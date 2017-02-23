@@ -545,6 +545,104 @@
         }
       }
     },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Cache/Redis/{name}/powerOff": {
+      "post": {
+        "tags": [
+          "Redis"
+        ],
+        "operationId": "Redis_PowerOff",
+        "x-ms-examples": {
+          "RedisCacheExport": { "$ref": "../examples/RedisCachePowerOff.json" }
+        },
+        "x-ms-long-running-operation": true,
+        "description": "PowerOff an existing redis cache.",
+        "parameters": [
+          {
+            "name": "resourceGroupName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the resource group."
+          },
+          {
+            "name": "name",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the Redis cache."
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "202": {
+            "description": "PowerOff operation successfully enqueued; follow the Location header to poll for final outcome.",
+            "schema": {
+              "$ref": "#/definitions/RedisStartOrStopResponse"
+            }
+          },
+          "200": {
+            "description": "PowerOff operation succeeded.",
+            "schema": {
+              "$ref": "#/definitions/RedisStartOrStopResponse"
+            }
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Cache/Redis/{name}/start": {
+      "post": {
+        "tags": [
+          "Redis"
+        ],
+        "operationId": "Redis_Start",
+        "x-ms-examples": {
+          "RedisCacheExport": { "$ref": "../examples/RedisCacheStart.json" }
+        },
+        "x-ms-long-running-operation": true,
+        "description": "Start an existing redis cache.",
+        "parameters": [
+          {
+            "name": "resourceGroupName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the resource group."
+          },
+          {
+            "name": "name",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the Redis cache."
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "202": {
+            "description": "Start operation successfully enqueued; follow the Location header to poll for final outcome.",
+            "schema": {
+              "$ref": "#/definitions/RedisStartOrStopResponse"
+            }
+          },
+          "200": {
+            "description": "Start operation succeeded.",
+            "schema": {
+              "$ref": "#/definitions/RedisStartOrStopResponse"
+            }
+          }
+        }
+      }
+    },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Cache/Redis/{name}/patchSchedules/default": {
       "put": {
         "tags": [
@@ -1137,6 +1235,16 @@
         }
       },
       "description": "Response to force reboot for Redis cache."
+    },
+    "RedisStartOrStopResponse": {
+      "properties": {
+        "Message": {
+          "readOnly": true,
+          "type": "string",
+          "description": "Status message"
+        }
+      },
+      "description": "Response to power off or start operation for Redis cache."
     }
   },
   "parameters": {

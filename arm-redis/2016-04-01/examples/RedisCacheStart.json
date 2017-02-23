@@ -1,0 +1,23 @@
+{
+  "parameters": {
+    "name": "cache1",
+    "resourceGroupName": "rg1",
+    "api-version": "2016-04-01",
+    "subscriptionId": "subid"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "Message": "The Cache 'cache1' is already Running."
+      }
+    },
+    "202": {
+      "headers": {
+        "location": "https://management.azure.com/subscriptions/subid/providers/Microsoft.Cache/...pathToOperationResult..."
+      },
+      "body": {
+        "Message": "The requested 'Start' operation for cache 'cache1' has been successfully scheduled and should be executed shortly."
+      }
+    }
+  }
+}
