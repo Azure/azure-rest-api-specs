@@ -582,13 +582,13 @@
           "202": {
             "description": "PowerOff operation successfully enqueued; follow the Location header to poll for final outcome.",
             "schema": {
-              "$ref": "#/definitions/RedisStartOrStopResponse"
+              "$ref": "#/definitions/RedisPowerOffResponse"
             }
           },
           "200": {
             "description": "PowerOff operation succeeded.",
             "schema": {
-              "$ref": "#/definitions/RedisStartOrStopResponse"
+              "$ref": "#/definitions/RedisPowerOffResponse"
             }
           }
         }
@@ -631,13 +631,13 @@
           "202": {
             "description": "Start operation successfully enqueued; follow the Location header to poll for final outcome.",
             "schema": {
-              "$ref": "#/definitions/RedisStartOrStopResponse"
+              "$ref": "#/definitions/RedisStartResponse"
             }
           },
           "200": {
             "description": "Start operation succeeded.",
             "schema": {
-              "$ref": "#/definitions/RedisStartOrStopResponse"
+              "$ref": "#/definitions/RedisStartResponse"
             }
           }
         }
@@ -1236,7 +1236,7 @@
       },
       "description": "Response to force reboot for Redis cache."
     },
-    "RedisStartOrStopResponse": {
+    "RedisPowerOffResponse": {
       "properties": {
         "Message": {
           "readOnly": true,
@@ -1244,7 +1244,17 @@
           "description": "Status message"
         }
       },
-      "description": "Response to power off or start operation for Redis cache."
+      "description": "Response to power off operation for Redis cache."
+    },
+    "RedisStartResponse": {
+      "properties": {
+        "Message": {
+          "readOnly": true,
+          "type": "string",
+          "description": "Status message"
+        }
+      },
+      "description": "Response to start operation for Redis cache."
     }
   },
   "parameters": {
