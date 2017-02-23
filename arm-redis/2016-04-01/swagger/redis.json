@@ -545,17 +545,17 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Cache/Redis/{name}/powerOff": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Cache/Redis/{name}/stop": {
       "post": {
         "tags": [
           "Redis"
         ],
-        "operationId": "Redis_PowerOff",
+        "operationId": "Redis_Stop",
         "x-ms-examples": {
-          "RedisCachePowerOff": { "$ref": "../examples/RedisCachePowerOff.json" }
+          "RedisCacheStop": { "$ref": "../examples/RedisCacheStop.json" }
         },
         "x-ms-long-running-operation": true,
-        "description": "PowerOff an existing redis cache.",
+        "description": "Stop an existing redis cache.",
         "parameters": [
           {
             "name": "resourceGroupName",
@@ -580,15 +580,15 @@
         ],
         "responses": {
           "202": {
-            "description": "PowerOff operation successfully enqueued; follow the Location header to poll for final outcome.",
+            "description": "Stop operation successfully enqueued; follow the Location header to poll for final outcome.",
             "schema": {
-              "$ref": "#/definitions/RedisPowerOffResponse"
+              "$ref": "#/definitions/RedisStopResponse"
             }
           },
           "200": {
-            "description": "PowerOff operation succeeded.",
+            "description": "Stop operation succeeded.",
             "schema": {
-              "$ref": "#/definitions/RedisPowerOffResponse"
+              "$ref": "#/definitions/RedisStopResponse"
             }
           }
         }
@@ -1236,7 +1236,7 @@
       },
       "description": "Response to force reboot for Redis cache."
     },
-    "RedisPowerOffResponse": {
+    "RedisStopResponse": {
       "properties": {
         "Message": {
           "readOnly": true,
