@@ -148,6 +148,7 @@
           "Create a database as a copy": { "$ref": "../examples/DatabaseCreateCopy.json" },
           "Create a database as an online secondary": { "$ref": "../examples/DatabaseCreateOnlineSecondary.json" },
           "Create a database as a non-readable secondary": { "$ref": "../examples/DatabaseCreateNonReadableSecondary.json" },
+          "Create a database as a point in time restore": { "$ref": "../examples/DatabaseCreatePointInTimeRestore.json" },
           "Update a database's elastic pool'": { "$ref": "../examples/DatabaseUpdateElasticPool.json" },
           "Update a database max": { "$ref": "../examples/DatabaseUpdateMax.json" },
           "Update a database min": { "$ref": "../examples/DatabaseUpdateMin.json" }
@@ -2294,11 +2295,11 @@
           "readOnly": true,
           "type": "string",
           "format": "date-time",
-          "description": "The recovery period start date of the Azure SQL database. This records the start date and time when recovery is available for this Azure SQL Database (ISO8601 format)."
+          "description": "This records the earliest start date and time that restore is available for this Azure SQL Database (ISO8601 format)."
         },
         "createMode": {
           "type": "string",
-          "description": "Specifies the type of database to create.",
+          "description": "Specifies the type of database to create. If createMode is not set to Default, sourceDatabaseId must be specified. If createMode is set to PointInTimeRestore, then restorePointInTime must be specified. If createMode is set to Restore, then sourceDatabaseDeletionDate must be specified.",
           "enum": [
             "Copy",
             "Default",
@@ -2315,7 +2316,12 @@
         },
         "sourceDatabaseId": {
           "type": "string",
-          "description": "Conditional. Specifies the resource ID of the source database. If createMode is not set to Default, then this value must be specified. The name of the source database must be the same. NOTE: Collation, Edition, and MaxSizeBytes must remain the same while the link is active. Values specified for these parameters will be ignored."
+          "description": "Conditional, write-only. If createMode is not set to Default, then this value must be specified. Specifies the resource ID of the source database. If createMode is NonReadableSecondary or  OnlineSecondary, the name of the source database must be the same as this new database. Collation, Edition, and MaxSizeBytes must remain the same while the link is active. Values specified for these parameters will be ignored."
+        },
+        "restorePointInTime": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Conditional, write-only. If createMode is set to PointInTimeRestore, then this value must be specified. Specifies the point in time (ISO8601 format) of the source database that will be restored to create the new database. Must be greater than or equal to the source database's earliestRestoreDate value. "
         },
         "edition": {
           "type": "string",
