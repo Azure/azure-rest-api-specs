@@ -876,7 +876,7 @@
         ],
         "responses": {
           "200": {
-            "description": "Response of get linked server.",
+            "description": "Response of get linked servers.",
             "schema": {
               "$ref": "#/definitions/RedisLinkedServerList"
             }
@@ -1346,7 +1346,7 @@
       "description": "Response to force reboot for Redis cache."
     },
     "RedisLinkedServer": {
-      "description": "Response to put/get linked servers for Redis cache.",
+      "description": "Response to put/get linked server for Redis cache.",
       "properties": {
         "id": {
           "readOnly": true,
@@ -1371,14 +1371,10 @@
       }
     },
     "RedisLinkedServerProperties": {
-      "description": "Properties of a Linked Server to be returned in get/put response",
+      "description": "Properties of a linked server to be returned in get/put response",
       "properties": {
-        "linkedRedisCacheName": {
-          "readOnly": true,
-          "type": "string",
-          "description": "Name of the linked redis cache."
-        },
         "linkStatus": {
+          "readOnly": true,
           "type": "string",
           "description": "Link status of the linked server.",
           "enum": [
@@ -1394,6 +1390,7 @@
           }
         },
         "serverRole": {
+          "readOnly": true,
           "type": "string",
           "description": "Server role of the linked server.",
           "enum": [
@@ -1428,7 +1425,7 @@
       "description": "List of linked servers of a Redis cache."
     },
      "RedisLinkedServerCreateProperties": {
-      "description": "Create Properties for a Linked Server",
+      "description": "Create Properties for a linked server",
       "properties": {
         "linkedRedisCacheId": {
           "type": "string",
@@ -1438,7 +1435,11 @@
           "type": "string",
           "description": "Location of the linked redis cache."
         }
-      }
+      },
+      "required": [
+        "linkedRedisCacheId",
+        "linkedRedisCacheLocation"
+      ]
     },
     "RedisLinkedServerCreateParameters": {
       "properties": {
