@@ -2782,7 +2782,12 @@
     },
     "Object": {
       "type": "object",
-      "properties": { }
+      "additionalProperties": {
+        "type": ["string", "array", "boolean", "integer", "null", "number", "object" ]
+       }, 
+      "properties": {        
+       },
+       "description": "A JToken object with client-defined properties which schema is not known to the RP."
     },
     "ResourceReference": {
       "type": "object",
