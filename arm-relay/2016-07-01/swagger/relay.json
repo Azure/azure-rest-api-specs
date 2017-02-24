@@ -37,7 +37,7 @@
     }
   },
   "paths": {
-    "/subscriptions/{subscriptionId}/providers/Microsoft.Relay/namespaces": {
+    "/subscriptions/{subscriptionId}/providers/Microsoft.Relay/Namespace": {
       "get": {
         "tags": [
           "Namespaces"
@@ -74,7 +74,7 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Relay/namespaces": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Relay/Namespaces": {
       "get": {
         "tags": [
           "Namespaces"
@@ -596,7 +596,7 @@
             "in": "body",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/HybridConnectionResource"
+              "$ref": "#/definitions/HybridConnection"
             },
             "description": "Parameters supplied to create a HybridConnection."
           },
@@ -611,7 +611,7 @@
           "200": {
             "description": "Request to Create Hybrid Connections succeeded",
             "schema": {
-              "$ref": "#/definitions/HybridConnectionResource"
+              "$ref": "#/definitions/HybridConnection"
             }
           },
           "default": {
@@ -693,7 +693,7 @@
           "200": {
             "description": "Successfully retrieved hybridConnection description",
             "schema": {
-              "$ref": "#/definitions/HybridConnectionResource"
+              "$ref": "#/definitions/HybridConnection"
             }
           },
           "default": {
@@ -1063,7 +1063,7 @@
             "in": "body",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/WcfRelaysResource"
+              "$ref": "#/definitions/WcfRelay"
             },
             "description": "Parameters supplied to create a WCFRelays."
           },
@@ -1078,7 +1078,7 @@
           "200": {
             "description": "Request to create WCFRelays succeeded",
             "schema": {
-              "$ref": "#/definitions/WcfRelaysResource"
+              "$ref": "#/definitions/WcfRelay"
             }
           },
           "default": {
@@ -1160,13 +1160,13 @@
           "200": {
             "description": "Successfully retrieved WCFRelays description",
             "schema": {
-              "$ref": "#/definitions/WcfRelaysResource"
+              "$ref": "#/definitions/WcfRelay"
             }
           },
           "204": {
             "description": "WCFRelays not found",
             "schema": {
-              "$ref": "#/definitions/WcfRelaysResource"
+              "$ref": "#/definitions/WcfRelay"
             }
           },
           "default": {
@@ -1510,7 +1510,7 @@
         "value": {
           "type": "array",
           "items": {
-            "$ref": "#/definitions/HybridConnectionResource"
+            "$ref": "#/definitions/HybridConnection"
           },
           "description": "Result of the List HybridConnection ."
         },
@@ -1521,7 +1521,7 @@
       },
       "description": "The response of the List HybridConnection operation."
     },
-    "HybridConnectionResource": {
+    "HybridConnection": {
       "properties": {
         "properties": {
           "x-ms-client-flatten": true,
@@ -1577,7 +1577,7 @@
         "value": {
           "type": "array",
           "items": {
-            "$ref": "#/definitions/WcfRelaysResource"
+            "$ref": "#/definitions/WcfRelay"
           },
           "description": "Result of the List WcfRelays ."
         },
@@ -1588,7 +1588,7 @@
       },
       "description": "The response of the List WcfRelays operation."
     },
-    "WcfRelaysResource": {
+    "WcfRelay": {
       "properties": {
         "properties": {
           "x-ms-client-flatten": true,
