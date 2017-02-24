@@ -4,6 +4,7 @@
 'use strict';
 var execSync = require('child_process').execSync,
   path = require('path'),
+  fs = require('fs'),
   glob = require('glob'),
   _ = require('underscore'),
   oav = require('openapi-validation-tools');
@@ -12,47 +13,86 @@ exports = module.exports;
 exports.globPath = path.join(__dirname, '../', '/**/swagger/*.json');
 exports.swaggers = _(glob.sync(exports.globPath));
 
-var finalResult = {};
 var swaggersToProcess = exports.swaggers;
+var finalResult = {};
+var filename = `log_${getTimeStamp()}.log`;
+var logFilepath = path.join(getLogDir(), filename);
 
-function updateResult(spec, errors) {
+function getTimeStamp() {
+  // We pad each value so that sorted directory listings show the files in chronological order
+  function pad(number) {
+    if (number < 10) {
+      return '0' + number;
+    }
+
+    return number;
+  }
+
+  var now = new Date();
+  return now.getFullYear()
+    + pad(now.getMonth() + 1)
+    + pad(now.getDate())
+    + "_"
+    + pad(now.getHours())
+    + pad(now.getMinutes())
+    + pad(now.getSeconds());
+}
+
+function updateResult(spec, errors, updateLog) {
   if (!finalResult[spec]) {
     finalResult[spec] = errors;
   } else {
     finalResult[spec] = finalResult[spec].concat(errors);
   }
+  if (updateLog) {
+    writeContent(JSON.stringify(finalResult, null, 2));
+  }
+  return;
 }
 
-function runTools() {
-  // Useful when debugging a test for a particular swagger. 
-  // Just update the regex. That will return an array of filtered items.
-  // swaggersToProcess = swaggersToProcess.filter(function (item) {
-  //   return (item.match(/.*arm-redis.2016-04-01*/ig) !== null);
-  // });
-  _(swaggersToProcess).each(function (swagger) {
-    runSemanticValidator(swagger).then(function (validationErrors) {
-      updateResult(swagger, validationErrors);
-      return swagger;
-    }).then(function (swagger) {
-      runLinter(swagger).then(function (linterErrors) {
-        updateResult(swagger, linterErrors);
-        console.dir(finalResult, { depth: null, colors: true });
-      });
-    });
+function getLogDir() {
+  let logDir = path.join(__dirname, '../', 'output');
+  if (!fs.existsSync(logDir)) {
+    try {
+      fs.mkdirSync(logDir);
+    } catch (e) {
+      if (e.code !== 'EEXIST') throw e;
+    }
+  }
+  return logDir;
+}
+
+//creates the log file if it has not been created
+function createLogFile() {
+  if (!fs.existsSync(logFilepath)) {
+    fs.writeFileSync(logFilepath, '');
+  }
+  return;
+}
+
+//appends the content to the log file
+function writeContent(content) {
+  fs.writeFileSync(logFilepath, content);
+}
+//executes promises sequentially by chaining them.
+function executePromisesSequentially(promiseFactories) {
+  let result = Promise.resolve();
+  promiseFactories.forEach(function (promiseFactory) {
+    result = result.then(promiseFactory);
   });
-}
+  return result;
+};
 
+// runs the linter on a given swagger spec.
 function runLinter(swagger) {
   let cmd = 'autorest -CodeGenerator None -I ' + swagger + ' -JsonValidationMessages true';
-  //console.log(`Executing: ${cmd}`);
+  console.log(`\t- Running Linter.`);
   let resultString, resultObj;
   try {
     resultString = execSync(cmd, { encoding: 'utf8' });
     // console.log('>>>>');
     // console.log(resultString);
-    if (resultString.trim().startsWith("AutoRest")) {
-      resultString = resultString.substring(resultString.indexOf('\n') + 1);
-    }
+    resultString = resultString.trim().substring(resultString.indexOf('['));
     resultObj = JSON.parse(resultString);
     //console.dir(resultObj, {depth: null, colors: true});
     return Promise.resolve(resultObj);
@@ -62,7 +102,9 @@ function runLinter(swagger) {
   }
 }
 
+//runs the semantic validator on a given swagger spec.
 function runSemanticValidator(swagger) {
+  console.log('\t- Running Semantic Validator.')
   return oav.validateSpec(swagger, 'off').then(function (validationResult) {
     //console.dir(validationResult, { depth: null, colors: true });
     return Promise.resolve(validationResult.validateSpec.errors);
@@ -71,4 +113,35 @@ function runSemanticValidator(swagger) {
   });
 }
 
-runTools();
+//main function
+function runScript() {
+  // Useful when debugging a test for a particular swagger. 
+  // Just update the regex. That will return an array of filtered items.
+  // swaggersToProcess = swaggersToProcess.filter(function (item) {
+  //   return (item.match(/.*arm-network/ig) !== null);
+  // });
+  createLogFile();
+  console.log(`The results will be logged here: "${logFilepath}".`)
+  let promiseFactories = _(swaggersToProcess).map(function (swagger) {
+    return function () { return runTools(swagger); };
+  });
+  return executePromisesSequentially(promiseFactories);
+}
+
+//runs the validation and linting tools on all the swaggers in the repo.
+function runTools(swagger) {
+  console.log(`Processing "${swagger}":`);
+  return runSemanticValidator(swagger).then(function (validationErrors) {
+    updateResult(swagger, validationErrors, true);
+    return swagger;
+  }).then(function (swagger) {
+    return runLinter(swagger).then(function (linterErrors) {
+      updateResult(swagger, linterErrors, true);
+      //console.dir(finalResult, { depth: null, colors: true });
+      return finalResult;
+    });
+  });
+}
+
+//magic starts here
+runScript();
