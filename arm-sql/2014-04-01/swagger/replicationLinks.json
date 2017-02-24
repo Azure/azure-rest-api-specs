@@ -23,6 +23,9 @@
         ],
         "operationId": "Databases_DeleteReplicationLink",
         "description": "Deletes the Azure SQL database replication link with the given ID. Cannot be done during failover.",
+        "x-ms-examples": {
+          "Delete a replication link": { "$ref": "../examples/ReplicationLinkDelete.json" }
+        },
         "parameters": [
           {
             "$ref": "#/parameters/ApiVersionParameter"
@@ -66,6 +69,9 @@
         ],
         "operationId": "Databases_GetReplicationLink",
         "description": "Gets information about an Azure SQL database replication link.",
+        "x-ms-examples": {
+          "Get a replication link": { "$ref": "../examples/ReplicationLinkGet.json" }
+        },
         "parameters": [
           {
             "$ref": "#/parameters/ApiVersionParameter"
@@ -111,6 +117,9 @@
         ],
         "operationId": "Databases_FailoverReplicationLink",
         "description": "Failover the Azure SQL database replication link with the given ID.",
+        "x-ms-examples": {
+          "Failover a replication link": { "$ref": "../examples/ReplicationLinkFailover.json" }
+        },
         "parameters": [
           {
             "$ref": "#/parameters/ApiVersionParameter"
@@ -203,6 +212,9 @@
         ],
         "operationId": "Databases_ListReplicationLinks",
         "description": "Gets information about Azure SQL database replication links.",
+        "x-ms-examples": {
+          "List Replication links": { "$ref": "../examples/ReplicationLinkList.json" }
+        },
         "parameters": [
           {
             "$ref": "#/parameters/ApiVersionParameter"
@@ -236,11 +248,43 @@
           "nextLinkName": null
         }
       }
+    },
+    "/providers/Microsoft.Sql/operations": {
+      "get": {
+        "tags": [
+          "Operations"
+        ],
+        "description": "Lists all of the available SQL Rest API operations.",
+        "operationId": "ListOperations",
+        "parameters": [
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK. The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/OperationListResult"
+            }
+          }
+        }
+      }
     }
   },
   "definitions": {
     "ReplicationLinkProperties": {
       "properties": {
+        "isTerminationAllowed": {
+          "readOnly": true,
+          "type": "boolean",
+          "description": "Legacy value indicating whether termination is allowed.  Currently always returns true."
+        },
+        "replicationMode": {
+          "readOnly": true,
+          "type": "string",
+          "description": "Replication mode of this replication link."
+        },
         "partnerServer": {
           "readOnly": true,
           "type": "string",
@@ -290,7 +334,7 @@
           "readOnly": true,
           "type": "string",
           "format": "date-time",
-          "description": "The start time for the replication link (ISO8601 format)."
+          "description": "The start time for the replication link."
         },
         "percentComplete": {
           "readOnly": true,
@@ -318,6 +362,16 @@
     },
     "ReplicationLink": {
       "properties": {
+        "location": {
+          "type": "string",
+          "description": "Location of the server that contains this firewall rule.",
+          "readOnly": true
+        },
+        "type": {
+          "type": "string",
+          "description": "Type of resource this is.",
+          "readOnly": true
+        },
         "properties": {
           "x-ms-client-flatten": true,
           "$ref": "#/definitions/ReplicationLinkProperties",
@@ -355,6 +409,49 @@
           "readOnly": true,
           "type": "string",
           "description": "The resource ID."
+        }
+      }
+    },
+    "OperationListResult": {
+     "description": "Result of the request to list SQL operations. It contains a list of operations and a URL link to get the next set of results.",
+      "properties": {
+        "value": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Operation"
+          },
+          "description": "List of SQL operations supported by the SQL resource provider."
+        },
+        "nextLink": {
+          "type": "string",
+          "description": "URL to get the next set of operation list results if there are any."
+        }
+      }
+    },
+    "Operation": {
+      "description": "SQL REST API operation definition.",
+      "type": "object",
+      "properties": {
+        "name": {
+          "description": "Operation name: {provider}/{resource}/{operation}",
+          "type": "string"
+        },
+        "display": {
+          "description": "Display metadata associated with the operation.",
+          "properties": {
+            "provider": {
+              "description": "Service provider: Microsoft SQL Database.",
+              "type": "string"
+            },
+            "resource": {
+              "description": "Resource on which the operation is performed: Server, Database, etc.",
+              "type": "string"
+            },
+            "operation": {
+              "description": "Type of operation: get, read, delete, etc.",
+              "type": "string"
+            }
+          }
         }
       }
     }
