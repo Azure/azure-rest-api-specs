@@ -323,7 +323,7 @@
             "in": "body",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/SharedAccessAuthorizationRuleResource"
+              "$ref": "#/definitions/SharedAccessAuthorizationRule"
             },
             "description": "The shared access authorization rule."
           },
@@ -338,7 +338,7 @@
           "200": {
             "description": "Request to create Namespace Authorization rule succeeded",
             "schema": {
-              "$ref": "#/definitions/SharedAccessAuthorizationRuleResource"
+              "$ref": "#/definitions/SharedAccessAuthorizationRule"
             }
           },
           "default": {
@@ -421,7 +421,7 @@
           "200": {
             "description": "Namespace Authorization rule returned successfully",
             "schema": {
-              "$ref": "#/definitions/SharedAccessAuthorizationRuleResource"
+              "$ref": "#/definitions/SharedAccessAuthorizationRule"
             }
           },
           "default": {
@@ -773,7 +773,7 @@
             "in": "body",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/SharedAccessAuthorizationRuleResource"
+              "$ref": "#/definitions/SharedAccessAuthorizationRule"
             },
             "description": "The shared access authorization rule."
           },
@@ -788,7 +788,7 @@
           "200": {
             "description": "HybridConnection Authorization rule created",
             "schema": {
-              "$ref": "#/definitions/SharedAccessAuthorizationRuleResource"
+              "$ref": "#/definitions/SharedAccessAuthorizationRule"
             }
           },
           "default": {
@@ -832,13 +832,13 @@
           "200": {
             "description": "HybridConnection authorizationRule deleted",
             "schema": {
-              "$ref": "#/definitions/SharedAccessAuthorizationRuleResource"
+              "$ref": "#/definitions/SharedAccessAuthorizationRule"
             }
           },
           "204": {
             "description": "Authorization rule does not exist",
             "schema": {
-              "$ref": "#/definitions/SharedAccessAuthorizationRuleResource"
+              "$ref": "#/definitions/SharedAccessAuthorizationRule"
             }
           },
           "default": {
@@ -882,7 +882,7 @@
           "200": {
             "description": "HybridConnection AuthorizationRule returned successfully",
             "schema": {
-              "$ref": "#/definitions/SharedAccessAuthorizationRuleResource"
+              "$ref": "#/definitions/SharedAccessAuthorizationRule"
             }
           },
           "default": {
@@ -1047,7 +1047,7 @@
         "x-ms-examples": {
           "RelayCreate": { "$ref": "../examples/Relay/RelayCreate.json" }
         },
-        "description": "Creates or Updates a WCFRelays. This operation is idempotent.",
+        "description": "Creates or Updates a WCFRelay. This operation is idempotent.",
         "parameters": [
           {
             "$ref": "#/parameters/resourceGroupNameParameter"
@@ -1246,7 +1246,7 @@
             "in": "body",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/SharedAccessAuthorizationRuleResource"
+              "$ref": "#/definitions/SharedAccessAuthorizationRule"
             },
             "description": "The shared access authorization rule."
           },
@@ -1261,7 +1261,7 @@
           "200": {
             "description": "WCFRelays Authorization rule created",
             "schema": {
-              "$ref": "#/definitions/SharedAccessAuthorizationRuleResource"
+              "$ref": "#/definitions/SharedAccessAuthorizationRule"
             }
           },
           "default": {
@@ -1305,13 +1305,13 @@
           "200": {
             "description": "Request to delete WCFRelay authorizationRule succeeded",
             "schema": {
-              "$ref": "#/definitions/SharedAccessAuthorizationRuleResource"
+              "$ref": "#/definitions/SharedAccessAuthorizationRule"
             }
           },
           "204": {
             "description": "Request accepted but Authorization rule does not exist",
             "schema": {
-              "$ref": "#/definitions/SharedAccessAuthorizationRuleResource"
+              "$ref": "#/definitions/SharedAccessAuthorizationRule"
             }
           },
           "default": {
@@ -1355,7 +1355,7 @@
           "200": {
             "description": "Request for WCFRelays AuthorizationRule succeeded",
             "schema": {
-              "$ref": "#/definitions/SharedAccessAuthorizationRuleResource"
+              "$ref": "#/definitions/SharedAccessAuthorizationRule"
             }
           },
           "default": {
@@ -1753,7 +1753,7 @@
         "value": {
           "type": "array",
           "items": {
-            "$ref": "#/definitions/SharedAccessAuthorizationRuleResource"
+            "$ref": "#/definitions/SharedAccessAuthorizationRule"
           },
           "description": "Result of the List AuthorizationRules operation."
         },
@@ -1764,7 +1764,7 @@
       },
       "description": "The response of the List Namespace operation."
     },
-    "SharedAccessAuthorizationRuleResource": {
+    "SharedAccessAuthorizationRule": {
       "properties": {
         "properties": {
           "x-ms-client-flatten": true,
@@ -1819,7 +1819,7 @@
         },
         "secondaryKey": {
           "type": "string",
-          "description": "A base64-encoded 256-bit primary key for signing and validating the SAS token"
+          "description": "A base64-encoded 256-bit secondary key for signing and validating the SAS token"
         },
         "keyName": {
           "type": "string",
@@ -1893,7 +1893,7 @@
       "minLength": 6,
       "maxLength": 50,
       "x-ms-parameter-location": "method",
-      "description": "The Namespace Name within the Resource Group"
+      "description": "The Namespace Name"
     },
     "hybridConnectionNameParameter": {
       "name": "hybridConnectionName",
@@ -1903,7 +1903,7 @@
       "minLength": 1,
       "maxLength": 50,
       "x-ms-parameter-location": "method",
-      "description": "The name of the hybrid connection."
+      "description": "The hybrid connection name."
     },
     "authorizationRuleNameParameter": {
       "name": "authorizationRuleName",
@@ -1923,7 +1923,7 @@
       "minLength": 1,
       "maxLength": 50,
       "x-ms-parameter-location": "method",
-      "description": "The name of the relay."
+      "description": "The relay name"
     }
   }
 }
