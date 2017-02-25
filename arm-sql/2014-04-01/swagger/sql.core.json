@@ -1617,7 +1617,8 @@
           "x-ms-enum": {
             "name": "ElasticPoolEditions",
             "modelAsString": true
-          }
+          },
+          "x-ms-mutability": [ "create", "read" ]
         },
         "dtu": {
           "type": "integer",
@@ -2351,7 +2352,7 @@
             "33d0db1f-6893-4210-99f9-463fb9b496a4",
             "da24338c-a6c9-46c2-a4bf-4ac95b496ae4"
             ],
-          "description": "The configured Service Level Objective ID of the Azure SQL database. This is the Service Level Objective that is in the process of being applied to the Azure SQL database. Once successfully updated, it will match the value of currentServiceObjectiveId property.",
+          "description": "The configured Service Level Objective ID of the Azure SQL database. This is the Service Level Objective that is in the process of being applied to the Azure SQL database. Once successfully updated, it will match the value of currentServiceObjectiveId property. If requestedServiceObjectiveId and requestedServiceObjectiveName are both updated, the value of requestedServiceObjectiveId overrides the value of requestedServiceObjectiveName.",
           "x-ms-enum": {
             "modelAsString": true,
             "name": "ServiceObjectiveId"
@@ -2376,7 +2377,8 @@
             "System1",
             "System2",
             "System3",
-            "System4"
+            "System4",
+            "ElasticPool"
             ],
           "x-ms-enum": {
             "modelAsString": true,
@@ -2419,7 +2421,7 @@
         },
         "elasticPoolName": {
           "type": "string",
-          "description": "The name of the Azure SQL Elastic Pool the database is in."
+          "description": "The name of the Azure SQL Elastic Pool the database is in. If elasticPoolName and requestedServiceObjectiveName are both updated, the value of requestedServiceObjectiveName is ignored."
         },
         "defaultSecondaryLocation": {
           "readOnly": true,
