@@ -1,8 +1,8 @@
 {
   "swagger": "2.0",
   "info": {
-    "title": "Server Firewall Rule APIs",
-    "description": "Provides create, read, update, and delete functionality for server firewall rules.",
+    "title": "Azure SQL Database server firewall rules",
+    "description": "Provides create, read, update, and delete functionality for Azure SQL Database server firewall rules.",
     "version": "2014-04-01"
   },
   "host": "management.azure.com",
@@ -45,7 +45,7 @@
             "in": "path",
             "required": true,
             "type": "string",
-            "description": "The name of the server firewall rule."
+            "description": "The name of the firewall rule."
           },
           {
             "name": "parameters",
@@ -99,7 +99,7 @@
             "in": "path",
             "required": true,
             "type": "string",
-            "description": "The name of the server firewall rule."
+            "description": "The name of the f rule."
           }
         ],
         "responses": {
@@ -116,7 +116,7 @@
           "FirewallRules"
         ],
         "operationId": "Servers_GetFirewallRule",
-        "description": "Returns a server firewall rule.",
+        "description": "Gets a server firewall rule.",
         "x-ms-examples": {
           "Get Firewall Rule": { "$ref": "../examples/FirewallRuleGet.json" }
         },
@@ -138,7 +138,7 @@
             "in": "path",
             "required": true,
             "type": "string",
-            "description": "The name of the server firewall rule."
+            "description": "The name of the firewall rule."
           }
         ],
         "responses": {
@@ -194,11 +194,11 @@
       "properties": {
         "startIpAddress": {
           "type": "string",
-          "description": "The start IP address of the server firewall rule. Must be IPv4 format. Use value '0.0.0.0' to represent all Azure-internal IP addresses."
+          "description": "The start IP address of the firewall rule. Must be IPv4 format. Use value '0.0.0.0' to represent all Azure-internal IP addresses."
         },
         "endIpAddress": {
           "type": "string",
-          "description": "The end IP address of the server firewall rule. Must be IPv4 format. Must be greater than or equal to startIpAddress. Use value '0.0.0.0' to represent all Azure-internal IP addresses."
+          "description": "The end IP address of the firewall rule. Must be IPv4 format. Must be greater than or equal to startIpAddress. Use value '0.0.0.0' to represent all Azure-internal IP addresses."
         }
       },
       "required": ["startIpAddress", "endIpAddress"],
@@ -241,7 +241,7 @@
           "items": {
             "$ref": "#/definitions/ServerFirewallRule"
           },
-          "description": "The list of server firewall rules for the server."
+          "description": "The list of server firewall rules."
         }
       },
       "description": "Represents the response to a List Firewall Rules request."
