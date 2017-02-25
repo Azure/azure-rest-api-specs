@@ -1227,7 +1227,7 @@
       }
     },
     "OperationsMonitoringProperties": {
-      "description": "The operations monitoring properties for the IoT hub. The possible keys to the dictionary are Connections, DeviceTelemetry, C2DCommands, DeviceIdentityOperations, FileUploadOperations.",
+      "description": "The operations monitoring properties for the IoT hub. The possible keys to the dictionary are Connections, DeviceTelemetry, C2DCommands, DeviceIdentityOperations, FileUploadOperations, Routes, D2CTwinOperations, C2DTwinOperations, TwinQueries, JobsOperations, DirectMethods.",
       "type": "object",
       "properties": {
         "events": {
@@ -1446,7 +1446,7 @@
         },
         "source": {
           "description": "The source that the routing rule is to be applied to, such as DeviceMessages.",      
-          "enum": ["DeviceMessages"],
+          "enum": ["DeviceMessages", "TwinChangeEvents", "DeviceLifecycleEvents", "DeviceJobLifecycleEvents"],
           "type": "string",
           "x-ms-enum": {
             "name": "RoutingSource",
