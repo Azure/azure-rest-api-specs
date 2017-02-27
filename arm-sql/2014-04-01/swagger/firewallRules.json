@@ -23,6 +23,10 @@
         ],
         "operationId": "Servers_CreateOrUpdateFirewallRule",
         "description": "Creates or updates an Azure SQL server firewall rule.",
+        "x-ms-examples": {
+          "Create a firewall rule max/min": { "$ref": "../examples/FirewallRuleCreate.json" },
+          "Update a firewall rule max/min": { "$ref": "../examples/FirewallRuleUpdate.json" }
+        },
         "parameters": [
           {
             "$ref": "#/parameters/ApiVersionParameter"
@@ -74,6 +78,9 @@
         ],
         "operationId": "Servers_DeleteFirewallRule",
         "description": "Deletes an Azure SQL server firewall rule.",
+        "x-ms-examples": {
+          "Delete a firewall rule": { "$ref": "../examples/FirewallRuleDelete.json" }
+        },
         "parameters": [
           {
             "$ref": "#/parameters/ApiVersionParameter"
@@ -110,6 +117,9 @@
         ],
         "operationId": "Servers_GetFirewallRule",
         "description": "Returns an Azure SQL server firewall rule.",
+        "x-ms-examples": {
+          "Get Firewall Rule": { "$ref": "../examples/FirewallRuleGet.json" }
+        },
         "parameters": [
           {
             "$ref": "#/parameters/ApiVersionParameter"
@@ -148,6 +158,9 @@
         ],
         "operationId": "Servers_ListFirewallRules",
         "description": "Returns a list of Azure SQL server firewall rules.",
+        "x-ms-examples": {
+          "List Firewall Rules": { "$ref": "../examples/FirewallRuleList.json" }
+        },
         "parameters": [
           {
             "$ref": "#/parameters/ApiVersionParameter"
@@ -181,13 +194,14 @@
       "properties": {
         "startIpAddress": {
           "type": "string",
-          "description": "The start IP address of the Azure SQL server firewall rule. Must be IPv4 format."
+          "description": "The start IP address of the Azure SQL server firewall rule. Must be IPv4 format. Use value '0.0.0.0' to represent all Azure-internal IP addresses."
         },
         "endIpAddress": {
           "type": "string",
-          "description": "The end IP address of the Azure SQL server firewall rule. Must be IPv4 format."
+          "description": "The end IP address of the Azure SQL server firewall rule. Must be IPv4 format. Must be greater than or equal to startIpAddress. Use value '0.0.0.0' to represent all Azure-internal IP addresses."
         }
       },
+      "required": ["startIpAddress", "endIpAddress"],
       "description": "Represents the properties of an Azure SQL server firewall rule."
     },
     "ServerFirewallRule": {
@@ -200,6 +214,11 @@
         "location": {
           "type": "string",
           "description": "Location of the server that contains this firewall rule.",
+          "readOnly": true
+        },
+        "type": {
+          "type": "string",
+          "description": "Type of resource this is.",
           "readOnly": true
         },
         "properties": {
