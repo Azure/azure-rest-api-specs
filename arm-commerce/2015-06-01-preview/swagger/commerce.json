@@ -25,11 +25,11 @@
         "operationId": "UsageAggregates_List",
         "description": "Query aggregated Azure subscription consumption data for a date range.",
         "externalDocs": {
-          "url": "https://msdn.microsoft.com/library/azure/1ea5b323-54bb-423d-916f-190de96c6a3c"
+          "url": "https://docs.microsoft.com/rest/api/commerce/usageaggregates"
         },
         "parameters": [
           {
-            "name": "reportedstartTime",
+            "name": "reportedStartTime",
             "in": "query",
             "required": true,
             "type": "string",
@@ -49,7 +49,7 @@
             "in": "query",
             "required": false,
             "type": "boolean",
-            "description": "When set to true (default), the aggregates are broken down into the instance metadata which is more granular."
+            "description": "`True` returns usage data in instance-level detail, `false` causes server-side aggregation with fewer details. For example, if you have 3 website instances, by default you will get 3 line items for website consumption. If you specify showDetails = false, the data will be aggregated as a single line item for website consumption within the time period (for the given subscriptionId, meterId, usageStartTime and usageEndTime)."
           },
           {
             "name": "aggregationGranularity",
@@ -57,7 +57,7 @@
             "required": false,
             "type": "string",
             "default": "Daily",
-            "description": "Value is either daily (default) or hourly to tell the API how to return the results grouped by day or hour.",
+            "description": "`Daily` (default) returns the data in daily granularity, `Hourly` returns the data in hourly granularity.",
             "enum": [
               "Daily",
               "Hourly"
@@ -72,7 +72,7 @@
             "in": "query",
             "required": false,
             "type": "string",
-            "description": "Retrieved from previous calls, this is the bookmark used for progress when the responses are paged."
+            "description": "Used when a continuation token string is provided in the response body of the previous call, enabling paging through a large result set. If not present, the data is retrieved from the beginning of the day/hour (based on the granularity) passed in. "
           },
           {
             "$ref": "#/parameters/ApiVersionParameter"
@@ -89,7 +89,7 @@
             }
           },
           "default": {
-            "description": "CDN error response describing why the operation failed.",
+            "description": "Error response describing why the operation failed.",
             "schema": {
               "$ref": "#/definitions/ErrorResponse"
             }
@@ -108,13 +108,18 @@
         "operationId": "RateCard_Get",
         "description": "Enables you to query for the resource/meter metadata and related prices used in a given subscription by Offer ID, Currency, Locale and Region. The metadata associated with the billing meters, including but not limited to service names, types, resources, units of measure, and regions, is subject to change at any time and without notice. If you intend to use this billing data in an automated fashion, please use the billing meter GUID to uniquely identify each billable item. If the billing meter GUID is scheduled to change due to a new billing model, you will be notified in advance of the change. ",
         "externalDocs": {
-          "url": "https://msdn.microsoft.com/en-us/library/azure/mt219004.aspx"
+          "url": "https://docs.microsoft.com/rest/api/commerce/ratecard"
+        },
+        "x-ms-examples": {
+          "GetRateCard": {
+            "$ref": "../examples/GetRatecard.json"
+          }
         },
         "parameters": [
           {
             "name": "$filter",
             "in": "query",
-            "required": false,
+            "required": true,
             "type": "string",
             "description": "The filter to apply on the operation. It ONLY supports the 'eq' and 'and' logical operators at this time. All the 4 query parameters 'OfferDurableId',  'Currency', 'Locale', 'Region' are required to be a part of the $filter."
           },
@@ -133,7 +138,7 @@
             }
           },
           "default": {
-            "description": "CDN error response describing why the operation failed.",
+            "description": "Error response describing why the operation failed.",
             "schema": {
               "$ref": "#/definitions/ErrorResponse"
             }
@@ -248,7 +253,12 @@
     },
     "RateCardQueryParameters": {
       "description": "Parameters that are used in the odata $filter query parameter for providing RateCard information.",
-      "required": [ "OfferDurableId", "Currency", "Locale", "RegionInfo" ],
+      "required": [
+        "OfferDurableId",
+        "Currency",
+        "Locale",
+        "RegionInfo"
+      ],
       "properties": {
         "OfferDurableId": {
           "description": "The Offer ID parameter consists of the 'MS-AZR-' prefix, plus the Offer ID number (e.g., MS-AZR-0026P). See https://azure.microsoft.com/en-us/support/legal/offer-details/ for more information on the list of available Offer IDs, country/region availability, and billing currency.",
@@ -283,17 +293,6 @@
         "IsTaxIncluded": {
           "description": "All rates are pretax, so this will always be returned as 'false'.",
           "type": "boolean"
-        },
-        "MeterRegion": {
-          "description": "The region in which the Azure service is available.",
-          "type": "string"
-        },
-        "Tags": {
-          "type": "array",
-          "items": {
-            "type": "string"
-          },
-          "description": "Provides additional meter data. 'Third Party' indicates a meter with no discount. Blanks indicate First Party."
         },
         "OfferTerms": {
           "type": "array",
@@ -335,6 +334,17 @@
           "description": "The unit in which the meter consumption is charged, e.g., 'Hours', 'GB', etc.",
           "type": "string"
         },
+        "MeterTags": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "description": "Provides additional meter data. 'Third Party' indicates a meter with no discount. Blanks indicate First Party."
+        },
+        "MeterRegion": {
+          "description": "The region in which the Azure service is available.",
+          "type": "string"
+        },
         "MeterRates": {
           "description": "The list of key/value pairs for the meter rates, in the format 'key':'value' where key = the meter quantity, and value = the corresponding price",
           "type": "object",
@@ -344,7 +354,7 @@
           }
         },
         "EffectiveDate": {
-          "description": "Indicates the date from which the meter rate or offer term is effective.",
+          "description": "Indicates the date from which the meter rate is effective.",
           "type": "string",
           "format": "date-time"
         },
@@ -358,16 +368,43 @@
     "OfferTermInfo": {
       "description": "Describes the offer term.",
       "discriminator": "Name",
-      "required": [ "Name" ],
+      "required": [
+        "Name"
+      ],
       "properties": {
         "Name": {
-          "description": "Name of the offer term. For example: 'Monetary Credit', 'Monetary Commitment",
-          "type": "string"
+          "description": "Name of the offer term",
+          "type": "string",
+          "enum": [
+            "Recurring Charge",
+            "Monetary Commitment",
+            "Monetary Credit"
+          ],
+            "x-ms-enum": {
+              "name": "OfferTermInfo",
+              "modelAsString": false
+            }
         },
         "EffectiveDate": {
-          "description": "Indicates the date from which the meter rate or offer term is effective.",
+          "description": "Indicates the date from which the offer term is effective.",
           "type": "string",
           "format": "date-time"
+        }
+      }
+    },
+    "MonetaryCredit": {
+      "x-ms-discriminator-value": "Monetary Credit",
+      "description": "Indicates that this is a monetary credit offer.",
+      "allOf": [
+        {
+          "$ref": "#/definitions/OfferTermInfo"
+        }
+      ],
+      "properties": {
+        "Credit": {
+          "description": "The amount of credit provided under the terms of the given offer level.",
+          "type": "number",
+          "format": "decimal"
         },
         "ExcludedMeterIds": {
           "description": "An array of meter ids that are excluded from the given offer terms.",
@@ -379,23 +416,9 @@
         }
       }
     },
-    "MonetaryCredit": {
-      "x-ms-discriminator-value": "Monetary Credit",
-      "allOf": [
-        {
-          "$ref": "#/definitions/OfferTermInfo"
-        }
-      ],
-      "properties": {
-        "Credit": {
-          "description": "The amount of credit provided under the terms of the given offer level. This field is used only by offer terms of type 'MonetaryCredit'.",
-          "type": "number",
-          "format": "decimal"
-        }
-      }
-    },
     "MonetaryCommitment": {
       "x-ms-discriminator-value": "Monetary Commitment",
+      "description": "Indicates that a monetary commitment is required for this offer",
       "allOf": [
         {
           "$ref": "#/definitions/OfferTermInfo"
@@ -409,11 +432,20 @@
             "type": "number",
             "format": "decimal"
           }
+        },
+        "ExcludedMeterIds": {
+          "description": "An array of meter ids that are excluded from the given offer terms.",
+          "type": "array",
+          "items": {
+            "type": "string",
+            "format": "uuid"
+          }
         }
       }
     },
     "RecurringCharge": {
       "x-ms-discriminator-value": "Recurring Charge",
+      "description": "Indicates a recurring charge is present for this offer.",
       "allOf": [
         {
           "$ref": "#/definitions/OfferTermInfo"
@@ -427,7 +459,7 @@
       }
     },
     "ErrorResponse": {
-      "description": "Describes ehe format of Error response.",
+      "description": "Describes the format of Error response.",
       "type": "object",
       "properties": {
         "code": {
