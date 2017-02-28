@@ -3,7 +3,7 @@
   "info": {
     "title": "RedisManagementClient",
     "description": "REST API for Azure Redis Cache Service.",
-    "version": "2016-04-01"
+    "version": "2017-02-01"
   },
   "host": "management.azure.com",
   "schemes": [
@@ -1401,6 +1401,11 @@
             "name": "ServerRole",
             "modelAsString": false
           }
+        },
+        "provisioningState": {
+          "readOnly": true,
+          "type": "string",
+          "description": "Terminal state of the link between primary and secondary redis cache."
         }
       },
       "allOf": [
