@@ -11,12 +11,10 @@
     "https"
   ],
   "consumes": [
-    "application/json",
-    "text/json"
+    "application/json"
   ],
   "produces": [
-    "application/json",
-    "text/json"
+    "application/json"
   ],
   "security": [
     {
@@ -137,7 +135,7 @@
             "in": "body",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/NamespaceResource"
+              "$ref": "#/definitions/Namespace"
             },
             "description": "Parameters supplied to create a Namespace Resource."
           },
@@ -152,13 +150,13 @@
           "200": {
             "description": "Namespace create request succeeded",
             "schema": {
-              "$ref": "#/definitions/NamespaceResource"
+              "$ref": "#/definitions/Namespace"
             }
           },
           "201": {
             "description": "Namespace create request accepted",
             "schema": {
-              "$ref": "#/definitions/NamespaceResource"
+              "$ref": "#/definitions/Namespace"
             }
           },
           "default": {
@@ -239,7 +237,7 @@
           "200": {
             "description": "Namespace returned successfully",
             "schema": {
-              "$ref": "#/definitions/NamespaceResource"
+              "$ref": "#/definitions/Namespace"
             }
           },
           "default": {
@@ -1659,7 +1657,7 @@
         "value": {
           "type": "array",
           "items": {
-            "$ref": "#/definitions/NamespaceResource"
+            "$ref": "#/definitions/Namespace"
           },
           "description": "Result of the List Namespace operation."
         },
@@ -1670,7 +1668,7 @@
       },
       "description": "The response of the List Namespace operation."
     },
-    "NamespaceResource": {
+    "Namespace": {
       "properties": {
         "sku": {
           "$ref": "#/definitions/Sku"
