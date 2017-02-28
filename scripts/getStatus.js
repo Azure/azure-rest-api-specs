@@ -74,6 +74,7 @@ function createLogFile() {
 function writeContent(content) {
   fs.writeFileSync(logFilepath, content);
 }
+
 //executes promises sequentially by chaining them.
 function executePromisesSequentially(promiseFactories) {
   let result = Promise.resolve();
@@ -83,23 +84,37 @@ function executePromisesSequentially(promiseFactories) {
   return result;
 };
 
-// runs the linter on a given swagger spec.
+//runs the linter on a given swagger spec.
 function runLinter(swagger) {
   let cmd = 'autorest -CodeGenerator None -I ' + swagger + ' -JsonValidationMessages true';
   console.log(`\t- Running Linter.`);
-  let resultString, resultObj;
+  let resultString = '', resultObj = [];
   try {
     resultString = execSync(cmd, { encoding: 'utf8' });
-    // console.log('>>>>');
-    // console.log(resultString);
-    resultString = resultString.trim().substring(resultString.indexOf('['));
-    resultObj = JSON.parse(resultString);
-    //console.dir(resultObj, {depth: null, colors: true});
-    return Promise.resolve(resultObj);
   } catch (err) {
-    console.log(`An error occurred while running the linter on ${swagger}:`);
-    console.dir(err, { depth: null, colors: true });
+    if (err.stdout && !err.stderr) {
+      resultString = err.stdout;
+    } else {
+      console.log(`An error occurred while running the linter on ${swagger}:`);
+      console.dir(err, { depth: null, colors: true });
+    }
   }
+  //console.log('>>>> Actual result...');
+  //console.log(resultString);
+  if (resultString) {
+    resultString = resultString.trim().substring(resultString.indexOf('['));
+    //console.log('>>>>>> Trimmed Result...');
+    //console.log(resultString);
+    try {
+      resultObj = JSON.parse(resultString);
+      //console.log('>>>>>> Parsed Result...');
+      //console.dir(resultObj, {depth: null, colors: true});
+    } catch (e) {
+      console.log(`An error occurred while executing JSON.parse() on the linter output for ${swagger}:`);
+      console.dir(e, { depth: null, colors: true });
+    }
+  }
+  return Promise.resolve(resultObj);
 }
 
 //runs the semantic validator on a given swagger spec.
