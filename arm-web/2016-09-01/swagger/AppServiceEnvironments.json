@@ -2,32 +2,26 @@
   "swagger": "2.0",
   "info": {
     "version": "2016-09-01",
-    "title": "AppServicePlans API Client"
+    "title": "AppServiceEnvironments API Client"
   },
   "host": "management.azure.com",
   "schemes": [
     "https"
   ],
   "paths": {
-    "/subscriptions/{subscriptionId}/providers/Microsoft.Web/serverfarms": {
+    "/subscriptions/{subscriptionId}/providers/Microsoft.Web/hostingEnvironments": {
       "get": {
         "tags": [
-          "AppServicePlans"
+          "AppServiceEnvironments"
         ],
-        "summary": "Get all App Service plans for a subcription.",
-        "description": "Get all App Service plans for a subcription.",
-        "operationId": "AppServicePlans_List",
+        "summary": "Get all App Service Environments for a subscription.",
+        "description": "Get all App Service Environments for a subscription.",
+        "operationId": "AppServiceEnvironments_List",
         "produces": [
           "application/json",
           "text/json"
         ],
         "parameters": [
-          {
-            "name": "detailed",
-            "in": "query",
-            "description": "Specify <code>true</code> to return all App Service plan properties. The default is <code>false</code>, which returns a subset of the properties.\n Retrieval of all properties may increase the API latency.",
-            "type": "boolean"
-          },
           {
             "$ref": "#/parameters/subscriptionIdParameter"
           },
@@ -39,7 +33,7 @@
           "200": {
             "description": "OK",
             "schema": {
-              "$ref": "#/definitions/AppServicePlanCollection"
+              "$ref": "#/definitions/AppServiceEnvironmentCollection"
             }
           }
         },
@@ -48,14 +42,14 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Web/serverfarms": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Web/hostingEnvironments": {
       "get": {
         "tags": [
-          "AppServicePlans"
+          "AppServiceEnvironments"
         ],
-        "summary": "Get all App Service plans in a resource group.",
-        "description": "Get all App Service plans in a resource group.",
-        "operationId": "AppServicePlans_ListByResourceGroup",
+        "summary": "Get all App Service Environments in a resource group.",
+        "description": "Get all App Service Environments in a resource group.",
+        "operationId": "AppServiceEnvironments_ListByResourceGroup",
         "produces": [
           "application/json",
           "text/json"
@@ -75,7 +69,7 @@
           "200": {
             "description": "OK",
             "schema": {
-              "$ref": "#/definitions/AppServicePlanCollection"
+              "$ref": "#/definitions/AppServiceEnvironmentCollection"
             }
           }
         },
@@ -84,14 +78,14 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Web/serverfarms/{name}": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Web/hostingEnvironments/{name}": {
       "get": {
         "tags": [
-          "AppServicePlans"
+          "AppServiceEnvironments"
         ],
-        "summary": "Get an App Service plan.",
-        "description": "Get an App Service plan.",
-        "operationId": "AppServicePlans_Get",
+        "summary": "Get the properties of an App Service Environment.",
+        "description": "Get the properties of an App Service Environment.",
+        "operationId": "AppServiceEnvironments_Get",
         "produces": [
           "application/json",
           "text/json",
@@ -105,7 +99,7 @@
           {
             "name": "name",
             "in": "path",
-            "description": "Name of the App Service plan.",
+            "description": "Name of the App Service Environment.",
             "required": true,
             "type": "string"
           },
@@ -120,18 +114,18 @@
           "200": {
             "description": "OK",
             "schema": {
-              "$ref": "#/definitions/AppServicePlan"
+              "$ref": "#/definitions/AppServiceEnvironment"
             }
           }
         }
       },
       "put": {
         "tags": [
-          "AppServicePlans"
+          "AppServiceEnvironments"
         ],
-        "summary": "Creates or updates an App Service Plan.",
-        "description": "Creates or updates an App Service Plan.",
-        "operationId": "AppServicePlans_CreateOrUpdate",
+        "summary": "Create or update an App Service Environment.",
+        "description": "Create or update an App Service Environment.",
+        "operationId": "AppServiceEnvironments_CreateOrUpdate",
         "consumes": [
           "application/json",
           "text/json",
@@ -150,17 +144,17 @@
           {
             "name": "name",
             "in": "path",
-            "description": "Name of the App Service plan.",
+            "description": "Name of the App Service Environment.",
             "required": true,
             "type": "string"
           },
           {
-            "name": "appServicePlan",
+            "name": "hostingEnvironmentEnvelope",
             "in": "body",
-            "description": "Details of the App Service plan.",
+            "description": "Configuration details of the App Service Environment.",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/AppServicePlan"
+              "$ref": "#/definitions/AppServiceEnvironment"
             }
           },
           {
@@ -172,27 +166,36 @@
         ],
         "responses": {
           "200": {
-            "description": "OK.",
+            "description": "OK",
             "schema": {
-              "$ref": "#/definitions/AppServicePlan"
+              "$ref": "#/definitions/AppServiceEnvironment"
             }
           },
           "202": {
             "description": "Operation is in progress.",
             "schema": {
-              "$ref": "#/definitions/AppServicePlan"
+              "$ref": "#/definitions/AppServiceEnvironment"
             }
+          },
+          "400": {
+            "description": "Bad request."
+          },
+          "404": {
+            "description": "Not found."
+          },
+          "409": {
+            "description": "Conflict."
           }
         },
         "x-ms-long-running-operation": true
       },
       "delete": {
         "tags": [
-          "AppServicePlans"
+          "AppServiceEnvironments"
         ],
-        "summary": "Delete an App Service plan.",
-        "description": "Delete an App Service plan.",
-        "operationId": "AppServicePlans_Delete",
+        "summary": "Delete an App Service Environment.",
+        "description": "Delete an App Service Environment.",
+        "operationId": "AppServiceEnvironments_Delete",
         "parameters": [
           {
             "$ref": "#/parameters/resourceGroupNameParameter"
@@ -200,7 +203,63 @@
           {
             "name": "name",
             "in": "path",
-            "description": "Name of the App Service plan.",
+            "description": "Name of the App Service Environment.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "forceDelete",
+            "in": "query",
+            "description": "Specify <code>true</code> to force the deletion even if the App Service Environment contains resources. The default is <code>false</code>.",
+            "type": "boolean"
+          },
+          {
+            "$ref": "#/parameters/subscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          }
+        ],
+        "responses": {
+          "202": {
+            "description": "Operation is in progress."
+          },
+          "204": {
+            "description": "App Service Environment does not exist"
+          },
+          "400": {
+            "description": "Bad request."
+          },
+          "404": {
+            "description": "Not found."
+          },
+          "409": {
+            "description": "Conflict."
+          }
+        },
+        "x-ms-long-running-operation": true
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Web/hostingEnvironments/{name}/capacities/compute": {
+      "get": {
+        "tags": [
+          "AppServiceEnvironments"
+        ],
+        "summary": "Get the used, available, and total worker capacity an App Service Environment.",
+        "description": "Get the used, available, and total worker capacity an App Service Environment.",
+        "operationId": "AppServiceEnvironments_ListCapacities",
+        "produces": [
+          "application/json",
+          "text/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/resourceGroupNameParameter"
+          },
+          {
+            "name": "name",
+            "in": "path",
+            "description": "Name of the App Service Environment.",
             "required": true,
             "type": "string"
           },
@@ -213,19 +272,25 @@
         ],
         "responses": {
           "200": {
-            "description": "OK."
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/StampCapacityCollection"
+            }
           }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Web/serverfarms/{name}/capabilities": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Web/hostingEnvironments/{name}/capacities/virtualip": {
       "get": {
         "tags": [
-          "AppServicePlans"
+          "AppServiceEnvironments"
         ],
-        "summary": "List all capabilities of an App Service plan.",
-        "description": "List all capabilities of an App Service plan.",
-        "operationId": "AppServicePlans_ListCapabilities",
+        "summary": "Get IP addresses assigned to an App Service Environment.",
+        "description": "Get IP addresses assigned to an App Service Environment.",
+        "operationId": "AppServiceEnvironments_ListVips",
         "produces": [
           "application/json",
           "text/json",
@@ -239,7 +304,49 @@
           {
             "name": "name",
             "in": "path",
-            "description": "Name of the App Service plan.",
+            "description": "Name of the App Service Environment.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "$ref": "#/parameters/subscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/AddressResponse"
+            }
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Web/hostingEnvironments/{name}/diagnostics": {
+      "get": {
+        "tags": [
+          "AppServiceEnvironments"
+        ],
+        "summary": "Get diagnostic information for an App Service Environment.",
+        "description": "Get diagnostic information for an App Service Environment.",
+        "operationId": "AppServiceEnvironments_ListDiagnostics",
+        "produces": [
+          "application/json",
+          "text/json",
+          "application/xml",
+          "text/xml"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/resourceGroupNameParameter"
+          },
+          {
+            "name": "name",
+            "in": "path",
+            "description": "Name of the App Service Environment.",
             "required": true,
             "type": "string"
           },
@@ -256,21 +363,21 @@
             "schema": {
               "type": "array",
               "items": {
-                "$ref": "#/definitions/Capability"
+                "$ref": "#/definitions/HostingEnvironmentDiagnostics"
               }
             }
           }
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Web/serverfarms/{name}/hybridConnectionNamespaces/{namespaceName}/relays/{relayName}": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Web/hostingEnvironments/{name}/diagnostics/{diagnosticsName}": {
       "get": {
         "tags": [
-          "AppServicePlans"
+          "AppServiceEnvironments"
         ],
-        "summary": "Retrieve a Hybrid Connection in use in an App Service plan.",
-        "description": "Retrieve a Hybrid Connection in use in an App Service plan.",
-        "operationId": "AppServicePlans_GetHybridConnection",
+        "summary": "Get a diagnostics item for an App Service Environment.",
+        "description": "Get a diagnostics item for an App Service Environment.",
+        "operationId": "AppServiceEnvironments_GetDiagnosticsItem",
         "produces": [
           "application/json",
           "text/json",
@@ -284,21 +391,14 @@
           {
             "name": "name",
             "in": "path",
-            "description": "Name of the App Service plan.",
+            "description": "Name of the App Service Environment.",
             "required": true,
             "type": "string"
           },
           {
-            "name": "namespaceName",
+            "name": "diagnosticsName",
             "in": "path",
-            "description": "Name of the Service Bus namespace.",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "name": "relayName",
-            "in": "path",
-            "description": "Name of the Service Bus relay.",
+            "description": "Name of the diagnostics item.",
             "required": true,
             "type": "string"
           },
@@ -313,68 +413,20 @@
           "200": {
             "description": "OK",
             "schema": {
-              "$ref": "#/definitions/HybridConnection"
+              "$ref": "#/definitions/HostingEnvironmentDiagnostics"
             }
-          }
-        }
-      },
-      "delete": {
-        "tags": [
-          "AppServicePlans"
-        ],
-        "summary": "Delete a Hybrid Connection in use in an App Service plan.",
-        "description": "Delete a Hybrid Connection in use in an App Service plan.",
-        "operationId": "AppServicePlans_DeleteHybridConnection",
-        "parameters": [
-          {
-            "$ref": "#/parameters/resourceGroupNameParameter"
-          },
-          {
-            "name": "name",
-            "in": "path",
-            "description": "Name of the App Service plan.",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "name": "namespaceName",
-            "in": "path",
-            "description": "Name of the Service Bus namespace.",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "name": "relayName",
-            "in": "path",
-            "description": "Name of the Service Bus relay.",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "$ref": "#/parameters/subscriptionIdParameter"
-          },
-          {
-            "$ref": "#/parameters/apiVersionParameter"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Successfully deleted hybrid connection"
-          },
-          "204": {
-            "description": "Hybrid connection does not exist"
           }
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Web/serverfarms/{name}/hybridConnectionNamespaces/{namespaceName}/relays/{relayName}/listKeys": {
-      "post": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Web/hostingEnvironments/{name}/metricdefinitions": {
+      "get": {
         "tags": [
-          "AppServicePlans"
+          "AppServiceEnvironments"
         ],
-        "summary": "Get the send key name and value of a Hybrid Connection.",
-        "description": "Get the send key name and value of a Hybrid Connection.",
-        "operationId": "AppServicePlans_ListHybridConnectionKeys",
+        "summary": "Get global metric definitions of an App Service Environment.",
+        "description": "Get global metric definitions of an App Service Environment.",
+        "operationId": "AppServiceEnvironments_ListMetricDefinitions",
         "produces": [
           "application/json",
           "text/json",
@@ -388,21 +440,7 @@
           {
             "name": "name",
             "in": "path",
-            "description": "Name of the App Service plan.",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "name": "namespaceName",
-            "in": "path",
-            "description": "The name of the Service Bus namespace.",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "name": "relayName",
-            "in": "path",
-            "description": "The name of the Service Bus relay.",
+            "description": "Name of the App Service Environment.",
             "required": true,
             "type": "string"
           },
@@ -417,20 +455,20 @@
           "200": {
             "description": "OK",
             "schema": {
-              "$ref": "#/definitions/HybridConnectionKey"
+              "$ref": "#/definitions/MetricDefinition"
             }
           }
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Web/serverfarms/{name}/hybridConnectionNamespaces/{namespaceName}/relays/{relayName}/sites": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Web/hostingEnvironments/{name}/metrics": {
       "get": {
         "tags": [
-          "AppServicePlans"
+          "AppServiceEnvironments"
         ],
-        "summary": "Get all apps that use a Hybrid Connection in an App Service Plan.",
-        "description": "Get all apps that use a Hybrid Connection in an App Service Plan.",
-        "operationId": "AppServicePlans_ListWebAppsByHybridConnection",
+        "summary": "Get global metrics of an App Service Environment.",
+        "description": "Get global metrics of an App Service Environment.",
+        "operationId": "AppServiceEnvironments_ListMetrics",
         "produces": [
           "application/json",
           "text/json"
@@ -442,192 +480,7 @@
           {
             "name": "name",
             "in": "path",
-            "description": "Name of the App Service plan.",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "name": "namespaceName",
-            "in": "path",
-            "description": "Name of the Hybrid Connection namespace.",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "name": "relayName",
-            "in": "path",
-            "description": "Name of the Hybrid Connection relay.",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "$ref": "#/parameters/subscriptionIdParameter"
-          },
-          {
-            "$ref": "#/parameters/apiVersionParameter"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "OK",
-            "schema": {
-              "$ref": "#/definitions/ResourceCollection"
-            }
-          }
-        },
-        "x-ms-pageable": {
-          "nextLinkName": "nextLink"
-        }
-      }
-    },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Web/serverfarms/{name}/hybridConnectionPlanLimits/limit": {
-      "get": {
-        "tags": [
-          "AppServicePlans"
-        ],
-        "summary": "Get the maximum number of Hybrid Connections allowed in an App Service plan.",
-        "description": "Get the maximum number of Hybrid Connections allowed in an App Service plan.",
-        "operationId": "AppServicePlans_GetHybridConnectionPlanLimit",
-        "produces": [
-          "application/json",
-          "text/json",
-          "application/xml",
-          "text/xml"
-        ],
-        "parameters": [
-          {
-            "$ref": "#/parameters/resourceGroupNameParameter"
-          },
-          {
-            "name": "name",
-            "in": "path",
-            "description": "Name of the App Service plan.",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "$ref": "#/parameters/subscriptionIdParameter"
-          },
-          {
-            "$ref": "#/parameters/apiVersionParameter"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "OK",
-            "schema": {
-              "$ref": "#/definitions/HybridConnectionLimits"
-            }
-          }
-        }
-      }
-    },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Web/serverfarms/{name}/hybridConnectionRelays": {
-      "get": {
-        "tags": [
-          "AppServicePlans"
-        ],
-        "summary": "Retrieve all Hybrid Connections in use in an App Service plan.",
-        "description": "Retrieve all Hybrid Connections in use in an App Service plan.",
-        "operationId": "AppServicePlans_ListHybridConnections",
-        "produces": [
-          "application/json",
-          "text/json"
-        ],
-        "parameters": [
-          {
-            "$ref": "#/parameters/resourceGroupNameParameter"
-          },
-          {
-            "name": "name",
-            "in": "path",
-            "description": "Name of the App Service plan.",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "$ref": "#/parameters/subscriptionIdParameter"
-          },
-          {
-            "$ref": "#/parameters/apiVersionParameter"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "OK",
-            "schema": {
-              "$ref": "#/definitions/HybridConnectionCollection"
-            }
-          }
-        },
-        "x-ms-pageable": {
-          "nextLinkName": "nextLink"
-        }
-      }
-    },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Web/serverfarms/{name}/metricdefinitions": {
-      "get": {
-        "tags": [
-          "AppServicePlans"
-        ],
-        "summary": "Get metrics that can be queried for an App Service plan, and their definitions.",
-        "description": "Get metrics that can be queried for an App Service plan, and their definitions.",
-        "operationId": "AppServicePlans_ListMetricDefintions",
-        "produces": [
-          "application/json",
-          "text/json"
-        ],
-        "parameters": [
-          {
-            "$ref": "#/parameters/resourceGroupNameParameter"
-          },
-          {
-            "name": "name",
-            "in": "path",
-            "description": "Name of the App Service plan.",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "$ref": "#/parameters/subscriptionIdParameter"
-          },
-          {
-            "$ref": "#/parameters/apiVersionParameter"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "OK",
-            "schema": {
-              "$ref": "#/definitions/ResourceMetricDefinitionCollection"
-            }
-          }
-        },
-        "x-ms-pageable": {
-          "nextLinkName": "nextLink"
-        }
-      }
-    },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Web/serverfarms/{name}/metrics": {
-      "get": {
-        "tags": [
-          "AppServicePlans"
-        ],
-        "summary": "Get metrics for an App Serice plan.",
-        "description": "Get metrics for an App Serice plan.",
-        "operationId": "AppServicePlans_ListMetrics",
-        "produces": [
-          "application/json",
-          "text/json"
-        ],
-        "parameters": [
-          {
-            "$ref": "#/parameters/resourceGroupNameParameter"
-          },
-          {
-            "name": "name",
-            "in": "path",
-            "description": "Name of the App Service plan.",
+            "description": "Name of the App Service Environment.",
             "required": true,
             "type": "string"
           },
@@ -664,53 +517,14 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Web/serverfarms/{name}/restartSites": {
-      "post": {
-        "tags": [
-          "AppServicePlans"
-        ],
-        "summary": "Restart all apps in an App Service plan.",
-        "description": "Restart all apps in an App Service plan.",
-        "operationId": "AppServicePlans_RestartWebApps",
-        "parameters": [
-          {
-            "$ref": "#/parameters/resourceGroupNameParameter"
-          },
-          {
-            "name": "name",
-            "in": "path",
-            "description": "Name of the App Service plan.",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "name": "softRestart",
-            "in": "query",
-            "description": "Specify <code>true</code> to performa a soft restart, applies the configuration settings and restarts the apps if necessary. The default is <code>false</code>, which always restarts and reprovisions the apps",
-            "type": "boolean"
-          },
-          {
-            "$ref": "#/parameters/subscriptionIdParameter"
-          },
-          {
-            "$ref": "#/parameters/apiVersionParameter"
-          }
-        ],
-        "responses": {
-          "204": {
-            "description": "No Content"
-          }
-        }
-      }
-    },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Web/serverfarms/{name}/sites": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Web/hostingEnvironments/{name}/multiRolePools": {
       "get": {
         "tags": [
-          "AppServicePlans"
+          "AppServiceEnvironments"
         ],
-        "summary": "Get all apps associated with an App Service plan.",
-        "description": "Get all apps associated with an App Service plan.",
-        "operationId": "AppServicePlans_ListWebApps",
+        "summary": "Get all multi-role pools.",
+        "description": "Get all multi-role pools.",
+        "operationId": "AppServiceEnvironments_ListMultiRolePools",
         "produces": [
           "application/json",
           "text/json"
@@ -722,27 +536,658 @@
           {
             "name": "name",
             "in": "path",
-            "description": "Name of the App Service plan.",
+            "description": "Name of the App Service Environment.",
             "required": true,
             "type": "string"
           },
           {
-            "name": "$skipToken",
-            "in": "query",
-            "description": "Skip to a web app in the list of webapps associated with app service plan. If specified, the resulting list will contain web apps starting from (including) the skipToken. Otherwise, the resulting list contains web apps from the start of the list",
+            "$ref": "#/parameters/subscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/WorkerPoolCollection"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Web/hostingEnvironments/{name}/multiRolePools/default": {
+      "get": {
+        "tags": [
+          "AppServiceEnvironments"
+        ],
+        "summary": "Get properties of a multi-role pool.",
+        "description": "Get properties of a multi-role pool.",
+        "operationId": "AppServiceEnvironments_GetMultiRolePool",
+        "produces": [
+          "application/json",
+          "text/json",
+          "application/xml",
+          "text/xml"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/resourceGroupNameParameter"
+          },
+          {
+            "name": "name",
+            "in": "path",
+            "description": "Name of the App Service Environment.",
+            "required": true,
             "type": "string"
+          },
+          {
+            "$ref": "#/parameters/subscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/WorkerPool"
+            }
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "AppServiceEnvironments"
+        ],
+        "summary": "Create or update a multi-role pool.",
+        "description": "Create or update a multi-role pool.",
+        "operationId": "AppServiceEnvironments_CreateOrUpdateMultiRolePool",
+        "consumes": [
+          "application/json",
+          "text/json",
+          "application/x-www-form-urlencoded"
+        ],
+        "produces": [
+          "application/json",
+          "text/json",
+          "application/xml",
+          "text/xml"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/resourceGroupNameParameter"
+          },
+          {
+            "name": "name",
+            "in": "path",
+            "description": "Name of the App Service Environment.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "multiRolePoolEnvelope",
+            "in": "body",
+            "description": "Properties of the multi-role pool.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/WorkerPool"
+            }
+          },
+          {
+            "$ref": "#/parameters/subscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK.",
+            "schema": {
+              "$ref": "#/definitions/WorkerPool"
+            }
+          },
+          "202": {
+            "description": "Operation is in progress.",
+            "schema": {
+              "$ref": "#/definitions/WorkerPool"
+            }
+          },
+          "400": {
+            "description": "Bad request."
+          },
+          "404": {
+            "description": "Not found."
+          },
+          "409": {
+            "description": "Conflict."
+          }
+        },
+        "x-ms-long-running-operation": true
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Web/hostingEnvironments/{name}/multiRolePools/default/instances/{instance}/metricdefinitions": {
+      "get": {
+        "tags": [
+          "AppServiceEnvironments"
+        ],
+        "summary": "Get metric definitions for a specific instance of a multi-role pool of an App Service Environment.",
+        "description": "Get metric definitions for a specific instance of a multi-role pool of an App Service Environment.",
+        "operationId": "AppServiceEnvironments_ListMultiRolePoolInstanceMetricDefinitions",
+        "produces": [
+          "application/json",
+          "text/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/resourceGroupNameParameter"
+          },
+          {
+            "name": "name",
+            "in": "path",
+            "description": "Name of the App Service Environment.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "instance",
+            "in": "path",
+            "description": "Name of the instance in the multi-role pool.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "$ref": "#/parameters/subscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/ResourceMetricDefinitionCollection"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Web/hostingEnvironments/{name}/multiRolePools/default/instances/{instance}metrics": {
+      "get": {
+        "tags": [
+          "AppServiceEnvironments"
+        ],
+        "summary": "Get metrics for a specific instance of a multi-role pool of an App Service Environment.",
+        "description": "Get metrics for a specific instance of a multi-role pool of an App Service Environment.",
+        "operationId": "AppServiceEnvironments_ListMultiRolePoolInstanceMetrics",
+        "produces": [
+          "application/json",
+          "text/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/resourceGroupNameParameter"
+          },
+          {
+            "name": "name",
+            "in": "path",
+            "description": "Name of the App Service Environment.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "instance",
+            "in": "path",
+            "description": "Name of the instance in the multi-role pool.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "details",
+            "in": "query",
+            "description": "Specify <code>true</code> to include instance details. The default is <code>false</code>.",
+            "type": "boolean"
+          },
+          {
+            "$ref": "#/parameters/subscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/ResourceMetricCollection"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Web/hostingEnvironments/{name}/multiRolePools/default/metricdefinitions": {
+      "get": {
+        "tags": [
+          "AppServiceEnvironments"
+        ],
+        "summary": "Get metric definitions for a multi-role pool of an App Service Environment.",
+        "description": "Get metric definitions for a multi-role pool of an App Service Environment.",
+        "operationId": "AppServiceEnvironments_ListMultiRoleMetricDefinitions",
+        "produces": [
+          "application/json",
+          "text/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/resourceGroupNameParameter"
+          },
+          {
+            "name": "name",
+            "in": "path",
+            "description": "Name of the App Service Environment.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "$ref": "#/parameters/subscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/ResourceMetricDefinitionCollection"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Web/hostingEnvironments/{name}/multiRolePools/default/metrics": {
+      "get": {
+        "tags": [
+          "AppServiceEnvironments"
+        ],
+        "summary": "Get metrics for a multi-role pool of an App Service Environment.",
+        "description": "Get metrics for a multi-role pool of an App Service Environment.",
+        "operationId": "AppServiceEnvironments_ListMultiRoleMetrics",
+        "produces": [
+          "application/json",
+          "text/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/resourceGroupNameParameter"
+          },
+          {
+            "name": "name",
+            "in": "path",
+            "description": "Name of the App Service Environment.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "startTime",
+            "in": "query",
+            "description": "Beginning time of the metrics query.",
+            "type": "string"
+          },
+          {
+            "name": "endTime",
+            "in": "query",
+            "description": "End time of the metrics query.",
+            "type": "string"
+          },
+          {
+            "name": "timeGrain",
+            "in": "query",
+            "description": "Time granularity of the metrics query.",
+            "type": "string"
+          },
+          {
+            "name": "details",
+            "in": "query",
+            "description": "Specify <code>true</code> to include instance details. The default is <code>false</code>.",
+            "type": "boolean"
           },
           {
             "name": "$filter",
             "in": "query",
-            "description": "Supported filter: $filter=state eq running. Returns only web apps that are currently running",
+            "description": "Return only usages/metrics specified in the filter. Filter conforms to odata syntax. Example: $filter=(name.value eq 'Metric1' or name.value eq 'Metric2') and startTime eq '2014-01-01T00:00:00Z' and endTime eq '2014-12-31T23:59:59Z' and timeGrain eq duration'[Hour|Minute|Day]'.",
             "x-ms-skip-url-encoding": true,
             "type": "string"
           },
           {
-            "name": "$top",
+            "$ref": "#/parameters/subscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/ResourceMetricCollection"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Web/hostingEnvironments/{name}/multiRolePools/default/skus": {
+      "get": {
+        "tags": [
+          "AppServiceEnvironments"
+        ],
+        "summary": "Get available SKUs for scaling a multi-role pool.",
+        "description": "Get available SKUs for scaling a multi-role pool.",
+        "operationId": "AppServiceEnvironments_ListMultiRolePoolSkus",
+        "produces": [
+          "application/json",
+          "text/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/resourceGroupNameParameter"
+          },
+          {
+            "name": "name",
+            "in": "path",
+            "description": "Name of the App Service Environment.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "$ref": "#/parameters/subscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/SkuInfoCollection"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Web/hostingEnvironments/{name}/multiRolePools/default/usages": {
+      "get": {
+        "tags": [
+          "AppServiceEnvironments"
+        ],
+        "summary": "Get usage metrics for a multi-role pool of an App Service Environment.",
+        "description": "Get usage metrics for a multi-role pool of an App Service Environment.",
+        "operationId": "AppServiceEnvironments_ListMultiRoleUsages",
+        "produces": [
+          "application/json",
+          "text/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/resourceGroupNameParameter"
+          },
+          {
+            "name": "name",
+            "in": "path",
+            "description": "Name of the App Service Environment.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "$ref": "#/parameters/subscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/UsageCollection"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Web/hostingEnvironments/{name}/operations": {
+      "get": {
+        "tags": [
+          "AppServiceEnvironments"
+        ],
+        "summary": "List all currently running operations on the App Service Environment.",
+        "description": "List all currently running operations on the App Service Environment.",
+        "operationId": "AppServiceEnvironments_ListOperations",
+        "produces": [
+          "application/json",
+          "text/json",
+          "application/xml",
+          "text/xml"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/resourceGroupNameParameter"
+          },
+          {
+            "name": "name",
+            "in": "path",
+            "description": "Name of the App Service Environment.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "$ref": "#/parameters/subscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/Operation"
+              }
+            }
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Web/hostingEnvironments/{name}/reboot": {
+      "post": {
+        "tags": [
+          "AppServiceEnvironments"
+        ],
+        "summary": "Reboot all machines in an App Service Environment.",
+        "description": "Reboot all machines in an App Service Environment.",
+        "operationId": "AppServiceEnvironments_Reboot",
+        "parameters": [
+          {
+            "$ref": "#/parameters/resourceGroupNameParameter"
+          },
+          {
+            "name": "name",
+            "in": "path",
+            "description": "Name of the App Service Environment.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "$ref": "#/parameters/subscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          }
+        ],
+        "responses": {
+          "202": {
+            "description": "Asynchronous operation in progress."
+          },
+          "400": {
+            "description": "Bad request."
+          },
+          "404": {
+            "description": "Not found."
+          },
+          "409": {
+            "description": "Conflict."
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Web/hostingEnvironments/{name}/resume": {
+      "post": {
+        "tags": [
+          "AppServiceEnvironments"
+        ],
+        "summary": "Resume an App Service Environment.",
+        "description": "Resume an App Service Environment.",
+        "operationId": "AppServiceEnvironments_Resume",
+        "produces": [
+          "application/json",
+          "text/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/resourceGroupNameParameter"
+          },
+          {
+            "name": "name",
+            "in": "path",
+            "description": "Name of the App Service Environment.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "$ref": "#/parameters/subscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK.",
+            "schema": {
+              "$ref": "#/definitions/WebAppCollection"
+            }
+          },
+          "202": {
+            "description": "Operation is in progress.",
+            "schema": {
+              "$ref": "#/definitions/WebAppCollection"
+            }
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Web/hostingEnvironments/{name}/serverfarms": {
+      "get": {
+        "tags": [
+          "AppServiceEnvironments"
+        ],
+        "summary": "Get all App Service plans in an App Service Environment.",
+        "description": "Get all App Service plans in an App Service Environment.",
+        "operationId": "AppServiceEnvironments_ListAppServicePlans",
+        "produces": [
+          "application/json",
+          "text/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/resourceGroupNameParameter"
+          },
+          {
+            "name": "name",
+            "in": "path",
+            "description": "Name of the App Service Environment.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "$ref": "#/parameters/subscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/AppServicePlanCollection"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Web/hostingEnvironments/{name}/sites": {
+      "get": {
+        "tags": [
+          "AppServiceEnvironments"
+        ],
+        "summary": "Get all apps in an App Service Environment.",
+        "description": "Get all apps in an App Service Environment.",
+        "operationId": "AppServiceEnvironments_ListWebApps",
+        "produces": [
+          "application/json",
+          "text/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/resourceGroupNameParameter"
+          },
+          {
+            "name": "name",
+            "in": "path",
+            "description": "Name of the App Service Environment.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "propertiesToInclude",
             "in": "query",
-            "description": "List page size. If specified, results are paged.",
+            "description": "Comma separated list of app properties to include.",
             "type": "string"
           },
           {
@@ -765,545 +1210,18 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Web/serverfarms/{name}/virtualNetworkConnections": {
-      "get": {
-        "tags": [
-          "AppServicePlans"
-        ],
-        "summary": "Get all Virtual Networks associated with an App Service plan.",
-        "description": "Get all Virtual Networks associated with an App Service plan.",
-        "operationId": "AppServicePlans_ListVnets",
-        "produces": [
-          "application/json",
-          "text/json",
-          "application/xml",
-          "text/xml"
-        ],
-        "parameters": [
-          {
-            "$ref": "#/parameters/resourceGroupNameParameter"
-          },
-          {
-            "name": "name",
-            "in": "path",
-            "description": "Name of the App Service plan.",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "$ref": "#/parameters/subscriptionIdParameter"
-          },
-          {
-            "$ref": "#/parameters/apiVersionParameter"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "OK",
-            "schema": {
-              "type": "array",
-              "items": {
-                "$ref": "#/definitions/VnetInfo"
-              }
-            }
-          }
-        }
-      }
-    },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Web/serverfarms/{name}/virtualNetworkConnections/{vnetName}": {
-      "get": {
-        "tags": [
-          "AppServicePlans"
-        ],
-        "summary": "Get a Virtual Network associated with an App Service plan.",
-        "description": "Get a Virtual Network associated with an App Service plan.",
-        "operationId": "AppServicePlans_GetVnetFromServerFarm",
-        "produces": [
-          "application/json",
-          "text/json",
-          "application/xml",
-          "text/xml"
-        ],
-        "parameters": [
-          {
-            "$ref": "#/parameters/resourceGroupNameParameter"
-          },
-          {
-            "name": "name",
-            "in": "path",
-            "description": "Name of the App Service plan.",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "name": "vnetName",
-            "in": "path",
-            "description": "Name of the Virtual Network.",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "$ref": "#/parameters/subscriptionIdParameter"
-          },
-          {
-            "$ref": "#/parameters/apiVersionParameter"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "OK.",
-            "schema": {
-              "$ref": "#/definitions/VnetInfo"
-            }
-          },
-          "404": {
-            "description": "Virtual network could not be found."
-          }
-        }
-      }
-    },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Web/serverfarms/{name}/virtualNetworkConnections/{vnetName}/gateways/{gatewayName}": {
-      "get": {
-        "tags": [
-          "AppServicePlans"
-        ],
-        "summary": "Get a Virtual Network gateway.",
-        "description": "Get a Virtual Network gateway.",
-        "operationId": "AppServicePlans_GetVnetGateway",
-        "produces": [
-          "application/json",
-          "text/json",
-          "application/xml",
-          "text/xml"
-        ],
-        "parameters": [
-          {
-            "$ref": "#/parameters/resourceGroupNameParameter"
-          },
-          {
-            "name": "name",
-            "in": "path",
-            "description": "Name of the App Service plan.",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "name": "vnetName",
-            "in": "path",
-            "description": "Name of the Virtual Network.",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "name": "gatewayName",
-            "in": "path",
-            "description": "Name of the gateway. Only the 'primary' gateway is supported.",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "$ref": "#/parameters/subscriptionIdParameter"
-          },
-          {
-            "$ref": "#/parameters/apiVersionParameter"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "OK",
-            "schema": {
-              "$ref": "#/definitions/VnetGateway"
-            }
-          }
-        }
-      },
-      "put": {
-        "tags": [
-          "AppServicePlans"
-        ],
-        "summary": "Update a Virtual Network gateway.",
-        "description": "Update a Virtual Network gateway.",
-        "operationId": "AppServicePlans_UpdateVnetGateway",
-        "consumes": [
-          "application/json",
-          "text/json",
-          "application/x-www-form-urlencoded"
-        ],
-        "produces": [
-          "application/json",
-          "text/json",
-          "application/xml",
-          "text/xml"
-        ],
-        "parameters": [
-          {
-            "$ref": "#/parameters/resourceGroupNameParameter"
-          },
-          {
-            "name": "name",
-            "in": "path",
-            "description": "Name of the App Service plan.",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "name": "vnetName",
-            "in": "path",
-            "description": "Name of the Virtual Network.",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "name": "gatewayName",
-            "in": "path",
-            "description": "Name of the gateway. Only the 'primary' gateway is supported.",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "name": "connectionEnvelope",
-            "in": "body",
-            "description": "Definition of the gateway.",
-            "required": true,
-            "schema": {
-              "$ref": "#/definitions/VnetGateway"
-            }
-          },
-          {
-            "$ref": "#/parameters/subscriptionIdParameter"
-          },
-          {
-            "$ref": "#/parameters/apiVersionParameter"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "OK",
-            "schema": {
-              "$ref": "#/definitions/VnetGateway"
-            }
-          }
-        }
-      }
-    },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Web/serverfarms/{name}/virtualNetworkConnections/{vnetName}/routes": {
-      "get": {
-        "tags": [
-          "AppServicePlans"
-        ],
-        "summary": "Get all routes that are associated with a Virtual Network in an App Service plan.",
-        "description": "Get all routes that are associated with a Virtual Network in an App Service plan.",
-        "operationId": "AppServicePlans_ListRoutesForVnet",
-        "produces": [
-          "application/json",
-          "text/json",
-          "application/xml",
-          "text/xml"
-        ],
-        "parameters": [
-          {
-            "$ref": "#/parameters/resourceGroupNameParameter"
-          },
-          {
-            "name": "name",
-            "in": "path",
-            "description": "Name of the App Service plan.",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "name": "vnetName",
-            "in": "path",
-            "description": "Name of the Virtual Network.",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "$ref": "#/parameters/subscriptionIdParameter"
-          },
-          {
-            "$ref": "#/parameters/apiVersionParameter"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "OK",
-            "schema": {
-              "type": "array",
-              "items": {
-                "$ref": "#/definitions/VnetRoute"
-              }
-            }
-          }
-        }
-      }
-    },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Web/serverfarms/{name}/virtualNetworkConnections/{vnetName}/routes/{routeName}": {
-      "get": {
-        "tags": [
-          "AppServicePlans"
-        ],
-        "summary": "Get a Virtual Network route in an App Service plan.",
-        "description": "Get a Virtual Network route in an App Service plan.",
-        "operationId": "AppServicePlans_GetRouteForVnet",
-        "produces": [
-          "application/json",
-          "text/json",
-          "application/xml",
-          "text/xml"
-        ],
-        "parameters": [
-          {
-            "$ref": "#/parameters/resourceGroupNameParameter"
-          },
-          {
-            "name": "name",
-            "in": "path",
-            "description": "Name of the App Service plan.",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "name": "vnetName",
-            "in": "path",
-            "description": "Name of the Virtual Network.",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "name": "routeName",
-            "in": "path",
-            "description": "Name of the Virtual Network route.",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "$ref": "#/parameters/subscriptionIdParameter"
-          },
-          {
-            "$ref": "#/parameters/apiVersionParameter"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "OK.",
-            "schema": {
-              "type": "array",
-              "items": {
-                "$ref": "#/definitions/VnetRoute"
-              }
-            }
-          },
-          "404": {
-            "description": "Specified route does not exist."
-          }
-        }
-      },
-      "put": {
-        "tags": [
-          "AppServicePlans"
-        ],
-        "summary": "Create or update a Virtual Network route in an App Service plan.",
-        "description": "Create or update a Virtual Network route in an App Service plan.",
-        "operationId": "AppServicePlans_CreateOrUpdateVnetRoute",
-        "consumes": [
-          "application/json",
-          "text/json",
-          "application/x-www-form-urlencoded"
-        ],
-        "produces": [
-          "application/json",
-          "text/json",
-          "application/xml",
-          "text/xml"
-        ],
-        "parameters": [
-          {
-            "$ref": "#/parameters/resourceGroupNameParameter"
-          },
-          {
-            "name": "name",
-            "in": "path",
-            "description": "Name of the App Service plan.",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "name": "vnetName",
-            "in": "path",
-            "description": "Name of the Virtual Network.",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "name": "routeName",
-            "in": "path",
-            "description": "Name of the Virtual Network route.",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "name": "route",
-            "in": "body",
-            "description": "Definition of the Virtual Network route.",
-            "required": true,
-            "schema": {
-              "$ref": "#/definitions/VnetRoute"
-            }
-          },
-          {
-            "$ref": "#/parameters/subscriptionIdParameter"
-          },
-          {
-            "$ref": "#/parameters/apiVersionParameter"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "OK.",
-            "schema": {
-              "$ref": "#/definitions/VnetRoute"
-            }
-          },
-          "400": {
-            "description": "Invalid request. Ensure that required parameters are given, and that addresses and address spaces are valid."
-          },
-          "404": {
-            "description": "Route not found."
-          }
-        }
-      },
-      "delete": {
-        "tags": [
-          "AppServicePlans"
-        ],
-        "summary": "Delete a Virtual Network route in an App Service plan.",
-        "description": "Delete a Virtual Network route in an App Service plan.",
-        "operationId": "AppServicePlans_DeleteVnetRoute",
-        "parameters": [
-          {
-            "$ref": "#/parameters/resourceGroupNameParameter"
-          },
-          {
-            "name": "name",
-            "in": "path",
-            "description": "Name of the App Service plan.",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "name": "vnetName",
-            "in": "path",
-            "description": "Name of the Virtual Network.",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "name": "routeName",
-            "in": "path",
-            "description": "Name of the Virtual Network route.",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "$ref": "#/parameters/subscriptionIdParameter"
-          },
-          {
-            "$ref": "#/parameters/apiVersionParameter"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Successfully deleted Virtual Network route."
-          },
-          "404": {
-            "description": "Specified Virtual Network route does not exist."
-          }
-        }
-      },
-      "patch": {
-        "tags": [
-          "AppServicePlans"
-        ],
-        "summary": "Create or update a Virtual Network route in an App Service plan.",
-        "description": "Create or update a Virtual Network route in an App Service plan.",
-        "operationId": "AppServicePlans_UpdateVnetRoute",
-        "consumes": [
-          "application/json",
-          "text/json",
-          "application/x-www-form-urlencoded"
-        ],
-        "produces": [
-          "application/json",
-          "text/json",
-          "application/xml",
-          "text/xml"
-        ],
-        "parameters": [
-          {
-            "$ref": "#/parameters/resourceGroupNameParameter"
-          },
-          {
-            "name": "name",
-            "in": "path",
-            "description": "Name of the App Service plan.",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "name": "vnetName",
-            "in": "path",
-            "description": "Name of the Virtual Network.",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "name": "routeName",
-            "in": "path",
-            "description": "Name of the Virtual Network route.",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "name": "route",
-            "in": "body",
-            "description": "Definition of the Virtual Network route.",
-            "required": true,
-            "schema": {
-              "$ref": "#/definitions/VnetRoute"
-            }
-          },
-          {
-            "$ref": "#/parameters/subscriptionIdParameter"
-          },
-          {
-            "$ref": "#/parameters/apiVersionParameter"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "OK.",
-            "schema": {
-              "$ref": "#/definitions/VnetRoute"
-            }
-          },
-          "400": {
-            "description": "Invalid request. Ensure that required parameters are given, and that addresses and address spaces are valid."
-          },
-          "404": {
-            "description": "Route not found."
-          }
-        }
-      }
-    },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Web/serverfarms/{name}/workers/{workerName}/reboot": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Web/hostingEnvironments/{name}/suspend": {
       "post": {
         "tags": [
-          "AppServicePlans"
+          "AppServiceEnvironments"
         ],
-        "summary": "Reboot a worker machine in an App Service plan.",
-        "description": "Reboot a worker machine in an App Service plan.",
-        "operationId": "AppServicePlans_RebootWorker",
+        "summary": "Suspend an App Service Environment.",
+        "description": "Suspend an App Service Environment.",
+        "operationId": "AppServiceEnvironments_Suspend",
+        "produces": [
+          "application/json",
+          "text/json"
+        ],
         "parameters": [
           {
             "$ref": "#/parameters/resourceGroupNameParameter"
@@ -1311,14 +1229,7 @@
           {
             "name": "name",
             "in": "path",
-            "description": "Name of the App Service plan.",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "name": "workerName",
-            "in": "path",
-            "description": "Name of worker machine, which typically starts with RD.",
+            "description": "Name of the App Service Environment.",
             "required": true,
             "type": "string"
           },
@@ -1330,20 +1241,871 @@
           }
         ],
         "responses": {
-          "204": {
-            "description": "No Content"
+          "200": {
+            "description": "OK.",
+            "schema": {
+              "$ref": "#/definitions/WebAppCollection"
+            }
+          },
+          "202": {
+            "description": "Operation is in progress.",
+            "schema": {
+              "$ref": "#/definitions/WebAppCollection"
+            }
           }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Web/hostingEnvironments/{name}/usages": {
+      "get": {
+        "tags": [
+          "AppServiceEnvironments"
+        ],
+        "summary": "Get global usage metrics of an App Service Environment.",
+        "description": "Get global usage metrics of an App Service Environment.",
+        "operationId": "AppServiceEnvironments_ListUsages",
+        "produces": [
+          "application/json",
+          "text/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/resourceGroupNameParameter"
+          },
+          {
+            "name": "name",
+            "in": "path",
+            "description": "Name of the App Service Environment.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "$filter",
+            "in": "query",
+            "description": "Return only usages/metrics specified in the filter. Filter conforms to odata syntax. Example: $filter=(name.value eq 'Metric1' or name.value eq 'Metric2') and startTime eq '2014-01-01T00:00:00Z' and endTime eq '2014-12-31T23:59:59Z' and timeGrain eq duration'[Hour|Minute|Day]'.",
+            "x-ms-skip-url-encoding": true,
+            "type": "string"
+          },
+          {
+            "$ref": "#/parameters/subscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/CsmUsageQuotaCollection"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Web/hostingEnvironments/{name}/workerPools": {
+      "get": {
+        "tags": [
+          "AppServiceEnvironments"
+        ],
+        "summary": "Get all worker pools of an App Service Environment.",
+        "description": "Get all worker pools of an App Service Environment.",
+        "operationId": "AppServiceEnvironments_ListWorkerPools",
+        "produces": [
+          "application/json",
+          "text/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/resourceGroupNameParameter"
+          },
+          {
+            "name": "name",
+            "in": "path",
+            "description": "Name of the App Service Environment.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "$ref": "#/parameters/subscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/WorkerPoolCollection"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Web/hostingEnvironments/{name}/workerPools/{workerPoolName}": {
+      "get": {
+        "tags": [
+          "AppServiceEnvironments"
+        ],
+        "summary": "Get properties of a worker pool.",
+        "description": "Get properties of a worker pool.",
+        "operationId": "AppServiceEnvironments_GetWorkerPool",
+        "produces": [
+          "application/json",
+          "text/json",
+          "application/xml",
+          "text/xml"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/resourceGroupNameParameter"
+          },
+          {
+            "name": "name",
+            "in": "path",
+            "description": "Name of the App Service Environment.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "workerPoolName",
+            "in": "path",
+            "description": "Name of the worker pool.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "$ref": "#/parameters/subscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/WorkerPool"
+            }
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "AppServiceEnvironments"
+        ],
+        "summary": "Create or update a worker pool.",
+        "description": "Create or update a worker pool.",
+        "operationId": "AppServiceEnvironments_CreateOrUpdateWorkerPool",
+        "consumes": [
+          "application/json",
+          "text/json",
+          "application/x-www-form-urlencoded"
+        ],
+        "produces": [
+          "application/json",
+          "text/json",
+          "application/xml",
+          "text/xml"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/resourceGroupNameParameter"
+          },
+          {
+            "name": "name",
+            "in": "path",
+            "description": "Name of the App Service Environment.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "workerPoolName",
+            "in": "path",
+            "description": "Name of the worker pool.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "workerPoolEnvelope",
+            "in": "body",
+            "description": "Properties of the worker pool.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/WorkerPool"
+            }
+          },
+          {
+            "$ref": "#/parameters/subscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK.",
+            "schema": {
+              "$ref": "#/definitions/WorkerPool"
+            }
+          },
+          "202": {
+            "description": "Operation is in progress.",
+            "schema": {
+              "$ref": "#/definitions/WorkerPool"
+            }
+          },
+          "400": {
+            "description": "Bad request."
+          },
+          "404": {
+            "description": "Not found."
+          },
+          "409": {
+            "description": "Conflict."
+          }
+        },
+        "x-ms-long-running-operation": true
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Web/hostingEnvironments/{name}/workerPools/{workerPoolName}/instances/{instance}/metricdefinitions": {
+      "get": {
+        "tags": [
+          "AppServiceEnvironments"
+        ],
+        "summary": "Get metric definitions for a specific instance of a worker pool of an App Service Environment.",
+        "description": "Get metric definitions for a specific instance of a worker pool of an App Service Environment.",
+        "operationId": "AppServiceEnvironments_ListWorkerPoolInstanceMetricDefinitions",
+        "produces": [
+          "application/json",
+          "text/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/resourceGroupNameParameter"
+          },
+          {
+            "name": "name",
+            "in": "path",
+            "description": "Name of the App Service Environment.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "workerPoolName",
+            "in": "path",
+            "description": "Name of the worker pool.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "instance",
+            "in": "path",
+            "description": "Name of the instance in the worker pool.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "$ref": "#/parameters/subscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/ResourceMetricDefinitionCollection"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Web/hostingEnvironments/{name}/workerPools/{workerPoolName}/instances/{instance}metrics": {
+      "get": {
+        "tags": [
+          "AppServiceEnvironments"
+        ],
+        "summary": "Get metrics for a specific instance of a worker pool of an App Service Environment.",
+        "description": "Get metrics for a specific instance of a worker pool of an App Service Environment.",
+        "operationId": "AppServiceEnvironments_ListWorkerPoolInstanceMetrics",
+        "produces": [
+          "application/json",
+          "text/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/resourceGroupNameParameter"
+          },
+          {
+            "name": "name",
+            "in": "path",
+            "description": "Name of the App Service Environment.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "workerPoolName",
+            "in": "path",
+            "description": "Name of the worker pool.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "instance",
+            "in": "path",
+            "description": "Name of the instance in the worker pool.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "details",
+            "in": "query",
+            "description": "Specify <code>true</code> to include instance details. The default is <code>false</code>.",
+            "type": "boolean"
+          },
+          {
+            "name": "$filter",
+            "in": "query",
+            "description": "Return only usages/metrics specified in the filter. Filter conforms to odata syntax. Example: $filter=(name.value eq 'Metric1' or name.value eq 'Metric2') and startTime eq '2014-01-01T00:00:00Z' and endTime eq '2014-12-31T23:59:59Z' and timeGrain eq duration'[Hour|Minute|Day]'.",
+            "x-ms-skip-url-encoding": true,
+            "type": "string"
+          },
+          {
+            "$ref": "#/parameters/subscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/ResourceMetricCollection"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Web/hostingEnvironments/{name}/workerPools/{workerPoolName}/metricdefinitions": {
+      "get": {
+        "tags": [
+          "AppServiceEnvironments"
+        ],
+        "summary": "Get metric definitions for a worker pool of an App Service Environment.",
+        "description": "Get metric definitions for a worker pool of an App Service Environment.",
+        "operationId": "AppServiceEnvironments_ListWebWorkerMetricDefinitions",
+        "produces": [
+          "application/json",
+          "text/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/resourceGroupNameParameter"
+          },
+          {
+            "name": "name",
+            "in": "path",
+            "description": "Name of the App Service Environment.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "workerPoolName",
+            "in": "path",
+            "description": "Name of the worker pool.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "$ref": "#/parameters/subscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/ResourceMetricDefinitionCollection"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Web/hostingEnvironments/{name}/workerPools/{workerPoolName}/metrics": {
+      "get": {
+        "tags": [
+          "AppServiceEnvironments"
+        ],
+        "summary": "Get metrics for a worker pool of a AppServiceEnvironment (App Service Environment).",
+        "description": "Get metrics for a worker pool of a AppServiceEnvironment (App Service Environment).",
+        "operationId": "AppServiceEnvironments_ListWebWorkerMetrics",
+        "produces": [
+          "application/json",
+          "text/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/resourceGroupNameParameter"
+          },
+          {
+            "name": "name",
+            "in": "path",
+            "description": "Name of the App Service Environment.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "workerPoolName",
+            "in": "path",
+            "description": "Name of worker pool",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "details",
+            "in": "query",
+            "description": "Specify <code>true</code> to include instance details. The default is <code>false</code>.",
+            "type": "boolean"
+          },
+          {
+            "name": "$filter",
+            "in": "query",
+            "description": "Return only usages/metrics specified in the filter. Filter conforms to odata syntax. Example: $filter=(name.value eq 'Metric1' or name.value eq 'Metric2') and startTime eq '2014-01-01T00:00:00Z' and endTime eq '2014-12-31T23:59:59Z' and timeGrain eq duration'[Hour|Minute|Day]'.",
+            "x-ms-skip-url-encoding": true,
+            "type": "string"
+          },
+          {
+            "$ref": "#/parameters/subscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/ResourceMetricCollection"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Web/hostingEnvironments/{name}/workerPools/{workerPoolName}/skus": {
+      "get": {
+        "tags": [
+          "AppServiceEnvironments"
+        ],
+        "summary": "Get available SKUs for scaling a worker pool.",
+        "description": "Get available SKUs for scaling a worker pool.",
+        "operationId": "AppServiceEnvironments_ListWorkerPoolSkus",
+        "produces": [
+          "application/json",
+          "text/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/resourceGroupNameParameter"
+          },
+          {
+            "name": "name",
+            "in": "path",
+            "description": "Name of the App Service Environment.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "workerPoolName",
+            "in": "path",
+            "description": "Name of the worker pool.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "$ref": "#/parameters/subscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/SkuInfoCollection"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Web/hostingEnvironments/{name}/workerPools/{workerPoolName}/usages": {
+      "get": {
+        "tags": [
+          "AppServiceEnvironments"
+        ],
+        "summary": "Get usage metrics for a worker pool of an App Service Environment.",
+        "description": "Get usage metrics for a worker pool of an App Service Environment.",
+        "operationId": "AppServiceEnvironments_ListWebWorkerUsages",
+        "produces": [
+          "application/json",
+          "text/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/resourceGroupNameParameter"
+          },
+          {
+            "name": "name",
+            "in": "path",
+            "description": "Name of the App Service Environment.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "workerPoolName",
+            "in": "path",
+            "description": "Name of the worker pool.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "$ref": "#/parameters/subscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/UsageCollection"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
         }
       }
     }
   },
   "definitions": {
+    "AddressResponse": {
+      "description": "Describes main public IP address and any extra virtual IPs.",
+      "type": "object",
+      "properties": {
+        "serviceIpAddress": {
+          "description": "Main public virtual IP.",
+          "type": "string"
+        },
+        "internalIpAddress": {
+          "description": "Virtual Network internal IP address of the App Service Environment if it is in internal load-balancing mode.",
+          "type": "string"
+        },
+        "outboundIpAddresses": {
+          "description": "IP addresses appearing on outbound connections.",
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "vipMappings": {
+          "description": "Additional virtual IPs.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/VirtualIPMapping"
+          }
+        }
+      }
+    },
     "ApiDefinitionInfo": {
       "description": "Information about the formal API definition for the app.",
       "type": "object",
       "properties": {
         "url": {
           "description": "The URL of the API definition.",
+          "type": "string"
+        }
+      }
+    },
+    "AppServiceEnvironment": {
+      "description": "Description of an App Service Environment.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/Resource"
+        }
+      ],
+      "properties": {
+        "properties": {
+          "description": "ARM envelope properties",
+          "required": [
+            "name",
+            "location",
+            "virtualNetwork",
+            "workerPools"
+          ],
+          "properties": {
+            "name": {
+              "description": "Name of the App Service Environment.",
+              "type": "string"
+            },
+            "location": {
+              "description": "Location of the App Service Environment, e.g. \"West US\".",
+              "type": "string"
+            },
+            "provisioningState": {
+              "description": "Provisioning state of the App Service Environment.",
+              "enum": [
+                "Succeeded",
+                "Failed",
+                "Canceled",
+                "InProgress",
+                "Deleting"
+              ],
+              "type": "string",
+              "readOnly": true,
+              "x-ms-enum": {
+                "name": "ProvisioningState",
+                "modelAsString": false
+              }
+            },
+            "status": {
+              "description": "Current status of the App Service Environment.",
+              "enum": [
+                "Preparing",
+                "Ready",
+                "Scaling",
+                "Deleting"
+              ],
+              "type": "string",
+              "readOnly": true,
+              "x-ms-enum": {
+                "name": "HostingEnvironmentStatus",
+                "modelAsString": false
+              }
+            },
+            "vnetName": {
+              "description": "Name of the Virtual Network for the App Service Environment.",
+              "type": "string"
+            },
+            "vnetResourceGroupName": {
+              "description": "Resource group of the Virtual Network.",
+              "type": "string"
+            },
+            "vnetSubnetName": {
+              "description": "Subnet of the Virtual Network.",
+              "type": "string"
+            },
+            "virtualNetwork": {
+              "$ref": "#/definitions/VirtualNetworkProfile",
+              "description": "Description of the Virtual Network."
+            },
+            "internalLoadBalancingMode": {
+              "description": "Specifies which endpoints to serve internally in the Virtual Network for the App Service Environment.",
+              "enum": [
+                "None",
+                "Web",
+                "Publishing"
+              ],
+              "type": "string",
+              "x-ms-enum": {
+                "name": "InternalLoadBalancingMode",
+                "modelAsString": false
+              }
+            },
+            "multiSize": {
+              "description": "Front-end VM size, e.g. \"Medium\", \"Large\".",
+              "type": "string"
+            },
+            "multiRoleCount": {
+              "format": "int32",
+              "description": "Number of front-end instances.",
+              "type": "integer"
+            },
+            "workerPools": {
+              "description": "Description of worker pools with worker size IDs, VM sizes, and number of workers in each pool.",
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/WorkerPool"
+              }
+            },
+            "ipsslAddressCount": {
+              "format": "int32",
+              "description": "Number of IP SSL addresses reserved for the App Service Environment.",
+              "type": "integer"
+            },
+            "databaseEdition": {
+              "description": "Edition of the metadata database for the App Service Environment, e.g. \"Standard\".",
+              "type": "string",
+              "readOnly": true
+            },
+            "databaseServiceObjective": {
+              "description": "Service objective of the metadata database for the App Service Environment, e.g. \"S0\".",
+              "type": "string",
+              "readOnly": true
+            },
+            "upgradeDomains": {
+              "format": "int32",
+              "description": "Number of upgrade domains of the App Service Environment.",
+              "type": "integer",
+              "readOnly": true
+            },
+            "subscriptionId": {
+              "description": "Subscription of the App Service Environment.",
+              "type": "string",
+              "readOnly": true
+            },
+            "dnsSuffix": {
+              "description": "DNS suffix of the App Service Environment.",
+              "type": "string"
+            },
+            "lastAction": {
+              "description": "Last deployment action on the App Service Environment.",
+              "type": "string",
+              "readOnly": true
+            },
+            "lastActionResult": {
+              "description": "Result of the last deployment action on the App Service Environment.",
+              "type": "string",
+              "readOnly": true
+            },
+            "allowedMultiSizes": {
+              "description": "List of comma separated strings describing which VM sizes are allowed for front-ends.",
+              "type": "string",
+              "readOnly": true
+            },
+            "allowedWorkerSizes": {
+              "description": "List of comma separated strings describing which VM sizes are allowed for workers.",
+              "type": "string",
+              "readOnly": true
+            },
+            "maximumNumberOfMachines": {
+              "format": "int32",
+              "description": "Maximum number of VMs in the App Service Environment.",
+              "type": "integer",
+              "readOnly": true
+            },
+            "vipMappings": {
+              "description": "Description of IP SSL mapping for the App Service Environment.",
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/VirtualIPMapping"
+              },
+              "readOnly": true
+            },
+            "environmentCapacities": {
+              "description": "Current total, used, and available worker capacities.",
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/StampCapacity"
+              },
+              "readOnly": true
+            },
+            "networkAccessControlList": {
+              "description": "Access control list for controlling traffic to the App Service Environment.",
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/NetworkAccessControlEntry"
+              }
+            },
+            "environmentIsHealthy": {
+              "description": "True/false indicating whether the App Service Environment is healthy.",
+              "type": "boolean",
+              "readOnly": true
+            },
+            "environmentStatus": {
+              "description": "Detailed message about with results of the last check of the App Service Environment.",
+              "type": "string",
+              "readOnly": true
+            },
+            "resourceGroup": {
+              "description": "Resource group of the App Service Environment.",
+              "type": "string",
+              "readOnly": true
+            },
+            "frontEndScaleFactor": {
+              "format": "int32",
+              "description": "Scale factor for front-ends.",
+              "type": "integer"
+            },
+            "defaultFrontEndScaleFactor": {
+              "format": "int32",
+              "description": "Default Scale Factor for FrontEnds.",
+              "type": "integer",
+              "readOnly": true
+            },
+            "apiManagementAccountId": {
+              "description": "API Management Account associated with the App Service Environment.",
+              "type": "string"
+            },
+            "suspended": {
+              "description": "<code>true</code> if the App Service Environment is suspended; otherwise, <code>false</code>. The environment can be suspended, e.g. when the management endpoint is no longer available\n (most likely because NSG blocked the incoming traffic).",
+              "type": "boolean"
+            },
+            "dynamicCacheEnabled": {
+              "description": "True/false indicating whether the App Service Environment is suspended. The environment can be suspended e.g. when the management endpoint is no longer available\n (most likely because NSG blocked the incoming traffic).",
+              "type": "boolean"
+            },
+            "clusterSettings": {
+              "description": "Custom settings for changing the behavior of the App Service Environment.",
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/NameValuePair"
+              }
+            }
+          },
+          "x-ms-client-flatten": true
+        }
+      }
+    },
+    "AppServiceEnvironmentCollection": {
+      "description": "Collection of App Service Environments.",
+      "required": [
+        "value"
+      ],
+      "type": "object",
+      "properties": {
+        "value": {
+          "description": "Collection of resources.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/AppServiceEnvironment"
+          }
+        },
+        "nextLink": {
+          "description": "Link to next page of resources.",
           "type": "string"
         }
       }
@@ -1689,6 +2451,91 @@
         }
       }
     },
+    "CsmUsageQuota": {
+      "description": "Usage of the quota resource.",
+      "type": "object",
+      "properties": {
+        "unit": {
+          "description": "Units of measurement for the quota resourse.",
+          "type": "string"
+        },
+        "nextResetTime": {
+          "format": "date-time",
+          "description": "Next reset time for the resource counter.",
+          "type": "string"
+        },
+        "currentValue": {
+          "format": "int64",
+          "description": "The current value of the resource counter.",
+          "type": "integer"
+        },
+        "limit": {
+          "format": "int64",
+          "description": "The resource limit.",
+          "type": "integer"
+        },
+        "name": {
+          "$ref": "#/definitions/LocalizableString",
+          "description": "Quota name."
+        }
+      }
+    },
+    "CsmUsageQuotaCollection": {
+      "description": "Collection of CSM usage quotas.",
+      "required": [
+        "value"
+      ],
+      "type": "object",
+      "properties": {
+        "value": {
+          "description": "Collection of resources.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/CsmUsageQuota"
+          }
+        },
+        "nextLink": {
+          "description": "Link to next page of resources.",
+          "type": "string"
+        }
+      }
+    },
+    "ErrorEntity": {
+      "description": "Body of the error response returned from the API.",
+      "type": "object",
+      "properties": {
+        "code": {
+          "description": "Basic error code.",
+          "type": "string"
+        },
+        "message": {
+          "description": "Any details of the error.",
+          "type": "string"
+        },
+        "extendedCode": {
+          "description": "Type of error.",
+          "type": "string"
+        },
+        "messageTemplate": {
+          "description": "Message template.",
+          "type": "string"
+        },
+        "parameters": {
+          "description": "Parameters for the template.",
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "innerErrors": {
+          "description": "Inner errors.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ErrorEntity"
+          }
+        }
+      }
+    },
     "Experiments": {
       "description": "Routing rules in production experiments.",
       "type": "object",
@@ -1752,6 +2599,32 @@
         "toUpdate": {
           "description": "Set to <code>true</code> to update existing hostname.",
           "type": "boolean"
+        },
+        "hostType": {
+          "description": "Indicates whether the hostname is a standard or repository hostname.",
+          "enum": [
+            "Standard",
+            "Repository"
+          ],
+          "type": "string",
+          "x-ms-enum": {
+            "name": "HostType",
+            "modelAsString": false
+          }
+        }
+      }
+    },
+    "HostingEnvironmentDiagnostics": {
+      "description": "Diagnostics for an App Service Environment.",
+      "type": "object",
+      "properties": {
+        "name": {
+          "description": "Name/identifier of the diagnostics.",
+          "type": "string"
+        },
+        "diagnosicsOutput": {
+          "description": "Diagnostics output.",
+          "type": "string"
         }
       }
     },
@@ -1775,136 +2648,6 @@
         }
       }
     },
-    "HybridConnection": {
-      "description": "Hybrid Connection contract. This is used to configure a Hybrid Connection.",
-      "type": "object",
-      "allOf": [
-        {
-          "$ref": "#/definitions/Resource"
-        }
-      ],
-      "properties": {
-        "properties": {
-          "description": "ARM envelope properties",
-          "properties": {
-            "serviceBusNamespace": {
-              "description": "The name of the Service Bus namespace.",
-              "type": "string",
-              "x-ms-mutability": [
-                "create",
-                "read"
-              ]
-            },
-            "relayName": {
-              "description": "The name of the Service Bus relay.",
-              "type": "string",
-              "x-ms-mutability": [
-                "create",
-                "read"
-              ]
-            },
-            "relayArmUri": {
-              "description": "The ARM URI to the Service Bus relay.",
-              "type": "string"
-            },
-            "hostname": {
-              "description": "The hostname of the endpoint.",
-              "type": "string"
-            },
-            "port": {
-              "format": "int32",
-              "description": "The port of the endpoint.",
-              "type": "integer"
-            },
-            "sendKeyName": {
-              "description": "The name of the Service Bus key which has Send permissions. This is used to authenticate to Service Bus.",
-              "type": "string"
-            },
-            "sendKeyValue": {
-              "description": "The value of the Service Bus key. This is used to authenticate to Service Bus. In ARM this key will not be returned\n normally, use the POST /listKeys API instead.",
-              "type": "string"
-            }
-          },
-          "x-ms-client-flatten": true
-        }
-      }
-    },
-    "HybridConnectionCollection": {
-      "description": "Collection of hostname bindings.",
-      "required": [
-        "value"
-      ],
-      "type": "object",
-      "properties": {
-        "value": {
-          "description": "Collection of resources.",
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/HybridConnection"
-          }
-        },
-        "nextLink": {
-          "description": "Link to next page of resources.",
-          "type": "string"
-        }
-      }
-    },
-    "HybridConnectionKey": {
-      "description": "Hybrid Connection key contract. This has the send key name and value for a Hybrid Connection.",
-      "type": "object",
-      "allOf": [
-        {
-          "$ref": "#/definitions/Resource"
-        }
-      ],
-      "properties": {
-        "properties": {
-          "description": "ARM envelope properties",
-          "properties": {
-            "sendKeyName": {
-              "description": "The name of the send key.",
-              "type": "string",
-              "readOnly": true
-            },
-            "sendKeyValue": {
-              "description": "The value of the send key.",
-              "type": "string",
-              "readOnly": true
-            }
-          },
-          "x-ms-client-flatten": true
-        }
-      }
-    },
-    "HybridConnectionLimits": {
-      "description": "Hybrid Connection limits contract. This is used to return the plan limits of Hybrid Connections.",
-      "type": "object",
-      "allOf": [
-        {
-          "$ref": "#/definitions/Resource"
-        }
-      ],
-      "properties": {
-        "properties": {
-          "description": "ARM envelope properties",
-          "properties": {
-            "current": {
-              "format": "int32",
-              "description": "The current number of Hybrid Connections.",
-              "type": "integer",
-              "readOnly": true
-            },
-            "maximum": {
-              "format": "int32",
-              "description": "The maximum number of Hybrid Connections allowed.",
-              "type": "integer",
-              "readOnly": true
-            }
-          },
-          "x-ms-client-flatten": true
-        }
-      }
-    },
     "IpSecurityRestriction": {
       "description": "IP security restriction on an app.",
       "required": [
@@ -1922,6 +2665,79 @@
         }
       }
     },
+    "LocalizableString": {
+      "description": "Localizable string object containing the name and a localized value.",
+      "type": "object",
+      "properties": {
+        "value": {
+          "description": "Non-localized name.",
+          "type": "string"
+        },
+        "localizedValue": {
+          "description": "Localized name.",
+          "type": "string"
+        }
+      }
+    },
+    "MetricAvailabilily": {
+      "description": "Metric availability and retention.",
+      "type": "object",
+      "properties": {
+        "timeGrain": {
+          "description": "Time grain.",
+          "type": "string"
+        },
+        "retention": {
+          "description": "Retention period for the current time grain.",
+          "type": "string"
+        }
+      }
+    },
+    "MetricDefinition": {
+      "description": "Metadata for a metric.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/Resource"
+        }
+      ],
+      "properties": {
+        "properties": {
+          "description": "ARM envelope properties",
+          "properties": {
+            "name": {
+              "description": "Name of the metric.",
+              "type": "string",
+              "readOnly": true
+            },
+            "unit": {
+              "description": "Unit of the metric.",
+              "type": "string",
+              "readOnly": true
+            },
+            "primaryAggregationType": {
+              "description": "Primary aggregation type.",
+              "type": "string",
+              "readOnly": true
+            },
+            "metricAvailabilities": {
+              "description": "List of time grains supported for the metric together with retention period.",
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/MetricAvailabilily"
+              },
+              "readOnly": true
+            },
+            "displayName": {
+              "description": "Friendly name shown in the UI.",
+              "type": "string",
+              "readOnly": true
+            }
+          },
+          "x-ms-client-flatten": true
+        }
+      }
+    },
     "NameValuePair": {
       "description": "Name value pair.",
       "type": "object",
@@ -1932,6 +2748,92 @@
         },
         "value": {
           "description": "Pair value.",
+          "type": "string"
+        }
+      }
+    },
+    "NetworkAccessControlEntry": {
+      "description": "Network access control entry.",
+      "type": "object",
+      "properties": {
+        "action": {
+          "description": "Action object.",
+          "enum": [
+            "Permit",
+            "Deny"
+          ],
+          "type": "string",
+          "x-ms-enum": {
+            "name": "AccessControlEntryAction",
+            "modelAsString": false
+          }
+        },
+        "description": {
+          "description": "Description.",
+          "type": "string"
+        },
+        "order": {
+          "format": "int32",
+          "description": "Order of precedence.",
+          "type": "integer"
+        },
+        "remoteSubnet": {
+          "description": "Remote subnet.",
+          "type": "string"
+        }
+      }
+    },
+    "Operation": {
+      "description": "Operation.",
+      "type": "object",
+      "properties": {
+        "id": {
+          "description": "Operation ID.",
+          "type": "string"
+        },
+        "name": {
+          "description": "Operation name.",
+          "type": "string"
+        },
+        "status": {
+          "description": "The current status of the operation.",
+          "enum": [
+            "InProgress",
+            "Failed",
+            "Succeeded",
+            "TimedOut",
+            "Created"
+          ],
+          "type": "string",
+          "x-ms-enum": {
+            "name": "OperationStatus",
+            "modelAsString": false
+          }
+        },
+        "errors": {
+          "description": "Any errors associate with the operation.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ErrorEntity"
+          }
+        },
+        "createdTime": {
+          "format": "date-time",
+          "description": "Time when operation has started.",
+          "type": "string"
+        },
+        "modifiedTime": {
+          "format": "date-time",
+          "description": "Time when operation has been updated.",
+          "type": "string"
+        },
+        "expirationTime": {
+          "format": "date-time",
+          "description": "Time when operation will expire.",
+          "type": "string"
+        },
+        "geoMasterOperationId": {
+          "description": "Applicable only for stamp operation ids.",
           "type": "string"
         }
       }
@@ -2055,26 +2957,6 @@
         }
       },
       "x-ms-azure-resource": true
-    },
-    "ResourceCollection": {
-      "description": "Collection of resources.",
-      "required": [
-        "value"
-      ],
-      "type": "object",
-      "properties": {
-        "value": {
-          "description": "Collection of resources.",
-          "type": "array",
-          "items": {
-            "type": "string"
-          }
-        },
-        "nextLink": {
-          "description": "Link to next page of resources.",
-          "type": "string"
-        }
-      }
     },
     "ResourceMetric": {
       "description": "Object representing a metric for any resource .",
@@ -2914,6 +3796,44 @@
         }
       }
     },
+    "SkuInfo": {
+      "description": "SKU discovery information.",
+      "type": "object",
+      "properties": {
+        "resourceType": {
+          "description": "Resource type that this SKU applies to.",
+          "type": "string"
+        },
+        "sku": {
+          "$ref": "#/definitions/SkuDescription",
+          "description": "Name and tier of the SKU."
+        },
+        "capacity": {
+          "$ref": "#/definitions/SkuCapacity",
+          "description": "Min, max, and default scale values of the SKU."
+        }
+      }
+    },
+    "SkuInfoCollection": {
+      "description": "Collection of SKU information.",
+      "required": [
+        "value"
+      ],
+      "type": "object",
+      "properties": {
+        "value": {
+          "description": "Collection of resources.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/SkuInfo"
+          }
+        },
+        "nextLink": {
+          "description": "Link to next page of resources.",
+          "type": "string"
+        }
+      }
+    },
     "SlotSwapStatus": {
       "description": "The status of the last successfull slot swap operation.",
       "type": "object",
@@ -2955,6 +3875,94 @@
         }
       }
     },
+    "StampCapacity": {
+      "description": "Stamp capacity information.",
+      "type": "object",
+      "properties": {
+        "name": {
+          "description": "Name of the stamp.",
+          "type": "string"
+        },
+        "availableCapacity": {
+          "format": "int64",
+          "description": "Available capacity (# of machines, bytes of storage etc...).",
+          "type": "integer"
+        },
+        "totalCapacity": {
+          "format": "int64",
+          "description": "Total capacity (# of machines, bytes of storage etc...).",
+          "type": "integer"
+        },
+        "unit": {
+          "description": "Name of the unit.",
+          "type": "string"
+        },
+        "computeMode": {
+          "description": "Shared/dedicated workers.",
+          "enum": [
+            "Shared",
+            "Dedicated",
+            "Dynamic"
+          ],
+          "type": "string",
+          "x-ms-enum": {
+            "name": "ComputeModeOptions",
+            "modelAsString": false
+          }
+        },
+        "workerSize": {
+          "description": "Size of the machines.",
+          "enum": [
+            "Default",
+            "Small",
+            "Medium",
+            "Large"
+          ],
+          "type": "string",
+          "x-ms-enum": {
+            "name": "WorkerSizeOptions",
+            "modelAsString": false
+          }
+        },
+        "workerSizeId": {
+          "format": "int32",
+          "description": "Size ID of machines: \n 0 - Small\n 1 - Medium\n 2 - Large",
+          "type": "integer"
+        },
+        "excludeFromCapacityAllocation": {
+          "description": "If <code>true</code>, it includes basic apps.\n Basic apps are not used for capacity allocation.",
+          "type": "boolean"
+        },
+        "isApplicableForAllComputeModes": {
+          "description": "<code>true</code> if capacity is applicable for all apps; otherwise, <code>false</code>.",
+          "type": "boolean"
+        },
+        "siteMode": {
+          "description": "Shared or Dedicated.",
+          "type": "string"
+        }
+      }
+    },
+    "StampCapacityCollection": {
+      "description": "Collection of stamp capacities.",
+      "required": [
+        "value"
+      ],
+      "type": "object",
+      "properties": {
+        "value": {
+          "description": "Collection of resources.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/StampCapacity"
+          }
+        },
+        "nextLink": {
+          "description": "Link to next page of resources.",
+          "type": "string"
+        }
+      }
+    },
     "StatusCodesBasedTrigger": {
       "description": "Trigger based on status code.",
       "type": "object",
@@ -2981,6 +3989,100 @@
         },
         "timeInterval": {
           "description": "Time interval.",
+          "type": "string"
+        }
+      }
+    },
+    "Usage": {
+      "description": "Usage of the quota resource.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/Resource"
+        }
+      ],
+      "properties": {
+        "properties": {
+          "description": "ARM envelope properties",
+          "properties": {
+            "displayName": {
+              "description": "Friendly name shown in the UI.",
+              "type": "string",
+              "readOnly": true
+            },
+            "name": {
+              "description": "Name of the quota.",
+              "type": "string",
+              "readOnly": true
+            },
+            "resourceName": {
+              "description": "Name of the quota resource.",
+              "type": "string",
+              "readOnly": true
+            },
+            "unit": {
+              "description": "Units of measurement for the quota resource.",
+              "type": "string",
+              "readOnly": true
+            },
+            "currentValue": {
+              "format": "int64",
+              "description": "The current value of the resource counter.",
+              "type": "integer",
+              "readOnly": true
+            },
+            "limit": {
+              "format": "int64",
+              "description": "The resource limit.",
+              "type": "integer",
+              "readOnly": true
+            },
+            "nextResetTime": {
+              "format": "date-time",
+              "description": "Next reset time for the resource counter.",
+              "type": "string",
+              "readOnly": true
+            },
+            "computeMode": {
+              "description": "Compute mode used for this usage.",
+              "enum": [
+                "Shared",
+                "Dedicated",
+                "Dynamic"
+              ],
+              "type": "string",
+              "readOnly": true,
+              "x-ms-enum": {
+                "name": "ComputeModeOptions",
+                "modelAsString": false
+              }
+            },
+            "siteMode": {
+              "description": "Site mode used for this usage.",
+              "type": "string",
+              "readOnly": true
+            }
+          },
+          "x-ms-client-flatten": true
+        }
+      }
+    },
+    "UsageCollection": {
+      "description": "Collection of usages.",
+      "required": [
+        "value"
+      ],
+      "type": "object",
+      "properties": {
+        "value": {
+          "description": "Collection of resources.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Usage"
+          }
+        },
+        "nextLink": {
+          "description": "Link to next page of resources.",
           "type": "string"
         }
       }
@@ -3024,133 +4126,51 @@
         }
       }
     },
-    "VnetGateway": {
-      "description": "The Virtual Network gateway contract. This is used to give the Virtual Network gateway access to the VPN package.",
+    "VirtualIPMapping": {
+      "description": "Virtual IP mapping.",
       "type": "object",
-      "allOf": [
-        {
-          "$ref": "#/definitions/Resource"
-        }
-      ],
       "properties": {
-        "properties": {
-          "description": "ARM envelope properties",
-          "required": [
-            "vpnPackageUri"
-          ],
-          "properties": {
-            "vnetName": {
-              "description": "The Virtual Network name.",
-              "type": "string",
-              "x-ms-mutability": [
-                "create",
-                "read"
-              ]
-            },
-            "vpnPackageUri": {
-              "description": "The URI where the VPN package can be downloaded.",
-              "type": "string",
-              "x-ms-mutability": [
-                "create",
-                "update"
-              ]
-            }
-          },
-          "x-ms-client-flatten": true
+        "virtualIP": {
+          "description": "Virtual IP address.",
+          "type": "string"
+        },
+        "internalHttpPort": {
+          "format": "int32",
+          "description": "Internal HTTP port.",
+          "type": "integer"
+        },
+        "internalHttpsPort": {
+          "format": "int32",
+          "description": "Internal HTTPS port.",
+          "type": "integer"
+        },
+        "inUse": {
+          "description": "Is virtual IP mapping in use.",
+          "type": "boolean"
         }
       }
     },
-    "VnetInfo": {
-      "description": "Virtual Network information contract.",
+    "VirtualNetworkProfile": {
+      "description": "Specification for using a Virtual Network.",
       "type": "object",
-      "allOf": [
-        {
-          "$ref": "#/definitions/Resource"
-        }
-      ],
       "properties": {
-        "properties": {
-          "description": "ARM envelope properties",
-          "properties": {
-            "vnetResourceId": {
-              "description": "The Virtual Network's resource ID.",
-              "type": "string"
-            },
-            "certThumbprint": {
-              "description": "The client certificate thumbprint.",
-              "type": "string",
-              "readOnly": true
-            },
-            "certBlob": {
-              "description": "A certificate file (.cer) blob containing the public key of the private key used to authenticate a \n Point-To-Site VPN connection.",
-              "type": "string"
-            },
-            "routes": {
-              "description": "The routes that this Virtual Network connection uses.",
-              "type": "array",
-              "items": {
-                "$ref": "#/definitions/VnetRoute"
-              },
-              "readOnly": true
-            },
-            "resyncRequired": {
-              "description": "<code>true</code> if a resync is required; otherwise, <code>false</code>.",
-              "type": "boolean",
-              "readOnly": true
-            },
-            "dnsServers": {
-              "description": "DNS servers to be used by this Virtual Network. This should be a comma-separated list of IP addresses.",
-              "type": "string"
-            }
-          },
-          "x-ms-client-flatten": true
-        }
-      }
-    },
-    "VnetRoute": {
-      "description": "Virtual Network route contract used to pass routing information for a Virtual Network.",
-      "type": "object",
-      "allOf": [
-        {
-          "$ref": "#/definitions/Resource"
-        }
-      ],
-      "properties": {
-        "properties": {
-          "description": "ARM envelope properties",
-          "properties": {
-            "name": {
-              "description": "The name of this route. This is only returned by the server and does not need to be set by the client.",
-              "type": "string",
-              "x-ms-mutability": [
-                "create",
-                "read"
-              ],
-              "x-ms-client-name": "vnetRouteName"
-            },
-            "startAddress": {
-              "description": "The starting address for this route. This may also include a CIDR notation, in which case the end address must not be specified.",
-              "type": "string"
-            },
-            "endAddress": {
-              "description": "The ending address for this route. If the start address is specified in CIDR notation, this must be omitted.",
-              "type": "string"
-            },
-            "routeType": {
-              "description": "The type of route this is:\n DEFAULT - By default, every app has routes to the local address ranges specified by RFC1918\n INHERITED - Routes inherited from the real Virtual Network routes\n STATIC - Static route set on the app only\n \n These values will be used for syncing an app's routes with those from a Virtual Network.",
-              "enum": [
-                "DEFAULT",
-                "INHERITED",
-                "STATIC"
-              ],
-              "type": "string",
-              "x-ms-enum": {
-                "name": "RouteType",
-                "modelAsString": true
-              }
-            }
-          },
-          "x-ms-client-flatten": true
+        "id": {
+          "description": "Resource id of the Virtual Network.",
+          "type": "string"
+        },
+        "name": {
+          "description": "Name of the Virtual Network (read-only).",
+          "type": "string",
+          "readOnly": true
+        },
+        "type": {
+          "description": "Resource type of the Virtual Network (read-only).",
+          "type": "string",
+          "readOnly": true
+        },
+        "subnet": {
+          "description": "Subnet within the Virtual Network.",
+          "type": "string"
         }
       }
     },
@@ -3166,6 +4186,81 @@
           "type": "array",
           "items": {
             "$ref": "#/definitions/Site"
+          }
+        },
+        "nextLink": {
+          "description": "Link to next page of resources.",
+          "type": "string"
+        }
+      }
+    },
+    "WorkerPool": {
+      "description": "Worker pool of an App Service Environment.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/Resource"
+        }
+      ],
+      "properties": {
+        "properties": {
+          "description": "ARM envelope properties",
+          "properties": {
+            "workerSizeId": {
+              "format": "int32",
+              "description": "Worker size ID for referencing this worker pool.",
+              "type": "integer"
+            },
+            "computeMode": {
+              "description": "Shared or dedicated app hosting.",
+              "enum": [
+                "Shared",
+                "Dedicated",
+                "Dynamic"
+              ],
+              "type": "string",
+              "x-ms-enum": {
+                "name": "ComputeModeOptions",
+                "modelAsString": false
+              }
+            },
+            "workerSize": {
+              "description": "VM size of the worker pool instances.",
+              "type": "string"
+            },
+            "workerCount": {
+              "format": "int32",
+              "description": "Number of instances in the worker pool.",
+              "type": "integer"
+            },
+            "instanceNames": {
+              "description": "Names of all instances in the worker pool (read only).",
+              "type": "array",
+              "items": {
+                "type": "string"
+              },
+              "readOnly": true
+            }
+          },
+          "x-ms-client-flatten": true
+        },
+        "sku": {
+          "$ref": "#/definitions/SkuDescription"
+        }
+      }
+    },
+    "WorkerPoolCollection": {
+      "description": "Collection of worker pools.",
+      "required": [
+        "value"
+      ],
+      "type": "object",
+      "properties": {
+        "value": {
+          "description": "Collection of resources.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/WorkerPool"
           }
         },
         "nextLink": {

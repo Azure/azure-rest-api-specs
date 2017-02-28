@@ -3090,7 +3090,8 @@
           "description": "The bit flags for enabled hub features. Bit 0 is set to 1 indicates graph is enabled, or disabled if set to 0. Bit 1 is set to 1 indicates the hub is disabled, or enabled if set to 0."
         },
         "hubBillingInfo": {
-          "$ref": "#/definitions/HubBillingInfoFormat"
+          "$ref": "#/definitions/HubBillingInfoFormat",
+          "description": "Billing settings of the hub."
         }
       },
       "description": "Properties of hub."
@@ -3402,7 +3403,8 @@
       "description": "The Salesforce connector properties.",
       "properties": {
         "usersetting": {
-          "$ref": "#/definitions/SalesforceDiscoverSetting"
+          "$ref": "#/definitions/SalesforceDiscoverSetting",
+          "description": "The user settings."
         },
         "salesforcetables": {
           "type": "array",
@@ -3718,22 +3720,27 @@
           "description": "If the file contains a header or not."
         },
         "errorManagement": {
-          "$ref": "#/definitions/ConnectorMappingErrorManagement"
+          "$ref": "#/definitions/ConnectorMappingErrorManagement",
+          "description": "The error management setting for the mapping."
         },
         "format": {
-          "$ref": "#/definitions/ConnectorMappingFormat"
+          "$ref": "#/definitions/ConnectorMappingFormat",
+          "description": "The format of mapping property."
         },
         "availability": {
-          "$ref": "#/definitions/ConnectorMappingAvailability"
+          "$ref": "#/definitions/ConnectorMappingAvailability",
+          "description": "The availability of mapping property."
         },
         "structure": {
           "type": "array",
           "items": {
             "$ref": "#/definitions/ConnectorMappingStructure"
-          }
+          },
+          "description": "Ingestion mapping information at property level."
         },
         "completeOperation": {
-          "$ref": "#/definitions/ConnectorMappingCompleteOperation"
+          "$ref": "#/definitions/ConnectorMappingCompleteOperation",
+          "description": "The operation after import is done."
         }
       },
       "description": "The connector mapping properties."
@@ -3812,7 +3819,8 @@
           "description": "The DataFormat ID."
         },
         "mappingProperties": {
-          "$ref": "#/definitions/ConnectorMappingProperties"
+          "$ref": "#/definitions/ConnectorMappingProperties",
+          "description": "The properties of the mapping."
         },
         "nextRunTime": {
           "type": "string",
@@ -4568,7 +4576,8 @@
           "type": "array",
           "items": {
             "$ref": "#/definitions/ParticipantPropertyReference"
-          }
+          },
+          "description": "The property references."
         },
         "participantName": {
           "type": "string",
@@ -4623,15 +4632,16 @@
         "idPropertyNames": {
           "type": "array",
           "items": {
-            "type": "string",
-            "description": "The id property names. Properties which uniquely identify an interaction instance."
-          }
+            "type": "string"
+          },
+          "description": "The id property names. Properties which uniquely identify an interaction instance."
         },
         "participantProfiles": {
           "type": "array",
           "items": {
             "$ref": "#/definitions/Participant"
-          }
+          },
+          "description": "Profiles that participated in the interaction."
         },
         "primaryParticipantProfilePropertyName": {
           "type": "string",
@@ -4648,13 +4658,13 @@
         "keyPropertyNames": {
           "type": "array",
           "items": {
-            "type": "string",
-            "description": "The properties which make up the unique id."
-          }
+            "type": "string"
+          },
+          "description": "The properties which make up the unique ID."
         },
         "strongIdName": {
           "type": "string",
-          "description": "The Name identifying the strong Id."
+          "description": "The Name identifying the strong ID."
         },
         "displayName": {
           "type": "object",
@@ -4671,7 +4681,7 @@
           "description": "Localized descriptions."
         }
       },
-      "description": "Property/Properties which represent a unique id."
+      "description": "Property/Properties which represent a unique ID."
     },
     "ProfileTypeDefinition": {
       "description": "The profile type definition.",
@@ -4680,7 +4690,8 @@
           "type": "array",
           "items": {
             "$ref": "#/definitions/StrongId"
-          }
+          },
+          "description": "The strong IDs."
         }
       },
       "allOf": [

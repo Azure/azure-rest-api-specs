@@ -43,7 +43,8 @@
         ],
         "operationId": "BatchAccount_Create",
         "x-ms-examples": {
-          "BatchAccountCreate_Default": { "$ref": "../examples/BatchAccountCreate_Default.json" }
+          "BatchAccountCreate_Default": { "$ref": "../examples/BatchAccountCreate_Default.json" },
+          "BatchAccountCreate_BYOS": { "$ref": "../examples/BatchAccountCreate_BYOS.json" }
         },
         "description": "Creates a new Batch account with the specified parameters. Existing accounts cannot be updated with this API and should instead be updated with the Update Batch Account API.",
         "parameters": [
@@ -1108,6 +1109,15 @@
         "autoStorage": {
           "$ref": "#/definitions/AutoStorageBaseProperties",
           "description": "The properties related to auto storage account."
+        },
+        "poolAllocationMode": {
+          "title": "The allocation mode to use for creating pools in the Batch account.",
+          "description": "The pool allocation mode also affects how clients may authenticate to the Batch Service API. If the mode is BatchService, clients may authenticate using access keys or Azure Active Directory. If the mode is UserSubscription, clients must use Azure Active Directory. The default is BatchService.",
+          "$ref": "#/definitions/PoolAllocationMode"
+        },
+        "keyVaultReference": {
+          "$ref": "#/definitions/KeyVaultReference",
+          "description": "A reference to the Azure key vault associated with the Batch account."
         }
       },
       "description": "The properties of a Batch account."
@@ -1125,15 +1135,6 @@
           },
           "description": "The user specified tags associated with the account."
         },
-        "poolAllocationMode": {
-          "title": "The allocation mode to use for creating pools in the Batch account.",
-          "description": "The pool allocation mode also affects how clients may authenticate to the Batch Service API. If the mode is BatchService, clients may authenticate using access keys or Azure Active Directory. If the mode is UserSubscription, clients must use Azure Active Directory. The default is BatchService.",
-          "$ref": "#/definitions/PoolAllocationMode"
-        },
-        "keyVaultReference": {
-          "$ref": "#/definitions/KeyVaultReference",
-          "description": "A reference to the Azure key vault associated with the Batch account."
-        },
         "properties": {
           "x-ms-client-flatten": true,
           "$ref": "#/definitions/BatchAccountBaseProperties",
@@ -1150,10 +1151,15 @@
         "id": {
           "type": "string",
           "description": "The resource ID of the Azure key vault associated with the Batch account."
+        },
+        "url": {
+          "type": "string",
+          "description": "The Url of the Azure key vault associated with the Batch account."
         }
       },
       "required": [
-        "id"
+        "id",
+        "url"
       ],
       "description": "Identifies the Azure key vault associated with a Batch account."
     },
