@@ -133,7 +133,7 @@ function runScript() {
   // Useful when debugging a test for a particular swagger. 
   // Just update the regex. That will return an array of filtered items.
   // swaggersToProcess = swaggersToProcess.filter(function (item) {
-  //   return (item.match(/.*arm-compute.*/ig) !== null);
+  //   return (item.match(/.*arm-network/ig) !== null);
   // });
   createLogFile();
   console.log(`The results will be logged here: "${logFilepath}".`)
