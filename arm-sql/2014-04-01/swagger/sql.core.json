@@ -275,7 +275,7 @@
             "in": "query",
             "required": false,
             "type": "string",
-            "description": "The comma separated list of child objects to expand in the response. Possible properties: serviceTierAdvisors, upgradeHint, transparentDataEncryption."
+            "description": "A comma separated list of child objects to expand in the response. Possible properties: serviceTierAdvisors, upgradeHint, transparentDataEncryption."
           }
         ],
         "responses": {
@@ -294,9 +294,10 @@
           "Databases"
         ],
         "operationId": "Databases_ListByServer",
-        "description": "Returns a list of databases by server.",
+        "description": "Returns a list of databases in a server.",
         "x-ms-examples": {
-          "List databases by server": { "$ref": "../examples/DatabaseList.json" }
+          "List databases by server": { "$ref": "../examples/DatabaseList.json" },
+          "List databases by server with filter": { "$ref": "../examples/DatabaseListWithFilter.json" }
         },
         "parameters": [
           {
@@ -310,6 +311,13 @@
           },
           {
             "$ref": "#/parameters/ServerNameParameter"
+          },
+          {
+            "name": "$filter",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "description": "An OData filter expression that describes a subset of databases to return."
           }
         ],
         "responses": {
@@ -520,7 +528,7 @@
           "Servers"
         ],
         "operationId": "Servers_ListByResourceGroup",
-        "description": "Returns a server.",
+        "description": "Returns a list of servers in a resource group.",
         "x-ms-examples": {
           "List servers by resource group": { "$ref": "../examples/ServerListByResourceGroup.json" }
         },
@@ -732,7 +740,7 @@
           "ElasticPools"
         ],
         "operationId": "ElasticPools_ListByServer",
-        "description": "Returns elastic pools.",
+        "description": "Returns a list of elastic pools in a server.",
         "x-ms-examples":{
           "List elastic pools": { "$ref": "../examples/ElasticPoolList.json" }
         },
@@ -902,7 +910,7 @@
           "ElasticPools"
         ],
         "operationId": "ElasticPools_ListDatabases",
-        "description": "Returns a database inside of an elastic pool.",
+        "description": "Returns a list of databases in an elastic pool.",
         "parameters": [
           {
             "$ref": "#/parameters/ApiVersionParameter"
@@ -1060,7 +1068,7 @@
           "RecommendedElasticPools"
         ],
         "operationId": "RecommendedElasticPools_ListDatabases",
-        "description": "Returns a database inside of a recommented elastic pool.",
+        "description": "Returns a list of databases inside a recommented elastic pool.",
         "parameters": [
           {
             "$ref": "#/parameters/ApiVersionParameter"
@@ -2294,7 +2302,7 @@
             "Restore"
           ],
           "x-ms-enum": {
-            "name": "createMode",
+            "name": "CreateMode",
             "modelAsString": true
           },
           "x-ms-mutability": [ "create" ]
