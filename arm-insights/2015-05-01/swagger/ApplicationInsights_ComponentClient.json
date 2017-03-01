@@ -431,7 +431,7 @@
         },
         "Flow_Type": {
           "type": "string",
-          "description": "Used by the Application Insights system to determine what kind of flow this component was created by. Typically, users will set this to 'Bluefield' when creating a component via the REST API."
+          "description": "Used by the Application Insights system to determine what kind of flow this component was created by. Users should set this to 'Bluefield' when creating a component via the REST API."
         },
         "Request_Source": {
           "type": "string",
@@ -462,7 +462,7 @@
         },
         "HockeyAppToken": {
           "type": "string",
-          "description": "Token used to authenticate communications with between Application Insights and HockeyApp (used primarily for mobile applications).",
+          "description": "Token used to authenticate communications with between Application Insights and HockeyApp.",
           "readOnly": true,
           "externalDocs": {
             "url": "https://aka.ms/sls76s"
@@ -476,7 +476,10 @@
         "SamplingPercentage": {
           "type": "number",
           "format": "double",
-          "description": "Percentage of the data produced by the application being monitored that is being sampled for alerts."
+          "description": "Percentage of the data produced by the application being monitored that is being sampled for Application Insights telemetry.",
+          "externalDocs": {
+            "url": "https://aka.ms/sl0yqd"
+          }
         }
       },
       "required": [
