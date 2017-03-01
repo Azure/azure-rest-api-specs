@@ -1,0 +1,565 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "ApplicationInsights.Client.SyntheticMonitor",
+    "description": "Azure Application Insights client for Synthetic Monitor based alerting",
+    "version": "2015-05-01"
+  },
+  "host": "management.azure.com",
+  "schemes": [
+    "https"
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "produces": [
+    "application/json"
+  ],
+  "security": [
+    {
+      "azure_auth": [
+        "user_impersonation"
+      ]
+    }
+  ],
+  "securityDefinitions": {
+    "azure_auth": {
+      "type": "oauth2",
+      "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
+      "flow": "implicit",
+      "description": "Azure Active Directory OAuth2 Flow",
+      "scopes": {
+        "user_impersonation": "impersonate your user account"
+      }
+    }
+  },
+  "paths": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.insights/webtests": {
+      "get": {
+        "description": "Get all Application Insights synthetic monitors defined within a specified resource group",
+        "operationId": "SyntheticMonitor_ListByResourceGroup",
+        "parameters": [
+          {
+            "$ref": "#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "A list containing 0 or more Synthetic Monitor definitions",
+            "schema": {
+              "$ref": "#/definitions/SyntheticMonitorListResult"
+            },
+            "examples": {
+              "application/json": {
+                "value": [
+                  {
+                    "id": "/subscriptions/8938312c-1467-4f13-8676-123456789abc/resourceGroups/my-resource-group/providers/microsoft.insights/webtests/my-webtest-my-component",
+                    "name": "my-webtest-my-component",
+                    "type": "microsoft.insights/webtests",
+                    "location": "southcentralus",
+                    "tags": {
+                      "hidden-link:/subscriptions/8938312c-1467-4f13-8676-123456789abc/resourceGroups/my-resource-group/providers/microsoft.insights/components/my-component": "Resource",
+                      "hidden-link:/subscriptions/8938312c-1467-4f13-8676-123456789abc/resourceGroups/my-resource-group/providers/Microsoft.Web/sites/mytestwebapp": "Resource"
+                    },
+                    "kind": null,
+                    "etag": "\"1c00a82f-0000-0000-0000-123456789abc\"",
+                    "properties": {
+                      "SyntheticMonitorId": "my-webtest-my-component",
+                      "Name": "my-webtest",
+                      "Description": "",
+                      "Enabled": false,
+                      "Frequency": 900,
+                      "Timeout": 120,
+                      "Kind": "ping",
+                      "RetryEnabled": null,
+                      "Locations": "  ",
+                      "Configuration": "@{WebTest=<WebTest         Name=\"my-webtest\"         Id=\"678ddf96-1ab8-44c8-9274-123456789abc\"         Enabled=\"True\"         CssProjectStructure=\"\"         CssIteration=\"\"         Timeout=\"120\"         WorkItemIds=\"\"         xmlns=\"http://microsoft.com/schemas/VisualStudio/TeamTest/2010\"         Description=\"\"         CredentialUserName=\"\"         CredentialPassword=\"\"         PreAuthenticate=\"True\"         Proxy=\"default\"         StopOnError=\"False\"         RecordedResultFile=\"\"         ResultsLocale=\"\">        <Items>        <Request         Method=\"GET\"         Guid=\"a4162485-9114-fcfc-e086-123456789abc\"         Version=\"1.1\"         Url=\"http://my-component.azurewebsites.net\"         ThinkTime=\"0\"         Timeout=\"120\"         ParseDependentRequests=\"True\"         FollowRedirects=\"True\"         RecordResult=\"True\"         Cache=\"False\"         ResponseTimeGoal=\"0\"         Encoding=\"utf-8\"         ExpectedHttpStatusCode=\"200\"         ExpectedResponseUrl=\"\"         ReportingName=\"\"         IgnoreHttpStatusCode=\"False\" />        </Items>        </WebTest>}",
+                      "provisioningState": "Succeeded"
+                    }
+                  },
+                  {
+                    "id": "/subscriptions/8938312c-1467-4f13-8676-123456789abc/resourceGroups/my-resource-group/providers/microsoft.insights/webtests/my-webtest-my-other-component",
+                    "name": "my-webtest-my-other-component",
+                    "type": "microsoft.insights/webtests",
+                    "location": "southcentralus",
+                    "tags": {
+                      "Test": "You can delete this synthetic monitor anytime",
+                      "hidden-link:/subscriptions/8938312c-1467-4f13-8676-123456789abc/resourceGroups/my-resource-group/providers/microsoft.insights/components/my-other-component": "Resource"
+                    },
+                    "kind": "",
+                    "etag": "\"1c007b27-0000-0000-0000-123456789abc\"",
+                    "properties": {
+                      "SyntheticMonitorId": "my-webtest-my-other-component",
+                      "Name": "342bccf4-722f-496d-b064-123456789abc",
+                      "Description": "",
+                      "Enabled": false,
+                      "Frequency": 900,
+                      "Timeout": 120,
+                      "Kind": "ping",
+                      "RetryEnabled": false,
+                      "Locations": "  ",
+                      "Configuration": "@{WebTest=<WebTest Name=\"342bccf4-722f-496d-b064-123456789abc\" Id=\"00a15cc1-c903-4f97-9af4-123456789abc\" Enabled=\"False\" CssProjectStructure=\"\" CssIteration=\"\" Timeout=\"120\" WorkItemIds=\"\" xmlns=\"http://microsoft.com/schemas/VisualStudio/TeamTest/2010\" Description=\"\" CredentialUserName=\"\" CredentialPassword=\"\" PreAuthenticate=\"True\" Proxy=\"default\" StopOnError=\"False\" RecordedResultFile=\"\" ResultsLocale=\"\"><Items><Request Method=\"GET\" Guid=\"347e1924-9899-4c6e-ad78-123456789abc\" Version=\"1.1\" Url=\"http://my-other-component.azurewebsites.net\" ThinkTime=\"0\" Timeout=\"120\" ParseDependentRequests=\"True\" FollowRedirects=\"True\" RecordResult=\"True\" Cache=\"False\" ResponseTimeGoal=\"0\" Encoding=\"utf-8\" ExpectedHttpStatusCode=\"200\" ExpectedResponseUrl=\"\" ReportingName=\"\" IgnoreHttpStatusCode=\"False\" /></Items></WebTest>}",
+                      "provisioningState": "Succeeded"
+                    }
+                  }
+                ],
+                "nextLink": null
+              }
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.insights/webtests/{webTestName}": {
+      "get": {
+        "description": "Get a specific Application Insights synthetic monitor definition.",
+        "operationId": "SyntheticMonitor_Get",
+        "parameters": [
+          {
+            "$ref": "#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/WebTestNameParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "A single instance of an Application Insights Synthetic Monitor definition",
+            "schema": {
+              "$ref": "#/definitions/SyntheticMonitor"
+            },
+            "examples": {
+              "application/json": {
+                "id": "/subscriptions/8938312c-1467-4f13-8676-123456789abc/resourceGroups/my-test-resources/providers/microsoft.insights/webtests/my-webtest-01-mywebservice",
+                "name": "my-webtest-01-mywebservice",
+                "type": "microsoft.insights/webtests",
+                "location": "southcentralus",
+                "tags": {
+                  "hidden-link:/subscriptions/8938312c-1467-4f13-8676-123456789abc/resourceGroups/my-test-resources/providers/microsoft.insights/components/mytester": "Resource",
+                  "hidden-link:/subscriptions/8938312c-1467-4f13-8676-123456789abc/resourceGroups/my-test-resources/providers/Microsoft.Web/sites/mytester": "Resource"
+                },
+                "kind": null,
+                "etag": "\"0f009cf2-0000-0000-0000-58a689c50000\"",
+                "properties": {
+                  "SyntheticMonitorId": "my-webtest-01-mywebservice",
+                  "Name": "mytest-webtest-01",
+                  "Description": "",
+                  "Enabled": false,
+                  "Frequency": 900,
+                  "Timeout": 30,
+                  "Kind": "ping",
+                  "RetryEnabled": null,
+                  "Locations": [
+                    "@{Id=us-fl-mia-edge}",
+                    "@{Id=apac-hk-hkn-azr}"
+                  ],
+                  "Configuration": {
+                    "WebTest": "\u003cWebTest         Name=\"mytest-webtest-01\"         Id=\"0317d26b-8672-4370-bd6b-123456789abc\"         Enabled=\"True\"         CssProjectStructure=\"\"         CssIteration=\"\"         Timeout=\"30\"         WorkItemIds=\"\"         xmlns=\"http://microsoft.com/schemas/VisualStudio/TeamTest/2010\"         Description=\"\"         CredentialUserName=\"\"         CredentialPassword=\"\"         PreAuthenticate=\"True\"         Proxy=\"default\"         StopOnError=\"False\"         RecordedResultFile=\"\"         ResultsLocale=\"\"\u003e        \u003cItems\u003e        \u003cRequest         Method=\"GET\"         Guid=\"a55ce143-4f1e-a7e6-b69e-123456789abc\"         Version=\"1.1\"         Url=\"http://mytester.azurewebsites.net\"         ThinkTime=\"0\"         Timeout=\"30\"         ParseDependentRequests=\"False\"         FollowRedirects=\"True\"         RecordResult=\"True\"         Cache=\"False\"         ResponseTimeGoal=\"0\"         Encoding=\"utf-8\"         ExpectedHttpStatusCode=\"200\"         ExpectedResponseUrl=\"\"         ReportingName=\"\"         IgnoreHttpStatusCode=\"False\" /\u003e        \u003c/Items\u003e        \u003c/WebTest\u003e"
+                  },
+                  "provisioningState": "Succeeded"
+                }
+              }
+            }
+          }
+        }
+      },
+      "put": {
+        "description": "Creates or updates an Application Insights synthetic monitor definition.",
+        "operationId": "SyntheticMonitor_CreateOrUpdate",
+        "parameters": [
+          {
+            "$ref": "#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/WebTestNameParameter"
+          },
+          {
+            "name": "WebTestDefinition",
+            "description": "Properties that need to be specified to create or update an Application Insights synthetic monitor definition",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/SyntheticMonitor"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Adding the Application Insights synthetic monitor was successful. Synthetic monitor properties are updated and returned.",
+            "schema": {
+              "$ref": "#/definitions/SyntheticMonitor"
+            },
+            "examples": {
+              "application/json": {
+                "id": "/subscriptions/8938312c-1467-4f13-8676-123456789abc/resourceGroups/my-resource-group/providers/microsoft.insights/webtests/my-webtest-my-component",
+                "name": "my-webtest-my-component",
+                "type": "microsoft.insights/webtests",
+                "location": "southcentralus",
+                "tags": {
+                  "hidden-link:/subscriptions/8938312c-1467-4f13-8676-123456789abc/resourceGroups/my-resource-group/providers/microsoft.insights/components/my-component": "Resource",
+                  "hidden-link:/subscriptions/8938312c-1467-4f13-8676-123456789abc/resourceGroups/my-resource-group/providers/Microsoft.Web/sites/mytestwebapp": "Resource"
+                },
+                "kind": null,
+                "etag": "\"1c00a82f-0000-0000-0000-123456789abc\"",
+                "properties": {
+                  "SyntheticMonitorId": "my-webtest-my-component",
+                  "Name": "my-webtest",
+                  "Description": "",
+                  "Enabled": false,
+                  "Frequency": 900,
+                  "Timeout": 120,
+                  "Kind": "ping",
+                  "RetryEnabled": null,
+                  "Locations": "  ",
+                  "Configuration": "@{WebTest=<WebTest         Name=\"my-webtest\"         Id=\"678ddf96-1ab8-44c8-9274-123456789abc\"         Enabled=\"True\"         CssProjectStructure=\"\"         CssIteration=\"\"         Timeout=\"120\"         WorkItemIds=\"\"         xmlns=\"http://microsoft.com/schemas/VisualStudio/TeamTest/2010\"         Description=\"\"         CredentialUserName=\"\"         CredentialPassword=\"\"         PreAuthenticate=\"True\"         Proxy=\"default\"         StopOnError=\"False\"         RecordedResultFile=\"\"         ResultsLocale=\"\">        <Items>        <Request         Method=\"GET\"         Guid=\"a4162485-9114-fcfc-e086-123456789abc\"         Version=\"1.1\"         Url=\"http://my-component.azurewebsites.net\"         ThinkTime=\"0\"         Timeout=\"120\"         ParseDependentRequests=\"True\"         FollowRedirects=\"True\"         RecordResult=\"True\"         Cache=\"False\"         ResponseTimeGoal=\"0\"         Encoding=\"utf-8\"         ExpectedHttpStatusCode=\"200\"         ExpectedResponseUrl=\"\"         ReportingName=\"\"         IgnoreHttpStatusCode=\"False\" />        </Items>        </WebTest>}",
+                  "provisioningState": "Succeeded"
+                }
+              }
+            }
+          }
+        }
+      },
+      "delete": {
+        "description": "Deletes an Application Insights synthetic monitor.",
+        "operationId": "SyntheticMonitor_Delete",
+        "parameters": [
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/WebTestNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "No content: the request was successful, but the response is empty (the request to delete failed because the specified synthetic monitor does not exist)."
+          },
+          "200": {
+            "description": "Successful request to delete a synthetic monitor definition"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/providers/microsoft.insights/webtests": {
+      "get": {
+        "description": "Get all Application Insights synthetic monitor alerts definitioned within a subscription.",
+        "operationId": "SyntheticMonitor_List",
+        "parameters": [
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "A list of 0 or more Application Insights synthetic monitor definitions",
+            "schema": {
+              "$ref": "#/definitions/SyntheticMonitorListResult"
+            },
+            "examples": {
+              "application/json": {
+                "value": [
+                  {
+                    "id": "/subscriptions/8938312c-1467-4f13-8676-123456789abc/resourceGroups/my-resource-group/providers/microsoft.insights/webtests/my-webtest-my-component",
+                    "name": "my-webtest-my-component",
+                    "type": "microsoft.insights/webtests",
+                    "location": "southcentralus",
+                    "tags": {
+                      "hidden-link:/subscriptions/8938312c-1467-4f13-8676-123456789abc/resourceGroups/my-resource-group/providers/microsoft.insights/components/my-component": "Resource",
+                      "hidden-link:/subscriptions/8938312c-1467-4f13-8676-123456789abc/resourceGroups/my-resource-group/providers/Microsoft.Web/sites/mytestwebapp": "Resource"
+                    },
+                    "kind": null,
+                    "etag": "\"1c00a82f-0000-0000-0000-123456789abc\"",
+                    "properties": {
+                      "SyntheticMonitorId": "my-webtest-my-component",
+                      "Name": "my-webtest",
+                      "Description": "",
+                      "Enabled": false,
+                      "Frequency": 900,
+                      "Timeout": 120,
+                      "Kind": "ping",
+                      "RetryEnabled": null,
+                      "Locations": "  ",
+                      "Configuration": "@{WebTest=<WebTest         Name=\"my-webtest\"         Id=\"678ddf96-1ab8-44c8-9274-123456789abc\"         Enabled=\"True\"         CssProjectStructure=\"\"         CssIteration=\"\"         Timeout=\"120\"         WorkItemIds=\"\"         xmlns=\"http://microsoft.com/schemas/VisualStudio/TeamTest/2010\"         Description=\"\"         CredentialUserName=\"\"         CredentialPassword=\"\"         PreAuthenticate=\"True\"         Proxy=\"default\"         StopOnError=\"False\"         RecordedResultFile=\"\"         ResultsLocale=\"\">        <Items>        <Request         Method=\"GET\"         Guid=\"a4162485-9114-fcfc-e086-123456789abc\"         Version=\"1.1\"         Url=\"http://my-component.azurewebsites.net\"         ThinkTime=\"0\"         Timeout=\"120\"         ParseDependentRequests=\"True\"         FollowRedirects=\"True\"         RecordResult=\"True\"         Cache=\"False\"         ResponseTimeGoal=\"0\"         Encoding=\"utf-8\"         ExpectedHttpStatusCode=\"200\"         ExpectedResponseUrl=\"\"         ReportingName=\"\"         IgnoreHttpStatusCode=\"False\" />        </Items>        </WebTest>}",
+                      "provisioningState": "Succeeded"
+                    }
+                  },
+                  {
+                    "id": "/subscriptions/8938312c-1467-4f13-8676-123456789abc/resourceGroups/my-resource-group/providers/microsoft.insights/webtests/my-webtest-my-other-component",
+                    "name": "my-webtest-my-other-component",
+                    "type": "microsoft.insights/webtests",
+                    "location": "southcentralus",
+                    "tags": {
+                      "Test": "You can delete this synthetic monitor anytime",
+                      "hidden-link:/subscriptions/8938312c-1467-4f13-8676-123456789abc/resourceGroups/my-resource-group/providers/microsoft.insights/components/my-other-component": "Resource"
+                    },
+                    "kind": "",
+                    "etag": "\"1c007b27-0000-0000-0000-123456789abc\"",
+                    "properties": {
+                      "SyntheticMonitorId": "my-webtest-my-other-component",
+                      "Name": "342bccf4-722f-496d-b064-123456789abc",
+                      "Description": "",
+                      "Enabled": false,
+                      "Frequency": 900,
+                      "Timeout": 120,
+                      "Kind": "ping",
+                      "RetryEnabled": false,
+                      "Locations": "  ",
+                      "Configuration": "@{WebTest=<WebTest Name=\"342bccf4-722f-496d-b064-123456789abc\" Id=\"00a15cc1-c903-4f97-9af4-123456789abc\" Enabled=\"False\" CssProjectStructure=\"\" CssIteration=\"\" Timeout=\"120\" WorkItemIds=\"\" xmlns=\"http://microsoft.com/schemas/VisualStudio/TeamTest/2010\" Description=\"\" CredentialUserName=\"\" CredentialPassword=\"\" PreAuthenticate=\"True\" Proxy=\"default\" StopOnError=\"False\" RecordedResultFile=\"\" ResultsLocale=\"\"><Items><Request Method=\"GET\" Guid=\"347e1924-9899-4c6e-ad78-123456789abc\" Version=\"1.1\" Url=\"http://my-other-component.azurewebsites.net\" ThinkTime=\"0\" Timeout=\"120\" ParseDependentRequests=\"True\" FollowRedirects=\"True\" RecordResult=\"True\" Cache=\"False\" ResponseTimeGoal=\"0\" Encoding=\"utf-8\" ExpectedHttpStatusCode=\"200\" ExpectedResponseUrl=\"\" ReportingName=\"\" IgnoreHttpStatusCode=\"False\" /></Items></WebTest>}",
+                      "provisioningState": "Succeeded"
+                    }
+                  }
+                ],
+                "nextLink": null
+              }
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    }
+  },
+  "definitions": {
+    "Resource": {
+      "properties": {
+        "id": {
+          "type": "string",
+          "readOnly": true,
+          "description": "Azure resource ID represents the complete path to the resource. This can be used with the Azure Resource Manager to link resources together.",
+          "externalDocs": {
+            "url": "https://aka.ms/search-linked-resources"
+          }
+        },
+        "name": {
+          "type": "string",
+          "description": "Azure resource name",
+          "externalDocs": {
+            "url": "https://aka.ms/search-naming-rules"
+          }
+        },
+        "type": {
+          "type": "string",
+          "readOnly": true,
+          "description": "Azure resource type"
+        },
+        "location": {
+          "type": "string",
+          "description": "The geographic location of the resource. This must be one of the supported and registered Azure Geo Regions (for example, West US, East US, Southeast Asia, and so forth). The geo region of a resource cannot be changed once it is created, but if an identical geo region is specified on update, the request will succeed.",
+          "externalDocs": {
+            "url": "https://aka.ms/search-rp-info"
+          },
+          "x-ms-mutability": [
+            "create", 
+            "read"
+          ]
+        },
+        "tags": {
+          "additionalProperties": {
+            "type": "string"
+          },
+          "description": "Tags to help categorize the resource in the Azure portal. This is a free-form list of key-value pairs that can be used for viewing and grouping a resource (across resource groups)."
+        }
+      },
+      "required": [
+        "location"
+      ],
+      "x-ms-azure-resource": true,
+      "description": "An azure resource object which forms the base for all Azure resources."
+    },
+    "SyntheticMonitorListResult": {
+      "description": "A list of 0 or more Application Insights synthetic monitor definitions",
+      "required": [
+        "value"
+      ],
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "Set of Application Insights synthetic monitor definitions",
+          "items": {
+            "$ref": "#/definitions/SyntheticMonitor"
+          }
+        },
+        "nextLink": {
+          "type": "string",
+          "description": "The link to get the next part of the returned list of synthetic monitors, should the return set be too large for a single request. May be null."
+        }
+      }
+    },
+    "SyntheticMonitor": {
+      "description": "An instance of a Synthetic Monitor Azure resource",
+      "allOf": [
+        {
+          "$ref": "#/definitions/Resource"
+        }
+      ],
+      "properties": {
+        "kind": {
+          "type": "string",
+          "description": "The kind of web test that this synthetic monitor watches. Choices are ping and multistep.",
+          "default": "ping",
+          "enum": [
+            "ping",
+            "multistep"
+          ],
+          "x-ms-enum": {
+            "name": "WebTestKind",
+            "modelAsString": false
+          }
+        },
+        "properties": {
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/WebTestProperties"
+        }
+      }
+    },
+    "WebTestProperties": {
+      "description": "Metadata describing a Synthetic Monitor for an Azure resource",
+      "required": [
+        "Name",
+        "Kind"
+      ],
+      "properties": {
+        "SyntheticMonitorId": {
+          "type": "string",
+          "description": "Unique ID of this WebTest"
+        },
+        "Name": {
+          "x-ms-client-name": "WebTestName",
+          "type": "string",
+          "description": "User defined name if this WebTest"
+        },
+        "Description": {
+          "type": "string",
+          "description": "Purpose/user defined descriptive test for this WebTest"
+        },
+        "Enabled": {
+          "type": "boolean",
+          "description": "Is the test actively being monitored, default is false"
+        },
+        "Frequency": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Interval between test runs for this WebTest"
+        },
+        "Timeout": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Seconds until this WebTest will timeout and fail"
+        },
+        "Kind": {
+          "x-ms-client-name": "WebTestKind",
+          "type": "string",
+          "description": "The kind of web test this is, valid choices are ping and multistep.",
+          "default": "ping",
+          "enum": [
+            "ping",
+            "multistep"
+          ],
+          "x-ms-enum": {
+            "name": "WebTestKind",
+            "modelAsString": false
+          }
+        },
+        "RetryEnabled": {
+          "type": "boolean",
+          "description": "Allow for retries should this WebTest fail"
+        },
+        "Locations": {
+          "type": "array",
+          "description": "A list of where to physically run the tests from to give global coverage for accessibility of your application",
+          "items": {
+            "$ref": "#/definitions/WebTestGeolocation"
+          }
+        },
+        "Configuration": {
+          "type": "object",
+          "description": "An XML configuration specification for a WebTest",
+          "properties": {
+            "WebTest": {
+              "type": "string",
+              "description": "The XML specification of a WebTest to run against an application"
+            }
+          }
+        },
+        "provisioningState": {
+          "type": "string",
+          "description": "Current state of this component: whether or not is has been provisioned within the resource group it is defined. Users cannot change this value but are able to read from it. Values will include Succeeded, Deploying, Canceled, and Failed",
+          "readOnly": true
+        }
+      }
+    },
+    "WebTestGeolocation": {
+      "description": "Geo-physical location to run a web test from.",
+      "type": "object",
+      "properties": {
+        "Id": {
+          "type": "string",
+          "description": "Unique ID of this WebTest"
+        }
+      }
+    }
+  },
+  "parameters": {
+    "SubscriptionIdParameter": {
+      "name": "subscriptionId",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "description": "The unique identifier for a Microsoft Azure subscription. The subscription ID forms part of the URI for every service call."
+    },
+    "ApiVersionParameter": {
+      "name": "api-version",
+      "in": "query",
+      "required": true,
+      "type": "string",
+      "description": "Client API version."
+    },
+    "ResourceGroupNameParameter": {
+      "name": "resourceGroupName",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "description": "The name of the Azure Resource group within which a given Application Insights synthetic monitor is defined. This name must be at least 1 character in length, and no more than 90.",
+      "x-ms-parameter-location": "method"
+    },
+    "WebTestNameParameter": {
+      "name": "webTestName",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "description": "The name of the Application Insights webtest resource",
+      "x-ms-parameter-location": "method"
+    }
+  }
+}

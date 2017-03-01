@@ -1,0 +1,540 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "ApplicationInsights.Client.Component",
+    "description": "Azure Application Insights client for Components",
+    "version": "2015-05-01"
+  },
+  "host": "management.azure.com",
+  "schemes": [
+    "https"
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "produces": [
+    "application/json"
+  ],
+  "security": [
+    {
+      "azure_auth": [
+        "user_impersonation"
+      ]
+    }
+  ],
+  "securityDefinitions": {
+    "azure_auth": {
+      "type": "oauth2",
+      "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
+      "flow": "implicit",
+      "description": "Azure Active Directory OAuth2 Flow",
+      "scopes": {
+        "user_impersonation": "impersonate your user account"
+      }
+    }
+  },
+  "paths": {
+    "/subscriptions/{subscriptionId}/providers/microsoft.insights/components": {
+      "get": {
+        "description": "Gets a list of all Application Insights component instances in a subscription.",
+        "operationId": "Component_List",
+        "parameters": [
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "A list containing 0 or more Application Insights component definitions",
+            "schema": {
+              "$ref": "#/definitions/ApplicationInsightsComponentListResult"
+            },
+            "examples": {
+              "application/json": {
+                "value": [
+                  {
+                    "id": "/subscriptions/8938312c-1467-4f13-8676-123456789abc/resourceGroups/Gruppe/providers/microsoft.insights/components/my-component",
+                    "name": "my-component",
+                    "type": "microsoft.insights/components",
+                    "location": "South Central US",
+                    "tags": "",
+                    "kind": "android",
+                    "etag": "\"0000069e-0000-0000-0000-123456789abc\"",
+                    "properties": {
+                      "ApplicationId": "my-component",
+                      "AppId": "16526d1a-dfba-4362-a9e9-123456789abc",
+                      "Application_Type": "android",
+                      "Flow_Type": "Redfield",
+                      "Request_Source": "VisualStudio",
+                      "InstrumentationKey": "dc5931c7-a7ad-4ad0-89d6-123456789abc",
+                      "Name": "my-component",
+                      "CreationDate": "2017-02-14T12:24:05.0041213+00:00",
+                      "PackageId": "",
+                      "TenantId": "f438d567-7177-4fe1-a5e3-123456789abc",
+                      "HockeyAppId": "",
+                      "HockeyAppToken": "",
+                      "provisioningState": "Succeeded",
+                      "SamplingPercentage": ""
+                    }
+                  },
+                  {
+                    "id": "/subscriptions/8938312c-1467-4f13-8676-123456789abc/resourceGroups/Group-3/providers/microsoft.insights/components/my-other-component",
+                    "name": "my-other-component",
+                    "type": "microsoft.insights/components",
+                    "location": "South Central US",
+                    "tags": "",
+                    "kind": "web",
+                    "etag": "\"0000079e-0000-0000-0000-582e691b0000\"",
+                    "properties": {
+                      "ApplicationId": "my-other-component",
+                      "AppId": "887f4bfd-b5fd-40d7-9fc3-123456789abc",
+                      "Application_Type": "web",
+                      "Flow_Type": "Redfield",
+                      "Request_Source": "IbizaAIExtension",
+                      "InstrumentationKey": "bc095013-3cf2-45ac-ab47-123456789abc",
+                      "Name": "my-other-component",
+                      "CreationDate": "2017-01-24T01:05:38.5934061+00:00",
+                      "PackageId": "",
+                      "TenantId": "f438d567-7177-4fe1-a5e3-123456789abc",
+                      "HockeyAppId": "",
+                      "HockeyAppToken": "",
+                      "provisioningState": "Succeeded",
+                      "SamplingPercentage": ""
+                    }
+                  }
+                ],
+                "nextLink": null
+              }
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.insights/components": {
+      "get": {
+        "description": "Gets a list of Application Insights components within a resource group.",
+        "operationId": "Component_ListByResourceGroup",
+        "parameters": [
+          {
+            "$ref": "#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "A list containing 0 or more Application Insights component definitions",
+            "schema": {
+              "$ref": "#/definitions/ApplicationInsightsComponentListResult"
+            },
+            "examples": {
+              "application/json": {
+                "value": [
+                  {
+                    "id": "/subscriptions/8938312c-1467-4f13-8676-123456789abc/resourceGroups/Gruppe/providers/microsoft.insights/components/my-component",
+                    "name": "my-component",
+                    "type": "microsoft.insights/components",
+                    "location": "South Central US",
+                    "tags": "",
+                    "kind": "android",
+                    "etag": "\"0000069e-0000-0000-0000-123456789abc\"",
+                    "properties": {
+                      "ApplicationId": "my-component",
+                      "AppId": "16526d1a-dfba-4362-a9e9-123456789abc",
+                      "Application_Type": "android",
+                      "Flow_Type": "Redfield",
+                      "Request_Source": "VisualStudio",
+                      "InstrumentationKey": "dc5931c7-a7ad-4ad0-89d6-123456789abc",
+                      "Name": "my-component",
+                      "CreationDate": "2017-02-14T12:24:05.0041213+00:00",
+                      "PackageId": "",
+                      "TenantId": "f438d567-7177-4fe1-a5e3-123456789abc",
+                      "HockeyAppId": "",
+                      "HockeyAppToken": "",
+                      "provisioningState": "Succeeded",
+                      "SamplingPercentage": ""
+                    }
+                  },
+                  {
+                    "id": "/subscriptions/8938312c-1467-4f13-8676-123456789abc/resourceGroups/Group-3/providers/microsoft.insights/components/my-other-component",
+                    "name": "my-other-component",
+                    "type": "microsoft.insights/components",
+                    "location": "South Central US",
+                    "tags": "",
+                    "kind": "web",
+                    "etag": "\"0000079e-0000-0000-0000-582e691b0000\"",
+                    "properties": {
+                      "ApplicationId": "my-other-component",
+                      "AppId": "887f4bfd-b5fd-40d7-9fc3-123456789abc",
+                      "Application_Type": "web",
+                      "Flow_Type": "Redfield",
+                      "Request_Source": "IbizaAIExtension",
+                      "InstrumentationKey": "bc095013-3cf2-45ac-ab47-123456789abc",
+                      "Name": "my-other-component",
+                      "CreationDate": "2017-01-24T01:05:38.5934061+00:00",
+                      "PackageId": "",
+                      "TenantId": "f438d567-7177-4fe1-a5e3-123456789abc",
+                      "HockeyAppId": "",
+                      "HockeyAppToken": "",
+                      "provisioningState": "Succeeded",
+                      "SamplingPercentage": ""
+                    }
+                  }
+                ],
+                "nextLink": null
+              }
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.insights/components/{resourceName}": {
+      "delete": {
+        "description": "Deletes an Application Insights component instance",
+        "operationId": "Component_Delete",
+        "parameters": [
+          {
+            "$ref": "#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ResourceNameParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful request when deleting an Application Insights instance"
+          },
+          "204": {
+            "description": "No content: the request was successful, but the response is empty (the request to delete failed because the specified component does not exist)."
+          }
+        }
+      },
+      "get": {
+        "description": "Returns an Application Insights instance",
+        "operationId": "Component_Get",
+        "parameters": [
+          {
+            "$ref": "#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ResourceNameParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "An Application Insights Component definition",
+            "schema": {
+              "$ref": "#/definitions/ApplicationInsightsComponent"
+            },
+            "examples": {
+              "application/json": {
+                "id": "/subscriptions/8938312c-1467-4f13-8676-123456789abc/resourceGroups/Group-3/providers/microsoft.insights/components/my-other-component",
+                "name": "my-other-component",
+                "type": "microsoft.insights/components",
+                "location": "South Central US",
+                "tags": "",
+                "kind": "web",
+                "etag": "\"0000079e-0000-0000-0000-582e691b0000\"",
+                "properties": {
+                  "ApplicationId": "my-other-component",
+                  "AppId": "887f4bfd-b5fd-40d7-9fc3-123456789abc",
+                  "Application_Type": "web",
+                  "Flow_Type": "Redfield",
+                  "Request_Source": "IbizaAIExtension",
+                  "InstrumentationKey": "bc095013-3cf2-45ac-ab47-123456789abc",
+                  "Name": "my-other-component",
+                  "CreationDate": "2017-01-24T01:05:38.5934061+00:00",
+                  "PackageId": "",
+                  "TenantId": "f438d567-7177-4fe1-a5e3-123456789abc",
+                  "HockeyAppId": "",
+                  "HockeyAppToken": "",
+                  "provisioningState": "Succeeded",
+                  "SamplingPercentage": ""
+                }
+              }
+            }
+          }
+        }
+      },
+      "put": {
+        "description": "Creates (or updates) an Application Insights component. Note: You cannot specify a different value for InstrumentationKey nor AppId in the Put operation",
+        "operationId": "Component_CreateOrUpdate",
+        "parameters": [
+          {
+            "$ref": "#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ResourceNameParameter"
+          },
+          {
+            "name": "InsightProperties",
+            "description": "Properties that need to be specified to create an applicationInsights Instance",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/ApplicationInsightsComponent"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful request when creating or updating an Application Insights component. The updated component instance is returned.",
+            "schema": {
+              "$ref": "#/definitions/ApplicationInsightsComponent"
+            },
+            "examples": {
+              "application/json": {
+                "id": "/subscriptions/8938312c-1467-4f13-8676-123456789abc/resourceGroups/Group-3/providers/microsoft.insights/components/my-other-component",
+                "name": "my-other-component",
+                "type": "microsoft.insights/components",
+                "location": "South Central US",
+                "tags": "",
+                "kind": "web",
+                "etag": "\"0000079e-0000-0000-0000-582e691b0000\"",
+                "properties": {
+                  "ApplicationId": "my-other-component",
+                  "AppId": "887f4bfd-b5fd-40d7-9fc3-123456789abc",
+                  "Application_Type": "web",
+                  "Flow_Type": "Redfield",
+                  "Request_Source": "IbizaAIExtension",
+                  "InstrumentationKey": "bc095013-3cf2-45ac-ab47-123456789abc",
+                  "Name": "my-other-component",
+                  "CreationDate": "2017-01-24T01:05:38.5934061+00:00",
+                  "PackageId": "",
+                  "TenantId": "f438d567-7177-4fe1-a5e3-123456789abc",
+                  "HockeyAppId": "",
+                  "HockeyAppToken": "",
+                  "provisioningState": "Succeeded",
+                  "SamplingPercentage": ""
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "definitions": {
+    "Resource": {
+      "properties": {
+        "id": {
+          "type": "string",
+          "readOnly": true,
+          "description": "Azure resource ID represents the complete path to the resource. This can be used with the Azure Resource Manager to link resources together.",
+          "externalDocs": {
+            "url": "https://aka.ms/search-linked-resources"
+          }
+        },
+        "name": {
+          "type": "string",
+          "description": "Azure resource name",
+          "externalDocs": {
+            "url": "https://aka.ms/search-naming-rules"
+          }
+        },
+        "type": {
+          "type": "string",
+          "readOnly": true,
+          "description": "Azure resource type"
+        },
+        "location": {
+          "type": "string",
+          "description": "The geographic location of the resource. This must be one of the supported and registered Azure Geo Regions (for example, West US, East US, Southeast Asia, and so forth). The geo region of a resource cannot be changed once it is created, but if an identical geo region is specified on update, the request will succeed.",
+          "externalDocs": {
+            "url": "https://aka.ms/search-rp-info"
+          },
+          "x-ms-mutability": [
+            "create", 
+            "read"
+          ]
+        },
+        "tags": {
+          "additionalProperties": {
+            "type": "string"
+          },
+          "description": "Tags to help categorize the resource in the Azure portal. This is a free-form list of key-value pairs that can be used for viewing and grouping a resource (across resource groups)."
+        }
+      },
+      "required": [
+        "location"
+      ],
+      "x-ms-azure-resource": true,
+      "description": "An azure resource object which forms the base for all Azure resources."
+    },
+    "ApplicationInsightsComponent": {
+      "properties": {
+        "kind": {
+          "type": "string",
+          "description": "The kind of application that this component refers to, used to identify icons and such to display in the Azure portal UX. Freeform string, but values should typically be one of the following: web, ios, android, other, store, java, phone"
+        },
+        "properties": {
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/ApplicationInsightsComponentProperties"
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "#/definitions/Resource"
+        }
+      ],
+      "required": [
+        "kind"
+      ],
+      "description": "An Application Insights component definition."
+    },
+    "ApplicationInsightsComponentProperties": {
+      "description": "Properties that define an Application Insights component resource",
+      "properties": {
+        "ApplicationId": {
+          "type": "string",
+          "description": "The unique ID of your application."
+        },
+        "AppId": {
+          "type": "string",
+          "readOnly": true,
+          "description": "Application Insights Unique ID for your Application."
+        },
+        "Application_Type": {
+          "type": "string",
+          "description": "Type of application being monitored. Example values: Web, android, other. Cannot be changed after the component has been created."
+        },
+        "Flow_Type": {
+          "type": "string",
+          "description": "Used by the Application Insights system to determine what kind of flow this component was created by. Typically, users will set this to 'Bluefield' when creating a component via the REST API."
+        },
+        "Request_Source": {
+          "type": "string",
+          "description": "Source of the request to create an Application Insights component. Users of the REST API should typically set this value to 'rest'"
+        },
+        "InstrumentationKey": {
+          "type": "string",
+          "readOnly": true,
+          "description": "Application Insights Instrumentation key. A read-only value that applications can use to identify the destination for all telemetry sent to Azure Application Insights. This value will be supplied upon construction of each new Application Insights component."
+        },
+        "CreationDate": {
+          "type": "string",
+          "readOnly": true,
+          "description": "Creation Date for the Application Insights component, in ISO 8601 format.",
+          "format": "date-time"
+        },
+        "TenantId": {
+          "type": "string",
+          "readOnly": true,
+          "description": "Azure Tenant Id."
+        },
+        "HockeyAppId": {
+          "type": "string",
+          "description": "The unique application ID created when a new application is added to HockeyApp, used for communications with HockeyApp.",
+          "externalDocs": {
+            "url": "https://aka.ms/ewjuel"
+          }
+        },
+        "HockeyAppToken": {
+          "type": "string",
+          "description": "Token used to authenticate communications with between Application Insights and HockeyApp (used primarily for mobile applications).",
+          "readOnly": true,
+          "externalDocs": {
+            "url": "https://aka.ms/sls76s"
+          }
+        },
+        "provisioningState": {
+          "type": "string",
+          "description": "Current state of this component: whether or not is has been provisioned within the resource group it is defined. Users cannot change this value but are able to read from it. Values will include Succeeded, Deploying, Canceled, and Failed",
+          "readOnly": true
+        },
+        "SamplingPercentage": {
+          "type": "number",
+          "format": "double",
+          "description": "Percentage of the data produced by the application being monitored that is being sampled for alerts."
+        }
+      },
+      "required": [
+        "ApplicationId",
+        "Application_Type"
+      ]
+    },
+    "ApplicationInsightsComponentListResult": {
+      "description": "Describes the list of Application Insights Resources.",
+      "required": [
+        "value"
+      ],
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "List of Application Insights component definitions.",
+          "items": {
+            "$ref": "#/definitions/ApplicationInsightsComponent"
+          }
+        },
+        "nextLink": {
+          "type": "string",
+          "description": "The URI to get the next set of Application Insights component defintions if too many components where returned in the result set."
+        }
+      },
+      "x-ms-azure-resource": true
+    }
+  },
+  "parameters": {
+    "SubscriptionIdParameter": {
+      "name": "subscriptionId",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "description": "The unique identifier for a Microsoft Azure subscription. The subscription ID forms part of the URI for every service call."
+    },
+    "ApiVersionParameter": {
+      "name": "api-version",
+      "in": "query",
+      "required": true,
+      "type": "string",
+      "description": "Client API version."
+    },
+    "ResourceGroupNameParameter": {
+      "name": "resourceGroupName",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "description": "The name of the Azure Resource group within which a given Application Insights component is defined. This name must be at least 1 character in length, and no more than 90.",
+      "x-ms-parameter-location": "method"
+    },
+    "ResourceNameParameter": {
+      "name": "resourceName",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "description": "The name of the Application Insights component resource",
+      "x-ms-parameter-location": "method"
+    }
+  }
+}
