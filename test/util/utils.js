@@ -61,14 +61,6 @@ exports.parseJsonFromFile = function parseJsonFromFile(filepath, callback) {
 };
 
 /**
- * Converts command to OS specific command by prepending `mono` for non-windows prOnlySwaggers
- * @returns {string} clr command
- */
-exports.clrCmd = function clrCmd(cmd) {
-  return exports.isWindows ? cmd : ('mono ' + cmd);
-};
-
-/**
  * Gets the name of the target branch to which the PR is sent. We are using the environment 
  * variable provided by travis-ci. It is called TRAVIS_BRANCH. More info can be found here:
  * https://docs.travis-ci.com/user/environment-variables/#Default-Environment-Variables
