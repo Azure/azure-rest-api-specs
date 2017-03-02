@@ -47,6 +47,12 @@
                     }
                 ],
                 "responses": {
+                    "201": {
+                        "description": "Created",
+                        "schema": {
+                        "$ref": "#/definitions/ImportExportOperationResponse"
+                        }
+                    },
                     "202": {
                         "description": "Accepted"
                     }
@@ -99,7 +105,7 @@
                     "200": {
                         "description": "OK",
                         "schema": {
-                        "$ref": "#/definitions/ImportExportOperationStatusResponseProperties"
+                        "$ref": "#/definitions/ImportExportOperationResponse"
                         }
                     },
                     "202": {
@@ -151,6 +157,12 @@
                     }
                 ],
                 "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                        "$ref": "#/definitions/ImportExportOperationResponse"
+                        }
+                    },
                     "202": {
                         "description": "Accepted"
                     }
@@ -166,7 +178,7 @@
                 "tags": [
                     "ImportExport"
                 ],
-                "operationId": "Servers_ListImportExportOperations",
+                "operationId": "ImportExportOperations_ListByServer",
                 "description": "The status of an import operation given the operation ID.",
                 "parameters": [
                     {
@@ -184,14 +196,17 @@
                 ],
                 "responses": {
                     "200": {
-                        "description": "",
+                        "description": "OK",
                         "schema": {
-                            "$ref": "#/definitions/ImportExportOperationStatusResponse"
+                            "$ref": "#/definitions/ImportExportOperationListResponse"
                         }
                     }
                 },
                 "x-ms-examples": {
                     "List Import/Export operations by server": { "$ref": "../examples/ImportExportOperationListByServer.json" }
+                },
+                "x-ms-pageable": {
+                "nextLinkName": null
                 }
             }
         },
@@ -200,8 +215,8 @@
                 "tags": [
                     "ImportExport"
                 ],
-                "operationId": "Servers_GetImportStatus",
-                "description": "The status of an import operation given the operation ID.",
+                "operationId": "ImportExportOperations_GetByServer",
+                "description": "The  of an import operation given the operation ID.",
                 "parameters": [
                     {
                         "$ref": "#/parameters/ApiVersionParameter"
@@ -226,9 +241,9 @@
                 ],
                 "responses": {
                     "200": {
-                        "description": "",
+                        "description": "OK",
                         "schema": {
-                            "$ref": "#/definitions/ImportExportOperationStatusResponse"
+                            "$ref": "#/definitions/ImportExportOperationResponse"
                         }
                     }
                 },
@@ -242,7 +257,7 @@
                 "tags": [
                     "ImportExport"
                 ],
-                "operationId": "Databases_GetImportExportStatus",
+                "operationId": "ImportExportOperations_GetByDatabase",
                 "description": "The status of an import or export operation on a database given the operation ID.",
                 "parameters": [
                     {
@@ -275,9 +290,9 @@
                 ],
                 "responses": {
                     "200": {
-                        "description": "",
+                        "description": "OK",
                         "schema": {
-                            "$ref": "#/definitions/ImportExportOperationStatusResponse"
+                            "$ref": "#/definitions/ImportExportOperationResponse"
                         }
                     }
                 },
@@ -318,70 +333,99 @@
                 },
                 "properties": {
                     "$ref": "#/definitions/ImportExtensionProperties",
+                    "x-ms-client-flatten": true,
                     "description": "Represents the properties of the resource."
                 }
             },
             "description": "Import database parameters."
         },
-        "ImportExportOperationStatusResponse": {
+        "ImportExportOperationListResponse": {
             "properties": {
-                "properties": {
-                    "x-ms-client-flatten": true,
-                    "$ref": "#/definitions/ImportExportOperationStatusResponseProperties",
-                    "description": "The properties of the response."
-                },
+                "value": {
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/definitions/ImportExportOperationResponse"
+                    }
+                }
+            },
+            "required": ["value"],
+            "description": "Response for Import/Export List operation."
+        },
+        "ImportExportOperationResponse": {
+            "properties": {
                 "id": {
                     "type": "string",
+                    "readOnly": true,
                     "description": "The id returned from the server."
                 },
                 "name": {
                     "type": "string",
+                    "readOnly": true,
                     "description": "The name returned from the server."
                 },
                 "type": {
                     "type": "string",
+                    "readOnly": true,
                     "description": "The type returned from the server."
+                },
+                "properties":
+                {
+                    "allOf": [
+                        {
+                        "$ref": "#/definitions/ImportExportOperationResponseProperties"
+                        }
+                    ],
+                    "x-ms-client-flatten": true
                 }
             },
-            "description": "Response for Import/Export Status operation."
+            "description": "Response for Import/Export Get operation."
         },
-        "ImportExportOperationStatusResponseProperties": {
+        "ImportExportOperationResponseProperties": {
             "properties": {
                 "requestType": {
                     "type": "string",
+                    "readOnly": true,
                     "description": "The request type of the operation."
                 },
                 "requestId": {
                     "type": "string",
                     "format": "uuid",
+                    "readOnly": true,
                     "description": "The request type of the operation."
                 },
                 "serverName": {
                     "type": "string",
+                    "readOnly": true,
                     "description": "The name of the server."
                 },
                 "databaseName": {
                     "type": "string",
+                    "readOnly": true,
                     "description": "The name of the database."
                 },
                 "status": {
                     "type": "string",
+                    "readOnly": true,
                     "description": "The status message returned from the server."
                 },
                 "lastModifiedTime": {
                     "type": "string",
+                    "readOnly": true,
                     "description": "The operation status last modified time."
                 },
                 "queuedTime": {
                     "type": "string",
+                    "readOnly": true,
                     "description": "The operation queued time."
                 },
                 "blobUri": {
                     "type": "string",
+                    "readOnly": true,
                     "description": "The blob uri."
                 },
                 "errorMessage": {
                     "type": "string",
+                    "readOnly": true,
                     "description": "The error message returned from the server."
                 }
             },
@@ -442,7 +486,7 @@
                 },
                 "authenticationType": {
                     "type": "string",
-                    "description": "The authentication type.",
+                    "description": "The authentication type - if not specified, will default to SQL.",
                     "enum": ["SQL","ADPassword"],
                     "x-ms-enum":{
                         "name": "AuthenticationType"
