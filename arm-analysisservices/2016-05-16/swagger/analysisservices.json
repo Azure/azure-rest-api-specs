@@ -509,6 +509,9 @@
       "properties": {
         "asAdministrators": {
           "$ref": "#/definitions/ServerAdministrators"
+        },
+        "backupConfiguration": {
+          "$ref": "#/definitions/BackupConfiguration"
         }
       }
     },
@@ -525,6 +528,28 @@
           "description": "An array of administrator user identities."
         }
       }
+    },
+    "BackupConfiguration": {
+      "description": "An object that represents backup configurations",
+      "type": "object",
+      "properties": {
+        "storageAccount": {
+          "type": "string",
+          "description": "Storage account full resource id for backup configuration"
+        },
+        "blobContainer": {
+          "type": "string",
+          "description": "The name of blob container for backup configuration"
+        },
+        "accessKey": {
+          "type": "string",
+          "description": "The access key of storage account used for backup configuration"
+        }
+      },
+      "required": [
+        "storageAccount",
+        "blobContainer"
+      ]
     }
   },
   "parameters": {

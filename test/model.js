@@ -9,12 +9,18 @@ var _ = require('lodash'),
 
 describe('Azure swagger model validation using x-ms-examples and examples in spec', function () {
   let swaggersToProcess = utils.getFilesChangedInPR();
+  // Useful when debugging a test for a particular swagger. 
+  // Just update the regex. That will return an array of filtered items.
+  // swaggersToProcess = swaggersToProcess.filter(function(item) {
+  //   return (item.match(/.arm-containerregistry.*2017-03-01.*/ig) !== null);
+  // });
   _(swaggersToProcess).each(function (swagger) {
     it(swagger + ' should have valid examples.', function (done) {
-      oav.validateExamples(swagger, null, false, 'error').then(function (validationResult) {
+      oav.validateExamples(swagger, null, 'error').then(function (validationResult) {
+        //console.dir(validationResult, {depth: null, colors: true});
         done(assert(validationResult.validityStatus === true, `swagger "${swagger}" contains model validation errors.`));
       }).catch(function (err) {
-        console.log(err);
+        console.dir(err, {depth: null, colors: true});
         done(err);
       });
     });
