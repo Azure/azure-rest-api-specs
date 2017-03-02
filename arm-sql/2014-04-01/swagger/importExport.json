@@ -307,13 +307,14 @@
             "properties": {
                 "operationMode": {
                     "type": "string",
-                    "description": "The type of Import/Export operation being performed",
+                    "description": "The type of Import/Export operation being performed.  This is always Import.",
                     "enum":["Import"],
                     "x-ms-enum":{
                         "name": "OperationMode"
                     }
                 }
             },
+            "required": ["operationMode"],
             "allOf": [
                 {
                     "$ref": "#/definitions/ExportRequestParameters"
