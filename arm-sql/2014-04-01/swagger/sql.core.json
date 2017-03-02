@@ -2291,7 +2291,7 @@
         },
         "createMode": {
           "type": "string",
-          "description": "Specifies the type of database to create. If createMode is not set to Default, sourceDatabaseId must be specified. If createMode is set to PointInTimeRestore, then restorePointInTime must be specified. If createMode is set to Restore, then sourceDatabaseDeletionDate must be specified.",
+          "description": "Specifies the type of database to create. If createMode is not set to Default, sourceDatabaseId must be specified. If createMode is set to PointInTimeRestore, then restorePointInTime must be specified. If createMode is set to Restore, then sourceDatabaseDeletionDate must be specified. Copy, NonReadableSecondary, and OnlineSecondary are not supported for DataWarehouse edition.",
           "enum": [
             "Copy",
             "Default",
@@ -2422,7 +2422,7 @@
         },
         "elasticPoolName": {
           "type": "string",
-          "description": "The name of the elastic pool the database is in. If elasticPoolName and requestedServiceObjectiveName are both updated, the value of requestedServiceObjectiveName is ignored."
+          "description": "The name of the elastic pool the database is in. If elasticPoolName and requestedServiceObjectiveName are both updated, the value of requestedServiceObjectiveName is ignored. Not supported for DataWarehouse edition."
         },
         "defaultSecondaryLocation": {
           "readOnly": true,
@@ -2473,7 +2473,7 @@
             "Enabled",
             "Disabled"
             ],
-          "description": "Conditional.  If the database is a geo-secondary, readScale indicates whether read-only connections are allowed to this database or not.",
+          "description": "Conditional. If the database is a geo-secondary, readScale indicates whether read-only connections are allowed to this database or not. Not supported for DataWarehouse edition.",
           "x-ms-enum": {
             "name": "ReadScale"
           }
@@ -2483,7 +2483,7 @@
           "enum": [
             "AdventureWorksLT"
             ],
-          "description": "Indicates the name of the sample schema to apply when creating this database. If createMode is not Default, this value is ignored.",
+          "description": "Indicates the name of the sample schema to apply when creating this database. If createMode is not Default, this value is ignored. Not supported for DataWarehouse edition.",
           "x-ms-enum": {
             "modelAsString": true,
             "name": "SampleName"
