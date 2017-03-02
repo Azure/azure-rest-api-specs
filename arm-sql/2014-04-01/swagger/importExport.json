@@ -52,7 +52,8 @@
                     }
                 },
                 "x-ms-examples": {
-                    "Import bacpac into new database": { "$ref": "../examples/DatabaseCreateImport.json" }
+                    "Import bacpac into new database Max": { "$ref": "../examples/DatabaseCreateImportMax.json" },
+                    "Import bacpac into new database Min": { "$ref": "../examples/DatabaseCreateImportMin.json" }
                 },
                 "x-ms-long-running-operation": true
             }
@@ -95,12 +96,19 @@
                     }
                 ],
                 "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                        "$ref": "#/definitions/ImportExportOperationStatusResponseProperties"
+                        }
+                    },
                     "202": {
                         "description": "Accepted"
                     }
                 },
                 "x-ms-examples": {
-                    "Import bacpac into an existing database": { "$ref": "../examples/DatabaseUpdateImport.json" }
+                    "Import bacpac into an existing database Max": { "$ref": "../examples/DatabaseUpdateImportMax.json" },
+                    "Import bacpac into an existing database Min": { "$ref": "../examples/DatabaseUpdateImportMin.json" }
                 },
                 "x-ms-long-running-operation": true
             }
@@ -284,33 +292,18 @@
             "properties": {
                 "operationMode": {
                     "type": "string",
-                    "description": "The type of Import/Export opertion being performed"
-                },
-                "storageKeyType": {
-                    "type": "string",
-                    "description": "The type of the storage key to use. Valid values are StorageAccessKey and SharedAccessKey."
-                },
-                "storageKey": {
-                    "type": "string",
-                    "description": "The storage key to use."
-                },
-                "storageUri": {
-                    "type": "string",
-                    "description": "The storage uri to use."
-                },
-                "administratorLogin": {
-                    "type": "string",
-                    "description": "The name of the SQL administrator."
-                },
-                "administratorLoginPassword": {
-                    "type": "string",
-                    "description": "The password of the SQL administrator."
-                },
-                "authenticationType": {
-                    "type": "string",
-                    "description": "The authentication type."
+                    "description": "The type of Import/Export operation being performed",
+                    "enum":["Import"],
+                    "x-ms-enum":{
+                        "name": "OperationMode"
+                    }
                 }
             },
+            "allOf": [
+                {
+                    "$ref": "#/definitions/ExportRequestParameters"
+                }
+            ],
             "description": "Represents the properties for an import operation"
         },
         "ImportExtensionRequestParameters": {
@@ -425,7 +418,11 @@
             "properties": {
                 "storageKeyType": {
                     "type": "string",
-                    "description": "The type of the storage key to use. Valid values are StorageAccessKey and SharedAccessKey."
+                    "description": "The type of the storage key to use. Valid values are StorageAccessKey and SharedAccessKey.",
+                    "enum": ["StorageAccessKey","SharedAccessKey"],
+                    "x-ms-enum":{
+                        "name": "StorageKeyType"
+                    }
                 },
                 "storageKey": {
                     "type": "string",
@@ -445,10 +442,14 @@
                 },
                 "authenticationType": {
                     "type": "string",
-                    "description": "The authentication type."
+                    "description": "The authentication type.",
+                    "enum": ["SQL","ADPassword"],
+                    "x-ms-enum":{
+                        "name": "AuthenticationType"
+                    }
                 }
             },
-            "required":["storageKeyType","storageKey","storageUri","administratorLogin","administratorLoginPassword","authenticationType"],
+            "required":["storageKeyType","storageKey","storageUri","administratorLogin","administratorLoginPassword"],
             "description": "Export database parameters."
         }
     },
