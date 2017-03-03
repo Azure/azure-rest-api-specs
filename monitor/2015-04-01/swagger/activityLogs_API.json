@@ -155,7 +155,7 @@
           "description": "the scope."
         }
       },
-      "description": "The RBAC properties of the event."
+      "description": "the authorization used by the user who has performed the operation that led to this event. This captures the RBAC properties of the event. These usually include the 'action', 'role' and the 'scope'"
     },
     "HttpRequestInfo": {
       "properties": {
@@ -182,8 +182,7 @@
       "required": [ "level", "eventTimestamp", "submissionTimestamp" ],
       "properties": {
         "authorization": {
-          "$ref": "#/definitions/SenderAuthorization",
-          "description": "the authorization used by the user who has performed the operation that led to this event. This captures the RBAC properties of the event. These usually include the 'action', 'role' and the 'scope'"
+          "$ref": "#/definitions/SenderAuthorization"
         },
         "claims": {
           "type": "object",
