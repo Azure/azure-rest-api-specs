@@ -153,7 +153,7 @@
               "$ref": "#/definitions/Namespace"
             }
           },
-          "201": {
+          "202": {
             "description": "Namespace create request accepted",
             "schema": {
               "$ref": "#/definitions/Namespace"
@@ -483,7 +483,7 @@
         "x-ms-examples": {
           "RelayNameSpaceAuthorizationRuleRegenrateKey": { "$ref": "../examples/NameSpaces/RelayNameSpaceAuthorizationRuleRegenrateKey.json" }
         },
-        "description": "Regenerats the Primary or Secondary ConnectionStrings to the namespace ",
+        "description": "Regenerates the Primary or Secondary ConnectionStrings to the namespace ",
         "parameters": [
           {
             "$ref": "#/parameters/resourceGroupNameParameter"
@@ -1769,6 +1769,9 @@
           "$ref": "#/definitions/SharedAccessAuthorizationRuleProperties"
         }
       },
+      "required": [
+        "properties"
+      ],
       "allOf": [
         {
           "$ref": "#/definitions/Resource"
