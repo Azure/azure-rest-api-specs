@@ -2478,6 +2478,231 @@
         }
       }
     },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Logic/integrationAccounts/{integrationAccountName}/sessions": {
+      "get": {
+        "tags": [
+          "IntegrationAccountSessions"
+        ],
+        "operationId": "Sessions_ListByIntegrationAccounts",
+        "x-ms-examples": { 
+          "SessionsListByIntegrationAccounts": { "$ref": "../examples/SessionsListByIntegrationAccounts.json" } 
+        },
+        "description": "Gets a list of integration account sessions.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/subscriptionId"
+          },
+          {
+            "name": "resourceGroupName",
+            "description": "The resource group name.",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "integrationAccountName",
+            "description": "The integration account name.",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "$ref": "#/parameters/api-version"
+          },
+          {
+            "name": "$top",
+            "description": "The number of items to be included in the result.",
+            "in": "query",
+            "required": false,
+            "type": "integer",
+            "format": "int32"
+          },
+          {
+            "name": "$filter",
+            "description": "The filter to apply on the operation.",
+            "in": "query",
+            "required": false,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/IntegrationAccountSessionListResult"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        },
+        "x-ms-odata": "#/definitions/IntegrationAccountSessionFilter"
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Logic/integrationAccounts/{integrationAccountName}/sessions/{sessionName}": {
+      "get": {
+        "tags": [
+          "IntegrationAccountSessions"
+        ],
+        "operationId": "Sessions_Get",
+        "x-ms-examples": { 
+          "SessionsGet": { "$ref": "../examples/SessionsGet.json" } 
+        },
+        "description": "Gets an integration account session.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/subscriptionId"
+          },
+          {
+            "name": "resourceGroupName",
+            "description": "The resource group name.",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "integrationAccountName",
+            "description": "The integration account name.",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "sessionName",
+            "description": "The integration account session name.",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "$ref": "#/parameters/api-version"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/IntegrationAccountSession"
+            }
+          },
+          "404": {
+            "description": "Session not found.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "IntegrationAccountSessions"
+        ],
+        "operationId": "Sessions_CreateOrUpdate",
+        "x-ms-examples": { 
+          "SessionsCreateOrUpdate": { "$ref": "../examples/SessionsCreateOrUpdate.json" } 
+        },
+        "description": "Creates or updates an integration account session.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/subscriptionId"
+          },
+          {
+            "name": "resourceGroupName",
+            "description": "The resource group name.",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "integrationAccountName",
+            "description": "The integration account name.",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "sessionName",
+            "description": "The integration account session name.",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "$ref": "#/parameters/api-version"
+          },
+          {
+            "name": "session",
+            "description": "The integration account session.",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/IntegrationAccountSession"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/IntegrationAccountSession"
+            }
+          },
+          "201": {
+            "description": "Created",
+            "schema": {
+              "$ref": "#/definitions/IntegrationAccountSession"
+            }
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "IntegrationAccountSessions"
+        ],
+        "operationId": "Sessions_Delete",
+        "x-ms-examples": { 
+          "SessionsDelete": { "$ref": "../examples/SessionsDelete.json" } 
+        },
+        "description": "Deletes an integration account session.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/subscriptionId"
+          },
+          {
+            "name": "resourceGroupName",
+            "description": "The resource group name.",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "integrationAccountName",
+            "description": "The integration account name.",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "sessionName",
+            "description": "The integration account session name.",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "$ref": "#/parameters/api-version"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "204": {
+            "description": "No Content"
+          }
+        }
+      }
+    },
     "/providers/Microsoft.Logic/operations": {
       "get": {
         "tags": [
@@ -2557,7 +2782,7 @@
     },
     "Object": {
       "type": "object",
-      "properties": {}
+      "properties": { }
     },
     "ResourceReference": {
       "type": "object",
@@ -6381,6 +6606,78 @@
       },
       "description": "The reference to the key vault key."
     },
+    "IntegrationAccountSessionFilter": {
+      "type": "object",
+      "required": [
+        "changedTime"
+      ],
+      "properties": {
+        "changedTime": {
+          "type": "string",
+          "format": "date-time",
+          "description": "The changed time of integration account sessions."
+        }
+      },
+      "description": "The integration account session filter."
+    },
+    "IntegrationAccountSessionListResult": {
+      "type": "object",
+      "properties": {
+        "value": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/IntegrationAccountSession"
+          },
+          "description": "The list of integration account sessions."
+        },
+        "nextLink": {
+          "type": "string",
+          "description": "The URL to get the next set of results."
+        }
+      },
+      "description": "The list of integration account sessions."
+    },
+    "IntegrationAccountSession": {
+      "type": "object",
+      "required": [
+        "properties"
+      ],
+      "properties": {
+        "properties": {
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/IntegrationAccountSessionProperties",
+          "description": "The integration account session properties."
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "#/definitions/Resource"
+        }
+      ],
+      "description": "The integration account session."
+    },
+    "IntegrationAccountSessionProperties": {
+      "type": "object",
+      "properties": {
+        "createdTime": {
+          "type": "string",
+          "format": "date-time",
+          "readOnly": true,
+          "description": "The created time."
+        },
+        "changedTime": {
+          "type": "string",
+          "format": "date-time",
+          "readOnly": true,
+          "description": "The changed time."
+        },
+        "content": {
+          "$ref": "#/definitions/Object",
+          "description": "The session content."
+        }
+      },
+      "description": "The integration account session properties."
+    },
     "Operation": {
       "description": "Logic REST API operation",
       "type": "object",
@@ -6425,7 +6722,17 @@
       }
     },
     "ErrorResponse": {
-      "description": "Error reponse indicates Logic service is not able to process the incoming request. The reason is provided in the error message.",
+       "description": "Error reponse indicates Logic service is not able to process the incoming request. The error property contains the error details.",
+      "type": "object",
+      "properties": {
+        "error": {
+          "$ref": "#/definitions/ErrorProperties",
+          "description": "The error properties."
+        }
+      }
+    },
+    "ErrorProperties": {
+      "description": "Error properties indicate why the Logic service was not able to process the incoming request. The reason is provided in the error message.",
       "type": "object",
       "properties": {
         "code": {
