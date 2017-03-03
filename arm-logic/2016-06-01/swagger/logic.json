@@ -2531,6 +2531,12 @@
             "schema": {
               "$ref": "#/definitions/IntegrationAccountSessionListResult"
             }
+          },
+          "default": {
+            "description": "Logic error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
           }
         },
         "x-ms-pageable": {
@@ -2585,8 +2591,8 @@
               "$ref": "#/definitions/IntegrationAccountSession"
             }
           },
-          "404": {
-            "description": "Session not found.",
+          "default": {
+            "description": "Logic error response describing why the operation failed.",
             "schema": {
               "$ref": "#/definitions/ErrorResponse"
             }
@@ -2652,6 +2658,12 @@
             "schema": {
               "$ref": "#/definitions/IntegrationAccountSession"
             }
+          },
+          "default": {
+            "description": "Logic error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
           }
         }
       },
@@ -2699,6 +2711,12 @@
           },
           "204": {
             "description": "No Content"
+          },
+          "default": {
+            "description": "Logic error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
           }
         }
       }
