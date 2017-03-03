@@ -74,7 +74,12 @@
 						"description": "The operationId cannot be found."
 					}
 				},
-				"deprecated": false
+				"deprecated": false,
+				"x-ms-examples": {
+					"PollGenerateRecommendationsStatus": {
+						"$ref": "../examples/PollGenerateRecommendationsStatus.json"
+					}
+				}
 			}
 		},
 		"/subscriptions/{subscriptionId}/providers/Microsoft.Advisor/recommendations": {
@@ -92,21 +97,21 @@
 					"name": "$filter",
 					"in": "query",
 					"description": "The filter to apply on listing recommendations",
-					"required": true,
+					"required": false,
 					"type": "string"
 				},
 				{
 					"name": "$top",
 					"in": "query",
 					"description": "The top used to listing recommendations.",
-					"required": true,
+					"required": false,
 					"type": "integer"
 				},
 				{
 					"name": "$skipToken",
 					"in": "query",
 					"description": "The skipToken used to list recommendations.",
-					"required": true,
+					"required": false,
 					"type": "string"
 				}],
 				"responses": {
@@ -196,11 +201,8 @@
 				},
 				"deprecated": false,
 				"x-ms-examples": {
-					"DeleteSuppressionSuccessfully": {
-						"$ref": "../examples/DeleteSuppression1.json"
-					},
-					"DeleteSuppressionNotFound": {
-						"$ref": "../examples/DeleteSuppression2.json"
+					"DeleteSuppression": {
+						"$ref": "../examples/DeleteSuppression.json"
 					}
 				}
 			}
