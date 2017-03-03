@@ -1,124 +1,111 @@
 {
 	"swagger": "2.0",
 	"info": {
-		"version": "v1",
-		"title": "Microsoft.Azure.Engineering.Gateway"
+		"version": "2016-07-12-preview",
+		"title": "AdvisorManagementClient",
+		"description": "REST APIs for Azure Advisor"
 	},
 	"host": "management.azure.com",
 	"schemes": ["https"],
+	"consumes": ["application/json"],
+	"produces": ["application/json"],
 	"paths": {
-		"/subscriptions/{subscriptionId}/providers/microsoft.Advisor/generaterecommendations": {
+		"/subscriptions/{subscriptionId}/providers/Microsoft.Advisor/generateRecommendations": {
 			"post": {
 				"tags": ["GenerateRecommendations"],
-				"operationId": "GenerateRecommendations_POST",
-				"consumes": [],
-				"produces": ["application/json",
-				"text/json"],
+				"description": "Initiates the recommendation generation/computation process for a subscription. This is an asynchronous operation. The generated recommendations are stored in a cache in the Advisor service.",
+				"operationId": "GenerateRecommendations_GenerateRecommendations",
 				"parameters": [{
-					"name": "subscriptionId",
-					"in": "path",
-					"required": true,
-					"type": "string",
-					"format": "uuid"
+					"$ref": "#/parameters/subscriptionIdParameter"
 				},
 				{
-					"name": "api-version",
-					"in": "query",
-					"required": true,
-					"type": "string"
+					"$ref": "#/parameters/apiVersionParameter"
 				}],
 				"responses": {
-					"200": {
-						"description": "OK",
-						"schema": {
-							"type": "object"
+					"202": {
+						"description": "Accepted",
+						"headers": {
+							"Location": {
+								"description": "The URL where the status of the long-running operation can be checked.",
+								"type": "string"
+							},
+							"Retry-After": {
+								"description": "The delay that the client should use when checking for the status of the operation. The value is in seconds.",
+								"type": "string"
+							}
 						}
 					}
 				},
-				"deprecated": false
+				"deprecated": false,
+				"x-ms-examples": {
+					"GenerateRecommendations": {
+						"$ref": "../examples/GenerateRecommendations.json"
+					}
+				}
 			}
 		},
-		"/subscriptions/{subscriptionId}/providers/microsoft.Advisor/generaterecommendations/{operationId}": {
+		"/subscriptions/{subscriptionId}/providers/Microsoft.Advisor/generateRecommendations/{operationId}": {
 			"get": {
 				"tags": ["GenerateRecommendations"],
-				"operationId": "GenerateRecommendations_GET",
-				"consumes": [],
-				"produces": ["application/json",
-				"text/json"],
+				"description": "Get generate recommendations status. As generate recommendation operation is an asynchronous operation. This is the method to get generate recommendation status.",
+				"operationId": "GenerateRecommendations_GetGenerateRecommendationsStatus",
 				"parameters": [{
-					"name": "subscriptionId",
-					"in": "path",
-					"required": true,
-					"type": "string",
-					"format": "uuid"
+					"$ref": "#/parameters/subscriptionIdParameter"
 				},
 				{
 					"name": "operationId",
 					"in": "path",
+					"description": "The operation Id.",
 					"required": true,
 					"type": "string",
 					"format": "uuid"
 				},
 				{
-					"name": "api-version",
-					"in": "query",
-					"required": true,
-					"type": "string"
+					"$ref": "#/parameters/apiVersionParameter"
 				}],
 				"responses": {
-					"200": {
-						"description": "OK",
-						"schema": {
-							"type": "object"
-						}
+					"202": {
+						"description": "Generate recommendation hasn't finished."
+					},
+					"204": {
+						"description": "Generate recommendation has finished."
+					},
+					"404": {
+						"description": "The operationId cannot be found."
 					}
 				},
 				"deprecated": false
 			}
 		},
-		"/subscriptions/{subscriptionId}/providers/microsoft.Advisor/recommendations": {
+		"/subscriptions/{subscriptionId}/providers/Microsoft.Advisor/recommendations": {
 			"get": {
 				"tags": ["GetRecommendations"],
-				"operationId": "GetRecommendations_GetRecomendation",
-				"consumes": [],
-				"produces": ["application/json",
-				"text/json"],
+				"description": "Obtains cached recommendations for a subscription. The recommendations are generated/computed by invoking generateRecommendations.",
+				"operationId": "GetRecommendations_ListRecommendations",
 				"parameters": [{
-					"name": "subscriptionId",
-					"in": "path",
-					"required": true,
-					"type": "string",
-					"format": "uuid"
+					"$ref": "#/parameters/subscriptionIdParameter"
 				},
 				{
-					"name": "recomendationId",
+					"$ref": "#/parameters/apiVersionParameter"
+				},
+				{
+					"name": "$filter",
 					"in": "query",
+					"description": "The filter to apply on listing recommendations",
 					"required": true,
-					"type": "string",
-					"format": "uuid"
-				}],
-				"responses": {
-					"200": {
-						"description": "OK",
-						"schema": {
-							"$ref": "#/definitions/ResourceRecommendationDetail"
-						}
-					}
+					"type": "string"
 				},
-				"deprecated": false
-			}
-		},
-		"/{recomendationId}": {
-			"get": {
-				"tags": ["GetRecommendations"],
-				"operationId": "GetRecommendations_GetRecomendation",
-				"consumes": [],
-				"produces": ["application/json",
-				"text/json"],
-				"parameters": [
 				{
-					"name": "recomendationId",
-					"in": "path",
+					"name": "$top",
+					"in": "query",
+					"description": "The top used to listing recommendations.",
+					"required": true,
+					"type": "integer"
+				},
+				{
+					"name": "$skipToken",
+					"in": "query",
+					"description": "The skipToken used to list recommendations.",
 					"required": true,
 					"type": "string"
 				}],
@@ -126,336 +113,381 @@
 					"200": {
 						"description": "OK",
 						"schema": {
-							"$ref": "#/definitions/ResourceRecommendationDetail"
+							"$ref": "#/definitions/CollectionResponse[ResourceRecommendationBase20160506]"
 						}
 					}
 				},
-				"deprecated": false
-			}
-		},
-		"/providers/microsoft.Advisor/operations": {
-			"get": {
-				"tags": ["OperationDiscovery"],
-				"operationId": "OperationDiscovery_GetOperationsForDiscovery",
-				"consumes": [],
-				"produces": ["application/json",
-				"text/json"],
-				"responses": {
-					"200": {
-						"description": "OK",
-						"schema": {
-							"$ref": "#/definitions/CollectionResponse[OperationEntity]"
-						}
-					}
+				"deprecated": false,
+				"x-ms-pageable": {
+					"nextLinkName": "nextLink"
 				},
-				"deprecated": false
+				"x-ms-examples": {
+					"istRecommendations": {
+						"$ref": "../examples/ListRecommendations.json"
+					}
+				}
 			}
 		},
-		"/{recomendationId}/suppressions/{name}": {
+		"/{recommendationId}/suppressions/{name}": {
 			"put": {
 				"tags": ["Suppression"],
-				"operationId": "Suppression_Suppressions",
-				"consumes": [],
-				"produces": ["application/json",
-				"text/json"],
+				"description": "Provides the ability to snooze a recommendation. The snooze attribute of a recommendation is referred to as a suppression. Use this API to create or update the snooze status of a recommendation.",
+				"operationId": "Suppression_Create",
 				"parameters": [{
-					"name": "subscriptionId",
+					"name": "recommendationId",
 					"in": "path",
-					"required": true,
-					"type": "string",
-					"format": "uuid"
-				},
-				{
-					"name": "recomendationId",
-					"in": "path",
-					"required": true,
-					"type": "string"
-				},
-				{
-					"name": "api-version",
-					"in": "query",
+					"description": "The recommendation Id",
 					"required": true,
 					"type": "string"
 				},
 				{
 					"name": "name",
 					"in": "path",
+					"description": "The suppression name.",
 					"required": true,
 					"type": "string"
+				},
+				{
+					"$ref": "#/parameters/apiVersionParameter"
 				}],
 				"responses": {
 					"200": {
 						"description": "OK",
 						"schema": {
-							"type": "object"
+							"$ref": "#/definitions/Suppression"
 						}
 					}
 				},
-				"deprecated": false
+				"deprecated": false,
+				"x-ms-examples": {
+					"CreateSuppression": {
+						"$ref": "../examples/CreateSuppression.json"
+					}
+				}
 			},
 			"delete": {
 				"tags": ["Suppression"],
+				"description": "Provides the ability to dismiss a recommendation. The dismiss attribute of a recommendation is referred to as a suppression. Use this API to create or update the dismiss status of a recommendation.",
 				"operationId": "Suppression_Delete",
-				"consumes": [],
-				"produces": ["application/json",
-				"text/json"],
 				"parameters": [{
-					"name": "recomendationId",
+					"name": "recommendationId",
 					"in": "path",
+					"description": "The recommendation Id",
 					"required": true,
 					"type": "string"
 				},
 				{
 					"name": "name",
 					"in": "path",
+					"description": "The suppression name.",
 					"required": true,
 					"type": "string"
 				},
 				{
-					"name": "api-version",
-					"in": "query",
-					"required": true,
-					"type": "string"
+					"$ref": "#/parameters/apiVersionParameter"
 				}],
 				"responses": {
-					"200": {
-						"description": "OK",
-						"schema": {
-							"type": "object"
-						}
+					"204": {
+						"description": "Delete suppression is done."
+					},
+					"404": {
+						"description": "The suppresion cannot be found."
 					}
 				},
-				"deprecated": false
+				"deprecated": false,
+				"x-ms-examples": {
+					"DeleteSuppression": {
+						"$ref": "../examples/DeleteSuppression.json"
+					}
+				}
 			}
 		},
-		"/subscriptions/{subscriptionId}/providers/microsoft.Advisor/suppressions": {
+		"/{recommendationId}": {
 			"get": {
-				"tags": ["Suppression"],
-				"operationId": "Suppression_GET",
-				"consumes": [],
-				"produces": ["application/json",
-				"text/json"],
+				"tags": ["GetRecommendations"],
+				"description": "Obtains details of a cached recommendation.",
+				"operationId": "GetRecommendations_GetRecommendationDetail",
 				"parameters": [{
-					"name": "subscriptionId",
+					"name": "recommendationId",
 					"in": "path",
-					"required": true,
-					"type": "string",
-					"format": "uuid"
-				},
-				{
-					"name": "api-version",
-					"in": "query",
+					"description": "The recommendation Id",
 					"required": true,
 					"type": "string"
+				},
+				{
+					"$ref": "#/parameters/apiVersionParameter"
 				}],
 				"responses": {
 					"200": {
 						"description": "OK",
 						"schema": {
-							"type": "object"
+							"$ref": "#/definitions/ResourceRecommendationBase20160506"
 						}
 					}
 				},
-				"deprecated": false
+				"deprecated": false,
+				"x-ms-examples": {
+					"GetRecommendationDetail": {
+						"$ref": "../examples/GetRecommendationDetail.json"
+					}
+				}
+			}
+		},
+		"/subscriptions/{subscriptionId}/providers/Microsoft.Advisor/suppressions": {
+			"get": {
+				"tags": ["Suppression"],
+				"summary": "",
+				"description": "Retrieves the list of snoozed/dismissed recommendations for a subscription. The snooze/dismiss attribute of a recommendation is referred to as a suppression.",
+				"operationId": "Suppression_ListSuppressions",
+				"parameters": [{
+					"$ref": "#/parameters/subscriptionIdParameter"
+				},
+				{
+					"$ref": "#/parameters/apiVersionParameter"
+				}],
+				"responses": {
+					"200": {
+						"description": "OK",
+						"schema": {
+							"type": "array",
+							"items": {
+								"$ref": "#/definitions/Suppression"
+							}
+						}
+					}
+				},
+				"deprecated": false,
+				"x-ms-examples": {
+					"ListSuppressions": {
+						"$ref": "../examples/ListSuppressions.json"
+					}
+				}
 			}
 		}
 	},
 	"definitions": {
-		"ResourceRecommendationDetail": {
+		"CollectionResponse[ResourceRecommendationBase20160506]": {
+			"description": "Recommendation Collection",
 			"type": "object",
 			"properties": {
-				"actions": {
+				"nextLink": {
+					"description": "The next link used to get next page of recommendations",
+					"type": "string"
+				},
+				"value": {
+					"description": "The recommendation List",
 					"type": "array",
 					"items": {
-						"$ref": "#/definitions/ResourceRecomendationAction"
+						"$ref": "#/definitions/ResourceRecommendationBase20160506"
+					}
+				}
+			}
+		},
+		"ResourceRecommendationBase20160506": {
+			"description": "Advisor Recommendation",
+			"type": "object",
+			"properties": {
+				"id": {
+					"description": "The recommendation Id.",
+					"type": "string"
+				},
+				"name": {
+					"description": "The recommendation name.",
+					"type": "string"
+				},
+				"properties": {
+					"$ref": "#/definitions/RecommendationProperties20160506",
+					"description": "The recommendation properties."
+				},
+				"suppressionIds": {
+					"description": "The suppression Lists.",
+					"type": "array",
+					"items": {
+						"format": "uuid",
+						"type": "string"
 					}
 				},
-				"description": {
+				"type": {
+					"description": "The recommendation Type.",
 					"type": "string"
 				},
-				"label": {
-					"type": "string"
-				},
-				"learnMoreLink": {
-					"type": "string"
-				},
+				"hardwareDetails": {
+					"$ref": "#/definitions/ResourceHardwareDetails",
+					"description": "The hardware details used to get potential cost."
+				}
+			}
+		},
+		"RecommendationProperties20160506": {
+			"description": "The recommendation properties",
+			"type": "object",
+			"properties": {
 				"category": {
+					"description": "The recommendation category.",
 					"enum": ["HighAvailability",
 					"Security",
 					"Performance",
 					"Cost"],
-					"type": "string"
-				},
-				"id": {
-					"type": "string"
+					"type": "string",
+					"x-ms-enum": {
+						"name": "category",
+						"modelAsString": true
+					}
 				},
 				"impact": {
+					"description": "The recommendation impact.",
 					"enum": ["High",
 					"Medium",
 					"Low"],
+					"type": "string",
+					"x-ms-enum": {
+						"name": "impact",
+						"modelAsString": true
+					}
+				},
+				"impactedField": {
+					"description": "The recommendation impacted field.",
 					"type": "string"
 				},
-				"impactedName": {
-					"type": "string"
-				},
-				"impactedType": {
+				"impactedValue": {
+					"description": "The recommendation impacted value.",
 					"type": "string"
 				},
 				"lastUpdated": {
 					"format": "date-time",
-					"type": "string"
-				},
-				"shortDescription": {
-					"$ref": "#/definitions/ShortDescription"
-				},
-				"subscriptionId": {
-					"format": "uuid",
-					"type": "string"
-				}
-			}
-		},
-		"ResourceRecomendationAction": {
-			"type": "object",
-			"properties": {
-				"actionType": {
-					"enum": ["Blade",
-					"Document",
-					"PowerShell",
-					"CLI"],
-					"type": "string"
-				},
-				"caption": {
-					"type": "string"
-				},
-				"description": {
+					"description": "The recommendation last updated time.",
 					"type": "string"
 				},
 				"metadata": {
+					"description": "The recommendation meta data.",
 					"type": "object",
 					"additionalProperties": {
 						"type": "object"
 					}
+				},
+				"recommendationTypeId": {
+					"description": "The recommendation Type Id.",
+					"type": "string"
+				},
+				"risk": {
+					"description": "The recommendation risk level.",
+					"enum": ["Error",
+					"Warning",
+					"None"],
+					"type": "string",
+					"x-ms-enum": {
+						"name": "risk",
+						"modelAsString": true
+					}
+				},
+				"shortDescription": {
+					"$ref": "#/definitions/ShortDescription",
+					"description": "The recommendation short description."
+				}
+			}
+		},
+		"ResourceHardwareDetails": {
+			"description": "The hardware details used to get potential cost.",
+			"type": "object",
+			"properties": {
+				"resourceId": {
+					"description": "The resource Id.",
+					"type": "string"
+				},
+				"size": {
+					"description": "The size.",
+					"type": "string"
 				}
 			}
 		},
 		"ShortDescription": {
+			"description": "The short description of recommendation.",
 			"type": "object",
 			"properties": {
 				"problem": {
+					"description": "The problem of recommendation.",
 					"type": "string"
 				},
 				"solution": {
+					"description": "The solution of the recommendation.",
 					"type": "string"
 				}
 			}
 		},
-		"CollectionResponse[OperationEntity]": {
+		"SuppressionContract": {
+			"description": "The suppression contract used for creating/updating suppression",
 			"type": "object",
 			"properties": {
-				"nextLink": {
+				"id": {
+					"description": "The recommmendation id.",
 					"type": "string"
 				},
-				"value": {
-					"type": "array",
-					"items": {
-						"$ref": "#/definitions/OperationEntity"
-					}
-				}
-			}
-		},
-		"OperationEntity": {
-			"type": "object",
-			"properties": {
+				"suppressionId": {
+					"description": "The suppression id.",
+					"type": "string"
+				},
 				"name": {
+					"description": "The suppression name.",
 					"type": "string"
 				},
-				"display": {
-					"$ref": "#/definitions/OperationDisplayInfo"
-				}
-			}
-		},
-		"OperationDisplayInfo": {
-			"type": "object",
-			"properties": {
-				"description": {
+				"type": {
+					"description": "The suppresion type.",
 					"type": "string"
 				},
-				"operation": {
-					"type": "string"
-				},
-				"provider": {
-					"type": "string"
-				},
-				"resource": {
+				"ttl": {
+					"description": "The suppression ttl.",
 					"type": "string"
 				}
 			}
 		},
-		"SubscriptionNotificationDefinition": {
+		"Suppression": {
+			"description": "The suppression.",
 			"type": "object",
 			"properties": {
-				"properties": {
-					"$ref": "#/definitions/SubscriptionNotificationPropertiesDefinition"
-				},
-				"registrationDate": {
+				"subscriptionId": {
+					"format": "uuid",
+					"description": "The subcription id.",
 					"type": "string"
 				},
-				"state": {
-					"enum": ["NotDefined",
-					"Registered",
-					"Unregistered",
-					"Warned",
-					"Suspended",
-					"Deleted"],
+				"suppressionId": {
+					"description": "The suppression GUID.",
+					"type": "string"
+				},
+				"ttl": {
+					"format": "int32",
+					"description": "The suppression ttl.",
+					"type": "integer"
+				},
+				"expirationTimeStamp": {
+					"format": "date-time",
+					"description": "The suppression expiration timestamp.",
+					"type": "string"
+				},
+				"stableId": {
+					"description": "The suppression stableId.",
+					"type": "string"
+				},
+				"id": {
+					"format": "uuid",
+					"description": "The full path of suppression id.",
 					"type": "string"
 				}
 			}
+		}
+	},
+	"parameters": {
+		"subscriptionIdParameter": {
+			"name": "subscriptionId",
+			"in": "path",
+			"description": "Azure Subscription ID.",
+			"required": true,
+			"type": "string"
 		},
-		"SubscriptionNotificationPropertiesDefinition": {
-			"type": "object",
-			"properties": {
-				"accountOwner": {
-					"$ref": "#/definitions/SubscriptionAccountOwner"
-				},
-				"locationPlacementId": {
-					"type": "string"
-				},
-				"quotaId": {
-					"type": "string"
-				},
-				"registeredFeatures": {
-					"type": "array",
-					"items": {
-						"$ref": "#/definitions/FeatureDefinition"
-					}
-				},
-				"tenantId": {
-					"type": "string"
-				}
-			}
-		},
-		"SubscriptionAccountOwner": {
-			"type": "object",
-			"properties": {
-				"puid": {
-					"type": "string"
-				}
-			}
-		},
-		"FeatureDefinition": {
-			"type": "object",
-			"properties": {
-				"name": {
-					"type": "string"
-				},
-				"state": {
-					"enum": ["NotSpecified",
-					"NotRegistered",
-					"Pending",
-					"Registered"],
-					"type": "string"
-				}
-			}
+		"apiVersionParameter": {
+			"name": "api-version",
+			"in": "query",
+			"description": "Version of the API to be used with the client request.",
+			"required": true,
+			"type": "string"
 		}
 	}
 }
