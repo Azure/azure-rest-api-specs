@@ -10,26 +10,27 @@
   ],
   "consumes": [
     "application/json",
-    "application/octet-stream"
+    "text/json"
   ],
   "produces": [
     "application/json",
-    "application/octet-stream"
+    "text/json"
   ],
   "paths": {
-	"/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Automation/automationAccounts/{name}": {
+	"/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Automation/automationAccounts/{automationAccountName}": {
       "patch": {
         "tags": [
           "AutomationAccounts"
         ],
         "operationId": "AutomationAccounts_Patch",
+        "operationId": "AutomationAccounts_Update",
         "description": "Patch an automation account.",
         "externalDocs": {
           "url": "http://aka.ms/azureautomationsdk/automationaccountoperations"
         },
         "parameters": [
           {
-            "name": "name",
+            "name": "automationAccountName",
             "in": "path",
             "required": true,
             "type": "string",
@@ -40,7 +41,7 @@
             "in": "body",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/AutomationAccountPatchParameters"
+              "$ref": "#/definitions/AutomationAccountUpdateParameters"
             },
             "description": "Parameters supplied to the patch automation account."
           },
@@ -74,7 +75,7 @@
         },
         "parameters": [
           {
-            "name": "name",
+            "name": "automationAccountName",
             "in": "path",
             "required": true,
             "type": "string",
@@ -113,9 +114,7 @@
             }
           }
         }
-      }
-    },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Automation/automationAccounts/{automationAccountName}": {
+      },
       "delete": {
         "tags": [
           "AutomationAccounts"
@@ -146,11 +145,12 @@
         "responses": {
           "200": {
             "description": "OK"
+          },
+	     "204": { 
+		 "description": "No Content" 
           }
         }
-      }
-    },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Automation/automationAccounts/{automationAccount}": {
+      },
       "get": {
         "tags": [
           "AutomationAccounts"
@@ -162,7 +162,7 @@
         },
         "parameters": [
           {
-            "name": "automationAccount",
+            "name": "automationAccountName",
             "in": "path",
             "required": true,
             "type": "string",
@@ -187,7 +187,7 @@
           }
         }
       }
-    },
+     }, 
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Automation/automationAccounts": {
       "get": {
         "tags": [
@@ -198,7 +198,7 @@
         "externalDocs": {
           "url": "http://aka.ms/azureautomationsdk/automationaccountoperations"
         },
-        "parameters": [
+        "parameters": [		 
           {
             "$ref": "#/parameters/ResourceGroupNameParameter"
           },
@@ -218,7 +218,72 @@
           }
         },
         "x-ms-pageable": {
-          "nextLinkName": "odata.nextLink"
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+	"/providers/Microsoft.Automation/operations": {
+      "get": {
+        "tags": [
+          "Operations"
+        ],
+        "summary": "Lists all of the available Automation REST API operations.",
+        "operationId": "Operations_List",
+        "parameters": [
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/OperationListResult"
+            }
+          },
+          "default": {
+            "description": "Automation error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": null
+        }
+      }
+    },
+	"/subscriptions/{subscriptionId}/providers/Microsoft.Automation/automationAccounts": {
+      "get": {
+        "tags": [
+          "AutomationAccounts"
+        ],
+        "summary": "Lists the Automation Accounts within an Azure subscitption.",
+        "operationId": "AutomationAccounts_ListBySubscriptionId",
+        "parameters": [
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/AutomationAccountListResult"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": null
         }
       }
     }
@@ -250,7 +315,7 @@
       },
       "description": "The account sku."
     },
-	"AutomationAccountPatchProperties": {
+	"AutomationAccountUpdateProperties": {
       "properties": {
         "sku": {
           "$ref": "#/definitions/Sku",
@@ -259,10 +324,10 @@
       },
       "description": "The parameters supplied to the patch account properties."
     },
-    "AutomationAccountPatchParameters": {
+    "AutomationAccountUpdateParameters": {
       "properties": {
         "properties": {
-          "$ref": "#/definitions/AutomationAccountPatchProperties",
+          "$ref": "#/definitions/AutomationAccountUpdateProperties",
           "x-ms-client-flatten": true,
           "description": "Gets or sets account update properties."
         },
@@ -389,10 +454,6 @@
           },
           "description": "Gets or sets list of accounts."
         },
-        "odata.nextLink": {
-          "type": "string",
-          "description": "Gets or sets the skip token."
-        },
         "nextLink": {
           "type": "string",
           "description": "Gets or sets the next link."
@@ -434,6 +495,56 @@
       ],
       "description": "The Resource definition.",
       "x-ms-azure-resource": true
+    },
+	"OperationListResult": {
+      "properties": {
+        "value": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Operation"
+          },
+          "description": "List of Automation operations supported by the Automation resource provider."
+        }
+      }
+    },
+	"Operation": {
+      "description": "Automation REST API operation",
+      "type": "object",
+      "properties": {
+        "name": {
+          "description": "Operation name: {provider}/{resource}/{operation}",
+          "type": "string"
+        },
+        "display": {
+          "properties": {
+            "provider": {
+              "description": "Service provider: Microsoft.Automation",
+              "type": "string"
+            },
+            "resource": {
+              "description": "Resource on which the operation is performed: Runbooks, Jobs etc.",
+              "type": "string"
+            },
+            "operation": {
+              "description": "Operation type: Read, write, delete, etc.",
+              "type": "string"
+            }
+          }
+        }
+      }
+    },
+	"ErrorResponse": {
+      "type": "object",
+      "properties": {
+        "code": {
+          "description": "Error code",
+          "type": "string"
+        },
+        "message": {
+          "description": "Error message indicating why the operation failed.",
+          "type": "string"
+        }
+      }
     }
   },
   "parameters": {
@@ -456,6 +567,7 @@
       "in": "path",
       "required": true,
       "type": "string",
+	  "pattern": "^[-\\w\\._]+$",
       "description": "The resource group name.",
       "x-ms-parameter-location": "method"
     }
