@@ -36,10 +36,14 @@
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ServiceFabric/clusters/{clusterName}": {
       "patch": {
         "tags": [
-          "ClusterpatchOperation"
+          "ClusterPatchOperation"
         ],
+        "x-ms-long-running-operation": true,
         "operationId": "Clusters_Update",
         "description": "Update cluster config",
+        "x-ms-examples": {
+          "Patch a cluster": { "$ref": "../examples/ClusterPatchOperation_exmaple.json" }
+        },
         "produces": [
           "application/json"
         ],
@@ -65,7 +69,7 @@
             "$ref": "#/parameters/api-version"
           },
           {
-            "name": "PatchRequest",
+            "name": "ClusterUpdateParameters",
             "in": "body",
             "required": true,
             "schema": {
@@ -81,6 +85,9 @@
           "200": {
             "description": "OK"
           },
+          "202": {
+            "description": "Accept"
+          },
           "default": {
             "description": "Error",
             "schema": {
@@ -95,6 +102,9 @@
         ],
         "operationId": "Clusters_Get",
         "description": "Get cluster resource",
+        "x-ms-examples": {
+          "Get a cluster": { "$ref": "../examples/ClusterGetOperation_example.json" }
+        },
         "produces": [
           "application/json"
         ],
@@ -140,7 +150,11 @@
           "ClusterCreateOperation"
         ],
         "operationId": "Clusters_Create",
+        "x-ms-long-running-operation": true,
         "description": "Create cluster resource",
+         "x-ms-examples": {
+          "Put a cluster": { "$ref": "../examples/ClusterPutOperation_exmaple.json" }
+        },
         "produces": [
           "application/json"
         ],
@@ -166,7 +180,7 @@
             "$ref": "#/parameters/api-version"
           },
           {
-            "name": "PutRequest",
+            "name": "ClusterUpdateParameters",
             "in": "body",
             "required": true,
             "schema": {
@@ -185,6 +199,9 @@
               "$ref": "#/definitions/Cluster"
             }
           },
+          "202": {
+            "description": "Accept"
+          },
           "default": {
             "description": "Error",
             "schema": {
@@ -199,6 +216,9 @@
         ],
         "operationId": "Clusters_Delete",
         "description": "Delete cluster resource",
+         "x-ms-examples": {
+          "Delete a cluster": { "$ref": "../examples/ClusterDeleteOperation_example.json" }
+        },
         "parameters": [
           {
             "name": "resourceGroupName",
@@ -225,6 +245,9 @@
           "200": {
             "description": "OK"
           },
+          "204": {
+            "description": "NoContent"
+          },
           "default": {
             "description": "Error",
             "schema": {
@@ -241,6 +264,9 @@
         ],
         "operationId": "Clusters_ListByResourceGroup",
         "description": "List cluster resource by resource group",
+        "x-ms-examples": {
+          "List cluster by resource group": { "$ref": "../examples/ClusterListByResourceGroupOperation_exmaple.json" }
+        },
         "produces": [
           "application/json"
         ],
@@ -279,6 +305,9 @@
         ],
         "operationId": "Clusters_List",
         "description": "List cluster resource",
+        "x-ms-examples": {
+          "List clusters": { "$ref": "../examples/ClusterListOperation_example.json" }
+        },
         "produces": [
           "application/json"
         ],
@@ -789,7 +818,7 @@
       ]
     },
     "ClusterListResult": {
-      "description": "Cluster list result",
+      "description": "Cluster list results",
       "properties": {
         "value": {
           "type": "array",
