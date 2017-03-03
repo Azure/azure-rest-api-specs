@@ -29,18 +29,16 @@ matrix:
 before_install:
   - docker pull lmazuel/swagger-to-sdk
   - python -c "import os; print('\n'.join(v for v in os.environ.keys() if v.startswith('TRAVIS')))" > /tmp/env_file
-  # Install mono and nuget to use latest Nightly of AutoRest.exe
-  - sudo apt-key adv --keyserver hkp://keyserver.ubuntu.com:80 --recv-keys 3FA7E0328081BFF6A14DA29AA6A19B38D3D831EF
-  - echo "deb http://download.mono-project.com/repo/debian wheezy main" | sudo tee /etc/apt/sources.list.d/mono-xamarin.list
+  # Install dotnet coreclr sdk for running autorest
+  - sudo sh -c 'echo "deb [arch=amd64] https://apt-mo.trafficmanager.net/repos/dotnet-release/ trusty main" > /etc/apt/sources.list.d/dotnetdev.list' 
+  - sudo apt-key adv --keyserver hkp://keyserver.ubuntu.com:80 --recv-keys 417A0893
   - sudo apt-get update
-  - sudo apt-get -q -y install mono-complete
-  - wget -q 'http://mxr.mozilla.org/seamonkey/source/security/nss/lib/ckfw/builtins/certdata.txt?raw=1' -O "/tmp/certdata.txt" 
-  - mozroots --import --ask-remove --file /tmp/certdata.txt
-  - sudo apt-get -q -y install nuget
-  # Installing AutoRest Nightly version from myget feed
-  - nuget install AutoRest -Source https://www.myget.org/F/autorest/ -pre -OutputDirectory .
+  - sudo apt-get install dotnet-dev-1.0.0-preview2.1-003177
 install:
   - npm install
+  - npm install -g autorest
+  - autorest --help
+  - autorest --version=latest
 script:
   - DOCKER_CMD="docker run --rm --env-file /tmp/env_file -e GH_TOKEN -v $PWD:/git-restapi/ lmazuel/swagger-to-sdk"
   - if [[ $MODE == 'python' ]]; then $DOCKER_CMD AutorestCI/azure-sdk-for-python --pr-repo-id Azure/azure-sdk-for-python -o master -v; fi

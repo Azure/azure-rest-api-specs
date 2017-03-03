@@ -7,7 +7,6 @@ var _ = require('lodash'),
   utils = require('./util/utils');
 
 describe('AutoRest Linter validation:', function () {
-  var autoRestLocation = './AutoRest.*/tools/AutoRest.exe';
   let swaggersToProcess = utils.getFilesChangedInPR();
   // Useful when debugging a test for a particular swagger. 
   // Just update the regex. That will return an array of filtered items.
@@ -16,7 +15,7 @@ describe('AutoRest Linter validation:', function () {
   // });
   _(swaggersToProcess).each(function (swagger) {
     it(swagger + ' should honor linter validation rules.', function (done) {
-      var cmd = utils.clrCmd(autoRestLocation + ' -CodeGenerator None -I ' + swagger);
+      var cmd = 'autorest -CodeGenerator None -I ' + swagger + ' -JsonValidationMessages true';
       console.log(`Executing: ${cmd}`);
       let result;
       try {
