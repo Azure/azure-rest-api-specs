@@ -2,7 +2,7 @@
   "swagger": "2.0",
   "info": {
     "title": "ApplicationInsights.Client.Component",
-    "description": "Azure Application Insights client for Components",
+    "description": "Azure Application Insights client for Components.",
     "version": "2015-05-01"
   },
   "host": "management.azure.com",
@@ -27,7 +27,7 @@
       "type": "oauth2",
       "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
       "flow": "implicit",
-      "description": "Azure Active Directory OAuth2 Flow",
+      "description": "Azure Active Directory OAuth2 Flow.",
       "scopes": {
         "user_impersonation": "impersonate your user account"
       }
@@ -36,7 +36,7 @@
   "paths": {
     "/subscriptions/{subscriptionId}/providers/microsoft.insights/components": {
       "get": {
-        "description": "Gets a list of all Application Insights component instances in a subscription.",
+        "description": "Gets a list of all Application Insights components within a subscription.",
         "operationId": "Component_List",
         "parameters": [
           {
@@ -48,7 +48,7 @@
         ],
         "responses": {
           "200": {
-            "description": "A list containing 0 or more Application Insights component definitions",
+            "description": "A list containing 0 or more Application Insights component definitions.",
             "schema": {
               "$ref": "#/definitions/ApplicationInsightsComponentListResult"
             },
@@ -61,12 +61,12 @@
                     "type": "microsoft.insights/components",
                     "location": "South Central US",
                     "tags": "",
-                    "kind": "android",
+                    "kind": "web",
                     "etag": "\"0000069e-0000-0000-0000-123456789abc\"",
                     "properties": {
                       "ApplicationId": "my-component",
                       "AppId": "16526d1a-dfba-4362-a9e9-123456789abc",
-                      "Application_Type": "android",
+                      "Application_Type": "web",
                       "Flow_Type": "Redfield",
                       "Request_Source": "VisualStudio",
                       "InstrumentationKey": "dc5931c7-a7ad-4ad0-89d6-123456789abc",
@@ -109,6 +109,9 @@
                 "nextLink": null
               }
             }
+          },
+          "404": {
+            "description": "The Azure subscription ID specified cannot be found or the api-version specified is incorrect."
           }
         },
         "x-ms-pageable": {
@@ -133,7 +136,7 @@
         ],
         "responses": {
           "200": {
-            "description": "A list containing 0 or more Application Insights component definitions",
+            "description": "A list containing 0 or more Application Insights component definitions.",
             "schema": {
               "$ref": "#/definitions/ApplicationInsightsComponentListResult"
             },
@@ -146,12 +149,12 @@
                     "type": "microsoft.insights/components",
                     "location": "South Central US",
                     "tags": "",
-                    "kind": "android",
+                    "kind": "web",
                     "etag": "\"0000069e-0000-0000-0000-123456789abc\"",
                     "properties": {
                       "ApplicationId": "my-component",
                       "AppId": "16526d1a-dfba-4362-a9e9-123456789abc",
-                      "Application_Type": "android",
+                      "Application_Type": "web",
                       "Flow_Type": "Redfield",
                       "Request_Source": "VisualStudio",
                       "InstrumentationKey": "dc5931c7-a7ad-4ad0-89d6-123456789abc",
@@ -194,6 +197,9 @@
                 "nextLink": null
               }
             }
+          },
+          "404": {
+            "description": "The Azure subscription ID specified cannot be found, the resource group name doesn't exist within this subscription, or the api-version specified is incorrect."
           }
         },
         "x-ms-pageable": {
@@ -203,7 +209,7 @@
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.insights/components/{resourceName}": {
       "delete": {
-        "description": "Deletes an Application Insights component instance",
+        "description": "Deletes an Application Insights component.",
         "operationId": "Component_Delete",
         "parameters": [
           {
@@ -221,15 +227,15 @@
         ],
         "responses": {
           "200": {
-            "description": "Successful request when deleting an Application Insights instance"
+            "description": "Successful request when deleting an Application Insights component."
           },
           "204": {
-            "description": "No content: the request was successful, but the response is empty (the request to delete failed because the specified component does not exist)."
+            "description": "The specified component does not exist."
           }
         }
       },
       "get": {
-        "description": "Returns an Application Insights instance",
+        "description": "Returns an Application Insights component.",
         "operationId": "Component_Get",
         "parameters": [
           {
@@ -247,7 +253,7 @@
         ],
         "responses": {
           "200": {
-            "description": "An Application Insights Component definition",
+            "description": "An Application Insights Component definition.",
             "schema": {
               "$ref": "#/definitions/ApplicationInsightsComponent"
             },
@@ -278,11 +284,14 @@
                 }
               }
             }
+          },
+          "404": {
+            "description": "The Application Insights component specified could not be found."
           }
         }
       },
       "put": {
-        "description": "Creates (or updates) an Application Insights component. Note: You cannot specify a different value for InstrumentationKey nor AppId in the Put operation",
+        "description": "Creates (or updates) an Application Insights component. Note: You cannot specify a different value for InstrumentationKey nor AppId in the Put operation.",
         "operationId": "Component_CreateOrUpdate",
         "parameters": [
           {
@@ -299,7 +308,7 @@
           },
           {
             "name": "InsightProperties",
-            "description": "Properties that need to be specified to create an applicationInsights Instance",
+            "description": "Properties that need to be specified to create an Application Insights component.",
             "in": "body",
             "required": true,
             "schema": {
@@ -309,7 +318,7 @@
         ],
         "responses": {
           "200": {
-            "description": "Successful request when creating or updating an Application Insights component. The updated component instance is returned.",
+            "description": "Successful request when creating or updating an Application Insights component. The updated component is returned.",
             "schema": {
               "$ref": "#/definitions/ApplicationInsightsComponent"
             },
@@ -358,7 +367,7 @@
         },
         "name": {
           "type": "string",
-          "description": "Azure resource name",
+          "description": "Azure resource name.",
           "externalDocs": {
             "url": "https://aka.ms/search-naming-rules"
           }
@@ -366,7 +375,7 @@
         "type": {
           "type": "string",
           "readOnly": true,
-          "description": "Azure resource type"
+          "description": "Azure resource type."
         },
         "location": {
           "type": "string",
@@ -396,7 +405,7 @@
       "properties": {
         "kind": {
           "type": "string",
-          "description": "The kind of application that this component refers to, used to identify icons and such to display in the Azure portal UX. Freeform string, but values should typically be one of the following: web, ios, android, other, store, java, phone"
+          "description": "The kind of application that this component refers to, used to customize UI. This value is a freeform string, values should typically be one of the following: web, ios, other, store, java, phone."
         },
         "properties": {
           "x-ms-client-flatten": true,
@@ -414,7 +423,7 @@
       "description": "An Application Insights component definition."
     },
     "ApplicationInsightsComponentProperties": {
-      "description": "Properties that define an Application Insights component resource",
+      "description": "Properties that define an Application Insights component resource.",
       "properties": {
         "ApplicationId": {
           "type": "string",
@@ -427,7 +436,7 @@
         },
         "Application_Type": {
           "type": "string",
-          "description": "Type of application being monitored. Example values: Web, android, other. Cannot be changed after the component has been created."
+          "description": "Type of application being monitored. Example values: Web, other. Cannot be changed after the component has been created."
         },
         "Flow_Type": {
           "type": "string",
@@ -435,7 +444,8 @@
         },
         "Request_Source": {
           "type": "string",
-          "description": "Source of the request to create an Application Insights component. Users of the REST API should typically set this value to 'rest'"
+          "readOnly": true,
+          "description": "Internal field. Describes what tool created this Application Insights component."
         },
         "InstrumentationKey": {
           "type": "string",
@@ -470,7 +480,7 @@
         },
         "provisioningState": {
           "type": "string",
-          "description": "Current state of this component: whether or not is has been provisioned within the resource group it is defined. Users cannot change this value but are able to read from it. Values will include Succeeded, Deploying, Canceled, and Failed",
+          "description": "Current state of this component: whether or not is has been provisioned within the resource group it is defined. Users cannot change this value but are able to read from it. Values will include Succeeded, Deploying, Canceled, and Failed.",
           "readOnly": true
         },
         "SamplingPercentage": {
@@ -536,7 +546,7 @@
       "in": "path",
       "required": true,
       "type": "string",
-      "description": "The name of the Application Insights component resource",
+      "description": "The name of the Application Insights component resource.",
       "x-ms-parameter-location": "method"
     }
   }

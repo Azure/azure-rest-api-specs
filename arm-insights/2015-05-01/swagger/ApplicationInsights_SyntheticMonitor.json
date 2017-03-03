@@ -2,7 +2,7 @@
   "swagger": "2.0",
   "info": {
     "title": "ApplicationInsights.Client.SyntheticMonitor",
-    "description": "Azure Application Insights client for synthetic monitor based alerting",
+    "description": "Azure Application Insights client for synthetic monitor based alerting.",
     "version": "2015-05-01"
   },
   "host": "management.azure.com",
@@ -27,7 +27,7 @@
       "type": "oauth2",
       "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
       "flow": "implicit",
-      "description": "Azure Active Directory OAuth2 Flow",
+      "description": "Azure Active Directory OAuth2 Flow.",
       "scopes": {
         "user_impersonation": "impersonate your user account"
       }
@@ -36,7 +36,7 @@
   "paths": {
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.insights/webtests": {
       "get": {
-        "description": "Get all Application Insights synthetic monitors defined within a specified resource group",
+        "description": "Get all Application Insights synthetic monitors defined within a specified resource group.",
         "operationId": "SyntheticMonitor_ListByResourceGroup",
         "parameters": [
           {
@@ -51,7 +51,7 @@
         ],
         "responses": {
           "200": {
-            "description": "A list containing 0 or more synthetic monitor definitions",
+            "description": "A list containing 0 or more synthetic monitor definitions.",
             "schema": {
               "$ref": "#/definitions/SyntheticMonitorListResult"
             },
@@ -112,6 +112,9 @@
                 "nextLink": null
               }
             }
+          },
+          "404": {
+            "description": "The Azure subscription ID specified cannot be found, the resource group name doesn't exist within this subscription, or the api-version specified is incorrect."
           }
         },
         "x-ms-pageable": {
@@ -139,7 +142,7 @@
         ],
         "responses": {
           "200": {
-            "description": "A single instance of an Application Insights synthetic monitor definition",
+            "description": "Ann Application Insights synthetic monitor definition.",
             "schema": {
               "$ref": "#/definitions/SyntheticMonitor"
             },
@@ -175,6 +178,9 @@
                 }
               }
             }
+          },
+          "404": {
+            "description": "The Azure subscription ID specified cannot be found, the resource group name doesn't exist within this subscription, the api-version specified is incorrect, or the webTestName specified does not exist in this resource group."
           }
         }
       },
@@ -196,7 +202,7 @@
           },
           {
             "name": "WebTestDefinition",
-            "description": "Properties that need to be specified to create or update an Application Insights synthetic monitor definition",
+            "description": "Properties that need to be specified to create or update an Application Insights synthetic monitor definition.",
             "in": "body",
             "required": true,
             "schema": {
@@ -262,7 +268,7 @@
             "description": "No content: the request was successful, but the response is empty (the request to delete failed because the specified synthetic monitor does not exist)."
           },
           "200": {
-            "description": "Successful request to delete a synthetic monitor definition"
+            "description": "Successful request to delete a synthetic monitor definition."
           }
         }
       }
@@ -281,7 +287,7 @@
         ],
         "responses": {
           "200": {
-            "description": "A list of 0 or more Application Insights synthetic monitor definitions",
+            "description": "A list of 0 or more Application Insights synthetic monitor definitions.",
             "schema": {
               "$ref": "#/definitions/SyntheticMonitorListResult"
             },
@@ -363,7 +369,7 @@
         },
         "name": {
           "type": "string",
-          "description": "Azure resource name",
+          "description": "Azure resource name.",
           "externalDocs": {
             "url": "https://aka.ms/search-naming-rules"
           }
@@ -371,7 +377,7 @@
         "type": {
           "type": "string",
           "readOnly": true,
-          "description": "Azure resource type"
+          "description": "Azure resource type."
         },
         "location": {
           "type": "string",
@@ -398,14 +404,14 @@
       "description": "An azure resource object which forms the base for all Azure resources."
     },
     "SyntheticMonitorListResult": {
-      "description": "A list of 0 or more Application Insights synthetic monitor definitions",
+      "description": "A list of 0 or more Application Insights synthetic monitor definitions.",
       "required": [
         "value"
       ],
       "properties": {
         "value": {
           "type": "array",
-          "description": "Set of Application Insights synthetic monitor definitions",
+          "description": "Set of Application Insights synthetic monitor definitions.",
           "items": {
             "$ref": "#/definitions/SyntheticMonitor"
           }
@@ -417,7 +423,7 @@
       }
     },
     "SyntheticMonitor": {
-      "description": "An instance of a synthetic monitor Azure resource",
+      "description": "An Application Insights synthetic monitor definition.",
       "allOf": [
         {
           "$ref": "#/definitions/Resource"
@@ -444,7 +450,7 @@
       }
     },
     "WebTestProperties": {
-      "description": "Metadata describing a synthetic monitor for an Azure resource",
+      "description": "Metadata describing a synthetic monitor for an Azure resource.",
       "required": [
         "Name",
         "Kind"
@@ -452,30 +458,30 @@
       "properties": {
         "SyntheticMonitorId": {
           "type": "string",
-          "description": "Unique ID of this WebTest"
+          "description": "Unique ID of this WebTest."
         },
         "Name": {
           "x-ms-client-name": "WebTestName",
           "type": "string",
-          "description": "User defined name if this WebTest"
+          "description": "User defined name if this WebTest."
         },
         "Description": {
           "type": "string",
-          "description": "Purpose/user defined descriptive test for this WebTest"
+          "description": "Purpose/user defined descriptive test for this WebTest."
         },
         "Enabled": {
           "type": "boolean",
-          "description": "Is the test actively being monitored, default is false"
+          "description": "Is the test actively being monitored, default is false."
         },
         "Frequency": {
           "type": "integer",
           "format": "int32",
-          "description": "Interval between test runs for this WebTest"
+          "description": "Interval between test runs for this WebTest."
         },
         "Timeout": {
           "type": "integer",
           "format": "int32",
-          "description": "Seconds until this WebTest will timeout and fail"
+          "description": "Seconds until this WebTest will timeout and fail."
         },
         "Kind": {
           "x-ms-client-name": "WebTestKind",
@@ -493,28 +499,28 @@
         },
         "RetryEnabled": {
           "type": "boolean",
-          "description": "Allow for retries should this WebTest fail"
+          "description": "Allow for retries should this WebTest fail."
         },
         "Locations": {
           "type": "array",
-          "description": "A list of where to physically run the tests from to give global coverage for accessibility of your application",
+          "description": "A list of where to physically run the tests from to give global coverage for accessibility of your application.",
           "items": {
             "$ref": "#/definitions/WebTestGeolocation"
           }
         },
         "Configuration": {
           "type": "object",
-          "description": "An XML configuration specification for a WebTest",
+          "description": "An XML configuration specification for a WebTest.",
           "properties": {
             "WebTest": {
               "type": "string",
-              "description": "The XML specification of a WebTest to run against an application"
+              "description": "The XML specification of a WebTest to run against an application."
             }
           }
         },
         "provisioningState": {
           "type": "string",
-          "description": "Current state of this component: whether or not is has been provisioned within the resource group it is defined. Users cannot change this value but are able to read from it. Values will include Succeeded, Deploying, Canceled, and Failed",
+          "description": "Current state of this component, whether or not is has been provisioned within the resource group it is defined. Users cannot change this value but are able to read from it. Values will include Succeeded, Deploying, Canceled, and Failed.",
           "readOnly": true
         }
       }
@@ -525,7 +531,7 @@
       "properties": {
         "Id": {
           "type": "string",
-          "description": "Unique ID of this WebTest"
+          "description": "Unique ID of this WebTest."
         }
       }
     }
@@ -558,7 +564,7 @@
       "in": "path",
       "required": true,
       "type": "string",
-      "description": "The name of the Application Insights webtest resource",
+      "description": "The name of the Application Insights webtest resource.",
       "x-ms-parameter-location": "method"
     }
   }
