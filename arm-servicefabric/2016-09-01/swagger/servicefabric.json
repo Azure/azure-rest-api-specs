@@ -38,7 +38,7 @@
         "tags": [
           "ClusterpatchOperation"
         ],
-        "operationId": "ClusterOperation_Update",
+        "operationId": "Clusters_Update",
         "description": "Update cluster config",
         "produces": [
           "application/json"
@@ -69,7 +69,7 @@
             "in": "body",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/ClusterPatchRequest"
+              "$ref": "#/definitions/ClusterUpdateParameters"
             },
             "description": "Patch Request"
           },
@@ -96,8 +96,8 @@
         "tags": [
           "ClusterGetOperation"
         ],
-        "operationId": "ClusterOperation_get",
-        "description": "Get cluster config",
+        "operationId": "Clusters_Get",
+        "description": "Get cluster resource",
         "produces": [
           "application/json"
         ],
@@ -127,13 +127,13 @@
           "200": {
             "description": "OK",
             "schema": {
-              "$ref": "#/definitions/ClusterResource"
+              "$ref": "#/definitions/Cluster"
             }
           },
           "202": {
             "description": "Accepted",
             "schema": {
-              "$ref": "#/definitions/ClusterResource"
+              "$ref": "#/definitions/Cluster"
             }
           },
           "default": {
@@ -148,8 +148,8 @@
         "tags": [
           "ClusterCreateOperation"
         ],
-        "operationId": "ClusterOperation_Create",
-        "description": "Create cluster config",
+        "operationId": "Clusters_Create",
+        "description": "Create cluster resource",
         "produces": [
           "application/json"
         ],
@@ -179,7 +179,7 @@
             "in": "body",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/ClusterResource"
+              "$ref": "#/definitions/Cluster"
             },
             "description": "Put Request"
           },
@@ -191,13 +191,100 @@
           "200": {
             "description": "OK",
             "schema": {
-              "$ref": "#/definitions/ClusterResource"
+              "$ref": "#/definitions/Cluster"
             }
           },
           "202": {
             "description": "Accepted",
             "schema": {
-              "$ref": "#/definitions/ClusterResource"
+              "$ref": "#/definitions/Cluster"
+            }
+          },
+          "default": {
+            "description": "Error",
+            "schema": {
+              "$ref": "#/definitions/ErrorModel"
+            }
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourcegroups/{resourceGroupName}/providers/Microsoft.ServiceFabric/clusters": {
+      "get": {
+        "tags": [
+          "ClusterListByResourceGroupOperation"
+        ],
+        "operationId": "Clusters_ListByResourceGroup",
+        "description": "List cluster resource by resource group",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "resourceGroupName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the Resource Group to which the server belongs."
+          },
+          {
+            "$ref": "#/parameters/api-version"
+          },
+          {
+            "$ref": "#/parameters/subscriptionId"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/ClusterListResult"
+            }
+          },
+          "202": {
+            "description": "Accepted",
+            "schema": {
+              "$ref": "#/definitions/ClusterListResult"
+            }
+          },
+          "default": {
+            "description": "Error",
+            "schema": {
+              "$ref": "#/definitions/ErrorModel"
+            }
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.ServiceFabric/clusters": {
+      "get": {
+        "tags": [
+          "ClusterListOperation"
+        ],
+        "operationId": "Clusters_List",
+        "description": "List cluster resource",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/api-version"
+          },
+          {
+            "$ref": "#/parameters/subscriptionId"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/ClusterListResult"
+            }
+          },
+          "202": {
+            "description": "Accepted",
+            "schema": {
+              "$ref": "#/definitions/ClusterListResult"
             }
           },
           "default": {
@@ -210,7 +297,7 @@
       }
     }
   },
-  "definitions": {    
+  "definitions": {
     "CertificateDescription": {
       "description": "Certificate description",
       "properties": {
@@ -297,7 +384,7 @@
         },
         "httpGatewayEndpointPort": {
           "type": "integer"
-        },     
+        },
         "durabilityLevel": {
           "type": "string",
           "enum": [
@@ -330,7 +417,7 @@
       "properties": {
         "isAdmin": {
           "type": "boolean",
-           "description": "Is admin or not"
+          "description": "Is admin or not"
         },
         "certificateThumbprint": {
           "type": "string"
@@ -342,7 +429,7 @@
       "properties": {
         "isAdmin": {
           "type": "boolean",
-            "description": "Is admin or not"
+          "description": "Is admin or not"
         },
         "certificateIssuerThumbprint": {
           "type": "string"
@@ -452,7 +539,7 @@
         }
       }
     },
-    "paasClusterUpgradePolicy": {
+    "PaasClusterUpgradePolicy": {
       "description": "Paas cluster upgrade policy",
       "properties": {
         "overrideUserUpgradePolicy": {
@@ -487,7 +574,7 @@
         }
       }
     },
-    "diagnosticsStorageAccountConfig": {
+    "DiagnosticsStorageAccountConfig": {
       "description": "Diagnostics storage account config",
       "properties": {
         "storageAccountName": {
@@ -513,7 +600,7 @@
         }
       }
     },
-    "clusterResourceProperties": {
+    "ClusterProperties": {
       "description": "The cluster resource properties",
       "properties": {
         "availableClusterVersions": {
@@ -631,18 +718,25 @@
           "readOnly": true
         },
         "diagnosticsStorageAccountConfig": {
-          "$ref": "#/definitions/diagnosticsStorageAccountConfig"
+          "$ref": "#/definitions/DiagnosticsStorageAccountConfig"
         },
         "upgradeDescription": {
-          "$ref": "#/definitions/paasClusterUpgradePolicy"
+          "$ref": "#/definitions/PaasClusterUpgradePolicy"
         }
       }
     },
-    "clusterPatchParameters": {
+    "ClusterPropertiesUpdateParameters": {
       "description": "Cluster patch parameters",
       "properties": {
         "properties": {
-          "$ref": "#/definitions/clusterResourceProperties"
+          "$ref": "#/definitions/ClusterProperties"
+        },
+        "tags": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          },
+          "description": "Cluster tags."
         },
         "propertyNames": {
           "description": "Allowed properties",
@@ -655,7 +749,8 @@
               "ClientCertificateThumbprints",
               "FabricSettings",
               "ReverseProxyCertificate",
-              "NodeTypes"
+              "NodeTypes",
+              "Tags"
             ]
           }
         }
@@ -665,19 +760,19 @@
       ],
       "x-ms-azure-resource": false
     },
-    "ClusterPatchRequest": {
+    "ClusterUpdateParameters": {
       "description": "Cluster patch request",
       "properties": {
         "properties": {
-          "$ref": "#/definitions/clusterPatchParameters"
+          "$ref": "#/definitions/ClusterPropertiesUpdateParameters"
         }
       }
     },
-    "ClusterResource": {
+    "Cluster": {
       "description": "The cluster resource",
       "properties": {
         "properties": {
-          "$ref": "#/definitions/clusterResourceProperties"
+          "$ref": "#/definitions/ClusterProperties"
         }
       },
       "allOf": [
@@ -685,6 +780,17 @@
           "$ref": "#/definitions/Resource"
         }
       ]
+    },
+    "ClusterListResult": {
+      "description": "Cluster list result",
+      "properties": {
+        "value": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Cluster"
+          }
+        }
+      }
     },
     "ErrorModel": {
       "description": "The model of the error",
