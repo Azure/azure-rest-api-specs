@@ -118,7 +118,7 @@
 					"200": {
 						"description": "OK",
 						"schema": {
-							"$ref": "#/definitions/CollectionResponse[ResourceRecommendationBase20160506]"
+							"$ref": "#/definitions/CollectionResponse[ResourceRecommendationBase]"
 						}
 					}
 				},
@@ -159,7 +159,7 @@
 					"200": {
 						"description": "OK",
 						"schema": {
-							"$ref": "#/definitions/Suppression"
+							"$ref": "#/definitions/SuppressionContract"
 						}
 					}
 				},
@@ -226,7 +226,7 @@
 					"200": {
 						"description": "OK",
 						"schema": {
-							"$ref": "#/definitions/ResourceRecommendationBase20160506"
+							"$ref": "#/definitions/ResourceRecommendationBase"
 						}
 					}
 				},
@@ -271,7 +271,7 @@
 		}
 	},
 	"definitions": {
-		"CollectionResponse[ResourceRecommendationBase20160506]": {
+		"CollectionResponse[ResourceRecommendationBase]": {
 			"description": "Recommendation Collection",
 			"type": "object",
 			"properties": {
@@ -283,12 +283,12 @@
 					"description": "The recommendation List",
 					"type": "array",
 					"items": {
-						"$ref": "#/definitions/ResourceRecommendationBase20160506"
+						"$ref": "#/definitions/ResourceRecommendationBase"
 					}
 				}
 			}
 		},
-		"ResourceRecommendationBase20160506": {
+		"ResourceRecommendationBase": {
 			"description": "Advisor Recommendation",
 			"type": "object",
 			"properties": {
@@ -301,7 +301,7 @@
 					"type": "string"
 				},
 				"properties": {
-					"$ref": "#/definitions/RecommendationProperties20160506",
+					"$ref": "#/definitions/RecommendationProperties",
 					"description": "The recommendation properties."
 				},
 				"suppressionIds": {
@@ -322,7 +322,7 @@
 				}
 			}
 		},
-		"RecommendationProperties20160506": {
+		"RecommendationProperties": {
 			"description": "The recommendation properties",
 			"type": "object",
 			"properties": {
