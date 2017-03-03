@@ -360,46 +360,33 @@
         "id": {
           "type": "string",
           "readOnly": true,
-          "description": "Azure resource ID represents the complete path to the resource. This can be used with the Azure Resource Manager to link resources together.",
-          "externalDocs": {
-            "url": "https://aka.ms/search-linked-resources"
-          }
+          "description": "Azure resource Id"
         },
         "name": {
           "type": "string",
-          "description": "Azure resource name.",
-          "externalDocs": {
-            "url": "https://aka.ms/search-naming-rules"
-          }
+          "description": "Azure resource name"
         },
         "type": {
           "type": "string",
           "readOnly": true,
-          "description": "Azure resource type."
+          "description": "Azure resource type"
         },
         "location": {
           "type": "string",
-          "description": "The geographic location of the resource. This must be one of the supported and registered Azure Geo Regions (for example, West US, East US, Southeast Asia, and so forth). The geo region of a resource cannot be changed once it is created, but if an identical geo region is specified on update, the request will succeed.",
-          "externalDocs": {
-            "url": "https://aka.ms/search-rp-info"
-          },
-          "x-ms-mutability": [
-            "create", 
-            "read"
-          ]
+          "description": "Resource location"
         },
         "tags": {
           "additionalProperties": {
             "type": "string"
           },
-          "description": "Tags to help categorize the resource in the Azure portal. This is a free-form list of key-value pairs that can be used for viewing and grouping a resource (across resource groups)."
+          "description": "Resource tags"
         }
       },
       "required": [
         "location"
       ],
       "x-ms-azure-resource": true,
-      "description": "An azure resource object which forms the base for all Azure resources."
+      "description": "An azure resource object"
     },
     "ApplicationInsightsComponent": {
       "properties": {
