@@ -2341,6 +2341,490 @@
         }
       }
     },
+    "/storage": {
+      "get": {
+        "tags": [
+          "Storage"
+        ],
+        "operationId": "GetStorageAccounts",
+        "description": "List storage accounts managed by specified key vault",
+        "parameters": [
+          {
+            "name": "maxresults",
+            "in": "query",
+            "required": false,
+            "type": "integer",
+            "format": "int32",
+            "minimum": 1,
+            "maximum": 25,
+            "description": "Maximum number of results to return in a page. If not specified the service will return up to 25 results."
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "A response message containing a list of storage accounts along with a link to the next page of storage accounts.",
+            "schema": {
+              "$ref": "#/definitions/StorageListResult"
+            }
+          },
+          "default": {
+            "description": "Key Vault error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/KeyVaultError"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/storage/{storage-account-name}": {
+      "delete": {
+        "tags": [
+          "Storage"
+        ],
+        "operationId": "DeleteStorageAccount",
+        "description": "Deletes a storage account.",
+        "parameters": [
+          {
+            "name": "storage-account-name",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "pattern": "^[0-9a-zA-Z]+$",
+            "description": "The name of the storage account."
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The deleted storage account.",
+            "schema": {
+              "$ref": "#/definitions/StorageBundle"
+            }
+          },
+          "default": {
+            "description": "Key Vault error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/KeyVaultError"
+            }
+          }
+        }
+      },
+      "get": {
+        "tags": [
+          "Storage"
+        ],
+        "operationId": "GetStorageAccount",
+        "description": "Gets information about a specified storage account.",
+        "parameters": [
+          {
+            "name": "storage-account-name",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "pattern": "^[0-9a-zA-Z]+$",
+            "description": "The name of the storage account."
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The retrieved storage account.",
+            "schema": {
+              "$ref": "#/definitions/StorageBundle"
+            }
+          },
+          "default": {
+            "description": "Key Vault error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/KeyVaultError"
+            }
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "Storage"
+        ],
+        "operationId": "SetStorageAccount",
+        "description": "Creates or updates a new storage account.",
+        "parameters": [
+          {
+            "name": "storage-account-name",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "pattern": "^[0-9a-zA-Z]+$",
+            "description": "The name of the storage account."
+          },
+          {
+            "name": "parameters",
+            "in": "body",
+            "required": true,
+            "x-ms-client-flatten": true,
+            "schema": {
+              "$ref": "#/definitions/StorageAccountCreateParameters"
+            },
+            "description": "The parameters to create a storage account."
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The created storage account.",
+            "schema": {
+              "$ref": "#/definitions/StorageBundle"
+            }
+          },
+          "default": {
+            "description": "Key Vault error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/KeyVaultError"
+            }
+          }
+        }
+      },
+      "patch": {
+        "tags": [
+          "Storage"
+        ],
+        "operationId": "UpdateStorageAccount",
+        "description": "Updates the specified attributes associated with the given storage account.",
+        "parameters": [
+          {
+            "name": "storage-account-name",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "pattern": "^[0-9a-zA-Z]+$",
+            "description": "The name of the storage account."
+          },
+          {
+            "name": "parameters",
+            "in": "body",
+            "required": true,
+            "x-ms-client-flatten": true,
+            "schema": {
+              "$ref": "#/definitions/StorageAccountUpdateParameters"
+            },
+            "description": "The parameters to update a storage account."
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The updated storage account.",
+            "schema": {
+              "$ref": "#/definitions/StorageBundle"
+            }
+          },
+          "default": {
+            "description": "Key Vault error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/KeyVaultError"
+            }
+          }
+        }
+      }
+    },
+    "/storage/{storage-account-name}/regeneratekey": {
+      "post": {
+        "tags": [
+          "Storage"
+        ],
+        "operationId": "RegenerateStorageAccountKey",
+        "description": "Regenerates the specified key value for the given storage account.",
+        "parameters": [
+          {
+            "name": "storage-account-name",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "pattern": "^[0-9a-zA-Z]+$",
+            "description": "The name of the storage account."
+          },
+          {
+            "name": "parameters",
+            "in": "body",
+            "required": true,
+            "x-ms-client-flatten": true,
+            "schema": {
+              "$ref": "#/definitions/StorageAccountRegenerteKeyParameters"
+            },
+            "description": "The parameters to regenerate storage account key."
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The updated storage account.",
+            "schema": {
+              "$ref": "#/definitions/StorageBundle"
+            }
+          },
+          "default": {
+            "description": "Key Vault error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/KeyVaultError"
+            }
+          }
+        }
+      }
+    },
+    "/storage/{storage-account-name}/sas": {
+      "get": {
+        "tags": [
+          "Storage"
+        ],
+        "operationId": "GetSasDefinitions",
+        "description": "List storage sas definitions for the given storage account.",
+        "parameters": [
+          {
+            "name": "storage-account-name",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "pattern": "^[0-9a-zA-Z]+$",
+            "description": "The name of the storage account."
+          },
+          {
+            "name": "maxresults",
+            "in": "query",
+            "required": false,
+            "type": "integer",
+            "format": "int32",
+            "minimum": 1,
+            "maximum": 25,
+            "description": "Maximum number of results to return in a page. If not specified the service will return up to 25 results."
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "A response message containing a list of sas definitions along with a link to the next page of sas definitions.",
+            "schema": {
+              "$ref": "#/definitions/SasDefinitionListResult"
+            }
+          },
+          "default": {
+            "description": "Key Vault error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/KeyVaultError"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/storage/{storage-account-name}/sas/{sas-definition-name}": {
+      "delete": {
+        "tags": [
+          "Storage"
+        ],
+        "operationId": "DeleteSasDefinition",
+        "description": "Deletes a sas definition from a specified storage account.",
+        "parameters": [
+          {
+            "name": "storage-account-name",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "pattern": "^[0-9a-zA-Z]+$",
+            "description": "The name of the storage account."
+          },
+          {
+            "name": "sas-definition-name",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "pattern": "^[0-9a-zA-Z]+$",
+            "description": "The name of the sas definition."
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The deleted sas definition.",
+            "schema": {
+              "$ref": "#/definitions/SasDefinitionBundle"
+            }
+          },
+          "default": {
+            "description": "Key Vault error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/KeyVaultError"
+            }
+          }
+        }
+      },
+      "get": {
+        "tags": [
+          "Storage"
+        ],
+        "operationId": "GetSasDefinition",
+        "description": "Gets information about a sas definition for the specified storage account.",
+        "parameters": [
+          {
+            "name": "storage-account-name",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "pattern": "^[0-9a-zA-Z]+$",
+            "description": "The name of the storage account."
+          },
+          {
+            "name": "sas-definition-name",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "pattern": "^[0-9a-zA-Z]+$",
+            "description": "The name of the sas definition."
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The retrieved sas definition.",
+            "schema": {
+              "$ref": "#/definitions/SasDefinitionBundle"
+            }
+          },
+          "default": {
+            "description": "Key Vault error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/KeyVaultError"
+            }
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "Storage"
+        ],
+        "operationId": "SetSasDefinition",
+        "description": "Creates or updates a new sas definition for the specified storage account.",
+        "parameters": [
+          {
+            "name": "storage-account-name",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "pattern": "^[0-9a-zA-Z]+$",
+            "description": "The name of the storage account."
+          },
+          {
+            "name": "sas-definition-name",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "pattern": "^[0-9a-zA-Z]+$",
+            "description": "The name of the sas definition."
+          },
+          {
+            "name": "parameters",
+            "in": "body",
+            "required": true,
+            "x-ms-client-flatten": true,
+            "schema": {
+              "$ref": "#/definitions/SasDefinitionCreateParameters"
+            },
+            "description": "The parameters to create a sas definition."
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The created sas definition.",
+            "schema": {
+              "$ref": "#/definitions/SasDefinitionBundle"
+            }
+          },
+          "default": {
+            "description": "Key Vault error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/KeyVaultError"
+            }
+          }
+        }
+      },
+      "patch": {
+        "tags": [
+          "Storage"
+        ],
+        "operationId": "UpdateSasDefinition",
+        "description": "Updates the specified attributes associated with the given sas definition.",
+        "parameters": [
+          {
+            "name": "storage-account-name",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "pattern": "^[0-9a-zA-Z]+$",
+            "description": "The name of the storage account."
+          },
+          {
+            "name": "sas-definition-name",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "pattern": "^[0-9a-zA-Z]+$",
+            "description": "The name of the sas definition."
+          },
+          {
+            "name": "parameters",
+            "in": "body",
+            "required": true,
+            "x-ms-client-flatten": true,
+            "schema": {
+              "$ref": "#/definitions/SasDefinitionUpdateParameters"
+            },
+            "description": "The parameters to update a sas definition."
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The updated sas definition.",
+            "schema": {
+              "$ref": "#/definitions/SasDefinitionBundle"
+            }
+          },
+          "default": {
+            "description": "Key Vault error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/KeyVaultError"
+            }
+          }
+        }
+      }
+    }
   },
   "definitions": {
     "Attributes": {
@@ -3840,6 +4324,344 @@
         }
       },
       "description": "The pending certificate signing request result."
+    },
+    "StorageAccountAttributes": {
+      "properties": {
+        "enabled": {
+          "type": "boolean",
+          "description": "Determines whether the object is enabled."
+        },
+        "created": {
+          "type": "integer",
+          "format": "unixtime",
+          "readOnly": true,
+          "description": "Creation time in UTC."
+        },
+        "updated": {
+          "type": "integer",
+          "format": "unixtime",
+          "readOnly": true,
+          "description": "Last updated time in UTC."
+        }
+      },
+      "description": "The storage account management attributes."
+    },
+    "StorageBundle": {
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "The storage account id.",
+          "readOnly": true
+        },
+        "resourceId": {
+          "type": "string",
+          "description": "Storage account resource id.",
+          "readOnly": true
+        },
+        "activeKeyName": {
+          "type": "string",
+          "description": "Current active storage account key name.",
+          "readOnly": true
+        },
+        "autoRegenerateKey": {
+          "type": "boolean",
+          "description": "Determines whether keyvault should manage the storage account.",
+          "readOnly": true
+        },
+        "regenerationPeriod": {
+          "type": "string",
+          "description": "The key regeneration time duration specified in ISO-8601 format.",
+          "readOnly": true
+        },
+        "attributes": {
+          "$ref": "#/definitions/StorageAccountAttributes",
+          "description": "The storage account attributes.",
+          "readOnly": true
+        },
+        "tags": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          },
+          "description": "Application specific metadata in the form of key-value pairs",
+          "readOnly": true
+        }
+      },
+      "description": "A Storage account bundle consists of key vault storage account details plus its attributes."
+    },
+    "StorageAccountCreateParameters": {
+      "properties": {
+        "resourceId": {
+          "type": "string",
+          "description": "Storage account resource id."
+        },
+        "activeKeyName": {
+          "type": "string",
+          "description": "Current active storage account key name."
+        },
+        "autoRegenerateKey": {
+          "type": "boolean",
+          "description": "Determines whether keyvault should manage the storage account for user."
+        },
+        "regenerationPeriod": {
+          "type": "string",
+          "description": "The key regeneration time duration specified in ISO-8601 format."
+        },
+        "attributes": {
+          "x-ms-client-name": "StorageAccountAttributes",
+          "$ref": "#/definitions/StorageAccountAttributes",
+          "description": "The attributes of the storage account."
+        },
+        "tags": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          },
+          "description": "Application specific metadata in the form of key-value pairs."
+        }
+      },
+      "description": "The storage account create parameters.",
+      "required": [ "resourceId", "activeKeyName", "autoRegenerateKey" ]
+    },
+    "StorageAccountUpdateParameters": {
+      "properties": {
+        "activeKeyName": {
+          "type": "string",
+          "description": "Current active storage account key name."
+        },
+        "autoRegenerateKey": {
+          "type": "boolean",
+          "description": "Determines whether keyvault should manage the storage account for user."
+        },
+        "regenerationPeriod": {
+          "type": "string",
+          "description": "The key regeneration time duration specified in ISO-8601 format."
+        },
+        "attributes": {
+          "x-ms-client-name": "StorageAccountAttributes",
+          "$ref": "#/definitions/StorageAccountAttributes",
+          "description": "The attributes of the storage account."
+        },
+        "tags": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          },
+          "description": "Application specific metadata in the form of key-value pairs."
+        }
+      },
+      "description": "The storage account update parameters."
+    },
+    "StorageAccountRegenerteKeyParameters": {
+      "properties": {
+        "keyName": {
+          "type": "string",
+          "description": "storage account key name.",
+        }
+      },
+      "description": "The storage account key regenerate parameters.",
+      "required": [ "keyName" ]
+    },
+    "StorageAccountItem": {
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "Storage identifier.",
+          "readOnly": true
+        },
+        "resourceId": {
+          "type": "string",
+          "description": "Storage acount resource Id.",
+          "readOnly": true
+        },
+        "attributes": {
+          "$ref": "#/definitions/StorageAccountAttributes",
+          "description": "The storage account management attributes.",
+          "readOnly": true
+        },
+        "tags": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          },
+          "description": "Application specific metadata in the form of key-value pairs.",
+          "readOnly": true
+        }
+      },
+      "description": "The storage account item containing storage account metadata."
+    },
+    "StorageListResult": {
+      "properties": {
+        "value": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/StorageAccountItem"
+          },
+          "readOnly": true,
+          "description": "A response message containing a list of storage accounts in the key vault along with a link to the next page of storage accounts."
+        },
+        "nextLink": {
+          "type": "string",
+          "readOnly": true,
+          "description": "The URL to get the next set of storage accounts."
+        }
+      },
+      "description": "The storage accounts list result."
+    },
+    "SasDefinitionAttributes": {
+      "properties": {
+        "enabled": {
+          "type": "boolean",
+          "description": "Determines whether the object is enabled."
+        },
+        "created": {
+          "type": "integer",
+          "format": "unixtime",
+          "readOnly": true,
+          "description": "Creation time in UTC."
+        },
+        "updated": {
+          "type": "integer",
+          "format": "unixtime",
+          "readOnly": true,
+          "description": "Last updated time in UTC."
+        }
+      },
+      "description": "The sas definition management attributes."
+    },
+    "SasDefinitionBundle": {
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "The sas definition id.",
+          "readOnly": true
+        },
+        "sid": {
+          "x-ms-client-name": "SecretId",
+          "type": "string",
+          "description": "Storage account sas definition secret id.",
+          "readOnly": true
+        },
+        "parameters": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          },
+          "description": "The sas definition metadata in the form of key-value pairs.",
+          "readOnly": true
+        },
+        "attributes": {
+          "$ref": "#/definitions/SasDefinitionAttributes",
+          "description": "The sas definition attributes.",
+          "readOnly": true
+        },
+        "tags": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          },
+          "description": "Application specific metadata in the form of key-value pairs",
+          "readOnly": true
+        }
+      },
+      "description": "A sas definition bundle consists of key vault sas definition details plus its attributes."
+    },
+    "SasDefinitionItem": {
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "Storage sas identifier.",
+          "readOnly": true
+        },
+        "sid": {
+          "x-ms-client-name": "SecretId",
+          "type": "string",
+          "description": "Storage account sas definition secret id.",
+          "readOnly": true
+        },
+        "attributes": {
+          "$ref": "#/definitions/SasDefinitionAttributes",
+          "description": "The sas definition management attributes.",
+          "readOnly": true
+        },
+        "tags": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          },
+          "description": "Application specific metadata in the form of key-value pairs.",
+          "readOnly": true
+        }
+      },
+      "description": "The sas definition item containing storage sas definition metadata."
+    },
+    "SasDefinitionListResult": {
+      "properties": {
+        "value": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/SasDefinitionItem"
+          },
+          "readOnly": true,
+          "description": "A response message containing a list of sas definitions along with a link to the next page of sas definitions."
+        },
+        "nextLink": {
+          "type": "string",
+          "readOnly": true,
+          "description": "The URL to get the next set of sas defintions."
+        }
+      },
+      "description": "The storage account sas definition list result."
+    },
+    "SasDefinitionCreateParameters": {
+      "properties": {
+        "parameters": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          },
+          "description": "Sas definition creation metadata in the form of key-value pairs."
+        },
+
+        "attributes": {
+          "x-ms-client-name": "SasDefinitionAttributes",
+          "$ref": "#/definitions/SasDefinitionAttributes",
+          "description": "The attributes of the sas definition."
+        },
+        "tags": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          },
+          "description": "Application specific metadata in the form of key-value pairs."
+        }
+      },
+      "description": "The sas definition create parameters.",
+      "required": [ "parameters" ]
+    },
+    "SasDefinitionUpdateParameters": {
+      "properties": {
+        "parameters": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          },
+          "description": "Sas definition update metadata in the form of key-value pairs."
+        },
+        "attributes": {
+          "x-ms-client-name": "SasDefinitionAttributes",
+          "$ref": "#/definitions/SasDefinitionAttributes",
+          "description": "The attributes of the sas definition."
+        },
+        "tags": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          },
+          "description": "Application specific metadata in the form of key-value pairs."
+        }
+      },
+      "description": "The sas definition update parameters."
     },
     "KeyVaultError": {
       "properties": {
