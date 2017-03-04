@@ -14,7 +14,7 @@
 			"post": {
 				"tags": ["GenerateRecommendations"],
 				"description": "Initiates the recommendation generation/computation process for a subscription. This is an asynchronous operation. The generated recommendations are stored in a cache in the Advisor service.",
-				"operationId": "GenerateRecommendations_GenerateRecommendations",
+				"operationId": "Recommentations_Generate",
 				"parameters": [{
 					"$ref": "#/parameters/subscriptionIdParameter"
 				},
@@ -26,11 +26,11 @@
 						"description": "Accepted",
 						"headers": {
 							"Location": {
-								"description": "The URL where the status of the long-running operation can be checked.",
+								"description": "The URL where the status of the asynchronous operation can be checked.",
 								"type": "string"
 							},
 							"Retry-After": {
-								"description": "The delay that the client should use when checking for the status of the operation. The value is in seconds.",
+								"description": "The delay to use while checking the status of the operation. The value is in seconds.",
 								"type": "string"
 							}
 						}
@@ -47,15 +47,15 @@
 		"/subscriptions/{subscriptionId}/providers/Microsoft.Advisor/generateRecommendations/{operationId}": {
 			"get": {
 				"tags": ["GenerateRecommendations"],
-				"description": "Get generate recommendations status. As generate recommendation operation is an asynchronous operation. This is the method to get generate recommendation status.",
-				"operationId": "GenerateRecommendations_GetGenerateRecommendationsStatus",
+				"description": "Retrieves the status of the recommendation computation/generation process. Invoke this API after calling generation recommendation. The Uri of this API is returned in the Location field of the response header.",
+				"operationId": "Recommentations_GetGenerateRecommendationsStatus",
 				"parameters": [{
 					"$ref": "#/parameters/subscriptionIdParameter"
 				},
 				{
 					"name": "operationId",
 					"in": "path",
-					"description": "The operation Id.",
+					"description": "The operation Id can be found from the Location field in generate recommendation response header.",
 					"required": true,
 					"type": "string",
 					"format": "uuid"
@@ -65,13 +65,10 @@
 				}],
 				"responses": {
 					"202": {
-						"description": "Generate recommendation hasn't finished."
+						"description": "Recommendation generation is in progress."
 					},
 					"204": {
-						"description": "Generate recommendation has finished."
-					},
-					"404": {
-						"description": "The operationId cannot be found."
+						"description": "Recommendation generation has completed."
 					}
 				},
 				"deprecated": false,
@@ -86,7 +83,7 @@
 			"get": {
 				"tags": ["GetRecommendations"],
 				"description": "Obtains cached recommendations for a subscription. The recommendations are generated/computed by invoking generateRecommendations.",
-				"operationId": "GetRecommendations_ListRecommendations",
+				"operationId": "Recommendations_List",
 				"parameters": [{
 					"$ref": "#/parameters/subscriptionIdParameter"
 				},
@@ -96,21 +93,21 @@
 				{
 					"name": "$filter",
 					"in": "query",
-					"description": "The filter to apply on listing recommendations",
+					"description": "The filter to apply on the recommendations.",
 					"required": false,
 					"type": "string"
 				},
 				{
 					"name": "$top",
 					"in": "query",
-					"description": "The top used to listing recommendations.",
+					"description": "The number of recommendations per page if using paged version of this API.",
 					"required": false,
 					"type": "integer"
 				},
 				{
 					"name": "$skipToken",
 					"in": "query",
-					"description": "The skipToken used to list recommendations.",
+					"description": "The page continuation token if using paged version of this API.",
 					"required": false,
 					"type": "string"
 				}],
@@ -118,27 +115,51 @@
 					"200": {
 						"description": "OK",
 						"schema": {
-							"$ref": "#/definitions/CollectionResponse[ResourceRecommendationBase]"
+							"$ref": "#/definitions/CollectionResponse[ResourceRecommendationBase20160506]"
 						}
 					}
 				},
 				"deprecated": false,
 				"x-ms-pageable": {
 					"nextLinkName": "nextLink"
-				},
-				"x-ms-examples": {
-					"ListRecommendations": {
-						"$ref": "../examples/ListRecommendations.json"
-					}
 				}
 			}
 		},
-		"/{recommendationId}/suppressions/{name}": {
-			"put": {
-				"tags": ["Suppression"],
-				"description": "Provides the ability to snooze a recommendation. The snooze attribute of a recommendation is referred to as a suppression. Use this API to create or update the snooze status of a recommendation.",
-				"operationId": "Suppression_Create",
+		"/providers/Microsoft.Advisor/operations": {
+			"get": {
+				"tags": ["Operations"],
+				"description": "Lists all of the available Advisor REST API operations",
+				"operationId": "Operations_List",
 				"parameters": [{
+					"$ref": "#/parameters/apiVersionParameter"
+				}],
+				"responses": {
+					"200": {
+						"description": "OK",
+						"schema": {
+							"$ref": "#/definitions/CollectionResponse[OperationEntity]"
+						}
+					}
+				},
+				"deprecated": false,
+				"x-ms-pageable": {
+					"nextLinkName": "nextLink"
+				}
+			}
+		},
+		"/{resourceUri}/providers/Microsoft.Advisor/recommendations/{recommendationId}/suppressions/{name}": {
+			"get": {
+				"tags": ["Suppressions"],
+				"description": "Obtains detail of a suppression",
+				"operationId": "Suppressions_Get",
+				"parameters": [{
+					"name": "resourceUri",
+					"in": "path",
+					"description": "The fully qualified arm identifier of the resource for which the recommendation applies.",
+					"required": true,
+					"type": "string"
+				},
+				{
 					"name": "recommendationId",
 					"in": "path",
 					"description": "The recommendation Id",
@@ -151,6 +172,58 @@
 					"description": "The suppression name.",
 					"required": true,
 					"type": "string"
+				},
+				{
+					"$ref": "#/parameters/apiVersionParameter"
+				}],
+				"responses": {
+					"200": {
+						"description": "OK",
+						"schema": {
+							"$ref": "#/definitions/Suppression"
+						}
+					}
+				},
+				"deprecated": false,
+				"x-ms-examples": {
+					"GetSuppressionDetail": {
+						"$ref": "../examples/GetSuppressionDetail.json"
+					}
+				}
+			},
+			"put": {
+				"tags": ["Suppressions"],
+				"description": "Provides the ability to snoozed/dismissed a recommendation. The snoozed/dismissed attribute of a recommendation is referred to as a suppression. Use this API to create or update the snoozed/dismissed status of a recommendation.",
+				"operationId": "Suppressions_Create",
+				"parameters": [{
+					"name": "resourceUri",
+					"in": "path",
+					"description": "The fully qualified arm identifier of the resource for which the recommendation applies.",
+					"required": true,
+					"type": "string"
+				},
+				{
+					"name": "recommendationId",
+					"in": "path",
+					"description": "The recommendation Id",
+					"required": true,
+					"type": "string"
+				},
+				{
+					"name": "name",
+					"in": "path",
+					"description": "The suppression name.",
+					"required": true,
+					"type": "string"
+				},
+				{
+					"name": "suppressionContract",
+					"in": "body",
+					"description": "The snoozed/dismissed attributes, eg, the snooze duration.",
+					"required": true,
+					"schema": {
+						"$ref": "#/definitions/SuppressionContract"
+					}
 				},
 				{
 					"$ref": "#/parameters/apiVersionParameter"
@@ -171,10 +244,17 @@
 				}
 			},
 			"delete": {
-				"tags": ["Suppression"],
-				"description": "Provides the ability to dismiss a recommendation. The dismiss attribute of a recommendation is referred to as a suppression. Use this API to create or update the dismiss status of a recommendation.",
-				"operationId": "Suppression_Delete",
+				"tags": ["Suppressions"],
+				"description": "Provides the ability to activate a snoozed/dismissed recommendation. The snoozed/dismissed attribute of a recommendation is referred to as a suppression.",
+				"operationId": "Suppressions_Delete",
 				"parameters": [{
+					"name": "resourceUri",
+					"in": "path",
+					"description": "The fully qualified arm identifier of the resource for which the recommendation applies.",
+					"required": true,
+					"type": "string"
+				},
+				{
 					"name": "recommendationId",
 					"in": "path",
 					"description": "The recommendation Id",
@@ -193,10 +273,7 @@
 				}],
 				"responses": {
 					"204": {
-						"description": "Delete suppression is done."
-					},
-					"404": {
-						"description": "The suppresion cannot be found."
+						"description": "The recommendation has been activated."
 					}
 				},
 				"deprecated": false,
@@ -207,15 +284,22 @@
 				}
 			}
 		},
-		"/{recommendationId}": {
+		"/{resourceUri}/providers/Microsoft.Advisor/recommendations/{recommendationId}": {
 			"get": {
 				"tags": ["GetRecommendations"],
 				"description": "Obtains details of a cached recommendation.",
-				"operationId": "GetRecommendations_GetRecommendationDetail",
+				"operationId": "Recommendations_Get",
 				"parameters": [{
+					"name": "resourceUri",
+					"in": "path",
+					"description": "The fully qualified arm identifier of the resource for which the recommendation applies.",
+					"required": true,
+					"type": "string"
+				},
+				{
 					"name": "recommendationId",
 					"in": "path",
-					"description": "The recommendation Id",
+					"description": "The recommendation Id.",
 					"required": true,
 					"type": "string"
 				},
@@ -226,7 +310,7 @@
 					"200": {
 						"description": "OK",
 						"schema": {
-							"$ref": "#/definitions/ResourceRecommendationBase"
+							"$ref": "#/definitions/ResourceRecommendationBase20160506"
 						}
 					}
 				},
@@ -240,10 +324,10 @@
 		},
 		"/subscriptions/{subscriptionId}/providers/Microsoft.Advisor/suppressions": {
 			"get": {
-				"tags": ["Suppression"],
+				"tags": ["Suppressions"],
 				"summary": "",
-				"description": "Retrieves the list of snoozed/dismissed recommendations for a subscription. The snooze/dismiss attribute of a recommendation is referred to as a suppression.",
-				"operationId": "Suppression_ListSuppressions",
+				"description": "Retrieves the list of snoozed/dismissed suppressions for a subscription. The snooze/dismiss attribute of a recommendation is referred to as a suppression.",
+				"operationId": "Suppressions_List",
 				"parameters": [{
 					"$ref": "#/parameters/subscriptionIdParameter"
 				},
@@ -272,15 +356,15 @@
 	},
 	"definitions": {
 		"CollectionResponse[ResourceRecommendationBase]": {
-			"description": "Recommendation Collection",
+			"description": "response entity collection",
 			"type": "object",
 			"properties": {
 				"nextLink": {
-					"description": "The next link used to get next page of recommendations",
+					"description": "The next link used to get next page of entity",
 					"type": "string"
 				},
 				"value": {
-					"description": "The recommendation List",
+					"description": "The list of entities.",
 					"type": "array",
 					"items": {
 						"$ref": "#/definitions/ResourceRecommendationBase"
@@ -302,7 +386,8 @@
 				},
 				"properties": {
 					"$ref": "#/definitions/RecommendationProperties",
-					"description": "The recommendation properties."
+					"description": "The recommendation properties.",
+					"x-ms-client-flatten": true
 				},
 				"suppressionIds": {
 					"description": "The suppression Lists.",
@@ -414,6 +499,59 @@
 				},
 				"solution": {
 					"description": "The solution of the recommendation.",
+					"type": "string"
+				}
+			}
+		},
+		"CollectionResponse[OperationEntity]": {
+			"description": "response entity collection",
+			"type": "object",
+			"properties": {
+				"nextLink": {
+					"description": "The next link used to get next page of entity",
+					"type": "string"
+				},
+				"value": {
+					"description": "The list of entities.",
+					"type": "array",
+					"items": {
+						"$ref": "#/definitions/OperationEntity"
+					}
+				}
+			}
+		},
+		"OperationEntity": {
+			"description": "Advisor operation.",
+			"type": "object",
+			"properties": {
+				"name": {
+					"description": "The operation Name.",
+					"type": "string"
+				},
+				"display": {
+					"$ref": "#/definitions/OperationDisplayInfo",
+					"description": "The operation display information."
+				}
+			}
+		},
+		"OperationDisplayInfo": {
+			"description": "Advisor operation display information.",
+			"type": "object",
+			"properties": {
+				"description": {
+					"description": "The operation description.",
+					"type": "string"
+				},
+				"operation": {
+					"description": "The operation.",
+					"type": "string"
+				},
+				"provider": {
+					"description": "The provider.",
+					"type": "string"
+				},
+				"resource": {
+					"description": "The resource name.",
 					"type": "string"
 				}
 			}
