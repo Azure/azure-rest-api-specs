@@ -42,7 +42,9 @@
         "operationId": "Clusters_Update",
         "description": "Update cluster config",
         "x-ms-examples": {
-          "Patch a cluster": { "$ref": "../examples/ClusterPatchOperation_exmaple.json" }
+          "Patch a cluster": {
+            "$ref": "../examples/ClusterPatchOperation_exmaple.json"
+          }
         },
         "produces": [
           "application/json"
@@ -103,7 +105,9 @@
         "operationId": "Clusters_Get",
         "description": "Get cluster resource",
         "x-ms-examples": {
-          "Get a cluster": { "$ref": "../examples/ClusterGetOperation_example.json" }
+          "Get a cluster": {
+            "$ref": "../examples/ClusterGetOperation_example.json"
+          }
         },
         "produces": [
           "application/json"
@@ -152,8 +156,10 @@
         "operationId": "Clusters_Create",
         "x-ms-long-running-operation": true,
         "description": "Create cluster resource",
-         "x-ms-examples": {
-          "Put a cluster": { "$ref": "../examples/ClusterPutOperation_exmaple.json" }
+        "x-ms-examples": {
+          "Put a cluster": {
+            "$ref": "../examples/ClusterPutOperation_exmaple.json"
+          }
         },
         "produces": [
           "application/json"
@@ -216,8 +222,10 @@
         ],
         "operationId": "Clusters_Delete",
         "description": "Delete cluster resource",
-         "x-ms-examples": {
-          "Delete a cluster": { "$ref": "../examples/ClusterDeleteOperation_example.json" }
+        "x-ms-examples": {
+          "Delete a cluster": {
+            "$ref": "../examples/ClusterDeleteOperation_example.json"
+          }
         },
         "parameters": [
           {
@@ -265,7 +273,9 @@
         "operationId": "Clusters_ListByResourceGroup",
         "description": "List cluster resource by resource group",
         "x-ms-examples": {
-          "List cluster by resource group": { "$ref": "../examples/ClusterListByResourceGroupOperation_exmaple.json" }
+          "List cluster by resource group": {
+            "$ref": "../examples/ClusterListByResourceGroupOperation_exmaple.json"
+          }
         },
         "produces": [
           "application/json"
@@ -306,7 +316,9 @@
         "operationId": "Clusters_List",
         "description": "List cluster resource",
         "x-ms-examples": {
-          "List clusters": { "$ref": "../examples/ClusterListOperation_example.json" }
+          "List clusters": {
+            "$ref": "../examples/ClusterListOperation_example.json"
+          }
         },
         "produces": [
           "application/json"
@@ -765,6 +777,7 @@
       "description": "Cluster patch parameters",
       "properties": {
         "properties": {
+          "x-ms-client-flatten": true,
           "$ref": "#/definitions/ClusterProperties"
         },
         "tags": {
@@ -800,6 +813,7 @@
       "description": "Cluster patch request",
       "properties": {
         "properties": {
+          "x-ms-client-flatten": true,
           "$ref": "#/definitions/ClusterPropertiesUpdateParameters"
         }
       }
@@ -808,6 +822,7 @@
       "description": "The cluster resource",
       "properties": {
         "properties": {
+          "x-ms-client-flatten": true,
           "$ref": "#/definitions/ClusterProperties"
         }
       },
