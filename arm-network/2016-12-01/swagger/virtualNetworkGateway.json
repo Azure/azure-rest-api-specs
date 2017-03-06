@@ -1521,11 +1521,11 @@
           "type": "boolean",
           "description": "EnableBgp flag"
         },
-        "UsePolicyBasedTrafficSelectors": {
+        "usePolicyBasedTrafficSelectors": {
           "type": "boolean",
           "description": "Enable policy-based traffic selectors."
         },
-        "IpsecPolicies": {
+        "ipsecPolicies": {
           "type": "array",
           "items": {
             "$ref": "#/definitions/IpsecPolicy"
@@ -1613,17 +1613,17 @@
     },
     "IpsecPolicy": {
       "properties": {
-        "SALifeTimeSeconds": {
+        "sALifeTimeSeconds": {
           "type": "integer",
           "format": "int64",
           "description": "The Security Association lifetime in seconds for a site to site VPN tunnel."
         },
-        "SADataSizeKilobytes": {
+        "sADataSizeKilobytes": {
           "type": "integer",
           "format": "int64",
-          "description": "The Security Association payload size for a site to site VPN tunnel."
+          "description": "The Security Association payload size in KB for a site to site VPN tunnel."
         },
-        "IpsecEncryption": {
+        "ipsecEncryption": {
           "type": "string",
           "description": "The IPSec encryption algorithm (IKE phase 2). Possible values are 'None', 'DES', 'DES3', 'AES128', 'AES192', 'AES256', 'GCMAES128', 'GCMAES192', and 'GCMAES256'.",
           "enum": [
@@ -1642,7 +1642,7 @@
             "modelAsString": true
           }
         },
-        "IpsecIntegrity": {
+        "ipsecIntegrity": {
           "type": "string",
           "description": "The IPSec integrity algorithm (IKE phase 2). Possible values are 'MD5', 'SHA1', 'SHA256', 'GCMAES128', 'GCMAES192', and 'GCMAES256'.",
           "enum": [
@@ -1658,7 +1658,7 @@
             "modelAsString": true
           }
         },
-        "IkeEncryption": {
+        "ikeEncryption": {
           "type": "string",
           "description": "The IKE encryption algorithm (IKE phase 1). Possible values are 'DES', 'DES3', 'AES128', 'AES192', and 'AES256'.",
           "enum": [
@@ -1673,7 +1673,7 @@
             "modelAsString": true
           }
         },
-        "IkeIntegrity": {
+        "ikeIntegrity": {
           "type": "string",
           "description": "The IKE integrity algorithm (IKE phase 1). Possible values are 'MD5', 'SHA1', 'SHA256', and 'SHA384'.",
           "enum": [
@@ -1687,7 +1687,7 @@
             "modelAsString": true
           }
         },
-        "DhGroup": {
+        "dhGroup": {
           "type": "string",
           "description": "The DH Groups used in IKE Phase 1 for initial SA. Possible values are 'None', 'DHGroup1', 'DHGroup2', 'DHGroup14', 'DHGroup2048', 'ECP256', 'ECP384', and 'DHGroup24'.",
           "enum": [
@@ -1705,7 +1705,7 @@
             "modelAsString": true
           }
         },
-        "PfsGroup": {
+        "pfsGroup": {
           "type": "string",
           "description": "The DH Groups used in IKE Phase 2 for new child SA. Possible values are 'None', 'PFS1', 'PFS2', 'PFS2048', 'ECP256', 'ECP384', and 'PFS24'.",
           "enum": [
@@ -1724,15 +1724,16 @@
         }
       },
       "required": [
-        "SALifeTimeSeconds",
-        "SADataSizeKilobytes",
-        "IpsecEncryption",
-        "IpsecIntegrity",
-        "IkeEncryption",
-        "IkeIntegrity",
-        "DhGroup",
-        "PfsGroup"
-      ]
+        "sALifeTimeSeconds",
+        "sADataSizeKilobytes",
+        "ipsecEncryption",
+        "ipsecIntegrity",
+        "ikeEncryption",
+        "ikeIntegrity",
+        "dhGroup",
+        "pfsGroup"
+      ],
+      "description": "An IPSec Policy configuration for a virtual network gateway connection"
     },
 	"LocalNetworkGatewayPropertiesFormat": {
       "properties": {
