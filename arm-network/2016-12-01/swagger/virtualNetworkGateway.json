@@ -1521,6 +1521,17 @@
           "type": "boolean",
           "description": "EnableBgp flag"
         },
+        "UsePolicyBasedTrafficSelectors": {
+          "type": "boolean",
+          "description": "Enable policy-based traffic selectors."
+        },
+        "IpsecPolicies": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/IpsecPolicy"
+          },
+          "description": "The IPSec Policies to be considered by this connection."
+        },
         "resourceGuid": {
           "type": "string",
           "description": "The resource GUID property of the VirtualNetworkGatewayConnection resource."
@@ -1599,6 +1610,129 @@
         "value"
       ],	  
       "description": "Response for GetConnectionSharedKey API service call"
+    },
+    "IpsecPolicy": {
+      "properties": {
+        "SALifeTimeSeconds": {
+          "type": "integer",
+          "format": "int64",
+          "description": "The Security Association lifetime in seconds for a site to site VPN tunnel."
+        },
+        "SADataSizeKilobytes": {
+          "type": "integer",
+          "format": "int64",
+          "description": "The Security Association payload size for a site to site VPN tunnel."
+        },
+        "IpsecEncryption": {
+          "type": "string",
+          "description": "The IPSec encryption algorithm (IKE phase 2). Possible values are 'None', 'DES', 'DES3', 'AES128', 'AES192', 'AES256', 'GCMAES128', 'GCMAES192', and 'GCMAES256'.",
+          "enum": [
+            "None",
+            "DES",
+            "DES3",
+            "AES128",
+            "AES192",
+            "AES256",
+            "GCMAES128",
+            "GCMAES192",
+            "GCMAES256"
+          ],
+          "x-ms-enum": {
+            "name": "IpsecEncryption",
+            "modelAsString": true
+          }
+        },
+        "IpsecIntegrity": {
+          "type": "string",
+          "description": "The IPSec integrity algorithm (IKE phase 2). Possible values are 'MD5', 'SHA1', 'SHA256', 'GCMAES128', 'GCMAES192', and 'GCMAES256'.",
+          "enum": [
+            "MD5",
+            "SHA1",
+            "SHA256",
+            "GCMAES128",
+            "GCMAES192",
+            "GCMAES256"
+          ],
+          "x-ms-enum": {
+            "name": "IpsecIntegrity",
+            "modelAsString": true
+          }
+        },
+        "IkeEncryption": {
+          "type": "string",
+          "description": "The IKE encryption algorithm (IKE phase 1). Possible values are 'DES', 'DES3', 'AES128', 'AES192', and 'AES256'.",
+          "enum": [
+            "DES",
+            "DES3",
+            "AES128",
+            "AES192",
+            "AES256"
+          ],
+          "x-ms-enum": {
+            "name": "IkeEncryption",
+            "modelAsString": true
+          }
+        },
+        "IkeIntegrity": {
+          "type": "string",
+          "description": "The IKE integrity algorithm (IKE phase 1). Possible values are 'MD5', 'SHA1', 'SHA256', and 'SHA384'.",
+          "enum": [
+            "MD5",
+            "SHA1",
+            "SHA256",
+            "SHA384"
+          ],
+          "x-ms-enum": {
+            "name": "IkeIntegrity",
+            "modelAsString": true
+          }
+        },
+        "DhGroup": {
+          "type": "string",
+          "description": "The DH Groups used in IKE Phase 1 for initial SA. Possible values are 'None', 'DHGroup1', 'DHGroup2', 'DHGroup14', 'DHGroup2048', 'ECP256', 'ECP384', and 'DHGroup24'.",
+          "enum": [
+            "None",
+            "DHGroup1",
+            "DHGroup2",
+            "DHGroup14",
+            "DHGroup2048",
+            "ECP256",
+            "ECP384",
+            "DHGroup24"
+          ],
+          "x-ms-enum": {
+            "name": "DhGroup",
+            "modelAsString": true
+          }
+        },
+        "PfsGroup": {
+          "type": "string",
+          "description": "The DH Groups used in IKE Phase 2 for new child SA. Possible values are 'None', 'PFS1', 'PFS2', 'PFS2048', 'ECP256', 'ECP384', and 'PFS24'.",
+          "enum": [
+            "None",
+            "PFS1",
+            "PFS2",
+            "PFS2048",
+            "ECP256",
+            "ECP384",
+            "PFS24"
+          ],
+          "x-ms-enum": {
+            "name": "PfsGroup",
+            "modelAsString": true
+          }
+        }
+      },
+      "required": [
+        "SALifeTimeSeconds",
+        "SADataSizeKilobytes",
+        "IpsecEncryption",
+        "IpsecIntegrity",
+        "IkeEncryption",
+        "IkeIntegrity",
+        "DhGroup",
+        "PfsGroup"
+      ]
     },
 	"LocalNetworkGatewayPropertiesFormat": {
       "properties": {
