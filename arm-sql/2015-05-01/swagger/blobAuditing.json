@@ -23,6 +23,9 @@
         ],
         "description": "Get a blob auditing policy associated with an Azure SQL database.",
         "operationId": "DatabaseBlobAuditingPolicies_Get",
+		"x-ms-examples": {
+          "Get database blob auditing policy": { "$ref": "../examples/DatabaseBlobAuditingGet.json" }
+        },
         "parameters": [
           {
             "$ref": "#/parameters/SubscriptionIdParameter"
@@ -63,10 +66,7 @@
             }
           },
           "default": {
-            "description": "*** Error Responses: ***\n\n * 400 InvalidDatabaseBlobAuditingPolicyCreateRequest - The create database blob auditing policy request does not exist or has no properties object.\n\n * 400 InvalidBlobAuditActionsAndGroups - Invalid audit actions or action groups.\n\n * 400 DataSecurityInvalidUserSuppliedParameter - An invalid parameter value was provided by the client.\n\n * 404 SubscriptionDoesNotHaveServer - The requested server was not found\n\n * 404 SourceDatabaseNotFound - The source database does not exist.\n\n * 500 DatabaseIsUnavailable - Loading failed. Please try again later.\n\n * 500 GetBlobAuditingPolicyFailed - Failed to get Auditing settings",
-            "schema": {
-              "$ref": "#/definitions/ArmErrorResponseMessage"
-            }
+            "description": "*** Error Responses: ***\n\n * 400 InvalidDatabaseBlobAuditingPolicyCreateRequest - The create database blob auditing policy request does not exist or has no properties object.\n\n * 400 InvalidBlobAuditActionsAndGroups - Invalid audit actions or action groups.\n\n * 400 DataSecurityInvalidUserSuppliedParameter - An invalid parameter value was provided by the client.\n\n * 404 SubscriptionDoesNotHaveServer - The requested server was not found\n\n * 404 SourceDatabaseNotFound - The source database does not exist.\n\n * 500 DatabaseIsUnavailable - Loading failed. Please try again later.\n\n * 500 GetBlobAuditingPolicyFailed - Failed to get Auditing settings"
           }
         },
         "deprecated": false
@@ -77,6 +77,10 @@
         ],
         "description": "Creates or updates a blob auditing policy for an Azure SQL database.",
         "operationId": "DatabaseBlobAuditingPolicies_CreateOrUpdate",
+		"x-ms-examples": {
+		  "Create database blob auditing policy min": { "$ref": "../examples/DatabaseBlobAuditingCreateMin.json" },
+		  "Create database blob auditing policy max": { "$ref": "../examples/DatabaseBlobAuditingCreateMax.json" }
+        },
         "parameters": [
           {
             "$ref": "#/parameters/SubscriptionIdParameter"
@@ -119,13 +123,19 @@
         ],
         "responses": {
           "200": {
-            "description": "Successfully set the database blob auditing policy."
+            "description": "Successfully set the database blob auditing policy.",
+            "schema": {
+              "$ref": "#/definitions/DatabaseBlobAuditingPolicyResource"
+            }
+          },
+		  "201": {
+            "description": "Successfully created the database blob auditing policy.",
+            "schema": {
+              "$ref": "#/definitions/DatabaseBlobAuditingPolicyResource"
+            }
           },
           "default": {
-            "description": "*** Error Responses: ***\n\n * 400 InvalidDatabaseBlobAuditingPolicyCreateRequest - The create database blob auditing policy request does not exist or has no properties object.\n\n * 400 InvalidBlobAuditActionsAndGroups - Invalid audit actions or action groups.\n\n * 400 DataSecurityInvalidUserSuppliedParameter - An invalid parameter value was provided by the client.\n\n * 404 SubscriptionDoesNotHaveServer - The requested server was not found\n\n * 404 SourceDatabaseNotFound - The source database does not exist.\n\n * 500 DatabaseIsUnavailable - Loading failed. Please try again later.\n\n * 500 UpsertBlobAuditingPolicyFailed - An error has occurred while saving Auditing settings, please try again later",
-            "schema": {
-              "$ref": "#/definitions/ArmErrorResponseMessage"
-            }
+            "description": "*** Error Responses: ***\n\n * 400 InvalidDatabaseBlobAuditingPolicyCreateRequest - The create database blob auditing policy request does not exist or has no properties object.\n\n * 400 InvalidBlobAuditActionsAndGroups - Invalid audit actions or action groups.\n\n * 400 DataSecurityInvalidUserSuppliedParameter - An invalid parameter value was provided by the client.\n\n * 404 SubscriptionDoesNotHaveServer - The requested server was not found\n\n * 404 SourceDatabaseNotFound - The source database does not exist.\n\n * 500 DatabaseIsUnavailable - Loading failed. Please try again later.\n\n * 500 UpsertBlobAuditingPolicyFailed - An error has occurred while saving Auditing settings, please try again later"
           }
         },
         "deprecated": false
@@ -136,57 +146,11 @@
         "tags": [
           "ServerBlobAuditingOperationResults"
         ],
-        "description": "Get a list of server blob auditing operation results.",
-        "operationId": "ServerBlobAuditingOperationResultsList_Get",
-        "parameters": [
-          {
-            "$ref": "#/parameters/SubscriptionIdParameter"
-          },
-          {
-            "$ref": "#/parameters/ResourceGroupParameter"
-          },
-          {
-            "name": "serverName",
-            "in": "path",
-            "description": "The name of the Azure SQL server for which server blob audit policy is defined.",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "name": "blobAuditingPolicyName",
-            "in": "path",
-            "description": "The name of the blob auditing policy.",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "$ref": "#/parameters/ApiVersionParameter"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Successfully retrieved the server blob auditing operation results.",
-            "schema": {
-              "$ref": "#/definitions/ODataCollectionResponse[List[BlobAuditingOperationResultResource]]"
-            }
-          },
-          "default": {
-            "description": "*** Error Responses: ***\n\n * 404 SubscriptionDoesNotHaveServer - The requested server was not found\n\n * 404 OperationIdNotFound - The operation with Id does not exist.\n\n * 405 ServerBlobAuditingOperationResultsNotImplemented - Operations on Server Auditing operation results are not enabled yet\n\n * 500 GetServerBlobAuditingOperationResultsFailed - Failed to get Auditing operation results",
-            "schema": {
-              "$ref": "#/definitions/ArmErrorResponseMessage"
-            }
-          }
+        "description": "Get a server blob auditing operation result.",
+        "operationId": "ServerBlobAuditingOperationResult_Get",
+		"x-ms-examples": {
+          "Get server blob auditing operation result": { "$ref": "../examples/ServerBlobAuditingOperationResult.json" }
         },
-        "deprecated": false
-      }
-    },
-	"/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/servers/{serverName}/auditingSettings/{blobAuditingPolicyName}/operationResults": {
-      "get": {
-        "tags": [
-          "ServerBlobAuditingOperationResults"
-        ],
-        "description": "Get a list of server blob auditing operation results.",
-        "operationId": "ServerBlobAuditingOperationResults_Get",
         "parameters": [
           {
             "$ref": "#/parameters/SubscriptionIdParameter"
@@ -223,26 +187,75 @@
           "200": {
             "description": "Successfully retrieved the server blob auditing operation results.",
             "schema": {
-              "$ref": "#/definitions/ODataCollectionResponse[List[BlobAuditingOperationResultResource]]"
+              "$ref": "#/definitions/BlobAuditingOperationResultResource"
             }
           },
           "default": {
-            "description": "*** Error Responses: ***\n\n * 404 SubscriptionDoesNotHaveServer - The requested server was not found\n\n * 404 OperationIdNotFound - The operation with Id does not exist.\n\n * 405 ServerBlobAuditingOperationResultsNotImplemented - Operations on Server Auditing operation results are not enabled yet\n\n * 500 GetServerBlobAuditingOperationResultsFailed - Failed to get Auditing operation results",
-            "schema": {
-              "$ref": "#/definitions/ArmErrorResponseMessage"
-            }
+            "description": "*** Error Responses: ***\n\n * 404 SubscriptionDoesNotHaveServer - The requested server was not found\n\n * 404 OperationIdNotFound - The operation with Id does not exist.\n\n * 405 ServerBlobAuditingOperationResultsNotImplemented - Operations on Server Auditing operation results are not enabled yet\n\n * 500 GetServerBlobAuditingOperationResultsFailed - Failed to get Auditing operation results"
           }
         },
         "deprecated": false
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/servers/{serverName}/auditingSettings/{blobAuditingPolicyName}": {
+	"/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/servers/{serverName}/auditingSettings/{blobAuditingPolicyName}/operationResults": {
+      "get": {
+        "tags": [
+          "ServerBlobAuditingOperationResults"
+        ],
+        "description": "Get a list of server blob auditing operation results.",
+        "operationId": "ServerBlobAuditingOperationResultsList_Get",
+		"x-ms-examples": {
+          "Get server blob auditing operation results": { "$ref": "../examples/ServerBlobAuditingOperationResultsList.json" }
+        },
+        "parameters": [
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupParameter"
+          },
+          {
+            "name": "serverName",
+            "in": "path",
+            "description": "The name of the Azure SQL server for which server blob audit policy is defined.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "blobAuditingPolicyName",
+            "in": "path",
+            "description": "The name of the blob auditing policy.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successfully retrieved the server blob auditing operation results.",
+            "schema": {
+              "$ref": "#/definitions/BlobAuditingOperationListResult"
+            }
+          },
+          "default": {
+            "description": "*** Error Responses: ***\n\n * 404 SubscriptionDoesNotHaveServer - The requested server was not found\n\n * 404 OperationIdNotFound - The operation with Id does not exist.\n\n * 405 ServerBlobAuditingOperationResultsNotImplemented - Operations on Server Auditing operation results are not enabled yet\n\n * 500 GetServerBlobAuditingOperationResultsFailed - Failed to get Auditing operation results"
+          }
+        },
+        "deprecated": false
+      }
+    },
+   "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/servers/{serverName}/auditingSettings/{blobAuditingPolicyName}": {
       "get": {
         "tags": [
           "ServerBlobAuditingPolicies"
         ],
         "description": "Get a blob auditing policy associated with an Azure SQL server.",
         "operationId": "ServerBlobAuditingPolicies_Get",
+		"x-ms-examples": {
+          "Get server blob auditing policy": { "$ref": "../examples/ServerBlobAuditingGet.json" }
+        },
         "parameters": [
           {
             "$ref": "#/parameters/SubscriptionIdParameter"
@@ -276,10 +289,7 @@
             }
           },
           "default": {
-            "description": "*** Error Responses: ***\n\n * 400 InvalidServerBlobAuditingPolicyCreateRequest - The create server blob auditing policy request does not exist or has no properties object.\n\n * 400 InvalidBlobAuditActionsAndGroups - Invalid audit actions or action groups.\n\n * 400 DataSecurityInvalidUserSuppliedParameter - An invalid parameter value was provided by the client.\n\n * 404 SubscriptionDoesNotHaveServer - The requested server was not found\n\n * 405 ServerBlobAuditingPolicyNotImplemented - Operations on Server Auditing settings are not enabled yet\n\n * 500 GetBlobAuditingPolicyFailed - Failed to get Auditing settings",
-            "schema": {
-              "$ref": "#/definitions/ArmErrorResponseMessage"
-            }
+            "description": "*** Error Responses: ***\n\n * 400 InvalidServerBlobAuditingPolicyCreateRequest - The create server blob auditing policy request does not exist or has no properties object.\n\n * 400 InvalidBlobAuditActionsAndGroups - Invalid audit actions or action groups.\n\n * 400 DataSecurityInvalidUserSuppliedParameter - An invalid parameter value was provided by the client.\n\n * 404 SubscriptionDoesNotHaveServer - The requested server was not found\n\n * 405 ServerBlobAuditingPolicyNotImplemented - Operations on Server Auditing settings are not enabled yet\n\n * 500 GetBlobAuditingPolicyFailed - Failed to get Auditing settings"
           }
         },
         "deprecated": false
@@ -290,6 +300,10 @@
         ],
         "description": "Creates or updates a blob auditing policy for an Azure SQL server.",
         "operationId": "ServerBlobAuditingPolicies_CreateOrUpdate",
+		"x-ms-examples": {
+		  "Create server blob auditing policy min": { "$ref": "../examples/ServerBlobAuditingCreateMin.json" },
+		  "Create server blob auditing policy max": { "$ref": "../examples/ServerBlobAuditingCreateMax.json" }
+        },
         "parameters": [
           {
             "$ref": "#/parameters/SubscriptionIdParameter"
@@ -335,10 +349,7 @@
             "schema": {}
           },
           "default": {
-            "description": "*** Error Responses: ***\n\n * 400 InvalidServerBlobAuditingPolicyCreateRequest - The create server blob auditing policy request does not exist or has no properties object.\n\n * 400 InvalidBlobAuditActionsAndGroups - Invalid audit actions or action groups.\n\n * 400 DataSecurityInvalidUserSuppliedParameter - An invalid parameter value was provided by the client.\n\n * 404 SubscriptionDoesNotHaveServer - The requested server was not found\n\n * 405 ServerBlobAuditingPolicyNotImplemented - Operations on Server Auditing settings are not enabled yet\n\n * 500 UpsertBlobAuditingPolicyFailed - An error has occurred while saving Auditing settings, please try again later",
-            "schema": {
-              "$ref": "#/definitions/ArmErrorResponseMessage"
-            }
+            "description": "*** Error Responses: ***\n\n * 400 InvalidServerBlobAuditingPolicyCreateRequest - The create server blob auditing policy request does not exist or has no properties object.\n\n * 400 InvalidBlobAuditActionsAndGroups - Invalid audit actions or action groups.\n\n * 400 DataSecurityInvalidUserSuppliedParameter - An invalid parameter value was provided by the client.\n\n * 404 SubscriptionDoesNotHaveServer - The requested server was not found\n\n * 405 ServerBlobAuditingPolicyNotImplemented - Operations on Server Auditing settings are not enabled yet\n\n * 500 UpsertBlobAuditingPolicyFailed - An error has occurred while saving Auditing settings, please try again later"
           }
         },
         "deprecated": false
@@ -346,62 +357,6 @@
     }
   },
   "definitions": {
-    "ArmErrorResponseMessage": {
-      "description": "Contains information about the error that occurred.",
-      "type": "object",
-      "properties": {
-        "error": {
-          "$ref": "#/definitions/ArmErrorResponseExtendedErrorInfo",
-          "description": "Contains the information about the error."
-        }
-      }
-    },
-    "ArmErrorResponseExtendedErrorInfo": {
-      "description": "Contains additional information about the error that occurred.",
-      "type": "object",
-      "properties": {
-        "details": {
-          "description": "A list of error details.",
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/ArmErrorResponseErrorDetail"
-          }
-        },
-        "innerError": {
-          "description": "The inner error if available."
-        },
-        "code": {
-          "description": "The error code associated with the failure.",
-          "type": "string"
-        },
-        "message": {
-          "description": "The error message associated with the failure.",
-          "type": "string"
-        },
-        "target": {
-          "description": "The target of the particular error.",
-          "type": "string"
-        }
-      }
-    },
-    "ArmErrorResponseErrorDetail": {
-      "description": "Contains detailed information about the error that occurred.",
-      "type": "object",
-      "properties": {
-        "code": {
-          "description": "The error code associated with the failure.",
-          "type": "string"
-        },
-        "message": {
-          "description": "The error message associated with the failure.",
-          "type": "string"
-        },
-        "target": {
-          "description": "The target of the particular error.",
-          "type": "string"
-        }
-      }
-    },
     "DatabaseBlobAuditingPolicyResource": {
       "description": "Contains information about an Azure SQL Database Blob Auditing policy.",
       "type": "object",
@@ -505,7 +460,7 @@
         }
       }
     },
-    "ODataCollectionResponse[List[BlobAuditingOperationResultResource]]": {
+    "BlobAuditingOperationListResult": {
       "type": "object",
       "properties": {
         "value": {
