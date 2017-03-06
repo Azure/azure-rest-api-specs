@@ -2478,6 +2478,249 @@
         }
       }
     },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Logic/integrationAccounts/{integrationAccountName}/sessions": {
+      "get": {
+        "tags": [
+          "IntegrationAccountSessions"
+        ],
+        "operationId": "Sessions_ListByIntegrationAccounts",
+        "x-ms-examples": { 
+          "SessionsListByIntegrationAccounts": { "$ref": "../examples/SessionsListByIntegrationAccounts.json" } 
+        },
+        "description": "Gets a list of integration account sessions.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/subscriptionId"
+          },
+          {
+            "name": "resourceGroupName",
+            "description": "The resource group name.",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "integrationAccountName",
+            "description": "The integration account name.",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "$ref": "#/parameters/api-version"
+          },
+          {
+            "name": "$top",
+            "description": "The number of items to be included in the result.",
+            "in": "query",
+            "required": false,
+            "type": "integer",
+            "format": "int32"
+          },
+          {
+            "name": "$filter",
+            "description": "The filter to apply on the operation.",
+            "in": "query",
+            "required": false,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/IntegrationAccountSessionListResult"
+            }
+          },
+          "default": {
+            "description": "Logic error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        },
+        "x-ms-odata": "#/definitions/IntegrationAccountSessionFilter"
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Logic/integrationAccounts/{integrationAccountName}/sessions/{sessionName}": {
+      "get": {
+        "tags": [
+          "IntegrationAccountSessions"
+        ],
+        "operationId": "Sessions_Get",
+        "x-ms-examples": { 
+          "SessionsGet": { "$ref": "../examples/SessionsGet.json" } 
+        },
+        "description": "Gets an integration account session.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/subscriptionId"
+          },
+          {
+            "name": "resourceGroupName",
+            "description": "The resource group name.",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "integrationAccountName",
+            "description": "The integration account name.",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "sessionName",
+            "description": "The integration account session name.",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "$ref": "#/parameters/api-version"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/IntegrationAccountSession"
+            }
+          },
+          "default": {
+            "description": "Logic error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "IntegrationAccountSessions"
+        ],
+        "operationId": "Sessions_CreateOrUpdate",
+        "x-ms-examples": { 
+          "SessionsCreateOrUpdate": { "$ref": "../examples/SessionsCreateOrUpdate.json" } 
+        },
+        "description": "Creates or updates an integration account session.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/subscriptionId"
+          },
+          {
+            "name": "resourceGroupName",
+            "description": "The resource group name.",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "integrationAccountName",
+            "description": "The integration account name.",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "sessionName",
+            "description": "The integration account session name.",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "$ref": "#/parameters/api-version"
+          },
+          {
+            "name": "session",
+            "description": "The integration account session.",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/IntegrationAccountSession"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/IntegrationAccountSession"
+            }
+          },
+          "201": {
+            "description": "Created",
+            "schema": {
+              "$ref": "#/definitions/IntegrationAccountSession"
+            }
+          },
+          "default": {
+            "description": "Logic error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "IntegrationAccountSessions"
+        ],
+        "operationId": "Sessions_Delete",
+        "x-ms-examples": { 
+          "SessionsDelete": { "$ref": "../examples/SessionsDelete.json" } 
+        },
+        "description": "Deletes an integration account session.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/subscriptionId"
+          },
+          {
+            "name": "resourceGroupName",
+            "description": "The resource group name.",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "integrationAccountName",
+            "description": "The integration account name.",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "sessionName",
+            "description": "The integration account session name.",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "$ref": "#/parameters/api-version"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "204": {
+            "description": "No Content"
+          },
+          "default": {
+            "description": "Logic error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        }
+      }
+    },
     "/providers/Microsoft.Logic/operations": {
       "get": {
         "tags": [
@@ -2557,7 +2800,7 @@
     },
     "Object": {
       "type": "object",
-      "properties": {}
+      "properties": { }
     },
     "ResourceReference": {
       "type": "object",
@@ -4272,15 +4515,15 @@
     "AgreementContent": {
       "type": "object",
       "properties": {
-        "AS2": {
+        "aS2": {
           "$ref": "#/definitions/AS2AgreementContent",
           "description": "The AS2 agreement content."
         },
-        "X12": {
+        "x12": {
           "$ref": "#/definitions/X12AgreementContent",
           "description": "The X12 agreement content."
         },
-        "Edifact": {
+        "edifact": {
           "$ref": "#/definitions/EdifactAgreementContent",
           "description": "The EDIFACT agreement content."
         }
@@ -4761,8 +5004,8 @@
         "interchangeControlNumberValidityDays",
         "checkDuplicateGroupControlNumber",
         "checkDuplicateTransactionSetControlNumber",
-        "validateEDITypes",
-        "validateXSDTypes",
+        "validateEdiTypes",
+        "validateXsdTypes",
         "allowLeadingAndTrailingSpacesAndZeroes",
         "trimLeadingAndTrailingSpacesAndZeroes",
         "trailingSeparatorPolicy"
@@ -4789,11 +5032,11 @@
           "type": "boolean",
           "description": "The value indicating whether to check for duplicate transaction set control number."
         },
-        "validateEDITypes": {
+        "validateEdiTypes": {
           "type": "boolean",
           "description": "The value indicating whether to Whether to validate EDI types."
         },
-        "validateXSDTypes": {
+        "validateXsdTypes": {
           "type": "boolean",
           "description": "The value indicating whether to Whether to validate XSD types."
         },
@@ -5210,8 +5453,8 @@
       "type": "object",
       "required": [
         "messageId",
-        "validateEDITypes",
-        "validateXSDTypes",
+        "validateEdiTypes",
+        "validateXsdTypes",
         "allowLeadingAndTrailingSpacesAndZeroes",
         "validateCharacterSet",
         "trimLeadingAndTrailingSpacesAndZeroes",
@@ -5222,11 +5465,11 @@
           "type": "string",
           "description": "The message id on which the validation settings has to be applied."
         },
-        "validateEDITypes": {
+        "validateEdiTypes": {
           "type": "boolean",
           "description": "The value indicating whether to validate EDI types."
         },
-        "validateXSDTypes": {
+        "validateXsdTypes": {
           "type": "boolean",
           "description": "The value indicating whether to validate XSD types."
         },
@@ -5589,8 +5832,8 @@
         "interchangeControlNumberValidityDays",
         "checkDuplicateGroupControlNumber",
         "checkDuplicateTransactionSetControlNumber",
-        "validateEDITypes",
-        "validateXSDTypes",
+        "validateEdiTypes",
+        "validateXsdTypes",
         "allowLeadingAndTrailingSpacesAndZeroes",
         "trimLeadingAndTrailingSpacesAndZeroes",
         "trailingSeparatorPolicy"
@@ -5617,11 +5860,11 @@
           "type": "boolean",
           "description": "The value indicating whether to check for duplicate transaction set control number."
         },
-        "validateEDITypes": {
+        "validateEdiTypes": {
           "type": "boolean",
           "description": "The value indicating whether to Whether to validate EDI types."
         },
-        "validateXSDTypes": {
+        "validateXsdTypes": {
           "type": "boolean",
           "description": "The value indicating whether to Whether to validate XSD types."
         },
@@ -6133,8 +6376,8 @@
       "required": [
         "messageId",
         "enforceCharacterSet",
-        "validateEDITypes",
-        "validateXSDTypes",
+        "validateEdiTypes",
+        "validateXsdTypes",
         "allowLeadingAndTrailingSpacesAndZeroes",
         "trailingSeparatorPolicy",
         "trimLeadingAndTrailingSpacesAndZeroes"
@@ -6148,11 +6391,11 @@
           "type": "boolean",
           "description": "The value indicating whether to validate character Set."
         },
-        "validateEDITypes": {
+        "validateEdiTypes": {
           "type": "boolean",
           "description": "The value indicating whether to validate EDI types."
         },
-        "validateXSDTypes": {
+        "validateXsdTypes": {
           "type": "boolean",
           "description": "The value indicating whether to validate XSD types."
         },
@@ -6381,6 +6624,78 @@
       },
       "description": "The reference to the key vault key."
     },
+    "IntegrationAccountSessionFilter": {
+      "type": "object",
+      "required": [
+        "changedTime"
+      ],
+      "properties": {
+        "changedTime": {
+          "type": "string",
+          "format": "date-time",
+          "description": "The changed time of integration account sessions."
+        }
+      },
+      "description": "The integration account session filter."
+    },
+    "IntegrationAccountSessionListResult": {
+      "type": "object",
+      "properties": {
+        "value": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/IntegrationAccountSession"
+          },
+          "description": "The list of integration account sessions."
+        },
+        "nextLink": {
+          "type": "string",
+          "description": "The URL to get the next set of results."
+        }
+      },
+      "description": "The list of integration account sessions."
+    },
+    "IntegrationAccountSession": {
+      "type": "object",
+      "required": [
+        "properties"
+      ],
+      "properties": {
+        "properties": {
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/IntegrationAccountSessionProperties",
+          "description": "The integration account session properties."
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "#/definitions/Resource"
+        }
+      ],
+      "description": "The integration account session."
+    },
+    "IntegrationAccountSessionProperties": {
+      "type": "object",
+      "properties": {
+        "createdTime": {
+          "type": "string",
+          "format": "date-time",
+          "readOnly": true,
+          "description": "The created time."
+        },
+        "changedTime": {
+          "type": "string",
+          "format": "date-time",
+          "readOnly": true,
+          "description": "The changed time."
+        },
+        "content": {
+          "$ref": "#/definitions/Object",
+          "description": "The session content."
+        }
+      },
+      "description": "The integration account session properties."
+    },
     "Operation": {
       "description": "Logic REST API operation",
       "type": "object",
@@ -6425,7 +6740,17 @@
       }
     },
     "ErrorResponse": {
-      "description": "Error reponse indicates Logic service is not able to process the incoming request. The reason is provided in the error message.",
+       "description": "Error reponse indicates Logic service is not able to process the incoming request. The error property contains the error details.",
+      "type": "object",
+      "properties": {
+        "error": {
+          "$ref": "#/definitions/ErrorProperties",
+          "description": "The error properties."
+        }
+      }
+    },
+    "ErrorProperties": {
+      "description": "Error properties indicate why the Logic service was not able to process the incoming request. The reason is provided in the error message.",
       "type": "object",
       "properties": {
         "code": {
