@@ -2388,14 +2388,6 @@
           },
           "description": "The list of service tier advisors for this database. Expanded property"
         },
-        "schemas": {
-          "readOnly": true,
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/Schema"
-          },
-          "description": "The schemas from this database."
-        },
         "transparentDataEncryption": {
           "readOnly": true,
           "type": "array",
@@ -2668,49 +2660,6 @@
       },
       "description": "Represents a Slo Usage Metric."
     },
-    "TableProperties": {
-      "properties": {
-        "tableType": {
-          "readOnly": true,
-          "type": "string",
-          "description": "The type of database table.",
-          "enum": [
-            "BaseTable",
-            "View"
-          ],
-          "x-ms-enum": {
-            "name": "TableType"
-          }
-        },
-        "columns": {
-          "readOnly": true,
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/Column"
-          },
-          "description": "The columns from this table."
-        },
-        "recommendedIndexes": {
-          "readOnly": true,
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/RecommendedIndex"
-          },
-          "description": "The recommended indices for this table."
-        }
-      },
-      "description": "Represents the properties of a database table."
-    },
-    "ColumnProperties": {
-      "properties": {
-        "columnType": {
-          "readOnly": true,
-          "type": "string",
-          "description": "The type of database table column."
-        }
-      },
-      "description": "Represents the properties of a database table column."
-    },
     "OperationImpact": {
       "properties": {
         "name": {
@@ -2737,64 +2686,6 @@
         }
       },
       "description": "Represents impact of an operation, both in absolute and relative terms."
-    },
-    "Column": {
-      "properties": {
-        "properties": {
-          "$ref": "#/definitions/ColumnProperties",
-          "description": "The properties representing the resource.",
-          "x-ms-client-flatten": true
-        }
-      },
-      "allOf": [
-        {
-          "$ref": "#/definitions/Resource"
-        }
-      ],
-      "description": "Represents a database table column."
-    },
-    "Table": {
-      "properties": {
-        "properties": {
-          "$ref": "#/definitions/TableProperties",
-          "description": "The properties representing the resource.",
-          "x-ms-client-flatten": true
-        }
-      },
-      "allOf": [
-        {
-          "$ref": "#/definitions/Resource"
-        }
-      ],
-      "description": "Represents a database table."
-    },
-    "SchemaProperties": {
-      "properties": {
-        "tables": {
-          "readOnly": true,
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/Table"
-          },
-          "description": "The tables from this database."
-        }
-      },
-      "description": "Represents the properties of a database schema."
-    },
-    "Schema": {
-      "properties": {
-        "properties": {
-          "$ref": "#/definitions/SchemaProperties",
-          "description": "The properties representing the resource.",
-          "x-ms-client-flatten": true
-        }
-      },
-      "allOf": [
-        {
-          "$ref": "#/definitions/Resource"
-        }
-      ],
-      "description": "Represents a database schema."
     },
     "RestorePointProperties": {
       "properties": {
