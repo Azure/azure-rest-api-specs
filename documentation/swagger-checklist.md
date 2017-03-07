@@ -65,7 +65,9 @@ OR
 
 - [ ] **Snnnn**: checklist text here.
 
-Where "M" stands for '*MUST*' or '*MUST NOT*' requirement. "S" stands for '*SHOULD*' or '*SHOULD NOT*' requirement. And, "nnnn" is replaced by a number that is unique among all the requirements in the checklist, thereby "nnnn" becomes a unique requirement identifier.
+"M" stands for a '*MUST*' or '*MUST NOT*' requirement. 
+"S" stands for a '*SHOULD*' or '*SHOULD NOT*' requirement. 
+"nnnn" is replaced by a number that is unique among all of the "M" or "S" requirements in the checklist, thereby "Mnnnn" or "Snnnn" becomes a unique requirement identifier.
 
 ## Validation Tools for Swagger Checklist ##
 
@@ -94,7 +96,7 @@ The Azure Developer Experience team will continue to deliver rich tools to valid
   - `ListByResourceGroup()` - list all resources in a resource group within a subscription.
   - `ListByParent()` - where "Parent" is a context specific suffix. It lists all resource under a parent.
 
-- [ ] **M1005**: :white_check_mark: Get operations *MUST* use the METHOD name "Get" or the METHOD name must start with "List"
+- [ ] **M1005**: :white_check_mark: GET operations *MUST* use the METHOD name "Get" or the METHOD name must start with "List"
 
 - [ ] **M1006**: :white_check_mark: PUT operations *MUST* use the METHOD Name "Create"
 

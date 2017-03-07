@@ -15,6 +15,9 @@
         ],
         "parameters": [
           {
+            "$ref": "#/parameters/timeout"
+          },
+          {
             "$ref": "#/parameters/api-version"
           }
         ],
@@ -52,12 +55,246 @@
             }
           },
           {
+            "$ref": "#/parameters/timeout"
+          },
+          {
             "$ref": "#/parameters/api-version"
           }
         ],
         "responses": {
           "200": {
             "description": "The cluster health",
+            "schema": {
+              "type": "string"
+            }
+          },
+          "default": {
+            "description": "Error",
+            "schema": {
+              "$ref": "#/definitions/ErrorModel"
+            }
+          }
+        }
+      }
+    },
+    "/$/Upgrade": {
+      "post": {
+        "operationId": "ClusterUpgrades_Start",
+        "description": "Start cluster upgrades",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "startClusterUpgrade",
+            "in": "body",
+            "description": "The description of the start cluster upgrade",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/StartClusterUpgrade"
+            }
+          },
+          {
+            "$ref": "#/parameters/timeout"
+          },
+          {
+            "$ref": "#/parameters/api-version"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The cluster upgrade",
+            "schema": {
+              "type": "string"
+            }
+          },
+          "default": {
+            "description": "Error",
+            "schema": {
+              "$ref": "#/definitions/ErrorModel"
+            }
+          }
+        }
+      }
+    },
+    "/$/UpdateUpgrade": {
+      "post": {
+        "operationId": "ClusterUpgrades_Update",
+        "description": "Update cluster upgrades",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "updateClusterUpgrade",
+            "in": "body",
+            "description": "The description of the update cluster upgrade",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/UpdateClusterUpgrade"
+            }
+          },
+          {
+            "$ref": "#/parameters/timeout"
+          },
+          {
+            "$ref": "#/parameters/api-version"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The cluster upgrade",
+            "schema": {
+              "type": "string"
+            }
+          },
+          "default": {
+            "description": "Error",
+            "schema": {
+              "$ref": "#/definitions/ErrorModel"
+            }
+          }
+        }
+      }
+    },
+    "/$/MoveToNextUpgradeDomain": {
+      "post": {
+        "operationId": "ClusterUpgrades_Resume",
+        "description": "Resume cluster upgrades",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "resumeClusterUpgrade",
+            "in": "body",
+            "description": "The upgrade of the cluster",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/ResumeClusterUpgrade"
+            }
+          },
+          {
+            "$ref": "#/parameters/timeout"
+          },
+          {
+            "$ref": "#/parameters/api-version"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The cluster upgrade",
+            "schema": {
+              "type": "string"
+            }
+          },
+          "default": {
+            "description": "Error",
+            "schema": {
+              "$ref": "#/definitions/ErrorModel"
+            }
+          }
+        }
+      }
+    },
+    "/$/RollbackUpgrade": {
+      "post": {
+        "operationId": "ClusterUpgrades_Rollback",
+        "description": "Rollback cluster upgrades",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/timeout"
+          },
+          {
+            "$ref": "#/parameters/api-version"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The cluster upgrade",
+            "schema": {
+              "type": "string"
+            }
+          },
+          "default": {
+            "description": "Error",
+            "schema": {
+              "$ref": "#/definitions/ErrorModel"
+            }
+          }
+        }
+      }
+    },
+    "/$/Provision": {
+      "post": {
+        "operationId": "ClusterPackages_Register",
+        "description": "Register cluster packages",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "registerClusterPackage",
+            "in": "body",
+            "description": "The package of the register cluster",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/RegisterClusterPackage"
+            }
+          },
+          {
+            "$ref": "#/parameters/timeout"
+          },
+          {
+            "$ref": "#/parameters/api-version"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The cluster upgrade",
+            "schema": {
+              "type": "string"
+            }
+          },
+          "default": {
+            "description": "Error",
+            "schema": {
+              "$ref": "#/definitions/ErrorModel"
+            }
+          }
+        }
+      }
+    },
+    "/$/Unprovision": {
+      "post": {
+        "operationId": "ClusterPackages_Unregister",
+        "description": "Unregister cluster packages",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "unregisterClusterPackage",
+            "in": "body",
+            "description": "The package of the unregister cluster",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/UnregisterClusterPackage"
+            }
+          },
+          {
+            "$ref": "#/parameters/timeout"
+          },
+          {
+            "$ref": "#/parameters/api-version"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The cluster upgrade",
             "schema": {
               "type": "string"
             }
@@ -79,6 +316,9 @@
           "application/json"
         ],
         "parameters": [
+          {
+            "$ref": "#/parameters/timeout"
+          },
           {
             "$ref": "#/parameters/api-version"
           },
@@ -122,6 +362,9 @@
             "required": true
           },
           {
+            "$ref": "#/parameters/timeout"
+          },
+          {
             "$ref": "#/parameters/api-version"
           }
         ],
@@ -155,6 +398,9 @@
             "description": "The name of the node",
             "type": "string",
             "required": true
+          },
+          {
+            "$ref": "#/parameters/timeout"
           },
           {
             "$ref": "#/parameters/api-version"
@@ -201,6 +447,9 @@
             }
           },
           {
+            "$ref": "#/parameters/timeout"
+          },
+          {
             "$ref": "#/parameters/api-version"
           }
         ],
@@ -234,6 +483,9 @@
             "description": "The name of the node",
             "type": "string",
             "required": true
+          },
+          {
+            "$ref": "#/parameters/timeout"
           },
           {
             "$ref": "#/parameters/api-version"
@@ -278,6 +530,9 @@
             "type": "string"
           },
           {
+            "$ref": "#/parameters/timeout"
+          },
+          {
             "$ref": "#/parameters/api-version"
           }
         ],
@@ -311,6 +566,9 @@
             "description": "The name of the node",
             "type": "string",
             "required": true
+          },
+          {
+            "$ref": "#/parameters/timeout"
           },
           {
             "$ref": "#/parameters/api-version"
@@ -356,6 +614,9 @@
             "description": "The name of the application",
             "type": "string",
             "required": true
+          },
+          {
+            "$ref": "#/parameters/timeout"
           },
           {
             "$ref": "#/parameters/api-version"
@@ -415,6 +676,9 @@
             "type": "string"
           },
           {
+            "$ref": "#/parameters/timeout"
+          },
+          {
             "$ref": "#/parameters/api-version"
           }
         ],
@@ -448,6 +712,9 @@
             "description": "The name of the node",
             "type": "string",
             "required": true
+          },
+          {
+            "$ref": "#/parameters/timeout"
           },
           {
             "$ref": "#/parameters/api-version"
@@ -491,6 +758,9 @@
             "type": "string",
             "required": true,
             "x-ms-skip-url-encoding": true
+          },
+          {
+            "$ref": "#/parameters/timeout"
           },
           {
             "$ref": "#/parameters/api-version"
@@ -537,6 +807,9 @@
             "type": "string",
             "required": true,
             "x-ms-skip-url-encoding": true
+          },
+          {
+            "$ref": "#/parameters/timeout"
           },
           {
             "$ref": "#/parameters/api-version"
@@ -592,6 +865,9 @@
             "required": true
           },
           {
+            "$ref": "#/parameters/timeout"
+          },
+          {
             "$ref": "#/parameters/api-version"
           }
         ],
@@ -633,6 +909,9 @@
             "type": "string",
             "required": true,
             "x-ms-skip-url-encoding": true
+          },
+          {
+            "$ref": "#/parameters/timeout"
           },
           {
             "$ref": "#/parameters/api-version"
@@ -695,6 +974,9 @@
             "type": "string"
           },
           {
+            "$ref": "#/parameters/timeout"
+          },
+          {
             "$ref": "#/parameters/api-version"
           }
         ],
@@ -736,6 +1018,9 @@
             "type": "string",
             "required": true,
             "x-ms-skip-url-encoding": true
+          },
+          {
+            "$ref": "#/parameters/timeout"
           },
           {
             "$ref": "#/parameters/api-version"
@@ -783,6 +1068,9 @@
             "schema": {
               "$ref": "#/definitions/NodeHealthReport"
             }
+          },
+          {
+            "$ref": "#/parameters/timeout"
           },
           {
             "$ref": "#/parameters/api-version"
@@ -835,6 +1123,9 @@
             "schema": {
               "$ref": "#/definitions/DeployedApplicationHealthReport"
             }
+          },
+          {
+            "$ref": "#/parameters/timeout"
           },
           {
             "$ref": "#/parameters/api-version"
@@ -896,6 +1187,9 @@
             }
           },
           {
+            "$ref": "#/parameters/timeout"
+          },
+          {
             "$ref": "#/parameters/api-version"
           }
         ],
@@ -923,6 +1217,9 @@
           "application/json"
         ],
         "parameters": [
+          {
+            "$ref": "#/parameters/timeout"
+          },
           {
             "$ref": "#/parameters/api-version"
           }
@@ -960,6 +1257,9 @@
             "description": "The name of the application type",
             "type": "string",
             "required": true
+          },
+          {
+            "$ref": "#/parameters/timeout"
           },
           {
             "$ref": "#/parameters/api-version"
@@ -1014,6 +1314,9 @@
             "type": "string"
           },
           {
+            "$ref": "#/parameters/timeout"
+          },
+          {
             "$ref": "#/parameters/api-version"
           }
         ],
@@ -1054,6 +1357,9 @@
             "description": "The version of the application type",
             "required": true,
             "type": "string"
+          },
+          {
+            "$ref": "#/parameters/timeout"
           },
           {
             "$ref": "#/parameters/api-version"
@@ -1101,6 +1407,9 @@
             "required": true
           },
           {
+            "$ref": "#/parameters/timeout"
+          },
+          {
             "$ref": "#/parameters/api-version"
           }
         ],
@@ -1129,13 +1438,6 @@
         ],
         "parameters": [
           {
-            "name": "timeout",
-            "in": "query",
-            "description": "The timeout in seconds",
-            "type": "integer",
-            "required": false
-          },
-          {
             "name": "registerApplicationType",
             "in": "body",
             "description": "The type of the register application",
@@ -1143,6 +1445,9 @@
             "schema": {
               "$ref": "#/definitions/RegisterApplicationType"
             }
+          },
+          {
+            "$ref": "#/parameters/timeout"
           },
           {
             "$ref": "#/parameters/api-version"
@@ -1189,6 +1494,9 @@
             }
           },
           {
+            "$ref": "#/parameters/timeout"
+          },
+          {
             "$ref": "#/parameters/api-version"
           }
         ],
@@ -1216,6 +1524,9 @@
           "application/json"
         ],
         "parameters": [
+          {
+            "$ref": "#/parameters/timeout"
+          },
           {
             "$ref": "#/parameters/api-version"
           },
@@ -1260,6 +1571,9 @@
             "x-ms-skip-url-encoding": true
           },
           {
+            "$ref": "#/parameters/timeout"
+          },
+          {
             "$ref": "#/parameters/api-version"
           }
         ],
@@ -1294,6 +1608,9 @@
             "type": "string",
             "required": true,
             "x-ms-skip-url-encoding": true
+          },
+          {
+            "$ref": "#/parameters/timeout"
           },
           {
             "$ref": "#/parameters/api-version"
@@ -1340,6 +1657,9 @@
             "x-ms-skip-url-encoding": true
           },
           {
+            "$ref": "#/parameters/timeout"
+          },
+          {
             "$ref": "#/parameters/api-version"
           }
         ],
@@ -1384,6 +1704,9 @@
             "x-ms-skip-url-encoding": true
           },
           {
+            "$ref": "#/parameters/timeout"
+          },
+          {
             "$ref": "#/parameters/api-version"
           }
         ],
@@ -1426,6 +1749,9 @@
             "type": "string",
             "required": true,
             "x-ms-skip-url-encoding": true
+          },
+          {
+            "$ref": "#/parameters/timeout"
           },
           {
             "$ref": "#/parameters/api-version"
@@ -1478,6 +1804,9 @@
             "type": "string"
           },
           {
+            "$ref": "#/parameters/timeout"
+          },
+          {
             "$ref": "#/parameters/api-version"
           }
         ],
@@ -1512,6 +1841,9 @@
             "type": "string",
             "required": true,
             "x-ms-skip-url-encoding": true
+          },
+          {
+            "$ref": "#/parameters/timeout"
           },
           {
             "$ref": "#/parameters/api-version"
@@ -1559,6 +1891,9 @@
             }
           },
           {
+            "$ref": "#/parameters/timeout"
+          },
+          {
             "$ref": "#/parameters/api-version"
           }
         ],
@@ -1594,6 +1929,9 @@
             "schema": {
               "$ref": "#/definitions/ApplicationDescription"
             }
+          },
+          {
+            "$ref": "#/parameters/timeout"
           },
           {
             "$ref": "#/parameters/api-version"
@@ -1653,6 +1991,9 @@
             }
           },
           {
+            "$ref": "#/parameters/timeout"
+          },
+          {
             "$ref": "#/parameters/api-version"
           }
         ],
@@ -1708,6 +2049,9 @@
             "schema": {
               "$ref": "#/definitions/ServiceDescriptionTemplate"
             }
+          },
+          {
+            "$ref": "#/parameters/timeout"
           },
           {
             "$ref": "#/parameters/api-version"
@@ -1767,6 +2111,9 @@
             }
           },
           {
+            "$ref": "#/parameters/timeout"
+          },
+          {
             "$ref": "#/parameters/api-version"
           }
         ],
@@ -1822,6 +2169,9 @@
             "schema": {
               "$ref": "#/definitions/ServiceDescriptionTemplate"
             }
+          },
+          {
+            "$ref": "#/parameters/timeout"
           },
           {
             "$ref": "#/parameters/api-version"
@@ -1889,6 +2239,9 @@
             }
           },
           {
+            "$ref": "#/parameters/timeout"
+          },
+          {
             "$ref": "#/parameters/api-version"
           }
         ],
@@ -1923,6 +2276,16 @@
             "type": "string",
             "required": true,
             "x-ms-skip-url-encoding": true
+          },
+          {
+            "name": "ForceRemove",
+            "in": "query",
+            "description": "The force remove flag to skip services check",
+            "type": "boolean",
+            "required": false
+          },
+          {
+            "$ref": "#/parameters/timeout"
           },
           {
             "$ref": "#/parameters/api-version"
@@ -1961,13 +2324,16 @@
             "x-ms-skip-url-encoding": true
           },
           {
-            "name": "startApplicationUpgradeDescription",
+            "name": "startApplicationUpgrade",
             "in": "body",
             "description": "The description of the start application upgrade",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/StartApplicationUpgradeDescription"
+              "$ref": "#/definitions/StartApplicationUpgrade"
             }
+          },
+          {
+            "$ref": "#/parameters/timeout"
           },
           {
             "$ref": "#/parameters/api-version"
@@ -2006,13 +2372,16 @@
             "x-ms-skip-url-encoding": true
           },
           {
-            "name": "updateApplicationUpgradeDescription",
+            "name": "updateApplicationUpgrade",
             "in": "body",
-            "description": "The description of the application upgrade",
+            "description": "The description of the update application upgrade",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/UpdateApplicationUpgradeDescription"
+              "$ref": "#/definitions/UpdateApplicationUpgrade"
             }
+          },
+          {
+            "$ref": "#/parameters/timeout"
           },
           {
             "$ref": "#/parameters/api-version"
@@ -2060,6 +2429,9 @@
             }
           },
           {
+            "$ref": "#/parameters/timeout"
+          },
+          {
             "$ref": "#/parameters/api-version"
           }
         ],
@@ -2094,6 +2466,9 @@
             "type": "string",
             "required": true,
             "x-ms-skip-url-encoding": true
+          },
+          {
+            "$ref": "#/parameters/timeout"
           },
           {
             "$ref": "#/parameters/api-version"
@@ -2141,6 +2516,9 @@
             }
           },
           {
+            "$ref": "#/parameters/timeout"
+          },
+          {
             "$ref": "#/parameters/api-version"
           }
         ],
@@ -2175,6 +2553,9 @@
             "type": "string",
             "required": true,
             "x-ms-skip-url-encoding": true
+          },
+          {
+            "$ref": "#/parameters/timeout"
           },
           {
             "$ref": "#/parameters/api-version"
@@ -2221,6 +2602,9 @@
             "x-ms-skip-url-encoding": true
           },
           {
+            "$ref": "#/parameters/timeout"
+          },
+          {
             "$ref": "#/parameters/api-version"
           }
         ],
@@ -2255,6 +2639,9 @@
             "type": "string",
             "required": true,
             "x-ms-skip-url-encoding": true
+          },
+          {
+            "$ref": "#/parameters/timeout"
           },
           {
             "$ref": "#/parameters/api-version"
@@ -2314,6 +2701,9 @@
             "required": false
           },
           {
+            "$ref": "#/parameters/timeout"
+          },
+          {
             "$ref": "#/parameters/api-version"
           }
         ],
@@ -2348,6 +2738,9 @@
             "type": "string",
             "required": true,
             "x-ms-skip-url-encoding": true
+          },
+          {
+            "$ref": "#/parameters/timeout"
           },
           {
             "$ref": "#/parameters/api-version"
@@ -2395,6 +2788,9 @@
             }
           },
           {
+            "$ref": "#/parameters/timeout"
+          },
+          {
             "$ref": "#/parameters/api-version"
           }
         ],
@@ -2429,6 +2825,9 @@
             "type": "string",
             "required": true,
             "x-ms-skip-url-encoding": true
+          },
+          {
+            "$ref": "#/parameters/timeout"
           },
           {
             "$ref": "#/parameters/api-version"
@@ -2474,6 +2873,9 @@
             "required": true
           },
           {
+            "$ref": "#/parameters/timeout"
+          },
+          {
             "$ref": "#/parameters/api-version"
           }
         ],
@@ -2508,6 +2910,9 @@
             "type": "string",
             "required": true,
             "x-ms-skip-url-encoding": true
+          },
+          {
+            "$ref": "#/parameters/timeout"
           },
           {
             "$ref": "#/parameters/api-version"
@@ -2546,6 +2951,9 @@
             "x-ms-skip-url-encoding": true
           },
           {
+            "$ref": "#/parameters/timeout"
+          },
+          {
             "$ref": "#/parameters/api-version"
           }
         ],
@@ -2582,6 +2990,9 @@
             "x-ms-skip-url-encoding": true
           },
           {
+            "$ref": "#/parameters/timeout"
+          },
+          {
             "$ref": "#/parameters/api-version"
           }
         ],
@@ -2615,6 +3026,9 @@
             "description": "The id of the partition",
             "type": "string",
             "required": true
+          },
+          {
+            "$ref": "#/parameters/timeout"
           },
           {
             "$ref": "#/parameters/api-version"
@@ -2657,6 +3071,9 @@
             "description": "The id of the replica",
             "type": "string",
             "required": true
+          },
+          {
+            "$ref": "#/parameters/timeout"
           },
           {
             "$ref": "#/parameters/api-version"
@@ -2708,6 +3125,9 @@
             "type": "string"
           },
           {
+            "$ref": "#/parameters/timeout"
+          },
+          {
             "$ref": "#/parameters/api-version"
           }
         ],
@@ -2750,6 +3170,9 @@
             "schema": {
               "$ref": "#/definitions/PartitionHealthReport"
             }
+          },
+          {
+            "$ref": "#/parameters/timeout"
           },
           {
             "$ref": "#/parameters/api-version"
@@ -2799,6 +3222,9 @@
             "description": "The filter of the events health state",
             "required": false,
             "type": "string"
+          },
+          {
+            "$ref": "#/parameters/timeout"
           },
           {
             "$ref": "#/parameters/api-version"
@@ -2852,6 +3278,9 @@
             }
           },
           {
+            "$ref": "#/parameters/timeout"
+          },
+          {
             "$ref": "#/parameters/api-version"
           }
         ],
@@ -2885,6 +3314,9 @@
             "description": "The id of the partition",
             "type": "string",
             "required": true
+          },
+          {
+            "$ref": "#/parameters/timeout"
           },
           {
             "$ref": "#/parameters/api-version"
@@ -2929,6 +3361,9 @@
             "required": true
           },
           {
+            "$ref": "#/parameters/timeout"
+          },
+          {
             "$ref": "#/parameters/api-version"
           }
         ],
@@ -2956,6 +3391,9 @@
           "application/json"
         ],
         "parameters": [
+          {
+            "$ref": "#/parameters/timeout"
+          },
           {
             "$ref": "#/parameters/api-version"
           }
@@ -3006,6 +3444,9 @@
             "required": false
           },
           {
+            "$ref": "#/parameters/timeout"
+          },
+          {
             "$ref": "#/parameters/api-version"
           }
         ],
@@ -3034,6 +3475,9 @@
         ],
         "parameters": [
           {
+            "$ref": "#/parameters/timeout"
+          },
+          {
             "$ref": "#/parameters/api-version"
           }
         ],
@@ -3055,6 +3499,34 @@
     }
   },
   "definitions": {
+    "RegisterClusterPackage": {
+      "type": "object",
+      "description": "The package of the register cluster",
+      "properties": {
+        "CodeFilePath": {
+          "type": "string",
+          "description": "The path of the code file"
+        },
+        "ClusterManifestFilePath": {
+          "type": "string",
+          "description": "The relative path of the cluster manifest file"
+        }
+      }
+    },
+    "UnregisterClusterPackage": {
+      "type": "object",
+      "description": "The package of the unregister cluster",
+      "properties": {
+        "CodeVersion": {
+          "type": "string",
+          "description": "The version of the code"
+        },
+        "ConfigVersion": {
+          "type": "string",
+          "description": "The version of the config"
+        }
+      }
+    },
     "Node": {
       "type": "object",
       "description": "The node",
@@ -4314,7 +4786,7 @@
     },
     "ApplicationDescription": {
       "type": "object",
-      "description": "The ",
+      "description": "The description of the application",
       "properties": {
         "Name": {
           "type": "string"
@@ -4717,6 +5189,96 @@
               }
             }
           }
+        }
+      }
+    },
+    "ClusterUpgradeHealthPolicy": {
+      "type": "object",
+      "description": "The upgrade health policy of the cluster",
+      "properties": {
+        "MaxPercentDeltaUnhealthyNodes": {
+          "type": "integer",
+          "description": "The max percent of the delta unhealthy nodes, values are [0-100]"
+        },
+        "MaxPercentUpgradeDomainDeltaUnhealthyNodes": {
+          "type": "integer",
+          "description": "The max percent of the upgrade domain delta unhealthy nodes, values are [0-100]"
+        }
+      }
+    },
+    "ApplicationHealthPolicyMap": {
+      "type": "object",
+      "description": "The application health policy of the cluster",
+      "properties": {
+        "ConsiderWarningAsError": {
+          "type": "boolean",
+          "description": "The boolean of the consider warning as error"
+        },
+        "MaxPercentUnhealthyDeployedApplications": {
+          "type": "integer",
+          "description": "The max percent of the unhealthy deployed applications"
+        },
+        "DefaultServiceTypeHealthPolicy": {
+          "type": "integer",
+          "description": "The policy of the default service type health"
+        },
+        "MaxPercentUnhealthyServices": {
+          "type": "integer",
+          "description": "The policy of the default service type health"
+        },
+        "MaxPercentUnhealthyPartitionsPerService": {
+          "type": "integer",
+          "description": "The max percent unhealthy partitions per service"
+        },
+        "MaxPercentUnhealthyReplicasPerPartition": {
+          "type": "integer",
+          "description": "The max percent unhealthy replicas per partition"
+        }
+      }
+    },
+    "StartClusterUpgrade": {
+      "type": "object",
+      "description": "The description of the start cluster upgrade",
+      "properties": {
+        "ConfigVersion": {
+          "type": "string",
+          "description": "The version of the config"
+        },
+        "CodeVersion": {
+          "type": "string",
+          "description": "The version of the code"
+        },
+        "UpgradeKind": {
+          "type": "string",
+          "description": "The kind of the upgrade"
+        },
+        "RollingUpgradeMode": {
+          "$ref": "#/definitions/RollingUpgradeMode",
+          "description": "The mode of the rolling upgrade"
+        },
+        "UpgradeReplicaSetCheckTimeoutInSeconds": {
+          "type": "integer",
+          "description": "The seconds of the upgrade replica set check timeout"
+        },
+        "ForceRestart": {
+          "type": "boolean",
+          "description": "The flag of the force restart"
+        },
+        "EnableDeltaHealthEvaluation": {
+          "type": "boolean",
+          "description": "The evaluation of the enable delta health"
+        },
+        "MonitoringPolicy": {
+          "type": "object",
+          "description": "The policy of the monitoring"
+        },
+        "ClusterUpgradeHealthPolicy": {
+          "$ref": "#/definitions/ClusterUpgradeHealthPolicy",
+          "description": "The policy of the cluster upgrade health"
+        },
+        "ApplicationHealthPolicyMap": {
+          "$ref": "#/definitions/ApplicationHealthPolicyMap",
+          "description": "The map of the application health policy"
         }
       }
     },
@@ -5634,7 +6196,7 @@
         }
       }
     },
-    "StartApplicationUpgradeDescription": {
+    "StartApplicationUpgrade": {
       "type": "object",
       "description": "The description of the start application upgrade",
       "properties": {
@@ -5647,7 +6209,16 @@
         "Parameters": {
           "type": "array",
           "items": {
-            "type": "string"
+            "type": "object",
+            "description": "The parameters",
+            "properties": {
+              "Key": {
+                "type": "string"
+              },
+              "Value": {
+                "type": "string"
+              }
+            }
           }
         },
         "UpgradeKind": {
@@ -5671,7 +6242,113 @@
         }
       }
     },
-    "UpdateApplicationUpgradeDescription": {
+    "UpdateDescription": {
+      "type": "object",
+      "description": "The description of the update",
+      "properties": {
+        "RollingUpgradeMode": {
+          "$ref": "#/definitions/RollingUpgradeMode",
+          "description": "The mode of the rolling upgrade"
+        },
+        "ForceRestart": {
+          "type": "boolean",
+          "description": "The flag of the force restart"
+        },
+        "FailureAction": {
+          "type": "string",
+          "description": "The action of the failure"
+        },
+        "UpgradeReplicaSetCheckTimeoutInSeconds": {
+          "type": "integer",
+          "description": "The seconds of the upgrade replica set check timeout"
+        },
+        "HealthCheckWaitDurationInMilliseconds": {
+          "type": "string",
+          "description": "The seconds of the health check wait duration"
+        },
+        "HealthCheckStableDurationInMilliseconds": {
+          "type": "string",
+          "description": "The seconds of the health check stable duration"
+        },
+        "HealthCheckRetryTimeoutInMilliseconds": {
+          "type": "string",
+          "description": "The milliseconds of the health check retry timeout"
+        },
+        "UpgradeTimeoutInMilliseconds": {
+          "type": "string",
+          "description": "The milliseconds of the upgrade timeout"
+        },
+        "UpgradeDomainTimeoutInMilliseconds": {
+          "type": "string",
+          "description": "The milliseconds of the upgrade domain timeout"
+        }
+      }
+    },
+    "ClusterHealthPolicy": {
+      "type": "object",
+      "description": "The policy of the cluster health",
+      "properties": {
+        "RollingUpgradeMode": {
+          "$ref": "#/definitions/RollingUpgradeMode",
+          "description": "The mode of the rolling upgrade"
+        },
+        "ForceRestart": {
+          "type": "boolean",
+          "description": "The flag of the force restart"
+        },
+        "FailureAction": {
+          "type": "string",
+          "description": "The action of the failure"
+        },
+        "UpgradeReplicaSetCheckTimeoutInSeconds": {
+          "type": "integer",
+          "description": "The seconds of the upgrade replica set check timeout"
+        },
+        "HealthCheckWaitDurationInMilliseconds": {
+          "type": "string",
+          "description": "The milliseconds of the health check wait duration"
+        },
+        "HealthCheckStableDurationInMilliseconds": {
+          "type": "string",
+          "description": "The milliseconds of the health check stable duration"
+        },
+        "HealthCheckRetryTimeoutInMilliseconds": {
+          "type": "string",
+          "description": "The milliseconds of the health check retry timeout"
+        },
+        "UpgradeTimeoutInMilliseconds": {
+          "type": "string",
+          "description": "The milliseconds of the upgrade timeout"
+        },
+        "UpgradeDomainTimeoutInMilliseconds": {
+          "type": "string",
+          "description": "The milliseconds of the upgrade domain timeout"
+        }
+      }
+    },
+    "UpdateClusterUpgrade": {
+      "type": "object",
+      "description": "The description of the update cluster upgrade",
+      "properties": {
+        "UpgradeKind": {
+          "type": "string",
+          "description": "The kind of the upgrade"
+        },
+        "UpdateDescription": {
+          "$ref": "#/definitions/UpdateDescription",
+          "description": "The description of the update"
+        },
+        "ClusterHealthPolicy": {
+          "$ref": "#/definitions/ClusterHealthPolicy",
+          "description": "The policy of the cluster health"
+        },
+        "EnableDeltaHealthEvaluations": {
+          "type": "boolean",
+          "description": "The evaluations of the enable delta health"
+        }
+      }
+    },
+    "UpdateApplicationUpgrade": {
       "type": "object",
       "description": "The description of the update application upgrade",
       "properties": {
@@ -5682,40 +6359,19 @@
           "type": "string"
         },
         "UpdateDescription": {
-          "type": "object",
-          "description": "The description of the update",
-          "properties": {
-            "RollingUpgradeMode": {
-              "$ref": "#/definitions/RollingUpgradeMode"
-            },
-            "ForceRestart": {
-              "type": "boolean"
-            },
-            "FailureAction": {
-              "type": "string"
-            },
-            "UpgradeReplicaSetCheckTimeoutInSeconds": {
-              "type": "integer"
-            },
-            "HealthCheckWaitDurationInMilliseconds": {
-              "type": "string"
-            },
-            "HealthCheckStableDurationInMilliseconds": {
-              "type": "string"
-            },
-            "HealthCheckRetryTimeoutInMilliseconds": {
-              "type": "string"
-            },
-            "UpgradeTimeoutInMilliseconds": {
-              "type": "string"
-            },
-            "UpgradeDomainTimeoutInMilliseconds": {
-              "type": "string"
-            }
-          }
+          "$ref": "#/definitions/UpdateDescription"
         },
         "ApplicationHealthPolicy": {
           "$ref": "#/definitions/ApplicationHealthPolicy"
+        }
+      }
+    },
+    "ResumeClusterUpgrade": {
+      "type": "object",
+      "description": "The upgrade of the resume cluster",
+      "properties": {
+        "UpgradeDomain": {
+          "type": "string"
         }
       }
     },
@@ -5896,6 +6552,13 @@
       "description": "The version of the api",
       "required": true,
       "type": "string"
+    },
+    "timeout": {
+      "name": "timeout",
+      "in": "query",
+      "description": "The timeout in seconds",
+      "type": "integer",
+      "required": false
     }
   }
 }

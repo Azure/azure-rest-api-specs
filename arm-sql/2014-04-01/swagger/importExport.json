@@ -1,0 +1,533 @@
+{
+    "swagger": "2.0",
+    "info": {
+        "title": "Azure SQL Database Import/Export spec",
+        "description": "Provides create and read functionality for Import/Export operations on Azure SQL databases.",
+        "version": "2014-04-01"
+    },
+    "host": "management.azure.com",
+    "schemes": [
+        "https"
+    ],
+    "consumes": [
+        "application/json"
+    ],
+    "produces": [
+        "application/json"
+    ],
+    "paths": {
+        "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/servers/{serverName}/import": {
+            "post": {
+                "tags": [
+                    "ImportExport"
+                ],
+                "operationId": "Servers_ImportDatabase",
+                "description": "Imports a bacpac into a new database. ",
+                "parameters": [
+                    {
+                        "$ref": "#/parameters/ApiVersionParameter"
+                    },
+                    {
+                        "$ref": "#/parameters/SubscriptionIdParameter"
+                    },
+                    {
+                        "$ref": "#/parameters/ResourceGroupParameter"
+                    },
+                    {
+                        "$ref": "#/parameters/ServerNameParameter"
+                    },
+                    {
+                        "name": "parameters",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/ImportRequestParameters"
+                        },
+                        "description": "The required parameters for importing a Bacpac into a database."
+                    }
+                ],
+                "responses": {
+                    "201": {
+                        "description": "Created",
+                        "schema": {
+                        "$ref": "#/definitions/ImportExportOperationResponse"
+                        }
+                    },
+                    "202": {
+                        "description": "Accepted"
+                    }
+                },
+                "x-ms-examples": {
+                    "Import bacpac into new database Max": { "$ref": "../examples/DatabaseCreateImportMax.json" },
+                    "Import bacpac into new database Min": { "$ref": "../examples/DatabaseCreateImportMin.json" }
+                },
+                "x-ms-long-running-operation": true
+            }
+        },
+        "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/servers/{serverName}/databases/{databaseName}/extensions/import": {
+            "put": {
+                "tags": [
+                    "ImportExport"
+                ],
+                "operationId": "Databases_Import",
+                "description": "Imports a bacpac into an existing database. The existing database must be empty.",
+                "parameters": [
+                    {
+                        "$ref": "#/parameters/ApiVersionParameter"
+                    },
+                    {
+                        "$ref": "#/parameters/SubscriptionIdParameter"
+                    },
+                    {
+                        "$ref": "#/parameters/ResourceGroupParameter"
+                    },
+                    {
+                        "$ref": "#/parameters/ServerNameParameter"
+                    },
+                    {
+                        "name": "databaseName",
+                        "in": "path",
+                        "required": true,
+                        "type": "string",
+                        "description": "The name of the database to import into"
+                    },
+                    {
+                        "name": "parameters",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/ImportExtensionRequestParameters"
+                        },
+                        "description": "The required parameters for importing a Bacpac into a database."
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                        "$ref": "#/definitions/ImportExportOperationResponse"
+                        }
+                    },
+                    "202": {
+                        "description": "Accepted"
+                    }
+                },
+                "x-ms-examples": {
+                    "Import bacpac into an existing database Max": { "$ref": "../examples/DatabaseUpdateImportMax.json" },
+                    "Import bacpac into an existing database Min": { "$ref": "../examples/DatabaseUpdateImportMin.json" }
+                },
+                "x-ms-long-running-operation": true
+            }
+        },
+        "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/servers/{serverName}/databases/{databaseName}/export": {
+            "post": {
+                "tags": [
+                    "ImportExport"
+                ],
+                "operationId": "Databases_Export",
+                "description": "Exports a database to a bacpac.",
+                "parameters": [
+                    {
+                        "$ref": "#/parameters/ApiVersionParameter"
+                    },
+                    {
+                        "$ref": "#/parameters/SubscriptionIdParameter"
+                    },
+                    {
+                        "$ref": "#/parameters/ResourceGroupParameter"
+                    },
+                    {
+                        "$ref": "#/parameters/ServerNameParameter"
+                    },
+                    {
+                        "name": "databaseName",
+                        "in": "path",
+                        "required": true,
+                        "type": "string",
+                        "description": "The name of the database to be exported."
+                    },
+                    {
+                        "name": "parameters",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/ExportRequestParameters"
+                        },
+                        "description": "The required parameters for exporting a database."
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                        "$ref": "#/definitions/ImportExportOperationResponse"
+                        }
+                    },
+                    "202": {
+                        "description": "Accepted"
+                    }
+                },
+                "x-ms-examples": {
+                    "Export a database into a new bacpac file": { "$ref": "../examples/DatabaseExport.json" }
+                },
+                "x-ms-long-running-operation": true
+            }
+        },
+        "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/servers/{serverName}/importExportOperationResults": {
+            "get": {
+                "tags": [
+                    "ImportExport"
+                ],
+                "operationId": "ImportExportOperations_ListByServer",
+                "description": "The status of an import operation given the operation ID.",
+                "parameters": [
+                    {
+                        "$ref": "#/parameters/ApiVersionParameter"
+                    },
+                    {
+                        "$ref": "#/parameters/SubscriptionIdParameter"
+                    },
+                    {
+                        "$ref": "#/parameters/ResourceGroupParameter"
+                    },
+                    {
+                        "$ref": "#/parameters/ServerNameParameter"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/ImportExportOperationListResponse"
+                        }
+                    }
+                },
+                "x-ms-examples": {
+                    "List Import/Export operations by server": { "$ref": "../examples/ImportExportOperationListByServer.json" }
+                },
+                "x-ms-pageable": {
+                "nextLinkName": null
+                }
+            }
+        },
+        "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/servers/{serverName}/importExportOperationResults/{operationId}": {
+            "get": {
+                "tags": [
+                    "ImportExport"
+                ],
+                "operationId": "ImportExportOperations_GetByServer",
+                "description": "The  of an import operation given the operation ID.",
+                "parameters": [
+                    {
+                        "$ref": "#/parameters/ApiVersionParameter"
+                    },
+                    {
+                        "$ref": "#/parameters/SubscriptionIdParameter"
+                    },
+                    {
+                        "$ref": "#/parameters/ResourceGroupParameter"
+                    },
+                    {
+                        "$ref": "#/parameters/ServerNameParameter"
+                    },
+                    {
+                        "name": "operationId",
+                        "in": "path",
+                        "required": true,
+                        "type": "string",
+                        "format": "uuid",
+                        "description": "The operation ID associated with the operation."
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/ImportExportOperationResponse"
+                        }
+                    }
+                },
+                "x-ms-examples": {
+                    "Get Import/Export operations by server": { "$ref": "../examples/ImportExportOperationGetByServer.json" }
+                }
+            }
+        },
+        "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/servers/{serverName}/databases/{databaseName}/importExportOperationResults/{operationId}": {
+            "get": {
+                "tags": [
+                    "ImportExport"
+                ],
+                "operationId": "ImportExportOperations_GetByDatabase",
+                "description": "The status of an import or export operation on a database given the operation ID.",
+                "parameters": [
+                    {
+                        "$ref": "#/parameters/ApiVersionParameter"
+                    },
+                    {
+                        "$ref": "#/parameters/SubscriptionIdParameter"
+                    },
+                    {
+                        "$ref": "#/parameters/ResourceGroupParameter"
+                    },
+                    {
+                        "$ref": "#/parameters/ServerNameParameter"
+                    },
+                    {
+                        "name": "databaseName",
+                        "in": "path",
+                        "required": true,
+                        "type": "string",
+                        "description": "The name of the database"
+                    },
+                    {
+                        "name": "operationId",
+                        "in": "path",
+                        "required": true,
+                        "type": "string",
+                        "format": "uuid",
+                        "description": "The operation ID associated with the operation."
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/ImportExportOperationResponse"
+                        }
+                    }
+                },
+                "x-ms-examples": {
+                    "Get Import/Export operations by database": { "$ref": "../examples/ImportExportOperationGetByDatabase.json" }
+                }
+            }
+        }
+    },
+    "definitions": {
+        "ImportExtensionProperties": {
+            "properties": {
+                "operationMode": {
+                    "type": "string",
+                    "description": "The type of Import/Export operation being performed.  This is always Import.",
+                    "enum":["Import"],
+                    "x-ms-enum":{
+                        "name": "OperationMode"
+                    }
+                }
+            },
+            "required": ["operationMode"],
+            "allOf": [
+                {
+                    "$ref": "#/definitions/ExportRequestParameters"
+                }
+            ],
+            "description": "Represents the properties for an import operation"
+        },
+        "ImportExtensionRequestParameters": {
+            "properties": {
+                "name": {
+                    "type": "string",
+                    "description": "The name of the extension."
+                },
+                "type": {
+                    "type": "string",
+                    "description": "The type of the extension."
+                },
+                "properties": {
+                    "$ref": "#/definitions/ImportExtensionProperties",
+                    "x-ms-client-flatten": true,
+                    "description": "Represents the properties of the resource."
+                }
+            },
+            "description": "Import database parameters."
+        },
+        "ImportExportOperationListResponse": {
+            "properties": {
+                "value": {
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/definitions/ImportExportOperationResponse"
+                    }
+                }
+            },
+            "required": ["value"],
+            "description": "Response for Import/Export List operation."
+        },
+        "ImportExportOperationResponse": {
+            "properties": {
+                "id": {
+                    "type": "string",
+                    "readOnly": true,
+                    "description": "The id returned from the server."
+                },
+                "name": {
+                    "type": "string",
+                    "readOnly": true,
+                    "description": "The name returned from the server."
+                },
+                "type": {
+                    "type": "string",
+                    "readOnly": true,
+                    "description": "The type returned from the server."
+                },
+                "properties":
+                {
+                    "allOf": [
+                        {
+                        "$ref": "#/definitions/ImportExportOperationResponseProperties"
+                        }
+                    ],
+                    "x-ms-client-flatten": true
+                }
+            },
+            "description": "Response for Import/Export Get operation."
+        },
+        "ImportExportOperationResponseProperties": {
+            "properties": {
+                "requestType": {
+                    "type": "string",
+                    "readOnly": true,
+                    "description": "The request type of the operation."
+                },
+                "requestId": {
+                    "type": "string",
+                    "format": "uuid",
+                    "readOnly": true,
+                    "description": "The request type of the operation."
+                },
+                "serverName": {
+                    "type": "string",
+                    "readOnly": true,
+                    "description": "The name of the server."
+                },
+                "databaseName": {
+                    "type": "string",
+                    "readOnly": true,
+                    "description": "The name of the database."
+                },
+                "status": {
+                    "type": "string",
+                    "readOnly": true,
+                    "description": "The status message returned from the server."
+                },
+                "lastModifiedTime": {
+                    "type": "string",
+                    "readOnly": true,
+                    "description": "The operation status last modified time."
+                },
+                "queuedTime": {
+                    "type": "string",
+                    "readOnly": true,
+                    "description": "The operation queued time."
+                },
+                "blobUri": {
+                    "type": "string",
+                    "readOnly": true,
+                    "description": "The blob uri."
+                },
+                "errorMessage": {
+                    "type": "string",
+                    "readOnly": true,
+                    "description": "The error message returned from the server."
+                }
+            },
+            "description": "Response for Import/Export Status operation."
+        },
+        "ImportRequestParameters": {
+            "properties": {
+                "databaseName": {
+                    "type": "string",
+                    "description": "The name of the database to import."
+                },
+                "edition": {
+                    "type": "string",
+                    "description": "The edition for the database being created."
+                },
+                "serviceObjectiveName": {
+                    "type": "string",
+                    "description": "The name of the service objective to assign to the database."
+                },
+                "maxSizeBytes": {
+                    "type": "string",
+                    "description": "The maximum size for the newly imported database."
+                }
+            },
+            "allOf": [
+                {
+                    "$ref": "#/definitions/ExportRequestParameters"
+                }
+            ],
+            "required":["databaseName","edition","serviceObjectiveName","maxSizeBytes"],
+            "description": "Import database parameters."
+        },
+        "ExportRequestParameters": {
+            "properties": {
+                "storageKeyType": {
+                    "type": "string",
+                    "description": "The type of the storage key to use. Valid values are StorageAccessKey and SharedAccessKey.",
+                    "enum": ["StorageAccessKey","SharedAccessKey"],
+                    "x-ms-enum":{
+                        "name": "StorageKeyType"
+                    }
+                },
+                "storageKey": {
+                    "type": "string",
+                    "description": "The storage key to use."
+                },
+                "storageUri": {
+                    "type": "string",
+                    "description": "The storage uri to use."
+                },
+                "administratorLogin": {
+                    "type": "string",
+                    "description": "The name of the SQL administrator."
+                },
+                "administratorLoginPassword": {
+                    "type": "string",
+                    "description": "The password of the SQL administrator."
+                },
+                "authenticationType": {
+                    "type": "string",
+                    "description": "The authentication type - if not specified, will default to SQL.",
+                    "enum": ["SQL","ADPassword"],
+                    "x-ms-enum":{
+                        "name": "AuthenticationType"
+                    }
+                }
+            },
+            "required":["storageKeyType","storageKey","storageUri","administratorLogin","administratorLoginPassword"],
+            "description": "Export database parameters."
+        }
+    },
+    "parameters": {
+        "SubscriptionIdParameter": {
+            "name": "subscriptionId",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The subscription ID that identifies an Azure subscription."
+        },
+        "ApiVersionParameter": {
+            "name": "api-version",
+            "in": "query",
+            "required": true,
+            "type": "string",
+            "description": "The API version to use for the request."
+        },
+        "ResourceGroupParameter": {
+            "name": "resourceGroupName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the resource group that contains the resource. You can obtain this value from the Azure Resource Manager API or the portal.",
+            "x-ms-parameter-location": "method"
+        },
+        "ServerNameParameter": {
+            "name": "serverName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the server.",
+            "x-ms-parameter-location": "method"
+        }
+    }
+}
