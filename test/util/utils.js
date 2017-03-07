@@ -8,6 +8,7 @@ var assert = require("assert"),
   path = require('path'),
   _ = require('lodash'),
   z = require('z-schema'),
+  YAML = require('js-yaml'),
   request = require('request'),
   util = require('util'),
   execSync = require('child_process').execSync;
@@ -52,9 +53,9 @@ exports.parseJsonFromFile = function parseJsonFromFile(filepath, callback) {
   fs.readFile(filepath, 'utf8', function (err, data) {
     if (err) return callback(err);
     try {
-      return callback(null, JSON.parse(exports.stripBOM(data)));
+      return callback(null, YAML.safeLoad(exports.stripBOM(data)));
     } catch (error) {
-      let e = new Error(`swagger "${filepath}" is an invalid JSON.\n${util.inspect(err, { depth: null })}`);
+      let e = new Error(`swagger "${filepath}" is an invalid JSON.\n${util.inspect(error, { depth: null })}`);
       return callback(e);
     }
   });
