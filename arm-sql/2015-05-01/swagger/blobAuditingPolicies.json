@@ -1,9 +1,9 @@
 {
   "swagger": "2.0",
   "info": {
-    "version": "2015-05-01-preview",
     "title": "SqlManagementClient",
-    "description": "The Azure SQL Database management API provides a RESTful set of web APIs that interact with Azure SQL Database services to manage your databases. The API enables users to create, retrieve, update, and delete databases, servers, and other entities."
+    "description": "The Azure SQL Database management API provides a RESTful set of web APIs that interact with Azure SQL Database services to manage your databases. The API enables users to create, retrieve, update, and delete databases, servers, and other entities.",
+    "version": "2015-05-01-preview"
   },
   "host": "management.azure.com",
   "schemes": [
@@ -23,7 +23,7 @@
         ],
         "description": "Get a blob auditing policy associated with an Azure SQL database.",
         "operationId": "DatabaseBlobAuditingPolicies_Get",
-		"x-ms-examples": {
+        "x-ms-examples": {
           "Get database blob auditing policy": { "$ref": "../examples/DatabaseBlobAuditingGet.json" }
         },
         "parameters": [
@@ -47,13 +47,13 @@
             "required": true,
             "type": "string"
           },
-          {
-            "name": "blobAuditingPolicyName",
-            "in": "path",
-            "description": "The name of the blob auditing policy.",
-            "required": true,
-            "type": "string"
-          },
+            {
+                "name": "blobAuditingPolicyName",
+                "in": "path",
+                "description": "The name of the blob auditing policy. Default is the currently value to use.",
+                "required": true,
+                "type": "string"
+            },
           {
             "$ref": "#/parameters/ApiVersionParameter"
           }
@@ -77,9 +77,9 @@
         ],
         "description": "Creates or updates a blob auditing policy for an Azure SQL database.",
         "operationId": "DatabaseBlobAuditingPolicies_CreateOrUpdate",
-		"x-ms-examples": {
-		  "Create database blob auditing policy min": { "$ref": "../examples/DatabaseBlobAuditingCreateMin.json" },
-		  "Create database blob auditing policy max": { "$ref": "../examples/DatabaseBlobAuditingCreateMax.json" }
+        "x-ms-examples": {
+          "Create database blob auditing policy min": { "$ref": "../examples/DatabaseBlobAuditingCreateMin.json" },
+          "Create database blob auditing policy max": { "$ref": "../examples/DatabaseBlobAuditingCreateMax.json" }
         },
         "parameters": [
           {
@@ -102,13 +102,13 @@
             "required": true,
             "type": "string"
           },
-          {
-            "name": "blobAuditingPolicyName",
-            "in": "path",
-            "description": "The name of the blob auditing policy.",
-            "required": true,
-            "type": "string"
-          },
+            {
+                "name": "blobAuditingPolicyName",
+                "in": "path",
+                "description": "The name of the blob auditing policy. Default is the currently value to use.",
+                "required": true,
+                "type": "string"
+            },
           {
             "name": "databaseBlobAuditingPolicy",
             "in": "body",
@@ -128,7 +128,7 @@
               "$ref": "#/definitions/DatabaseBlobAuditingPolicyResource"
             }
           },
-		  "201": {
+          "201": {
             "description": "Successfully created the database blob auditing policy.",
             "schema": {
               "$ref": "#/definitions/DatabaseBlobAuditingPolicyResource"
@@ -146,9 +146,9 @@
         "tags": [
           "ServerBlobAuditingOperationResults"
         ],
-        "description": "Get a server blob auditing operation result.",
+        "description": "Get the active server blob auditing operation result.",
         "operationId": "ServerBlobAuditingOperationResult_Get",
-		"x-ms-examples": {
+        "x-ms-examples": {
           "Get server blob auditing operation result": { "$ref": "../examples/ServerBlobAuditingOperationResult.json" }
         },
         "parameters": [
@@ -165,13 +165,13 @@
             "required": true,
             "type": "string"
           },
-          {
-            "name": "blobAuditingPolicyName",
-            "in": "path",
-            "description": "The name of the blob auditing policy.",
-            "required": true,
-            "type": "string"
-          },
+            {
+                "name": "blobAuditingPolicyName",
+                "in": "path",
+                "description": "The name of the blob auditing policy. Default is the currently value to use.",
+                "required": true,
+                "type": "string"
+            },
           {
             "name": "operationId",
             "in": "path",
@@ -197,14 +197,14 @@
         "deprecated": false
       }
     },
-	"/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/servers/{serverName}/auditingSettings/{blobAuditingPolicyName}/operationResults": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/servers/{serverName}/auditingSettings/{blobAuditingPolicyName}/operationResults": {
       "get": {
         "tags": [
           "ServerBlobAuditingOperationResults"
         ],
         "description": "Get a list of server blob auditing operation results.",
         "operationId": "ServerBlobAuditingOperationResultsList_Get",
-		"x-ms-examples": {
+        "x-ms-examples": {
           "Get server blob auditing operation results": { "$ref": "../examples/ServerBlobAuditingOperationResultsList.json" }
         },
         "parameters": [
@@ -221,13 +221,13 @@
             "required": true,
             "type": "string"
           },
-          {
-            "name": "blobAuditingPolicyName",
-            "in": "path",
-            "description": "The name of the blob auditing policy.",
-            "required": true,
-            "type": "string"
-          },
+            {
+                "name": "blobAuditingPolicyName",
+                "in": "path",
+                "description": "The name of the blob auditing policy. Default is the currently value to use.",
+                "required": true,
+                "type": "string"
+            },
           {
             "$ref": "#/parameters/ApiVersionParameter"
           }
@@ -253,7 +253,7 @@
         ],
         "description": "Get a blob auditing policy associated with an Azure SQL server.",
         "operationId": "ServerBlobAuditingPolicies_Get",
-		"x-ms-examples": {
+        "x-ms-examples": {
           "Get server blob auditing policy": { "$ref": "../examples/ServerBlobAuditingGet.json" }
         },
         "parameters": [
@@ -270,13 +270,13 @@
             "required": true,
             "type": "string"
           },
-          {
-            "name": "blobAuditingPolicyName",
-            "in": "path",
-            "description": "The name of the blob auditing policy.",
-            "required": true,
-            "type": "string"
-          },
+            {
+                "name": "blobAuditingPolicyName",
+                "in": "path",
+                "description": "The name of the blob auditing policy. Default is the currently value to use.",
+                "required": true,
+                "type": "string"
+            },
           {
             "$ref": "#/parameters/ApiVersionParameter"
           }
@@ -300,9 +300,9 @@
         ],
         "description": "Creates or updates a blob auditing policy for an Azure SQL server.",
         "operationId": "ServerBlobAuditingPolicies_CreateOrUpdate",
-		"x-ms-examples": {
-		  "Create server blob auditing policy min": { "$ref": "../examples/ServerBlobAuditingCreateMin.json" },
-		  "Create server blob auditing policy max": { "$ref": "../examples/ServerBlobAuditingCreateMax.json" }
+        "x-ms-examples": {
+          "Create server blob auditing policy min": { "$ref": "../examples/ServerBlobAuditingCreateMin.json" },
+          "Create server blob auditing policy max": { "$ref": "../examples/ServerBlobAuditingCreateMax.json" }
         },
         "parameters": [
           {
@@ -318,13 +318,13 @@
             "required": true,
             "type": "string"
           },
-          {
-            "name": "blobAuditingPolicyName",
-            "in": "path",
-            "description": "The name of the blob auditing policy.",
-            "required": true,
-            "type": "string"
-          },
+            {
+                "name": "blobAuditingPolicyName",
+                "in": "path",
+                "description": "The name of the blob auditing policy. Default is the currently value to use.",
+                "required": true,
+                "type": "string"
+            },
           {
             "name": "serverBlobAuditingPolicy",
             "in": "body",

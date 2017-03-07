@@ -21,9 +21,9 @@
         "tags": [
           "ServerSecurityAlertOperationResults"
         ],
-        "description": "Get a server Threat Detection operation result.",
+        "description": "Get the active server Threat Detection operation result.",
         "operationId": "ServerThreatDetectionOperationResult_Get",
-		"x-ms-examples": {
+        "x-ms-examples": {
           "Get server security alert operation result": { "$ref": "../examples/ServerSecurityAlertOperationResult.json" }
         },
         "parameters": [
@@ -40,13 +40,13 @@
             "required": true,
             "type": "string"
           },
-          {
-            "name": "securityAlertPolicyName",
-            "in": "path",
-            "description": "The name of the Threat Detection security alert policy.",
-            "required": true,
-            "type": "string"
-          },
+            {
+                "name": "securityAlertPolicyName",
+                "in": "path",
+                "description": "The name of the Threat Detection security alert policy. Default is the currently value to use.",
+                "required": true,
+                "type": "string"
+            },
           {
             "name": "operationId",
             "in": "path",
@@ -79,7 +79,7 @@
         ],
         "description": "Get a list of server Threat Detection operation results.",
         "operationId": "ServerThreatDetectionOperationResultsList_Get",
-		"x-ms-examples": {
+        "x-ms-examples": {
           "Get server security alert operation results list": { "$ref": "../examples/ServerSecurityAlertOperationResultsList.json" }
         },
         "parameters": [
@@ -96,13 +96,13 @@
             "required": true,
             "type": "string"
           },
-          {
-            "name": "securityAlertPolicyName",
-            "in": "path",
-            "description": "The name of the Threat Detection security alert policy.",
-            "required": true,
-            "type": "string"
-          },
+            {
+                "name": "securityAlertPolicyName",
+                "in": "path",
+                "description": "The name of the Threat Detection security alert policy. Default is the currently value to use.",
+                "required": true,
+                "type": "string"
+            },
           {
             "$ref": "#/parameters/ApiVersionParameter"
           }
@@ -128,7 +128,7 @@
         ],
         "description": "Get a Threat Detection policy associated with an Azure SQL server.",
         "operationId": "ServerThreatDetectionPolicies_Get",
-		"x-ms-examples": {
+        "x-ms-examples": {
           "Get server security alert policy": { "$ref": "../examples/ServerSecurityAlertGet.json" }
         },
         "parameters": [
@@ -145,13 +145,13 @@
             "required": true,
             "type": "string"
           },
-          {
-            "name": "securityAlertPolicyName",
-            "in": "path",
-            "description": "The name of the Threat Detection policy.",
-            "required": true,
-            "type": "string"
-          },
+            {
+                "name": "securityAlertPolicyName",
+                "in": "path",
+                "description": "The name of the Threat Detection policy. Default is the currently value to use.",
+                "required": true,
+                "type": "string"
+            },
           {
             "$ref": "#/parameters/ApiVersionParameter"
           }
@@ -175,9 +175,9 @@
         ],
         "description": "Creates or updates a Threat Detection policy for an Azure SQL server.",
         "operationId": "ServerThreatDetectionPolicies_CreateOrUpdate",
-		"x-ms-examples": {
-		  "Create server security alert policy max": { "$ref": "../examples/ServerSecurityAlertCreateMax.json" },
-		  "Create server security alert policy min": { "$ref": "../examples/ServerSecurityAlertCreateMin.json" }
+        "x-ms-examples": {
+          "Create server security alert policy max": { "$ref": "../examples/ServerSecurityAlertCreateMax.json" },
+          "Create server security alert policy min": { "$ref": "../examples/ServerSecurityAlertCreateMin.json" }
         },
         "parameters": [
           {
@@ -193,13 +193,13 @@
             "required": true,
             "type": "string"
           },
-          {
-            "name": "securityAlertPolicyName",
-            "in": "path",
-            "description": "The name of the Threat Detection policy.",
-            "required": true,
-            "type": "string"
-          },
+            {
+                "name": "securityAlertPolicyName",
+                "in": "path",
+                "description": "The name of the Threat Detection policy. Default is the currently value to use.",
+                "required": true,
+                "type": "string"
+            },
           {
             "name": "serverSecurityAlertPolicy",
             "in": "body",

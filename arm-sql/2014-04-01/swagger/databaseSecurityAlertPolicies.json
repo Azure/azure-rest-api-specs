@@ -23,7 +23,7 @@
         ],
         "description": "Get a Threat Detection policy associated with an Azure SQL database.",
         "operationId": "DatabaseThreatDetectionPolicies_Get",
-		"x-ms-examples": {
+        "x-ms-examples": {
           "Get database security alert policy": { "$ref": "../examples/DatabaseSecurityAlertGet.json" }
         },
         "parameters": [
@@ -47,10 +47,10 @@
             "required": true,
             "type": "string"
           },
-		      {
+              {
             "name": "securityAlertPolicyName",
             "in": "path",
-            "description": "The name of the Threat Detection policy.",
+            "description": "The name of the Threat Detection policy. Default is the currently value to use.",
             "required": true,
             "type": "string"
           },
@@ -77,9 +77,9 @@
         ],
         "description": "Creates or updates a Threat Detection policy for an Azure SQL database.",
         "operationId": "DatabaseThreatDetectionPolicies_CreateOrUpdate",
-		"x-ms-examples": {
-		  "Create database security alert policy min": { "$ref": "../examples/DatabaseSecurityAlertCreateMin.json" },
-		  "Create database security alert policy max": { "$ref": "../examples/DatabaseSecurityAlertCreateMax.json" }
+        "x-ms-examples": {
+          "Create database security alert policy min": { "$ref": "../examples/DatabaseSecurityAlertCreateMin.json" },
+          "Create database security alert policy max": { "$ref": "../examples/DatabaseSecurityAlertCreateMax.json" }
         },
         "parameters": [
           {
@@ -102,13 +102,13 @@
             "required": true,
             "type": "string"
           },
-		      {
-            "name": "securityAlertPolicyName",
-            "in": "path",
-            "description": "The name of the Threat Detection policy.",
-            "required": true,
-            "type": "string"
-          },
+          {
+                "name": "securityAlertPolicyName",
+                "in": "path",
+                "description": "The name of the Threat Detection policy. Default is the currently value to use.",
+                "required": true,
+                "type": "string"
+            },
           {
             "name": "databaseSecurityAlertPolicy",
             "in": "body",
@@ -238,7 +238,7 @@
           "description": "Specifies the number of days to keep in the Threat Detection audit logs.",
           "type": "integer"
         },
-		    "useServerDefault": {
+        "useServerDefault": {
           "description": "Specifies whether to use the default server policy. Options are Enabled or Disabled.",
           "type": "string"
         }
