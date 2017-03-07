@@ -629,25 +629,32 @@
       "description": "Diagnostics storage account config",
       "properties": {
         "storageAccountName": {
-          "type": "string"
+          "type": "string",
+          "readOnly": true
         },
         "primaryAccessKey": {
-          "type": "string"
+          "type": "string",
+          "readOnly": true
         },
         "secondaryAccessKey": {
-          "type": "string"
+          "type": "string",
+          "readOnly": true
         },
         "protectedAccountKeyName": {
-          "type": "string"
+          "type": "string",
+          "readOnly": true
         },
         "blobEndpoint": {
-          "type": "string"
+          "type": "string",
+          "readOnly": true
         },
         "queueEndpoint": {
-          "type": "string"
+          "type": "string",
+          "readOnly": true
         },
         "tableEndpoint": {
-          "type": "string"
+          "type": "string",
+          "readOnly": true
         }
       }
     },
@@ -662,9 +669,11 @@
           }
         },
         "clusterId": {
+          "readOnly": true,
           "type": "string"
         },
         "clusterState": {
+          "readOnly": true,
           "type": "string",
           "enum": [
             "Default",
