@@ -8532,7 +8532,7 @@
           "type": "string",
           "x-ms-enum": {
             "name": "RecoveryPlanGroupType",
-            "modelAsString": true
+            "modelAsString": false
           }
         },
         "replicationProtectedItems": {
@@ -8611,7 +8611,7 @@
             "type": "string",
             "x-ms-enum": {
               "name": "ReplicationProtectedItemOperation",
-              "modelAsString": true
+              "modelAsString": false
             }
           }
         },
@@ -8626,7 +8626,7 @@
             "type": "string",
             "x-ms-enum": {
               "name": "PossibleOperationsDirections",
-              "modelAsString": true
+              "modelAsString": false
             }
           }
         },
@@ -8643,15 +8643,6 @@
         "instanceType": {
           "description": "Gets the type of action details (see RecoveryPlanActionDetailsTypes enum for\r\n            possible values).",
           "type": "string",
-          "readOnly": true
-        },
-        "CanWrite": {
-          "description": "Gets a value indicating whether this Newtonsoft.Json.JsonConverter can write JSON",
-          "type": "boolean",
-          "readOnly": true
-        },
-        "CanRead": {
-          "type": "boolean",
           "readOnly": true
         }
       },
@@ -8698,7 +8689,7 @@
           "type": "string",
           "x-ms-enum": {
             "name": "FailoverDeploymentModel",
-            "modelAsString": true
+            "modelAsString": false
           }
         },
         "groups": {
@@ -8767,7 +8758,7 @@
           "type": "string",
           "x-ms-enum": {
             "name": "PossibleOperationsDirections",
-            "modelAsString": true
+            "modelAsString": false
           }
         },
         "providerSpecificDetails": {
@@ -8783,14 +8774,9 @@
       "description": "Recovery plan provider specific failover input base class.",
       "type": "object",
       "properties": {
-        "CanWrite": {
-          "description": "Gets a value indicating whether this Newtonsoft.Json.JsonConverter can write JSON",
-          "type": "boolean",
-          "readOnly": true
-        },
-        "CanRead": {
-          "type": "boolean",
-          "readOnly": true
+        "instanceType": {
+          "description": "Gets or sets the class type.",
+          "type": "string"
         }
       },
       "discriminator": "instanceType"
@@ -8826,7 +8812,7 @@
           "type": "string",
           "x-ms-enum": {
             "name": "PossibleOperationsDirections",
-            "modelAsString": true
+            "modelAsString": false
           }
         },
         "sourceSiteOperations": {
@@ -8838,7 +8824,7 @@
           "type": "string",
           "x-ms-enum": {
             "name": "SourceSiteOperations",
-            "modelAsString": true
+            "modelAsString": false
           }
         },
         "providerSpecificDetails": {
@@ -8881,7 +8867,7 @@
           "type": "string",
           "x-ms-enum": {
             "name": "PossibleOperationsDirections",
-            "modelAsString": true
+            "modelAsString": false
           }
         },
         "networkType": {
@@ -9321,7 +9307,7 @@
           "type": "string",
           "x-ms-enum": {
             "name": "LicenseType",
-            "modelAsString": true
+            "modelAsString": false
           }
         }
       }
@@ -9372,7 +9358,7 @@
           "type": "string",
           "x-ms-enum": {
             "name": "DisableProtectionReason",
-            "modelAsString": true
+            "modelAsString": false
           }
         },
         "replicationProviderInput": {
@@ -12823,7 +12809,7 @@
           "type": "string",
           "x-ms-enum": {
             "name": "SetMultiVmSyncStatus",
-            "modelAsString": true
+            "modelAsString": false
           }
         }
       },
@@ -12865,7 +12851,7 @@
           "type": "string",
           "x-ms-enum": {
             "name": "SetMultiVmSyncStatus",
-            "modelAsString": true
+            "modelAsString": false
           }
         }
       },
@@ -12907,7 +12893,7 @@
           "type": "string",
           "x-ms-enum": {
             "name": "SetMultiVmSyncStatus",
-            "modelAsString": true
+            "modelAsString": false
           }
         }
       },
@@ -12943,17 +12929,8 @@
           "type": "string",
           "x-ms-enum": {
             "name": "RecoveryPlanActionLocation",
-            "modelAsString": true
+            "modelAsString": false
           }
-        },
-        "CanWrite": {
-          "description": "Gets a value indicating whether this Newtonsoft.Json.JsonConverter can write JSON",
-          "type": "boolean",
-          "readOnly": true
-        },
-        "CanRead": {
-          "type": "boolean",
-          "readOnly": true
         }
       },
       "x-ms-discriminator-value": "RecoveryPlanScriptActionDetails"
@@ -12987,17 +12964,8 @@
           "type": "string",
           "x-ms-enum": {
             "name": "RecoveryPlanActionLocation",
-            "modelAsString": true
+            "modelAsString": false
           }
-        },
-        "CanWrite": {
-          "description": "Gets a value indicating whether this Newtonsoft.Json.JsonConverter can write JSON",
-          "type": "boolean",
-          "readOnly": true
-        },
-        "CanRead": {
-          "type": "boolean",
-          "readOnly": true
         }
       },
       "x-ms-discriminator-value": "RecoveryPlanAutomationRunbookActionDetails"
@@ -13014,15 +12982,6 @@
         "description": {
           "description": "Gets or sets the manual action description.",
           "type": "string"
-        },
-        "CanWrite": {
-          "description": "Gets a value indicating whether this Newtonsoft.Json.JsonConverter can write JSON",
-          "type": "boolean",
-          "readOnly": true
-        },
-        "CanRead": {
-          "type": "boolean",
-          "readOnly": true
         }
       },
       "x-ms-discriminator-value": "RecoveryPlanManualActionDetails"
@@ -13061,17 +13020,8 @@
           "type": "string",
           "x-ms-enum": {
             "name": "HyperVReplicaAzureRpRecoveryPointType",
-            "modelAsString": true
+            "modelAsString": false
           }
-        },
-        "CanWrite": {
-          "description": "Gets a value indicating whether this Newtonsoft.Json.JsonConverter can write JSON",
-          "type": "boolean",
-          "readOnly": true
-        },
-        "CanRead": {
-          "type": "boolean",
-          "readOnly": true
         }
       },
       "x-ms-discriminator-value": "RecoveryPlanHyperVReplicaAzureFailoverInput"
@@ -13098,7 +13048,7 @@
           "type": "string",
           "x-ms-enum": {
             "name": "DataSyncStatus",
-            "modelAsString": true
+            "modelAsString": false
           }
         },
         "recoveryVmCreationOption": {
@@ -13110,17 +13060,8 @@
           "type": "string",
           "x-ms-enum": {
             "name": "AlternateLocationRecoveryOption",
-            "modelAsString": true
+            "modelAsString": false
           }
-        },
-        "CanWrite": {
-          "description": "Gets a value indicating whether this Newtonsoft.Json.JsonConverter can write JSON",
-          "type": "boolean",
-          "readOnly": true
-        },
-        "CanRead": {
-          "type": "boolean",
-          "readOnly": true
         }
       },
       "x-ms-discriminator-value": "RecoveryPlanHyperVReplicaAzureFailbackInput"
@@ -13153,17 +13094,8 @@
           "type": "string",
           "x-ms-enum": {
             "name": "InMageV2RpRecoveryPointType",
-            "modelAsString": true
+            "modelAsString": false
           }
-        },
-        "CanWrite": {
-          "description": "Gets a value indicating whether this Newtonsoft.Json.JsonConverter can write JSON",
-          "type": "boolean",
-          "readOnly": true
-        },
-        "CanRead": {
-          "type": "boolean",
-          "readOnly": true
         }
       },
       "x-ms-discriminator-value": "RecoveryPlanInMageAzureV2FailoverInput"
@@ -13190,17 +13122,8 @@
           "type": "string",
           "x-ms-enum": {
             "name": "RpInMageRecoveryPointType",
-            "modelAsString": true
+            "modelAsString": false
           }
-        },
-        "CanWrite": {
-          "description": "Gets a value indicating whether this Newtonsoft.Json.JsonConverter can write JSON",
-          "type": "boolean",
-          "readOnly": true
-        },
-        "CanRead": {
-          "type": "boolean",
-          "readOnly": true
         }
       },
       "x-ms-discriminator-value": "RecoveryPlanInMageFailoverInput"
@@ -13228,21 +13151,12 @@
           "type": "string",
           "x-ms-enum": {
             "name": "A2ARpRecoveryPointType",
-            "modelAsString": true
+            "modelAsString": false
           }
         },
         "cloudServiceCreationOption": {
           "description": "Gets or sets a value indicating whether to use recovery cloud service for TFO or not.",
           "type": "string"
-        },
-        "CanWrite": {
-          "description": "Gets a value indicating whether this Newtonsoft.Json.JsonConverter can write JSON",
-          "type": "boolean",
-          "readOnly": true
-        },
-        "CanRead": {
-          "type": "boolean",
-          "readOnly": true
         }
       },
       "x-ms-discriminator-value": "RecoveryPlanA2AFailoverInput"
