@@ -85,7 +85,10 @@
         ],
         "responses": {
           "200": {
-            "description": "OK"
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/Cluster"
+            }
           },
           "202": {
             "description": "Accept"
@@ -774,7 +777,7 @@
       }
     },
     "ClusterPropertiesUpdateParameters": {
-      "description": "Cluster patch parameters",
+      "description": "Cluster properties update parameters",
       "properties": {
         "properties": {
           "x-ms-client-flatten": true,
@@ -810,7 +813,7 @@
       "x-ms-azure-resource": false
     },
     "ClusterUpdateParameters": {
-      "description": "Cluster patch request",
+      "description": "Cluster update request",
       "properties": {
         "properties": {
           "x-ms-client-flatten": true,
