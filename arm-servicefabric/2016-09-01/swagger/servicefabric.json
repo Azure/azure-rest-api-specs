@@ -285,7 +285,7 @@
         ],
         "parameters": [
           {
-             "name": "resourceGroupName",
+            "name": "resourceGroupName",
             "in": "path",
             "required": true,
             "type": "string",
@@ -651,6 +651,56 @@
         }
       }
     },
+    "ClusterPropertiesUpdateParameters": {
+      "description": "The cluster resource properties",
+      "properties": {
+        "reliabilityLevel": {
+          "type": "string",
+          "enum": [
+            "Invalid",
+            "Bronze",
+            "Silver",
+            "Gold",
+            "Platinum"
+          ]
+        },
+        "upgradeMode": {
+          "type": "string",
+          "enum": [
+            "Default",
+            "Automatic",
+            "Manual"
+          ]
+        },
+        "clusterCodeVersion": {
+          "type": "string"
+        },
+        "certificate": {
+          "$ref": "#/definitions/CertificateDescription"
+        },
+        "clientCertificateThumbprints": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ClientCertificateThumbprint"
+          }
+        },
+        "fabricSettings": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/SettingsSectionDescription"
+          }
+        },
+        "reverseProxyCertificate": {
+          "$ref": "#/definitions/CertificateDescription"
+        },
+        "nodeTypes": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/NodeTypeDescription"
+          }
+        }
+      }
+    },
     "ClusterProperties": {
       "description": "The cluster resource properties",
       "properties": {
@@ -773,12 +823,12 @@
         }
       }
     },
-    "ClusterPropertiesUpdateParameters": {
-      "description": "Cluster properties update parameters",
+    "ClusterUpdateParameters": {
+      "description": "Cluster update request",
       "properties": {
         "properties": {
           "x-ms-client-flatten": true,
-          "$ref": "#/definitions/ClusterProperties"
+          "$ref": "#/definitions/ClusterPropertiesUpdateParameters"
         },
         "tags": {
           "type": "object",
@@ -786,35 +836,6 @@
             "type": "string"
           },
           "description": "Cluster tags."
-        },
-        "propertyNames": {
-          "description": "Allowed properties",
-          "type": "array",
-          "items": {
-            "type": "string",
-            "enum": [
-              "ReliabilityLevel",
-              "ClusterUpgradeMode",
-              "ClientCertificateThumbprints",
-              "FabricSettings",
-              "ReverseProxyCertificate",
-              "NodeTypes",
-              "Tags"
-            ]
-          }
-        }
-      },
-      "required": [
-        "properties"
-      ],
-      "x-ms-azure-resource": false
-    },
-    "ClusterUpdateParameters": {
-      "description": "Cluster update request",
-      "properties": {
-        "properties": {
-          "x-ms-client-flatten": true,
-          "$ref": "#/definitions/ClusterPropertiesUpdateParameters"
         }
       }
     },
