@@ -35,7 +35,72 @@
     }
   },
   "paths": {
-    "/subscriptions/{subscriptionId}/providers/Microsoft.Relay/Namespace": {
+    "/providers/Microsoft.Relay/operations": {
+      "get": {
+        "tags": [
+          "Operations"
+        ],
+        "operationId": "Operations_List",
+        "description": "Lists all of the available Relay REST API operations.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK. The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/OperationListResult"
+            }
+          },
+          "default": {
+            "description": "Relay error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.Relay/CheckNameAvailability": {
+      "post": {
+        "tags": [
+          "Namespaces"
+        ],
+        "operationId": "Namespaces_CheckNameAvailability",
+        "description": "Check the give namespace name availability.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "name": "parameters",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/CheckNameAvailability"
+            },
+            "description": "Parameters to check availability of the given namespace name"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "check availability returned successfully.",
+            "schema": {
+              "$ref": "#/definitions/CheckNameAvailabilityResult"
+            }
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.Relay/Namespaces": {
       "get": {
         "tags": [
           "Namespaces"
@@ -154,10 +219,7 @@
             }
           },
           "202": {
-            "description": "Namespace create request accepted",
-            "schema": {
-              "$ref": "#/definitions/Namespace"
-            }
+            "description": "Namespace create request accepted"
           },
           "default": {
             "description": "Relay error response describing why the operation failed.",
@@ -244,6 +306,44 @@
             "description": "Relay error response describing why the operation failed.",
             "schema": {
               "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        }
+      },
+      "patch": {
+        "tags": [
+          "Namespaces"
+        ],
+        "operationId": "Namespaces_Update",
+        "description": "Creates or updates a namespace. Once created, this namespace's resource manifest is immutable. This operation is idempotent.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/resourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/namespaceNameParameter"
+          },
+          {
+            "name": "parameters",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/NamespacePatch"
+            },
+            "description": "Parameters for updating a namespace resource."
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Namespace successfuly updated.",
+            "schema": {
+              "$ref": "#/definitions/Namespace"
             }
           }
         }
@@ -386,8 +486,7 @@
               "$ref": "#/definitions/ErrorResponse"
             }
           }
-        },
-        "x-ms-long-running-operation": true
+        }
       },
       "get": {
         "tags": [
@@ -531,7 +630,7 @@
         "tags": [
           "HybridConnections"
         ],
-        "operationId": "HybridConnections_ListByNamespace",
+        "operationId": "HybridConnections_ListByNamespaces",
         "x-ms-examples": {
           "RelayHybridConnectionListAll": { "$ref": "../examples/HybridConnection/RelayHybridConnectionListAll.json" }
         },
@@ -998,7 +1097,7 @@
         "tags": [
           "WCFRelays"
         ],
-        "operationId": "WCFRelays_ListByNamespace",
+        "operationId": "WCFRelays_ListByNamespaces",
         "x-ms-examples": {
           "RelayListAll": { "$ref": "../examples/Relay/RelayListAll.json" }
         },
@@ -1468,7 +1567,7 @@
     }
   },
   "definitions": {
-    "Resource": {
+    "TrackedResource": {
       "properties": {
         "id": {
           "readOnly": true,
@@ -1487,20 +1586,40 @@
         },
         "location": {
           "type": "string",
+          "readOnly": true,
           "description": "Resource location"
         },
         "tags": {
           "type": "object",
+          "readOnly": true,
           "additionalProperties": {
             "type": "string"
           },
           "description": "Resource tags"
         }
       },
-      "required": [
-        "location"
-      ],
       "description": "Definition of Resource",
+      "x-ms-azure-resource": true
+    },
+    "Resource": {
+      "properties": {
+        "id": {
+          "readOnly": true,
+          "type": "string",
+          "description": "Resource Id"
+        },
+        "name": {
+          "readOnly": true,
+          "type": "string",
+          "description": "Resource name"
+        },
+        "type": {
+          "readOnly": true,
+          "type": "string",
+          "description": "Resource type"
+        }
+      },
+      "description": "The Resource definition",
       "x-ms-azure-resource": true
     },
     "HybridConnectionListResult": {
@@ -1551,8 +1670,8 @@
           "format": "int32",
           "type": "integer",
           "readOnly": true,
-          "minLength": 1,
-          "maxLength": 25,
+          "minimum": 1,
+          "maximum": 25,
           "description": "The number of listeners for this HybridConnection. min : 1 and max:25 supported"
         },
         "requiresClientAuthorization": {
@@ -1680,7 +1799,7 @@
       },
       "allOf": [
         {
-          "$ref": "#/definitions/Resource"
+          "$ref": "#/definitions/TrackedResource"
         }
       ],
       "description": "Description of a Namespace resource."
@@ -1831,7 +1950,7 @@
     },
     "RegenerateKeysParameters": {
       "properties": {
-        "Policykey": {
+        "policykey": {
           "type": "string",
           "description": "Key that needs to be regenerated.",
           "enum": [
@@ -1839,7 +1958,7 @@
             "SecondaryKey"
           ],
           "x-ms-enum": {
-            "name": "Policykey",
+            "name": "policykey",
             "modelAsString": true
           }
         }
@@ -1857,6 +1976,121 @@
         "message": {
           "description": "Error message indicating why the operation failed.",
           "type": "string"
+        }
+      }
+    },
+    "UnavailableReason": {
+      "type": "string",
+      "enum": [
+        "None",
+        "InvalidName",
+        "SubscriptionIsDisabled",
+        "NameInUse",
+        "NameInLockdown",
+        "TooManyNamespaceInCurrentSubscription"
+      ],
+      "x-ms-enum": {
+        "name": "UnavailableReason",
+        "modelAsString": false
+      },
+      "description": "Specifies the reason for the unavailability of the service."
+    },
+    "CheckNameAvailability": {
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "The Name to check the namespce name availability"
+        }
+      },
+      "required": [
+        "name"
+      ],
+      "description": "Description of a Check Name availability request properties."
+    },
+    "CheckNameAvailabilityResult": {
+      "properties": {
+        "nameAvailable": {
+          "type": "boolean",
+          "description": "Value indicating namespace is availability, true if the namespace is available; otherwise, false."
+        },
+        "reason": {
+          "$ref": "#/definitions/UnavailableReason",
+          "description": "The reason for unavailability of a namespace."
+        },
+        "message": {
+          "type": "string",
+          "readOnly": true,
+          "description": "The detailed info regarding the reason associated with the namespace."
+        }
+      },
+      "description": "Description of a Check Name availability request properties."
+    },
+    "NamespacePatch": {
+      "properties": {
+        "tags": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          },
+          "description": "Resource tags"
+        },
+        "sku": {
+          "$ref": "#/definitions/Sku",
+          "description": "The sku of the created namespace"
+        },
+        "properties": {
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/NamespaceProperties"
+        }
+      },
+      "description": "Parameters supplied to the Patch Namespace operation."
+    },
+    "OperationListResult": {
+      "description": "Result of the request to list EventHub operations. It contains a list of operations and a URL link to get the next set of results.",
+      "properties": {
+        "value": {
+          "description": "List of EventHub operations supported by the Microsoft.EventHub resource provider.",
+          "type": "array",
+          "readOnly": true,
+          "items": {
+            "$ref": "#/definitions/Operation"
+          }
+        },
+        "nextLink": {
+          "description": "URL to get the next set of operation list results if there are any.",
+          "type": "string",
+          "readOnly": true
+        }
+      }
+    },
+    "Operation": {
+      "description": "A EventHub REST API operation",
+      "type": "object",
+      "properties": {
+        "name": {
+          "description": "Operation name: {provider}/{resource}/{operation}",
+          "type": "string",
+          "readOnly": true
+        },
+        "display": {
+          "description": "The object that represents the operation.",
+          "properties": {
+            "provider": {
+              "description": "Service provider: Microsoft.EventHub",
+              "type": "string",
+              "readOnly": true
+            },
+            "resource": {
+              "description": "Resource on which the operation is performed: Invoice, etc.",
+              "type": "string",
+              "readOnly": true
+            },
+            "operation": {
+              "description": "Operation type: Read, write, delete, etc.",
+              "type": "string",
+              "readOnly": true
+            }
+          }
         }
       }
     }
