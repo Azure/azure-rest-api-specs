@@ -1,7 +1,7 @@
 {
   "swagger": "2.0",
   "info": {
-    "title": "AutomationManagementClient",
+    "title": "AutomationManagement",
     "version": "2015-10-31"
   },
   "host": "management.azure.com",
@@ -9,12 +9,10 @@
     "https"
   ],
   "consumes": [
-    "application/json",
-    "text/json"
+    "application/json"
   ],
   "produces": [
-    "application/json",
-    "text/json"
+    "application/json"
   ],
   "paths": {
 	"/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Automation/automationAccounts/{automationAccountName}": {
@@ -23,7 +21,7 @@
           "AutomationAccounts"
         ],
         "operationId": "AutomationAccounts_Update",
-        "description": "Patch an automation account.",
+        "description": "Update an automation account.",
         "externalDocs": {
           "url": "http://aka.ms/azureautomationsdk/automationaccountoperations"
         },
@@ -33,6 +31,9 @@
             "in": "path",
             "required": true,
             "type": "string",
+			"minLength": 6,
+			"maxLength": 50,
+			"pattern": "^[A-Za-z][-A-Za-z0-9]{4,48}[A-Za-z0-9]$",
             "description": "Automation account name."
           },
           {
@@ -42,7 +43,7 @@
             "schema": {
               "$ref": "#/definitions/AutomationAccountUpdateParameters"
             },
-            "description": "Parameters supplied to the patch automation account."
+            "description": "Parameters supplied to the update automation account."
           },
           {
             "$ref": "#/parameters/ResourceGroupNameParameter"
@@ -59,6 +60,12 @@
             "description": "OK",
             "schema": {
               "$ref": "#/definitions/AutomationAccount"
+            }
+          },
+		  "default": {
+            "description": "Automation error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
             }
           }
         }
@@ -214,6 +221,12 @@
             "schema": {
               "$ref": "#/definitions/AutomationAccountListResult"
             }
+          },
+		  "default": {
+            "description": "Automation error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
           }
         },
         "x-ms-pageable": {
@@ -226,7 +239,7 @@
         "tags": [
           "Operations"
         ],
-        "summary": "Lists all of the available Automation REST API operations.",
+        "description": "Lists all of the available Automation REST API operations.",
         "operationId": "Operations_List",
         "parameters": [
           {
@@ -293,7 +306,7 @@
       "properties": {
         "name": {
           "type": "string",
-          "description": "Gets or sets the sku name of the account.",
+          "description": "The SKU (pricing tier) of the account.",
           "enum": [
             "Free",
             "Basic"
@@ -305,12 +318,12 @@
         },
         "family": {
           "type": "string",
-          "description": "Gets or sets the sku family."
+          "description": "sku family."
         },
         "capacity": {
           "type": "integer",
           "format": "int32",
-          "description": "Gets or sets the sku capcity."
+          "description": "sku capcity."
         }
       },
       "description": "The account sku."
@@ -319,52 +332,52 @@
       "properties": {
         "sku": {
           "$ref": "#/definitions/Sku",
-          "description": "Gets or sets account sku."
+          "description": "account sku."
         }
       },
-      "description": "The parameters supplied to the patch account properties."
+      "description": "The parameters supplied to the update account properties."
     },
     "AutomationAccountUpdateParameters": {
       "properties": {
         "properties": {
           "$ref": "#/definitions/AutomationAccountUpdateProperties",
           "x-ms-client-flatten": true,
-          "description": "Gets or sets account update properties."
+          "description": "account update properties."
         },
         "name": {
           "type": "string",
-          "description": "Gets or sets the name of the resource."
+          "description": "name of the resource."
         },
         "location": {
           "type": "string",
-          "description": "Gets or sets the location of the resource."
+          "description": "location of the resource."
         },
         "tags": {
           "type": "object",
           "additionalProperties": {
             "type": "string"
           },
-          "description": "Gets or sets the tags attached to the resource."
+          "description": "tags attached to the resource."
         }
       },
       "required": [
         "properties"
       ],
-      "description": "The parameters supplied to the patch automation account operation."
+      "description": "The parameters supplied to the update automation account operation."
     },
     "AutomationAccountProperties": {
       "properties": {
         "sku": {
           "$ref": "#/definitions/Sku",
-          "description": "Gets or sets the sku of account."
+          "description": "sku of account."
         },
         "lastModifiedBy": {
           "type": "string",
-          "description": "Gets or sets the last modified by."
+          "description": "last modified by"
         },
         "state": {
           "type": "string",
-          "description": "Gets or sets the status of account.",
+          "description": "status of account.",
           "enum": [
             "Ok",
             "Unavailable",
@@ -378,16 +391,16 @@
         "creationTime": {
           "type": "string",
           "format": "date-time",
-          "description": "Gets or sets the creation time."
+          "description": "creation time."
         },
         "lastModifiedTime": {
           "type": "string",
           "format": "date-time",
-          "description": "Gets or sets the last modified time."
+          "description": "last modified time."
         },
         "description": {
           "type": "string",
-          "description": "Gets or sets the description."
+          "description": "description."
         }
       },
       "description": "Definition of the account property."
@@ -397,11 +410,11 @@
         "properties": {
           "$ref": "#/definitions/AutomationAccountProperties",
           "x-ms-client-flatten": true,
-          "description": "Gets or sets the automation account properties."
+          "description": "automation account properties."
         },
         "etag": {
           "type": "string",
-          "description": "Gets or sets the etag of the resource."
+          "description": "etag of the resource."
         }
       },
       "allOf": [
@@ -415,7 +428,7 @@
       "properties": {
         "sku": {
           "$ref": "#/definitions/Sku",
-          "description": "Gets or sets account sku."
+          "description": "account sku."
         }
       },
       "description": "The parameters supplied to the create or update account properties."
@@ -425,22 +438,22 @@
         "properties": {
           "$ref": "#/definitions/AutomationAccountCreateOrUpdateProperties",
           "x-ms-client-flatten": true,
-          "description": "Gets or sets account create or update properties."
+          "description": "account create or update properties."
         },
         "name": {
           "type": "string",
-          "description": "Gets or sets the name of the resource."
+          "description": "name of the resource."
         },
         "location": {
           "type": "string",
-          "description": "Gets or sets the location of the resource."
+          "description": "location of the resource."
         },
         "tags": {
           "type": "object",
           "additionalProperties": {
             "type": "string"
           },
-          "description": "Gets or sets the tags attached to the resource."
+          "description": "tags attached to the resource."
         }
       },
       "description": "The parameters supplied to the create or update automation account operation."
@@ -452,11 +465,11 @@
           "items": {
             "$ref": "#/definitions/AutomationAccount"
           },
-          "description": "Gets or sets list of accounts."
+          "description": "list of accounts."
         },
         "nextLink": {
           "type": "string",
-          "description": "Gets or sets the next link."
+          "description": "next link."
         }
       },
       "description": "The response model for the list account operation."
