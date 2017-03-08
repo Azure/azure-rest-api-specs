@@ -426,7 +426,7 @@
       "properties": {
         "sku": {
           "$ref": "#/definitions/Sku",
-          "description": "The Sku of the container registry."
+          "description": "The SKU of the container registry."
         },
         "properties": {
           "$ref": "#/definitions/RegistryProperties",
@@ -436,13 +436,13 @@
       }
     },
     "Sku": {
-      "description": "The Sku of a container registry.",
+      "description": "The SKU of a container registry.",
       "required": [
         "name"
       ],
       "properties": {
         "name": {
-          "description": "The Sku name of the the container registry. Required for registry creation.",
+          "description": "The SKU name of the the container registry. Required for registry creation.",
           "enum": [
             "Basic"
           ],
@@ -453,7 +453,7 @@
           }
         },
         "tier": {
-          "description": "The Sku tier based on the Sku name.",
+          "description": "The SKU tier based on the SKU name.",
           "enum": [
             "Basic"
           ],
@@ -507,8 +507,8 @@
     "StorageAccountProperties": {
       "description": "The properties of a storage account for a container registry.",
       "properties": {
-        "id": {
-          "description": "The resource ID of the storage account.",
+        "name": {
+          "description": "The name of the storage account.",
           "type": "string"
         }
       }
@@ -533,7 +533,7 @@
         },
         "sku": {
           "$ref": "#/definitions/Sku",
-          "description": "The Sku of the container registry."
+          "description": "The SKU of the container registry."
         },
         "properties": {
           "$ref": "#/definitions/RegistryPropertiesCreateParameters",
@@ -561,12 +561,12 @@
     "StorageAccountParameters": {
       "description": "The parameters of a storage account for a container registry.",
       "required": [
-        "id",
+        "name",
         "accessKey"
       ],
       "properties": {
-        "id": {
-          "description": "The resource ID of the storage account.",
+        "name": {
+          "description": "The name of the storage account.",
           "type": "string"
         },
         "accessKey": {
