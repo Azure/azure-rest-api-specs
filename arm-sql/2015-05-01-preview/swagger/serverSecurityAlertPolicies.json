@@ -34,11 +34,7 @@
             "$ref": "#/parameters/ResourceGroupParameter"
           },
           {
-            "name": "serverName",
-            "in": "path",
-            "description": "The name of the Azure SQL server for which server Threat Detection policy is defined.",
-            "required": true,
-            "type": "string"
+            "$ref": "#/parameters/ServerNameParameter"
           },
 		  {
 			"name": "securityAlertPolicyName",
@@ -89,19 +85,15 @@
             "$ref": "#/parameters/ResourceGroupParameter"
           },
           {
-            "name": "serverName",
-            "in": "path",
-            "description": "The name of the Azure SQL server for which server Threat Detection policy is defined.",
-            "required": true,
-            "type": "string"
+            "$ref": "#/parameters/ServerNameParameter"
           },
-            {
-                "name": "securityAlertPolicyName",
-                "in": "path",
-                "description": "The name of the Threat Detection security alert policy. Default is the currently value to use.",
-                "required": true,
-                "type": "string"
-            },
+          {
+              "name": "securityAlertPolicyName",
+              "in": "path",
+              "description": "The name of the Threat Detection security alert policy. Default is the currently value to use.",
+              "required": true,
+              "type": "string"
+          },
           {
             "$ref": "#/parameters/ApiVersionParameter"
           }
@@ -137,19 +129,15 @@
             "$ref": "#/parameters/ResourceGroupParameter"
           },
           {
-            "name": "serverName",
-            "in": "path",
-            "description": "The name of the Azure SQL server for which server Threat Detection policy is defined.",
-            "required": true,
-            "type": "string"
+            "$ref": "#/parameters/ServerNameParameter"
           },
-            {
-                "name": "securityAlertPolicyName",
-                "in": "path",
-                "description": "The name of the Threat Detection policy. Default is the currently value to use.",
-                "required": true,
-                "type": "string"
-            },
+          {
+              "name": "securityAlertPolicyName",
+              "in": "path",
+              "description": "The name of the Threat Detection policy. Default is the currently value to use.",
+              "required": true,
+              "type": "string"
+          },
           {
             "$ref": "#/parameters/ApiVersionParameter"
           }
@@ -184,19 +172,15 @@
             "$ref": "#/parameters/ResourceGroupParameter"
           },
           {
-            "name": "serverName",
-            "in": "path",
-            "description": "The name of the Azure SQL server for which server Threat Detection policy will be defined.",
-            "required": true,
-            "type": "string"
+            "$ref": "#/parameters/ServerNameParameter"
           },
-            {
-                "name": "securityAlertPolicyName",
-                "in": "path",
-                "description": "The name of the Threat Detection policy. Default is the currently value to use.",
-                "required": true,
-                "type": "string"
-            },
+          {
+              "name": "securityAlertPolicyName",
+              "in": "path",
+              "description": "The name of the Threat Detection policy. Default is the currently value to use.",
+              "required": true,
+              "type": "string"
+          },
           {
             "name": "serverSecurityAlertPolicy",
             "in": "body",
@@ -441,6 +425,14 @@
       "required": true,
       "x-ms-parameter-location": "method",
       "type": "string"
+    },
+    "ServerNameParameter": {
+      "name": "serverName",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "description": "The name of the Azure SQL server.",
+      "x-ms-parameter-location": "method"
     }
   }
 }

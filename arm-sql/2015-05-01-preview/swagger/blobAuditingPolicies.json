@@ -34,11 +34,7 @@
             "$ref": "#/parameters/ResourceGroupParameter"
           },
           {
-            "name": "serverName",
-            "in": "path",
-            "description": "The name of the Azure SQL Database Server on which the Azure SQL Database is hosted.",
-            "required": true,
-            "type": "string"
+            "$ref": "#/parameters/ServerNameParameter"
           },
           {
             "name": "databaseName",
@@ -88,11 +84,7 @@
             "$ref": "#/parameters/ResourceGroupParameter"
           },
           {
-            "name": "serverName",
-            "in": "path",
-            "description": "The name of the Azure SQL Database Server on which the Azure SQL Database is hosted.",
-            "required": true,
-            "type": "string"
+            "$ref": "#/parameters/ServerNameParameter"
           },
           {
             "name": "databaseName",
@@ -101,13 +93,13 @@
             "required": true,
             "type": "string"
           },
-            {
-                "name": "blobAuditingPolicyName",
-                "in": "path",
-                "description": "The name of the blob auditing policy. Default is the currently value to use.",
-                "required": true,
-                "type": "string"
-            },
+          {
+              "name": "blobAuditingPolicyName",
+              "in": "path",
+              "description": "The name of the blob auditing policy. Default is the currently value to use.",
+              "required": true,
+              "type": "string"
+          },
           {
             "name": "databaseBlobAuditingPolicy",
             "in": "body",
@@ -157,19 +149,15 @@
             "$ref": "#/parameters/ResourceGroupParameter"
           },
           {
-            "name": "serverName",
-            "in": "path",
-            "description": "The name of the Azure SQL server for which server blob audit policy is defined.",
-            "required": true,
-            "type": "string"
+            "$ref": "#/parameters/ServerNameParameter"
           },
-            {
-                "name": "blobAuditingPolicyName",
-                "in": "path",
-                "description": "The name of the blob auditing policy. Default is the currently value to use.",
-                "required": true,
-                "type": "string"
-            },
+          {
+              "name": "blobAuditingPolicyName",
+              "in": "path",
+              "description": "The name of the blob auditing policy. Default is the currently value to use.",
+              "required": true,
+              "type": "string"
+          },
           {
             "name": "operationId",
             "in": "path",
@@ -212,19 +200,15 @@
             "$ref": "#/parameters/ResourceGroupParameter"
           },
           {
-            "name": "serverName",
-            "in": "path",
-            "description": "The name of the Azure SQL server for which server blob audit policy is defined.",
-            "required": true,
-            "type": "string"
+            "$ref": "#/parameters/ServerNameParameter"
           },
-            {
-                "name": "blobAuditingPolicyName",
-                "in": "path",
-                "description": "The name of the blob auditing policy. Default is the currently value to use.",
-                "required": true,
-                "type": "string"
-            },
+          {
+              "name": "blobAuditingPolicyName",
+              "in": "path",
+              "description": "The name of the blob auditing policy. Default is the currently value to use.",
+              "required": true,
+              "type": "string"
+          },
           {
             "$ref": "#/parameters/ApiVersionParameter"
           }
@@ -260,11 +244,7 @@
             "$ref": "#/parameters/ResourceGroupParameter"
           },
           {
-            "name": "serverName",
-            "in": "path",
-            "description": "The name of the Azure SQL server for which server blob audit policy is defined.",
-            "required": true,
-            "type": "string"
+            "$ref": "#/parameters/ServerNameParameter"
           },
           {
             "name": "blobAuditingPolicyName",
@@ -307,11 +287,7 @@
             "$ref": "#/parameters/ResourceGroupParameter"
           },
           {
-            "name": "serverName",
-            "in": "path",
-            "description": "The name of the Azure SQL server for which server blob audit policy will be defined.",
-            "required": true,
-            "type": "string"
+            "$ref": "#/parameters/ServerNameParameter"
           },
           {
             "name": "blobAuditingPolicyName",
@@ -652,6 +628,14 @@
       "required": true,
       "x-ms-parameter-location": "method",
       "type": "string"
+    },
+    "ServerNameParameter": {
+      "name": "serverName",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "description": "The name of the Azure SQL server.",
+      "x-ms-parameter-location": "method"
     }
   }
 }
