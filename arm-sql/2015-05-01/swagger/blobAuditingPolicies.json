@@ -68,8 +68,7 @@
           "default": {
             "description": "*** Error Responses: ***\n\n * 400 InvalidDatabaseBlobAuditingPolicyCreateRequest - The create database blob auditing policy request does not exist or has no properties object.\n\n * 400 InvalidBlobAuditActionsAndGroups - Invalid audit actions or action groups.\n\n * 400 DataSecurityInvalidUserSuppliedParameter - An invalid parameter value was provided by the client.\n\n * 404 SubscriptionDoesNotHaveServer - The requested server was not found\n\n * 404 SourceDatabaseNotFound - The source database does not exist.\n\n * 500 DatabaseIsUnavailable - Loading failed. Please try again later.\n\n * 500 GetBlobAuditingPolicyFailed - Failed to get Auditing settings"
           }
-        },
-        "deprecated": false
+        }
       },
       "put": {
         "tags": [
@@ -137,8 +136,7 @@
           "default": {
             "description": "*** Error Responses: ***\n\n * 400 InvalidDatabaseBlobAuditingPolicyCreateRequest - The create database blob auditing policy request does not exist or has no properties object.\n\n * 400 InvalidBlobAuditActionsAndGroups - Invalid audit actions or action groups.\n\n * 400 DataSecurityInvalidUserSuppliedParameter - An invalid parameter value was provided by the client.\n\n * 404 SubscriptionDoesNotHaveServer - The requested server was not found\n\n * 404 SourceDatabaseNotFound - The source database does not exist.\n\n * 500 DatabaseIsUnavailable - Loading failed. Please try again later.\n\n * 500 UpsertBlobAuditingPolicyFailed - An error has occurred while saving Auditing settings, please try again later"
           }
-        },
-        "deprecated": false
+        }
       }
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/servers/{serverName}/auditingSettings/{blobAuditingPolicyName}/operationResults/{operationId}": {
@@ -193,8 +191,7 @@
           "default": {
             "description": "*** Error Responses: ***\n\n * 404 SubscriptionDoesNotHaveServer - The requested server was not found\n\n * 404 OperationIdNotFound - The operation with Id does not exist.\n\n * 405 ServerBlobAuditingOperationResultsNotImplemented - Operations on Server Auditing operation results are not enabled yet\n\n * 500 GetServerBlobAuditingOperationResultsFailed - Failed to get Auditing operation results"
           }
-        },
-        "deprecated": false
+        }
       }
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/servers/{serverName}/auditingSettings/{blobAuditingPolicyName}/operationResults": {
@@ -242,8 +239,7 @@
           "default": {
             "description": "*** Error Responses: ***\n\n * 404 SubscriptionDoesNotHaveServer - The requested server was not found\n\n * 404 OperationIdNotFound - The operation with Id does not exist.\n\n * 405 ServerBlobAuditingOperationResultsNotImplemented - Operations on Server Auditing operation results are not enabled yet\n\n * 500 GetServerBlobAuditingOperationResultsFailed - Failed to get Auditing operation results"
           }
-        },
-        "deprecated": false
+        }
       }
     },
    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/servers/{serverName}/auditingSettings/{blobAuditingPolicyName}": {
@@ -270,13 +266,13 @@
             "required": true,
             "type": "string"
           },
-            {
-                "name": "blobAuditingPolicyName",
-                "in": "path",
-                "description": "The name of the blob auditing policy. Default is the currently value to use.",
-                "required": true,
-                "type": "string"
-            },
+          {
+            "name": "blobAuditingPolicyName",
+            "in": "path",
+            "description": "The name of the blob auditing policy. Default is the currently value to use.",
+            "required": true,
+            "type": "string"
+          },
           {
             "$ref": "#/parameters/ApiVersionParameter"
           }
@@ -291,8 +287,7 @@
           "default": {
             "description": "*** Error Responses: ***\n\n * 400 InvalidServerBlobAuditingPolicyCreateRequest - The create server blob auditing policy request does not exist or has no properties object.\n\n * 400 InvalidBlobAuditActionsAndGroups - Invalid audit actions or action groups.\n\n * 400 DataSecurityInvalidUserSuppliedParameter - An invalid parameter value was provided by the client.\n\n * 404 SubscriptionDoesNotHaveServer - The requested server was not found\n\n * 405 ServerBlobAuditingPolicyNotImplemented - Operations on Server Auditing settings are not enabled yet\n\n * 500 GetBlobAuditingPolicyFailed - Failed to get Auditing settings"
           }
-        },
-        "deprecated": false
+        }
       },
       "put": {
         "tags": [
@@ -318,13 +313,13 @@
             "required": true,
             "type": "string"
           },
-            {
-                "name": "blobAuditingPolicyName",
-                "in": "path",
-                "description": "The name of the blob auditing policy. Default is the currently value to use.",
-                "required": true,
-                "type": "string"
-            },
+          {
+            "name": "blobAuditingPolicyName",
+            "in": "path",
+            "description": "The name of the blob auditing policy. Default is the currently value to use.",
+            "required": true,
+            "type": "string"
+          },
           {
             "name": "serverBlobAuditingPolicy",
             "in": "body",
@@ -352,7 +347,7 @@
             "description": "*** Error Responses: ***\n\n * 400 InvalidServerBlobAuditingPolicyCreateRequest - The create server blob auditing policy request does not exist or has no properties object.\n\n * 400 InvalidBlobAuditActionsAndGroups - Invalid audit actions or action groups.\n\n * 400 DataSecurityInvalidUserSuppliedParameter - An invalid parameter value was provided by the client.\n\n * 404 SubscriptionDoesNotHaveServer - The requested server was not found\n\n * 405 ServerBlobAuditingPolicyNotImplemented - Operations on Server Auditing settings are not enabled yet\n\n * 500 UpsertBlobAuditingPolicyFailed - An error has occurred while saving Auditing settings, please try again later"
           }
         },
-        "deprecated": false
+        "x-ms-long-running-operation": true
       }
     }
   },
