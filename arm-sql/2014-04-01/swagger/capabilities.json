@@ -22,7 +22,7 @@
                     "Capabilities"
                 ],
                 "operationId": "Capabilities_Get",
-                "description": "Returns information about the Azure SQL capabilities available for the specified region.",
+                "description": "Returns the capabilities available for the specified region.",
                 "parameters": [
                     {
                         "$ref": "#/parameters/ApiVersionParameter"
@@ -35,7 +35,7 @@
                         "in": "path",
                         "required": true,
                         "type": "string",
-                        "description": "The Id of the region for which the Azure SQL capabilities are retrieved."
+                        "description": "The Id of the region for which the capabilities are retrieved."
                     }
                 ],
                 "responses": {
@@ -72,8 +72,7 @@
                         "Petabytes"
                     ],
                     "x-ms-enum": {
-                        "name": "MaxSizeUnits",
-                        "modelAsString": true
+                        "name": "MaxSizeUnits"
                     }
                 },
                 "status": {
@@ -86,12 +85,11 @@
                         "Default"
                     ],
                     "x-ms-enum": {
-                        "name": "CapabilityStatus",
-                        "modelAsString": true
+                        "name": "CapabilityStatus"
                     }
                 }
             },
-            "description": "Represents the maximum size limits for an Azure SQL Database."
+            "description": "Represents the maximum size limits for a database."
         },
         "ServiceObjectiveCapability": {
             "properties": {
@@ -110,8 +108,7 @@
                         "Default"
                     ],
                     "x-ms-enum": {
-                        "name": "CapabilityStatus",
-                        "modelAsString": true
+                        "name": "CapabilityStatus"
                     }
                 },
                 "performanceLevel": {
@@ -131,7 +128,7 @@
                     "items": {
                         "$ref": "#/definitions/MaxSizeCapability"
                     },
-                    "description": "The list of supported maximum Azure SQL Database sizes for this Service Objective."
+                    "description": "The list of supported maximum database sizes for this Service Objective."
                 }
             },
             "description": "Represents the Service Objectives capabilities."
@@ -165,15 +162,14 @@
                 "status": {
                     "readOnly": true,
                     "type": "string",
-                    "description": "The status of the Azure SQL Server edition.",
+                    "description": "The status of the server edition.",
                     "enum": [
                         "Visible",
                         "Available",
                         "Default"
                     ],
                     "x-ms-enum": {
-                        "name": "CapabilityStatus",
-                        "modelAsString": true
+                        "name": "CapabilityStatus"
                     }
                 },
                 "supportedServiceLevelObjectives": {
@@ -185,7 +181,7 @@
                     "description": "The list of supported Service Objectives for the edition."
                 }
             },
-            "description": "Represents the Azure SQL Server edition capabilities."
+            "description": "Represents the server edition capabilities."
         },
         "ServerVersionCapability": {
             "properties": {
@@ -197,15 +193,14 @@
                 "status": {
                     "readOnly": true,
                     "type": "string",
-                    "description": "The status of the Azure SQL Server version.",
+                    "description": "The status of the server version.",
                     "enum": [
                         "Visible",
                         "Available",
                         "Default"
                     ],
                     "x-ms-enum": {
-                        "name": "CapabilityStatus",
-                        "modelAsString": true
+                        "name": "CapabilityStatus"
                     }
                 },
                 "supportedEditions": {
@@ -214,10 +209,10 @@
                     "items": {
                         "$ref": "#/definitions/EditionCapability"
                     },
-                    "description": "The list of supported Azure SQL Server editions."
+                    "description": "The list of supported server editions."
                 }
             },
-            "description": "Represents the Azure SQL Server capabilities."
+            "description": "Represents the server capabilities."
         },
         "LocationCapabilities": {
             "properties": {
@@ -236,8 +231,7 @@
                         "Default"
                     ],
                     "x-ms-enum": {
-                        "name": "CapabilityStatus",
-                        "modelAsString": true
+                        "name": "CapabilityStatus"
                     }
                 },
                 "supportedServerVersions": {
@@ -246,10 +240,10 @@
                     "items": {
                         "$ref": "#/definitions/ServerVersionCapability"
                     },
-                    "description": "The list of supported Azure SQL Server versions."
+                    "description": "The list of supported server versions."
                 }
             },
-            "description": "Represents the Azure SQL capabilities for a region."
+            "description": "Represents the capabilities for a region."
         },
         "Resource": {
             "description": "Resource properties",
