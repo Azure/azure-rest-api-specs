@@ -410,11 +410,7 @@
             "$ref": "#/parameters/namespaceNameParameter"
           },
           {
-            "name": "authorizationRuleName",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "description": "Namespace Authorization Rule Name."
+            "$ref": "#/parameters/authorizationRuleNameParameter"
           },
           {
             "name": "parameters",
@@ -1569,35 +1565,26 @@
   "definitions": {
     "TrackedResource": {
       "properties": {
-        "id": {
-          "readOnly": true,
-          "type": "string",
-          "description": "Resource Id"
-        },
-        "name": {
-          "readOnly": true,
-          "type": "string",
-          "description": "Resource name"
-        },
-        "type": {
-          "readOnly": true,
-          "type": "string",
-          "description": "Resource type"
-        },
         "location": {
           "type": "string",
-          "readOnly": true,
           "description": "Resource location"
         },
         "tags": {
           "type": "object",
-          "readOnly": true,
           "additionalProperties": {
             "type": "string"
           },
           "description": "Resource tags"
         }
       },
+      "required": [
+        "location"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/Resource"
+        }
+      ],
       "description": "Definition of Resource",
       "x-ms-azure-resource": true
     },
@@ -1950,7 +1937,7 @@
     },
     "RegenerateKeysParameters": {
       "properties": {
-        "policykey": {
+        "policyKey": {
           "type": "string",
           "description": "Key that needs to be regenerated.",
           "enum": [
@@ -1958,7 +1945,7 @@
             "SecondaryKey"
           ],
           "x-ms-enum": {
-            "name": "policykey",
+            "name": "policyKey",
             "modelAsString": true
           }
         }
@@ -1999,7 +1986,7 @@
       "properties": {
         "name": {
           "type": "string",
-          "description": "The Name to check the namespce name availability"
+          "description": "The Name to check the namespce name availability and The namespace name can contain only letters, numbers, and hyphens. The namespace must start with a letter, and it must end with a letter or number."
         }
       },
       "required": [
