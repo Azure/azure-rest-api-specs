@@ -21,11 +21,9 @@
               "endPort": 65534
             },
             "isPrimary": true,
-            "vmInstanceCount": 5
+            "vmInstanceCount": 5,
+            "reverseProxyEndpointPort": 9998
           }
-        ],
-        "propertyNames": [
-          "NodeTypes.DurabilityLevel"
         ]
       }
     },
@@ -37,42 +35,25 @@
           "location": "southcentralus",
           "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourcegroups/resRg/providers/Microsoft.ServiceFabric/clusters/myCluster",
           "name": "myCluster",
-          "tags": {
-            "resourceType": "Service Fabric",
-            "clusterName": "myCluster"
-          },
-          "etag": "W/\"636236839047996583\"",
+          "tags": {},
+          "etag": "W/\"636244182147134147\"",
           "properties": {
-            "provisioningState": "Updating",
-            "clusterId": "466e7604-b8ae-4696-a91d-d7b5fcc63628",
-            "clusterCodeVersion": "5.5.149.9494",
-            "clusterState": "UpdatingUserConfiguration",
-            "managementEndpoint": "https://myCluster.southcentralus.cloudapp.azure.com:19080",
-            "clusterEndpoint": "https://warp-test-winfabrp-southcentralus.trafficmanager.net/runtime/clusters/466e7604-b8ae-4696-a91d-d7b5fcc63628",
-            "certificate": {
-              "thumbprint": "483B5DE52ECA35147B94C5E116FA7B2E34BB68F9",
-              "x509StoreName": "My"
-            },
+            "provisioningState": "Succeeded",
+            "clusterId": "8d566293-3508-4d62-ba7b-056fa710c3c9",
+            "clusterCodeVersion": "5.5.216.0",
+            "clusterState": "Ready",
+            "managementEndpoint": "http://myCluster.southcentralus.cloudapp.azure.com:19080",
+            "clusterEndpoint": "https://warp-test-winfabrp-southcentralus.trafficmanager.net/runtime/clusters/8d566293-3508-4d62-ba7b-056fa710c3c9",
             "clientCertificateThumbprints": [],
             "clientCertificateCommonNames": [],
-            "fabricSettings": [
-              {
-                "name": "Security",
-                "parameters": [
-                  {
-                    "name": "ClusterProtectionLevel",
-                    "value": "EncryptAndSign"
-                  }
-                ]
-              }
-            ],
+            "fabricSettings": [],
             "upgradeDescription": {
               "overrideUserUpgradePolicy": false,
               "forceRestart": true,
               "upgradeReplicaSetCheckTimeout": "10675199.02:48:05.4775807",
-              "healthCheckWaitDuration": "00:05:00",
-              "healthCheckStableDuration": "00:05:00",
-              "healthCheckRetryTimeout": "00:45:00",
+              "healthCheckWaitDuration": "00:00:01",
+              "healthCheckStableDuration": "00:00:01",
+              "healthCheckRetryTimeout": "00:00:01",
               "upgradeTimeout": "12:00:00",
               "upgradeDomainTimeout": "02:00:00",
               "healthPolicy": {
@@ -86,15 +67,15 @@
               }
             },
             "diagnosticsStorageAccountConfig": {
-              "storageAccountName": "ba3wzulspn67w2",
+              "storageAccountName": "sflogssdktest5486",
               "protectedAccountKeyName": "StorageAccountKey1",
-              "blobEndpoint": "https://ba3wzulspn67w2.blob.core.windows.net/",
-              "queueEndpoint": "https://ba3wzulspn67w2.queue.core.windows.net/",
-              "tableEndpoint": "https://ba3wzulspn67w2.table.core.windows.net/"
+              "blobEndpoint": "https://sflogssdktest5486.blob.core.windows.net/",
+              "queueEndpoint": "https://sflogssdktest5486.queue.core.windows.net/",
+              "tableEndpoint": "https://sflogssdktest5486.table.core.windows.net/"
             },
             "nodeTypes": [
               {
-                "name": "nt1vm",
+                "name": "n1",
                 "clientConnectionEndpointPort": 19000,
                 "httpGatewayEndpointPort": 19080,
                 "applicationPorts": {
@@ -107,80 +88,26 @@
                 },
                 "isPrimary": true,
                 "vmInstanceCount": 5,
-                "durabilityLevel": "Bronze"
+                "reverseProxyEndpointPort": 9998,
+                "durabilityLevel": "Silver"
               }
             ],
             "vmImage": "Windows",
-            "reliabilityLevel": "Silver",
+            "reliabilityLevel": "Bronze",
             "upgradeMode": "Automatic",
             "availableClusterVersions": [
               {
-                "codeVersion": "5.1.158.9590",
-                "supportExpiryUtc": "9999-12-31T23:59:59.9999999",
-                "environment": "Windows"
-              },
-              {
-                "codeVersion": "5.2.0.100",
-                "supportExpiryUtc": "9999-12-31T23:59:59.9999999",
-                "environment": "Windows"
-              },
-              {
-                "codeVersion": "5.2.207.9590",
-                "supportExpiryUtc": "9999-12-31T23:59:59.9999999",
-                "environment": "Windows"
-              },
-              {
-                "codeVersion": "5.3.121.9494",
-                "supportExpiryUtc": "9999-12-31T23:59:59.9999999",
-                "environment": "Windows"
-              },
-              {
-                "codeVersion": "5.3.311.9590",
-                "supportExpiryUtc": "9999-12-31T23:59:59.9999999",
-                "environment": "Windows"
-              },
-              {
-                "codeVersion": "5.4.30.100",
-                "supportExpiryUtc": "9999-12-31T23:59:59.9999999",
-                "environment": "Windows"
-              },
-              {
-                "codeVersion": "5.4.35.100",
-                "supportExpiryUtc": "9999-12-31T23:59:59.9999999",
-                "environment": "Windows"
-              },
-              {
-                "codeVersion": "5.4.38.100",
-                "supportExpiryUtc": "9999-12-31T23:59:59.9999999",
-                "environment": "Windows"
-              },
-              {
-                "codeVersion": "5.4.118.9494",
-                "supportExpiryUtc": "9999-12-31T23:59:59.9999999",
-                "environment": "Windows"
-              },
-              {
-                "codeVersion": "5.4.132.9494",
-                "supportExpiryUtc": "9999-12-31T23:59:59.9999999",
-                "environment": "Windows"
-              },
-              {
                 "codeVersion": "5.4.145.9494",
-                "supportExpiryUtc": "9999-12-31T23:59:59.9999999",
+                "supportExpiryUtc": "2017-05-10T00:00:00",
                 "environment": "Windows"
               },
               {
                 "codeVersion": "5.4.164.9494",
-                "supportExpiryUtc": "9999-12-31T23:59:59.9999999",
+                "supportExpiryUtc": "2017-05-10T00:00:00",
                 "environment": "Windows"
               },
               {
-                "codeVersion": "5.5.67.9494",
-                "supportExpiryUtc": "9999-12-31T23:59:59.9999999",
-                "environment": "Windows"
-              },
-              {
-                "codeVersion": "5.5.149.9494",
+                "codeVersion": "5.5.216.0",
                 "supportExpiryUtc": "9999-12-31T23:59:59.9999999",
                 "environment": "Windows"
               }
@@ -190,3 +117,4 @@
       }
     }
   }
+}

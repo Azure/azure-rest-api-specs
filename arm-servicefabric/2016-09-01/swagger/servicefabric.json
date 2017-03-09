@@ -54,18 +54,10 @@
         ],
         "parameters": [
           {
-            "name": "resourceGroupName",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "description": "The name of the Resource Group to which the server belongs."
+            "$ref": "#/parameters/resourceGroupNameParameter"
           },
           {
-            "name": "clusterName",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "description": "The name of the cluster"
+            "$ref": "#/parameters/clusterNameParameter"
           },
           {
             "$ref": "#/parameters/api-version"
@@ -117,18 +109,10 @@
         ],
         "parameters": [
           {
-            "name": "resourceGroupName",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "description": "The name of the Resource Group to which the server belongs."
+            "$ref": "#/parameters/resourceGroupNameParameter"
           },
           {
-            "name": "clusterName",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "description": "The name of the cluster"
+            "$ref": "#/parameters/clusterNameParameter"
           },
           {
             "$ref": "#/parameters/api-version"
@@ -172,18 +156,10 @@
         ],
         "parameters": [
           {
-            "name": "resourceGroupName",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "description": "The name of the Resource Group to which the server belongs."
+            "$ref": "#/parameters/resourceGroupNameParameter"
           },
           {
-            "name": "clusterName",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "description": "The name of the cluster"
+            "$ref": "#/parameters/clusterNameParameter"
           },
           {
             "$ref": "#/parameters/api-version"
@@ -232,18 +208,10 @@
         },
         "parameters": [
           {
-            "name": "resourceGroupName",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "description": "The name of the Resource Group to which the server belongs."
+            "$ref": "#/parameters/resourceGroupNameParameter"
           },
           {
-            "name": "clusterName",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "description": "The name of the cluster"
+            "$ref": "#/parameters/clusterNameParameter"
           },
           {
             "$ref": "#/parameters/api-version"
@@ -285,11 +253,7 @@
         ],
         "parameters": [
           {
-            "name": "resourceGroupName",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "description": "The name of the Resource Group to which the server belongs."
+            "$ref": "#/parameters/resourceGroupNameParameter"
           },
           {
             "$ref": "#/parameters/api-version"
@@ -673,27 +637,33 @@
           ]
         },
         "clusterCodeVersion": {
+          "description": "The ServiceFabric code version, if set it, please make sure you have set upgradeMode to Manual, otherwise ,it will fail",
           "type": "string"
         },
         "certificate": {
+          "description": "The cluster certificate settings, the new certificate should exist in Vmss or KeyVault,before you add it, it will override original value",
           "$ref": "#/definitions/CertificateDescription"
         },
         "clientCertificateThumbprints": {
+          "description": "The cluster client thumbprints, it will override existing collection",
           "type": "array",
           "items": {
             "$ref": "#/definitions/ClientCertificateThumbprint"
           }
         },
         "fabricSettings": {
+          "description": "The new fabric settings for the cluster, Be noted, it will only update or add to existing collection, it will NOT override",
           "type": "array",
           "items": {
             "$ref": "#/definitions/SettingsSectionDescription"
           }
         },
         "reverseProxyCertificate": {
+          "description": "Certificate for the reverse proxy",
           "$ref": "#/definitions/CertificateDescription"
         },
         "nodeTypes": {
+          "description": "The settings for NodeTypes, it will override",
           "type": "array",
           "items": {
             "$ref": "#/definitions/NodeTypeDescription"
@@ -739,6 +709,7 @@
           "type": "string"
         },
         "clusterCodeVersion": {
+          "description": "The ServiceFabric code version",
           "type": "string"
         },
         "certificate": {
@@ -934,6 +905,22 @@
       "description": "The version of the api",
       "in": "query",
       "required": true
+    },
+    "resourceGroupNameParameter": {
+      "description": "The name of the Resource Group to which the server belongs.",
+      "name": "resourceGroupName",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "x-ms-parameter-location": "method"
+    },
+    "clusterNameParameter": {
+      "description": "The name of the cluster",
+      "name": "clusterName",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "x-ms-parameter-location": "method"
     }
   }
 }
