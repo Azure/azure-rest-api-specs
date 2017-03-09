@@ -271,11 +271,7 @@
             "description": "The name of the database to be retrieved."
           },
           {
-            "name": "$expand",
-            "in": "query",
-            "required": false,
-            "type": "string",
-            "description": "A comma separated list of child objects to expand in the response. Possible properties: serviceTierAdvisors, transparentDataEncryption."
+            "$ref": "#/parameters/DatabaseExpandParameter"
           }
         ],
         "responses": {
@@ -311,6 +307,9 @@
           },
           {
             "$ref": "#/parameters/ServerNameParameter"
+          },
+          {
+            "$ref": "#/parameters/DatabaseExpandParameter"
           },
           {
             "name": "$filter",
@@ -3126,6 +3125,14 @@
         "name": "TransparentDataEncryptionConfiguration"
       },
       "description": "The name of the transparent data encryption configuration group.",
+      "x-ms-parameter-location": "method"
+    },
+    "DatabaseExpandParameter": {
+      "name": "$expand",
+      "in": "query",
+      "required": false,
+      "type": "string",
+      "description": "A comma separated list of child objects to expand in the response. Possible properties: serviceTierAdvisors, transparentDataEncryption.",
       "x-ms-parameter-location": "method"
     }
   }
