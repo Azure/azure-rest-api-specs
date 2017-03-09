@@ -2,7 +2,7 @@
   "swagger": "2.0",
   "info": {
     "title": "SqlManagementClient",
-    "description": "The Azure SQL Database management API provides a RESTful set of web APIs that interact with Azure SQL Database services to manage your databases. The API enables users to create, retrieve, update, and delete databases, servers, and other entities.",
+    "description": "The database management API provides a RESTful set of web APIs that interact with database services to manage your databases. The API enables users to create, retrieve, update, and delete databases, servers, and other entities.",
     "version": "2015-05-01-preview"
   },
   "host": "management.azure.com",
@@ -21,7 +21,7 @@
         "tags": [
           "DatabaseBlobAuditingPolicies"
         ],
-        "description": "Get a blob auditing policy associated with an Azure SQL database.",
+        "description": "Get a blob auditing policy associated with a database.",
         "operationId": "DatabaseBlobAuditingPolicies_Get",
         "x-ms-examples": {
           "Get database blob auditing policy": { "$ref": "../examples/DatabaseBlobAuditingGet.json" }
@@ -39,7 +39,7 @@
           {
             "name": "databaseName",
             "in": "path",
-            "description": "The name of the Azure SQL database for which database blob audit policy is defined.",
+            "description": "The name of the database for which database blob audit policy is defined.",
             "required": true,
             "type": "string"
           },
@@ -70,7 +70,7 @@
         "tags": [
           "DatabaseBlobAuditingPolicies"
         ],
-        "description": "Creates or updates a blob auditing policy for an Azure SQL database.",
+        "description": "Creates or updates a blob auditing policy for a database.",
         "operationId": "DatabaseBlobAuditingPolicies_CreateOrUpdate",
         "x-ms-examples": {
           "Create database blob auditing policy min": { "$ref": "../examples/DatabaseBlobAuditingCreateMin.json" },
@@ -89,7 +89,7 @@
           {
             "name": "databaseName",
             "in": "path",
-            "description": "The name of the Azure SQL database for which database blob audit policy will be defined.",
+            "description": "The name of the database for which database blob audit policy will be defined.",
             "required": true,
             "type": "string"
           },
@@ -232,7 +232,7 @@
         "tags": [
           "ServerBlobAuditingPolicies"
         ],
-        "description": "Get a blob auditing policy associated with an Azure SQL server.",
+        "description": "Get a blob auditing policy associated with a server.",
         "operationId": "ServerBlobAuditingPolicies_Get",
         "x-ms-examples": {
           "Get server blob auditing policy": { "$ref": "../examples/ServerBlobAuditingGet.json" }
@@ -274,7 +274,7 @@
         "tags": [
           "ServerBlobAuditingPolicies"
         ],
-        "description": "Creates or updates a blob auditing policy for an Azure SQL server.",
+        "description": "Creates or updates a blob auditing policy for a server.",
         "operationId": "ServerBlobAuditingPolicies_CreateOrUpdate",
         "x-ms-examples": {
           "Create server blob auditing policy min": { "$ref": "../examples/ServerBlobAuditingCreateMin.json" },
@@ -330,7 +330,7 @@
   },
   "definitions": {
     "DatabaseBlobAuditingPolicyResource": {
-      "description": "Contains information about an Azure SQL Database Blob Auditing policy.",
+      "description": "Contains information about a database Blob Auditing policy.",
       "type": "object",
       "properties": {
         "id": {
@@ -405,7 +405,7 @@
       }
     },
     "DatabaseBlobAuditingPolicyResourceProperties": {
-      "description": "Properties for an Azure SQL Database Blob Auditing policy.",
+      "description": "Properties for a database Blob Auditing policy.",
       "type": "object",
       "properties": {
         "state": {
@@ -458,7 +458,7 @@
       "description": "Represents the response to a list blob auditing operation request."
     },
     "BlobAuditingOperationResultResource": {
-      "description": "Contains information about an Azure SQL Server Blob Auditing policy operation result.",
+      "description": "Contains information about a server Blob Auditing policy operation result.",
       "type": "object",
       "properties": {
         "id": {
@@ -506,7 +506,7 @@
       }
     },
     "BlobAuditingOperationResultResourceProperties": {
-      "description": "Properties for an Azure SQL Database Blob Auditing operation result.",
+      "description": "Properties for a database Blob Auditing operation result.",
       "type": "object",
       "properties": {
         "operationId": {
@@ -524,7 +524,7 @@
       }
     },
     "ServerBlobAuditingPolicyResource": {
-      "description": "Contains information about an Azure SQL Server Blob Auditing policy.",
+      "description": "Contains information about a server Blob Auditing policy.",
       "type": "object",
       "properties": {
         "id": {
@@ -572,7 +572,7 @@
       }
     },
     "ServerBlobAuditingPolicyResourceProperties": {
-      "description": "Properties for an Azure SQL Server Blob Auditing policy.",
+      "description": "Properties for a server Blob Auditing policy.",
       "type": "object",
       "properties": {
         "state": {

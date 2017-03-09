@@ -2,7 +2,7 @@
   "swagger": "2.0",
   "info": {
     "title": "Database Threat Detection Policy APIs",
-    "description": "Provides create, read and update functionality for Azure SQL database Threat Detection policies.",
+    "description": "Provides create, read and update functionality for database Threat Detection policies.",
     "version": "2014-04-01"
   },
   "host": "management.azure.com",
@@ -21,7 +21,7 @@
         "tags": [
           "DatabaseThreatDetectionPolicies"
         ],
-        "description": "Get a Threat Detection policy associated with an Azure SQL database.",
+        "description": "Get a Threat Detection policy associated with a database.",
         "operationId": "DatabaseThreatDetectionPolicies_Get",
         "x-ms-examples": {
           "Get database security alert policy": { "$ref": "../examples/DatabaseSecurityAlertGet.json" }
@@ -39,7 +39,7 @@
           {
             "name": "databaseName",
             "in": "path",
-            "description": "The name of the Azure SQL database for which database Threat Detection policy is defined.",
+            "description": "The name of the database for which database Threat Detection policy is defined.",
             "required": true,
             "type": "string"
           },
@@ -70,7 +70,7 @@
         "tags": [
           "DatabaseThreatDetectionPolicies"
         ],
-        "description": "Creates or updates a Threat Detection policy for an Azure SQL database.",
+        "description": "Creates or updates a Threat Detection policy for a database.",
         "operationId": "DatabaseThreatDetectionPolicies_CreateOrUpdate",
         "x-ms-examples": {
           "Create database security alert policy min": { "$ref": "../examples/DatabaseSecurityAlertCreateMin.json" },
@@ -89,7 +89,7 @@
           {
             "name": "databaseName",
             "in": "path",
-            "description": "The name of the Azure SQL database for which database Threat Detection policy is defined.",
+            "description": "The name of the database for which database Threat Detection policy is defined.",
             "required": true,
             "type": "string"
           },
@@ -156,7 +156,7 @@
       }
     },
     "DatabaseSecurityAlertPolicyResource": {
-      "description": "Contains information about an Azure SQL Database Threat Detection policy.",
+      "description": "Contains information about a database Threat Detection policy.",
       "type": "object",
       "properties": {
         "id": {
@@ -204,7 +204,7 @@
       }
     },
     "DatabaseSecurityAlertPolicyProperties": {
-      "description": "Properties for an Azure SQL Database Threat Detection policy.",
+      "description": "Properties for a database Threat Detection policy.",
       "type": "object",
       "properties": {
         "state": {
