@@ -31,9 +31,6 @@
             "in": "path",
             "required": true,
             "type": "string",
-			"minLength": 6,
-			"maxLength": 50,
-			"pattern": "^[A-Za-z][-A-Za-z0-9]{4,48}[A-Za-z0-9]$",
             "description": "Automation account name."
           },
           {
@@ -85,9 +82,6 @@
             "in": "path",
             "required": true,
             "type": "string",
-			"minLength": 6,
-			"maxLength": 50,
-			"pattern": "^[A-Za-z][-A-Za-z0-9]{4,48}[A-Za-z0-9]$",
             "description": "Parameters supplied to the create or update automation account."
           },
           {
@@ -145,9 +139,6 @@
             "in": "path",
             "required": true,
             "type": "string",
-			"minLength": 6,
-			"maxLength": 50,
-			"pattern": "^[A-Za-z][-A-Za-z0-9]{4,48}[A-Za-z0-9]$",
             "description": "Automation account name."
           },
           {
@@ -190,9 +181,6 @@
             "in": "path",
             "required": true,
             "type": "string",
-			"minLength": 6,
-			"maxLength": 50,
-			"pattern": "^[A-Za-z][-A-Za-z0-9]{4,48}[A-Za-z0-9]$",
             "description": "The automation account name."
           },
           {
@@ -333,7 +321,7 @@
       "properties": {
         "name": {
           "type": "string",
-          "description": "The SKU (pricing tier) of the account.",
+          "description": "Gets or sets the SKU (pricing tier) of the account.",
           "enum": [
             "Free",
             "Basic"
@@ -345,12 +333,12 @@
         },
         "family": {
           "type": "string",
-          "description": "sku family."
+          "description": "Gets or sets the sku family."
         },
         "capacity": {
           "type": "integer",
           "format": "int32",
-          "description": "sku capcity."
+          "description": "Gets or sets the sku capacity."
         }
       },
       "description": "The account sku."
@@ -359,7 +347,7 @@
       "properties": {
         "sku": {
           "$ref": "#/definitions/Sku",
-          "description": "account sku."
+          "description": "Gets or sets account sku."
         }
       },
       "description": "The parameters supplied to the update account properties."
@@ -369,22 +357,22 @@
         "properties": {
           "$ref": "#/definitions/AutomationAccountUpdateProperties",
           "x-ms-client-flatten": true,
-          "description": "account update properties."
+          "description": "Gets or sets account update properties."
         },
         "name": {
           "type": "string",
-          "description": "name of the resource."
+          "description": "Gets or sets the name of the resource."
         },
         "location": {
           "type": "string",
-          "description": "location of the resource."
+          "description": "Gets or sets the location of the resource."
         },
         "tags": {
           "type": "object",
           "additionalProperties": {
             "type": "string"
           },
-          "description": "tags attached to the resource."
+          "description": "Gets or sets the tags attached to the resource."
         }
       },
       "required": [
@@ -396,15 +384,15 @@
       "properties": {
         "sku": {
           "$ref": "#/definitions/Sku",
-          "description": "sku of account."
+          "description": "Gets or sets the sku of account."
         },
         "lastModifiedBy": {
           "type": "string",
-          "description": "last modified by"
+          "description": "Gets or sets the last modified by."
         },
         "state": {
           "type": "string",
-          "description": "status of account.",
+          "description": "Gets or sets the status of account.",
           "enum": [
             "Ok",
             "Unavailable",
@@ -418,16 +406,16 @@
         "creationTime": {
           "type": "string",
           "format": "date-time",
-          "description": "creation time."
+          "description": "Gets or sets the creation time."
         },
         "lastModifiedTime": {
           "type": "string",
           "format": "date-time",
-          "description": "last modified time."
+          "description": "Gets or sets the last modified time."
         },
         "description": {
           "type": "string",
-          "description": "description."
+          "description": "Gets or sets the description."
         }
       },
       "description": "Definition of the account property."
@@ -437,11 +425,11 @@
         "properties": {
           "$ref": "#/definitions/AutomationAccountProperties",
           "x-ms-client-flatten": true,
-          "description": "automation account properties."
+          "description": "Gets or sets the automation account properties."
         },
         "etag": {
           "type": "string",
-          "description": "etag of the resource."
+          "description": "Gets or sets the etag of the resource."
         }
       },
       "allOf": [
@@ -455,7 +443,7 @@
       "properties": {
         "sku": {
           "$ref": "#/definitions/Sku",
-          "description": "account sku."
+          "description": "Gets or sets account sku."
         }
       },
       "description": "The parameters supplied to the create or update account properties."
@@ -465,22 +453,22 @@
         "properties": {
           "$ref": "#/definitions/AutomationAccountCreateOrUpdateProperties",
           "x-ms-client-flatten": true,
-          "description": "account create or update properties."
+          "description": "Gets or sets account create or update properties."
         },
         "name": {
           "type": "string",
-          "description": "name of the resource."
+          "description": "Gets or sets the name of the resource."
         },
         "location": {
           "type": "string",
-          "description": "location of the resource."
+          "description": "Gets or sets the location of the resource."
         },
         "tags": {
           "type": "object",
           "additionalProperties": {
             "type": "string"
           },
-          "description": "tags attached to the resource."
+          "description": "Gets or sets the tags attached to the resource."
         }
       },
       "description": "The parameters supplied to the create or update automation account operation."
@@ -492,11 +480,11 @@
           "items": {
             "$ref": "#/definitions/AutomationAccount"
           },
-          "description": "list of accounts."
+          "description": "Gets or sets list of accounts."
         },
         "nextLink": {
           "type": "string",
-          "description": "next link."
+          "description": "Gets or sets the next link."
         }
       },
       "description": "The response model for the list account operation."
