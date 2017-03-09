@@ -21,7 +21,6 @@
           "UsageMetrics"
         ],
         "operationId": "UsageMetrics_List",
-        "deprecated": true,
         "description": "The List operation lists the usage metrics for the resource. **WARNING**: Operation to be deprecated.",
         "parameters": [
           {
@@ -43,6 +42,12 @@
           }
         ],
         "responses": {
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          },
           "200": {
             "description": "Successful request to get the list of usage metric values",
             "schema": {
@@ -121,6 +126,20 @@
       },
       "required": [ "value" ],
       "description": "Represents collection of usage metrics."
+    },
+    "ErrorResponse": {
+      "description": "Describes the format of Error response.",
+      "type": "object",
+      "properties": {
+        "code": {
+          "description": "Error code",
+          "type": "string"
+        },
+        "message": {
+          "description": "Error message indicating why the operation failed.",
+          "type": "string"
+        }
+      }
     }
   },
   "parameters": {
