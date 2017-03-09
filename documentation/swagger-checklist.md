@@ -96,7 +96,7 @@ The Azure Developer Experience team will continue to deliver rich tools to valid
   - `ListByResourceGroup()` - list all resources in a resource group within a subscription.
   - `ListByParent()` - where "Parent" is a context specific suffix. It lists all resource under a parent.
 
-- [ ] **M1005**: :white_check_mark: Get operations *MUST* use the METHOD name "Get" or the METHOD name must start with "List"
+- [ ] **M1005**: :white_check_mark: GET operations *MUST* use the METHOD name "Get" or the METHOD name must start with "List"
 
 - [ ] **M1006**: :white_check_mark: PUT operations *MUST* use the METHOD Name "Create"
 

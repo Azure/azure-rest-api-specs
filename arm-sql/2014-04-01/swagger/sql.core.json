@@ -2251,7 +2251,7 @@
         },
         "createMode": {
           "type": "string",
-          "description": "Specifies the type of database to create. If createMode is not set to Default, sourceDatabaseId must be specified. If createMode is set to PointInTimeRestore, then restorePointInTime must be specified. If createMode is set to Restore, then sourceDatabaseDeletionDate must be specified. Copy, NonReadableSecondary, and OnlineSecondary are not supported for DataWarehouse edition.",
+          "description": "Specifies the mode of database creation.\n\nDefault: regular database creation.\n\nCopy: creates a database as a copy of an existing database. sourceDatabaseId must be specified as the resource ID of the source database.\n\nOnlineSecondary/NonReadableSecondary: creates a database as a (readable or nonreadable) secondary replica of an existing database. sourceDatabaseId must be specified as the resource ID of the existing primary database.\n\nPointInTimeRestore: Creates a database by restoring a point in time backup of an existing database. sourceDatabaseId must be specified as the resource ID of the existing database, and restorePointInTime must be specified.\n\nRecovery: Creates a database by restoring a geo-replicated backup. sourceDatabaseId must be specified as the recoverable database resource ID to restore.\n\nRestore: Creates a database by restoring a backup of a deleted database. sourceDatabaseId must be specified. If sourceDatabaseId is the database's original resource ID, then sourceDatabaseDeletionDate must be specified. Otherwise sourceDatabaseId must be the restorable dropped database resource ID and sourceDatabaseDeletionDate is ignored. restorePointInTime may also be specified to restore from an earlier point in time.\n\nRestoreLongTermRetentionBackup: Creates a database by restoring from a long term retention vault. recoveryServicesRecoveryPointResourceId must be specified as the recovery point resource ID.\n\nCopy, NonReadableSecondary, OnlineSecondary and RestoreLongTermRetentionBackup are not supported for DataWarehouse edition.",
           "enum": [
             "Copy",
             "Default",
@@ -2259,7 +2259,8 @@
             "OnlineSecondary",
             "PointInTimeRestore",
             "Recovery",
-            "Restore"
+            "Restore",
+            "RestoreLongTermRetentionBackup"
           ],
           "x-ms-enum": {
             "name": "CreateMode",
@@ -2269,13 +2270,25 @@
         },
         "sourceDatabaseId": {
           "type": "string",
-          "description": "Conditional. If createMode is not set to Default, then this value must be specified. Specifies the resource ID of the source database. If createMode is NonReadableSecondary or OnlineSecondary, the name of the source database must be the same as this new database.",
+          "description": "Conditional. If createMode is Copy, NonReadableSecondary, OnlineSecondary, PointInTimeRestore, Recovery, or Restore, then this value is required. Specifies the resource ID of the source database. If createMode is NonReadableSecondary or OnlineSecondary, the name of the source database must be the same as the new database being created.",
+          "x-ms-mutability": [ "create" ]
+        },
+        "sourceDatabaseDeletionDate": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Conditional. If createMode is Restore and sourceDatabaseId is the deleted database's original resource id when it existed (as opposed to its current restorable dropped database id), then this value is required. Specifies the time that the database was deleted.",
           "x-ms-mutability": [ "create" ]
         },
         "restorePointInTime": {
           "type": "string",
           "format": "date-time",
-          "description": "Conditional. If createMode is set to PointInTimeRestore, then this value must be specified. Specifies the point in time (ISO8601 format) of the source database that will be restored to create the new database. Must be greater than or equal to the source database's earliestRestoreDate value.",
+          "description": "Conditional. If createMode is PointInTimeRestore, this value is required. If createMode is Restore, this value is optional. Specifies the point in time (ISO8601 format) of the source database that will be restored to create the new database. Must be greater than or equal to the source database's earliestRestoreDate value.",
+          "x-ms-mutability": [ "create" ]
+        },
+        "recoveryServicesRecoveryPointResourceId": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Conditional. If createMode is RestoreLongTermRetentionBackup, then this value is required. Specifies the resource ID of the recovery point to restore from.",
           "x-ms-mutability": [ "create" ]
         },
         "edition": {
