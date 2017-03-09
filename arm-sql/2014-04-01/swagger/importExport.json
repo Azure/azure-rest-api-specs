@@ -64,12 +64,12 @@
                 "x-ms-long-running-operation": true
             }
         },
-        "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/servers/{serverName}/databases/{databaseName}/extensions/import": {
+        "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/servers/{serverName}/databases/{databaseName}/extensions/{extensionName}": {
             "put": {
                 "tags": [
                     "ImportExport"
                 ],
-                "operationId": "Databases_Import",
+                "operationId": "Databases_CreateImportOperation",
                 "description": "Imports a bacpac into an existing database. The existing database must be empty.",
                 "parameters": [
                     {
@@ -90,6 +90,16 @@
                         "required": true,
                         "type": "string",
                         "description": "The name of the database to import into"
+                    },
+                    {
+                        "name": "extensionName",
+                        "in": "path",
+                        "required": true,
+                        "type": "string",
+                        "enum": [
+                            "import"
+                        ],
+                        "description": "The name of the database extension API."
                     },
                     {
                         "name": "parameters",
