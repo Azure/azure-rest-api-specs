@@ -328,7 +328,7 @@
             "in": "body",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/NamespacePatch"
+              "$ref": "#/definitions/NamespaceUpdateParameter"
             },
             "description": "Parameters for updating a namespace resource."
           },
@@ -626,7 +626,7 @@
         "tags": [
           "HybridConnections"
         ],
-        "operationId": "HybridConnections_ListByNamespaces",
+        "operationId": "HybridConnections_ListByNamespace",
         "x-ms-examples": {
           "RelayHybridConnectionListAll": { "$ref": "../examples/HybridConnection/RelayHybridConnectionListAll.json" }
         },
@@ -1093,7 +1093,7 @@
         "tags": [
           "WCFRelays"
         ],
-        "operationId": "WCFRelays_ListByNamespaces",
+        "operationId": "WCFRelays_ListByNamespace",
         "x-ms-examples": {
           "RelayListAll": { "$ref": "../examples/Relay/RelayListAll.json" }
         },
@@ -2012,7 +2012,7 @@
       },
       "description": "Description of a Check Name availability request properties."
     },
-    "NamespacePatch": {
+    "NamespaceUpdateParameter": {
       "properties": {
         "tags": {
           "type": "object",
@@ -2024,10 +2024,6 @@
         "sku": {
           "$ref": "#/definitions/Sku",
           "description": "The sku of the created namespace"
-        },
-        "properties": {
-          "x-ms-client-flatten": true,
-          "$ref": "#/definitions/NamespaceProperties"
         }
       },
       "description": "Parameters supplied to the Patch Namespace operation."
