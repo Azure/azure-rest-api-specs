@@ -13,8 +13,8 @@
 		"/subscriptions/{subscriptionId}/providers/Microsoft.Advisor/generateRecommendations": {
 			"post": {
 				"tags": ["GenerateRecommendations"],
-				"description": "Initiates the recommendation generation/computation process for a subscription. This is an asynchronous operation. The generated recommendations are stored in a cache in the Advisor service.",
-				"operationId": "Recommentations_Generate",
+				"description": "Initiates the recommendation generation or computation process for a subscription. This operation is asynchronous. The generated recommendations are stored in a cache in the Advisor service.",
+				"operationId": "Recommendations_Generate",
 				"parameters": [{
 					"$ref": "#/parameters/subscriptionIdParameter"
 				},
@@ -23,14 +23,14 @@
 				}],
 				"responses": {
 					"202": {
-						"description": "Accepted",
+						"description": "Accepted.",
 						"headers": {
 							"Location": {
 								"description": "The URL where the status of the asynchronous operation can be checked.",
 								"type": "string"
 							},
 							"Retry-After": {
-								"description": "The delay to use while checking the status of the operation. The value is in seconds.",
+								"description": "The amount of delay to use while the status of the operation is checked. The value is expressed in seconds.",
 								"type": "string"
 							}
 						}
@@ -47,15 +47,15 @@
 		"/subscriptions/{subscriptionId}/providers/Microsoft.Advisor/generateRecommendations/{operationId}": {
 			"get": {
 				"tags": ["GenerateRecommendations"],
-				"description": "Retrieves the status of the recommendation computation/generation process. Invoke this API after calling generation recommendation. The Uri of this API is returned in the Location field of the response header.",
-				"operationId": "Recommentations_GetGenerateRecommendationsStatus",
+				"description": "Retrieves the status of the recommendation computation or generation process. Invoke this API after calling the generation recommendation. The URI of this API is returned in the Location field of the response header.",
+				"operationId": "Recommendations_GetGenerateRecommendationsStatus",
 				"parameters": [{
 					"$ref": "#/parameters/subscriptionIdParameter"
 				},
 				{
 					"name": "operationId",
 					"in": "path",
-					"description": "The operation Id can be found from the Location field in generate recommendation response header.",
+					"description": "The operation ID, which can be found from the Location field in the generate recommendation response header.",
 					"required": true,
 					"type": "string",
 					"format": "uuid"
@@ -68,7 +68,7 @@
 						"description": "Recommendation generation is in progress."
 					},
 					"204": {
-						"description": "Recommendation generation has completed."
+						"description": "Recommendation generation has been completed."
 					}
 				},
 				"deprecated": false,
@@ -82,7 +82,7 @@
 		"/subscriptions/{subscriptionId}/providers/Microsoft.Advisor/recommendations": {
 			"get": {
 				"tags": ["GetRecommendations"],
-				"description": "Obtains cached recommendations for a subscription. The recommendations are generated/computed by invoking generateRecommendations.",
+				"description": "Obtains cached recommendations for a subscription. The recommendations are generated or computed by invoking generateRecommendations.",
 				"operationId": "Recommendations_List",
 				"parameters": [{
 					"$ref": "#/parameters/subscriptionIdParameter"
@@ -93,29 +93,29 @@
 				{
 					"name": "$filter",
 					"in": "query",
-					"description": "The filter to apply on the recommendations.",
+					"description": "The filter to apply to the recommendations.",
 					"required": false,
 					"type": "string"
 				},
 				{
 					"name": "$top",
 					"in": "query",
-					"description": "The number of recommendations per page if using paged version of this API.",
+					"description": "The number of recommendations per page if a paged version of this API is being used.",
 					"required": false,
 					"type": "integer"
 				},
 				{
 					"name": "$skipToken",
 					"in": "query",
-					"description": "The page continuation token if using paged version of this API.",
+					"description": "The page-continuation token to use with a paged version of this API.",
 					"required": false,
 					"type": "string"
 				}],
 				"responses": {
 					"200": {
-						"description": "OK",
+						"description": "OK.",
 						"schema": {
-							"$ref": "#/definitions/CollectionResponse[ResourceRecommendationBase]"
+							"$ref": "#/definitions/ResourceRecommendationBaseListResult"
 						}
 					}
 				},
@@ -133,16 +133,16 @@
 		"/providers/Microsoft.Advisor/operations": {
 			"get": {
 				"tags": ["Operations"],
-				"description": "Lists all of the available Advisor REST API operations",
+				"description": "Lists all the available Advisor REST API operations.",
 				"operationId": "Operations_List",
 				"parameters": [{
 					"$ref": "#/parameters/apiVersionParameter"
 				}],
 				"responses": {
 					"200": {
-						"description": "OK",
+						"description": "OK.",
 						"schema": {
-							"$ref": "#/definitions/CollectionResponse[OperationEntity]"
+							"$ref": "#/definitions/OperationEntityListResult"
 						}
 					}
 				},
@@ -155,26 +155,26 @@
 		"/{resourceUri}/providers/Microsoft.Advisor/recommendations/{recommendationId}/suppressions/{name}": {
 			"get": {
 				"tags": ["Suppressions"],
-				"description": "Obtains detail of a suppression",
+				"description": "Obtains the details of a suppression.",
 				"operationId": "Suppressions_Get",
 				"parameters": [{
 					"name": "resourceUri",
 					"in": "path",
-					"description": "The fully qualified arm identifier of the resource for which the recommendation applies.",
+					"description": "The fully qualified Azure Resource Manager identifier of the resource to which the recommendation applies.",
 					"required": true,
 					"type": "string"
 				},
 				{
 					"name": "recommendationId",
 					"in": "path",
-					"description": "The recommendation Id",
+					"description": "The recommendation ID.",
 					"required": true,
 					"type": "string"
 				},
 				{
 					"name": "name",
 					"in": "path",
-					"description": "The suppression name.",
+					"description": "The name of the suppression.",
 					"required": true,
 					"type": "string"
 				},
@@ -183,9 +183,9 @@
 				}],
 				"responses": {
 					"200": {
-						"description": "OK",
+						"description": "OK.",
 						"schema": {
-							"$ref": "#/definitions/Suppression"
+							"$ref": "#/definitions/SuppressionContract"
 						}
 					}
 				},
@@ -198,33 +198,33 @@
 			},
 			"put": {
 				"tags": ["Suppressions"],
-				"description": "Provides the ability to snoozed/dismissed a recommendation. The snoozed/dismissed attribute of a recommendation is referred to as a suppression. Use this API to create or update the snoozed/dismissed status of a recommendation.",
+				"description": "Enables the snoozed or dismissed attribute of a recommendation. The snoozed or dismissed attribute is referred to as a suppression. Use this API to create or update the snoozed or dismissed status of a recommendation.",
 				"operationId": "Suppressions_Create",
 				"parameters": [{
 					"name": "resourceUri",
 					"in": "path",
-					"description": "The fully qualified arm identifier of the resource for which the recommendation applies.",
+					"description": "The fully qualified Azure Resource Manager identifier of the resource to which the recommendation applies.",
 					"required": true,
 					"type": "string"
 				},
 				{
 					"name": "recommendationId",
 					"in": "path",
-					"description": "The recommendation Id",
+					"description": "The recommendation ID.",
 					"required": true,
 					"type": "string"
 				},
 				{
 					"name": "name",
 					"in": "path",
-					"description": "The suppression name.",
+					"description": "The name of the suppression.",
 					"required": true,
 					"type": "string"
 				},
 				{
 					"name": "suppressionContract",
 					"in": "body",
-					"description": "The snoozed/dismissed attributes, eg, the snooze duration.",
+					"description": "The snoozed or dismissed attribute; for example, the snooze duration.",
 					"required": true,
 					"schema": {
 						"$ref": "#/definitions/SuppressionContract"
@@ -235,7 +235,7 @@
 				}],
 				"responses": {
 					"200": {
-						"description": "OK",
+						"description": "OK.",
 						"schema": {
 							"$ref": "#/definitions/SuppressionContract"
 						}
@@ -250,26 +250,26 @@
 			},
 			"delete": {
 				"tags": ["Suppressions"],
-				"description": "Provides the ability to activate a snoozed/dismissed recommendation. The snoozed/dismissed attribute of a recommendation is referred to as a suppression.",
+				"description": "Enables the activation of a snoozed or dismissed recommendation. The snoozed or dismissed attribute of a recommendation is referred to as a suppression.",
 				"operationId": "Suppressions_Delete",
 				"parameters": [{
 					"name": "resourceUri",
 					"in": "path",
-					"description": "The fully qualified arm identifier of the resource for which the recommendation applies.",
+					"description": "The fully qualified Azure Resource Manager identifier of the resource to which the recommendation applies.",
 					"required": true,
 					"type": "string"
 				},
 				{
 					"name": "recommendationId",
 					"in": "path",
-					"description": "The recommendation Id",
+					"description": "The recommendation ID.",
 					"required": true,
 					"type": "string"
 				},
 				{
 					"name": "name",
 					"in": "path",
-					"description": "The suppression name.",
+					"description": "The name of the suppression.",
 					"required": true,
 					"type": "string"
 				},
@@ -297,14 +297,14 @@
 				"parameters": [{
 					"name": "resourceUri",
 					"in": "path",
-					"description": "The fully qualified arm identifier of the resource for which the recommendation applies.",
+					"description": "The fully qualified Azure Resource Manager identifier of the resource to which the recommendation applies.",
 					"required": true,
 					"type": "string"
 				},
 				{
 					"name": "recommendationId",
 					"in": "path",
-					"description": "The recommendation Id.",
+					"description": "The recommendation ID.",
 					"required": true,
 					"type": "string"
 				},
@@ -330,8 +330,7 @@
 		"/subscriptions/{subscriptionId}/providers/Microsoft.Advisor/suppressions": {
 			"get": {
 				"tags": ["Suppressions"],
-				"summary": "",
-				"description": "Retrieves the list of snoozed/dismissed suppressions for a subscription. The snooze/dismiss attribute of a recommendation is referred to as a suppression.",
+				"description": "Retrieves the list of snoozed or dismissed suppressions for a subscription. The snoozed or dismissed attribute of a recommendation is referred to as a suppression.",
 				"operationId": "Suppressions_List",
 				"parameters": [{
 					"$ref": "#/parameters/subscriptionIdParameter"
@@ -341,11 +340,11 @@
 				}],
 				"responses": {
 					"200": {
-						"description": "OK",
+						"description": "OK.",
 						"schema": {
 							"type": "array",
 							"items": {
-								"$ref": "#/definitions/Suppression"
+								"$ref": "#/definitions/SuppressionContract"
 							}
 						}
 					}
@@ -360,16 +359,16 @@
 		}
 	},
 	"definitions": {
-		"CollectionResponse[ResourceRecommendationBase]": {
-			"description": "response entity collection",
+		"ResourceRecommendationBaseListResult": {
+			"description": "The list of Advisor recommendations.",
 			"type": "object",
 			"properties": {
 				"nextLink": {
-					"description": "The next link used to get next page of entities.",
+					"description": "The link used to get the next page of recommendations.",
 					"type": "string"
 				},
 				"value": {
-					"description": "The list of entities.",
+					"description": "The list of recommendations.",
 					"type": "array",
 					"items": {
 						"$ref": "#/definitions/ResourceRecommendationBase"
@@ -378,24 +377,24 @@
 			}
 		},
 		"ResourceRecommendationBase": {
-			"description": "Advisor Recommendation",
+			"description": "Advisor Recommendation.",
 			"type": "object",
 			"properties": {
 				"id": {
-					"description": "The recommendation Id.",
+					"description": "The fully qualified recommendation ID, for example /subscriptions/subscriptionId/resourceGroups/resourceGroup1/providers/Microsoft.ClassicCompute/virtualMachines/vm1/providers/Microsoft.Advisor/recommendations/recommendationGUID.",
 					"type": "string"
 				},
 				"name": {
-					"description": "The recommendation name.",
+					"description": "The name of recommendation.",
 					"type": "string"
 				},
 				"properties": {
 					"$ref": "#/definitions/RecommendationProperties",
-					"description": "The recommendation properties.",
+					"description": "The properties of the recommendation.",
 					"x-ms-client-flatten": true
 				},
 				"suppressionIds": {
-					"description": "The list of suppression ids.",
+					"description": "The list of snoozed and dismissed rules for the recommendation.",
 					"type": "array",
 					"items": {
 						"format": "uuid",
@@ -403,21 +402,17 @@
 					}
 				},
 				"type": {
-					"description": "The recommendation type.",
+					"description": "The recommendation type: Microsoft.Advisor/recommendations.",
 					"type": "string"
-				},
-				"hardwareDetails": {
-					"$ref": "#/definitions/ResourceHardwareDetails",
-					"description": "The hardware details used to get potential cost."
 				}
 			}
 		},
 		"RecommendationProperties": {
-			"description": "The recommendation properties",
+			"description": "The properties of the recommendation.",
 			"type": "object",
 			"properties": {
 				"category": {
-					"description": "The recommendation category.",
+					"description": "The category of the recommendation.",
 					"enum": ["HighAvailability",
 					"Security",
 					"Performance",
@@ -429,7 +424,7 @@
 					}
 				},
 				"impact": {
-					"description": "The recommendation impact.",
+					"description": "The business impact of the recommendation.",
 					"enum": ["High",
 					"Medium",
 					"Low"],
@@ -440,31 +435,31 @@
 					}
 				},
 				"impactedField": {
-					"description": "The recommendation impacted field.",
+					"description": "The resource type identified by Advisor.",
 					"type": "string"
 				},
 				"impactedValue": {
-					"description": "The recommendation impacted value.",
+					"description": "The resource identified by Advisor.",
 					"type": "string"
 				},
 				"lastUpdated": {
 					"format": "date-time",
-					"description": "The recommendation last updated time.",
+					"description": "The most recent time that Advisor checked the validity of the recommendation.",
 					"type": "string"
 				},
 				"metadata": {
-					"description": "The recommendation meta data.",
+					"description": "The recommendation metadata.",
 					"type": "object",
 					"additionalProperties": {
 						"type": "object"
 					}
 				},
 				"recommendationTypeId": {
-					"description": "The recommendation Type Id.",
+					"description": "The recommendation-type GUID.",
 					"type": "string"
 				},
 				"risk": {
-					"description": "The recommendation risk level.",
+					"description": "The potential risk of not implementing the recommendation.",
 					"enum": ["Error",
 					"Warning",
 					"None"],
@@ -476,48 +471,67 @@
 				},
 				"shortDescription": {
 					"$ref": "#/definitions/ShortDescription",
-					"description": "The recommendation short description."
+					"description": "A summary of the recommendation."
 				}
 			}
 		},
-		"ResourceHardwareDetails": {
-			"description": "The hardware details used to get potential cost.",
-			"type": "object",
+		"Resource": {
+			"description": "An Azure resource.",
+			"required": ["location"],
 			"properties": {
-				"resourceId": {
-					"description": "The resource Id.",
+				"id": {
+					"description": "The resource ID.",
+					"type": "string",
+					"readOnly": true
+				},
+				"name": {
+					"description": "The name of the resource.",
+					"type": "string",
+					"readOnly": true
+				},
+				"type": {
+					"description": "The type of the resource.",
+					"type": "string",
+					"readOnly": true
+				},
+				"location": {
+					"description": "The location of the resource. This cannot be changed after the resource is created.",
 					"type": "string"
 				},
-				"size": {
-					"description": "The size.",
-					"type": "string"
+				"tags": {
+					"description": "The tags of the resource.",
+					"type": "object",
+					"additionalProperties": {
+						"type": "string"
+					}
 				}
-			}
+			},
+			"x-ms-azure-resource": true
 		},
 		"ShortDescription": {
-			"description": "The short description of recommendation.",
+			"description": "A summary of the recommendation.",
 			"type": "object",
 			"properties": {
 				"problem": {
-					"description": "The problem of recommendation.",
+					"description": "The issue or opportunity identified by the recommendation.",
 					"type": "string"
 				},
 				"solution": {
-					"description": "The solution of the recommendation.",
+					"description": "The remediation action suggested by the recommendation.",
 					"type": "string"
 				}
 			}
 		},
-		"CollectionResponse[OperationEntity]": {
-			"description": "response entity collection",
+		"OperationEntityListResult": {
+			"description": "The list of Advisor operations.",
 			"type": "object",
 			"properties": {
 				"nextLink": {
-					"description": "The next link used to get next page of entities.",
+					"description": "The link used to get the next page of operations.",
 					"type": "string"
 				},
 				"value": {
-					"description": "The list of entities.",
+					"description": "The list of operations.",
 					"type": "array",
 					"items": {
 						"$ref": "#/definitions/OperationEntity"
@@ -526,97 +540,54 @@
 			}
 		},
 		"OperationEntity": {
-			"description": "Advisor operation.",
+			"description": "The operation supported by Advisor.",
 			"type": "object",
 			"properties": {
 				"name": {
-					"description": "The operation Name.",
+					"description": "Operation name: {provider}/{resource}/{operation}.",
 					"type": "string"
 				},
 				"display": {
 					"$ref": "#/definitions/OperationDisplayInfo",
-					"description": "The operation display information."
+					"description": "The operation supported by Advisor."
 				}
 			}
 		},
 		"OperationDisplayInfo": {
-			"description": "Advisor operation display information.",
+			"description": "The operation supported by Advisor.",
 			"type": "object",
 			"properties": {
 				"description": {
-					"description": "The operation description.",
+					"description": "The description of the operation.",
 					"type": "string"
 				},
 				"operation": {
-					"description": "The operation.",
+					"description": "The action that users can perform, based on their permission level.",
 					"type": "string"
 				},
 				"provider": {
-					"description": "The provider.",
+					"description": "Service provider: Microsoft Advisor.",
 					"type": "string"
 				},
 				"resource": {
-					"description": "The resource name.",
+					"description": "Resource on which the operation is performed.",
 					"type": "string"
 				}
 			}
 		},
 		"SuppressionContract": {
-			"description": "The suppression contract used for creating/updating suppression",
+			"description": "The details of the snoozed or dismissed rule; for example, the duration, name, and GUID associated with the rule.",
 			"type": "object",
+			"allOf": [{
+				"$ref": "#/definitions/Resource"
+			}],
 			"properties": {
-				"id": {
-					"description": "The recommmendation id.",
-					"type": "string"
-				},
 				"suppressionId": {
-					"description": "The suppression id.",
-					"type": "string"
-				},
-				"name": {
-					"description": "The suppression name.",
-					"type": "string"
-				},
-				"type": {
-					"description": "The suppresion type.",
+					"description": "The GUID of the suppression.",
 					"type": "string"
 				},
 				"ttl": {
-					"description": "The suppression ttl.",
-					"type": "string"
-				}
-			}
-		},
-		"Suppression": {
-			"description": "The suppression.",
-			"type": "object",
-			"properties": {
-				"subscriptionId": {
-					"format": "uuid",
-					"description": "The subcription id.",
-					"type": "string"
-				},
-				"suppressionId": {
-					"description": "The suppression GUID.",
-					"type": "string"
-				},
-				"ttl": {
-					"format": "int32",
-					"description": "The suppression ttl.",
-					"type": "integer"
-				},
-				"expirationTimeStamp": {
-					"format": "date-time",
-					"description": "The suppression expiration timestamp.",
-					"type": "string"
-				},
-				"stableId": {
-					"description": "The suppression stableId.",
-					"type": "string"
-				},
-				"id": {
-					"format": "uuid",
-					"description": "The full path of suppression id.",
+					"description": "The duration for which the suppression is valid.",
 					"type": "string"
 				}
 			}
@@ -626,16 +597,30 @@
 		"subscriptionIdParameter": {
 			"name": "subscriptionId",
 			"in": "path",
-			"description": "Azure Subscription ID.",
+			"description": "The Azure subscription ID.",
 			"required": true,
 			"type": "string"
 		},
 		"apiVersionParameter": {
 			"name": "api-version",
 			"in": "query",
-			"description": "Version of the API to be used with the client request.",
+			"description": "The version of the API to be used with the client request.",
 			"required": true,
 			"type": "string"
 		}
-	}
+	},
+	"securityDefinitions": {
+		"azure_auth": {
+			"type": "oauth2",
+			"description": "Azure Active Directory OAuth2 Flow.",
+			"flow": "implicit",
+			"authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
+			"scopes": {
+				"user_impersonation": "impersonate your user account"
+			}
+		}
+	},
+	"security": [{
+		"azure_auth": ["user_impersonation"]
+	}]
 }
