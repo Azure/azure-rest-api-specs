@@ -2531,6 +2531,12 @@
             "schema": {
               "$ref": "#/definitions/IntegrationAccountSessionListResult"
             }
+          },
+          "default": {
+            "description": "Logic error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
           }
         },
         "x-ms-pageable": {
@@ -2585,8 +2591,8 @@
               "$ref": "#/definitions/IntegrationAccountSession"
             }
           },
-          "404": {
-            "description": "Session not found.",
+          "default": {
+            "description": "Logic error response describing why the operation failed.",
             "schema": {
               "$ref": "#/definitions/ErrorResponse"
             }
@@ -2652,6 +2658,12 @@
             "schema": {
               "$ref": "#/definitions/IntegrationAccountSession"
             }
+          },
+          "default": {
+            "description": "Logic error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
           }
         }
       },
@@ -2699,6 +2711,12 @@
           },
           "204": {
             "description": "No Content"
+          },
+          "default": {
+            "description": "Logic error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
           }
         }
       }
@@ -4497,15 +4515,15 @@
     "AgreementContent": {
       "type": "object",
       "properties": {
-        "AS2": {
+        "aS2": {
           "$ref": "#/definitions/AS2AgreementContent",
           "description": "The AS2 agreement content."
         },
-        "X12": {
+        "x12": {
           "$ref": "#/definitions/X12AgreementContent",
           "description": "The X12 agreement content."
         },
-        "Edifact": {
+        "edifact": {
           "$ref": "#/definitions/EdifactAgreementContent",
           "description": "The EDIFACT agreement content."
         }
@@ -4986,8 +5004,8 @@
         "interchangeControlNumberValidityDays",
         "checkDuplicateGroupControlNumber",
         "checkDuplicateTransactionSetControlNumber",
-        "validateEDITypes",
-        "validateXSDTypes",
+        "validateEdiTypes",
+        "validateXsdTypes",
         "allowLeadingAndTrailingSpacesAndZeroes",
         "trimLeadingAndTrailingSpacesAndZeroes",
         "trailingSeparatorPolicy"
@@ -5014,11 +5032,11 @@
           "type": "boolean",
           "description": "The value indicating whether to check for duplicate transaction set control number."
         },
-        "validateEDITypes": {
+        "validateEdiTypes": {
           "type": "boolean",
           "description": "The value indicating whether to Whether to validate EDI types."
         },
-        "validateXSDTypes": {
+        "validateXsdTypes": {
           "type": "boolean",
           "description": "The value indicating whether to Whether to validate XSD types."
         },
@@ -5435,8 +5453,8 @@
       "type": "object",
       "required": [
         "messageId",
-        "validateEDITypes",
-        "validateXSDTypes",
+        "validateEdiTypes",
+        "validateXsdTypes",
         "allowLeadingAndTrailingSpacesAndZeroes",
         "validateCharacterSet",
         "trimLeadingAndTrailingSpacesAndZeroes",
@@ -5447,11 +5465,11 @@
           "type": "string",
           "description": "The message id on which the validation settings has to be applied."
         },
-        "validateEDITypes": {
+        "validateEdiTypes": {
           "type": "boolean",
           "description": "The value indicating whether to validate EDI types."
         },
-        "validateXSDTypes": {
+        "validateXsdTypes": {
           "type": "boolean",
           "description": "The value indicating whether to validate XSD types."
         },
@@ -5814,8 +5832,8 @@
         "interchangeControlNumberValidityDays",
         "checkDuplicateGroupControlNumber",
         "checkDuplicateTransactionSetControlNumber",
-        "validateEDITypes",
-        "validateXSDTypes",
+        "validateEdiTypes",
+        "validateXsdTypes",
         "allowLeadingAndTrailingSpacesAndZeroes",
         "trimLeadingAndTrailingSpacesAndZeroes",
         "trailingSeparatorPolicy"
@@ -5842,11 +5860,11 @@
           "type": "boolean",
           "description": "The value indicating whether to check for duplicate transaction set control number."
         },
-        "validateEDITypes": {
+        "validateEdiTypes": {
           "type": "boolean",
           "description": "The value indicating whether to Whether to validate EDI types."
         },
-        "validateXSDTypes": {
+        "validateXsdTypes": {
           "type": "boolean",
           "description": "The value indicating whether to Whether to validate XSD types."
         },
@@ -6358,8 +6376,8 @@
       "required": [
         "messageId",
         "enforceCharacterSet",
-        "validateEDITypes",
-        "validateXSDTypes",
+        "validateEdiTypes",
+        "validateXsdTypes",
         "allowLeadingAndTrailingSpacesAndZeroes",
         "trailingSeparatorPolicy",
         "trimLeadingAndTrailingSpacesAndZeroes"
@@ -6373,11 +6391,11 @@
           "type": "boolean",
           "description": "The value indicating whether to validate character Set."
         },
-        "validateEDITypes": {
+        "validateEdiTypes": {
           "type": "boolean",
           "description": "The value indicating whether to validate EDI types."
         },
-        "validateXSDTypes": {
+        "validateXsdTypes": {
           "type": "boolean",
           "description": "The value indicating whether to validate XSD types."
         },

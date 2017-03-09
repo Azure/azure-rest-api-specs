@@ -9,12 +9,20 @@ var _ = require('lodash'),
 
 describe('Azure swagger semantic validation:', function () {
   let swaggersToProcess = utils.getFilesChangedInPR();
+  // Useful when debugging a test for a particular swagger. 
+  // Just update the regex. That will return an array of filtered items.
+  // swaggersToProcess = swaggersToProcess.filter(function(item) {
+  //   return (item.match(/.*arm-logic.*2016-06-01.*/ig) !== null);
+  // });
+
   _(swaggersToProcess).each(function (swagger) {
     it(swagger + ' should be semantically valid.', function (done) {
-      oav.validateSpec(swagger, false, 'error').then(function (validationResult) {
-        done(assert(validationResult.errors && validationResult.errors.length === 0, `swagger "${swagger}" contains semantic validation errors.`));
+      oav.validateSpec(swagger, 'error').then(function (validationResult) {
+        //console.dir(validationResult, {depth: null, colors: true});
+        done(assert(validationResult.validateSpec && validationResult.validateSpec.errors && validationResult.validateSpec.errors.length === 0, 
+        `swagger "${swagger}" contains semantic validation errors.`));
       }).catch(function (err) {
-        console.log(err);
+        console.dir(err, {depth: null, colors: true});
         done(err);
       });
     });
