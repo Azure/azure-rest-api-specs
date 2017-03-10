@@ -22,7 +22,7 @@
           "ServerSecurityAlertOperationResults"
         ],
         "description": "Get the active server Threat Detection operation result.",
-        "operationId": "ServerThreatDetectionOperationResult_Get",
+        "operationId": "ServerThreatDetectionPolicies_GetOperationResult",
         "x-ms-examples": {
           "Get server security alert operation result": { "$ref": "../examples/ServerSecurityAlertOperationResult.json" }
         },
@@ -54,7 +54,7 @@
           "200": {
             "description": "Successfully retrieved the server Threat Detection operation results.",
             "schema": {
-              "$ref": "#/definitions/SecurityAlertOperationResultResource"
+              "$ref": "#/definitions/SecurityAlertOperationResult"
             }
           },
           "default": {
@@ -69,7 +69,7 @@
           "ServerSecurityAlertOperationResults"
         ],
         "description": "Get a list of server Threat Detection operation results.",
-        "operationId": "ServerThreatDetectionOperationResultsList_Get",
+        "operationId": "ServerThreatDetectionPolicies_ListOperationResults",
         "x-ms-examples": {
           "Get server security alert operation results list": { "$ref": "../examples/ServerSecurityAlertOperationResultsList.json" }
         },
@@ -134,7 +134,7 @@
           "200": {
             "description": "Successfully retrieved the server Threat Detection policy.",
             "schema": {
-              "$ref": "#/definitions/ServerSecurityAlertPolicyResource"
+              "$ref": "#/definitions/ServerSecurityAlertPolicy"
             }
           },
           "default": {
@@ -170,7 +170,7 @@
             "in": "body",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/ServerSecurityAlertPolicyResource"
+              "$ref": "#/definitions/ServerSecurityAlertPolicy"
             },
             "description": "The name of the server security alert policy."
           },
@@ -182,7 +182,7 @@
           "200": {
             "description": "OK",
             "schema": {
-              "$ref": "#/definitions/ServerSecurityAlertPolicyResource"
+              "$ref": "#/definitions/ServerSecurityAlertPolicy"
             }
           },
           "202": {
@@ -238,7 +238,7 @@
         "value": {
           "type": "array",
           "items": {
-            "$ref": "#/definitions/SecurityAlertOperationResultResource"
+            "$ref": "#/definitions/SecurityAlertOperationResult"
           }
         },
         "nextLink": {
@@ -247,22 +247,52 @@
       },
       "description": "Represents the response to a list security alert operation request."
     },
-    "SecurityAlertOperationResultResource": {
+    "SqlSubResource": {
+      "description": "Subresource properties",
+      "properties": {
+        "name": {
+          "readOnly": true,
+          "type": "string",
+          "description": "Resource name"
+        },
+        "id": {
+          "readOnly": true,
+          "type": "string",
+          "description": "The resource ID."
+        }
+      }
+    },
+    "SqlTypedSubResource": {
+      "description": "Subresource properties",
+      "properties": {
+        "type": {
+          "readOnly": true,
+          "type": "string",
+          "description": "Resource type"
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "#/definitions/SqlSubResource"
+        }
+      ]
+    },
+    "SecurityAlertOperationResult": {
       "description": "Contains information about a server Threat Detection policy operation result.",
       "type": "object",
       "properties": {
         "properties": {
-          "$ref": "#/definitions/SecurityAlertOperationResultResourceProperties",
+          "$ref": "#/definitions/SecurityAlertOperationResultProperties",
           "x-ms-client-flatten": true
         }
       },
       "allOf": [
         {
-          "$ref": "#/definitions/Resource"
+          "$ref": "#/definitions/SqlTypedSubResource"
         }
       ]
     },
-    "SecurityAlertOperationResultResourceProperties": {
+    "SecurityAlertOperationResultProperties": {
       "description": "Properties for a database Threat Detection operation result.",
       "type": "object",
       "properties": {
@@ -280,7 +310,7 @@
         }
       }
     },
-    "ServerSecurityAlertPolicyResource": {
+    "ServerSecurityAlertPolicy": {
       "description": "Contains information about a server Threat Detection policy.",
       "type": "object",
       "properties": {
@@ -291,7 +321,7 @@
       },
       "allOf": [
         {
-          "$ref": "#/definitions/Resource"
+          "$ref": "#/definitions/SqlTypedSubResource"
         }
       ]
     },
@@ -396,7 +426,7 @@
       "required": true,
       "type": "string",
       "enum": [
-        "Default"
+        "default"
       ],
       "x-ms-parameter-location": "method"
     }

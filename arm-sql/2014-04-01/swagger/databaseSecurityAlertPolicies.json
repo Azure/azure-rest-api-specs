@@ -54,7 +54,7 @@
           "200": {
             "description": "Successfully retrieved the database Threat Detection policy.",
             "schema": {
-              "$ref": "#/definitions/DatabaseSecurityAlertPolicyResource"
+              "$ref": "#/definitions/DatabaseSecurityAlertPolicy"
             }
           },
           "default": {
@@ -98,7 +98,7 @@
             "description": "The database Threat Detection policy.",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/DatabaseSecurityAlertPolicyResource"
+              "$ref": "#/definitions/DatabaseSecurityAlertPolicy"
             }
           },
           {
@@ -155,7 +155,37 @@
       ],
       "x-ms-azure-resource": true
     },
-    "DatabaseSecurityAlertPolicyResource": {
+    "SqlSubResource": {
+      "description": "Subresource properties",
+      "properties": {
+        "name": {
+          "readOnly": true,
+          "type": "string",
+          "description": "Resource name"
+        },
+        "id": {
+          "readOnly": true,
+          "type": "string",
+          "description": "The resource ID."
+        }
+      }
+    },
+    "SqlTypedSubResource": {
+      "description": "Subresource properties",
+      "properties": {
+        "type": {
+          "readOnly": true,
+          "type": "string",
+          "description": "Resource type"
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "#/definitions/SqlSubResource"
+        }
+      ]
+    },
+    "DatabaseSecurityAlertPolicy": {
       "description": "Contains information about a database Threat Detection policy.",
       "type": "object",
       "properties": {
@@ -166,7 +196,7 @@
       },
       "allOf": [
         {
-          "$ref": "#/definitions/Resource"
+          "$ref": "#/definitions/SqlTypedSubResource"
         }
       ]
     },
@@ -281,7 +311,7 @@
       "required": true,
       "type": "string",
       "enum": [
-        "Default"
+        "default"
       ],
       "x-ms-parameter-location": "method"
     }

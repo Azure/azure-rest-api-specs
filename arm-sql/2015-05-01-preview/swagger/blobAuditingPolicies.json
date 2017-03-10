@@ -54,7 +54,7 @@
           "200": {
             "description": "Successfully retrieved the database blob auditing policy.",
             "schema": {
-              "$ref": "#/definitions/DatabaseBlobAuditingPolicyResource"
+              "$ref": "#/definitions/DatabaseBlobAuditingPolicy"
             }
           },
           "default": {
@@ -97,7 +97,7 @@
             "in": "body",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/DatabaseBlobAuditingPolicyResource"
+              "$ref": "#/definitions/DatabaseBlobAuditingPolicy"
             },
             "description": "The name of the database blob auditing policy."
           },
@@ -109,13 +109,13 @@
           "200": {
             "description": "Successfully set the database blob auditing policy.",
             "schema": {
-              "$ref": "#/definitions/DatabaseBlobAuditingPolicyResource"
+              "$ref": "#/definitions/DatabaseBlobAuditingPolicy"
             }
           },
           "201": {
             "description": "Successfully created the database blob auditing policy.",
             "schema": {
-              "$ref": "#/definitions/DatabaseBlobAuditingPolicyResource"
+              "$ref": "#/definitions/DatabaseBlobAuditingPolicy"
             }
           },
           "default": {
@@ -130,7 +130,7 @@
           "ServerBlobAuditingOperationResults"
         ],
         "description": "Get the active server blob auditing operation result.",
-        "operationId": "ServerBlobAuditingOperationResult_Get",
+        "operationId": "ServerBlobAuditingPolicies_GetOperationResult",
         "x-ms-examples": {
           "Get server blob auditing operation result": { "$ref": "../examples/ServerBlobAuditingOperationResult.json" }
         },
@@ -162,7 +162,7 @@
           "200": {
             "description": "Successfully retrieved the server blob auditing operation results.",
             "schema": {
-              "$ref": "#/definitions/BlobAuditingOperationResultResource"
+              "$ref": "#/definitions/BlobAuditingOperationResult"
             }
           },
           "default": {
@@ -177,7 +177,7 @@
           "ServerBlobAuditingOperationResults"
         ],
         "description": "Get a list of server blob auditing operation results.",
-        "operationId": "ServerBlobAuditingOperationResultsList_Get",
+        "operationId": "ServerBlobAuditingPolicies_ListOperationResults",
         "x-ms-examples": {
           "Get server blob auditing operation results": { "$ref": "../examples/ServerBlobAuditingOperationResultsList.json" }
         },
@@ -242,7 +242,7 @@
           "200": {
             "description": "Successfully retrieved the server blob auditing policy.",
             "schema": {
-              "$ref": "#/definitions/ServerBlobAuditingPolicyResource"
+              "$ref": "#/definitions/ServerBlobAuditingPolicy"
             }
           },
           "default": {
@@ -278,7 +278,7 @@
             "in": "body",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/ServerBlobAuditingPolicyResource"
+              "$ref": "#/definitions/ServerBlobAuditingPolicy"
             },
             "description": "The name of the server blob auditing policy."
           },
@@ -290,7 +290,7 @@
           "200": {
             "description": "OK",
             "schema": {
-              "$ref": "#/definitions/ServerBlobAuditingPolicyResource"
+              "$ref": "#/definitions/ServerBlobAuditingPolicy"
             }
           },
           "202": {
@@ -305,88 +305,63 @@
     }
   },
   "definitions": {
-    "DatabaseBlobAuditingPolicyResource": {
+    "SqlSubResource": {
+      "description": "Subresource properties",
+      "properties": {
+        "name": {
+          "readOnly": true,
+          "type": "string",
+          "description": "Resource name"
+        },
+        "id": {
+          "readOnly": true,
+          "type": "string",
+          "description": "The resource ID."
+        }
+      }
+    },
+    "SqlTypedSubResource": {
+      "description": "Subresource properties",
+      "properties": {
+        "type": {
+          "readOnly": true,
+          "type": "string",
+          "description": "Resource type"
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "#/definitions/SqlSubResource"
+        }
+      ]
+    },
+    "DatabaseBlobAuditingPolicy": {
       "description": "Contains information about a database Blob Auditing policy.",
       "type": "object",
       "properties": {
-        "id": {
-          "description": "The resource ID",
-          "type": "string"
-        },
-        "name": {
-          "description": "The name of the resource",
-          "type": "string"
-        },
-        "type": {
-          "description": "The resource type",
-          "type": "string"
-        },
-        "location": {
-          "description": "The location the resource resides in",
-          "type": "string"
-        },
-        "sku": {
-          "$ref": "#/definitions/ArmResourceSku"
-        },
-        "kind": {
-          "description":  "The attributes of the entity that drives portal UI",
-          "enum": [
-              "None",
-              "V2",
-              "V12",
-              "User",
-              "System",
-              "Datawarehouse"
-          ],
-          "type": "string"
-        },
-        "tags": {
-          "description": "the tags assigned to the resource",
-          "type": "object",
-          "additionalProperties": {
-            "type": "string"
-          }
-        },
         "properties": {
-          "$ref": "#/definitions/DatabaseBlobAuditingPolicyResourceProperties",
+          "$ref": "#/definitions/DatabaseBlobAuditingPolicyProperties",
           "x-ms-client-flatten": true
         }
-      }
+      },
+      "allOf": [
+        { "$ref": "#/definitions/SqlTypedSubResource" }
+      ]
     },
-    "ArmResourceSku": {
-      "description": "Represents an ARM Resource SKU.",
-      "type": "object",
-      "properties": {
-        "name": {
-          "description": "The name of the SKU, typically, a letter + Number code, e.g. P3.",
-          "type": "string"
-        },
-        "tier": {
-          "description": "The tier of the particular SKU, e.g. Basic, Premium.",
-          "type": "string"
-        },
-        "size": {
-          "description": "the size code, to be interpreted by resource as appropriate",
-          "type": "string"
-        },
-        "family": {
-          "description": "the family of hardware",
-          "type": "string"
-        },
-        "capacity": {
-          "description": "the scale up/out capacity",
-          "format": "int32",
-          "type": "integer"
-        }
-      }
-    },
-    "DatabaseBlobAuditingPolicyResourceProperties": {
+    "DatabaseBlobAuditingPolicyProperties": {
       "description": "Properties for a database Blob Auditing policy.",
       "type": "object",
       "properties": {
         "state": {
-          "description": "Specifies the state of the policy. Options are Enabled or Disabled",
-          "type": "string"
+          "description": "Specifies the state of the policy.",
+          "type": "string",
+          "enum": [
+            "Enabled",
+            "Disabled"
+          ],
+          "x-ms-enum":{
+            "name": "BlobAuditingPolicyState"
+          }
         },
         "storageEndpoint": {
           "description": "Specifies the blob storage endpoint (e.g. https://MyAccount.blob.core.windows.net)",
@@ -424,7 +399,7 @@
         "value": {
           "type": "array",
           "items": {
-            "$ref": "#/definitions/BlobAuditingOperationResultResource"
+            "$ref": "#/definitions/BlobAuditingOperationResult"
           }
         },
         "nextLink": {
@@ -433,55 +408,20 @@
       },
       "description": "Represents the response to a list blob auditing operation request."
     },
-    "BlobAuditingOperationResultResource": {
+    "BlobAuditingOperationResult": {
       "description": "Contains information about a server Blob Auditing policy operation result.",
       "type": "object",
       "properties": {
-        "id": {
-          "description": "The resource ID",
-          "type": "string"
-        },
-        "name": {
-          "description": "The name of the resource",
-          "type": "string"
-        },
-        "type": {
-          "description": "The resource type",
-          "type": "string"
-        },
-        "location": {
-          "description": "The location the resource resides in",
-          "type": "string"
-        },
-        "sku": {
-          "$ref": "#/definitions/ArmResourceSku"
-        },
-        "kind": {
-          "description": "The attributes of the entity that drives portal UI",
-          "enum": [
-            "None",
-            "V2",
-            "V12",
-            "User",
-            "System",
-            "Datawarehouse"
-          ],
-          "type": "string"
-        },
-        "tags": {
-          "description": "the tags assigned to the resource",
-          "type": "object",
-          "additionalProperties": {
-            "type": "string"
-          }
-        },
         "properties": {
-          "$ref": "#/definitions/BlobAuditingOperationResultResourceProperties",
+          "$ref": "#/definitions/BlobAuditingOperationResultProperties",
           "x-ms-client-flatten": true
         }
-      }
+      },
+      "allOf": [
+        { "$ref": "#/definitions/SqlTypedSubResource" }
+      ]
     },
-    "BlobAuditingOperationResultResourceProperties": {
+    "BlobAuditingOperationResultProperties": {
       "description": "Properties for a database Blob Auditing operation result.",
       "type": "object",
       "properties": {
@@ -499,61 +439,33 @@
         }
       }
     },
-    "ServerBlobAuditingPolicyResource": {
+    "ServerBlobAuditingPolicy": {
       "description": "Contains information about a server Blob Auditing policy.",
       "type": "object",
       "properties": {
-        "id": {
-          "description": "The resource ID",
-          "type": "string"
-        },
-        "name": {
-          "description": "The name of the resource",
-          "type": "string"
-        },
-        "type": {
-          "description": "The resource type",
-          "type": "string"
-        },
-        "location": {
-          "description": "The location the resource resides in",
-          "type": "string"
-        },
-        "sku": {
-          "$ref": "#/definitions/ArmResourceSku"
-        },
-        "kind": {
-          "description": "The attributes of the entity that drives portal UI",
-          "enum": [
-            "None",
-            "V2",
-            "V12",
-            "User",
-            "System",
-            "Datawarehouse"
-          ],
-          "type": "string"
-        },
-        "tags": {
-          "description": "the tags assigned to the resource",
-          "type": "object",
-          "additionalProperties": {
-            "type": "string"
-          }
-        },
         "properties": {
-          "$ref": "#/definitions/ServerBlobAuditingPolicyResourceProperties",
+          "$ref": "#/definitions/ServerBlobAuditingPolicyProperties",
           "x-ms-client-flatten": true
         }
-      }
+      },
+      "allOf": [
+        { "$ref": "#/definitions/SqlTypedSubResource" }
+      ]
     },
-    "ServerBlobAuditingPolicyResourceProperties": {
+    "ServerBlobAuditingPolicyProperties": {
       "description": "Properties for a server Blob Auditing policy.",
       "type": "object",
       "properties": {
         "state": {
-          "description": "Specifies the state of the policy. Options are Enabled or Disabled",
-          "type": "string"
+          "description": "Specifies the state of the policy.",
+          "type": "string",
+          "enum": [
+            "Enabled",
+            "Disabled"
+          ],
+          "x-ms-enum":{
+            "name": "BlobAuditingPolicyState"
+          }
         },
         "storageEndpoint": {
           "description": "Specifies the blob storage endpoint (e.g. https://MyAccount.blob.core.windows.net)",
@@ -625,7 +537,7 @@
       "type": "string",
       "description": "The name of the blob auditing policy.",
       "enum":[
-        "Default"
+        "default"
       ],
       "x-ms-parameter-location": "method"
     }
