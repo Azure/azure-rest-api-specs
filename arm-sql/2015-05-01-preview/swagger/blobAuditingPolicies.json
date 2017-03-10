@@ -44,11 +44,7 @@
             "type": "string"
           },
           {
-            "name": "blobAuditingPolicyName",
-            "in": "path",
-            "description": "The name of the blob auditing policy. Default is the currently value to use.",
-            "required": true,
-            "type": "string"
+            "$ref": "#/parameters/BlobAuditingPolicyNameParameter"
           },
           {
             "$ref": "#/parameters/ApiVersionParameter"
@@ -94,11 +90,7 @@
             "type": "string"
           },
           {
-            "name": "blobAuditingPolicyName",
-            "in": "path",
-            "description": "The name of the blob auditing policy. Default is the currently value to use.",
-            "required": true,
-            "type": "string"
+            "$ref": "#/parameters/BlobAuditingPolicyNameParameter"
           },
           {
             "name": "databaseBlobAuditingPolicy",
@@ -153,11 +145,7 @@
             "$ref": "#/parameters/ServerNameParameter"
           },
           {
-            "name": "blobAuditingPolicyName",
-            "in": "path",
-            "description": "The name of the blob auditing policy. Default is the currently value to use.",
-            "required": true,
-            "type": "string"
+            "$ref": "#/parameters/BlobAuditingPolicyNameParameter"
           },
           {
             "name": "operationId",
@@ -204,11 +192,7 @@
             "$ref": "#/parameters/ServerNameParameter"
           },
           {
-            "name": "blobAuditingPolicyName",
-            "in": "path",
-            "description": "The name of the blob auditing policy. Default is the currently value to use.",
-            "required": true,
-            "type": "string"
+            "$ref": "#/parameters/BlobAuditingPolicyNameParameter"
           },
           {
             "$ref": "#/parameters/ApiVersionParameter"
@@ -248,11 +232,7 @@
             "$ref": "#/parameters/ServerNameParameter"
           },
           {
-            "name": "blobAuditingPolicyName",
-            "in": "path",
-            "description": "The name of the blob auditing policy. Default is the currently value to use.",
-            "required": true,
-            "type": "string"
+            "$ref": "#/parameters/BlobAuditingPolicyNameParameter"
           },
           {
             "$ref": "#/parameters/ApiVersionParameter"
@@ -291,11 +271,7 @@
             "$ref": "#/parameters/ServerNameParameter"
           },
           {
-            "name": "blobAuditingPolicyName",
-            "in": "path",
-            "description": "The name of the blob auditing policy. Default is the currently value to use.",
-            "required": true,
-            "type": "string"
+            "$ref": "#/parameters/BlobAuditingPolicyNameParameter"
           },
           {
             "name": "serverBlobAuditingPolicy",
@@ -621,7 +597,7 @@
     "ApiVersionParameter": {
       "name": "api-version",
       "in": "query",
-      "description": "Client Api Version.",
+      "description": "The API version to use for the request.",
       "required": true,
       "x-ms-parameter-location": "client",
       "type": "string"
@@ -639,7 +615,18 @@
       "in": "path",
       "required": true,
       "type": "string",
-      "description": "The name of the Azure SQL server.",
+      "description": "The name of the server.",
+      "x-ms-parameter-location": "method"
+    },
+    "BlobAuditingPolicyNameParameter": {
+      "name": "blobAuditingPolicyName",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "description": "The name of the blob auditing policy.",
+      "enum":[
+        "Default"
+      ],
       "x-ms-parameter-location": "method"
     }
   }

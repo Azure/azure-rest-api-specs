@@ -37,11 +37,7 @@
             "$ref": "#/parameters/ServerNameParameter"
           },
           {
-            "name": "securityAlertPolicyName",
-            "in": "path",
-            "description": "The name of the Threat Detection security alert policy. Default is the currently value to use.",
-            "required": true,
-            "type": "string"
+            "$ref": "#/parameters/SecurityAlertPolicyNameParameter"
           },
           {
             "name": "operationId",
@@ -88,11 +84,7 @@
             "$ref": "#/parameters/ServerNameParameter"
           },
           {
-            "name": "securityAlertPolicyName",
-            "in": "path",
-            "description": "The name of the Threat Detection security alert policy. Default is the currently value to use.",
-            "required": true,
-            "type": "string"
+            "$ref": "#/parameters/SecurityAlertPolicyNameParameter"
           },
           {
             "$ref": "#/parameters/ApiVersionParameter"
@@ -132,11 +124,7 @@
             "$ref": "#/parameters/ServerNameParameter"
           },
           {
-            "name": "securityAlertPolicyName",
-            "in": "path",
-            "description": "The name of the Threat Detection policy. Default is the currently value to use.",
-            "required": true,
-            "type": "string"
+            "$ref": "#/parameters/SecurityAlertPolicyNameParameter"
           },
           {
             "$ref": "#/parameters/ApiVersionParameter"
@@ -175,11 +163,7 @@
             "$ref": "#/parameters/ServerNameParameter"
           },
           {
-            "name": "securityAlertPolicyName",
-            "in": "path",
-            "description": "The name of the Threat Detection policy. Default is the currently value to use.",
-            "required": true,
-            "type": "string"
+            "$ref": "#/parameters/SecurityAlertPolicyNameParameter"
           },
           {
             "name": "serverSecurityAlertPolicy",
@@ -416,7 +400,7 @@
     "ApiVersionParameter": {
       "name": "api-version",
       "in": "query",
-      "description": "Client Api Version.",
+      "description": "The API version to use for the request.",
       "required": true,
       "x-ms-parameter-location": "client",
       "type": "string"
@@ -434,7 +418,18 @@
       "in": "path",
       "required": true,
       "type": "string",
-      "description": "The name of the Azure SQL server.",
+      "description": "The name of the server.",
+      "x-ms-parameter-location": "method"
+    },
+    "SecurityAlertPolicyNameParameter":{
+      "name": "securityAlertPolicyName",
+      "in": "path",
+      "description": "The name of the Threat Detection policy.",
+      "required": true,
+      "type": "string",
+      "enum": [
+        "Default"
+      ],
       "x-ms-parameter-location": "method"
     }
   }
