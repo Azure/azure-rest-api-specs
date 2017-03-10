@@ -69,7 +69,7 @@
           "WebServices"
         ],
         "operationId": "WebServices_Get",
-        "description": "Gets the Web Service Definiton as specified by a subscription, resource group, and name. Note that the storage credentials and web service keys are not returned by this call. To get the web service access keys, call List Keys.",
+        "description": "Gets the Web Service Definition as specified by a subscription, resource group, and name. Note that the storage credentials and web service keys are not returned by this call. To get the web service access keys, call List Keys.",
         "parameters": [
           {
             "$ref": "#/parameters/ResourceGroupNameParameter"
@@ -81,7 +81,7 @@
             "in": "query",
             "name": "region",
             "type": "string",
-            "description": "The region of the web service",
+            "description": "The region for which encrypted credential parameters are valid.",
             "required": false
           },        
           {
@@ -176,7 +176,7 @@
           "WebServices"
         ],
         "operationId": "WebServices_CreateRegionalWebServiceProperties",
-        "description": "Generate regional web service properties. This is especially important to encrypted credential information in parameters.",
+        "description": "Creates an encrypted credentials parameter blob for the specified region. To get the web service from a region other than the region in which it has been created, you must first call Create Regional Web Services Properties to create a copy of the encrypted credential parameter blob in that region. You only need to do this before the first time that you get the web service in the new region.",
         "parameters": [
           {
             "$ref": "#/parameters/ResourceGroupNameParameter"
@@ -188,7 +188,7 @@
             "in": "query",
             "name": "region",
             "type": "string",
-            "description": "The region of the web service",
+            "description": "The region for which encrypted credential parameters are created.",
             "required": true
           },        
           {
@@ -200,7 +200,7 @@
         ],
         "responses": {
           "202": {
-            "description": "Accepted.  The response includes the Provisioning State and the Azure-AsyncOperation header. To get the progress of the operation, call GET operation on the URL in Azure-AsyncOperation header field. For more informationFor more information about Asynchronous Operations, see https://msdn.microsoft.com/en-us/library/mt742920.aspx."
+            "description": "Accepted.  The response includes the Azure-AsyncOperation header. To get the progress of the operation, call the GET operation on the URL in the Azure-AsyncOperation header field. For more information about Asynchronous Operations, see https://msdn.microsoft.com/en-us/library/mt742920.aspx."
           }
         },
         "x-ms-long-running-operation": true
@@ -510,11 +510,11 @@
         },
         "payloadsInBlobStorage": {
           "type": "boolean",
-          "description": "If Assets+Input+Output+Package+Parameters+ExampleRequest is too large (> 3MB), this field will be set to true and the content will be put into a blob. Otherwise, this will be set to false and Assets, Input, Output, Package, Parameters, ExampleRequest will be inline."
+          "description": "When set to true, indicates that the payload size is larger than 3 MB. Otherwise false. If the payload size exceed 3 MB, the payload is stored in a blob and the PayloadsLocation parameter contains the URI of the blob. Otherwise, this will be set to false and Assets, Input, Output, Package, Parameters, ExampleRequest are inline. The Payload sizes is determined by adding the size of the Assets, Input, Output, Package, Parameters, and the ExampleRequest."
         },
         "PayloadsLocation": {
           "$ref": "#/definitions/BlobLocation",
-          "description": "Blob location of the large payload."
+          "description": "The URI of the payload blob. This paramater contains a value only if the payloadsInBlobStorage parameter is set to true. Otherwise is set to null."
         }
       }
     },
@@ -866,7 +866,7 @@
       "properties": {
         "uri": {
           "type": "string",
-          "description": "The URI where the blob is accessible from, (e.g. aml://abc for system assets or https://xyz for user asets or payload",
+          "description": "The URI from which the blob is accessible from. For example, aml://abc for system assets or https://xyz for user assets or payload.",
           "format": "url"
         },
         "credentials": {
