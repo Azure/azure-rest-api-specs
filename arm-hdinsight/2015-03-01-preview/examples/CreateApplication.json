@@ -1,0 +1,50 @@
+{
+    "parameters": {
+        "name": "app1",
+        "clusterName": "cluster1",
+        "resourceGroupName": "rg1",
+        "api-version": "2015-03-01-preview",
+        "subscriptionId": "subid",
+        "applicationCreateParameters": {
+            "computeProfile": {
+                "roles": [
+                    {
+                        "name": "edgenode",
+                        "targetInstanceCount": 1,
+                        "hardwareProfile": {
+                            "vmSize": "Standard_D12_v2"
+                        }
+                    }
+                ]
+            },
+            "installScriptActions": [
+                {
+                    "name": "app-install-app1",
+                    "uri": "https://.../install.sh",
+                    "parameters": "-version latest -port 20000",
+                    "roles": [
+                        "edgenode"
+                    ]
+                }
+            ],
+            "httpsEndpoints": [
+                {
+                    "subDomainSuffix": "dss",
+                    "destinationPort": "20000",
+                    "accessModes": [
+                        "WebPage"
+                    ]
+                }
+            ],
+            "applicationType": "CustomApplication"
+        }
+    },
+    "responses": {
+        "200": {
+            "headers": {
+                "location": "https://management.azure.com/subscriptions/subid/providers/Microsoft.HDInsight/pathToOperationResult"
+            }
+        },
+        "204": {}
+    }
+}
