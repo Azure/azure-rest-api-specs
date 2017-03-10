@@ -106,7 +106,7 @@
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/servers/{serverName}/securityAlertPolicies/{securityAlertPolicyName}": {
       "get": {
         "tags": [
-          "SecurityAlertsResources"
+          "SecurityAlert"
         ],
         "description": "Get a Threat Detection policy associated with a server.",
         "operationId": "ServerThreatDetectionPolicies_Get",
@@ -144,7 +144,7 @@
       },
       "put": {
         "tags": [
-          "ServerThreatDetectionPolicies"
+          "SecurityAlert"
         ],
         "description": "Creates or updates a Threat Detection policy for a server.",
         "operationId": "ServerThreatDetectionPolicies_CreateOrUpdate",
@@ -197,32 +197,40 @@
     }
   },
   "definitions": {
-    "ArmResourceSku": {
-      "description": "Represents an ARM Resource SKU.",
-      "type": "object",
+    "Resource": {
+      "description": "Resource properties",
       "properties": {
         "name": {
-          "description": "The name of the SKU, typically, a letter + Number code, e.g. P3.",
-          "type": "string"
+          "readOnly": true,
+          "type": "string",
+          "description": "Resource name"
         },
-        "tier": {
-          "description": "The tier of the particular SKU, e.g. Basic, Premium.",
-          "type": "string"
+        "id": {
+          "readOnly": true,
+          "type": "string",
+          "description": "Resource ID"
         },
-        "size": {
-          "description": "the size code, to be interpreted by resource as appropriate",
-          "type": "string"
+        "type": {
+          "readOnly": true,
+          "type": "string",
+          "description": "Resource type"
         },
-        "family": {
-          "description": "the family of hardware",
-          "type": "string"
+        "location": {
+          "type": "string",
+          "description": "Resource location"
         },
-        "capacity": {
-          "description": "the scale up/out capacity",
-          "format": "int32",
-          "type": "integer"
+        "tags": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          },
+          "description": "Resource tags"
         }
-      }
+      },
+      "required": [
+        "location"
+      ],
+      "x-ms-azure-resource": true
     },
     "SecurityAlertOperationListResult": {
       "type": "object",
@@ -243,49 +251,16 @@
       "description": "Contains information about a server Threat Detection policy operation result.",
       "type": "object",
       "properties": {
-        "id": {
-          "description": "The resource ID",
-          "type": "string"
-        },
-        "name": {
-          "description": "The name of the resource",
-          "type": "string"
-        },
-        "type": {
-          "description": "The resource type",
-          "type": "string"
-        },
-        "location": {
-          "description": "The location the resource resides in",
-          "type": "string"
-        },
-        "sku": {
-          "$ref": "#/definitions/ArmResourceSku"
-        },
-        "kind": {
-          "description": "The attributes of the entity that drives portal UI",
-          "enum": [
-            "None",
-            "V2",
-            "V12",
-            "User",
-            "System",
-            "Datawarehouse"
-          ],
-          "type": "string"
-        },
-        "tags": {
-          "description": "the tags assigned to the resource",
-          "type": "object",
-          "additionalProperties": {
-            "type": "string"
-          }
-        },
         "properties": {
           "$ref": "#/definitions/SecurityAlertOperationResultResourceProperties",
           "x-ms-client-flatten": true
         }
-      }
+      },
+      "allOf": [
+        {
+          "$ref": "#/definitions/Resource"
+        }
+      ]
     },
     "SecurityAlertOperationResultResourceProperties": {
       "description": "Properties for a database Threat Detection operation result.",
@@ -309,49 +284,16 @@
       "description": "Contains information about a server Threat Detection policy.",
       "type": "object",
       "properties": {
-        "id": {
-          "description": "The resource ID",
-          "type": "string"
-        },
-        "name": {
-          "description": "The name of the resource",
-          "type": "string"
-        },
-        "type": {
-          "description": "The resource type",
-          "type": "string"
-        },
-        "location": {
-          "description": "The location the resource resides in",
-          "type": "string"
-        },
-        "sku": {
-          "$ref": "#/definitions/ArmResourceSku"
-        },
-        "kind": {
-          "description": "The attributes of the entity that drives portal UI",
-          "enum": [
-            "None",
-            "V2",
-            "V12",
-            "User",
-            "System",
-            "Datawarehouse"
-          ],
-          "type": "string"
-        },
-        "tags": {
-          "description": "the tags assigned to the resource",
-          "type": "object",
-          "additionalProperties": {
-            "type": "string"
-          }
-        },
         "properties": {
           "$ref": "#/definitions/ServerSecurityAlertPolicyResourceProperties",
           "x-ms-client-flatten": true
         }
-      }
+      },
+      "allOf": [
+        {
+          "$ref": "#/definitions/Resource"
+        }
+      ]
     },
     "ServerSecurityAlertPolicyResourceProperties": {
       "description": "Properties for a server Threat Detection policy.",
@@ -359,11 +301,30 @@
       "properties": {
         "state": {
           "description": "Specifies the state of the policy. Options are Enabled or Disabled.",
-          "type": "string"
+          "type": "string",
+          "enum": [
+            "New",
+            "Enabled",
+            "Disabled"
+          ],
+          "x-ms-enum": {
+            "name": "SecurityAlertPolicyState"
+          }
         },
         "disabledAlerts": {
-          "description": "Specifies the comma-separated list of alerts that are disabled. The possible values are:  Sql_Injection, Sql_Injection_Vulnerability, Access_Anomaly, Usage_Anomaly or empty string",
-          "type": "string"
+          "description": "Specifies the comma-separated list of alerts that are disabled, or empty string to disable no alerts.",
+          "type": "string",
+          "enum": [
+            "Sql_Injection",
+            "Sql_Injection_Vulnerability",
+            "Access_Anomaly",
+            "Usage_Anomaly",
+            "Preview"
+          ],
+          "x-ms-enum": {
+            "name": "SecurityAlert",
+            "modelAsString": true
+          }
         },
         "emailAddresses": {
           "description": "Specifies the semicolon-separated list of e-mail addresses to which the alert is sent.",
@@ -371,7 +332,14 @@
         },
         "emailAccountAdmins": {
           "description": "Specifies that the alert is sent to the account administrators. Options are Enabled or Disabled.",
-          "type": "string"
+          "type": "string",
+          "enum": [
+            "Enabled",
+            "Disabled"
+          ],
+          "x-ms-enum": {
+            "name": "SecurityAlertPolicyEmailAccountAdmins"
+          }
         },
         "storageEndpoint": {
           "description": "Specifies the blob storage endpoint (e.g. https://MyAccount.blob.core.windows.net). This blob storage will hold all Threat Detection audit logs.",
