@@ -311,7 +311,7 @@
             "in": "body",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/NamespacePatch"
+              "$ref": "#/definitions/NamespaceUpdateParameter"
             },
             "description": "Parameters for updating a namespace resource."
           },
@@ -600,7 +600,7 @@
         "tags": [
           "EventHubs"
         ],
-        "operationId": "EventHubs_listbynamespaces",
+        "operationId": "EventHubs_ListByNamespace",
         "description": "Gets all the Event Hubs in a namespace.",
         "externalDocs": {
           "url": "https://msdn.microsoft.com/en-us/library/azure/mt639493.aspx"
@@ -1207,7 +1207,7 @@
         "tags": [
           "ConsumerGroups"
         ],
-        "operationId": "ConsumerGroups_listbyeventhubs",
+        "operationId": "ConsumerGroups_ListByEventHub",
         "description": "Gets all the consumer groups in a eventhub. An empty feed is returned if no consumer group exists in the eventhub.",
         "externalDocs": {
           "url": "https://msdn.microsoft.com/en-us/library/azure/mt639503.aspx"
@@ -1299,6 +1299,31 @@
         }
       }
     },
+    "TrackedResource": {
+      "properties": {
+        "location": {
+          "type": "string",
+          "description": "Resource location"
+        },
+        "tags": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          },
+          "description": "Resource tags"
+        }
+      },
+      "required": [
+        "location"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/Resource"
+        }
+      ],
+      "description": "Definition of Resource",
+      "x-ms-azure-resource": true
+    },
     "Resource": {
       "properties": {
         "id": {
@@ -1315,51 +1340,9 @@
           "readOnly": true,
           "type": "string",
           "description": "Resource type"
-        },
-        "location": {
-          "type": "string",
-          "description": "Resource location"
-        },
-        "tags": {
-          "type": "object",
-          "additionalProperties": {
-            "type": "string"
-          },
-          "description": "Resource tags"
         }
       },
-      "required": [
-        "location"
-      ],
-      "description": "The Resource definition.",
-      "x-ms-azure-resource": true
-    },
-    "Resource_proxy": {
-      "properties": {
-        "id": {
-          "readOnly": true,
-          "type": "string",
-          "description": "Resource Id"
-        },
-        "name": {
-          "readOnly": true,
-          "type": "string",
-          "description": "Resource name"
-        },
-        "type": {
-          "readOnly": true,
-          "type": "string",
-          "description": "Resource type"
-        },
-        "tags": {
-          "type": "object",
-          "additionalProperties": {
-            "type": "string"
-          },
-          "description": "Resource tags"
-        }
-      },
-      "description": "The Resource definition for other than namespace.",
+      "description": "The Resource definition",
       "x-ms-azure-resource": true
     },
     "NamespaceListResult": {
@@ -1390,7 +1373,7 @@
       },
       "allOf": [
         {
-          "$ref": "#/definitions/Resource"
+          "$ref": "#/definitions/TrackedResource"
         }
       ],
       "description": "Description of a namespace resource."
@@ -1399,20 +1382,24 @@
       "properties": {
         "provisioningState": {
           "type": "string",
+          "readOnly": true,
           "description": "Provisioning state of the namespace."
         },
         "createdAt": {
           "type": "string",
           "format": "date-time",
+          "readOnly": true,
           "description": "The time the namespace was created."
         },
         "updatedAt": {
           "type": "string",
           "format": "date-time",
+          "readOnly": true,
           "description": "The time the namespace was updated."
         },
         "serviceBusEndpoint": {
           "type": "string",
+          "readOnly": true,
           "description": "Endpoint you can use to perform Service Bus operations."
         }
       },
@@ -1482,7 +1469,7 @@
       },
       "allOf": [
         {
-          "$ref": "#/definitions/Resource_proxy"
+          "$ref": "#/definitions/Resource"
         }
       ],
       "description": "Description of a namespace authorization rule."
@@ -1622,7 +1609,7 @@
       },
       "allOf": [
         {
-          "$ref": "#/definitions/Resource_proxy"
+          "$ref": "#/definitions/Resource"
         }
       ],
       "description": "Description of the Event Hub resource."
@@ -1678,7 +1665,7 @@
       },
       "allOf": [
         {
-          "$ref": "#/definitions/Resource_proxy"
+          "$ref": "#/definitions/Resource"
         }
       ],
       "description": "Description of the consumer group resource."
@@ -1745,7 +1732,7 @@
       },
       "description": "Description of a Check Name availability request properties."
     },
-    "NamespacePatch": {
+    "NamespaceUpdateParameter": {
       "properties": {
         "tags": {
           "type": "object",
@@ -1757,10 +1744,6 @@
         "sku": {
           "$ref": "#/definitions/Sku",
           "description": "The sku of the created namespace"
-        },
-        "properties": {
-          "x-ms-client-flatten": true,
-          "$ref": "#/definitions/NamespaceProperties"
         }
       },
       "description": "Parameters supplied to the Patch Namespace operation."
