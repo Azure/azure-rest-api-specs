@@ -21,8 +21,8 @@
                 "tags": [
                     "Capabilities"
                 ],
-                "operationId": "Capabilities_Get",
-                "description": "Returns the capabilities available for the specified region.",
+                "operationId": "Capabilities_List",
+                "description": "Returns the capabilities available for the specified location.",
                 "parameters": [
                     {
                         "$ref": "#/parameters/ApiVersionParameter"
@@ -35,7 +35,7 @@
                         "in": "path",
                         "required": true,
                         "type": "string",
-                        "description": "The Id of the region for which the capabilities are retrieved."
+                        "description": "The Id of the location for which the capabilities are retrieved."
                     }
                 ],
                 "responses": {
@@ -58,7 +58,7 @@
                 "limit": {
                     "readOnly": true,
                     "type": "integer",
-                    "format": "int32",
+                    "format": "int64",
                     "description": "The maximum size of the database (see 'unit' for the units)."
                 },
                 "unit": {
@@ -82,7 +82,8 @@
                     "enum": [
                         "Visible",
                         "Available",
-                        "Default"
+                        "Default",
+                        "Disabled"
                     ],
                     "x-ms-enum": {
                         "name": "CapabilityStatus"
@@ -96,16 +97,17 @@
                 "name": {
                     "readOnly": true,
                     "type": "string",
-                    "description": "The Service Objective name."
+                    "description": "The service objective name."
                 },
                 "status": {
                     "readOnly": true,
                     "type": "string",
-                    "description": "The status of the Service Objective.",
+                    "description": "The status of the service objective.",
                     "enum": [
                         "Visible",
                         "Available",
-                        "Default"
+                        "Default",
+                        "Disabled"
                     ],
                     "x-ms-enum": {
                         "name": "CapabilityStatus"
@@ -114,13 +116,13 @@
                 "performanceLevel": {
                     "readOnly": true,
                     "$ref": "#/definitions/PerformanceLevel",
-                    "description": "The performance level of the Service Objective Capability.",
+                    "description": "The performance level of the service objective Capability.",
                     "x-ms-client-flatten": true
                 },
                 "id": {
                     "readOnly": true,
                     "type": "string",
-                    "description": "The unique ID of the Service Objective."
+                    "description": "The unique ID of the service objective."
                 },
                 "supportedMaxSizes": {
                     "readOnly": true,
@@ -128,16 +130,17 @@
                     "items": {
                         "$ref": "#/definitions/MaxSizeCapability"
                     },
-                    "description": "The list of supported maximum database sizes for this Service Objective."
+                    "description": "The list of supported maximum database sizes for this service objective."
                 }
             },
-            "description": "Represents the Service Objectives capabilities."
+            "description": "Represents the service objectives capabilities."
         },
         "PerformanceLevel": {            
-            "description": "Represents a possible performance level of a Service Objective Capability.",
+            "description": "Represents a possible performance level of a service objective Capability.",
             "properties": {
                 "unit": {
                     "type": "string",
+                    "readOnly": true,
                     "description": "Unit type used to measure SLO performance level.",
                     "enum": [
                         "DTU"
@@ -148,6 +151,7 @@
                 },
                 "value": {
                     "type": "integer",
+                    "readOnly": true,
                     "description": "Performance level value."
                 }
             }
@@ -166,7 +170,8 @@
                     "enum": [
                         "Visible",
                         "Available",
-                        "Default"
+                        "Default",
+                        "Disabled"
                     ],
                     "x-ms-enum": {
                         "name": "CapabilityStatus"
@@ -178,7 +183,7 @@
                     "items": {
                         "$ref": "#/definitions/ServiceObjectiveCapability"
                     },
-                    "description": "The list of supported Service Objectives for the edition."
+                    "description": "The list of supported service objectives for the edition."
                 }
             },
             "description": "Represents the server edition capabilities."
@@ -197,7 +202,8 @@
                     "enum": [
                         "Visible",
                         "Available",
-                        "Default"
+                        "Default",
+                        "Disabled"
                     ],
                     "x-ms-enum": {
                         "name": "CapabilityStatus"
@@ -219,16 +225,17 @@
                 "name": {
                     "readOnly": true,
                     "type": "string",
-                    "description": "The region name."
+                    "description": "The location name."
                 },
                 "status": {
                     "readOnly": true,
                     "type": "string",
-                    "description": "The status for the region with respect to Azure SQL.",
+                    "description": "The status for the location with respect to Azure SQL.",
                     "enum": [
                         "Visible",
                         "Available",
-                        "Default"
+                        "Default",
+                        "Disabled"
                     ],
                     "x-ms-enum": {
                         "name": "CapabilityStatus"
@@ -243,58 +250,7 @@
                     "description": "The list of supported server versions."
                 }
             },
-            "description": "Represents the capabilities for a region."
-        },
-        "Resource": {
-            "description": "Resource properties",
-            "properties": {
-                "name": {
-                    "readOnly": true,
-                    "type": "string",
-                    "description": "Resource name"
-                },
-                "id": {
-                    "readOnly": true,
-                    "type": "string",
-                    "description": "The resource ID."
-                },
-                "type": {
-                    "readOnly": true,
-                    "type": "string",
-                    "description": "Resource type"
-                },
-                "location": {
-                    "type": "string",
-                    "description": "Resource location"
-                },
-                "tags": {
-                    "type": "object",
-                    "additionalProperties": {
-                        "type": "string"
-                    },
-                    "description": "Resource tags"
-                }
-            },
-            "required": [
-                "location"
-            ],
-            "x-ms-azure-resource": true
-        },
-        "SubResource": {
-            "description": "Subresource properties",
-            "properties": {
-                "name": {
-                    "readOnly": true,
-                    "type": "string",
-                    "description": "Resource name"
-                },
-                "id": {
-                    "readOnly": true,
-                    "type": "string",
-                    "description": "The resource ID."
-                }
-            },
-            "x-ms-azure-resource": true
+            "description": "Represents the capabilities for a location."
         }
     },
     "parameters": {
