@@ -4088,6 +4088,32 @@
       },
       "description": "The instance view of a virtual machine boot diagnostics."
     },
+    "VirtualMachineIdentity": {
+      "properties": {
+        "principalId": {
+          "readOnly": true,
+          "type": "string",
+          "description": "The principal id of virtual machine identity."
+        },
+        "tenantId": {
+          "readOnly": true,
+          "type": "string",
+          "description": "The tenant id associated with the virtual machine."
+        },
+        "type": {
+          "type": "string",
+          "description": "The type of identity used for the virtual machine. Currently, the only supported type is 'SystemAssigned', which implicitly creates an identity.",
+          "enum": [
+            "SystemAssigned"
+          ],
+          "x-ms-enum": {
+            "name": "ResourceIdentityType",
+            "modelAsString": false
+          }
+        }
+      },
+      "description": "Identity for the virtual machine."
+    },
     "VirtualMachineInstanceView": {
       "properties": {
         "platformUpdateDomain": {
@@ -4201,6 +4227,10 @@
             "$ref": "#/definitions/VirtualMachineExtension"
           },
           "description": "The virtual machine child extension resources."
+        },
+        "identity": {
+          "$ref": "#/definitions/VirtualMachineIdentity",
+          "description": "The identity of the virtual machine, if configured."
         }
       },
       "allOf": [
@@ -4439,6 +4469,32 @@
         "value"
       ],
       "description": "The List Image operation response."
+    },
+    "VirtualMachineScaleSetIdentity": {
+      "properties": {
+        "principalId": {
+          "readOnly": true,
+          "type": "string",
+          "description": "The principal id of virtual machine scale set identity."
+        },
+        "tenantId": {
+          "readOnly": true,
+          "type": "string",
+          "description": "The tenant id associated with the virtual machine scale set."
+        },
+        "type": {
+          "type": "string",
+          "description": "The type of identity used for the virtual machine scale set. Currently, the only supported type is 'SystemAssigned', which implicitly creates an identity.",
+          "enum": [
+            "SystemAssigned"
+          ],
+          "x-ms-enum": {
+            "name": "ResourceIdentityType",
+            "modelAsString": false
+          }
+        }
+      },
+      "description": "Identity for the virtual machine scale set."
     },
     "VirtualMachineScaleSetOSProfile": {
       "properties": {
@@ -4826,6 +4882,10 @@
         "properties": {
           "x-ms-client-flatten": true,
           "$ref": "#/definitions/VirtualMachineScaleSetProperties"
+        },
+        "identity": {
+          "$ref": "#/definitions/VirtualMachineScaleSetIdentity",
+          "description": "The identity of the virtual machine scale set, if configured."
         }
       },
       "allOf": [
