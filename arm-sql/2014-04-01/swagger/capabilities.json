@@ -53,6 +53,18 @@
         }
     },
     "definitions": {
+        "CapabilityStatus": {
+            "type": "string",
+            "enum": [
+                "Visible",
+                "Available",
+                "Default",
+                "Disabled"
+            ],
+            "x-ms-enum": {
+                "name": "CapabilityStatus"
+            }
+        },
         "MaxSizeCapability": {
             "properties": {
                 "limit": {
@@ -77,17 +89,8 @@
                 },
                 "status": {
                     "readOnly": true,
-                    "type": "string",
                     "description": "The status of the maximum size capability.",
-                    "enum": [
-                        "Visible",
-                        "Available",
-                        "Default",
-                        "Disabled"
-                    ],
-                    "x-ms-enum": {
-                        "name": "CapabilityStatus"
-                    }
+                    "$ref": "#/definitions/CapabilityStatus"
                 }
             },
             "description": "Represents the maximum size limits for a database."
@@ -103,15 +106,7 @@
                     "readOnly": true,
                     "type": "string",
                     "description": "The status of the service objective.",
-                    "enum": [
-                        "Visible",
-                        "Available",
-                        "Default",
-                        "Disabled"
-                    ],
-                    "x-ms-enum": {
-                        "name": "CapabilityStatus"
-                    }
+                    "$ref": "#/definitions/CapabilityStatus"
                 },
                 "performanceLevel": {
                     "readOnly": true,
@@ -167,15 +162,7 @@
                     "readOnly": true,
                     "type": "string",
                     "description": "The status of the server edition.",
-                    "enum": [
-                        "Visible",
-                        "Available",
-                        "Default",
-                        "Disabled"
-                    ],
-                    "x-ms-enum": {
-                        "name": "CapabilityStatus"
-                    }
+                    "$ref": "#/definitions/CapabilityStatus"
                 },
                 "supportedServiceLevelObjectives": {
                     "readOnly": true,
@@ -199,15 +186,7 @@
                     "readOnly": true,
                     "type": "string",
                     "description": "The status of the server version.",
-                    "enum": [
-                        "Visible",
-                        "Available",
-                        "Default",
-                        "Disabled"
-                    ],
-                    "x-ms-enum": {
-                        "name": "CapabilityStatus"
-                    }
+                    "$ref": "#/definitions/CapabilityStatus"
                 },
                 "supportedEditions": {
                     "readOnly": true,
@@ -231,15 +210,7 @@
                     "readOnly": true,
                     "type": "string",
                     "description": "The status for the location with respect to Azure SQL.",
-                    "enum": [
-                        "Visible",
-                        "Available",
-                        "Default",
-                        "Disabled"
-                    ],
-                    "x-ms-enum": {
-                        "name": "CapabilityStatus"
-                    }
+                    "$ref": "#/definitions/CapabilityStatus"
                 },
                 "supportedServerVersions": {
                     "readOnly": true,
