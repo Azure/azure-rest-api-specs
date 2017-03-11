@@ -16,93 +16,6 @@
     "application/json"
   ],
   "paths": {
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/servers/{serverName}/securityAlertPolicies/{securityAlertPolicyName}/operationResults/{operationId}": {
-      "get": {
-        "tags": [
-          "ServerSecurityAlertOperationResults"
-        ],
-        "description": "Get the active server Threat Detection operation result.",
-        "operationId": "ServerThreatDetectionPolicies_GetOperationResult",
-        "x-ms-examples": {
-          "Get server security alert operation result": { "$ref": "../examples/ServerSecurityAlertOperationResult.json" }
-        },
-        "parameters": [
-          {
-            "$ref": "#/parameters/SubscriptionIdParameter"
-          },
-          {
-            "$ref": "#/parameters/ResourceGroupParameter"
-          },
-          {
-            "$ref": "#/parameters/ServerNameParameter"
-          },
-          {
-            "$ref": "#/parameters/SecurityAlertPolicyNameParameter"
-          },
-          {
-            "name": "operationId",
-            "in": "path",
-            "description": "The server Threat Detection operation id to retrieve.",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "$ref": "#/parameters/ApiVersionParameter"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Successfully retrieved the server Threat Detection operation results.",
-            "schema": {
-              "$ref": "#/definitions/SecurityAlertOperationResult"
-            }
-          },
-          "default": {
-            "description": "*** Error Responses: ***\n\n * 404 SubscriptionDoesNotHaveServer - The requested server was not found\n\n * 404 OperationIdNotFound - The operation with Id does not exist.\n\n * 405 ServerSecurityAlertOperationResultsNotImplemented - Operations on Server Threat Detection security alert operation results are not enabled yet\n\n * 500 GetServerSecurityAlertOperationResultsFailed - Failed to get Threat Detection security Alert operation results"
-          }
-        }
-      }
-    },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/servers/{serverName}/securityAlertPolicies/{securityAlertPolicyName}/operationResults/": {
-      "get": {
-        "tags": [
-          "ServerSecurityAlertOperationResults"
-        ],
-        "description": "Get a list of server Threat Detection operation results.",
-        "operationId": "ServerThreatDetectionPolicies_ListOperationResults",
-        "x-ms-examples": {
-          "Get server security alert operation results list": { "$ref": "../examples/ServerSecurityAlertOperationResultsList.json" }
-        },
-        "parameters": [
-          {
-            "$ref": "#/parameters/SubscriptionIdParameter"
-          },
-          {
-            "$ref": "#/parameters/ResourceGroupParameter"
-          },
-          {
-            "$ref": "#/parameters/ServerNameParameter"
-          },
-          {
-            "$ref": "#/parameters/SecurityAlertPolicyNameParameter"
-          },
-          {
-            "$ref": "#/parameters/ApiVersionParameter"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Successfully retrieved the server Threat Detection operation results.",
-            "schema": {
-              "$ref": "#/definitions/SecurityAlertOperationListResult"
-            }
-          },
-          "default": {
-            "description": "*** Error Responses: ***\n\n * 404 SubscriptionDoesNotHaveServer - The requested server was not found\n\n * 404 OperationIdNotFound - The operation with Id does not exist.\n\n * 405 ServerSecurityAlertOperationResultsNotImplemented - Operations on Server Threat Detection security alert operation results are not enabled yet\n\n * 500 GetServerSecurityAlertOperationResultsFailed - Failed to get Threat Detection security Alert operation results"
-          }
-        }
-      }
-    },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/servers/{serverName}/securityAlertPolicies/{securityAlertPolicyName}": {
       "get": {
         "tags": [
@@ -232,21 +145,6 @@
       ],
       "x-ms-azure-resource": true
     },
-    "SecurityAlertOperationListResult": {
-      "type": "object",
-      "properties": {
-        "value": {
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/SecurityAlertOperationResult"
-          }
-        },
-        "nextLink": {
-          "type": "string"
-        }
-      },
-      "description": "Represents the response to a list security alert operation request."
-    },
     "SqlSubResource": {
       "description": "Subresource properties",
       "properties": {
@@ -276,39 +174,6 @@
           "$ref": "#/definitions/SqlSubResource"
         }
       ]
-    },
-    "SecurityAlertOperationResult": {
-      "description": "Contains information about a server Threat Detection policy operation result.",
-      "type": "object",
-      "properties": {
-        "properties": {
-          "$ref": "#/definitions/SecurityAlertOperationResultProperties",
-          "x-ms-client-flatten": true
-        }
-      },
-      "allOf": [
-        {
-          "$ref": "#/definitions/SqlTypedSubResource"
-        }
-      ]
-    },
-    "SecurityAlertOperationResultProperties": {
-      "description": "Properties for a database Threat Detection operation result.",
-      "type": "object",
-      "properties": {
-        "operationId": {
-          "description": "Specifies the Threat Detection operation ID.",
-          "type": "string"
-        },
-        "state": {
-          "description": "Specifies the state of the Threat Detection operation.",
-          "type": "string"
-        },
-        "startTime": {
-          "description": "Specifies the start time of the Threat Detection operation.",
-          "type": "string"
-        }
-      }
     },
     "ServerSecurityAlertPolicy": {
       "description": "Contains information about a server Threat Detection policy.",
