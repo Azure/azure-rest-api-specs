@@ -64,7 +64,7 @@
                 "x-ms-long-running-operation": true
             }
         },
-        "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/servers/{serverName}/databases/{databaseName}/extensions/{extensionName}": {
+        "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/servers/{serverName}/databases/{databaseName}/extensions/import": {
             "put": {
                 "tags": [
                     "ImportExport"
@@ -90,16 +90,6 @@
                         "required": true,
                         "type": "string",
                         "description": "The name of the database to import into"
-                    },
-                    {
-                        "name": "extensionName",
-                        "in": "path",
-                        "required": true,
-                        "type": "string",
-                        "enum": [
-                            "import"
-                        ],
-                        "description": "The name of the database extension API."
                     },
                     {
                         "name": "parameters",
