@@ -16,7 +16,7 @@
     "application/json"
   ],
   "paths": {
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/servers/{serverName}/databases/{databaseName}/auditingSettings/{blobAuditingPolicyName}": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/servers/{serverName}/databases/{databaseName}/auditingSettings/default": {
       "get": {
         "tags": [
           "DatabaseBlobAuditingPolicies"
@@ -42,9 +42,6 @@
             "description": "The name of the database for which database blob audit policy is defined.",
             "required": true,
             "type": "string"
-          },
-          {
-            "$ref": "#/parameters/BlobAuditingPolicyNameParameter"
           },
           {
             "$ref": "#/parameters/ApiVersionParameter"
@@ -90,9 +87,6 @@
             "type": "string"
           },
           {
-            "$ref": "#/parameters/BlobAuditingPolicyNameParameter"
-          },
-          {
             "name": "databaseBlobAuditingPolicy",
             "in": "body",
             "required": true,
@@ -124,7 +118,7 @@
         }
       }
     },
-   "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/servers/{serverName}/auditingSettings/{blobAuditingPolicyName}": {
+   "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/servers/{serverName}/auditingSettings/default": {
       "get": {
         "tags": [
           "ServerBlobAuditingPolicies"
@@ -143,9 +137,6 @@
           },
           {
             "$ref": "#/parameters/ServerNameParameter"
-          },
-          {
-            "$ref": "#/parameters/BlobAuditingPolicyNameParameter"
           },
           {
             "$ref": "#/parameters/ApiVersionParameter"
@@ -182,9 +173,6 @@
           },
           {
             "$ref": "#/parameters/ServerNameParameter"
-          },
-          {
-            "$ref": "#/parameters/BlobAuditingPolicyNameParameter"
           },
           {
             "name": "serverBlobAuditingPolicy",
@@ -395,17 +383,6 @@
       "required": true,
       "type": "string",
       "description": "The name of the server.",
-      "x-ms-parameter-location": "method"
-    },
-    "BlobAuditingPolicyNameParameter": {
-      "name": "blobAuditingPolicyName",
-      "in": "path",
-      "required": true,
-      "type": "string",
-      "description": "The name of the blob auditing policy.",
-      "enum":[
-        "default"
-      ],
       "x-ms-parameter-location": "method"
     }
   }

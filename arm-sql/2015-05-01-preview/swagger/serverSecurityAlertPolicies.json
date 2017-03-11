@@ -16,7 +16,7 @@
     "application/json"
   ],
   "paths": {
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/servers/{serverName}/securityAlertPolicies/{securityAlertPolicyName}": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/servers/{serverName}/securityAlertPolicies/default": {
       "get": {
         "tags": [
           "SecurityAlert"
@@ -35,9 +35,6 @@
           },
           {
             "$ref": "#/parameters/ServerNameParameter"
-          },
-          {
-            "$ref": "#/parameters/SecurityAlertPolicyNameParameter"
           },
           {
             "$ref": "#/parameters/ApiVersionParameter"
@@ -74,9 +71,6 @@
           },
           {
             "$ref": "#/parameters/ServerNameParameter"
-          },
-          {
-            "$ref": "#/parameters/SecurityAlertPolicyNameParameter"
           },
           {
             "name": "serverSecurityAlertPolicy",
@@ -282,17 +276,6 @@
       "required": true,
       "type": "string",
       "description": "The name of the server.",
-      "x-ms-parameter-location": "method"
-    },
-    "SecurityAlertPolicyNameParameter":{
-      "name": "securityAlertPolicyName",
-      "in": "path",
-      "description": "The name of the Threat Detection policy.",
-      "required": true,
-      "type": "string",
-      "enum": [
-        "default"
-      ],
       "x-ms-parameter-location": "method"
     }
   }
