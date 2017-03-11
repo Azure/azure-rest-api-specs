@@ -50,7 +50,7 @@
                     "201": {
                         "description": "Created",
                         "schema": {
-                        "$ref": "#/definitions/ImportExportOperationResponse"
+                        "$ref": "#/definitions/ImportExportResponse"
                         }
                     },
                     "202": {
@@ -69,7 +69,7 @@
                 "tags": [
                     "ImportExport"
                 ],
-                "operationId": "Databases_CreateImportOperation",
+                "operationId": "Databases_ImportIntoExisting",
                 "description": "Creates an import operation that imports a bacpac into an existing database. The existing database must be empty.",
                 "parameters": [
                     {
@@ -105,7 +105,7 @@
                     "200": {
                         "description": "OK",
                         "schema": {
-                        "$ref": "#/definitions/ImportExportOperationResponse"
+                        "$ref": "#/definitions/ImportExportResponse"
                         }
                     },
                     "202": {
@@ -160,7 +160,7 @@
                     "200": {
                         "description": "OK",
                         "schema": {
-                        "$ref": "#/definitions/ImportExportOperationResponse"
+                        "$ref": "#/definitions/ImportExportResponse"
                         }
                     },
                     "202": {
@@ -241,19 +241,7 @@
             },
             "description": "Import database parameters."
         },
-        "ImportExportOperationListResponse": {
-            "properties": {
-                "value": {
-                    "type": "array",
-                    "items": {
-                        "$ref": "#/definitions/ImportExportOperationResponse"
-                    }
-                }
-            },
-            "required": ["value"],
-            "description": "Response for Import/Export List operation."
-        },
-        "ImportExportOperationResponse": {
+        "ImportExportResponse": {
             "properties": {
                 "allOf": {
                     "$ref": "#/definitions/SqlTypedSubResource"
@@ -262,7 +250,7 @@
                 {
                     "allOf": [
                         {
-                        "$ref": "#/definitions/ImportExportOperationResponseProperties"
+                        "$ref": "#/definitions/ImportExportResponseProperties"
                         }
                     ],
                     "x-ms-client-flatten": true
@@ -270,7 +258,7 @@
             },
             "description": "Response for Import/Export Get operation."
         },
-        "ImportExportOperationResponseProperties": {
+        "ImportExportResponseProperties": {
             "properties": {
                 "requestType": {
                     "type": "string",
