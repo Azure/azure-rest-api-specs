@@ -1,0 +1,318 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "HDInsightManagementClient",
+    "description": "The HDInsight Management Client.",
+    "version": "2015-03-01-preview"
+  },
+  "host": "management.azure.com",
+  "schemes": [
+    "https"
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "produces": [
+    "application/json"
+  ],
+  "security": [
+    {
+      "azure_auth": [
+        "user_impersonation"
+      ]
+    }
+  ],
+  "securityDefinitions": {
+    "azure_auth": {
+      "type": "oauth2",
+      "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
+      "flow": "implicit",
+      "description": "Azure Active Directory OAuth2 Flow",
+      "scopes": {
+        "user_impersonation": "impersonate your user account"
+      }
+    }
+  },
+  "paths": {
+    "/subscriptions/{subscriptionId}/providers/Microsoft.HDInsight/locations/{location}/capabilities": {
+      "get": {
+        "tags": [
+          "Regions"
+        ],
+        "operationId": "Region_GetCapabilities",
+        "description": "Gets the capabilities for the specified location.",
+        "parameters": [
+          {
+            "name": "location",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The location to get capabilities for."
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK response definition.",
+            "schema": {
+              "$ref": "#/definitions/CapabilitiesResult"
+            }
+          }
+        }
+      }
+    },
+    "/providers/Microsoft.HDinsight/operations": {
+      "get": {
+        "tags": [
+          "Operations"
+        ],
+        "description": "Lists all of the available HDInsight REST API operations.",
+        "operationId": "Operations_List",
+        "parameters": [
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK. The request has succeeded.",
+            "schema": {
+              "$ref": "./cluster.json#/definitions/OperationListResult"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    }
+  },
+  "definitions": {
+    "VersionSpec": {
+     "description": "Gets or sets Version spec properties.",
+      "properties": {
+        "friendlyName": {
+          "type": "string",
+          "description": "Friendly Name"
+        },
+        "displayName": {
+          "type": "string",
+          "description": "Display Name"
+        },
+        "isDefault": {
+          "type": "string",
+          "description": "Value true if the version is the default version."
+        },
+        "componentVersions": {
+          "type": "object",
+          "description": "Gets or Sets component version property.",
+          "additionalProperties": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "VersionsCapability": {
+     "description": "Gets or sets version capability.",
+      "properties": {
+        "available": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/VersionSpec"
+          }
+        }
+      }
+    },
+    "RegionsCapability": {
+      "description": "Gets or sets version regions capability.",
+      "properties": {
+        "available": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "VmSizesCapability": {
+     "description": "Gets or sets virtual machine sizes capability.",
+      "properties": {
+        "available": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "VmSizeCompatibilityFilter": {
+     "description": "Gets or sets virtual machine type compatibility filter.",
+      "properties": {
+        "FilterMode": {
+          "type": "string"
+        },
+        "Regions": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "ClusterFlavors": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "NodeTypes": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "ClusterVersions": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "VMSizes": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "RegionalQuotaCapability": {
+     "description": "Gets or sets regional quota capacity.",
+      "properties": {
+        "region_name": {
+          "type": "string"
+        },
+        "cores_used": {
+          "type": "integer",
+          "format": "int64"
+        },
+        "cores_available": {
+          "type": "integer",
+          "format": "int64"
+        }
+      }
+    },
+    "QuotaCapability": {
+     "description": "Gets or sets regional quota capacity.",
+      "properties": {
+        "regionalQuotas": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/RegionalQuotaCapability"
+          }
+        }
+      }
+    },
+    "CapabilitiesResult": {
+     "description": "Gets capabilities as result.",      
+      "properties": {
+        "versions": {
+          "type": "object",
+          "additionalProperties": {
+            "$ref": "#/definitions/VersionsCapability"
+          }
+        },
+        "regions": {
+          "type": "object",
+          "additionalProperties": {
+            "$ref": "#/definitions/RegionsCapability"
+          }
+        },
+        "vmsizes": {
+          "type": "object",
+          "additionalProperties": {
+            "$ref": "#/definitions/VmSizesCapability"
+          }
+        },
+        "vmsize_filters": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/VmSizeCompatibilityFilter"
+          }
+        },
+        "features": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "quota": {
+          "$ref": "#/definitions/QuotaCapability"
+        }
+      },
+      "description": "The Get Capabilities operation response."
+    },
+    "Operation": {
+      "description": "HDInsight REST API operation",
+      "type": "object",
+      "properties": {
+        "name": {
+          "description": "Operation name: {provider}/{resource}/{operation}",
+          "type": "string"
+        },
+        "display": {
+          "description": "The object that represents the operation.",
+          "properties": {
+            "provider": {
+              "description": "Service provider: Microsoft.HDInsight",
+              "type": "string"
+            },
+            "resource": {
+              "description": "Resource on which the operation is performed: Profile, endpoint, etc.",
+              "type": "string"
+            },
+            "operation": {
+              "description": "Operation type: Read, write, delete, etc.",
+              "type": "string"
+            }
+          }
+        }
+      }
+    },
+    "OperationListResult": {
+      "description": "Result of the request to list HDInsight operations. It contains a list of operations and a URL link to get the next set of results.",
+      "properties": {
+        "value": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Operation"
+          },
+          "description": "List of HDInsight operations supported by the HDInsight resource provider."
+        },
+        "nextLink": {
+          "type": "string",
+          "description": "URL to get the next set of operation list results if there are any."
+        }
+      }
+    }
+  },
+  "parameters": {
+    "SubscriptionIdParameter": {
+      "name": "subscriptionId",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "description": "Gets subscription credentials which uniquely identify Microsoft Azure subscription. The subscription ID forms part of the URI for every service call."
+    },
+    "ApiVersionParameter": {
+      "name": "api-version",
+      "in": "query",
+      "required": true,
+      "type": "string",
+      "description": "Client Api Version."
+    }
+  }
+
+}
