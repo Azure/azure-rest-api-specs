@@ -27,9 +27,6 @@
             "$ref": "#/parameters/ResourceGroupNameParameter"
           },
           {
-            "$ref": "#/parameters/FilterParameter"
-          },
-          {
             "$ref": "#/parameters/ApiVersionParameter"
           },
           {
@@ -189,8 +186,7 @@
         },
         "x-ms-pageable": {
           "nextLinkName": "nextLink"
-        },
-        "x-ms-odata": "#/definitions/AutoscaleSettingResource"
+        }
       }
     },
     "/subscriptions/{subscriptionId}/resourcegroups/{resourceGroupName}/providers/microsoft.insights/autoscalesettings/{autoscaleSettingName}": {
@@ -783,7 +779,11 @@
         },
         "location": {
           "type": "string",
-          "description": "Resource location"
+          "description": "Resource location",
+          "x-ms-mutability": [
+              "create",
+              "read"
+          ]
         },
         "tags": {
           "additionalProperties": {
@@ -1242,14 +1242,6 @@
       "required": true,
       "type": "string",
       "description": "The name of the resource group.",
-      "x-ms-parameter-location": "method"
-    },
-    "FilterParameter": {
-      "name": "$filter",
-      "in": "query",
-      "required": false,
-      "type": "string",
-      "description": "The filter to apply on the operation. For more information please see https://msdn.microsoft.com/en-us/library/azure/dn931934.aspx",
       "x-ms-parameter-location": "method"
     },
     "AutoscaleSettingNameParameter": {
