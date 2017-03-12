@@ -199,7 +199,7 @@
       "type": "object",
       "properties": {
         "state": {
-          "description": "Specifies the state of the policy.",
+          "description": "Specifies the state of the policy. If state is Enabled, storageEndpoint and storageAccountAccessKey are required.",
           "type": "string",
           "enum": [
             "New",
@@ -241,11 +241,11 @@
           }
         },
         "storageEndpoint": {
-          "description": "Specifies the blob storage endpoint (e.g. https://MyAccount.blob.core.windows.net). This blob storage will hold all Threat Detection audit logs.",
+          "description": "Specifies the blob storage endpoint (e.g. https://MyAccount.blob.core.windows.net). This blob storage will hold all Threat Detection audit logs. If state is Enabled, storageEndpoint is required.",
           "type": "string"
         },
         "storageAccountAccessKey": {
-          "description": "Specifies the identifier key of the Threat Detection audit storage account.",
+          "description": "Specifies the identifier key of the Threat Detection audit storage account. If state is Enabled, storageAccountAccessKey is required.",
           "type": "string"
         },
         "retentionDays": {
