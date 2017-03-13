@@ -57,6 +57,31 @@
         }
       }
     },
+    "/providers/Microsoft.ContainerRegistry/operations": {
+      "get": {
+        "tags": [
+          "Operation"
+        ],
+        "description": "Lists all of the available Azure Container Registry REST API operations.",
+        "operationId": "Operations_List",
+        "parameters": [
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request was successful; the request was well-formed and received properly.",
+            "schema": {
+              "$ref": "#/definitions/OperationListResult"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ContainerRegistry/registries/{registryName}": {
       "get": {
         "tags": [
@@ -409,6 +434,56 @@
         },
         "message": {
           "description": "If any, the error message that provides more detail for the reason that the name is not available.",
+          "type": "string"
+        }
+      }
+    },
+    "OperationListResult": {
+      "description": "The result of a request to list container registry operations.",
+      "properties": {
+        "value": {
+          "description": "The list of container registry operations. Since this list may be incomplete, the nextLink field should be used to request the next list of operations.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/OperationDefinition"
+          }
+        },
+        "nextLink": {
+          "description": "The URI that can be used to request the next list of container registry operations.",
+          "type": "string"
+        }
+      }
+    },
+    "OperationDefinition": {
+      "description": "The definition of a container registry operation.",
+      "properties": {
+        "name": {
+          "description": "Operation name: {provider}/{resource}/{operation}.",
+          "type": "string"
+        },
+        "display": {
+          "$ref": "#/definitions/OperationDisplayDefinition",
+          "description": "The display information for the container registry operation."
+        }
+      }
+    },
+    "OperationDisplayDefinition": {
+      "description": "The display information for a container registry operation.",
+      "properties": {
+        "provider": {
+          "description": "The resource provider name: Microsoft.ContainerRegistry.",
+          "type": "string"
+        },
+        "resource": {
+          "description": "The resource on which the operation is performed.",
+          "type": "string"
+        },
+        "operation": {
+          "description": "The operation that users can perform.",
+          "type": "string"
+        },
+        "description": {
+          "description": "The description for the operation.",
           "type": "string"
         }
       }
