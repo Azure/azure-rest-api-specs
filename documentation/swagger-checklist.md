@@ -84,6 +84,13 @@ The Azure Developer Experience team will continue to deliver rich tools to valid
 
 - [ ] **M1000**: Plural names in parameters and model properties MUST only be used to represent collections.
 
+  Example from [arm-cdn](https://github.com/Azure/azure-rest-api-specs/blob/master/arm-cdn/2016-10-02/swagger/cdn.json):
+  ```json
+    "/subscriptions/{subscriptionId}/providers/Microsoft.Cdn/profiles": {
+      "get": {
+        "description": "Lists all of the CDN profiles within an Azure subscription.",
+  ```
+
 - [ ] **M1001**: :white_check_mark: Each operation *MUST* contain an OperationId of the form "RESOURCE_METHOD" a.k.a "NOUN_VERB", where "RESOURCE" represents the resource or object the operation addresses, and METHOD is a short name for the operation being performed "Get, Start, Delete, Create, List", etc.
 
 - [ ] **M1002**: If the NOUN in the OperationId "NOUN_VERB" matches with the name of the Model definition then the NOUN in the operationId *MUST* use the plural form of NOUN to avoid collision in the namespace.
