@@ -16,7 +16,7 @@
         "application/json"
     ],
     "paths": {
-        "/subscriptions/{subscriptionId}/providers/Microsoft.Sql/locations/{locationID}/capabilities": {
+        "/subscriptions/{subscriptionId}/providers/Microsoft.Sql/locations/{locationId}/capabilities": {
             "get": {
                 "tags": [
                     "Capabilities"
@@ -31,7 +31,7 @@
                         "$ref": "#/parameters/SubscriptionIdParameter"
                     },
                     {
-                        "name": "locationID",
+                        "name": "locationId",
                         "in": "path",
                         "required": true,
                         "type": "string",
@@ -62,7 +62,8 @@
                 "Disabled"
             ],
             "x-ms-enum": {
-                "name": "CapabilityStatus"
+                "name": "CapabilityStatus",
+                "description": "Status of the specified capability."
             }
         },
         "MaxSizeCapability": {
