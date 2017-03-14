@@ -1616,14 +1616,14 @@
     },
     "IpsecPolicy": {
       "properties": {
-        "SALifeTimeSeconds": {
+        "saLifeTimeSeconds": {
           "type": "integer",
-          "format": "int64",
+          "format": "int32",
           "description": "The Security Association (SA) lifetime in seconds for a site to site VPN tunnel."
         },
-        "SADataSizeKilobytes": {
+        "saDataSizeKilobytes": {
           "type": "integer",
-          "format": "int64",
+          "format": "int32",
           "description": "The Security Association (SA) payload size in KB for a site to site VPN tunnel."
         },
         "ipsecEncryption": {
@@ -1727,8 +1727,8 @@
         }
       },
       "required": [
-        "SALifeTimeSeconds",
-        "SADataSizeKilobytes",
+        "saLifeTimeSeconds",
+        "saDataSizeKilobytes",
         "ipsecEncryption",
         "ipsecIntegrity",
         "ikeEncryption",
