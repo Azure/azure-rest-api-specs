@@ -197,12 +197,11 @@
                     "type": "string",
                     "readOnly": true,
                     "description": "Resource type"
-                },
-                "allOf":
-                { 
-                    "$ref": "#/definitions/SqlSubResource" 
                 }
-            }
+            },
+            "allOf": [{ 
+                "$ref": "#/definitions/SqlSubResource" 
+            }]
         },
         "ImportExtensionProperties": {
             "properties": {
@@ -243,15 +242,15 @@
         },
         "ImportExportResponse": {
             "properties": {
-                "allOf": {
-                    "$ref": "#/definitions/SqlTypedSubResource"
-                },
                 "properties":
                 {
                     "$ref": "#/definitions/ImportExportResponseProperties",
                     "x-ms-client-flatten": true
                 }
             },
+            "allOf": [{
+                "$ref": "#/definitions/SqlTypedSubResource"
+            }],
             "description": "Response for Import/Export Get operation."
         },
         "ImportExportResponseProperties": {
