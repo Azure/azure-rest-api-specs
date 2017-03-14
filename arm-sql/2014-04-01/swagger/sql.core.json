@@ -3214,6 +3214,21 @@
         }
       }
     },
+    "SqlTypedSubResource": {
+      "description": "Subresource properties",
+      "properties": {
+        "type": {
+          "readOnly": true,
+          "type": "string",
+          "description": "Resource type"
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "#/definitions/SqlSubResource"
+        }
+      ]
+    },
     "OperationListResult": {
      "description": "Result of the request to list SQL operations. It contains a list of operations and a URL link to get the next set of results.",
       "properties": {
