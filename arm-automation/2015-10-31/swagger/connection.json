@@ -1,0 +1,470 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "AutomationManagement",
+    "version": "2015-10-31"
+  },
+  "host": "management.azure.com",
+  "schemes": [
+    "https"
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "produces": [
+    "application/json"
+  ],
+  "paths": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Automation/automationAccounts/{automationAccount}/connections/{connectionName}": {
+      "delete": {
+        "tags": [
+          "Connections"
+        ],
+        "operationId": "Connections_Delete",
+        "description": "Delete the connection.",
+        "externalDocs": {
+          "url": "http://aka.ms/azureautomationsdk/connectionoperations"
+        },
+        "parameters": [
+          {
+            "name": "automationAccount",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The automation account name."
+          },
+          {
+            "name": "connectionName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of connection."
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+		  "default": {
+            "description": "Automation error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        }
+      },
+      "get": {
+        "tags": [
+          "Connections"
+        ],
+        "operationId": "Connections_Get",
+        "description": "Retrieve the connection identified by connection name.",
+        "externalDocs": {
+          "url": "http://aka.ms/azureautomationsdk/connectionoperations"
+        },
+        "parameters": [
+          {
+            "name": "automationAccount",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The automation account name."
+          },
+          {
+            "name": "connectionName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of connection."
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/Connection"
+            }
+          },
+		  "default": {
+            "description": "Automation error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        }
+      },
+	  "put": {
+        "tags": [
+          "Connections"
+        ],
+        "operationId": "Connections_CreateOrUpdate",
+        "description": "Create a connection.",
+        "externalDocs": {
+          "url": "http://aka.ms/azureautomationsdk/connectionoperations"
+        },
+        "parameters": [
+          {
+            "name": "automationAccount",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The automation account name."
+          },
+          {
+            "name": "connectionName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The parameters supplied to the create or update connection operation."
+          },
+          {
+            "name": "parameters",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/ConnectionCreateOrUpdateParameters"
+            },
+            "description": "The parameters supplied to the create or update connection operation."
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": "Created",
+            "schema": {
+              "$ref": "#/definitions/Connection"
+            }
+          },
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/Connection"
+            }
+          },
+		  "default": {
+            "description": "Automation error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        }
+      },
+      "patch": {
+        "tags": [
+          "Connections"
+        ],
+        "operationId": "Connections_Update",
+        "description": "Update a connection.",
+        "externalDocs": {
+          "url": "http://aka.ms/azureautomationsdk/connectionoperations"
+        },
+        "parameters": [
+          {
+            "name": "automationAccount",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The automation account name."
+          },
+          {
+            "name": "connectionName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The parameters supplied to the update a connection operation."
+          },
+          {
+            "name": "parameters",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/ConnectionUpdateParameters"
+            },
+            "description": "The parameters supplied to the update a connection operation."
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+		  "default": {
+            "description": "Automation error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Automation/automationAccounts/{automationAccount}/connections": {
+      "get": {
+        "tags": [
+          "Connections"
+        ],
+        "operationId": "Connections_List",
+        "description": "Retrieve a list of connections.",
+        "externalDocs": {
+          "url": "http://aka.ms/azureautomationsdk/connectionoperations"
+        },
+        "parameters": [
+          {
+            "name": "automationAccount",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The automation account name."
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/ConnectionListResult"
+            }
+          },
+		  "default": {
+            "description": "Automation error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    }
+  },
+  "definitions": {
+    "ConnectionCreateOrUpdateProperties": {
+      "properties": {
+        "description": {
+          "type": "string",
+          "description": "Gets or sets the description of the connection."
+        },
+        "connectionType": {
+          "$ref": "#/definitions/ConnectionTypeAssociationProperty",
+          "description": "Gets or sets the connectionType of the connection."
+        },
+        "fieldDefinitionValues": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          },
+          "description": "Gets or sets the field definition properties of the connection."
+        }
+      },
+      "required": [
+        "connectionType"
+      ],
+      "description": "The properties of the create connection properties"
+    },
+    "ConnectionCreateOrUpdateParameters": {
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "Gets or sets the name of the connection."
+        },
+        "properties": {
+          "$ref": "#/definitions/ConnectionCreateOrUpdateProperties",
+          "x-ms-client-flatten": true,
+          "description": "Gets or sets the properties of the connection."
+        }
+      },
+      "required": [
+        "name",
+        "properties"
+      ],
+      "description": "The parameters supplied to the create or update connection operation."
+    },
+    "ConnectionProperties": {
+      "properties": {
+        "connectionType": {
+          "$ref": "#/definitions/ConnectionTypeAssociationProperty",
+          "description": "Gets or sets the connectionType of the connection."
+        },
+        "fieldDefinitionValues": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          },
+          "description": "Gets or sets the field definition values of the connection."
+        },
+        "creationTime": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Gets or sets the creation time."
+        },
+        "lastModifiedTime": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Gets or sets the last modified time."
+        },
+        "description": {
+          "type": "string",
+          "description": "Gets or sets the description."
+        }
+      },
+      "description": "Definition of the connection properties."
+    },
+    "Connection": {
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "Gets or sets the id of the resource."
+        },
+        "name": {
+          "type": "string",
+          "description": "Gets or sets the name of the connection."
+        },
+        "properties": {
+          "$ref": "#/definitions/ConnectionProperties",
+          "x-ms-client-flatten": true,
+          "description": "Gets or sets the properties of the connection."
+        }
+      },
+      "description": "Definition of the connection."
+    },
+    "ConnectionListResult": {
+      "properties": {
+        "value": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Connection"
+          },
+          "description": "Gets or sets a list of connection."
+        },
+        "nextLink": {
+          "type": "string",
+          "description": "Gets or sets the next link."
+        }
+      },
+      "description": "The response model for the list connection operation."
+    },
+    "ConnectionUpdateProperties": {
+      "properties": {
+        "description": {
+          "type": "string",
+          "description": "Gets or sets the description of the connection."
+        },
+        "fieldDefinitionValues": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          },
+          "description": "Gets or sets the field definition values of the connection."
+        }
+      },
+      "description": "The properties of the update connection operation."
+    },
+    "ConnectionUpdateParameters": {
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "Gets or sets the name of the connection."
+        },
+        "properties": {
+          "$ref": "#/definitions/ConnectionUpdateProperties",
+          "x-ms-client-flatten": true,
+          "description": "Gets or sets the properties of the connection."
+        }
+      },
+      "required": [
+        "properties"
+      ],
+      "description": "The parameters supplied to the update connection operation."
+    },
+	"ConnectionTypeAssociationProperty": {
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "Gets or sets the name of the connection type."
+        }
+      },
+      "description": "The connection type property associated with the entity."
+    },
+	"ErrorResponse": {
+      "type": "object",
+      "properties": {
+        "code": {
+          "description": "Error code",
+          "type": "string"
+        },
+        "message": {
+          "description": "Error message indicating why the operation failed.",
+          "type": "string"
+        }	
+      },
+	  "description": "Error response of an operation failure"
+    }
+  },
+  "parameters": {
+    "SubscriptionIdParameter": {
+      "name": "subscriptionId",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "description": "Gets subscription credentials which uniquely identify Microsoft Azure subscription. The subscription ID forms part of the URI for every service call."
+    },
+    "ApiVersionParameter": {
+      "name": "api-version",
+      "in": "query",
+      "required": true,
+      "type": "string",
+      "description": "Client Api Version."
+    },
+    "ResourceGroupNameParameter": {
+      "name": "resourceGroupName",
+      "in": "path",
+      "required": true,
+      "type": "string",
+	  "pattern": "^[-\\w\\._]+$",
+      "description": "The resource group name.",
+      "x-ms-parameter-location": "method"
+    }
+  }
+}

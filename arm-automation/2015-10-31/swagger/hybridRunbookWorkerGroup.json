@@ -1,0 +1,342 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "AutomationManagement",
+    "version": "2015-10-31"
+  },
+  "host": "management.azure.com",
+  "schemes": [
+    "https"
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "produces": [
+    "application/json"
+  ],
+  "paths": {
+	"/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Automation/automationAccounts/{automationAccount}/hybridRunbookWorkerGroups/{hybridRunbookWorkerGroupName}": {
+      "delete": {
+        "tags": [
+          "HybridRunbookWorkerGroups"
+        ],
+        "operationId": "HybridRunbookWorkerGroups_Delete",
+        "description": "Delete a hybrid runbook worker group.",
+        "externalDocs": {
+          "url": "http://aka.ms/azureautomationsdk/hybridrunbookworkergroupoperations"
+        },
+        "parameters": [
+          {
+            "name": "automationAccount",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "Automation account name."
+          },
+          {
+            "name": "hybridRunbookWorkerGroupName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The hybrid runbook worker group name"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+		  "default": {
+            "description": "Automation error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        }
+      },
+      "get": {
+        "tags": [
+          "HybridRunbookWorkerGroups"
+        ],
+        "operationId": "HybridRunbookWorkerGroups_Get",
+        "description": "Retrieve a hybrid runbook worker group.",
+        "externalDocs": {
+          "url": "http://aka.ms/azureautomationsdk/hybridrunbookworkergroupoperations"
+        },
+        "parameters": [
+          {
+            "name": "automationAccount",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The automation account name."
+          },
+          {
+            "name": "hybridRunbookWorkerGroupName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The hybrid runbook worker group name"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/HybridRunbookWorkerGroup"
+            }
+          },
+		  "default": {
+            "description": "Automation error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        }
+      },
+      "patch": {
+        "tags": [
+          "HybridRunbookWorkerGroups"
+        ],
+        "operationId": "HybridRunbookWorkerGroups_Update",
+        "description": "Update a hybrid runbook worker group.",
+        "externalDocs": {
+          "url": "http://aka.ms/azureautomationsdk/hybridrunbookworkergroupoperations"
+        },
+        "parameters": [
+          {
+            "name": "automationAccount",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The automation account name."
+          },
+          {
+            "name": "hybridRunbookWorkerGroupName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The hybrid runbook worker group name"
+          },
+          {
+            "name": "parameters",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/HybridRunbookWorkerGroupUpdateParameters"
+            },
+            "description": "The hybrid runbook worker group"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/HybridRunbookWorkerGroup"
+            }
+          },
+		  "default": {
+            "description": "Automation error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Automation/automationAccounts/{automationAccount}/hybridRunbookWorkerGroups": {
+      "get": {
+        "tags": [
+          "HybridRunbookWorkerGroups"
+        ],
+        "operationId": "HybridRunbookWorkerGroups_List",
+        "description": "Retrieve a list of hybrid runbook worker groups.",
+        "externalDocs": {
+          "url": "http://aka.ms/azureautomationsdk/hybridrunbookworkergroupoperations"
+        },
+        "parameters": [
+          {
+            "name": "automationAccount",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The automation account name."
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/HybridRunbookWorkerGroupsListResult"
+            }
+          },
+		  "default": {
+            "description": "Automation error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "odata.nextLink"
+        }
+      }
+    }
+  },
+  "definitions": {
+	"HybridRunbookWorker": {
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "Gets or sets the worker machine name."
+        },
+        "ipAddress": {
+          "type": "string",
+          "description": "Gets or sets the assigned machine IP address."
+        },
+        "registrationTime": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Gets or sets the registration time of the worker machine."
+        }
+      },
+      "description": "Definition of hybrid runbook worker."
+    },
+    "HybridRunbookWorkerGroup": {
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "Gets or sets the id of the resource."
+        },
+        "name": {
+          "type": "string",
+          "description": "Gets or sets the name of the group."
+        },
+        "hybridRunbookWorkers": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/HybridRunbookWorker"
+          },
+          "description": "Gets or sets the list of hybrid runbook workers."
+        },
+        "credential": {
+          "$ref": "#/definitions/RunAsCredentialAssociationProperty",
+          "description": "Sets the credential of a worker group."
+        }
+      },
+      "description": "Definition of hybrid runbook worker group."
+    },
+    "HybridRunbookWorkerGroupsListResult": {
+      "properties": {
+        "value": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/HybridRunbookWorkerGroup"
+          },
+          "description": "Gets or sets a list of hybrid runbook worker groups."
+        },
+        "odata.nextLink": {
+          "type": "string",
+          "description": "Gets or sets the skip token."
+        },
+        "nextLink": {
+          "type": "string",
+          "description": "Gets or sets the next link."
+        }
+      },
+      "description": "The response model for the list hybrid runbook worker groups."
+    },
+    "HybridRunbookWorkerGroupUpdateParameters": {
+      "properties": {
+        "credential": {
+          "$ref": "#/definitions/RunAsCredentialAssociationProperty",
+          "description": "Sets the credential of a worker group."
+        }
+      },
+      "description": "Parameters supplied to the update operation."
+    },
+ 	"ErrorResponse": {
+      "type": "object",
+      "properties": {
+        "code": {
+          "description": "Error code",
+          "type": "string"
+        },
+        "message": {
+          "description": "Error message indicating why the operation failed.",
+          "type": "string"
+        }	
+      },
+	  "description": "Error response of an operation failure"
+    },
+	"RunAsCredentialAssociationProperty": {
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "Gets or sets the name of the credential."
+        }
+      },
+      "description": "Definition of runas credential to use for hybrid worker."
+    }
+  },
+  "parameters": {
+    "SubscriptionIdParameter": {
+      "name": "subscriptionId",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "description": "Gets subscription credentials which uniquely identify Microsoft Azure subscription. The subscription ID forms part of the URI for every service call."
+    },
+    "ApiVersionParameter": {
+      "name": "api-version",
+      "in": "query",
+      "required": true,
+      "type": "string",
+      "description": "Client Api Version."
+    },
+    "ResourceGroupNameParameter": {
+      "name": "resourceGroupName",
+      "in": "path",
+      "required": true,
+      "type": "string",
+	  "pattern": "^[-\\w\\._]+$",
+      "description": "The resource group name.",
+      "x-ms-parameter-location": "method"
+    }
+  }
+}

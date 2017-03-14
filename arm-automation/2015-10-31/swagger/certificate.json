@@ -1,0 +1,457 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "AutomationManagement",
+    "version": "2015-10-31"
+  },
+  "host": "management.azure.com",
+  "schemes": [
+    "https"
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "produces": [
+    "application/json"
+  ],
+  "paths": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Automation/automationAccounts/{automationAccount}/certificates/{certificateName}": {
+      "delete": {
+        "tags": [
+          "Certificates"
+        ],
+        "operationId": "Certificates_Delete",
+        "description": "Delete the certificate.",
+        "externalDocs": {
+          "url": "http://aka.ms/azureautomationsdk/certificateoperations"
+        },
+        "parameters": [
+          {
+            "name": "automationAccount",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The automation account name."
+          },
+          {
+            "name": "certificateName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of certificate."
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+		  "default": {
+            "description": "Automation error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        }
+      },
+      "get": {
+        "tags": [
+          "Certificates"
+        ],
+        "operationId": "Certificates_Get",
+        "description": "Retrieve the certificate identified by certificate name.",
+        "externalDocs": {
+          "url": "http://aka.ms/azureautomationsdk/certificateoperations"
+        },
+        "parameters": [
+          {
+            "name": "automationAccount",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The automation account name."
+          },
+          {
+            "name": "certificateName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of certificate."
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/Certificate"
+            }
+          },
+		  "default": {
+            "description": "Automation error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        }
+      },
+	  "put": {
+        "tags": [
+          "Certificates"
+        ],
+        "operationId": "Certificates_CreateOrUpdate",
+        "description": "Create a certificate.",
+        "externalDocs": {
+          "url": "http://aka.ms/azureautomationsdk/certificateoperations"
+        },
+        "parameters": [
+          {
+            "name": "automationAccount",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The automation account name."
+          },
+          {
+            "name": "certificateName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The parameters supplied to the create or update certificate operation."
+          },
+          {
+            "name": "parameters",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/CertificateCreateOrUpdateParameters"
+            },
+            "description": "The parameters supplied to the create or update certificate operation."
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": "Created",
+            "schema": {
+              "$ref": "#/definitions/Certificate"
+            }
+          },
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/Certificate"
+            }
+          },
+		  "default": {
+            "description": "Automation error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        }
+      },
+      "patch": {
+        "tags": [
+          "Certificates"
+        ],
+        "operationId": "Certificates_Update",
+        "description": "Update a certificate.",
+        "externalDocs": {
+          "url": "http://aka.ms/azureautomationsdk/certificateoperations"
+        },
+        "parameters": [
+          {
+            "name": "automationAccount",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The automation account name."
+          },
+          {
+            "name": "certificateName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The parameters supplied to the update certificate operation."
+          },
+          {
+            "name": "parameters",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/CertificateUpdateParameters"
+            },
+            "description": "The parameters supplied to the update certificate operation."
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+		  "default": {
+            "description": "Automation error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Automation/automationAccounts/{automationAccount}/certificates": {
+      "get": {
+        "tags": [
+          "Certificates"
+        ],
+        "operationId": "Certificates_List",
+        "description": "Retrieve a list of certificates.",
+        "externalDocs": {
+          "url": "http://aka.ms/azureautomationsdk/certificateoperations"
+        },
+        "parameters": [
+          {
+            "name": "automationAccount",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The automation account name."
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/CertificateListResult"
+            }
+          },
+		  "default": {
+            "description": "Automation error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    }
+  },
+  "definitions": {
+    "CertificateCreateOrUpdateProperties": {
+      "properties": {
+        "base64Value": {
+          "type": "string",
+          "description": "Gets or sets the base64 encoded value of the certificate."
+        },
+        "description": {
+          "type": "string",
+          "description": "Gets or sets the description of the certificate."
+        },
+        "thumbprint": {
+          "type": "string",
+          "description": "Gets or sets the thumbprint of the certificate."
+        },
+        "isExportable": {
+          "type": "boolean",
+          "description": "Gets or sets the is exportable flag of the certificate."
+        }
+      },
+      "required": [
+        "base64Value"
+      ],
+      "description": "The properties of the create certificate operation."
+    },
+    "CertificateCreateOrUpdateParameters": {
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "Gets or sets the name of the certificate."
+        },
+        "properties": {
+          "$ref": "#/definitions/CertificateCreateOrUpdateProperties",
+          "x-ms-client-flatten": true,
+          "description": "Gets or sets the properties of the certificate."
+        }
+      },
+      "required": [
+        "name",
+        "properties"
+      ],
+      "description": "The parameters supplied to the create or update or replace certificate operation."
+    },
+    "CertificateProperties": {
+      "properties": {
+        "thumbprint": {
+          "type": "string",
+          "description": "Gets or sets the thumbprint of the certificate."
+        },
+        "expiryTime": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Gets or sets the expiry time of the certificate."
+        },
+        "isExportable": {
+          "type": "boolean",
+          "description": "Gets or sets the is exportable flag of the certificate."
+        },
+        "creationTime": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Gets or sets the creation time."
+        },
+        "lastModifiedTime": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Gets or sets the last modified time."
+        },
+        "description": {
+          "type": "string",
+          "description": "Gets or sets the description."
+        }
+      },
+      "description": "Properties of the certificate."
+    },
+    "Certificate": {
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "Gets or sets the id of the resource."
+        },
+        "name": {
+          "type": "string",
+          "description": "Gets or sets the name of the certificate."
+        },
+        "properties": {
+          "$ref": "#/definitions/CertificateProperties",
+          "x-ms-client-flatten": true,
+          "description": "Gets or sets the properties of the certificate."
+        }
+      },
+      "description": "Definition of the certificate."
+    },
+    "CertificateListResult": {
+      "properties": {
+        "value": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Certificate"
+          },
+          "description": "Gets or sets a list of certificates."
+        },
+        "nextLink": {
+          "type": "string",
+          "description": "Gets or sets the next link."
+        }
+      },
+      "description": "The response model for the list certificate operation."	  
+    },
+    "CertificateUpdateProperties": {
+      "properties": {
+        "description": {
+          "type": "string",
+          "description": "Gets or sets the description of the certificate."
+        }
+      },
+      "description": "The properties of the update certificate operation"
+    },
+    "CertificateUpdateParameters": {
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "Gets or sets the name of the certificate."
+        },
+        "properties": {
+          "$ref": "#/definitions/CertificateUpdateProperties",
+          "x-ms-client-flatten": true,
+          "description": "Gets or sets the properties of the certificate."
+        }
+      },
+      "required": [
+        "name"
+      ],
+      "description": "The parameters supplied to the update certificate operation."
+    },
+	"ErrorResponse": {
+      "type": "object",
+      "properties": {
+        "code": {
+          "description": "Error code",
+          "type": "string"
+        },
+        "message": {
+          "description": "Error message indicating why the operation failed.",
+          "type": "string"
+        }	
+      },
+	  "description": "Error response of an operation failure"
+    }
+   },
+  "parameters": {
+    "SubscriptionIdParameter": {
+      "name": "subscriptionId",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "description": "Gets subscription credentials which uniquely identify Microsoft Azure subscription. The subscription ID forms part of the URI for every service call."
+    },
+    "ApiVersionParameter": {
+      "name": "api-version",
+      "in": "query",
+      "required": true,
+      "type": "string",
+      "description": "Client Api Version."
+    },
+    "ResourceGroupNameParameter": {
+      "name": "resourceGroupName",
+      "in": "path",
+      "required": true,
+      "type": "string",
+	  "pattern": "^[-\\w\\._]+$",
+      "description": "The resource group name.",
+      "x-ms-parameter-location": "method"
+    }
+  }
+}

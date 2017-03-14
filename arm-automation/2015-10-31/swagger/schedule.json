@@ -1,0 +1,916 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "AutomationManagement",
+    "version": "2015-10-31"
+  },
+  "host": "management.azure.com",
+  "schemes": [
+    "https"
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "produces": [
+    "application/json"
+  ],
+  "paths": {
+   "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Automation/automationAccounts/{automationAccount}/jobSchedules/{jobScheduleName}": {
+      "delete": {
+        "tags": [
+          "JobSchedules"
+        ],
+        "operationId": "JobSchedules_Delete",
+        "description": "Delete the job schedule identified by job schedule name.",
+        "externalDocs": {
+          "url": "http://aka.ms/azureautomationsdk/jobscheduleoperations"
+        },
+        "parameters": [
+          {
+            "name": "automationAccount",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The automation account name."
+          },
+          {
+            "name": "jobScheduleName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The job schedule name."
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+		  "default": {
+            "description": "Automation error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        }
+      },
+      "get": {
+        "tags": [
+          "JobSchedules"
+        ],
+        "operationId": "JobSchedules_Get",
+        "description": "Retrieve the job schedule identified by job schedule name.",
+        "externalDocs": {
+          "url": "http://aka.ms/azureautomationsdk/jobscheduleoperations"
+        },
+        "parameters": [
+          {
+            "name": "automationAccount",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The automation account name."
+          },
+          {
+            "name": "jobScheduleName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The job schedule name."
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/JobSchedule"
+            }
+          },
+		  "default": {
+            "description": "Automation error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        }
+      },
+	  "put": {
+        "tags": [
+          "JobSchedules"
+        ],
+        "operationId": "JobSchedules_Create",
+        "description": "Create a job schedule.",
+        "externalDocs": {
+          "url": "http://aka.ms/azureautomationsdk/jobscheduleoperations"
+        },
+        "parameters": [
+          {
+            "name": "automationAccount",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The automation account name."
+          },
+          {
+            "name": "jobScheduleName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "format": "uuid",
+            "description": "The job schedule name."
+          },
+          {
+            "name": "parameters",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/JobScheduleCreateParameters"
+            },
+            "description": "The parameters supplied to the create job schedule operation."
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": "Created",
+            "schema": {
+              "$ref": "#/definitions/JobSchedule"
+            }
+          },
+		  "default": {
+            "description": "Automation error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Automation/automationAccounts/{automationAccount}/jobSchedules": {
+      "get": {
+        "tags": [
+          "JobSchedules"
+        ],
+        "operationId": "JobSchedules_List",
+        "description": "Retrieve a list of job schedules.",
+        "externalDocs": {
+          "url": "http://aka.ms/azureautomationsdk/jobscheduleoperations"
+        },
+        "parameters": [
+          {
+            "name": "automationAccount",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The automation account name."
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/JobScheduleListResult"
+            }
+          },
+		  "default": {
+            "description": "Automation error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+   	"/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Automation/automationAccounts/{automationAccount}/schedules/{scheduleName}": {
+      "put": {
+        "tags": [
+          "Schedules"
+        ],
+        "operationId": "Schedules_CreateOrUpdate",
+        "description": "Create a schedule.",
+        "externalDocs": {
+          "url": "http://aka.ms/azureautomationsdk/scheduleoperations"
+        },
+        "parameters": [
+          {
+            "name": "automationAccount",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The automation account name."
+          },
+          {
+            "name": "scheduleName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The schedule name."
+          },
+          {
+            "name": "parameters",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/ScheduleCreateOrUpdateParameters"
+            },
+            "description": "The parameters supplied to the create or update schedule operation."
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/Schedule"
+            }
+          },
+          "201": {
+            "description": "Created",
+            "schema": {
+              "$ref": "#/definitions/Schedule"
+            }
+          },
+		  "default": {
+            "description": "Automation error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        }
+      },
+      "patch": {
+        "tags": [
+          "Schedules"
+        ],
+        "operationId": "Schedules_Update",
+        "description": "Update the schedule identified by schedule name.",
+        "externalDocs": {
+          "url": "http://aka.ms/azureautomationsdk/scheduleoperations"
+        },
+        "parameters": [
+          {
+            "name": "automationAccount",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The automation account name."
+          },
+          {
+            "name": "scheduleName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The schedule name."
+          },
+          {
+            "name": "parameters",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/ScheduleUpdateParameters"
+            },
+            "description": "The parameters supplied to the update schedule operation."
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+		  "default": {
+            "description": "Automation error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        }
+      },
+	  "get": {
+        "tags": [
+          "Schedules"
+        ],
+        "operationId": "Schedules_Get",
+        "description": "Retrieve the schedule identified by schedule name.",
+        "externalDocs": {
+          "url": "http://aka.ms/azureautomationsdk/scheduleoperations"
+        },
+        "parameters": [
+          {
+            "name": "automationAccount",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The automation account name."
+          },
+          {
+            "name": "scheduleName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The schedule name."
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/Schedule"
+            }
+          },
+		  "default": {
+            "description": "Automation error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "Schedules"
+        ],
+        "operationId": "Schedules_Delete",
+        "description": "Delete the schedule identified by schedule name.",
+        "externalDocs": {
+          "url": "http://aka.ms/azureautomationsdk/scheduleoperations"
+        },
+        "parameters": [
+          {
+            "name": "automationAccount",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The automation account name."
+          },
+          {
+            "name": "scheduleName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The schedule name."
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+		  "default": {
+            "description": "Automation error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Automation/automationAccounts/{automationAccount}/schedules": {
+      "get": {
+        "tags": [
+          "Schedules"
+        ],
+        "operationId": "Schedules_List",
+        "description": "Retrieve a list of schedules.",
+        "externalDocs": {
+          "url": "http://aka.ms/azureautomationsdk/scheduleoperations"
+        },
+        "parameters": [
+          {
+            "name": "automationAccount",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The automation account name."
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/ScheduleListResult"
+            }
+          },
+		  "default": {
+            "description": "Automation error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    }
+  },
+  "definitions": {
+    "JobScheduleCreateProperties": {
+      "properties": {
+        "schedule": {
+          "$ref": "#/definitions/ScheduleAssociationProperty",
+          "description": "Gets or sets the schedule."
+        },
+        "runbook": {
+          "$ref": "#/definitions/RunbookAssociationProperty",
+          "description": "Gets or sets the runbook."
+        },
+        "runOn": {
+          "type": "string",
+          "description": "Gets or sets the hybrid worker group that the scheduled job should run on."
+        },
+        "parameters": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          },
+          "description": "Gets or sets a list of job properties."
+        }
+      },
+      "required": [
+        "schedule",
+        "runbook"
+      ],
+      "description": "The parameters supplied to the create job schedule operation."
+    },
+    "JobScheduleCreateParameters": {
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/JobScheduleCreateProperties",
+          "x-ms-client-flatten": true,
+          "description": "Gets or sets the list of job schedule properties."
+        }
+      },
+      "required": [
+        "properties"
+      ],
+      "description": "The parameters supplied to the create job schedule operation."
+    },
+    "JobScheduleProperties": {
+      "properties": {
+        "jobScheduleId": {
+          "type": "string",
+          "description": "Gets or sets the id of job schedule."
+        },
+        "schedule": {
+          "$ref": "#/definitions/ScheduleAssociationProperty",
+          "description": "Gets or sets the schedule."
+        },
+        "runbook": {
+          "$ref": "#/definitions/RunbookAssociationProperty",
+          "description": "Gets or sets the runbook."
+        },
+        "runOn": {
+          "type": "string",
+          "description": "Gets or sets the hybrid worker group that the scheduled job should run on."
+        },
+        "parameters": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          },
+          "description": "Gets or sets the parameters of the job schedule."
+        }
+      },
+      "description": "Definition of job schedule parameters."
+    },
+    "JobSchedule": {
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "Gets or sets the id of the resource."
+        },
+        "properties": {
+          "$ref": "#/definitions/JobScheduleProperties",
+          "x-ms-client-flatten": true,
+          "description": "Gets or sets the properties of the job schedule."
+        }
+      },
+      "description": "Definition of the job schedule."
+    },
+    "JobScheduleListResult": {
+      "properties": {
+        "value": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/JobSchedule"
+          },
+          "description": "Gets or sets a list of job schedules."
+        },
+        "odata.nextLink": {
+          "type": "string",
+          "description": "Gets or sets the skip token."
+        },
+        "nextLink": {
+          "type": "string",
+          "description": "Gets or sets the next link."
+        }
+      },
+      "description": "The response model for the list job schedule operation."
+    },
+	"AdvancedScheduleMonthlyOccurrence": {
+      "properties": {
+        "occurrence": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Occurrence of the week within the month. Must be between 1 and 5"
+        },
+        "day": {
+          "type": "string",
+          "description": "Day of the occurrence. Must be one of monday, tuesday, wednesday,thursday, friday, saturday, sunday.",
+          "enum": [
+            "Monday",
+            "Tuesday",
+            "Wednesday",
+            "Thursday",
+            "Friday",
+            "Saturday",
+            "Sunday"
+          ],
+          "x-ms-enum": {
+            "name": "ScheduleDay",
+            "modelAsString": true
+          }
+        }
+      },
+      "description": "The properties of the create advanced schedule monthly occurrence."
+    },
+    "AdvancedSchedule": {
+      "properties": {
+        "weekDays": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "description": "Days of the week that the job should execute on."
+        },
+        "monthDays": {
+          "type": "array",
+          "items": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "description": "Days of the month that the job should execute on. Must be between 1 and 31."
+        },
+        "monthlyOccurrences": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/AdvancedScheduleMonthlyOccurrence"
+          },
+          "description": "Occurrences of days within a month."
+        }
+      },
+      "description": "The properties of the create Advanced Schedule."
+    },
+    "ScheduleCreateOrUpdateProperties": {
+      "properties": {
+        "description": {
+          "type": "string",
+          "description": "Gets or sets the description of the schedule."
+        },
+        "startTime": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Gets or sets the start time of the schedule."
+        },
+        "expiryTime": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Gets or sets the end time of the schedule."
+        },
+        "interval": {
+          "description": "Gets or sets the interval of the schedule."
+        },
+        "frequency": {
+          "type": "string",
+          "description": "Gets or sets the frequency of the schedule.",
+          "enum": [
+            "OneTime",
+            "Day",
+            "Hour",
+            "Week",
+            "Month"
+          ],
+          "x-ms-enum": {
+            "name": "ScheduleFrequency",
+            "modelAsString": true
+          }
+        },
+        "timeZone": {
+          "type": "string",
+          "description": "Gets or sets the time zone of the schedule."
+        },
+        "advancedSchedule": {
+          "$ref": "#/definitions/AdvancedSchedule",
+          "description": "Gets or sets the AdvancedSchedule."
+        }
+      },
+      "required": [
+        "startTime",
+        "frequency"
+      ],
+      "description": "The parameters supplied to the create or update schedule operation."
+    },
+    "ScheduleCreateOrUpdateParameters": {
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "Gets or sets the name of the schedule."
+        },
+        "properties": {
+          "$ref": "#/definitions/ScheduleCreateOrUpdateProperties",
+          "x-ms-client-flatten": true,
+          "description": "Gets or sets the list of schedule properties."
+        }
+      },
+      "required": [
+        "name",
+        "properties"
+      ],
+      "description": "The parameters supplied to the create or update schedule operation."
+    },
+    "ScheduleProperties": {
+      "properties": {
+        "startTime": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Gets or sets the start time of the schedule."
+        },
+        "startTimeOffsetMinutes": {
+          "readOnly": true,
+          "type": "number",
+          "format": "double",
+          "description": "Gets the start time's offset in minutes."
+        },
+        "expiryTime": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Gets or sets the end time of the schedule."
+        },
+        "expiryTimeOffsetMinutes": {
+          "type": "number",
+          "format": "double",
+          "description": "Gets or sets the expiry time's offset in minutes."
+        },
+        "isEnabled": {
+          "type": "boolean",
+          "description": "Gets or sets a value indicating whether this schedule is enabled."
+        },
+        "nextRun": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Gets or sets the next run time of the schedule."
+        },
+        "nextRunOffsetMinutes": {
+          "type": "number",
+          "format": "double",
+          "description": "Gets or sets the next run time's offset in minutes."
+        },
+        "interval": {
+          "description": "Gets or sets the interval of the schedule."
+        },
+        "frequency": {
+          "type": "string",
+          "description": "Gets or sets the frequency of the schedule.",
+          "enum": [
+            "OneTime",
+            "Day",
+            "Hour",
+            "Week",
+            "Month"
+          ],
+          "x-ms-enum": {
+            "name": "ScheduleFrequency",
+            "modelAsString": true
+          }
+        },
+        "timeZone": {
+          "type": "string",
+          "description": "Gets or sets the time zone of the schedule."
+        },
+        "advancedSchedule": {
+          "$ref": "#/definitions/AdvancedSchedule",
+          "description": "Gets or sets the advanced schedule."
+        },
+        "creationTime": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Gets or sets the creation time."
+        },
+        "lastModifiedTime": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Gets or sets the last modified time."
+        },
+        "description": {
+          "type": "string",
+          "description": "Gets or sets the description."
+        }
+      },
+      "description": "Definition of schedule parameters."
+    },
+    "Schedule": {
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "Gets or sets the id of the resource."
+        },
+        "name": {
+          "type": "string",
+          "description": "Gets or sets the name of the schedule."
+        },
+        "properties": {
+          "$ref": "#/definitions/ScheduleProperties",
+          "x-ms-client-flatten": true,
+          "description": "Gets or sets the properties of the schedule."
+        }
+      },
+      "description": "Definition of the schedule."
+    },
+    "ScheduleUpdateProperties": {
+      "properties": {
+        "description": {
+          "type": "string",
+          "description": "Gets or sets the description of the schedule."
+        },
+        "isEnabled": {
+          "type": "boolean",
+          "description": "Gets or sets a value indicating whether this schedule is enabled."
+        }
+      },
+      "description": "The parameters supplied to the update schedule operation."
+    },
+    "ScheduleUpdateParameters": {
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "Gets or sets the name of the schedule."
+        },
+        "properties": {
+          "$ref": "#/definitions/ScheduleUpdateProperties",
+          "x-ms-client-flatten": true,
+          "description": "Gets or sets the list of schedule properties."
+        }
+      },
+      "required": [
+        "name"
+      ],
+      "description": "The parameters supplied to the update schedule operation."
+    },
+    "ScheduleListResult": {
+      "properties": {
+        "value": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Schedule"
+          },
+          "description": "Gets or sets a list of schedules."
+        },
+        "odata.nextLink": {
+          "type": "string",
+          "description": "Gets or sets the skip token."
+        },
+        "nextLink": {
+          "type": "string",
+          "description": "Gets or sets the next link."
+        }
+      },
+      "description": "The response model for the list schedule operation."
+    },
+	"ScheduleAssociationProperty": {
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "Gets or sets the name of the schedule."
+        }
+      },
+      "description": "The schedule property associated with the entity."
+    },
+    "RunbookAssociationProperty": {
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "Gets or sets the name of the runbook."
+        }
+      },
+      "description": "The runbook property associated with the entity."
+    },
+   	"ErrorResponse": {
+      "type": "object",
+      "properties": {
+        "code": {
+          "description": "Error code",
+          "type": "string"
+        },
+        "message": {
+          "description": "Error message indicating why the operation failed.",
+          "type": "string"
+        }	
+      },
+	  "description": "Error response of an operation failure"
+    }
+  },
+  "parameters": {
+    "SubscriptionIdParameter": {
+      "name": "subscriptionId",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "description": "Gets subscription credentials which uniquely identify Microsoft Azure subscription. The subscription ID forms part of the URI for every service call."
+    },
+    "ApiVersionParameter": {
+      "name": "api-version",
+      "in": "query",
+      "required": true,
+      "type": "string",
+      "description": "Client Api Version."
+    },
+    "ResourceGroupNameParameter": {
+      "name": "resourceGroupName",
+      "in": "path",
+      "required": true,
+      "type": "string",
+	  "pattern": "^[-\\w\\._]+$",
+      "description": "The resource group name.",
+      "x-ms-parameter-location": "method"
+    }
+  }
+}

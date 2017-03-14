@@ -89,7 +89,7 @@
             "in": "body",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/AutomationAccountCreateOrUpdateParameters"
+				"$ref": "#/definitions/AutomationAccountCreateOrUpdateParameters"
             },
             "description": "Parameters supplied to the create or update automation account."
           },
@@ -314,6 +314,145 @@
           "nextLinkName": null
         }
       }
+    },
+	"/{subscriptionId}/operations/{requestId}": {
+      "get": {
+        "operationId": "GetOperationStatus",
+        "description": "The Get Operation Status operation returns the status of thespecified operation. After calling an asynchronous operation, you can call Get Operation Status to determine whether the operation has succeeded, failed, or is still in progress.",
+        "externalDocs": {
+          "url": "http://msdn.microsoft.com/en-us/library/windowsazure/ee460783.aspx"
+        },
+        "parameters": [
+          {
+            "name": "requestId",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The request ID for the request you wish to track. The request ID is returned in the x-ms-request-id response header for every request."
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        }
+      }
+    },
+	"/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Automation/automationAccounts/{automationAccount}/statistics": {
+      "get": {
+        "tags": [
+          "Statistics"
+        ],
+        "operationId": "Statistics_List",
+        "description": "Retrieve the statistics for the account.",
+        "externalDocs": {
+          "url": "http://aka.ms/azureautomationsdk/statisticsoperations"
+        },
+        "parameters": [
+          {
+            "name": "automationAccount",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The automation account name."
+          },
+          {
+            "name": "$filter",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "description": "The filter to apply on the operation."
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/StatisticsListResult"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": null
+        }
+      }
+    },
+	"/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Automation/automationAccounts/{automationAccount}/usages": {
+      "get": {
+        "tags": [
+          "Usages"
+        ],
+        "operationId": "Usages_List",
+        "description": "Retrieve the usage for the account id.",
+        "externalDocs": {
+          "url": "http://aka.ms/azureautomationsdk/usageoperations"
+        },
+        "parameters": [
+          {
+            "name": "automationAccount",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The automation account name."
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/UsageListResult"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": null
+        }
+      }
     }
   },
   "definitions": {
@@ -321,7 +460,7 @@
       "properties": {
         "name": {
           "type": "string",
-          "description": "Gets or sets the SKU (pricing tier) of the account.",
+          "description": "Gets or sets the SKU name of the account.",
           "enum": [
             "Free",
             "Basic"
@@ -576,6 +715,98 @@
         }	
       },
 	  "description": "Error response of an operation failure"
+    },
+	"Statistics": {
+      "properties": {
+        "counterProperty": {
+          "type": "string",
+          "description": "Gets or sets the property value of the statistic."
+        },
+        "counterValue": {
+          "type": "integer",
+          "format": "int64",
+          "description": "Gets or sets the value of the statistic."
+        },
+        "startTime": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Gets or sets the startTime of the statistic."
+        },
+        "endTime": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Gets or sets the endTime of the statistic."
+        },
+        "id": {
+          "type": "string",
+          "description": "Gets or sets the id."
+        }
+      },
+      "description": "Definition of the statistic."
+    },
+    "StatisticsListResult": {
+      "properties": {
+        "value": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Statistics"
+          },
+          "description": "Gets or sets a list of statistics."
+        }
+      },
+      "description": "The response model for the list statistics operation."
+    },
+	"Usage": {
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "Gets or sets the id of the resource."
+        },
+        "name": {
+          "$ref": "#/definitions/UsageCounterName",
+          "description": "Gets or sets the usage counter name."
+        },
+        "unit": {
+          "type": "string",
+          "description": "Gets or sets the usage unit name."
+        },
+        "currentValue": {
+          "type": "number",
+          "format": "double",
+          "description": "Gets or sets the current usage value."
+        },
+        "limit": {
+          "type": "integer",
+          "format": "int64",
+          "description": "Gets or sets max limit. -1 for unlimited"
+        }
+      },
+      "description": "Definition of Usage."
+    },
+	"UsageCounterName": {
+      "properties": {
+        "value": {
+          "type": "string",
+          "description": "Gets or sets the usage counter name."
+        },
+        "localizedValue": {
+          "type": "string",
+          "description": "Gets or sets the localized usage counter name."
+        }
+      },
+      "description": "Definition of usage counter name."
+    },
+    "UsageListResult": {
+      "properties": {
+        "value": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Usage"
+          },
+          "description": "Gets or sets usage."
+        }
+      },
+      "description": "The response model for the get usage operation."
     }
   },
   "parameters": {
