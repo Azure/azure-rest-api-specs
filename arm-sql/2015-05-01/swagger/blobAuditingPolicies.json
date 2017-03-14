@@ -1,0 +1,657 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "SqlManagementClient",
+    "description": "The Azure SQL Database management API provides a RESTful set of web APIs that interact with Azure SQL Database services to manage your databases. The API enables users to create, retrieve, update, and delete databases, servers, and other entities.",
+    "version": "2015-05-01-preview"
+  },
+  "host": "management.azure.com",
+  "schemes": [
+    "https"
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "produces": [
+    "application/json"
+  ],
+  "paths": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/servers/{serverName}/databases/{databaseName}/auditingSettings/{blobAuditingPolicyName}": {
+      "get": {
+        "tags": [
+          "DatabaseBlobAuditingPolicies"
+        ],
+        "description": "Get a blob auditing policy associated with an Azure SQL database.",
+        "operationId": "DatabaseBlobAuditingPolicies_Get",
+        "x-ms-examples": {
+          "Get database blob auditing policy": { "$ref": "../examples/DatabaseBlobAuditingGet.json" }
+        },
+        "parameters": [
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupParameter"
+          },
+          {
+            "name": "serverName",
+            "in": "path",
+            "description": "The name of the Azure SQL Database Server on which the Azure SQL Database is hosted.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "databaseName",
+            "in": "path",
+            "description": "The name of the Azure SQL database for which database blob audit policy is defined.",
+            "required": true,
+            "type": "string"
+          },
+            {
+                "name": "blobAuditingPolicyName",
+                "in": "path",
+                "description": "The name of the blob auditing policy. Default is the currently value to use.",
+                "required": true,
+                "type": "string"
+            },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successfully retrieved the database blob auditing policy.",
+            "schema": {
+              "$ref": "#/definitions/DatabaseBlobAuditingPolicyResource"
+            }
+          },
+          "default": {
+            "description": "*** Error Responses: ***\n\n * 400 InvalidDatabaseBlobAuditingPolicyCreateRequest - The create database blob auditing policy request does not exist or has no properties object.\n\n * 400 InvalidBlobAuditActionsAndGroups - Invalid audit actions or action groups.\n\n * 400 DataSecurityInvalidUserSuppliedParameter - An invalid parameter value was provided by the client.\n\n * 404 SubscriptionDoesNotHaveServer - The requested server was not found\n\n * 404 SourceDatabaseNotFound - The source database does not exist.\n\n * 500 DatabaseIsUnavailable - Loading failed. Please try again later.\n\n * 500 GetBlobAuditingPolicyFailed - Failed to get Auditing settings"
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "DatabaseBlobAuditingPolicies"
+        ],
+        "description": "Creates or updates a blob auditing policy for an Azure SQL database.",
+        "operationId": "DatabaseBlobAuditingPolicies_CreateOrUpdate",
+        "x-ms-examples": {
+          "Create database blob auditing policy min": { "$ref": "../examples/DatabaseBlobAuditingCreateMin.json" },
+          "Create database blob auditing policy max": { "$ref": "../examples/DatabaseBlobAuditingCreateMax.json" }
+        },
+        "parameters": [
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupParameter"
+          },
+          {
+            "name": "serverName",
+            "in": "path",
+            "description": "The name of the Azure SQL Database Server on which the Azure SQL Database is hosted.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "databaseName",
+            "in": "path",
+            "description": "The name of the Azure SQL database for which database blob audit policy will be defined.",
+            "required": true,
+            "type": "string"
+          },
+            {
+                "name": "blobAuditingPolicyName",
+                "in": "path",
+                "description": "The name of the blob auditing policy. Default is the currently value to use.",
+                "required": true,
+                "type": "string"
+            },
+          {
+            "name": "databaseBlobAuditingPolicy",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/DatabaseBlobAuditingPolicyResource"
+            }
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successfully set the database blob auditing policy.",
+            "schema": {
+              "$ref": "#/definitions/DatabaseBlobAuditingPolicyResource"
+            }
+          },
+          "201": {
+            "description": "Successfully created the database blob auditing policy.",
+            "schema": {
+              "$ref": "#/definitions/DatabaseBlobAuditingPolicyResource"
+            }
+          },
+          "default": {
+            "description": "*** Error Responses: ***\n\n * 400 InvalidDatabaseBlobAuditingPolicyCreateRequest - The create database blob auditing policy request does not exist or has no properties object.\n\n * 400 InvalidBlobAuditActionsAndGroups - Invalid audit actions or action groups.\n\n * 400 DataSecurityInvalidUserSuppliedParameter - An invalid parameter value was provided by the client.\n\n * 404 SubscriptionDoesNotHaveServer - The requested server was not found\n\n * 404 SourceDatabaseNotFound - The source database does not exist.\n\n * 500 DatabaseIsUnavailable - Loading failed. Please try again later.\n\n * 500 UpsertBlobAuditingPolicyFailed - An error has occurred while saving Auditing settings, please try again later"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/servers/{serverName}/auditingSettings/{blobAuditingPolicyName}/operationResults/{operationId}": {
+      "get": {
+        "tags": [
+          "ServerBlobAuditingOperationResults"
+        ],
+        "description": "Get the active server blob auditing operation result.",
+        "operationId": "ServerBlobAuditingOperationResult_Get",
+        "x-ms-examples": {
+          "Get server blob auditing operation result": { "$ref": "../examples/ServerBlobAuditingOperationResult.json" }
+        },
+        "parameters": [
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupParameter"
+          },
+          {
+            "name": "serverName",
+            "in": "path",
+            "description": "The name of the Azure SQL server for which server blob audit policy is defined.",
+            "required": true,
+            "type": "string"
+          },
+            {
+                "name": "blobAuditingPolicyName",
+                "in": "path",
+                "description": "The name of the blob auditing policy. Default is the currently value to use.",
+                "required": true,
+                "type": "string"
+            },
+          {
+            "name": "operationId",
+            "in": "path",
+            "description": "The server blob auditing operation id to retrieve.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successfully retrieved the server blob auditing operation results.",
+            "schema": {
+              "$ref": "#/definitions/BlobAuditingOperationResultResource"
+            }
+          },
+          "default": {
+            "description": "*** Error Responses: ***\n\n * 404 SubscriptionDoesNotHaveServer - The requested server was not found\n\n * 404 OperationIdNotFound - The operation with Id does not exist.\n\n * 405 ServerBlobAuditingOperationResultsNotImplemented - Operations on Server Auditing operation results are not enabled yet\n\n * 500 GetServerBlobAuditingOperationResultsFailed - Failed to get Auditing operation results"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/servers/{serverName}/auditingSettings/{blobAuditingPolicyName}/operationResults": {
+      "get": {
+        "tags": [
+          "ServerBlobAuditingOperationResults"
+        ],
+        "description": "Get a list of server blob auditing operation results.",
+        "operationId": "ServerBlobAuditingOperationResultsList_Get",
+        "x-ms-examples": {
+          "Get server blob auditing operation results": { "$ref": "../examples/ServerBlobAuditingOperationResultsList.json" }
+        },
+        "parameters": [
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupParameter"
+          },
+          {
+            "name": "serverName",
+            "in": "path",
+            "description": "The name of the Azure SQL server for which server blob audit policy is defined.",
+            "required": true,
+            "type": "string"
+          },
+            {
+                "name": "blobAuditingPolicyName",
+                "in": "path",
+                "description": "The name of the blob auditing policy. Default is the currently value to use.",
+                "required": true,
+                "type": "string"
+            },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successfully retrieved the server blob auditing operation results.",
+            "schema": {
+              "$ref": "#/definitions/BlobAuditingOperationListResult"
+            }
+          },
+          "default": {
+            "description": "*** Error Responses: ***\n\n * 404 SubscriptionDoesNotHaveServer - The requested server was not found\n\n * 404 OperationIdNotFound - The operation with Id does not exist.\n\n * 405 ServerBlobAuditingOperationResultsNotImplemented - Operations on Server Auditing operation results are not enabled yet\n\n * 500 GetServerBlobAuditingOperationResultsFailed - Failed to get Auditing operation results"
+          }
+        }
+      }
+    },
+   "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/servers/{serverName}/auditingSettings/{blobAuditingPolicyName}": {
+      "get": {
+        "tags": [
+          "ServerBlobAuditingPolicies"
+        ],
+        "description": "Get a blob auditing policy associated with an Azure SQL server.",
+        "operationId": "ServerBlobAuditingPolicies_Get",
+        "x-ms-examples": {
+          "Get server blob auditing policy": { "$ref": "../examples/ServerBlobAuditingGet.json" }
+        },
+        "parameters": [
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupParameter"
+          },
+          {
+            "name": "serverName",
+            "in": "path",
+            "description": "The name of the Azure SQL server for which server blob audit policy is defined.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "blobAuditingPolicyName",
+            "in": "path",
+            "description": "The name of the blob auditing policy. Default is the currently value to use.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successfully retrieved the server blob auditing policy.",
+            "schema": {
+              "$ref": "#/definitions/ServerBlobAuditingPolicyResource"
+            }
+          },
+          "default": {
+            "description": "*** Error Responses: ***\n\n * 400 InvalidServerBlobAuditingPolicyCreateRequest - The create server blob auditing policy request does not exist or has no properties object.\n\n * 400 InvalidBlobAuditActionsAndGroups - Invalid audit actions or action groups.\n\n * 400 DataSecurityInvalidUserSuppliedParameter - An invalid parameter value was provided by the client.\n\n * 404 SubscriptionDoesNotHaveServer - The requested server was not found\n\n * 405 ServerBlobAuditingPolicyNotImplemented - Operations on Server Auditing settings are not enabled yet\n\n * 500 GetBlobAuditingPolicyFailed - Failed to get Auditing settings"
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "ServerBlobAuditingPolicies"
+        ],
+        "description": "Creates or updates a blob auditing policy for an Azure SQL server.",
+        "operationId": "ServerBlobAuditingPolicies_CreateOrUpdate",
+        "x-ms-examples": {
+          "Create server blob auditing policy min": { "$ref": "../examples/ServerBlobAuditingCreateMin.json" },
+          "Create server blob auditing policy max": { "$ref": "../examples/ServerBlobAuditingCreateMax.json" }
+        },
+        "parameters": [
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupParameter"
+          },
+          {
+            "name": "serverName",
+            "in": "path",
+            "description": "The name of the Azure SQL server for which server blob audit policy will be defined.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "blobAuditingPolicyName",
+            "in": "path",
+            "description": "The name of the blob auditing policy. Default is the currently value to use.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "serverBlobAuditingPolicy",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/ServerBlobAuditingPolicyResource"
+            }
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/ServerBlobAuditingPolicyResource"
+            }
+          },
+          "202": {
+            "description": "Successfully set the server blob auditing policy.",
+            "schema": {}
+          },
+          "default": {
+            "description": "*** Error Responses: ***\n\n * 400 InvalidServerBlobAuditingPolicyCreateRequest - The create server blob auditing policy request does not exist or has no properties object.\n\n * 400 InvalidBlobAuditActionsAndGroups - Invalid audit actions or action groups.\n\n * 400 DataSecurityInvalidUserSuppliedParameter - An invalid parameter value was provided by the client.\n\n * 404 SubscriptionDoesNotHaveServer - The requested server was not found\n\n * 405 ServerBlobAuditingPolicyNotImplemented - Operations on Server Auditing settings are not enabled yet\n\n * 500 UpsertBlobAuditingPolicyFailed - An error has occurred while saving Auditing settings, please try again later"
+          }
+        },
+        "x-ms-long-running-operation": true
+      }
+    }
+  },
+  "definitions": {
+    "DatabaseBlobAuditingPolicyResource": {
+      "description": "Contains information about an Azure SQL Database Blob Auditing policy.",
+      "type": "object",
+      "properties": {
+        "id": {
+          "description": "The resource ID",
+          "type": "string"
+        },
+        "name": {
+          "description": "The name of the resource",
+          "type": "string"
+        },
+        "type": {
+          "description": "The resource type",
+          "type": "string"
+        },
+        "location": {
+          "description": "The location the resource resides in",
+          "type": "string"
+        },
+        "sku": {
+          "$ref": "#/definitions/ArmResourceSku"
+        },
+        "kind": {
+          "description":  "The attributes of the entity that drives portal UI",
+          "enum": [
+              "None",
+              "V2",
+              "V12",
+              "User",
+              "System",
+              "Datawarehouse"
+          ],
+          "type": "string"
+        },
+        "tags": {
+          "description": "the tags assigned to the resource",
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          }
+        },
+        "properties": {
+          "$ref": "#/definitions/DatabaseBlobAuditingPolicyResourceProperties"
+        }
+      }
+    },
+    "ArmResourceSku": {
+      "description": "Represents an ARM Resource SKU.",
+      "type": "object",
+      "properties": {
+        "name": {
+          "description": "The name of the SKU, typically, a letter + Number code, e.g. P3.",
+          "type": "string"
+        },
+        "tier": {
+          "description": "The tier of the particular SKU, e.g. Basic, Premium.",
+          "type": "string"
+        },
+        "size": {
+          "description": "the size code, to be interpreted by resource as appropriate",
+          "type": "string"
+        },
+        "family": {
+          "description": "the family of hardware",
+          "type": "string"
+        },
+        "capacity": {
+          "description": "the scale up/out capacity",
+          "format": "int32",
+          "type": "integer"
+        }
+      }
+    },
+    "DatabaseBlobAuditingPolicyResourceProperties": {
+      "description": "Properties for an Azure SQL Database Blob Auditing policy.",
+      "type": "object",
+      "properties": {
+        "state": {
+          "description": "Specifies the state of the policy. Options are Enabled or Disabled",
+          "type": "string"
+        },
+        "storageEndpoint": {
+          "description": "Specifies the blob storage endpoint (e.g. https://MyAccount.blob.core.windows.net)",
+          "type": "string"
+        },
+        "storageAccountAccessKey": {
+          "description": "Specifies the identifier key of the auditing storage account.",
+          "type": "string"
+        },
+        "retentionDays": {
+          "format": "int32",
+          "description": "Specifies the number of days to keep in the audit logs.",
+          "type": "integer"
+        },
+        "auditActionsAndGroups": {
+          "description": "Specifies the Actions and Actions-Groups to audit.",
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "storageAccountSubscriptionId": {
+          "description": "Specifies the blob storage subscription Id.",
+          "type": "string"
+        },
+        "isStorageSecondaryKeyInUse": {
+          "description": "Specifies whether storageAccountAccessKey value is the storage’s secondary key.",
+          "type": "boolean"
+        }
+      }
+    },
+    "BlobAuditingOperationListResult": {
+      "type": "object",
+      "properties": {
+        "value": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/BlobAuditingOperationResultResource"
+          }
+        },
+        "nextLink": {
+          "type": "string"
+        }
+      }
+    },
+    "BlobAuditingOperationResultResource": {
+      "description": "Contains information about an Azure SQL Server Blob Auditing policy operation result.",
+      "type": "object",
+      "properties": {
+        "id": {
+          "description": "The resource ID",
+          "type": "string"
+        },
+        "name": {
+          "description": "The name of the resource",
+          "type": "string"
+        },
+        "type": {
+          "description": "The resource type",
+          "type": "string"
+        },
+        "location": {
+          "description": "The location the resource resides in",
+          "type": "string"
+        },
+        "sku": {
+          "$ref": "#/definitions/ArmResourceSku"
+        },
+        "kind": {
+          "description": "The attributes of the entity that drives portal UI",
+          "enum": [
+            "None",
+            "V2",
+            "V12",
+            "User",
+            "System",
+            "Datawarehouse"
+          ],
+          "type": "string"
+        },
+        "tags": {
+          "description": "the tags assigned to the resource",
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          }
+        },
+        "properties": {
+          "$ref": "#/definitions/BlobAuditingOperationResultResourceProperties"
+        }
+      }
+    },
+    "BlobAuditingOperationResultResourceProperties": {
+      "description": "Properties for an Azure SQL Database Blob Auditing operation result.",
+      "type": "object",
+      "properties": {
+        "operationId": {
+          "description": "Specifies the Blob Auditing operation ID",
+          "type": "string"
+        },
+        "state": {
+          "description": "Specifies the state of the Blob Auditing operation.",
+          "type": "string"
+        },
+        "startTime": {
+          "description": "Specifies the start time of the Blob Auditing operation.",
+          "type": "string"
+        }
+      }
+    },
+    "ServerBlobAuditingPolicyResource": {
+      "description": "Contains information about an Azure SQL Server Blob Auditing policy.",
+      "type": "object",
+      "properties": {
+        "id": {
+          "description": "The resource ID",
+          "type": "string"
+        },
+        "name": {
+          "description": "The name of the resource",
+          "type": "string"
+        },
+        "type": {
+          "description": "The resource type",
+          "type": "string"
+        },
+        "location": {
+          "description": "The location the resource resides in",
+          "type": "string"
+        },
+        "sku": {
+          "$ref": "#/definitions/ArmResourceSku"
+        },
+        "kind": {
+          "description": "The attributes of the entity that drives portal UI",
+          "enum": [
+            "None",
+            "V2",
+            "V12",
+            "User",
+            "System",
+            "Datawarehouse"
+          ],
+          "type": "string"
+        },
+        "tags": {
+          "description": "the tags assigned to the resource",
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          }
+        },
+        "properties": {
+          "$ref": "#/definitions/ServerBlobAuditingPolicyResourceProperties"
+        }
+      }
+    },
+    "ServerBlobAuditingPolicyResourceProperties": {
+      "description": "Properties for an Azure SQL Server Blob Auditing policy.",
+      "type": "object",
+      "properties": {
+        "state": {
+          "description": "Specifies the state of the policy. Options are Enabled or Disabled",
+          "type": "string"
+        },
+        "storageEndpoint": {
+          "description": "Specifies the blob storage endpoint (e.g. https://MyAccount.blob.core.windows.net)",
+          "type": "string"
+        },
+        "storageAccountAccessKey": {
+          "description": "Specifies the identifier key of the auditing storage account.",
+          "type": "string"
+        },
+        "retentionDays": {
+          "format": "int32",
+          "description": "Specifies the number of days to keep in the audit logs.",
+          "type": "integer"
+        },
+        "auditActionsAndGroups": {
+          "description": "Specifies the Actions and Actions-Groups to audit.",
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "storageAccountSubscriptionId": {
+          "description": "Specifies the blob storage subscription Id.",
+          "type": "string"
+        },
+        "isStorageSecondaryKeyInUse": {
+          "description": "Specifies whether storageAccountAccessKey value is the storage’s secondary key.",
+          "type": "boolean"
+        }
+      }
+    }
+  },
+  "parameters": {
+    "SubscriptionIdParameter": {
+      "name": "subscriptionId",
+      "in": "path",
+      "description": "The subscription ID that identifies an Azure subscription.",
+      "required": true,
+      "type": "string"
+    },
+    "ApiVersionParameter": {
+      "name": "api-version",
+      "in": "query",
+      "description": "Client Api Version.",
+      "required": true,
+      "x-ms-parameter-location": "client",
+      "type": "string"
+    },
+    "ResourceGroupParameter": {
+      "name": "resourceGroupName",
+      "in": "path",
+      "description": "The name of the resource group that contains the resource. You can obtain this value from the Azure Resource Manager API or the portal.",
+      "required": true,
+      "x-ms-parameter-location": "method",
+      "type": "string"
+    }
+  }
+}

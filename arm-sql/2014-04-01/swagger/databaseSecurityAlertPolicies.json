@@ -1,0 +1,280 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "Database Threat Detection Policy APIs",
+    "description": "Provides create, read and update functionality for Azure SQL database Threat Detection policies.",
+    "version": "2014-04-01"
+  },
+  "host": "management.azure.com",
+  "schemes": [
+    "https"
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "produces": [
+    "application/json"
+  ],
+  "paths": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/servers/{serverName}/databases/{databaseName}/securityAlertPolicies/{securityAlertPolicyName}": {
+      "get": {
+        "tags": [
+          "DatabaseThreatDetectionPolicies"
+        ],
+        "description": "Get a Threat Detection policy associated with an Azure SQL database.",
+        "operationId": "DatabaseThreatDetectionPolicies_Get",
+        "x-ms-examples": {
+          "Get database security alert policy": { "$ref": "../examples/DatabaseSecurityAlertGet.json" }
+        },
+        "parameters": [
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupParameter"
+          },
+          {
+            "name": "serverName",
+            "in": "path",
+            "description": "The name of the Azure SQL Database on which the Azure SQL Database is hosted.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "databaseName",
+            "in": "path",
+            "description": "The name of the Azure SQL database for which database Threat Detection policy is defined.",
+            "required": true,
+            "type": "string"
+          },
+              {
+            "name": "securityAlertPolicyName",
+            "in": "path",
+            "description": "The name of the Threat Detection policy. Default is the currently value to use.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successfully retrieved the database Threat Detection policy.",
+            "schema": {
+              "$ref": "#/definitions/DatabaseSecurityAlertPolicyResource"
+            }
+          },
+          "default": {
+            "description": "*** Error Responses: ***\n\n * 500 GetDatabaseSecurityAlertPolicyFailed - Failed to get database Threat Detection security alert policies. * 500 DatabaseIsUnavailable - Your settings are currently unavailable, please try again later"
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "DatabaseThreatDetectionPolicies"
+        ],
+        "description": "Creates or updates a Threat Detection policy for an Azure SQL database.",
+        "operationId": "DatabaseThreatDetectionPolicies_CreateOrUpdate",
+        "x-ms-examples": {
+          "Create database security alert policy min": { "$ref": "../examples/DatabaseSecurityAlertCreateMin.json" },
+          "Create database security alert policy max": { "$ref": "../examples/DatabaseSecurityAlertCreateMax.json" }
+        },
+        "parameters": [
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupParameter"
+          },
+          {
+            "name": "serverName",
+            "in": "path",
+            "description": "The name of the Azure SQL Database on which the Azure SQL Database is hosted.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "databaseName",
+            "in": "path",
+            "description": "The name of the Azure SQL database for which database Threat Detection policy is defined.",
+            "required": true,
+            "type": "string"
+          },
+          {
+                "name": "securityAlertPolicyName",
+                "in": "path",
+                "description": "The name of the Threat Detection policy. Default is the currently value to use.",
+                "required": true,
+                "type": "string"
+            },
+          {
+            "name": "databaseSecurityAlertPolicy",
+            "in": "body",
+           "description": "The database Threat Detection policy.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/DatabaseSecurityAlertPolicyResource"
+            }
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successfully updated the database Threat Detection policy.",
+            "schema": {}
+          },
+          "201": {
+            "description": "Successfully created the database Threat Detection policy.",
+            "schema": {}
+          },
+          "default": {
+            "description": "*** Error Responses: ***\n\n * 500 UpsertDatabaseSecurityAlertPolicyFailed - An error has occurred while saving Threat detection settings, please try again later * 500 DatabaseIsUnavailable - Your settings are currently unavailable, please try again later"
+          }
+        }
+      }
+    }
+  },
+  "definitions": {
+    "ArmResourceSku": {
+      "description": "Represents an ARM Resource SKU.",
+      "type": "object",
+      "properties": {
+        "name": {
+          "description": "The name of the SKU, typically, a letter + Number code, e.g. P3.",
+          "type": "string"
+        },
+        "tier": {
+          "description": "The tier of the particular SKU, e.g. Basic, Premium.",
+          "type": "string"
+        },
+        "size": {
+          "description": "the size code, to be interpreted by resource as appropriate",
+          "type": "string"
+        },
+        "family": {
+          "description": "the family of hardware",
+          "type": "string"
+        },
+        "capacity": {
+          "description": "the scale up/out capacity",
+          "format": "int32",
+          "type": "integer"
+        }
+      }
+    },
+    "DatabaseSecurityAlertPolicyResource": {
+      "description": "Contains information about an Azure SQL Database Threat Detection policy.",
+      "type": "object",
+      "properties": {
+        "id": {
+          "description": "The resource ID",
+          "type": "string"
+        },
+        "name": {
+          "description": "The name of the resource",
+          "type": "string"
+        },
+        "type": {
+          "description": "The resource type",
+          "type": "string"
+        },
+        "location": {
+          "description": "The location the resource resides in",
+          "type": "string"
+        },
+        "sku": {
+          "$ref": "#/definitions/ArmResourceSku"
+        },
+        "kind": {
+          "description": "The attributes of the entity that drives portal UI",
+          "enum": [
+            "None",
+            "V2",
+            "V12",
+            "User",
+            "System",
+            "Datawarehouse"
+          ],
+          "type": "string"
+        },
+        "tags": {
+          "description": "the tags assigned to the resource",
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          }
+        },
+        "properties": {
+          "$ref": "#/definitions/DatabaseSecurityAlertPolicyProperties"
+        }
+      }
+    },
+    "DatabaseSecurityAlertPolicyProperties": {
+      "description": "Properties for an Azure SQL Database Threat Detection policy.",
+      "type": "object",
+      "properties": {
+        "state": {
+          "description": "Specifies the state of the policy. Options are Enabled or Disabled.",
+          "type": "string"
+        },
+        "disabledAlerts": {
+          "description": "Specifies the comma-separated list of alerts that are disabled. The possible values are:  Sql_Injection, Sql_Injection_Vulnerability, Access_Anomaly, Usage_Anomaly or empty string",
+          "type": "string"
+        },
+        "emailAddresses": {
+          "description": "Specifies the semicolon-separated list of e-mail addresses to which the alert is sent.",
+          "type": "string"
+        },
+        "emailAccountAdmins": {
+          "description": "Specifies that the alert is sent to the account administrators. Options are Enabled or Disabled.",
+          "type": "string"
+        },
+        "storageEndpoint": {
+          "description": "Specifies the blob storage endpoint (e.g. https://MyAccount.blob.core.windows.net). This blob storage will hold all Threat Detection audit logs.",
+          "type": "string"
+        },
+        "storageAccountAccessKey": {
+          "description": "Specifies the identifier key of the Threat Detection audit storage account.",
+          "type": "string"
+        },
+        "retentionDays": {
+          "format": "int32",
+          "description": "Specifies the number of days to keep in the Threat Detection audit logs.",
+          "type": "integer"
+        },
+        "useServerDefault": {
+          "description": "Specifies whether to use the default server policy. Options are Enabled or Disabled.",
+          "type": "string"
+        }
+      }
+    }
+  },
+  "parameters": {
+    "SubscriptionIdParameter": {
+      "name": "subscriptionId",
+      "in": "path",
+      "description": "The subscription ID that identifies an Azure subscription.",
+      "required": true,
+      "type": "string"
+    },
+    "ApiVersionParameter": {
+      "name": "api-version",
+      "in": "query",
+      "description": "Client Api Version.",
+      "required": true,
+      "x-ms-parameter-location": "client",
+      "type": "string"
+    },
+    "ResourceGroupParameter": {
+      "name": "resourceGroupName",
+      "in": "path",
+      "description": "The name of the resource group that contains the resource. You can obtain this value from the Azure Resource Manager API or the portal.",
+      "required": true,
+      "x-ms-parameter-location": "method",
+      "type": "string"
+    }
+  }
+}
