@@ -243,7 +243,7 @@ For example, [NetworkInterface.ipConfigurations](https://github.com/Azure/azure-
 
 - :white_check_mark: **M2057**: A Sku object must have a property 'name' of type 'string'. It may also have the following properties: 'tier', 'size','family' and 'capacity'.
 
-- :white_check_mark: **M2058**: Paths in x-ms-paths must overload a normal path in the paths section, i.e. a path in the x-ms-path must either be same as a path in the paths section or a path in the paths sections followed by additional paramaeters.
+- :white_check_mark: **M2058**: Paths in x-ms-paths must overload a normal path in the paths section, i.e. a path in the x-ms-path must either be same as a path in the paths section or a path in the paths sections followed by additional parameters.
 
 ### SHOULD
 
