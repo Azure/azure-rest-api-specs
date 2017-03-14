@@ -545,6 +545,104 @@
         }
       }
     },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Cache/Redis/{name}/stop": {
+      "post": {
+        "tags": [
+          "Redis"
+        ],
+        "operationId": "Redis_Stop",
+        "x-ms-examples": {
+          "RedisCacheStop": { "$ref": "../examples/RedisCacheStop.json" }
+        },
+        "x-ms-long-running-operation": true,
+        "description": "Stop an existing redis cache.",
+        "parameters": [
+          {
+            "name": "resourceGroupName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the resource group."
+          },
+          {
+            "name": "name",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the Redis cache."
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "202": {
+            "description": "Stop operation successfully enqueued; follow the Location header to poll for final outcome.",
+            "schema": {
+              "$ref": "#/definitions/RedisStopResponse"
+            }
+          },
+          "200": {
+            "description": "Stop operation succeeded.",
+            "schema": {
+              "$ref": "#/definitions/RedisStopResponse"
+            }
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Cache/Redis/{name}/start": {
+      "post": {
+        "tags": [
+          "Redis"
+        ],
+        "operationId": "Redis_Start",
+        "x-ms-examples": {
+          "RedisCacheStart": { "$ref": "../examples/RedisCacheStart.json" }
+        },
+        "x-ms-long-running-operation": true,
+        "description": "Start an existing redis cache.",
+        "parameters": [
+          {
+            "name": "resourceGroupName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the resource group."
+          },
+          {
+            "name": "name",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the Redis cache."
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "202": {
+            "description": "Start operation successfully enqueued; follow the Location header to poll for final outcome.",
+            "schema": {
+              "$ref": "#/definitions/RedisStartResponse"
+            }
+          },
+          "200": {
+            "description": "Start operation succeeded.",
+            "schema": {
+              "$ref": "#/definitions/RedisStartResponse"
+            }
+          }
+        }
+      }
+    },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Cache/Redis/{name}/patchSchedules/default": {
       "put": {
         "tags": [
@@ -1137,6 +1235,26 @@
         }
       },
       "description": "Response to force reboot for Redis cache."
+    },
+    "RedisStopResponse": {
+      "properties": {
+        "Message": {
+          "readOnly": true,
+          "type": "string",
+          "description": "Status message"
+        }
+      },
+      "description": "Response to stop operation for Redis cache."
+    },
+    "RedisStartResponse": {
+      "properties": {
+        "Message": {
+          "readOnly": true,
+          "type": "string",
+          "description": "Status message"
+        }
+      },
+      "description": "Response to start operation for Redis cache."
     }
   },
   "parameters": {
