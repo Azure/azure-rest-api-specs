@@ -1,0 +1,606 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "AutomationManagement",
+    "version": "2015-10-31"
+  },
+  "host": "management.azure.com",
+  "schemes": [
+    "https"
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "produces": [
+    "application/json"
+  ],
+  "paths": {
+	"/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Automation/automationAccounts/{automationAccountName}": {
+      "patch": {
+        "tags": [
+          "AutomationAccounts"
+        ],
+        "operationId": "AutomationAccounts_Update",
+        "description": "Update an automation account.",
+        "externalDocs": {
+          "url": "http://aka.ms/azureautomationsdk/automationaccountoperations"
+        },
+        "parameters": [
+          {
+            "name": "automationAccountName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "Automation account name."
+          },
+          {
+            "name": "parameters",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/AutomationAccountUpdateParameters"
+            },
+            "description": "Parameters supplied to the update automation account."
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/AutomationAccount"
+            }
+          },
+		  "default": {
+            "description": "Automation error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "AutomationAccounts"
+        ],
+        "operationId": "AutomationAccounts_CreateOrUpdate",
+        "description": "Create or update an automation account.",
+        "externalDocs": {
+          "url": "http://aka.ms/azureautomationsdk/automationaccountoperations"
+        },
+        "parameters": [
+          {
+            "name": "automationAccountName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "Parameters supplied to the create or update automation account."
+          },
+          {
+            "name": "parameters",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/AutomationAccountCreateOrUpdateParameters"
+            },
+            "description": "Parameters supplied to the create or update automation account."
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": "Created",
+            "schema": {
+              "$ref": "#/definitions/AutomationAccount"
+            }
+          },
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/AutomationAccount"
+            }
+          },
+		  "default": {
+            "description": "Automation error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "AutomationAccounts"
+        ],
+        "operationId": "AutomationAccounts_Delete",
+        "description": "Delete an automation account.",
+        "externalDocs": {
+          "url": "http://aka.ms/azureautomationsdk/automationaccountoperations"
+        },
+        "parameters": [
+          {
+            "name": "automationAccountName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "Automation account name."
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+	     "204": { 
+		 "description": "No Content" 
+          },
+		  "default": {
+            "description": "Automation error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        }
+      },
+      "get": {
+        "tags": [
+          "AutomationAccounts"
+        ],
+        "operationId": "AutomationAccounts_Get",
+        "description": "Get information about an Automation Account.",
+        "externalDocs": {
+          "url": "http://aka.ms/azureautomationsdk/automationaccountoperations"
+        },
+        "parameters": [
+          {
+            "name": "automationAccountName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The automation account name."
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/AutomationAccount"
+            }
+          },
+		  "default": {
+            "description": "Automation error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        }
+      }
+     }, 
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Automation/automationAccounts": {
+      "get": {
+        "tags": [
+          "AutomationAccounts"
+        ],
+        "operationId": "AutomationAccounts_ListByResourceGroup",
+        "description": "Retrieve a list of accounts within a given resource group.",
+        "externalDocs": {
+          "url": "http://aka.ms/azureautomationsdk/automationaccountoperations"
+        },
+        "parameters": [		 
+          {
+            "$ref": "#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/AutomationAccountListResult"
+            }
+          },
+		  "default": {
+            "description": "Automation error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+	"/providers/Microsoft.Automation/operations": {
+      "get": {
+        "tags": [
+          "Operations"
+        ],
+        "description": "Lists all of the available Automation REST API operations.",
+        "operationId": "Operations_List",
+        "parameters": [
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/OperationListResult"
+            }
+          },
+          "default": {
+            "description": "Automation error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": null
+        }
+      }
+    },
+	"/subscriptions/{subscriptionId}/providers/Microsoft.Automation/automationAccounts": {
+      "get": {
+        "tags": [
+          "AutomationAccounts"
+        ],
+        "summary": "Lists the Automation Accounts within an Azure subscitption.",
+        "operationId": "AutomationAccounts_ListBySubscriptionId",
+		"description": "Retrieve a list of accounts within a given subscription.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/AutomationAccountListResult"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": null
+        }
+      }
+    }
+  },
+  "definitions": {
+    "Sku": {
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "Gets or sets the SKU (pricing tier) of the account.",
+          "enum": [
+            "Free",
+            "Basic"
+          ],
+          "x-ms-enum": {
+            "name": "SkuNameEnum",
+            "modelAsString": true
+          }
+        },
+        "family": {
+          "type": "string",
+          "description": "Gets or sets the SKU family."
+        },
+        "capacity": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Gets or sets the SKU capacity."
+        }
+      },
+      "description": "The account SKU."
+    },
+	"AutomationAccountUpdateProperties": {
+      "properties": {
+        "sku": {
+          "$ref": "#/definitions/Sku",
+          "description": "Gets or sets account SKU."
+        }
+      },
+      "description": "The parameters supplied to the update account properties."
+    },
+    "AutomationAccountUpdateParameters": {
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/AutomationAccountUpdateProperties",
+          "x-ms-client-flatten": true,
+          "description": "Gets or sets account update properties."
+        },
+        "name": {
+          "type": "string",
+          "description": "Gets or sets the name of the resource."
+        },
+        "location": {
+          "type": "string",
+          "description": "Gets or sets the location of the resource."
+        },
+        "tags": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          },
+          "description": "Gets or sets the tags attached to the resource."
+        }
+      },
+      "required": [
+        "properties"
+      ],
+      "description": "The parameters supplied to the update automation account operation."
+    },
+    "AutomationAccountProperties": {
+      "properties": {
+        "sku": {
+          "$ref": "#/definitions/Sku",
+          "description": "Gets or sets the SKU of account."
+        },
+        "lastModifiedBy": {
+          "type": "string",
+          "description": "Gets or sets the last modified by."
+        },
+        "state": {
+          "type": "string",
+          "description": "Gets or sets the status of account.",
+          "enum": [
+            "Ok",
+            "Unavailable",
+            "Suspended"
+          ],
+          "x-ms-enum": {
+            "name": "AutomationAccountState",
+            "modelAsString": true
+          }
+        },
+        "creationTime": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Gets or sets the creation time."
+        },
+        "lastModifiedTime": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Gets or sets the last modified time."
+        },
+        "description": {
+          "type": "string",
+          "description": "Gets or sets the description."
+        }
+      },
+      "description": "Definition of the account property."
+    },
+    "AutomationAccount": {
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/AutomationAccountProperties",
+          "x-ms-client-flatten": true,
+          "description": "Gets or sets the automation account properties."
+        },
+        "etag": {
+          "type": "string",
+          "description": "Gets or sets the etag of the resource."
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "#/definitions/Resource"
+        }
+      ],
+      "description": "Definition of the automation account type."
+    },
+    "AutomationAccountCreateOrUpdateProperties": {
+      "properties": {
+        "sku": {
+          "$ref": "#/definitions/Sku",
+          "description": "Gets or sets account SKU."
+        }
+      },
+      "description": "The parameters supplied to the create or update account properties."
+    },
+    "AutomationAccountCreateOrUpdateParameters": {
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/AutomationAccountCreateOrUpdateProperties",
+          "x-ms-client-flatten": true,
+          "description": "Gets or sets account create or update properties."
+        },
+        "name": {
+          "type": "string",
+          "description": "Gets or sets the name of the resource."
+        },
+        "location": {
+          "type": "string",
+          "description": "Gets or sets the location of the resource."
+        },
+        "tags": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          },
+          "description": "Gets or sets the tags attached to the resource."
+        }
+      },
+      "description": "The parameters supplied to the create or update automation account operation."
+    },
+    "AutomationAccountListResult": {
+      "properties": {
+        "value": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/AutomationAccount"
+          },
+          "description": "Gets or sets list of accounts."
+        },
+        "nextLink": {
+          "type": "string",
+          "description": "Gets or sets the next link."
+        }
+      },
+      "description": "The response model for the list account operation."
+    },
+	"Resource": {
+      "properties": {
+        "id": {
+          "readOnly": true,
+          "type": "string",
+          "description": "Resource Id"
+        },
+        "name": {
+          "readOnly": true,
+          "type": "string",
+          "description": "Resource name"
+        },
+        "type": {
+          "readOnly": true,
+          "type": "string",
+          "description": "Resource type"
+        },
+        "location": {
+          "type": "string",
+          "description": "Resource location"
+        },
+        "tags": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          },
+          "description": "Resource tags"
+        }
+      },
+      "required": [
+        "location"
+      ],
+      "description": "The Resource definition.",
+      "x-ms-azure-resource": true
+    },
+	"OperationListResult": {
+      "properties": {
+        "value": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Operation"
+          },
+          "description": "List of Automation operations supported by the Automation resource provider."
+        }
+      },
+	  "description": "The response model for the list of Automation operations"
+    },
+	"Operation": {
+      "description": "Automation REST API operation",
+      "type": "object",
+      "properties": {
+        "name": {
+          "description": "Operation name: {provider}/{resource}/{operation}",
+          "type": "string"
+        },
+        "display": {
+          "properties": {
+            "provider": {
+              "description": "Service provider: Microsoft.Automation",
+              "type": "string"
+            },
+            "resource": {
+              "description": "Resource on which the operation is performed: Runbooks, Jobs etc.",
+              "type": "string"
+            },
+            "operation": {
+              "description": "Operation type: Read, write, delete, etc.",
+              "type": "string"
+            }
+          },
+		  "description": "Provider, Resource and Operation values"
+        }
+      }
+    },
+	"ErrorResponse": {
+      "type": "object",
+      "properties": {
+        "code": {
+          "description": "Error code",
+          "type": "string"
+        },
+        "message": {
+          "description": "Error message indicating why the operation failed.",
+          "type": "string"
+        }	
+      },
+	  "description": "Error response of an operation failure"
+    }
+  },
+  "parameters": {
+    "SubscriptionIdParameter": {
+      "name": "subscriptionId",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "description": "Gets subscription credentials which uniquely identify Microsoft Azure subscription. The subscription ID forms part of the URI for every service call."
+    },
+    "ApiVersionParameter": {
+      "name": "api-version",
+      "in": "query",
+      "required": true,
+      "type": "string",
+      "description": "Client Api Version."
+    },
+    "ResourceGroupNameParameter": {
+      "name": "resourceGroupName",
+      "in": "path",
+      "required": true,
+      "type": "string",
+	  "pattern": "^[-\\w\\._]+$",
+      "description": "The resource group name.",
+      "x-ms-parameter-location": "method"
+    }
+  }
+}
