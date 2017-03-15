@@ -155,36 +155,6 @@
       ],
       "x-ms-azure-resource": true
     },
-    "SqlSubResource": {
-      "description": "Subresource properties",
-      "properties": {
-        "name": {
-          "readOnly": true,
-          "type": "string",
-          "description": "Resource name"
-        },
-        "id": {
-          "readOnly": true,
-          "type": "string",
-          "description": "The resource ID."
-        }
-      }
-    },
-    "SqlTypedSubResource": {
-      "description": "Typed subresource properties",
-      "properties": {
-        "type": {
-          "readOnly": true,
-          "type": "string",
-          "description": "Resource type"
-        }
-      },
-      "allOf": [
-        {
-          "$ref": "#/definitions/SqlSubResource"
-        }
-      ]
-    },
     "DatabaseSecurityAlertPolicy": {
       "description": "Contains information about a database Threat Detection policy.",
       "type": "object",
@@ -196,7 +166,7 @@
       },
       "allOf": [
         {
-          "$ref": "#/definitions/SqlTypedSubResource"
+          "$ref": "#/definitions/Resource"
         }
       ]
     },
