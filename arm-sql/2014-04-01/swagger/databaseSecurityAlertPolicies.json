@@ -120,7 +120,7 @@
     }
   },
   "definitions": {
-    "Resource": {
+    "ResourceWithOptionalLocation": {
       "description": "Resource properties",
       "properties": {
         "name": {
@@ -149,16 +149,17 @@
           },
           "description": "Resource tags"
         }
-      },
-      "required": [
-        "location"
-      ],
-      "x-ms-azure-resource": true
+      }
     },
     "DatabaseSecurityAlertPolicy": {
       "description": "Contains information about a database Threat Detection policy.",
       "type": "object",
       "properties": {
+        "kind": {
+          "readOnly": true,
+          "type": "string",
+          "description": "Resource kind."
+        },
         "properties": {
           "$ref": "#/definitions/DatabaseSecurityAlertPolicyProperties",
           "x-ms-client-flatten": true
@@ -166,7 +167,7 @@
       },
       "allOf": [
         {
-          "$ref": "#/definitions/Resource"
+          "$ref": "#/definitions/ResourceWithOptionalLocation"
         }
       ]
     },
