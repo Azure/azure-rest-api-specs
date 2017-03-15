@@ -3,7 +3,7 @@
   "info": {
     "title": "NetworkManagementClient",
     "description": "The Microsoft Azure Network management API provides a RESTful set of web services that interact with Microsoft Azure Networks service to manage your network resources. The API has entities that capture the relationship between an end user and the Microsoft Azure Networks service.",
-    "version": "2016-12-01"
+    "version": "2017-03-01"
   },
   "host": "management.azure.com",
   "schemes": [
@@ -1215,7 +1215,8 @@
           "format": "int32",
           "description": "The weight added to routes learned from this BGP speaker."
         }
-      }
+      },
+      "description": "BGP settings details"
     },
     "BgpPeerStatus": {
       "properties": {
@@ -1270,11 +1271,12 @@
         },
         "messagesReceived": {
           "type": "integer",
-          "format": "in64",
+          "format": "int64",
           "readOnly": true,
           "description": "The number of BGP messages received"
         }
-      }
+      },
+      "description": "BGP peer status details"
     },
     "GatewayRoute": {
       "properties": {
@@ -1314,7 +1316,8 @@
           "readOnly": true,
           "description": "The route's weight"
         }
-      }
+      },
+      "description": "Gateway routing details"
     },
     "VirtualNetworkGateway": {
       "properties": {
@@ -1339,7 +1342,7 @@
     },
 	"VpnClientParameters": {
       "properties": {
-        "ProcessorArchitecture": {
+        "processorArchitecture": {
           "type": "string",
           "description": "VPN client Processor Architecture. Possible values are: 'AMD64' and 'X86'.",
           "enum": [
@@ -1353,9 +1356,9 @@
         }
       },
       "required": [
-        "ProcessorArchitecture"
+        "processorArchitecture"
       ],
-      "description": "VpnClientParameters"
+      "description": "Vpn Client Parameters for package generation"
     },
 	"VirtualNetworkGatewayListResult": {
       "properties": {
@@ -1520,6 +1523,17 @@
           "type": "boolean",
           "description": "EnableBgp flag"
         },
+        "usePolicyBasedTrafficSelectors": {
+          "type": "boolean",
+          "description": "Enable policy-based traffic selectors."
+        },
+        "ipsecPolicies": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/IpsecPolicy"
+          },
+          "description": "The IPSec Policies to be considered by this connection."
+        },
         "resourceGuid": {
           "type": "string",
           "description": "The resource GUID property of the VirtualNetworkGatewayConnection resource."
@@ -1585,7 +1599,8 @@
       },
       "required": [
         "keyLength"
-      ]
+      ],
+      "description": "The virtual network connection reset shared key"
     },
     "ConnectionSharedKey": {
       "properties": {
@@ -1598,6 +1613,130 @@
         "value"
       ],	  
       "description": "Response for GetConnectionSharedKey API service call"
+    },
+    "IpsecPolicy": {
+      "properties": {
+        "saLifeTimeSeconds": {
+          "type": "integer",
+          "format": "int32",
+          "description": "The Security Association (SA) lifetime in seconds for a site to site VPN tunnel."
+        },
+        "saDataSizeKilobytes": {
+          "type": "integer",
+          "format": "int32",
+          "description": "The Security Association (SA) payload size in KB for a site to site VPN tunnel."
+        },
+        "ipsecEncryption": {
+          "type": "string",
+          "description": "The IPSec encryption algorithm (IKE phase 2).",
+          "enum": [
+            "None",
+            "DES",
+            "DES3",
+            "AES128",
+            "AES192",
+            "AES256",
+            "GCMAES128",
+            "GCMAES192",
+            "GCMAES256"
+          ],
+          "x-ms-enum": {
+            "name": "IpsecEncryption",
+            "modelAsString": true
+          }
+        },
+        "ipsecIntegrity": {
+          "type": "string",
+          "description": "The IPSec integrity algorithm (IKE phase 2).",
+          "enum": [
+            "MD5",
+            "SHA1",
+            "SHA256",
+            "GCMAES128",
+            "GCMAES192",
+            "GCMAES256"
+          ],
+          "x-ms-enum": {
+            "name": "IpsecIntegrity",
+            "modelAsString": true
+          }
+        },
+        "ikeEncryption": {
+          "type": "string",
+          "description": "The IKE encryption algorithm (IKE phase 1).",
+          "enum": [
+            "DES",
+            "DES3",
+            "AES128",
+            "AES192",
+            "AES256"
+          ],
+          "x-ms-enum": {
+            "name": "IkeEncryption",
+            "modelAsString": true
+          }
+        },
+        "ikeIntegrity": {
+          "type": "string",
+          "description": "The IKE integrity algorithm (IKE phase 1).",
+          "enum": [
+            "MD5",
+            "SHA1",
+            "SHA256",
+            "SHA384"
+          ],
+          "x-ms-enum": {
+            "name": "IkeIntegrity",
+            "modelAsString": true
+          }
+        },
+        "dhGroup": {
+          "type": "string",
+          "description": "The DH Groups used in IKE Phase 1 for initial SA.",
+          "enum": [
+            "None",
+            "DHGroup1",
+            "DHGroup2",
+            "DHGroup14",
+            "DHGroup2048",
+            "ECP256",
+            "ECP384",
+            "DHGroup24"
+          ],
+          "x-ms-enum": {
+            "name": "DhGroup",
+            "modelAsString": true
+          }
+        },
+        "pfsGroup": {
+          "type": "string",
+          "description": "The DH Groups used in IKE Phase 2 for new child SA.",
+          "enum": [
+            "None",
+            "PFS1",
+            "PFS2",
+            "PFS2048",
+            "ECP256",
+            "ECP384",
+            "PFS24"
+          ],
+          "x-ms-enum": {
+            "name": "PfsGroup",
+            "modelAsString": true
+          }
+        }
+      },
+      "required": [
+        "saLifeTimeSeconds",
+        "saDataSizeKilobytes",
+        "ipsecEncryption",
+        "ipsecIntegrity",
+        "ikeEncryption",
+        "ikeIntegrity",
+        "dhGroup",
+        "pfsGroup"
+      ],
+      "description": "An IPSec Policy configuration for a virtual network gateway connection"
     },
 	"LocalNetworkGatewayPropertiesFormat": {
       "properties": {
