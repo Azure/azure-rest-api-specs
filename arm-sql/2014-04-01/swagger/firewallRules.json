@@ -52,7 +52,7 @@
             "in": "body",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/ServerFirewallRule"
+              "$ref": "#/definitions/FirewallRule"
             },
             "description": "The required parameters for creating or updating a firewall rule."
           }
@@ -61,13 +61,13 @@
           "200": {
             "description": "OK",
             "schema": {
-              "$ref": "#/definitions/ServerFirewallRule"
+              "$ref": "#/definitions/FirewallRule"
             }
           },
           "201": {
             "description": "Created",
             "schema": {
-              "$ref": "#/definitions/ServerFirewallRule"
+              "$ref": "#/definitions/FirewallRule"
             }
           }
         }
@@ -145,7 +145,7 @@
           "200": {
             "description": "OK",
             "schema": {
-              "$ref": "#/definitions/ServerFirewallRule"
+              "$ref": "#/definitions/FirewallRule"
             }
           }
         }
@@ -179,7 +179,7 @@
           "200": {
             "description": "OK",
             "schema": {
-              "$ref": "#/definitions/ServerFirewallRuleListResult"
+              "$ref": "#/definitions/FirewallRuleListResult"
             }
           }
         },
@@ -190,7 +190,7 @@
     }
   },
   "definitions": {
-    "ServerFirewallRuleProperties": {
+    "FirewallRuleProperties": {
       "properties": {
         "startIpAddress": {
           "type": "string",
@@ -204,7 +204,7 @@
       "required": ["startIpAddress", "endIpAddress"],
       "description": "Represents the properties of a server firewall rule."
     },
-    "ServerFirewallRule": {
+    "FirewallRule": {
       "properties": {
         "kind": {
           "type": "string",
@@ -222,7 +222,7 @@
           "readOnly": true
         },
         "properties": {
-          "$ref": "#/definitions/ServerFirewallRuleProperties",
+          "$ref": "#/definitions/FirewallRuleProperties",
           "description": "The properties representing the resource.",
           "x-ms-client-flatten": true
         }
@@ -234,12 +234,12 @@
       ],
       "description": "Represents a server firewall rule."
     },
-    "ServerFirewallRuleListResult": {
+    "FirewallRuleListResult": {
       "properties": {
         "value": {
           "type": "array",
           "items": {
-            "$ref": "#/definitions/ServerFirewallRule"
+            "$ref": "#/definitions/FirewallRule"
           },
           "description": "The list of server firewall rules."
         }
