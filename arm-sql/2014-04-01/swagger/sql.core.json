@@ -1390,7 +1390,7 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/servers/{serverName}/databases/{databaseName}/transparentDataEncryption/{configName}/operationResults": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/servers/{serverName}/databases/{databaseName}/transparentDataEncryption/current/operationResults": {
       "get": {
         "tags": [
           "TransparentDataEncryption"
@@ -1803,6 +1803,14 @@
     },
     "ElasticPoolActivity": {
       "properties": {
+        "location":{  
+          "type":"string",
+          "x-ms-mutability":[  
+            "read",
+            "create"
+          ],
+          "description":"The geo-location where the resource lives"
+        },
         "properties": {
           "$ref": "#/definitions/ElasticPoolActivityProperties",
           "description": "The properties representing the resource.",
