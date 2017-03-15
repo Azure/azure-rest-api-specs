@@ -149,13 +149,17 @@
           },
           "description": "Resource tags"
         }
-      },
-      "x-ms-azure-resource": true
+      }
     },
     "DatabaseBlobAuditingPolicy": {
       "description": "Contains information about a database Blob Auditing policy.",
       "type": "object",
       "properties": {
+        "kind": {
+          "readOnly": true,
+          "type": "string",
+          "description": "Resource kind."
+        },
         "properties": {
           "$ref": "#/definitions/DatabaseBlobAuditingPolicyProperties",
           "x-ms-client-flatten": true
