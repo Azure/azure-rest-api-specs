@@ -1301,7 +1301,7 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/servers/{serverName}/databases/{databaseName}/transparentDataEncryption/{configName}": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/servers/{serverName}/databases/{databaseName}/transparentDataEncryption/current": {
       "put": {
         "tags": [
           "TransparentDataEncryption"
@@ -1327,9 +1327,6 @@
             "required": true,
             "type": "string",
             "description": "The name of the database for which setting the transparent data encryption applies."
-          },
-          {
-            "$ref": "#/parameters/TransparentDataEncryptionConfigNameParameter"
           },
           {
             "name": "parameters",
@@ -3143,20 +3140,6 @@
       "required": true,
       "type": "string",
       "description": "The name of the server.",
-      "x-ms-parameter-location": "method"
-    },
-    "TransparentDataEncryptionConfigNameParameter": {
-      "name": "configName",
-      "in": "path",
-      "required": true,
-      "type": "string",
-      "enum": [
-        "current"
-      ],
-      "x-ms-enum": {
-        "name": "TransparentDataEncryptionConfiguration"
-      },
-      "description": "The name of the transparent data encryption configuration group.",
       "x-ms-parameter-location": "method"
     },
     "DatabaseExpandParameter": {
