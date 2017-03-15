@@ -120,37 +120,6 @@
     }
   },
   "definitions": {
-    "ResourceWithOptionalLocation": {
-      "description": "Resource properties",
-      "properties": {
-        "name": {
-          "readOnly": true,
-          "type": "string",
-          "description": "Resource name"
-        },
-        "id": {
-          "readOnly": true,
-          "type": "string",
-          "description": "Resource ID"
-        },
-        "type": {
-          "readOnly": true,
-          "type": "string",
-          "description": "Resource type"
-        },
-        "location": {
-          "type": "string",
-          "description": "Resource location"
-        },
-        "tags": {
-          "type": "object",
-          "additionalProperties": {
-            "type": "string"
-          },
-          "description": "Resource tags"
-        }
-      }
-    },
     "DatabaseSecurityAlertPolicy": {
       "description": "Contains information about a database Threat Detection policy.",
       "type": "object",
@@ -167,7 +136,7 @@
       },
       "allOf": [
         {
-          "$ref": "#/definitions/ResourceWithOptionalLocation"
+          "$ref": "./resourceDefinitions.json#/definitions/ProxyResource"
         }
       ]
     },

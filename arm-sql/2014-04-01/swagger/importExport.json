@@ -175,34 +175,6 @@
         }
     },
     "definitions": {
-        "SqlSubResource": {
-            "description": "Subresource properties",
-            "properties": {
-                "name": {
-                "readOnly": true,
-                "type": "string",
-                "description": "Resource name"
-                },
-                "id": {
-                "readOnly": true,
-                "type": "string",
-                "description": "The resource ID."
-                }
-            }
-        },
-        "SqlTypedSubResource": {
-            "description": "Typed subresource properties",
-            "properties": {
-                "type": {
-                    "type": "string",
-                    "readOnly": true,
-                    "description": "Resource type"
-                }
-            },
-            "allOf": [{ 
-                "$ref": "#/definitions/SqlSubResource" 
-            }]
-        },
         "ImportExtensionProperties": {
             "properties": {
                 "operationMode": {
@@ -249,7 +221,7 @@
                 }
             },
             "allOf": [{
-                "$ref": "#/definitions/SqlTypedSubResource"
+                "$ref": "./resourceDefinitions.json#/definitions/ProxyResource"
             }],
             "description": "Response for Import/Export Get operation."
         },

@@ -1564,7 +1564,7 @@
       },
       "allOf": [
         {
-          "$ref": "#/definitions/Resource"
+          "$ref": "./resourceDefinitions.json#/definitions/ProxyResource"
         }
       ],
       "description": "Represents a recommented elastic pool."
@@ -1665,7 +1665,7 @@
       },
       "allOf": [
         {
-          "$ref": "#/definitions/Resource"
+          "$ref": "./resourceDefinitions.json#/definitions/TrackedResource"
         }
       ],
       "description": "Represents a database elastic pool."
@@ -1811,7 +1811,7 @@
       },
       "allOf": [
         {
-          "$ref": "#/definitions/Resource"
+          "$ref": "./resourceDefinitions.json#/definitions/ProxyResource"
         }
       ],
       "description": "Represents the activity on an elastic pool."
@@ -1925,7 +1925,7 @@
       },
       "allOf": [
         {
-          "$ref": "#/definitions/Resource"
+          "$ref": "./resourceDefinitions.json#/definitions/ProxyResource"
         }
       ],
       "description": "Represents the activity on an elastic pool."
@@ -2007,7 +2007,7 @@
       },
       "allOf": [
         {
-          "$ref": "#/definitions/Resource"
+          "$ref": "./resourceDefinitions.json#/definitions/TrackedResource"
         }
       ],
       "description": "Represents a server."
@@ -2148,7 +2148,7 @@
       },
       "allOf": [
         {
-          "$ref": "#/definitions/Resource"
+          "$ref": "./resourceDefinitions.json#/definitions/ProxyResource"
         }
       ],
       "description": "Represents a database recommended index."
@@ -2179,7 +2179,7 @@
       },
       "allOf": [
         {
-          "$ref": "#/definitions/SqlSubResource"
+          "$ref": "#/definitions/SubResource"
         }
       ],
       "description": "Represents a database transparent data encryption ."
@@ -2467,7 +2467,7 @@
       },
       "allOf": [
         {
-          "$ref": "#/definitions/Resource"
+          "$ref": "./resourceDefinitions.json#/definitions/TrackedResource"
         }
       ],
       "description": "Represents a database."
@@ -2612,7 +2612,7 @@
       },
       "allOf": [
         {
-          "$ref": "#/definitions/SqlSubResource"
+          "$ref": "#/definitions/SubResource"
         }
       ],
       "description": "Represents a Service Tier Advisor."
@@ -2743,7 +2743,7 @@
       },
       "allOf": [
         {
-          "$ref": "#/definitions/Resource"
+          "$ref": "./resourceDefinitions.json#/definitions/ProxyResource"
         }
       ],
       "description": "Represents a database restore point."
@@ -2800,7 +2800,7 @@
       "description": "Represents database metrics.",
       "allOf": [
         {
-          "$ref": "#/definitions/SqlSubResource"
+          "$ref": "#/definitions/SubResource"
         }
       ]
     },
@@ -2926,7 +2926,7 @@
       },
       "allOf": [
         {
-          "$ref": "#/definitions/SqlSubResource"
+          "$ref": "#/definitions/SubResource"
         }
       ],
       "description": "Represents a database service objective."
@@ -2978,7 +2978,7 @@
       },
       "allOf": [
         {
-          "$ref": "#/definitions/SqlSubResource"
+          "$ref": "#/definitions/SubResource"
         }
       ],
       "description": "Represents a database transparent data encryption Scan."
@@ -2996,42 +2996,7 @@
       "required": ["value"],
       "description": "Represents the response to a list database transparent data encryption activity request."
     },
-    "Resource": {
-      "description": "Resource properties",
-      "properties": {
-        "name": {
-          "readOnly": true,
-          "type": "string",
-          "description": "Resource name"
-        },
-        "id": {
-          "readOnly": true,
-          "type": "string",
-          "description": "Resource ID"
-        },
-        "type": {
-          "readOnly": true,
-          "type": "string",
-          "description": "Resource type"
-        },
-        "location": {
-          "type": "string",
-          "description": "Resource location"
-        },
-        "tags": {
-          "type": "object",
-          "additionalProperties": {
-            "type": "string"
-          },
-          "description": "Resource tags"
-        }
-      },
-      "required": [
-        "location"
-      ],
-      "x-ms-azure-resource": true
-    },
-    "SqlSubResource": {
+    "SubResource": {
       "description": "Subresource properties",
       "properties": {
         "name": {
@@ -3045,21 +3010,6 @@
           "description": "The resource ID."
         }
       }
-    },
-    "SqlTypedSubResource": {
-      "description": "Typed subresource properties",
-      "properties": {
-        "type": {
-          "readOnly": true,
-          "type": "string",
-          "description": "Resource type"
-        }
-      },
-      "allOf": [
-        {
-          "$ref": "#/definitions/SqlSubResource"
-        }
-      ]
     },
     "OperationListResult": {
      "description": "Result of the request to list SQL operations. It contains a list of operations and a URL link to get the next set of results.",
