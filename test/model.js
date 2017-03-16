@@ -5,7 +5,7 @@
 var _ = require('lodash'),
   assert = require('assert'),
   utils = require('./util/utils'),
-  oav = require('openapi-validation-tools');
+  oav = require('oav');
 
 describe('Azure swagger model validation using x-ms-examples and examples in spec', function () {
   let swaggersToProcess = utils.getFilesChangedInPR();
