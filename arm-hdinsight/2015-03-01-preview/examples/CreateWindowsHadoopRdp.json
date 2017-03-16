@@ -1,73 +1,82 @@
 {
     "parameters": {
-        "clusterVersion": "3.5",
-        "osType": "Linux",
-        "tier": "Standard",
-        "clusterDefinition": {
-            "kind": "Hadoop",
-            "configurations": {
-                "gateway": {
-                    "restAuthCredential.isEnabled": true,
-                    "restAuthCredential.username": "admin",
-                    "restAuthCredential.password": "password"
+        "clusterName": "cluster1",
+        "resourceGroupName": "rg1",
+        "api-version": "2015-03-01-preview",
+        "subscriptionId": "subid",
+        "clusterCreateParameters": {
+            "tags": null,
+            "properties": {
+                "clusterVersion": "3.5",
+                "osType": "Linux",
+                "tier": "Standard",
+                "clusterDefinition": {
+                    "kind": "Hadoop",
+                    "configurations": {
+                        "gateway": {
+                            "restAuthCredential.isEnabled": true,
+                            "restAuthCredential.username": "admin",
+                            "restAuthCredential.password": "**********"
+                        }
+                    }
+                },
+                "storageProfile": {
+                    "storageaccounts": [
+                        {
+                            "name": "mystorage",
+                            "isDefault": true,
+                            "container": "containername",
+                            "key": "storageapikey"
+                        }
+                    ]
+                },
+                "computeProfile": {
+                    "roles": [
+                        {
+                            "name": "headnode",
+                            "minInstanceCount": 1,
+                            "targetInstanceCount": 2,
+                            "hardwareProfile": {
+                                "vmSize": "Standard_D3_V2"
+                            },
+                            "osProfile": {
+                                "linuxOperatingSystemProfile": {
+                                    "username": "sshuser",
+                                    "password": "**********"
+                                }
+                            }
+                        },
+                        {
+                            "name": "workernode",
+                            "minInstanceCount": 1,
+                            "targetInstanceCount": 4,
+                            "hardwareProfile": {
+                                "vmSize": "Standard_D3_V2"
+                            },
+                            "osProfile": {
+                                "linuxOperatingSystemProfile": {
+                                    "username": "sshuser",
+                                    "password": "**********"
+                                }
+                            }
+                        },
+                        {
+                            "name": "zookeepernode",
+                            "minInstanceCount": 1,
+                            "targetInstanceCount": 3,
+                            "hardwareProfile": {
+                                "vmSize": "Small"
+                            },
+                            "osProfile": {
+                                "linuxOperatingSystemProfile": {
+                                    "username": "sshuser",
+                                    "password": "**********"
+                                }
+                            }
+                        }
+                    ]
                 }
             }
-        },
-        "storageProfile": {
-            "storageaccounts": [
-                {
-                    "name": "mystorage",
-                    "isDefault": true,
-                    "container": "containername",
-                    "key": "storageapikey"
-                }
-            ]
-        },
-        "computeProfile": {
-            "roles": [
-                {
-                    "name": "headnode",
-                    "minInstanceCount": 1,
-                    "targetInstanceCount": 2,
-                    "hardwareProfile": {
-                        "vmSize": "Standard_D3_V2"
-                    },
-                    "osProfile": {
-                        "linuxOperatingSystemProfile": {
-                            "username": "sshuser",
-                            "password": "sshpassword"
-                        }
-                    }
-                },
-                {
-                    "name": "workernode",
-                    "minInstanceCount": 1,
-                    "targetInstanceCount": 4,
-                    "hardwareProfile": {
-                        "vmSize": "Standard_D3_V2"
-                    },
-                    "osProfile": {
-                        "linuxOperatingSystemProfile": {
-                            "username": "sshuser",
-                            "password": "sshpassword"
-                        }
-                    }
-                },
-                {
-                    "name": "zookeepernode",
-                    "minInstanceCount": 1,
-                    "targetInstanceCount": 3,
-                    "hardwareProfile": {
-                        "vmSize": "Small"
-                    },
-                    "osProfile": {
-                        "linuxOperatingSystemProfile": {
-                            "username": "sshuser",
-                            "password": "sshpassword"
-                        }
-                    }
-                }
-            ]
         }
     },
     "responses": {

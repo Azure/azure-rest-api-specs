@@ -226,6 +226,13 @@
             "description": "The name of the resource group."
           },
           {
+            "name": "clusterName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the cluster."
+          },
+          {
             "name": "roleName",
             "in": "path",
             "required": true,
@@ -236,15 +243,8 @@
             ],
             "x-ms-enum": {
               "name": "RoleName",
-              "modelAsString": false
+              "modelAsString": true
             }
-          },
-          {
-            "name": "clusterName",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "description": "The name of the cluster."
           },
           {
             "name": "resizeParameters",
@@ -301,7 +301,7 @@
         }
       }
     },
-    "/providers/Microsoft.HDinsight/operations": {
+    "/providers/Microsoft.HDInsight/operations": {
       "get": {
         "tags": [
           "Operations"
@@ -337,6 +337,7 @@
         },
         "password": {
           "type": "string",
+          "format": "password",
           "description": "Gets or sets the password for the RDP user."
         },
         "expiryDate": {
@@ -385,6 +386,7 @@
         },
         "password": {
           "type": "string",
+          "format": "password",
           "description": "Gets or sets the password."
         },
         "sshProfile": {
@@ -430,6 +432,7 @@
         },
         "restAuthCredential.password": {
           "type": "string",
+          "format": "password",
           "description": "Gets or sets the http user password."
         }
       },
@@ -497,6 +500,7 @@
         },
         "domainUserPassword": {
           "type": "string",
+          "format": "password",
           "description": "Gets or sets the domain admin password."
         },
         "clusterUsersGroupDNs": {
@@ -558,6 +562,11 @@
           "type": "string",
           "description": "Gets or sets the name of the role."
         },
+        "minInstanceCount": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Gets or sets the minimum instance count of the cluster."
+        },
         "targetInstanceCount": {
           "type": "integer",
           "format": "int32",
@@ -596,6 +605,38 @@
         }
       },
       "description": "Describes the compute profile."
+    },
+    "StorageAccount":{
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "The name of the storage account."
+        },
+        "isDefault": {
+          "type": "boolean",
+          "description": "Describes is the storage account is the default storage account."
+        },
+        "container": {
+          "type": "string",
+          "description": "The container in the storage account."
+        },
+        "key": {
+          "type": "string",
+          "description": "The storage account access key."
+        }
+      }
+    },
+    "StorageProfile": {
+      "properties": {
+        "storageaccounts": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/StorageAccount"
+          },
+          "description": "Gets or sets the list of storage accounts in the cluster."
+        }
+      },
+      "description": "Describes the storage profile."
     },
     "ClusterCreateProperties": {
       "description": "Gets or sets cluster create parameters.",
@@ -639,6 +680,10 @@
         "computeProfile": {
           "$ref": "#/definitions/ComputeProfile",
           "description": "Gets or sets the compute profile."
+        },
+        "storageProfile": {
+          "$ref": "#/definitions/StorageProfile",
+          "description": "Gets or sets the storage profile."          
         }
       }
     },
@@ -650,6 +695,7 @@
         },
         "tags": {
           "type": "object",
+          "x-isnullable": true,
           "additionalProperties": {
             "type": "string"
           },
@@ -877,7 +923,7 @@
           "description": "Gets or sets the list of run time script actions."
         },
         "persistOnSuccess": {
-          "type": "boolean",
+          "type": "string",
           "description": "Gets or sets if the scripts needs to be persisted."
         }
       },
@@ -885,26 +931,6 @@
         "persistOnSuccess"
       ],
       "description": "Describes the script actions on a running cluster."
-    },
-    "HttpConnectivitySettings": {
-      "properties": {
-        "restAuthCredential.isEnabled": {
-          "x-ms-client-name": "enabledCredential",
-          "type": "boolean",
-          "description": "Gets or sets the whether or not HTTP is enabled."
-        },
-        "restAuthCredential.username": {
-          "x-ms-client-name": "username",
-          "type": "string",
-          "description": "Gets or sets the http username."
-        },
-        "restAuthCredential.password": {
-          "x-ms-client-name": "password",
-          "type": "string",
-          "description": "Gets or sets the http user password."
-        }
-      },
-      "description": "The payload for a Configure HTTP settings request."
     },
     "ClusterListPersistedScriptActionsResult": {
       "properties": {
@@ -1101,6 +1127,7 @@
         },
         "tags": {
           "type": "object",
+          "x-isnullable" : true,
           "additionalProperties": {
             "type": "string"
           },

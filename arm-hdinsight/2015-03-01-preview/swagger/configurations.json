@@ -138,7 +138,7 @@
             "in": "body",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/HttpSettingsParameters"
+              "$ref": "#/definitions/HttpConnectivitySettings"
             },
             "description": "The name of the resource group."
           },
@@ -220,7 +220,7 @@
         }
       }
     },
-    "/providers/Microsoft.HDinsight/operations": {
+    "/providers/Microsoft.HDInsight/operations": {
       "get": {
         "tags": [
           "Operations"
@@ -328,31 +328,11 @@
       ],
       "description": "Parameters specifying the data factory gateway definition for a create or update operation."
     },
-    "HttpSettingsParameters": {
-      "properties": {
-        "restAuthCredential.isEnabled": {
-          "type": "boolean",
-          "description": "Gets or sets the whether or not HTTP is enabled."
-        },
-        "restAuthCredential.username": {
-          "type": "string",
-          "description": "Gets or sets the http username."
-        },
-        "restAuthCredential.password": {
-          "type": "string",
-          "description": "Gets or sets the http user password."
-        }
-      },
-      "required": [
-        "restAuthCredential.isEnabled"
-      ],
-      "description": "The payload for a Configure HTTP settings request."
-    },
     "HttpConnectivitySettings": {
       "properties": {
         "restAuthCredential.isEnabled": {
           "x-ms-client-name": "enabledCredential",
-          "type": "boolean",
+          "type": "string",
           "description": "Gets or sets the whether or not HTTP is enabled."
         },
         "restAuthCredential.username": {
@@ -363,6 +343,7 @@
         "restAuthCredential.password": {
           "x-ms-client-name": "password",
           "type": "string",
+          "format": "password",
           "description": "Gets or sets the http user password."
         }
       },

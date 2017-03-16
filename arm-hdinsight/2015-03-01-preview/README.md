@@ -1,14 +1,10 @@
 # TODO list
 
 ## Swagger needed:
- * Application PUT, GET, list
- * Monitoring PUT, GET, list
- * All response objects
+Add operations in its own file
+Replace resouce properties by inheriting
+resource, subresource, optionalsubresource(arm-azuredatalake)
 ## Examples needed:
- * Application PUT, GET, list Clarify TODO list
- * Windows cluster creation
- * Examples for other operations (script actions, ...)
- * Examples for other features (Secure Hadoop, Data Lake Store as primary, ...)
-
-## Other:
- * Verify whether other operations exist (e.g., list locations)
+ * Use powershell, or azure sdk to capture Get response for example.
+ * Validate generated interface with existing sdk.
+ * Verify whether other operations exist (e.g., list locations). Loop in Ganeshan, Nemanja.

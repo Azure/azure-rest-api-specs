@@ -1,6 +1,6 @@
 {
     "parameters": {
-        "name": "app1",
+        "applicationName": "hue",
         "clusterName": "cluster1",
         "resourceGroupName": "rg1",
         "api-version": "2015-03-01-preview",
@@ -27,6 +27,7 @@
                     ]
                 }
             ],
+            "uninstallScriptActions": [],
             "httpsEndpoints": [
                 {
                     "subDomainSuffix": "dss",
@@ -36,13 +37,30 @@
                     ]
                 }
             ],
-            "applicationType": "CustomApplication"
+            "ProvisioningState": "",
+            "applicationType": "CustomApplication",
+            "ErrorInfos": []
         }
     },
     "responses": {
         "200": {
-            "headers": {
-                "location": "https://management.azure.com/subscriptions/subid/providers/Microsoft.HDInsight/pathToOperationResult"
+            "body": {
+                "id": "",
+                "name": "",
+                "type": "",
+                "eTag": "",
+                "tags": {},
+                "properties": {
+                    "ComputeProfile": {},
+                    "InstallScriptActions": [],
+                    "UninstallScriptActions": [],
+                    "HttpsEndpoints": [],
+                    "SshEndpoints": [],
+                    "ProvisioningState": "",
+                    "ApplicationState": "",
+                    "ErrorInfos": [],
+                    "CreatedDate": "Tue, 15 Nov 1994 08:12:31 GMT"
+                }
             }
         }
     }

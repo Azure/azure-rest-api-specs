@@ -115,7 +115,7 @@
             ],
             "x-ms-enum": {
               "name": "ApplicationName",
-              "modelAsString": false
+              "modelAsString": true
             }
           }
         ],
@@ -132,7 +132,7 @@
         "tags": [
           "Applications"
         ],
-        "description": "Lists all of the applications HDInsight cluster.",
+        "description": "The operation creates applications for the HDInsight cluster.",
         "operationId": "Applications_Create",
         "x-ms-examples": {
           "Create Application": {
@@ -206,12 +206,6 @@
             "description": "The name of the cluster."
           },
           {
-            "$ref": "#/parameters/ApiVersionParameter"
-          },
-          {
-            "$ref": "#/parameters/SubscriptionIdParameter"
-          },
-          {
             "name": "applicationName",
             "in": "path",
             "required": true,
@@ -224,6 +218,12 @@
               "name": "ApplicationName",
               "modelAsString": false
             }
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
           }
         ],
         "responses": {
@@ -233,7 +233,7 @@
         }
       }
     },
-    "/providers/Microsoft.HDinsight/operations": {
+    "/providers/Microsoft.HDInsight/operations": {
       "get": {
         "tags": [
           "Operations"
