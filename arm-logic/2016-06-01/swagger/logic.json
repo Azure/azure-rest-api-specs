@@ -4956,6 +4956,10 @@
         "encryptionAlgorithm": {
           "$ref": "#/definitions/EncryptionAlgorithm",
           "description": "The encryption algorithm."
+        },
+        "signingAlgorithm": {
+          "$ref": "#/definitions/SigningAlgorithm",
+          "description": "The signing algorithm."
         }
       },
       "description": "The AS2 agreement validation settings."
@@ -5828,6 +5832,18 @@
       ],
       "x-ms-enum": {
         "name": "EncryptionAlgorithm",
+        "modelAsString": false
+      }
+    },
+    "SigningAlgorithm": {
+      "type": "string",
+      "enum": [
+        "NotSpecified",
+        "Default",
+        "SHA1"
+      ],
+      "x-ms-enum": {
+        "name": "SigningAlgorithm",
         "modelAsString": false
       }
     },
