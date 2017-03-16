@@ -175,6 +175,35 @@
         }
     },
     "definitions": {
+    "Resource":{
+      "description":"The resource model definition for an ARM resource.",
+      "properties":{  
+        "id":{  
+          "readOnly":true,
+          "type":"string",
+          "description":"Fully qualified resource Id for the resource. Ex - /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/{resourceProviderNamespace}/{resourceType}/{resourceName}"
+        },
+        "name":{  
+          "readOnly":true,
+          "type":"string",
+          "description":"The name of the resource"
+        },
+        "type":{  
+          "readOnly":true,
+          "type":"string",
+          "description":"The type of the resource. Ex- Microsoft.Compute/virtualMachines or Microsoft.Storage/storageAccounts."
+        }
+      },
+      "x-ms-azure-resource": true
+    },
+    "ProxyResource":{  
+      "description":"The resource model definition for a ARM proxy resource. It will have everything other than location and tags.",
+      "allOf":[  
+        {  
+          "$ref":"#/definitions/Resource"
+        }
+      ]
+    },
         "ImportExtensionProperties": {
             "properties": {
                 "operationMode": {
@@ -221,7 +250,7 @@
                 }
             },
             "allOf": [{
-                "$ref": "./resourceDefinitions.json#/definitions/ProxyResource"
+                "$ref": "#/definitions/ProxyResource"
             }],
             "description": "Response for Import/Export Get operation."
         },

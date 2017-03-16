@@ -21,7 +21,7 @@
         "tags": [
           "SecurityAlert"
         ],
-        "description": "Gets a Threat Detection policy associated with a database.",
+        "description": "Gets a database's threat detection policy.",
         "operationId": "Databases_GetThreatDetectionPolicy",
         "x-ms-examples": {
           "Get database security alert policy": { "$ref": "../examples/DatabaseSecurityAlertGet.json" }
@@ -63,7 +63,7 @@
         "tags": [
           "SecurityAlert"
         ],
-        "description": "Creates or updates a Threat Detection policy for a database.",
+        "description": "Creates or updates a database's threat detection policy.",
         "operationId": "Databases_CreateOrUpdateThreatDetectionPolicy",
         "x-ms-examples": {
           "Create database security alert policy min": { "$ref": "../examples/DatabaseSecurityAlertCreateMin.json" },
@@ -87,7 +87,7 @@
             "type": "string"
           },
           {
-            "name": "databaseSecurityAlertPolicy",
+            "name": "parameters",
             "in": "body",
             "description": "The database Threat Detection policy.",
             "required": true,
@@ -120,6 +120,68 @@
     }
   },
   "definitions": {
+    "Resource":{
+      "description":"The resource model definition for an ARM resource.",
+      "properties":{  
+        "id":{  
+          "readOnly":true,
+          "type":"string",
+          "description":"Fully qualified resource Id for the resource. Ex - /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/{resourceProviderNamespace}/{resourceType}/{resourceName}"
+        },
+        "name":{  
+          "readOnly":true,
+          "type":"string",
+          "description":"The name of the resource"
+        },
+        "type":{  
+          "readOnly":true,
+          "type":"string",
+          "description":"The type of the resource. Ex- Microsoft.Compute/virtualMachines or Microsoft.Storage/storageAccounts."
+        }
+      },
+      "x-ms-azure-resource": true
+    },
+    "TrackedResource":{  
+      "description":"The resource model definition for an ARM tracked top level resource.",
+      "properties":{  
+        "tags":{  
+          "type":"object",
+          "additionalProperties":{  
+            "type":"string"
+          },
+          "x-ms-mutability":[  
+            "read",
+            "create",
+            "update"
+          ],
+          "description":"Resource tags."
+        },
+        "location":{  
+          "type":"string",
+          "x-ms-mutability":[  
+            "read",
+            "create"
+          ],
+          "description":"The geo-location where the resource lives"
+        }
+      },
+      "required":[  
+        "location"
+      ],
+      "allOf":[  
+        {  
+          "$ref":"#/definitions/Resource"
+        }
+      ]
+    },
+    "ProxyResource":{  
+      "description":"The resource model definition for a ARM proxy resource. It will have everything other than location and tags.",
+      "allOf":[  
+        {  
+          "$ref":"#/definitions/Resource"
+        }
+      ]
+    },
     "DatabaseSecurityAlertPolicy": {
       "description": "Contains information about a database Threat Detection policy.",
       "type": "object",
@@ -144,7 +206,7 @@
       },
       "allOf": [
         {
-          "$ref": "./resourceDefinitions.json#/definitions/ProxyResource"
+          "$ref": "#/definitions/ProxyResource"
         }
       ]
     },

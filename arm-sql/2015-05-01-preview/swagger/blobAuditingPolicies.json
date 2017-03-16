@@ -21,7 +21,7 @@
         "tags": [
           "DatabaseBlobAuditingPolicies"
         ],
-        "description": "Gets a blob auditing policy associated with a database.",
+        "description": "Gets a database's blob auditing policy.",
         "operationId": "Databases_GetBlobAuditingPolicy",
         "x-ms-examples": {
           "Get database blob auditing policy": { "$ref": "../examples/DatabaseBlobAuditingGet.json" }
@@ -63,7 +63,7 @@
         "tags": [
           "DatabaseBlobAuditingPolicies"
         ],
-        "description": "Creates or updates a blob auditing policy for a database.",
+        "description": "Creates or updates a database's blob auditing policy.",
         "operationId": "Databases_CreateOrUpdateBlobAuditingPolicy",
         "x-ms-examples": {
           "Create database blob auditing policy min": { "$ref": "../examples/DatabaseBlobAuditingCreateMin.json" },
@@ -87,13 +87,13 @@
             "type": "string"
           },
           {
-            "name": "databaseBlobAuditingPolicy",
+            "name": "parameters",
             "in": "body",
             "required": true,
             "schema": {
               "$ref": "#/definitions/DatabaseBlobAuditingPolicy"
             },
-            "description": "The name of the database blob auditing policy."
+            "description": "The database blob auditing policy."
           },
           {
             "$ref": "#/parameters/ApiVersionParameter"
@@ -120,6 +120,35 @@
     }
   },
   "definitions": {
+    "Resource":{
+      "description":"The resource model definition for an ARM resource.",
+      "properties":{  
+        "id":{  
+          "readOnly":true,
+          "type":"string",
+          "description":"Fully qualified resource Id for the resource. Ex - /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/{resourceProviderNamespace}/{resourceType}/{resourceName}"
+        },
+        "name":{  
+          "readOnly":true,
+          "type":"string",
+          "description":"The name of the resource"
+        },
+        "type":{  
+          "readOnly":true,
+          "type":"string",
+          "description":"The type of the resource. Ex- Microsoft.Compute/virtualMachines or Microsoft.Storage/storageAccounts."
+        }
+      },
+      "x-ms-azure-resource": true
+    },
+    "ProxyResource":{  
+      "description":"The resource model definition for a ARM proxy resource. It will have everything other than location and tags.",
+      "allOf":[  
+        {  
+          "$ref":"#/definitions/Resource"
+        }
+      ]
+    },
     "DatabaseBlobAuditingPolicy": {
       "description": "Contains information about a database Blob Auditing policy.",
       "type": "object",
@@ -143,7 +172,7 @@
         }
       },
       "allOf": [
-        { "$ref": "./resourceDefinitions.json#/definitions/ProxyResource" }
+        { "$ref": "#/definitions/ProxyResource" }
       ]
     },
     "DatabaseBlobAuditingPolicyProperties": {

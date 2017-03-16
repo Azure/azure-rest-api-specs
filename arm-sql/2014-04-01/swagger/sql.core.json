@@ -1455,6 +1455,68 @@
     }
   },
   "definitions": {
+    "Resource":{
+      "description":"The resource model definition for an ARM resource.",
+      "properties":{  
+        "id":{  
+          "readOnly":true,
+          "type":"string",
+          "description":"Fully qualified resource Id for the resource. Ex - /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/{resourceProviderNamespace}/{resourceType}/{resourceName}"
+        },
+        "name":{  
+          "readOnly":true,
+          "type":"string",
+          "description":"The name of the resource"
+        },
+        "type":{  
+          "readOnly":true,
+          "type":"string",
+          "description":"The type of the resource. Ex- Microsoft.Compute/virtualMachines or Microsoft.Storage/storageAccounts."
+        }
+      },
+      "x-ms-azure-resource": true
+    },
+    "TrackedResource":{  
+      "description":"The resource model definition for an ARM tracked top level resource.",
+      "properties":{  
+        "tags":{  
+          "type":"object",
+          "additionalProperties":{  
+            "type":"string"
+          },
+          "x-ms-mutability":[  
+            "read",
+            "create",
+            "update"
+          ],
+          "description":"Resource tags."
+        },
+        "location":{  
+          "type":"string",
+          "x-ms-mutability":[  
+            "read",
+            "create"
+          ],
+          "description":"The geo-location where the resource lives"
+        }
+      },
+      "required":[  
+        "location"
+      ],
+      "allOf":[  
+        {  
+          "$ref":"#/definitions/Resource"
+        }
+      ]
+    },
+    "ProxyResource":{  
+      "description":"The resource model definition for a ARM proxy resource. It will have everything other than location and tags.",
+      "allOf":[  
+        {  
+          "$ref":"#/definitions/Resource"
+        }
+      ]
+    },
     "RecommendedElasticPoolMetric": {
       "properties": {
         "dateTime": {
@@ -1564,7 +1626,7 @@
       },
       "allOf": [
         {
-          "$ref": "./resourceDefinitions.json#/definitions/ProxyResource"
+          "$ref": "#/definitions/ProxyResource"
         }
       ],
       "description": "Represents a recommented elastic pool."
@@ -1665,7 +1727,7 @@
       },
       "allOf": [
         {
-          "$ref": "./resourceDefinitions.json#/definitions/TrackedResource"
+          "$ref": "#/definitions/TrackedResource"
         }
       ],
       "description": "Represents a database elastic pool."
@@ -1819,7 +1881,7 @@
       },
       "allOf": [
         {
-          "$ref": "./resourceDefinitions.json#/definitions/ProxyResource"
+          "$ref": "#/definitions/ProxyResource"
         }
       ],
       "description": "Represents the activity on an elastic pool."
@@ -1941,7 +2003,7 @@
       },
       "allOf": [
         {
-          "$ref": "./resourceDefinitions.json#/definitions/ProxyResource"
+          "$ref": "#/definitions/ProxyResource"
         }
       ],
       "description": "Represents the activity on an elastic pool."
@@ -2023,7 +2085,7 @@
       },
       "allOf": [
         {
-          "$ref": "./resourceDefinitions.json#/definitions/TrackedResource"
+          "$ref": "#/definitions/TrackedResource"
         }
       ],
       "description": "Represents a server."
@@ -2164,7 +2226,7 @@
       },
       "allOf": [
         {
-          "$ref": "./resourceDefinitions.json#/definitions/ProxyResource"
+          "$ref": "#/definitions/ProxyResource"
         }
       ],
       "description": "Represents a database recommended index."
@@ -2483,7 +2545,7 @@
       },
       "allOf": [
         {
-          "$ref": "./resourceDefinitions.json#/definitions/TrackedResource"
+          "$ref": "#/definitions/TrackedResource"
         }
       ],
       "description": "Represents a database."
@@ -2759,7 +2821,7 @@
       },
       "allOf": [
         {
-          "$ref": "./resourceDefinitions.json#/definitions/ProxyResource"
+          "$ref": "#/definitions/ProxyResource"
         }
       ],
       "description": "Represents a database restore point."
