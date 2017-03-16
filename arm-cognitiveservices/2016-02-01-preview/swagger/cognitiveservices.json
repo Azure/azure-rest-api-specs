@@ -10,12 +10,10 @@
     "https"
   ],
   "consumes": [
-    "application/json",
-    "text/json"
+    "application/json"
   ],
   "produces": [
-    "application/json",
-    "text/json"
+    "application/json"
   ],
   "paths": {
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.CognitiveServices/accounts/{accountName}": {
@@ -220,7 +218,25 @@
               "$ref": "#/definitions/CognitiveServicesAccount"
             },
             "examples": {
-              "application/json": "{\n  “id”: “/subscriptions/{id}/resourceGroups/{group}/providers/{rpns}/{type}/{name}”,\n  “name”: “{name}”,\n  “type”: “Microsoft.CognitiveSerices/accounts”,\n  \"location\": \"North US\",\n  \"tags\": {\n    \"key1\": \"value 1\",\n    \"key2\": \"value 2\"\n   },\n  \"kind\" : \"resource kind\",\n   \"sku\": {\n\t    \"name\": \"sku code\"\n\t} \n  “etag”: “00000000-0000-0000-0000-000000000000”,\n  \"properties\": { }\n}"
+              "application/json": {
+                "id": "/subscriptions/f9b96b36-1f5e-4021-8959-51527e26e6d3/resourceGroups/felixwa-01/providers/Microsoft.CognitiveServices/accounts/felixwatest1",
+                "name": "felixwatest1",
+                "type": "Microsoft.CognitiveSerices/accounts",
+                "location": "West US",
+                "tags": {
+                  "Owner": "felixwa",
+                  "ExpiredDate": "2017/09/01"
+                },
+                "kind": "Emotion",
+                "sku": {
+                  "name": "F0"
+                },
+                "etag": "W/\"datetime'2017-02-28T08%3A38%3A56.2597251Z'\"",
+                "properties": {
+                  "endpoint": "https://westus.api.cognitive.microsoft.com/emotion/v1.0",
+                  "provisioningState": "Succeeded"
+                }
+              }
             }
           },
           "default": {
@@ -238,7 +254,6 @@
           "CognitiveServicesAccounts"
         ],
         "description": "Returns all the resources of a particular type belonging to a resource group",
-        "operationId": "CognitiveServicesAccounts_ListByResourceGroup",
         "parameters": [
           {
             "name": "resourceGroupName",
@@ -261,7 +276,44 @@
               "$ref": "#/definitions/CognitiveServicesAccountListResult"
             },
             "examples": {
-              "application/json": "{\n  “value”: [\n    {\n        “id”: “{url to resource 1}”,\n        “name”: “Name1”,\n        “type”: “Microsoft.CognitiveServices/accounts”,\n        \"location\": \"North US\"    \n        \"kind\" : \"resource kind\",\n        \"sku\": {\n\t        \"name\": \"sku code\"\n\t  }, \n        \"etag\": \"00000000-0000-0000-0000-000000000000\",\n        \"properties\": { }\n    },\n    {\n        “id”: “{url to resource 2}”,\n        “name”: “Name2”,\n        “type”: “Microsoft.CognitiveServices/accounts”,\n        \"location\": \"North US\",\n        \"kind\" : \"resource kind\",\n        \"sku\": {\n\t        \"name\": \"sku code\"\n\t  }, \n        \"etag\": \"00000000-0000-0000-0000-000000000000\",\n        \"properties\": { }\n    }\n  ],\n  “nextLink”: “{originalRequestUrl}?$skipToken={opaqueString}”\n}"
+              "application/json": {
+                "value": [
+                  {
+                    "id": "/subscriptions/f9b96b36-1f5e-4021-8959-51527e26e6d3/resourceGroups/felixwa-01/providers/Microsoft.CognitiveServices/accounts/felixwatest1",
+                    "name": "felixwatest1",
+                    "type": "Microsoft.CognitiveServices/accounts",
+                    "location": "westus",
+                    "sku": {
+                      "name": "F0"
+                    },
+                    "kind": "Emotion",
+                    "tags": {
+                      "Owner": "felixwa",
+                      "ExpiredDate": "2017/09/01"
+                    },
+                    "etag": "W/\"datetime'2017-02-28T08%3A38%3A56.2597251Z'\"",
+                    "properties": {
+                      "endpoint": "https://westus.api.cognitive.microsoft.com/emotion/v1.0",
+                      "provisioningState": "Succeeded"
+                    }
+                  },
+                  {
+                    "id": "/subscriptions/f9b96b36-1f5e-4021-8959-51527e26e6d3/resourceGroups/felixwa-01/providers/Microsoft.CognitiveServices/accounts/newspeech",
+                    "name": "newspeech",
+                    "type": "Microsoft.CognitiveServices/accounts",
+                    "location": "global",
+                    "sku": {
+                      "name": "S0"
+                    },
+                    "kind": "Bing.Speech",
+                    "etag": "W/\"datetime'2017-03-01T07%3A01%3A13.749955Z'\"",
+                    "properties": {
+                      "endpoint": "https://api.cognitive.microsoft.com/sts/v1.0",
+                      "provisioningState": "Succeeded"
+                    }
+                  }
+                ]
+              }
             }
           },
           "default": {
@@ -282,7 +334,6 @@
           "CognitiveServicesAccounts"
         ],
         "description": "Returns all the resources of a particular type belonging to a subscription.",
-        "operationId": "CognitiveServicesAccounts_List",
         "parameters": [
           {
             "$ref": "#/parameters/apiVersionParameter"
@@ -298,7 +349,40 @@
               "$ref": "#/definitions/CognitiveServicesAccountListResult"
             },
             "examples": {
-              "application/json": "{\n  “value”: [\n    {\n        “id”: “{url to resource 1}”,\n        “name”: “Name1”,\n        “type”: “Microsoft.CognitiveServices/accounts”,\n        \"location\": \"North US\"    \n        \"kind\" : \"resource kind\",\n            \"sku\": {\n            \"name\": \"sku code\"\n        }, \n       \"etag\": \"00000000-0000-0000-0000-000000000000\",\n        \"properties\": { }\n    },\n    {\n        “id”: “{url to resource 2}”,\n        “name”: “Name2”,\n        “type”: “Microsoft.CognitiveServices/accounts”,\n        \"location\": \"North US\",\n        \"kind\" : \"resource kind\",\n            \"sku\": {\n            \"name\": \"sku code\"\n        }, \n       \"etag\": \"00000000-0000-0000-0000-000000000000\",\n        \"properties\": { }\n    }\n  ],\n  “nextLink”: “{originalRequestUrl}?$skipToken={opaqueString}”\n}\n"
+              "application/json": {
+                "value": [
+                  {
+                    "id": "/subscriptions/f9b96b36-1f5e-4021-8959-51527e26e6d3/resourceGroups/anglitest/providers/Microsoft.CognitiveServices/accounts/toketestray",
+                    "name": "toketestray",
+                    "type": "Microsoft.CognitiveServices/accounts",
+                    "location": "global",
+                    "sku": {
+                      "name": "S0"
+                    },
+                    "kind": "Bing.Speech",
+                    "etag": "W/\"datetime'2017-03-05T03%3A34%3A24.9324079Z'\"",
+                    "properties": {
+                      "endpoint": "https://api.cognitive.microsoft.com/sts/v1.0",
+                      "provisioningState": "Succeeded"
+                    }
+                  },
+                  {
+                    "id": "/subscriptions/f9b96b36-1f5e-4021-8959-51527e26e6d3/resourceGroups/bvttest/providers/Microsoft.CognitiveServices/accounts/bingSearch",
+                    "name": "bingSearch",
+                    "type": "Microsoft.CognitiveServices/accounts",
+                    "location": "global",
+                    "sku": {
+                      "name": "S1"
+                    },
+                    "kind": "Bing.Search",
+                    "etag": "W/\"datetime'2017-03-10T08%3A16%3A43.9972121Z'\"",
+                    "properties": {
+                      "endpoint": "https://api.cognitive.microsoft.com/bing/v5.0",
+                      "provisioningState": "Succeeded"
+                    }
+                  }
+                ]
+              }
             }
           },
           "default": {
@@ -353,8 +437,8 @@
             },
             "examples": {
               "application/json": {
-                "key1": "xxxx",
-                "key2": "xxxxx"
+                "key1": "KEY1",
+                "key2": "KEY2"
               }
             }
           },
@@ -460,11 +544,28 @@
         "responses": {
           "200": {
             "description": "The resource provider should return 200 (OK) to indicate that the operation completed successfully.\nFor a detailed explanation of each field in the response body, please refer to the request body description in the PUT resource section. The only GET specific properties are “name,” “type” and “id.”\nField\tDescription\nsku\tRequired, object\n\tThe exact set of keys that define this sku. This matches the fields on the respective resource.\nsku.name\tRequired, string\n\tThe name of the SKU. This is typically a letter + number code, such as A0 or P3\nsku.tier\tRequired, string\n\tThe tier of this particular SKU. Typically one of:\n\t· Free\n\t· Basic\n\t· Standard\n\t· Premium\n",
-             "schema": {
+            "schema": {
               "$ref": "#/definitions/CognitiveServicesAccountEnumerateSkusResult"
             },
             "examples": {
-              "application/json": "{\n    \"value\": [\n        {\n            \"resourceType\": \"Microsoft.CognitiveServices/accounts\"\n            \"sku\": {\n                \"name\": \"sku name\",\n                \"tier\": \"sku tier\"\n            }\n        },\n        {\n            \"resourceType\": \"Microsoft.CognitiveServices/accounts\"\n            \"sku\": {\n                \"name\": \"sku name\",\n                \"tier\": \"sku tier\"\n            }\n        }\n    ]\n}"
+              "application/json": {
+                "value": [
+                  {
+                    "resourceType": "Microsoft.CognitiveServices/accounts",
+                    "sku": {
+                      "name": "F0",
+                      "tier": "Free"
+                    }
+                  },
+                  {
+                    "resourceType": "Microsoft.CognitiveServices/accounts",
+                    "sku": {
+                      "name": "S0",
+                      "tier": "Standard"
+                    }
+                  }
+                ]
+              }
             }
           },
           "default": {
@@ -610,7 +711,7 @@
         },
         "kind": {
           "type": "string",
-          "description": "Type of cognitive service account."       
+          "description": "Type of cognitive service account."
         },
         "location": {
           "type": "string",
@@ -675,7 +776,8 @@
           "type": "string",
           "description": "Endpoint of the created account"
         }
-      }
+      },
+      "description": "Properties of cognitive services account."
     },
     "CognitiveServicesAccountKeys": {
       "properties": {
@@ -729,14 +831,16 @@
         "sku": {
           "$ref": "#/definitions/Sku"
         }
-      }
+      },
+      "description": "Cognitive Services resource and sku."
     },
     "Error": {
       "properties": {
         "error": {
           "$ref": "#/definitions/ErrorBody"
         }
-      }
+      },
+      "description": "Cognitive Services error object."
     },
     "ErrorBody": {
       "properties": {
