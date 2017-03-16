@@ -716,6 +716,8 @@
           }
         },
         "clusterId": {
+          "readOnly": true,
+          "description": "The cluster id used internally by ServiceFabirc",
           "type": "string"
         },
         "clusterState": {
@@ -740,10 +742,11 @@
           ]
         },
         "clusterEndpoint": {
+          "readOnly": true,
           "type": "string"
         },
         "clusterCodeVersion": {
-          "description": "The ServiceFabric code version",
+          "description": "The ServiceFabric code version, you don't need to set it, when you choose upgradeMode as Automatic",
           "type": "string"
         },
         "certificate": {
@@ -816,7 +819,16 @@
         "upgradeDescription": {
           "$ref": "#/definitions/PaasClusterUpgradePolicy"
         }
-      }
+      },
+      "required": [
+        "managementEndpoint",
+        "reliabilityLevel",
+        "provisioningState",
+        "vmImage",
+        "diagnosticsStorageAccountConfig",
+        "nodeTypes",
+        "upgradeMode"
+      ]
     },
     "ClusterUpdateParameters": {
       "description": "Cluster update request",
