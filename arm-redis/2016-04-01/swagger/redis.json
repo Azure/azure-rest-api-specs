@@ -10,12 +10,10 @@
     "https"
   ],
   "consumes": [
-    "application/json",
-    "text/json"
+    "application/json"
   ],
   "produces": [
-    "application/json",
-    "text/json"
+    "application/json"
   ],
   "security": [
     {
@@ -36,12 +34,40 @@
     }
   },
   "paths": {
+    "/providers/Microsoft.Cache/operations": {
+      "get": {
+        "tags": [
+          "Operations"
+        ],
+        "description": "Lists all of the available REST API operations of the Microsoft.Cache provider.",
+        "operationId": "Operations_List",
+        "parameters": [
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success. The response describes the list of operations.",
+            "schema": {
+              "$ref": "#/definitions/OperationListResult"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Cache/Redis/{name}": {
       "put": {
         "tags": [
           "Redis"
         ],
         "operationId": "Redis_Create",
+        "x-ms-examples": { 
+          "RedisCacheCreate": { "$ref": "../examples/RedisCacheCreate.json" } 
+        },
         "description": "Create or replace (overwrite/recreate, with potential downtime) an existing Redis cache.",
         "x-ms-long-running-operation": true,
         "parameters": [
@@ -77,13 +103,13 @@
         ],
         "responses": {
           "201": {
-            "description": "",
+            "description": "The new redis cache was successfully created. Check provisioningStatus to see detailed status.",
             "schema": {
               "$ref": "#/definitions/RedisResource"
             }
           },
           "200": {
-            "description": "",
+            "description": "The existing redis cache was successfully updated. Check provisioningStatus to see detailed status.",
             "schema": {
               "$ref": "#/definitions/RedisResource"
             }
@@ -95,8 +121,10 @@
           "Redis"
         ],
         "operationId": "Redis_Update",
+        "x-ms-examples": { 
+          "RedisCacheUpdate": { "$ref": "../examples/RedisCacheUpdate.json" } 
+        },
         "description": "Update an existing Redis cache.",
-        "x-ms-long-running-operation": true,
         "parameters": [
           {
             "name": "resourceGroupName",
@@ -142,6 +170,9 @@
           "Redis"
         ],
         "operationId": "Redis_Delete",
+        "x-ms-examples": { 
+          "RedisCacheDelete": { "$ref": "../examples/RedisCacheDelete.json" } 
+        },
         "description": "Deletes a Redis cache.",
         "x-ms-long-running-operation": true,
         "parameters": [
@@ -168,10 +199,10 @@
         ],
         "responses": {
           "200": {
-            "description": ""
+            "description": "Successfully deleted the cache."
           },
           "204": {
-            "description": ""
+            "description": "Successfully deleted the cache."
           }
         }
       },
@@ -180,6 +211,9 @@
           "Redis"
         ],
         "operationId": "Redis_Get",
+        "x-ms-examples": { 
+          "RedisCacheGet": { "$ref": "../examples/RedisCacheGet.json" } 
+        },
         "description": "Gets a Redis cache (resource description).",
         "parameters": [
           {
@@ -205,7 +239,7 @@
         ],
         "responses": {
           "200": {
-            "description": "",
+            "description": "Successfully found the cache",
             "schema": {
               "$ref": "#/definitions/RedisResource"
             }
@@ -219,6 +253,9 @@
           "Redis"
         ],
         "operationId": "Redis_ListByResourceGroup",
+        "x-ms-examples": { 
+          "RedisCacheListByResourceGroup": { "$ref": "../examples/RedisCacheListByResourceGroup.json" } 
+        },
         "description": "Lists all Redis caches in a resource group.",
         "parameters": [
           {
@@ -254,6 +291,9 @@
           "Redis"
         ],
         "operationId": "Redis_List",
+        "x-ms-examples": { 
+          "RedisCacheList": { "$ref": "../examples/RedisCacheList.json" } 
+        },
         "description": "Gets all Redis caches in the specified subscription.",
         "parameters": [
           {
@@ -272,7 +312,7 @@
           }
         },
         "x-ms-pageable": {
-            "nextLinkName": "nextLink"
+          "nextLinkName": "nextLink"
         }
       }
     },
@@ -282,6 +322,9 @@
           "Redis"
         ],
         "operationId": "Redis_ListKeys",
+        "x-ms-examples": { 
+          "RedisCacheListKeys": { "$ref": "../examples/RedisCacheListKeys.json" } 
+        },
         "description": "Retrieve a Redis cache's access keys. This operation requires write permission to the cache resource.",
         "parameters": [
           {
@@ -321,6 +364,9 @@
           "Redis"
         ],
         "operationId": "Redis_RegenerateKey",
+        "x-ms-examples": { 
+          "RedisCacheRegenerateKey": { "$ref": "../examples/RedisCacheRegenerateKey.json" } 
+        },
         "description": "Regenerate Redis cache's access keys. This operation requires write permission to the cache resource.",
         "parameters": [
           {
@@ -369,6 +415,9 @@
           "Redis"
         ],
         "operationId": "Redis_ForceReboot",
+        "x-ms-examples": { 
+          "RedisCacheForceReboot": { "$ref": "../examples/RedisCacheForceReboot.json" } 
+        },
         "description": "Reboot specified Redis node(s). This operation requires write permission to the cache resource. There can be potential data loss.",
         "parameters": [
           {
@@ -403,10 +452,10 @@
         ],
         "responses": {
           "200": {
-            "description": ""
-          },
-          "204": {
-            "description": ""
+            "description": "Reboot operation successfully enqueued",
+            "schema": {
+              "$ref": "#/definitions/RedisForceRebootResponse" 
+            }
           }
         }
       }
@@ -417,6 +466,9 @@
           "Redis"
         ],
         "operationId": "Redis_ImportData",
+        "x-ms-examples": { 
+          "RedisCacheImport": { "$ref": "../examples/RedisCacheImport.json" } 
+        },
         "x-ms-long-running-operation": true,
         "description": "Import data into Redis cache.",
         "parameters": [
@@ -452,7 +504,13 @@
         ],
         "responses": {
           "202": {
-            "description": ""
+            "description": "Import operation successfully enqueued; follow the Location header to poll for final outcome."
+          },
+          "200": {
+            "description": "Import operation succeeded."
+          },
+          "204": {
+            "description": "Import operation succeeded."
           }
         }
       }
@@ -463,8 +521,11 @@
           "Redis"
         ],
         "operationId": "Redis_ExportData",
+        "x-ms-examples": { 
+          "RedisCacheExport": { "$ref": "../examples/RedisCacheExport.json" } 
+        },
         "x-ms-long-running-operation": true,
-        "description": "Import data into Redis cache.",
+        "description": "Export data from the redis cache to blobs in a container.",
         "parameters": [
           {
             "name": "resourceGroupName",
@@ -498,7 +559,220 @@
         ],
         "responses": {
           "202": {
-            "description": ""
+            "description": "Export operation successfully enqueued; follow the Location header to poll for final outcome."
+          },
+          "200": {
+            "description": "Export operation succeeded."
+          },
+          "204": {
+            "description": "Export operation succeeded."
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Cache/Redis/{cacheName}/firewallRules": {
+      "get": {
+        "tags": [
+          "Redis",
+          "FirewallRules"
+        ],
+        "operationId": "FirewallRules_List",
+        "description": "Gets all firewall rules in the specified redis cache.",
+        "x-ms-examples": { 
+          "RedisCacheFirewallRulesList": { "$ref": "../examples/RedisCacheFirewallRulesList.json" } 
+        },
+        "parameters": [
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "name": "resourceGroupName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the resource group."
+          },
+          {
+            "name": "cacheName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the Redis cache."
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successfully got the current rules",
+            "schema": {
+              "$ref": "#/definitions/RedisFirewallRuleListResult"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Cache/Redis/{cacheName}/firewallRules/{ruleName}": {
+      "put": {
+        "tags": [
+          "Redis",
+          "FirewallRules"
+        ],
+        "operationId": "RedisFirewallRule_CreateOrUpdate",
+        "description": "Create or update a redis cache firewall rule",
+        "x-ms-examples": { 
+          "RedisCacheFirewallRuleCreate": { "$ref": "../examples/RedisCacheFirewallRuleCreate.json" }
+        },
+        "parameters": [
+          {
+            "name": "resourceGroupName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the resource group."
+          },
+          {
+            "name": "cacheName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the Redis cache."
+          },
+          {
+            "name": "ruleName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the firewall rule."
+          },
+          {
+            "name": "parameters",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/RedisFirewallRule"
+            },
+            "description": "Parameters supplied to the create or update redis firewall rule operation."
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Resource was successfully updated",
+            "schema": {
+              "$ref": "#/definitions/RedisFirewallRule"
+            }
+          },
+          "201": {
+            "description": "Resource was successfully created",
+            "schema": {
+              "$ref": "#/definitions/RedisFirewallRule"
+            }
+          }
+        }
+      },
+      "get": {
+        "tags": [
+          "Redis",
+          "FirewallRules"
+        ],
+        "operationId": "RedisFirewallRule_Get",
+        "description": "Gets a single firewall rule in a specified redis cache.",
+        "x-ms-examples": { 
+          "RedisCacheFirewallRuleGet": { "$ref": "../examples/RedisCacheFirewallRuleGet.json" }
+        },
+        "parameters": [
+          {
+            "name": "resourceGroupName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the resource group."
+          },
+          {
+            "name": "cacheName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the Redis cache."
+          },
+          {
+            "name": "ruleName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the firewall rule."
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successfully found the rule",
+            "schema": {
+              "$ref": "#/definitions/RedisFirewallRule"
+            }
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "Redis",
+          "FirewallRules"
+        ],
+        "operationId": "RedisFirewallRule_Delete",
+        "description": "Deletes a single firewall rule in a specified redis cache.",
+        "x-ms-examples": { 
+          "RedisCacheFirewallRuleDelete": { "$ref": "../examples/RedisCacheFirewallRuleDelete.json" }
+        },
+        "parameters": [
+          {
+            "name": "resourceGroupName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the resource group."
+          },
+          {
+            "name": "cacheName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the Redis cache."
+          },
+          {
+            "name": "ruleName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the firewall rule."
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successfully deleted the rule"
+          },
+          "204": {
+            "description": "Successfully deleted the rule"
           }
         }
       }
@@ -509,7 +783,10 @@
           "Redis"
         ],
         "operationId": "PatchSchedules_CreateOrUpdate",
-        "description": "Create or replace the patching schedule for Redis cache.",
+        "x-ms-examples": { 
+          "RedisCachePatchSchedulesCreateOrUpdate": { "$ref": "../examples/RedisCachePatchSchedulesCreateOrUpdate.json" } 
+        },
+        "description": "Create or replace the patching schedule for Redis cache (requires Premium SKU).",
         "parameters": [
           {
             "name": "resourceGroupName",
@@ -532,7 +809,7 @@
             "schema": {
               "$ref": "#/definitions/RedisPatchSchedule"
             },
-            "description": "Parameters to set patch schedules for Redis cache."
+            "description": "Parameters to set the patching schedule for Redis cache."
           },
           {
             "$ref": "#/parameters/ApiVersionParameter"
@@ -543,7 +820,13 @@
         ],
         "responses": {
           "200": {
-            "description": "",
+            "description": "The patch schedule was successfully updated.",
+            "schema": {
+              "$ref": "#/definitions/RedisPatchSchedule"
+            }
+          },
+          "201": {
+            "description": "The patch schedule was successfully created.",
             "schema": {
               "$ref": "#/definitions/RedisPatchSchedule"
             }
@@ -555,7 +838,10 @@
           "Redis"
         ],
         "operationId": "PatchSchedules_Delete",
-        "description": "Deletes the patching schedule for Redis cache.",
+        "x-ms-examples": { 
+          "RedisCachePatchSchedulesDelete": { "$ref": "../examples/RedisCachePatchSchedulesDelete.json" } 
+        },
+        "description": "Deletes the patching schedule of a redis cache (requires Premium SKU).",
         "parameters": [
           {
             "name": "resourceGroupName",
@@ -569,7 +855,7 @@
             "in": "path",
             "required": true,
             "type": "string",
-            "description": "The name of the Redis cache."
+            "description": "The name of the redis cache."
           },
           {
             "$ref": "#/parameters/ApiVersionParameter"
@@ -580,7 +866,10 @@
         ],
         "responses": {
           "200": {
-            "description": ""
+            "description": "Success."
+          },
+          "204": {
+            "description": "Success."
           }
         }
       },
@@ -589,7 +878,10 @@
           "Redis"
         ],
         "operationId": "PatchSchedules_Get",
-        "description": "Gets the patching schedule for Redis cache.",
+        "x-ms-examples": { 
+          "RedisCachePatchSchedulesGet": { "$ref": "../examples/RedisCachePatchSchedulesGet.json" } 
+        },
+        "description": "Gets the patching schedule of a redis cache (requires Premium SKU).",
         "parameters": [
           {
             "name": "resourceGroupName",
@@ -603,7 +895,7 @@
             "in": "path",
             "required": true,
             "type": "string",
-            "description": "The name of the Redis cache."
+            "description": "The name of the redis cache."
           },
           {
             "$ref": "#/parameters/ApiVersionParameter"
@@ -614,13 +906,10 @@
         ],
         "responses": {
           "200": {
-            "description": "Response of Get patch schedules.",
+            "description": "Response of get patch schedules.",
             "schema": {
               "$ref": "#/definitions/RedisPatchSchedule"
             }
-          },
-          "404": {
-            "description": "Response if patch schedules does not exist."
           }
         }
       }
@@ -806,7 +1095,7 @@
         }
       },
       "description": "Parameters supplied to the Update Redis operation."
-    },    
+    },
     "RedisAccessKeys": {
       "properties": {
         "primaryKey": {
@@ -821,6 +1110,70 @@
         }
       },
       "description": "Redis cache access keys."
+    },
+    "RedisFirewallRule": {
+      "description": "A firewall rule on a redis cache has a name, and describes a contiguous range of IP addresses permitted to connect",
+      "properties": {
+        "id": {
+          "type": "string",
+          "readOnly": true,
+          "description": "resource ID (of the firewall rule)"
+        },
+        "name": {
+          "type": "string",
+          "readOnly": true,
+          "description": "name of the firewall rule"
+        },
+        "type": {
+          "type": "string",
+          "readOnly": true,
+          "description": "type (of the firewall rule resource = 'Microsoft.Cache/redis/firewallRule')"
+        },
+        "properties": {
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/RedisFirewallRuleProperties",
+          "description": "redis cache firewall rule properties"
+        }
+      },
+      "required": [
+        "properties"
+      ]
+    },
+    "RedisFirewallRuleProperties": {
+      "description": "Specifies a range of IP addresses permitted to connect to the cache",
+      "properties": {
+        "startIP": {
+          "type": "string",
+          "description": "lowest IP address included in the range"
+        },
+        "endIP": {
+          "type": "string",
+          "description": "highest IP address included in the range"
+        }
+      },
+      "required": [
+        "startIP",
+        "endIP"
+      ]
+    },
+    "RedisFirewallRuleListResult": {
+      "properties": {
+        "value": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/RedisFirewallRule"
+          },
+          "description": "Results of the list firewall rules operation."
+        },
+        "nextLink": {
+          "type": "string",
+          "description": "Link for next set of locations."
+        }
+      },
+      "description": "The response of list firewall rules Redis operation.",
+      "required": [
+        "value"
+      ]
     },
     "RedisResourceProperties": {
       "properties": {
@@ -854,6 +1207,11 @@
           "type": "integer",
           "format": "int32",
           "description": "Redis SSL port."
+        },
+        "accessKeys": {
+          "$ref": "#/definitions/RedisAccessKeys",
+          "readOnly": true,
+          "description": "The keys of the Redis cache - not set if this object is not the response to Create or Update redis cache"
         }
       },
       "allOf": [
@@ -1065,6 +1423,63 @@
         "properties"
       ],
       "description": "Response to put/get patch schedules for Redis cache."
+    },
+    "RedisForceRebootResponse": {
+      "properties": {
+        "Message": {
+          "readOnly": true,
+          "type": "string",
+          "description": "Status message"
+        }
+      },
+      "description": "Response to force reboot for Redis cache."
+    },
+    "Operation": {
+      "description": "REST API operation",
+      "type": "object",
+      "properties": {
+        "name": {
+          "description": "Operation name: {provider}/{resource}/{operation}",
+          "type": "string"
+        },
+        "display": {
+          "description": "The object that describes the operation.",
+          "properties": {
+            "provider": {
+              "description": "Friendly name of the resource provider",
+              "type": "string"
+            },
+            "operation": {
+              "description": "Operation type: read, write, delete, listKeys/action, etc.",
+              "type": "string"
+            },
+            "resource": {
+              "description": "Resource type on which the operation is performed.",
+              "type": "string"
+            },
+            "description": {
+              "description": "Friendly name of the operation",
+              "type": "string"
+            }
+          }
+        }
+      }
+    },
+    "OperationListResult": {
+     "description": "Result of the request to list REST API operations. It contains a list of operations and a URL nextLink to get the next set of results.",
+      "properties": {
+        "value": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Operation"
+          },
+          "description": "List of operations supported by the resource provider."
+        },
+        "nextLink": {
+          "type": "string",
+          "description": "URL to get the next set of operation list results if there are any."
+        }
+      }
     }
   },
   "parameters": {

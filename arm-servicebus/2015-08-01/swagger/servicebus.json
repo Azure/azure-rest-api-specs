@@ -1,4 +1,4 @@
-﻿{
+{
   "swagger": "2.0",
   "info": {
     "title": "ServiceBusManagementClient",
@@ -10,12 +10,10 @@
     "https"
   ],
   "consumes": [
-    "application/json",
-    "text/json"
+    "application/json"
   ],
   "produces": [
-    "application/json",
-    "text/json"
+    "application/json"
   ],
   "security": [
     {
@@ -36,12 +34,71 @@
     }
   },
   "paths": {
+    "/providers/Microsoft.ServiceBus/operations": {
+      "get": {
+        "tags": [
+          "Operations"
+        ],
+        "operationId": "Operations_List",
+        "description": "Lists all of the available ServiceBus REST API operations.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK. The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/OperationListResult"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.ServiceBus/CheckNameAvailability": {
+      "post": {
+        "tags": [
+          "Namespaces"
+        ],
+        "operationId": "Namespaces_CheckNameAvailability",
+        "description": "Check the give namespace name availability.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "name": "parameters",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/CheckNameAvailability"
+            },
+            "description": "Parameters to check availability of the given namespace name"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "check availability returned successfully.",
+            "schema": {
+              "$ref": "#/definitions/CheckNameAvailabilityResult"
+            }
+          }
+        }
+      }
+    },
     "/subscriptions/{subscriptionId}/providers/Microsoft.ServiceBus/namespaces": {
       "get": {
         "tags": [
           "Namespaces"
         ],
-        "operationId": "Namespaces_ListBySubscription",
+        "operationId": "Namespaces_List",
         "description": "Gets all the available namespaces within the subscription, irrespective of the resource groups.",
         "externalDocs": {
           "url": "https://msdn.microsoft.com/en-us/library/azure/mt639412.aspx"
@@ -79,11 +136,7 @@
         },
         "parameters": [
           {
-            "name": "resourceGroupName",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "description": "The name of the resource group."
+            "$ref": "#/parameters/resourceGroupNameParameter"
           },
           {
             "$ref": "#/parameters/ApiVersionParameter"
@@ -117,25 +170,17 @@
         },
         "parameters": [
           {
-            "name": "resourceGroupName",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "description": "The name of the resource group."
+            "$ref": "#/parameters/resourceGroupNameParameter"
           },
           {
-            "name": "namespaceName",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "description": "The namespace name."
+            "$ref": "#/parameters/namespaceNameParameter"
           },
           {
             "name": "parameters",
             "in": "body",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/NamespaceCreateOrUpdateParameters"
+              "$ref": "#/definitions/Namespace"
             },
             "description": "Parameters supplied to create a namespace resource."
           },
@@ -150,14 +195,17 @@
           "201": {
             "description": "Namespace create request accepted.",
             "schema": {
-              "$ref": "#/definitions/NamespaceResource"
+              "$ref": "#/definitions/Namespace"
             }
           },
           "200": {
             "description": "Namespace created successfully.",
             "schema": {
-              "$ref": "#/definitions/NamespaceResource"
+              "$ref": "#/definitions/Namespace"
             }
+          },
+          "202": {
+            "description": "Namespace create or update request accepted."
           }
         },
         "x-ms-long-running-operation": true
@@ -173,18 +221,10 @@
         },
         "parameters": [
           {
-            "name": "resourceGroupName",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "description": "The name of the resource group."
+            "$ref": "#/parameters/resourceGroupNameParameter"
           },
           {
-            "name": "namespaceName",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "description": "The namespace name."
+            "$ref": "#/parameters/namespaceNameParameter"
           },
           {
             "$ref": "#/parameters/ApiVersionParameter"
@@ -217,18 +257,10 @@
         },
         "parameters": [
           {
-            "name": "resourceGroupName",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "description": "The name of the resource group."
+            "$ref": "#/parameters/resourceGroupNameParameter"
           },
           {
-            "name": "namespaceName",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "description": "The namespace name."
+            "$ref": "#/parameters/namespaceNameParameter"
           },
           {
             "$ref": "#/parameters/ApiVersionParameter"
@@ -241,8 +273,55 @@
           "200": {
             "description": "Namespace successfully returned.",
             "schema": {
-              "$ref": "#/definitions/NamespaceResource"
+              "$ref": "#/definitions/Namespace"
             }
+          }
+        }
+      },
+      "patch": {
+        "tags": [
+          "Namespaces"
+        ],
+        "operationId": "Namespaces_Update",
+        "description": "Updates a service namespace. Once created, this namespace's resource manifest is immutable. This operation is idempotent.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/resourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/namespaceNameParameter"
+          },
+          {
+            "name": "parameters",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/NamespaceUpdateParameters"
+            },
+            "description": "Parameters supplied to update a namespace resource."
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": "Namespace update request accepted.",
+            "schema": {
+              "$ref": "#/definitions/Namespace"
+            }
+          },
+          "200": {
+            "description": "Namespace updated successfully.",
+            "schema": {
+              "$ref": "#/definitions/Namespace"
+            }
+          },
+          "202": {
+            "description": "Namespace update request accepted."
           }
         }
       }
@@ -259,18 +338,10 @@
         },
         "parameters": [
           {
-            "name": "resourceGroupName",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "description": "The name of the resource group."
+            "$ref": "#/parameters/resourceGroupNameParameter"
           },
           {
-            "name": "namespaceName",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "description": "The namespace name."
+            "$ref": "#/parameters/namespaceNameParameter"
           },
           {
             "$ref": "#/parameters/ApiVersionParameter"
@@ -304,32 +375,20 @@
         },
         "parameters": [
           {
-            "name": "resourceGroupName",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "description": "The name of the resource group."
+            "$ref": "#/parameters/resourceGroupNameParameter"
           },
           {
-            "name": "namespaceName",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "description": "The namespace name."
+            "$ref": "#/parameters/namespaceNameParameter"
           },
           {
-            "name": "authorizationRuleName",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "description": "Namespace authorization rule name."
+            "$ref": "#/parameters/authorizationRuleNameParameter"
           },
           {
             "name": "parameters",
             "in": "body",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/SharedAccessAuthorizationRuleCreateOrUpdateParameters"
+              "$ref": "#/definitions/SharedAccessAuthorizationRule"
             },
             "description": "The shared access authorization rule."
           },
@@ -344,7 +403,7 @@
           "200": {
             "description": "Namespace authorization rule created.",
             "schema": {
-              "$ref": "#/definitions/SharedAccessAuthorizationRuleResource"
+              "$ref": "#/definitions/SharedAccessAuthorizationRule"
             }
           }
         }
@@ -360,25 +419,13 @@
         },
         "parameters": [
           {
-            "name": "resourceGroupName",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "description": "The name of the resource group."
+            "$ref": "#/parameters/resourceGroupNameParameter"
           },
           {
-            "name": "namespaceName",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "description": "The namespace name."
+            "$ref": "#/parameters/namespaceNameParameter"
           },
           {
-            "name": "authorizationRuleName",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "description": "Authorization rule name."
+            "$ref": "#/parameters/authorizationRuleNameParameter"
           },
           {
             "$ref": "#/parameters/ApiVersionParameter"
@@ -407,25 +454,13 @@
         },
         "parameters": [
           {
-            "name": "resourceGroupName",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "description": "The name of the resource group."
+            "$ref": "#/parameters/resourceGroupNameParameter"
           },
           {
-            "name": "namespaceName",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "description": "The namespace name."
+            "$ref": "#/parameters/namespaceNameParameter"
           },
           {
-            "name": "authorizationRuleName",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "description": "Authorization rule name."
+            "$ref": "#/parameters/authorizationRuleNameParameter"
           },
           {
             "$ref": "#/parameters/ApiVersionParameter"
@@ -438,7 +473,7 @@
           "200": {
             "description": "Namespace authorization rule returned successfully.",
             "schema": {
-              "$ref": "#/definitions/SharedAccessAuthorizationRuleResource"
+              "$ref": "#/definitions/SharedAccessAuthorizationRule"
             }
           }
         }
@@ -456,25 +491,13 @@
         },
         "parameters": [
           {
-            "name": "resourceGroupName",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "description": "The name of the resource group."
+            "$ref": "#/parameters/resourceGroupNameParameter"
           },
           {
-            "name": "namespaceName",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "description": "The namespace name."
+            "$ref": "#/parameters/namespaceNameParameter"
           },
           {
-            "name": "authorizationRuleName",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "description": "The authorization rule name."
+            "$ref": "#/parameters/authorizationRuleNameParameter"
           },
           {
             "$ref": "#/parameters/ApiVersionParameter"
@@ -505,25 +528,13 @@
         },
         "parameters": [
           {
-            "name": "resourceGroupName",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "description": "The name of the resource group."
+            "$ref": "#/parameters/resourceGroupNameParameter"
           },
           {
-            "name": "namespaceName",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "description": "The namespace name."
+            "$ref": "#/parameters/namespaceNameParameter"
           },
           {
-            "name": "authorizationRuleName",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "description": "The authorization rule name."
+            "$ref": "#/parameters/authorizationRuleNameParameter"
           },
           {
             "name": "parameters",
@@ -556,25 +567,17 @@
         "tags": [
           "Queues"
         ],
-        "operationId": "Queues_ListAll",
+        "operationId": "Queues_ListByNamespace",
         "description": "Gets the queues within a namespace.",
         "externalDocs": {
           "url": "https://msdn.microsoft.com/en-us/library/azure/mt639415.aspx"
         },
         "parameters": [
           {
-            "name": "resourceGroupName",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "description": "The name of the resource group."
+            "$ref": "#/parameters/resourceGroupNameParameter"
           },
           {
-            "name": "namespaceName",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "description": "The namespace name."
+            "$ref": "#/parameters/namespaceNameParameter"
           },
           {
             "$ref": "#/parameters/ApiVersionParameter"
@@ -608,32 +611,20 @@
         },
         "parameters": [
           {
-            "name": "resourceGroupName",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "description": "The name of the resource group."
+            "$ref": "#/parameters/resourceGroupNameParameter"
           },
           {
-            "name": "namespaceName",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "description": "The namespace name."
+            "$ref": "#/parameters/namespaceNameParameter"
           },
           {
-            "name": "queueName",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "description": "The queue name."
+            "$ref": "#/parameters/queueNameParameter"
           },
           {
             "name": "parameters",
             "in": "body",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/QueueCreateOrUpdateParameters"
+              "$ref": "#/definitions/Queue"
             },
             "description": "Parameters supplied to create or update a queue resource."
           },
@@ -648,7 +639,7 @@
           "200": {
             "description": "Queue successfully created.",
             "schema": {
-              "$ref": "#/definitions/QueueResource"
+              "$ref": "#/definitions/Queue"
             }
           }
         }
@@ -664,25 +655,13 @@
         },
         "parameters": [
           {
-            "name": "resourceGroupName",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "description": "The name of the resource group."
+            "$ref": "#/parameters/resourceGroupNameParameter"
           },
           {
-            "name": "namespaceName",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "description": "The namespace name."
+            "$ref": "#/parameters/namespaceNameParameter"
           },
           {
-            "name": "queueName",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "description": "The name of the queue to be deleted."
+            "$ref": "#/parameters/queueNameParameter"
           },
           {
             "$ref": "#/parameters/ApiVersionParameter"
@@ -711,25 +690,13 @@
         },
         "parameters": [
           {
-            "name": "resourceGroupName",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "description": "The name of the resource group."
+            "$ref": "#/parameters/resourceGroupNameParameter"
           },
           {
-            "name": "namespaceName",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "description": "The namespace name."
+            "$ref": "#/parameters/namespaceNameParameter"
           },
           {
-            "name": "queueName",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "description": "The queue name."
+            "$ref": "#/parameters/queueNameParameter"
           },
           {
             "$ref": "#/parameters/ApiVersionParameter"
@@ -742,7 +709,7 @@
           "200": {
             "description": "Queue description successfully returned.",
             "schema": {
-              "$ref": "#/definitions/QueueResource"
+              "$ref": "#/definitions/Queue"
             }
           }
         }
@@ -760,25 +727,13 @@
         },
         "parameters": [
           {
-            "name": "resourceGroupName",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "description": "The name of the resource group."
+            "$ref": "#/parameters/resourceGroupNameParameter"
           },
           {
-            "name": "namespaceName",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "description": "The namespace name"
+            "$ref": "#/parameters/namespaceNameParameter"
           },
           {
-            "name": "queueName",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "description": "The queue name."
+            "$ref": "#/parameters/queueNameParameter"
           },
           {
             "$ref": "#/parameters/ApiVersionParameter"
@@ -809,39 +764,23 @@
         "description": "Creates an authorization rule for a queue.",
         "parameters": [
           {
-            "name": "resourceGroupName",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "description": "The name of the resource group."
+            "$ref": "#/parameters/resourceGroupNameParameter"
           },
           {
-            "name": "namespaceName",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "description": "The namespace name."
+            "$ref": "#/parameters/namespaceNameParameter"
           },
           {
-            "name": "queueName",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "description": "The queue name."
+            "$ref": "#/parameters/queueNameParameter"
           },
           {
-            "name": "authorizationRuleName",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "description": "Authorization rule name."
+            "$ref": "#/parameters/authorizationRuleNameParameter"
           },
           {
             "name": "parameters",
             "in": "body",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/SharedAccessAuthorizationRuleCreateOrUpdateParameters"
+              "$ref": "#/definitions/SharedAccessAuthorizationRule"
             },
             "description": "The shared access authorization rule."
           },
@@ -856,7 +795,7 @@
           "200": {
             "description": "Authorization rule successfully created.",
             "schema": {
-              "$ref": "#/definitions/SharedAccessAuthorizationRuleResource"
+              "$ref": "#/definitions/SharedAccessAuthorizationRule"
             }
           }
         }
@@ -872,32 +811,16 @@
         },
         "parameters": [
           {
-            "name": "resourceGroupName",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "description": "The name of the resource group."
+            "$ref": "#/parameters/resourceGroupNameParameter"
           },
           {
-            "name": "namespaceName",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "description": "The namespace name."
+            "$ref": "#/parameters/namespaceNameParameter"
           },
           {
-            "name": "queueName",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "description": "The queue name."
+            "$ref": "#/parameters/queueNameParameter"
           },
           {
-            "name": "authorizationRuleName",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "description": "Authorization rule name."
+            "$ref": "#/parameters/authorizationRuleNameParameter"
           },
           {
             "$ref": "#/parameters/ApiVersionParameter"
@@ -926,32 +849,16 @@
         },
         "parameters": [
           {
-            "name": "resourceGroupName",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "description": "The name of the resource group."
+            "$ref": "#/parameters/resourceGroupNameParameter"
           },
           {
-            "name": "namespaceName",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "description": "The namespace name."
+            "$ref": "#/parameters/namespaceNameParameter"
           },
           {
-            "name": "queueName",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "description": "The queue name."
+            "$ref": "#/parameters/queueNameParameter"
           },
           {
-            "name": "authorizationRuleName",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "description": "Authorization rule name."
+            "$ref": "#/parameters/authorizationRuleNameParameter"
           },
           {
             "$ref": "#/parameters/ApiVersionParameter"
@@ -964,7 +871,7 @@
           "200": {
             "description": "Authorization rule successfully returned.",
             "schema": {
-              "$ref": "#/definitions/SharedAccessAuthorizationRuleResource"
+              "$ref": "#/definitions/SharedAccessAuthorizationRule"
             }
           }
         }
@@ -982,32 +889,16 @@
         },
         "parameters": [
           {
-            "name": "resourceGroupName",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "description": "The name of the resource group."
+            "$ref": "#/parameters/resourceGroupNameParameter"
           },
           {
-            "name": "namespaceName",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "description": "The namespace name."
+            "$ref": "#/parameters/namespaceNameParameter"
           },
           {
-            "name": "queueName",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "description": "The queue name."
+            "$ref": "#/parameters/queueNameParameter"
           },
           {
-            "name": "authorizationRuleName",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "description": "The authorization rule name."
+            "$ref": "#/parameters/authorizationRuleNameParameter"
           },
           {
             "$ref": "#/parameters/ApiVersionParameter"
@@ -1038,32 +929,16 @@
         },
         "parameters": [
           {
-            "name": "resourceGroupName",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "description": "The name of the resource group."
+            "$ref": "#/parameters/resourceGroupNameParameter"
           },
           {
-            "name": "namespaceName",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "description": "The namespace name."
+            "$ref": "#/parameters/namespaceNameParameter"
           },
           {
-            "name": "queueName",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "description": "The queue name."
+            "$ref": "#/parameters/queueNameParameter"
           },
           {
-            "name": "authorizationRuleName",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "description": "The authorization rule name."
+            "$ref": "#/parameters/authorizationRuleNameParameter"
           },
           {
             "name": "parameters",
@@ -1096,25 +971,17 @@
         "tags": [
           "Topics"
         ],
-        "operationId": "Topics_ListAll",
+        "operationId": "Topics_ListByNamespace",
         "description": "Gets all the topics in a namespace.",
         "externalDocs": {
           "url": "https://msdn.microsoft.com/en-us/library/azure/mt639388.aspx"
         },
         "parameters": [
           {
-            "name": "resourceGroupName",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "description": "The name of the resource group."
+            "$ref": "#/parameters/resourceGroupNameParameter"
           },
           {
-            "name": "namespaceName",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "description": "The namespace name."
+            "$ref": "#/parameters/namespaceNameParameter"
           },
           {
             "$ref": "#/parameters/ApiVersionParameter"
@@ -1148,32 +1015,20 @@
         },
         "parameters": [
           {
-            "name": "resourceGroupName",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "description": "The name of the resource group."
+            "$ref": "#/parameters/resourceGroupNameParameter"
           },
           {
-            "name": "namespaceName",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "description": "The namespace name."
+            "$ref": "#/parameters/namespaceNameParameter"
           },
           {
-            "name": "topicName",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "description": "The topic name."
+            "$ref": "#/parameters/topicNameParameter"
           },
           {
             "name": "parameters",
             "in": "body",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/TopicCreateOrUpdateParameters"
+              "$ref": "#/definitions/Topic"
             },
             "description": "Parameters supplied to create a topic resource."
           },
@@ -1188,7 +1043,7 @@
           "200": {
             "description": "Topic successfully created.",
             "schema": {
-              "$ref": "#/definitions/TopicResource"
+              "$ref": "#/definitions/Topic"
             }
           }
         }
@@ -1204,25 +1059,13 @@
         },
         "parameters": [
           {
-            "name": "resourceGroupName",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "description": "The name of the resource group."
+            "$ref": "#/parameters/resourceGroupNameParameter"
           },
           {
-            "name": "namespaceName",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "description": "The namespace name."
+            "$ref": "#/parameters/namespaceNameParameter"
           },
           {
-            "name": "topicName",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "description": "The name of the topic to delete."
+            "$ref": "#/parameters/topicNameParameter"
           },
           {
             "$ref": "#/parameters/ApiVersionParameter"
@@ -1251,25 +1094,13 @@
         },
         "parameters": [
           {
-            "name": "resourceGroupName",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "description": "The name of the resource group."
+            "$ref": "#/parameters/resourceGroupNameParameter"
           },
           {
-            "name": "namespaceName",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "description": "The namespace name."
+            "$ref": "#/parameters/namespaceNameParameter"
           },
           {
-            "name": "topicName",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "description": "The topic name."
+            "$ref": "#/parameters/topicNameParameter"
           },
           {
             "$ref": "#/parameters/ApiVersionParameter"
@@ -1282,7 +1113,7 @@
           "200": {
             "description": "Topic description successfully retrieved.",
             "schema": {
-              "$ref": "#/definitions/TopicResource"
+              "$ref": "#/definitions/Topic"
             }
           }
         }
@@ -1300,25 +1131,13 @@
         },
         "parameters": [
           {
-            "name": "resourceGroupName",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "description": "The name of the resource group."
+            "$ref": "#/parameters/resourceGroupNameParameter"
           },
           {
-            "name": "namespaceName",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "description": "The namespace name."
+            "$ref": "#/parameters/namespaceNameParameter"
           },
           {
-            "name": "topicName",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "description": "The topic name."
+            "$ref": "#/parameters/topicNameParameter"
           },
           {
             "$ref": "#/parameters/ApiVersionParameter"
@@ -1352,39 +1171,23 @@
         },
         "parameters": [
           {
-            "name": "resourceGroupName",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "description": "The name of the resource group."
+            "$ref": "#/parameters/resourceGroupNameParameter"
           },
           {
-            "name": "namespaceName",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "description": "The namespace name."
+            "$ref": "#/parameters/namespaceNameParameter"
           },
           {
-            "name": "topicName",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "description": "The topic name."
+            "$ref": "#/parameters/topicNameParameter"
           },
           {
-            "name": "authorizationRuleName",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "description": "Authorization rule name."
+            "$ref": "#/parameters/authorizationRuleNameParameter"
           },
           {
             "name": "parameters",
             "in": "body",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/SharedAccessAuthorizationRuleCreateOrUpdateParameters"
+              "$ref": "#/definitions/SharedAccessAuthorizationRule"
             },
             "description": "The shared access authorization rule."
           },
@@ -1399,7 +1202,7 @@
           "200": {
             "description": "Topic authorization rule successfully created.",
             "schema": {
-              "$ref": "#/definitions/SharedAccessAuthorizationRuleResource"
+              "$ref": "#/definitions/SharedAccessAuthorizationRule"
             }
           }
         }
@@ -1415,32 +1218,16 @@
         },
         "parameters": [
           {
-            "name": "resourceGroupName",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "description": "The name of the resource group."
+            "$ref": "#/parameters/resourceGroupNameParameter"
           },
           {
-            "name": "namespaceName",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "description": "The namespace name."
+            "$ref": "#/parameters/namespaceNameParameter"
           },
           {
-            "name": "topicName",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "description": "The topic name."
+            "$ref": "#/parameters/topicNameParameter"
           },
           {
-            "name": "authorizationRuleName",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "description": "Authorization rule name."
+            "$ref": "#/parameters/authorizationRuleNameParameter"
           },
           {
             "$ref": "#/parameters/ApiVersionParameter"
@@ -1453,7 +1240,7 @@
           "200": {
             "description": "Topic authorization rule returned successfully.",
             "schema": {
-              "$ref": "#/definitions/SharedAccessAuthorizationRuleResource"
+              "$ref": "#/definitions/SharedAccessAuthorizationRule"
             }
           }
         }
@@ -1469,32 +1256,16 @@
         },
         "parameters": [
           {
-            "name": "resourceGroupName",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "description": "The name of the resource group."
+            "$ref": "#/parameters/resourceGroupNameParameter"
           },
           {
-            "name": "namespaceName",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "description": "The namespace name."
+            "$ref": "#/parameters/namespaceNameParameter"
           },
           {
-            "name": "topicName",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "description": "The topic name."
+            "$ref": "#/parameters/topicNameParameter"
           },
           {
-            "name": "authorizationRuleName",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "description": "Authorization rule name."
+            "$ref": "#/parameters/authorizationRuleNameParameter"
           },
           {
             "$ref": "#/parameters/ApiVersionParameter"
@@ -1525,32 +1296,16 @@
         },
         "parameters": [
           {
-            "name": "resourceGroupName",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "description": "The name of the resource group."
+            "$ref": "#/parameters/resourceGroupNameParameter"
           },
           {
-            "name": "namespaceName",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "description": "The namespace name."
+            "$ref": "#/parameters/namespaceNameParameter"
           },
           {
-            "name": "topicName",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "description": "The topic name."
+            "$ref": "#/parameters/topicNameParameter"
           },
           {
-            "name": "authorizationRuleName",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "description": "The authorization rule name."
+            "$ref": "#/parameters/authorizationRuleNameParameter"
           },
           {
             "$ref": "#/parameters/ApiVersionParameter"
@@ -1581,32 +1336,16 @@
         },
         "parameters": [
           {
-            "name": "resourceGroupName",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "description": "The name of the resource group."
+            "$ref": "#/parameters/resourceGroupNameParameter"
           },
           {
-            "name": "namespaceName",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "description": "The namespace name."
+            "$ref": "#/parameters/namespaceNameParameter"
           },
           {
-            "name": "topicName",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "description": "The topic name."
+            "$ref": "#/parameters/topicNameParameter"
           },
           {
-            "name": "authorizationRuleName",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "description": "The authorization rule name."
+            "$ref": "#/parameters/authorizationRuleNameParameter"
           },
           {
             "name": "parameters",
@@ -1639,32 +1378,20 @@
         "tags": [
           "Subscriptions"
         ],
-        "operationId": "Subscriptions_ListAll",
-        "description": "Lsit all the subscriptions under a specified topic.",
+        "operationId": "Subscriptions_ListByTopic",
+        "description": "List all the subscriptions under a specified topic.",
         "externalDocs": {
           "url": "https://msdn.microsoft.com/en-us/library/azure/mt639400.aspx"
         },
         "parameters": [
           {
-            "name": "resourceGroupName",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "description": "The name of the resource group."
+            "$ref": "#/parameters/resourceGroupNameParameter"
           },
           {
-            "name": "namespaceName",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "description": "The namespace name."
+            "$ref": "#/parameters/namespaceNameParameter"
           },
           {
-            "name": "topicName",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "description": "The topic name."
+            "$ref": "#/parameters/topicNameParameter"
           },
           {
             "$ref": "#/parameters/ApiVersionParameter"
@@ -1698,39 +1425,23 @@
         },
         "parameters": [
           {
-            "name": "resourceGroupName",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "description": "The name of the resource group."
+            "$ref": "#/parameters/resourceGroupNameParameter"
           },
           {
-            "name": "namespaceName",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "description": "The namespace name."
+            "$ref": "#/parameters/namespaceNameParameter"
           },
           {
-            "name": "topicName",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "description": "The topic name."
+            "$ref": "#/parameters/topicNameParameter"
           },
           {
-            "name": "subscriptionName",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "description": "The subscription name."
+            "$ref": "#/parameters/subscriptionNameParameter"
           },
           {
             "name": "parameters",
             "in": "body",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/SubscriptionCreateOrUpdateParameters"
+              "$ref": "#/definitions/Subscription"
             },
             "description": "Parameters supplied to create a subscription resource."
           },
@@ -1745,7 +1456,7 @@
           "200": {
             "description": "Subscription create request accepted.",
             "schema": {
-              "$ref": "#/definitions/SubscriptionResource"
+              "$ref": "#/definitions/Subscription"
             }
           }
         }
@@ -1761,32 +1472,16 @@
         },
         "parameters": [
           {
-            "name": "resourceGroupName",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "description": "The name of the resource group."
+            "$ref": "#/parameters/resourceGroupNameParameter"
           },
           {
-            "name": "namespaceName",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "description": "The namespace name."
+            "$ref": "#/parameters/namespaceNameParameter"
           },
           {
-            "name": "topicName",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "description": "The topic name."
+            "$ref": "#/parameters/topicNameParameter"
           },
           {
-            "name": "subscriptionName",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "description": "The subscription name."
+            "$ref": "#/parameters/subscriptionNameParameter"
           },
           {
             "$ref": "#/parameters/ApiVersionParameter"
@@ -1815,32 +1510,16 @@
         },
         "parameters": [
           {
-            "name": "resourceGroupName",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "description": "The name of the resource group."
+            "$ref": "#/parameters/resourceGroupNameParameter"
           },
           {
-            "name": "namespaceName",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "description": "The namespace name."
+            "$ref": "#/parameters/namespaceNameParameter"
           },
           {
-            "name": "topicName",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "description": "The topic name."
+            "$ref": "#/parameters/topicNameParameter"
           },
           {
-            "name": "subscriptionName",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "description": "The subscription name."
+            "$ref": "#/parameters/subscriptionNameParameter"
           },
           {
             "$ref": "#/parameters/ApiVersionParameter"
@@ -1853,7 +1532,7 @@
           "200": {
             "description": "Successfully retrieved subscription description.",
             "schema": {
-              "$ref": "#/definitions/SubscriptionResource"
+              "$ref": "#/definitions/Subscription"
             }
           }
         }
@@ -1861,6 +1540,31 @@
     }
   },
   "definitions": {
+    "TrackedResource": {
+      "properties": {
+        "location": {
+          "type": "string",
+          "description": "Resource location"
+        },
+        "tags": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          },
+          "description": "Resource tags"
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "#/definitions/Resource"
+        }
+      ],
+      "required": [
+        "location"
+      ],
+      "x-ms-azure-resource": true,
+      "description": "The Resource definition."
+    },
     "Resource": {
       "properties": {
         "id": {
@@ -1877,56 +1581,17 @@
           "readOnly": true,
           "type": "string",
           "description": "Resource type"
-        },
-        "location": {
-          "type": "string",
-          "description": "Resource location"
-        },
-        "tags": {
-          "type": "object",
-          "additionalProperties": {
-            "type": "string"
-          },
-          "description": "Resource tags"
         }
       },
-      "required": [
-        "location"
-      ],
-      "x-ms-azure-resource": true
-    },
-    "NamespaceCreateOrUpdateParameters": {
-      "properties": {
-        "location": {
-          "type": "string",
-          "description": "Namespace location."
-        },
-        "sku": {
-          "$ref": "#/definitions/Sku"
-        },
-        "tags": {
-          "type": "object",
-          "additionalProperties": {
-            "type": "string"
-          },
-          "description": "Namespace tags."
-        },
-        "properties": {
-          "x-ms-client-flatten": true,
-          "$ref": "#/definitions/NamespaceProperties"
-        }
-      },
-      "required": [
-        "location"
-      ],
-      "description": "Parameters supplied to the Create Or Update Namespace operation."
+      "x-ms-azure-resource": true,
+      "description": "The Resource definition for other than namespace."
     },
     "NamespaceListResult": {
       "properties": {
         "value": {
           "type": "array",
           "items": {
-            "$ref": "#/definitions/NamespaceResource"
+            "$ref": "#/definitions/Namespace"
           },
           "description": "Result of the List Namespace operation."
         },
@@ -1937,7 +1602,7 @@
       },
       "description": "The response of the List Namespace operation."
     },
-    "NamespaceResource": {
+    "Namespace": {
       "properties": {
         "sku": {
           "$ref": "#/definitions/Sku"
@@ -1949,64 +1614,55 @@
       },
       "allOf": [
         {
-          "$ref": "#/definitions/Resource"
+          "$ref": "#/definitions/TrackedResource"
         }
       ],
       "description": "Description of a namespace resource."
+    },
+    "NamespaceUpdateParameters": {
+      "properties": {
+        "tags": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          },
+          "description": "Resource tags"
+        },
+        "sku": {
+          "$ref": "#/definitions/Sku",
+          "description": "The sku of the created namespace"
+        }
+      },
+      "description": "Parameters supplied to the Patch Namespace operation."
     },
     "NamespaceProperties": {
       "properties": {
         "provisioningState": {
           "type": "string",
+          "readOnly": true,
           "description": "Provisioning state of the namespace."
-        },
-        "status": {
-          "type": "string",
-          "description": "State of the namespace.",
-          "enum": [
-            "Unknown",
-            "Creating",
-            "Created",
-            "Activating",
-            "Enabling",
-            "Active",
-            "Disabling",
-            "Disabled",
-            "SoftDeleting",
-            "SoftDeleted",
-            "Removing",
-            "Removed",
-            "Failed"
-          ],
-          "x-ms-enum": {
-            "name": "NamespaceState",
-            "modelAsString": false
-          }
         },
         "createdAt": {
           "type": "string",
           "format": "date-time",
+          "readOnly": true,
           "description": "The time the namespace was created."
         },
         "updatedAt": {
           "type": "string",
           "format": "date-time",
+          "readOnly": true,
           "description": "The time the namespace was updated."
         },
         "serviceBusEndpoint": {
-          "externalDocs": {
-            "url": "http://msdn.microsoft.com/en-us/library/windowsazure/jj873988.aspx"
-          },
           "type": "string",
+          "readOnly": true,
           "description": "Endpoint you can use to perform Service Bus operations."
         },
-        "createACSNamespace": {
-          "type": "boolean",
-          "description": "Indicates whether to create an ACS namespace."
-        },
-        "enabled": {
-          "type": "boolean",
-          "description": "Specifies whether this instance is enabled."
+        "metricId": {
+          "type": "string",
+          "readOnly": true,
+          "description": "Identifier for Azure Insights metrics"
         }
       },
       "description": "Properties of the namespace."
@@ -2043,7 +1699,7 @@
         "capacity": {
           "format": "int32",
           "type": "integer",
-          "description": "The specified messaging units for the tier."
+          "description": "The specified messaging units for the tier. For Premium tier, capacity are 1,2 and 4."
         }
       },
       "required": [
@@ -2051,29 +1707,12 @@
       ],
       "description": "SKU of the namespace."
     },
-    "SharedAccessAuthorizationRuleCreateOrUpdateParameters": {
-      "properties": {
-        "location": {
-          "type": "string",
-          "description": "data center location."
-        },
-        "name": {
-          "type": "string",
-          "description": "Name of the authorization rule."
-        },
-        "properties": {
-          "x-ms-client-flatten": true,
-          "$ref": "#/definitions/SharedAccessAuthorizationRuleProperties"
-        }
-      },
-      "description": "Parameters supplied to the Create Or Update Authorization Rules operation."
-    },
     "SharedAccessAuthorizationRuleListResult": {
       "properties": {
         "value": {
           "type": "array",
           "items": {
-            "$ref": "#/definitions/SharedAccessAuthorizationRuleResource"
+            "$ref": "#/definitions/SharedAccessAuthorizationRule"
           },
           "description": "Result of the List Authorization Rules operation."
         },
@@ -2084,7 +1723,7 @@
       },
       "description": "The response to the List Namespace operation."
     },
-    "SharedAccessAuthorizationRuleResource": {
+    "SharedAccessAuthorizationRule": {
       "properties": {
         "properties": {
           "x-ms-client-flatten": true,
@@ -2138,7 +1777,7 @@
         },
         "secondaryKey": {
           "type": "string",
-          "description": "A base64-encoded 256-bit primary key for signing and validating the SAS token."
+          "description": "A base64-encoded 256-bit secondary key for signing and validating the SAS token."
         },
         "keyName": {
           "type": "string",
@@ -2149,7 +1788,7 @@
     },
     "RegenerateKeysParameters": {
       "properties": {
-        "Policykey": {
+        "policykey": {
           "type": "string",
           "description": "Key that needs to be regenerated.",
           "enum": [
@@ -2164,32 +1803,12 @@
       },
       "description": "Parameters supplied to the Regenerate Authorization Rule operation."
     },
-    "QueueCreateOrUpdateParameters": {
-      "properties": {
-        "name": {
-          "type": "string",
-          "description": "Queue name."
-        },
-        "location": {
-          "type": "string",
-          "description": "location of the resource."
-        },
-        "properties": {
-          "x-ms-client-flatten": true,
-          "$ref": "#/definitions/QueueProperties"
-        }
-      },
-      "required": [
-        "location"
-      ],
-      "description": "Parameters supplied to the Create Or Update Queue operation."
-    },
     "QueueListResult": {
       "properties": {
         "value": {
           "type": "array",
           "items": {
-            "$ref": "#/definitions/QueueResource"
+            "$ref": "#/definitions/Queue"
           },
           "description": "Result of the List Queues operation."
         },
@@ -2200,7 +1819,7 @@
       },
       "description": "The response to the List Queues operation."
     },
-    "QueueResource": {
+    "Queue": {
       "properties": {
         "properties": {
           "x-ms-client-flatten": true,
@@ -2216,35 +1835,33 @@
     },
     "QueueProperties": {
       "properties": {
-        "lockDuration ": {
+        "lockDuration": {
           "type": "string",
-          "description": "The duration of a peek-lock; that is, the amount of time that the message is locked for other receivers. The maximum value for LockDuration is 5 minutes; the default value is 1 minute."
+          "description": "The duration of a peek-lock; that is, the amount of time that the message is locked for other receivers. The maximum value for LockDuration is 5 minutes; the default value is 1 minute. The service accepts a C# Standard TimeSpan Format for loc duration https://msdn.microsoft.com/en-us/library/ee372286(v=vs.110).aspx"
         },
         "accessedAt": {
           "type": "string",
           "format": "date-time",
+          "readOnly": true,
           "description": "Last time a message was sent, or the last time there was a receive request to this queue."
         },
         "autoDeleteOnIdle": {
           "type": "string",
-          "description": "the TimeSpan idle interval after which the queue is automatically deleted. The minimum duration is 5 minutes."
-        },
-        "entityAvailabilityStatus ": {
-          "$ref": "#/definitions/EntityAvailabilityStatus",
-          "description": "Entity availability status for the queue."
+          "description": "the TimeSpan idle interval after which the queue is automatically deleted. The minimum duration is 5 minutes. The service accepts a C# Standard TimeSpan Format for loc duration https://msdn.microsoft.com/en-us/library/ee372286(v=vs.110).aspx. Format is 'DD.HH:MM:SS' and default value of this property is 10675199 days."
         },
         "createdAt": {
           "type": "string",
           "format": "date-time",
-          "description": "The exact time the message was created."
+          "readOnly": true,
+          "description": "The exact time the Queue was created."
         },
         "defaultMessageTimeToLive": {
           "type": "string",
-          "description": "The default message time to live value. This is the duration after which the message expires, starting from when the message is sent to Service Bus. This is the default value used when TimeToLive is not set on a message itself."
+          "description": "The default message time to live value. This is the duration after which the message expires, starting from when the message is sent to Service Bus. This is the default value used when TimeToLive is not set on a message itself. Format is 'DD.HH:MM:SS' and default value of this property is 10675199 days. The service accepts a C# Standard TimeSpan Format for loc duration https://msdn.microsoft.com/en-us/library/ee372286(v=vs.110).aspx "
         },
-        "duplicateDetectionHistoryTimeWindow ": {
+        "duplicateDetectionHistoryTimeWindow": {
           "type": "string",
-          "description": "TimeSpan structure that defines the duration of the duplicate detection history. The default value is 10 minutes."
+          "description": "TimeSpan structure that defines the duration of the duplicate detection history. The default value is 10 minutes. The service accepts a C# Standard TimeSpan Format for loc duration https://msdn.microsoft.com/en-us/library/ee372286(v=vs.110).aspx . Format is 'DD.HH:MM:SS' and default value of this property is 10675199 days"
         },
         "enableBatchedOperations": {
           "type": "boolean",
@@ -2262,11 +1879,7 @@
           "type": "boolean",
           "description": "A value that indicates whether the queue is to be partitioned across multiple message brokers."
         },
-        "isAnonymousAccessible": {
-          "type": "boolean",
-          "description": "A value that indicates whether the message is accessible anonymously."
-        },
-        "maxDeliveryCount ": {
+        "maxDeliveryCount": {
           "format": "int32",
           "type": "integer",
           "description": "The maximum delivery count. A message is automatically deadlettered after this number of deliveries."
@@ -2276,12 +1889,14 @@
           "type": "integer",
           "description": "The maximum size of the queue in megabytes, which is the size of memory allocated for the queue."
         },
-        "messageCount ": {
+        "messageCount": {
           "format": "int64",
           "type": "integer",
+          "readOnly": true,
           "description": "The number of messages in the queue."
         },
         "countDetails": {
+          "readOnly": true,
           "$ref": "#/definitions/MessageCountDetails"
         },
         "requiresDuplicateDetection": {
@@ -2292,13 +1907,15 @@
           "type": "boolean",
           "description": "A value that indicates whether the queue supports the concept of sessions."
         },
-        "sizeInBytes ": {
+        "sizeInBytes": {
           "format": "int64",
           "type": "integer",
+          "readOnly": true,
           "description": "The size of the queue, in bytes."
         },
         "status": {
           "$ref": "#/definitions/EntityStatus",
+          "readOnly": true,
           "description": "Enumerates the possible values for the status of a messaging entity."
         },
         "supportOrdering": {
@@ -2308,9 +1925,11 @@
         "updatedAt": {
           "type": "string",
           "format": "date-time",
-          "description": "The exact time the message was updated."
+          "readOnly": true,
+          "description": "The exact time the Queue was updated."
         }
-      }
+      },
+      "description": "The Queue Properties definition."
     },
     "MessageCountDetails": {
       "type": "object",
@@ -2318,57 +1937,42 @@
         "activeMessageCount": {
           "format": "int64",
           "type": "integer",
+          "readOnly": true,
           "description": "Number of active messages in the queue, topic, or subscription."
         },
         "deadLetterMessageCount": {
           "format": "int64",
           "type": "integer",
+          "readOnly": true,
           "description": "Number of messages that are dead lettered."
         },
         "scheduledMessageCount": {
           "format": "int64",
           "type": "integer",
+          "readOnly": true,
           "description": "Number of scheduled messages."
         },
         "transferDeadLetterMessageCount": {
           "format": "int64",
           "type": "integer",
+          "readOnly": true,
           "description": "Number of messages transferred into dead letters."
         },
         "transferMessageCount": {
           "format": "int64",
           "type": "integer",
+          "readOnly": true,
           "description": "Number of messages transferred to another queue, topic, or subscription."
         }
       },
       "description": "Message Count Details."
-    },
-    "TopicCreateOrUpdateParameters": {
-      "properties": {
-        "name": {
-          "type": "string",
-          "description": "Topic name."
-        },
-        "location": {
-          "type": "string",
-          "description": "Location of the resource."
-        },
-        "properties": {
-          "x-ms-client-flatten": true,
-          "$ref": "#/definitions/TopicProperties"
-        }
-      },
-      "required": [
-        "location"
-      ],
-      "description": "Parameters supplied to the Create Or Update Topic operation."
     },
     "TopicListResult": {
       "properties": {
         "value": {
           "type": "array",
           "items": {
-            "$ref": "#/definitions/TopicResource"
+            "$ref": "#/definitions/Topic"
           },
           "description": "Result of the List Topics operation."
         },
@@ -2379,7 +1983,7 @@
       },
       "description": "The response to the List Topics operation."
     },
-    "TopicResource": {
+    "Topic": {
       "properties": {
         "properties": {
           "x-ms-client-flatten": true,
@@ -2398,31 +2002,30 @@
         "accessedAt": {
           "type": "string",
           "format": "date-time",
+          "readOnly": true,
           "description": "Last time the message was sent, or a request was received, for this topic."
         },
         "autoDeleteOnIdle": {
           "type": "string",
-          "description": "TimeSpan idle interval after which the topic is automatically deleted. The minimum duration is 5 minutes."
-        },
-        "entityAvailabilityStatus ": {
-          "$ref": "#/definitions/EntityAvailabilityStatus",
-          "description": "Entity availability status for the topic."
+          "description": "TimeSpan idle interval after which the topic is automatically deleted. The minimum duration is 5 minutes. The service accepts a C# Standard TimeSpan Format for loc duration https://msdn.microsoft.com/en-us/library/ee372286(v=vs.110).aspx . Format is 'DD.HH:MM:SS' and default value of this property is 10675199 days"
         },
         "createdAt": {
           "type": "string",
           "format": "date-time",
-          "description": "Exact time the message was created."
+          "readOnly": true,
+          "description": "Exact time the Tpoic was created."
         },
         "countDetails": {
+          "readOnly": true,
           "$ref": "#/definitions/MessageCountDetails"
         },
         "defaultMessageTimeToLive": {
           "type": "string",
-          "description": "Default message time to live value. This is the duration after which the message expires, starting from when the message is sent to Service Bus. This is the default value used when TimeToLive is not set on a message itself."
+          "description": "Default message time to live value. This is the duration after which the message expires, starting from when the message is sent to Service Bus. This is the default value used when TimeToLive is not set on a message itself. The service accepts a C# Standard TimeSpan Format for loc duration https://msdn.microsoft.com/en-us/library/ee372286(v=vs.110).aspx . Format is 'DD.HH:MM:SS' and default value of this property is 10675199 days"
         },
-        "duplicateDetectionHistoryTimeWindow ": {
+        "duplicateDetectionHistoryTimeWindow": {
           "type": "string",
-          "description": "TimeSpan structure that defines the duration of the duplicate detection history. The default value is 10 minutes."
+          "description": "TimeSpan structure that defines the duration of the duplicate detection history. The default value is 10 minutes. The service accepts a C# Standard TimeSpan Format for loc duration https://msdn.microsoft.com/en-us/library/ee372286(v=vs.110).aspx . Format is 'DD.HH:MM:SS' and default value of this property is 10675199 days"
         },
         "enableBatchedOperations": {
           "type": "boolean",
@@ -2436,22 +2039,6 @@
           "type": "boolean",
           "description": "Value that indicates whether the topic to be partitioned across multiple message brokers is enabled."
         },
-        "enableSubscriptionPartitioning": {
-          "type": "boolean",
-          "description": "Value that indicates whether partitioning is enabled or disabled."
-        },
-        "filteringMessagesBeforePublishing": {
-          "type": "boolean",
-          "description": "Whether messages should be filtered before publishing."
-        },
-        "isAnonymousAccessible": {
-          "type": "boolean",
-          "description": "Value that indicates whether the message is accessible anonymously."
-        },
-        "isExpress": {
-          "type": "boolean",
-          "description": ""
-        },
         "maxSizeInMegabytes": {
           "format": "int64",
           "type": "integer",
@@ -2464,15 +2051,18 @@
         "sizeInBytes": {
           "format": "int64",
           "type": "integer",
+          "readOnly": true,
           "description": "Size of the topic, in bytes."
         },
         "status": {
           "$ref": "#/definitions/EntityStatus",
+          "readOnly": true,
           "description": "Enumerates the possible values for the status of a messaging entity."
         },
         "subscriptionCount": {
           "format": "int32",
           "type": "integer",
+          "readOnly": true,
           "description": "Number of subscriptions."
         },
         "supportOrdering": {
@@ -2482,36 +2072,18 @@
         "updatedAt": {
           "type": "string",
           "format": "date-time",
-          "description": "The exact time the message was updated."
-        }
-      }
-    },
-    "SubscriptionCreateOrUpdateParameters": {
-      "properties": {
-        "location": {
-          "type": "string",
-          "description": "Subscription data center location."
-        },
-        "type": {
-          "type": "string",
-          "description": "Resource manager type of the resource."
-        },
-        "properties": {
-          "x-ms-client-flatten": true,
-          "$ref": "#/definitions/SubscriptionProperties"
+          "readOnly": true,
+          "description": "The exact time the Topic was updated."
         }
       },
-      "required": [
-        "location"
-      ],
-      "description": "Parameters supplied to the Create Or Update Subscription operation."
+      "description": "The Tpoic Properties definition."
     },
     "SubscriptionListResult": {
       "properties": {
         "value": {
           "type": "array",
           "items": {
-            "$ref": "#/definitions/SubscriptionResource"
+            "$ref": "#/definitions/Subscription"
           },
           "description": "Result of the List Subscriptions operation."
         },
@@ -2522,7 +2094,7 @@
       },
       "description": "The response to the List Subscriptions operation."
     },
-    "SubscriptionResource": {
+    "Subscription": {
       "properties": {
         "properties": {
           "x-ms-client-flatten": true,
@@ -2540,24 +2112,27 @@
       "properties": {
         "accessedAt": {
           "type": "string",
+          "readOnly": true,
           "format": "date-time",
           "description": "Last time there was a receive request to this subscription."
         },
         "autoDeleteOnIdle": {
           "type": "string",
-          "description": "TimeSpan idle interval after which the topic is automatically deleted. The minimum duration is 5 minutes."
+          "description": "TimeSpan idle interval after which the topic is automatically deleted. The minimum duration is 5 minutes. The service accepts a C# Standard TimeSpan Format for loc duration https://msdn.microsoft.com/en-us/library/ee372286(v=vs.110).aspx. Format is 'DD.HH:MM:SS' and default value of this property is 10675199 days"
         },
         "countDetails": {
+          "readOnly": true,
           "$ref": "#/definitions/MessageCountDetails"
         },
         "createdAt": {
           "type": "string",
           "format": "date-time",
-          "description": "Exact time the message was created."
+          "readOnly": true,
+          "description": "Exact time the Subscription was created."
         },
         "defaultMessageTimeToLive": {
           "type": "string",
-          "description": "Default message time to live value. This is the duration after which the message expires, starting from when the message is sent to Service Bus. This is the default value used when TimeToLive is not set on a message itself."
+          "description": "Default message time to live value. This is the duration after which the message expires, starting from when the message is sent to Service Bus. This is the default value used when TimeToLive is not set on a message itself. The service accepts a C# Standard TimeSpan Format for loc duration https://msdn.microsoft.com/en-us/library/ee372286(v=vs.110).aspx . Format is 'DD.HH:MM:SS' and default value of this property is 10675199 days"
         },
         "deadLetteringOnFilterEvaluationExceptions": {
           "type": "boolean",
@@ -2571,17 +2146,9 @@
           "type": "boolean",
           "description": "Value that indicates whether server-side batched operations are enabled."
         },
-        "entityAvailabilityStatus": {
-          "$ref": "#/definitions/EntityAvailabilityStatus",
-          "description": "Entity availability status for the topic."
-        },
-        "isReadOnly": {
-          "type": "boolean",
-          "description": "Value that indicates whether the entity description is read-only."
-        },
         "lockDuration": {
           "type": "string",
-          "description": "The lock duration time span for the subscription."
+          "description": "The lock duration time span for the subscription. The service accepts a C# Standard TimeSpan Format for loc duration https://msdn.microsoft.com/en-us/library/ee372286(v=vs.110).aspx"
         },
         "maxDeliveryCount": {
           "format": "int32",
@@ -2591,6 +2158,7 @@
         "messageCount": {
           "format": "int64",
           "type": "integer",
+          "readOnly": true,
           "description": "Number of messages."
         },
         "requiresSession": {
@@ -2604,25 +2172,11 @@
         "updatedAt": {
           "type": "string",
           "format": "date-time",
-          "description": "The exact time the message was updated."
+          "readOnly": true,
+          "description": "The exact time the subscription was updated."
         }
       },
       "description": "Description of Subscription Resource."
-    },
-    "EntityAvailabilityStatus": {
-      "type": "string",
-      "enum": [
-        "Available",
-        "Limited",
-        "Renaming",
-        "Restoring",
-        "Unknown"
-      ],
-      "x-ms-enum": {
-        "name": "EntityAvailabilityStatus",
-        "modelAsString": false
-      },
-      "description": "Entity availability status."
     },
     "EntityStatus": {
       "type": "string",
@@ -2642,6 +2196,101 @@
         "modelAsString": false
       },
       "description": "Entity status."
+    },
+    "UnavailableReason": {
+      "type": "string",
+      "enum": [
+        "None",
+        "InvalidName",
+        "SubscriptionIsDisabled",
+        "NameInUse",
+        "NameInLockdown",
+        "TooManyNamespaceInCurrentSubscription"
+      ],
+      "x-ms-enum": {
+        "name": "UnavailableReason",
+        "modelAsString": true
+      },
+      "description": "Specifies the reason for the unavailability of the service."
+    },
+    "CheckNameAvailability": {
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "The Name to check the namespce name availability and The namespace name can contain only letters, numbers, and hyphens. The namespace must start with a letter, and it must end with a letter or number."
+        }
+      },
+      "required": [
+        "name"
+      ],
+      "description": "Description of a Check Name availability request properties."
+    },
+    "CheckNameAvailabilityResult": {
+      "properties": {
+        "nameAvailable": {
+          "type": "boolean",
+          "description": "Value indicating namespace is availability, true if the namespace is available; otherwise, false."
+        },
+        "reason": {
+          "$ref": "#/definitions/UnavailableReason",
+          "description": "The reason for unavailability of a namespace."
+        },
+        "message": {
+          "type": "string",
+          "readOnly": true,
+          "description": "The detailed info regarding the reason associated with the namespace."
+        }
+      },
+      "description": "Description of a Check Name availability request properties."
+    },
+    "OperationListResult": {
+      "description": "Result of the request to list ServiceBus operations. It contains a list of operations and a URL link to get the next set of results.",
+      "properties": {
+        "value": {
+          "description": "List of ServiceBus operations supported by the Microsoft.ServiceBus resource provider.",
+          "type": "array",
+          "readOnly": true,
+          "items": {
+            "$ref": "#/definitions/Operation"
+          }
+        },
+        "nextLink": {
+          "description": "URL to get the next set of operation list results if there are any.",
+          "type": "string",
+          "readOnly": true
+        }
+      }
+    },
+    "Operation": {
+      "description": "A ServiceBus REST API operation",
+      "type": "object",
+      "properties": {
+        "name": {
+          "description": "Operation name: {provider}/{resource}/{operation}",
+          "type": "string",
+          "readOnly": true
+        },
+        "display": {
+          "description": "The object that represents the operation.",
+          "properties": {
+            "provider": {
+              "description": "Service provider: Microsoft.ServiceBus",
+              "type": "string",
+              "readOnly": true
+            },
+            "resource": {
+              "description": "Resource on which the operation is performed: Invoice, etc.",
+              "type": "string",
+              "readOnly": true
+            },
+            "operation": {
+              "description": "Operation type: Read, write, delete, etc.",
+              "type": "string",
+              "readOnly": true
+            }
+          }
+        }
+      }
     }
   },
   "parameters": {
@@ -2658,6 +2307,66 @@
       "required": true,
       "type": "string",
       "description": "Client API version."
+    },
+    "resourceGroupNameParameter": {
+      "name": "resourceGroupName",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 90,
+      "x-ms-parameter-location": "method",
+      "description": "Name of the Resource group within the Azure subscription."
+    },
+    "namespaceNameParameter": {
+      "name": "namespaceName",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "minLength": 6,
+      "maxLength": 50,
+      "x-ms-parameter-location": "method",
+      "description": "The namespace name"
+    },
+    "authorizationRuleNameParameter": {
+      "name": "authorizationRuleName",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 50,
+      "x-ms-parameter-location": "method",
+      "description": "The authorizationrule name."
+    },
+    "queueNameParameter": {
+      "name": "queueName",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 50,
+      "x-ms-parameter-location": "method",
+      "description": "The queue name."
+    },
+    "topicNameParameter": {
+      "name": "topicName",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 50,
+      "x-ms-parameter-location": "method",
+      "description": "The topic name."
+    },
+    "subscriptionNameParameter": {
+      "name": "subscriptionName",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 50,
+      "x-ms-parameter-location": "method",
+      "description": "The subscription name."
     }
   }
 }

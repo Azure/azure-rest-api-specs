@@ -7,9 +7,6 @@
 
   "outputs":{
     "aliases":{
-      "metadata":{
-        "description":"This list of aliases is used by Azure XPLAT CLI, Azure Powershell, and Azure Portal as shorthands for commonly used VM images. If you change this file, please verify that this doesn't break VMSS creation from Portal :)."
-      },
       "type":"object",
       "value":{
 
@@ -17,7 +14,7 @@
           "CentOS":{
             "publisher":"OpenLogic",
             "offer":"CentOS",
-            "sku":"7.2",
+            "sku":"7.3",
             "version":"latest"
           },
           "CoreOS":{
@@ -32,33 +29,39 @@
             "sku":"8",
             "version":"latest"
           },
-          "openSUSE":{
+          "openSUSE-Leap": {
             "publisher":"SUSE",
-            "offer":"openSUSE",
-            "sku":"13.2",
-            "version":"latest"
+            "offer":"openSUSE-Leap",
+            "sku":"42.2",
+            "version": "latest"
           },
           "RHEL":{
             "publisher":"RedHat",
             "offer":"RHEL",
-            "sku":"7.2",
+            "sku":"7.3",
             "version":"latest"
           },
           "SLES":{
             "publisher":"SUSE",
             "offer":"SLES",
-            "sku":"12-SP1",
+            "sku":"12-SP2",
             "version":"latest"
           },
           "UbuntuLTS":{
             "publisher":"Canonical",
             "offer":"UbuntuServer",
-            "sku":"14.04.4-LTS",
+            "sku":"16.04-LTS",
             "version":"latest"
           }
         },
 
         "Windows":{
+          "Win2016Datacenter":{
+            "publisher":"MicrosoftWindowsServer",
+            "offer":"WindowsServer",
+            "sku":"2016-Datacenter",
+            "version":"latest"
+          },
           "Win2012R2Datacenter":{
             "publisher":"MicrosoftWindowsServer",
             "offer":"WindowsServer",
