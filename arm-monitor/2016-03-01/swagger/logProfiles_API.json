@@ -14,6 +14,24 @@
   "produces": [
     "application/json"
   ],
+  "security": [
+    {
+      "azure_auth": [
+        "user_impersonation"
+      ]
+    }
+  ],
+  "securityDefinitions": {
+    "azure_auth": {
+      "type": "oauth2",
+      "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
+      "flow": "implicit",
+      "description": "Azure Active Directory OAuth2 Flow",
+      "scopes": {
+        "user_impersonation": "impersonate your user account"
+      }
+    }
+  },
   "paths": {
     "/subscriptions/{subscriptionId}/providers/microsoft.insights/logprofiles/{logProfileName}": {
       "delete": {
@@ -57,6 +75,12 @@
           }
         ],
         "responses": {
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          },
           "200": {
             "description": "Successful request to get more information about a log profile.",
             "schema": {
@@ -200,7 +224,11 @@
         },
         "location": {
           "type": "string",
-          "description": "Resource location"
+          "description": "Resource location",
+          "x-ms-mutability": [
+              "create",
+              "read"
+          ]
         },
         "tags": {
           "additionalProperties": {
@@ -231,7 +259,7 @@
       "description": "Specifies the retention policy for the log."
     },
     "LogProfileProperties": {
-      "required": [ "locations" ],
+      "required": [ "locations", "categories", "retentionPolicy" ],
       "properties": {
         "storageAccountId": {
           "type": "string",
@@ -290,6 +318,20 @@
       },
       "required": ["value"],
       "description": "Represents a collection of log profiles."
+    },
+    "ErrorResponse": {
+      "description": "Describes the format of Error response.",
+      "type": "object",
+      "properties": {
+        "code": {
+          "description": "Error code",
+          "type": "string"
+        },
+        "message": {
+          "description": "Error message indicating why the operation failed.",
+          "type": "string"
+        }
+      }
     }
   },
   "parameters": {
