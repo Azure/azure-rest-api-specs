@@ -1,0 +1,336 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "version": "2016-06-01",
+    "title": "RecoveryServicesClient",
+    "x-ms-code-generation-settings": {
+      "internalConstructors": false
+    }
+  },
+  "host": "management.azure.com",
+  "schemes": [
+    "https"
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "produces": [
+    "application/json"
+  ],
+  "paths": {
+    "/Subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.RecoveryServices/operations": {
+      "get": {
+        "tags": [
+          "Operations"
+        ],
+        "description": "Returns the list of available operations.",
+        "operationId": "Operations_List",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/SubscriptionId"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupName"
+          },
+          {
+            "$ref": "#/parameters/ApiVersion"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/ClientDiscoveryResponse"
+            }
+          }
+        },
+        "deprecated": false,
+        "x-ms-pageable": {
+          "nextLinkName": "NextLink"
+        }
+      }
+    },
+    "/Subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.RecoveryServices/vaults/{vaultName}/usages": {
+      "get": {
+        "tags": [
+          "VaultUsages"
+        ],
+        "description": "Fetches the usages of the vault.",
+        "operationId": "Usages_ListByVaults",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/ApiVersion"
+          },
+          {
+            "$ref": "#/parameters/VaultName"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupName"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionId"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/VaultUsageList"
+            }
+          }
+        },
+        "deprecated": false,
+        "x-ms-pageable": {
+          "nextLinkName": null
+        }
+      }
+    }
+  },
+  "definitions": {
+    "ClientDiscoveryDisplay": {
+      "description": "Localized display information of an operation.",
+      "type": "object",
+      "properties": {
+        "Provider": {
+          "description": "Name of the resource provider.",
+          "type": "string",
+          "readOnly": true
+        },
+        "Resource": {
+          "description": "Type of the resource.",
+          "type": "string",
+          "readOnly": true
+        },
+        "Operation": {
+          "description": "Name of the operation.",
+          "type": "string",
+          "readOnly": true
+        },
+        "Description": {
+          "description": "Operation description.",
+          "type": "string",
+          "readOnly": true
+        }
+      }
+    },
+    "ClientDiscoveryForLogSpecification": {
+      "description": "Log specification for the operation.",
+      "type": "object",
+      "properties": {
+        "name": {
+          "description": "Name of the log.",
+          "type": "string",
+          "readOnly": true
+        },
+        "displayName": {
+          "description": "Localized display name.",
+          "type": "string",
+          "readOnly": true
+        },
+        "blobDuration": {
+          "description": "Blob duration.",
+          "type": "string",
+          "readOnly": true
+        }
+      }
+    },
+    "ClientDiscoveryForProperties": {
+      "description": "Operation properties.",
+      "type": "object",
+      "properties": {
+        "serviceSpecification": {
+          "$ref": "#/definitions/ClientDiscoveryForServiceSpecification",
+          "description": "Operation properties.",
+          "readOnly": true
+        }
+      }
+    },
+    "ClientDiscoveryForServiceSpecification": {
+      "description": "Operation properties.",
+      "type": "object",
+      "properties": {
+        "logSpecifications": {
+          "description": "List of log specifications of this operation.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ClientDiscoveryForLogSpecification"
+          },
+          "readOnly": true
+        }
+      }
+    },
+    "ClientDiscoveryResponse": {
+      "description": "List of available operations.",
+      "type": "object",
+      "properties": {
+        "Value": {
+          "description": "List of available operationss.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ClientDiscoveryValueForSingleApi"
+          },
+          "readOnly": true
+        },
+        "NextLink": {
+          "description": "NextLink",
+          "type": "string",
+          "readOnly": true
+        }
+      }
+    },
+    "ClientDiscoveryValueForSingleApi": {
+      "description": "Available operation details.",
+      "type": "object",
+      "properties": {
+        "Name": {
+          "description": "Name of the operation.",
+          "type": "string",
+          "readOnly": true
+        },
+        "Display": {
+          "$ref": "#/definitions/ClientDiscoveryDisplay",
+          "description": "Contains the localized display information for this particular operation.",
+          "readOnly": true
+        },
+        "Origin": {
+          "description": "The intended executor of the operation.",
+          "type": "string",
+          "readOnly": true
+        },
+        "Properties": {
+          "$ref": "#/definitions/ClientDiscoveryForProperties",
+          "description": "Properties of the operation.",
+          "readOnly": true
+        }
+      }
+    },
+    "VaultUsage": {
+      "description": "Usages of a vault.",
+      "type": "object",
+      "properties": {
+        "unit": {
+          "description": "Unit of the usage.",
+          "enum": [
+            "Count",
+            "Bytes",
+            "Seconds",
+            "Percent",
+            "CountPerSecond",
+            "BytesPerSecond"
+          ],
+          "type": "string",
+          "x-ms-enum": {
+            "name": "UsagesUnit",
+            "modelAsString": true
+          }
+        },
+        "quotaPeriod": {
+          "description": "Quota period of usage.",
+          "type": "string"
+        },
+        "nextResetTime": {
+          "format": "date-time",
+          "description": "Next reset time of usage.",
+          "type": "string"
+        },
+        "currentValue": {
+          "format": "int64",
+          "description": "Current value of usage.",
+          "type": "integer"
+        },
+        "limit": {
+          "format": "int64",
+          "description": "Limit of usage.",
+          "type": "integer"
+        },
+        "name": {
+          "$ref": "#/definitions/NameInfo",
+          "description": "Name of usage."
+        }
+      }
+    },
+    "VaultUsageList": {
+      "description": "Usage for vault.",
+      "type": "object",
+      "properties": {
+        "value": {
+          "description": "The list of usages for the given vault.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/VaultUsage"
+          }
+        }
+      }
+    },
+    "NameInfo": {
+      "description": "The name of usage.",
+      "type": "object",
+      "properties": {
+        "value": {
+          "description": "Value of usage.",
+          "type": "string"
+        },
+        "localizedValue": {
+          "description": "Localized value of usage.",
+          "type": "string"
+        }
+      }
+    }
+  },
+  "parameters": {
+    "SubscriptionId": {
+      "name": "subscriptionId",
+      "in": "path",
+      "description": "The subscription Id.",
+      "required": true,
+      "type": "string"
+    },
+    "ResourceGroupName": {
+      "name": "resourceGroupName",
+      "in": "path",
+      "description": "The name of the resource group where the recovery services vault is present.",
+      "required": true,
+      "x-ms-parameter-location": "method",
+      "type": "string"
+    },
+    "VaultName": {
+      "name": "vaultName",
+      "in": "path",
+      "description": "The name of the recovery services vault.",
+      "required": true,
+      "x-ms-parameter-location": "method",
+      "type": "string"
+    },
+    "ApiVersion": {
+      "name": "api-version",
+      "in": "query",
+      "description": "Client Api Version.",
+      "required": true,
+      "type": "string"
+    }
+  },
+  "securityDefinitions": {
+    "azure_auth": {
+      "type": "oauth2",
+      "description": "Azure Active Directory OAuth2 Flow",
+      "flow": "implicit",
+      "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
+      "scopes": {
+        "user_impersonation": "impersonate your user account."
+      }
+    }
+  },
+  "security": [
+    {
+      "azure_auth": [
+        "user_impersonation"
+      ]
+    }
+  ]
+}
