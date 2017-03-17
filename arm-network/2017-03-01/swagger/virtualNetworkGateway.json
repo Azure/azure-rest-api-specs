@@ -1619,16 +1619,16 @@
         "saLifeTimeSeconds": {
           "type": "integer",
           "format": "int32",
-          "description": "The Security Association (SA) lifetime in seconds for a site to site VPN tunnel."
+          "description": "The IPSec Security Association (also called Quick Mode or Phase 2 SA) lifetime in seconds for a site to site VPN tunnel."
         },
         "saDataSizeKilobytes": {
           "type": "integer",
           "format": "int32",
-          "description": "The Security Association (SA) payload size in KB for a site to site VPN tunnel."
+          "description": "The IPSec Security Association (also called Quick Mode or Phase 2 SA) payload size in KB for a site to site VPN tunnel."
         },
         "ipsecEncryption": {
           "type": "string",
-          "description": "The IPSec encryption algorithm (IKE phase 2).",
+          "description": "The IPSec encryption algorithm (IKE phase 1).",
           "enum": [
             "None",
             "DES",
@@ -1647,7 +1647,7 @@
         },
         "ipsecIntegrity": {
           "type": "string",
-          "description": "The IPSec integrity algorithm (IKE phase 2).",
+          "description": "The IPSec integrity algorithm (IKE phase 1).",
           "enum": [
             "MD5",
             "SHA1",
@@ -1663,7 +1663,7 @@
         },
         "ikeEncryption": {
           "type": "string",
-          "description": "The IKE encryption algorithm (IKE phase 1).",
+          "description": "The IKE encryption algorithm (IKE phase 2).",
           "enum": [
             "DES",
             "DES3",
@@ -1678,7 +1678,7 @@
         },
         "ikeIntegrity": {
           "type": "string",
-          "description": "The IKE integrity algorithm (IKE phase 1).",
+          "description": "The IKE integrity algorithm (IKE phase 2).",
           "enum": [
             "MD5",
             "SHA1",
