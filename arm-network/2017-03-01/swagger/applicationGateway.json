@@ -1282,10 +1282,28 @@
             "name": "ApplicationGatewayFirewallMode",
             "modelAsString": true
           }
+        },
+        "ruleSetType": {
+          "type": "string",
+          "description": "The type of the web application firewall rule set. Possible values are: 'OWASP'."
+        },
+        "ruleSetVersion": {
+          "type": "string",
+          "description": "The version of the rule set type."
+        },
+        "disabledRuleGroups": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ApplicationGatewayFirewallDisabledRuleGroup"
+          },
+          "description": "The disabled rule groups."
         }
       },
       "required": [
-        "enabled"
+        "enabled",
+        "firewallMode",
+        "ruleSetType",
+        "ruleSetVersion"
       ],
       "description": "Application gateway web application firewall configuration."
     },
@@ -1310,6 +1328,26 @@
             "drainTimeoutInSec"
         ],
         "description": "Connection draining allows open connections to a backend server to be active for a specified time after the backend server got removed from the configuration."
+    },
+    "ApplicationGatewayFirewallDisabledRuleGroup": {
+      "properties": {
+        "ruleGroupName": {
+          "type": "string",
+          "description": "The name of the rule group that will be disabled."
+        },
+        "rules": {
+          "type": "array",
+          "items": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "description": "The list of rules that will be disabled. If empty, all rules of the rule group will be disabled."
+        }
+      },
+      "required": [
+        "ruleGroupName"
+      ],
+      "description": "Allows to disable rules within a rule group or an entire rule group."
     }
   },
   "parameters": {
