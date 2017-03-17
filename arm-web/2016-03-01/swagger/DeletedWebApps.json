@@ -275,7 +275,7 @@
       "type": "object",
       "allOf": [
         {
-          "$ref": "#/definitions/Site"
+          "$ref": "#/definitions/Resource"
         }
       ],
       "properties": {
@@ -286,6 +286,207 @@
               "format": "date-time",
               "description": "Time in UTC when the app was deleted.",
               "type": "string",
+              "readOnly": true
+            },
+            "state": {
+              "description": "Current state of the app.",
+              "type": "string",
+              "readOnly": true
+            },
+            "hostNames": {
+              "description": "Hostnames associated with the app.",
+              "type": "array",
+              "items": {
+                "type": "string"
+              },
+              "readOnly": true
+            },
+            "repositorySiteName": {
+              "description": "Name of the repository site.",
+              "type": "string",
+              "readOnly": true
+            },
+            "usageState": {
+              "description": "State indicating whether the app has exceeded its quota usage. Read-only.",
+              "enum": [
+                "Normal",
+                "Exceeded"
+              ],
+              "type": "string",
+              "readOnly": true,
+              "x-ms-enum": {
+                "name": "UsageState",
+                "modelAsString": false
+              }
+            },
+            "enabled": {
+              "description": "<code>true</code> if the app is enabled; otherwise, <code>false</code>. Setting this value to false disables the app (takes the app offline).",
+              "type": "boolean"
+            },
+            "enabledHostNames": {
+              "description": "Enabled hostnames for the app.Hostnames need to be assigned (see HostNames) AND enabled. Otherwise,\n the app is not served on those hostnames.",
+              "type": "array",
+              "items": {
+                "type": "string"
+              },
+              "readOnly": true
+            },
+            "availabilityState": {
+              "description": "Management information availability state for the app.",
+              "enum": [
+                "Normal",
+                "Limited",
+                "DisasterRecoveryMode"
+              ],
+              "type": "string",
+              "readOnly": true,
+              "x-ms-enum": {
+                "name": "SiteAvailabilityState",
+                "modelAsString": false
+              }
+            },
+            "hostNameSslStates": {
+              "description": "Hostname SSL states are used to manage the SSL bindings for app's hostnames.",
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/HostNameSslState"
+              }
+            },
+            "serverFarmId": {
+              "description": "Resource ID of the associated App Service plan, formatted as: \"/subscriptions/{subscriptionID}/resourceGroups/{groupName}/providers/Microsoft.Web/serverfarms/{appServicePlanName}\".",
+              "type": "string"
+            },
+            "reserved": {
+              "description": "<code>true</code> if reserved; otherwise, <code>false</code>.",
+              "default": false,
+              "type": "boolean",
+              "x-ms-mutability": [
+                "create",
+                "read"
+              ]
+            },
+            "lastModifiedTimeUtc": {
+              "format": "date-time",
+              "description": "Last time the app was modified, in UTC. Read-only.",
+              "type": "string",
+              "readOnly": true
+            },
+            "siteConfig": {
+              "$ref": "#/definitions/SiteConfig",
+              "description": "Configuration of the app."
+            },
+            "trafficManagerHostNames": {
+              "description": "Azure Traffic Manager hostnames associated with the app. Read-only.",
+              "type": "array",
+              "items": {
+                "type": "string"
+              },
+              "readOnly": true
+            },
+            "premiumAppDeployed": {
+              "description": "Indicates whether app is deployed as a premium app.",
+              "type": "boolean",
+              "readOnly": true
+            },
+            "scmSiteAlsoStopped": {
+              "description": "<code>true</code> to stop SCM (KUDU) site when the app is stopped; otherwise, <code>false</code>. The default is <code>false</code>.",
+              "default": false,
+              "type": "boolean"
+            },
+            "targetSwapSlot": {
+              "description": "Specifies which deployment slot this app will swap into. Read-only.",
+              "type": "string",
+              "readOnly": true
+            },
+            "hostingEnvironmentProfile": {
+              "$ref": "#/definitions/HostingEnvironmentProfile",
+              "description": "App Service Environment to use for the app.",
+              "x-ms-mutability": [
+                "create",
+                "read"
+              ]
+            },
+            "microService": {
+              "description": "Micro services like apps, logic apps.",
+              "default": "WebSites",
+              "type": "string",
+              "x-ms-mutability": [
+                "create",
+                "read"
+              ]
+            },
+            "gatewaySiteName": {
+              "description": "Name of gateway app associated with the app.",
+              "type": "string",
+              "x-ms-mutability": [
+                "create",
+                "read"
+              ]
+            },
+            "clientAffinityEnabled": {
+              "description": "<code>true</code> to enable client affinity; <code>false</code> to stop sending session affinity cookies, which route client requests in the same session to the same instance. Default is <code>true</code>.",
+              "type": "boolean"
+            },
+            "clientCertEnabled": {
+              "description": "<code>true</code> to enable client certificate authentication (TLS mutual authentication); otherwise, <code>false</code>. Default is <code>false</code>.",
+              "type": "boolean"
+            },
+            "hostNamesDisabled": {
+              "description": "<code>true</code> to disable the public hostnames of the app; otherwise, <code>false</code>.\n If <code>true</code>, the app is only accessible via API management process.",
+              "type": "boolean"
+            },
+            "outboundIpAddresses": {
+              "description": "List of IP addresses that the app uses for outbound connections (e.g. database access). Read-only.",
+              "type": "string",
+              "readOnly": true
+            },
+            "containerSize": {
+              "format": "int32",
+              "description": "Size of the function container.",
+              "type": "integer"
+            },
+            "dailyMemoryTimeQuota": {
+              "format": "int32",
+              "description": "Maximum allowed daily memory-time quota (applicable on dynamic apps only).",
+              "type": "integer"
+            },
+            "suspendedTill": {
+              "format": "date-time",
+              "description": "App suspended till in case memory-time quota is exceeded.",
+              "type": "string",
+              "readOnly": true
+            },
+            "maxNumberOfWorkers": {
+              "format": "int32",
+              "description": "Maximum number of workers.\n This only applies to Functions container.",
+              "type": "integer",
+              "readOnly": true
+            },
+            "cloningInfo": {
+              "$ref": "#/definitions/CloningInfo",
+              "description": "If specified during app creation, the app is cloned from a source app.",
+              "x-ms-mutability": [
+                "create"
+              ]
+            },
+            "resourceGroup": {
+              "description": "Name of the resource group the app belongs to. Read-only.",
+              "type": "string",
+              "readOnly": true
+            },
+            "isDefaultContainer": {
+              "description": "<code>true</code> if the app is a default container; otherwise, <code>false</code>.",
+              "type": "boolean",
+              "readOnly": true
+            },
+            "defaultHostName": {
+              "description": "Default hostname of the app. Read-only.",
+              "type": "string",
+              "readOnly": true
+            },
+            "slotSwapStatus": {
+              "$ref": "#/definitions/SlotSwapStatus",
+              "description": "Status of the last deployment slot swap operation.",
               "readOnly": true
             }
           },
@@ -561,224 +762,6 @@
         }
       },
       "x-ms-azure-resource": true
-    },
-    "Site": {
-      "description": "A web app, a mobile app backend, or an API app.",
-      "type": "object",
-      "allOf": [
-        {
-          "$ref": "#/definitions/Resource"
-        }
-      ],
-      "properties": {
-        "properties": {
-          "description": "Site resource specific properties",
-          "properties": {
-            "state": {
-              "description": "Current state of the app.",
-              "type": "string",
-              "readOnly": true
-            },
-            "hostNames": {
-              "description": "Hostnames associated with the app.",
-              "type": "array",
-              "items": {
-                "type": "string"
-              },
-              "readOnly": true
-            },
-            "repositorySiteName": {
-              "description": "Name of the repository site.",
-              "type": "string",
-              "readOnly": true
-            },
-            "usageState": {
-              "description": "State indicating whether the app has exceeded its quota usage. Read-only.",
-              "enum": [
-                "Normal",
-                "Exceeded"
-              ],
-              "type": "string",
-              "readOnly": true,
-              "x-ms-enum": {
-                "name": "UsageState",
-                "modelAsString": false
-              }
-            },
-            "enabled": {
-              "description": "<code>true</code> if the app is enabled; otherwise, <code>false</code>. Setting this value to false disables the app (takes the app offline).",
-              "type": "boolean"
-            },
-            "enabledHostNames": {
-              "description": "Enabled hostnames for the app.Hostnames need to be assigned (see HostNames) AND enabled. Otherwise,\n the app is not served on those hostnames.",
-              "type": "array",
-              "items": {
-                "type": "string"
-              },
-              "readOnly": true
-            },
-            "availabilityState": {
-              "description": "Management information availability state for the app.",
-              "enum": [
-                "Normal",
-                "Limited",
-                "DisasterRecoveryMode"
-              ],
-              "type": "string",
-              "readOnly": true,
-              "x-ms-enum": {
-                "name": "SiteAvailabilityState",
-                "modelAsString": false
-              }
-            },
-            "hostNameSslStates": {
-              "description": "Hostname SSL states are used to manage the SSL bindings for app's hostnames.",
-              "type": "array",
-              "items": {
-                "$ref": "#/definitions/HostNameSslState"
-              }
-            },
-            "serverFarmId": {
-              "description": "Resource ID of the associated App Service plan, formatted as: \"/subscriptions/{subscriptionID}/resourceGroups/{groupName}/providers/Microsoft.Web/serverfarms/{appServicePlanName}\".",
-              "type": "string"
-            },
-            "reserved": {
-              "description": "<code>true</code> if reserved; otherwise, <code>false</code>.",
-              "default": false,
-              "type": "boolean",
-              "x-ms-mutability": [
-                "create",
-                "read"
-              ]
-            },
-            "lastModifiedTimeUtc": {
-              "format": "date-time",
-              "description": "Last time the app was modified, in UTC. Read-only.",
-              "type": "string",
-              "readOnly": true
-            },
-            "siteConfig": {
-              "$ref": "#/definitions/SiteConfig",
-              "description": "Configuration of the app."
-            },
-            "trafficManagerHostNames": {
-              "description": "Azure Traffic Manager hostnames associated with the app. Read-only.",
-              "type": "array",
-              "items": {
-                "type": "string"
-              },
-              "readOnly": true
-            },
-            "premiumAppDeployed": {
-              "description": "Indicates whether app is deployed as a premium app.",
-              "type": "boolean",
-              "readOnly": true
-            },
-            "scmSiteAlsoStopped": {
-              "description": "<code>true</code> to stop SCM (KUDU) site when the app is stopped; otherwise, <code>false</code>. The default is <code>false</code>.",
-              "default": false,
-              "type": "boolean"
-            },
-            "targetSwapSlot": {
-              "description": "Specifies which deployment slot this app will swap into. Read-only.",
-              "type": "string",
-              "readOnly": true
-            },
-            "hostingEnvironmentProfile": {
-              "$ref": "#/definitions/HostingEnvironmentProfile",
-              "description": "App Service Environment to use for the app.",
-              "x-ms-mutability": [
-                "create",
-                "read"
-              ]
-            },
-            "microService": {
-              "description": "Micro services like apps, logic apps.",
-              "default": "WebSites",
-              "type": "string",
-              "x-ms-mutability": [
-                "create",
-                "read"
-              ]
-            },
-            "gatewaySiteName": {
-              "description": "Name of gateway app associated with the app.",
-              "type": "string",
-              "x-ms-mutability": [
-                "create",
-                "read"
-              ]
-            },
-            "clientAffinityEnabled": {
-              "description": "<code>true</code> to enable client affinity; <code>false</code> to stop sending session affinity cookies, which route client requests in the same session to the same instance. Default is <code>true</code>.",
-              "type": "boolean"
-            },
-            "clientCertEnabled": {
-              "description": "<code>true</code> to enable client certificate authentication (TLS mutual authentication); otherwise, <code>false</code>. Default is <code>false</code>.",
-              "type": "boolean"
-            },
-            "hostNamesDisabled": {
-              "description": "<code>true</code> to disable the public hostnames of the app; otherwise, <code>false</code>.\n If <code>true</code>, the app is only accessible via API management process.",
-              "type": "boolean"
-            },
-            "outboundIpAddresses": {
-              "description": "List of IP addresses that the app uses for outbound connections (e.g. database access). Read-only.",
-              "type": "string",
-              "readOnly": true
-            },
-            "containerSize": {
-              "format": "int32",
-              "description": "Size of the function container.",
-              "type": "integer"
-            },
-            "dailyMemoryTimeQuota": {
-              "format": "int32",
-              "description": "Maximum allowed daily memory-time quota (applicable on dynamic apps only).",
-              "type": "integer"
-            },
-            "suspendedTill": {
-              "format": "date-time",
-              "description": "App suspended till in case memory-time quota is exceeded.",
-              "type": "string",
-              "readOnly": true
-            },
-            "maxNumberOfWorkers": {
-              "format": "int32",
-              "description": "Maximum number of workers.\n This only applies to Functions container.",
-              "type": "integer",
-              "readOnly": true
-            },
-            "cloningInfo": {
-              "$ref": "#/definitions/CloningInfo",
-              "description": "If specified during app creation, the app is cloned from a source app.",
-              "x-ms-mutability": [
-                "create"
-              ]
-            },
-            "resourceGroup": {
-              "description": "Name of the resource group the app belongs to. Read-only.",
-              "type": "string",
-              "readOnly": true
-            },
-            "isDefaultContainer": {
-              "description": "<code>true</code> if the app is a default container; otherwise, <code>false</code>.",
-              "type": "boolean",
-              "readOnly": true
-            },
-            "defaultHostName": {
-              "description": "Default hostname of the app. Read-only.",
-              "type": "string",
-              "readOnly": true
-            },
-            "slotSwapStatus": {
-              "$ref": "#/definitions/SlotSwapStatus",
-              "description": "Status of the last deployment slot swap operation.",
-              "readOnly": true
-            }
-          },
-          "x-ms-client-flatten": true
-        }
-      }
     },
     "SiteConfig": {
       "description": "Configuration of an App Service app.",
