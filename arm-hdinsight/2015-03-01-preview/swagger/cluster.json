@@ -300,31 +300,6 @@
           "nextLinkName": "nextLink"
         }
       }
-    },
-    "/providers/Microsoft.HDInsight/operations": {
-      "get": {
-        "tags": [
-          "Operations"
-        ],
-        "description": "Lists all of the available HDInsight REST API operations.",
-        "operationId": "Operations_List",
-        "parameters": [
-          {
-            "$ref": "#/parameters/ApiVersionParameter"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "OK. The request has succeeded.",
-            "schema": {
-              "$ref": "#/definitions/OperationListResult"
-            }
-          }
-        },
-        "x-ms-pageable": {
-          "nextLinkName": "nextLink"
-        }
-      }
     }
   },
   "definitions": {
@@ -844,34 +819,15 @@
       "description": "Describes the properties of a cluster."
     },
     "Cluster": {
+      "allOf": [
+        {
+          "$ref": "#/definitions/Resource"
+        }
+      ],
       "properties": {
-        "id": {
-          "type": "string",
-          "description": "Gets or sets the ID of the resource."
-        },
-        "name": {
-          "type": "string",
-          "description": "Gets or sets the name of the resource."
-        },
-        "type": {
-          "type": "string",
-          "description": "Gets or sets the type of resource."
-        },
-        "location": {
-          "type": "string",
-          "description": "Gets or sets the location of the resource."
-        },
         "etag": {
           "type": "string",
           "description": "Gets or sets the ETag for the resource"
-        },
-        "tags": {
-          "type": ["object", "null"],
-          "x-nullable": true,
-          "additionalProperties": {
-            "type": "string"
-          },
-          "description": "Gets or sets the resource tags."
         },
         "properties": {
           "$ref": "#/definitions/ClusterGetProperties",
