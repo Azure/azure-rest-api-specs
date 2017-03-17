@@ -5,7 +5,7 @@
 var _ = require('lodash'),
   assert = require('assert'),
   utils = require('./util/utils'),
-  oav = require('openapi-validation-tools');
+  oav = require('oav');
 
 describe('Azure swagger semantic validation:', function () {
   let swaggersToProcess = utils.getFilesChangedInPR();
