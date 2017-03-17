@@ -21,8 +21,8 @@
                 "tags": [
                     "Capabilities"
                 ],
-                "operationId": "Capabilities_List",
-                "description": "Returns the capabilities available for the specified location.",
+                "operationId": "Capabilities_ListByLocation",
+                "description": "Gets the capabilities available for the specified location.",
                 "parameters": [
                     {
                         "$ref": "#/parameters/ApiVersionParameter"
@@ -35,7 +35,7 @@
                         "in": "path",
                         "required": true,
                         "type": "string",
-                        "description": "The Id of the location for which the capabilities are retrieved."
+                        "description": "The location id whose capabilities are retrieved."
                     }
                 ],
                 "responses": {
@@ -55,7 +55,7 @@
     "definitions": {
         "CapabilityStatus": {
             "type": "string",
-            "description": "The availability status of the Capability",
+            "description": "The availability status of the capability",
             "enum": [
                 "Visible",
                 "Available",
@@ -94,7 +94,7 @@
                     "$ref": "#/definitions/CapabilityStatus"
                 }
             },
-            "description": "Represents the maximum size limits for a database."
+            "description": "The maximum size limits for a database."
         },
         "ServiceObjectiveCapability": {
             "properties": {
@@ -112,7 +112,7 @@
                 "performanceLevel": {
                     "readOnly": true,
                     "$ref": "#/definitions/PerformanceLevel",
-                    "description": "The performance level of the service objective Capability.",
+                    "description": "The performance level of the service objective capability.",
                     "x-ms-client-flatten": true
                 },
                 "id": {
@@ -129,15 +129,15 @@
                     "description": "The list of supported maximum database sizes for this service objective."
                 }
             },
-            "description": "Represents the service objectives capabilities."
+            "description": "The service objectives capabilities."
         },
         "PerformanceLevel": {            
-            "description": "Represents a possible performance level of a service objective Capability.",
+            "description": "A possible performance level of a service objective capability.",
             "properties": {
                 "unit": {
                     "type": "string",
                     "readOnly": true,
-                    "description": "Unit type used to measure SLO performance level.",
+                    "description": "Unit type used to measure service objective performance level.",
                     "enum": [
                         "DTU"
                     ],
@@ -174,7 +174,7 @@
                     "description": "The list of supported service objectives for the edition."
                 }
             },
-            "description": "Represents the server edition capabilities."
+            "description": "The server edition capabilities."
         },
         "ServerVersionCapability": {
             "properties": {
@@ -198,7 +198,7 @@
                     "description": "The list of supported server editions."
                 }
             },
-            "description": "Represents the server capabilities."
+            "description": "The server capabilities."
         },
         "LocationCapabilities": {
             "properties": {
@@ -210,7 +210,7 @@
                 "status": {
                     "readOnly": true,
                     "type": "string",
-                    "description": "The status for the location with respect to Azure SQL.",
+                    "description": "Azure SQL Database's status for the location.",
                     "$ref": "#/definitions/CapabilityStatus"
                 },
                 "supportedServerVersions": {
@@ -222,7 +222,7 @@
                     "description": "The list of supported server versions."
                 }
             },
-            "description": "Represents the capabilities for a location."
+            "description": "The capabilities for a location."
         }
     },
     "parameters": {
