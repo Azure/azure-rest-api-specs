@@ -392,6 +392,7 @@
           "description": "The name of settings section description"
         },
         "parameters": {
+          "description": "Settings parameter description",
           "type": "array",
           "items": {
             "$ref": "#/definitions/SettingsParameterDescription"
@@ -417,24 +418,31 @@
           "type": "string"
         },
         "placementProperties": {
+          "description": "Placement properties key",
           "type": "object",
           "additionalProperties": {
+            "description": "Placement properties value",
             "type": "string"
           }
         },
         "capacities": {
+          "description": "Capacities key",
           "type": "object",
           "additionalProperties": {
+            "description": "Capacities value",
             "type": "string"
           }
         },
         "clientConnectionEndpointPort": {
+          "description": "Client connection endpoint port",
           "type": "integer"
         },
         "httpGatewayEndpointPort": {
+          "description": "Http gateway endpoint port",
           "type": "integer"
         },
         "durabilityLevel": {
+          "description": "Nodetype durability Level",
           "type": "string",
           "enum": [
             "Bronze",
@@ -444,19 +452,23 @@
           ]
         },
         "applicationPorts": {
+          "description": "Application ports",
           "$ref": "#/definitions/EndpointRangeDescription"
         },
         "ephemeralPorts": {
+          "description": "Ephemeral ports",
           "$ref": "#/definitions/EndpointRangeDescription"
         },
         "isPrimary": {
-          "type": "boolean",
-          "description": "Is primary or not"
+          "description": "Primary node or not",
+          "type": "boolean"
         },
         "vmInstanceCount": {
+          "description": "Instance count",
           "type": "integer"
         },
         "reverseProxyEndpointPort": {
+          "description": "Reverse proxy endpoint port",
           "type": "integer"
         }
       }
@@ -811,6 +823,7 @@
           }
         },
         "provisioningState": {
+          "readOnly": true,
           "description": "The provisioning state of the cluster",
           "type": "string",
           "enum": [
@@ -822,7 +835,7 @@
           ]
         },
         "vmImage": {
-          "description": "The os type",
+          "description": "The OS type",
           "type": "string"
         },
         "diagnosticsStorageAccountConfig": {
@@ -837,7 +850,6 @@
       "required": [
         "managementEndpoint",
         "reliabilityLevel",
-        "provisioningState",
         "vmImage",
         "diagnosticsStorageAccountConfig",
         "nodeTypes",
