@@ -351,12 +351,15 @@
       "description": "Certificate description",
       "properties": {
         "thumbprint": {
+          "description": "Primary certificate thumbprint",
           "type": "string"
         },
         "thumbprintSecondary": {
+          "description": "Secondary certificate thumbprint",
           "type": "string"
         },
         "x509StoreName": {
+          "description": "Certificate x509 store location",
           "type": "string",
           "enum": [
             "AddressBook",
@@ -404,9 +407,11 @@
       "description": "Endpoint range description",
       "properties": {
         "startPort": {
+          "description": "Endpoint start port",
           "type": "integer"
         },
         "endPort": {
+          "description": "Endpoint end port",
           "type": "integer"
         }
       }
@@ -415,6 +420,7 @@
       "description": "NodeType description",
       "properties": {
         "name": {
+          "description": "NodeType description name",
           "type": "string"
         },
         "placementProperties": {
@@ -481,6 +487,7 @@
           "description": "Is admin or not"
         },
         "certificateThumbprint": {
+          "description": "ClientCertificate thumbprint",
           "type": "string"
         }
       }
@@ -490,14 +497,16 @@
       "properties": {
         "isAdmin": {
           "type": "boolean",
-          "description": "Is admin or not"
+          "description": "Is the certificate for admin usage or not"
         },
         "certificateIssuerThumbprint": {
+          "description": "Certificate issuer thumbprint",
           "type": "string"
         }
       }
     },
     "ClusterEnvironment": {
+      "description": "Cluster environment",
       "type": "string",
       "enum": [
         "Default",
@@ -509,12 +518,15 @@
       "description": "NodeType description",
       "properties": {
         "codeVersion": {
+          "description": "Cluster code version",
           "type": "string"
         },
         "supportExpiryUtc": {
+          "description": "Support expiry Utc",
           "type": "string"
         },
         "environment": {
+          "description": "Cluster environment",
           "$ref": "#/definitions/ClusterEnvironment"
         }
       }
@@ -523,6 +535,7 @@
       "description": "Paas service type health policy",
       "properties": {
         "maxPercentUnhealthyServices": {
+          "description": "max percent of unhealthy services",
           "type": "integer"
         }
       }
@@ -531,11 +544,14 @@
       "description": "Paas application health policy",
       "properties": {
         "defaultServiceTypeHealthPolicy": {
+          "description": "default ServiceType health policy",
           "$ref": "#/definitions/PaasServiceTypeHealthPolicy"
         },
         "serivceTypeHealthPolicies": {
+          "description": "SerivceType health policies",
           "type": "object",
           "additionalProperties": {
+            "description": "Paas ServiceType health policies",
             "$ref": "#/definitions/PaasServiceTypeHealthPolicy"
           }
         }
@@ -545,14 +561,18 @@
       "description": "Paas cluster upgrade health policy",
       "properties": {
         "maxPercentUnhealthyNodes": {
+          "description": "Max percent of unhealthy nodes",
           "type": "integer"
         },
         "maxPercentUnhealthyApplications": {
+          "description": "Max percent of unhealthy applications",
           "type": "integer"
         },
         "applicationHealthPolicies": {
+          "description": "Application health policies",
           "type": "object",
           "additionalProperties": {
+            "description": "Paas application health policy",
             "$ref": "#/definitions/PaasApplicationHealthPolicy"
           }
         }
@@ -562,6 +582,7 @@
       "description": "Paas service type delta health policy",
       "properties": {
         "maxPercentDeltaUnhealthyServices": {
+          "description": "max percent of delta unhealthy services",
           "type": "integer"
         }
       }
@@ -570,11 +591,14 @@
       "description": "Paas application delta health policy",
       "properties": {
         "defaultServiceTypeDeltaHealthPolicy": {
+          "description": "default serviceType delta health policy",
           "$ref": "#/definitions/PaasServiceTypeDeltaHealthPolicy"
         },
         "serivceTypeDeltaHealthPolicies": {
+          "description": "SerivceType delta health policies",
           "type": "object",
           "additionalProperties": {
+            "description": "Paas serviceType delta health policy",
             "$ref": "#/definitions/PaasServiceTypeDeltaHealthPolicy"
           }
         }
@@ -584,17 +608,22 @@
       "description": "Paas cluster upgrade delta health policy",
       "properties": {
         "maxPercentDeltaUnhealthyNodes": {
+          "description": "Max of percent of delta unhealthy nodes",
           "type": "integer"
         },
         "maxPercentUpgradeDomainDeltaUnhealthyNodes": {
+          "description": "Max of percent upgrade domain delta unhealthy nodes",
           "type": "integer"
         },
         "maxPercentDeltaUnhealthyApplications": {
+          "description": "Max percent of delta unhealthy applications",
           "type": "integer"
         },
         "applicationHealthPolicies": {
+          "description": "Application health policies",
           "type": "object",
           "additionalProperties": {
+            "description": "Paas application delta health policy",
             "$ref": "#/definitions/PaasApplicationDeltaHealthPolicy"
           }
         }
@@ -604,33 +633,43 @@
       "description": "Paas cluster upgrade policy",
       "properties": {
         "overrideUserUpgradePolicy": {
+          "description": "Override user upgrade policy",
           "type": "boolean"
         },
         "forceRestart": {
+          "description": "Force restart or not",
           "type": "boolean"
         },
         "upgradeReplicaSetCheckTimeout": {
+          "description": "Upgrade replica set check timeout",
           "type": "string"
         },
         "healthCheckWaitDuration": {
+          "description": "Health check wait duration",
           "type": "string"
         },
         "healthCheckStableDuration": {
+          "description": "Health check stable duration",
           "type": "string"
         },
         "healthCheckRetryTimeout": {
+          "description": "Health check retry timeout",
           "type": "string"
         },
         "upgradeTimeout": {
+          "description": "Upgrade Timeout",
           "type": "string"
         },
         "upgradeDomainTimeout": {
+          "description": "upgrade domain timeout",
           "type": "string"
         },
         "healthPolicy": {
+          "description": "Health Policy",
           "$ref": "#/definitions/PaasClusterUpgradeHealthPolicy"
         },
         "deltaHealthPolicy": {
+          "description": "Delta health policy",
           "$ref": "#/definitions/PaasClusterUpgradeDeltaHealthPolicy"
         }
       }
@@ -639,24 +678,31 @@
       "description": "Diagnostics storage account config",
       "properties": {
         "storageAccountName": {
+          "description": "Diagnostics storage account name",
           "type": "string"
         },
         "primaryAccessKey": {
+          "description": "Primary diagnostics storage access key",
           "type": "string"
         },
         "secondaryAccessKey": {
+          "description": "Secondary diagnostics storage access key",
           "type": "string"
         },
         "protectedAccountKeyName": {
+          "description": "Protected Diagnostics storage key name",
           "type": "string"
         },
         "blobEndpoint": {
+          "description": "Diagnostics storage account blob endpoint",
           "type": "string"
         },
         "queueEndpoint": {
+          "description": "Diagnostics storage account queue endpoint",
           "type": "string"
         },
         "tableEndpoint": {
+          "description": "Diagnostics storage account table endpoint",
           "type": "string"
         }
       }
@@ -665,6 +711,7 @@
       "description": "The cluster resource properties",
       "properties": {
         "reliabilityLevel": {
+          "description": "Cluster reliability level",
           "type": "string",
           "enum": [
             "Invalid",
@@ -675,6 +722,7 @@
           ]
         },
         "upgradeMode": {
+          "description": "Cluster upgrade mode",
           "type": "string",
           "enum": [
             "Default",
@@ -832,7 +880,11 @@
             "Succeeded",
             "Failed",
             "Canceled"
-          ]
+          ],
+          "x-ms-enum": {
+            "name": "ProvisioningState",
+            "modelAsString": true
+          }
         },
         "vmImage": {
           "description": "The OS type",
@@ -868,7 +920,7 @@
           "additionalProperties": {
             "type": "string"
           },
-          "description": "Cluster tags."
+          "description": "Cluster update parameters"
         }
       }
     },
@@ -905,15 +957,19 @@
       "description": "Operation detail",
       "properties": {
         "provider": {
+          "description": "Provider name",
           "type": "string"
         },
         "resource": {
+          "description": "Resource name",
           "type": "string"
         },
         "operation": {
+          "description": "Operation name",
           "type": "string"
         },
         "description": {
+          "description": "Operation description",
           "type": "string"
         }
       }
@@ -922,12 +978,14 @@
       "description": "Available operation list result",
       "properties": {
         "name": {
+          "description": "Result name",
           "type": "string"
         },
         "display": {
           "$ref": "#/definitions/AvailableOperationDisplay"
         },
         "origin": {
+          "description": "Origin result",
           "type": "string"
         },
         "nextLink": {
@@ -961,9 +1019,11 @@
           "description": "The error",
           "properties": {
             "code": {
+              "description": "The error code",
               "type": "string"
             },
             "message": {
+              "description": "The error message",
               "type": "string"
             }
           }
