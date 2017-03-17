@@ -342,7 +342,7 @@
         },
         "expiryDate": {
           "type": "string",
-          "format": "date-time",
+          "format": "date",
           "description": "Gets or sets the RDP expiry date(YYYY-MM-DD)."
         }
       }
@@ -694,8 +694,8 @@
           "description": "Gets or sets the location of the cluster."
         },
         "tags": {
-          "type": "object",
-          "x-isnullable": true,
+          "type": ["object", "null"],
+          "x-nullable": true,
           "additionalProperties": {
             "type": "string"
           },
@@ -866,7 +866,8 @@
           "description": "Gets or sets the ETag for the resource"
         },
         "tags": {
-          "type": "object",
+          "type": ["object", "null"],
+          "x-nullable": true,
           "additionalProperties": {
             "type": "string"
           },
@@ -1126,8 +1127,8 @@
           "description": "Resource location"
         },
         "tags": {
-          "type": "object",
-          "x-isnullable" : true,
+          "type": ["object", "null"],
+          "x-nullable": true,
           "additionalProperties": {
             "type": "string"
           },
