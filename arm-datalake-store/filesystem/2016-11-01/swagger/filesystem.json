@@ -215,7 +215,7 @@
           {
             "name": "fsaction",
             "in": "query",
-            "required": false,
+            "required": true,
             "type": "string",
             "description": "File system operation read/write/execute in string form, matching regex pattern '[rwx-]{3}'"
           },
@@ -259,6 +259,14 @@
             "required": true,
             "type": "string",
             "description": "The Data Lake Store path (starting with '/') of the directory to create."
+          },
+          {
+            "name": "permission",
+            "in": "query",
+            "required": false,
+            "type": "integer",
+            "format": "int32",
+            "description": "Optional octal permission with which the directory should be created."
           },
           {
             "name": "op",
@@ -315,7 +323,7 @@
               "type": "string"
             },
             "collectionFormat": "csv",
-            "description": "A list of comma seperated Data Lake Store paths (starting with '/') of the files to concatenate, in the order in which they should be concatenated."
+            "description": "A list of comma separated Data Lake Store paths (starting with '/') of the files to concatenate, in the order in which they should be concatenated."
           },
           {
             "name": "op",
@@ -446,13 +454,20 @@
             "description": "Gets or sets the item or lexographical index before which to begin returning results. For example, a file list of 'a','b','d' and listBefore='d' will return 'a','b', and a listBefore='c' will also return 'a','b'. Optional."
           },
           {
+            "name": "tooId",
+            "in": "query",
+            "required": false,
+            "type": "boolean",
+            "description": "An optional switch to return friendly names in place of owner and group. tooid=false returns friendly names instead of the AAD Object ID. Default value is true, returning AAD object IDs."
+          },
+          {
             "name": "op",
             "in": "query",
             "required": true,
             "type": "string",
             "description": "The constant value for the operation.",
             "enum": [
-              "MSLISTSTATUS"
+              "LISTSTATUS"
             ]
           },
           {
@@ -538,13 +553,20 @@
             "description": "The Data Lake Store path (starting with '/') of the file or directory for which to retrieve the status."
           },
           {
+            "name": "tooId",
+            "in": "query",
+            "required": false,
+            "type": "boolean",
+            "description": "An optional switch to return friendly names in place of owner and group. tooid=false returns friendly names instead of the AAD Object ID. Default value is true, returning AAD object IDs."
+          },
+          {
             "name": "op",
             "in": "query",
             "required": true,
             "type": "string",
             "description": "The constant value for the operation.",
             "enum": [
-              "MSGETFILESTATUS"
+              "GETFILESTATUS"
             ]
           },
           {
@@ -577,7 +599,7 @@
           "application/octet-stream"
         ],
         "operationId": "FileSystem_Append",
-        "description": "Appends to the specified file. NOTE: The target must not contain data added by ConcurrentAppend. ConcurrentAppend and Append cannot be used interchangeably; once a target file has been modified using either of these append options, the other append option cannot be used on the target file.",
+        "description": "Used for serial appends to the specified file. NOTE: The target must not contain data added by ConcurrentAppend. ConcurrentAppend and Append cannot be used interchangeably; once a target file has been modified using either of these append options, the other append option cannot be used on the target file.",
         "parameters": [
           {
             "name": "directFilePath",
@@ -622,6 +644,22 @@
             }
           },
           {
+            "name": "leaseId",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "format": "uuid",
+            "description": "Optional unique GUID per file to ensure single writer semantics, meaning that only clients that append to the file with the same leaseId will be allowed to do so."
+          },
+          {
+            "name": "fileSessionId",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "format": "uuid",
+            "description": "Optional unique GUID per file indicating all the appends with the same fileSessionId are from the same client and same session. This will give a performance benefit when syncFlag is DATA or METADATA."
+          },
+          {
             "name": "op",
             "in": "query",
             "required": true,
@@ -635,7 +673,7 @@
             "name": "append",
             "in": "query",
             "required": true,
-            "description": "The constant value for the operation.",
+            "description": "Flag to skip redirection. When append=false or not specified, the request is redirected. Submit another HTTP PUT request using the URL in the Location header with the file data to be written. When append=true, this redirection is skipped.",
             "type": "string",
             "enum": [
               "true"
@@ -698,7 +736,7 @@
             "required": false,
             "type": "string",
             "default": "CLOSE",
-            "description": "Optionally indicates what to do after completion of the append. DATA indicates more data is coming so no sync takes place, METADATA indicates a sync should be done to refresh metadata of the file only. CLOSE indicates that both the stream and metadata should be refreshed upon append completion.",
+            "description": "Optionally indicates what to do after completion of the append. DATA indicates more data is coming so no sync takes place, METADATA indicates a sync should be done to refresh metadata of the file only. CLOSE indicates that both the stream and metadata should be refreshed upon create completion.",
             "enum": [
               "DATA",
               "METADATA",
@@ -708,6 +746,21 @@
             "name": "SyncFlag",
             "modelAsString": false
             }
+          },
+          {
+            "name": "leaseId",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "format": "uuid",
+            "description": "Optional unique GUID per file to ensure single writer semantics, meaning that only clients that append to the file with the same leaseId will be allowed to do so."
+          },
+          {
+            "name": "permission",
+            "type": "integer",
+            "in": "query",
+            "format": "int32",
+            "description": "The octal representation of the unnamed user, mask and other permissions that should be set for the file when created. If not specified, it inherits these from the container."
           },
           {
             "name": "op",
@@ -724,7 +777,7 @@
             "in": "query",
             "required": true,
             "type": "string",
-            "description": "The constant value for the operation.",
+            "description": "Flag to skip redirection. When write=false or not specified, the request is redirected. Submit another HTTP PUT request using the URL in the Location header with the file data to be written. When write=true, this redirection is skipped.",
             "enum": [
               "true"
             ]
@@ -780,6 +833,14 @@
             "description": "The byte offset to start reading data from."
           },
           {
+            "name": "fileSessionId",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "format": "uuid",
+            "description": "Optional unique GUID per file indicating all the reads with the same fileSessionId are from the same client and same session. This will give a performance benefit."
+          },
+          {
             "name": "op",
             "in": "query",
             "required": true,
@@ -793,7 +854,7 @@
             "name": "read",
             "in": "query",
             "required": true,
-            "description": "The constant value for the operation.",
+            "description": "Flag to skip redirection. When read=false or not specified, the request is redirected. Submit another HTTP PUT request using the URL in the Location header with the file data to be read. When read=true, this redirection is skipped.",
             "type": "string",
             "enum": [
               "true"
@@ -1070,13 +1131,20 @@
             "description": "The Data Lake Store path (starting with '/') of the file or directory for which to get the ACL."
           },
           {
+            "name": "tooId",
+            "in": "query",
+            "required": false,
+            "type": "boolean",
+            "description": "An optional switch to return friendly names in place of object ID for ACL entries. tooid=false returns friendly names instead of the AAD Object ID. Default value is true, returning AAD object IDs."
+          },
+          {
             "name": "op",
             "in": "query",
             "required": true,
             "type": "string",
             "description": "The constant value for the operation.",
             "enum": [
-              "MSGETACLSTATUS"
+              "GETACLSTATUS"
             ]
           },
           {
@@ -1424,7 +1492,8 @@
           "format": "int64",
           "description": "the number of children in the directory."
         },
-        "expirationTime": {
+        "msExpirationTime": {
+          "x-ms-client-name": "expirationTime",
           "type": "integer",
           "readOnly": true,
           "format": "int64",
@@ -1474,6 +1543,11 @@
             "name": "FileType",
             "modelAsString": false
           }
+        },
+        "aclBit": {
+          "type": "boolean",
+          "readOnly": true,
+          "description": "flag to indicate if extended acls are enabled "
         }
       },
       "description": "Data Lake Store file or directory information."
