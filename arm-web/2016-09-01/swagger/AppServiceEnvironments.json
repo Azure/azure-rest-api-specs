@@ -2109,11 +2109,14 @@
       "allOf": [
         {
           "$ref": "#/definitions/Resource"
-        },
-        {
-          "$ref": "#/definitions/AppServiceEnvironment"
         }
-      ]
+      ],
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/AppServiceEnvironment",
+          "x-ms-client-flatten": true
+        }
+      }
     },
     "AppServicePlan": {
       "description": "App Service plan.",
@@ -2125,7 +2128,7 @@
       ],
       "properties": {
         "properties": {
-          "description": "ARM envelope properties",
+          "description": "AppServicePlan resource specific properties",
           "required": [
             "name"
           ],
@@ -2708,7 +2711,7 @@
       ],
       "properties": {
         "properties": {
-          "description": "ARM envelope properties",
+          "description": "MetricDefinition resource specific properties",
           "properties": {
             "name": {
               "description": "Name of the metric.",
@@ -3068,7 +3071,7 @@
       ],
       "properties": {
         "properties": {
-          "description": "ARM envelope properties",
+          "description": "ResourceMetricDefinition resource specific properties",
           "properties": {
             "name": {
               "$ref": "#/definitions/ResourceMetricName",
@@ -3225,7 +3228,7 @@
       ],
       "properties": {
         "properties": {
-          "description": "ARM envelope properties",
+          "description": "Site resource specific properties",
           "properties": {
             "state": {
               "description": "Current state of the app.",
@@ -3997,7 +4000,7 @@
       ],
       "properties": {
         "properties": {
-          "description": "ARM envelope properties",
+          "description": "Usage resource specific properties",
           "properties": {
             "displayName": {
               "description": "Friendly name shown in the UI.",
@@ -4255,12 +4258,13 @@
       "allOf": [
         {
           "$ref": "#/definitions/Resource"
-        },
-        {
-          "$ref": "#/definitions/WorkerPool"
         }
       ],
       "properties": {
+        "properties": {
+          "$ref": "#/definitions/WorkerPool",
+          "x-ms-client-flatten": true
+        },
         "sku": {
           "$ref": "#/definitions/SkuDescription"
         }

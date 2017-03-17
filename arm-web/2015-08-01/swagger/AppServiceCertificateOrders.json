@@ -884,7 +884,7 @@
       ],
       "properties": {
         "properties": {
-          "description": "ARM envelope properties",
+          "description": "AppServiceCertificateOrder resource specific properties",
           "required": [
             "productType"
           ],
@@ -1076,11 +1076,14 @@
       "allOf": [
         {
           "$ref": "#/definitions/Resource"
-        },
-        {
-          "$ref": "#/definitions/AppServiceCertificate"
         }
-      ]
+      ],
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/AppServiceCertificate",
+          "x-ms-client-flatten": true
+        }
+      }
     },
     "CertificateDetails": {
       "description": "SSL certificate details.",
@@ -1146,7 +1149,7 @@
       ],
       "properties": {
         "properties": {
-          "description": "ARM envelope properties",
+          "description": "CertificateEmail resource specific properties",
           "properties": {
             "emailId": {
               "description": "Email id.",
@@ -1172,7 +1175,7 @@
       ],
       "properties": {
         "properties": {
-          "description": "ARM envelope properties",
+          "description": "CertificateOrderAction resource specific properties",
           "properties": {
             "type": {
               "description": "Action type.",
@@ -1228,7 +1231,7 @@
       ],
       "properties": {
         "properties": {
-          "description": "ARM envelope properties",
+          "description": "ReissueCertificateOrderRequest resource specific properties",
           "properties": {
             "keySize": {
               "format": "int32",
@@ -1263,7 +1266,7 @@
       ],
       "properties": {
         "properties": {
-          "description": "ARM envelope properties",
+          "description": "RenewCertificateOrderRequest resource specific properties",
           "properties": {
             "keySize": {
               "format": "int32",

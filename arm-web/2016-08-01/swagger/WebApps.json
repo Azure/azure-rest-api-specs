@@ -3632,6 +3632,48 @@
         "x-ms-long-running-operation": true
       }
     },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Web/sites/{name}/migratemysql/status": {
+      "get": {
+        "tags": [
+          "WebApps"
+        ],
+        "summary": "Returns the status of MySql in app migration, if one is active, and whether or not MySql in app is enabled",
+        "description": "Returns the status of MySql in app migration, if one is active, and whether or not MySql in app is enabled",
+        "operationId": "WebApps_GetMigrateMySqlStatus",
+        "produces": [
+          "application/json",
+          "text/json",
+          "application/xml",
+          "text/xml"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/resourceGroupNameParameter"
+          },
+          {
+            "name": "name",
+            "in": "path",
+            "description": "Name of web app",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "$ref": "#/parameters/subscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/MigrateMySqlStatus"
+            }
+          }
+        }
+      }
+    },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Web/sites/{name}/networkFeatures/{view}": {
       "get": {
         "tags": [
@@ -3705,16 +3747,29 @@
           {
             "name": "name",
             "in": "path",
-            "description": "The name of the web app",
+            "description": "The name of the web app.",
             "required": true,
             "type": "string"
           },
           {
             "name": "durationInSeconds",
             "in": "query",
-            "description": "The duration to keep capturing in seconds",
+            "description": "The duration to keep capturing in seconds.",
             "type": "integer",
             "format": "int32"
+          },
+          {
+            "name": "maxFrameLength",
+            "in": "query",
+            "description": "The maximum frame length in bytes (Optional).",
+            "type": "integer",
+            "format": "int32"
+          },
+          {
+            "name": "sasUrl",
+            "in": "query",
+            "description": "The Blob URL to store capture file.",
+            "type": "string"
           },
           {
             "$ref": "#/parameters/subscriptionIdParameter"
@@ -8121,6 +8176,55 @@
         }
       }
     },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Web/sites/{name}/slots/{slot}/migratemysql/status": {
+      "get": {
+        "tags": [
+          "WebApps"
+        ],
+        "summary": "Returns the status of MySql in app migration, if one is active, and whether or not MySql in app is enabled",
+        "description": "Returns the status of MySql in app migration, if one is active, and whether or not MySql in app is enabled",
+        "operationId": "WebApps_GetMigrateMySqlStatusSlot",
+        "produces": [
+          "application/json",
+          "text/json",
+          "application/xml",
+          "text/xml"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/resourceGroupNameParameter"
+          },
+          {
+            "name": "name",
+            "in": "path",
+            "description": "Name of web app",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "slot",
+            "in": "path",
+            "description": "Name of the deployment slot",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "$ref": "#/parameters/subscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/MigrateMySqlStatus"
+            }
+          }
+        }
+      }
+    },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Web/sites/{name}/slots/{slot}/networkFeatures/{view}": {
       "get": {
         "tags": [
@@ -8217,6 +8321,19 @@
             "in": "path",
             "description": "The name of the slot for this web app.",
             "required": true,
+            "type": "string"
+          },
+          {
+            "name": "maxFrameLength",
+            "in": "query",
+            "description": "The maximum frame length in bytes (Optional).",
+            "type": "integer",
+            "format": "int32"
+          },
+          {
+            "name": "sasUrl",
+            "in": "query",
+            "description": "The Blob URL to store capture file.",
             "type": "string"
           },
           {
@@ -10988,7 +11105,7 @@
       ],
       "properties": {
         "properties": {
-          "description": "ARM envelope properties",
+          "description": "BackupItem resource specific properties",
           "properties": {
             "id": {
               "format": "int32",
@@ -11121,7 +11238,7 @@
       ],
       "properties": {
         "properties": {
-          "description": "ARM envelope properties",
+          "description": "BackupRequest resource specific properties",
           "required": [
             "name",
             "storageAccountUrl"
@@ -11489,7 +11606,7 @@
       ],
       "properties": {
         "properties": {
-          "description": "ARM envelope properties",
+          "description": "CustomHostnameAnalysisResult resource specific properties",
           "properties": {
             "isHostnameAlreadyVerified": {
               "description": "<code>true</code> if hostname is already verified; otherwise, <code>false</code>.",
@@ -11613,7 +11730,7 @@
       ],
       "properties": {
         "properties": {
-          "description": "ARM envelope properties",
+          "description": "Deployment resource specific properties",
           "properties": {
             "id": {
               "description": "ID.",
@@ -11818,7 +11935,7 @@
       ],
       "properties": {
         "properties": {
-          "description": "ARM envelope properties",
+          "description": "HostNameBinding resource specific properties",
           "required": [
             "name"
           ],
@@ -12051,7 +12168,7 @@
       ],
       "properties": {
         "properties": {
-          "description": "ARM envelope properties",
+          "description": "HybridConnection resource specific properties",
           "properties": {
             "serviceBusNamespace": {
               "description": "The name of the Service Bus namespace.",
@@ -12105,7 +12222,7 @@
       ],
       "properties": {
         "properties": {
-          "description": "ARM envelope properties",
+          "description": "HybridConnectionKey resource specific properties",
           "properties": {
             "sendKeyName": {
               "description": "The name of the send key.",
@@ -12132,7 +12249,7 @@
       ],
       "properties": {
         "properties": {
-          "description": "ARM envelope properties",
+          "description": "Identifier resource specific properties",
           "properties": {
             "id": {
               "description": "ID.",
@@ -12204,7 +12321,7 @@
       ],
       "properties": {
         "properties": {
-          "description": "ARM envelope properties",
+          "description": "MigrateMySqlRequest resource specific properties",
           "required": [
             "connectionString"
           ],
@@ -12212,6 +12329,49 @@
             "connectionString": {
               "description": "Connection string to the remote MySQL database to which data should be migrated.",
               "type": "string"
+            }
+          },
+          "x-ms-client-flatten": true
+        }
+      }
+    },
+    "MigrateMySqlStatus": {
+      "description": "MySQL migration status.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/Resource"
+        }
+      ],
+      "properties": {
+        "properties": {
+          "description": "MigrateMySqlStatus resource specific properties",
+          "properties": {
+            "migrationOperationStatus": {
+              "description": "Status of the migration task.",
+              "enum": [
+                "InProgress",
+                "Failed",
+                "Succeeded",
+                "TimedOut",
+                "Created"
+              ],
+              "type": "string",
+              "readOnly": true,
+              "x-ms-enum": {
+                "name": "OperationStatus",
+                "modelAsString": false
+              }
+            },
+            "operationId": {
+              "description": "Operation ID for the migration task.",
+              "type": "string",
+              "readOnly": true
+            },
+            "localMySqlEnabled": {
+              "description": "True if the web app has in app MySql enabled",
+              "type": "boolean",
+              "readOnly": true
             }
           },
           "x-ms-client-flatten": true
@@ -12242,7 +12402,7 @@
       ],
       "properties": {
         "properties": {
-          "description": "ARM envelope properties",
+          "description": "NetworkFeatures resource specific properties",
           "properties": {
             "virtualNetworkName": {
               "description": "The Virtual Network name.",
@@ -12429,7 +12589,7 @@
       ],
       "properties": {
         "properties": {
-          "description": "ARM envelope properties",
+          "description": "PremierAddOn resource specific properties",
           "properties": {
             "sku": {
               "description": "SKU.",
@@ -12550,7 +12710,7 @@
       ],
       "properties": {
         "properties": {
-          "description": "ARM envelope properties",
+          "description": "RecoverResponse resource specific properties",
           "properties": {
             "operationId": {
               "description": "ID of the recovery operation. Can be used to check the status of the corresponding operation.",
@@ -12572,7 +12732,7 @@
       ],
       "properties": {
         "properties": {
-          "description": "ARM envelope properties",
+          "description": "RelayServiceConnectionEntity resource specific properties",
           "properties": {
             "entityName": {
               "type": "string"
@@ -12758,7 +12918,7 @@
       ],
       "properties": {
         "properties": {
-          "description": "ARM envelope properties",
+          "description": "ResourceMetricDefinition resource specific properties",
           "properties": {
             "name": {
               "$ref": "#/definitions/ResourceMetricName",
@@ -12915,7 +13075,7 @@
       ],
       "properties": {
         "properties": {
-          "description": "ARM envelope properties",
+          "description": "RestoreRequest resource specific properties",
           "required": [
             "storageAccountUrl",
             "overwrite"
@@ -12986,7 +13146,7 @@
       ],
       "properties": {
         "properties": {
-          "description": "ARM envelope properties",
+          "description": "RestoreResponse resource specific properties",
           "properties": {
             "operationId": {
               "description": "When server starts the restore process, it will return an operation ID identifying that particular restore operation.",
@@ -13008,7 +13168,7 @@
       ],
       "properties": {
         "properties": {
-          "description": "ARM envelope properties",
+          "description": "Site resource specific properties",
           "properties": {
             "state": {
               "description": "Current state of the app.",
@@ -13226,7 +13386,7 @@
       ],
       "properties": {
         "properties": {
-          "description": "ARM envelope properties",
+          "description": "SiteAuthSettings resource specific properties",
           "properties": {
             "enabled": {
               "description": "<code>true</code> if the Authentication / Authorization feature is enabled for the current app; otherwise, <code>false</code>.",
@@ -13667,11 +13827,14 @@
       "allOf": [
         {
           "$ref": "#/definitions/Resource"
-        },
-        {
-          "$ref": "#/definitions/SiteConfig"
         }
-      ]
+      ],
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/SiteConfig",
+          "x-ms-client-flatten": true
+        }
+      }
     },
     "SiteConfigurationSnapshotInfo": {
       "description": "A snapshot of a web app configuration.",
@@ -13683,7 +13846,7 @@
       ],
       "properties": {
         "properties": {
-          "description": "ARM envelope properties",
+          "description": "SiteConfigurationSnapshotInfo resource specific properties",
           "properties": {
             "time": {
               "format": "date-time",
@@ -13712,7 +13875,7 @@
       ],
       "properties": {
         "properties": {
-          "description": "ARM envelope properties",
+          "description": "SiteInstance resource specific properties",
           "properties": {
             "name": {
               "description": "Name of instance.",
@@ -13755,7 +13918,7 @@
       ],
       "properties": {
         "properties": {
-          "description": "ARM envelope properties",
+          "description": "SiteLogsConfig resource specific properties",
           "properties": {
             "applicationLogs": {
               "$ref": "#/definitions/ApplicationLogsConfig",
@@ -13810,7 +13973,7 @@
       ],
       "properties": {
         "properties": {
-          "description": "ARM envelope properties",
+          "description": "SitePhpErrorLogFlag resource specific properties",
           "properties": {
             "localLogErrors": {
               "description": "Local log_errors setting.",
@@ -13843,7 +14006,7 @@
       ],
       "properties": {
         "properties": {
-          "description": "ARM envelope properties",
+          "description": "SiteSourceControl resource specific properties",
           "properties": {
             "repoUrl": {
               "description": "Repository or source control URL.",
@@ -13916,11 +14079,14 @@
       "allOf": [
         {
           "$ref": "#/definitions/Resource"
-        },
-        {
-          "$ref": "#/definitions/SlotConfigNames"
         }
-      ]
+      ],
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/SlotConfigNames",
+          "x-ms-client-flatten": true
+        }
+      }
     },
     "SlotDifference": {
       "description": "A setting difference between two deployment slots of an app.",
@@ -13932,7 +14098,7 @@
       ],
       "properties": {
         "properties": {
-          "description": "ARM envelope properties",
+          "description": "SlotDifference resource specific properties",
           "properties": {
             "type": {
               "description": "Type of the difference: Information, Warning or Error.",
@@ -14045,7 +14211,7 @@
       ],
       "properties": {
         "properties": {
-          "description": "ARM envelope properties",
+          "description": "Snapshot resource specific properties",
           "properties": {
             "time": {
               "format": "date-time",
@@ -14118,7 +14284,7 @@
       ],
       "properties": {
         "properties": {
-          "description": "ARM envelope properties",
+          "description": "StorageMigrationOptions resource specific properties",
           "required": [
             "azurefilesConnectionString",
             "azurefilesShare"
@@ -14169,7 +14335,7 @@
       ],
       "properties": {
         "properties": {
-          "description": "ARM envelope properties",
+          "description": "StorageMigrationResponse resource specific properties",
           "properties": {
             "operationId": {
               "description": "When server starts the migration process, it will return an operation ID identifying that particular migration operation.",
@@ -14210,7 +14376,7 @@
       ],
       "properties": {
         "properties": {
-          "description": "ARM envelope properties",
+          "description": "User resource specific properties",
           "required": [
             "publishingUserName"
           ],
@@ -14293,7 +14459,7 @@
       ],
       "properties": {
         "properties": {
-          "description": "ARM envelope properties",
+          "description": "VnetGateway resource specific properties",
           "required": [
             "vpnPackageUri"
           ],
@@ -14365,7 +14531,7 @@
       ],
       "properties": {
         "properties": {
-          "description": "ARM envelope properties",
+          "description": "VnetRoute resource specific properties",
           "properties": {
             "name": {
               "description": "The name of this route. This is only returned by the server and does not need to be set by the client.",
