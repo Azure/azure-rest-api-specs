@@ -709,6 +709,7 @@
       "description": "The cluster resource properties",
       "properties": {
         "availableClusterVersions": {
+          "description": "The available cluster code version which the cluster can upgrade to, note that you must choose upgradeMode to manual to upgrade to",
           "type": "array",
           "readOnly": true,
           "items": {
@@ -721,6 +722,7 @@
           "type": "string"
         },
         "clusterState": {
+          "description": "The state for the cluster",
           "readOnly": true,
           "type": "string",
           "enum": [
@@ -742,6 +744,7 @@
           ]
         },
         "clusterEndpoint": {
+          "description": "The endpoint for the cluster connecting to servicefabric resource provider",
           "readOnly": true,
           "type": "string"
         },
@@ -750,12 +753,13 @@
           "type": "string"
         },
         "certificate": {
+          "description": "The cluster certificate",
           "$ref": "#/definitions/CertificateDescription"
         },
         "reliabilityLevel": {
+          "description": "The reliability level for the cluster",
           "type": "string",
           "enum": [
-            "Invalid",
             "Bronze",
             "Silver",
             "Gold",
@@ -763,44 +767,51 @@
           ]
         },
         "upgradeMode": {
+          "description": "The cluster upgrade mode",
           "type": "string",
           "enum": [
-            "Default",
             "Automatic",
             "Manual"
           ]
         },
         "clientCertificateThumbprints": {
+          "description": "The client certificate thumbprints",
           "type": "array",
           "items": {
             "$ref": "#/definitions/ClientCertificateThumbprint"
           }
         },
         "clientCertificateCommonNames": {
+          "description": "The certificate common name and issurer thumprint for the client certificate",
           "type": "array",
           "items": {
             "$ref": "#/definitions/ClientCertificateCommonName"
           }
         },
         "fabricSettings": {
+          "description": "The faric setting collection",
           "type": "array",
           "items": {
             "$ref": "#/definitions/SettingsSectionDescription"
           }
         },
         "reverseProxyCertificate": {
+          "description": "The certificate for the reverse proxy",
           "$ref": "#/definitions/CertificateDescription"
         },
         "managementEndpoint": {
+          "description": "The cluster management endpoint address",
           "type": "string"
         },
         "nodeTypes": {
+          "description": "The arary of the nodeType",
           "type": "array",
           "items": {
             "$ref": "#/definitions/NodeTypeDescription"
           }
         },
         "provisioningState": {
+          "description": "The provisioning state of the cluster",
           "type": "string",
           "enum": [
             "Default",
@@ -811,12 +822,15 @@
           ]
         },
         "vmImage": {
+          "description": "The os type",
           "type": "string"
         },
         "diagnosticsStorageAccountConfig": {
+          "description": "The storage diagnostics account configuration ",
           "$ref": "#/definitions/DiagnosticsStorageAccountConfig"
         },
         "upgradeDescription": {
+          "description": "The upgrade policy",
           "$ref": "#/definitions/PaasClusterUpgradePolicy"
         }
       },
