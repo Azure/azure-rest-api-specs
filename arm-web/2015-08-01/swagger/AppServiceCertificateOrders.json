@@ -117,6 +117,143 @@
         }
       }
     },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.CertificateRegistration/certificateOrders/{certificateOrderName}": {
+      "get": {
+        "tags": [
+          "AppServiceCertificateOrders"
+        ],
+        "summary": "Get a certificate order.",
+        "description": "Get a certificate order.",
+        "operationId": "AppServiceCertificateOrders_Get",
+        "produces": [
+          "application/json",
+          "text/json",
+          "application/xml",
+          "text/xml"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/resourceGroupNameParameter"
+          },
+          {
+            "name": "certificateOrderName",
+            "in": "path",
+            "description": "Name of the certificate order..",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "$ref": "#/parameters/subscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/AppServiceCertificateOrder"
+            }
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "AppServiceCertificateOrders"
+        ],
+        "summary": "Create or update a certificate purchase order.",
+        "description": "Create or update a certificate purchase order.",
+        "operationId": "AppServiceCertificateOrders_CreateOrUpdate",
+        "consumes": [
+          "application/json",
+          "text/json",
+          "application/x-www-form-urlencoded"
+        ],
+        "produces": [
+          "application/json",
+          "text/json",
+          "application/xml",
+          "text/xml"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/resourceGroupNameParameter"
+          },
+          {
+            "name": "certificateOrderName",
+            "in": "path",
+            "description": "Name of the certificate order.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "certificateDistinguishedName",
+            "in": "body",
+            "description": "Distinguished name to to use for the certificate order.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/AppServiceCertificateOrder"
+            }
+          },
+          {
+            "$ref": "#/parameters/subscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "App Service Certificate Order is created.",
+            "schema": {
+              "$ref": "#/definitions/AppServiceCertificateOrder"
+            }
+          },
+          "201": {
+            "description": "App Service Certificate Order creation operation is in progress",
+            "schema": {
+              "$ref": "#/definitions/AppServiceCertificateOrder"
+            }
+          }
+        },
+        "x-ms-long-running-operation": true
+      },
+      "delete": {
+        "tags": [
+          "AppServiceCertificateOrders"
+        ],
+        "summary": "Delete an existing certificate order.",
+        "description": "Delete an existing certificate order.",
+        "operationId": "AppServiceCertificateOrders_Delete",
+        "parameters": [
+          {
+            "$ref": "#/parameters/resourceGroupNameParameter"
+          },
+          {
+            "name": "certificateOrderName",
+            "in": "path",
+            "description": "Name of the certificate order.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "$ref": "#/parameters/subscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Succesfully deleted certificate order."
+          },
+          "204": {
+            "description": "Certificate order does not exist."
+          }
+        }
+      }
+    },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.CertificateRegistration/certificateOrders/{certificateOrderName}/certificates": {
       "get": {
         "tags": [
@@ -318,143 +455,6 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.CertificateRegistration/certificateOrders/{certificateOrderName}": {
-      "get": {
-        "tags": [
-          "AppServiceCertificateOrders"
-        ],
-        "summary": "Get a certificate order.",
-        "description": "Get a certificate order.",
-        "operationId": "AppServiceCertificateOrders_Get",
-        "produces": [
-          "application/json",
-          "text/json",
-          "application/xml",
-          "text/xml"
-        ],
-        "parameters": [
-          {
-            "$ref": "#/parameters/resourceGroupNameParameter"
-          },
-          {
-            "name": "certificateOrderName",
-            "in": "path",
-            "description": "Name of the certificate order.",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "$ref": "#/parameters/subscriptionIdParameter"
-          },
-          {
-            "$ref": "#/parameters/apiVersionParameter"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "OK",
-            "schema": {
-              "$ref": "#/definitions/AppServiceCertificateOrder"
-            }
-          }
-        }
-      },
-      "put": {
-        "tags": [
-          "AppServiceCertificateOrders"
-        ],
-        "summary": "Create or update a certificate purchase order.",
-        "description": "Create or update a certificate purchase order.",
-        "operationId": "AppServiceCertificateOrders_CreateOrUpdate",
-        "consumes": [
-          "application/json",
-          "text/json",
-          "application/x-www-form-urlencoded"
-        ],
-        "produces": [
-          "application/json",
-          "text/json",
-          "application/xml",
-          "text/xml"
-        ],
-        "parameters": [
-          {
-            "$ref": "#/parameters/resourceGroupNameParameter"
-          },
-          {
-            "name": "certificateOrderName",
-            "in": "path",
-            "description": "Name of the certificate order.",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "name": "certificateDistinguishedName",
-            "in": "body",
-            "description": "Distinguished name to to use for the certificate order.",
-            "required": true,
-            "schema": {
-              "$ref": "#/definitions/AppServiceCertificateOrder"
-            }
-          },
-          {
-            "$ref": "#/parameters/subscriptionIdParameter"
-          },
-          {
-            "$ref": "#/parameters/apiVersionParameter"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "App Service Certificate Order is created.",
-            "schema": {
-              "$ref": "#/definitions/AppServiceCertificateOrder"
-            }
-          },
-          "201": {
-            "description": "App Service Certificate Order creation operation is in progress",
-            "schema": {
-              "$ref": "#/definitions/AppServiceCertificateOrder"
-            }
-          }
-        },
-        "x-ms-long-running-operation": true
-      },
-      "delete": {
-        "tags": [
-          "AppServiceCertificateOrders"
-        ],
-        "summary": "Delete an existing certificate order.",
-        "description": "Delete an existing certificate order.",
-        "operationId": "AppServiceCertificateOrders_DeleteCertificateOrder",
-        "parameters": [
-          {
-            "$ref": "#/parameters/resourceGroupNameParameter"
-          },
-          {
-            "name": "certificateOrderName",
-            "in": "path",
-            "description": "Name of the certificate order.",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "$ref": "#/parameters/subscriptionIdParameter"
-          },
-          {
-            "$ref": "#/parameters/apiVersionParameter"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Succesfully deleted certificate order."
-          },
-          "204": {
-            "description": "Certificate order does not exist."
-          }
-        }
-      }
-    },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.CertificateRegistration/certificateOrders/{certificateOrderName}/reissue": {
       "post": {
         "tags": [
@@ -635,96 +635,6 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.CertificateRegistration/certificateOrders/{certificateOrderName}/retrieveCertificateActions": {
-      "post": {
-        "tags": [
-          "AppServiceCertificateOrders"
-        ],
-        "summary": "Retrieve the list of certificate actions.",
-        "description": "Retrieve the list of certificate actions.",
-        "operationId": "AppServiceCertificateOrders_RetrieveCertificateActions",
-        "produces": [
-          "application/json",
-          "text/json",
-          "application/xml",
-          "text/xml"
-        ],
-        "parameters": [
-          {
-            "$ref": "#/parameters/resourceGroupNameParameter"
-          },
-          {
-            "name": "certificateOrderName",
-            "in": "path",
-            "description": "Name of the certificate order.",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "$ref": "#/parameters/subscriptionIdParameter"
-          },
-          {
-            "$ref": "#/parameters/apiVersionParameter"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "OK",
-            "schema": {
-              "type": "array",
-              "items": {
-                "$ref": "#/definitions/CertificateOrderAction"
-              }
-            }
-          }
-        }
-      }
-    },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.CertificateRegistration/certificateOrders/{certificateOrderName}/retrieveEmailHistory": {
-      "post": {
-        "tags": [
-          "AppServiceCertificateOrders"
-        ],
-        "summary": "Retrieve email history.",
-        "description": "Retrieve email history.",
-        "operationId": "AppServiceCertificateOrders_RetrieveCertificateEmailHistory",
-        "produces": [
-          "application/json",
-          "text/json",
-          "application/xml",
-          "text/xml"
-        ],
-        "parameters": [
-          {
-            "$ref": "#/parameters/resourceGroupNameParameter"
-          },
-          {
-            "name": "certificateOrderName",
-            "in": "path",
-            "description": "Name of the certificate order.",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "$ref": "#/parameters/subscriptionIdParameter"
-          },
-          {
-            "$ref": "#/parameters/apiVersionParameter"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "OK",
-            "schema": {
-              "type": "array",
-              "items": {
-                "$ref": "#/definitions/CertificateEmail"
-              }
-            }
-          }
-        }
-      }
-    },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.CertificateRegistration/certificateOrders/{certificateOrderName}/retrieveSiteSeal": {
       "post": {
         "tags": [
@@ -815,6 +725,96 @@
           }
         }
       }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.CertificateRegistration/certificateOrders/{name}/retrieveCertificateActions": {
+      "post": {
+        "tags": [
+          "AppServiceCertificateOrders"
+        ],
+        "summary": "Retrieve the list of certificate actions.",
+        "description": "Retrieve the list of certificate actions.",
+        "operationId": "AppServiceCertificateOrders_RetrieveCertificateActions",
+        "produces": [
+          "application/json",
+          "text/json",
+          "application/xml",
+          "text/xml"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/resourceGroupNameParameter"
+          },
+          {
+            "name": "name",
+            "in": "path",
+            "description": "Name of the certificate order.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "$ref": "#/parameters/subscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/CertificateOrderAction"
+              }
+            }
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.CertificateRegistration/certificateOrders/{name}/retrieveEmailHistory": {
+      "post": {
+        "tags": [
+          "AppServiceCertificateOrders"
+        ],
+        "summary": "Retrieve email history.",
+        "description": "Retrieve email history.",
+        "operationId": "AppServiceCertificateOrders_RetrieveCertificateEmailHistory",
+        "produces": [
+          "application/json",
+          "text/json",
+          "application/xml",
+          "text/xml"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/resourceGroupNameParameter"
+          },
+          {
+            "name": "name",
+            "in": "path",
+            "description": "Name of the certificate order.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "$ref": "#/parameters/subscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/CertificateEmail"
+              }
+            }
+          }
+        }
+      }
     }
   },
   "definitions": {
@@ -823,7 +823,7 @@
       "type": "object",
       "properties": {
         "keyVaultId": {
-          "description": "Key Vault Csm resource Id.",
+          "description": "Key Vault resource Id.",
           "type": "string"
         },
         "keyVaultSecretName": {
@@ -1032,6 +1032,18 @@
             "isPrivateKeyExternal": {
               "description": "<code>true</code> if private key is external; otherwise, <code>false</code>.",
               "type": "boolean"
+            },
+            "appServiceCertificateNotRenewableReasons": {
+              "description": "Reasons why App Service Certificate is not renewable at the current moment.",
+              "type": "array",
+              "items": {
+                "enum": [
+                  "RegistrationStatusNotSupportedForRenewal",
+                  "ExpirationNotInRenewalTimeRange",
+                  "SubscriptionNotActive"
+                ],
+                "type": "string"
+              }
             }
           },
           "x-ms-client-flatten": true
@@ -1064,46 +1076,11 @@
       "allOf": [
         {
           "$ref": "#/definitions/Resource"
+        },
+        {
+          "$ref": "#/definitions/AppServiceCertificate"
         }
-      ],
-      "properties": {
-        "properties": {
-          "description": "ARM envelope properties",
-          "properties": {
-            "keyVaultId": {
-              "description": "Key Vault Csm resource Id.",
-              "type": "string"
-            },
-            "keyVaultSecretName": {
-              "description": "Key Vault secret name.",
-              "type": "string"
-            },
-            "provisioningState": {
-              "description": "Status of the Key Vault secret.",
-              "enum": [
-                "Initialized",
-                "WaitingOnCertificateOrder",
-                "Succeeded",
-                "CertificateOrderFailed",
-                "OperationNotPermittedOnKeyVault",
-                "AzureServiceUnauthorizedToAccessKeyVault",
-                "KeyVaultDoesNotExist",
-                "KeyVaultSecretDoesNotExist",
-                "UnknownError",
-                "ExternalPrivateKey",
-                "Unknown"
-              ],
-              "type": "string",
-              "readOnly": true,
-              "x-ms-enum": {
-                "name": "KeyVaultSecretStatus",
-                "modelAsString": false
-              }
-            }
-          },
-          "x-ms-client-flatten": true
-        }
-      }
+      ]
     },
     "CertificateDetails": {
       "description": "SSL certificate details.",
