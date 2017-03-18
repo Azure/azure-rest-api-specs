@@ -361,6 +361,31 @@
         },
         "x-ms-long-running-operation": true
       }
+    },
+     "/subscriptions/{subscriptionId}/providers/Microsoft.Network/applicationGatewayAvailableWafRuleSets": {
+      "get": {
+        "tags": [
+          "ApplicationGateways"
+        ],
+        "operationId": "ApplicationGateways_GetAvailableWafRuleSets",
+        "description": "Gets all available web application firewall rule sets.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success. The operation returns a list of all available web application firewall rule sets.",
+            "schema": {
+              "$ref": "#/definitions/ApplicationGatewayAvailableWafRuleSetsResult"
+            }
+          }
+        }
+      }
     }
   },
   "definitions": {
@@ -1348,6 +1373,90 @@
         "ruleGroupName"
       ],
       "description": "Allows to disable rules within a rule group or an entire rule group."
+    },
+    "ApplicationGatewayAvailableWafRuleSetsResult": {
+      "properties": {
+        "value": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ApplicationGatewayFirewallRuleSet"
+          },
+          "description": "The list of application gateway rule sets."
+        }
+      },
+      "description": "Response for ApplicationGatewayAvailableWafRuleSets API service call."
+    },
+    "ApplicationGatewayFirewallRuleSet": {
+      "properties": {
+        "properties": {
+          "x-ms-client-flatten": false,
+          "$ref": "#/definitions/ApplicationGatewayFirewallRuleSetPropertiesFormat"
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "./network.json#/definitions/Resource"
+        }
+      ],
+      "description": "A web application firewall rule set."
+    },
+    "ApplicationGatewayFirewallRuleSetPropertiesFormat": {
+      "properties": {
+        "provisioningState": {
+          "type": "string",
+          "description": "The provisioning state of the web application firewall rule set."
+        },
+        "ruleSetType": {
+          "type": "string",
+          "description": "The type of the web application firewall rule set."
+        },
+        "ruleSetVersion": {
+          "type": "string",
+          "description": "The version of the web application firewall rule set type."
+        },
+        "ruleGroups": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ApplicationGatewayFirewallRuleGroup"
+          },
+          "description": "The rule groups of the web application firewall rule set."
+        }
+      },
+      "description": "Properties of the web application firewall rule set."
+    },
+    "ApplicationGatewayFirewallRuleGroup": {
+      "properties": {
+        "ruleGroupName": {
+          "type": "string",
+          "description": "The name of the web application firewall rule group."
+        },
+        "description": {
+          "type": "string",
+          "description": "The description of the web application firewall rule group."
+        },
+        "rules": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ApplicationGatewayFirewallRule"
+          },
+          "description": "The rules of the web application firewall rule group."
+        }
+      },
+      "description": "A web application firewall rule group."
+    },
+    "ApplicationGatewayFirewallRule": {
+      "properties": {
+        "ruleId": {
+          "type": "integer",
+          "format": "int32",
+          "description": "The identifier of the web application firewall rule."
+        },
+        "description": {
+          "type": "string",
+          "description": "The description of the web application firewall rule."
+        }
+      },
+      "description": "A web application firewall rule."
     }
   },
   "parameters": {
