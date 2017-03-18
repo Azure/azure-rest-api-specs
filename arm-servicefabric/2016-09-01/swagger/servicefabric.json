@@ -348,18 +348,18 @@
   },
   "definitions": {
     "CertificateDescription": {
-      "description": "Certificate description",
+      "description": "Certificate details",
       "properties": {
         "thumbprint": {
-          "description": "Primary certificate thumbprint",
+          "description": "Thumbprint of the primary certificate",
           "type": "string"
         },
         "thumbprintSecondary": {
-          "description": "Secondary certificate thumbprint",
+          "description": "Thumbprint of the secondary certificate ",
           "type": "string"
         },
         "x509StoreName": {
-          "description": "Certificate x509 store location",
+          "description": "The local certificate store location",
           "type": "string",
           "enum": [
             "AddressBook",
@@ -375,11 +375,11 @@
       }
     },
     "SettingsParameterDescription": {
-      "description": "Settings parameter description",
+      "description": "ServiceFabric settings under sections",
       "properties": {
         "name": {
           "type": "string",
-          "description": "The name of settings parameter description"
+          "description": "The name of settings property"
         },
         "value": {
           "type": "string",
@@ -388,14 +388,14 @@
       }
     },
     "SettingsSectionDescription": {
-      "description": "Settings section description",
+      "description": "ServiceFabric section settings",
       "properties": {
         "name": {
           "type": "string",
-          "description": "The name of settings section description"
+          "description": "The name of settings section"
         },
         "parameters": {
-          "description": "Settings parameter description",
+          "description": "Settings parameter value",
           "type": "array",
           "items": {
             "$ref": "#/definitions/SettingsParameterDescription"
@@ -404,43 +404,43 @@
       }
     },
     "EndpointRangeDescription": {
-      "description": "Endpoint range description",
+      "description": "Port range details",
       "properties": {
         "startPort": {
-          "description": "Endpoint start port",
+          "description": "Starting port of a range of ports",
           "type": "integer"
         },
         "endPort": {
-          "description": "Endpoint end port",
+          "description": "End port of a range of ports",
           "type": "integer"
         }
       }
     },
     "NodeTypeDescription": {
-      "description": "NodeType description",
+      "description": "NodeType details",
       "properties": {
         "name": {
-          "description": "NodeType description name",
+          "description": "Name of NodeType",
           "type": "string"
         },
         "placementProperties": {
-          "description": "Placement properties key",
+          "description": "Placement property key",
           "type": "object",
           "additionalProperties": {
-            "description": "Placement properties value",
+            "description": "Placement property value",
             "type": "string"
           }
         },
         "capacities": {
-          "description": "Capacities key",
+          "description": "Capacity property key",
           "type": "object",
           "additionalProperties": {
-            "description": "Capacities value",
+            "description": "Capacity property value",
             "type": "string"
           }
         },
         "clientConnectionEndpointPort": {
-          "description": "Client connection endpoint port",
+          "description": "TCP gateway endpoint port",
           "type": "integer"
         },
         "httpGatewayEndpointPort": {
@@ -458,55 +458,59 @@
           ]
         },
         "applicationPorts": {
-          "description": "Application ports",
+          "description": "Ports used by applications",
           "$ref": "#/definitions/EndpointRangeDescription"
         },
         "ephemeralPorts": {
-          "description": "Ephemeral ports",
+          "description": "System assgined application ports",
           "$ref": "#/definitions/EndpointRangeDescription"
         },
         "isPrimary": {
-          "description": "Primary node or not",
+          "description": "Mark this node as primay",
           "type": "boolean"
         },
         "vmInstanceCount": {
-          "description": "Instance count",
+          "description": "VMSS instance count",
           "type": "integer"
         },
         "reverseProxyEndpointPort": {
-          "description": "Reverse proxy endpoint port",
+          "description": "Endpoint used by reverse proxy",
           "type": "integer"
         }
       }
     },
     "ClientCertificateThumbprint": {
-      "description": "NodeType description",
+      "description": "Client certificate details using thumbprint",
       "properties": {
         "isAdmin": {
           "type": "boolean",
-          "description": "Is admin or not"
+          "description": "Is this certificate used for admin access from the client, if false , it is used or query only access"
         },
         "certificateThumbprint": {
-          "description": "ClientCertificate thumbprint",
+          "description": "Certificate thumbprint",
           "type": "string"
         }
       }
     },
     "ClientCertificateCommonName": {
-      "description": "NodeType description",
+      "description": "Client certificate details using common name",
       "properties": {
         "isAdmin": {
           "type": "boolean",
-          "description": "Is the certificate for admin usage or not"
+          "description": "Is this certificate used for admin access from the client, if false , it is used or query only access"
+        },
+        "CertificateCommonName": {
+          "description": "Certificate common name to be granted access; be carefull using wild card common names",
+          "type": "string"
         },
         "certificateIssuerThumbprint": {
           "description": "Certificate issuer thumbprint",
           "type": "string"
-        }
+        }        
       }
     },
     "ClusterEnvironment": {
-      "description": "Cluster environment",
+      "description": "Cluster operating system",
       "type": "string",
       "enum": [
         "Default",
@@ -515,50 +519,50 @@
       ]
     },
     "ClusterVersionDetails": {
-      "description": "NodeType description",
+      "description": "Fabric version details",
       "properties": {
         "codeVersion": {
-          "description": "Cluster code version",
+          "description": "Fabric code version",
           "type": "string"
         },
         "supportExpiryUtc": {
-          "description": "Support expiry Utc",
+          "description": "The date of expiry of the above version",
           "type": "string"
         },
         "environment": {
-          "description": "Cluster environment",
+          "description": "Cluster operating system",
           "$ref": "#/definitions/ClusterEnvironment"
         }
       }
     },
-    "PaasServiceTypeHealthPolicy": {
-      "description": "Paas service type health policy",
+    "ServiceTypeHealthPolicy": {
+      "description": "Cluster health policy",
       "properties": {
         "maxPercentUnhealthyServices": {
-          "description": "max percent of unhealthy services",
+          "description": "Max percent of unhealthy services",
           "type": "integer"
         }
       }
     },
-    "PaasApplicationHealthPolicy": {
-      "description": "Paas application health policy",
+    "ApplicationHealthPolicy": {
+      "description": "Application health policy",
       "properties": {
         "defaultServiceTypeHealthPolicy": {
-          "description": "default ServiceType health policy",
-          "$ref": "#/definitions/PaasServiceTypeHealthPolicy"
+          "description": "Health policy for the default service",
+          "$ref": "#/definitions/ServiceTypeHealthPolicy"
         },
         "serivceTypeHealthPolicies": {
-          "description": "SerivceType health policies",
+          "description": "SerivceType health policy",
           "type": "object",
           "additionalProperties": {
-            "description": "Paas ServiceType health policies",
-            "$ref": "#/definitions/PaasServiceTypeHealthPolicy"
+            "description": "ServiceType health policy",
+            "$ref": "#/definitions/ServiceTypeHealthPolicy"
           }
         }
       }
     },
-    "PaasClusterUpgradeHealthPolicy": {
-      "description": "Paas cluster upgrade health policy",
+    "ClusterUpgradeHealthPolicy": {
+      "description": "Default cluster upgrade health policy",
       "properties": {
         "maxPercentUnhealthyNodes": {
           "description": "Max percent of unhealthy nodes",
@@ -569,108 +573,108 @@
           "type": "integer"
         },
         "applicationHealthPolicies": {
-          "description": "Application health policies",
+          "description": "Application health policy",
           "type": "object",
           "additionalProperties": {
-            "description": "Paas application health policy",
-            "$ref": "#/definitions/PaasApplicationHealthPolicy"
+            "description": "Application health policy",
+            "$ref": "#/definitions/ApplicationHealthPolicy"
           }
         }
       }
     },
-    "PaasServiceTypeDeltaHealthPolicy": {
-      "description": "Paas service type delta health policy",
+    "ServiceTypeDeltaHealthPolicy": {
+      "description": "Service health policy",
       "properties": {
         "maxPercentDeltaUnhealthyServices": {
-          "description": "max percent of delta unhealthy services",
+          "description": "Max percent of additional unhealthy services",
           "type": "integer"
         }
       }
     },
-    "PaasApplicationDeltaHealthPolicy": {
-      "description": "Paas application delta health policy",
+    "ApplicationDeltaHealthPolicy": {
+      "description": "Application health policy",
       "properties": {
         "defaultServiceTypeDeltaHealthPolicy": {
-          "description": "default serviceType delta health policy",
-          "$ref": "#/definitions/PaasServiceTypeDeltaHealthPolicy"
+          "description": "Delta health policy for default services",
+          "$ref": "#/definitions/ServiceTypeDeltaHealthPolicy"
         },
         "serivceTypeDeltaHealthPolicies": {
-          "description": "SerivceType delta health policies",
+          "description": "Health policy for additional service",
           "type": "object",
           "additionalProperties": {
-            "description": "Paas serviceType delta health policy",
-            "$ref": "#/definitions/PaasServiceTypeDeltaHealthPolicy"
+            "description": "Delta health policy for service",
+            "$ref": "#/definitions/ServiceTypeDeltaHealthPolicy"
           }
         }
       }
     },
-    "PaasClusterUpgradeDeltaHealthPolicy": {
-      "description": "Paas cluster upgrade delta health policy",
+    "ClusterUpgradeDeltaHealthPolicy": {
+      "description": "Delta health policy for the cluster",
       "properties": {
         "maxPercentDeltaUnhealthyNodes": {
-          "description": "Max of percent of delta unhealthy nodes",
+          "description": "Additional unhealthy nodes percentage",
           "type": "integer"
         },
         "maxPercentUpgradeDomainDeltaUnhealthyNodes": {
-          "description": "Max of percent upgrade domain delta unhealthy nodes",
+          "description": "Additional unhealthy nodes percentage per upgrade domain ",
           "type": "integer"
         },
         "maxPercentDeltaUnhealthyApplications": {
-          "description": "Max percent of delta unhealthy applications",
+          "description": "Additional unhealthy applications percentage",
           "type": "integer"
         },
         "applicationHealthPolicies": {
-          "description": "Application health policies",
+          "description": "Application health policy",
           "type": "object",
           "additionalProperties": {
-            "description": "Paas application delta health policy",
-            "$ref": "#/definitions/PaasApplicationDeltaHealthPolicy"
+            "description": "Additional unhealthy applications percentage",
+            "$ref": "#/definitions/ApplicationDeltaHealthPolicy"
           }
         }
       }
     },
-    "PaasClusterUpgradePolicy": {
-      "description": "Paas cluster upgrade policy",
+    "ClusterUpgradePolicy": {
+      "description": "Cluster upgrade policy",
       "properties": {
         "overrideUserUpgradePolicy": {
-          "description": "Override user upgrade policy",
+          "description": "Use the user defined upgrade policy or not",
           "type": "boolean"
         },
         "forceRestart": {
-          "description": "Force restart or not",
+          "description": "Force node to restart or not",
           "type": "boolean"
         },
         "upgradeReplicaSetCheckTimeout": {
-          "description": "Upgrade replica set check timeout",
+          "description": "Timeout for replica set upgrade to complete",
           "type": "string"
         },
         "healthCheckWaitDuration": {
-          "description": "Health check wait duration",
+          "description": "The length of time to wait after completing an upgrade domain before performing health checks.",
           "type": "string"
         },
         "healthCheckStableDuration": {
-          "description": "Health check stable duration",
+          "description": "The length of time that health checks must pass continuously.",
           "type": "string"
         },
         "healthCheckRetryTimeout": {
-          "description": "Health check retry timeout",
+          "description": "The length of time that health checks can fail continuously",
           "type": "string"
         },
         "upgradeTimeout": {
-          "description": "Upgrade Timeout",
+          "description": "The upgrade timeout.",
           "type": "string"
         },
         "upgradeDomainTimeout": {
-          "description": "upgrade domain timeout",
+          "description": "The timeout for any upgrade domain.",
           "type": "string"
         },
         "healthPolicy": {
-          "description": "Health Policy",
-          "$ref": "#/definitions/PaasClusterUpgradeHealthPolicy"
+          "description": "Cluster health Policy",
+          "$ref": "#/definitions/ClusterUpgradeHealthPolicy"
         },
         "deltaHealthPolicy": {
-          "description": "Delta health policy",
-          "$ref": "#/definitions/PaasClusterUpgradeDeltaHealthPolicy"
+          "description": "Delta  health policy",
+          "$ref": "#/definitions/ClusterUpgradeDeltaHealthPolicy"
         }
       }
     },
@@ -682,11 +686,11 @@
           "type": "string"
         },
         "primaryAccessKey": {
-          "description": "Primary diagnostics storage access key",
+          "description": "Primary key for the Azure Storage",
           "type": "string"
         },
         "secondaryAccessKey": {
-          "description": "Secondary diagnostics storage access key",
+          "description": "Secondary key for the Azure Storage",
           "type": "string"
         },
         "protectedAccountKeyName": {
@@ -708,10 +712,10 @@
       }
     },
     "ClusterPropertiesUpdateParameters": {
-      "description": "The cluster resource properties",
+      "description": "The cluster resource properties can be updated",
       "properties": {
         "reliabilityLevel": {
-          "description": "Cluster reliability level",
+          "description": "Cluster reliability level indicates replica set size of system service",
           "type": "string",
           "enum": [
             "Invalid",
@@ -722,7 +726,7 @@
           ]
         },
         "upgradeMode": {
-          "description": "Cluster upgrade mode",
+          "description": "Cluster upgrade mode indicates if fabric upgrade is initiated automatically by the system or not",
           "type": "string",
           "enum": [
             "Default",
@@ -735,18 +739,18 @@
           "type": "string"
         },
         "certificate": {
-          "description": "The cluster certificate settings, the new certificate should exist in Vmss or KeyVault,before you add it, it will override original value",
+          "description": "The cluster certificate settings, the new certificate should exist in VMSS or KeyVault,before you add it, it will override original value",
           "$ref": "#/definitions/CertificateDescription"
         },
         "clientCertificateThumbprints": {
-          "description": "The cluster client thumbprints, it will override existing collection",
+          "description": "The client thumbprint details ,it is used for client access for cluter operation, it will override existing collection",
           "type": "array",
           "items": {
             "$ref": "#/definitions/ClientCertificateThumbprint"
           }
         },
         "fabricSettings": {
-          "description": "The new fabric settings for the cluster, Be noted, it will overwrite existing collection",
+          "description": "ServiceFabric section settings, Note, it will overwrite existing collection",
           "type": "array",
           "items": {
             "$ref": "#/definitions/SettingsSectionDescription"
@@ -757,7 +761,7 @@
           "$ref": "#/definitions/CertificateDescription"
         },
         "nodeTypes": {
-          "description": "The settings for NodeTypes, it will override",
+          "description": "The list of nodetypes that make up the cluster, it will override",
           "type": "array",
           "items": {
             "$ref": "#/definitions/NodeTypeDescription"
@@ -778,7 +782,7 @@
         },
         "clusterId": {
           "readOnly": true,
-          "description": "The cluster id used internally by ServiceFabirc",
+          "description": "The cluster id the resource identifier for the cluster resource",
           "type": "string"
         },
         "clusterState": {
@@ -809,15 +813,15 @@
           "type": "string"
         },
         "clusterCodeVersion": {
-          "description": "The ServiceFabric code version, you don't need to set it, when you choose upgradeMode as Automatic",
+          "description": "The ServiceFabric code version running in your cluster",
           "type": "string"
         },
         "certificate": {
-          "description": "The cluster certificate",
+          "description": "The certificates used for cluster security",
           "$ref": "#/definitions/CertificateDescription"
         },
         "reliabilityLevel": {
-          "description": "The reliability level for the cluster",
+          "description": "Cluster reliability level indicates replica set size of system service",
           "type": "string",
           "enum": [
             "Bronze",
@@ -827,7 +831,7 @@
           ]
         },
         "upgradeMode": {
-          "description": "The cluster upgrade mode",
+          "description": "Cluster upgrade mode indicates if fabric upgrade is initiated automatically by the system or not",
           "type": "string",
           "enum": [
             "Automatic",
@@ -835,36 +839,36 @@
           ]
         },
         "clientCertificateThumbprints": {
-          "description": "The client certificate thumbprints",
+          "description": "The client thumbprint details ,it is used for client access for cluter operation",
           "type": "array",
           "items": {
             "$ref": "#/definitions/ClientCertificateThumbprint"
           }
         },
         "clientCertificateCommonNames": {
-          "description": "The certificate common name and issurer thumprint for the client certificate",
+          "description": "Client certificate details using common name",
           "type": "array",
           "items": {
             "$ref": "#/definitions/ClientCertificateCommonName"
           }
         },
         "fabricSettings": {
-          "description": "The faric setting collection",
+          "description": "ServiceFabric section settings",
           "type": "array",
           "items": {
             "$ref": "#/definitions/SettingsSectionDescription"
           }
         },
         "reverseProxyCertificate": {
-          "description": "The certificate for the reverse proxy",
+          "description": "The certificate details for the reverse proxy",
           "$ref": "#/definitions/CertificateDescription"
         },
         "managementEndpoint": {
-          "description": "The cluster management endpoint address",
+          "description": "Http endpoint for client access",
           "type": "string"
         },
         "nodeTypes": {
-          "description": "The arary of the nodeType",
+          "description": "The list of nodetypes that make up the cluster",
           "type": "array",
           "items": {
             "$ref": "#/definitions/NodeTypeDescription"
@@ -872,7 +876,7 @@
         },
         "provisioningState": {
           "readOnly": true,
-          "description": "The provisioning state of the cluster",
+          "description": "The provisioning state of the cluster resource",
           "type": "string",
           "enum": [
             "Default",
@@ -887,16 +891,16 @@
           }
         },
         "vmImage": {
-          "description": "The OS type",
+          "description": "The vm image name",
           "type": "string"
         },
         "diagnosticsStorageAccountConfig": {
-          "description": "The storage diagnostics account configuration ",
+          "description": "The storage diagnostics account configuration details",
           "$ref": "#/definitions/DiagnosticsStorageAccountConfig"
         },
         "upgradeDescription": {
-          "description": "The upgrade policy",
-          "$ref": "#/definitions/PaasClusterUpgradePolicy"
+          "description": "Cluster upgrade policy",
+          "$ref": "#/definitions/ClusterUpgradePolicy"
         }
       },
       "required": [
@@ -954,7 +958,7 @@
       }
     },
     "AvailableOperationDisplay": {
-      "description": "Operation detail",
+      "description": "Operation supported by ServiceFabric resource provider",
       "properties": {
         "provider": {
           "description": "Provider name",
@@ -1013,10 +1017,10 @@
       }
     },
     "ErrorModel": {
-      "description": "The model of the error",
+      "description": "The structure of the error",
       "properties": {
         "error": {
-          "description": "The error",
+          "description": "The error detail ",
           "properties": {
             "code": {
               "description": "The error code",
@@ -1070,19 +1074,19 @@
     "subscriptionId": {
       "type": "string",
       "name": "subscriptionId",
-      "description": "The subscription identifier",
+      "description": "The customer subscription identifier",
       "in": "path",
       "required": true
     },
     "api-version": {
       "type": "string",
       "name": "api-version",
-      "description": "The version of the api",
+      "description": "The version of the ServiceFabric resouce provider api",
       "in": "query",
       "required": true
     },
     "resourceGroupNameParameter": {
-      "description": "The name of the Resource Group to which the server belongs.",
+      "description": "The name of the resource group to which the resource belongs or get created",
       "name": "resourceGroupName",
       "in": "path",
       "required": true,
@@ -1090,7 +1094,7 @@
       "x-ms-parameter-location": "method"
     },
     "clusterNameParameter": {
-      "description": "The name of the cluster",
+      "description": "The name of the cluster resource",
       "name": "clusterName",
       "in": "path",
       "required": true,
