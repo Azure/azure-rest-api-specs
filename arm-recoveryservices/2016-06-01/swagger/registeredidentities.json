@@ -30,24 +30,27 @@
         ],
         "parameters": [
           {
-            "$ref": "#/parameters/ApiVersion"
+            "$ref": "#/parameters/SubscriptionId"
           },
           {
             "$ref": "#/parameters/ResourceGroupName"
           },
           {
-            "$ref": "#/parameters/SubscriptionId"
+            "$ref": "#/parameters/ApiVersion"
           }
         ],
         "responses": {
           "200": {
             "description": "OK",
             "schema": {
-              "$ref": "#/definitions/ClientDiscoveryResponse"
+              "$ref": "./vaults.json#/definitions/ClientDiscoveryResponse"
             }
           }
         },
-        "deprecated": false
+        "deprecated": false,
+        "x-ms-pageable": {
+          "nextLinkName": "NextLink"
+        }
       }
     },
     "/Subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.RecoveryServices/vaults/{vaultName}/certificates/{certificateName}": {
@@ -65,16 +68,13 @@
         ],
         "parameters": [
           {
-            "$ref": "#/parameters/ApiVersion"
-          },
-          {
-            "$ref": "#/parameters/VaultName"
+            "$ref": "#/parameters/SubscriptionId"
           },
           {
             "$ref": "#/parameters/ResourceGroupName"
           },
           {
-            "$ref": "#/parameters/SubscriptionId"
+            "$ref": "#/parameters/VaultName"
           },
           {
             "name": "certificateName",
@@ -91,6 +91,9 @@
             "schema": {
               "$ref": "#/definitions/CertificateRequest"
             }
+          },
+          {
+            "$ref": "#/parameters/ApiVersion"
           }
         ],
         "responses": {
@@ -113,16 +116,13 @@
         "operationId": "RegisteredIdentities_Delete",
         "parameters": [
           {
-            "$ref": "#/parameters/ApiVersion"
-          },
-          {
-            "$ref": "#/parameters/VaultName"
+            "$ref": "#/parameters/SubscriptionId"
           },
           {
             "$ref": "#/parameters/ResourceGroupName"
           },
           {
-            "$ref": "#/parameters/SubscriptionId"
+            "$ref": "#/parameters/VaultName"
           },
           {
             "name": "identityName",
@@ -130,6 +130,9 @@
             "description": "Name of the protection container to unregister.",
             "required": true,
             "type": "string"
+          },
+          {
+            "$ref": "#/parameters/ApiVersion"
           }
         ],
         "responses": {
@@ -148,123 +151,6 @@
       "properties": {
         "properties": {
           "$ref": "#/definitions/RawCertificateData"
-        }
-      }
-    },
-    "ClientDiscoveryDisplay": {
-      "description": "Localized display information of an operation.",
-      "type": "object",
-      "properties": {
-        "Provider": {
-          "description": "Name of the resource provider.",
-          "type": "string",
-          "readOnly": true
-        },
-        "Resource": {
-          "description": "Type of the resource.",
-          "type": "string",
-          "readOnly": true
-        },
-        "Operation": {
-          "description": "Name of the operation.",
-          "type": "string",
-          "readOnly": true
-        },
-        "Description": {
-          "description": "Operation description.",
-          "type": "string",
-          "readOnly": true
-        }
-      }
-    },
-    "ClientDiscoveryForLogSpecification": {
-      "description": "Log specification for the operation.",
-      "type": "object",
-      "properties": {
-        "name": {
-          "description": "Name of the log.",
-          "type": "string",
-          "readOnly": true
-        },
-        "displayName": {
-          "description": "Localized display name.",
-          "type": "string",
-          "readOnly": true
-        },
-        "blobDuration": {
-          "description": "Blob duration.",
-          "type": "string",
-          "readOnly": true
-        }
-      }
-    },
-    "ClientDiscoveryForProperties": {
-      "description": "Operation properties.",
-      "type": "object",
-      "properties": {
-        "serviceSpecification": {
-          "$ref": "#/definitions/ClientDiscoveryForServiceSpecification",
-          "description": "Operation properties.",
-          "readOnly": true
-        }
-      }
-    },
-    "ClientDiscoveryForServiceSpecification": {
-      "description": "Operation properties.",
-      "type": "object",
-      "properties": {
-        "logSpecifications": {
-          "description": "List of log specifications of this operation.",
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/ClientDiscoveryForLogSpecification"
-          },
-          "readOnly": true
-        }
-      }
-    },
-    "ClientDiscoveryResponse": {
-      "description": "List of available operations.",
-      "type": "object",
-      "properties": {
-        "Value": {
-          "description": "List of available operationss.",
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/ClientDiscoveryValueForSingleApi"
-          },
-          "readOnly": true
-        },
-        "NextLink": {
-          "description": "NextLink",
-          "type": "string",
-          "readOnly": true
-        }
-      }
-    },
-    "ClientDiscoveryValueForSingleApi": {
-      "description": "Available operation details.",
-      "type": "object",
-      "properties": {
-        "Name": {
-          "description": "Name of the operation.",
-          "type": "string",
-          "readOnly": true
-        },
-        "Display": {
-          "$ref": "#/definitions/ClientDiscoveryDisplay",
-          "description": "Contains the localized display information for this particular operation.",
-          "readOnly": true
-        },
-        "Origin": {
-          "description": "The intended executor of the operation.",
-          "type": "string",
-          "readOnly": true
-        },
-        "Properties": {
-          "$ref": "#/definitions/ClientDiscoveryForProperties",
-          "description": "Properties of the operation.",
-          "readOnly": true
         }
       }
     },

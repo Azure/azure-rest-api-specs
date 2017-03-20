@@ -456,18 +456,8 @@
         },
         "blobDuration": {
           "description": "Blob duration.",
+          "format": "date-time",
           "type": "string",
-          "readOnly": true
-        }
-      }
-    },
-    "ClientDiscoveryForProperties": {
-      "description": "Operation properties.",
-      "type": "object",
-      "properties": {
-        "serviceSpecification": {
-          "$ref": "#/definitions/ClientDiscoveryForServiceSpecification",
-          "description": "Operation properties.",
           "readOnly": true
         }
       }
@@ -482,6 +472,17 @@
           "items": {
             "$ref": "#/definitions/ClientDiscoveryForLogSpecification"
           },
+          "readOnly": true
+        }
+      }
+    },
+    "ClientDiscoveryProperties": {
+      "description": "Operation properties.",
+      "type": "object",
+      "properties": {
+        "serviceSpecification": {
+          "$ref": "#/definitions/ClientDiscoveryForServiceSpecification",
+          "description": "Operation properties.",
           "readOnly": true
         }
       }
@@ -525,7 +526,7 @@
           "readOnly": true
         },
         "Properties": {
-          "$ref": "#/definitions/ClientDiscoveryForProperties",
+          "$ref": "#/definitions/ClientDiscoveryProperties",
           "description": "Properties of the operation.",
           "readOnly": true,
           "x-ms-client-flatten": true
@@ -550,54 +551,6 @@
           "description": "Resource type represents the complete path of the form Namespace/ResourceType/ResourceType/...",
           "type": "string",
           "readOnly": true
-        },
-        "location": {
-          "description": "Resource location.",
-          "type": "string"
-        },
-        "tags": {
-          "description": "Resource tags.",
-          "type": "object",
-          "additionalProperties": {
-            "type": "string"
-          }
-        },
-        "eTag": {
-          "description": "Optional ETag.",
-          "type": "string"
-        }
-      },
-      "x-ms-azure-resource": true
-    },
-    "NonTrackedResource": {
-      "description": "Non tracked resource.",
-      "type": "object",
-      "properties": {
-        "id": {
-          "description": "Resource Id represents the complete path to the resource.",
-          "type": "string",
-          "readOnly": true
-        },
-        "name": {
-          "description": "Resource name associated with the resource.",
-          "type": "string",
-          "readOnly": true
-        },
-        "type": {
-          "description": "Resource type represents the complete path of the form Namespace/ResourceType/ResourceType/...",
-          "type": "string",
-          "readOnly": true
-        },
-        "location": {
-          "description": "Resource location.",
-          "type": "string"
-        },
-        "tags": {
-          "description": "Resource tags.",
-          "type": "object",
-          "additionalProperties": {
-            "type": "string"
-          }
         },
         "eTag": {
           "description": "Optional ETag.",
@@ -626,15 +579,38 @@
         }
       }
     },
-    "Vault": {
-      "description": "Resource information, as returned by the resource provider.",
+    "TrackedResource": {
+      "description": "Tracked resource with location.",
+      "type": "object",
       "required": [
         "location"
       ],
-      "type": "object",
       "allOf": [
         {
           "$ref": "#/definitions/Resource"
+        }
+      ],
+      "properties":{
+        "location": {
+          "description": "Resource location.",
+          "type": "string"
+        },
+        "tags": {
+          "description": "Resource tags.",
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          }
+        }
+      },
+      "x-ms-azure-resource": true
+    },
+    "Vault": {
+      "description": "Resource information, as returned by the resource provider.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/TrackedResource"
         }
       ],
       "properties": {
@@ -671,9 +647,10 @@
     },
     "VaultExtendedInfoResource": {
       "description": "Vault extended information.",
+      "type": "object",
       "allOf": [
         {
-          "$ref": "#/definitions/NonTrackedResource"
+          "$ref": "#/definitions/Resource"
         }
       ],
       "properties": {
