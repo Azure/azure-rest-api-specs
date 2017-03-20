@@ -14,6 +14,24 @@
   "produces": [
     "application/json"
   ],
+  "security": [
+    {
+      "azure_auth": [
+        "user_impersonation"
+      ]
+    }
+  ],
+  "securityDefinitions": {
+    "azure_auth": {
+      "type": "oauth2",
+      "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
+      "flow": "implicit",
+      "description": "Azure Active Directory OAuth2 Flow",
+      "scopes": {
+        "user_impersonation": "impersonate your user account"
+      }
+    }
+  },
   "paths": {
     "/subscriptions/{subscriptionId}/resourcegroups/{resourceGroupName}/providers/microsoft.insights/autoscalesettings": {
       "get": {
@@ -27,9 +45,6 @@
             "$ref": "#/parameters/ResourceGroupNameParameter"
           },
           {
-            "$ref": "#/parameters/FilterParameter"
-          },
-          {
             "$ref": "#/parameters/ApiVersionParameter"
           },
           {
@@ -37,6 +52,12 @@
           }
         ],
         "responses": {
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          },
           "200": {
             "description": "Successful request for a list of autoscale settings",
             "schema": {
@@ -183,8 +204,7 @@
         },
         "x-ms-pageable": {
           "nextLinkName": "nextLink"
-        },
-        "x-ms-odata": "#/definitions/AutoscaleSettingResource"
+        }
       }
     },
     "/subscriptions/{subscriptionId}/resourcegroups/{resourceGroupName}/providers/microsoft.insights/autoscalesettings/{autoscaleSettingName}": {
@@ -218,6 +238,12 @@
           }
         ],
         "responses": {
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          },
           "200": {
             "description": "Successful request to create or update an autoscale setting",
             "schema": {
@@ -551,6 +577,12 @@
           }
         ],
         "responses": {
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          },
           "200": {
             "description": "Successful request to delete an autoscale setting"
           },
@@ -580,6 +612,12 @@
           }
         ],
         "responses": {
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          },
           "200": {
             "description": "Successful request to get one autoscale setting",
             "schema": {
@@ -749,6 +787,7 @@
         },
         "name": {
           "type": "string",
+          "readOnly": true,
           "description": "Azure resource name"
         },
         "type": {
@@ -758,7 +797,11 @@
         },
         "location": {
           "type": "string",
-          "description": "Resource location"
+          "description": "Resource location",
+          "x-ms-mutability": [
+              "create",
+              "read"
+          ]
         },
         "tags": {
           "additionalProperties": {
@@ -1180,6 +1223,20 @@
       },
       "required": ["value"],
       "description": "Represents a collection of autoscale setting resources."
+    },
+    "ErrorResponse": {
+      "description": "Describes the format of Error response.",
+      "type": "object",
+      "properties": {
+        "code": {
+          "description": "Error code",
+          "type": "string"
+        },
+        "message": {
+          "description": "Error message indicating why the operation failed.",
+          "type": "string"
+        }
+      }
     }
   },
   "parameters": {
@@ -1203,14 +1260,6 @@
       "required": true,
       "type": "string",
       "description": "The name of the resource group.",
-      "x-ms-parameter-location": "method"
-    },
-    "FilterParameter": {
-      "name": "$filter",
-      "in": "query",
-      "required": false,
-      "type": "string",
-      "description": "The filter to apply on the operation. For more information please see https://msdn.microsoft.com/en-us/library/azure/dn931934.aspx",
       "x-ms-parameter-location": "method"
     },
     "AutoscaleSettingNameParameter": {

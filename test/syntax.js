@@ -16,8 +16,14 @@ var context;
 
 // Useful when debugging a test for a particular swagger. 
 // Just update the regex. That will return an array of filtered items.
-// swaggers = swaggers.filter(function(item) {
-//   return (item.match(/.*arm-redis.*/ig) !== null);
+// utils.swaggers = utils.swaggers.filter(function(item) {
+//   return (item.match(/.*arm-logic.*2016-06-01.*/ig) !== null);
+// });
+// utils.compositeSwaggers = utils.compositeSwaggers.filter(function(item) {
+//   return (item.match(/.*arm-logic.*2016-06-01.*/ig) !== null);
+// });
+// utils.examples = utils.examples.filter(function(item) {
+//   return (item.match(/.*arm-logic.*2016-06-01.*/ig) !== null);
 // });
 
 
