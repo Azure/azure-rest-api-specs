@@ -1,0 +1,1101 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "ServiceFabricClient",
+    "version": "2016-09-01"
+  },
+  "host": "management.azure.com",
+  "schemes": [
+    "https"
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "produces": [
+    "application/json"
+  ],
+  "security": [
+    {
+      "azure_auth": [
+        "user_impersonation"
+      ]
+    }
+  ],
+  "securityDefinitions": {
+    "azure_auth": {
+      "type": "oauth2",
+      "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
+      "flow": "implicit",
+      "description": "Azure Active Directory OAuth2 Flow",
+      "scopes": {
+        "user_impersonation": "impersonate your user account"
+      }
+    }
+  },
+  "paths": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ServiceFabric/clusters/{clusterName}": {
+      "patch": {
+        "tags": [
+          "ClusterPatchOperation"
+        ],
+        "x-ms-long-running-operation": true,
+        "operationId": "Clusters_Update",
+        "description": "Update cluster configuration",
+        "x-ms-examples": {
+          "Patch a cluster": {
+            "$ref": "../examples/ClusterPatchOperation_exmaple.json"
+          }
+        },
+        "produces": [
+          "application/json"
+        ],
+        "consumes": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/resourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/clusterNameParameter"
+          },
+          {
+            "$ref": "#/parameters/api-version"
+          },
+          {
+            "name": "ClusterUpdateParameters",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/ClusterUpdateParameters"
+            },
+            "description": "The parameters which contains the property value and property name which used to update the cluster configuration"
+          },
+          {
+            "$ref": "#/parameters/subscriptionId"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK - Cluster updated successfully",
+            "schema": {
+              "$ref": "#/definitions/Cluster"
+            }
+          },
+          "202": {
+            "description": "Accepted - Update request accepted; the operation will complete asynchronously."
+          },
+          "default": {
+            "description": "Error",
+            "schema": {
+              "$ref": "#/definitions/ErrorModel"
+            }
+          }
+        }
+      },
+      "get": {
+        "tags": [
+          "ClusterGetOperation"
+        ],
+        "operationId": "Clusters_Get",
+        "description": "Get cluster resource",
+        "x-ms-examples": {
+          "Get a cluster": {
+            "$ref": "../examples/ClusterGetOperation_example.json"
+          }
+        },
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/resourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/clusterNameParameter"
+          },
+          {
+            "$ref": "#/parameters/api-version"
+          },
+          {
+            "$ref": "#/parameters/subscriptionId"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK - Get cluster successfully",
+            "schema": {
+              "$ref": "#/definitions/Cluster"
+            }
+          },
+          "default": {
+            "description": "Error",
+            "schema": {
+              "$ref": "#/definitions/ErrorModel"
+            }
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "ClusterCreateOperation"
+        ],
+        "operationId": "Clusters_Create",
+        "x-ms-long-running-operation": true,
+        "description": "Create cluster resource",
+        "x-ms-examples": {
+          "Put a cluster with min parmaeter": {
+            "$ref": "../examples/ClusterPutOperation_exmaple_min.json"
+          },
+          "Put a cluster with max parmaeter": {
+            "$ref": "../examples/ClusterPutOperation_exmaple_max.json"
+          }
+        },
+        "produces": [
+          "application/json"
+        ],
+        "consumes": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/resourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/clusterNameParameter"
+          },
+          {
+            "$ref": "#/parameters/api-version"
+          },
+          {
+            "name": "ClusterResource",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/Cluster"
+            },
+            "description": "Put Request"
+          },
+          {
+            "$ref": "#/parameters/subscriptionId"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK - Put cluster successfully",
+            "schema": {
+              "$ref": "#/definitions/Cluster"
+            }
+          },
+          "202": {
+            "description": "Accepted - Put request accepted; the operation will complete asynchronously."
+          },
+          "default": {
+            "description": "Error",
+            "schema": {
+              "$ref": "#/definitions/ErrorModel"
+            }
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "ClusterDeleteOperation"
+        ],
+        "operationId": "Clusters_Delete",
+        "description": "Delete cluster resource",
+        "x-ms-examples": {
+          "Delete a cluster": {
+            "$ref": "../examples/ClusterDeleteOperation_example.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "#/parameters/resourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/clusterNameParameter"
+          },
+          {
+            "$ref": "#/parameters/api-version"
+          },
+          {
+            "$ref": "#/parameters/subscriptionId"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK - cluster deleted  successfully"
+          },
+          "204": {
+            "description": "NoContent"
+          },
+          "default": {
+            "description": "Error",
+            "schema": {
+              "$ref": "#/definitions/ErrorModel"
+            }
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourcegroups/{resourceGroupName}/providers/Microsoft.ServiceFabric/clusters": {
+      "get": {
+        "tags": [
+          "ClusterListByResourceGroupOperation"
+        ],
+        "operationId": "Clusters_ListByResourceGroup",
+        "description": "List cluster resource by resource group",
+        "x-ms-examples": {
+          "List cluster by resource group": {
+            "$ref": "../examples/ClusterListByResourceGroupOperation_exmaple.json"
+          }
+        },
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/resourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/api-version"
+          },
+          {
+            "$ref": "#/parameters/subscriptionId"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK - Get cluster  successfully",
+            "schema": {
+              "$ref": "#/definitions/ClusterListResult"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.ServiceFabric/clusters": {
+      "get": {
+        "tags": [
+          "ClusterListOperation"
+        ],
+        "operationId": "Clusters_List",
+        "description": "List cluster resource",
+        "x-ms-examples": {
+          "List clusters": {
+            "$ref": "../examples/ClusterListOperation_example.json"
+          }
+        },
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/api-version"
+          },
+          {
+            "$ref": "#/parameters/subscriptionId"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK - Get cluster  successfully",
+            "schema": {
+              "$ref": "#/definitions/ClusterListResult"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/providers/Microsoft.ServiceFabric/operations": {
+      "get": {
+        "tags": [
+          "Operations"
+        ],
+        "operationId": "Operations_List",
+        "description": "Lists all of the available ServiceFabric REST API operations.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/api-version"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK. The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/OperationListResult"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorModel"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    }
+  },
+  "definitions": {
+    "CertificateDescription": {
+      "description": "Certificate description",
+      "properties": {
+        "thumbprint": {
+          "description": "Primary certificate thumbprint",
+          "type": "string"
+        },
+        "thumbprintSecondary": {
+          "description": "Secondary certificate thumbprint",
+          "type": "string"
+        },
+        "x509StoreName": {
+          "description": "Certificate x509 store location",
+          "type": "string",
+          "enum": [
+            "AddressBook",
+            "AuthRoot",
+            "CertificateAuthority",
+            "Disallowed",
+            "My",
+            "Root",
+            "TrustedPeople",
+            "TrustedPublisher"
+          ]
+        }
+      }
+    },
+    "SettingsParameterDescription": {
+      "description": "Settings parameter description",
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "The name of settings parameter description"
+        },
+        "value": {
+          "type": "string",
+          "description": "The value of the property"
+        }
+      }
+    },
+    "SettingsSectionDescription": {
+      "description": "Settings section description",
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "The name of settings section description"
+        },
+        "parameters": {
+          "description": "Settings parameter description",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/SettingsParameterDescription"
+          }
+        }
+      }
+    },
+    "EndpointRangeDescription": {
+      "description": "Endpoint range description",
+      "properties": {
+        "startPort": {
+          "description": "Endpoint start port",
+          "type": "integer"
+        },
+        "endPort": {
+          "description": "Endpoint end port",
+          "type": "integer"
+        }
+      }
+    },
+    "NodeTypeDescription": {
+      "description": "NodeType description",
+      "properties": {
+        "name": {
+          "description": "NodeType description name",
+          "type": "string"
+        },
+        "placementProperties": {
+          "description": "Placement properties key",
+          "type": "object",
+          "additionalProperties": {
+            "description": "Placement properties value",
+            "type": "string"
+          }
+        },
+        "capacities": {
+          "description": "Capacities key",
+          "type": "object",
+          "additionalProperties": {
+            "description": "Capacities value",
+            "type": "string"
+          }
+        },
+        "clientConnectionEndpointPort": {
+          "description": "Client connection endpoint port",
+          "type": "integer"
+        },
+        "httpGatewayEndpointPort": {
+          "description": "Http gateway endpoint port",
+          "type": "integer"
+        },
+        "durabilityLevel": {
+          "description": "Nodetype durability Level",
+          "type": "string",
+          "enum": [
+            "Bronze",
+            "Silver",
+            "Gold",
+            "Platimun"
+          ]
+        },
+        "applicationPorts": {
+          "description": "Application ports",
+          "$ref": "#/definitions/EndpointRangeDescription"
+        },
+        "ephemeralPorts": {
+          "description": "Ephemeral ports",
+          "$ref": "#/definitions/EndpointRangeDescription"
+        },
+        "isPrimary": {
+          "description": "Primary node or not",
+          "type": "boolean"
+        },
+        "vmInstanceCount": {
+          "description": "Instance count",
+          "type": "integer"
+        },
+        "reverseProxyEndpointPort": {
+          "description": "Reverse proxy endpoint port",
+          "type": "integer"
+        }
+      }
+    },
+    "ClientCertificateThumbprint": {
+      "description": "NodeType description",
+      "properties": {
+        "isAdmin": {
+          "type": "boolean",
+          "description": "Is admin or not"
+        },
+        "certificateThumbprint": {
+          "description": "ClientCertificate thumbprint",
+          "type": "string"
+        }
+      }
+    },
+    "ClientCertificateCommonName": {
+      "description": "NodeType description",
+      "properties": {
+        "isAdmin": {
+          "type": "boolean",
+          "description": "Is the certificate for admin usage or not"
+        },
+        "certificateIssuerThumbprint": {
+          "description": "Certificate issuer thumbprint",
+          "type": "string"
+        }
+      }
+    },
+    "ClusterEnvironment": {
+      "description": "Cluster environment",
+      "type": "string",
+      "enum": [
+        "Default",
+        "Windows",
+        "Linux"
+      ]
+    },
+    "ClusterVersionDetails": {
+      "description": "NodeType description",
+      "properties": {
+        "codeVersion": {
+          "description": "Cluster code version",
+          "type": "string"
+        },
+        "supportExpiryUtc": {
+          "description": "Support expiry Utc",
+          "type": "string"
+        },
+        "environment": {
+          "description": "Cluster environment",
+          "$ref": "#/definitions/ClusterEnvironment"
+        }
+      }
+    },
+    "PaasServiceTypeHealthPolicy": {
+      "description": "Paas service type health policy",
+      "properties": {
+        "maxPercentUnhealthyServices": {
+          "description": "max percent of unhealthy services",
+          "type": "integer"
+        }
+      }
+    },
+    "PaasApplicationHealthPolicy": {
+      "description": "Paas application health policy",
+      "properties": {
+        "defaultServiceTypeHealthPolicy": {
+          "description": "default ServiceType health policy",
+          "$ref": "#/definitions/PaasServiceTypeHealthPolicy"
+        },
+        "serivceTypeHealthPolicies": {
+          "description": "SerivceType health policies",
+          "type": "object",
+          "additionalProperties": {
+            "description": "Paas ServiceType health policies",
+            "$ref": "#/definitions/PaasServiceTypeHealthPolicy"
+          }
+        }
+      }
+    },
+    "PaasClusterUpgradeHealthPolicy": {
+      "description": "Paas cluster upgrade health policy",
+      "properties": {
+        "maxPercentUnhealthyNodes": {
+          "description": "Max percent of unhealthy nodes",
+          "type": "integer"
+        },
+        "maxPercentUnhealthyApplications": {
+          "description": "Max percent of unhealthy applications",
+          "type": "integer"
+        },
+        "applicationHealthPolicies": {
+          "description": "Application health policies",
+          "type": "object",
+          "additionalProperties": {
+            "description": "Paas application health policy",
+            "$ref": "#/definitions/PaasApplicationHealthPolicy"
+          }
+        }
+      }
+    },
+    "PaasServiceTypeDeltaHealthPolicy": {
+      "description": "Paas service type delta health policy",
+      "properties": {
+        "maxPercentDeltaUnhealthyServices": {
+          "description": "max percent of delta unhealthy services",
+          "type": "integer"
+        }
+      }
+    },
+    "PaasApplicationDeltaHealthPolicy": {
+      "description": "Paas application delta health policy",
+      "properties": {
+        "defaultServiceTypeDeltaHealthPolicy": {
+          "description": "default serviceType delta health policy",
+          "$ref": "#/definitions/PaasServiceTypeDeltaHealthPolicy"
+        },
+        "serivceTypeDeltaHealthPolicies": {
+          "description": "SerivceType delta health policies",
+          "type": "object",
+          "additionalProperties": {
+            "description": "Paas serviceType delta health policy",
+            "$ref": "#/definitions/PaasServiceTypeDeltaHealthPolicy"
+          }
+        }
+      }
+    },
+    "PaasClusterUpgradeDeltaHealthPolicy": {
+      "description": "Paas cluster upgrade delta health policy",
+      "properties": {
+        "maxPercentDeltaUnhealthyNodes": {
+          "description": "Max of percent of delta unhealthy nodes",
+          "type": "integer"
+        },
+        "maxPercentUpgradeDomainDeltaUnhealthyNodes": {
+          "description": "Max of percent upgrade domain delta unhealthy nodes",
+          "type": "integer"
+        },
+        "maxPercentDeltaUnhealthyApplications": {
+          "description": "Max percent of delta unhealthy applications",
+          "type": "integer"
+        },
+        "applicationHealthPolicies": {
+          "description": "Application health policies",
+          "type": "object",
+          "additionalProperties": {
+            "description": "Paas application delta health policy",
+            "$ref": "#/definitions/PaasApplicationDeltaHealthPolicy"
+          }
+        }
+      }
+    },
+    "PaasClusterUpgradePolicy": {
+      "description": "Paas cluster upgrade policy",
+      "properties": {
+        "overrideUserUpgradePolicy": {
+          "description": "Override user upgrade policy",
+          "type": "boolean"
+        },
+        "forceRestart": {
+          "description": "Force restart or not",
+          "type": "boolean"
+        },
+        "upgradeReplicaSetCheckTimeout": {
+          "description": "Upgrade replica set check timeout",
+          "type": "string"
+        },
+        "healthCheckWaitDuration": {
+          "description": "Health check wait duration",
+          "type": "string"
+        },
+        "healthCheckStableDuration": {
+          "description": "Health check stable duration",
+          "type": "string"
+        },
+        "healthCheckRetryTimeout": {
+          "description": "Health check retry timeout",
+          "type": "string"
+        },
+        "upgradeTimeout": {
+          "description": "Upgrade Timeout",
+          "type": "string"
+        },
+        "upgradeDomainTimeout": {
+          "description": "upgrade domain timeout",
+          "type": "string"
+        },
+        "healthPolicy": {
+          "description": "Health Policy",
+          "$ref": "#/definitions/PaasClusterUpgradeHealthPolicy"
+        },
+        "deltaHealthPolicy": {
+          "description": "Delta health policy",
+          "$ref": "#/definitions/PaasClusterUpgradeDeltaHealthPolicy"
+        }
+      }
+    },
+    "DiagnosticsStorageAccountConfig": {
+      "description": "Diagnostics storage account config",
+      "properties": {
+        "storageAccountName": {
+          "description": "Diagnostics storage account name",
+          "type": "string"
+        },
+        "primaryAccessKey": {
+          "description": "Primary diagnostics storage access key",
+          "type": "string"
+        },
+        "secondaryAccessKey": {
+          "description": "Secondary diagnostics storage access key",
+          "type": "string"
+        },
+        "protectedAccountKeyName": {
+          "description": "Protected Diagnostics storage key name",
+          "type": "string"
+        },
+        "blobEndpoint": {
+          "description": "Diagnostics storage account blob endpoint",
+          "type": "string"
+        },
+        "queueEndpoint": {
+          "description": "Diagnostics storage account queue endpoint",
+          "type": "string"
+        },
+        "tableEndpoint": {
+          "description": "Diagnostics storage account table endpoint",
+          "type": "string"
+        }
+      }
+    },
+    "ClusterPropertiesUpdateParameters": {
+      "description": "The cluster resource properties",
+      "properties": {
+        "reliabilityLevel": {
+          "description": "Cluster reliability level",
+          "type": "string",
+          "enum": [
+            "Invalid",
+            "Bronze",
+            "Silver",
+            "Gold",
+            "Platinum"
+          ]
+        },
+        "upgradeMode": {
+          "description": "Cluster upgrade mode",
+          "type": "string",
+          "enum": [
+            "Default",
+            "Automatic",
+            "Manual"
+          ]
+        },
+        "clusterCodeVersion": {
+          "description": "The ServiceFabric code version, if set it, please make sure you have set upgradeMode to Manual, otherwise ,it will fail",
+          "type": "string"
+        },
+        "certificate": {
+          "description": "The cluster certificate settings, the new certificate should exist in Vmss or KeyVault,before you add it, it will override original value",
+          "$ref": "#/definitions/CertificateDescription"
+        },
+        "clientCertificateThumbprints": {
+          "description": "The cluster client thumbprints, it will override existing collection",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ClientCertificateThumbprint"
+          }
+        },
+        "fabricSettings": {
+          "description": "The new fabric settings for the cluster, Be noted, it will overwrite existing collection",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/SettingsSectionDescription"
+          }
+        },
+        "reverseProxyCertificate": {
+          "description": "Certificate for the reverse proxy",
+          "$ref": "#/definitions/CertificateDescription"
+        },
+        "nodeTypes": {
+          "description": "The settings for NodeTypes, it will override",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/NodeTypeDescription"
+          }
+        }
+      }
+    },
+    "ClusterProperties": {
+      "description": "The cluster resource properties",
+      "properties": {
+        "availableClusterVersions": {
+          "description": "The available cluster code version which the cluster can upgrade to, note that you must choose upgradeMode to manual to upgrade to",
+          "type": "array",
+          "readOnly": true,
+          "items": {
+            "$ref": "#/definitions/ClusterVersionDetails"
+          }
+        },
+        "clusterId": {
+          "readOnly": true,
+          "description": "The cluster id used internally by ServiceFabirc",
+          "type": "string"
+        },
+        "clusterState": {
+          "description": "The state for the cluster",
+          "readOnly": true,
+          "type": "string",
+          "enum": [
+            "Default",
+            "WaitingForNodes",
+            "Deploying",
+            "BaselineUpgrade",
+            "UpdatingUserConfiguration",
+            "UpdatingUserCertificate",
+            "UpdatingInfrastructure",
+            "EnforcingClusterVersion",
+            "UpgradeServiceUnreachable",
+            "Deleting",
+            "ScaleUp",
+            "ScaleDown",
+            "AutoScale",
+            "Ready",
+            "Failed"
+          ]
+        },
+        "clusterEndpoint": {
+          "description": "The endpoint for the cluster connecting to servicefabric resource provider",
+          "readOnly": true,
+          "type": "string"
+        },
+        "clusterCodeVersion": {
+          "description": "The ServiceFabric code version, you don't need to set it, when you choose upgradeMode as Automatic",
+          "type": "string"
+        },
+        "certificate": {
+          "description": "The cluster certificate",
+          "$ref": "#/definitions/CertificateDescription"
+        },
+        "reliabilityLevel": {
+          "description": "The reliability level for the cluster",
+          "type": "string",
+          "enum": [
+            "Bronze",
+            "Silver",
+            "Gold",
+            "Platinum"
+          ]
+        },
+        "upgradeMode": {
+          "description": "The cluster upgrade mode",
+          "type": "string",
+          "enum": [
+            "Automatic",
+            "Manual"
+          ]
+        },
+        "clientCertificateThumbprints": {
+          "description": "The client certificate thumbprints",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ClientCertificateThumbprint"
+          }
+        },
+        "clientCertificateCommonNames": {
+          "description": "The certificate common name and issurer thumprint for the client certificate",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ClientCertificateCommonName"
+          }
+        },
+        "fabricSettings": {
+          "description": "The faric setting collection",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/SettingsSectionDescription"
+          }
+        },
+        "reverseProxyCertificate": {
+          "description": "The certificate for the reverse proxy",
+          "$ref": "#/definitions/CertificateDescription"
+        },
+        "managementEndpoint": {
+          "description": "The cluster management endpoint address",
+          "type": "string"
+        },
+        "nodeTypes": {
+          "description": "The arary of the nodeType",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/NodeTypeDescription"
+          }
+        },
+        "provisioningState": {
+          "readOnly": true,
+          "description": "The provisioning state of the cluster",
+          "type": "string",
+          "enum": [
+            "Default",
+            "Updating",
+            "Succeeded",
+            "Failed",
+            "Canceled"
+          ],
+          "x-ms-enum": {
+            "name": "ProvisioningState",
+            "modelAsString": true
+          }
+        },
+        "vmImage": {
+          "description": "The OS type",
+          "type": "string"
+        },
+        "diagnosticsStorageAccountConfig": {
+          "description": "The storage diagnostics account configuration ",
+          "$ref": "#/definitions/DiagnosticsStorageAccountConfig"
+        },
+        "upgradeDescription": {
+          "description": "The upgrade policy",
+          "$ref": "#/definitions/PaasClusterUpgradePolicy"
+        }
+      },
+      "required": [
+        "managementEndpoint",
+        "reliabilityLevel",
+        "vmImage",
+        "diagnosticsStorageAccountConfig",
+        "nodeTypes",
+        "upgradeMode"
+      ]
+    },
+    "ClusterUpdateParameters": {
+      "description": "Cluster update request",
+      "properties": {
+        "properties": {
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/ClusterPropertiesUpdateParameters"
+        },
+        "tags": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          },
+          "description": "Cluster update parameters"
+        }
+      }
+    },
+    "Cluster": {
+      "description": "The cluster resource",
+      "properties": {
+        "properties": {
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/ClusterProperties"
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "#/definitions/Resource"
+        }
+      ]
+    },
+    "ClusterListResult": {
+      "description": "Cluster list results",
+      "properties": {
+        "value": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Cluster"
+          }
+        },
+        "nextLink": {
+          "type": "string",
+          "description": "The URL to use for getting the next set of results."
+        }
+      }
+    },
+    "AvailableOperationDisplay": {
+      "description": "Operation detail",
+      "properties": {
+        "provider": {
+          "description": "Provider name",
+          "type": "string"
+        },
+        "resource": {
+          "description": "Resource name",
+          "type": "string"
+        },
+        "operation": {
+          "description": "Operation name",
+          "type": "string"
+        },
+        "description": {
+          "description": "Operation description",
+          "type": "string"
+        }
+      }
+    },
+    "OperationResult": {
+      "description": "Available operation list result",
+      "properties": {
+        "name": {
+          "description": "Result name",
+          "type": "string"
+        },
+        "display": {
+          "$ref": "#/definitions/AvailableOperationDisplay"
+        },
+        "origin": {
+          "description": "Origin result",
+          "type": "string"
+        },
+        "nextLink": {
+          "type": "string",
+          "description": "The URL to use for getting the next set of results."
+        }
+      }
+    },
+    "OperationListResult": {
+      "description": "Result of the request to list ServiceFabric operations. It contains a list of operations and a URL link to get the next set of results.",
+      "properties": {
+        "value": {
+          "description": "List of ServiceFabric operations supported by the Microsoft.ServiceFabric resource provider.",
+          "type": "array",
+          "readOnly": true,
+          "items": {
+            "$ref": "#/definitions/OperationResult"
+          }
+        },
+        "nextLink": {
+          "description": "URL to get the next set of operation list results if there are any.",
+          "type": "string",
+          "readOnly": true
+        }
+      }
+    },
+    "ErrorModel": {
+      "description": "The model of the error",
+      "properties": {
+        "error": {
+          "description": "The error",
+          "properties": {
+            "code": {
+              "description": "The error code",
+              "type": "string"
+            },
+            "message": {
+              "description": "The error message",
+              "type": "string"
+            }
+          }
+        }
+      }
+    },
+    "Resource": {
+      "description": "The resource model definition.",
+      "properties": {
+        "id": {
+          "readOnly": true,
+          "type": "string",
+          "description": "Resource ID."
+        },
+        "name": {
+          "readOnly": true,
+          "type": "string",
+          "description": "Resource name."
+        },
+        "type": {
+          "readOnly": true,
+          "type": "string",
+          "description": "Resource type."
+        },
+        "location": {
+          "type": "string",
+          "description": "Resource location."
+        },
+        "tags": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          },
+          "description": "Resource tags."
+        }
+      },
+      "required": [
+        "location"
+      ],
+      "x-ms-azure-resource": true
+    }
+  },
+  "parameters": {
+    "subscriptionId": {
+      "type": "string",
+      "name": "subscriptionId",
+      "description": "The subscription identifier",
+      "in": "path",
+      "required": true
+    },
+    "api-version": {
+      "type": "string",
+      "name": "api-version",
+      "description": "The version of the api",
+      "in": "query",
+      "required": true
+    },
+    "resourceGroupNameParameter": {
+      "description": "The name of the Resource Group to which the server belongs.",
+      "name": "resourceGroupName",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "x-ms-parameter-location": "method"
+    },
+    "clusterNameParameter": {
+      "description": "The name of the cluster",
+      "name": "clusterName",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "x-ms-parameter-location": "method"
+    }
+  }
+}
