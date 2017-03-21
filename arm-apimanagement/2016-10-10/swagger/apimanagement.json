@@ -293,9 +293,9 @@
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ApiManagement/service/{serviceName}/apis/{apiId}/operations": {
       "get": {
         "tags": [
-          "ApiOperations"
+          "Operations"
         ],
-        "operationId": "ApiOperations_ListByApi",
+        "operationId": "Operations_ListByApis",
         "description": "Lists a collection of the operations for the specified API.",
         "parameters": [
           {
@@ -350,7 +350,7 @@
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ApiManagement/service/{serviceName}/apis/{apiId}/operations/{operationId}": {
       "get": {
         "tags": [
-          "ApiOperations"
+          "Operations"
         ],
         "operationId": "ApiOperations_Get",
         "description": "Gets the details of the API Operation specified by its identifier.",
@@ -397,7 +397,7 @@
       },
       "put": {
         "tags": [
-          "ApiOperations"
+          "Operations"
         ],
         "operationId": "ApiOperations_CreateOrUpdate",
         "description": "Creates a new API operation or updates an existing one.",
@@ -447,7 +447,7 @@
       },
       "patch": {
         "tags": [
-          "ApiOperations"
+          "Operations"
         ],
         "operationId": "ApiOperations_Update",
         "description": "Updates the details of the operation specified by its identifier.",
@@ -501,7 +501,7 @@
       },
       "delete": {
         "tags": [
-          "ApiOperations"
+          "Operations"
         ],
         "operationId": "ApiOperations_Delete",
         "description": "Deletes the specified operation.",
@@ -550,7 +550,7 @@
         "tags": [
           "ApiProducts"
         ],
-        "operationId": "ApiProducts_ListByApi",
+        "operationId": "Products_ListByApis",
         "description": "Lists all API associated products.",
         "parameters": [
           {
@@ -607,7 +607,7 @@
         "tags": [
           "Subscriptions"
         ],
-        "operationId": "Subscriptions_ListByService",
+        "operationId": "Subscriptions_List",
         "description": "Lists all subscriptions of the API Management service instance.",
         "externalDocs": {
           "url": "https://msdn.microsoft.com/en-us/library/azure/dn776325.aspx"
@@ -1181,7 +1181,7 @@
         "tags": [
           "ProductApis"
         ],
-        "operationId": "ProductApis_ListByProduct",
+        "operationId": "Apis_ListByProducts",
         "description": "Lists a collection of the APIs associated with a product.",
         "parameters": [
           {
@@ -1238,7 +1238,7 @@
         "tags": [
           "ProductApis"
         ],
-        "operationId": "ProductApis_Add",
+        "operationId": "ProductApis_Create",
         "description": "Adds an API to the specified product.",
         "parameters": [
           {
@@ -1319,7 +1319,7 @@
         "tags": [
           "ProductGroups"
         ],
-        "operationId": "ProductGroups_ListByProduct",
+        "operationId": "Groups_ListByProducts",
         "description": "Lists the collection of developer groups associated with the specified product.",
         "parameters": [
           {
@@ -1376,7 +1376,7 @@
         "tags": [
           "ProductGroups"
         ],
-        "operationId": "ProductGroups_Add",
+        "operationId": "ProductGroups_Create",
         "description": "Adds the association between the specified developer group with the specified product.",
         "parameters": [
           {
@@ -1714,7 +1714,7 @@
         "tags": [
           "GroupUsers"
         ],
-        "operationId": "GroupUsers_ListByGroup",
+        "operationId": "Users_ListByGroups",
         "description": "Lists a collection of the members of the group, specified by its identifier.",
         "parameters": [
           {
@@ -1771,7 +1771,7 @@
         "tags": [
           "GroupUsers"
         ],
-        "operationId": "GroupUsers_Add",
+        "operationId": "GroupUsers_Create",
         "description": "Adds a user to the specified group.",
         "parameters": [
           {
@@ -1931,9 +1931,9 @@
           {
             "$ref": "#/parameters/ServiceNameParameter"
           },
-	  {
-	    "$ref": "#/parameters/CertificateIdParameter"
-	  },
+          {
+            "$ref": "#/parameters/CertificateIdParameter"
+          },
           {
             "$ref": "#/parameters/ApiVersionParameter"
           },
@@ -1979,9 +1979,9 @@
           {
             "$ref": "#/parameters/ServiceNameParameter"
           },
-	  {
-	    "$ref": "#/parameters/CertificateIdParameter"
-	  },
+          {
+            "$ref": "#/parameters/CertificateIdParameter"
+          },
           {
             "name": "parameters",
             "in": "body",
@@ -2033,9 +2033,9 @@
           {
             "$ref": "#/parameters/ServiceNameParameter"
           },
-	  {
-	    "$ref": "#/parameters/CertificateIdParameter"
-	  },
+          {
+            "$ref": "#/parameters/CertificateIdParameter"
+          },
           {
             "name": "If-Match",
             "in": "header",
@@ -2477,7 +2477,7 @@
         "tags": [
           "UserGroups"
         ],
-        "operationId": "UserGroups_ListByUser",
+        "operationId": "Groups_ListByUsers",
         "description": "Lists all user groups.",
         "parameters": [
           {
@@ -2651,7 +2651,7 @@
           {
             "$ref": "#/parameters/ServiceNameParameter"
           },
-	  {
+          {
             "$ref": "#/parameters/AuthenticationServerIdParameter"
           },           
           {
@@ -2695,7 +2695,7 @@
           {
             "$ref": "#/parameters/ServiceNameParameter"
           },
-	  {
+          {
             "$ref": "#/parameters/AuthenticationServerIdParameter"
           },
           {
@@ -2742,7 +2742,7 @@
           {
             "$ref": "#/parameters/ServiceNameParameter"
           },
-	  {
+          {
             "$ref": "#/parameters/AuthenticationServerIdParameter"
           },
           {
@@ -2793,7 +2793,7 @@
           {
             "$ref": "#/parameters/ServiceNameParameter"
           },
-	  {
+          {
             "$ref": "#/parameters/AuthenticationServerIdParameter"
           },
           {
@@ -2885,10 +2885,7 @@
           "200": {
             "description": "Lists of User Identities.",
             "schema": {
-              "type": "array",
-              "items": {
-                "$ref": "#/definitions/UserIdentityContract"
-              }
+              "$ref": "#/definitions/UserIdentityCollection"
             }
           },
           "default": {
@@ -3377,7 +3374,7 @@
         "tags": [
           "Property"
         ],
-        "operationId": "Property_ListByService",
+        "operationId": "Properties_ListByService",
         "description": "Lists a collection of properties defined within a service instance.",
         "externalDocs": {
           "url": "https://msdn.microsoft.com/en-us/library/azure/mt651775.aspx"
@@ -4833,7 +4830,7 @@
           }
         }
       }
-    }  
+    }
   },
   "x-ms-paths": {
   "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ApiManagement/service/{serviceName}/apis/{apiId}?export=true": {
@@ -5811,6 +5808,18 @@
       },
       "description": "User identity details."
     },
+    "UserIdentityCollection": {
+      "properties": {
+        "value": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/UserIdentityContract"
+          },
+          "description": "User Identity values."
+        }
+      },
+      "description": "List of Users Identity list representation."
+    },
     "UserContract": {
       "properties": {
         "id": {
@@ -6264,34 +6273,7 @@
         "clientId",
         "grantTypes"
       ],
-      "description": "External OAuth authorization server settings.",
-      "example": {
-          "id": "/authorizationServers/554be23d0fce600674232c33",
-          "name": "AAD OAuth A/S",
-          "description": null,
-          "clientRegistrationEndpoint": "https://contoso.com/",
-          "authorizationEndpoint": "https://login.microsoftonline.com/55abb68a-8ews-4565-8675-927722a8a005/oauth2/authorize?api-version=1.0",
-          "authorizationMethods": [
-              "GET"
-          ],
-          "clientAuthenticationMethod": [
-              "Body"
-          ],
-          "tokenBodyParameters": [],
-          "tokenEndpoint": "https://login.microsoftonline.com/55abb68a-8ews-4565-8675-927722a8a005/oauth2/token?api-version=1.0",
-          "supportState": false,
-          "defaultScope": null,
-          "grantTypes": [
-            "authorizationCode"
-          ],
-          "bearerTokenSendingMethods": [
-            "authorizationHeader"
-          ],
-          "clientId": "demo",
-          "clientSecret": "demo",
-          "resourceOwnerUsername": null,
-          "resourceOwnerPassword": null       
-      }
+      "description": "External OAuth authorization server settings."
     },
     "AuthorizationServerCollection": {
       "properties": {
@@ -7845,7 +7827,7 @@
       "x-ms-parameter-location": "method"
     },
     "LoggerIdParameter": {
-      "name": "loggerId",
+      "name": "loggerid",
       "in": "path",
       "required": true,
       "type": "string",
