@@ -406,7 +406,7 @@
             "properties": {
                 "storageKeyType": {
                     "type": "string",
-                    "description": "The type of the storage key to use. Valid values are StorageAccessKey and SharedAccessKey.",
+                    "description": "The type of the storage key to use.",
                     "enum": ["StorageAccessKey","SharedAccessKey"],
                     "x-ms-enum":{
                         "name": "StorageKeyType"
@@ -414,7 +414,7 @@
                 },
                 "storageKey": {
                     "type": "string",
-                    "description": "The storage key to use."
+                    "description": "The storage key to use.  If storage key type is SharedAccessKey, it must be preceded with a \"?.\""
                 },
                 "storageUri": {
                     "type": "string",
