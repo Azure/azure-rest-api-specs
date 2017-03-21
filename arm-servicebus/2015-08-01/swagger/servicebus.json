@@ -124,7 +124,7 @@
           "200": {
             "description": "Namespaces successfully returned.",
             "schema": {
-              "$ref": "#/definitions/NamespaceListResult"
+              "$ref": "#/definitions/SBNamespaceListResult"
             }
           }
         },
@@ -161,7 +161,7 @@
           "200": {
             "description": "Namespaces successfully returned.",
             "schema": {
-              "$ref": "#/definitions/NamespaceListResult"
+              "$ref": "#/definitions/SBNamespaceListResult"
             }
           }
         },
@@ -195,7 +195,7 @@
             "in": "body",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/Namespace"
+              "$ref": "#/definitions/SBNamespace"
             },
             "description": "Parameters supplied to create a namespace resource."
           },
@@ -210,13 +210,13 @@
           "201": {
             "description": "Namespace create request accepted.",
             "schema": {
-              "$ref": "#/definitions/Namespace"
+              "$ref": "#/definitions/SBNamespace"
             }
           },
           "200": {
             "description": "Namespace created successfully.",
             "schema": {
-              "$ref": "#/definitions/Namespace"
+              "$ref": "#/definitions/SBNamespace"
             }
           },
           "202": {
@@ -294,7 +294,7 @@
           "200": {
             "description": "Namespace successfully returned.",
             "schema": {
-              "$ref": "#/definitions/Namespace"
+              "$ref": "#/definitions/SBNamespace"
             }
           }
         }
@@ -320,7 +320,7 @@
             "in": "body",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/NamespaceUpdateParameters"
+              "$ref": "#/definitions/SBNamespaceUpdateParameters"
             },
             "description": "Parameters supplied to update a namespace resource."
           },
@@ -335,13 +335,13 @@
           "201": {
             "description": "Namespace update request accepted.",
             "schema": {
-              "$ref": "#/definitions/Namespace"
+              "$ref": "#/definitions/SBNamespace"
             }
           },
           "200": {
             "description": "Namespace updated successfully.",
             "schema": {
-              "$ref": "#/definitions/Namespace"
+              "$ref": "#/definitions/SBNamespace"
             }
           },
           "202": {
@@ -635,7 +635,7 @@
           "200": {
             "description": "Queues successfully returned.",
             "schema": {
-              "$ref": "#/definitions/QueueListResult"
+              "$ref": "#/definitions/SBQueueListResult"
             }
           }
         },
@@ -672,7 +672,7 @@
             "in": "body",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/Queue"
+              "$ref": "#/definitions/SBQueue"
             },
             "description": "Parameters supplied to create or update a queue resource."
           },
@@ -687,7 +687,7 @@
           "200": {
             "description": "Queue successfully created.",
             "schema": {
-              "$ref": "#/definitions/Queue"
+              "$ref": "#/definitions/SBQueue"
             }
           }
         }
@@ -763,7 +763,7 @@
           "200": {
             "description": "Queue description successfully returned.",
             "schema": {
-              "$ref": "#/definitions/Queue"
+              "$ref": "#/definitions/SBQueue"
             }
           }
         }
@@ -1700,12 +1700,12 @@
       "x-ms-azure-resource": true,
       "description": "The Resource definition for other than namespace."
     },
-    "NamespaceListResult": {
+    "SBNamespaceListResult": {
       "properties": {
         "value": {
           "type": "array",
           "items": {
-            "$ref": "#/definitions/Namespace"
+            "$ref": "#/definitions/SBNamespace"
           },
           "description": "Result of the List Namespace operation."
         },
@@ -1716,14 +1716,14 @@
       },
       "description": "The response of the List Namespace operation."
     },
-    "Namespace": {
+    "SBNamespace": {
       "properties": {
         "sku": {
           "$ref": "#/definitions/Sku"
         },
         "properties": {
           "x-ms-client-flatten": true,
-          "$ref": "#/definitions/NamespaceProperties"
+          "$ref": "#/definitions/SBNamespaceProperties"
         }
       },
       "allOf": [
@@ -1733,7 +1733,7 @@
       ],
       "description": "Description of a namespace resource."
     },
-    "NamespaceUpdateParameters": {
+    "SBNamespaceUpdateParameters": {
       "properties": {
         "tags": {
           "type": "object",
@@ -1749,7 +1749,7 @@
       },
       "description": "Parameters supplied to the Patch Namespace operation."
     },
-    "NamespaceProperties": {
+    "SBNamespaceProperties": {
       "properties": {
         "provisioningState": {
           "type": "string",
@@ -1917,12 +1917,12 @@
       },
       "description": "Parameters supplied to the Regenerate Authorization Rule operation."
     },
-    "QueueListResult": {
+    "SBQueueListResult": {
       "properties": {
         "value": {
           "type": "array",
           "items": {
-            "$ref": "#/definitions/Queue"
+            "$ref": "#/definitions/SBQueue"
           },
           "description": "Result of the List Queues operation."
         },
@@ -1933,11 +1933,11 @@
       },
       "description": "The response to the List Queues operation."
     },
-    "Queue": {
+    "SBQueue": {
       "properties": {
         "properties": {
           "x-ms-client-flatten": true,
-          "$ref": "#/definitions/QueueProperties"
+          "$ref": "#/definitions/SBQueueProperties"
         }
       },
       "allOf": [
@@ -1947,7 +1947,7 @@
       ],
       "description": "Description of queue Resource."
     },
-    "QueueProperties": {
+    "SBQueueProperties": {
       "properties": {
         "lockDuration": {
           "type": "string",
