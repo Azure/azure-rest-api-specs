@@ -33,10 +33,10 @@
             "$ref": "#/parameters/SubscriptionId"
           },
           {
-            "$ref": "#/parameters/ResourceGroupName"
+            "$ref": "#/parameters/ApiVersion"
           },
           {
-            "$ref": "#/parameters/ApiVersion"
+            "$ref": "#/parameters/ResourceGroupName"
           }
         ],
         "responses": {
@@ -71,6 +71,9 @@
             "$ref": "#/parameters/SubscriptionId"
           },
           {
+            "$ref": "#/parameters/ApiVersion"
+          },
+          {
             "$ref": "#/parameters/ResourceGroupName"
           },
           {
@@ -91,9 +94,6 @@
             "schema": {
               "$ref": "#/definitions/CertificateRequest"
             }
-          },
-          {
-            "$ref": "#/parameters/ApiVersion"
           }
         ],
         "responses": {
@@ -119,6 +119,9 @@
             "$ref": "#/parameters/SubscriptionId"
           },
           {
+            "$ref": "#/parameters/ApiVersion"
+          },
+          {
             "$ref": "#/parameters/ResourceGroupName"
           },
           {
@@ -130,9 +133,6 @@
             "description": "Name of the protection container to unregister.",
             "required": true,
             "type": "string"
-          },
-          {
-            "$ref": "#/parameters/ApiVersion"
           }
         ],
         "responses": {
@@ -204,16 +204,6 @@
         }
       ],
       "properties": {
-        "certificate": {
-          "format": "byte",
-          "description": "The base64 encoded certificate raw data string.",
-          "type": "string"
-        },
-        "resourceId": {
-          "format": "int64",
-          "description": "Resource ID of the vault.",
-          "type": "integer"
-        },
         "aadAuthority": {
           "description": "AAD tenant authority.",
           "type": "string"
@@ -232,32 +222,6 @@
         },
         "azureManagementEndpointAudience": {
           "description": "Azure Management Endpoint Audience.",
-          "type": "string"
-        },
-        "subject": {
-          "description": "Certificate Subject Name.",
-          "type": "string"
-        },
-        "validFrom": {
-          "format": "date-time",
-          "description": "Certificate Validity start Date time.",
-          "type": "string"
-        },
-        "validTo": {
-          "format": "date-time",
-          "description": "Certificate Validity End Date time.",
-          "type": "string"
-        },
-        "thumbprint": {
-          "description": "Certificate thumbprint.",
-          "type": "string"
-        },
-        "friendlyName": {
-          "description": "Certificate friendlyname.",
-          "type": "string"
-        },
-        "issuer": {
-          "description": "Certificate issuer.",
           "type": "string"
         }
       },
@@ -285,16 +249,6 @@
         }
       ],
       "properties": {
-        "certificate": {
-          "format": "byte",
-          "description": "The base64 encoded certificate raw data string.",
-          "type": "string"
-        },
-        "resourceId": {
-          "format": "int64",
-          "description": "Vault resource id.",
-          "type": "integer"
-        },
         "globalAcsNamespace": {
           "description": "ACS namespace name - tenant for our service.",
           "type": "string"
@@ -305,32 +259,6 @@
         },
         "globalAcsRPRealm": {
           "description": "Global ACS namespace RP realm.",
-          "type": "string"
-        },
-        "subject": {
-          "description": "Certificate Subject Name.",
-          "type": "string"
-        },
-        "validFrom": {
-          "format": "date-time",
-          "description": "Certificate Validity start Date time.",
-          "type": "string"
-        },
-        "validTo": {
-          "format": "date-time",
-          "description": "Certificate Validity End Date time.",
-          "type": "string"
-        },
-        "thumbprint": {
-          "description": "Certificate thumbprint.",
-          "type": "string"
-        },
-        "friendlyName": {
-          "description": "Certificate friendlyname.",
-          "type": "string"
-        },
-        "issuer": {
-          "description": "Certificate issuer.",
           "type": "string"
         }
       },
@@ -345,6 +273,42 @@
       "properties": {
         "authType": {
           "description": "This property will be used as the discriminator for deciding the specific types in the polymorhpic chain of types.",
+          "type": "string"
+        },
+        "certificate": {
+          "format": "byte",
+          "description": "The base64 encoded certificate raw data string.",
+          "type": "string"
+        },
+        "friendlyName": {
+          "description": "Certificate friendlyname.",
+          "type": "string"
+        },
+        "issuer": {
+          "description": "Certificate issuer.",
+          "type": "string"
+        },
+        "resourceId": {
+          "format": "int64",
+          "description": "Resource ID of the vault.",
+          "type": "integer"
+        },
+        "subject": {
+          "description": "Certificate Subject Name.",
+          "type": "string"
+        },
+        "thumbprint": {
+          "description": "Certificate thumbprint.",
+          "type": "string"
+        },
+        "validFrom": {
+          "format": "date-time",
+          "description": "Certificate Validity start Date time.",
+          "type": "string"
+        },
+        "validTo": {
+          "format": "date-time",
+          "description": "Certificate Validity End Date time.",
           "type": "string"
         }
       },
