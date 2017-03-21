@@ -1365,7 +1365,8 @@
           "type": "array",
           "items": {
             "type": "integer",
-            "format": "int32"
+            "format": "int32",
+            "x-nullable": false
           },
           "description": "The list of rules that will be disabled. If null, all rules of the rule group will be disabled."
         }
@@ -1423,6 +1424,11 @@
           "description": "The rule groups of the web application firewall rule set."
         }
       },
+      "required": [
+        "ruleSetType",
+        "ruleSetVersion",
+        "ruleGroups"
+      ],
       "description": "Properties of the web application firewall rule set."
     },
     "ApplicationGatewayFirewallRuleGroup": {
@@ -1443,6 +1449,10 @@
           "description": "The rules of the web application firewall rule group."
         }
       },
+      "required": [
+        "ruleGroupName",
+        "rules"
+      ],
       "description": "A web application firewall rule group."
     },
     "ApplicationGatewayFirewallRule": {
@@ -1457,6 +1467,9 @@
           "description": "The description of the web application firewall rule."
         }
       },
+      "required": [
+        "ruleId"
+      ],
       "description": "A web application firewall rule."
     }
   },
