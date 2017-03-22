@@ -105,6 +105,11 @@
         ],
         "operationId": "Clusters_Delete",
         "description": "Begins deleting the specified HDInsight cluster.",
+        "x-ms-examples": {
+          "Delete Hadoop on Linux cluster": {
+            "$ref": "../examples/DeleteLinuxHadoopCluster.json"
+          }
+        },
         "parameters": [
           {
             "name": "resourceGroupName",
@@ -143,6 +148,14 @@
         ],
         "operationId": "Clusters_Get",
         "description": "Gets the specified cluster.",
+        "x-ms-examples": {
+          "Get Hadoop on Linux cluster": {
+            "$ref": "../examples/GetLinuxHadoopCluster.json"
+          },
+          "Get Spark on Linux cluster": {
+            "$ref": "../examples/GetLinuxSparkCluster.json"
+          }
+        },
         "parameters": [
           {
             "name": "resourceGroupName",
@@ -182,6 +195,11 @@
         ],
         "operationId": "Clusters_ListByResourceGroup",
         "description": "List the HDInsight clusters in a resource group.",
+        "x-ms-examples": {
+          "Get All Hadoop on Linux cluster": {
+            "$ref": "../examples/GetLinuxHadoopAllCluster.json"
+          }
+        },
         "parameters": [
           {
             "name": "resourceGroupName",
@@ -341,7 +359,7 @@
       }
     },
     "SshProfile": {
-      "description":"Gets or sets the ssh profile for the HDInsight cluster",
+      "description": "Gets or sets the ssh profile for the HDInsight cluster",
       "properties": {
         "publicKeys": {
           "type": "array",
@@ -581,7 +599,7 @@
       },
       "description": "Describes the compute profile."
     },
-    "StorageAccount":{
+    "StorageAccount": {
       "properties": {
         "name": {
           "type": "string",
@@ -658,7 +676,7 @@
         },
         "storageProfile": {
           "$ref": "#/definitions/StorageProfile",
-          "description": "Gets or sets the storage profile."          
+          "description": "Gets or sets the storage profile."
         }
       }
     },
@@ -669,7 +687,10 @@
           "description": "Gets or sets the location of the cluster."
         },
         "tags": {
-          "type": ["object", "null"],
+          "type": [
+            "object",
+            "null"
+          ],
           "x-nullable": true,
           "additionalProperties": {
             "type": "string"
@@ -694,7 +715,7 @@
       }
     },
     "ErrorInfo": {
-     "description": "Gets the error message associated with the cluster creation.",
+      "description": "Gets the error message associated with the cluster creation.",
       "properties": {
         "code": {
           "type": "string",
@@ -707,7 +728,7 @@
       }
     },
     "ConnectivityEndpoint": {
-     "description": "Gets or sets the connectivity properties",
+      "description": "Gets or sets the connectivity properties",
       "properties": {
         "name": {
           "type": "string",
@@ -787,7 +808,6 @@
         },
         "createdDate": {
           "type": "string",
-          "format": "date-time",
           "description": "Gets or sets the date on which the cluster was created."
         },
         "clusterState": {
@@ -1083,7 +1103,10 @@
           "description": "Resource location"
         },
         "tags": {
-          "type": ["object", "null"],
+          "type": [
+            "object",
+            "null"
+          ],
           "x-nullable": true,
           "additionalProperties": {
             "type": "string"

@@ -7,36 +7,30 @@
         "subscriptionId": "subid",
         "applicationCreateParameters": {
             "computeProfile": {
-                "roles": [
-                    {
-                        "name": "edgenode",
-                        "targetInstanceCount": 1,
-                        "hardwareProfile": {
-                            "vmSize": "Standard_D12_v2"
-                        }
+                "roles": [{
+                    "name": "edgenode",
+                    "targetInstanceCount": 1,
+                    "hardwareProfile": {
+                        "vmSize": "Standard_D12_v2"
                     }
-                ]
+                }]
             },
-            "installScriptActions": [
-                {
-                    "name": "app-install-app1",
-                    "uri": "https://.../install.sh",
-                    "parameters": "-version latest -port 20000",
-                    "roles": [
-                        "edgenode"
-                    ]
-                }
-            ],
+            "installScriptActions": [{
+                "name": "app-install-app1",
+                "uri": "https://.../install.sh",
+                "parameters": "-version latest -port 20000",
+                "roles": [
+                    "edgenode"
+                ]
+            }],
             "uninstallScriptActions": [],
-            "httpsEndpoints": [
-                {
-                    "subDomainSuffix": "dss",
-                    "destinationPort": "20000",
-                    "accessModes": [
-                        "WebPage"
-                    ]
-                }
-            ],
+            "httpsEndpoints": [{
+                "subDomainSuffix": "dss",
+                "destinationPort": "20000",
+                "accessModes": [
+                    "WebPage"
+                ]
+            }],
             "ProvisioningState": "",
             "applicationType": "CustomApplication",
             "ErrorInfos": []

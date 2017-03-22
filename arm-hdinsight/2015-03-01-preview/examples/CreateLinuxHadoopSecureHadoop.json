@@ -21,27 +21,24 @@
                     }
                 },
                 "storageProfile": {
-                    "storageaccounts": [
-                        {
-                            "name": "mystorage",
-                            "isDefault": true,
-                            "container": "containername",
-                            "key": "storage account key"
-                        }
-                    ]
-                },				
-                "securityProfile": {					
-                        "directoryType": "ActiveDirectory",
-                        "domain": "DomainName",
-                        "organizationalUnitDN": "OU=Hadoop,DC=hdinsight,DC=test",
-                        "ldapsUrls": ["ldaps://10.10.0.4:636"],
-                        "domainUsername": "DomainUsername",
-                        "domainUserPassword": "**********",
-                        "clusterUsersGroupDNs": ["hdiusers"]
-                    },
+                    "storageaccounts": [{
+                        "name": "mystorage",
+                        "isDefault": true,
+                        "container": "containername",
+                        "key": "storage account key"
+                    }]
+                },
+                "securityProfile": {
+                    "directoryType": "ActiveDirectory",
+                    "domain": "DomainName",
+                    "organizationalUnitDN": "OU=Hadoop,DC=hdinsight,DC=test",
+                    "ldapsUrls": ["ldaps://10.10.0.4:636"],
+                    "domainUsername": "DomainUsername",
+                    "domainUserPassword": "**********",
+                    "clusterUsersGroupDNs": ["hdiusers"]
+                },
                 "computeProfile": {
-                    "roles": [
-                        {
+                    "roles": [{
                             "name": "headnode",
                             "minInstanceCount": 1,
                             "targetInstanceCount": 2,
@@ -53,11 +50,9 @@
                                     "username": "sshuser",
                                     "password": "**********",
                                     "sshProfile": {
-                                        "publicKeys": [
-                                            {
-                                                "certificateData": "**********"
-                                            }
-                                        ]
+                                        "publicKeys": [{
+                                            "certificateData": "**********"
+                                        }]
                                     }
                                 }
                             },
@@ -65,7 +60,7 @@
                                 "id": "/subscriptions/subId/resourceGroups/rg/providers/Microsoft.Network/virtualNetworks/vnetname",
                                 "subnet": "/subscriptions/subId/resourceGroups/rg/providers/Microsoft.Network/virtualNetworks/vnetname/subnets/vnetsubnet"
                             },
-                            "scriptActions": [ ]
+                            "scriptActions": []
                         },
                         {
                             "name": "workernode",
@@ -79,11 +74,9 @@
                                     "username": "sshuser",
                                     "password": "**********",
                                     "sshProfile": {
-                                        "publicKeys": [
-                                            {
-                                                "certificateData": "**********"
-                                            }
-                                        ]
+                                        "publicKeys": [{
+                                            "certificateData": "**********"
+                                        }]
                                     }
                                 }
                             },
@@ -91,7 +84,7 @@
                                 "id": "/subscriptions/subId/resourceGroups/rg/providers/Microsoft.Network/virtualNetworks/vnetname",
                                 "subnet": "/subscriptions/subId/resourceGroups/rg/providers/Microsoft.Network/virtualNetworks/vnetname/subnets/vnetsubnet"
                             },
-                            "scriptActions": [ ]
+                            "scriptActions": []
                         },
                         {
                             "name": "zookeepernode",
@@ -105,11 +98,9 @@
                                     "username": "sshuser",
                                     "password": "**********",
                                     "sshProfile": {
-                                        "publicKeys": [
-                                            {
-                                                "certificateData": "**********"
-                                            }
-                                        ]
+                                        "publicKeys": [{
+                                            "certificateData": "**********"
+                                        }]
                                     }
                                 }
                             },
@@ -117,7 +108,7 @@
                                 "id": "/subscriptions/subId/resourceGroups/rg/providers/Microsoft.Network/virtualNetworks/vnetname",
                                 "subnet": "/subscriptions/subId/resourceGroups/rg/providers/Microsoft.Network/virtualNetworks/vnetname/subnets/vnetsubnet"
                             },
-                            "scriptActions": [ ]
+                            "scriptActions": []
                         }
                     ]
                 }

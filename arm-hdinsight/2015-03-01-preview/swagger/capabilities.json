@@ -41,6 +41,11 @@
         ],
         "operationId": "Location_GetCapabilities",
         "description": "Gets the capabilities for the specified location.",
+        "x-ms-examples": {
+          "Get the subscription capabilities for specific location": {
+            "$ref": "../examples/GetHDInsightCapabilities.json"
+          }
+        },
         "parameters": [
           {
             "name": "location",
@@ -69,7 +74,7 @@
   },
   "definitions": {
     "VersionSpec": {
-     "description": "Gets or sets Version spec properties.",
+      "description": "Gets or sets Version spec properties.",
       "properties": {
         "friendlyName": {
           "type": "string",
@@ -93,7 +98,7 @@
       }
     },
     "VersionsCapability": {
-     "description": "Gets or sets version capability.",
+      "description": "Gets or sets version capability.",
       "properties": {
         "available": {
           "type": "array",
@@ -115,7 +120,7 @@
       }
     },
     "VmSizesCapability": {
-     "description": "Gets or sets virtual machine sizes capability.",
+      "description": "Gets or sets virtual machine sizes capability.",
       "properties": {
         "available": {
           "type": "array",
@@ -126,7 +131,7 @@
       }
     },
     "VmSizeCompatibilityFilter": {
-     "description": "Gets or sets virtual machine type compatibility filter.",
+      "description": "Gets or sets virtual machine type compatibility filter.",
       "properties": {
         "FilterMode": {
           "type": "string"
@@ -164,7 +169,7 @@
       }
     },
     "RegionalQuotaCapability": {
-     "description": "Gets or sets regional quota capacity.",
+      "description": "Gets or sets regional quota capacity.",
       "properties": {
         "region_name": {
           "type": "string"
@@ -180,7 +185,7 @@
       }
     },
     "QuotaCapability": {
-     "description": "Gets or sets regional quota capacity.",
+      "description": "Gets or sets regional quota capacity.",
       "properties": {
         "regionalQuotas": {
           "type": "array",
@@ -191,7 +196,7 @@
       }
     },
     "CapabilitiesResult": {
-     "description": "The Get Capabilities operation response.",      
+      "description": "The Get Capabilities operation response.",
       "properties": {
         "versions": {
           "type": "object",
