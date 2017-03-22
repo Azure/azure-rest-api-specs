@@ -417,25 +417,25 @@
       }
     },
     "NodeTypeDescription": {
-      "description": "NodeType details",
+      "description": "Describes a node type in the cluster, each node type represents sub set of nodes in the cluster",
       "properties": {
         "name": {
-          "description": "Name of NodeType",
+          "description": "Name of the node type",
           "type": "string"
         },
         "placementProperties": {
-          "description": "Placement property key",
+          "description": "The placement tags applied to nodes in the node type, which can be used to indicate where certain services (workload) should run",
           "type": "object",
           "additionalProperties": {
-            "description": "Placement property value",
+            "description": "Placement tag value",
             "type": "string"
           }
         },
         "capacities": {
-          "description": "Capacity property key",
+          "description": "The capacity tags applied to the nodes in the node type, the cluster resource manager uses these tags to understand how much of a resource a node has",
           "type": "object",
           "additionalProperties": {
-            "description": "Capacity property value",
+            "description": "Capacity tag value",
             "type": "string"
           }
         },
@@ -466,11 +466,11 @@
           "$ref": "#/definitions/EndpointRangeDescription"
         },
         "isPrimary": {
-          "description": "Mark this node as primay",
+          "description": "Mark this as the primary node type",
           "type": "boolean"
         },
         "vmInstanceCount": {
-          "description": "VMSS instance count",
+          "description": "The number of node instances in the node type",
           "type": "integer"
         },
         "reverseProxyEndpointPort": {
@@ -747,6 +747,13 @@
           "type": "array",
           "items": {
             "$ref": "#/definitions/ClientCertificateThumbprint"
+          }
+        },
+        "clientCertificateCommonNames": {
+          "description": "Client certificate details using common name",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ClientCertificateCommonName"
           }
         },
         "fabricSettings": {
