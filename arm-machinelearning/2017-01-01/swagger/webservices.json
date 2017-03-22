@@ -10,12 +10,10 @@
     "https"
   ],
   "consumes": [
-    "application/json",
-    "text/json"
+    "application/json"
   ],
   "produces": [
-    "application/json",
-    "text/json"
+    "application/json"
   ],
   "paths": {
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.MachineLearning/webServices/{webServiceName}": {
@@ -50,13 +48,13 @@
         ],
         "responses": {
           "200": {
-            "description": "Success. This response is returned for an update web service operation. The response payload is identical to the response payload that is returned by the GET operation. The response includes the Provisioning State and the Azure-AsyncOperation header. To get the progress of the operation, call GET operation on the URL in Azure-AsyncOperation header field. For more information about Asynchronous Operations, see https://msdn.microsoft.com/en-us/library/mt742920.aspx.",
+            "description": "Success. This response is returned for an update web service operation. The response payload is identical to the response payload that is returned by the GET operation. The response includes the Provisioning State and the Azure-AsyncOperation header. To get the progress of the operation, call GET operation on the URL in Azure-AsyncOperation header field. For more information about Asynchronous Operations, see https://docs.microsoft.com/en-us/azure/azure-resource-manager/resource-manager-async-operations.",
             "schema": {
               "$ref": "#/definitions/WebService"
             }
           },
           "201": {
-            "description": "Created. This response is returned for a create web service operation. The response includes the Provisioning State and the Azure-AsyncOperation header. To get the progress of the operation, call GET operation on the URL in Azure-AsyncOperation header field. For more information about Asynchronous Operations, see https://msdn.microsoft.com/en-us/library/mt742920.aspx.",
+            "description": "Created. This response is returned for a create web service operation. The response includes the Provisioning State and the Azure-AsyncOperation header. To get the progress of the operation, call GET operation on the URL in Azure-AsyncOperation header field. For more information about Asynchronous Operations, see https://docs.microsoft.com/en-us/azure/azure-resource-manager/resource-manager-async-operations.",
             "schema": {
               "$ref": "#/definitions/WebService"
             }
@@ -93,7 +91,7 @@
         ],
         "responses": {
           "200": {
-            "description": "Success.  The response includes the Provisioning State and the Azure-AsyncOperation header. To get the progress of the operation, call GET operation on the URL in Azure-AsyncOperation header field. For more informationFor more information about Asynchronous Operations, see https://msdn.microsoft.com/en-us/library/mt742920.aspx.",
+            "description": "Success.  The response includes the Provisioning State and the Azure-AsyncOperation header. To get the progress of the operation, call GET operation on the URL in Azure-AsyncOperation header field. For more informationFor more information about Asynchronous Operations, see https://docs.microsoft.com/en-us/azure/azure-resource-manager/resource-manager-async-operations.",
             "schema": {
               "$ref": "#/definitions/WebService"
             }
@@ -131,7 +129,7 @@
         ],
         "responses": {
           "200": {
-            "description": "Success. The response payload is identical to the response payload that is returned by the GET operation. The response includes the Provisioning State and the Azure-AsyncOperation header. To get the progress of the operation, call GET operation on the URL in Azure-AsyncOperation header field. For more information about Asynchronous Operations, see https://msdn.microsoft.com/en-us/library/mt742920.aspx.",
+            "description": "Success. The response payload is identical to the response payload that is returned by the GET operation. The response includes the Provisioning State and the Azure-AsyncOperation header. To get the progress of the operation, call GET operation on the URL in Azure-AsyncOperation header field. For more information about Asynchronous Operations, see https://docs.microsoft.com/en-us/azure/azure-resource-manager/resource-manager-async-operations.",
             "schema": {
               "$ref": "#/definitions/WebService"
             }
@@ -143,7 +141,7 @@
         "tags": [
           "WebServices"
         ],
-        "operationId": "WebServices_Remove",
+        "operationId": "WebServices_Delete",
         "description": "Deletes the specified web service.",
         "parameters": [
           {
@@ -175,7 +173,7 @@
         "tags": [
           "WebServices"
         ],
-        "operationId": "WebServices_CreateRegionalWebServiceProperties",
+        "operationId": "WebServices_CreateRegionalProperties",
         "description": "Creates an encrypted credentials parameter blob for the specified region. To get the web service from a region other than the region in which it has been created, you must first call Create Regional Web Services Properties to create a copy of the encrypted credential parameter blob in that region. You only need to do this before the first time that you get the web service in the new region.",
         "parameters": [
           {
@@ -200,7 +198,7 @@
         ],
         "responses": {
           "202": {
-            "description": "Accepted.  The response includes the Azure-AsyncOperation header. To get the progress of the operation, call the GET operation on the URL in the Azure-AsyncOperation header field. For more information about Asynchronous Operations, see https://msdn.microsoft.com/en-us/library/mt742920.aspx."
+            "description": "Accepted.  The response includes the Azure-AsyncOperation header. To get the progress of the operation, call the GET operation on the URL in the Azure-AsyncOperation header field. For more information about Asynchronous Operations, see https://docs.microsoft.com/en-us/azure/azure-resource-manager/resource-manager-async-operations."
           }
         },
         "x-ms-long-running-operation": true
@@ -283,7 +281,7 @@
         "x-ms-pageable": {
           "nextLinkName": "nextLink"
         },
-        "operationId": "WebServices_List",
+        "operationId": "WebServices_ListBySubscriptionId",
         "description": "Gets the web services in the specified subscription.",
         "parameters": [
           {
@@ -345,6 +343,7 @@
   },
   "definitions": {
     "Resource": {
+      "description": "Azure resource.",
       "x-ms-azure-resource": true,
       "required": [
         "location"
@@ -512,7 +511,7 @@
           "type": "boolean",
           "description": "When set to true, indicates that the payload size is larger than 3 MB. Otherwise false. If the payload size exceed 3 MB, the payload is stored in a blob and the PayloadsLocation parameter contains the URI of the blob. Otherwise, this will be set to false and Assets, Input, Output, Package, Parameters, ExampleRequest are inline. The Payload sizes is determined by adding the size of the Assets, Input, Output, Package, Parameters, and the ExampleRequest."
         },
-        "PayloadsLocation": {
+        "payloadsLocation": {
           "$ref": "#/definitions/BlobLocation",
           "description": "The URI of the payload blob. This paramater contains a value only if the payloadsInBlobStorage parameter is set to true. Otherwise is set to null."
         }
