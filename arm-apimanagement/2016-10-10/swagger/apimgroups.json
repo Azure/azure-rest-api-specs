@@ -326,7 +326,7 @@
           "200": {
             "description": "Lists a collection of user entities associated with the group.",
             "schema": {
-              "$ref": "#/definitions/UserCollection"
+              "$ref": "./apimusers.json#/definitions/UserCollection"
             }
           },
           "default": {
@@ -339,7 +339,7 @@
         "x-ms-pageable": {
           "nextLinkName": "nextLink"
         },
-        "x-ms-odata": "#/definitions/UserContract"
+        "x-ms-odata": "./apimusers.json#/definitions/UserContract"
       }
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ApiManagement/service/{serviceName}/groups/{groupId}/users/{uid}": {
@@ -573,90 +573,6 @@
 			}
 		  },
 		  "description": "Parameters supplied to the Update Group operation."
-		},
-		"UserCollection": {
-		  "properties": {
-			"value": {
-			  "type": "array",
-			  "items": {
-				"$ref": "#/definitions/UserContract"
-			  },
-			  "description": "Page values."
-			},
-			"count": {
-			  "type": "integer",
-			  "format": "int64",
-			  "description": "Total record count number across all pages."
-			},
-			"nextLink": {
-			  "type": "string",
-			  "description": "Next page link if any."
-			}
-		  },
-		  "description": "Paged Users list representation."
-		},
-		"UserContract": {
-		  "properties": {
-			"id": {
-			  "type": "string",
-			  "description": "User identifier path."
-			},
-			"firstName": {
-			  "type": "string",
-			  "description": "First name."
-			},
-			"lastName": {
-			  "type": "string",
-			  "description": "Last name."
-			},
-			"email": {
-			  "type": "string",
-			  "description": "Email address."
-			},
-			"state": {
-			  "type": "string",
-			  "description": "User state.",
-			  "enum": [
-				"Active",
-				"Blocked"
-			  ],
-			  "x-ms-enum": {
-				"name": "UserStateContract",
-				"modelAsString": false
-			  }
-			},
-			"registrationDate": {
-			  "type": "string",
-			  "format": "date-time",
-			  "description": "Date of user registration. The date conforms to the following format: `yyyy-MM-ddTHH:mm:ssZ` as specified by the ISO 8601 standard.\n"
-			},
-			"note": {
-			  "type": "string",
-			  "description": "Administrator's note about given user."
-			},
-			"identities": {
-			  "readOnly": true,
-			  "type": "array",
-			  "items": {
-				"$ref": "#/definitions/UserIdentityContract"
-			  },
-			  "description": "Collection of user identities."
-			}
-		  },
-		  "description": "User profile."
-		},
-		"UserIdentityContract": {
-		  "properties": {
-			"provider": {
-			  "type": "string",
-			  "description": "Identity provider name."
-			},
-			"id": {
-			  "type": "string",
-			  "description": "Identifier value within provider."
-			}
-		  },
-		  "description": "User identity details."
 		}
   },
   "parameters": {
