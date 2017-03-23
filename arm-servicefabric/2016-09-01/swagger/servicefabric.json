@@ -314,6 +314,43 @@
         }
       }
     },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.ServiceFabric/locations/{location}/environments/{environment}/clusterVersions": {
+      "get": {
+        "tags": [
+          "ClusterVersionsListOperation"
+        ],
+        "operationId": "ClusterVersions_List",
+        "description": "List cluster code versions by location",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/locationForClusterCodeVersions"
+          },
+          {
+            "$ref": "#/parameters/environment"
+          },
+          {
+            "$ref": "#/parameters/api-version"
+          },
+          {
+            "$ref": "#/parameters/subscriptionId"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK - List cluster code versions successfully",
+            "schema": {
+              "$ref": "#/definitions/ClusterCodeVersionsListResult"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
     "/providers/Microsoft.ServiceFabric/operations": {
       "get": {
         "tags": [
@@ -347,6 +384,59 @@
     }
   },
   "definitions": {
+    "ClusterCodeVersionResultDetail": {
+      "description": "The result of list cluster code versions",
+      "properties": {
+        "codeVersion": {
+          "description": "The cluster code version",
+          "type": "string"
+        },
+        "supportExpiryUtc": {
+          "description": "The date of expiry of the version",
+          "type": "string"
+        },
+        "environment": {
+          "description": "Cluster operating system",
+          "$ref": "#/definitions/ClusterEnvironment"
+        }
+      }
+    },
+    "ClusterCodeVersionsResult": {
+      "description": "The result of list cluster code versions",
+      "properties": {
+        "id": {
+          "description": "The identification of the result",
+          "type": "string"
+        },
+        "name": {
+          "description": "The name of the result",
+          "type": "string"
+        },
+        "type": {
+          "description": "The result resource type",
+          "type": "string"
+        },
+        "properties": {
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/ClusterCodeVersionResultDetail"
+        }
+      }
+    },
+    "ClusterCodeVersionsListResult": {
+      "description": "Cluster code versions list results",
+      "properties": {
+        "value": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ClusterCodeVersionsResult"
+          }
+        },
+        "nextLink": {
+          "type": "string",
+          "description": "The URL to use for getting the next set of results."
+        }
+      }
+    },
     "CertificateDescription": {
       "description": "Certificate details",
       "properties": {
@@ -362,17 +452,14 @@
           "description": "The local certificate store location",
           "type": "string",
           "enum": [
-            "AddressBook",
-            "AuthRoot",
-            "CertificateAuthority",
-            "Disallowed",
-            "My",
-            "Root",
-            "TrustedPeople",
-            "TrustedPublisher"
+            "My"
           ]
         }
-      }
+      },
+      "required": [
+        "thumbprint",
+        "x509StoreName"
+      ]
     },
     "SettingsParameterDescription": {
       "description": "ServiceFabric settings under sections",
@@ -385,7 +472,11 @@
           "type": "string",
           "description": "The value of the property"
         }
-      }
+      },
+      "required": [
+        "name",
+        "value"
+      ]
     },
     "SettingsSectionDescription": {
       "description": "ServiceFabric section settings",
@@ -401,7 +492,11 @@
             "$ref": "#/definitions/SettingsParameterDescription"
           }
         }
-      }
+      },
+      "required": [
+        "name",
+        "parameters"
+      ]
     },
     "EndpointRangeDescription": {
       "description": "Port range details",
@@ -414,7 +509,11 @@
           "description": "End port of a range of ports",
           "type": "integer"
         }
-      }
+      },
+      "required": [
+        "startPort",
+        "endPort"
+      ]
     },
     "NodeTypeDescription": {
       "description": "Describes a node type in the cluster, each node type represents sub set of nodes in the cluster",
@@ -477,7 +576,15 @@
           "description": "Endpoint used by reverse proxy",
           "type": "integer"
         }
-      }
+      },
+      "required": [
+        "name",
+        "clientConnectionEndpointPort",
+        "httpGatewayEndpointPort",
+        "durabilityLevel",
+        "isPrimary",
+        "vmInstanceCount"
+      ]
     },
     "ClientCertificateThumbprint": {
       "description": "Client certificate details using thumbprint",
@@ -490,7 +597,11 @@
           "description": "Certificate thumbprint",
           "type": "string"
         }
-      }
+      },
+      "required": [
+        "isAdmin",
+        "certificateThumbprint"
+      ]
     },
     "ClientCertificateCommonName": {
       "description": "Client certificate details using common name",
@@ -506,14 +617,18 @@
         "certificateIssuerThumbprint": {
           "description": "Certificate issuer thumbprint",
           "type": "string"
-        }        
-      }
+        }
+      },
+      "required": [
+        "isAdmin",
+        "certificateCommonName",
+        "certificateIssuerThumbprint"
+      ]
     },
     "ClusterEnvironment": {
       "description": "Cluster operating system, the default will be Windows",
       "type": "string",
       "enum": [
-        "Default",
         "Windows",
         "Linux"
       ]
@@ -709,7 +824,10 @@
           "description": "Diagnostics storage account table endpoint",
           "type": "string"
         }
-      }
+      },
+      "required": [
+        "storageAccountName"
+      ]
     },
     "ClusterPropertiesUpdateParameters": {
       "description": "The cluster resource properties can be updated",
@@ -728,13 +846,12 @@
           "description": "Cluster upgrade mode indicates if fabric upgrade is initiated automatically by the system or not",
           "type": "string",
           "enum": [
-            "Default",
             "Automatic",
             "Manual"
           ]
         },
         "clusterCodeVersion": {
-          "description": "The ServiceFabric code version, if set it, please make sure you have set upgradeMode to Manual, otherwise ,it will fail",
+          "description": "The ServiceFabric code version, if set it, please make sure you have set upgradeMode to Manual, otherwise ,it will fail, if you are using PUT new cluster,  you can get the version by using ClusterVersions_List , if you are updating existing cluster, you can get the availableClusterVersions from ClusterGetOperation,  ",
           "type": "string"
         },
         "certificate": {
@@ -796,7 +913,6 @@
           "readOnly": true,
           "type": "string",
           "enum": [
-            "Default",
             "WaitingForNodes",
             "Deploying",
             "BaselineUpgrade",
@@ -911,9 +1027,7 @@
       "required": [
         "managementEndpoint",
         "reliabilityLevel",
-        "vmImage",
-        "nodeTypes",
-        "upgradeMode"
+        "nodeTypes"
       ]
     },
     "ClusterUpdateParameters": {
@@ -1103,6 +1217,35 @@
       "in": "path",
       "required": true,
       "type": "string",
+      "x-ms-parameter-location": "method"
+    },
+    "locationForClusterCodeVersions": {
+      "description": "The location for the cluster code versions, this is different from cluster location",
+      "name": "location",
+      "required": true,
+      "in": "path",
+      "type": "string",
+      "x-ms-parameter-location": "method"
+    },
+    "clusterVersion": {
+      "description": "The cluster code version",
+      "name": "clusterVersion",
+      "required": true,
+      "in": "path",
+      "type": "string",
+      "x-ms-parameter-location": "method"
+    },
+    "environment": {
+      "description": "Cluster operating system, the default means all",
+      "name": "environment",
+      "required": true,
+      "in": "path",
+      "type": "string",
+      "enum": [
+        "Default",
+        "Windows",
+        "Linux"
+      ],
       "x-ms-parameter-location": "method"
     }
   }
