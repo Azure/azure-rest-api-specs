@@ -1358,7 +1358,7 @@
       ],
       "properties": {
         "properties": {
-          "description": "ARM envelope properties",
+          "description": "AppServicePlan resource specific properties",
           "required": [
             "name"
           ],
@@ -1797,7 +1797,7 @@
       ],
       "properties": {
         "properties": {
-          "description": "ARM envelope properties",
+          "description": "HybridConnection resource specific properties",
           "properties": {
             "serviceBusNamespace": {
               "description": "The name of the Service Bus namespace.",
@@ -1871,7 +1871,7 @@
       ],
       "properties": {
         "properties": {
-          "description": "ARM envelope properties",
+          "description": "HybridConnectionKey resource specific properties",
           "properties": {
             "sendKeyName": {
               "description": "The name of the send key.",
@@ -1898,7 +1898,7 @@
       ],
       "properties": {
         "properties": {
-          "description": "ARM envelope properties",
+          "description": "HybridConnectionLimits resource specific properties",
           "properties": {
             "current": {
               "format": "int32",
@@ -2193,7 +2193,7 @@
       ],
       "properties": {
         "properties": {
-          "description": "ARM envelope properties",
+          "description": "ResourceMetricDefinition resource specific properties",
           "properties": {
             "name": {
               "$ref": "#/definitions/ResourceMetricName",
@@ -2350,7 +2350,7 @@
       ],
       "properties": {
         "properties": {
-          "description": "ARM envelope properties",
+          "description": "Site resource specific properties",
           "properties": {
             "state": {
               "description": "Current state of the app.",
@@ -2472,7 +2472,7 @@
             },
             "microService": {
               "description": "Micro services like apps, logic apps.",
-              "default": false,
+              "default": "WebSites",
               "type": "string",
               "x-ms-mutability": [
                 "create",
@@ -2561,255 +2561,244 @@
     "SiteConfig": {
       "description": "Configuration of an App Service app.",
       "type": "object",
-      "allOf": [
-        {
-          "$ref": "#/definitions/Resource"
-        }
-      ],
       "properties": {
-        "properties": {
-          "description": "ARM envelope properties",
-          "properties": {
-            "numberOfWorkers": {
-              "format": "int32",
-              "description": "Number of workers.",
-              "type": "integer"
-            },
-            "defaultDocuments": {
-              "description": "Default documents.",
-              "type": "array",
-              "items": {
-                "type": "string"
-              }
-            },
-            "netFrameworkVersion": {
-              "description": ".NET Framework version.",
-              "default": "v4.6",
-              "type": "string"
-            },
-            "phpVersion": {
-              "description": "Version of PHP.",
-              "type": "string"
-            },
-            "pythonVersion": {
-              "description": "Version of Python.",
-              "type": "string"
-            },
-            "nodeVersion": {
-              "description": "Version of Node.js.",
-              "type": "string"
-            },
-            "linuxFxVersion": {
-              "description": "Linux App Framework and version",
-              "type": "string"
-            },
-            "requestTracingEnabled": {
-              "description": "<code>true</code> if request tracing is enabled; otherwise, <code>false</code>.",
-              "type": "boolean"
-            },
-            "requestTracingExpirationTime": {
-              "format": "date-time",
-              "description": "Request tracing expiration time.",
-              "type": "string"
-            },
-            "remoteDebuggingEnabled": {
-              "description": "<code>true</code> if remote debugging is enabled; otherwise, <code>false</code>.",
-              "type": "boolean"
-            },
-            "remoteDebuggingVersion": {
-              "description": "Remote debugging version.",
-              "type": "string"
-            },
-            "httpLoggingEnabled": {
-              "description": "<code>true</code> if HTTP logging is enabled; otherwise, <code>false</code>.",
-              "type": "boolean"
-            },
-            "logsDirectorySizeLimit": {
-              "format": "int32",
-              "description": "HTTP logs directory size limit.",
-              "type": "integer"
-            },
-            "detailedErrorLoggingEnabled": {
-              "description": "<code>true</code> if detailed error logging is enabled; otherwise, <code>false</code>.",
-              "type": "boolean"
-            },
-            "publishingUsername": {
-              "description": "Publishing user name.",
-              "type": "string"
-            },
-            "appSettings": {
-              "description": "Application settings.",
-              "type": "array",
-              "items": {
-                "$ref": "#/definitions/NameValuePair"
-              }
-            },
-            "connectionStrings": {
-              "description": "Connection strings.",
-              "type": "array",
-              "items": {
-                "$ref": "#/definitions/ConnStringInfo"
-              }
-            },
-            "machineKey": {
-              "$ref": "#/definitions/SiteMachineKey",
-              "description": "Site MachineKey.",
-              "readOnly": true
-            },
-            "handlerMappings": {
-              "description": "Handler mappings.",
-              "type": "array",
-              "items": {
-                "$ref": "#/definitions/HandlerMapping"
-              }
-            },
-            "documentRoot": {
-              "description": "Document root.",
-              "type": "string"
-            },
-            "scmType": {
-              "description": "SCM type.",
-              "enum": [
-                "None",
-                "Dropbox",
-                "Tfs",
-                "LocalGit",
-                "GitHub",
-                "CodePlexGit",
-                "CodePlexHg",
-                "BitbucketGit",
-                "BitbucketHg",
-                "ExternalGit",
-                "ExternalHg",
-                "OneDrive",
-                "VSO"
-              ],
-              "type": "string",
-              "x-ms-enum": {
-                "name": "ScmType",
-                "modelAsString": true
-              }
-            },
-            "use32BitWorkerProcess": {
-              "description": "<code>true</code> to use 32-bit worker process; otherwise, <code>false</code>.",
-              "type": "boolean"
-            },
-            "webSocketsEnabled": {
-              "description": "<code>true</code> if WebSocket is enabled; otherwise, <code>false</code>.",
-              "type": "boolean"
-            },
-            "alwaysOn": {
-              "description": "<code>true</code> if Always On is enabled; otherwise, <code>false</code>.",
-              "type": "boolean"
-            },
-            "javaVersion": {
-              "description": "Java version.",
-              "type": "string"
-            },
-            "javaContainer": {
-              "description": "Java container.",
-              "type": "string"
-            },
-            "javaContainerVersion": {
-              "description": "Java container version.",
-              "type": "string"
-            },
-            "appCommandLine": {
-              "description": "App command line to launch.",
-              "type": "string"
-            },
-            "managedPipelineMode": {
-              "description": "Managed pipeline mode.",
-              "enum": [
-                "Integrated",
-                "Classic"
-              ],
-              "type": "string",
-              "x-ms-enum": {
-                "name": "ManagedPipelineMode",
-                "modelAsString": false
-              }
-            },
-            "virtualApplications": {
-              "description": "Virtual applications.",
-              "type": "array",
-              "items": {
-                "$ref": "#/definitions/VirtualApplication"
-              }
-            },
-            "loadBalancing": {
-              "description": "Site load balancing.",
-              "enum": [
-                "WeightedRoundRobin",
-                "LeastRequests",
-                "LeastResponseTime",
-                "WeightedTotalTraffic",
-                "RequestHash"
-              ],
-              "type": "string",
-              "x-ms-enum": {
-                "name": "SiteLoadBalancing",
-                "modelAsString": false
-              }
-            },
-            "experiments": {
-              "$ref": "#/definitions/Experiments",
-              "description": "This is work around for polymophic types."
-            },
-            "limits": {
-              "$ref": "#/definitions/SiteLimits",
-              "description": "Site limits."
-            },
-            "autoHealEnabled": {
-              "description": "<code>true</code> if Auto Heal is enabled; otherwise, <code>false</code>.",
-              "type": "boolean"
-            },
-            "autoHealRules": {
-              "$ref": "#/definitions/AutoHealRules",
-              "description": "Auto Heal rules."
-            },
-            "tracingOptions": {
-              "description": "Tracing options.",
-              "type": "string"
-            },
-            "vnetName": {
-              "description": "Virtual Network name.",
-              "type": "string",
-              "x-ms-mutability": [
-                "create",
-                "read"
-              ]
-            },
-            "cors": {
-              "$ref": "#/definitions/CorsSettings",
-              "description": "Cross-Origin Resource Sharing (CORS) settings."
-            },
-            "push": {
-              "$ref": "#/definitions/PushSettings",
-              "description": "Push endpoint settings."
-            },
-            "apiDefinition": {
-              "$ref": "#/definitions/ApiDefinitionInfo",
-              "description": "Information about the formal API definition for the app."
-            },
-            "autoSwapSlotName": {
-              "description": "Auto-swap slot name.",
-              "type": "string"
-            },
-            "localMySqlEnabled": {
-              "description": "<code>true</code> to enable local MySQL; otherwise, <code>false</code>.",
-              "default": false,
-              "type": "boolean"
-            },
-            "ipSecurityRestrictions": {
-              "description": "IP security restrictions.",
-              "type": "array",
-              "items": {
-                "$ref": "#/definitions/IpSecurityRestriction"
-              }
-            }
-          },
-          "x-ms-client-flatten": true
+        "numberOfWorkers": {
+          "format": "int32",
+          "description": "Number of workers.",
+          "type": "integer"
+        },
+        "defaultDocuments": {
+          "description": "Default documents.",
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "netFrameworkVersion": {
+          "description": ".NET Framework version.",
+          "default": "v4.6",
+          "type": "string"
+        },
+        "phpVersion": {
+          "description": "Version of PHP.",
+          "type": "string"
+        },
+        "pythonVersion": {
+          "description": "Version of Python.",
+          "type": "string"
+        },
+        "nodeVersion": {
+          "description": "Version of Node.js.",
+          "type": "string"
+        },
+        "linuxFxVersion": {
+          "description": "Linux App Framework and version",
+          "type": "string"
+        },
+        "requestTracingEnabled": {
+          "description": "<code>true</code> if request tracing is enabled; otherwise, <code>false</code>.",
+          "type": "boolean"
+        },
+        "requestTracingExpirationTime": {
+          "format": "date-time",
+          "description": "Request tracing expiration time.",
+          "type": "string"
+        },
+        "remoteDebuggingEnabled": {
+          "description": "<code>true</code> if remote debugging is enabled; otherwise, <code>false</code>.",
+          "type": "boolean"
+        },
+        "remoteDebuggingVersion": {
+          "description": "Remote debugging version.",
+          "type": "string"
+        },
+        "httpLoggingEnabled": {
+          "description": "<code>true</code> if HTTP logging is enabled; otherwise, <code>false</code>.",
+          "type": "boolean"
+        },
+        "logsDirectorySizeLimit": {
+          "format": "int32",
+          "description": "HTTP logs directory size limit.",
+          "type": "integer"
+        },
+        "detailedErrorLoggingEnabled": {
+          "description": "<code>true</code> if detailed error logging is enabled; otherwise, <code>false</code>.",
+          "type": "boolean"
+        },
+        "publishingUsername": {
+          "description": "Publishing user name.",
+          "type": "string"
+        },
+        "appSettings": {
+          "description": "Application settings.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/NameValuePair"
+          }
+        },
+        "connectionStrings": {
+          "description": "Connection strings.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ConnStringInfo"
+          }
+        },
+        "machineKey": {
+          "$ref": "#/definitions/SiteMachineKey",
+          "description": "Site MachineKey.",
+          "readOnly": true
+        },
+        "handlerMappings": {
+          "description": "Handler mappings.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/HandlerMapping"
+          }
+        },
+        "documentRoot": {
+          "description": "Document root.",
+          "type": "string"
+        },
+        "scmType": {
+          "description": "SCM type.",
+          "enum": [
+            "None",
+            "Dropbox",
+            "Tfs",
+            "LocalGit",
+            "GitHub",
+            "CodePlexGit",
+            "CodePlexHg",
+            "BitbucketGit",
+            "BitbucketHg",
+            "ExternalGit",
+            "ExternalHg",
+            "OneDrive",
+            "VSO"
+          ],
+          "type": "string",
+          "x-ms-enum": {
+            "name": "ScmType",
+            "modelAsString": true
+          }
+        },
+        "use32BitWorkerProcess": {
+          "description": "<code>true</code> to use 32-bit worker process; otherwise, <code>false</code>.",
+          "type": "boolean"
+        },
+        "webSocketsEnabled": {
+          "description": "<code>true</code> if WebSocket is enabled; otherwise, <code>false</code>.",
+          "type": "boolean"
+        },
+        "alwaysOn": {
+          "description": "<code>true</code> if Always On is enabled; otherwise, <code>false</code>.",
+          "type": "boolean"
+        },
+        "javaVersion": {
+          "description": "Java version.",
+          "type": "string"
+        },
+        "javaContainer": {
+          "description": "Java container.",
+          "type": "string"
+        },
+        "javaContainerVersion": {
+          "description": "Java container version.",
+          "type": "string"
+        },
+        "appCommandLine": {
+          "description": "App command line to launch.",
+          "type": "string"
+        },
+        "managedPipelineMode": {
+          "description": "Managed pipeline mode.",
+          "enum": [
+            "Integrated",
+            "Classic"
+          ],
+          "type": "string",
+          "x-ms-enum": {
+            "name": "ManagedPipelineMode",
+            "modelAsString": false
+          }
+        },
+        "virtualApplications": {
+          "description": "Virtual applications.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/VirtualApplication"
+          }
+        },
+        "loadBalancing": {
+          "description": "Site load balancing.",
+          "enum": [
+            "WeightedRoundRobin",
+            "LeastRequests",
+            "LeastResponseTime",
+            "WeightedTotalTraffic",
+            "RequestHash"
+          ],
+          "type": "string",
+          "x-ms-enum": {
+            "name": "SiteLoadBalancing",
+            "modelAsString": false
+          }
+        },
+        "experiments": {
+          "$ref": "#/definitions/Experiments",
+          "description": "This is work around for polymophic types."
+        },
+        "limits": {
+          "$ref": "#/definitions/SiteLimits",
+          "description": "Site limits."
+        },
+        "autoHealEnabled": {
+          "description": "<code>true</code> if Auto Heal is enabled; otherwise, <code>false</code>.",
+          "type": "boolean"
+        },
+        "autoHealRules": {
+          "$ref": "#/definitions/AutoHealRules",
+          "description": "Auto Heal rules."
+        },
+        "tracingOptions": {
+          "description": "Tracing options.",
+          "type": "string"
+        },
+        "vnetName": {
+          "description": "Virtual Network name.",
+          "type": "string",
+          "x-ms-mutability": [
+            "create",
+            "read"
+          ]
+        },
+        "cors": {
+          "$ref": "#/definitions/CorsSettings",
+          "description": "Cross-Origin Resource Sharing (CORS) settings."
+        },
+        "push": {
+          "$ref": "#/definitions/PushSettings",
+          "description": "Push endpoint settings."
+        },
+        "apiDefinition": {
+          "$ref": "#/definitions/ApiDefinitionInfo",
+          "description": "Information about the formal API definition for the app."
+        },
+        "autoSwapSlotName": {
+          "description": "Auto-swap slot name.",
+          "type": "string"
+        },
+        "localMySqlEnabled": {
+          "description": "<code>true</code> to enable local MySQL; otherwise, <code>false</code>.",
+          "default": false,
+          "type": "boolean"
+        },
+        "ipSecurityRestrictions": {
+          "description": "IP security restrictions.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/IpSecurityRestriction"
+          }
         }
       }
     },
@@ -3046,7 +3035,7 @@
       ],
       "properties": {
         "properties": {
-          "description": "ARM envelope properties",
+          "description": "VnetGateway resource specific properties",
           "required": [
             "vpnPackageUri"
           ],
@@ -3075,47 +3064,36 @@
     "VnetInfo": {
       "description": "Virtual Network information contract.",
       "type": "object",
-      "allOf": [
-        {
-          "$ref": "#/definitions/Resource"
-        }
-      ],
       "properties": {
-        "properties": {
-          "description": "ARM envelope properties",
-          "properties": {
-            "vnetResourceId": {
-              "description": "The Virtual Network's resource ID.",
-              "type": "string"
-            },
-            "certThumbprint": {
-              "description": "The client certificate thumbprint.",
-              "type": "string",
-              "readOnly": true
-            },
-            "certBlob": {
-              "description": "A certificate file (.cer) blob containing the public key of the private key used to authenticate a \n Point-To-Site VPN connection.",
-              "type": "string"
-            },
-            "routes": {
-              "description": "The routes that this Virtual Network connection uses.",
-              "type": "array",
-              "items": {
-                "$ref": "#/definitions/VnetRoute"
-              },
-              "readOnly": true
-            },
-            "resyncRequired": {
-              "description": "<code>true</code> if a resync is required; otherwise, <code>false</code>.",
-              "type": "boolean",
-              "readOnly": true
-            },
-            "dnsServers": {
-              "description": "DNS servers to be used by this Virtual Network. This should be a comma-separated list of IP addresses.",
-              "type": "string"
-            }
+        "vnetResourceId": {
+          "description": "The Virtual Network's resource ID.",
+          "type": "string"
+        },
+        "certThumbprint": {
+          "description": "The client certificate thumbprint.",
+          "type": "string",
+          "readOnly": true
+        },
+        "certBlob": {
+          "description": "A certificate file (.cer) blob containing the public key of the private key used to authenticate a \n Point-To-Site VPN connection.",
+          "type": "string"
+        },
+        "routes": {
+          "description": "The routes that this Virtual Network connection uses.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/VnetRoute"
           },
-          "x-ms-client-flatten": true
+          "readOnly": true
+        },
+        "resyncRequired": {
+          "description": "<code>true</code> if a resync is required; otherwise, <code>false</code>.",
+          "type": "boolean",
+          "readOnly": true
+        },
+        "dnsServers": {
+          "description": "DNS servers to be used by this Virtual Network. This should be a comma-separated list of IP addresses.",
+          "type": "string"
         }
       }
     },
@@ -3129,7 +3107,7 @@
       ],
       "properties": {
         "properties": {
-          "description": "ARM envelope properties",
+          "description": "VnetRoute resource specific properties",
           "properties": {
             "name": {
               "description": "The name of this route. This is only returned by the server and does not need to be set by the client.",
