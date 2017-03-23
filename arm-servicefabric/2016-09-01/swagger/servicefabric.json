@@ -395,7 +395,7 @@
           "description": "The name of settings section"
         },
         "parameters": {
-          "description": "Settings parameter value",
+          "description": "Collection of settings in the section, each setting is a tuple consisting of setting name and value",
           "type": "array",
           "items": {
             "$ref": "#/definitions/SettingsParameterDescription"
@@ -510,7 +510,7 @@
       }
     },
     "ClusterEnvironment": {
-      "description": "Cluster operating system",
+      "description": "Cluster operating system, the default will be Windows",
       "type": "string",
       "enum": [
         "Default",
@@ -718,7 +718,6 @@
           "description": "Cluster reliability level indicates replica set size of system service",
           "type": "string",
           "enum": [
-            "Invalid",
             "Bronze",
             "Silver",
             "Gold",
@@ -739,11 +738,11 @@
           "type": "string"
         },
         "certificate": {
-          "description": "The cluster certificate settings, the new certificate should exist in VMSS or KeyVault,before you add it, it will override original value",
+          "description": "The cluster certificate settings, the new certificate should exist in VMSS or Azure key vault,before you add it. It will override original value",
           "$ref": "#/definitions/CertificateDescription"
         },
         "clientCertificateThumbprints": {
-          "description": "The client thumbprint details ,it is used for client access for cluter operation, it will override existing collection",
+          "description": "The client thumbprint details, it is used for client access for cluster operation, it will override existing collection",
           "type": "array",
           "items": {
             "$ref": "#/definitions/ClientCertificateThumbprint"
@@ -846,7 +845,7 @@
           ]
         },
         "clientCertificateThumbprints": {
-          "description": "The client thumbprint details ,it is used for client access for cluter operation",
+          "description": "The client thumbprint details ,it is used for client access for cluster operation",
           "type": "array",
           "items": {
             "$ref": "#/definitions/ClientCertificateThumbprint"
@@ -886,7 +885,6 @@
           "description": "The provisioning state of the cluster resource",
           "type": "string",
           "enum": [
-            "Default",
             "Updating",
             "Succeeded",
             "Failed",
