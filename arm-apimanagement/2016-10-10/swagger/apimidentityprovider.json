@@ -43,16 +43,16 @@
         "description": "Lists a collection of Identity Provider configured in the specified service instance.",
         "parameters": [
           {
-            "$ref": "#/parameters/SubscriptionIdParameter"
+            "$ref": "./apimanagement.json#/parameters/SubscriptionIdParameter"
           },
           {
-            "$ref": "#/parameters/ResourceGroupNameParameter"
+            "$ref": "./apimanagement.json#/parameters/ResourceGroupNameParameter"
           },
           {
-            "$ref": "#/parameters/ServiceNameParameter"
+            "$ref": "./apimanagement.json#/parameters/ServiceNameParameter"
           },
           {
-            "$ref": "#/parameters/ApiVersionParameter"
+            "$ref": "./apimanagement.json#/parameters/ApiVersionParameter"
           }          
         ],
         "responses": {
@@ -80,19 +80,19 @@
         "description": "Gets the configuration details of the identity Provider configured in specified service instance.",
         "parameters": [
           {
-            "$ref": "#/parameters/SubscriptionIdParameter"
+            "$ref": "./apimanagement.json#/parameters/SubscriptionIdParameter"
           },
           {
-            "$ref": "#/parameters/ResourceGroupNameParameter"
+            "$ref": "./apimanagement.json#/parameters/ResourceGroupNameParameter"
           },
           {
-            "$ref": "#/parameters/ServiceNameParameter"
+            "$ref": "./apimanagement.json#/parameters/ServiceNameParameter"
           },
           {
             "$ref": "#/parameters/IdentityProviderNameParameter"
           },
           {
-            "$ref": "#/parameters/ApiVersionParameter"
+            "$ref": "./apimanagement.json#/parameters/ApiVersionParameter"
           }
         ],
         "responses": {
@@ -124,10 +124,10 @@
         "description": "Creates or Updates the IdentityProvider configuration.",
         "parameters": [
           {
-            "$ref": "#/parameters/ResourceGroupNameParameter"
+            "$ref": "./apimanagement.json#/parameters/ResourceGroupNameParameter"
           },
           {
-            "$ref": "#/parameters/ServiceNameParameter"
+            "$ref": "./apimanagement.json#/parameters/ServiceNameParameter"
           },
           {
             "$ref": "#/parameters/IdentityProviderNameParameter"
@@ -142,10 +142,10 @@
             "description": "Create parameters."
           },
           {
-            "$ref": "#/parameters/ApiVersionParameter"
+            "$ref": "./apimanagement.json#/parameters/ApiVersionParameter"
           },
           {
-            "$ref": "#/parameters/SubscriptionIdParameter"
+            "$ref": "./apimanagement.json#/parameters/SubscriptionIdParameter"
           }
         ],
         "responses": {
@@ -171,10 +171,10 @@
         "description": "Updates an existing IdentityProvider configuration.",
         "parameters": [
           {
-            "$ref": "#/parameters/ResourceGroupNameParameter"
+            "$ref": "./apimanagement.json#/parameters/ResourceGroupNameParameter"
           },
           {
-            "$ref": "#/parameters/ServiceNameParameter"
+            "$ref": "./apimanagement.json#/parameters/ServiceNameParameter"
           },
           {
             "$ref": "#/parameters/IdentityProviderNameParameter"
@@ -196,10 +196,10 @@
             "type": "string"
           },
           {
-            "$ref": "#/parameters/ApiVersionParameter"
+            "$ref": "./apimanagement.json#/parameters/ApiVersionParameter"
           },
           {
-            "$ref": "#/parameters/SubscriptionIdParameter"
+            "$ref": "./apimanagement.json#/parameters/SubscriptionIdParameter"
           }
         ],
         "responses": {
@@ -222,10 +222,10 @@
         "description": "Deletes the specified identity provider configuration.",
         "parameters": [
           {
-            "$ref": "#/parameters/ResourceGroupNameParameter"
+            "$ref": "./apimanagement.json#/parameters/ResourceGroupNameParameter"
           },
           {
-            "$ref": "#/parameters/ServiceNameParameter"
+            "$ref": "./apimanagement.json#/parameters/ServiceNameParameter"
           },
           {
             "$ref": "#/parameters/IdentityProviderNameParameter"
@@ -238,10 +238,10 @@
             "type": "string"
           },
           {
-            "$ref": "#/parameters/ApiVersionParameter"
+            "$ref": "./apimanagement.json#/parameters/ApiVersionParameter"
           },
           {
-            "$ref": "#/parameters/SubscriptionIdParameter"
+            "$ref": "./apimanagement.json#/parameters/SubscriptionIdParameter"
           }
         ],
         "responses": {
@@ -342,13 +342,6 @@
     }
   },
   "parameters": {
-		"ApiVersionParameter": {
-		  "name": "api-version",
-		  "in": "query",
-		  "required": true,
-		  "type": "string",
-		  "description": "Version of the API to be used with the client request."
-		},
 		"IdentityProviderNameParameter": {
 		  "name": "identityProviderName",
 		  "in": "path",
@@ -368,32 +361,6 @@
 		  },
 		  "description": "Identity Provider Type identifier.",
 		  "x-ms-parameter-location": "method"
-		},
-		"ResourceGroupNameParameter": {
-		  "name": "resourceGroupName",
-		  "in": "path",
-		  "required": true,
-		  "type": "string",
-		  "description": "The name of the resource group.",
-		  "x-ms-parameter-location": "method"
-		},
-		"ServiceNameParameter": {
-		  "name": "serviceName",
-		  "in": "path",
-		  "required": true,
-		  "type": "string",
-		  "description": "The name of the API Management service.",
-		  "minLength": 1,
-		  "maxLength": 50,
-		  "pattern": "^[a-zA-Z](?:[a-zA-Z0-9-]*[a-zA-Z0-9])?$",
-		  "x-ms-parameter-location": "method"
-		},
-		"SubscriptionIdParameter": {
-		  "name": "subscriptionId",
-		  "in": "path",
-		  "required": true,
-		  "type": "string",
-		  "description": "Subscription credentials which uniquely identify Microsoft Azure subscription. The subscription ID forms part of the URI for every service call."
 		}
   }
 }

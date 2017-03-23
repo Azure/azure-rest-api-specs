@@ -50,10 +50,10 @@
         },
         "parameters": [
           {
-            "$ref": "#/parameters/ResourceGroupNameParameter"
+            "$ref": "./apimanagement.json#/parameters/ResourceGroupNameParameter"
           },
           {
-            "$ref": "#/parameters/ServiceNameParameter"
+            "$ref": "./apimanagement.json#/parameters/ServiceNameParameter"
           },
           {
             "name": "$filter",
@@ -63,16 +63,16 @@
             "description": "| Field | Supported operators    | Supported functions                         |\n|-------|------------------------|---------------------------------------------|\n| id    | ge, le, eq, ne, gt, lt | substringof, contains, startswith, endswith |\n| name  | ge, le, eq, ne, gt, lt | substringof, contains, startswith, endswith |"            
           },
           {
-            "$ref": "#/parameters/TopQueryParameter"
+            "$ref": "./apimanagement.json#/parameters/TopQueryParameter"
           },
           {
-            "$ref": "#/parameters/SkipQueryParameter"
+            "$ref": "./apimanagement.json#/parameters/SkipQueryParameter"
           },
           {
-            "$ref": "#/parameters/ApiVersionParameter"
+            "$ref": "./apimanagement.json#/parameters/ApiVersionParameter"
           },
           {
-            "$ref": "#/parameters/SubscriptionIdParameter"
+            "$ref": "./apimanagement.json#/parameters/SubscriptionIdParameter"
           }
         ],
         "responses": {
@@ -98,19 +98,19 @@
         "description": "Gets the details of the authorization server specified by its identifier.",
         "parameters": [
           {
-            "$ref": "#/parameters/ResourceGroupNameParameter"
+            "$ref": "./apimanagement.json#/parameters/ResourceGroupNameParameter"
           },
           {
-            "$ref": "#/parameters/ServiceNameParameter"
+            "$ref": "./apimanagement.json#/parameters/ServiceNameParameter"
           },
           {
             "$ref": "#/parameters/AuthenticationServerIdParameter"
           },           
           {
-            "$ref": "#/parameters/ApiVersionParameter"
+            "$ref": "./apimanagement.json#/parameters/ApiVersionParameter"
           },
           {
-            "$ref": "#/parameters/SubscriptionIdParameter"
+            "$ref": "./apimanagement.json#/parameters/SubscriptionIdParameter"
           }
         ],
         "responses": {
@@ -142,10 +142,10 @@
         "description": "Creates new authorization server or updates an existing authorization server.",
         "parameters": [
           {
-            "$ref": "#/parameters/ResourceGroupNameParameter"
+            "$ref": "./apimanagement.json#/parameters/ResourceGroupNameParameter"
           },
           {
-            "$ref": "#/parameters/ServiceNameParameter"
+            "$ref": "./apimanagement.json#/parameters/ServiceNameParameter"
           },
           {
             "$ref": "#/parameters/AuthenticationServerIdParameter"
@@ -160,10 +160,10 @@
             "description": "Create or update parameters."
           },
           {
-            "$ref": "#/parameters/ApiVersionParameter"
+            "$ref": "./apimanagement.json#/parameters/ApiVersionParameter"
           },
           {
-            "$ref": "#/parameters/SubscriptionIdParameter"
+            "$ref": "./apimanagement.json#/parameters/SubscriptionIdParameter"
           }
         ],
         "responses": {
@@ -189,10 +189,10 @@
         "description": "Updates the details of the authorization server specified by its identifier.",
         "parameters": [
           {
-            "$ref": "#/parameters/ResourceGroupNameParameter"
+            "$ref": "./apimanagement.json#/parameters/ResourceGroupNameParameter"
           },
           {
-            "$ref": "#/parameters/ServiceNameParameter"
+            "$ref": "./apimanagement.json#/parameters/ServiceNameParameter"
           },
           {
             "$ref": "#/parameters/AuthenticationServerIdParameter"
@@ -214,10 +214,10 @@
             "type": "string"
           },
           {
-            "$ref": "#/parameters/ApiVersionParameter"
+            "$ref": "./apimanagement.json#/parameters/ApiVersionParameter"
           },
           {
-            "$ref": "#/parameters/SubscriptionIdParameter"
+            "$ref": "./apimanagement.json#/parameters/SubscriptionIdParameter"
           }
         ],
         "responses": {
@@ -240,10 +240,10 @@
         "description": "Deletes specific authorization server instance.",
         "parameters": [
           {
-            "$ref": "#/parameters/ResourceGroupNameParameter"
+            "$ref": "./apimanagement.json#/parameters/ResourceGroupNameParameter"
           },
           {
-            "$ref": "#/parameters/ServiceNameParameter"
+            "$ref": "./apimanagement.json#/parameters/ServiceNameParameter"
           },
           {
             "$ref": "#/parameters/AuthenticationServerIdParameter"
@@ -256,10 +256,10 @@
             "type": "string"
           },
           {
-            "$ref": "#/parameters/ApiVersionParameter"
+            "$ref": "./apimanagement.json#/parameters/ApiVersionParameter"
           },
           {
-            "$ref": "#/parameters/SubscriptionIdParameter"
+            "$ref": "./apimanagement.json#/parameters/SubscriptionIdParameter"
           }
         ],
         "responses": {
@@ -611,13 +611,6 @@
 		}
   },
   "parameters": {
-    "ApiVersionParameter": {
-      "name": "api-version",
-      "in": "query",
-      "required": true,
-      "type": "string",
-      "description": "Version of the API to be used with the client request."
-    },
     "AuthenticationServerIdParameter": {
       "name": "authsid",
       "in": "path",
@@ -626,52 +619,6 @@
       "description": "Identifier of the authorization server.",
       "maxLength": 256,
       "pattern": "^[^*#&+:<>?]+$",
-      "x-ms-parameter-location": "method"
-    },
-    "ResourceGroupNameParameter": {
-      "name": "resourceGroupName",
-      "in": "path",
-      "required": true,
-      "type": "string",
-      "description": "The name of the resource group.",
-      "x-ms-parameter-location": "method"
-    },
-    "ServiceNameParameter": {
-      "name": "serviceName",
-      "in": "path",
-      "required": true,
-      "type": "string",
-      "description": "The name of the API Management service.",
-      "minLength": 1,
-      "maxLength": 50,
-      "pattern": "^[a-zA-Z](?:[a-zA-Z0-9-]*[a-zA-Z0-9])?$",
-      "x-ms-parameter-location": "method"
-    },
-    "SkipQueryParameter": {
-      "name": "$skip",
-      "in": "query",
-      "required": false,
-      "type": "integer",
-      "format": "int32",
-      "description": "Number of records to skip.",
-      "minimum": 0,
-      "x-ms-parameter-location": "method"
-    },
-    "SubscriptionIdParameter": {
-      "name": "subscriptionId",
-      "in": "path",
-      "required": true,
-      "type": "string",
-      "description": "Subscription credentials which uniquely identify Microsoft Azure subscription. The subscription ID forms part of the URI for every service call."
-    },
-    "TopQueryParameter": {
-      "name": "$top",
-      "in": "query",
-      "required": false,
-      "type": "integer",
-      "format": "int32",
-      "description": "Number of records to return.",
-      "minimum": 1,
       "x-ms-parameter-location": "method"
     }
   }

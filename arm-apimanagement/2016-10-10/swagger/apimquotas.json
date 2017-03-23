@@ -51,19 +51,19 @@
         },
         "parameters": [
           {
-            "$ref": "#/parameters/SubscriptionIdParameter"
+            "$ref": "./apimanagement.json#/parameters/SubscriptionIdParameter"
           },
           {
-            "$ref": "#/parameters/ResourceGroupNameParameter"
+            "$ref": "./apimanagement.json#/parameters/ResourceGroupNameParameter"
           },
           {
-            "$ref": "#/parameters/ServiceNameParameter"
+            "$ref": "./apimanagement.json#/parameters/ServiceNameParameter"
           },
           {
             "$ref": "#/parameters/QuotaCounterKeyParameter"
           },
           {
-            "$ref": "#/parameters/ApiVersionParameter"
+            "$ref": "./apimanagement.json#/parameters/ApiVersionParameter"
           }
         ],
         "responses": {
@@ -89,10 +89,10 @@
         "description": "Updates all the quota counter values specified with the existing quota counter key to a value in the specified service instance. This should be used for reset of the quota counter values.",
         "parameters": [
           {
-            "$ref": "#/parameters/ResourceGroupNameParameter"
+            "$ref": "./apimanagement.json#/parameters/ResourceGroupNameParameter"
           },
           {
-            "$ref": "#/parameters/ServiceNameParameter"
+            "$ref": "./apimanagement.json#/parameters/ServiceNameParameter"
           },
           {
             "$ref": "#/parameters/QuotaCounterKeyParameter"
@@ -107,10 +107,10 @@
             "description": "The value of the quota counter to be applied to all quota counter periods."
           },
           {
-            "$ref": "#/parameters/ApiVersionParameter"
+            "$ref": "./apimanagement.json#/parameters/ApiVersionParameter"
           },
           {
-            "$ref": "#/parameters/SubscriptionIdParameter"
+            "$ref": "./apimanagement.json#/parameters/SubscriptionIdParameter"
           }
         ],
         "responses": {
@@ -139,13 +139,13 @@
         },
         "parameters": [
           {
-            "$ref": "#/parameters/SubscriptionIdParameter"
+            "$ref": "./apimanagement.json#/parameters/SubscriptionIdParameter"
           },
           {
-            "$ref": "#/parameters/ResourceGroupNameParameter"
+            "$ref": "./apimanagement.json#/parameters/ResourceGroupNameParameter"
           },
           {
-            "$ref": "#/parameters/ServiceNameParameter"
+            "$ref": "./apimanagement.json#/parameters/ServiceNameParameter"
           },
           {
             "$ref": "#/parameters/QuotaCounterKeyParameter"
@@ -154,7 +154,7 @@
             "$ref": "#/parameters/QuotaPeriodKeyParameter"
           },
           {
-            "$ref": "#/parameters/ApiVersionParameter"
+            "$ref": "./apimanagement.json#/parameters/ApiVersionParameter"
           }
         ],
         "responses": {
@@ -180,10 +180,10 @@
         "description": "Updates an existing quota counter value in the specified service instance.",
         "parameters": [
           {
-            "$ref": "#/parameters/ResourceGroupNameParameter"
+            "$ref": "./apimanagement.json#/parameters/ResourceGroupNameParameter"
           },
           {
-            "$ref": "#/parameters/ServiceNameParameter"
+            "$ref": "./apimanagement.json#/parameters/ServiceNameParameter"
           },
           {
             "$ref": "#/parameters/QuotaCounterKeyParameter"
@@ -201,10 +201,10 @@
             "description": "The value of the Quota counter to be applied on the specified period."
           },          
           {
-            "$ref": "#/parameters/ApiVersionParameter"
+            "$ref": "./apimanagement.json#/parameters/ApiVersionParameter"
           },
           {
-            "$ref": "#/parameters/SubscriptionIdParameter"
+            "$ref": "./apimanagement.json#/parameters/SubscriptionIdParameter"
           }
         ],
         "responses": {
@@ -296,13 +296,6 @@
 		}
   },
   "parameters": {
-		"ApiVersionParameter": {
-		  "name": "api-version",
-		  "in": "query",
-		  "required": true,
-		  "type": "string",
-		  "description": "Version of the API to be used with the client request."
-		},
 		"QuotaCounterKeyParameter": {
 		  "name": "quotaCounterKey",
 		  "in": "path",
@@ -318,32 +311,6 @@
 		  "type": "string",
 		  "description": "Quota period key identifier.",
 		  "x-ms-parameter-location": "method"
-		},
-		"ResourceGroupNameParameter": {
-		  "name": "resourceGroupName",
-		  "in": "path",
-		  "required": true,
-		  "type": "string",
-		  "description": "The name of the resource group.",
-		  "x-ms-parameter-location": "method"
-		},
-		"ServiceNameParameter": {
-		  "name": "serviceName",
-		  "in": "path",
-		  "required": true,
-		  "type": "string",
-		  "description": "The name of the API Management service.",
-		  "minLength": 1,
-		  "maxLength": 50,
-		  "pattern": "^[a-zA-Z](?:[a-zA-Z0-9-]*[a-zA-Z0-9])?$",
-		  "x-ms-parameter-location": "method"
-		},
-		"SubscriptionIdParameter": {
-		  "name": "subscriptionId",
-		  "in": "path",
-		  "required": true,
-		  "type": "string",
-		  "description": "Subscription credentials which uniquely identify Microsoft Azure subscription. The subscription ID forms part of the URI for every service call."
 		}
   }
 }
