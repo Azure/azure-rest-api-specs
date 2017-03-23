@@ -128,7 +128,7 @@
           "200": {
             "description": "Namespaces returned successfully",
             "schema": {
-              "$ref": "#/definitions/NamespaceListResult"
+              "$ref": "#/definitions/RelayNamespaceListResult"
             }
           },
           "default": {
@@ -168,7 +168,7 @@
           "200": {
             "description": "Namespaces by resourcegroup returned successfully",
             "schema": {
-              "$ref": "#/definitions/NamespaceListResult"
+              "$ref": "#/definitions/RelayNamespaceListResult"
             }
           },
           "default": {
@@ -188,11 +188,15 @@
         "tags": [
           "Namespaces"
         ],
-        "operationId": "Namespaces_ListBySubscription",
+
+        "operationId": "Namespaces_CreateOrUpdate",
         "x-ms-examples": {
-          "RelayNameSpaceListBySubscription": { "$ref": "../examples/NameSpaces/RelayNameSpaceListBySubscription.json" }
+
+          "RelayNamespaceCreate": { "$ref": "../examples/NameSpaces/RelayNameSpaceCreate.json" }
         },
-        "description": "Lists all the available namespaces within the subscription irrespective of the resourceGroups.",
+
+        "description": "Create Azure Relay namespace.",
+
         "parameters": [
           {
             "$ref": "#/parameters/resourceGroupNameParameter"
@@ -205,7 +209,7 @@
             "in": "body",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/Namespace"
+              "$ref": "#/definitions/RelayNamespace"
             },
             "description": "Parameters supplied to create a Namespace Resource."
           },
@@ -220,7 +224,7 @@
           "200": {
             "description": "Namespace create request succeeded",
             "schema": {
-              "$ref": "#/definitions/Namespace"
+              "$ref": "#/definitions/RelayNamespace"
             }
           },
           "202": {
@@ -233,21 +237,18 @@
             }
           }
         },
-        "x-ms-pageable": {
-          "nextLinkName": "nextLink"
-        }
-      }
-    },
-	"/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Relay/namespaces": {
-      "get": {
+        "x-ms-long-running-operation": true
+      },
+      "delete": {
         "tags": [
           "Namespaces"
         ],
-        "operationId": "Namespaces_ListByResourceGroup",
+        "operationId": "Namespaces_Delete",
         "x-ms-examples": {
-          "RelayNameSpaceListByResourceGroup": { "$ref": "../examples/NameSpaces/RelayNameSpaceListByResourceGroup.json" }
+          "RelayNameSpaceDelete": { "$ref": "../examples/NameSpaces/RelayNameSpaceDelete.json" }
         },
-        "description": "Lists all the available namespaces within the ResourceGroup.",
+
+        "description": "Deletes an existing namespace. This operation also removes all associated resources under the namespace.",
         "parameters": [
           {
             "$ref": "#/parameters/resourceGroupNameParameter"
@@ -264,10 +265,13 @@
         ],
         "responses": {
           "200": {
-            "description": "Namespaces by resourcegroup returned successfully",
-            "schema": {
-              "$ref": "#/definitions/NamespaceListResult"
-            }
+            "description": "Namespace delete Request succeeded"
+          },
+          "202": {
+            "description": "Namespace delete request has been accepted for processing and the operation will complete asynchronously."
+          },
+          "204": {
+            "description": "Namespace delete request has been accepted, but the Namespace not found"
           },
           "default": {
             "description": "Relay error response describing why the operation failed.",
@@ -276,29 +280,25 @@
             }
           }
         },
-        "x-ms-pageable": {
-          "nextLinkName": "nextLink"
-        }
-      }
-    },
-	"/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Relay/namespaces/{namespaceName}": {
-      "put": {
+        "x-ms-long-running-operation": true
+      },
+      "get": {
         "tags": [
           "Namespaces"
         ],
-        "operationId": "Namespaces_CreateOrUpdate",
-        "x-ms-examples": {
-          "RelayNamespaceCreate": { "$ref": "../examples/NameSpaces/RelayNameSpaceCreate.json" }
-        },
-        "description": "Create Azure Relay namespace.",
 
+        "operationId": "Namespaces_Get",
+        "x-ms-examples": {
+
+          "RelayNameSpaceGet": { "$ref": "../examples/NameSpaces/RelayNameSpaceGet.json" }
+        },
+
+        "description": "Returns the description for the specified namespace.",
         "parameters": [
           {
             "$ref": "#/parameters/resourceGroupNameParameter"
           },
-		  {
-            "$ref": "#/parameters/namespaceNameParameter"
-          },          
+
           {
             "$ref": "#/parameters/namespaceNameParameter"
           },
@@ -311,15 +311,9 @@
         ],
         "responses": {
           "200": {
-            "description": "Namespace create request succeeded",
+            "description": "Namespace returned successfully",
             "schema": {
-              "$ref": "#/definitions/Namespace"
-            }
-          },
-          "201": {
-            "description": "Namespace create request accepted",
-            "schema": {
-              "$ref": "#/definitions/Namespace"
+              "$ref": "#/definitions/RelayNamespace"
             }
           },
           "default": {
@@ -363,7 +357,7 @@
           "200": {
             "description": "Namespace successfuly updated.",
             "schema": {
-              "$ref": "#/definitions/Namespace"
+              "$ref": "#/definitions/RelayNamespace"
             }
           }
         }
@@ -638,49 +632,6 @@
               "$ref": "#/definitions/ErrorResponse"
             }
           }
-        }
-      }
-    },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Relay/namespaces/{namespaceName}/HybridConnections": {
-      "get": {
-        "tags": [
-          "HybridConnections"
-        ],
-        "operationId": "HybridConnections_ListByNamespace",
-        "x-ms-examples": {
-          "RelayHybridConnectionListAll": { "$ref": "../examples/HybridConnection/RelayHybridConnectionListAll.json" }
-        },
-        "description": "Lists the HybridConnection within the namespace.",
-        "parameters": [
-          {
-            "$ref": "#/parameters/resourceGroupNameParameter"
-          },
-          {
-            "$ref": "#/parameters/namespaceNameParameter"
-          },
-          {
-            "$ref": "#/parameters/ApiVersionParameter"
-          },
-          {
-            "$ref": "#/parameters/SubscriptionIdParameter"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Request to retrieve HybridConnections by NameSpace succeeded",
-            "schema": {
-              "$ref": "#/definitions/HybridConnectionListResult"
-            }
-          },
-          "default": {
-            "description": "Relay error response describing why the operation failed.",
-            "schema": {
-              "$ref": "#/definitions/ErrorResponse"
-            }
-          }
-        },
-        "x-ms-pageable": {
-          "nextLinkName": "nextLink"
         }
       }
     },
@@ -1148,49 +1099,6 @@
               "$ref": "#/definitions/ErrorResponse"
             }
           }
-        }
-      }
-    },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Relay/namespaces/{namespaceName}/WcfRelays": {
-      "get": {
-        "tags": [
-          "WCFRelays"
-        ],
-        "operationId": "WCFRelays_ListByNamespace",
-        "x-ms-examples": {
-          "RelayListAll": { "$ref": "../examples/Relay/RelayListAll.json" }
-        },
-        "description": "Lists the WCFRelays within the namespace.",
-        "parameters": [
-          {
-            "$ref": "#/parameters/resourceGroupNameParameter"
-          },
-          {
-            "$ref": "#/parameters/namespaceNameParameter"
-          },
-          {
-            "$ref": "#/parameters/ApiVersionParameter"
-          },
-          {
-            "$ref": "#/parameters/SubscriptionIdParameter"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "WCF Relays returned successfully",
-            "schema": {
-              "$ref": "#/definitions/WcfRelaysListResult"
-            }
-          },
-          "default": {
-            "description": "Relay error response describing why the operation failed.",
-            "schema": {
-              "$ref": "#/definitions/ErrorResponse"
-            }
-          }
-        },
-        "x-ms-pageable": {
-          "nextLinkName": "nextLink"
         }
       }
     },
@@ -1714,27 +1622,6 @@
       "description": "The Resource definition",
       "x-ms-azure-resource": true
     },
-    "Resource": {
-      "properties": {
-        "id": {
-          "readOnly": true,
-          "type": "string",
-          "description": "Resource Id"
-        },
-        "name": {
-          "readOnly": true,
-          "type": "string",
-          "description": "Resource name"
-        },
-        "type": {
-          "readOnly": true,
-          "type": "string",
-          "description": "Resource type"
-        }
-      },
-      "description": "The Resource definition",
-      "x-ms-azure-resource": true
-    },
     "HybridConnectionListResult": {
       "properties": {
         "value": {
@@ -1884,12 +1771,12 @@
       },
       "description": "Properties of the WcfRelay Properties."
     },
-    "NamespaceListResult": {
+    "RelayNamespaceListResult": {
       "properties": {
         "value": {
           "type": "array",
           "items": {
-            "$ref": "#/definitions/Namespace"
+            "$ref": "#/definitions/RelayNamespace"
           },
           "description": "Result of the List Namespace operation."
         },
@@ -1900,14 +1787,14 @@
       },
       "description": "The response of the List Namespace operation."
     },
-    "Namespace": {
+    "RelayNamespace": {
       "properties": {
         "sku": {
           "$ref": "#/definitions/Sku"
         },
         "properties": {
           "x-ms-client-flatten": true,
-          "$ref": "#/definitions/NamespaceProperties"
+          "$ref": "#/definitions/RelayNamespaceProperties"
         }
       },
       "allOf": [
@@ -1917,7 +1804,7 @@
       ],
       "description": "Description of a Namespace resource."
     },
-    "NamespaceProperties": {
+    "RelayNamespaceProperties": {
       "properties": {
         "provisioningState": {
           "type": "string",
