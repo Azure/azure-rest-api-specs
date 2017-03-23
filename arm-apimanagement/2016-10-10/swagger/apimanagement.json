@@ -118,7 +118,44 @@
       }
     }
   },
-  "definitions": {
+  "definitions": {    
+    "ErrorFieldContract": {
+      "properties": {
+        "code": {
+          "type": "string",
+          "description": "Property level error code."
+        },
+        "message": {
+          "type": "string",
+          "description": "Human-readable representation of property-level error."
+        },
+        "target": {
+          "type": "string",
+          "description": "Property name."
+        }
+      },
+      "description": "Error Field contract."
+    },
+    "ErrorBodyContract": {
+      "properties": {
+        "code": {
+          "type": "string",
+          "description": "Service-defined error code. This code serves as a sub-status for the HTTP error code specified in the response."
+        },
+        "message": {
+          "type": "string",
+          "description": "Human-readable representation of the error."
+        },
+        "details": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ErrorFieldContract"
+          },
+          "description": "The list of invalid fields send in request, in case of validation error."
+        }
+      },
+      "description": "Error Body contract."
+    },
     "PolicySnippetsCollection": {
       "properties": {
         "value": {
