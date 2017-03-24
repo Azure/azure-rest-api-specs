@@ -452,7 +452,14 @@
           "description": "The local certificate store location",
           "type": "string",
           "enum": [
-            "My"
+            "AddressBook",
+            "AuthRoot",
+            "CertificateAuthority",
+            "Disallowed",
+            "My",
+            "Root",
+            "TrustedPeople",
+            "TrustedPublisher"
           ]
         }
       },
@@ -654,8 +661,10 @@
       "description": "Cluster health policy",
       "properties": {
         "maxPercentUnhealthyServices": {
-          "description": "Max percent of unhealthy services",
-          "type": "integer"
+          "description": "Maximum percentage of unhealthy services in cluster",
+          "type": "integer",
+          "maximum": 100,
+          "minimum": 0
         }
       }
     },
@@ -680,12 +689,16 @@
       "description": "Default cluster upgrade health policy",
       "properties": {
         "maxPercentUnhealthyNodes": {
-          "description": "Max percent of unhealthy nodes",
-          "type": "integer"
+          "description": "Maximum percentage of unhealthy nodes in cluster",
+          "type": "integer",
+          "maximum": 100,
+          "minimum": 0
         },
         "maxPercentUnhealthyApplications": {
-          "description": "Max percent of unhealthy applications",
-          "type": "integer"
+          "description": "Maximum percentage of unhealthy application in cluster",
+          "type": "integer",
+          "maximum": 100,
+          "minimum": 0
         },
         "applicationHealthPolicies": {
           "description": "Application health policy",
@@ -701,8 +714,10 @@
       "description": "Service health policy",
       "properties": {
         "maxPercentDeltaUnhealthyServices": {
-          "description": "Max percent of additional unhealthy services",
-          "type": "integer"
+          "description": "Maximum percentage of unhealthy services in cluster",
+          "type": "integer",
+          "maximum": 100,
+          "minimum": 0
         }
       }
     },
@@ -728,15 +743,21 @@
       "properties": {
         "maxPercentDeltaUnhealthyNodes": {
           "description": "Additional unhealthy nodes percentage",
-          "type": "integer"
+          "type": "integer",
+          "maximum": 100,
+          "minimum": 0
         },
         "maxPercentUpgradeDomainDeltaUnhealthyNodes": {
           "description": "Additional unhealthy nodes percentage per upgrade domain ",
-          "type": "integer"
+          "type": "integer",
+          "maximum": 100,
+          "minimum": 0
         },
         "maxPercentDeltaUnhealthyApplications": {
           "description": "Additional unhealthy applications percentage",
-          "type": "integer"
+          "type": "integer",
+          "maximum": 100,
+          "minimum": 0
         },
         "applicationHealthPolicies": {
           "description": "Application health policy",
@@ -760,27 +781,27 @@
           "type": "boolean"
         },
         "upgradeReplicaSetCheckTimeout": {
-          "description": "Timeout for replica set upgrade to complete",
+          "description": "Timeout for replica set upgrade to complete,it represents .Net TimeSpan",
           "type": "string"
         },
         "healthCheckWaitDuration": {
-          "description": "The length of time to wait after completing an upgrade domain before performing health checks.",
+          "description": "The length of time to wait after completing an upgrade domain before performing health checks, it represents .Net TimeSpan",
           "type": "string"
         },
         "healthCheckStableDuration": {
-          "description": "The length of time that health checks must pass continuously. It is .net TimeSpan",
+          "description": "The length of time that health checks must pass continuously,it represents .Net TimeSpan",
           "type": "string"
         },
         "healthCheckRetryTimeout": {
-          "description": "The length of time that health checks can fail continuously",
+          "description": "The length of time that health checks can fail continuously,it represents .Net TimeSpan",
           "type": "string"
         },
         "upgradeTimeout": {
-          "description": "The upgrade timeout.",
+          "description": "The upgrade timeout,it represents .Net TimeSpan",
           "type": "string"
         },
         "upgradeDomainTimeout": {
-          "description": "The timeout for any upgrade domain.",
+          "description": "The timeout for any upgrade domain,it represents .Net TimeSpan",
           "type": "string"
         },
         "healthPolicy": {
