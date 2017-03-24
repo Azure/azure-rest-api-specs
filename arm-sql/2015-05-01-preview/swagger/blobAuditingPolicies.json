@@ -21,8 +21,8 @@
         "tags": [
           "DatabaseBlobAuditingPolicies"
         ],
-        "description": "Gets a blob auditing policy associated with a database.",
-        "operationId": "DatabaseBlobAuditingPolicies_Get",
+        "description": "Gets a database's blob auditing policy.",
+        "operationId": "Databases_GetBlobAuditingPolicy",
         "x-ms-examples": {
           "Get database blob auditing policy": { "$ref": "../examples/DatabaseBlobAuditingGet.json" }
         },
@@ -63,8 +63,8 @@
         "tags": [
           "DatabaseBlobAuditingPolicies"
         ],
-        "description": "Creates or updates a blob auditing policy for a database.",
-        "operationId": "DatabaseBlobAuditingPolicies_CreateOrUpdate",
+        "description": "Creates or updates a database's blob auditing policy.",
+        "operationId": "Databases_CreateOrUpdateBlobAuditingPolicy",
         "x-ms-examples": {
           "Create database blob auditing policy min": { "$ref": "../examples/DatabaseBlobAuditingCreateMin.json" },
           "Create database blob auditing policy max": { "$ref": "../examples/DatabaseBlobAuditingCreateMax.json" }
@@ -87,13 +87,13 @@
             "type": "string"
           },
           {
-            "name": "databaseBlobAuditingPolicy",
+            "name": "parameters",
             "in": "body",
             "required": true,
             "schema": {
               "$ref": "#/definitions/DatabaseBlobAuditingPolicy"
             },
-            "description": "The name of the database blob auditing policy."
+            "description": "The database blob auditing policy."
           },
           {
             "$ref": "#/parameters/ApiVersionParameter"
@@ -120,33 +120,65 @@
     }
   },
   "definitions": {
-    "SqlSubResource": {
-      "description": "Subresource properties",
-      "properties": {
-        "name": {
-          "readOnly": true,
-          "type": "string",
-          "description": "Resource name"
+"Resource":{
+      "description":"ARM resource.",
+      "properties":{  
+        "id":{  
+          "readOnly":true,
+          "type":"string",
+          "description":"Resource ID."
         },
-        "id": {
-          "readOnly": true,
-          "type": "string",
-          "description": "The resource ID."
-        }
-      }
-    },
-    "SqlTypedSubResource": {
-      "description": "Subresource properties",
-      "properties": {
-        "type": {
-          "readOnly": true,
-          "type": "string",
-          "description": "Resource type"
+        "name":{  
+          "readOnly":true,
+          "type":"string",
+          "description":"Resource name."
+        },
+        "type":{  
+          "readOnly":true,
+          "type":"string",
+          "description":"Resource type."
         }
       },
-      "allOf": [
-        {
-          "$ref": "#/definitions/SqlSubResource"
+      "x-ms-azure-resource": true
+    },
+    "TrackedResource":{  
+      "description":"ARM tracked top level resource.",
+      "properties":{  
+        "tags":{  
+          "type":"object",
+          "additionalProperties":{  
+            "type":"string"
+          },
+          "x-ms-mutability":[  
+            "read",
+            "create",
+            "update"
+          ],
+          "description":"Resource tags."
+        },
+        "location":{  
+          "type":"string",
+          "x-ms-mutability":[  
+            "read",
+            "create"
+          ],
+          "description":"Resource location."
+        }
+      },
+      "required":[  
+        "location"
+      ],
+      "allOf":[  
+        {  
+          "$ref":"#/definitions/Resource"
+        }
+      ]
+    },
+    "ProxyResource":{  
+      "description":"ARM proxy resource.",
+      "allOf":[  
+        {  
+          "$ref":"#/definitions/Resource"
         }
       ]
     },
@@ -154,13 +186,26 @@
       "description": "Contains information about a database Blob Auditing policy.",
       "type": "object",
       "properties": {
+        "location":{  
+          "type":"string",
+          "x-ms-mutability":[  
+            "read",
+            "create"
+          ],
+          "description":"The geo-location where the resource lives"
+        },
+        "kind": {
+          "readOnly": true,
+          "type": "string",
+          "description": "Resource kind."
+        },
         "properties": {
           "$ref": "#/definitions/DatabaseBlobAuditingPolicyProperties",
           "x-ms-client-flatten": true
         }
       },
       "allOf": [
-        { "$ref": "#/definitions/SqlTypedSubResource" }
+        { "$ref": "#/definitions/ProxyResource" }
       ]
     },
     "DatabaseBlobAuditingPolicyProperties": {
@@ -184,7 +229,10 @@
         },
         "storageAccountAccessKey": {
           "description": "Specifies the identifier key of the auditing storage account. If state is Enabled, storageAccountAccessKey is required.",
-          "type": "string"
+          "type": "string",
+          "x-ms-mutability": [
+            "create", "update"
+          ]
         },
         "retentionDays": {
           "format": "int32",

@@ -21,8 +21,8 @@
         "tags": [
           "SecurityAlert"
         ],
-        "description": "Gets a Threat Detection policy associated with a database.",
-        "operationId": "DatabaseThreatDetectionPolicies_Get",
+        "description": "Gets a database's threat detection policy.",
+        "operationId": "Databases_GetThreatDetectionPolicy",
         "x-ms-examples": {
           "Get database security alert policy": { "$ref": "../examples/DatabaseSecurityAlertGet.json" }
         },
@@ -63,8 +63,8 @@
         "tags": [
           "SecurityAlert"
         ],
-        "description": "Creates or updates a Threat Detection policy for a database.",
-        "operationId": "DatabaseThreatDetectionPolicies_CreateOrUpdate",
+        "description": "Creates or updates a database's threat detection policy.",
+        "operationId": "Databases_CreateOrUpdateThreatDetectionPolicy",
         "x-ms-examples": {
           "Create database security alert policy min": { "$ref": "../examples/DatabaseSecurityAlertCreateMin.json" },
           "Create database security alert policy max": { "$ref": "../examples/DatabaseSecurityAlertCreateMax.json" }
@@ -87,7 +87,7 @@
             "type": "string"
           },
           {
-            "name": "databaseSecurityAlertPolicy",
+            "name": "parameters",
             "in": "body",
             "description": "The database Threat Detection policy.",
             "required": true,
@@ -120,68 +120,65 @@
     }
   },
   "definitions": {
-    "Resource": {
-      "description": "Resource properties",
-      "properties": {
-        "name": {
-          "readOnly": true,
-          "type": "string",
-          "description": "Resource name"
+    "Resource":{
+      "description":"ARM resource.",
+      "properties":{  
+        "id":{  
+          "readOnly":true,
+          "type":"string",
+          "description":"Resource ID."
         },
-        "id": {
-          "readOnly": true,
-          "type": "string",
-          "description": "Resource ID"
+        "name":{  
+          "readOnly":true,
+          "type":"string",
+          "description":"Resource name."
         },
-        "type": {
-          "readOnly": true,
-          "type": "string",
-          "description": "Resource type"
-        },
-        "location": {
-          "type": "string",
-          "description": "Resource location"
-        },
-        "tags": {
-          "type": "object",
-          "additionalProperties": {
-            "type": "string"
-          },
-          "description": "Resource tags"
+        "type":{  
+          "readOnly":true,
+          "type":"string",
+          "description":"Resource type."
         }
       },
-      "required": [
-        "location"
-      ],
       "x-ms-azure-resource": true
     },
-    "SqlSubResource": {
-      "description": "Subresource properties",
-      "properties": {
-        "name": {
-          "readOnly": true,
-          "type": "string",
-          "description": "Resource name"
+    "TrackedResource":{  
+      "description":"ARM tracked top level resource.",
+      "properties":{  
+        "tags":{  
+          "type":"object",
+          "additionalProperties":{  
+            "type":"string"
+          },
+          "x-ms-mutability":[  
+            "read",
+            "create",
+            "update"
+          ],
+          "description":"Resource tags."
         },
-        "id": {
-          "readOnly": true,
-          "type": "string",
-          "description": "The resource ID."
-        }
-      }
-    },
-    "SqlTypedSubResource": {
-      "description": "Subresource properties",
-      "properties": {
-        "type": {
-          "readOnly": true,
-          "type": "string",
-          "description": "Resource type"
+        "location":{  
+          "type":"string",
+          "x-ms-mutability":[  
+            "read",
+            "create"
+          ],
+          "description":"Resource location."
         }
       },
-      "allOf": [
-        {
-          "$ref": "#/definitions/SqlSubResource"
+      "required":[  
+        "location"
+      ],
+      "allOf":[  
+        {  
+          "$ref":"#/definitions/Resource"
+        }
+      ]
+    },
+    "ProxyResource":{  
+      "description":"ARM proxy resource.",
+      "allOf":[  
+        {  
+          "$ref":"#/definitions/Resource"
         }
       ]
     },
@@ -189,6 +186,19 @@
       "description": "Contains information about a database Threat Detection policy.",
       "type": "object",
       "properties": {
+        "location":{  
+          "type":"string",
+          "x-ms-mutability":[  
+            "read",
+            "create"
+          ],
+          "description":"The geo-location where the resource lives"
+        },
+        "kind": {
+          "readOnly": true,
+          "type": "string",
+          "description": "Resource kind."
+        },
         "properties": {
           "$ref": "#/definitions/DatabaseSecurityAlertPolicyProperties",
           "x-ms-client-flatten": true
@@ -196,7 +206,7 @@
       },
       "allOf": [
         {
-          "$ref": "#/definitions/SqlTypedSubResource"
+          "$ref": "#/definitions/ProxyResource"
         }
       ]
     },
@@ -217,19 +227,8 @@
           }
         },
         "disabledAlerts": {
-          "description": "Specifies the comma-separated list of alerts that are disabled, or empty string to disable no alerts.",
-          "type": "string",
-          "enum": [
-            "Sql_Injection",
-            "Sql_Injection_Vulnerability",
-            "Access_Anomaly",
-            "Usage_Anomaly",
-            "Preview"
-          ],
-          "x-ms-enum": {
-            "name": "SecurityAlert",
-            "modelAsString": true
-          }
+          "description": "Specifies the semicolon-separated list of alerts that are disabled, or empty string to disable no alerts. Possible values: Sql_Injection; Sql_Injection_Vulnerability; Access_Anomaly; Usage_Anomaly.",
+          "type": "string"
         },
         "emailAddresses": {
           "description": "Specifies the semicolon-separated list of e-mail addresses to which the alert is sent.",
@@ -252,7 +251,10 @@
         },
         "storageAccountAccessKey": {
           "description": "Specifies the identifier key of the Threat Detection audit storage account. If state is Enabled, storageAccountAccessKey is required.",
-          "type": "string"
+          "type": "string",
+          "x-ms-mutability": [
+            "create", "update"
+          ]
         },
         "retentionDays": {
           "format": "int32",

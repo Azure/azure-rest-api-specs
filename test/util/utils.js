@@ -114,6 +114,15 @@ exports.getFilesChangedInPR = function getFilesChangedInPR() {
         return (item.match(/.*\/swagger\/*/ig) !== null);
       });
       console.log(`>>>> Number of swaggers found in this PR: ${swaggerFilesInPR.length}`);
+      
+      var deletedFiles = swaggerFilesInPR.filter(function(swaggerFile){
+        return !fs.existsSync(swaggerFile);
+      });
+      console.log('>>>>> Files deleted in this PR are as follows:')
+      console.log(deletedFiles);
+      // Remove files that have been deleted in the PR
+      swaggerFilesInPR = swaggerFilesInPR.filter(function(x) { return deletedFiles.indexOf(x) < 0 });
+
       result = swaggerFilesInPR;
     } catch (err) {
       throw err;
