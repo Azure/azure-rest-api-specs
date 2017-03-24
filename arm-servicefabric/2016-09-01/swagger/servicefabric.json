@@ -591,7 +591,7 @@
       "properties": {
         "isAdmin": {
           "type": "boolean",
-          "description": "Is this certificate used for admin access from the client, if false , it is used or query only access"
+          "description": "Is this certificate used for admin access from the client, if false, it is used or query only access"
         },
         "certificateThumbprint": {
           "description": "Certificate thumbprint",
@@ -641,7 +641,7 @@
           "type": "string"
         },
         "supportExpiryUtc": {
-          "description": "The date of expiry of the above version",
+          "description": "The expiration date of the above version",
           "type": "string"
         },
         "environment": {
@@ -768,7 +768,7 @@
           "type": "string"
         },
         "healthCheckStableDuration": {
-          "description": "The length of time that health checks must pass continuously.",
+          "description": "The length of time that health checks must pass continuously. It is .net TimeSpan",
           "type": "string"
         },
         "healthCheckRetryTimeout": {
@@ -788,7 +788,7 @@
           "$ref": "#/definitions/ClusterUpgradeHealthPolicy"
         },
         "deltaHealthPolicy": {
-          "description": "Delta  health policy",
+          "description": "Delta health policy",
           "$ref": "#/definitions/ClusterUpgradeDeltaHealthPolicy"
         }
       }
@@ -851,11 +851,11 @@
           ]
         },
         "clusterCodeVersion": {
-          "description": "The ServiceFabric code version, if set it, please make sure you have set upgradeMode to Manual, otherwise ,it will fail, if you are using PUT new cluster,  you can get the version by using ClusterVersions_List , if you are updating existing cluster, you can get the availableClusterVersions from ClusterGetOperation,  ",
+          "description": "The ServiceFabric code version, if set it, please make sure you have set upgradeMode to Manual, otherwise ,it will fail, if you are using PUT new cluster, you can get the version by using ClusterVersions_List, if you are updating existing cluster, you can get the availableClusterVersions from Clusters_Get",
           "type": "string"
         },
         "certificate": {
-          "description": "The cluster certificate settings, the new certificate should exist in VMSS or Azure key vault,before you add it. It will override original value",
+          "description": "The cluster certificate settings, the new certificate should exist in virtual machine scale sets or Azure key vault,before you add it. It will override original value",
           "$ref": "#/definitions/CertificateDescription"
         },
         "clientCertificateThumbprints": {
@@ -905,7 +905,7 @@
         },
         "clusterId": {
           "readOnly": true,
-          "description": "The cluster id the resource identifier for the cluster resource",
+          "description": "The unique identifier for the cluster resource",
           "type": "string"
         },
         "clusterState": {
