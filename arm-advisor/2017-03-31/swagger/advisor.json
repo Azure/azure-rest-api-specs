@@ -33,7 +33,7 @@
 				],
 				"responses": {
 					"202": {
-						"description": "Accepted.",
+						"description": "Accepted. Recommendation generation has been accepted.",
 						"headers": {
 							"Location": {
 								"description": "The URL where the status of the asynchronous operation can be checked.",
@@ -60,7 +60,7 @@
 					"GenerateRecommendations"
 				],
 				"description": "Retrieves the status of the recommendation computation or generation process. Invoke this API after calling the generation recommendation. The URI of this API is returned in the Location field of the response header.",
-				"operationId": "Recommendations_GetGenerateRecommendationsStatus",
+				"operationId": "Recommendations_GetGenerateStatus",
 				"parameters": [
 					{
 						"$ref": "#/parameters/subscriptionIdParameter"
@@ -79,18 +79,13 @@
 				],
 				"responses": {
 					"202": {
-						"description": "Recommendation generation is in progress."
+						"description": "Accepted. Recommendation generation is in progress."
 					},
 					"204": {
-						"description": "Recommendation generation has been completed."
+						"description": "NoContent. Recommendation generation has been completed."
 					}
 				},
-				"deprecated": false,
-				"x-ms-examples": {
-					"PollGenerateRecommendationsStatus": {
-						"$ref": "../examples/PollGenerateRecommendationsStatus.json"
-					}
-				}
+				"deprecated": false
 			}
 		},
 		"/subscriptions/{subscriptionId}/providers/Microsoft.Advisor/recommendations": {
@@ -131,7 +126,7 @@
 				],
 				"responses": {
 					"200": {
-						"description": "OK.",
+						"description": "OK. Successfully obtained cached recommendations.",
 						"schema": {
 							"$ref": "#/definitions/ResourceRecommendationBaseListResult"
 						}
@@ -162,7 +157,7 @@
 				],
 				"responses": {
 					"200": {
-						"description": "OK.",
+						"description": "OK. Successfully retrived operation list.",
 						"schema": {
 							"$ref": "#/definitions/OperationEntityListResult"
 						}
@@ -209,7 +204,7 @@
 				],
 				"responses": {
 					"200": {
-						"description": "OK.",
+						"description": "OK. Successfully got suppression detail.",
 						"schema": {
 							"$ref": "#/definitions/SuppressionContract"
 						}
@@ -265,7 +260,7 @@
 				],
 				"responses": {
 					"200": {
-						"description": "OK.",
+						"description": "OK. Successfully created suppression.",
 						"schema": {
 							"$ref": "#/definitions/SuppressionContract"
 						}
@@ -312,7 +307,7 @@
 				],
 				"responses": {
 					"204": {
-						"description": "The recommendation has been activated."
+						"description": "NoContent. The recommendation has been activated."
 					}
 				},
 				"deprecated": false,
@@ -351,7 +346,7 @@
 				],
 				"responses": {
 					"200": {
-						"description": "OK",
+						"description": "OK. Successfully got recommendation detail.",
 						"schema": {
 							"$ref": "#/definitions/ResourceRecommendationBase"
 						}
@@ -382,7 +377,7 @@
 				],
 				"responses": {
 					"200": {
-						"description": "OK.",
+						"description": "OK. Successfully got all suppressions in a subscription.",
 						"schema": {
 							"type": "array",
 							"items": {
@@ -421,31 +416,16 @@
 		"ResourceRecommendationBase": {
 			"description": "Advisor Recommendation.",
 			"type": "object",
+			"allOf": [
+				{
+					"$ref": "#/definitions/Resource"
+				}
+			],
 			"properties": {
-				"id": {
-					"description": "The fully qualified recommendation ID, for example /subscriptions/subscriptionId/resourceGroups/resourceGroup1/providers/Microsoft.ClassicCompute/virtualMachines/vm1/providers/Microsoft.Advisor/recommendations/recommendationGUID.",
-					"type": "string"
-				},
-				"name": {
-					"description": "The name of recommendation.",
-					"type": "string"
-				},
 				"properties": {
 					"$ref": "#/definitions/RecommendationProperties",
 					"description": "The properties of the recommendation.",
 					"x-ms-client-flatten": true
-				},
-				"suppressionIds": {
-					"description": "The list of snoozed and dismissed rules for the recommendation.",
-					"type": "array",
-					"items": {
-						"format": "uuid",
-						"type": "string"
-					}
-				},
-				"type": {
-					"description": "The recommendation type: Microsoft.Advisor/recommendations.",
-					"type": "string"
 				}
 			}
 		},
@@ -520,6 +500,14 @@
 				"shortDescription": {
 					"$ref": "#/definitions/ShortDescription",
 					"description": "A summary of the recommendation."
+				},
+				"suppressionIds": {
+					"description": "The list of snoozed and dismissed rules for the recommendation.",
+					"type": "array",
+					"items": {
+						"format": "uuid",
+						"type": "string"
+					}
 				}
 			}
 		},
@@ -540,17 +528,6 @@
 					"description": "The type of the resource.",
 					"type": "string",
 					"readOnly": true
-				},
-				"location": {
-					"description": "The location of the resource. This cannot be changed after the resource is created.",
-					"type": "string"
-				},
-				"tags": {
-					"description": "The tags of the resource.",
-					"type": "object",
-					"additionalProperties": {
-						"type": "string"
-					}
 				}
 			},
 			"x-ms-azure-resource": true
@@ -630,6 +607,17 @@
 					"$ref": "#/definitions/Resource"
 				}
 			],
+			"properties": {
+				"properties": {
+					"$ref": "#/definitions/SuppressionProperties",
+					"description": "The properties of the suppression.",
+					"x-ms-client-flatten": true
+				}
+			}
+		},
+		"SuppressionProperties": {
+			"description": "The properties of the suppression.",
+			"type": "object",
 			"properties": {
 				"suppressionId": {
 					"description": "The GUID of the suppression.",
