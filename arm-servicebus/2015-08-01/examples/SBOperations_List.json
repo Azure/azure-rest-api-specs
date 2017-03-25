@@ -301,43 +301,6 @@
               "resource": "Namespace metrics",
               "operation": "Get Namespace metrics",
               "description": "Get list of Namespace metrics Resource Descriptions"
-            },
-            "properties": {
-              "serviceSpecification": {
-                "metricSpecifications": [
-                  {
-                    "name": "CPUXNS",
-                    "displayName": "CPU usage per namespace",
-                    "displayDescription": "Service bus premium namespace CPU usage metric",
-                    "unit": "Percent",
-                    "aggregationType": "Maximum",
-                    "availabilities": [
-                      {
-                        "timeGrain": "PT1M",
-                        "blobDuration": "P30D"
-                      }
-                    ],
-                    "metricFilterPattern": "(?i)^premium$",
-                    "fillGapWithZero": false
-                  },
-                  {
-                    "name": "WSXNS",
-                    "displayName": "Memory size usage per namespace",
-                    "displayDescription": "Service bus premium namespace memory usage metric",
-                    "unit": "Percent",
-                    "aggregationType": "Maximum",
-                    "availabilities": [
-                      {
-                        "timeGrain": "PT1M",
-                        "blobDuration": "P30D"
-                      }
-                    ],
-                    "metricFilterPattern": "(?i)^premium$",
-                    "fillGapWithZero": false
-                  }
-                ],
-                "logSpecifications": null
-              }
             }
           },
           {
@@ -365,18 +328,6 @@
               "resource": "Namespace logs",
               "operation": "Get Namespace logs",
               "description": "Get list of Namespace logs Resource Descriptions"
-            },
-            "properties": {
-              "serviceSpecification": {
-                "metricSpecifications": null,
-                "logSpecifications": [
-                  {
-                    "name": "OperationalLogs",
-                    "displayName": "Operational Logs",
-                    "blobDuration": "PT5M"
-                  }
-                ]
-              }
             }
           }
         ]
