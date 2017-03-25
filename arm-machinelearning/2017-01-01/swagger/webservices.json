@@ -141,7 +141,7 @@
         "tags": [
           "WebServices"
         ],
-        "operationId": "WebServices_Delete",
+        "operationId": "WebServices_Remove",
         "description": "Deletes the specified web service.",
         "parameters": [
           {
@@ -356,7 +356,8 @@
         },
         "name": {
           "description": "Specifies the name of the resource.",
-          "type": "string"
+          "type": "string",
+          "readOnly": true
         },
         "location": {
           "description": "Specifies the location of the resource.",
@@ -865,8 +866,7 @@
       "properties": {
         "uri": {
           "type": "string",
-          "description": "The URI from which the blob is accessible from. For example, aml://abc for system assets or https://xyz for user assets or payload.",
-          "format": "url"
+          "description": "The URI from which the blob is accessible from. For example, aml://abc for system assets or https://xyz for user assets or payload."
         },
         "credentials": {
           "type": "string",
