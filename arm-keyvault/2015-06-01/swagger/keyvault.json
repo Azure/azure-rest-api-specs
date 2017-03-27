@@ -223,7 +223,7 @@
           "200": {
             "description": "Get information about all key vaults in the subscription.",
             "schema": {
-              "$ref": "#/definitions/VaultListResult"
+              "$ref": "#/definitions/ResourceListResult"
             }
           }
         },
@@ -270,7 +270,6 @@
         },
         "objectId": {
           "type": "string",
-          "format": "uuid",
           "description": "The object ID of a user, service principal or security group in the Azure Active Directory tenant for the vault. The object ID must be unique for the list of access policies."
         },
         "applicationId": {
@@ -431,6 +430,22 @@
         }
       },
       "description": "List of vaults"
+    },
+    "ResourceListResult": {
+      "properties": {
+        "value": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Resource"
+          },
+          "description": "Gets the list of vault resources."
+        },
+        "nextLink": {
+          "type": "string",
+          "description": "Gets the URL to get the next set of vault resources."
+        }
+      },
+      "description": "List of vault resources."
     },
     "Resource": {
       "properties": {

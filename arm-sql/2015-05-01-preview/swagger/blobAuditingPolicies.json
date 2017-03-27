@@ -1,0 +1,294 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "SqlManagementClient",
+    "description": "The database management API provides a RESTful set of web APIs that interact with database services to manage your databases. The API enables users to create, retrieve, update, and delete databases, servers, and other entities.",
+    "version": "2015-05-01-preview"
+  },
+  "host": "management.azure.com",
+  "schemes": [
+    "https"
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "produces": [
+    "application/json"
+  ],
+  "paths": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/servers/{serverName}/databases/{databaseName}/auditingSettings/default": {
+      "get": {
+        "tags": [
+          "DatabaseBlobAuditingPolicies"
+        ],
+        "description": "Gets a database's blob auditing policy.",
+        "operationId": "Databases_GetBlobAuditingPolicy",
+        "x-ms-examples": {
+          "Get database blob auditing policy": { "$ref": "../examples/DatabaseBlobAuditingGet.json" }
+        },
+        "parameters": [
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupParameter"
+          },
+          {
+            "$ref": "#/parameters/ServerNameParameter"
+          },
+          {
+            "name": "databaseName",
+            "in": "path",
+            "description": "The name of the database for which database blob audit policy is defined.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successfully retrieved the database blob auditing policy.",
+            "schema": {
+              "$ref": "#/definitions/DatabaseBlobAuditingPolicy"
+            }
+          },
+          "default": {
+            "description": "*** Error Responses: ***\n\n * 400 InvalidDatabaseBlobAuditingPolicyCreateRequest - The create database blob auditing policy request does not exist or has no properties object.\n\n * 400 InvalidBlobAuditActionsAndGroups - Invalid audit actions or action groups.\n\n * 400 DataSecurityInvalidUserSuppliedParameter - An invalid parameter value was provided by the client.\n\n * 404 SubscriptionDoesNotHaveServer - The requested server was not found\n\n * 404 SourceDatabaseNotFound - The source database does not exist.\n\n * 500 DatabaseIsUnavailable - Loading failed. Please try again later.\n\n * 500 GetBlobAuditingPolicyFailed - Failed to get Auditing settings"
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "DatabaseBlobAuditingPolicies"
+        ],
+        "description": "Creates or updates a database's blob auditing policy.",
+        "operationId": "Databases_CreateOrUpdateBlobAuditingPolicy",
+        "x-ms-examples": {
+          "Create database blob auditing policy min": { "$ref": "../examples/DatabaseBlobAuditingCreateMin.json" },
+          "Create database blob auditing policy max": { "$ref": "../examples/DatabaseBlobAuditingCreateMax.json" }
+        },
+        "parameters": [
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupParameter"
+          },
+          {
+            "$ref": "#/parameters/ServerNameParameter"
+          },
+          {
+            "name": "databaseName",
+            "in": "path",
+            "description": "The name of the database for which database blob audit policy will be defined.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "parameters",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/DatabaseBlobAuditingPolicy"
+            },
+            "description": "The database blob auditing policy."
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successfully set the database blob auditing policy.",
+            "schema": {
+              "$ref": "#/definitions/DatabaseBlobAuditingPolicy"
+            }
+          },
+          "201": {
+            "description": "Successfully created the database blob auditing policy.",
+            "schema": {
+              "$ref": "#/definitions/DatabaseBlobAuditingPolicy"
+            }
+          },
+          "default": {
+            "description": "*** Error Responses: ***\n\n * 400 InvalidDatabaseBlobAuditingPolicyCreateRequest - The create database blob auditing policy request does not exist or has no properties object.\n\n * 400 InvalidBlobAuditActionsAndGroups - Invalid audit actions or action groups.\n\n * 400 DataSecurityInvalidUserSuppliedParameter - An invalid parameter value was provided by the client.\n\n * 404 SubscriptionDoesNotHaveServer - The requested server was not found\n\n * 404 SourceDatabaseNotFound - The source database does not exist.\n\n * 500 DatabaseIsUnavailable - Loading failed. Please try again later.\n\n * 500 UpsertBlobAuditingPolicyFailed - An error has occurred while saving Auditing settings, please try again later"
+          }
+        }
+      }
+    }
+  },
+  "definitions": {
+"Resource":{
+      "description":"ARM resource.",
+      "properties":{  
+        "id":{  
+          "readOnly":true,
+          "type":"string",
+          "description":"Resource ID."
+        },
+        "name":{  
+          "readOnly":true,
+          "type":"string",
+          "description":"Resource name."
+        },
+        "type":{  
+          "readOnly":true,
+          "type":"string",
+          "description":"Resource type."
+        }
+      },
+      "x-ms-azure-resource": true
+    },
+    "TrackedResource":{  
+      "description":"ARM tracked top level resource.",
+      "properties":{  
+        "tags":{  
+          "type":"object",
+          "additionalProperties":{  
+            "type":"string"
+          },
+          "x-ms-mutability":[  
+            "read",
+            "create",
+            "update"
+          ],
+          "description":"Resource tags."
+        },
+        "location":{  
+          "type":"string",
+          "x-ms-mutability":[  
+            "read",
+            "create"
+          ],
+          "description":"Resource location."
+        }
+      },
+      "required":[  
+        "location"
+      ],
+      "allOf":[  
+        {  
+          "$ref":"#/definitions/Resource"
+        }
+      ]
+    },
+    "ProxyResource":{  
+      "description":"ARM proxy resource.",
+      "allOf":[  
+        {  
+          "$ref":"#/definitions/Resource"
+        }
+      ]
+    },
+    "DatabaseBlobAuditingPolicy": {
+      "description": "Contains information about a database Blob Auditing policy.",
+      "type": "object",
+      "properties": {
+        "location":{  
+          "type":"string",
+          "x-ms-mutability":[  
+            "read",
+            "create"
+          ],
+          "description":"The geo-location where the resource lives"
+        },
+        "kind": {
+          "readOnly": true,
+          "type": "string",
+          "description": "Resource kind."
+        },
+        "properties": {
+          "$ref": "#/definitions/DatabaseBlobAuditingPolicyProperties",
+          "x-ms-client-flatten": true
+        }
+      },
+      "allOf": [
+        { "$ref": "#/definitions/ProxyResource" }
+      ]
+    },
+    "DatabaseBlobAuditingPolicyProperties": {
+      "description": "Properties for a database Blob Auditing policy.",
+      "type": "object",
+      "properties": {
+        "state": {
+          "description": "Specifies the state of the policy. If state is Enabled, storageEndpoint and storageAccountAccessKey are required.",
+          "type": "string",
+          "enum": [
+            "Enabled",
+            "Disabled"
+          ],
+          "x-ms-enum":{
+            "name": "BlobAuditingPolicyState"
+          }
+        },
+        "storageEndpoint": {
+          "description": "Specifies the blob storage endpoint (e.g. https://MyAccount.blob.core.windows.net). If state is Enabled, storageEndpoint is required.",
+          "type": "string"
+        },
+        "storageAccountAccessKey": {
+          "description": "Specifies the identifier key of the auditing storage account. If state is Enabled, storageAccountAccessKey is required.",
+          "type": "string",
+          "x-ms-mutability": [
+            "create", "update"
+          ]
+        },
+        "retentionDays": {
+          "format": "int32",
+          "description": "Specifies the number of days to keep in the audit logs.",
+          "type": "integer"
+        },
+        "auditActionsAndGroups": {
+          "description": "Specifies the Actions and Actions-Groups to audit.",
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "storageAccountSubscriptionId": {
+          "description": "Specifies the blob storage subscription Id.",
+          "type": "string"
+        },
+        "isStorageSecondaryKeyInUse": {
+          "description": "Specifies whether storageAccountAccessKey value is the storage’s secondary key.",
+          "type": "boolean"
+        }
+      },
+      "required": [ "state" ]
+    }
+  },
+  "parameters": {
+    "SubscriptionIdParameter": {
+      "name": "subscriptionId",
+      "in": "path",
+      "description": "The subscription ID that identifies an Azure subscription.",
+      "required": true,
+      "type": "string"
+    },
+    "ApiVersionParameter": {
+      "name": "api-version",
+      "in": "query",
+      "description": "The API version to use for the request.",
+      "required": true,
+      "x-ms-parameter-location": "client",
+      "type": "string"
+    },
+    "ResourceGroupParameter": {
+      "name": "resourceGroupName",
+      "in": "path",
+      "description": "The name of the resource group that contains the resource. You can obtain this value from the Azure Resource Manager API or the portal.",
+      "required": true,
+      "x-ms-parameter-location": "method",
+      "type": "string"
+    },
+    "ServerNameParameter": {
+      "name": "serverName",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "description": "The name of the server.",
+      "x-ms-parameter-location": "method"
+    }
+  }
+}

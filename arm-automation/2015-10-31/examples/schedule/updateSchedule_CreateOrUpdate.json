@@ -1,0 +1,29 @@
+{
+  "parameters": {
+    "subscriptionId": "b5e4748c-f69a-467c-8749-e2f9c8cd3db0",
+    "resourceGroupName": "oi-default-east-us",
+    "automationAccountName": "VivAccountSwagger33",
+    "credentialName": "VivsSchedule",
+    "api-version": "2015-10-31",
+    "scheduleCreateOrUpdateParameters": {
+      "name": "VivsSchedule",
+      "properties": {
+        "description": "my description of schedule goes here",
+        "startTime": "2017-03-27T18:59:25.4621209Z",
+        "expiryTime": "2017-04-01T17:28:57.2494819Z",
+        "interval": 1,
+        "frequency": "Hour",
+        "advancedSchedule": {}
+      }
+    }
+  },
+  "responses": {
+    "409": {
+      "headers": {},
+      "body": {
+        "code": "Conflict",
+        "message": "A schedule with same name already exists for this account."
+      }
+    }
+  }
+}

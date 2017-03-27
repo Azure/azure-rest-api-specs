@@ -9,12 +9,10 @@
     "https"
   ],
   "consumes": [
-    "application/json",
-    "text/json"
+    "application/json"
   ],
   "produces": [
-    "application/json",
-    "text/json"
+    "application/json"
   ],
   "security": [
     {
@@ -78,13 +76,93 @@
         ],
         "responses": {
           "200": {
-            "description": "",
+            "description": "OK",
             "schema": {
               "$ref": "#/definitions/ManagementLockObject"
             }
           },
           "201": {
-            "description": "",
+            "description": "Created",
+            "schema": {
+              "$ref": "#/definitions/ManagementLockObject"
+            }
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "ManagementLocks"
+        ],
+        "operationId": "ManagementLocks_DeleteAtResourceGroupLevel",
+        "description": "Deletes the management lock of a resource group.",
+        "parameters": [
+          {
+            "name": "resourceGroupName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The resource group name.",
+            "pattern": "^[-\\w\\._\\(\\)]+$",
+            "minLength": 1,
+            "maxLength": 90
+          },
+          {
+            "name": "lockName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of lock."
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "NoContent"
+          },
+          "200": {
+            "description": "OK"
+          }
+        }
+      },
+      "get": {
+        "tags": [
+          "ManagementLocks"
+        ],
+        "operationId": "ManagementLocks_GetAtResourceGroupLevel",
+        "description": "Gets a management lock at the resource group level.",
+        "parameters": [
+          {
+            "name": "resourceGroupName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The resource group name.",
+            "pattern": "^[-\\w\\._\\(\\)]+$",
+            "minLength": 1,
+            "maxLength": 90
+          },
+          {
+            "name": "lockName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The lock name."
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
             "schema": {
               "$ref": "#/definitions/ManagementLockObject"
             }
@@ -165,13 +243,13 @@
         ],
         "responses": {
           "200": {
-            "description": "",
+            "description": "OK",
             "schema": {
               "$ref": "#/definitions/ManagementLockObject"
             }
           },
           "201": {
-            "description": "",
+            "description": "Created",
             "schema": {
               "$ref": "#/definitions/ManagementLockObject"
             }
@@ -241,13 +319,10 @@
         ],
         "responses": {
           "204": {
-            "description": ""
+            "description": "NoContent"
           },
           "200": {
-            "description": ""
-          },
-          "202": {
-            "description": ""
+            "description": "OK"
           }
         }
       }
@@ -285,13 +360,13 @@
         ],
         "responses": {
           "201": {
-            "description": "",
+            "description": "Created",
             "schema": {
               "$ref": "#/definitions/ManagementLockObject"
             }
           },
           "200": {
-            "description": "",
+            "description": "OK",
             "schema": {
               "$ref": "#/definitions/ManagementLockObject"
             }
@@ -321,13 +396,10 @@
         ],
         "responses": {
           "204": {
-            "description": ""
+            "description": "NoContent"
           },
           "200": {
-            "description": ""
-          },
-          "202": {
-            "description": ""
+            "description": "OK"
           }
         }
       },
@@ -354,58 +426,10 @@
         ],
         "responses": {
           "200": {
-            "description": "",
+            "description": "OK",
             "schema": {
               "$ref": "#/definitions/ManagementLockObject"
             }
-          },
-          "204": {
-            "description": "",
-            "schema": {
-              "$ref": "#/definitions/ManagementLockObject"
-            }
-          }
-        }
-      }
-    },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroup}/providers/Microsoft.Authorization/locks/{lockName}": {
-      "delete": {
-        "tags": [
-          "ManagementLocks"
-        ],
-        "operationId": "ManagementLocks_DeleteAtResourceGroupLevel",
-        "description": "Deletes the management lock of a resource group.",
-        "parameters": [
-          {
-            "name": "resourceGroup",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "description": "The resource group names."
-          },
-          {
-            "name": "lockName",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "description": "The name of lock."
-          },
-          {
-            "$ref": "#/parameters/ApiVersionParameter"
-          },
-          {
-            "$ref": "#/parameters/SubscriptionIdParameter"
-          }
-        ],
-        "responses": {
-          "204": {
-            "description": ""
-          },
-          "200": {
-            "description": ""
-          },
-          "202": {
-            "description": ""
           }
         }
       }
@@ -444,7 +468,7 @@
         ],
         "responses": {
           "200": {
-            "description": "",
+            "description": "OK",
             "schema": {
               "$ref": "#/definitions/ManagementLockListResult"
             }
@@ -520,7 +544,7 @@
         ],
         "responses": {
           "200": {
-            "description": "",
+            "description": "OK",
             "schema": {
               "$ref": "#/definitions/ManagementLockListResult"
             }
@@ -530,39 +554,6 @@
           "nextLinkName": "nextLink"
         },
         "x-ms-odata": "#/definitions/ManagementLockObject"
-      }
-    },
-    "/{nextLink}": {
-      "get": {
-        "tags": [
-          "ManagementLocks"
-        ],
-        "operationId": "ManagementLocks_ListNext",
-        "description": "Get a list of management locks at resource level or below.",
-        "parameters": [
-          {
-            "name": "nextLink",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "description": "NextLink from the previous successful call to List operation.",
-            "x-ms-skip-url-encoding": true
-          },
-          {
-            "$ref": "#/parameters/SubscriptionIdParameter"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "",
-            "schema": {
-              "$ref": "#/definitions/ManagementLockListResult"
-            }
-          }
-        },
-        "x-ms-pageable": {
-          "nextLinkName": "nextLink"
-        }
       }
     },
     "/subscriptions/{subscriptionId}/providers/Microsoft.Authorization/locks": {
@@ -589,7 +580,7 @@
         ],
         "responses": {
           "200": {
-            "description": "",
+            "description": "OK",
             "schema": {
               "$ref": "#/definitions/ManagementLockListResult"
             }
@@ -603,50 +594,11 @@
     }
   },
   "definitions": {
-    "DeploymentExtendedFilter": {
-      "properties": {
-        "provisioningState": {
-          "type": "string",
-          "description": "Gets or sets the provisioning state."
-        }
-      },
-      "description": "Deployment filter."
-    },
-    "GenericResourceFilter": {
-      "properties": {
-        "resourceType": {
-          "type": "string",
-          "description": "Gets or sets the resource type."
-        },
-        "tagname": {
-          "type": "string",
-          "description": "Gets or sets the tag name."
-        },
-        "tagvalue": {
-          "type": "string",
-          "description": "Gets or sets the tag value."
-        }
-      },
-      "description": "Resource filter."
-    },
-    "ResourceGroupFilter": {
-      "properties": {
-        "tagName": {
-          "type": "string",
-          "description": "Gets or sets the tag name."
-        },
-        "tagValue": {
-          "type": "string",
-          "description": "Gets or sets the tag value."
-        }
-      },
-      "description": "Resource group filter."
-    },
     "ManagementLockProperties": {
       "properties": {
         "level": {
           "type": "string",
-          "description": "Gets or sets the lock level of the management lock.",
+          "description": "The lock level of the management lock.",
           "enum": [
             "NotSpecified",
             "CanNotDelete",
@@ -659,7 +611,7 @@
         },
         "notes": {
           "type": "string",
-          "description": "Gets or sets the notes of the management lock."
+          "description": "The notes of the management lock."
         }
       },
       "description": "The management lock properties."
@@ -669,19 +621,19 @@
         "properties": {
           "x-ms-client-flatten": true,
           "$ref": "#/definitions/ManagementLockProperties",
-          "description": "Gets or sets the properties of the lock."
+          "description": "The properties of the lock."
         },
         "id": {
           "type": "string",
-          "description": "Gets or sets the Id of the lock."
+          "description": "The Id of the lock."
         },
         "type": {
           "type": "string",
-          "description": "Gets or sets the type of the lock."
+          "description": "The type of the lock."
         },
         "name": {
           "type": "string",
-          "description": "Gets or sets the name of the lock."
+          "description": "The name of the lock."
         }
       },
       "description": "Management lock information.",
@@ -694,57 +646,14 @@
           "items": {
             "$ref": "#/definitions/ManagementLockObject"
           },
-          "description": "Gets or sets the list of locks."
+          "description": "The list of locks."
         },
         "nextLink": {
           "type": "string",
-          "description": "Gets or sets the URL to get the next set of results."
+          "description": "The URL to get the next set of results."
         }
       },
       "description": "List of management locks."
-    },
-    "Resource": {
-      "properties": {
-        "id": {
-          "readOnly": true,
-          "type": "string",
-          "description": "Resource Id"
-        },
-        "name": {
-          "readOnly": true,
-          "type": "string",
-          "description": "Resource name"
-        },
-        "type": {
-          "readOnly": true,
-          "type": "string",
-          "description": "Resource type"
-        },
-        "location": {
-          "type": "string",
-          "description": "Resource location"
-        },
-        "tags": {
-          "type": "object",
-          "additionalProperties": {
-            "type": "string"
-          },
-          "description": "Resource tags"
-        }
-      },
-      "required": [
-        "location"
-      ],
-      "x-ms-azure-resource": true
-    },
-    "SubResource": {
-      "properties": {
-        "id": {
-          "type": "string",
-          "description": "Resource Id"
-        }
-      },
-      "x-ms-azure-resource": true
     }
   },
   "parameters": {

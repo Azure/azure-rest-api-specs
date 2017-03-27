@@ -1,4 +1,4 @@
-﻿{
+{
   "swagger": "2.0",
   "info": {
     "title": "ServiceBusManagementClient",
@@ -10,12 +10,10 @@
     "https"
   ],
   "consumes": [
-    "application/json",
-    "text/json"
+    "application/json"
   ],
   "produces": [
-    "application/json",
-    "text/json"
+    "application/json"
   ],
   "security": [
     {
@@ -36,13 +34,81 @@
     }
   },
   "paths": {
+    "/providers/Microsoft.ServiceBus/operations": {
+      "get": {
+        "tags": [
+          "Operations"
+        ],
+        "operationId": "Operations_List",
+        "x-ms-examples": {
+          "OperationsList": { "$ref": "../examples/SBOperations_List.json" }
+        },
+        "description": "Lists all of the available ServiceBus REST API operations.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK. The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/OperationListResult"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.ServiceBus/CheckNameAvailability": {
+      "post": {
+        "tags": [
+          "Namespaces"
+        ],
+        "operationId": "Namespaces_CheckNameAvailability",
+        "x-ms-examples": {
+          "NameSpaceCheckNameAvailability": { "$ref": "../examples/NameSpaces/SBNameSpaceCheckNameAvailability.json" }
+        },
+        "description": "Check the give namespace name availability.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "name": "parameters",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/CheckNameAvailability"
+            },
+            "description": "Parameters to check availability of the given namespace name"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "check availability returned successfully.",
+            "schema": {
+              "$ref": "#/definitions/CheckNameAvailabilityResult"
+            }
+          }
+        }
+      }
+    },
     "/subscriptions/{subscriptionId}/providers/Microsoft.ServiceBus/namespaces": {
       "get": {
         "tags": [
           "Namespaces"
         ],
         "operationId": "Namespaces_ListBySubscription",
-        "description": "Lists all the available namespaces within the subscription irrespective of the resourceGroups.",
+        "x-ms-examples": {
+          "NameSpaceList": { "$ref": "../examples/NameSpaces/SBNameSpaceList.json" }
+        },
+        "description": "Gets all the available namespaces within the subscription, irrespective of the resource groups.",
         "externalDocs": {
           "url": "https://msdn.microsoft.com/en-us/library/azure/mt639412.aspx"
         },
@@ -56,7 +122,7 @@
         ],
         "responses": {
           "200": {
-            "description": "Namespaces returned successfully",
+            "description": "Namespaces successfully returned.",
             "schema": {
               "$ref": "#/definitions/NamespaceListResult"
             }
@@ -73,17 +139,16 @@
           "Namespaces"
         ],
         "operationId": "Namespaces_ListByResourceGroup",
-        "description": "Lists the available namespaces within a resourceGroup.",
+        "x-ms-examples": {
+          "NameSpaceListByResourceGroup": { "$ref": "../examples/NameSpaces/SBNameSpaceListByResourceGroup.json" }
+        },
+        "description": "Gets the available namespaces within a resource group.",
         "externalDocs": {
           "url": "https://msdn.microsoft.com/en-us/library/azure/mt639412.aspx"
         },
         "parameters": [
           {
-            "name": "resourceGroupName",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "description": "The name of the resource group."
+            "$ref": "#/parameters/resourceGroupNameParameter"
           },
           {
             "$ref": "#/parameters/ApiVersionParameter"
@@ -94,7 +159,7 @@
         ],
         "responses": {
           "200": {
-            "description": "Namespaces returned successfully",
+            "description": "Namespaces successfully returned.",
             "schema": {
               "$ref": "#/definitions/NamespaceListResult"
             }
@@ -111,17 +176,16 @@
           "Namespaces"
         ],
         "operationId": "Namespaces_CreateOrUpdate",
-        "description": "Creates/Updates a service namespace. Once created, this namespace's resource manifest is immutable. This operation is idempotent.",
+        "x-ms-examples": {
+          "NameSpaceCreate": { "$ref": "../examples/NameSpaces/SBNameSpaceCreate.json" }
+        },
+        "description": "Creates or updates a service namespace. Once created, this namespace's resource manifest is immutable. This operation is idempotent.",
         "externalDocs": {
           "url": "https://msdn.microsoft.com/en-us/library/azure/mt639408.aspx"
         },
         "parameters": [
           {
-            "name": "resourceGroupName",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "description": "The name of the resource group."
+            "$ref": "#/parameters/resourceGroupNameParameter"
           },
           {
             "name": "namespaceName",
@@ -137,7 +201,7 @@
             "schema": {
               "$ref": "#/definitions/NamespaceCreateOrUpdateParameters"
             },
-            "description": "Parameters supplied to create a Namespace Resource."
+            "description": "Parameters supplied to create a namespace resource."
           },
           {
             "$ref": "#/parameters/ApiVersionParameter"
@@ -148,16 +212,19 @@
         ],
         "responses": {
           "201": {
-            "description": "Namespace create request accepted",
+            "description": "Namespace create request accepted.",
             "schema": {
               "$ref": "#/definitions/NamespaceResource"
             }
           },
           "200": {
-            "description": "Namespace create request successful",
+            "description": "Namespace created successfully.",
             "schema": {
               "$ref": "#/definitions/NamespaceResource"
             }
+          },
+          "202": {
+            "description": "Namespace create or update request accepted."
           }
         },
         "x-ms-long-running-operation": true
@@ -167,24 +234,19 @@
           "Namespaces"
         ],
         "operationId": "Namespaces_Delete",
+        "x-ms-examples": {
+          "NameSpaceDelete": { "$ref": "../examples/NameSpaces/SBNameSpaceDelete.json" }
+        },
         "description": "Deletes an existing namespace. This operation also removes all associated resources under the namespace.",
         "externalDocs": {
           "url": "https://msdn.microsoft.com/en-us/library/azure/mt639389.aspx"
         },
         "parameters": [
           {
-            "name": "resourceGroupName",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "description": "The name of the resource group."
+            "$ref": "#/parameters/resourceGroupNameParameter"
           },
           {
-            "name": "namespaceName",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "description": "The namespace name."
+            "$ref": "#/parameters/namespaceNameParameter"
           },
           {
             "$ref": "#/parameters/ApiVersionParameter"
@@ -195,13 +257,13 @@
         ],
         "responses": {
           "204": {
-            "description": "No Content"
+            "description": "No content."
           },
           "200": {
-            "description": "Namespace delete successful"
+            "description": "Namespace successfully deleted."
           },
           "202": {
-            "description": "Namespace delete request has been accepted"
+            "description": "Namespace delete request accepted."
           }
         },
         "x-ms-long-running-operation": true
@@ -211,24 +273,19 @@
           "Namespaces"
         ],
         "operationId": "Namespaces_Get",
-        "description": "Returns the description for the specified namespace.",
+        "x-ms-examples": {
+          "NameSpaceGet": { "$ref": "../examples/NameSpaces/SBNameSpaceGet.json" }
+        },
+        "description": "Gets a description for the specified namespace.",
         "externalDocs": {
           "url": "https://msdn.microsoft.com/en-us/library/azure/mt639379.aspx"
         },
         "parameters": [
           {
-            "name": "resourceGroupName",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "description": "The name of the resource group."
+            "$ref": "#/parameters/resourceGroupNameParameter"
           },
           {
-            "name": "namespaceName",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "description": "The namespace name."
+            "$ref": "#/parameters/namespaceNameParameter"
           },
           {
             "$ref": "#/parameters/ApiVersionParameter"
@@ -239,10 +296,60 @@
         ],
         "responses": {
           "200": {
-            "description": "Namespace returned successfully",
+            "description": "Namespace successfully returned.",
             "schema": {
               "$ref": "#/definitions/NamespaceResource"
             }
+          }
+        }
+      },
+      "patch": {
+        "tags": [
+          "Namespaces"
+        ],
+        "operationId": "Namespaces_Update",
+        "x-ms-examples": {
+          "NameSpaceUpdate": { "$ref": "../examples/NameSpaces/SBNameSpaceUpdate.json" }
+        },
+        "description": "Updates a service namespace. Once created, this namespace's resource manifest is immutable. This operation is idempotent.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/resourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/namespaceNameParameter"
+          },
+          {
+            "name": "parameters",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/NamespaceUpdateParameters"
+            },
+            "description": "Parameters supplied to update a namespace resource."
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": "Namespace update request accepted.",
+            "schema": {
+              "$ref": "#/definitions/NamespaceResource"
+            }
+          },
+          "200": {
+            "description": "Namespace updated successfully.",
+            "schema": {
+              "$ref": "#/definitions/NamespaceResource"
+            }
+          },
+          "202": {
+            "description": "Namespace update request accepted."
           }
         }
       }
@@ -253,24 +360,19 @@
           "Namespaces"
         ],
         "operationId": "Namespaces_ListAuthorizationRules",
-        "description": "Authorization rules for a namespace.",
+        "x-ms-examples": {
+          "NameSpaceAutorizationRuleListAll": { "$ref": "../examples/NameSpaces/SBNameSpaceAutorizationRuleListAll.json" }
+        },
+        "description": "Gets the authorization rules for a namespace.",
         "externalDocs": {
           "url": "https://msdn.microsoft.com/en-us/library/azure/mt639376.aspx"
         },
         "parameters": [
           {
-            "name": "resourceGroupName",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "description": "The name of the resource group."
+            "$ref": "#/parameters/resourceGroupNameParameter"
           },
           {
-            "name": "namespaceName",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "description": "The namespace name"
+            "$ref": "#/parameters/namespaceNameParameter"
           },
           {
             "$ref": "#/parameters/ApiVersionParameter"
@@ -281,7 +383,7 @@
         ],
         "responses": {
           "200": {
-            "description": "Namespace Authorization rule returned successfully",
+            "description": "Namespace authorization rules returned successfully.",
             "schema": {
               "$ref": "#/definitions/SharedAccessAuthorizationRuleListResult"
             }
@@ -298,31 +400,22 @@
           "Namespaces"
         ],
         "operationId": "Namespaces_CreateOrUpdateAuthorizationRule",
-        "description": "Creates an authorization rule for a namespace",
+        "x-ms-examples": {
+          "NameSpaceAuthorizationRuleCreate": { "$ref": "../examples/NameSpaces/SBNameSpaceAuthorizationRuleCreate.json" }
+        },
+        "description": "Creates or updates an authorization rule for a namespace.",
         "externalDocs": {
           "url": "https://msdn.microsoft.com/en-us/library/azure/mt639410.aspx"
         },
         "parameters": [
           {
-            "name": "resourceGroupName",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "description": "The name of the resource group."
+            "$ref": "#/parameters/resourceGroupNameParameter"
           },
           {
-            "name": "namespaceName",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "description": "The namespace name."
+            "$ref": "#/parameters/namespaceNameParameter"
           },
           {
-            "name": "authorizationRuleName",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "description": "Namespace Aauthorization Rule Name."
+            "$ref": "#/parameters/authorizationRuleNameParameter"
           },
           {
             "name": "parameters",
@@ -342,7 +435,7 @@
         ],
         "responses": {
           "200": {
-            "description": "Namespace Authorization rule created",
+            "description": "Namespace authorization rule created.",
             "schema": {
               "$ref": "#/definitions/SharedAccessAuthorizationRuleResource"
             }
@@ -354,31 +447,22 @@
           "Namespaces"
         ],
         "operationId": "Namespaces_DeleteAuthorizationRule",
-        "description": "Deletes a namespace authorization rule",
+        "x-ms-examples": {
+          "NameSpaceAutorizationRuleDelete": { "$ref": "../examples/NameSpaces/SBNameSpaceAutorizationRuleDelete.json" }
+        },
+        "description": "Deletes a namespace authorization rule.",
         "externalDocs": {
           "url": "https://msdn.microsoft.com/en-us/library/azure/mt639417.aspx"
         },
         "parameters": [
           {
-            "name": "resourceGroupName",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "description": "The name of the resource group."
+            "$ref": "#/parameters/resourceGroupNameParameter"
           },
           {
-            "name": "namespaceName",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "description": "The namespace name."
+            "$ref": "#/parameters/namespaceNameParameter"
           },
           {
-            "name": "authorizationRuleName",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "description": "Authorization Rule Name."
+            "$ref": "#/parameters/authorizationRuleNameParameter"
           },
           {
             "$ref": "#/parameters/ApiVersionParameter"
@@ -389,10 +473,10 @@
         ],
         "responses": {
           "204": {
-            "description": "No Content"
+            "description": "No content."
           },
           "200": {
-            "description": "Namespace Authorization rule deleted"
+            "description": "Namespace authorization rule successfully deleted."
           }
         }
       },
@@ -401,31 +485,22 @@
           "Namespaces"
         ],
         "operationId": "Namespaces_GetAuthorizationRule",
-        "description": "Authorization rule for a namespace by name.",
+        "x-ms-examples": {
+          "NameSpaceAutorizationRuleGet": { "$ref": "../examples/NameSpaces/SBNameSpaceAutorizationRuleGet.json" }
+        },
+        "description": "Gets an authorization rule for a namespace by rule name.",
         "externalDocs": {
           "url": "https://msdn.microsoft.com/en-us/library/azure/mt639392.aspx"
         },
         "parameters": [
           {
-            "name": "resourceGroupName",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "description": "The name of the resource group."
+            "$ref": "#/parameters/resourceGroupNameParameter"
           },
           {
-            "name": "namespaceName",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "description": "The namespace name"
+            "$ref": "#/parameters/namespaceNameParameter"
           },
           {
-            "name": "authorizationRuleName",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "description": "Authorization rule name."
+            "$ref": "#/parameters/authorizationRuleNameParameter"
           },
           {
             "$ref": "#/parameters/ApiVersionParameter"
@@ -436,7 +511,7 @@
         ],
         "responses": {
           "200": {
-            "description": "Namespace Authorization rule returned successfully",
+            "description": "Namespace authorization rule returned successfully.",
             "schema": {
               "$ref": "#/definitions/SharedAccessAuthorizationRuleResource"
             }
@@ -450,31 +525,22 @@
           "Namespaces"
         ],
         "operationId": "Namespaces_ListKeys",
-        "description": "Primary and Secondary ConnectionStrings to the namespace ",
+        "x-ms-examples": {
+          "NameSpaceAuthorizationRuleListKey": { "$ref": "../examples/NameSpaces/SBNameSpaceAuthorizationRuleListKey.json" }
+        },
+        "description": "Gets the primary and secondary connection strings for the namespace.",
         "externalDocs": {
           "url": "https://msdn.microsoft.com/en-us/library/azure/mt639398.aspx"
         },
         "parameters": [
           {
-            "name": "resourceGroupName",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "description": "The name of the resource group."
+            "$ref": "#/parameters/resourceGroupNameParameter"
           },
           {
-            "name": "namespaceName",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "description": "The namespace name."
+            "$ref": "#/parameters/namespaceNameParameter"
           },
           {
-            "name": "authorizationRuleName",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "description": "The authorizationRule name."
+            "$ref": "#/parameters/authorizationRuleNameParameter"
           },
           {
             "$ref": "#/parameters/ApiVersionParameter"
@@ -485,7 +551,7 @@
         ],
         "responses": {
           "200": {
-            "description": "Successful",
+            "description": "Connection strings successfully returned.",
             "schema": {
               "$ref": "#/definitions/ResourceListKeys"
             }
@@ -499,31 +565,22 @@
           "Namespaces"
         ],
         "operationId": "Namespaces_RegenerateKeys",
-        "description": "Regenerats the Primary or Secondary ConnectionStrings to the namespace ",
+        "x-ms-examples": {
+          "NameSpaceAuthorizationRuleRegenrateKey": { "$ref": "../examples/NameSpaces/SBNameSpaceAuthorizationRuleRegenrateKey.json" }
+        },
+        "description": "Regenerates the primary or secondary connection strings for the namespace.",
         "externalDocs": {
           "url": "https://msdn.microsoft.com/en-us/library/azure/mt718977.aspx"
         },
         "parameters": [
           {
-            "name": "resourceGroupName",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "description": "The name of the resource group."
+            "$ref": "#/parameters/resourceGroupNameParameter"
           },
           {
-            "name": "namespaceName",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "description": "The namespace name."
+            "$ref": "#/parameters/namespaceNameParameter"
           },
           {
-            "name": "authorizationRuleName",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "description": "The authorizationRule name."
+            "$ref": "#/parameters/authorizationRuleNameParameter"
           },
           {
             "name": "parameters",
@@ -532,7 +589,7 @@
             "schema": {
               "$ref": "#/definitions/RegenerateKeysParameters"
             },
-            "description": "Parameters supplied to regenerate Auth Rule."
+            "description": "Parameters supplied to regenerate the authorization rule."
           },
           {
             "$ref": "#/parameters/ApiVersionParameter"
@@ -543,7 +600,7 @@
         ],
         "responses": {
           "200": {
-            "description": "Successful",
+            "description": "Authorization rule successfully regenerated.",
             "schema": {
               "$ref": "#/definitions/ResourceListKeys"
             }
@@ -557,24 +614,19 @@
           "Queues"
         ],
         "operationId": "Queues_ListAll",
-        "description": "Lists the queues within the namespace.",
+        "x-ms-examples": {
+          "QueueListByNameSpace": { "$ref": "../examples/Queues/SBQueueListByNameSpace.json" }
+        },
+        "description": "Gets the queues within a namespace.",
         "externalDocs": {
           "url": "https://msdn.microsoft.com/en-us/library/azure/mt639415.aspx"
         },
         "parameters": [
           {
-            "name": "resourceGroupName",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "description": "The name of the resource group."
+            "$ref": "#/parameters/resourceGroupNameParameter"
           },
           {
-            "name": "namespaceName",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "description": "The namespace name."
+            "$ref": "#/parameters/namespaceNameParameter"
           },
           {
             "$ref": "#/parameters/ApiVersionParameter"
@@ -585,7 +637,7 @@
         ],
         "responses": {
           "200": {
-            "description": "Queues returned successfully",
+            "description": "Queues successfully returned.",
             "schema": {
               "$ref": "#/definitions/QueueListResult"
             }
@@ -602,31 +654,22 @@
           "Queues"
         ],
         "operationId": "Queues_CreateOrUpdate",
-        "description": "Creates/Updates a service Queue. This operation is idempotent.",
+        "x-ms-examples": {
+          "QueueCreate": { "$ref": "../examples/Queues/SBQueueCreate.json" }
+        },
+        "description": "Creates or updates a Service Bus queue. This operation is idempotent.",
         "externalDocs": {
           "url": "https://msdn.microsoft.com/en-us/library/azure/mt639395.aspx"
         },
         "parameters": [
           {
-            "name": "resourceGroupName",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "description": "The name of the resource group."
+            "$ref": "#/parameters/resourceGroupNameParameter"
           },
           {
-            "name": "namespaceName",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "description": "The namespace name."
+            "$ref": "#/parameters/namespaceNameParameter"
           },
           {
-            "name": "queueName",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "description": "The queue name."
+            "$ref": "#/parameters/queueNameParameter"
           },
           {
             "name": "parameters",
@@ -635,7 +678,7 @@
             "schema": {
               "$ref": "#/definitions/QueueCreateOrUpdateParameters"
             },
-            "description": "Parameters supplied to create a Queue Resource."
+            "description": "Parameters supplied to create or update a queue resource."
           },
           {
             "$ref": "#/parameters/ApiVersionParameter"
@@ -646,7 +689,7 @@
         ],
         "responses": {
           "200": {
-            "description": "Queue created",
+            "description": "Queue successfully created.",
             "schema": {
               "$ref": "#/definitions/QueueResource"
             }
@@ -658,31 +701,22 @@
           "Queues"
         ],
         "operationId": "Queues_Delete",
-        "description": "Deletes a queue from the specified namespace in resource group.",
+        "x-ms-examples": {
+          "QueueDelete": { "$ref": "../examples/Queues/SBQueueDelete.json" }
+        },
+        "description": "Deletes a queue from the specified namespace in a resource group.",
         "externalDocs": {
           "url": "https://msdn.microsoft.com/en-us/library/azure/mt639411.aspx"
         },
         "parameters": [
           {
-            "name": "resourceGroupName",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "description": "The name of the resource group."
+            "$ref": "#/parameters/resourceGroupNameParameter"
           },
           {
-            "name": "namespaceName",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "description": "The namespace name."
+            "$ref": "#/parameters/namespaceNameParameter"
           },
           {
-            "name": "queueName",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "description": "The queue name."
+            "$ref": "#/parameters/queueNameParameter"
           },
           {
             "$ref": "#/parameters/ApiVersionParameter"
@@ -693,10 +727,10 @@
         ],
         "responses": {
           "204": {
-            "description": "No Content"
+            "description": "No content."
           },
           "200": {
-            "description": "Queue deleted."
+            "description": "Queue successfully deleted."
           }
         }
       },
@@ -705,31 +739,22 @@
           "Queues"
         ],
         "operationId": "Queues_Get",
-        "description": "Returns the description for the specified queue.",
+        "x-ms-examples": {
+          "QueueGet": { "$ref": "../examples/Queues/SBQueueGet.json" }
+        },
+        "description": "Returns a description for the specified queue.",
         "externalDocs": {
           "url": "https://msdn.microsoft.com/en-us/library/azure/mt639380.aspx"
         },
         "parameters": [
           {
-            "name": "resourceGroupName",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "description": "The name of the resource group."
+            "$ref": "#/parameters/resourceGroupNameParameter"
           },
           {
-            "name": "namespaceName",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "description": "The namespace name."
+            "$ref": "#/parameters/namespaceNameParameter"
           },
           {
-            "name": "queueName",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "description": "The queue name."
+            "$ref": "#/parameters/queueNameParameter"
           },
           {
             "$ref": "#/parameters/ApiVersionParameter"
@@ -740,7 +765,7 @@
         ],
         "responses": {
           "200": {
-            "description": "Successfully retrieved queue description.",
+            "description": "Queue description successfully returned.",
             "schema": {
               "$ref": "#/definitions/QueueResource"
             }
@@ -754,31 +779,22 @@
           "Queues"
         ],
         "operationId": "Queues_ListAuthorizationRules",
-        "description": "Returns all Queue authorizationRules.",
+        "x-ms-examples": {
+          "QueueAutorizationRuleListAll": { "$ref": "../examples/Queues/SBQueueAutorizationRuleListAll.json" }
+        },
+        "description": "Gets all authorization rules for a queue.",
         "externalDocs": {
           "url": "https://msdn.microsoft.com/en-us/library/azure/mt705607.aspx"
         },
         "parameters": [
           {
-            "name": "resourceGroupName",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "description": "The name of the resource group."
+            "$ref": "#/parameters/resourceGroupNameParameter"
           },
           {
-            "name": "namespaceName",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "description": "The namespace name"
+            "$ref": "#/parameters/namespaceNameParameter"
           },
           {
-            "name": "queueName",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "description": "The queue name."
+            "$ref": "#/parameters/queueNameParameter"
           },
           {
             "$ref": "#/parameters/ApiVersionParameter"
@@ -789,7 +805,7 @@
         ],
         "responses": {
           "200": {
-            "description": "Queues Authorization rule returned successfully",
+            "description": "Authorization rules successfully returned.",
             "schema": {
               "$ref": "#/definitions/SharedAccessAuthorizationRuleListResult"
             }
@@ -806,35 +822,22 @@
           "Queues"
         ],
         "operationId": "Queues_CreateOrUpdateAuthorizationRule",
-        "description": "Creates an authorization rule for a queue",
+        "x-ms-examples": {
+          "QueueAuthorizationRuleCreate": { "$ref": "../examples/Queues/SBQueueAuthorizationRuleCreate.json" }
+        },
+        "description": "Creates an authorization rule for a queue.",
         "parameters": [
           {
-            "name": "resourceGroupName",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "description": "The name of the resource group."
+            "$ref": "#/parameters/resourceGroupNameParameter"
           },
           {
-            "name": "namespaceName",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "description": "The namespace name."
+            "$ref": "#/parameters/namespaceNameParameter"
           },
           {
-            "name": "queueName",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "description": "The queue name."
+            "$ref": "#/parameters/queueNameParameter"
           },
           {
-            "name": "authorizationRuleName",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "description": "Aauthorization Rule Name."
+            "$ref": "#/parameters/authorizationRuleNameParameter"
           },
           {
             "name": "parameters",
@@ -854,7 +857,7 @@
         ],
         "responses": {
           "200": {
-            "description": "Queues Authorization rule created",
+            "description": "Authorization rule successfully created.",
             "schema": {
               "$ref": "#/definitions/SharedAccessAuthorizationRuleResource"
             }
@@ -866,38 +869,25 @@
           "Queues"
         ],
         "operationId": "Queues_DeleteAuthorizationRule",
-        "description": "Deletes a queue authorization rule",
+        "x-ms-examples": {
+          "QueueAutorizationRuleDelete": { "$ref": "../examples/Queues/SBQueueAutorizationRuleDelete.json" }
+        },
+        "description": "Deletes a queue authorization rule.",
         "externalDocs": {
           "url": "https://msdn.microsoft.com/en-us/library/azure/mt705609.aspx"
         },
         "parameters": [
           {
-            "name": "resourceGroupName",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "description": "The name of the resource group."
+            "$ref": "#/parameters/resourceGroupNameParameter"
           },
           {
-            "name": "namespaceName",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "description": "The namespace name."
+            "$ref": "#/parameters/namespaceNameParameter"
           },
           {
-            "name": "queueName",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "description": "The queue name."
+            "$ref": "#/parameters/queueNameParameter"
           },
           {
-            "name": "authorizationRuleName",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "description": "Authorization Rule Name."
+            "$ref": "#/parameters/authorizationRuleNameParameter"
           },
           {
             "$ref": "#/parameters/ApiVersionParameter"
@@ -908,10 +898,10 @@
         ],
         "responses": {
           "204": {
-            "description": "No Content"
+            "description": "No content."
           },
           "200": {
-            "description": "Queue authorizationRule deleted"
+            "description": "Authorization rule successfully deleted."
           }
         }
       },
@@ -920,38 +910,25 @@
           "Queues"
         ],
         "operationId": "Queues_GetAuthorizationRule",
-        "description": "Queue authorizationRule for a queue by name.",
+        "x-ms-examples": {
+          "QueueAutorizationRuleGet": { "$ref": "../examples/Queues/SBQueueAutorizationRuleGet.json" }
+        },
+        "description": "Gets an authorization rule for a queue by rule name.",
         "externalDocs": {
           "url": "https://msdn.microsoft.com/en-us/library/azure/mt705611.aspx"
         },
         "parameters": [
           {
-            "name": "resourceGroupName",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "description": "The name of the resource group."
+            "$ref": "#/parameters/resourceGroupNameParameter"
           },
           {
-            "name": "namespaceName",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "description": "The namespace name"
+            "$ref": "#/parameters/namespaceNameParameter"
           },
           {
-            "name": "queueName",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "description": "The queue name."
+            "$ref": "#/parameters/queueNameParameter"
           },
           {
-            "name": "authorizationRuleName",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "description": "Authorization rule name."
+            "$ref": "#/parameters/authorizationRuleNameParameter"
           },
           {
             "$ref": "#/parameters/ApiVersionParameter"
@@ -962,7 +939,7 @@
         ],
         "responses": {
           "200": {
-            "description": "Queues AuthorizationRule returned successfully",
+            "description": "Authorization rule successfully returned.",
             "schema": {
               "$ref": "#/definitions/SharedAccessAuthorizationRuleResource"
             }
@@ -976,38 +953,25 @@
           "Queues"
         ],
         "operationId": "Queues_ListKeys",
-        "description": "Primary and Secondary ConnectionStrings to the queue.",
+        "x-ms-examples": {
+          "QueueAuthorizationRuleListKey": { "$ref": "../examples/Queues/SBQueueAuthorizationRuleListKey.json" }
+        },
+        "description": "Primary and secondary connection strings to the queue.",
         "externalDocs": {
           "url": "https://msdn.microsoft.com/en-us/library/azure/mt705608.aspx"
         },
         "parameters": [
           {
-            "name": "resourceGroupName",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "description": "The name of the resource group."
+            "$ref": "#/parameters/resourceGroupNameParameter"
           },
           {
-            "name": "namespaceName",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "description": "The namespace name."
+            "$ref": "#/parameters/namespaceNameParameter"
           },
           {
-            "name": "queueName",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "description": "The queue name."
+            "$ref": "#/parameters/queueNameParameter"
           },
           {
-            "name": "authorizationRuleName",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "description": "The authorizationRule name."
+            "$ref": "#/parameters/authorizationRuleNameParameter"
           },
           {
             "$ref": "#/parameters/ApiVersionParameter"
@@ -1018,7 +982,7 @@
         ],
         "responses": {
           "200": {
-            "description": "Successful",
+            "description": "Connection strings successfully returned.",
             "schema": {
               "$ref": "#/definitions/ResourceListKeys"
             }
@@ -1032,38 +996,25 @@
           "Queues"
         ],
         "operationId": "Queues_RegenerateKeys",
-        "description": "Regenerates the Primary or Secondary ConnectionStrings to the Queue",
+        "x-ms-examples": {
+          "QueueAuthorizationRuleRegenrateKey": { "$ref": "../examples/Queues/SBQueueAuthorizationRuleRegenrateKey.json" }
+        },
+        "description": "Regenerates the primary or secondary connection strings to the queue.",
         "externalDocs": {
           "url": "https://msdn.microsoft.com/en-us/library/azure/mt705606.aspx"
         },
         "parameters": [
           {
-            "name": "resourceGroupName",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "description": "The name of the resource group."
+            "$ref": "#/parameters/resourceGroupNameParameter"
           },
           {
-            "name": "namespaceName",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "description": "The namespace name."
+            "$ref": "#/parameters/namespaceNameParameter"
           },
           {
-            "name": "queueName",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "description": "The queue name."
+            "$ref": "#/parameters/queueNameParameter"
           },
           {
-            "name": "authorizationRuleName",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "description": "The authorizationRule name"
+            "$ref": "#/parameters/authorizationRuleNameParameter"
           },
           {
             "name": "parameters",
@@ -1072,7 +1023,7 @@
             "schema": {
               "$ref": "#/definitions/RegenerateKeysParameters"
             },
-            "description": "Parameters supplied to regenerate Auth Rule."
+            "description": "Parameters supplied to regenerate the authorization rule."
           },
           {
             "$ref": "#/parameters/ApiVersionParameter"
@@ -1083,7 +1034,7 @@
         ],
         "responses": {
           "200": {
-            "description": "Successful",
+            "description": "Connection strings successfully regenerated.",
             "schema": {
               "$ref": "#/definitions/ResourceListKeys"
             }
@@ -1097,24 +1048,19 @@
           "Topics"
         ],
         "operationId": "Topics_ListAll",
-        "description": "Lists all the topics in a namespace.",
+        "x-ms-examples": {
+          "TopicGet": { "$ref": "../examples/Topics/SBTopicListByNameSpace.json" }
+        },
+        "description": "Gets all the topics in a namespace.",
         "externalDocs": {
           "url": "https://msdn.microsoft.com/en-us/library/azure/mt639388.aspx"
         },
         "parameters": [
           {
-            "name": "resourceGroupName",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "description": "The name of the resource group."
+            "$ref": "#/parameters/resourceGroupNameParameter"
           },
           {
-            "name": "namespaceName",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "description": "The namespace name."
+            "$ref": "#/parameters/namespaceNameParameter"
           },
           {
             "$ref": "#/parameters/ApiVersionParameter"
@@ -1142,31 +1088,22 @@
           "Topics"
         ],
         "operationId": "Topics_CreateOrUpdate",
-        "description": "Creates a topic in the specified namespace",
+        "x-ms-examples": {
+          "TopicCreate": { "$ref": "../examples/Topics/SBTopicCreate.json" }
+        },
+        "description": "Creates a topic in the specified namespace.",
         "externalDocs": {
           "url": "https://msdn.microsoft.com/en-us/library/azure/mt639409.aspx"
         },
         "parameters": [
           {
-            "name": "resourceGroupName",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "description": "The name of the resource group."
+            "$ref": "#/parameters/resourceGroupNameParameter"
           },
           {
-            "name": "namespaceName",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "description": "The namespace name."
+            "$ref": "#/parameters/namespaceNameParameter"
           },
           {
-            "name": "topicName",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "description": "The topic name."
+            "$ref": "#/parameters/topicNameParameter"
           },
           {
             "name": "parameters",
@@ -1175,7 +1112,7 @@
             "schema": {
               "$ref": "#/definitions/TopicCreateOrUpdateParameters"
             },
-            "description": "Parameters supplied to create a Topic Resource."
+            "description": "Parameters supplied to create a topic resource."
           },
           {
             "$ref": "#/parameters/ApiVersionParameter"
@@ -1186,7 +1123,7 @@
         ],
         "responses": {
           "200": {
-            "description": "Topic created",
+            "description": "Topic successfully created.",
             "schema": {
               "$ref": "#/definitions/TopicResource"
             }
@@ -1198,31 +1135,22 @@
           "Topics"
         ],
         "operationId": "Topics_Delete",
+        "x-ms-examples": {
+          "TopicDelete": { "$ref": "../examples/Topics/SBTopicDelete.json" }
+        },
         "description": "Deletes a topic from the specified namespace and resource group.",
         "externalDocs": {
           "url": "https://msdn.microsoft.com/en-us/library/azure/mt639404.aspx"
         },
         "parameters": [
           {
-            "name": "resourceGroupName",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "description": "The name of the resource group."
+            "$ref": "#/parameters/resourceGroupNameParameter"
           },
           {
-            "name": "namespaceName",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "description": "The topics name."
+            "$ref": "#/parameters/namespaceNameParameter"
           },
           {
-            "name": "topicName",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "description": "The topics name."
+            "$ref": "#/parameters/topicNameParameter"
           },
           {
             "$ref": "#/parameters/ApiVersionParameter"
@@ -1236,7 +1164,7 @@
             "description": "No Content"
           },
           "200": {
-            "description": "Topic delete successful"
+            "description": "Topic successfully deleted."
           }
         }
       },
@@ -1245,31 +1173,22 @@
           "Topics"
         ],
         "operationId": "Topics_Get",
-        "description": "Returns the description for the specified topic",
+        "x-ms-examples": {
+          "TopicGet": { "$ref": "../examples/Topics/SBTopicGet.json" }
+        },
+        "description": "Returns a description for the specified topic.",
         "externalDocs": {
           "url": "https://msdn.microsoft.com/en-us/library/azure/mt639399.aspx"
         },
         "parameters": [
           {
-            "name": "resourceGroupName",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "description": "The name of the resource group."
+            "$ref": "#/parameters/resourceGroupNameParameter"
           },
           {
-            "name": "namespaceName",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "description": "The namespace name."
+            "$ref": "#/parameters/namespaceNameParameter"
           },
           {
-            "name": "topicName",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "description": "The topic name."
+            "$ref": "#/parameters/topicNameParameter"
           },
           {
             "$ref": "#/parameters/ApiVersionParameter"
@@ -1280,7 +1199,7 @@
         ],
         "responses": {
           "200": {
-            "description": "Successfully retrieved topic description.",
+            "description": "Topic description successfully retrieved.",
             "schema": {
               "$ref": "#/definitions/TopicResource"
             }
@@ -1294,31 +1213,22 @@
           "Topics"
         ],
         "operationId": "Topics_ListAuthorizationRules",
-        "description": "Authorization rules for a topic.",
+        "x-ms-examples": {
+          "TopicAutorizationRuleListAll": { "$ref": "../examples/Topics/SBTopicAutorizationRuleListAll.json" }
+        },
+        "description": "Gets authorization rules for a topic.",
         "externalDocs": {
           "url": "https://msdn.microsoft.com/en-us/library/azure/mt720681.aspx"
         },
         "parameters": [
           {
-            "name": "resourceGroupName",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "description": "The name of the resource group."
+            "$ref": "#/parameters/resourceGroupNameParameter"
           },
           {
-            "name": "namespaceName",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "description": "The topic name"
+            "$ref": "#/parameters/namespaceNameParameter"
           },
           {
-            "name": "topicName",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "description": "The topic name."
+            "$ref": "#/parameters/topicNameParameter"
           },
           {
             "$ref": "#/parameters/ApiVersionParameter"
@@ -1329,7 +1239,7 @@
         ],
         "responses": {
           "200": {
-            "description": "Topic AuthorizationRule returned successfully",
+            "description": "Authorization rules successfully returned.",
             "schema": {
               "$ref": "#/definitions/SharedAccessAuthorizationRuleListResult"
             }
@@ -1346,38 +1256,25 @@
           "Topics"
         ],
         "operationId": "Topics_CreateOrUpdateAuthorizationRule",
-        "description": "Creates an authorizatioRule for the specified topic.",
+        "x-ms-examples": {
+          "TopicAuthorizationRuleCreate": { "$ref": "../examples/Topics/SBTopicAuthorizationRuleCreate.json" }
+        },
+        "description": "Creates an authorizatio rule for the specified topic.",
         "externalDocs": {
           "url": "https://msdn.microsoft.com/en-us/library/azure/mt720678.aspx"
         },
         "parameters": [
           {
-            "name": "resourceGroupName",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "description": "The name of the resource group."
+            "$ref": "#/parameters/resourceGroupNameParameter"
           },
           {
-            "name": "namespaceName",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "description": "The namespace name."
+            "$ref": "#/parameters/namespaceNameParameter"
           },
           {
-            "name": "topicName",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "description": "The topic name."
+            "$ref": "#/parameters/topicNameParameter"
           },
           {
-            "name": "authorizationRuleName",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "description": "Aauthorization Rule Name."
+            "$ref": "#/parameters/authorizationRuleNameParameter"
           },
           {
             "name": "parameters",
@@ -1397,7 +1294,7 @@
         ],
         "responses": {
           "200": {
-            "description": "Topic Authorization rule created",
+            "description": "Topic authorization rule successfully created.",
             "schema": {
               "$ref": "#/definitions/SharedAccessAuthorizationRuleResource"
             }
@@ -1409,38 +1306,25 @@
           "Topics"
         ],
         "operationId": "Topics_GetAuthorizationRule",
-        "description": "Returns the specified authorizationRule.",
+        "x-ms-examples": {
+          "TopicAutorizationRuleGet": { "$ref": "../examples/Topics/SBTopicAutorizationRuleGet.json" }
+        },
+        "description": "Returns the specified authorization rule.",
         "externalDocs": {
           "url": "https://msdn.microsoft.com/en-us/library/azure/mt720676.aspx"
         },
         "parameters": [
           {
-            "name": "resourceGroupName",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "description": "The name of the resource group."
+            "$ref": "#/parameters/resourceGroupNameParameter"
           },
           {
-            "name": "namespaceName",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "description": "The namespace name"
+            "$ref": "#/parameters/namespaceNameParameter"
           },
           {
-            "name": "topicName",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "description": "The topic name."
+            "$ref": "#/parameters/topicNameParameter"
           },
           {
-            "name": "authorizationRuleName",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "description": "Authorization rule name."
+            "$ref": "#/parameters/authorizationRuleNameParameter"
           },
           {
             "$ref": "#/parameters/ApiVersionParameter"
@@ -1451,7 +1335,7 @@
         ],
         "responses": {
           "200": {
-            "description": "Topic AuthorizationRule returned successfully",
+            "description": "Topic authorization rule returned successfully.",
             "schema": {
               "$ref": "#/definitions/SharedAccessAuthorizationRuleResource"
             }
@@ -1463,38 +1347,25 @@
           "Topics"
         ],
         "operationId": "Topics_DeleteAuthorizationRule",
-        "description": "Deletes a topic authorizationRule",
+        "x-ms-examples": {
+          "TopicAutorizationRuleDelete": { "$ref": "../examples/Topics/SBTopicAutorizationRuleDelete.json" }
+        },
+        "description": "Deletes a topic authorization rule.",
         "externalDocs": {
           "url": "https://msdn.microsoft.com/en-us/library/azure/mt720681.aspx"
         },
         "parameters": [
           {
-            "name": "resourceGroupName",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "description": "The name of the resource group."
+            "$ref": "#/parameters/resourceGroupNameParameter"
           },
           {
-            "name": "namespaceName",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "description": "The namespace name."
+            "$ref": "#/parameters/namespaceNameParameter"
           },
           {
-            "name": "topicName",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "description": "The topic name."
+            "$ref": "#/parameters/topicNameParameter"
           },
           {
-            "name": "authorizationRuleName",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "description": "AuthorizationRule Name."
+            "$ref": "#/parameters/authorizationRuleNameParameter"
           },
           {
             "$ref": "#/parameters/ApiVersionParameter"
@@ -1505,10 +1376,10 @@
         ],
         "responses": {
           "204": {
-            "description": "No Content"
+            "description": "No content."
           },
           "200": {
-            "description": "Topics AuthorizationRule deleted"
+            "description": "Topic authorization rule successfully deleted."
           }
         }
       }
@@ -1519,38 +1390,25 @@
           "Topics"
         ],
         "operationId": "Topics_ListKeys",
-        "description": "Primary and Secondary ConnectionStrings to the topic",
+        "x-ms-examples": {
+          "TopicAuthorizationRuleListKey": { "$ref": "../examples/Topics/SBTopicAuthorizationRuleListKey.json" }
+        },
+        "description": "Gets the primary and secondary connection strings for the topic.",
         "externalDocs": {
           "url": "https://msdn.microsoft.com/en-us/library/azure/mt720677.aspx"
         },
         "parameters": [
           {
-            "name": "resourceGroupName",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "description": "The name of the resource group."
+            "$ref": "#/parameters/resourceGroupNameParameter"
           },
           {
-            "name": "namespaceName",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "description": "The namespace name."
+            "$ref": "#/parameters/namespaceNameParameter"
           },
           {
-            "name": "topicName",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "description": "The topic name."
+            "$ref": "#/parameters/topicNameParameter"
           },
           {
-            "name": "authorizationRuleName",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "description": "The authorizationRule name."
+            "$ref": "#/parameters/authorizationRuleNameParameter"
           },
           {
             "$ref": "#/parameters/ApiVersionParameter"
@@ -1561,7 +1419,7 @@
         ],
         "responses": {
           "200": {
-            "description": "Successful",
+            "description": "Connection strings successfully retrieved.",
             "schema": {
               "$ref": "#/definitions/ResourceListKeys"
             }
@@ -1575,38 +1433,25 @@
           "Topics"
         ],
         "operationId": "Topics_RegenerateKeys",
-        "description": "Regenerates Primary or Secondary ConnectionStrings to the topic",
+        "x-ms-examples": {
+          "TopicAuthorizationRuleRegenrateKey": { "$ref": "../examples/Topics/SBTopicAuthorizationRuleRegenrateKey.json" }
+        },
+        "description": "Regenerates primary or secondary connection strings for the topic.",
         "externalDocs": {
           "url": "https://msdn.microsoft.com/en-us/library/azure/mt720679.aspx"
         },
         "parameters": [
           {
-            "name": "resourceGroupName",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "description": "The name of the resource group."
+            "$ref": "#/parameters/resourceGroupNameParameter"
           },
           {
-            "name": "namespaceName",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "description": "The namespace name."
+            "$ref": "#/parameters/namespaceNameParameter"
           },
           {
-            "name": "topicName",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "description": "The topic name."
+            "$ref": "#/parameters/topicNameParameter"
           },
           {
-            "name": "authorizationRuleName",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "description": "The authorizationRule name."
+            "$ref": "#/parameters/authorizationRuleNameParameter"
           },
           {
             "name": "parameters",
@@ -1615,7 +1460,7 @@
             "schema": {
               "$ref": "#/definitions/RegenerateKeysParameters"
             },
-            "description": "Parameters supplied to regenerate Auth Rule."
+            "description": "Parameters supplied to regenerate the authorization rule."
           },
           {
             "$ref": "#/parameters/ApiVersionParameter"
@@ -1626,7 +1471,7 @@
         ],
         "responses": {
           "200": {
-            "description": "Successful",
+            "description": "Connection strings successfully regenerated.",
             "schema": {
               "$ref": "#/definitions/ResourceListKeys"
             }
@@ -1640,31 +1485,22 @@
           "Subscriptions"
         ],
         "operationId": "Subscriptions_ListAll",
-        "description": "Lsit all the subscriptions under a specified topic",
+        "x-ms-examples": {
+          "SubscriptionListByTopic": { "$ref": "../examples/Subscriptions/SBSubscriptionListByTopic.json" }
+        },
+        "description": "List all the subscriptions under a specified topic.",
         "externalDocs": {
           "url": "https://msdn.microsoft.com/en-us/library/azure/mt639400.aspx"
         },
         "parameters": [
           {
-            "name": "resourceGroupName",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "description": "The name of the resource group."
+            "$ref": "#/parameters/resourceGroupNameParameter"
           },
           {
-            "name": "namespaceName",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "description": "The namespace name."
+            "$ref": "#/parameters/namespaceNameParameter"
           },
           {
-            "name": "topicName",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "description": "The topic name."
+            "$ref": "#/parameters/topicNameParameter"
           },
           {
             "$ref": "#/parameters/ApiVersionParameter"
@@ -1675,7 +1511,7 @@
         ],
         "responses": {
           "200": {
-            "description": "Successfully retrieved list of Subscriptions.",
+            "description": "Successfully retrieved list of subscriptions.",
             "schema": {
               "$ref": "#/definitions/SubscriptionListResult"
             }
@@ -1692,38 +1528,25 @@
           "Subscriptions"
         ],
         "operationId": "Subscriptions_CreateOrUpdate",
-        "description": "Creates a topic subscription",
+        "x-ms-examples": {
+          "SubscriptionCreate": { "$ref": "../examples/Subscriptions/SBSubscriptionCreate.json" }
+        },
+        "description": "Creates a topic subscription.",
         "externalDocs": {
           "url": "https://msdn.microsoft.com/en-us/library/azure/mt639385.aspx"
         },
         "parameters": [
           {
-            "name": "resourceGroupName",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "description": "The name of the resource group."
+            "$ref": "#/parameters/resourceGroupNameParameter"
           },
           {
-            "name": "namespaceName",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "description": "The namespace name."
+            "$ref": "#/parameters/namespaceNameParameter"
           },
           {
-            "name": "topicName",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "description": "The topicName name."
+            "$ref": "#/parameters/topicNameParameter"
           },
           {
-            "name": "subscriptionName",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "description": "The subscriptionName name."
+            "$ref": "#/parameters/subscriptionNameParameter"
           },
           {
             "name": "parameters",
@@ -1732,7 +1555,7 @@
             "schema": {
               "$ref": "#/definitions/SubscriptionCreateOrUpdateParameters"
             },
-            "description": "Parameters supplied to create a subscription Resource."
+            "description": "Parameters supplied to create a subscription resource."
           },
           {
             "$ref": "#/parameters/ApiVersionParameter"
@@ -1743,7 +1566,7 @@
         ],
         "responses": {
           "200": {
-            "description": "Subscription create request accepted",
+            "description": "Subscription create request accepted.",
             "schema": {
               "$ref": "#/definitions/SubscriptionResource"
             }
@@ -1755,38 +1578,25 @@
           "Subscriptions"
         ],
         "operationId": "Subscriptions_Delete",
+        "x-ms-examples": {
+          "SubscriptionDelete": { "$ref": "../examples/Subscriptions/SBSubscriptionDelete.json" }
+        },
         "description": "Deletes a subscription from the specified topic.",
         "externalDocs": {
           "url": "https://msdn.microsoft.com/en-us/library/azure/mt639381.aspx"
         },
         "parameters": [
           {
-            "name": "resourceGroupName",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "description": "The name of the resource group."
+            "$ref": "#/parameters/resourceGroupNameParameter"
           },
           {
-            "name": "namespaceName",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "description": "The namespace name."
+            "$ref": "#/parameters/namespaceNameParameter"
           },
           {
-            "name": "topicName",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "description": "The topic name."
+            "$ref": "#/parameters/topicNameParameter"
           },
           {
-            "name": "subscriptionName",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "description": "The subscription name."
+            "$ref": "#/parameters/subscriptionNameParameter"
           },
           {
             "$ref": "#/parameters/ApiVersionParameter"
@@ -1797,10 +1607,10 @@
         ],
         "responses": {
           "204": {
-            "description": "No Content"
+            "description": "No content."
           },
           "200": {
-            "description": "Subscription deleted."
+            "description": "Subscription successfully deleted."
           }
         }
       },
@@ -1809,38 +1619,25 @@
           "Subscriptions"
         ],
         "operationId": "Subscriptions_Get",
+        "x-ms-examples": {
+          "SubscriptionGet": { "$ref": "../examples/Subscriptions/SBSubscriptionGet.json" }
+        },
         "description": "Returns a subscription description for the specified topic.",
         "externalDocs": {
           "url": "https://msdn.microsoft.com/en-us/library/azure/mt639402.aspx"
         },
         "parameters": [
           {
-            "name": "resourceGroupName",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "description": "The name of the resource group."
+            "$ref": "#/parameters/resourceGroupNameParameter"
           },
           {
-            "name": "namespaceName",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "description": "The namespace name."
+            "$ref": "#/parameters/namespaceNameParameter"
           },
           {
-            "name": "topicName",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "description": "The topic name."
+            "$ref": "#/parameters/topicNameParameter"
           },
           {
-            "name": "subscriptionName",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "description": "The subscription name."
+            "$ref": "#/parameters/subscriptionNameParameter"
           },
           {
             "$ref": "#/parameters/ApiVersionParameter"
@@ -1851,7 +1648,7 @@
         ],
         "responses": {
           "200": {
-            "description": "Successfully retrieved queue description.",
+            "description": "Successfully retrieved subscription description.",
             "schema": {
               "$ref": "#/definitions/SubscriptionResource"
             }
@@ -1861,6 +1658,30 @@
     }
   },
   "definitions": {
+    "TrackedResource": {
+      "properties": {
+        "location": {
+          "type": "string",
+          "description": "Resource location"
+        },
+        "tags": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          },
+          "description": "Resource tags"
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "#/definitions/Resource"
+        }
+      ],
+      "required": [
+        "location"
+      ],
+      "description": "The Resource definition."
+    },
     "Resource": {
       "properties": {
         "id": {
@@ -1877,23 +1698,10 @@
           "readOnly": true,
           "type": "string",
           "description": "Resource type"
-        },
-        "location": {
-          "type": "string",
-          "description": "Resource location"
-        },
-        "tags": {
-          "type": "object",
-          "additionalProperties": {
-            "type": "string"
-          },
-          "description": "Resource tags"
         }
       },
-      "required": [
-        "location"
-      ],
-      "x-ms-azure-resource": true
+      "x-ms-azure-resource": true,
+      "description": "The Resource definition for other than namespace."
     },
     "NamespaceCreateOrUpdateParameters": {
       "properties": {
@@ -1919,7 +1727,7 @@
       "required": [
         "location"
       ],
-      "description": "Parameters supplied to the CreateOrUpdate Namespace operation."
+      "description": "Parameters supplied to the Create Or Update Namespace operation."
     },
     "NamespaceListResult": {
       "properties": {
@@ -1932,7 +1740,7 @@
         },
         "nextLink": {
           "type": "string",
-          "description": "Link to the next set of results. Not empty if Value contains incomplete list of Namespaces"
+          "description": "Link to the next set of results. Not empty if Value contains incomplete list of Namespaces."
         }
       },
       "description": "The response of the List Namespace operation."
@@ -1949,16 +1757,17 @@
       },
       "allOf": [
         {
-          "$ref": "#/definitions/Resource"
+          "$ref": "#/definitions/TrackedResource"
         }
       ],
-      "description": "Description of a Namespace resource."
+      "description": "Description of a namespace resource."
     },
     "NamespaceProperties": {
       "properties": {
         "provisioningState": {
           "type": "string",
-          "description": "Provisioning state of the Namespace."
+          "readOnly": true,
+          "description": "Provisioning state of the namespace."
         },
         "status": {
           "type": "string",
@@ -1986,37 +1795,53 @@
         "createdAt": {
           "type": "string",
           "format": "date-time",
+          "readOnly": true,
           "description": "The time the namespace was created."
         },
         "updatedAt": {
           "type": "string",
           "format": "date-time",
+          "readOnly": true,
           "description": "The time the namespace was updated."
         },
         "serviceBusEndpoint": {
-          "externalDocs": {
-            "url": "http://msdn.microsoft.com/en-us/library/windowsazure/jj873988.aspx"
-          },
           "type": "string",
-          "description": "Endpoint you can use to perform ServiceBus operations."
+          "readOnly": true,
+          "description": "Endpoint you can use to perform Service Bus operations."
         },
         "createACSNamespace": {
           "type": "boolean",
-          "description": "Indicates whether to create ACS namespace."
+          "description": "Indicates whether to create an ACS namespace."
         },
         "enabled": {
           "type": "boolean",
           "description": "Specifies whether this instance is enabled."
         }
       },
-      "description": "Properties of the Namespace."
+      "description": "Properties of the namespace."
+    },
+    "NamespaceUpdateParameters": {
+      "properties": {
+        "tags": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          },
+          "description": "Resource tags"
+        },
+        "sku": {
+          "$ref": "#/definitions/Sku",
+          "description": "The sku of the created namespace"
+        }
+      },
+      "description": "Parameters supplied to the Patch Namespace operation."
     },
     "Sku": {
       "type": "object",
       "properties": {
         "name": {
           "type": "string",
-          "description": "Name of this Sku",
+          "description": "Name of this SKU.",
           "enum": [
             "Basic",
             "Standard",
@@ -2029,7 +1854,7 @@
         },
         "tier": {
           "type": "string",
-          "description": "The tier of this particular SKU",
+          "description": "The billing tier of this particular SKU.",
           "enum": [
             "Basic",
             "Standard",
@@ -2043,13 +1868,13 @@
         "capacity": {
           "format": "int32",
           "type": "integer",
-          "description": "The messaging units for the tier specified"
+          "description": "The specified messaging units for the tier."
         }
       },
       "required": [
         "tier"
       ],
-      "description": "Sku of the Namespace."
+      "description": "SKU of the namespace."
     },
     "SharedAccessAuthorizationRuleCreateOrUpdateParameters": {
       "properties": {
@@ -2059,14 +1884,14 @@
         },
         "name": {
           "type": "string",
-          "description": "Name of the AuthorizationRule."
+          "description": "Name of the authorization rule."
         },
         "properties": {
           "x-ms-client-flatten": true,
           "$ref": "#/definitions/SharedAccessAuthorizationRuleProperties"
         }
       },
-      "description": "Parameters supplied to the CreateOrUpdate  AuthorizationRules."
+      "description": "Parameters supplied to the Create Or Update Authorization Rules operation."
     },
     "SharedAccessAuthorizationRuleListResult": {
       "properties": {
@@ -2075,14 +1900,14 @@
           "items": {
             "$ref": "#/definitions/SharedAccessAuthorizationRuleResource"
           },
-          "description": "Result of the List AuthorizationRules operation."
+          "description": "Result of the List Authorization Rules operation."
         },
         "nextLink": {
           "type": "string",
-          "description": "Link to the next set of results. Not empty if Value contains incomplete list of AuthorizationRules"
+          "description": "Link to the next set of results. Not empty if Value contains incomplete list of Authorization Rules."
         }
       },
-      "description": "The response of the List Namespace operation."
+      "description": "The response to the List Namespace operation."
     },
     "SharedAccessAuthorizationRuleResource": {
       "properties": {
@@ -2096,7 +1921,7 @@
           "$ref": "#/definitions/Resource"
         }
       ],
-      "description": "Description of a Namespace AuthorizationRules."
+      "description": "Description of a namespace authorization rule."
     },
     "SharedAccessAuthorizationRuleProperties": {
       "properties": {
@@ -2126,23 +1951,23 @@
       "properties": {
         "primaryConnectionString": {
           "type": "string",
-          "description": "PrimaryConnectionString of the created Namespace AuthorizationRule."
+          "description": "Primary connection string of the created namespace authorization rule."
         },
         "secondaryConnectionString": {
           "type": "string",
-          "description": "SecondaryConnectionString of the created Namespace AuthorizationRule"
+          "description": "Secondary connection string of the created namespace authorization rule."
         },
         "primaryKey": {
           "type": "string",
-          "description": "A base64-encoded 256-bit primary key for signing and validating the SAS token"
+          "description": "A base64-encoded 256-bit primary key for signing and validating the SAS token."
         },
         "secondaryKey": {
           "type": "string",
-          "description": "A base64-encoded 256-bit primary key for signing and validating the SAS token"
+          "description": "A base64-encoded 256-bit primary key for signing and validating the SAS token."
         },
         "keyName": {
           "type": "string",
-          "description": "A string that describes the authorization rule"
+          "description": "A string that describes the authorization rule."
         }
       },
       "description": "Namespace/ServiceBus Connection String"
@@ -2151,7 +1976,7 @@
       "properties": {
         "Policykey": {
           "type": "string",
-          "description": "Key that needs to be regenerated .",
+          "description": "Key that needs to be regenerated.",
           "enum": [
             "PrimaryKey",
             "SecondaryKey"
@@ -2162,7 +1987,7 @@
           }
         }
       },
-      "description": "Parameters supplied to the Regenerate Auth Rule."
+      "description": "Parameters supplied to the Regenerate Authorization Rule operation."
     },
     "QueueCreateOrUpdateParameters": {
       "properties": {
@@ -2182,7 +2007,7 @@
       "required": [
         "location"
       ],
-      "description": "Parameters supplied to the CreateOrUpdate Queue operation."
+      "description": "Parameters supplied to the Create Or Update Queue operation."
     },
     "QueueListResult": {
       "properties": {
@@ -2195,10 +2020,10 @@
         },
         "nextLink": {
           "type": "string",
-          "description": "Link to the next set of results. Not empty if Value contains incomplete list of Queues"
+          "description": "Link to the next set of results. Not empty if Value contains incomplete list of queues."
         }
       },
-      "description": "The response of the List Queues operation."
+      "description": "The response to the List Queues operation."
     },
     "QueueResource": {
       "properties": {
@@ -2216,86 +2041,91 @@
     },
     "QueueProperties": {
       "properties": {
-        "lockDuration ": {
+        "lockDuration": {
           "type": "string",
-          "description": "the duration of a peek lock; that is, the amount of time that the message is locked for other receivers. The maximum value for LockDuration is 5 minutes; the default value is 1 minute."
+          "description": "The duration of a peek-lock; that is, the amount of time that the message is locked for other receivers. The maximum value for LockDuration is 5 minutes; the default value is 1 minute."
         },
         "accessedAt": {
           "type": "string",
           "format": "date-time",
+          "readOnly": true,
           "description": "Last time a message was sent, or the last time there was a receive request to this queue."
         },
         "autoDeleteOnIdle": {
           "type": "string",
           "description": "the TimeSpan idle interval after which the queue is automatically deleted. The minimum duration is 5 minutes."
         },
-        "entityAvailabilityStatus ": {
+        "entityAvailabilityStatus": {
           "$ref": "#/definitions/EntityAvailabilityStatus",
           "description": "Entity availability status for the queue."
         },
         "createdAt": {
           "type": "string",
           "format": "date-time",
-          "description": "the exact time the message was created."
+          "readOnly": true,
+          "description": "The exact time the message was created."
         },
         "defaultMessageTimeToLive": {
           "type": "string",
-          "description": "the default message time to live value. This is the duration after which the message expires, starting from when the message is sent to Service Bus. This is the default value used when TimeToLive is not set on a message itself."
+          "description": "The default message time to live value. This is the duration after which the message expires, starting from when the message is sent to Service Bus. This is the default value used when TimeToLive is not set on a message itself."
         },
-        "duplicateDetectionHistoryTimeWindow ": {
+        "duplicateDetectionHistoryTimeWindow": {
           "type": "string",
-          "description": "TimeSpan structure that defines the duration of the duplicate detection history. The default value is 10 minutes.."
+          "description": "TimeSpan structure that defines the duration of the duplicate detection history. The default value is 10 minutes."
         },
         "enableBatchedOperations": {
           "type": "boolean",
-          "description": "value that indicates whether server-side batched operations are enabled.."
+          "description": "A value that indicates whether server-side batched operations are enabled."
         },
         "deadLetteringOnMessageExpiration": {
           "type": "boolean",
-          "description": "a value that indicates whether this queue has dead letter support when a message expires."
+          "description": "A value that indicates whether this queue has dead letter support when a message expires."
         },
         "enableExpress": {
           "type": "boolean",
-          "description": "a value that indicates whether Express Entities are enabled. An express queue holds a message in memory temporarily before writing it to persistent storage."
+          "description": "A value that indicates whether Express Entities are enabled. An express queue holds a message in memory temporarily before writing it to persistent storage."
         },
         "enablePartitioning": {
           "type": "boolean",
-          "description": "value that indicates whether the queue to be partitioned across multiple message brokers is enabled."
+          "description": "A value that indicates whether the queue is to be partitioned across multiple message brokers."
         },
         "isAnonymousAccessible": {
           "type": "boolean",
-          "description": "a value that indicates whether the message is anonymous accessible."
+          "description": "A value that indicates whether the message is accessible anonymously."
         },
-        "maxDeliveryCount ": {
+        "maxDeliveryCount": {
           "format": "int32",
           "type": "integer",
-          "description": "the maximum delivery count. A message is automatically deadlettered after this number of deliveries."
+          "description": "The maximum delivery count. A message is automatically deadlettered after this number of deliveries."
         },
         "maxSizeInMegabytes": {
           "format": "int64",
           "type": "integer",
-          "description": "the maximum size of the queue in megabytes, which is the size of memory allocated for the queue."
+          "description": "The maximum size of the queue in megabytes, which is the size of memory allocated for the queue."
         },
-        "messageCount ": {
+        "messageCount": {
           "format": "int64",
           "type": "integer",
-          "description": "the number of messages in the queue."
+          "readOnly": true,
+          "description": "The number of messages in the queue."
         },
         "countDetails": {
+          "readOnly": true,
           "$ref": "#/definitions/MessageCountDetails"
         },
         "requiresDuplicateDetection": {
           "type": "boolean",
-          "description": "the value indicating if this queue requires duplicate detection."
+          "description": "A value indicating if this queue requires duplicate detection."
         },
         "requiresSession": {
           "type": "boolean",
-          "description": "a value that indicates whether the queue supports the concept of session."
+          "description": "A value that indicates whether the queue supports the concept of sessions."
         },
-        "sizeInBytes ": {
+        "sizeInBytes": {
           "format": "int64",
           "type": "integer",
-          "description": "the size of the queue in bytes."
+          "readOnly": true,
+          "description": "The size of the queue, in bytes."
         },
         "status": {
           "$ref": "#/definitions/EntityStatus",
@@ -2303,14 +2133,16 @@
         },
         "supportOrdering": {
           "type": "boolean",
-          "description": "a value that indicates whether the queue supports ordering."
+          "description": "A value that indicates whether the queue supports ordering."
         },
         "updatedAt": {
           "type": "string",
           "format": "date-time",
-          "description": "the exact time the message has been updated."
+          "readOnly": true,
+          "description": "The exact time the message was updated."
         }
-      }
+      },
+      "description": "The Queue Properties definition."
     },
     "MessageCountDetails": {
       "type": "object",
@@ -2318,26 +2150,31 @@
         "activeMessageCount": {
           "format": "int64",
           "type": "integer",
+          "readOnly": true,
           "description": "Number of active messages in the queue, topic, or subscription."
         },
         "deadLetterMessageCount": {
           "format": "int64",
           "type": "integer",
-          "description": "Number of messages that are dead letters."
+          "readOnly": true,
+          "description": "Number of messages that are dead lettered."
         },
         "scheduledMessageCount": {
           "format": "int64",
           "type": "integer",
-          "description": "Number scheduled messages."
+          "readOnly": true,
+          "description": "Number of scheduled messages."
         },
         "transferDeadLetterMessageCount": {
           "format": "int64",
           "type": "integer",
+          "readOnly": true,
           "description": "Number of messages transferred into dead letters."
         },
         "transferMessageCount": {
           "format": "int64",
           "type": "integer",
+          "readOnly": true,
           "description": "Number of messages transferred to another queue, topic, or subscription."
         }
       },
@@ -2361,7 +2198,7 @@
       "required": [
         "location"
       ],
-      "description": "Parameters supplied to the CreateOrUpdate Topic operation."
+      "description": "Parameters supplied to the Create Or Update Topic operation."
     },
     "TopicListResult": {
       "properties": {
@@ -2374,10 +2211,10 @@
         },
         "nextLink": {
           "type": "string",
-          "description": "Link to the next set of results. Not empty if Value contains incomplete list of Topics"
+          "description": "Link to the next set of results. Not empty if Value contains incomplete list of topics."
         }
       },
-      "description": "The response of the List Topics operation."
+      "description": "The response to the List Topics operation."
     },
     "TopicResource": {
       "properties": {
@@ -2391,42 +2228,45 @@
           "$ref": "#/definitions/Resource"
         }
       ],
-      "description": "Description of topic Resource."
+      "description": "Description of topic resource."
     },
     "TopicProperties": {
       "properties": {
         "accessedAt": {
           "type": "string",
           "format": "date-time",
-          "description": "Last time the message was sent or a request was received for this topic."
+          "readOnly": true,
+          "description": "Last time the message was sent, or a request was received, for this topic."
         },
         "autoDeleteOnIdle": {
           "type": "string",
           "description": "TimeSpan idle interval after which the topic is automatically deleted. The minimum duration is 5 minutes."
         },
-        "entityAvailabilityStatus ": {
+        "entityAvailabilityStatus": {
           "$ref": "#/definitions/EntityAvailabilityStatus",
           "description": "Entity availability status for the topic."
         },
         "createdAt": {
           "type": "string",
           "format": "date-time",
+          "readOnly": true,
           "description": "Exact time the message was created."
         },
         "countDetails": {
+          "readOnly": true,
           "$ref": "#/definitions/MessageCountDetails"
         },
         "defaultMessageTimeToLive": {
           "type": "string",
           "description": "Default message time to live value. This is the duration after which the message expires, starting from when the message is sent to Service Bus. This is the default value used when TimeToLive is not set on a message itself."
         },
-        "duplicateDetectionHistoryTimeWindow ": {
+        "duplicateDetectionHistoryTimeWindow": {
           "type": "string",
-          "description": "TimeSpan structure that defines the duration of the duplicate detection history. The default value is 10 minutes.."
+          "description": "TimeSpan structure that defines the duration of the duplicate detection history. The default value is 10 minutes."
         },
         "enableBatchedOperations": {
           "type": "boolean",
-          "description": "Value that indicates whether server-side batched operations are enabled.."
+          "description": "Value that indicates whether server-side batched operations are enabled."
         },
         "enableExpress": {
           "type": "boolean",
@@ -2438,7 +2278,7 @@
         },
         "enableSubscriptionPartitioning": {
           "type": "boolean",
-          "description": "Value that indicates whether partitioning is enabled or disabled.."
+          "description": "Value that indicates whether partitioning is enabled or disabled."
         },
         "filteringMessagesBeforePublishing": {
           "type": "boolean",
@@ -2446,7 +2286,7 @@
         },
         "isAnonymousAccessible": {
           "type": "boolean",
-          "description": "Value that indicates whether the message is anonymous accessible."
+          "description": "Value that indicates whether the message is accessible anonymously."
         },
         "isExpress": {
           "type": "boolean",
@@ -2455,7 +2295,7 @@
         "maxSizeInMegabytes": {
           "format": "int64",
           "type": "integer",
-          "description": "Maximum size of the topic in megabytes, which is the size of memory allocated for the topic."
+          "description": "Maximum size of the topic in megabytes, which is the size of the memory allocated for the topic."
         },
         "requiresDuplicateDetection": {
           "type": "boolean",
@@ -2464,7 +2304,8 @@
         "sizeInBytes": {
           "format": "int64",
           "type": "integer",
-          "description": "Size of the topic in bytes."
+          "readOnly": true,
+          "description": "Size of the topic, in bytes."
         },
         "status": {
           "$ref": "#/definitions/EntityStatus",
@@ -2473,6 +2314,7 @@
         "subscriptionCount": {
           "format": "int32",
           "type": "integer",
+          "readOnly": true,
           "description": "Number of subscriptions."
         },
         "supportOrdering": {
@@ -2482,9 +2324,11 @@
         "updatedAt": {
           "type": "string",
           "format": "date-time",
-          "description": "The exact time the message has been updated."
+          "readOnly": true,
+          "description": "The exact time the message was updated."
         }
-      }
+      },
+      "description": "The Tpoic Properties definition."
     },
     "SubscriptionCreateOrUpdateParameters": {
       "properties": {
@@ -2494,7 +2338,7 @@
         },
         "type": {
           "type": "string",
-          "description": "Resource Manager type of the resource."
+          "description": "Resource manager type of the resource."
         },
         "properties": {
           "x-ms-client-flatten": true,
@@ -2504,7 +2348,7 @@
       "required": [
         "location"
       ],
-      "description": "Parameters supplied to the CreateOrUpdate Subscription operation."
+      "description": "Parameters supplied to the Create Or Update Subscription operation."
     },
     "SubscriptionListResult": {
       "properties": {
@@ -2517,10 +2361,10 @@
         },
         "nextLink": {
           "type": "string",
-          "description": "Link to the next set of results. Not empty if Value contains incomplete list of Subscriptions"
+          "description": "Link to the next set of results. Not empty if Value contains incomplete list of subscriptions."
         }
       },
-      "description": "The response of the List Subscriptions operation."
+      "description": "The response to the List Subscriptions operation."
     },
     "SubscriptionResource": {
       "properties": {
@@ -2534,25 +2378,28 @@
           "$ref": "#/definitions/Resource"
         }
       ],
-      "description": "Description of Subscription Resource."
+      "description": "Description of subscription resource."
     },
     "SubscriptionProperties": {
       "properties": {
         "accessedAt": {
           "type": "string",
+          "readOnly": true,
           "format": "date-time",
-          "description": "Last time a there was a receive request to this subscription."
+          "description": "Last time there was a receive request to this subscription."
         },
         "autoDeleteOnIdle": {
           "type": "string",
           "description": "TimeSpan idle interval after which the topic is automatically deleted. The minimum duration is 5 minutes."
         },
         "countDetails": {
+          "readOnly": true,
           "$ref": "#/definitions/MessageCountDetails"
         },
         "createdAt": {
           "type": "string",
           "format": "date-time",
+          "readOnly": true,
           "description": "Exact time the message was created."
         },
         "defaultMessageTimeToLive": {
@@ -2561,15 +2408,15 @@
         },
         "deadLetteringOnFilterEvaluationExceptions": {
           "type": "boolean",
-          "description": "Value that indicates if a subscription has dead letter support on Filter evaluation exceptions."
+          "description": "Value that indicates whether a subscription has dead letter support on filter evaluation exceptions."
         },
         "deadLetteringOnMessageExpiration": {
           "type": "boolean",
-          "description": "Value that indicates if a subscription has dead letter support when a message expires."
+          "description": "Value that indicates whether a subscription has dead letter support when a message expires."
         },
         "enableBatchedOperations": {
           "type": "boolean",
-          "description": "Value that indicates whether server-side batched operations are enabled.."
+          "description": "Value that indicates whether server-side batched operations are enabled."
         },
         "entityAvailabilityStatus": {
           "$ref": "#/definitions/EntityAvailabilityStatus",
@@ -2591,11 +2438,12 @@
         "messageCount": {
           "format": "int64",
           "type": "integer",
+          "readOnly": true,
           "description": "Number of messages."
         },
         "requiresSession": {
           "type": "boolean",
-          "description": "Value indicating if a subscription supports the concept of session."
+          "description": "Value indicating if a subscription supports the concept of sessions."
         },
         "status": {
           "$ref": "#/definitions/EntityStatus",
@@ -2604,7 +2452,8 @@
         "updatedAt": {
           "type": "string",
           "format": "date-time",
-          "description": "The exact time the message has been updated."
+          "readOnly": true,
+          "description": "The exact time the message was updated."
         }
       },
       "description": "Description of Subscription Resource."
@@ -2642,6 +2491,101 @@
         "modelAsString": false
       },
       "description": "Entity status."
+    },
+    "UnavailableReason": {
+      "type": "string",
+      "enum": [
+        "None",
+        "InvalidName",
+        "SubscriptionIsDisabled",
+        "NameInUse",
+        "NameInLockdown",
+        "TooManyNamespaceInCurrentSubscription"
+      ],
+      "x-ms-enum": {
+        "name": "UnavailableReason",
+        "modelAsString": true
+      },
+      "description": "Specifies the reason for the unavailability of the service."
+    },
+    "CheckNameAvailability": {
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "The Name to check the namespce name availability and The namespace name can contain only letters, numbers, and hyphens. The namespace must start with a letter, and it must end with a letter or number."
+        }
+      },
+      "required": [
+        "name"
+      ],
+      "description": "Description of a Check Name availability request properties."
+    },
+    "CheckNameAvailabilityResult": {
+      "properties": {
+        "nameAvailable": {
+          "type": "boolean",
+          "description": "Value indicating namespace is availability, true if the namespace is available; otherwise, false."
+        },
+        "reason": {
+          "$ref": "#/definitions/UnavailableReason",
+          "description": "The reason for unavailability of a namespace."
+        },
+        "message": {
+          "type": "string",
+          "readOnly": true,
+          "description": "The detailed info regarding the reason associated with the namespace."
+        }
+      },
+      "description": "Description of a Check Name availability request properties."
+    },
+    "OperationListResult": {
+      "description": "Result of the request to list ServiceBus operations. It contains a list of operations and a URL link to get the next set of results.",
+      "properties": {
+        "value": {
+          "description": "List of ServiceBus operations supported by the Microsoft.ServiceBus resource provider.",
+          "type": "array",
+          "readOnly": true,
+          "items": {
+            "$ref": "#/definitions/Operation"
+          }
+        },
+        "nextLink": {
+          "description": "URL to get the next set of operation list results if there are any.",
+          "type": "string",
+          "readOnly": true
+        }
+      }
+    },
+    "Operation": {
+      "description": "A ServiceBus REST API operation",
+      "type": "object",
+      "properties": {
+        "name": {
+          "description": "Operation name: {provider}/{resource}/{operation}",
+          "type": "string",
+          "readOnly": true
+        },
+        "display": {
+          "description": "The object that represents the operation.",
+          "properties": {
+            "provider": {
+              "description": "Service provider: Microsoft.ServiceBus",
+              "type": "string",
+              "readOnly": true
+            },
+            "resource": {
+              "description": "Resource on which the operation is performed: Invoice, etc.",
+              "type": "string",
+              "readOnly": true
+            },
+            "operation": {
+              "description": "Operation type: Read, write, delete, etc.",
+              "type": "string",
+              "readOnly": true
+            }
+          }
+        }
+      }
     }
   },
   "parameters": {
@@ -2650,14 +2594,74 @@
       "in": "path",
       "required": true,
       "type": "string",
-      "description": "Subscription credentials which uniquely identify Microsoft Azure subscription. The subscription ID forms part of the URI for every service call."
+      "description": "Subscription credentials that uniquely identify a Microsoft Azure subscription. The subscription ID forms part of the URI for every service call."
     },
     "ApiVersionParameter": {
       "name": "api-version",
       "in": "query",
       "required": true,
       "type": "string",
-      "description": "Client Api Version."
+      "description": "Client API version."
+    },
+    "resourceGroupNameParameter": {
+      "name": "resourceGroupName",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 90,
+      "x-ms-parameter-location": "method",
+      "description": "Name of the Resource group within the Azure subscription."
+    },
+    "namespaceNameParameter": {
+      "name": "namespaceName",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "minLength": 6,
+      "maxLength": 50,
+      "x-ms-parameter-location": "method",
+      "description": "The namespace name"
+    },
+    "authorizationRuleNameParameter": {
+      "name": "authorizationRuleName",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 50,
+      "x-ms-parameter-location": "method",
+      "description": "The authorizationrule name."
+    },
+    "queueNameParameter": {
+      "name": "queueName",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 50,
+      "x-ms-parameter-location": "method",
+      "description": "The queue name."
+    },
+    "topicNameParameter": {
+      "name": "topicName",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 50,
+      "x-ms-parameter-location": "method",
+      "description": "The topic name."
+    },
+    "subscriptionNameParameter": {
+      "name": "subscriptionName",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 50,
+      "x-ms-parameter-location": "method",
+      "description": "The subscription name."
     }
   }
 }

@@ -15,7 +15,7 @@
     "application/json"
   ],
   "paths": {
-	"/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Automation/automationAccounts/{automationAccount}/agentRegistrationInformation": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Automation/automationAccounts/{automationAccountName}/agentRegistrationInformation": {
       "get": {
         "tags": [
           "AgentRegistrationInformation"
@@ -27,39 +27,39 @@
         },
         "parameters": [
           {
-            "name": "automationAccount",
+            "name": "automationAccountName",
             "in": "path",
             "required": true,
             "type": "string",
             "description": "The automation account name."
           },
           {
-            "$ref": "#/parameters/ResourceGroupNameParameter"
+            "$ref": "./definitions.json#/parameters/ResourceGroupNameParameter"
           },
           {
-            "$ref": "#/parameters/SubscriptionIdParameter"
+            "$ref": "./definitions.json#/parameters/SubscriptionIdParameter"
           },
           {
-            "$ref": "#/parameters/ApiVersionParameter"
+            "$ref": "./definitions.json#/parameters/ApiVersionParameter"
           }
         ],
         "responses": {
           "200": {
             "description": "OK",
             "schema": {
-              "$ref": "#/definitions/AgentRegistration"
+              "$ref": "./definitions.json#/definitions/AgentRegistration"
             }
           },
-		  "default": {
+          "default": {
             "description": "Automation error response describing why the operation failed.",
             "schema": {
-              "$ref": "#/definitions/ErrorResponse"
+              "$ref": "./definitions.json#/definitions/ErrorResponse"
             }
           }
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Automation/automationAccounts/{automationAccount}/agentRegistrationInformation/regenerateKey": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Automation/automationAccounts/{automationAccountName}/agentRegistrationInformation/regenerateKey": {
       "post": {
         "tags": [
           "AgentRegistrationInformation"
@@ -71,48 +71,48 @@
         },
         "parameters": [
           {
-            "name": "automationAccount",
+            "name": "automationAccountName",
             "in": "path",
             "required": true,
             "type": "string",
             "description": "The automation account name."
           },
           {
-            "name": "keyName",
+            "name": "agentRegistrationRegenerateKeyParameter",
             "in": "body",
             "required": true,
             "schema": {
-				"$ref": "#/definitions/AgentRegistrationRegenerateKeyParameter"
+              "$ref": "./definitions.json#/definitions/AgentRegistrationRegenerateKeyParameter"
             },
             "description": "The name of the agent registration key to be regenerated"
           },
           {
-            "$ref": "#/parameters/ResourceGroupNameParameter"
+            "$ref": "./definitions.json#/parameters/ResourceGroupNameParameter"
           },
           {
-            "$ref": "#/parameters/SubscriptionIdParameter"
+            "$ref": "./definitions.json#/parameters/SubscriptionIdParameter"
           },
           {
-            "$ref": "#/parameters/ApiVersionParameter"
+            "$ref": "./definitions.json#/parameters/ApiVersionParameter"
           }
         ],
         "responses": {
           "200": {
             "description": "OK",
             "schema": {
-              "$ref": "#/definitions/AgentRegistration"
+              "$ref": "./definitions.json#/definitions/AgentRegistration"
             }
           },
-		  "default": {
+          "default": {
             "description": "Automation error response describing why the operation failed.",
             "schema": {
-              "$ref": "#/definitions/ErrorResponse"
+              "$ref": "./definitions.json#/definitions/ErrorResponse"
             }
           }
         }
       }
     },
-	"/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Automation/automationAccounts/{automationAccount}/nodes/{nodeId}": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Automation/automationAccounts/{automationAccountName}/nodes/{nodeId}": {
       "delete": {
         "tags": [
           "Nodes"
@@ -124,7 +124,7 @@
         },
         "parameters": [
           {
-            "name": "automationAccount",
+            "name": "automationAccountName",
             "in": "path",
             "required": true,
             "type": "string",
@@ -138,23 +138,26 @@
             "description": "The node id."
           },
           {
-            "$ref": "#/parameters/ResourceGroupNameParameter"
+            "$ref": "./definitions.json#/parameters/ResourceGroupNameParameter"
           },
           {
-            "$ref": "#/parameters/SubscriptionIdParameter"
+            "$ref": "./definitions.json#/parameters/SubscriptionIdParameter"
           },
           {
-            "$ref": "#/parameters/ApiVersionParameter"
+            "$ref": "./definitions.json#/parameters/ApiVersionParameter"
           }
         ],
         "responses": {
           "200": {
-            "description": "OK"
+            "description": "OK",
+            "schema": {
+              "$ref": "./definitions.json#/definitions/DscNode"
+            }
           },
-		  "default": {
+          "default": {
             "description": "Automation error response describing why the operation failed.",
             "schema": {
-              "$ref": "#/definitions/ErrorResponse"
+              "$ref": "./definitions.json#/definitions/ErrorResponse"
             }
           }
         }
@@ -170,7 +173,7 @@
         },
         "parameters": [
           {
-            "name": "automationAccount",
+            "name": "automationAccountName",
             "in": "path",
             "required": true,
             "type": "string",
@@ -184,26 +187,26 @@
             "description": "The node id."
           },
           {
-            "$ref": "#/parameters/ResourceGroupNameParameter"
+            "$ref": "./definitions.json#/parameters/ResourceGroupNameParameter"
           },
           {
-            "$ref": "#/parameters/SubscriptionIdParameter"
+            "$ref": "./definitions.json#/parameters/SubscriptionIdParameter"
           },
           {
-            "$ref": "#/parameters/ApiVersionParameter"
+            "$ref": "./definitions.json#/parameters/ApiVersionParameter"
           }
         ],
         "responses": {
           "200": {
             "description": "OK",
             "schema": {
-              "$ref": "#/definitions/DscNode"
+              "$ref": "./definitions.json#/definitions/DscNode"
             }
           },
-		  "default": {
+          "default": {
             "description": "Automation error response describing why the operation failed.",
             "schema": {
-              "$ref": "#/definitions/ErrorResponse"
+              "$ref": "./definitions.json#/definitions/ErrorResponse"
             }
           }
         }
@@ -219,7 +222,7 @@
         },
         "parameters": [
           {
-            "name": "automationAccount",
+            "name": "automationAccountName",
             "in": "path",
             "required": true,
             "type": "string",
@@ -237,49 +240,49 @@
             "in": "body",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/DscNodeUpdateParameters"
+              "$ref": "./definitions.json#/definitions/DscNodeUpdateParameters"
             },
             "description": "Parameters supplied to the update dsc node."
           },
           {
-            "$ref": "#/parameters/ResourceGroupNameParameter"
+            "$ref": "./definitions.json#/parameters/ResourceGroupNameParameter"
           },
           {
-            "$ref": "#/parameters/SubscriptionIdParameter"
+            "$ref": "./definitions.json#/parameters/SubscriptionIdParameter"
           },
           {
-            "$ref": "#/parameters/ApiVersionParameter"
+            "$ref": "./definitions.json#/parameters/ApiVersionParameter"
           }
         ],
         "responses": {
           "200": {
             "description": "OK",
             "schema": {
-              "$ref": "#/definitions/DscNode"
+              "$ref": "./definitions.json#/definitions/DscNode"
             }
           },
-		  "default": {
+          "default": {
             "description": "Automation error response describing why the operation failed.",
             "schema": {
-              "$ref": "#/definitions/ErrorResponse"
+              "$ref": "./definitions.json#/definitions/ErrorResponse"
             }
           }
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Automation/automationAccounts/{automationAccount}/nodes": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Automation/automationAccounts/{automationAccountName}/nodes": {
       "get": {
         "tags": [
           "Nodes"
         ],
-        "operationId": "Nodes_List",
+        "operationId": "Nodes_ListByAutomationAccount",
         "description": "Retrieve a list of dsc nodes.",
         "externalDocs": {
           "url": "http://aka.ms/azureautomationsdk/dscnodeoperations"
         },
         "parameters": [
           {
-            "name": "automationAccount",
+            "name": "automationAccountName",
             "in": "path",
             "required": true,
             "type": "string",
@@ -293,26 +296,26 @@
             "description": "The filter to apply on the operation."
           },
           {
-            "$ref": "#/parameters/ResourceGroupNameParameter"
+            "$ref": "./definitions.json#/parameters/ResourceGroupNameParameter"
           },
           {
-            "$ref": "#/parameters/SubscriptionIdParameter"
+            "$ref": "./definitions.json#/parameters/SubscriptionIdParameter"
           },
           {
-            "$ref": "#/parameters/ApiVersionParameter"
+            "$ref": "./definitions.json#/parameters/ApiVersionParameter"
           }
         ],
         "responses": {
           "200": {
             "description": "OK",
             "schema": {
-              "$ref": "#/definitions/DscNodeListResult"
+              "$ref": "./definitions.json#/definitions/DscNodeListResult"
             }
           },
-		  "default": {
+          "default": {
             "description": "Automation error response describing why the operation failed.",
             "schema": {
-              "$ref": "#/definitions/ErrorResponse"
+              "$ref": "./definitions.json#/definitions/ErrorResponse"
             }
           }
         },
@@ -321,19 +324,19 @@
         }
       }
     },
-	"/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Automation/automationAccounts/{automationAccount}/nodes/{nodeId}/reports": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Automation/automationAccounts/{automationAccountName}/nodes/{nodeId}/reports": {
       "get": {
         "tags": [
           "NodeReports"
         ],
-        "operationId": "NodeReports_List",
+        "operationId": "NodeReports_ListByNode",
         "description": "Retrieve the Dsc node report list by node id and report id.",
         "externalDocs": {
           "url": "http://aka.ms/azureautomationsdk/dscnodereportoperations"
         },
         "parameters": [
           {
-            "name": "automationAccount",
+            "name": "automationAccountName",
             "in": "path",
             "required": true,
             "type": "string",
@@ -354,26 +357,26 @@
             "description": "The filter to apply on the operation."
           },
           {
-            "$ref": "#/parameters/ResourceGroupNameParameter"
+            "$ref": "./definitions.json#/parameters/ResourceGroupNameParameter"
           },
           {
-            "$ref": "#/parameters/SubscriptionIdParameter"
+            "$ref": "./definitions.json#/parameters/SubscriptionIdParameter"
           },
           {
-            "$ref": "#/parameters/ApiVersionParameter"
+            "$ref": "./definitions.json#/parameters/ApiVersionParameter"
           }
         ],
         "responses": {
           "200": {
             "description": "OK",
             "schema": {
-              "$ref": "#/definitions/DscNodeReportListResult"
+              "$ref": "./definitions.json#/definitions/DscNodeReportListResult"
             }
           },
-		  "default": {
+          "default": {
             "description": "Automation error response describing why the operation failed.",
             "schema": {
-              "$ref": "#/definitions/ErrorResponse"
+              "$ref": "./definitions.json#/definitions/ErrorResponse"
             }
           }
         },
@@ -382,7 +385,7 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Automation/automationAccounts/{automationAccount}/nodes/{nodeId}/reports/{reportId}": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Automation/automationAccounts/{automationAccountName}/nodes/{nodeId}/reports/{reportId}": {
       "get": {
         "tags": [
           "NodeReports"
@@ -394,7 +397,7 @@
         },
         "parameters": [
           {
-            "name": "automationAccount",
+            "name": "automationAccountName",
             "in": "path",
             "required": true,
             "type": "string",
@@ -415,32 +418,32 @@
             "description": "The report id."
           },
           {
-            "$ref": "#/parameters/ResourceGroupNameParameter"
+            "$ref": "./definitions.json#/parameters/ResourceGroupNameParameter"
           },
           {
-            "$ref": "#/parameters/SubscriptionIdParameter"
+            "$ref": "./definitions.json#/parameters/SubscriptionIdParameter"
           },
           {
-            "$ref": "#/parameters/ApiVersionParameter"
+            "$ref": "./definitions.json#/parameters/ApiVersionParameter"
           }
         ],
         "responses": {
           "200": {
             "description": "OK",
             "schema": {
-              "$ref": "#/definitions/DscNodeReport"
+              "$ref": "./definitions.json#/definitions/DscNodeReport"
             }
           },
-		  "default": {
+          "default": {
             "description": "Automation error response describing why the operation failed.",
             "schema": {
-              "$ref": "#/definitions/ErrorResponse"
+              "$ref": "./definitions.json#/definitions/ErrorResponse"
             }
           }
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Automation/automationAccounts/{automationAccount}/nodes/{nodeId}/reports/{reportId}/content": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Automation/automationAccounts/{automationAccountName}/nodes/{nodeId}/reports/{reportId}/content": {
       "get": {
         "tags": [
           "NodeReports"
@@ -452,7 +455,7 @@
         },
         "parameters": [
           {
-            "name": "automationAccount",
+            "name": "automationAccountName",
             "in": "path",
             "required": true,
             "type": "string",
@@ -473,13 +476,13 @@
             "description": "The report id."
           },
           {
-            "$ref": "#/parameters/ResourceGroupNameParameter"
+            "$ref": "./definitions.json#/parameters/ResourceGroupNameParameter"
           },
           {
-            "$ref": "#/parameters/SubscriptionIdParameter"
+            "$ref": "./definitions.json#/parameters/SubscriptionIdParameter"
           },
           {
-            "$ref": "#/parameters/ApiVersionParameter"
+            "$ref": "./definitions.json#/parameters/ApiVersionParameter"
           }
         ],
         "responses": {
@@ -489,481 +492,16 @@
               "type": "file"
             }
           },
-		  "default": {
+          "default": {
             "description": "Automation error response describing why the operation failed.",
             "schema": {
-              "$ref": "#/definitions/ErrorResponse"
+              "$ref": "./definitions.json#/definitions/ErrorResponse"
             }
           }
         }
       }
     }
   },
-  "definitions": {
-    "AgentRegistrationKeys": {
-      "properties": {
-        "primary": {
-          "type": "string",
-          "description": "Gets or sets the primary key."
-        },
-        "secondary": {
-          "type": "string",
-          "description": "Gets or sets the secondary key."
-        }
-      },
-      "description": "Definition of the agent registration keys."
-    },
-    "AgentRegistration": {
-      "properties": {
-        "dscMetaConfiguration": {
-          "type": "string",
-          "description": "Gets or sets the dsc meta configuration."
-        },
-        "endpoint": {
-          "type": "string",
-          "description": "Gets or sets the dsc server endpoint."
-        },
-        "keys": {
-          "$ref": "#/definitions/AgentRegistrationKeys",
-          "description": "Gets or sets the agent registration keys."
-        },
-        "id": {
-          "type": "string",
-          "description": "Gets or sets the id."
-        }
-      },
-      "description": "Definition of the agent registration infomration type."
-    },
-    "AgentRegistrationRegenerateKeyParameter": {
-      "properties": {
-        "keyName": {
-          "type": "string",
-          "description": "Gets or sets the agent registration key name - Primary or Secondary.",
-          "enum": [
-            "Primary",
-            "Secondary"
-          ],
-          "x-ms-enum": {
-            "name": "AgentRegistrationKeyName",
-            "modelAsString": true
-          }
-        },
-        "name": {
-          "type": "string",
-          "description": "Gets or sets the name of the resource."
-        },
-        "location": {
-          "type": "string",
-          "description": "Gets or sets the location of the resource."
-        },
-        "tags": {
-          "type": "object",
-          "additionalProperties": {
-            "type": "string"
-          },
-          "description": "Gets or sets the tags attached to the resource."
-        }
-      },
-      "required": [
-        "keyName"
-      ],
-      "description": "The parameters supplied to the regenerate keys operation."
-    },
-	"DscNode": {
-      "properties": {
-        "lastSeen": {
-          "type": "string",
-          "format": "date-time",
-          "description": "Gets or sets the last seen time of the node."
-        },
-        "registrationTime": {
-          "type": "string",
-          "format": "date-time",
-          "description": "Gets or sets the registration time of the node."
-        },
-        "ip": {
-          "type": "string",
-          "description": "Gets or sets the ip of the node."
-        },
-        "accountId": {
-          "type": "string",
-          "description": "Gets or sets the account id of the node."
-        },
-        "nodeConfiguration": {
-          "$ref": "#/definitions/DscNodeConfigurationAssociationProperty",
-          "description": "Gets or sets the configuration of the node."
-        },
-        "status": {
-          "type": "string",
-          "description": "Gets or sets the status of the node."
-        },
-        "nodeId": {
-          "type": "string",
-          "description": "Gets or sets the node id."
-        },
-        "etag": {
-          "type": "string",
-          "description": "Gets or sets the etag of the resource."
-        }
-      },
-      "allOf": [
-        {
-          "$ref": "#/definitions/Resource"
-        }
-      ],
-      "description": "Definition of the dsc node type."
-    },
-	"DscNodeConfigurationAssociationProperty": {
-      "properties": {
-        "name": {
-          "type": "string",
-          "description": "Gets or sets the name of the dsc nodeconfiguration."
-        }
-      },
-      "description": "The dsc nodeconfiguration property associated with the entity."
-    },
-    "DscNodeListResult": {
-      "properties": {
-        "value": {
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/DscNode"
-          },
-          "description": "Gets or sets a list of dsc nodes."
-        },
-        "nextLink": {
-          "type": "string",
-          "description": "Gets or sets the next link."
-        }
-      },
-      "description": "The response model for the list dsc nodes operation."
-    },
-    "DscNodeUpdateParameters": {
-      "properties": {
-        "nodeId": {
-          "type": "string",
-          "description": "Gets or sets the id of the dsc node."
-        },
-        "nodeConfiguration": {
-          "$ref": "#/definitions/DscNodeConfigurationAssociationProperty",
-          "description": "Gets or sets the configuration of the node."
-        }
-      },
-      "description": "The parameters supplied to the update dsc node operation."
-    },
-	"DscNodeReport": {
-      "properties": {
-        "endTime": {
-          "type": "string",
-          "format": "date-time",
-          "description": "Gets or sets the end time of the node report."
-        },
-        "lastModifiedTime": {
-          "type": "string",
-          "format": "date-time",
-          "description": "Gets or sets the lastModifiedTime of the node report."
-        },
-        "startTime": {
-          "type": "string",
-          "format": "date-time",
-          "description": "Gets or sets the start time of the node report."
-        },
-        "type": {
-          "type": "string",
-          "description": "Gets or sets the type of the node report."
-        },
-        "reportId": {
-          "type": "string",
-          "description": "Gets or sets the id of the node report."
-        },
-        "status": {
-          "type": "string",
-          "description": "Gets or sets the status of the node report."
-        },
-        "refreshMode": {
-          "type": "string",
-          "description": "Gets or sets the refreshMode of the node report."
-        },
-        "rebootRequested": {
-          "type": "string",
-          "description": "Gets or sets the rebootRequested of the node report."
-        },
-        "reportFormatVersion": {
-          "type": "string",
-          "description": "Gets or sets the reportFormatVersion of the node report."
-        },
-        "configurationVersion": {
-          "type": "string",
-          "description": "Gets or sets the configurationVersion of the node report."
-        },
-        "id": {
-          "type": "string",
-          "description": "Gets or sets the id."
-        },
-        "errors": {
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/DscReportError"
-          },
-          "description": "Gets or sets the errors for the node report."
-        },
-        "resources": {
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/DscReportResource"
-          },
-          "description": "Gets or sets the resource for the node report."
-        },
-        "metaConfiguration": {
-          "$ref": "#/definitions/DscMetaConfiguration",
-          "description": "Gets or sets the metaConfiguration of the node at the time of the report."
-        },
-        "hostName": {
-          "type": "string",
-          "description": "Gets or sets the hostname of the node that sent the report."
-        },
-        "iPV4Addresses": {
-          "type": "array",
-          "items": {
-            "type": "string"
-          },
-          "description": "Gets or sets the IPv4 address of the node that sent the report."
-        },
-        "iPV6Addresses": {
-          "type": "array",
-          "items": {
-            "type": "string"
-          },
-          "description": "Gets or sets the IPv6 address of the node that sent the report."
-        },
-        "numberOfResources": {
-          "type": "integer",
-          "format": "int32",
-          "description": "Gets or sets the number of resource in the node report."
-        },
-        "rawErrors": {
-          "type": "string",
-          "description": "Gets or sets the unparsed errors for the node report."
-        }
-      },
-      "description": "Definition of the dsc node report type."
-    },
-	"DscReportError": {
-      "properties": {
-        "errorSource": {
-          "type": "string",
-          "description": "Gets or sets the source of the error."
-        },
-        "resourceId": {
-          "type": "string",
-          "description": "Gets or sets the resource ID which generated the error."
-        },
-        "errorCode": {
-          "type": "string",
-          "description": "Gets or sets the error code."
-        },
-        "errorMessage": {
-          "type": "string",
-          "description": "Gets or sets the error message."
-        },
-        "locale": {
-          "type": "string",
-          "description": "Gets or sets the locale of the error."
-        },
-        "errorDetails": {
-          "type": "string",
-          "description": "Gets or sets the error details."
-        }
-      },
-      "description": "Definition of the dsc node report error type."
-    },
-	"DscMetaConfiguration": {
-      "properties": {
-        "configurationModeFrequencyMins": {
-          "type": "integer",
-          "format": "int32",
-          "description": "Gets or sets the ConfigurationModeFrequencyMins value of the meta configuration."
-        },
-        "rebootNodeIfNeeded": {
-          "type": "boolean",
-          "description": "Gets or sets the RebootNodeIfNeeded value of the meta configuration."
-        },
-        "configurationMode": {
-          "type": "string",
-          "description": "Gets or sets the ConfigurationMode value of the meta configuration."
-        },
-        "actionAfterReboot": {
-          "type": "string",
-          "description": "Gets or sets the ActionAfterReboot value of the meta configuration."
-        },
-        "certificateId": {
-          "type": "string",
-          "description": "Gets or sets the CertificateId value of the meta configuration."
-        },
-        "refreshFrequencyMins": {
-          "type": "integer",
-          "format": "int32",
-          "description": "Gets or sets the RefreshFrequencyMins value of the meta configuration."
-        },
-        "allowModuleOverwrite": {
-          "type": "boolean",
-          "description": "Gets or sets the AllowModuleOverwrite value of the meta configuration."
-        }
-      },
-      "description": "Definition of the DSC Meta Configuration."
-    },
-	"DscNodeReportListResult": {
-      "properties": {
-        "value": {
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/DscNodeReport"
-          },
-          "description": "Gets or sets a list of dsc node reports."
-        },
-        "odata.nextLink": {
-          "type": "string",
-          "description": "Gets or sets the skip token."
-        },
-        "nextLink": {
-          "type": "string",
-          "description": "Gets or sets the next link."
-        }
-      },
-      "description": "The response model for the list dsc nodes operation."
-    },
-	"DscReportResource": {
-      "properties": {
-        "resourceId": {
-          "type": "string",
-          "description": "Gets or sets the ID of the resource."
-        },
-        "sourceInfo": {
-          "type": "string",
-          "description": "Gets or sets the source info of the resource."
-        },
-        "dependsOn": {
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/DscReportResourceNavigation"
-          },
-          "description": "Gets or sets the Resource Navigation values for resources the resource depends on."
-        },
-        "moduleName": {
-          "type": "string",
-          "description": "Gets or sets the module name of the resource."
-        },
-        "moduleVersion": {
-          "type": "string",
-          "description": "Gets or sets the module version of the resource."
-        },
-        "resourceName": {
-          "type": "string",
-          "description": "Gets or sets the name of the resource."
-        },
-        "error": {
-          "type": "string",
-          "description": "Gets or sets the error of the resource."
-        },
-        "status": {
-          "type": "string",
-          "description": "Gets or sets the status of the resource."
-        },
-        "durationInSeconds": {
-          "type": "number",
-          "format": "double",
-          "description": "Gets or sets the duration in seconds for the resource."
-        },
-        "startDate": {
-          "type": "string",
-          "format": "date-time",
-          "description": "Gets or sets the start date of the resource."
-        }
-      },
-      "description": "Definition of the DSC Report Resource."
-    },
-	"DscReportResourceNavigation": {
-      "properties": {
-        "resourceId": {
-          "type": "string",
-          "description": "Gets or sets the ID of the resource to navigate to."
-        }
-      },
-      "description": "Navigation for DSC Report Resource."
-    },
-  	"ErrorResponse": {
-      "type": "object",
-      "properties": {
-        "code": {
-          "description": "Error code",
-          "type": "string"
-        },
-        "message": {
-          "description": "Error message indicating why the operation failed.",
-          "type": "string"
-        }	
-      },
-	  "description": "Error response of an operation failure"
-    },
-	"Resource": {
-      "properties": {
-        "id": {
-          "readOnly": true,
-          "type": "string",
-          "description": "Resource Id"
-        },
-        "name": {
-          "readOnly": true,
-          "type": "string",
-          "description": "Resource name"
-        },
-        "type": {
-          "readOnly": true,
-          "type": "string",
-          "description": "Resource type"
-        },
-        "location": {
-          "type": "string",
-          "description": "Resource location"
-        },
-        "tags": {
-          "type": "object",
-          "additionalProperties": {
-            "type": "string"
-          },
-          "description": "Resource tags"
-        }
-      },
-      "required": [
-        "location"
-      ],
-      "description": "The Resource definition.",
-      "x-ms-azure-resource": true
-    }
-  },
-  "parameters": {
-    "SubscriptionIdParameter": {
-      "name": "subscriptionId",
-      "in": "path",
-      "required": true,
-      "type": "string",
-      "description": "Gets subscription credentials which uniquely identify Microsoft Azure subscription. The subscription ID forms part of the URI for every service call."
-    },
-    "ApiVersionParameter": {
-      "name": "api-version",
-      "in": "query",
-      "required": true,
-      "type": "string",
-      "description": "Client Api Version."
-    },
-    "ResourceGroupNameParameter": {
-      "name": "resourceGroupName",
-      "in": "path",
-      "required": true,
-      "type": "string",
-	  "pattern": "^[-\\w\\._]+$",
-      "description": "The resource group name.",
-      "x-ms-parameter-location": "method"
-    }
-  }
+  "definitions": {},
+  "parameters": {}
 }
