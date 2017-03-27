@@ -1629,12 +1629,12 @@
           "$ref": "#/definitions/HybridConnectionProperties"
         }
       },
+      "description": "Description of HybridConnection Resource.",
       "allOf": [
         {
           "$ref": "#/definitions/Resource"
         }
-      ],
-      "description": "Description of HybridConnection Resource."
+      ]
     },
     "HybridConnectionProperties": {
       "properties": {
@@ -1696,12 +1696,12 @@
           "$ref": "#/definitions/WcfRelayProperties"
         }
       },
+      "description": "Description of WcfRelays Resource.",
       "allOf": [
         {
           "$ref": "#/definitions/Resource"
         }
-      ],
-      "description": "Description of WcfRelays Resource."
+      ]
     },
     "WcfRelayProperties": {
       "properties": {
@@ -1774,25 +1774,26 @@
     "RelayNamespace": {
       "properties": {
         "sku": {
-          "$ref": "#/definitions/Sku"
+          "$ref": "#/definitions/Sku",
+          "description": "Sku of the Namespace."
         },
         "properties": {
           "x-ms-client-flatten": true,
           "$ref": "#/definitions/RelayNamespaceProperties"
         }
       },
+      "description": "Description of a Namespace resource.",
       "allOf": [
         {
           "$ref": "#/definitions/TrackedResource"
         }
-      ],
-      "description": "Description of a Namespace resource."
+      ]
     },
     "RelayNamespaceProperties": {
       "properties": {
         "provisioningState": {
           "type": "string",
-		  "readOnly": true,
+          "readOnly": true,
           "description": "Provisioning state of the namespace."
         },
         "createdAt": {
@@ -1846,11 +1847,11 @@
           }
         }
       },
+      "description": "Sku of the Namespace.",
       "required": [
         "name",
         "tier"
-      ],
-      "description": "Sku of the Namespace."
+      ]
     },
     "SharedAccessAuthorizationRuleListResult": {
       "properties": {
@@ -1946,7 +1947,7 @@
           ],
           "x-ms-enum": {
             "name": "policyKey",
-            "modelAsString": false
+            "modelAsString": true
           }
         }
       },
