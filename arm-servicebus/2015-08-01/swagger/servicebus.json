@@ -40,6 +40,9 @@
           "Operations"
         ],
         "operationId": "Operations_List",
+        "x-ms-examples": {
+          "OperationsList": { "$ref": "../examples/SBOperations_List.json" }
+        },
         "description": "Lists all of the available ServiceBus REST API operations.",
         "parameters": [
           {
@@ -65,6 +68,9 @@
           "Namespaces"
         ],
         "operationId": "Namespaces_CheckNameAvailability",
+        "x-ms-examples": {
+          "NameSpaceCheckNameAvailability": { "$ref": "../examples/NameSpaces/SBNameSpaceCheckNameAvailability.json" }
+        },
         "description": "Check the give namespace name availability.",
         "parameters": [
           {
@@ -98,7 +104,10 @@
         "tags": [
           "Namespaces"
         ],
-        "operationId": "Namespaces_List",
+        "operationId": "Namespaces_ListBySubscription",
+        "x-ms-examples": {
+          "NameSpaceList": { "$ref": "../examples/NameSpaces/SBNameSpaceList.json" }
+        },
         "description": "Gets all the available namespaces within the subscription, irrespective of the resource groups.",
         "externalDocs": {
           "url": "https://msdn.microsoft.com/en-us/library/azure/mt639412.aspx"
@@ -130,6 +139,9 @@
           "Namespaces"
         ],
         "operationId": "Namespaces_ListByResourceGroup",
+        "x-ms-examples": {
+          "NameSpaceListByResourceGroup": { "$ref": "../examples/NameSpaces/SBNameSpaceListByResourceGroup.json" }
+        },
         "description": "Gets the available namespaces within a resource group.",
         "externalDocs": {
           "url": "https://msdn.microsoft.com/en-us/library/azure/mt639412.aspx"
@@ -164,6 +176,9 @@
           "Namespaces"
         ],
         "operationId": "Namespaces_CreateOrUpdate",
+        "x-ms-examples": {
+          "NameSpaceCreate": { "$ref": "../examples/NameSpaces/SBNameSpaceCreate.json" }
+        },
         "description": "Creates or updates a service namespace. Once created, this namespace's resource manifest is immutable. This operation is idempotent.",
         "externalDocs": {
           "url": "https://msdn.microsoft.com/en-us/library/azure/mt639408.aspx"
@@ -173,14 +188,18 @@
             "$ref": "#/parameters/resourceGroupNameParameter"
           },
           {
-            "$ref": "#/parameters/namespaceNameParameter"
+            "name": "namespaceName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The namespace name."
           },
           {
             "name": "parameters",
             "in": "body",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/Namespace"
+              "$ref": "#/definitions/NamespaceCreateOrUpdateParameters"
             },
             "description": "Parameters supplied to create a namespace resource."
           },
@@ -195,13 +214,13 @@
           "201": {
             "description": "Namespace create request accepted.",
             "schema": {
-              "$ref": "#/definitions/Namespace"
+              "$ref": "#/definitions/NamespaceResource"
             }
           },
           "200": {
             "description": "Namespace created successfully.",
             "schema": {
-              "$ref": "#/definitions/Namespace"
+              "$ref": "#/definitions/NamespaceResource"
             }
           },
           "202": {
@@ -215,6 +234,9 @@
           "Namespaces"
         ],
         "operationId": "Namespaces_Delete",
+        "x-ms-examples": {
+          "NameSpaceDelete": { "$ref": "../examples/NameSpaces/SBNameSpaceDelete.json" }
+        },
         "description": "Deletes an existing namespace. This operation also removes all associated resources under the namespace.",
         "externalDocs": {
           "url": "https://msdn.microsoft.com/en-us/library/azure/mt639389.aspx"
@@ -251,6 +273,9 @@
           "Namespaces"
         ],
         "operationId": "Namespaces_Get",
+        "x-ms-examples": {
+          "NameSpaceGet": { "$ref": "../examples/NameSpaces/SBNameSpaceGet.json" }
+        },
         "description": "Gets a description for the specified namespace.",
         "externalDocs": {
           "url": "https://msdn.microsoft.com/en-us/library/azure/mt639379.aspx"
@@ -273,7 +298,7 @@
           "200": {
             "description": "Namespace successfully returned.",
             "schema": {
-              "$ref": "#/definitions/Namespace"
+              "$ref": "#/definitions/NamespaceResource"
             }
           }
         }
@@ -283,6 +308,9 @@
           "Namespaces"
         ],
         "operationId": "Namespaces_Update",
+        "x-ms-examples": {
+          "NameSpaceUpdate": { "$ref": "../examples/NameSpaces/SBNameSpaceUpdate.json" }
+        },
         "description": "Updates a service namespace. Once created, this namespace's resource manifest is immutable. This operation is idempotent.",
         "parameters": [
           {
@@ -311,13 +339,13 @@
           "201": {
             "description": "Namespace update request accepted.",
             "schema": {
-              "$ref": "#/definitions/Namespace"
+              "$ref": "#/definitions/NamespaceResource"
             }
           },
           "200": {
             "description": "Namespace updated successfully.",
             "schema": {
-              "$ref": "#/definitions/Namespace"
+              "$ref": "#/definitions/NamespaceResource"
             }
           },
           "202": {
@@ -332,6 +360,9 @@
           "Namespaces"
         ],
         "operationId": "Namespaces_ListAuthorizationRules",
+        "x-ms-examples": {
+          "NameSpaceAutorizationRuleListAll": { "$ref": "../examples/NameSpaces/SBNameSpaceAutorizationRuleListAll.json" }
+        },
         "description": "Gets the authorization rules for a namespace.",
         "externalDocs": {
           "url": "https://msdn.microsoft.com/en-us/library/azure/mt639376.aspx"
@@ -369,6 +400,9 @@
           "Namespaces"
         ],
         "operationId": "Namespaces_CreateOrUpdateAuthorizationRule",
+        "x-ms-examples": {
+          "NameSpaceAuthorizationRuleCreate": { "$ref": "../examples/NameSpaces/SBNameSpaceAuthorizationRuleCreate.json" }
+        },
         "description": "Creates or updates an authorization rule for a namespace.",
         "externalDocs": {
           "url": "https://msdn.microsoft.com/en-us/library/azure/mt639410.aspx"
@@ -388,7 +422,7 @@
             "in": "body",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/SharedAccessAuthorizationRule"
+              "$ref": "#/definitions/SharedAccessAuthorizationRuleCreateOrUpdateParameters"
             },
             "description": "The shared access authorization rule."
           },
@@ -403,7 +437,7 @@
           "200": {
             "description": "Namespace authorization rule created.",
             "schema": {
-              "$ref": "#/definitions/SharedAccessAuthorizationRule"
+              "$ref": "#/definitions/SharedAccessAuthorizationRuleResource"
             }
           }
         }
@@ -413,6 +447,9 @@
           "Namespaces"
         ],
         "operationId": "Namespaces_DeleteAuthorizationRule",
+        "x-ms-examples": {
+          "NameSpaceAutorizationRuleDelete": { "$ref": "../examples/NameSpaces/SBNameSpaceAutorizationRuleDelete.json" }
+        },
         "description": "Deletes a namespace authorization rule.",
         "externalDocs": {
           "url": "https://msdn.microsoft.com/en-us/library/azure/mt639417.aspx"
@@ -448,6 +485,9 @@
           "Namespaces"
         ],
         "operationId": "Namespaces_GetAuthorizationRule",
+        "x-ms-examples": {
+          "NameSpaceAutorizationRuleGet": { "$ref": "../examples/NameSpaces/SBNameSpaceAutorizationRuleGet.json" }
+        },
         "description": "Gets an authorization rule for a namespace by rule name.",
         "externalDocs": {
           "url": "https://msdn.microsoft.com/en-us/library/azure/mt639392.aspx"
@@ -473,7 +513,7 @@
           "200": {
             "description": "Namespace authorization rule returned successfully.",
             "schema": {
-              "$ref": "#/definitions/SharedAccessAuthorizationRule"
+              "$ref": "#/definitions/SharedAccessAuthorizationRuleResource"
             }
           }
         }
@@ -485,6 +525,9 @@
           "Namespaces"
         ],
         "operationId": "Namespaces_ListKeys",
+        "x-ms-examples": {
+          "NameSpaceAuthorizationRuleListKey": { "$ref": "../examples/NameSpaces/SBNameSpaceAuthorizationRuleListKey.json" }
+        },
         "description": "Gets the primary and secondary connection strings for the namespace.",
         "externalDocs": {
           "url": "https://msdn.microsoft.com/en-us/library/azure/mt639398.aspx"
@@ -522,6 +565,9 @@
           "Namespaces"
         ],
         "operationId": "Namespaces_RegenerateKeys",
+        "x-ms-examples": {
+          "NameSpaceAuthorizationRuleRegenrateKey": { "$ref": "../examples/NameSpaces/SBNameSpaceAuthorizationRuleRegenrateKey.json" }
+        },
         "description": "Regenerates the primary or secondary connection strings for the namespace.",
         "externalDocs": {
           "url": "https://msdn.microsoft.com/en-us/library/azure/mt718977.aspx"
@@ -567,7 +613,10 @@
         "tags": [
           "Queues"
         ],
-        "operationId": "Queues_ListByNamespace",
+        "operationId": "Queues_ListAll",
+        "x-ms-examples": {
+          "QueueListByNameSpace": { "$ref": "../examples/Queues/SBQueueListByNameSpace.json" }
+        },
         "description": "Gets the queues within a namespace.",
         "externalDocs": {
           "url": "https://msdn.microsoft.com/en-us/library/azure/mt639415.aspx"
@@ -605,6 +654,9 @@
           "Queues"
         ],
         "operationId": "Queues_CreateOrUpdate",
+        "x-ms-examples": {
+          "QueueCreate": { "$ref": "../examples/Queues/SBQueueCreate.json" }
+        },
         "description": "Creates or updates a Service Bus queue. This operation is idempotent.",
         "externalDocs": {
           "url": "https://msdn.microsoft.com/en-us/library/azure/mt639395.aspx"
@@ -624,7 +676,7 @@
             "in": "body",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/Queue"
+              "$ref": "#/definitions/QueueCreateOrUpdateParameters"
             },
             "description": "Parameters supplied to create or update a queue resource."
           },
@@ -639,7 +691,7 @@
           "200": {
             "description": "Queue successfully created.",
             "schema": {
-              "$ref": "#/definitions/Queue"
+              "$ref": "#/definitions/QueueResource"
             }
           }
         }
@@ -649,6 +701,9 @@
           "Queues"
         ],
         "operationId": "Queues_Delete",
+        "x-ms-examples": {
+          "QueueDelete": { "$ref": "../examples/Queues/SBQueueDelete.json" }
+        },
         "description": "Deletes a queue from the specified namespace in a resource group.",
         "externalDocs": {
           "url": "https://msdn.microsoft.com/en-us/library/azure/mt639411.aspx"
@@ -684,6 +739,9 @@
           "Queues"
         ],
         "operationId": "Queues_Get",
+        "x-ms-examples": {
+          "QueueGet": { "$ref": "../examples/Queues/SBQueueGet.json" }
+        },
         "description": "Returns a description for the specified queue.",
         "externalDocs": {
           "url": "https://msdn.microsoft.com/en-us/library/azure/mt639380.aspx"
@@ -709,7 +767,7 @@
           "200": {
             "description": "Queue description successfully returned.",
             "schema": {
-              "$ref": "#/definitions/Queue"
+              "$ref": "#/definitions/QueueResource"
             }
           }
         }
@@ -721,6 +779,9 @@
           "Queues"
         ],
         "operationId": "Queues_ListAuthorizationRules",
+        "x-ms-examples": {
+          "QueueAutorizationRuleListAll": { "$ref": "../examples/Queues/SBQueueAutorizationRuleListAll.json" }
+        },
         "description": "Gets all authorization rules for a queue.",
         "externalDocs": {
           "url": "https://msdn.microsoft.com/en-us/library/azure/mt705607.aspx"
@@ -761,6 +822,9 @@
           "Queues"
         ],
         "operationId": "Queues_CreateOrUpdateAuthorizationRule",
+        "x-ms-examples": {
+          "QueueAuthorizationRuleCreate": { "$ref": "../examples/Queues/SBQueueAuthorizationRuleCreate.json" }
+        },
         "description": "Creates an authorization rule for a queue.",
         "parameters": [
           {
@@ -780,7 +844,7 @@
             "in": "body",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/SharedAccessAuthorizationRule"
+              "$ref": "#/definitions/SharedAccessAuthorizationRuleCreateOrUpdateParameters"
             },
             "description": "The shared access authorization rule."
           },
@@ -795,7 +859,7 @@
           "200": {
             "description": "Authorization rule successfully created.",
             "schema": {
-              "$ref": "#/definitions/SharedAccessAuthorizationRule"
+              "$ref": "#/definitions/SharedAccessAuthorizationRuleResource"
             }
           }
         }
@@ -805,6 +869,9 @@
           "Queues"
         ],
         "operationId": "Queues_DeleteAuthorizationRule",
+        "x-ms-examples": {
+          "QueueAutorizationRuleDelete": { "$ref": "../examples/Queues/SBQueueAutorizationRuleDelete.json" }
+        },
         "description": "Deletes a queue authorization rule.",
         "externalDocs": {
           "url": "https://msdn.microsoft.com/en-us/library/azure/mt705609.aspx"
@@ -843,6 +910,9 @@
           "Queues"
         ],
         "operationId": "Queues_GetAuthorizationRule",
+        "x-ms-examples": {
+          "QueueAutorizationRuleGet": { "$ref": "../examples/Queues/SBQueueAutorizationRuleGet.json" }
+        },
         "description": "Gets an authorization rule for a queue by rule name.",
         "externalDocs": {
           "url": "https://msdn.microsoft.com/en-us/library/azure/mt705611.aspx"
@@ -871,7 +941,7 @@
           "200": {
             "description": "Authorization rule successfully returned.",
             "schema": {
-              "$ref": "#/definitions/SharedAccessAuthorizationRule"
+              "$ref": "#/definitions/SharedAccessAuthorizationRuleResource"
             }
           }
         }
@@ -883,6 +953,9 @@
           "Queues"
         ],
         "operationId": "Queues_ListKeys",
+        "x-ms-examples": {
+          "QueueAuthorizationRuleListKey": { "$ref": "../examples/Queues/SBQueueAuthorizationRuleListKey.json" }
+        },
         "description": "Primary and secondary connection strings to the queue.",
         "externalDocs": {
           "url": "https://msdn.microsoft.com/en-us/library/azure/mt705608.aspx"
@@ -923,6 +996,9 @@
           "Queues"
         ],
         "operationId": "Queues_RegenerateKeys",
+        "x-ms-examples": {
+          "QueueAuthorizationRuleRegenrateKey": { "$ref": "../examples/Queues/SBQueueAuthorizationRuleRegenrateKey.json" }
+        },
         "description": "Regenerates the primary or secondary connection strings to the queue.",
         "externalDocs": {
           "url": "https://msdn.microsoft.com/en-us/library/azure/mt705606.aspx"
@@ -971,7 +1047,10 @@
         "tags": [
           "Topics"
         ],
-        "operationId": "Topics_ListByNamespace",
+        "operationId": "Topics_ListAll",
+        "x-ms-examples": {
+          "TopicGet": { "$ref": "../examples/Topics/SBTopicListByNameSpace.json" }
+        },
         "description": "Gets all the topics in a namespace.",
         "externalDocs": {
           "url": "https://msdn.microsoft.com/en-us/library/azure/mt639388.aspx"
@@ -1009,6 +1088,9 @@
           "Topics"
         ],
         "operationId": "Topics_CreateOrUpdate",
+        "x-ms-examples": {
+          "TopicCreate": { "$ref": "../examples/Topics/SBTopicCreate.json" }
+        },
         "description": "Creates a topic in the specified namespace.",
         "externalDocs": {
           "url": "https://msdn.microsoft.com/en-us/library/azure/mt639409.aspx"
@@ -1028,7 +1110,7 @@
             "in": "body",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/Topic"
+              "$ref": "#/definitions/TopicCreateOrUpdateParameters"
             },
             "description": "Parameters supplied to create a topic resource."
           },
@@ -1043,7 +1125,7 @@
           "200": {
             "description": "Topic successfully created.",
             "schema": {
-              "$ref": "#/definitions/Topic"
+              "$ref": "#/definitions/TopicResource"
             }
           }
         }
@@ -1053,6 +1135,9 @@
           "Topics"
         ],
         "operationId": "Topics_Delete",
+        "x-ms-examples": {
+          "TopicDelete": { "$ref": "../examples/Topics/SBTopicDelete.json" }
+        },
         "description": "Deletes a topic from the specified namespace and resource group.",
         "externalDocs": {
           "url": "https://msdn.microsoft.com/en-us/library/azure/mt639404.aspx"
@@ -1088,6 +1173,9 @@
           "Topics"
         ],
         "operationId": "Topics_Get",
+        "x-ms-examples": {
+          "TopicGet": { "$ref": "../examples/Topics/SBTopicGet.json" }
+        },
         "description": "Returns a description for the specified topic.",
         "externalDocs": {
           "url": "https://msdn.microsoft.com/en-us/library/azure/mt639399.aspx"
@@ -1113,7 +1201,7 @@
           "200": {
             "description": "Topic description successfully retrieved.",
             "schema": {
-              "$ref": "#/definitions/Topic"
+              "$ref": "#/definitions/TopicResource"
             }
           }
         }
@@ -1125,6 +1213,9 @@
           "Topics"
         ],
         "operationId": "Topics_ListAuthorizationRules",
+        "x-ms-examples": {
+          "TopicAutorizationRuleListAll": { "$ref": "../examples/Topics/SBTopicAutorizationRuleListAll.json" }
+        },
         "description": "Gets authorization rules for a topic.",
         "externalDocs": {
           "url": "https://msdn.microsoft.com/en-us/library/azure/mt720681.aspx"
@@ -1165,6 +1256,9 @@
           "Topics"
         ],
         "operationId": "Topics_CreateOrUpdateAuthorizationRule",
+        "x-ms-examples": {
+          "TopicAuthorizationRuleCreate": { "$ref": "../examples/Topics/SBTopicAuthorizationRuleCreate.json" }
+        },
         "description": "Creates an authorizatio rule for the specified topic.",
         "externalDocs": {
           "url": "https://msdn.microsoft.com/en-us/library/azure/mt720678.aspx"
@@ -1187,7 +1281,7 @@
             "in": "body",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/SharedAccessAuthorizationRule"
+              "$ref": "#/definitions/SharedAccessAuthorizationRuleCreateOrUpdateParameters"
             },
             "description": "The shared access authorization rule."
           },
@@ -1202,7 +1296,7 @@
           "200": {
             "description": "Topic authorization rule successfully created.",
             "schema": {
-              "$ref": "#/definitions/SharedAccessAuthorizationRule"
+              "$ref": "#/definitions/SharedAccessAuthorizationRuleResource"
             }
           }
         }
@@ -1212,6 +1306,9 @@
           "Topics"
         ],
         "operationId": "Topics_GetAuthorizationRule",
+        "x-ms-examples": {
+          "TopicAutorizationRuleGet": { "$ref": "../examples/Topics/SBTopicAutorizationRuleGet.json" }
+        },
         "description": "Returns the specified authorization rule.",
         "externalDocs": {
           "url": "https://msdn.microsoft.com/en-us/library/azure/mt720676.aspx"
@@ -1240,7 +1337,7 @@
           "200": {
             "description": "Topic authorization rule returned successfully.",
             "schema": {
-              "$ref": "#/definitions/SharedAccessAuthorizationRule"
+              "$ref": "#/definitions/SharedAccessAuthorizationRuleResource"
             }
           }
         }
@@ -1250,6 +1347,9 @@
           "Topics"
         ],
         "operationId": "Topics_DeleteAuthorizationRule",
+        "x-ms-examples": {
+          "TopicAutorizationRuleDelete": { "$ref": "../examples/Topics/SBTopicAutorizationRuleDelete.json" }
+        },
         "description": "Deletes a topic authorization rule.",
         "externalDocs": {
           "url": "https://msdn.microsoft.com/en-us/library/azure/mt720681.aspx"
@@ -1290,6 +1390,9 @@
           "Topics"
         ],
         "operationId": "Topics_ListKeys",
+        "x-ms-examples": {
+          "TopicAuthorizationRuleListKey": { "$ref": "../examples/Topics/SBTopicAuthorizationRuleListKey.json" }
+        },
         "description": "Gets the primary and secondary connection strings for the topic.",
         "externalDocs": {
           "url": "https://msdn.microsoft.com/en-us/library/azure/mt720677.aspx"
@@ -1330,6 +1433,9 @@
           "Topics"
         ],
         "operationId": "Topics_RegenerateKeys",
+        "x-ms-examples": {
+          "TopicAuthorizationRuleRegenrateKey": { "$ref": "../examples/Topics/SBTopicAuthorizationRuleRegenrateKey.json" }
+        },
         "description": "Regenerates primary or secondary connection strings for the topic.",
         "externalDocs": {
           "url": "https://msdn.microsoft.com/en-us/library/azure/mt720679.aspx"
@@ -1378,7 +1484,10 @@
         "tags": [
           "Subscriptions"
         ],
-        "operationId": "Subscriptions_ListByTopic",
+        "operationId": "Subscriptions_ListAll",
+        "x-ms-examples": {
+          "SubscriptionListByTopic": { "$ref": "../examples/Subscriptions/SBSubscriptionListByTopic.json" }
+        },
         "description": "List all the subscriptions under a specified topic.",
         "externalDocs": {
           "url": "https://msdn.microsoft.com/en-us/library/azure/mt639400.aspx"
@@ -1419,6 +1528,9 @@
           "Subscriptions"
         ],
         "operationId": "Subscriptions_CreateOrUpdate",
+        "x-ms-examples": {
+          "SubscriptionCreate": { "$ref": "../examples/Subscriptions/SBSubscriptionCreate.json" }
+        },
         "description": "Creates a topic subscription.",
         "externalDocs": {
           "url": "https://msdn.microsoft.com/en-us/library/azure/mt639385.aspx"
@@ -1441,7 +1553,7 @@
             "in": "body",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/Subscription"
+              "$ref": "#/definitions/SubscriptionCreateOrUpdateParameters"
             },
             "description": "Parameters supplied to create a subscription resource."
           },
@@ -1456,7 +1568,7 @@
           "200": {
             "description": "Subscription create request accepted.",
             "schema": {
-              "$ref": "#/definitions/Subscription"
+              "$ref": "#/definitions/SubscriptionResource"
             }
           }
         }
@@ -1466,6 +1578,9 @@
           "Subscriptions"
         ],
         "operationId": "Subscriptions_Delete",
+        "x-ms-examples": {
+          "SubscriptionDelete": { "$ref": "../examples/Subscriptions/SBSubscriptionDelete.json" }
+        },
         "description": "Deletes a subscription from the specified topic.",
         "externalDocs": {
           "url": "https://msdn.microsoft.com/en-us/library/azure/mt639381.aspx"
@@ -1504,6 +1619,9 @@
           "Subscriptions"
         ],
         "operationId": "Subscriptions_Get",
+        "x-ms-examples": {
+          "SubscriptionGet": { "$ref": "../examples/Subscriptions/SBSubscriptionGet.json" }
+        },
         "description": "Returns a subscription description for the specified topic.",
         "externalDocs": {
           "url": "https://msdn.microsoft.com/en-us/library/azure/mt639402.aspx"
@@ -1532,7 +1650,7 @@
           "200": {
             "description": "Successfully retrieved subscription description.",
             "schema": {
-              "$ref": "#/definitions/Subscription"
+              "$ref": "#/definitions/SubscriptionResource"
             }
           }
         }
@@ -1585,12 +1703,38 @@
       "x-ms-azure-resource": true,
       "description": "The Resource definition for other than namespace."
     },
+    "NamespaceCreateOrUpdateParameters": {
+      "properties": {
+        "location": {
+          "type": "string",
+          "description": "Namespace location."
+        },
+        "sku": {
+          "$ref": "#/definitions/Sku"
+        },
+        "tags": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          },
+          "description": "Namespace tags."
+        },
+        "properties": {
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/NamespaceProperties"
+        }
+      },
+      "required": [
+        "location"
+      ],
+      "description": "Parameters supplied to the Create Or Update Namespace operation."
+    },
     "NamespaceListResult": {
       "properties": {
         "value": {
           "type": "array",
           "items": {
-            "$ref": "#/definitions/Namespace"
+            "$ref": "#/definitions/NamespaceResource"
           },
           "description": "Result of the List Namespace operation."
         },
@@ -1601,7 +1745,7 @@
       },
       "description": "The response of the List Namespace operation."
     },
-    "Namespace": {
+    "NamespaceResource": {
       "properties": {
         "sku": {
           "$ref": "#/definitions/Sku"
@@ -1618,28 +1762,35 @@
       ],
       "description": "Description of a namespace resource."
     },
-    "NamespaceUpdateParameters": {
-      "properties": {
-        "tags": {
-          "type": "object",
-          "additionalProperties": {
-            "type": "string"
-          },
-          "description": "Resource tags"
-        },
-        "sku": {
-          "$ref": "#/definitions/Sku",
-          "description": "The sku of the created namespace"
-        }
-      },
-      "description": "Parameters supplied to the Patch Namespace operation."
-    },
     "NamespaceProperties": {
       "properties": {
         "provisioningState": {
           "type": "string",
           "readOnly": true,
           "description": "Provisioning state of the namespace."
+        },
+        "status": {
+          "type": "string",
+          "description": "State of the namespace.",
+          "enum": [
+            "Unknown",
+            "Creating",
+            "Created",
+            "Activating",
+            "Enabling",
+            "Active",
+            "Disabling",
+            "Disabled",
+            "SoftDeleting",
+            "SoftDeleted",
+            "Removing",
+            "Removed",
+            "Failed"
+          ],
+          "x-ms-enum": {
+            "name": "NamespaceState",
+            "modelAsString": false
+          }
         },
         "createdAt": {
           "type": "string",
@@ -1658,13 +1809,32 @@
           "readOnly": true,
           "description": "Endpoint you can use to perform Service Bus operations."
         },
-        "metricId": {
-          "type": "string",
-          "readOnly": true,
-          "description": "Identifier for Azure Insights metrics"
+        "createACSNamespace": {
+          "type": "boolean",
+          "description": "Indicates whether to create an ACS namespace."
+        },
+        "enabled": {
+          "type": "boolean",
+          "description": "Specifies whether this instance is enabled."
         }
       },
       "description": "Properties of the namespace."
+    },
+    "NamespaceUpdateParameters": {
+      "properties": {
+        "tags": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          },
+          "description": "Resource tags"
+        },
+        "sku": {
+          "$ref": "#/definitions/Sku",
+          "description": "The sku of the created namespace"
+        }
+      },
+      "description": "Parameters supplied to the Patch Namespace operation."
     },
     "Sku": {
       "type": "object",
@@ -1698,7 +1868,7 @@
         "capacity": {
           "format": "int32",
           "type": "integer",
-          "description": "The specified messaging units for the tier. For Premium tier, capacity are 1,2 and 4."
+          "description": "The specified messaging units for the tier."
         }
       },
       "required": [
@@ -1706,12 +1876,29 @@
       ],
       "description": "SKU of the namespace."
     },
+    "SharedAccessAuthorizationRuleCreateOrUpdateParameters": {
+      "properties": {
+        "location": {
+          "type": "string",
+          "description": "data center location."
+        },
+        "name": {
+          "type": "string",
+          "description": "Name of the authorization rule."
+        },
+        "properties": {
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/SharedAccessAuthorizationRuleProperties"
+        }
+      },
+      "description": "Parameters supplied to the Create Or Update Authorization Rules operation."
+    },
     "SharedAccessAuthorizationRuleListResult": {
       "properties": {
         "value": {
           "type": "array",
           "items": {
-            "$ref": "#/definitions/SharedAccessAuthorizationRule"
+            "$ref": "#/definitions/SharedAccessAuthorizationRuleResource"
           },
           "description": "Result of the List Authorization Rules operation."
         },
@@ -1722,7 +1909,7 @@
       },
       "description": "The response to the List Namespace operation."
     },
-    "SharedAccessAuthorizationRule": {
+    "SharedAccessAuthorizationRuleResource": {
       "properties": {
         "properties": {
           "x-ms-client-flatten": true,
@@ -1776,7 +1963,7 @@
         },
         "secondaryKey": {
           "type": "string",
-          "description": "A base64-encoded 256-bit secondary key for signing and validating the SAS token."
+          "description": "A base64-encoded 256-bit primary key for signing and validating the SAS token."
         },
         "keyName": {
           "type": "string",
@@ -1787,7 +1974,7 @@
     },
     "RegenerateKeysParameters": {
       "properties": {
-        "policykey": {
+        "Policykey": {
           "type": "string",
           "description": "Key that needs to be regenerated.",
           "enum": [
@@ -1802,12 +1989,32 @@
       },
       "description": "Parameters supplied to the Regenerate Authorization Rule operation."
     },
+    "QueueCreateOrUpdateParameters": {
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "Queue name."
+        },
+        "location": {
+          "type": "string",
+          "description": "location of the resource."
+        },
+        "properties": {
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/QueueProperties"
+        }
+      },
+      "required": [
+        "location"
+      ],
+      "description": "Parameters supplied to the Create Or Update Queue operation."
+    },
     "QueueListResult": {
       "properties": {
         "value": {
           "type": "array",
           "items": {
-            "$ref": "#/definitions/Queue"
+            "$ref": "#/definitions/QueueResource"
           },
           "description": "Result of the List Queues operation."
         },
@@ -1818,7 +2025,7 @@
       },
       "description": "The response to the List Queues operation."
     },
-    "Queue": {
+    "QueueResource": {
       "properties": {
         "properties": {
           "x-ms-client-flatten": true,
@@ -1836,7 +2043,7 @@
       "properties": {
         "lockDuration": {
           "type": "string",
-          "description": "The duration of a peek-lock; that is, the amount of time that the message is locked for other receivers. The maximum value for LockDuration is 5 minutes; the default value is 1 minute. The service accepts a C# Standard TimeSpan Format for loc duration https://msdn.microsoft.com/en-us/library/ee372286(v=vs.110).aspx"
+          "description": "The duration of a peek-lock; that is, the amount of time that the message is locked for other receivers. The maximum value for LockDuration is 5 minutes; the default value is 1 minute."
         },
         "accessedAt": {
           "type": "string",
@@ -1846,21 +2053,25 @@
         },
         "autoDeleteOnIdle": {
           "type": "string",
-          "description": "the TimeSpan idle interval after which the queue is automatically deleted. The minimum duration is 5 minutes. The service accepts a C# Standard TimeSpan Format for loc duration https://msdn.microsoft.com/en-us/library/ee372286(v=vs.110).aspx. Format is 'DD.HH:MM:SS' and default value of this property is 10675199 days."
+          "description": "the TimeSpan idle interval after which the queue is automatically deleted. The minimum duration is 5 minutes."
+        },
+        "entityAvailabilityStatus": {
+          "$ref": "#/definitions/EntityAvailabilityStatus",
+          "description": "Entity availability status for the queue."
         },
         "createdAt": {
           "type": "string",
           "format": "date-time",
           "readOnly": true,
-          "description": "The exact time the Queue was created."
+          "description": "The exact time the message was created."
         },
         "defaultMessageTimeToLive": {
           "type": "string",
-          "description": "The default message time to live value. This is the duration after which the message expires, starting from when the message is sent to Service Bus. This is the default value used when TimeToLive is not set on a message itself. Format is 'DD.HH:MM:SS' and default value of this property is 10675199 days. The service accepts a C# Standard TimeSpan Format for loc duration https://msdn.microsoft.com/en-us/library/ee372286(v=vs.110).aspx "
+          "description": "The default message time to live value. This is the duration after which the message expires, starting from when the message is sent to Service Bus. This is the default value used when TimeToLive is not set on a message itself."
         },
         "duplicateDetectionHistoryTimeWindow": {
           "type": "string",
-          "description": "TimeSpan structure that defines the duration of the duplicate detection history. The default value is 10 minutes. The service accepts a C# Standard TimeSpan Format for loc duration https://msdn.microsoft.com/en-us/library/ee372286(v=vs.110).aspx . Format is 'DD.HH:MM:SS' and default value of this property is 10675199 days"
+          "description": "TimeSpan structure that defines the duration of the duplicate detection history. The default value is 10 minutes."
         },
         "enableBatchedOperations": {
           "type": "boolean",
@@ -1877,6 +2088,10 @@
         "enablePartitioning": {
           "type": "boolean",
           "description": "A value that indicates whether the queue is to be partitioned across multiple message brokers."
+        },
+        "isAnonymousAccessible": {
+          "type": "boolean",
+          "description": "A value that indicates whether the message is accessible anonymously."
         },
         "maxDeliveryCount": {
           "format": "int32",
@@ -1914,7 +2129,6 @@
         },
         "status": {
           "$ref": "#/definitions/EntityStatus",
-          "readOnly": true,
           "description": "Enumerates the possible values for the status of a messaging entity."
         },
         "supportOrdering": {
@@ -1925,7 +2139,7 @@
           "type": "string",
           "format": "date-time",
           "readOnly": true,
-          "description": "The exact time the Queue was updated."
+          "description": "The exact time the message was updated."
         }
       },
       "description": "The Queue Properties definition."
@@ -1966,12 +2180,32 @@
       },
       "description": "Message Count Details."
     },
+    "TopicCreateOrUpdateParameters": {
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "Topic name."
+        },
+        "location": {
+          "type": "string",
+          "description": "Location of the resource."
+        },
+        "properties": {
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/TopicProperties"
+        }
+      },
+      "required": [
+        "location"
+      ],
+      "description": "Parameters supplied to the Create Or Update Topic operation."
+    },
     "TopicListResult": {
       "properties": {
         "value": {
           "type": "array",
           "items": {
-            "$ref": "#/definitions/Topic"
+            "$ref": "#/definitions/TopicResource"
           },
           "description": "Result of the List Topics operation."
         },
@@ -1982,7 +2216,7 @@
       },
       "description": "The response to the List Topics operation."
     },
-    "Topic": {
+    "TopicResource": {
       "properties": {
         "properties": {
           "x-ms-client-flatten": true,
@@ -2006,13 +2240,17 @@
         },
         "autoDeleteOnIdle": {
           "type": "string",
-          "description": "TimeSpan idle interval after which the topic is automatically deleted. The minimum duration is 5 minutes. The service accepts a C# Standard TimeSpan Format for loc duration https://msdn.microsoft.com/en-us/library/ee372286(v=vs.110).aspx . Format is 'DD.HH:MM:SS' and default value of this property is 10675199 days"
+          "description": "TimeSpan idle interval after which the topic is automatically deleted. The minimum duration is 5 minutes."
+        },
+        "entityAvailabilityStatus": {
+          "$ref": "#/definitions/EntityAvailabilityStatus",
+          "description": "Entity availability status for the topic."
         },
         "createdAt": {
           "type": "string",
           "format": "date-time",
           "readOnly": true,
-          "description": "Exact time the Tpoic was created."
+          "description": "Exact time the message was created."
         },
         "countDetails": {
           "readOnly": true,
@@ -2020,11 +2258,11 @@
         },
         "defaultMessageTimeToLive": {
           "type": "string",
-          "description": "Default message time to live value. This is the duration after which the message expires, starting from when the message is sent to Service Bus. This is the default value used when TimeToLive is not set on a message itself. The service accepts a C# Standard TimeSpan Format for loc duration https://msdn.microsoft.com/en-us/library/ee372286(v=vs.110).aspx . Format is 'DD.HH:MM:SS' and default value of this property is 10675199 days"
+          "description": "Default message time to live value. This is the duration after which the message expires, starting from when the message is sent to Service Bus. This is the default value used when TimeToLive is not set on a message itself."
         },
         "duplicateDetectionHistoryTimeWindow": {
           "type": "string",
-          "description": "TimeSpan structure that defines the duration of the duplicate detection history. The default value is 10 minutes. The service accepts a C# Standard TimeSpan Format for loc duration https://msdn.microsoft.com/en-us/library/ee372286(v=vs.110).aspx . Format is 'DD.HH:MM:SS' and default value of this property is 10675199 days"
+          "description": "TimeSpan structure that defines the duration of the duplicate detection history. The default value is 10 minutes."
         },
         "enableBatchedOperations": {
           "type": "boolean",
@@ -2037,6 +2275,22 @@
         "enablePartitioning": {
           "type": "boolean",
           "description": "Value that indicates whether the topic to be partitioned across multiple message brokers is enabled."
+        },
+        "enableSubscriptionPartitioning": {
+          "type": "boolean",
+          "description": "Value that indicates whether partitioning is enabled or disabled."
+        },
+        "filteringMessagesBeforePublishing": {
+          "type": "boolean",
+          "description": "Whether messages should be filtered before publishing."
+        },
+        "isAnonymousAccessible": {
+          "type": "boolean",
+          "description": "Value that indicates whether the message is accessible anonymously."
+        },
+        "isExpress": {
+          "type": "boolean",
+          "description": ""
         },
         "maxSizeInMegabytes": {
           "format": "int64",
@@ -2055,7 +2309,6 @@
         },
         "status": {
           "$ref": "#/definitions/EntityStatus",
-          "readOnly": true,
           "description": "Enumerates the possible values for the status of a messaging entity."
         },
         "subscriptionCount": {
@@ -2072,17 +2325,37 @@
           "type": "string",
           "format": "date-time",
           "readOnly": true,
-          "description": "The exact time the Topic was updated."
+          "description": "The exact time the message was updated."
         }
       },
       "description": "The Tpoic Properties definition."
+    },
+    "SubscriptionCreateOrUpdateParameters": {
+      "properties": {
+        "location": {
+          "type": "string",
+          "description": "Subscription data center location."
+        },
+        "type": {
+          "type": "string",
+          "description": "Resource manager type of the resource."
+        },
+        "properties": {
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/SubscriptionProperties"
+        }
+      },
+      "required": [
+        "location"
+      ],
+      "description": "Parameters supplied to the Create Or Update Subscription operation."
     },
     "SubscriptionListResult": {
       "properties": {
         "value": {
           "type": "array",
           "items": {
-            "$ref": "#/definitions/Subscription"
+            "$ref": "#/definitions/SubscriptionResource"
           },
           "description": "Result of the List Subscriptions operation."
         },
@@ -2093,7 +2366,7 @@
       },
       "description": "The response to the List Subscriptions operation."
     },
-    "Subscription": {
+    "SubscriptionResource": {
       "properties": {
         "properties": {
           "x-ms-client-flatten": true,
@@ -2117,7 +2390,7 @@
         },
         "autoDeleteOnIdle": {
           "type": "string",
-          "description": "TimeSpan idle interval after which the topic is automatically deleted. The minimum duration is 5 minutes. The service accepts a C# Standard TimeSpan Format for loc duration https://msdn.microsoft.com/en-us/library/ee372286(v=vs.110).aspx. Format is 'DD.HH:MM:SS' and default value of this property is 10675199 days"
+          "description": "TimeSpan idle interval after which the topic is automatically deleted. The minimum duration is 5 minutes."
         },
         "countDetails": {
           "readOnly": true,
@@ -2127,11 +2400,11 @@
           "type": "string",
           "format": "date-time",
           "readOnly": true,
-          "description": "Exact time the Subscription was created."
+          "description": "Exact time the message was created."
         },
         "defaultMessageTimeToLive": {
           "type": "string",
-          "description": "Default message time to live value. This is the duration after which the message expires, starting from when the message is sent to Service Bus. This is the default value used when TimeToLive is not set on a message itself. The service accepts a C# Standard TimeSpan Format for loc duration https://msdn.microsoft.com/en-us/library/ee372286(v=vs.110).aspx . Format is 'DD.HH:MM:SS' and default value of this property is 10675199 days"
+          "description": "Default message time to live value. This is the duration after which the message expires, starting from when the message is sent to Service Bus. This is the default value used when TimeToLive is not set on a message itself."
         },
         "deadLetteringOnFilterEvaluationExceptions": {
           "type": "boolean",
@@ -2145,9 +2418,17 @@
           "type": "boolean",
           "description": "Value that indicates whether server-side batched operations are enabled."
         },
+        "entityAvailabilityStatus": {
+          "$ref": "#/definitions/EntityAvailabilityStatus",
+          "description": "Entity availability status for the topic."
+        },
+        "isReadOnly": {
+          "type": "boolean",
+          "description": "Value that indicates whether the entity description is read-only."
+        },
         "lockDuration": {
           "type": "string",
-          "description": "The lock duration time span for the subscription. The service accepts a C# Standard TimeSpan Format for loc duration https://msdn.microsoft.com/en-us/library/ee372286(v=vs.110).aspx"
+          "description": "The lock duration time span for the subscription."
         },
         "maxDeliveryCount": {
           "format": "int32",
@@ -2172,10 +2453,25 @@
           "type": "string",
           "format": "date-time",
           "readOnly": true,
-          "description": "The exact time the subscription was updated."
+          "description": "The exact time the message was updated."
         }
       },
       "description": "Description of Subscription Resource."
+    },
+    "EntityAvailabilityStatus": {
+      "type": "string",
+      "enum": [
+        "Available",
+        "Limited",
+        "Renaming",
+        "Restoring",
+        "Unknown"
+      ],
+      "x-ms-enum": {
+        "name": "EntityAvailabilityStatus",
+        "modelAsString": false
+      },
+      "description": "Entity availability status."
     },
     "EntityStatus": {
       "type": "string",
