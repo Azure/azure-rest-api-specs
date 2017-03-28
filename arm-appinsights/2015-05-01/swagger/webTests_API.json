@@ -2,7 +2,7 @@
   "swagger": "2.0",
   "info": {
     "title": "AppInsightsManagementClient",
-    "description": "Azure Application Insights client for synthetic monitor based alerting.",
+    "description": "Azure Application Insights client for web test based alerting.",
     "version": "2015-05-01"
   },
   "host": "management.azure.com",
@@ -36,8 +36,8 @@
   "paths": {
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.insights/webtests": {
       "get": {
-        "description": "Get all Application Insights synthetic monitors defined within a specified resource group.",
-        "operationId": "SyntheticMonitor_ListByResourceGroup",
+        "description": "Get all Application Insights web tests defined within a specified resource group.",
+        "operationId": "WebTests_ListByResourceGroup",
         "parameters": [
           {
             "$ref": "#/parameters/ResourceGroupNameParameter"
@@ -51,15 +51,15 @@
         ],
         "responses": {
           "200": {
-            "description": "A list containing 0 or more synthetic monitor definitions.",
+            "description": "A list containing 0 or more web test definitions.",
             "schema": {
-              "$ref": "#/definitions/SyntheticMonitorListResult"
+              "$ref": "#/definitions/webTestListResult"
             }
           }
         },
         "x-ms-examples": {
-          "SyntheticMonitorListByResourceGroup": {
-            "$ref": "../examples/SyntheticMonitorListByResourceGroup.json"
+          "webTestListByResourceGroup": {
+            "$ref": "../examples/webTestListByResourceGroup.json"
           }
         },
         "x-ms-pageable": {
@@ -69,8 +69,8 @@
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.insights/webtests/{webTestName}": {
       "get": {
-        "description": "Get a specific Application Insights synthetic monitor definition.",
-        "operationId": "SyntheticMonitor_Get",
+        "description": "Get a specific Application Insights web test definition.",
+        "operationId": "WebTests_Get",
         "parameters": [
           {
             "$ref": "#/parameters/ResourceGroupNameParameter"
@@ -87,21 +87,21 @@
         ],
         "responses": {
           "200": {
-            "description": "Ann Application Insights synthetic monitor definition.",
+            "description": "Ann Application Insights web test definition.",
             "schema": {
-              "$ref": "#/definitions/SyntheticMonitor"
+              "$ref": "#/definitions/WebTest"
             }
           }
         },
         "x-ms-examples": {
-          "SyntheticMonitorGet": {
-            "$ref": "../examples/SyntheticMonitorGet.json"
+          "webTestGet": {
+            "$ref": "../examples/webTestGet.json"
           }
         }
       },
       "put": {
-        "description": "Creates or updates an Application Insights synthetic monitor definition.",
-        "operationId": "SyntheticMonitor_CreateOrUpdate",
+        "description": "Creates or updates an Application Insights web test definition.",
+        "operationId": "WebTests_CreateOrUpdate",
         "parameters": [
           {
             "$ref": "#/parameters/ResourceGroupNameParameter"
@@ -117,34 +117,74 @@
           },
           {
             "name": "WebTestDefinition",
-            "description": "Properties that need to be specified to create or update an Application Insights synthetic monitor definition.",
+            "description": "Properties that need to be specified to create or update an Application Insights web test definition.",
             "in": "body",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/SyntheticMonitor"
+              "$ref": "#/definitions/WebTest"
             }
           }
         ],
         "responses": {
           "200": {
-            "description": "Adding the Application Insights synthetic monitor was successful. Synthetic monitor properties are updated and returned.",
+            "description": "Adding the Application Insights web test was successful. Web test properties are updated and returned.",
             "schema": {
-              "$ref": "#/definitions/SyntheticMonitor"
+              "$ref": "#/definitions/WebTest"
             }
           }
         },
         "x-ms-examples": {
-          "SyntheticMonitorCreate": {
-            "$ref": "../examples/SyntheticMonitorCreate.json"
+          "webTestCreate": {
+            "$ref": "../examples/webTestCreate.json"
           },
-          "SyntheticMonitorUpdate": {
-            "$ref": "../examples/SyntheticMonitorUpdate.json"
+          "webTestUpdate": {
+            "$ref": "../examples/webTestUpdate.json"
+          }
+        }
+      },
+      "patch": {
+        "description": "Creates or updates an Application Insights web test definition.",
+        "operationId": "WebTests_UpdateTags",
+        "parameters": [
+          {
+            "$ref": "#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/WebTestNameParameter"
+          },
+          {
+            "name": "WebTestTags",
+            "description": "Updated tag information to set into the web test instance.",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/TagsResource"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Updating the Application Insights web test tags was successful. Web test tags are updated and returned with the rest of the WebTest object properties.",
+            "schema": {
+              "$ref": "#/definitions/WebTest"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "webTestUpdateTags": {
+            "$ref": "../examples/webTestUpdateTagsOnly.json"
           }
         }
       },
       "delete": {
-        "description": "Deletes an Application Insights synthetic monitor.",
-        "operationId": "SyntheticMonitor_Delete",
+        "description": "Deletes an Application Insights web test.",
+        "operationId": "WebTests_Delete",
         "parameters": [
           {
             "$ref": "#/parameters/SubscriptionIdParameter"
@@ -161,18 +201,18 @@
         ],
         "responses": {
           "204": {
-            "description": "No content: the request was successful, but the response is empty (the request to delete failed because the specified synthetic monitor does not exist)."
+            "description": "No content: the request was successful, but the response is empty (the request to delete failed because the specified web test does not exist)."
           },
           "200": {
-            "description": "Successful request to delete a synthetic monitor definition."
+            "description": "Successful request to delete a web test definition."
           }
         }
       }
     },
     "/subscriptions/{subscriptionId}/providers/microsoft.insights/webtests": {
       "get": {
-        "description": "Get all Application Insights synthetic monitor alerts definitioned within a subscription.",
-        "operationId": "SyntheticMonitor_List",
+        "description": "Get all Application Insights web test alerts definitioned within a subscription.",
+        "operationId": "WebTests_List",
         "parameters": [
           {
             "$ref": "#/parameters/ApiVersionParameter"
@@ -183,15 +223,15 @@
         ],
         "responses": {
           "200": {
-            "description": "A list of 0 or more Application Insights synthetic monitor definitions.",
+            "description": "A list of 0 or more Application Insights web test definitions.",
             "schema": {
-              "$ref": "#/definitions/SyntheticMonitorListResult"
+              "$ref": "#/definitions/webTestListResult"
             }
           }
         },
         "x-ms-examples": {
-          "SyntheticMonitorList": {
-            "$ref": "../examples/SyntheticMonitorList.json"
+          "webTestList": {
+            "$ref": "../examples/webTestList.json"
           }
         },
         "x-ms-pageable": {
@@ -210,7 +250,8 @@
         },
         "name": {
           "type": "string",
-          "description": "Azure resource name"
+          "description": "Azure resource name",
+          "readOnly": true
         },
         "type": {
           "type": "string",
@@ -234,27 +275,38 @@
       "x-ms-azure-resource": true,
       "description": "An azure resource object"
     },
-    "SyntheticMonitorListResult": {
-      "description": "A list of 0 or more Application Insights synthetic monitor definitions.",
+    "TagsResource": {
+      "properties": {
+        "tags": {
+          "additionalProperties": {
+            "type": "string"
+          },
+          "description": "Resource tags"
+        }
+      },
+      "description": "A container holding only the Tags for a resource, allowing the user to update the tags on a WebTest instance."
+    },
+    "webTestListResult": {
+      "description": "A list of 0 or more Application Insights web test definitions.",
       "required": [
         "value"
       ],
       "properties": {
         "value": {
           "type": "array",
-          "description": "Set of Application Insights synthetic monitor definitions.",
+          "description": "Set of Application Insights web test definitions.",
           "items": {
-            "$ref": "#/definitions/SyntheticMonitor"
+            "$ref": "#/definitions/WebTest"
           }
         },
         "nextLink": {
           "type": "string",
-          "description": "The link to get the next part of the returned list of synthetic monitors, should the return set be too large for a single request. May be null."
+          "description": "The link to get the next part of the returned list of web tests, should the return set be too large for a single request. May be null."
         }
       }
     },
-    "SyntheticMonitor": {
-      "description": "An Application Insights synthetic monitor definition.",
+    "WebTest": {
+      "description": "An Application Insights web test definition.",
       "allOf": [
         {
           "$ref": "#/definitions/Resource"
@@ -263,7 +315,7 @@
       "properties": {
         "kind": {
           "type": "string",
-          "description": "The kind of web test that this synthetic monitor watches. Choices are ping and multistep.",
+          "description": "The kind of web test that this web test watches. Choices are ping and multistep.",
           "default": "ping",
           "enum": [
             "ping",
@@ -281,7 +333,7 @@
       }
     },
     "WebTestProperties": {
-      "description": "Metadata describing a synthetic monitor for an Azure resource.",
+      "description": "Metadata describing a web test for an Azure resource.",
       "required": [
         "Name",
         "Kind"
@@ -302,7 +354,7 @@
         },
         "Enabled": {
           "type": "boolean",
-          "description": "Is the test actively being monitored, default is false."
+          "description": "Is the test actively being monitored."
         },
         "Frequency": {
           "type": "integer",
@@ -357,12 +409,13 @@
       }
     },
     "WebTestGeolocation": {
-      "description": "Geo-physical location to run a web test from.",
+      "description": "Geo-physical location to run a web test from. You must specify one or more locations for the test to run from.",
       "type": "object",
       "properties": {
         "Id": {
+          "x-ms-client-name": "location",
           "type": "string",
-          "description": "Unique ID of this WebTest."
+          "description": "Location ID for the webtest to run from."
         }
       }
     }

@@ -37,7 +37,7 @@
     "/subscriptions/{subscriptionId}/providers/microsoft.insights/components": {
       "get": {
         "description": "Gets a list of all Application Insights components within a subscription.",
-        "operationId": "Component_List",
+        "operationId": "Components_List",
         "parameters": [
           {
             "$ref": "#/parameters/ApiVersionParameter"
@@ -55,7 +55,9 @@
           }
         },
         "x-ms-examples": {
-          "ComponentsList.json": { "$ref": "../examples/ComponentsList.json" }
+          "ComponentsList.json": {
+            "$ref": "../examples/ComponentsList.json"
+          }
         },
         "x-ms-pageable": {
           "nextLinkName": "nextLink"
@@ -65,7 +67,7 @@
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.insights/components": {
       "get": {
         "description": "Gets a list of Application Insights components within a resource group.",
-        "operationId": "Component_ListByResourceGroup",
+        "operationId": "Components_ListByResourceGroup",
         "parameters": [
           {
             "$ref": "#/parameters/ResourceGroupNameParameter"
@@ -86,7 +88,9 @@
           }
         },
         "x-ms-examples": {
-          "ComponentListByResourceGroup": { "$ref": "../examples/ComponentListByResourceGroup.json" }
+          "ComponentListByResourceGroup": {
+            "$ref": "../examples/ComponentsListByResourceGroup.json"
+          }
         },
         "x-ms-pageable": {
           "nextLinkName": "nextLink"
@@ -96,7 +100,7 @@
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.insights/components/{resourceName}": {
       "delete": {
         "description": "Deletes an Application Insights component.",
-        "operationId": "Component_Delete",
+        "operationId": "Components_Delete",
         "parameters": [
           {
             "$ref": "#/parameters/ResourceGroupNameParameter"
@@ -122,7 +126,7 @@
       },
       "get": {
         "description": "Returns an Application Insights component.",
-        "operationId": "Component_Get",
+        "operationId": "Components_Get",
         "parameters": [
           {
             "$ref": "#/parameters/ResourceGroupNameParameter"
@@ -146,12 +150,14 @@
           }
         },
         "x-ms-examples": {
-          "ComponentGet": { "$ref": "../examples/ComponentGet.json" }
+          "ComponentGet": {
+            "$ref": "../examples/ComponentsGet.json"
+          }
         }
       },
       "put": {
         "description": "Creates (or updates) an Application Insights component. Note: You cannot specify a different value for InstrumentationKey nor AppId in the Put operation.",
-        "operationId": "Component_CreateOrUpdate",
+        "operationId": "Components_CreateOrUpdate",
         "parameters": [
           {
             "$ref": "#/parameters/ResourceGroupNameParameter"
@@ -184,8 +190,52 @@
           }
         },
         "x-ms-examples": {
-          "ComponentCreate": { "$ref": "../examples/ComponentCreate.json" },
-          "ComponentUpdate": { "$ref": "../examples/ComponentUpdate.json" }
+          "ComponentCreate": {
+            "$ref": "../examples/ComponentsCreate.json"
+          },
+          "ComponentUpdate": {
+            "$ref": "../examples/ComponentsUpdate.json"
+          }
+        }
+      },
+      "patch": {
+        "description": "Updates an existing component's tags. To update other fields use the CreateOrUpdate method.",
+        "operationId": "Components_UpdateTags",
+        "parameters": [
+          {
+            "$ref": "#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ResourceNameParameter"
+          },
+          {
+            "name": "ComponentTags",
+            "description": "Updated tag information to set into the component instance.",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/TagsResource"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Updating the Application Insights component's tags was successful. Component tags are updated and returned with the rest of the Component's object properties.",
+            "schema": {
+              "$ref": "#/definitions/ApplicationInsightsComponent"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "ComponentUpdateTagsOnly": {
+            "$ref": "../examples/ComponentsUpdateTagsOnly.json"
+          }
         }
       }
     }
@@ -200,7 +250,8 @@
         },
         "name": {
           "type": "string",
-          "description": "Azure resource name"
+          "description": "Azure resource name",
+          "readOnly": true
         },
         "type": {
           "type": "string",
@@ -223,6 +274,17 @@
       ],
       "x-ms-azure-resource": true,
       "description": "An azure resource object"
+    },
+    "TagsResource": {
+      "properties": {
+        "tags": {
+          "additionalProperties": {
+            "type": "string"
+          },
+          "description": "Resource tags"
+        }
+      },
+      "description": "A container holding only the Tags for a resource, allowing the user to update the tags on a WebTest instance."
     },
     "ApplicationInsightsComponent": {
       "properties": {
@@ -250,7 +312,8 @@
       "properties": {
         "ApplicationId": {
           "type": "string",
-          "description": "The unique ID of your application."
+          "description": "The unique ID of your application. This field mirrors the 'Name' field and cannot be changed.",
+          "readOnly": true
         },
         "AppId": {
           "type": "string",
@@ -259,11 +322,29 @@
         },
         "Application_Type": {
           "type": "string",
-          "description": "Type of application being monitored. Example values: Web, other. Cannot be changed after the component has been created."
+          "description": "Type of application being monitored.",
+          "default": "web",
+          "enum": [
+            "web",
+            "other"
+          ],
+          "x-ms-enum": {
+            "name": "ApplicationType",
+            "modelAsString": false
+          },
+          "x-ms-mutability": ["create", "read"]
         },
         "Flow_Type": {
           "type": "string",
-          "description": "Used by the Application Insights system to determine what kind of flow this component was created by. Users should set this to 'Bluefield' when creating a component via the REST API."
+          "description": "Used by the Application Insights system to determine what kind of flow this component was created by. This is to be set to 'Bluefield' when creating/updating a component via the REST API.",
+          "default": "Bluefield",
+          "enum": [
+            "Bluefield"
+          ],
+          "x-ms-enum": {
+            "name": "FlowType",
+            "modelAsString": false
+          }
         },
         "Request_Source": {
           "type": "string",
@@ -316,7 +397,6 @@
         }
       },
       "required": [
-        "ApplicationId",
         "Application_Type"
       ]
     },
@@ -337,8 +417,7 @@
           "type": "string",
           "description": "The URI to get the next set of Application Insights component defintions if too many components where returned in the result set."
         }
-      },
-      "x-ms-azure-resource": true
+      }
     }
   },
   "parameters": {
