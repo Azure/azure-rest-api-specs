@@ -41,6 +41,9 @@
           "Operations"
         ],
         "operationId": "Operations_List",
+        "x-ms-examples": {
+          "RelayOperationsList": { "$ref": "../examples/RelayOperations_List.json" }
+        },
         "description": "Lists all of the available Relay REST API operations.",
         "parameters": [
           {
@@ -72,6 +75,9 @@
           "Namespaces"
         ],
         "operationId": "Namespaces_CheckNameAvailability",
+        "x-ms-examples": {
+          "RelayCheckNameAvailability": { "$ref": "../examples/NameSpaces/RelayNameSpaceCheckNameAvailability.json" }
+        },
         "description": "Check the give namespace name availability.",
         "parameters": [
           {
@@ -122,7 +128,7 @@
           "200": {
             "description": "Namespaces returned successfully",
             "schema": {
-              "$ref": "#/definitions/NamespaceListResult"
+              "$ref": "#/definitions/RelayNamespaceListResult"
             }
           },
           "default": {
@@ -162,7 +168,7 @@
           "200": {
             "description": "Namespaces by resourcegroup returned successfully",
             "schema": {
-              "$ref": "#/definitions/NamespaceListResult"
+              "$ref": "#/definitions/RelayNamespaceListResult"
             }
           },
           "default": {
@@ -182,10 +188,13 @@
         "tags": [
           "Namespaces"
         ],
+
         "operationId": "Namespaces_CreateOrUpdate",
         "x-ms-examples": {
+
           "RelayNamespaceCreate": { "$ref": "../examples/NameSpaces/RelayNameSpaceCreate.json" }
         },
+
         "description": "Create Azure Relay namespace.",
 
         "parameters": [
@@ -200,7 +209,7 @@
             "in": "body",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/Namespace"
+              "$ref": "#/definitions/RelayNamespace"
             },
             "description": "Parameters supplied to create a Namespace Resource."
           },
@@ -215,7 +224,7 @@
           "200": {
             "description": "Namespace create request succeeded",
             "schema": {
-              "$ref": "#/definitions/Namespace"
+              "$ref": "#/definitions/RelayNamespace"
             }
           },
           "202": {
@@ -276,15 +285,19 @@
         "tags": [
           "Namespaces"
         ],
+
         "operationId": "Namespaces_Get",
         "x-ms-examples": {
+
           "RelayNameSpaceGet": { "$ref": "../examples/NameSpaces/RelayNameSpaceGet.json" }
         },
+
         "description": "Returns the description for the specified namespace.",
         "parameters": [
           {
             "$ref": "#/parameters/resourceGroupNameParameter"
           },
+
           {
             "$ref": "#/parameters/namespaceNameParameter"
           },
@@ -299,7 +312,7 @@
           "200": {
             "description": "Namespace returned successfully",
             "schema": {
-              "$ref": "#/definitions/Namespace"
+              "$ref": "#/definitions/RelayNamespace"
             }
           },
           "default": {
@@ -328,7 +341,7 @@
             "in": "body",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/NamespaceUpdateParameter"
+              "$ref": "#/definitions/RelayNamespaceUpdateParameter"
             },
             "description": "Parameters for updating a namespace resource."
           },
@@ -343,7 +356,7 @@
           "200": {
             "description": "Namespace successfuly updated.",
             "schema": {
-              "$ref": "#/definitions/Namespace"
+              "$ref": "#/definitions/RelayNamespace"
             }
           }
         }
@@ -923,16 +936,10 @@
         ],
         "responses": {
           "200": {
-            "description": "HybridConnection authorizationRule deleted",
-            "schema": {
-              "$ref": "#/definitions/SharedAccessAuthorizationRule"
-            }
+            "description": "HybridConnection authorizationRule deleted"
           },
           "204": {
-            "description": "Authorization rule does not exist",
-            "schema": {
-              "$ref": "#/definitions/SharedAccessAuthorizationRule"
-            }
+            "description": "Authorization rule does not exist"
           },
           "default": {
             "description": "Relay error response describing why the operation failed.",
@@ -1257,10 +1264,7 @@
             }
           },
           "204": {
-            "description": "WCFRelays not found",
-            "schema": {
-              "$ref": "#/definitions/WcfRelay"
-            }
+            "description": "WCFRelays not found"
           },
           "default": {
             "description": "Relay error response describing why the operation failed.",
@@ -1396,16 +1400,10 @@
         ],
         "responses": {
           "200": {
-            "description": "Request to delete WCFRelay authorizationRule succeeded",
-            "schema": {
-              "$ref": "#/definitions/SharedAccessAuthorizationRule"
-            }
+            "description": "Request to delete WCFRelay authorizationRule succeeded"
           },
           "204": {
-            "description": "Request accepted but Authorization rule does not exist",
-            "schema": {
-              "$ref": "#/definitions/SharedAccessAuthorizationRule"
-            }
+            "description": "Request accepted but Authorization rule does not exist"
           },
           "default": {
             "description": "Relay error response describing why the operation failed.",
@@ -1585,8 +1583,7 @@
           "$ref": "#/definitions/Resource"
         }
       ],
-      "description": "Definition of Resource",
-      "x-ms-azure-resource": true
+      "description": "Definition of Resource"
     },
     "Resource": {
       "properties": {
@@ -1629,15 +1626,16 @@
       "properties": {
         "properties": {
           "x-ms-client-flatten": true,
-          "$ref": "#/definitions/HybridConnectionProperties"
+          "$ref": "#/definitions/HybridConnectionProperties",
+          "description": "Properties of HybridConnection"
         }
       },
+      "description": "Description of HybridConnection Resource.",
       "allOf": [
         {
           "$ref": "#/definitions/Resource"
         }
-      ],
-      "description": "Description of HybridConnection Resource."
+      ]
     },
     "HybridConnectionProperties": {
       "properties": {
@@ -1696,15 +1694,16 @@
       "properties": {
         "properties": {
           "x-ms-client-flatten": true,
-          "$ref": "#/definitions/WcfRelayProperties"
+          "$ref": "#/definitions/WcfRelayProperties",
+          "description": "Properties of WcfRelay"
         }
       },
+      "description": "Description of WcfRelays Resource.",
       "allOf": [
         {
           "$ref": "#/definitions/Resource"
         }
-      ],
-      "description": "Description of WcfRelays Resource."
+      ]
     },
     "WcfRelayProperties": {
       "properties": {
@@ -1758,12 +1757,12 @@
       },
       "description": "Properties of the WcfRelay Properties."
     },
-    "NamespaceListResult": {
+    "RelayNamespaceListResult": {
       "properties": {
         "value": {
           "type": "array",
           "items": {
-            "$ref": "#/definitions/Namespace"
+            "$ref": "#/definitions/RelayNamespace"
           },
           "description": "Result of the List Namespace operation."
         },
@@ -1774,27 +1773,30 @@
       },
       "description": "The response of the List Namespace operation."
     },
-    "Namespace": {
+    "RelayNamespace": {
       "properties": {
         "sku": {
-          "$ref": "#/definitions/Sku"
+          "$ref": "#/definitions/Sku",
+          "description": "Sku of the Namespace."
         },
         "properties": {
           "x-ms-client-flatten": true,
-          "$ref": "#/definitions/NamespaceProperties"
+          "$ref": "#/definitions/RelayNamespaceProperties",
+          "description": "Description of Relay Namespace"
         }
       },
+      "description": "Description of a Namespace resource.",
       "allOf": [
         {
           "$ref": "#/definitions/TrackedResource"
         }
-      ],
-      "description": "Description of a Namespace resource."
+      ]
     },
-    "NamespaceProperties": {
+    "RelayNamespaceProperties": {
       "properties": {
         "provisioningState": {
           "type": "string",
+          "readOnly": true,
           "description": "Provisioning state of the namespace."
         },
         "createdAt": {
@@ -1811,11 +1813,13 @@
         },
         "serviceBusEndpoint": {
           "type": "string",
+          "readOnly": true,
           "description": "Endpoint you can use to perform Service Bus operations."
         },
-        "enabled": {
-          "type": "boolean",
-          "description": "true if client authorization is needed for this relay; otherwise, false."
+        "metricId": {
+          "type": "string",
+          "readOnly": true,
+          "description": "Identifier for Azure Insights metrics"
         }
       },
       "description": "Properties of the Namespace."
@@ -1846,11 +1850,11 @@
           }
         }
       },
+      "description": "Sku of the Namespace.",
       "required": [
         "name",
         "tier"
-      ],
-      "description": "Sku of the Namespace."
+      ]
     },
     "SharedAccessAuthorizationRuleListResult": {
       "properties": {
@@ -1872,7 +1876,8 @@
       "properties": {
         "properties": {
           "x-ms-client-flatten": true,
-          "$ref": "#/definitions/SharedAccessAuthorizationRuleProperties"
+          "$ref": "#/definitions/SharedAccessAuthorizationRuleProperties",
+          "description": "SharedAccess Authorization Rule properties"
         }
       },
       "required": [
@@ -2012,7 +2017,7 @@
       },
       "description": "Description of a Check Name availability request properties."
     },
-    "NamespaceUpdateParameter": {
+    "RelayNamespaceUpdateParameter": {
       "properties": {
         "tags": {
           "type": "object",
