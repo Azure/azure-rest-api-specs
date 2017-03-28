@@ -10,12 +10,10 @@
     "https"
   ],
   "consumes": [
-    "application/json",
-    "text/json"
+    "application/json"
   ],
   "produces": [
-    "application/json",
-    "text/json"
+    "application/json"
   ],
   "security": [
     {
@@ -361,6 +359,31 @@
         },
         "x-ms-long-running-operation": true
       }
+    },
+     "/subscriptions/{subscriptionId}/providers/Microsoft.Network/applicationGatewayAvailableWafRuleSets": {
+      "get": {
+        "tags": [
+          "ApplicationGateways"
+        ],
+        "operationId": "ApplicationGateways_ListAvailableWafRuleSets",
+        "description": "Lists all available web application firewall rule sets.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success. The operation returns a list of all available web application firewall rule sets.",
+            "schema": {
+              "$ref": "#/definitions/ApplicationGatewayAvailableWafRuleSetsResult"
+            }
+          }
+        }
+      }
     }
   },
   "definitions": {
@@ -419,12 +442,13 @@
         },	  
         "health": {
           "type": "string",
-          "description": "Health of backend server. Possible values are: 'Unknown', 'Up', 'Down', and 'Partial'.",
+          "description": "Health of backend server.",
           "enum": [
             "Unknown",
             "Up",
             "Down",
-            "Partial"
+            "Partial",
+            "Draining"
           ],
           "x-ms-enum": {
             "name": "ApplicationGatewayBackendHealthServerHealth",
@@ -438,7 +462,7 @@
       "properties": {
         "name": {
           "type": "string",
-          "description": "Name of an application gateway SKU. Possible values are: 'Standard_Small', 'Standard_Medium', 'Standard_Large', 'WAF_Medium', and 'WAF_Large'.",
+          "description": "Name of an application gateway SKU.",
           "enum": [
             "Standard_Small",
             "Standard_Medium",
@@ -453,7 +477,7 @@
         },
         "tier": {
           "type": "string",
-          "description": "Tier of an application gateway. Possible values are: 'Standard' and 'WAF'.",
+          "description": "Tier of an application gateway.",
           "enum": [
             "Standard",
             "WAF"
@@ -475,7 +499,7 @@
       "properties": {
         "disabledSslProtocols": {
           "type": "array",
-          "description": "SSL protocols to be disabled on application gateway. Possible values are: 'TLSv1_0', 'TLSv1_1', and 'TLSv1_2'.",
+          "description": "SSL protocols to be disabled on application gateway.",
           "items": {
             "type": "string",
             "enum": [
@@ -613,7 +637,7 @@
         },
         "privateIPAllocationMethod": {
           "type": "string",
-          "description": "PrivateIP allocation method. Possible values are: 'Static' and 'Dynamic'.",
+          "description": "PrivateIP allocation method.",
           "enum": [
             "Static",
             "Dynamic"
@@ -763,7 +787,7 @@
         },
         "protocol": {
           "type": "string",
-          "description": "Protocol. Possible values are: 'Http' and 'Https'.",
+          "description": "Protocol.",
           "enum": [
             "Http",
             "Https"
@@ -775,7 +799,7 @@
         },
         "cookieBasedAffinity": {
           "type": "string",
-          "description": "Cookie based affinity. Possible values are: 'Enabled' and 'Disabled'.",
+          "description": "Cookie based affinity.",
           "enum": [
             "Enabled",
             "Disabled"
@@ -846,7 +870,7 @@
         },
         "protocol": {
           "type": "string",
-          "description": "Protocol. Possible values are: 'Http' and 'Https'.",
+          "description": "Protocol.",
           "enum": [
             "Http",
             "Https"
@@ -947,7 +971,7 @@
       "properties": {
         "protocol": {
           "type": "string",
-          "description": "Protocol. Possible values are: 'Http' and 'Https'.",
+          "description": "Protocol.",
           "enum": [
             "Http",
             "Https"
@@ -1013,7 +1037,7 @@
       "properties": {
         "ruleType": {
           "type": "string",
-          "description": "Rule type. Possible values are: 'Basic' and 'PathBasedRouting'.",
+          "description": "Rule type.",
           "enum": [
             "Basic",
             "PathBasedRouting"
@@ -1081,7 +1105,7 @@
         "operationalState": {
           "readOnly": true,
           "type": "string",
-          "description": "Operational state of the application gateway resource. Possible values are: 'Stopped', 'Started', 'Running', and 'Stopping'.",
+          "description": "Operational state of the application gateway resource.",
           "enum": [
             "Stopped",
             "Starting",
@@ -1273,7 +1297,7 @@
         },
         "firewallMode": {
           "type": "string",
-          "description": "Web application firewall mode. Possible values are: 'Detection' and 'Prevention'.",
+          "description": "Web application firewall mode.",
           "enum": [
             "Detection",
             "Prevention"
@@ -1282,10 +1306,28 @@
             "name": "ApplicationGatewayFirewallMode",
             "modelAsString": true
           }
+        },
+        "ruleSetType": {
+          "type": "string",
+          "description": "The type of the web application firewall rule set. Possible values are: 'OWASP'."
+        },
+        "ruleSetVersion": {
+          "type": "string",
+          "description": "The version of the rule set type."
+        },
+        "disabledRuleGroups": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ApplicationGatewayFirewallDisabledRuleGroup"
+          },
+          "description": "The disabled rule groups."
         }
       },
       "required": [
-        "enabled"
+        "enabled",
+        "firewallMode",
+        "ruleSetType",
+        "ruleSetVersion"
       ],
       "description": "Application gateway web application firewall configuration."
     },
@@ -1310,6 +1352,123 @@
             "drainTimeoutInSec"
         ],
         "description": "Connection draining allows open connections to a backend server to be active for a specified time after the backend server got removed from the configuration."
+    },
+    "ApplicationGatewayFirewallDisabledRuleGroup": {
+      "properties": {
+        "ruleGroupName": {
+          "type": "string",
+          "description": "The name of the rule group that will be disabled."
+        },
+        "rules": {
+          "type": "array",
+          "items": {
+            "type": "integer",
+            "format": "int32",
+            "x-nullable": false
+          },
+          "description": "The list of rules that will be disabled. If null, all rules of the rule group will be disabled."
+        }
+      },
+      "required": [
+        "ruleGroupName"
+      ],
+      "description": "Allows to disable rules within a rule group or an entire rule group."
+    },
+    "ApplicationGatewayAvailableWafRuleSetsResult": {
+      "properties": {
+        "value": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ApplicationGatewayFirewallRuleSet"
+          },
+          "description": "The list of application gateway rule sets."
+        }
+      },
+      "description": "Response for ApplicationGatewayAvailableWafRuleSets API service call."
+    },
+    "ApplicationGatewayFirewallRuleSet": {
+      "properties": {
+        "properties": {
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/ApplicationGatewayFirewallRuleSetPropertiesFormat"
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "./network.json#/definitions/Resource"
+        }
+      ],
+      "description": "A web application firewall rule set."
+    },
+    "ApplicationGatewayFirewallRuleSetPropertiesFormat": {
+      "properties": {
+        "provisioningState": {
+          "type": "string",
+          "description": "The provisioning state of the web application firewall rule set."
+        },
+        "ruleSetType": {
+          "type": "string",
+          "description": "The type of the web application firewall rule set."
+        },
+        "ruleSetVersion": {
+          "type": "string",
+          "description": "The version of the web application firewall rule set type."
+        },
+        "ruleGroups": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ApplicationGatewayFirewallRuleGroup"
+          },
+          "description": "The rule groups of the web application firewall rule set."
+        }
+      },
+      "required": [
+        "ruleSetType",
+        "ruleSetVersion",
+        "ruleGroups"
+      ],
+      "description": "Properties of the web application firewall rule set."
+    },
+    "ApplicationGatewayFirewallRuleGroup": {
+      "properties": {
+        "ruleGroupName": {
+          "type": "string",
+          "description": "The name of the web application firewall rule group."
+        },
+        "description": {
+          "type": "string",
+          "description": "The description of the web application firewall rule group."
+        },
+        "rules": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ApplicationGatewayFirewallRule"
+          },
+          "description": "The rules of the web application firewall rule group."
+        }
+      },
+      "required": [
+        "ruleGroupName",
+        "rules"
+      ],
+      "description": "A web application firewall rule group."
+    },
+    "ApplicationGatewayFirewallRule": {
+      "properties": {
+        "ruleId": {
+          "type": "integer",
+          "format": "int32",
+          "description": "The identifier of the web application firewall rule."
+        },
+        "description": {
+          "type": "string",
+          "description": "The description of the web application firewall rule."
+        }
+      },
+      "required": [
+        "ruleId"
+      ],
+      "description": "A web application firewall rule."
     }
   },
   "parameters": {
