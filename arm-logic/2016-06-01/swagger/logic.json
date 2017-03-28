@@ -4902,6 +4902,10 @@
         "enableNrrForInboundMdn": {
           "type": "boolean",
           "description": "The value indicating whether to enable NRR for inbound MDN."
+        },
+        "sha2AlgorithmFormat": {
+          "type": "string",
+          "description": "The Sha2 algorithm format. Valid values are Sha2, ShaHashSize, ShaHyphenHashSize, Sha2UnderscoreHashSize."
         }
       },
       "description": "The AS2 agreement security settings."
@@ -5840,7 +5844,10 @@
       "enum": [
         "NotSpecified",
         "Default",
-        "SHA1"
+        "SHA1",
+		"SHA2256",
+		"SHA2384",
+		"SHA2512"
       ],
       "x-ms-enum": {
         "name": "SigningAlgorithm",
