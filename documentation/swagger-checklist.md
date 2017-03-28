@@ -245,7 +245,9 @@ For example, [NetworkInterface.ipConfigurations](https://github.com/Azure/azure-
 
 - :white_check_mark: **M2058**: Paths in x-ms-paths must overload a normal path in the paths section, i.e. a path in the x-ms-path must either be same as a path in the paths section or a path in the paths sections followed by additional parameters.
 
-- :white_check_mark: **M2060**: x-ms-pageable operations must have a 200 response defined.
+- :white_check_mark: **M2060**: x-ms-pageable operations must have a 200 response defined. Implemented as rule "PageableExtensionRule".
+
+- :white_check_mark: **M2061**: URLs should have parameterized resource type values instead of defaults. Implemented as rule "ProvidersPathValidation" in which all odd positions in the URL path followed by ```providers/providersNamespace``` are considered as resource type values
 
 ### SHOULD
 
