@@ -336,12 +336,14 @@
       "description": "Metadata describing a web test for an Azure resource.",
       "required": [
         "Name",
-        "Kind"
+        "Kind",
+        "Locations",
+        "SyntheticMonitorId"
       ],
       "properties": {
         "SyntheticMonitorId": {
           "type": "string",
-          "description": "Unique ID of this WebTest."
+          "description": "Unique ID of this WebTest. This is typically the same value as the Name field."
         },
         "Name": {
           "x-ms-client-name": "WebTestName",
@@ -359,12 +361,14 @@
         "Frequency": {
           "type": "integer",
           "format": "int32",
-          "description": "Interval between test runs for this WebTest."
+          "description": "Interval in seconds between test runs for this WebTest. Default value is 300.",
+          "default": 300
         },
         "Timeout": {
           "type": "integer",
           "format": "int32",
-          "description": "Seconds until this WebTest will timeout and fail."
+          "description": "Seconds until this WebTest will timeout and fail. Default valu is 30.",
+          "default": 30
         },
         "Kind": {
           "x-ms-client-name": "WebTestKind",
