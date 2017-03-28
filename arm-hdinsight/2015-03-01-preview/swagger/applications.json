@@ -15,13 +15,11 @@
   "produces": [
     "application/json"
   ],
-  "security": [
-    {
-      "azure_auth": [
-        "user_impersonation"
-      ]
-    }
-  ],
+  "security": [{
+    "azure_auth": [
+      "user_impersonation"
+    ]
+  }],
   "securityDefinitions": {
     "azure_auth": {
       "type": "oauth2",
@@ -46,8 +44,7 @@
             "$ref": "../examples/GetAllApplications.json"
           }
         },
-        "parameters": [
-          {
+        "parameters": [{
             "name": "resourceGroupName",
             "in": "path",
             "required": true,
@@ -92,12 +89,11 @@
           "Get application on HDInsight cluster successfully created.": {
             "$ref": "../examples/GetApplicationCreated.json"
           },
-         "Get application on HDInsight cluster creation in progress": {
+          "Get application on HDInsight cluster creation in progress": {
             "$ref": "../examples/GetApplicationInProgress.json"
           }
         },
-        "parameters": [
-          {
+        "parameters": [{
             "name": "resourceGroupName",
             "in": "path",
             "required": true,
@@ -149,8 +145,7 @@
             "$ref": "../examples/CreateApplication.json"
           }
         },
-        "parameters": [
-          {
+        "parameters": [{
             "name": "resourceGroupName",
             "in": "path",
             "required": true,
@@ -205,8 +200,7 @@
             "$ref": "../examples/DeleteApplication.json"
           }
         },
-        "parameters": [
-          {
+        "parameters": [{
             "name": "resourceGroupName",
             "in": "path",
             "required": true,
@@ -262,7 +256,7 @@
           }
         },
         "location": {
-          "type": ["string", "null"],
+          "type": "string",
           "description": "Gets the location of the endpoint."
         },
         "destinationPort": {
@@ -277,7 +271,7 @@
         },
         "additionalProperties": {
           "type": "string"
-        } 
+        }
       }
     },
     "ApplicationGetEndpoint": {
@@ -337,7 +331,7 @@
           "description": "Gets application ssh endpoints."
         },
         "provisioningState": {
-          "readOnly": true,            
+          "readOnly": true,
           "type": "string",
           "description": "Gets the provisioning state of the application"
         },
@@ -368,7 +362,7 @@
           "description": "Gets the Marketplace identifier."
         },
         "additionalProperties": {
-            "type": "string"
+          "type": "string"
         }
       }
     },
@@ -377,17 +371,17 @@
       "type": "object",
       "properties": {
         "id": {
-          "readOnly": true,          
+          "readOnly": true,
           "$ref": "./cluster.json#/definitions/SubResource",
           "description": "Gets or sets the ID of the application"
         },
         "name": {
-          "readOnly": true,          
+          "readOnly": true,
           "description": "Gets or sets the name of the application.",
           "type": "string"
         },
         "type": {
-          "readOnly": true,          
+          "readOnly": true,
           "description": "Gets or sets the type of application.",
           "type": "string"
         },
@@ -396,7 +390,7 @@
           "type": "string"
         },
         "tags": {
-          "type": ["object", "null"],
+          "type": "object",
           "additionalProperties": {
             "type": "string"
           },
