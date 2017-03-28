@@ -330,7 +330,7 @@
           ],
           "x-ms-enum": {
             "name": "ApplicationType",
-            "modelAsString": false
+            "modelAsString": true
           },
           "x-ms-mutability": ["create", "read"]
         },
@@ -343,13 +343,20 @@
           ],
           "x-ms-enum": {
             "name": "FlowType",
-            "modelAsString": false
+            "modelAsString": true
           }
         },
         "Request_Source": {
           "type": "string",
-          "readOnly": true,
-          "description": "Internal field. Describes what tool created this Application Insights component."
+          "description": "Describes what tool created this Application Insights component. Customers using this API should set this to the default 'rest'.",
+          "default": "rest",
+          "enum": [
+            "rest"
+          ],
+          "x-ms-enum": {
+            "name": "RequestSource",
+            "modelAsString": true
+          }
         },
         "InstrumentationKey": {
           "type": "string",
