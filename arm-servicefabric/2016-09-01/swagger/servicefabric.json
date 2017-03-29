@@ -384,7 +384,7 @@
     }
   },
   "definitions": {
-    "ClusterCodeVersionResultDetail": {
+    "ClusterVersionDetails": {
       "description": "The detail of the ServiceFabric runtime version result",
       "properties": {
         "codeVersion": {
@@ -418,7 +418,7 @@
         },
         "properties": {
           "x-ms-client-flatten": true,
-          "$ref": "#/definitions/ClusterCodeVersionResultDetail"
+          "$ref": "#/definitions/ClusterVersionDetails"
         }
       }
     },
@@ -638,23 +638,6 @@
         "Windows",
         "Linux"
       ]
-    },
-    "ClusterVersionDetails": {
-      "description": "ServiceFabric runtime version details",
-      "properties": {
-        "codeVersion": {
-          "description": "ServiceFabric runtime version",
-          "type": "string"
-        },
-        "supportExpiryUtc": {
-          "description": "The expiration supporting date of the above version",
-          "type": "string"
-        },
-        "environment": {
-          "description": "Cluster operating system",
-          "$ref": "#/definitions/ClusterEnvironment"
-        }
-      }
     },
     "ServiceTypeHealthPolicy": {
       "description": "Cluster health policy",
