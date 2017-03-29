@@ -10,9 +10,9 @@ describe('AutoRest Linter validation:', function () {
   let swaggersToProcess = utils.getFilesChangedInPR();
   // Useful when debugging a test for a particular swagger. 
   // Just update the regex. That will return an array of filtered items.
-  swaggersToProcess = swaggersToProcess.filter(function(item) {
-    return (item.match(/.arm-appinsights.*/ig) !== null);
-  });
+  // swaggersToProcess = swaggersToProcess.filter(function(item) {
+  //   return (item.match(/.arm-containerregistry.*2017-03-01.*/ig) !== null);
+  // });
   _(swaggersToProcess).each(function (swagger) {
     it(swagger + ' should honor linter validation rules.', function (done) {
       var cmd = 'autorest -CodeGenerator None -I ' + swagger + ' -JsonValidationMessages true';
