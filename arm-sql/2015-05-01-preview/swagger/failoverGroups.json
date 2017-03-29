@@ -1,7 +1,7 @@
 {
     "swagger": "2.0",
     "info": {
-        "version": "2.0",
+        "version": "2015-05-01-preview",
         "title": "SqlManagementClient",
         "description": "The Azure SQL Database management API provides a RESTful set of web APIs that interact with Azure SQL Database services to manage your databases. The API enables users to create, retrieve, update, and delete databases, servers, and other entities."
     },
@@ -28,23 +28,18 @@
                 },
                 "parameters": [
                     {
-                        "required": true,
                         "$ref": "#/parameters/SubscriptionIdParameter"
                     },
                     {
-                        "required": true,
                         "$ref": "#/parameters/ResourceGroupParameter"
                     },
                     {
-                        "required": true,
                         "$ref": "#/parameters/ServerParameter"
                     },
                     {
-                        "required": true,
                         "$ref": "#/parameters/FailoverGroupParameter"
                     },
                     {
-                        "required": true,
                         "$ref": "#/parameters/ApiVersionParameter"
                     }
                 ],
@@ -75,32 +70,22 @@
                 },
                 "parameters": [
                     {
-                        "required": true,
                         "$ref": "#/parameters/SubscriptionIdParameter"
                     },
                     {
-                        "required": true,
                         "$ref": "#/parameters/ResourceGroupParameter"
                     },
                     {
-                        "required": true,
                         "$ref": "#/parameters/ServerParameter"
                     },
                     {
-                        "required": true,
                         "$ref": "#/parameters/FailoverGroupParameter"
                     },
                     {
-                        "name": "failoverGroup",
-                        "in": "body",
-                        "required": true,
-                        "schema": {
-                            "$ref": "#/definitions/FailoverGroupResource"
-                        }
+                        "$ref": "#/parameters/ApiVersionParameter"
                     },
                     {
-                        "required": true,
-                        "$ref": "#/parameters/ApiVersionParameter"
+                        "$ref": "#/parameters/FailoverGroupBodyParameter"
                     }
                 ],
                 "responses": {
@@ -137,23 +122,18 @@
                 },
                 "parameters": [
                     {
-                        "required": true,
                         "$ref": "#/parameters/SubscriptionIdParameter"
                     },
                     {
-                        "required": true,
                         "$ref": "#/parameters/ResourceGroupParameter"
                     },
                     {
-                        "required": true,
                         "$ref": "#/parameters/ServerParameter"
                     },
                     {
-                        "required": true,
                         "$ref": "#/parameters/FailoverGroupParameter"
                     },
                     {
-                        "required": true,
                         "$ref": "#/parameters/ApiVersionParameter"
                     }
                 ],
@@ -185,24 +165,22 @@
                 },
                 "parameters": [
                     {
-                        "required": true,
                         "$ref": "#/parameters/SubscriptionIdParameter"
                     },
                     {
-                        "required": true,
                         "$ref": "#/parameters/ResourceGroupParameter"
                     },
                     {
-                        "required": true,
                         "$ref": "#/parameters/ServerParameter"
                     },
                     {
-                        "required": true,
                         "$ref": "#/parameters/FailoverGroupParameter"
                     },
                     {
-                        "required": true,
                         "$ref": "#/parameters/ApiVersionParameter"
+                    },
+                    {
+                        "$ref": "#/parameters/FailoverGroupBodyParameter"
                     }
                 ],
                 "responses": {
@@ -235,19 +213,15 @@
                 },
                 "parameters": [
                     {
-                        "required": true,
                         "$ref": "#/parameters/SubscriptionIdParameter"
                     },
                     {
-                        "required": true,
                         "$ref": "#/parameters/ResourceGroupParameter"
                     },
                     {
-                        "required": true,
                         "$ref": "#/parameters/ServerParameter"
                     },
                     {
-                        "required": true,
                         "$ref": "#/parameters/ApiVersionParameter"
                     }
                 ],
@@ -280,23 +254,18 @@
                 },
                 "parameters": [
                     {
-                        "required": true,
                         "$ref": "#/parameters/SubscriptionIdParameter"
                     },
                     {
-                        "required": true,
                         "$ref": "#/parameters/ResourceGroupParameter"
                     },
                     {
-                        "required": true,
                         "$ref": "#/parameters/ServerParameter"
                     },
                     {
-                        "required": true,
                         "$ref": "#/parameters/FailoverGroupParameter"
                     },
                     {
-                        "required": true,
                         "$ref": "#/parameters/ApiVersionParameter"
                     }
                 ],
@@ -330,23 +299,18 @@
                 },
                 "parameters": [
                     {
-                        "required": true,
                         "$ref": "#/parameters/SubscriptionIdParameter"
                     },
                     {
-                        "required": true,
                         "$ref": "#/parameters/ResourceGroupParameter"
                     },
                     {
-                        "required": true,
                         "$ref": "#/parameters/ServerParameter"
                     },
                     {
-                        "required": true,
                         "$ref": "#/parameters/FailoverGroupParameter"
                     },
                     {
-                        "required": true,
                         "$ref": "#/parameters/ApiVersionParameter"
                     }
                 ],
@@ -492,7 +456,7 @@
             }
         },
         "FailoverGroupResourceProperties": {
-            "description": "Properties for an Azure SQL Database Failover Group",
+            "description": "Properties for a failover group",
             "type": "object",
             "properties": {
                 "readWriteEndpoint": {
@@ -638,6 +602,15 @@
             "required": true,
             "x-ms-parameter-location": "method",
             "type": "string"
+        },
+        "FailoverGroupBodyParameter": {
+            "name": "failoverGroup",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/FailoverGroupResource"
+            },
+            "description": "The failover group."
         }
     }
 }
