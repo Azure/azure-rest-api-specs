@@ -445,7 +445,7 @@
           "type": "string"
         },
         "thumbprintSecondary": {
-          "description": "Thumbprint of the secondary certificate ",
+          "description": "Thumbprint of the secondary certificate",
           "type": "string"
         },
         "x509StoreName": {
@@ -684,7 +684,7 @@
         }
       }
     },
-    "ClusterUpgradeHealthPolicy": {
+    "ClusterHealthPolicy": {
       "description": "Default cluster upgrade health policy",
       "properties": {
         "maxPercentUnhealthyNodes": {
@@ -810,7 +810,7 @@
         },
         "healthPolicy": {
           "description": "Cluster health Policy",
-          "$ref": "#/definitions/ClusterUpgradeHealthPolicy"
+          "$ref": "#/definitions/ClusterHealthPolicy"
         },
         "deltaHealthPolicy": {
           "description": "Delta health policy",
@@ -872,7 +872,7 @@
           "type": "string",
           "minLength": 1
         },
-        "ClientApplication": {
+        "clientApplication": {
           "description": "Azure active directory client application id",
           "type": "string",
           "minLength": 1
@@ -1152,6 +1152,7 @@
           "type": "string"
         },
         "display": {
+          "description": "Dispaly of the result",
           "$ref": "#/definitions/AvailableOperationDisplay"
         },
         "origin": {
