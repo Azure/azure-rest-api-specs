@@ -63,13 +63,7 @@
             "$ref": "#/parameters/api-version"
           },
           {
-            "name": "ClusterUpdateParameters",
-            "in": "body",
-            "required": true,
-            "schema": {
-              "$ref": "#/definitions/ClusterUpdateParameters"
-            },
-            "description": "The parameters which contains the property value and property name which used to update the cluster configuration"
+            "$ref": "#/parameters/clusterUpdateParameter"
           },
           {
             "$ref": "#/parameters/subscriptionId"
@@ -168,13 +162,7 @@
             "$ref": "#/parameters/api-version"
           },
           {
-            "name": "ClusterResource",
-            "in": "body",
-            "required": true,
-            "schema": {
-              "$ref": "#/definitions/Cluster"
-            },
-            "description": "Put Request"
+            "$ref": "#/parameters/clusterResourceParameters"
           },
           {
             "$ref": "#/parameters/subscriptionId"
@@ -1279,6 +1267,24 @@
         "Linux"
       ],
       "x-ms-parameter-location": "method"
+    },
+    "clusterUpdateParameter": {
+      "name": "clusterUpdateParameter",
+      "in": "body",
+      "required": true,
+      "schema": {
+        "$ref": "#/definitions/ClusterUpdateParameters"
+      },
+      "description": "The parameters which contains the property value and property name which used to update the cluster configuration"
+    },
+    "clusterResourceParameters": {
+      "name": "ClusterResource",
+      "in": "body",
+      "required": true,
+      "schema": {
+        "$ref": "#/definitions/Cluster"
+      },
+      "description": "Put Request"
     }
   }
 }
