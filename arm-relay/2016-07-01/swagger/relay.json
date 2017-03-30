@@ -390,7 +390,7 @@
           "200": {
             "description": "Namespace Authorization rule returned successfully",
             "schema": {
-              "$ref": "#/definitions/SharedAccessAuthorizationRuleListResult"
+              "$ref": "#/definitions/AuthorizationRuleListResult"
             }
           },
           "default": {
@@ -430,9 +430,9 @@
             "in": "body",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/SharedAccessAuthorizationRule"
+              "$ref": "#/definitions/AuthorizationRule"
             },
-            "description": "The shared access authorization rule."
+            "description": "The authorization rule parameters"
           },
           {
             "$ref": "#/parameters/ApiVersionParameter"
@@ -445,7 +445,7 @@
           "200": {
             "description": "Request to create Namespace Authorization rule succeeded",
             "schema": {
-              "$ref": "#/definitions/SharedAccessAuthorizationRule"
+              "$ref": "#/definitions/AuthorizationRule"
             }
           },
           "default": {
@@ -527,7 +527,7 @@
           "200": {
             "description": "Namespace Authorization rule returned successfully",
             "schema": {
-              "$ref": "#/definitions/SharedAccessAuthorizationRule"
+              "$ref": "#/definitions/AuthorizationRule"
             }
           },
           "default": {
@@ -570,7 +570,7 @@
           "200": {
             "description": "Successful",
             "schema": {
-              "$ref": "#/definitions/ResourceListKeys"
+              "$ref": "#/definitions/AuthorizationRuleKeys"
             }
           },
           "default": {
@@ -622,7 +622,7 @@
           "200": {
             "description": "Successful",
             "schema": {
-              "$ref": "#/definitions/ResourceListKeys"
+              "$ref": "#/definitions/AuthorizationRuleKeys"
             }
           },
           "default": {
@@ -842,7 +842,7 @@
           "200": {
             "description": "Authorization rules successfully returned.",
             "schema": {
-              "$ref": "#/definitions/SharedAccessAuthorizationRuleListResult"
+              "$ref": "#/definitions/AuthorizationRuleListResult"
             }
           }
         },
@@ -879,9 +879,9 @@
             "in": "body",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/SharedAccessAuthorizationRule"
+              "$ref": "#/definitions/AuthorizationRule"
             },
-            "description": "The shared access authorization rule."
+            "description": "The authorization rule parameters"
           },
           {
             "$ref": "#/parameters/ApiVersionParameter"
@@ -894,7 +894,7 @@
           "200": {
             "description": "HybridConnection Authorization rule created",
             "schema": {
-              "$ref": "#/definitions/SharedAccessAuthorizationRule"
+              "$ref": "#/definitions/AuthorizationRule"
             }
           },
           "default": {
@@ -982,7 +982,7 @@
           "200": {
             "description": "HybridConnection AuthorizationRule returned successfully",
             "schema": {
-              "$ref": "#/definitions/SharedAccessAuthorizationRule"
+              "$ref": "#/definitions/AuthorizationRule"
             }
           },
           "default": {
@@ -1028,7 +1028,7 @@
           "200": {
             "description": "Request to retirve ConnectionStrings to the HybridConnection succeeded",
             "schema": {
-              "$ref": "#/definitions/ResourceListKeys"
+              "$ref": "#/definitions/AuthorizationRuleKeys"
             }
           },
           "default": {
@@ -1083,7 +1083,7 @@
           "200": {
             "description": "Request to regenerate ConnectionStrings to HybridConnection succeeded",
             "schema": {
-              "$ref": "#/definitions/ResourceListKeys"
+              "$ref": "#/definitions/AuthorizationRuleKeys"
             }
           },
           "default": {
@@ -1306,7 +1306,7 @@
           "200": {
             "description": "Authorization rules successfully returned.",
             "schema": {
-              "$ref": "#/definitions/SharedAccessAuthorizationRuleListResult"
+              "$ref": "#/definitions/AuthorizationRuleListResult"
             }
           }
         },
@@ -1343,9 +1343,9 @@
             "in": "body",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/SharedAccessAuthorizationRule"
+              "$ref": "#/definitions/AuthorizationRule"
             },
-            "description": "The shared access authorization rule."
+            "description": "The authorization rule parameters."
           },
           {
             "$ref": "#/parameters/ApiVersionParameter"
@@ -1358,7 +1358,7 @@
           "200": {
             "description": "WCFRelays Authorization rule created",
             "schema": {
-              "$ref": "#/definitions/SharedAccessAuthorizationRule"
+              "$ref": "#/definitions/AuthorizationRule"
             }
           },
           "default": {
@@ -1446,7 +1446,7 @@
           "200": {
             "description": "Request for WCFRelays AuthorizationRule succeeded",
             "schema": {
-              "$ref": "#/definitions/SharedAccessAuthorizationRule"
+              "$ref": "#/definitions/AuthorizationRule"
             }
           },
           "default": {
@@ -1492,7 +1492,7 @@
           "200": {
             "description": "Successful",
             "schema": {
-              "$ref": "#/definitions/ResourceListKeys"
+              "$ref": "#/definitions/AuthorizationRuleKeys"
             }
           },
           "default": {
@@ -1547,7 +1547,7 @@
           "200": {
             "description": "Successful",
             "schema": {
-              "$ref": "#/definitions/ResourceListKeys"
+              "$ref": "#/definitions/AuthorizationRuleKeys"
             }
           },
           "default": {
@@ -1666,10 +1666,6 @@
         "userMetadata": {
           "type": "string",
           "description": "usermetadata is a placeholder to store user-defined string data for the HybridConnection endpoint.e.g. it can be used to store  descriptive data, such as list of teams and their contact information also user-defined configuration settings can be stored."
-        },
-        "path": {
-          "type": "string",
-          "description": "The path of the HybridConnection."
         }
       },
       "description": "Properties of the HybridConnection."
@@ -1856,12 +1852,12 @@
         "tier"
       ]
     },
-    "SharedAccessAuthorizationRuleListResult": {
+    "AuthorizationRuleListResult": {
       "properties": {
         "value": {
           "type": "array",
           "items": {
-            "$ref": "#/definitions/SharedAccessAuthorizationRule"
+            "$ref": "#/definitions/AuthorizationRule"
           },
           "description": "Result of the List AuthorizationRules operation."
         },
@@ -1872,12 +1868,12 @@
       },
       "description": "The response of the List Namespace operation."
     },
-    "SharedAccessAuthorizationRule": {
+    "AuthorizationRule": {
       "properties": {
         "properties": {
           "x-ms-client-flatten": true,
-          "$ref": "#/definitions/SharedAccessAuthorizationRuleProperties",
-          "description": "SharedAccess Authorization Rule properties"
+          "$ref": "#/definitions/AuthorizationRuleProperties",
+          "description": "Authorization Rule properties"
         }
       },
       "required": [
@@ -1890,7 +1886,7 @@
       ],
       "description": "Description of a Namespace AuthorizationRules."
     },
-    "SharedAccessAuthorizationRuleProperties": {
+    "AuthorizationRuleProperties": {
       "properties": {
         "rights": {
           "type": "array",
@@ -1913,9 +1909,9 @@
       "required": [
         "rights"
       ],
-      "description": "SharedAccessAuthorizationRule properties."
+      "description": "AuthorizationRule properties."
     },
-    "ResourceListKeys": {
+    "AuthorizationRuleKeys": {
       "properties": {
         "primaryConnectionString": {
           "type": "string",
