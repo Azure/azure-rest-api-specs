@@ -30,6 +30,9 @@
         },
         "parameters": [
           {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
             "$ref": "#/parameters/SubscriptionIdParameter"
           },
           {
@@ -40,9 +43,6 @@
           },
           {
             "$ref": "#/parameters/FailoverGroupParameter"
-          },
-          {
-            "$ref": "#/parameters/ApiVersionParameter"
           }
         ],
         "responses": {
@@ -71,6 +71,9 @@
         },
         "parameters": [
           {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
             "$ref": "#/parameters/SubscriptionIdParameter"
           },
           {
@@ -81,9 +84,6 @@
           },
           {
             "$ref": "#/parameters/FailoverGroupParameter"
-          },
-          {
-            "$ref": "#/parameters/ApiVersionParameter"
           },
           {
             "$ref": "#/parameters/FailoverGroupBodyParameter"
@@ -122,6 +122,9 @@
         },
         "parameters": [
           {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
             "$ref": "#/parameters/SubscriptionIdParameter"
           },
           {
@@ -132,9 +135,6 @@
           },
           {
             "$ref": "#/parameters/FailoverGroupParameter"
-          },
-          {
-            "$ref": "#/parameters/ApiVersionParameter"
           }
         ],
         "responses": {
@@ -164,6 +164,9 @@
         },
         "parameters": [
           {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
             "$ref": "#/parameters/SubscriptionIdParameter"
           },
           {
@@ -174,9 +177,6 @@
           },
           {
             "$ref": "#/parameters/FailoverGroupParameter"
-          },
-          {
-            "$ref": "#/parameters/ApiVersionParameter"
           },
           {
             "$ref": "#/parameters/FailoverGroupBodyParameter"
@@ -211,6 +211,9 @@
         },
         "parameters": [
           {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
             "$ref": "#/parameters/SubscriptionIdParameter"
           },
           {
@@ -218,9 +221,6 @@
           },
           {
             "$ref": "#/parameters/ServerParameter"
-          },
-          {
-            "$ref": "#/parameters/ApiVersionParameter"
           }
         ],
         "responses": {
@@ -251,6 +251,9 @@
         },
         "parameters": [
           {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
             "$ref": "#/parameters/SubscriptionIdParameter"
           },
           {
@@ -261,9 +264,6 @@
           },
           {
             "$ref": "#/parameters/FailoverGroupParameter"
-          },
-          {
-            "$ref": "#/parameters/ApiVersionParameter"
           }
         ],
         "responses": {
@@ -295,6 +295,9 @@
         },
         "parameters": [
           {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
             "$ref": "#/parameters/SubscriptionIdParameter"
           },
           {
@@ -305,9 +308,6 @@
           },
           {
             "$ref": "#/parameters/FailoverGroupParameter"
-          },
-          {
-            "$ref": "#/parameters/ApiVersionParameter"
           }
         ],
         "responses": {
@@ -348,39 +348,6 @@
       },
       "x-ms-azure-resource": true
     },
-    "TrackedResource": {
-      "description": "ARM tracked top level resource.",
-      "properties": {
-        "tags": {
-          "type": "object",
-          "additionalProperties": {
-            "type": "string"
-          },
-          "x-ms-mutability": [
-            "read",
-            "create",
-            "update"
-          ],
-          "description": "Resource tags."
-        },
-        "location": {
-          "type": "string",
-          "x-ms-mutability": [
-            "read",
-            "create"
-          ],
-          "description": "Resource location."
-        }
-      },
-      "required": [
-        "location"
-      ],
-      "allOf": [
-        {
-          "$ref": "#/definitions/Resource"
-        }
-      ]
-    },
     "ProxyResource": {
       "description": "ARM proxy resource.",
       "allOf": [
@@ -414,7 +381,9 @@
           "description": "Resource tags."
         },
         "properties": {
-          "$ref": "#/definitions/FailoverGroupProperties"
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/FailoverGroupProperties",
+          "description": "The properties representing the resource."
         }
       },
       "allOf": [
@@ -444,7 +413,8 @@
           "readOnly": true,
           "type": "string",
           "x-ms-enum": {
-            "name": "FailoverGroupReplicationRole"
+            "name": "FailoverGroupReplicationRole",
+            "modelAsString": true
           }
         },
         "replicationState": {
@@ -479,7 +449,8 @@
           ],
           "type": "string",
           "x-ms-enum": {
-            "name": "ReadWriteEndpointFailoverPolicy"
+            "name": "ReadWriteEndpointFailoverPolicy",
+            "modelAsString": true
           }
         },
         "failoverWithDataLossGracePeriodMinutes": {
@@ -500,7 +471,8 @@
           ],
           "type": "string",
           "x-ms-enum": {
-            "name": "ReadOnlyEndpointFailoverPolicy"
+            "name": "ReadOnlyEndpointFailoverPolicy",
+            "modelAsString": true
           }
         }
       }
@@ -526,7 +498,8 @@
           ],
           "type": "string",
           "x-ms-enum": {
-            "name": "FailoverGroupReplicationRole"
+            "name": "FailoverGroupReplicationRole",
+            "modelAsString": true
           }
         }
       }
