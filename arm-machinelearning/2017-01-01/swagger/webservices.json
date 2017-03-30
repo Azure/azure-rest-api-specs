@@ -224,6 +224,12 @@
         "responses": {
           "202": {
             "description": "Accepted.  The response includes the Azure-AsyncOperation header. To get the progress of the operation, call the GET operation on the URL in the Azure-AsyncOperation header field. For more information about Asynchronous Operations, see https://docs.microsoft.com/en-us/azure/azure-resource-manager/resource-manager-async-operations."
+          },
+          "200": {
+            "description": "OK. For SDK generation only.",
+            "schema": {
+              "$ref": "#/definitions/AsyncOperationStatus"
+            }
           }
         },
         "x-ms-long-running-operation": true
@@ -1137,6 +1143,80 @@
         "certificateThumbprint": {
           "type": "string",
           "description": "If the parameter value in 'value' field is encrypted, the thumbprint of the certificate should be put here."
+        }
+      }
+    },
+    "AsyncOperationStatus": {
+      "type": "object",
+      "description": "Azure async operation status.",
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "Async operation id"
+        },
+        "name": {
+          "type": "string",
+          "description": "Async operation name"
+        },
+        "provisioningState": {
+          "type": "string",
+          "description": "Read Only: The provision state of the web service. Valid values are Unknown, Provisioning, Succeeded, and Failed.",
+          "enum": [
+            "Unknown",
+            "Provisioning",
+            "Succeeded",
+            "Failed"
+          ],
+          "x-ms-enum": {
+            "name": "ProvisioningState",
+            "modelAsString": true
+          },
+          "readOnly": true
+        },
+        "startTime": {
+          "type": "string",
+          "description": "The date time that async operation started.",
+          "format": "date-time",
+          "readOnly": true
+        },
+        "endTime": {
+          "type": "string",
+          "description": "The date time that async operation finished.",
+          "format": "date-time",
+          "readOnly": true
+        },
+        "percentComplete": {
+          "type": "number",
+          "description": "Async operation progress"
+        },
+        "errorInfo": {
+          "$ref": "#/definitions/AsyncOperationErrorInfo",
+          "description": "The error info structure to describe the error detail if the async operation failed."
+        }
+      }
+    },
+    "AsyncOperationErrorInfo": {
+      "type": "object",
+      "description": "The error detail information for async operation",
+      "properties": {
+        "code": {
+          "type": "string",
+          "description": "The error code"
+        },
+        "target": {
+          "type": "string",
+          "description": "The error target"
+        },
+        "message": {
+          "type": "string",
+          "description": "The error message"
+        },
+        "details": {
+          "type": "array",
+          "description": "An array of error info.",
+          "items": {
+            "$ref": "#/definitions/AsyncOperationErrorInfo"
+          }
         }
       }
     }
