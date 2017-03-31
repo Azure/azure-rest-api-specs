@@ -33,12 +33,12 @@
     }
   },
   "paths": {
-    "/{resourceUri}/providers/microsoft.insights/diagnosticSettings/{name}": {
+    "/{resourceUri}/providers/microsoft.insights/diagnosticSettings/service": {
       "get": {
         "tags": [
-          "DiagnosticSettings"
+          "ServiceDiagnosticSettings"
         ],
-        "operationId": "DiagnosticSettings_Get",
+        "operationId": "ServiceDiagnosticSettings_Get",
         "description": "Gets the active diagnostic settings for the specified resource.",
         "parameters": [
           {
@@ -46,9 +46,6 @@
           },
           {
             "$ref": "#/parameters/ApiVersionParameter"
-          },
-          {
-            "$ref": "#/parameters/NameParameter"
           }
         ],
         "responses": {
@@ -59,15 +56,15 @@
             }
           },
           "200": {
-            "description": "Successful request to get more information about diagnostic setting",
+            "description": "Successful request to get more information about service diagnostic setting",
             "schema": {
-              "$ref": "#/definitions/DiagnosticSettingsResource"
+              "$ref": "#/definitions/ServiceDiagnosticSettingsResource"
             },
             "examples": {
               "application/json": {
-                "id":"/subscriptions/1a66ce04-b633-4a0b-b2bc-a912ec8986a6/resourcegroups/viruela1/providers/microsoft.logic/workflows/viruela6/diagnosticSettings/mysetting",
+                "id":"/subscriptions/1a66ce04-b633-4a0b-b2bc-a912ec8986a6/resourcegroups/viruela1/providers/microsoft.logic/workflows/viruela6/diagnosticSettings/service",
                 "type":"",
-                "name":"mysetting",
+                "name":"service",
                 "location":"",
                 "tags":null,
                 "properties": {
@@ -101,9 +98,9 @@
       },
       "put": {
         "tags": [
-          "DiagnosticSettings"
+          "ServiceDiagnosticSettings"
         ],
-        "operationId": "DiagnosticSettings_CreateOrUpdate",
+        "operationId": "ServiceDiagnosticSettings_CreateOrUpdate",
         "description": "Create or update new diagnostic settings for the specified resource.",
         "parameters": [
           {
@@ -117,30 +114,29 @@
             "in": "body",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/DiagnosticSettingsResource"
+              "$ref": "#/definitions/ServiceDiagnosticSettingsResource"
             },
             "description": "Parameters supplied to the operation."
-          },
-          {
-            "$ref": "#/parameters/NameParameter"
           }
         ],
         "responses": {
           "200": {
-            "description": "Successful request to create a diagnostic setting",
+            "description": "Successful request to create a service diagnostic setting",
             "schema": {
-              "$ref": "#/definitions/DiagnosticSettingsResource"
+              "$ref": "#/definitions/ServiceDiagnosticSettingsResource"
             },
             "examples": {
               "application/json": {
-                "id":"/subscriptions/1a66ce04-b633-4a0b-b2bc-a912ec8986a6/resourcegroups/viruela1/providers/microsoft.logic/workflows/viruela6/diagnosticSettings/mysetting",
+                "id":"/subscriptions/1a66ce04-b633-4a0b-b2bc-a912ec8986a6/resourcegroups/viruela1/providers/microsoft.logic/workflows/viruela6/diagnosticSettings/service",
                 "type":"",
-                "name":"mysetting",
+                "name":"service",
                 "location":"",
                 "tags":null,
                 "properties": {
-                  "storageAccountId":"/subscriptions/df602c9c-7aa0-407d-a6fb-eb20c8bd1192/resourceGroups/apptest/providers/Microsoft.Storage/storageAccounts/appteststorage1","serviceBusRuleId":"/subscriptions/b67f7fec-69fc-4974-9099-a26bd6ffeda3/resourceGroups/andy1101/providers/Microsoft.EventHub/namespaces/andy1101/authorizationrules/RootManageSharedAccessKey",
+                  "storageAccountId":"/subscriptions/df602c9c-7aa0-407d-a6fb-eb20c8bd1192/resourceGroups/apptest/providers/Microsoft.Storage/storageAccounts/appteststorage1",
+                  "serviceBusRuleId":"/subscriptions/b67f7fec-69fc-4974-9099-a26bd6ffeda3/resourceGroups/andy1101/providers/Microsoft.EventHub/namespaces/andy1101/authorizationrules/RootManageSharedAccessKey",
                   "workspaceId":"",
+                  "eventHubAuthorizationRuleId":"/subscriptions/1a66ce04-b633-4a0b-b2bc-a912ec8986a6/resourceGroups/montest/providers/microsoft.eventhub/namespaces/mynamespace/eventhubs/myeventhub/authorizationrules/myrule",
                   "metrics": [
                     {
                       "timeGrain":"PT1M",
@@ -164,29 +160,6 @@
                 }
               }
             }
-          }
-        }
-      },
-      "delete": {
-        "tags": [
-          "DiagnosticSettings"
-        ],
-        "operationId": "DiagnosticSettings_Remove",
-        "description": "Delete existing diagnostic settings for the specified resource.",
-        "parameters": [
-          {
-            "$ref": "#/parameters/ResourceUriParameter"
-          },
-          {
-            "$ref": "#/parameters/ApiVersionParameter"
-          },
-          {
-            "$ref": "#/parameters/NameParameter"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Successful request to remove a diagnostic setting"
           }
         }
       }
@@ -283,7 +256,7 @@
       "required": [ "enabled" ],
       "description": "Part of MultiTenantDiagnosticSettings. Specifies the settings for a particular log."
     },
-    "DiagnosticSettings": {
+    "ServiceDiagnosticSettings": {
       "properties": {
         "storageAccountId": {
           "type": "string",
@@ -316,9 +289,9 @@
           "description": "The workspace ID (resource ID of a Log Analytics workspace) for a Log Analytics workspace to which you would like to send Diagnostic Logs. Example: /subscriptions/4b9e8510-67ab-4e9a-95a9-e2f1e570ea9c/resourceGroups/insights-integration/providers/Microsoft.OperationalInsights/workspaces/viruela2"
         }
       },
-      "description": "The diagnostic settings."
+      "description": "The diagnostic settings for service."
     },
-    "DiagnosticSettingsResource": {
+    "ServiceDiagnosticSettingsResource": {
       "type": "object",
       "allOf": [
         {
@@ -328,10 +301,10 @@
       "properties": {
         "properties": {
           "x-ms-client-flatten": true,
-          "$ref": "#/definitions/DiagnosticSettings"
+          "$ref": "#/definitions/ServiceDiagnosticSettings"
         }
       },
-      "description": "Description of diagnostic setting"
+      "description": "Description of a service diagnostic setting"
     },
     "ErrorResponse": {
       "description": "Describes the format of Error response.",
@@ -362,14 +335,6 @@
       "required": true,
       "type": "string",
       "description": "The identifier of the resource.",
-      "x-ms-parameter-location": "method"
-    },
-    "NameParameter": {
-      "name": "name",
-      "in": "path",
-      "required": true,
-      "type": "string",
-      "description": "The name of the diagnostic setting.",
       "x-ms-parameter-location": "method"
     }
   }
