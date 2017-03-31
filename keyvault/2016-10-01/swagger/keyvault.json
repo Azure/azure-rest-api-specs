@@ -1260,6 +1260,79 @@
         }
       }
     },
+    "/secrets/{secret-name}/backup": {
+      "post": {
+        "tags": [
+          "Secrets"
+        ],
+        "operationId": "BackupSecret",
+        "description": "Requests that a backup of the specified secret be downloaded to the client.",
+        "parameters": [
+          {
+            "name": "secret-name",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the secret."
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The backup blob containing the backed up secret.",
+            "schema": {
+              "$ref": "#/definitions/BackupSecretResult"
+            }
+          },
+          "default": {
+            "description": "Key Vault error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/KeyVaultError"
+            }
+          }
+        }
+      }
+    },
+    "/secrets/restore": {
+      "post": {
+        "tags": [
+          "Secrets"
+        ],
+        "operationId": "RestoreSecret",
+        "description": "Restores a backed up secret to a vault.",
+        "parameters": [
+          {
+            "name": "parameters",
+            "in": "body",
+            "required": true,
+            "x-ms-client-flatten": true,
+            "schema": {
+              "$ref": "#/definitions/SecretRestoreParameters"
+            },
+            "description": "The parameters to restore the secret."
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Restored secret bundle in the vault.",
+            "schema": {
+              "$ref": "#/definitions/SecretBundle"
+            }
+          },
+          "default": {
+            "description": "Key Vault error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/KeyVaultError"
+            }
+          }
+        }
+      }
+    },    
     "/certificates": {
       "get": {
         "tags": [
@@ -2444,6 +2517,18 @@
       ],
       "description": "The secret management attributes."
     },
+    "SecretRestoreParameters": {
+      "properties": {
+        "value": {
+          "type": "string",
+          "x-ms-client-name": "secretBundleBackup",
+          "format": "base64url",
+          "description": "The backup blob associated with a secret bundle."
+        }
+      },
+      "description": "The secret restore parameters.",
+      "required": [ "value" ]
+    },
     "CertificateAttributes": {
       "allOf": [
         {
@@ -3451,6 +3536,17 @@
       },
       "description": "The backup key result, containing the backup blob."
     },
+    "BackupSecretResult": {
+      "properties": {
+        "value": {
+          "type": "string",
+          "format": "base64url",
+          "readOnly": true,
+          "description": "The backup blob containing the backed up secret."
+        }
+      },
+      "description": "The backup secret result, containing the backup blob."
+    },    
     "PendingCertificateSigningRequestResult": {
       "properties": {
         "value": {
