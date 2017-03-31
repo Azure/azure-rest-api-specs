@@ -18,15 +18,15 @@
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Automation/automationAccounts/{automationAccountName}/modules/{moduleName}/activities/{activityName}": {
       "get": {
         "tags": [
-          "Activities"
+          "Activity"
         ],
-        "operationId": "Activities_Get",
+        "operationId": "Activity_Get",
         "description": "Retrieve the activity in the module identified by module name and activity name.",
         "externalDocs": {
           "url": "http://aka.ms/azureautomationsdk/activityoperations"
         },
-       "x-ms-examples": {
-          "Get Activity in a module" : {
+        "x-ms-examples": {
+          "Get Activity in a module": {
             "$ref": "../examples/module/getActivityInAModule.json"
           }
         },
@@ -81,14 +81,14 @@
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Automation/automationAccounts/{automationAccountName}/modules/{moduleName}/activities": {
       "get": {
         "tags": [
-          "Activities"
+          "Activity"
         ],
-        "operationId": "Activities_ListByModule",
+        "operationId": "Activity_ListByModule",
         "description": "Retrieve a list of activities in the module identified by module name.",
         "externalDocs": {
           "url": "http://aka.ms/azureautomationsdk/activityoperations"
         },
-       "x-ms-examples": {
+        "x-ms-examples": {
           "List activities by a module": {
             "$ref": "../examples/module/listActivitiesByModule.json"
           }
@@ -140,9 +140,9 @@
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Automation/automationAccounts/{automationAccountName}/modules/{moduleName}": {
       "delete": {
         "tags": [
-          "Modules"
+          "Module"
         ],
-        "operationId": "Modules_Delete",
+        "operationId": "Module_Delete",
         "description": "Delete the module by name.",
         "externalDocs": {
           "url": "http://aka.ms/azureautomationsdk/moduleoperations"
@@ -191,9 +191,9 @@
       },
       "get": {
         "tags": [
-          "Modules"
+          "Module"
         ],
-        "operationId": "Modules_Get",
+        "operationId": "Module_Get",
         "description": "Retrieve the module identified by module name.",
         "externalDocs": {
           "url": "http://aka.ms/azureautomationsdk/moduleoperations"
@@ -245,9 +245,9 @@
       },
       "put": {
         "tags": [
-          "Modules"
+          "Module"
         ],
-        "operationId": "Modules_CreateOrUpdate",
+        "operationId": "Module_CreateOrUpdate",
         "description": "Create or Update the module identified by module name.",
         "externalDocs": {
           "url": "http://aka.ms/azureautomationsdk/moduleoperations"
@@ -276,7 +276,7 @@
             "description": "The name of module."
           },
           {
-            "name": "moduleCreateOrUpdateParameters",
+            "name": "parameters",
             "in": "body",
             "required": true,
             "schema": {
@@ -314,9 +314,9 @@
       },
       "patch": {
         "tags": [
-          "Modules"
+          "Module"
         ],
-        "operationId": "Modules_Update",
+        "operationId": "Module_Update",
         "description": "Update the module identified by module name.",
         "externalDocs": {
           "url": "http://aka.ms/azureautomationsdk/moduleoperations"
@@ -340,7 +340,7 @@
             "description": "The name of module."
           },
           {
-            "name": "moduleUpdateParameters",
+            "name": "parameters",
             "in": "body",
             "required": true,
             "schema": {
@@ -374,14 +374,14 @@
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Automation/automationAccounts/{automationAccountName}/modules": {
       "get": {
         "tags": [
-          "Modules"
+          "Module"
         ],
-        "operationId": "Modules_ListByAutomationAccount",
+        "operationId": "Module_ListByAutomationAccount",
         "description": "Retrieve a list of modules.",
         "externalDocs": {
           "url": "http://aka.ms/azureautomationsdk/moduleoperations"
         },
-        "x-ms-examples" : {
+        "x-ms-examples": {
           "List modules by automation account": {
             "$ref": "../examples/module/listModulesByAutomationAccount.json"
           }

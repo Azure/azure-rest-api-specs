@@ -18,9 +18,9 @@
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Automation/automationAccounts/{automationAccountName}/nodeConfigurations/{nodeConfigurationName}": {
       "delete": {
         "tags": [
-          "NodeConfigurations"
+          "DscNodeConfiguration"
         ],
-        "operationId": "NodeConfigurations_Delete",
+        "operationId": "DscNodeConfiguration_Delete",
         "description": "Delete the Dsc node configurations by node configuration.",
         "externalDocs": {
           "url": "http://aka.ms/azureautomationsdk/dscnodeconfigurations"
@@ -69,9 +69,9 @@
       },
       "get": {
         "tags": [
-          "NodeConfigurations"
+          "DscNodeConfiguration"
         ],
-        "operationId": "NodeConfigurations_Get",
+        "operationId": "DscNodeConfiguration_Get",
         "description": "Retrieve the Dsc node configurations by node configuration.",
         "externalDocs": {
           "url": "http://aka.ms/azureautomationsdk/dscnodeconfigurations"
@@ -123,9 +123,9 @@
       },
       "put": {
         "tags": [
-          "NodeConfigurations"
+          "DscNodeConfiguration"
         ],
-        "operationId": "NodeConfigurations_CreateOrUpdate",
+        "operationId": "DscNodeConfiguration_CreateOrUpdate",
         "description": "Create the node configuration identified by node configuration name.",
         "externalDocs": {
           "url": "http://aka.ms/azureautomationsdk/dscnodeconfigurations"
@@ -149,7 +149,7 @@
             "description": "The create or update parameters for configuration."
           },
           {
-            "name": "dscNodeConfigurationCreateOrUpdateParameters",
+            "name": "parameters",
             "in": "body",
             "required": true,
             "schema": {
@@ -189,9 +189,9 @@
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Automation/automationAccounts/{automationAccountName}/nodeConfigurations": {
       "get": {
         "tags": [
-          "NodeConfigurations"
+          "DscNodeConfiguration"
         ],
-        "operationId": "NodeConfigurations_ListByAutomationAccount",
+        "operationId": "DscNodeConfiguration_ListByAutomationAccount",
         "description": "Retrieve a list of dsc node configurations.",
         "externalDocs": {
           "url": "http://aka.ms/azureautomationsdk/dscnodeconfigurations"

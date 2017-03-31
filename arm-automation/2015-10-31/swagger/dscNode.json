@@ -81,7 +81,7 @@
             "description": "The automation account name."
           },
           {
-            "name": "agentRegistrationRegenerateKeyParameter",
+            "name": "parameters",
             "in": "body",
             "required": true,
             "schema": {
@@ -115,9 +115,9 @@
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Automation/automationAccounts/{automationAccountName}/nodes/{nodeId}": {
       "delete": {
         "tags": [
-          "Nodes"
+          "DscNode"
         ],
-        "operationId": "Nodes_Delete",
+        "operationId": "DscNode_Delete",
         "description": "Delete the dsc node identified by node id.",
         "externalDocs": {
           "url": "http://aka.ms/azureautomationsdk/dscnodeoperations"
@@ -164,9 +164,9 @@
       },
       "get": {
         "tags": [
-          "Nodes"
+          "DscNode"
         ],
-        "operationId": "Nodes_Get",
+        "operationId": "DscNode_Get",
         "description": "Retrieve the dsc node identified by node id.",
         "externalDocs": {
           "url": "http://aka.ms/azureautomationsdk/dscnodeoperations"
@@ -218,9 +218,9 @@
       },
       "patch": {
         "tags": [
-          "Nodes"
+          "DscNode"
         ],
-        "operationId": "Nodes_Update",
+        "operationId": "DscNode_Update",
         "description": "Update the dsc node.",
         "externalDocs": {
           "url": "http://aka.ms/azureautomationsdk/dscnodeoperations"
@@ -283,9 +283,9 @@
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Automation/automationAccounts/{automationAccountName}/nodes": {
       "get": {
         "tags": [
-          "Nodes"
+          "DscNode"
         ],
-        "operationId": "Nodes_ListByAutomationAccount",
+        "operationId": "DscNode_ListByAutomationAccount",
         "description": "Retrieve a list of dsc nodes.",
         "externalDocs": {
           "url": "http://aka.ms/azureautomationsdk/dscnodeoperations"

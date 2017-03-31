@@ -14,13 +14,13 @@
   "produces": [
     "application/json"
   ],
-"paths": {
+  "paths": {
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Automation/automationAccounts/{automationAccountName}": {
       "patch": {
         "tags": [
-          "AutomationAccounts"
+          "AutomationAccount"
         ],
-        "operationId": "AutomationAccounts_Update",
+        "operationId": "AutomationAccount_Update",
         "description": "Update an automation account.",
         "externalDocs": {
           "url": "http://aka.ms/azureautomationsdk/automationaccountoperations"
@@ -42,7 +42,7 @@
             "description": "Automation account name."
           },
           {
-            "name": "automationAccountUpdateParameters",
+            "name": "parameters",
             "in": "body",
             "required": true,
             "schema": {
@@ -74,9 +74,9 @@
       },
       "put": {
         "tags": [
-          "AutomationAccounts"
+          "AutomationAccount"
         ],
-        "operationId": "AutomationAccounts_CreateOrUpdate",
+        "operationId": "AutomationAccount_CreateOrUpdate",
         "description": "Create or update automation account.",
         "externalDocs": {
           "url": "http://aka.ms/azureautomationsdk/automationaccountoperations"
@@ -98,7 +98,7 @@
             "description": "Parameters supplied to the create or update automation account."
           },
           {
-            "name": "automationAccountCreateOrUpdateParameters",
+            "name": "parameters",
             "in": "body",
             "required": true,
             "schema": {
@@ -136,9 +136,9 @@
       },
       "delete": {
         "tags": [
-          "AutomationAccounts"
+          "AutomationAccount"
         ],
-        "operationId": "AutomationAccounts_Delete",
+        "operationId": "AutomationAccount_Delete",
         "description": "Delete an automation account.",
         "externalDocs": {
           "url": "http://aka.ms/azureautomationsdk/automationaccountoperations"
@@ -183,9 +183,9 @@
       },
       "get": {
         "tags": [
-          "AutomationAccounts"
+          "AutomationAccount"
         ],
-        "operationId": "AutomationAccounts_Get",
+        "operationId": "AutomationAccount_Get",
         "description": "Get information about an Automation Account.",
         "externalDocs": {
           "url": "http://aka.ms/azureautomationsdk/automationaccountoperations"
@@ -232,9 +232,9 @@
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Automation/automationAccounts": {
       "get": {
         "tags": [
-          "AutomationAccounts"
+          "AutomationAccount"
         ],
-        "operationId": "AutomationAccounts_ListByResourceGroup",
+        "operationId": "AutomationAccount_ListByResourceGroup",
         "description": "Retrieve a list of accounts within a given resource group.",
         "externalDocs": {
           "url": "http://aka.ms/azureautomationsdk/automationaccountoperations"
@@ -308,10 +308,10 @@
     "/subscriptions/{subscriptionId}/providers/Microsoft.Automation/automationAccounts": {
       "get": {
         "tags": [
-          "AutomationAccounts"
+          "AutomationAccount"
         ],
         "summary": "Lists the Automation Accounts within an Azure subscription.",
-        "operationId": "AutomationAccounts_List",
+        "operationId": "AutomationAccount_List",
         "description": "Retrieve a list of accounts within a given subscription.",
         "x-ms-examples": {
           "List automation accounts by resource group": {

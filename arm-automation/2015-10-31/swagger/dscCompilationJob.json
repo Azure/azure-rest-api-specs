@@ -18,9 +18,9 @@
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Automation/automationAccounts/{automationAccountName}/compilationjobs/{compilationJobId}": {
       "put": {
         "tags": [
-          "CompilationJobs"
+          "DscCompilationJob"
         ],
-        "operationId": "CompilationJobs_Create",
+        "operationId": "DscCompilationJob_Create",
         "description": "Creates the Dsc compilation job of the configuration.",
         "externalDocs": {
           "url": "http://aka.ms/azureautomationsdk/dscconfigurationcompilejoboperations"
@@ -50,7 +50,7 @@
             "description": "The the DSC configuration Id."
           },
           {
-            "name": "dscCompilationJobCreateParameters",
+            "name": "parameters",
             "in": "body",
             "required": true,
             "schema": {
@@ -82,9 +82,9 @@
       },
       "get": {
         "tags": [
-          "CompilationJobs"
+          "DscCompilationJob"
         ],
-        "operationId": "CompilationJobs_Get",
+        "operationId": "DscCompilationJob_Get",
         "description": "Retrieve the Dsc configuration compilation job identified by job id.",
         "externalDocs": {
           "url": "http://aka.ms/azureautomationsdk/dsccompilationjoboperations"
@@ -134,9 +134,9 @@
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Automation/automationAccounts/{automationAccountName}/compilationjobs": {
       "get": {
         "tags": [
-          "CompilationJobs"
+          "DscCompilationJob"
         ],
-        "operationId": "CompilationJobs_ListByAutomationAccount",
+        "operationId": "DscCompilationJob_ListByAutomationAccount",
         "description": "Retrieve a list of dsc compilation jobs.",
         "externalDocs": {
           "url": "http://aka.ms/azureautomationsdk/compilationjoboperations"
@@ -188,9 +188,9 @@
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Automation/automationAccounts/{automationAccountName}/compilationjobs/{jobId}/streams/{jobStreamId}": {
       "get": {
         "tags": [
-          "CompilationJobs"
+          "DscCompilationJob"
         ],
-        "operationId": "CompilationJobs_GetStream",
+        "operationId": "DscCompilationJob_GetStream",
         "description": "Retrieve the job stream identified by job stream id.",
         "externalDocs": {
           "url": "http://aka.ms/azureautomationsdk/jobstreamoperations"

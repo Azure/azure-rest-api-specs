@@ -13,7 +13,6 @@
   ],
   "produces": [
     "application/json"
-    
   ],
   "paths": {
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Automation/automationAccounts/{automationAccountName}/runbooks/{runbookName}/draft/content": {
@@ -99,13 +98,11 @@
             "description": "The runbook name."
           },
           {
-            "name": "runbookCreateOrUpdateDraftParameters",
+            "name": "runbookContent",
             "in": "body",
             "required": true,
-            "schema": {
-              "$ref": "./definitions.json#/definitions/RunbookCreateOrUpdateDraftParameters"
-            },
-            "description": "The runbook draft update parameters."
+            "type": "string",
+            "description": "The runbook draft content."
           },
           {
             "$ref": "./definitions.json#/parameters/SubscriptionIdParameter"
@@ -234,6 +231,12 @@
           "202": {
             "description": "Accepted and  the operation will complete asynchronously."
           },
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "./definitions.json#/definitions/Runbook"
+            }
+          },
           "default": {
             "description": "Automation error response describing why the operation failed.",
             "schema": {
@@ -303,9 +306,9 @@
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Automation/automationAccounts/{automationAccountName}/runbooks/{runbookName}/content": {
       "get": {
         "tags": [
-          "Runbooks"
+          "Runbook"
         ],
-        "operationId": "Runbooks_GetContent",
+        "operationId": "Runbook_GetContent",
         "description": "Retrieve the content of runbook identified by runbook name.",
         "externalDocs": {
           "url": "http://aka.ms/azureautomationsdk/runbookoperations"
@@ -359,14 +362,14 @@
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Automation/automationAccounts/{automationAccountName}/runbooks/{runbookName}": {
       "get": {
         "tags": [
-          "Runbooks"
+          "Runbook"
         ],
-        "operationId": "Runbooks_Get",
+        "operationId": "Runbook_Get",
         "description": "Retrieve the runbook identified by runbook name.",
         "externalDocs": {
           "url": "http://aka.ms/azureautomationsdk/runbookoperations"
         },
-       "x-ms-examples": {
+        "x-ms-examples": {
           "Get runbook": {
             "$ref": "../examples/runbook/getRunbook.json"
           }
@@ -413,14 +416,14 @@
       },
       "put": {
         "tags": [
-          "Runbooks"
+          "Runbook"
         ],
-        "operationId": "Runbooks_CreateOrUpdate",
+        "operationId": "Runbook_CreateOrUpdate",
         "description": "Create the runbook identified by runbook name.",
         "externalDocs": {
           "url": "http://aka.ms/azureautomationsdk/runbookoperations"
         },
-       "x-ms-examples": {
+        "x-ms-examples": {
           "Create or update runbook": {
             "$ref": "../examples/runbook/createOrUpdateRunbook.json"
           }
@@ -444,7 +447,7 @@
             "description": "The runbook name."
           },
           {
-            "name": "runbookCreateOrUpdateParameters",
+            "name": "parameters",
             "in": "body",
             "required": true,
             "schema": {
@@ -479,14 +482,14 @@
       },
       "patch": {
         "tags": [
-          "Runbooks"
+          "Runbook"
         ],
-        "operationId": "Runbooks_Update",
+        "operationId": "Runbook_Update",
         "description": "Update the runbook identified by runbook name.",
         "externalDocs": {
           "url": "http://aka.ms/azureautomationsdk/runbookoperations"
         },
-       "x-ms-examples": {
+        "x-ms-examples": {
           "Update runbook": {
             "$ref": "../examples/runbook/updateRunbook.json"
           }
@@ -510,7 +513,7 @@
             "description": "The runbook name."
           },
           {
-            "name": "runbookUpdateParameters",
+            "name": "parameters",
             "in": "body",
             "required": true,
             "schema": {
@@ -542,9 +545,9 @@
       },
       "delete": {
         "tags": [
-          "Runbooks"
+          "Runbook"
         ],
-        "operationId": "Runbooks_Delete",
+        "operationId": "Runbook_Delete",
         "description": "Delete the runbook by name.",
         "externalDocs": {
           "url": "http://aka.ms/azureautomationsdk/runbookoperations"
@@ -595,9 +598,9 @@
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Automation/automationAccounts/{automationAccountName}/runbooks": {
       "get": {
         "tags": [
-          "Runbooks"
+          "Runbook"
         ],
-        "operationId": "Runbooks_ListByAutomationAccount",
+        "operationId": "Runbook_ListByAutomationAccount",
         "description": "Retrieve a list of runbooks.",
         "externalDocs": {
           "url": "http://aka.ms/azureautomationsdk/runbookoperations"
