@@ -14,7 +14,7 @@
   "produces": [
     "application/json"
   ],
-  "paths": {
+"paths": {
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Automation/automationAccounts/{automationAccountName}": {
       "patch": {
         "tags": [
@@ -32,6 +32,9 @@
         },
         "parameters": [
           {
+            "$ref": "./definitions.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
             "name": "automationAccountName",
             "in": "path",
             "required": true,
@@ -46,9 +49,6 @@
               "$ref": "./definitions.json#/definitions/AutomationAccountUpdateParameters"
             },
             "description": "Parameters supplied to the update automation account."
-          },
-          {
-            "$ref": "./definitions.json#/parameters/ResourceGroupNameParameter"
           },
           {
             "$ref": "./definitions.json#/parameters/SubscriptionIdParameter"
@@ -77,20 +77,19 @@
           "AutomationAccounts"
         ],
         "operationId": "AutomationAccounts_CreateOrUpdate",
-        "description": "Create or update an automation account.",
-        "x-ms-long-running-operation": true,
+        "description": "Create or update automation account.",
         "externalDocs": {
           "url": "http://aka.ms/azureautomationsdk/automationaccountoperations"
         },
         "x-ms-examples": {
-          "Create an automation account": {
-            "$ref": "../examples/account/createAutomationAccount.json"
-          },
-          "Update an automation account": {
-            "$ref": "../examples/account/updateAutomationAccount.json"
+          "Create or update automation account": {
+            "$ref": "../examples/account/createOrUpdateAutomationAccount.json"
           }
         },
         "parameters": [
+          {
+            "$ref": "./definitions.json#/parameters/ResourceGroupNameParameter"
+          },
           {
             "name": "automationAccountName",
             "in": "path",
@@ -106,9 +105,6 @@
               "$ref": "./definitions.json#/definitions/AutomationAccountCreateOrUpdateParameters"
             },
             "description": "Parameters supplied to the create or update automation account."
-          },
-          {
-            "$ref": "./definitions.json#/parameters/ResourceGroupNameParameter"
           },
           {
             "$ref": "./definitions.json#/parameters/SubscriptionIdParameter"
@@ -148,23 +144,20 @@
           "url": "http://aka.ms/azureautomationsdk/automationaccountoperations"
         },
         "x-ms-examples": {
-          "Delete an existing automation account": {
-            "$ref": "../examples/account/deleteExistingAutomationAccount.json"
-          },
-          "Delete a non-existing automation account": {
-            "$ref": "../examples/account/deleteNonExistingAutomationAccount.json"
+          "Delete automation account": {
+            "$ref": "../examples/account/deleteAutomationAccount.json"
           }
         },
         "parameters": [
+          {
+            "$ref": "./definitions.json#/parameters/ResourceGroupNameParameter"
+          },
           {
             "name": "automationAccountName",
             "in": "path",
             "required": true,
             "type": "string",
             "description": "Automation account name."
-          },
-          {
-            "$ref": "./definitions.json#/parameters/ResourceGroupNameParameter"
           },
           {
             "$ref": "./definitions.json#/parameters/SubscriptionIdParameter"
@@ -198,20 +191,20 @@
           "url": "http://aka.ms/azureautomationsdk/automationaccountoperations"
         },
         "x-ms-examples": {
-          "Get an automation account": {
+          "Get automation account": {
             "$ref": "../examples/account/getAutomationAccount.json"
           }
         },
         "parameters": [
+          {
+            "$ref": "./definitions.json#/parameters/ResourceGroupNameParameter"
+          },
           {
             "name": "automationAccountName",
             "in": "path",
             "required": true,
             "type": "string",
             "description": "The automation account name."
-          },
-          {
-            "$ref": "./definitions.json#/parameters/ResourceGroupNameParameter"
           },
           {
             "$ref": "./definitions.json#/parameters/SubscriptionIdParameter"
@@ -352,44 +345,6 @@
         }
       }
     },
-    "/{subscriptionId}/operations/{requestId}": {
-      "get": {
-        "operationId": "GetOperationStatus",
-        "description": "The Get Operation Status operation returns the status of thespecified operation. After calling an asynchronous operation, you can call Get Operation Status to determine whether the operation has succeeded, failed, or is still in progress.",
-        "externalDocs": {
-          "url": "http://msdn.microsoft.com/en-us/library/windowsazure/ee460783.aspx"
-        },
-        "parameters": [
-          {
-            "name": "requestId",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "description": "The request ID for the request you wish to track. The request ID is returned in the x-ms-request-id response header for every request."
-          },
-          {
-            "$ref": "./definitions.json#/parameters/ResourceGroupNameParameter"
-          },
-          {
-            "$ref": "./definitions.json#/parameters/SubscriptionIdParameter"
-          },
-          {
-            "$ref": "./definitions.json#/parameters/ApiVersionParameter"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "OK"
-          },
-          "default": {
-            "description": "Error response describing why the operation failed.",
-            "schema": {
-              "$ref": "./definitions.json#/definitions/ErrorResponse"
-            }
-          }
-        }
-      }
-    },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Automation/automationAccounts/{automationAccountName}/statistics": {
       "get": {
         "tags": [
@@ -407,6 +362,9 @@
         },
         "parameters": [
           {
+            "$ref": "./definitions.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
             "name": "automationAccountName",
             "in": "path",
             "required": true,
@@ -419,9 +377,6 @@
             "required": false,
             "type": "string",
             "description": "The filter to apply on the operation."
-          },
-          {
-            "$ref": "./definitions.json#/parameters/ResourceGroupNameParameter"
           },
           {
             "$ref": "./definitions.json#/parameters/SubscriptionIdParameter"
@@ -466,14 +421,14 @@
         },
         "parameters": [
           {
+            "$ref": "./definitions.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
             "name": "automationAccountName",
             "in": "path",
             "required": true,
             "type": "string",
             "description": "The automation account name."
-          },
-          {
-            "$ref": "./definitions.json#/parameters/ResourceGroupNameParameter"
           },
           {
             "$ref": "./definitions.json#/parameters/SubscriptionIdParameter"

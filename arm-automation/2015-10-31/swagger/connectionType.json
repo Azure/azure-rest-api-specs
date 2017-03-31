@@ -27,13 +27,13 @@
         },
         "x-ms-examples": {
           "Delete an existing connection type": {
-            "$ref": "../examples/connectionType/deleteConnectionType_Existing.json"
-          },
-          "Delete a non-existing connection type": {
-            "$ref": "../examples/connectionType/deleteConnectionType_NonExisting.json"
+            "$ref": "../examples/connectionType/deleteConnectionType.json"
           }
         },
         "parameters": [
+          {
+            "$ref": "./definitions.json#/parameters/ResourceGroupNameParameter"
+          },
           {
             "name": "automationAccountName",
             "in": "path",
@@ -49,9 +49,6 @@
             "description": "The name of connectiontype."
           },
           {
-            "$ref": "./definitions.json#/parameters/ResourceGroupNameParameter"
-          },
-          {
             "$ref": "./definitions.json#/parameters/SubscriptionIdParameter"
           },
           {
@@ -61,6 +58,9 @@
         "responses": {
           "200": {
             "description": "OK"
+          },
+		            "204": {
+            "description": "No Content"
           },
           "default": {
             "description": "Automation error response describing why the operation failed.",
@@ -86,6 +86,9 @@
         },
         "parameters": [
           {
+            "$ref": "./definitions.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
             "name": "automationAccountName",
             "in": "path",
             "required": true,
@@ -98,9 +101,6 @@
             "required": true,
             "type": "string",
             "description": "The name of connectiontype."
-          },
-          {
-            "$ref": "./definitions.json#/parameters/ResourceGroupNameParameter"
           },
           {
             "$ref": "./definitions.json#/parameters/SubscriptionIdParameter"
@@ -134,14 +134,14 @@
           "url": "http://aka.ms/azureautomationsdk/connectiontypeoperations"
         },
         "x-ms-examples": {
-          "Create connection type": {
-            "$ref": "../examples/connectionType/createConnectionType.json"
-          },
-          "Update connection type": {
-            "$ref": "../examples/connectionType/updateExistingConnectionType.json"
+          "Create or update connection type": {
+            "$ref": "../examples/connectionType/createOrUpdateConnectionType.json"
           }
         },
         "parameters": [
+          {
+            "$ref": "./definitions.json#/parameters/ResourceGroupNameParameter"
+          },
           {
             "name": "automationAccountName",
             "in": "path",
@@ -164,9 +164,6 @@
               "$ref": "./definitions.json#/definitions/ConnectionTypeCreateOrUpdateParameters"
             },
             "description": "The parameters supplied to the create or update connectiontype operation."
-          },
-          {
-            "$ref": "./definitions.json#/parameters/ResourceGroupNameParameter"
           },
           {
             "$ref": "./definitions.json#/parameters/SubscriptionIdParameter"
@@ -217,14 +214,14 @@
         },
         "parameters": [
           {
+            "$ref": "./definitions.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
             "name": "automationAccountName",
             "in": "path",
             "required": true,
             "type": "string",
             "description": "The automation account name."
-          },
-          {
-            "$ref": "./definitions.json#/parameters/ResourceGroupNameParameter"
           },
           {
             "$ref": "./definitions.json#/parameters/SubscriptionIdParameter"

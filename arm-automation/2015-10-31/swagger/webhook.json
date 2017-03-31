@@ -15,7 +15,7 @@
     "application/json"
   ],
   "paths": {
-	"/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Automation/automationAccounts/{automationAccountName}/webhooks/generateUri": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Automation/automationAccounts/{automationAccountName}/webhooks/generateUri": {
       "post": {
         "tags": [
           "Webhooks"
@@ -27,11 +27,7 @@
         },
         "parameters": [
           {
-            "name": "resourceGroupName",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "description": "The name of the resource group."
+            "$ref": "./definitions.json#/parameters/ResourceGroupNameParameter"
           },
           {
             "name": "automationAccountName",
@@ -39,9 +35,6 @@
             "required": true,
             "type": "string",
             "description": "The automation account name."
-          },
-          {
-            "$ref": "./definitions.json#/parameters/ResourceGroupNameParameter"
           },
           {
             "$ref": "./definitions.json#/parameters/SubscriptionIdParameter"
@@ -57,7 +50,7 @@
               "type": "string"
             }
           },
-		  "default": {
+          "default": {
             "description": "Automation error response describing why the operation failed.",
             "schema": {
               "$ref": "./definitions.json#/definitions/ErrorResponse"
@@ -76,7 +69,15 @@
         "externalDocs": {
           "url": "http://aka.ms/azureautomationsdk/webhookoperations"
         },
+        "x-ms-examples": {
+          "Delete webhook": {
+            "$ref": "../examples/webhook/deleteWebhook.json"
+          }
+        },
         "parameters": [
+          {
+            "$ref": "./definitions.json#/parameters/ResourceGroupNameParameter"
+          },
           {
             "name": "automationAccountName",
             "in": "path",
@@ -92,9 +93,6 @@
             "description": "The webhook name."
           },
           {
-            "$ref": "./definitions.json#/parameters/ResourceGroupNameParameter"
-          },
-          {
             "$ref": "./definitions.json#/parameters/SubscriptionIdParameter"
           },
           {
@@ -105,7 +103,7 @@
           "200": {
             "description": "OK"
           },
-		  "default": {
+          "default": {
             "description": "Automation error response describing why the operation failed.",
             "schema": {
               "$ref": "./definitions.json#/definitions/ErrorResponse"
@@ -122,7 +120,15 @@
         "externalDocs": {
           "url": "http://aka.ms/azureautomationsdk/webhookoperations"
         },
+        "x-ms-examples": {
+          "Get webhook": {
+            "$ref": "../examples/webhook/getWebhook.json"
+          }
+        },
         "parameters": [
+          {
+            "$ref": "./definitions.json#/parameters/ResourceGroupNameParameter"
+          },
           {
             "name": "automationAccountName",
             "in": "path",
@@ -138,9 +144,6 @@
             "description": "The webhook name."
           },
           {
-            "$ref": "./definitions.json#/parameters/ResourceGroupNameParameter"
-          },
-          {
             "$ref": "./definitions.json#/parameters/SubscriptionIdParameter"
           },
           {
@@ -154,7 +157,7 @@
               "$ref": "./definitions.json#/definitions/Webhook"
             }
           },
-		  "default": {
+          "default": {
             "description": "Automation error response describing why the operation failed.",
             "schema": {
               "$ref": "./definitions.json#/definitions/ErrorResponse"
@@ -162,7 +165,7 @@
           }
         }
       },
-	  "put": {
+      "put": {
         "tags": [
           "Webhooks"
         ],
@@ -171,7 +174,15 @@
         "externalDocs": {
           "url": "http://aka.ms/azureautomationsdk/webhookoperations"
         },
+        "x-ms-examples": {
+          "Create or update webhook": {
+            "$ref": "../examples/webhook/createOrUpdateWebhook.json"
+          }
+        },
         "parameters": [
+          {
+            "$ref": "./definitions.json#/parameters/ResourceGroupNameParameter"
+          },
           {
             "name": "automationAccountName",
             "in": "path",
@@ -196,9 +207,6 @@
             "description": "The create or update parameters for webhook."
           },
           {
-            "$ref": "./definitions.json#/parameters/ResourceGroupNameParameter"
-          },
-          {
             "$ref": "./definitions.json#/parameters/SubscriptionIdParameter"
           },
           {
@@ -218,7 +226,7 @@
               "$ref": "./definitions.json#/definitions/Webhook"
             }
           },
-		  "default": {
+          "default": {
             "description": "Automation error response describing why the operation failed.",
             "schema": {
               "$ref": "./definitions.json#/definitions/ErrorResponse"
@@ -235,7 +243,15 @@
         "externalDocs": {
           "url": "http://aka.ms/azureautomationsdk/webhookoperations"
         },
+        "x-ms-examples": {
+          "Update webhook": {
+            "$ref": "../examples/webhook/updateWebhook.json"
+          }
+        },
         "parameters": [
+          {
+            "$ref": "./definitions.json#/parameters/ResourceGroupNameParameter"
+          },
           {
             "name": "automationAccountName",
             "in": "path",
@@ -260,9 +276,6 @@
             "description": "The update parameters for webhook."
           },
           {
-            "$ref": "./definitions.json#/parameters/ResourceGroupNameParameter"
-          },
-          {
             "$ref": "./definitions.json#/parameters/SubscriptionIdParameter"
           },
           {
@@ -276,7 +289,7 @@
               "$ref": "./definitions.json#/definitions/Webhook"
             }
           },
-		  "default": {
+          "default": {
             "description": "Automation error response describing why the operation failed.",
             "schema": {
               "$ref": "./definitions.json#/definitions/ErrorResponse"
@@ -295,7 +308,15 @@
         "externalDocs": {
           "url": "http://aka.ms/azureautomationsdk/webhookoperations"
         },
+        "x-ms-examples": {
+          "List webhooks by Automation Account": {
+            "$ref": "../examples/webhook/listWebhooksByAutomationAccount.json"
+          }
+        },
         "parameters": [
+          {
+            "$ref": "./definitions.json#/parameters/ResourceGroupNameParameter"
+          },
           {
             "name": "automationAccountName",
             "in": "path",
@@ -311,9 +332,6 @@
             "description": "The filter to apply on the operation."
           },
           {
-            "$ref": "./definitions.json#/parameters/ResourceGroupNameParameter"
-          },
-          {
             "$ref": "./definitions.json#/parameters/SubscriptionIdParameter"
           },
           {
@@ -327,7 +345,7 @@
               "$ref": "./definitions.json#/definitions/WebhookListResult"
             }
           },
-		  "default": {
+          "default": {
             "description": "Automation error response describing why the operation failed.",
             "schema": {
               "$ref": "./definitions.json#/definitions/ErrorResponse"
@@ -340,8 +358,6 @@
       }
     }
   },
-  "definitions": {
-  },
-  "parameters": {
-  }
+  "definitions": {},
+  "parameters": {}
 }

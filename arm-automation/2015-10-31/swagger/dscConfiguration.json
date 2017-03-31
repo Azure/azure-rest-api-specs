@@ -25,7 +25,15 @@
         "externalDocs": {
           "url": "http://aka.ms/azureautomationsdk/configurationoperations"
         },
+        "x-ms-examples": {
+          "Delete DSC Configuration": {
+            "$ref": "../examples/dscConfiguration/deleteDscConfiguration.json"
+          }
+        },
         "parameters": [
+          {
+            "$ref": "./definitions.json#/parameters/ResourceGroupNameParameter"
+          },
           {
             "name": "automationAccountName",
             "in": "path",
@@ -41,9 +49,6 @@
             "description": "The configuration name."
           },
           {
-            "$ref": "./definitions.json#/parameters/ResourceGroupNameParameter"
-          },
-          {
             "$ref": "./definitions.json#/parameters/SubscriptionIdParameter"
           },
           {
@@ -53,6 +58,9 @@
         "responses": {
           "200": {
             "description": "OK"
+          },
+          "204": {
+            "description": "No Content"
           },
           "default": {
             "description": "Automation error response describing why the operation failed.",
@@ -71,9 +79,17 @@
         "externalDocs": {
           "url": "http://aka.ms/azureautomationsdk/configurationoperations"
         },
+        "x-ms-examples": {
+          "Get a DSC Configuration": {
+            "$ref": "../examples/dscConfiguration/getDscConfiguration.json"
+          }
+        },
         "parameters": [
           {
-            "name": "automationAccount",
+            "$ref": "./definitions.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "automationAccountName",
             "in": "path",
             "required": true,
             "type": "string",
@@ -85,9 +101,6 @@
             "required": true,
             "type": "string",
             "description": "The configuration name."
-          },
-          {
-            "$ref": "./definitions.json#/parameters/ResourceGroupNameParameter"
           },
           {
             "$ref": "./definitions.json#/parameters/SubscriptionIdParameter"
@@ -120,9 +133,17 @@
         "externalDocs": {
           "url": "http://aka.ms/azureautomationsdk/configurationoperations"
         },
+        "x-ms-examples": {
+          "Create or Update Configuration": {
+            "$ref": "../examples/dscConfiguration/createOrUpdateDscConfiguration.json"
+          }
+        },
         "parameters": [
           {
-            "name": "automationAccount",
+            "$ref": "./definitions.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "automationAccountName",
             "in": "path",
             "required": true,
             "type": "string",
@@ -143,9 +164,6 @@
               "$ref": "./definitions.json#/definitions/DscConfigurationCreateOrUpdateParameters"
             },
             "description": "The create or update parameters for configuration."
-          },
-          {
-            "$ref": "./definitions.json#/parameters/ResourceGroupNameParameter"
           },
           {
             "$ref": "./definitions.json#/parameters/SubscriptionIdParameter"
@@ -186,7 +204,15 @@
         "externalDocs": {
           "url": "http://aka.ms/azureautomationsdk/configurationoperations"
         },
+        "x-ms-examples": {
+          "Get DSC Configuration content": {
+            "$ref": "../examples/dscConfiguration/getDscConfigurationContent.json"
+          }
+        },
         "parameters": [
+          {
+            "$ref": "./definitions.json#/parameters/ResourceGroupNameParameter"
+          },
           {
             "name": "automationAccountName",
             "in": "path",
@@ -200,9 +226,6 @@
             "required": true,
             "type": "string",
             "description": "The configuration name."
-          },
-          {
-            "$ref": "./definitions.json#/parameters/ResourceGroupNameParameter"
           },
           {
             "$ref": "./definitions.json#/parameters/SubscriptionIdParameter"
@@ -237,16 +260,21 @@
         "externalDocs": {
           "url": "http://aka.ms/azureautomationsdk/configurationoperations"
         },
+        "x-ms-examples": {
+          "Get DSC Configuration": {
+            "$ref": "../examples/dscConfiguration/getAllDscConfigurations.json"
+          }
+        },
         "parameters": [
+          {
+            "$ref": "./definitions.json#/parameters/ResourceGroupNameParameter"
+          },
           {
             "name": "automationAccountName",
             "in": "path",
             "required": true,
             "type": "string",
             "description": "The automation account name."
-          },
-          {
-            "$ref": "./definitions.json#/parameters/ResourceGroupNameParameter"
           },
           {
             "$ref": "./definitions.json#/parameters/SubscriptionIdParameter"

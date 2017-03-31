@@ -27,13 +27,13 @@
         },
         "x-ms-examples": {
           "Delete an existing connection": {
-            "$ref": "../examples/connection/deleteConnection_Existing.json"
-          },
-          "Delete a non-existing connection": {
-            "$ref": "../examples/connection/deleteConnection_NonExisting.json"
+            "$ref": "../examples/connection/deleteConnection.json"
           }
         },
         "parameters": [
+          {
+            "$ref": "./definitions.json#/parameters/ResourceGroupNameParameter"
+          },
           {
             "name": "automationAccountName",
             "in": "path",
@@ -49,9 +49,6 @@
             "description": "The name of connection."
           },
           {
-            "$ref": "./definitions.json#/parameters/ResourceGroupNameParameter"
-          },
-          {
             "$ref": "./definitions.json#/parameters/SubscriptionIdParameter"
           },
           {
@@ -60,7 +57,10 @@
         ],
         "responses": {
           "200": {
-            "description": "OK"
+            "description": "OK",
+            "schema": {
+              "$ref": "./definitions.json#/definitions/Connection"
+            }
           },
           "204": {
             "description": "No Content"
@@ -89,6 +89,9 @@
         },
         "parameters": [
           {
+            "$ref": "./definitions.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
             "name": "automationAccountName",
             "in": "path",
             "required": true,
@@ -101,9 +104,6 @@
             "required": true,
             "type": "string",
             "description": "The name of connection."
-          },
-          {
-            "$ref": "./definitions.json#/parameters/ResourceGroupNameParameter"
           },
           {
             "$ref": "./definitions.json#/parameters/SubscriptionIdParameter"
@@ -132,19 +132,19 @@
           "Connections"
         ],
         "operationId": "Connections_CreateOrUpdate",
-        "description": "Create a connection.",
+        "description": "Create or update a connection.",
         "externalDocs": {
           "url": "http://aka.ms/azureautomationsdk/connectionoperations"
         },
         "x-ms-examples": {
-          "Create a connection": {
-            "$ref": "../examples/connection/createConnection.json"
-          },
-          "Update a connection": {
-            "$ref": "../examples/connection/updateConnection_CreateOrUpdate.json"
+          "Create or update connection": {
+            "$ref": "../examples/connection/createOrUpdateConnection.json"
           }
         },
         "parameters": [
+          {
+            "$ref": "./definitions.json#/parameters/ResourceGroupNameParameter"
+          },
           {
             "name": "automationAccountName",
             "in": "path",
@@ -167,9 +167,6 @@
               "$ref": "./definitions.json#/definitions/ConnectionCreateOrUpdateParameters"
             },
             "description": "The parameters supplied to the create or update connection operation."
-          },
-          {
-            "$ref": "./definitions.json#/parameters/ResourceGroupNameParameter"
           },
           {
             "$ref": "./definitions.json#/parameters/SubscriptionIdParameter"
@@ -210,10 +207,13 @@
         },
         "x-ms-examples": {
           "Update a connection": {
-            "$ref": "../examples/connection/updateConnection_Patch.json"
+            "$ref": "../examples/connection/updateConnection.json"
           }
         },
         "parameters": [
+          {
+            "$ref": "./definitions.json#/parameters/ResourceGroupNameParameter"
+          },
           {
             "name": "automationAccountName",
             "in": "path",
@@ -236,9 +236,6 @@
               "$ref": "./definitions.json#/definitions/ConnectionUpdateParameters"
             },
             "description": "The parameters supplied to the update a connection operation."
-          },
-          {
-            "$ref": "./definitions.json#/parameters/ResourceGroupNameParameter"
           },
           {
             "$ref": "./definitions.json#/parameters/SubscriptionIdParameter"
@@ -283,14 +280,14 @@
         },
         "parameters": [
           {
+            "$ref": "./definitions.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
             "name": "automationAccountName",
             "in": "path",
             "required": true,
             "type": "string",
             "description": "The automation account name."
-          },
-          {
-            "$ref": "./definitions.json#/parameters/ResourceGroupNameParameter"
           },
           {
             "$ref": "./definitions.json#/parameters/SubscriptionIdParameter"

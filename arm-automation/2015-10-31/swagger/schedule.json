@@ -25,7 +25,15 @@
         "externalDocs": {
           "url": "http://aka.ms/azureautomationsdk/scheduleoperations"
         },
+        "x-ms-examples": {
+          "Create or update a schedule": {
+            "$ref": "../examples/schedule/createOrUpdateSchedule.json"
+          }
+        },
         "parameters": [
+          {
+            "$ref": "./definitions.json#/parameters/ResourceGroupNameParameter"
+          },
           {
             "name": "automationAccountName",
             "in": "path",
@@ -50,9 +58,6 @@
             "description": "The parameters supplied to the create or update schedule operation."
           },
           {
-            "$ref": "./definitions.json#/parameters/ResourceGroupNameParameter"
-          },
-          {
             "$ref": "./definitions.json#/parameters/SubscriptionIdParameter"
           },
           {
@@ -66,7 +71,7 @@
               "$ref": "./definitions.json#/definitions/Schedule"
             }
           },
-		            "409": {
+          "409": {
             "description": "Conflict"
           },
           "default": {
@@ -86,7 +91,15 @@
         "externalDocs": {
           "url": "http://aka.ms/azureautomationsdk/scheduleoperations"
         },
+        "x-ms-examples": {
+          "Update a schedule": {
+            "$ref": "../examples/schedule/updateSchedule.json"
+          }
+        },
         "parameters": [
+          {
+            "$ref": "./definitions.json#/parameters/ResourceGroupNameParameter"
+          },
           {
             "name": "automationAccountName",
             "in": "path",
@@ -109,9 +122,6 @@
               "$ref": "./definitions.json#/definitions/ScheduleUpdateParameters"
             },
             "description": "The parameters supplied to the update schedule operation."
-          },
-          {
-            "$ref": "./definitions.json#/parameters/ResourceGroupNameParameter"
           },
           {
             "$ref": "./definitions.json#/parameters/SubscriptionIdParameter"
@@ -144,7 +154,15 @@
         "externalDocs": {
           "url": "http://aka.ms/azureautomationsdk/scheduleoperations"
         },
+        "x-ms-examples": {
+          "Get a schedule": {
+            "$ref": "../examples/schedule/getSchedule.json"
+          }
+        },
         "parameters": [
+          {
+            "$ref": "./definitions.json#/parameters/ResourceGroupNameParameter"
+          },
           {
             "name": "automationAccountName",
             "in": "path",
@@ -158,9 +176,6 @@
             "required": true,
             "type": "string",
             "description": "The schedule name."
-          },
-          {
-            "$ref": "./definitions.json#/parameters/ResourceGroupNameParameter"
           },
           {
             "$ref": "./definitions.json#/parameters/SubscriptionIdParameter"
@@ -193,7 +208,15 @@
         "externalDocs": {
           "url": "http://aka.ms/azureautomationsdk/scheduleoperations"
         },
+        "x-ms-examples": {
+          "Delete schedule": {
+            "$ref": "../examples/schedule/deleteSchedule.json"
+          }
+        },
         "parameters": [
+          {
+            "$ref": "./definitions.json#/parameters/ResourceGroupNameParameter"
+          },
           {
             "name": "automationAccountName",
             "in": "path",
@@ -209,9 +232,6 @@
             "description": "The schedule name."
           },
           {
-            "$ref": "./definitions.json#/parameters/ResourceGroupNameParameter"
-          },
-          {
             "$ref": "./definitions.json#/parameters/SubscriptionIdParameter"
           },
           {
@@ -221,6 +241,9 @@
         "responses": {
           "200": {
             "description": "OK"
+          },
+          "404": {
+            "description": "Not Found"
           },
           "default": {
             "description": "Automation error response describing why the operation failed.",
@@ -241,16 +264,24 @@
         "externalDocs": {
           "url": "http://aka.ms/azureautomationsdk/scheduleoperations"
         },
+        "x-ms-examples": {
+          "List schedules by automation account, first 100": {
+            "$ref": "../examples/schedule/listSchedulesByAutomationAccount_First100.json"
+          },
+          "List schedules by automation account, next 100": {
+            "$ref": "../examples/schedule/listSchedulesByAutomationAccount_Next100.json"
+          }
+        },
         "parameters": [
+          {
+            "$ref": "./definitions.json#/parameters/ResourceGroupNameParameter"
+          },
           {
             "name": "automationAccountName",
             "in": "path",
             "required": true,
             "type": "string",
             "description": "The automation account name."
-          },
-          {
-            "$ref": "./definitions.json#/parameters/ResourceGroupNameParameter"
           },
           {
             "$ref": "./definitions.json#/parameters/SubscriptionIdParameter"

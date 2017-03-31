@@ -15,7 +15,7 @@
     "application/json"
   ],
   "paths": {
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Automation/automationAccounts/{automationAccountName}/compilationjobs/{dscConfigurationId}": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Automation/automationAccounts/{automationAccountName}/compilationjobs/{compilationJobId}": {
       "put": {
         "tags": [
           "CompilationJobs"
@@ -25,7 +25,15 @@
         "externalDocs": {
           "url": "http://aka.ms/azureautomationsdk/dscconfigurationcompilejoboperations"
         },
+        "x-ms-examples": {
+          "Create or update a DSC Compilation job": {
+            "$ref": "../examples/dscCompilationJob/createCompilationJob.json"
+          }
+        },
         "parameters": [
+          {
+            "$ref": "./definitions.json#/parameters/ResourceGroupNameParameter"
+          },
           {
             "name": "automationAccountName",
             "in": "path",
@@ -34,7 +42,7 @@
             "description": "The automation account name."
           },
           {
-            "name": "dscConfigurationId",
+            "name": "compilationJobId",
             "in": "path",
             "required": true,
             "type": "string",
@@ -49,9 +57,6 @@
               "$ref": "./definitions.json#/definitions/DscCompilationJobCreateParameters"
             },
             "description": "The parameters supplied to the create compilation job operation."
-          },
-          {
-            "$ref": "./definitions.json#/parameters/ResourceGroupNameParameter"
           },
           {
             "$ref": "./definitions.json#/parameters/SubscriptionIdParameter"
@@ -86,6 +91,9 @@
         },
         "parameters": [
           {
+            "$ref": "./definitions.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
             "name": "automationAccountName",
             "in": "path",
             "required": true,
@@ -93,14 +101,12 @@
             "description": "The automation account name."
           },
           {
-            "name": "dscConfigurationId",
+            "name": "compilationJobId",
             "in": "path",
             "required": true,
+            "format": "uuid",
             "type": "string",
             "description": "The Dsc configuration compilation job id."
-          },
-          {
-            "$ref": "./definitions.json#/parameters/ResourceGroupNameParameter"
           },
           {
             "$ref": "./definitions.json#/parameters/SubscriptionIdParameter"
@@ -137,6 +143,9 @@
         },
         "parameters": [
           {
+            "$ref": "./definitions.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
             "name": "automationAccountName",
             "in": "path",
             "required": true,
@@ -149,9 +158,6 @@
             "required": false,
             "type": "string",
             "description": "The filter to apply on the operation."
-          },
-          {
-            "$ref": "./definitions.json#/parameters/ResourceGroupNameParameter"
           },
           {
             "$ref": "./definitions.json#/parameters/SubscriptionIdParameter"
@@ -184,12 +190,15 @@
         "tags": [
           "CompilationJobs"
         ],
-        "operationId": "CompilationJobs_GetOutput",
+        "operationId": "CompilationJobs_GetStream",
         "description": "Retrieve the job stream identified by job stream id.",
         "externalDocs": {
           "url": "http://aka.ms/azureautomationsdk/jobstreamoperations"
         },
         "parameters": [
+          {
+            "$ref": "./definitions.json#/parameters/ResourceGroupNameParameter"
+          },
           {
             "name": "automationAccountName",
             "in": "path",
@@ -202,6 +211,7 @@
             "in": "path",
             "required": true,
             "type": "string",
+            "format": "uuid",
             "description": "The job id."
           },
           {
@@ -210,9 +220,6 @@
             "required": true,
             "type": "string",
             "description": "The job stream id."
-          },
-          {
-            "$ref": "./definitions.json#/parameters/ResourceGroupNameParameter"
           },
           {
             "$ref": "./definitions.json#/parameters/SubscriptionIdParameter"

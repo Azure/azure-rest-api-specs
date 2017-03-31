@@ -25,7 +25,15 @@
         "externalDocs": {
           "url": "http://aka.ms/azureautomationsdk/certificateoperations"
         },
+        "x-ms-examples": {
+          "Delete a certificate": {
+            "$ref": "../examples/certificate/deleteCertificate.json"
+          }
+        },
         "parameters": [
+          {
+            "$ref": "./definitions.json#/parameters/ResourceGroupNameParameter"
+          },
           {
             "name": "automationAccountName",
             "in": "path",
@@ -39,9 +47,6 @@
             "required": true,
             "type": "string",
             "description": "The name of certificate."
-          },
-          {
-            "$ref": "./definitions.json#/parameters/ResourceGroupNameParameter"
           },
           {
             "$ref": "./definitions.json#/parameters/SubscriptionIdParameter"
@@ -71,7 +76,15 @@
         "externalDocs": {
           "url": "http://aka.ms/azureautomationsdk/certificateoperations"
         },
+        "x-ms-examples": {
+          "Get a certificate": {
+            "$ref": "../examples/certificate/getCertificate.json"
+          }
+        },
         "parameters": [
+          {
+            "$ref": "./definitions.json#/parameters/ResourceGroupNameParameter"
+          },
           {
             "name": "automationAccountName",
             "in": "path",
@@ -85,9 +98,6 @@
             "required": true,
             "type": "string",
             "description": "The name of certificate."
-          },
-          {
-            "$ref": "./definitions.json#/parameters/ResourceGroupNameParameter"
           },
           {
             "$ref": "./definitions.json#/parameters/SubscriptionIdParameter"
@@ -120,7 +130,15 @@
         "externalDocs": {
           "url": "http://aka.ms/azureautomationsdk/certificateoperations"
         },
+        "x-ms-examples": {
+          "Create or update a certificate": {
+            "$ref": "../examples/certificate/createOrUpdateCertificate.json"
+          }
+        },
         "parameters": [
+          {
+            "$ref": "./definitions.json#/parameters/ResourceGroupNameParameter"
+          },
           {
             "name": "automationAccountName",
             "in": "path",
@@ -143,9 +161,6 @@
               "$ref": "./definitions.json#/definitions/CertificateCreateOrUpdateParameters"
             },
             "description": "The parameters supplied to the create or update certificate operation."
-          },
-          {
-            "$ref": "./definitions.json#/parameters/ResourceGroupNameParameter"
           },
           {
             "$ref": "./definitions.json#/parameters/SubscriptionIdParameter"
@@ -184,7 +199,15 @@
         "externalDocs": {
           "url": "http://aka.ms/azureautomationsdk/certificateoperations"
         },
+        "x-ms-examples": {
+          "Update a certificate": {
+            "$ref": "../examples/certificate/updateCertificate.json"
+          }
+        },
         "parameters": [
+          {
+            "$ref": "./definitions.json#/parameters/ResourceGroupNameParameter"
+          },
           {
             "name": "automationAccountName",
             "in": "path",
@@ -207,9 +230,6 @@
               "$ref": "./definitions.json#/definitions/CertificateUpdateParameters"
             },
             "description": "The parameters supplied to the update certificate operation."
-          },
-          {
-            "$ref": "./definitions.json#/parameters/ResourceGroupNameParameter"
           },
           {
             "$ref": "./definitions.json#/parameters/SubscriptionIdParameter"
@@ -244,16 +264,21 @@
         "externalDocs": {
           "url": "http://aka.ms/azureautomationsdk/certificateoperations"
         },
+        "x-ms-examples": {
+          "List certificates": {
+            "$ref": "../examples/certificate/listCertificatesByAutomationAccount.json"
+          }
+        },
         "parameters": [
+          {
+            "$ref": "./definitions.json#/parameters/ResourceGroupNameParameter"
+          },
           {
             "name": "automationAccountName",
             "in": "path",
             "required": true,
             "type": "string",
             "description": "The automation account name."
-          },
-          {
-            "$ref": "./definitions.json#/parameters/ResourceGroupNameParameter"
           },
           {
             "$ref": "./definitions.json#/parameters/SubscriptionIdParameter"

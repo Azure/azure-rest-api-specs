@@ -127,7 +127,8 @@
         },
         "name": {
           "type": "string",
-          "description": "Gets or sets the name of the activity."
+          "readOnly": true,
+          "description": "Gets the name of the activity."
         },
         "properties": {
           "$ref": "#/definitions/ActivityProperties",
@@ -297,7 +298,8 @@
         },
         "state": {
           "type": "string",
-          "description": "Gets or sets the status of account.",
+          "readOnly": true,
+          "description": "Gets status of account.",
           "enum": [
             "Ok",
             "Unavailable",
@@ -311,12 +313,14 @@
         "creationTime": {
           "type": "string",
           "format": "date-time",
-          "description": "Gets or sets the creation time."
+          "readOnly": true,
+          "description": "Gets the creation time."
         },
         "lastModifiedTime": {
           "type": "string",
           "format": "date-time",
-          "description": "Gets or sets the last modified time."
+          "readOnly": true,
+          "description": "Gets the last modified time."
         },
         "description": {
           "type": "string",
@@ -390,7 +394,7 @@
         },
         "name": {
           "type": "string",
-          "description": "Gets or sets the name of the resource."
+          "description": "Gets or sets name of the resource."
         },
         "location": {
           "type": "string",
@@ -468,26 +472,31 @@
       "properties": {
         "thumbprint": {
           "type": "string",
-          "description": "Gets or sets the thumbprint of the certificate."
+          "readOnly": true,
+          "description": "Gets the thumbprint of the certificate."
         },
         "expiryTime": {
           "type": "string",
           "format": "date-time",
-          "description": "Gets or sets the expiry time of the certificate."
+          "readOnly": true,
+          "description": "Gets the expiry time of the certificate."
         },
         "isExportable": {
           "type": "boolean",
-          "description": "Gets or sets the is exportable flag of the certificate."
+          "readOnly": true,
+          "description": "Gets the is exportable flag of the certificate."
         },
         "creationTime": {
           "type": "string",
           "format": "date-time",
-          "description": "Gets or sets the creation time."
+          "readOnly": true,
+          "description": "Gets the creation time."
         },
         "lastModifiedTime": {
           "type": "string",
           "format": "date-time",
-          "description": "Gets or sets the last modified time."
+          "readOnly": true,
+          "description": "Gets the last modified time."
         },
         "description": {
           "type": "string",
@@ -500,11 +509,13 @@
       "properties": {
         "id": {
           "type": "string",
-          "description": "Gets or sets the id of the resource."
+          "readOnly": true,
+          "description": "Gets the id of the resource."
         },
         "name": {
           "type": "string",
-          "description": "Gets or sets the name of the certificate."
+          "readOnly": true,
+          "description": "Gets the name of the certificate."
         },
         "properties": {
           "$ref": "#/definitions/CertificateProperties",
@@ -608,17 +619,20 @@
           "additionalProperties": {
             "type": "string"
           },
-          "description": "Gets or sets the field definition values of the connection."
+          "readOnly": true,
+          "description": "Gets the field definition values of the connection."
         },
         "creationTime": {
           "type": "string",
           "format": "date-time",
-          "description": "Gets or sets the creation time."
+          "readOnly": true,
+          "description": "Gets the creation time."
         },
         "lastModifiedTime": {
           "type": "string",
           "format": "date-time",
-          "description": "Gets or sets the last modified time."
+          "readOnly": true,
+          "description": "Gets the last modified time."
         },
         "description": {
           "type": "string",
@@ -631,11 +645,13 @@
       "properties": {
         "id": {
           "type": "string",
-          "description": "Gets or sets the id of the resource."
+          "readOnly": true,
+          "description": "Gets the id of the resource."
         },
         "name": {
           "type": "string",
-          "description": "Gets or sets the name of the connection."
+          "readOnly": true,
+          "description": "Gets the name of the connection."
         },
         "properties": {
           "$ref": "#/definitions/ConnectionProperties",
@@ -751,12 +767,14 @@
           "additionalProperties": {
             "$ref": "#/definitions/FieldDefinition"
           },
-          "description": "Gets or sets the field definitions of the connection type."
+          "readOnly": true,
+          "description": "Gets the field definitions of the connection type."
         },
         "creationTime": {
           "type": "string",
           "format": "date-time",
-          "description": "Gets or sets the creation time."
+          "readOnly": true,
+          "description": "Gets the creation time."
         },
         "lastModifiedTime": {
           "type": "string",
@@ -774,11 +792,13 @@
       "properties": {
         "id": {
           "type": "string",
-          "description": "Gets or sets the id of the resource."
+          "readOnly": true,
+          "description": "Gets the id of the resource."
         },
         "name": {
           "type": "string",
-          "description": "Gets or sets the name of the connection type."
+          "readOnly": true,
+          "description": "Gets the name of the connection type."
         },
         "properties": {
           "$ref": "#/definitions/ConnectionTypeProperties",
@@ -847,17 +867,20 @@
       "properties": {
         "userName": {
           "type": "string",
-          "description": "Gets or sets the user name of the credential."
+          "readOnly": true,
+          "description": "Gets the user name of the credential."
         },
         "creationTime": {
           "type": "string",
           "format": "date-time",
-          "description": "Gets or sets the creation time."
+          "readOnly": true,
+          "description": "Gets the creation time."
         },
         "lastModifiedTime": {
           "type": "string",
           "format": "date-time",
-          "description": "Gets or sets the last modified time."
+          "readOnly": true,
+          "description": "Gets the last modified time."
         },
         "description": {
           "type": "string",
@@ -870,11 +893,12 @@
       "properties": {
         "id": {
           "type": "string",
-          "description": "Gets or sets the id of the resource."
+          "readOnly": true,
+          "description": "Gets the id of the resource."
         },
         "name": {
           "type": "string",
-          "description": "Gets or sets the name of the credential."
+          "description": "Gets the name of the credential."
         },
         "properties": {
           "$ref": "#/definitions/CredentialProperties",
@@ -1025,7 +1049,7 @@
         },
         "name": {
           "type": "string",
-          "description": "Gets or sets the name of the resource."
+          "description": "Gets or sets name of the resource."
         },
         "location": {
           "type": "string",
@@ -1052,16 +1076,20 @@
         },
         "startedBy": {
           "type": "string",
-          "description": "Gets or sets the compilation job started by."
+          "readOnly": true,
+          "description": "Gets the compilation job started by."
         },
         "jobId": {
           "type": "string",
-          "description": "Gets or sets the id of the job."
+          "format": "uuid",
+          "readOnly": true,
+          "description": "Gets the id of the job."
         },
         "creationTime": {
           "type": "string",
           "format": "date-time",
-          "description": "Gets or sets the creation time of the job."
+          "readOnly": true,
+          "description": "Gets the creation time of the job."
         },
         "status": {
           "type": "string",
@@ -1093,26 +1121,31 @@
         "startTime": {
           "type": "string",
           "format": "date-time",
-          "description": "Gets or sets the start time of the job."
+          "readOnly": true,
+          "description": "Gets the start time of the job."
         },
         "endTime": {
           "type": "string",
           "format": "date-time",
-          "description": "Gets or sets the end time of the job."
+          "readOnly": true,
+          "description": "Gets the end time of the job."
         },
         "exception": {
           "type": "string",
-          "description": "Gets or sets the exception of the job."
+          "readOnly": true,
+          "description": "Gets the exception of the job."
         },
         "lastModifiedTime": {
           "type": "string",
           "format": "date-time",
-          "description": "Gets or sets the last modified time of the job."
+          "readOnly": true,
+          "description": "Gets the last modified time of the job."
         },
         "lastStatusModifiedTime": {
           "type": "string",
           "format": "date-time",
-          "description": "Gets or sets the last status modified time of the job."
+          "readOnly": true,
+          "description": "Gets the last status modified time of the job."
         },
         "parameters": {
           "type": "object",
@@ -1128,7 +1161,8 @@
       "properties": {
         "id": {
           "type": "string",
-          "description": "Gets or sets the id of the resource."
+          "readOnly": true,
+          "description": "Gets the id of the resource."
         },
         "properties": {
           "$ref": "#/definitions/DscCompilationJobProperties",
@@ -1323,7 +1357,7 @@
         },
         "name": {
           "type": "string",
-          "description": "Gets or sets the name of the resource."
+          "description": "Gets or sets name of the resource."
         },
         "location": {
           "type": "string",
@@ -1341,15 +1375,6 @@
         "properties"
       ],
       "description": "The parameters supplied to the create or update configuration operation."
-    },
-    "DscConfigurationAssociationProperty": {
-      "properties": {
-        "name": {
-          "type": "string",
-          "description": "Gets or sets the name of the Dsc configuration."
-        }
-      },
-      "description": "The Dsc configuration property associated with the entity."
     },
     "DscMetaConfiguration": {
       "properties": {
@@ -1774,7 +1799,7 @@
           "type": "string",
           "description": "Gets or sets the worker machine name."
         },
-        "ipAddress": {
+        "ip": {
           "type": "string",
           "description": "Gets or sets the assigned machine IP address."
         },
@@ -1881,7 +1906,7 @@
         },
         "name": {
           "type": "string",
-          "description": "Gets or sets the name of the resource."
+          "description": "Gets or sets name of the resource."
         },
         "location": {
           "type": "string",
@@ -2061,6 +2086,7 @@
         },
         "jobId": {
           "type": "string",
+          "format": "uuid",
           "description": "Gets or sets the id of the job."
         },
         "creationTime": {
@@ -2173,6 +2199,7 @@
           "description": "Gets or sets the values of the job stream."
         }
       },
+      "x-ms-client-flatten": true,
       "description": "Definition of the job stream."
     },
     "ModuleCreateOrUpdateProperties": {
@@ -2196,7 +2223,7 @@
         },
         "name": {
           "type": "string",
-          "description": "Gets or sets the name of the resource."
+          "description": "Gets or sets name of the resource."
         },
         "location": {
           "type": "string",
@@ -2352,7 +2379,7 @@
         },
         "name": {
           "type": "string",
-          "description": "Gets or sets the name of the resource."
+          "description": "Gets or sets name of the resource."
         },
         "location": {
           "type": "string",
@@ -2603,6 +2630,10 @@
             "modelAsString": true
           }
         },
+        "draft": {
+          "$ref": "#/definitions/RunbookDraft",
+          "description": "Gets or sets the draft runbook properties."
+        },
         "publishContentLink": {
           "$ref": "#/definitions/ContentLink",
           "description": "Gets or sets the published runbook content link."
@@ -2618,8 +2649,7 @@
         }
       },
       "required": [
-        "runbookType",
-        "publishContentLink"
+        "runbookType"
       ],
       "description": "The parameters supplied to the create or update runbook properties."
     },
@@ -2699,29 +2729,14 @@
     },
     "RunbookCreateOrUpdateDraftParameters": {
       "properties": {
-        "properties": {
-          "$ref": "#/definitions/RunbookCreateOrUpdateDraftProperties",
-          "x-ms-client-flatten": true,
-          "description": "Gets or sets runbook draft create or update properties."
-        },
-        "name": {
+        "runbookContent": {
           "type": "string",
-          "description": "Gets or sets the name of the resource."
-        },
-        "location": {
-          "type": "string",
-          "description": "Gets or sets the location of the resource."
-        },
-        "tags": {
-          "type": "object",
-          "additionalProperties": {
-            "type": "string"
-          },
-          "description": "Gets or sets the tags attached to the resource."
+          "description": "Content of the Runbook."
         }
       },
+      "x-ms-client-flatten": true,
       "required": [
-        "properties"
+        "runbookContent"
       ],
       "description": "The parameters supplied to the create or update runbook operation."
     },
@@ -2790,7 +2805,7 @@
             "modelAsString": true
           }
         },
-        "publisdContentLink": {
+        "publishContentLink": {
           "$ref": "#/definitions/ContentLink",
           "description": "Gets or sets the published runbook content link."
         },
@@ -3151,7 +3166,8 @@
           ],
           "x-ms-enum": {
             "name": "SkuNameEnum",
-            "modelAsString": true
+            "modelAsString": true,
+            "default":"Free"
           }
         },
         "family": {
@@ -3164,32 +3180,40 @@
           "description": "Gets or sets the SKU capacity."
         }
       },
+      "required": [
+        "name"
+      ],
       "description": "The account SKU."
     },
     "Statistics": {
       "properties": {
         "counterProperty": {
           "type": "string",
-          "description": "Gets or sets the property value of the statistic."
+          "readOnly": true,
+          "description": "Gets the property value of the statistic."
         },
         "counterValue": {
           "type": "integer",
           "format": "int64",
-          "description": "Gets or sets the value of the statistic."
+          "readOnly": true,
+          "description": "Gets the value of the statistic."
         },
         "startTime": {
           "type": "string",
           "format": "date-time",
-          "description": "Gets or sets the startTime of the statistic."
+          "readOnly": true,
+          "description": "Gets the startTime of the statistic."
         },
         "endTime": {
           "type": "string",
           "format": "date-time",
-          "description": "Gets or sets the endTime of the statistic."
+          "readOnly": true,
+          "description": "Gets the endTime of the statistic."
         },
         "id": {
           "type": "string",
-          "description": "Gets or sets the id."
+          "readOnly": true,
+          "description": "Gets the id."
         }
       },
       "description": "Definition of the statistic."
@@ -3340,6 +3364,10 @@
           "type": "integer",
           "format": "int64",
           "description": "Gets or sets max limit. -1 for unlimited"
+        },
+        "throttleStatus": {
+          "type": "string",
+          "description": "Gets or sets the throttle status."
         }
       },
       "description": "Definition of Usage."

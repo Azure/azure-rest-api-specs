@@ -15,7 +15,7 @@
     "application/json"
   ],
   "paths": {
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Automation/automationAccounts/{automationAccountName}/jobSchedules/{jobScheduleName}": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Automation/automationAccounts/{automationAccountName}/jobSchedules/{jobScheduleId}": {
       "delete": {
         "tags": [
           "JobSchedules"
@@ -25,7 +25,15 @@
         "externalDocs": {
           "url": "http://aka.ms/azureautomationsdk/jobscheduleoperations"
         },
+        "x-ms-examples": {
+          "Delete a job schedule": {
+            "$ref": "../examples/jobSchedule/deleteJobSchedule.json"
+          }
+        },
         "parameters": [
+          {
+            "$ref": "./definitions.json#/parameters/ResourceGroupNameParameter"
+          },
           {
             "name": "automationAccountName",
             "in": "path",
@@ -34,14 +42,12 @@
             "description": "The automation account name."
           },
           {
-            "name": "jobScheduleName",
+            "name": "jobScheduleId",
             "in": "path",
             "required": true,
             "type": "string",
+            "format": "uuid",
             "description": "The job schedule name."
-          },
-          {
-            "$ref": "./definitions.json#/parameters/ResourceGroupNameParameter"
           },
           {
             "$ref": "./definitions.json#/parameters/SubscriptionIdParameter"
@@ -71,7 +77,15 @@
         "externalDocs": {
           "url": "http://aka.ms/azureautomationsdk/jobscheduleoperations"
         },
+        "x-ms-examples": {
+          "Get a job schedule": {
+            "$ref": "../examples/jobSchedule/getJobSchedule.json"
+          }
+        },
         "parameters": [
+          {
+            "$ref": "./definitions.json#/parameters/ResourceGroupNameParameter"
+          },
           {
             "name": "automationAccountName",
             "in": "path",
@@ -80,14 +94,12 @@
             "description": "The automation account name."
           },
           {
-            "name": "jobScheduleName",
+            "name": "jobScheduleId",
             "in": "path",
             "required": true,
             "type": "string",
+            "format": "uuid",
             "description": "The job schedule name."
-          },
-          {
-            "$ref": "./definitions.json#/parameters/ResourceGroupNameParameter"
           },
           {
             "$ref": "./definitions.json#/parameters/SubscriptionIdParameter"
@@ -120,7 +132,15 @@
         "externalDocs": {
           "url": "http://aka.ms/azureautomationsdk/jobscheduleoperations"
         },
+        "x-ms-examples": {
+          "Create a job schedule": {
+            "$ref": "../examples/jobSchedule/createJobSchedule.json"
+          }
+        },
         "parameters": [
+          {
+            "$ref": "./definitions.json#/parameters/ResourceGroupNameParameter"
+          },
           {
             "name": "automationAccountName",
             "in": "path",
@@ -129,7 +149,7 @@
             "description": "The automation account name."
           },
           {
-            "name": "jobScheduleName",
+            "name": "jobScheduleId",
             "in": "path",
             "required": true,
             "type": "string",
@@ -144,9 +164,6 @@
               "$ref": "./definitions.json#/definitions/JobScheduleCreateParameters"
             },
             "description": "The parameters supplied to the create job schedule operation."
-          },
-          {
-            "$ref": "./definitions.json#/parameters/ResourceGroupNameParameter"
           },
           {
             "$ref": "./definitions.json#/parameters/SubscriptionIdParameter"
@@ -181,16 +198,21 @@
         "externalDocs": {
           "url": "http://aka.ms/azureautomationsdk/jobscheduleoperations"
         },
+        "x-ms-examples": {
+          "List all job schedules by automation account": {
+            "$ref": "../examples/jobSchedule/listAllJobSchedulesByAutomationAccount.json"
+          }
+        },
         "parameters": [
+          {
+            "$ref": "./definitions.json#/parameters/ResourceGroupNameParameter"
+          },
           {
             "name": "automationAccountName",
             "in": "path",
             "required": true,
             "type": "string",
             "description": "The automation account name."
-          },
-          {
-            "$ref": "./definitions.json#/parameters/ResourceGroupNameParameter"
           },
           {
             "$ref": "./definitions.json#/parameters/SubscriptionIdParameter"

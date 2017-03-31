@@ -15,7 +15,7 @@
     "application/json"
   ],
   "paths": {
-	"/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Automation/automationAccounts/{automationAccountName}/hybridRunbookWorkerGroups/{hybridRunbookWorkerGroupName}": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Automation/automationAccounts/{automationAccountName}/hybridRunbookWorkerGroups/{hybridRunbookWorkerGroupName}": {
       "delete": {
         "tags": [
           "HybridRunbookWorkerGroups"
@@ -25,7 +25,15 @@
         "externalDocs": {
           "url": "http://aka.ms/azureautomationsdk/hybridrunbookworkergroupoperations"
         },
+		        "x-ms-examples": {
+          "Delete a hybrid worker group": {
+            "$ref": "../examples/hybridRunbookWorkerGroup/deleteHybridRunbookWorkerGroup.json"
+          }
+        },
         "parameters": [
+          {
+            "$ref": "./definitions.json#/parameters/ResourceGroupNameParameter"
+          },
           {
             "name": "automationAccountName",
             "in": "path",
@@ -41,9 +49,6 @@
             "description": "The hybrid runbook worker group name"
           },
           {
-            "$ref": "./definitions.json#/parameters/ResourceGroupNameParameter"
-          },
-          {
             "$ref": "./definitions.json#/parameters/SubscriptionIdParameter"
           },
           {
@@ -54,7 +59,7 @@
           "200": {
             "description": "OK"
           },
-		  "default": {
+          "default": {
             "description": "Automation error response describing why the operation failed.",
             "schema": {
               "$ref": "./definitions.json#/definitions/ErrorResponse"
@@ -71,7 +76,15 @@
         "externalDocs": {
           "url": "http://aka.ms/azureautomationsdk/hybridrunbookworkergroupoperations"
         },
+				        "x-ms-examples": {
+          "Get a hybrid worker group": {
+            "$ref": "../examples/hybridRunbookWorkerGroup/hybridRunbookWorkerGroupGet.json"
+          }
+        },
         "parameters": [
+          {
+            "$ref": "./definitions.json#/parameters/ResourceGroupNameParameter"
+          },
           {
             "name": "automationAccountName",
             "in": "path",
@@ -87,9 +100,6 @@
             "description": "The hybrid runbook worker group name"
           },
           {
-            "$ref": "./definitions.json#/parameters/ResourceGroupNameParameter"
-          },
-          {
             "$ref": "./definitions.json#/parameters/SubscriptionIdParameter"
           },
           {
@@ -103,7 +113,7 @@
               "$ref": "./definitions.json#/definitions/HybridRunbookWorkerGroup"
             }
           },
-		  "default": {
+          "default": {
             "description": "Automation error response describing why the operation failed.",
             "schema": {
               "$ref": "./definitions.json#/definitions/ErrorResponse"
@@ -121,6 +131,9 @@
           "url": "http://aka.ms/azureautomationsdk/hybridrunbookworkergroupoperations"
         },
         "parameters": [
+          {
+            "$ref": "./definitions.json#/parameters/ResourceGroupNameParameter"
+          },
           {
             "name": "automationAccountName",
             "in": "path",
@@ -145,9 +158,6 @@
             "description": "The hybrid runbook worker group"
           },
           {
-            "$ref": "./definitions.json#/parameters/ResourceGroupNameParameter"
-          },
-          {
             "$ref": "./definitions.json#/parameters/SubscriptionIdParameter"
           },
           {
@@ -161,7 +171,7 @@
               "$ref": "./definitions.json#/definitions/HybridRunbookWorkerGroup"
             }
           },
-		  "default": {
+          "default": {
             "description": "Automation error response describing why the operation failed.",
             "schema": {
               "$ref": "./definitions.json#/definitions/ErrorResponse"
@@ -180,16 +190,21 @@
         "externalDocs": {
           "url": "http://aka.ms/azureautomationsdk/hybridrunbookworkergroupoperations"
         },
+						        "x-ms-examples": {
+          "List hybrid worker groups by Automation Account": {
+            "$ref": "../examples/hybridRunbookWorkerGroup/hybridRunbookWorkerGroupList.json"
+          }
+        },
         "parameters": [
+          {
+            "$ref": "./definitions.json#/parameters/ResourceGroupNameParameter"
+          },
           {
             "name": "automationAccountName",
             "in": "path",
             "required": true,
             "type": "string",
             "description": "The automation account name."
-          },
-          {
-            "$ref": "./definitions.json#/parameters/ResourceGroupNameParameter"
           },
           {
             "$ref": "./definitions.json#/parameters/SubscriptionIdParameter"
@@ -205,7 +220,7 @@
               "$ref": "./definitions.json#/definitions/HybridRunbookWorkerGroupsListResult"
             }
           },
-		  "default": {
+          "default": {
             "description": "Automation error response describing why the operation failed.",
             "schema": {
               "$ref": "./definitions.json#/definitions/ErrorResponse"
@@ -218,8 +233,6 @@
       }
     }
   },
-  "definitions": {
-  },
-  "parameters": {
-  }
+  "definitions": {},
+  "parameters": {}
 }

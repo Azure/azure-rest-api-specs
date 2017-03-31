@@ -25,7 +25,15 @@
         "externalDocs": {
           "url": "http://aka.ms/azureautomationsdk/dscnodeconfigurations"
         },
+        "x-ms-examples": {
+          "Delete a DSC node configuration": {
+            "$ref": "../examples/dscNodeConfiguration/deleteDscNodeConfiguration.json"
+          }
+        },
         "parameters": [
+          {
+            "$ref": "./definitions.json#/parameters/ResourceGroupNameParameter"
+          },
           {
             "name": "automationAccountName",
             "in": "path",
@@ -39,9 +47,6 @@
             "required": true,
             "type": "string",
             "description": "The Dsc node configuration name."
-          },
-          {
-            "$ref": "./definitions.json#/parameters/ResourceGroupNameParameter"
           },
           {
             "$ref": "./definitions.json#/parameters/SubscriptionIdParameter"
@@ -71,7 +76,15 @@
         "externalDocs": {
           "url": "http://aka.ms/azureautomationsdk/dscnodeconfigurations"
         },
+        "x-ms-examples": {
+          "Get a DSC node configuration": {
+            "$ref": "../examples/dscNodeConfiguration/getDscNodeConfiguration.json"
+          }
+        },
         "parameters": [
+          {
+            "$ref": "./definitions.json#/parameters/ResourceGroupNameParameter"
+          },
           {
             "name": "automationAccountName",
             "in": "path",
@@ -85,9 +98,6 @@
             "required": true,
             "type": "string",
             "description": "The Dsc node configuration name."
-          },
-          {
-            "$ref": "./definitions.json#/parameters/ResourceGroupNameParameter"
           },
           {
             "$ref": "./definitions.json#/parameters/SubscriptionIdParameter"
@@ -122,6 +132,9 @@
         },
         "parameters": [
           {
+            "$ref": "./definitions.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
             "name": "automationAccountName",
             "in": "path",
             "required": true,
@@ -143,9 +156,6 @@
               "$ref": "./definitions.json#/definitions/DscNodeConfigurationCreateOrUpdateParameters"
             },
             "description": "The create or update parameters for configuration."
-          },
-          {
-            "$ref": "./definitions.json#/parameters/ResourceGroupNameParameter"
           },
           {
             "$ref": "./definitions.json#/parameters/SubscriptionIdParameter"
@@ -186,7 +196,15 @@
         "externalDocs": {
           "url": "http://aka.ms/azureautomationsdk/dscnodeconfigurations"
         },
+        "x-ms-examples": {
+          "List DSC node configurations by Automation Account": {
+            "$ref": "../examples/dscNodeConfiguration/listDscNodeConfigurations.json"
+          }
+        },
         "parameters": [
+          {
+            "$ref": "./definitions.json#/parameters/ResourceGroupNameParameter"
+          },
           {
             "name": "automationAccountName",
             "in": "path",
@@ -200,9 +218,6 @@
             "required": false,
             "type": "string",
             "description": "The filter to apply on the operation."
-          },
-          {
-            "$ref": "./definitions.json#/parameters/ResourceGroupNameParameter"
           },
           {
             "$ref": "./definitions.json#/parameters/SubscriptionIdParameter"

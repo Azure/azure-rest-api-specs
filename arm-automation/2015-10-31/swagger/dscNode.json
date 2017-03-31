@@ -27,14 +27,14 @@
         },
         "parameters": [
           {
+            "$ref": "./definitions.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
             "name": "automationAccountName",
             "in": "path",
             "required": true,
             "type": "string",
             "description": "The automation account name."
-          },
-          {
-            "$ref": "./definitions.json#/parameters/ResourceGroupNameParameter"
           },
           {
             "$ref": "./definitions.json#/parameters/SubscriptionIdParameter"
@@ -71,6 +71,9 @@
         },
         "parameters": [
           {
+            "$ref": "./definitions.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
             "name": "automationAccountName",
             "in": "path",
             "required": true,
@@ -85,9 +88,6 @@
               "$ref": "./definitions.json#/definitions/AgentRegistrationRegenerateKeyParameter"
             },
             "description": "The name of the agent registration key to be regenerated"
-          },
-          {
-            "$ref": "./definitions.json#/parameters/ResourceGroupNameParameter"
           },
           {
             "$ref": "./definitions.json#/parameters/SubscriptionIdParameter"
@@ -124,6 +124,9 @@
         },
         "parameters": [
           {
+            "$ref": "./definitions.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
             "name": "automationAccountName",
             "in": "path",
             "required": true,
@@ -136,9 +139,6 @@
             "required": true,
             "type": "string",
             "description": "The node id."
-          },
-          {
-            "$ref": "./definitions.json#/parameters/ResourceGroupNameParameter"
           },
           {
             "$ref": "./definitions.json#/parameters/SubscriptionIdParameter"
@@ -171,7 +171,15 @@
         "externalDocs": {
           "url": "http://aka.ms/azureautomationsdk/dscnodeoperations"
         },
+        "x-ms-examples": {
+          "Get a node": {
+            "$ref": "../examples/dscNodes/getDscNode.json"
+          }
+        },
         "parameters": [
+          {
+            "$ref": "./definitions.json#/parameters/ResourceGroupNameParameter"
+          },
           {
             "name": "automationAccountName",
             "in": "path",
@@ -185,9 +193,6 @@
             "required": true,
             "type": "string",
             "description": "The node id."
-          },
-          {
-            "$ref": "./definitions.json#/parameters/ResourceGroupNameParameter"
           },
           {
             "$ref": "./definitions.json#/parameters/SubscriptionIdParameter"
@@ -220,7 +225,15 @@
         "externalDocs": {
           "url": "http://aka.ms/azureautomationsdk/dscnodeoperations"
         },
+        "x-ms-examples": {
+          "Update a node": {
+            "$ref": "../examples/dscNodes/updateDscNode.json"
+          }
+        },
         "parameters": [
+          {
+            "$ref": "./definitions.json#/parameters/ResourceGroupNameParameter"
+          },
           {
             "name": "automationAccountName",
             "in": "path",
@@ -243,9 +256,6 @@
               "$ref": "./definitions.json#/definitions/DscNodeUpdateParameters"
             },
             "description": "Parameters supplied to the update dsc node."
-          },
-          {
-            "$ref": "./definitions.json#/parameters/ResourceGroupNameParameter"
           },
           {
             "$ref": "./definitions.json#/parameters/SubscriptionIdParameter"
@@ -280,7 +290,15 @@
         "externalDocs": {
           "url": "http://aka.ms/azureautomationsdk/dscnodeoperations"
         },
+        "x-ms-examples": {
+          "List DSC nodes by Automation Account": {
+            "$ref": "../examples/dscNodes/listAllDscNodesByAutomationAccount.json"
+          }
+        },
         "parameters": [
+          {
+            "$ref": "./definitions.json#/parameters/ResourceGroupNameParameter"
+          },
           {
             "name": "automationAccountName",
             "in": "path",
@@ -294,9 +312,6 @@
             "required": false,
             "type": "string",
             "description": "The filter to apply on the operation."
-          },
-          {
-            "$ref": "./definitions.json#/parameters/ResourceGroupNameParameter"
           },
           {
             "$ref": "./definitions.json#/parameters/SubscriptionIdParameter"
@@ -330,11 +345,19 @@
           "NodeReports"
         ],
         "operationId": "NodeReports_ListByNode",
-        "description": "Retrieve the Dsc node report list by node id and report id.",
+        "description": "Retrieve the Dsc node report list by node id.",
         "externalDocs": {
           "url": "http://aka.ms/azureautomationsdk/dscnodereportoperations"
         },
+        "x-ms-examples": {
+          "List DSC reports by node id.": {
+            "$ref": "../examples/dscNodes/listDscNodeReportsByNode.json"
+          }
+        },
         "parameters": [
+          {
+            "$ref": "./definitions.json#/parameters/ResourceGroupNameParameter"
+          },
           {
             "name": "automationAccountName",
             "in": "path",
@@ -355,9 +378,6 @@
             "required": false,
             "type": "string",
             "description": "The filter to apply on the operation."
-          },
-          {
-            "$ref": "./definitions.json#/parameters/ResourceGroupNameParameter"
           },
           {
             "$ref": "./definitions.json#/parameters/SubscriptionIdParameter"
@@ -395,7 +415,15 @@
         "externalDocs": {
           "url": "http://aka.ms/azureautomationsdk/dscnodereportoperations"
         },
+        "x-ms-examples": {
+          "Get Dsc node report data by node id and report id. ": {
+            "$ref": "../examples/dscNodes/getDscNodeReport.json"
+          }
+        },
         "parameters": [
+          {
+            "$ref": "./definitions.json#/parameters/ResourceGroupNameParameter"
+          },
           {
             "name": "automationAccountName",
             "in": "path",
@@ -416,9 +444,6 @@
             "required": true,
             "type": "string",
             "description": "The report id."
-          },
-          {
-            "$ref": "./definitions.json#/parameters/ResourceGroupNameParameter"
           },
           {
             "$ref": "./definitions.json#/parameters/SubscriptionIdParameter"
@@ -453,7 +478,15 @@
         "externalDocs": {
           "url": "http://aka.ms/azureautomationsdk/dscnodereportoperations"
         },
+        "x-ms-examples": {
+          "List DSC reports by node id.": {
+            "$ref": "../examples/dscNodes/listDscNodeReportsByNode.json"
+          }
+        },
         "parameters": [
+          {
+            "$ref": "./definitions.json#/parameters/ResourceGroupNameParameter"
+          },
           {
             "name": "automationAccountName",
             "in": "path",
@@ -474,9 +507,6 @@
             "required": true,
             "type": "string",
             "description": "The report id."
-          },
-          {
-            "$ref": "./definitions.json#/parameters/ResourceGroupNameParameter"
           },
           {
             "$ref": "./definitions.json#/parameters/SubscriptionIdParameter"
