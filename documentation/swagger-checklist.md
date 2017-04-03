@@ -5,11 +5,11 @@
 Latest version: [https://github.com/Azure/azure-rest-api-specs/blob/master/documentation/swagger-checklist.md](https://github.com/Azure/azure-rest-api-specs/blob/master/documentation/swagger-checklist.md)
 
 Editors:</br>
-Asir Selvasingh, Microsoft</br>
-Amar Zavery, Microsoft</br>
 Mark Cowlishaw, Microsoft</br>
-Johan Stenberg, Microsoft</br>
 Kirthi Krishnamraju, Microsoft</br>
+Asir Selvasingh, Microsoft</br>
+Johan Stenberg, Microsoft</br>
+Amar Zavery, Microsoft</br>
 
 
 ## Executive Summary ##
