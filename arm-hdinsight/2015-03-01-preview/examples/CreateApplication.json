@@ -1,0 +1,61 @@
+{
+    "parameters": {
+        "applicationName": "hue",
+        "clusterName": "cluster1",
+        "resourceGroupName": "rg1",
+        "api-version": "2015-03-01-preview",
+        "subscriptionId": "subid",
+        "applicationCreateParameters": {
+            "computeProfile": {
+                "roles": [{
+                    "name": "edgenode",
+                    "targetInstanceCount": 1,
+                    "hardwareProfile": {
+                        "vmSize": "Standard_D12_v2"
+                    }
+                }]
+            },
+            "installScriptActions": [{
+                "name": "app-install-app1",
+                "uri": "https://.../install.sh",
+                "parameters": "-version latest -port 20000",
+                "roles": [
+                    "edgenode"
+                ]
+            }],
+            "uninstallScriptActions": [],
+            "httpsEndpoints": [{
+                "subDomainSuffix": "dss",
+                "destinationPort": "20000",
+                "accessModes": [
+                    "WebPage"
+                ]
+            }],
+            "ProvisioningState": "",
+            "applicationType": "CustomApplication",
+            "ErrorInfos": []
+        }
+    },
+    "responses": {
+        "200": {
+            "body": {
+                "id": "",
+                "name": "",
+                "type": "",
+                "eTag": "",
+                "tags": {},
+                "properties": {
+                    "ComputeProfile": {},
+                    "InstallScriptActions": [],
+                    "UninstallScriptActions": [],
+                    "HttpsEndpoints": [],
+                    "SshEndpoints": [],
+                    "ProvisioningState": "",
+                    "ApplicationState": "",
+                    "ErrorInfos": [],
+                    "CreatedDate": "2017-02-28"
+                }
+            }
+        }
+    }
+}

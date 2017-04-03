@@ -1,0 +1,386 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "HDInsightManagementClient",
+    "description": "The HDInsight Management Client.",
+    "version": "2015-03-01-preview"
+  },
+  "host": "management.azure.com",
+  "schemes": [
+    "https"
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "produces": [
+    "application/json"
+  ],
+  "security": [
+    {
+      "azure_auth": [
+        "user_impersonation"
+      ]
+    }
+  ],
+  "securityDefinitions": {
+    "azure_auth": {
+      "type": "oauth2",
+      "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
+      "flow": "implicit",
+      "description": "Azure Active Directory OAuth2 Flow",
+      "scopes": {
+        "user_impersonation": "impersonate your user account"
+      }
+    }
+  },
+  "paths": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.HDInsight/clusters/{clusterName}/applications": {
+      "get": {
+        "tags": [
+          "Applications"
+        ],
+        "description": "Lists all of the applications HDInsight cluster.",
+        "operationId": "Applications_List",
+        "parameters": [
+          {
+            "name": "resourceGroupName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the resource group."
+          },
+          {
+            "name": "clusterName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the cluster."
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK. The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/ApplicationListResult"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.HDInsight/clusters/{clusterName}/applications/{applicationName}": {
+      "get": {
+        "tags": [
+          "Applications"
+        ],
+        "description": "List properties of the application.",
+        "operationId": "Applications_Get",
+        "parameters": [
+          {
+            "name": "resourceGroupName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the resource group."
+          },
+          {
+            "name": "clusterName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the cluster."
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "name": "applicationName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The constant value for the applicationName",
+            "enum": [
+              "hue"
+            ],
+            "x-ms-enum": {
+              "name": "ApplicationName",
+              "modelAsString": true
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK. The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/Application"
+            }
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "Applications"
+        ],
+        "description": "The operation creates applications for the HDInsight cluster.",
+        "operationId": "Applications_Create",
+        "x-ms-examples": {
+          "Create Application": {
+            "$ref": "../examples/CreateApplication.json"
+          }
+        },
+        "parameters": [
+          {
+            "name": "resourceGroupName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the resource group."
+          },
+          {
+            "name": "clusterName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the cluster."
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "name": "applicationName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The constant value for the applicationName",
+            "enum": [
+              "hue"
+            ],
+            "x-ms-enum": {
+              "name": "ApplicationName",
+              "modelAsString": false
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK. The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/Application"
+            }
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "Applications"
+        ],
+        "description": "Lists all of the applications HDInsight cluster.",
+        "operationId": "Applications_Delete",
+        "parameters": [
+          {
+            "name": "resourceGroupName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the resource group."
+          },
+          {
+            "name": "clusterName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the cluster."
+          },
+          {
+            "name": "applicationName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The constant value for the applicationName",
+            "enum": [
+              "hue"
+            ],
+            "x-ms-enum": {
+              "name": "ApplicationName",
+              "modelAsString": false
+            }
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK. The request has succeeded."
+          }
+        }
+      }
+    }
+  },
+  "definitions": {
+    "ApplicationGetHttpsEndpoint": {
+      "description": "Gets application access modes",
+      "type": "string"
+    },
+    "ApplicationGetEndpoint": {
+      "description": "Gets Application ssh endpoint",
+      "type": "object",
+      "properties": {
+        "location": {
+          "type": "string",
+          "description": "Gets the location of the endpoint."
+        },
+        "destinationPort": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Gets the destinationPort to connect to."
+        },
+        "publicPort": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Gets the publicPort to connect to."
+        }
+      }
+    },
+    "ApplicationGetProperties": {
+      "description": "HDInsight cluster application.",
+      "type": "object",
+      "properties": {
+        "ComputeProfile": {
+          "$ref": "./cluster.json#/definitions/ComputeProfile",
+          "description": "Gets or sets the list of roles in the cluster."
+        },
+        "InstallScriptActions": {
+          "type": "array",
+          "items": {
+            "$ref": "./cluster.json#/definitions/RuntimeScriptAction"
+          },
+          "description": "Gets uninstall script actions."
+        },
+        "UninstallScriptActions": {
+          "type": "array",
+          "items": {
+            "$ref": "./cluster.json#/definitions/RuntimeScriptAction"
+          },
+          "description": "Gets uninstall script actions."
+        },
+        "HttpsEndpoints": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ApplicationGetHttpsEndpoint"
+          },
+          "description": "Gets application Https endpoints."
+        },
+        "SshEndpoints": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ApplicationGetEndpoint"
+          },
+          "description": "Gets application ssh endpoints."
+        },
+        "ProvisioningState": {
+          "type": "string",
+          "description": "Gets the provisioning state of the application"
+        },
+        "ApplicationState": {
+          "type": "string",
+          "description": "Gets the Application state"
+        },
+        "ErrorInfos": {
+          "type": "array",
+          "items": {
+            "$ref": "./cluster.json#/definitions/ErrorInfo"
+          },
+          "description": "Gets or sets the list of errors."
+        },
+        "CreatedDate": {
+          "type": "string",
+          "format": "date",
+          "description": "Gets the application created date time."
+        }
+      }
+    },
+    "Application": {
+      "description": "HDInsight cluster application",
+      "type": "object",
+      "properties": {
+        "id": {
+          "description": "Gets or sets the ID of the application",
+          "type": "string"
+        },
+        "name": {
+          "description": "Gets or sets the name of the application.",
+          "type": "string"
+        },
+        "type": {
+          "description": "Gets or sets the type of application.",
+          "type": "string"
+        },
+        "eTag": {
+          "description": "Gets or sets the ETag for the application",
+          "type": "string"
+        },
+        "tags": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          },
+          "description": "Gets or sets the application tags."
+        },
+        "properties": {
+          "$ref": "#/definitions/ApplicationGetProperties",
+          "description": "Gets or sets the properties of the application."
+        }
+      }
+    },
+    "ApplicationListResult": {
+      "description": "Result of the request to list cluster Applications. It contains a list of operations and a URL link to get the next set of results.",
+      "properties": {
+        "value": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Application"
+          },
+          "description": "List of HDInsight applications installed on HDInsight cluster."
+        },
+        "nextLink": {
+          "type": "string",
+          "description": "URL to get the next set of operation list results if there are any."
+        }
+      }
+    }
+  },
+  "parameters": {
+    "SubscriptionIdParameter": {
+      "name": "subscriptionId",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "description": "Gets subscription credentials which uniquely identify Microsoft Azure subscription. The subscription ID forms part of the URI for every service call."
+    },
+    "ApiVersionParameter": {
+      "name": "api-version",
+      "in": "query",
+      "required": true,
+      "type": "string",
+      "description": "Client Api Version."
+    }
+  }
+}
