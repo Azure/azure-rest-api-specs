@@ -56,10 +56,10 @@
     "/Subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.RecoveryServices/vaults/{vaultName}/backupconfig/vaultconfig": {
       "get": {
         "tags": [
-          "BackupResourceVaultConfigs"
+          "BackupVaultConfigs"
         ],
-        "description": "Fetches resource vault config.",
-        "operationId": "BackupResourceVaultConfigs_Get",
+        "description": "Fetches vault config.",
+        "operationId": "BackupVaultConfigs_Get",
         "produces": [
           "application/json"
         ],
@@ -81,7 +81,7 @@
           "200": {
             "description": "OK",
             "schema": {
-              "$ref": "#/definitions/BackupResourceVaultConfigResource"
+              "$ref": "#/definitions/BackupVaultConfigResource"
             }
           }
         },
@@ -89,10 +89,10 @@
       },
       "patch": {
         "tags": [
-          "BackupResourceVaultConfigs"
+          "BackupVaultConfigs"
         ],
         "description": "Updates vault config model type.",
-        "operationId": "BackupResourceVaultConfigs_Update",
+        "operationId": "BackupVaultConfigs_Update",
         "produces": [
           "application/json"
         ],
@@ -110,12 +110,12 @@
             "$ref": "#/parameters/VaultName"
           },
           {
-            "name": "resourceBackupResourceVaultConfig",
+            "name": "backupVaultConfigResource",
             "in": "body",
-            "description": "resourceBackupResourceVaultConfig",
+            "description": "Backup vault config resource.",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/BackupResourceVaultConfigResource"
+              "$ref": "#/definitions/BackupVaultConfigResource"
             }
           }
         ],
@@ -123,7 +123,7 @@
           "200": {
             "description": "OK",
             "schema": {
-              "$ref": "#/definitions/BackupResourceVaultConfigResource"
+              "$ref": "#/definitions/BackupVaultConfigResource"
             }
           }
         },
@@ -133,10 +133,10 @@
     "/Subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.RecoveryServices/vaults/{vaultName}/backupstorageconfig/vaultstorageconfig": {
       "get": {
         "tags": [
-          "BackupResourceStorageConfigs"
+          "BackupStorageConfigs"
         ],
         "description": "Fetches resource storage config.",
-        "operationId": "BackupResourceStorageConfigs_Get",
+        "operationId": "BackupStorageConfigs_Get",
         "produces": [
           "application/json"
         ],
@@ -158,7 +158,7 @@
           "200": {
             "description": "OK",
             "schema": {
-              "$ref": "#/definitions/BackupResourceConfigResource"
+              "$ref": "#/definitions/BackupStorageConfigResource"
             }
           }
         },
@@ -166,10 +166,10 @@
       },
       "patch": {
         "tags": [
-          "BackupResourceStorageConfigs"
+          "BackupStorageConfigs"
         ],
         "description": "Updates vault storage model type.",
-        "operationId": "BackupResourceStorageConfigs_Update",
+        "operationId": "BackupStorageConfigs_Update",
         "parameters": [
           {
             "$ref": "#/parameters/SubscriptionId"
@@ -184,12 +184,12 @@
             "$ref": "#/parameters/VaultName"
           },
           {
-            "name": "resourceBackupResourceConfig",
+            "name": "backupStorageConfigResource",
             "in": "body",
-            "description": "resourceBackupResourceConfig",
+            "description": "Backup storage config resource.",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/BackupResourceConfigResource"
+              "$ref": "#/definitions/BackupStorageConfigResource"
             }
           }
         ],
@@ -203,8 +203,8 @@
     }
   },
   "definitions": {
-    "BackupResourceConfig": {
-      "description": "The resource storage details.",
+    "BackupStorageConfig": {
+      "description": "The backup storage config.",
       "type": "object",
       "properties": {
         "storageModelType": {
@@ -248,8 +248,8 @@
         }
       }
     },
-    "BackupResourceConfigResource": {
-      "description": "The resource storage details.",
+    "BackupStorageConfigResource": {
+      "description": "The backup storage config.",
       "allOf": [
         {
           "$ref": "./vaults.json#/definitions/Resource"
@@ -257,13 +257,13 @@
       ],
       "properties": {
         "properties": {
-          "$ref": "#/definitions/BackupResourceConfig",
+          "$ref": "#/definitions/BackupStorageConfig",
           "x-ms-client-flatten": true
         }
       }
     },
-    "BackupResourceVaultConfig": {
-      "description": "Backup resource vault config details.",
+    "BackupVaultConfig": {
+      "description": "Backup vault config details.",
       "type": "object",
       "properties": {
         "storageType": {
@@ -307,8 +307,8 @@
         }
       }
     },
-    "BackupResourceVaultConfigResource": {
-      "description": "Backup resource vault config details.",
+    "BackupVaultConfigResource": {
+      "description": "Backup vault config details.",
       "allOf": [
         {
           "$ref": "./vaults.json#/definitions/Resource"
@@ -316,7 +316,7 @@
       ],
       "properties": {
         "properties": {
-          "$ref": "#/definitions/BackupResourceVaultConfig",
+          "$ref": "#/definitions/BackupVaultConfig",
           "x-ms-client-flatten": true
         }
       }
