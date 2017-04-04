@@ -605,6 +605,78 @@
         }
       }
     },
+    "UpgradeDetails": {
+      "description": "Details for upgrading vault.",
+      "type": "object",
+      "properties": {
+        "operationId": {
+          "description": "ID of the vault upgrade operation.",
+          "type": "string",
+          "readOnly": true
+        },
+        "startTimeUtc": {
+          "description": "UTC time at which the upgrade operation has started.",
+          "type": "string",
+          "readOnly": true,
+          "format": "date-time"
+        },
+        "lastUpdatedTimeUtc": {
+          "description": "UTC time at which the upgrade operation status was last updated.",
+          "type": "string",
+          "readOnly": true,
+          "format": "date-time"
+        },
+        "endTimeUtc": {
+          "description": "UTC time at which the upgrade operation has ended.",
+          "type": "string",
+          "readOnly": true,
+          "format": "date-time"
+        },
+        "status": {
+          "description": "Status of the vault upgrade operation.",
+          "enum": [
+            "Unknown",
+            "InProgress",
+            "Upgraded",
+            "Failed"
+          ],
+          "type": "string",
+          "readOnly": true,
+          "x-ms-enum": {
+            "name": "VaultUpgradeState",
+            "modelAsString": true
+          }
+        },
+        "message": {
+          "description": "Message to the user containing information about the upgrade operation.",
+          "type": "string",
+          "readOnly": true
+        },
+        "triggerType": {
+          "description": "The way the vault upgradation was triggered.",
+          "enum": [
+            "UserTriggered",
+            "ForcedUpgrade"
+          ],
+          "type": "string",
+          "readOnly": true,
+          "x-ms-enum": {
+            "name": "TriggerType",
+            "modelAsString": true
+          }
+        },
+        "upgradedResourceId": {
+          "description": "Resource ID of the upgraded vault.",
+          "type": "string",
+          "readOnly": true
+        },
+        "previousResourceId": {
+          "description": "Resource ID of the vault before the upgrade.",
+          "type": "string",
+          "readOnly": true
+        }
+      }
+    },
     "Vault": {
       "description": "Resource information, as returned by the resource provider.",
       "type": "object",
@@ -615,8 +687,7 @@
       ],
       "properties": {
         "properties": {
-          "$ref": "#/definitions/VaultProperties",
-          "x-ms-client-flatten": true
+          "$ref": "#/definitions/VaultProperties"
         },
         "sku": {
           "$ref": "#/definitions/Sku"
@@ -684,6 +755,9 @@
           "description": "Provisioning State.",
           "type": "string",
           "readOnly": true
+        },
+        "upgradeDetails": {
+          "$ref": "#/definitions/UpgradeDetails"
         }
       }
     }
