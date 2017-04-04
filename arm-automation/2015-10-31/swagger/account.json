@@ -15,7 +15,7 @@
     "application/json"
   ],
   "paths": {
-	"/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Automation/automationAccounts/{automationAccountName}": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Automation/automationAccounts/{automationAccountName}": {
       "patch": {
         "tags": [
           "AutomationAccounts"
@@ -59,7 +59,7 @@
               "$ref": "#/definitions/AutomationAccount"
             }
           },
-		  "default": {
+          "default": {
             "description": "Automation error response describing why the operation failed.",
             "schema": {
               "$ref": "#/definitions/ErrorResponse"
@@ -116,7 +116,7 @@
               "$ref": "#/definitions/AutomationAccount"
             }
           },
-		  "default": {
+          "default": {
             "description": "Automation error response describing why the operation failed.",
             "schema": {
               "$ref": "#/definitions/ErrorResponse"
@@ -155,10 +155,10 @@
           "200": {
             "description": "OK"
           },
-	     "204": { 
-		 "description": "No Content" 
+          "204": {
+            "description": "No Content"
           },
-		  "default": {
+          "default": {
             "description": "Automation error response describing why the operation failed.",
             "schema": {
               "$ref": "#/definitions/ErrorResponse"
@@ -200,7 +200,7 @@
               "$ref": "#/definitions/AutomationAccount"
             }
           },
-		  "default": {
+          "default": {
             "description": "Automation error response describing why the operation failed.",
             "schema": {
               "$ref": "#/definitions/ErrorResponse"
@@ -208,7 +208,7 @@
           }
         }
       }
-     }, 
+    },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Automation/automationAccounts": {
       "get": {
         "tags": [
@@ -219,7 +219,7 @@
         "externalDocs": {
           "url": "http://aka.ms/azureautomationsdk/automationaccountoperations"
         },
-        "parameters": [		 
+        "parameters": [
           {
             "$ref": "#/parameters/ResourceGroupNameParameter"
           },
@@ -237,7 +237,7 @@
               "$ref": "#/definitions/AutomationAccountListResult"
             }
           },
-		  "default": {
+          "default": {
             "description": "Automation error response describing why the operation failed.",
             "schema": {
               "$ref": "#/definitions/ErrorResponse"
@@ -249,7 +249,7 @@
         }
       }
     },
-	"/providers/Microsoft.Automation/operations": {
+    "/providers/Microsoft.Automation/operations": {
       "get": {
         "tags": [
           "Operations"
@@ -280,14 +280,14 @@
         }
       }
     },
-	"/subscriptions/{subscriptionId}/providers/Microsoft.Automation/automationAccounts": {
+    "/subscriptions/{subscriptionId}/providers/Microsoft.Automation/automationAccounts": {
       "get": {
         "tags": [
           "AutomationAccounts"
         ],
         "summary": "Lists the Automation Accounts within an Azure subscitption.",
         "operationId": "AutomationAccounts_ListBySubscriptionId",
-		"description": "Retrieve a list of accounts within a given subscription.",
+        "description": "Retrieve a list of accounts within a given subscription.",
         "parameters": [
           {
             "$ref": "#/parameters/SubscriptionIdParameter"
@@ -311,7 +311,7 @@
           }
         },
         "x-ms-pageable": {
-          "nextLinkName": null
+          "nextLinkName": "nextLink"
         }
       }
     }
@@ -343,7 +343,7 @@
       },
       "description": "The account SKU."
     },
-	"AutomationAccountUpdateProperties": {
+    "AutomationAccountUpdateProperties": {
       "properties": {
         "sku": {
           "$ref": "#/definitions/Sku",
@@ -489,7 +489,7 @@
       },
       "description": "The response model for the list account operation."
     },
-	"Resource": {
+    "Resource": {
       "properties": {
         "id": {
           "readOnly": true,
@@ -524,7 +524,7 @@
       "description": "The Resource definition.",
       "x-ms-azure-resource": true
     },
-	"OperationListResult": {
+    "OperationListResult": {
       "properties": {
         "value": {
           "type": "array",
@@ -534,9 +534,9 @@
           "description": "List of Automation operations supported by the Automation resource provider."
         }
       },
-	  "description": "The response model for the list of Automation operations"
+      "description": "The response model for the list of Automation operations"
     },
-	"Operation": {
+    "Operation": {
       "description": "Automation REST API operation",
       "type": "object",
       "properties": {
@@ -559,11 +559,11 @@
               "type": "string"
             }
           },
-		  "description": "Provider, Resource and Operation values"
+          "description": "Provider, Resource and Operation values"
         }
       }
     },
-	"ErrorResponse": {
+    "ErrorResponse": {
       "type": "object",
       "properties": {
         "code": {
@@ -573,9 +573,9 @@
         "message": {
           "description": "Error message indicating why the operation failed.",
           "type": "string"
-        }	
+        }
       },
-	  "description": "Error response of an operation failure"
+      "description": "Error response of an operation failure"
     }
   },
   "parameters": {
@@ -598,7 +598,7 @@
       "in": "path",
       "required": true,
       "type": "string",
-	  "pattern": "^[-\\w\\._]+$",
+      "pattern": "^[-\\w\\._]+$",
       "description": "The resource group name.",
       "x-ms-parameter-location": "method"
     }
