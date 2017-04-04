@@ -3,7 +3,10 @@
          "clusterName": "cluster1",
          "resourceGroupName": "rg1",
          "api-version": "2015-03-01-preview",
-         "subscriptionId": "subid"
+         "subscriptionId": "subid",
+         "PatchParameters": {
+             "tags": { "key1": "val1", "key2": "val2" }
+         }
      },
      "responses": {
          "200": {
@@ -13,7 +16,7 @@
                  "type": "Microsoft.HDInsight/clusters",
                  "location": "West US",
                  "etag": "f0212a39-b827-45e0-9ffa-4f5232e58851",
-                 "tags": { "key1": "val1" },
+                 "tags": { "key1": "val1", "key2": "val2" },
                  "properties": {
                      "clusterVersion": "3.5.1000.0",
                      "osType": "Linux",

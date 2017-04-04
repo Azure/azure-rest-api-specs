@@ -1,1059 +1,1122 @@
 {
-  "swagger": "2.0",
-  "info": {
-    "title": "HDInsightManagementClient",
-    "description": "The HDInsight Management Client.",
-    "version": "2015-03-01-preview"
-  },
-  "host": "management.azure.com",
-  "schemes": [
-    "https"
-  ],
-  "consumes": [
-    "application/json"
-  ],
-  "produces": [
-    "application/json"
-  ],
-  "security": [{
-    "azure_auth": [
-      "user_impersonation"
-    ]
-  }],
-  "securityDefinitions": {
-    "azure_auth": {
-      "type": "oauth2",
-      "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
-      "flow": "implicit",
-      "description": "Azure Active Directory OAuth2 Flow",
-      "scopes": {
-        "user_impersonation": "impersonate your user account"
-      }
-    }
-  },
-  "paths": {
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.HDInsight/clusters/{clusterName}": {
-      "put": {
-        "tags": [
-          "Clusters"
-        ],
-        "operationId": "Clusters_Create",
-        "description": "Begins creating a new HDInsight cluster with the specified parameters.",
-        "x-ms-examples": {
-          "Create Hadoop on Linux cluster with SSH password": {
-            "$ref": "../examples/CreateLinuxHadoopSshPassword.json"
-          },
-          "Create Hadoop on Linux cluster with SSH public key": {
-            "$ref": "../examples/CreateLinuxHadoopSshPublicKey.json"
-          },
-          "Create Spark on Linux Cluster with SSH password": {
-            "$ref": "../examples/CreateLinuxSparkSshPassword.json"
-          },
-          "Create Windows Cluster": {
-            "$ref": "../examples/CreateWindowsHadoopRdp.json"
-          },
-          "Create Secure Hadoop cluster": {
-            "$ref": "../examples/CreateLinuxHadoopSecureHadoop.json"
-          }
-        },
-        "parameters": [{
-            "name": "resourceGroupName",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "description": "The name of the resource group."
-          },
-          {
-            "name": "clusterName",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "description": "The name of the cluster."
-          },
-          {
-            "name": "clusterCreateParameters",
-            "in": "body",
-            "required": true,
-            "schema": {
-              "$ref": "#/definitions/ClusterCreateParametersExtended"
+    "swagger": "2.0",
+    "info": {
+        "title": "HDInsightManagementClient",
+        "description": "The HDInsight Management Client.",
+        "version": "2015-03-01-preview"
+    },
+    "host": "management.azure.com",
+    "schemes": [
+        "https"
+    ],
+    "consumes": [
+        "application/json"
+    ],
+    "produces": [
+        "application/json"
+    ],
+    "security": [{
+        "azure_auth": [
+            "user_impersonation"
+        ]
+    }],
+    "securityDefinitions": {
+        "azure_auth": {
+            "type": "oauth2",
+            "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
+            "flow": "implicit",
+            "description": "Azure Active Directory OAuth2 Flow",
+            "scopes": {
+                "user_impersonation": "impersonate your user account"
+            }
+        }
+    },
+    "paths": {
+        "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.HDInsight/clusters/{clusterName}": {
+            "put": {
+                "tags": [
+                    "Clusters"
+                ],
+                "operationId": "Clusters_Create",
+                "description": "Begins creating a new HDInsight cluster with the specified parameters.",
+                "x-ms-examples": {
+                    "Create Hadoop on Linux cluster with SSH password": {
+                        "$ref": "../examples/CreateLinuxHadoopSshPassword.json"
+                    },
+                    "Create Hadoop on Linux cluster with SSH public key": {
+                        "$ref": "../examples/CreateLinuxHadoopSshPublicKey.json"
+                    },
+                    "Create Spark on Linux Cluster with SSH password": {
+                        "$ref": "../examples/CreateLinuxSparkSshPassword.json"
+                    },
+                    "Create Windows Cluster": {
+                        "$ref": "../examples/CreateWindowsHadoopRdp.json"
+                    },
+                    "Create Secure Hadoop cluster": {
+                        "$ref": "../examples/CreateLinuxHadoopSecureHadoop.json"
+                    }
+                },
+                "parameters": [{
+                        "name": "resourceGroupName",
+                        "in": "path",
+                        "required": true,
+                        "type": "string",
+                        "description": "The name of the resource group."
+                    },
+                    {
+                        "name": "clusterName",
+                        "in": "path",
+                        "required": true,
+                        "type": "string",
+                        "description": "The name of the cluster."
+                    },
+                    {
+                        "name": "clusterCreateParameters",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/ClusterCreateParametersExtended"
+                        },
+                        "description": "The cluster create request."
+                    },
+                    {
+                        "$ref": "#/parameters/ApiVersionParameter"
+                    },
+                    {
+                        "$ref": "#/parameters/SubscriptionIdParameter"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK response definition.",
+                        "schema": {
+                            "$ref": "#/definitions/Cluster"
+                        }
+                    }
+                },
+                "x-ms-long-running-operation": true
             },
-            "description": "The cluster create request."
-          },
-          {
-            "$ref": "#/parameters/ApiVersionParameter"
-          },
-          {
-            "$ref": "#/parameters/SubscriptionIdParameter"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "OK response definition.",
-            "schema": {
-              "$ref": "#/definitions/Cluster"
+            "patch": {
+                "tags": [
+                    "Clusters"
+                ],
+                "operationId": "Clusters_Patch",
+                "description": "Patch HDInsight cluster with the specified parameters.",
+                "x-ms-examples": {
+                    "Patch HDInsight Linux clusters": {
+                        "$ref": "../examples/PatchLinuxHadoopCluster.json"
+                    }
+                },
+                "parameters": [{
+                        "name": "resourceGroupName",
+                        "in": "path",
+                        "required": true,
+                        "type": "string",
+                        "description": "The name of the resource group."
+                    },
+                    {
+                        "name": "clusterName",
+                        "in": "path",
+                        "required": true,
+                        "type": "string",
+                        "description": "The name of the cluster."
+                    },
+                    {
+                        "name": "PatchParameters",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/ClusterPatchParameters"
+                        },
+                        "description": "The cluster patch request."
+                    },
+                    {
+                        "$ref": "#/parameters/ApiVersionParameter"
+                    },
+                    {
+                        "$ref": "#/parameters/SubscriptionIdParameter"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK response definition.",
+                        "schema": {
+                            "$ref": "#/definitions/Cluster"
+                        }
+                    }
+                }
+            },
+            "delete": {
+                "tags": [
+                    "Clusters"
+                ],
+                "operationId": "Clusters_Delete",
+                "description": "Begins deleting the specified HDInsight cluster.",
+                "x-ms-examples": {
+                    "Delete Hadoop on Linux cluster": {
+                        "$ref": "../examples/DeleteLinuxHadoopCluster.json"
+                    }
+                },
+                "parameters": [{
+                        "name": "resourceGroupName",
+                        "in": "path",
+                        "required": true,
+                        "type": "string",
+                        "description": "The name of the resource group."
+                    },
+                    {
+                        "name": "clusterName",
+                        "in": "path",
+                        "required": true,
+                        "type": "string",
+                        "description": "The name of the cluster."
+                    },
+                    {
+                        "$ref": "#/parameters/ApiVersionParameter"
+                    },
+                    {
+                        "$ref": "#/parameters/SubscriptionIdParameter"
+                    }
+                ],
+                "responses": {
+                    "202": {
+                        "description": "Accepted response definition."
+                    },
+                    "200": {
+                        "description": "Ok response definition."
+                    }
+                },
+                "x-ms-long-running-operation": true
+            },
+            "get": {
+                "tags": [
+                    "Clusters"
+                ],
+                "operationId": "Clusters_Get",
+                "description": "Gets the specified cluster.",
+                "x-ms-examples": {
+                    "Get Hadoop on Linux cluster": {
+                        "$ref": "../examples/GetLinuxHadoopCluster.json"
+                    },
+                    "Get Spark on Linux cluster": {
+                        "$ref": "../examples/GetLinuxSparkCluster.json"
+                    }
+                },
+                "parameters": [{
+                        "name": "resourceGroupName",
+                        "in": "path",
+                        "required": true,
+                        "type": "string",
+                        "description": "The name of the resource group."
+                    },
+                    {
+                        "name": "clusterName",
+                        "in": "path",
+                        "required": true,
+                        "type": "string",
+                        "description": "The name of the cluster."
+                    },
+                    {
+                        "$ref": "#/parameters/ApiVersionParameter"
+                    },
+                    {
+                        "$ref": "#/parameters/SubscriptionIdParameter"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK response definition.",
+                        "schema": {
+                            "$ref": "#/definitions/Cluster"
+                        }
+                    }
+                }
             }
-          }
         },
-        "x-ms-long-running-operation": true
-      },
-      "delete": {
-        "tags": [
-          "Clusters"
-        ],
-        "operationId": "Clusters_Delete",
-        "description": "Begins deleting the specified HDInsight cluster.",
-        "x-ms-examples": {
-          "Delete Hadoop on Linux cluster": {
-            "$ref": "../examples/DeleteLinuxHadoopCluster.json"
-          }
-        },
-        "parameters": [{
-            "name": "resourceGroupName",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "description": "The name of the resource group."
-          },
-          {
-            "name": "clusterName",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "description": "The name of the cluster."
-          },
-          {
-            "$ref": "#/parameters/ApiVersionParameter"
-          },
-          {
-            "$ref": "#/parameters/SubscriptionIdParameter"
-          }
-        ],
-        "responses": {
-          "202": {
-            "description": "Accepted response definition."
-          },
-          "200": {
-            "description": "Ok response definition."
-          }
-        },
-        "x-ms-long-running-operation": true
-      },
-      "get": {
-        "tags": [
-          "Clusters"
-        ],
-        "operationId": "Clusters_Get",
-        "description": "Gets the specified cluster.",
-        "x-ms-examples": {
-          "Get Hadoop on Linux cluster": {
-            "$ref": "../examples/GetLinuxHadoopCluster.json"
-          },
-          "Get Spark on Linux cluster": {
-            "$ref": "../examples/GetLinuxSparkCluster.json"
-          }
-        },
-        "parameters": [{
-            "name": "resourceGroupName",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "description": "The name of the resource group."
-          },
-          {
-            "name": "clusterName",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "description": "The name of the cluster."
-          },
-          {
-            "$ref": "#/parameters/ApiVersionParameter"
-          },
-          {
-            "$ref": "#/parameters/SubscriptionIdParameter"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "OK response definition.",
-            "schema": {
-              "$ref": "#/definitions/Cluster"
+        "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.HDInsight/clusters": {
+            "get": {
+                "tags": [
+                    "Clusters"
+                ],
+                "operationId": "Clusters_ListByResourceGroup",
+                "description": "List the HDInsight clusters in a resource group.",
+                "x-ms-examples": {
+                    "Get All Hadoop on Linux cluster": {
+                        "$ref": "../examples/GetLinuxHadoopAllCluster.json"
+                    }
+                },
+                "parameters": [{
+                        "name": "resourceGroupName",
+                        "in": "path",
+                        "required": true,
+                        "type": "string",
+                        "description": "The name of the resource group."
+                    },
+                    {
+                        "$ref": "#/parameters/ApiVersionParameter"
+                    },
+                    {
+                        "$ref": "#/parameters/SubscriptionIdParameter"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK response definition.",
+                        "schema": {
+                            "$ref": "#/definitions/ClusterListResult"
+                        }
+                    }
+                },
+                "x-ms-pageable": {
+                    "nextLinkName": "nextLink"
+                }
             }
-          }
+        },
+        "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.HDInsight/clusters/{clusterName}/roles/{roleName}/resize": {
+            "post": {
+                "tags": [
+                    "Clusters"
+                ],
+                "operationId": "Clusters_Resize",
+                "description": "Begins a resize operation on the specified HDInsight cluster.",
+                "parameters": [{
+                        "name": "resourceGroupName",
+                        "in": "path",
+                        "required": true,
+                        "type": "string",
+                        "description": "The name of the resource group."
+                    },
+                    {
+                        "name": "clusterName",
+                        "in": "path",
+                        "required": true,
+                        "type": "string",
+                        "description": "The name of the cluster."
+                    },
+                    {
+                        "name": "roleName",
+                        "in": "path",
+                        "required": true,
+                        "type": "string",
+                        "description": "The constant value for the roleName",
+                        "enum": [
+                            "workernode"
+                        ],
+                        "x-ms-enum": {
+                            "name": "RoleName",
+                            "modelAsString": true
+                        }
+                    },
+                    {
+                        "name": "resizeParameters",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/ClusterResizeParameters"
+                        },
+                        "description": "The parameters for the resize operation."
+                    },
+                    {
+                        "$ref": "#/parameters/ApiVersionParameter"
+                    },
+                    {
+                        "$ref": "#/parameters/SubscriptionIdParameter"
+                    }
+                ],
+                "responses": {
+                    "202": {
+                        "description": "Accepted response definition."
+                    },
+                    "200": {
+                        "description": "Ok response definition."
+                    }
+                },
+                "x-ms-long-running-operation": true
+            }
+        },
+        "/subscriptions/{subscriptionId}/providers/Microsoft.HDInsight/clusters": {
+            "get": {
+                "tags": [
+                    "Clusters"
+                ],
+                "operationId": "Clusters_List",
+                "description": "Lists HDInsight clusters under the subscription.",
+                "parameters": [{
+                        "$ref": "#/parameters/ApiVersionParameter"
+                    },
+                    {
+                        "$ref": "#/parameters/SubscriptionIdParameter"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK response definition.",
+                        "schema": {
+                            "$ref": "#/definitions/ClusterListResult"
+                        }
+                    }
+                },
+                "x-ms-pageable": {
+                    "nextLinkName": "nextLink"
+                }
+            }
         }
-      }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.HDInsight/clusters": {
-      "get": {
-        "tags": [
-          "Clusters"
-        ],
-        "operationId": "Clusters_ListByResourceGroup",
-        "description": "List the HDInsight clusters in a resource group.",
-        "x-ms-examples": {
-          "Get All Hadoop on Linux cluster": {
-            "$ref": "../examples/GetLinuxHadoopAllCluster.json"
-          }
-        },
-        "parameters": [{
-            "name": "resourceGroupName",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "description": "The name of the resource group."
-          },
-          {
-            "$ref": "#/parameters/ApiVersionParameter"
-          },
-          {
-            "$ref": "#/parameters/SubscriptionIdParameter"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "OK response definition.",
-            "schema": {
-              "$ref": "#/definitions/ClusterListResult"
-            }
-          }
-        },
-        "x-ms-pageable": {
-          "nextLinkName": "nextLink"
-        }
-      }
-    },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.HDInsight/clusters/{clusterName}/roles/{roleName}/resize": {
-      "post": {
-        "tags": [
-          "Clusters"
-        ],
-        "operationId": "Clusters_Resize",
-        "description": "Begins a resize operation on the specified HDInsight cluster.",
-        "parameters": [{
-            "name": "resourceGroupName",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "description": "The name of the resource group."
-          },
-          {
-            "name": "clusterName",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "description": "The name of the cluster."
-          },
-          {
-            "name": "roleName",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "description": "The constant value for the roleName",
-            "enum": [
-              "workernode"
+    "definitions": {
+        "HttpSettingsParameters": {
+            "properties": {
+                "restAuthCredential.isEnabled": {
+                    "type": "string",
+                    "description": "Gets or sets the whether or not HTTP is enabled."
+                },
+                "restAuthCredential.username": {
+                    "type": "string",
+                    "description": "Gets or sets the http username."
+                },
+                "restAuthCredential.password": {
+                    "type": "string",
+                    "format": "password",
+                    "description": "Gets or sets the http user password."
+                }
+            },
+            "required": [
+                "restAuthCredential.isEnabled"
             ],
-            "x-ms-enum": {
-              "name": "RoleName",
-              "modelAsString": true
+            "description": "The payload for a Configure HTTP settings request."
+        },
+        "ClusterDefinition": {
+            "description": "Gets or sets the cluste definition.",
+            "properties": {
+                "blueprint": {
+                    "type": "string",
+                    "description": "Gets or sets the link to the blueprint."
+                },
+                "kind": {
+                    "type": "string",
+                    "description": "Gets or sets the type of cluster."
+                },
+                "componentVersion": {
+                    "type": "object",
+                    "additionalProperties": {
+                        "type": "string"
+                    },
+                    "description": "Gets or sets the versions of different services in the cluster."
+                },
+                "configurations": {
+                    "type": "object",
+                    "description": "Gets or sets the cluster configurations."
+                }
             }
-          },
-          {
-            "name": "resizeParameters",
-            "in": "body",
-            "required": true,
-            "schema": {
-              "$ref": "#/definitions/ClusterResizeParameters"
+        },
+        "SecurityProfile": {
+            "description": "Gets or sets the security profile which contains Ssh public key for the HDInsight cluster.",
+            "properties": {
+                "directoryType": {
+                    "type": "string",
+                    "description": "Gets or sets the directory type.",
+                    "enum": [
+                        "ActiveDirectory"
+                    ],
+                    "x-ms-enum": {
+                        "name": "DirectoryType",
+                        "modelAsString": false
+                    }
+                },
+                "domain": {
+                    "type": "string",
+                    "description": "Gets or sets the domain."
+                },
+                "organizationalUnitDN": {
+                    "type": "string",
+                    "description": "Gets or sets Distinguished Name for organizational unit."
+                },
+                "ldapsUrls": {
+                    "type": "array",
+                    "items": {
+                        "type": "string"
+                    },
+                    "description": "Gets or sets the LDAP URLs."
+                },
+                "domainUsername": {
+                    "type": "string",
+                    "description": "Gets or sets the domain admin user name."
+                },
+                "domainUserPassword": {
+                    "type": "string",
+                    "format": "password",
+                    "description": "Gets or sets the domain admin password."
+                },
+                "clusterUsersGroupDNs": {
+                    "type": "array",
+                    "items": {
+                        "type": "string"
+                    },
+                    "description": "Optional. Gets or sets the Distinguished Names for cluster user groups"
+                }
+            }
+        },
+        "HardwareProfile": {
+            "properties": {
+                "vmSize": {
+                    "type": "string",
+                    "description": "Gets or sets the size of the VM"
+                }
             },
-            "description": "The parameters for the resize operation."
-          },
-          {
-            "$ref": "#/parameters/ApiVersionParameter"
-          },
-          {
-            "$ref": "#/parameters/SubscriptionIdParameter"
-          }
-        ],
-        "responses": {
-          "202": {
-            "description": "Accepted response definition."
-          },
-          "200": {
-            "description": "Ok response definition."
-          }
+            "description": "Describes the hardware profile."
         },
-        "x-ms-long-running-operation": true
-      }
-    },
-    "/subscriptions/{subscriptionId}/providers/Microsoft.HDInsight/clusters": {
-      "get": {
-        "tags": [
-          "Clusters"
-        ],
-        "operationId": "Clusters_List",
-        "description": "Lists HDInsight clusters under the subscription.",
-        "parameters": [{
-            "$ref": "#/parameters/ApiVersionParameter"
-          },
-          {
-            "$ref": "#/parameters/SubscriptionIdParameter"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "OK response definition.",
-            "schema": {
-              "$ref": "#/definitions/ClusterListResult"
+        "VirtualNetworkProfile": {
+            "description": "Gets or sets the Virtual network properties.",
+            "properties": {
+                "id": {
+                    "type": "string",
+                    "description": "Gets or sets the ID of the virtual network."
+                },
+                "subnet": {
+                    "type": "string",
+                    "description": "Gets or sets the name of the subnet."
+                }
             }
-          }
         },
-        "x-ms-pageable": {
-          "nextLinkName": "nextLink"
-        }
-      }
-    }
-  },
-  "definitions": {
-    "HttpSettingsParameters": {
-      "properties": {
-        "restAuthCredential.isEnabled": {
-          "type": "string",
-          "description": "Gets or sets the whether or not HTTP is enabled."
+        "Role": {
+            "properties": {
+                "name": {
+                    "type": "string",
+                    "description": "Gets or sets the name of the role."
+                },
+                "minInstanceCount": {
+                    "type": "integer",
+                    "format": "int32",
+                    "description": "Gets or sets the minimum instance count of the cluster."
+                },
+                "targetInstanceCount": {
+                    "type": "integer",
+                    "format": "int32",
+                    "description": "Gets or sets the instance count of the cluster."
+                },
+                "hardwareProfile": {
+                    "$ref": "#/definitions/HardwareProfile",
+                    "description": "Gets or sets the hardware profile."
+                },
+                "osProfile": {
+                    "$ref": "./configurations.json#/definitions/OsProfile",
+                    "description": "Gets or sets the operating system profile."
+                },
+                "virtualNetworkProfile": {
+                    "$ref": "#/definitions/VirtualNetworkProfile",
+                    "description": "Gets or sets the virtual network profile."
+                },
+                "scriptActions": {
+                    "type": "array",
+                    "items": {
+                        "$ref": "./scriptActions.json#/definitions/ScriptAction"
+                    },
+                    "description": "Gets or sets the list of script actions on the role."
+                }
+            },
+            "description": "Describes a role on the cluster."
         },
-        "restAuthCredential.username": {
-          "type": "string",
-          "description": "Gets or sets the http username."
+        "ComputeProfile": {
+            "properties": {
+                "roles": {
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/definitions/Role"
+                    },
+                    "description": "Gets or sets the list of roles in the cluster."
+                }
+            },
+            "description": "Describes the compute profile."
         },
-        "restAuthCredential.password": {
-          "type": "string",
-          "format": "password",
-          "description": "Gets or sets the http user password."
-        }
-      },
-      "required": [
-        "restAuthCredential.isEnabled"
-      ],
-      "description": "The payload for a Configure HTTP settings request."
-    },
-    "ClusterDefinition": {
-      "description": "Gets or sets the cluste definition.",
-      "properties": {
-        "blueprint": {
-          "type": "string",
-          "description": "Gets or sets the link to the blueprint."
+        "StorageAccount": {
+            "properties": {
+                "name": {
+                    "type": "string",
+                    "description": "The name of the storage account."
+                },
+                "isDefault": {
+                    "type": "boolean",
+                    "description": "Describes is the storage account is the default storage account."
+                },
+                "container": {
+                    "type": "string",
+                    "description": "The container in the storage account."
+                },
+                "key": {
+                    "type": "string",
+                    "description": "The storage account access key."
+                }
+            }
         },
-        "kind": {
-          "type": "string",
-          "description": "Gets or sets the type of cluster."
+        "StorageProfile": {
+            "properties": {
+                "storageaccounts": {
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/definitions/StorageAccount"
+                    },
+                    "description": "Gets or sets the list of storage accounts in the cluster."
+                }
+            },
+            "description": "Describes the storage profile."
         },
-        "componentVersion": {
-          "type": "object",
-          "additionalProperties": {
-            "type": "string"
-          },
-          "description": "Gets or sets the versions of different services in the cluster."
+        "ClusterCreateProperties": {
+            "description": "Gets or sets cluster create parameters.",
+            "properties": {
+                "clusterVersion": {
+                    "type": "string",
+                    "description": "Gets or sets the version of the cluster."
+                },
+                "osType": {
+                    "type": "string",
+                    "description": "Gets or sets the type of operating system.",
+                    "enum": [
+                        "Windows",
+                        "Linux"
+                    ],
+                    "x-ms-enum": {
+                        "name": "OSType",
+                        "modelAsString": false
+                    }
+                },
+                "tier": {
+                    "type": "string",
+                    "description": "Gets or sets the cluster tier.",
+                    "enum": [
+                        "Standard",
+                        "Premium"
+                    ],
+                    "x-ms-enum": {
+                        "name": "Tier",
+                        "modelAsString": false
+                    }
+                },
+                "clusterDefinition": {
+                    "$ref": "#/definitions/ClusterDefinition",
+                    "description": "Gets or sets the cluster definition."
+                },
+                "securityProfile": {
+                    "$ref": "#/definitions/SecurityProfile",
+                    "description": "Gets or sets the security profile."
+                },
+                "computeProfile": {
+                    "$ref": "#/definitions/ComputeProfile",
+                    "description": "Gets or sets the compute profile."
+                },
+                "storageProfile": {
+                    "$ref": "#/definitions/StorageProfile",
+                    "description": "Gets or sets the storage profile."
+                }
+            }
         },
-        "configurations": {
-          "type": "object",
-          "description": "Gets or sets the cluster configurations."
-        }
-      }
-    },
-    "SecurityProfile": {
-      "description": "Gets or sets the security profile which contains Ssh public key for the HDInsight cluster.",
-      "properties": {
-        "directoryType": {
-          "type": "string",
-          "description": "Gets or sets the directory type.",
-          "enum": [
-            "ActiveDirectory"
-          ],
-          "x-ms-enum": {
-            "name": "DirectoryType",
-            "modelAsString": false
-          }
+        "ClusterCreateParametersExtended": {
+            "properties": {
+                "location": {
+                    "type": "string",
+                    "description": "Gets or sets the location of the cluster."
+                },
+                "tags": {
+                    "type": "object",
+                    "additionalProperties": {
+                        "type": "string"
+                    },
+                    "description": "Gets or sets the resource tags."
+                },
+                "properties": {
+                    "$ref": "#/definitions/ClusterCreateProperties",
+                    "description": "Gets or sets the cluster create parameters."
+                }
+            },
+            "description": "The CreateCluster request parameters."
         },
-        "domain": {
-          "type": "string",
-          "description": "Gets or sets the domain."
+        "ClusterPatchParameters": {
+            "properties": {
+                "tags": {
+                    "type": "object",
+                    "x-nullable": true,
+                    "additionalProperties": {
+                        "type": "string"
+                    },
+                    "description": "Gets or sets the resource tags."
+                }
+            },
+            "description": "The PatchCluster request parameters"
         },
-        "organizationalUnitDN": {
-          "type": "string",
-          "description": "Gets or sets Distinguished Name for organizational unit."
-        },
-        "ldapsUrls": {
-          "type": "array",
-          "items": {
-            "type": "string"
-          },
-          "description": "Gets or sets the LDAP URLs."
-        },
-        "domainUsername": {
-          "type": "string",
-          "description": "Gets or sets the domain admin user name."
-        },
-        "domainUserPassword": {
-          "type": "string",
-          "format": "password",
-          "description": "Gets or sets the domain admin password."
-        },
-        "clusterUsersGroupDNs": {
-          "type": "array",
-          "items": {
-            "type": "string"
-          },
-          "description": "Optional. Gets or sets the Distinguished Names for cluster user groups"
-        }
-      }
-    },
-    "HardwareProfile": {
-      "properties": {
-        "vmSize": {
-          "type": "string",
-          "description": "Gets or sets the size of the VM"
-        }
-      },
-      "description": "Describes the hardware profile."
-    },
-    "VirtualNetworkProfile": {
-      "description": "Gets or sets the Virtual network properties.",
-      "properties": {
-        "id": {
-          "type": "string",
-          "description": "Gets or sets the ID of the virtual network."
-        },
-        "subnet": {
-          "type": "string",
-          "description": "Gets or sets the name of the subnet."
-        }
-      }
-    },
-    "Role": {
-      "properties": {
-        "name": {
-          "type": "string",
-          "description": "Gets or sets the name of the role."
-        },
-        "minInstanceCount": {
-          "type": "integer",
-          "format": "int32",
-          "description": "Gets or sets the minimum instance count of the cluster."
-        },
-        "targetInstanceCount": {
-          "type": "integer",
-          "format": "int32",
-          "description": "Gets or sets the instance count of the cluster."
-        },
-        "hardwareProfile": {
-          "$ref": "#/definitions/HardwareProfile",
-          "description": "Gets or sets the hardware profile."
-        },
-        "osProfile": {
-          "$ref": "./configurations.json#/definitions/OsProfile",
-          "description": "Gets or sets the operating system profile."
-        },
-        "virtualNetworkProfile": {
-          "$ref": "#/definitions/VirtualNetworkProfile",
-          "description": "Gets or sets the virtual network profile."
-        },
-        "scriptActions": {
-          "type": "array",
-          "items": {
-            "$ref": "./scriptActions.json#/definitions/ScriptAction"
-          },
-          "description": "Gets or sets the list of script actions on the role."
-        }
-      },
-      "description": "Describes a role on the cluster."
-    },
-    "ComputeProfile": {
-      "properties": {
-        "roles": {
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/Role"
-          },
-          "description": "Gets or sets the list of roles in the cluster."
-        }
-      },
-      "description": "Describes the compute profile."
-    },
-    "StorageAccount": {
-      "properties": {
-        "name": {
-          "type": "string",
-          "description": "The name of the storage account."
-        },
-        "isDefault": {
-          "type": "boolean",
-          "description": "Describes is the storage account is the default storage account."
-        },
-        "container": {
-          "type": "string",
-          "description": "The container in the storage account."
-        },
-        "key": {
-          "type": "string",
-          "description": "The storage account access key."
-        }
-      }
-    },
-    "StorageProfile": {
-      "properties": {
-        "storageaccounts": {
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/StorageAccount"
-          },
-          "description": "Gets or sets the list of storage accounts in the cluster."
-        }
-      },
-      "description": "Describes the storage profile."
-    },
-    "ClusterCreateProperties": {
-      "description": "Gets or sets cluster create parameters.",
-      "properties": {
-        "clusterVersion": {
-          "type": "string",
-          "description": "Gets or sets the version of the cluster."
-        },
-        "osType": {
-          "type": "string",
-          "description": "Gets or sets the type of operating system.",
-          "enum": [
-            "Windows",
-            "Linux"
-          ],
-          "x-ms-enum": {
-            "name": "OSType",
-            "modelAsString": false
-          }
-        },
-        "tier": {
-          "type": "string",
-          "description": "Gets or sets the cluster tier.",
-          "enum": [
-            "Standard",
-            "Premium"
-          ],
-          "x-ms-enum": {
-            "name": "Tier",
-            "modelAsString": false
-          }
-        },
-        "clusterDefinition": {
-          "$ref": "#/definitions/ClusterDefinition",
-          "description": "Gets or sets the cluster definition."
-        },
-        "securityProfile": {
-          "$ref": "#/definitions/SecurityProfile",
-          "description": "Gets or sets the security profile."
-        },
-        "computeProfile": {
-          "$ref": "#/definitions/ComputeProfile",
-          "description": "Gets or sets the compute profile."
-        },
-        "storageProfile": {
-          "$ref": "#/definitions/StorageProfile",
-          "description": "Gets or sets the storage profile."
-        }
-      }
-    },
-    "ClusterCreateParametersExtended": {
-      "properties": {
-        "location": {
-          "type": "string",
-          "description": "Gets or sets the location of the cluster."
-        },
-        "tags": {
-          "type": "object",
-          "additionalProperties": {
-            "type": "string"
-          },
-          "description": "Gets or sets the resource tags."
-        },
-        "properties": {
-          "$ref": "#/definitions/ClusterCreateProperties",
-          "description": "Gets or sets the cluster create parameters."
-        }
-      },
-      "description": "The CreateCluster request parameters."
-    },
-    "QuotaInfo": {
-      "description": "Gets or sets Quota properties for the cluster.",
-      "properties": {
-        "coresUsed": {
-          "type": "integer",
-          "format": "int32",
-          "description": "Gets or sets the cores used by the cluster."
-        }
-      }
-    },
-    "ErrorInfo": {
-      "description": "Gets the error message associated with the cluster creation.",
-      "properties": {
-        "code": {
-          "type": "string",
-          "description": "Gets or sets the error code."
-        },
-        "message": {
-          "type": "string",
-          "description": "Gets or sets the error message."
-        }
-      }
-    },
-    "ConnectivityEndpoint": {
-      "description": "Gets or sets the connectivity properties",
-      "properties": {
-        "name": {
-          "type": "string",
-          "description": "Gets or sets the name of the endpoint."
-        },
-        "protocol": {
-          "type": "string",
-          "description": "Gets or sets the protocol of the endpoint."
-        },
-        "location": {
-          "type": "string",
-          "description": "Gets or sets the location of the endpoint."
-        },
-        "port": {
-          "type": "integer",
-          "format": "int32",
-          "description": "Gets or sets the port to connect to."
-        }
-      }
-    },
-    "ClusterGetProperties": {
-      "properties": {
-        "clusterVersion": {
-          "type": "string",
-          "description": "Gets or sets the version of the cluster."
-        },
-        "osType": {
-          "type": "string",
-          "description": "Gets or sets the type of operating system.",
-          "enum": [
-            "Windows",
-            "Linux"
-          ],
-          "x-ms-enum": {
-            "name": "OSType",
-            "modelAsString": false
-          }
-        },
-        "tier": {
-          "type": "string",
-          "description": "Gets or sets the cluster tier.",
-          "enum": [
-            "Standard",
-            "Premium"
-          ],
-          "x-ms-enum": {
-            "name": "Tier",
-            "modelAsString": false
-          }
-        },
-        "clusterDefinition": {
-          "$ref": "#/definitions/ClusterDefinition",
-          "description": "Gets or sets the cluster definition."
-        },
-        "securityProfile": {
-          "$ref": "#/definitions/SecurityProfile",
-          "description": "Gets or sets the security profile."
-        },
-        "computeProfile": {
-          "$ref": "#/definitions/ComputeProfile",
-          "description": "Gets or sets the compute profile."
-        },
-        "provisioningState": {
-          "type": "string",
-          "description": "Gets or sets the provisioning state, which only appears in the response.",
-          "enum": [
-            "InProgress",
-            "Failed",
-            "Succeeded",
-            "Canceled",
-            "Deleting"
-          ],
-          "x-ms-enum": {
-            "name": "HDInsightClusterProvisioningState",
-            "modelAsString": false
-          }
-        },
-        "createdDate": {
-          "type": "string",
-          "description": "Gets or sets the date on which the cluster was created."
-        },
-        "clusterState": {
-          "type": "string",
-          "description": "Gets or sets the state of the cluster."
-        },
-        "quotaInfo": {
-          "$ref": "#/definitions/QuotaInfo",
-          "description": "Gets or sets the quota information."
+        "QuotaInfo": {
+            "description": "Gets or sets Quota properties for the cluster.",
+            "properties": {
+                "coresUsed": {
+                    "type": "integer",
+                    "format": "int32",
+                    "description": "Gets or sets the cores used by the cluster."
+                }
+            }
         },
         "errors": {
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/ErrorInfo"
-          },
-          "description": "Gets or sets the list of errors."
-        },
-        "connectivityEndpoints": {
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/ConnectivityEndpoint"
-          },
-          "description": "Gets or sets the list of connectivity endpoints."
-        }
-      },
-      "required": [
-        "clusterDefinition"
-      ],
-      "description": "Describes the properties of a cluster."
-    },
-    "Cluster": {
-      "allOf": [{
-        "$ref": "#/definitions/Resource"
-      }],
-      "properties": {
-        "etag": {
-          "type": "string",
-          "description": "Gets or sets the ETag for the resource"
-        },
-        "properties": {
-          "$ref": "#/definitions/ClusterGetProperties",
-          "description": "Gets or sets the properties of the cluster."
-        }
-      },
-      "description": "Describes the cluster."
-    },
-    "RuntimeScriptAction": {
-      "properties": {
-        "name": {
-          "type": "string",
-          "description": "Gets or sets the name of the script action."
-        },
-        "uri": {
-          "type": "string",
-          "description": "Gets or sets the URI to the script."
-        },
-        "parameters": {
-          "type": "string",
-          "description": "Gets or sets the parameters for the script"
-        },
-        "roles": {
-          "type": "array",
-          "items": {
-            "type": "string"
-          },
-          "description": "Gets or sets the list of roles where script will be executed."
-        },
-        "applicationName": {
-          "readOnly": true,
-          "type": "string",
-          "description": "Gets the application name of the script action, if any."
-        }
-      },
-      "required": [
-        "name",
-        "uri",
-        "roles"
-      ],
-      "description": "Describes a script action on a running cluster."
-    },
-    "ExecuteScriptActionParameters": {
-      "properties": {
-        "scriptActions": {
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/RuntimeScriptAction"
-          },
-          "description": "Gets or sets the list of run time script actions."
-        },
-        "persistOnSuccess": {
-          "type": "string",
-          "description": "Gets or sets if the scripts needs to be persisted."
-        }
-      },
-      "required": [
-        "persistOnSuccess"
-      ],
-      "description": "Describes the script actions on a running cluster."
-    },
-    "ClusterListPersistedScriptActionsResult": {
-      "properties": {
-        "value": {
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/RuntimeScriptAction"
-          }
-        },
-        "nextLink": {
-          "type": "string",
-          "readOnly": true,
-          "description": "The link (url) to the next page of results."
-        }
-      },
-      "description": "List PersistedScriptActions operations response."
-    },
-    "ScriptActionExecutionSummary": {
-      "properties": {
-        "status": {
-          "readOnly": true,
-          "type": "string",
-          "description": "Gets the status of script action execution."
-        },
-        "instanceCount": {
-          "readOnly": true,
-          "type": "integer",
-          "format": "int32",
-          "description": "Gets the instance count for a given script action execution status."
-        }
-      },
-      "description": "Describes the execution summary of a script action."
-    },
-    "RuntimeScriptActionDetail": {
-      "properties": {
-        "scriptExecutionId": {
-          "readOnly": true,
-          "type": "integer",
-          "format": "int64",
-          "description": "Gets the execution id of the script action."
-        },
-        "startTime": {
-          "readOnly": true,
-          "type": "string",
-          "description": "Gets the start time of script action execution."
-        },
-        "endTime": {
-          "readOnly": true,
-          "type": "string",
-          "description": "Gets the end time of script action execution."
-        },
-        "status": {
-          "readOnly": true,
-          "type": "string",
-          "description": "Gets the current execution status of the script action."
-        },
-        "operation": {
-          "readOnly": true,
-          "type": "string",
-          "description": "Gets the reason why the script action was executed."
-        },
-        "executionSummary": {
-          "readOnly": true,
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/ScriptActionExecutionSummary"
-          },
-          "description": "Gets the summary of script action execution result."
-        },
-        "debugInformation": {
-          "readOnly": true,
-          "type": "string",
-          "description": "Gets the script action execution debug information."
-        },
-        "name": {
-          "type": "string",
-          "description": "Gets or sets the name of the script action."
-        },
-        "uri": {
-          "type": "string",
-          "description": "Gets or sets the URI to the script."
-        },
-        "parameters": {
-          "type": "string",
-          "description": "Gets or sets the parameters for the script"
-        },
-        "roles": {
-          "type": "array",
-          "items": {
-            "type": "string"
-          },
-          "description": "Gets or sets the list of roles where script will be executed."
-        },
-        "applicationName": {
-          "readOnly": true,
-          "type": "string",
-          "description": "Gets the application name of the script action, if any."
-        }
-      },
-      "required": [
-        "name",
-        "uri",
-        "roles"
-      ],
-      "description": "Describes the execution details of a script action."
-    },
-    "ClusterListRuntimeScriptActionDetailResult": {
-      "properties": {
-        "value": {
-          "readOnly": true,
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/RuntimeScriptActionDetail"
-          }
-        },
-        "nextLink": {
-          "type": "string",
-          "readOnly": true,
-          "description": "The link (url) to the next page of results."
-        }
-      },
-      "description": "The ListScriptExecutionHistory response."
-    },
-    "ClusterListResult": {
-      "properties": {
-        "value": {
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/Cluster"
-          }
-        },
-        "nextLink": {
-          "type": "string",
-          "readOnly": true,
-          "description": "The link (url) to the next page of results."
-        }
-      },
-      "description": "The List Cluster operation response."
-    },
-    "ClusterResizeParameters": {
-      "properties": {
-        "targetInstanceCount": {
-          "type": "integer",
-          "format": "int32",
-          "description": "Gets or sets the target instance count for the operation."
-        }
-      },
-      "description": "The Resize Cluster request parameters."
-    },
-    "OperationResource": {
-      "properties": {
-        "status": {
-          "type": "string",
-          "description": "Gets or sets the async operation state.",
-          "enum": [
-            "InProgress",
-            "Succeeded",
-            "Failed"
-          ],
-          "x-ms-enum": {
-            "name": "AsyncOperationState",
-            "modelAsString": false
-          }
-        },
-        "error": {
-          "$ref": "#/definitions/ErrorInfo",
-          "description": "Gets or sets the operation error information."
-        }
-      },
-      "description": "The azure async operation response."
-    },
-    "Resource": {
-      "properties": {
-        "id": {
-          "readOnly": true,
-          "type": "string",
-          "description": "Resource Id"
-        },
-        "name": {
-          "readOnly": true,
-          "type": "string",
-          "description": "Resource name"
-        },
-        "type": {
-          "readOnly": true,
-          "type": "string",
-          "description": "Resource type"
-        },
-        "location": {
-          "type": "string",
-          "description": "Resource location"
-        },
-        "tags": {
-          "type": "object",
-          "additionalProperties": {
-            "type": "string"
-          },
-          "description": "Resource tags"
-        }
-      },
-      "required": [
-        "location"
-      ],
-      "description": "The resource definition.",
-      "x-ms-azure-resource": true
-    },
-    "SubResource": {
-      "properties": {
-        "id": {
-          "type": "string",
-          "description": "Resource Id"
-        }
-      },
-      "description": "The sub resource definition.",
-      "x-ms-azure-resource": true
-    },
-    "Operation": {
-      "description": "HDInsight REST API operation",
-      "type": "object",
-      "properties": {
-        "name": {
-          "description": "Operation name: {provider}/{resource}/{operation}",
-          "type": "string"
-        },
-        "display": {
-          "description": "The object that represents the operation.",
-          "properties": {
-            "provider": {
-              "description": "Service provider: Microsoft.HDInsight",
-              "type": "string"
-            },
-            "resource": {
-              "description": "Resource on which the operation is performed: Profile, endpoint, etc.",
-              "type": "string"
-            },
-            "operation": {
-              "description": "Operation type: Read, write, delete, etc.",
-              "type": "string"
+            "description": "Gets the error message associated with the cluster creation.",
+            "properties": {
+                "code": {
+                    "type": "string",
+                    "description": "Gets or sets the error code."
+                },
+                "message": {
+                    "type": "string",
+                    "description": "Gets or sets the error message."
+                }
             }
-          }
-        }
-      }
-    },
-    "OperationListResult": {
-      "description": "Result of the request to list HDInsight operations. It contains a list of operations and a URL link to get the next set of results.",
-      "properties": {
-        "value": {
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/Operation"
-          },
-          "description": "List of HDInsight operations supported by the HDInsight resource provider."
         },
-        "nextLink": {
-          "type": "string",
-          "description": "URL to get the next set of operation list results if there are any."
+        "ConnectivityEndpoint": {
+            "description": "Gets or sets the connectivity properties",
+            "properties": {
+                "name": {
+                    "type": "string",
+                    "description": "Gets or sets the name of the endpoint."
+                },
+                "protocol": {
+                    "type": "string",
+                    "description": "Gets or sets the protocol of the endpoint."
+                },
+                "location": {
+                    "type": "string",
+                    "description": "Gets or sets the location of the endpoint."
+                },
+                "port": {
+                    "type": "integer",
+                    "format": "int32",
+                    "description": "Gets or sets the port to connect to."
+                }
+            }
+        },
+        "ClusterGetProperties": {
+            "properties": {
+                "clusterVersion": {
+                    "type": "string",
+                    "description": "Gets or sets the version of the cluster."
+                },
+                "osType": {
+                    "type": "string",
+                    "description": "Gets or sets the type of operating system.",
+                    "enum": [
+                        "Windows",
+                        "Linux"
+                    ],
+                    "x-ms-enum": {
+                        "name": "OSType",
+                        "modelAsString": false
+                    }
+                },
+                "tier": {
+                    "type": "string",
+                    "description": "Gets or sets the cluster tier.",
+                    "enum": [
+                        "Standard",
+                        "Premium"
+                    ],
+                    "x-ms-enum": {
+                        "name": "Tier",
+                        "modelAsString": false
+                    }
+                },
+                "clusterDefinition": {
+                    "$ref": "#/definitions/ClusterDefinition",
+                    "description": "Gets or sets the cluster definition."
+                },
+                "securityProfile": {
+                    "$ref": "#/definitions/SecurityProfile",
+                    "description": "Gets or sets the security profile."
+                },
+                "computeProfile": {
+                    "$ref": "#/definitions/ComputeProfile",
+                    "description": "Gets or sets the compute profile."
+                },
+                "provisioningState": {
+                    "type": "string",
+                    "description": "Gets or sets the provisioning state, which only appears in the response.",
+                    "enum": [
+                        "InProgress",
+                        "Failed",
+                        "Succeeded",
+                        "Canceled",
+                        "Deleting"
+                    ],
+                    "x-ms-enum": {
+                        "name": "HDInsightClusterProvisioningState",
+                        "modelAsString": false
+                    }
+                },
+                "createdDate": {
+                    "type": "string",
+                    "description": "Gets or sets the date on which the cluster was created."
+                },
+                "clusterState": {
+                    "type": "string",
+                    "description": "Gets or sets the state of the cluster."
+                },
+                "quotaInfo": {
+                    "$ref": "#/definitions/QuotaInfo",
+                    "description": "Gets or sets the quota information."
+                },
+                "errors": {
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/definitions/errors"
+                    },
+                    "description": "Gets or sets the list of errors."
+                },
+                "connectivityEndpoints": {
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/definitions/ConnectivityEndpoint"
+                    },
+                    "description": "Gets or sets the list of connectivity endpoints."
+                }
+            },
+            "required": [
+                "clusterDefinition"
+            ],
+            "description": "Describes the properties of a cluster."
+        },
+        "Cluster": {
+            "allOf": [{
+                "$ref": "#/definitions/Resource"
+            }],
+            "properties": {
+                "etag": {
+                    "type": "string",
+                    "description": "Gets or sets the ETag for the resource"
+                },
+                "properties": {
+                    "$ref": "#/definitions/ClusterGetProperties",
+                    "description": "Gets or sets the properties of the cluster."
+                }
+            },
+            "description": "Describes the cluster."
+        },
+        "RuntimeScriptAction": {
+            "properties": {
+                "name": {
+                    "type": "string",
+                    "description": "Gets or sets the name of the script action."
+                },
+                "uri": {
+                    "type": "string",
+                    "description": "Gets or sets the URI to the script."
+                },
+                "parameters": {
+                    "type": "string",
+                    "description": "Gets or sets the parameters for the script"
+                },
+                "roles": {
+                    "type": "array",
+                    "items": {
+                        "type": "string"
+                    },
+                    "description": "Gets or sets the list of roles where script will be executed."
+                },
+                "applicationName": {
+                    "readOnly": true,
+                    "type": "string",
+                    "description": "Gets the application name of the script action, if any."
+                }
+            },
+            "required": [
+                "name",
+                "uri",
+                "roles"
+            ],
+            "description": "Describes a script action on a running cluster."
+        },
+        "ExecuteScriptActionParameters": {
+            "properties": {
+                "scriptActions": {
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/definitions/RuntimeScriptAction"
+                    },
+                    "description": "Gets or sets the list of run time script actions."
+                },
+                "persistOnSuccess": {
+                    "type": "string",
+                    "description": "Gets or sets if the scripts needs to be persisted."
+                }
+            },
+            "required": [
+                "persistOnSuccess"
+            ],
+            "description": "Describes the script actions on a running cluster."
+        },
+        "ClusterListPersistedScriptActionsResult": {
+            "properties": {
+                "value": {
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/definitions/RuntimeScriptAction"
+                    }
+                },
+                "nextLink": {
+                    "type": "string",
+                    "readOnly": true,
+                    "description": "The link (url) to the next page of results."
+                }
+            },
+            "description": "List PersistedScriptActions operations response."
+        },
+        "ScriptActionExecutionSummary": {
+            "properties": {
+                "status": {
+                    "readOnly": true,
+                    "type": "string",
+                    "description": "Gets the status of script action execution."
+                },
+                "instanceCount": {
+                    "readOnly": true,
+                    "type": "integer",
+                    "format": "int32",
+                    "description": "Gets the instance count for a given script action execution status."
+                }
+            },
+            "description": "Describes the execution summary of a script action."
+        },
+        "RuntimeScriptActionDetail": {
+            "properties": {
+                "scriptExecutionId": {
+                    "readOnly": true,
+                    "type": "integer",
+                    "format": "int64",
+                    "description": "Gets the execution id of the script action."
+                },
+                "startTime": {
+                    "readOnly": true,
+                    "type": "string",
+                    "description": "Gets the start time of script action execution."
+                },
+                "endTime": {
+                    "readOnly": true,
+                    "type": "string",
+                    "description": "Gets the end time of script action execution."
+                },
+                "status": {
+                    "readOnly": true,
+                    "type": "string",
+                    "description": "Gets the current execution status of the script action."
+                },
+                "operation": {
+                    "readOnly": true,
+                    "type": "string",
+                    "description": "Gets the reason why the script action was executed."
+                },
+                "executionSummary": {
+                    "readOnly": true,
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/definitions/ScriptActionExecutionSummary"
+                    },
+                    "description": "Gets the summary of script action execution result."
+                },
+                "debugInformation": {
+                    "readOnly": true,
+                    "type": "string",
+                    "description": "Gets the script action execution debug information."
+                },
+                "name": {
+                    "type": "string",
+                    "description": "Gets or sets the name of the script action."
+                },
+                "uri": {
+                    "type": "string",
+                    "description": "Gets or sets the URI to the script."
+                },
+                "parameters": {
+                    "type": "string",
+                    "description": "Gets or sets the parameters for the script"
+                },
+                "roles": {
+                    "type": "array",
+                    "items": {
+                        "type": "string"
+                    },
+                    "description": "Gets or sets the list of roles where script will be executed."
+                },
+                "applicationName": {
+                    "readOnly": true,
+                    "type": "string",
+                    "description": "Gets the application name of the script action, if any."
+                }
+            },
+            "required": [
+                "name",
+                "uri",
+                "roles"
+            ],
+            "description": "Describes the execution details of a script action."
+        },
+        "ClusterListRuntimeScriptActionDetailResult": {
+            "properties": {
+                "value": {
+                    "readOnly": true,
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/definitions/RuntimeScriptActionDetail"
+                    }
+                },
+                "nextLink": {
+                    "type": "string",
+                    "readOnly": true,
+                    "description": "The link (url) to the next page of results."
+                }
+            },
+            "description": "The ListScriptExecutionHistory response."
+        },
+        "ClusterListResult": {
+            "properties": {
+                "value": {
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/definitions/Cluster"
+                    }
+                },
+                "nextLink": {
+                    "type": "string",
+                    "readOnly": true,
+                    "description": "The link (url) to the next page of results."
+                }
+            },
+            "description": "The List Cluster operation response."
+        },
+        "ClusterResizeParameters": {
+            "properties": {
+                "targetInstanceCount": {
+                    "type": "integer",
+                    "format": "int32",
+                    "description": "Gets or sets the target instance count for the operation."
+                }
+            },
+            "description": "The Resize Cluster request parameters."
+        },
+        "OperationResource": {
+            "properties": {
+                "status": {
+                    "type": "string",
+                    "description": "Gets or sets the async operation state.",
+                    "enum": [
+                        "InProgress",
+                        "Succeeded",
+                        "Failed"
+                    ],
+                    "x-ms-enum": {
+                        "name": "AsyncOperationState",
+                        "modelAsString": false
+                    }
+                },
+                "error": {
+                    "$ref": "#/definitions/errors",
+                    "description": "Gets or sets the operation error information."
+                }
+            },
+            "description": "The azure async operation response."
+        },
+        "Resource": {
+            "properties": {
+                "id": {
+                    "readOnly": true,
+                    "type": "string",
+                    "description": "Resource Id"
+                },
+                "name": {
+                    "readOnly": true,
+                    "type": "string",
+                    "description": "Resource name"
+                },
+                "type": {
+                    "readOnly": true,
+                    "type": "string",
+                    "description": "Resource type"
+                },
+                "location": {
+                    "type": "string",
+                    "description": "Resource location"
+                },
+                "tags": {
+                    "type": "object",
+                    "additionalProperties": {
+                        "type": "string"
+                    },
+                    "description": "Resource tags"
+                }
+            },
+            "required": [
+                "location"
+            ],
+            "description": "The resource definition.",
+            "x-ms-azure-resource": true
+        },
+        "SubResource": {
+            "properties": {
+                "id": {
+                    "type": "string",
+                    "description": "Resource Id"
+                }
+            },
+            "description": "The sub resource definition.",
+            "x-ms-azure-resource": true
+        },
+        "Operation": {
+            "description": "HDInsight REST API operation",
+            "type": "object",
+            "properties": {
+                "name": {
+                    "description": "Operation name: {provider}/{resource}/{operation}",
+                    "type": "string"
+                },
+                "display": {
+                    "description": "The object that represents the operation.",
+                    "properties": {
+                        "provider": {
+                            "description": "Service provider: Microsoft.HDInsight",
+                            "type": "string"
+                        },
+                        "resource": {
+                            "description": "Resource on which the operation is performed: Profile, endpoint, etc.",
+                            "type": "string"
+                        },
+                        "operation": {
+                            "description": "Operation type: Read, write, delete, etc.",
+                            "type": "string"
+                        }
+                    }
+                }
+            }
+        },
+        "OperationListResult": {
+            "description": "Result of the request to list HDInsight operations. It contains a list of operations and a URL link to get the next set of results.",
+            "properties": {
+                "value": {
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/definitions/Operation"
+                    },
+                    "description": "List of HDInsight operations supported by the HDInsight resource provider."
+                },
+                "nextLink": {
+                    "type": "string",
+                    "description": "URL to get the next set of operation list results if there are any."
+                }
+            }
         }
-      }
-    }
-  },
-  "parameters": {
-    "SubscriptionIdParameter": {
-      "name": "subscriptionId",
-      "in": "path",
-      "required": true,
-      "type": "string",
-      "description": "Gets subscription credentials which uniquely identify Microsoft Azure subscription. The subscription ID forms part of the URI for every service call."
     },
-    "ApiVersionParameter": {
-      "name": "api-version",
-      "in": "query",
-      "required": true,
-      "type": "string",
-      "description": "Client Api Version."
+    "parameters": {
+        "SubscriptionIdParameter": {
+            "name": "subscriptionId",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "Gets subscription credentials which uniquely identify Microsoft Azure subscription. The subscription ID forms part of the URI for every service call."
+        },
+        "ApiVersionParameter": {
+            "name": "api-version",
+            "in": "query",
+            "required": true,
+            "type": "string",
+            "description": "Client Api Version."
+        }
     }
-  }
 }
