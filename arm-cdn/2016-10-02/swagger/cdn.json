@@ -1388,6 +1388,122 @@
         "x-ms-long-running-operation": true
       }
     },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Cdn/profiles/{profileName}/endpoints/{endpointName}/customDomains/{customDomainName}/disableCustomHttps": {
+      "post": {
+        "tags": [
+          "CustomDomains"
+        ],
+        "description": "Disable https delivery of the custom domain.",
+        "operationId": "CustomDomains_DisableCustomHttps",
+        "parameters": [
+          {
+            "$ref": "#/parameters/resourceGroupNameParameter"
+          },
+          {
+            "name": "profileName",
+            "in": "path",
+            "description": "Name of the CDN profile which is unique within the resource group.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "endpointName",
+            "in": "path",
+            "description": "Name of the endpoint under the profile which is unique globally.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "customDomainName",
+            "in": "path",
+            "description": "Name of the custom domain within an endpoint.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "$ref": "#/parameters/subscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          }
+        ],
+        "responses": {
+          "202": {
+            "description": "Accepted and the operation will complete asynchronously.",
+            "schema": {
+              "$ref": "#/definitions/CustomDomain"
+            }
+          },
+          "200": {
+            "description": "OK. The request has succeeded."
+          },
+          "default": {
+            "description": "CDN error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Cdn/profiles/{profileName}/endpoints/{endpointName}/customDomains/{customDomainName}/enableCustomHttps": {
+      "post": {
+        "tags": [
+          "CustomDomains"
+        ],
+        "description": "Enable https delivery of the custom domain.",
+        "operationId": "CustomDomains_EnableCustomHttps",
+        "parameters": [
+          {
+            "$ref": "#/parameters/resourceGroupNameParameter"
+          },
+          {
+            "name": "profileName",
+            "in": "path",
+            "description": "Name of the CDN profile which is unique within the resource group.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "endpointName",
+            "in": "path",
+            "description": "Name of the endpoint under the profile which is unique globally.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "customDomainName",
+            "in": "path",
+            "description": "Name of the custom domain within an endpoint.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "$ref": "#/parameters/subscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          }
+        ],
+        "responses": {
+          "202": {
+            "description": "Accepted and the operation will complete asynchronously.",
+            "schema": {
+              "$ref": "#/definitions/CustomDomain"
+            }
+          },
+          "200": {
+            "description": "OK. The request has succeeded."
+          },
+          "default": {
+            "description": "CDN error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        }
+      }
+    },
     "/providers/Microsoft.Cdn/checkNameAvailability": {
       "post": {
         "tags": [
@@ -1431,7 +1547,7 @@
           "CheckResourceUsage"
         ],
         "description": "Check the quota and actual usage of the CDN profiles under the given subscription.",
-        "operationId": "CheckResourceUsage",
+        "operationId": "ListResourceUsage",
         "parameters": [
           {
             "$ref": "#/parameters/subscriptionIdParameter"
@@ -1515,6 +1631,9 @@
               "$ref": "#/definitions/ErrorResponse"
             }
           }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
         }
       }
     }
@@ -2020,6 +2139,22 @@
             "modelAsString": true
           }
         },
+        "customHttpsProvisioningState": {
+          "description": "Provisioning state of Custom Https of the custom domain.",
+          "readOnly": true,
+          "enum": [
+            "Enabling",
+            "Enabled",
+            "Disabling",
+            "Disabled",
+            "Failed"
+          ],
+          "type": "string",
+          "x-ms-enum": {
+            "name": "CustomHttpsProvisioningState",
+            "modelAsString": true
+          }
+        },
         "validationData": {
           "description": "Special validation or data may be required when delivering CDN to some regions due to local compliance reasons. E.g. ICP license number of a custom domain is required to deliver content in China.",
           "type": "string"
@@ -2237,6 +2372,10 @@
             "$ref": "#/definitions/EdgeNode"
           },
           "description": "Edge node of CDN service."
+        },
+        "nextLink": {
+          "type": "string",
+          "description": "URL to get the next set of edgenode list results if there are any."
         }
       }
     },

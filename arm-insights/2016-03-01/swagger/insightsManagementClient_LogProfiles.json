@@ -64,20 +64,26 @@
             },
             "examples": {
               "application/json": {
-                "storageAccountId": "/subscriptions/6983c752-c9b8-48dd-b4d4-da739beb7e98/resourceGroups/Default-Storage-WestUS/providers/Microsoft.ClassicStorage/storageAccounts/armlogs1",
-                "serviceBusRuleId": "/subscriptions/6983c752-c9b8-48dd-b4d4-da739beb7e98/resourceGroups/Default-ServiceBus-WestUS/providers/Microsoft.ServiceBus/namespaces/myNamespace/RootManageSharedAccessKey",
-                "locations": [
-                  "eastus",
-                  "westus"
-                ],
-                "categories": [
-                  "Write",
-                  "Delete",
-                  "Action"
-                ],
-                "retentionPolicy": {
-                  "enabled": true,
-                  "days": 1
+                "id":"/subscriptions/df602c9c-7aa0-407d-a6fb-eb20c8bd1192/providers/microsoft.insights/logprofiles/default",
+                "type":"",
+                "name":"default",
+                "location":"",
+                "tags":null,
+                "properties": {
+                  "storageAccountId":"/subscriptions/df602c9c-7aa0-407d-a6fb-eb20c8bd1192/resourceGroups/JohnKemTest/providers/Microsoft.Storage/storageAccounts/johnkemtest8162",
+                  "serviceBusRuleId":"",
+                  "locations": [
+                    "global"
+                  ],
+                  "categories": [
+                    "Delete",
+                    "Write",
+                    "Action"
+                  ],
+                  "retentionPolicy": {
+                    "enabled":true,
+                    "days":3
+                  }
                 }
               }
             }
@@ -102,7 +108,7 @@
             "in": "body",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/LogProfileProperties"
+              "$ref": "#/definitions/LogProfileResource"
             },
             "description": "Parameters supplied to the operation."
           },
@@ -118,20 +124,26 @@
             },
             "examples": {
               "application/json": {
-                "storageAccountId": "/subscriptions/6983c752-c9b8-48dd-b4d4-da739beb7e98/resourceGroups/Default-Storage-WestUS/providers/Microsoft.ClassicStorage/storageAccounts/armlogs1",
-                "serviceBusRuleId": "/subscriptions/6983c752-c9b8-48dd-b4d4-da739beb7e98/resourceGroups/Default-ServiceBus-WestUS/providers/Microsoft.ServiceBus/namespaces/myNamespace/RootManageSharedAccessKey",
-                "locations": [
-                  "eastus",
-                  "westus"
-                ],
-                "categories": [
-                  "Write",
-                  "Delete",
-                  "Action"
-                ],
-                "retentionPolicy": {
-                  "enabled": true,
-                  "days": 1
+                "id":"/subscriptions/df602c9c-7aa0-407d-a6fb-eb20c8bd1192/providers/microsoft.insights/logprofiles/default",
+                "type":"",
+                "name":"default",
+                "location":"",
+                "tags":null,
+                "properties": {
+                  "storageAccountId":"/subscriptions/df602c9c-7aa0-407d-a6fb-eb20c8bd1192/resourceGroups/JohnKemTest/providers/Microsoft.Storage/storageAccounts/johnkemtest8162",
+                  "serviceBusRuleId":"",
+                  "locations":[
+                    "global"
+                  ],
+                  "categories": [
+                    "Delete",
+                    "Write",
+                    "Action"
+                  ],
+                  "retentionPolicy": {
+                    "enabled":true,
+                    "days":3
+                  }
                 }
               }
             }
@@ -218,7 +230,7 @@
       "description": "Specifies the retention policy for the log."
     },
     "LogProfileProperties": {
-      "required": ["storageAccountId", "locations"],
+      "required": [ "locations" ],
       "properties": {
         "storageAccountId": {
           "type": "string",

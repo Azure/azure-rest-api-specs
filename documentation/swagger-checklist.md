@@ -5,11 +5,11 @@
 Latest version: [https://github.com/Azure/azure-rest-api-specs/blob/master/documentation/swagger-checklist.md](https://github.com/Azure/azure-rest-api-specs/blob/master/documentation/swagger-checklist.md)
 
 Editors:</br>
-Asir Selvasingh, Microsoft</br>
-Amar Zavery, Microsoft</br>
 Mark Cowlishaw, Microsoft</br>
-Johan Stenberg, Microsoft</br>
 Kirthi Krishnamraju, Microsoft</br>
+Asir Selvasingh, Microsoft</br>
+Johan Stenberg, Microsoft</br>
+Amar Zavery, Microsoft</br>
 
 
 ## Executive Summary ##
@@ -65,7 +65,9 @@ OR
 
 - [ ] **Snnnn**: checklist text here.
 
-Where "M" stands for '*MUST*' or '*MUST NOT*' requirement. "S" stands for '*SHOULD*' or '*SHOULD NOT*' requirement. And, "nnnn" is replaced by a number that is unique among all the requirements in the checklist, thereby "nnnn" becomes a unique requirement identifier.
+"M" stands for a '*MUST*' or '*MUST NOT*' requirement. 
+"S" stands for a '*SHOULD*' or '*SHOULD NOT*' requirement. 
+"nnnn" is replaced by a number that is unique among all of the "M" or "S" requirements in the checklist, thereby "Mnnnn" or "Snnnn" becomes a unique requirement identifier.
 
 ## Validation Tools for Swagger Checklist ##
 
@@ -94,7 +96,7 @@ The Azure Developer Experience team will continue to deliver rich tools to valid
   - `ListByResourceGroup()` - list all resources in a resource group within a subscription.
   - `ListByParent()` - where "Parent" is a context specific suffix. It lists all resource under a parent.
 
-- [ ] **M1005**: :white_check_mark: Get operations *MUST* use the METHOD name "Get" or the METHOD name must start with "List"
+- [ ] **M1005**: :white_check_mark: GET operations *MUST* use the METHOD name "Get" or the METHOD name must start with "List"
 
 - [ ] **M1006**: :white_check_mark: PUT operations *MUST* use the METHOD Name "Create"
 
@@ -238,6 +240,14 @@ For example, [NetworkInterface.ipConfigurations](https://github.com/Azure/azure-
 - [ ] **M2055**: An operationId in the swagger spec *MUST NOT* be split by more than one underscore. Please use the "tags" array for adding extra names.
 
 - [ ] **M2056**: If the service (in Azure) only supports PATCHING tags on a Resource in the PATCH operation and has a PUT on the same resource which is named as "CreateOrUpdate", then it *MUST NOT* expose the "PATCH" operation in the swagger spec. 
+
+- :white_check_mark: **M2057**: A Sku object must have a property 'name' of type 'string'. It may also have the following properties: 'tier', 'size','family' and 'capacity'.
+
+- :white_check_mark: **M2058**: Paths in x-ms-paths must overload a normal path in the paths section, i.e. a path in the x-ms-path must either be same as a path in the paths section or a path in the paths sections followed by additional parameters.
+
+- :white_check_mark: **M2060**: x-ms-pageable operations must have a 200 response defined. Implemented as rule "PageableExtensionRule".
+
+- :white_check_mark: **M2061**: URLs should have parameterized resource type values instead of defaults. Implemented as rule "ProvidersPathValidation" in which all odd positions in the URL path followed by ```providers/providersNamespace``` are considered as resource type values
 
 ### SHOULD
 
