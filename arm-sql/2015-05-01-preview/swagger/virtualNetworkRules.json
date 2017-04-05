@@ -245,40 +245,32 @@
     "SubscriptionIdParameter": {
       "name": "subscriptionId",
       "in": "path",
-      "description": "The Azure subscription ID.",
+      "description": "The subscription ID that identifies an Azure subscription.",
       "required": true,
       "type": "string"
     },
     "ApiVersionParameter": {
       "name": "api-version",
       "in": "query",
-      "description": "Client Api Version.",
+      "description": "The API version to use for the request.",
       "required": true,
-      "type": "string",
-      "x-ms-parameter-location": "client"
+      "x-ms-parameter-location": "client",
+      "type": "string"
     },
     "ResourceGroupParameter": {
       "name": "resourceGroupName",
       "in": "path",
-      "description": "The name of the resource group that contains the resource.",
+      "description": "The name of the resource group that contains the resource. You can obtain this value from the Azure Resource Manager API or the portal.",
       "required": true,
-      "type": "string",
-      "x-ms-parameter-location": "method"
+      "x-ms-parameter-location": "method",
+      "type": "string"
     },
     "ServerNameParameter": {
       "name": "serverName",
       "in": "path",
+      "required": true,
+      "type": "string",
       "description": "The name of the server.",
-      "required": true,
-      "type": "string",
-      "x-ms-parameter-location": "method"
-    },
-    "DatabaseNameParameter": {
-      "name": "databaseName",
-      "in": "path",
-      "description": "The name of the database.",
-      "required": true,
-      "type": "string",
       "x-ms-parameter-location": "method"
     }
   }
