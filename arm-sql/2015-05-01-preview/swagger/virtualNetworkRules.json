@@ -153,9 +153,9 @@
         "x-ms-examples": {
           "Lists the virtual network firewall rules": { "$ref": "../examples/VirtualNetworkRulesList.json" }
         },
-       "x-ms-paging": { 
-         "nextLinkName": "null" 
-         },
+        "x-ms-paging": { 
+        "nextLinkName": "null" 
+        },
         "parameters": [
           {
             "$ref": "#/parameters/ApiVersionParameter"
@@ -219,24 +219,17 @@
       "type": "object",
       "properties": {
         "properties": {
-          "$ref": "#/definitions/VnetFirewallRuleResourceProperties",
+          "$ref": "#/definitions/VnetFirewallRuleProperties",
           "x-ms-flatten": "true"
-        },
-        "location": {
-          "type": "string"
-        },
-        "id": {
-          "type": "string"
-        },
-        "name": {
-          "type": "string"
-        },
-        "type": {
-          "type": "string"
         }
-      }
+      },
+      "allOf": [
+      {
+        "$ref": "#/definitions/ProxyResource"
+       }
+      ]
     },
-    "VnetFirewallRuleResourceProperties": {
+    "VnetFirewallRuleProperties": {
       "description": "Properties of a vnet firewall rule resource.",
       "type": "object",
       "properties": {
