@@ -28,6 +28,9 @@
         },
         "parameters": [
           {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
             "$ref": "#/parameters/SubscriptionIdParameter"
           },
           {
@@ -37,14 +40,7 @@
             "$ref": "#/parameters/ServerNameParameter"
           },
           {
-            "name": "vnetFirewallRuleName",
-            "in": "path",
-            "description": "The name of the Virtual Network Firewall Rule.",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "$ref": "#/parameters/ApiVersionParameter"
+            "$ref": "#/parameters/VnetFirewallRuleNameParameter"
           }
         ],
         "responses": {
@@ -70,6 +66,9 @@
         },
         "parameters": [
           {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
             "$ref": "#/parameters/SubscriptionIdParameter"
           },
           {
@@ -79,14 +78,7 @@
             "$ref": "#/parameters/ServerNameParameter"
           },
           {
-            "name": "vnetFirewallRuleName",
-            "in": "path",
-            "description": "The name of the Virtual Network Firewall Rule.",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "$ref": "#/parameters/ApiVersionParameter"
+            "$ref": "#/parameters/VnetFirewallRuleNameParameter"
           }
         ],
         "responses": {
@@ -122,6 +114,9 @@
         },
         "parameters": [
           {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
             "$ref": "#/parameters/SubscriptionIdParameter"
           },
           {
@@ -131,14 +126,7 @@
             "$ref": "#/parameters/ServerNameParameter"
           },
           {
-            "name": "vnetFirewallRuleName",
-            "in": "path",
-            "description": "The name of the Virtual Network Firewall Rule.",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "$ref": "#/parameters/ApiVersionParameter"
+            "$ref": "#/parameters/VnetFirewallRuleNameParameter"
           }
         ],
         "responses": {
@@ -161,11 +149,17 @@
           "VnetFirewallRule"
         ],
         "description": "Returns information about Vnet Firewall Rules.",
-        "operationId": "VnetFirewallRules_List",
+        "operationId": "VnetFirewallRules_ListByServer",
         "x-ms-examples": {
           "Lists the virtual network firewall rules": { "$ref": "../examples/VirtualNetworkRulesList.json" }
         },
+       "x-ms-paging": { 
+         "nextLinkName": "null" 
+         },
         "parameters": [
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
           {
             "$ref": "#/parameters/SubscriptionIdParameter"
           },
@@ -174,16 +168,13 @@
           },
           {
             "$ref": "#/parameters/ServerNameParameter"
-          },
-          {
-            "$ref": "#/parameters/ApiVersionParameter"
           }
         ],
         "responses": {
           "200": {
             "description": "Successfully retrieved the list of vnet firewall rules.",
             "schema": {
-              "$ref": "#/definitions/VnetFirewallRuleList"
+              "$ref": "#/definitions/VnetFirewallRuleListResult"
             }
           },
           "default": {
@@ -194,12 +185,42 @@
     }
   },
   "definitions": {
+    "Resource":{
+      "description":"ARM resource.",
+      "properties":{  
+        "id":{  
+          "readOnly":true,
+          "type":"string",
+          "description":"Resource ID."
+        },
+        "name":{  
+          "readOnly":true,
+          "type":"string",
+          "description":"Resource name."
+        },
+        "type":{  
+          "readOnly":true,
+          "type":"string",
+          "description":"Resource type."
+        }
+      },
+      "x-ms-azure-resource": true
+    },
+    "ProxyResource":{  
+      "description":"ARM proxy resource.",
+      "allOf":[  
+        {  
+          "$ref":"#/definitions/Resource"
+        }
+      ]
+    },
     "VnetFirewallRule": {
       "description": "Vnet Firewall Rule Resource.",
       "type": "object",
       "properties": {
         "properties": {
-          "$ref": "#/definitions/VnetFirewallRuleResourceProperties"
+          "$ref": "#/definitions/VnetFirewallRuleResourceProperties",
+          "x-ms-flatten": "true"
         },
         "location": {
           "type": "string"
@@ -225,7 +246,7 @@
         }
       }
     },
-    "VnetFirewallRuleList": {
+    "VnetFirewallRuleListResult": {
       "description": "A list of Vnet Firewall Rule Resource.",
       "type": "object",
       "properties": {
@@ -234,9 +255,6 @@
           "items": {
             "$ref": "#/definitions/VnetFirewallRule"
           }
-        },
-        "nextLink": {
-          "type": "string"
         }
       }
     }
@@ -272,6 +290,13 @@
       "type": "string",
       "description": "The name of the server.",
       "x-ms-parameter-location": "method"
+    },
+    "VnetFirewallRuleNameParameter": {
+      "name": "vnetFirewallRuleName",
+      "in": "path",
+      "description": "The name of the Virtual Network Firewall Rule.",
+      "required": true,
+      "type": "string"
     }
   }
 }
