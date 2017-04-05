@@ -248,6 +248,7 @@ For example, [NetworkInterface.ipConfigurations](https://github.com/Azure/azure-
 - :white_check_mark: **M2060**: x-ms-pageable operations must have a 200 response defined. Implemented as rule "PageableExtensionRule".
 
 - :white_check_mark: **M2061**: URLs should have parameterized resource type values instead of defaults. Implemented as rule "ProvidersPathValidation" in which all odd positions in the URL path followed by ```providers/providersNamespace``` are considered as resource type values
+- :white_check_mark: **M2062**: ARM specifications PUT operations return resource models. Validation rule "PutResponseResourceValidation" validates that these response models have the ```x-ms-azure-resource``` extension set to true.
 
 ### SHOULD
 
