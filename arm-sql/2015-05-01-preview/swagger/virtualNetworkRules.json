@@ -3,7 +3,7 @@
   "info": {
     "version": "2015-05-01-preview",
     "title": "SqlManagementClient",
-    "description": "The Database management API provides a RESTful set of web APIs that interact with Database services to manage your databases. The API enables users to create, retrieve, update, and delete databases, servers, and other entities."
+    "description": "The Virtual Network Rules API provides a RESTful set of web APIs that interact with firewall rules to manage your virtual networks. The API enables users to create, retrieve, update, and delete virtual network rules."
   },
   "host": "management.azure.com",
   "schemes": [
@@ -22,7 +22,7 @@
           "VnetFirewallRule"
         ],
         "description": "Returns information about a Vnet Firewall Rule.",
-        "operationId": "VnetFirewallRule_Get",
+        "operationId": "VnetFirewallRules_Get",
         "x-ms-examples": {
           "Gets the virtual network firewall rule": { "$ref": "../examples/VirtualNetworkRulesGet.json" }
         },
@@ -64,7 +64,7 @@
           "VnetFirewallRule"
         ],
         "description": "Creates a new Vnet Firewall Rule or updates an existing Vnet Firewall Rule.",
-        "operationId": "VnetFirewallRule_CreateOrUpdate",
+        "operationId": "VnetFirewallRules_CreateOrUpdate",
         "x-ms-examples": {
           "Create or update a virtual network firewall rule": { "$ref": "../examples/VirtualNetworkRulesCreateOrUpdate.json" }
         },
@@ -104,6 +104,9 @@
             "schema": {
               "$ref": "#/definitions/VnetFirewallRule"
             }
+          },
+          "202": {
+            "description": "Accepted"
           }
         },
         "x-ms-long-running-operation": true
@@ -113,7 +116,7 @@
           "VnetFirewallRule"
         ],
         "description": "Deletes the Vnet Firewall Rule with the given name.",
-        "operationId": "VnetFirewallRule_Delete",
+        "operationId": "VnetFirewallRules_Delete",
         "x-ms-examples": {
           "Delete a virtual network firewall rule": { "$ref": "../examples/VirtualNetworkRulesDelete.json" }
         },
@@ -158,7 +161,7 @@
           "VnetFirewallRule"
         ],
         "description": "Returns information about Vnet Firewall Rules.",
-        "operationId": "VnetFirewallRule_List",
+        "operationId": "VnetFirewallRules_List",
         "x-ms-examples": {
           "Lists the virtual network firewall rules": { "$ref": "../examples/VirtualNetworkRulesList.json" }
         },
@@ -191,65 +194,6 @@
     }
   },
   "definitions": {
-    "OperationListResult": {
-      "description": "Result of the request to list SQL operations.",
-      "type": "object",
-      "properties": {
-        "value": {
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/Operation"
-          }
-        },
-        "nextLink": {
-          "type": "string"
-        }
-      }
-    },
-    "Operation": {
-      "description": "SQL REST API operation definition.",
-      "type": "object",
-      "properties": {
-        "name": {
-          "type": "string"
-        },
-        "display": {
-          "$ref": "#/definitions/OperationDisplay"
-        },
-        "origin": {
-          "enum": [
-            "NotSpecified",
-            "user",
-            "system"
-          ],
-          "type": "string"
-        },
-        "properties": {
-          "type": "object",
-          "additionalProperties": {
-            "type": "object"
-          }
-        }
-      }
-    },
-    "OperationDisplay": {
-      "description": "Display metadata associated with the operation.",
-      "type": "object",
-      "properties": {
-        "provider": {
-          "type": "string"
-        },
-        "resource": {
-          "type": "string"
-        },
-        "operation": {
-          "type": "string"
-        },
-        "description": {
-          "type": "string"
-        }
-      }
-    },
     "VnetFirewallRule": {
       "description": "Vnet Firewall Rule Resource.",
       "type": "object",
