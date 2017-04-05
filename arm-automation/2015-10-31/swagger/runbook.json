@@ -79,6 +79,11 @@
         "externalDocs": {
           "url": "http://aka.ms/azureautomationsdk/runbookdraftoperations"
         },
+        "x-ms-examples": {
+          "Create or update runbook draft": {
+            "$ref": "../examples/runbook/createOrUpdateRunbookDraft.json"
+          }
+        },
         "parameters": [
           {
             "$ref": "./definitions.json#/parameters/ResourceGroupNameParameter"
@@ -102,7 +107,8 @@
             "in": "body",
             "required": true,
             "schema": {
-              "type": "string"
+              "type": "object",
+              "format": "file"
             },
             "description": "The runbook draft content."
           },
@@ -119,9 +125,6 @@
           },
           "200": {
             "description": "OK."
-          },
-          "201": {
-            "description": "Created"
           },
           "default": {
             "description": "Automation error response describing why the operation failed.",
