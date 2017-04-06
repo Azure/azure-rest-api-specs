@@ -66,9 +66,9 @@
             "examples": {
               "application/json": {
                 "id":"/subscriptions/1a66ce04-b633-4a0b-b2bc-a912ec8986a6/resourcegroups/viruela1/providers/microsoft.logic/workflows/viruela6/diagnosticSettings/mysetting",
-                "type":"",
+                "type":"microsoft.logic/workflows",
                 "name":"mysetting",
-                "location":"",
+                "location":"eastus",
                 "tags":null,
                 "properties": {
                   "storageAccountId":"/subscriptions/df602c9c-7aa0-407d-a6fb-eb20c8bd1192/resourceGroups/apptest/providers/Microsoft.Storage/storageAccounts/appteststorage1",
@@ -127,6 +127,12 @@
           }
         ],
         "responses": {
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          },
           "200": {
             "description": "Successful request to create a diagnostic setting",
             "schema": {
@@ -135,9 +141,9 @@
             "examples": {
               "application/json": {
                 "id":"/subscriptions/1a66ce04-b633-4a0b-b2bc-a912ec8986a6/resourcegroups/viruela1/providers/microsoft.logic/workflows/viruela6/diagnosticSettings/mysetting",
-                "type":"",
+                "type":"microsoft.logic/workflows",
                 "name":"mysetting",
-                "location":"",
+                "location":"eastus",
                 "tags":null,
                 "properties": {
                   "storageAccountId":"/subscriptions/df602c9c-7aa0-407d-a6fb-eb20c8bd1192/resourceGroups/apptest/providers/Microsoft.Storage/storageAccounts/appteststorage1",
@@ -187,8 +193,55 @@
           }
         ],
         "responses": {
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          },
           "200": {
             "description": "Successful request to remove a diagnostic setting"
+          },
+          "204": {
+            "description": "Successful request to remove a diagnostic setting"
+          }
+        }
+      },
+      "patch": {
+        "description": "Updates an existing DiagnosticSettingsResource tags. To update other fields use the CreateOrUpdate method.",
+        "operationId": "DiagnosticSettings_Update",
+        "parameters": [
+          {
+            "$ref": "#/parameters/ResourceUriParameter"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "name": "diagnosticSettingResource",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/DiagnosticSettingsResource"
+            },
+            "description": "Parameters supplied to the operation."
+          },
+          {
+            "$ref": "#/parameters/NameParameter"
+          }
+        ],
+        "responses": {
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          },
+          "200": {
+            "description": "An existing DiagnosticSettingResource was successfully updated.",
+            "schema": {
+              "$ref": "#/definitions/DiagnosticSettingsResource"
+            }
           }
         }
       }
@@ -242,6 +295,7 @@
         "days": {
           "type": "integer",
           "format": "int32",
+          "minimum": 0,
           "description": "the number of days for the retention in days. A value of 0 will retain the events indefinitely."
         }
       },
