@@ -15,6 +15,17 @@
   "produces": [
     "application/json"
   ],
+  "securityDefinitions": {
+    "azure_auth": {
+      "type": "oauth2",
+      "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
+      "flow": "implicit",
+      "description": "Azure Active Directory OAuth2 Flow",
+      "scopes": {
+        "user_impersonation": "impersonate your user account"
+      }
+    }
+  },
   "paths": {
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.CognitiveServices/accounts/{accountName}": {
       "put": {
@@ -36,9 +47,8 @@
             "in": "path",
             "required": true,
             "type": "string",
-            "description": "The name of the cognitive services account within the specified resource group. Cognitive Services account names must be between 3 and 24 characters in length and use numbers and lower-case letters only.",
-            "maxLength": 24,
-            "minLength": 3,
+            "maxLength": 64,
+            "minLength": 2,
             "pattern": "^[a-zA-Z0-9][a-zA-Z0-9_.-]*$"
           },
           {
@@ -97,9 +107,8 @@
             "in": "path",
             "required": true,
             "type": "string",
-            "description": "The name of the cognitive services account within the specified resource group. Cognitive Services account names must be between 3 and 24 characters in length and use numbers and lower-case letters only.",
-            "maxLength": 24,
-            "minLength": 3,
+            "maxLength": 64,
+            "minLength": 2,
             "pattern": "^[a-zA-Z0-9][a-zA-Z0-9_.-]*$"
           },
           {
@@ -153,9 +162,8 @@
             "in": "path",
             "required": true,
             "type": "string",
-            "description": "The name of the cognitive services account within the specified resource group. Cognitive Services account names must be between 3 and 24 characters in length and use numbers and lower-case letters only.",
-            "maxLength": 24,
-            "minLength": 3,
+            "maxLength": 64,
+            "minLength": 2,
             "pattern": "^[a-zA-Z0-9][a-zA-Z0-9_.-]*$"
           },
           {
@@ -199,9 +207,8 @@
             "in": "path",
             "required": true,
             "type": "string",
-            "description": "The name of the cognitive services account within the specified resource group. Cognitive Services account names must be between 3 and 24 characters in length and use numbers and lower-case letters only.",
-            "maxLength": 24,
-            "minLength": 3,
+            "maxLength": 64,
+            "minLength": 2,
             "pattern": "^[a-zA-Z0-9][a-zA-Z0-9_.-]*$"
           },
           {
@@ -322,9 +329,8 @@
             "in": "path",
             "required": true,
             "type": "string",
-            "description": "The name of the cognitive services account within the specified resource group. Cognitive Services account names must be between 3 and 24 characters in length and use numbers and lower-case letters only.",
-            "maxLength": 24,
-            "minLength": 3,
+            "maxLength": 64,
+            "minLength": 2,
             "pattern": "^[a-zA-Z0-9][a-zA-Z0-9_.-]*$"
           },
           {
@@ -370,9 +376,8 @@
             "in": "path",
             "required": true,
             "type": "string",
-            "description": "The name of the cognitive services account within the specified resource group. Cognitive Services account names must be between 3 and 24 characters in length and use numbers and lower-case letters only.",
-            "maxLength": 24,
-            "minLength": 3,
+            "maxLength": 64,
+            "minLength": 2,
             "pattern": "^[a-zA-Z0-9][a-zA-Z0-9_.-]*$"
           },
           {
@@ -428,9 +433,8 @@
             "in": "path",
             "required": true,
             "type": "string",
-            "description": "The name of the cognitive services account within the specified resource group. Cognitive Services account names must be between 3 and 24 characters in length and use numbers and lower-case letters only.",
-            "maxLength": 24,
-            "minLength": 3,
+            "maxLength": 64,
+            "minLength": 2,
             "pattern": "^[a-zA-Z0-9][a-zA-Z0-9_.-]*$"
           },
           {
@@ -608,7 +612,6 @@
           "description": "Gets or sets a list of key value pairs that describe the resource. These tags can be used in viewing and grouping this resource (across resource groups). A maximum of 15 tags can be provided for a resource. Each tag must have a key no greater than 128 characters and value no greater than 256 characters."
         },
         "properties": {
-          "x-ms-client-flatten": true,
           "$ref": "#/definitions/CognitiveServicesAccountPropertiesCreateParameters",
           "description": "Must exist in the request. Must not be null."
         }
@@ -653,7 +656,7 @@
       "properties": {
         "sku": {
           "$ref": "#/definitions/Sku",
-          "description": "Required. Gets or sets the SKU of the resource."
+          "description": "Gets or sets the SKU of the resource."
         },
         "tags": {
           "type": "object",
@@ -937,7 +940,7 @@
     "CheckSkuAvailabilityParameter": {
       "description": "Check SKU availability parameter.",
       "properties": {
-        "sku": {
+        "skus": {
           "type": "array",
           "items": {
             "$ref": "#/definitions/Sku"
@@ -975,7 +978,7 @@
         },
         "reason": {
           "type": "string",
-          "description": "Reaon why the SKU is not available.",
+          "description": "Reason why the SKU is not available.",
           "enum": [
             "Invalid",
             "NotEligible",
