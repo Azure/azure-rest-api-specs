@@ -250,6 +250,7 @@
       "x-ms-azure-resource": true
     },
     "ProxyResource": {
+      "description": "ARM proxy resource.",
       "type": "object",
       "allOf": [
         {
@@ -280,7 +281,8 @@
       "properties": {
         "nextLink": {
           "description": "Link to retrieve next page of results.",
-          "type": "string"
+          "type": "string",
+          "readOnly": true
         },
         "value": {
           "description": "Array of results.",
@@ -296,14 +298,14 @@
     "SubscriptionIdParameter": {
       "name": "subscriptionId",
       "in": "path",
-      "description": "The Azure subscription ID.",
+      "description": "The subscription ID that identifies an Azure subscription.",
       "required": true,
       "type": "string"
     },
     "ApiVersionParameter": {
       "name": "api-version",
       "in": "query",
-      "description": "Client Api Version.",
+      "description": "The API version to use for the request.",
       "required": true,
       "type": "string",
       "x-ms-parameter-location": "client"
@@ -311,7 +313,7 @@
     "ResourceGroupParameter": {
       "name": "resourceGroupName",
       "in": "path",
-      "description": "The name of the resource group that contains the resource.",
+      "description": "The name of the resource group that contains the resource. You can obtain this value from the Azure Resource Manager API or the portal.",
       "required": true,
       "type": "string",
       "x-ms-parameter-location": "method"
