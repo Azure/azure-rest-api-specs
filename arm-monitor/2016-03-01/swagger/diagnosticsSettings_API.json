@@ -76,7 +76,7 @@
                   "workspaceId":"",
                   "metrics": [
                     {
-                      "timeGrain":"PT1M",
+                      "category":"WorkflowMetrics",
                       "enabled":true,
                       "retentionPolicy": {
                         "enabled":false,
@@ -151,7 +151,7 @@
                   "workspaceId":"",
                   "metrics": [
                     {
-                      "timeGrain":"PT1M",
+                      "category":"WorkflowMetrics",
                       "enabled":true,
                       "retentionPolicy": {
                         "enabled":false,
@@ -309,6 +309,10 @@
           "format": "duration",
           "description": "the timegrain of the metric in ISO8601 format."
         },
+        "category": {
+          "type": "string",
+          "description": "Name of a Diagnostic Metric category for a resource type this setting is applied to. To obtain the list of Diagnostic metric categories for a resource, first perform a GET diagnostic settings operation."
+        },
         "enabled": {
           "type": "boolean",
           "description": "a value indicating whether this timegrain is enabled."
@@ -318,7 +322,7 @@
           "description": "the retention policy for this timegrain."
         }
       },
-      "required": [ "enabled", "timeGrain" ],
+      "required": [ "enabled" ],
       "description": "Part of MultiTenantDiagnosticSettings. Specifies the settings for a particular metric."
     },
     "LogSettings": {
