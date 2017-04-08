@@ -160,12 +160,6 @@
                         "description": "The name of the cluster."
                     },
                     {
-                        "$ref": "#/parameters/ApiVersionParameter"
-                    },
-                    {
-                        "$ref": "#/parameters/SubscriptionIdParameter"
-                    },
-                    {
                         "name": "applicationName",
                         "in": "path",
                         "required": true,
@@ -178,6 +172,21 @@
                             "name": "ApplicationName",
                             "modelAsString": false
                         }
+                    },
+                    {
+                        "name": "parameters",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/ApplicationGetProperties"
+                        },
+                        "description": "The application create request."
+                    },
+                    {
+                        "$ref": "#/parameters/ApiVersionParameter"
+                    },
+                    {
+                        "$ref": "#/parameters/SubscriptionIdParameter"
                     }
                 ],
                 "responses": {
@@ -219,7 +228,7 @@
                         "in": "path",
                         "required": true,
                         "type": "string",
-                        "description": "The constant value for the applicationName",
+                        "description": "The constant value for the applicationName.",
                         "enum": [
                             "hue"
                         ],
@@ -246,14 +255,15 @@
     },
     "definitions": {
         "ApplicationGetHttpsEndpoint": {
-            "description": "Gets application access modes",
+            "description": "Gets application Http endpoints.",
             "type": "object",
             "properties": {
                 "accessModes": {
                     "type": "array",
                     "items": {
                         "type": "string"
-                    }
+                    },
+                    "description": "Gets list of access modes for the application."
                 },
                 "location": {
                     "type": "string",
@@ -268,10 +278,10 @@
                     "type": "integer",
                     "format": "int32",
                     "description": "Gets the publicPort to connect to."
-                },
-                "additionalProperties": {
-                    "type": "string"
                 }
+            },
+            "additionalProperties": {
+                "type": "string"
             }
         },
         "ApplicationGetEndpoint": {
@@ -362,6 +372,7 @@
                     "description": "Gets the Marketplace identifier."
                 },
                 "additionalProperties": {
+                    "description": "Gets the additional properties for application.",
                     "type": "string"
                 }
             }
@@ -390,11 +401,11 @@
                     "type": "string"
                 },
                 "tags": {
+                    "description": "Gets or sets the application tags.",
                     "type": "object",
                     "additionalProperties": {
                         "type": "string"
-                    },
-                    "description": "Gets or sets the application tags."
+                    }
                 },
                 "properties": {
                     "$ref": "#/definitions/ApplicationGetProperties",
