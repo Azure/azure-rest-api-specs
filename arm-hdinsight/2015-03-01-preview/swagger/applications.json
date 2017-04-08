@@ -83,7 +83,7 @@
                 "tags": [
                     "Applications"
                 ],
-                "description": "List properties of the application.",
+                "description": "Lists properties of the application.",
                 "operationId": "Applications_Get",
                 "x-ms-examples": {
                     "Get application on HDInsight cluster successfully created.": {
@@ -263,21 +263,21 @@
                     "items": {
                         "type": "string"
                     },
-                    "description": "Gets list of access modes for the application."
+                    "description": "The list of access modes for the application."
                 },
                 "location": {
                     "type": "string",
-                    "description": "Gets the location of the endpoint."
+                    "description": "The location of the endpoint."
                 },
                 "destinationPort": {
                     "type": "integer",
                     "format": "int32",
-                    "description": "Gets the destinationPort to connect to."
+                    "description": "The destinationPort to connect to."
                 },
                 "publicPort": {
                     "type": "integer",
                     "format": "int32",
-                    "description": "Gets the publicPort to connect to."
+                    "description": "The publicPort to connect to."
                 }
             },
             "additionalProperties": {
@@ -290,17 +290,17 @@
             "properties": {
                 "location": {
                     "type": "string",
-                    "description": "Gets the location of the endpoint."
+                    "description": "The location of the endpoint."
                 },
                 "destinationPort": {
                     "type": "integer",
                     "format": "int32",
-                    "description": "Gets the destinationPort to connect to."
+                    "description": "The destinationPort to connect to."
                 },
                 "publicPort": {
                     "type": "integer",
                     "format": "int32",
-                    "description": "Gets the publicPort to connect to."
+                    "description": "The publicPort to connect to."
                 }
             }
         },
@@ -310,69 +310,69 @@
             "properties": {
                 "computeProfile": {
                     "$ref": "./cluster.json#/definitions/ComputeProfile",
-                    "description": "Gets or sets the list of roles in the cluster."
+                    "description": "The list of roles in the cluster."
                 },
                 "installScriptActions": {
                     "type": "array",
                     "items": {
                         "$ref": "./cluster.json#/definitions/RuntimeScriptAction"
                     },
-                    "description": "Gets uninstall script actions."
+                    "description": "The list of install script actions."
                 },
                 "uninstallScriptActions": {
                     "type": "array",
                     "items": {
                         "$ref": "./cluster.json#/definitions/RuntimeScriptAction"
                     },
-                    "description": "Gets uninstall script actions."
+                    "description": "The list of uninstall script actions."
                 },
                 "httpsEndpoints": {
                     "type": "array",
                     "items": {
                         "$ref": "#/definitions/ApplicationGetHttpsEndpoint"
                     },
-                    "description": "Gets application Https endpoints."
+                    "description": "The list of application Https endpoints."
                 },
                 "sshEndpoints": {
                     "type": "array",
                     "items": {
                         "$ref": "#/definitions/ApplicationGetEndpoint"
                     },
-                    "description": "Gets application ssh endpoints."
+                    "description": "The list of application ssh endpoints."
                 },
                 "provisioningState": {
                     "readOnly": true,
                     "type": "string",
-                    "description": "Gets the provisioning state of the application"
+                    "description": "The provisioning state of the application"
                 },
                 "applicationType": {
                     "type": "string",
-                    "description": "Gets the Application type."
+                    "description": "The Application type."
                 },
                 "applicationState": {
                     "readOnly": true,
                     "type": "string",
-                    "description": "Gets the Application state."
+                    "description": "The Application state."
                 },
                 "errors": {
                     "type": "array",
                     "items": {
                         "$ref": "./cluster.json#/definitions/errors"
                     },
-                    "description": "Gets or sets the list of errors."
+                    "description": "The list of errors."
                 },
                 "createdDate": {
                     "readOnly": true,
                     "type": "string",
-                    "description": "Gets the application created date time."
+                    "description": "The application create date time."
                 },
                 "marketplaceIdentifier": {
                     "readOnly": true,
                     "type": "string",
-                    "description": "Gets the Marketplace identifier."
+                    "description": "The Marketplace identifier."
                 },
                 "additionalProperties": {
-                    "description": "Gets the additional properties for application.",
+                    "description": "The additional properties for application.",
                     "type": "string"
                 }
             }
@@ -384,24 +384,24 @@
                 "id": {
                     "readOnly": true,
                     "$ref": "./cluster.json#/definitions/SubResource",
-                    "description": "Gets or sets the ID of the application"
+                    "description": "The resource id for the application"
                 },
                 "name": {
                     "readOnly": true,
-                    "description": "Gets or sets the name of the application.",
+                    "description": "The name of the application.",
                     "type": "string"
                 },
                 "type": {
                     "readOnly": true,
-                    "description": "Gets or sets the type of application.",
+                    "description": "The type of application.",
                     "type": "string"
                 },
                 "etag": {
-                    "description": "Gets or sets the ETag for the application",
+                    "description": "The ETag for the application",
                     "type": "string"
                 },
                 "tags": {
-                    "description": "Gets or sets the application tags.",
+                    "description": "The tags for the application.",
                     "type": "object",
                     "additionalProperties": {
                         "type": "string"

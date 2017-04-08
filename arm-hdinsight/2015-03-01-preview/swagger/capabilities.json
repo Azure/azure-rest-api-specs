@@ -87,7 +87,7 @@
                 },
                 "componentVersions": {
                     "type": "object",
-                    "description": "Gets or Sets component version property.",
+                    "description": "The component version property.",
                     "additionalProperties": {
                         "type": "string"
                     }
@@ -95,7 +95,7 @@
             }
         },
         "versionsCapability": {
-            "description": "Gets or sets version capability.",
+            "description": "The version capability.",
             "properties": {
                 "available": {
                     "description": "Gets the list of version capabilities.",
@@ -107,7 +107,7 @@
             }
         },
         "regionsCapability": {
-            "description": "Gets or sets regions capability.",
+            "description": "The regions capability.",
             "properties": {
                 "available": {
                     "description": "Gets the list of region capabilities.",
@@ -119,7 +119,7 @@
             }
         },
         "vmSizesCapability": {
-            "description": "Gets or sets virtual machine sizes capability.",
+            "description": "The virtual machine sizes capability.",
             "properties": {
                 "available": {
                     "description": "Gets the list of virtual machine size capabilities.",
@@ -131,42 +131,42 @@
             }
         },
         "vmSizeCompatibilityFilter": {
-            "description": "Gets or sets virtual machine type compatibility filter.",
+            "description": "The virtual machine type compatibility filter.",
             "properties": {
                 "FilterMode": {
                     "description": "Gets the mode for the filter.",
                     "type": "string"
                 },
                 "Regions": {
-                    "description": "Gets the list of regions.",
+                    "description": "The list of regions.",
                     "type": "array",
                     "items": {
                         "type": "string"
                     }
                 },
                 "ClusterFlavors": {
-                    "description": "Gets the list of cluster types available.",
+                    "description": "The list of cluster types available.",
                     "type": "array",
                     "items": {
                         "type": "string"
                     }
                 },
                 "NodeTypes": {
-                    "description": "Gets the list of node types.",
+                    "description": "The list of node types.",
                     "type": "array",
                     "items": {
                         "type": "string"
                     }
                 },
                 "ClusterVersions": {
-                    "description": "Gets the list of cluster versions.",
+                    "description": "The list of cluster versions.",
                     "type": "array",
                     "items": {
                         "type": "string"
                     }
                 },
                 "vmsizes": {
-                    "description": "Gets the list of virtual machine sizes.",
+                    "description": "The list of virtual machine sizes.",
                     "type": "array",
                     "items": {
                         "type": "string"
@@ -175,29 +175,29 @@
             }
         },
         "regionalQuotaCapability": {
-            "description": "Gets or sets regional quota capacity.",
+            "description": "The regional quota capacity.",
             "properties": {
                 "region_name": {
                     "description": "Gets the region name.",
                     "type": "string"
                 },
                 "cores_used": {
-                    "description": "Gets the number of cores used in the region.",
+                    "description": "The number of cores used in the region.",
                     "type": "integer",
                     "format": "int64"
                 },
                 "cores_available": {
-                    "description": "Gets the number of courses available in the region.",
+                    "description": "The number of courses available in the region.",
                     "type": "integer",
                     "format": "int64"
                 }
             }
         },
         "quotaCapability": {
-            "description": "Gets or sets regional quota capability.",
+            "description": "The regional quota capability.",
             "properties": {
                 "regionalQuotas": {
-                    "description": "Gets or sets region quota capabilities.",
+                    "description": "The list of region quota capabilities.",
                     "type": "array",
                     "items": {
                         "$ref": "#/definitions/regionalQuotaCapability"
@@ -209,42 +209,42 @@
             "description": "The Get Capabilities operation response.",
             "properties": {
                 "versions": {
-                    "description": "Gets the version capability.",
+                    "description": "The version capability.",
                     "type": "object",
                     "additionalProperties": {
                         "$ref": "#/definitions/versionsCapability"
                     }
                 },
                 "regions": {
-                    "description": "Gets the virtual machine size compatibilty features.",
+                    "description": "The virtual machine size compatibilty features.",
                     "type": "object",
                     "additionalProperties": {
                         "$ref": "#/definitions/regionsCapability"
                     }
                 },
                 "vmsizes": {
-                    "description": "Gets the virtual machine sizes.",
+                    "description": "The virtual machine sizes.",
                     "type": "object",
                     "additionalProperties": {
                         "$ref": "#/definitions/vmSizesCapability"
                     }
                 },
                 "vmsize_filters": {
-                    "description": "Gets the virtual machine size compatibilty filters.",
+                    "description": "The virtual machine size compatibilty filters.",
                     "type": "array",
                     "items": {
                         "$ref": "#/definitions/vmSizeCompatibilityFilter"
                     }
                 },
                 "features": {
-                    "description": "Gets the capabilty features.",
+                    "description": "The capabilty features.",
                     "type": "array",
                     "items": {
                         "type": "string"
                     }
                 },
                 "quota": {
-                    "description": "Gets the quota capability.",
+                    "description": "The quota capability.",
                     "$ref": "#/definitions/quotaCapability"
                 }
             }
