@@ -2042,10 +2042,6 @@
           "type": "string",
           "readOnly": true
         },
-        "kind": {
-          "description": "Kind of the app service environment",
-          "type": "string"
-        },
         "resourceGroup": {
           "description": "Resource group of the App Service Environment.",
           "type": "string",
@@ -2409,6 +2405,10 @@
         "trafficManagerProfileName": {
           "description": "Name of Traffic Manager profile to create. This is only needed if Traffic Manager profile does not already exist.",
           "type": "string"
+        },
+        "ignoreQuotas": {
+          "description": "<code>true</code> if quotas should be ignored; otherwise, <code>false</code>.",
+          "type": "boolean"
         }
       }
     },
@@ -2436,7 +2436,8 @@
             "EventHub",
             "ApiHub",
             "DocDb",
-            "RedisCache"
+            "RedisCache",
+            "PostgreSQL"
           ],
           "type": "string",
           "x-ms-enum": {
