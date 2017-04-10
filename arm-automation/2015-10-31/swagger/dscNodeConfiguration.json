@@ -1,0 +1,251 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "AutomationManagement",
+    "version": "2015-10-31"
+  },
+  "host": "management.azure.com",
+  "schemes": [
+    "https"
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "produces": [
+    "application/json"
+  ],
+  "paths": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Automation/automationAccounts/{automationAccountName}/nodeConfigurations/{nodeConfigurationName}": {
+      "delete": {
+        "tags": [
+          "DscNodeConfiguration"
+        ],
+        "operationId": "DscNodeConfiguration_Delete",
+        "description": "Delete the Dsc node configurations by node configuration.",
+        "externalDocs": {
+          "url": "http://aka.ms/azureautomationsdk/dscnodeconfigurations"
+        },
+        "x-ms-examples": {
+          "Delete a DSC node configuration": {
+            "$ref": "../examples/dscNodeConfiguration/deleteDscNodeConfiguration.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "./definitions.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "automationAccountName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The automation account name."
+          },
+          {
+            "name": "nodeConfigurationName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The Dsc node configuration name."
+          },
+          {
+            "$ref": "./definitions.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "./definitions.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "default": {
+            "description": "Automation error response describing why the operation failed.",
+            "schema": {
+              "$ref": "./definitions.json#/definitions/ErrorResponse"
+            }
+          }
+        }
+      },
+      "get": {
+        "tags": [
+          "DscNodeConfiguration"
+        ],
+        "operationId": "DscNodeConfiguration_Get",
+        "description": "Retrieve the Dsc node configurations by node configuration.",
+        "externalDocs": {
+          "url": "http://aka.ms/azureautomationsdk/dscnodeconfigurations"
+        },
+        "x-ms-examples": {
+          "Get a DSC node configuration": {
+            "$ref": "../examples/dscNodeConfiguration/getDscNodeConfiguration.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "./definitions.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "automationAccountName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The automation account name."
+          },
+          {
+            "name": "nodeConfigurationName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The Dsc node configuration name."
+          },
+          {
+            "$ref": "./definitions.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "./definitions.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "./definitions.json#/definitions/DscNodeConfiguration"
+            }
+          },
+          "default": {
+            "description": "Automation error response describing why the operation failed.",
+            "schema": {
+              "$ref": "./definitions.json#/definitions/ErrorResponse"
+            }
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "DscNodeConfiguration"
+        ],
+        "operationId": "DscNodeConfiguration_CreateOrUpdate",
+        "description": "Create the node configuration identified by node configuration name.",
+        "externalDocs": {
+          "url": "http://aka.ms/azureautomationsdk/dscnodeconfigurations"
+        },
+        "parameters": [
+          {
+            "$ref": "./definitions.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "automationAccountName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The automation account name."
+          },
+          {
+            "name": "nodeConfigurationName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The create or update parameters for configuration."
+          },
+          {
+            "name": "parameters",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "./definitions.json#/definitions/DscNodeConfigurationCreateOrUpdateParameters"
+            },
+            "description": "The create or update parameters for configuration."
+          },
+          {
+            "$ref": "./definitions.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "./definitions.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "./definitions.json#/definitions/DscNodeConfiguration"
+            }
+          },
+          "201": {
+            "description": "Created",
+            "schema": {
+              "$ref": "./definitions.json#/definitions/DscNodeConfiguration"
+            }
+          },
+          "default": {
+            "description": "Automation error response describing why the operation failed.",
+            "schema": {
+              "$ref": "./definitions.json#/definitions/ErrorResponse"
+            }
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Automation/automationAccounts/{automationAccountName}/nodeConfigurations": {
+      "get": {
+        "tags": [
+          "DscNodeConfiguration"
+        ],
+        "operationId": "DscNodeConfiguration_ListByAutomationAccount",
+        "description": "Retrieve a list of dsc node configurations.",
+        "externalDocs": {
+          "url": "http://aka.ms/azureautomationsdk/dscnodeconfigurations"
+        },
+        "x-ms-examples": {
+          "List DSC node configurations by Automation Account": {
+            "$ref": "../examples/dscNodeConfiguration/listDscNodeConfigurations.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "./definitions.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "automationAccountName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The automation account name."
+          },
+          {
+            "name": "$filter",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "description": "The filter to apply on the operation."
+          },
+          {
+            "$ref": "./definitions.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "./definitions.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "./definitions.json#/definitions/DscNodeConfigurationListResult"
+            }
+          },
+          "default": {
+            "description": "Automation error response describing why the operation failed.",
+            "schema": {
+              "$ref": "./definitions.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    }
+  },
+  "definitions": {},
+  "parameters": {}
+}

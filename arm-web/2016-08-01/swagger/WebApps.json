@@ -1622,7 +1622,7 @@
           "200": {
             "description": "OK",
             "schema": {
-              "$ref": "#/definitions/SiteConfig"
+              "$ref": "#/definitions/SiteConfigResource"
             }
           }
         }
@@ -1662,7 +1662,7 @@
             "description": "JSON representation of a SiteConfig object. See example.",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/SiteConfig"
+              "$ref": "#/definitions/SiteConfigResource"
             }
           },
           {
@@ -1676,7 +1676,7 @@
           "200": {
             "description": "OK",
             "schema": {
-              "$ref": "#/definitions/SiteConfig"
+              "$ref": "#/definitions/SiteConfigResource"
             }
           }
         }
@@ -1716,7 +1716,7 @@
             "description": "JSON representation of a SiteConfig object. See example.",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/SiteConfig"
+              "$ref": "#/definitions/SiteConfigResource"
             }
           },
           {
@@ -1730,7 +1730,7 @@
           "200": {
             "description": "OK",
             "schema": {
-              "$ref": "#/definitions/SiteConfig"
+              "$ref": "#/definitions/SiteConfigResource"
             }
           }
         }
@@ -1824,7 +1824,7 @@
           "200": {
             "description": "OK",
             "schema": {
-              "$ref": "#/definitions/SiteConfig"
+              "$ref": "#/definitions/SiteConfigResource"
             }
           }
         }
@@ -3632,6 +3632,48 @@
         "x-ms-long-running-operation": true
       }
     },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Web/sites/{name}/migratemysql/status": {
+      "get": {
+        "tags": [
+          "WebApps"
+        ],
+        "summary": "Returns the status of MySql in app migration, if one is active, and whether or not MySql in app is enabled",
+        "description": "Returns the status of MySql in app migration, if one is active, and whether or not MySql in app is enabled",
+        "operationId": "WebApps_GetMigrateMySqlStatus",
+        "produces": [
+          "application/json",
+          "text/json",
+          "application/xml",
+          "text/xml"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/resourceGroupNameParameter"
+          },
+          {
+            "name": "name",
+            "in": "path",
+            "description": "Name of web app",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "$ref": "#/parameters/subscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/MigrateMySqlStatus"
+            }
+          }
+        }
+      }
+    },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Web/sites/{name}/networkFeatures/{view}": {
       "get": {
         "tags": [
@@ -3705,16 +3747,29 @@
           {
             "name": "name",
             "in": "path",
-            "description": "The name of the web app",
+            "description": "The name of the web app.",
             "required": true,
             "type": "string"
           },
           {
             "name": "durationInSeconds",
             "in": "query",
-            "description": "The duration to keep capturing in seconds",
+            "description": "The duration to keep capturing in seconds.",
             "type": "integer",
             "format": "int32"
+          },
+          {
+            "name": "maxFrameLength",
+            "in": "query",
+            "description": "The maximum frame length in bytes (Optional).",
+            "type": "integer",
+            "format": "int32"
+          },
+          {
+            "name": "sasUrl",
+            "in": "query",
+            "description": "The Blob URL to store capture file.",
+            "type": "string"
           },
           {
             "$ref": "#/parameters/subscriptionIdParameter"
@@ -3754,7 +3809,7 @@
           {
             "name": "name",
             "in": "path",
-            "description": "The name of the web app",
+            "description": "The name of the web app.",
             "required": true,
             "type": "string"
           },
@@ -5973,7 +6028,7 @@
           "200": {
             "description": "OK",
             "schema": {
-              "$ref": "#/definitions/SiteConfig"
+              "$ref": "#/definitions/SiteConfigResource"
             }
           }
         }
@@ -6013,7 +6068,7 @@
             "description": "JSON representation of a SiteConfig object. See example.",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/SiteConfig"
+              "$ref": "#/definitions/SiteConfigResource"
             }
           },
           {
@@ -6034,7 +6089,7 @@
           "200": {
             "description": "OK",
             "schema": {
-              "$ref": "#/definitions/SiteConfig"
+              "$ref": "#/definitions/SiteConfigResource"
             }
           }
         }
@@ -6074,7 +6129,7 @@
             "description": "JSON representation of a SiteConfig object. See example.",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/SiteConfig"
+              "$ref": "#/definitions/SiteConfigResource"
             }
           },
           {
@@ -6095,7 +6150,7 @@
           "200": {
             "description": "OK",
             "schema": {
-              "$ref": "#/definitions/SiteConfig"
+              "$ref": "#/definitions/SiteConfigResource"
             }
           }
         }
@@ -6203,7 +6258,7 @@
           "200": {
             "description": "OK",
             "schema": {
-              "$ref": "#/definitions/SiteConfig"
+              "$ref": "#/definitions/SiteConfigResource"
             }
           }
         }
@@ -8121,6 +8176,55 @@
         }
       }
     },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Web/sites/{name}/slots/{slot}/migratemysql/status": {
+      "get": {
+        "tags": [
+          "WebApps"
+        ],
+        "summary": "Returns the status of MySql in app migration, if one is active, and whether or not MySql in app is enabled",
+        "description": "Returns the status of MySql in app migration, if one is active, and whether or not MySql in app is enabled",
+        "operationId": "WebApps_GetMigrateMySqlStatusSlot",
+        "produces": [
+          "application/json",
+          "text/json",
+          "application/xml",
+          "text/xml"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/resourceGroupNameParameter"
+          },
+          {
+            "name": "name",
+            "in": "path",
+            "description": "Name of web app",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "slot",
+            "in": "path",
+            "description": "Name of the deployment slot",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "$ref": "#/parameters/subscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/MigrateMySqlStatus"
+            }
+          }
+        }
+      }
+    },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Web/sites/{name}/slots/{slot}/networkFeatures/{view}": {
       "get": {
         "tags": [
@@ -8201,14 +8305,14 @@
           {
             "name": "name",
             "in": "path",
-            "description": "The name of the web app",
+            "description": "The name of the web app.",
             "required": true,
             "type": "string"
           },
           {
             "name": "durationInSeconds",
             "in": "query",
-            "description": "The duration to keep capturing in seconds",
+            "description": "The duration to keep capturing in seconds.",
             "type": "integer",
             "format": "int32"
           },
@@ -8217,6 +8321,19 @@
             "in": "path",
             "description": "The name of the slot for this web app.",
             "required": true,
+            "type": "string"
+          },
+          {
+            "name": "maxFrameLength",
+            "in": "query",
+            "description": "The maximum frame length in bytes (Optional).",
+            "type": "integer",
+            "format": "int32"
+          },
+          {
+            "name": "sasUrl",
+            "in": "query",
+            "description": "The Blob URL to store capture file.",
             "type": "string"
           },
           {
@@ -8257,7 +8374,7 @@
           {
             "name": "name",
             "in": "path",
-            "description": "The name of the web app",
+            "description": "The name of the web app.",
             "required": true,
             "type": "string"
           },
@@ -8879,7 +8996,7 @@
         ],
         "summary": "Get the difference in configuration settings between two web app slots.",
         "description": "Get the difference in configuration settings between two web app slots.",
-        "operationId": "WebApps_GetSlotsDifferencesSlot",
+        "operationId": "WebApps_ListSlotDifferencesSlot",
         "consumes": [
           "application/json",
           "text/json",
@@ -9901,7 +10018,7 @@
         ],
         "summary": "Get the difference in configuration settings between two web app slots.",
         "description": "Get the difference in configuration settings between two web app slots.",
-        "operationId": "WebApps_GetSlotsDifferencesFromProduction",
+        "operationId": "WebApps_ListSlotDifferencesFromProduction",
         "consumes": [
           "application/json",
           "text/json",
@@ -10988,7 +11105,7 @@
       ],
       "properties": {
         "properties": {
-          "description": "ARM envelope properties",
+          "description": "BackupItem resource specific properties",
           "properties": {
             "id": {
               "format": "int32",
@@ -11121,7 +11238,7 @@
       ],
       "properties": {
         "properties": {
-          "description": "ARM envelope properties",
+          "description": "BackupRequest resource specific properties",
           "required": [
             "name",
             "storageAccountUrl"
@@ -11489,7 +11606,7 @@
       ],
       "properties": {
         "properties": {
-          "description": "ARM envelope properties",
+          "description": "CustomHostnameAnalysisResult resource specific properties",
           "properties": {
             "isHostnameAlreadyVerified": {
               "description": "<code>true</code> if hostname is already verified; otherwise, <code>false</code>.",
@@ -11613,7 +11730,7 @@
       ],
       "properties": {
         "properties": {
-          "description": "ARM envelope properties",
+          "description": "Deployment resource specific properties",
           "properties": {
             "id": {
               "description": "ID.",
@@ -11701,14 +11818,6 @@
       "description": "Body of the error response returned from the API.",
       "type": "object",
       "properties": {
-        "code": {
-          "description": "Basic error code.",
-          "type": "string"
-        },
-        "message": {
-          "description": "Any details of the error.",
-          "type": "string"
-        },
         "extendedCode": {
           "description": "Type of error.",
           "type": "string"
@@ -11730,6 +11839,14 @@
           "items": {
             "$ref": "#/definitions/ErrorEntity"
           }
+        },
+        "code": {
+          "description": "Basic error code.",
+          "type": "string"
+        },
+        "message": {
+          "description": "Any details of the error.",
+          "type": "string"
         }
       }
     },
@@ -11818,7 +11935,7 @@
       ],
       "properties": {
         "properties": {
-          "description": "ARM envelope properties",
+          "description": "HostNameBinding resource specific properties",
           "required": [
             "name"
           ],
@@ -12051,7 +12168,7 @@
       ],
       "properties": {
         "properties": {
-          "description": "ARM envelope properties",
+          "description": "HybridConnection resource specific properties",
           "properties": {
             "serviceBusNamespace": {
               "description": "The name of the Service Bus namespace.",
@@ -12105,7 +12222,7 @@
       ],
       "properties": {
         "properties": {
-          "description": "ARM envelope properties",
+          "description": "HybridConnectionKey resource specific properties",
           "properties": {
             "sendKeyName": {
               "description": "The name of the send key.",
@@ -12132,7 +12249,7 @@
       ],
       "properties": {
         "properties": {
-          "description": "ARM envelope properties",
+          "description": "Identifier resource specific properties",
           "properties": {
             "id": {
               "description": "ID.",
@@ -12204,7 +12321,7 @@
       ],
       "properties": {
         "properties": {
-          "description": "ARM envelope properties",
+          "description": "MigrateMySqlRequest resource specific properties",
           "required": [
             "connectionString"
           ],
@@ -12212,6 +12329,49 @@
             "connectionString": {
               "description": "Connection string to the remote MySQL database to which data should be migrated.",
               "type": "string"
+            }
+          },
+          "x-ms-client-flatten": true
+        }
+      }
+    },
+    "MigrateMySqlStatus": {
+      "description": "MySQL migration status.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/Resource"
+        }
+      ],
+      "properties": {
+        "properties": {
+          "description": "MigrateMySqlStatus resource specific properties",
+          "properties": {
+            "migrationOperationStatus": {
+              "description": "Status of the migration task.",
+              "enum": [
+                "InProgress",
+                "Failed",
+                "Succeeded",
+                "TimedOut",
+                "Created"
+              ],
+              "type": "string",
+              "readOnly": true,
+              "x-ms-enum": {
+                "name": "OperationStatus",
+                "modelAsString": false
+              }
+            },
+            "operationId": {
+              "description": "Operation ID for the migration task.",
+              "type": "string",
+              "readOnly": true
+            },
+            "localMySqlEnabled": {
+              "description": "True if the web app has in app MySql enabled",
+              "type": "boolean",
+              "readOnly": true
             }
           },
           "x-ms-client-flatten": true
@@ -12242,7 +12402,7 @@
       ],
       "properties": {
         "properties": {
-          "description": "ARM envelope properties",
+          "description": "NetworkFeatures resource specific properties",
           "properties": {
             "virtualNetworkName": {
               "description": "The Virtual Network name.",
@@ -12429,7 +12589,7 @@
       ],
       "properties": {
         "properties": {
-          "description": "ARM envelope properties",
+          "description": "PremierAddOn resource specific properties",
           "properties": {
             "sku": {
               "description": "SKU.",
@@ -12550,7 +12710,7 @@
       ],
       "properties": {
         "properties": {
-          "description": "ARM envelope properties",
+          "description": "RecoverResponse resource specific properties",
           "properties": {
             "operationId": {
               "description": "ID of the recovery operation. Can be used to check the status of the corresponding operation.",
@@ -12572,7 +12732,7 @@
       ],
       "properties": {
         "properties": {
-          "description": "ARM envelope properties",
+          "description": "RelayServiceConnectionEntity resource specific properties",
           "properties": {
             "entityName": {
               "type": "string"
@@ -12758,7 +12918,7 @@
       ],
       "properties": {
         "properties": {
-          "description": "ARM envelope properties",
+          "description": "ResourceMetricDefinition resource specific properties",
           "properties": {
             "name": {
               "$ref": "#/definitions/ResourceMetricName",
@@ -12915,7 +13075,7 @@
       ],
       "properties": {
         "properties": {
-          "description": "ARM envelope properties",
+          "description": "RestoreRequest resource specific properties",
           "required": [
             "storageAccountUrl",
             "overwrite"
@@ -12986,7 +13146,7 @@
       ],
       "properties": {
         "properties": {
-          "description": "ARM envelope properties",
+          "description": "RestoreResponse resource specific properties",
           "properties": {
             "operationId": {
               "description": "When server starts the restore process, it will return an operation ID identifying that particular restore operation.",
@@ -13008,7 +13168,7 @@
       ],
       "properties": {
         "properties": {
-          "description": "ARM envelope properties",
+          "description": "Site resource specific properties",
           "properties": {
             "state": {
               "description": "Current state of the app.",
@@ -13130,7 +13290,7 @@
             },
             "microService": {
               "description": "Micro services like apps, logic apps.",
-              "default": false,
+              "default": "WebSites",
               "type": "string",
               "x-ms-mutability": [
                 "create",
@@ -13219,136 +13379,147 @@
     "SiteAuthSettings": {
       "description": "Configuration settings for the Azure App Service Authentication / Authorization feature.",
       "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/Resource"
+        }
+      ],
       "properties": {
-        "enabled": {
-          "description": "<code>true</code> if the Authentication / Authorization feature is enabled for the current app; otherwise, <code>false</code>.",
-          "type": "boolean"
-        },
-        "runtimeVersion": {
-          "description": "The RuntimeVersion of the Authentication / Authorization feature in use for the current app.\n The setting in this value can control the behavior of certain features in the Authentication / Authorization module.",
-          "type": "string"
-        },
-        "unauthenticatedClientAction": {
-          "description": "The action to take when an unauthenticated client attempts to access the app.",
-          "enum": [
-            "RedirectToLoginPage",
-            "AllowAnonymous"
-          ],
-          "type": "string",
-          "x-ms-enum": {
-            "name": "UnauthenticatedClientAction",
-            "modelAsString": false
-          }
-        },
-        "tokenStoreEnabled": {
-          "description": "<code>true</code> to durably store platform-specific security tokens that are obtained during login flows; otherwise, <code>false</code>.\n The default is <code>false</code>.",
-          "type": "boolean"
-        },
-        "allowedExternalRedirectUrls": {
-          "description": "External URLs that can be redirected to as part of logging in or logging out of the app. Note that the query string part of the URL is ignored.\n This is an advanced setting typically only needed by Windows Store application backends.\n Note that URLs within the current domain are always implicitly allowed.",
-          "type": "array",
-          "items": {
-            "type": "string"
-          }
-        },
-        "defaultProvider": {
-          "description": "The default authentication provider to use when multiple providers are configured.\n This setting is only needed if multiple providers are configured and the unauthenticated client\n action is set to \"RedirectToLoginPage\".",
-          "enum": [
-            "AzureActiveDirectory",
-            "Facebook",
-            "Google",
-            "MicrosoftAccount",
-            "Twitter"
-          ],
-          "type": "string",
-          "x-ms-enum": {
-            "name": "BuiltInAuthenticationProvider",
-            "modelAsString": false
-          }
-        },
-        "tokenRefreshExtensionHours": {
-          "format": "double",
-          "description": "The number of hours after session token expiration that a session token can be used to\n call the token refresh API. The default is 72 hours.",
-          "type": "number"
-        },
-        "clientId": {
-          "description": "The Client ID of this relying party application, known as the client_id.\n This setting is required for enabling OpenID Connection authentication with Azure Active Directory or \n other 3rd party OpenID Connect providers.\n More information on OpenID Connect: http://openid.net/specs/openid-connect-core-1_0.html",
-          "type": "string"
-        },
-        "clientSecret": {
-          "description": "The Client Secret of this relying party application (in Azure Active Directory, this is also referred to as the Key).\n This setting is optional. If no client secret is configured, the OpenID Connect implicit auth flow is used to authenticate end users.\n Otherwise, the OpenID Connect Authorization Code Flow is used to authenticate end users.\n More information on OpenID Connect: http://openid.net/specs/openid-connect-core-1_0.html",
-          "type": "string"
-        },
-        "issuer": {
-          "description": "The OpenID Connect Issuer URI that represents the entity which issues access tokens for this application.\n When using Azure Active Directory, this value is the URI of the directory tenant, e.g. https://sts.windows.net/{tenant-guid}/.\n This URI is a case-sensitive identifier for the token issuer.\n More information on OpenID Connect Discovery: http://openid.net/specs/openid-connect-discovery-1_0.html",
-          "type": "string"
-        },
-        "allowedAudiences": {
-          "description": "Allowed audience values to consider when validating JWTs issued by \n Azure Active Directory. Note that the <code>ClientID</code> value is always considered an\n allowed audience, regardless of this setting.",
-          "type": "array",
-          "items": {
-            "type": "string"
-          }
-        },
-        "additionalLoginParams": {
-          "description": "Login parameters to send to the OpenID Connect authorization endpoint when\n a user logs in. Each parameter must be in the form \"key=value\".",
-          "type": "array",
-          "items": {
-            "type": "string"
-          }
-        },
-        "googleClientId": {
-          "description": "The OpenID Connect Client ID for the Google web application.\n This setting is required for enabling Google Sign-In.\n Google Sign-In documentation: https://developers.google.com/identity/sign-in/web/",
-          "type": "string"
-        },
-        "googleClientSecret": {
-          "description": "The client secret associated with the Google web application.\n This setting is required for enabling Google Sign-In.\n Google Sign-In documentation: https://developers.google.com/identity/sign-in/web/",
-          "type": "string"
-        },
-        "googleOAuthScopes": {
-          "description": "The OAuth 2.0 scopes that will be requested as part of Google Sign-In authentication.\n This setting is optional. If not specified, \"openid\", \"profile\", and \"email\" are used as default scopes.\n Google Sign-In documentation: https://developers.google.com/identity/sign-in/web/",
-          "type": "array",
-          "items": {
-            "type": "string"
-          }
-        },
-        "facebookAppId": {
-          "description": "The App ID of the Facebook app used for login.\n This setting is required for enabling Facebook Login.\n Facebook Login documentation: https://developers.facebook.com/docs/facebook-login",
-          "type": "string"
-        },
-        "facebookAppSecret": {
-          "description": "The App Secret of the Facebook app used for Facebook Login.\n This setting is required for enabling Facebook Login.\n Facebook Login documentation: https://developers.facebook.com/docs/facebook-login",
-          "type": "string"
-        },
-        "facebookOAuthScopes": {
-          "description": "The OAuth 2.0 scopes that will be requested as part of Facebook Login authentication.\n This setting is optional.\n Facebook Login documentation: https://developers.facebook.com/docs/facebook-login",
-          "type": "array",
-          "items": {
-            "type": "string"
-          }
-        },
-        "twitterConsumerKey": {
-          "description": "The OAuth 1.0a consumer key of the Twitter application used for sign-in.\n This setting is required for enabling Twitter Sign-In.\n Twitter Sign-In documentation: https://dev.twitter.com/web/sign-in",
-          "type": "string"
-        },
-        "twitterConsumerSecret": {
-          "description": "The OAuth 1.0a consumer secret of the Twitter application used for sign-in.\n This setting is required for enabling Twitter Sign-In.\n Twitter Sign-In documentation: https://dev.twitter.com/web/sign-in",
-          "type": "string"
-        },
-        "microsoftAccountClientId": {
-          "description": "The OAuth 2.0 client ID that was created for the app used for authentication.\n This setting is required for enabling Microsoft Account authentication.\n Microsoft Account OAuth documentation: https://dev.onedrive.com/auth/msa_oauth.htm",
-          "type": "string"
-        },
-        "microsoftAccountClientSecret": {
-          "description": "The OAuth 2.0 client secret that was created for the app used for authentication.\n This setting is required for enabling Microsoft Account authentication.\n Microsoft Account OAuth documentation: https://dev.onedrive.com/auth/msa_oauth.htm",
-          "type": "string"
-        },
-        "microsoftAccountOAuthScopes": {
-          "description": "The OAuth 2.0 scopes that will be requested as part of Microsoft Account authentication.\n This setting is optional. If not specified, \"wl.basic\" is used as the default scope.\n Microsoft Account Scopes and permissions documentation: https://msdn.microsoft.com/en-us/library/dn631845.aspx",
-          "type": "array",
-          "items": {
-            "type": "string"
-          }
+        "properties": {
+          "description": "SiteAuthSettings resource specific properties",
+          "properties": {
+            "enabled": {
+              "description": "<code>true</code> if the Authentication / Authorization feature is enabled for the current app; otherwise, <code>false</code>.",
+              "type": "boolean"
+            },
+            "runtimeVersion": {
+              "description": "The RuntimeVersion of the Authentication / Authorization feature in use for the current app.\n The setting in this value can control the behavior of certain features in the Authentication / Authorization module.",
+              "type": "string"
+            },
+            "unauthenticatedClientAction": {
+              "description": "The action to take when an unauthenticated client attempts to access the app.",
+              "enum": [
+                "RedirectToLoginPage",
+                "AllowAnonymous"
+              ],
+              "type": "string",
+              "x-ms-enum": {
+                "name": "UnauthenticatedClientAction",
+                "modelAsString": false
+              }
+            },
+            "tokenStoreEnabled": {
+              "description": "<code>true</code> to durably store platform-specific security tokens that are obtained during login flows; otherwise, <code>false</code>.\n The default is <code>false</code>.",
+              "type": "boolean"
+            },
+            "allowedExternalRedirectUrls": {
+              "description": "External URLs that can be redirected to as part of logging in or logging out of the app. Note that the query string part of the URL is ignored.\n This is an advanced setting typically only needed by Windows Store application backends.\n Note that URLs within the current domain are always implicitly allowed.",
+              "type": "array",
+              "items": {
+                "type": "string"
+              }
+            },
+            "defaultProvider": {
+              "description": "The default authentication provider to use when multiple providers are configured.\n This setting is only needed if multiple providers are configured and the unauthenticated client\n action is set to \"RedirectToLoginPage\".",
+              "enum": [
+                "AzureActiveDirectory",
+                "Facebook",
+                "Google",
+                "MicrosoftAccount",
+                "Twitter"
+              ],
+              "type": "string",
+              "x-ms-enum": {
+                "name": "BuiltInAuthenticationProvider",
+                "modelAsString": false
+              }
+            },
+            "tokenRefreshExtensionHours": {
+              "format": "double",
+              "description": "The number of hours after session token expiration that a session token can be used to\n call the token refresh API. The default is 72 hours.",
+              "type": "number"
+            },
+            "clientId": {
+              "description": "The Client ID of this relying party application, known as the client_id.\n This setting is required for enabling OpenID Connection authentication with Azure Active Directory or \n other 3rd party OpenID Connect providers.\n More information on OpenID Connect: http://openid.net/specs/openid-connect-core-1_0.html",
+              "type": "string"
+            },
+            "clientSecret": {
+              "description": "The Client Secret of this relying party application (in Azure Active Directory, this is also referred to as the Key).\n This setting is optional. If no client secret is configured, the OpenID Connect implicit auth flow is used to authenticate end users.\n Otherwise, the OpenID Connect Authorization Code Flow is used to authenticate end users.\n More information on OpenID Connect: http://openid.net/specs/openid-connect-core-1_0.html",
+              "type": "string"
+            },
+            "issuer": {
+              "description": "The OpenID Connect Issuer URI that represents the entity which issues access tokens for this application.\n When using Azure Active Directory, this value is the URI of the directory tenant, e.g. https://sts.windows.net/{tenant-guid}/.\n This URI is a case-sensitive identifier for the token issuer.\n More information on OpenID Connect Discovery: http://openid.net/specs/openid-connect-discovery-1_0.html",
+              "type": "string"
+            },
+            "allowedAudiences": {
+              "description": "Allowed audience values to consider when validating JWTs issued by \n Azure Active Directory. Note that the <code>ClientID</code> value is always considered an\n allowed audience, regardless of this setting.",
+              "type": "array",
+              "items": {
+                "type": "string"
+              }
+            },
+            "additionalLoginParams": {
+              "description": "Login parameters to send to the OpenID Connect authorization endpoint when\n a user logs in. Each parameter must be in the form \"key=value\".",
+              "type": "array",
+              "items": {
+                "type": "string"
+              }
+            },
+            "googleClientId": {
+              "description": "The OpenID Connect Client ID for the Google web application.\n This setting is required for enabling Google Sign-In.\n Google Sign-In documentation: https://developers.google.com/identity/sign-in/web/",
+              "type": "string"
+            },
+            "googleClientSecret": {
+              "description": "The client secret associated with the Google web application.\n This setting is required for enabling Google Sign-In.\n Google Sign-In documentation: https://developers.google.com/identity/sign-in/web/",
+              "type": "string"
+            },
+            "googleOAuthScopes": {
+              "description": "The OAuth 2.0 scopes that will be requested as part of Google Sign-In authentication.\n This setting is optional. If not specified, \"openid\", \"profile\", and \"email\" are used as default scopes.\n Google Sign-In documentation: https://developers.google.com/identity/sign-in/web/",
+              "type": "array",
+              "items": {
+                "type": "string"
+              }
+            },
+            "facebookAppId": {
+              "description": "The App ID of the Facebook app used for login.\n This setting is required for enabling Facebook Login.\n Facebook Login documentation: https://developers.facebook.com/docs/facebook-login",
+              "type": "string"
+            },
+            "facebookAppSecret": {
+              "description": "The App Secret of the Facebook app used for Facebook Login.\n This setting is required for enabling Facebook Login.\n Facebook Login documentation: https://developers.facebook.com/docs/facebook-login",
+              "type": "string"
+            },
+            "facebookOAuthScopes": {
+              "description": "The OAuth 2.0 scopes that will be requested as part of Facebook Login authentication.\n This setting is optional.\n Facebook Login documentation: https://developers.facebook.com/docs/facebook-login",
+              "type": "array",
+              "items": {
+                "type": "string"
+              }
+            },
+            "twitterConsumerKey": {
+              "description": "The OAuth 1.0a consumer key of the Twitter application used for sign-in.\n This setting is required for enabling Twitter Sign-In.\n Twitter Sign-In documentation: https://dev.twitter.com/web/sign-in",
+              "type": "string"
+            },
+            "twitterConsumerSecret": {
+              "description": "The OAuth 1.0a consumer secret of the Twitter application used for sign-in.\n This setting is required for enabling Twitter Sign-In.\n Twitter Sign-In documentation: https://dev.twitter.com/web/sign-in",
+              "type": "string"
+            },
+            "microsoftAccountClientId": {
+              "description": "The OAuth 2.0 client ID that was created for the app used for authentication.\n This setting is required for enabling Microsoft Account authentication.\n Microsoft Account OAuth documentation: https://dev.onedrive.com/auth/msa_oauth.htm",
+              "type": "string"
+            },
+            "microsoftAccountClientSecret": {
+              "description": "The OAuth 2.0 client secret that was created for the app used for authentication.\n This setting is required for enabling Microsoft Account authentication.\n Microsoft Account OAuth documentation: https://dev.onedrive.com/auth/msa_oauth.htm",
+              "type": "string"
+            },
+            "microsoftAccountOAuthScopes": {
+              "description": "The OAuth 2.0 scopes that will be requested as part of Microsoft Account authentication.\n This setting is optional. If not specified, \"wl.basic\" is used as the default scope.\n Microsoft Account Scopes and permissions documentation: https://msdn.microsoft.com/en-us/library/dn631845.aspx",
+              "type": "array",
+              "items": {
+                "type": "string"
+              }
+            }
+          },
+          "x-ms-client-flatten": true
         }
       }
     },
@@ -13409,6 +13580,250 @@
     "SiteConfig": {
       "description": "Configuration of an App Service app.",
       "type": "object",
+      "properties": {
+        "numberOfWorkers": {
+          "format": "int32",
+          "description": "Number of workers.",
+          "type": "integer"
+        },
+        "defaultDocuments": {
+          "description": "Default documents.",
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "netFrameworkVersion": {
+          "description": ".NET Framework version.",
+          "default": "v4.6",
+          "type": "string"
+        },
+        "phpVersion": {
+          "description": "Version of PHP.",
+          "type": "string"
+        },
+        "pythonVersion": {
+          "description": "Version of Python.",
+          "type": "string"
+        },
+        "nodeVersion": {
+          "description": "Version of Node.js.",
+          "type": "string"
+        },
+        "linuxFxVersion": {
+          "description": "Linux App Framework and version",
+          "type": "string"
+        },
+        "requestTracingEnabled": {
+          "description": "<code>true</code> if request tracing is enabled; otherwise, <code>false</code>.",
+          "type": "boolean"
+        },
+        "requestTracingExpirationTime": {
+          "format": "date-time",
+          "description": "Request tracing expiration time.",
+          "type": "string"
+        },
+        "remoteDebuggingEnabled": {
+          "description": "<code>true</code> if remote debugging is enabled; otherwise, <code>false</code>.",
+          "type": "boolean"
+        },
+        "remoteDebuggingVersion": {
+          "description": "Remote debugging version.",
+          "type": "string"
+        },
+        "httpLoggingEnabled": {
+          "description": "<code>true</code> if HTTP logging is enabled; otherwise, <code>false</code>.",
+          "type": "boolean"
+        },
+        "logsDirectorySizeLimit": {
+          "format": "int32",
+          "description": "HTTP logs directory size limit.",
+          "type": "integer"
+        },
+        "detailedErrorLoggingEnabled": {
+          "description": "<code>true</code> if detailed error logging is enabled; otherwise, <code>false</code>.",
+          "type": "boolean"
+        },
+        "publishingUsername": {
+          "description": "Publishing user name.",
+          "type": "string"
+        },
+        "appSettings": {
+          "description": "Application settings.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/NameValuePair"
+          }
+        },
+        "connectionStrings": {
+          "description": "Connection strings.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ConnStringInfo"
+          }
+        },
+        "machineKey": {
+          "$ref": "#/definitions/SiteMachineKey",
+          "description": "Site MachineKey.",
+          "readOnly": true
+        },
+        "handlerMappings": {
+          "description": "Handler mappings.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/HandlerMapping"
+          }
+        },
+        "documentRoot": {
+          "description": "Document root.",
+          "type": "string"
+        },
+        "scmType": {
+          "description": "SCM type.",
+          "enum": [
+            "None",
+            "Dropbox",
+            "Tfs",
+            "LocalGit",
+            "GitHub",
+            "CodePlexGit",
+            "CodePlexHg",
+            "BitbucketGit",
+            "BitbucketHg",
+            "ExternalGit",
+            "ExternalHg",
+            "OneDrive",
+            "VSO"
+          ],
+          "type": "string",
+          "x-ms-enum": {
+            "name": "ScmType",
+            "modelAsString": true
+          }
+        },
+        "use32BitWorkerProcess": {
+          "description": "<code>true</code> to use 32-bit worker process; otherwise, <code>false</code>.",
+          "type": "boolean"
+        },
+        "webSocketsEnabled": {
+          "description": "<code>true</code> if WebSocket is enabled; otherwise, <code>false</code>.",
+          "type": "boolean"
+        },
+        "alwaysOn": {
+          "description": "<code>true</code> if Always On is enabled; otherwise, <code>false</code>.",
+          "type": "boolean"
+        },
+        "javaVersion": {
+          "description": "Java version.",
+          "type": "string"
+        },
+        "javaContainer": {
+          "description": "Java container.",
+          "type": "string"
+        },
+        "javaContainerVersion": {
+          "description": "Java container version.",
+          "type": "string"
+        },
+        "appCommandLine": {
+          "description": "App command line to launch.",
+          "type": "string"
+        },
+        "managedPipelineMode": {
+          "description": "Managed pipeline mode.",
+          "enum": [
+            "Integrated",
+            "Classic"
+          ],
+          "type": "string",
+          "x-ms-enum": {
+            "name": "ManagedPipelineMode",
+            "modelAsString": false
+          }
+        },
+        "virtualApplications": {
+          "description": "Virtual applications.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/VirtualApplication"
+          }
+        },
+        "loadBalancing": {
+          "description": "Site load balancing.",
+          "enum": [
+            "WeightedRoundRobin",
+            "LeastRequests",
+            "LeastResponseTime",
+            "WeightedTotalTraffic",
+            "RequestHash"
+          ],
+          "type": "string",
+          "x-ms-enum": {
+            "name": "SiteLoadBalancing",
+            "modelAsString": false
+          }
+        },
+        "experiments": {
+          "$ref": "#/definitions/Experiments",
+          "description": "This is work around for polymophic types."
+        },
+        "limits": {
+          "$ref": "#/definitions/SiteLimits",
+          "description": "Site limits."
+        },
+        "autoHealEnabled": {
+          "description": "<code>true</code> if Auto Heal is enabled; otherwise, <code>false</code>.",
+          "type": "boolean"
+        },
+        "autoHealRules": {
+          "$ref": "#/definitions/AutoHealRules",
+          "description": "Auto Heal rules."
+        },
+        "tracingOptions": {
+          "description": "Tracing options.",
+          "type": "string"
+        },
+        "vnetName": {
+          "description": "Virtual Network name.",
+          "type": "string",
+          "x-ms-mutability": [
+            "create",
+            "read"
+          ]
+        },
+        "cors": {
+          "$ref": "#/definitions/CorsSettings",
+          "description": "Cross-Origin Resource Sharing (CORS) settings."
+        },
+        "push": {
+          "$ref": "#/definitions/PushSettings",
+          "description": "Push endpoint settings."
+        },
+        "apiDefinition": {
+          "$ref": "#/definitions/ApiDefinitionInfo",
+          "description": "Information about the formal API definition for the app."
+        },
+        "autoSwapSlotName": {
+          "description": "Auto-swap slot name.",
+          "type": "string"
+        },
+        "localMySqlEnabled": {
+          "description": "<code>true</code> to enable local MySQL; otherwise, <code>false</code>.",
+          "default": false,
+          "type": "boolean"
+        },
+        "ipSecurityRestrictions": {
+          "description": "IP security restrictions.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/IpSecurityRestriction"
+          }
+        }
+      }
+    },
+    "SiteConfigResource": {
+      "description": "Web app configuration ARM resource.",
+      "type": "object",
       "allOf": [
         {
           "$ref": "#/definitions/Resource"
@@ -13416,247 +13831,7 @@
       ],
       "properties": {
         "properties": {
-          "description": "ARM envelope properties",
-          "properties": {
-            "numberOfWorkers": {
-              "format": "int32",
-              "description": "Number of workers.",
-              "type": "integer"
-            },
-            "defaultDocuments": {
-              "description": "Default documents.",
-              "type": "array",
-              "items": {
-                "type": "string"
-              }
-            },
-            "netFrameworkVersion": {
-              "description": ".NET Framework version.",
-              "default": "v4.6",
-              "type": "string"
-            },
-            "phpVersion": {
-              "description": "Version of PHP.",
-              "type": "string"
-            },
-            "pythonVersion": {
-              "description": "Version of Python.",
-              "type": "string"
-            },
-            "nodeVersion": {
-              "description": "Version of Node.js.",
-              "type": "string"
-            },
-            "linuxFxVersion": {
-              "description": "Linux App Framework and version",
-              "type": "string"
-            },
-            "requestTracingEnabled": {
-              "description": "<code>true</code> if request tracing is enabled; otherwise, <code>false</code>.",
-              "type": "boolean"
-            },
-            "requestTracingExpirationTime": {
-              "format": "date-time",
-              "description": "Request tracing expiration time.",
-              "type": "string"
-            },
-            "remoteDebuggingEnabled": {
-              "description": "<code>true</code> if remote debugging is enabled; otherwise, <code>false</code>.",
-              "type": "boolean"
-            },
-            "remoteDebuggingVersion": {
-              "description": "Remote debugging version.",
-              "type": "string"
-            },
-            "httpLoggingEnabled": {
-              "description": "<code>true</code> if HTTP logging is enabled; otherwise, <code>false</code>.",
-              "type": "boolean"
-            },
-            "logsDirectorySizeLimit": {
-              "format": "int32",
-              "description": "HTTP logs directory size limit.",
-              "type": "integer"
-            },
-            "detailedErrorLoggingEnabled": {
-              "description": "<code>true</code> if detailed error logging is enabled; otherwise, <code>false</code>.",
-              "type": "boolean"
-            },
-            "publishingUsername": {
-              "description": "Publishing user name.",
-              "type": "string"
-            },
-            "appSettings": {
-              "description": "Application settings.",
-              "type": "array",
-              "items": {
-                "$ref": "#/definitions/NameValuePair"
-              }
-            },
-            "connectionStrings": {
-              "description": "Connection strings.",
-              "type": "array",
-              "items": {
-                "$ref": "#/definitions/ConnStringInfo"
-              }
-            },
-            "machineKey": {
-              "$ref": "#/definitions/SiteMachineKey",
-              "description": "Site MachineKey.",
-              "readOnly": true
-            },
-            "handlerMappings": {
-              "description": "Handler mappings.",
-              "type": "array",
-              "items": {
-                "$ref": "#/definitions/HandlerMapping"
-              }
-            },
-            "documentRoot": {
-              "description": "Document root.",
-              "type": "string"
-            },
-            "scmType": {
-              "description": "SCM type.",
-              "enum": [
-                "None",
-                "Dropbox",
-                "Tfs",
-                "LocalGit",
-                "GitHub",
-                "CodePlexGit",
-                "CodePlexHg",
-                "BitbucketGit",
-                "BitbucketHg",
-                "ExternalGit",
-                "ExternalHg",
-                "OneDrive",
-                "VSO"
-              ],
-              "type": "string",
-              "x-ms-enum": {
-                "name": "ScmType",
-                "modelAsString": true
-              }
-            },
-            "use32BitWorkerProcess": {
-              "description": "<code>true</code> to use 32-bit worker process; otherwise, <code>false</code>.",
-              "type": "boolean"
-            },
-            "webSocketsEnabled": {
-              "description": "<code>true</code> if WebSocket is enabled; otherwise, <code>false</code>.",
-              "type": "boolean"
-            },
-            "alwaysOn": {
-              "description": "<code>true</code> if Always On is enabled; otherwise, <code>false</code>.",
-              "type": "boolean"
-            },
-            "javaVersion": {
-              "description": "Java version.",
-              "type": "string"
-            },
-            "javaContainer": {
-              "description": "Java container.",
-              "type": "string"
-            },
-            "javaContainerVersion": {
-              "description": "Java container version.",
-              "type": "string"
-            },
-            "appCommandLine": {
-              "description": "App command line to launch.",
-              "type": "string"
-            },
-            "managedPipelineMode": {
-              "description": "Managed pipeline mode.",
-              "enum": [
-                "Integrated",
-                "Classic"
-              ],
-              "type": "string",
-              "x-ms-enum": {
-                "name": "ManagedPipelineMode",
-                "modelAsString": false
-              }
-            },
-            "virtualApplications": {
-              "description": "Virtual applications.",
-              "type": "array",
-              "items": {
-                "$ref": "#/definitions/VirtualApplication"
-              }
-            },
-            "loadBalancing": {
-              "description": "Site load balancing.",
-              "enum": [
-                "WeightedRoundRobin",
-                "LeastRequests",
-                "LeastResponseTime",
-                "WeightedTotalTraffic",
-                "RequestHash"
-              ],
-              "type": "string",
-              "x-ms-enum": {
-                "name": "SiteLoadBalancing",
-                "modelAsString": false
-              }
-            },
-            "experiments": {
-              "$ref": "#/definitions/Experiments",
-              "description": "This is work around for polymophic types."
-            },
-            "limits": {
-              "$ref": "#/definitions/SiteLimits",
-              "description": "Site limits."
-            },
-            "autoHealEnabled": {
-              "description": "<code>true</code> if Auto Heal is enabled; otherwise, <code>false</code>.",
-              "type": "boolean"
-            },
-            "autoHealRules": {
-              "$ref": "#/definitions/AutoHealRules",
-              "description": "Auto Heal rules."
-            },
-            "tracingOptions": {
-              "description": "Tracing options.",
-              "type": "string"
-            },
-            "vnetName": {
-              "description": "Virtual Network name.",
-              "type": "string",
-              "x-ms-mutability": [
-                "create",
-                "read"
-              ]
-            },
-            "cors": {
-              "$ref": "#/definitions/CorsSettings",
-              "description": "Cross-Origin Resource Sharing (CORS) settings."
-            },
-            "push": {
-              "$ref": "#/definitions/PushSettings",
-              "description": "Push endpoint settings."
-            },
-            "apiDefinition": {
-              "$ref": "#/definitions/ApiDefinitionInfo",
-              "description": "Information about the formal API definition for the app."
-            },
-            "autoSwapSlotName": {
-              "description": "Auto-swap slot name.",
-              "type": "string"
-            },
-            "localMySqlEnabled": {
-              "description": "<code>true</code> to enable local MySQL; otherwise, <code>false</code>.",
-              "default": false,
-              "type": "boolean"
-            },
-            "ipSecurityRestrictions": {
-              "description": "IP security restrictions.",
-              "type": "array",
-              "items": {
-                "$ref": "#/definitions/IpSecurityRestriction"
-              }
-            }
-          },
+          "$ref": "#/definitions/SiteConfig",
           "x-ms-client-flatten": true
         }
       }
@@ -13671,7 +13846,7 @@
       ],
       "properties": {
         "properties": {
-          "description": "ARM envelope properties",
+          "description": "SiteConfigurationSnapshotInfo resource specific properties",
           "properties": {
             "time": {
               "format": "date-time",
@@ -13700,7 +13875,7 @@
       ],
       "properties": {
         "properties": {
-          "description": "ARM envelope properties",
+          "description": "SiteInstance resource specific properties",
           "properties": {
             "name": {
               "description": "Name of instance.",
@@ -13743,7 +13918,7 @@
       ],
       "properties": {
         "properties": {
-          "description": "ARM envelope properties",
+          "description": "SiteLogsConfig resource specific properties",
           "properties": {
             "applicationLogs": {
               "$ref": "#/definitions/ApplicationLogsConfig",
@@ -13798,7 +13973,7 @@
       ],
       "properties": {
         "properties": {
-          "description": "ARM envelope properties",
+          "description": "SitePhpErrorLogFlag resource specific properties",
           "properties": {
             "localLogErrors": {
               "description": "Local log_errors setting.",
@@ -13831,7 +14006,7 @@
       ],
       "properties": {
         "properties": {
-          "description": "ARM envelope properties",
+          "description": "SiteSourceControl resource specific properties",
           "properties": {
             "repoUrl": {
               "description": "Repository or source control URL.",
@@ -13878,6 +14053,26 @@
         }
       }
     },
+    "SlotConfigNames": {
+      "description": "Names for connection strings and application settings to be marked as sticky to the deployment slot and not moved during a swap operation.\n This is valid for all deployment slots in an app.",
+      "type": "object",
+      "properties": {
+        "connectionStringNames": {
+          "description": "List of connection string names.",
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "appSettingNames": {
+          "description": "List of application settings names.",
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        }
+      }
+    },
     "SlotConfigNamesResource": {
       "description": "Slot Config names azure resource.",
       "type": "object",
@@ -13888,23 +14083,7 @@
       ],
       "properties": {
         "properties": {
-          "description": "ARM envelope properties",
-          "properties": {
-            "connectionStringNames": {
-              "description": "List of connection string names.",
-              "type": "array",
-              "items": {
-                "type": "string"
-              }
-            },
-            "appSettingNames": {
-              "description": "List of application settings names.",
-              "type": "array",
-              "items": {
-                "type": "string"
-              }
-            }
-          },
+          "$ref": "#/definitions/SlotConfigNames",
           "x-ms-client-flatten": true
         }
       }
@@ -13919,7 +14098,7 @@
       ],
       "properties": {
         "properties": {
-          "description": "ARM envelope properties",
+          "description": "SlotDifference resource specific properties",
           "properties": {
             "type": {
               "description": "Type of the difference: Information, Warning or Error.",
@@ -14032,7 +14211,7 @@
       ],
       "properties": {
         "properties": {
-          "description": "ARM envelope properties",
+          "description": "Snapshot resource specific properties",
           "properties": {
             "time": {
               "format": "date-time",
@@ -14105,7 +14284,7 @@
       ],
       "properties": {
         "properties": {
-          "description": "ARM envelope properties",
+          "description": "StorageMigrationOptions resource specific properties",
           "required": [
             "azurefilesConnectionString",
             "azurefilesShare"
@@ -14156,7 +14335,7 @@
       ],
       "properties": {
         "properties": {
-          "description": "ARM envelope properties",
+          "description": "StorageMigrationResponse resource specific properties",
           "properties": {
             "operationId": {
               "description": "When server starts the migration process, it will return an operation ID identifying that particular migration operation.",
@@ -14197,7 +14376,7 @@
       ],
       "properties": {
         "properties": {
-          "description": "ARM envelope properties",
+          "description": "User resource specific properties",
           "required": [
             "publishingUserName"
           ],
@@ -14280,7 +14459,7 @@
       ],
       "properties": {
         "properties": {
-          "description": "ARM envelope properties",
+          "description": "VnetGateway resource specific properties",
           "required": [
             "vpnPackageUri"
           ],
@@ -14309,47 +14488,36 @@
     "VnetInfo": {
       "description": "Virtual Network information contract.",
       "type": "object",
-      "allOf": [
-        {
-          "$ref": "#/definitions/Resource"
-        }
-      ],
       "properties": {
-        "properties": {
-          "description": "ARM envelope properties",
-          "properties": {
-            "vnetResourceId": {
-              "description": "The Virtual Network's resource ID.",
-              "type": "string"
-            },
-            "certThumbprint": {
-              "description": "The client certificate thumbprint.",
-              "type": "string",
-              "readOnly": true
-            },
-            "certBlob": {
-              "description": "A certificate file (.cer) blob containing the public key of the private key used to authenticate a \n Point-To-Site VPN connection.",
-              "type": "string"
-            },
-            "routes": {
-              "description": "The routes that this Virtual Network connection uses.",
-              "type": "array",
-              "items": {
-                "$ref": "#/definitions/VnetRoute"
-              },
-              "readOnly": true
-            },
-            "resyncRequired": {
-              "description": "<code>true</code> if a resync is required; otherwise, <code>false</code>.",
-              "type": "boolean",
-              "readOnly": true
-            },
-            "dnsServers": {
-              "description": "DNS servers to be used by this Virtual Network. This should be a comma-separated list of IP addresses.",
-              "type": "string"
-            }
+        "vnetResourceId": {
+          "description": "The Virtual Network's resource ID.",
+          "type": "string"
+        },
+        "certThumbprint": {
+          "description": "The client certificate thumbprint.",
+          "type": "string",
+          "readOnly": true
+        },
+        "certBlob": {
+          "description": "A certificate file (.cer) blob containing the public key of the private key used to authenticate a \n Point-To-Site VPN connection.",
+          "type": "string"
+        },
+        "routes": {
+          "description": "The routes that this Virtual Network connection uses.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/VnetRoute"
           },
-          "x-ms-client-flatten": true
+          "readOnly": true
+        },
+        "resyncRequired": {
+          "description": "<code>true</code> if a resync is required; otherwise, <code>false</code>.",
+          "type": "boolean",
+          "readOnly": true
+        },
+        "dnsServers": {
+          "description": "DNS servers to be used by this Virtual Network. This should be a comma-separated list of IP addresses.",
+          "type": "string"
         }
       }
     },
@@ -14363,7 +14531,7 @@
       ],
       "properties": {
         "properties": {
-          "description": "ARM envelope properties",
+          "description": "VnetRoute resource specific properties",
           "properties": {
             "name": {
               "description": "The name of this route. This is only returned by the server and does not need to be set by the client.",
