@@ -25,9 +25,6 @@
         "operationId": "FailoverGroups_Get",
         "parameters": [
           {
-            "$ref": "#/parameters/SubscriptionIdParameter"
-          },
-          {
             "$ref": "#/parameters/ResourceGroupParameter"
           },
           {
@@ -43,6 +40,9 @@
             "description": "The name of the failover group.",
             "required": true,
             "type": "string"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
           },
           {
             "$ref": "#/parameters/ApiVersionParameter"
@@ -73,9 +73,6 @@
         "operationId": "FailoverGroups_CreateOrUpdate",
         "parameters": [
           {
-            "$ref": "#/parameters/SubscriptionIdParameter"
-          },
-          {
             "$ref": "#/parameters/ResourceGroupParameter"
           },
           {
@@ -100,6 +97,9 @@
             "schema": {
               "$ref": "#/definitions/FailoverGroup"
             }
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
           },
           {
             "$ref": "#/parameters/ApiVersionParameter"
@@ -140,9 +140,6 @@
         "operationId": "FailoverGroups_Delete",
         "parameters": [
           {
-            "$ref": "#/parameters/SubscriptionIdParameter"
-          },
-          {
             "$ref": "#/parameters/ResourceGroupParameter"
           },
           {
@@ -158,6 +155,9 @@
             "description": "The name of the failover group.",
             "required": true,
             "type": "string"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
           },
           {
             "$ref": "#/parameters/ApiVersionParameter"
@@ -192,9 +192,6 @@
         "operationId": "FailoverGroups_Update",
         "parameters": [
           {
-            "$ref": "#/parameters/SubscriptionIdParameter"
-          },
-          {
             "$ref": "#/parameters/ResourceGroupParameter"
           },
           {
@@ -219,6 +216,9 @@
             "schema": {
               "$ref": "#/definitions/FailoverGroup"
             }
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
           },
           {
             "$ref": "#/parameters/ApiVersionParameter"
@@ -255,9 +255,6 @@
         "operationId": "FailoverGroups_ListByServer",
         "parameters": [
           {
-            "$ref": "#/parameters/SubscriptionIdParameter"
-          },
-          {
             "$ref": "#/parameters/ResourceGroupParameter"
           },
           {
@@ -266,6 +263,9 @@
             "description": "The name of the server containing the failover group.",
             "required": true,
             "type": "string"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
           },
           {
             "$ref": "#/parameters/ApiVersionParameter"
@@ -301,9 +301,6 @@
         "operationId": "FailoverGroups_Failover",
         "parameters": [
           {
-            "$ref": "#/parameters/SubscriptionIdParameter"
-          },
-          {
             "$ref": "#/parameters/ResourceGroupParameter"
           },
           {
@@ -319,6 +316,9 @@
             "description": "The name of the failover group.",
             "required": true,
             "type": "string"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
           },
           {
             "$ref": "#/parameters/ApiVersionParameter"
@@ -355,9 +355,6 @@
         "operationId": "FailoverGroups_ForceFailoverAllowDataLoss",
         "parameters": [
           {
-            "$ref": "#/parameters/SubscriptionIdParameter"
-          },
-          {
             "$ref": "#/parameters/ResourceGroupParameter"
           },
           {
@@ -373,6 +370,9 @@
             "description": "The name of the failover group.",
             "required": true,
             "type": "string"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
           },
           {
             "$ref": "#/parameters/ApiVersionParameter"
@@ -607,7 +607,8 @@
       "in": "path",
       "description": "The Azure subscription ID.",
       "required": true,
-      "type": "string"
+      "type": "string",
+      "x-ms-parameter-location": "client"
     },
     "ApiVersionParameter": {
       "name": "api-version",
