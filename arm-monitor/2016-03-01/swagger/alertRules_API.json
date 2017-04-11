@@ -14,6 +14,24 @@
   "produces": [
     "application/json"
   ],
+  "security": [
+    {
+      "azure_auth": [
+        "user_impersonation"
+      ]
+    }
+  ],
+  "securityDefinitions": {
+    "azure_auth": {
+      "type": "oauth2",
+      "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
+      "flow": "implicit",
+      "description": "Azure Active Directory OAuth2 Flow",
+      "scopes": {
+        "user_impersonation": "impersonate your user account"
+      }
+    }
+  },
   "paths": {
     "/subscriptions/{subscriptionId}/resourcegroups/{resourceGroupName}/providers/microsoft.insights/alertrules/{ruleName}": {
       "put": {
@@ -46,6 +64,12 @@
           }
         ],
         "responses": {
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          },
           "200": {
             "description": "Successful request to update an alert rule",
             "schema": {
@@ -71,6 +95,7 @@
                       "resourceUri":"/subscriptions/b67f7fec-69fc-4974-9099-a26bd6ffeda3/resourceGroups/Rac46PostSwapRG/providers/Microsoft.Web/sites/leoalerttest",
                       "metricName":"Requests"
                     },
+                    "operator":"GreaterThan",
                     "threshold":3.0,
                     "windowSize":"PT5M",
                     "timeAggregation":"Total"
@@ -106,6 +131,7 @@
                       "resourceUri":"/subscriptions/b67f7fec-69fc-4974-9099-a26bd6ffeda3/resourceGroups/Rac46PostSwapRG/providers/Microsoft.Web/sites/leoalerttest",
                       "metricName":"Requests"
                     },
+                    "operator":"GreaterThan",
                     "threshold":2.0,
                     "windowSize":"PT5M",
                     "timeAggregation":"Total"
@@ -191,9 +217,9 @@
                     "dataSource": { 
                       "odata.type":"Microsoft.Azure.Management.Insights.Models.RuleMetricDataSource",
                       "resourceUri":"/subscriptions/b67f7fec-69fc-4974-9099-a26bd6ffeda3/resourceGroups/Rac46PostSwapRG/providers/Microsoft.Web/sites/leoalerttest",
-                      "metricNamespace":"",
                       "metricName":"Requests"
                     },
+                    "operator":"GreaterThan",
                     "threshold":2.0,
                     "windowSize":"PT5M",
                     "timeAggregation":"Total"
@@ -220,9 +246,6 @@
           },
           {
             "$ref": "#/parameters/ApiVersionParameter"
-          },
-          {
-            "$ref": "#/parameters/FilterParameter"
           },
           {
             "$ref": "#/parameters/SubscriptionIdParameter"
@@ -254,9 +277,9 @@
                         "dataSource": {
                           "odata.type":"Microsoft.Azure.Management.Insights.Models.RuleMetricDataSource",
                           "resourceUri":"/subscriptions/b67f7fec-69fc-4974-9099-a26bd6ffeda3/resourceGroups/Rac46PostSwapRG/providers/Microsoft.Web/sites/leoalerttest",
-                          "metricNamespace":"",
                           "metricName":"Requests"
                         },
+                        "operator":"GreaterThan",
                         "threshold":2.0,
                         "windowSize":"PT5M",
                         "timeAggregation":"Total"
@@ -291,9 +314,9 @@
                         "dataSource": {
                           "odata.type":"Microsoft.Azure.Management.Insights.Models.RuleMetricDataSource",
                           "resourceUri":"/subscriptions/b67f7fec-69fc-4974-9099-a26bd6ffeda3/resourceGroups/Rac46PostSwapRG/providers/Microsoft.Web/sites/leoalerttest",
-                          "metricNamespace":"",
                           "metricName":"Requests"
                         },
+                        "operator":"GreaterThan",
                         "threshold":2.0,
                         "windowSize":"PT5M",
                         "timeAggregation":"Total"
@@ -309,8 +332,7 @@
         },
         "x-ms-pageable": {
           "nextLinkName": null
-        },
-        "x-ms-odata": "#/definitions/AlertRuleResource"
+        }
       }
     }
   },
@@ -322,6 +344,10 @@
         "odata.type": {
           "type": "string",
           "description": "specifies the type of condition. This can be one of three types: ManagementEventRuleCondition (occurrences of management events), LocationThresholdRuleCondition (based on the number of failures of a web test), and ThresholdRuleCondition (based on the threshold of a metric)."
+        },
+        "dataSource": {
+          "$ref": "#/definitions/RuleDataSource",
+          "description": "the resource from which the rule collects its data. For this type dataSource will always be of type RuleMetricDataSource."
         }
       },
       "required": [ "odata.type" ],
@@ -334,6 +360,10 @@
         "odata.type": {
           "type": "string",
           "description": "specifies the type of data source. There are two types of rule data sources: RuleMetricDataSource and RuleManagementEventDataSource"
+        },
+        "resourceUri": {
+          "type": "string",
+          "description": "the resource identifier of the resource the rule monitors."
         }
       },
       "required": [ "odata.type" ],
@@ -348,10 +378,6 @@
         }
       ],
       "properties": {
-        "resourceUri": {
-           "type": "string",
-           "description": "the resource identifier of the resource the rule monitors."
-        },
         "metricName": {
           "type": "string",
           "description": "the name of the metric that defines what the rule monitors."
@@ -400,10 +426,6 @@
         "resourceProviderName": {
           "type": "string",
           "description": "the resource provider name."
-        },
-        "resourceUri": {
-          "type": "string",
-          "description": "the resource uri."
         },
         "status": {
           "type": "string",
@@ -457,10 +479,6 @@
       ],
       "required": [ "threshold", "operator" ],
       "properties": {
-        "dataSource": {
-          "$ref": "#/definitions/RuleDataSource",
-          "description": "the resource from which the rule collects its data. For this type dataSource will always be of type RuleMetricDataSource."
-        },
         "operator": {
           "$ref": "#/definitions/ConditionOperator",
           "description": "the operator used to compare the data and the threshold."
@@ -492,10 +510,6 @@
         }
       ],
       "properties": {
-        "dataSource": {
-          "$ref": "#/definitions/RuleDataSource",
-          "description": "the resource from which the rule collects its data. For this type dataSource will always be of type RuleMetricDataSource."
-        },
         "windowSize": {
           "type": "string",
           "format": "duration",
@@ -539,10 +553,6 @@
         }
       ],
       "properties": {
-        "dataSource": {
-          "$ref": "#/definitions/RuleDataSource",
-          "description": "the resource from which the rule collects its data. For this type dataSource will always be of type RuleManagementEventDataSource."
-        },
         "aggregation": {
           "$ref": "#/definitions/ManagementEventAggregationCondition",
           "description": "How the data that is collected should be combined over time and when the alert is activated. Note that for management event alerts aggregation is optional – if it is not provided then any event will cause the alert to activate."
@@ -614,7 +624,8 @@
     "AlertRule": {
       "required": [
         "name",
-        "isEnabled"
+        "isEnabled",
+        "condition"
       ],
       "properties": {
         "name": {
@@ -658,6 +669,7 @@
         },
         "name": {
           "type": "string",
+          "readOnly": true,
           "description": "Azure resource name"
         },
         "type": {
@@ -667,7 +679,11 @@
         },
         "location": {
           "type": "string",
-          "description": "Resource location"
+          "description": "Resource location",
+          "x-ms-mutability": [
+              "create",
+              "read"
+          ]
         },
         "tags": {
           "additionalProperties": {
@@ -711,6 +727,20 @@
         }
       },
       "description": "Represents a collection of alert rule resources."
+    },
+    "ErrorResponse": {
+      "description": "Describes the format of Error response.",
+      "type": "object",
+      "properties": {
+        "code": {
+          "description": "Error code",
+          "type": "string"
+        },
+        "message": {
+          "description": "Error message indicating why the operation failed.",
+          "type": "string"
+        }
+      }
     }
   },
   "parameters": {
@@ -742,14 +772,6 @@
       "required": true,
       "type": "string",
       "description": "The name of the rule.",
-      "x-ms-parameter-location": "method"
-    },
-    "FilterParameter": {
-      "name": "$filter",
-      "in": "query",
-      "required": false,
-      "type": "string",
-      "description": "The filter to apply on the operation. For more information please see https://msdn.microsoft.com/en-us/library/azure/dn931934.aspx",
       "x-ms-parameter-location": "method"
     }
   }

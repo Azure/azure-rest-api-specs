@@ -1,8 +1,8 @@
 {
   "swagger": "2.0",
   "info": {
-    "title": "Server Firewall Rule APIs",
-    "description": "Provides create, read, update, and delete functionality for Azure SQL server firewall rules.",
+    "title": "Azure SQL Database server firewall rules",
+    "description": "Provides create, read, update, and delete functionality for Azure SQL Database server firewall rules.",
     "version": "2014-04-01"
   },
   "host": "management.azure.com",
@@ -21,8 +21,12 @@
         "tags": [
           "FirewallRules"
         ],
-        "operationId": "Servers_CreateOrUpdateFirewallRule",
-        "description": "Creates or updates an Azure SQL server firewall rule.",
+        "operationId": "FirewallRules_CreateOrUpdate",
+        "description": "Creates or updates a firewall rule.",
+        "x-ms-examples": {
+          "Create a firewall rule max/min": { "$ref": "../examples/FirewallRuleCreate.json" },
+          "Update a firewall rule max/min": { "$ref": "../examples/FirewallRuleUpdate.json" }
+        },
         "parameters": [
           {
             "$ref": "#/parameters/ApiVersionParameter"
@@ -41,14 +45,14 @@
             "in": "path",
             "required": true,
             "type": "string",
-            "description": "The name of the Azure SQL server firewall rule."
+            "description": "The name of the firewall rule."
           },
           {
             "name": "parameters",
             "in": "body",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/ServerFirewallRule"
+              "$ref": "#/definitions/FirewallRule"
             },
             "description": "The required parameters for creating or updating a firewall rule."
           }
@@ -57,13 +61,13 @@
           "200": {
             "description": "OK",
             "schema": {
-              "$ref": "#/definitions/ServerFirewallRule"
+              "$ref": "#/definitions/FirewallRule"
             }
           },
           "201": {
             "description": "Created",
             "schema": {
-              "$ref": "#/definitions/ServerFirewallRule"
+              "$ref": "#/definitions/FirewallRule"
             }
           }
         }
@@ -72,8 +76,11 @@
         "tags": [
           "FirewallRules"
         ],
-        "operationId": "Servers_DeleteFirewallRule",
-        "description": "Deletes an Azure SQL server firewall rule.",
+        "operationId": "FirewallRules_Delete",
+        "description": "Deletes a firewall rule.",
+        "x-ms-examples": {
+          "Delete a firewall rule": { "$ref": "../examples/FirewallRuleDelete.json" }
+        },
         "parameters": [
           {
             "$ref": "#/parameters/ApiVersionParameter"
@@ -92,7 +99,7 @@
             "in": "path",
             "required": true,
             "type": "string",
-            "description": "The name of the Azure SQL server firewall rule."
+            "description": "The name of the firewall rule."
           }
         ],
         "responses": {
@@ -108,8 +115,11 @@
         "tags": [
           "FirewallRules"
         ],
-        "operationId": "Servers_GetFirewallRule",
-        "description": "Returns an Azure SQL server firewall rule.",
+        "operationId": "FirewallRules_Get",
+        "description": "Gets a firewall rule.",
+        "x-ms-examples": {
+          "Get Firewall Rule": { "$ref": "../examples/FirewallRuleGet.json" }
+        },
         "parameters": [
           {
             "$ref": "#/parameters/ApiVersionParameter"
@@ -128,14 +138,14 @@
             "in": "path",
             "required": true,
             "type": "string",
-            "description": "The name of the Azure SQL server firewall rule."
+            "description": "The name of the firewall rule."
           }
         ],
         "responses": {
           "200": {
             "description": "OK",
             "schema": {
-              "$ref": "#/definitions/ServerFirewallRule"
+              "$ref": "#/definitions/FirewallRule"
             }
           }
         }
@@ -146,8 +156,11 @@
         "tags": [
           "FirewallRules"
         ],
-        "operationId": "Servers_ListFirewallRules",
-        "description": "Returns a list of Azure SQL server firewall rules.",
+        "operationId": "FirewallRules_ListByServer",
+        "description": "Returns a list of firewall rules.",
+        "x-ms-examples": {
+          "List Firewall Rules": { "$ref": "../examples/FirewallRuleList.json" }
+        },
         "parameters": [
           {
             "$ref": "#/parameters/ApiVersionParameter"
@@ -166,7 +179,7 @@
           "200": {
             "description": "OK",
             "schema": {
-              "$ref": "#/definitions/ServerFirewallRuleListResult"
+              "$ref": "#/definitions/FirewallRuleListResult"
             }
           }
         },
@@ -177,57 +190,7 @@
     }
   },
   "definitions": {
-    "ServerFirewallRuleProperties": {
-      "properties": {
-        "startIpAddress": {
-          "type": "string",
-          "description": "The start IP address of the Azure SQL server firewall rule. Must be IPv4 format."
-        },
-        "endIpAddress": {
-          "type": "string",
-          "description": "The end IP address of the Azure SQL server firewall rule. Must be IPv4 format."
-        }
-      },
-      "description": "Represents the properties of an Azure SQL server firewall rule."
-    },
-    "ServerFirewallRule": {
-      "properties": {
-        "kind": {
-          "type": "string",
-          "description": "Kind of server that contains this firewall rule.",
-          "readOnly": true
-        },
-        "location": {
-          "type": "string",
-          "description": "Location of the server that contains this firewall rule.",
-          "readOnly": true
-        },
-        "properties": {
-          "$ref": "#/definitions/ServerFirewallRuleProperties",
-          "description": "The properties representing the resource.",
-          "x-ms-client-flatten": true
-        }
-      },
-      "allOf": [
-        {
-          "$ref": "#/definitions/SqlSubResource"
-        }
-      ],
-      "description": "Represents an Azure SQL server firewall rule."
-    },
-    "ServerFirewallRuleListResult": {
-      "properties": {
-        "value": {
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/ServerFirewallRule"
-          },
-          "description": "The list of Azure SQL server firewall rules for the server."
-        }
-      },
-      "description": "Represents the response to a List Firewall Rules request."
-    },
-    "SqlSubResource": {
+    "SubResource": {
       "description": "Subresource properties",
       "properties": {
         "name": {
@@ -241,6 +204,62 @@
           "description": "The resource ID."
         }
       }
+    },
+    "FirewallRuleProperties": {
+      "properties": {
+        "startIpAddress": {
+          "type": "string",
+          "description": "The start IP address of the firewall rule. Must be IPv4 format. Use value '0.0.0.0' to represent all Azure-internal IP addresses."
+        },
+        "endIpAddress": {
+          "type": "string",
+          "description": "The end IP address of the firewall rule. Must be IPv4 format. Must be greater than or equal to startIpAddress. Use value '0.0.0.0' to represent all Azure-internal IP addresses."
+        }
+      },
+      "required": ["startIpAddress", "endIpAddress"],
+      "description": "Represents the properties of a server firewall rule."
+    },
+    "FirewallRule": {
+      "properties": {
+        "kind": {
+          "type": "string",
+          "description": "Kind of server that contains this firewall rule.",
+          "readOnly": true
+        },
+        "location": {
+          "type": "string",
+          "description": "Location of the server that contains this firewall rule.",
+          "readOnly": true
+        },
+        "type": {
+          "type": "string",
+          "description": "Type of resource this is.",
+          "readOnly": true
+        },
+        "properties": {
+          "$ref": "#/definitions/FirewallRuleProperties",
+          "description": "The properties representing the resource.",
+          "x-ms-client-flatten": true
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "#/definitions/SubResource"
+        }
+      ],
+      "description": "Represents a server firewall rule."
+    },
+    "FirewallRuleListResult": {
+      "properties": {
+        "value": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/FirewallRule"
+          },
+          "description": "The list of server firewall rules."
+        }
+      },
+      "description": "Represents the response to a List Firewall Rules request."
     }
   },
   "parameters": {
@@ -271,7 +290,7 @@
       "in": "path",
       "required": true,
       "type": "string",
-      "description": "The name of the Azure SQL server.",
+      "description": "The name of the server.",
       "x-ms-parameter-location": "method"
     }
   }
