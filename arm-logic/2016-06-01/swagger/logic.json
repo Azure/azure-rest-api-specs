@@ -493,6 +493,15 @@
             "type": "string"
           },
           {
+            "name": "keyType",
+            "description": "The access key type.",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/RegenerateActionParameter"
+            }
+          },
+          {
             "$ref": "#/parameters/api-version"
           }
         ],
@@ -838,6 +847,15 @@
             "in": "path",
             "required": true,
             "type": "string"
+          },
+          {
+            "name": "parameters",
+            "description": "The callback URL parameters.",
+            "in": "body",
+            "required": false,
+            "schema": {
+              "$ref": "#/definitions/GetCallbackUrlParameters"
+            }
           },
           {
             "$ref": "#/parameters/api-version"
@@ -3950,6 +3968,16 @@
         }
       },
       "description": "The content hash."
+    },
+    "RegenerateActionParameter": {
+      "type": "object",
+      "properties": {
+        "keyType": {
+          "$ref": "#/definitions/KeyType",
+          "description": "The key type."
+        }
+      },
+      "description": "The access key regenerate action content."
     },
     "RetryHistory": {
       "type": "object",
