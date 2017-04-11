@@ -675,8 +675,8 @@
           "description": "Gets or sets a list of key value pairs that describe the resource. These tags can be used in viewing and grouping this resource (across resource groups). A maximum of 15 tags can be provided for a resource. Each tag must have a key no greater than 128 characters and value no greater than 256 characters."
         },
         "properties": {
-          "$ref": "#/definitions/CognitiveServicesAccountPropertiesCreateParameters",
-          "description": "Must exist in the request. Must not be null."
+          "type": "object",
+          "description": "Must exist in the request. Must be an empty object. Must not be null."
         }
       },
       "required": [
@@ -773,9 +773,6 @@
         "name"
       ],
       "description": "The SKU of the cognitive services account."
-    },
-    "CognitiveServicesAccountPropertiesCreateParameters": {
-      "description": "required empty proprties object. Must be an empty object, and must exist in the request."
     },
     "CognitiveServicesAccount": {
       "description": "Cognitive Services Account is an Azure resource representing the provisioned account, its type, location and SKU.",
