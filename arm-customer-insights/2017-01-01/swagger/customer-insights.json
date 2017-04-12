@@ -551,6 +551,60 @@
         }
       }
     },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.CustomerInsights/hubs/{hubName}/profiles/{profileName}/getEnrichingKpis": {
+      "post": {
+        "tags": [
+          "Profiles"
+        ],
+        "operationId": "Profiles_GetEnrichingKpis",
+        "x-ms-examples": {
+          "Profiles_GetEnrichingKpis": {
+            "$ref": "../examples/ProfileGetEnrichingKpis.json"
+          }
+        },
+        "description": "Gets the KPIs that enrich the profile Type identified by the supplied name. Enrichment happens through participants of the Interaction on an Interaction KPI and through Relationships for Profile KPIs.",
+        "parameters": [
+          {
+            "name": "resourceGroupName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the resource group."
+          },
+          {
+            "name": "hubName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the hub."
+          },
+          {
+            "name": "profileName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the profile."
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK. Successfully get the enriching KPIs.",
+            "schema": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/KpiDefinition"
+              }
+            }
+          }
+        }
+      }
+    },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.CustomerInsights/hubs/{hubName}/interactions/{interactionName}": {
       "put": {
         "tags": [
@@ -727,6 +781,57 @@
         },
         "x-ms-pageable": {
           "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.CustomerInsights/hubs/{hubName}/interactions/{interactionName}/suggestRelationshipLinks": {
+      "post": {
+        "tags": [
+          "Interactions"
+        ],
+        "operationId": "Interactions_SuggestRelationshipLinks",
+        "x-ms-examples": {
+          "Interactions_SuggestRelationshipLinks": {
+            "$ref": "../examples/InteractionsSuggestRelationshipLinks.json"
+          }
+        },
+        "description": "Suggests relationships to create relationship links.",
+        "parameters": [
+          {
+            "name": "resourceGroupName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the resource group."
+          },
+          {
+            "name": "hubName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the hub."
+          },
+          {
+            "name": "interactionName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the interaction."
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK. Successfully get suggested Relationship Links.",
+            "schema": {
+              "$ref": "#/definitions/SuggestRelationshipLinksResponse"
+            }
+          }
         }
       }
     },
@@ -3215,9 +3320,9 @@
           "description": "The last changed time for the type definition."
         },
         "provisioningState": {
-          "type": "string",
+          "$ref": "#/definitions/ProvisioningState",
           "readOnly": true,
-          "description": "The provisioning state of the Type."
+          "description": "Provisioning state."
         },
         "schemaItemTypeLink": {
           "type": "string",
@@ -3320,6 +3425,14 @@
         "schemaItemPropLink": {
           "type": "string",
           "description": "URL encoded schema.org item prop link for the property."
+        },
+        "maxLength": {
+          "type": "integer",
+          "description": "Max length of string. Used only if type is string."
+        },
+        "isAvailableInGraph": {
+          "type": "boolean",
+          "description": "Whether property is available in graph or not."
         }
       },
       "description": "Property definition."
@@ -3496,16 +3609,7 @@
           "description": "Name of the connector."
         },
         "connectorType": {
-          "type": "string",
-          "enum": [
-            "CRM",
-            "AzureBlob",
-            "Salesforce"
-          ],
-          "x-ms-enum": {
-            "name": "ConnectorTypes",
-            "modelAsString": false
-          },
+          "$ref": "#/definitions/ConnectorType",
           "description": "Type of connector."
         },
         "displayName": {
@@ -3556,6 +3660,10 @@
           "type": "string",
           "readOnly": true,
           "description": "The hub name."
+        },
+        "isInternal": {
+          "type": "boolean",
+          "description": "If this is an internal connector."
         }
       },
       "description": "Properties of connector."
@@ -3758,16 +3866,7 @@
           "description": "The connector name."
         },
         "connectorType": {
-          "type": "string",
-          "enum": [
-            "CRM",
-            "AzureBlob",
-            "Salesforce"
-          ],
-          "x-ms-enum": {
-            "name": "ConnectorTypes",
-            "modelAsString": false
-          },
+          "$ref": "#/definitions/ConnectorType",
           "description": "Type of connector."
         },
         "created": {
@@ -3937,6 +4036,7 @@
         "calculationWindow": {
           "type": "string",
           "enum": [
+            "Lifetime",
             "Hour",
             "Day",
             "Week",
@@ -3948,6 +4048,10 @@
           },
           "description": "The calculation window."
         },
+        "calculationWindowFieldName": {
+          "type": "string",
+          "description": "Name of calculation window field."
+        },
         "function": {
           "type": "string",
           "enum": [
@@ -3957,7 +4061,8 @@
             "Max",
             "Last",
             "Count",
-            "None"
+            "None",
+            "CountDistinct"
           ],
           "x-ms-enum": {
             "name": "KpiFunctions",
@@ -4001,9 +4106,9 @@
           "description": "The participant profiles."
         },
         "provisioningState": {
-          "type": "string",
+          "$ref": "#/definitions/ProvisioningState",
           "readOnly": true,
-          "description": "The provisioning state."
+          "description": "Provisioning state."
         },
         "thresHolds": {
           "$ref": "#/definitions/KpiThresholds",
@@ -4299,13 +4404,25 @@
           "description": "The properties that represent the participating profile."
         },
         "provisioningState": {
-          "type": "string",
+          "$ref": "#/definitions/ProvisioningState",
           "readOnly": true,
           "description": "Provisioning state."
         },
         "referenceOnly": {
           "type": "boolean",
           "description": "Indicating whether the link is reference only link. This flag is ingored if the Mappings are defined. If the mappings are not defined and it is set to true, links processing will not create or update profiles."
+        },
+        "operationType": {
+          "type": "string",
+          "enum": [
+            "Upsert",
+            "Delete"
+          ],
+          "x-ms-enum": {
+            "name": "InstanceOperationType",
+            "modelAsString": false
+          },
+          "description": "Determines whether this link is supposed to create or delete instances if Link is NOT Reference Only."
         }
       },
       "description": "The definition of Link."
@@ -4399,7 +4516,7 @@
           "description": "Profile type."
         },
         "provisioningState": {
-          "type": "string",
+          "$ref": "#/definitions/ProvisioningState",
           "readOnly": true,
           "description": "Provisioning state."
         },
@@ -4500,7 +4617,7 @@
           "description": "The property references for the Profile of the Relationship."
         },
         "provisioningState": {
-          "type": "string",
+          "$ref": "#/definitions/ProvisioningState",
           "readOnly": true,
           "description": "Provisioning state."
         },
@@ -4646,8 +4763,56 @@
         "primaryParticipantProfilePropertyName": {
           "type": "string",
           "description": "The primary participant property name for an interaction ,This is used to logically represent the agent of the interaction, Specify the participant name here from ParticipantName."
+        },
+        "dataSources": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/DataSource"
+          },
+          "description": "This is specific to interactions modeled as activities. Data sources are used to determine where data is stored and also in precedence rules."
+        },
+        "defaultDataSourceId": {
+          "type": "string",
+          "description": "Default data source is specifically used in cases where data source is not specified in an instance."
+        },
+        "isActivity": {
+          "type": "boolean",
+          "description": "An interaction can be tagged as an activity only during create. This enables the interaction to be editable and can enable merging of properties from multiple data sources based on precedence, which is defined at a link level."
         }
       }
+    },
+    "DataSource": {
+      "properties": {
+        "dataSourceType": {
+          "type": "string",
+          "enum": [
+            "ConnectorMapping",
+            "LinkInteraction",
+            "SystemDefault"
+          ],
+          "x-ms-enum": {
+            "name": "DataSourceType",
+            "modelAsString": false
+          },
+          "description": "The data source type."
+        },
+        "id": {
+          "type": "string",
+          "readOnly": true,
+          "description": "The data source ID."
+        },
+        "linkId": {
+          "type": "string",
+          "readOnly": true,
+          "description": "The Link ID if the data source type is LinkInteraction."
+        },
+        "connectorMappingId": {
+          "type": "string",
+          "readOnly": true,
+          "description": "The Connector Mapping ID if the data source type is ConnectorMapping."
+        }
+      },
+      "description": "Data Source is a way for us to know the source of instances. A single type can have data coming in from multiple places. In activities we use this to determine precedence rules."
     },
     "StrongId": {
       "required": [
@@ -4789,6 +4954,14 @@
         }
       },
       "description": "The response of list KPI operation."
+    },
+    "EnrichingKpi": {
+      "allOf": [
+        {
+          "$ref": "#/definitions/KpiDefinition"
+        }
+      ],
+      "description": "The enriching KPI definition."
     },
     "ConnectorResourceFormat": {
       "description": "The connector resource format.",
@@ -5062,17 +5235,8 @@
           "description": "Localized description for the metadata."
         },
         "provisioningState": {
-          "type": "string",
+          "$ref": "#/definitions/ProvisioningState",
           "readOnly": true,
-          "enum": [
-            "Provisioning",
-            "Succeeded",
-            "Failed"
-          ],
-          "x-ms-enum": {
-            "name": "ProvisioningStates",
-            "modelAsString": false
-          },
           "description": "Provisioning state."
         },
         "role": {
@@ -5139,6 +5303,14 @@
           "description": "Widget types set for the assignment."
         },
         "roleAssignments": {
+          "$ref": "#/definitions/ResourceSetDescription",
+          "description": "The Role assignments set for the assignment."
+        },
+        "conflationPolicies": {
+          "$ref": "#/definitions/ResourceSetDescription",
+          "description": "Widget types set for the assignment."
+        },
+        "segments": {
           "$ref": "#/definitions/ResourceSetDescription",
           "description": "The Role assignments set for the assignment."
         }
@@ -5306,6 +5478,89 @@
         "modelAsString": false
       },
       "description": "Supported permission types."
+    },
+    "ProvisioningState": {
+      "type": "string",
+      "enum": [
+        "Provisioning",
+        "Succeeded",
+        "Expiring",
+        "Deleting",
+        "HumanIntervention",
+        "Failed"
+      ],
+      "x-ms-enum": {
+        "name": "ProvisioningStates",
+        "modelAsString": true
+      },
+      "description": "Provisioning state."
+    },
+    "ConnectorType": {
+      "type": "string",
+      "enum": [
+        "None",
+        "CRM",
+        "AzureBlob",
+        "Salesforce",
+        "ExchangeOnline",
+        "Outbound"
+      ],
+      "x-ms-enum": {
+        "name": "ConnectorTypes",
+        "modelAsString": true
+      },
+      "description": "Type of connector."
+    },
+    "SuggestRelationshipLinksResponse": {
+      "required": [
+        "interactionName",
+        "suggestedRelationships"
+      ],
+      "properties": {
+        "interactionName": {
+          "type": "string",
+          "description": "The interaction name."
+        },
+        "suggestedRelationships": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/RelationshipsLookup"
+          },
+          "description": "Suggested relationships for the type."
+        }
+      },
+      "description": "The response of suggest relationship links operation."
+    },
+    "RelationshipsLookup": {
+      "properties": {
+        "profileName": {
+          "type": "string",
+          "description": "The relationship profile."
+        },
+        "profilePropertyReferences": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ParticipantPropertyReference"
+          },
+          "description": "The property references for the profile type."
+        },
+        "relatedProfileName": {
+          "type": "string",
+          "description": "The related profile."
+        },
+        "relatedProfilePropertyReferences": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ParticipantPropertyReference"
+          },
+          "description": "The property references for the related profile type."
+        },
+        "existingRelationshipName": {
+          "type": "string",
+          "description": "The name of existing Relationship."
+        }
+      },
+      "description": "The definition of suggested relationship for the type."
     }
   },
   "parameters": {
