@@ -162,7 +162,7 @@
         ],
         "operationId": "UpdateKey",
         "summary": "The update key operation changes specified attributes of a stored key and can be applied to any key type and key version stored in Azure Key Vault.",
-        "description": "The cryptographic material of a key itself cannot be changed. In order to perform this operation, the key must already exist in the Key Vault.",
+        "description": "In order to perform this operation, the key must already exist in the Key Vault. Note: The cryptographic material of a key itself cannot be changed.",
         "parameters": [
           {
             "name": "key-name",
@@ -186,7 +186,7 @@
             "schema": {
               "$ref": "#/definitions/KeyUpdateParameters"
             },
-            "description": "The parameters for the key to update."
+            "description": "The parameters of the key to update."
           },
           {
             "$ref": "#/parameters/ApiVersionParameter"
@@ -528,7 +528,7 @@
         ],
         "operationId": "sign",
         "summary": "Creates a signature from a digest using the specified key.",
-        "description": "SIGN is applicable to asymmetric and symmetric keys stored in Azure Key Vault since this operation uses the private portion of the key.",
+        "description": "The SIGN operation is applicable to asymmetric and symmetric keys stored in Azure Key Vault since this operation uses the private portion of the key.",
         "parameters": [
           {
             "name": "key-name",
@@ -581,7 +581,7 @@
         ],
         "operationId": "verify",
         "summary": "Verifies a signature using a specified key.",
-        "description": "VERIFY is applicable to symmetric keys stored in Azure Key Vault. VERIFY is not strictly necessary for asymmetric keys stored in Azure Key Vault since signature verification can be performed using the public portion of the key but this operation is supported as a convenience for callers that only have a key-reference and not the public portion of the key.",
+        "description": "The VERIFY operation is applicable to symmetric keys stored in Azure Key Vault. VERIFY is not strictly necessary for asymmetric keys stored in Azure Key Vault since signature verification can be performed using the public portion of the key but this operation is supported as a convenience for callers that only have a key-reference and not the public portion of the key.",
         "parameters": [
           {
             "name": "key-name",
@@ -1006,7 +1006,7 @@
         ],
         "operationId": "GetCertificates",
         "summary": "List certificates in a specified key vault",
-        "description": " ",
+        "description": "The GetCertificates operation returns the set of certificates resources in the specified key vault.",
         "parameters": [
           {
             "name": "maxresults",
@@ -1120,7 +1120,7 @@
         ],
         "operationId": "GetCertificateContacts",
         "summary": "Lists the certificate contacts for a specified key vault.",
-        "description": " ",
+        "description": "The GetCertificateContacts operation returns the set of certificate contact resources in the specified key vault.",
         "parameters": [
           {
             "$ref": "#/parameters/ApiVersionParameter"
@@ -1176,7 +1176,7 @@
         ],
         "operationId": "GetCertificateIssuers",
         "summary": "List certificate issuers for a specified key vault.",
-        "description": " ",
+        "description": "The GetCertificateIssuers operation returns the set of certificate issuer resources in the specified key vault",
         "parameters": [
           {
             "name": "maxresults",
@@ -1306,7 +1306,7 @@
         ],
         "operationId": "GetCertificateIssuer",
         "summary": "Lists the specified certificate issuer.",
-        "description": " ",
+        "description": "The GetCertificateIssuer operation returns the specified certificate issuer resources in the specified key vault",
         "parameters": [
           {
             "name": "issuer-name",
@@ -1470,7 +1470,7 @@
         ],
         "operationId": "GetCertificateVersions",
         "summary": "List the versions of a certificate.",
-        "description": " ",
+        "description": "The GetCertificateVersions operation returns the versions of a certificate in the specified key vault",
         "parameters": [
           {
             "name": "certificate-name",
@@ -1519,7 +1519,7 @@
         ],
         "operationId": "GetCertificatePolicy",
         "summary": "Lists the policy for a certificate.",
-        "description": " ",
+        "description": "The GetCertificatePolicy operation returns the specified certificate policy resources in the specified key vault",
         "parameters": [
           {
             "name": "certificate-name",
@@ -1649,7 +1649,7 @@
         ],
         "operationId": "GetCertificate",
         "summary": "Gets information about a specified certificate.",
-        "description": " ",
+        "description": " The GetCertificate operation returns information about a specific certificate in the specified key vault",
         "parameters": [
           {
             "name": "certificate-name",
@@ -1736,7 +1736,7 @@
         ],
         "operationId": "GetCertificateOperation",
         "summary": "Gets the operation associated with a specified certificate.",
-        "description": " ",
+        "description": "The GetCertificateOperation operation returns the certificate operation associated with the certificate.",
         "parameters": [
           {
             "name": "certificate-name",
