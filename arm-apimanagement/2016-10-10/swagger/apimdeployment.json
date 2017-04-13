@@ -43,7 +43,7 @@
         "operationId": "Operations_List",
         "parameters": [
           {
-            "$ref": "#/parameters/ApiVersionParameter"
+            "$ref": "./apimanagement.json#/parameters/ApiVersionParameter"
           }
         ],
         "responses": {
@@ -71,10 +71,10 @@
         },
         "parameters": [
           {
-            "$ref": "#/parameters/ResourceGroupNameParameter"
+            "$ref": "./apimanagement.json#/parameters/ResourceGroupNameParameter"
           },
           {
-            "$ref": "#/parameters/ServiceNameParameter"
+            "$ref": "./apimanagement.json#/parameters/ServiceNameParameter"
           },
           {
             "name": "parameters",
@@ -86,10 +86,10 @@
             "description": "Parameters supplied to the ManageDeployments operation."
           },
           {
-            "$ref": "#/parameters/ApiVersionParameter"
+            "$ref": "./apimanagement.json#/parameters/ApiVersionParameter"
           },
           {
-            "$ref": "#/parameters/SubscriptionIdParameter"
+            "$ref": "./apimanagement.json#/parameters/SubscriptionIdParameter"
           }
         ],
         "responses": {
@@ -127,10 +127,10 @@
         },
         "parameters": [
           {
-            "$ref": "#/parameters/ResourceGroupNameParameter"
+            "$ref": "./apimanagement.json#/parameters/ResourceGroupNameParameter"
           },
           {
-            "$ref": "#/parameters/ServiceNameParameter"
+            "$ref": "./apimanagement.json#/parameters/ServiceNameParameter"
           },
           {
             "name": "parameters",
@@ -142,10 +142,10 @@
             "description": "Parameters supplied to the Restore API Management service from backup operation."
           },
           {
-            "$ref": "#/parameters/ApiVersionParameter"
+            "$ref": "./apimanagement.json#/parameters/ApiVersionParameter"
           },
           {
-            "$ref": "#/parameters/SubscriptionIdParameter"
+            "$ref": "./apimanagement.json#/parameters/SubscriptionIdParameter"
           }
         ],
         "responses": {
@@ -180,10 +180,10 @@
         },
         "parameters": [
           {
-            "$ref": "#/parameters/ResourceGroupNameParameter"
+            "$ref": "./apimanagement.json#/parameters/ResourceGroupNameParameter"
           },
           {
-            "$ref": "#/parameters/ServiceNameParameter"
+            "$ref": "./apimanagement.json#/parameters/ServiceNameParameter"
           },
           {
             "name": "parameters",
@@ -195,10 +195,10 @@
             "description": "Parameters supplied to the ApiManagementServices_Backup operation."
           },
           {
-            "$ref": "#/parameters/ApiVersionParameter"
+            "$ref": "./apimanagement.json#/parameters/ApiVersionParameter"
           },
           {
-            "$ref": "#/parameters/SubscriptionIdParameter"
+            "$ref": "./apimanagement.json#/parameters/SubscriptionIdParameter"
           }
         ],
         "responses": {
@@ -233,10 +233,10 @@
         },
         "parameters": [
           {
-            "$ref": "#/parameters/ResourceGroupNameParameter"
+            "$ref": "./apimanagement.json#/parameters/ResourceGroupNameParameter"
           },
           {
-            "$ref": "#/parameters/ServiceNameParameter"
+            "$ref": "./apimanagement.json#/parameters/ServiceNameParameter"
           },
           {
             "name": "parameters",
@@ -248,10 +248,10 @@
             "description": "Parameters supplied to the CreateOrUpdate API Management service operation."
           },
           {
-            "$ref": "#/parameters/ApiVersionParameter"
+            "$ref": "./apimanagement.json#/parameters/ApiVersionParameter"
           },
           {
-            "$ref": "#/parameters/SubscriptionIdParameter"
+            "$ref": "./apimanagement.json#/parameters/SubscriptionIdParameter"
           }
         ],
         "responses": {
@@ -283,10 +283,10 @@
         "description": "Updates an existing API Management service.",
         "parameters": [
           {
-            "$ref": "#/parameters/ResourceGroupNameParameter"
+            "$ref": "./apimanagement.json#/parameters/ResourceGroupNameParameter"
           },
           {
-            "$ref": "#/parameters/ServiceNameParameter"
+            "$ref": "./apimanagement.json#/parameters/ServiceNameParameter"
           },
           {
             "name": "parameters",
@@ -298,10 +298,10 @@
             "description": "Parameters supplied to the CreateOrUpdate API Management service operation."
           },
           {
-            "$ref": "#/parameters/ApiVersionParameter"
+            "$ref": "./apimanagement.json#/parameters/ApiVersionParameter"
           },
           {
-            "$ref": "#/parameters/SubscriptionIdParameter"
+            "$ref": "./apimanagement.json#/parameters/SubscriptionIdParameter"
           }
         ],
         "responses": {
@@ -331,16 +331,16 @@
         "description": "Gets an API Management service resource description.",
         "parameters": [
           {
-            "$ref": "#/parameters/ResourceGroupNameParameter"
+            "$ref": "./apimanagement.json#/parameters/ResourceGroupNameParameter"
           },
           {
-            "$ref": "#/parameters/ServiceNameParameter"
+            "$ref": "./apimanagement.json#/parameters/ServiceNameParameter"
           },
           {
-            "$ref": "#/parameters/ApiVersionParameter"
+            "$ref": "./apimanagement.json#/parameters/ApiVersionParameter"
           },
           {
-            "$ref": "#/parameters/SubscriptionIdParameter"
+            "$ref": "./apimanagement.json#/parameters/SubscriptionIdParameter"
           }
         ],
         "responses": {
@@ -350,8 +350,8 @@
               "$ref": "#/definitions/ApiManagementServiceResource"
             }
           },
-          "404": {
-            "description": "ApiManagement Service not found.",
+          "default": {
+            "description": "Error response describing why the operation failed.",
             "schema": {
               "$ref": "#/definitions/ErrorResponse"
             }
@@ -366,16 +366,16 @@
         "description": "Deletes an existing API Management service.",
         "parameters": [
           {
-            "$ref": "#/parameters/ResourceGroupNameParameter"
+            "$ref": "./apimanagement.json#/parameters/ResourceGroupNameParameter"
           },
           {
-            "$ref": "#/parameters/ServiceNameParameter"
+            "$ref": "./apimanagement.json#/parameters/ServiceNameParameter"
           },
           {
-            "$ref": "#/parameters/ApiVersionParameter"
+            "$ref": "./apimanagement.json#/parameters/ApiVersionParameter"
           },
           {
-            "$ref": "#/parameters/SubscriptionIdParameter"
+            "$ref": "./apimanagement.json#/parameters/SubscriptionIdParameter"
           }
         ],
         "responses": {
@@ -385,8 +385,8 @@
           "204": {
             "description": "Service is already deleted."
           },
-          "404": {
-            "description": "ApiManagement Service not found.",
+          "default": {
+            "description": "Error response describing why the operation failed.",
             "schema": {
               "$ref": "#/definitions/ErrorResponse"
             }
@@ -403,13 +403,13 @@
         "description": "List all API Management services within a resource group.",
         "parameters": [
           {
-            "$ref": "#/parameters/ResourceGroupNameParameter"
+            "$ref": "./apimanagement.json#/parameters/ResourceGroupNameParameter"
           },
           {
-            "$ref": "#/parameters/ApiVersionParameter"
+            "$ref": "./apimanagement.json#/parameters/ApiVersionParameter"
           },
           {
-            "$ref": "#/parameters/SubscriptionIdParameter"
+            "$ref": "./apimanagement.json#/parameters/SubscriptionIdParameter"
           }
         ],
         "responses": {
@@ -434,10 +434,10 @@
         "description": "Lists all API Management services within an Azure subscription.",
         "parameters": [          
           {
-            "$ref": "#/parameters/ApiVersionParameter"
+            "$ref": "./apimanagement.json#/parameters/ApiVersionParameter"
           },
           {
-            "$ref": "#/parameters/SubscriptionIdParameter"
+            "$ref": "./apimanagement.json#/parameters/SubscriptionIdParameter"
           }
         ],
         "responses": {
@@ -465,16 +465,16 @@
         },
         "parameters": [
           {
-            "$ref": "#/parameters/ResourceGroupNameParameter"
+            "$ref": "./apimanagement.json#/parameters/ResourceGroupNameParameter"
           },
           {
-            "$ref": "#/parameters/ServiceNameParameter"
+            "$ref": "./apimanagement.json#/parameters/ServiceNameParameter"
           },
           {
-            "$ref": "#/parameters/ApiVersionParameter"
+            "$ref": "./apimanagement.json#/parameters/ApiVersionParameter"
           },
           {
-            "$ref": "#/parameters/SubscriptionIdParameter"
+            "$ref": "./apimanagement.json#/parameters/SubscriptionIdParameter"
           }
         ],
         "responses": {
@@ -509,10 +509,10 @@
             "description": "Parameters supplied to the CheckNameAvailability operation."
           },
           {
-            "$ref": "#/parameters/ApiVersionParameter"
+            "$ref": "./apimanagement.json#/parameters/ApiVersionParameter"
           },
           {
-            "$ref": "#/parameters/SubscriptionIdParameter"
+            "$ref": "./apimanagement.json#/parameters/SubscriptionIdParameter"
           }
         ],
         "responses": {
@@ -537,10 +537,10 @@
         },
         "parameters": [
           {
-            "$ref": "#/parameters/ResourceGroupNameParameter"
+            "$ref": "./apimanagement.json#/parameters/ResourceGroupNameParameter"
           },
           {
-            "$ref": "#/parameters/ServiceNameParameter"
+            "$ref": "./apimanagement.json#/parameters/ServiceNameParameter"
           },
           {
             "name": "parameters",
@@ -552,10 +552,10 @@
             "description": "Parameters supplied to the Upload SSL certificate for an API Management service operation."
           },
           {
-            "$ref": "#/parameters/ApiVersionParameter"
+            "$ref": "./apimanagement.json#/parameters/ApiVersionParameter"
           },
           {
-            "$ref": "#/parameters/SubscriptionIdParameter"
+            "$ref": "./apimanagement.json#/parameters/SubscriptionIdParameter"
           }
         ],
         "responses": {
@@ -586,10 +586,10 @@
         },
         "parameters": [
           {
-            "$ref": "#/parameters/ResourceGroupNameParameter"
+            "$ref": "./apimanagement.json#/parameters/ResourceGroupNameParameter"
           },
           {
-            "$ref": "#/parameters/ServiceNameParameter"
+            "$ref": "./apimanagement.json#/parameters/ServiceNameParameter"
           },
           {
             "name": "parameters",
@@ -601,10 +601,10 @@
             "description": "Parameters supplied to the UpdateHostname operation."
           },
           {
-            "$ref": "#/parameters/ApiVersionParameter"
+            "$ref": "./apimanagement.json#/parameters/ApiVersionParameter"
           },
           {
-            "$ref": "#/parameters/SubscriptionIdParameter"
+            "$ref": "./apimanagement.json#/parameters/SubscriptionIdParameter"
           }
         ],
         "responses": {
@@ -642,16 +642,16 @@
         },
         "parameters": [
           {
-            "$ref": "#/parameters/ResourceGroupNameParameter"
+            "$ref": "./apimanagement.json#/parameters/ResourceGroupNameParameter"
           },
           {
-            "$ref": "#/parameters/ServiceNameParameter"
+            "$ref": "./apimanagement.json#/parameters/ServiceNameParameter"
           },
           {
-            "$ref": "#/parameters/ApiVersionParameter"
+            "$ref": "./apimanagement.json#/parameters/ApiVersionParameter"
           },
           {
-            "$ref": "#/parameters/SubscriptionIdParameter"
+            "$ref": "./apimanagement.json#/parameters/SubscriptionIdParameter"
           }
         ],
         "responses": {
@@ -1302,38 +1302,5 @@
     }
   },
   "parameters": {
-    "SubscriptionIdParameter": {
-      "name": "subscriptionId",
-      "in": "path",
-      "required": true,
-      "type": "string",
-      "description": "Subscription credentials which uniquely identify the Microsoft Azure subscription. The subscription ID forms part of the URI for every service call."
-    },
-    "ApiVersionParameter": {
-      "name": "api-version",
-      "in": "query",
-      "required": true,
-      "type": "string",
-      "description": "Version of the API to be used with the client request."
-    },
-    "ServiceNameParameter": {
-      "name": "serviceName",
-      "in": "path",
-      "required": true,
-      "type": "string",
-      "description": "The name of the API Management service.",
-      "minLength": 1,
-      "maxLength": 50,
-      "pattern": "^[a-zA-Z](?:[a-zA-Z0-9-]*[a-zA-Z0-9])?$",
-      "x-ms-parameter-location": "method"
-    },
-    "ResourceGroupNameParameter": {
-      "name": "resourceGroupName",
-      "in": "path",
-      "required": true,
-      "type": "string",
-      "description": "The name of the resource group.",
-      "x-ms-parameter-location": "method"
-    }
   }
 }
