@@ -3474,9 +3474,57 @@
           "type": "string",
           "readOnly": true,
           "description": "Gets the workflow trigger callback URL."
+        },
+        "method": {
+          "type": "string",
+          "readOnly": true,
+          "description": "Gets the workflow trigger callback URL HTTP method."
+        },
+        "basePath": {
+          "type": "string",
+          "readOnly": true,
+          "description": "Gets the workflow trigger callback URL base path."
+        },
+        "relativePath": {
+          "type": "string",
+          "readOnly": true,
+          "description": "Gets the workflow trigger callback URL relative path."
+        },
+        "relativePathParameters": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "description": "Gets the workflow trigger callback URL relative path parameters."
+        },
+        "queries": {
+          "$ref": "#/definitions/WorkflowTriggerListCallbackUrlQueries",
+          "description": "Gets the workflow trigger callback URL query parameters."
         }
       },
       "description": "The workflow trigger callback URL."
+    },
+    "WorkflowTriggerListCallbackUrlQueries": {
+      "type": "object",
+      "properties": {
+        "api-version": {
+          "type": "string",
+          "description": "The api version."
+        },
+        "sp": {
+          "type": "string",
+          "description": "The SAS permissions."
+        },
+        "sv": {
+          "type": "string",
+          "description": "The SAS version."
+        },
+        "sig": {
+          "type": "string",
+          "description": "The SAS signature."
+        }
+      },
+      "description": "Gets the workflow trigger callback URL query parameters."
     },
     "WorkflowTriggerHistory": {
       "type": "object",
