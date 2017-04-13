@@ -198,7 +198,7 @@
             "in": "body",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/Namespace"
+              "$ref": "#/definitions/NamespaceResource"
             },
             "description": "Parameters for creating a namespace resource."
           },
@@ -213,13 +213,13 @@
           "201": {
             "description": "Namespace create request accepted.",
             "schema": {
-              "$ref": "#/definitions/Namespace"
+              "$ref": "#/definitions/NamespaceResource"
             }
           },
           "200": {
             "description": "Namespace successfuly created.",
             "schema": {
-              "$ref": "#/definitions/Namespace"
+              "$ref": "#/definitions/NamespaceResource"
             }
           },
           "202": {
@@ -303,7 +303,7 @@
           "200": {
             "description": "Namespace returned successfully.",
             "schema": {
-              "$ref": "#/definitions/Namespace"
+              "$ref": "#/definitions/NamespaceResource"
             }
           }
         }
@@ -717,7 +717,7 @@
             "in": "body",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/EventHub"
+              "$ref": "#/definitions/EventHubResource"
             },
             "description": "Parameters supplied to create an Event Hub resource."
           },
@@ -732,7 +732,7 @@
           "200": {
             "description": "Event Hub successfully created.",
             "schema": {
-              "$ref": "#/definitions/EventHub"
+              "$ref": "#/definitions/EventHubResource"
             }
           }
         }
@@ -820,7 +820,7 @@
           "200": {
             "description": "Successfully retrieved the Event Hub description.",
             "schema": {
-              "$ref": "#/definitions/EventHub"
+              "$ref": "#/definitions/EventHubResource"
             }
           }
         }
@@ -1168,7 +1168,7 @@
             "in": "body",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/ConsumerGroup"
+              "$ref": "#/definitions/ConsumerGroupResource"
             },
             "description": "Parameters supplied to create a consumer group resource."
           },
@@ -1183,7 +1183,7 @@
           "200": {
             "description": "Consumer group successfully created.",
             "schema": {
-              "$ref": "#/definitions/ConsumerGroup"
+              "$ref": "#/definitions/ConsumerGroupResource"
             }
           }
         }
@@ -1277,7 +1277,7 @@
           "200": {
             "description": "Successfully retrieved the consumer group description.",
             "schema": {
-              "$ref": "#/definitions/ConsumerGroup"
+              "$ref": "#/definitions/ConsumerGroupResource"
             }
           }
         }
@@ -1434,7 +1434,7 @@
         "value": {
           "type": "array",
           "items": {
-            "$ref": "#/definitions/Namespace"
+            "$ref": "#/definitions/NamespaceResource"
           },
           "description": "Result of the List Namespace operation."
         },
@@ -1445,7 +1445,7 @@
       },
       "description": "The response of the List Namespace operation."
     },
-    "Namespace": {
+    "NamespaceResource": {
       "properties": {
         "sku": {
           "$ref": "#/definitions/Sku"
@@ -1689,7 +1689,7 @@
       },
       "description": "Description of a EventHub Properties."
     },
-    "EventHub": {
+    "EventHubResource": {
       "properties": {
         "properties": {
           "x-ms-client-flatten": true,
@@ -1708,7 +1708,7 @@
         "value": {
           "type": "array",
           "items": {
-            "$ref": "#/definitions/EventHub"
+            "$ref": "#/definitions/EventHubResource"
           },
           "description": "Result of the List Event Hubs operation."
         },
@@ -1745,7 +1745,7 @@
       },
       "description": "Description of a Consumer Group properties."
     },
-    "ConsumerGroup": {
+    "ConsumerGroupResource": {
       "properties": {
         "properties": {
           "x-ms-client-flatten": true,
@@ -1764,7 +1764,7 @@
         "value": {
           "type": "array",
           "items": {
-            "$ref": "#/definitions/ConsumerGroup"
+            "$ref": "#/definitions/ConsumerGroupResource"
           },
           "description": "Result of the List Consumer Group operation."
         },
