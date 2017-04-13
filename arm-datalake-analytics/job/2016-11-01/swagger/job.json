@@ -35,6 +35,118 @@
     "application/json"
   ],
   "paths": {
+    "/pipelines" : {
+      "get": {
+        "tags": [
+          "Pipeline"
+        ],
+        "operationId": "Pipeline_List",
+        "description": "Lists all pipelines.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successfully retrieved the list of pipelines.",
+            "schema": {
+              "$ref": "#/definitions/JobPipelineInformationListResult"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        },
+        "x-ms-odata": "#/definitions/JobPipelineInformation"
+      }
+    },
+    "/pipelines/{pipelineIdentity}": {
+      "get": {
+        "tags": [
+          "Pipeline"
+        ],
+        "operationId": "Pipeline_Get",
+        "description": "Gets the Pipeline information for the specified pipeline ID.",
+        "parameters": [
+          {
+            "name": "pipelineIdentity",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "format": "uuid",
+            "description": "Pipeline ID."
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successfully retrieved details of the specified pipeline.",
+            "schema": {
+              "$ref": "#/definitions/JobPipelineInformation"
+            }
+          }
+        }
+      }
+    },
+    "/recurrences" : {
+      "get": {
+        "tags": [
+          "Recurrence"
+        ],
+        "operationId": "Recurrence_List",
+        "description": "Lists all recurrences.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successfully retrieved the list of recurrences.",
+            "schema": {
+              "$ref": "#/definitions/JobRecurrenceInformationListResult"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        },
+        "x-ms-odata": "#/definitions/JobRecurrenceInformation"
+      }
+    },
+    "/recurrences/{recurrenceIdentity}": {
+      "get": {
+        "tags": [
+          "Recurrence"
+        ],
+        "operationId": "Recurrence_Get",
+        "description": "Gets the recurrence information for the specified recurrence ID.",
+        "parameters": [
+          {
+            "name": "recurrenceIdentity",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "format": "uuid",
+            "description": "Recurrence ID."
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successfully retrieved details of the specified pipeline.",
+            "schema": {
+              "$ref": "#/definitions/JobRecurrenceInformation"
+            }
+          }
+        }
+      }
+    },
     "/Jobs/{jobIdentity}/GetStatistics": {
       "get": {
         "tags": [
@@ -882,6 +994,234 @@
       },
       "description": "The Data Lake Analytics job error details."
     },
+    "JobRelationshipProperties": {
+      "properties": {
+        "pipelineId": {
+          "type": "string",
+          "format": "uuid",
+          "description": "the job relationship pipeline identifier (a GUID)."
+        },
+        "pipelineName": {
+          "type": "string",
+          "maxLength": 260,
+          "description": "the friendly name of the job relationship pipeline, which does not need to be unique."
+        },
+        "pipelineUri": {
+          "type": "string",
+          "description": "the pipeline uri, unique, links to the originating service for this pipeline."
+        },
+        "runId": {
+          "type": "string",
+          "format": "uuid",
+          "description": "the run identifier (a GUID), unique identifier of the iteration of this pipeline."
+        },
+        "recurrenceId": {
+          "type": "string",
+          "format": "uuid",
+          "description": "the recurrence identifier (a GUID), unique per activity/script, regardless of iterations. This is something to link different occurrences of the same job together."
+        },
+        "recurrenceName": {
+          "type": "string",
+          "maxLength": 260,
+          "description": "the recurrence name, user friendly name for the correlation between jobs."
+        }
+      },
+      "required": [
+          "recurrenceId"
+      ],
+      "description": "Job relationship information properties including pipeline information, correlation information, etc."
+    },
+    "JobPipelineInformationListResult": {
+      "properties": {
+        "value": {
+          "type": "array",
+          "readOnly": true,
+          "items": {
+            "$ref": "#/definitions/JobPipelineInformation"
+          },
+          "description": "the list of job pipeline information items."
+        },
+        "nextLink": {
+          "type": "string",
+          "readOnly": true,
+          "description": "the link (url) to the next page of results."
+        }
+      },
+      "description": "List of job pipeline information items."
+    },
+    "JobPipelineInformation": {
+      "properties": {
+        "pipelineId": {
+          "type": "string",
+          "format": "uuid",
+          "readOnly": true,
+          "description": "the job relationship pipeline identifier (a GUID)."
+        },
+        "pipelineName": {
+          "type": "string",
+          "maxLength": 260,
+          "readOnly": true,
+          "description": "the friendly name of the job relationship pipeline, which does not need to be unique."
+        },
+        "pipelineUri": {
+          "type": "string",
+          "readOnly": true,
+          "description": "the pipeline uri, unique, links to the originating service for this pipeline."
+        },
+        "numJobsFailed": {
+          "type": "integer",
+          "format": "int32",
+          "readOnly": true,
+          "description": "the number of jobs in this pipeline that have failed."
+        },
+        "numJobsCanceled": {
+          "type": "integer",
+          "format": "int32",
+          "readOnly": true,
+          "description": "the number of jobs in this pipeline that have been canceled."
+        },
+        "numJobsSucceeded": {
+          "type": "integer",
+          "format": "int32",
+          "readOnly": true,
+          "description": "the number of jobs in this pipeline that have succeeded."
+        },
+        "auHoursFailed": {
+          "type": "number",
+          "format": "double",
+          "readOnly": true,
+          "description": "the number of job execution hours that resulted in failed jobs."
+        },
+        "auHoursCanceled": {
+          "type": "number",
+          "format": "double",
+          "readOnly": true,
+          "description": "the number of job execution hours that resulted in canceled jobs."
+        },
+        "auHoursSucceeded": {
+          "type": "number",
+          "format": "double",
+          "readOnly": true,
+          "description": "the number of job execution hours that resulted in successful jobs."
+        },
+        "lastSubmitTime": {
+          "type": "string",
+          "format": "date-time",
+          "readOnly": true,
+          "description": "the last time a job in this pipeline was submitted."
+        },
+        "runs": {
+          "type": "array",
+          "readOnly": true,
+          "items": {
+            "$ref": "#/definitions/JobPipelineRunInformation"
+          },
+          "description": "the list of recurrence identifiers representing each run of this pipeline."
+        },
+        "recurrences": {
+          "type": "array",
+          "readOnly": true,
+          "items": {
+            "type": "string",
+            "format": "uuid"
+          },
+          "description": "the list of recurrence identifiers representing each run of this pipeline."
+        }
+      },
+      "description": "Job Pipeline Information, showing the relationship of jobs and recurrences of those jobs in a pipeline."
+    },
+    "JobRecurrenceInformationListResult": {
+      "properties": {
+        "value": {
+          "type": "array",
+          "readOnly": true,
+          "items": {
+            "$ref": "#/definitions/JobRecurrenceInformation"
+          },
+          "description": "the list of job recurrence information items."
+        },
+        "nextLink": {
+          "type": "string",
+          "readOnly": true,
+          "description": "the link (url) to the next page of results."
+        }
+      },
+      "description": "List of job recurrence information items."
+    },
+    "JobRecurrenceInformation": {
+      "properties": {
+        "recurrenceId": {
+          "type": "string",
+          "format": "uuid",
+          "readOnly": true,
+          "description": "the recurrence identifier (a GUID), unique per activity/script, regardless of iterations. This is something to link different occurrences of the same job together."
+        },
+        "recurrenceName": {
+          "type": "string",
+          "readOnly": true,
+          "description": "the recurrence name, user friendly name for the correlation between jobs."
+        },
+        "numJobsFailed": {
+          "type": "integer",
+          "format": "int32",
+          "readOnly": true,
+          "description": "the number of jobs in this recurrence that have failed."
+        },
+        "numJobsCanceled": {
+          "type": "integer",
+          "format": "int32",
+          "readOnly": true,
+          "description": "the number of jobs in this recurrence that have been canceled."
+        },
+        "numJobsSucceeded": {
+          "type": "integer",
+          "format": "int32",
+          "readOnly": true,
+          "description": "the number of jobs in this recurrence that have succeeded."
+        },
+        "auHoursFailed": {
+          "type": "number",
+          "format": "double",
+          "readOnly": true,
+          "description": "the number of job execution hours that resulted in failed jobs."
+        },
+        "auHoursCanceled": {
+          "type": "number",
+          "format": "double",
+          "readOnly": true,
+          "description": "the number of job execution hours that resulted in canceled jobs."
+        },
+        "auHoursSucceeded": {
+          "type": "number",
+          "format": "double",
+          "readOnly": true,
+          "description": "the number of job execution hours that resulted in successful jobs."
+        },
+        "lastSubmitTime": {
+          "type": "string",
+          "format": "date-time",
+          "readOnly": true,
+          "description": "the last time a job in this recurrence was submitted."
+        }
+      }
+    },
+    "JobPipelineRunInformation": {
+      "properties": {
+        "runId": {
+          "type": "string",
+          "format": "uuid",
+          "readOnly": true,
+          "description": "the run identifier of an instance of pipeline executions (a GUID)."
+        },
+        "lastSubmitTime": {
+          "type": "string",
+          "format": "date-time",
+          "readOnly": true,
+          "description": "the time this instance was last submitted."
+        }
+      },
+      "description": "Run info for a specific job pipeline."
+    },
     "JobInformation": {
       "properties": {
         "jobId": {
@@ -1007,6 +1347,10 @@
         "properties": {
           "$ref": "#/definitions/JobProperties",
           "description": "the job specific properties."
+        },
+        "related": {
+          "$ref": "#/definitions/JobRelationshipProperties",
+          "description": "the recurring job relationship information properties."
         }
       },
       "required": [
