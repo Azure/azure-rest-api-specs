@@ -423,6 +423,95 @@
         }
       }
     },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Logic/workflows/{workflowName}/listSwagger": {
+      "post": {
+        "tags": [
+          "Workflows"
+        ],
+        "operationId": "Workflows_ListSwagger",
+        "description": "Gets an OpenAPI definition for the workflow.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/subscriptionId"
+          },
+          {
+            "name": "resourceGroupName",
+            "description": "The resource group name.",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "workflowName",
+            "description": "The workflow name.",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "$ref": "#/parameters/api-version"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/Object"
+            }
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Logic/workflows/{workflowName}/regenerateAccessKey": {
+      "post": {
+        "tags": [
+          "Workflows"
+        ],
+        "operationId": "Workflows_RegenerateAccessKey",
+        "description": "Regenerates the callback URL access key for request triggers.",
+        "x-ms-examples": {
+          "Regenerate the callback URL access key for request triggers": {
+            "$ref": "../examples/WorkflowsRegenerateAccessKey.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "#/parameters/subscriptionId"
+          },
+          {
+            "name": "resourceGroupName",
+            "description": "The resource group name.",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "workflowName",
+            "description": "The workflow name.",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "keyType",
+            "description": "The access key type.",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/RegenerateActionParameter"
+            }
+          },
+          {
+            "$ref": "#/parameters/api-version"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Logic/workflows/{workflowName}/versions": {
       "get": {
         "tags": [
@@ -715,6 +804,73 @@
         }
       }
     },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Logic/workflows/{workflowName}/versions/{versionId}/triggers/{triggerName}/listCallbackUrl": {
+      "post": {
+        "tags": [
+          "WorkflowTriggers"
+        ],
+        "operationId": "WorkflowVersions_ListCallbackUrl",
+        "description": "Lists the callback URL for a trigger of a workflow version.",
+        "x-ms-examples": {
+          "Get callback URL for a trigger of a workflow version": {
+            "$ref": "../examples/WorkflowVersionsListCallbackUrl.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "#/parameters/subscriptionId"
+          },
+          {
+            "name": "resourceGroupName",
+            "description": "The resource group name.",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "workflowName",
+            "description": "The workflow name.",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "versionId",
+            "description": "The workflow versionId.",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "triggerName",
+            "description": "The workflow trigger name.",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "parameters",
+            "description": "The callback URL parameters.",
+            "in": "body",
+            "required": false,
+            "schema": {
+              "$ref": "#/definitions/GetCallbackUrlParameters"
+            }
+          },
+          {
+            "$ref": "#/parameters/api-version"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/WorkflowTriggerCallbackUrl"
+            }
+          }
+        }
+      }
+    },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Logic/workflows/{workflowName}/triggers/{triggerName}/histories": {
       "get": {
         "tags": [
@@ -814,7 +970,7 @@
           },
           {
             "name": "historyName",
-            "description": "The workflow trigger history name.",
+            "description": "The workflow trigger history name. Corresponds to the run name for triggers that resulted in a run.",
             "in": "path",
             "required": true,
             "type": "string"
@@ -829,6 +985,61 @@
             "schema": {
               "$ref": "#/definitions/WorkflowTriggerHistory"
             }
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Logic/workflows/{workflowName}/triggers/{triggerName}/histories/{historyName}/resubmit": {
+      "post": {
+        "tags": [
+          "WorkflowTriggerHistories"
+        ],
+        "operationId": "WorkflowTriggerHistories_Resubmit",
+        "description": "Resubmits a workflow run based on the trigger history.",
+        "x-ms-examples": {
+          "Resubmit a workflow run based on the trigger history": {
+            "$ref": "../examples/WorkflowTriggerHistoriesResubmit.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "#/parameters/subscriptionId"
+          },
+          {
+            "name": "resourceGroupName",
+            "description": "The resource group name.",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "workflowName",
+            "description": "The workflow name.",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "triggerName",
+            "description": "The workflow trigger name.",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "historyName",
+            "description": "The workflow trigger history name. Corresponds to the run name for triggers that resulted in a run.",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "$ref": "#/parameters/api-version"
+          }
+        ],
+        "responses": {
+          "202": {
+            "description": "OK"
           }
         }
       }
@@ -3263,9 +3474,57 @@
           "type": "string",
           "readOnly": true,
           "description": "Gets the workflow trigger callback URL."
+        },
+        "method": {
+          "type": "string",
+          "readOnly": true,
+          "description": "Gets the workflow trigger callback URL HTTP method."
+        },
+        "basePath": {
+          "type": "string",
+          "readOnly": true,
+          "description": "Gets the workflow trigger callback URL base path."
+        },
+        "relativePath": {
+          "type": "string",
+          "readOnly": true,
+          "description": "Gets the workflow trigger callback URL relative path."
+        },
+        "relativePathParameters": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "description": "Gets the workflow trigger callback URL relative path parameters."
+        },
+        "queries": {
+          "$ref": "#/definitions/WorkflowTriggerListCallbackUrlQueries",
+          "description": "Gets the workflow trigger callback URL query parameters."
         }
       },
       "description": "The workflow trigger callback URL."
+    },
+    "WorkflowTriggerListCallbackUrlQueries": {
+      "type": "object",
+      "properties": {
+        "api-version": {
+          "type": "string",
+          "description": "The api version."
+        },
+        "sp": {
+          "type": "string",
+          "description": "The SAS permissions."
+        },
+        "sv": {
+          "type": "string",
+          "description": "The SAS version."
+        },
+        "sig": {
+          "type": "string",
+          "description": "The SAS signature."
+        }
+      },
+      "description": "Gets the workflow trigger callback URL query parameters."
     },
     "WorkflowTriggerHistory": {
       "type": "object",
@@ -3579,6 +3838,13 @@
           "$ref": "#/definitions/Object",
           "readOnly": true,
           "description": "Gets the tracked properties."
+        },
+        "retryHistory": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/RetryHistory"
+          },
+          "description": "Gets the retry histories."
         }
       },
       "description": "The workflow run action properties."
@@ -3750,6 +4016,48 @@
         }
       },
       "description": "The content hash."
+    },
+    "RegenerateActionParameter": {
+      "type": "object",
+      "properties": {
+        "keyType": {
+          "$ref": "#/definitions/KeyType",
+          "description": "The key type."
+        }
+      },
+      "description": "The access key regenerate action content."
+    },
+    "RetryHistory": {
+      "type": "object",
+      "properties": {
+        "startTime": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Gets the start time."
+        },
+        "endTime": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Gets the end time."
+        },
+        "code": {
+          "type": "string",
+          "description": "Gets the status code."
+        },
+        "clientRequestId": {
+          "type": "string",
+          "description": "Gets the client request Id."
+        },
+        "serviceRequestId": {
+          "type": "string",
+          "description": "Gets the service request Id."
+        },
+        "error": {
+          "$ref": "#/definitions/ErrorResponse",
+          "description": "Gets the error response."
+        }
+      },
+      "description": "The retry history."
     },
     "Correlation": {
       "type": "object",
