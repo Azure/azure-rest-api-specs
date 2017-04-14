@@ -38,8 +38,9 @@
         "tags": [
           "ServiceDiagnosticSettings"
         ],
+        "deprecated": true,
         "operationId": "ServiceDiagnosticSettings_Get",
-        "description": "Gets the active diagnostic settings for the specified resource.",
+        "description": "Gets the active diagnostic settings for the specified resource. **WARNING**: This method will be deprecated in future releases.",
         "parameters": [
           {
             "$ref": "#/parameters/ResourceUriParameter"
@@ -101,8 +102,9 @@
         "tags": [
           "ServiceDiagnosticSettings"
         ],
+        "deprecated": true,
         "operationId": "ServiceDiagnosticSettings_CreateOrUpdate",
-        "description": "Create or update new diagnostic settings for the specified resource.",
+        "description": "Create or update new diagnostic settings for the specified resource. **WARNING**: This method will be deprecated in future releases.",
         "parameters": [
           {
             "$ref": "#/parameters/ResourceUriParameter"
@@ -165,38 +167,39 @@
         }
       },
       "patch": {
-          "description": "Updates an existing ServiceDiagnosticSettingsResource. To update other fields use the CreateOrUpdate method.",
-          "operationId": "ServiceDiagnosticSettings_Update",
-          "parameters": [
-              {
-                "$ref": "#/parameters/ResourceUriParameter"
-              },
-              {
-                "$ref": "#/parameters/ApiVersionParameter"
-              },
-              {
-                  "name": "serviceDiagnosticSettingsResource",
-                  "in": "body",
-                  "required": true,
-                  "schema": {
-                      "$ref": "#/definitions/ServiceDiagnosticSettingsResource"
-                  },
-                  "description": "Parameters supplied to the operation."
-              }
-          ],
-          "responses": {
-              "default": {
-                  "description": "Error response describing why the operation failed.",
-                  "schema": {
-                      "$ref": "#/definitions/ErrorResponse"
-                  }
-              },
-              "200": {
-                  "description": "An existing service diagnostics setting resource was successfully updated.",
-                  "schema": {
-                      "$ref": "#/definitions/ServiceDiagnosticSettingsResource"
-                  }
-              }
+        "deprecated": true,
+        "description": "Updates an existing ServiceDiagnosticSettingsResource. To update other fields use the CreateOrUpdate method. **WARNING**: This method will be deprecated in future releases.",
+        "operationId": "ServiceDiagnosticSettings_Update",
+        "parameters": [
+            {
+              "$ref": "#/parameters/ResourceUriParameter"
+            },
+            {
+              "$ref": "#/parameters/ApiVersionParameter"
+            },
+            {
+                "name": "serviceDiagnosticSettingsResource",
+                "in": "body",
+                "required": true,
+                "schema": {
+                    "$ref": "#/definitions/ServiceDiagnosticSettingsResource"
+                },
+                "description": "Parameters supplied to the operation."
+            }
+        ],
+        "responses": {
+            "default": {
+                "description": "Error response describing why the operation failed.",
+                "schema": {
+                    "$ref": "#/definitions/ErrorResponse"
+                }
+            },
+            "200": {
+                "description": "An existing service diagnostics setting resource was successfully updated.",
+                "schema": {
+                    "$ref": "#/definitions/ServiceDiagnosticSettingsResource"
+                }
+            }
           }
       }
     }
