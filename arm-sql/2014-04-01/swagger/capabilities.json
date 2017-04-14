@@ -127,9 +127,14 @@
                         "$ref": "#/definitions/MaxSizeCapability"
                     },
                     "description": "The list of supported maximum database sizes for this service objective."
+                },
+                "includedMaxSize": {
+                    "readOnly": true,
+                    "$ref": "#/definitions/MaxSizeCapability",
+                    "description": "The included (free) max size for this service level objective."
                 }
             },
-            "description": "The service objectives capabilities."
+            "description": "The service objectives capability."
         },
         "PerformanceLevel": {            
             "description": "A possible performance level of a service objective capability.",
@@ -162,7 +167,7 @@
                 "status": {
                     "readOnly": true,
                     "type": "string",
-                    "description": "The status of the server edition.",
+                    "description": "The status of the edition.",
                     "$ref": "#/definitions/CapabilityStatus"
                 },
                 "supportedServiceLevelObjectives": {
@@ -174,7 +179,7 @@
                     "description": "The list of supported service objectives for the edition."
                 }
             },
-            "description": "The server edition capabilities."
+            "description": "The database edition capabilities."
         },
         "ServerVersionCapability": {
             "properties": {
@@ -195,7 +200,15 @@
                     "items": {
                         "$ref": "#/definitions/EditionCapability"
                     },
-                    "description": "The list of supported server editions."
+                    "description": "The list of supported database editions."
+                },
+                "supportedElasticPoolEditions": {
+                    "readOnly": true,
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/definitions/ElasticPoolEditionCapability"
+                    },
+                    "description": "The list of supported elastic pool editions."
                 }
             },
             "description": "The server capabilities."
@@ -223,6 +236,122 @@
                 }
             },
             "description": "The capabilities for a location."
+        },
+        "ElasticPoolEditionCapability": {
+            "properties": {
+                "name": {
+                    "readOnly": true,
+                    "type": "string",
+                    "description": "The elastic pool edition name."
+                },
+                "status": {
+                    "readOnly": true,
+                    "type": "string",
+                    "description": "The status of the elastic pool edition.",
+                    "$ref": "#/definitions/CapabilityStatus"
+                },
+                "supportedElasticPoolDtus": {
+                    "readOnly": true,
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/definitions/ElasticPoolDtuCapability"
+                    },
+                    "description": "The list of supported elastic pool DTU levels for the edition."
+                }
+            },
+            "description": "The elastic pool edition capabilities."
+        },
+        "ElasticPoolDtuCapability": {
+            "properties": {
+                "limit": {
+                    "readOnly": true,
+                    "type": "integer",
+                    "format": "int64",
+                    "description": "The maximum size of the database (see 'unit' for the units)."
+                },
+                "maxDatabaseCount": {
+                    "readOnly": true,
+                    "type": "integer",
+                    "format": "int64",
+                    "description": "The maximum number of databases supported."
+                },
+                "status": {
+                    "readOnly": true,
+                    "type": "string",
+                    "description": "The status of the capability.",
+                    "$ref": "#/definitions/CapabilityStatus"
+                },
+                "supportedMaxSizes": {
+                    "readOnly": true,
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/definitions/MaxSizeCapability"
+                    },
+                    "description": "The list of supported max sizes."
+                },
+                "includedMaxSize": {
+                    "readOnly": true,
+                    "$ref": "#/definitions/MaxSizeCapability",
+                    "description": "The included (free) max size for this service level objective."
+                },
+                "supportedPerDatabaseMaxSizes": {
+                    "readOnly": true,
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/definitions/MaxSizeCapability"
+                    },
+                    "description": "The list of supported max database sizes."
+                },
+                "supportedPerDatabaseMaxDtus": {
+                    "readOnly": true,
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/definitions/ElasticPoolPerDatabaseMaxDtuCapability"
+                    },
+                    "description": "The list of supported max database DTUs."
+                }
+            },
+            "description": "The Elastic Pool DTU capability."
+        },
+        "ElasticPoolPerDatabaseMaxDtuCapability": {
+            "properties": {
+                "limit": {
+                    "readOnly": true,
+                    "type": "integer",
+                    "format": "int64",
+                    "description": "The maximum DTUs per database."
+                },
+                "status": {
+                    "readOnly": true,
+                    "description": "The status of the capability.",
+                    "$ref": "#/definitions/CapabilityStatus"
+                },
+                "supportedPerDatabaseMinDtus": {
+                    "readOnly": true,
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/definitions/ElasticPoolPerDatabaseMinDtuCapability"
+                    },
+                    "description": "The list of supported min database DTUs."
+                }
+            },
+            "description": "The max per-database DTU capability."
+        },
+        "ElasticPoolPerDatabaseMinDtuCapability": {
+            "properties": {
+                "limit": {
+                    "readOnly": true,
+                    "type": "integer",
+                    "format": "int64",
+                    "description": "The maximum DTUs per database."
+                },
+                "status": {
+                    "readOnly": true,
+                    "description": "The status of the capability.",
+                    "$ref": "#/definitions/CapabilityStatus"
+                }
+            },
+            "description": "The minimum per-database DTU capability."
         }
     },
     "parameters": {
