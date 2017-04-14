@@ -34,7 +34,41 @@
     }
   },
   "paths": {
-    "/subscriptions/{subscriptionId}/providers/Microsoft.EventHub/namespaces": {
+    "/subscriptions/{subscriptionId}/providers/Microsoft.EventHub/CheckNameAvailability": {
+      "post": {
+        "tags": [
+          "Namespaces"
+        ],
+        "operationId": "Namespaces_CheckNameAvailability",
+        "description": "Check the give namespace name availability.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+		  {
+            "name": "parameters",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/CheckNameAvailability"
+            },
+            "description": "Parameters to check availability of the given namespace name"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "check availability returned successfully.",
+            "schema": {
+              "$ref": "#/definitions/CheckNameAvailabilityResult"
+            }
+          }
+        }
+      }
+    },
+	"/subscriptions/{subscriptionId}/providers/Microsoft.EventHub/namespaces": {
       "get": {
         "tags": [
           "Namespaces"
@@ -77,7 +111,13 @@
         "description": "Lists the available namespaces within a resource group.",
         "parameters": [
           {
-            "$ref": "#/parameters/resourceGroupNameParameter"
+            "name": "resourceGroupName",
+		  "in": "path",
+		  "required": true,
+		  "type": "string",
+		  "minLength": 1,
+		  "maxLength": 90,
+		  "description": "Name of the Resource group within the Azure subscription."
           },
           {
             "$ref": "#/parameters/ApiVersionParameter"
@@ -111,7 +151,13 @@
         "description": "Creates or updates a namespace. Once created, this namespace's resource manifest is immutable. This operation is idempotent.",
         "parameters": [
           {
-            "$ref": "#/parameters/resourceGroupNameParameter"
+            "name": "resourceGroupName",
+		  "in": "path",
+		  "required": true,
+		  "type": "string",
+		  "minLength": 1,
+		  "maxLength": 90,
+		  "description": "Name of the Resource group within the Azure subscription."
           },
           {
             "$ref": "#/parameters/namespaceNameParameter"
@@ -162,7 +208,13 @@
         "description": "Deletes an existing namespace. This operation also removes all associated resources under the namespace.",
         "parameters": [
           {
-            "$ref": "#/parameters/resourceGroupNameParameter"
+            "name": "resourceGroupName",
+		  "in": "path",
+		  "required": true,
+		  "type": "string",
+		  "minLength": 1,
+		  "maxLength": 90,
+		  "description": "Name of the Resource group within the Azure subscription."
           },
           {
             "$ref": "#/parameters/namespaceNameParameter"
@@ -198,7 +250,13 @@
         "description": "Gets the description of the specified namespace.",
         "parameters": [
           {
-            "$ref": "#/parameters/resourceGroupNameParameter"
+            "name": "resourceGroupName",
+		  "in": "path",
+		  "required": true,
+		  "type": "string",
+		  "minLength": 1,
+		  "maxLength": 90,
+		  "description": "Name of the Resource group within the Azure subscription."
           },
           {
             "$ref": "#/parameters/namespaceNameParameter"
@@ -218,62 +276,6 @@
             }
           }
         }
-      },
-      "patch": {
-        "tags": [
-          "Namespaces"
-        ],
-        "operationId": "Namespaces_Update",
-		"x-ms-examples": {
-          "NameSpaceUpdate": { "$ref": "../examples/NameSpaces/EHNameSpaceUpdate.json" }
-        },
-        "description": "Creates or updates a namespace. Once created, this namespace's resource manifest is immutable. This operation is idempotent.",
-        "parameters": [
-          {
-            "name": "resourceGroupName",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "minLength": 1,
-            "maxLength": 90,
-            "description": "Name of the Resource group within the Azure subscription."
-          },
-          {
-            "$ref": "#/parameters/namespaceNameParameter"
-          },
-          {
-            "name": "parameters",
-            "in": "body",
-            "required": true,
-            "schema": {
-              "$ref": "#/definitions/NamespaceUpdateParameter"
-            },
-            "description": "Parameters for updating a namespace resource."
-          },
-          {
-            "$ref": "#/parameters/ApiVersionParameter"
-          },
-          {
-            "$ref": "#/parameters/SubscriptionIdParameter"
-          }
-        ],
-        "responses": {
-          "201": {
-            "description": "Namespace update request accepted.",
-            "schema": {
-              "$ref": "#/definitions/Namespace"
-            }
-          },
-          "200": {
-            "description": "Namespace successfuly updated.",
-            "schema": {
-              "$ref": "#/definitions/Namespace"
-            }
-          },
-          "202": {
-            "description": "Namespace create or update request accepted."
-          }
-        }
       }
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.EventHub/namespaces/{namespaceName}/AuthorizationRules": {
@@ -288,7 +290,13 @@
         "description": "Gets a list of authorization rules for a namespace.",
         "parameters": [
           {
-            "$ref": "#/parameters/resourceGroupNameParameter"
+            "name": "resourceGroupName",
+		  "in": "path",
+		  "required": true,
+		  "type": "string",
+		  "minLength": 1,
+		  "maxLength": 90,
+		  "description": "Name of the Resource group within the Azure subscription."
           },
           {
             "$ref": "#/parameters/namespaceNameParameter"
@@ -325,7 +333,13 @@
         "description": "Creates or updates an authorization rule for a namespace.",
         "parameters": [
           {
-            "$ref": "#/parameters/resourceGroupNameParameter"
+            "name": "resourceGroupName",
+		  "in": "path",
+		  "required": true,
+		  "type": "string",
+		  "minLength": 1,
+		  "maxLength": 90,
+		  "description": "Name of the Resource group within the Azure subscription."
           },
           {
             "$ref": "#/parameters/namespaceNameParameter"
@@ -369,7 +383,13 @@
         "description": "Deletes an authorization rule for a namespace.",
         "parameters": [
           {
-            "$ref": "#/parameters/resourceGroupNameParameter"
+            "name": "resourceGroupName",
+		  "in": "path",
+		  "required": true,
+		  "type": "string",
+		  "minLength": 1,
+		  "maxLength": 90,
+		  "description": "Name of the Resource group within the Azure subscription."
           },
           {
             "$ref": "#/parameters/namespaceNameParameter"
@@ -404,7 +424,13 @@
         "description": "Gets an authorization rule for a namespace by rule name.",
         "parameters": [
           {
-            "$ref": "#/parameters/resourceGroupNameParameter"
+            "name": "resourceGroupName",
+		  "in": "path",
+		  "required": true,
+		  "type": "string",
+		  "minLength": 1,
+		  "maxLength": 90,
+		  "description": "Name of the Resource group within the Azure subscription."
           },
           {
             "$ref": "#/parameters/namespaceNameParameter"
@@ -441,7 +467,13 @@
         "description": "Gets the primary and secondary connection strings for the namespace.",
         "parameters": [
           {
-            "$ref": "#/parameters/resourceGroupNameParameter"
+            "name": "resourceGroupName",
+		  "in": "path",
+		  "required": true,
+		  "type": "string",
+		  "minLength": 1,
+		  "maxLength": 90,
+		  "description": "Name of the Resource group within the Azure subscription."
           },
           {
             "$ref": "#/parameters/namespaceNameParameter"
@@ -478,7 +510,13 @@
         "description": "Regenerates the primary or secondary connection strings for the specified namespace.",
         "parameters": [
           {
-            "$ref": "#/parameters/resourceGroupNameParameter"
+            "name": "resourceGroupName",
+		  "in": "path",
+		  "required": true,
+		  "type": "string",
+		  "minLength": 1,
+		  "maxLength": 90,
+		  "description": "Name of the Resource group within the Azure subscription."
           },
           {
             "$ref": "#/parameters/namespaceNameParameter"
@@ -524,7 +562,13 @@
         },
         "parameters": [
           {
-            "$ref": "#/parameters/resourceGroupNameParameter"
+            "name": "resourceGroupName",
+		  "in": "path",
+		  "required": true,
+		  "type": "string",
+		  "minLength": 1,
+		  "maxLength": 90,
+		  "description": "Name of the Resource group within the Azure subscription."
           },
           {
             "$ref": "#/parameters/namespaceNameParameter"
@@ -564,7 +608,13 @@
         },
         "parameters": [
           {
-            "$ref": "#/parameters/resourceGroupNameParameter"
+            "name": "resourceGroupName",
+		  "in": "path",
+		  "required": true,
+		  "type": "string",
+		  "minLength": 1,
+		  "maxLength": 90,
+		  "description": "Name of the Resource group within the Azure subscription."
           },
           {
             "$ref": "#/parameters/namespaceNameParameter"
@@ -611,7 +661,13 @@
         },
         "parameters": [
           {
-            "$ref": "#/parameters/resourceGroupNameParameter"
+            "name": "resourceGroupName",
+		  "in": "path",
+		  "required": true,
+		  "type": "string",
+		  "minLength": 1,
+		  "maxLength": 90,
+		  "description": "Name of the Resource group within the Azure subscription."
           },
           {
             "$ref": "#/parameters/namespaceNameParameter"
@@ -649,7 +705,13 @@
         },
         "parameters": [
           {
-            "$ref": "#/parameters/resourceGroupNameParameter"
+            "name": "resourceGroupName",
+		  "in": "path",
+		  "required": true,
+		  "type": "string",
+		  "minLength": 1,
+		  "maxLength": 90,
+		  "description": "Name of the Resource group within the Azure subscription."
           },
           {
             "$ref": "#/parameters/namespaceNameParameter"
@@ -686,7 +748,13 @@
         "description": "Gets the authorization rules for an Event Hub.",
         "parameters": [
           {
-            "$ref": "#/parameters/resourceGroupNameParameter"
+            "name": "resourceGroupName",
+		  "in": "path",
+		  "required": true,
+		  "type": "string",
+		  "minLength": 1,
+		  "maxLength": 90,
+		  "description": "Name of the Resource group within the Azure subscription."
           },
           {
             "$ref": "#/parameters/namespaceNameParameter"
@@ -729,7 +797,13 @@
         },
         "parameters": [
           {
-            "$ref": "#/parameters/resourceGroupNameParameter"
+            "name": "resourceGroupName",
+		  "in": "path",
+		  "required": true,
+		  "type": "string",
+		  "minLength": 1,
+		  "maxLength": 90,
+		  "description": "Name of the Resource group within the Azure subscription."
           },
           {
             "$ref": "#/parameters/namespaceNameParameter"
@@ -779,7 +853,13 @@
         },
         "parameters": [
           {
-            "$ref": "#/parameters/resourceGroupNameParameter"
+            "name": "resourceGroupName",
+		  "in": "path",
+		  "required": true,
+		  "type": "string",
+		  "minLength": 1,
+		  "maxLength": 90,
+		  "description": "Name of the Resource group within the Azure subscription."
           },
           {
             "$ref": "#/parameters/namespaceNameParameter"
@@ -820,7 +900,13 @@
         },
         "parameters": [
           {
-            "$ref": "#/parameters/resourceGroupNameParameter"
+            "name": "resourceGroupName",
+		  "in": "path",
+		  "required": true,
+		  "type": "string",
+		  "minLength": 1,
+		  "maxLength": 90,
+		  "description": "Name of the Resource group within the Azure subscription."
           },
           {
             "$ref": "#/parameters/namespaceNameParameter"
@@ -863,7 +949,13 @@
         },
         "parameters": [
           {
-            "$ref": "#/parameters/resourceGroupNameParameter"
+          "name": "resourceGroupName",
+		  "in": "path",
+		  "required": true,
+		  "type": "string",
+		  "minLength": 1,
+		  "maxLength": 90,
+		  "description": "Name of the Resource group within the Azure subscription."
           },
           {
             "$ref": "#/parameters/namespaceNameParameter"
@@ -906,7 +998,13 @@
         },
         "parameters": [
           {
-            "$ref": "#/parameters/resourceGroupNameParameter"
+            "name": "resourceGroupName",
+		  "in": "path",
+		  "required": true,
+		  "type": "string",
+		  "minLength": 1,
+		  "maxLength": 90,
+		  "description": "Name of the Resource group within the Azure subscription."
           },
           {
             "$ref": "#/parameters/namespaceNameParameter"
@@ -958,7 +1056,13 @@
         },
         "parameters": [
           {
-            "$ref": "#/parameters/resourceGroupNameParameter"
+            "name": "resourceGroupName",
+		  "in": "path",
+		  "required": true,
+		  "type": "string",
+		  "minLength": 1,
+		  "maxLength": 90,
+		  "description": "Name of the Resource group within the Azure subscription."
           },
           {
             "$ref": "#/parameters/namespaceNameParameter"
@@ -1008,7 +1112,13 @@
         },
         "parameters": [
           {
-            "$ref": "#/parameters/resourceGroupNameParameter"
+            "name": "resourceGroupName",
+		  "in": "path",
+		  "required": true,
+		  "type": "string",
+		  "minLength": 1,
+		  "maxLength": 90,
+		  "description": "Name of the Resource group within the Azure subscription."
           },
           {
             "$ref": "#/parameters/namespaceNameParameter"
@@ -1049,7 +1159,13 @@
         },
         "parameters": [
           {
-            "$ref": "#/parameters/resourceGroupNameParameter"
+            "name": "resourceGroupName",
+		  "in": "path",
+		  "required": true,
+		  "type": "string",
+		  "minLength": 1,
+		  "maxLength": 90,
+		  "description": "Name of the Resource group within the Azure subscription."
           },
           {
             "$ref": "#/parameters/namespaceNameParameter"
@@ -1089,7 +1205,13 @@
         },
         "parameters": [
           {
-            "$ref": "#/parameters/resourceGroupNameParameter"
+            "name": "resourceGroupName",
+		  "in": "path",
+		  "required": true,
+		  "type": "string",
+		  "minLength": 1,
+		  "maxLength": 90,
+		  "description": "Name of the Resource group within the Azure subscription."
           },
           {
             "$ref": "#/parameters/namespaceNameParameter"
@@ -1119,56 +1241,7 @@
     }
   },
   "definitions": {
-    "OperationListResult": {
-      "description": "Result of the request to list EventHub operations. It contains a list of operations and a URL link to get the next set of results.",
-      "properties": {
-        "value": {
-          "description": "List of EventHub operations supported by the Microsoft.EventHub resource provider.",
-          "type": "array",
-          "readOnly": true,
-          "items": {
-            "$ref": "#/definitions/Operation"
-          }
-        },
-        "nextLink": {
-          "description": "URL to get the next set of operation list results if there are any.",
-          "type": "string",
-          "readOnly": true
-        }
-      }
-    },
-    "Operation": {
-      "description": "A EventHub REST API operation",
-      "type": "object",
-      "properties": {
-        "name": {
-          "description": "Operation name: {provider}/{resource}/{operation}",
-          "type": "string",
-          "readOnly": true
-        },
-        "display": {
-          "description": "The object that represents the operation.",
-          "properties": {
-            "provider": {
-              "description": "Service provider: Microsoft.EventHub",
-              "type": "string",
-              "readOnly": true
-            },
-            "resource": {
-              "description": "Resource on which the operation is performed: Invoice, etc.",
-              "type": "string",
-              "readOnly": true
-            },
-            "operation": {
-              "description": "Operation type: Read, write, delete, etc.",
-              "type": "string",
-              "readOnly": true
-            }
-          }
-        }
-      }
-    },
-    "TrackedResource": {
+    "Resource": {
       "properties": {
         "location": {
           "type": "string",
@@ -1191,27 +1264,6 @@
         }
       ],
       "description": "Definition of Resource",
-      "x-ms-azure-resource": true
-    },
-    "Resource": {
-      "properties": {
-        "id": {
-          "readOnly": true,
-          "type": "string",
-          "description": "Resource Id"
-        },
-        "name": {
-          "readOnly": true,
-          "type": "string",
-          "description": "Resource name"
-        },
-        "type": {
-          "readOnly": true,
-          "type": "string",
-          "description": "Resource type"
-        }
-      },
-      "description": "The Resource definition",
       "x-ms-azure-resource": true
     },
     "NamespaceListResult": {
