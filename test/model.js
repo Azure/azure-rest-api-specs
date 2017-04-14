@@ -16,7 +16,7 @@ describe('Azure swagger model validation using x-ms-examples and examples in spe
   // });
   _(swaggersToProcess).each(function (swagger) {
     it(swagger + ' should have valid examples.', function (done) {
-      oav.validateExamples(swagger, null, 'error').then(function (validationResult) {
+      oav.validateExamples(swagger, null, {consoleLogLevel: 'error'}).then(function (validationResult) {
         //console.dir(validationResult, {depth: null, colors: true});
         done(assert(validationResult.validityStatus === true, `swagger "${swagger}" contains model validation errors.`));
       }).catch(function (err) {

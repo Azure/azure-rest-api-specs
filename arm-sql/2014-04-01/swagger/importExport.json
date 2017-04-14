@@ -58,8 +58,10 @@
                     }
                 },
                 "x-ms-examples": {
-                    "Import bacpac into new database Max": { "$ref": "../examples/DatabaseCreateImportMax.json" },
-                    "Import bacpac into new database Min": { "$ref": "../examples/DatabaseCreateImportMin.json" }
+                    "Import bacpac into new database Max with storage key": { "$ref": "../examples/DatabaseCreateImportMaxStorageKey.json" },
+                    "Import bacpac into new database Min with storage key": { "$ref": "../examples/DatabaseCreateImportMinStorageKey.json" },
+                    "Import bacpac into new database Max with SAS key": { "$ref": "../examples/DatabaseCreateImportMaxSasKey.json" },
+                    "Import bacpac into new database Min with SAS key": { "$ref": "../examples/DatabaseCreateImportMinSasKey.json" }
                 },
                 "x-ms-long-running-operation": true
             }
@@ -102,7 +104,7 @@
                     }
                 ],
                 "responses": {
-                    "200": {
+                    "201": {
                         "description": "OK",
                         "schema": {
                         "$ref": "#/definitions/ImportExportResponse"
@@ -113,8 +115,10 @@
                     }
                 },
                 "x-ms-examples": {
-                    "Import bacpac into an existing database Max": { "$ref": "../examples/DatabaseUpdateImportMax.json" },
-                    "Import bacpac into an existing database Min": { "$ref": "../examples/DatabaseUpdateImportMin.json" }
+                    "Import bacpac into an existing database Max with storage key": { "$ref": "../examples/DatabaseUpdateImportMaxStorageKey.json" },
+                    "Import bacpac into an existing database Min with storage key": { "$ref": "../examples/DatabaseUpdateImportMinStorageKey.json" },
+                    "Import bacpac into an existing database Max with SAS key": { "$ref": "../examples/DatabaseUpdateImportMaxSasKey.json" },
+                    "Import bacpac into an existing database Min with SAS key": { "$ref": "../examples/DatabaseUpdateImportMinSasKey.json" }
                 },
                 "x-ms-long-running-operation": true
             }
@@ -168,7 +172,8 @@
                     }
                 },
                 "x-ms-examples": {
-                    "Export a database into a new bacpac file": { "$ref": "../examples/DatabaseExport.json" }
+                    "Export a database into a new bacpac file with storage key": { "$ref": "../examples/DatabaseExportStorageKey.json" },
+                    "Export a database into a new bacpac file with SAS key": { "$ref": "../examples/DatabaseExportSasKey.json" }
                 },
                 "x-ms-long-running-operation": true
             }
