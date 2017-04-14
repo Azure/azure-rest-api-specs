@@ -249,6 +249,7 @@ For example, [NetworkInterface.ipConfigurations](https://github.com/Azure/azure-
 
 - :white_check_mark: **M2061**: URLs should have parameterized resource type values instead of defaults. Implemented as rule "ProvidersPathValidation" in which all odd positions in the URL path followed by ```providers/providersNamespace``` are considered as resource type values
 - :white_check_mark: **M2062**: ARM specifications PUT operations return resource models. Validation rule "PutResponseResourceValidation" validates that these response models have the ```x-ms-azure-resource``` extension set to true.
+- :white_check_mark: **M2063**: Operation Id Nouns must not be named the same as any of the model definition names in the spec. Nouns should instead be expressed in their plural forms in the OperationId. Implemented as "OperationIdNounPluralizedFormValidation"
 
 ### SHOULD
 
