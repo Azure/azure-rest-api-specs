@@ -120,7 +120,7 @@ function runLinter(swagger) {
 //runs the semantic validator on a given swagger spec.
 function runSemanticValidator(swagger) {
   console.log('\t- Running Semantic Validator.')
-  return oav.validateSpec(swagger, 'off').then(function (validationResult) {
+  return oav.validateSpec(swagger, {consoleLogLevel: 'off'}).then(function (validationResult) {
     //console.dir(validationResult, { depth: null, colors: true });
     return Promise.resolve(validationResult.validateSpec.errors);
   }).catch(function (err) {
