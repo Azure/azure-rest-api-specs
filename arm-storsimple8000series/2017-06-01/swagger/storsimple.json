@@ -139,7 +139,7 @@
         ],
         "parameters": [
           {
-            "name": "Manager",
+            "name": "parameters",
             "in": "body",
             "description": "The manager.",
             "required": true,
@@ -228,7 +228,7 @@
         ],
         "parameters": [
           {
-            "name": "configureDeviceRequest",
+            "name": "parameters",
             "in": "body",
             "description": "The minimal properties to configure a device.",
             "required": true,
@@ -267,7 +267,7 @@
           "Devices"
         ],
         "description": "Returns the list of devices for the specified manager.",
-        "operationId": "Devices_ListByManager",
+        "operationId": "Devices_ListByManagers",
         "consumes": [
           "application/json"
         ],
@@ -409,7 +409,7 @@
           "Devices"
         ],
         "description": "Patches the device.",
-        "operationId": "Devices_Patch",
+        "operationId": "Devices_Update",
         "consumes": [
           "application/json"
         ],
@@ -425,7 +425,7 @@
             "type": "string"
           },
           {
-            "name": "devicePatch",
+            "name": "parameters",
             "in": "body",
             "description": "Patch representation of the device.",
             "required": true,
@@ -637,7 +637,7 @@
         ],
         "parameters": [
           {
-            "name": "ManagerExtendedInfo",
+            "name": "parameters",
             "in": "body",
             "description": "The manager extended information.",
             "required": true,
@@ -715,7 +715,7 @@
         ],
         "parameters": [
           {
-            "name": "ManagerExtendedInfo",
+            "name": "parameters",
             "in": "body",
             "description": "The manager extended information.",
             "required": true,
@@ -905,6 +905,44 @@
         },
         "deprecated": false
       }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.StorSimple/operations": {
+      "get": {
+        "tags": [
+          "Operations"
+        ],
+        "description": "Retrieves all the available provider operations in a resource group.",
+        "operationId": "Operations_ListByResourceGroup",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/subscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/resourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The collection of available provider operations.",
+            "schema": {
+              "$ref": "#/definitions/AvailableProviderOperationList"
+            }
+          }
+        },
+        "deprecated": false,
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
     }
   },
   "definitions": {
@@ -954,6 +992,76 @@
           }
         }
       }
+    },
+    "AvailableProviderOperation": {
+      "description": "Represents available provider operation.",
+      "type": "object",
+      "properties": {
+        "name": {
+          "description": "The name of the operation being performed on a particular object. Name format: \"{resourceProviderNamespace}/{resourceType}/{read|write|delete|action}\". Eg. Microsoft.StorSimple/managers/devices/volumeContainers/read, Microsoft.StorSimple/managers/devices/alerts/clearAlerts/action",
+          "type": "string"
+        },
+        "display": {
+          "$ref": "#/definitions/AvailableProviderOperationDisplay",
+          "description": "Contains the localized display information for this particular operation/action."
+        },
+        "origin": {
+          "description": "The intended executor of the operation; governs the display of the operation in the RBAC UX and the audit logs UX. Default value is “user,system”",
+          "type": "string"
+        },
+        "properties": {
+          "$ref": "#/definitions/AvailableProviderOperationProperties",
+          "description": "Reserved for future use.",
+          "x-ms-client-flatten": true
+        }
+      }
+    },
+    "AvailableProviderOperationDisplay": {
+      "description": "Contains the localized display information for this particular operation/action. These value will be used by several clients for (a) custom role definitions for RBAC, (b) complex query filters for the event service and (c) audit history/records for management operations.",
+      "type": "object",
+      "properties": {
+        "provider": {
+          "description": "The localized friendly form of the resource provider name – it is expected to also include the publisher/company responsible. It should use Title Casing and begin with “Microsoft” for 1st party services.",
+          "type": "string"
+        },
+        "resource": {
+          "description": "The localized friendly form of the resource type related to this action/operation – it should match the public documentation for the resource provider. It should use Title Casing – for examples, please refer to the “name” section.",
+          "type": "string"
+        },
+        "operation": {
+          "description": "The localized friendly name for the operation, as it should be shown to the user. It should be concise (to fit in drop downs) but clear (i.e. self-documenting). It should use Title Casing and include the entity/resource to which it applies.",
+          "type": "string"
+        },
+        "description": {
+          "description": "The localized friendly description for the operation, as it should be shown to the user. It should be thorough, yet concise – it will be used in tool tips and detailed views.",
+          "type": "string"
+        }
+      }
+    },
+    "AvailableProviderOperationList": {
+      "description": "List of available provider operations.",
+      "required": [
+        "value"
+      ],
+      "type": "object",
+      "properties": {
+        "value": {
+          "description": "The value.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/AvailableProviderOperation"
+          }
+        },
+        "nextLink": {
+          "description": "The NextLink.",
+          "type": "string"
+        }
+      }
+    },
+    "AvailableProviderOperationProperties": {
+      "description": "Represents properties of AvailableProviderOperation",
+      "type": "object",
+      "properties": {}
     },
     "BaseModel": {
       "description": "Represents the base class for all other ARM object models",
@@ -1118,7 +1226,7 @@
         "deviceDescription",
         "deviceSoftwareVersion",
         "deviceConfigurationStatus",
-        "targetIQN",
+        "targetIqn",
         "modelDescription",
         "status",
         "serialNumber",
@@ -1165,7 +1273,7 @@
             "modelAsString": false
           }
         },
-        "targetIQN": {
+        "targetIqn": {
           "description": "The target iqn.",
           "type": "string"
         },
@@ -1514,11 +1622,11 @@
       "description": "Network interface Data 0 IP settings",
       "type": "object",
       "properties": {
-        "controllerZeroIP": {
+        "controllerZeroIp": {
           "description": "Controller 0's IPv4 address",
           "type": "string"
         },
-        "controllerOneIP": {
+        "controllerOneIp": {
           "description": "Controller 1's IPv4 address",
           "type": "string"
         }
@@ -1546,15 +1654,18 @@
       "properties": {
         "id": {
           "description": "The Resource Id",
-          "type": "string"
+          "type": "string",
+          "readOnly": true
         },
         "name": {
           "description": "The Resource Name",
-          "type": "string"
+          "type": "string",
+          "readOnly": true
         },
         "type": {
           "description": "The Resource type",
-          "type": "string"
+          "type": "string",
+          "readOnly": true
         },
         "location": {
           "description": "The Geo location of the Manager",
@@ -1574,7 +1685,7 @@
       "description": "Mandatory DNS settings",
       "type": "object",
       "properties": {
-        "secondaryDNSServers": {
+        "secondaryDnsServers": {
           "description": "Secondary DNS Server address",
           "type": "array",
           "items": {
