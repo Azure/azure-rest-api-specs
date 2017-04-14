@@ -7,7 +7,7 @@ var execSync = require('child_process').execSync,
   fs = require('fs'),
   glob = require('glob'),
   _ = require('underscore'),
-  oav = require('openapi-validation-tools');
+  oav = require('oav');
 
 exports = module.exports;
 exports.globPath = path.join(__dirname, '../', '/**/swagger/*.json');
