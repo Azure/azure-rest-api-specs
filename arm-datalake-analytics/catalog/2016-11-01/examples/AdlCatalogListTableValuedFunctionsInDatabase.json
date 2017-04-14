@@ -9,7 +9,12 @@
             "body": {
                 "value":[
                     {
-                        "computeAccountName":"contosoadla","databaseName":"master","schemaName":"dbo","tvfName":"WeblogsView","definition":"//create TVF WeblogsView on space-delimited website log data\nCREATE FUNCTION master.dbo.WeblogsView()\nRETURNS @result TABLE\n(\n    s_date DateTime,\n    s_time string,\n    s_sitename string,\n    cs_method string, \n    cs_uristem string,\n    cs_uriquery string,\n    s_port int,\n    cs_username string, \n    c_ip string,\n    cs_useragent string,\n    cs_cookie string,\n    cs_referer string, \n    cs_host string,\n    sc_status int,\n    sc_substatus int,\n    sc_win32status int, \n    sc_bytes int,\n    cs_bytes int,\n    s_timetaken int\n)\nAS\nBEGIN\n\n    @result = EXTRACT\n        s_date DateTime,\n        s_time string,\n        s_sitename string,\n        cs_method string,\n        cs_uristem string,\n        cs_uriquery string,\n        s_port int,\n        cs_username string,\n        c_ip string,\n        cs_useragent string,\n        cs_cookie string,\n        cs_referer string,\n        cs_host string,\n        sc_status int,\n        sc_substatus int,\n        sc_win32status int,\n        sc_bytes int,\n        cs_bytes int,\n        s_timetaken int\n    FROM @\"/Samples/Data/WebLog.log\"\n    USING Extractors.Text(delimiter:' ');\n\nEND;","version":"7884a35b-a2b8-4375-9a47-54c367cf346e"
+                        "computeAccountName":"contosoadla",
+                        "databaseName":"master",
+                        "schemaName":"dbo",
+                        "tvfName":"WeblogsView",
+                        "definition":"fake data",
+                        "version":"7884a35b-a2b8-4375-9a47-54c367cf346e"
                     }
                 ]
             }
