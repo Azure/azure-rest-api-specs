@@ -385,7 +385,7 @@
             "description": "The payload for a Configure HTTP settings request."
         },
         "ClusterDefinition": {
-            "description": "The cluste definition.",
+            "description": "The cluster definition.",
             "properties": {
                 "blueprint": {
                     "type": "string",
@@ -404,6 +404,12 @@
                 },
                 "configurations": {
                     "type": "object",
+                    "additionalProperties": {
+                        "type": "object",
+                        "additionalProperties": {
+                            "type": "string"
+                        }
+                    },
                     "description": "The cluster configurations."
                 }
             }
