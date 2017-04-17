@@ -15,6 +15,38 @@
     "application/json"
   ],
   "paths": {
+    "/providers/Microsoft.StorSimple/operations": {
+      "get": {
+        "tags": [
+          "Operations"
+        ],
+        "description": "Lists all of the available REST API operations of the Microsoft.Storsimple provider",
+        "operationId": "Operations_List",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The collection of available provider operations.",
+            "schema": {
+              "$ref": "#/definitions/AvailableProviderOperationList"
+            }
+          }
+        },
+        "deprecated": false,
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
     "/subscriptions/{subscriptionId}/providers/Microsoft.StorSimple/managers": {
       "get": {
         "tags": [
@@ -904,44 +936,6 @@
           }
         },
         "deprecated": false
-      }
-    },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.StorSimple/operations": {
-      "get": {
-        "tags": [
-          "Operations"
-        ],
-        "description": "Retrieves all the available provider operations in a resource group.",
-        "operationId": "Operations_ListByResourceGroup",
-        "consumes": [
-          "application/json"
-        ],
-        "produces": [
-          "application/json"
-        ],
-        "parameters": [
-          {
-            "$ref": "#/parameters/subscriptionIdParameter"
-          },
-          {
-            "$ref": "#/parameters/resourceGroupNameParameter"
-          },
-          {
-            "$ref": "#/parameters/apiVersionParameter"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "The collection of available provider operations.",
-            "schema": {
-              "$ref": "#/definitions/AvailableProviderOperationList"
-            }
-          }
-        },
-        "deprecated": false,
-        "x-ms-pageable": {
-          "nextLinkName": "nextLink"
-        }
       }
     }
   },
