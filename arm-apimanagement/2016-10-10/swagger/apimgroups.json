@@ -290,7 +290,7 @@
         "tags": [
           "GroupUsers"
         ],
-        "operationId": "Users_ListByGroups",
+        "operationId": "GroupUsers_ListByGroups",
         "description": "Lists a collection of the members of the group, specified by its identifier.",
         "parameters": [
           {
@@ -498,9 +498,9 @@
 			},
 			"externalId": {
 			  "type": "string",
-			  "description": "For external groups, this property contains the id of the group from the external identity provider, e.g. Azure Active Directory; otherwise the value is null.",
+			  "description": "For external groups, this property contains the id of the group from the external identity provider, e.g. for Azure Active Directory aad://<tenant>.onmicrosoft.com/groups/<group object id>; otherwise the value is null.",
 			  "readOnly": true
-			}
+			 }
 		  },
 		  "required": [
 			"name"
@@ -534,8 +534,8 @@
 			},
 			"externalId": {
 			  "type": "string",
-			  "description": "Identifier for an external group."
-			}
+			  "description": "Identifier of the external groups, this property contains the id of the group from the external identity provider, e.g. for Azure Active Directory aad://<tenant>.onmicrosoft.com/groups/<group object id>; otherwise the value is null."
+		 	   }
 		  },
 		  "required": [
 			"name"
@@ -569,8 +569,7 @@
 			},
 			"externalId": {
 			  "type": "string",
-			  "description": "Identifier for an external group."
-			}
+			  "description": "Identifier of the external groups, this property contains the id of the group from the external identity provider, e.g. for Azure Active Directory aad://<tenant>.onmicrosoft.com/groups/<group object id>; otherwise the value is null."			}
 		  },
 		  "description": "Parameters supplied to the Update Group operation."
 		}

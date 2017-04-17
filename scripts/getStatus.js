@@ -7,7 +7,7 @@ var execSync = require('child_process').execSync,
   fs = require('fs'),
   glob = require('glob'),
   _ = require('underscore'),
-  oav = require('openapi-validation-tools');
+  oav = require('oav');
 
 exports = module.exports;
 exports.globPath = path.join(__dirname, '../', '/**/swagger/*.json');
@@ -120,7 +120,7 @@ function runLinter(swagger) {
 //runs the semantic validator on a given swagger spec.
 function runSemanticValidator(swagger) {
   console.log('\t- Running Semantic Validator.')
-  return oav.validateSpec(swagger, 'off').then(function (validationResult) {
+  return oav.validateSpec(swagger, {consoleLogLevel: 'off'}).then(function (validationResult) {
     //console.dir(validationResult, { depth: null, colors: true });
     return Promise.resolve(validationResult.validateSpec.errors);
   }).catch(function (err) {
