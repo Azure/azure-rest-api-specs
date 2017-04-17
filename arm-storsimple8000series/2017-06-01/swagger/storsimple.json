@@ -1000,7 +1000,7 @@
           "description": "Contains the localized display information for this particular operation/action."
         },
         "origin": {
-          "description": "The intended executor of the operation; governs the display of the operation in the RBAC UX and the audit logs UX. Default value is “user,system”",
+          "description": "The intended executor of the operation; governs the display of the operation in the RBAC UX and the audit logs UX. Default value is \"user,system\"",
           "type": "string"
         },
         "properties": {
@@ -1015,11 +1015,11 @@
       "type": "object",
       "properties": {
         "provider": {
-          "description": "The localized friendly form of the resource provider name – it is expected to also include the publisher/company responsible. It should use Title Casing and begin with “Microsoft” for 1st party services.",
+          "description": "The localized friendly form of the resource provider name – it is expected to also include the publisher/company responsible. It should use Title Casing and begin with 'Microsoft' for 1st party services.",
           "type": "string"
         },
         "resource": {
-          "description": "The localized friendly form of the resource type related to this action/operation – it should match the public documentation for the resource provider. It should use Title Casing – for examples, please refer to the “name” section.",
+          "description": "The localized friendly form of the resource type related to this action/operation – it should match the public documentation for the resource provider. It should use Title Casing – for examples, please refer to the 'name' section.",
           "type": "string"
         },
         "operation": {
@@ -1063,15 +1063,18 @@
       "properties": {
         "id": {
           "description": "The Path Id that uniquely identifies the object",
-          "type": "string"
+          "type": "string",
+          "readOnly": true
         },
         "name": {
           "description": "The name of the object",
-          "type": "string"
+          "type": "string",
+          "readOnly": true
         },
         "type": {
           "description": "The hierarchical type of the object",
-          "type": "string"
+          "type": "string",
+          "readOnly": true
         },
         "kind": {
           "description": "The Kind of the object. Currently only Series8000 is supported",
