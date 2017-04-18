@@ -42,7 +42,26 @@
         ],
         "operationId": "Pipeline_List",
         "description": "Lists all pipelines.",
+        "x-ms-examples": {
+          "List all of the pipelines in an account": { "$ref": "../examples/AdlPipelineList.json" }
+        },
         "parameters": [
+          {
+            "name": "startDateTime",
+            "in": "query",
+            "required": true,
+            "type": "string",
+            "format": "date-time",
+            "description": "The start date for when to get the list of pipelines. The startDateTime and endDateTime can be no more than 30 days apart."
+          },
+          {
+            "name": "endDateTime",
+            "in": "query",
+            "required": true,
+            "type": "string",
+            "format": "date-time",
+            "description": "The end date for when to get the list of pipelines. The startDateTime and endDateTime can be no more than 30 days apart."
+          },
           {
             "$ref": "#/parameters/ApiVersionParameter"
           }
@@ -57,8 +76,7 @@
         },
         "x-ms-pageable": {
           "nextLinkName": "nextLink"
-        },
-        "x-ms-odata": "#/definitions/JobPipelineInformation"
+        }
       }
     },
     "/pipelines/{pipelineIdentity}": {
@@ -68,6 +86,9 @@
         ],
         "operationId": "Pipeline_Get",
         "description": "Gets the Pipeline information for the specified pipeline ID.",
+        "x-ms-examples": {
+          "Get a specific pipelines in an account": { "$ref": "../examples/AdlPipelineGet.json" }
+        },
         "parameters": [
           {
             "name": "pipelineIdentity",
@@ -76,6 +97,22 @@
             "type": "string",
             "format": "uuid",
             "description": "Pipeline ID."
+          },
+          {
+            "name": "startDateTime",
+            "in": "query",
+            "required": true,
+            "type": "string",
+            "format": "date-time",
+            "description": "The start date for when to get the pipeline and aggregate its data. The startDateTime and endDateTime can be no more than 30 days apart."
+          },
+          {
+            "name": "endDateTime",
+            "in": "query",
+            "required": true,
+            "type": "string",
+            "format": "date-time",
+            "description": "The end date for when to get the pipeline and aggregate its data. The startDateTime and endDateTime can be no more than 30 days apart."
           },
           {
             "$ref": "#/parameters/ApiVersionParameter"
@@ -98,7 +135,26 @@
         ],
         "operationId": "Recurrence_List",
         "description": "Lists all recurrences.",
+        "x-ms-examples": {
+          "List all of the recurrences in an account": { "$ref": "../examples/AdlRecurrenceList.json" }
+        },
         "parameters": [
+          {
+            "name": "startDateTime",
+            "in": "query",
+            "required": true,
+            "type": "string",
+            "format": "date-time",
+            "description": "The start date for when to get the list of recurrences. The startDateTime and endDateTime can be no more than 30 days apart."
+          },
+          {
+            "name": "endDateTime",
+            "in": "query",
+            "required": true,
+            "type": "string",
+            "format": "date-time",
+            "description": "The end date for when to get the list of recurrences. The startDateTime and endDateTime can be no more than 30 days apart."
+          },
           {
             "$ref": "#/parameters/ApiVersionParameter"
           }
@@ -113,8 +169,7 @@
         },
         "x-ms-pageable": {
           "nextLinkName": "nextLink"
-        },
-        "x-ms-odata": "#/definitions/JobRecurrenceInformation"
+        }
       }
     },
     "/recurrences/{recurrenceIdentity}": {
@@ -124,6 +179,9 @@
         ],
         "operationId": "Recurrence_Get",
         "description": "Gets the recurrence information for the specified recurrence ID.",
+        "x-ms-examples": {
+          "Get a specific recurrences in an account": { "$ref": "../examples/AdlRecurrenceGet.json" }
+        },
         "parameters": [
           {
             "name": "recurrenceIdentity",
@@ -132,6 +190,22 @@
             "type": "string",
             "format": "uuid",
             "description": "Recurrence ID."
+          },
+          {
+            "name": "startDateTime",
+            "in": "query",
+            "required": true,
+            "type": "string",
+            "format": "date-time",
+            "description": "The start date for when to get the recurrence and aggregate its data. The startDateTime and endDateTime can be no more than 30 days apart."
+          },
+          {
+            "name": "endDateTime",
+            "in": "query",
+            "required": true,
+            "type": "string",
+            "format": "date-time",
+            "description": "The end date for when to get recurrence and aggregate its data. The startDateTime and endDateTime can be no more than 30 days apart."
           },
           {
             "$ref": "#/parameters/ApiVersionParameter"
