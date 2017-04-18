@@ -1927,27 +1927,7 @@
           "readOnly": true,
           "type": "string",
           "format": "uuid",
-          "enum": [
-            "dd6d99bb-f193-4ec1-86f2-43d3bccbc49c",
-            "f1173c43-91bd-4aaa-973c-54e79e15235b",
-            "1b1ebd4d-d903-4baa-97f9-4ea675f5e928",
-            "455330e1-00cd-488b-b5fa-177c226f28b7",
-            "789681b8-ca10-4eb0-bdf2-e0b050601b40",
-            "7203483a-c4fb-4304-9e9f-17c71c904f5d",
-            "a7d1b92d-c987-4375-b54d-2b1d0e0f5bb0",
-            "a7c4c615-cfb1-464b-b252-925be0a19446",
-            "26e021db-f1f9-4c98-84c6-92af8ef433d7",
-            "29dd7459-4a7c-4e56-be22-f0adda49440d",
-            "c99ac918-dbea-463f-a475-16ec020fdc12",
-            "620323bf-2879-4807-b30d-c2e6d7b3b3aa",
-            "33d0db1f-6893-4210-99f9-463fb9b496a4",
-            "da24338c-a6c9-46c2-a4bf-4ac95b496ae4"
-            ],
-          "description": "The current service level objective ID of the database. This is the ID of the service level objective that is currently active.",
-          "x-ms-enum": {
-            "modelAsString": true,
-            "name": "ServiceObjectiveId"
-          }
+          "description": "The current service level objective ID of the database. This is the ID of the service level objective that is currently active."
         },
         "databaseId": {
           "readOnly": true,
@@ -2029,27 +2009,7 @@
         "requestedServiceObjectiveId": {
           "type": "string",
           "format": "uuid",
-          "enum": [
-            "dd6d99bb-f193-4ec1-86f2-43d3bccbc49c",
-            "f1173c43-91bd-4aaa-973c-54e79e15235b",
-            "1b1ebd4d-d903-4baa-97f9-4ea675f5e928",
-            "455330e1-00cd-488b-b5fa-177c226f28b7",
-            "789681b8-ca10-4eb0-bdf2-e0b050601b40",
-            "7203483a-c4fb-4304-9e9f-17c71c904f5d",
-            "a7d1b92d-c987-4375-b54d-2b1d0e0f5bb0",
-            "a7c4c615-cfb1-464b-b252-925be0a19446",
-            "26e021db-f1f9-4c98-84c6-92af8ef433d7",
-            "29dd7459-4a7c-4e56-be22-f0adda49440d",
-            "c99ac918-dbea-463f-a475-16ec020fdc12",
-            "620323bf-2879-4807-b30d-c2e6d7b3b3aa",
-            "33d0db1f-6893-4210-99f9-463fb9b496a4",
-            "da24338c-a6c9-46c2-a4bf-4ac95b496ae4"
-            ],
-          "description": "The configured service level objective ID of the database. This is the service level objective that is in the process of being applied to the database. Once successfully updated, it will match the value of currentServiceObjectiveId property. If requestedServiceObjectiveId and requestedServiceObjectiveName are both updated, the value of requestedServiceObjectiveId overrides the value of requestedServiceObjectiveName. To see possible values, query the capabilities API (/subscriptions/{subscriptionId}/providers/Microsoft.Sql/locations/{locationID}/capabilities) referred to by operationId: \"Capabilities_ListByLocation.\"",
-          "x-ms-enum": {
-            "modelAsString": true,
-            "name": "ServiceObjectiveId"
-          }
+          "description": "The configured service level objective ID of the database. This is the service level objective that is in the process of being applied to the database. Once successfully updated, it will match the value of currentServiceObjectiveId property. If requestedServiceObjectiveId and requestedServiceObjectiveName are both updated, the value of requestedServiceObjectiveId overrides the value of requestedServiceObjectiveName. To see possible values, query the capabilities API (/subscriptions/{subscriptionId}/providers/Microsoft.Sql/locations/{locationID}/capabilities) referred to by operationId: \"Capabilities_ListByLocation.\""
         },
         "requestedServiceObjectiveName": {
           "type": "string",
@@ -2316,7 +2276,8 @@
           "readOnly": true,
           "type": "number",
           "format": "double",
-          "description": "Gets or sets confidence for service tier advisor."
+          "description": "Gets or sets confidence for service tier advisor.",
+          "x-nullable": false
         }
       },
       "description": "Represents the properties of a Service Tier Advisor."
@@ -2359,40 +2320,25 @@
             "System2",
             "ElasticPool"
             ],
-            "x-ms-enum": {
-            "modelAsString": true,
-            "name": "ServiceObjectiveName"
-          }
+          "x-ms-enum": {
+              "modelAsString": true,
+              "name": "ServiceObjectiveName"
+          },
+          "readOnly": true
         },
         "serviceLevelObjectiveId": {
           "type": "string",
           "format": "uuid",
           "description": "The serviceLevelObjectiveId for SLO usage metric.",
-          "enum": [
-            "dd6d99bb-f193-4ec1-86f2-43d3bccbc49c",
-            "f1173c43-91bd-4aaa-973c-54e79e15235b",
-            "1b1ebd4d-d903-4baa-97f9-4ea675f5e928",
-            "455330e1-00cd-488b-b5fa-177c226f28b7",
-            "789681b8-ca10-4eb0-bdf2-e0b050601b40",
-            "7203483a-c4fb-4304-9e9f-17c71c904f5d",
-            "a7d1b92d-c987-4375-b54d-2b1d0e0f5bb0",
-            "a7c4c615-cfb1-464b-b252-925be0a19446",
-            "26e021db-f1f9-4c98-84c6-92af8ef433d7",
-            "29dd7459-4a7c-4e56-be22-f0adda49440d",
-            "c99ac918-dbea-463f-a475-16ec020fdc12",
-            "620323bf-2879-4807-b30d-c2e6d7b3b3aa",
-            "33d0db1f-6893-4210-99f9-463fb9b496a4",
-            "da24338c-a6c9-46c2-a4bf-4ac95b496ae4"
-            ],
-            "x-ms-enum": {
-            "modelAsString": true,
-            "name": "ServiceObjectiveId"
-          }
+          "readOnly": true,
+          "x-nullable": false
         },
         "inRangeTimeRatio": {
           "type": "number",
           "format": "double",
-          "description": "Gets or sets inRangeTimeRatio for SLO usage metric."
+          "description": "Gets or sets inRangeTimeRatio for SLO usage metric.",
+          "readOnly": true,
+          "x-nullable": false
         }
       },
       "description": "Represents a Slo Usage Metric."
