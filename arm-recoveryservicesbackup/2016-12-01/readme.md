@@ -13,7 +13,7 @@ override-info:
 
 ``` yaml 
 input-file:
-  - ./2016-12-01/backupManagement.json
+  - ./backupManagement.json
 azure-arm: true
 ```
 
@@ -32,6 +32,8 @@ directive:
       - $["/Subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.RecoveryServices/vaults/{vaultName}/backupJobs/operationResults/{operationId}"].paths
       - $.paths["/Subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.RecoveryServices/vaults/{vaultName}/backupstorageconfig/vaultstorageconfig"]
     reason: These paths have been validated from ARM team and any change will require changes across services
+  - suppress: XmsExamplesProvidedValidation
+    reason: This is a temporary suppression due to time constraint. x-ms-examples will be added in update
 ```
 
 ## Code Generation
