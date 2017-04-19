@@ -6,28 +6,18 @@
 		"description": "REST APIs for Azure Advisor"
 	},
 	"host": "management.azure.com",
-	"schemes": [
-		"https"
-	],
-	"consumes": [
-		"application/json"
-	],
-	"produces": [
-		"application/json"
-	],
+	"schemes": ["https"],
+	"consumes": ["application/json"],
+	"produces": ["application/json"],
 	"paths": {
 		"/subscriptions/{subscriptionId}/providers/Microsoft.Advisor/generateRecommendations": {
 			"post": {
-				"tags": [
-					"GenerateRecommendations"
-				],
+				"tags": ["GenerateRecommendations"],
 				"description": "Initiates the recommendation generation or computation process for a subscription. This operation is asynchronous. The generated recommendations are stored in a cache in the Advisor service.",
 				"operationId": "Recommendations_Generate",
-				"parameters": [
-					{
+				"parameters": [{
 						"$ref": "#/parameters/subscriptionIdParameter"
-					},
-					{
+					}, {
 						"$ref": "#/parameters/apiVersionParameter"
 					}
 				],
@@ -56,24 +46,19 @@
 		},
 		"/subscriptions/{subscriptionId}/providers/Microsoft.Advisor/generateRecommendations/{operationId}": {
 			"get": {
-				"tags": [
-					"GenerateRecommendations"
-				],
+				"tags": ["GenerateRecommendations"],
 				"description": "Retrieves the status of the recommendation computation or generation process. Invoke this API after calling the generation recommendation. The URI of this API is returned in the Location field of the response header.",
 				"operationId": "Recommendations_GetGenerateStatus",
-				"parameters": [
-					{
+				"parameters": [{
 						"$ref": "#/parameters/subscriptionIdParameter"
-					},
-					{
+					}, {
 						"name": "operationId",
 						"in": "path",
 						"description": "The operation ID, which can be found from the Location field in the generate recommendation response header.",
 						"required": true,
 						"type": "string",
 						"format": "uuid"
-					},
-					{
+					}, {
 						"$ref": "#/parameters/apiVersionParameter"
 					}
 				],
@@ -90,33 +75,26 @@
 		},
 		"/subscriptions/{subscriptionId}/providers/Microsoft.Advisor/recommendations": {
 			"get": {
-				"tags": [
-					"GetRecommendations"
-				],
+				"tags": ["GetRecommendations"],
 				"description": "Obtains cached recommendations for a subscription. The recommendations are generated or computed by invoking generateRecommendations.",
 				"operationId": "Recommendations_List",
-				"parameters": [
-					{
+				"parameters": [{
 						"$ref": "#/parameters/subscriptionIdParameter"
-					},
-					{
+					}, {
 						"$ref": "#/parameters/apiVersionParameter"
-					},
-					{
+					}, {
 						"name": "$filter",
 						"in": "query",
 						"description": "The filter to apply to the recommendations.",
 						"required": false,
 						"type": "string"
-					},
-					{
+					}, {
 						"name": "$top",
 						"in": "query",
 						"description": "The number of recommendations per page if a paged version of this API is being used.",
 						"required": false,
 						"type": "integer"
-					},
-					{
+					}, {
 						"name": "$skipToken",
 						"in": "query",
 						"description": "The page-continuation token to use with a paged version of this API.",
@@ -145,13 +123,10 @@
 		},
 		"/providers/Microsoft.Advisor/operations": {
 			"get": {
-				"tags": [
-					"Operations"
-				],
+				"tags": ["Operations"],
 				"description": "Lists all the available Advisor REST API operations.",
 				"operationId": "Operations_List",
-				"parameters": [
-					{
+				"parameters": [{
 						"$ref": "#/parameters/apiVersionParameter"
 					}
 				],
@@ -171,34 +146,28 @@
 		},
 		"/{resourceUri}/providers/Microsoft.Advisor/recommendations/{recommendationId}/suppressions/{name}": {
 			"get": {
-				"tags": [
-					"Suppressions"
-				],
+				"tags": ["Suppressions"],
 				"description": "Obtains the details of a suppression.",
 				"operationId": "Suppressions_Get",
-				"parameters": [
-					{
+				"parameters": [{
 						"name": "resourceUri",
 						"in": "path",
 						"description": "The fully qualified Azure Resource Manager identifier of the resource to which the recommendation applies.",
 						"required": true,
 						"type": "string"
-					},
-					{
+					}, {
 						"name": "recommendationId",
 						"in": "path",
 						"description": "The recommendation ID.",
 						"required": true,
 						"type": "string"
-					},
-					{
+					}, {
 						"name": "name",
 						"in": "path",
 						"description": "The name of the suppression.",
 						"required": true,
 						"type": "string"
-					},
-					{
+					}, {
 						"$ref": "#/parameters/apiVersionParameter"
 					}
 				],
@@ -218,34 +187,28 @@
 				}
 			},
 			"put": {
-				"tags": [
-					"Suppressions"
-				],
+				"tags": ["Suppressions"],
 				"description": "Enables the snoozed or dismissed attribute of a recommendation. The snoozed or dismissed attribute is referred to as a suppression. Use this API to create or update the snoozed or dismissed status of a recommendation.",
 				"operationId": "Suppressions_Create",
-				"parameters": [
-					{
+				"parameters": [{
 						"name": "resourceUri",
 						"in": "path",
 						"description": "The fully qualified Azure Resource Manager identifier of the resource to which the recommendation applies.",
 						"required": true,
 						"type": "string"
-					},
-					{
+					}, {
 						"name": "recommendationId",
 						"in": "path",
 						"description": "The recommendation ID.",
 						"required": true,
 						"type": "string"
-					},
-					{
+					}, {
 						"name": "name",
 						"in": "path",
 						"description": "The name of the suppression.",
 						"required": true,
 						"type": "string"
-					},
-					{
+					}, {
 						"name": "suppressionContract",
 						"in": "body",
 						"description": "The snoozed or dismissed attribute; for example, the snooze duration.",
@@ -253,8 +216,7 @@
 						"schema": {
 							"$ref": "#/definitions/SuppressionContract"
 						}
-					},
-					{
+					}, {
 						"$ref": "#/parameters/apiVersionParameter"
 					}
 				],
@@ -274,34 +236,28 @@
 				}
 			},
 			"delete": {
-				"tags": [
-					"Suppressions"
-				],
+				"tags": ["Suppressions"],
 				"description": "Enables the activation of a snoozed or dismissed recommendation. The snoozed or dismissed attribute of a recommendation is referred to as a suppression.",
 				"operationId": "Suppressions_Delete",
-				"parameters": [
-					{
+				"parameters": [{
 						"name": "resourceUri",
 						"in": "path",
 						"description": "The fully qualified Azure Resource Manager identifier of the resource to which the recommendation applies.",
 						"required": true,
 						"type": "string"
-					},
-					{
+					}, {
 						"name": "recommendationId",
 						"in": "path",
 						"description": "The recommendation ID.",
 						"required": true,
 						"type": "string"
-					},
-					{
+					}, {
 						"name": "name",
 						"in": "path",
 						"description": "The name of the suppression.",
 						"required": true,
 						"type": "string"
-					},
-					{
+					}, {
 						"$ref": "#/parameters/apiVersionParameter"
 					}
 				],
@@ -320,27 +276,22 @@
 		},
 		"/{resourceUri}/providers/Microsoft.Advisor/recommendations/{recommendationId}": {
 			"get": {
-				"tags": [
-					"GetRecommendations"
-				],
+				"tags": ["GetRecommendations"],
 				"description": "Obtains details of a cached recommendation.",
 				"operationId": "Recommendations_Get",
-				"parameters": [
-					{
+				"parameters": [{
 						"name": "resourceUri",
 						"in": "path",
 						"description": "The fully qualified Azure Resource Manager identifier of the resource to which the recommendation applies.",
 						"required": true,
 						"type": "string"
-					},
-					{
+					}, {
 						"name": "recommendationId",
 						"in": "path",
 						"description": "The recommendation ID.",
 						"required": true,
 						"type": "string"
-					},
-					{
+					}, {
 						"$ref": "#/parameters/apiVersionParameter"
 					}
 				],
@@ -362,31 +313,39 @@
 		},
 		"/subscriptions/{subscriptionId}/providers/Microsoft.Advisor/suppressions": {
 			"get": {
-				"tags": [
-					"Suppressions"
-				],
+				"tags": ["Suppressions"],
 				"description": "Retrieves the list of snoozed or dismissed suppressions for a subscription. The snoozed or dismissed attribute of a recommendation is referred to as a suppression.",
 				"operationId": "Suppressions_List",
-				"parameters": [
-					{
+				"parameters": [{
 						"$ref": "#/parameters/subscriptionIdParameter"
-					},
-					{
+					}, {
 						"$ref": "#/parameters/apiVersionParameter"
+					}, {
+						"name": "$top",
+						"in": "query",
+						"description": "The number of suppressions per page if a paged version of this API is being used.",
+						"required": false,
+						"type": "integer"
+					}, {
+						"name": "$skipToken",
+						"in": "query",
+						"description": "The page-continuation token to use with a paged version of this API.",
+						"required": false,
+						"type": "string"
 					}
 				],
 				"responses": {
 					"200": {
 						"description": "OK. Successfully got all suppressions in a subscription.",
 						"schema": {
-							"type": "array",
-							"items": {
-								"$ref": "#/definitions/SuppressionContract"
-							}
+							"$ref": "#/definitions/SuppressionContractListResult"
 						}
 					}
 				},
 				"deprecated": false,
+				"x-ms-pageable": {
+					"nextLinkName": "nextLink"
+				},
 				"x-ms-examples": {
 					"ListSuppressions": {
 						"$ref": "../examples/ListSuppressions.json"
@@ -416,8 +375,7 @@
 		"ResourceRecommendationBase": {
 			"description": "Advisor Recommendation.",
 			"type": "object",
-			"allOf": [
-				{
+			"allOf": [{
 					"$ref": "#/definitions/Resource"
 				}
 			],
@@ -435,12 +393,7 @@
 			"properties": {
 				"category": {
 					"description": "The category of the recommendation.",
-					"enum": [
-						"HighAvailability",
-						"Security",
-						"Performance",
-						"Cost"
-					],
+					"enum": ["HighAvailability", "Security", "Performance", "Cost"],
 					"type": "string",
 					"x-ms-enum": {
 						"name": "category",
@@ -449,11 +402,7 @@
 				},
 				"impact": {
 					"description": "The business impact of the recommendation.",
-					"enum": [
-						"High",
-						"Medium",
-						"Low"
-					],
+					"enum": ["High", "Medium", "Low"],
 					"type": "string",
 					"x-ms-enum": {
 						"name": "impact",
@@ -486,11 +435,7 @@
 				},
 				"risk": {
 					"description": "The potential risk of not implementing the recommendation.",
-					"enum": [
-						"Error",
-						"Warning",
-						"None"
-					],
+					"enum": ["Error", "Warning", "None"],
 					"type": "string",
 					"x-ms-enum": {
 						"name": "risk",
@@ -602,8 +547,7 @@
 		"SuppressionContract": {
 			"description": "The details of the snoozed or dismissed rule; for example, the duration, name, and GUID associated with the rule.",
 			"type": "object",
-			"allOf": [
-				{
+			"allOf": [{
 					"$ref": "#/definitions/Resource"
 				}
 			],
@@ -626,6 +570,23 @@
 				"ttl": {
 					"description": "The duration for which the suppression is valid.",
 					"type": "string"
+				}
+			}
+		},
+		"SuppressionContractListResult": {
+			"description": "The list of Advisor suppressions.",
+			"type": "object",
+			"properties": {
+				"nextLink": {
+					"description": "The link used to get the next page of suppressions.",
+					"type": "string"
+				},
+				"value": {
+					"description": "The list of suppressions.",
+					"type": "array",
+					"items": {
+						"$ref": "#/definitions/SuppressionContract"
+					}
 				}
 			}
 		}
@@ -657,11 +618,8 @@
 			}
 		}
 	},
-	"security": [
-		{
-			"azure_auth": [
-				"user_impersonation"
-			]
+	"security": [{
+			"azure_auth": ["user_impersonation"]
 		}
 	]
 }
