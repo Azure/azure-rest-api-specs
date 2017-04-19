@@ -34,6 +34,8 @@ directive:
     reason: These paths have been validated from ARM team and any change will require changes across services
   - suppress: XmsExamplesProvidedValidation
     reason: This is a temporary suppression due to time constraint. x-ms-examples will be added in update
+  - suppress: AvoidNestedProperties
+    reason: x-ms-client-flatten doesn't work with polymophic classes. So adding x-ms-client-flatten will require one to one checking of contracts and can't be done for now due to time constraint.
 ```
 
 ## Code Generation
