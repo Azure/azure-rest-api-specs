@@ -470,6 +470,9 @@
           "ReferenceDataSets"
         ],
         "operationId": "ReferenceDataSets_CreateOrUpdate",
+        "x-ms-examples": {
+          "ReferenceDataSetsCreate": { "$ref": "../examples/ReferenceDataSetsCreate.json" }
+        },
         "description": "Create or update a reference data set in the specified environment.",
         "parameters": [
           {
@@ -524,6 +527,9 @@
           "ReferenceDataSets"
         ],
         "operationId": "ReferenceDataSets_Get",
+        "x-ms-examples": {
+          "ReferenceDataSetsGet": { "$ref": "../examples/ReferenceDataSetsGet.json" }
+        },
         "description": "Gets the reference data set with the specified name in the specified environment.",
         "parameters": [
           {
@@ -559,6 +565,9 @@
           "ReferenceDataSets"
         ],
         "operationId": "ReferenceDataSets_Update",
+        "x-ms-examples": {
+          "ReferenceDataSetsUpdate": { "$ref": "../examples/ReferenceDataSetsPatchTags.json" }
+        },
         "description": "Updates the reference data set with the specified name in the specified subscription, resource group, and environment.",
         "parameters": [
           {
@@ -603,6 +612,9 @@
           "ReferenceDataSets"
         ],
         "operationId": "ReferenceDataSets_Delete",
+        "x-ms-examples": {
+          "ReferenceDataSetsDelete": { "$ref": "../examples/ReferenceDataSetsDelete.json" }
+        },
         "description": "Deletes the reference data set with the specified name in the specified subscription, resource group, and environment",
         "parameters": [
           {
@@ -640,6 +652,9 @@
           "ReferenceDataSets"
         ],
         "operationId": "ReferenceDataSets_ListByEnvironment",
+        "x-ms-examples": {
+          "ReferenceDataSetsListByEnvironment": { "$ref": "../examples/ReferenceDataSetsListByEnvironment.json" }
+        },
         "description": "Lists all the available reference data sets associated with the subscription and within the specified resource group and environment.",
         "parameters": [
           {
@@ -671,6 +686,9 @@
           "AccessPolicies"
         ],
         "operationId": "AccessPolicies_CreateOrUpdate",
+        "x-ms-examples": {
+          "AccessPoliciesCreate": { "$ref": "../examples/AccessPoliciesCreate.json" }
+        },
         "description": "Create or update an access policy in the specified environment.",
         "parameters": [
           {
@@ -725,6 +743,9 @@
           "AccessPolicies"
         ],
         "operationId": "AccessPolicies_Get",
+        "x-ms-examples": {
+          "AccessPoliciesGet": { "$ref": "../examples/AccessPoliciesGet.json" }
+        },
         "description": "Gets the access policy with the specified name in the specified environment.",
         "parameters": [
           {
@@ -760,6 +781,9 @@
           "AccessPolicies"
         ],
         "operationId": "AccessPolicies_Update",
+        "x-ms-examples": {
+          "AccessPoliciesUpdate": { "$ref": "../examples/AccessPoliciesPatchRoles.json" }
+        },
         "description": "Updates the access policy with the specified name in the specified subscription, resource group, and environment.",
         "parameters": [
           {
@@ -804,6 +828,9 @@
           "AccessPolicies"
         ],
         "operationId": "AccessPolicies_Delete",
+        "x-ms-examples": {
+          "AccessPoliciesDelete": { "$ref": "../examples/AccessPoliciesDelete.json" }
+        },
         "description": "Deletes the access policy with the specified name in the specified subscription, resource group, and environment",
         "parameters": [
           {
@@ -841,6 +868,9 @@
           "AccessPolicies"
         ],
         "operationId": "AccessPolicies_ListByEnvironment",
+        "x-ms-examples": {
+          "AccessPoliciesByEnvironment": { "$ref": "../examples/AccessPoliciesListByEnvironment.json" }
+        },
         "description": "Lists all the available access policies associated with the environment.",
         "parameters": [
           {
@@ -1114,7 +1144,27 @@
     },
     "EventSourceCreateOrUpdateParameters": {
       "properties": {
+        "kind": {
+          "type": "string",
+          "description": "The kind of the event source.",
+          "enum": [
+            "Microsoft.EventHub",
+            "Microsoft.IoTHub"
+          ],
+          "x-ms-enum": {
+            "name": "Kind",
+            "modelAsString": false
+          }
+        },
+        "properties": {
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/EventSourceCommonProperties"
+        }
       },
+      "required": [
+        "kind",
+        "properties"
+      ],
       "allOf": [
         {
           "$ref": "#/definitions/CreateOrUpdateTrackedResourceProperties"
@@ -1124,19 +1174,13 @@
     },
     "EventHubEventSourceCreateOrUpdateParameters": {
       "properties": {
-        "kind": {
-          "type": "string",
-          "description": "The kind of the event source.",
-          "enum": [ "Microsoft.EventHub" ]
-        },
         "properties": {
           "x-ms-client-flatten": true,
           "$ref": "#/definitions/EventHubEventSourceCreationProperties"
         }
       },
       "required": [
-        "properties",
-        "kind"
+        "properties"
       ],
       "allOf": [
         {
@@ -1147,19 +1191,13 @@
     },
     "IoTHubEventSourceCreateOrUpdateParameters": {
       "properties": {
-        "kind": {
-          "type": "string",
-          "description": "The kind of the event source.",
-          "enum": [ "Microsoft.IoTHub" ]
-        },
         "properties": {
           "x-ms-client-flatten": true,
           "$ref": "#/definitions/IoTHubEventSourceCreationProperties"
         }
       },
       "required": [
-        "properties",
-        "kind"
+        "properties"
       ],
       "allOf": [
         {
@@ -1234,12 +1272,14 @@
           "description": "The kind of the event source.",
           "enum": [ "Microsoft.EventHub", "Microsoft.IoTHub" ]
         },
-        "eventSourceType": {
-          "type": "string"
+        "properties": {
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/EventSourceCommonProperties"
         }
       },
       "required": [
-        "kind"
+        "kind",
+        "properties"
       ],
       "allOf": [
         {
