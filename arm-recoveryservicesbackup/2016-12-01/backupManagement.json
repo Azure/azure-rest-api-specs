@@ -18,6 +18,35 @@
     "application/json"
   ],
   "paths": {
+    "/Subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.RecoveryServices/operations": {
+      "get": {
+        "tags": [
+          "Operations"
+        ],
+        "description": "Returns the list of available operations.",
+        "operationId": "Operations_List",
+        "parameters": [
+          {
+            "$ref": "#/parameters/SubscriptionId"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupName"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/ClientDiscoveryResponse"
+            }
+          }
+        },
+        "deprecated": false
+      },
+      "x-ms-pageable": {
+        "nextLinkName": "nextLink"
+      }
+    },
     "/Subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.RecoveryServices/vaults/{vaultName}/backupconfig/vaultconfig": {
       "get": {
         "tags": [
@@ -156,6 +185,7 @@
         "tags": [
           "BackupEngines"
         ],
+        "description": "Returns backup management server registered to Recovery Services Vault.",
         "operationId": "BackupEngines_Get",
         "produces": [
           "application/json"
@@ -176,6 +206,7 @@
           {
             "name": "backupEngineName",
             "in": "path",
+            "description": "Name of the backup management server.",
             "required": true,
             "type": "string"
           },
@@ -2046,6 +2077,7 @@
   },
   "definitions": {
     "AzureBackupServerContainer": {
+      "description": "AzureBackupServer (DPMVenus) workload-specific protection container.",
       "type": "object",
       "allOf": [
         {
@@ -2063,25 +2095,31 @@
         },
         "protectedItemCount": {
           "format": "int64",
+          "description": "Number of protected items in the BackupEngine",
           "type": "integer"
         },
         "dpmAgentVersion": {
+          "description": "Backup engine Agent version",
           "type": "string"
         },
         "DPMServers": {
+          "description": "List of BackupEngines protecting the container",
           "type": "array",
           "items": {
             "type": "string"
           }
         },
         "UpgradeAvailable": {
+          "description": "To check if upgrade available",
           "type": "boolean"
         },
         "protectionStatus": {
+          "description": "Protection status of the container.",
           "type": "string"
         },
         "extendedInfo": {
-          "$ref": "#/definitions/DPMContainerExtendedInfo"
+          "$ref": "#/definitions/DPMContainerExtendedInfo",
+          "description": "Extended Info of the container."
         }
       },
       "x-ms-discriminator-value": "AzureBackupServerContainer"
@@ -2492,6 +2530,7 @@
       "x-ms-discriminator-value": "Microsoft.Sql/servers/databases"
     },
     "AzureSqlProtectedItemExtendedInfo": {
+      "description": "Additional information on Azure Sql specific protected item.",
       "type": "object",
       "properties": {
         "oldestRecoveryPoint": {
@@ -2584,19 +2623,24 @@
           "type": "string"
         },
         "dpmVersion": {
+          "description": "Backup engine version",
           "type": "string"
         },
         "azureBackupAgentVersion": {
+          "description": "Backup agent version",
           "type": "string"
         },
         "isAzureBackupAgentUpgradeAvailable": {
+          "description": "To check if backup agent upgrade available",
           "type": "boolean"
         },
         "isDPMUpgradeAvailable": {
+          "description": "To check if backup engine upgrade available",
           "type": "boolean"
         },
         "extendedInfo": {
-          "$ref": "#/definitions/BackupEngineExtendedInfo"
+          "$ref": "#/definitions/BackupEngineExtendedInfo",
+          "description": "Extended info of the backupengine"
         }
       },
       "discriminator": "backupEngineType"
@@ -2634,37 +2678,46 @@
       }
     },
     "BackupEngineExtendedInfo": {
+      "description": "Additional information on backup engine.",
       "type": "object",
       "properties": {
         "databaseName": {
+          "description": "Database name of backup engine.",
           "type": "string"
         },
         "protectedItemsCount": {
           "format": "int32",
+          "description": "Number of protected items in the backup engine.",
           "type": "integer"
         },
         "protectedServersCount": {
           "format": "int32",
+          "description": "Number of protected servers in the backup engine.",
           "type": "integer"
         },
         "diskCount": {
           "format": "int32",
+          "description": "Number of disks in the backup engine.",
           "type": "integer"
         },
         "usedDiskSpace": {
           "format": "double",
+          "description": "Diskspace used in the backup engine.",
           "type": "number"
         },
         "availableDiskSpace": {
           "format": "double",
+          "description": "Diskspace currently available in the backup engine.",
           "type": "number"
         },
         "refreshedAt": {
           "format": "date-time",
+          "description": "Last refresh time in the backup engine.",
           "type": "string"
         },
         "azureProtectedInstances": {
           "format": "int32",
+          "description": "Protected instances in the backup engine.",
           "type": "integer"
         }
       }
@@ -2883,6 +2936,7 @@
       "type": "object",
       "properties": {
         "expand": {
+          "description": "attribute to add extended info",
           "type": "string"
         }
       }
@@ -2908,14 +2962,17 @@
           }
         },
         "friendlyName": {
+          "description": "Friendly name of the backup engine.",
           "type": "string"
         },
         "expand": {
+          "description": "Attribute to add extended info.",
           "type": "string"
         }
       }
     },
     "BMSBackupSummariesQueryObject": {
+      "description": "Query parameters to fetch backup summaries.",
       "type": "object",
       "properties": {
         "type": {
@@ -2935,6 +2992,9 @@
     },
     "BMSContainerQueryObject": {
       "description": "The query filters that can be used with the list containers API.",
+      "required": [
+        "backupManagementType"
+      ],
       "type": "object",
       "properties": {
         "backupManagementType": {
@@ -3031,6 +3091,108 @@
           "format": "date-time",
           "description": "Backup copies created before this time.",
           "type": "string"
+        }
+      }
+    },
+    "ClientDiscoveryDisplay": {
+      "description": "Localized display information of an operation.",
+      "type": "object",
+      "properties": {
+        "Provider": {
+          "description": "Name of the provider for display purposes",
+          "type": "string"
+        },
+        "Resource": {
+          "description": "Name of the resource type for display purposes",
+          "type": "string"
+        },
+        "Operation": {
+          "description": "Name of the operation for display purposes",
+          "type": "string"
+        },
+        "Description": {
+          "description": "Description of the operation for display purposes",
+          "type": "string"
+        }
+      }
+    },
+    "ClientDiscoveryForLogSpecification": {
+      "description": "Class to represent shoebox log specification in json client discovery.",
+      "type": "object",
+      "properties": {
+        "name": {
+          "description": "Name",
+          "type": "string"
+        },
+        "displayName": {
+          "description": "Localized display name",
+          "type": "string"
+        },
+        "blobDuration": {
+          "description": "blob duration",
+          "type": "string"
+        }
+      }
+    },
+    "ClientDiscoveryForProperties": {
+      "description": "Class to represent shoebox properties in json client discovery.",
+      "type": "object",
+      "properties": {
+        "serviceSpecification": {
+          "$ref": "#/definitions/ClientDiscoveryForServiceSpecification",
+          "description": "Operation properties."
+        }
+      }
+    },
+    "ClientDiscoveryForServiceSpecification": {
+      "description": "Class to represent shoebox service specification in json client discovery.",
+      "type": "object",
+      "properties": {
+        "logSpecifications": {
+          "description": "List of log specifications of this operation.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ClientDiscoveryForLogSpecification"
+          }
+        }
+      }
+    },
+    "ClientDiscoveryResponse": {
+      "description": "Operations List response which contains list of available APIs.",
+      "type": "object",
+      "properties": {
+        "Value": {
+          "description": "List of available operationss.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ClientDiscoveryValueForSingleApi"
+          }
+        },
+        "NextLink": {
+          "description": "NextLink",
+          "type": "string"
+        }
+      }
+    },
+    "ClientDiscoveryValueForSingleApi": {
+      "description": "Available operation details.",
+      "type": "object",
+      "properties": {
+        "Name": {
+          "description": "Name",
+          "type": "string"
+        },
+        "Display": {
+          "$ref": "#/definitions/ClientDiscoveryDisplay",
+          "description": "Contains the localized display information for this particular operation"
+        },
+        "Origin": {
+          "description": "The intended executor of the operation;governs the display of the operation in the RBAC UX and the audit logs UX",
+          "type": "string"
+        },
+        "Properties": {
+          "$ref": "#/definitions/ClientDiscoveryForProperties",
+          "description": "Properties"
         }
       }
     },
@@ -3135,34 +3297,42 @@
         },
         "protectedItemCount": {
           "format": "int64",
+          "description": "Number of protected items in the BackupEngine",
           "type": "integer"
         },
         "dpmAgentVersion": {
+          "description": "Backup engine Agent version",
           "type": "string"
         },
         "DPMServers": {
+          "description": "List of BackupEngines protecting the container",
           "type": "array",
           "items": {
             "type": "string"
           }
         },
         "UpgradeAvailable": {
+          "description": "To check if upgrade available",
           "type": "boolean"
         },
         "protectionStatus": {
+          "description": "Protection status of the container.",
           "type": "string"
         },
         "extendedInfo": {
-          "$ref": "#/definitions/DPMContainerExtendedInfo"
+          "$ref": "#/definitions/DPMContainerExtendedInfo",
+          "description": "Extended Info of the container."
         }
       },
       "x-ms-discriminator-value": "DPMContainer"
     },
     "DPMContainerExtendedInfo": {
+      "description": "Additional information of the DPMContainer.",
       "type": "object",
       "properties": {
         "lastRefreshedAt": {
           "format": "date-time",
+          "description": "Last refresh time of the DPMContainer.",
           "type": "string"
         }
       }
@@ -3298,7 +3468,7 @@
       }
     },
     "DPMProtectedItem": {
-      "description": "Additional information on Azure SQL specific backup item.",
+      "description": "Additional information on Backup engine specific backup item.",
       "type": "object",
       "allOf": [
         {
@@ -3311,9 +3481,11 @@
           "type": "string"
         },
         "backupEngineName": {
+          "description": "Backup Management server protecting this backup item",
           "type": "string"
         },
         "protectionState": {
+          "description": "Protection state of the backupengine",
           "enum": [
             "Invalid",
             "IRPending",
@@ -3329,66 +3501,83 @@
           }
         },
         "isScheduledForDeferredDelete": {
+          "description": "To check if backup item is scheduled for deferred delete",
           "type": "boolean"
         },
         "extendedInfo": {
-          "$ref": "#/definitions/DPMProtectedItemExtendedInfo"
+          "$ref": "#/definitions/DPMProtectedItemExtendedInfo",
+          "description": "Extended info of the backup item."
         }
       },
       "x-ms-discriminator-value": "DPMProtectedItem"
     },
     "DPMProtectedItemExtendedInfo": {
+      "description": "Additional information of DPM Protected item.",
       "type": "object",
       "properties": {
         "protectableObjectLoadPath": {
+          "description": "Attribute to provide information on various DBs.",
           "type": "object",
           "additionalProperties": {
             "type": "string"
           }
         },
         "protected": {
+          "description": "To check if backup item is disk protected.",
           "type": "boolean"
         },
         "isPresentOnCloud": {
+          "description": "To check if backup item is cloud protected.",
           "type": "boolean"
         },
         "lastBackupStatus": {
+          "description": "Last backup status information on backup item.",
           "type": "string"
         },
         "lastRefreshedAt": {
           "format": "date-time",
+          "description": "Last refresh time on backup item.",
           "type": "string"
         },
         "oldestRecoveryPoint": {
           "format": "date-time",
+          "description": "Oldest cloud recovery point time.",
           "type": "string"
         },
         "recoveryPointCount": {
           "format": "int32",
+          "description": "cloud recovery point count.",
           "type": "integer"
         },
         "onPremiseOldestRecoveryPoint": {
           "format": "date-time",
+          "description": "Oldest disk recovery point time.",
           "type": "string"
         },
         "onPremiseLatestRecoveryPoint": {
           "format": "date-time",
+          "description": "latest disk recovery point time.",
           "type": "string"
         },
         "onPremiseRecoveryPointCount": {
           "format": "int32",
+          "description": "disk recovery point count.",
           "type": "integer"
         },
         "isCollocated": {
+          "description": "To check if backup item is collocated.",
           "type": "boolean"
         },
         "protectionGroupName": {
+          "description": "Protection group name of the backup item.",
           "type": "string"
         },
         "diskStorageUsedInBytes": {
+          "description": "Used Disk storage in bytes.",
           "type": "string"
         },
         "totalDiskStorageSizeInBytes": {
+          "description": "total Disk storage in bytes.",
           "type": "string"
         }
       }
