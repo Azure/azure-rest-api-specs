@@ -43,7 +43,7 @@
         "x-ms-examples": {
           "EHOperations_List": { "$ref": "../examples/EHOperations_List.json" }
         },
-        "description": "Lists all of the available event hub REST API operations.",
+        "description": "Lists all of the available Event Hub REST API operations.",
         "parameters": [
           {
             "$ref": "#/parameters/ApiVersionParameter"
@@ -71,7 +71,7 @@
         "x-ms-examples": {
           "NamespacesCheckNameAvailability": { "$ref": "../examples/NameSpaces/EHNameSpaceCheckNameAvailability.json" }
         },
-        "description": "Check the give namespace name availability.",
+        "description": "Check the give Namespace name availability.",
         "parameters": [
           {
             "$ref": "#/parameters/ApiVersionParameter"
@@ -86,7 +86,7 @@
             "schema": {
               "$ref": "#/definitions/CheckNameAvailability"
             },
-            "description": "Parameters to check availability of the given namespace name"
+            "description": "Parameters to check availability of the given Namespace name"
           }
         ],
         "responses": {
@@ -108,7 +108,7 @@
         "x-ms-examples": {
           "NamespacesListBySubscription": { "$ref": "../examples/NameSpaces/EHNameSpaceList.json" }
         },
-        "description": "Lists all the available namespaces within a subscription, irrespective of the resource groups.",
+        "description": "Lists all the available Namespaces within a subscription, irrespective of the resource groups.",
         "parameters": [
           {
             "$ref": "#/parameters/ApiVersionParameter"
@@ -139,7 +139,7 @@
         "x-ms-examples": {
           "NamespaceListByResourceGroup": { "$ref": "../examples/NameSpaces/EHNameSpaceListByResourceGroup.json" }
         },
-        "description": "Lists the available namespaces within a resource group.",
+        "description": "Lists the available Namespaces within a resource group.",
         "parameters": [
           {
             "$ref": "#/parameters/resourceGroupNameParameter"
@@ -350,7 +350,7 @@
         "x-ms-examples": {
           "ListAuthorizationRules": { "$ref": "../examples/NameSpaces/EHNameSpaceAutorizationRuleListAll.json" }
         },
-        "description": "Gets a list of authorization rules for a namespace.",
+        "description": "Gets a list of authorization rules for a Namespace.",
         "parameters": [
           {
             "$ref": "#/parameters/resourceGroupNameParameter"
@@ -367,7 +367,7 @@
         ],
         "responses": {
           "200": {
-            "description": "Namespace authorization rule successfully returned.",
+            "description": "Namespace AuthorizationRule successfully returned.",
             "schema": {
               "$ref": "#/definitions/SharedAccessAuthorizationRuleListResult"
             }
@@ -387,7 +387,7 @@
         "x-ms-examples": {
           "NameSpaceAuthorizationRuleCreate": { "$ref": "../examples/NameSpaces/EHNameSpaceAuthorizationRuleCreate.json" }
         },
-        "description": "Creates or updates an authorization rule for a namespace.",
+        "description": "Creates or updates an AuthorizationRule for a Namespace.",
         "parameters": [
           {
             "$ref": "#/parameters/resourceGroupNameParameter"
@@ -405,7 +405,7 @@
             "schema": {
               "$ref": "#/definitions/SharedAccessAuthorizationRuleCreateOrUpdateParameters"
             },
-            "description": "The shared access authorization rule."
+            "description": "The shared access AuthorizationRule."
           },
           {
             "$ref": "#/parameters/ApiVersionParameter"
@@ -416,7 +416,7 @@
         ],
         "responses": {
           "200": {
-            "description": "Namespace authorization rule created",
+            "description": "Namespace AuthorizationRule created",
             "schema": {
               "$ref": "#/definitions/SharedAccessAuthorizationRuleResource"
             }
@@ -431,7 +431,7 @@
         "x-ms-examples": {
           "NameSpaceAutorizationRuleDelete": { "$ref": "../examples/NameSpaces/EHNameSpaceAutorizationRuleDelete.json" }
         },
-        "description": "Deletes an authorization rule for a namespace.",
+        "description": "Deletes an AuthorizationRule for a Namespace.",
         "parameters": [
           {
             "$ref": "#/parameters/resourceGroupNameParameter"
@@ -454,7 +454,7 @@
             "description": "No content."
           },
           "200": {
-            "description": "Namespace authorization rule successfully deleted."
+            "description": "Namespace AuthorizationRule successfully deleted."
           }
         }
       },
@@ -466,7 +466,7 @@
         "x-ms-examples": {
           "NameSpaceAutorizationRuleGet": { "$ref": "../examples/NameSpaces/EHNameSpaceAutorizationRuleGet.json" }
         },
-        "description": "Gets an authorization rule for a namespace by rule name.",
+        "description": "Gets an AuthorizationRule for a Namespace by rule name.",
         "parameters": [
           {
             "$ref": "#/parameters/resourceGroupNameParameter"
@@ -486,7 +486,7 @@
         ],
         "responses": {
           "200": {
-            "description": "Namespace authorization rule returned successfully.",
+            "description": "Namespace AuthorizationRule returned successfully.",
             "schema": {
               "$ref": "#/definitions/SharedAccessAuthorizationRuleResource"
             }
@@ -503,7 +503,7 @@
         "x-ms-examples": {
           "NameSpaceAuthorizationRuleListKey": { "$ref": "../examples/NameSpaces/EHNameSpaceAuthorizationRuleListKey.json" }
         },
-        "description": "Gets the primary and secondary connection strings for the namespace.",
+        "description": "Gets the primary and secondary connection strings for the Namespace.",
         "parameters": [
           {
             "$ref": "#/parameters/resourceGroupNameParameter"
@@ -540,7 +540,7 @@
         "x-ms-examples": {
           "NameSpaceAuthorizationRuleRegenrateKey": { "$ref": "../examples/NameSpaces/EHNameSpaceAuthorizationRuleRegenrateKey.json" }
         },
-        "description": "Regenerates the primary or secondary connection strings for the specified namespace.",
+        "description": "Regenerates the primary or secondary connection strings for the specified Namespace.",
         "parameters": [
           {
             "$ref": "#/parameters/resourceGroupNameParameter"
@@ -586,7 +586,7 @@
         "x-ms-examples": {
           "EventHubsListAll": { "$ref": "../examples/EventHubs/EHEventHubListByNameSpace.json" }
         },
-        "description": "Gets all the Event Hubs in a namespace.",
+        "description": "Gets all the Event Hubs in a Namespace.",
         "externalDocs": {
           "url": "https://msdn.microsoft.com/en-us/library/azure/mt639493.aspx"
         },
@@ -626,7 +626,7 @@
         "x-ms-examples": {
           "EventHubCreate": { "$ref": "../examples/EventHubs/EHEventHubCreate.json" }
         },
-        "description": "Creates or updates a new Event Hub as a nested resource within a namespace.",
+        "description": "Creates or updates a new Event Hub as a nested resource within a Namespace.",
         "externalDocs": {
           "url": "https://msdn.microsoft.com/en-us/library/azure/mt639497.aspx"
         },
@@ -673,7 +673,7 @@
         "x-ms-examples": {
           "EventHubDelete": { "$ref": "../examples/EventHubs/EHEventHubDelete.json" }
         },
-        "description": "Deletes an Event Hub from the specified namespace and resource group.",
+        "description": "Deletes an Event Hub from the specified Namespace and resource group.",
         "externalDocs": {
           "url": "https://msdn.microsoft.com/en-us/library/azure/mt639496.aspx"
         },
@@ -771,7 +771,7 @@
         ],
         "responses": {
           "200": {
-            "description": "Event Hub authorization rule returned successfully.",
+            "description": "Event Hub AuthorizationRule returned successfully.",
             "schema": {
               "$ref": "#/definitions/SharedAccessAuthorizationRuleListResult"
             }
@@ -791,7 +791,7 @@
         "x-ms-examples": {
           "EventHubAuthorizationRuleCreate": { "$ref": "../examples/EventHubs/EHEventHubAuthorizationRuleCreate.json" }
         },
-        "description": "Creates or updates an authorization rule for the specified Event Hub.",
+        "description": "Creates or updates an AuthorizationRule for the specified Event Hub.",
         "externalDocs": {
           "url": "https://msdn.microsoft.com/en-us/library/azure/mt706096.aspx"
         },
@@ -815,7 +815,7 @@
             "schema": {
               "$ref": "#/definitions/SharedAccessAuthorizationRuleCreateOrUpdateParameters"
             },
-            "description": "The shared access authorization rule."
+            "description": "The shared access AuthorizationRule."
           },
           {
             "$ref": "#/parameters/ApiVersionParameter"
@@ -826,7 +826,7 @@
         ],
         "responses": {
           "200": {
-            "description": "Event Hubs authorization rule successfully created.",
+            "description": "Event Hub AuthorizationRule successfully created.",
             "schema": {
               "$ref": "#/definitions/SharedAccessAuthorizationRuleResource"
             }
@@ -841,7 +841,7 @@
         "x-ms-examples": {
           "EventHubAutorizationRuleGet": { "$ref": "../examples/EventHubs/EHEventHubAutorizationRuleGet.json" }
         },
-        "description": "Gets an authorization rule for an Event Hub by rule name.",
+        "description": "Gets an AuthorizationRule for an Event Hub by rule name.",
         "externalDocs": {
           "url": "https://msdn.microsoft.com/en-us/library/azure/mt706097.aspx"
         },
@@ -867,7 +867,7 @@
         ],
         "responses": {
           "200": {
-            "description": "Event Hub authorization rule successfully returned.",
+            "description": "Event Hub AuthorizationRule successfully returned.",
             "schema": {
               "$ref": "#/definitions/SharedAccessAuthorizationRuleResource"
             }
@@ -882,7 +882,7 @@
         "x-ms-examples": {
           "EventHubAutorizationRuleDelete": { "$ref": "../examples/EventHubs/EHEventHubAutorizationRuleDelete.json" }
         },
-        "description": "Deletes an Event Hubs authorization rule.",
+        "description": "Deletes an Event Hub AuthorizationRule.",
         "externalDocs": {
           "url": "https://msdn.microsoft.com/en-us/library/azure/mt706100.aspx"
         },
@@ -911,7 +911,7 @@
             "description": "No content."
           },
           "200": {
-            "description": "Event Hub authorization rule successfully deleted."
+            "description": "Event Hub AuthorizationRule successfully deleted."
           }
         }
       }
@@ -992,7 +992,7 @@
             "schema": {
               "$ref": "#/definitions/RegenerateKeysParameters"
             },
-            "description": "Parameters supplied to regenerate the authorization rule."
+            "description": "Parameters supplied to regenerate the AuthorizationRule Keys (PrimaryKey/SecondaryKey)."
           },
           {
             "$ref": "#/parameters/ApiVersionParameter"
@@ -1020,7 +1020,7 @@
         "x-ms-examples": {
           "ConsumerGroupCreate": { "$ref": "../examples/ConsumerGroup/EHConsumerGroupCreate.json" }
         },
-        "description": "Creates or updates an Event Hubs consumer group as a nested resource within a namespace.",
+        "description": "Creates or updates an Event Hubs consumer group as a nested resource within a Namespace.",
         "externalDocs": {
           "url": "https://msdn.microsoft.com/en-us/library/azure/mt639498.aspx"
         },
@@ -1044,7 +1044,7 @@
             "schema": {
               "$ref": "#/definitions/ConsumerGroupCreateOrUpdateParameters"
             },
-            "description": "Parameters supplied to create a consumer group resource."
+            "description": "Parameters supplied to create or update a consumer group resource."
           },
           {
             "$ref": "#/parameters/ApiVersionParameter"
@@ -1154,7 +1154,7 @@
         "x-ms-examples": {
           "ConsumerGroupsListAll": { "$ref": "../examples/ConsumerGroup/EHConsumerGroupListByEventHub.json" }
         },
-        "description": "Gets all the consumer groups in a namespace. An empty feed is returned if no consumer group exists in the namespace.",
+        "description": "Gets all the consumer groups in a Namespace. An empty feed is returned if no consumer group exists in the Namespace.",
         "externalDocs": {
           "url": "https://msdn.microsoft.com/en-us/library/azure/mt639503.aspx"
         },
@@ -1191,10 +1191,10 @@
   },
   "definitions": {
     "OperationListResult": {
-      "description": "Result of the request to list EventHub operations. It contains a list of operations and a URL link to get the next set of results.",
+      "description": "Result of the request to list Event Hub operations. It contains a list of operations and a URL link to get the next set of results.",
       "properties": {
         "value": {
-          "description": "List of EventHub operations supported by the Microsoft.EventHub resource provider.",
+          "description": "List of Event Hub operations supported by the Microsoft.EventHub resource provider.",
           "type": "array",
           "readOnly": true,
           "items": {
@@ -1209,7 +1209,7 @@
       }
     },
     "Operation": {
-      "description": "A EventHub REST API operation",
+      "description": "A Event Hub REST API operation",
       "type": "object",
       "properties": {
         "name": {
@@ -1341,13 +1341,13 @@
           "$ref": "#/definitions/TrackedResource"
         }
       ],
-      "description": "Description of a namespace resource."
+      "description": "Single Namespace item in List or Get Operation"
     },
     "NamespaceProperties": {
       "properties": {
         "status": {
           "type": "string",
-          "description": "State of the namespace.",
+          "description": "State of the Namespace.",
           "enum": [
             "Unknown",
             "Creating",
@@ -1370,17 +1370,17 @@
         },
         "provisioningState": {
           "type": "string",
-          "description": "Provisioning state of the namespace."
+          "description": "Provisioning state of the Namespace."
         },
         "createdAt": {
           "type": "string",
           "format": "date-time",
-          "description": "The time the namespace was created."
+          "description": "The time the Namespace was created."
         },
         "updatedAt": {
           "type": "string",
           "format": "date-time",
-          "description": "The time the namespace was updated."
+          "description": "The time the Namespace was updated."
         },
         "serviceBusEndpoint": {
           "externalDocs": {
@@ -1399,7 +1399,7 @@
           "description": "Specifies whether this instance is enabled."
         }
       },
-      "description": "Properties of the namespace."
+      "description": "Properties of the Namespace supplied for create or update Namespace operation"
     },
     "Sku": {
       "type": "object",
@@ -1438,7 +1438,7 @@
       "required": [
         "tier"
       ],
-      "description": "SKU of the namespace."
+      "description": "SKU parameters supplied to the create Namespace operation"
     },
     "SharedAccessAuthorizationRuleCreateOrUpdateParameters": {
       "properties": {
@@ -1448,7 +1448,7 @@
         },
         "name": {
           "type": "string",
-          "description": "Name of the authorization rule."
+          "description": "Name of the AuthorizationRule."
         },
         "properties": {
           "x-ms-client-flatten": true,
@@ -1485,7 +1485,7 @@
           "$ref": "#/definitions/Resource"
         }
       ],
-      "description": "Description of a namespace authorization rule."
+      "description": "Single item in a List or Get AuthorizationRule operation"
     },
     "SharedAccessAuthorizationRuleProperties": {
       "properties": {
@@ -1509,19 +1509,19 @@
       "required": [
         "rights"
       ],
-      "description": "SharedAccessAuthorizationRule properties."
+      "description": "Properties supplied to create or update SharedAccessAuthorizationRule"
     },
     "ResourceListKeys": {
       "properties": {
         "primaryConnectionString": {
           "type": "string",
           "readOnly": true,
-          "description": "Primary connection string of the created namespace authorization rule."
+          "description": "Primary connection string of the created Namespace AuthorizationRule."
         },
         "secondaryConnectionString": {
           "type": "string",
           "readOnly": true,
-          "description": "Secondary connection string of the created namespace authorization rule."
+          "description": "Secondary connection string of the created Namespace AuthorizationRule."
         },
         "primaryKey": {
           "type": "string",
@@ -1536,7 +1536,7 @@
         "keyName": {
           "type": "string",
           "readOnly": true,
-          "description": "A string that describes the authorization rule."
+          "description": "A string that describes the AuthorizationRule."
         }
       },
       "description": "Namespace/EventHub Connection String"
@@ -1556,7 +1556,7 @@
           }
         }
       },
-      "description": "Parameters supplied to the Regenerate Authorization Rule operation."
+      "description": "Parameters supplied to the Regenerate Authorization Rule keys operation."
     },
     "EventHubCreateOrUpdateParameters": {
       "properties": {
@@ -1566,7 +1566,7 @@
         },
         "type": {
           "type": "string",
-          "description": "ARM type of the namespace."
+          "description": "ARM type of the Namespace."
         },
         "name": {
           "type": "string",
@@ -1634,7 +1634,7 @@
           "description": "The exact time the message was updated."
         }
       },
-      "description": "Description of a EventHub Properties."
+      "description": "Properties supplied to the Create Or Update Event Hub operation."
     },
     "EventHubResource": {
       "properties": {
@@ -1648,7 +1648,7 @@
           "$ref": "#/definitions/Resource"
         }
       ],
-      "description": "Description of the Event Hub resource."
+      "description": "Single item in List or Get Event Hub operation"
     },
     "EventHubListResult": {
       "properties": {
@@ -1657,14 +1657,14 @@
           "items": {
             "$ref": "#/definitions/EventHubResource"
           },
-          "description": "Result of the List Event Hubs operation."
+          "description": "Result of the List EventHubs operation."
         },
         "nextLink": {
           "type": "string",
-          "description": "Link to the next set of results. Not empty if Value contains incomplete list of Event Hubs."
+          "description": "Link to the next set of results. Not empty if Value contains incomplete list of EventHubs."
         }
       },
-      "description": "The response of the List Event Hubs operation."
+      "description": "The result of the List EventHubs operation."
     },
     "ConsumerGroupCreateOrUpdateParameters": {
       "properties": {
@@ -1674,7 +1674,7 @@
         },
         "type": {
           "type": "string",
-          "description": "ARM type of the namespace."
+          "description": "ARM type of the Namespace."
         },
         "name": {
           "type": "string",
@@ -1714,7 +1714,7 @@
           "description": "The user metadata."
         }
       },
-      "description": "Description of a Consumer Group properties."
+      "description": "Properties supplied to the Create Or Update Consumer Group operation."
     },
     "ConsumerGroupResource": {
       "properties": {
@@ -1728,7 +1728,7 @@
           "$ref": "#/definitions/Resource"
         }
       ],
-      "description": "Description of the consumer group resource."
+      "description": "Single item in List or Get Consumer group operation"
     },
     "ConsumerGroupListResult": {
       "properties": {
@@ -1744,7 +1744,7 @@
           "description": "Link to the next set of results. Not empty if Value contains incomplete list of Consumer Group"
         }
       },
-      "description": "The response to the List Consumer Group operation."
+      "description": "The result to the List Consumer Group operation."
     },
     "UnavailableReason": {
       "type": "string",
@@ -1772,25 +1772,25 @@
       "required": [
         "name"
       ],
-      "description": "Description of a Check Name availability request properties."
+      "description": "Check Name availability of Namespace request properties."
     },
     "CheckNameAvailabilityResult": {
       "properties": {
         "nameAvailable": {
           "type": "boolean",
-          "description": "Value indicating namespace is availability, true if the namespace is available; otherwise, false."
+          "description": "Value indicating Namespace is availability, true if the Namespace is available; otherwise, false."
         },
         "reason": {
           "$ref": "#/definitions/UnavailableReason",
-          "description": "The reason for unavailability of a namespace."
+          "description": "The reason for unavailability of a Namespace."
         },
         "message": {
           "type": "string",
           "readOnly": true,
-          "description": "The detailed info regarding the reason associated with the namespace."
+          "description": "The detailed info regarding the reason associated with the Namespace."
         }
       },
-      "description": "Description of a Check Name availability request properties."
+      "description": "Check Name availability of Namespace response properties."
     },
     "NamespaceUpdateParameter": {
       "properties": {
@@ -1803,10 +1803,10 @@
         },
         "sku": {
           "$ref": "#/definitions/Sku",
-          "description": "The sku of the created namespace"
+          "description": "The sku of the created Namespace"
         }
       },
-      "description": "Parameters supplied to the Patch Namespace operation."
+      "description": "Parameters supplied to the Patch/update Namespace operation."
     }
   },
   "parameters": {
@@ -1842,7 +1842,7 @@
       "minLength": 6,
       "maxLength": 50,
       "x-ms-parameter-location": "method",
-      "description": "The namespace name"
+      "description": "The Namespace name"
     },
     "authorizationRuleNameParameter": {
       "name": "authorizationRuleName",
@@ -1862,7 +1862,7 @@
       "minLength": 1,
       "maxLength": 50,
       "x-ms-parameter-location": "method",
-      "description": "The eventhub name"
+      "description": "The Event Hub name"
     },
     "consumerGroupNameParameter": {
       "name": "consumerGroupName",
