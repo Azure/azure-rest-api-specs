@@ -13,7 +13,7 @@ override-info:
 
 ``` yaml 
 input-file:
-  - ./backupManagement.json
+  - ./swagger/backupManagement.json
 azure-arm: true
 ```
 
