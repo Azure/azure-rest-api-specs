@@ -3,7 +3,7 @@
   "info": {
     "version": "2015-08-01",
     "title": "WebSite Management Client",
-    "description": "Use these APIs to manage Azure Websites resources through the Azure Resource Manager. All task operations conform to the HTTP/1.1 protocol specification and each operation returns an x-ms-request-id header that can be used to obtain information about the request. You must make sure that requests made to these resources are secure. For more information, see <a href=\"https://msdn.microsoft.com/en-us/library/azure/dn790557.aspx\">Authenticating Azure Resource Manager requests.</a>"
+    "description": "Use these APIs to manage Azure Websites resources through the Azure Resource Manager. All task operations conform to the HTTP/1.1 protocol specification and each operation returns an x-ms-request-id header that can be used to obtain information about the request. You must make sure that requests made to these resources are secure. For more information, see https://msdn.microsoft.com/en-us/library/azure/dn790557.aspx."
   },
   "host": "management.azure.com",
   "schemes": [
@@ -1921,6 +1921,12 @@
             "type": "string"
           },
           {
+            "name": "linuxWorkersEnabled",
+            "in": "query",
+            "description": "Filter only to regions that support linux workers",
+            "type": "boolean"
+          },
+          {
             "$ref": "#/parameters/subscriptionIdParameter"
           },
           {
@@ -3284,7 +3290,8 @@
             "name": "$filter",
             "in": "query",
             "description": "Return only usages/metrics specified in the filter. Filter conforms to odata syntax. Example: $filter=(name.value eq 'Metric1' or name.value eq 'Metric2') and startTime eq '2014-01-01T00:00:00Z' and endTime eq '2014-12-31T23:59:59Z' and timeGrain eq duration'[Hour|Minute|Day]'.",
-            "type": "string"
+            "type": "string",
+            "x-ms-skip-url-encoding": true
           },
           {
             "$ref": "#/parameters/subscriptionIdParameter"
@@ -3385,7 +3392,8 @@
             "name": "$filter",
             "in": "query",
             "description": "Return only usages/metrics specified in the filter. Filter conforms to odata syntax. Example: $filter=(name.value eq 'Metric1' or name.value eq 'Metric2') and startTime eq '2014-01-01T00:00:00Z' and endTime eq '2014-12-31T23:59:59Z' and timeGrain eq duration'[Hour|Minute|Day]'.",
-            "type": "string"
+            "type": "string",
+            "x-ms-skip-url-encoding": true
           },
           {
             "$ref": "#/parameters/subscriptionIdParameter"
@@ -3463,7 +3471,8 @@
             "name": "$filter",
             "in": "query",
             "description": "Return only usages/metrics specified in the filter. Filter conforms to odata syntax. Example: $filter=(name.value eq 'Metric1' or name.value eq 'Metric2') and startTime eq '2014-01-01T00:00:00Z' and endTime eq '2014-12-31T23:59:59Z' and timeGrain eq duration'[Hour|Minute|Day]'.",
-            "type": "string"
+            "type": "string",
+            "x-ms-skip-url-encoding": true
           },
           {
             "$ref": "#/parameters/subscriptionIdParameter"
@@ -3530,7 +3539,8 @@
             "name": "$filter",
             "in": "query",
             "description": "Return only usages/metrics specified in the filter. Filter conforms to odata syntax. Example: $filter=(name.value eq 'Metric1' or name.value eq 'Metric2') and startTime eq '2014-01-01T00:00:00Z' and endTime eq '2014-12-31T23:59:59Z' and timeGrain eq duration'[Hour|Minute|Day]'.",
-            "type": "string"
+            "type": "string",
+            "x-ms-skip-url-encoding": true
           },
           {
             "$ref": "#/parameters/subscriptionIdParameter"
@@ -4417,7 +4427,8 @@
             "name": "$filter",
             "in": "query",
             "description": "Return only usages/metrics specified in the filter. Filter conforms to odata syntax. Example: $filter=(name.value eq 'Metric1' or name.value eq 'Metric2') and startTime eq '2014-01-01T00:00:00Z' and endTime eq '2014-12-31T23:59:59Z' and timeGrain eq duration'[Hour|Minute|Day]'.",
-            "type": "string"
+            "type": "string",
+            "x-ms-skip-url-encoding": true
           },
           {
             "$ref": "#/parameters/subscriptionIdParameter"
@@ -5863,7 +5874,8 @@
             "name": "$filter",
             "in": "query",
             "description": "Return only usages/metrics specified in the filter. Filter conforms to odata syntax. Example: $filter=(name.value eq 'Metric1' or name.value eq 'Metric2') and startTime eq '2014-01-01T00:00:00Z' and endTime eq '2014-12-31T23:59:59Z' and timeGrain eq duration'[Hour|Minute|Day]'.",
-            "type": "string"
+            "type": "string",
+            "x-ms-skip-url-encoding": true
           },
           {
             "$ref": "#/parameters/subscriptionIdParameter"
@@ -11048,6 +11060,12 @@
             "schema": {
               "$ref": "#/definitions/SiteSourceControl"
             }
+          },
+          "201": {
+            "description": "Created",
+            "schema": {
+              "$ref": "#/definitions/SiteSourceControl"
+            }
           }
         },
         "deprecated": false
@@ -11267,6 +11285,12 @@
         "responses": {
           "200": {
             "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/SiteSourceControl"
+            }
+          },
+          "201": {
+            "description": "Created",
             "schema": {
               "$ref": "#/definitions/SiteSourceControl"
             }
@@ -14306,7 +14330,8 @@
             "name": "$filter",
             "in": "query",
             "description": "Return only usages/metrics specified in the filter. Filter conforms to odata syntax. Example: $filter=(name.value eq 'Metric1' or name.value eq 'Metric2') and startTime eq '2014-01-01T00:00:00Z' and endTime eq '2014-12-31T23:59:59Z' and timeGrain eq duration'[Hour|Minute|Day]'.",
-            "type": "string"
+            "type": "string",
+            "x-ms-skip-url-encoding": true
           },
           {
             "$ref": "#/parameters/subscriptionIdParameter"
@@ -14373,7 +14398,8 @@
             "name": "$filter",
             "in": "query",
             "description": "Return only usages/metrics specified in the filter. Filter conforms to odata syntax. Example: $filter=(name.value eq 'Metric1' or name.value eq 'Metric2') and startTime eq '2014-01-01T00:00:00Z' and endTime eq '2014-12-31T23:59:59Z' and timeGrain eq duration'[Hour|Minute|Day]'.",
-            "type": "string"
+            "type": "string",
+            "x-ms-skip-url-encoding": true
           },
           {
             "$ref": "#/parameters/subscriptionIdParameter"
@@ -17584,6 +17610,10 @@
               "description": "Resource group of the serverfarm",
               "type": "string",
               "readOnly": true
+            },
+            "reserved": {
+              "description": "Enables creation of a Linux App Service Plan",
+              "type": "boolean"
             }
           },
           "x-ms-client-flatten": true
@@ -17887,6 +17917,10 @@
               "description": "Version of Python",
               "type": "string"
             },
+            "nodeVersion": {
+              "description": "Version of Node",
+              "type": "string"
+            },
             "requestTracingEnabled": {
               "description": "Enable request tracing",
               "type": "boolean"
@@ -17983,6 +18017,10 @@
             },
             "javaContainerVersion": {
               "description": "Java container version",
+              "type": "string"
+            },
+            "appCommandLine": {
+              "description": "App Command Line to launch",
               "type": "string"
             },
             "managedPipelineMode": {

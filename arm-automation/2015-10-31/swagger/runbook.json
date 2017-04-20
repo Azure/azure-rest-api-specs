@@ -1,0 +1,1030 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "AutomationManagement",
+    "version": "2015-10-31"
+  },
+  "host": "management.azure.com",
+  "schemes": [
+    "https"
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "produces": [
+    "application/json"
+  ],
+  "paths": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Automation/automationAccounts/{automationAccountName}/runbooks/{runbookName}/draft/content": {
+      "get": {
+        "tags": [
+          "RunbookDraft"
+        ],
+        "operationId": "RunbookDraft_GetContent",
+        "description": "Retrieve the content of runbook draft identified by runbook name.",
+        "externalDocs": {
+          "url": "http://aka.ms/azureautomationsdk/runbookdraftoperations"
+        },
+        "x-ms-examples": {
+          "Get runbook draft content": {
+            "$ref": "../examples/runbook/getRunbookDraftContent.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "./definitions.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "automationAccountName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The automation account name."
+          },
+          {
+            "name": "runbookName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The runbook name."
+          },
+          {
+            "$ref": "./definitions.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "./definitions.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "type": "file"
+            }
+          },
+          "default": {
+            "description": "Automation error response describing why the operation failed.",
+            "schema": {
+              "$ref": "./definitions.json#/definitions/ErrorResponse"
+            }
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "RunbookDraft"
+        ],
+        "operationId": "RunbookDraft_CreateOrUpdate",
+        "description": "Updates the runbook draft with runbookStream as its content.",
+        "externalDocs": {
+          "url": "http://aka.ms/azureautomationsdk/runbookdraftoperations"
+        },
+        "x-ms-examples": {
+          "Create or update runbook draft": {
+            "$ref": "../examples/runbook/createOrUpdateRunbookDraft.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "./definitions.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "automationAccountName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The automation account name."
+          },
+          {
+            "name": "runbookName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The runbook name."
+          },
+          {
+            "name": "runbookContent",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "type": "object",
+              "format": "file"
+            },
+            "description": "The runbook draft content."
+          },
+          {
+            "$ref": "./definitions.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "./definitions.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "202": {
+            "description": "Accepted and  the operation will complete asynchronously."
+          },
+          "200": {
+            "description": "OK."
+          },
+          "default": {
+            "description": "Automation error response describing why the operation failed.",
+            "schema": {
+              "$ref": "./definitions.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-long-running-operation": true
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Automation/automationAccounts/{automationAccountName}/runbooks/{runbookName}/draft": {
+      "get": {
+        "tags": [
+          "RunbookDraft"
+        ],
+        "operationId": "RunbookDraft_Get",
+        "description": "Retrieve the runbook draft identified by runbook name.",
+        "externalDocs": {
+          "url": "http://aka.ms/azureautomationsdk/runbookdraftoperations"
+        },
+        "x-ms-examples": {
+          "Get runbook draft": {
+            "$ref": "../examples/runbook/getRunbookDraft.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "./definitions.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "automationAccountName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The automation account name."
+          },
+          {
+            "name": "runbookName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The runbook name."
+          },
+          {
+            "$ref": "./definitions.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "./definitions.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "./definitions.json#/definitions/RunbookDraft"
+            }
+          },
+          "default": {
+            "description": "Automation error response describing why the operation failed.",
+            "schema": {
+              "$ref": "./definitions.json#/definitions/ErrorResponse"
+            }
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Automation/automationAccounts/{automationAccountName}/runbooks/{runbookName}/draft/publish": {
+      "post": {
+        "tags": [
+          "RunbookDraft"
+        ],
+        "operationId": "RunbookDraft_Publish",
+        "description": "Publish runbook draft.",
+        "externalDocs": {
+          "url": "http://aka.ms/azureautomationsdk/runbookdraftoperations"
+        },
+        "x-ms-examples": {
+          "Publish runbook draft": {
+            "$ref": "../examples/runbook/publishRunbookDraft.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "./definitions.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "automationAccountName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The automation account name."
+          },
+          {
+            "name": "runbookName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The parameters supplied to the publish runbook operation."
+          },
+          {
+            "$ref": "./definitions.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "./definitions.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "202": {
+            "description": "Accepted and  the operation will complete asynchronously."
+          },
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "./definitions.json#/definitions/Runbook"
+            }
+          },
+          "default": {
+            "description": "Automation error response describing why the operation failed.",
+            "schema": {
+              "$ref": "./definitions.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-long-running-operation": true
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Automation/automationAccounts/{automationAccountName}/runbooks/{runbookName}/draft/undoEdit": {
+      "post": {
+        "tags": [
+          "RunbookDraft"
+        ],
+        "operationId": "RunbookDraft_UndoEdit",
+        "description": "Retrieve the runbook identified by runbook name.",
+        "externalDocs": {
+          "url": "http://aka.ms/azureautomationsdk/runbookdraftoperations"
+        },
+        "x-ms-examples": {
+          "Undo draft edit to last known published state": {
+            "$ref": "../examples/runbook/undoDraftEditToLastKnownPublishedState.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "./definitions.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "automationAccountName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The automation account name."
+          },
+          {
+            "name": "runbookName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The runbook name."
+          },
+          {
+            "$ref": "./definitions.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "./definitions.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "./definitions.json#/definitions/RunbookDraftUndoEditResult"
+            }
+          },
+          "default": {
+            "description": "Automation error response describing why the operation failed.",
+            "schema": {
+              "$ref": "./definitions.json#/definitions/ErrorResponse"
+            }
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Automation/automationAccounts/{automationAccountName}/runbooks/{runbookName}/content": {
+      "get": {
+        "tags": [
+          "Runbook"
+        ],
+        "operationId": "Runbook_GetContent",
+        "description": "Retrieve the content of runbook identified by runbook name.",
+        "externalDocs": {
+          "url": "http://aka.ms/azureautomationsdk/runbookoperations"
+        },
+        "x-ms-examples": {
+          "Get runbook content": {
+            "$ref": "../examples/runbook/getRunbookContent.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "./definitions.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "automationAccountName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The automation account name."
+          },
+          {
+            "name": "runbookName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The runbook name."
+          },
+          {
+            "$ref": "./definitions.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "./definitions.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "type": "file"
+            }
+          },
+          "default": {
+            "description": "Automation error response describing why the operation failed.",
+            "schema": {
+              "$ref": "./definitions.json#/definitions/ErrorResponse"
+            }
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Automation/automationAccounts/{automationAccountName}/runbooks/{runbookName}": {
+      "get": {
+        "tags": [
+          "Runbook"
+        ],
+        "operationId": "Runbook_Get",
+        "description": "Retrieve the runbook identified by runbook name.",
+        "externalDocs": {
+          "url": "http://aka.ms/azureautomationsdk/runbookoperations"
+        },
+        "x-ms-examples": {
+          "Get runbook": {
+            "$ref": "../examples/runbook/getRunbook.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "./definitions.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "automationAccountName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The automation account name."
+          },
+          {
+            "name": "runbookName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The runbook name."
+          },
+          {
+            "$ref": "./definitions.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "./definitions.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "./definitions.json#/definitions/Runbook"
+            }
+          },
+          "default": {
+            "description": "Automation error response describing why the operation failed.",
+            "schema": {
+              "$ref": "./definitions.json#/definitions/ErrorResponse"
+            }
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "Runbook"
+        ],
+        "operationId": "Runbook_CreateOrUpdate",
+        "description": "Create the runbook identified by runbook name.",
+        "externalDocs": {
+          "url": "http://aka.ms/azureautomationsdk/runbookoperations"
+        },
+        "x-ms-examples": {
+          "Create or update runbook": {
+            "$ref": "../examples/runbook/createOrUpdateRunbook.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "./definitions.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "automationAccountName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The automation account name."
+          },
+          {
+            "name": "runbookName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The runbook name."
+          },
+          {
+            "name": "parameters",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "./definitions.json#/definitions/RunbookCreateOrUpdateParameters"
+            },
+            "description": "The create or update parameters for runbook. Provide either content link for a published runbook or draft, not both."
+          },
+          {
+            "$ref": "./definitions.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "./definitions.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "201": {
+            "description": "Created"
+          },
+          "400": {
+            "description": "Bad Request. Cannot specify the content link for a published runbook and draft at the same time."
+          },
+          "default": {
+            "description": "Automation error response describing why the operation failed.",
+            "schema": {
+              "$ref": "./definitions.json#/definitions/ErrorResponse"
+            }
+          }
+        }
+      },
+      "patch": {
+        "tags": [
+          "Runbook"
+        ],
+        "operationId": "Runbook_Update",
+        "description": "Update the runbook identified by runbook name.",
+        "externalDocs": {
+          "url": "http://aka.ms/azureautomationsdk/runbookoperations"
+        },
+        "x-ms-examples": {
+          "Update runbook": {
+            "$ref": "../examples/runbook/updateRunbook.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "./definitions.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "automationAccountName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The automation account name."
+          },
+          {
+            "name": "runbookName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The runbook name."
+          },
+          {
+            "name": "parameters",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "./definitions.json#/definitions/RunbookUpdateParameters"
+            },
+            "description": "The update parameters for runbook."
+          },
+          {
+            "$ref": "./definitions.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "./definitions.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "./definitions.json#/definitions/Runbook"
+            }
+          },
+          "default": {
+            "description": "Automation error response describing why the operation failed.",
+            "schema": {
+              "$ref": "./definitions.json#/definitions/ErrorResponse"
+            }
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "Runbook"
+        ],
+        "operationId": "Runbook_Delete",
+        "description": "Delete the runbook by name.",
+        "externalDocs": {
+          "url": "http://aka.ms/azureautomationsdk/runbookoperations"
+        },
+        "x-ms-examples": {
+          "Delete a runbook": {
+            "$ref": "../examples/runbook/deleteRunbook.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "./definitions.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "automationAccountName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The automation account name."
+          },
+          {
+            "name": "runbookName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The runbook name."
+          },
+          {
+            "$ref": "./definitions.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "./definitions.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "default": {
+            "description": "Automation error response describing why the operation failed.",
+            "schema": {
+              "$ref": "./definitions.json#/definitions/ErrorResponse"
+            }
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Automation/automationAccounts/{automationAccountName}/runbooks": {
+      "get": {
+        "tags": [
+          "Runbook"
+        ],
+        "operationId": "Runbook_ListByAutomationAccount",
+        "description": "Retrieve a list of runbooks.",
+        "externalDocs": {
+          "url": "http://aka.ms/azureautomationsdk/runbookoperations"
+        },
+        "x-ms-examples": {
+          "List runbooks by automation account": {
+            "$ref": "../examples/runbook/listRunbooksByAutomationAccount.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "./definitions.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "automationAccountName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The automation account name."
+          },
+          {
+            "$ref": "./definitions.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "./definitions.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "./definitions.json#/definitions/RunbookListResult"
+            }
+          },
+          "default": {
+            "description": "Automation error response describing why the operation failed.",
+            "schema": {
+              "$ref": "./definitions.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Automation/automationAccounts/{automationAccountName}/runbooks/{runbookName}/draft/testJob/streams/{jobStreamId}": {
+      "get": {
+        "tags": [
+          "TestJobStreams"
+        ],
+        "operationId": "TestJobStreams_Get",
+        "description": "Retrieve a test job streams identified by runbook name and stream id.",
+        "externalDocs": {
+          "url": "http://aka.ms/azureautomationsdk/jobstreamoperations"
+        },
+        "parameters": [
+          {
+            "$ref": "./definitions.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "automationAccountName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The automation account name."
+          },
+          {
+            "name": "runbookName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The runbook name."
+          },
+          {
+            "name": "jobStreamId",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The job stream id."
+          },
+          {
+            "$ref": "./definitions.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "./definitions.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "./definitions.json#/definitions/JobStream"
+            }
+          },
+          "default": {
+            "description": "Automation error response describing why the operation failed.",
+            "schema": {
+              "$ref": "./definitions.json#/definitions/ErrorResponse"
+            }
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Automation/automationAccounts/{automationAccountName}/runbooks/{runbookName}/draft/testJob/streams": {
+      "get": {
+        "tags": [
+          "TestJobStreams"
+        ],
+        "operationId": "TestJobStreams_ListByTestJob",
+        "description": "Retrieve a list of test job streams identified by runbook name.",
+        "externalDocs": {
+          "url": "http://aka.ms/azureautomationsdk/jobstreamoperations"
+        },
+        "parameters": [
+          {
+            "$ref": "./definitions.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "automationAccountName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The automation account name."
+          },
+          {
+            "name": "runbookName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The runbook name."
+          },
+          {
+            "name": "$filter",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "description": "The filter to apply on the operation."
+          },
+          {
+            "$ref": "./definitions.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "./definitions.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "./definitions.json#/definitions/JobStreamListResult"
+            }
+          },
+          "default": {
+            "description": "Automation error response describing why the operation failed.",
+            "schema": {
+              "$ref": "./definitions.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Automation/automationAccounts/{automationAccountName}/runbooks/{runbookName}/draft/testJob": {
+      "put": {
+        "tags": [
+          "TestJobs"
+        ],
+        "operationId": "TestJobs_Create",
+        "description": "Create a test job of the runbook.",
+        "externalDocs": {
+          "url": "http://aka.ms/azureautomationsdk/testjoboperations"
+        },
+        "parameters": [
+          {
+            "$ref": "./definitions.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "automationAccountName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The automation account name."
+          },
+          {
+            "name": "runbookName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The parameters supplied to the create test job operation."
+          },
+          {
+            "name": "parameters",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "./definitions.json#/definitions/TestJobCreateParameters"
+            },
+            "description": "The parameters supplied to the create test job operation."
+          },
+          {
+            "$ref": "./definitions.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "./definitions.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": "Created",
+            "schema": {
+              "$ref": "./definitions.json#/definitions/TestJob"
+            }
+          },
+          "default": {
+            "description": "Automation error response describing why the operation failed.",
+            "schema": {
+              "$ref": "./definitions.json#/definitions/ErrorResponse"
+            }
+          }
+        }
+      },
+      "get": {
+        "tags": [
+          "TestJobs"
+        ],
+        "operationId": "TestJobs_Get",
+        "description": "Retrieve the test job for the specified runbook.",
+        "externalDocs": {
+          "url": "http://aka.ms/azureautomationsdk/testjoboperations"
+        },
+        "parameters": [
+          {
+            "$ref": "./definitions.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "automationAccountName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The automation account name."
+          },
+          {
+            "name": "runbookName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The runbook name."
+          },
+          {
+            "$ref": "./definitions.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "./definitions.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "./definitions.json#/definitions/TestJob"
+            }
+          },
+          "default": {
+            "description": "Automation error response describing why the operation failed.",
+            "schema": {
+              "$ref": "./definitions.json#/definitions/ErrorResponse"
+            }
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Automation/automationAccounts/{automationAccountName}/runbooks/{runbookName}/draft/testJob/resume": {
+      "post": {
+        "tags": [
+          "TestJobs"
+        ],
+        "operationId": "TestJobs_Resume",
+        "description": "Resume the test job.",
+        "externalDocs": {
+          "url": "http://aka.ms/azureautomationsdk/testjoboperations"
+        },
+        "parameters": [
+          {
+            "$ref": "./definitions.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "automationAccountName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The automation account name."
+          },
+          {
+            "name": "runbookName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The runbook name."
+          },
+          {
+            "$ref": "./definitions.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "./definitions.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "default": {
+            "description": "Automation error response describing why the operation failed.",
+            "schema": {
+              "$ref": "./definitions.json#/definitions/ErrorResponse"
+            }
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Automation/automationAccounts/{automationAccountName}/runbooks/{runbookName}/draft/testJob/stop": {
+      "post": {
+        "tags": [
+          "TestJobs"
+        ],
+        "operationId": "TestJobs_Stop",
+        "description": "Stop the test job.",
+        "externalDocs": {
+          "url": "http://aka.ms/azureautomationsdk/testjoboperations"
+        },
+        "parameters": [
+          {
+            "$ref": "./definitions.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "automationAccountName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The automation account name."
+          },
+          {
+            "name": "runbookName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The runbook name."
+          },
+          {
+            "$ref": "./definitions.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "./definitions.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "default": {
+            "description": "Automation error response describing why the operation failed.",
+            "schema": {
+              "$ref": "./definitions.json#/definitions/ErrorResponse"
+            }
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Automation/automationAccounts/{automationAccountName}/runbooks/{runbookName}/draft/testJob/suspend": {
+      "post": {
+        "tags": [
+          "TestJobs"
+        ],
+        "operationId": "TestJobs_Suspend",
+        "description": "Suspend the test job.",
+        "externalDocs": {
+          "url": "http://aka.ms/azureautomationsdk/testjoboperations"
+        },
+        "parameters": [
+          {
+            "$ref": "./definitions.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "automationAccountName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The automation account name."
+          },
+          {
+            "name": "runbookName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The runbook name."
+          },
+          {
+            "$ref": "./definitions.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "./definitions.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "default": {
+            "description": "Automation error response describing why the operation failed.",
+            "schema": {
+              "$ref": "./definitions.json#/definitions/ErrorResponse"
+            }
+          }
+        }
+      }
+    }
+  },
+  "definitions": {},
+  "parameters": {}
+}
