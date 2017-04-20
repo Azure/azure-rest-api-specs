@@ -166,7 +166,7 @@ For example, [NetworkInterface.ipConfigurations](https://github.com/Azure/azure-
 
 - [ ] **M2019**: Every "Resource" Model *MUST* be tagged with ["x-ms-azure-resource"](https://github.com/Azure/azure-rest-api-specs/blob/master/documentation/swagger-extensions.md#x-ms-azure-resource). This will indicate Autorest to make the Resource model inherit from the Resource definition in the client runtime.
 
-- [ ] **M2020**: The "Resource" model definition in ARM, *MUST* have "id", "name" and "type" properties marked as `"readOnly": true`.
+- [ ] **M2020**: A "Resource" model definition *MUST* have "id", "name" and "type" properties marked as `"readOnly": true` in its model hierarchy.
 
 - [ ] **M2021**: The "location" property of "Resource" model definition in ARM, *MUST* have ["x-ms-mutability": ["create", "read"]](https://github.com/Azure/autorest/tree/master/docs/extensions#x-ms-mutability) extension. Usually the "location" property is also a required property of the model definition.
 
