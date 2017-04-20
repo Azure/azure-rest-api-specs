@@ -84,7 +84,7 @@
             "in": "body",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/CheckNameAvailability"
+              "$ref": "#/definitions/CheckNameAvailabilityParameter"
             },
             "description": "Parameters to check availability of the given Namespace name"
           }
@@ -1762,17 +1762,17 @@
       },
       "description": "Specifies the reason for the unavailability of the service."
     },
-    "CheckNameAvailability": {
+    "CheckNameAvailabilityParameter": {
       "properties": {
         "name": {
           "type": "string",
-          "description": "The Name to check the namespce name availability"
+          "description": "Name to check the namespace name availability"
         }
       },
       "required": [
         "name"
       ],
-      "description": "Check Name availability of Namespace request properties."
+      "description": "Parameter supplied to check Namespace name availability operation "
     },
     "CheckNameAvailabilityResult": {
       "properties": {
@@ -1790,7 +1790,7 @@
           "description": "The detailed info regarding the reason associated with the Namespace."
         }
       },
-      "description": "Check Name availability of Namespace response properties."
+      "description": "The Result of the CheckNameAvailability operation"
     },
     "NamespaceUpdateParameter": {
       "properties": {
@@ -1832,7 +1832,7 @@
       "minLength": 1,
       "maxLength": 90,
       "x-ms-parameter-location": "method",
-      "description": "Name of the Resource group within the Azure subscription."
+      "description": "Name of the resource group within the azure subscription."
     },
     "namespaceNameParameter": {
       "name": "namespaceName",
@@ -1852,7 +1852,7 @@
       "minLength": 1,
       "maxLength": 50,
       "x-ms-parameter-location": "method",
-      "description": "The authorizationrule name."
+      "description": "The authorization rule name."
     },
     "eventHubNameParameter": {
       "name": "eventHubName",
