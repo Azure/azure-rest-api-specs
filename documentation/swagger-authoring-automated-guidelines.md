@@ -1,17 +1,21 @@
-# Automated Guidelines for Swagger Authoring #
+# Automated Guidelines for OpenAPI(swagger) specs Authoring #
 
-This document lists the set of automated rules that can be validated against swagger spec by running [validation tools](https://github.com/Azure/adx-documentation-pr/blob/master/tools/tools.md). Please look [here for Manual guidelines](swagger-authoring-manual-guidelines.md).
+This document lists the set of automated rules that can be validated against OpenAPI(swagger) spec by running [validation tools](https://github.com/Azure/adx-documentation-pr/wiki/OpenAPI-Validation-tools). Please look [here for Manual guidelines](swagger-authoring-manual-guidelines.md).
 
 It is a requirement to conform to all manual and automated rules with severity "Error" before sending a pull request for review.
 
-## Error vs Warning
-- Rules with severity "Error" have to be addressed for the swagger to be approved by the reviewers. If there is a strong reason for why the rule cannot be addressed in a swagger spec, escalation process has to be followed to get sign off from management.
+We request OpenAPI(Swagger) spec authoring be assigned to engineers who have an intimate knowledge of a service endpoint and its developer experience to avoid feeding inefficiencies into teams that focus on Azure developer experiences and the rest of the Azure eco-system.
 
-- Rules with severity "Warning" are strong recommendations made by Azure developer experience team for better SDK/Documentation experience. It is NOT a requirement to address them.
+## Error vs Warning
+- Rules with severity "Error" have to be addressed for the OpenAPI(swagger) spec to be approved by the reviewers. If there is a strong reason for why the rule cannot be addressed in an OpenAPI(swagger) spec, [suppression process](https://github.com/Azure/adx-documentation-pr/wiki/Swagger-Validation-Errors-Suppression) has to be followed to get sign off.
+
+- Rules with severity "Warning" are either strong recommendations made by Azure developer experience team for better SDK/Documentation experience or they point out something to evaluate, for example, the warning for booleans asks the user to evaluate whether the property should be a boolean or not. It is NOT a requirement to address warnings.
 
 ## Automated Rules
 
 ### RPC Violations
+
+#### RPC Errors
 
 | Id | Rule Name | Output Message |Severity | 
 | --- | --- | --- | --- |
@@ -34,6 +38,11 @@ It is a requirement to conform to all manual and automated rules with severity "
 | M2062	| PutResponseResourceValidation | The 200 response model for an ARM PUT operation must have x-ms-azure-resource extension set to true in its hierarchy. Operation: '{0}' Model: '{1}'. | Error |
 | M3027	| TrackedResourceListByResourceGroup | The tracked resource, '{0}', must have a list by resource group operation. | Error |
 | M3027	| TrackedResourceListBySubscription | The tracked resource, '{0}', must have a list by subscriptions operation. | Error |
+
+#### RPC Warnings
+
+| Id | Rule Name | Output Message |Severity | 
+| --- | --- | --- | --- |
 | M2061	| ProvidersPathValidation |	Type values \"{0}\" have default value(s), please consider parameterizing them | Warning |
 | M3018	| BooleanPropertyNotRecommended	| Booleans are not descriptive and make them hard to use. Instead use string enums with allowed set of values defined. |	Warning |
 | M3017	| GuidValidation | Guid used at the #/Definitions/{1}/.../{0}. Usage of Guid is not recommanded. If GUIDs are absolutely required in your service, please get sign off from the Azure API review board. | Warning |
@@ -41,6 +50,8 @@ It is a requirement to conform to all manual and automated rules with severity "
 | M3010	| TrackedResourceListByImmediateParent | The child tracked resource, '{0}' with immediate parent '{1}', must have a list by immediate parent operation. | Warning |
 
 ### SDK Violations
+
+#### SDK Errors
 
 | Id | Rule Name | Output Message |Severity | 
 | --- | --- | --- | --- |
@@ -66,17 +77,20 @@ It is a requirement to conform to all manual and automated rules with severity "
 | M2019	| ResourceIsMsResourceValidation | A 'Resource' definition must have x-ms-azure-resource extension enabled and set to true. |	Error |
 | M2013	| XmsClientNameParameterValidation, XmsClientNamePropertyValidation | Value of 'x-ms-client-name' cannot be the same as '{0}' Property/Model. | Error |
 | M2058 |XmsPathsMustOverloadPaths | Paths in x-ms-paths must overload a normal path in the paths section, i.e. a path in the x-ms-paths must either be same as a path in the paths section or a path in the paths sections followed by additional parameters. | Error |
-| ?	| ResponseRequired | This rule fails if the operation lacks responses or lacks a default response |	Error |
 | M2047	| ParameterNameValidation | Parameter Must have the "name" property defined with non-empty string as its value | Error |
 | M2062	| RequiredReadOnlyPropertiesValidation | Property '{0}' is a required property. It should not be marked as 'readonly'. | Error |
-| M2054	| SecurityDefinitionsStructureValidation | A swagger must have security definitions and must adhere to the specific structure. | Error |
+| M2054	| SecurityDefinitionsStructureValidation | An OpenAPI(swagger) spec must have security definitions and must adhere to the specific structure. | Error |
 | M2022	| XmsExamplesProvidedValidation | Please provide x-ms-examples describing minimum/maximum property set for response/request payloads for operations.{0} | Error |
+
+#### SDK Warningss
+
+| Id | Rule Name | Output Message |Severity | 
+| --- | --- | --- | --- |
 | M4000 | ModelTypeIncomplete |	This definition lacks the property 'description', which is required for model types	| Warning |
 | M4000 | ParameterDescriptionRequired, OperationDescriptionRequired  | {0} lacks 'description' property. Consider adding a 'description' element. Accurate description is essential for maintaining reference documentation. | Warning |
  M4000 | DescriptiveDescriptionRequired | The value provided for description is not descriptive enough. Accurate and descriptive description is essential for maintaining reference documentation. | Warning |
 | ?	| AvoidMSDNReferences |	For better generated code quality, remove all references to "msdn.microsoft.com". | Warning |
 | S2001	| AvoidNestedProperties | Consider using x-ms-client-flatten to provide a better end user experience | Warning |
 | S2004	| NonAppJsonTypeWarning | Please make sure that media types other than 'application/json' are supported by your service. | Warning |
-| ? |	InvalidConstraint | Fails this rule if constraint isn't supported for SwaggerObject type | Warning |
 | M2063	| BodyParametersValidation | A body parameter must be named 'parameters'. | Warning |
 | M2017	| PutRequestResponseValidation | A PUT operation request body schema should be the same as its 200 response schema, to allow reusing the same entity between GET and PUT. If the schema of the PUT request body is a superset of the GET response body, make sure you have a PATCH operation to make the resource updatable. Operation: '{0}' Request Model: '{1}' Response Model: '{2}' | Warning |
