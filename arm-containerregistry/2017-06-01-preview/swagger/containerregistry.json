@@ -1537,6 +1537,11 @@
     },
     "Event": {
       "description": "The event for a webhook.",
+      "allOf": [
+        {
+          "$ref": "#/definitions/EventInfo"
+        }
+      ],
       "properties": {
         "eventRequestMessage": {
           "$ref": "#/definitions/EventRequestMessage",
@@ -1545,10 +1550,6 @@
         "eventResponseMessage": {
           "$ref": "#/definitions/EventResponseMessage",
           "description": "The event response message received from the service URI."
-        },
-        "id": {
-          "description": "The event ID.",
-          "type": "string"
         }
       }
     },
