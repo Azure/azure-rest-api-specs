@@ -806,7 +806,10 @@
         ],
         "responses": {
           "200": {
-            "description": "The request was successful; the request was well-formed and received properly."
+            "description": "The request was successful; the request was well-formed and received properly.",
+            "schema": {
+              "$ref": "#/definitions/EventInfo"
+            }
           }
         },
         "x-ms-examples": {
@@ -1507,6 +1510,15 @@
         }
       }
     },
+    "EventInfo": {
+      "description": "The basic information of an event.",
+      "properties": {
+        "id": {
+          "description": "The event ID.",
+          "type": "string"
+        }
+      }
+    },
     "EventListResult": {
       "description": "The result of a request to list events for a webhook.",
       "properties": {
@@ -1526,10 +1538,6 @@
     "Event": {
       "description": "The event for a webhook.",
       "properties": {
-        "id": {
-          "description": "The event ID.",
-          "type": "string"
-        },
         "eventRequestMessage": {
           "$ref": "#/definitions/EventRequestMessage",
           "description": "The event request message sent to the service URI."
@@ -1537,6 +1545,10 @@
         "eventResponseMessage": {
           "$ref": "#/definitions/EventResponseMessage",
           "description": "The event response message received from the service URI."
+        },
+        "id": {
+          "description": "The event ID.",
+          "type": "string"
         }
       }
     },
