@@ -877,13 +877,6 @@
           },
           {
             "$ref": "#/parameters/WebhookNameParameter"
-          },
-          {
-            "name": "$filter",
-            "in": "query",
-            "description": "Optional OData filter.",
-            "required": false,
-            "type": "string"
           }
         ],
         "responses": {
@@ -1532,6 +1525,79 @@
     },
     "Event": {
       "description": "The event for a webhook.",
+      "properties": {
+        "id": {
+          "description": "The event ID.",
+          "type": "string"
+        },
+        "eventRequestMessage": {
+          "$ref": "#/definitions/EventRequestMessage",
+          "description": "The event request message sent to the service URI."
+        },
+        "eventResponseMessage": {
+          "$ref": "#/definitions/EventResponseMessage",
+          "description": "The event response message received from the service URI."
+        }
+      }
+    },
+    "EventRequestMessage": {
+      "description": "The event request message sent to the service URI.",
+      "properties": {
+        "content": {
+          "$ref": "#/definitions/EventContent",
+          "description": "The content of the event request message."
+        },
+        "headers": {
+          "description": "The headers of the event request message.",
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          }
+        },
+        "method": {
+          "description": "The HTTP method used to send the event request message.",
+          "type": "string"
+        },
+        "requestUri": {
+          "description": "The URI used to send the event request message.",
+          "type": "string"
+        },
+        "version": {
+          "description": "The HTTP message version.",
+          "type": "string"
+        }
+      }
+    },
+    "EventResponseMessage": {
+      "description": "The event response message received from the service URI.",
+      "properties": {
+        "content": {
+          "description": "The content of the event response message.",
+          "type": "string"
+        },
+        "headers": {
+          "description": "The headers of the event response message.",
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          }
+        },
+        "reasonPhrase": {
+          "description": "The reason phrase of the event response message.",
+          "type": "string"
+        },
+        "statusCode": {
+          "description": "The status code of the event response message.",
+          "type": "string"
+        },
+        "version": {
+          "description": "The HTTP message version.",
+          "type": "string"
+        }
+      }
+    },
+    "EventContent": {
+      "description": "The content of the event request message.",
       "properties": {
         "id": {
           "description": "The event ID.",
