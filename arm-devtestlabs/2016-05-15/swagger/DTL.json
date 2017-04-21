@@ -20,7 +20,7 @@
                     {
                         "name": "$expand",
                         "in": "query",
-                        "description": "Specify the $expand query. Example: 'properties($expand=storageDetails)'",
+                        "description": "Specify the $expand query. Example: 'properties($select=defaultStorageAccount)'",
                         "required": false,
                         "type": "string"
                     },
@@ -40,7 +40,7 @@
                         "format": "int32"
                     },
                     {
-                        "name": "$orderBy",
+                        "name": "$orderby",
                         "in": "query",
                         "description": "The ordering expression for the results, using OData notation.",
                         "required": false,
@@ -93,7 +93,7 @@
                         "format": "int32"
                     },
                     {
-                        "name": "$orderBy",
+                        "name": "$orderby",
                         "in": "query",
                         "description": "The ordering expression for the results, using OData notation.",
                         "required": false,
@@ -127,7 +127,7 @@
                     {
                         "name": "$expand",
                         "in": "query",
-                        "description": "Specify the $expand query. Example: 'properties($expand=storageDetails)'",
+                        "description": "Specify the $expand query. Example: 'properties($select=defaultStorageAccount)'",
                         "required": false,
                         "type": "string"
                     },
@@ -147,7 +147,7 @@
                         "format": "int32"
                     },
                     {
-                        "name": "$orderBy",
+                        "name": "$orderby",
                         "in": "query",
                         "description": "The ordering expression for the results, using OData notation.",
                         "required": false,
@@ -208,7 +208,7 @@
                         "format": "int32"
                     },
                     {
-                        "name": "$orderBy",
+                        "name": "$orderby",
                         "in": "query",
                         "description": "The ordering expression for the results, using OData notation.",
                         "required": false,
@@ -276,7 +276,7 @@
                         "format": "int32"
                     },
                     {
-                        "name": "$orderBy",
+                        "name": "$orderby",
                         "in": "query",
                         "description": "The ordering expression for the results, using OData notation.",
                         "required": false,
@@ -303,7 +303,7 @@
             "get": {
                 "tags": [ "ArmTemplate" ],
                 "description": "Get azure resource manager template.",
-                "operationId": "ArmTemplate_GetResource",
+                "operationId": "ArmTemplate_Get",
                 "parameters": [
                     { "$ref": "#/parameters/subscriptionId" },
                     { "$ref": "#/parameters/resourceGroupName" },
@@ -395,7 +395,7 @@
                         "format": "int32"
                     },
                     {
-                        "name": "$orderBy",
+                        "name": "$orderby",
                         "in": "query",
                         "description": "The ordering expression for the results, using OData notation.",
                         "required": false,
@@ -422,7 +422,7 @@
             "get": {
                 "tags": [ "Artifact" ],
                 "description": "Get artifact.",
-                "operationId": "Artifact_GetResource",
+                "operationId": "Artifact_Get",
                 "parameters": [
                     { "$ref": "#/parameters/subscriptionId" },
                     { "$ref": "#/parameters/resourceGroupName" },
@@ -524,7 +524,7 @@
             "get": {
                 "tags": [ "ArtifactSource" ],
                 "description": "Get artifact source.",
-                "operationId": "ArtifactSource_GetResource",
+                "operationId": "ArtifactSource_Get",
                 "parameters": [
                     { "$ref": "#/parameters/subscriptionId" },
                     { "$ref": "#/parameters/resourceGroupName" },
@@ -566,7 +566,7 @@
             "put": {
                 "tags": [ "ArtifactSource" ],
                 "description": "Create or replace an existing artifact source.",
-                "operationId": "ArtifactSource_CreateOrUpdateResource",
+                "operationId": "ArtifactSource_CreateOrUpdate",
                 "parameters": [
                     { "$ref": "#/parameters/subscriptionId" },
                     { "$ref": "#/parameters/resourceGroupName" },
@@ -612,7 +612,7 @@
             "delete": {
                 "tags": [ "ArtifactSource" ],
                 "description": "Delete artifact source.",
-                "operationId": "ArtifactSource_DeleteResource",
+                "operationId": "ArtifactSource_Delete",
                 "parameters": [
                     { "$ref": "#/parameters/subscriptionId" },
                     { "$ref": "#/parameters/resourceGroupName" },
@@ -689,7 +689,7 @@
             "get": {
                 "tags": [ "Cost" ],
                 "description": "Get cost.",
-                "operationId": "Cost_GetResource",
+                "operationId": "Cost_Get",
                 "parameters": [
                     { "$ref": "#/parameters/subscriptionId" },
                     { "$ref": "#/parameters/resourceGroupName" },
@@ -731,7 +731,7 @@
             "put": {
                 "tags": [ "Cost" ],
                 "description": "Create or replace an existing cost.",
-                "operationId": "Cost_CreateOrUpdateResource",
+                "operationId": "Cost_CreateOrUpdate",
                 "parameters": [
                     { "$ref": "#/parameters/subscriptionId" },
                     { "$ref": "#/parameters/resourceGroupName" },
@@ -813,7 +813,7 @@
                         "format": "int32"
                     },
                     {
-                        "name": "$orderBy",
+                        "name": "$orderby",
                         "in": "query",
                         "description": "The ordering expression for the results, using OData notation.",
                         "required": false,
@@ -840,7 +840,7 @@
             "get": {
                 "tags": [ "CustomImage" ],
                 "description": "Get custom image.",
-                "operationId": "CustomImage_GetResource",
+                "operationId": "CustomImage_Get",
                 "parameters": [
                     { "$ref": "#/parameters/subscriptionId" },
                     { "$ref": "#/parameters/resourceGroupName" },
@@ -882,7 +882,7 @@
             "put": {
                 "tags": [ "CustomImage" ],
                 "description": "Create or replace an existing custom image. This operation can take a while to complete.",
-                "operationId": "CustomImage_CreateOrUpdateResource",
+                "operationId": "CustomImage_CreateOrUpdate",
                 "parameters": [
                     { "$ref": "#/parameters/subscriptionId" },
                     { "$ref": "#/parameters/resourceGroupName" },
@@ -929,7 +929,7 @@
             "delete": {
                 "tags": [ "CustomImage" ],
                 "description": "Delete custom image. This operation can take a while to complete.",
-                "operationId": "CustomImage_DeleteResource",
+                "operationId": "CustomImage_Delete",
                 "parameters": [
                     { "$ref": "#/parameters/subscriptionId" },
                     { "$ref": "#/parameters/resourceGroupName" },
@@ -999,7 +999,7 @@
                         "format": "int32"
                     },
                     {
-                        "name": "$orderBy",
+                        "name": "$orderby",
                         "in": "query",
                         "description": "The ordering expression for the results, using OData notation.",
                         "required": false,
@@ -1026,7 +1026,7 @@
             "get": {
                 "tags": [ "Formula" ],
                 "description": "Get formula.",
-                "operationId": "Formula_GetResource",
+                "operationId": "Formula_Get",
                 "parameters": [
                     { "$ref": "#/parameters/subscriptionId" },
                     { "$ref": "#/parameters/resourceGroupName" },
@@ -1068,7 +1068,7 @@
             "put": {
                 "tags": [ "Formula" ],
                 "description": "Create or replace an existing Formula. This operation can take a while to complete.",
-                "operationId": "Formula_CreateOrUpdateResource",
+                "operationId": "Formula_CreateOrUpdate",
                 "parameters": [
                     { "$ref": "#/parameters/subscriptionId" },
                     { "$ref": "#/parameters/resourceGroupName" },
@@ -1115,7 +1115,7 @@
             "delete": {
                 "tags": [ "Formula" ],
                 "description": "Delete formula.",
-                "operationId": "Formula_DeleteResource",
+                "operationId": "Formula_Delete",
                 "parameters": [
                     { "$ref": "#/parameters/subscriptionId" },
                     { "$ref": "#/parameters/resourceGroupName" },
@@ -1184,7 +1184,7 @@
                         "format": "int32"
                     },
                     {
-                        "name": "$orderBy",
+                        "name": "$orderby",
                         "in": "query",
                         "description": "The ordering expression for the results, using OData notation.",
                         "required": false,
@@ -1245,7 +1245,7 @@
                         "format": "int32"
                     },
                     {
-                        "name": "$orderBy",
+                        "name": "$orderby",
                         "in": "query",
                         "description": "The ordering expression for the results, using OData notation.",
                         "required": false,
@@ -1272,7 +1272,7 @@
             "get": {
                 "tags": [ "NotificationChannel" ],
                 "description": "Get notificationchannel.",
-                "operationId": "NotificationChannel_GetResource",
+                "operationId": "NotificationChannel_Get",
                 "parameters": [
                     { "$ref": "#/parameters/subscriptionId" },
                     { "$ref": "#/parameters/resourceGroupName" },
@@ -1314,7 +1314,7 @@
             "put": {
                 "tags": [ "NotificationChannel" ],
                 "description": "Create or replace an existing notificationChannel.",
-                "operationId": "NotificationChannel_CreateOrUpdateResource",
+                "operationId": "NotificationChannel_CreateOrUpdate",
                 "parameters": [
                     { "$ref": "#/parameters/subscriptionId" },
                     { "$ref": "#/parameters/resourceGroupName" },
@@ -1360,7 +1360,7 @@
             "delete": {
                 "tags": [ "NotificationChannel" ],
                 "description": "Delete notificationchannel.",
-                "operationId": "NotificationChannel_DeleteResource",
+                "operationId": "NotificationChannel_Delete",
                 "parameters": [
                     { "$ref": "#/parameters/subscriptionId" },
                     { "$ref": "#/parameters/resourceGroupName" },
@@ -1563,7 +1563,7 @@
                         "format": "int32"
                     },
                     {
-                        "name": "$orderBy",
+                        "name": "$orderby",
                         "in": "query",
                         "description": "The ordering expression for the results, using OData notation.",
                         "required": false,
@@ -1590,7 +1590,7 @@
             "get": {
                 "tags": [ "Policy" ],
                 "description": "Get policy.",
-                "operationId": "Policy_GetResource",
+                "operationId": "Policy_Get",
                 "parameters": [
                     { "$ref": "#/parameters/subscriptionId" },
                     { "$ref": "#/parameters/resourceGroupName" },
@@ -1639,7 +1639,7 @@
             "put": {
                 "tags": [ "Policy" ],
                 "description": "Create or replace an existing policy.",
-                "operationId": "Policy_CreateOrUpdateResource",
+                "operationId": "Policy_CreateOrUpdate",
                 "parameters": [
                     { "$ref": "#/parameters/subscriptionId" },
                     { "$ref": "#/parameters/resourceGroupName" },
@@ -1692,7 +1692,7 @@
             "delete": {
                 "tags": [ "Policy" ],
                 "description": "Delete policy.",
-                "operationId": "Policy_DeleteResource",
+                "operationId": "Policy_Delete",
                 "parameters": [
                     { "$ref": "#/parameters/subscriptionId" },
                     { "$ref": "#/parameters/resourceGroupName" },
@@ -1817,7 +1817,7 @@
                         "format": "int32"
                     },
                     {
-                        "name": "$orderBy",
+                        "name": "$orderby",
                         "in": "query",
                         "description": "The ordering expression for the results, using OData notation.",
                         "required": false,
@@ -1844,7 +1844,7 @@
             "get": {
                 "tags": [ "Schedule" ],
                 "description": "Get schedule.",
-                "operationId": "Schedule_GetResource",
+                "operationId": "Schedule_Get",
                 "parameters": [
                     { "$ref": "#/parameters/subscriptionId" },
                     { "$ref": "#/parameters/resourceGroupName" },
@@ -1886,7 +1886,7 @@
             "put": {
                 "tags": [ "Schedule" ],
                 "description": "Create or replace an existing schedule.",
-                "operationId": "Schedule_CreateOrUpdateResource",
+                "operationId": "Schedule_CreateOrUpdate",
                 "parameters": [
                     { "$ref": "#/parameters/subscriptionId" },
                     { "$ref": "#/parameters/resourceGroupName" },
@@ -1932,7 +1932,7 @@
             "delete": {
                 "tags": [ "Schedule" ],
                 "description": "Delete schedule.",
-                "operationId": "Schedule_DeleteResource",
+                "operationId": "Schedule_Delete",
                 "parameters": [
                     { "$ref": "#/parameters/subscriptionId" },
                     { "$ref": "#/parameters/resourceGroupName" },
@@ -2110,7 +2110,7 @@
                         "format": "int32"
                     },
                     {
-                        "name": "$orderBy",
+                        "name": "$orderby",
                         "in": "query",
                         "description": "The ordering expression for the results, using OData notation.",
                         "required": false,
@@ -2137,7 +2137,7 @@
             "get": {
                 "tags": [ "ServiceRunner" ],
                 "description": "Get service runner.",
-                "operationId": "ServiceRunner_GetResource",
+                "operationId": "ServiceRunner_Get",
                 "parameters": [
                     { "$ref": "#/parameters/subscriptionId" },
                     { "$ref": "#/parameters/resourceGroupName" },
@@ -2172,7 +2172,7 @@
             "put": {
                 "tags": [ "ServiceRunner" ],
                 "description": "Create or replace an existing Service runner.",
-                "operationId": "ServiceRunner_CreateOrUpdateResource",
+                "operationId": "ServiceRunner_CreateOrUpdate",
                 "parameters": [
                     { "$ref": "#/parameters/subscriptionId" },
                     { "$ref": "#/parameters/resourceGroupName" },
@@ -2218,7 +2218,7 @@
             "delete": {
                 "tags": [ "ServiceRunner" ],
                 "description": "Delete service runner.",
-                "operationId": "ServiceRunner_DeleteResource",
+                "operationId": "ServiceRunner_Delete",
                 "parameters": [
                     { "$ref": "#/parameters/subscriptionId" },
                     { "$ref": "#/parameters/resourceGroupName" },
@@ -2287,7 +2287,7 @@
                         "format": "int32"
                     },
                     {
-                        "name": "$orderBy",
+                        "name": "$orderby",
                         "in": "query",
                         "description": "The ordering expression for the results, using OData notation.",
                         "required": false,
@@ -2314,7 +2314,7 @@
             "get": {
                 "tags": [ "User" ],
                 "description": "Get user profile.",
-                "operationId": "User_GetResource",
+                "operationId": "User_Get",
                 "parameters": [
                     { "$ref": "#/parameters/subscriptionId" },
                     { "$ref": "#/parameters/resourceGroupName" },
@@ -2356,7 +2356,7 @@
             "put": {
                 "tags": [ "User" ],
                 "description": "Create or replace an existing user profile.",
-                "operationId": "User_CreateOrUpdateResource",
+                "operationId": "User_CreateOrUpdate",
                 "parameters": [
                     { "$ref": "#/parameters/subscriptionId" },
                     { "$ref": "#/parameters/resourceGroupName" },
@@ -2402,7 +2402,7 @@
             "delete": {
                 "tags": [ "User" ],
                 "description": "Delete user profile. This operation can take a while to complete.",
-                "operationId": "User_DeleteResource",
+                "operationId": "User_Delete",
                 "parameters": [
                     { "$ref": "#/parameters/subscriptionId" },
                     { "$ref": "#/parameters/resourceGroupName" },
@@ -2521,7 +2521,7 @@
                         "format": "int32"
                     },
                     {
-                        "name": "$orderBy",
+                        "name": "$orderby",
                         "in": "query",
                         "description": "The ordering expression for the results, using OData notation.",
                         "required": false,
@@ -2548,7 +2548,7 @@
             "get": {
                 "tags": [ "Disk" ],
                 "description": "Get disk.",
-                "operationId": "Disk_GetResource",
+                "operationId": "Disk_Get",
                 "parameters": [
                     { "$ref": "#/parameters/subscriptionId" },
                     { "$ref": "#/parameters/resourceGroupName" },
@@ -2597,7 +2597,7 @@
             "put": {
                 "tags": [ "Disk" ],
                 "description": "Create or replace an existing disk. This operation can take a while to complete.",
-                "operationId": "Disk_CreateOrUpdateResource",
+                "operationId": "Disk_CreateOrUpdate",
                 "parameters": [
                     { "$ref": "#/parameters/subscriptionId" },
                     { "$ref": "#/parameters/resourceGroupName" },
@@ -2651,7 +2651,7 @@
             "delete": {
                 "tags": [ "Disk" ],
                 "description": "Delete disk. This operation can take a while to complete.",
-                "operationId": "Disk_DeleteResource",
+                "operationId": "Disk_Delete",
                 "parameters": [
                     { "$ref": "#/parameters/subscriptionId" },
                     { "$ref": "#/parameters/resourceGroupName" },
@@ -2835,7 +2835,7 @@
                         "format": "int32"
                     },
                     {
-                        "name": "$orderBy",
+                        "name": "$orderby",
                         "in": "query",
                         "description": "The ordering expression for the results, using OData notation.",
                         "required": false,
@@ -2862,7 +2862,7 @@
             "get": {
                 "tags": [ "Environment" ],
                 "description": "Get environment.",
-                "operationId": "Environment_GetResource",
+                "operationId": "Environment_Get",
                 "parameters": [
                     { "$ref": "#/parameters/subscriptionId" },
                     { "$ref": "#/parameters/resourceGroupName" },
@@ -2911,7 +2911,7 @@
             "put": {
                 "tags": [ "Environment" ],
                 "description": "Create or replace an existing environment. This operation can take a while to complete.",
-                "operationId": "Environment_CreateOrUpdateResource",
+                "operationId": "Environment_CreateOrUpdate",
                 "parameters": [
                     { "$ref": "#/parameters/subscriptionId" },
                     { "$ref": "#/parameters/resourceGroupName" },
@@ -2965,7 +2965,7 @@
             "delete": {
                 "tags": [ "Environment" ],
                 "description": "Delete environment. This operation can take a while to complete.",
-                "operationId": "Environment_DeleteResource",
+                "operationId": "Environment_Delete",
                 "parameters": [
                     { "$ref": "#/parameters/subscriptionId" },
                     { "$ref": "#/parameters/resourceGroupName" },
@@ -3049,7 +3049,7 @@
                         "format": "int32"
                     },
                     {
-                        "name": "$orderBy",
+                        "name": "$orderby",
                         "in": "query",
                         "description": "The ordering expression for the results, using OData notation.",
                         "required": false,
@@ -3076,7 +3076,7 @@
             "get": {
                 "tags": [ "Secret" ],
                 "description": "Get secret.",
-                "operationId": "Secret_GetResource",
+                "operationId": "Secret_Get",
                 "parameters": [
                     { "$ref": "#/parameters/subscriptionId" },
                     { "$ref": "#/parameters/resourceGroupName" },
@@ -3125,7 +3125,7 @@
             "put": {
                 "tags": [ "Secret" ],
                 "description": "Create or replace an existing secret.",
-                "operationId": "Secret_CreateOrUpdateResource",
+                "operationId": "Secret_CreateOrUpdate",
                 "parameters": [
                     { "$ref": "#/parameters/subscriptionId" },
                     { "$ref": "#/parameters/resourceGroupName" },
@@ -3178,7 +3178,7 @@
             "delete": {
                 "tags": [ "Secret" ],
                 "description": "Delete secret.",
-                "operationId": "Secret_DeleteResource",
+                "operationId": "Secret_Delete",
                 "parameters": [
                     { "$ref": "#/parameters/subscriptionId" },
                     { "$ref": "#/parameters/resourceGroupName" },
@@ -3254,7 +3254,7 @@
                         "format": "int32"
                     },
                     {
-                        "name": "$orderBy",
+                        "name": "$orderby",
                         "in": "query",
                         "description": "The ordering expression for the results, using OData notation.",
                         "required": false,
@@ -3281,7 +3281,7 @@
             "get": {
                 "tags": [ "VirtualMachine" ],
                 "description": "Get virtual machine.",
-                "operationId": "VirtualMachine_GetResource",
+                "operationId": "VirtualMachine_Get",
                 "parameters": [
                     { "$ref": "#/parameters/subscriptionId" },
                     { "$ref": "#/parameters/resourceGroupName" },
@@ -3323,7 +3323,7 @@
             "put": {
                 "tags": [ "VirtualMachine" ],
                 "description": "Create or replace an existing Virtual machine. This operation can take a while to complete.",
-                "operationId": "VirtualMachine_CreateOrUpdateResource",
+                "operationId": "VirtualMachine_CreateOrUpdate",
                 "parameters": [
                     { "$ref": "#/parameters/subscriptionId" },
                     { "$ref": "#/parameters/resourceGroupName" },
@@ -3370,7 +3370,7 @@
             "delete": {
                 "tags": [ "VirtualMachine" ],
                 "description": "Delete virtual machine. This operation can take a while to complete.",
-                "operationId": "VirtualMachine_DeleteResource",
+                "operationId": "VirtualMachine_Delete",
                 "parameters": [
                     { "$ref": "#/parameters/subscriptionId" },
                     { "$ref": "#/parameters/resourceGroupName" },
@@ -3763,7 +3763,7 @@
                         "format": "int32"
                     },
                     {
-                        "name": "$orderBy",
+                        "name": "$orderby",
                         "in": "query",
                         "description": "The ordering expression for the results, using OData notation.",
                         "required": false,
@@ -3790,7 +3790,7 @@
             "get": {
                 "tags": [ "VirtualMachineSchedule" ],
                 "description": "Get schedule.",
-                "operationId": "VirtualMachineSchedule_GetResource",
+                "operationId": "VirtualMachineSchedule_Get",
                 "parameters": [
                     { "$ref": "#/parameters/subscriptionId" },
                     { "$ref": "#/parameters/resourceGroupName" },
@@ -3839,7 +3839,7 @@
             "put": {
                 "tags": [ "VirtualMachineSchedule" ],
                 "description": "Create or replace an existing schedule.",
-                "operationId": "VirtualMachineSchedule_CreateOrUpdateResource",
+                "operationId": "VirtualMachineSchedule_CreateOrUpdate",
                 "parameters": [
                     { "$ref": "#/parameters/subscriptionId" },
                     { "$ref": "#/parameters/resourceGroupName" },
@@ -3892,7 +3892,7 @@
             "delete": {
                 "tags": [ "VirtualMachineSchedule" ],
                 "description": "Delete schedule.",
-                "operationId": "VirtualMachineSchedule_DeleteResource",
+                "operationId": "VirtualMachineSchedule_Delete",
                 "parameters": [
                     { "$ref": "#/parameters/subscriptionId" },
                     { "$ref": "#/parameters/resourceGroupName" },
@@ -4060,7 +4060,7 @@
                         "format": "int32"
                     },
                     {
-                        "name": "$orderBy",
+                        "name": "$orderby",
                         "in": "query",
                         "description": "The ordering expression for the results, using OData notation.",
                         "required": false,
@@ -4087,7 +4087,7 @@
             "get": {
                 "tags": [ "VirtualNetwork" ],
                 "description": "Get virtual network.",
-                "operationId": "VirtualNetwork_GetResource",
+                "operationId": "VirtualNetwork_Get",
                 "parameters": [
                     { "$ref": "#/parameters/subscriptionId" },
                     { "$ref": "#/parameters/resourceGroupName" },
@@ -4129,7 +4129,7 @@
             "put": {
                 "tags": [ "VirtualNetwork" ],
                 "description": "Create or replace an existing virtual network. This operation can take a while to complete.",
-                "operationId": "VirtualNetwork_CreateOrUpdateResource",
+                "operationId": "VirtualNetwork_CreateOrUpdate",
                 "parameters": [
                     { "$ref": "#/parameters/subscriptionId" },
                     { "$ref": "#/parameters/resourceGroupName" },
@@ -4176,7 +4176,7 @@
             "delete": {
                 "tags": [ "VirtualNetwork" ],
                 "description": "Delete virtual network. This operation can take a while to complete.",
-                "operationId": "VirtualNetwork_DeleteResource",
+                "operationId": "VirtualNetwork_Delete",
                 "parameters": [
                     { "$ref": "#/parameters/subscriptionId" },
                     { "$ref": "#/parameters/resourceGroupName" },
@@ -4254,7 +4254,7 @@
             "get": {
                 "tags": [ "Lab" ],
                 "description": "Get lab.",
-                "operationId": "Lab_GetResource",
+                "operationId": "Lab_Get",
                 "parameters": [
                     { "$ref": "#/parameters/subscriptionId" },
                     { "$ref": "#/parameters/resourceGroupName" },
@@ -4268,7 +4268,7 @@
                     {
                         "name": "$expand",
                         "in": "query",
-                        "description": "Specify the $expand query. Example: 'properties($expand=storageDetails)'",
+                        "description": "Specify the $expand query. Example: 'properties($select=defaultStorageAccount)'",
                         "required": false,
                         "type": "string"
                     },
@@ -4289,7 +4289,7 @@
             "put": {
                 "tags": [ "Lab" ],
                 "description": "Create or replace an existing lab. This operation can take a while to complete.",
-                "operationId": "Lab_CreateOrUpdateResource",
+                "operationId": "Lab_CreateOrUpdate",
                 "parameters": [
                     { "$ref": "#/parameters/subscriptionId" },
                     { "$ref": "#/parameters/resourceGroupName" },
@@ -4329,7 +4329,7 @@
             "delete": {
                 "tags": [ "Lab" ],
                 "description": "Delete lab. This operation can take a while to complete.",
-                "operationId": "Lab_DeleteResource",
+                "operationId": "Lab_Delete",
                 "parameters": [
                     { "$ref": "#/parameters/subscriptionId" },
                     { "$ref": "#/parameters/resourceGroupName" },
@@ -4589,7 +4589,7 @@
                         "format": "int32"
                     },
                     {
-                        "name": "$orderBy",
+                        "name": "$orderby",
                         "in": "query",
                         "description": "The ordering expression for the results, using OData notation.",
                         "required": false,
@@ -4616,7 +4616,7 @@
             "get": {
                 "tags": [ "GlobalSchedule" ],
                 "description": "Get schedule.",
-                "operationId": "GlobalSchedule_GetResource",
+                "operationId": "GlobalSchedule_Get",
                 "parameters": [
                     { "$ref": "#/parameters/subscriptionId" },
                     { "$ref": "#/parameters/resourceGroupName" },
@@ -4651,7 +4651,7 @@
             "put": {
                 "tags": [ "GlobalSchedule" ],
                 "description": "Create or replace an existing schedule.",
-                "operationId": "GlobalSchedule_CreateOrUpdateResource",
+                "operationId": "GlobalSchedule_CreateOrUpdate",
                 "parameters": [
                     { "$ref": "#/parameters/subscriptionId" },
                     { "$ref": "#/parameters/resourceGroupName" },
@@ -4690,7 +4690,7 @@
             "delete": {
                 "tags": [ "GlobalSchedule" ],
                 "description": "Delete schedule.",
-                "operationId": "GlobalSchedule_DeleteResource",
+                "operationId": "GlobalSchedule_Delete",
                 "parameters": [
                     { "$ref": "#/parameters/subscriptionId" },
                     { "$ref": "#/parameters/resourceGroupName" },
@@ -4927,33 +4927,40 @@
             "properties": {
                 "displayName": {
                     "description": "The display name of the ARM template.",
-                    "type": "string"
+                    "type": "string",
+                    "readOnly": true
                 },
                 "description": {
                     "description": "The description of the ARM template.",
-                    "type": "string"
+                    "type": "string",
+                    "readOnly": true
                 },
                 "publisher": {
                     "description": "The publisher of the ARM template.",
-                    "type": "string"
+                    "type": "string",
+                    "readOnly": true
                 },
                 "icon": {
                     "description": "The URI to the icon of the ARM template.",
-                    "type": "string"
+                    "type": "string",
+                    "readOnly": true
                 },
                 "contents": {
                     "description": "The contents of the ARM template.",
-                    "type": "object"
+                    "type": "object",
+                    "readOnly": true
                 },
                 "createdDate": {
                     "format": "date-time",
                     "description": "The creation date of the armTemplate.",
-                    "type": "string"
+                    "type": "string",
+                    "readOnly": true
                 },
                 "parametersValueFilesInfo": {
                     "description": "File name and parameter values information from all azuredeploy.*.parameters.json for the ARM template.",
                     "type": "array",
-                    "items": { "$ref": "#/definitions/ParametersValueFileInfo" }
+                    "items": { "$ref": "#/definitions/ParametersValueFileInfo" },
+                    "readOnly": true
                 }
             }
         },
@@ -5108,36 +5115,44 @@
             "properties": {
                 "title": {
                     "description": "The artifact's title.",
-                    "type": "string"
+                    "type": "string",
+                    "readOnly": true
                 },
                 "description": {
                     "description": "The artifact's description.",
-                    "type": "string"
+                    "type": "string",
+                    "readOnly": true
                 },
                 "publisher": {
                     "description": "The artifact's publisher.",
-                    "type": "string"
+                    "type": "string",
+                    "readOnly": true
                 },
                 "filePath": {
                     "description": "The file path to the artifact.",
-                    "type": "string"
+                    "type": "string",
+                    "readOnly": true
                 },
                 "icon": {
                     "description": "The URI to the artifact icon.",
-                    "type": "string"
+                    "type": "string",
+                    "readOnly": true
                 },
                 "targetOsType": {
                     "description": "The artifact's target OS.",
-                    "type": "string"
+                    "type": "string",
+                    "readOnly": true
                 },
                 "parameters": {
                     "description": "The artifact's parameters.",
-                    "type": "object"
+                    "type": "object",
+                    "readOnly": true
                 },
                 "createdDate": {
                     "format": "date-time",
                     "description": "The artifact's creation date.",
-                    "type": "string"
+                    "type": "string",
+                    "readOnly": true
                 }
             }
         },
@@ -5215,7 +5230,8 @@
                 "createdDate": {
                     "format": "date-time",
                     "description": "The artifact source's creation date.",
-                    "type": "string"
+                    "type": "string",
+                    "readOnly": true
                 },
                 "provisioningState": {
                     "description": "The provisioning status of the resource.",
@@ -5272,11 +5288,6 @@
                         "name": "EnableStatus",
                         "modelAsString": true
                     }
-                },
-                "createdDate": {
-                    "format": "date-time",
-                    "description": "The artifact source's creation date.",
-                    "type": "string"
                 },
                 "provisioningState": {
                     "description": "The provisioning status of the resource.",
@@ -5411,6 +5422,10 @@
                 "displayStatus": {
                     "description": "Gets the short localizable label for the status.",
                     "type": "string"
+                },
+                "message": {
+                    "description": "Gets the message associated with the status.",
+                    "type": "string"
                 }
             }
         },
@@ -5424,6 +5439,10 @@
                 },
                 "displayStatus": {
                     "description": "Gets the short localizable label for the status.",
+                    "type": "string"
+                },
+                "message": {
+                    "description": "Gets the message associated with the status.",
                     "type": "string"
                 }
             }
@@ -5574,7 +5593,8 @@
                 "creationDate": {
                     "format": "date-time",
                     "description": "The creation date of the custom image.",
-                    "type": "string"
+                    "type": "string",
+                    "readOnly": true
                 },
                 "managedImageId": {
                     "description": "The Managed Image Id backing the custom image.",
@@ -5741,7 +5761,8 @@
                 "createdDate": {
                     "format": "date-time",
                     "description": "The creation date of the disk.",
-                    "type": "string"
+                    "type": "string",
+                    "readOnly": true
                 },
                 "hostCaching": {
                     "description": "The host caching policy of the disk (i.e. None, ReadOnly, ReadWrite).",
@@ -5802,12 +5823,14 @@
                     "type": "string"
                 },
                 "resourceGroupId": {
-                    "description": "The identifier  of the resource group containing the environment's resources.",
-                    "type": "string"
+                    "description": "The identifier of the resource group containing the environment's resources.",
+                    "type": "string",
+                    "readOnly": true
                 },
                 "createdByUser": {
                     "description": "The creator of the environment.",
-                    "type": "string"
+                    "type": "string",
+                    "readOnly": true
                 },
                 "provisioningState": {
                     "description": "The provisioning status of the resource.",
@@ -5964,7 +5987,8 @@
                 "creationDate": {
                     "format": "date-time",
                     "description": "The creation date of the formula.",
-                    "type": "string"
+                    "type": "string",
+                    "readOnly": true
                 },
                 "formulaContent": {
                     "$ref": "#/definitions/LabVirtualMachineCreationParameter",
@@ -6018,7 +6042,8 @@
                 "createdDate": {
                     "format": "date-time",
                     "description": "The creation date of the gallery image.",
-                    "type": "string"
+                    "type": "string",
+                    "readOnly": true
                 },
                 "description": {
                     "description": "The description of the gallery image.",
@@ -6234,7 +6259,6 @@
         },
         "Lab": {
             "description": "A lab.",
-            "required": [ "properties" ],
             "type": "object",
             "allOf": [ { "$ref": "#/definitions/Resource" } ],
             "properties": {
@@ -6293,17 +6317,20 @@
                 },
                 "labCostSummary": {
                     "$ref": "#/definitions/LabCostSummaryProperties",
-                    "description": "The lab cost summary component of the cost data."
+                    "description": "The lab cost summary component of the cost data.",
+                    "readOnly": true
                 },
                 "labCostDetails": {
                     "description": "The lab cost details component of the cost data.",
                     "type": "array",
-                    "items": { "$ref": "#/definitions/LabCostDetailsProperties" }
+                    "items": { "$ref": "#/definitions/LabCostDetailsProperties" },
+                    "readOnly": true
                 },
                 "resourceCosts": {
                     "description": "The resource cost component of the cost data.",
                     "type": "array",
-                    "items": { "$ref": "#/definitions/LabResourceCostProperties" }
+                    "items": { "$ref": "#/definitions/LabResourceCostProperties" },
+                    "readOnly": true
                 },
                 "currencyCode": {
                     "description": "The currency code of the cost.",
@@ -6363,23 +6390,28 @@
             "properties": {
                 "defaultStorageAccount": {
                     "description": "The lab's default storage account.",
-                    "type": "string"
+                    "type": "string",
+                    "readOnly": true
                 },
                 "defaultPremiumStorageAccount": {
                     "description": "The lab's default premium storage account.",
-                    "type": "string"
+                    "type": "string",
+                    "readOnly": true
                 },
                 "artifactsStorageAccount": {
                     "description": "The lab's artifact storage account.",
-                    "type": "string"
+                    "type": "string",
+                    "readOnly": true
                 },
                 "premiumDataDiskStorageAccount": {
                     "description": "The lab's premium data disk storage account.",
-                    "type": "string"
+                    "type": "string",
+                    "readOnly": true
                 },
                 "vaultName": {
                     "description": "The lab's Key vault.",
-                    "type": "string"
+                    "type": "string",
+                    "readOnly": true
                 },
                 "labStorageType": {
                     "description": "Type of storage used by the lab. It can be either Premium or Standard. Default is Premium.",
@@ -6393,11 +6425,8 @@
                 "createdDate": {
                     "format": "date-time",
                     "description": "The creation date of the lab.",
-                    "type": "string"
-                },
-                "storageDetails": {
-                    "$ref": "#/definitions/LabStorageProperties",
-                    "description": "The storage properties."
+                    "type": "string",
+                    "readOnly": true
                 },
                 "premiumDataDisks": {
                     "description": "The setting to enable usage of premium data disks.\r\nWhen its value is 'Enabled', creation of standard or premium data disks is allowed.\r\nWhen its value is 'Disabled', only creation of standard data disks is allowed.",
@@ -6422,26 +6451,6 @@
             "description": "Properties of a lab.",
             "type": "object",
             "properties": {
-                "defaultStorageAccount": {
-                    "description": "The lab's default storage account.",
-                    "type": "string"
-                },
-                "defaultPremiumStorageAccount": {
-                    "description": "The lab's default premium storage account.",
-                    "type": "string"
-                },
-                "artifactsStorageAccount": {
-                    "description": "The lab's artifact storage account.",
-                    "type": "string"
-                },
-                "premiumDataDiskStorageAccount": {
-                    "description": "The lab's premium data disk storage account.",
-                    "type": "string"
-                },
-                "vaultName": {
-                    "description": "The lab's Key vault.",
-                    "type": "string"
-                },
                 "labStorageType": {
                     "description": "Type of storage used by the lab. It can be either Premium or Standard. Default is Premium.",
                     "enum": [ "Standard", "Premium" ],
@@ -6450,15 +6459,6 @@
                         "name": "StorageType",
                         "modelAsString": true
                     }
-                },
-                "createdDate": {
-                    "format": "date-time",
-                    "description": "The creation date of the lab.",
-                    "type": "string"
-                },
-                "storageDetails": {
-                    "$ref": "#/definitions/LabStoragePropertiesFragment",
-                    "description": "The storage properties."
                 },
                 "premiumDataDisks": {
                     "description": "The setting to enable usage of premium data disks.\r\nWhen its value is 'Enabled', creation of standard or premium data disks is allowed.\r\nWhen its value is 'Disabled', only creation of standard data disks is allowed.",
@@ -6519,50 +6519,6 @@
                 "externalResourceId": {
                     "description": "The ID of the external resource",
                     "type": "string"
-                }
-            }
-        },
-        "LabStorageProperties": {
-            "description": "Storage accounts configured in a lab.",
-            "type": "object",
-            "properties": {
-                "defaultStorageAccount": {
-                    "$ref": "#/definitions/StorageProperties",
-                    "description": "The default storage account properties."
-                },
-                "defaultPremiumStorageAccount": {
-                    "$ref": "#/definitions/StorageProperties",
-                    "description": "The default premium storage account properties."
-                },
-                "artifactsStorageAccount": {
-                    "$ref": "#/definitions/StorageProperties",
-                    "description": "The artifacts storage account properties."
-                },
-                "premiumDataDiskStorageAccount": {
-                    "$ref": "#/definitions/StorageProperties",
-                    "description": "The premium data disk storage account properties."
-                }
-            }
-        },
-        "LabStoragePropertiesFragment": {
-            "description": "Storage accounts configured in a lab.",
-            "type": "object",
-            "properties": {
-                "defaultStorageAccount": {
-                    "$ref": "#/definitions/StoragePropertiesFragment",
-                    "description": "The default storage account properties."
-                },
-                "defaultPremiumStorageAccount": {
-                    "$ref": "#/definitions/StoragePropertiesFragment",
-                    "description": "The default premium storage account properties."
-                },
-                "artifactsStorageAccount": {
-                    "$ref": "#/definitions/StoragePropertiesFragment",
-                    "description": "The artifacts storage account properties."
-                },
-                "premiumDataDiskStorageAccount": {
-                    "$ref": "#/definitions/StoragePropertiesFragment",
-                    "description": "The premium data disk storage account properties."
                 }
             }
         },
@@ -7169,7 +7125,8 @@
                 "createdDate": {
                     "format": "date-time",
                     "description": "The creation date of the notification channel.",
-                    "type": "string"
+                    "type": "string",
+                    "readOnly": true
                 },
                 "provisioningState": {
                     "description": "The provisioning status of the resource.",
@@ -7197,11 +7154,6 @@
                     "description": "The list of event for which this notification is enabled.",
                     "type": "array",
                     "items": { "$ref": "#/definitions/EventFragment" }
-                },
-                "createdDate": {
-                    "format": "date-time",
-                    "description": "The creation date of the notification channel.",
-                    "type": "string"
                 },
                 "provisioningState": {
                     "description": "The provisioning status of the resource.",
@@ -7284,8 +7236,14 @@
             "description": "Information about an artifact's parameter.",
             "type": "object",
             "properties": {
-                "name": { "type": "string" },
-                "value": { "type": "string" }
+                "name": {
+                    "description": "The name of the artifact parameter.",
+                    "type": "string"
+                },
+                "value": {
+                    "description": "The value of the artifact parameter.",
+                    "type": "string"
+                }
             }
         },
         "ParametersValueFileInfo": {
@@ -7384,7 +7342,8 @@
                 "createdDate": {
                     "format": "date-time",
                     "description": "The creation date of the policy.",
-                    "type": "string"
+                    "type": "string",
+                    "readOnly": true
                 },
                 "provisioningState": {
                     "description": "The provisioning status of the resource.",
@@ -7438,11 +7397,6 @@
                         "name": "PolicyEvaluatorType",
                         "modelAsString": true
                     }
-                },
-                "createdDate": {
-                    "format": "date-time",
-                    "description": "The creation date of the policy.",
-                    "type": "string"
                 },
                 "provisioningState": {
                     "description": "The provisioning status of the resource.",
@@ -7529,15 +7483,18 @@
             "properties": {
                 "id": {
                     "description": "The identifier of the resource.",
-                    "type": "string"
+                    "type": "string",
+                    "readOnly": true
                 },
                 "name": {
                     "description": "The name of the resource.",
-                    "type": "string"
+                    "type": "string",
+                    "readOnly": true
                 },
                 "type": {
                     "description": "The type of the resource.",
-                    "type": "string"
+                    "type": "string",
+                    "readOnly": true
                 },
                 "location": {
                     "description": "The location of the resource.",
@@ -7900,7 +7857,8 @@
                 "createdDate": {
                     "format": "date-time",
                     "description": "The creation date of the schedule.",
-                    "type": "string"
+                    "type": "string",
+                    "readOnly": true
                 },
                 "targetResourceId": {
                     "description": "The resource ID to which the schedule belongs",
@@ -7952,11 +7910,6 @@
                 "notificationSettings": {
                     "$ref": "#/definitions/NotificationSettingsFragment",
                     "description": "Notification settings."
-                },
-                "createdDate": {
-                    "format": "date-time",
-                    "description": "The creation date of the schedule.",
-                    "type": "string"
                 },
                 "targetResourceId": {
                     "description": "The resource ID to which the schedule belongs",
@@ -8082,42 +8035,6 @@
                 },
                 "labName": {
                     "description": "The lab for the schedule.",
-                    "type": "string"
-                }
-            }
-        },
-        "StorageProperties": {
-            "description": "Properties of a storage account.",
-            "type": "object",
-            "properties": {
-                "statusOfPrimary": {
-                    "description": "Gets the status of the storage account",
-                    "type": "string"
-                },
-                "id": {
-                    "description": "Gets the resource ID of the storage account",
-                    "type": "string"
-                },
-                "accountType": {
-                    "description": "Gets the account type of the storage account",
-                    "type": "string"
-                }
-            }
-        },
-        "StoragePropertiesFragment": {
-            "description": "Properties of a storage account.",
-            "type": "object",
-            "properties": {
-                "statusOfPrimary": {
-                    "description": "Gets the status of the storage account",
-                    "type": "string"
-                },
-                "id": {
-                    "description": "Gets the resource ID of the storage account",
-                    "type": "string"
-                },
-                "accountType": {
-                    "description": "Gets the account type of the storage account",
                     "type": "string"
                 }
             }
@@ -8405,7 +8322,8 @@
                 "createdDate": {
                     "format": "date-time",
                     "description": "The creation date of the user profile.",
-                    "type": "string"
+                    "type": "string",
+                    "readOnly": true
                 },
                 "provisioningState": {
                     "description": "The provisioning status of the resource.",
@@ -8428,11 +8346,6 @@
                 "secretStore": {
                     "$ref": "#/definitions/UserSecretStoreFragment",
                     "description": "The secret store of the user."
-                },
-                "createdDate": {
-                    "format": "date-time",
-                    "description": "The creation date of the user profile.",
-                    "type": "string"
                 },
                 "provisioningState": {
                     "description": "The provisioning status of the resource.",
@@ -8474,7 +8387,6 @@
         },
         "VirtualNetwork": {
             "description": "A virtual network.",
-            "required": [ "properties" ],
             "type": "object",
             "allOf": [ { "$ref": "#/definitions/Resource" } ],
             "properties": {
@@ -8527,7 +8439,8 @@
                 "createdDate": {
                     "format": "date-time",
                     "description": "The creation date of the virtual network.",
-                    "type": "string"
+                    "type": "string",
+                    "readOnly": true
                 },
                 "provisioningState": {
                     "description": "The provisioning status of the resource.",
@@ -8565,11 +8478,6 @@
                     "description": "The subnet overrides of the virtual network.",
                     "type": "array",
                     "items": { "$ref": "#/definitions/SubnetOverrideFragment" }
-                },
-                "createdDate": {
-                    "format": "date-time",
-                    "description": "The creation date of the virtual network.",
-                    "type": "string"
                 },
                 "provisioningState": {
                     "description": "The provisioning status of the resource.",
@@ -8661,5 +8569,6 @@
             "scopes": { "user_impersonation": "Access Microsoft Azure" }
         }
     },
-    "security": [ { "oauth2": [ "user_impersonation" ] } ]
+    "security": [ { "oauth2": [ "user_impersonation" ] } ],
+    "$schema": "https://raw.githubusercontent.com/swagger-api/swagger-spec/master/schemas/v2.0/schema.json"
 }
