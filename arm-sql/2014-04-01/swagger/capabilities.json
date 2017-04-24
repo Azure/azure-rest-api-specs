@@ -72,7 +72,8 @@
                     "readOnly": true,
                     "type": "integer",
                     "format": "int64",
-                    "description": "The maximum size of the database (see 'unit' for the units)."
+                    "description": "The maximum size of the database (see 'unit' for the units).",
+                    "x-nullable": false
                 },
                 "unit": {
                     "readOnly": true,
@@ -118,7 +119,9 @@
                 "id": {
                     "readOnly": true,
                     "type": "string",
-                    "description": "The unique ID of the service objective."
+                    "format": "uuid",
+                    "description": "The unique ID of the service objective.",
+                    "x-nullable": false
                 },
                 "supportedMaxSizes": {
                     "readOnly": true,
