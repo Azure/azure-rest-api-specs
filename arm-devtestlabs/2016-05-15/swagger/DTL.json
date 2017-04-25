@@ -12,9 +12,9 @@
     "paths": {
         "/subscriptions/{subscriptionId}/providers/Microsoft.DevTestLab/labs": {
             "get": {
-                "tags": [ "Lab" ],
+                "tags": [ "Labs" ],
                 "description": "List labs in a subscription.",
-                "operationId": "Lab_ListBySubscription",
+                "operationId": "Labs_ListBySubscription",
                 "parameters": [
                     { "$ref": "#/parameters/subscriptionId" },
                     {
@@ -65,9 +65,9 @@
         },
         "/subscriptions/{subscriptionId}/providers/Microsoft.DevTestLab/schedules": {
             "get": {
-                "tags": [ "GlobalSchedule" ],
+                "tags": [ "GlobalSchedules" ],
                 "description": "List schedules in a subscription.",
-                "operationId": "GlobalSchedule_ListBySubscription",
+                "operationId": "GlobalSchedules_ListBySubscription",
                 "parameters": [
                     { "$ref": "#/parameters/subscriptionId" },
                     {
@@ -118,9 +118,9 @@
         },
         "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DevTestLab/labs": {
             "get": {
-                "tags": [ "Lab" ],
+                "tags": [ "Labs" ],
                 "description": "List labs in a resource group.",
-                "operationId": "Lab_ListByResourceGroup",
+                "operationId": "Labs_ListByResourceGroup",
                 "parameters": [
                     { "$ref": "#/parameters/subscriptionId" },
                     { "$ref": "#/parameters/resourceGroupName" },
@@ -172,9 +172,9 @@
         },
         "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DevTestLab/labs/{labName}/artifactsources": {
             "get": {
-                "tags": [ "ArtifactSource" ],
+                "tags": [ "ArtifactSources" ],
                 "description": "List artifact sources in a given lab.",
-                "operationId": "ArtifactSource_List",
+                "operationId": "ArtifactSources_List",
                 "parameters": [
                     { "$ref": "#/parameters/subscriptionId" },
                     { "$ref": "#/parameters/resourceGroupName" },
@@ -233,9 +233,9 @@
         },
         "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DevTestLab/labs/{labName}/artifactsources/{artifactSourceName}/armtemplates": {
             "get": {
-                "tags": [ "ArmTemplate" ],
+                "tags": [ "ArmTemplates" ],
                 "description": "List azure resource manager templates in a given artifact source.",
-                "operationId": "ArmTemplate_List",
+                "operationId": "ArmTemplates_List",
                 "parameters": [
                     { "$ref": "#/parameters/subscriptionId" },
                     { "$ref": "#/parameters/resourceGroupName" },
@@ -301,9 +301,9 @@
         },
         "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DevTestLab/labs/{labName}/artifactsources/{artifactSourceName}/armtemplates/{name}": {
             "get": {
-                "tags": [ "ArmTemplate" ],
+                "tags": [ "ArmTemplates" ],
                 "description": "Get azure resource manager template.",
-                "operationId": "ArmTemplate_Get",
+                "operationId": "ArmTemplates_Get",
                 "parameters": [
                     { "$ref": "#/parameters/subscriptionId" },
                     { "$ref": "#/parameters/resourceGroupName" },
@@ -352,9 +352,9 @@
         },
         "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DevTestLab/labs/{labName}/artifactsources/{artifactSourceName}/artifacts": {
             "get": {
-                "tags": [ "Artifact" ],
+                "tags": [ "Artifacts" ],
                 "description": "List artifacts in a given artifact source.",
-                "operationId": "Artifact_List",
+                "operationId": "Artifacts_List",
                 "parameters": [
                     { "$ref": "#/parameters/subscriptionId" },
                     { "$ref": "#/parameters/resourceGroupName" },
@@ -420,9 +420,9 @@
         },
         "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DevTestLab/labs/{labName}/artifactsources/{artifactSourceName}/artifacts/{name}": {
             "get": {
-                "tags": [ "Artifact" ],
+                "tags": [ "Artifacts" ],
                 "description": "Get artifact.",
-                "operationId": "Artifact_Get",
+                "operationId": "Artifacts_Get",
                 "parameters": [
                     { "$ref": "#/parameters/subscriptionId" },
                     { "$ref": "#/parameters/resourceGroupName" },
@@ -471,9 +471,9 @@
         },
         "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DevTestLab/labs/{labName}/artifactsources/{artifactSourceName}/artifacts/{name}/generateArmTemplate": {
             "post": {
-                "tags": [ "Artifact" ],
+                "tags": [ "Artifacts" ],
                 "description": "Generates an ARM template for the given artifact, uploads the required files to a storage account, and validates the generated artifact.",
-                "operationId": "Artifact_GenerateArmTemplate",
+                "operationId": "Artifacts_GenerateArmTemplate",
                 "parameters": [
                     { "$ref": "#/parameters/subscriptionId" },
                     { "$ref": "#/parameters/resourceGroupName" },
@@ -522,9 +522,9 @@
         },
         "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DevTestLab/labs/{labName}/artifactsources/{name}": {
             "get": {
-                "tags": [ "ArtifactSource" ],
+                "tags": [ "ArtifactSources" ],
                 "description": "Get artifact source.",
-                "operationId": "ArtifactSource_Get",
+                "operationId": "ArtifactSources_Get",
                 "parameters": [
                     { "$ref": "#/parameters/subscriptionId" },
                     { "$ref": "#/parameters/resourceGroupName" },
@@ -564,9 +564,9 @@
                 "security": [ { "oauth2": [ "user_impersonation" ] } ]
             },
             "put": {
-                "tags": [ "ArtifactSource" ],
+                "tags": [ "ArtifactSources" ],
                 "description": "Create or replace an existing artifact source.",
-                "operationId": "ArtifactSource_CreateOrUpdate",
+                "operationId": "ArtifactSources_CreateOrUpdate",
                 "parameters": [
                     { "$ref": "#/parameters/subscriptionId" },
                     { "$ref": "#/parameters/resourceGroupName" },
@@ -610,9 +610,9 @@
                 "security": [ { "oauth2": [ "user_impersonation" ] } ]
             },
             "delete": {
-                "tags": [ "ArtifactSource" ],
+                "tags": [ "ArtifactSources" ],
                 "description": "Delete artifact source.",
-                "operationId": "ArtifactSource_Delete",
+                "operationId": "ArtifactSources_Delete",
                 "parameters": [
                     { "$ref": "#/parameters/subscriptionId" },
                     { "$ref": "#/parameters/resourceGroupName" },
@@ -643,9 +643,9 @@
                 "security": [ { "oauth2": [ "user_impersonation" ] } ]
             },
             "patch": {
-                "tags": [ "ArtifactSource" ],
+                "tags": [ "ArtifactSources" ],
                 "description": "Modify properties of artifact sources.",
-                "operationId": "ArtifactSource_Update",
+                "operationId": "ArtifactSources_Update",
                 "parameters": [
                     { "$ref": "#/parameters/subscriptionId" },
                     { "$ref": "#/parameters/resourceGroupName" },
@@ -687,9 +687,9 @@
         },
         "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DevTestLab/labs/{labName}/costs/{name}": {
             "get": {
-                "tags": [ "Cost" ],
+                "tags": [ "Costs" ],
                 "description": "Get cost.",
-                "operationId": "Cost_Get",
+                "operationId": "Costs_Get",
                 "parameters": [
                     { "$ref": "#/parameters/subscriptionId" },
                     { "$ref": "#/parameters/resourceGroupName" },
@@ -729,9 +729,9 @@
                 "security": [ { "oauth2": [ "user_impersonation" ] } ]
             },
             "put": {
-                "tags": [ "Cost" ],
+                "tags": [ "Costs" ],
                 "description": "Create or replace an existing cost.",
-                "operationId": "Cost_CreateOrUpdate",
+                "operationId": "Costs_CreateOrUpdate",
                 "parameters": [
                     { "$ref": "#/parameters/subscriptionId" },
                     { "$ref": "#/parameters/resourceGroupName" },
@@ -777,9 +777,9 @@
         },
         "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DevTestLab/labs/{labName}/customimages": {
             "get": {
-                "tags": [ "CustomImage" ],
+                "tags": [ "CustomImages" ],
                 "description": "List custom images in a given lab.",
-                "operationId": "CustomImage_List",
+                "operationId": "CustomImages_List",
                 "parameters": [
                     { "$ref": "#/parameters/subscriptionId" },
                     { "$ref": "#/parameters/resourceGroupName" },
@@ -838,9 +838,9 @@
         },
         "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DevTestLab/labs/{labName}/customimages/{name}": {
             "get": {
-                "tags": [ "CustomImage" ],
+                "tags": [ "CustomImages" ],
                 "description": "Get custom image.",
-                "operationId": "CustomImage_Get",
+                "operationId": "CustomImages_Get",
                 "parameters": [
                     { "$ref": "#/parameters/subscriptionId" },
                     { "$ref": "#/parameters/resourceGroupName" },
@@ -880,9 +880,9 @@
                 "security": [ { "oauth2": [ "user_impersonation" ] } ]
             },
             "put": {
-                "tags": [ "CustomImage" ],
+                "tags": [ "CustomImages" ],
                 "description": "Create or replace an existing custom image. This operation can take a while to complete.",
-                "operationId": "CustomImage_CreateOrUpdate",
+                "operationId": "CustomImages_CreateOrUpdate",
                 "parameters": [
                     { "$ref": "#/parameters/subscriptionId" },
                     { "$ref": "#/parameters/resourceGroupName" },
@@ -927,9 +927,9 @@
                 "x-ms-long-running-operation": true
             },
             "delete": {
-                "tags": [ "CustomImage" ],
+                "tags": [ "CustomImages" ],
                 "description": "Delete custom image. This operation can take a while to complete.",
-                "operationId": "CustomImage_Delete",
+                "operationId": "CustomImages_Delete",
                 "parameters": [
                     { "$ref": "#/parameters/subscriptionId" },
                     { "$ref": "#/parameters/resourceGroupName" },
@@ -963,9 +963,9 @@
         },
         "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DevTestLab/labs/{labName}/formulas": {
             "get": {
-                "tags": [ "Formula" ],
+                "tags": [ "Formulas" ],
                 "description": "List formulas in a given lab.",
-                "operationId": "Formula_List",
+                "operationId": "Formulas_List",
                 "parameters": [
                     { "$ref": "#/parameters/subscriptionId" },
                     { "$ref": "#/parameters/resourceGroupName" },
@@ -1024,9 +1024,9 @@
         },
         "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DevTestLab/labs/{labName}/formulas/{name}": {
             "get": {
-                "tags": [ "Formula" ],
+                "tags": [ "Formulas" ],
                 "description": "Get formula.",
-                "operationId": "Formula_Get",
+                "operationId": "Formulas_Get",
                 "parameters": [
                     { "$ref": "#/parameters/subscriptionId" },
                     { "$ref": "#/parameters/resourceGroupName" },
@@ -1066,9 +1066,9 @@
                 "security": [ { "oauth2": [ "user_impersonation" ] } ]
             },
             "put": {
-                "tags": [ "Formula" ],
+                "tags": [ "Formulas" ],
                 "description": "Create or replace an existing Formula. This operation can take a while to complete.",
-                "operationId": "Formula_CreateOrUpdate",
+                "operationId": "Formulas_CreateOrUpdate",
                 "parameters": [
                     { "$ref": "#/parameters/subscriptionId" },
                     { "$ref": "#/parameters/resourceGroupName" },
@@ -1113,9 +1113,9 @@
                 "x-ms-long-running-operation": true
             },
             "delete": {
-                "tags": [ "Formula" ],
+                "tags": [ "Formulas" ],
                 "description": "Delete formula.",
-                "operationId": "Formula_Delete",
+                "operationId": "Formulas_Delete",
                 "parameters": [
                     { "$ref": "#/parameters/subscriptionId" },
                     { "$ref": "#/parameters/resourceGroupName" },
@@ -1148,9 +1148,9 @@
         },
         "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DevTestLab/labs/{labName}/galleryimages": {
             "get": {
-                "tags": [ "GalleryImage" ],
+                "tags": [ "GalleryImages" ],
                 "description": "List gallery images in a given lab.",
-                "operationId": "GalleryImage_List",
+                "operationId": "GalleryImages_List",
                 "parameters": [
                     { "$ref": "#/parameters/subscriptionId" },
                     { "$ref": "#/parameters/resourceGroupName" },
@@ -1209,9 +1209,9 @@
         },
         "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DevTestLab/labs/{labName}/notificationchannels": {
             "get": {
-                "tags": [ "NotificationChannel" ],
+                "tags": [ "NotificationChannels" ],
                 "description": "List notificationchannels in a given lab.",
-                "operationId": "NotificationChannel_List",
+                "operationId": "NotificationChannels_List",
                 "parameters": [
                     { "$ref": "#/parameters/subscriptionId" },
                     { "$ref": "#/parameters/resourceGroupName" },
@@ -1270,9 +1270,9 @@
         },
         "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DevTestLab/labs/{labName}/notificationchannels/{name}": {
             "get": {
-                "tags": [ "NotificationChannel" ],
+                "tags": [ "NotificationChannels" ],
                 "description": "Get notificationchannel.",
-                "operationId": "NotificationChannel_Get",
+                "operationId": "NotificationChannels_Get",
                 "parameters": [
                     { "$ref": "#/parameters/subscriptionId" },
                     { "$ref": "#/parameters/resourceGroupName" },
@@ -1312,9 +1312,9 @@
                 "security": [ { "oauth2": [ "user_impersonation" ] } ]
             },
             "put": {
-                "tags": [ "NotificationChannel" ],
+                "tags": [ "NotificationChannels" ],
                 "description": "Create or replace an existing notificationChannel.",
-                "operationId": "NotificationChannel_CreateOrUpdate",
+                "operationId": "NotificationChannels_CreateOrUpdate",
                 "parameters": [
                     { "$ref": "#/parameters/subscriptionId" },
                     { "$ref": "#/parameters/resourceGroupName" },
@@ -1358,9 +1358,9 @@
                 "security": [ { "oauth2": [ "user_impersonation" ] } ]
             },
             "delete": {
-                "tags": [ "NotificationChannel" ],
+                "tags": [ "NotificationChannels" ],
                 "description": "Delete notificationchannel.",
-                "operationId": "NotificationChannel_Delete",
+                "operationId": "NotificationChannels_Delete",
                 "parameters": [
                     { "$ref": "#/parameters/subscriptionId" },
                     { "$ref": "#/parameters/resourceGroupName" },
@@ -1391,9 +1391,9 @@
                 "security": [ { "oauth2": [ "user_impersonation" ] } ]
             },
             "patch": {
-                "tags": [ "NotificationChannel" ],
+                "tags": [ "NotificationChannels" ],
                 "description": "Modify properties of notificationchannels.",
-                "operationId": "NotificationChannel_Update",
+                "operationId": "NotificationChannels_Update",
                 "parameters": [
                     { "$ref": "#/parameters/subscriptionId" },
                     { "$ref": "#/parameters/resourceGroupName" },
@@ -1435,9 +1435,9 @@
         },
         "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DevTestLab/labs/{labName}/notificationchannels/{name}/notify": {
             "post": {
-                "tags": [ "NotificationChannel" ],
+                "tags": [ "NotificationChannels" ],
                 "description": "Send notification to provided channel.",
-                "operationId": "NotificationChannel_Notify",
+                "operationId": "NotificationChannels_Notify",
                 "parameters": [
                     { "$ref": "#/parameters/subscriptionId" },
                     { "$ref": "#/parameters/resourceGroupName" },
@@ -1476,9 +1476,9 @@
         },
         "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DevTestLab/labs/{labName}/policysets/{name}/evaluatePolicies": {
             "post": {
-                "tags": [ "PolicySet" ],
+                "tags": [ "PolicySets" ],
                 "description": "Evaluates lab policy.",
-                "operationId": "PolicySet_EvaluatePolicies",
+                "operationId": "PolicySets_EvaluatePolicies",
                 "parameters": [
                     { "$ref": "#/parameters/subscriptionId" },
                     { "$ref": "#/parameters/resourceGroupName" },
@@ -1520,9 +1520,9 @@
         },
         "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DevTestLab/labs/{labName}/policysets/{policySetName}/policies": {
             "get": {
-                "tags": [ "Policy" ],
+                "tags": [ "Policies" ],
                 "description": "List policies in a given policy set.",
-                "operationId": "Policy_List",
+                "operationId": "Policies_List",
                 "parameters": [
                     { "$ref": "#/parameters/subscriptionId" },
                     { "$ref": "#/parameters/resourceGroupName" },
@@ -1588,9 +1588,9 @@
         },
         "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DevTestLab/labs/{labName}/policysets/{policySetName}/policies/{name}": {
             "get": {
-                "tags": [ "Policy" ],
+                "tags": [ "Policies" ],
                 "description": "Get policy.",
-                "operationId": "Policy_Get",
+                "operationId": "Policies_Get",
                 "parameters": [
                     { "$ref": "#/parameters/subscriptionId" },
                     { "$ref": "#/parameters/resourceGroupName" },
@@ -1637,9 +1637,9 @@
                 "security": [ { "oauth2": [ "user_impersonation" ] } ]
             },
             "put": {
-                "tags": [ "Policy" ],
+                "tags": [ "Policies" ],
                 "description": "Create or replace an existing policy.",
-                "operationId": "Policy_CreateOrUpdate",
+                "operationId": "Policies_CreateOrUpdate",
                 "parameters": [
                     { "$ref": "#/parameters/subscriptionId" },
                     { "$ref": "#/parameters/resourceGroupName" },
@@ -1690,9 +1690,9 @@
                 "security": [ { "oauth2": [ "user_impersonation" ] } ]
             },
             "delete": {
-                "tags": [ "Policy" ],
+                "tags": [ "Policies" ],
                 "description": "Delete policy.",
-                "operationId": "Policy_Delete",
+                "operationId": "Policies_Delete",
                 "parameters": [
                     { "$ref": "#/parameters/subscriptionId" },
                     { "$ref": "#/parameters/resourceGroupName" },
@@ -1730,9 +1730,9 @@
                 "security": [ { "oauth2": [ "user_impersonation" ] } ]
             },
             "patch": {
-                "tags": [ "Policy" ],
+                "tags": [ "Policies" ],
                 "description": "Modify properties of policies.",
-                "operationId": "Policy_Update",
+                "operationId": "Policies_Update",
                 "parameters": [
                     { "$ref": "#/parameters/subscriptionId" },
                     { "$ref": "#/parameters/resourceGroupName" },
@@ -1781,9 +1781,9 @@
         },
         "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DevTestLab/labs/{labName}/schedules": {
             "get": {
-                "tags": [ "Schedule" ],
+                "tags": [ "Schedules" ],
                 "description": "List schedules in a given lab.",
-                "operationId": "Schedule_List",
+                "operationId": "Schedules_List",
                 "parameters": [
                     { "$ref": "#/parameters/subscriptionId" },
                     { "$ref": "#/parameters/resourceGroupName" },
@@ -1842,9 +1842,9 @@
         },
         "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DevTestLab/labs/{labName}/schedules/{name}": {
             "get": {
-                "tags": [ "Schedule" ],
+                "tags": [ "Schedules" ],
                 "description": "Get schedule.",
-                "operationId": "Schedule_Get",
+                "operationId": "Schedules_Get",
                 "parameters": [
                     { "$ref": "#/parameters/subscriptionId" },
                     { "$ref": "#/parameters/resourceGroupName" },
@@ -1884,9 +1884,9 @@
                 "security": [ { "oauth2": [ "user_impersonation" ] } ]
             },
             "put": {
-                "tags": [ "Schedule" ],
+                "tags": [ "Schedules" ],
                 "description": "Create or replace an existing schedule.",
-                "operationId": "Schedule_CreateOrUpdate",
+                "operationId": "Schedules_CreateOrUpdate",
                 "parameters": [
                     { "$ref": "#/parameters/subscriptionId" },
                     { "$ref": "#/parameters/resourceGroupName" },
@@ -1930,9 +1930,9 @@
                 "security": [ { "oauth2": [ "user_impersonation" ] } ]
             },
             "delete": {
-                "tags": [ "Schedule" ],
+                "tags": [ "Schedules" ],
                 "description": "Delete schedule.",
-                "operationId": "Schedule_Delete",
+                "operationId": "Schedules_Delete",
                 "parameters": [
                     { "$ref": "#/parameters/subscriptionId" },
                     { "$ref": "#/parameters/resourceGroupName" },
@@ -1963,9 +1963,9 @@
                 "security": [ { "oauth2": [ "user_impersonation" ] } ]
             },
             "patch": {
-                "tags": [ "Schedule" ],
+                "tags": [ "Schedules" ],
                 "description": "Modify properties of schedules.",
-                "operationId": "Schedule_Update",
+                "operationId": "Schedules_Update",
                 "parameters": [
                     { "$ref": "#/parameters/subscriptionId" },
                     { "$ref": "#/parameters/resourceGroupName" },
@@ -2007,9 +2007,9 @@
         },
         "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DevTestLab/labs/{labName}/schedules/{name}/execute": {
             "post": {
-                "tags": [ "Schedule" ],
+                "tags": [ "Schedules" ],
                 "description": "Execute a schedule. This operation can take a while to complete.",
-                "operationId": "Schedule_Execute",
+                "operationId": "Schedules_Execute",
                 "parameters": [
                     { "$ref": "#/parameters/subscriptionId" },
                     { "$ref": "#/parameters/resourceGroupName" },
@@ -2043,9 +2043,9 @@
         },
         "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DevTestLab/labs/{labName}/schedules/{name}/listApplicable": {
             "post": {
-                "tags": [ "Schedule" ],
+                "tags": [ "Schedules" ],
                 "description": "Lists all applicable schedules",
-                "operationId": "Schedule_ListApplicable",
+                "operationId": "Schedules_ListApplicable",
                 "parameters": [
                     { "$ref": "#/parameters/subscriptionId" },
                     { "$ref": "#/parameters/resourceGroupName" },
@@ -2081,9 +2081,9 @@
         },
         "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DevTestLab/labs/{labName}/servicerunners": {
             "get": {
-                "tags": [ "ServiceRunner" ],
+                "tags": [ "ServiceRunners" ],
                 "description": "List service runners in a given lab.",
-                "operationId": "ServiceRunner_List",
+                "operationId": "ServiceRunners_List",
                 "parameters": [
                     { "$ref": "#/parameters/subscriptionId" },
                     { "$ref": "#/parameters/resourceGroupName" },
@@ -2135,9 +2135,9 @@
         },
         "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DevTestLab/labs/{labName}/servicerunners/{name}": {
             "get": {
-                "tags": [ "ServiceRunner" ],
+                "tags": [ "ServiceRunners" ],
                 "description": "Get service runner.",
-                "operationId": "ServiceRunner_Get",
+                "operationId": "ServiceRunners_Get",
                 "parameters": [
                     { "$ref": "#/parameters/subscriptionId" },
                     { "$ref": "#/parameters/resourceGroupName" },
@@ -2170,9 +2170,9 @@
                 "security": [ { "oauth2": [ "user_impersonation" ] } ]
             },
             "put": {
-                "tags": [ "ServiceRunner" ],
+                "tags": [ "ServiceRunners" ],
                 "description": "Create or replace an existing Service runner.",
-                "operationId": "ServiceRunner_CreateOrUpdate",
+                "operationId": "ServiceRunners_CreateOrUpdate",
                 "parameters": [
                     { "$ref": "#/parameters/subscriptionId" },
                     { "$ref": "#/parameters/resourceGroupName" },
@@ -2216,9 +2216,9 @@
                 "security": [ { "oauth2": [ "user_impersonation" ] } ]
             },
             "delete": {
-                "tags": [ "ServiceRunner" ],
+                "tags": [ "ServiceRunners" ],
                 "description": "Delete service runner.",
-                "operationId": "ServiceRunner_Delete",
+                "operationId": "ServiceRunners_Delete",
                 "parameters": [
                     { "$ref": "#/parameters/subscriptionId" },
                     { "$ref": "#/parameters/resourceGroupName" },
@@ -2251,9 +2251,9 @@
         },
         "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DevTestLab/labs/{labName}/users": {
             "get": {
-                "tags": [ "User" ],
+                "tags": [ "Users" ],
                 "description": "List user profiles in a given lab.",
-                "operationId": "User_List",
+                "operationId": "Users_List",
                 "parameters": [
                     { "$ref": "#/parameters/subscriptionId" },
                     { "$ref": "#/parameters/resourceGroupName" },
@@ -2312,9 +2312,9 @@
         },
         "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DevTestLab/labs/{labName}/users/{name}": {
             "get": {
-                "tags": [ "User" ],
+                "tags": [ "Users" ],
                 "description": "Get user profile.",
-                "operationId": "User_Get",
+                "operationId": "Users_Get",
                 "parameters": [
                     { "$ref": "#/parameters/subscriptionId" },
                     { "$ref": "#/parameters/resourceGroupName" },
@@ -2354,9 +2354,9 @@
                 "security": [ { "oauth2": [ "user_impersonation" ] } ]
             },
             "put": {
-                "tags": [ "User" ],
+                "tags": [ "Users" ],
                 "description": "Create or replace an existing user profile.",
-                "operationId": "User_CreateOrUpdate",
+                "operationId": "Users_CreateOrUpdate",
                 "parameters": [
                     { "$ref": "#/parameters/subscriptionId" },
                     { "$ref": "#/parameters/resourceGroupName" },
@@ -2400,9 +2400,9 @@
                 "security": [ { "oauth2": [ "user_impersonation" ] } ]
             },
             "delete": {
-                "tags": [ "User" ],
+                "tags": [ "Users" ],
                 "description": "Delete user profile. This operation can take a while to complete.",
-                "operationId": "User_Delete",
+                "operationId": "Users_Delete",
                 "parameters": [
                     { "$ref": "#/parameters/subscriptionId" },
                     { "$ref": "#/parameters/resourceGroupName" },
@@ -2434,9 +2434,9 @@
                 "x-ms-long-running-operation": true
             },
             "patch": {
-                "tags": [ "User" ],
+                "tags": [ "Users" ],
                 "description": "Modify properties of user profiles.",
-                "operationId": "User_Update",
+                "operationId": "Users_Update",
                 "parameters": [
                     { "$ref": "#/parameters/subscriptionId" },
                     { "$ref": "#/parameters/resourceGroupName" },
@@ -2478,9 +2478,9 @@
         },
         "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DevTestLab/labs/{labName}/users/{userName}/disks": {
             "get": {
-                "tags": [ "Disk" ],
+                "tags": [ "Disks" ],
                 "description": "List disks in a given user profile.",
-                "operationId": "Disk_List",
+                "operationId": "Disks_List",
                 "parameters": [
                     { "$ref": "#/parameters/subscriptionId" },
                     { "$ref": "#/parameters/resourceGroupName" },
@@ -2546,9 +2546,9 @@
         },
         "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DevTestLab/labs/{labName}/users/{userName}/disks/{name}": {
             "get": {
-                "tags": [ "Disk" ],
+                "tags": [ "Disks" ],
                 "description": "Get disk.",
-                "operationId": "Disk_Get",
+                "operationId": "Disks_Get",
                 "parameters": [
                     { "$ref": "#/parameters/subscriptionId" },
                     { "$ref": "#/parameters/resourceGroupName" },
@@ -2595,9 +2595,9 @@
                 "security": [ { "oauth2": [ "user_impersonation" ] } ]
             },
             "put": {
-                "tags": [ "Disk" ],
+                "tags": [ "Disks" ],
                 "description": "Create or replace an existing disk. This operation can take a while to complete.",
-                "operationId": "Disk_CreateOrUpdate",
+                "operationId": "Disks_CreateOrUpdate",
                 "parameters": [
                     { "$ref": "#/parameters/subscriptionId" },
                     { "$ref": "#/parameters/resourceGroupName" },
@@ -2649,9 +2649,9 @@
                 "x-ms-long-running-operation": true
             },
             "delete": {
-                "tags": [ "Disk" ],
+                "tags": [ "Disks" ],
                 "description": "Delete disk. This operation can take a while to complete.",
-                "operationId": "Disk_Delete",
+                "operationId": "Disks_Delete",
                 "parameters": [
                     { "$ref": "#/parameters/subscriptionId" },
                     { "$ref": "#/parameters/resourceGroupName" },
@@ -2692,9 +2692,9 @@
         },
         "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DevTestLab/labs/{labName}/users/{userName}/disks/{name}/attach": {
             "post": {
-                "tags": [ "Disk" ],
+                "tags": [ "Disks" ],
                 "description": "Attach and create the lease of the disk to the virtual machine. This operation can take a while to complete.",
-                "operationId": "Disk_Attach",
+                "operationId": "Disks_Attach",
                 "parameters": [
                     { "$ref": "#/parameters/subscriptionId" },
                     { "$ref": "#/parameters/resourceGroupName" },
@@ -2742,9 +2742,9 @@
         },
         "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DevTestLab/labs/{labName}/users/{userName}/disks/{name}/detach": {
             "post": {
-                "tags": [ "Disk" ],
+                "tags": [ "Disks" ],
                 "description": "Detach and break the lease of the disk attached to the virtual machine. This operation can take a while to complete.",
-                "operationId": "Disk_Detach",
+                "operationId": "Disks_Detach",
                 "parameters": [
                     { "$ref": "#/parameters/subscriptionId" },
                     { "$ref": "#/parameters/resourceGroupName" },
@@ -2792,9 +2792,9 @@
         },
         "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DevTestLab/labs/{labName}/users/{userName}/environments": {
             "get": {
-                "tags": [ "Environment" ],
+                "tags": [ "Environments" ],
                 "description": "List environments in a given user profile.",
-                "operationId": "Environment_List",
+                "operationId": "Environments_List",
                 "parameters": [
                     { "$ref": "#/parameters/subscriptionId" },
                     { "$ref": "#/parameters/resourceGroupName" },
@@ -2860,9 +2860,9 @@
         },
         "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DevTestLab/labs/{labName}/users/{userName}/environments/{name}": {
             "get": {
-                "tags": [ "Environment" ],
+                "tags": [ "Environments" ],
                 "description": "Get environment.",
-                "operationId": "Environment_Get",
+                "operationId": "Environments_Get",
                 "parameters": [
                     { "$ref": "#/parameters/subscriptionId" },
                     { "$ref": "#/parameters/resourceGroupName" },
@@ -2909,9 +2909,9 @@
                 "security": [ { "oauth2": [ "user_impersonation" ] } ]
             },
             "put": {
-                "tags": [ "Environment" ],
+                "tags": [ "Environments" ],
                 "description": "Create or replace an existing environment. This operation can take a while to complete.",
-                "operationId": "Environment_CreateOrUpdate",
+                "operationId": "Environments_CreateOrUpdate",
                 "parameters": [
                     { "$ref": "#/parameters/subscriptionId" },
                     { "$ref": "#/parameters/resourceGroupName" },
@@ -2963,9 +2963,9 @@
                 "x-ms-long-running-operation": true
             },
             "delete": {
-                "tags": [ "Environment" ],
+                "tags": [ "Environments" ],
                 "description": "Delete environment. This operation can take a while to complete.",
-                "operationId": "Environment_Delete",
+                "operationId": "Environments_Delete",
                 "parameters": [
                     { "$ref": "#/parameters/subscriptionId" },
                     { "$ref": "#/parameters/resourceGroupName" },
@@ -3006,9 +3006,9 @@
         },
         "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DevTestLab/labs/{labName}/users/{userName}/secrets": {
             "get": {
-                "tags": [ "Secret" ],
+                "tags": [ "Secrets" ],
                 "description": "List secrets in a given user profile.",
-                "operationId": "Secret_List",
+                "operationId": "Secrets_List",
                 "parameters": [
                     { "$ref": "#/parameters/subscriptionId" },
                     { "$ref": "#/parameters/resourceGroupName" },
@@ -3074,9 +3074,9 @@
         },
         "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DevTestLab/labs/{labName}/users/{userName}/secrets/{name}": {
             "get": {
-                "tags": [ "Secret" ],
+                "tags": [ "Secrets" ],
                 "description": "Get secret.",
-                "operationId": "Secret_Get",
+                "operationId": "Secrets_Get",
                 "parameters": [
                     { "$ref": "#/parameters/subscriptionId" },
                     { "$ref": "#/parameters/resourceGroupName" },
@@ -3123,9 +3123,9 @@
                 "security": [ { "oauth2": [ "user_impersonation" ] } ]
             },
             "put": {
-                "tags": [ "Secret" ],
+                "tags": [ "Secrets" ],
                 "description": "Create or replace an existing secret.",
-                "operationId": "Secret_CreateOrUpdate",
+                "operationId": "Secrets_CreateOrUpdate",
                 "parameters": [
                     { "$ref": "#/parameters/subscriptionId" },
                     { "$ref": "#/parameters/resourceGroupName" },
@@ -3176,9 +3176,9 @@
                 "security": [ { "oauth2": [ "user_impersonation" ] } ]
             },
             "delete": {
-                "tags": [ "Secret" ],
+                "tags": [ "Secrets" ],
                 "description": "Delete secret.",
-                "operationId": "Secret_Delete",
+                "operationId": "Secrets_Delete",
                 "parameters": [
                     { "$ref": "#/parameters/subscriptionId" },
                     { "$ref": "#/parameters/resourceGroupName" },
@@ -3218,9 +3218,9 @@
         },
         "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DevTestLab/labs/{labName}/virtualmachines": {
             "get": {
-                "tags": [ "VirtualMachine" ],
+                "tags": [ "VirtualMachines" ],
                 "description": "List virtual machines in a given lab.",
-                "operationId": "VirtualMachine_List",
+                "operationId": "VirtualMachines_List",
                 "parameters": [
                     { "$ref": "#/parameters/subscriptionId" },
                     { "$ref": "#/parameters/resourceGroupName" },
@@ -3279,9 +3279,9 @@
         },
         "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DevTestLab/labs/{labName}/virtualmachines/{name}": {
             "get": {
-                "tags": [ "VirtualMachine" ],
+                "tags": [ "VirtualMachines" ],
                 "description": "Get virtual machine.",
-                "operationId": "VirtualMachine_Get",
+                "operationId": "VirtualMachines_Get",
                 "parameters": [
                     { "$ref": "#/parameters/subscriptionId" },
                     { "$ref": "#/parameters/resourceGroupName" },
@@ -3321,9 +3321,9 @@
                 "security": [ { "oauth2": [ "user_impersonation" ] } ]
             },
             "put": {
-                "tags": [ "VirtualMachine" ],
+                "tags": [ "VirtualMachines" ],
                 "description": "Create or replace an existing Virtual machine. This operation can take a while to complete.",
-                "operationId": "VirtualMachine_CreateOrUpdate",
+                "operationId": "VirtualMachines_CreateOrUpdate",
                 "parameters": [
                     { "$ref": "#/parameters/subscriptionId" },
                     { "$ref": "#/parameters/resourceGroupName" },
@@ -3368,9 +3368,9 @@
                 "x-ms-long-running-operation": true
             },
             "delete": {
-                "tags": [ "VirtualMachine" ],
+                "tags": [ "VirtualMachines" ],
                 "description": "Delete virtual machine. This operation can take a while to complete.",
-                "operationId": "VirtualMachine_Delete",
+                "operationId": "VirtualMachines_Delete",
                 "parameters": [
                     { "$ref": "#/parameters/subscriptionId" },
                     { "$ref": "#/parameters/resourceGroupName" },
@@ -3402,9 +3402,9 @@
                 "x-ms-long-running-operation": true
             },
             "patch": {
-                "tags": [ "VirtualMachine" ],
+                "tags": [ "VirtualMachines" ],
                 "description": "Modify properties of virtual machines.",
-                "operationId": "VirtualMachine_Update",
+                "operationId": "VirtualMachines_Update",
                 "parameters": [
                     { "$ref": "#/parameters/subscriptionId" },
                     { "$ref": "#/parameters/resourceGroupName" },
@@ -3446,9 +3446,9 @@
         },
         "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DevTestLab/labs/{labName}/virtualmachines/{name}/addDataDisk": {
             "post": {
-                "tags": [ "VirtualMachine" ],
+                "tags": [ "VirtualMachines" ],
                 "description": "Attach a new or existing data disk to virtual machine. This operation can take a while to complete.",
-                "operationId": "VirtualMachine_AddDataDisk",
+                "operationId": "VirtualMachines_AddDataDisk",
                 "parameters": [
                     { "$ref": "#/parameters/subscriptionId" },
                     { "$ref": "#/parameters/resourceGroupName" },
@@ -3489,9 +3489,9 @@
         },
         "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DevTestLab/labs/{labName}/virtualmachines/{name}/applyArtifacts": {
             "post": {
-                "tags": [ "VirtualMachine" ],
+                "tags": [ "VirtualMachines" ],
                 "description": "Apply artifacts to virtual machine. This operation can take a while to complete.",
-                "operationId": "VirtualMachine_ApplyArtifacts",
+                "operationId": "VirtualMachines_ApplyArtifacts",
                 "parameters": [
                     { "$ref": "#/parameters/subscriptionId" },
                     { "$ref": "#/parameters/resourceGroupName" },
@@ -3532,9 +3532,9 @@
         },
         "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DevTestLab/labs/{labName}/virtualmachines/{name}/claim": {
             "post": {
-                "tags": [ "VirtualMachine" ],
+                "tags": [ "VirtualMachines" ],
                 "description": "Take ownership of an existing virtual machine This operation can take a while to complete.",
-                "operationId": "VirtualMachine_Claim",
+                "operationId": "VirtualMachines_Claim",
                 "parameters": [
                     { "$ref": "#/parameters/subscriptionId" },
                     { "$ref": "#/parameters/resourceGroupName" },
@@ -3568,9 +3568,9 @@
         },
         "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DevTestLab/labs/{labName}/virtualmachines/{name}/detachDataDisk": {
             "post": {
-                "tags": [ "VirtualMachine" ],
+                "tags": [ "VirtualMachines" ],
                 "description": "Detach the specified disk from the virtual machine. This operation can take a while to complete.",
-                "operationId": "VirtualMachine_DetachDataDisk",
+                "operationId": "VirtualMachines_DetachDataDisk",
                 "parameters": [
                     { "$ref": "#/parameters/subscriptionId" },
                     { "$ref": "#/parameters/resourceGroupName" },
@@ -3611,9 +3611,9 @@
         },
         "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DevTestLab/labs/{labName}/virtualmachines/{name}/listApplicableSchedules": {
             "post": {
-                "tags": [ "VirtualMachine" ],
+                "tags": [ "VirtualMachines" ],
                 "description": "Lists all applicable schedules",
-                "operationId": "VirtualMachine_ListApplicableSchedules",
+                "operationId": "VirtualMachines_ListApplicableSchedules",
                 "parameters": [
                     { "$ref": "#/parameters/subscriptionId" },
                     { "$ref": "#/parameters/resourceGroupName" },
@@ -3648,9 +3648,9 @@
         },
         "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DevTestLab/labs/{labName}/virtualmachines/{name}/start": {
             "post": {
-                "tags": [ "VirtualMachine" ],
+                "tags": [ "VirtualMachines" ],
                 "description": "Start a virtual machine. This operation can take a while to complete.",
-                "operationId": "VirtualMachine_Start",
+                "operationId": "VirtualMachines_Start",
                 "parameters": [
                     { "$ref": "#/parameters/subscriptionId" },
                     { "$ref": "#/parameters/resourceGroupName" },
@@ -3684,9 +3684,9 @@
         },
         "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DevTestLab/labs/{labName}/virtualmachines/{name}/stop": {
             "post": {
-                "tags": [ "VirtualMachine" ],
+                "tags": [ "VirtualMachines" ],
                 "description": "Stop a virtual machine This operation can take a while to complete.",
-                "operationId": "VirtualMachine_Stop",
+                "operationId": "VirtualMachines_Stop",
                 "parameters": [
                     { "$ref": "#/parameters/subscriptionId" },
                     { "$ref": "#/parameters/resourceGroupName" },
@@ -3720,9 +3720,9 @@
         },
         "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DevTestLab/labs/{labName}/virtualmachines/{virtualMachineName}/schedules": {
             "get": {
-                "tags": [ "VirtualMachineSchedule" ],
+                "tags": [ "VirtualMachineSchedules" ],
                 "description": "List schedules in a given virtual machine.",
-                "operationId": "VirtualMachineSchedule_List",
+                "operationId": "VirtualMachineSchedules_List",
                 "parameters": [
                     { "$ref": "#/parameters/subscriptionId" },
                     { "$ref": "#/parameters/resourceGroupName" },
@@ -3788,9 +3788,9 @@
         },
         "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DevTestLab/labs/{labName}/virtualmachines/{virtualMachineName}/schedules/{name}": {
             "get": {
-                "tags": [ "VirtualMachineSchedule" ],
+                "tags": [ "VirtualMachineSchedules" ],
                 "description": "Get schedule.",
-                "operationId": "VirtualMachineSchedule_Get",
+                "operationId": "VirtualMachineSchedules_Get",
                 "parameters": [
                     { "$ref": "#/parameters/subscriptionId" },
                     { "$ref": "#/parameters/resourceGroupName" },
@@ -3837,9 +3837,9 @@
                 "security": [ { "oauth2": [ "user_impersonation" ] } ]
             },
             "put": {
-                "tags": [ "VirtualMachineSchedule" ],
+                "tags": [ "VirtualMachineSchedules" ],
                 "description": "Create or replace an existing schedule.",
-                "operationId": "VirtualMachineSchedule_CreateOrUpdate",
+                "operationId": "VirtualMachineSchedules_CreateOrUpdate",
                 "parameters": [
                     { "$ref": "#/parameters/subscriptionId" },
                     { "$ref": "#/parameters/resourceGroupName" },
@@ -3890,9 +3890,9 @@
                 "security": [ { "oauth2": [ "user_impersonation" ] } ]
             },
             "delete": {
-                "tags": [ "VirtualMachineSchedule" ],
+                "tags": [ "VirtualMachineSchedules" ],
                 "description": "Delete schedule.",
-                "operationId": "VirtualMachineSchedule_Delete",
+                "operationId": "VirtualMachineSchedules_Delete",
                 "parameters": [
                     { "$ref": "#/parameters/subscriptionId" },
                     { "$ref": "#/parameters/resourceGroupName" },
@@ -3930,9 +3930,9 @@
                 "security": [ { "oauth2": [ "user_impersonation" ] } ]
             },
             "patch": {
-                "tags": [ "VirtualMachineSchedule" ],
+                "tags": [ "VirtualMachineSchedules" ],
                 "description": "Modify properties of schedules.",
-                "operationId": "VirtualMachineSchedule_Update",
+                "operationId": "VirtualMachineSchedules_Update",
                 "parameters": [
                     { "$ref": "#/parameters/subscriptionId" },
                     { "$ref": "#/parameters/resourceGroupName" },
@@ -3981,9 +3981,9 @@
         },
         "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DevTestLab/labs/{labName}/virtualmachines/{virtualMachineName}/schedules/{name}/execute": {
             "post": {
-                "tags": [ "VirtualMachineSchedule" ],
+                "tags": [ "VirtualMachineSchedules" ],
                 "description": "Execute a schedule. This operation can take a while to complete.",
-                "operationId": "VirtualMachineSchedule_Execute",
+                "operationId": "VirtualMachineSchedules_Execute",
                 "parameters": [
                     { "$ref": "#/parameters/subscriptionId" },
                     { "$ref": "#/parameters/resourceGroupName" },
@@ -4024,9 +4024,9 @@
         },
         "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DevTestLab/labs/{labName}/virtualnetworks": {
             "get": {
-                "tags": [ "VirtualNetwork" ],
+                "tags": [ "VirtualNetworks" ],
                 "description": "List virtual networks in a given lab.",
-                "operationId": "VirtualNetwork_List",
+                "operationId": "VirtualNetworks_List",
                 "parameters": [
                     { "$ref": "#/parameters/subscriptionId" },
                     { "$ref": "#/parameters/resourceGroupName" },
@@ -4085,9 +4085,9 @@
         },
         "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DevTestLab/labs/{labName}/virtualnetworks/{name}": {
             "get": {
-                "tags": [ "VirtualNetwork" ],
+                "tags": [ "VirtualNetworks" ],
                 "description": "Get virtual network.",
-                "operationId": "VirtualNetwork_Get",
+                "operationId": "VirtualNetworks_Get",
                 "parameters": [
                     { "$ref": "#/parameters/subscriptionId" },
                     { "$ref": "#/parameters/resourceGroupName" },
@@ -4127,9 +4127,9 @@
                 "security": [ { "oauth2": [ "user_impersonation" ] } ]
             },
             "put": {
-                "tags": [ "VirtualNetwork" ],
+                "tags": [ "VirtualNetworks" ],
                 "description": "Create or replace an existing virtual network. This operation can take a while to complete.",
-                "operationId": "VirtualNetwork_CreateOrUpdate",
+                "operationId": "VirtualNetworks_CreateOrUpdate",
                 "parameters": [
                     { "$ref": "#/parameters/subscriptionId" },
                     { "$ref": "#/parameters/resourceGroupName" },
@@ -4174,9 +4174,9 @@
                 "x-ms-long-running-operation": true
             },
             "delete": {
-                "tags": [ "VirtualNetwork" ],
+                "tags": [ "VirtualNetworks" ],
                 "description": "Delete virtual network. This operation can take a while to complete.",
-                "operationId": "VirtualNetwork_Delete",
+                "operationId": "VirtualNetworks_Delete",
                 "parameters": [
                     { "$ref": "#/parameters/subscriptionId" },
                     { "$ref": "#/parameters/resourceGroupName" },
@@ -4208,9 +4208,9 @@
                 "x-ms-long-running-operation": true
             },
             "patch": {
-                "tags": [ "VirtualNetwork" ],
+                "tags": [ "VirtualNetworks" ],
                 "description": "Modify properties of virtual networks.",
-                "operationId": "VirtualNetwork_Update",
+                "operationId": "VirtualNetworks_Update",
                 "parameters": [
                     { "$ref": "#/parameters/subscriptionId" },
                     { "$ref": "#/parameters/resourceGroupName" },
@@ -4252,9 +4252,9 @@
         },
         "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DevTestLab/labs/{name}": {
             "get": {
-                "tags": [ "Lab" ],
+                "tags": [ "Labs" ],
                 "description": "Get lab.",
-                "operationId": "Lab_Get",
+                "operationId": "Labs_Get",
                 "parameters": [
                     { "$ref": "#/parameters/subscriptionId" },
                     { "$ref": "#/parameters/resourceGroupName" },
@@ -4287,9 +4287,9 @@
                 "security": [ { "oauth2": [ "user_impersonation" ] } ]
             },
             "put": {
-                "tags": [ "Lab" ],
+                "tags": [ "Labs" ],
                 "description": "Create or replace an existing lab. This operation can take a while to complete.",
-                "operationId": "Lab_CreateOrUpdate",
+                "operationId": "Labs_CreateOrUpdate",
                 "parameters": [
                     { "$ref": "#/parameters/subscriptionId" },
                     { "$ref": "#/parameters/resourceGroupName" },
@@ -4327,9 +4327,9 @@
                 "x-ms-long-running-operation": true
             },
             "delete": {
-                "tags": [ "Lab" ],
+                "tags": [ "Labs" ],
                 "description": "Delete lab. This operation can take a while to complete.",
-                "operationId": "Lab_Delete",
+                "operationId": "Labs_Delete",
                 "parameters": [
                     { "$ref": "#/parameters/subscriptionId" },
                     { "$ref": "#/parameters/resourceGroupName" },
@@ -4354,9 +4354,9 @@
                 "x-ms-long-running-operation": true
             },
             "patch": {
-                "tags": [ "Lab" ],
+                "tags": [ "Labs" ],
                 "description": "Modify properties of labs.",
-                "operationId": "Lab_Update",
+                "operationId": "Labs_Update",
                 "parameters": [
                     { "$ref": "#/parameters/subscriptionId" },
                     { "$ref": "#/parameters/resourceGroupName" },
@@ -4391,9 +4391,9 @@
         },
         "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DevTestLab/labs/{name}/claimAnyVm": {
             "post": {
-                "tags": [ "Lab" ],
+                "tags": [ "Labs" ],
                 "description": "Claim a random claimable virtual machine in the lab. This operation can take a while to complete.",
-                "operationId": "Lab_ClaimAnyVm",
+                "operationId": "Labs_ClaimAnyVm",
                 "parameters": [
                     { "$ref": "#/parameters/subscriptionId" },
                     { "$ref": "#/parameters/resourceGroupName" },
@@ -4420,9 +4420,9 @@
         },
         "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DevTestLab/labs/{name}/createEnvironment": {
             "post": {
-                "tags": [ "Lab" ],
+                "tags": [ "Labs" ],
                 "description": "Create virtual machines in a lab. This operation can take a while to complete.",
-                "operationId": "Lab_CreateEnvironment",
+                "operationId": "Labs_CreateEnvironment",
                 "parameters": [
                     { "$ref": "#/parameters/subscriptionId" },
                     { "$ref": "#/parameters/resourceGroupName" },
@@ -4456,9 +4456,9 @@
         },
         "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DevTestLab/labs/{name}/exportResourceUsage": {
             "post": {
-                "tags": [ "Lab" ],
+                "tags": [ "Labs" ],
                 "description": "Exports the lab resource usage into a storage account This operation can take a while to complete.",
-                "operationId": "Lab_ExportResourceUsage",
+                "operationId": "Labs_ExportResourceUsage",
                 "parameters": [
                     { "$ref": "#/parameters/subscriptionId" },
                     { "$ref": "#/parameters/resourceGroupName" },
@@ -4492,9 +4492,9 @@
         },
         "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DevTestLab/labs/{name}/generateUploadUri": {
             "post": {
-                "tags": [ "Lab" ],
+                "tags": [ "Labs" ],
                 "description": "Generate a URI for uploading custom disk images to a Lab.",
-                "operationId": "Lab_GenerateUploadUri",
+                "operationId": "Labs_GenerateUploadUri",
                 "parameters": [
                     { "$ref": "#/parameters/subscriptionId" },
                     { "$ref": "#/parameters/resourceGroupName" },
@@ -4529,9 +4529,9 @@
         },
         "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DevTestLab/labs/{name}/listVhds": {
             "post": {
-                "tags": [ "Lab" ],
+                "tags": [ "Labs" ],
                 "description": "List disk images available for custom image creation.",
-                "operationId": "Lab_ListVhds",
+                "operationId": "Labs_ListVhds",
                 "parameters": [
                     { "$ref": "#/parameters/subscriptionId" },
                     { "$ref": "#/parameters/resourceGroupName" },
@@ -4560,9 +4560,9 @@
         },
         "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DevTestLab/schedules": {
             "get": {
-                "tags": [ "GlobalSchedule" ],
+                "tags": [ "GlobalSchedules" ],
                 "description": "List schedules in a resource group.",
-                "operationId": "GlobalSchedule_ListByResourceGroup",
+                "operationId": "GlobalSchedules_ListByResourceGroup",
                 "parameters": [
                     { "$ref": "#/parameters/subscriptionId" },
                     { "$ref": "#/parameters/resourceGroupName" },
@@ -4614,9 +4614,9 @@
         },
         "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DevTestLab/schedules/{name}": {
             "get": {
-                "tags": [ "GlobalSchedule" ],
+                "tags": [ "GlobalSchedules" ],
                 "description": "Get schedule.",
-                "operationId": "GlobalSchedule_Get",
+                "operationId": "GlobalSchedules_Get",
                 "parameters": [
                     { "$ref": "#/parameters/subscriptionId" },
                     { "$ref": "#/parameters/resourceGroupName" },
@@ -4649,9 +4649,9 @@
                 "security": [ { "oauth2": [ "user_impersonation" ] } ]
             },
             "put": {
-                "tags": [ "GlobalSchedule" ],
+                "tags": [ "GlobalSchedules" ],
                 "description": "Create or replace an existing schedule.",
-                "operationId": "GlobalSchedule_CreateOrUpdate",
+                "operationId": "GlobalSchedules_CreateOrUpdate",
                 "parameters": [
                     { "$ref": "#/parameters/subscriptionId" },
                     { "$ref": "#/parameters/resourceGroupName" },
@@ -4688,9 +4688,9 @@
                 "security": [ { "oauth2": [ "user_impersonation" ] } ]
             },
             "delete": {
-                "tags": [ "GlobalSchedule" ],
+                "tags": [ "GlobalSchedules" ],
                 "description": "Delete schedule.",
-                "operationId": "GlobalSchedule_Delete",
+                "operationId": "GlobalSchedules_Delete",
                 "parameters": [
                     { "$ref": "#/parameters/subscriptionId" },
                     { "$ref": "#/parameters/resourceGroupName" },
@@ -4714,9 +4714,9 @@
                 "security": [ { "oauth2": [ "user_impersonation" ] } ]
             },
             "patch": {
-                "tags": [ "GlobalSchedule" ],
+                "tags": [ "GlobalSchedules" ],
                 "description": "Modify properties of schedules.",
-                "operationId": "GlobalSchedule_Update",
+                "operationId": "GlobalSchedules_Update",
                 "parameters": [
                     { "$ref": "#/parameters/subscriptionId" },
                     { "$ref": "#/parameters/resourceGroupName" },
@@ -4751,9 +4751,9 @@
         },
         "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DevTestLab/schedules/{name}/execute": {
             "post": {
-                "tags": [ "GlobalSchedule" ],
+                "tags": [ "GlobalSchedules" ],
                 "description": "Execute a schedule. This operation can take a while to complete.",
-                "operationId": "GlobalSchedule_Execute",
+                "operationId": "GlobalSchedules_Execute",
                 "parameters": [
                     { "$ref": "#/parameters/subscriptionId" },
                     { "$ref": "#/parameters/resourceGroupName" },
@@ -4780,9 +4780,9 @@
         },
         "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DevTestLab/schedules/{name}/retarget": {
             "post": {
-                "tags": [ "GlobalSchedule" ],
+                "tags": [ "GlobalSchedules" ],
                 "description": "Updates a schedule's target resource Id. This operation can take a while to complete.",
-                "operationId": "GlobalSchedule_Retarget",
+                "operationId": "GlobalSchedules_Retarget",
                 "parameters": [
                     { "$ref": "#/parameters/subscriptionId" },
                     { "$ref": "#/parameters/resourceGroupName" },
@@ -6547,14 +6547,25 @@
         },
         "LabVirtualMachineCreationParameter": {
             "description": "Properties for creating a virtual machine.",
-            "required": [ "properties" ],
             "type": "object",
-            "allOf": [ { "$ref": "#/definitions/Resource" } ],
             "properties": {
                 "properties": {
                     "$ref": "#/definitions/LabVirtualMachineCreationParameterProperties",
                     "description": "The properties of the resource.",
                     "x-ms-client-flatten": true
+                },
+                "name": {
+                    "description": "The name of the virtual machine or environment",
+                    "type": "string"
+                },
+                "location": {
+                    "description": "The location of the new virtual machine or environment",
+                    "type": "string"
+                },
+                "tags": {
+                    "description": "The tags of the resource.",
+                    "type": "object",
+                    "additionalProperties": { "type": "string" }
                 }
             }
         },
