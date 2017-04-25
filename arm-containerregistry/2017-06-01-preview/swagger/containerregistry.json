@@ -1170,10 +1170,6 @@
             "type": "string"
           }
         },
-        "sku": {
-          "$ref": "#/definitions/Sku",
-          "description": "The SKU of the container registry."
-        },
         "properties": {
           "$ref": "#/definitions/RegistryPropertiesUpdateParameters",
           "description": "The properties that the container registry will be updated with.",
@@ -1333,6 +1329,9 @@
     },
     "WebhookProperties": {
       "description": "The properties of a webhook.",
+      "required": [
+        "actions"
+      ],
       "properties": {
         "isEnabled": {
           "description": "The value that indicates whether the webhook is enabled.",
@@ -1388,7 +1387,8 @@
     "WebhookPropertiesCreateParameters": {
       "description": "The parameters for creating the properties of a webhook.",
       "required": [
-        "callbackConfig"
+        "callbackConfig",
+        "actions"
       ],
       "properties": {
         "callbackConfig": {
@@ -1460,9 +1460,6 @@
     },
     "WebhookPropertiesUpdateParameters": {
       "description": "The parameters for updating the properties of a webhook.",
-      "required": [
-        "callbackConfig"
-      ],
       "properties": {
         "callbackConfig": {
           "$ref": "#/definitions/CallbackConfig",
