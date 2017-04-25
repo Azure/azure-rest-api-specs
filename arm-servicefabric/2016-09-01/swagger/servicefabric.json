@@ -63,7 +63,7 @@
             "$ref": "#/parameters/api-version"
           },
           {
-            "name": "ClusterUpdateParameters",
+            "name": "parameters",
             "in": "body",
             "required": true,
             "schema": {
@@ -168,7 +168,7 @@
             "$ref": "#/parameters/api-version"
           },
           {
-            "name": "ClusterResource",
+            "name": "parameters",
             "in": "body",
             "required": true,
             "schema": {
@@ -321,6 +321,11 @@
         ],
         "operationId": "ClusterVersions_List",
         "description": "List cluster code versions by location",
+        "x-ms-examples": {
+          "List clusters": {
+            "$ref": "../examples/ClusterVersionsList_example.json"
+          }
+        },
         "produces": [
           "application/json"
         ],
@@ -638,34 +643,6 @@
         "Linux"
       ]
     },
-    "ServiceTypeHealthPolicy": {
-      "description": " Represents the health policy used to evaluate the health of services belonging to a service type.",
-      "properties": {
-        "maxPercentUnhealthyServices": {
-          "description": "The maximum maximum allowed percentage of unhealthy services. Allowed values are Byte values from zero to 100.",
-          "type": "integer",
-          "maximum": 100,
-          "minimum": 0
-        }
-      }
-    },
-    "ApplicationHealthPolicy": {
-      "description": "Defines a health policy used to evaluate the health of an application or one of its children entities.",
-      "properties": {
-        "defaultServiceTypeHealthPolicy": {
-          "description": "the health policy used by default to evaluate the health of a service type.",
-          "$ref": "#/definitions/ServiceTypeHealthPolicy"
-        },
-        "serivceTypeHealthPolicies": {
-          "description": " Defines a ServiceTypeHealthPolicy per service type name,the key is the name of the application",
-          "type": "object",
-          "additionalProperties": {
-            "description": "The value of the service type health policy map item. This is the ServiceTypeHealthPolicy for this service type.",
-            "$ref": "#/definitions/ServiceTypeHealthPolicy"
-          }
-        }
-      }
-    },
     "ClusterHealthPolicy": {
       "description": "Defines a health policy used to evaluate the health of the cluster or of a cluster node.",
       "properties": {
@@ -680,42 +657,6 @@
           "type": "integer",
           "maximum": 100,
           "minimum": 0
-        },
-        "applicationHealthPolicies": {
-          "description": "Defines a map with max percentage unhealthy applications for specific application types,key is the name of the application type",
-          "type": "object",
-          "additionalProperties": {
-            "description": "The value of the application type health policy map item.",
-            "$ref": "#/definitions/ApplicationHealthPolicy"
-          }
-        }
-      }
-    },
-    "ServiceTypeDeltaHealthPolicy": {
-      "description": "Service health policy",
-      "properties": {
-        "maxPercentDeltaUnhealthyServices": {
-          "description": "Maximum percentage of unhealthy services in cluster",
-          "type": "integer",
-          "maximum": 100,
-          "minimum": 0
-        }
-      }
-    },
-    "ApplicationDeltaHealthPolicy": {
-      "description": "Application health policy",
-      "properties": {
-        "defaultServiceTypeDeltaHealthPolicy": {
-          "description": "Delta health policy for default services",
-          "$ref": "#/definitions/ServiceTypeDeltaHealthPolicy"
-        },
-        "serivceTypeDeltaHealthPolicies": {
-          "description": "Health policy for additional service",
-          "type": "object",
-          "additionalProperties": {
-            "description": "Delta health policy for service",
-            "$ref": "#/definitions/ServiceTypeDeltaHealthPolicy"
-          }
         }
       }
     },
@@ -739,14 +680,6 @@
           "type": "integer",
           "maximum": 100,
           "minimum": 0
-        },
-        "applicationHealthPolicies": {
-          "description": "Application health policy",
-          "type": "object",
-          "additionalProperties": {
-            "description": "Additional unhealthy applications percentage",
-            "$ref": "#/definitions/ApplicationDeltaHealthPolicy"
-          }
         }
       },
       "required": [

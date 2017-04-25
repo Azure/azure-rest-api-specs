@@ -581,75 +581,6 @@
           }
         }
       }
-    },
-    "/subscriptions/{subscriptionId}/providers/Microsoft.CognitiveServices/locations/{location}/updateAccountsCreationSettings": {
-      "post": {
-        "tags": [ "CognitiveServicesAccounts" ],
-        "operationId": "CognitiveServices_UpdateAccountsCreationSettings",
-        "description": "Update accounts creation settings.",
-        "x-ms-examples": {
-          "Update Account Creation Settings": {
-            "$ref": "../examples/UpdateAccountsCreationSettings.json"
-          }
-        },
-        "parameters": [
-          {
-            "$ref": "#/parameters/subscriptionIdParameter"
-          },
-          {
-            "$ref": "#/parameters/apiVersionParameter"
-          },
-          {
-            "$ref": "#/parameters/locationParameter"
-          },
-          {
-            "name": "parameters",
-            "in": "body",
-            "required": true,
-            "x-ms-client-flatten": true,
-            "schema": {
-              "$ref": "#/definitions/CognitiveServicesAccountsCreationSettingUpdateParameter"
-            },
-            "description": "Update Cognitive Services accounts creation settings."
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "OK"
-          }
-        }
-      }
-    },
-    "/subscriptions/{subscriptionId}/providers/Microsoft.CognitiveServices/locations/{location}/listAccountsCreationSettings": {
-      "post": {
-        "tags": [ "CognitiveServicesAccounts" ],
-        "operationId": "CognitiveServices_ListAccountsCreationSettings",
-        "description": "List Cognitive Services accounts creation settings.",
-        "x-ms-examples": {
-          "Update Account Creation Settings": {
-            "$ref": "../examples/ListAccountsCreationSettings.json"
-          }
-        },
-        "parameters": [
-          {
-            "$ref": "#/parameters/subscriptionIdParameter"
-          },
-          {
-            "$ref": "#/parameters/apiVersionParameter"
-          },
-          {
-            "$ref": "#/parameters/locationParameter"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "OK",
-            "schema": {
-              "$ref": "#/definitions/CognitiveServicesAccountsCreationSettingResult"
-            }
-          }
-        }
-      }
     }
   },
   "definitions": {
@@ -1067,43 +998,6 @@
         "message": {
           "type": "string",
           "description": "Additional error message."
-        }
-      }
-    },
-    "CognitiveServicesAccountsCreationSetting": {
-      "description": "Accounts creation setting entity.",
-      "properties": {
-        "kind": {
-          "$ref": "#/definitions/CognitiveServicesAccountKind",
-          "description": "Kind of Cognitive Services account."
-        },
-        "allowCreate": {
-          "type": "boolean",
-          "description": "Whether allow user to create resource."
-        }
-      }
-    },
-    "CognitiveServicesAccountsCreationSettingUpdateParameter": {
-      "description": "Accounts creation setting update parameter.",
-      "properties": {
-        "settings": {
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/CognitiveServicesAccountsCreationSetting"
-          },
-          "description": "Account creation settings."
-        }
-      }
-    },
-    "CognitiveServicesAccountsCreationSettingResult": {
-      "description": "Accounts creation setting result list.",
-      "properties": {
-        "value": {
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/CognitiveServicesAccountsCreationSetting"
-          },
-          "description": "Account creation setting result list."
         }
       }
     }
