@@ -16,7 +16,7 @@
     "application/json"
   ],
   "paths": {
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/servers/{serverName}/databases/{databaseName}/pause": {
+        "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/servers/{serverName}/databases/{databaseName}/pause": {
       "post": {
         "tags": [
           "DatabaseActivation"
@@ -92,47 +92,6 @@
           }
         },
         "x-ms-long-running-operation": true
-      }
-    },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/servers/{serverName}/databases/{databaseName}/restorePoints": {
-      "get": {
-        "tags": [
-          "DatabaseBackup"
-        ],
-        "operationId": "Databases_ListRestorePoints",
-        "description": "Returns a list of database restore points.",
-        "parameters": [
-          {
-            "$ref": "#/parameters/ApiVersionParameter"
-          },
-          {
-            "$ref": "#/parameters/SubscriptionIdParameter"
-          },
-          {
-            "$ref": "#/parameters/ResourceGroupParameter"
-          },
-          {
-            "$ref": "#/parameters/ServerNameParameter"
-          },
-          {
-            "name": "databaseName",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "description": "The name of the database from which to retrieve available restore points."
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "OK",
-            "schema": {
-              "$ref": "#/definitions/RestorePointListResult"
-            }
-          }
-        },
-        "x-ms-pageable": {
-          "nextLinkName": null
-        }
       }
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/servers/{serverName}/databases/{databaseName}": {
@@ -368,222 +327,6 @@
             "description": "OK",
             "schema": {
               "$ref": "#/definitions/DatabaseMetricListResult"
-            }
-          }
-        },
-        "x-ms-pageable": {
-          "nextLinkName": null
-        }
-      }
-    },
-    "/subscriptions/{subscriptionId}/providers/Microsoft.Sql/servers": {
-      "get": {
-        "tags": [
-          "Servers"
-        ],
-        "operationId": "Servers_List",
-        "description": "Returns a list of servers.",
-        "x-ms-examples": {
-          "List servers": { "$ref": "../examples/ServerList.json" }
-        },
-        "parameters": [
-          {
-            "$ref": "#/parameters/ApiVersionParameter"
-          },
-          {
-            "$ref": "#/parameters/SubscriptionIdParameter"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "OK",
-            "schema": {
-              "$ref": "#/definitions/ServerListResult"
-            }
-          }
-        },
-        "x-ms-pageable": {
-          "nextLinkName": null
-        }
-      }
-    },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/servers/{serverName}": {
-      "put": {
-        "tags": [
-          "Servers"
-        ],
-        "operationId": "Servers_CreateOrUpdate",
-        "description": "Creates or updates a new server.",
-        "x-ms-examples": {
-          "Create server min": { "$ref": "../examples/ServerCreateMin.json" },
-          "Create server max": { "$ref": "../examples/ServerCreateMax.json" }
-        },
-        "parameters": [
-          {
-            "$ref": "#/parameters/ApiVersionParameter"
-          },
-          {
-            "$ref": "#/parameters/SubscriptionIdParameter"
-          },
-          {
-            "$ref": "#/parameters/ResourceGroupParameter"
-          },
-          {
-            "$ref": "#/parameters/ServerNameParameter"
-          },
-          {
-            "name": "parameters",
-            "in": "body",
-            "required": true,
-            "schema": {
-              "$ref": "#/definitions/Server"
-            },
-            "description": "The required parameters for creating or updating a server."
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "OK",
-            "schema": {
-              "$ref": "#/definitions/Server"
-            }
-          },
-          "201": {
-            "description": "Created",
-            "schema": {
-              "$ref": "#/definitions/Server"
-            }
-          }
-        }
-      },
-      "delete": {
-        "tags": [
-          "Servers"
-        ],
-        "operationId": "Servers_Delete",
-        "description": "Deletes a SQL server.",
-        "x-ms-examples": {
-          "Delete SQL Server": { "$ref": "../examples/ServerDelete.json" }
-        },
-        "parameters": [
-          {
-            "$ref": "#/parameters/ApiVersionParameter"
-          },
-          {
-            "$ref": "#/parameters/SubscriptionIdParameter"
-          },
-          {
-            "$ref": "#/parameters/ResourceGroupParameter"
-          },
-          {
-            "$ref": "#/parameters/ServerNameParameter"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "OK"
-          },
-          "204": {
-            "description": "Accepted"
-          }
-        }
-      },
-      "get": {
-        "tags": [
-          "Servers"
-        ],
-        "operationId": "Servers_Get",
-        "description": "Gets a server.",
-        "x-ms-examples": {
-          "Get Server": { "$ref": "../examples/ServerGet.json" }
-        },
-        "parameters": [
-          {
-            "$ref": "#/parameters/ApiVersionParameter"
-          },
-          {
-            "$ref": "#/parameters/SubscriptionIdParameter"
-          },
-          {
-            "$ref": "#/parameters/ResourceGroupParameter"
-          },
-          {
-            "$ref": "#/parameters/ServerNameParameter"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "OK",
-            "schema": {
-              "$ref": "#/definitions/Server"
-            }
-          }
-        }
-      }
-    },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/servers": {
-      "get": {
-        "tags": [
-          "Servers"
-        ],
-        "operationId": "Servers_ListByResourceGroup",
-        "description": "Returns a list of servers in a resource group.",
-        "x-ms-examples": {
-          "List servers by resource group": { "$ref": "../examples/ServerListByResourceGroup.json" }
-        },
-        "parameters": [
-          {
-            "$ref": "#/parameters/ApiVersionParameter"
-          },
-          {
-            "$ref": "#/parameters/SubscriptionIdParameter"
-          },
-          {
-            "$ref": "#/parameters/ResourceGroupParameter"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "OK",
-            "schema": {
-              "$ref": "#/definitions/ServerListResult"
-            }
-          }
-        },
-        "x-ms-pageable": {
-          "nextLinkName": null
-        }
-      }
-    },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/servers/{serverName}/usages": {
-      "get": {
-        "tags": [
-          "Servers"
-        ],
-        "operationId": "Servers_ListUsages",
-        "description": "Returns server usages.",
-        "x-ms-examples":{
-          "List servers usages": { "$ref": "../examples/ServerUsageMetricsList.json" }
-        },
-        "parameters": [
-          {
-            "$ref": "#/parameters/ApiVersionParameter"
-          },
-          {
-            "$ref": "#/parameters/SubscriptionIdParameter"
-          },
-          {
-            "$ref": "#/parameters/ResourceGroupParameter"
-          },
-          {
-            "$ref": "#/parameters/ServerNameParameter"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "OK",
-            "schema": {
-              "$ref": "#/definitions/ServerMetricListResult"
             }
           }
         },
@@ -1430,28 +1173,6 @@
           "nextLinkName": null
         }
       }
-    },
-    "/providers/Microsoft.Sql/operations": {
-      "get": {
-        "tags": [
-          "Operations"
-        ],
-        "description": "Lists all of the available SQL Rest API operations.",
-        "operationId": "Operations_List",
-        "parameters": [
-          {
-            "$ref": "#/parameters/ApiVersionParameter"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "OK. The request has succeeded.",
-            "schema": {
-              "$ref": "#/definitions/OperationListResult"
-            }
-          }
-        }
-      }
     }
   },
   "definitions": {
@@ -1778,7 +1499,9 @@
         "operationId": {
           "readOnly": true,
           "type": "string",
-          "description": "The unique operation ID."
+          "format": "uuid",
+          "description": "The unique operation ID.",
+          "x-nullable": false
         },
         "percentComplete": {
           "readOnly": true,
@@ -1938,7 +1661,8 @@
           "readOnly": true,
           "type": "string",
           "format": "uuid",
-          "description": "The unique operation ID."
+          "description": "The unique operation ID.",
+          "x-nullable": false
         },
         "percentComplete": {
           "readOnly": true,
@@ -2020,88 +1744,6 @@
       },
       "required": ["value"],
       "description": "Represents the response to a list elastic pool database activity request."
-    },
-    "ServerProperties": {
-      "properties": {
-        "fullyQualifiedDomainName": {
-          "readOnly": true,
-          "type": "string",
-          "description": "The fully qualified domain name of the server."
-        },
-        "version": {
-          "type": "string",
-          "enum": ["2.0", "12.0"],
-          "description": "The version of the server.",
-          "x-ms-enum": {
-              "name": "ServerVersion",
-              "modelAsString": true
-          }
-        },
-        "administratorLogin": {
-          "type": "string",
-          "description": "Administrator username for the server. Can only be specified when the server is being created (and is required for creation).",
-          "x-ms-mutability": [ "create", "read" ]
-        },
-        "administratorLoginPassword": {
-          "type": "string",
-          "description": "The administrator login password (required for server creation).",
-          "x-ms-mutability": [ "create", "update" ]
-        },
-        "externalAdministratorSid": {
-          "readOnly": true,
-          "type": "string",
-          "format": "uuid",
-          "description": "The ID of the Active Azure Directory object with admin permissions on this server. Legacy parameter, always null. To check for Active Directory admin, query .../servers/{serverName}/administrators."
-        },
-        "externalAdministratorLogin": {
-          "readOnly": true,
-          "type": "string",
-          "description": "The display name of the Azure Active Directory object with admin permissions on this server. Legacy parameter, always null. To check for Active Directory admin, query .../servers/{serverName}/administrators"
-        },
-        "state": {
-          "readOnly": true,
-          "type": "string",
-          "description": "The state of the server.",
-          "enum": ["Ready", "Disabled"],
-          "x-ms-enum": {
-              "name": "ServerState"
-          }
-        }
-      },
-      "description": "Represents the properties of a server."
-    },
-    "Server": {
-      "properties": {
-        "kind": {
-          "readOnly": true,
-          "type": "string",
-          "description": "Kind of sql server.  This is metadata used for the Azure portal experience."
-        },
-        "properties": {
-          "$ref": "#/definitions/ServerProperties",
-          "description": "Represents the properties of the resource.",
-          "x-ms-client-flatten": true
-        }
-      },
-      "allOf": [
-        {
-          "$ref": "#/definitions/TrackedResource"
-        }
-      ],
-      "description": "Represents a server."
-    },
-    "ServerListResult": {
-      "properties": {
-        "value": {
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/Server"
-          },
-          "description": "The list of servers."
-        }
-      },
-      "required": ["value"],
-      "description": "Represents the response to a get server request."
     },
     "RecommendedIndexProperties": {
       "properties": {
@@ -2285,31 +1927,12 @@
           "readOnly": true,
           "type": "string",
           "format": "uuid",
-          "enum": [
-            "dd6d99bb-f193-4ec1-86f2-43d3bccbc49c",
-            "f1173c43-91bd-4aaa-973c-54e79e15235b",
-            "1b1ebd4d-d903-4baa-97f9-4ea675f5e928",
-            "455330e1-00cd-488b-b5fa-177c226f28b7",
-            "789681b8-ca10-4eb0-bdf2-e0b050601b40",
-            "7203483a-c4fb-4304-9e9f-17c71c904f5d",
-            "a7d1b92d-c987-4375-b54d-2b1d0e0f5bb0",
-            "a7c4c615-cfb1-464b-b252-925be0a19446",
-            "26e021db-f1f9-4c98-84c6-92af8ef433d7",
-            "29dd7459-4a7c-4e56-be22-f0adda49440d",
-            "c99ac918-dbea-463f-a475-16ec020fdc12",
-            "620323bf-2879-4807-b30d-c2e6d7b3b3aa",
-            "33d0db1f-6893-4210-99f9-463fb9b496a4",
-            "da24338c-a6c9-46c2-a4bf-4ac95b496ae4"
-            ],
-          "description": "The current service level objective ID of the database. This is the ID of the service level objective that is currently active.",
-          "x-ms-enum": {
-            "modelAsString": true,
-            "name": "ServiceObjectiveId"
-          }
+          "description": "The current service level objective ID of the database. This is the ID of the service level objective that is currently active."
         },
         "databaseId": {
           "readOnly": true,
           "type": "string",
+          "format": "uuid",
           "description": "The ID of the database."
         },
         "earliestRestoreDate": {
@@ -2356,7 +1979,6 @@
         },
         "recoveryServicesRecoveryPointResourceId": {
           "type": "string",
-          "format": "date-time",
           "description": "Conditional. If createMode is RestoreLongTermRetentionBackup, then this value is required. Specifies the resource ID of the recovery point to restore from.",
           "x-ms-mutability": [ "create" ]
         },
@@ -2387,27 +2009,7 @@
         "requestedServiceObjectiveId": {
           "type": "string",
           "format": "uuid",
-          "enum": [
-            "dd6d99bb-f193-4ec1-86f2-43d3bccbc49c",
-            "f1173c43-91bd-4aaa-973c-54e79e15235b",
-            "1b1ebd4d-d903-4baa-97f9-4ea675f5e928",
-            "455330e1-00cd-488b-b5fa-177c226f28b7",
-            "789681b8-ca10-4eb0-bdf2-e0b050601b40",
-            "7203483a-c4fb-4304-9e9f-17c71c904f5d",
-            "a7d1b92d-c987-4375-b54d-2b1d0e0f5bb0",
-            "a7c4c615-cfb1-464b-b252-925be0a19446",
-            "26e021db-f1f9-4c98-84c6-92af8ef433d7",
-            "29dd7459-4a7c-4e56-be22-f0adda49440d",
-            "c99ac918-dbea-463f-a475-16ec020fdc12",
-            "620323bf-2879-4807-b30d-c2e6d7b3b3aa",
-            "33d0db1f-6893-4210-99f9-463fb9b496a4",
-            "da24338c-a6c9-46c2-a4bf-4ac95b496ae4"
-            ],
-          "description": "The configured service level objective ID of the database. This is the service level objective that is in the process of being applied to the database. Once successfully updated, it will match the value of currentServiceObjectiveId property. If requestedServiceObjectiveId and requestedServiceObjectiveName are both updated, the value of requestedServiceObjectiveId overrides the value of requestedServiceObjectiveName. To see possible values, query the capabilities API (/subscriptions/{subscriptionId}/providers/Microsoft.Sql/locations/{locationID}/capabilities) referred to by operationId: \"Capabilities_ListByLocation.\"",
-          "x-ms-enum": {
-            "modelAsString": true,
-            "name": "ServiceObjectiveId"
-          }
+          "description": "The configured service level objective ID of the database. This is the service level objective that is in the process of being applied to the database. Once successfully updated, it will match the value of currentServiceObjectiveId property. If requestedServiceObjectiveId and requestedServiceObjectiveName are both updated, the value of requestedServiceObjectiveId overrides the value of requestedServiceObjectiveName. To see possible values, query the capabilities API (/subscriptions/{subscriptionId}/providers/Microsoft.Sql/locations/{locationID}/capabilities) referred to by operationId: \"Capabilities_ListByLocation.\""
         },
         "requestedServiceObjectiveName": {
           "type": "string",
@@ -2674,7 +2276,8 @@
           "readOnly": true,
           "type": "number",
           "format": "double",
-          "description": "Gets or sets confidence for service tier advisor."
+          "description": "Gets or sets confidence for service tier advisor.",
+          "x-nullable": false
         }
       },
       "description": "Represents the properties of a Service Tier Advisor."
@@ -2717,40 +2320,25 @@
             "System2",
             "ElasticPool"
             ],
-            "x-ms-enum": {
-            "modelAsString": true,
-            "name": "ServiceObjectiveName"
-          }
+          "x-ms-enum": {
+              "modelAsString": true,
+              "name": "ServiceObjectiveName"
+          },
+          "readOnly": true
         },
         "serviceLevelObjectiveId": {
           "type": "string",
           "format": "uuid",
           "description": "The serviceLevelObjectiveId for SLO usage metric.",
-          "enum": [
-            "dd6d99bb-f193-4ec1-86f2-43d3bccbc49c",
-            "f1173c43-91bd-4aaa-973c-54e79e15235b",
-            "1b1ebd4d-d903-4baa-97f9-4ea675f5e928",
-            "455330e1-00cd-488b-b5fa-177c226f28b7",
-            "789681b8-ca10-4eb0-bdf2-e0b050601b40",
-            "7203483a-c4fb-4304-9e9f-17c71c904f5d",
-            "a7d1b92d-c987-4375-b54d-2b1d0e0f5bb0",
-            "a7c4c615-cfb1-464b-b252-925be0a19446",
-            "26e021db-f1f9-4c98-84c6-92af8ef433d7",
-            "29dd7459-4a7c-4e56-be22-f0adda49440d",
-            "c99ac918-dbea-463f-a475-16ec020fdc12",
-            "620323bf-2879-4807-b30d-c2e6d7b3b3aa",
-            "33d0db1f-6893-4210-99f9-463fb9b496a4",
-            "da24338c-a6c9-46c2-a4bf-4ac95b496ae4"
-            ],
-            "x-ms-enum": {
-            "modelAsString": true,
-            "name": "ServiceObjectiveId"
-          }
+          "readOnly": true,
+          "x-nullable": false
         },
         "inRangeTimeRatio": {
           "type": "number",
           "format": "double",
-          "description": "Gets or sets inRangeTimeRatio for SLO usage metric."
+          "description": "Gets or sets inRangeTimeRatio for SLO usage metric.",
+          "readOnly": true,
+          "x-nullable": false
         }
       },
       "description": "Represents a Slo Usage Metric."
@@ -2781,63 +2369,6 @@
         }
       },
       "description": "Represents impact of an operation, both in absolute and relative terms."
-    },
-    "RestorePointProperties": {
-      "properties": {
-        "restorePointType": {
-          "readOnly": true,
-          "type": "string",
-          "description": "The restore point type of the database restore point.",
-          "enum": [
-            "DISCRETE",
-            "CONTINUOUS"
-          ],
-          "x-ms-enum": {
-            "name": "RestorePointTypes"
-          }
-        },
-        "restorePointCreationDate": {
-          "readOnly": true,
-          "type": "string",
-          "format": "date-time",
-          "description": "Restore point creation time (ISO8601 format). Populated when restorePointType = CONTINUOUS. Null otherwise."
-        },
-        "earliestRestoreDate": {
-          "readOnly": true,
-          "type": "string",
-          "format": "date-time",
-          "description": "Earliest restore time (ISO8601 format). Populated when restorePointType = DISCRETE. Null otherwise."
-        }
-      },
-      "description": "Represents the properties of a database restore point."
-    },
-    "RestorePoint": {
-      "properties": {
-        "properties": {
-          "$ref": "#/definitions/RestorePointProperties",
-          "description": "The properties representing the restore point.",
-          "x-ms-client-flatten": true
-        }
-      },
-      "allOf": [
-        {
-          "$ref": "#/definitions/ProxyResource"
-        }
-      ],
-      "description": "Represents a database restore point."
-    },
-    "RestorePointListResult": {
-      "properties": {
-        "value": {
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/RestorePoint"
-          },
-          "description": "The list of a given database restore points."
-        }
-      },
-      "required": ["value"],
-      "description": "Represents the response to a list database restore points request."
     },
     "DatabaseMetric": {
       "properties": {
@@ -2974,12 +2505,14 @@
         "isDefault": {
           "readOnly": true,
           "type": "boolean",
-          "description": "Gets whether the service level objective is the default service objective."
+          "description": "Gets whether the service level objective is the default service objective.",
+          "x-nullable": false
         },
         "isSystem": {
           "readOnly": true,
           "type": "boolean",
-          "description": "Gets whether the service level objective is a system service objective."
+          "description": "Gets whether the service level objective is a system service objective.",
+          "x-nullable": false
         },
         "description": {
           "readOnly": true,
@@ -2989,7 +2522,8 @@
         "enabled": {
           "readOnly": true,
           "type": "boolean",
-          "description": "Gets whether the service level objective is enabled."
+          "description": "Gets whether the service level objective is enabled.",
+          "x-nullable": false
         }
       },
       "description": "Represents the properties of a database service objective."
@@ -3086,49 +2620,6 @@
           "readOnly": true,
           "type": "string",
           "description": "The resource ID."
-        }
-      }
-    },
-    "OperationListResult": {
-     "description": "Result of the request to list SQL operations. It contains a list of operations and a URL link to get the next set of results.",
-      "properties": {
-        "value": {
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/Operation"
-          },
-          "description": "List of SQL operations supported by the SQL resource provider."
-        },
-        "nextLink": {
-          "type": "string",
-          "description": "URL to get the next set of operation list results if there are any."
-        }
-      }
-    },
-    "Operation": {
-      "description": "SQL REST API operation definition.",
-      "type": "object",
-      "properties": {
-        "name": {
-          "description": "Operation name: {provider}/{resource}/{operation}",
-          "type": "string"
-        },
-        "display": {
-          "description": "Display metadata associated with the operation.",
-          "properties": {
-            "provider": {
-              "description": "Service provider: Microsoft SQL Database.",
-              "type": "string"
-            },
-            "resource": {
-              "description": "Resource on which the operation is performed: Server, Database, etc.",
-              "type": "string"
-            },
-            "operation": {
-              "description": "Type of operation: get, read, delete, etc.",
-              "type": "string"
-            }
-          }
         }
       }
     }
