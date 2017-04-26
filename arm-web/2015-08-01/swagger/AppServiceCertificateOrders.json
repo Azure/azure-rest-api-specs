@@ -1031,7 +1031,8 @@
             },
             "isPrivateKeyExternal": {
               "description": "<code>true</code> if private key is external; otherwise, <code>false</code>.",
-              "type": "boolean"
+              "type": "boolean",
+              "readOnly": true
             },
             "appServiceCertificateNotRenewableReasons": {
               "description": "Reasons why App Service Certificate is not renewable at the current moment.",
@@ -1043,7 +1044,14 @@
                   "SubscriptionNotActive"
                 ],
                 "type": "string"
-              }
+              },
+              "readOnly": true
+            },
+            "nextAutoRenewalTimeStamp": {
+              "format": "date-time",
+              "description": "Time stamp when the certificate would be auto renewed next",
+              "type": "string",
+              "readOnly": true
             }
           },
           "x-ms-client-flatten": true
