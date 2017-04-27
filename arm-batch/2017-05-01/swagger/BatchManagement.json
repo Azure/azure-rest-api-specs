@@ -2,7 +2,7 @@
   "swagger": "2.0",
   "info": {
     "title": "BatchManagement",
-    "version": "2017-01-01",
+    "version": "2017-05-01",
     "x-ms-code-generation-settings": {
       "name": "BatchManagementClient"
     }
@@ -49,12 +49,7 @@
         "description": "Creates a new Batch account with the specified parameters. Existing accounts cannot be updated with this API and should instead be updated with the Update Batch Account API.",
         "parameters": [
           {
-            "name": "resourceGroupName",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "pattern": "^[-\\w\\._]+$",
-            "description": "The name of the resource group that contains the new Batch account."
+            "$ref": "#/parameters/ResourceGroupNameParameter"
           },
           {
             "name": "accountName",
@@ -97,7 +92,7 @@
                 "type": "string"
               },
               "Retry-After": {
-                "description": "Suggested delay to check the status of the asynchronous operation. The value is an integer that represents the seconds.",
+                "description": "Suggested delay to check the status of the asynchronous operation. The value is an integer that specifies the delay in seconds.",
                 "type": "integer",
                 "format": "int32"
               }
@@ -117,25 +112,16 @@
           "BatchAccount"
         ],
         "operationId": "BatchAccount_Update",
+        "x-ms-examples": {
+          "BatchAccountUpdate": { "$ref": "../examples/BatchAccountUpdate.json" }
+        },
         "description": "Updates the properties of an existing Batch account.",
         "parameters": [
           {
-            "name": "resourceGroupName",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "pattern": "^[-\\w\\._]+$",
-            "description": "The name of the resource group that contains the Batch account."
+            "$ref": "#/parameters/ResourceGroupNameParameter"
           },
           {
-            "name": "accountName",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "pattern": "^[-\\w\\._]+$",
-            "minLength": 3,
-            "maxLength": 24,
-            "description": "The name of the account."
+            "$ref": "#/parameters/AccountNameParameter"
           },
           {
             "name": "parameters",
@@ -179,22 +165,10 @@
         "description": "Deletes the specified Batch account.",
         "parameters": [
           {
-            "name": "resourceGroupName",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "pattern": "^[-\\w\\._]+$",
-            "description": "The name of the resource group that contains the Batch account to be deleted."
+            "$ref": "#/parameters/ResourceGroupNameParameter"
           },
           {
-            "name": "accountName",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "pattern": "^[-\\w\\._]+$",
-            "minLength": 3,
-            "maxLength": 24,
-            "description": "The name of the account to be deleted."
+            "$ref": "#/parameters/AccountNameParameter"
           },
           {
             "$ref": "#/parameters/ApiVersionParameter"
@@ -215,7 +189,7 @@
                 "type": "string"
               },
               "Retry-After": {
-                "description": "Suggested delay to check the status of the asynchronous operation. The value is an integer that represents the seconds.",
+                "description": "Suggested delay to check the status of the asynchronous operation. The value is an integer that specifies the delay in seconds.",
                 "type": "integer",
                 "format": "int32"
               }
@@ -241,22 +215,10 @@
         "description": "Gets information about the specified Batch account.",
         "parameters": [
           {
-            "name": "resourceGroupName",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "pattern": "^[-\\w\\._]+$",
-            "description": "The name of the resource group that contains the Batch account."
+            "$ref": "#/parameters/ResourceGroupNameParameter"
           },
           {
-            "name": "accountName",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "pattern": "^[-\\w\\._]+$",
-            "minLength": 3,
-            "maxLength": 24,
-            "description": "The name of the account."
+            "$ref": "#/parameters/AccountNameParameter"
           },
           {
             "$ref": "#/parameters/ApiVersionParameter"
@@ -287,6 +249,9 @@
           "BatchAccount"
         ],
         "operationId": "BatchAccount_List",
+        "x-ms-examples": {
+          "BatchAccountList": { "$ref": "../examples/BatchAccountList.json" }
+        },
         "description": "Gets information about the Batch accounts associated with the subscription.",
         "parameters": [
           {
@@ -321,15 +286,13 @@
           "BatchAccount"
         ],
         "operationId": "BatchAccount_ListByResourceGroup",
-        "description": "Gets information about the Batch accounts associated within the specified resource group.",
+        "x-ms-examples": {
+          "BatchAccountListByResourceGroup": { "$ref": "../examples/BatchAccountListByResourceGroup.json" }
+        },
+        "description": "Gets information about the Batch accounts associated with the specified resource group.",
         "parameters": [
           {
-            "name": "resourceGroupName",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "pattern": "^[-\\w\\._]+$",
-            "description": "The name of the resource group whose Batch accounts to list."
+            "$ref": "#/parameters/ResourceGroupNameParameter"
           },
           {
             "$ref": "#/parameters/ApiVersionParameter"
@@ -363,25 +326,13 @@
           "BatchAccount"
         ],
         "operationId": "BatchAccount_SynchronizeAutoStorageKeys",
-        "description": "Synchronizes access keys for the auto storage account configured for the specified Batch account.",
+        "description": "Synchronizes access keys for the auto-storage account configured for the specified Batch account.",
         "parameters": [
           {
-            "name": "resourceGroupName",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "pattern": "^[-\\w\\._]+$",
-            "description": "The name of the resource group that contains the Batch account."
+            "$ref": "#/parameters/ResourceGroupNameParameter"
           },
           {
-            "name": "accountName",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "pattern": "^[-\\w\\._]+$",
-            "minLength": 3,
-            "maxLength": 24,
-            "description": "The name of the Batch account."
+            "$ref": "#/parameters/AccountNameParameter"
           },
           {
             "$ref": "#/parameters/ApiVersionParameter"
@@ -409,25 +360,16 @@
           "BatchAccount"
         ],
         "operationId": "BatchAccount_RegenerateKey",
+        "x-ms-examples": {
+          "BatchAccountRegenerateKey": { "$ref": "../examples/BatchAccountRegenerateKey.json" }
+        },
         "description": "Regenerates the specified account key for the Batch account.",
         "parameters": [
           {
-            "name": "resourceGroupName",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "pattern": "^[-\\w\\._]+$",
-            "description": "The name of the resource group that contains the Batch account."
+            "$ref": "#/parameters/ResourceGroupNameParameter"
           },
           {
-            "name": "accountName",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "pattern": "^[-\\w\\._]+$",
-            "minLength": 3,
-            "maxLength": 24,
-            "description": "The name of the account."
+            "$ref": "#/parameters/AccountNameParameter"
           },
           {
             "name": "parameters",
@@ -447,7 +389,7 @@
         ],
         "responses": {
           "200": {
-            "description": "The operation was successful. The response contains the keys of the Batch account.",
+            "description": "The operation was successful. The response contains the Batch account keys.",
             "schema": {
               "$ref": "#/definitions/BatchAccountKeys"
             }
@@ -467,26 +409,17 @@
           "BatchAccount"
         ],
         "operationId": "BatchAccount_GetKeys",
+        "x-ms-examples": {
+          "BatchAccountGetKeys": { "$ref": "../examples/BatchAccountGetKeys.json" }
+        },
         "summary": "Gets the account keys for the specified Batch account.",
         "description": "This operation applies only to Batch accounts created with a poolAllocationMode of 'BatchService'. If the Batch account was created with a poolAllocationMode of 'UserSubscription', clients cannot use access to keys to authenticate, and must use Azure Active Directory instead. In this case, getting the keys will fail.",
         "parameters": [
           {
-            "name": "resourceGroupName",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "pattern": "^[-\\w\\._]+$",
-            "description": "The name of the resource group that contains the Batch account."
+            "$ref": "#/parameters/ResourceGroupNameParameter"
           },
           {
-            "name": "accountName",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "pattern": "^[-\\w\\._]+$",
-            "minLength": 3,
-            "maxLength": 24,
-            "description": "The name of the account."
+            "$ref": "#/parameters/AccountNameParameter"
           },
           {
             "$ref": "#/parameters/ApiVersionParameter"
@@ -520,22 +453,10 @@
         "description": "Activates the specified application package.",
         "parameters": [
           {
-            "name": "resourceGroupName",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "pattern": "^[-\\w\\._]+$",
-            "description": "The name of the resource group that contains the Batch account."
+            "$ref": "#/parameters/ResourceGroupNameParameter"
           },
           {
-            "name": "accountName",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "pattern": "^[-\\w\\._]+$",
-            "minLength": 3,
-            "maxLength": 24,
-            "description": "The name of the Batch account."
+            "$ref": "#/parameters/AccountNameParameter"
           },
           {
             "name": "applicationId",
@@ -589,22 +510,10 @@
         "description": "Adds an application to the specified Batch account.",
         "parameters": [
           {
-            "name": "resourceGroupName",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "pattern": "^[-\\w\\._]+$",
-            "description": "The name of the resource group that contains the Batch account."
+            "$ref": "#/parameters/ResourceGroupNameParameter"
           },
           {
-            "name": "accountName",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "pattern": "^[-\\w\\._]+$",
-            "minLength": 3,
-            "maxLength": 24,
-            "description": "The name of the Batch account."
+            "$ref": "#/parameters/AccountNameParameter"
           },
           {
             "name": "applicationId",
@@ -618,7 +527,7 @@
             "in": "body",
             "required": false,
             "schema": {
-              "$ref": "#/definitions/AddApplicationParameters"
+              "$ref": "#/definitions/ApplicationCreateParameters"
             },
             "description": "The parameters for the request."
           },
@@ -652,22 +561,10 @@
         "description": "Deletes an application.",
         "parameters": [
           {
-            "name": "resourceGroupName",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "pattern": "^[-\\w\\._]+$",
-            "description": "The name of the resource group that contains the Batch account."
+            "$ref": "#/parameters/ResourceGroupNameParameter"
           },
           {
-            "name": "accountName",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "pattern": "^[-\\w\\._]+$",
-            "minLength": 3,
-            "maxLength": 24,
-            "description": "The name of the Batch account."
+            "$ref": "#/parameters/AccountNameParameter"
           },
           {
             "name": "applicationId",
@@ -703,22 +600,10 @@
         "description": "Gets information about the specified application.",
         "parameters": [
           {
-            "name": "resourceGroupName",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "pattern": "^[-\\w\\._]+$",
-            "description": "The name of the resource group that contains the Batch account."
+            "$ref": "#/parameters/ResourceGroupNameParameter"
           },
           {
-            "name": "accountName",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "pattern": "^[-\\w\\._]+$",
-            "minLength": 3,
-            "maxLength": 24,
-            "description": "The name of the Batch account."
+            "$ref": "#/parameters/AccountNameParameter"
           },
           {
             "name": "applicationId",
@@ -757,22 +642,10 @@
         "description": "Updates settings for the specified application.",
         "parameters": [
           {
-            "name": "resourceGroupName",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "pattern": "^[-\\w\\._]+$",
-            "description": "The name of the resource group that contains the Batch account."
+            "$ref": "#/parameters/ResourceGroupNameParameter"
           },
           {
-            "name": "accountName",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "pattern": "^[-\\w\\._]+$",
-            "minLength": 3,
-            "maxLength": 24,
-            "description": "The name of the Batch account."
+            "$ref": "#/parameters/AccountNameParameter"
           },
           {
             "name": "applicationId",
@@ -786,7 +659,7 @@
             "in": "body",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/UpdateApplicationParameters"
+              "$ref": "#/definitions/ApplicationUpdateParameters"
             },
             "description": "The parameters for the request."
           },
@@ -819,22 +692,10 @@
         "description": "Creates an application package record.",
         "parameters": [
           {
-            "name": "resourceGroupName",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "pattern": "^[-\\w\\._]+$",
-            "description": "The name of the resource group that contains the Batch account."
+            "$ref": "#/parameters/ResourceGroupNameParameter"
           },
           {
-            "name": "accountName",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "pattern": "^[-\\w\\._]+$",
-            "minLength": 3,
-            "maxLength": 24,
-            "description": "The name of the Batch account."
+            "$ref": "#/parameters/AccountNameParameter"
           },
           {
             "name": "applicationId",
@@ -880,22 +741,10 @@
         "description": "Deletes an application package record and its associated binary file.",
         "parameters": [
           {
-            "name": "resourceGroupName",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "pattern": "^[-\\w\\._]+$",
-            "description": "The name of the resource group that contains the Batch account."
+            "$ref": "#/parameters/ResourceGroupNameParameter"
           },
           {
-            "name": "accountName",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "pattern": "^[-\\w\\._]+$",
-            "minLength": 3,
-            "maxLength": 24,
-            "description": "The name of the Batch account."
+            "$ref": "#/parameters/AccountNameParameter"
           },
           {
             "name": "applicationId",
@@ -938,22 +787,10 @@
         "description": "Gets information about the specified application package.",
         "parameters": [
           {
-            "name": "resourceGroupName",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "pattern": "^[-\\w\\._]+$",
-            "description": "The name of the resource group that contains the Batch account."
+            "$ref": "#/parameters/ResourceGroupNameParameter"
           },
           {
-            "name": "accountName",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "pattern": "^[-\\w\\._]+$",
-            "minLength": 3,
-            "maxLength": 24,
-            "description": "The name of the Batch account."
+            "$ref": "#/parameters/AccountNameParameter"
           },
           {
             "name": "applicationId",
@@ -1001,22 +838,10 @@
         "description": "Lists all of the applications in the specified account.",
         "parameters": [
           {
-            "name": "resourceGroupName",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "pattern": "^[-\\w\\._]+$",
-            "description": "The name of the resource group that contains the Batch account."
+            "$ref": "#/parameters/ResourceGroupNameParameter"
           },
           {
-            "name": "accountName",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "pattern": "^[-\\w\\._]+$",
-            "minLength": 3,
-            "maxLength": 24,
-            "description": "The name of the Batch account."
+            "$ref": "#/parameters/AccountNameParameter"
           },
           {
             "name": "maxresults",
@@ -1058,6 +883,9 @@
           "Location"
         ],
         "operationId": "Location_GetQuotas",
+        "x-ms-examples": {
+          "LocationGetQuotas": { "$ref": "../examples/LocationGetQuotas.json" }
+        },
         "description": "Gets the Batch service quotas for the specified subscription at the given location.",
         "parameters": [
           {
@@ -1065,7 +893,7 @@
             "in": "path",
             "required": true,
             "type": "string",
-            "description": "The desired region for the quotas."
+            "description": "The region for which to retrieve Batch service quotas."
           },
           {
             "$ref": "#/parameters/ApiVersionParameter"
@@ -1076,7 +904,7 @@
         ],
         "responses": {
           "200": {
-            "description": "The operation was successful. The response contains the Batch service quotas of the subscription.",
+            "description": "The operation was successful. The response contains the Batch service quotas for the subscription in the specified location.",
             "schema": {
               "$ref": "#/definitions/BatchLocationQuota"
             }
@@ -1089,6 +917,37 @@
           }
         }
       }
+    },
+    "/providers/Microsoft.Batch/operations": {
+      "get": {
+        "tags": [
+          "Operations"
+        ],
+        "operationId": "Operations_List",
+        "description": "Lists available operations for the Microsoft.Batch provider",
+        "parameters": [
+          {
+              "$ref": "#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The operation was successful. The response contains the list of available operations.",
+            "schema": {
+              "$ref": "#/definitions/OperationListResult"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
     }
   },
   "definitions": {
@@ -1096,19 +955,28 @@
       "properties": {
         "storageAccountId": {
           "type": "string",
-          "description": "The resource ID of the storage account to be used for auto storage account."
+          "description": "The resource ID of the storage account to be used for auto-storage account."
         }
       },
       "required": [
         "storageAccountId"
       ],
-      "description": "The properties related to auto storage account."
+      "description": "The properties related to the auto-storage account."
     },
-    "BatchAccountBaseProperties": {
+    "BatchAccountUpdateProperties": {
       "properties": {
         "autoStorage": {
           "$ref": "#/definitions/AutoStorageBaseProperties",
-          "description": "The properties related to auto storage account."
+          "description": "The properties related to the auto-storage account."
+        }
+      },
+      "description": "The properties of a Batch account."
+    },
+    "BatchAccountCreateProperties": {
+      "properties": {
+        "autoStorage": {
+          "$ref": "#/definitions/AutoStorageBaseProperties",
+          "description": "The properties related to the auto-storage account."
         },
         "poolAllocationMode": {
           "title": "The allocation mode to use for creating pools in the Batch account.",
@@ -1122,15 +990,6 @@
       },
       "description": "The properties of a Batch account."
     },
-    "BatchAccountUpdateBaseProperties": {
-      "properties": {
-        "autoStorage": {
-          "$ref": "#/definitions/AutoStorageBaseProperties",
-          "description": "The properties related to auto storage account."
-        }
-      },
-      "description": "The properties for a Batch account update."
-    },
     "BatchAccountCreateParameters": {
       "properties": {
         "location": {
@@ -1142,11 +1001,11 @@
           "additionalProperties": {
             "type": "string"
           },
-          "description": "The user specified tags associated with the account."
+          "description": "The user-specified tags associated with the account."
         },
         "properties": {
           "x-ms-client-flatten": true,
-          "$ref": "#/definitions/BatchAccountBaseProperties",
+          "$ref": "#/definitions/BatchAccountCreateProperties",
           "description": "The properties of the Batch account."
         }
       },
@@ -1163,7 +1022,7 @@
         },
         "url": {
           "type": "string",
-          "description": "The Url of the Azure key vault associated with the Batch account."
+          "description": "The URL of the Azure key vault associated with the Batch account."
         }
       },
       "required": [
@@ -1174,10 +1033,6 @@
     },
     "AutoStorageProperties": {
       "properties": {
-        "storageAccountId": {
-          "type": "string",
-          "description": "The resource ID of the storage account to be used for auto storage account."
-        },
         "lastKeySync": {
           "type": "string",
           "format": "date-time",
@@ -1185,17 +1040,21 @@
         }
       },
       "required": [
-        "storageAccountId",
         "lastKeySync"
       ],
-      "description": "Contains information about the auto storage account associated with a Batch account."
+      "allOf": [
+        {
+          "$ref": "#/definitions/AutoStorageBaseProperties"
+        }
+      ],
+      "description": "Contains information about the auto-storage account associated with a Batch account."
     },
     "BatchAccountProperties": {
       "properties": {
         "accountEndpoint": {
           "type": "string",
           "readOnly": true,
-          "description": "The endpoint used by this account to interact with the Batch services."
+          "description": "The account endpoint used to interact with the Batch service."
         },
         "provisioningState": {
           "type": "string",
@@ -1227,16 +1086,23 @@
           "$ref": "#/definitions/KeyVaultReference"
         },
         "autoStorage": {
-          "title": "The properties and status of any auto storage account associated with the Batch account.",
+          "title": "The properties and status of any auto-storage account associated with the Batch account.",
           "readOnly": true,
           "$ref": "#/definitions/AutoStorageProperties"
         },
-        "coreQuota": {
+        "dedicatedCoreQuota": {
           "readOnly": true,
           "x-nullable": false,
           "type": "integer",
           "format": "int32",
-          "title": "The core quota for this Batch account."
+          "title": "The dedicated core quota for this Batch account."
+        },
+        "lowPriorityCoreQuota": {
+          "readOnly": true,
+          "x-nullable": false,
+          "type": "integer",
+          "format": "int32",
+          "title": "The low-priority core quota for this Batch account."
         },
         "poolQuota": {
           "readOnly": true,
@@ -1277,15 +1143,15 @@
           "additionalProperties": {
             "type": "string"
           },
-          "description": "The user specified tags associated with the account."
+          "description": "The user-specified tags associated with the account."
         },
         "properties": {
           "x-ms-client-flatten": true,
-          "$ref": "#/definitions/BatchAccountUpdateBaseProperties",
+          "$ref": "#/definitions/BatchAccountUpdateProperties",
           "description": "The properties of the account."
         }
       },
-      "description": "Parameters supplied to the Update operation."
+      "description": "Parameters for updating an Azure Batch account."
     },
     "BatchAccountListResult": {
       "properties": {
@@ -1294,7 +1160,7 @@
           "items": {
             "$ref": "#/definitions/BatchAccount"
           },
-          "description": "The collection of returned Batch accounts."
+          "description": "The collection of Batch accounts returned by the listing operation."
         },
         "nextLink": {
           "type": "string",
@@ -1325,6 +1191,11 @@
     },
     "BatchAccountKeys": {
       "properties": {
+        "accountName": {
+          "type": "string",
+          "readOnly": true,
+          "description": "The Batch account name."
+        },
         "primary": {
           "type": "string",
           "readOnly": true,
@@ -1348,9 +1219,9 @@
       "required": [
         "format"
       ],
-      "description": "Parameters for an ApplicationOperations.ActivateApplicationPackage request."
+      "description": "Parameters for an activating an application package."
     },
-    "AddApplicationParameters": {
+    "ApplicationCreateParameters": {
       "properties": {
         "allowUpdates": {
           "type": "boolean",
@@ -1361,7 +1232,7 @@
           "description": "The display name for the application."
         }
       },
-      "description": "Parameters for an ApplicationOperations.AddApplication request."
+      "description": "Parameters for adding an Application."
     },
     "Application": {
       "properties": {
@@ -1425,13 +1296,13 @@
         "storageUrl": {
           "type": "string",
           "readOnly": true,
-          "description": "The storage URL at which the application package is stored."
+          "description": "The URL for the application package in Azure Storage."
         },
         "storageUrlExpiry": {
           "type": "string",
           "format": "date-time",
           "readOnly": true,
-          "description": "The UTC time at which the storage URL will expire."
+          "description": "The UTC time at which the Azure Storage URL will expire."
         },
         "lastActivationTime": {
           "type": "string",
@@ -1456,9 +1327,9 @@
           "description": "The URL to get the next set of results."
         }
       },
-      "description": "Response to an ApplicationOperations.ListApplications request."
+      "description": "The result of performing list applications."
     },
-    "UpdateApplicationParameters": {
+    "ApplicationUpdateParameters": {
       "properties": {
         "allowUpdates": {
           "type": "boolean",
@@ -1473,7 +1344,7 @@
           "description": "The display name for the application."
         }
       },
-      "description": "Parameters for an ApplicationOperations.UpdateApplication request."
+      "description": "Parameters for an update application request."
     },
     "BatchLocationQuota": {
       "properties": {
@@ -1491,22 +1362,22 @@
         "id": {
           "readOnly": true,
           "type": "string",
-          "description": "The ID of the resource"
+          "description": "The ID of the resource."
         },
         "name": {
           "readOnly": true,
           "type": "string",
-          "description": "The name of the resource"
+          "description": "The name of the resource."
         },
         "type": {
           "readOnly": true,
           "type": "string",
-          "description": "The type of the resource"
+          "description": "The type of the resource."
         },
         "location": {
           "readOnly": true,
           "type": "string",
-          "description": "The location of the resource"
+          "description": "The location of the resource."
         },
         "tags": {
           "readOnly": true,
@@ -1514,7 +1385,7 @@
           "additionalProperties": {
             "type": "string"
           },
-          "description": "The tags of the resource"
+          "description": "The tags of the resource."
         }
       },
       "description": "A definition of an Azure resource.",
@@ -1535,6 +1406,15 @@
     "CloudError": {
       "x-ms-external": true,
       "properties": {
+        "error": {
+          "$ref": "#/definitions/CloudErrorBody"
+        }
+      },
+      "description": "An error response from the Batch service."
+    },
+    "CloudErrorBody": {
+      "x-ms-external": true,
+      "properties": {
         "code": {
           "type": "string",
           "description": "An identifier for the error. Codes are invariant and are intended to be consumed programmatically."
@@ -1550,12 +1430,69 @@
         "details": {
           "type": "array",
           "items": {
-            "$ref": "#/definitions/CloudError"
+            "$ref": "#/definitions/CloudErrorBody"
           },
           "description": "A list of additional details about the error."
         }
       },
       "description": "An error response from the Batch service."
+    },
+    "Operation": {
+      "title": "A REST API operation",
+      "type": "object",
+      "properties": {
+        "name": {
+          "title": "The operation name.",
+          "description": "This is of the format {provider}/{resource}/{operation}",
+          "type": "string"
+        },
+        "display": {
+          "title": "The object that describes the operation.",
+          "properties": {
+            "provider": {
+              "title": "Friendly name of the resource provider.",
+              "type": "string"
+            },
+            "operation": {
+              "title": "The operation type.",
+              "description": "For example: read, write, delete, or listKeys/action",
+              "type": "string"
+            },
+            "resource": {
+              "title": "The resource type on which the operation is performed.",
+              "type": "string"
+            },
+            "description": {
+              "title": "The friendly name of the operation",
+              "type": "string"
+            }
+          }
+        },
+        "origin": {
+          "title": "The intended executor of the operation.",
+          "type": "string"
+        },
+        "properties": {
+          "title": "Properties of the operation.",
+          "type": "object"
+        }
+      }
+    },
+    "OperationListResult": {
+     "title": "Result of the request to list REST API operations. It contains a list of operations and a URL nextLink to get the next set of results.",
+      "properties": {
+        "value": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Operation"
+          },
+          "title": "The list of operations supported by the resource provider."
+        },
+        "nextLink": {
+          "type": "string",
+          "title": "The URL to get the next set of operation list results if there are any."
+        }
+      }
     }
   },
   "parameters": {
@@ -1564,7 +1501,7 @@
       "in": "path",
       "required": true,
       "type": "string",
-      "description": "A unique identifier of a Microsoft Azure subscription. The subscription ID forms part of the URI for every service call."
+      "description": "The Azure subscription ID. This is a GUID-formatted string (e.g. 00000000-0000-0000-0000-000000000000)"
     },
     "ApiVersionParameter": {
       "name": "api-version",
@@ -1572,6 +1509,26 @@
       "required": true,
       "type": "string",
       "description": "The API version to be used with the HTTP request."
+    }, 
+    "ResourceGroupNameParameter": {
+      "name": "resourceGroupName",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "pattern": "^[-\\w\\._]+$",
+      "description": "The name of the resource group that contains the Batch account.",
+      "x-ms-parameter-location": "method"
+    },
+    "AccountNameParameter": {
+      "name": "accountName",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "pattern": "^[-\\w\\._]+$",
+      "minLength": 3,
+      "maxLength": 24,
+      "description": "The name of the Batch account.",
+      "x-ms-parameter-location": "method"
     }
   }
 }
