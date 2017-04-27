@@ -380,7 +380,7 @@
         "tags": [
           "Deployments"
         ],
-        "operationId": "Deployments_List",
+        "operationId": "Deployments_ListByResourceGroup",
         "description": "Get all the deployments for a resource group.",
         "parameters": [
           {
@@ -580,7 +580,7 @@
         "tags": [
           "ResourceGroups"
         ],
-        "operationId": "ResourceGroups_ListResources",
+        "operationId": "Resources_ListByResourceGroup",
         "description": "Get all the resources for a resource group.",
         "parameters": [
           {
@@ -675,7 +675,7 @@
           "ResourceGroups"
         ],
         "operationId": "ResourceGroups_CreateOrUpdate",
-        "description": "Creates a resource group.",
+        "description": "Creates or updates a resource group.",
         "parameters": [
           {
             "name": "resourceGroupName",
@@ -790,7 +790,7 @@
         "tags": [
           "ResourceGroups"
         ],
-        "operationId": "ResourceGroups_Patch",
+        "operationId": "ResourceGroups_Update",
         "summary": "Updates a resource group.",
         "description": "Resource groups can be updated through a simple PATCH operation to a group address. The format of the request is the same as that for creating a resource group. If a field is unspecified, the current value is retained.",
         "parameters": [
@@ -1916,7 +1916,7 @@
           },
           "description": "Validation error."
         }
-      }
+      },
     },
     "AliasPathType": {
       "properties": {
@@ -2512,7 +2512,8 @@
           "type": "object",
           "description": "HTTP message content."
         }
-      }
+      },
+      "description": "HTTP message."
     },
     "DeploymentOperationProperties": {
       "properties": {
@@ -2650,7 +2651,8 @@
           "description": "Resource tags"
         }
       },
-      "x-ms-azure-resource": true
+      "x-ms-azure-resource": true,
+      "description": "Resource."
     },
     "SubResource": {
       "properties": {
@@ -2659,7 +2661,8 @@
           "description": "Resource ID"
         }
       },
-      "x-ms-azure-resource": true
+      "x-ms-azure-resource": true,
+      "description": "Sub-resource."
     },
     "ResourceGroupExportResult": {
       "properties": {
@@ -2671,7 +2674,8 @@
           "$ref": "#/definitions/ResourceManagementErrorWithDetails",
           "description": "The error."
         }
-      }
+      },
+      "description": "Resource group export result."
     }
   },
   "parameters": {
