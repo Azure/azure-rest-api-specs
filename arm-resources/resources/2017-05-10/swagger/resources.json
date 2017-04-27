@@ -809,7 +809,7 @@
             "in": "body",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/ResourceGroup"
+              "$ref": "#/definitions/ResourceGroupPatchable"
             },
             "description": "Parameters supplied to update a resource group."
           },
@@ -1917,6 +1917,7 @@
           "description": "Validation error."
         }
       },
+      "description": "The detailed error message of resource management."
     },
     "AliasPathType": {
       "properties": {
@@ -2357,6 +2358,35 @@
       "required": [
         "location"
       ],
+      "description": "Resource group information."
+    },
+    "ResourceGroupPatchable": {
+      "properties": {
+        "id": {
+          "readOnly": true,
+          "type": "string",
+          "description": "The ID of the resource group."
+        },
+        "name": {
+          "type": "string",
+          "description": "The name of the resource group."
+        },
+        "properties": {
+          "$ref": "#/definitions/ResourceGroupProperties"
+        },
+        "managedBy": {
+          "type": "string",
+          "description": "The ID of the resource that manages this resource group."
+        },
+        "tags": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "string",
+            "description": "The additional properties. "
+          },
+          "description": "The tags attached to the resource group."
+        }
+      },
       "description": "Resource group information."
     },
     "ResourceGroupProperties": {
