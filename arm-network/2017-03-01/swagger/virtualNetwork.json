@@ -36,7 +36,7 @@
     }
   },
   "paths": {
-  	"/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/virtualNetworks/{virtualNetworkName}": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/virtualNetworks/{virtualNetworkName}": {
       "delete": {
         "tags": [
           "VirtualNetworks"
@@ -638,7 +638,7 @@
         }
       }
     },
-	"/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/virtualNetworks/{virtualNetworkName}/CheckIPAddressAvailability": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/virtualNetworks/{virtualNetworkName}/CheckIPAddressAvailability": {
       "get": {
         "operationId": "VirtualNetworks_CheckIPAddressAvailability",
         "description": "Checks whether a private IP address is available for use.",
@@ -678,6 +678,48 @@
               "$ref": "#/definitions/IPAddressAvailabilityResult"
             }
           }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/virtualNetworks/{virtualNetworkName}/usages": {
+      "get": {
+        "operationId": "VirtualNetworks_GetUsage",
+        "description": "Gets usage stats.",
+        "parameters": [
+          {
+            "name": "resourceGroupName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the resource group."
+          },
+          {
+            "name": "virtualNetworkName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the virtual network."
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Usage stats for vnet.",
+            "schema": {
+              "$ref": "#/definitions/VirtualNetworkUsageResult"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "VnetGetUsage": { "$ref": "../examples/VirtualNetworkGetUsage.json" }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
         }
       }
     }
@@ -944,7 +986,7 @@
       },
       "description": "Response for the ListVirtualNetworks API service call."
     },
-	"AddressSpace": {
+    "AddressSpace": {
       "properties": {
         "addressPrefixes": {
           "type": "array",
@@ -956,7 +998,7 @@
       },
       "description": "AddressSpace contains an array of IP address ranges that can be used by subnets of the virtual network."
     },
-	"DhcpOptions": {
+    "DhcpOptions": {
       "properties": {
         "dnsServers": {
           "type": "array",
@@ -968,7 +1010,7 @@
       },
       "description": "DhcpOptions contains an array of DNS servers available to VMs deployed in the virtual network. Standard DHCP option for a subnet overrides VNET DHCP options."
     },
-	"IPAddressAvailabilityResult": {
+    "IPAddressAvailabilityResult": {
       "properties": {
         "available": {
           "type": "boolean",
@@ -983,6 +1025,62 @@
         }
       },
       "description": "Response for CheckIPAddressAvailability API service call"
+    },
+    "VirtualNetworkUsageResult": {
+      "properties": {
+        "value": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/VirtualNetworkUsage"
+          },
+          "description": "Gets VirtualNetwork usage."
+        },
+        "nextLink": {
+          "type": "string",
+          "description": "The URL to get the next set of results."
+        }
+      },
+      "description": "Response for the virtual networks GetUsage API service call."
+    },
+    "VirtualNetworkUsage": {
+      "properties": {
+        "currentValue": {
+          "type": "number",
+          "format": "double",
+          "description": "Current usage value."
+        },
+        "id": {
+          "type": "string",
+          "description": "Subnet identifier."
+        },
+        "limit": {
+          "type": "number",
+          "format": "double",
+          "description": "Limit of usage."
+        },
+        "name": {
+          "$ref": "#/definitions/VirtualNetworkUsageName",
+          "description": "The name containing common and localized value for usage."
+        },
+        "unit": {
+          "type": "string",
+          "description": "Usage units."
+        }
+      },
+      "description": "Usage details for subnet."
+    },
+    "VirtualNetworkUsageName": {
+      "properties": {
+        "localizedValue": {
+          "type": "string",
+          "description": "Localized subnet size and usage string."
+        },
+        "value": {
+          "type": "string",
+          "description": "Subnet size and usage string."
+        }
+      },
+      "description": "Usage strings container."
     }
   },
   "parameters": {
