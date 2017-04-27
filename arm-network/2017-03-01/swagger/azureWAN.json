@@ -1,0 +1,3309 @@
+{
+    "swagger": "2.0",
+    "info": {
+        "title": "WANAsAServiceManagementClient",
+        "description": "REST API for Azure WAN As a Service.",
+        "version": "2017-03-01"
+    },
+    "host": "management.azure.com",
+    "schemes": [
+        "https"
+    ],
+    "consumes": [
+        "application/json"
+    ],
+    "produces": [
+        "application/json"
+    ],
+    "security": [
+        {
+            "azure_auth": [
+                "user_impersonation"
+            ]
+        }
+    ],
+    "securityDefinitions": {
+        "azure_auth": {
+            "type": "oauth2",
+            "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
+            "flow": "implicit",
+            "description": "Azure Active Directory OAuth2 Flow",
+            "scopes": {
+                "user_impersonation": "impersonate your user account"
+            }
+        }
+    },
+    "paths": {
+        "/subscriptions/{subscriptionId}/resourceGroup/{resourceGroupName}/providers/Microsoft.Network/WANs/{wanName}": {
+            "get": {
+                "operationId": "AzureWAN_Get",
+                "description": "Retrieves the details of a WAN.",
+                "parameters": [
+                    {
+                        "$ref": "#/parameters/ResourceGroupParameter"
+                    },
+                    {
+                        "name": "wanName",
+                        "in": "path",
+                        "required": true,
+                        "type": "string",
+                        "description": "The name of the WAN being retrieved."
+                    },
+                    {
+                        "$ref": "#/parameters/ApiVersionParameter"
+                    },
+                    {
+                        "$ref": "#/parameters/SubscriptionIdParameter"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Request successful. Returns the details of the WAN retrieved.",
+                        "schema": {
+                            "$ref": "#/definitions/WAN"
+                        }
+                    },
+                    "404": {
+                        "description": "WAN Doesn't exist"
+                    }
+                }
+            },
+            "put": {
+                "operationId": "AzureWAN_CreateOrUpdate",
+                "description": "Creates a WAN resource if it doesn't exist else updates the existing WAN.",
+                "parameters": [
+                    {
+                        "$ref": "#/parameters/SubscriptionIdParameter"
+                    },
+                    {
+                        "$ref": "#/parameters/ResourceGroupParameter"
+                    },
+                    {
+                        "name": "wanName",
+                        "in": "path",
+                        "required": true,
+                        "type": "string",
+                        "description": "The name of the WAN being created or updated."
+                    },
+                    {
+                        "$ref": "#/parameters/ApiVersionParameter"
+                    },
+                    {
+                        "name": "parameters",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/AzureWANPutParameters"
+                        },
+                        "description": "Parameters supplied to create or update WAN."
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Request successful. Returns the details of the WAN created or updated.",
+                        "schema": {
+                            "$ref": "#/definitions/WAN"
+                        }
+                    },
+                    "202": {
+                        "description": "Request received successfully. WAN is not yet provisioned; follow the Location header to poll for the WAN."
+                    },
+                    "400": {
+                        "description": "Bad Request. Failed to validate."
+                    }
+                }
+            },
+            "patch": {
+                "operationId": "AzureWAN_Update",
+                "description": "Updates a WAN.",
+                "parameters": [
+                    {
+                        "$ref": "#/parameters/SubscriptionIdParameter"
+                    },
+                    {
+                        "$ref": "#/parameters/ResourceGroupParameter"
+                    },
+                    {
+                        "name": "wanName",
+                        "in": "path",
+                        "required": true,
+                        "type": "string",
+                        "description": "The name of the WAN being updated."
+                    },
+                    {
+                        "$ref": "#/parameters/ApiVersionParameter"
+                    },
+                    {
+                        "name": "parameters",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/AzureWANPatchParameters"
+                        },
+                        "description": "Parameters supplied to Update WAN."
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Request successful. Returns the details of the WAN updated.",
+                        "schema": {
+                            "$ref": "#/definitions/WAN"
+                        }
+                    },
+                    "202": {
+                        "description": "Request received successfully. WAN is not yet provisioned; follow the Location header to poll for the WAN."
+                    },
+                    "400": {
+                        "description": "Bad Request. Failed to validate."
+                    }
+                }
+            },
+            "delete": {
+                "operationId": "AzureWAN_Delete",
+                "description": "Deletes a WAN.",
+                "parameters": [
+                    {
+                        "$ref": "#/parameters/SubscriptionIdParameter"
+                    },
+                    {
+                        "$ref": "#/parameters/ResourceGroupParameter"
+                    },
+                    {
+                        "name": "wanName",
+                        "in": "path",
+                        "required": true,
+                        "type": "string",
+                        "description": "The name of the WAN being deleted."
+                    },
+                    {
+                        "$ref": "#/parameters/ApiVersionParameter"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Request successful. WAN deleted."
+                    },
+                    "202": {
+                        "description": "Request received successfully. WAN deletion is in progress; follow the Location header to poll for final outcome."
+                    },
+                    "204": {
+                        "description": "No WANs exist by the name provided."
+                    },
+                    "400": {
+                        "description": "Bad Request. Failed to validate."
+                    }
+                }
+            }
+        },
+        "/subscriptions/{subscriptionId}/resourceGroup/{resourceGroupName}/providers/Microsoft.Network/WANs": {
+            "get": {
+                "operationId": "AzureWAN_ListByResourceGroup",
+                "description": "Lists all the WANs in a resource group.",
+                "parameters": [
+                    {
+                        "$ref": "#/parameters/SubscriptionIdParameter"
+                    },
+                    {
+                        "$ref": "#/parameters/ResourceGroupParameter"
+                    },
+                    {
+                        "$ref": "#/parameters/ApiVersionParameter"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Request successful. Returns the details of all the WANs in the resource group.",
+                        "schema": {
+                            "$ref": "#/definitions/ListWANsResult"
+                        }
+                    },
+                    "204": {
+                        "description": "No WANs exist in the resource group."
+                    }
+                },
+                "x-ms-pageable": {
+                    "nextLinkName": "nextLink"
+                }
+            }
+        },
+        "/subscriptions/{subscriptionId}/providers/Microsoft.Network/WANs": {
+            "get": {
+                "operationId": "AzureWAN_ListBySubscriptionId",
+                "description": "Lists all the WANs in a subscription.",
+                "parameters": [
+                    {
+                        "$ref": "#/parameters/SubscriptionIdParameter"
+                    },
+                    {
+                        "$ref": "#/parameters/ApiVersionParameter"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Request successful. Returns the details of all the WANs in the subscription.",
+                        "schema": {
+                            "$ref": "#/definitions/ListWANsResult"
+                        }
+                    },
+                    "204": {
+                        "description": "No WANs exist in the subscription."
+                    }
+                },
+                "x-ms-pageable": {
+                    "nextLinkName": "nextLink"
+                }
+            }
+        },
+
+        "/subscriptions/{subscriptionId}/resourceGroup/{resourceGroupName}/providers/Microsoft.Network/vpnSites/{vpnSiteName}": {
+            "get": {
+                "operationId": "AzureVpnSite_Get",
+                "description": "Retrieves the details of a VPNsite.",
+                "parameters": [
+                    {
+                        "$ref": "#/parameters/SubscriptionIdParameter"
+                    },
+                    {
+                        "$ref": "#/parameters/ResourceGroupParameter"
+                    },
+                    {
+                        "name": "vpnSiteName",
+                        "in": "path",
+                        "required": true,
+                        "type": "string",
+                        "description": "The name of the VpnSite being retrieved."
+                    },
+                    {
+                        "$ref": "#/parameters/ApiVersionParameter"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Request successful. Returns the details of the VpnSite retrieved.",
+                        "schema": {
+                            "$ref": "#/definitions/VpnSite"
+                        }
+                    },
+                    "404": {
+                        "description": "VpnSite doesn't exist"
+                    }
+                }
+            },
+            "put": {
+                "operationId": "AzureVpnSite_CreateOrUpdate",
+                "description": "Creates a VpnSite resource if it doesn't exist else updates the existing VpnSite.",
+                "parameters": [
+                    {
+                        "$ref": "#/parameters/SubscriptionIdParameter"
+                    },
+                    {
+                        "$ref": "#/parameters/ResourceGroupParameter"
+                    },
+                    {
+                        "name": "vpnSiteName",
+                        "in": "path",
+                        "required": true,
+                        "type": "string",
+                        "description": "The name of the VpnSite being created or updated."
+                    },
+                    {
+                        "$ref": "#/parameters/ApiVersionParameter"
+                    },
+                    {
+                        "name": "parameters",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/VpnSitePutOrPatchParameters"
+                        },
+                        "description": "Parameters supplied to create or update VpnSite."
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Request successful. Returns the details of the VpnSite created or updated.",
+                        "schema": {
+                            "$ref": "#/definitions/VpnSite"
+                        }
+                    },
+                    "202": {
+                        "description": "Request received successfully. VpnSite is not yet provisioned; follow the Location header to poll for the VpnSite."
+                    },
+                    "400": {
+                        "description": "Bad Request. Failed to validate."
+                    }
+                }
+            },
+            "patch": {
+                "operationId": "AzureVpnSite_Update",
+                "description": "Updates a VpnSite.",
+                "parameters": [
+                    {
+                        "$ref": "#/parameters/SubscriptionIdParameter"
+                    },
+                    {
+                        "$ref": "#/parameters/ResourceGroupParameter"
+                    },
+                    {
+                        "name": "vpnSiteName",
+                        "in": "path",
+                        "required": true,
+                        "type": "string",
+                        "description": "The name of the VpnSite being updated."
+                    },
+                    {
+                        "$ref": "#/parameters/ApiVersionParameter"
+                    },
+                    {
+                        "name": "parameters",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/VpnSitePutOrPatchParameters"
+                        },
+                        "description": "Parameters supplied to Update VpnSite."
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Request successful. Returns the details of the VpnSite updated.",
+                        "schema": {
+                            "$ref": "#/definitions/VpnSite"
+                        }
+                    },
+                    "202": {
+                        "description": "Request received successfully. VpnSite is not yet updated; follow the Location header to poll for final outcome."
+                    },
+                    "400": {
+                        "description": "Bad Request. Failed to validate."
+                    }
+                }
+            },
+            "delete": {
+                "operationId": "AzureVpnSite_Delete",
+                "description": "Deletes a VpnSite.",
+                "parameters": [
+                    {
+                        "$ref": "#/parameters/SubscriptionIdParameter"
+                    },
+                    {
+                        "$ref": "#/parameters/ResourceGroupParameter"
+                    },
+                    {
+                        "name": "vpnSiteName",
+                        "in": "path",
+                        "required": true,
+                        "type": "string",
+                        "description": "The name of the VpnSite being deleted."
+                    },
+                    {
+                        "$ref": "#/parameters/ApiVersionParameter"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Request successful. VpnSite deleted."
+                    },
+                    "202": {
+                        "description": "Request received successfully. VpnSite deletion is in progress; follow the Location header to poll for final outcome"
+                    },
+                    "204": {
+                        "description": "No VpnSites exist by the name provided."
+                    },
+                    "400": {
+                        "description": "VpnSite is still referenced by a vpnConnection. Cannot delete."
+                    }
+                }
+            }
+        },
+        "/subscriptions/{subscriptionId}/resourceGroup/{resourceGroupName}/providers/Microsoft.Network/vpnSites": {
+            "get": {
+                "operationId": "AzureVpnSites_ListByResourceGroup",
+                "description": "Lists all the vpnSites in a resource group.",
+                "parameters": [
+                    {
+                        "$ref": "#/parameters/SubscriptionIdParameter"
+                    },
+                    {
+                        "$ref": "#/parameters/ResourceGroupParameter"
+                    },
+                    {
+                        "$ref": "#/parameters/ApiVersionParameter"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Request successful. Returns the details of all the vpnSites in the resource group.",
+                        "schema": {
+                            "$ref": "#/definitions/ListVpnSitesResult"
+                        }
+                    },
+                    "204": {
+                        "description": "No vpnSites exist in the resource group."
+                    }
+                },
+                "x-ms-pageable": {
+                    "nextLinkName": "nextLink"
+                }
+            }
+        },
+        "/subscriptions/{subscriptionId}/providers/Microsoft.Network/vpnSites": {
+            "get": {
+                "operationId": "AzureVpnSites_ListBySubscriptionId",
+                "description": "Lists all the VpnSites in a subscription.",
+                "parameters": [
+                    {
+                        "$ref": "#/parameters/SubscriptionIdParameter"
+                    },
+                    {
+                        "$ref": "#/parameters/ApiVersionParameter"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Request successful. Returns the details of all the VpnSites in the subscription.",
+                        "schema": {
+                            "$ref": "#/definitions/ListVpnSitesResult"
+                        }
+                    },
+                    "204": {
+                        "description": "No VpnSites exist in the subscription."
+                    }
+                },
+                "x-ms-pageable": {
+                    "nextLinkName": "nextLink"
+                }
+            }
+        },
+
+        "/subscriptions/{subscriptionId}/resourceGroup/{resourceGroupName}/providers/Microsoft.Network/hubs/{hubName}": {
+            "get": {
+                "operationId": "AzureHub_Get",
+                "description": "Retrieves the details of a Hub.",
+                "parameters": [
+                    {
+                        "$ref": "#/parameters/SubscriptionIdParameter"
+                    },
+                    {
+                        "$ref": "#/parameters/ResourceGroupParameter"
+                    },
+                    {
+                        "name": "hubName",
+                        "in": "path",
+                        "required": true,
+                        "type": "string",
+                        "description": "The name of the Hub being retrieved."
+                    },
+                    {
+                        "$ref": "#/parameters/ApiVersionParameter"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Request successful. Returns the details of the Hub retrieved.",
+                        "schema": {
+                            "$ref": "#/definitions/Hub"
+                        }
+                    },
+                    "404": {
+                        "description": "Hub doesn't exist"
+                    }
+                }
+            },
+            "put": {
+                "operationId": "AzureHub_CreateOrUpdate",
+                "description": "Creates a hub resource if it doesn't exist else updates the existing hub.",
+                "parameters": [
+                    {
+                        "$ref": "#/parameters/SubscriptionIdParameter"
+                    },
+                    {
+                        "$ref": "#/parameters/ResourceGroupParameter"
+                    },
+                    {
+                        "name": "hubName",
+                        "in": "path",
+                        "required": true,
+                        "type": "string",
+                        "description": "The name of the hub being created or updated."
+                    },
+                    {
+                        "$ref": "#/parameters/ApiVersionParameter"
+                    },
+                    {
+                        "name": "parameters",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/HubPutOrPatchParameters"
+                        },
+                        "description": "Parameters supplied to create or update Hub."
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Request successful. Returns the details of the Hub created or updated.",
+                        "schema": {
+                            "$ref": "#/definitions/Hub"
+                        }
+                    },
+                    "202": {
+                        "description": "Request received successfully. Hub is not yet provisioned; follow the Location header to poll for final outcome."
+                    },
+                    "400": {
+                        "description": "Bad Request. Failed to validate."
+                    }
+                }
+            },
+            "patch": {
+                "operationId": "AzureHub_Update",
+                "description": "Updates a Hub.",
+                "parameters": [
+                    {
+                        "$ref": "#/parameters/SubscriptionIdParameter"
+                    },
+                    {
+                        "$ref": "#/parameters/ResourceGroupParameter"
+                    },
+                    {
+                        "name": "hubName",
+                        "in": "path",
+                        "required": true,
+                        "type": "string",
+                        "description": "The name of the Hub being updated."
+                    },
+                    {
+                        "$ref": "#/parameters/ApiVersionParameter"
+                    },
+                    {
+                        "name": "parameters",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/HubPutOrPatchParameters"
+                        },
+                        "description": "Parameters supplied to update Hub."
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Request successful. Returns the details of the Hub updated.",
+                        "schema": {
+                            "$ref": "#/definitions/Hub"
+                        }
+                    },
+                    "202": {
+                        "description": "Request received successfully. Hub is not yet updated; follow the Location header to poll for final outcome."
+                    },
+                    "400": {
+                        "description": "Bad Request. Failed to validate."
+                    }
+                }
+            },
+            "delete": {
+                "operationId": "AzureHub_Delete",
+                "description": "Deletes a Hub.",
+                "parameters": [
+                    {
+                        "$ref": "#/parameters/SubscriptionIdParameter"
+                    },
+                    {
+                        "$ref": "#/parameters/ResourceGroupParameter"
+                    },
+                    {
+                        "name": "hubName",
+                        "in": "path",
+                        "required": true,
+                        "type": "string",
+                        "description": "The name of the Hub being deleted."
+                    },
+                    {
+                        "$ref": "#/parameters/ApiVersionParameter"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Request successful. Hub deleted."
+                    },
+                    "202": {
+                        "description": "Request received successfully. Hub deletion is in progress; follow the Location header to poll for final outcome."
+                    },
+                    "204": {
+                        "description": "No Hubs exist by the name provided."
+                    },
+                    "400": {
+                        "description": "Hub is still referenced by a WAN. Cannot delete."
+                    }
+                }
+            }
+        },
+        "/subscriptions/{subscriptionId}/resourceGroup/{resourceGroupName}/providers/Microsoft.Network/hubs": {
+            "get": {
+                "operationId": "AzureHubs_ListByResourceGroup",
+                "description": "Lists all the hubs in a resource group.",
+                "parameters": [
+                    {
+                        "$ref": "#/parameters/SubscriptionIdParameter"
+                    },
+                    {
+                        "$ref": "#/parameters/ResourceGroupParameter"
+                    },
+                    {
+                        "$ref": "#/parameters/ApiVersionParameter"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Request successful. Returns the details of all the hubs in the resource group.",
+                        "schema": {
+                            "$ref": "#/definitions/ListHubsResult"
+                        }
+                    },
+                    "204": {
+                        "description": "No hubs exist in the resource group."
+                    }
+                },
+                "x-ms-pageable": {
+                    "nextLinkName": "nextLink"
+                }
+            }
+        },
+        "/subscriptions/{subscriptionId}/providers/Microsoft.Network/hubs": {
+            "get": {
+                "operationId": "AzureHubs_ListBySubscriptionId",
+                "description": "Lists all the hubs in a subscription.",
+                "parameters": [
+                    {
+                        "$ref": "#/parameters/SubscriptionIdParameter"
+                    },
+                    {
+                        "$ref": "#/parameters/ApiVersionParameter"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Request successful. Returns the details of all the hubs in the subscription.",
+                        "schema": {
+                            "$ref": "#/definitions/ListHubsResult"
+                        }
+                    },
+                    "204": {
+                        "description": "No hubs exist in the subscription."
+                    }
+                },
+                "x-ms-pageable": {
+                    "nextLinkName": "nextLink"
+                }
+            }
+        },
+
+        "/subscriptions/{subscriptionId}/resourceGroup/{resourceGroupName}/providers/Microsoft.Network/hubs/{hubName}/scalableVpnGateways/{gatewayName}": {
+            "get": {
+                "operationId": "AzureScalableVpnGateway_Get",
+                "description": "Retrieves the details of a scalable vpn gateway.",
+                "parameters": [
+                    {
+                        "$ref": "#/parameters/SubscriptionIdParameter"
+                    },
+                    {
+                        "$ref": "#/parameters/ResourceGroupParameter"
+                    },
+                    {
+                        "$ref": "#/parameters/HubParameter"
+                    },
+                    {
+                        "$ref": "#/parameters/GatewayParameter"
+                    },
+                    {
+                        "$ref": "#/parameters/ApiVersionParameter"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Request successful. Returns the details of the scalable vpn gateway retrieved.",
+                        "schema": {
+                            "$ref": "#/definitions/ScalableVpnGateway"
+                        }
+                    },
+                    "404": {
+                        "description": "Scalable vpn gateway doesn't exist."
+                    }
+                }
+            },
+            "put": {
+                "operationId": "AzureScalableVpnGateway_CreateOrUpdate",
+                "description": "Creates a scalable vpn gateway if it doesn't exist else updates the existing gateway.",
+                "parameters": [
+                    {
+                        "$ref": "#/parameters/SubscriptionIdParameter"
+                    },
+                    {
+                        "$ref": "#/parameters/ResourceGroupParameter"
+                    },
+                    {
+                        "$ref": "#/parameters/HubParameter"
+                    },
+                    {
+                        "$ref": "#/parameters/GatewayParameter"
+                    },
+                    {
+                        "$ref": "#/parameters/ApiVersionParameter"
+                    },
+                    {
+                        "name": "parameters",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/ScalableVpnGatewayPutOrPatchParameters"
+                        },
+                        "description": "Parameters supplied to create or Update a scalable vpn gateway."
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Request successful. Returns the details of the scalabale Vpn Gateway created or updated.",
+                        "schema": {
+                            "$ref": "#/definitions/ScalableVpnGateway"
+                        }
+                    },
+                    "202": {
+                        "description": "Request received successfully. Scalabale Vpn Gateway is not yet provisioned; follow the Location header to poll for final outcome."
+                    },
+                    "400": {
+                        "description": "Bad Request. Failed to validate."
+                    }
+                }
+            },
+            "patch": {
+                "operationId": "AzureScalableVpnGateway_Update",
+                "description": "Updates a scalable vpn gateway.",
+                "parameters": [
+                    {
+                        "$ref": "#/parameters/SubscriptionIdParameter"
+                    },
+                    {
+                        "$ref": "#/parameters/ResourceGroupParameter"
+                    },
+                    {
+                        "$ref": "#/parameters/HubParameter"
+                    },
+                    {
+                        "$ref": "#/parameters/GatewayParameter"
+                    },
+                    {
+                        "$ref": "#/parameters/ApiVersionParameter"
+                    },
+                    {
+                        "name": "parameters",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/ScalableVpnGatewayPutOrPatchParameters"
+                        },
+                        "description": "Parameters supplied to update a scalable vpn gateway."
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Request successful. Returns the details of the updated gateway.",
+                        "schema": {
+                            "$ref": "#/definitions/ScalableVpnGateway"
+                        }
+                    },
+                    "202": {
+                        "description": "Request received successfully. ScalableVpnGateway is not yet updated; follow the Location header to poll for final outcome."
+                    },
+                    "400": {
+                        "description": "Bad Request. Failed to validate."
+                    }
+                }
+            },
+            "delete": {
+                "operationId": "AzureScalableVpnGateway_Delete",
+                "description": "Deletes a sacalable vpn gateway.",
+                "parameters": [
+                    {
+                        "$ref": "#/parameters/SubscriptionIdParameter"
+                    },
+                    {
+                        "$ref": "#/parameters/ResourceGroupParameter"
+                    },
+                    {
+                        "$ref": "#/parameters/HubParameter"
+                    },
+                    {
+                        "$ref": "#/parameters/GatewayParameter"
+                    },
+                    {
+                        "$ref": "#/parameters/ApiVersionParameter"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Request successful. Scalable Vpn Gateway deleted."
+                    },
+                    "202": {
+                        "description": "Request received successfully. Scalable Vpn Gateway deletion is in progress; follow the Location header to poll for final outcome."
+                    },
+                    "204": {
+                        "description": "No scalable Vpn gateways exist by the name provided."
+                    },
+                    "400": {
+                        "description": "Cannot delete."
+                    }
+                }
+            }
+        },
+        "/subscriptions/{subscriptionId}/resourceGroup/{resourceGroupName}/providers/Microsoft.Network/hubs/{hubName}/scalableVpnGateways/{gatewayName}/vpnConnections/{connectionName}": {
+            "get": {
+                "operationId": "AzureVpnConnectionToScalableVpnGateway_Get",
+                "description": "Retrieves the details of a vpn connection.",
+                "parameters": [
+                    {
+                        "$ref": "#/parameters/SubscriptionIdParameter"
+                    },
+                    {
+                        "$ref": "#/parameters/ResourceGroupParameter"
+                    },
+                    {
+                        "$ref": "#/parameters/HubParameter"
+                    },
+                    {
+                        "$ref": "#/parameters/GatewayParameter"
+                    },
+                    {
+                        "$ref": "#/parameters/ConnectionNameParameter"
+                    },
+                    {
+                        "$ref": "#/parameters/ApiVersionParameter"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Request successful. Returns the details of the vpn connection.",
+                        "schema": {
+                            "$ref": "#/definitions/VpnConnection"
+                        }
+                    },
+                    "404": {
+                        "description": "Vpn Connection doesn't exist"
+                    }
+                }
+            },
+            "put": {
+                "operationId": "AzureVpnConnectionToScalableVpnGateway_CreateOrUpdate",
+                "description": "Creates a vpn connection to a scalable vpn gateway if it doesn't exist else updates the existing connection.",
+                "parameters": [
+                    {
+                        "$ref": "#/parameters/SubscriptionIdParameter"
+                    },
+                    {
+                        "$ref": "#/parameters/ResourceGroupParameter"
+                    },
+                    {
+                        "$ref": "#/parameters/HubParameter"
+                    },
+                    {
+                        "$ref": "#/parameters/GatewayParameter"
+                    },
+                    {
+                        "$ref": "#/parameters/ConnectionNameParameter"
+                    },
+                    {
+                        "$ref": "#/parameters/ApiVersionParameter"
+                    },
+                    {
+                        "name": "parameters",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/VpnConnectionPutOrPatchParameters"
+                        },
+                        "description": "Parameters supplied to create or update a vpn connection to a scalable vpn gateway."
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Request successful. Returns the details of the vpn connection created or updated.",
+                        "schema": {
+                            "$ref": "#/definitions/VpnConnection"
+                        }
+                    },
+                    "202": {
+                        "description": "Request received successfully. Vpn connection is not yet provisioned; follow the Location header to poll for final outcome."
+                    },
+                    "400": {
+                        "description": "Bad Request. Failed to validate."
+                    }
+                }
+            },
+            "patch": {
+                "operationId": "AzureVpnConnectionToScalableVpnGateway_Update",
+                "description": "Updates a vpn connection.",
+                "parameters": [
+                    {
+                        "$ref": "#/parameters/SubscriptionIdParameter"
+                    },
+                    {
+                        "$ref": "#/parameters/ResourceGroupParameter"
+                    },
+                    {
+                        "$ref": "#/parameters/HubParameter"
+                    },
+                    {
+                        "$ref": "#/parameters/GatewayParameter"
+                    },
+                    {
+                        "$ref": "#/parameters/ConnectionNameParameter"
+                    },
+                    {
+                        "$ref": "#/parameters/ApiVersionParameter"
+                    },
+                    {
+                        "name": "parameters",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/ScalableVpnGatewayPutOrPatchParameters"
+                        },
+                        "description": "Parameters supplied to update a vpn connection."
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Request successful. Returns the details of the updated gateway.",
+                        "schema": {
+                            "$ref": "#/definitions/VpnConnection"
+                        }
+                    },
+                    "202": {
+                        "description": "Request received successfully. Vpn connection is not yet updated; follow the Location header to poll for final outcome."
+                    },
+                    "400": {
+                        "description": "Bad Request. Failed to validate."
+                    }
+                }
+            },
+            "delete": {
+                "operationId": "AzureVpnConnectionToScalableVpnGateway_Delete",
+                "description": "Deletes a vpn connection.",
+                "parameters": [
+                    {
+                        "$ref": "#/parameters/SubscriptionIdParameter"
+                    },
+                    {
+                        "$ref": "#/parameters/ResourceGroupParameter"
+                    },
+                    {
+                        "$ref": "#/parameters/HubParameter"
+                    },
+                    {
+                        "$ref": "#/parameters/GatewayParameter"
+                    },
+                    {
+                        "$ref": "#/parameters/ConnectionNameParameter"
+                    },
+                    {
+                        "$ref": "#/parameters/ApiVersionParameter"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Request successful. Vpn connection deleted."
+                    },
+                    "202": {
+                        "description": "Request received successfully. Vpn connection deletion is in progress; follow the Location header to poll for final outcome."
+                    },
+                    "204": {
+                        "description": "No connections by the name exist."
+                    },
+                    "400": {
+                        "description": "Cannot delete."
+                    }
+                }
+            }
+        },
+        "/subscriptions/{subscriptionId}/providers/Microsoft.Network/hubs/{hubName}/scalableVpnGateways/{gatewayName}/vpnConnections": {
+            "get": {
+                "operationId": "AzureVpnConnectionsForGateway_ListAll",
+                "description": "Retrieves the details of all vpn connections for a particular scalable vpn gateway.",
+                "parameters": [
+                    {
+                        "$ref": "#/parameters/SubscriptionIdParameter"
+                    },
+                    {
+
+                        "$ref": "#/parameters/HubParameter"
+                    },
+                    {
+                        "$ref": "#/parameters/GatewayParameter"
+                    },
+                    {
+                        "$ref": "#/parameters/ApiVersionParameter"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Request successful. Returns the details of all the Vpn connections to the gateway.",
+                        "schema": {
+                            "$ref": "#/definitions/ListVpnConnectionsResult"
+                        }
+                    },
+                    "204": {
+                        "description": "No vpn connections exist for this gateway."
+                    }
+                },
+                "x-ms-pageable": {
+                    "nextLinkName": "nextLink"
+                }
+            }
+        },
+        "/subscriptions/{subscriptionId}/resourceGroup/{resourceGroupName}/providers/Microsoft.Network/hubs/{hubName}/scalableVpnGateways/{gatewayName}/VpnClientConfigurations/{configName}": {
+            "get": {
+                "operationId": "AzureWANVpnClientConfiguration_Get",
+                "description": "Retrieves the details of a vpn client configuration.",
+                "parameters": [
+                    {
+                        "$ref": "#/parameters/SubscriptionIdParameter"
+                    },
+                    {
+                        "$ref": "#/parameters/ResourceGroupParameter"
+                    },
+                    {
+                        "$ref": "#/parameters/HubParameter"
+                    },
+                    {
+                        "$ref": "#/parameters/GatewayParameter"
+                    },
+                    {
+                        "$ref": "#/parameters/VpnClinetConfigurationNameParameter"
+                    },
+                    {
+                        "$ref": "#/parameters/ApiVersionParameter"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Request successful. Returns the details of the vpn client configuration.",
+                        "schema": {
+                            "$ref": "#/definitions/VpnClinetConfiguration"
+                        }
+                    },
+                    "404": {
+                        "description": "Vpn client configuration doesn't exist"
+                    }
+                }
+            },
+            "put": {
+                "operationId": "AzureWANVpnClientConfiguration_CreateOrUpdate",
+                "description": "Creates a vpn client configuration if it doesn't exist else updates the existing configuration.",
+                "parameters": [
+                    {
+                        "$ref": "#/parameters/SubscriptionIdParameter"
+                    },
+                    {
+                        "$ref": "#/parameters/ResourceGroupParameter"
+                    },
+                    {
+                        "$ref": "#/parameters/HubParameter"
+                    },
+                    {
+                        "$ref": "#/parameters/GatewayParameter"
+                    },
+                    {
+                        "$ref": "#/parameters/VpnClinetConfigurationNameParameter"
+                    },
+                    {
+                        "$ref": "#/parameters/ApiVersionParameter"
+                    },
+                    {
+                        "name": "parameters",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/VpnClientConfigurationPutOrPatchParameters"
+                        },
+                        "description": "Parameters supplied to create or update a vpn client configuration."
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Request successful. Returns the details of the vpn client configuration created or updated.",
+                        "schema": {
+                            "$ref": "#/definitions/VpnClinetConfiguration"
+                        }
+                    },
+                    "202": {
+                        "description": "Request received successfully. Vpn client configuration is not yet provisioned; follow the Location header to poll for final outcome."
+                    },
+                    "400": {
+                        "description": "Bad Request. Failed to validate."
+                    }
+                }
+            },
+            "patch": {
+                "operationId": "AzureWANVpnClientConfiguration_Update",
+                "description": "Updates a vpn client configuration.",
+                "parameters": [
+                    {
+                        "$ref": "#/parameters/SubscriptionIdParameter"
+                    },
+                    {
+                        "$ref": "#/parameters/ResourceGroupParameter"
+                    },
+                    {
+                        "$ref": "#/parameters/HubParameter"
+                    },
+                    {
+                        "$ref": "#/parameters/GatewayParameter"
+                    },
+                    {
+                        "$ref": "#/parameters/VpnClinetConfigurationNameParameter"
+                    },
+                    {
+                        "$ref": "#/parameters/ApiVersionParameter"
+                    },
+                    {
+                        "name": "parameters",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/VpnClientConfigurationPutOrPatchParameters"
+                        },
+                        "description": "Parameters supplied to update a vpn client configuration."
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Request successful. Returns the details of the updated vpn client configuration.",
+                        "schema": {
+                            "$ref": "#/definitions/VpnClinetConfiguration"
+                        }
+                    },
+                    "202": {
+                        "description": "Request received successfully. Vpn Clinet Configuration is not yet updated; follow the Location header to poll for final outcome."
+                    },
+                    "400": {
+                        "description": "Bad Request. Failed to validate."
+                    }
+                }
+            },
+            "delete": {
+                "operationId": "AzureWANVpnClientConfiguration_Delete",
+
+                "description": "Deletes a vpn clinet configuration.",
+                "parameters": [
+                    {
+                        "$ref": "#/parameters/SubscriptionIdParameter"
+                    },
+                    {
+                        "$ref": "#/parameters/ResourceGroupParameter"
+                    },
+                    {
+                        "$ref": "#/parameters/HubParameter"
+                    },
+                    {
+                        "$ref": "#/parameters/GatewayParameter"
+                    },
+                    {
+                        "$ref": "#/parameters/VpnClinetConfigurationNameParameter"
+                    },
+                    {
+                        "$ref": "#/parameters/ApiVersionParameter"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Request successful. Vpn client configuration is deleted."
+                    },
+                    "202": {
+                        "description": "Request received successfully. Vpn client configuration deletion is in progress; follow the Location header to poll for final outcome."
+                    },
+                    "204": {
+                        "description": "No Vpn client configuration by the name exist."
+                    },
+                    "400": {
+                        "description": "Cannot delete."
+                    }
+                }
+            }
+        },
+        "/subscriptions/{subscriptionId}/resourceGroup/{resourceGroupName}/providers/Microsoft.Network/hubs/{hubName}/scalableVpnGateways/{gatewayName}/vpnClientConfigurations/{configName}/VpnClientPackage": {
+            "post": {
+                "operationId": "AzureWAN_DownloadVpnClientPackage",
+                "description": "Downloads a Vpn Client package to configure their Vpn Client to connect to the scalableVpnGateway.",
+                "parameters": [
+                    {
+                        "$ref": "#/parameters/SubscriptionIdParameter"
+                    },
+                    {
+                        "$ref": "#/parameters/ResourceGroupParameter"
+                    },
+                    {
+                        "$ref": "#/parameters/HubParameter"
+                    },
+                    {
+                        "$ref": "#/parameters/GatewayParameter"
+                    },
+                    {
+                        "$ref": "#/parameters/VpnClinetConfigurationNameParameter"
+                    },
+                    {
+                        "$ref": "#/parameters/ApiVersionParameter"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Request successful. Returns the SAS url for Vpn client package.",
+                        "schema": {
+                            "type": "string",
+                            "description": "SAS url for vpn client package"
+                        }
+                    },
+                    "202": {
+                        "description": "Request accepted. Operation in progress; follow the Location header to poll for final outcome."
+                    },
+                    "400": {
+                        "description": "Bad Request!"
+                    }
+                }
+            }
+        },
+        "/subscriptions/{subscriptionId}/resourceGroup/{resourceGroupName}/providers/Microsoft.Network/hubs/{hubName}/scalableExpressRouteGateways/{gatewayName}": {
+            "get": {
+                "operationId": "AzureWANScalableExpressRouteGateway_Get",
+                "description": "Retrieves the details of a scalable ExpressRoute gateway.",
+                "parameters": [
+                    {
+                        "$ref": "#/parameters/SubscriptionIdParameter"
+                    },
+                    {
+                        "$ref": "#/parameters/ResourceGroupParameter"
+                    },
+                    {
+                        "$ref": "#/parameters/HubParameter"
+                    },
+                    {
+                        "$ref": "#/parameters/GatewayParameter"
+                    },
+                    {
+                        "$ref": "#/parameters/ApiVersionParameter"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Request successful. Returns the details of the scalable ExpressRoute gateway retrieved.",
+                        "schema": {
+                            "$ref": "#/definitions/ScalableExpressRouteGateway"
+                        }
+                    },
+                    "404": {
+                        "description": "Scalable ExpressRoute gateway doesn't exist"
+                    }
+                }
+            },
+            "put": {
+                "operationId": "AzureWANScalableExpressRouteGateway_CreateOrUpdate",
+                "description": "Creates a scalable ExpressRoute gateway if it doesn't exist else updates the existing gateway.",
+                "parameters": [
+                    {
+                        "$ref": "#/parameters/SubscriptionIdParameter"
+                    },
+                    {
+                        "$ref": "#/parameters/ResourceGroupParameter"
+                    },
+                    {
+                        "$ref": "#/parameters/HubParameter"
+                    },
+                    {
+                        "$ref": "#/parameters/GatewayParameter"
+                    },
+                    {
+                        "$ref": "#/parameters/ApiVersionParameter"
+                    },
+                    {
+                        "name": "parameters",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/ScalableExpressRouteGatewayPutOrPatchParameters"
+                        },
+                        "description": "Parameters supplied to create or update a scalable ExpressRoute gateway."
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Request successful. Returns the details of the scalabale ExpressRoute Gateway created or updated.",
+                        "schema": {
+                            "$ref": "#/definitions/ScalableExpressRouteGateway"
+                        }
+                    },
+                    "202": {
+                        "description": "Request received successfully. Scalabale ExpressRoute Gateway is not yet provisioned; follow the Location header to poll for final outcome."
+                    },
+                    "400": {
+                        "description": "Bad Request. Failed to validate."
+                    }
+                }
+            },
+            "patch": {
+                "operationId": "AzureWANScalableExpressRouteGateway_Update",
+                "description": "Updates a scalable ExpressRoute gateway.",
+                "parameters": [
+                    {
+                        "$ref": "#/parameters/SubscriptionIdParameter"
+                    },
+                    {
+                        "$ref": "#/parameters/ResourceGroupParameter"
+                    },
+                    {
+                        "$ref": "#/parameters/HubParameter"
+                    },
+                    {
+                        "$ref": "#/parameters/GatewayParameter"
+                    },
+                    {
+                        "$ref": "#/parameters/ApiVersionParameter"
+                    },
+                    {
+                        "name": "parameters",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/ScalableExpressRouteGatewayPutOrPatchParameters"
+                        },
+                        "description": "Parameters supplied to update a scalable ExpressRoute gateway."
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Request successful. Returns the details of the updated gateway.",
+                        "schema": {
+                            "$ref": "#/definitions/ScalableExpressRouteGateway"
+                        }
+                    },
+                    "202": {
+                        "description": "Request received successfully. ScalableExpressRouteGateway is not yet updated; follow the Location header to poll for final outcome."
+                    },
+                    "400": {
+                        "description": "Bad Request. Failed to validate."
+                    }
+                }
+            },
+            "delete": {
+                "operationId": "AzureWANScalableExpressRouteGateway_Delete",
+                "description": "Deletes a sacalable ExpressRoute gateway.",
+                "parameters": [
+                    {
+                        "$ref": "#/parameters/SubscriptionIdParameter"
+                    },
+                    {
+                        "$ref": "#/parameters/ResourceGroupParameter"
+                    },
+                    {
+                        "$ref": "#/parameters/HubParameter"
+                    },
+                    {
+                        "$ref": "#/parameters/GatewayParameter"
+                    },
+                    {
+                        "$ref": "#/parameters/ApiVersionParameter"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Request successful. Scalable ExpressRoute Gateway deleted."
+                    },
+                    "202": {
+                        "description": "Request received successfully. Scalable ExpressRoute Gateway deletion is in progress; follow the Location header to poll for final outcome."
+                    },
+                    "204": {
+                        "description": "No scalable ExpressRoute gateways exist by the name provided."
+                    },
+                    "400": {
+                        "description": "Cannot delete."
+                    }
+                }
+            }
+        },
+        "/subscriptions/{subscriptionId}/resourceGroup/{resourceGroupName}/providers/Microsoft.Network/hubs/{hubName}/scalableExpressRouteGateways/{gatewayName}/expressRouteConnections/{connectionName}": {
+            "get": {
+                "operationId": "AzureWANExpressRouteConnection_Get",
+                "description": "Retrieves the details of an ExpressRoute connection.",
+                "parameters": [
+                    {
+                        "$ref": "#/parameters/SubscriptionIdParameter"
+                    },
+                    {
+                        "$ref": "#/parameters/ResourceGroupParameter"
+                    },
+                    {
+                        "$ref": "#/parameters/HubParameter"
+                    },
+                    {
+                        "$ref": "#/parameters/GatewayParameter"
+                    },
+                    {
+                        "$ref": "#/parameters/ConnectionNameParameter"
+                    },
+                    {
+                        "$ref": "#/parameters/ApiVersionParameter"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Request successful. Returns the details of the ExpressRoute connection retrieved.",
+                        "schema": {
+                            "$ref": "#/definitions/ExpressRouteConnection"
+                        }
+                    },
+                    "404": {
+                        "description": "ExpressRoute Connection doesn't exist"
+                    }
+                }
+            },
+            "put": {
+                "operationId": "AzureWANExpressRouteConnection_CreateOrUpdate",
+                "description": "Creates an ExpressRoute connection to a scalable ExpressRoute gateway if it doesn't exist else updates the existing connection.",
+                "parameters": [
+                    {
+                        "$ref": "#/parameters/SubscriptionIdParameter"
+                    },
+                    {
+                        "$ref": "#/parameters/ResourceGroupParameter"
+                    },
+                    {
+                        "$ref": "#/parameters/HubParameter"
+                    },
+                    {
+                        "$ref": "#/parameters/GatewayParameter"
+                    },
+                    {
+                        "$ref": "#/parameters/ConnectionNameParameter"
+                    },
+                    {
+                        "$ref": "#/parameters/ApiVersionParameter"
+                    },
+                    {
+                        "name": "parameters",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/ExpressRouteConnectionPutOrPatchParameters"
+                        },
+                        "description": "Parameters supplied to create or update a ExpressRoute connection to a scalable ExpressRoute gateway."
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Request successful. Returns the details of the ExpressRoute connection created or updated.",
+                        "schema": {
+                            "$ref": "#/definitions/ExpressRouteConnection"
+                        }
+                    },
+                    "202": {
+                        "description": "Request received successfully. ExpressRoute connection is not yet provisioned; follow the Location header to poll for final outcome."
+                    },
+                    "400": {
+                        "description": "Bad Request. Failed to validate."
+                    }
+                }
+            },
+            "patch": {
+                "operationId": "AzureWANExpressRouteConnection_Update",
+                "description": "Updates an ExpressRoute connection.",
+                "parameters": [
+                    {
+                        "$ref": "#/parameters/SubscriptionIdParameter"
+                    },
+                    {
+                        "$ref": "#/parameters/ResourceGroupParameter"
+                    },
+                    {
+                        "$ref": "#/parameters/HubParameter"
+                    },
+                    {
+                        "$ref": "#/parameters/GatewayParameter"
+                    },
+                    {
+                        "$ref": "#/parameters/ConnectionNameParameter"
+                    },
+                    {
+                        "$ref": "#/parameters/ApiVersionParameter"
+                    },
+                    {
+                        "name": "parameters",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/ScalableExpressRouteGatewayPutOrPatchParameters"
+                        },
+                        "description": "Parameters supplied to update an ExpressRoute connection."
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Request successful. Returns the details of the updated gateway.",
+                        "schema": {
+                            "$ref": "#/definitions/ExpressRouteConnection"
+                        }
+                    },
+                    "202": {
+                        "description": "Request received successfully. ExpressRoute connection is not yet updated; follow the Location header to poll for final outcome."
+                    },
+                    "400": {
+                        "description": "Bad Request. Failed to validate."
+                    }
+                }
+            },
+            "delete": {
+                "operationId": "AzureWANExpressRouteConnection_Delete",
+                "description": "Deletes an ExpressRoute connection.",
+                "parameters": [
+                    {
+                        "$ref": "#/parameters/SubscriptionIdParameter"
+                    },
+                    {
+                        "$ref": "#/parameters/ResourceGroupParameter"
+                    },
+                    {
+                        "$ref": "#/parameters/HubParameter"
+                    },
+                    {
+                        "$ref": "#/parameters/GatewayParameter"
+                    },
+                    {
+                        "$ref": "#/parameters/ConnectionNameParameter"
+                    },
+                    {
+                        "$ref": "#/parameters/ApiVersionParameter"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Request successful. ExpressRoute connection is deleted."
+                    },
+                    "202": {
+                        "description": "Request received successfully. ExpressRoute connection deletion is in progress; follow the Location header to poll for final outcome."
+                    },
+                    "204": {
+                        "description": "No connections by the name exist."
+                    },
+                    "400": {
+                        "description": "Cannot delete."
+                    }
+                }
+            }
+        },
+        "/subscriptions/{subscriptionId}/resourceGroup/{resourceGroupName}/providers/Microsoft.Network/hubs/{hubName}/scalableExpressRouteGateways/{gatewayName}/expressRouteConnections": {
+            "get": {
+                "operationId": "AzureWANExpressRouteConnections_List",
+                "description": "Retrieves the details of all ExpressRoute connections for a particular scalable ExpressRoute gateway.",
+                "parameters": [
+                    {
+                        "$ref": "#/parameters/SubscriptionIdParameter"
+                    },
+                    {
+                        "$ref": "#/parameters/ResourceGroupParameter"
+                    },
+                    {
+                        "$ref": "#/parameters/HubParameter"
+                    },
+                    {
+                        "$ref": "#/parameters/GatewayParameter"
+                    },
+                    {
+                        "$ref": "#/parameters/ApiVersionParameter"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Request successful. Returns the details of all the ExpressRoute connections to the gateway.",
+                        "schema": {
+                            "$ref": "#/definitions/ListExpressRouteConnectionsResult"
+                        }
+                    },
+                    "204": {
+                        "description": "No ExpressRoute connections exist for this gateway."
+                    }
+                },
+                "x-ms-pageable": {
+                    "nextLinkName": "nextLink"
+                }
+            }
+        },
+        "/subscriptions/{subscriptionId}/resourceGroup/{resourceGroupName}/providers/Microsoft.Network/hubs/{hubName}/vNetPeeringConnections/{connectionName}": {
+            "get": {
+                "operationId": "AzureWANVNetPeeringConnection_Get",
+                "description": "Retrieves the details of a VNetPeering connection.",
+                "parameters": [
+                    {
+                        "$ref": "#/parameters/SubscriptionIdParameter"
+                    },
+                    {
+                        "$ref": "#/parameters/ResourceGroupParameter"
+                    },
+                    {
+                        "$ref": "#/parameters/HubParameter"
+                    },
+                    {
+                        "$ref": "#/parameters/ConnectionNameParameter"
+                    },
+                    {
+                        "$ref": "#/parameters/ApiVersionParameter"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Request successful. Returns the details of the VNetPeering connection retrieved.",
+                        "schema": {
+                            "$ref": "#/definitions/VNetPeeringConnection"
+                        }
+                    },
+                    "404": {
+                        "description": "VNetPeering Connection doesn't exist"
+                    }
+                }
+            },
+            "put": {
+                "operationId": "AzureWANVNetPeeringConnection_CreateOrUpdate",
+                "description": "Creates a VNetPeering connection if it doesn't exist else updates the existing vnet peering connection.",
+                "parameters": [
+                    {
+                        "$ref": "#/parameters/SubscriptionIdParameter"
+                    },
+                    {
+                        "$ref": "#/parameters/ResourceGroupParameter"
+                    },
+                    {
+                        "$ref": "#/parameters/HubParameter"
+                    },
+                    {
+                        "$ref": "#/parameters/ConnectionNameParameter"
+                    },
+                    {
+                        "$ref": "#/parameters/ApiVersionParameter"
+                    },
+                    {
+                        "name": "parameters",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/VNetPeeringConnectionPutOrPatchParameters"
+                        },
+                        "description": "Parameters supplied to create or update a VNetPeering connection."
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Request successful. Returns the details of the VNetPeering connection created or updated.",
+                        "schema": {
+                            "$ref": "#/definitions/VNetPeeringConnection"
+                        }
+                    },
+                    "202": {
+                        "description": "Request received successfully. VNetPeering connection is not yet provisioned; follow the Location header to poll for final outcome."
+                    },
+                    "400": {
+                        "description": "Bad Request. Failed to validate."
+                    }
+                }
+            },
+            "patch": {
+                "operationId": "AzureWANVNetPeeringConnection_Update",
+                "description": "Updates a VNetPeering connection.",
+                "parameters": [
+                    {
+                        "$ref": "#/parameters/SubscriptionIdParameter"
+                    },
+                    {
+                        "$ref": "#/parameters/ResourceGroupParameter"
+                    },
+                    {
+                        "$ref": "#/parameters/HubParameter"
+                    },
+                    {
+                        "$ref": "#/parameters/ConnectionNameParameter"
+                    },
+                    {
+                        "$ref": "#/parameters/ApiVersionParameter"
+                    },
+                    {
+                        "name": "parameters",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/VNetPeeringConnectionPutOrPatchParameters"
+                        },
+                        "description": "Parameters supplied to update a VNetPeering connection."
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Request successful. Returns the details of the updated VNetPeering connection.",
+                        "schema": {
+                            "$ref": "#/definitions/VNetPeeringConnection"
+                        }
+                    },
+                    "202": {
+                        "description": "Request received successfully. VNetPeering connection is not yet updated; follow the Location header to poll for final outcome."
+                    },
+                    "400": {
+                        "description": "Bad Request. Failed to validate."
+                    }
+                }
+            },
+            "delete": {
+                "operationId": "AzureWANVNetPeeringConnection_Delete",
+                "description": "Deletes a VNetPeering connection.",
+                "parameters": [
+                    {
+                        "$ref": "#/parameters/SubscriptionIdParameter"
+                    },
+                    {
+                        "$ref": "#/parameters/ResourceGroupParameter"
+                    },
+                    {
+                        "$ref": "#/parameters/HubParameter"
+                    },
+                    {
+                        "$ref": "#/parameters/ConnectionNameParameter"
+                    },
+                    {
+                        "$ref": "#/parameters/ApiVersionParameter"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Request successful. VNetPeering connection deleted."
+                    },
+                    "202": {
+                        "description": "Request received successfully. VNetPeering connection deletion is in progress; follow the Location header to poll for final outcome."
+                    },
+                    "204": {
+                        "description": "No connections by the name exist."
+                    },
+                    "400": {
+                        "description": "Cannot delete."
+                    }
+                }
+            }
+        },
+        "/subscriptions/{subscriptionId}/resourceGroup/{resourceGroupName}/providers/Microsoft.Network/hubs/{hubName}/vNetPeeringConnections": {
+            "get": {
+                "operationId": "AzureWANVNetPeeringConnections_ListAll",
+                "description": "Retrieves the details of all VNetPeering connections.",
+                "parameters": [
+                    {
+                        "$ref": "#/parameters/SubscriptionIdParameter"
+                    },
+                    {
+                        "$ref": "#/parameters/ResourceGroupParameter"
+                    },
+                    {
+                        "$ref": "#/parameters/HubParameter"
+                    },
+                    {
+                        "$ref": "#/parameters/ApiVersionParameter"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Request successful. Returns the details of all the VNetPeering connections for the hub.",
+                        "schema": {
+                            "$ref": "#/definitions/ListVNetPeeringConnectionsResult"
+                        }
+                    },
+                    "204": {
+                        "description": "No VNetPeering connections exist."
+                    }
+                },
+                "x-ms-pageable": {
+                    "nextLinkName": "nextLink"
+                }
+            }
+        },
+
+        "/subscriptions/{subscriptionId}/resourceGroup/{resourceGroupName}/providers/Microsoft.Network/firewallPolicies/{firewallPolicyName}": {
+            "get": {
+                "operationId": "AzureWANFirewallPolicy_Get",
+                "description": "Retrieves the details of a firewall policy.",
+                "parameters": [
+                    {
+                        "$ref": "#/parameters/SubscriptionIdParameter"
+                    },
+                    {
+                        "$ref": "#/parameters/ResourceGroupParameter"
+                    },
+                    {
+                        "name": "firewallPolicyName",
+                        "in": "path",
+                        "required": true,
+                        "type": "string",
+                        "description": "The name of the Firewall Policy being retrieved."
+                    },
+                    {
+                        "$ref": "#/parameters/ApiVersionParameter"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Request successful. Returns the details of the Firewall Policy retrieved.",
+                        "schema": {
+                            "$ref": "#/definitions/FirewallPolicy"
+                        }
+                    },
+                    "404": {
+                        "description": "FirewallPolicy doesn't exist"
+                    }
+                }
+            },
+            "put": {
+                "operationId": "AzureWANFirewallPolicy_CreateOrUpdate",
+                "description": "Creates a Firewall Policy resource if it doesn't exist else updates the existing Firewall Policy.",
+                "parameters": [
+                    {
+                        "$ref": "#/parameters/SubscriptionIdParameter"
+                    },
+                    {
+                        "$ref": "#/parameters/ResourceGroupParameter"
+                    },
+                    {
+                        "name": "firewallPolicyName",
+                        "in": "path",
+                        "required": true,
+                        "type": "string",
+                        "description": "The name of the Firewall Policy being created or updated."
+                    },
+                    {
+                        "$ref": "#/parameters/ApiVersionParameter"
+                    },
+                    {
+                        "name": "parameters",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/FirewallPolicyPutOrPatchParameters"
+                        },
+                        "description": "Parameters supplied to create or update Firewall Policy."
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Request successful. Returns the details of the Firewall Policy created or updated.",
+                        "schema": {
+                            "$ref": "#/definitions/FirewallPolicy"
+                        }
+                    },
+                    "202": {
+                        "description": "Request received successfully. FirewallPolicy is not yet provisioned; follow the Location header to poll for final outcome."
+                    },
+                    "400": {
+                        "description": "Bad Request. Failed to validate."
+                    }
+                }
+            },
+            "patch": {
+                "operationId": "AzureWANFirewallPolicy_Update",
+                "description": "Updates a Firewall Policy.",
+                "parameters": [
+                    {
+                        "$ref": "#/parameters/SubscriptionIdParameter"
+                    },
+                    {
+                        "$ref": "#/parameters/ResourceGroupParameter"
+                    },
+                    {
+                        "name": "firewallPolicyName",
+                        "in": "path",
+                        "required": true,
+                        "type": "string",
+                        "description": "The name of the Firewall Policy being updated."
+                    },
+                    {
+                        "$ref": "#/parameters/ApiVersionParameter"
+                    },
+                    {
+                        "name": "parameters",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/FirewallPolicyPutOrPatchParameters"
+                        },
+                        "description": "Parameters supplied to Update Firewall Policy."
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Request successful. Returns the details of the firewall policy updated.",
+                        "schema": {
+                            "$ref": "#/definitions/FirewallPolicy"
+                        }
+                    },
+                    "202": {
+                        "description": "Request received successfully. Firewall Policy is not yet updated; follow the Location header to poll for final outcome."
+                    },
+                    "400": {
+                        "description": "Bad Request. Failed to validate."
+                    }
+                }
+            },
+            "delete": {
+                "operationId": "AzureWANFirewallPolicy_Delete",
+                "description": "Deletes a firewall policy.",
+                "parameters": [
+                    {
+                        "$ref": "#/parameters/SubscriptionIdParameter"
+                    },
+                    {
+                        "$ref": "#/parameters/ResourceGroupParameter"
+                    },
+                    {
+                        "name": "firewallPolicyName",
+                        "in": "path",
+                        "required": true,
+                        "type": "string",
+                        "description": "The name of the firewall policy being deleted."
+                    },
+                    {
+                        "$ref": "#/parameters/ApiVersionParameter"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Request successful. Firewall Policy deleted."
+                    },
+                    "202": {
+                        "description": "Request received successfully. Firewall policy deletion is in progress; follow the Location header to poll for final outcome."
+                    },
+                    "204": {
+                        "description": "No Firewall policies exist by the name provided."
+                    },
+                    "400": {
+                        "description": "Firewall Policy is still referenced by a WAN. Cannot delete."
+                    }
+                }
+            }
+        },
+        "/subscriptions/{subscriptionId}/resourceGroup/{resourceGroupName}/providers/Microsoft.Network/firewallPolicies": {
+            "get": {
+                "operationId": "AzureWANFirewallPolicy_ListByResourceGroup",
+                "description": "Lists all the firewall policies in a resource group.",
+                "parameters": [
+                    {
+                        "$ref": "#/parameters/SubscriptionIdParameter"
+                    },
+                    {
+                        "$ref": "#/parameters/ResourceGroupParameter"
+                    },
+                    {
+                        "$ref": "#/parameters/ApiVersionParameter"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Request successful. Returns the details of all the firewall policies in the resource group.",
+                        "schema": {
+                            "$ref": "#/definitions/ListFirewallPoliciesResult"
+                        }
+                    },
+                    "204": {
+                        "description": "No firewall policies exist in the resource group."
+                    }
+                },
+                "x-ms-pageable": {
+                    "nextLinkName": "nextLink"
+                }
+            }
+        },
+        "/subscriptions/{subscriptionId}/providers/Microsoft.Network/firewallPolicies": {
+            "get": {
+                "operationId": "AzureWANFirewallPolicy_ListBySubscriptionId",
+                "description": "Lists all the firewall policies in a subscription.",
+                "parameters": [
+                    {
+                        "$ref": "#/parameters/SubscriptionIdParameter"
+                    },
+                    {
+                        "$ref": "#/parameters/ApiVersionParameter"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Request successful. Returns the details of all the firewall policies in the subscription.",
+                        "schema": {
+                            "$ref": "#/definitions/ListFirewallPoliciesResult"
+                        }
+                    },
+                    "204": {
+                        "description": "No firewall policies exist in the subscription."
+                    }
+                },
+                "x-ms-pageable": {
+                    "nextLinkName": "nextLink"
+                }
+            }
+        }
+    },
+    "definitions": {
+        "WAN": {
+            "description": "Details of WAN.",
+            "allOf": [
+                {
+                    "$ref": "./network.json#/definitions/Resource"
+                }
+            ],
+            "properties": {
+                "provisioningState": {
+                    "type": "string",
+                    "description": "The current provisisoning state.",
+                    "enum": [
+                        "Succeeded",
+                        "Updating",
+                        "Deleting",
+                        "Failed"
+                    ],
+                    "x-ms-enum": {
+                        "name": "ProvisioningState",
+                        "modelAsString": true
+                    }
+                },
+                "interHubEncryption": {
+                    "type": "string",
+                    "description": "The current state of inter hub encryption, enabled or disabled.",
+                    "enum": [
+                        "Enabled",
+                        "Disabled"
+                    ],
+                    "x-ms-enum": {
+                        "name": "InterHubEncryption",
+                        "modelAsString": true
+                    }
+                },
+                "hubs": {
+                    "type": "array",
+                    "items": {
+                        "type": "string"
+                    },
+                    "description": "List of Hubs in the WAN."
+                },
+                "vpnSites": {
+                    "type": "array",
+                    "items": {
+                        "type": "string"
+                    },
+                    "description": "List of vpn-sites in the WAN."
+                },
+                "firewallPolicies": {
+                    "type": "array",
+                    "items": {
+                        "type": "string"
+                    },
+                    "description": "List of firewall ploicies in the WAN."
+                }
+            }
+        },
+        "AzureWANPutParameters": {
+            "name": {
+                "type": "string",
+                "description": "Name of the WAN."
+
+            },
+            "location": {
+                "type": "string",
+                "description": "Resource location."
+
+            },
+            "tags": {
+                "type": "object",
+                "additionalProperties": {
+                    "type": "string"
+                },
+                "description": "Resource tags."
+            },
+            "properties": {
+                "interHubEncryption": {
+                    "type": "string",
+                    "description": "The current state of inter hub encryption, enabled or disabled.",
+                    "enum": [
+                        "Enabled",
+                        "Disabled"
+                    ],
+                    "x-ms-enum": {
+                        "name": "InterHubEncryption",
+                        "modelAsString": true
+                    }
+                }
+            },
+            "description": "List of parameters to create WAN."
+        },
+        "AzureWANPatchParameters": {
+            "name": {
+                "type": "string",
+                "description": "Name of the WAN."
+            },
+            "location": {
+                "type": "string",
+                "description": "Resource location."
+            },
+            "tags": {
+                "type": "object",
+                "additionalProperties": {
+                    "type": "string"
+                },
+                "description": "Resource tags."
+            },
+            "properties": {
+                "interHubEncryption": {
+                    "type": "string",
+                    "description": "The current state of inter hub encryption, enabled or disabled.",
+                    "enum": [
+                        "Enabled",
+                        "Disabled"
+                    ],
+                    "x-ms-enum": {
+                        "name": "InterHubEncryption",
+                        "modelAsString": true
+                    }
+                }
+            },
+            "description": "List of parameters to update WAN."
+        },
+        "ListWANsResult": {
+            "description": "Result of the request to list WANs. It contains a list of WANs and a URL nextLink to get the next set of results.",
+            "properties": {
+                "value": {
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/definitions/WAN"
+                    },
+                    "description": "List of WANs."
+                },
+                "nextLink": {
+                    "type": "string",
+                    "description": "URL to get the next set of operation list results if there are any."
+                }
+            }
+        },
+        "VpnSite": {
+            "allOf": [
+                {
+                    "$ref": "./network.json#/definitions/Resource"
+                }
+            ],
+            "properties": {
+                "provisioningState": {
+                    "$ref": "#/definitions/provisioningState"
+                },
+                "WAN": {
+                    "type": "string",
+                    "description": "The WAN to which the vpnSite belongs"
+                },
+                "deviceProperties": {
+                    "$ref": "#/definitions/DeviceProperties"
+                },
+                "ipAddress": {
+                    "type": "string",
+                    "description": "The ip-address for the vpn-site."
+                },
+                "subnets": {
+                    "type": "array",
+                    "description": "list of subnets for vpn-site.",
+                    "items": {
+                        "type": "string"
+                    }
+                },
+                "ipsecProperties": {
+                    "$ref": "#/definitions/IPSecProperties"
+                },
+                "bgpProperties": {
+                    "$ref": "#/definitions/BGPProperties"
+                }
+            },
+            "description": "Details of VpnSite."
+        },
+        "VpnSitePutOrPatchParameters": {
+            "name": {
+                "type": "string",
+                "description": "Name of the VpnSite."
+            },
+            "location": {
+                "type": "string",
+                "description": "Resource location."
+            },
+            "tags": {
+                "type": "object",
+                "additionalProperties": {
+                    "type": "string"
+                },
+                "description": "Resource tags."
+            },
+            "properties": {
+                "WAN": {
+                    "type": "string",
+                    "description": "The id of the WAN to which the vpnSite belongs"
+                },
+                "deviceProperties": {
+                    "$ref": "#/definitions/DeviceProperties"
+                },
+                "ipAddress": {
+                    "type": "string",
+                    "description": "The ip-address for the vpn-site."
+                },
+                "subnets": {
+                    "type": "array",
+                    "description": "list of subnets for vpn-site.",
+                    "items": {
+                        "type": "string"
+                    }
+                },
+                "ipsecProperties": {
+                    "$ref": "#/definitions/IPSecProperties"
+                },
+                "bgpProperties": {
+                    "$ref": "#/definitions/BGPProperties"
+                }
+            },
+            "description": "List of parametrs for creating or updating VpnSite."
+        },
+        "ListVpnSitesResult": {
+            "description": "Result of the request to list VpnSites. It contains a list of VpnSites and a URL nextLink to get the next set of results.",
+            "properties": {
+                "value": {
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/definitions/VpnSite"
+                    },
+                    "description": "List of VpnSites."
+                },
+                "nextLink": {
+                    "type": "string",
+                    "description": "URL to get the next set of operation list results if there are any."
+                }
+            }
+        },
+        "Hub": {
+            "allOf": [
+                {
+                    "$ref": "./network.json#/definitions/Resource"
+                }
+            ],
+            "properties": {
+                "provisioningState": {
+                    "$ref": "#/definitions/provisioningState"
+                },
+                "WAN": {
+                    "type": "string",
+                    "description": "The WAN to which the Hub belongs"
+                },
+                "scalableVpnGateways": {
+                    "type": "array",
+                    "description": "list of all scalable vpn gateways with this Hub.",
+                    "items": {
+                        "type": "string"
+                    }
+                },
+                "scalableExpressRouteGateways": {
+                    "type": "array",
+                    "description": "list of all scalable ExpressRoute gateways with this Hub.",
+                    "items": {
+                        "type": "string"
+                    }
+                },
+                "vNetPeeringConnections": {
+                    "type": "array",
+                    "description": "list of all vNet peering connections with this Hub.",
+                    "items": {
+                        "type": "string"
+                    }
+                },
+                "AddressPrefixes": {
+                    "type": "array",
+                    "description": "list of address-prefixes for this Hub.",
+                    "items": {
+                        "type": "string"
+                    }
+                }
+            },
+            "description": "Details of Hub."
+        },
+        "HubPutOrPatchParameters": {
+            "name": {
+                "type": "string",
+                "description": "Name of the Hub."
+            },
+            "location": {
+                "type": "string",
+                "description": "Resource location."
+            },
+            "tags": {
+                "type": "object",
+                "additionalProperties": {
+                    "type": "string"
+                },
+                "description": "Resource tags."
+            },
+            "properties": {
+                "WAN": {
+                    "type": "string",
+                    "description": "The id of the WAN to which the Hub belongs"
+                },
+                "scalableVpnGateways": {
+                    "type": "array",
+                    "description": "list of all scalable vpn gateways with this Hub.",
+                    "items": {
+                        "type": "string"
+                    }
+                },
+                "scalableExpressRouteGateways": {
+                    "type": "array",
+                    "description": "list of all scalable ExpressRoute gateways with this Hub.",
+                    "items": {
+                        "type": "string"
+                    }
+                },
+                "vNetPeeringConnections": {
+                    "type": "array",
+                    "description": "list of all vNet peering connections with this Hub.",
+                    "items": {
+                        "type": "string"
+                    }
+                },
+                "AddressPrefixes": {
+                    "type": "array",
+                    "description": "list of address-prefixes for this Hub.",
+                    "items": {
+                        "type": "string"
+                    }
+                }
+            },
+            "description": "List of parameters to create or update Hub."
+        },
+        "ListHubsResult": {
+
+            "description": "Result of the request to list Hubs. It contains a list of Hubs and a URL nextLink to get the next set of results.",
+
+            "properties": {
+
+                "value": {
+
+                    "type": "array",
+
+                    "items": {
+
+                        "$ref": "#/definitions/Hub"
+
+                    },
+
+                    "description": "List of Hubs."
+
+                },
+
+                "nextLink": {
+
+                    "type": "string",
+
+                    "description": "URL to get the next set of operation list results if there are any."
+
+                }
+            }
+        },
+        "ScalableVpnGateway": {
+            "allOf": [
+                {
+                    "$ref": "./network.json#/definitions/Resource"
+                }
+            ],
+            "properties": {
+                "provisioningState": {
+                    "$ref": "#/definitions/provisioningState"
+                },
+                "vpnConnections": {
+                    "type": "array",
+                    "description": "list of all vpn connections to the gateway.",
+                    "items": {
+                        "type": "string"
+                    }
+                },
+                "vpnClientConfigurations": {
+                    "type": "array",
+                    "description": "list of all vpn client configurations to the gateway.",
+                    "items": {
+                        "type": "string"
+                    }
+                }
+            },
+            "description": "Details of scalable vpn gateway."
+        },
+        "ScalableVpnGatewayPutOrPatchParameters": {
+            "name": {
+                "type": "string",
+                "description": "Name of the WAN."
+            },
+            "location": {
+                "type": "string",
+                "description": "Resource location."
+            },
+            "tags": {
+                "type": "object",
+                "additionalProperties": {
+                    "type": "string"
+                },
+                "description": "Resource tags."
+            },
+            "properties": {
+                "vpnConnections": {
+                    "type": "array",
+                    "description": "list of all vpn connections to the gateway.",
+                    "items": {
+                        "type": "string"
+                    }
+                },
+                "vpnClientConfigurations": {
+                    "type": "array",
+                    "description": "list of all vpn client configurations to the gateway.",
+                    "items": {
+                        "type": "string"
+                    }
+                }
+            },
+            "description": "List of parameters to create Scalable VPN Gateway."
+        },
+        "VpnConnection": {
+            "allOf": [
+                {
+                    "$ref": "./network.json#/definitions/Resource"
+                }
+            ],
+            "properties": {
+                "provisioningState": {
+                    "$ref": "#/definitions/provisioningState"
+                },
+                "connectedSite": {
+                    "type": "string",
+                    "description": "Id of the connected vpn site."
+                },
+                "sharedKey": {
+                    "type": "string",
+                    "description": "Shared key for the vpn connection."
+                },
+                "routingWeight": {
+                    "type": "integer",
+                    "format": "int32",
+                    "description": "routing weight for vpn connection."
+                },
+                "connectionStatus": {
+                    "$ref": "#/definitions/connectionStatus"
+                },
+                "tunnelConnectionStatus": {
+                    "type": "array",
+                    "description": "list of connection status.",
+                    "items": {
+                        "type": "string"
+                    }
+                },
+                "ingressBytesTransferred": {
+                    "type": "integer",
+                    "format": "int32",
+                    "description": "Ingress bytes transferred."
+                },
+                "egressBytesTransferred": {
+                    "type": "integer",
+                    "format": "int32",
+                    "description": "Egress bytes transferred."
+                },
+                "rateLimit": {
+                    "type": "integer",
+                    "format": "int32",
+                    "description": "rate limit for vpn connection."
+                },
+                "ingressFirewallPolicies": {
+                    "type": "array",
+                    "description": "list of ingress firewall policies.",
+                    "items": {
+                        "type": "string"
+                    }
+                },
+                "egressFirewallPolicies": {
+                    "type": "array",
+                    "description": "list of egress firewall policies.",
+                    "items": {
+                        "type": "string"
+                    }
+                }
+            },
+            "description": "Details of Vpn Connection."
+        },
+        "ListVpnConnectionsResult": {
+            "description": "Result of the request to list all vpn connections to a scalable vpn gateway. It contains a list of Vpn Connections and a URL nextLink to get the next set of results.",
+            "properties": {
+                "value": {
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/definitions/VpnConnection"
+                    },
+                    "description": "List of Vpn Connections."
+                },
+                "nextLink": {
+                    "type": "string",
+                    "description": "URL to get the next set of operation list results if there are any."
+                }
+            }
+        },
+        "VpnConnectionPutOrPatchParameters": {
+            "name": {
+                "type": "string",
+                "description": "Name of the Vpn Connection."
+            },
+            "location": {
+                "type": "string",
+                "description": "Resource location."
+            },
+            "tags": {
+                "type": "object",
+                "additionalProperties": {
+                    "type": "string"
+                },
+                "description": "Resource tags."
+            },
+            "properties": {
+                "connectedSite": {
+                    "type": "string",
+                    "description": "Id of the connected vpn site."
+                },
+                "sharedKey": {
+                    "type": "string",
+                    "description": "Shared key for the vpn connection."
+                },
+                "routingWeight": {
+                    "type": "integer",
+                    "format": "int32",
+                    "description": "routing weight for vpn connection."
+                },
+                "rateLimit": {
+                    "type": "integer",
+                    "format": "int32",
+                    "description": "rate limit for vpn connection."
+                },
+                "ingressFirewallPolicies": {
+                    "type": "array",
+                    "description": "list of ingress firewall policies.",
+                    "items": {
+                        "type": "string"
+                    }
+                },
+                "egressFirewallPolicies": {
+                    "type": "array",
+                    "description": "list of egress firewall policies.",
+                    "items": {
+                        "type": "string"
+                    }
+                }
+            },
+            "description": "List of parameters to create or update vpn connection."
+        },
+        "VpnClinetConfiguration": {
+            "allOf": [
+                {
+                    "$ref": "./network.json#/definitions/Resource"
+                }
+            ],
+            "properties": {
+                "provisioningState": {
+                    "$ref": "#/definitions/provisioningState"
+                },
+                "vpnClientRootCertificates": {
+                    "type": "array",
+                    "description": "list of all Vpn Client Root Certificates.",
+                    "items": {
+                        "type": "string"
+                    }
+                },
+                "vpnClientRevokedCertificates": {
+                    "type": "array",
+                    "description": "list of all Vpn Client revoked Certificates.",
+                    "items": {
+                        "type": "string"
+                    }
+                },
+                "vpnClientAddressPool": {
+                    "$ref": "#/definitions/vpnClientAddressPool"
+                },
+                "vpnClientConnectionHealth": {
+                    "$ref": "#/definitions/vpnClientConnectionHealth"
+                }
+            },
+            "description": "Details of Vpn Client Configuration."
+        },
+        "VpnClientConfigurationPutOrPatchParameters": {
+            "name": {
+                "type": "string",
+                "description": "Name of the Vpn client configuration."
+            },
+            "location": {
+                "type": "string",
+                "description": "Resource location."
+            },
+            "tags": {
+                "type": "object",
+                "additionalProperties": {
+                    "type": "string"
+                },
+                "description": "Resource tags."
+            },
+            "properties": {
+                "vpnClientRootCertificates": {
+                    "type": "array",
+                    "description": "list of all Vpn Client Root Certificates.",
+                    "items": {
+                        "type": "string"
+                    }
+                },
+                "vpnClientRevokedCertificates": {
+                    "type": "array",
+                    "description": "list of all Vpn Client revoked Certificates.",
+                    "items": {
+                        "type": "string"
+                    }
+                },
+                "vpnClientAddressPool": {
+                    "$ref": "#/definitions/vpnClientAddressPool"
+                },
+                "vpnClientConnectionHealth": {
+                    "$ref": "#/definitions/vpnClientConnectionHealth"
+                }
+            },
+            "description": "List of parameters to create or update vpn client configuration."
+        },
+        "ScalableExpressRouteGateway": {
+            "allOf": [
+                {
+                    "$ref": "./network.json#/definitions/Resource"
+                }
+            ],
+            "properties": {
+                "provisioningState": {
+                    "$ref": "#/definitions/provisioningState"
+                },
+                "expressRouteConnections": {
+                    "type": "array",
+                    "description": "list of all ExpressRoute connections to the gateway.",
+                    "items": {
+                        "type": "string"
+                    }
+                }
+            },
+            "description": "Details of Express Route Gateway."
+        },
+        "ScalableExpressRouteGatewayPutOrPatchParameters": {
+            "name": {
+                "type": "string",
+                "description": "Name of the WAN."
+            },
+            "location": {
+                "type": "string",
+                "description": "Resource location."
+            },
+            "tags": {
+                "type": "object",
+                "additionalProperties": {
+                    "type": "string"
+                },
+                "description": "Resource tags."
+            },
+            "properties": {
+                "expressRouteConnections": {
+                    "type": "array",
+                    "description": "list of all ExpressRoute connections to the gateway.",
+                    "items": {
+                        "type": "string"
+                    }
+                }
+            },
+            "description": "Parameters to create or update a scalable Express Route Gateway."
+        },
+        "ExpressRouteConnection": {
+            "allOf": [
+                {
+                    "$ref": "./network.json#/definitions/Resource"
+                }
+            ],
+            "properties": {
+                "provisioningState": {
+                    "$ref": "#/definitions/provisioningState"
+                },
+                "connectedCircuit": {
+                    "type": "string",
+                    "description": "Id of the connected ExpressRoute circuit."
+                },
+                "authorizationKey": {
+                    "type": "string",
+                    "description": "authorizationKey key for the ExpressRoute connection."
+                },
+                "routingWeight": {
+                    "type": "integer",
+                    "format": "int32",
+                    "description": "routing weight for ExpressRoute connection."
+                },
+                "connectionHealth": {
+                    "connectionStatus": {
+                        "$ref": "#/definitions/connectionStatus"
+                    },
+                    "ingressBytesTransferred": {
+                        "type": "integer",
+                        "format": "int32",
+                        "description": "Ingress bytes transferred."
+                    },
+                    "egressBytesTransferred": {
+                        "type": "integer",
+                        "format": "int32",
+                        "description": "Egress bytes transferred."
+                    }
+                },
+                "rateLimit": {
+                    "type": "integer",
+                    "format": "int32",
+                    "description": "rate limit for ExpressRoute connection."
+                },
+                "ingressFirewallPolicies": {
+                    "type": "array",
+                    "description": "list of ingress firewall policies.",
+                    "items": {
+                        "type": "string"
+                    }
+                },
+                "egressFirewallPolicies": {
+                    "type": "array",
+                    "description": "list of egress firewall policies.",
+                    "items": {
+                        "type": "string"
+                    }
+                }
+            },
+            "description": "Details of ExpressRoute Connection."
+        },
+        "ListExpressRouteConnectionsResult": {
+
+            "description": "Result of the request to list of ExpressRoute connections to a scalable ExpressRoute gateway. It contains a list of ExpressRoute Connections and a URL nextLink to get the next set of results.",
+
+            "properties": {
+
+                "value": {
+
+                    "type": "array",
+
+                    "items": {
+
+                        "$ref": "#/definitions/ExpressRouteConnection"
+
+                    },
+
+                    "description": "List of ExpressRoute Connections."
+
+                },
+
+                "nextLink": {
+
+                    "type": "string",
+
+                    "description": "URL to get the next set of operation list results if there are any."
+
+                }
+            }
+        },
+        "ExpressRouteConnectionPutOrPatchParameters": {
+            "name": {
+                "type": "string",
+                "description": "Name of the ExpressRoute Connection."
+            },
+            "location": {
+                "type": "string",
+                "description": "Resource location."
+            },
+            "tags": {
+                "type": "object",
+                "additionalProperties": {
+                    "type": "string"
+                },
+                "description": "Resource tags."
+            },
+            "properties": {
+                "connectedCircuit": {
+                    "type": "string",
+                    "description": "Id of the connected ExpressRoute circuit."
+                },
+                "authorizationKey": {
+                    "type": "string",
+                    "description": "authorizationKey key for the ExpressRoute connection."
+                },
+                "routingWeight": {
+                    "type": "integer",
+                    "format": "int32",
+                    "description": "routing weight for ExpressRoute connection."
+                },
+                "rateLimit": {
+                    "type": "integer",
+                    "format": "int32",
+                    "description": "rate limit for ExpressRoute connection."
+                },
+                "ingressFirewallPolicies": {
+                    "type": "array",
+                    "description": "list of ingress firewall policies.",
+                    "items": {
+                        "type": "string"
+                    }
+                },
+                "egressFirewallPolicies": {
+                    "type": "array",
+                    "description": "list of egress firewall policies.",
+                    "items": {
+                        "type": "string"
+                    }
+                }
+            },
+            "description": "List of parameters to create or update ExpressRoute connection."
+        },
+        "VNetPeeringConnection": {
+            "allOf": [
+                {
+                    "$ref": "./network.json#/definitions/Resource"
+                }
+            ],
+            "properties": {
+                "provisioningState": {
+                    "$ref": "#/definitions/provisioningState"
+                },
+                "connectedVNet": {
+                    "type": "string",
+                    "description": "Id of the connected virtual network."
+                },
+                "connectionStatus": {
+                    "$ref": "#/definitions/connectionStatus"
+                },
+                "ingressBytesTransferred": {
+                    "type": "integer",
+                    "format": "int32",
+                    "description": "Ingress bytes transferred."
+                },
+                "egressBytesTransferred": {
+                    "type": "integer",
+                    "format": "int32",
+                    "description": "Egress bytes transferred."
+                },
+                "ingressFirewallPolicies": {
+                    "type": "array",
+                    "description": "list of ingress firewall policies.",
+                    "items": {
+                        "type": "string"
+                    }
+                },
+                "egressFirewallPolicies": {
+                    "type": "array",
+                    "description": "list of egress firewall policies.",
+                    "items": {
+                        "type": "string"
+                    }
+                }
+            },
+            "description": "Details of VNet Peering Connection."
+        },
+        "ListVNetPeeringConnectionsResult": {
+
+            "description": "Result of the request to list of VNetPeering connections to a scalable ExpressRoute gateway. It contains a list of VNetPeering Connections and a URL nextLink to get the next set of results.",
+
+            "properties": {
+
+                "value": {
+
+                    "type": "array",
+
+                    "items": {
+
+                        "$ref": "#/definitions/VNetPeeringConnection"
+
+                    },
+
+                    "description": "List of VNetPeering Connections."
+
+                },
+
+                "nextLink": {
+
+                    "type": "string",
+
+                    "description": "URL to get the next set of operation list results if there are any."
+
+                }
+            }
+        },
+        "VNetPeeringConnectionPutOrPatchParameters": {
+            "name": {
+                "type": "string",
+                "description": "Name of the VNetPeering Connection."
+            },
+            "location": {
+                "type": "string",
+                "description": "Resource location."
+            },
+            "tags": {
+                "type": "object",
+                "additionalProperties": {
+                    "type": "string"
+                },
+                "description": "Resource tags."
+            },
+            "properties": {
+                "connectedVNet": {
+                    "type": "string",
+                    "description": "Id of the connected VNet."
+                },
+                "ingressFirewallPolicies": {
+                    "type": "array",
+                    "description": "list of ingress firewall policies.",
+                    "items": {
+                        "type": "string"
+                    }
+                },
+                "egressFirewallPolicies": {
+                    "type": "array",
+                    "description": "list of egress firewall policies.",
+                    "items": {
+                        "type": "string"
+                    }
+                }
+            },
+            "description": "List of parameters to create or update VNetPeering connection."
+        },
+        "FirewallPolicy": {
+            "allOf": [
+                {
+                    "$ref": "./network.json#/definitions/Resource"
+                }
+            ],
+            "properties": {
+                "provisioningState": {
+                    "$ref": "#/definitions/provisioningState"
+                },
+                "destination": {
+                    "type": "string",
+                    "description": "resource url for circuit/vpnSite/vnet/address-prefix"
+                },
+                "destinationType": {
+                    "$ref": "#/definitions/destinationType"
+                },
+                "source": {
+                    "type": "string",
+                    "description": "resource url for circuit/vpnSite/vnet/address-prefix"
+                },
+                "sourceType": {
+                    "$ref": "#/definitions/sourceType"
+                },
+                "sourcePortRange": {
+                    "type": "string",
+                    "description": "range of source port"
+                },
+                "access": {
+                    "$ref": "#/definitions/access"
+                },
+                "priority": {
+                    "type": "integer",
+                    "format": "int32",
+                    "description": "priority of the fiewall policy."
+                }
+            },
+            "description": "Details of FirewallPolicy."
+        },
+        "FirewallPolicyPutOrPatchParameters": {
+            "name": {
+                "type": "string",
+                "description": "Name of the FirewallPolicy."
+            },
+            "location": {
+                "type": "string",
+                "description": "Resource location."
+            },
+            "tags": {
+                "type": "object",
+                "additionalProperties": {
+                    "type": "string"
+                },
+                "description": "Resource tags."
+            },
+            "properties": {
+                "destination": {
+                    "type": "string",
+                    "description": "resource url for circuit/vpnSite/vnet/address-prefix"
+                },
+                "destinationType": {
+                    "$ref": "#/definitions/destinationType"
+                },
+                "source": {
+                    "type": "string",
+                    "description": "resource url for circuit/vpnSite/vnet/address-prefix"
+                },
+                "sourceType": {
+                    "$ref": "#/definitions/sourceType"
+                },
+                "sourcePortRange": {
+                    "type": "string",
+                    "description": "range of source port"
+                },
+                "access": {
+                    "$ref": "#/definitions/access"
+                },
+                "priority": {
+                    "type": "integer",
+                    "format": "int32",
+                    "description": "priority of the fiewall policy."
+                }
+            },
+            "description": "List of parameters to create or update FirewallPolicy."
+        },
+        "ListFirewallPoliciesResult": {
+            "description": "Result of the request to list FirewallPolicies. It contains a list of FirewallPolicies and a URL nextLink to get the next set of results.",
+            "properties": {
+                "value": {
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/definitions/FirewallPolicy"
+                    },
+                    "description": "List of FirewallPolicies."
+                },
+                "nextLink": {
+                    "type": "string",
+                    "description": "URL to get the next set of operation list results if there are any."
+                }
+            }
+        },
+        "DeviceProperties": {
+            "type": "object",
+            "deviceVendor": {
+                "type": "string",
+                "description": "Name of the device Vendor."
+            },
+            "deviceModel": {
+                "type": "string",
+                "description": "Model of the device."
+            },
+            "linkSpeed": {
+                "type": "string",
+                "description": "Link speed."
+            },
+            "description": "List of properties of the device."
+        },
+        "IPSecProperties": {
+            "type": "object",
+            "ikeEncryptionAlgorithm": {
+                "type": "string",
+                "description": "Name of the ike encryption algorithm."
+            },
+            "ikeIntegrityAlgorithm": {
+                "type": "string",
+                "description": "Name of the ike integrity algorithm."
+            },
+            "dhGroup": {
+                "type": "string",
+                "description": "DH group for the device."
+            },
+            "ipsecEncryptionAlgorithm": {
+                "type": "string",
+                "description": "Name of the ipsec encryption algorithm."
+            },
+            "ipsecIntegrityAlgorithm": {
+                "type": "string",
+                "description": "Name of the ipsec integrity algorithm."
+            },
+            "pfsGroup": {
+                "type": "string",
+                "description": "PFS group for the device."
+            },
+            "psk": {
+                "type": "string",
+                "description": "PSK."
+            },
+            "description": "List of IpSec properties."
+        },
+        "BGPProperties": {
+            "type": "object",
+            "peeringIPAddress": {
+                "type": "string",
+                "description": "IP address for bgp peering."
+            },
+            "asn": {
+                "type": "string",
+                "description": ""
+            },
+            "description": "List of bgp properties."
+        },
+        "provisioningState": {
+            "type": "string",
+            "description": "The current provisisoning state.",
+            "enum": [
+                "Succeeded",
+                "Updating",
+                "Deleting",
+                "Failed"
+            ],
+            "x-ms-enum": {
+                "name": "ProvisioningState",
+                "modelAsString": true
+            }
+        },
+        "connectionStatus": {
+            "type": "string",
+            "description": "The current state of the vpn connection.",
+            "enum": [
+                "Unknown",
+                "Connecting",
+                "Connected",
+                "NotConnected"
+            ],
+            "x-ms-enum": {
+                "name": "connectionStatus",
+                "modelAsString": true
+            }
+        },
+        "destinationType": {
+            "type": "string",
+            "description": "The type of destination for a firewall policy.",
+            "enum": [
+                "ExpressRouteCircuit",
+                "VpnSite",
+                "VNet",
+                "AddressPrefix"
+            ],
+            "x-ms-enum": {
+                "name": "destinationType",
+                "modelAsString": true
+            }
+        },
+        "sourceType": {
+            "type": "string",
+            "description": "The type of source for a firewall policy.",
+            "enum": [
+                "ExpressRouteCircuit",
+                "VpnSite",
+                "VNet",
+                "AddressPrefix"
+            ],
+            "x-ms-enum": {
+                "name": "sourceType",
+                "modelAsString": true
+            }
+        },
+        "interHubEncryption": {
+            "type": "string",
+            "description": "The current state of inter hub encryption, enabled or disabled.",
+            "enum": [
+                "Enabled",
+                "Disabled"
+            ],
+            "x-ms-enum": {
+                "name": "InterHubEncryption",
+                "modelAsString": true
+            }
+        },
+        "access": {
+            "type": "string",
+            "description": "Access to be allowed or denied.",
+            "enum": [
+                "Allow",
+                "Deny"
+            ],
+            "x-ms-enum": {
+                "name": "access",
+                "modelAsString": true
+            }
+        },
+        "vpnClientAddressPool": {
+            "type": "object",
+            "addressPrefixes": {
+                "type": "array",
+                "description": "list of address prefixes.",
+                "items": {
+                    "type": "string"
+                }
+            },
+            "description": "Vpn client address pool."
+        },
+        "vpnClientConnectionHealth": {
+            "type": "object",
+            "properties": {
+                "vpnClientConnectionsCount": {
+                    "type": "integer",
+                    "format": "int32",
+                    "description": "Number of vpn client connections."
+                },
+                "allocatedIpAddresses": {
+                    "type": "array",
+                    "description": "list of alloctaed ip-addresses.",
+                    "items": {
+                        "type": "string"
+                    }
+                },
+                "ingressBytesTransferred": {
+                    "type": "integer",
+                    "format": "int32",
+                    "description": "Ingress bytes transferred."
+                },
+                "egressBytesTransferred": {
+                    "type": "integer",
+                    "format": "int32",
+                    "description": "Egress bytes transferred."
+                }
+            },
+            "description": "Details of Vpn client Connection health."
+        }
+    },
+    "parameters": {
+        "ApiVersionParameter": {
+            "name": "api-version",
+            "in": "query",
+            "required": true,
+            "type": "string",
+            "description": "Client API version."
+        },
+        "SubscriptionIdParameter": {
+            "name": "subscriptionId",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The subscription credentials which uniquely identify the Microsoft Azure subscription. The subscription ID forms part of the URI for every service call."
+        },
+        "ResourceGroupParameter": {
+            "name": "resourceGroupName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The resource group name of the Hub."
+        },
+        "HubParameter": {
+            "name": "hubName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the Hub."
+        },
+        "GatewayParameter": {
+            "name": "gatewayName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the gateway."
+        },
+        "ConnectionNameParameter": {
+            "name": "connectionName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the vpn or express-route connection."
+        },
+        "VpnClinetConfigurationNameParameter": {
+            "name": "configName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the vpn client configuration."
+        }
+    }
+}
