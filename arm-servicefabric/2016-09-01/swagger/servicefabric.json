@@ -632,7 +632,8 @@
       },
       "required": [
         "isAdmin",
-        "certificateCommonName"
+        "certificateCommonName",
+        "certificateIssuerThumbprint"
       ]
     },
     "ClusterEnvironment": {
@@ -850,6 +851,10 @@
           "items": {
             "$ref": "#/definitions/NodeTypeDescription"
           }
+        },
+        "upgradeDescription": {
+          "description": "The policy to use when upgrading the cluster.",
+          "$ref": "#/definitions/ClusterUpgradePolicy"
         }
       }
     },

@@ -438,7 +438,7 @@
         "tags": [
           "Replications"
         ],
-        "description": "Creates a replication for a container registry with the specified parameters.",
+        "description": "Creates or updates a replication for a container registry with the specified parameters.",
         "operationId": "Replications_CreateOrUpdate",
         "parameters": [
           {
@@ -1170,10 +1170,6 @@
             "type": "string"
           }
         },
-        "sku": {
-          "$ref": "#/definitions/Sku",
-          "description": "The SKU of the container registry."
-        },
         "properties": {
           "$ref": "#/definitions/RegistryPropertiesUpdateParameters",
           "description": "The properties that the container registry will be updated with.",
@@ -1333,6 +1329,9 @@
     },
     "WebhookProperties": {
       "description": "The properties of a webhook.",
+      "required": [
+        "actions"
+      ],
       "properties": {
         "isEnabled": {
           "description": "The value that indicates whether the webhook is enabled.",
@@ -1388,12 +1387,20 @@
     "WebhookPropertiesCreateParameters": {
       "description": "The parameters for creating the properties of a webhook.",
       "required": [
-        "callbackConfig"
+        "serviceUri",
+        "actions"
       ],
       "properties": {
-        "callbackConfig": {
-          "$ref": "#/definitions/CallbackConfig",
-          "description": "The configuration of service URI and custom headers for the webhook."
+        "serviceUri": {
+          "description": "The service URI for the webhook to post notifications.",
+          "type": "string"
+        },
+        "customHeaders": {
+          "description": "Custom headers that will be added to the webhook notifications.",
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          }
         },
         "isEnabled": {
           "description": "The value that indicates whether the webhook is enabled.",
@@ -1422,25 +1429,6 @@
         }
       }
     },
-    "CallbackConfig": {
-      "description": "The configuration of service URI and custom headers for the webhook.",
-      "required": [
-        "serviceUri"
-      ],
-      "properties": {
-        "serviceUri": {
-          "description": "The service URI for the webhook to post notifications.",
-          "type": "string"
-        },
-        "customHeaders": {
-          "description": "Custom headers that will be added to the webhook notifications.",
-          "type": "object",
-          "additionalProperties": {
-            "type": "string"
-          }
-        }
-      }
-    },
     "WebhookUpdateParameters": {
       "description": "The parameters for updating a webhook.",
       "properties": {
@@ -1460,13 +1448,17 @@
     },
     "WebhookPropertiesUpdateParameters": {
       "description": "The parameters for updating the properties of a webhook.",
-      "required": [
-        "callbackConfig"
-      ],
       "properties": {
-        "callbackConfig": {
-          "$ref": "#/definitions/CallbackConfig",
-          "description": "The configuration of service URI and custom headers for the webhook."
+        "serviceUri": {
+          "description": "The service URI for the webhook to post notifications.",
+          "type": "string"
+        },
+        "customHeaders": {
+          "description": "Custom headers that will be added to the webhook notifications.",
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          }
         },
         "isEnabled": {
           "description": "The value that indicates whether the webhook is enabled.",
@@ -1516,6 +1508,25 @@
         "id": {
           "description": "The event ID.",
           "type": "string"
+        }
+      }
+    },
+    "CallbackConfig": {
+      "description": "The configuration of service URI and custom headers for the webhook.",
+      "required": [
+        "serviceUri"
+      ],
+      "properties": {
+        "serviceUri": {
+          "description": "The service URI for the webhook to post notifications.",
+          "type": "string"
+        },
+        "customHeaders": {
+          "description": "Custom headers that will be added to the webhook notifications.",
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          }
         }
       }
     },
