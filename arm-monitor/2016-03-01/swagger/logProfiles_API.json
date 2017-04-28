@@ -173,6 +173,44 @@
             }
           }
         }
+      },
+      "patch": {
+          "description": "Updates an existing LogProfilesResource. To update other fields use the CreateOrUpdate method.",
+          "operationId": "LogProfiles_Update",
+          "parameters": [
+              {
+                  "$ref": "#/parameters/SubscriptionIdParameter"
+              },
+              {
+                "$ref": "#/parameters/LogProfileNameParameter"
+              },
+              {
+                  "$ref": "#/parameters/ApiVersionParameter"
+              },
+              {
+                  "name": "logProfilesResource",
+                  "in": "body",
+                  "required": true,
+                  "schema": {
+                      "$ref": "#/definitions/LogProfileResource"
+                  },
+                  "description": "Parameters supplied to the operation."
+              }
+          ],
+          "responses": {
+              "default": {
+                  "description": "Error response describing why the operation failed.",
+                  "schema": {
+                      "$ref": "#/definitions/ErrorResponse"
+                  }
+              },
+              "200": {
+                  "description": "An existing log profile was successfully updated.",
+                  "schema": {
+                      "$ref": "#/definitions/LogProfileResource"
+                  }
+              }
+          }
       }
     },
     "/subscriptions/{subscriptionId}/providers/microsoft.insights/logprofiles": {
