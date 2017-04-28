@@ -10300,6 +10300,7 @@
           "type": "array",
           "items": {
             "type": "string",
+            "x-nullable": false,
             "enum": [
               "job"
             ],
@@ -11000,7 +11001,7 @@
         "sshPrivateKey": {
           "type": "string",
           "title": "The SSH private key for the user account.",
-          "description": "The SSH private key establishes password-less SSH between nodes in a Linux pool when the pool's enableInterNodeCommunication property is true. If not specified, password-less SSH is not established between nodes."
+          "description": "The SSH private key is used to automatically configure password-less SSH between nodes in a Linux pool when the pool's enableInterNodeCommunication property is true. If not specified, password-less SSH is not configured between nodes."
         }
       },
       "title": "Properties used to create a user account on a Linux node."
@@ -11320,6 +11321,7 @@
           "type": "array",
           "items": {
             "type": "string",
+            "x-nullable": false,
             "enum": [
               "startTask",
               "task",
@@ -12165,13 +12167,13 @@
         },
         "failureInfo": {
           "$ref": "#/definitions/TaskFailureInformation",
-          "title": "Information describing the task failure.",
-          "description": "This property is set only if the task is in the completed state."
+          "title": "Information describing the task failure, if any.",
+          "description": "This property is set only if the task is in the completed state and encountered a failure."
         },
         "retryCount": {
           "type": "integer",
           "format": "int32",
-          "title": "The number of times the task has been retried by the Batch service. Every time the task exits with a non-zero exit code, it is deemed a task failure. The Batch service will retry the task up to the limit specified by the constraints."
+          "title": "The number of times the task has been retried by the Batch service. Task application failures (non-zero exit code) are retried, pre-processing errors (the task could not be run) and file upload errors are not retried. The Batch service will retry the task up to the limit specified by the constraints."
         },
         "lastRetryTime": {
           "type": "string",
@@ -12230,8 +12232,8 @@
         },
         "failureInfo": {
           "$ref": "#/definitions/TaskFailureInformation",
-          "title": "Information describing the task failure.",
-          "description": "This property is set only if the task is in the completed state."
+          "title": "Information describing the task failure, if any.",
+          "description": "This property is set only if the task is in the completed state and encountered a failure."
         },
         "result": {
           "$ref": "#/definitions/TaskExecutionResult",
@@ -12576,7 +12578,8 @@
         "currentLowPriorityNodes": {
           "type": "integer",
           "format": "int32",
-          "title": "The number of low-priority compute nodes currently in the pool."
+          "title": "The number of low-priority compute nodes currently in the pool.",
+          "description": "Low-priority compute nodes which have been preempted are included in this count."
         },
         "targetDedicatedNodes": {
           "type": "integer",
@@ -12868,14 +12871,14 @@
         },
         "failureInfo": {
           "$ref": "#/definitions/TaskFailureInformation",
-          "title": "Information describing the task failure.",
-          "description": "This property is set only if the task is in the completed state."
+          "title": "Information describing the task failure, if any.",
+          "description": "This property is set only if the task is in the completed state and encountered a failure."
         },
         "retryCount": {
           "type": "integer",
           "format": "int32",
           "title": "The number of times the task has been retried by the Batch service.",
-          "description": "The task is retried if it exits with a nonzero exit code, up to the specified maxTaskRetryCount."
+          "description": "The number of times the task has been retried by the Batch service. Task application failures (non-zero exit code) are retried, pre-processing errors (the task could not be run) and file upload errors are not retried. The Batch service will retry the task up to the limit specified by the constraints."
         },
         "lastRetryTime": {
           "type": "string",
@@ -13363,8 +13366,8 @@
         },
         "failureInfo": {
           "$ref": "#/definitions/TaskFailureInformation",
-          "title": "Information describing the task failure.",
-          "description": "This property is set only if the task is in the completed state."
+          "title": "Information describing the task failure, if any.",
+          "description": "This property is set only if the task is in the completed state and encountered a failure."
         },
         "state": {
           "title": "The current state of the subtask.",
@@ -13488,14 +13491,14 @@
         },
         "failureInfo": {
           "$ref": "#/definitions/TaskFailureInformation",
-          "title": "Information describing the task failure.",
-          "description": "This property is set only if the task is in the completed state."
+          "title": "Information describing the task failure, if any.",
+          "description": "This property is set only if the task is in the completed state and encountered a failure."
         },
         "retryCount": {
           "type": "integer",
           "format": "int32",
           "title": "The number of times the task has been retried by the Batch service.",
-          "description": "The task is retried if it exits with a nonzero exit code, up to the specified MaxTaskRetryCount."
+          "description": "The number of times the task has been retried by the Batch service. Task application failures (non-zero exit code) are retried, pre-processing errors (the task could not be run) and file upload errors are not retried. The Batch service will retry the task up to the limit specified by the constraints."
         },
         "lastRetryTime": {
           "type": "string",
@@ -13706,7 +13709,7 @@
         }
       },
       "required": [ "name" ],
-      "title": "A user account on a compute node."
+      "title": "A user account for RDP or SSH access on a compute node."
     },
     "ComputeNodeGetRemoteLoginSettingsResult": {
       "properties": {
@@ -14148,12 +14151,12 @@
         "path": {
           "type": "string",
           "title": "The destination blob or virtual directory within the Azure Storage container.",
-          "description": "If filePattern contains one or more wildcards, then path is the name of the blob virtual directory (blob name prefix). If filePattern contains no wildcards, then path is the name of the blob."
+          "description": "If filePattern refers to a specific file (i.e. contains no wildcards), then path is the name of the blob to which to upload that file. If filePattern contains one or more wildcards (and therefore may match multiple files), then path is the name of the blob virtual directory (which is prepended to each blob name) to which to upload the file(s). If omitted, file(s) are uploaded to the root of the container with a blob name matching their file name."
         },
         "containerUrl": {
           "type": "string",
-          "title": "A SAS URL granting write access to the Azure storage container.",
-          "description": "The Batch service uses the SAS URL to authenticate to Azure Storage in order to write the output files to the container."
+          "title": "The URL of the container within Azure Blob Storage to which to upload the file(s).",
+          "description": "The URL must include a Shared Access Signature (SAS) granting write permissions to the container."
         }
       },
       "required": [ "containerUrl" ],
@@ -14168,7 +14171,7 @@
         }
       },
       "required": [ "uploadCondition" ],
-      "title": "Details about file upload, including under what conditions to perform the upload."
+      "title": "Details about an output file upload operation, including under what conditions to perform the upload."
     },
     "ErrorMessage": {
       "properties": {
