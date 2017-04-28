@@ -1030,6 +1030,7 @@
       "properties": {
         "value": {
           "type": "array",
+          "readOnly": true,
           "items": {
             "$ref": "#/definitions/VirtualNetworkUsage"
           },
@@ -1047,24 +1048,29 @@
         "currentValue": {
           "type": "number",
           "format": "double",
-          "description": "Current usage value."
+          "readOnly": true,
+          "description": "Indicates number of IPs used from the Subnet."
         },
         "id": {
           "type": "string",
+          "readOnly": true,
           "description": "Subnet identifier."
         },
         "limit": {
           "type": "number",
           "format": "double",
-          "description": "Limit of usage."
+          "readOnly": true,
+          "description": "Indicates the size of the subnet."
         },
         "name": {
           "$ref": "#/definitions/VirtualNetworkUsageName",
+          "readOnly": true,
           "description": "The name containing common and localized value for usage."
         },
         "unit": {
           "type": "string",
-          "description": "Usage units."
+          "readOnly": true,
+          "description": "Usage units. Returns 'Count'"
         }
       },
       "description": "Usage details for subnet."
@@ -1073,10 +1079,12 @@
       "properties": {
         "localizedValue": {
           "type": "string",
+          "readOnly": true,
           "description": "Localized subnet size and usage string."
         },
         "value": {
           "type": "string",
+          "readOnly": true,
           "description": "Subnet size and usage string."
         }
       },
