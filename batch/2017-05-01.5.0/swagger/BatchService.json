@@ -1765,7 +1765,7 @@
         "x-ms-examples": {
           "File delete from node": { "$ref": "../examples/FileDeleteFromNode.json" }
         },
-        "summary": "Deletes the specified task file from the compute node.",
+        "summary": "Deletes the specified file from the compute node.",
         "x-ms-request-id": "request-id",
         "parameters": [
           {
@@ -11001,7 +11001,7 @@
         "sshPrivateKey": {
           "type": "string",
           "title": "The SSH private key for the user account.",
-          "description": "The SSH private key is used to automatically configure password-less SSH between nodes in a Linux pool when the pool's enableInterNodeCommunication property is true. If not specified, password-less SSH is not configured between nodes."
+          "description": "The private key must not be password protected. The private key is used to automatically configure asymmetric-key based authentication for SSH between nodes in a Linux pool when the pool's enableInterNodeCommunication property is true (it is ignored if enableInterNodeCommunication is false). It does this by placing the key pair into the user's .ssh directory. If not specified, password-less SSH is not configured between nodes (no modification of the user's .ssh directory is done)."
         }
       },
       "title": "Properties used to create a user account on a Linux node."
@@ -11407,7 +11407,7 @@
         "enableAutoScale": {
           "type": "boolean",
           "title": "Whether the pool size should automatically adjust over time.",
-          "description": "If false, the targetDedicated element is required. If true, the autoScaleFormula element is required. The pool automatically resizes according to the formula. The default value is false."
+          "description": "If false, at least one of targetDedicateNodes and targetLowPriorityNodes must be specified. If true, the autoScaleFormula element is required. The pool automatically resizes according to the formula. The default value is false."
         },
         "autoScaleFormula": {
           "type": "string",
@@ -12496,7 +12496,7 @@
           "type": "string",
           "format": "date-time",
           "title": "The last modified time of the pool.",
-          "description": "This is the last time at which the pool level data, such as the targetDedicated or enableAutoscale settings, changed. It does not factor in node-level changes such as a compute node changing state."
+          "description": "This is the last time at which the pool level data, such as the targetDedicatedNodes or enableAutoscale settings, changed. It does not factor in node-level changes such as a compute node changing state."
         },
         "creationTime": {
           "type": "string",
