@@ -3,7 +3,7 @@
   "info": {
     "title": "NotificationHubsManagementClient",
     "description": "Azure NotificationHub client",
-    "version": "2016-03-01"
+    "version": "2017-04-01"
   },
   "host": "management.azure.com",
   "schemes": [
@@ -43,9 +43,6 @@
         ],
         "operationId": "Namespaces_CheckAvailability",
         "description": "Checks the availability of the given service namespace across all Azure subscriptions. This is useful because the domain name is created based on the service namespace name.",
-        "externalDocs": {
-          "url": "http://msdn.microsoft.com/en-us/library/windowsazure/jj870968.aspx"
-        },
         "parameters": [
           {
             "name": "parameters",
@@ -448,9 +445,6 @@
         ],
         "operationId": "Namespaces_ListAll",
         "description": "Lists all the available namespaces within the subscription irrespective of the resourceGroups.",
-        "externalDocs": {
-          "url": "http://msdn.microsoft.com/en-us/library/azure/hh780759.aspx"
-        },
         "parameters": [
           {
             "$ref": "#/parameters/ApiVersionParameter"
@@ -461,7 +455,7 @@
         ],
         "responses": {
           "200": {
-            "description": " Gets all the Namespaces within the subscription irrespective of the ResourceGroup",
+            "description": "Gets all the Namespaces within the subscription irrespective of the ResourceGroup",
             "schema": {
               "$ref": "#/definitions/NamespaceListResult"
             }
@@ -503,7 +497,7 @@
         ],
         "responses": {
           "200": {
-            "description": "Get the Namespace AuthorizationRule",
+            "description": "Get the List of AuthorizationRules of a Namespace",
             "schema": {
               "$ref": "#/definitions/SharedAccessAuthorizationRuleListResult"
             }
@@ -1553,6 +1547,22 @@
         "thumbprint": {
           "type": "string",
           "description": "The Apns certificate Thumbprint"
+        },
+        "keyId": {
+          "type": "string",
+          "description": "A 10-character key identifier (kid) key, obtained from your developer account"
+        },
+        "appName": {
+          "type": "string",
+          "description": "The name of the application"
+        },
+        "appId": {
+          "type": "string",
+          "description": "The issuer (iss) registered claim key, whose value is your 10-character Team ID, obtained from your developer account"
+        },
+        "token": {
+          "type": "string",
+          "description": "Provider Authentication Token, obtained through your developer account"
         }
       },
       "description": "Description of a NotificationHub ApnsCredential."
