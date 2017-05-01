@@ -711,7 +711,6 @@
           {
             "name": "linkedServerName",
             "in": "path",
-            "required": true,
             "type": "string",
             "description": "The name of the linked server that is being added to the Redis cache."
           },
@@ -789,8 +788,8 @@
           }
         ],
         "responses": {
-          "202": {
-            "description": "The operation to delete the linked server was successfully enqueued.."
+          "200": {
+            "description": "Linked server was successfully deleted."
           }
         }
       },
@@ -1373,35 +1372,6 @@
     "RedisLinkedServerProperties": {
       "description": "Properties of a linked server to be returned in get/put response",
       "properties": {
-        "linkStatus": {
-          "readOnly": true,
-          "type": "string",
-          "description": "Link status of the linked server.",
-          "enum": [
-            "Initiating",
-            "Syncing",
-            "Linked",
-            "Deleting",
-            "Unknown"
-          ],
-          "x-ms-enum": {
-            "name": "LinkStatus",
-            "modelAsString": false
-          }
-        },
-        "serverRole": {
-          "readOnly": true,
-          "type": "string",
-          "description": "Server role of the linked server.",
-          "enum": [
-            "Primary",
-            "Secondary"
-          ],
-          "x-ms-enum": {
-            "name": "ServerRole",
-            "modelAsString": false
-          }
-        },
         "provisioningState": {
           "readOnly": true,
           "type": "string",
@@ -1439,11 +1409,24 @@
         "linkedRedisCacheLocation": {
           "type": "string",
           "description": "Location of the linked redis cache."
+        },
+        "role": {
+          "type": "string",
+          "description": "Role of the linked server.",
+          "enum": [
+            "Primary",
+            "Secondary"
+          ],
+          "x-ms-enum": {
+            "name": "ReplicationRole",
+            "modelAsString": false
+          }
         }
       },
       "required": [
         "linkedRedisCacheId",
-        "linkedRedisCacheLocation"
+        "linkedRedisCacheLocation",
+        "role"
       ]
     },
     "RedisLinkedServerCreateParameters": {
