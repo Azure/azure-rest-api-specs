@@ -1819,10 +1819,10 @@
       }
     },
     "ConnectivityInformation": {
-      "readOnly": true,
       "description": "Information on the connectivity status.",
       "properties": {
         "hops": {
+          "readOnly": true,
           "type": "array",
           "description": "List of hops on between the source and the destination.",
           "items": {
@@ -1830,6 +1830,7 @@
           }
         },
         "connectionStatus": {
+          "readOnly": true,
           "type": "string",
           "enum": [ "Unknown", "Connected", "Disconnected", "Degraded" ],
           "x-ms-enum": {
@@ -1840,47 +1841,56 @@
         },
         "avgLatencyInMs": {
           "description": "Average latency in milliseconds.",
+          "readOnly": true,
           "type": "integer"
         },
         "minLatencyInMs": {
           "description": "Minimum latency in milliseconds.",
+          "readOnly": true,
           "type": "integer"
         },
         "maxLatencyInMs": {
           "description": "Maximum latency in milliseconds.",
+          "readOnly": true,
           "type": "integer"
         },
         "probesSent": {
           "description": "Total number of probes sent.",
+          "readOnly": true,
           "type": "integer"
         },
         "probesFailed": {
           "description": "Number of failed probes.",
+          "readOnly": true,
           "type": "integer"
         }
       }
     },
     "ConnectivityHop": {
-      "readOnly": true,
       "description": "Information about a hop between the source and the destination.",
       "properties": {
         "type": {
           "description": "The type of the hop.",
+          "readOnly": true,
           "type": "string"
         },
         "id": {
           "description": "The ID of the hop.",
+          "readOnly": true,
           "type": "string"
         },
         "address": {
           "description": "The IP address of the hop.",
+          "readOnly": true,
           "type": "string"
         },
         "resourceId": {
           "description": "The ID of the resource corresponding to this hop.",
+          "readOnly": true,
           "type": "string"
         },
         "nextHopIds": {
+          "readOnly": true,
           "type": "array",
           "description": "List of next hop identifiers.",
           "items": {
@@ -1888,6 +1898,7 @@
           }
         },
         "issues": {
+          "readOnly": true,
           "type": "array",
           "description": "List of issues.",
           "items": {
@@ -1897,10 +1908,10 @@
       }
     },
     "ConnectivityIssue": {
-      "readOnly": true,
       "description": "Information about an issue encountered in the process of checking for connectivity.",
       "properties": {
         "origin": {
+          "readOnly": true,
           "type": "string",
           "enum": [ "Local", "Inbound", "Outbound" ],
           "x-ms-enum": {
@@ -1910,6 +1921,7 @@
           "description": "The origin of the issue."
         },
         "severity": {
+          "readOnly": true,
           "type": "string",
           "enum": [ "Error", "Warning" ],
           "x-ms-enum": {
@@ -1919,6 +1931,7 @@
           "description": "The severity of the issue."
         },
         "type": {
+          "readOnly": true,
           "type": "string",
           "enum": [ "Unknown", "AgentStopped", "GuestFirewall", "DnsResolution", "SocketBind", "NetworkSecurityRule", "UserDefinedRoute", "PortThrottled", "Platform" ],
           "x-ms-enum": {
@@ -1928,6 +1941,7 @@
           "description": "The type of issue."
         },
         "context": {
+          "readOnly": true,
           "type": "array",
           "description": "Provides additional context on the issue.",
           "items": {
