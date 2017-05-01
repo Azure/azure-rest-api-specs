@@ -1,0 +1,622 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "Gateway Management Client",
+    "description": "REST API for On-Premises Data Gateways.",
+    "version": "2016-06-01"
+  },
+  "host": "management.azure.com",
+  "schemes": [
+    "https"
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "produces": [
+    "application/json"
+  ],
+  "security": [
+    {
+      "azure_auth": [
+        "user_impersonation"
+      ]
+    }
+  ],
+  "securityDefinitions": {
+    "azure_auth": {
+      "type": "oauth2",
+      "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
+      "flow": "implicit",
+      "description": "Azure Active Directory OAuth2 Flow.",
+      "scopes": {
+        "user_impersonation": "impersonate your user account"
+      }
+    }
+  },
+  "paths": {
+    "/subscriptions/{subscriptionId}/providers/Microsoft.Web/connectionGateways": {
+      "get": {
+        "tags": [
+          "Gateways"
+        ],
+        "operationId": "Gateways_ListBySubscription",
+        "description": "Gets a list of On-Premises Data Gateways by subscription.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/subscriptionId"
+          },
+          {
+            "$ref": "#/parameters/api-version"
+          },
+          {
+            "name": "$top",
+            "description": "The number of items to be included in the result.",
+            "in": "query",
+            "required": false,
+            "type": "integer",
+            "format": "int32"
+          },
+          {
+            "name": "$filter",
+            "description": "The filter to apply on the operation.",
+            "in": "query",
+            "required": false,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/ConnectionGatewayListResult"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        },
+        "x-ms-odata": "#/definitions/GatewayFilter"
+      }
+    },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.Web/locations/{location}/connectionGatewayInstallations": {
+      "get": {
+        "tags": [
+          "Gateways"
+        ],
+        "operationId": "Gateways_ListInstallationsBySubscription",
+        "description": "Gets a list of On-Premises Data Gateway installations by subscription and location",
+        "parameters": [
+          {
+            "$ref": "#/parameters/subscriptionId"
+          },
+          {
+            "$ref": "#/parameters/api-version"
+          },
+          {
+            "name": "location",
+            "description": "The location.",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "$top",
+            "description": "The number of items to be included in the result.",
+            "in": "query",
+            "required": false,
+            "type": "integer",
+            "format": "int32"
+          },
+          {
+            "name": "$filter",
+            "description": "The filter to apply on the operation.",
+            "in": "query",
+            "required": false,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/ConnectionGatewayInstallationListResult"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        },
+        "x-ms-odata": "#/definitions/GatewayFilter"
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Web/connectionGateways": {
+      "get": {
+        "tags": [
+          "Gateways"
+        ],
+        "operationId": "Gateways_ListByResourceGroup",
+        "description": "Gets a list of On-Premises Data Gateways by resource group.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/subscriptionId"
+          },
+          {
+            "name": "resourceGroupName",
+            "description": "The resource group name.",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "$ref": "#/parameters/api-version"
+          },
+          {
+            "name": "$top",
+            "description": "The number of items to be included in the result.",
+            "in": "query",
+            "required": false,
+            "type": "integer",
+            "format": "int32"
+          },
+          {
+            "name": "$filter",
+            "description": "The filter to apply on the operation.",
+            "in": "query",
+            "required": false,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/ConnectionGatewayListResult"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        },
+        "x-ms-odata": "#/definitions/GatewayFilter"
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Web/connectionGateways/{gatewayName}": {
+      "get": {
+        "tags": [
+          "Gateways"
+        ],
+        "operationId": "Gateways_Get",
+        "description": "Gets a On-Premises Data Gateway.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/subscriptionId"
+          },
+          {
+            "name": "resourceGroupName",
+            "description": "The resource group name.",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "gatewayName",
+            "description": "The gateway name.",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "$ref": "#/parameters/api-version"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/ConnectionGateway"
+            }
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "Gateways"
+        ],
+        "operationId": "Gateways_CreateOrUpdate",
+        "description": "Creates or updates a On-Premises Data Gateway.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/subscriptionId"
+          },
+          {
+            "name": "resourceGroupName",
+            "description": "The resource group name.",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "gatewayName",
+            "description": "The gateway name.",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "$ref": "#/parameters/api-version"
+          },
+          {
+            "name": "gateway",
+            "description": "The gateway.",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/ConnectionGateway"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/ConnectionGateway"
+            }
+          },
+          "201": {
+            "description": "Created",
+            "schema": {
+              "$ref": "#/definitions/ConnectionGateway"
+            }
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "Gateways"
+        ],
+        "operationId": "Gateways_Delete",
+        "description": "Deletes a On-Premises Data Gateway.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/subscriptionId"
+          },
+          {
+            "name": "resourceGroupName",
+            "description": "The resource group name.",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "gatewayName",
+            "description": "The gateway name.",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "$ref": "#/parameters/api-version"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "204": {
+            "description": "No Content"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/providers/locations/{location}/Microsoft.Web/connectionGatewayInstallations/{gatewayInstallationName}": {
+      "get": {
+        "tags": [
+          "Gateways"
+        ],
+        "operationId": "Gateways_GetInstallation",
+        "description": "Gets a On-Premises Data Gateway Installation.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/subscriptionId"
+          },
+          {
+            "name": "location",
+            "description": "The gateway installation location.",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "gatewayInstallationName",
+            "description": "The gateway installation name.",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "$ref": "#/parameters/api-version"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/ConnectionGatewayInstallation"
+            }
+          }
+        }
+      }
+    }
+  },
+  "definitions": {
+    "Resource": {
+      "properties": {
+        "id": {
+          "type": "string",
+          "readOnly": true,
+          "description": "The resource id."
+        },
+        "name": {
+          "type": "string",
+          "readOnly": true,
+          "description": "Gets the resource name."
+        },
+        "type": {
+          "type": "string",
+          "readOnly": true,
+          "description": "Gets the resource type."
+        },
+        "location": {
+          "type": "string",
+          "description": "The resource location."
+        },
+        "tags": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          },
+          "description": "The resource tags."
+        }
+      },
+      "x-ms-azure-resource": true,
+      "description": "The base resource type."
+    },
+    "SubResource": {
+      "properties": {
+        "id": {
+          "type": "string",
+          "readOnly": true,
+          "description": "The resource id."
+        }
+      },
+      "x-ms-azure-resource": true,
+      "description": "The sub resource type."
+    },
+    "Object": {
+      "type": "object",
+      "properties": {}
+    },
+    "ResourceReference": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string",
+          "readOnly": true,
+          "description": "The resource id."
+        },
+        "name": {
+          "type": "string",
+          "readOnly": true,
+          "description": "Gets the resource name."
+        },
+        "type": {
+          "type": "string",
+          "readOnly": true,
+          "description": "Gets the resource type."
+        }
+      },
+      "description": "The resource reference."
+    },
+    "ConnectionGateway": {
+      "type": "object",
+      "properties": {
+        "properties": {
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/ConnectionGatewayProperties",
+          "description": "The gateway properties."
+        }
+      },
+      "description": "The gateway type.",
+      "allOf": [
+        {
+          "$ref": "#/definitions/Resource"
+        }
+      ]
+    },
+    "ConnectionGatewayInstallation": {
+      "type": "object",
+      "properties": {
+        "properties": {
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/ConnectionGatewayInstallationProperties",
+          "description": "The gateway installation properties."
+        }
+      },
+      "description": "The gateway installation type.",
+      "allOf": [
+        {
+          "$ref": "#/definitions/Resource"
+        }
+      ]
+    },
+    "ConnectionGatewayProperties": {
+      "type": "object",
+      "properties": {
+        "connectionGatewayInstallation": {
+          "$ref": "#/definitions/ConnectionGatewayInstallationReferenceProperties",
+          "readOnly": true,
+          "description": "Gets the gateway installation reference properties."
+        },
+        "contactInformation": {
+          "type": "string",
+          "readOnly": true,
+          "description": "Gets the contact information."
+        },
+        "displayName": {
+          "type": "string",
+          "readOnly": true,
+          "description": "Gets the display name of the installation."
+        },
+        "machineName": {
+          "type": "string",
+          "readOnly": true,
+          "description": "The machine name of the gateway."
+        },
+        "status": {
+          "type": "string",
+          "readOnly": true,
+          "description": "Gets the status."
+        },
+        "backendUri": {
+          "type": "string",
+          "readOnly": true,
+          "description": "Gets the backend URI of connection gateway."
+        }
+      },
+      "description": "The gateway properties."
+    },
+    "ConnectionGatewayInstallationProperties": {
+      "type": "object",
+      "properties": {
+        "connectionGateway": {
+          "$ref": "#/definitions/ConnectionGatewayReferenceProperties",
+          "readOnly": true,
+          "description": "Gets the connection gateway reference properties."
+        },
+        "location": {
+          "type": "string",
+          "readOnly": true,
+          "description": "Gets the location information."
+        },
+        "name": {
+          "type": "string",
+          "readOnly": true,
+          "description": "Gets the display name of the installation."
+        },
+        "id": {
+          "type": "string",
+          "readOnly": true,
+          "description": "The state."
+        },
+        "type": {
+          "type": "string",
+          "readOnly": true,
+          "description": "Gets the type."
+        }
+      },
+      "description": "The gateway installation properties."
+    },
+    "ConnectionGatewayInstallationReferenceProperties": {
+      "type": "object",
+      "properties": {
+        "location": {
+          "type": "string",
+          "readOnly": true,
+          "description": "Gets the location information."
+        },
+        "name": {
+          "type": "string",
+          "readOnly": true,
+          "description": "Gets the display name of the installation."
+        },
+        "id": {
+          "type": "string",
+          "readOnly": true,
+          "description": "The id of the installation."
+        },
+        "type": {
+          "type": "string",
+          "readOnly": true,
+          "description": "Gets the type."
+        }
+      },
+      "description": "The gateway installation reference properties."
+    },
+    "ConnectionGatewayReferenceProperties": {
+      "type": "object",
+      "properties": {
+        "location": {
+          "type": "string",
+          "readOnly": true,
+          "description": "Gets the location information."
+        },
+        "name": {
+          "type": "string",
+          "readOnly": true,
+          "description": "Gets the name of the connection gateway."
+        },
+        "id": {
+          "type": "string",
+          "readOnly": true,
+          "description": "The id of the connection gateway."
+        },
+        "type": {
+          "type": "string",
+          "readOnly": true,
+          "description": "Gets the type."
+        }
+      },
+      "description": "The connection gateway reference properties."
+    },
+    "ConnectionGatewayListResult": {
+      "type": "object",
+      "properties": {
+        "value": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ConnectionGateway"
+          },
+          "description": "The list of connection gateways."
+        },
+        "nextLink": {
+          "type": "string",
+          "description": "The URL to get the next set of results."
+        }
+      },
+      "description": "The list of connection gateways."
+    },
+    "ConnectionGatewayInstallationListResult": {
+      "type": "object",
+      "properties": {
+        "value": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ConnectionGatewayInstallation"
+          },
+          "description": "The list of connection gateway installations."
+        },
+        "nextLink": {
+          "type": "string",
+          "description": "The URL to get the next set of results."
+        }
+      },
+      "description": "The list of connection gateway installations."
+    }
+  },
+  "parameters": {
+    "subscriptionId": {
+      "name": "subscriptionId",
+      "description": "The subscription id.",
+      "in": "path",
+      "required": true,
+      "type": "string"
+    },
+    "api-version": {
+      "name": "api-version",
+      "description": "The API version.",
+      "in": "query",
+      "required": true,
+      "type": "string"
+    }
+  }
+}
