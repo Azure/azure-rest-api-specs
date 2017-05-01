@@ -1,0 +1,348 @@
+{
+    "swagger": "2.0",
+    "info": {
+        "title": "HDInsightManagementClient",
+        "description": "The HDInsight Management Client.",
+        "version": "2015-03-01-preview"
+    },
+    "host": "management.azure.com",
+    "schemes": [
+        "https"
+    ],
+    "consumes": [
+        "application/json"
+    ],
+    "produces": [
+        "application/json"
+    ],
+    "security": [{
+        "azure_auth": [
+            "user_impersonation"
+        ]
+    }],
+    "securityDefinitions": {
+        "azure_auth": {
+            "type": "oauth2",
+            "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
+            "flow": "implicit",
+            "description": "Azure Active Directory OAuth2 Flow",
+            "scopes": {
+                "user_impersonation": "impersonate your user account"
+            }
+        }
+    },
+    "paths": {
+        "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.HDInsight/clusters/{clusterName}/changerdpsetting": {
+            "post": {
+                "tags": [
+                    "Clusters"
+                ],
+                "operationId": "Clusters_ChangeRdpSettings",
+                "description": "Begins changing the RDP settings on the specified cluster.",
+                "x-ms-examples": {
+                    "Change Remote Desktop settings - Enable": {
+                        "$ref": "../examples/RdpSettingsEnable.json"
+                    }
+                },
+                "parameters": [{
+                        "name": "resourceGroupName",
+                        "in": "path",
+                        "required": true,
+                        "type": "string",
+                        "description": "The name of the resource group."
+                    },
+                    {
+                        "name": "clusterName",
+                        "in": "path",
+                        "required": true,
+                        "type": "string",
+                        "pattern": "^[0-9a-zA-Z][0-9a-zA-Z-]*[a-zA-Z0-9]$",
+                        "description": "The name of the cluster."
+                    },
+                    {
+                        "name": "parameters",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/RDPSettingsParameters"
+                        },
+                        "description": "The OS profile for RDP."
+                    },
+                    {
+                        "$ref": "#/parameters/ApiVersionParameter"
+                    },
+                    {
+                        "$ref": "#/parameters/SubscriptionIdParameter"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Ok response definition"
+                    },
+                    "202": {
+                        "description": "Accepted response definition"
+                    }
+                },
+                "x-ms-long-running-operation": true
+            }
+        },
+        "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.HDInsight/clusters/{clusterName}/configurations/{configurationName}": {
+            "post": {
+                "tags": [
+                    "Configurations"
+                ],
+                "operationId": "Configurations_UpdateHTTPSettings",
+                "description": "Begins configuring the HTTP settings on the specified cluster.",
+                "x-ms-examples": {
+                    "Enable HTTP connectivity": {
+                        "$ref": "../examples/ChangeHttpConnectivityEnable.json"
+                    },
+                    "Disable HTTP connectivity": {
+                        "$ref": "../examples/ChangeHttpConnectivityDisable.json"
+                    }
+                },
+                "parameters": [{
+                        "name": "resourceGroupName",
+                        "in": "path",
+                        "required": true,
+                        "type": "string",
+                        "description": "The name of the resource group."
+                    },
+                    {
+                        "name": "clusterName",
+                        "in": "path",
+                        "required": true,
+                        "type": "string",
+                        "description": "The name of the cluster."
+                    },
+                    {
+                        "name": "configurationName",
+                        "in": "path",
+                        "required": true,
+                        "type": "string",
+                        "description": "The constant for configuration type of gateway.",
+                        "enum": [
+                            "gateway"
+                        ],
+                        "x-ms-enum": {
+                            "name": "Configurationname",
+                            "modelAsString": false
+                        }
+                    },
+                    {
+                        "name": "parameters",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/HttpConnectivitySettings"
+                        },
+                        "description": "The name of the resource group."
+                    },
+                    {
+                        "$ref": "#/parameters/ApiVersionParameter"
+                    },
+                    {
+                        "$ref": "#/parameters/SubscriptionIdParameter"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Ok response definition"
+                    },
+                    "202": {
+                        "description": "Accepted response definition"
+                    },
+                    "204": {
+                        "description": "No content response definition"
+                    }
+                },
+                "x-ms-long-running-operation": true
+            },
+            "get": {
+                "tags": [
+                    "Configurations"
+                ],
+                "operationId": "Configurations_Get",
+                "description": "The configuration object for the specified cluster.",
+                "x-ms-examples": {
+                    "Get HTTP settings": {
+                        "$ref": "../examples/GetHttpConnectivity.json"
+                    }
+                },
+                "parameters": [{
+                        "name": "resourceGroupName",
+                        "in": "path",
+                        "required": true,
+                        "type": "string",
+                        "description": "The name of the resource group."
+                    },
+                    {
+                        "name": "clusterName",
+                        "in": "path",
+                        "required": true,
+                        "type": "string",
+                        "description": "The name of the cluster."
+                    },
+                    {
+                        "name": "configurationName",
+                        "in": "path",
+                        "required": true,
+                        "type": "string",
+                        "description": "The constant for configuration type of gateway.",
+                        "enum": [
+                            "gateway",
+                            "core-site"
+                        ],
+                        "x-ms-enum": {
+                            "name": "Configurationname",
+                            "modelAsString": false
+                        }
+                    },
+                    {
+                        "$ref": "#/parameters/ApiVersionParameter"
+                    },
+                    {
+                        "$ref": "#/parameters/SubscriptionIdParameter"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK response definition.",
+                        "schema": {
+                            "$ref": "#/definitions/HttpConnectivitySettings"
+                        }
+                    }
+                }
+            }
+        }
+    },
+    "definitions": {
+        "RdpSettings": {
+            "description": "The RDP settings for the windows cluster.",
+            "properties": {
+                "username": {
+                    "type": "string",
+                    "description": "The username for the RDP user."
+                },
+                "password": {
+                    "type": "string",
+                    "description": "The password for the RDP user."
+                },
+                "expiryDate": {
+                    "type": "string",
+                    "format": "date",
+                    "description": "The RDP expiry date(YYYY-MM-DD)."
+                }
+            }
+        },
+        "WindowsOperatingSystemProfile": {
+            "description": "The Windows operation system settings.",
+            "properties": {
+                "rdpSettings": {
+                    "$ref": "#/definitions/RdpSettings",
+                    "description": "The RDP settings."
+                }
+            }
+        },
+        "SshPublicKey": {
+            "description": "The Ssh public key for the cluster nodes.",
+            "properties": {
+                "certificateData": {
+                    "type": "string",
+                    "description": "The certificate for SSH."
+                }
+            }
+        },
+        "SshProfile": {
+            "description": "The list of Ssh public keys.",
+            "properties": {
+                "publicKeys": {
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/definitions/SshPublicKey"
+                    },
+                    "description": "The list of SSH public keys."
+                }
+            }
+        },
+        "LinuxOperatingSystemProfile": {
+            "description": "The ssh username, password, and ssh public key.",
+            "properties": {
+                "username": {
+                    "type": "string",
+                    "description": "The username."
+                },
+                "password": {
+                    "type": "string",
+                    "description": "The password."
+                },
+                "sshProfile": {
+                    "$ref": "#/definitions/SshProfile",
+                    "description": "The SSH profile."
+                }
+            }
+        },
+        "OsProfile": {
+            "description": "The Windows operation systems profile, and configure remote desktop settings.",
+            "properties": {
+                "windowsOperatingSystemProfile": {
+                    "$ref": "#/definitions/WindowsOperatingSystemProfile",
+                    "description": "The Windows OS profile."
+                },
+                "linuxOperatingSystemProfile": {
+                    "$ref": "#/definitions/LinuxOperatingSystemProfile",
+                    "description": "The Linux OS profile."
+                }
+            }
+        },
+        "RDPSettingsParameters": {
+            "properties": {
+                "osProfile": {
+                    "$ref": "#/definitions/OsProfile",
+                    "description": "The definition of a data factory gateway to be created or updated."
+                }
+            },
+            "required": [
+                "osProfile"
+            ],
+            "description": "Parameters specifying the data factory gateway definition for a create or update operation."
+        },
+        "HttpConnectivitySettings": {
+            "properties": {
+                "restAuthCredential.isEnabled": {
+                    "x-ms-client-name": "enabledCredential",
+                    "type": "string",
+                    "description": "Describes whether HTTP based authorization is enabled or not."
+                },
+                "restAuthCredential.username": {
+                    "x-ms-client-name": "username",
+                    "type": "string",
+                    "description": "The http username."
+                },
+                "restAuthCredential.password": {
+                    "x-ms-client-name": "password",
+                    "type": "string",
+                    "format": "password",
+                    "description": "The http user password."
+                }
+            },
+            "description": "The payload for a Configure HTTP settings request."
+        }
+    },
+    "parameters": {
+        "SubscriptionIdParameter": {
+            "name": "subscriptionId",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "Gets subscription credentials which uniquely identify Microsoft Azure subscription. The subscription ID forms part of the URI for every service call."
+        },
+        "ApiVersionParameter": {
+            "name": "api-version",
+            "in": "query",
+            "required": true,
+            "type": "string",
+            "description": "Client Api Version."
+        }
+    }
+}

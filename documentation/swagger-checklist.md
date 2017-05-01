@@ -5,11 +5,11 @@
 Latest version: [https://github.com/Azure/azure-rest-api-specs/blob/master/documentation/swagger-checklist.md](https://github.com/Azure/azure-rest-api-specs/blob/master/documentation/swagger-checklist.md)
 
 Editors:</br>
-Asir Selvasingh, Microsoft</br>
-Amar Zavery, Microsoft</br>
 Mark Cowlishaw, Microsoft</br>
-Johan Stenberg, Microsoft</br>
 Kirthi Krishnamraju, Microsoft</br>
+Asir Selvasingh, Microsoft</br>
+Johan Stenberg, Microsoft</br>
+Amar Zavery, Microsoft</br>
 
 
 ## Executive Summary ##
@@ -96,7 +96,7 @@ The Azure Developer Experience team will continue to deliver rich tools to valid
   - `ListByResourceGroup()` - list all resources in a resource group within a subscription.
   - `ListByParent()` - where "Parent" is a context specific suffix. It lists all resource under a parent.
 
-- [ ] **M1005**: :white_check_mark: Get operations *MUST* use the METHOD name "Get" or the METHOD name must start with "List"
+- [ ] **M1005**: :white_check_mark: GET operations *MUST* use the METHOD name "Get" or the METHOD name must start with "List"
 
 - [ ] **M1006**: :white_check_mark: PUT operations *MUST* use the METHOD Name "Create"
 
@@ -160,13 +160,13 @@ For example, [NetworkInterface.ipConfigurations](https://github.com/Azure/azure-
 
 - [ ] **M2016**: For PATCH operation, every property in the model for the request body *MUST* be optional and the property *MUST NOT* provide any default value. The absence of default values applies recursively to complex properties in the model definition.
 
-- [ ] **M2017**: The model definition for the body parameter and the response *MUST* be the same for a PUT operation. This ensures that the same entity will be reusable between GET and PUT.
+- [ ] **M2017**: A PUT operation request body schema should be the same as its 200 response schema, to allow reusing the same entity between GET and PUT. If the schema of the PUT request body is a superset of the GET response body, there must be a PATCH operation to make the resource updatable.
 
 - [ ] **M2018**: A parameter or a model property having an `"enum": []` constraint, *MUST* have an  ["x-ms-enum"](https://github.com/Azure/azure-rest-api-specs/blob/master/documentation/swagger-extensions.md#x-ms-enum) extension and the extension's "modelAsString" property *MUST* be set to `false` where applicable.
 
 - [ ] **M2019**: Every "Resource" Model *MUST* be tagged with ["x-ms-azure-resource"](https://github.com/Azure/azure-rest-api-specs/blob/master/documentation/swagger-extensions.md#x-ms-azure-resource). This will indicate Autorest to make the Resource model inherit from the Resource definition in the client runtime.
 
-- [ ] **M2020**: The "Resource" model definition in ARM, *MUST* have "id", "name" and "type" properties marked as `"readOnly": true`.
+- [ ] **M2020**: A "Resource" model definition *MUST* have "id", "name" and "type" properties marked as `"readOnly": true` in its model hierarchy.
 
 - [ ] **M2021**: The "location" property of "Resource" model definition in ARM, *MUST* have ["x-ms-mutability": ["create", "read"]](https://github.com/Azure/autorest/tree/master/docs/extensions#x-ms-mutability) extension. Usually the "location" property is also a required property of the model definition.
 
@@ -240,6 +240,17 @@ For example, [NetworkInterface.ipConfigurations](https://github.com/Azure/azure-
 - [ ] **M2055**: An operationId in the swagger spec *MUST NOT* be split by more than one underscore. Please use the "tags" array for adding extra names.
 
 - [ ] **M2056**: If the service (in Azure) only supports PATCHING tags on a Resource in the PATCH operation and has a PUT on the same resource which is named as "CreateOrUpdate", then it *MUST NOT* expose the "PATCH" operation in the swagger spec. 
+
+- :white_check_mark: **M2057**: A Sku object must have a property 'name' of type 'string'. It may also have the following properties: 'tier', 'size','family' and 'capacity'.
+
+- :white_check_mark: **M2058**: Paths in x-ms-paths must overload a normal path in the paths section, i.e. a path in the x-ms-path must either be same as a path in the paths section or a path in the paths sections followed by additional parameters.
+
+- :white_check_mark: **M2060**: x-ms-pageable operations must have a 200 response defined. Implemented as rule "PageableExtensionRule".
+
+- :white_check_mark: **M2061**: URLs should have parameterized resource type values instead of defaults. Implemented as rule "ProvidersPathValidation" in which all odd positions in the URL path followed by ```providers/providersNamespace``` are considered as resource type values
+- :white_check_mark: **M2062**: ARM specifications PUT operations return resource models. Validation rule "PutResponseResourceValidation" validates that these response models have the ```x-ms-azure-resource``` extension set to true.
+- :white_check_mark: **M2063**: Operation Id Nouns must not be named the same as any of the model definition names in the spec. Nouns should instead be expressed in their plural forms in the OperationId. Implemented as "OperationIdNounPluralizedFormValidation"
+- :white_check_mark: **M2064**: A long running PUT operation's 200/201 response MUST reference a model schema.
 
 ### SHOULD
 

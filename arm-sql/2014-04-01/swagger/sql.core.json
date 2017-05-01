@@ -16,12 +16,12 @@
     "application/json"
   ],
   "paths": {
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/servers/{serverName}/databases/{databaseName}/pause": {
+        "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/servers/{serverName}/databases/{databaseName}/pause": {
       "post": {
         "tags": [
           "DatabaseActivation"
         ],
-        "operationId": "Databases_PauseDataWarehouse",
+        "operationId": "Databases_Pause",
         "description": "Pauses a data warehouse.",
         "parameters": [
           {
@@ -60,7 +60,7 @@
         "tags": [
           "DatabaseActivation"
         ],
-        "operationId": "Databases_ResumeDataWarehouse",
+        "operationId": "Databases_Resume",
         "description": "Resumes a data warehouse.",
         "parameters": [
           {
@@ -92,47 +92,6 @@
           }
         },
         "x-ms-long-running-operation": true
-      }
-    },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/servers/{serverName}/databases/{databaseName}/restorePoints": {
-      "get": {
-        "tags": [
-          "DatabaseBackup"
-        ],
-        "operationId": "Databases_ListRestorePoints",
-        "description": "Returns a list of database restore points.",
-        "parameters": [
-          {
-            "$ref": "#/parameters/ApiVersionParameter"
-          },
-          {
-            "$ref": "#/parameters/SubscriptionIdParameter"
-          },
-          {
-            "$ref": "#/parameters/ResourceGroupParameter"
-          },
-          {
-            "$ref": "#/parameters/ServerNameParameter"
-          },
-          {
-            "name": "databaseName",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "description": "The name of the database from which to retrieve available restore points."
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "OK",
-            "schema": {
-              "$ref": "#/definitions/RestorePointListResult"
-            }
-          }
-        },
-        "x-ms-pageable": {
-          "nextLinkName": null
-        }
       }
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/servers/{serverName}/databases/{databaseName}": {
@@ -271,11 +230,7 @@
             "description": "The name of the database to be retrieved."
           },
           {
-            "name": "$expand",
-            "in": "query",
-            "required": false,
-            "type": "string",
-            "description": "A comma separated list of child objects to expand in the response. Possible properties: serviceTierAdvisors, upgradeHint, transparentDataEncryption."
+            "$ref": "#/parameters/DatabaseExpandParameter"
           }
         ],
         "responses": {
@@ -311,6 +266,9 @@
           },
           {
             "$ref": "#/parameters/ServerNameParameter"
+          },
+          {
+            "$ref": "#/parameters/DatabaseExpandParameter"
           },
           {
             "name": "$filter",
@@ -369,222 +327,6 @@
             "description": "OK",
             "schema": {
               "$ref": "#/definitions/DatabaseMetricListResult"
-            }
-          }
-        },
-        "x-ms-pageable": {
-          "nextLinkName": null
-        }
-      }
-    },
-    "/subscriptions/{subscriptionId}/providers/Microsoft.Sql/servers": {
-      "get": {
-        "tags": [
-          "Servers"
-        ],
-        "operationId": "Servers_List",
-        "description": "Returns a list of servers.",
-        "x-ms-examples": {
-          "List servers": { "$ref": "../examples/ServerList.json" }
-        },
-        "parameters": [
-          {
-            "$ref": "#/parameters/ApiVersionParameter"
-          },
-          {
-            "$ref": "#/parameters/SubscriptionIdParameter"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "OK",
-            "schema": {
-              "$ref": "#/definitions/ServerListResult"
-            }
-          }
-        },
-        "x-ms-pageable": {
-          "nextLinkName": null
-        }
-      }
-    },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/servers/{serverName}": {
-      "put": {
-        "tags": [
-          "Servers"
-        ],
-        "operationId": "Servers_CreateOrUpdate",
-        "description": "Creates or updates a new server.",
-        "x-ms-examples": {
-          "Create server min": { "$ref": "../examples/ServerCreateMin.json" },
-          "Create server max": { "$ref": "../examples/ServerCreateMax.json" }
-        },
-        "parameters": [
-          {
-            "$ref": "#/parameters/ApiVersionParameter"
-          },
-          {
-            "$ref": "#/parameters/SubscriptionIdParameter"
-          },
-          {
-            "$ref": "#/parameters/ResourceGroupParameter"
-          },
-          {
-            "$ref": "#/parameters/ServerNameParameter"
-          },
-          {
-            "name": "parameters",
-            "in": "body",
-            "required": true,
-            "schema": {
-              "$ref": "#/definitions/Server"
-            },
-            "description": "The required parameters for creating or updating a server."
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "OK",
-            "schema": {
-              "$ref": "#/definitions/Server"
-            }
-          },
-          "201": {
-            "description": "Created",
-            "schema": {
-              "$ref": "#/definitions/Server"
-            }
-          }
-        }
-      },
-      "delete": {
-        "tags": [
-          "Servers"
-        ],
-        "operationId": "Servers_Delete",
-        "description": "Deletes a SQL server.",
-        "x-ms-examples": {
-          "Delete SQL Server": { "$ref": "../examples/ServerDelete.json" }
-        },
-        "parameters": [
-          {
-            "$ref": "#/parameters/ApiVersionParameter"
-          },
-          {
-            "$ref": "#/parameters/SubscriptionIdParameter"
-          },
-          {
-            "$ref": "#/parameters/ResourceGroupParameter"
-          },
-          {
-            "$ref": "#/parameters/ServerNameParameter"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "OK"
-          },
-          "204": {
-            "description": "Accepted"
-          }
-        }
-      },
-      "get": {
-        "tags": [
-          "Servers"
-        ],
-        "operationId": "Servers_GetByResourceGroup",
-        "description": "Gets a server.",
-        "x-ms-examples": {
-          "Get Server": { "$ref": "../examples/ServerGet.json" }
-        },
-        "parameters": [
-          {
-            "$ref": "#/parameters/ApiVersionParameter"
-          },
-          {
-            "$ref": "#/parameters/SubscriptionIdParameter"
-          },
-          {
-            "$ref": "#/parameters/ResourceGroupParameter"
-          },
-          {
-            "$ref": "#/parameters/ServerNameParameter"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "OK",
-            "schema": {
-              "$ref": "#/definitions/Server"
-            }
-          }
-        }
-      }
-    },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/servers": {
-      "get": {
-        "tags": [
-          "Servers"
-        ],
-        "operationId": "Servers_ListByResourceGroup",
-        "description": "Returns a list of servers in a resource group.",
-        "x-ms-examples": {
-          "List servers by resource group": { "$ref": "../examples/ServerListByResourceGroup.json" }
-        },
-        "parameters": [
-          {
-            "$ref": "#/parameters/ApiVersionParameter"
-          },
-          {
-            "$ref": "#/parameters/SubscriptionIdParameter"
-          },
-          {
-            "$ref": "#/parameters/ResourceGroupParameter"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "OK",
-            "schema": {
-              "$ref": "#/definitions/ServerListResult"
-            }
-          }
-        },
-        "x-ms-pageable": {
-          "nextLinkName": null
-        }
-      }
-    },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/servers/{serverName}/usages": {
-      "get": {
-        "tags": [
-          "Servers"
-        ],
-        "operationId": "Servers_ListUsages",
-        "description": "Returns server usages.",
-        "x-ms-examples":{
-          "List servers usages": { "$ref": "../examples/ServerUsageMetricsList.json" }
-        },
-        "parameters": [
-          {
-            "$ref": "#/parameters/ApiVersionParameter"
-          },
-          {
-            "$ref": "#/parameters/SubscriptionIdParameter"
-          },
-          {
-            "$ref": "#/parameters/ResourceGroupParameter"
-          },
-          {
-            "$ref": "#/parameters/ServerNameParameter"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "OK",
-            "schema": {
-              "$ref": "#/definitions/ServerMetricListResult"
             }
           }
         },
@@ -1033,7 +775,7 @@
         "tags": [
           "RecommendedElasticPools"
         ],
-        "operationId": "RecommendedElasticPools_List",
+        "operationId": "RecommendedElasticPools_ListByServer",
         "description": "Returns recommended elastic pools.",
         "parameters": [
           {
@@ -1431,31 +1173,71 @@
           "nextLinkName": null
         }
       }
-    },
-    "/providers/Microsoft.Sql/operations": {
-      "get": {
-        "tags": [
-          "Operations"
-        ],
-        "description": "Lists all of the available SQL Rest API operations.",
-        "operationId": "ListOperations",
-        "parameters": [
-          {
-            "$ref": "#/parameters/ApiVersionParameter"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "OK. The request has succeeded.",
-            "schema": {
-              "$ref": "#/definitions/OperationListResult"
-            }
-          }
-        }
-      }
     }
   },
   "definitions": {
+    "Resource":{
+      "description":"ARM resource.",
+      "properties":{  
+        "id":{  
+          "readOnly":true,
+          "type":"string",
+          "description":"Resource ID."
+        },
+        "name":{  
+          "readOnly":true,
+          "type":"string",
+          "description":"Resource name."
+        },
+        "type":{  
+          "readOnly":true,
+          "type":"string",
+          "description":"Resource type."
+        }
+      },
+      "x-ms-azure-resource": true
+    },
+    "TrackedResource":{  
+      "description":"ARM tracked top level resource.",
+      "properties":{  
+        "tags":{  
+          "type":"object",
+          "additionalProperties":{  
+            "type":"string"
+          },
+          "x-ms-mutability":[  
+            "read",
+            "create",
+            "update"
+          ],
+          "description":"Resource tags."
+        },
+        "location":{  
+          "type":"string",
+          "x-ms-mutability":[  
+            "read",
+            "create"
+          ],
+          "description":"Resource location."
+        }
+      },
+      "required":[  
+        "location"
+      ],
+      "allOf":[  
+        {  
+          "$ref":"#/definitions/Resource"
+        }
+      ]
+    },
+    "ProxyResource":{  
+      "description":"ARM proxy resource.",
+      "allOf":[  
+        {  
+          "$ref":"#/definitions/Resource"
+        }
+      ]
+    },
     "RecommendedElasticPoolMetric": {
       "properties": {
         "dateTime": {
@@ -1481,14 +1263,14 @@
         "databaseEdition": {
           "readOnly": true,
           "type": "string",
-          "description": "The edition of the recommended elastic pool. The ElasticPoolEditions enumeration contains all the valid editions.",
+          "description": "The edition of the recommended elastic pool. The ElasticPoolEdition enumeration contains all the valid editions.",
           "enum": [
             "Basic",
             "Standard",
             "Premium"
           ],
           "x-ms-enum": {
-            "name": "ElasticPoolEditions",
+            "name": "ElasticPoolEdition",
             "modelAsString": true
           }
         },
@@ -1565,7 +1347,7 @@
       },
       "allOf": [
         {
-          "$ref": "#/definitions/Resource"
+          "$ref": "#/definitions/ProxyResource"
         }
       ],
       "description": "Represents a recommented elastic pool."
@@ -1623,7 +1405,7 @@
             "Premium"
           ],
           "x-ms-enum": {
-            "name": "ElasticPoolEditions",
+            "name": "ElasticPoolEdition",
             "modelAsString": true
           },
           "x-ms-mutability": [ "create", "read" ]
@@ -1666,7 +1448,7 @@
       },
       "allOf": [
         {
-          "$ref": "#/definitions/Resource"
+          "$ref": "#/definitions/TrackedResource"
         }
       ],
       "description": "Represents a database elastic pool."
@@ -1717,7 +1499,9 @@
         "operationId": {
           "readOnly": true,
           "type": "string",
-          "description": "The unique operation ID."
+          "format": "uuid",
+          "description": "The unique operation ID.",
+          "x-nullable": false
         },
         "percentComplete": {
           "readOnly": true,
@@ -1804,6 +1588,14 @@
     },
     "ElasticPoolActivity": {
       "properties": {
+        "location":{  
+          "type":"string",
+          "x-ms-mutability":[  
+            "read",
+            "create"
+          ],
+          "description":"The geo-location where the resource lives"
+        },
         "properties": {
           "$ref": "#/definitions/ElasticPoolActivityProperties",
           "description": "The properties representing the resource.",
@@ -1812,7 +1604,7 @@
       },
       "allOf": [
         {
-          "$ref": "#/definitions/Resource"
+          "$ref": "#/definitions/ProxyResource"
         }
       ],
       "description": "Represents the activity on an elastic pool."
@@ -1868,7 +1660,9 @@
         "operationId": {
           "readOnly": true,
           "type": "string",
-          "description": "The unique operation ID."
+          "format": "uuid",
+          "description": "The unique operation ID.",
+          "x-nullable": false
         },
         "percentComplete": {
           "readOnly": true,
@@ -1917,6 +1711,14 @@
     },
     "ElasticPoolDatabaseActivity": {
       "properties": {
+        "location":{  
+          "type":"string",
+          "x-ms-mutability":[  
+            "read",
+            "create"
+          ],
+          "description":"The geo-location where the resource lives"
+        },
         "properties": {
           "$ref": "#/definitions/ElasticPoolDatabaseActivityProperties",
           "description": "The properties representing the resource.",
@@ -1925,7 +1727,7 @@
       },
       "allOf": [
         {
-          "$ref": "#/definitions/Resource"
+          "$ref": "#/definitions/ProxyResource"
         }
       ],
       "description": "Represents the activity on an elastic pool."
@@ -1943,137 +1745,6 @@
       "required": ["value"],
       "description": "Represents the response to a list elastic pool database activity request."
     },
-    "ServerProperties": {
-      "properties": {
-        "fullyQualifiedDomainName": {
-          "readOnly": true,
-          "type": "string",
-          "description": "The fully qualified domain name of the server."
-        },
-        "version": {
-          "type": "string",
-          "enum": ["2.0", "12.0"],
-          "description": "The version of the server.",
-          "x-ms-enum": {
-              "name": "ServerVersion",
-              "modelAsString": true
-          }
-        },
-        "administratorLogin": {
-          "type": "string",
-          "description": "Administrator username for the server. Can only be specified when the server is being created (and is required for creation).",
-          "x-ms-mutability": [ "create", "read" ]
-        },
-        "administratorLoginPassword": {
-          "type": "string",
-          "description": "The administrator login password (required for server creation).",
-          "x-ms-mutability": [ "create", "update" ]
-        },
-        "externalAdministratorSid": {
-          "readOnly": true,
-          "type": "string",
-          "format": "uuid",
-          "description": "The ID of the Active Azure Directory object with admin permissions on this server. Legacy parameter, always null. To check for Active Directory admin, query .../servers/{serverName}/administrators."
-        },
-        "externalAdministratorLogin": {
-          "readOnly": true,
-          "type": "string",
-          "description": "The display name of the Azure Active Directory object with admin permissions on this server. Legacy parameter, always null. To check for Active Directory admin, query .../servers/{serverName}/administrators"
-        },
-        "state": {
-          "readOnly": true,
-          "type": "string",
-          "description": "The state of the server.",
-          "enum": ["Ready", "Disabled"],
-          "x-ms-enum": {
-              "name": "ServerState"
-          }
-        }
-      },
-      "description": "Represents the properties of a server."
-    },
-    "Server": {
-      "properties": {
-        "kind": {
-          "readOnly": true,
-          "type": "string",
-          "description": "Kind of sql server.  This is metadata used for the Azure portal experience."
-        },
-        "properties": {
-          "$ref": "#/definitions/ServerProperties",
-          "description": "Represents the properties of the resource.",
-          "x-ms-client-flatten": true
-        }
-      },
-      "allOf": [
-        {
-          "$ref": "#/definitions/Resource"
-        }
-      ],
-      "description": "Represents a server."
-    },
-    "ServerListResult": {
-      "properties": {
-        "value": {
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/Server"
-          },
-          "description": "The list of servers."
-        }
-      },
-      "required": ["value"],
-      "description": "Represents the response to a get server request."
-    },
-    "UpgradeRecommendedElasticPoolProperties": {
-      "properties": {
-        "Name": {
-          "type": "string",
-          "description": "The name of the recommended elastic pool being upgraded."
-        },
-        "Edition": {
-          "type": "string",
-          "enum": ["Basic", "Standard", "Premium"],
-          "description": "The target edition for the recommended elastic pool being upgraded.",
-          "x-ms-enum": {
-              "name": "TargetElasticPoolEditions"
-          }
-        },
-        "Dtu": {
-          "type": "integer",
-          "format": "int32",
-          "description": "The DTU guarantee for the recommended elastic pool being upgraded."
-        },
-        "StorageMb": {
-          "type": "integer",
-          "format": "int32",
-          "description": "The storage limit in MB for the recommended elastic pool being upgraded."
-        },
-        "DatabaseDtuMin": {
-          "type": "integer",
-          "format": "int32",
-          "description": "The DTU guarantee for database for the recommended elastic pool being upgraded."
-        },
-        "DatabaseDtuMax": {
-          "type": "integer",
-          "format": "int32",
-          "description": "The DTU cap for database for the recommended elastic pool being upgraded."
-        },
-        "DatabaseCollection": {
-          "type": "array",
-          "items": {
-            "type": "string"
-          },
-          "description": "The list of database names to be put in the recommended elastic pool being upgraded."
-        },
-        "IncludeAllDatabases": {
-          "type": "boolean",
-          "description": "Gets or sets whether all databases to be put in the recommended elastic pool being upgraded."
-        }
-      },
-      "required": ["Name", "Edition"],
-      "description": "Represents the properties of a recommended elastic pool being upgraded."
-    },
     "RecommendedIndexProperties": {
       "properties": {
         "action": {
@@ -2086,7 +1757,7 @@
           ],
           "description": "The proposed index action. You can create a missing index, drop an unused index, or rebuild an existing index to improve its performance.",
           "x-ms-enum": {
-           "name": "RecommendedIndexActions"
+           "name": "RecommendedIndexAction"
           }
         },
         "state": {
@@ -2107,7 +1778,7 @@
           "type": "string",
           "description": "The current recommendation state.",
           "x-ms-enum": {
-           "name": "RecommendedIndexStates"
+           "name": "RecommendedIndexState"
           }
         },
         "created": {
@@ -2133,7 +1804,7 @@
           "type": "string",
           "description": "The type of index (CLUSTERED, NONCLUSTERED, COLUMNSTORE, CLUSTERED COLUMNSTORE)",
           "x-ms-enum": {
-           "name": "RecommendedIndexTypes"
+           "name": "RecommendedIndexType"
           }
         },
         "schema": {
@@ -2197,7 +1868,7 @@
       },
       "allOf": [
         {
-          "$ref": "#/definitions/Resource"
+          "$ref": "#/definitions/ProxyResource"
         }
       ],
       "description": "Represents a database recommended index."
@@ -2212,7 +1883,7 @@
             "Disabled"
           ],
           "x-ms-enum": {
-            "name": "TransparentDataEncryptionStates"
+            "name": "TransparentDataEncryptionStatus"
           }
         }
       },
@@ -2228,7 +1899,7 @@
       },
       "allOf": [
         {
-          "$ref": "#/definitions/SqlSubResource"
+          "$ref": "#/definitions/SubResource"
         }
       ],
       "description": "Represents a database transparent data encryption ."
@@ -2256,31 +1927,12 @@
           "readOnly": true,
           "type": "string",
           "format": "uuid",
-          "enum": [
-            "dd6d99bb-f193-4ec1-86f2-43d3bccbc49c",
-            "f1173c43-91bd-4aaa-973c-54e79e15235b",
-            "1b1ebd4d-d903-4baa-97f9-4ea675f5e928",
-            "455330e1-00cd-488b-b5fa-177c226f28b7",
-            "789681b8-ca10-4eb0-bdf2-e0b050601b40",
-            "7203483a-c4fb-4304-9e9f-17c71c904f5d",
-            "a7d1b92d-c987-4375-b54d-2b1d0e0f5bb0",
-            "a7c4c615-cfb1-464b-b252-925be0a19446",
-            "26e021db-f1f9-4c98-84c6-92af8ef433d7",
-            "29dd7459-4a7c-4e56-be22-f0adda49440d",
-            "c99ac918-dbea-463f-a475-16ec020fdc12",
-            "620323bf-2879-4807-b30d-c2e6d7b3b3aa",
-            "33d0db1f-6893-4210-99f9-463fb9b496a4",
-            "da24338c-a6c9-46c2-a4bf-4ac95b496ae4"
-            ],
-          "description": "The current service level objective ID of the database. This is the ID of the service level objective that is currently active.",
-          "x-ms-enum": {
-            "modelAsString": true,
-            "name": "ServiceObjectiveId"
-          }
+          "description": "The current service level objective ID of the database. This is the ID of the service level objective that is currently active."
         },
         "databaseId": {
           "readOnly": true,
           "type": "string",
+          "format": "uuid",
           "description": "The ID of the database."
         },
         "earliestRestoreDate": {
@@ -2291,7 +1943,7 @@
         },
         "createMode": {
           "type": "string",
-          "description": "Specifies the type of database to create. If createMode is not set to Default, sourceDatabaseId must be specified. If createMode is set to PointInTimeRestore, then restorePointInTime must be specified. If createMode is set to Restore, then sourceDatabaseDeletionDate must be specified. Copy, NonReadableSecondary, and OnlineSecondary are not supported for DataWarehouse edition.",
+          "description": "Specifies the mode of database creation.\n\nDefault: regular database creation.\n\nCopy: creates a database as a copy of an existing database. sourceDatabaseId must be specified as the resource ID of the source database.\n\nOnlineSecondary/NonReadableSecondary: creates a database as a (readable or nonreadable) secondary replica of an existing database. sourceDatabaseId must be specified as the resource ID of the existing primary database.\n\nPointInTimeRestore: Creates a database by restoring a point in time backup of an existing database. sourceDatabaseId must be specified as the resource ID of the existing database, and restorePointInTime must be specified.\n\nRecovery: Creates a database by restoring a geo-replicated backup. sourceDatabaseId must be specified as the recoverable database resource ID to restore.\n\nRestore: Creates a database by restoring a backup of a deleted database. sourceDatabaseId must be specified. If sourceDatabaseId is the database's original resource ID, then sourceDatabaseDeletionDate must be specified. Otherwise sourceDatabaseId must be the restorable dropped database resource ID and sourceDatabaseDeletionDate is ignored. restorePointInTime may also be specified to restore from an earlier point in time.\n\nRestoreLongTermRetentionBackup: Creates a database by restoring from a long term retention vault. recoveryServicesRecoveryPointResourceId must be specified as the recovery point resource ID.\n\nCopy, NonReadableSecondary, OnlineSecondary and RestoreLongTermRetentionBackup are not supported for DataWarehouse edition.",
           "enum": [
             "Copy",
             "Default",
@@ -2299,7 +1951,8 @@
             "OnlineSecondary",
             "PointInTimeRestore",
             "Recovery",
-            "Restore"
+            "Restore",
+            "RestoreLongTermRetentionBackup"
           ],
           "x-ms-enum": {
             "name": "CreateMode",
@@ -2309,18 +1962,29 @@
         },
         "sourceDatabaseId": {
           "type": "string",
-          "description": "Conditional. If createMode is not set to Default, then this value must be specified. Specifies the resource ID of the source database. If createMode is NonReadableSecondary or OnlineSecondary, the name of the source database must be the same as this new database.",
+          "description": "Conditional. If createMode is Copy, NonReadableSecondary, OnlineSecondary, PointInTimeRestore, Recovery, or Restore, then this value is required. Specifies the resource ID of the source database. If createMode is NonReadableSecondary or OnlineSecondary, the name of the source database must be the same as the new database being created.",
+          "x-ms-mutability": [ "create" ]
+        },
+        "sourceDatabaseDeletionDate": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Conditional. If createMode is Restore and sourceDatabaseId is the deleted database's original resource id when it existed (as opposed to its current restorable dropped database id), then this value is required. Specifies the time that the database was deleted.",
           "x-ms-mutability": [ "create" ]
         },
         "restorePointInTime": {
           "type": "string",
           "format": "date-time",
-          "description": "Conditional. If createMode is set to PointInTimeRestore, then this value must be specified. Specifies the point in time (ISO8601 format) of the source database that will be restored to create the new database. Must be greater than or equal to the source database's earliestRestoreDate value.",
+          "description": "Conditional. If createMode is PointInTimeRestore, this value is required. If createMode is Restore, this value is optional. Specifies the point in time (ISO8601 format) of the source database that will be restored to create the new database. Must be greater than or equal to the source database's earliestRestoreDate value.",
+          "x-ms-mutability": [ "create" ]
+        },
+        "recoveryServicesRecoveryPointResourceId": {
+          "type": "string",
+          "description": "Conditional. If createMode is RestoreLongTermRetentionBackup, then this value is required. Specifies the resource ID of the recovery point to restore from.",
           "x-ms-mutability": [ "create" ]
         },
         "edition": {
           "type": "string",
-          "description": "The edition of the database. The DatabaseEditions enumeration contains all the valid editions. If createMode is NonReadableSecondary or OnlineSecondary, this value is ignored.",
+          "description": "The edition of the database. The DatabaseEditions enumeration contains all the valid editions. If createMode is NonReadableSecondary or OnlineSecondary, this value is ignored. To see possible values, query the capabilities API (/subscriptions/{subscriptionId}/providers/Microsoft.Sql/locations/{locationID}/capabilities) referred to by operationId: \"Capabilities_ListByLocation.\"",
           "enum": [
             "Web",
             "Business",
@@ -2330,41 +1994,22 @@
             "Free",
             "Stretch",
             "DataWarehouse",
-            "System"
+            "System",
+            "System2"
           ],
           "x-ms-enum": {
-            "name": "DatabaseEditions",
+            "name": "DatabaseEdition",
             "modelAsString": true
           }
         },
         "maxSizeBytes": {
           "type": "string",
-          "description": "The max size of the database expressed in bytes. If createMode is not Default, this value is ignored. Note: Only the following sizes are supported (in addition to limitations being placed on each edition): { 100 MB | 500 MB |1 GB | 5 GB | 10 GB | 20 GB | 30 GB … 150 GB | 200 GB … 500 GB }"
+          "description": "The max size of the database expressed in bytes. If createMode is not Default, this value is ignored. To see possible values, query the capabilities API (/subscriptions/{subscriptionId}/providers/Microsoft.Sql/locations/{locationID}/capabilities) referred to by operationId: \"Capabilities_ListByLocation.\""
         },
         "requestedServiceObjectiveId": {
           "type": "string",
           "format": "uuid",
-          "enum": [
-            "dd6d99bb-f193-4ec1-86f2-43d3bccbc49c",
-            "f1173c43-91bd-4aaa-973c-54e79e15235b",
-            "1b1ebd4d-d903-4baa-97f9-4ea675f5e928",
-            "455330e1-00cd-488b-b5fa-177c226f28b7",
-            "789681b8-ca10-4eb0-bdf2-e0b050601b40",
-            "7203483a-c4fb-4304-9e9f-17c71c904f5d",
-            "a7d1b92d-c987-4375-b54d-2b1d0e0f5bb0",
-            "a7c4c615-cfb1-464b-b252-925be0a19446",
-            "26e021db-f1f9-4c98-84c6-92af8ef433d7",
-            "29dd7459-4a7c-4e56-be22-f0adda49440d",
-            "c99ac918-dbea-463f-a475-16ec020fdc12",
-            "620323bf-2879-4807-b30d-c2e6d7b3b3aa",
-            "33d0db1f-6893-4210-99f9-463fb9b496a4",
-            "da24338c-a6c9-46c2-a4bf-4ac95b496ae4"
-            ],
-          "description": "The configured service level objective ID of the database. This is the service level objective that is in the process of being applied to the database. Once successfully updated, it will match the value of currentServiceObjectiveId property. If requestedServiceObjectiveId and requestedServiceObjectiveName are both updated, the value of requestedServiceObjectiveId overrides the value of requestedServiceObjectiveName.",
-          "x-ms-enum": {
-            "modelAsString": true,
-            "name": "ServiceObjectiveId"
-          }
+          "description": "The configured service level objective ID of the database. This is the service level objective that is in the process of being applied to the database. Once successfully updated, it will match the value of currentServiceObjectiveId property. If requestedServiceObjectiveId and requestedServiceObjectiveName are both updated, the value of requestedServiceObjectiveId overrides the value of requestedServiceObjectiveName. To see possible values, query the capabilities API (/subscriptions/{subscriptionId}/providers/Microsoft.Sql/locations/{locationID}/capabilities) referred to by operationId: \"Capabilities_ListByLocation.\""
         },
         "requestedServiceObjectiveName": {
           "type": "string",
@@ -2382,13 +2027,14 @@
             "P11",
             "P15",
             "System",
+            "System2",
             "ElasticPool"
             ],
           "x-ms-enum": {
             "modelAsString": true,
             "name": "ServiceObjectiveName"
           },
-          "description": "The name of the configured service level objective of the database. This is the service level objective that is in the process of being applied to the database. Once successfully updated, it will match the value of serviceLevelObjective property."
+          "description": "The name of the configured service level objective of the database. This is the service level objective that is in the process of being applied to the database. Once successfully updated, it will match the value of serviceLevelObjective property. To see possible values, query the capabilities API (/subscriptions/{subscriptionId}/providers/Microsoft.Sql/locations/{locationID}/capabilities) referred to by operationId: \"Capabilities_ListByLocation.\""
         },
         "serviceLevelObjective": {
           "readOnly": true,
@@ -2407,6 +2053,7 @@
             "P11",
             "P15",
             "System",
+            "System2",
             "ElasticPool"
             ],
           "x-ms-enum": {
@@ -2436,14 +2083,6 @@
             "$ref": "#/definitions/ServiceTierAdvisor"
           },
           "description": "The list of service tier advisors for this database. Expanded property"
-        },
-        "schemas": {
-          "readOnly": true,
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/Schema"
-          },
-          "description": "The schemas from this database."
         },
         "transparentDataEncryption": {
           "readOnly": true,
@@ -2508,7 +2147,7 @@
       },
       "allOf": [
         {
-          "$ref": "#/definitions/Resource"
+          "$ref": "#/definitions/TrackedResource"
         }
       ],
       "description": "Represents a database."
@@ -2637,7 +2276,8 @@
           "readOnly": true,
           "type": "number",
           "format": "double",
-          "description": "Gets or sets confidence for service tier advisor."
+          "description": "Gets or sets confidence for service tier advisor.",
+          "x-nullable": false
         }
       },
       "description": "Represents the properties of a Service Tier Advisor."
@@ -2653,7 +2293,7 @@
       },
       "allOf": [
         {
-          "$ref": "#/definitions/SqlSubResource"
+          "$ref": "#/definitions/SubResource"
         }
       ],
       "description": "Represents a Service Tier Advisor."
@@ -2677,102 +2317,31 @@
             "P11",
             "P15",
             "System",
+            "System2",
             "ElasticPool"
             ],
-            "x-ms-enum": {
-            "modelAsString": true,
-            "name": "ServiceObjectiveName"
-          }
+          "x-ms-enum": {
+              "modelAsString": true,
+              "name": "ServiceObjectiveName"
+          },
+          "readOnly": true
         },
         "serviceLevelObjectiveId": {
           "type": "string",
           "format": "uuid",
           "description": "The serviceLevelObjectiveId for SLO usage metric.",
-          "enum": [
-            "dd6d99bb-f193-4ec1-86f2-43d3bccbc49c",
-            "f1173c43-91bd-4aaa-973c-54e79e15235b",
-            "1b1ebd4d-d903-4baa-97f9-4ea675f5e928",
-            "455330e1-00cd-488b-b5fa-177c226f28b7",
-            "789681b8-ca10-4eb0-bdf2-e0b050601b40",
-            "7203483a-c4fb-4304-9e9f-17c71c904f5d",
-            "a7d1b92d-c987-4375-b54d-2b1d0e0f5bb0",
-            "a7c4c615-cfb1-464b-b252-925be0a19446",
-            "26e021db-f1f9-4c98-84c6-92af8ef433d7",
-            "29dd7459-4a7c-4e56-be22-f0adda49440d",
-            "c99ac918-dbea-463f-a475-16ec020fdc12",
-            "620323bf-2879-4807-b30d-c2e6d7b3b3aa",
-            "33d0db1f-6893-4210-99f9-463fb9b496a4",
-            "da24338c-a6c9-46c2-a4bf-4ac95b496ae4"
-            ],
-            "x-ms-enum": {
-            "modelAsString": true,
-            "name": "ServiceObjectiveId"
-          }
+          "readOnly": true,
+          "x-nullable": false
         },
         "inRangeTimeRatio": {
           "type": "number",
           "format": "double",
-          "description": "Gets or sets inRangeTimeRatio for SLO usage metric."
+          "description": "Gets or sets inRangeTimeRatio for SLO usage metric.",
+          "readOnly": true,
+          "x-nullable": false
         }
       },
       "description": "Represents a Slo Usage Metric."
-    },
-    "UpgradeHint": {
-      "properties": {
-        "targetServiceLevelObjective": {
-          "type": "string",
-          "description": "TargetServiceLevelObjective for upgrade hint."
-        },
-        "targetServiceLevelObjectiveId": {
-          "type": "string",
-          "format": "uuid",
-          "description": "TargetServiceLevelObjectiveId for upgrade hint."
-        }
-      },
-      "description": "Represents a Upgrade Hint."
-    },
-    "TableProperties": {
-      "properties": {
-        "tableType": {
-          "readOnly": true,
-          "type": "string",
-          "description": "The type of database table.",
-          "enum": [
-            "BaseTable",
-            "View"
-          ],
-          "x-ms-enum": {
-            "name": "TableType"
-          }
-        },
-        "columns": {
-          "readOnly": true,
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/Column"
-          },
-          "description": "The columns from this table."
-        },
-        "recommendedIndexes": {
-          "readOnly": true,
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/RecommendedIndex"
-          },
-          "description": "The recommended indices for this table."
-        }
-      },
-      "description": "Represents the properties of a database table."
-    },
-    "ColumnProperties": {
-      "properties": {
-        "columnType": {
-          "readOnly": true,
-          "type": "string",
-          "description": "The type of database table column."
-        }
-      },
-      "description": "Represents the properties of a database table column."
     },
     "OperationImpact": {
       "properties": {
@@ -2800,121 +2369,6 @@
         }
       },
       "description": "Represents impact of an operation, both in absolute and relative terms."
-    },
-    "Column": {
-      "properties": {
-        "properties": {
-          "$ref": "#/definitions/ColumnProperties",
-          "description": "The properties representing the resource.",
-          "x-ms-client-flatten": true
-        }
-      },
-      "allOf": [
-        {
-          "$ref": "#/definitions/Resource"
-        }
-      ],
-      "description": "Represents a database table column."
-    },
-    "Table": {
-      "properties": {
-        "properties": {
-          "$ref": "#/definitions/TableProperties",
-          "description": "The properties representing the resource.",
-          "x-ms-client-flatten": true
-        }
-      },
-      "allOf": [
-        {
-          "$ref": "#/definitions/Resource"
-        }
-      ],
-      "description": "Represents a database table."
-    },
-    "SchemaProperties": {
-      "properties": {
-        "tables": {
-          "readOnly": true,
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/Table"
-          },
-          "description": "The tables from this database."
-        }
-      },
-      "description": "Represents the properties of a database schema."
-    },
-    "Schema": {
-      "properties": {
-        "properties": {
-          "$ref": "#/definitions/SchemaProperties",
-          "description": "The properties representing the resource.",
-          "x-ms-client-flatten": true
-        }
-      },
-      "allOf": [
-        {
-          "$ref": "#/definitions/Resource"
-        }
-      ],
-      "description": "Represents a database schema."
-    },
-    "RestorePointProperties": {
-      "properties": {
-        "restorePointType": {
-          "readOnly": true,
-          "type": "string",
-          "description": "The restore point type of the database restore point.",
-          "enum": [
-            "DISCRETE",
-            "CONTINUOUS"
-          ],
-          "x-ms-enum": {
-            "name": "RestorePointTypes"
-          }
-        },
-        "restorePointCreationDate": {
-          "readOnly": true,
-          "type": "string",
-          "format": "date-time",
-          "description": "Restore point creation time (ISO8601 format). Populated when restorePointType = CONTINUOUS. Null otherwise."
-        },
-        "earliestRestoreDate": {
-          "readOnly": true,
-          "type": "string",
-          "format": "date-time",
-          "description": "Earliest restore time (ISO8601 format). Populated when restorePointType = DISCRETE. Null otherwise."
-        }
-      },
-      "description": "Represents the properties of a database restore point."
-    },
-    "RestorePoint": {
-      "properties": {
-        "properties": {
-          "$ref": "#/definitions/RestorePointProperties",
-          "description": "The properties representing the restore point.",
-          "x-ms-client-flatten": true
-        }
-      },
-      "allOf": [
-        {
-          "$ref": "#/definitions/Resource"
-        }
-      ],
-      "description": "Represents a database restore point."
-    },
-    "RestorePointListResult": {
-      "properties": {
-        "value": {
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/RestorePoint"
-          },
-          "description": "The list of a given database restore points."
-        }
-      },
-      "required": ["value"],
-      "description": "Represents the response to a list database restore points request."
     },
     "DatabaseMetric": {
       "properties": {
@@ -2955,7 +2409,7 @@
       "description": "Represents database metrics.",
       "allOf": [
         {
-          "$ref": "#/definitions/SqlSubResource"
+          "$ref": "#/definitions/SubResource"
         }
       ]
     },
@@ -3051,12 +2505,14 @@
         "isDefault": {
           "readOnly": true,
           "type": "boolean",
-          "description": "Gets whether the service level objective is the default service objective."
+          "description": "Gets whether the service level objective is the default service objective.",
+          "x-nullable": false
         },
         "isSystem": {
           "readOnly": true,
           "type": "boolean",
-          "description": "Gets whether the service level objective is a system service objective."
+          "description": "Gets whether the service level objective is a system service objective.",
+          "x-nullable": false
         },
         "description": {
           "readOnly": true,
@@ -3066,7 +2522,8 @@
         "enabled": {
           "readOnly": true,
           "type": "boolean",
-          "description": "Gets whether the service level objective is enabled."
+          "description": "Gets whether the service level objective is enabled.",
+          "x-nullable": false
         }
       },
       "description": "Represents the properties of a database service objective."
@@ -3081,7 +2538,7 @@
       },
       "allOf": [
         {
-          "$ref": "#/definitions/SqlSubResource"
+          "$ref": "#/definitions/SubResource"
         }
       ],
       "description": "Represents a database service objective."
@@ -3110,7 +2567,7 @@
             "Decrypting"
           ],
           "x-ms-enum": {
-            "name": "TransparentDataEncryptionActivityStates",
+            "name": "TransparentDataEncryptionActivityStatus",
             "modelAsString": true
           }
         },
@@ -3133,7 +2590,7 @@
       },
       "allOf": [
         {
-          "$ref": "#/definitions/SqlSubResource"
+          "$ref": "#/definitions/SubResource"
         }
       ],
       "description": "Represents a database transparent data encryption Scan."
@@ -3151,42 +2608,7 @@
       "required": ["value"],
       "description": "Represents the response to a list database transparent data encryption activity request."
     },
-    "Resource": {
-      "description": "Resource properties",
-      "properties": {
-        "name": {
-          "readOnly": true,
-          "type": "string",
-          "description": "Resource name"
-        },
-        "id": {
-          "readOnly": true,
-          "type": "string",
-          "description": "Resource ID"
-        },
-        "type": {
-          "readOnly": true,
-          "type": "string",
-          "description": "Resource type"
-        },
-        "location": {
-          "type": "string",
-          "description": "Resource location"
-        },
-        "tags": {
-          "type": "object",
-          "additionalProperties": {
-            "type": "string"
-          },
-          "description": "Resource tags"
-        }
-      },
-      "required": [
-        "location"
-      ],
-      "x-ms-azure-resource": true
-    },
-    "SqlSubResource": {
+    "SubResource": {
       "description": "Subresource properties",
       "properties": {
         "name": {
@@ -3198,49 +2620,6 @@
           "readOnly": true,
           "type": "string",
           "description": "The resource ID."
-        }
-      }
-    },
-    "OperationListResult": {
-     "description": "Result of the request to list SQL operations. It contains a list of operations and a URL link to get the next set of results.",
-      "properties": {
-        "value": {
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/Operation"
-          },
-          "description": "List of SQL operations supported by the SQL resource provider."
-        },
-        "nextLink": {
-          "type": "string",
-          "description": "URL to get the next set of operation list results if there are any."
-        }
-      }
-    },
-    "Operation": {
-      "description": "SQL REST API operation definition.",
-      "type": "object",
-      "properties": {
-        "name": {
-          "description": "Operation name: {provider}/{resource}/{operation}",
-          "type": "string"
-        },
-        "display": {
-          "description": "Display metadata associated with the operation.",
-          "properties": {
-            "provider": {
-              "description": "Service provider: Microsoft SQL Database.",
-              "type": "string"
-            },
-            "resource": {
-              "description": "Resource on which the operation is performed: Server, Database, etc.",
-              "type": "string"
-            },
-            "operation": {
-              "description": "Type of operation: get, read, delete, etc.",
-              "type": "string"
-            }
-          }
         }
       }
     }
@@ -3274,6 +2653,14 @@
       "required": true,
       "type": "string",
       "description": "The name of the server.",
+      "x-ms-parameter-location": "method"
+    },
+    "DatabaseExpandParameter": {
+      "name": "$expand",
+      "in": "query",
+      "required": false,
+      "type": "string",
+      "description": "A comma separated list of child objects to expand in the response. Possible properties: serviceTierAdvisors, transparentDataEncryption.",
       "x-ms-parameter-location": "method"
     }
   }

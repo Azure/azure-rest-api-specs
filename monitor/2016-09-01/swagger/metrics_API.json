@@ -14,6 +14,24 @@
   "produces": [
     "application/json"
   ],
+  "security": [
+    {
+      "azure_auth": [
+        "user_impersonation"
+      ]
+    }
+  ],
+  "securityDefinitions": {
+    "azure_auth": {
+      "type": "oauth2",
+      "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
+      "flow": "implicit",
+      "description": "Azure Active Directory OAuth2 Flow",
+      "scopes": {
+        "user_impersonation": "impersonate your user account"
+      }
+    }
+  },
   "paths": {
     "/{resourceUri}/providers/microsoft.insights/metrics": {
       "get": {
@@ -21,7 +39,7 @@
           "Metrics"
         ],
         "operationId": "Metrics_List",
-        "description": "**Lists the metric values for a resource**.<br>The **$filter** is used to reduce the set of metric data returned. Some common properties for this expression will be: name.value, aggregationType, startTime, endTime, timeGrain. The filter expression uses these properties with comparison operators (eg. eq, gt, lt) and multiple expressions can be combined with parentheses and 'and/or' operators.<br>Some example filter expressions are:<br>- $filter=(name.value eq 'RunsSucceeded') and aggregationType eq 'Total' and startTime eq 2016-02-20 and endTime eq 2016-02-21 and timeGrain eq duration'PT1M',<br>- $filter=(name.value eq 'RunsSucceeded') and (aggregationType eq 'Total' or aggregationType eq 'Average') and startTime eq 2016-02-20 and endTime eq 2016-02-21 and timeGrain eq duration'PT1H',<br>- $filter=(name.value eq 'ActionsCompleted' or name.value eq 'RunsSucceeded') and (aggregationType eq 'Total' or aggregationType eq 'Average') and startTime eq 2016-02-20 and endTime eq 2016-02-21 and timeGrain eq duration'PT1M'.<br><br> >**NOTE**: When a metrics query comes in with multiple metrics, but with no aggregation types defined, the service will pick the Primary aggregation type of the first metrics to be used as the default aggregation type for all the metrics.",
+        "description": "Lists the metric values for a resource.<br>The **$filter** is used to reduce the set of metric data returned. Some common properties for this expression will be: name.value, aggregationType, startTime, endTime, timeGrain.<br>The filter expression uses these properties with comparison operators (eg. eq, gt, lt) and multiple expressions can be combined with parentheses and 'and/or' logical operators.<br>Some example filter expressions are:<br>- $filter=(name.value eq 'RunsSucceeded') and aggregationType eq 'Total' and startTime eq 2016-02-20 and endTime eq 2016-02-21 and timeGrain eq duration'PT1M',<br>- $filter=(name.value eq 'RunsSucceeded') and (aggregationType eq 'Total' or aggregationType eq 'Average') and startTime eq 2016-02-20 and endTime eq 2016-02-21 and timeGrain eq duration'PT1H',<br>- $filter=(name.value eq 'ActionsCompleted' or name.value eq 'RunsSucceeded') and (aggregationType eq 'Total' or aggregationType eq 'Average') and startTime eq 2016-02-20 and endTime eq 2016-02-21 and timeGrain eq duration'PT1M'.<br><br> >**NOTE**: When a metrics query comes in with multiple metrics, but with no aggregation types defined, the service will pick the Primary aggregation type of the first metrics to be used as the default aggregation type for all the metrics.",
         "parameters": [
           {
             "$ref": "#/parameters/ResourceUriParameter"            
@@ -34,6 +52,12 @@
           }
         ],
         "responses": {
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          },
           "200": {
             "description": "Successful request to get the list of metric values",
             "schema": {
@@ -210,6 +234,20 @@
       },
       "required": ["value"],
       "description": "The collection of metric value sets."
+    },
+    "ErrorResponse": {
+      "description": "Describes the format of Error response.",
+      "type": "object",
+      "properties": {
+        "code": {
+          "description": "Error code",
+          "type": "string"
+        },
+        "message": {
+          "description": "Error message indicating why the operation failed.",
+          "type": "string"
+        }
+      }
     }
   },
   "parameters": {

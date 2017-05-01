@@ -21,7 +21,7 @@
                 "tags": [
                     "ImportExport"
                 ],
-                "operationId": "Servers_ImportDatabase",
+                "operationId": "Databases_Import",
                 "description": "Imports a bacpac into a new database. ",
                 "parameters": [
                     {
@@ -41,16 +41,16 @@
                         "in": "body",
                         "required": true,
                         "schema": {
-                            "$ref": "#/definitions/ImportRequestParameters"
+                            "$ref": "#/definitions/ImportRequest"
                         },
                         "description": "The required parameters for importing a Bacpac into a database."
                     }
                 ],
                 "responses": {
-                    "201": {
-                        "description": "Created",
+                    "200": {
+                        "description": "OK",
                         "schema": {
-                        "$ref": "#/definitions/ImportExportOperationResponse"
+                        "$ref": "#/definitions/ImportExportResponse"
                         }
                     },
                     "202": {
@@ -58,8 +58,10 @@
                     }
                 },
                 "x-ms-examples": {
-                    "Import bacpac into new database Max": { "$ref": "../examples/DatabaseCreateImportMax.json" },
-                    "Import bacpac into new database Min": { "$ref": "../examples/DatabaseCreateImportMin.json" }
+                    "Import bacpac into new database Max with storage key": { "$ref": "../examples/DatabaseCreateImportMaxStorageKey.json" },
+                    "Import bacpac into new database Min with storage key": { "$ref": "../examples/DatabaseCreateImportMinStorageKey.json" },
+                    "Import bacpac into new database Max with SAS key": { "$ref": "../examples/DatabaseCreateImportMaxSasKey.json" },
+                    "Import bacpac into new database Min with SAS key": { "$ref": "../examples/DatabaseCreateImportMinSasKey.json" }
                 },
                 "x-ms-long-running-operation": true
             }
@@ -69,8 +71,8 @@
                 "tags": [
                     "ImportExport"
                 ],
-                "operationId": "Databases_Import",
-                "description": "Imports a bacpac into an existing database. The existing database must be empty.",
+                "operationId": "Databases_CreateImportOperation",
+                "description": "Creates an import operation that imports a bacpac into an existing database. The existing database must be empty.",
                 "parameters": [
                     {
                         "$ref": "#/parameters/ApiVersionParameter"
@@ -96,16 +98,16 @@
                         "in": "body",
                         "required": true,
                         "schema": {
-                            "$ref": "#/definitions/ImportExtensionRequestParameters"
+                            "$ref": "#/definitions/ImportExtensionRequest"
                         },
                         "description": "The required parameters for importing a Bacpac into a database."
                     }
                 ],
                 "responses": {
-                    "200": {
+                    "201": {
                         "description": "OK",
                         "schema": {
-                        "$ref": "#/definitions/ImportExportOperationResponse"
+                        "$ref": "#/definitions/ImportExportResponse"
                         }
                     },
                     "202": {
@@ -113,8 +115,10 @@
                     }
                 },
                 "x-ms-examples": {
-                    "Import bacpac into an existing database Max": { "$ref": "../examples/DatabaseUpdateImportMax.json" },
-                    "Import bacpac into an existing database Min": { "$ref": "../examples/DatabaseUpdateImportMin.json" }
+                    "Import bacpac into an existing database Max with storage key": { "$ref": "../examples/DatabaseUpdateImportMaxStorageKey.json" },
+                    "Import bacpac into an existing database Min with storage key": { "$ref": "../examples/DatabaseUpdateImportMinStorageKey.json" },
+                    "Import bacpac into an existing database Max with SAS key": { "$ref": "../examples/DatabaseUpdateImportMaxSasKey.json" },
+                    "Import bacpac into an existing database Min with SAS key": { "$ref": "../examples/DatabaseUpdateImportMinSasKey.json" }
                 },
                 "x-ms-long-running-operation": true
             }
@@ -151,7 +155,7 @@
                         "in": "body",
                         "required": true,
                         "schema": {
-                            "$ref": "#/definitions/ExportRequestParameters"
+                            "$ref": "#/definitions/ExportRequest"
                         },
                         "description": "The required parameters for exporting a database."
                     }
@@ -160,7 +164,7 @@
                     "200": {
                         "description": "OK",
                         "schema": {
-                        "$ref": "#/definitions/ImportExportOperationResponse"
+                        "$ref": "#/definitions/ImportExportResponse"
                         }
                     },
                     "202": {
@@ -168,161 +172,96 @@
                     }
                 },
                 "x-ms-examples": {
-                    "Export a database into a new bacpac file": { "$ref": "../examples/DatabaseExport.json" }
+                    "Export a database into a new bacpac file with storage key": { "$ref": "../examples/DatabaseExportStorageKey.json" },
+                    "Export a database into a new bacpac file with SAS key": { "$ref": "../examples/DatabaseExportSasKey.json" }
                 },
                 "x-ms-long-running-operation": true
-            }
-        },
-        "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/servers/{serverName}/importExportOperationResults": {
-            "get": {
-                "tags": [
-                    "ImportExport"
-                ],
-                "operationId": "ImportExportOperations_ListByServer",
-                "description": "The status of an import operation given the operation ID.",
-                "parameters": [
-                    {
-                        "$ref": "#/parameters/ApiVersionParameter"
-                    },
-                    {
-                        "$ref": "#/parameters/SubscriptionIdParameter"
-                    },
-                    {
-                        "$ref": "#/parameters/ResourceGroupParameter"
-                    },
-                    {
-                        "$ref": "#/parameters/ServerNameParameter"
-                    }
-                ],
-                "responses": {
-                    "200": {
-                        "description": "OK",
-                        "schema": {
-                            "$ref": "#/definitions/ImportExportOperationListResponse"
-                        }
-                    }
-                },
-                "x-ms-examples": {
-                    "List Import/Export operations by server": { "$ref": "../examples/ImportExportOperationListByServer.json" }
-                },
-                "x-ms-pageable": {
-                "nextLinkName": null
-                }
-            }
-        },
-        "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/servers/{serverName}/importExportOperationResults/{operationId}": {
-            "get": {
-                "tags": [
-                    "ImportExport"
-                ],
-                "operationId": "ImportExportOperations_GetByServer",
-                "description": "The  of an import operation given the operation ID.",
-                "parameters": [
-                    {
-                        "$ref": "#/parameters/ApiVersionParameter"
-                    },
-                    {
-                        "$ref": "#/parameters/SubscriptionIdParameter"
-                    },
-                    {
-                        "$ref": "#/parameters/ResourceGroupParameter"
-                    },
-                    {
-                        "$ref": "#/parameters/ServerNameParameter"
-                    },
-                    {
-                        "name": "operationId",
-                        "in": "path",
-                        "required": true,
-                        "type": "string",
-                        "format": "uuid",
-                        "description": "The operation ID associated with the operation."
-                    }
-                ],
-                "responses": {
-                    "200": {
-                        "description": "OK",
-                        "schema": {
-                            "$ref": "#/definitions/ImportExportOperationResponse"
-                        }
-                    }
-                },
-                "x-ms-examples": {
-                    "Get Import/Export operations by server": { "$ref": "../examples/ImportExportOperationGetByServer.json" }
-                }
-            }
-        },
-        "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/servers/{serverName}/databases/{databaseName}/importExportOperationResults/{operationId}": {
-            "get": {
-                "tags": [
-                    "ImportExport"
-                ],
-                "operationId": "ImportExportOperations_GetByDatabase",
-                "description": "The status of an import or export operation on a database given the operation ID.",
-                "parameters": [
-                    {
-                        "$ref": "#/parameters/ApiVersionParameter"
-                    },
-                    {
-                        "$ref": "#/parameters/SubscriptionIdParameter"
-                    },
-                    {
-                        "$ref": "#/parameters/ResourceGroupParameter"
-                    },
-                    {
-                        "$ref": "#/parameters/ServerNameParameter"
-                    },
-                    {
-                        "name": "databaseName",
-                        "in": "path",
-                        "required": true,
-                        "type": "string",
-                        "description": "The name of the database"
-                    },
-                    {
-                        "name": "operationId",
-                        "in": "path",
-                        "required": true,
-                        "type": "string",
-                        "format": "uuid",
-                        "description": "The operation ID associated with the operation."
-                    }
-                ],
-                "responses": {
-                    "200": {
-                        "description": "OK",
-                        "schema": {
-                            "$ref": "#/definitions/ImportExportOperationResponse"
-                        }
-                    }
-                },
-                "x-ms-examples": {
-                    "Get Import/Export operations by database": { "$ref": "../examples/ImportExportOperationGetByDatabase.json" }
-                }
             }
         }
     },
     "definitions": {
+    "Resource":{
+      "description":"ARM resource.",
+      "properties":{  
+        "id":{  
+          "readOnly":true,
+          "type":"string",
+          "description":"Resource ID."
+        },
+        "name":{  
+          "readOnly":true,
+          "type":"string",
+          "description":"Resource name."
+        },
+        "type":{  
+          "readOnly":true,
+          "type":"string",
+          "description":"Resource type."
+        }
+      },
+      "x-ms-azure-resource": true
+    },
+    "TrackedResource":{  
+      "description":"ARM tracked top level resource.",
+      "properties":{  
+        "tags":{  
+          "type":"object",
+          "additionalProperties":{  
+            "type":"string"
+          },
+          "x-ms-mutability":[  
+            "read",
+            "create",
+            "update"
+          ],
+          "description":"Resource tags."
+        },
+        "location":{  
+          "type":"string",
+          "x-ms-mutability":[  
+            "read",
+            "create"
+          ],
+          "description":"Resource location."
+        }
+      },
+      "required":[  
+        "location"
+      ],
+      "allOf":[  
+        {  
+          "$ref":"#/definitions/Resource"
+        }
+      ]
+    },
+    "ProxyResource":{  
+      "description":"ARM proxy resource.",
+      "allOf":[  
+        {  
+          "$ref":"#/definitions/Resource"
+        }
+      ]
+    },
         "ImportExtensionProperties": {
             "properties": {
                 "operationMode": {
                     "type": "string",
-                    "description": "The type of Import/Export operation being performed.  This is always Import.",
-                    "enum":["Import"],
+                    "description": "The type of import operation being performed. This is always Import.",
+                    "enum": ["Import"],
                     "x-ms-enum":{
-                        "name": "OperationMode"
+                        "name": "ImportOperationMode"
                     }
                 }
             },
             "required": ["operationMode"],
             "allOf": [
                 {
-                    "$ref": "#/definitions/ExportRequestParameters"
+                    "$ref": "#/definitions/ExportRequest"
                 }
             ],
             "description": "Represents the properties for an import operation"
         },
-        "ImportExtensionRequestParameters": {
+        "ImportExtensionRequest": {
             "properties": {
                 "name": {
                     "type": "string",
@@ -340,48 +279,20 @@
             },
             "description": "Import database parameters."
         },
-        "ImportExportOperationListResponse": {
+        "ImportExportResponse": {
             "properties": {
-                "value": {
-                    "type": "array",
-                    "items": {
-                        "$ref": "#/definitions/ImportExportOperationResponse"
-                    }
-                }
-            },
-            "required": ["value"],
-            "description": "Response for Import/Export List operation."
-        },
-        "ImportExportOperationResponse": {
-            "properties": {
-                "id": {
-                    "type": "string",
-                    "readOnly": true,
-                    "description": "The id returned from the server."
-                },
-                "name": {
-                    "type": "string",
-                    "readOnly": true,
-                    "description": "The name returned from the server."
-                },
-                "type": {
-                    "type": "string",
-                    "readOnly": true,
-                    "description": "The type returned from the server."
-                },
                 "properties":
                 {
-                    "allOf": [
-                        {
-                        "$ref": "#/definitions/ImportExportOperationResponseProperties"
-                        }
-                    ],
+                    "$ref": "#/definitions/ImportExportResponseProperties",
                     "x-ms-client-flatten": true
                 }
             },
+            "allOf": [{
+                "$ref": "#/definitions/ProxyResource"
+            }],
             "description": "Response for Import/Export Get operation."
         },
-        "ImportExportOperationResponseProperties": {
+        "ImportExportResponseProperties": {
             "properties": {
                 "requestType": {
                     "type": "string",
@@ -432,7 +343,7 @@
             },
             "description": "Response for Import/Export Status operation."
         },
-        "ImportRequestParameters": {
+        "ImportRequest": {
             "properties": {
                 "databaseName": {
                     "type": "string",
@@ -440,11 +351,48 @@
                 },
                 "edition": {
                     "type": "string",
-                    "description": "The edition for the database being created."
+                    "description": "The edition for the database being created.",
+                    "enum": [
+                        "Web",
+                        "Business",
+                        "Basic",
+                        "Standard",
+                        "Premium",
+                        "Free",
+                        "Stretch",
+                        "DataWarehouse",
+                        "System",
+                        "System2"
+                    ],
+                    "x-ms-enum": {
+                        "name": "DatabaseEdition",
+                        "modelAsString": true
+                    }
                 },
                 "serviceObjectiveName": {
                     "type": "string",
-                    "description": "The name of the service objective to assign to the database."
+                    "description": "The name of the service objective to assign to the database.",
+                    "enum": [
+                        "Basic",
+                        "S0",
+                        "S1",
+                        "S2",
+                        "S3",
+                        "P1",
+                        "P2",
+                        "P3",
+                        "P4",
+                        "P6",
+                        "P11",
+                        "P15",
+                        "System",
+                        "System2",
+                        "ElasticPool"
+                        ],
+                    "x-ms-enum": {
+                        "modelAsString": true,
+                        "name": "ServiceObjectiveName"
+                    }
                 },
                 "maxSizeBytes": {
                     "type": "string",
@@ -453,17 +401,17 @@
             },
             "allOf": [
                 {
-                    "$ref": "#/definitions/ExportRequestParameters"
+                    "$ref": "#/definitions/ExportRequest"
                 }
             ],
             "required":["databaseName","edition","serviceObjectiveName","maxSizeBytes"],
             "description": "Import database parameters."
         },
-        "ExportRequestParameters": {
+        "ExportRequest": {
             "properties": {
                 "storageKeyType": {
                     "type": "string",
-                    "description": "The type of the storage key to use. Valid values are StorageAccessKey and SharedAccessKey.",
+                    "description": "The type of the storage key to use.",
                     "enum": ["StorageAccessKey","SharedAccessKey"],
                     "x-ms-enum":{
                         "name": "StorageKeyType"
@@ -471,7 +419,7 @@
                 },
                 "storageKey": {
                     "type": "string",
-                    "description": "The storage key to use."
+                    "description": "The storage key to use.  If storage key type is SharedAccessKey, it must be preceded with a \"?.\""
                 },
                 "storageUri": {
                     "type": "string",
@@ -487,11 +435,12 @@
                 },
                 "authenticationType": {
                     "type": "string",
-                    "description": "The authentication type - if not specified, will default to SQL.",
+                    "description": "The authentication type.",
                     "enum": ["SQL","ADPassword"],
                     "x-ms-enum":{
                         "name": "AuthenticationType"
-                    }
+                    },
+                    "default": "SQL"
                 }
             },
             "required":["storageKeyType","storageKey","storageUri","administratorLogin","administratorLoginPassword"],

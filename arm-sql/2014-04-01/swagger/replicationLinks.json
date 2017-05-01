@@ -116,7 +116,7 @@
           "DatabaseReplicationLinks"
         ],
         "operationId": "Databases_FailoverReplicationLink",
-        "description": "Failover the database replication link.",
+        "description": "Sets which replica database is primary by failing over from the current primary replica database.",
         "x-ms-examples": {
           "Failover a replication link": { "$ref": "../examples/ReplicationLinkFailover.json" }
         },
@@ -165,7 +165,7 @@
           "DatabaseReplicationLinks"
         ],
         "operationId": "Databases_FailoverReplicationLinkAllowDataLoss",
-        "description": "Force failover the database replication link, which may result in data loss.",
+        "description": "Sets which replica database is primary by failing over from the current primary replica database. This operation might result in data loss.",
         "parameters": [
           {
             "$ref": "#/parameters/ApiVersionParameter"
@@ -251,6 +251,21 @@
     }
   },
   "definitions": {
+    "SubResource": {
+      "description": "Subresource properties",
+      "properties": {
+        "name": {
+          "readOnly": true,
+          "type": "string",
+          "description": "Resource name"
+        },
+        "id": {
+          "readOnly": true,
+          "type": "string",
+          "description": "The resource ID."
+        }
+      }
+    },
     "ReplicationLinkProperties": {
       "properties": {
         "isTerminationAllowed": {
@@ -358,7 +373,7 @@
       },
       "allOf": [
         {
-          "$ref": "#/definitions/SqlSubResource"
+          "$ref": "#/definitions/SubResource"
         }
       ],
       "description": "Represents a database replication link."
@@ -374,21 +389,6 @@
         }
       },
       "description": "Represents the response to a List database replication link request."
-    },
-    "SqlSubResource": {
-      "description": "Subresource properties",
-      "properties": {
-        "name": {
-          "readOnly": true,
-          "type": "string",
-          "description": "Resource name"
-        },
-        "id": {
-          "readOnly": true,
-          "type": "string",
-          "description": "The resource ID."
-        }
-      }
     }
   },
   "parameters": {
