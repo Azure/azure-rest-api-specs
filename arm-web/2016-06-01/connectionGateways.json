@@ -74,8 +74,7 @@
         },
         "x-ms-pageable": {
           "nextLinkName": "nextLink"
-        },
-        "x-ms-odata": "#/definitions/GatewayFilter"
+        }
       }
     },
     "/subscriptions/{subscriptionId}/providers/Microsoft.Web/locations/{location}/connectionGatewayInstallations": {
@@ -125,8 +124,7 @@
         },
         "x-ms-pageable": {
           "nextLinkName": "nextLink"
-        },
-        "x-ms-odata": "#/definitions/GatewayFilter"
+        }
       }
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Web/connectionGateways": {
@@ -176,8 +174,7 @@
         },
         "x-ms-pageable": {
           "nextLinkName": "nextLink"
-        },
-        "x-ms-odata": "#/definitions/GatewayFilter"
+        }
       }
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Web/connectionGateways/{gatewayName}": {
@@ -350,6 +347,7 @@
   },
   "definitions": {
     "Resource": {
+      "required": [ "location" ],
       "properties": {
         "id": {
           "type": "string",
@@ -380,17 +378,6 @@
       },
       "x-ms-azure-resource": true,
       "description": "The base resource type."
-    },
-    "SubResource": {
-      "properties": {
-        "id": {
-          "type": "string",
-          "readOnly": true,
-          "description": "The resource id."
-        }
-      },
-      "x-ms-azure-resource": true,
-      "description": "The sub resource type."
     },
     "Object": {
       "type": "object",
