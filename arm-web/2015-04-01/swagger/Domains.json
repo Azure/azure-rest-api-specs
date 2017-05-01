@@ -793,7 +793,8 @@
               "type": "array",
               "items": {
                 "type": "string"
-              }
+              },
+              "readOnly": true
             },
             "privacy": {
               "description": "<code>true</code> if domain privacy is enabled for this domain; otherwise, <code>false</code>.",
@@ -832,7 +833,8 @@
               "type": "array",
               "items": {
                 "$ref": "#/definitions/HostName"
-              }
+              },
+              "readOnly": true
             },
             "consent": {
               "$ref": "#/definitions/DomainPurchaseConsent",
@@ -851,7 +853,43 @@
                   "SubscriptionNotActive"
                 ],
                 "type": "string"
+              },
+              "readOnly": true
+            },
+            "dnsType": {
+              "description": "Current DNS type",
+              "enum": [
+                "AzureDns",
+                "DefaultDomainRegistrarDns"
+              ],
+              "type": "string",
+              "x-ms-enum": {
+                "name": "DnsType",
+                "modelAsString": false
               }
+            },
+            "dnsZoneId": {
+              "description": "Azure DNS Zone to use",
+              "type": "string"
+            },
+            "targetDnsType": {
+              "description": "Target DNS type (would be used for migration)",
+              "enum": [
+                "AzureDns",
+                "DefaultDomainRegistrarDns"
+              ],
+              "type": "string",
+              "x-ms-enum": {
+                "name": "DnsType",
+                "modelAsString": false
+              }
+            },
+            "authCode": {
+              "type": "string",
+              "readOnly": true,
+              "x-ms-mutability": [
+                "create"
+              ]
             }
           },
           "x-ms-client-flatten": true

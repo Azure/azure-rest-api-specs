@@ -1384,6 +1384,44 @@
           "nextLinkName": null
         }
       }
+    },
+    "/{tenantID}/getObjectsByObjectIds": {
+      "post": {
+        "tags": [
+          "Objects"
+        ],
+        "operationId": "Objects_GetObjectsByObjectIds",
+        "description": "Gets AD group membership for the specified AD object IDs.",
+        "parameters": [
+          {
+            "name": "parameters",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/GetObjectsParameters"
+            },
+            "description": "Objects filtering parameters."
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/tenantIDInPath"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK. The operation was successful.",
+            "schema": {
+              "$ref": "#/definitions/GetObjectsResult"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "odata.nextLink",
+          "operationName": "Objects_GetObjectsByObjectIdsNext"
+        }
+      }
     }
   },
   "x-ms-paths": {
@@ -1599,6 +1637,43 @@
         "x-ms-pageable": {
           "nextLinkName": "odata.nextLink",
           "operationName": "Users_ListNext"
+        }
+      }
+    },
+    "/{tenantID}/{nextLink}?Objects_GetObjectsByObjectIdsNext": {
+      "post": {
+        "tags": [
+          "Objects"
+        ],
+        "operationId": "Objects_GetObjectsByObjectIdsNext",
+        "description": "Gets AD group membership for the specified AD object IDs.",
+        "parameters": [
+          {
+            "name": "nextLink",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "Next link for the list operation.",
+            "x-ms-skip-url-encoding": true
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/tenantIDInPath"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK. The operation was successful.",
+            "schema": {
+              "$ref": "#/definitions/GetObjectsResult"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "odata.nextLink",
+          "operationName": "Objects_GetObjectsByObjectIdsNext"
         }
       }
     }
@@ -2325,7 +2400,33 @@
         }
       },
       "description": "Server response for Get tenant users API call."
-    }
+    },
+    "GetObjectsParameters": {
+      "properties": {
+        "objectIds": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "description": "The requested object IDs."
+        },
+        "types": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "description": "The requested object types."
+        },
+        "includeDirectoryObjectReferences": {
+          "type": "boolean",
+          "description": "If true, also searches for object IDs in the partner tenant."
+        }
+      },
+      "required": [
+        "includeDirectoryObjectReferences"
+      ],
+      "description": "Request parameters for the GetObjectsByObjectIds API."
+    }      
   },
   "parameters": {
     "ApiVersionParameter": {

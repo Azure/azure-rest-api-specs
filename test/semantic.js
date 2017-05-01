@@ -17,7 +17,7 @@ describe('Azure swagger semantic validation:', function () {
 
   _(swaggersToProcess).each(function (swagger) {
     it(swagger + ' should be semantically valid.', function (done) {
-      oav.validateSpec(swagger, 'error').then(function (validationResult) {
+      oav.validateSpec(swagger, {consoleLogLevel: 'error'}).then(function (validationResult) {
         //console.dir(validationResult, {depth: null, colors: true});
         done(assert(validationResult.validateSpec && validationResult.validateSpec.errors && validationResult.validateSpec.errors.length === 0, 
         `swagger "${swagger}" contains semantic validation errors.`));
