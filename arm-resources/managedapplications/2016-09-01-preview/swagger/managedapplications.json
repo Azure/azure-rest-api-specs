@@ -225,7 +225,6 @@
           {
             "name": "parameters",
             "in": "body",
-            "required": true,
             "schema": {
               "$ref": "#/definitions/Appliance"
             },
@@ -686,7 +685,6 @@
           {
             "name": "parameters",
             "in": "body",
-            "required": true,
             "schema": {
               "$ref": "#/definitions/Appliance"
             },
@@ -853,6 +851,7 @@
     "Appliance": {
       "properties": {
         "properties": {
+          "x-ms-client-flatten": true,
           "$ref": "#/definitions/ApplianceProperties",
           "description": "The appliance properties."
         },
@@ -880,6 +879,7 @@
     "ApplianceDefinition": {
       "properties": {
         "properties": {
+          "x-ms-client-flatten": true,
           "$ref": "#/definitions/ApplianceDefinitionProperties",
           "description": "The appliance definition properties."
         }
@@ -1109,6 +1109,7 @@
           "description": "Resource tags"
         }
       },
+      "description": "Resource information.",
       "x-ms-azure-resource": true
     },
     "ApplianceListResult": {
