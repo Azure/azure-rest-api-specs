@@ -948,7 +948,7 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/networkWatchers/{networkWatcherName}/checkConnectivity": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/networkWatchers/{networkWatcherName}/connectivityCheck": {
       "post": {
         "tags": [
           "NetworkWatchers"
@@ -1819,6 +1819,7 @@
       }
     },
     "ConnectivityInformation": {
+      "readOnly": true,
       "description": "Information on the connectivity status.",
       "properties": {
         "hops": {
@@ -1860,6 +1861,7 @@
       }
     },
     "ConnectivityHop": {
+      "readOnly": true,
       "description": "Information about a hop between the source and the destination.",
       "properties": {
         "type": {
@@ -1895,6 +1897,7 @@
       }
     },
     "ConnectivityIssue": {
+      "readOnly": true,
       "description": "Information about an issue encountered in the process of checking for connectivity.",
       "properties": {
         "origin": {
