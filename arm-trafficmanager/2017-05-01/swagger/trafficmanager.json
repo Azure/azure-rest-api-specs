@@ -2,7 +2,7 @@
   "swagger": "2.0",
   "info": {
     "title": "TrafficManagerManagementClient",
-    "version": "2017-03-01"
+    "version": "2017-05-01"
   },
   "host": "management.azure.com",
   "schemes": [
@@ -323,7 +323,7 @@
         "x-ms-pageable": {
           "nextLinkName": null
         },
-        "operationId": "Profiles_ListByInResourceGroup",
+        "operationId": "Profiles_ListAllInResourceGroup",
         "description": "Lists all Traffic Manager profiles within a resource group.",
         "parameters": [
           {
@@ -729,7 +729,7 @@
         "ttl": {
           "type": "integer",
           "format": "int64",
-          "description": "Gets or sets the DNS Ttime-To-Live (TTL), in seconds.  This informs the local DNS resolvers and DNS clients how long to cache DNS responses provided by this Traffic Manager profile."
+          "description": "Gets or sets the DNS Time-To-Live (TTL), in seconds.  This informs the local DNS resolvers and DNS clients how long to cache DNS responses provided by this Traffic Manager profile."
         }
       },
       "description": "Class containing DNS settings in a Traffic Manager profile."
@@ -742,7 +742,7 @@
         },
         "protocol": {
           "type": "string",
-          "description": "Gets or sets the protocol (HTTP or HTTPS) used to probe for endpoint health."
+          "description": "Gets or sets the protocol (HTTP, HTTPS or TCP) used to probe for endpoint health."
         },
         "port": {
           "type": "integer",
@@ -752,6 +752,21 @@
         "path": {
           "type": "string",
           "description": "Gets or sets the path relative to the endpoint domain name used to probe for endpoint health."
+        },
+        "intervalInSeconds": {
+          "type": "integer",
+          "format": "int64",
+          "description": "Gets or sets the monitor interval for endpoints in this profile. This is the interval at which Traffic Manager will check the health of each endpoint in this profile."
+        },
+        "timeoutInSeconds": {
+          "type": "integer",
+          "format": "int64",
+          "description": "Gets or sets the monitor timeout for endpoints in this profile. This is the time that Traffic Manager allows endpoints in this profile to response to the health check."
+        },
+        "toleratedNumberOfFailures": {
+          "type": "integer",
+          "format": "int64",
+          "description": "Gets or sets the number of consecutive failed health check that Traffic Manager tolerates before declaring an endpoint in this profile Degraded after the next failed health check."
         }
       },
       "description": "Class containing endpoint monitoring settings in a Traffic Manager profile."
