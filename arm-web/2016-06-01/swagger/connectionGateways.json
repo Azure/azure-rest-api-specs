@@ -39,7 +39,10 @@
         "tags": [
           "Gateways"
         ],
-        "operationId": "Gateways_ListBySubscription",
+        "x-ms-examples": {
+          "Task get": { "$ref": "../examples/ConnectionGatewaysGet.json" }
+        },
+        "operationId": "Gateways_ListBySubscriptions",
         "description": "Gets a list of On-Premises Data Gateways by subscription.",
         "parameters": [
           {
@@ -82,7 +85,10 @@
         "tags": [
           "Gateways"
         ],
-        "operationId": "Gateways_ListInstallationsBySubscription",
+        "x-ms-examples": {
+          "Task get": { "$ref": "../examples/ConnectionGatewayInstallationsBySubscription.json" }
+        },
+        "operationId": "ConnectionGatewayInstallations_ListBySubscription",
         "description": "Gets a list of On-Premises Data Gateway installations by subscription and location",
         "parameters": [
           {
@@ -132,6 +138,9 @@
         "tags": [
           "Gateways"
         ],
+        "x-ms-examples": {
+          "Task get": { "$ref": "../examples/ConnectionGatewayByResourceGroup.json" }
+        },
         "operationId": "Gateways_ListByResourceGroup",
         "description": "Gets a list of On-Premises Data Gateways by resource group.",
         "parameters": [
@@ -178,6 +187,9 @@
         "tags": [
           "Gateways"
         ],
+        "x-ms-examples": {
+          "Task get": { "$ref": "../examples/ConnectionGatewayGet.json" }
+        },
         "operationId": "Gateways_Get",
         "description": "Gets a On-Premises Data Gateway.",
         "parameters": [
@@ -207,6 +219,9 @@
         "tags": [
           "Gateways"
         ],
+        "x-ms-examples": {
+          "Task get": { "$ref": "../examples/ConnectionGatewayPut.json" }
+        },
         "operationId": "Gateways_CreateOrUpdate",
         "description": "Creates or updates a On-Premises Data Gateway.",
         "parameters": [
@@ -251,6 +266,9 @@
         "tags": [
           "Gateways"
         ],
+        "x-ms-examples": {
+          "Task get": { "$ref": "../examples/ConnectionGatewayDelete.json" }
+        },
         "operationId": "Gateways_Delete",
         "description": "Deletes a On-Premises Data Gateway.",
         "parameters": [
@@ -277,11 +295,14 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/providers/locations/{location}/Microsoft.Web/connectionGatewayInstallations/{gatewayInstallationName}": {
+    "/subscriptions/{subscriptionId}/providers/Microsoft.Web/locations/{location}/connectionGatewayInstallations/{gatewayInstallationName}": {
       "get": {
         "tags": [
           "Gateways"
         ],
+        "x-ms-examples": {
+          "Task get": { "$ref": "../examples/ConnectionGatewayInstallationGet.json" }
+        },
         "operationId": "Gateways_GetInstallation",
         "description": "Gets a On-Premises Data Gateway Installation.",
         "parameters": [
@@ -351,6 +372,38 @@
       "x-ms-azure-resource": true,
       "description": "The base resource type."
     },
+    "UntrackedResource": {
+      "required": [ "location" ],
+      "properties": {
+        "id": {
+          "type": "string",
+          "readOnly": true,
+          "description": "The resource id."
+        },
+        "name": {
+          "type": "string",
+          "readOnly": true,
+          "description": "Gets the resource name."
+        },
+        "type": {
+          "type": "string",
+          "readOnly": true,
+          "description": "Gets the resource type."
+        },
+        "location": {
+          "type": "string",
+          "description": "The resource location."
+        },
+        "tags": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          },
+          "description": "The resource tags."
+        }
+      },
+      "description": "The base resource type."
+    },
     "Object": {
       "type": "object",
       "properties": {}
@@ -372,6 +425,11 @@
           "type": "string",
           "readOnly": true,
           "description": "Gets the resource type."
+        },
+        "location": {
+          "type": "string",
+          "readOnly": true,
+          "description": "Gets the resource location."
         }
       },
       "description": "The resource reference."
@@ -404,7 +462,7 @@
       "description": "The gateway installation type.",
       "allOf": [
         {
-          "$ref": "#/definitions/Resource"
+          "$ref": "#/definitions/UntrackedResource"
         }
       ]
     },
@@ -477,55 +535,21 @@
     },
     "ConnectionGatewayInstallationReferenceProperties": {
       "type": "object",
-      "properties": {
-        "location": {
-          "type": "string",
-          "readOnly": true,
-          "description": "Gets the location information."
-        },
-        "name": {
-          "type": "string",
-          "readOnly": true,
-          "description": "Gets the display name of the installation."
-        },
-        "id": {
-          "type": "string",
-          "readOnly": true,
-          "description": "The id of the installation."
-        },
-        "type": {
-          "type": "string",
-          "readOnly": true,
-          "description": "Gets the type."
+      "description": "The gateway installation reference properties.",
+      "allOf": [
+        {
+          "$ref": "#/definitions/ResourceReference"
         }
-      },
-      "description": "The gateway installation reference properties."
+      ]
     },
     "ConnectionGatewayReferenceProperties": {
       "type": "object",
-      "properties": {
-        "location": {
-          "type": "string",
-          "readOnly": true,
-          "description": "Gets the location information."
-        },
-        "name": {
-          "type": "string",
-          "readOnly": true,
-          "description": "Gets the name of the connection gateway."
-        },
-        "id": {
-          "type": "string",
-          "readOnly": true,
-          "description": "The id of the connection gateway."
-        },
-        "type": {
-          "type": "string",
-          "readOnly": true,
-          "description": "Gets the type."
+      "description": "The connection gateway reference properties.",
+      "allOf": [
+        {
+          "$ref": "#/definitions/ResourceReference"
         }
-      },
-      "description": "The connection gateway reference properties."
+      ]
     },
     "ConnectionGatewayListResult": {
       "type": "object",
