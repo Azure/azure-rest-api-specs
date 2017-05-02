@@ -48,7 +48,11 @@
             "$ref": "#/parameters/ApiVersionParameter"
           },
           {
-            "$ref": "#/parameters/FilterParameter"
+            "name": "$filter",
+            "in": "query",
+            "type": "string",
+            "description": "Reduces the set of data collected by retrieving particular metric definitions from all the definitions available for the resource.<br>For example, to get just the definition for the 'CPU percentage' counter: $filter=name.value eq '\\Processor(_Total)\\% Processor Time'.<br>Multiple metrics can be retrieved by joining together *'name eq <value>'* clauses separated by *or* logical operators.<br>**NOTE**: No other syntax is allowed.",
+            "required": false
           }
         ],
         "responses": {
@@ -268,14 +272,6 @@
       "required": true,
       "type": "string",
       "description": "Client Api Version."
-    },
-    "FilterParameter": {
-      "name": "$filter",
-      "in": "query",
-      "type": "string",
-      "description": "Reduces the set of data collected by retrieving particular metric definitions from all the definitions available for the resource.<br>For example, to get just the definition for the 'CPU percentage' counter: $filter=name.value eq '\\Processor(_Total)\\% Processor Time'.<br>Multiple metrics can be retrieved by joining together *'name eq <value>'* clauses separated by *or* logical operators.<br>**NOTE**: No other syntax is allowed.",
-      "x-ms-parameter-location": "method",
-      "required": false
     },
     "ResourceUriParameter": {
       "name": "resourceUri",
