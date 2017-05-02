@@ -296,7 +296,7 @@
         "tags": [
           "ProductApis"
         ],
-        "operationId": "Apis_ListByProducts",
+        "operationId": "ProductApis_ListByProducts",
         "description": "Lists a collection of the APIs associated with a product.",
         "parameters": [
           {
@@ -434,7 +434,7 @@
         "tags": [
           "ProductGroups"
         ],
-        "operationId": "Groups_ListByProducts",
+        "operationId": "ProductGroups_ListByProducts",
         "description": "Lists the collection of developer groups associated with the specified product.",
         "parameters": [
           {
@@ -578,7 +578,7 @@
         "tags": [
           "ProductSubscriptions"
         ],
-        "operationId": "Subscriptions_ListByProducts",
+        "operationId": "ProductSubscriptions_ListByProducts",
         "description": "Lists the collection of subscriptions to the specified product.",
         "parameters": [
           {
@@ -628,6 +628,149 @@
           "nextLinkName": "nextLink"
         },
         "x-ms-odata": "./apimsubscriptions.json#/definitions/SubscriptionContract"
+      }
+    },    
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ApiManagement/service/{serviceName}/products/{productId}/policy": {
+      "get": {
+        "tags": [
+          "ProductPolicy"
+        ],
+        "operationId": "ProductPolicy_Get",
+        "description": "Get the policy configuration at the Product level.",
+        "produces": [
+          "application/vnd.ms-azure-apim.policy+xml"
+        ],
+        "parameters": [
+          {
+            "$ref": "./apimanagement.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "./apimanagement.json#/parameters/ServiceNameParameter"
+          },
+          {
+            "$ref": "./apimanagement.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "./apimanagement.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ProductIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {            
+            "description": "Product Policy information.",
+            "schema": {
+              "type": "file"
+            },
+            "headers": {              
+              "ETag": {
+                "description": "Current entity state version. Should be treated as opaque and used to make conditional HTTP requests.",
+                "type": "string"
+              }              
+            }
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "ProductPolicy"
+        ],
+        "operationId": "ProductPolicy_CreateOrUpdate",
+        "description": "Creates or updates policy configuration for the Product.",
+        "consumes": [
+          "application/vnd.ms-azure-apim.policy+xml"
+        ],
+        "parameters": [
+          {
+            "$ref": "./apimanagement.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "./apimanagement.json#/parameters/ServiceNameParameter"
+          },          
+          {
+            "$ref": "#/parameters/ProductIdParameter"
+          },
+          {
+            "name": "parameters",
+            "in": "body",
+            "schema": {
+              "type": "object",
+              "format": "file"
+            },
+            "required": true,
+            "description": "The policy contents to apply."
+          },
+          {
+            "name": "If-Match",
+            "in": "header",
+            "required": true,
+            "description": "The entity state (Etag) version of the product policy to update. A value of \"*\" can be used for If-Match to unconditionally apply the operation.",
+            "type": "string"
+          },
+          {
+            "$ref": "./apimanagement.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "./apimanagement.json#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": "Product policy configuration was successfully created."
+          },
+          "204":{
+            "description": "Product policy configuration of the tenant was successfully updated."
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "./apimanagement.json#/definitions/ErrorBodyContract"
+            }
+          }
+        }
+      },      
+      "delete": {
+        "tags": [
+          "ProductPolicy"
+        ],
+        "operationId": "ProductPolicy_Delete",
+        "description": "Deletes the policy configuration at the Product.",
+        "parameters": [
+          {
+            "$ref": "./apimanagement.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "./apimanagement.json#/parameters/ServiceNameParameter"
+          },          
+          {
+            "$ref": "#/parameters/ProductIdParameter"
+          },
+          {
+            "name": "If-Match",
+            "in": "header",
+            "required": true,
+            "description": "The entity state (Etag) version of the product policy to update. A value of \"*\" can be used for If-Match to unconditionally apply the operation.",
+            "type": "string"
+          },
+          {
+            "$ref": "./apimanagement.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "./apimanagement.json#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+           "204": {
+            "description": "Successfully deleted the policy configuration at the Product level."
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "./apimanagement.json#/definitions/ErrorBodyContract"
+            }
+          }
+        }
       }
     }
   },
