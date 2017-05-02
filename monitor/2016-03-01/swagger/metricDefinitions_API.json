@@ -39,7 +39,7 @@
           "MetricDefinitions"
         ],
         "operationId": "MetricDefinitions_List",
-        "description": "Lists the metric definitions for the resource.<br>The **$filter** parameter is optional, and can be used to only retrieve certain metric definitions.<br>For example, get just the definition for the CPU percentage counter: $filter=name.value eq '\\Processor(_Total)\\% Processor Time'.<br>This **$filter** is very restricted and allows only clauses of the form **'name eq <value>'** separated by **or** logical operators.<br>**NOTE**: No other syntax is allowed.",
+        "description": "Lists the metric definitions for the resource.",
         "parameters": [
           {
             "$ref": "#/parameters/ResourceUriParameter"
@@ -273,7 +273,7 @@
       "name": "$filter",
       "in": "query",
       "type": "string",
-      "description": "Reduces the set of data collected. The syntax allowed depends on the operation. See the operation's description for details.",
+      "description": "Reduces the set of data collected by retrieving particular metric definitions from all the definitions available for the resource.<br>For example, to get just the definition for the 'CPU percentage' counter: $filter=name.value eq '\\Processor(_Total)\\% Processor Time'.<br>Multiple metrics can be retrieved by joining together *'name eq <value>'* clauses separated by *or* logical operators.<br>**NOTE**: No other syntax is allowed.",
       "x-ms-parameter-location": "method",
       "required": false
     },
