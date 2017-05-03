@@ -354,8 +354,8 @@
           }
         ],
         "responses": {
-          "204": {
-            "description": "No Content"
+          "200": {
+            "description": "OK"
           }
         }
       }
@@ -730,6 +730,49 @@
           }
         },
         "x-ms-long-running-operation": true
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Web/sites/{name}/config": {
+      "get": {
+        "tags": [
+          "WebApps"
+        ],
+        "summary": "List the configurations of an app",
+        "description": "List the configurations of an app",
+        "operationId": "WebApps_ListConfigurations",
+        "produces": [
+          "application/json",
+          "text/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/resourceGroupNameParameter"
+          },
+          {
+            "name": "name",
+            "in": "path",
+            "description": "Name of the app.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "$ref": "#/parameters/subscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/SiteConfigResourceCollection"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
       }
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Web/sites/{name}/config/appsettings": {
@@ -4289,8 +4332,50 @@
           }
         ],
         "responses": {
-          "204": {
-            "description": "No Content"
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Web/sites/{name}/resourceHealthMetadata": {
+      "get": {
+        "tags": [
+          "WebApps"
+        ],
+        "summary": "Gets the category of ResourceHealthMetadata to use for the given site",
+        "description": "Gets the category of ResourceHealthMetadata to use for the given site",
+        "operationId": "WebApps_GetResourceHealthMetadata",
+        "produces": [
+          "application/json",
+          "text/json",
+          "application/xml",
+          "text/xml"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/resourceGroupNameParameter"
+          },
+          {
+            "name": "name",
+            "in": "path",
+            "description": "Name of web app",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "$ref": "#/parameters/subscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/ResourceHealthMetadata"
+            }
           }
         }
       }
@@ -4688,8 +4773,8 @@
           }
         ],
         "responses": {
-          "204": {
-            "description": "No Content"
+          "200": {
+            "description": "OK"
           }
         }
       }
@@ -5113,6 +5198,56 @@
           }
         },
         "x-ms-long-running-operation": true
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Web/sites/{name}/slots/{slot}/config": {
+      "get": {
+        "tags": [
+          "WebApps"
+        ],
+        "summary": "List the configurations of an app",
+        "description": "List the configurations of an app",
+        "operationId": "WebApps_ListConfigurationsSlot",
+        "produces": [
+          "application/json",
+          "text/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/resourceGroupNameParameter"
+          },
+          {
+            "name": "name",
+            "in": "path",
+            "description": "Name of the app.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "slot",
+            "in": "path",
+            "description": "Name of the deployment slot. If a slot is not specified, the API will return configuration for the production slot.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "$ref": "#/parameters/subscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/SiteConfigResourceCollection"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
       }
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Web/sites/{name}/slots/{slot}/config/appsettings": {
@@ -8931,8 +9066,57 @@
           }
         ],
         "responses": {
-          "204": {
-            "description": "No Content"
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Web/sites/{name}/slots/{slot}/resourceHealthMetadata": {
+      "get": {
+        "tags": [
+          "WebApps"
+        ],
+        "summary": "Gets the category of ResourceHealthMetadata to use for the given site",
+        "description": "Gets the category of ResourceHealthMetadata to use for the given site",
+        "operationId": "WebApps_GetResourceHealthMetadataSlot",
+        "produces": [
+          "application/json",
+          "text/json",
+          "application/xml",
+          "text/xml"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/resourceGroupNameParameter"
+          },
+          {
+            "name": "name",
+            "in": "path",
+            "description": "Name of web app",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "slot",
+            "in": "path",
+            "description": "Name of web app slot. If not specified then will default to production slot.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "$ref": "#/parameters/subscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/ResourceHealthMetadata"
+            }
           }
         }
       }
@@ -9429,6 +9613,46 @@
             "name": "slot",
             "in": "path",
             "description": "Name of web app slot. If not specified then will default to production slot.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "$ref": "#/parameters/subscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "No Content"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Web/sites/{name}/slots/{slot}/syncfunctiontriggers": {
+      "post": {
+        "tags": [
+          "WebApps"
+        ],
+        "summary": "Syncs function trigger metadata to the scale controller",
+        "description": "Syncs function trigger metadata to the scale controller",
+        "operationId": "WebApps_SyncFunctionTriggersSlot",
+        "parameters": [
+          {
+            "$ref": "#/parameters/resourceGroupNameParameter"
+          },
+          {
+            "name": "name",
+            "in": "path",
+            "description": "Name of the app.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "slot",
+            "in": "path",
+            "description": "Name of the deployment slot. If a slot is not specified, the API will restore a backup of the production slot.",
             "required": true,
             "type": "string"
           },
@@ -10405,6 +10629,39 @@
         }
       }
     },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Web/sites/{name}/syncfunctiontriggers": {
+      "post": {
+        "tags": [
+          "WebApps"
+        ],
+        "summary": "Syncs function trigger metadata to the scale controller",
+        "description": "Syncs function trigger metadata to the scale controller",
+        "operationId": "WebApps_SyncFunctionTriggers",
+        "parameters": [
+          {
+            "$ref": "#/parameters/resourceGroupNameParameter"
+          },
+          {
+            "name": "name",
+            "in": "path",
+            "description": "Name of the app.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "$ref": "#/parameters/subscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "No Content"
+          }
+        }
+      }
+    },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Web/sites/{name}/usages": {
       "get": {
         "tags": [
@@ -11298,12 +11555,12 @@
       "properties": {
         "frequencyInterval": {
           "format": "int32",
-          "description": "How often should be the backup executed (e.g. for weekly backup, this should be set to 7 and FrequencyUnit should be set to Day)",
+          "description": "How often the backup should be executed (e.g. for weekly backup, this should be set to 7 and FrequencyUnit should be set to Day)",
           "default": 7,
           "type": "integer"
         },
         "frequencyUnit": {
-          "description": "The unit of time for how often should be the backup executed (e.g. for weekly backup, this should be set to Day and FrequencyInterval should be set to 7)",
+          "description": "The unit of time for how often the backup should be executed (e.g. for weekly backup, this should be set to Day and FrequencyInterval should be set to 7)",
           "default": "Day",
           "enum": [
             "Day",
@@ -11323,7 +11580,7 @@
         "retentionPeriodInDays": {
           "format": "int32",
           "description": "After how many days backups should be deleted.",
-          "default": 90,
+          "default": 30,
           "type": "integer"
         },
         "startTime": {
@@ -11388,6 +11645,10 @@
         "trafficManagerProfileName": {
           "description": "Name of Traffic Manager profile to create. This is only needed if Traffic Manager profile does not already exist.",
           "type": "string"
+        },
+        "ignoreQuotas": {
+          "description": "<code>true</code> if quotas should be ignored; otherwise, <code>false</code>.",
+          "type": "boolean"
         }
       }
     },
@@ -11415,7 +11676,8 @@
             "EventHub",
             "ApiHub",
             "DocDb",
-            "RedisCache"
+            "RedisCache",
+            "PostgreSQL"
           ],
           "type": "string",
           "x-ms-enum": {
@@ -11449,7 +11711,8 @@
             "EventHub",
             "ApiHub",
             "DocDb",
-            "RedisCache"
+            "RedisCache",
+            "PostgreSQL"
           ],
           "type": "string",
           "x-ms-enum": {
@@ -11699,7 +11962,8 @@
           "enum": [
             "SqlAzure",
             "MySql",
-            "LocalMySql"
+            "LocalMySql",
+            "PostgreSql"
           ],
           "type": "string",
           "x-ms-enum": {
@@ -11757,16 +12021,20 @@
               "description": "Deployer.",
               "type": "string"
             },
-            "author_email": {
+            "authorEmail": {
               "description": "Author email.",
               "type": "string"
             },
-            "start_time": {
+            "startTime": {
               "format": "date-time",
               "description": "Start time.",
-              "type": "string"
+              "type": "string",
+              "x-ms-mutability": [
+                "create",
+                "read"
+              ]
             },
-            "end_time": {
+            "endTime": {
               "format": "date-time",
               "description": "End time.",
               "type": "string"
@@ -12813,6 +13081,35 @@
       },
       "x-ms-azure-resource": true
     },
+    "ResourceHealthMetadata": {
+      "description": "Used for getting ResourceHealthCheck settings.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/Resource"
+        }
+      ],
+      "properties": {
+        "properties": {
+          "description": "ResourceHealthMetadata resource specific properties",
+          "properties": {
+            "id": {
+              "description": "ARM Resource Id",
+              "type": "string"
+            },
+            "category": {
+              "description": "The category that the resource matches in the RHC Policy File",
+              "type": "string"
+            },
+            "signalAvailability": {
+              "description": "Is there a health signal for the resource",
+              "type": "boolean"
+            }
+          },
+          "x-ms-client-flatten": true
+        }
+      }
+    },
     "ResourceMetric": {
       "description": "Object representing a metric for any resource .",
       "type": "object",
@@ -13833,6 +14130,26 @@
         "properties": {
           "$ref": "#/definitions/SiteConfig",
           "x-ms-client-flatten": true
+        }
+      }
+    },
+    "SiteConfigResourceCollection": {
+      "description": "Collection of site configurations.",
+      "required": [
+        "value"
+      ],
+      "type": "object",
+      "properties": {
+        "value": {
+          "description": "Collection of resources.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/SiteConfigResource"
+          }
+        },
+        "nextLink": {
+          "description": "Link to next page of resources.",
+          "type": "string"
         }
       }
     },
