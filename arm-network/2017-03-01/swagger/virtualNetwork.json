@@ -683,8 +683,8 @@
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/virtualNetworks/{virtualNetworkName}/usages": {
       "get": {
-        "operationId": "VirtualNetworks_GetUsage",
-        "description": "Gets usage stats.",
+        "operationId": "VirtualNetworks_ListUsage",
+        "description": "Lists usage stats.",
         "parameters": [
           {
             "name": "resourceGroupName",
@@ -711,12 +711,12 @@
           "200": {
             "description": "Usage stats for vnet.",
             "schema": {
-              "$ref": "#/definitions/VirtualNetworkUsageResult"
+              "$ref": "#/definitions/VirtualNetworkListUsageResult"
             }
           }
         },
         "x-ms-examples": {
-          "VnetGetUsage": { "$ref": "../examples/VirtualNetworkGetUsage.json" }
+          "VnetGetUsage": { "$ref": "../examples/VirtualNetworkListUsage.json" }
         },
         "x-ms-pageable": {
           "nextLinkName": "nextLink"
@@ -1026,7 +1026,7 @@
       },
       "description": "Response for CheckIPAddressAvailability API service call"
     },
-    "VirtualNetworkUsageResult": {
+    "VirtualNetworkListUsageResult": {
       "properties": {
         "value": {
           "type": "array",
@@ -1034,7 +1034,7 @@
           "items": {
             "$ref": "#/definitions/VirtualNetworkUsage"
           },
-          "description": "Gets VirtualNetwork usage."
+          "description": "Lists VirtualNetwork usage stats."
         },
         "nextLink": {
           "type": "string",
