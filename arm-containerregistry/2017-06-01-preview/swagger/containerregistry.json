@@ -859,7 +859,7 @@
       }
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ContainerRegistry/registries/{registryName}/webhooks/{webhookName}/listEvents": {
-      "get": {
+      "post": {
         "tags": [
           "Webhooks"
         ],
@@ -1028,8 +1028,9 @@
           "description": "The SKU name of the the container registry. Required for registry creation.",
           "enum": [
             "Basic",
-            "Standard",
-            "Premium"
+            "Standard_Small",
+            "Standard_Medium",
+            "Standard_Large"
           ],
           "type": "string",
           "x-ms-enum": {
@@ -1041,8 +1042,7 @@
           "description": "The SKU tier based on the SKU name.",
           "enum": [
             "Basic",
-            "Standard",
-            "Premium"
+            "Standard"
           ],
           "type": "string",
           "readOnly": true,
