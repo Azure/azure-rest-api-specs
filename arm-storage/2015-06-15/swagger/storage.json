@@ -13,7 +13,8 @@
     "https"
   ],
   "consumes": [
-    "application/json"
+    "application/json",
+    "text/json"
   ],
   "produces": [
     "application/json",
@@ -384,7 +385,7 @@
           "Usage"
         ],
         "operationId": "Usage_List",
-        "description": "Gets the current usage count and the limit for the resources under the subscription.",
+        "description": "Lists the current usage count and the limit for the resources under the subscription.",
         "parameters": [
           {
             "$ref": "#/parameters/ApiVersionParameter"
@@ -395,7 +396,7 @@
         ],
         "responses": {
           "200": {
-            "description": "OK -- current usage acount and limit retrieved and returned successfully.",
+            "description": "OK -- current usage count and limit retrieved and returned successfully.",
             "schema": {
               "$ref": "#/definitions/UsageListResult"
             }
@@ -427,11 +428,11 @@
       "properties": {
         "nameAvailable": {
           "type": "boolean",
-          "description": "Gets a boolean value that indicates whether the name is available for you to use. If true, the name is available. If false, the name has already been taken or is invalid and cannot be used."
+          "description": "Boolean value that indicates whether the name is available for you to use. If true, the name is available. If false, the name has already been taken or is invalid and cannot be used."
         },
         "reason": {
           "type": "string",
-          "description": "Gets the reason that a storage account name could not be used. The Reason element is only returned if NameAvailable is false.",
+          "description": "The reason that a storage account name could not be used. The Reason element is only returned if NameAvailable is false.",
           "enum": [
             "AccountNameInvalid",
             "AlreadyExists"
@@ -443,7 +444,7 @@
         },
         "message": {
           "type": "string",
-          "description": "Gets an error message explaining the Reason value in more detail."
+          "description": "The error message explaining the Reason value in more detail."
         }
       },
       "description": "The CheckNameAvailability operation response."
@@ -452,7 +453,7 @@
       "properties": {
         "accountType": {
           "type": "string",
-          "description": "Gets or sets the sku name. Required for account creation; optional for update. Note that in older versions, sku name was called accountType.",
+          "description": "The sku name. Required for account creation; optional for update. Note that in older versions, sku name was called accountType.",
           "enum": [
             "Standard_LRS",
             "Standard_ZRS",
@@ -475,14 +476,14 @@
       "properties": {
         "location": {
           "type": "string",
-          "description": "Required. Gets or sets the location of the resource. This will be one of the supported and registered Azure Geo Regions (e.g. West US, East US, Southeast Asia, etc.). The geo region of a resource cannot be changed once it is created, but if an identical geo region is specified on update, the request will succeed."
+          "description": "The location of the resource. This will be one of the supported and registered Azure Geo Regions (e.g. West US, East US, Southeast Asia, etc.). The geo region of a resource cannot be changed once it is created, but if an identical geo region is specified on update, the request will succeed."
         },
         "tags": {
           "type": "object",
           "additionalProperties": {
             "type": "string"
           },
-          "description": "Gets or sets a list of key value pairs that describe the resource. These tags can be used for viewing and grouping this resource (across resource groups). A maximum of 15 tags can be provided for a resource. Each tag must have a key with a length no greater than 128 characters and a value with a length no greater than 256 characters."
+          "description": "A list of key value pairs that describe the resource. These tags can be used for viewing and grouping this resource (across resource groups). A maximum of 15 tags can be provided for a resource. Each tag must have a key with a length no greater than 128 characters and a value with a length no greater than 256 characters."
         },
         "properties": {
           "x-ms-client-flatten": true,
@@ -499,19 +500,19 @@
       "properties": {
         "blob": {
           "type": "string",
-          "description": "Gets the blob endpoint."
+          "description": "The blob endpoint."
         },
         "queue": {
           "type": "string",
-          "description": "Gets the queue endpoint."
+          "description": "The queue endpoint."
         },
         "table": {
           "type": "string",
-          "description": "Gets the table endpoint."
+          "description": "The table endpoint."
         },
         "file": {
           "type": "string",
-          "description": "Gets the file endpoint."
+          "description": "The file endpoint."
         }
       },
       "description": "The URIs that are used to perform a retrieval of a public blob, queue or table object."
@@ -520,7 +521,7 @@
       "properties": {
         "name": {
           "type": "string",
-          "description": "Gets or sets the custom domain name. Name is the CNAME source."
+          "description": "The custom domain name. Name is the CNAME source."
         },
         "useSubDomain": {
           "type": "boolean",
@@ -536,7 +537,7 @@
       "properties": {
         "provisioningState": {
           "type": "string",
-          "description": "Gets the status of the storage account at the time the operation was called.",
+          "description": "The status of the storage account at the time the operation was called.",
           "enum": [
             "Creating",
             "ResolvingDNS",
@@ -549,7 +550,7 @@
         },
         "accountType": {
           "type": "string",
-          "description": "Gets the type of the storage account.",
+          "description": "The type of the storage account.",
           "enum": [
             "Standard_LRS",
             "Standard_ZRS",
@@ -564,15 +565,15 @@
         },
         "primaryEndpoints": {
           "$ref": "#/definitions/Endpoints",
-          "description": "Gets the URLs that are used to perform a retrieval of a public blob, queue, or table object. Note that Standard_ZRS and Premium_LRS accounts only return the blob endpoint."
+          "description": "The URLs that are used to perform a retrieval of a public blob, queue, or table object. Note that Standard_ZRS and Premium_LRS accounts only return the blob endpoint."
         },
         "primaryLocation": {
           "type": "string",
-          "description": "Gets the location of the primary data center for the storage account."
+          "description": "The location of the primary data center for the storage account."
         },
         "statusOfPrimary": {
           "type": "string",
-          "description": "Gets the status indicating whether the primary location of the storage account is available or unavailable.",
+          "description": "The status indicating whether the primary location of the storage account is available or unavailable.",
           "enum": [
             "Available",
             "Unavailable"
@@ -585,15 +586,15 @@
         "lastGeoFailoverTime": {
           "type": "string",
           "format": "date-time",
-          "description": "Gets the timestamp of the most recent instance of a failover to the secondary location. Only the most recent timestamp is retained. This element is not returned if there has never been a failover instance. Only available if the accountType is Standard_GRS or Standard_RAGRS."
+          "description": "The timestamp of the most recent instance of a failover to the secondary location. Only the most recent timestamp is retained. This element is not returned if there has never been a failover instance. Only available if the accountType is Standard_GRS or Standard_RAGRS."
         },
         "secondaryLocation": {
           "type": "string",
-          "description": "Gets the location of the geo-replicated secondary for the storage account. Only available if the accountType is Standard_GRS or Standard_RAGRS."
+          "description": "The location of the geo-replicated secondary for the storage account. Only available if the accountType is Standard_GRS or Standard_RAGRS."
         },
         "statusOfSecondary": {
           "type": "string",
-          "description": "Gets the status indicating whether the secondary location of the storage account is available or unavailable. Only available if the SKU name is Standard_GRS or Standard_RAGRS.",
+          "description": "The status indicating whether the secondary location of the storage account is available or unavailable. Only available if the SKU name is Standard_GRS or Standard_RAGRS.",
           "enum": [
             "Available",
             "Unavailable"
@@ -606,15 +607,15 @@
         "creationTime": {
           "type": "string",
           "format": "date-time",
-          "description": "Gets the creation date and time of the storage account in UTC."
+          "description": "The creation date and time of the storage account in UTC."
         },
         "customDomain": {
           "$ref": "#/definitions/CustomDomain",
-          "description": "Gets the custom domain the user assigned to this storage account."
+          "description": "The custom domain the user assigned to this storage account."
         },
         "secondaryEndpoints": {
           "$ref": "#/definitions/Endpoints",
-          "description": "Gets the URLs that are used to perform a retrieval of a public blob, queue, or table object from the secondary location of the storage account. Only available if the SKU name is Standard_RAGRS."
+          "description": "The URLs that are used to perform a retrieval of a public blob, queue, or table object from the secondary location of the storage account. Only available if the SKU name is Standard_RAGRS."
         }
       },
       "description": "Properties of the storage account."
@@ -637,11 +638,11 @@
       "properties": {
         "key1": {
           "type": "string",
-          "description": "Gets the value of key 1."
+          "description": "The value of key 1."
         },
         "key2": {
           "type": "string",
-          "description": "Gets the value of key 2."
+          "description": "The value of key 2."
         }
       },
       "description": "The access keys for the storage account."
@@ -653,7 +654,7 @@
           "items": {
             "$ref": "#/definitions/StorageAccount"
           },
-          "description": "Gets the list of storage accounts and their properties."
+          "description": "The list of storage accounts and their properties."
         }
       },
       "description": "The list storage accounts operation response."
@@ -662,7 +663,7 @@
       "properties": {
         "accountType": {
           "type": "string",
-          "description": "Gets or sets the account type. Note that StandardZRS and PremiumLRS accounts cannot be changed to other account types, and other account types cannot be changed to StandardZRS or PremiumLRS.",
+          "description": "The account type. Note that StandardZRS and PremiumLRS accounts cannot be changed to other account types, and other account types cannot be changed to StandardZRS or PremiumLRS.",
           "enum": [
             "Standard_LRS",
             "Standard_ZRS",
@@ -714,11 +715,11 @@
       "properties": {
         "value": {
           "type": "string",
-          "description": "Gets a string describing the resource name."
+          "description": "A string describing the resource name."
         },
         "localizedValue": {
           "type": "string",
-          "description": "Gets a localized string describing the resource name."
+          "description": "A localized string describing the resource name."
         }
       },
       "description": "The Usage Names."
@@ -727,7 +728,7 @@
       "properties": {
         "unit": {
           "type": "string",
-          "description": "Gets the unit of measurement.",
+          "description": "The unit of measurement.",
           "enum": [
             "Count",
             "Bytes",
@@ -744,16 +745,16 @@
         "currentValue": {
           "type": "integer",
           "format": "int32",
-          "description": "Gets the current count of the allocated resources in the subscription."
+          "description": "The current count of the allocated resources in the subscription."
         },
         "limit": {
           "type": "integer",
           "format": "int32",
-          "description": "Gets the maximum count of the resources that can be allocated in the subscription."
+          "description": "The maximum count of the resources that can be allocated in the subscription."
         },
         "name": {
           "$ref": "#/definitions/UsageName",
-          "description": "Gets the name of the type of usage."
+          "description": "The name of the type of usage."
         }
       },
       "required": [
@@ -771,7 +772,7 @@
           "items": {
             "$ref": "#/definitions/Usage"
           },
-          "description": "Gets or sets the list Storage Resource Usages."
+          "description": "The list Storage Resource Usages."
         }
       },
       "description": "The List Usages operation response."
@@ -815,7 +816,7 @@
       "in": "path",
       "required": true,
       "type": "string",
-      "description": "Gets subscription credentials which uniquely identify the Microsoft Azure subscription. The subscription ID forms part of the URI for every service call."
+      "description": "Subscription credentials which uniquely identify the Microsoft Azure subscription. The subscription ID forms part of the URI for every service call."
     },
     "ApiVersionParameter": {
       "name": "api-version",
