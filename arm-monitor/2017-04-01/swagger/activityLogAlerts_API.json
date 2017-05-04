@@ -5,7 +5,7 @@
         "x-ms-code-generation-settings": {
             "name": "MonitorManagementClient"
         },
-        "version": "2017-03-01-preview"
+        "version": "2017-04-01"
     },
     "host": "management.azure.com",
     "schemes": [
@@ -38,7 +38,6 @@
     "paths": {
         "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.insights/activityLogAlerts/{activityLogAlertName}": {
             "put": {
-                "deprecated": true,
                 "description": "Create a new activity log alert or update an existing one.",
                 "operationId": "ActivityLogAlerts_CreateOrUpdate",
                 "x-ms-examples": {
@@ -91,7 +90,6 @@
                 }
             },
             "get": {
-                "deprecated": true,
                 "description": "Get an activity log alert.",
                 "operationId": "ActivityLogAlerts_Get",
                 "x-ms-examples": {
@@ -129,7 +127,6 @@
                 }
             },
             "delete": {
-                "deprecated": true,
                 "description": "Delete an activity log alert.",
                 "operationId": "ActivityLogAlerts_Delete",
                 "x-ms-examples": {
@@ -167,7 +164,6 @@
                 }
             },
             "patch": {
-                "deprecated": true,
                 "description": "Updates an existing ActivityLogAlertResource's tags. To update other fields use the CreateOrUpdate method.",
                 "operationId": "ActivityLogAlerts_Update",
                 "parameters": [
@@ -188,7 +184,7 @@
                         "in": "body",
                         "required": true,
                         "schema": {
-                            "$ref": "#/definitions/ActivityLogAlertResourcePatch"
+                            "$ref": "#/definitions/ActivityLogAlertPatchBody"
                         },
                         "description": "Parameters supplied to the operation."
                     }
@@ -216,7 +212,6 @@
         },
         "/subscriptions/{subscriptionId}/providers/microsoft.insights/activityLogAlerts": {
             "get": {
-                "deprecated": true,
                 "description": "Get a list of all activity log alerts in a subscription.",
                 "operationId": "ActivityLogAlerts_ListBySubscriptionId",
                 "x-ms-examples": {
@@ -253,7 +248,6 @@
         },
         "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.insights/activityLogAlerts": {
             "get": {
-                "deprecated": true,
                 "description": "Get a list of all activity log alerts in a resource group.",
                 "operationId": "ActivityLogAlerts_ListByResourceGroup",
                 "x-ms-examples": {
@@ -354,6 +348,10 @@
                         "$ref": "#/definitions/ActivityLogAlertResource"
                     },
                     "description": "The list of activity log alerts."
+                },
+                "nextLink": {
+                    "type": "string",
+                    "description": "Provides the link to retrive the next set of elements."
                 }
             }
         },
@@ -446,7 +444,7 @@
                     "additionalProperties": {
                         "type": "string"
                     },
-                    "description": "The dictionary of custom properties to include with the post operation. These data are appended to the webhook payload."
+                    "description": "the dictionary of custom properties to include with the post operation. These data are appended to the webhook payload."
                 }
             },
             "required": [
@@ -467,14 +465,15 @@
                 }
             }
         },
-        "ActivityLogAlertResourcePatch": {
-            "description": "An activity log alert resource for patch operations.",
-            "allOf": [
-                {
-                    "$ref": "#/definitions/Resource"
-                }
-            ],
+        "ActivityLogAlertPatchBody": {
+            "description": "An activity log alert object for the body of patch operations.",
             "properties": {
+                "tags": {
+                    "additionalProperties": {
+                        "type": "string"
+                    },
+                    "description": "Resource tags"
+                },
                 "properties": {
                     "x-ms-client-flatten": true,
                     "$ref": "#/definitions/ActivityLogAlertPatch"
