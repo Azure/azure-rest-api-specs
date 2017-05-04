@@ -2462,11 +2462,16 @@
         }
       ],
       "properties": {
-        "purgeDisabled": {
-          "type": "boolean",
+        "recoveryLevel": {
+          "type": "string",
+          "description": "Reflects the deletion recovery level currently in effect for keys in the current vault. If it contains 'Purgeable' the key can be permanently deleted by a privileged user; otherwise, only the system can purge the key, at the end of the retention interval.",
+          "enum": [ "Purgeable", "Recoverable+Purgeable", "Recoverable", "Recoverable+ProtectedSubscription" ],
+          "x-ms-enum": {
+            "name": "DeletionRecoveryLevel",
+            "modelAsString": true
+          },
           "readOnly": true,
-          "x-nullable": false,
-          "description": "Reflects the purge protection status of the key. If true, purge is disabled, false, otherwise."
+          "x-nullable": false
         }
       },
       "description": "The attributes of a key managed by the key vault service."
@@ -2696,8 +2701,21 @@
       "allOf": [
         {
           "$ref": "#/definitions/Attributes"
-        }
+        },
       ],
+      "properties": {
+        "recoveryLevel": {
+          "type": "string",
+          "description": "Reflects the deletion recovery level currently in effect for secrets in the current vault. If it contains 'Purgeable', the secret can be permanently deleted by a privileged user; otherwise, only the system can purge the secret, at the end of the retention interval.",
+          "enum": [ "Purgeable", "Recoverable+Purgeable", "Recoverable", "Recoverable+ProtectedSubscription" ],
+          "x-ms-enum": {
+            "name": "DeletionRecoveryLevel",
+            "modelAsString": true
+          },
+          "readOnly": true,
+          "x-nullable": false
+        }
+      },
       "description": "The secret management attributes."
     },
     "SecretRestoreParameters": {
@@ -2716,8 +2734,21 @@
       "allOf": [
         {
           "$ref": "#/definitions/Attributes"
-        }
+        },
       ],
+      "properties": {
+        "recoveryLevel": {
+          "type": "string",
+          "description": "Reflects the deletion recovery level currently in effect for certificates in the current vault. If it contains 'Purgeable', the certificate can be permanently deleted by a privileged user; otherwise, only the system can purge the certificate, at the end of the retention interval.",
+          "enum": [ "Purgeable", "Recoverable+Purgeable", "Recoverable", "Recoverable+ProtectedSubscription" ],
+          "x-ms-enum": {
+            "name": "DeletionRecoveryLevel",
+            "modelAsString": true
+          },
+          "readOnly": true,
+          "x-nullable": false
+        }
+      },
       "description": "The certificate management attributes."
     },
     "CertificateItem": {
