@@ -2201,7 +2201,7 @@
           "type": "string"
         },
         "resource": {
-          "description": "The localized friendly form of the resource type related to this action/operation - it should match the public documentation for the resource provider. It should use Title Casing – for examples, please refer to the 'name' section.",
+          "description": "The localized friendly form of the resource type related to this action/operation - it should match the public documentation for the resource provider. It should use Title Casing - for examples, please refer to the 'name' section",
           "type": "string"
         },
         "operation": {
@@ -2702,7 +2702,7 @@
           }
         },
         "authorizationStatus": {
-          "description": "Is Device currently authorized for rollover",
+          "description": "The authorization status of the device for service data encryption key rollover.",
           "enum": [
             "Disabled",
             "Enabled"
@@ -2729,15 +2729,15 @@
       }
     },
     "DNSSettings": {
-      "description": "The DNS settings of a device.",
+      "description": "The DNS(Domain Name Server) settings of a device.",
       "type": "object",
       "properties": {
         "primaryDnsServer": {
-          "description": "The Primary IPv4 DNS server for the device",
+          "description": "The primary IPv4 DNS server for the device",
           "type": "string"
         },
         "primaryIpv6DnsServer": {
-          "description": "The Primary IPv6 DNS server for the device",
+          "description": "The primary IPv6 DNS server for the device",
           "type": "string"
         },
         "secondaryDnsServers": {
@@ -3244,7 +3244,7 @@
       "properties": {
         "encryptionKey": {
           "$ref": "#/definitions/AsymmetricEncryptedSecret",
-          "description": "The key used to encrypt data in this data container. It is required when\r\nencryption parameter is “Enabled”. This key itself is encrypted using \r\nthe Secrets Encryption Key known to devices."
+          "description": "The key used to encrypt data in this volume container. It is required when property 'EncryptionStatus' is �Enabled�."
         },
         "encryptionStatus": {
           "description": "Flag to know whether encryption is enabled or not.",
@@ -3270,7 +3270,7 @@
           "type": "string"
         },
         "ownerShipStatus": {
-          "description": "Owner ship status of Volume Container.If the status is “NotOwned”,\r\n then only the delete operation on the volume container is permitted.",
+          "description": "Owner ship status of Volume Container. Only when the status is \"NotOwned\", the delete operation on the volume container is permitted.",
           "enum": [
             "Owned",
             "NotOwned"
