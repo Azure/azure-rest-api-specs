@@ -36,7 +36,7 @@
         }
     },
     "paths": {
-        "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Insights/actionGroups/{actionGroupName}": {
+        "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.insights/actionGroups/{actionGroupName}": {
             "put": {
                 "description": "Create a new action group or update an existing one.",
                 "operationId": "ActionGroups_CreateOrUpdate",
@@ -47,16 +47,10 @@
                 },
                 "parameters": [
                     {
-                        "$ref": "#/parameters/SubscriptionIdParameter"
-                    },
-                    {
                         "$ref": "#/parameters/ResourceGroupNameParameter"
                     },
                     {
                         "$ref": "#/parameters/ActionGroupNameParameter"
-                    },
-                    {
-                        "$ref": "#/parameters/ApiVersionParameter"
                     },
                     {
                         "name": "actionGroup",
@@ -66,6 +60,12 @@
                             "$ref": "#/definitions/ActionGroupResource"
                         },
                         "description": "The action group to create or use for the update."
+                    },
+                    {
+                        "$ref": "#/parameters/SubscriptionIdParameter"
+                    },
+                    {
+                        "$ref": "#/parameters/ApiVersionParameter"
                     }
                 ],
                 "responses": {
@@ -96,13 +96,13 @@
                 },
                 "parameters": [
                     {
-                        "$ref": "#/parameters/SubscriptionIdParameter"
-                    },
-                    {
                         "$ref": "#/parameters/ResourceGroupNameParameter"
                     },
                     {
                         "$ref": "#/parameters/ActionGroupNameParameter"
+                    },
+                    {
+                        "$ref": "#/parameters/SubscriptionIdParameter"
                     },
                     {
                         "$ref": "#/parameters/ApiVersionParameter"
@@ -133,13 +133,13 @@
                 },
                 "parameters": [
                     {
-                        "$ref": "#/parameters/SubscriptionIdParameter"
-                    },
-                    {
                         "$ref": "#/parameters/ResourceGroupNameParameter"
                     },
                     {
                         "$ref": "#/parameters/ActionGroupNameParameter"
+                    },
+                    {
+                        "$ref": "#/parameters/SubscriptionIdParameter"
                     },
                     {
                         "$ref": "#/parameters/ApiVersionParameter"
@@ -158,7 +158,7 @@
                 }
             }
         },
-        "/subscriptions/{subscriptionId}/providers/Microsoft.Insights/actionGroups": {
+        "/subscriptions/{subscriptionId}/providers/microsoft.insights/actionGroups": {
             "get": {
                 "description": "Get a list of all action groups in a subscription.",
                 "operationId": "ActionGroups_ListBySubscriptionId",
@@ -191,7 +191,7 @@
                 }
             }
         },
-        "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Insights/actionGroups": {
+        "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.insights/actionGroups": {
             "get": {
                 "description": "Get a list of all action groups in a resource group.",
                 "operationId": "ActionGroups_ListByResourceGroup",
@@ -205,10 +205,10 @@
                 },
                 "parameters": [
                     {
-                        "$ref": "#/parameters/SubscriptionIdParameter"
+                        "$ref": "#/parameters/ResourceGroupNameParameter"
                     },
                     {
-                        "$ref": "#/parameters/ResourceGroupNameParameter"
+                        "$ref": "#/parameters/SubscriptionIdParameter"
                     },
                     {
                         "$ref": "#/parameters/ApiVersionParameter"
@@ -227,27 +227,21 @@
                 }
             }
         },
-        "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Insights/actionGroups/{actionGroupName}/subscribe": {
+        "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.insights/actionGroups/{actionGroupName}/subscribe": {
             "post": {
                 "description": "Enable a receiver in an action group. This changes the receiver's status from Disabled to Enabled.",
                 "operationId": "ActionGroups_EnableReceiver",
                 "x-ms-examples": {
-                    "List all action groups": {
+                    "Enable the receiver": {
                         "$ref": "../examples/enableReceiver.json"
                     }
                 },
                 "parameters": [
                     {
-                        "$ref": "#/parameters/SubscriptionIdParameter"
-                    },
-                    {
                         "$ref": "#/parameters/ResourceGroupNameParameter"
                     },
                     {
                         "$ref": "#/parameters/ActionGroupNameParameter"
-                    },
-                    {
-                        "$ref": "#/parameters/ApiVersionParameter"
                     },
                     {
                         "name": "enableRequest",
@@ -257,6 +251,12 @@
                             "$ref": "#/definitions/EnableRequest"
                         },
                         "description": "The receiver to re-enable."
+                    },
+                    {
+                        "$ref": "#/parameters/SubscriptionIdParameter"
+                    },
+                    {
+                        "$ref": "#/parameters/ApiVersionParameter"
                     }
                 ],
                 "responses": {
@@ -338,6 +338,10 @@
                         "$ref": "#/definitions/ActionGroupResource"
                     },
                     "description": "The list of action groups."
+                },
+                "nextLink": {
+                    "type": "string",
+                    "description": "Provides the link to retrive the next set of elements."
                 }
             }
         },

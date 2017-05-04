@@ -142,6 +142,9 @@
               }
             }
           }
+        },
+        "x-ms-examples": {
+            "Create or update an alert rule": { "$ref": "../examples/createOrUpdateAlertRule.json" }
         }
       },
       "delete": {
@@ -171,6 +174,9 @@
           "200": {
             "description": "Successful request to delete an alert rule"
           }
+        },
+        "x-ms-examples": {
+            "Delete an alert rule": { "$ref": "../examples/deleteAlertRule.json" }
         }
       },
       "get": {
@@ -230,6 +236,9 @@
               }
             }
           }
+        },
+        "x-ms-examples": {
+            "Get an alert rule": { "$ref": "../examples/getAlertRule.json" }
         }
       },
       "patch": {
@@ -373,6 +382,9 @@
         },
         "x-ms-pageable": {
           "nextLinkName": null
+        },
+        "x-ms-examples": {
+            "List alert rules": { "$ref": "../examples/listAlertRule.json" }
         }
       }
     }
@@ -559,6 +571,7 @@
         "failedLocationCount": {
           "type": "integer",
           "format": "int32",
+          "minimum": 0,
           "description": "the number of locations that must fail to activate the alert."
         }
       },

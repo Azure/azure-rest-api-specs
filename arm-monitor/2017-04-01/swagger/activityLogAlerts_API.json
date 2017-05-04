@@ -162,6 +162,52 @@
                         }
                     }
                 }
+            },
+            "patch": {
+                "description": "Updates an existing ActivityLogAlertResource's tags. To update other fields use the CreateOrUpdate method.",
+                "operationId": "ActivityLogAlerts_Update",
+                "parameters": [
+                    {
+                        "$ref": "#/parameters/SubscriptionIdParameter"
+                    },
+                    {
+                        "$ref": "#/parameters/ResourceGroupNameParameter"
+                    },
+                    {
+                        "$ref": "#/parameters/ActivityLogAlertNameParameter"
+                    },
+                    {
+                        "$ref": "#/parameters/ApiVersionParameter"
+                    },
+                    {
+                        "name": "activityLogAlertPatch",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/ActivityLogAlertPatchBody"
+                        },
+                        "description": "Parameters supplied to the operation."
+                    }
+                ],
+                "responses": {
+                    "default": {
+                        "description": "Error response describing why the operation failed.",
+                        "schema": {
+                            "$ref": "#/definitions/ErrorResponse"
+                        }
+                    },
+                    "200": {
+                        "description": "An existing activity log alert was successfully updated.",
+                        "schema": {
+                            "$ref": "#/definitions/ActivityLogAlertResource"
+                        }
+                    }
+                },
+                "x-ms-examples": {
+                    "Path an activity log alert": {
+                        "$ref": "../examples/patchActivityLogAlert.json"
+                    }
+                }
             }
         },
         "/subscriptions/{subscriptionId}/providers/microsoft.insights/activityLogAlerts": {
@@ -302,6 +348,10 @@
                         "$ref": "#/definitions/ActivityLogAlertResource"
                     },
                     "description": "The list of activity log alerts."
+                },
+                "nextLink": {
+                    "type": "string",
+                    "description": "Provides the link to retrive the next set of elements."
                 }
             }
         },
@@ -412,6 +462,31 @@
                 "message": {
                     "description": "Error message indicating why the operation failed.",
                     "type": "string"
+                }
+            }
+        },
+        "ActivityLogAlertPatchBody": {
+            "description": "An activity log alert object for the body of patch operations.",
+            "properties": {
+                "tags": {
+                    "additionalProperties": {
+                        "type": "string"
+                    },
+                    "description": "Resource tags"
+                },
+                "properties": {
+                    "x-ms-client-flatten": true,
+                    "$ref": "#/definitions/ActivityLogAlertPatch"
+                }
+            }
+        },
+        "ActivityLogAlertPatch": {
+            "description": "An Azure activity log alert for patch operations.",
+            "properties": {
+                "enabled": {
+                    "type": "boolean",
+                    "default": true,
+                    "description": "Indicates whether this activity log alert is enabled. If an activity log alert is not enabled, then none of its actions will be activated."
                 }
             }
         }
