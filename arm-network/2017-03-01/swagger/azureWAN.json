@@ -3077,61 +3077,68 @@
         },
         "DeviceProperties": {
             "type": "object",
-            "deviceVendor": {
-                "type": "string",
-                "description": "Name of the device Vendor."
-            },
-            "deviceModel": {
-                "type": "string",
-                "description": "Model of the device."
-            },
-            "linkSpeed": {
-                "type": "string",
-                "description": "Link speed."
+            "properties": {
+                "deviceVendor": {
+                    "type": "string",
+                    "description": "Name of the device Vendor."
+                },
+                "deviceModel": {
+                    "type": "string",
+                    "description": "Model of the device."
+                },
+                "linkSpeed": {
+                    "type": "string",
+                    "description": "Link speed."
+                }
             },
             "description": "List of properties of the device."
         },
         "IPSecProperties": {
             "type": "object",
-            "ikeEncryptionAlgorithm": {
-                "type": "string",
-                "description": "Name of the ike encryption algorithm."
-            },
-            "ikeIntegrityAlgorithm": {
-                "type": "string",
-                "description": "Name of the ike integrity algorithm."
-            },
-            "dhGroup": {
-                "type": "string",
-                "description": "DH group for the device."
-            },
-            "ipsecEncryptionAlgorithm": {
-                "type": "string",
-                "description": "Name of the ipsec encryption algorithm."
-            },
-            "ipsecIntegrityAlgorithm": {
-                "type": "string",
-                "description": "Name of the ipsec integrity algorithm."
-            },
-            "pfsGroup": {
-                "type": "string",
-                "description": "PFS group for the device."
-            },
-            "psk": {
-                "type": "string",
-                "description": "PSK."
+            "properties": {
+                "ikeEncryptionAlgorithm": {
+                    "type": "string",
+                    "description": "Name of the ike encryption algorithm."
+                },
+                "ikeIntegrityAlgorithm": {
+                    "type": "string",
+                    "description": "Name of the ike integrity algorithm."
+                },
+                "dhGroup": {
+                    "type": "string",
+                    "description": "DH group for the device."
+                },
+                "ipsecEncryptionAlgorithm": {
+                    "type": "string",
+                    "description": "Name of the ipsec encryption algorithm."
+                },
+                "ipsecIntegrityAlgorithm": {
+                    "type": "string",
+                    "description": "Name of the ipsec integrity algorithm."
+                },
+                "pfsGroup": {
+                    "type": "string",
+                    "description": "PFS group for the device."
+                },
+                "psk": {
+                    "type": "string",
+                    "description": "PSK."
+                }
             },
             "description": "List of IpSec properties."
         },
         "BGPProperties": {
             "type": "object",
-            "peeringIPAddress": {
-                "type": "string",
-                "description": "IP address for bgp peering."
-            },
-            "asn": {
-                "type": "string",
-                "description": ""
+            "properties": {
+
+                "peeringIPAddress": {
+                    "type": "string",
+                    "description": "IP address for bgp peering."
+                },
+                "asn": {
+                    "type": "string",
+                    "description": ""
+                }
             },
             "description": "List of bgp properties."
         },
@@ -3217,11 +3224,13 @@
         },
         "vpnClientAddressPool": {
             "type": "object",
-            "addressPrefixes": {
-                "type": "array",
-                "description": "list of address prefixes.",
-                "items": {
-                    "type": "string"
+            "properties": {
+                "addressPrefixes": {
+                    "type": "array",
+                    "description": "list of address prefixes.",
+                    "items": {
+                        "type": "string"
+                    }
                 }
             },
             "description": "Vpn client address pool."
