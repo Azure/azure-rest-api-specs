@@ -15,6 +15,7 @@ We request OpenAPI(Swagger) spec authoring be assigned to engineers who have an
   * [SDK Violations](#sdk-violations)
     * [SDK Errors](#sdk-errors)
     * [SDK Warnings](#sdk-warnings)
+* [Rule Descriptions](#rule-descriptions)
 
 ## Error vs Warning
 - Rules with severity "Error" have to be addressed for the OpenAPI(swagger) spec to be approved by the reviewers. If there is a strong reason for why the rule cannot be addressed in an OpenAPI(swagger) spec it will be a permanent exception, then [suppression process](https://github.com/Azure/adx-documentation-pr/wiki/Swagger-Validation-Errors-Suppression) must be followed.
@@ -105,13 +106,14 @@ We request OpenAPI(Swagger) spec authoring be assigned to engineers who have an
 | M2063	| BodyParametersValidation | A body parameter must be named 'parameters'. | Warning |
 | M2017	| PutRequestResponseValidation | A PUT operation request body schema should be the same as its 200 response schema, to allow reusing the same entity between GET and PUT. If the schema of the PUT request body is a superset of the GET response body, make sure you have a PATCH operation to make the resource updatable. Operation: '{0}' Request Model: '{1}' Response Model: '{2}' | Warning |
 
+## Rule Descriptions
 
-## <a name="M3012" />M3012 APIVersionPattern
+### <a name="M3012" />M3012 APIVersionPattern
 **Output Message**: API Version must be in the format: yyyy-MM-dd, optionally followed by -preview, -alpha, -beta, -rc, -privatepreview.
 
 **Description**: The API Version paramemter MUST be in the Year-Month-Date format (i.e. 2016-07-04.)  NOTE that this is the en-US ordering of month and date.  
 
-They date MAY optionally be followed by one of:
+The date MAY optionally be followed by one of:
 * -preview - Indicates the API version is in (public) preview
 * -alpha
 * -beta
@@ -120,7 +122,7 @@ They date MAY optionally be followed by one of:
 
 **Good Examples**: Examples of valid version patterns include:
 * 2016-07-04
-* 2016-07-04-beta
+* 2016-07-04-preview
 
 **Bad Examples**: The following would be invalid:
 * 97-07-04 - Date should be YYYY, not YY
