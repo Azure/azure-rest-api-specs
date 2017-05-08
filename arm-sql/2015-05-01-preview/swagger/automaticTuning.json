@@ -1,0 +1,491 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "version": "2015-05-01-preview",
+    "title": "SqlManagementClient",
+    "description": "The Azure SQL Database management API provides a RESTful set of web APIs that interact with Azure SQL Database services to manage your databases. The API enables users to create, retrieve, update, and delete databases, servers, and other entities."
+  },
+  "host": "management.azure.com",
+  "schemes": [
+    "https"
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "produces": [
+    "application/json"
+  ],
+  "paths": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/servers/{serverName}/databases/{databaseName}/automaticTuning/current": {
+      "get": {
+        "tags": [
+          "DatabaseAutomaticTuning"
+        ],
+        "description": "Returns details of Automatic Tuning.",
+        "operationId": "DatabaseAutomaticTuning_Get",
+        "parameters": [
+          {
+            "$ref": "#/parameters/ResourceGroupParameter"
+          },
+          {
+            "$ref": "#/parameters/ServerNameParameter"
+          },
+          {
+            "$ref": "#/parameters/DatabaseNameParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successfully retrieved database automatic tuning properties.",
+            "schema": {
+              "$ref": "#/definitions/AutomaticTuning"
+            }
+          },
+          "default": {
+            "description": "*** Error Responses: ***\n\n * 400 InvalidIdentifier - The identifier contains NULL or an invalid unicode character.\n\n * 404 SubscriptionDoesNotHaveServer - The requested server was not found\n\n * 404 DatabaseDoesNotExist - The requested database was not found\n\n * 404 SubscriptionDoesNotHaveElasticPool - The requested elastic pool was not found\n\n * 404 OperationIdNotFound - The operation with Id does not exist.\n\n * 405 NotSupported - This functionality is not supported.\n\n * 409 Conflict - Request could not be processed because of conflict in the request.\n\n * 409 OperationCancelled - The operation has been cancelled by user.\n\n * 409 OperationInterrupted - The operation on the resource could not be completed because it was interrupted by another operation on the same resource.\n\n * 500 OperationTimedOut - The operation timed out and automatically rolled back. Please retry the operation.\n\n * 503 ServiceTemporarilyUnavailable - Feature temporarily unavailable."
+          }
+        }
+      },
+      "patch": {
+        "tags": [
+          "DatabaseAutomaticTuning"
+        ],
+        "description": "Update automatic tuning properties for target database.",
+        "operationId": "DatabaseAutomaticTuning_Update",
+        "parameters": [
+          {
+            "$ref": "#/parameters/ResourceGroupParameter"
+          },
+          {
+            "$ref": "#/parameters/ServerNameParameter"
+          },
+          {
+            "$ref": "#/parameters/DatabaseNameParameter"
+          },
+          {
+            "name": "parameters",
+            "in": "body",
+            "description": "The requested automatic tuning resource state.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/AutomaticTuningUpdate"
+            }
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successfully updated the specified database automatic tuning settings.",
+            "schema": {
+              "$ref": "#/definitions/AutomaticTuning"
+            }
+          },
+          "default": {
+            "description": "*** Error Responses: ***\n\n * 400 InvalidIdentifier - The identifier contains NULL or an invalid unicode character.\n\n * 400 InvalidAutomaticTuningUpsertRequest - \n\n * 400 InvalidAdvisorAutoExecuteStatus - Specified auto-execute status for the advisor is not allowed.\n\n * 404 SubscriptionDoesNotHaveServer - The requested server was not found\n\n * 404 DatabaseDoesNotExist - The requested database was not found\n\n * 404 SubscriptionDoesNotHaveElasticPool - The requested elastic pool was not found\n\n * 404 OperationIdNotFound - The operation with Id does not exist.\n\n * 405 NotSupported - This functionality is not supported.\n\n * 409 Conflict - Request could not be processed because of conflict in the request.\n\n * 409 OperationCancelled - The operation has been cancelled by user.\n\n * 409 OperationInterrupted - The operation on the resource could not be completed because it was interrupted by another operation on the same resource.\n\n * 500 OperationTimedOut - The operation timed out and automatically rolled back. Please retry the operation.\n\n * 503 ServiceTemporarilyUnavailable - Feature temporarily unavailable."
+          }
+        }
+      }
+    },
+      "get": {
+        "tags": [
+          "Operations"
+        ],
+        "description": "Lists all of the available SQL Rest API operations.",
+        "operationId": "Operations_List",
+        "parameters": [
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successfully retrieved operations.",
+            "schema": {
+              "$ref": "#/definitions/OperationListResult"
+            }
+          },
+          "default": {
+            "description": "*** Error Responses: ***"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/servers/{serverName}/automaticTuning/current": {
+      "get": {
+        "tags": [
+          "ServerAutomaticTuning"
+        ],
+        "description": "Successfully retrieved server automatic tuning options.",
+        "operationId": "ServerAutomaticTuning_Get",
+        "parameters": [
+          {
+            "$ref": "#/parameters/ResourceGroupParameter"
+          },
+          {
+            "$ref": "#/parameters/ServerNameParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successfully retrieved server automatic tuning properties.",
+            "schema": {
+              "$ref": "#/definitions/AutomaticTuningUpdate"
+            }
+          },
+          "default": {
+            "description": "*** Error Responses: ***\n\n * 400 InvalidIdentifier - The identifier contains NULL or an invalid unicode character.\n\n * 404 SubscriptionDoesNotHaveServer - The requested server was not found\n\n * 404 DatabaseDoesNotExist - The requested database was not found\n\n * 404 SubscriptionDoesNotHaveElasticPool - The requested elastic pool was not found\n\n * 404 OperationIdNotFound - The operation with Id does not exist.\n\n * 405 NotSupported - This functionality is not supported.\n\n * 409 Conflict - Request could not be processed because of conflict in the request.\n\n * 409 OperationCancelled - The operation has been cancelled by user.\n\n * 409 OperationInterrupted - The operation on the resource could not be completed because it was interrupted by another operation on the same resource.\n\n * 500 OperationTimedOut - The operation timed out and automatically rolled back. Please retry the operation.\n\n * 503 ServiceTemporarilyUnavailable - Feature temporarily unavailable."
+          }
+        }
+      },
+      "patch": {
+        "tags": [
+          "ServerAutomaticTuning"
+        ],
+        "description": "Update default automatic tuning options on server.",
+        "operationId": "ServerAutomaticTuning_Update",
+        "parameters": [
+          {
+            "$ref": "#/parameters/ResourceGroupParameter"
+          },
+          {
+            "$ref": "#/parameters/ServerNameParameter"
+          },
+          {
+            "name": "parameters",
+            "in": "body",
+            "description": "The requested automatic tuning resource state.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/AutomaticTuningUpdate"
+            }
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successfully updated the default server-level automatic tuning options.",
+            "schema": {
+              "$ref": "#/definitions/AutomaticTuningUpdate"
+            }
+          },
+          "default": {
+            "description": "*** Error Responses: ***\n\n * 400 InvalidIdentifier - The identifier contains NULL or an invalid unicode character.\n\n * 400 InvalidAutomaticTuningUpsertRequest - \n\n * 400 InvalidAdvisorAutoExecuteStatus - Specified auto-execute status for the advisor is not allowed.\n\n * 404 SubscriptionDoesNotHaveServer - The requested server was not found\n\n * 404 DatabaseDoesNotExist - The requested database was not found\n\n * 404 SubscriptionDoesNotHaveElasticPool - The requested elastic pool was not found\n\n * 404 OperationIdNotFound - The operation with Id does not exist.\n\n * 405 NotSupported - This functionality is not supported.\n\n * 409 Conflict - Request could not be processed because of conflict in the request.\n\n * 409 OperationCancelled - The operation has been cancelled by user.\n\n * 409 OperationInterrupted - The operation on the resource could not be completed because it was interrupted by another operation on the same resource.\n\n * 500 OperationTimedOut - The operation timed out and automatically rolled back. Please retry the operation.\n\n * 503 ServiceTemporarilyUnavailable - Feature temporarily unavailable."
+          }
+        }
+      }
+    }
+      "get": {
+        "tags": [
+          "Servers"
+        ],
+        "description": "Returns a list of servers.",
+        "operationId": "Servers_List",
+        "parameters": [
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successfully retrieved the list of servers.",
+            "schema": {
+              "$ref": "#/definitions/ServerListResult"
+            }
+          },
+          "default": {
+            "description": "*** Error Responses: ***"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        },
+        "x-ms-examples": {
+          "List servers": {
+            "$ref": "../examples/ServerList.json"
+          }
+        }
+      }
+    },
+      "get": {
+        "tags": [
+          "VnetFirewallRules"
+        ],
+        "description": "Gets a list of virtual network rules in a server.",
+        "operationId": "VnetFirewallRules_ListByServer",
+        "parameters": [
+          {
+            "$ref": "#/parameters/ResourceGroupParameter"
+          },
+          {
+            "$ref": "#/parameters/ServerNameParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successfully retrieved the list of virtual network rules.",
+            "schema": {
+              "$ref": "#/definitions/VnetFirewallRuleListResult"
+            }
+          },
+          "default": {
+            "description": "*** Error Responses: ***\n\n * 404 SubscriptionDoesNotHaveServer - The requested server was not found\n\n * 404 ResourceNotFound - The requested resource was not found."
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        },
+        "x-ms-examples": {
+          "List virtual network rules": {
+            "$ref": "../examples/VirtualNetworkRulesList.json"
+          }
+        }
+      }
+    }
+  },
+  "definitions": {
+    "AutomaticTuningProperties": {
+      "description": "Automatic Tuning properties.",
+      "type": "object",
+      "properties": {
+        "actualState": {
+          "description": "Automatic tuning actual state.",
+          "enum": [
+            "Auto",
+            "Inherit",
+            "Custom"
+          ],
+          "type": "string",
+          "readOnly": true
+        },
+        "desiredState": {
+          "description": "Automatic tuning desired state.",
+          "enum": [
+            "Auto",
+            "Inherit",
+            "Custom"
+          ],
+          "type": "string"
+        },
+        "options": {
+          "description": "Automatic tuning options definition.",
+          "type": "object",
+          "additionalProperties": {
+            "$ref": "#/definitions/Microsoft.SqlServer.Management.Service.ResourceProvider.Arm.V20150501.WorkloadInsight.Entities.AutomaticTuningProperties.AutomaticTuningOptions"
+          }
+        }
+      }
+    },
+    "Resource": {
+      "description": "ARM resource.",
+      "type": "object",
+      "properties": {
+        "id": {
+          "description": "Resource ID.",
+          "type": "string",
+          "readOnly": true
+        },
+        "name": {
+          "description": "Resource name.",
+          "type": "string",
+          "readOnly": true
+        },
+        "type": {
+          "description": "Resource type.",
+          "type": "string",
+          "readOnly": true
+        }
+      },
+      "x-ms-azure-resource": true
+    },
+    "ProxyResource": {
+      "description": "ARM proxy resource.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/Resource"
+        }
+      ],
+      "properties": {}
+    },
+    "AutomaticTuning": {
+      "description": "Database-level Automatic Tuning.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/ProxyResource"
+        }
+      ],
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/AutomaticTuningProperties",
+          "description": "Resource properties.",
+          "x-ms-client-flatten": true
+        }
+      }
+    },
+    "AutomaticTuningUpdateProperties": {
+      "description": "Properties for updating Automatic Tuning.",
+      "type": "object",
+      "properties": {
+        "desiredState": {
+          "description": "Automatic tuning desired state.",
+          "enum": [
+            "Auto",
+            "Inherit",
+            "Custom"
+          ],
+          "type": "string"
+        },
+        "options": {
+          "description": "Automatic tuning options definition.",
+          "type": "object",
+          "additionalProperties": {
+            "$ref": "#/definitions/Microsoft.SqlServer.Management.Service.ResourceProvider.Arm.V20150501.WorkloadInsight.Entities.AutomaticTuningUpdateProperties.AutomaticTuningUpdateOptions"
+          }
+        }
+      }
+    },
+    "AutomaticTuningUpdate": {
+      "description": "Azure SQL Database or Server Automatic Tuning.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/ProxyResource"
+        }
+      ],
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/AutomaticTuningUpdateProperties",
+          "description": "Resource properties.",
+          "x-ms-client-flatten": true
+        }
+      }
+    },
+      "description": "The properties of a server.",
+      "type": "object",
+      "properties": {
+        "administratorLogin": {
+          "description": "Administrator username for the server. Can only be specified when the server is being created (and is required for creation).",
+          "type": "string"
+        },
+        "administratorLoginPassword": {
+          "description": "The administrator login password (required for server creation).",
+          "type": "string",
+          "x-ms-mutability": [
+            "create",
+            "update"
+          ]
+        },
+        "version": {
+          "description": "The version of the server.",
+          "type": "string"
+        },
+        "state": {
+          "description": "The state of the server.",
+          "type": "string",
+          "readOnly": true
+        },
+        "fullyQualifiedDomainName": {
+          "description": "The fully qualified domain name of the server.",
+          "type": "string",
+          "readOnly": true
+        }
+      }
+    },
+    "TrackedResource": {
+      "description": "A list of virtual network rules.",
+      "type": "object",
+      "properties": {
+        "value": {
+          "description": "Array of results.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/VnetFirewallRule"
+          },
+          "readOnly": true
+        },
+        "nextLink": {
+          "description": "Link to retrieve next page of results.",
+          "type": "string",
+          "readOnly": true
+        }
+      }
+    }
+  },
+  "parameters": {
+    "SubscriptionIdParameter": {
+      "name": "subscriptionId",
+      "in": "path",
+      "description": "The subscription ID that identifies an Azure subscription.",
+      "required": true,
+      "type": "string",
+      "x-ms-parameter-location": "client"
+    },
+    "ApiVersionParameter": {
+      "name": "api-version",
+      "in": "query",
+      "description": "The API version to use for the request.",
+      "required": true,
+      "type": "string",
+      "x-ms-parameter-location": "client"
+    },
+    "ResourceGroupParameter": {
+      "name": "resourceGroupName",
+      "in": "path",
+      "description": "The name of the resource group that contains the resource. You can obtain this value from the Azure Resource Manager API or the portal.",
+      "required": true,
+      "type": "string",
+      "x-ms-parameter-location": "method"
+    },
+    "ServerNameParameter": {
+      "name": "serverName",
+      "in": "path",
+      "description": "The name of the server.",
+      "required": true,
+      "type": "string",
+      "x-ms-parameter-location": "method"
+    },
+    "DatabaseNameParameter": {
+      "name": "databaseName",
+      "in": "path",
+      "description": "The name of the database.",
+      "required": true,
+      "type": "string",
+      "x-ms-parameter-location": "method"
+    }
+  }
+}
