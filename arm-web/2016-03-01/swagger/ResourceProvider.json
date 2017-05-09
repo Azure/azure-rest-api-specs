@@ -101,6 +101,37 @@
       }
     },
     "/providers/Microsoft.Web/sourcecontrols/{sourceControlType}": {
+      "get": {
+        "summary": "Gets source control token",
+        "description": "Gets source control token",
+        "operationId": "GetSourceControl",
+        "produces": [
+          "application/json",
+          "text/json",
+          "application/xml",
+          "text/xml"
+        ],
+        "parameters": [
+          {
+            "name": "sourceControlType",
+            "in": "path",
+            "description": "Type of source control",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/SourceControl"
+            }
+          }
+        }
+      },
       "put": {
         "summary": "Updates source control token",
         "description": "Updates source control token",
