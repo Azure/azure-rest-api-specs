@@ -9,9 +9,36 @@ batch:
       title: $(name)
 
     azureresourceschema: 
-      non: foo
+      note: This generates all the Azure Resource Schemas into the specified folder (merging as it goes)
+``` 
 
-    input-file:
+## Specifications
+
+This should include every single REST-API specification for every Azure Resource/Version this repository
+
+``` yaml
+batch:
+    input-file: 
+      - ../specification/customer-insights/resource-manager/Microsoft.CustomerInsights/2017-01-01/customer-insights.json
+      - ../specification/automation/resource-manager/Microsoft.Automation/2015-10-31/account.json
+      - ../specification/automation/resource-manager/Microsoft.Automation/2015-10-31/certificate.json
+      - ../specification/automation/resource-manager/Microsoft.Automation/2015-10-31/connection.json
+      - ../specification/automation/resource-manager/Microsoft.Automation/2015-10-31/connectionType.json
+      - ../specification/automation/resource-manager/Microsoft.Automation/2015-10-31/credential.json
+      - ../specification/automation/resource-manager/Microsoft.Automation/2015-10-31/definitions.json
+      - ../specification/automation/resource-manager/Microsoft.Automation/2015-10-31/dscCompilationJob.json
+      - ../specification/automation/resource-manager/Microsoft.Automation/2015-10-31/dscConfiguration.json
+      - ../specification/automation/resource-manager/Microsoft.Automation/2015-10-31/dscNode.json
+      - ../specification/automation/resource-manager/Microsoft.Automation/2015-10-31/dscNodeConfiguration.json
+      - ../specification/automation/resource-manager/Microsoft.Automation/2015-10-31/hybridRunbookWorkerGroup.json
+      - ../specification/automation/resource-manager/Microsoft.Automation/2015-10-31/job.json
+      - ../specification/automation/resource-manager/Microsoft.Automation/2015-10-31/jobSchedule.json
+      - ../specification/automation/resource-manager/Microsoft.Automation/2015-10-31/module.json
+      - ../specification/automation/resource-manager/Microsoft.Automation/2015-10-31/runbook.json
+      - ../specification/automation/resource-manager/Microsoft.Automation/2015-10-31/schedule.json
+      - ../specification/automation/resource-manager/Microsoft.Automation/2015-10-31/variable.json
+      - ../specification/automation/resource-manager/Microsoft.Automation/2015-10-31/webhook.json
+    
       - ../specification/advisor/resource-manager/Microsoft.Advisor/2016-07-12-preview/advisor.json
       - ../specification/advisor/resource-manager/Microsoft.Advisor/2017-03-31/advisor.json
       - ../specification/advisor/resource-manager/Microsoft.Advisor/2017-04-19/advisor.json
@@ -43,8 +70,6 @@ batch:
       - ../specification/batch/resource-manager/Microsoft.Batch/2015-12-01/BatchManagement.json
       - ../specification/batch/resource-manager/Microsoft.Batch/2017-01-01/BatchManagement.json
       - ../specification/batch/resource-manager/Microsoft.Batch/2017-05-01/BatchManagement.json
-      # Move this -- looks like a dataplane API
-      # - ../specification/batch/resource-manager/Microsoft.Batch/2017-05-01.5.0/BatchService.json
       - ../specification/billing/resource-manager/Microsoft.Billing/2017-02-27-preview/billing.json
       - ../specification/billing/resource-manager/Microsoft.Billing/2017-04-24-preview/billing.json
       - ../specification/cdn/resource-manager/Microsoft.Cdn/2015-06-01/cdn.json
@@ -65,8 +90,7 @@ batch:
       - ../specification/containerregistry/resource-manager/Microsoft.ContainerRegistry/2016-06-27-preview/containerregistry.json
       - ../specification/containerregistry/resource-manager/Microsoft.ContainerRegistry/2017-03-01/containerregistry.json
       - ../specification/containerregistry/resource-manager/Microsoft.ContainerRegistry/2017-06-01-preview/containerregistry.json
-      # Requires bug fix.
-      # - ../specification/customer-insights/resource-manager/Microsoft.CustomerInsights/2017-01-01/customer-insights.json
+      
       - ../specification/datalake-analytics/resource-manager/Microsoft.DataLakeAnalytics/2015-10-01-preview/account.json
       - ../specification/datalake-analytics/resource-manager/Microsoft.DataLakeAnalytics/2015-10-01-preview/catalog.json
       - ../specification/datalake-analytics/resource-manager/Microsoft.DataLakeAnalytics/2015-11-01-preview/job.json
@@ -114,7 +138,6 @@ batch:
       - ../specification/machinelearning/resource-manager/Microsoft.MachineLearning/2016-05-01-preview/webservices.json
       - ../specification/machinelearning/resource-manager/Microsoft.MachineLearning/2017-01-01/webservices.json
       - ../specification/mediaservices/resource-manager/Microsoft.Media/2015-10-01/media.json
-      - ../specification/mobileengagement/resource-manager/Microsoft.MobileEngagement/2014-12-01/export.schema.json
       - ../specification/mobileengagement/resource-manager/Microsoft.MobileEngagement/2014-12-01/mobile-engagement.json
       - ../specification/monitor/resource-manager/microsoft.insights/2015-04-01/autoscale_API.json
       - ../specification/monitor/resource-manager/microsoft.insights/2015-07-01/serviceDiagnosticsSettings_API.json
@@ -180,17 +203,14 @@ batch:
       - ../specification/notificationhubs/resource-manager/Microsoft.NotificationHubs/2017-04-01/notificationhubs.json
       - ../specification/operationalinsights/resource-manager/Microsoft.OperationalInsights/2015-03-20/OperationalInsights.json
       - ../specification/operationalinsights/resource-manager/Microsoft.OperationalInsights/2015-11-01-preview/OperationalInsights.json
-      # has byte array?
-      # - ../specification/powerbiembedded/resource-manager/Microsoft.PowerBI/2016-01-29/powerbiembedded.json
-      # bytearray?
-      # - ../specification/recoveryservices/resource-manager/Microsoft.RecoveryServices/2016-06-01/registeredidentities.json
+      - ../specification/powerbiembedded/resource-manager/Microsoft.PowerBI/2016-01-29/powerbiembedded.json
+      - ../specification/recoveryservices/resource-manager/Microsoft.RecoveryServices/2016-06-01/registeredidentities.json
       - ../specification/recoveryservices/resource-manager/Microsoft.RecoveryServices/2016-06-01/replicationusages.json
       - ../specification/recoveryservices/resource-manager/Microsoft.RecoveryServices/2016-06-01/vaults.json
       - ../specification/recoveryservices/resource-manager/Microsoft.RecoveryServices/2016-06-01/vaultusages.json
       - ../specification/recoveryservices/resource-manager/Microsoft.RecoveryServices/2016-12-01/backup.json
       - ../specification/recoveryservicesbackup/resource-manager/Microsoft.RecoveryServices/2016-06-01/recoveryservicesbackup.json
-      # bytearray?
-      # - ../specification/recoveryservicesbackup/resource-manager/Microsoft.RecoveryServices/2016-06-01/registeredIdentities.json
+      - ../specification/recoveryservicesbackup/resource-manager/Microsoft.RecoveryServices/2016-06-01/registeredIdentities.json
       - ../specification/recoveryservicesbackup/resource-manager/Microsoft.RecoveryServices/2016-12-01/backupManagement.json
       - ../specification/redis/resource-manager/Microsoft.Cache/2015-08-01/redis.json
       - ../specification/redis/resource-manager/Microsoft.Cache/2016-04-01/redis.json
@@ -241,8 +261,7 @@ batch:
       - ../specification/storage/resource-manager/Microsoft.Storage/2016-12-01/storage.json
       - ../specification/storageimportexport/resource-manager/Microsoft.ImportExport/2016-11-01/storageimportexport.json
       - ../specification/storsimple8000series/resource-manager/Microsoft.StorSimple/2017-06-01/storsimple.json
-      # some invalid swagger
-      # - ../specification/timeseriesinsights/resource-manager/Microsoft.TimeSeriesInsights/2017-02-28-preview/timeseriesinsights.json
+      
       - ../specification/trafficmanager/resource-manager/Microsoft.Network/2015-11-01/trafficmanager.json
       - ../specification/trafficmanager/resource-manager/Microsoft.Network/2017-03-01/trafficmanager.json
       - ../specification/web/resource-manager/Microsoft.CertificateRegistration/2015-08-01/AppServiceCertificateOrders.json
@@ -250,8 +269,7 @@ batch:
       - ../specification/web/resource-manager/Microsoft.DomainRegistration/2015-04-01/TopLevelDomains.json
       - ../specification/web/resource-manager/Microsoft.Web/2015-08-01/service.json
       - ../specification/web/resource-manager/Microsoft.Web/2015-08-01-preview/logicAppsManagementClient.json
-      # byte arrray
-      # - - ../specification/web/resource-manager/Microsoft.Web/2016-03-01/Certificates.json
+      - ../specification/web/resource-manager/Microsoft.Web/2016-03-01/Certificates.json
       - ../specification/web/resource-manager/Microsoft.Web/2016-03-01/DeletedWebApps.json
       - ../specification/web/resource-manager/Microsoft.Web/2016-03-01/Provider.json
       - ../specification/web/resource-manager/Microsoft.Web/2016-03-01/Recommendations.json
@@ -259,27 +277,7 @@ batch:
       - ../specification/web/resource-manager/Microsoft.Web/2016-08-01/WebApps.json
       - ../specification/web/resource-manager/Microsoft.Web/2016-09-01/AppServiceEnvironments.json
       - ../specification/web/resource-manager/Microsoft.Web/2016-09-01/AppServicePlans.json
-
+      
+      # some invalid swagger
+      # - ../specification/timeseriesinsights/resource-manager/Microsoft.TimeSeriesInsights/2017-02-28-preview/timeseriesinsights.json
 ```  
-
-``` none
-
-      - ../specification/automation/resource-manager/Microsoft.Automation/2015-10-31/account.json
-      - ../specification/automation/resource-manager/Microsoft.Automation/2015-10-31/certificate.json
-      - ../specification/automation/resource-manager/Microsoft.Automation/2015-10-31/connection.json
-      - ../specification/automation/resource-manager/Microsoft.Automation/2015-10-31/connectionType.json
-      - ../specification/automation/resource-manager/Microsoft.Automation/2015-10-31/credential.json
-      - ../specification/automation/resource-manager/Microsoft.Automation/2015-10-31/definitions.json
-      - ../specification/automation/resource-manager/Microsoft.Automation/2015-10-31/dscCompilationJob.json
-      - ../specification/automation/resource-manager/Microsoft.Automation/2015-10-31/dscConfiguration.json
-      - ../specification/automation/resource-manager/Microsoft.Automation/2015-10-31/dscNode.json
-      - ../specification/automation/resource-manager/Microsoft.Automation/2015-10-31/dscNodeConfiguration.json
-      - ../specification/automation/resource-manager/Microsoft.Automation/2015-10-31/hybridRunbookWorkerGroup.json
-      - ../specification/automation/resource-manager/Microsoft.Automation/2015-10-31/job.json
-      - ../specification/automation/resource-manager/Microsoft.Automation/2015-10-31/jobSchedule.json
-      - ../specification/automation/resource-manager/Microsoft.Automation/2015-10-31/module.json
-      - ../specification/automation/resource-manager/Microsoft.Automation/2015-10-31/runbook.json
-      - ../specification/automation/resource-manager/Microsoft.Automation/2015-10-31/schedule.json
-      - ../specification/automation/resource-manager/Microsoft.Automation/2015-10-31/variable.json
-      - ../specification/automation/resource-manager/Microsoft.Automation/2015-10-31/webhook.json
-```
