@@ -1,0 +1,502 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "GalleryAdminClient",
+    "description": "Management client for azurestack gallery admin operations.",
+    "version": "2015-04-01"
+  },
+  "host": "publicapi.azurestack.local",
+  "schemes": [
+    "https"
+  ],
+    "consumes": [
+    "application/json"
+  ],
+  "produces": [
+    "application/json"
+  ],
+  "security": [
+    {
+      "azure_auth": [
+        "user_impersonation"
+      ]
+    }
+  ],
+  "securityDefinitions": {
+    "azure_auth": {
+      "type": "oauth2",
+      "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
+      "flow": "implicit",
+      "description": "Azure Active Directory OAuth2 Flow",
+      "scopes": {
+        "user_impersonation": "impersonate your user account"
+      }
+    }
+  },
+  "paths": {
+      "/subscriptions/{subscriptionId}/providers/microsoft.gallery.admin/galleryItems": {
+      "get": {
+        "tags": [
+          "AdminGalleryItems"
+        ],
+        "description": "Lists gallery registrations.",
+        "operationId": "AdminGalleryItems_List",
+        "consumes": [],
+        "produces": [
+          "application/json",
+          "text/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/ResourceDefinition"
+              }
+            }
+          }
+        }
+      },
+      "post": {
+        "tags": [
+          "AdminGalleryItems"
+        ],
+        "description": "Uploads a provider gallery item to the storage.",
+        "operationId": "AdminGalleryItems_Upload",
+        "consumes": [         
+          "application/json",
+          "text/json"
+          ],
+        "produces": [
+          "application/json",
+          "text/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "name": "galleryItemUri",
+            "in": "body",
+            "description": "Gallery Item Uri from where the gallery package is downloaded.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/GalleryItemUriPayload"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK, when the gallery item already exists and trying to upload the same item returns this response",
+            "schema": {
+              "$ref": "#/definitions/ResourceDefinition"
+            }
+          },
+          "201": {
+            "description": "Created, When a new gallery item is uploaded, this response is returned",
+            "schema": {
+              "$ref": "#/definitions/ResourceDefinition"
+            }
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/providers/microsoft.gallery.admin/galleryItems/{galleryItemName}": {
+      "get": {
+        "tags": [
+          "AdminGalleryItems"
+        ],
+        "description": "Gets a specific gallery registration.",
+        "operationId": "AdminGalleryItems_Get",
+        "consumes": [],
+        "produces": [
+          "application/json",
+          "text/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "name": "galleryItemName",
+            "in": "path",
+            "description": "Identity of the gallery item. Includes publisher name, item name and may include version separated by period character.",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/ResourceDefinition"
+            }
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "AdminGalleryItems"
+        ],
+        "description": "Deletes a specific gallery registration.",
+        "operationId": "AdminGalleryItems_Delete",
+        "consumes": [],
+        "produces": [],
+        "parameters": [
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "name": "galleryItemName",
+            "in": "path",
+            "description": "Identity of the gallery item. Includes publisher name, item name and may include version separated by period character.",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "No Content, This response is returned when the provided gallery item does not exist"
+          },
+          "200": {
+            "description": "OK, This response is returned when the provided gallery item is successfully deleted"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.gallery.providers/galleryItems/{galleryItemName}": {
+      "get": {
+        "tags": [
+          "ProviderGalleryRegistrations"
+        ],
+        "description": "Gets a specific gallery registration",
+        "operationId": "ProviderGalleryRegistrations_Get",
+        "consumes": [],
+        "produces": [
+          "application/json",
+          "text/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/resourceGroupNameParameter"
+          },
+          {
+            "name": "galleryItemName",
+            "in": "path",
+            "description": "Identity of the gallery item. Includes publisher name, item name and may include version separated by period character.",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/ResourceDefinition"
+            }
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "ProviderGalleryRegistrations"
+        ],
+        "description": "Uploads a provider gallery item to the storage",
+        "operationId": "ProviderGalleryRegistrations_CreateOrUpdate",
+        "consumes": [],
+        "produces": [
+          "application/json",
+          "text/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/resourceGroupNameParameter"
+          },
+          {
+            "name": "galleryItemName",
+            "in": "path",
+            "description": "Identity of the gallery item. Includes publisher name, item name and may include version separated by period character.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "registrationResourceDefinition",
+            "in": "body",
+            "description": "Resource definition of the gallery item.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/ResourceDefinition"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK, This response is returned when the provided registration already exists",
+            "schema": {
+              "$ref": "#/definitions/ResourceDefinition"
+            }
+          },
+          "201": {
+            "description": "Created, This response is returned when new registration is provided",
+            "schema": {
+              "$ref": "#/definitions/ResourceDefinition"
+            }
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "ProviderGalleryRegistrations"
+        ],
+        "description": "Deletes a specific gallery registration",
+        "operationId": "ProviderGalleryRegistrations_Delete",
+        "consumes": [],
+        "produces": [
+          "application/json",
+          "text/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/resourceGroupNameParameter"
+          },
+          {
+            "name": "galleryItemName",
+            "in": "path",
+            "description": "Identity of the gallery item. Includes publisher name, item name and may include version separated by period character.",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "No Content, This response is returned when the provided gallery registration does not exist"
+          },
+          "200": {
+            "description": "OK, This response is returned when the provided gallery registration is successfully deleted"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.gallery.providers/galleryItems": {
+      "get": {
+        "tags": [
+          "ProviderGalleryRegistrations"
+        ],
+        "description": "Lists gallery registrations",
+        "operationId": "ProviderGalleryRegistrations_List",
+        "consumes": [],
+        "produces": [
+          "application/json",
+          "text/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/resourceGroupNameParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/ResourceDefinition"
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "definitions": {
+     "GalleryItemUriPayload": {
+      "description": "Gallery item URI, Points to the http or https uri where the gallery package is located, typically a blob uri",
+      "type": "object",
+      "properties": {
+        "GalleryItemUri": {
+          "description": "The gallery item URI.",
+          "type": "string"
+        }
+      }
+    },
+    "ResourcePlan": {
+      "type": "object",
+      "description": "The reosurce plan object",
+      "properties": {
+        "Name": {
+          "type": "string",
+          "description": "The name of the plan",
+          "readOnly": true
+        },
+        "Product": {
+          "type": "string",
+          "description": "The product code of the plan",
+          "readOnly": true
+        },
+        "PromotionCode": {
+          "type": "string",
+          "description": "The promotion code of the plan",
+          "readOnly": true
+        },
+        "Publisher": {
+          "type": "string",
+          "description": "The publisher of the plan",
+          "readOnly": true
+        }
+      }
+    },
+    "ResourceSku": {
+      "type": "object",
+      "description": "The resource sku object",
+      "properties": {
+        "Name": {
+          "type": "string",
+          "description": "The name of the sku",
+          "readOnly": true
+        },
+        "Tier": {
+          "type": "string",
+          "description": "The tier of the sku",
+          "readOnly": true
+        },
+        "Size": {
+          "type": "string",
+          "description": "The size of the sku",
+          "readOnly": true
+        },
+        "Family": {
+          "type": "string",
+          "description": "The family of the sku",
+          "readOnly": true
+        },
+        "Capacity": {
+          "format": "int32",
+          "type": "integer",
+          "description": "The capacity of the sku",
+          "readOnly": true
+        }
+      }
+    },
+    "ResourceDefinition": {
+      "type": "object",
+      "description": "The resource definition object of the azure resource manager",
+      "properties": {
+        "Id": {
+          "type": "string",
+          "description": "The ID of the resource"
+        },
+        "Name": {
+          "type": "string",
+          "description": "The name of the resource",
+          "readOnly": true
+        },
+        "Type": {
+          "type": "string",
+          "description": "The type of the resource",
+          "readOnly": true
+        },
+        "Location": {
+          "type": "string",
+          "description": "The location of the resource"
+        },
+        "Plan": {
+          "$ref": "#/definitions/ResourcePlan",
+          "description": "The plan of the resource"
+        },
+        "Sku": {
+          "$ref": "#/definitions/ResourceSku",
+          "description": "The sku of the resource"
+        },
+        "Kind": {
+          "type": "string",
+          "description": "The kind of the resource"
+        },
+        "Tags": {
+          "type": "object",
+          "description": "The tags on the resource",
+          "additionalProperties": {
+            "type": "string"
+          }
+        },
+        "etag": {
+          "type": "string",
+          "description": "The etag of the resource"
+        },
+        "Properties": {
+          "type": "object",
+          "description": "The custom properties of the resource"
+        }
+      },
+      "x-ms-azure-resource": true
+    }
+  },
+  "parameters": {
+    "SubscriptionIdParameter": {
+      "name": "subscriptionId",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "description": "Subscription credentials which uniquely identify Azure stack subscription. The subscription ID forms part of the URI for every service call."
+    },
+    "ApiVersionParameter": {
+      "name": "api-version",
+      "in": "query",
+      "required": true,
+      "type": "string",
+      "description": "Client Api Version."
+    },
+    "resourceGroupNameParameter": {
+      "name": "resourceGroupName",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "pattern": "^[-\\w\\._\\(\\)]+$",
+      "minLength": 1,
+      "maxLength": 90,
+      "x-ms-parameter-location": "method",
+      "description": "Name of an Azure resource group."
+    }
+  }
+}
