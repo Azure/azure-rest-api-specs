@@ -5506,7 +5506,12 @@
             "description": "NoContent"
           }
         },
-        "deprecated": false
+        "deprecated": false,
+        "x-ms-examples": {
+          "Tracks the Site async operation.": {
+            "$ref": "../examples/ReplicationJobs_GetTrackAsyncOperation.json"
+          }
+        }
       }
     },
     "/Subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.RecoveryServices/vaults/{resourceName}/replicationJobs/{jobName}/resume": {
@@ -5565,7 +5570,12 @@
           }
         },
         "deprecated": false,
-        "x-ms-long-running-operation": true
+        "x-ms-long-running-operation": true,
+        "x-ms-examples": {
+          "Resumes the specified job.": {
+            "$ref": "../examples/ReplicationJobs_Resume.json"
+          }
+        }
       }
     },
     "/Subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.RecoveryServices/vaults/{resourceName}/replicationJobs/{jobName}/restart": {
@@ -5612,7 +5622,12 @@
           }
         },
         "deprecated": false,
-        "x-ms-long-running-operation": true
+        "x-ms-long-running-operation": true,
+        "x-ms-examples": {
+          "Restarts the specified job.": {
+            "$ref": "../examples/ReplicationJobs_Restart.json"
+          }
+        }
       }
     },
     "/Subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.RecoveryServices/vaults/{resourceName}/replicationJobs/{jobName}/cancel": {
@@ -5659,7 +5674,12 @@
           }
         },
         "deprecated": false,
-        "x-ms-long-running-operation": true
+        "x-ms-long-running-operation": true,
+        "x-ms-examples": {
+          "Cancels the specified job.": {
+            "$ref": "../examples/ReplicationJobs_Cancel.json"
+          }
+        }
       }
     },
     "/Subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.RecoveryServices/vaults/{resourceName}/replicationJobs/{jobName}": {
@@ -5702,7 +5722,12 @@
             }
           }
         },
-        "deprecated": false
+        "deprecated": false,
+        "x-ms-examples": {
+          "Gets the job details.": {
+            "$ref": "../examples/ReplicationJobs_Get.json"
+          }
+        }
       }
     },
     "/Subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.RecoveryServices/vaults/{resourceName}/replicationJobs/export": {
@@ -5710,7 +5735,7 @@
         "tags": [
           "ReplicationJobs"
         ],
-        "summary": "Gets \"ExportJobs\" workflow details.\r\n            Old method: Two APIs were exposed for performing export jobs, one api\r\n            (subscriptions/workflow/computeWorkflowHistory) to trigger the export jobs workflow and\r\n            another api to get the blob information after the workflow has completed successfully\r\n            (subscriptions/workflow/{workflowId}/blobUrlWithSASKey)\r\n            New Method: Only one API is exposed to trigger export jobs workflow, which will trigger\r\n            the export jobs workflow, however in order to store the blob information(blobUri and\r\n            sas token) the CustomDetails field associated with the JobProperties (in Job Object)\r\n            is being used. This will be set once the export jobs workflow completes successfully.\r\n            Within custom details, instanceType is set to \"ExportJobsDetails\" and fields\r\n            \"blobUri\" and \"sasToken\" contains the required information that is necessary to access\r\n            exported jobs data.\r\n            Note:\r\n            1. Current Implementation only supports one type of AffectedObjectType and one value\r\n            for WorkflowStatus for the filer. Hence the current implementation only uses the first\r\n            value in the corresponding lists.\r\n            2. A dummy Job Entity is created in the Jobs table (this is marked as internal job)\r\n            This job entity can be identified by the Scenario Name which is set to\r\n            \"ScenarioName.ExportsJobs\".",
+        "summary": "Exports the details of the Azure Site Recovery jobs of the vault.",
         "description": "The operation to export the details of the Azure Site Recovery jobs of the vault.",
         "operationId": "ReplicationJobs_Export",
         "consumes": [
@@ -5754,7 +5779,12 @@
           }
         },
         "deprecated": false,
-        "x-ms-long-running-operation": true
+        "x-ms-long-running-operation": true,
+        "x-ms-examples": {
+          "Exports the details of the Azure Site Recovery jobs of the vault.": {
+            "$ref": "../examples/ReplicationJobs_Export.json"
+          }
+        }
       }
     },
     "/Subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.RecoveryServices/vaults/{resourceName}/replicationJobs": {
@@ -5801,7 +5831,12 @@
         "x-ms-pageable": {
           "nextLinkName": "nextLink"
         },
-        "x-ms-odata": "JobQueryParameter"
+        "x-ms-odata": "JobQueryParameter",
+        "x-ms-examples": {
+          "Gets the list of jobs.": {
+            "$ref": "../examples/ReplicationJobs_List.json"
+          }
+        }
       }
     },
     "/Subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.RecoveryServices/vaults/{resourceName}/replicationFabrics/{fabricName}/operationresults/{jobName}": {
