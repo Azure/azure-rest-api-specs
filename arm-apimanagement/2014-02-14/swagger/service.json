@@ -1,0 +1,1289 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "APIManagementServiceClient",
+    "description": "REST API for Azure APIManagement Service",
+    "version": "2014-02-14"
+  },
+  "host": "management.azure.com",
+  "schemes": [
+    "https"
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "produces": [
+    "application/json"
+  ],
+  "security": [
+    {
+      "azure_auth": [
+        "user_impersonation"
+      ]
+    }
+  ],
+  "securityDefinitions": {
+    "azure_auth": {
+      "type": "oauth2",
+      "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
+      "flow": "implicit",
+      "description": "Azure Active Directory OAuth2 Flow",
+      "scopes": {
+        "user_impersonation": "impersonate your user account"
+      }
+    }
+  },
+  "paths": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ApiManagement/service/{serviceName}/operations/{operationId}": {
+      "get": {
+        "tags": [
+          "ApiManagement"
+        ],
+        "operationId": "ApiManagement_GetApiManagementServiceOperation",
+        "parameters": [
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/APIManagementServiceNameParameter"
+          },
+          {
+            "$ref": "#/parameters/OperationIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "schema": {
+              "type": "file"
+            },
+            "x-nullable": true
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ApiManagement/service/{serviceName}/operationresults/{operationId}": {
+      "get": {
+        "tags": [
+          "ApiManagement"
+        ],
+        "operationId": "ApiManagement_GetApiManagementServiceOperationStatus",
+        "parameters": [
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/APIManagementServiceNameParameter"
+          },
+          {
+            "$ref": "#/parameters/OperationIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "schema": {
+              "type": "file"
+            },
+            "x-nullable": true
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ApiManagement/service/{serviceName}/backup/operationresults/{operationId}": {
+      "get": {
+        "tags": [
+          "ApiManagement"
+        ],
+        "operationId": "ApiManagement_GetApiManagementServiceBackupOperationStatus",
+        "parameters": [
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/APIManagementServiceNameParameter"
+          },
+          {
+            "$ref": "#/parameters/OperationIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "schema": {
+              "type": "file"
+            },
+            "x-nullable": true
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ApiManagement/service/{serviceName}/restore/operationresults/{operationId}": {
+      "get": {
+        "tags": [
+          "ApiManagement"
+        ],
+        "operationId": "ApiManagement_GetApiManagementServiceRestoreOperationStatus",
+        "parameters": [
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/APIManagementServiceNameParameter"
+          },
+          {
+            "$ref": "#/parameters/OperationIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "schema": {
+              "type": "file"
+            },
+            "x-nullable": true
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ApiManagement/service/{serviceName}/managedeployments/operationresults/{operationId}": {
+      "get": {
+        "tags": [
+          "ApiManagement"
+        ],
+        "operationId": "ApiManagement_GetApiManagementServiceManageDeploymentsOperationStatus",
+        "parameters": [
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/APIManagementServiceNameParameter"
+          },
+          {
+            "$ref": "#/parameters/OperationIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "schema": {
+              "type": "file"
+            },
+            "x-nullable": true
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ApiManagement/service/{serviceName}/managevpn/operationresults/{operationId}": {
+      "get": {
+        "tags": [
+          "ApiManagement"
+        ],
+        "operationId": "ApiManagement_GetApiManagementServiceManageVPNOperationStatus",
+        "parameters": [
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/APIManagementServiceNameParameter"
+          },
+          {
+            "$ref": "#/parameters/OperationIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "schema": {
+              "type": "file"
+            },
+            "x-nullable": true
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ApiManagement/service/{serviceName}/updatehostname/operationresults/{operationId}": {
+      "get": {
+        "tags": [
+          "ApiManagement"
+        ],
+        "operationId": "ApiManagement_GetApiManagementServiceUpdateHostNameOperationStatus",
+        "parameters": [
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/APIManagementServiceNameParameter"
+          },
+          {
+            "$ref": "#/parameters/OperationIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "schema": {
+              "type": "file"
+            },
+            "x-nullable": true
+          }
+        }
+      }
+    },
+    "/providers/Microsoft.ApiManagement/operations": {
+      "get": {
+        "tags": [
+          "ApiManagement"
+        ],
+        "operationId": "ApiManagement_GetAllSupportedOperations",
+        "parameters": [ ],
+        "responses": {
+          "200": {
+            "description": ""
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ApiManagement/service/{serviceName}": {
+      "get": {
+        "tags": [
+          "ApiManagement"
+        ],
+        "operationId": "ApiManagement_Get",
+        "description": "Get ApiManagement service (resource description).",
+        "parameters": [
+          {
+            "$ref": "#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/APIManagementServiceNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "schema": {
+              "$ref": "#/definitions/APIManagementService"
+            }
+          },
+          "404": {
+            "description": "APIManagement service Not Found",
+            "schema": {
+            }
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "ApiManagement"
+        ],
+        "operationId": "ApiManagement_CreateOrUpdate",
+        "description": "Create APIManagement service, or update an existing service",
+        "parameters": [
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/APIManagementServiceNameParameter"
+          },
+          {
+            "name": "service",
+            "in": "body",
+            "schema": {
+              "$ref": "#/definitions/APIManagementService"
+            },
+            "description": "Parameters supplied to the CreateOrUpdate ApiManagement service operation.",
+            "x-nullable": true
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": "",
+            "schema": {
+              "$ref": "#/definitions/APIManagementService"
+            }
+          },
+          "200": {
+            "description": "",
+            "schema": {
+              "$ref": "#/definitions/APIManagementService"
+            }
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "ApiManagement"
+        ],
+        "operationId": "ApiManagement_Delete",
+        "description": "Deletes APIManagement service. This operation takes a while to complete.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/APIManagementServiceNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": ""
+          },
+          "204": {
+            "description": ""
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.ApiManagement/service": {
+      "get": {
+        "tags": [
+          "ApiManagement"
+        ],
+        "operationId": "ApiManagement_GetAllAPIManagementServicesInSubscription",
+        "description": "Gets all ApiManagement services in the specified subscription.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "schema": {
+              "$ref": "#/definitions/APIManagementServiceListResult"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ApiManagement/service": {
+      "get": {
+        "tags": [
+          "ApiManagement"
+        ],
+        "operationId": "ApiManagement_GetAllApiManagementServicesInResourceGroup",
+        "description": "Gets all ApiManagement services in a resource group.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "schema": {
+              "$ref": "#/definitions/APIManagementServiceListResult"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ApiManagement/service/{serviceName}/managedeployments": {
+      "post": {
+        "tags": [
+          "ApiManagement"
+        ],
+        "operationId": "ApiManagement_ApiManagementServiceManageDeployments",
+        "parameters": [
+          {
+            "$ref": "#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/APIManagementServiceNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "name": "manageDeploymentContract",
+            "in": "body",
+            "schema": {
+              "$ref": "#/definitions/ManageDeploymentContract"
+            },
+            "x-nullable": true
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "schema": {
+              "type": "file"
+            },
+            "x-nullable": true
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ApiManagement/service/{serviceName}/getssotoken": {
+      "get": {
+        "tags": [
+          "ApiManagement"
+        ],
+        "operationId": "ApiManagement_GetSsoToken",
+        "parameters": [
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/APIManagementServiceNameParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "schema": {
+              "type": "file"
+            },
+            "x-nullable": true
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ApiManagement/service/{serviceName}/updatehostname": {
+      "post": {
+        "tags": [
+          "ApiManagement"
+        ],
+        "operationId": "ApiManagement_UpdateHostname",
+        "parameters": [
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/APIManagementServiceNameParameter"
+          },
+          {
+            "name": "configuration",
+            "in": "body",
+            "schema": {
+              "$ref": "#/definitions/HostnameConfigurationDelta"
+            },
+            "x-nullable": true
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "schema": {
+              "type": "file"
+            },
+            "x-nullable": true
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ApiManagement/service/{serviceName}/managevpn": {
+      "post": {
+        "tags": [
+          "ApiManagement"
+        ],
+        "operationId": "ApiManagement_ManageVpnConfiguration",
+        "parameters": [
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/APIManagementServiceNameParameter"
+          },
+          {
+            "name": "vpnConfiguration",
+            "in": "body",
+            "schema": {
+              "$ref": "#/definitions/APIManagementServiceVpnConfiguration"
+            },
+            "x-nullable": true
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "schema": {
+              "type": "file"
+            },
+            "x-nullable": true
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ApiManagement/service/{serviceName}/checkcustomhostname": {
+      "post": {
+        "tags": [
+          "ApiManagement"
+        ],
+        "operationId": "ApiManagement_CheckCustomHostname",
+        "parameters": [
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/APIManagementServiceNameParameter"
+          },
+          {
+            "name": "configuration",
+            "in": "body",
+            "schema": {
+              "$ref": "#/definitions/HostnameConfigurationDelta"
+            },
+            "x-nullable": true
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "schema": {
+              "type": "file"
+            },
+            "x-nullable": true
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ApiManagement/service/{serviceName}/updatecertificate": {
+      "post": {
+        "tags": [
+          "ApiManagement"
+        ],
+        "operationId": "ApiManagement_UploadCertificate",
+        "parameters": [
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/APIManagementServiceNameParameter"
+          },
+          {
+            "name": "certificate",
+            "in": "body",
+            "schema": {
+              "$ref": "#/definitions/CustomSslCertificate"
+            },
+            "x-nullable": true
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "schema": {
+              "type": "file"
+            },
+            "x-nullable": true
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ApiManagement/service/{serviceName}/backup": {
+      "post": {
+        "tags": [
+          "ApiManagement"
+        ],
+        "operationId": "ApiManagement_BackupApiManagementServiceToCloudBlob",
+        "parameters": [
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/APIManagementServiceNameParameter"
+          },
+          {
+            "name": "destination",
+            "in": "body",
+            "schema": {
+              "$ref": "#/definitions/BackupRestoreAPIManagementServiceContract"
+            },
+            "x-nullable": true
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "schema": {
+              "type": "file"
+            },
+            "x-nullable": true
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ApiManagement/service/{serviceName}/restore": {
+      "post": {
+        "tags": [
+          "ApiManagement"
+        ],
+        "operationId": "ApiManagement_RestoreApiManagementServiceFromCloudBlob",
+        "parameters": [
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/APIManagementServiceNameParameter"
+          },
+          {
+            "name": "source",
+            "in": "body",
+            "schema": {
+              "$ref": "#/definitions/BackupRestoreAPIManagementServiceContract"
+            },
+            "x-nullable": true
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "schema": {
+              "type": "file"
+            },
+            "x-nullable": true
+          }
+        }
+      }
+    }
+  },
+  "definitions": {
+    "UserSubscription": {
+      "type": "object",
+      "x-typeName": "UserSubscription",
+      "required": [
+        "RegistrationDate",
+        "State",
+        "ForceDeleteServices"
+      ],
+      "properties": {
+        "SubscriptionId": {
+          "type": "string"
+        },
+        "RegistrationDate": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "State": {
+          "$ref": "#/definitions/UserSubscriptionState"
+        },
+        "Properties": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          }
+        },
+        "ForceDeleteServices": {
+          "type": "boolean"
+        }
+      }
+    },
+    "UserSubscriptionState": {
+      "type": "string",
+      "x-typeName": "UserSubscriptionState",
+      "x-enumNames": [
+        "Registered",
+        "Unregistered",
+        "Suspended",
+        "Deleted",
+        "Warned"
+      ],
+      "enum": [
+        "Registered",
+        "Unregistered",
+        "Suspended",
+        "Deleted",
+        "Warned"
+      ],
+      "description": ""
+    },
+    "MigrateSubscriptionContract": {
+      "type": "object",
+      "x-typeName": "MigrateSubscriptionContract",
+      "properties": {
+        "DestinationSubscriptionId": {
+          "type": "string"
+        },
+        "Properties": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "MoveResourcesContract": {
+      "type": "object",
+      "x-typeName": "MoveResourcesContract",
+      "properties": {
+        "TargetResourceGroup": {
+          "type": "string"
+        },
+        "ResourceUris": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "APIManagementService": {
+      "type": "object",
+      "x-typeName": "APIManagementService",
+      "properties": {
+        "id": {
+          "readOnly": true,
+          "type": "string",
+          "description": "Resource Id"
+        },
+        "name": {
+          "readOnly": true,
+          "type": "string",
+          "description": "APIManagement service name"
+        },
+        "type": {
+          "readOnly": true,
+          "type": "string",
+          "description": "APIManagement service type"
+        },
+        "location": {
+          "type": "string",
+          "description": "APIManagement service location"
+        },
+        "selfLink": {
+          "type": "string",
+          "readOnly": true
+        },
+        "tags": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          },
+          "description": "Resource tags"
+        },
+        "subscriptionId": {
+          "type": "string",
+          "readOnly": true
+        },
+        "resourceGroupName": {
+          "type": "string",
+          "readOnly": true
+        },
+        "etag": {
+          "type": "string",
+          "readOnly": true
+        },
+        "properties": {
+          "$ref": "#/definitions/APIManagementServiceProperties"
+        }
+      },
+      "required": [
+        "location",
+        "properties"
+      ],
+      "x-ms-azure-resource": true
+    },
+    "APIManagementServiceProperties": {
+      "type": "object",
+      "x-typeName": "APIManagementServiceProperties",
+      "required": [
+        "publisherEmail",
+        "publisherName",
+        "sku"
+      ],
+      "properties": {
+        "publisherEmail": {
+          "type": "string"
+        },
+        "publisherName": {
+          "type": "string"
+        },
+        "sku": {
+          "$ref": "#/definitions/Sku"
+        },
+        "provisioningState": {
+          "type": "string",
+          "readOnly": true
+        },
+        "targetProvisioningState": {
+          "type": "string",
+          "readOnly": true
+        },
+        "createdAtUtc": {
+          "type": "string",
+          "format": "date-time",
+          "readOnly": true
+        },
+        "runtimeUrl": {
+          "type": "string",
+          "readOnly": true
+        },
+        "portalUrl": {
+          "type": "string",
+          "readOnly": true
+        },
+        "managementApiUrl": {
+          "type": "string",
+          "readOnly": true
+        },
+        "scmUrl": {
+          "type": "string",
+          "readOnly": true
+        },
+        "addresserEmail": {
+          "type": "string",
+          "readOnly": true
+        },
+        "hostnameConfigurations": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/HostnameConfiguration"
+          }
+        },
+        "staticIPs": {
+          "type": "array",
+          "readOnly": true,
+          "items": {
+            "type": "string"
+          }
+        },
+        "additionalLocations": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/AdditionalLocation"
+          }
+        },
+        "vpnconfiguration": {
+          "$ref": "#/definitions/VirtualNetworkConfiguration"
+        }
+      }
+    },
+    "Sku": {
+      "type": "object",
+      "x-typeName": "Sku",
+      "required": [
+        "SkuType"
+      ],
+      "properties": {
+        "name": {
+          "$ref": "#/definitions/SkuType",
+          "description": "What type of ApiManagement SKU to deploy. Valid values: (Developer, Standard, Premium)"
+        },
+        "capacity": {
+          "$ref": "#/definitions/SkuUnitCount",
+          "description": "How many units of APIManagement SKU to deploy. Valid values: for Developer (1), for Standard (1, 2, 3, 4), for Premium (1, 2, 3, 4, 5, 6, 7, 8, 9, 10)"
+        }
+      }
+    },
+    "SkuType": {
+      "type": "string",
+      "x-typeName": "SkuType",
+      "description": "What type of ApiManagement SKU to deploy. Valid values: (Developer, Standard, Premium)",
+      "x-ms-enum": {
+        "name": "name",
+        "modelAsString": true
+      },
+      "x-enumNames": [
+        "Developer",
+        "Standard",
+        "Premium"
+      ],
+      "enum": [
+        "Developer",
+        "Standard",
+        "Premium"
+      ]
+    },
+    "SkuUnitCount": {
+      "type": "integer",
+      "format": "int32",
+      "description": "How many units of APIManagement SKU to deploy. Valid values: for Developer (1), for Standard (1, 2, 3, 4), for Premium (1, 2, 3, 4, 5, 6, 7, 8, 9, 10)"
+    },
+    "HostnameConfiguration": {
+      "type": "object",
+      "x-typeName": "HostnameConfiguration",
+      "required": [
+        "type",
+        "hostname",
+        "certificate"
+      ],
+      "properties": {
+        "type": {
+          "$ref": "#/definitions/HostnameType"
+        },
+        "hostname": {
+          "type": "string"
+        },
+        "certificate": {
+          "$ref": "#/definitions/CertificateInformation"
+        }
+      }
+    },
+    "HostnameType": {
+      "type": "string",
+      "x-typeName": "HostnameType",
+      "x-enumNames": [
+        "Proxy",
+        "Portal"
+      ],
+      "enum": [
+        "Proxy",
+        "Portal"
+      ],
+      "description": "Host name type. Valid values are Proxy, Portal"
+    },
+    "CertificateInformation": {
+      "type": "object",
+      "x-typeName": "CertificateInformation",
+      "required": [
+        "expiry",
+        "subject",
+        "thumbprint"
+      ],
+      "properties": {
+        "expiry": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "thumbprint": {
+          "type": "string"
+        },
+        "subject": {
+          "type": "string"
+        }
+      }
+    },
+    "AdditionalLocation": {
+      "type": "object",
+      "x-typeName": "AdditionalLocation",
+      "required": [
+        "skuType",
+        "skuUnitCount",
+        "location"
+      ],
+      "properties": {
+        "location": {
+          "type": "string"
+        },
+        "skuType": {
+          "$ref": "#/definitions/SkuType",
+          "description": "What type of ApiManagement SKU to deploy. Valid values: (Premium)"
+        },
+        "skuUnitCount": {
+          "$ref": "#/definitions/SkuUnitCount",
+          "description": "How many units of APIManagement SKU to deploy. Valid values: for Developer (1), for Standard (1, 2, 3, 4), for Premium (1, 2, 3, 4, 5, 6, 7, 8, 9, 10)"
+        },
+        "staticIPs": {
+          "type": "array",
+          "readOnly": true,
+          "items": {
+            "type": "string"
+          }
+        },
+        "vpnconfiguration": {
+          "$ref": "#/definitions/VirtualNetworkConfiguration"
+        }
+      }
+    },
+    "VirtualNetworkConfiguration": {
+      "type": "object",
+      "x-typeName": "VirtualNetworkConfiguration",
+      "required": [
+        "vnetid",
+        "subnetname",
+        "location"
+      ],
+      "properties": {
+        "vnetid": {
+          "type": "string",
+          "format": "guid"
+        },
+        "subnetname": {
+          "type": "string"
+        },
+        "location": {
+          "type": "string"
+        }
+      }
+    },
+    "APIManagementServiceListResult": {
+      "properties": {
+        "value": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/APIManagementService"
+          },
+          "description": "Results of the list operation"
+        },
+        "nextLink": {
+          "type": "string",
+          "description": "Link for next set of locations."
+        }
+      },
+      "description": "The response of list APIManagement service operation."
+    },
+    "ManageDeploymentContract": {
+      "type": "object",
+      "x-typeName": "ManageDeploymentContract",
+      "required": [
+        "SkuType",
+        "SkuUnitCount",
+        "Location"
+      ],
+      "properties": {
+        "Location": {
+          "type": "string"
+        },
+        "skuType": {
+          "$ref": "#/definitions/SkuType",
+          "description": "What type of ApiManagement SKU to deploy. Valid values: (Premium)"
+        },
+        "skuUnitCount": {
+          "$ref": "#/definitions/SkuUnitCount",
+          "description": "How many units of APIManagement SKU to deploy. Valid values: for Developer (1), for Standard (1, 2, 3, 4), for Premium (1, 2, 3, 4, 5, 6, 7, 8, 9, 10)"
+        },
+        "additionalLocations": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/AdditionalLocation"
+          }
+        },
+        "vpnconfiguration": {
+          "$ref": "#/definitions/VirtualNetworkConfiguration"
+        }
+      }
+    },
+    "HostnameConfigurationDelta": {
+      "type": "object",
+      "x-typeName": "HostnameConfigurationDelta",
+      "properties": {
+        "HostnamesToCreateOrUpdate": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/HostnameConfiguration"
+          }
+        },
+        "HostnamesToDelete": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/HostnameType"
+          }
+        }
+      }
+    },
+    "APIManagementServiceVpnConfiguration": {
+      "type": "object",
+      "x-typeName": "APIManagementServiceVpnConfiguration",
+      "properties": {
+        "vpnconfiguration": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/VirtualNetworkConfiguration"
+          }
+        }
+      }
+    },
+    "CustomSslCertificate": {
+      "type": "object",
+      "x-typeName": "CustomSslCertificate",
+      "required": [
+        "Type",
+        "EncodedCertificate",
+        "Thumbprint",
+        "CertificatePassword"
+      ],
+      "properties": {
+        "Type": {
+          "$ref": "#/definitions/HostnameType"
+        },
+        "EncodedCertificate": {
+          "type": "string"
+        },
+        "Thumbprint": {
+          "type": "string"
+        },
+        "CertificatePassword": {
+          "type": "string"
+        }
+      }
+    },
+    "BackupRestoreAPIManagementServiceContract": {
+      "type": "object",
+      "x-typeName": "BackupRestoreAPIManagementServiceContract",
+      "required": [
+        "StorageAccount",
+        "AccessKey",
+        "ContainerName"
+      ],
+      "properties": {
+        "StorageAccount": {
+          "type": "string"
+        },
+        "AccessKey": {
+          "type": "string"
+        },
+        "ContainerName": {
+          "type": "string"
+        },
+        "BackupName": {
+          "type": "string"
+        }
+      }
+    }
+  },
+  "parameters": {
+    "SubscriptionIdParameter": {
+      "name": "subscriptionId",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "x-nullable": false,
+      "description": "The subscriptionId which uniquely identify Microsoft Azure subscription. The subscription ID forms part of the URI for every service call."
+    },
+    "ResourceGroupNameParameter": {
+      "name": "resourceGroupName",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "x-nullable": false,
+      "description": "The name of the resource group."
+    },
+    "APIManagementServiceNameParameter": {
+      "name": "serviceName",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "x-nullable": false,
+      "description": "The name of ApiManagement service."
+    },
+    "ApiVersionParameter": {
+      "name": "api-version",
+      "in": "query",
+      "required": true,
+      "type": "string",
+      "description": "Api Version query parameter."
+    },
+    "OperationIdParameter": {
+      "name": "operationId",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "x-nullable": false,
+      "description": "The operationId parameter to query status of async operation."
+    }
+  },
+  "responses": { }
+}
