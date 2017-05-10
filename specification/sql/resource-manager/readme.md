@@ -46,6 +46,7 @@ input-file:
 - Microsoft.Sql/2014-04-01/operations.json
 - Microsoft.Sql/2014-04-01/replicationLinks.json
 - Microsoft.Sql/2014-04-01/servers.json
+- Microsoft.Sql/2014-04-01/serverAzureADAdministrators.json
 - Microsoft.Sql/2014-04-01/sql.core.json
 - Microsoft.Sql/2014-04-01/databaseSecurityAlertPolicies.json
 - Microsoft.Sql/2015-05-01-preview/blobAuditingPolicies.json
