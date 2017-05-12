@@ -683,77 +683,11 @@
       }
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Cache/Redis/{name}/linkedServers/{linkedServerName}": {
-      "put": {
-        "tags": [
-          "Redis"
-        ],
-        "operationId": "RedisLinkedServer_Create",
-        "x-ms-long-running-operation": true,
-        "x-ms-examples": {
-          "RedisLinkedServer_Create": { "$ref": "../examples/RedisCacheLinkedServer_Create.json" }
-        },
-        "description": "Adds a linked server to the Redis cache (requires Premium SKU).",
-        "parameters": [
-          {
-            "name": "resourceGroupName",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "description": "The name of the resource group."
-          },
-          {
-            "name": "name",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "description": "The name of the Redis cache."
-          },
-          {
-            "name": "linkedServerName",
-            "in": "path",
-            "type": "string",
-            "description": "The name of the linked server that is being added to the Redis cache."
-          },
-          {
-            "name": "parameters",
-            "in": "body",
-            "required": true,
-            "schema": {
-              "$ref": "#/definitions/RedisLinkedServerCreateParameters"
-            },
-            "description": "Parameters supplied to the Create Linked server operation."
-          },
-          {
-            "$ref": "#/parameters/ApiVersionParameter"
-          },
-          {
-            "$ref": "#/parameters/SubscriptionIdParameter"
-          }
-        ],
-        "responses": {
-          "202": {
-            "description": "The operation to add linked server was successfully enqueued."
-          },
-           "200": {
-            "description": "The linked server was successfully added.",
-            "schema": {
-              "$ref": "#/definitions/RedisLinkedServer"
-            }
-          },
-           "201": {
-            "description": "The linked server was successfully added.",
-            "schema": {
-              "$ref": "#/definitions/RedisLinkedServer"
-            }
-          }
-        }
-      },
       "delete": {
         "tags": [
           "Redis"
         ],
         "operationId": "RedisLinkedServer_Delete",
-        "x-ms-long-running-operation": true,
         "x-ms-examples": {
           "RedisLinkedServerDelete": { "$ref": "../examples/RedisCacheLinkedServer_Delete.json" }
         },
@@ -835,13 +769,69 @@
           "200": {
             "description": "Response of get linked server.",
             "schema": {
-              "$ref": "#/definitions/RedisLinkedServer"
+              "$ref": "#/definitions/RedisLinkedServerWithProperties"
             }
           }
         }
       }
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Cache/Redis/{name}/linkedServers": {
+       "put": {
+        "tags": [
+          "Redis"
+        ],
+        "operationId": "RedisLinkedServer_Create",
+        "x-ms-long-running-operation": true,
+        "x-ms-examples": {
+          "RedisLinkedServer_Create": { "$ref": "../examples/RedisCacheLinkedServer_Create.json" }
+        },
+        "description": "Adds a linked server to the Redis cache (requires Premium SKU).",
+        "parameters": [
+          {
+            "name": "resourceGroupName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the resource group."
+          },
+          {
+            "name": "name",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the Redis cache."
+          },
+          {
+            "name": "parameters",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/RedisLinkedServerCreateParameters"
+            },
+            "description": "Parameters supplied to the Create Linked server operation."
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {        
+           "200": {
+            "description": "The linked server was successfully added.",
+            "schema": {
+              "$ref": "#/definitions/RedisLinkedServerWithProperties"
+            }
+          },
+           "201": {
+            "description": "The linked server was successfully added.",
+            "schema": {
+              "$ref": "#/definitions/RedisLinkedServerWithProperties"
+            }
+          }
+        }
+      },
       "get": {
         "tags": [
           "Redis"
@@ -1345,7 +1335,17 @@
       "description": "Response to force reboot for Redis cache."
     },
     "RedisLinkedServer": {
-      "description": "Response to put/get linked server for Redis cache.",
+      "description": "Linked server Id",
+      "properties": {
+        "id": {
+          "readOnly": true,
+          "type": "string",
+          "description": "Linked server Id."
+        }
+      }
+    },
+    "RedisLinkedServerWithProperties": {
+      "description": "Response to put/get linked server (with properties) for Redis cache.",
       "properties": {
         "id": {
           "readOnly": true,
@@ -1391,13 +1391,13 @@
           "items": {
             "$ref": "#/definitions/RedisLinkedServer"
           },
-          "description": "List of linked servers of a Redis cache."
+          "description": "List of linked server Ids of a Redis cache."
         }
       },
       "required": [
         "value"
       ],
-      "description": "List of linked servers of a Redis cache."
+      "description": "List of linked server Ids of a Redis cache."
     },
      "RedisLinkedServerCreateProperties": {
       "description": "Create properties for a linked server",
