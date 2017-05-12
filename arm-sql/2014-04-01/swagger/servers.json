@@ -536,6 +536,39 @@
       ],
       "description": "Represents a database service objective."
     },
+    "ServiceObjectiveProperties": {
+      "properties": {
+        "serviceObjectiveName": {
+          "readOnly": true,
+          "type": "string",
+          "description": "The name for the service objective."
+        },
+        "isDefault": {
+          "readOnly": true,
+          "type": "boolean",
+          "description": "Gets whether the service level objective is the default service objective.",
+          "x-nullable": false
+        },
+        "isSystem": {
+          "readOnly": true,
+          "type": "boolean",
+          "description": "Gets whether the service level objective is a system service objective.",
+          "x-nullable": false
+        },
+        "description": {
+          "readOnly": true,
+          "type": "string",
+          "description": "The description for the service level objective."
+        },
+        "enabled": {
+          "readOnly": true,
+          "type": "boolean",
+          "description": "Gets whether the service level objective is enabled.",
+          "x-nullable": false
+        }
+      },
+      "description": "Represents the properties of a database service objective."
+    },
     "ServiceObjectiveListResult": {
       "properties": {
         "value": {
