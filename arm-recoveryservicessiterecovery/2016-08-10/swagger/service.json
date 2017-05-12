@@ -293,73 +293,6 @@
         }
       }
     },
-    "/Subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.RecoveryServices/vaults/{resourceName}/replicationFabrics/{fabricName}/replicationvCenters/{vCenterName}/operationresults/{jobName}": {
-      "get": {
-        "tags": [
-          "ReplicationvCenters"
-        ],
-        "summary": "Tracks the provider async operation.",
-        "description": "Track the results of an asynchronous operation on the vCenter.",
-        "operationId": "ReplicationvCenters_GetOperationResults",
-        "produces": [
-          "application/json"
-        ],
-        "parameters": [
-          {
-            "$ref": "#/parameters/ApiVersion"
-          },
-          {
-            "$ref": "#/parameters/ResourceName"
-          },
-          {
-            "$ref": "#/parameters/ResourceGroupName"
-          },
-          {
-            "$ref": "#/parameters/SubscriptionId"
-          },
-          {
-            "name": "fabricName",
-            "in": "path",
-            "description": "fabric name.",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "name": "vCenterName",
-            "in": "path",
-            "description": "vCenter name to work on.",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "name": "jobName",
-            "in": "path",
-            "description": "job name to track.",
-            "required": true,
-            "type": "string"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "OK",
-            "schema": {
-              "$ref": "#/definitions/VCenter"
-            }
-          },
-          "202": {
-            "description": "Accepted"
-          },
-          "204": {
-            "description": "NoContent"
-          }
-        },
-        "x-ms-examples": {
-          "Tracks the provider async operation.": {
-            "$ref": "../examples/ReplicationvCenters_GetOperationResults.json"
-          }
-        }
-      }
-    },
     "/Subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.RecoveryServices/vaults/{resourceName}/replicationFabrics/{fabricName}/replicationvCenters/{vCenterName}": {
       "get": {
         "tags": [
@@ -692,80 +625,6 @@
         "x-ms-examples": {
           "Gets the list of vCenter registered under the vault.": {
             "$ref": "../examples/ReplicationvCenters_List.json"
-          }
-        }
-      }
-    },
-    "/Subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.RecoveryServices/vaults/{resourceName}/replicationFabrics/{fabricName}/replicationStorageClassifications/{storageClassificationName}/replicationStorageClassificationMappings/{storageClassificationMappingName}/operationresults/{jobName}": {
-      "get": {
-        "tags": [
-          "ReplicationStorageClassificationMappings"
-        ],
-        "summary": "Tracks async operations.",
-        "description": "Tracks an asynchronous operation on the storage classification mapping.",
-        "operationId": "ReplicationStorageClassificationMappings_GetOperationResults",
-        "produces": [
-          "application/json"
-        ],
-        "parameters": [
-          {
-            "$ref": "#/parameters/ApiVersion"
-          },
-          {
-            "$ref": "#/parameters/ResourceName"
-          },
-          {
-            "$ref": "#/parameters/ResourceGroupName"
-          },
-          {
-            "$ref": "#/parameters/SubscriptionId"
-          },
-          {
-            "name": "fabricName",
-            "in": "path",
-            "description": "Fabric name.",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "name": "storageClassificationName",
-            "in": "path",
-            "description": "Storage classification name.",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "name": "storageClassificationMappingName",
-            "in": "path",
-            "description": "Storage classification mapping object name.",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "name": "jobName",
-            "in": "path",
-            "description": "Job identifier.",
-            "required": true,
-            "type": "string"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "OK",
-            "schema": {
-              "$ref": "#/definitions/StorageClassificationMapping"
-            }
-          },
-          "202": {
-            "description": "Accepted"
-          },
-          "204": {
-            "description": "NoContent"
-          }
-        },
-        "x-ms-examples": {
-          "Tracks async operations.": {
-            "$ref": "../examples/ReplicationStorageClassificationMappings_GetOperationResults.json"
           }
         }
       }
@@ -1209,80 +1068,6 @@
         "x-ms-examples": {
           "Gets the list of storage classification objects under a vault.": {
             "$ref": "../examples/ReplicationStorageClassifications_List.json"
-          }
-        }
-      }
-    },
-    "/Subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.RecoveryServices/vaults/{resourceName}/replicationFabrics/{fabricName}/replicationProtectionContainers/{protectionContainerName}/replicationProtectedItems/{replicatedProtectedItemName}/operationresults/{jobId}": {
-      "get": {
-        "tags": [
-          "ReplicationProtectedItems"
-        ],
-        "summary": "Tracks the Replication protected item async operation.",
-        "description": "Track the results of an asynchronous operation on the replication protected item.",
-        "operationId": "ReplicationProtectedItems_GetOperationResults",
-        "produces": [
-          "application/json"
-        ],
-        "parameters": [
-          {
-            "$ref": "#/parameters/ApiVersion"
-          },
-          {
-            "$ref": "#/parameters/ResourceName"
-          },
-          {
-            "$ref": "#/parameters/ResourceGroupName"
-          },
-          {
-            "$ref": "#/parameters/SubscriptionId"
-          },
-          {
-            "name": "fabricName",
-            "in": "path",
-            "description": "Fabric name.",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "name": "protectionContainerName",
-            "in": "path",
-            "description": "Protection container name.",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "name": "replicatedProtectedItemName",
-            "in": "path",
-            "description": "Replication protected item name.",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "name": "jobId",
-            "in": "path",
-            "description": "job id to track.",
-            "required": true,
-            "type": "string"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "OK",
-            "schema": {
-              "$ref": "#/definitions/ReplicationProtectedItem"
-            }
-          },
-          "202": {
-            "description": "Accepted"
-          },
-          "204": {
-            "description": "NoContent"
-          }
-        },
-        "x-ms-examples": {
-          "Tracks the Replication protected item async operation.": {
-            "$ref": "../examples/ReplicationProtectedItems_GetOperationResults.json"
           }
         }
       }
@@ -2301,73 +2086,6 @@
         }
       }
     },
-    "/Subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.RecoveryServices/vaults/{resourceName}/replicationFabrics/{fabricName}/replicationRecoveryServicesProviders/{providerName}/operationresults/{jobName}": {
-      "get": {
-        "tags": [
-          "ReplicationRecoveryServicesProviders"
-        ],
-        "summary": "Tracks the provider async operation.",
-        "description": "Track the results of an asynchronous operation on the recovery services provider.",
-        "operationId": "ReplicationRecoveryServicesProviders_GetOperationResults",
-        "produces": [
-          "application/json"
-        ],
-        "parameters": [
-          {
-            "$ref": "#/parameters/ApiVersion"
-          },
-          {
-            "$ref": "#/parameters/ResourceName"
-          },
-          {
-            "$ref": "#/parameters/ResourceGroupName"
-          },
-          {
-            "$ref": "#/parameters/SubscriptionId"
-          },
-          {
-            "name": "fabricName",
-            "in": "path",
-            "description": "Fabric name.",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "name": "providerName",
-            "in": "path",
-            "description": "Recovery services provider name.",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "name": "jobName",
-            "in": "path",
-            "description": "ASR Job name.",
-            "required": true,
-            "type": "string"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "OK",
-            "schema": {
-              "$ref": "#/definitions/RecoveryServicesProvider"
-            }
-          },
-          "202": {
-            "description": "Accepted"
-          },
-          "204": {
-            "description": "NoContent"
-          }
-        },
-        "x-ms-examples": {
-          "Tracks the provider async operation.": {
-            "$ref": "../examples/ReplicationRecoveryServicesProviders_GetOperationResults.json"
-          }
-        }
-      }
-    },
     "/Subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.RecoveryServices/vaults/{resourceName}/replicationFabrics/{fabricName}/replicationRecoveryServicesProviders/{providerName}/refreshProvider": {
       "post": {
         "tags": [
@@ -2809,66 +2527,6 @@
         "x-ms-examples": {
           "Get recovery points for a replication protected item.": {
             "$ref": "../examples/RecoveryPoints_ListByReplicationProtectedItems.json"
-          }
-        }
-      }
-    },
-    "/Subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.RecoveryServices/vaults/{resourceName}/replicationRecoveryPlans/{recoveryPlanName}/operationresults/{jobName}": {
-      "get": {
-        "tags": [
-          "ReplicationRecoveryPlans"
-        ],
-        "summary": "Tracks the recovery plan async operation.",
-        "description": "Track the results of an asynchronous operation on the recovery plan",
-        "operationId": "ReplicationRecoveryPlans_GetOperationResults",
-        "produces": [
-          "application/json"
-        ],
-        "parameters": [
-          {
-            "$ref": "#/parameters/ApiVersion"
-          },
-          {
-            "$ref": "#/parameters/ResourceName"
-          },
-          {
-            "$ref": "#/parameters/ResourceGroupName"
-          },
-          {
-            "$ref": "#/parameters/SubscriptionId"
-          },
-          {
-            "name": "recoveryPlanName",
-            "in": "path",
-            "description": "Recovery plan name.",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "name": "jobName",
-            "in": "path",
-            "description": "ARM name of the job.",
-            "required": true,
-            "type": "string"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "OK",
-            "schema": {
-              "$ref": "#/definitions/RecoveryPlan"
-            }
-          },
-          "202": {
-            "description": "Accepted"
-          },
-          "204": {
-            "description": "NoContent"
-          }
-        },
-        "x-ms-examples": {
-          "Tracks the recovery plan async operation.": {
-            "$ref": "../examples/ReplicationRecoveryPlans_GetOperationResults.json"
           }
         }
       }
@@ -3610,73 +3268,6 @@
         }
       }
     },
-    "/Subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.RecoveryServices/vaults/{resourceName}/replicationFabrics/{fabricName}/replicationProtectionContainers/{protectionContainerName}/operationresults/{jobId}": {
-      "get": {
-        "tags": [
-          "ReplicationProtectionContainers"
-        ],
-        "summary": "Tracks the provider async operation.",
-        "description": "Track the results of an asynchronous operation on protectable items.",
-        "operationId": "ReplicationProtectionContainers_GetOperationResults",
-        "produces": [
-          "application/json"
-        ],
-        "parameters": [
-          {
-            "$ref": "#/parameters/ApiVersion"
-          },
-          {
-            "$ref": "#/parameters/ResourceName"
-          },
-          {
-            "$ref": "#/parameters/ResourceGroupName"
-          },
-          {
-            "$ref": "#/parameters/SubscriptionId"
-          },
-          {
-            "name": "fabricName",
-            "in": "path",
-            "description": "Fabric name.",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "name": "protectionContainerName",
-            "in": "path",
-            "description": "Protection container name.",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "name": "jobId",
-            "in": "path",
-            "description": "job id to track.",
-            "required": true,
-            "type": "string"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "OK",
-            "schema": {
-              "$ref": "#/definitions/ProtectionContainer"
-            }
-          },
-          "202": {
-            "description": "Accepted"
-          },
-          "204": {
-            "description": "NoContent"
-          }
-        },
-        "x-ms-examples": {
-          "Tracks the provider async operation.": {
-            "$ref": "../examples/ReplicationProtectionContainers_GetOperationResults.json"
-          }
-        }
-      }
-    },
     "/Subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.RecoveryServices/vaults/{resourceName}/replicationFabrics/{fabricName}/replicationProtectionContainers/{protectionContainerName}/discoverProtectableItem": {
       "post": {
         "tags": [
@@ -3958,80 +3549,6 @@
         "x-ms-examples": {
           "Gets the list of all protection containers in a vault.": {
             "$ref": "../examples/ReplicationProtectionContainers_List.json"
-          }
-        }
-      }
-    },
-    "/Subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.RecoveryServices/vaults/{resourceName}/replicationFabrics/{fabricName}/replicationProtectionContainers/{protectionContainerName}/replicationProtectionContainerMappings/{mappingName}/operationresults/{jobId}": {
-      "get": {
-        "tags": [
-          "ReplicationProtectionContainerMappings"
-        ],
-        "summary": "Tracks the protection container mapping async operation.",
-        "description": "Track the results of an asynchronous operation on a protection container mapping.",
-        "operationId": "ReplicationProtectionContainerMappings_GetOperationResults",
-        "produces": [
-          "application/json"
-        ],
-        "parameters": [
-          {
-            "$ref": "#/parameters/ApiVersion"
-          },
-          {
-            "$ref": "#/parameters/ResourceName"
-          },
-          {
-            "$ref": "#/parameters/ResourceGroupName"
-          },
-          {
-            "$ref": "#/parameters/SubscriptionId"
-          },
-          {
-            "name": "fabricName",
-            "in": "path",
-            "description": "Fabric name.",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "name": "protectionContainerName",
-            "in": "path",
-            "description": "Protection container name.",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "name": "mappingName",
-            "in": "path",
-            "description": "Protection container mapping name.",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "name": "jobId",
-            "in": "path",
-            "description": "Job identifier.",
-            "required": true,
-            "type": "string"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "OK",
-            "schema": {
-              "$ref": "#/definitions/ProtectionContainerMapping"
-            }
-          },
-          "202": {
-            "description": "Accepted"
-          },
-          "204": {
-            "description": "NoContent"
-          }
-        },
-        "x-ms-examples": {
-          "Tracks the protection container mapping async operation.": {
-            "$ref": "../examples/ReplicationProtectionContainerMappings_GetOperationResults.json"
           }
         }
       }
@@ -4520,66 +4037,6 @@
         "x-ms-examples": {
           "Gets the list of protectable items.": {
             "$ref": "../examples/ReplicationProtectableItems_ListByReplicationProtectionContainers.json"
-          }
-        }
-      }
-    },
-    "/Subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.RecoveryServices/vaults/{resourceName}/replicationPolicies/{policyName}/operationresults/{jobName}": {
-      "get": {
-        "tags": [
-          "ReplicationPolicies"
-        ],
-        "summary": "Tracks the protection profiles async operation.",
-        "description": "Track the results of an asynchronous operation on a replication policy.",
-        "operationId": "ReplicationPolicies_GetOperationResults",
-        "produces": [
-          "application/json"
-        ],
-        "parameters": [
-          {
-            "$ref": "#/parameters/ApiVersion"
-          },
-          {
-            "$ref": "#/parameters/ResourceName"
-          },
-          {
-            "$ref": "#/parameters/ResourceGroupName"
-          },
-          {
-            "$ref": "#/parameters/SubscriptionId"
-          },
-          {
-            "name": "policyName",
-            "in": "path",
-            "description": "Policy Name.",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "name": "jobName",
-            "in": "path",
-            "description": "job id to track.",
-            "required": true,
-            "type": "string"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "OK",
-            "schema": {
-              "$ref": "#/definitions/Policy"
-            }
-          },
-          "202": {
-            "description": "Accepted"
-          },
-          "204": {
-            "description": "NoContent"
-          }
-        },
-        "x-ms-examples": {
-          "Tracks the protection profiles async operation.": {
-            "$ref": "../examples/ReplicationPolicies_GetOperationResults.json"
           }
         }
       }
@@ -5404,66 +4861,6 @@
         }
       }
     },
-    "/Subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.RecoveryServices/vaults/{resourceName}/replicationJobs/{name}/operationresults/{jobName}": {
-      "get": {
-        "tags": [
-          "ReplicationJobs"
-        ],
-        "summary": "Tracks the Site async operation.",
-        "description": "Track the results of an asynchronous operation on an Azure Site Recovery job",
-        "operationId": "ReplicationJobs_GetOperationResults",
-        "produces": [
-          "application/json"
-        ],
-        "parameters": [
-          {
-            "$ref": "#/parameters/ApiVersion"
-          },
-          {
-            "$ref": "#/parameters/ResourceName"
-          },
-          {
-            "$ref": "#/parameters/ResourceGroupName"
-          },
-          {
-            "$ref": "#/parameters/SubscriptionId"
-          },
-          {
-            "name": "name",
-            "in": "path",
-            "description": "Original Job id on which resume/restart was called.",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "name": "jobName",
-            "in": "path",
-            "description": "job id to track.",
-            "required": true,
-            "type": "string"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "OK",
-            "schema": {
-              "$ref": "#/definitions/Job"
-            }
-          },
-          "202": {
-            "description": "Accepted"
-          },
-          "204": {
-            "description": "NoContent"
-          }
-        },
-        "x-ms-examples": {
-          "Tracks the Site async operation.": {
-            "$ref": "../examples/ReplicationJobs_GetOperationResults.json"
-          }
-        }
-      }
-    },
     "/Subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.RecoveryServices/vaults/{resourceName}/replicationJobs/{jobName}/resume": {
       "post": {
         "tags": [
@@ -5779,66 +5176,6 @@
         "x-ms-examples": {
           "Gets the list of jobs.": {
             "$ref": "../examples/ReplicationJobs_List.json"
-          }
-        }
-      }
-    },
-    "/Subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.RecoveryServices/vaults/{resourceName}/replicationFabrics/{fabricName}/operationresults/{jobName}": {
-      "get": {
-        "tags": [
-          "ReplicationFabrics"
-        ],
-        "summary": "Tracks the Site async operation.",
-        "description": "Track the results of an asynchronous operation on the fabric",
-        "operationId": "ReplicationFabrics_GetOperationResults",
-        "produces": [
-          "application/json"
-        ],
-        "parameters": [
-          {
-            "$ref": "#/parameters/ApiVersion"
-          },
-          {
-            "$ref": "#/parameters/ResourceName"
-          },
-          {
-            "$ref": "#/parameters/ResourceGroupName"
-          },
-          {
-            "$ref": "#/parameters/SubscriptionId"
-          },
-          {
-            "name": "fabricName",
-            "in": "path",
-            "description": "Site name to work on.",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "name": "jobName",
-            "in": "path",
-            "description": "job id to track.",
-            "required": true,
-            "type": "string"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "OK",
-            "schema": {
-              "$ref": "#/definitions/Fabric"
-            }
-          },
-          "202": {
-            "description": "Accepted"
-          },
-          "204": {
-            "description": "NoContent"
-          }
-        },
-        "x-ms-examples": {
-          "Tracks the Site async operation.": {
-            "$ref": "../examples/ReplicationFabrics_GetOperationResults.json"
           }
         }
       }
@@ -8661,7 +7998,7 @@
         },
         "skipTestFailoverCleanup": {
           "description": "A value indicating whether the test failover cleanup is to be skipped.",
-          "type": "boolean"
+          "type": "string"
         },
         "providerSpecificDetails": {
           "description": "The provider specific properties.",
@@ -9302,7 +8639,7 @@
         },
         "skipTestFailoverCleanup": {
           "description": "A value indicating whether the test failover cleanup is to be skipped.",
-          "type": "boolean"
+          "type": "string"
         },
         "providerSpecificDetails": {
           "$ref": "#/definitions/ProviderSpecificFailoverInput",
@@ -10623,7 +9960,7 @@
         },
         "useManagedDisks": {
           "description": "A value indicating whether managed disks should be used during failover.",
-          "type": "boolean"
+          "type": "string"
         },
         "licenseType": {
           "description": "License Type of the VM to be used.",
@@ -10856,7 +10193,7 @@
         },
         "useManagedDisks": {
           "description": "A value indicating whether managed disks should be used during failover.",
-          "type": "boolean"
+          "type": "string"
         },
         "licenseType": {
           "description": "License Type of the VM to be used.",
@@ -11541,7 +10878,7 @@
         },
         "useManagedDisks": {
           "description": "A value indicating whether managed disks should be used during failover.",
-          "type": "boolean"
+          "type": "string"
         }
       },
       "x-ms-discriminator-value": "HyperVReplicaAzure"
@@ -11630,7 +10967,7 @@
         },
         "useManagedDisks": {
           "description": "A value indicating whether managed disks should be used during failover.",
-          "type": "boolean"
+          "type": "string"
         }
       },
       "x-ms-discriminator-value": "InMageAzureV2"
@@ -11773,7 +11110,7 @@
         },
         "useManagedDisks": {
           "description": "A value indicating whether managed disks should be used during failover.",
-          "type": "boolean"
+          "type": "string"
         }
       },
       "x-ms-discriminator-value": "HyperVReplicaAzure"
@@ -11797,7 +11134,7 @@
         },
         "useManagedDisks": {
           "description": "A value indicating whether managed disks should be used during failover.",
-          "type": "boolean"
+          "type": "string"
         }
       },
       "x-ms-discriminator-value": "InMageAzureV2"
