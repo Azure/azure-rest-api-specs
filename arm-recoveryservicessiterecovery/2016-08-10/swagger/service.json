@@ -4842,6 +4842,46 @@
         }
       }
     },
+    "/Subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.RecoveryServices/operations": {
+      "get": {
+        "tags": [
+          "Operations"
+        ],
+        "summary": "Returns the list of available operations.",
+        "description": "Operation to return the list of available operations.",
+        "operationId": "Operations_List",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/ApiVersion"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupName"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionId"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/OperationsDiscoveryCollection"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        },
+        "x-ms-examples": {
+          "Returns the list of available operations.": {
+            "$ref": "../examples/Operations_List.json"
+          }
+        }
+      }
+    },
     "/Subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.RecoveryServices/vaults/{resourceName}/replicationNetworks": {
       "get": {
         "tags": [
@@ -7563,6 +7603,72 @@
         }
       }
     },
+    "OperationsDiscoveryCollection": {
+      "description": "Collection of ClientDiscovery details.",
+      "type": "object",
+      "properties": {
+        "value": {
+          "description": "The ClientDiscovery details.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/OperationsDiscovery"
+          }
+        },
+        "nextLink": {
+          "description": "The value of next link.",
+          "type": "string"
+        }
+      }
+    },
+    "OperationsDiscovery": {
+      "description": "Operations discovery class.",
+      "type": "object",
+      "properties": {
+        "name": {
+          "description": "Name of the API. \r\n            The name of the operation being performed on this particular object. It should match the action name that appears in RBAC / the event service.\r\n            Examples of operations include:  \r\n            * Microsoft.Compute/virtualMachine/capture/action \r\n            * Microsoft.Compute/virtualMachine/restart/action \r\n            * Microsoft.Compute/virtualMachine/write \r\n            * Microsoft.Compute/virtualMachine/read \r\n            * Microsoft.Compute/virtualMachine/delete  \r\n            Each action should include, in order:  \r\n            (1) Resource Provider Namespace \r\n            (2) Type hierarchy for which the action applies (e.g. server/databases for a SQL Azure database) \r\n            (3) Read, Write, Action or Delete indicating which type applies. If it is a PUT/PATCH on a collection or named value, Write should be used. \r\n            If it is a GET, Read should be used. If it is a DELETE, Delete should be used. If it is a POST, Action should be used.   \r\n            As a note: all resource providers would need to include the \"{Resource Provider Namespace}/register/action\" operation in their response.  \r\n            This API is used to register for their service, and should include details about the operation (e.g. a localized name for the resource provider + any special considerations like PII release)",
+          "type": "string"
+        },
+        "display": {
+          "$ref": "#/definitions/Display",
+          "description": "Object type"
+        },
+        "origin": {
+          "description": "Origin.\r\n            The intended executor of the operation; governs the display of the operation in the RBAC UX and the audit logs UX.   \r\n            Default value is \"user,system\"",
+          "type": "string"
+        },
+        "properties": {
+          "$ref": "#/definitions/OperationsDiscoveryProperties",
+          "description": "Properties. Reserved for future use."
+        }
+      }
+    },
+    "Display": {
+      "description": "Contains the localized display information for this particular operation / action. These value will be used by several clients for \r\n            (1) custom role definitions for RBAC; \r\n            (2) complex query filters for the event service; and \r\n            (3) audit history / records for management operations.",
+      "type": "object",
+      "properties": {
+        "provider": {
+          "description": "The provider.\r\n            The localized friendly form of the resource provider name – it is expected to also include the publisher/company responsible. \r\n            It should use Title Casing and begin with \"Microsoft\" for 1st party services.   \r\n            e.g. \"Microsoft Monitoring Insights\" or \"Microsoft Compute.\"",
+          "type": "string"
+        },
+        "resource": {
+          "description": "The resource.\r\n            The localized friendly form of the resource related to this action/operation – it should match the public documentation for the resource provider. \r\n            It should use Title Casing.   \r\n            This value should be unique for a particular URL type (e.g. nested types should *not* reuse their parent’s display.resource field).  \r\n            e.g. \"Virtual Machines\" or \"Scheduler Job Collections\", or \"Virtual Machine VM Sizes\" or \"Scheduler Jobs\"",
+          "type": "string"
+        },
+        "operation": {
+          "description": "The operation.\r\n            The localized friendly name for the operation, as it should be shown to the user. \r\n            It should be concise (to fit in drop downs) but clear (i.e. self-documenting). \r\n            It should use Title Casing.  \r\n            Prescriptive guidance: Read Create or Update Delete 'ActionName'",
+          "type": "string"
+        },
+        "description": {
+          "description": "The description.\r\n            The localized friendly description for the operation, as it should be shown to the user. \r\n            It should be thorough, yet concise – it will be used in tool tips and detailed views.   \r\n            Prescriptive guidance for namespaces: \r\n            Read any 'display.provider'  resource \r\n            Create or Update any  'display.provider'  resource \r\n            Delete any  'display.provider'  resource \r\n            Perform any other action on any  'display.provider'  resource  \r\n            Prescriptive guidance for namespaces: \r\n            Read any 'display.resource' Create or Update any  'display.resource' Delete any 'display.resource' 'ActionName' any 'display.resources'",
+          "type": "string"
+        }
+      }
+    },
+    "OperationsDiscoveryProperties": {
+      "description": "ClientDiscovery properties.",
+      "type": "object",
+      "properties": {}
+    },
     "PolicyCollection": {
       "description": "Protection Profile Collection details.",
       "type": "object",
@@ -8385,9 +8491,6 @@
     },
     "UpdateRecoveryPlanInput": {
       "description": "Update recovery plan input class.",
-      "required": [
-        "properties"
-      ],
       "type": "object",
       "properties": {
         "properties": {
