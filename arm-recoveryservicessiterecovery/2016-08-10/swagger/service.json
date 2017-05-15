@@ -6858,7 +6858,7 @@
       "description": "Input details specific to fabrics during Network Mapping.",
       "type": "object",
       "properties": {
-        "InstanceType": {
+        "instanceType": {
           "description": "The instance type.",
           "type": "string"
         }
@@ -9178,10 +9178,6 @@
         "primaryNetworkId": {
           "description": "The primary azure vnet Id.",
           "type": "string"
-        },
-        "InstanceType": {
-          "description": "The instance type.",
-          "type": "string"
         }
       },
       "x-ms-discriminator-value": "AzureToAzure"
@@ -9194,12 +9190,7 @@
           "$ref": "#/definitions/FabricSpecificUpdateNetworkMappingInput"
         }
       ],
-      "properties": {
-        "InstanceType": {
-          "description": "The instance type.",
-          "type": "string"
-        }
-      },
+      "properties": {},
       "x-ms-discriminator-value": "VmmToAzure"
     },
     "VmmToVmmUpdateNetworkMappingInput": {
@@ -9210,12 +9201,7 @@
           "$ref": "#/definitions/FabricSpecificUpdateNetworkMappingInput"
         }
       ],
-      "properties": {
-        "InstanceType": {
-          "description": "The instance type.",
-          "type": "string"
-        }
-      },
+      "properties": {},
       "x-ms-discriminator-value": "VmmToVmm"
     },
     "AzureFabricSpecificDetails": {
