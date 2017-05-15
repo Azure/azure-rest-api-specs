@@ -121,8 +121,8 @@
         "tags": [
           "Registries"
         ],
-        "description": "Creates a container registry with the specified parameters.",
-        "operationId": "Registries_Create",
+        "description": "Creates or updates a container registry with the specified parameters.",
+        "operationId": "Registries_CreateOrUpdate",
         "parameters": [
           {
             "$ref": "#/parameters/ApiVersionParameter"
@@ -137,12 +137,12 @@
             "$ref": "#/parameters/RegistryNameParameter"
           },
           {
-            "name": "registryCreateParameters",
+            "name": "registry",
             "in": "body",
-            "description": "The parameters for creating a container registry.",
+            "description": "The parameters for creating or updating a container registry.",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/RegistryCreateParameters"
+              "$ref": "#/definitions/Registry"
             }
           }
         ],
@@ -161,8 +161,8 @@
           }
         },
         "x-ms-examples": {
-          "RegistryCreate": {
-            "$ref": "../examples/RegistryCreate.json"
+          "RegistryCreateOrUpdate": {
+            "$ref": "../examples/RegistryCreateOrUpdate.json"
           }
         },
         "x-ms-long-running-operation": true
@@ -225,12 +225,12 @@
             "$ref": "#/parameters/RegistryNameParameter"
           },
           {
-            "name": "registryUpdateParameters",
+            "name": "registry",
             "in": "body",
             "description": "The parameters for updating a container registry.",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/RegistryUpdateParameters"
+              "$ref": "#/definitions/Registry"
             }
           }
         ],
@@ -462,7 +462,7 @@
           {
             "name": "replication",
             "in": "body",
-            "description": "The parameters for creating a replication.",
+            "description": "The parameters for creating or updating a replication.",
             "required": true,
             "schema": {
               "$ref": "#/definitions/Replication"
@@ -1101,100 +1101,13 @@
     },
     "StorageAccountProperties": {
       "description": "The properties of a storage account for a container registry. Only applicable to Basic SKU.",
-      "properties": {
-        "name": {
-          "description": "The name of the storage account.",
-          "type": "string"
-        }
-      }
-    },
-    "RegistryCreateParameters": {
-      "description": "The parameters for creating a container registry.",
       "required": [
-        "location",
-        "sku"
+        "id"
       ],
       "properties": {
-        "tags": {
-          "description": "The tags for the container registry.",
-          "type": "object",
-          "additionalProperties": {
-            "type": "string"
-          }
-        },
-        "location": {
-          "description": "The location of the container registry. This cannot be changed after the resource is created.",
+        "id": {
+          "description": "The resource ID of the storage account.",
           "type": "string"
-        },
-        "sku": {
-          "$ref": "#/definitions/Sku",
-          "description": "The SKU of the container registry."
-        },
-        "properties": {
-          "$ref": "#/definitions/RegistryPropertiesCreateParameters",
-          "description": "The properties that the container registry will be created with.",
-          "x-ms-client-flatten": true
-        }
-      }
-    },
-    "RegistryPropertiesCreateParameters": {
-      "description": "The parameters for creating the properties of a container registry.",
-      "properties": {
-        "adminUserEnabled": {
-          "description": "The value that indicates whether the admin user is enabled.",
-          "default": false,
-          "type": "boolean"
-        },
-        "storageAccount": {
-          "$ref": "#/definitions/StorageAccountParameters",
-          "description": "The parameters of a storage account for the container registry. Only applicable to Basic SKU. If specified, the storage account must be in the same physical location as the container registry."
-        }
-      }
-    },
-    "StorageAccountParameters": {
-      "description": "The parameters of a storage account for a container registry. Only applicable to Basic SKU.",
-      "required": [
-        "name",
-        "accessKey"
-      ],
-      "properties": {
-        "name": {
-          "description": "The name of the storage account.",
-          "type": "string"
-        },
-        "accessKey": {
-          "description": "The access key to the storage account.",
-          "type": "string"
-        }
-      }
-    },
-    "RegistryUpdateParameters": {
-      "description": "The parameters for updating a container registry.",
-      "properties": {
-        "tags": {
-          "description": "The tags for the container registry.",
-          "type": "object",
-          "additionalProperties": {
-            "type": "string"
-          }
-        },
-        "properties": {
-          "$ref": "#/definitions/RegistryPropertiesUpdateParameters",
-          "description": "The properties that the container registry will be updated with.",
-          "x-ms-client-flatten": true
-        }
-      }
-    },
-    "RegistryPropertiesUpdateParameters": {
-      "description": "The parameters for updating the properties of a container registry.",
-      "properties": {
-        "adminUserEnabled": {
-          "description": "The value that indicates whether the admin user is enabled.",
-          "type": "boolean"
-        },
-        "storageAccount": {
-          "$ref": "#/definitions/StorageAccountParameters",
-          "description": "The parameters of a storage account for the container registry. Only applicable to Basic SKU. If specified, the storage account must be in the same physical location as the container registry."
         }
       }
     },
