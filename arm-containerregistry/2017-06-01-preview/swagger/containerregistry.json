@@ -225,12 +225,12 @@
             "$ref": "#/parameters/RegistryNameParameter"
           },
           {
-            "name": "registry",
+            "name": "registryUpdateParameters",
             "in": "body",
             "description": "The parameters for updating a container registry.",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/Registry"
+              "$ref": "#/definitions/RegistryUpdateParameters"
             }
           }
         ],
@@ -1108,6 +1108,36 @@
         "id": {
           "description": "The resource ID of the storage account.",
           "type": "string"
+        }
+      }
+    },
+    "RegistryUpdateParameters": {
+      "description": "The parameters for updating a container registry.",
+      "properties": {
+        "tags": {
+          "description": "The tags for the container registry.",
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          }
+        },
+        "properties": {
+          "$ref": "#/definitions/RegistryPropertiesUpdateParameters",
+          "description": "The properties that the container registry will be updated with.",
+          "x-ms-client-flatten": true
+        }
+      }
+    },
+    "RegistryPropertiesUpdateParameters": {
+      "description": "The parameters for updating the properties of a container registry.",
+      "properties": {
+        "adminUserEnabled": {
+          "description": "The value that indicates whether the admin user is enabled.",
+          "type": "boolean"
+        },
+        "storageAccount": {
+          "$ref": "#/definitions/StorageAccountProperties",
+          "description": "The parameters of a storage account for the container registry. Only applicable to Basic SKU. If specified, the storage account must be in the same physical location as the container registry."
         }
       }
     },
