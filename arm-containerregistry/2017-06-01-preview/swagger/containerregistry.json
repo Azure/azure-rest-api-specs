@@ -153,8 +153,11 @@
               "$ref": "#/definitions/Registry"
             }
           },
-          "202": {
-            "description": "The request was successful; the operation will complete asynchronously."
+          "201": {
+            "description": "The request was successful; the operation will complete asynchronously.",
+            "schema": {
+              "$ref": "#/definitions/Registry"
+            }
           }
         },
         "x-ms-examples": {
@@ -473,8 +476,11 @@
               "$ref": "#/definitions/Replication"
             }
           },
-          "202": {
-            "description": "The request was successful; the operation will complete asynchronously."
+          "201": {
+            "description": "The request was successful; the operation will complete asynchronously.",
+            "schema": {
+              "$ref": "#/definitions/Replication"
+            }
           }
         },
         "x-ms-examples": {
@@ -642,8 +648,11 @@
               "$ref": "#/definitions/Webhook"
             }
           },
-          "202": {
-            "description": "The request was successful; the operation will complete asynchronously."
+          "201": {
+            "description": "The request was successful; the operation will complete asynchronously.",
+            "schema": {
+              "$ref": "#/definitions/Webhook"
+            }
           }
         },
         "x-ms-examples": {
@@ -732,13 +741,20 @@
             "schema": {
               "$ref": "#/definitions/Webhook"
             }
+          },
+          "201": {
+            "description": "The request was successful; the operation will complete asynchronously.",
+            "schema": {
+              "$ref": "#/definitions/Webhook"
+            }
           }
         },
         "x-ms-examples": {
           "WebhookUpdate": {
             "$ref": "../examples/WebhookUpdate.json"
           }
-        }
+        },
+        "x-ms-long-running-operation": true
       }
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ContainerRegistry/registries/{registryName}/webhooks": {
@@ -1068,17 +1084,9 @@
           "readOnly": true
         },
         "provisioningState": {
-          "description": "The status of the container registry at the time the operation was called.",
-          "enum": [
-            "Creating",
-            "Succeeded"
-          ],
+          "description": "The provisioning state of the container registry at the time the operation was called.",
           "type": "string",
-          "readOnly": true,
-          "x-ms-enum": {
-            "name": "ProvisioningState",
-            "modelAsString": false
-          }
+          "readOnly": true
         },
         "adminUserEnabled": {
           "description": "The value that indicates whether the admin user is enabled.",
@@ -1282,17 +1290,14 @@
       "description": "The properties of a replication.",
       "properties": {
         "provisioningState": {
-          "description": "The status of the replication at the time the operation was called.",
-          "enum": [
-            "Creating",
-            "Succeeded"
-          ],
+          "description": "The provisioning state of the replication at the time the operation was called.",
           "type": "string",
-          "readOnly": true,
-          "x-ms-enum": {
-            "name": "ProvisioningState",
-            "modelAsString": false
-          }
+          "readOnly": true
+        },
+        "status": {
+          "description": "The status of the replication at the time the operation was called.",
+          "type": "string",
+          "readOnly": true
         }
       }
     },
@@ -1333,13 +1338,20 @@
         "actions"
       ],
       "properties": {
-        "isEnabled": {
-          "description": "The value that indicates whether the webhook is enabled.",
-          "default": true,
-          "type": "boolean"
+        "status": {
+          "description": "The status of the webhook at the time the operation was called.",
+          "enum": [
+            "enabled",
+            "disabled"
+          ],
+          "type": "string",
+          "x-ms-enum": {
+            "name": "WebhookStatus",
+            "modelAsString": true
+          }
         },
         "scope": {
-          "description": "The scope of repositories where the event can be triggered.",
+          "description": "The scope of repositories where the event can be triggered. For example, 'foo:*' means events for all tags under repository 'foo'. 'foo:bar' means events for 'foo:bar' only. 'foo' is equivalent to 'foo:latest'. Empty means all events.",
           "type": "string"
         },
         "actions": {
@@ -1348,7 +1360,6 @@
           "items": {
             "enum": [
               "push",
-              "pull",
               "delete"
             ],
             "type": "string",
@@ -1357,6 +1368,11 @@
               "modelAsString": true
             }
           }
+        },
+        "provisioningState": {
+          "description": "The provisioning state of the webhook at the time the operation was called.",
+          "type": "string",
+          "readOnly": true
         }
       }
     },
@@ -1402,13 +1418,20 @@
             "type": "string"
           }
         },
-        "isEnabled": {
-          "description": "The value that indicates whether the webhook is enabled.",
-          "default": true,
-          "type": "boolean"
+        "status": {
+          "description": "The status of the webhook at the time the operation was called.",
+          "enum": [
+            "enabled",
+            "disabled"
+          ],
+          "type": "string",
+          "x-ms-enum": {
+            "name": "WebhookStatus",
+            "modelAsString": true
+          }
         },
         "scope": {
-          "description": "The scope of repositories where the event can be triggered.",
+          "description": "The scope of repositories where the event can be triggered. For example, 'foo:*' means events for all tags under repository 'foo'. 'foo:bar' means events for 'foo:bar' only. 'foo' is equivalent to 'foo:latest'. Empty means all events.",
           "type": "string"
         },
         "actions": {
@@ -1417,7 +1440,6 @@
           "items": {
             "enum": [
               "push",
-              "pull",
               "delete"
             ],
             "type": "string",
@@ -1460,12 +1482,20 @@
             "type": "string"
           }
         },
-        "isEnabled": {
-          "description": "The value that indicates whether the webhook is enabled.",
-          "type": "boolean"
+        "status": {
+          "description": "The status of the webhook at the time the operation was called.",
+          "enum": [
+            "enabled",
+            "disabled"
+          ],
+          "type": "string",
+          "x-ms-enum": {
+            "name": "WebhookStatus",
+            "modelAsString": true
+          }
         },
         "scope": {
-          "description": "The scope of repositories where the event can be triggered.",
+          "description": "The scope of repositories where the event can be triggered. For example, 'foo:*' means events for all tags under repository 'foo'. 'foo:bar' means events for 'foo:bar' only. 'foo' is equivalent to 'foo:latest'. Empty means all events.",
           "type": "string"
         },
         "actions": {
@@ -1474,7 +1504,6 @@
           "items": {
             "enum": [
               "push",
-              "pull",
               "delete"
             ],
             "type": "string",
@@ -1628,6 +1657,7 @@
           "type": "string"
         },
         "timestamp": {
+          "format": "date-time",
           "description": "The time at which the event occurred.",
           "type": "string"
         },
