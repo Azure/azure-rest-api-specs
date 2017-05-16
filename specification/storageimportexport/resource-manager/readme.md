@@ -39,7 +39,7 @@ These settings apply only when `--api-version=2016-11-01` is specified on the co
 
 ``` yaml $(api-version) == '2016-11-01'
 input-file:
-- Microsoft.ImportExport/2016-11-01/storsimple.json
+- Microsoft.ImportExport/2016-11-01/storageimportexport.json
 
 ```
 

@@ -49,7 +49,7 @@ These settings apply only when `--api-version=2015-11-01` is specified on the co
 
 ``` yaml $(api-version) == '2015-11-01'
 input-file:
-- Microsoft.Network/2017-03-01/trafficmanager.json
+- Microsoft.Network/2015-11-01/trafficmanager.json
 
 ```
 

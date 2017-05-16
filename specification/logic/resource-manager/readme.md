@@ -49,7 +49,7 @@ These settings apply only when `--api-version=2015-08-01-preview` is specified o
 
 ``` yaml $(api-version) == '2015-08-01-preview'
 input-file:
-- Microsoft.Logic/2015-02-01-preview/logic.json
+- Microsoft.Logic/2015-08-01-preview/logic.json
 
 ```
  

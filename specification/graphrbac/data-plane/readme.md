@@ -39,7 +39,7 @@ These settings apply only when `--api-version=1.6` is specified on the command l
 
 ``` yaml $(api-version) == '1.6'
 input-file:
-- data-plane/1.6/graphrbac.json
+- 1.6/graphrbac.json
 
 ```
 

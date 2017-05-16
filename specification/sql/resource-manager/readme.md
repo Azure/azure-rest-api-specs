@@ -50,6 +50,8 @@ input-file:
 - Microsoft.Sql/2014-04-01/sql.core.json
 - Microsoft.Sql/2014-04-01/databaseSecurityAlertPolicies.json
 - Microsoft.Sql/2015-05-01-preview/blobAuditingPolicies.json
+- Microsoft.Sql/2015-05-01-preview/failoverGroups.json
+- Microsoft.Sql/2015-05-01-preview/virtualNetworkRules.json
 
 ```
  

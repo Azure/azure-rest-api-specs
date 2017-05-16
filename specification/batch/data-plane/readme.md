@@ -28,7 +28,18 @@ These are the global settings for the Batch API.
 # common 
 title: Batch
 description: Batch Client
-api-version: 2017-01-01.4.0
+api-version: 2017-05-01.5.0
+
+```
+
+
+# API Version: 2017-05-01.5.0
+
+These settings apply only when `--api-version=2017-05-01.5.0` is specified on the command line.
+
+``` yaml $(api-version) == '2017-05-01.5.0'
+input-file:
+- Microsoft.Batch/2017-05-01.5.0/BatchService.json
 
 ```
 

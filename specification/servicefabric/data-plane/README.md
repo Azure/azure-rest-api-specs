@@ -44,6 +44,17 @@ input-file:
 ```
 
 
+# API Version: 5.6
+
+These settings apply only when `--api-version=5.6` is specified on the command line.
+
+``` yaml $(api-version) == '1.0.0'
+input-file:
+- Microsoft.ServiceFabric/5.6/servicefabric.json
+
+```
+
+
 ---
 #### Language-specific settings: CSharp
 

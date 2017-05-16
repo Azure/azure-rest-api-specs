@@ -28,7 +28,18 @@ These are the global settings for the KeyVault API.
 # common 
 title: Key Vault
 description: Key Vault Client
-api-version: 2015-06-01
+api-version: 2016-10-01
+
+```
+
+
+# API Version: 2016-10-01
+
+These settings apply only when `--api-version=2016-10-01` is specified on the command line.
+
+``` yaml $(api-version) == '2016-10-01'
+input-file:
+- Microsoft.KeyVault/2016-10-01/keyvault.json
 
 ```
 

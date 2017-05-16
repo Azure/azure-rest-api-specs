@@ -39,7 +39,7 @@ These settings apply only when `--api-version=2016-07-01` is specified on the co
 
 ``` yaml $(api-version) == '2016-07-01'
 input-file:
-- Microsoft.Relay/2016-07-01/resourcehealth.json
+- Microsoft.Relay/2016-07-01/relay.json
 
 ```
 

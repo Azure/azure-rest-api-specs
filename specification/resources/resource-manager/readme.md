@@ -118,6 +118,20 @@ input-file:
 - Microsoft.Resources/2015-11-01/subscriptions.json
 
 ```
+ 
+# API Version: 2015-12-01
+
+These settings apply only when `--api-version=2015-12-01` is specified on the command line.
+
+``` yaml $(api-version) == '2015-12-01'
+input-file:
+- Microsoft.Authorization/2015-01-01/locks.json
+- Microsoft.Authorization/2015-10-01-preview/policy.json
+- Microsoft.Features/2015-12-01/features.json
+- Microsoft.Resources/2015-11-01/resources.json
+- Microsoft.Resources/2015-11-01/subscriptions.json
+
+```
 
 
 ---
