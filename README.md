@@ -16,44 +16,57 @@ If you're a spec author looking for information about all of of the repositories
 ## Directory Structure
 
 The structure of the directory should strictly follow these rules:
-- If the Rest end point is for management plane(going through ARM end point) then the top level folder must be the "arm-<service_name>". Else top folder name must be "<service_name>".
-- The second level must be the API versions
-- The third level must be the format of the specification (ex. swagger)
-- The fourth level must be the specifications
+
+1. **Profile**: The profile holder contains the profiles' definition MD files. these files will contain information and references to the snapshots of the RPs' Resource types or Dataplane API versions that represent a specific profile.
+
+2. **Specification**: This folder the is root folder for all Specs (Management and Dataplane) related docs. 
+
+3. **<RP-Name> Folders - each RP will have a seperate folder
+
+4. **'resource-manager' and 'data-plane' Folders**: the RPs can put specs in one of two categories: `resource-manager` (for ARM resources) and `data-plane` (for everything else) . The autorest configuration file (`readme.md`) for the RP should be inside this folder 
+
+4. **API versions**: this folder will be the direct child of the category folder. there will be one such folder per resource type or dataplane service version. This folder will contain the OpenAPI validation Specs (Swaggers previously) and the examples folder. 
+
+6. **Examples**: the example folder will contain the x-ms-examples files. it will reside under the APIs or Resources' version folders as different APIs or Resource types version can have different examples. 
+
+7. **Notes**: 
+    - folder names should be singular (ie, 'profile' not 'profiles' ) -- this removes ambiguity for some non-english speakers. 
+    - generic folder names should be lower-case
+    - proper-name/product name/namespace folders can be PascalCased (ie, "KeyVault")
+    - files are whatever case you think is good for your soul.
+
 
 The structure should appear like so:
 ```bash
 .
-├── arm-authorization
-│   └── 2015-01-01
-│       └── swagger
-│           └── authorization.json
-├── arm-compute
-│   └── 2015-06-15
-│       └── swagger
-│           └── service.json
-├── arm-features
-│   └── 2014-08-01-preview
-│       └── swagger
-│           └── features.json
-├── arm-network
-│   └── 2015-05-01-preview
-│       └── swagger
-│           └── service.json
-├── arm-resources
-│   └── 2014-04-01-preview
-│       └── swagger
-│           └── service.json
-├── arm-storage
-│   └── 2015-05-01-preview
-│       └── swagger
-│           └── service.json
-├── arm-subscriptions
-│   └── 2014-04-01-preview
-│       └── swagger
-│           └── service.json
-├── arm-web
-├── documentation
++---automation
+|   \---resource-manager
+|       \---Microsoft.Automation
+|           \---2015-10-31
+|               \---examples
++---batch
+|   +---data-plane
+|   |   \---Microsoft.Batch
+|   |       +---2015-12-01.2.2
+|   |       +---2016-02-01.3.0
+|   |       +---2016-07-01.3.1
+|   |       +---2017-01-01.4.0
+|   |       |   \---examples
+|   |       \---2017-05-01.5.0
+|   \---resource-manager
+|       \---Microsoft.Batch
+|           +---2015-12-01
+|           +---2017-01-01
+|           |   \---examples
+|           \---2017-05-01
+|               \---examples
++---billing
+|   \---resource-manager
+|       \---Microsoft.Billing
+|           +---2017-02-27-preview
+|           |   \---examples
+|           \---2017-04-24-preview
+|               \---examples
 └── readme.md
 ```
 
@@ -63,4 +76,5 @@ Currently, the specifications are expected to be in Swagger JSON format
 The next step in the process after a spec is completed is to generate SDKs and API reference documentation. Go to the [Azure Developer Experience guide](https://github.com/Azure/adx-documentation-pr) for more information.
 
 ---
-_This project has adopted the [Microsoft Open Source Code of Conduct](https://opensource.microsoft.com/codeofconduct/). For more information see the [Code of Conduct FAQ](https://opensource.microsoft.com/codeofconduct/faq/) or contact [opencode@microsoft.com](mailto:opencode@microsoft.com) with any additional questions or comments._
+_This project has adopted the [Microsoft Open Source Code of Conduct](https://opensource.microsoft.com/codeofconduct/). For more information see the [Code of Conduct FAQ](https://opensource.microsoft.com/codeofconduct/faq/) or contact [opencode@microsoft.com](mailto:opencode@microsoft.com) with any additional questions or comments._Folder PATH listing for volume Windows
+
