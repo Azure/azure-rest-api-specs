@@ -2493,7 +2493,7 @@
                     "description": "routing weight for vpn connection."
                 },
                 "connectionStatus": {
-                    "$ref": "#/definitions/connectionStatus"
+                    "$ref": "#/definitions/VpnConnectionStatus"
                 },
                 "tunnelConnectionStatus": {
                     "type": "array",
@@ -2748,7 +2748,7 @@
                 "connectionHealth": {
                     "properties": {
                         "connectionStatus": {
-                            "$ref": "#/definitions/connectionStatus"
+                            "$ref": "#/definitions/ExpressRouteConnectionStatus"
                         },
                         "ingressBytesTransferred": {
                             "type": "integer",
@@ -2880,7 +2880,7 @@
                     "description": "Id of the connected virtual network."
                 },
                 "connectionStatus": {
-                    "$ref": "#/definitions/connectionStatus"
+                    "$ref": "#/definitions/VnetPeeringConnectionStatus"
                 },
                 "ingressBytesTransferred": {
                     "type": "integer",
@@ -3155,7 +3155,7 @@
                 "modelAsString": true
             }
         },
-        "connectionStatus": {
+        "VpnConnectionStatus": {
             "type": "string",
             "description": "The current state of the vpn connection.",
             "enum": [
@@ -3165,7 +3165,35 @@
                 "NotConnected"
             ],
             "x-ms-enum": {
-                "name": "connectionStatus",
+                "name": "vpnConnectionStatus",
+                "modelAsString": true
+            }
+        },
+        "ExpressRouteConnectionStatus": {
+            "type": "string",
+            "description": "The current state of the express-route connection.",
+            "enum": [
+                "Unknown",
+                "Connecting",
+                "Connected",
+                "NotConnected"
+            ],
+            "x-ms-enum": {
+                "name": "expressRouteConnectionStatus",
+                "modelAsString": true
+            }
+        },
+        "VnetPeeringConnectionStatus": {
+            "type": "string",
+            "description": "The current state of the vnet peering connection.",
+            "enum": [
+                "Unknown",
+                "Connecting",
+                "Connected",
+                "NotConnected"
+            ],
+            "x-ms-enum": {
+                "name": "vnetPeeringConnectionStatus",
                 "modelAsString": true
             }
         },
