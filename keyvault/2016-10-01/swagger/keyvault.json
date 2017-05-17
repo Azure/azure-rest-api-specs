@@ -33,7 +33,8 @@
           "Keys"
         ],
         "operationId": "CreateKey",
-        "description": "Creates a new key, stores it, then returns key parameters and attributes to the client. The create key operation can be used to create any key type in Azure Key Vault. If the named key already exists, Azure Key Vault creates a new version of the key. Authorization: Requires the keys/create permission.",
+        "summary": "Creates a new key, stores it, then returns key parameters and attributes to the client.",
+        "description": "The create key operation can be used to create any key type in Azure Key Vault. If the named key already exists, Azure Key Vault creates a new version of the key.",
         "parameters": [
           {
             "name": "key-name",
@@ -79,7 +80,8 @@
           "Keys"
         ],
         "operationId": "ImportKey",
-        "description": "Imports an externally created key, stores it, and returns key parameters and attributes to the client. The import key operation may be used to import any key type into an Azure Key Vault. If the named key already exists, Azure Key Vault creates a new version of the key. Authorization: requires the keys/import permission. ",
+        "summary": "Imports an externally created key, stores it, and returns key parameters and attributes to the client.",
+        "description": "The import key operation may be used to import any key type into an Azure Key Vault. If the named key already exists, Azure Key Vault creates a new version of the key.",
         "parameters": [
           {
             "name": "key-name",
@@ -123,7 +125,8 @@
           "Keys"
         ],
         "operationId": "DeleteKey",
-        "description": "Deletes a key of any type from storage in Azure Key Vault. The delete key operation cannot be used to remove individual versions of a key. This operation removes the cryptographic material associated with the key, which means the key is not usable for Sign/Verify, Wrap/Unwrap or Encrypt/Decrypt operations. Authorization: Requires the keys/delete permission.",
+        "summary": "Deletes a key of any type from storage in Azure Key Vault.",
+        "description": "The delete key operation cannot be used to remove individual versions of a key. This operation removes the cryptographic material associated with the key, which means the key is not usable for Sign/Verify, Wrap/Unwrap or Encrypt/Decrypt operations.",
         "parameters": [
           {
             "name": "key-name",
@@ -138,9 +141,9 @@
         ],
         "responses": {
           "200": {
-            "description": "The public part of the deleted key.",
+            "description": "The public part of the deleted key and deletion information on when the key will be purged.",
             "schema": {
-              "$ref": "#/definitions/KeyBundle"
+              "$ref": "#/definitions/DeletedKeyBundle"
             }
           },
           "default": {
@@ -158,7 +161,8 @@
           "Keys"
         ],
         "operationId": "UpdateKey",
-        "description": "The update key operation changes specified attributes of a stored key and can be applied to any key type and key version stored in Azure Key Vault. The cryptographic material of a key itself cannot be changed. In order to perform this operation, the key must already exist in the Key Vault. Authorization: requires the keys/update permission.",
+        "summary": "The update key operation changes specified attributes of a stored key and can be applied to any key type and key version stored in Azure Key Vault.",
+        "description": "In order to perform this operation, the key must already exist in the Key Vault. Note: The cryptographic material of a key itself cannot be changed.",
         "parameters": [
           {
             "name": "key-name",
@@ -182,7 +186,7 @@
             "schema": {
               "$ref": "#/definitions/KeyUpdateParameters"
             },
-            "description": "The parameters for the key to update."
+            "description": "The parameters of the key to update."
           },
           {
             "$ref": "#/parameters/ApiVersionParameter"
@@ -208,7 +212,8 @@
           "Keys"
         ],
         "operationId": "GetKey",
-        "description": "Gets the public part of a stored key. The get key operation is applicable to all key types. If the requested key is symmetric, then no key material is released in the response. Authorization: Requires the keys/get permission.",
+        "summary": "Gets the public part of a stored key.",
+        "description": "The get key operation is applicable to all key types. If the requested key is symmetric, then no key material is released in the response.",
         "parameters": [
           {
             "name": "key-name",
@@ -250,7 +255,8 @@
           "Keys"
         ],
         "operationId": "GetKeyVersions",
-        "description": "Retrieves a list of individual key versions with the same key name. The full key identifier, attributes, and tags are provided in the response. Authorization: Requires the keys/list permission.",
+        "summary": "Retrieves a list of individual key versions with the same key name.",
+        "description": "The full key identifier, attributes, and tags are provided in the response.",
         "parameters": [
           {
             "name": "key-name",
@@ -298,7 +304,8 @@
           "Keys"
         ],
         "operationId": "GetKeys",
-        "description": "List keys in the specified vault.",
+        "summary": "List keys in the specified vault.",
+        "description": "Retrieves a list of the keys in the Key Vault as JSON Web Key structures that contain the public part of a stored key. The LIST operation is applicable to all key types, however only the base key identifier,attributes, and tags are provided in the response. Individual versions of a key are not listed in the response. Authorization: Requires the keys/list permission.",
         "parameters": [
           {
             "name": "maxresults",
@@ -339,7 +346,8 @@
           "Keys"
         ],
         "operationId": "BackupKey",
-        "description": "Requests that a backup of the specified key be downloaded to the client.",
+        "summary": "Requests that a backup of the specified key be downloaded to the client.",
+        "description": "The Key Backup operation exports a key from Azure Key Vault in a protected form. Note that this operation does NOT return key material in a form that can be used outside the Azure Key Vault system, the returned key material is either protected to a Azure Key Vault HSM or to Azure Key Vault itself. The intent of this operation is to allow a client to GENERATE a key in one Azure Key Vault instance, BACKUP the key, and then RESTORE it into another Azure Key Vault instance. The BACKUP operation may be used to export, in protected form, any key type from Azure Key Vault. Individual versions of a key cannot be backed up. BACKUP / RESTORE can be performed within geographical boundaries only; meaning that a BACKUP from one geographical area cannot be restored to another geographical area. For example, a backup from the US geographical area cannot be restored in an EU geographical area.",
         "parameters": [
           {
             "name": "key-name",
@@ -374,7 +382,8 @@
           "Keys"
         ],
         "operationId": "RestoreKey",
-        "description": "Restores a backed up key to a vault.",
+        "summary": "Restores a backed up key to a vault.",
+        "description": "Imports a previously backed up key into Azure Key Vault, restoring the key, its key identifier, attributes and access control policies. The RESTORE operation may be used to import a previously backed up key. Individual versions of a key cannot be restored. The key is restored in its entirety with the same key name as it had when it was backed up. If the key name is not available in the target Key Vault, the RESTORE operation will be rejected. While the key name is retained during restore, the final key identifier will change if the key is restored to a different vault. Restore will restore all versions and preserve version identifiers. The RESTORE operation is subject to security constraints: The target Key Vault must be owned by the same Microsoft Azure Subscription as the source Key Vault The user must have RESTORE permission in the target Key Vault.",
         "parameters": [
           {
             "name": "parameters",
@@ -412,7 +421,8 @@
           "Keys"
         ],
         "operationId": "encrypt",
-        "description": "Encrypts an arbitrary sequence of bytes using an encryption key that is stored in a key vault.",
+        "summary": "Encrypts an arbitrary sequence of bytes using an encryption key that is stored in a key vault.",
+        "description": "The ENCRYPT operation encrypts an arbitrary sequence of bytes using an encryption key that is stored in Azure Key Vault. Note that the ENCRYPT operation only supports a single block of data, the size of which is dependent on the target key and the encryption algorithm to be used. The ENCRYPT operation is only strictly necessary for symmetric keys stored in Azure Key Vault since protection with an asymmetric key can be performed using public portion of the key. This operation is supported for asymmetric keys as a convenience for callers that have a key-reference but do not have access to the public key material.",
         "parameters": [
           {
             "name": "key-name",
@@ -464,7 +474,8 @@
           "Keys"
         ],
         "operationId": "decrypt",
-        "description": "Decrypts a single block of encrypted data.",
+        "summary": "Decrypts a single block of encrypted data.",
+        "description": "The DECRYPT operation decrypts a well-formed block of ciphertext using the target encryption key and specified algorithm. This operation is the reverse of the ENCRYPT operation; only a single block of data may be decrypted, the size of this block is dependent on the target key and the algorithm to be used. The DECRYPT operation applies to asymmetric and symmetric keys stored in Azure Key Vault since it uses the private portion of the key.",
         "parameters": [
           {
             "name": "key-name",
@@ -516,7 +527,8 @@
           "Keys"
         ],
         "operationId": "sign",
-        "description": "Creates a signature from a digest using the specified key.",
+        "summary": "Creates a signature from a digest using the specified key.",
+        "description": "The SIGN operation is applicable to asymmetric and symmetric keys stored in Azure Key Vault since this operation uses the private portion of the key.",
         "parameters": [
           {
             "name": "key-name",
@@ -568,7 +580,8 @@
           "Keys"
         ],
         "operationId": "verify",
-        "description": "Verifies a signature using a specified key.",
+        "summary": "Verifies a signature using a specified key.",
+        "description": "The VERIFY operation is applicable to symmetric keys stored in Azure Key Vault. VERIFY is not strictly necessary for asymmetric keys stored in Azure Key Vault since signature verification can be performed using the public portion of the key but this operation is supported as a convenience for callers that only have a key-reference and not the public portion of the key.",
         "parameters": [
           {
             "name": "key-name",
@@ -620,7 +633,8 @@
           "Keys"
         ],
         "operationId": "wrapKey",
-        "description": "Wraps a symmetric key using a specified key.",
+        "summary": "Wraps a symmetric key using a specified key.",
+        "description": "The WRAP operation supports encryption of a symmetric key using a key encryption key that has previously been stored in an Azure Key Vault. The WRAP operation is only strictly necessary for symmetric keys stored in Azure Key Vault since protection with an asymmetric key can be performed using the public portion of the key. This operation is supported for asymmetric keys as a convenience for callers that have a key-reference but do not have access to the public key material.",
         "parameters": [
           {
             "name": "key-name",
@@ -672,7 +686,8 @@
           "Keys"
         ],
         "operationId": "unwrapKey",
-        "description": "Unwraps a symmetric key using the specified key that was initially used for wrapping that key.",
+        "summary": "Unwraps a symmetric key using the specified key that was initially used for wrapping that key.",
+        "description": "The UNWRAP operation supports decryption of a symmetric key using the target key encryption key. This operation is the reverse of the WRAP operation. The UNWRAP operation applies to asymmetric and symmetric keys stored in Azure Key Vault since it uses the private portion of the key.",
         "parameters": [
           {
             "name": "key-name",
@@ -718,13 +733,155 @@
         }
       }
     },
+    "/deletedkeys": {
+      "get": {
+        "tags": [
+          "DeletedKeys"
+        ],
+        "operationId": "GetDeletedKeys",
+        "description": "List deleted keys in the specified vault. Authorization: Requires the keys/list permission.",
+        "parameters": [
+          {
+            "name": "maxresults",
+            "in": "query",
+            "required": false,
+            "type": "integer",
+            "format": "int32",
+            "minimum": 1,
+            "maximum": 25,
+            "description": "Maximum number of results to return in a page. If not specified the service will return up to 25 results."
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "A response message containing a list of deleted keys in the vault along with a link to the next page of deleted keys",
+            "schema": {
+              "$ref": "#/definitions/DeletedKeyListResult"
+            }
+          },
+          "default": {
+            "description": "Key Vault error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/KeyVaultError"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/deletedkeys/{key-name}": {
+      "get": {
+        "tags": [
+          "DeletedKeys"
+        ],
+        "operationId": "GetDeletedKey",
+        "description": "Retrieves the deleted key information plus its attributes. Authorization: Requires the keys/get permission.",
+        "parameters": [
+          {
+            "name": "key-name",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the key"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "A DeletedKeyBundle consisting of a WebKey plus its Attributes and deletion info",
+            "schema": {
+              "$ref": "#/definitions/DeletedKeyBundle"
+            }
+          },
+          "default": {
+            "description": "Key Vault error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/KeyVaultError"
+            }
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "DeletedKeys"
+        ],
+        "operationId": "PurgeDeletedKey",
+        "description": "Permanently deletes the specified key. aka purges the key. Authorization: Requires the keys/purge permission.",
+        "parameters": [
+          {
+            "name": "key-name",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the key"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "No content signaling that the key was purged forever."
+          },
+          "default": {
+            "description": "Key Vault error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/KeyVaultError"
+            }
+          }
+        }
+      }
+    },
+    "/deletedkeys/{key-name}/recover": {
+      "post": {
+        "tags": [
+          "DeletedKeys"
+        ],
+        "operationId": "RecoverDeletedKey",
+        "description": "Recovers the deleted key back to its current version under /keys. Authorization: Requires the keys/recover permission.",
+        "parameters": [
+          {
+            "name": "key-name",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the deleted key"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "A Key bundle of the original key and its attributes",
+            "schema": {
+              "$ref": "#/definitions/KeyBundle"
+            }
+          },
+          "default": {
+            "description": "Key Vault error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/KeyVaultError"
+            }
+          }
+        }
+      }
+    },
     "/secrets/{secret-name}": {
       "put": {
         "tags": [
           "Secrets"
         ],
         "operationId": "SetSecret",
-        "description": "Sets a secret in a specified key vault.",
+        "summary": "Sets a secret in a specified key vault.",
+        "description": " The SET operation adds a secret to the Azure Key Vault. If the named secret already exists, Azure Key Vault creates a new version of that secret.",
         "parameters": [
           {
             "name": "secret-name",
@@ -768,7 +925,8 @@
           "Secrets"
         ],
         "operationId": "DeleteSecret",
-        "description": "Deletes a secret from a specified key vault.",
+        "summary": "Deletes a secret from a specified key vault.",
+        "description": "The DELETE operation applies to any secret stored in Azure Key Vault. DELETE cannot be applied to an individual version of a secret.",
         "parameters": [
           {
             "name": "secret-name",
@@ -783,9 +941,9 @@
         ],
         "responses": {
           "200": {
-            "description": "The deleted secret.",
+            "description": "The deleted secret and information on when the secret will be deleted, and how to recover the deleted secret.",
             "schema": {
-              "$ref": "#/definitions/SecretBundle"
+              "$ref": "#/definitions/DeletedSecretBundle"
             }
           },
           "default": {
@@ -803,7 +961,8 @@
           "Secrets"
         ],
         "operationId": "UpdateSecret",
-        "description": "Updates the attributes associated with a specified secret in a given key vault.",
+        "summary": "Updates the attributes associated with a specified secret in a given key vault.",
+        "description": "The UPDATE operation changes specified attributes of an existing stored secret. Attributes that are not specified in the request are left unchanged. The value of a secret itself cannot be changed.",
         "parameters": [
           {
             "name": "secret-name",
@@ -853,7 +1012,8 @@
           "Secrets"
         ],
         "operationId": "GetSecret",
-        "description": "Get a specified secret from a given key vault.",
+        "summary": "Get a specified secret from a given key vault.",
+        "description": "The GET operation is applicable to any secret stored in Azure Key Vault.",
         "parameters": [
           {
             "name": "secret-name",
@@ -895,7 +1055,8 @@
           "Secrets"
         ],
         "operationId": "GetSecrets",
-        "description": "List secrets in a specified key vault",
+        "summary": "List secrets in a specified key vault",
+        "description": "The LIST operation is applicable to the entire vault, however only the base secret identifier and attributes are provided in the response. Individual secret versions are not listed in the response.",
         "parameters": [
           {
             "name": "maxresults",
@@ -936,7 +1097,8 @@
           "Secrets"
         ],
         "operationId": "GetSecretVersions",
-        "description": "List the versions of the specified secret.",
+        "summary": "List the versions of the specified secret.",
+        "description": "The LIST VERSIONS operation can be applied to all versions having the same secret name in the same key vault. The full secret identifier and attributes are provided in the response. No values are returned for the secrets and only current versions of a secret are listed.",
         "parameters": [
           {
             "name": "secret-name",
@@ -978,13 +1140,228 @@
         }
       }
     },
+    "/deletedsecrets": {
+      "get": {
+        "tags": [
+          "DeletedSecrets"
+        ],
+        "operationId": "GetDeletedSecrets",
+        "description": "List deleted secrets in the specified vault. Authorization: requires the secrets/list permission.",
+        "parameters": [
+          {
+            "name": "maxresults",
+            "in": "query",
+            "required": false,
+            "type": "integer",
+            "format": "int32",
+            "minimum": 1,
+            "maximum": 25,
+            "description": "Maximum number of results to return in a page. If not specified the service will return up to 25 results."
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "A response message containing a list of deleted secrets in the vault along with a link to the next page of deleted secrets",
+            "schema": {
+              "$ref": "#/definitions/DeletedSecretListResult"
+            }
+          },
+          "default": {
+            "description": "Key Vault error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/KeyVaultError"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/deletedsecrets/{secret-name}": {
+      "get": {
+        "tags": [
+          "DeletedSecrets"
+        ],
+        "operationId": "GetDeletedSecret",
+        "description": "Retrieves the deleted secret information plus its attributes. Authorization: requires the secrets/get permission.",
+        "parameters": [
+          {
+            "name": "secret-name",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the secret"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "A Secret bundle of the secret and its attributes",
+            "schema": {
+              "$ref": "#/definitions/DeletedSecretBundle"
+            }
+          },
+          "default": {
+            "description": "Key Vault error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/KeyVaultError"
+            }
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "DeletedSecrets"
+        ],
+        "operationId": "PurgeDeletedSecret",
+        "description": "Permanently deletes the specified secret. aka purges the secret. Authorization: requires the secrets/purge permission.",
+        "parameters": [
+          {
+            "name": "secret-name",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the secret"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "No content signaling that the secret was purged forever."
+          },
+          "default": {
+            "description": "Key Vault error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/KeyVaultError"
+            }
+          }
+        }
+      }
+    },
+    "/deletedsecrets/{secret-name}/recover": {
+      "post": {
+        "tags": [
+          "DeletedSecrets"
+        ],
+        "operationId": "RecoverDeletedSecret",
+        "description": "Recovers the deleted secret back to its current version under /secrets. Authorization: requires the secrets/recover permission.",
+        "parameters": [
+          {
+            "name": "secret-name",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the deleted secret"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "A Secret bundle of the original secret and its attributes",
+            "schema": {
+              "$ref": "#/definitions/SecretBundle"
+            }
+          },
+          "default": {
+            "description": "Key Vault error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/KeyVaultError"
+            }
+          }
+        }
+      }
+    },
+    "/secrets/{secret-name}/backup": {
+      "post": {
+        "tags": [
+          "Secrets"
+        ],
+        "operationId": "BackupSecret",
+        "description": "Requests that a backup of the specified secret be downloaded to the client. Authorization: requires the secrets/backup permission.",
+        "parameters": [
+          {
+            "name": "secret-name",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the secret."
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The backup blob containing the backed up secret.",
+            "schema": {
+              "$ref": "#/definitions/BackupSecretResult"
+            }
+          },
+          "default": {
+            "description": "Key Vault error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/KeyVaultError"
+            }
+          }
+        }
+      }
+    },
+    "/secrets/restore": {
+      "post": {
+        "tags": [
+          "Secrets"
+        ],
+        "operationId": "RestoreSecret",
+        "description": "Restores a backed up secret to a vault. Authorization: requires the secrets/restore permission.",
+        "parameters": [
+          {
+            "name": "parameters",
+            "in": "body",
+            "required": true,
+            "x-ms-client-flatten": true,
+            "schema": {
+              "$ref": "#/definitions/SecretRestoreParameters"
+            },
+            "description": "The parameters to restore the secret."
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Restored secret bundle in the vault.",
+            "schema": {
+              "$ref": "#/definitions/SecretBundle"
+            }
+          },
+          "default": {
+            "description": "Key Vault error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/KeyVaultError"
+            }
+          }
+        }
+      }
+    },    
     "/certificates": {
       "get": {
         "tags": [
           "Certificates"
         ],
         "operationId": "GetCertificates",
-        "description": "List certificates in a specified key vault",
+        "summary": "List certificates in a specified key vault",
+        "description": "The GetCertificates operation returns the set of certificates resources in the specified key vault.",
         "parameters": [
           {
             "name": "maxresults",
@@ -1025,7 +1402,8 @@
           "Certificates"
         ],
         "operationId": "DeleteCertificate",
-        "description": "Deletes a certificate from a specified key vault.",
+        "summary": "Deletes a certificate from a specified key vault.",
+        "description": "Deletes all versions of a certificate object along with its associated policy. Delete certificate cannot be used to remove individual versions of a certificate object.",
         "parameters": [
           {
             "name": "certificate-name",
@@ -1042,7 +1420,7 @@
           "200": {
             "description": "The deleted certificate.",
             "schema": {
-              "$ref": "#/definitions/CertificateBundle"
+              "$ref": "#/definitions/DeletedCertificateBundle"
             }
           },
           "default": {
@@ -1060,7 +1438,8 @@
           "Certificates"
         ],
         "operationId": "SetCertificateContacts",
-        "description": "Sets the certificate contacts for the specified key vault.",
+        "description": "Sets the certificate contacts for the specified key vault. Authorization: requires the certificates/managecontacts permission.",
+        "summary": "Sets the certificate contacts for the specified key vault.",
         "parameters": [
           {
             "name": "contacts",
@@ -1095,7 +1474,8 @@
           "Certificates"
         ],
         "operationId": "GetCertificateContacts",
-        "description": "Lists the certificate contacts for a specified key vault.",
+        "summary": "Lists the certificate contacts for a specified key vault.",
+        "description": "The GetCertificateContacts operation returns the set of certificate contact resources in the specified key vault.",
         "parameters": [
           {
             "$ref": "#/parameters/ApiVersionParameter"
@@ -1121,7 +1501,8 @@
           "Certificates"
         ],
         "operationId": "DeleteCertificateContacts",
-        "description": "Deletes the certificate contacts for a specified key vault.",
+        "description": "Deletes the certificate contacts for a specified key vault certificate. Authorization: requires the certificates/managecontacts permission.",
+        "summary": "Deletes the certificate contacts for a specified key vault.",
         "parameters": [
           {
             "$ref": "#/parameters/ApiVersionParameter"
@@ -1149,7 +1530,8 @@
           "Certificates"
         ],
         "operationId": "GetCertificateIssuers",
-        "description": "List certificate issuers for a specified key vault.",
+        "summary": "List certificate issuers for a specified key vault.",
+        "description": "The GetCertificateIssuers operation returns the set of certificate issuer resources in the specified key vault",
         "parameters": [
           {
             "name": "maxresults",
@@ -1190,7 +1572,8 @@
           "Certificates"
         ],
         "operationId": "SetCertificateIssuer",
-        "description": "Sets the specified certificate issuer.",
+        "summary": "Sets the specified certificate issuer.",
+        "description": "The SetCertificateIssuer operation adds or updates the specified certificate issuer.",
         "parameters": [
           {
             "name": "issuer-name",
@@ -1233,7 +1616,8 @@
           "Certificates"
         ],
         "operationId": "UpdateCertificateIssuer",
-        "description": "Updates the specified certificate issuer.",
+        "summary": "Updates the specified certificate issuer.",
+        "description": "The UpdateCertificateIssuer operation performs an update on the specified certificate issuer entity.",
         "parameters": [
           {
             "name": "issuer-name",
@@ -1276,7 +1660,8 @@
           "Certificates"
         ],
         "operationId": "GetCertificateIssuer",
-        "description": "Lists the specified certificate issuer.",
+        "summary": "Lists the specified certificate issuer.",
+        "description": "The GetCertificateIssuer operation returns the specified certificate issuer resources in the specified key vault",
         "parameters": [
           {
             "name": "issuer-name",
@@ -1309,7 +1694,8 @@
           "Certificates"
         ],
         "operationId": "DeleteCertificateIssuer",
-        "description": "Deletes the specified certificate issuer.",
+        "summary": "Deletes the specified certificate issuer.",
+        "description": "The DeleteCertificateIssuer operation permanently removes the specified certificate issuer from the vault.",
         "parameters": [
           {
             "name": "issuer-name",
@@ -1344,7 +1730,8 @@
           "Certificates"
         ],
         "operationId": "CreateCertificate",
-        "description": "Creates a new certificate. If this is the first version, the certificate resource is created.",
+        "summary": "Creates a new certificate. ",
+        "description": "If this is the first version, the certificate resource is created.",
         "parameters": [
           {
             "name": "certificate-name",
@@ -1390,7 +1777,8 @@
           "Certificates"
         ],
         "operationId": "ImportCertificate",
-        "description": "Imports a certificate into a specified key vault.",
+        "summary": "Imports a certificate into a specified key vault.",
+        "description": "Imports an existing valid certificate, containing a private key, into Azure Key Vault. The certificate to be imported can be in either PFX or PEM format. If the certificate is in PEM format the PEM file must contain the key as well as x509 certificates.",
         "parameters": [
           {
             "name": "certificate-name",
@@ -1436,7 +1824,8 @@
           "Certificates"
         ],
         "operationId": "GetCertificateVersions",
-        "description": "List the versions of a certificate.",
+        "summary": "List the versions of a certificate.",
+        "description": "The GetCertificateVersions operation returns the versions of a certificate in the specified key vault",
         "parameters": [
           {
             "name": "certificate-name",
@@ -1484,7 +1873,8 @@
           "Certificates"
         ],
         "operationId": "GetCertificatePolicy",
-        "description": "Lists the policy for a certificate.",
+        "summary": "Lists the policy for a certificate.",
+        "description": "The GetCertificatePolicy operation returns the specified certificate policy resources in the specified key vault",
         "parameters": [
           {
             "name": "certificate-name",
@@ -1517,7 +1907,8 @@
           "Certificates"
         ],
         "operationId": "UpdateCertificatePolicy",
-        "description": "Updates the policy for a certificate. Set specified members in the certificate policy. Leave others as null.",
+        "summary": "Updates the policy for a certificate.",
+        "description": "Set specified members in the certificate policy. Leave others as null.",
         "parameters": [
           {
             "name": "certificate-name",
@@ -1561,7 +1952,8 @@
           "Certificates"
         ],
         "operationId": "UpdateCertificate",
-        "description": "Updates the specified attributes associated with the given certificate.",
+        "summary": "Updates the specified attributes associated with the given certificate.",
+        "description": "The UpdateCertificate operation applies the specified update on the given certificate; note the only elements being updated are the certificate's attributes.",
         "parameters": [
           {
             "name": "certificate-name",
@@ -1611,7 +2003,7 @@
           "Certificates"
         ],
         "operationId": "GetCertificate",
-        "description": "Gets information about a specified certificate.",
+        "description": "Gets information about a specified certificate. Authorization: requires the certificates/get permission.",
         "parameters": [
           {
             "name": "certificate-name",
@@ -1653,7 +2045,7 @@
           "Certificates"
         ],
         "operationId": "UpdateCertificateOperation",
-        "description": "Updates a certificate operation.",
+        "description": "Updates a certificate operation. Authorization: requires the certificates/update permission.",
         "parameters": [
           {
             "name": "certificate-name",
@@ -1696,7 +2088,7 @@
           "Certificates"
         ],
         "operationId": "GetCertificateOperation",
-        "description": "Gets the operation associated with a specified certificate.",
+        "description": "Gets the operation associated with a specified certificate. Authorization: requires the certificates/get permission.",
         "parameters": [
           {
             "name": "certificate-name",
@@ -1729,7 +2121,7 @@
           "Certificates"
         ],
         "operationId": "DeleteCertificateOperation",
-        "description": "Deletes the operation for a specified certificate.",
+        "description": "Deletes the operation for a specified certificate. Authorization: requires the certificates/update permission.",
         "parameters": [
           {
             "name": "certificate-name",
@@ -1764,7 +2156,8 @@
           "Certificates"
         ],
         "operationId": "MergeCertificate",
-        "description": "Merges a certificate or a certificate chain with a key pair existing on the server.",
+        "summary": "Merges a certificate or a certificate chain with a key pair existing on the server.",
+        "description": "The MergeCertificate operation performs the merging of a certificate or certificate chain with a key pair currently available in the service. Authorization: requires the certificates/update permission.",
         "parameters": [
           {
             "name": "certificate-name",
@@ -1802,7 +2195,152 @@
           }
         }
       }
-    }
+    },
+    "/deletedcertificates": {
+      "get": {
+        "tags": [
+          "DeletedCertificates"
+        ],
+        "operationId": "GetDeletedCertificates",
+        "summary": "Lists the deleted certificates in the specified vault, currently available for recovery.",
+        "description": "The GetDeletedCertificates operation retrieves the certificates in the current vault which are in a deleted state and ready for recovery or purging.",
+        "parameters": [
+          {
+            "name": "maxresults",
+            "in": "query",
+            "required": false,
+            "type": "integer",
+            "format": "int32",
+            "minimum": 1,
+            "maximum": 25,
+            "description": "Maximum number of results to return in a page. If not specified the service will return up to 25 results."
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "A response message containing a list of deleted certificates in the vault along with a link to the next page of deleted certificates",
+            "schema": {
+              "$ref": "#/definitions/DeletedCertificateListResult"
+            }
+          },
+          "default": {
+            "description": "Key Vault error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/KeyVaultError"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/deletedcertificates/{certificate-name}": {
+      "get": {
+        "tags": [
+          "DeletedCertificates"
+        ],
+        "operationId": "GetDeletedCertificate",
+        "summary": "Retrieves information about the specified deleted certificate.",
+        "description": "The GetDeletedCertificate operation retrieves the deleted certificate information plus its attributes, such as retention interval, scheduled permanent deletion and the current deletion recovery level.",
+        "parameters": [
+          {
+            "name": "certificate-name",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the certificate"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "A Certificate bundle of the certificate and its attributes",
+            "schema": {
+              "$ref": "#/definitions/DeletedCertificateBundle"
+            }
+          },
+          "default": {
+            "description": "Key Vault error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/KeyVaultError"
+            }
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "DeletedCertificates"
+        ],
+        "operationId": "PurgeDeletedCertificate",
+        "summary": "Permanently deletes the specified deleted certificate.",
+        "description": "The PurgeDeletedCertificate operation performs an irreversible deletion of the specified certificate, without possibility for recovery. The operation is not available if the recovery level does not specify 'Purgeable'. Requires the explicit granting of the 'purge' permission.",
+        "parameters": [
+          {
+            "name": "certificate-name",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the certificate"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "No content signaling that the certificate was purged forever."
+          },
+          "default": {
+            "description": "Key Vault error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/KeyVaultError"
+            }
+          }
+        }
+      }
+    },
+    "/deletedcertificates/{certificate-name}/recover": {
+      "post": {
+        "tags": [
+          "DeletedCertificates"
+        ],
+        "operationId": "RecoverDeletedCertificate",
+        "summary": "Recovers the deleted certificate back to its current version under /certificates.",
+        "description": "The RecoverDeletedCertificate operation performs the reversal of the Delete operation. The operation is applicable in vaults enabled for soft-delete, and must be issued during the retention interval (available in the deleted certificate's attributes).",
+        "parameters": [
+          {
+            "name": "certificate-name",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the deleted certificate"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "A Certificate bundle of the original certificate and its attributes",
+            "schema": {
+              "$ref": "#/definitions/CertificateBundle"
+            }
+          },
+          "default": {
+            "description": "Key Vault error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/KeyVaultError"
+            }
+          }
+        }
+      }
+    },
   },
   "definitions": {
     "Attributes": {
@@ -1923,6 +2461,19 @@
           "$ref": "#/definitions/Attributes"
         }
       ],
+      "properties": {
+        "recoveryLevel": {
+          "type": "string",
+          "description": "Reflects the deletion recovery level currently in effect for keys in the current vault. If it contains 'Purgeable' the key can be permanently deleted by a privileged user; otherwise, only the system can purge the key, at the end of the retention interval.",
+          "enum": [ "Purgeable", "Recoverable+Purgeable", "Recoverable", "Recoverable+ProtectedSubscription" ],
+          "x-ms-enum": {
+            "name": "DeletionRecoveryLevel",
+            "modelAsString": true
+          },
+          "readOnly": true,
+          "x-nullable": false
+        }
+      },
       "description": "The attributes of a key managed by the key vault service."
     },
     "KeyBundle": {
@@ -1974,6 +2525,58 @@
         }
       },
       "description": "The key item containing key metadata."
+    },
+    "DeletedKeyBundle": {
+      "allOf": [
+        {
+          "$ref": "#/definitions/KeyBundle"
+        }
+      ],
+      "properties": {
+        "recoveryId": {
+          "type": "string",
+          "description": "The url of the recovery object, used to identify and recover the deleted key."
+        },
+        "scheduledPurgeDate": {
+          "type": "integer",
+          "format": "unixtime",
+          "readOnly": true,
+          "description": "The time when the key is scheduled to be purged, in UTC"
+        },
+        "deletedDate": {
+          "type": "integer",
+          "format": "unixtime",
+          "readOnly": true,
+          "description": "The time when the key was deleted, in UTC"
+        }
+      },
+      "description": "A DeletedKeyBundle consisting of a WebKey plus its Attributes and deletion info"
+    },
+    "DeletedKeyItem": {
+      "allOf": [
+        {
+          "$ref": "#/definitions/KeyItem"
+        }
+      ],
+      "properties": {
+        "recoveryId": {
+          "type": "string",
+          "description": "The url of the recovery object, used to identify and recover the deleted key."
+        },
+        "scheduledPurgeDate": {
+          "type": "integer",
+          "format": "unixtime",
+          "readOnly": true,
+          "description": "The time when the key is scheduled to be purged, in UTC"
+        },
+        "deletedDate": {
+          "type": "integer",
+          "format": "unixtime",
+          "readOnly": true,
+          "description": "The time when the key was deleted, in UTC"
+        }
+      },
+      "description": "The deleted key item containing the deleted key metadata and information about deletion."
     },
     "SecretBundle": {
       "properties": {
@@ -2042,20 +2645,110 @@
       },
       "description": "The secret item containing secret metadata."
     },
+    "DeletedSecretBundle": {
+      "allOf": [
+        {
+          "$ref": "#/definitions/SecretBundle"
+        }
+      ],
+      "properties": {
+        "recoveryId": {
+          "type": "string",
+          "description": "The url of the recovery object, used to identify and recover the deleted secret."
+        },
+        "scheduledPurgeDate": {
+          "type": "integer",
+          "format": "unixtime",
+          "readOnly": true,
+          "description": "The time when the secret is scheduled to be purged, in UTC"
+        },
+        "deletedDate": {
+          "type": "integer",
+          "format": "unixtime",
+          "readOnly": true,
+          "description": "The time when the secret was deleted, in UTC"
+        }
+      },
+      "description": "A Deleted Secret consisting of its previous id, attributes and its tags, as well as information on when it will be purged."
+    },
+    "DeletedSecretItem": {
+      "allOf": [
+        {
+          "$ref": "#/definitions/SecretItem"
+        }
+      ],
+      "properties": {
+        "recoveryId": {
+          "type": "string",
+          "description": "The url of the recovery object, used to identify and recover the deleted secret."
+        },
+        "scheduledPurgeDate": {
+          "type": "integer",
+          "format": "unixtime",
+          "readOnly": true,
+          "description": "The time when the secret is scheduled to be purged, in UTC"
+        },
+        "deletedDate": {
+          "type": "integer",
+          "format": "unixtime",
+          "readOnly": true,
+          "description": "The time when the secret was deleted, in UTC"
+        }
+      },
+      "description": "The deleted secret item containing metadata about the deleted secret."
+    },
     "SecretAttributes": {
       "allOf": [
         {
           "$ref": "#/definitions/Attributes"
-        }
+        },
       ],
+      "properties": {
+        "recoveryLevel": {
+          "type": "string",
+          "description": "Reflects the deletion recovery level currently in effect for secrets in the current vault. If it contains 'Purgeable', the secret can be permanently deleted by a privileged user; otherwise, only the system can purge the secret, at the end of the retention interval.",
+          "enum": [ "Purgeable", "Recoverable+Purgeable", "Recoverable", "Recoverable+ProtectedSubscription" ],
+          "x-ms-enum": {
+            "name": "DeletionRecoveryLevel",
+            "modelAsString": true
+          },
+          "readOnly": true,
+          "x-nullable": false
+        }
+      },
       "description": "The secret management attributes."
+    },
+    "SecretRestoreParameters": {
+      "properties": {
+        "value": {
+          "type": "string",
+          "x-ms-client-name": "secretBundleBackup",
+          "format": "base64url",
+          "description": "The backup blob associated with a secret bundle."
+        }
+      },
+      "description": "The secret restore parameters.",
+      "required": [ "value" ]
     },
     "CertificateAttributes": {
       "allOf": [
         {
           "$ref": "#/definitions/Attributes"
-        }
+        },
       ],
+      "properties": {
+        "recoveryLevel": {
+          "type": "string",
+          "description": "Reflects the deletion recovery level currently in effect for certificates in the current vault. If it contains 'Purgeable', the certificate can be permanently deleted by a privileged user; otherwise, only the system can purge the certificate, at the end of the retention interval.",
+          "enum": [ "Purgeable", "Recoverable+Purgeable", "Recoverable", "Recoverable+ProtectedSubscription" ],
+          "x-ms-enum": {
+            "name": "DeletionRecoveryLevel",
+            "modelAsString": true
+          },
+          "readOnly": true,
+          "x-nullable": false
+        }
+      },
       "description": "The certificate management attributes."
     },
     "CertificateItem": {
@@ -2148,6 +2841,58 @@
         }
       },
       "description": "A certificate bundle consists of a certificate (X509) plus its attributes."
+    },
+    "DeletedCertificateBundle": {
+      "allOf": [
+        {
+          "$ref": "#/definitions/CertificateBundle"
+        }
+      ],
+      "properties": {
+        "recoveryId": {
+          "type": "string",
+          "description": "The url of the recovery object, used to identify and recover the deleted certificate."
+        },
+        "scheduledPurgeDate": {
+          "type": "integer",
+          "format": "unixtime",
+          "readOnly": true,
+          "description": "The time when the certificate is scheduled to be purged, in UTC"
+        },
+        "deletedDate": {
+          "type": "integer",
+          "format": "unixtime",
+          "readOnly": true,
+          "description": "The time when the certificate was deleted, in UTC"
+        }
+      },
+      "description": "A Deleted Certificate consisting of its previous id, attributes and its tags, as well as information on when it will be purged."
+    },
+    "DeletedCertificateItem": {
+      "allOf": [
+        {
+          "$ref": "#/definitions/CertificateItem"
+        }
+      ],
+      "properties": {
+        "recoveryId": {
+          "type": "string",
+          "description": "The url of the recovery object, used to identify and recover the deleted certificate."
+        },
+        "scheduledPurgeDate": {
+          "type": "integer",
+          "format": "unixtime",
+          "readOnly": true,
+          "description": "The time when the certificate is scheduled to be purged, in UTC"
+        },
+        "deletedDate": {
+          "type": "integer",
+          "format": "unixtime",
+          "readOnly": true,
+          "description": "The time when the certificate was deleted, in UTC"
+        }
+      },
+      "description": "The deleted certificate item containing metadata about the deleted certificate."
     },
     "CertificateOperation": {
       "properties": {
@@ -2603,7 +3348,7 @@
           "type": "string",
           "minLength": 1,
           "description": "algorithm identifier",
-          "enum": [ "RSA-OAEP", "RSA1_5" ],
+          "enum": [ "RSA-OAEP", "RSA-OAEP-256", "RSA1_5" ],
           "x-ms-enum": {
             "name": "JsonWebKeyEncryptionAlgorithm",
             "modelAsString": true
@@ -2624,7 +3369,7 @@
           "type": "string",
           "minLength": 1,
           "description": "The signing/verification algorithm identifier. For more information on possible algorithm types, see JsonWebKeySignatureAlgorithm.",
-          "enum": [ "RS256", "RS384", "RS512", "RSNULL" ],
+          "enum": [ "PS256", "PS384", "PS512", "RS256", "RS384", "RS512", "RSNULL" ],
           "x-ms-enum": {
             "name": "JsonWebKeySignatureAlgorithm",
             "modelAsString": true
@@ -2645,7 +3390,7 @@
           "type": "string",
           "minLength": 1,
           "description": "The signing/verification algorithm. For more information on possible algorithm types, see JsonWebKeySignatureAlgorithm.",
-          "enum": [ "RS256", "RS384", "RS512", "RSNULL" ],
+          "enum": [ "PS256", "PS384", "PS512", "RS256", "RS384", "RS512", "RSNULL" ],
           "x-ms-enum": {
             "name": "JsonWebKeySignatureAlgorithm",
             "modelAsString": true
@@ -2956,6 +3701,24 @@
       },
       "description": "The key list result."
     },
+    "DeletedKeyListResult": {
+      "properties": {
+        "value": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/DeletedKeyItem"
+          },
+          "readOnly": true,
+          "description": "A response message containing a list of deleted keys in the vault along with a link to the next page of deleted keys"
+        },
+        "nextLink": {
+          "type": "string",
+          "readOnly": true,
+          "description": "The URL to get the next set of deleted keys."
+        }
+      },
+      "description": "A list of keys that have been deleted in this vault."
+    },
     "SecretListResult": {
       "properties": {
         "value": {
@@ -2974,6 +3737,24 @@
       },
       "description": "The secret list result."
     },
+    "DeletedSecretListResult": {
+      "properties": {
+        "value": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/DeletedSecretItem"
+          },
+          "readOnly": true,
+          "description": "A response message containing a list of the deleted secrets in the vault along with a link to the next page of deleted secrets"
+        },
+        "nextLink": {
+          "type": "string",
+          "readOnly": true,
+          "description": "The URL to get the next set of deleted secrets."
+        }
+      },
+      "description": "The deleted secret list result"
+    },
     "CertificateListResult": {
       "properties": {
         "value": {
@@ -2991,6 +3772,24 @@
         }
       },
       "description": "The certificate list result."
+    },
+    "DeletedCertificateListResult": {
+      "properties": {
+        "value": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/DeletedCertificateItem"
+          },
+          "readOnly": true,
+          "description": "A response message containing a list of deleted certificates in the vault along with a link to the next page of deleted certificates"
+        },
+        "nextLink": {
+          "type": "string",
+          "readOnly": true,
+          "description": "The URL to get the next set of deleted certificates."
+        }
+      },
+      "description": "A list of certificates that have been deleted in this vault."
     },
     "CertificateIssuerListResult": {
       "properties": {
@@ -3021,6 +3820,17 @@
       },
       "description": "The backup key result, containing the backup blob."
     },
+    "BackupSecretResult": {
+      "properties": {
+        "value": {
+          "type": "string",
+          "format": "base64url",
+          "readOnly": true,
+          "description": "The backup blob containing the backed up secret."
+        }
+      },
+      "description": "The backup secret result, containing the backup blob."
+    },    
     "PendingCertificateSigningRequestResult": {
       "properties": {
         "value": {

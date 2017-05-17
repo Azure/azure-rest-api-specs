@@ -1,0 +1,532 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "ApiManagementClient",
+    "description": "Use these REST APIs for performing operations on Backend entity in Azure API Management deployment. The Backend entity in API Management represents a backend service that is configured to skip certification chain validation when using a self-signed certificate to test mutual certificate authentication.",
+    "version": "2016-10-10"
+  },
+  "host": "management.azure.com",
+  "schemes": [
+    "https"
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "produces": [
+    "application/json"
+  ],
+  "security": [
+    {
+      "azure_auth": [
+        "user_impersonation"
+      ]
+    }
+  ],
+  "securityDefinitions": {
+    "azure_auth": {
+      "type": "oauth2",
+      "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
+      "flow": "implicit",
+      "description": "Azure Active Directory OAuth2 Flow.",
+      "scopes": {
+        "user_impersonation": "impersonate your user account"
+      }
+    }
+  },
+  "paths": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ApiManagement/service/{serviceName}/backends": {
+      "get": {
+        "tags": [
+          "Backends"
+        ],
+        "operationId": "Backends_ListByService",
+        "description": "Lists a collection of backends in the specified service instance.",
+        "externalDocs": {
+          "url": "https://msdn.microsoft.com/en-us/library/dn935030.aspx"
+        },
+        "parameters": [
+          {
+            "$ref": "./apimanagement.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "./apimanagement.json#/parameters/ServiceNameParameter"
+          },
+          {
+            "name": "$filter",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "description": "| Field | Supported operators    | Supported functions                         |\n|-------|------------------------|---------------------------------------------|\n| id    | ge, le, eq, ne, gt, lt | substringof, contains, startswith, endswith |\n| host  | ge, le, eq, ne, gt, lt | substringof, contains, startswith, endswith |"
+          },
+          {
+            "$ref": "./apimanagement.json#/parameters/TopQueryParameter"
+          },
+          {
+            "$ref": "./apimanagement.json#/parameters/SkipQueryParameter"
+          },
+          {
+            "$ref": "./apimanagement.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "./apimanagement.json#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Lists a collection of Backend entities.",
+            "schema": {
+              "$ref": "#/definitions/BackendCollection"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "./apimanagement.json#/definitions/ErrorBodyContract"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        },
+        "x-ms-odata": "#/definitions/BackendResponse"
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ApiManagement/service/{serviceName}/backends/{backendid}": {
+      "get": {
+        "tags": [
+          "Backends"
+        ],
+        "operationId": "Backends_Get",
+        "description": "Gets the details of the backend specified by its identifier.",
+        "parameters": [
+          {
+            "$ref": "./apimanagement.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "./apimanagement.json#/parameters/ServiceNameParameter"
+          },
+          {
+            "$ref": "#/parameters/BackendIdParameter"
+          },
+          {
+            "$ref": "./apimanagement.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "./apimanagement.json#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The response body contains the specified Backend entity.",
+            "schema": {
+              "$ref": "#/definitions/BackendResponse"
+            },
+            "headers": {              
+              "ETag": {
+                "description": "Current entity state version. Should be treated as opaque and used to make conditional HTTP requests.",
+                "type": "string"
+              }              
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "./apimanagement.json#/definitions/ErrorBodyContract"
+            }
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "Backends"
+        ],
+        "operationId": "Backends_CreateOrUpdate",
+        "description": "Creates or Updates a backend.",
+        "parameters": [
+          {
+            "$ref": "./apimanagement.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "./apimanagement.json#/parameters/ServiceNameParameter"
+          },
+          {
+            "$ref": "#/parameters/BackendIdParameter"
+          },
+          {
+            "name": "parameters",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/BackendContract"
+            },
+            "description": "Create parameters."
+          },
+          {
+            "$ref": "./apimanagement.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "./apimanagement.json#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": "Backend was successfully created."
+          },
+          "204": {
+            "description": "The existing backend was successfully updated."
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "./apimanagement.json#/definitions/ErrorBodyContract"
+            }
+          }
+        }
+      },
+      "patch": {
+        "tags": [
+          "Backends"
+        ],
+        "operationId": "Backends_Update",
+        "description": "Updates an existing backend.",
+        "parameters": [
+          {
+            "$ref": "./apimanagement.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "./apimanagement.json#/parameters/ServiceNameParameter"
+          },
+          {
+            "$ref": "#/parameters/BackendIdParameter"
+          },
+          {
+            "name": "parameters",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/BackendUpdateParameters"
+            },
+            "description": "Update parameters."
+          },
+          {
+            "name": "If-Match",
+            "in": "header",
+            "required": true,
+            "description": "The entity state (Etag) version of the backend to update. A value of \"*\" can be used for If-Match to unconditionally apply the operation.",
+            "type": "string"
+          },
+          {
+            "$ref": "./apimanagement.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "./apimanagement.json#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+           "204": {
+            "description": "The existing backend was successfully updated."
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "./apimanagement.json#/definitions/ErrorBodyContract"
+            }
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "Backends"
+        ],
+        "operationId": "Backends_Delete",
+        "description": "Deletes the specified backend.",
+        "parameters": [
+          {
+            "$ref": "./apimanagement.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "./apimanagement.json#/parameters/ServiceNameParameter"
+          },
+          {
+            "$ref": "#/parameters/BackendIdParameter"
+          },
+          {
+            "name": "If-Match",
+            "in": "header",
+            "required": true,
+            "description": "The entity state (Etag) version of the backend to delete. A value of \"*\" can be used for If-Match to unconditionally apply the operation.",
+            "type": "string"
+          },
+          {
+            "$ref": "./apimanagement.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "./apimanagement.json#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "The backend was successfully deleted."
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "./apimanagement.json#/definitions/ErrorBodyContract"
+            }
+          }
+        }
+      }
+    }
+  },
+  "definitions": {    
+		"BackendAuthorizationHeaderCredentials": {
+		  "properties": {
+			"scheme": {
+			  "type": "string",
+			  "description": "Authentication Scheme name.",
+			  "minLength": 1,
+			  "maxLength": 100
+			},
+			"parameter": {
+			  "type": "string",
+			  "description": "Authentication Parameter value.",
+			  "minLength": 1,
+			  "maxLength": 300
+			}
+		  },
+		  "required": [
+			"scheme",
+			"parameter"
+		  ],
+		  "description": "Authorization header information."
+		},
+		"BackendBaseParameters": {
+		  "properties": {
+			"title": {
+			  "type": "string",
+			  "description": "Backend Title.",
+			  "minLength": 1,
+			  "maxLength": 300
+			},
+			"description": {
+			  "type": "string",
+			  "description": "Backend Description.",
+			  "minLength": 1,
+			  "maxLength": 2000
+			},
+			"resourceId": {
+			  "type": "string",
+			  "description": "Management Uri of the Resource in External System. This url can be the Arm Resource Id of Logic Apps, Function Apps or Api Apps.",
+			  "minLength": 1,
+			  "maxLength": 2000
+			},
+			"properties": {
+			  "x-ms-client-flatten": true,
+			  "$ref": "#/definitions/BackendProperties"
+			}
+		  },
+		  "allOf": [
+			{
+			  "$ref": "#/definitions/BackendCredentialsContract"
+			},
+			{
+			  "$ref": "#/definitions/BackendProxyContract"
+			}
+		  ],
+		  "description": "Backend entity base Parameter set."
+		},
+		"BackendCollection": {
+		  "properties": {
+			"value": {
+			  "type": "array",
+			  "items": {
+				"$ref": "#/definitions/BackendResponse"
+			  },
+			  "description": "Backend values."
+			},
+			"count": {
+			  "type": "integer",
+			  "format": "int64",
+			  "description": "Total record count number across all pages."
+			},
+			"nextLink": {
+			  "type": "string",
+			  "description": "Next page link if any."
+			}
+		  },
+		  "description": "Paged Backend list representation."
+		},
+		"BackendContract": {
+		  "properties": {
+			"id": {
+			  "type": "string",
+			  "description": "Uniquely identifies the backend within the current API Management service instance. The value is a valid relative URL in the format of /backends/{backendId} where {backendId} is a backend identifier.",
+			  "readOnly": true
+			},
+			"url": {
+			  "type": "string",
+			  "description": "Runtime Url of the Backend.",
+			  "minLength": 1,
+			  "maxLength": 2000
+			},
+			"protocol": {
+			  "type": "string",
+			  "enum": [
+				"http",
+				"soap"
+			  ],
+			  "x-ms-enum": {
+				"name": "BackendProtocol",
+				"modelAsString": true
+			  },
+			  "description": "Backend communication protocol."
+			}
+		  },
+		  "allOf": [
+			{
+			  "$ref": "#/definitions/BackendBaseParameters"
+			}
+		  ],
+		  "required": [
+			"url",
+			"protocol"
+		  ],
+		  "description": "Parameters supplied to the Create Backend operation."
+		},
+		"BackendCredentialsContract": {
+		  "properties": {
+			"certificate": {
+			  "type": "array",
+			  "items": {
+				"type": "string"
+			  },
+			  "maxItems": 32,
+			  "description": "List of Client Certificate Thumbprint."
+			},
+			"query": {
+			  "type": "object",
+			  "additionalProperties": {
+				"type": "array",
+				"items": {
+				  "type": "string"
+				}
+			  },
+			  "description": "Query Parameter description."
+			},
+			"header": {
+			  "type": "object",
+			  "additionalProperties": {
+				"type": "array",
+				"items": {
+				  "type": "string"
+				}
+			  },
+			  "description": "Header Parameter description."
+			}
+		  },
+		  "allOf": [
+			{
+			  "$ref": "#/definitions/BackendAuthorizationHeaderCredentials"
+			}
+		  ],
+		  "description": "Details of the Credentials used to connect to Backend."
+		},
+		"BackendProperties": {
+		  "properties": {
+			"skipCertificateChainValidation": {
+			  "type": "boolean",
+			  "description": "Flag indicating whether SSL certificate chain validation should be skipped when using self-signed certificates for this backend host.",
+			  "default": false
+			},
+			"skipCertificateNameValidation": {
+			  "type": "boolean",
+			  "description": "Flag indicating whether SSL certificate name validation should be skipped when using self-signed certificates for this backend host.",
+			  "default": false
+			}
+		  },
+		  "description": "Properties specific to a Backend."
+		},
+		"BackendProxyContract": {
+		  "externalDocs": {
+			"url": "https://msdn.microsoft.com/en-us/library/system.net.webproxy(v=vs.110).aspx",
+			"description": "Backend entity uses these details to connect to a WebProxy."
+		  },
+		  "properties": {
+			"url": {
+			  "type": "string",
+			  "description": "WebProxy Server AbsoluteUri property which includes the entire URI stored in the Uri instance, including all fragments and query strings.",
+			  "minLength": 1,
+			  "maxLength": 2000
+			},
+			"username": {
+			  "type": "string",
+			  "description": "Username to connect to the WebProxy server"
+			},
+			"password": {
+			  "type": "string",
+			  "description": "Password to connect to the WebProxy Server"
+			}
+		  },
+		  "required": [
+			"url"
+		  ],
+		  "description": "Details of the Backend WebProxy Server to use in the Request to Backend."
+		},
+		"BackendResponse": {
+		  "properties": {
+			"id": {
+			  "type": "string",
+			  "description": "Uniquely identifies the backend within the current API Management service instance. The value is a valid relative URL in the format of /backends/{backendId} where {backendId} is a backend identifier.",
+			  "readOnly": true
+			}
+		  },
+		  "allOf": [
+			{
+			  "$ref": "#/definitions/BackendContract"
+			}
+		  ],
+		  "description": "The Backend entity in API Management represents a backend service that is configured to skip certification chain validation when using a self-signed certificate to test mutual certificate authentication."
+		},
+		"BackendUpdateParameters": {
+		  "properties": {
+			"url": {
+			  "type": "string",
+			  "description": "Runtime Url of the Backend.",
+			  "minLength": 1,
+			  "maxLength": 2000
+			},
+			"protocol": {
+			  "type": "string",
+			  "enum": [
+				"http",
+				"soap"
+			  ],
+			  "x-ms-enum": {
+				"name": "BackendProtocol",
+				"modelAsString": true
+			  },
+			  "description": "Backend communication protocol."
+			}
+		  },
+		  "allOf": [
+			{
+			  "$ref": "#/definitions/BackendBaseParameters"
+			}
+		  ],
+		  "description": "Parameters supplied to the Update Backend operation."
+		}
+  },
+  "parameters": {
+		"BackendIdParameter": {
+		  "name": "backendid",
+		  "in": "path",
+		  "required": true,
+		  "type": "string",
+		  "description": "Identifier of the Backend entity. Must be unique in the current API Management service instance.",
+		  "minLength": 1,
+		  "maxLength": 255,
+		  "pattern": "^[^*#&+:<>?]+$",
+		  "x-ms-parameter-location": "method"
+		}
+  }
+}

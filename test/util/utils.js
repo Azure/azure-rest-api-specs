@@ -8,6 +8,7 @@ var assert = require("assert"),
   path = require('path'),
   _ = require('lodash'),
   z = require('z-schema'),
+  YAML = require('js-yaml'),
   request = require('request'),
   util = require('util'),
   execSync = require('child_process').execSync;
@@ -52,20 +53,12 @@ exports.parseJsonFromFile = function parseJsonFromFile(filepath, callback) {
   fs.readFile(filepath, 'utf8', function (err, data) {
     if (err) return callback(err);
     try {
-      return callback(null, JSON.parse(exports.stripBOM(data)));
+      return callback(null, YAML.safeLoad(exports.stripBOM(data)));
     } catch (error) {
-      let e = new Error(`swagger "${filepath}" is an invalid JSON.\n${util.inspect(err, { depth: null })}`);
+      let e = new Error(`swagger "${filepath}" is an invalid JSON.\n${util.inspect(error, { depth: null })}`);
       return callback(e);
     }
   });
-};
-
-/**
- * Converts command to OS specific command by prepending `mono` for non-windows prOnlySwaggers
- * @returns {string} clr command
- */
-exports.clrCmd = function clrCmd(cmd) {
-  return exports.isWindows ? cmd : ('mono ' + cmd);
 };
 
 /**
@@ -121,6 +114,15 @@ exports.getFilesChangedInPR = function getFilesChangedInPR() {
         return (item.match(/.*\/swagger\/*/ig) !== null);
       });
       console.log(`>>>> Number of swaggers found in this PR: ${swaggerFilesInPR.length}`);
+      
+      var deletedFiles = swaggerFilesInPR.filter(function(swaggerFile){
+        return !fs.existsSync(swaggerFile);
+      });
+      console.log('>>>>> Files deleted in this PR are as follows:')
+      console.log(deletedFiles);
+      // Remove files that have been deleted in the PR
+      swaggerFilesInPR = swaggerFilesInPR.filter(function(x) { return deletedFiles.indexOf(x) < 0 });
+
       result = swaggerFilesInPR;
     } catch (err) {
       throw err;

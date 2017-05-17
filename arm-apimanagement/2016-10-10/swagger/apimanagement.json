@@ -1,0 +1,292 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "ApiManagementClient",
+    "description": "Use these REST APIs for performing operations on entities like API, Product, and Subscription associated with your Azure API Management deployment.",
+    "version": "2016-10-10"
+  },
+  "host": "management.azure.com",
+  "schemes": [
+    "https"
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "produces": [
+    "application/json"
+  ],
+  "security": [
+    {
+      "azure_auth": [
+        "user_impersonation"
+      ]
+    }
+  ],
+  "securityDefinitions": {
+    "azure_auth": {
+      "type": "oauth2",
+      "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
+      "flow": "implicit",
+      "description": "Azure Active Directory OAuth2 Flow.",
+      "scopes": {
+        "user_impersonation": "impersonate your user account"
+      }
+    }
+  },
+  "paths": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ApiManagement/service/{serviceName}/policySnippets": {
+      "get": {
+        "tags": [
+          "PolicySnippets"
+        ],
+        "operationId": "PolicySnippets_ListByService",
+        "description": "Lists all policy snippets.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "./apimanagement.json#/parameters/ServiceNameParameter"
+          },
+          {
+            "name": "scope",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "description": "Policy scope.",
+            "enum": [
+              "Tenant",
+              "Product",
+              "Api",
+              "Operation",
+              "All"
+            ],
+            "x-ms-enum": {
+              "name": "PolicyScopeContract",
+              "modelAsString": false
+            }
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Returns an array of Policy Contracts.",
+            "schema": {            
+                "$ref": "#/definitions/PolicySnippetsCollection"
+            }
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ApiManagement/service/{serviceName}/regions": {
+      "get": {
+        "tags": [
+          "Regions"
+        ],
+        "operationId": "Regions_ListByService",
+        "description": "Lists all azure regions in which the service exists.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "./apimanagement.json#/parameters/ServiceNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Lists of Regions in which the service is deployed.",
+            "schema": {
+              "$ref": "#/definitions/RegionListResult"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": null
+        }
+      }
+    }
+  },
+  "definitions": {    
+    "ErrorFieldContract": {
+      "properties": {
+        "code": {
+          "type": "string",
+          "description": "Property level error code."
+        },
+        "message": {
+          "type": "string",
+          "description": "Human-readable representation of property-level error."
+        },
+        "target": {
+          "type": "string",
+          "description": "Property name."
+        }
+      },
+      "description": "Error Field contract."
+    },
+    "ErrorBodyContract": {
+      "properties": {
+        "code": {
+          "type": "string",
+          "description": "Service-defined error code. This code serves as a sub-status for the HTTP error code specified in the response."
+        },
+        "message": {
+          "type": "string",
+          "description": "Human-readable representation of the error."
+        },
+        "details": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ErrorFieldContract"
+          },
+          "description": "The list of invalid fields send in request, in case of validation error."
+        }
+      },
+      "description": "Error Body contract."
+    },
+    "PolicySnippetsCollection": {
+      "properties": {
+        "value": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/PolicySnippetContract"
+          },
+          "description": "Policy snippet value."
+        }
+      },
+      "description": "The response of the list policy snippets operation."
+    },
+    "PolicySnippetContract": {
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "Snippet name.",
+          "readOnly": true
+        },
+        "content": {
+          "type": "string",
+          "description": "Snippet content.",
+          "readOnly": true
+        },
+        "toolTip": {
+          "type": "string",
+          "description": "Snippet toolTip.",
+          "readOnly": true
+        },
+        "scope": {
+          "type": "string",
+          "description": "Snippet scope.",
+          "enum": [
+            "Tenant",
+            "Product",
+            "Api",
+            "Operation",
+            "All"
+          ],
+          "readOnly": true,
+          "x-ms-enum": {
+            "name": "PolicyScopeContract",
+            "modelAsString": false
+          }
+        }
+      },
+      "description": "Policy snippet."
+    },
+    "RegionContract": {
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "Region name."
+        },
+        "isMasterRegion": {
+          "type": "boolean",
+          "description": "whether Region is the master region."
+        }
+      },
+      "required": [
+        "name",
+        "isMasterRegion"
+      ],
+      "description": "Region profile."
+    },
+    "RegionListResult": {
+      "properties": {
+        "value": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/RegionContract"
+          },
+          "description": "Lists of Regions."
+        }
+      },
+      "description": "Lists Regions operation response details."
+    }
+  },
+  "parameters": {
+		"ApiVersionParameter": {
+		  "name": "api-version",
+		  "in": "query",
+		  "required": true,
+		  "type": "string",
+		  "description": "Version of the API to be used with the client request."
+		},
+		"ResourceGroupNameParameter": {
+		  "name": "resourceGroupName",
+		  "in": "path",
+		  "required": true,
+		  "type": "string",
+		  "description": "The name of the resource group.",
+		  "x-ms-parameter-location": "method"
+		},
+		"ServiceNameParameter": {
+		  "name": "serviceName",
+		  "in": "path",
+		  "required": true,
+		  "type": "string",
+		  "description": "The name of the API Management service.",
+		  "minLength": 1,
+		  "maxLength": 50,
+		  "pattern": "^[a-zA-Z](?:[a-zA-Z0-9-]*[a-zA-Z0-9])?$",
+		  "x-ms-parameter-location": "method"
+		},
+		"SkipQueryParameter": {
+		  "name": "$skip",
+		  "in": "query",
+		  "required": false,
+		  "type": "integer",
+		  "format": "int32",
+		  "description": "Number of records to skip.",
+		  "minimum": 0,
+		  "x-ms-parameter-location": "method"
+		},
+		"SubscriptionIdParameter": {
+		  "name": "subscriptionId",
+		  "in": "path",
+		  "required": true,
+		  "type": "string",
+		  "description": "Subscription credentials which uniquely identify Microsoft Azure subscription. The subscription ID forms part of the URI for every service call."
+		},
+		"TopQueryParameter": {
+		  "name": "$top",
+		  "in": "query",
+		  "required": false,
+		  "type": "integer",
+		  "format": "int32",
+		  "description": "Number of records to return.",
+		  "minimum": 1,
+		  "x-ms-parameter-location": "method"
+		}
+  }
+}

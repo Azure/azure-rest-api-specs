@@ -1718,6 +1718,21 @@
               "format": "date-time",
               "description": "UTC date and time when the process started"
             },
+            "role": {
+              "type": "string",
+              "enum": [
+                "webServer",
+                "appServer",
+                "databaseServer",
+                "ldapServer",
+                "smbServer"
+              ],
+              "x-ms-enum": {
+                "name": "ProcessRole",
+                "modelAsString": true
+              },
+              "description": "The inferred role of this process based on its name, command line, etc."
+            },
             "details": {
               "$ref": "#/definitions/ProcessDetails",
               "description": "Process metadata (command line, product name, etc.)."
