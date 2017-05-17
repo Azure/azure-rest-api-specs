@@ -1,0 +1,42 @@
+{
+  "parameters": {
+    "subscriptionId": "c3aa9078-0000-0000-0000-e36f151182d7",
+    "resourceGroupName": "default-sql-onebox",
+    "serverName": "testsvr11",
+    "databaseName": "db1",
+    "api-version": "2015-05-01-preview"
+  },
+  "responses": {
+    "200": {
+        "body": {
+            "id": "/subscriptions/c3aa9078-0000-0000-0000-e36f151182d7/resourceGroups/default-sql-onebox/providers/Microsoft.Sql/servers/testsvr11/databases/db1/automaticTuning/current",
+            "name": "current",
+            "type": "Microsoft.Sql/servers/databases/automaticTuning",
+            "properties" : {
+		        "actualState" : "Auto",
+		        "desiredState" : "Inherit",
+		        "options" : {
+			        "forceLastGoodPlan" : {
+				        "actualState" : "Off",
+				        "reasonCode" : 2,
+				        "reasonDesc" : "AutoConfigured",
+				        "desiredState" : "Default"
+			        },
+			        "createIndex" : {
+				        "actualState" : "Off",
+				        "reasonCode" : 2,
+				        "reasonDesc" : "AutoConfigured",
+				        "desiredState" : "Default"
+			        },
+			        "dropIndex" : {
+				        "actualState" : "Off",
+				        "reasonCode" : 2,
+				        "reasonDesc" : "AutoConfigured",
+				        "desiredState" : "Default"
+			        }
+		        }
+	        }
+        }
+    }
+  }
+}
