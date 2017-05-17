@@ -262,7 +262,7 @@
                   "in": "body",
                   "required": true,
                   "schema": {
-                      "$ref": "#/definitions/AlertRuleResource"
+                      "$ref": "#/definitions/AlertRuleResourcePatch"
                   },
                   "description": "Parameters supplied to the operation."
               }
@@ -769,6 +769,21 @@
         }
       },
       "description": "The alert rule resource."
+    },
+    "AlertRuleResourcePatch": {
+      "description": "The alert rule object for patch operations.",
+      "properties": {
+        "tags": {
+            "additionalProperties": {
+                "type": "string"
+            },
+            "description": "Resource tags"
+        },
+        "properties": {
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/AlertRule"
+        }
+      }
     },
     "AlertRuleResourceCollection": {
       "properties": {

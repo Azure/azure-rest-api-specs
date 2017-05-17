@@ -201,7 +201,7 @@
                   "in": "body",
                   "required": true,
                   "schema": {
-                      "$ref": "#/definitions/LogProfileResource"
+                      "$ref": "#/definitions/LogProfileResourcePatch"
                   },
                   "description": "Parameters supplied to the operation."
               }
@@ -356,6 +356,21 @@
       },
       "required": ["properties"],
       "description": "The log profile resource."
+    },
+    "LogProfileResourcePatch": {
+      "description": "The log profile resource for patch operations.",
+      "properties": {
+        "tags": {
+            "additionalProperties": {
+                "type": "string"
+            },
+            "description": "Resource tags"
+        },
+        "properties": {
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/LogProfileProperties"
+        }
+      }
     },
     "LogProfileCollection": {
       "properties": {
