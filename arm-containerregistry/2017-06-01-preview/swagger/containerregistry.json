@@ -121,8 +121,8 @@
         "tags": [
           "Registries"
         ],
-        "description": "Creates or updates a container registry with the specified parameters.",
-        "operationId": "Registries_CreateOrUpdate",
+        "description": "Creates a container registry with the specified parameters.",
+        "operationId": "Registries_Create",
         "parameters": [
           {
             "$ref": "#/parameters/ApiVersionParameter"
@@ -139,7 +139,7 @@
           {
             "name": "registry",
             "in": "body",
-            "description": "The parameters for creating or updating a container registry.",
+            "description": "The parameters for creating a container registry.",
             "required": true,
             "schema": {
               "$ref": "#/definitions/Registry"
@@ -161,8 +161,8 @@
           }
         },
         "x-ms-examples": {
-          "RegistryCreateOrUpdate": {
-            "$ref": "../examples/RegistryCreateOrUpdate.json"
+          "RegistryCreate": {
+            "$ref": "../examples/RegistryCreate.json"
           }
         },
         "x-ms-long-running-operation": true
