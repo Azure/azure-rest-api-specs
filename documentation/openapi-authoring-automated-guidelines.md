@@ -1,10 +1,21 @@
 # OpenAPI Specifications Authoring - Automated Guidelines #
 
-This document lists the set of automated rules that can be validated against OpenAPI(swagger) spec by running [validation tools](https://github.com/Azure/adx-documentation-pr/wiki/OpenAPI-Validation-tools). Please visit [here for Manual guidelines](swagger-authoring-manual-guidelines.md).
+This document lists the set of automated rules that can be validated against OpenAPI(swagger) spec by running [validation tools](https://github.com/Azure/adx-documentation-pr/wiki/OpenAPI-Validation-tools). Please visit [here for Manual guidelines](openapi-authoring-manual-guidelines.md).
 
 It is a requirement to conform to all manual and automated rules with severity "Error" before sending a pull request for review.
 
 We request OpenAPI(Swagger) spec authoring be assigned to engineers who have an intimate knowledge of a service endpoint and its developer experience to avoid feeding inefficiencies into teams that focus on Azure developer experiences and the rest of the Azure eco-system.
+
+## Index
+* [Error vs. Warning](#error-vs-warning)
+* [Automated Rules](#automated-rules)
+  * [RPC Violations](#rpc-violations)
+    * [RPC Errors](#rpc-errors)
+    * [RPC Warnings](#rpc-warnings)
+  * [SDK Violations](#sdk-violations)
+    * [SDK Errors](#sdk-errors)
+    * [SDK Warnings](#sdk-warnings)
+* [Rule Descriptions](#rule-descriptions)
 
 ## Error vs Warning
 - Rules with severity "Error" have to be addressed for the OpenAPI(swagger) spec to be approved by the reviewers. If there is a strong reason for why the rule cannot be addressed in an OpenAPI(swagger) spec it will be a permanent exception, then [suppression process](https://github.com/Azure/adx-documentation-pr/wiki/Swagger-Validation-Errors-Suppression) must be followed.
@@ -19,7 +30,7 @@ We request OpenAPI(Swagger) spec authoring be assigned to engineers who have an
 
 | Id | Rule Name | Output Message |Severity | 
 | --- | --- | --- | --- |
-| M3012	| APIVersionPattern	| API Version must be in the format: yyyy-MM-dd, optionally followed by -preview, -alpha, -beta, -rc, -privatepreview.	|  Error |
+| [M3012](#M3012)	| [APIVersionPattern](#M3012)	| API Version must be in the format: yyyy-MM-dd, optionally followed by -preview, -alpha, -beta, -rc, -privatepreview.	|  Error |
 | M3019	| ARMResourcePropertiesBag	| Top level property names should not be repeated inside the properties bag for ARM resource '{0}'. Properties [{1}] conflict with ARM top level properties. Please rename these. | Error |
 | M3016	| BodyPropertiesNamesCamelCase | Property named: "{0}", must follow camelCase style. Example: "{1}". | Error |
 | M3016	| DefinitionsPropertiesNamesCamelCase  | Property named: "{0}", for definition: "{1}" must follow camelCase style. Example: "{2}". | Error |
@@ -82,7 +93,7 @@ We request OpenAPI(Swagger) spec authoring be assigned to engineers who have an
 | M2054	| SecurityDefinitionsStructureValidation | An OpenAPI(swagger) spec must have security definitions and must adhere to the specific structure. | Error |
 | M2022	| XmsExamplesProvidedValidation | Please provide x-ms-examples describing minimum/maximum property set for response/request payloads for operations.{0} | Error |
 
-#### SDK Warningss
+#### SDK Warnings
 
 | Id | Rule Name | Output Message |Severity | 
 | --- | --- | --- | --- |
@@ -94,3 +105,31 @@ We request OpenAPI(Swagger) spec authoring be assigned to engineers who have an
 | S2004	| NonAppJsonTypeWarning | Please make sure that media types other than 'application/json' are supported by your service. | Warning |
 | M2063	| BodyParametersValidation | A body parameter must be named 'parameters'. | Warning |
 | M2017	| PutRequestResponseValidation | A PUT operation request body schema should be the same as its 200 response schema, to allow reusing the same entity between GET and PUT. If the schema of the PUT request body is a superset of the GET response body, make sure you have a PATCH operation to make the resource updatable. Operation: '{0}' Request Model: '{1}' Response Model: '{2}' | Warning |
+
+## Rule Descriptions
+
+### <a name="M3012" />M3012 APIVersionPattern
+**Output Message**: API Version must be in the format: yyyy-MM-dd, optionally followed by -preview, -alpha, -beta, -rc, -privatepreview.
+
+**Description**: The API Version paramemter MUST be in the Year-Month-Date format (i.e. 2016-07-04.)  NOTE that this is the en-US ordering of month and date.  
+
+The date MAY optionally be followed by one of:
+* -preview - Indicates the API version is in (public) preview
+* -alpha
+* -beta
+* -rc (release candidate)
+* -privatepreview
+
+**Good Examples**: Examples of valid version patterns include:
+* 2016-07-04
+* 2016-07-04-preview
+
+**Bad Examples**: The following would be invalid:
+* 97-07-04 - Date should be YYYY, not YY
+* 2016/07/04 - Date should use "-", not "/"
+* 1842-07-04 - Year should be accurate; we didn't have Azure in 1842 :(
+* 2150-07-04 - Year should be current, not in the future; though we'll hopefully get here eventually :)
+* 2016-07-04-publicpreview - Use "-preview" to indicate a public preview
+* 2016-07-04-rc0 - Just use "rc", not "rc" + number
+
+Links: [Index](#index) | [Error vs. Warning](#error-vs-warning) | [Automated Rules](#automated-rules) | [RPC](#rpc-violations): [Errors](#rpc-errors) or [Warnings](#rpc-warnings) | [SDK](#sdk-violations): [Errors](#sdk-errors) or [Warnings](#sdk-warnings)
