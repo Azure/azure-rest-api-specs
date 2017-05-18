@@ -84,11 +84,7 @@ The Azure Developer Experience team will continue to deliver rich tools to valid
 
 - [ ] **M1000**: Plural names in parameters and model properties MUST only be used to represent collections.
 
-- [ ] **M1001**: :white_check_mark: Each operation *MUST* contain an OperationId of the form "RESOURCE_METHOD" a.k.a "NOUN_VERB", where "RESOURCE" represents the resource or object the operation addresses, and METHOD is a short name for the operation being performed "Get, Start, Delete, Create, List", etc.
-
 - [ ] **M1002**: If the NOUN in the OperationId "NOUN_VERB" matches with the name of the Model definition then the NOUN in the operationId *MUST* use the plural form of NOUN to avoid collision in the namespace.
-
-- [ ] **M1003**: List operations *MUST* be prefixed with "List" and *MUST NOT* be named as "GetXXXX" operations.
 
 - [ ] **M1004**: List operations *MUST* use consistent names and semantics. List operations *MUST* NOT use any other names. Consistent names and semantics are:
 
@@ -96,21 +92,13 @@ The Azure Developer Experience team will continue to deliver rich tools to valid
   - `ListByResourceGroup()` - list all resources in a resource group within a subscription.
   - `ListByParent()` - where "Parent" is a context specific suffix. It lists all resource under a parent.
 
-- [ ] **M1005**: :white_check_mark: GET operations *MUST* use the METHOD name "Get" or the METHOD name must start with "List"
-
-- [ ] **M1006**: :white_check_mark: PUT operations *MUST* use the METHOD Name "Create"
-
-- [ ] **M1007**: :white_check_mark: PATCH operations *MUST* use the METHOD Name "Update"
-
 - [ ] **M1008**: POST operations *MUST* use a METHOD Name that matches the semantic operation on the resource, for example "Start" or "Stop"
-
-- [ ] **M1009**: :white_check_mark: DELETE operations *MUST* use the METHOD Name "Delete"
 
 - [ ] **M1010**: Terminology in Swagger and Azure Portal *MUST* be the same.
 
 - [ ] **M1011**: Resource Model name *MUST* be same as singular form of the resource type. Like for virtualMachines resource type it should be VirtualMachine.
 
-- [ ] **M1012**: Parameter names in the apis *MUST* be name of the resource like virtualMachines\{virtualMachine} or virtualMachines\{virtualMachineName} both are good example but virtualMachines\{vm} is bad example. 
+- [ ] **M1012**: Parameter names in the apis *MUST* be name of the resource like virtualMachines\{virtualMachine} or virtualMachines\{virtualMachineName} both are good example but virtualMachines\{vm} is bad example.
 
 - [ ] **M1013**: Any action name *MUST* be same as what is defined in the Rest APIs, like regenerateAdminKeys should be regenerateAdminKeys in the Swagger as well, where as regenerateKeys is bad example.
 
@@ -125,22 +113,12 @@ The Azure Developer Experience team will continue to deliver rich tools to valid
 
 - [ ] **M2002**: Boolean parameters *MUST* be represented as boolean in Swagger. Boolean parameters *MUST* NOT be represented as strings. Similarly, this requirements applies to other primitive data types such as integer, float and double. These primitive data types *MUST* be represented using [Swagger primitive data types](https://github.com/OAI/OpenAPI-Specification/blob/master/versions/2.0.md#data-types).
 
-- [ ] **M2003**: :white_check_mark: If a format is specified along with a type, it *MUST* be from one of the supported formats - "int64", "int32", "float", "decimal", "double", "byte", "base64url", "unixtime", "date", "date-time", "duration", "date-time-rfc1123", "uuid", otherwise in codegeneration the artifact will be of the specified type and not as per the desired format. 
-
 - [ ] **M2004**: :white_check_mark: Long running (asynchronous) operations *MUST* be modeled as [long running operations](https://github.com/Azure/azure-rest-api-specs/blob/master/documentation/creating-swagger.md#longrunning) in Swagger.
 
-- [ ] **M2005**: :white_check_mark: A long-running operation *MUST* have a terminal success status code. At least 
-   - 200 or 201 for PUT/PATCH
-   - 200, 201 or 204  or all of the aforementioned for POST
-   - 204 or 200 or both for delete. 
-   This will indicate the code generator, how to deserialize the final success response after the polling is done. If the response has a response body then it *MUST* be modeled in the terminal status code.
-</br>
 
 - [ ] **M2006**: Required parameters *MUST* be accurately labeled as `"required": true` in Swagger.
 
 - [ ] **M2007**: Required properties of a model definition *MUST* be accurately labeled as `"required": [ "propertyName1" ]` in Swagger.
-
-- [ ] **M2008**: :white_check_mark: Mutability of properties *MUST* be marked up using [`x-ms-mutability` extension](https://github.com/Azure/autorest/tree/master/docs/extensions#x-ms-mutability).
 
 - [ ] **M2009**: Error definitions *MUST* be abstracted, modeled and reused.
 
@@ -152,37 +130,13 @@ For example, [NetworkInterface.ipConfigurations](https://github.com/Azure/azure-
 
 - [ ] **M2012**: Operations that are exposed through private previews *MUST NOT* be described in the [public GitHub repository](https://github.com/Azure/azure-rest-api-specs). They *MUST* be described in the [private GitHub repository](https://github.com/Azure/azure-rest-api-specs-pr) instead.
 
-- [ ] **M2013**: The value of the ["x-ms-client-name"](https://github.com/Azure/autorest/tree/master/docs/extensions#x-ms-client-name) and ["x-ms-discriminator-value"](https://github.com/Azure/autorest/tree/master/docs/extensions#x-ms-discriminator-value) *MUST NOT* be the same as the model property or the model name, otherwise the purpose is defeated.
-
-- [ ] **M2014**: For specifications describing the Management Plane of ARM, "subscriptionId" & "api-version" *MUST* always be defined in the global parameters section.
-
 - [ ] **M2015**: For a Given Resource, GET/PUT/PATCH *MUST* return the same "Resource" Model.
-
-- [ ] **M2016**: For PATCH operation, every property in the model for the request body *MUST* be optional and the property *MUST NOT* provide any default value. The absence of default values applies recursively to complex properties in the model definition.
-
-- [ ] **M2017**: A PUT operation request body schema should be the same as its 200 response schema, to allow reusing the same entity between GET and PUT. If the schema of the PUT request body is a superset of the GET response body, there must be a PATCH operation to make the resource updatable.
-
-- [ ] **M2018**: A parameter or a model property having an `"enum": []` constraint, *MUST* have an  ["x-ms-enum"](https://github.com/Azure/azure-rest-api-specs/blob/master/documentation/swagger-extensions.md#x-ms-enum) extension and the extension's "modelAsString" property *MUST* be set to `false` where applicable.
-
-- [ ] **M2019**: Every "Resource" Model *MUST* be tagged with ["x-ms-azure-resource"](https://github.com/Azure/azure-rest-api-specs/blob/master/documentation/swagger-extensions.md#x-ms-azure-resource). This will indicate Autorest to make the Resource model inherit from the Resource definition in the client runtime.
-
-- [ ] **M2020**: A "Resource" model definition *MUST* have "id", "name" and "type" properties marked as `"readOnly": true` in its model hierarchy.
 
 - [ ] **M2021**: The "location" property of "Resource" model definition in ARM, *MUST* have ["x-ms-mutability": ["create", "read"]](https://github.com/Azure/autorest/tree/master/docs/extensions#x-ms-mutability) extension. Usually the "location" property is also a required property of the model definition.
 
 - [ ] **M2022**: Every operation in the swagger specification *MUST* have an ["x-ms-examples"](https://github.com/Azure/azure-rest-api-specs/blob/master/documentation/x-ms-examples.md) extension applied with scenarios that provide the *MINIMUM* AND *MAXIMUM* properties of the request and response payload. Please feel free to provide more example scenarios for a particular operation.
 
-- [ ] **M2023**: a Swagger specification *MUST* use `"x-ms-codegeneration-settings": { "name": "<ServiceName>Client" }` for providing a better name to the generated client.
-
 - [ ] **M2024**: Operations that return a single page and have the response schema {"value": [Array of items] }, *MUST* apply the ["x-ms-pageable"](https://github.com/Azure/azure-rest-api-specs/blob/master/documentation/swagger-extensions.md#x-ms-pageable) with it's `"nextLinkName"` property explicitly set to `"null"`. This will ensure that value property gets unwrapped into an IEnumerable.
-
-- [ ] **M2025**: If the `"nextLinkName"` property of the ["x-ms-pageable"](https://github.com/Azure/azure-rest-api-specs/blob/master/documentation/swagger-extensions.md#x-ms-pageable) extension is defined with a value, then the Model definition *MUST* also have a property named with the same value for nextLink.
-
-- [ ] **M2026**: Model types (request body, response body, complex model properties) *MUST NOT* be defined inline. They *MUST* be defined explicitly in the `"defintions: { . . . }` section of the swagger specification.
-
-- [ ] **M2027**: If a property or a parameter has an `"enum": []` constraint and it also has a `"default"` value then the default value *MUST* be one of the values specified in the enum. It is *RECOMMENDED* that the default value be the first element in the "enum" array.
-
-- [ ] **M2028**: The value of [`x-ms-client-name` extension](https://github.com/Azure/autorest/blob/master/Documentation/swagger-extensions.md#x-ms-client-name) *MUST NOT* be an empty string, because it will be used as the identifier of the artifact in the generated client.
 
 - [ ] **M2029**: Every path in the `"paths": { . . . }` object *MUST* be unique and *MUST NOT* be equivalent. 
   - `/paths/path1/{param1}` and `/paths/path1/{param2}` are equivalent paths and are *NOT* allowed.
@@ -213,15 +167,11 @@ For example, [NetworkInterface.ipConfigurations](https://github.com/Azure/azure-
 
 - [ ] **M2042**: The items property for Schema Objects, or schema-like objects (non-body parameters), *MUST* be required when type is set to array. More details can be found [here](https://github.com/OAI/OpenAPI-Specification/issues/174).
 
-- [ ] **M2043**: The  schemes array in the swagger spec for any HTTP protocol based Azure REST service *MUST* only have "https" as the supported scheme. It *MUST* be `"schemes": ["https"]`
 
-- [ ] **M2044**: A swagger specification *MUST NOT* have any operation with an HTTP verb outside this (case-insensitive) list ["DELETE", "GET", "PUT", "PATCH", "HEAD", "OPTIONS", "POST"].
 
 - [ ] **M2045**: An example specified in a specification as per the swagger specification for a response *MUST* be in the response object keyed on the "MIME-TYPE". More details can be found [here](https://github.com/OAI/OpenAPI-Specification/blob/master/versions/2.0.md#exampleObject).
 
 - [ ] **M2046**: An example specified in a specification as per the swagger specification for a model in the request body *MUST* be specified in the free-form example property of that model definition. More details can be found [here](https://github.com/OAI/OpenAPI-Specification/blob/master/versions/2.0.md#fixed-fields-13).
-
-- [ ] **M2047**: A parameter object *MUST* have a `"name"` property defined with a non-empty string as its value.
 
 - [ ] **M2048**: A parameter object *MUST* have an `"in"` property defined with a non-empty string. The value can be one of "query", "header", "path", "body", "formData".
 
@@ -235,37 +185,17 @@ For example, [NetworkInterface.ipConfigurations](https://github.com/Azure/azure-
 
 - [ ] **M2053**: Parameters or properties that can only accept one value *MUST* be marked as "required" and they *MUST* have an "enum" array constraint with one valid value in it.
 
-- [ ] **M2054**: Every swagger spec *MUST* have a "securityDefinitions" object accurately defined. An example can be found over [here](https://github.com/Azure/azure-rest-api-specs/blob/master/arm-analysisservices/2016-05-16/swagger/analysisservices.json#L26).
-
-- [ ] **M2055**: An operationId in the swagger spec *MUST NOT* be split by more than one underscore. Please use the "tags" array for adding extra names.
-
 - [ ] **M2056**: If the service (in Azure) only supports PATCHING tags on a Resource in the PATCH operation and has a PUT on the same resource which is named as "CreateOrUpdate", then it *MUST NOT* expose the "PATCH" operation in the swagger spec. 
-
-- :white_check_mark: **M2057**: A Sku object must have a property 'name' of type 'string'. It may also have the following properties: 'tier', 'size','family' and 'capacity'.
-
-- :white_check_mark: **M2058**: Paths in x-ms-paths must overload a normal path in the paths section, i.e. a path in the x-ms-path must either be same as a path in the paths section or a path in the paths sections followed by additional parameters.
-
-- :white_check_mark: **M2060**: x-ms-pageable operations must have a 200 response defined. Implemented as rule "PageableExtensionRule".
-
-- :white_check_mark: **M2061**: URLs should have parameterized resource type values instead of defaults. Implemented as rule "ProvidersPathValidation" in which all odd positions in the URL path followed by ```providers/providersNamespace``` are considered as resource type values
-- :white_check_mark: **M2062**: ARM specifications PUT operations return resource models. Validation rule "PutResponseResourceValidation" validates that these response models have the ```x-ms-azure-resource``` extension set to true.
-- :white_check_mark: **M2063**: Operation Id Nouns must not be named the same as any of the model definition names in the spec. Nouns should instead be expressed in their plural forms in the OperationId. Implemented as "OperationIdNounPluralizedFormValidation"
-- :white_check_mark: **M2064**: A long running PUT operation's 200/201 response MUST reference a model schema.
 
 ### SHOULD
 
 - [ ] **S2000**: If a parameter or a model property indicates that it is some "kind/type" of an artifact that can have a value from set of possible values, then it *SHOULD* have an `"enum": ["Array of possible values"]` constraint on that entity. It *MUST* also use the ["x-ms-enum"](https://github.com/Azure/azure-rest-api-specs/blob/master/documentation/swagger-extensions.md#x-ms-enum) extension. If creating an enum is not possible, then the values need to be documented in description. If the number of allowed values is huge, add a link to some kind of external documentation in the description, where those values are defined.
-
-- [ ] **S2001**: If a model is nested more than one level deep then ["x-ms-client-flatten"](https://github.com/Azure/autorest/tree/master/docs/extensions#x-ms-client-flatten) extension *MUST* be applied. This is mostly applicable while defining Resource Models in Azure Resource Manager where Resource Provider specific properties are present inside the "properties" property bag. TODO: *SHOULD* or a *MUST*? Exception if the model has a polymorphic discriminator.
 
 - [ ] **S2002**: Parameters that are common to most of the operations (example: resourceGroupName) *SHOULD* be defined in the global parameters section and they *MUST* have the extension `"x-ms-parameter-location": "method"` applied on them. This will make sure that they do not end up being properties on the generated client.
 
 - [ ] **S2002**: Property `"name"`of the `"Resource"` model *SHOULD NOT* be required and it must be marked as readOnly. The name of the Resource is specified as a path parameter. There is no need to require the customer to specify it in the body parameter as well.
 
 - [ ] **S2003**: If a swagger specification has a "fully" pageable operation and a "single-page" only operation then the generated code in C# will generate Page1.cs and Page.cs. They will differ on nextLink. To avoid this it is best advised that all the operations *SHOULD* defined as "fully" pageable in the specification.
-
-- [ ] **S2004**: Produces and Consumes global arrays *SHOULD* have "application/json" as the supported MIME-TYPE. If the operation needs to have a different one then it can override it.
-
 
 ## Operational - Swagger Checklist ##
 
@@ -274,8 +204,6 @@ For example, [NetworkInterface.ipConfigurations](https://github.com/Azure/azure-
 - [ ] **M3001**: Each operation described in a Swagger specification *MUST* be tested prior to opening a pull request against the preview/master branch of the [Azure REST API Specs](https://github.com/azure/azure-rest-api-specs/) GitHub repo.
 
 ## Documentation - Swagger Checklist ##
-
-- [ ] **M4000**: Every operation, model definition, model property, parameter, response status codes *MUST* have accurate and meaningful description about it in the description property of that entity. It *MUST NOT* be over or under described.
 
 - [ ] **M4001**: Descriptions *MUST* NOT contain spelling errors, grammatical errors, run off sentences and dummy texts.
 
@@ -310,6 +238,98 @@ Here are some [basic rules for public documentation](https://github.com/Azure/az
 - [ ] **M5004**: The top level property of a specification that describes the version of the swagger specification that the specification adheres to, *MUST* be set to `"swagger": "2.0"`.
 
 - [ ] **M5005**: All the management plane swagger specifications *MUST* have the base folder name in the format `"arm-<service-name>/"` and the data plane swagger specifications *MUST* have the base folder name in the format `"<service-name>/"`.
+
+## SDKViolation Warnings
+
+- [ ] **SW1**: `OperationIdNounInVerb` Each operation *MUST* contain an OperationId of the form "RESOURCE_METHOD" a.k.a "NOUN_VERB", where "RESOURCE" represents the resource or object the operation addresses, and METHOD is a short name for the operation being performed "Get, Start, Delete, Create, List", etc.
+
+- [ ] **SW2**: `ListOperationNamingWarning` List operations *MUST* be prefixed with "List" and *MUST NOT* be named as "GetXXXX" operations.
+
+- [ ] **SW3**: `GetOperationNameValidation` GET operations *MUST* use the METHOD name "Get" or the METHOD name must start with "List"
+
+- [ ] **SW4**: `PutOperationNameValidation` PUT operations *MUST* use the METHOD Name "Create"
+
+- [ ] **SW5**: `PatchOperationNameValidation` PATCH operations *MUST* use the METHOD Name "Update"
+
+- [ ] **SW6**: `DeleteOperationNameValidation` DELETE operations *MUST* use the METHOD Name "Delete"
+
+- [ ] **SW7**: `PutRequestResponseValidation` A PUT operation request body schema should be the same as its 200 response schema, to allow reusing the same entity between GET and PUT. If the schema of the PUT request body is a superset of the GET response body, there must be a PATCH operation to make the resource updatable.
+
+- [ ] **SW8**:  `XmsEnumValidation` A parameter or a model property having an `"enum": []` constraint, *MUST* have an  ["x-ms-enum"](https://github.com/Azure/azure-rest-api-specs/blob/master/documentation/swagger-extensions.md#x-ms-enum) extension and the extension's "modelAsString" property *MUST* be set to `false` where applicable.
+
+- [ ] **SW9**: `OperationIdNounConflictingModelNames` Operation Id Nouns must not be named the same as any of the model definition names in the spec. Nouns should instead be expressed in their plural forms in the OperationId. Implemented as "OperationIdNounPluralizedFormValidation"
+
+- [ ] **SW10**: `LROStatusCodesValidation` A long running PUT operation's 200/201 response MUST reference a model schema.
+
+- [ ] **SW11**: `AvoidNestedProperties` If a model is nested more than one level deep then ["x-ms-client-flatten"](https://github.com/Azure/autorest/tree/master/docs/extensions#x-ms-client-flatten) extension *MUST* be applied. This is mostly applicable while defining Resource Models in Azure Resource Manager where Resource Provider specific properties are present inside the "properties" property bag. TODO: *SHOULD* or a *MUST*? Exception if the model has a polymorphic discriminator.
+
+- [ ] **SW12**: `NonAppJsonTypeWarning` Produces and Consumes global arrays *SHOULD* have "application/json" as the supported MIME-TYPE. If the operation needs to have a different one then it can override it.
+
+- [ ] **SW13**: `DescriptionRequired` Every operation, model definition, model property, parameter, response status codes *MUST* have accurate and meaningful description about it in the description property of that entity. It *MUST NOT* be over or under described.
+
+## SDKViolation Errors
+
+- [ ] **SE1**: `ValidFormats` If a format is specified along with a type, it *MUST* be from one of the supported formats - "int64", "int32", "float", "decimal", "double", "byte", "base64url", "unixtime", "date", "date-time", "duration", "date-time-rfc1123", "uuid", otherwise in codegeneration the artifact will be of the specified type and not as per the desired format. 
+
+- [ ] **SE2**: `LongRunningResponseValidationRule` A long-running operation *MUST* have a terminal success status code. At least 
+   - 200 or 201 for PUT/PATCH
+   - 200, 201 or 204  or all of the aforementioned for POST
+   - 204 or 200 or both for delete. 
+   This will indicate the code generator, how to deserialize the final success response after the polling is done. If the response has a response body then it *MUST* be modeled in the terminal status code.
+</br>
+
+- [ ] **SE3**: `MutabilityWithReadOnlyRule` Mutability of properties *MUST* be marked up using [`x-ms-mutability` extension](https://github.com/Azure/autorest/tree/master/docs/extensions#x-ms-mutability).
+
+- [ ] **SE4**: `XmsClientNameParameterValidation/XmsClientNamePropertyValidation` The value of the ["x-ms-client-name"](https://github.com/Azure/autorest/tree/master/docs/extensions#x-ms-client-name) and ["x-ms-discriminator-value"](https://github.com/Azure/autorest/tree/master/docs/extensions#x-ms-discriminator-value) *MUST NOT* be the same as the model property or the model name, otherwise the purpose is defeated.
+
+- [ ] **SE5**: `OperationParametersValidation/ServiceDefinitionParameters` For specifications describing the Management Plane of ARM, "subscriptionId" & "api-version" *MUST* always be defined in the global parameters section.
+
+- [ ] **SE6**: `ResourceIsMsResourceValidation` Every "Resource" Model *MUST* be tagged with ["x-ms-azure-resource"](https://github.com/Azure/azure-rest-api-specs/blob/master/documentation/swagger-extensions.md#x-ms-azure-resource). This will indicate Autorest to make the Resource model inherit from the Resource definition in the client runtime.
+
+- [ ] **SE7**: `SummaryDescriptionValidation` A Swagger specification *MUST* use `"x-ms-codegeneration-settings": { "name": "<ServiceName>Client" }` for providing a better name to the generated client.
+
+- [ ] **SE8**: `NextLinkPropertyMustExist` If the `"nextLinkName"` property of the ["x-ms-pageable"](https://github.com/Azure/azure-rest-api-specs/blob/master/documentation/swagger-extensions.md#x-ms-pageable) extension is defined with a value, then the Model definition *MUST* also have a property named with the same value for nextLink.
+
+- [ ] **SE9**: `AvoidAnonymousTypes/AnonymousBodyParameter` Model types (request body, response body, complex model properties) *MUST NOT* be defined inline. They *MUST* be defined explicitly in the `"defintions: { . . . }` section of the swagger specification.
+
+- [ ] **SE10**: `DefaultMustBeInEnum` If a property or a parameter has an `"enum": []` constraint and it also has a `"default"` value then the default value *MUST* be one of the values specified in the enum. It is *RECOMMENDED* that the default value be the first element in the "enum" array.
+
+- [ ] **SE11**: `NonEmptyClientName` The value of [`x-ms-client-name` extension](https://github.com/Azure/autorest/blob/master/Documentation/swagger-extensions.md#x-ms-client-name) *MUST NOT* be an empty string, because it will be used as the identifier of the artifact in the generated client.
+
+- [ ] **SE12**: `ParameterNameValidation` A parameter object *MUST* have a `"name"` property defined with a non-empty string as its value.
+
+- [ ] **SE13**: `SecurityDefinitionsStructureValidation` Every swagger spec *MUST* have a "securityDefinitions" object accurately defined. An example can be found over [here](https://github.com/Azure/azure-rest-api-specs/blob/master/arm-analysisservices/2016-05-16/swagger/analysisservices.json#L26).
+
+- [ ] **SE14**: `OneUnderscoreInOperationId` An operationId in the swagger spec *MUST NOT* be split by more than one underscore. Please use the "tags" array for adding extra names.
+
+- [ ] **SE15**: `XmsPathsMustOverloadPaths` Paths in x-ms-paths must overload a normal path in the paths section, i.e. a path in the x-ms-path must either be same as a path in the paths section or a path in the paths sections followed by additional parameters.
+
+- [ ] **SE16**: `PageableRequires200Response` x-ms-pageable operations must have a 200 response defined. Implemented as rule "PageableExtensionRule".
+
+- [ ] **SE17**: `RequiredReadOnlyPropertiesValidation` Required properties *MUST* not be marked as readonly.
+
+
+## RPCViolation Warnings
+
+- [ ] **RW1**: `SupportedSchemesWarning` The schemes array in the swagger spec for any HTTP protocol based Azure REST service *MUST* only have "https" as the supported scheme. It *MUST* be `"schemes": ["https"]`
+
+- [ ] **RW2**: `SkuModelValidation` A Sku object must have a property 'name' of type 'string'. It may also have the following properties: 'tier', 'size','family' and 'capacity'.
+
+- [ ] **RW3**: `ProvidersPathValidation` URLs should have parameterized resource type values instead of defaults. Implemented as rule "ProvidersPathValidation" in which all odd positions in the URL path followed by ```providers/providersNamespace``` are considered as resource type values
+
+
+
+## RPCViolation Errors
+
+- [ ] **RE1**: `PatchBodyParametersSchemaValidation` For PATCH operation, every property in the model for the request body *MUST* be optional and the property *MUST NOT* provide any default value. The absence of default values applies recursively to complex properties in the model definition.
+
+- [ ] **RE2**: `ResourceModelValidation` A "Resource" model definition *MUST* have "id", "name" and "type" properties marked as `"readOnly": true` in its model hierarchy.
+
+- [ ] **RE3**: `HttpVerbValidation` A swagger specification *MUST NOT* have any operation with an HTTP verb outside this (case-insensitive) list ["DELETE", "GET", "PUT", "PATCH", "HEAD", "OPTIONS", "POST"].
+
+- [ ] **RE4**: `UniqueResourcePaths` A swagger specification *MUST* contain unique paths.
+
+- [ ] **RE5**: `PutResponseResourceValidation` ARM specifications PUT operations return resource models. Validation rule "PutResponseResourceValidation" validates that these response models have the ```x-ms-azure-resource``` extension set to true.
 
 ## Appendix A: References ##
 
