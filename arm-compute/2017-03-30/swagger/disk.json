@@ -15,6 +15,24 @@
   "produces": [
     "application/json"
   ],
+  "security": [
+    {
+      "azure_auth": [
+        "user_impersonation"
+      ]
+    }
+  ],
+  "securityDefinitions": {
+    "azure_auth": {
+      "type": "oauth2",
+      "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
+      "flow": "implicit",
+      "description": "Azure Active Directory OAuth2 Flow",
+      "scopes": {
+        "user_impersonation": "impersonate your user account"
+      }
+    }
+  },
   "paths": {
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/disks/{diskName}": {
       "put": {
@@ -735,7 +753,7 @@
           "description": "The sku tier."
         }
       },
-      "description": "Gets or sets the disks and snapshots sku name. Can be Standard_LRS or Premium_LRS."
+      "description": "The disks and snapshots sku name. Can be Standard_LRS or Premium_LRS."
     },
     "DiskProperties": {
       "properties": {
@@ -881,7 +899,8 @@
           "x-ms-enum": {
             "name": "DiskCreateOption",
             "modelAsString": false
-          }
+          },
+          "description": "This enumerates the possible sources of a disk's creation."
         },
         "storageAccountId": {
           "type": "string",

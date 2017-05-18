@@ -3722,6 +3722,13 @@
             "Standard_A9",
             "Standard_A10",
             "Standard_A11",
+            "Standard_A1_v2",
+            "Standard_A2_v2",
+            "Standard_A4_v2",
+            "Standard_A8_v2",
+            "Standard_A2m_v2",
+            "Standard_A4m_v2",
+            "Standard_A8m_v2",
             "Standard_D1",
             "Standard_D2",
             "Standard_D3",
@@ -3758,6 +3765,16 @@
             "Standard_DS13_v2",
             "Standard_DS14_v2",
             "Standard_DS15_v2",
+            "Standard_F1",
+            "Standard_F2",
+            "Standard_F4",
+            "Standard_F8",
+            "Standard_F16",
+            "Standard_F1s",
+            "Standard_F2s",
+            "Standard_F4s",
+            "Standard_F8s",
+            "Standard_F16s",
             "Standard_G1",
             "Standard_G2",
             "Standard_G3",
@@ -3767,7 +3784,24 @@
             "Standard_GS2",
             "Standard_GS3",
             "Standard_GS4",
-            "Standard_GS5"
+            "Standard_GS5",
+            "Standard_H8",
+            "Standard_H16",
+            "Standard_H8m",
+            "Standard_H16m",
+            "Standard_H16r",
+            "Standard_H16mr",
+            "Standard_L4s",
+            "Standard_L8s",
+            "Standard_L16s",
+            "Standard_L32s",
+            "Standard_NC6",
+            "Standard_NC12",
+            "Standard_NC24",
+            "Standard_NC24r",
+            "Standard_NV6",
+            "Standard_NV12",
+            "Standard_NV24"
           ],
           "x-ms-enum": {
             "name": "VirtualMachineSizeTypes",
@@ -4390,7 +4424,7 @@
       },
       "description": "Identity for the virtual machine."
     },
-    "MaintenanceStatus": {
+    "MaintenanceRedeployStatus": {
       "properties": {
         "isCustomerInitiatedMaintenanceAllowed": {
           "type": "boolean",
@@ -4457,8 +4491,8 @@
           "$ref": "#/definitions/VirtualMachineAgentInstanceView",
           "description": "The VM Agent running on the virtual machine."
         },
-        "maintenanceStatus": {
-          "$ref": "#/definitions/MaintenanceStatus",
+        "maintenanceRedeployStatus": {
+          "$ref": "#/definitions/MaintenanceRedeployStatus",
           "description": "The Maintenance Operation status on the virtual machine."
         },
         "disks": {
