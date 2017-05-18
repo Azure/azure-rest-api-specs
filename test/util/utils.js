@@ -25,10 +25,8 @@ exports.compositeSchemaUrl = "https://raw.githubusercontent.com/Azure/autorest/m
 exports.isWindows = (process.platform.lastIndexOf('win') === 0);
 exports.prOnly = undefined !== process.env['PR_ONLY'] ? process.env['PR_ONLY'] : 'false';
 
-exports.globPath = path.join(__dirname, '../', '../', '/**/swagger/*.json');
-exports.swaggers = _(glob.sync(exports.globPath));
-exports.compositeGlobPath = path.join(__dirname, '../', '../', '/**/composite*.json');
-exports.compositeSwaggers = _(glob.sync(exports.compositeGlobPath));
+exports.globPath = path.join(__dirname, '../', '../', '/specification/**/*.json');
+exports.swaggers = _(glob.sync(exports.globPath, { ignore: ['/**/examples/*.json', '/**/quickstart-templates/*.json', '/**/schema/*.json'] }));
 exports.exampleGlobPath = path.join(__dirname, '../', '../', '/**/examples/*.json');
 exports.examples = _(glob.sync(exports.exampleGlobPath));
 
