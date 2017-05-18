@@ -114,6 +114,7 @@ These settings apply only when `--api-version=2016-06-01` is specified on the co
 input-file:
 - Microsoft.Network/2016-06-01/network.json
 
+
 ```
  
 # API Version: 2016-03-30
@@ -132,8 +133,18 @@ These settings apply only when `--api-version=2015-06-15` is specified on the co
 
 ``` yaml $(api-version) == '2015-06-15'
 input-file:
-- Microsoft.Network/2015-06-15/network.json
-
+- Microsoft.Network/2015-06-15/applicationGateway.json
+- Microsoft.Network/2015-06-15/checkDnsAvailability.json
+- Microsoft.Network/2015-06-15/expressRouteCircuit.json
+- Microsoft.Network/2015-06-15/loadBalancer.json
+- Microsoft.Network/2015-06-15/networkInterface.json
+- Microsoft.Network/2015-06-15/networkSecurityGroup.json
+- Microsoft.Network/2015-06-15/publicIpAddress.json
+- Microsoft.Network/2015-06-15/routeTable.json
+- Microsoft.Network/2015-06-15/usage.json
+- Microsoft.Network/2015-06-15/virtualNetwork.json
+- Microsoft.Network/2015-06-15/virtualNetworkGateway.json
+- microsoft.Compute/2015-06-15/vmssNetworkInterface.json
 ```
  
 # API Version: 2015-05-01-preview
