@@ -138,17 +138,27 @@ Links: [Index](#index) | [Error vs. Warning](#error-vs-warning) | [Automated Rul
 **Output Message**: Property named: "{0}", must follow camelCase style. Example: "{1}".
 **Output Message**: Property named: "{0}", for definition: "{1}" must follow camelCase style. Example: "{2}".
 
-**Description**: Property names must use lowerCameCase style.  
+**Description**: Property names must use lowerCamelCase style. 
+If the property is a single word (ex: foo, bar, etc.) it will be all lowercase. 
+Two-letter acronmys (ex: ID, IO, IP, etc.) should be capitalized. 
+Three-letter acronyms (ex: API, URL, etc.) should only have the first letter capitalized (ex: Api, Url, etc.) 
+For more capitalization guidance, see: [https://msdn.microsoft.com/en-us/library/141e06ef(v=vs.71).aspx](https://msdn.microsoft.com/en-us/library/141e06ef(v=vs.71).aspx)
 
 **Good Examples**: Examples of lowerCamelCase style:
 * camelCase
-* resourceKey
+* foo
+* bar
 * fooBarBaz
+* resourceKey
+* resourceApiKey
 
 **Bad Examples**: The following would be invalid:
 * PascalCase
 * UpperCamelCase
-* alllowercase
-* miXeDcApItAlIzAtIoN
+* resourceAPIKey
+
+**Bad Examples**: The following violate these guidelines but would not be caught by automation: 
+* alllowercase - If there are multiple words, please capitalize starting with the second word
+* miXeDcApItAlIzAtIoN - Please capitalize the first letter of each word (and not seemingly random letters)
 
 Links: [Index](#index) | [Error vs. Warning](#error-vs-warning) | [Automated Rules](#automated-rules) | [RPC](#rpc-violations): [Errors](#rpc-errors) or [Warnings](#rpc-warnings) | [SDK](#sdk-violations): [Errors](#sdk-errors) or [Warnings](#sdk-warnings)
