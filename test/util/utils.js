@@ -109,7 +109,16 @@ exports.getFilesChangedInPR = function getFilesChangedInPR() {
       console.log('>>>>> Files changed in this PR are as follows:')
       console.log(filesChanged);
       swaggerFilesInPR = filesChanged.split('\n').filter(function (item) {
-        return (item.match(/.*\/swagger\/*/ig) !== null);
+        if (item.match(/.*json$/ig) == null) {
+          return false;
+        }
+        if (item.match(/.*\/examples\/*/ig) !== null) {
+          return false;
+        }
+        if (item.match(/.*\/quickstart-templates\/*/ig) !== null) {
+          return false;
+        }
+        return true;
       });
       console.log(`>>>> Number of swaggers found in this PR: ${swaggerFilesInPR.length}`);
       
