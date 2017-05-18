@@ -182,39 +182,8 @@
         }
       }
     }
-  },
+  }
   "definitions": {
-      "description": "Automatic Tuning properties.",
-      "type": "object",
-      "properties": {
-        "actualState": {
-          "description": "Automatic tuning actual state.",
-          "enum": [
-            "Auto",
-            "Inherit",
-            "Custom"
-          ],
-          "type": "string",
-          "readOnly": true
-        },
-        "desiredState": {
-          "description": "Automatic tuning desired state.",
-          "enum": [
-            "Auto",
-            "Inherit",
-            "Custom"
-          ],
-          "type": "string"
-        },
-        "options": {
-          "description": "Automatic tuning options definition.",
-          "type": "object",
-          "additionalProperties": {
-            "$ref": "#/definitions/Microsoft.SqlServer.Management.Service.ResourceProvider.Arm.V20150501.WorkloadInsight.Entities.AutomaticTuningProperties.AutomaticTuningOptions"
-          }
-        }
-      }
-    },
     "Resource": {
       "description": "ARM resource.",
       "type": "object",
@@ -247,7 +216,7 @@
       ],
       "properties": {}
     },
-	"AutomaticTuningProperties": {
+    "AutomaticTuningProperties": {
       "description": "Automatic Tuning properties.",
       "type": "object",
       "properties": {
@@ -258,7 +227,10 @@
             "Inherit",
             "Custom"
           ],
-          "type": "string"
+          "type": "string",
+          "x-ms-enum": {
+            "name": "AutomaticTuningMode"
+          }
         },
         "actualState": {
           "description": "Automatic tuning actual state.",
@@ -268,7 +240,10 @@
             "Custom"
           ],
           "type": "string",
-          "readOnly": true
+          "readOnly": true,
+          "x-ms-enum": {
+            "name": "AutomaticTuningMode"
+          }
         },
         "options": {
           "description": "Automatic tuning options definition.",
@@ -290,7 +265,10 @@
             "Off",
             "Default"
           ],
-          "type": "string"
+          "type": "string",
+          "x-ms-enum": {
+            "name": "AutomaticTuningOptionModeDesired"
+          }
         },
         "actualState": {
           "description": "Automatic tuning option actual state.",
@@ -299,7 +277,10 @@
             "Off"
           ],
           "type": "string",
-          "readOnly": true
+          "readOnly": true,
+          "x-ms-enum": {
+            "name": "AutomaticTuningOptionModeActual"
+          }
         },
         "reasonCode": {
           "format": "int32",
@@ -318,30 +299,56 @@
             "NotSupported"
           ],
           "type": "string",
-          "readOnly": true
+          "readOnly": true,
+          "x-ms-enum": {
+            "name": "AutomaticTuningDisabledReason"
+          }
         }
       }
     },
     "AutomaticTuning": {
-      "description": "A list of virtual network rules.",
+      "description": "Database-level Automatic Tuning.",
       "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/ProxyResource"
+        }
+      ],
       "properties": {
-        "value": {
-          "description": "Array of results.",
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/VnetFirewallRule"
-          },
-          "readOnly": true
-        },
-        "nextLink": {
-          "description": "Link to retrieve next page of results.",
+        "properties": {
+          "$ref": "#/definitions/AutomaticTuningProperties",
+          "description": "Resource properties.",
+          "x-ms-client-flatten": true
+        }
+      }
+    },
+    "TrackedResource": {
+      "description": "ARM tracked top level resource.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/Resource"
+        }
+      ],
+      "properties": {
+        "location": {
+          "description": "Resource location.",
           "type": "string",
-          "readOnly": true
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
+        },
+        "tags": {
+          "description": "Resource tags.",
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          }
         }
       }
     }
-  },
+  }
   "parameters": {
     "SubscriptionIdParameter": {
       "name": "subscriptionId",
