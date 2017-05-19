@@ -433,9 +433,21 @@
             }
           },
           "description": "Permissions to certificates"
+        },
+        "storage": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "enum": [ "get", "list", "delete", "set", "update", "regeneratekey", "setsas", "listsas", "getsas", "deletesas" ],
+            "x-ms-enum": {
+              "name": "StoragePermissions",
+              "modelAsString": true
+            }
+          },
+          "description": "Permissions to storage accounts"
         }
       },
-      "description": "Permissions the identity has for keys, secrets and certificates."
+      "description": "Permissions the identity has for keys, secrets, certificates and storage."
     },
     "VaultProperties": {
       "properties": {
