@@ -1,0 +1,363 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "AutomationManagementClient",
+    "version": "2015-10-31"
+  },
+  "host": "management.azure.com",
+  "schemes": [
+    "https"
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "produces": [
+    "application/json"
+  ],
+  "paths": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Automation/automationAccounts/{automationAccountName}/webhooks/generateUri": {
+      "post": {
+        "tags": [
+          "Webhook"
+        ],
+        "operationId": "Webhook_GenerateUri",
+        "description": "Generates a Uri for use in creating a webhook.",
+        "externalDocs": {
+          "url": "http://aka.ms/azureautomationsdk/webhookoperations"
+        },
+        "parameters": [
+          {
+            "$ref": "./definitions.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "automationAccountName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The automation account name."
+          },
+          {
+            "$ref": "./definitions.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "./definitions.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "type": "string"
+            }
+          },
+          "default": {
+            "description": "Automation error response describing why the operation failed.",
+            "schema": {
+              "$ref": "./definitions.json#/definitions/ErrorResponse"
+            }
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Automation/automationAccounts/{automationAccountName}/webhooks/{webhookName}": {
+      "delete": {
+        "tags": [
+          "Webhook"
+        ],
+        "operationId": "Webhook_Delete",
+        "description": "Delete the webhook by name.",
+        "externalDocs": {
+          "url": "http://aka.ms/azureautomationsdk/webhookoperations"
+        },
+        "x-ms-examples": {
+          "Delete webhook": {
+            "$ref": "../examples/webhook/deleteWebhook.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "./definitions.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "automationAccountName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The automation account name."
+          },
+          {
+            "name": "webhookName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The webhook name."
+          },
+          {
+            "$ref": "./definitions.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "./definitions.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "default": {
+            "description": "Automation error response describing why the operation failed.",
+            "schema": {
+              "$ref": "./definitions.json#/definitions/ErrorResponse"
+            }
+          }
+        }
+      },
+      "get": {
+        "tags": [
+          "Webhook"
+        ],
+        "operationId": "Webhook_Get",
+        "description": "Retrieve the webhook identified by webhook name.",
+        "externalDocs": {
+          "url": "http://aka.ms/azureautomationsdk/webhookoperations"
+        },
+        "x-ms-examples": {
+          "Get webhook": {
+            "$ref": "../examples/webhook/getWebhook.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "./definitions.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "automationAccountName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The automation account name."
+          },
+          {
+            "name": "webhookName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The webhook name."
+          },
+          {
+            "$ref": "./definitions.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "./definitions.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "./definitions.json#/definitions/Webhook"
+            }
+          },
+          "default": {
+            "description": "Automation error response describing why the operation failed.",
+            "schema": {
+              "$ref": "./definitions.json#/definitions/ErrorResponse"
+            }
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "Webhook"
+        ],
+        "operationId": "Webhook_CreateOrUpdate",
+        "description": "Create the webhook identified by webhook name.",
+        "externalDocs": {
+          "url": "http://aka.ms/azureautomationsdk/webhookoperations"
+        },
+        "x-ms-examples": {
+          "Create or update webhook": {
+            "$ref": "../examples/webhook/createOrUpdateWebhook.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "./definitions.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "automationAccountName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The automation account name."
+          },
+          {
+            "name": "webhookName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The webhook name."
+          },
+          {
+            "name": "parameters",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "./definitions.json#/definitions/WebhookCreateOrUpdateParameters"
+            },
+            "description": "The create or update parameters for webhook."
+          },
+          {
+            "$ref": "./definitions.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "./definitions.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "./definitions.json#/definitions/Webhook"
+            }
+          },
+          "201": {
+            "description": "Created",
+            "schema": {
+              "$ref": "./definitions.json#/definitions/Webhook"
+            }
+          },
+          "default": {
+            "description": "Automation error response describing why the operation failed.",
+            "schema": {
+              "$ref": "./definitions.json#/definitions/ErrorResponse"
+            }
+          }
+        }
+      },
+      "patch": {
+        "tags": [
+          "Webhook"
+        ],
+        "operationId": "Webhook_Update",
+        "description": "Update the webhook identified by webhook name.",
+        "externalDocs": {
+          "url": "http://aka.ms/azureautomationsdk/webhookoperations"
+        },
+        "x-ms-examples": {
+          "Update webhook": {
+            "$ref": "../examples/webhook/updateWebhook.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "./definitions.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "automationAccountName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The automation account name."
+          },
+          {
+            "name": "webhookName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The webhook name."
+          },
+          {
+            "name": "parameters",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "./definitions.json#/definitions/WebhookUpdateParameters"
+            },
+            "description": "The update parameters for webhook."
+          },
+          {
+            "$ref": "./definitions.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "./definitions.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "./definitions.json#/definitions/Webhook"
+            }
+          },
+          "default": {
+            "description": "Automation error response describing why the operation failed.",
+            "schema": {
+              "$ref": "./definitions.json#/definitions/ErrorResponse"
+            }
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Automation/automationAccounts/{automationAccountName}/webhooks": {
+      "get": {
+        "tags": [
+          "Webhook"
+        ],
+        "operationId": "Webhook_ListByAutomationAccount",
+        "description": "Retrieve a list of webhooks.",
+        "externalDocs": {
+          "url": "http://aka.ms/azureautomationsdk/webhookoperations"
+        },
+        "x-ms-examples": {
+          "List webhooks by Automation Account": {
+            "$ref": "../examples/webhook/listWebhooksByAutomationAccount.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "./definitions.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "automationAccountName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The automation account name."
+          },
+          {
+            "name": "$filter",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "description": "The filter to apply on the operation."
+          },
+          {
+            "$ref": "./definitions.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "./definitions.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "./definitions.json#/definitions/WebhookListResult"
+            }
+          },
+          "default": {
+            "description": "Automation error response describing why the operation failed.",
+            "schema": {
+              "$ref": "./definitions.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    }
+  },
+  "definitions": {},
+  "parameters": {}
+}

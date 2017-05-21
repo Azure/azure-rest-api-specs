@@ -14,6 +14,24 @@
   "produces": [
     "application/json"
   ],
+  "security": [
+    {
+      "azure_auth": [
+        "user_impersonation"
+      ]
+    }
+  ],
+  "securityDefinitions": {
+    "azure_auth": {
+      "type": "oauth2",
+      "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
+      "flow": "implicit",
+      "description": "Azure Active Directory OAuth2 Flow",
+      "scopes": {
+        "user_impersonation": "impersonate your user account"
+      }
+    }
+  },
   "paths": {
     "/{resourceUri}/providers/microsoft.insights/metricDefinitions": {
       "get": {
@@ -21,7 +39,7 @@
           "MetricDefinitions"
         ],
         "operationId": "MetricDefinitions_List",
-        "description": "Lists the metric definitions for the resource. The **$filter** parameter is optional, and can be used to only retrieve certain metric definitions. For example, get just the definition for the CPU percentage counter: $filter=name.value eq '\\Processor(_Total)\\% Processor Time'. This $filter is very restricted and allows only these 'name eq <value>' clauses separated by or operators. No other syntax is allowed.",
+        "description": "Lists the metric definitions for the resource.",
         "parameters": [
           {
             "$ref": "#/parameters/ResourceUriParameter"
@@ -30,10 +48,20 @@
             "$ref": "#/parameters/ApiVersionParameter"
           },
           {
-            "$ref": "#/parameters/FilterParameter"
+            "name": "$filter",
+            "in": "query",
+            "type": "string",
+            "description": "Reduces the set of data collected by retrieving particular metric definitions from all the definitions available for the resource.<br>For example, to get just the definition for the 'CPU percentage' counter: $filter=name.value eq '\\Processor(_Total)\\% Processor Time'.<br>Multiple metrics can be retrieved by joining together *'name eq <value>'* clauses separated by *or* logical operators.<br>**NOTE**: No other syntax is allowed.",
+            "required": false
           }
         ],
         "responses": {
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          },
           "200": {
             "description": "Successful request to get the list of metric definitions",
             "schema": {
@@ -110,7 +138,11 @@
         "x-ms-pageable": {
           "nextLinkName": null
         },
-        "x-ms-odata": "#/definitions/MetricDefinition"
+        "x-ms-odata": "#/definitions/MetricDefinition",
+        "x-ms-examples": {
+          "Get Metric Definitions without filter": { "$ref": "../examples/GetMetricDefinitions.json" },
+          "Get Metric Definitions with filter": { "$ref": "../examples/GetMetricDefinitionsFiltered.json" }
+        }
       }
     }
   },
@@ -217,6 +249,20 @@
       },
       "required": ["value"],
       "description": "Represents collection of metric definitions."
+    },
+    "ErrorResponse": {
+      "description": "Describes the format of Error response.",
+      "type": "object",
+      "properties": {
+        "code": {
+          "description": "Error code",
+          "type": "string"
+        },
+        "message": {
+          "description": "Error message indicating why the operation failed.",
+          "type": "string"
+        }
+      }
     }
   },
   "parameters": {
@@ -226,14 +272,6 @@
       "required": true,
       "type": "string",
       "description": "Client Api Version."
-    },
-    "FilterParameter": {
-      "name": "$filter",
-      "in": "query",
-      "type": "string",
-      "description": "Reduces the set of data collected. The syntax allowed depends on the operation. See the operation's description for details.",
-      "x-ms-parameter-location": "method",
-      "required": false
     },
     "ResourceUriParameter": {
       "name": "resourceUri",

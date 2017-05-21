@@ -122,6 +122,7 @@
         "tags": [
           "Catalog"
         ],
+        "deprecated": true,
         "operationId": "Catalog_GetSecret",
         "description": "Gets the specified secret in the specified database. This is deprecated and will be removed in the next release. Please use GetCredential instead.",
         "parameters": [
@@ -827,6 +828,95 @@
         "x-ms-odata": "#/definitions/USqlTable"
       }
     },
+    "/catalog/usql/databases/{databaseName}/schemas/{schemaName}/statistics": {
+      "get": {
+        "tags": [
+          "Catalog"
+        ],
+        "operationId": "Catalog_ListTableStatisticsByDatabaseAndSchema",
+        "description": "Retrieves the list of all table statistics within the specified schema from the Data Lake Analytics catalog.",
+        "x-ms-examples": {
+          "List all table statistics in a database and schema": { "$ref": "../examples/AdlCatalogListStatisticsInDatabaseSchema.json" }
+        },
+        "parameters": [
+          {
+            "name": "databaseName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the database containing the statistics."
+          },
+          {
+            "name": "schemaName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the schema containing the statistics."
+          },
+          {
+            "name": "$filter",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "description": "OData filter. Optional."
+          },
+          {
+            "name": "$top",
+            "in": "query",
+            "required": false,
+            "type": "integer",
+            "format": "int32",
+            "minimum": 1,
+            "description": "The number of items to return. Optional."
+          },
+          {
+            "name": "$skip",
+            "in": "query",
+            "required": false,
+            "type": "integer",
+            "format": "int32",
+            "minimum": 1,
+            "description": "The number of items to skip over before returning elements. Optional."
+          },
+          {
+            "name": "$select",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "description": "OData Select statement. Limits the properties on each entry to just those requested, e.g. Categories?$select=CategoryName,Description. Optional."
+          },
+          {
+            "name": "$orderby",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "description": "OrderBy clause. One or more comma-separated expressions with an optional \"asc\" (the default) or \"desc\" depending on the order you'd like the values sorted, e.g. Categories?$orderby=CategoryName desc. Optional."
+          },
+          {
+            "name": "$count",
+            "in": "query",
+            "required": false,
+            "type": "boolean",
+            "description": "The Boolean value of true or false to request a count of the matching resources included with the resources in the response, e.g. Categories?$count=true. Optional."
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successfully retrieved the list of all table statistics in the specified database and schema.",
+            "schema": {
+              "$ref": "#/definitions/USqlTableStatisticsList"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        },
+        "x-ms-odata": "#/definitions/USqlTableStatistics"
+      }
+    },
     "/catalog/usql/databases/{databaseName}/schemas/{schemaName}/tabletypes/{tableTypeName}": {
       "get": {
         "tags": [
@@ -954,6 +1044,141 @@
           "nextLinkName": "nextLink"
         },
         "x-ms-odata": "#/definitions/USqlTableType"
+      }
+    },
+    "/catalog/usql/databases/{databaseName}/schemas/{schemaName}/packages/{packageName}": {
+      "get": {
+        "tags": [
+          "Catalog"
+        ],
+        "operationId": "Catalog_GetPackage",
+        "description": "Retrieves the specified package from the Data Lake Analytics catalog.",
+        "x-ms-examples": {
+          "Get a specific package": { "$ref": "../examples/AdlCatalogGetPackage.json" }
+        },
+        "parameters": [
+          {
+            "name": "databaseName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the database containing the package."
+          },
+          {
+            "name": "schemaName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the schema containing the package."
+          },
+          {
+            "name": "packageName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the package."
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successfully retrieved the specified package from the underying database and schema combination",
+            "schema": {
+              "$ref": "#/definitions/USqlPackage"
+            }
+          }
+        }
+      }
+    },
+    "/catalog/usql/databases/{databaseName}/schemas/{schemaName}/packages": {
+      "get": {
+        "tags": [
+          "Catalog"
+        ],
+        "operationId": "Catalog_ListPackages",
+        "description": "Retrieves the list of packages from the Data Lake Analytics catalog.",
+        "x-ms-examples": {
+          "List all packages in a database and schema": { "$ref": "../examples/AdlCatalogListPackages.json" }
+        },
+        "parameters": [
+          {
+            "name": "databaseName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the database containing the packages."
+          },
+          {
+            "name": "schemaName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the schema containing the packages."
+          },
+          {
+            "name": "$filter",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "description": "OData filter. Optional."
+          },
+          {
+            "name": "$top",
+            "in": "query",
+            "required": false,
+            "type": "integer",
+            "format": "int32",
+            "minimum": 1,
+            "description": "The number of items to return. Optional."
+          },
+          {
+            "name": "$skip",
+            "in": "query",
+            "required": false,
+            "type": "integer",
+            "format": "int32",
+            "minimum": 1,
+            "description": "The number of items to skip over before returning elements. Optional."
+          },
+          {
+            "name": "$select",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "description": "OData Select statement. Limits the properties on each entry to just those requested, e.g. Categories?$select=CategoryName,Description. Optional."
+          },
+          {
+            "name": "$orderby",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "description": "OrderBy clause. One or more comma-separated expressions with an optional \"asc\" (the default) or \"desc\" depending on the order you'd like the values sorted, e.g. Categories?$orderby=CategoryName desc. Optional."
+          },
+          {
+            "name": "$count",
+            "in": "query",
+            "required": false,
+            "type": "boolean",
+            "description": "The Boolean value of true or false to request a count of the matching resources included with the resources in the response, e.g. Categories?$count=true. Optional."
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successfully retrieved the list of packages in the specified database and schema.",
+            "schema": {
+              "$ref": "#/definitions/USqlPackageList"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        },
+        "x-ms-odata": "#/definitions/USqlPackage"
       }
     },
     "/catalog/usql/databases/{databaseName}/schemas/{schemaName}/views/{viewName}": {
@@ -1816,6 +2041,334 @@
         "x-ms-odata": "#/definitions/USqlSchema"
       }
     },
+    "/catalog/usql/databases/{databaseName}/statistics": {
+      "get": {
+        "tags": [
+          "Catalog"
+        ],
+        "operationId": "Catalog_ListTableStatisticsByDatabase",
+        "description": "Retrieves the list of all statistics in a database from the Data Lake Analytics catalog.",
+        "x-ms-examples": {
+          "List all table statistics in a database": { "$ref": "../examples/AdlCatalogListStatisticsInDatabase.json" }
+        },
+        "parameters": [
+          {
+            "name": "databaseName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the database containing the table statistics."
+          },
+          {
+            "name": "$filter",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "description": "OData filter. Optional."
+          },
+          {
+            "name": "$top",
+            "in": "query",
+            "required": false,
+            "type": "integer",
+            "format": "int32",
+            "minimum": 1,
+            "description": "The number of items to return. Optional."
+          },
+          {
+            "name": "$skip",
+            "in": "query",
+            "required": false,
+            "type": "integer",
+            "format": "int32",
+            "minimum": 1,
+            "description": "The number of items to skip over before returning elements. Optional."
+          },
+          {
+            "name": "$select",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "description": "OData Select statement. Limits the properties on each entry to just those requested, e.g. Categories?$select=CategoryName,Description. Optional."
+          },
+          {
+            "name": "$orderby",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "description": "OrderBy clause. One or more comma-separated expressions with an optional \"asc\" (the default) or \"desc\" depending on the order you'd like the values sorted, e.g. Categories?$orderby=CategoryName desc. Optional."
+          },
+          {
+            "name": "$count",
+            "in": "query",
+            "required": false,
+            "type": "boolean",
+            "description": "The Boolean value of true or false to request a count of the matching resources included with the resources in the response, e.g. Categories?$count=true. Optional."
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successfully retrieved the list of all table statistics in the specified database.",
+            "schema": {
+              "$ref": "#/definitions/USqlTableStatisticsList"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        },
+        "x-ms-odata": "#/definitions/USqlTableStatistics"
+      }
+    },
+    "/catalog/usql/databases/{databaseName}/tables": {
+      "get": {
+        "tags": [
+          "Catalog"
+        ],
+        "operationId": "Catalog_ListTablesByDatabase",
+        "description": "Retrieves the list of all tables in a database from the Data Lake Analytics catalog.",
+        "x-ms-examples": {
+          "List all tables in a database": { "$ref": "../examples/AdlCatalogListTablesInDatabase.json" }
+        },
+        "parameters": [
+          {
+            "name": "databaseName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the database containing the tables."
+          },
+          {
+            "name": "$filter",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "description": "OData filter. Optional."
+          },
+          {
+            "name": "$top",
+            "in": "query",
+            "required": false,
+            "type": "integer",
+            "format": "int32",
+            "minimum": 1,
+            "description": "The number of items to return. Optional."
+          },
+          {
+            "name": "$skip",
+            "in": "query",
+            "required": false,
+            "type": "integer",
+            "format": "int32",
+            "minimum": 1,
+            "description": "The number of items to skip over before returning elements. Optional."
+          },
+          {
+            "name": "$select",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "description": "OData Select statement. Limits the properties on each entry to just those requested, e.g. Categories?$select=CategoryName,Description. Optional."
+          },
+          {
+            "name": "$orderby",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "description": "OrderBy clause. One or more comma-separated expressions with an optional \"asc\" (the default) or \"desc\" depending on the order you'd like the values sorted, e.g. Categories?$orderby=CategoryName desc. Optional."
+          },
+          {
+            "name": "$count",
+            "in": "query",
+            "required": false,
+            "type": "boolean",
+            "description": "The Boolean value of true or false to request a count of the matching resources included with the resources in the response, e.g. Categories?$count=true. Optional."
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successfully retrieved the list of all tables in the specified database.",
+            "schema": {
+              "$ref": "#/definitions/USqlTableList"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        },
+        "x-ms-odata": "#/definitions/USqlTable"
+      }
+    },
+    "/catalog/usql/databases/{databaseName}/tablevaluedfunctions": {
+      "get": {
+        "tags": [
+          "Catalog"
+        ],
+        "operationId": "Catalog_ListTableValuedFunctionsByDatabase",
+        "description": "Retrieves the list of all table valued functions in a database from the Data Lake Analytics catalog.",
+        "x-ms-examples": {
+          "List all table valued functions in a database": { "$ref": "../examples/AdlCatalogListTableValuedFunctionsInDatabase.json" }
+        },
+        "parameters": [
+          {
+            "name": "databaseName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the database containing the table valued functions."
+          },
+          {
+            "name": "$filter",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "description": "OData filter. Optional."
+          },
+          {
+            "name": "$top",
+            "in": "query",
+            "required": false,
+            "type": "integer",
+            "format": "int32",
+            "minimum": 1,
+            "description": "The number of items to return. Optional."
+          },
+          {
+            "name": "$skip",
+            "in": "query",
+            "required": false,
+            "type": "integer",
+            "format": "int32",
+            "minimum": 1,
+            "description": "The number of items to skip over before returning elements. Optional."
+          },
+          {
+            "name": "$select",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "description": "OData Select statement. Limits the properties on each entry to just those requested, e.g. Categories?$select=CategoryName,Description. Optional."
+          },
+          {
+            "name": "$orderby",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "description": "OrderBy clause. One or more comma-separated expressions with an optional \"asc\" (the default) or \"desc\" depending on the order you'd like the values sorted, e.g. Categories?$orderby=CategoryName desc. Optional."
+          },
+          {
+            "name": "$count",
+            "in": "query",
+            "required": false,
+            "type": "boolean",
+            "description": "The Boolean value of true or false to request a count of the matching resources included with the resources in the response, e.g. Categories?$count=true. Optional."
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successfully retrieved the list of all table valued functions in the specified database.",
+            "schema": {
+              "$ref": "#/definitions/USqlTableValuedFunctionList"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        },
+        "x-ms-odata": "#/definitions/USqlTableValuedFunction"
+      }
+    },
+    "/catalog/usql/databases/{databaseName}/views": {
+      "get": {
+        "tags": [
+          "Catalog"
+        ],
+        "operationId": "Catalog_ListViewsByDatabase",
+        "description": "Retrieves the list of all views in a database from the Data Lake Analytics catalog.",
+        "x-ms-examples": {
+          "List all views in a database": { "$ref": "../examples/AdlCatalogListViewsInDatabase.json" }
+        },
+        "parameters": [
+          {
+            "name": "databaseName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the database containing the views."
+          },
+          {
+            "name": "$filter",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "description": "OData filter. Optional."
+          },
+          {
+            "name": "$top",
+            "in": "query",
+            "required": false,
+            "type": "integer",
+            "format": "int32",
+            "minimum": 1,
+            "description": "The number of items to return. Optional."
+          },
+          {
+            "name": "$skip",
+            "in": "query",
+            "required": false,
+            "type": "integer",
+            "format": "int32",
+            "minimum": 1,
+            "description": "The number of items to skip over before returning elements. Optional."
+          },
+          {
+            "name": "$select",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "description": "OData Select statement. Limits the properties on each entry to just those requested, e.g. Categories?$select=CategoryName,Description. Optional."
+          },
+          {
+            "name": "$orderby",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "description": "OrderBy clause. One or more comma-separated expressions with an optional \"asc\" (the default) or \"desc\" depending on the order you'd like the values sorted, e.g. Categories?$orderby=CategoryName desc. Optional."
+          },
+          {
+            "name": "$count",
+            "in": "query",
+            "required": false,
+            "type": "boolean",
+            "description": "The Boolean value of true or false to request a count of the matching resources included with the resources in the response, e.g. Categories?$count=true. Optional."
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successfully retrieved the list of all views in the specified database.",
+            "schema": {
+              "$ref": "#/definitions/USqlViewList"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        },
+        "x-ms-odata": "#/definitions/USqlView"
+      }
+    },
     "/catalog/usql/databases/{databaseName}": {
       "get": {
         "tags": [
@@ -2473,6 +3026,51 @@
       },
       "description": "A Data Lake Analytics catalog U-SQL view item list."
     },
+    "USqlPackage": {
+      "allOf": [
+        {
+          "$ref": "#/definitions/CatalogItem"
+        }
+      ],
+      "properties": {
+        "databaseName": {
+          "type": "string",
+          "description": "the name of the database containing the package."
+        },
+        "schemaName": {
+          "type": "string",
+          "description": "the name of the schema associated with this package and database."
+        },
+        "packageName": {
+          "type": "string",
+          "x-ms-client-name": "name",
+          "description": "the name of the package."
+        },
+        "definition": {
+          "type": "string",
+          "description": "the definition of the package."
+        }
+      },
+      "description": "A Data Lake Analytics catalog U-SQL package item."
+    },
+    "USqlPackageList": {
+      "allOf": [
+        {
+          "$ref": "#/definitions/CatalogItemList"
+        }
+      ],
+      "properties": {
+        "value": {
+          "type": "array",
+          "readOnly": true,
+          "items": {
+            "$ref": "#/definitions/USqlPackage"
+          },
+          "description": "the list of packages in the database and schema combination"
+        }
+      },
+      "description": "A Data Lake Analytics catalog U-SQL package item list."
+    },
     "USqlTablePartition": {
       "allOf": [
         {
@@ -2766,11 +3364,12 @@
           "description": "the assembly file type.",
           "enum": [
             "Assembly",
-            "Resource"
+            "Resource",
+            "Nodeploy"
           ],
           "x-ms-enum": {
             "name": "FileType",
-            "modelAsString": false
+            "modelAsString": true
           }
         },
         "originalPath": {

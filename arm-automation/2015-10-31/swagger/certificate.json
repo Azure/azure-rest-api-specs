@@ -1,0 +1,312 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "AutomationManagement",
+    "version": "2015-10-31"
+  },
+  "host": "management.azure.com",
+  "schemes": [
+    "https"
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "produces": [
+    "application/json"
+  ],
+  "paths": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Automation/automationAccounts/{automationAccountName}/certificates/{certificateName}": {
+      "delete": {
+        "tags": [
+          "Certificate"
+        ],
+        "operationId": "Certificate_Delete",
+        "description": "Delete the certificate.",
+        "externalDocs": {
+          "url": "http://aka.ms/azureautomationsdk/certificateoperations"
+        },
+        "x-ms-examples": {
+          "Delete a certificate": {
+            "$ref": "../examples/certificate/deleteCertificate.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "./definitions.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "automationAccountName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The automation account name."
+          },
+          {
+            "name": "certificateName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of certificate."
+          },
+          {
+            "$ref": "./definitions.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "./definitions.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "default": {
+            "description": "Automation error response describing why the operation failed.",
+            "schema": {
+              "$ref": "./definitions.json#/definitions/ErrorResponse"
+            }
+          }
+        }
+      },
+      "get": {
+        "tags": [
+          "Certificate"
+        ],
+        "operationId": "Certificate_Get",
+        "description": "Retrieve the certificate identified by certificate name.",
+        "externalDocs": {
+          "url": "http://aka.ms/azureautomationsdk/certificateoperations"
+        },
+        "x-ms-examples": {
+          "Get a certificate": {
+            "$ref": "../examples/certificate/getCertificate.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "./definitions.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "automationAccountName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The automation account name."
+          },
+          {
+            "name": "certificateName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of certificate."
+          },
+          {
+            "$ref": "./definitions.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "./definitions.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "./definitions.json#/definitions/Certificate"
+            }
+          },
+          "default": {
+            "description": "Automation error response describing why the operation failed.",
+            "schema": {
+              "$ref": "./definitions.json#/definitions/ErrorResponse"
+            }
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "Certificate"
+        ],
+        "operationId": "Certificate_CreateOrUpdate",
+        "description": "Create a certificate.",
+        "externalDocs": {
+          "url": "http://aka.ms/azureautomationsdk/certificateoperations"
+        },
+        "x-ms-examples": {
+          "Create or update a certificate": {
+            "$ref": "../examples/certificate/createOrUpdateCertificate.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "./definitions.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "automationAccountName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The automation account name."
+          },
+          {
+            "name": "certificateName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The parameters supplied to the create or update certificate operation."
+          },
+          {
+            "name": "parameters",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "./definitions.json#/definitions/CertificateCreateOrUpdateParameters"
+            },
+            "description": "The parameters supplied to the create or update certificate operation."
+          },
+          {
+            "$ref": "./definitions.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "./definitions.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": "Created",
+            "schema": {
+              "$ref": "./definitions.json#/definitions/Certificate"
+            }
+          },
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "./definitions.json#/definitions/Certificate"
+            }
+          },
+          "default": {
+            "description": "Automation error response describing why the operation failed.",
+            "schema": {
+              "$ref": "./definitions.json#/definitions/ErrorResponse"
+            }
+          }
+        }
+      },
+      "patch": {
+        "tags": [
+          "Certificate"
+        ],
+        "operationId": "Certificate_Update",
+        "description": "Update a certificate.",
+        "externalDocs": {
+          "url": "http://aka.ms/azureautomationsdk/certificateoperations"
+        },
+        "x-ms-examples": {
+          "Update a certificate": {
+            "$ref": "../examples/certificate/updateCertificate.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "./definitions.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "automationAccountName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The automation account name."
+          },
+          {
+            "name": "certificateName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The parameters supplied to the update certificate operation."
+          },
+          {
+            "name": "parameters",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "./definitions.json#/definitions/CertificateUpdateParameters"
+            },
+            "description": "The parameters supplied to the update certificate operation."
+          },
+          {
+            "$ref": "./definitions.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "./definitions.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "./definitions.json#/definitions/Certificate"
+            }
+          },
+          "default": {
+            "description": "Automation error response describing why the operation failed.",
+            "schema": {
+              "$ref": "./definitions.json#/definitions/ErrorResponse"
+            }
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Automation/automationAccounts/{automationAccountName}/certificates": {
+      "get": {
+        "tags": [
+          "Certificate"
+        ],
+        "operationId": "Certificate_ListByAutomationAccount",
+        "description": "Retrieve a list of certificates.",
+        "externalDocs": {
+          "url": "http://aka.ms/azureautomationsdk/certificateoperations"
+        },
+        "x-ms-examples": {
+          "List certificates": {
+            "$ref": "../examples/certificate/listCertificatesByAutomationAccount.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "./definitions.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "automationAccountName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The automation account name."
+          },
+          {
+            "$ref": "./definitions.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "./definitions.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "./definitions.json#/definitions/CertificateListResult"
+            }
+          },
+          "default": {
+            "description": "Automation error response describing why the operation failed.",
+            "schema": {
+              "$ref": "./definitions.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    }
+  },
+  "definitions": {},
+  "parameters": {}
+}

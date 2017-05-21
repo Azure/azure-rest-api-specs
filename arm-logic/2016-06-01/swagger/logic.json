@@ -423,6 +423,95 @@
         }
       }
     },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Logic/workflows/{workflowName}/listSwagger": {
+      "post": {
+        "tags": [
+          "Workflows"
+        ],
+        "operationId": "Workflows_ListSwagger",
+        "description": "Gets an OpenAPI definition for the workflow.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/subscriptionId"
+          },
+          {
+            "name": "resourceGroupName",
+            "description": "The resource group name.",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "workflowName",
+            "description": "The workflow name.",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "$ref": "#/parameters/api-version"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/Object"
+            }
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Logic/workflows/{workflowName}/regenerateAccessKey": {
+      "post": {
+        "tags": [
+          "Workflows"
+        ],
+        "operationId": "Workflows_RegenerateAccessKey",
+        "description": "Regenerates the callback URL access key for request triggers.",
+        "x-ms-examples": {
+          "Regenerate the callback URL access key for request triggers": {
+            "$ref": "../examples/WorkflowsRegenerateAccessKey.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "#/parameters/subscriptionId"
+          },
+          {
+            "name": "resourceGroupName",
+            "description": "The resource group name.",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "workflowName",
+            "description": "The workflow name.",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "keyType",
+            "description": "The access key type.",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/RegenerateActionParameter"
+            }
+          },
+          {
+            "$ref": "#/parameters/api-version"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Logic/workflows/{workflowName}/versions": {
       "get": {
         "tags": [
@@ -715,6 +804,73 @@
         }
       }
     },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Logic/workflows/{workflowName}/versions/{versionId}/triggers/{triggerName}/listCallbackUrl": {
+      "post": {
+        "tags": [
+          "WorkflowTriggers"
+        ],
+        "operationId": "WorkflowVersions_ListCallbackUrl",
+        "description": "Lists the callback URL for a trigger of a workflow version.",
+        "x-ms-examples": {
+          "Get callback URL for a trigger of a workflow version": {
+            "$ref": "../examples/WorkflowVersionsListCallbackUrl.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "#/parameters/subscriptionId"
+          },
+          {
+            "name": "resourceGroupName",
+            "description": "The resource group name.",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "workflowName",
+            "description": "The workflow name.",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "versionId",
+            "description": "The workflow versionId.",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "triggerName",
+            "description": "The workflow trigger name.",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "parameters",
+            "description": "The callback URL parameters.",
+            "in": "body",
+            "required": false,
+            "schema": {
+              "$ref": "#/definitions/GetCallbackUrlParameters"
+            }
+          },
+          {
+            "$ref": "#/parameters/api-version"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/WorkflowTriggerCallbackUrl"
+            }
+          }
+        }
+      }
+    },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Logic/workflows/{workflowName}/triggers/{triggerName}/histories": {
       "get": {
         "tags": [
@@ -814,7 +970,7 @@
           },
           {
             "name": "historyName",
-            "description": "The workflow trigger history name.",
+            "description": "The workflow trigger history name. Corresponds to the run name for triggers that resulted in a run.",
             "in": "path",
             "required": true,
             "type": "string"
@@ -829,6 +985,61 @@
             "schema": {
               "$ref": "#/definitions/WorkflowTriggerHistory"
             }
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Logic/workflows/{workflowName}/triggers/{triggerName}/histories/{historyName}/resubmit": {
+      "post": {
+        "tags": [
+          "WorkflowTriggerHistories"
+        ],
+        "operationId": "WorkflowTriggerHistories_Resubmit",
+        "description": "Resubmits a workflow run based on the trigger history.",
+        "x-ms-examples": {
+          "Resubmit a workflow run based on the trigger history": {
+            "$ref": "../examples/WorkflowTriggerHistoriesResubmit.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "#/parameters/subscriptionId"
+          },
+          {
+            "name": "resourceGroupName",
+            "description": "The resource group name.",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "workflowName",
+            "description": "The workflow name.",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "triggerName",
+            "description": "The workflow trigger name.",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "historyName",
+            "description": "The workflow trigger history name. Corresponds to the run name for triggers that resulted in a run.",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "$ref": "#/parameters/api-version"
+          }
+        ],
+        "responses": {
+          "202": {
+            "description": "OK"
           }
         }
       }
@@ -1157,6 +1368,11 @@
         ],
         "operationId": "IntegrationAccounts_ListBySubscription",
         "description": "Gets a list of integration accounts by subscription.",
+        "x-ms-examples": {
+          "List IntegrationAccounts by subscription": {
+            "$ref": "../examples/IntegrationAccountsListBySubscription.json"
+          }
+        },
         "parameters": [
           {
             "$ref": "#/parameters/subscriptionId"
@@ -1193,6 +1409,11 @@
         ],
         "operationId": "IntegrationAccounts_ListByResourceGroup",
         "description": "Gets a list of integration accounts by resource group.",
+        "x-ms-examples": {
+          "List IntegrationAccounts by resourcegroup name": {
+            "$ref": "../examples/IntegrationAccountsListByResourceGroup.json"
+          }
+        },
         "parameters": [
           {
             "$ref": "#/parameters/subscriptionId"
@@ -1236,6 +1457,11 @@
         ],
         "operationId": "IntegrationAccounts_Get",
         "description": "Gets an integration account.",
+        "x-ms-examples": {
+          "Get IntegrationAccount by name": {
+            "$ref": "../examples/IntegrationAccountsGet.json"
+          }
+        },
         "parameters": [
           {
             "$ref": "#/parameters/subscriptionId"
@@ -1273,6 +1499,11 @@
         ],
         "operationId": "IntegrationAccounts_CreateOrUpdate",
         "description": "Creates or updates an integration account.",
+        "x-ms-examples": {
+          "Create or update an IntegrationAccount": {
+            "$ref": "../examples/IntegrationAccountsCreateOrUpdate.json"
+          }
+        },
         "parameters": [
           {
             "$ref": "#/parameters/subscriptionId"
@@ -1325,6 +1556,11 @@
         ],
         "operationId": "IntegrationAccounts_Update",
         "description": "Updates an integration account.",
+        "x-ms-examples": {
+          "Patch an IntegrationAccount": {
+            "$ref": "../examples/IntegrationAccountsUpdate.json"
+          }
+        },
         "parameters": [
           {
             "$ref": "#/parameters/subscriptionId"
@@ -1371,6 +1607,11 @@
         ],
         "operationId": "IntegrationAccounts_Delete",
         "description": "Deletes an integration account.",
+        "x-ms-examples": {
+          "Delete an IntegrationAccount": {
+            "$ref": "../examples/IntegrationAccountsDelete.json"
+          }
+        },
         "parameters": [
           {
             "$ref": "#/parameters/subscriptionId"
@@ -1410,6 +1651,11 @@
         ],
         "operationId": "IntegrationAccounts_GetCallbackUrl",
         "description": "Gets the integration account callback URL.",
+        "x-ms-examples": {
+          "Get IntegrationAccount callback URL": {
+            "$ref": "../examples/IntegrationAccountsGetCallbackUrl.json"
+          }
+        },
         "parameters": [
           {
             "$ref": "#/parameters/subscriptionId"
@@ -1458,6 +1704,11 @@
         ],
         "operationId": "Schemas_ListByIntegrationAccounts",
         "description": "Gets a list of integration account schemas.",
+        "x-ms-examples": {
+          "Get schemas by integration account name": {
+            "$ref": "../examples/SchemasListByIntegrationAccounts.json"
+          }
+        },
         "parameters": [
           {
             "$ref": "#/parameters/subscriptionId"
@@ -1516,6 +1767,11 @@
         ],
         "operationId": "Schemas_Get",
         "description": "Gets an integration account schema.",
+        "x-ms-examples": {
+          "Get schema by name": {
+            "$ref": "../examples/SchemasGet.json"
+          }
+        },
         "parameters": [
           {
             "$ref": "#/parameters/subscriptionId"
@@ -1560,6 +1816,11 @@
         ],
         "operationId": "Schemas_CreateOrUpdate",
         "description": "Creates or updates an integration account schema.",
+        "x-ms-examples": {
+          "Create or update schema": {
+            "$ref": "../examples/SchemasCreateOrUpdate.json"
+          }
+        },
         "parameters": [
           {
             "$ref": "#/parameters/subscriptionId"
@@ -1619,6 +1880,11 @@
         ],
         "operationId": "Schemas_Delete",
         "description": "Deletes an integration account schema.",
+        "x-ms-examples": {
+          "Delete a schema by name": {
+            "$ref": "../examples/SchemasDelete.json"
+          }
+        },
         "parameters": [
           {
             "$ref": "#/parameters/subscriptionId"
@@ -1665,6 +1931,11 @@
         ],
         "operationId": "Maps_ListByIntegrationAccounts",
         "description": "Gets a list of integration account maps.",
+        "x-ms-examples": {
+          "Get maps by integration account name": {
+            "$ref": "../examples/MapsListByIntegrationAccounts.json"
+          }
+        },
         "parameters": [
           {
             "$ref": "#/parameters/subscriptionId"
@@ -1723,6 +1994,11 @@
         ],
         "operationId": "Maps_Get",
         "description": "Gets an integration account map.",
+        "x-ms-examples": {
+          "Get map by name": {
+            "$ref": "../examples/MapsGet.json"
+          }
+        },
         "parameters": [
           {
             "$ref": "#/parameters/subscriptionId"
@@ -1767,6 +2043,11 @@
         ],
         "operationId": "Maps_CreateOrUpdate",
         "description": "Creates or updates an integration account map.",
+        "x-ms-examples": {
+          "Create or update a map": {
+            "$ref": "../examples/MapsCreateOrUpdate.json"
+          }
+        },
         "parameters": [
           {
             "$ref": "#/parameters/subscriptionId"
@@ -1826,6 +2107,11 @@
         ],
         "operationId": "Maps_Delete",
         "description": "Deletes an integration account map.",
+        "x-ms-examples": {
+          "Delete a map": {
+            "$ref": "../examples/MapsDelete.json"
+          }
+        },
         "parameters": [
           {
             "$ref": "#/parameters/subscriptionId"
@@ -1872,6 +2158,11 @@
         ],
         "operationId": "Partners_ListByIntegrationAccounts",
         "description": "Gets a list of integration account partners.",
+        "x-ms-examples": {
+          "Get partners by integrationaccount name": {
+            "$ref": "../examples/PartnersListByIntegrationAccounts.json"
+          }
+        },
         "parameters": [
           {
             "$ref": "#/parameters/subscriptionId"
@@ -1930,6 +2221,11 @@
         ],
         "operationId": "Partners_Get",
         "description": "Gets an integration account partner.",
+        "x-ms-examples": {
+          "Get partner by name": {
+            "$ref": "../examples/PartnersGet.json"
+          }
+        },
         "parameters": [
           {
             "$ref": "#/parameters/subscriptionId"
@@ -1974,6 +2270,11 @@
         ],
         "operationId": "Partners_CreateOrUpdate",
         "description": "Creates or updates an integration account partner.",
+        "x-ms-examples": {
+          "Create or update a partner": {
+            "$ref": "../examples/PartnersCreateOrUpdate.json"
+          }
+        },
         "parameters": [
           {
             "$ref": "#/parameters/subscriptionId"
@@ -2033,6 +2334,11 @@
         ],
         "operationId": "Partners_Delete",
         "description": "Deletes an integration account partner.",
+        "x-ms-examples": {
+          "Delete a partner": {
+            "$ref": "../examples/PartnersDelete.json"
+          }
+        },
         "parameters": [
           {
             "$ref": "#/parameters/subscriptionId"
@@ -2079,6 +2385,11 @@
         ],
         "operationId": "Agreements_ListByIntegrationAccounts",
         "description": "Gets a list of integration account agreements.",
+        "x-ms-examples": {
+          "Get agreements by integrationaccount name": {
+            "$ref": "../examples/AgreementsListByIntegrationAccounts.json"
+          }
+        },
         "parameters": [
           {
             "$ref": "#/parameters/subscriptionId"
@@ -2137,6 +2448,11 @@
         ],
         "operationId": "Agreements_Get",
         "description": "Gets an integration account agreement.",
+        "x-ms-examples": {
+          "Get agreement by name": {
+            "$ref": "../examples/AgreementsGet.json"
+          }
+        },
         "parameters": [
           {
             "$ref": "#/parameters/subscriptionId"
@@ -2181,6 +2497,11 @@
         ],
         "operationId": "Agreements_CreateOrUpdate",
         "description": "Creates or updates an integration account agreement.",
+        "x-ms-examples": {
+          "Create or update an agreement": {
+            "$ref": "../examples/AgreementsCreateOrUpdate.json"
+          }
+        },
         "parameters": [
           {
             "$ref": "#/parameters/subscriptionId"
@@ -2240,6 +2561,11 @@
         ],
         "operationId": "Agreements_Delete",
         "description": "Deletes an integration account agreement.",
+        "x-ms-examples": {
+          "Delete an agreement": {
+            "$ref": "../examples/AgreementsDelete.json"
+          }
+        },
         "parameters": [
           {
             "$ref": "#/parameters/subscriptionId"
@@ -2286,6 +2612,11 @@
         ],
         "operationId": "Certificates_ListByIntegrationAccounts",
         "description": "Gets a list of integration account certificates.",
+        "x-ms-examples": {
+          "Get certificates by integrationAccount name": {
+            "$ref": "../examples/CertificatesListByIntegrationAccounts.json"
+          }
+        },
         "parameters": [
           {
             "$ref": "#/parameters/subscriptionId"
@@ -2336,6 +2667,11 @@
         ],
         "operationId": "Certificates_Get",
         "description": "Gets an integration account certificate.",
+        "x-ms-examples": {
+          "Get certificate by name": {
+            "$ref": "../examples/CertificatesGet.json"
+          }
+        },
         "parameters": [
           {
             "$ref": "#/parameters/subscriptionId"
@@ -2380,6 +2716,11 @@
         ],
         "operationId": "Certificates_CreateOrUpdate",
         "description": "Creates or updates an integration account certificate.",
+        "x-ms-examples": {
+          "Create or update a certificate": {
+            "$ref": "../examples/CertificatesCreateOrUpdate.json"
+          }
+        },
         "parameters": [
           {
             "$ref": "#/parameters/subscriptionId"
@@ -2439,6 +2780,11 @@
         ],
         "operationId": "Certificates_Delete",
         "description": "Deletes an integration account certificate.",
+        "x-ms-examples": {
+          "Delete a certificate": {
+            "$ref": "../examples/CertificatesDelete.json"
+          }
+        },
         "parameters": [
           {
             "$ref": "#/parameters/subscriptionId"
@@ -2484,8 +2830,10 @@
           "IntegrationAccountSessions"
         ],
         "operationId": "Sessions_ListByIntegrationAccounts",
-        "x-ms-examples": { 
-          "SessionsListByIntegrationAccounts": { "$ref": "../examples/SessionsListByIntegrationAccounts.json" } 
+        "x-ms-examples": {
+          "SessionsListByIntegrationAccounts": {
+            "$ref": "../examples/SessionsListByIntegrationAccounts.json"
+          }
         },
         "description": "Gets a list of integration account sessions.",
         "parameters": [
@@ -2531,6 +2879,12 @@
             "schema": {
               "$ref": "#/definitions/IntegrationAccountSessionListResult"
             }
+          },
+          "default": {
+            "description": "Logic error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
           }
         },
         "x-ms-pageable": {
@@ -2545,8 +2899,10 @@
           "IntegrationAccountSessions"
         ],
         "operationId": "Sessions_Get",
-        "x-ms-examples": { 
-          "SessionsGet": { "$ref": "../examples/SessionsGet.json" } 
+        "x-ms-examples": {
+          "SessionsGet": {
+            "$ref": "../examples/SessionsGet.json"
+          }
         },
         "description": "Gets an integration account session.",
         "parameters": [
@@ -2585,8 +2941,8 @@
               "$ref": "#/definitions/IntegrationAccountSession"
             }
           },
-          "404": {
-            "description": "Session not found.",
+          "default": {
+            "description": "Logic error response describing why the operation failed.",
             "schema": {
               "$ref": "#/definitions/ErrorResponse"
             }
@@ -2598,8 +2954,10 @@
           "IntegrationAccountSessions"
         ],
         "operationId": "Sessions_CreateOrUpdate",
-        "x-ms-examples": { 
-          "SessionsCreateOrUpdate": { "$ref": "../examples/SessionsCreateOrUpdate.json" } 
+        "x-ms-examples": {
+          "SessionsCreateOrUpdate": {
+            "$ref": "../examples/SessionsCreateOrUpdate.json"
+          }
         },
         "description": "Creates or updates an integration account session.",
         "parameters": [
@@ -2652,6 +3010,12 @@
             "schema": {
               "$ref": "#/definitions/IntegrationAccountSession"
             }
+          },
+          "default": {
+            "description": "Logic error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
           }
         }
       },
@@ -2660,8 +3024,10 @@
           "IntegrationAccountSessions"
         ],
         "operationId": "Sessions_Delete",
-        "x-ms-examples": { 
-          "SessionsDelete": { "$ref": "../examples/SessionsDelete.json" } 
+        "x-ms-examples": {
+          "SessionsDelete": {
+            "$ref": "../examples/SessionsDelete.json"
+          }
         },
         "description": "Deletes an integration account session.",
         "parameters": [
@@ -2699,6 +3065,12 @@
           },
           "204": {
             "description": "No Content"
+          },
+          "default": {
+            "description": "Logic error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
           }
         }
       }
@@ -2708,7 +3080,6 @@
         "tags": [
           "Operations"
         ],
-
         "description": "Lists all of the available Logic REST API operations.",
         "operationId": "ListOperations",
         "parameters": [
@@ -2782,7 +3153,7 @@
     },
     "Object": {
       "type": "object",
-      "properties": { }
+      "properties": {}
     },
     "ResourceReference": {
       "type": "object",
@@ -3103,9 +3474,57 @@
           "type": "string",
           "readOnly": true,
           "description": "Gets the workflow trigger callback URL."
+        },
+        "method": {
+          "type": "string",
+          "readOnly": true,
+          "description": "Gets the workflow trigger callback URL HTTP method."
+        },
+        "basePath": {
+          "type": "string",
+          "readOnly": true,
+          "description": "Gets the workflow trigger callback URL base path."
+        },
+        "relativePath": {
+          "type": "string",
+          "readOnly": true,
+          "description": "Gets the workflow trigger callback URL relative path."
+        },
+        "relativePathParameters": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "description": "Gets the workflow trigger callback URL relative path parameters."
+        },
+        "queries": {
+          "$ref": "#/definitions/WorkflowTriggerListCallbackUrlQueries",
+          "description": "Gets the workflow trigger callback URL query parameters."
         }
       },
       "description": "The workflow trigger callback URL."
+    },
+    "WorkflowTriggerListCallbackUrlQueries": {
+      "type": "object",
+      "properties": {
+        "api-version": {
+          "type": "string",
+          "description": "The api version."
+        },
+        "sp": {
+          "type": "string",
+          "description": "The SAS permissions."
+        },
+        "sv": {
+          "type": "string",
+          "description": "The SAS version."
+        },
+        "sig": {
+          "type": "string",
+          "description": "The SAS signature."
+        }
+      },
+      "description": "Gets the workflow trigger callback URL query parameters."
     },
     "WorkflowTriggerHistory": {
       "type": "object",
@@ -3419,6 +3838,13 @@
           "$ref": "#/definitions/Object",
           "readOnly": true,
           "description": "Gets the tracked properties."
+        },
+        "retryHistory": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/RetryHistory"
+          },
+          "description": "Gets the retry histories."
         }
       },
       "description": "The workflow run action properties."
@@ -3590,6 +4016,48 @@
         }
       },
       "description": "The content hash."
+    },
+    "RegenerateActionParameter": {
+      "type": "object",
+      "properties": {
+        "keyType": {
+          "$ref": "#/definitions/KeyType",
+          "description": "The key type."
+        }
+      },
+      "description": "The access key regenerate action content."
+    },
+    "RetryHistory": {
+      "type": "object",
+      "properties": {
+        "startTime": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Gets the start time."
+        },
+        "endTime": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Gets the end time."
+        },
+        "code": {
+          "type": "string",
+          "description": "Gets the status code."
+        },
+        "clientRequestId": {
+          "type": "string",
+          "description": "Gets the client request Id."
+        },
+        "serviceRequestId": {
+          "type": "string",
+          "description": "Gets the service request Id."
+        },
+        "error": {
+          "$ref": "#/definitions/ErrorResponse",
+          "description": "Gets the error response."
+        }
+      },
+      "description": "The retry history."
     },
     "Correlation": {
       "type": "object",
@@ -3947,8 +4415,7 @@
     },
     "IntegrationAccountProperties": {
       "type": "object",
-      "properties": {
-      }
+      "properties": {}
     },
     "IntegrationAccountListResult": {
       "type": "object",
@@ -4048,14 +4515,12 @@
         "metadata": {
           "type": "object",
           "description": "The metadata.",
-          "properties": {
-          }
+          "properties": {}
         },
         "content": {
-          "type": "object",
+          "type": "string",
           "description": "The content.",
-          "properties": {
-          }
+          "properties": {}
         },
         "contentType": {
           "type": "string",
@@ -4162,10 +4627,9 @@
           "description": "The changed time."
         },
         "content": {
-          "type": "object",
+          "type": "string",
           "description": "The content.",
-          "properties": {
-          }
+          "properties": {}
         },
         "contentType": {
           "type": "string",
@@ -4179,8 +4643,7 @@
         "metadata": {
           "type": "object",
           "description": "The metadata.",
-          "properties": {
-          }
+          "properties": {}
         }
       },
       "description": "The integration account map."
@@ -4314,8 +4777,7 @@
         "metadata": {
           "type": "object",
           "description": "The metadata.",
-          "properties": {
-          }
+          "properties": {}
         },
         "content": {
           "$ref": "#/definitions/PartnerContent",
@@ -4451,8 +4913,7 @@
         "metadata": {
           "type": "object",
           "description": "The metadata.",
-          "properties": {
-          }
+          "properties": {}
         },
         "agreementType": {
           "$ref": "#/definitions/AgreementType",
@@ -4497,15 +4958,15 @@
     "AgreementContent": {
       "type": "object",
       "properties": {
-        "AS2": {
+        "aS2": {
           "$ref": "#/definitions/AS2AgreementContent",
           "description": "The AS2 agreement content."
         },
-        "X12": {
+        "x12": {
           "$ref": "#/definitions/X12AgreementContent",
           "description": "The X12 agreement content."
         },
-        "Edifact": {
+        "edifact": {
           "$ref": "#/definitions/EdifactAgreementContent",
           "description": "The EDIFACT agreement content."
         }
@@ -4749,6 +5210,10 @@
         "enableNrrForInboundMdn": {
           "type": "boolean",
           "description": "The value indicating whether to enable NRR for inbound MDN."
+        },
+        "sha2AlgorithmFormat": {
+          "type": "string",
+          "description": "The Sha2 algorithm format. Valid values are Sha2, ShaHashSize, ShaHyphenHashSize, Sha2UnderscoreHashSize."
         }
       },
       "description": "The AS2 agreement security settings."
@@ -4803,6 +5268,10 @@
         "encryptionAlgorithm": {
           "$ref": "#/definitions/EncryptionAlgorithm",
           "description": "The encryption algorithm."
+        },
+        "signingAlgorithm": {
+          "$ref": "#/definitions/SigningAlgorithm",
+          "description": "The signing algorithm."
         }
       },
       "description": "The AS2 agreement validation settings."
@@ -4986,8 +5455,8 @@
         "interchangeControlNumberValidityDays",
         "checkDuplicateGroupControlNumber",
         "checkDuplicateTransactionSetControlNumber",
-        "validateEDITypes",
-        "validateXSDTypes",
+        "validateEdiTypes",
+        "validateXsdTypes",
         "allowLeadingAndTrailingSpacesAndZeroes",
         "trimLeadingAndTrailingSpacesAndZeroes",
         "trailingSeparatorPolicy"
@@ -5014,11 +5483,11 @@
           "type": "boolean",
           "description": "The value indicating whether to check for duplicate transaction set control number."
         },
-        "validateEDITypes": {
+        "validateEdiTypes": {
           "type": "boolean",
           "description": "The value indicating whether to Whether to validate EDI types."
         },
-        "validateXSDTypes": {
+        "validateXsdTypes": {
           "type": "boolean",
           "description": "The value indicating whether to Whether to validate XSD types."
         },
@@ -5435,8 +5904,8 @@
       "type": "object",
       "required": [
         "messageId",
-        "validateEDITypes",
-        "validateXSDTypes",
+        "validateEdiTypes",
+        "validateXsdTypes",
         "allowLeadingAndTrailingSpacesAndZeroes",
         "validateCharacterSet",
         "trimLeadingAndTrailingSpacesAndZeroes",
@@ -5447,11 +5916,11 @@
           "type": "string",
           "description": "The message id on which the validation settings has to be applied."
         },
-        "validateEDITypes": {
+        "validateEdiTypes": {
           "type": "boolean",
           "description": "The value indicating whether to validate EDI types."
         },
-        "validateXSDTypes": {
+        "validateXsdTypes": {
           "type": "boolean",
           "description": "The value indicating whether to validate XSD types."
         },
@@ -5678,6 +6147,21 @@
         "modelAsString": false
       }
     },
+    "SigningAlgorithm": {
+      "type": "string",
+      "enum": [
+        "NotSpecified",
+        "Default",
+        "SHA1",
+        "SHA2256",
+        "SHA2384",
+        "SHA2512"
+      ],
+      "x-ms-enum": {
+        "name": "SigningAlgorithm",
+        "modelAsString": true
+      }
+    },
     "TrailingSeparatorPolicy": {
       "type": "string",
       "enum": [
@@ -5814,8 +6298,8 @@
         "interchangeControlNumberValidityDays",
         "checkDuplicateGroupControlNumber",
         "checkDuplicateTransactionSetControlNumber",
-        "validateEDITypes",
-        "validateXSDTypes",
+        "validateEdiTypes",
+        "validateXsdTypes",
         "allowLeadingAndTrailingSpacesAndZeroes",
         "trimLeadingAndTrailingSpacesAndZeroes",
         "trailingSeparatorPolicy"
@@ -5842,11 +6326,11 @@
           "type": "boolean",
           "description": "The value indicating whether to check for duplicate transaction set control number."
         },
-        "validateEDITypes": {
+        "validateEdiTypes": {
           "type": "boolean",
           "description": "The value indicating whether to Whether to validate EDI types."
         },
-        "validateXSDTypes": {
+        "validateXsdTypes": {
           "type": "boolean",
           "description": "The value indicating whether to Whether to validate XSD types."
         },
@@ -6271,7 +6755,6 @@
         "receiverApplicationQualifier": {
           "type": "string",
           "description": "The receiver application qualifier."
-
         },
         "receiverApplicationId": {
           "type": "string",
@@ -6358,8 +6841,8 @@
       "required": [
         "messageId",
         "enforceCharacterSet",
-        "validateEDITypes",
-        "validateXSDTypes",
+        "validateEdiTypes",
+        "validateXsdTypes",
         "allowLeadingAndTrailingSpacesAndZeroes",
         "trailingSeparatorPolicy",
         "trimLeadingAndTrailingSpacesAndZeroes"
@@ -6373,11 +6856,11 @@
           "type": "boolean",
           "description": "The value indicating whether to validate character Set."
         },
-        "validateEDITypes": {
+        "validateEdiTypes": {
           "type": "boolean",
           "description": "The value indicating whether to validate EDI types."
         },
-        "validateXSDTypes": {
+        "validateXsdTypes": {
           "type": "boolean",
           "description": "The value indicating whether to validate XSD types."
         },
@@ -6554,8 +7037,7 @@
         "metadata": {
           "type": "object",
           "description": "The metadata.",
-          "properties": {
-          }
+          "properties": {}
         },
         "key": {
           "$ref": "#/definitions/KeyVaultKeyReference",
@@ -6722,7 +7204,7 @@
       }
     },
     "ErrorResponse": {
-       "description": "Error reponse indicates Logic service is not able to process the incoming request. The error property contains the error details.",
+      "description": "Error reponse indicates Logic service is not able to process the incoming request. The error property contains the error details.",
       "type": "object",
       "properties": {
         "error": {
