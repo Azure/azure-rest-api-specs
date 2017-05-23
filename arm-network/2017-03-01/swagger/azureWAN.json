@@ -62,9 +62,6 @@
                         "schema": {
                             "$ref": "#/definitions/WAN"
                         }
-                    },
-                    "404": {
-                        "description": "WAN Doesn't exist"
                     }
                 }
             },
@@ -111,7 +108,8 @@
                     "400": {
                         "description": "Bad Request. Failed to validate."
                     }
-                }
+                },
+                "x-ms-long-running-operation": true
             },
             "patch": {
                 "operationId": "AzureWAN_Update",
@@ -156,7 +154,8 @@
                     "400": {
                         "description": "Bad Request. Failed to validate."
                     }
-                }
+                },
+                "x-ms-long-running-operation": true
             },
             "delete": {
                 "operationId": "AzureWAN_Delete",
@@ -192,7 +191,8 @@
                     "400": {
                         "description": "Bad Request. Failed to validate."
                     }
-                }
+                },
+                "x-ms-long-running-operation": true
             }
         },
         "/subscriptions/{subscriptionId}/resourceGroup/{resourceGroupName}/providers/Microsoft.Network/WANs": {
@@ -216,9 +216,6 @@
                         "schema": {
                             "$ref": "#/definitions/ListWANsResult"
                         }
-                    },
-                    "204": {
-                        "description": "No WANs exist in the resource group."
                     }
                 },
                 "x-ms-pageable": {
@@ -244,9 +241,6 @@
                         "schema": {
                             "$ref": "#/definitions/ListWANsResult"
                         }
-                    },
-                    "204": {
-                        "description": "No WANs exist in the subscription."
                     }
                 },
                 "x-ms-pageable": {
@@ -283,9 +277,6 @@
                         "schema": {
                             "$ref": "#/definitions/VpnSite"
                         }
-                    },
-                    "404": {
-                        "description": "VpnSite doesn't exist"
                     }
                 }
             },
@@ -332,7 +323,8 @@
                     "400": {
                         "description": "Bad Request. Failed to validate."
                     }
-                }
+                },
+                "x-ms-long-running-operation": true
             },
             "patch": {
                 "operationId": "AzureVpnSite_Update",
@@ -377,7 +369,8 @@
                     "400": {
                         "description": "Bad Request. Failed to validate."
                     }
-                }
+                },
+                "x-ms-long-running-operation": true
             },
             "delete": {
                 "operationId": "AzureVpnSite_Delete",
@@ -413,7 +406,8 @@
                     "400": {
                         "description": "VpnSite is still referenced by a vpnConnection. Cannot delete."
                     }
-                }
+                },
+                "x-ms-long-running-operation": true
             }
         },
         "/subscriptions/{subscriptionId}/resourceGroup/{resourceGroupName}/providers/Microsoft.Network/vpnSites": {
@@ -437,9 +431,6 @@
                         "schema": {
                             "$ref": "#/definitions/ListVpnSitesResult"
                         }
-                    },
-                    "204": {
-                        "description": "No vpnSites exist in the resource group."
                     }
                 },
                 "x-ms-pageable": {
@@ -465,9 +456,6 @@
                         "schema": {
                             "$ref": "#/definitions/ListVpnSitesResult"
                         }
-                    },
-                    "204": {
-                        "description": "No VpnSites exist in the subscription."
                     }
                 },
                 "x-ms-pageable": {
@@ -488,11 +476,7 @@
                         "$ref": "#/parameters/ResourceGroupParameter"
                     },
                     {
-                        "name": "hubName",
-                        "in": "path",
-                        "required": true,
-                        "type": "string",
-                        "description": "The name of the Hub being retrieved."
+                        "$ref": "#/parameters/HubParameter"
                     },
                     {
                         "$ref": "#/parameters/ApiVersionParameter"
@@ -504,9 +488,6 @@
                         "schema": {
                             "$ref": "#/definitions/Hub"
                         }
-                    },
-                    "404": {
-                        "description": "Hub doesn't exist"
                     }
                 }
             },
@@ -521,11 +502,7 @@
                         "$ref": "#/parameters/ResourceGroupParameter"
                     },
                     {
-                        "name": "hubName",
-                        "in": "path",
-                        "required": true,
-                        "type": "string",
-                        "description": "The name of the hub being created or updated."
+                        "$ref": "#/parameters/HubParameter"
                     },
                     {
                         "$ref": "#/parameters/ApiVersionParameter"
@@ -553,7 +530,8 @@
                     "400": {
                         "description": "Bad Request. Failed to validate."
                     }
-                }
+                },
+                "x-ms-long-running-operation": true
             },
             "patch": {
                 "operationId": "AzureHub_Update",
@@ -566,11 +544,7 @@
                         "$ref": "#/parameters/ResourceGroupParameter"
                     },
                     {
-                        "name": "hubName",
-                        "in": "path",
-                        "required": true,
-                        "type": "string",
-                        "description": "The name of the Hub being updated."
+                        "$ref": "#/parameters/HubParameter"
                     },
                     {
                         "$ref": "#/parameters/ApiVersionParameter"
@@ -598,7 +572,8 @@
                     "400": {
                         "description": "Bad Request. Failed to validate."
                     }
-                }
+                },
+                "x-ms-long-running-operation": true
             },
             "delete": {
                 "operationId": "AzureHub_Delete",
@@ -611,11 +586,7 @@
                         "$ref": "#/parameters/ResourceGroupParameter"
                     },
                     {
-                        "name": "hubName",
-                        "in": "path",
-                        "required": true,
-                        "type": "string",
-                        "description": "The name of the Hub being deleted."
+                        "$ref": "#/parameters/HubParameter"
                     },
                     {
                         "$ref": "#/parameters/ApiVersionParameter"
@@ -634,7 +605,8 @@
                     "400": {
                         "description": "Hub is still referenced by a WAN. Cannot delete."
                     }
-                }
+                },
+                "x-ms-long-running-operation": true
             }
         },
         "/subscriptions/{subscriptionId}/resourceGroup/{resourceGroupName}/providers/Microsoft.Network/hubs": {
@@ -658,9 +630,6 @@
                         "schema": {
                             "$ref": "#/definitions/ListHubsResult"
                         }
-                    },
-                    "204": {
-                        "description": "No hubs exist in the resource group."
                     }
                 },
                 "x-ms-pageable": {
@@ -686,9 +655,6 @@
                         "schema": {
                             "$ref": "#/definitions/ListHubsResult"
                         }
-                    },
-                    "204": {
-                        "description": "No hubs exist in the subscription."
                     }
                 },
                 "x-ms-pageable": {
@@ -724,9 +690,6 @@
                         "schema": {
                             "$ref": "#/definitions/ScalableVpnGateway"
                         }
-                    },
-                    "404": {
-                        "description": "Scalable vpn gateway doesn't exist."
                     }
                 }
             },
@@ -772,7 +735,8 @@
                     "400": {
                         "description": "Bad Request. Failed to validate."
                     }
-                }
+                },
+                "x-ms-long-running-operation": true
             },
             "patch": {
                 "operationId": "AzureScalableVpnGateway_Update",
@@ -816,7 +780,8 @@
                     "400": {
                         "description": "Bad Request. Failed to validate."
                     }
-                }
+                },
+                "x-ms-long-running-operation": true
             },
             "delete": {
                 "operationId": "AzureScalableVpnGateway_Delete",
@@ -851,7 +816,8 @@
                     "400": {
                         "description": "Cannot delete."
                     }
-                }
+                },
+                "x-ms-long-running-operation": true
             }
         },
         "/subscriptions/{subscriptionId}/resourceGroup/{resourceGroupName}/providers/Microsoft.Network/hubs/{hubName}/scalableVpnGateways/{gatewayName}/vpnConnections/{connectionName}": {
@@ -884,9 +850,6 @@
                         "schema": {
                             "$ref": "#/definitions/VpnConnection"
                         }
-                    },
-                    "404": {
-                        "description": "Vpn Connection doesn't exist"
                     }
                 }
             },
@@ -935,7 +898,8 @@
                     "400": {
                         "description": "Bad Request. Failed to validate."
                     }
-                }
+                },
+                "x-ms-long-running-operation": true
             },
             "patch": {
                 "operationId": "AzureVpnConnectionToScalableVpnGateway_Update",
@@ -982,7 +946,8 @@
                     "400": {
                         "description": "Bad Request. Failed to validate."
                     }
-                }
+                },
+                "x-ms-long-running-operation": true
             },
             "delete": {
                 "operationId": "AzureVpnConnectionToScalableVpnGateway_Delete",
@@ -1020,13 +985,14 @@
                     "400": {
                         "description": "Cannot delete."
                     }
-                }
+                },
+                "x-ms-long-running-operation": true
             }
         },
         "/subscriptions/{subscriptionId}/providers/Microsoft.Network/hubs/{hubName}/scalableVpnGateways/{gatewayName}/vpnConnections": {
             "get": {
-                "operationId": "AzureVpnConnectionsForGateway_ListAll",
-                "description": "Retrieves the details of all vpn connections for a particular scalable vpn gateway.",
+                "operationId": "AzureVpnConnectionsForGateway_ListByScalableVpnGateway",
+                "description": "Retrieves all vpn connections for a particular scalable vpn gateway.",
                 "parameters": [
                     {
                         "$ref": "#/parameters/SubscriptionIdParameter"
@@ -1044,13 +1010,10 @@
                 ],
                 "responses": {
                     "200": {
-                        "description": "Request successful. Returns the details of all the Vpn connections to the gateway.",
+                        "description": "Request successful. Returns all Vpn connections for a scalable vpn gateway.",
                         "schema": {
                             "$ref": "#/definitions/ListVpnConnectionsResult"
                         }
-                    },
-                    "204": {
-                        "description": "No vpn connections exist for this gateway."
                     }
                 },
                 "x-ms-pageable": {
@@ -1088,9 +1051,6 @@
                         "schema": {
                             "$ref": "#/definitions/VpnClinetConfiguration"
                         }
-                    },
-                    "404": {
-                        "description": "Vpn client configuration doesn't exist"
                     }
                 }
             },
@@ -1139,7 +1099,8 @@
                     "400": {
                         "description": "Bad Request. Failed to validate."
                     }
-                }
+                },
+                "x-ms-long-running-operation": true
             },
             "patch": {
                 "operationId": "AzureWANVpnClientConfiguration_Update",
@@ -1186,11 +1147,11 @@
                     "400": {
                         "description": "Bad Request. Failed to validate."
                     }
-                }
+                },
+                "x-ms-long-running-operation": true
             },
             "delete": {
                 "operationId": "AzureWANVpnClientConfiguration_Delete",
-
                 "description": "Deletes a vpn clinet configuration.",
                 "parameters": [
                     {
@@ -1225,13 +1186,14 @@
                     "400": {
                         "description": "Cannot delete."
                     }
-                }
+                },
+                "x-ms-long-running-operation": true
             }
         },
         "/subscriptions/{subscriptionId}/resourceGroup/{resourceGroupName}/providers/Microsoft.Network/hubs/{hubName}/scalableVpnGateways/{gatewayName}/vpnClientConfigurations/{configName}/VpnClientPackage": {
             "post": {
                 "operationId": "AzureWAN_DownloadVpnClientPackage",
-                "description": "Downloads a Vpn Client package to configure their Vpn Client to connect to the scalableVpnGateway.",
+                "description": "Returns the SAS url for downloading a Vpn Client package to configure Vpn Client to connect to the scalableVpnGateway.",
                 "parameters": [
                     {
                         "$ref": "#/parameters/SubscriptionIdParameter"
@@ -1266,7 +1228,8 @@
                     "400": {
                         "description": "Bad Request!"
                     }
-                }
+                },
+                "x-ms-long-running-operation": true
             }
         },
         "/subscriptions/{subscriptionId}/resourceGroup/{resourceGroupName}/providers/Microsoft.Network/hubs/{hubName}/scalableExpressRouteGateways/{gatewayName}": {
@@ -1296,9 +1259,6 @@
                         "schema": {
                             "$ref": "#/definitions/ScalableExpressRouteGateway"
                         }
-                    },
-                    "404": {
-                        "description": "Scalable ExpressRoute gateway doesn't exist"
                     }
                 }
             },
@@ -1344,7 +1304,8 @@
                     "400": {
                         "description": "Bad Request. Failed to validate."
                     }
-                }
+                },
+                "x-ms-long-running-operation": true
             },
             "patch": {
                 "operationId": "AzureWANScalableExpressRouteGateway_Update",
@@ -1388,7 +1349,8 @@
                     "400": {
                         "description": "Bad Request. Failed to validate."
                     }
-                }
+                },
+                "x-ms-long-running-operation": true
             },
             "delete": {
                 "operationId": "AzureWANScalableExpressRouteGateway_Delete",
@@ -1423,7 +1385,8 @@
                     "400": {
                         "description": "Cannot delete."
                     }
-                }
+                },
+                "x-ms-long-running-operation": true
             }
         },
         "/subscriptions/{subscriptionId}/resourceGroup/{resourceGroupName}/providers/Microsoft.Network/hubs/{hubName}/scalableExpressRouteGateways/{gatewayName}/expressRouteConnections/{connectionName}": {
@@ -1456,9 +1419,6 @@
                         "schema": {
                             "$ref": "#/definitions/ExpressRouteConnection"
                         }
-                    },
-                    "404": {
-                        "description": "ExpressRoute Connection doesn't exist"
                     }
                 }
             },
@@ -1507,7 +1467,8 @@
                     "400": {
                         "description": "Bad Request. Failed to validate."
                     }
-                }
+                },
+                "x-ms-long-running-operation": true
             },
             "patch": {
                 "operationId": "AzureWANExpressRouteConnection_Update",
@@ -1554,7 +1515,8 @@
                     "400": {
                         "description": "Bad Request. Failed to validate."
                     }
-                }
+                },
+                "x-ms-long-running-operation": true
             },
             "delete": {
                 "operationId": "AzureWANExpressRouteConnection_Delete",
@@ -1592,7 +1554,8 @@
                     "400": {
                         "description": "Cannot delete."
                     }
-                }
+                },
+                "x-ms-long-running-operation": true
             }
         },
         "/subscriptions/{subscriptionId}/resourceGroup/{resourceGroupName}/providers/Microsoft.Network/hubs/{hubName}/scalableExpressRouteGateways/{gatewayName}/expressRouteConnections": {
@@ -1622,9 +1585,6 @@
                         "schema": {
                             "$ref": "#/definitions/ListExpressRouteConnectionsResult"
                         }
-                    },
-                    "204": {
-                        "description": "No ExpressRoute connections exist for this gateway."
                     }
                 },
                 "x-ms-pageable": {
@@ -1659,9 +1619,6 @@
                         "schema": {
                             "$ref": "#/definitions/VNetPeeringConnection"
                         }
-                    },
-                    "404": {
-                        "description": "VNetPeering Connection doesn't exist"
                     }
                 }
             },
@@ -1707,7 +1664,8 @@
                     "400": {
                         "description": "Bad Request. Failed to validate."
                     }
-                }
+                },
+                "x-ms-long-running-operation": true
             },
             "patch": {
                 "operationId": "AzureWANVNetPeeringConnection_Update",
@@ -1751,7 +1709,8 @@
                     "400": {
                         "description": "Bad Request. Failed to validate."
                     }
-                }
+                },
+                "x-ms-long-running-operation": true
             },
             "delete": {
                 "operationId": "AzureWANVNetPeeringConnection_Delete",
@@ -1786,7 +1745,8 @@
                     "400": {
                         "description": "Cannot delete."
                     }
-                }
+                },
+                "x-ms-long-running-operation": true
             }
         },
         "/subscriptions/{subscriptionId}/resourceGroup/{resourceGroupName}/providers/Microsoft.Network/hubs/{hubName}/vNetPeeringConnections": {
@@ -1813,9 +1773,6 @@
                         "schema": {
                             "$ref": "#/definitions/ListVNetPeeringConnectionsResult"
                         }
-                    },
-                    "204": {
-                        "description": "No VNetPeering connections exist."
                     }
                 },
                 "x-ms-pageable": {
@@ -1852,9 +1809,6 @@
                         "schema": {
                             "$ref": "#/definitions/FirewallPolicy"
                         }
-                    },
-                    "404": {
-                        "description": "FirewallPolicy doesn't exist"
                     }
                 }
             },
@@ -1901,7 +1855,8 @@
                     "400": {
                         "description": "Bad Request. Failed to validate."
                     }
-                }
+                },
+                "x-ms-long-running-operation": true
             },
             "patch": {
                 "operationId": "AzureWANFirewallPolicy_Update",
@@ -1946,7 +1901,8 @@
                     "400": {
                         "description": "Bad Request. Failed to validate."
                     }
-                }
+                },
+                "x-ms-long-running-operation": true
             },
             "delete": {
                 "operationId": "AzureWANFirewallPolicy_Delete",
@@ -1982,7 +1938,8 @@
                     "400": {
                         "description": "Firewall Policy is still referenced by a WAN. Cannot delete."
                     }
-                }
+                },
+                "x-ms-long-running-operation": true
             }
         },
         "/subscriptions/{subscriptionId}/resourceGroup/{resourceGroupName}/providers/Microsoft.Network/firewallPolicies": {
@@ -2006,9 +1963,6 @@
                         "schema": {
                             "$ref": "#/definitions/ListFirewallPoliciesResult"
                         }
-                    },
-                    "204": {
-                        "description": "No firewall policies exist in the resource group."
                     }
                 },
                 "x-ms-pageable": {
@@ -2034,9 +1988,6 @@
                         "schema": {
                             "$ref": "#/definitions/ListFirewallPoliciesResult"
                         }
-                    },
-                    "204": {
-                        "description": "No firewall policies exist in the subscription."
                     }
                 },
                 "x-ms-pageable": {
