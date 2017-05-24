@@ -419,6 +419,13 @@
             "description": "The maximum number of record sets to return. If not specified, returns up to 100 record sets."
           },
           {
+            "name": "$recordsetnamesuffix",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "description": "The suffix label of the record set name that has to be used to filter the record set enumerations. If this parameter is specified, Enumeration will return only records that end with .<recordSetNameSuffix>"
+          },
+          {
             "$ref": "#/parameters/ApiVersionParameter"
           },
           {
@@ -473,6 +480,13 @@
             "type": "integer",
             "format": "int32",
             "description": "The maximum number of record sets to return. If not specified, returns up to 100 record sets."
+          },
+          {
+            "name": "$recordsetnamesuffix",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "description": "The suffix label of the record set name that has to be used to filter the record set enumerations. If this parameter is specified, Enumeration will return only records that end with .<recordSetNameSuffix>"
           },
           {
             "$ref": "#/parameters/ApiVersionParameter"

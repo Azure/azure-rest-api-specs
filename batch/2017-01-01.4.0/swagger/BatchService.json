@@ -246,6 +246,9 @@
           "nextLinkName": "odata.nextLink"
         },
         "operationId": "Pool_ListUsageMetrics",
+        "x-ms-examples": {
+          "Pool list usage metrics": { "$ref": "../examples/PoolListUsageMetrics.json" }
+        },
         "summary": "Lists the usage metrics, aggregated by pool across individual time intervals, for the specified account.",
         "description": "If you do not specify a $filter clause including a poolId, the response includes all pools that existed in the account in the time range of the returned aggregation intervals.",
         "x-ms-request-id": "request-id",
@@ -395,6 +398,9 @@
           "nextLinkName": "odata.nextLink"
         },
         "operationId": "Account_ListNodeAgentSkus",
+        "x-ms-examples": {
+          "Account list node agent skus": { "$ref": "../examples/AccountListNodeAgentSkus.json" }
+        },
         "summary": "Lists all node agent SKUs supported by the Azure Batch service.",
         "x-ms-request-id": "request-id",
         "parameters": [
@@ -516,6 +522,9 @@
           "Pools"
         ],
         "operationId": "Pool_GetAllLifetimeStatistics",
+        "x-ms-examples": {
+          "Pool get lifetime statistics": { "$ref": "../examples/PoolGetLifetimeStatistics.json" }
+        },
         "summary": "Gets lifetime summary statistics for all of the pools in the specified account.",
         "description": "Statistics are aggregated across all pools that have ever existed in the account, from account creation to the last update time of the statistics.",
         "x-ms-request-id": "request-id",
@@ -613,6 +622,9 @@
           "Jobs"
         ],
         "operationId": "Job_GetAllLifetimeStatistics",
+        "x-ms-examples": {
+          "Job get lifetime statistics": { "$ref": "../examples/JobGetLifetimeStatistics.json" }
+        },
         "summary": "Gets lifetime summary statistics for all of the jobs in the specified account.",
         "description": "Statistics are aggregated across all jobs that have ever existed in the account, from account creation to the last update time of the statistics.",
         "x-ms-request-id": "request-id",
@@ -710,11 +722,14 @@
           "Certificates"
         ],
         "operationId": "Certificate_Add",
+        "x-ms-examples": {
+          "Certificate add": { "$ref": "../examples/CertificateAdd.json" }
+        },
         "summary": "Adds a certificate to the specified account.",
         "x-ms-request-id": "request-id",
         "parameters": [
           {
-            "name": "Certificate",
+            "name": "certificate",
             "in": "body",
             "description": "The certificate to be added.",
             "required": true,
@@ -817,6 +832,9 @@
           "nextLinkName": "odata.nextLink"
         },
         "operationId": "Certificate_List",
+        "x-ms-examples": {
+          "Certificate list": { "$ref": "../examples/CertificateList.json" }
+        },
         "summary": "Lists all of the certificates that have been added to the specified account.",
         "x-ms-request-id": "request-id",
         "parameters": [
@@ -948,6 +966,9 @@
           "Certificates"
         ],
         "operationId": "Certificate_CancelDeletion",
+        "x-ms-examples": {
+          "Certificate cancel delete": { "$ref": "../examples/CertificateCancelDelete.json" }
+        },
         "summary": "Cancels a failed deletion of a certificate from the specified account.",
         "description": "If you try to delete a certificate that is being used by a pool or compute node, the status of the certificate changes to deleteFailed. If you decide that you want to continue using the certificate, you can use this operation to set the status of the certificate back to active. If you intend to delete the certificate, you do not need to run this operation after the deletion failed. You must make sure that the certificate is not being used by any resources, and then you can try again to delete the certificate.",
         "x-ms-request-id": "request-id",
@@ -1060,6 +1081,9 @@
           "Certificates"
         ],
         "operationId": "Certificate_Delete",
+        "x-ms-examples": {
+          "Certificate delete": { "$ref": "../examples/CertificateDelete.json" }
+        },
         "summary": "Deletes a certificate from the specified account.",
         "description": "You cannot delete a certificate if a resource (pool or compute node) is using it. Before you can delete a certificate, you must therefore make sure that the certificate is not associated with any existing pools, the certificate is not installed on any compute nodes (even if you remove a certificate from a pool, it is not removed from existing compute nodes in that pool until they restart), and no running tasks depend on the certificate. If you try to delete a certificate that is in use, the deletion fails. The certificate status changes to deleteFailed. You can use Cancel Delete Certificate to set the status back to active if you decide that you want to continue using the certificate.",
         "x-ms-request-id": "request-id",
@@ -1166,6 +1190,9 @@
           "Certificates"
         ],
         "operationId": "Certificate_Get",
+        "x-ms-examples": {
+          "Certificate get": { "$ref": "../examples/CertificateGet.json" }
+        },
         "description": "Gets information about the specified certificate.",
         "x-ms-request-id": "request-id",
         "parameters": [
@@ -1286,6 +1313,9 @@
           "Files"
         ],
         "operationId": "File_DeleteFromTask",
+        "x-ms-examples": {
+          "File delete from task": { "$ref": "../examples/FileDeleteFromTask.json" }
+        },
         "summary": "Deletes the specified task file from the compute node where the task ran.",
         "x-ms-request-id": "request-id",
         "parameters": [
@@ -1567,6 +1597,9 @@
           "Files"
         ],
         "operationId": "File_GetPropertiesFromTask",
+        "x-ms-examples": {
+          "File get properties from task": { "$ref": "../examples/FileGetPropertiesFromTask.json" }
+        },
         "description": "Gets the properties of the specified task file.",
         "x-ms-request-id": "request-id",
         "parameters": [
@@ -1729,6 +1762,9 @@
           "Files"
         ],
         "operationId": "File_DeleteFromComputeNode",
+        "x-ms-examples": {
+          "File delete from node": { "$ref": "../examples/FileDeleteFromNode.json" }
+        },
         "summary": "Deletes the specified task file from the compute node.",
         "x-ms-request-id": "request-id",
         "parameters": [
@@ -1837,7 +1873,7 @@
           "Files"
         ],
         "operationId": "File_GetFromComputeNode",
-        "description": "Returns the content of the specified task file.",
+        "description": "Returns the content of the specified compute node file.",
         "x-ms-request-id": "request-id",
         "parameters": [
           {
@@ -1859,7 +1895,7 @@
             "in": "path",
             "required": true,
             "type": "string",
-            "description": "The path to the task file that you want to get the content of."
+            "description": "The path to the compute node file that you want to get the content of."
           },
           {
             "name": "timeout",
@@ -2010,6 +2046,9 @@
           "Files"
         ],
         "operationId": "File_GetPropertiesFromComputeNode",
+        "x-ms-examples": {
+          "File get properties from node": { "$ref": "../examples/FileGetPropertiesFromNode.json" }
+        },
         "description": "Gets the properties of the specified compute node file.",
         "x-ms-request-id": "request-id",
         "parameters": [
@@ -2175,6 +2214,9 @@
           "nextLinkName": "odata.nextLink"
         },
         "operationId": "File_ListFromTask",
+        "x-ms-examples": {
+          "File list from task": { "$ref": "../examples/FileListFromTask.json" }
+        },
         "summary": "Lists the files in a task's directory on its compute node.",
         "x-ms-request-id": "request-id",
         "parameters": [
@@ -2320,6 +2362,9 @@
           "nextLinkName": "odata.nextLink"
         },
         "operationId": "File_ListFromComputeNode",
+        "x-ms-examples": {
+          "File list from node": { "$ref": "../examples/FileListFromNode.json" }
+        },
         "summary": "Lists all of the files in task directories on the specified compute node.",
         "x-ms-request-id": "request-id",
         "parameters": [
@@ -2605,6 +2650,9 @@
           "JobSchedules"
         ],
         "operationId": "JobSchedule_Delete",
+        "x-ms-examples": {
+          "JobSchedule delete": { "$ref": "../examples/JobScheduleDelete.json" }
+        },
         "summary": "Deletes a job schedule from the specified account.",
         "description": "When you delete a job schedule, this also deletes all jobs and tasks under that schedule. When tasks are deleted, all the files in their working directories on the compute nodes are also deleted (the retention period is ignored). The job schedule statistics are no longer accessible once the job schedule is deleted, though they are still counted towards account lifetime statistics.",
         "x-ms-request-id": "request-id",
@@ -2735,6 +2783,9 @@
           "JobSchedules"
         ],
         "operationId": "JobSchedule_Get",
+        "x-ms-examples": {
+          "JobSchedule get": { "$ref": "../examples/JobScheduleGet.json" }
+        },
         "description": "Gets information about the specified job schedule.",
         "x-ms-request-id": "request-id",
         "parameters": [
@@ -2898,6 +2949,9 @@
           "JobSchedules"
         ],
         "operationId": "JobSchedule_Patch",
+        "x-ms-examples": {
+          "JobSchedule patch": { "$ref": "../examples/JobSchedulePatch.json" }
+        },
         "summary": "Updates the properties of the specified job schedule.",
         "description": "This replaces only the job schedule properties specified in the request. For example, if the schedule property is not specified with this request, then the Batch service will keep the existing schedule. Changes to a job schedule only impact jobs created by the schedule after the update has taken place; currently running jobs are unaffected.",
         "x-ms-request-id": "request-id",
@@ -3052,6 +3106,9 @@
           "JobSchedules"
         ],
         "operationId": "JobSchedule_Update",
+        "x-ms-examples": {
+          "JobSchedule update": { "$ref": "../examples/JobScheduleUpdate.json" }
+        },
         "summary": "Updates the properties of the specified job schedule.",
         "description": "This fully replaces all the updateable properties of the job schedule. For example, if the schedule property is not specified with this request, then the Batch service will remove the existing schedule. Changes to a job schedule only impact jobs created by the schedule after the update has taken place; currently running jobs are unaffected.",
         "x-ms-request-id": "request-id",
@@ -3208,6 +3265,9 @@
           "JobSchedules"
         ],
         "operationId": "JobSchedule_Disable",
+        "x-ms-examples": {
+          "JobSchedule disable": { "$ref": "../examples/JobScheduleDisable.json" }
+        },
         "summary": "Disables a job schedule.",
         "description": "No new jobs will be created until the job schedule is enabled again.",
         "x-ms-request-id": "request-id",
@@ -3355,6 +3415,9 @@
           "JobSchedules"
         ],
         "operationId": "JobSchedule_Enable",
+        "x-ms-examples": {
+          "JobSchedule enable": { "$ref": "../examples/JobScheduleEnable.json" }
+        },
         "summary": "Enables a job schedule.",
         "x-ms-request-id": "request-id",
         "parameters": [
@@ -3501,6 +3564,9 @@
           "JobSchedules"
         ],
         "operationId": "JobSchedule_Terminate",
+        "x-ms-examples": {
+          "JobSchedule terminate": { "$ref": "../examples/JobScheduleTerminate.json" }
+        },
         "summary": "Terminates a job schedule.",
         "x-ms-request-id": "request-id",
         "parameters": [
@@ -3647,6 +3713,10 @@
           "JobSchedules"
         ],
         "operationId": "JobSchedule_Add",
+        "x-ms-examples": {
+          "Add a basic JobSchedule": { "$ref": "../examples/JobScheduleAdd_Basic.json" },
+          "Add a complex JobScheduleAdd": { "$ref": "../examples/JobScheduleAdd_Complex.json" }
+        },
         "summary": "Adds a job schedule to the specified account.",
         "x-ms-request-id": "request-id",
         "parameters": [
@@ -3663,7 +3733,7 @@
             }
           },
           {
-            "name": "CloudJobSchedule",
+            "name": "cloudJobSchedule",
             "in": "body",
             "description": "The job schedule to be added.",
             "required": true,
@@ -3754,6 +3824,9 @@
           "nextLinkName": "odata.nextLink"
         },
         "operationId": "JobSchedule_List",
+        "x-ms-examples": {
+          "JobSchedule list": { "$ref": "../examples/JobScheduleList.json" }
+        },
         "summary": "Lists all of the job schedules in the specified account.",
         "x-ms-request-id": "request-id",
         "parameters": [
@@ -4025,6 +4098,9 @@
           "Jobs"
         ],
         "operationId": "Job_Get",
+        "x-ms-examples": {
+          "Job get": { "$ref": "../examples/JobGet.json" }
+        },
         "summary": "Gets information about the specified job.",
         "x-ms-request-id": "request-id",
         "parameters": [
@@ -4188,6 +4264,9 @@
           "Jobs"
         ],
         "operationId": "Job_Patch",
+        "x-ms-examples": {
+          "Job patch": { "$ref": "../examples/JobPatch.json" }
+        },
         "summary": "Updates the properties of the specified job.",
         "description": "This replaces only the job properties specified in the request. For example, if the job has constraints, and a request does not specify the constraints element, then the job keeps the existing constraints.",
         "x-ms-request-id": "request-id",
@@ -4342,6 +4421,9 @@
           "Jobs"
         ],
         "operationId": "Job_Update",
+        "x-ms-examples": {
+          "Job update": { "$ref": "../examples/JobUpdate.json" }
+        },
         "summary": "Updates the properties of the specified job.",
         "description": "This fully replaces all the updateable properties of the job. For example, if the job has constraints associated with it and if constraints is not specified with this request, then the Batch service will remove the existing constraints.",
         "x-ms-request-id": "request-id",
@@ -4498,6 +4580,9 @@
           "Jobs"
         ],
         "operationId": "Job_Disable",
+        "x-ms-examples": {
+          "Job disable": { "$ref": "../examples/JobDisable.json" }
+        },
         "summary": "Disables the specified job, preventing new tasks from running.",
         "description": "The Batch Service immediately moves the job to the disabling state. Batch then uses the disableTasks parameter to determine what to do with the currently running tasks of the job. The job remains in the disabling state until the disable operation is completed and all tasks have been dealt with according to the disableTasks option; the job then moves to the disabled state. No new tasks are started under the job until it moves back to active state. If you try to disable a job that is in any state other than active, disabling, or disabled, the request fails with status code 409.",
         "x-ms-request-id": "request-id",
@@ -4654,6 +4739,9 @@
           "Jobs"
         ],
         "operationId": "Job_Enable",
+        "x-ms-examples": {
+          "Job enable": { "$ref": "../examples/JobEnable.json" }
+        },
         "summary": "Enables the specified job, allowing new tasks to run.",
         "description": "When you call this API, the Batch service sets a disabled job to the enabling state. After the this operation is completed, the job moves to the active state, and scheduling of new tasks under the job resumes. The Batch service does not allow a task to remain in the active state for more than 7 days. Therefore, if you enable a job containing active tasks which were added more than 7 days ago, those tasks will not run.",
         "x-ms-request-id": "request-id",
@@ -4801,6 +4889,9 @@
           "Jobs"
         ],
         "operationId": "Job_Terminate",
+        "x-ms-examples": {
+          "Job terminate": { "$ref": "../examples/JobTerminate.json" }
+        },
         "summary": "Terminates the specified job, marking it as completed.",
         "description": "When a Terminate Job request is received, the Batch service sets the job to the terminating state. The Batch service then terminates any active or running tasks associated with the job, and runs any required Job Release tasks. The job then moves into the completed state.",
         "x-ms-request-id": "request-id",
@@ -4957,12 +5048,16 @@
           "Jobs"
         ],
         "operationId": "Job_Add",
+        "x-ms-examples": {
+          "Add a basic job": { "$ref": "../examples/JobAdd_Basic.json" },
+          "Add a complex job": { "$ref": "../examples/JobAdd_Complex.json" }
+        },
         "summary": "Adds a job to the specified account.",
         "description": "The Batch service supports two ways to control the work done as part of a job. In the first approach, the user specifies a Job Manager task. The Batch service launches this task when it is ready to start the job. The Job Manager task controls all other tasks that run under this job, by using the Task APIs. In the second approach, the user directly controls the execution of tasks under an active job, by using the Task APIs. Also note: when naming jobs, avoid including sensitive information such as user names or secret project names. This information may appear in telemetry logs accessible to Microsoft Support engineers.",
         "x-ms-request-id": "request-id",
         "parameters": [
           {
-            "name": "Job",
+            "name": "job",
             "in": "body",
             "description": "The job to be added.",
             "required": true,
@@ -5065,6 +5160,9 @@
           "nextLinkName": "odata.nextLink"
         },
         "operationId": "Job_List",
+        "x-ms-examples": {
+          "Job list": { "$ref": "../examples/JobList.json" }
+        },
         "summary": "Lists all of the jobs in the specified account.",
         "x-ms-request-id": "request-id",
         "parameters": [
@@ -5360,6 +5458,9 @@
           "nextLinkName": "odata.nextLink"
         },
         "operationId": "Job_ListPreparationAndReleaseTaskStatus",
+        "x-ms-examples": {
+          "Job list preparation and release task status": { "$ref": "../examples/JobListPreparationAndReleaseTaskStatus.json" }
+        },
         "summary": "Lists the execution status of the Job Preparation and Job Release task for the specified job across the compute nodes where the job has run.",
         "description": "This API returns the Job Preparation and Job Release task status on all compute nodes that have run the Job Preparation or Job Release task. This includes nodes which have since been removed from the pool. ",
         "x-ms-request-id": "request-id",
@@ -5499,12 +5600,16 @@
           "Pools"
         ],
         "operationId": "Pool_Add",
+        "x-ms-examples": {
+          "Add a CloudServiceConfiguration pool": { "$ref": "../examples/PoolAdd_CloudServiceConfiguration.json" },
+          "Add a VirtualMachineConfiguration pool": { "$ref": "../examples/PoolAdd_VirtualMachineConfiguration.json" }
+        },
         "summary": "Adds a pool to the specified account.",
         "description": "When naming pools, avoid including sensitive information such as user names or secret project names. This information may appear in telemetry logs accessible to Microsoft Support engineers.",
         "x-ms-request-id": "request-id",
         "parameters": [
           {
-            "name": "Pool",
+            "name": "pool",
             "in": "body",
             "description": "The pool to be added.",
             "required": true,
@@ -5607,6 +5712,9 @@
           "nextLinkName": "odata.nextLink"
         },
         "operationId": "Pool_List",
+        "x-ms-examples": {
+          "Pool list": { "$ref": "../examples/PoolList_Basic.json" }
+        },
         "summary": "Lists all of the pools in the specified account.",
         "x-ms-request-id": "request-id",
         "parameters": [
@@ -5748,6 +5856,9 @@
           "Pools"
         ],
         "operationId": "Pool_Delete",
+        "x-ms-examples": {
+          "Pool delete": { "$ref": "../examples/PoolDelete.json" }
+        },
         "summary": "Deletes a pool from the specified account.",
         "description": "When you request that a pool be deleted, the following actions occur: the pool state is set to deleting; any ongoing resize operation on the pool are stopped; the Batch service starts resizing the pool to zero nodes; any tasks running on existing nodes are terminated and requeued (as if a resize pool operation had been requested with the default requeue option); finally, the pool is removed from the system. Because running tasks are requeued, the user can rerun these tasks by updating their job to target a different pool. The tasks can then run on the new pool. If you want to override the requeue behavior, then you should call resize pool explicitly to shrink the pool to zero size before deleting the pool. If you call an Update, Patch or Delete API on a pool in the deleting state, it will fail with HTTP status code 409 with error code PoolBeingDeleted.",
         "x-ms-request-id": "request-id",
@@ -6021,6 +6132,9 @@
           "Pools"
         ],
         "operationId": "Pool_Get",
+        "x-ms-examples": {
+          "Pool get": { "$ref": "../examples/PoolGet_Basic.json" }
+        },
         "description": "Gets information about the specified pool.",
         "x-ms-request-id": "request-id",
         "parameters": [
@@ -6444,6 +6558,9 @@
           "Pools"
         ],
         "operationId": "Pool_EnableAutoScale",
+        "x-ms-examples": {
+          "Pool enable autoscale": { "$ref": "../examples/PoolEnableAutoscale.json" }
+        },
         "summary": "Enables automatic scaling for a pool.",
         "description": "You cannot enable automatic scaling on a pool if a resize operation is in progress on the pool. If automatic scaling of the pool is currently disabled, you must specify a valid autoscale formula as part of the request. If automatic scaling of the pool is already enabled, you may specify a new autoscale formula and/or a new evaluation interval. You cannot call this API for the same pool more than once every 30 seconds.",
         "x-ms-request-id": "request-id",
@@ -6600,6 +6717,9 @@
           "Pools"
         ],
         "operationId": "Pool_EvaluateAutoScale",
+        "x-ms-examples": {
+          "Pool evaluate autoscale": { "$ref": "../examples/PoolEvaluateAutoscale.json" }
+        },
         "summary": "Gets the result of evaluating an automatic scaling formula on the pool.",
         "description": "This API is primarily for validating an autoscale formula, as it simply returns the result without applying the formula to the pool.",
         "x-ms-request-id": "request-id",
@@ -6717,6 +6837,9 @@
           "Pools"
         ],
         "operationId": "Pool_Resize",
+        "x-ms-examples": {
+          "Pool resize": { "$ref": "../examples/PoolResize.json" }
+        },
         "summary": "Changes the number of compute nodes that are assigned to a pool.",
         "description": "You can only resize a pool when its allocation state is steady. If the pool is already resizing, the request fails with status code 409. When you resize a pool, the pool's allocation state changes from steady to resizing. You cannot resize pools which are configured for automatic scaling. If you try to do this, the Batch service returns an error 409. If you resize a pool downwards, the Batch service chooses which nodes to remove. To remove specific nodes, use the pool remove nodes API instead.",
         "x-ms-request-id": "request-id",
@@ -6873,6 +6996,9 @@
           "Pools"
         ],
         "operationId": "Pool_StopResize",
+        "x-ms-examples": {
+          "Pool stop resize": { "$ref": "../examples/PoolStopResize.json" }
+        },
         "summary": "Stops an ongoing resize operation on the pool.",
         "description": "This does not restore the pool to its previous state before the resize operation: it only stops any further changes being made, and the pool maintains its current state. A resize operation need not be an explicit resize pool request; this API can also be used to halt the initial sizing of the pool when it is created.",
         "x-ms-request-id": "request-id",
@@ -7020,6 +7146,9 @@
           "Pools"
         ],
         "operationId": "Pool_UpdateProperties",
+        "x-ms-examples": {
+          "Pool update": { "$ref": "../examples/PoolUpdate.json" }
+        },
         "summary": "Updates the properties of the specified pool.",
         "description": "This fully replaces all the updateable properties of the pool. For example, if the pool has a start task associated with it and if start task is not specified with this request, then the Batch service will remove the existing start task.",
         "x-ms-request-id": "request-id",
@@ -7290,6 +7419,9 @@
           "ComputeNodes"
         ],
         "operationId": "Pool_RemoveNodes",
+        "x-ms-examples": {
+          "Pool remove nodes": { "$ref": "../examples/PoolRemoveNodes.json" }
+        },
         "summary": "Removes compute nodes from the specified pool.",
         "description": "This operation can only run when the allocation state of the pool is steady. When this operation runs, the allocation state changes from steady to resizing.",
         "x-ms-request-id": "request-id",
@@ -7446,6 +7578,10 @@
           "Tasks"
         ],
         "operationId": "Task_Add",
+        "x-ms-examples": {
+          "Add a basic task": { "$ref": "../examples/TaskAdd_Basic.json" },
+          "Add a task with exit conditions": { "$ref": "../examples/TaskAdd_ExitConditions.json" }
+        },
         "summary": "Adds a task to the specified job.",
         "x-ms-request-id": "request-id",
         "parameters": [
@@ -7560,6 +7696,9 @@
           "nextLinkName": "odata.nextLink"
         },
         "operationId": "Task_List",
+        "x-ms-examples": {
+          "Task list": { "$ref": "../examples/TaskList.json" }
+        },
         "summary": "Lists all of the tasks that are associated with the specified job.",
         "description": "For multi-instance tasks, information such as affinityId, executionInfo and nodeInfo refer to the primary task. Use the list subtasks API to retrieve information about subtasks.",
         "x-ms-request-id": "request-id",
@@ -7709,6 +7848,10 @@
           "Tasks"
         ],
         "operationId": "Task_AddCollection",
+        "x-ms-examples": {
+          "Add a basic collection of tasks": { "$ref": "../examples/TaskAddCollection_Basic.json" },
+          "Add a complex collection of tasks": { "$ref": "../examples/TaskAddCollection_Complex.json" }
+        },
         "summary": "Adds a collection of tasks to the specified job.",
         "description": "Note that each task must have a unique ID. The Batch service may not return the results for each task in the same order the tasks were submitted in this request. If the server times out or the connection is closed during the request, the request may have been partially or fully processed, or not at all. In such cases, the user should re-issue the request. Note that it is up to the user to correctly handle failures when re-issuing a request. For example, you should use the same task ids during a retry so that if the prior operation succeeded, the retry will not create extra tasks unexpectedly.",
         "x-ms-request-id": "request-id",
@@ -7811,6 +7954,9 @@
           "Tasks"
         ],
         "operationId": "Task_Delete",
+        "x-ms-examples": {
+          "Task delete": { "$ref": "../examples/TaskDelete.json" }
+        },
         "summary": "Deletes a task from the specified job.",
         "description": "When a task is deleted, all of the files in its directory on the compute node where it ran are also deleted (regardless of the retention time). For multi-instance tasks, the delete task operation applies synchronously to the primary task; subtasks and their files are then deleted asynchronously in the background.",
         "x-ms-request-id": "request-id",
@@ -7948,6 +8094,9 @@
           "Tasks"
         ],
         "operationId": "Task_Get",
+        "x-ms-examples": {
+          "Task get": { "$ref": "../examples/TaskGet.json" }
+        },
         "summary": "Gets information about the specified task.",
         "description": "For multi-instance tasks, information such as affinityId, executionInfo and nodeInfo refer to the primary task. Use the list subtasks API to retrieve information about subtasks.",
         "x-ms-request-id": "request-id",
@@ -8123,6 +8272,9 @@
           "Tasks"
         ],
         "operationId": "Task_Update",
+        "x-ms-examples": {
+          "Task update": { "$ref": "../examples/TaskUpdate.json" }
+        },
         "description": "Updates the properties of the specified task.",
         "x-ms-request-id": "request-id",
         "parameters": [
@@ -8285,6 +8437,9 @@
           "Tasks"
         ],
         "operationId": "Task_ListSubtasks",
+        "x-ms-examples": {
+          "Task list subtasks": { "$ref": "../examples/TaskListSubtasks.json" }
+        },
         "summary": "Lists all of the subtasks that are associated with the specified multi-instance task.",
         "description": "If the task is not a multi-instance task then this returns an empty collection.",
         "x-ms-request-id": "request-id",
@@ -8406,6 +8561,9 @@
           "Tasks"
         ],
         "operationId": "Task_Terminate",
+        "x-ms-examples": {
+          "Task terminate": { "$ref": "../examples/TaskTerminate.json" }
+        },
         "summary": "Terminates the specified task.",
         "description": "When the task has been terminated, it moves to the completed state. For multi-instance tasks, the terminate task operation applies synchronously to the primary task; subtasks are then terminated asynchronously in the background.",
         "x-ms-request-id": "request-id",
@@ -8560,6 +8718,9 @@
           "Tasks"
         ],
         "operationId": "Task_Reactivate",
+        "x-ms-examples": {
+          "Task reactivate": { "$ref": "../examples/TaskReactivate.json" }
+        },
         "summary": "Reactivates the specified task.",
         "description": "Reactivation makes a task eligible to be retried again up to its maximum retry count. The task's state is changed to active. As the task is no longer in the completed state, any previous exit code or scheduling error is no longer available after reactivation. This will fail for tasks that are not completed or that previously completed successfully (with an exit code of 0). Additionally, this will fail if the job has completed (or is terminating or deleting).",
         "x-ms-request-id": "request-id",
@@ -8714,6 +8875,9 @@
           "ComputeNodes"
         ],
         "operationId": "ComputeNode_AddUser",
+        "x-ms-examples": {
+          "Node add user": { "$ref": "../examples/NodeAddUser.json" }
+        },
         "summary": "Adds a user account to the specified compute node.",
         "description": "You can add a user account to a node only when it is in the idle or running state.",
         "x-ms-request-id": "request-id",
@@ -8733,7 +8897,7 @@
             "description": "The ID of the machine on which you want to create a user account."
           },
           {
-            "name": "User",
+            "name": "user",
             "in": "body",
             "description": "The user account to be created.",
             "required": true,
@@ -8835,6 +8999,9 @@
           "ComputeNodes"
         ],
         "operationId": "ComputeNode_DeleteUser",
+        "x-ms-examples": {
+          "Node delete user": { "$ref": "../examples/NodeDeleteUser.json" }
+        },
         "summary": "Deletes a user account from the specified compute node.",
         "description": "You can delete a user account to a node only when it is in the idle or running state.",
         "x-ms-request-id": "request-id",
@@ -8937,6 +9104,9 @@
           "ComputeNodes"
         ],
         "operationId": "ComputeNode_UpdateUser",
+        "x-ms-examples": {
+          "Node update user": { "$ref": "../examples/NodeUpdateUser.json" }
+        },
         "summary": "Updates the password or expiration time of a user account on the specified compute node.",
         "description": "This operation replaces of all the updateable properties of the account. For example, if the expiryTime element is not specified, the current value is replaced with the default value, not left unmodified. You can update a user account on a node only when it is in the idle or running state.",
         "x-ms-request-id": "request-id",
@@ -9065,6 +9235,9 @@
           "ComputeNodes"
         ],
         "operationId": "ComputeNode_Get",
+        "x-ms-examples": {
+          "Node get": { "$ref": "../examples/NodeGet_Basic.json" }
+        },
         "summary": "Gets information about the specified compute node.",
         "x-ms-request-id": "request-id",
         "parameters": [
@@ -9185,6 +9358,9 @@
           "ComputeNodes"
         ],
         "operationId": "ComputeNode_Reboot",
+        "x-ms-examples": {
+          "Node reboot": { "$ref": "../examples/NodeReboot.json" }
+        },
         "summary": "Restarts the specified compute node.",
         "description": "You can restart a node only if it is in an idle or running state.",
         "x-ms-request-id": "request-id",
@@ -9306,6 +9482,9 @@
           "ComputeNodes"
         ],
         "operationId": "ComputeNode_Reimage",
+        "x-ms-examples": {
+          "Node reimage": { "$ref": "../examples/NodeReimage.json" }
+        },
         "summary": "Reinstalls the operating system on the specified compute node.",
         "description": "You can reinstall the operating system on a node only if it is in an idle or running state. This API can be invoked only on pools created with the cloud service configuration property.",
         "x-ms-request-id": "request-id",
@@ -9427,6 +9606,9 @@
           "ComputeNodes"
         ],
         "operationId": "ComputeNode_DisableScheduling",
+        "x-ms-examples": {
+          "Node disable scheduling": { "$ref": "../examples/NodeDisableScheduling.json" }
+        },
         "summary": "Disables task scheduling on the specified compute node.",
         "x-ms-request-id": "request-id",
         "parameters": [
@@ -9547,6 +9729,9 @@
           "ComputeNodes"
         ],
         "operationId": "ComputeNode_EnableScheduling",
+        "x-ms-examples": {
+          "Node enable scheduling": { "$ref": "../examples/NodeEnableScheduling.json" }
+        },
         "summary": "Enables task scheduling on the specified compute node.",
         "x-ms-request-id": "request-id",
         "parameters": [
@@ -9658,6 +9843,9 @@
           "ComputeNodes"
         ],
         "operationId": "ComputeNode_GetRemoteLoginSettings",
+        "x-ms-examples": {
+          "Node get remote login settings": { "$ref": "../examples/NodeGetRemoteLoginSettings.json" }
+        },
         "summary": "Gets the settings required for remote login to a compute node.",
         "description": "Before you can remotely login to a node using the remote login settings, you must create a user account on the node. This API can be invoked only on pools created with the virtual machine configuration property.",
         "x-ms-request-id": "request-id",
@@ -9883,6 +10071,9 @@
           "nextLinkName": "odata.nextLink"
         },
         "operationId": "ComputeNode_List",
+        "x-ms-examples": {
+          "Node list": { "$ref": "../examples/NodeList.json" }
+        },
         "summary": "Lists the compute nodes in the specified pool.",
         "x-ms-request-id": "request-id",
         "parameters": [

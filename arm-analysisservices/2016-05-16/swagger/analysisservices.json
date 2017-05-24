@@ -186,8 +186,13 @@
           "200": {
             "description": "OK",
             "schema": { "$ref": "#/definitions/AnalysisServicesServer" }
+          },
+          "202": {
+            "description": "Accepted",
+            "schema": { "$ref": "#/definitions/AnalysisServicesServer" }
           }
-        }
+        },
+        "x-ms-long-running-operation": true
       }
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AnalysisServices/servers/{serverName}/suspend": {
@@ -475,6 +480,9 @@
         "name": {
           "type": "string",
           "enum": [
+            "B1",
+            "B2",
+            "S0",
             "S1",
             "S2",
             "S4",
@@ -484,19 +492,20 @@
             "name": "SkuName",
             "modelAsString": true
           },
-          "description": "Name of the SKU level for the server being provisioned. Possible values are: 'S1', 'S2', 'S4', and 'D1'."
+          "description": "Name of the SKU level for the server being provisioned."
         },
         "tier": {
           "type": "string",
           "enum": [
             "Development",
+            "Basic",
             "Standard"
           ],
           "x-ms-enum": {
             "name": "SkuTier",
             "modelAsString": true
           },
-          "description": "The name of the Azure pricing tier to which the SKU applies. Possible values are: 'Development' and 'Standard'."
+          "description": "The name of the Azure pricing tier to which the SKU applies."
         }
       },
       "required": [

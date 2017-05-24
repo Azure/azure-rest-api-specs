@@ -35,7 +35,7 @@
   "paths": {
     "/subscriptions/{subscriptionId}/resourcegroups/{resourceGroupName}/providers/microsoft.insights/alertrules/{ruleName}": {
       "put": {
-        "description": "Creates or updates an alert rule.\r\nRequest method: PUT\t\tRequest URI: https://management.azure.com/subscriptions/{subscription-id}/resourceGroups/{resource-group-name}/providers/microsoft.insights/alertRules/{alert-rule-name}?api-version={api-version}",
+        "description": "Creates or updates an alert rule.",
         "tags": [
           "AlertRules"
         ],
@@ -142,6 +142,9 @@
               }
             }
           }
+        },
+        "x-ms-examples": {
+            "Create or update an alert rule": { "$ref": "../examples/createOrUpdateAlertRule.json" }
         }
       },
       "delete": {
@@ -171,6 +174,9 @@
           "200": {
             "description": "Successful request to delete an alert rule"
           }
+        },
+        "x-ms-examples": {
+            "Delete an alert rule": { "$ref": "../examples/deleteAlertRule.json" }
         }
       },
       "get": {
@@ -230,6 +236,9 @@
               }
             }
           }
+        },
+        "x-ms-examples": {
+            "Get an alert rule": { "$ref": "../examples/getAlertRule.json" }
         }
       }
     },
@@ -332,6 +341,9 @@
         },
         "x-ms-pageable": {
           "nextLinkName": null
+        },
+        "x-ms-examples": {
+            "List alert rules": { "$ref": "../examples/listAlertRule.json" }
         }
       }
     }
@@ -518,6 +530,7 @@
         "failedLocationCount": {
           "type": "integer",
           "format": "int32",
+          "minimum": 0,
           "description": "the number of locations that must fail to activate the alert."
         }
       },
