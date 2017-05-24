@@ -1,6 +1,6 @@
 # OpenAPI Specifications Authoring - Automated Guidelines #
 
-This document lists the set of automated rules that can be validated against OpenAPI(swagger) spec by running [validation tools](https://github.com/Azure/adx-documentation-pr/wiki/OpenAPI-Validation-tools). Please visit [here for Manual guidelines](swagger-authoring-manual-guidelines.md).
+This document lists the set of automated rules that can be validated against OpenAPI(swagger) spec by running [validation tools](https://github.com/Azure/adx-documentation-pr/wiki/OpenAPI-Validation-tools). Please visit [here for Manual guidelines](openapi-authoring-manual-guidelines.md).
 
 It is a requirement to conform to all manual and automated rules with severity "Error" before sending a pull request for review.
 
@@ -32,8 +32,8 @@ We request OpenAPI(Swagger) spec authoring be assigned to engineers who have an
 | --- | --- | --- | --- |
 | [M3012](#M3012)	| [APIVersionPattern](#M3012)	| API Version must be in the format: yyyy-MM-dd, optionally followed by -preview, -alpha, -beta, -rc, -privatepreview.	|  Error |
 | M3019	| ARMResourcePropertiesBag	| Top level property names should not be repeated inside the properties bag for ARM resource '{0}'. Properties [{1}] conflict with ARM top level properties. Please rename these. | Error |
-| M3016	| BodyPropertiesNamesCamelCase | Property named: "{0}", must follow camelCase style. Example: "{1}". | Error |
-| M3016	| DefinitionsPropertiesNamesCamelCase  | Property named: "{0}", for definition: "{1}" must follow camelCase style. Example: "{2}". | Error |
+| [M3016](#M3016)	| [BodyPropertiesNamesCamelCase](#M3016) | Property named: "{0}", must follow camelCase style. Example: "{1}". | Error |
+| [M3016](#M3016)	| [DefinitionsPropertiesNamesCamelCase](#M3016)  | Property named: "{0}", for definition: "{1}" must follow camelCase style. Example: "{2}". | Error |
 | M3006	| BodyTopLevelProperties | Top level properties should be one of name, type, id, location, properties, tags, plan, sku, etag, managedBy, identity. Extra properties found: "{0}". | Error |
 | M3008	| CollectionObjectPropertiesNamingValidation | Collection object {0} returned by list operation {1} with 'x-ms-pageable' extension, has no property named 'value'. | Error |
 | M2044	| HttpVerbValidation | Permissible values for HTTP Verb are delete,get,put,patch,head,options,post. | Error |
@@ -131,5 +131,34 @@ The date MAY optionally be followed by one of:
 * 2150-07-04 - Year should be current, not in the future; though we'll hopefully get here eventually :)
 * 2016-07-04-publicpreview - Use "-preview" to indicate a public preview
 * 2016-07-04-rc0 - Just use "rc", not "rc" + number
+
+Links: [Index](#index) | [Error vs. Warning](#error-vs-warning) | [Automated Rules](#automated-rules) | [RPC](#rpc-violations): [Errors](#rpc-errors) or [Warnings](#rpc-warnings) | [SDK](#sdk-violations): [Errors](#sdk-errors) or [Warnings](#sdk-warnings)
+
+### <a name="M3016" />M3016 PropertiesNamesCamelCase
+**Output Message**: Property named: "{0}", must follow camelCase style. Example: "{1}".
+**Output Message**: Property named: "{0}", for definition: "{1}" must follow camelCase style. Example: "{2}".
+
+**Description**: Property names must use lowerCamelCase style. 
+If the property is a single word (ex: foo, bar, etc.) it will be all lowercase. 
+Two-letter acronmys (ex: ID, IO, IP, etc.) should be capitalized. 
+Three-letter acronyms (ex: API, URL, etc.) should only have the first letter capitalized (ex: Api, Url, etc.) 
+For more capitalization guidance, see: [https://msdn.microsoft.com/en-us/library/141e06ef(v=vs.71).aspx](https://msdn.microsoft.com/en-us/library/141e06ef(v=vs.71).aspx)
+
+**Good Examples**: Examples of lowerCamelCase style:
+* camelCase
+* foo
+* bar
+* fooBarBaz
+* resourceKey
+* resourceApiKey
+
+**Bad Examples**: The following would be invalid:
+* PascalCase
+* UpperCamelCase
+* resourceAPIKey
+
+**Bad Examples**: The following violate these guidelines but would not be caught by automation: 
+* alllowercase - If there are multiple words, please capitalize starting with the second word
+* miXeDcApItAlIzAtIoN - Please capitalize the first letter of each word (and not seemingly random letters)
 
 Links: [Index](#index) | [Error vs. Warning](#error-vs-warning) | [Automated Rules](#automated-rules) | [RPC](#rpc-violations): [Errors](#rpc-errors) or [Warnings](#rpc-warnings) | [SDK](#sdk-violations): [Errors](#sdk-errors) or [Warnings](#sdk-warnings)

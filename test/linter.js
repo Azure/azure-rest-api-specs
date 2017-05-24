@@ -20,17 +20,10 @@ describe('AutoRest Linter validation:', function () {
       let result;
       try {
         result = execSync(cmd, { encoding: 'utf8' });
-        console.log(result);
+        done();
       } catch (err) {
-        if (err.stdout && !err.stderr) {
-          console.log(err.stdout);
-        } else {
-          console.log(`An error occurred while running the linter on ${swagger}:`);
-          console.dir(err, { depth: null, colors: true });
-        }
-        throw err;
+        done(new Error('AutoRest Linter validation failed.'));
       }
-      done();
     });
   }).value();
 });
