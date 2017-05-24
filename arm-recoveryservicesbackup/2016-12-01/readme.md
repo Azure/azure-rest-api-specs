@@ -34,3 +34,13 @@ csharp:
   namespace: Microsoft.Azure.Management.RecoveryServices.Backup
   output-folder: Generated/CSharp
 ```
+
+### Python
+
+```yaml
+python:
+  namespace: azure.mgmt.recoveryservices.backup
+  package-name: azure-mgmt-recoveryservicesbackup
+  package-version: 1.0.0-preview
+  output-folder: Generated/Python
+```
