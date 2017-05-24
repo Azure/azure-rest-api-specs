@@ -3,7 +3,7 @@
   "info": {
     "title": "StorageManagement",
     "description": "The Azure Storage Management API.",
-    "version": "2016-12-01",
+    "version": "2017-06-01",
     "x-ms-code-generation-settings": {
       "name": "StorageManagementClient"
     }
@@ -616,6 +616,20 @@
       },
       "description": "A list of services that support encryption."
     },
+    "KeyVaultProperties":{
+      "properties": {
+          "keyName": {
+            "type": "string"
+          },
+          "keyVersion": {
+            "type": "string"
+          },
+          "keyVaultUri": {
+            "type": "string"
+          }
+      },
+      "description": "Properties of key vault."
+    },
     "Encryption": {
       "properties": {
         "services": {
@@ -624,8 +638,15 @@
         },
         "keySource": {
           "type": "string",
-          "description": "The encryption keySource (provider). Possible values (case-insensitive):  Microsoft.Storage",
-          "enum": [ "Microsoft.Storage" ]
+          "description": "The encryption keySource (provider). Possible values (case-insensitive):  Microsoft.Storage, Microsoft.KeyVault",
+          "enum": [
+            "Microsoft.Storage",
+            "Microsoft.KeyVault"
+          ]
+        },
+        "keyVaultProperties":{
+          "$ref": "#/definitions/KeyVaultProperties",
+          "description": "Properties provided by key vault."
         }
       },
       "required": [ "keySource" ],
@@ -662,6 +683,32 @@
       },
       "description": "The parameters used to create the storage account."
     },
+    "Identity": {
+      "properties": {
+        "principalId": {
+          "readOnly": true,
+          "type": "string",
+          "description": "The principal ID of resource identity."
+        },
+        "tenantId": {
+          "readOnly": true,
+          "type": "string",
+          "description": "The tenant ID of resource."
+        },
+        "type": {
+          "type": "string",
+          "description": "The identity type.",
+          "enum": [
+            "SystemAssigned"
+          ],
+          "x-ms-enum": {
+            "name": "IdentityType",
+            "modelAsString": false
+          }
+        }
+      },
+      "description": "Identity for the resource."
+    },
     "StorageAccountCreateParameters": {
       "properties": {
         "sku": {
@@ -690,6 +737,10 @@
             "type": "string"
           },
           "description": "Gets or sets a list of key value pairs that describe the resource. These tags can be used for viewing and grouping this resource (across resource groups). A maximum of 15 tags can be provided for a resource. Each tag must have a key with a length no greater than 128 characters and a value with a length no greater than 256 characters."
+        },
+        "identity": {
+          "$ref": "#/definitions/Identity",
+          "description": "The identity of the resource."
         },
         "properties": {
           "x-ms-client-flatten": true,
@@ -854,6 +905,10 @@
             "modelAsString": false
           }
         },
+        "identity": {
+          "$ref": "#/definitions/Identity",
+          "description": "The identity of the resource."
+        },
         "properties": {
           "x-ms-client-flatten": true,
           "$ref": "#/definitions/StorageAccountProperties"
@@ -974,6 +1029,10 @@
             "type": "string"
           },
           "description": "Gets or sets a list of key value pairs that describe the resource. These tags can be used in viewing and grouping this resource (across resource groups). A maximum of 15 tags can be provided for a resource. Each tag must have a key no greater in length than 128 characters and a value no greater in length than 256 characters."
+        },
+        "identity": {
+          "$ref": "#/definitions/Identity",
+          "description": "The identity of the resource."
         },
         "properties": {
           "x-ms-client-flatten": true,
