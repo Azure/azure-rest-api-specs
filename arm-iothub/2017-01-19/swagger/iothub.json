@@ -1013,8 +1013,8 @@
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Devices/IotHubs/{resourceName}/certificates/{certificateName}": {
       "get": {
         "tags": [ "GET" ],
-        "summary": "Get the certificate list.",
-        "description": "Returns the complete list of certificates.",
+        "summary": "Get the certificate.",
+        "description": "Returns the certificate.",
         "operationId": "Certificate_Get",
         "parameters": [
           {
@@ -1083,16 +1083,17 @@
           {
             "name": "resourceName",
             "in": "path",
-            "description": "The name of the IoT hub to create or update.",
+            "description": "The name of the IoT hub.",
             "required": true,
             "type": "string"
           },
           {
             "name": "certificateName",
             "in":"path",
-            "description":"The name of the certificate",
+            "description":"The name of the certificate create or update.",
             "required":true,
-            "type":"string"
+            "type":"string",
+			"maxLength": 256
           },
           {
             "name": "certificateDescription",
@@ -1112,7 +1113,7 @@
             }
           },
           "200": {
-            "description": "If certificate already existed and update was successful, the operation returns HTTP status code of 201 (OK).",
+            "description": "If certificate already exist and update was successful, the operation returns HTTP status code of 201 (OK).",
             "schema": {
               "$ref": "#/definitions/CertificateDescription"
             }
@@ -1148,14 +1149,14 @@
           {
             "name": "resourceName",
             "in": "path",
-            "description": "The name of the IoT hub to delete.",
+            "description": "The name of the IoT hub.",
             "required": true,
             "type": "string"
           },
           {
             "name": "certificateName",
             "in":"path",
-            "description":"The name of the certificate",
+            "description":"The name of the certificate to delete.",
             "required":true,
             "type":"string"
           }
