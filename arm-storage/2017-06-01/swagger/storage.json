@@ -638,11 +638,16 @@
         },
         "keySource": {
           "type": "string",
-          "description": "The encryption keySource (provider). Possible values (case-insensitive):  Microsoft.Storage, Microsoft.KeyVault",
+          "description": "The encryption keySource (provider). Possible values (case-insensitive):  Microsoft.Storage, Microsoft.Keyvault",
           "enum": [
             "Microsoft.Storage",
-            "Microsoft.KeyVault"
-          ]
+            "Microsoft.Keyvault"
+          ],
+          "x-ms-enum": {
+            "name": "KeySource",
+            "modelAsString": true
+          },
+          "default":"Microsoft.Storage"
         },
         "keyVaultProperties":{
           "$ref": "#/definitions/KeyVaultProperties",
@@ -707,6 +712,9 @@
           }
         }
       },
+      "required":[
+        "type"
+      ],
       "description": "Identity for the resource."
     },
     "StorageAccountCreateParameters": {
