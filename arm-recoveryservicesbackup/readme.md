@@ -13,8 +13,10 @@ override-info:
 
 ``` yaml 
 input-file:
-  - ./swagger/backupManagement.json
+  - ./2016-12-01/swagger/backupManagement.json
+  - ./2016-08-10/swagger/operations.json
 azure-arm: true
+license-header: MICROSOFT_MIT
 ```
 
 ## Suppression
@@ -33,4 +35,15 @@ directive:
 csharp:
   namespace: Microsoft.Azure.Management.RecoveryServices.Backup
   output-folder: Generated/CSharp
+```
+
+### Python
+
+```yaml
+python:
+  namespace: azure.mgmt.recoveryservices.backup
+  package-name: azure-mgmt-recoveryservicesbackup
+  package-version: 1.0.0-preview
+  output-folder: Generated/Python
+  payload-flattening-threshold: 2
 ```
