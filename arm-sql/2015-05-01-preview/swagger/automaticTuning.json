@@ -16,7 +16,7 @@
     "application/json"
   ],
   "paths": {
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/servers/{serverName}/databases/{databaseName}/automaticTuning/current": {
+	"/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/servers/{serverName}/databases/{databaseName}/automaticTuning/current": {
       "get": {
         "tags": [
           "DatabaseAutomaticTuning"
@@ -106,83 +106,8 @@
           }
         }
       }
-    },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/servers/{serverName}/automaticTuning/current": {
-      "get": {
-        "tags": [
-          "ServerAutomaticTuning"
-        ],
-        "description": "Successfully retrieved server automatic tuning options.",
-        "operationId": "ServerAutomaticTuning_Get",
-        "parameters": [
-          {
-            "$ref": "#/parameters/ResourceGroupParameter"
-          },
-          {
-            "$ref": "#/parameters/ServerNameParameter"
-          },
-          {
-            "$ref": "#/parameters/SubscriptionIdParameter"
-          },
-          {
-            "$ref": "#/parameters/ApiVersionParameter"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Successfully retrieved server automatic tuning properties.",
-            "schema": {
-              "$ref": "#/definitions/AutomaticTuning"
-            }
-          },
-          "default": {
-            "description": "*** Error Responses: ***\n\n * 400 InvalidIdentifier - The identifier contains NULL or an invalid unicode character.\n\n * 404 SubscriptionDoesNotHaveElasticPool - The requested elastic pool was not found\n\n * 404 SubscriptionDoesNotHaveServer - The requested server was not found\n\n * 404 DatabaseDoesNotExist - The requested database was not found\n\n * 404 OperationIdNotFound - The operation with Id does not exist.\n\n * 405 NotSupported - This functionality is not supported.\n\n * 409 Conflict - Request could not be processed because of conflict in the request.\n\n * 409 OperationCancelled - The operation has been cancelled by user.\n\n * 409 OperationInterrupted - The operation on the resource could not be completed because it was interrupted by another operation on the same resource.\n\n * 500 OperationTimedOut - The operation timed out and automatically rolled back. Please retry the operation.\n\n * 503 ServiceTemporarilyUnavailable - Feature temporarily unavailable."
-          }
-        }
-      },
-      "patch": {
-        "tags": [
-          "ServerAutomaticTuning"
-        ],
-        "description": "Update default automatic tuning options on server.",
-        "operationId": "ServerAutomaticTuning_Update",
-        "parameters": [
-          {
-            "$ref": "#/parameters/ResourceGroupParameter"
-          },
-          {
-            "$ref": "#/parameters/ServerNameParameter"
-          },
-          {
-            "name": "parameters",
-            "in": "body",
-            "description": "The requested automatic tuning resource state.",
-            "required": true,
-            "schema": {
-              "$ref": "#/definitions/AutomaticTuning"
-            }
-          },
-          {
-            "$ref": "#/parameters/SubscriptionIdParameter"
-          },
-          {
-            "$ref": "#/parameters/ApiVersionParameter"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Successfully updated the default server-level automatic tuning options.",
-            "schema": {
-              "$ref": "#/definitions/AutomaticTuning"
-            }
-          },
-          "default": {
-            "description": "*** Error Responses: ***\n\n * 400 InvalidIdentifier - The identifier contains NULL or an invalid unicode character.\n\n * 400 InvalidAutomaticTuningUpsertRequest - The update automatic tuning request body does not exist or has no properties object.\n\n * 400 InvalidAdvisorAutoExecuteStatus - Specified auto-execute status for the advisor is not allowed.\n\n * 404 SubscriptionDoesNotHaveElasticPool - The requested elastic pool was not found\n\n * 404 SubscriptionDoesNotHaveServer - The requested server was not found\n\n * 404 DatabaseDoesNotExist - The requested database was not found\n\n * 404 OperationIdNotFound - The operation with Id does not exist.\n\n * 405 NotSupported - This functionality is not supported.\n\n * 409 Conflict - Request could not be processed because of conflict in the request.\n\n * 409 OperationCancelled - The operation has been cancelled by user.\n\n * 409 OperationInterrupted - The operation on the resource could not be completed because it was interrupted by another operation on the same resource.\n\n * 500 OperationTimedOut - The operation timed out and automatically rolled back. Please retry the operation.\n\n * 503 ServiceTemporarilyUnavailable - Feature temporarily unavailable."
-          }
-        }
-      }
-    }
-  },
+	}
+   },
   "definitions": {
     "Resource": {
       "description": "ARM resource.",
@@ -229,7 +154,8 @@
           ],
           "type": "string",
           "x-ms-enum": {
-            "name": "AutomaticTuningMode"
+            "name": "AutomaticTuningMode",
+            "modelAsString": false
           }
         },
         "actualState": {
@@ -242,7 +168,8 @@
           "type": "string",
           "readOnly": true,
           "x-ms-enum": {
-            "name": "AutomaticTuningMode"
+            "name": "AutomaticTuningMode",
+            "modelAsString": false
           }
         },
         "options": {
@@ -267,7 +194,8 @@
           ],
           "type": "string",
           "x-ms-enum": {
-            "name": "AutomaticTuningOptionModeDesired"
+            "name": "AutomaticTuningOptionModeDesired",
+            "modelAsString": false
           }
         },
         "actualState": {
@@ -279,7 +207,8 @@
           "type": "string",
           "readOnly": true,
           "x-ms-enum": {
-            "name": "AutomaticTuningOptionModeActual"
+            "name": "AutomaticTuningOptionModeActual",
+            "modelAsString": false
           }
         },
         "reasonCode": {
@@ -301,7 +230,8 @@
           "type": "string",
           "readOnly": true,
           "x-ms-enum": {
-            "name": "AutomaticTuningDisabledReason"
+            "name": "AutomaticTuningDisabledReason",
+            "modelAsString": false
           }
         }
       }
@@ -322,32 +252,6 @@
         }
       }
     },
-    "TrackedResource": {
-      "description": "ARM tracked top level resource.",
-      "type": "object",
-      "allOf": [
-        {
-          "$ref": "#/definitions/Resource"
-        }
-      ],
-      "properties": {
-        "location": {
-          "description": "Resource location.",
-          "type": "string",
-          "x-ms-mutability": [
-            "read",
-            "create"
-          ]
-        },
-        "tags": {
-          "description": "Resource tags.",
-          "type": "object",
-          "additionalProperties": {
-            "type": "string"
-          }
-        }
-      }
-    }
   },
   "parameters": {
     "SubscriptionIdParameter": {
@@ -389,6 +293,17 @@
       "required": true,
       "type": "string",
       "x-ms-parameter-location": "method"
+    }
+  },
+  "securityDefinitions": {
+    "azure_auth": {
+      "type": "oauth2",
+      "description": "Azure Active Directory OAuth2 Flow",
+      "flow": "implicit",
+      "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
+      "scopes": {
+        "user_impersonation": "impersonate your user account"
+      }
     }
   }
 }
