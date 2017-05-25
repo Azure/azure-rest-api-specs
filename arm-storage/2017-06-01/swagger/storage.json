@@ -20,7 +20,7 @@
     "text/json"
   ],
   "paths": {
-    "/providers/Microsoft.Storage/operations":{
+    "/providers/Microsoft.Storage/operations": {
       "get": {
         "tags": [
           "Operations"
@@ -583,6 +583,98 @@
               "type": "string"
             }
           }
+        },
+        "origin": {
+          "type" : "string",
+          "description": "The origin of operations."
+        },
+        "properties": {
+          "description": "Properties of operation, include metric specifications.",
+          "x-ms-client-flatten": true,
+          "x-ms-client-name": "OperationPerperties",
+          "$ref" : "#/definitions/OperationPerperties"
+        }
+      }
+    },
+    "OperationPerperties":
+    {
+      "description": "Properties of operation, include metric specifications.",
+      "properties": {
+        "serviceSpecification": {
+          "$ref" : "#/definitions/ServiceSpecification"
+        }
+      }
+    },
+    "ServiceSpecification":
+    {
+      "description": "One property of operation, include metric specifications.",
+      "properties": {
+        "metricSpecifications":
+        {
+          "description": "Metric specifications of operation.",
+          "type":"array",
+          "items": {
+            "$ref" : "#/definitions/MetricSpecification"
+          }
+        }
+      }
+    },
+    "MetricSpecification": {
+      "description": "Metric specification of operation.",
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "Name of metric specification."
+        },
+        "displayName":
+        {
+          "type": "string",
+          "description": "Display name of metric specification."
+        },
+        "displayDescription": {
+          "type": "string",
+          "description": "Display description of metric specification."
+        },
+        "unit": {
+          "type" : "string",
+          "description": "Unit could be Bytes or Count."
+        },
+        "dimensions": {
+          "description": "Dimensions.",
+          "type" : "array",
+          "items": {
+            "$ref" : "#/definitions/Dimension"
+          }
+        },
+        "aggregationType": {
+          "type" : "string",
+          "description": "Aggregation type could be Average."
+        } ,
+        "fillGapWithZero":
+        {
+          "type" : "boolean",
+          "description": "The property to decide fill gap with zero or not."
+        },
+        "category": {
+          "type": "string",
+          "description": "The category this metric specification belong to, could be Capacity."
+        },
+        "resourceIdDimensionNameOverride": {
+          "type": "string",
+          "description": "Account Resource Id."
+        }
+      }
+    },
+    "Dimension": {
+      "description": "Dimensions.",
+      "properties": {
+        "name" : {
+          "type" : "string",
+          "description": "Display name of dimension."
+        },
+        "displayName" : {
+          "type" : "string",
+          "description": "Display name of dimension."
         }
       }
     },
@@ -726,22 +818,25 @@
       },
       "description": "A list of services that support encryption."
     },
-    "KeyVaultProperties":{
+    "KeyVaultProperties": {
+      "description": "Properties of key vault.",
       "properties": {
-          "keyName": {
+          "keyname": {
             "type": "string",
-            "description": "The name of KeyVault key."
+            "description": "The name of KeyVault key.",
+            "x-ms-client-name": "KeyName"
           },
-          "keyVersion": {
+          "keyversion": {
             "type": "string",
-            "description": "The version of KeyVault key."
+            "description": "The version of KeyVault key.",
+            "x-ms-client-name": "KeyVersion"
           },
-          "keyVaultUri": {
+          "keyvaulturi": {
             "type": "string",
-            "description": "The Uri of KeyVault."
+            "description": "The Uri of KeyVault.",
+            "x-ms-client-name": "KeyVaultUri"
           }
-      },
-      "description": "Properties of key vault."
+      }
     },
     "Encryption": {
       "properties": {
@@ -762,8 +857,9 @@
           },
           "default":"Microsoft.Storage"
         },
-        "keyVaultProperties":{
+        "keyvaultproperties": {
           "$ref": "#/definitions/KeyVaultProperties",
+          "x-ms-client-name": "KeyVaultProperties",
           "description": "Properties provided by key vault."
         }
       },
