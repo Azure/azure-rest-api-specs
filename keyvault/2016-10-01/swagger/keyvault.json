@@ -2622,7 +2622,7 @@
           "Storage"
         ],
         "operationId": "GetSasDefinitions",
-        "description": "List storage SAS definitions for the given storage account.",
+        "description": "List storage sas definitions for the given storage account.",
         "parameters": [
           {
             "name": "storage-account-name",
@@ -2648,7 +2648,7 @@
         ],
         "responses": {
           "200": {
-            "description": "A response message containing a list of SAS definitions along with a link to the next page of SAS definitions.",
+            "description": "A response message containing a list of sas definitions along with a link to the next page of sas definitions.",
             "schema": {
               "$ref": "#/definitions/SasDefinitionListResult"
             }
@@ -2676,7 +2676,7 @@
           "Storage"
         ],
         "operationId": "DeleteSasDefinition",
-        "description": "Deletes a SAS definition from a specified storage account.",
+        "description": "Deletes a sas definition from a specified storage account.",
         "parameters": [
           {
             "name": "storage-account-name",
@@ -2692,7 +2692,7 @@
             "required": true,
             "type": "string",
             "pattern": "^[0-9a-zA-Z]+$",
-            "description": "The name of the SAS definition."
+            "description": "The name of the sas definition."
           },
           {
             "$ref": "#/parameters/ApiVersionParameter"
@@ -2700,7 +2700,7 @@
         ],
         "responses": {
           "200": {
-            "description": "The deleted SAS definition.",
+            "description": "The deleted sas definition.",
             "schema": {
               "$ref": "#/definitions/SasDefinitionBundle"
             }
@@ -2723,7 +2723,7 @@
           "Storage"
         ],
         "operationId": "GetSasDefinition",
-        "description": "Gets information about a SAS definition for the specified storage account.",
+        "description": "Gets information about a sas definition for the specified storage account.",
         "parameters": [
           {
             "name": "storage-account-name",
@@ -2739,7 +2739,7 @@
             "required": true,
             "type": "string",
             "pattern": "^[0-9a-zA-Z]+$",
-            "description": "The name of the SAS definition."
+            "description": "The name of the sas definition."
           },
           {
             "$ref": "#/parameters/ApiVersionParameter"
@@ -2747,7 +2747,7 @@
         ],
         "responses": {
           "200": {
-            "description": "The retrieved SAS definition.",
+            "description": "The retrieved sas definition.",
             "schema": {
               "$ref": "#/definitions/SasDefinitionBundle"
             }
@@ -2770,7 +2770,7 @@
           "Storage"
         ],
         "operationId": "SetSasDefinition",
-        "description": "Creates or updates a new SAS definition for the specified storage account.",
+        "description": "Creates or updates a new sas definition for the specified storage account.",
         "parameters": [
           {
             "name": "storage-account-name",
@@ -2786,7 +2786,7 @@
             "required": true,
             "type": "string",
             "pattern": "^[0-9a-zA-Z]+$",
-            "description": "The name of the SAS definition."
+            "description": "The name of the sas definition."
           },
           {
             "name": "parameters",
@@ -2796,7 +2796,7 @@
             "schema": {
               "$ref": "#/definitions/SasDefinitionCreateParameters"
             },
-            "description": "The parameters to create a SAS definition."
+            "description": "The parameters to create a sas definition."
           },
           {
             "$ref": "#/parameters/ApiVersionParameter"
@@ -2804,7 +2804,7 @@
         ],
         "responses": {
           "200": {
-            "description": "The created SAS definition.",
+            "description": "The created sas definition.",
             "schema": {
               "$ref": "#/definitions/SasDefinitionBundle"
             }
@@ -2827,7 +2827,7 @@
           "Storage"
         ],
         "operationId": "UpdateSasDefinition",
-        "description": "Updates the specified attributes associated with the given SAS definition.",
+        "description": "Updates the specified attributes associated with the given sas definition.",
         "parameters": [
           {
             "name": "storage-account-name",
@@ -2843,7 +2843,7 @@
             "required": true,
             "type": "string",
             "pattern": "^[0-9a-zA-Z]+$",
-            "description": "The name of the SAS definition."
+            "description": "The name of the sas definition."
           },
           {
             "name": "parameters",
@@ -2853,7 +2853,7 @@
             "schema": {
               "$ref": "#/definitions/SasDefinitionUpdateParameters"
             },
-            "description": "The parameters to update a SAS definition."
+            "description": "The parameters to update a sas definition."
           },
           {
             "$ref": "#/parameters/ApiVersionParameter"
@@ -2861,7 +2861,7 @@
         ],
         "responses": {
           "200": {
-            "description": "The updated SAS definition.",
+            "description": "The updated sas definition.",
             "schema": {
               "$ref": "#/definitions/SasDefinitionBundle"
             }
@@ -4384,7 +4384,7 @@
       "properties": {
         "enabled": {
           "type": "boolean",
-          "description": "the enabled state of the object."
+          "description": "Determines whether the object is enabled."
         },
         "created": {
           "type": "integer",
@@ -4410,17 +4410,17 @@
         },
         "resourceId": {
           "type": "string",
-          "description": "The storage account resource id.",
+          "description": "Storage account resource id.",
           "readOnly": true
         },
         "activeKeyName": {
           "type": "string",
-          "description": "The current active storage account key name.",
+          "description": "Current active storage account key name.",
           "readOnly": true
         },
         "autoRegenerateKey": {
           "type": "boolean",
-          "description": "whether keyvault should manage the storage account for the user.",
+          "description": "Determines whether keyvault should manage the storage account.",
           "readOnly": true
         },
         "regenerationPeriod": {
@@ -4456,7 +4456,7 @@
         },
         "autoRegenerateKey": {
           "type": "boolean",
-          "description": "whether keyvault should manage the storage account for the user."
+          "description": "Determines whether keyvault should manage the storage account for user."
         },
         "regenerationPeriod": {
           "type": "string",
@@ -4482,11 +4482,11 @@
       "properties": {
         "activeKeyName": {
           "type": "string",
-          "description": "The current active storage account key name."
+          "description": "Current active storage account key name."
         },
         "autoRegenerateKey": {
           "type": "boolean",
-          "description": "whether keyvault should manage the storage account for the user."
+          "description": "Determines whether keyvault should manage the storage account for user."
         },
         "regenerationPeriod": {
           "type": "string",
@@ -4511,7 +4511,7 @@
       "properties": {
         "keyName": {
           "type": "string",
-          "description": "The storage account key name."
+          "description": "storage account key name."
         }
       },
       "description": "The storage account key regenerate parameters.",
@@ -4526,7 +4526,7 @@
         },
         "resourceId": {
           "type": "string",
-          "description": "Storage account resource Id.",
+          "description": "Storage acount resource Id.",
           "readOnly": true
         },
         "attributes": {
@@ -4567,7 +4567,7 @@
       "properties": {
         "enabled": {
           "type": "boolean",
-          "description": "the enabled state of the object."
+          "description": "Determines whether the object is enabled."
         },
         "created": {
           "type": "integer",
@@ -4582,19 +4582,19 @@
           "description": "Last updated time in UTC."
         }
       },
-      "description": "The SAS definition management attributes."
+      "description": "The sas definition management attributes."
     },
     "SasDefinitionBundle": {
       "properties": {
         "id": {
           "type": "string",
-          "description": "The SAS definition id.",
+          "description": "The sas definition id.",
           "readOnly": true
         },
         "sid": {
           "x-ms-client-name": "SecretId",
           "type": "string",
-          "description": "Storage account SAS definition secret id.",
+          "description": "Storage account sas definition secret id.",
           "readOnly": true
         },
         "parameters": {
@@ -4602,12 +4602,12 @@
           "additionalProperties": {
             "type": "string"
           },
-          "description": "The SAS definition metadata in the form of key-value pairs.",
+          "description": "The sas definition metadata in the form of key-value pairs.",
           "readOnly": true
         },
         "attributes": {
           "$ref": "#/definitions/SasDefinitionAttributes",
-          "description": "The SAS definition attributes.",
+          "description": "The sas definition attributes.",
           "readOnly": true
         },
         "tags": {
@@ -4619,24 +4619,24 @@
           "readOnly": true
         }
       },
-      "description": "A SAS definition bundle consists of key vault SAS definition details plus its attributes."
+      "description": "A sas definition bundle consists of key vault sas definition details plus its attributes."
     },
     "SasDefinitionItem": {
       "properties": {
         "id": {
           "type": "string",
-          "description": "The storage SAS identifier.",
+          "description": "Storage sas identifier.",
           "readOnly": true
         },
         "sid": {
           "x-ms-client-name": "SecretId",
           "type": "string",
-          "description": "The storage account SAS definition secret id.",
+          "description": "Storage account sas definition secret id.",
           "readOnly": true
         },
         "attributes": {
           "$ref": "#/definitions/SasDefinitionAttributes",
-          "description": "The SAS definition management attributes.",
+          "description": "The sas definition management attributes.",
           "readOnly": true
         },
         "tags": {
@@ -4648,7 +4648,7 @@
           "readOnly": true
         }
       },
-      "description": "The SAS definition item containing storage SAS definition metadata."
+      "description": "The sas definition item containing storage sas definition metadata."
     },
     "SasDefinitionListResult": {
       "properties": {
@@ -4658,15 +4658,15 @@
             "$ref": "#/definitions/SasDefinitionItem"
           },
           "readOnly": true,
-          "description": "A response message containing a list of SAS definitions along with a link to the next page of SAS definitions."
+          "description": "A response message containing a list of sas definitions along with a link to the next page of sas definitions."
         },
         "nextLink": {
           "type": "string",
           "readOnly": true,
-          "description": "The URL to get the next set of SAS defintions."
+          "description": "The URL to get the next set of sas defintions."
         }
       },
-      "description": "The storage account SAS definition list result."
+      "description": "The storage account sas definition list result."
     },
     "SasDefinitionCreateParameters": {
       "properties": {
@@ -4681,7 +4681,7 @@
         "attributes": {
           "x-ms-client-name": "SasDefinitionAttributes",
           "$ref": "#/definitions/SasDefinitionAttributes",
-          "description": "The attributes of the SAS definition."
+          "description": "The attributes of the sas definition."
         },
         "tags": {
           "type": "object",
@@ -4691,7 +4691,7 @@
           "description": "Application specific metadata in the form of key-value pairs."
         }
       },
-      "description": "The SAS definition create parameters.",
+      "description": "The sas definition create parameters.",
       "required": [ "parameters" ]
     },
     "SasDefinitionUpdateParameters": {
@@ -4706,7 +4706,7 @@
         "attributes": {
           "x-ms-client-name": "SasDefinitionAttributes",
           "$ref": "#/definitions/SasDefinitionAttributes",
-          "description": "The attributes of the SAS definition."
+          "description": "The attributes of the sas definition."
         },
         "tags": {
           "type": "object",
@@ -4716,7 +4716,7 @@
           "description": "Application specific metadata in the form of key-value pairs."
         }
       },
-      "description": "The SAS definition update parameters."
+      "description": "The sas definition update parameters."
     },
     "KeyVaultError": {
       "properties": {
