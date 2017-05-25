@@ -20,6 +20,28 @@
     "text/json"
   ],
   "paths": {
+    "/providers/Microsoft.Storage/operations":{
+      "get": {
+        "tags": [
+          "Operations"
+        ],
+        "description": "Lists all of the available Storage Rest API operations.",
+        "operationId": "Operations_List",
+        "parameters": [
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK. The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/OperationListResult"
+            }
+          }
+        }
+      }
+    },
     "/subscriptions/{subscriptionId}/providers/Microsoft.Storage/checkNameAvailability": {
       "post": {
         "tags": [
@@ -482,14 +504,59 @@
     }
   },
   "definitions": {
+    "OperationListResult": {
+     "description": "Result of the request to list Storage operations. It contains a list of operations and a URL link to get the next set of results.",
+      "properties": {
+        "value": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Operation"
+          },
+          "description": "List of Storage operations supported by the Storage resource provider."
+        },
+        "nextLink": {
+          "type": "string",
+          "description": "URL to get the next set of operation list results if there are any."
+        }
+      }
+    },
+    "Operation": {
+      "description": "Storage REST API operation definition.",
+      "type": "object",
+      "properties": {
+        "name": {
+          "description": "Operation name: {provider}/{resource}/{operation}",
+          "type": "string"
+        },
+        "display": {
+          "description": "Display metadata associated with the operation.",
+          "properties": {
+            "provider": {
+              "description": "Service provider: Microsoft Storage.",
+              "type": "string"
+            },
+            "resource": {
+              "description": "Resource on which the operation is performed etc.",
+              "type": "string"
+            },
+            "operation": {
+              "description": "Type of operation: get, read, delete, etc.",
+              "type": "string"
+            }
+          }
+        }
+      }
+    },
     "StorageAccountCheckNameAvailabilityParameters": {
       "properties": {
         "name": {
-          "type": "string"
+          "type": "string",
+          "description": "The storage account name."
         },
         "type": {
           "type": "string",
-          "enum": [ "Microsoft.Storage/storageAccounts" ]
+          "enum": [ "Microsoft.Storage/storageAccounts" ],
+          "description": "The type of resource, Microsoft.Storage/storageAccounts"
         }
       },
       "required": [
@@ -619,13 +686,16 @@
     "KeyVaultProperties":{
       "properties": {
           "keyName": {
-            "type": "string"
+            "type": "string",
+            "description": "The name of KeyVault key."
           },
           "keyVersion": {
-            "type": "string"
+            "type": "string",
+            "description": "The version of KeyVault key."
           },
           "keyVaultUri": {
-            "type": "string"
+            "type": "string",
+            "description": "The Uri of KeyVault."
           }
       },
       "description": "Properties of key vault."
@@ -752,7 +822,8 @@
         },
         "properties": {
           "x-ms-client-flatten": true,
-          "$ref": "#/definitions/StorageAccountPropertiesCreateParameters"
+          "$ref": "#/definitions/StorageAccountPropertiesCreateParameters",
+          "description": "The parameters used to create the storage account."
         }
       },
       "required": [
@@ -919,7 +990,8 @@
         },
         "properties": {
           "x-ms-client-flatten": true,
-          "$ref": "#/definitions/StorageAccountProperties"
+          "$ref": "#/definitions/StorageAccountProperties",
+          "description": "Properties of the storage account."
         }
       },
       "allOf": [
@@ -986,7 +1058,8 @@
     "StorageAccountRegenerateKeyParameters": {
       "properties": {
         "keyName": {
-          "type": "string"
+          "type": "string",
+          "description": "The name of storage keys that want to be regenerated, possible vaules are key1, key2."
         }
       },
       "required": [
@@ -1044,7 +1117,8 @@
         },
         "properties": {
           "x-ms-client-flatten": true,
-          "$ref": "#/definitions/StorageAccountPropertiesUpdateParameters"
+          "$ref": "#/definitions/StorageAccountPropertiesUpdateParameters",
+          "description": "The parameters used when updating a storage account."
         }
       },
       "description": "The parameters that can be provided when updating the storage account properties."
@@ -1399,5 +1473,23 @@
       "maxLength": 90,
       "x-ms-parameter-location": "method"
     }
-  }
+  },
+  "securityDefinitions": {
+    "azure_auth": {
+        "type": "oauth2",
+        "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
+        "flow": "implicit",
+        "description": "Azure Active Directory OAuth2 Flow",
+        "scopes": {
+            "user_impersonation": "impersonate your user account"
+        }
+    }
+  },
+  "security": [
+    {
+      "azure_auth": [
+        "user_impersonation"
+      ]
+    }
+  ]
 }
