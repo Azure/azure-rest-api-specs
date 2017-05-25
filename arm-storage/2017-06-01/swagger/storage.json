@@ -595,6 +595,10 @@
         "type": {
           "type": "string",
           "enum": [ "Microsoft.Storage/storageAccounts" ],
+          "x-ms-enum": {
+            "name": "Type",
+            "modelAsString": false
+          },
           "description": "The type of resource, Microsoft.Storage/storageAccounts"
         }
       },
@@ -1270,6 +1274,10 @@
             "t",
             "f"
           ],
+          "x-ms-enum": {
+            "name": "Services",
+            "modelAsString": true
+          },
           "x-ms-client-name": "Services",
           "description": "The signed services accessible with the account SAS. Possible values include: Blob (b), Queue (q), Table (t), File (f)."
         },
@@ -1295,6 +1303,10 @@
             "u",
             "p"
           ],
+          "x-ms-enum": {
+            "name": "Permissions",
+            "modelAsString": true
+          },
           "x-ms-client-name": "Permissions",
           "description": "The signed permissions for the account SAS. Possible values include: Read (r), Write (w), Delete (d), List (l), Add (a), Create (c), Update (u) and Process (p)."
         },
@@ -1365,6 +1377,10 @@
             "f",
             "s"
           ],
+          "x-ms-enum": {
+            "name": "signedResource",
+            "modelAsString": true
+          },
           "x-ms-client-name": "Resource",
           "description": "The signed services accessible with the service SAS. Possible values include: Blob (b), Container (c), File (f), Share (s)."
         },
@@ -1380,6 +1396,10 @@
             "u",
             "p"
           ],
+          "x-ms-enum": {
+            "name": "Permissions",
+            "modelAsString": true
+          },
           "x-ms-client-name": "Permissions",
           "description": "The signed permissions for the service SAS. Possible values include: Read (r), Write (w), Delete (d), List (l), Add (a), Create (c), Update (u) and Process (p)."
         },
