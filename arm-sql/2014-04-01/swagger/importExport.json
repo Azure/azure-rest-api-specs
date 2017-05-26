@@ -104,6 +104,12 @@
                     }
                 ],
                 "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                        "$ref": "#/definitions/ImportExportResponse"
+                        }
+                    },
                     "201": {
                         "description": "OK",
                         "schema": {
@@ -182,18 +188,18 @@
     "definitions": {
     "Resource":{
       "description":"ARM resource.",
-      "properties":{  
-        "id":{  
+      "properties":{
+        "id":{
           "readOnly":true,
           "type":"string",
           "description":"Resource ID."
         },
-        "name":{  
+        "name":{
           "readOnly":true,
           "type":"string",
           "description":"Resource name."
         },
-        "type":{  
+        "type":{
           "readOnly":true,
           "type":"string",
           "description":"Resource type."
@@ -201,43 +207,43 @@
       },
       "x-ms-azure-resource": true
     },
-    "TrackedResource":{  
+    "TrackedResource":{
       "description":"ARM tracked top level resource.",
-      "properties":{  
-        "tags":{  
+      "properties":{
+        "tags":{
           "type":"object",
-          "additionalProperties":{  
+          "additionalProperties":{
             "type":"string"
           },
-          "x-ms-mutability":[  
+          "x-ms-mutability":[
             "read",
             "create",
             "update"
           ],
           "description":"Resource tags."
         },
-        "location":{  
+        "location":{
           "type":"string",
-          "x-ms-mutability":[  
+          "x-ms-mutability":[
             "read",
             "create"
           ],
           "description":"Resource location."
         }
       },
-      "required":[  
+      "required":[
         "location"
       ],
-      "allOf":[  
-        {  
+      "allOf":[
+        {
           "$ref":"#/definitions/Resource"
         }
       ]
     },
-    "ProxyResource":{  
+    "ProxyResource":{
       "description":"ARM proxy resource.",
-      "allOf":[  
-        {  
+      "allOf":[
+        {
           "$ref":"#/definitions/Resource"
         }
       ]
