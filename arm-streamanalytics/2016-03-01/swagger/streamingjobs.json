@@ -570,6 +570,9 @@
           "type": "string",
           "description": "The data locale of the stream analytics job. Value should be the name of a supported .NET Culture from the set https://msdn.microsoft.com/en-us/library/system.globalization.culturetypes(v=vs.110).aspx. Defaults to 'en-US' if none specified."
         },
+        "compatibilityLevel": {
+          "$ref": "#/definitions/CompatibilityLevel",
+        },
         "createdDate": {
           "readOnly": true,
           "type": "string",
@@ -619,7 +622,7 @@
           ],
           "x-ms-enum": {
             "name": "SkuName",
-            "modelAsString": false
+            "modelAsString": true
           }
         }
       }
@@ -666,7 +669,7 @@
       ],
       "x-ms-enum": {
         "name": "OutputStartMode",
-        "modelAsString": false
+        "modelAsString": true
       }
     },
     "EventsOutOfOrderPolicy": {
@@ -678,7 +681,7 @@
       ],
       "x-ms-enum": {
         "name": "EventsOutOfOrderPolicy",
-        "modelAsString": false
+        "modelAsString": true
       }
     },
     "OutputErrorPolicy": {
@@ -690,7 +693,17 @@
       ],
       "x-ms-enum": {
         "name": "OutputErrorPolicy",
-        "modelAsString": false
+        "modelAsString": true
+      }
+    },
+    "CompatibilityLevel": {
+      "type": "string",
+      "enum": [
+        "1.0"
+      ],
+      "x-ms-enum": {
+        "name": "CompatibilityLevel",
+        "modelAsString": true
       }
     },
     "Resource": {
