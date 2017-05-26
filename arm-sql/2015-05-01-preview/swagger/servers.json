@@ -272,7 +272,15 @@
             "description": "Accepted"
           }
         },
-        "x-ms-long-running-operation": true
+        "x-ms-long-running-operation": true,
+        "x-ms-examples": {
+          "Update a server with minimal properties": {
+            "$ref": "../examples/ServerUpdateMin.json"
+          },
+          "Update a server with all properties": {
+            "$ref": "../examples/ServerUpdateMax.json"
+          }
+        }
       }
     }
   },
@@ -429,14 +437,19 @@
         "kind": {
           "description": "Kind of sql server. This is metadata used for the Azure portal experience.",
           "enum": [
-            "None",
+            "",
             "v2.0",
             "v12.0",
             "user",
             "system",
             "datawarehouse"
           ],
-          "type": "string"
+          "type": "string",
+          "readOnly": true,
+          "x-ms-enum": {
+            "name": "ResourceKind",
+            "modelAsString": true
+          }
         },
         "properties": {
           "$ref": "#/definitions/ServerProperties",

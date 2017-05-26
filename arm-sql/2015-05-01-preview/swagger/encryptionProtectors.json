@@ -169,11 +169,11 @@
         },
         "x-ms-long-running-operation": true,
         "x-ms-examples": {
-          "Update the encryption protector to key vault": {
-            "$ref": "../examples/EncryptionProtectorCreateOrUpdateKeyVault.json"
-          },
           "Update the encryption protector to service managed": {
             "$ref": "../examples/EncryptionProtectorCreateOrUpdateServiceManaged.json"
+          },
+          "Update the encryption protector to key vault": {
+            "$ref": "../examples/EncryptionProtectorCreateOrUpdateKeyVault.json"
           }
         }
       }
@@ -280,11 +280,15 @@
         "kind": {
           "description": "Kind of encryption protector. This is metadata used for the Azure portal experience.",
           "enum": [
-            "None",
+            "",
             "azurekeyvault",
             "servicemanaged"
           ],
-          "type": "string"
+          "type": "string",
+          "x-ms-enum": {
+            "name": "ServerKeyResourceKind",
+            "modelAsString": true
+          }
         },
         "location": {
           "description": "Resource location.",
