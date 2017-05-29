@@ -716,6 +716,47 @@
         "deprecated": false
       }
     },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.StorSimple/managers/{managerName}/cloudApplianceConfigurations": {
+      "get": {
+        "tags": [
+          "CloudAppliance"
+        ],
+        "description": "Lists supported cloud appliance models and supported configurations.",
+        "operationId": "CloudAppliance_ListSupportedConfigurations",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/subscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/resourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/managerNameParameter"
+          },
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The collection of cloud appliance configuration.",
+            "schema": {
+              "$ref": "#/definitions/CloudApplianceConfigurationList"
+            }
+          }
+        },
+        "deprecated": false,
+        "x-ms-pageable": {
+          "nextLinkName": null
+        }
+      }
+    },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.StorSimple/managers/{managerName}/configureDevice": {
       "post": {
         "tags": [
@@ -2172,6 +2213,102 @@
         }
       }
     },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.StorSimple/managers/{managerName}/devices/{deviceName}/metrics": {
+      "get": {
+        "tags": [
+          "Devices"
+        ],
+        "description": "Gets the metrics for the specified device.",
+        "operationId": "Devices_ListMetrics",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/deviceNameParameter"
+          },
+          {
+            "$ref": "#/parameters/subscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/resourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/managerNameParameter"
+          },
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          },
+          {
+            "name": "$filter",
+            "in": "query",
+            "description": "OData Filter options",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/MetricList"
+            }
+          }
+        },
+        "deprecated": false,
+        "x-ms-odata": "#/definitions/MetricFilter",
+        "x-ms-pageable": {
+          "nextLinkName": null
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.StorSimple/managers/{managerName}/devices/{deviceName}/metricsDefinitions": {
+      "get": {
+        "tags": [
+          "Devices"
+        ],
+        "description": "Gets the metric definitions for the specified device.",
+        "operationId": "Devices_ListMetricDefinition",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/deviceNameParameter"
+          },
+          {
+            "$ref": "#/parameters/subscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/resourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/managerNameParameter"
+          },
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/MetricDefinitionList"
+            }
+          }
+        },
+        "deprecated": false,
+        "x-ms-pageable": {
+          "nextLinkName": null
+        }
+      }
+    },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.StorSimple/managers/{managerName}/devices/{deviceName}/networkSettings/default": {
       "get": {
         "tags": [
@@ -2393,6 +2530,141 @@
           },
           "204": {
             "description": "Successfully scanned for updates."
+          }
+        },
+        "deprecated": false,
+        "x-ms-long-running-operation": true
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.StorSimple/managers/{managerName}/devices/{deviceName}/securitySettings/default": {
+      "get": {
+        "tags": [
+          "DeviceSettings"
+        ],
+        "description": "Returns the Security properties of the specified device name.",
+        "operationId": "DeviceSettings_GetSecuritySettings",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/deviceNameParameter"
+          },
+          {
+            "$ref": "#/parameters/subscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/resourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/managerNameParameter"
+          },
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Device Security settings.",
+            "schema": {
+              "$ref": "#/definitions/SecuritySettings"
+            }
+          }
+        },
+        "deprecated": false
+      },
+      "patch": {
+        "tags": [
+          "DeviceSettings"
+        ],
+        "description": "Patch Security properties of the specified device name.",
+        "operationId": "DeviceSettings_UpdateSecuritySettings",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/deviceNameParameter"
+          },
+          {
+            "name": "parameters",
+            "in": "body",
+            "description": "The security settings properties to be patched.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/SecuritySettingsPatch"
+            }
+          },
+          {
+            "$ref": "#/parameters/subscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/resourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/managerNameParameter"
+          },
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The device Security settings.",
+            "schema": {
+              "$ref": "#/definitions/SecuritySettings"
+            }
+          },
+          "202": {
+            "description": "Accepted the request to update device security settings."
+          }
+        },
+        "deprecated": false,
+        "x-ms-long-running-operation": true
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.StorSimple/managers/{managerName}/devices/{deviceName}/securitySettings/default/syncRemoteManagementCertificate": {
+      "post": {
+        "tags": [
+          "DeviceSettings"
+        ],
+        "description": "sync Remote management Certificate between appliance and Service",
+        "operationId": "DeviceSettings_SyncRemotemanagementCertificate",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/deviceNameParameter"
+          },
+          {
+            "$ref": "#/parameters/subscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/resourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/managerNameParameter"
+          },
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          }
+        ],
+        "responses": {
+          "202": {
+            "description": "Accepted the request to sync Remote Management certificate settings."
+          },
+          "204": {
+            "description": "Successfully synced Remote Management certificate settings."
           }
         },
         "deprecated": false,
@@ -2781,6 +3053,115 @@
         "x-ms-long-running-operation": true
       }
     },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.StorSimple/managers/{managerName}/devices/{deviceName}/volumeContainers/{volumeContainerName}/metrics": {
+      "get": {
+        "tags": [
+          "VolumeContainers"
+        ],
+        "description": "Gets the metrics for the specified volume container.",
+        "operationId": "VolumeContainers_ListMetrics",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/deviceNameParameter"
+          },
+          {
+            "name": "volumeContainerName",
+            "in": "path",
+            "description": "The volume container name.",
+            "required": true,
+            "type": "string",
+            "x-ms-skip-url-encoding": true
+          },
+          {
+            "$ref": "#/parameters/subscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/resourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/managerNameParameter"
+          },
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          },
+          {
+            "name": "$filter",
+            "in": "query",
+            "description": "OData Filter options",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/MetricList"
+            }
+          }
+        },
+        "deprecated": false,
+        "x-ms-odata": "#/definitions/MetricFilter"
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.StorSimple/managers/{managerName}/devices/{deviceName}/volumeContainers/{volumeContainerName}/metricsDefinitions": {
+      "get": {
+        "tags": [
+          "VolumeContainers"
+        ],
+        "description": "Gets the metric definitions for the specified volume container.",
+        "operationId": "VolumeContainers_ListMetricDefinition",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/deviceNameParameter"
+          },
+          {
+            "name": "volumeContainerName",
+            "in": "path",
+            "description": "The volume container name.",
+            "required": true,
+            "type": "string",
+            "x-ms-skip-url-encoding": true
+          },
+          {
+            "$ref": "#/parameters/subscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/resourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/managerNameParameter"
+          },
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/MetricDefinitionList"
+            }
+          }
+        },
+        "deprecated": false,
+        "x-ms-pageable": {
+          "nextLinkName": null
+        }
+      }
+    },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.StorSimple/managers/{managerName}/devices/{deviceName}/volumeContainers/{volumeContainerName}/volumes": {
       "get": {
         "tags": [
@@ -3012,6 +3393,134 @@
         },
         "deprecated": false,
         "x-ms-long-running-operation": true
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.StorSimple/managers/{managerName}/devices/{deviceName}/volumeContainers/{volumeContainerName}/volumes/{volumeName}/metrics": {
+      "get": {
+        "tags": [
+          "Volumes"
+        ],
+        "description": "Gets the metrics for the specified volume.",
+        "operationId": "Volumes_ListMetrics",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/deviceNameParameter"
+          },
+          {
+            "name": "volumeContainerName",
+            "in": "path",
+            "description": "The volume container name.",
+            "required": true,
+            "type": "string",
+            "x-ms-skip-url-encoding": true
+          },
+          {
+            "name": "volumeName",
+            "in": "path",
+            "description": "The volume name.",
+            "required": true,
+            "type": "string",
+            "x-ms-skip-url-encoding": true
+          },
+          {
+            "$ref": "#/parameters/subscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/resourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/managerNameParameter"
+          },
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          },
+          {
+            "name": "$filter",
+            "in": "query",
+            "description": "OData Filter options",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/MetricList"
+            }
+          }
+        },
+        "deprecated": false,
+        "x-ms-odata": "#/definitions/MetricFilter",
+        "x-ms-pageable": {
+          "nextLinkName": null
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.StorSimple/managers/{managerName}/devices/{deviceName}/volumeContainers/{volumeContainerName}/volumes/{volumeName}/metricsDefinitions": {
+      "get": {
+        "tags": [
+          "Volumes"
+        ],
+        "description": "Gets the metric definitions for the specified volume.",
+        "operationId": "Volumes_ListMetricDefinition",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/deviceNameParameter"
+          },
+          {
+            "name": "volumeContainerName",
+            "in": "path",
+            "description": "The volume container name.",
+            "required": true,
+            "type": "string",
+            "x-ms-skip-url-encoding": true
+          },
+          {
+            "name": "volumeName",
+            "in": "path",
+            "description": "The volume name.",
+            "required": true,
+            "type": "string",
+            "x-ms-skip-url-encoding": true
+          },
+          {
+            "$ref": "#/parameters/subscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/resourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/managerNameParameter"
+          },
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/MetricDefinitionList"
+            }
+          }
+        },
+        "deprecated": false,
+        "x-ms-pageable": {
+          "nextLinkName": null
+        }
       }
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.StorSimple/managers/{managerName}/devices/{deviceName}/volumes": {
@@ -3514,44 +4023,6 @@
         "deprecated": false
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.StorSimple/managers/{managerName}/listPrivateEncryptionKey": {
-      "post": {
-        "tags": [
-          "Managers"
-        ],
-        "description": "Returns the symmetric encrypted private encryption key of the manager.",
-        "operationId": "Managers_GetPrivateEncryptionKey",
-        "consumes": [
-          "application/json"
-        ],
-        "produces": [
-          "application/json"
-        ],
-        "parameters": [
-          {
-            "$ref": "#/parameters/subscriptionIdParameter"
-          },
-          {
-            "$ref": "#/parameters/resourceGroupNameParameter"
-          },
-          {
-            "$ref": "#/parameters/managerNameParameter"
-          },
-          {
-            "$ref": "#/parameters/apiVersionParameter"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "The private encryption key.",
-            "schema": {
-              "$ref": "#/definitions/SymmetricEncryptedSecret"
-            }
-          }
-        },
-        "deprecated": false
-      }
-    },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.StorSimple/managers/{managerName}/listPublicEncryptionKey": {
       "post": {
         "tags": [
@@ -3588,6 +4059,144 @@
           }
         },
         "deprecated": false
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.StorSimple/managers/{managerName}/metrics": {
+      "get": {
+        "tags": [
+          "Managers"
+        ],
+        "description": "Gets the metrics for the specified manager.",
+        "operationId": "Managers_ListMetrics",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/subscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/resourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/managerNameParameter"
+          },
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          },
+          {
+            "name": "$filter",
+            "in": "query",
+            "description": "OData Filter options",
+            "required": false,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The collection of metrics.",
+            "schema": {
+              "$ref": "#/definitions/MetricList"
+            }
+          }
+        },
+        "deprecated": false,
+        "x-ms-odata": "#/definitions/MetricFilter",
+        "x-ms-pageable": {
+          "nextLinkName": null
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.StorSimple/managers/{managerName}/metricsDefinitions": {
+      "get": {
+        "tags": [
+          "Managers"
+        ],
+        "description": "Gets the metric definitions for the specified manager.",
+        "operationId": "Managers_ListMetricDefinition",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/subscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/resourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/managerNameParameter"
+          },
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The collection of metric definitions.",
+            "schema": {
+              "$ref": "#/definitions/MetricDefinitionList"
+            }
+          }
+        },
+        "deprecated": false,
+        "x-ms-pageable": {
+          "nextLinkName": null
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.StorSimple/managers/{managerName}/provisionCloudAppliance": {
+      "post": {
+        "tags": [
+          "CloudAppliance"
+        ],
+        "description": "Provisions cloud appliance.",
+        "operationId": "CloudAppliance_Provision",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "parameters",
+            "in": "body",
+            "description": "The cloud appliance",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/CloudAppliance"
+            }
+          },
+          {
+            "$ref": "#/parameters/subscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/resourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/managerNameParameter"
+          },
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successfully created job for provision cloud appliance."
+          },
+          "202": {
+            "description": "Accepted the request to provision cloud appliance."
+          }
+        },
+        "deprecated": false,
+        "x-ms-long-running-operation": true
       }
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.StorSimple/managers/{managerName}/regenerateActivationKey": {
@@ -4919,6 +5528,164 @@
         }
       }
     },
+    "CloudAppliance": {
+      "description": "The cloud appliance.",
+      "required": [
+        "name",
+        "vnetRegion"
+      ],
+      "type": "object",
+      "properties": {
+        "name": {
+          "description": "The name.",
+          "type": "string"
+        },
+        "vnetName": {
+          "description": "The name of the virtual network.",
+          "type": "string"
+        },
+        "vnetRegion": {
+          "description": "The virtual network region.",
+          "type": "string"
+        },
+        "isVnetDnsConfigured": {
+          "description": "Indicates whether virtual network used is configured with DNS or not.",
+          "type": "boolean"
+        },
+        "isVnetExpressConfigured": {
+          "description": "Indicates whether virtual network used is configured with express route or not.",
+          "type": "boolean"
+        },
+        "subnetName": {
+          "description": "The name of the subnet.",
+          "type": "string"
+        },
+        "storageAccountName": {
+          "description": "The name of the storage account.",
+          "type": "string"
+        },
+        "storageAccountType": {
+          "description": "The type of the storage account.",
+          "type": "string"
+        },
+        "vmType": {
+          "description": "The type of the virtual machine.",
+          "type": "string"
+        },
+        "vmImageName": {
+          "description": "The name of the virtual machine image.",
+          "type": "string"
+        },
+        "modelNumber": {
+          "description": "The model number.",
+          "type": "string"
+        }
+      }
+    },
+    "CloudApplianceConfiguration": {
+      "description": "The cloud appliance configuration",
+      "required": [
+        "properties"
+      ],
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/BaseModel"
+        }
+      ],
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/CloudApplianceConfigurationProperties",
+          "description": "The properties.",
+          "x-ms-client-flatten": true
+        }
+      }
+    },
+    "CloudApplianceConfigurationList": {
+      "description": "The cloud appliance configuration list",
+      "required": [
+        "value"
+      ],
+      "type": "object",
+      "properties": {
+        "value": {
+          "description": "The value.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/CloudApplianceConfiguration"
+          }
+        }
+      }
+    },
+    "CloudApplianceConfigurationProperties": {
+      "description": "The properties of cloud appliance configuration.",
+      "required": [
+        "modelNumber",
+        "cloudPlatform",
+        "acsConfiguration",
+        "supportedStorageAccountTypes",
+        "supportedRegions",
+        "supportedVmTypes",
+        "supportedVmImages"
+      ],
+      "type": "object",
+      "properties": {
+        "modelNumber": {
+          "description": "The model number.",
+          "type": "string"
+        },
+        "cloudPlatform": {
+          "description": "The cloud platform.",
+          "type": "string"
+        },
+        "acsConfiguration": {
+          "$ref": "#/definitions/AcsConfiguration",
+          "description": "The ACS configuration."
+        },
+        "supportedStorageAccountTypes": {
+          "description": "The supported storage account types.",
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "supportedRegions": {
+          "description": "The supported regions.",
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "supportedVmTypes": {
+          "description": "The supported virtual machine types.",
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "supportedVmImages": {
+          "description": "The supported virtual machine images.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/VmImage"
+          }
+        }
+      }
+    },
+    "CloudApplianceSettings": {
+      "description": "The cloud appliance settings.",
+      "type": "object",
+      "properties": {
+        "serviceDataEncryptionKey": {
+          "$ref": "#/definitions/AsymmetricEncryptedSecret",
+          "description": "The service data encryption key (encrypted with DAK)."
+        },
+        "channelIntegrityKey": {
+          "$ref": "#/definitions/AsymmetricEncryptedSecret",
+          "description": "The channel integrity key (encrypted with DAK)."
+        }
+      }
+    },
     "ConfigureDeviceRequest": {
       "description": "The mandatory device configuration request.",
       "required": [
@@ -5387,6 +6154,20 @@
             "name": "InEligibilityCategory",
             "modelAsString": false
           }
+        }
+      }
+    },
+    "DimensionFilter": {
+      "description": "The dimension filter.",
+      "type": "object",
+      "properties": {
+        "name": {
+          "description": "Specifies the dimension name. E.g., NetworkInterface. Valid values are the ones specified in the field \"dimensions\" in the ListMetricDefinitions call. Only 'Equality' operator is supported for this property.",
+          "type": "string"
+        },
+        "values": {
+          "description": "Specifies the dimension value. E.g., Data0. Valid values are the ones returned in the field \"dimensions\" in the ListMetricDefinitions call. Only 'Equality' operator is supported for this property.",
+          "type": "string"
         }
       }
     },
@@ -6201,6 +6982,301 @@
         }
       }
     },
+    "MetricAvailablity": {
+      "description": "The metric availability.",
+      "type": "object",
+      "properties": {
+        "timeGrain": {
+          "description": "The aggregation interval for the metric.",
+          "type": "string"
+        },
+        "retention": {
+          "description": "The retention period for the metric at the specified timegrain.",
+          "type": "string"
+        }
+      }
+    },
+    "MetricData": {
+      "description": "The metric data.",
+      "type": "object",
+      "properties": {
+        "timeStamp": {
+          "format": "date-time",
+          "description": "The time stamp of the metric data.",
+          "type": "string"
+        },
+        "sum": {
+          "format": "double",
+          "description": "The sum of all samples at the time stamp.",
+          "type": "number"
+        },
+        "count": {
+          "format": "int32",
+          "description": "The count of all samples at the time stamp.",
+          "type": "integer"
+        },
+        "average": {
+          "format": "double",
+          "description": "The average of all samples at the time stamp.",
+          "type": "number"
+        },
+        "minimum": {
+          "format": "double",
+          "description": "The minimum of all samples at the time stamp.",
+          "type": "number"
+        },
+        "maximum": {
+          "format": "double",
+          "description": "The maximum of all samples at the time stamp.",
+          "type": "number"
+        }
+      }
+    },
+    "MetricDefinition": {
+      "description": "The monitoring metric definition.",
+      "type": "object",
+      "properties": {
+        "name": {
+          "$ref": "#/definitions/MetricName",
+          "description": "The metric name."
+        },
+        "unit": {
+          "description": "The metric unit.",
+          "enum": [
+            "Bytes",
+            "BytesPerSecond",
+            "Count",
+            "CountPerSecond",
+            "Percent",
+            "Seconds"
+          ],
+          "type": "string",
+          "x-ms-enum": {
+            "name": "MetricUnit",
+            "modelAsString": false
+          }
+        },
+        "primaryAggregationType": {
+          "description": "The metric aggregation type.",
+          "enum": [
+            "Average",
+            "Last",
+            "Maximum",
+            "Minimum",
+            "None",
+            "Total"
+          ],
+          "type": "string",
+          "x-ms-enum": {
+            "name": "MetricAggregationType",
+            "modelAsString": false
+          }
+        },
+        "resourceId": {
+          "description": "The metric source ID.",
+          "type": "string"
+        },
+        "metricAvailabilities": {
+          "description": "The available metric granularities.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/MetricAvailablity"
+          }
+        },
+        "dimensions": {
+          "description": "The available metric dimensions.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/MetricDimension"
+          }
+        },
+        "category": {
+          "description": "The category of the metric.",
+          "type": "string"
+        },
+        "type": {
+          "description": "The metric definition type.",
+          "type": "string"
+        }
+      }
+    },
+    "MetricDefinitionList": {
+      "description": "The list of metric definitions.",
+      "type": "object",
+      "properties": {
+        "value": {
+          "description": "The list of metric definitions.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/MetricDefinition"
+          }
+        }
+      }
+    },
+    "MetricDimension": {
+      "description": "The metric dimension. It indicates the source of the metric.",
+      "type": "object",
+      "properties": {
+        "name": {
+          "description": "The metric dimension name.",
+          "type": "string"
+        },
+        "value": {
+          "description": "The metric dimension values.",
+          "type": "string"
+        }
+      }
+    },
+    "MetricFilter": {
+      "description": "The OData filters to be used for metrics.",
+      "required": [
+        "category"
+      ],
+      "type": "object",
+      "properties": {
+        "name": {
+          "$ref": "#/definitions/MetricNameFilter",
+          "description": "Specifies the metric name filter specifying the name of the metric to be filtered on. Only 'Equality' operator is supported for this property."
+        },
+        "startTime": {
+          "format": "date-time",
+          "description": "Specifies the start time of the time range to be queried. Only 'Greater Than Or Equal To' operator is supported for this property.",
+          "type": "string"
+        },
+        "endTime": {
+          "format": "date-time",
+          "description": "Specifies the end time of the time range to be queried. Only 'Less Than Or Equal To' operator is supported for this property.",
+          "type": "string"
+        },
+        "timeGrain": {
+          "description": "Specifies the time granularity of the metrics to be returned. E.g., \"P1D\". Valid values are the ones returned as the field \"timeGrain\" in the ListMetricDefinitions call. Only 'Equality' operator is supported for this property.",
+          "type": "string"
+        },
+        "category": {
+          "description": "Specifies the category of the metrics to be filtered. E.g., \"CapacityUtilization\". Valid values are the ones returned as the field \"category\" in the ListMetricDefinitions call. Only 'Equality' operator is supported for this property.",
+          "type": "string"
+        },
+        "dimensions": {
+          "$ref": "#/definitions/DimensionFilter",
+          "description": "Specifies the source(the dimension) of the metrics to be filtered. Only 'Equality' operator is supported for this property."
+        }
+      }
+    },
+    "MetricList": {
+      "description": "The metric list.",
+      "type": "object",
+      "properties": {
+        "value": {
+          "description": "The value.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Metrics"
+          }
+        }
+      }
+    },
+    "MetricName": {
+      "description": "The metric name.",
+      "type": "object",
+      "properties": {
+        "value": {
+          "description": "The metric name.",
+          "type": "string"
+        },
+        "localizedValue": {
+          "description": "The localized metric name.",
+          "type": "string"
+        }
+      }
+    },
+    "MetricNameFilter": {
+      "description": "The metric name filter, specifying the name of the metric to be filtered on.",
+      "type": "object",
+      "properties": {
+        "value": {
+          "description": "Specifies the metric name to be filtered on. E.g., CloudStorageUsed. Valid values are the ones returned in the field \"name\" in the ListMetricDefinitions call. Only 'Equality' operator is supported for this property.",
+          "type": "string"
+        }
+      }
+    },
+    "Metrics": {
+      "description": "The monitoring metric.",
+      "type": "object",
+      "properties": {
+        "resourceId": {
+          "description": "The ID of metric source.",
+          "type": "string"
+        },
+        "startTime": {
+          "format": "date-time",
+          "description": "The start time of the metric data.",
+          "type": "string"
+        },
+        "endTime": {
+          "format": "date-time",
+          "description": "The end time of the metric data.",
+          "type": "string"
+        },
+        "timeGrain": {
+          "description": "The time granularity of the metric data.",
+          "type": "string"
+        },
+        "primaryAggregation": {
+          "description": "The metric aggregation type.",
+          "enum": [
+            "Average",
+            "Last",
+            "Maximum",
+            "Minimum",
+            "None",
+            "Total"
+          ],
+          "type": "string",
+          "x-ms-enum": {
+            "name": "MetricAggregationType",
+            "modelAsString": false
+          }
+        },
+        "name": {
+          "$ref": "#/definitions/MetricName",
+          "description": "The name of the metric."
+        },
+        "dimensions": {
+          "description": "The metric dimensions.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/MetricDimension"
+          }
+        },
+        "unit": {
+          "description": "The unit of the metric data.",
+          "enum": [
+            "Bytes",
+            "BytesPerSecond",
+            "Count",
+            "CountPerSecond",
+            "Percent",
+            "Seconds"
+          ],
+          "type": "string",
+          "x-ms-enum": {
+            "name": "MetricUnit",
+            "modelAsString": false
+          }
+        },
+        "type": {
+          "description": "The type of the metric data.",
+          "type": "string"
+        },
+        "values": {
+          "description": "The list of the metric data.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/MetricData"
+          }
+        }
+      }
+    },
     "NetworkAdapterList": {
       "description": "The collection of network adapters on the device.",
       "required": [
@@ -6600,6 +7676,83 @@
         }
       }
     },
+    "SecuritySettings": {
+      "description": "The security settings of a device.",
+      "required": [
+        "properties"
+      ],
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/BaseModel"
+        }
+      ],
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/SecuritySettingsProperties",
+          "description": "The properties of the security settings of a device.",
+          "x-ms-client-flatten": true
+        }
+      }
+    },
+    "SecuritySettingsPatch": {
+      "description": "Represents the patch request for the security settings of a device.",
+      "required": [
+        "properties"
+      ],
+      "type": "object",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/SecuritySettingsPatchProperties",
+          "description": "The properties of the security settings patch.",
+          "x-ms-client-flatten": true
+        }
+      }
+    },
+    "SecuritySettingsPatchProperties": {
+      "description": "The properties of the security settings patch.",
+      "type": "object",
+      "properties": {
+        "remoteManagementSettings": {
+          "$ref": "#/definitions/RemoteManagementSettingsPatch",
+          "description": "The remote management settings."
+        },
+        "deviceAdminPassword": {
+          "$ref": "#/definitions/AsymmetricEncryptedSecret",
+          "description": "The device administrator password."
+        },
+        "snapshotPassword": {
+          "$ref": "#/definitions/AsymmetricEncryptedSecret",
+          "description": "The snapshot manager password."
+        },
+        "chapSettings": {
+          "$ref": "#/definitions/ChapSettings",
+          "description": "The device CHAP and reverse-CHAP settings."
+        },
+        "cloudApplianceSettings": {
+          "$ref": "#/definitions/CloudApplianceSettings",
+          "description": "The cloud appliance settings."
+        }
+      }
+    },
+    "SecuritySettingsProperties": {
+      "description": "The properties of security settings of a device.",
+      "required": [
+        "remoteManagementSettings",
+        "chapSettings"
+      ],
+      "type": "object",
+      "properties": {
+        "remoteManagementSettings": {
+          "$ref": "#/definitions/RemoteManagementSettings",
+          "description": "The settings for remote management of a device."
+        },
+        "chapSettings": {
+          "$ref": "#/definitions/ChapSettings",
+          "description": "The Challenge-Handshake Authentication Protocol (CHAP) settings."
+        }
+      }
+    },
     "SendTestAlertEmailRequest": {
       "description": "The request for sending test alert email",
       "required": [
@@ -6970,6 +8123,39 @@
         "lastUpdatedTime": {
           "format": "date-time",
           "description": "The time when the last update was completed.",
+          "type": "string"
+        }
+      }
+    },
+    "VmImage": {
+      "description": "The virtual machine image.",
+      "required": [
+        "name",
+        "version",
+        "offer",
+        "publisher",
+        "sku"
+      ],
+      "type": "object",
+      "properties": {
+        "name": {
+          "description": "The name.",
+          "type": "string"
+        },
+        "version": {
+          "description": "The version.",
+          "type": "string"
+        },
+        "offer": {
+          "description": "The offer.",
+          "type": "string"
+        },
+        "publisher": {
+          "description": "The publisher.",
+          "type": "string"
+        },
+        "sku": {
+          "description": "The SKU.",
           "type": "string"
         }
       }
