@@ -16,7 +16,7 @@ const exec = require('child_process').exec,
 let swaggersToProcess = utils.getFilesChangedInPR();
 let targetBranch = utils.getTargetBranchFromJenkins();
 let sourceBranch = utils.getSourceBranchFromJenkins();
-let pullRequestNumber = utils.getPullRequestNumber();
+let pullRequestNumber = utils.getPullRequestIdJenkins();
 let linterCmd = `autorest --azure-arm=true --message-format=json --input-file=`;
 let gitCheckoutCmd = `git checkout ${targetBranch}`;
 let gitLogCmd = `git log -3`;
