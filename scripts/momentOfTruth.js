@@ -2,6 +2,7 @@
 // Licensed under the MIT License. See License.txt in the project root for license information.
 
 'use strict';
+process.env['PR_ONLY'] = 'true';
 
 const exec = require('child_process').exec,
     execSync = require('child_process').execSync,
@@ -13,7 +14,6 @@ const exec = require('child_process').exec,
     http = require('http'),
     azure = require('azure-storage');
 
-process.env['PR_ONLY'] = 'true';
 let swaggersToProcess = utils.getFilesChangedInPR();
 let targetBranch = utils.getTargetBranchFromJenkins();
 let sourceBranch = utils.getSourceBranchFromJenkins();
