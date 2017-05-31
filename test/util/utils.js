@@ -216,7 +216,7 @@ exports.getTimeStamp = function getTimeStamp() {
  */
 exports.getFilesChangedInPR = function getFilesChangedInPR() {
   let result = exports.swaggers;
-  console.log(`@@@@@ pexports.prOnly = ${exports.prOnly}`);
+  console.log(`@@@@@ exports.prOnly = ${exports.prOnly}`);
   if (exports.prOnly === 'true') {
     let targetBranch, cmd, filesChanged, swaggerFilesInPR;
     try {

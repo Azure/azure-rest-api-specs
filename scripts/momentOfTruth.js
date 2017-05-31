@@ -13,6 +13,7 @@ const exec = require('child_process').exec,
     http = require('http'),
     azure = require('azure-storage');
 
+process.env['PR_ONLY'] = 'true';
 let swaggersToProcess = utils.getFilesChangedInPR();
 let targetBranch = utils.getTargetBranchFromJenkins();
 let sourceBranch = utils.getSourceBranchFromJenkins();
