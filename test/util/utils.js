@@ -184,7 +184,9 @@ exports.getPullRequestIdJenkins = function getPullRequestIdJenkins() {
 exports.getRepoName = function getRepoName() {
   let result = process.env['TRAVIS_REPO_SLUG'];
   console.log(`@@@@@ process.env['TRAVIS_REPO_SLUG'] - ${process.env['TRAVIS_REPO_SLUG']}`);
-
+  if(!result) {
+    result = 'Azure/azure-rest-api-spec';
+  }
   return result;
 };
 
@@ -214,6 +216,7 @@ exports.getTimeStamp = function getTimeStamp() {
  */
 exports.getFilesChangedInPR = function getFilesChangedInPR() {
   let result = exports.swaggers;
+  console.log(`@@@@@ pexports.prOnly = ${exports.prOnly}`);
   if (exports.prOnly === 'true') {
     let targetBranch, cmd, filesChanged, swaggerFilesInPR;
     try {
