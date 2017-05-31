@@ -221,7 +221,8 @@ exports.getFilesChangedInPR = function getFilesChangedInPR() {
     let targetBranch, cmd, filesChanged, swaggerFilesInPR;
     try {
       targetBranch = exports.getTargetBranch();
-      cmd = `git diff --name-only HEAD $(git merge-base HEAD ${targetBranch})`;
+      let mergeBaseSha = execSync(`git merge-base HEAD ${targetBranch}`, { encoding: 'utf8' });
+      cmd = `git diff --name-only HEAD ${mergeBaseSha}`;
       filesChanged = execSync(cmd, { encoding: 'utf8' });
       console.log('>>>>> Files changed in this PR are as follows:')
       console.log(filesChanged);
