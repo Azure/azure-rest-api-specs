@@ -865,6 +865,112 @@
       "required": [ "keySource" ],
       "description": "The encryption settings on the storage account."
     },
+    "VirtualNetworkRule": {
+      "properties": {
+        "id": {
+          "type": "string",
+          "x-ms-client-name": "VirtualNetworkResourceId",
+          "description": "A URL of vnet, subnet, classicVnet or classicSubnet."
+        },
+        "action": {
+          "type": "string",
+          "enum": [
+            "allow"
+          ],
+          "x-ms-enum": {
+            "name": "Action",
+            "modelAsString": false
+          },
+          "default": "allow",
+          "description": "The action of virtual network ACL rule."
+        },
+        "state": {
+          "type": "string",
+          "enum": [
+            "provisioning",
+            "deprovisioning",
+            "succeeded",
+            "failed",
+            "networkSourceDeleted"
+          ],
+          "description": "Gets the state of virtual network ACL rule."
+        }
+      },
+      "required": [ "id" ],
+      "description": "Virtual Network rule."
+    },
+    "IpRule": {
+      "properties": {
+        "value": {
+          "type": "string",
+          "x-ms-client-name": "IPAddressOrRange",
+          "description": "Specifies the IP or IP range in CIDR format. Only IPV4 address is allowed."
+        },
+        "action": {
+          "type": "string",
+          "enum": [
+            "allow"
+          ],
+          "x-ms-enum": {
+            "name": "Action",
+            "modelAsString": false
+          },
+          "default": "allow",
+          "description": "The action of IP ACL rule."
+        }
+      },
+      "required": [
+        "value"
+      ],
+      "description": "IP rule with specific IP or IP range in CIDR format."
+    },
+    "StorageNetworkAcls": {
+      "properties": {
+        "bypass": {
+          "type": "string",
+          "enum": [
+            "None",
+            "Logging",
+            "Metrics",
+            "AzureServices"
+          ],
+          "x-ms-client-name": "Bypass",
+          "default": "AzureServices",
+          "description": "Specifies whether traffic is bypassed for Logging/Metrics/AzureServices. Possible values are any combination of Logging|Metrics|AzureServices (For example, \"Logging, Metrics\"), or None to bypass none of those traffics."
+        },
+        "virtualNetworkRules": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/VirtualNetworkRule"
+          },
+          "description": "Sets the virtual network ACL rules"
+        },
+        "ipRules": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/IpRule"
+          },
+          "description": "Sets the IP ACL rules"
+        },
+        "defaultAction": {
+          "type": "string",
+          "enum": [
+            "allow",
+            "deny"
+          ],
+          "x-ms-enum": {
+            "name": "DefaultAction",
+            "modelAsString": false
+          },
+          "default": "allow",
+          "description": "Specifies the default action of allow or deny when no other rules match."
+        }
+      },
+      "required": [
+        "defaultAction"
+      ],
+      "description": "Network ACL"
+    },
     "StorageAccountPropertiesCreateParameters": {
       "properties": {
         "customDomain": {
@@ -874,6 +980,9 @@
         "encryption": {
           "$ref": "#/definitions/Encryption",
           "description": "Provides the encryption settings on the account. If left unspecified the account encryption settings will remain the same. The default setting is unencrypted."
+        },
+        "networkAcls": {
+          "$ref": "#/definitions/StorageNetworkAcls"
         },
         "accessTier": {
           "type": "string",
@@ -1098,6 +1207,10 @@
           "default": false,
           "x-ms-client-name": "EnableHttpsTrafficOnly",
           "description": "Allows https traffic only to storage service if sets to true."
+        },
+        "networkAcls": {
+          "$ref": "#/definitions/StorageNetworkAcls",
+          "readOnly": true
         }
       },
       "description": "Properties of the storage account."
@@ -1232,6 +1345,9 @@
           "default": false,
           "x-ms-client-name": "EnableHttpsTrafficOnly",
           "description": "Allows https traffic only to storage service if sets to true."
+        },
+        "networkAcls": {
+          "$ref": "#/definitions/StorageNetworkAcls"
         }
       },
       "description": "The parameters used when updating a storage account."
