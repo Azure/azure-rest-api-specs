@@ -63,6 +63,44 @@ exports.parseJsonFromFile = function parseJsonFromFile(filepath, callback) {
 
 /**
  * Gets the name of the target branch to which the PR is sent. We are using the environment 
+ * variable provided by Jenkin's Github plugin. It is called ghprbTargetBranch. More info can be found here:
+ * https://wiki.jenkins-ci.org/display/JENKINS/Github+pull+request+builder+plugin
+ * If the environment variable is undefined then the method returns 'master' as the default value.
+ * @returns {string} branchName The target branch name.
+ */
+exports.getTargetBranchFromJenkins = function getTargetBranchFromJenkins() {
+  console.log(`@@@@@ process.env['ghprbTargetBranch'] - ${process.env['ghprbTargetBranch']}`);
+  let result = process.env['ghprbTargetBranch'] || 'master';
+  result = result.trim();
+  console.log(`>>>>> The target branch is: "${result}".`);
+  return result;
+};
+
+/**
+ * Gets the name of the source branch from which the PR is sent. We are using the environment 
+ * variable provided by Jenkin's Github plugin. It is called ghprbSourceBranch. More info can be found here:
+ * https://wiki.jenkins-ci.org/display/JENKINS/Github+pull+request+builder+plugin
+ * If the environment variable is undefined then the method returns 'master' as the default value.
+ * @returns {string} branchName The source branch name.
+ */
+exports.getSourceBranchFromJenkins = function getSourceBranchFromJenkins() {
+  let cmd = 'git rev-parse --abbrev-ref HEAD';
+  let result = process.env['ghprbSourceBranch'];
+  console.log(`@@@@@ process.env['ghprbSourceBranch'] - ${process.env['ghprbSourceBranch']}`);
+  if (!result) {
+    try {
+      result = execSync(cmd, { encoding: 'utf8' });
+    } catch (err) {
+      console.log(`An error occurred while getting the current branch ${util.inspect(err, { depth: null })}.`);
+    }
+  }
+  result = result.trim();
+  console.log(`>>>>> The source branch is: "${result}".`);
+  return result;
+};
+
+/**
+ * Gets the name of the target branch to which the PR is sent. We are using the environment 
  * variable provided by travis-ci. It is called TRAVIS_BRANCH. More info can be found here:
  * https://docs.travis-ci.com/user/environment-variables/#Default-Environment-Variables
  * If the environment variable is undefined then the method returns 'master' as the default value.
@@ -105,6 +143,30 @@ exports.getSourceBranch = function getSourceBranch() {
 exports.getPullRequestNumber = function getPullRequestNumber() {
   let result = process.env['TRAVIS_PULL_REQUEST'];
   console.log(`@@@@@ process.env['TRAVIS_PULL_REQUEST'] - ${process.env['TRAVIS_PULL_REQUEST']}`);
+
+  if (!result) {
+    result = 'undefined';
+  }
+
+  return result;
+};
+
+/**
+ * Gets the PR number.
+ * @returns {string} PR number or 'undefined'.
+ */
+exports.getPullRequestNumberJenkins = function getPullRequestNumberJenkins() {
+  let result = getPullRequestIdJenkins();
+  return result;
+};
+
+/**
+ * Gets the PR number.
+ * @returns {string} PR number or 'undefined'.
+ */
+exports.getPullRequestIdJenkins = function getPullRequestIdJenkins() {
+  let result = process.env['ghprbPullId'];
+  console.log(`@@@@@ process.env['ghprbPullId'] - ${process.env['ghprbPullId']}`);
 
   if (!result) {
     result = 'undefined';

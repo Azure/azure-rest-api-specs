@@ -14,8 +14,8 @@ const exec = require('child_process').exec,
     azure = require('azure-storage');
 
 let swaggersToProcess = utils.getFilesChangedInPR();
-let targetBranch = utils.getTargetBranch();
-let sourceBranch = utils.getSourceBranch();
+let targetBranch = utils.getTargetBranchFromJenkins();
+let sourceBranch = utils.getSourceBranchFromJenkins();
 let pullRequestNumber = utils.getPullRequestNumber();
 let linterCmd = `autorest --azure-arm=true --message-format=json --input-file=`;
 let gitCheckoutCmd = `git checkout ${targetBranch}`;
