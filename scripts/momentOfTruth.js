@@ -13,7 +13,6 @@ const exec = require('child_process').exec,
     http = require('http'),
     azure = require('azure-storage');
 
-let blobService = azure.createBlobService();
 let swaggersToProcess = utils.getFilesChangedInPR();
 let targetBranch = utils.getTargetBranch();
 let sourceBranch = utils.getSourceBranch();
@@ -101,11 +100,12 @@ function getLinterResult(swaggerPath) {
 // Uploads the result file to Azure Blob Storage
 function uploadToAzureStorage() {
     console.log(logFilepath);
-    blobService.createBlockBlobFromLocalFile('moment-of-truth', filename, logFilepath, function (error, result, response) {
-        if (!error) {
-            console.log(error);
-        }
-    });
+    // let blobService = azure.createBlobService();
+    // blobService.createBlockBlobFromLocalFile('moment-of-truth', filename, logFilepath, function (error, result, response) {
+    //     if (!error) {
+    //         console.log(error);
+    //     }
+    // });
 }
 
 // Run linter tool
