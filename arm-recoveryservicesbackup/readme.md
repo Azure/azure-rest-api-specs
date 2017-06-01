@@ -41,9 +41,10 @@ csharp:
 
 ```yaml
 python:
-  namespace: azure.mgmt.recoveryservices.backup
+  namespace: azure.mgmt.recoveryservicesbackup
   package-name: azure-mgmt-recoveryservicesbackup
-  package-version: 1.0.0-preview
+  package-version: 0.1.0
   output-folder: Generated/Python
   payload-flattening-threshold: 2
+  license-header: MICROSOFT_MIT_NO_VERSION
 ```
