@@ -719,7 +719,15 @@
         },
         "endpointStatus": {
           "type": "string",
-          "description": "The status of the endpoint. If the endpoint is Enabled, it is probed for endpoint health and is included in the traffic routing method.  Possible values are 'Enabled' and 'Disabled'."
+          "description": "The status of the endpoint. If the endpoint is Enabled, it is probed for endpoint health and is included in the traffic routing method.",
+          "enum": [
+            "Enabled",
+            "Disabled"
+          ],
+          "x-ms-enum": {
+            "name": "EndpointStatus",
+            "modelAsString": true
+          }
         },
         "weight": {
           "type": "integer",
@@ -737,7 +745,19 @@
         },
         "endpointMonitorStatus": {
           "type": "string",
-          "description": "The monitoring status of the endpoint."
+          "description": "The monitoring status of the endpoint.",
+          "enum": [
+            "CheckingEndpoint",
+            "Online",
+            "Degraded",
+            "Disabled",
+            "Inactive",
+            "Stopped"
+          ],
+          "x-ms-enum": {
+            "name": "EndpointMonitorStatus",
+            "modelAsString": true
+          }
         },
         "minChildEndpoints": {
           "type": "integer",
@@ -805,11 +825,31 @@
       "properties": {
         "profileMonitorStatus": {
           "type": "string",
-          "description": "The profile-level monitoring status of the Traffic Manager profile."
+          "description": "The profile-level monitoring status of the Traffic Manager profile.",
+          "enum": [
+            "CheckingEndpoints",
+            "Online",
+            "Degraded",
+            "Disabled",
+            "Inactive"
+          ],
+          "x-ms-enum": {
+            "name": "ProfileMonitorStatus",
+            "modelAsString": true
+          }
         },
         "protocol": {
           "type": "string",
-          "description": "The protocol (HTTP, HTTPS or TCP) used to probe for endpoint health."
+          "description": "The protocol (HTTP, HTTPS or TCP) used to probe for endpoint health.",
+          "enum": [
+            "HTTP",
+            "HTTPS",
+            "TCP"
+          ],
+          "x-ms-enum": {
+            "name": "MonitorProtocol",
+            "modelAsString": true
+          }
         },
         "port": {
           "type": "integer",
@@ -842,11 +882,29 @@
       "properties": {
         "profileStatus": {
           "type": "string",
-          "description": "The status of the Traffic Manager profile.  Possible values are 'Enabled' and 'Disabled'."
+          "description": "The status of the Traffic Manager profile.",
+          "enum": [
+            "Enabled",
+            "Disabled"
+          ],
+          "x-ms-enum": {
+            "name": "ProfileStatus",
+            "modelAsString": true
+          }
         },
         "trafficRoutingMethod": {
           "type": "string",
-          "description": "The traffic routing method of the Traffic Manager profile.  Possible values are 'Performance', 'Weighted', 'Priority' or 'Geographic'."
+          "description": "The traffic routing method of the Traffic Manager profile.",
+          "enum": [
+            "Performance",
+            "Priority",
+            "Weighted",
+            "Geographic"
+          ],
+          "x-ms-enum": {
+            "name": "TrafficRoutingMethod",
+            "modelAsString": true
+          }
         },
         "dnsConfig": {
           "$ref": "#/definitions/DnsConfig",
