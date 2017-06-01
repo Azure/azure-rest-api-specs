@@ -106,8 +106,8 @@ We request OpenAPI(Swagger) spec authoring be assigned to engineers who have an
 | S2004	| NonAppJsonTypeWarning | Please make sure that media types other than 'application/json' are supported by your service. | Warning |
 | M2063	| BodyParametersValidation | A body parameter must be named 'parameters'. | Warning |
 | M2017	| PutRequestResponseValidation | A PUT operation request body schema should be the same as its 200 response schema, to allow reusing the same entity between GET and PUT. If the schema of the PUT request body is a superset of the GET response body, make sure you have a PATCH operation to make the resource updatable. Operation: '{0}' Request Model: '{1}' Response Model: '{2}' | Warning |
-| S2005	| LocationMustHaveXmsMutability | The "location" property of "Resource" model definition in ARM, MUST have "x-ms-mutability": ["create", "read"] extension
-| S2006	| ControlCharactersNotAllowed | Control characters are not allowed in a given specification.
+| S2005	| LocationMustHaveXmsMutability | The "location" property of "Resource" model definition in ARM, MUST have "x-ms-mutability": ["create", "read"] extension.
+| S2006	| ControlCharactersNotAllowed | Specification must not contain any control characters.
 
 ## Rule Descriptions
 
