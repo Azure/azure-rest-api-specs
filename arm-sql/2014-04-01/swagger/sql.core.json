@@ -16,7 +16,46 @@
     "application/json"
   ],
   "paths": {
-        "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/servers/{serverName}/databases/{databaseName}/pause": {
+    "/subscriptions/{subscriptionId}/providers/Microsoft.Sql/checkNameAvailability": {
+      "post": {
+        "tags": [
+          "CheckNameAvailability"
+        ],
+        "operationId": "CheckNameAvailability",
+        "description": "Determines whether a resource can be created with the specified name.",
+        "x-ms-examples": {
+          "Check for a server name that is available": { "$ref": "../examples/CheckNameAvailabilityServerAvailable.json" },
+          "Check for a server name that already exists": { "$ref": "../examples/CheckNameAvailabilityServerAlreadyExists.json" },
+          "Check for a server name that is invalid": { "$ref": "../examples/CheckNameAvailabilityServerInvalid.json" }
+        },
+        "parameters": [
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "name": "parameters",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/CheckNameAvailabilityRequest"
+            },
+            "description": "The required parameters for creating or updating a database."
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/CheckNameAvailabilityResponse"
+            }
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/servers/{serverName}/databases/{databaseName}/pause": {
       "post": {
         "tags": [
           "DatabaseActivation"
@@ -1106,18 +1145,18 @@
   "definitions": {
     "Resource":{
       "description":"ARM resource.",
-      "properties":{  
-        "id":{  
+      "properties":{
+        "id":{
           "readOnly":true,
           "type":"string",
           "description":"Resource ID."
         },
-        "name":{  
+        "name":{
           "readOnly":true,
           "type":"string",
           "description":"Resource name."
         },
-        "type":{  
+        "type":{
           "readOnly":true,
           "type":"string",
           "description":"Resource type."
@@ -1125,46 +1164,95 @@
       },
       "x-ms-azure-resource": true
     },
-    "TrackedResource":{  
+    "TrackedResource":{
       "description":"ARM tracked top level resource.",
-      "properties":{  
-        "tags":{  
+      "properties":{
+        "tags":{
           "type":"object",
-          "additionalProperties":{  
+          "additionalProperties":{
             "type":"string"
           },
-          "x-ms-mutability":[  
+          "x-ms-mutability":[
             "read",
             "create",
             "update"
           ],
           "description":"Resource tags."
         },
-        "location":{  
+        "location":{
           "type":"string",
-          "x-ms-mutability":[  
+          "x-ms-mutability":[
             "read",
             "create"
           ],
           "description":"Resource location."
         }
       },
-      "required":[  
+      "required":[
         "location"
       ],
-      "allOf":[  
-        {  
+      "allOf":[
+        {
           "$ref":"#/definitions/Resource"
         }
       ]
     },
-    "ProxyResource":{  
+    "ProxyResource":{
       "description":"ARM proxy resource.",
-      "allOf":[  
-        {  
+      "allOf":[
+        {
           "$ref":"#/definitions/Resource"
         }
       ]
+    },
+    "CheckNameAvailabilityRequest": {
+      "properties":{
+        "name": {
+          "type": "string",
+          "description": "The name whose availability is to be checked."
+        },
+        "type": {
+          "type": "string",
+          "description": "The type of resource that is used as the scope of the availability check.",
+          "enum": [
+            "Microsoft.Sql/servers"
+          ],
+          "x-ms-enum": {
+            "name": "CheckNameAvailabilityResourceType",
+            "modelAsString": false
+          }
+        }
+      },
+      "description": "A request to check whether the specified name for a resource is available."
+    },
+    "CheckNameAvailabilityResponse": {
+      "properties":{
+        "available": {
+          "type": "boolean",
+          "description": "True if the name is available, otherwise false."
+        },
+        "message": {
+          "type": "string",
+          "description": "A message explaining why the name is unavailable. Will be null if the name is available."
+        },
+        "name": {
+          "type": "string",
+          "description": "The name whose availability was checked."
+        },
+        "reason": {
+          "type": "string",
+          "description": "The reason code explaining why the name is unavailable. Will be null if the name is available.",
+          "enum": [
+            "Invalid",
+            "AlreadyExists"
+          ],
+          "x-ms-enum": {
+            "name": "CheckNameAvailabilityReason",
+            "modelAsString": false
+          }
+        }
+      },
+      "description": "A response indicating whether the specified name for a resource is available."
     },
     "RecommendedElasticPoolMetric": {
       "properties": {
@@ -1516,9 +1604,9 @@
     },
     "ElasticPoolActivity": {
       "properties": {
-        "location":{  
+        "location":{
           "type":"string",
-          "x-ms-mutability":[  
+          "x-ms-mutability":[
             "read",
             "create"
           ],
@@ -1639,9 +1727,9 @@
     },
     "ElasticPoolDatabaseActivity": {
       "properties": {
-        "location":{  
+        "location":{
           "type":"string",
-          "x-ms-mutability":[  
+          "x-ms-mutability":[
             "read",
             "create"
           ],
