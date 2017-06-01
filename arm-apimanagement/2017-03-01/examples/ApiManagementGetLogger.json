@@ -1,0 +1,27 @@
+{
+    "parameters": {
+        "serviceName": "apimService1",
+        "resourceGroupName": "rg1",
+        "api-version": "2017-03-01",
+        "subscriptionId": "subid",
+        "loggerid": "templateLogger"
+    },
+    "responses": {
+        "200": {
+            "body": {
+                "id": "/subscriptions/subid/resourceGroups/rg1/providers/Microsoft.ApiManagement/service/apimService1/loggers/templateLogger",
+                "type": "Microsoft.ApiManagement/service/loggers",
+                "name": "templateLogger",
+                "properties": {
+                    "type": "azureEventHub",
+                    "description": "template logger description",
+                    "credentials": {
+                        "name": "templateeh",
+                        "connectionString": "{{Logger-Credentials-592f1174cc83890dc4f32687}}"
+                    },
+                    "isBuffered": true
+                }
+            }
+        }
+    }
+}

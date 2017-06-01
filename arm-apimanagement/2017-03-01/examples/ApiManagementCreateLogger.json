@@ -1,0 +1,53 @@
+{
+  "parameters": {
+    "serviceName": "apimService1",
+    "resourceGroupName": "rg1",
+    "api-version": "2017-03-01",
+    "subscriptionId": "subid",
+    "loggerid": "loggerId",
+    "parameters": {
+      "properties": {
+        "type": "azureEventHub",
+        "description": "adding a new logger",
+        "credentials": {
+          "name": "hydraeventhub",
+          "connectionString": "Endpoint=sb://contoso-ns.servicebus.windows.net/;SharedAccessKeyName=Sender;SharedAccessKey=.."
+        }
+      }
+    }
+  },
+  "responses": {
+    "201": {
+      "body": {
+        "id": "/subscriptions/subid/resourceGroups/rg1/providers/Microsoft.ApiManagement/service/apimService1/loggers/loggerId",
+        "type": "Microsoft.ApiManagement/service/loggers",
+        "name": "loggerId",
+        "properties": {
+          "type": "azureEventHub",
+          "description": "adding a new logger",
+          "credentials": {
+            "name": "hydraeventhub",
+            "connectionString": "{{593099d6d8d14f0a34cb28c1}}"
+          },
+          "isBuffered": true
+        }
+      }
+    },
+    "200": {
+      "body": {
+        "id": "/subscriptions/subid/resourceGroups/rg1/providers/Microsoft.ApiManagement/service/apimService1/loggers/loggerId",
+        "type": "Microsoft.ApiManagement/service/loggers",
+        "name": "loggerId",
+        "properties": {
+          "type": "azureEventHub",
+          "description": "adding a new logger",
+          "credentials": {
+            "name": "hydraeventhub",
+            "connectionString": "{{593099d6d8d14f0a34cb28c1}}"
+          },
+          "isBuffered": true
+        }
+      }
+    }
+  }
+}
