@@ -107,63 +107,63 @@ We request OpenAPI(Swagger) spec authoring be assigned to engineers who have an
 | S2004	| NonAppJsonTypeWarning | Please make sure that media types other than 'application/json' are supported by your service. | Warning |
 | M2063	| BodyParametersValidation | A body parameter must be named 'parameters'. | Warning |
 | M2017	| PutRequestResponseValidation | A PUT operation request body schema should be the same as its 200 response schema, to allow reusing the same entity between GET and PUT. If the schema of the PUT request body is a superset of the GET response body, make sure you have a PATCH operation to make the resource updatable. Operation: '{0}' Request Model: '{1}' Response Model: '{2}' | Warning |
-| S2005	| LocationMustHaveXmsMutability | The "location" property of "Resource" model definition in ARM MUST have "x-ms-mutability": ["create", "read"] extension.
+| S4002	| LocationMustHaveXmsMutability | The "location" property of "Resource" model definition in ARM MUST have "x-ms-mutability": ["create", "read"] extension.
 | S2008	| PostOperationIdContainsUrlVerb | A POST operation OperationId must contain the verb at the end of the url related to the operation. 
 | S2009	| ArraySchemaMustHaveItems | A property of type `Array` must have `items` defined in its `Schema`.
 
 ## Rule Descriptions
 
-### <a name="M3012" />M3012 APIVersionPattern
-**Output Message**: API Version must be in the format: yyyy-MM-dd, optionally followed by -preview, -alpha, -beta, -rc, -privatepreview.
+### <a name="S4002" />S4002	LocationMustHaveXmsMutability
+**Output Message**: Property 'location' must have '\"x-ms-mutability\":[\"read\", \"create\"]' extension defined. Resource Model: '{0}'
 
-**Description**: The API Version paramemter MUST be in the Year-Month-Date format (i.e. 2016-07-04.)  NOTE that this is the en-US ordering of month and date.  
+**Description**: A tracked resource's `location` property must have the `x-ms-mutability` properties set as `read`, `create`.
 
-The date MAY optionally be followed by one of:
-* -preview - Indicates the API version is in (public) preview
-* -alpha
-* -beta
-* -rc (release candidate)
-* -privatepreview
+**Why the rule is important**: Location is a property that is set once and non-updatable for a tracked resource. Hence, per ARM guidelines the only operations allowed are `read` and `create`.
 
-**Good Examples**: Examples of valid version patterns include:
-* 2016-07-04
-* 2016-07-04-preview
-
-**Bad Examples**: The following would be invalid:
-* 97-07-04 - Date should be YYYY, not YY
-* 2016/07/04 - Date should use "-", not "/"
-* 1842-07-04 - Year should be accurate; we didn't have Azure in 1842 :(
-* 2150-07-04 - Year should be current, not in the future; though we'll hopefully get here eventually :)
-* 2016-07-04-publicpreview - Use "-preview" to indicate a public preview
-* 2016-07-04-rc0 - Just use "rc", not "rc" + number
+**How to fix the violation**: Ensure that the `location` property in the tracked resource's hierarchy is correctly set to `read` and `create`.
 
 Links: [Index](#index) | [Error vs. Warning](#error-vs-warning) | [Automated Rules](#automated-rules) | [RPC](#rpc-violations): [Errors](#rpc-errors) or [Warnings](#rpc-warnings) | [SDK](#sdk-violations): [Errors](#sdk-errors) or [Warnings](#sdk-warnings)
 
-### <a name="M3016" />M3016 PropertiesNamesCamelCase
-**Output Message**: Property named: "{0}", must follow camelCase style. Example: "{1}".
-**Output Message**: Property named: "{0}", for definition: "{1}" must follow camelCase style. Example: "{2}".
+### <a name="S2008" />S2008	PostOperationIdContainsUrlVerb
+**Output Message**: OperationId must contain the verb: '{0}' in:'{1}'
 
-**Description**: Property names must use lowerCamelCase style. 
-If the property is a single word (ex: foo, bar, etc.) it will be all lowercase. 
-Two-letter acronmys (ex: ID, IO, IP, etc.) should be capitalized. 
-Three-letter acronyms (ex: API, URL, etc.) should only have the first letter capitalized (ex: Api, Url, etc.) 
-For more capitalization guidance, see: [https://msdn.microsoft.com/en-us/library/141e06ef(v=vs.71).aspx](https://msdn.microsoft.com/en-us/library/141e06ef(v=vs.71).aspx)
+**Description**: A POST operation's operationID must contain the verb indicated at the end of the corresponding url.
 
-**Good Examples**: Examples of lowerCamelCase style:
-* camelCase
-* foo
-* bar
-* fooBarBaz
-* resourceKey
-* resourceApiKey
+**Why the rule is important**: The url indicates the action performed by it, the corresponding POST operationId must therefore contain this verb for semantic consistency.
 
-**Bad Examples**: The following would be invalid:
-* PascalCase
-* UpperCamelCase
-* resourceAPIKey
+**How to fix the violation**: Ensure that the operationId for POST operation contains the verb indicated at the end of the url.
 
-**Bad Examples**: The following violate these guidelines but would not be caught by automation: 
-* alllowercase - If there are multiple words, please capitalize starting with the second word
-* miXeDcApItAlIzAtIoN - Please capitalize the first letter of each word (and not seemingly random letters)
+**Good Examples**: Examples of url and corresponding POST operationIds:
+* Url: /foo/{someResource}/activate
+* OperationId: SomeResourceTypes_ActivateResource
+
+**Bad Examples**: Examples of url and corresponding POST operationIds:
+* Url: /foo/{someResource}/activate
+* OperationId: SomeResourceTypes_StartResource
+
+Links: [Index](#index) | [Error vs. Warning](#error-vs-warning) | [Automated Rules](#automated-rules) | [RPC](#rpc-violations): [Errors](#rpc-errors) or [Warnings](#rpc-warnings) | [SDK](#sdk-violations): [Errors](#sdk-errors) or [Warnings](#sdk-warnings)
+
+### <a name="S2009" />S2009 ArraySchemaMustHaveItems
+**Output Message**: Please provide an items property for array type: '{0}'.
+
+**Description**: A schema of `array` type must always contain an `items` property. without it, AutoRest will fail to generate an SDK.
+
+**Why the rule is important**: AutoRest needs to know the type of item contained in the array so that it can correctly generate the corresponding code.
+
+**How to fix the violation**: Correctly specify the `items` section for given array type. The items can be of any primitive type or can be a reference to another object type.
+
+Links: [Index](#index) | [Error vs. Warning](#error-vs-warning) | [Automated Rules](#automated-rules) | [RPC](#rpc-violations): [Errors](#rpc-errors) or [Warnings](#rpc-warnings) | [SDK](#sdk-violations): [Errors](#sdk-errors) or [Warnings](#sdk-warnings)
+
+### <a name="R3011" />R3011 ControlCharactersNotAllowed
+**Output Message**: May not contain control characters:  Characters:'{0}' in:'{1}'
+
+**Description**: Verifies whether if a specification does not have any control characters in it.
+Control characters are not allowed in a specification.
+
+**Why the rule is important**: Per ARM guidelines, a specification must not contain any control characters.
+
+**How to fix the violation**: Remove the control characters in the specification.
+
+**Examples**: N/A
 
 Links: [Index](#index) | [Error vs. Warning](#error-vs-warning) | [Automated Rules](#automated-rules) | [RPC](#rpc-violations): [Errors](#rpc-errors) or [Warnings](#rpc-warnings) | [SDK](#sdk-violations): [Errors](#sdk-errors) or [Warnings](#sdk-warnings)
