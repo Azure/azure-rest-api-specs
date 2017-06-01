@@ -93,6 +93,7 @@ We request OpenAPI(Swagger) spec authoring be assigned to engineers who have an
 | M2062	| RequiredReadOnlyPropertiesValidation | Property '{0}' is a required property. It should not be marked as 'readonly'. | Error |
 | M2054	| SecurityDefinitionsStructureValidation | An OpenAPI(swagger) spec must have security definitions and must adhere to the specific structure. | Error |
 | M2022	| XmsExamplesProvidedValidation | Please provide x-ms-examples describing minimum/maximum property set for response/request payloads for operations.{0} | Error |
+| S2006	| ControlCharactersNotAllowed | Specification must not contain any control characters.
 
 #### SDK Warnings
 
@@ -107,7 +108,6 @@ We request OpenAPI(Swagger) spec authoring be assigned to engineers who have an
 | M2063	| BodyParametersValidation | A body parameter must be named 'parameters'. | Warning |
 | M2017	| PutRequestResponseValidation | A PUT operation request body schema should be the same as its 200 response schema, to allow reusing the same entity between GET and PUT. If the schema of the PUT request body is a superset of the GET response body, make sure you have a PATCH operation to make the resource updatable. Operation: '{0}' Request Model: '{1}' Response Model: '{2}' | Warning |
 | S2005	| LocationMustHaveXmsMutability | The "location" property of "Resource" model definition in ARM MUST have "x-ms-mutability": ["create", "read"] extension.
-| S2006	| ControlCharactersNotAllowed | Specification must not contain any control characters.
 | S2008	| PostOperationIdContainsUrlVerb | A POST operation OperationId must contain the verb at the end of the url related to the operation. 
 | S2009	| ArraySchemaMustHaveItems | A property of type `Array` must have `items` defined in its `Schema`.
 
