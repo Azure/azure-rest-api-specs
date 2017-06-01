@@ -68,18 +68,23 @@
           }
         ],
         "responses": {
-          "200": { 
-             "description": "The updated Traffic Manager endpoint.", 
-             "schema": { 
-               "$ref": "#/definitions/Endpoint" 
-             } 
+          "200": {
+            "description": "The updated Traffic Manager endpoint.",
+            "schema": {
+              "$ref": "#/definitions/Endpoint"
+            }
           },
           "default": {
             "description": "Default response. It will be deserialized as per the Error definition.",
             "schema": {
               "$ref": "#/definitions/CloudError"
             }
-          } 
+          }
+        },
+        "x-ms-examples": {
+          "Endpoint-PATCH-External-Target": {
+            "$ref": "../examples/Endpoint-PATCH-External-Target.json"
+          }
         }
       },
       "get": {
@@ -125,17 +130,28 @@
           }
         ],
         "responses": {
-          "200": { 
-             "description": "The Traffic Manager endpoint.", 
-             "schema": { 
-               "$ref": "#/definitions/Endpoint" 
-             } 
+          "200": {
+            "description": "The Traffic Manager endpoint.",
+            "schema": {
+              "$ref": "#/definitions/Endpoint"
+            }
           },
           "default": {
             "description": "Default response. It will be deserialized as per the Error definition.",
             "schema": {
               "$ref": "#/definitions/CloudError"
             }
+          }
+        },
+        "x-ms-examples": {
+          "Endpoint-GET-External-WithGeoMapping": {
+            "$ref": "../examples/Endpoint-GET-External-WithGeoMapping.json"
+          },
+          "Endpoint-GET-External-WithLocation": {
+            "$ref": "../examples/Endpoint-GET-External-WithLocation.json"
+          },
+          "Endpoint-GET-NotFound": {
+            "$ref": "../examples/Endpoint-GET-NotFound.json"
           }
         }
       },
@@ -191,24 +207,32 @@
           }
         ],
         "responses": {
-          "200": { 
-             "description": "The created or updated Endpoint.", 
-             "schema": { 
-               "$ref": "#/definitions/Endpoint" 
-             } 
+          "200": {
+            "description": "The created or updated Endpoint.",
+            "schema": {
+              "$ref": "#/definitions/Endpoint"
+            }
           },
-          "201": { 
-             "description": "The created or updated Endpoint.", 
-             "schema": { 
-               "$ref": "#/definitions/Endpoint" 
-             } 
+          "201": {
+            "description": "The created or updated Endpoint.",
+            "schema": {
+              "$ref": "#/definitions/Endpoint"
+            }
           },
           "default": {
             "description": "Default response. It will be deserialized as per the Error definition.",
             "schema": {
               "$ref": "#/definitions/CloudError"
             }
-          } 
+          }
+        },
+        "x-ms-examples": {
+          "Endpoint-PUT-External-WithGeoMapping": {
+            "$ref": "../examples/Endpoint-PUT-External-WithGeoMapping.json"
+          },
+          "Endpoint-PUT-External-WithLocation": {
+            "$ref": "../examples/Endpoint-PUT-External-WithLocation.json"
+          }
         }
       },
       "delete": {
@@ -254,23 +278,28 @@
           }
         ],
         "responses": {
-          "200": { 
-             "description": "The Traffic Manager Endpoint was deleted successfully.",
-             "schema": { 
-               "$ref": "#/definitions/DeleteOperationResult" 
-             } 
+          "200": {
+            "description": "The Traffic Manager Endpoint was deleted successfully.",
+            "schema": {
+              "$ref": "#/definitions/DeleteOperationResult"
+            }
           },
-          "204": { 
-             "description": "The Traffic Manager Endpoint does not exist. It could have been deleted on a previous request.",
-             "schema": { 
-               "$ref": "#/definitions/DeleteOperationResult" 
-             } 
+          "204": {
+            "description": "The Traffic Manager Endpoint does not exist. It could have been deleted on a previous request.",
+            "schema": {
+              "$ref": "#/definitions/DeleteOperationResult"
+            }
           },
           "default": {
             "description": "Default response. It will be deserialized as per the Error definition.",
             "schema": {
               "$ref": "#/definitions/CloudError"
             }
+          }
+        },
+        "x-ms-examples": {
+          "Endpoint-DELETE-External": {
+            "$ref": "../examples/Endpoint-DELETE-External.json"
           }
         }
       }
@@ -297,17 +326,25 @@
           }
         ],
         "responses": {
-          "200": { 
-             "description": "The Traffic Manager Name Availability.",
-             "schema": { 
-               "$ref": "#/definitions/TrafficManagerNameAvailability" 
-             } 
+          "200": {
+            "description": "The Traffic Manager Name Availability.",
+            "schema": {
+              "$ref": "#/definitions/TrafficManagerNameAvailability"
+            }
           },
           "default": {
             "description": "Default response. It will be deserialized as per the Error definition.",
             "schema": {
               "$ref": "#/definitions/CloudError"
             }
+          }
+        },
+        "x-ms-examples": {
+          "NameAvailabilityTest_NameAvailablePOST21": {
+            "$ref": "../examples/NameAvailabilityTest_NameAvailable-POST-example-21.json"
+          },
+          "NameAvailabilityTest_NameNotAvailablePOST23": {
+            "$ref": "../examples/NameAvailabilityTest_NameNotAvailable-POST-example-23.json"
           }
         }
       }
@@ -338,10 +375,10 @@
           }
         ],
         "responses": {
-          "200": { 
-             "description": "The list of Traffic Manager profiles.",
-             "schema": {
-               "$ref": "#/definitions/ProfileListResult"
+          "200": {
+            "description": "The list of Traffic Manager profiles.",
+            "schema": {
+              "$ref": "#/definitions/ProfileListResult"
             }
           },
           "default": {
@@ -349,6 +386,11 @@
             "schema": {
               "$ref": "#/definitions/CloudError"
             }
+          }
+        },
+        "x-ms-examples": {
+          "ListProfilesByResourceGroup": {
+            "$ref": "../examples/Profile-GET-ByResourceGroup.json"
           }
         }
       }
@@ -361,7 +403,7 @@
         "x-ms-pageable": {
           "nextLinkName": null
         },
-        "operationId": "Profiles_ListAll",
+        "operationId": "Profiles_ListBySubscription",
         "description": "Lists all Traffic Manager profiles within a subscription.",
         "parameters": [
           {
@@ -372,10 +414,10 @@
           }
         ],
         "responses": {
-          "200": { 
-             "description": "The list of Traffic Manager profiles.",
-             "schema": {
-               "$ref": "#/definitions/ProfileListResult"
+          "200": {
+            "description": "The list of Traffic Manager profiles.",
+            "schema": {
+              "$ref": "#/definitions/ProfileListResult"
             }
           },
           "default": {
@@ -383,6 +425,11 @@
             "schema": {
               "$ref": "#/definitions/CloudError"
             }
+          }
+        },
+        "x-ms-examples": {
+          "ListBySubscription": {
+            "$ref": "../examples/Profile-GET-BySubscription.json"
           }
         }
       }
@@ -417,17 +464,22 @@
           }
         ],
         "responses": {
-          "200": { 
-             "description": "The Traffic Manager profile.", 
-             "schema": { 
-               "$ref": "#/definitions/Profile" 
-             } 
+          "200": {
+            "description": "The Traffic Manager profile.",
+            "schema": {
+              "$ref": "#/definitions/Profile"
+            }
           },
           "default": {
             "description": "Default response. It will be deserialized as per the Error definition.",
             "schema": {
               "$ref": "#/definitions/CloudError"
             }
+          }
+        },
+        "x-ms-examples": {
+          "Profile-GET-WithEndpoints": {
+            "$ref": "../examples/Profile-GET-WithEndpoints.json"
           }
         }
       },
@@ -469,23 +521,31 @@
           }
         ],
         "responses": {
-          "200": { 
-             "description": "The created or updated Traffic Manager profile.", 
-             "schema": { 
-               "$ref": "#/definitions/Profile" 
-             } 
+          "200": {
+            "description": "The created or updated Traffic Manager profile.",
+            "schema": {
+              "$ref": "#/definitions/Profile"
+            }
           },
-          "201": { 
-             "description": "The created or updated Traffic Manager profile.", 
-             "schema": { 
-               "$ref": "#/definitions/Profile" 
-             } 
+          "201": {
+            "description": "The created or updated Traffic Manager profile.",
+            "schema": {
+              "$ref": "#/definitions/Profile"
+            }
           },
           "default": {
             "description": "Default response. It will be deserialized as per the Error definition.",
             "schema": {
               "$ref": "#/definitions/CloudError"
             }
+          }
+        },
+        "x-ms-examples": {
+          "Profile-PUT-NoEndpoints": {
+            "$ref": "../examples/Profile-PUT-NoEndpoints.json"
+          },
+          "Profile-PUT-WithEndpoints": {
+            "$ref": "../examples/Profile-PUT-WithEndpoints"
           }
         }
       },
@@ -518,23 +578,28 @@
           }
         ],
         "responses": {
-          "200": { 
-             "description": "The Traffic Manager Profile was deleted successfully.",
-             "schema": { 
-               "$ref": "#/definitions/DeleteOperationResult" 
-             } 
+          "200": {
+            "description": "The Traffic Manager Profile was deleted successfully.",
+            "schema": {
+              "$ref": "#/definitions/DeleteOperationResult"
+            }
           },
-          "204": { 
-             "description": "The profile does not exist. It could have been deleted on a previous request.",
-             "schema": { 
-               "$ref": "#/definitions/DeleteOperationResult" 
-             } 
+          "204": {
+            "description": "The profile does not exist. It could have been deleted on a previous request.",
+            "schema": {
+              "$ref": "#/definitions/DeleteOperationResult"
+            }
           },
           "default": {
             "description": "Default response. It will be deserialized as per the Error definition.",
             "schema": {
               "$ref": "#/definitions/CloudError"
             }
+          }
+        },
+        "x-ms-examples": {
+          "Profile-DELETE": {
+            "$ref": "../examples/Profile-DELETE.json"
           }
         }
       },
@@ -576,17 +641,22 @@
           }
         ],
         "responses": {
-          "200": { 
-             "description": "The updated Traffic Manager profile.", 
-             "schema": { 
-               "$ref": "#/definitions/Profile" 
-             } 
+          "200": {
+            "description": "The updated Traffic Manager profile.",
+            "schema": {
+              "$ref": "#/definitions/Profile"
+            }
           },
           "default": {
             "description": "Default response. It will be deserialized as per the Error definition.",
             "schema": {
               "$ref": "#/definitions/CloudError"
             }
+          }
+        },
+        "x-ms-examples": {
+          "Profile-PATCH-MonitorConfig": {
+            "$ref": "../examples/Profile-PATCH-MonitorConfig.json"
           }
         }
       }
@@ -604,17 +674,22 @@
           }
         ],
         "responses": {
-          "200": { 
-             "description": "The default Geographic Hierarchy.", 
-             "schema": { 
-               "$ref": "#/definitions/TrafficManagerGeographicHierarchy" 
-             } 
+          "200": {
+            "description": "The default Geographic Hierarchy.",
+            "schema": {
+              "$ref": "#/definitions/TrafficManagerGeographicHierarchy"
+            }
           },
           "default": {
             "description": "Default response. It will be deserialized as per the Error definition.",
             "schema": {
               "$ref": "#/definitions/CloudError"
             }
+          }
+        },
+        "x-ms-examples": {
+          "GeographicHierarchy-GET-default": {
+            "$ref": "../examples/GeographicHierarchy-GET-default.json"
           }
         }
       }
@@ -715,7 +790,7 @@
         },
         "fqdn": {
           "type": "string",
-          "readOnly": true, 
+          "readOnly": true,
           "description": "The fully-qualified domain name (FQDN) of the Traffic Manager profile. This is formed from the concatenation of the RelativeName with the DNS domain used by Azure Traffic Manager."
         },
         "ttl": {
@@ -887,74 +962,72 @@
       ],
       "description": "Class representing the Geographic hierarchy used with the Geographic traffic routing method."
     },
-    "Resource": {  
-      "properties": {  
-        "id": {  
+    "Resource": {
+      "description": "The core properties of ARM resources",
+      "properties": {
+        "id": {
           "readOnly": true,
           "type": "string",
-          "description": "Fully qualified resource Id for the resource. Ex - /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/{resourceProviderNamespace}/{resourceType}/{resourceName}"
+          "description": "Fully qualified resource Id for the resource. Ex - /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/trafficManagerProfiles/{resourceName}"
         },
-        "name": {  
+        "name": {
           "readOnly": true,
           "type": "string",
           "description": "The name of the resource"
         },
-        "type": {  
+        "type": {
           "readOnly": true,
           "type": "string",
-          "description": "The type of the resource. Ex- Microsoft.Compute/virtualMachines or Microsoft.Storage/storageAccounts."
+          "description": "The type of the resource. Ex- Microsoft.Network/trafficmanagerProfiles."
         }
       },
       "x-ms-azure-resource": true
     },
-    "TrackedResource": {  
+    "TrackedResource": {
       "description": "The resource model definition for a ARM tracked top level resource",
-      "properties": {  
-        "tags": {  
+      "properties": {
+        "tags": {
           "type": "object",
-          "additionalProperties": {  
+          "additionalProperties": {
             "type": "string"
           },
-          "x-ms-mutability": [  
+          "x-ms-mutability": [
             "read",
             "create",
             "update"
           ],
           "description": "Resource tags."
         },
-        "location": {  
+        "location": {
           "type": "string",
-          "x-ms-mutability": [  
+          "x-ms-mutability": [
             "read",
             "create"
           ],
           "description": "The Azure Region where the resource lives"
         }
       },
-      "required": [  
-        "location"
-      ],
-      "allOf": [  
-        {  
+      "allOf": [
+        {
           "$ref": "#/definitions/Resource"
         }
       ]
     },
-    "ProxyResource": {  
+    "ProxyResource": {
       "description": "The resource model definition for a ARM proxy resource. It will have everything other than required location and tags",
-      "allOf": [  
-        {  
+      "allOf": [
+        {
           "$ref": "#/definitions/Resource"
         }
       ]
     },
     "CloudError": {
       "type": "object",
-      "properties": { 
-        "error": { 
+      "properties": {
+        "error": {
           "$ref": "#/definitions/CloudErrorBody",
-          "description": "The content of the error." 
-          } 
+          "description": "The content of the error."
+        }
       },
       "description": "An error returned by the Azure Resource Manager",
       "x-ms-external": true
@@ -962,21 +1035,23 @@
     "CloudErrorBody": {
       "type": "object",
       "properties": {
-        "code": { 
+        "code": {
           "type": "string",
-          "description": "Error code" 
-          },
-        "message": { 
+          "description": "Error code"
+        },
+        "message": {
           "type": "string",
-          "description": "Error message" 
-          },
-        "target": { 
+          "description": "Error message"
+        },
+        "target": {
           "type": "string",
-          "description": "Error target" 
-          },
+          "description": "Error target"
+        },
         "details": {
           "type": "array",
-          "items": { "$ref": "#/definitions/CloudErrorBody" },
+          "items": {
+            "$ref": "#/definitions/CloudErrorBody"
+          },
           "description": "Error details"
         }
       },
@@ -1009,13 +1084,13 @@
   ],
   "securityDefinitions": {
     "azure_auth": {
-        "type": "oauth2",
-        "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
-        "flow": "implicit",
-        "description": "Azure Active Directory OAuth2 Flow",
-        "scopes": {
-            "user_impersonation": "impersonate your user account"
-        }
+      "type": "oauth2",
+      "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
+      "flow": "implicit",
+      "description": "Azure Active Directory OAuth2 Flow",
+      "scopes": {
+        "user_impersonation": "impersonate your user account"
+      }
     }
   }
 }
