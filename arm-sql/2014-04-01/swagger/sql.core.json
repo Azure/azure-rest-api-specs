@@ -19,9 +19,9 @@
     "/subscriptions/{subscriptionId}/providers/Microsoft.Sql/checkNameAvailability": {
       "post": {
         "tags": [
-          "CheckNameAvailability"
+          "Servers"
         ],
-        "operationId": "CheckNameAvailability",
+        "operationId": "Servers_CheckNameAvailability",
         "description": "Determines whether a resource can be created with the specified name.",
         "x-ms-examples": {
           "Check for a server name that is available": { "$ref": "../examples/CheckNameAvailabilityServerAvailable.json" },
@@ -1223,21 +1223,27 @@
           }
         }
       },
+      "required": [
+        "name", "type"
+      ],
       "description": "A request to check whether the specified name for a resource is available."
     },
     "CheckNameAvailabilityResponse": {
       "properties":{
         "available": {
           "type": "boolean",
-          "description": "True if the name is available, otherwise false."
+          "description": "True if the name is available, otherwise false.",
+          "readOnly": true
         },
         "message": {
           "type": "string",
-          "description": "A message explaining why the name is unavailable. Will be null if the name is available."
+          "description": "A message explaining why the name is unavailable. Will be null if the name is available.",
+          "readOnly": true
         },
         "name": {
           "type": "string",
-          "description": "The name whose availability was checked."
+          "description": "The name whose availability was checked.",
+          "readOnly": true
         },
         "reason": {
           "type": "string",
@@ -1249,7 +1255,8 @@
           "x-ms-enum": {
             "name": "CheckNameAvailabilityReason",
             "modelAsString": false
-          }
+          },
+          "readOnly": true
         }
       },
       "description": "A response indicating whether the specified name for a resource is available."
