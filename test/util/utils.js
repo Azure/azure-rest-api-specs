@@ -97,6 +97,56 @@ exports.getSourceBranch = function getSourceBranch() {
 };
 
 /**
+ * Gets the PR number. We are using the environment 
+ * variable provided by travis-ci. It is called TRAVIS_PULL_REQUEST. More info can be found here:
+ * https://docs.travis-ci.com/user/environment-variables/#Convenience-Variables
+ * @returns {string} PR number or 'undefined'.
+ */
+exports.getPullRequestNumber = function getPullRequestNumber() {
+  let result = process.env['TRAVIS_PULL_REQUEST'];
+  console.log(`@@@@@ process.env['TRAVIS_PULL_REQUEST'] - ${process.env['TRAVIS_PULL_REQUEST']}`);
+
+  if (!result) {
+    result = 'undefined';
+  }
+
+  return result;
+};
+
+/**
+ * Gets the Repo name. We are using the environment 
+ * variable provided by travis-ci. It is called TRAVIS_REPO_SLUG. More info can be found here:
+ * https://docs.travis-ci.com/user/environment-variables/#Convenience-Variables
+ * @returns {string} PR number or 'undefined'.
+ */
+exports.getRepoName = function getRepoName() {
+  let result = process.env['TRAVIS_REPO_SLUG'];
+  console.log(`@@@@@ process.env['TRAVIS_REPO_SLUG'] - ${process.env['TRAVIS_REPO_SLUG']}`);
+
+  return result;
+};
+
+exports.getTimeStamp = function getTimeStamp() {
+  // We pad each value so that sorted directory listings show the files in chronological order
+  function pad(number) {
+    if (number < 10) {
+      return '0' + number;
+    }
+
+    return number;
+  }
+
+  var now = new Date();
+  return now.getFullYear()
+    + pad(now.getMonth() + 1)
+    + pad(now.getDate())
+    + "_"
+    + pad(now.getHours())
+    + pad(now.getMinutes())
+    + pad(now.getSeconds());
+}
+
+/**
  * Retrieves list of swagger files to be processed for linting
  * @returns {Array} list of files to be processed for linting
  */
