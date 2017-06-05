@@ -275,16 +275,24 @@ Links: [Index](#index) | [Error vs. Warning](#error-vs-warning) | [Automated Rul
 
 **Why the rule is important**: Location is a property that is set once and non-updatable for a tracked resource. Hence, per ARM guidelines the only operations allowed are `read` and `create`.
 
-**How to fix the violation**: Ensure that the `location` property in the tracked resource's hierarchy is correctly set to `read` and `create`.
+**How to fix the violation**: Ensure that the `location` property in the tracked resource's hierarchy has `x-ms-mutability` correctly set to `read` and `create`.
+For example:
+```
+"location": {
+  "type": "string",
+  "description": "location of the resource",
+  "x-ms-mutability": [ "create", "read" ]
+}
+```
 
 Links: [Index](#index) | [Error vs. Warning](#error-vs-warning) | [Automated Rules](#automated-rules) | [RPC](#rpc-violations): [Errors](#rpc-errors) or [Warnings](#rpc-warnings) | [SDK](#sdk-violations): [Errors](#sdk-errors) or [Warnings](#sdk-warnings)
 
 ### <a name="S2008" />S2008	PostOperationIdContainsUrlVerb
-**Output Message**: OperationId must contain the verb: '{0}' in:'{1}'
+**Output Message**: OperationId should contain the verb: '{0}' in:'{1}'
 
-**Description**: A POST operation's operationID must contain the verb indicated at the end of the corresponding url.
+**Description**: A POST operation's operationId should contain the verb indicated at the end of the corresponding url.
 
-**Why the rule is important**: The url indicates the action performed by it, the corresponding POST operationId must therefore contain this verb for semantic consistency.
+**Why the rule is important**: The url indicates the action performed by it, the corresponding POST operationId should therefore contain this verb for semantic consistency.
 
 **How to fix the violation**: Ensure that the operationId for POST operation contains the verb indicated at the end of the url.
 
@@ -296,6 +304,8 @@ Links: [Index](#index) | [Error vs. Warning](#error-vs-warning) | [Automated Rul
 * Url: /foo/{someResource}/activate
 * OperationId: SomeResourceTypes_StartResource
 
+**Impact on generated code**: Method generated for the POST operation will be named as indicated after the '_'. For eg., OperationId *SomeResourceTypes_ActivateResource* will generate a method named *ActivateResource*
+
 Links: [Index](#index) | [Error vs. Warning](#error-vs-warning) | [Automated Rules](#automated-rules) | [RPC](#rpc-violations): [Errors](#rpc-errors) or [Warnings](#rpc-warnings) | [SDK](#sdk-violations): [Errors](#sdk-errors) or [Warnings](#sdk-warnings)
 
 ### <a name="S2009" />S2009 ArraySchemaMustHaveItems
@@ -306,6 +316,26 @@ Links: [Index](#index) | [Error vs. Warning](#error-vs-warning) | [Automated Rul
 **Why the rule is important**: AutoRest needs to know the type of item contained in the array so that it can correctly generate the corresponding code.
 
 **How to fix the violation**: Correctly specify the `items` section for given array type. The items can be of any primitive type or can be a reference to another object type.
+
+**Good Examples**:
+Example with primitive type.
+```
+"MyPrimitiveArray":{
+  "type": "array",
+  "items": {
+    type: "number"
+  }
+}
+```
+Example with object reference type
+```
+"MyComplexArray":{
+  "type": "array",
+  "items": {
+    "$ref": "#/definitions/MySimpleObject"
+  }
+}
+```
 
 Links: [Index](#index) | [Error vs. Warning](#error-vs-warning) | [Automated Rules](#automated-rules) | [RPC](#rpc-violations): [Errors](#rpc-errors) or [Warnings](#rpc-warnings) | [SDK](#sdk-violations): [Errors](#sdk-errors) or [Warnings](#sdk-warnings)
 
@@ -319,6 +349,6 @@ Control characters are not allowed in a specification.
 
 **How to fix the violation**: Remove the control characters in the specification.
 
-**Examples**: N/A
+**Examples**: A list of control characters in unicode can be found [here](https://unicode-table.com/en/).
 
 Links: [Index](#index) | [Error vs. Warning](#error-vs-warning) | [Automated Rules](#automated-rules) | [RPC](#rpc-violations): [Errors](#rpc-errors) or [Warnings](#rpc-warnings) | [SDK](#sdk-violations): [Errors](#sdk-errors) or [Warnings](#sdk-warnings)
