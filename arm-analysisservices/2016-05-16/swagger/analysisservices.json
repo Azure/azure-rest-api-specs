@@ -186,8 +186,13 @@
           "200": {
             "description": "OK",
             "schema": { "$ref": "#/definitions/AnalysisServicesServer" }
+          },
+          "202": {
+            "description": "Accepted",
+            "schema": { "$ref": "#/definitions/AnalysisServicesServer" }
           }
-        }
+        },
+        "x-ms-long-running-operation": true
       }
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AnalysisServices/servers/{serverName}/suspend": {
