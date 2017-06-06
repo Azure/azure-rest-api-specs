@@ -1,24 +1,24 @@
-{  
+{
    "swagger":"2.0",
-   "info":{  
+   "info":{
       "title":"Azure SQL Database API spec",
       "description":"The Azure SQL Database management API provides a RESTful set of web services that interact with Azure SQL Database services to manage your external server administrators.",
       "version":"2014-04-01"
    },
    "host":"management.azure.com",
-   "schemes":[  
+   "schemes":[
       "https"
    ],
-   "consumes":[  
+   "consumes":[
       "application/json"
    ],
-   "produces":[  
+   "produces":[
       "application/json"
    ],
-   "paths":{  
-      "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/servers/{serverName}/administrators/activedirectory":{  
-         "put":{  
-            "tags":[  
+   "paths":{
+      "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/servers/{serverName}/administrators/activedirectory":{
+         "put":{
+            "tags":[
                "ServerAdministrators"
             ],
             "operationId":"ServerAzureADAdministrators_CreateOrUpdate",
@@ -28,53 +28,53 @@
                   "$ref":"./examples/ServerAdminCreateUpdate.json"
                }
             },
-            "parameters":[  
-               {  
+            "parameters":[
+               {
                   "$ref":"#/parameters/ApiVersionParameter"
                },
-               {  
+               {
                   "$ref":"#/parameters/SubscriptionIdParameter"
                },
-               {  
+               {
                   "$ref":"#/parameters/ResourceGroupParameter"
                },
-               {  
+               {
                   "$ref":"#/parameters/ServerNameParameter"
                },
-               {  
+               {
                   "name":"properties",
                   "in":"body",
                   "required":true,
-                  "schema":{  
+                  "schema":{
                      "$ref":"#/definitions/ServerAzureADAdministrator"
                   },
                   "description":"The required parameters for creating or updating an Active Directory Administrator."
                }
             ],
-            "responses":{  
-               "200":{  
+            "responses":{
+               "200":{
                   "description":"OK",
-                  "schema":{  
+                  "schema":{
                      "$ref":"#/definitions/ServerAzureADAdministrator"
                   }
                },
-               "201":{  
+               "201":{
                   "description":"Created",
-                  "schema":{  
+                  "schema":{
                      "$ref":"#/definitions/ServerAzureADAdministrator"
                   }
                },
-               "202":{  
+               "202":{
                   "description":"Accepted",
-		  "schema":{  
+		  "schema":{
                      "$ref":"#/definitions/ServerAzureADAdministrator"
                   }
                }
             },
             "x-ms-long-running-operation":true
          },
-         "delete":{  
-            "tags":[  
+         "delete":{
+            "tags":[
                "ServerAdministrators"
             ],
             "operationId":"ServerAzureADAdministrators_Delete",
@@ -84,44 +84,44 @@
                   "$ref":"./examples/ServerAdminDelete.json"
                }
             },
-            "parameters":[  
-               {  
+            "parameters":[
+               {
                   "$ref":"#/parameters/ApiVersionParameter"
                },
-               {  
+               {
                   "$ref":"#/parameters/SubscriptionIdParameter"
                },
-               {  
+               {
                   "$ref":"#/parameters/ResourceGroupParameter"
                },
-               {  
+               {
                   "$ref":"#/parameters/ServerNameParameter"
                }
             ],
-            "responses":{  
-               "202":{  
+            "responses":{
+               "202":{
                   "description":"Accepted",
-		  "schema":{  
+		  "schema":{
                      "$ref":"#/definitions/ServerAzureADAdministrator"
                   }
                },
-               "204":{  
+               "204":{
                   "description":"No Content",
-		   "schema":{  
+		   "schema":{
                      "$ref":"#/definitions/ServerAzureADAdministrator"
                   }
                },
-               "200":{  
+               "200":{
                   "description":"OK",
-		  "schema":{  
+		  "schema":{
                      "$ref":"#/definitions/ServerAzureADAdministrator"
                   }
                }
             },
             "x-ms-long-running-operation":true
          },
-         "get":{  
-            "tags":[  
+         "get":{
+            "tags":[
                "ServerAdministrators"
             ],
             "operationId":"ServerAzureADAdministrators_Get",
@@ -131,99 +131,99 @@
                   "$ref":"./examples/ServerAdminGet.json"
                }
             },
-            "parameters":[  
-               {  
+            "parameters":[
+               {
                   "$ref":"#/parameters/ApiVersionParameter"
                },
-               {  
+               {
                   "$ref":"#/parameters/SubscriptionIdParameter"
                },
-               {  
+               {
                   "$ref":"#/parameters/ResourceGroupParameter"
                },
-               {  
+               {
                   "$ref":"#/parameters/ServerNameParameter"
                }
             ],
-            "responses":{  
-               "200":{  
+            "responses":{
+               "200":{
                   "description":"OK",
-                  "schema":{  
+                  "schema":{
                      "$ref":"#/definitions/ServerAzureADAdministrator"
                   }
                }
             }
          }
       },
-      "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/servers/{serverName}/administrators":{  
-         "get":{  
-            "tags":[  
+      "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/servers/{serverName}/administrators":{
+         "get":{
+            "tags":[
                "ServerAdministrators"
             ],
             "operationId":"ServerAzureADAdministrators_List",
             "description":"Returns a list of server Administrators.",
-			"x-ms-examples":{  
+            "x-ms-examples":{  
                "get a list of server administrators":{  
                   "$ref":"./examples/ServerAdminList.json"
                }
             },
-            "parameters":[  
-               {  
+            "parameters":[
+               {
                   "$ref":"#/parameters/ApiVersionParameter"
                },
-               {  
+               {
                   "$ref":"#/parameters/SubscriptionIdParameter"
                },
-               {  
+               {
                   "$ref":"#/parameters/ResourceGroupParameter"
                },
-               {  
+               {
                   "$ref":"#/parameters/ServerNameParameter"
                }
             ],
-            "responses":{  
-               "200":{  
+            "responses":{
+               "200":{
                   "description":"OK",
-                  "schema":{  
+                  "schema":{
                      "$ref":"#/definitions/ServerAdministratorListResult"
                   }
                }
             },
-            "x-ms-pageable":{  
+            "x-ms-pageable":{
                "nextLinkName":null
             }
          }
       }
    },
-   "definitions":{  
-      "ServerAdministratorProperties":{  
-         "properties":{  
-            "administratorType":{  
+   "definitions":{
+      "ServerAdministratorProperties":{
+         "properties":{
+            "administratorType":{
                "type":"string",
                "description":"The type of administrator.",
-               "enum":[  
+               "enum":[
                   "ActiveDirectory"
                ],
-               "x-ms-enum":{  
+               "x-ms-enum":{
                   "name":"AdministratorType"
                }
             },
-            "login":{  
+            "login":{
                "type":"string",
                "description":"The server administrator login value."
             },
-            "sid":{  
+            "sid":{
                "type":"string",
                "description":"The server administrator Sid (Secure ID).",
 			   "format": "uuid"
             },
-            "tenantId":{  
+            "tenantId":{
                "type":"string",
                "description":"The server Active Directory Administrator tenant id.",
 			   "format": "uuid"
             }
          },
-         "required":[  
+         "required":[
             "tenantId",
             "administratorType",
             "login",
@@ -231,26 +231,26 @@
          ],
          "description":"The properties of an server Administrator."
       },
-      "ServerAzureADAdministrator":{  
-         "properties":{  
-            "properties":{  
+      "ServerAzureADAdministrator":{
+         "properties":{
+            "properties":{
                "x-ms-client-flatten":true,
                "$ref":"#/definitions/ServerAdministratorProperties",
                "description":"The properties of the resource."
             }
          },
-         "allOf":[  
-            {  
+         "allOf":[
+            {
                "$ref":"#/definitions/SqlSubResource"
             }
          ],
          "description":"An server Active Directory Administrator."
       },
-      "ServerAdministratorListResult":{  
-         "properties":{  
-            "value":{  
+      "ServerAdministratorListResult":{
+         "properties":{
+            "value":{
                "type":"array",
-               "items":{  
+               "items":{
                   "$ref":"#/definitions/ServerAzureADAdministrator"
                },
                "description":"The list of server Active Directory Administrators for the server."
@@ -258,15 +258,15 @@
          },
          "description":"The response to a list Active Directory Administrators request."
       },
-      "SqlSubResource":{  
+      "SqlSubResource":{
          "description":"Subresource properties",
-         "properties":{  
-            "name":{  
+         "properties":{
+            "name":{
                "readOnly":true,
                "type":"string",
                "description":"Resource name"
             },
-            "id":{  
+            "id":{
                "readOnly":true,
                "type":"string",
                "description":"Resource Id"
@@ -274,22 +274,22 @@
          }
       }
    },
-   "parameters":{  
-      "SubscriptionIdParameter":{  
+   "parameters":{
+      "SubscriptionIdParameter":{
          "name":"subscriptionId",
          "in":"path",
          "required":true,
          "type":"string",
          "description":"The subscription ID that identifies an Azure subscription."
       },
-      "ApiVersionParameter":{  
+      "ApiVersionParameter":{
          "name":"api-version",
          "in":"query",
          "required":true,
          "type":"string",
          "description":"The API version to use for the request."
       },
-      "ResourceGroupParameter":{  
+      "ResourceGroupParameter":{
          "name":"resourceGroupName",
          "in":"path",
          "required":true,
@@ -297,7 +297,7 @@
          "description":"The name of the resource group that contains the resource. You can obtain this value from the Azure Resource Manager API or the portal.",
          "x-ms-parameter-location":"method"
       },
-      "ServerNameParameter":{  
+      "ServerNameParameter":{
          "name":"serverName",
          "in":"path",
          "required":true,
@@ -305,7 +305,7 @@
          "description":"The name of the server.",
          "x-ms-parameter-location":"method"
       },
-      "DatabaseExpandParameter":{  
+      "DatabaseExpandParameter":{
          "name":"$expand",
          "in":"query",
          "required":false,
@@ -313,5 +313,16 @@
          "description":"A comma separated list of child objects to expand in the response. Possible properties: serviceTierAdvisors, transparentDataEncryption.",
          "x-ms-parameter-location":"method"
       }
-   }
+   },
+  "securityDefinitions": {
+    "azure_auth": {
+      "type": "oauth2",
+      "description": "Azure Active Directory OAuth2 Flow",
+      "flow": "implicit",
+      "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
+      "scopes": {
+        "user_impersonation": "impersonate your user account"
+      }
+    }
+  }
 }

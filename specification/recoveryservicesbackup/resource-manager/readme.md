@@ -27,9 +27,11 @@ These are the global settings for the RecoveryServicesBackup API.
 ``` yaml
 # common 
 title: Recovery Services Backup
-description: Recovery Services Backup Client
+description: Open API 2.0 Specs for Azure RecoveryServices Backup service
 api-version: 2016-12-01
 
+azure-arm: true
+license-header: MICROSOFT_MIT
 ```
 
 
@@ -40,6 +42,7 @@ These settings apply only when `--api-version=2016-12-01` is specified on the co
 ``` yaml $(api-version) == '2016-12-01'
 input-file:
 - Microsoft.RecoveryServices/2016-12-01/backupManagement.json
+- Microsoft.RecoveryServices/2016-08-10/operations.json
 
 ```
  
@@ -56,13 +59,38 @@ input-file:
 
 
 ---
-#### Language-specific settings: CSharp
+# Code Generation
+
+## C#
 
 These settings apply only when `--csharp` is specified on the command line.
 
 ``` yaml $(csharp)
 csharp:
-  # override the default output folder
-  output-folder: $(output-folder)/csharp
+  namespace: Microsoft.Azure.Management.RecoveryServices.Backup
+  output-folder: Generated/CSharp
 ```
 
+## Python
+
+```yaml
+python:
+  namespace: azure.mgmt.recoveryservicesbackup
+  package-name: azure-mgmt-recoveryservicesbackup
+  package-version: 0.1.0
+  output-folder: Generated/Python
+  payload-flattening-threshold: 2
+  license-header: MICROSOFT_MIT_NO_VERSION
+```
+
+
+---
+# Validation
+
+## Suppression
+
+``` yaml
+directive:
+  - suppress: DefinitionsPropertiesNamesCamelCase
+    reason: Autorest invalidates two letter acronyms as well and changes in data contracts require service wide changes and require more time
+```

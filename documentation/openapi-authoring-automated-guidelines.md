@@ -32,8 +32,8 @@ We request OpenAPI(Swagger) spec authoring be assigned to engineers who have an
 | --- | --- | --- | --- |
 | [M3012](#M3012)	| [APIVersionPattern](#M3012)	| API Version must be in the format: yyyy-MM-dd, optionally followed by -preview, -alpha, -beta, -rc, -privatepreview.	|  Error |
 | M3019	| ARMResourcePropertiesBag	| Top level property names should not be repeated inside the properties bag for ARM resource '{0}'. Properties [{1}] conflict with ARM top level properties. Please rename these. | Error |
-| M3016	| BodyPropertiesNamesCamelCase | Property named: "{0}", must follow camelCase style. Example: "{1}". | Error |
-| M3016	| DefinitionsPropertiesNamesCamelCase  | Property named: "{0}", for definition: "{1}" must follow camelCase style. Example: "{2}". | Error |
+| [M3016](#M3016)	| [BodyPropertiesNamesCamelCase](#M3016) | Property named: "{0}", must follow camelCase style. Example: "{1}". | Error |
+| [M3016](#M3016)	| [DefinitionsPropertiesNamesCamelCase](#M3016)  | Property named: "{0}", for definition: "{1}" must follow camelCase style. Example: "{2}". | Error |
 | M3006	| BodyTopLevelProperties | Top level properties should be one of name, type, id, location, properties, tags, plan, sku, etag, managedBy, identity. Extra properties found: "{0}". | Error |
 | M3008	| CollectionObjectPropertiesNamingValidation | Collection object {0} returned by list operation {1} with 'x-ms-pageable' extension, has no property named 'value'. | Error |
 | M2044	| HttpVerbValidation | Permissible values for HTTP Verb are delete,get,put,patch,head,options,post. | Error |
@@ -131,5 +131,134 @@ The date MAY optionally be followed by one of:
 * 2150-07-04 - Year should be current, not in the future; though we'll hopefully get here eventually :)
 * 2016-07-04-publicpreview - Use "-preview" to indicate a public preview
 * 2016-07-04-rc0 - Just use "rc", not "rc" + number
+
+Links: [Index](#index) | [Error vs. Warning](#error-vs-warning) | [Automated Rules](#automated-rules) | [RPC](#rpc-violations): [Errors](#rpc-errors) or [Warnings](#rpc-warnings) | [SDK](#sdk-violations): [Errors](#sdk-errors) or [Warnings](#sdk-warnings)
+
+### <a name="M3016" />M3016 PropertiesNamesCamelCase
+**Output Message**: Property named: "{0}", must follow camelCase style. Example: "{1}".
+**Output Message**: Property named: "{0}", for definition: "{1}" must follow camelCase style. Example: "{2}".
+
+**Description**: Property names must use lowerCamelCase style. 
+If the property is a single word (ex: foo, bar, etc.) it will be all lowercase. 
+Two-letter acronmys (ex: ID, IO, IP, etc.) should be capitalized. 
+Three-letter acronyms (ex: API, URL, etc.) should only have the first letter capitalized (ex: Api, Url, etc.) 
+For more capitalization guidance, see: [https://msdn.microsoft.com/en-us/library/141e06ef(v=vs.71).aspx](https://msdn.microsoft.com/en-us/library/141e06ef(v=vs.71).aspx)
+
+**Good Examples**: Examples of lowerCamelCase style:
+* camelCase
+* foo
+* bar
+* fooBarBaz
+* resourceKey
+* resourceApiKey
+
+**Bad Examples**: The following would be invalid:
+* PascalCase
+* UpperCamelCase
+* resourceAPIKey
+
+**Bad Examples**: The following violate these guidelines but would not be caught by automation: 
+* alllowercase - If there are multiple words, please capitalize starting with the second word
+* miXeDcApItAlIzAtIoN - Please capitalize the first letter of each word (and not seemingly random letters)
+
+Links: [Index](#index) | [Error vs. Warning](#error-vs-warning) | [Automated Rules](#automated-rules) | [RPC](#rpc-violations): [Errors](#rpc-errors) or [Warnings](#rpc-warnings) | [SDK](#sdk-violations): [Errors](#sdk-errors) or [Warnings](#sdk-warnings)
+
+### <a name="R3025" />R3025 TrackedResourceGetOperationValidation
+**Output Message**: Tracked resource '{0}' must have a get operation.
+
+**Description**: Verifies if a tracked resource has a corresponding GET operation. 
+What's a tracked resource? A Tracked Resource is an ARM Resource with "location" as a required property.
+
+**Why the rule is important**: Per ARM guidelines, each tracked resource must have a GET operation.
+
+**How to fix the violation**: Add a GET operation that returns the tracked resource pointed out by the rule - if the operation does not exist for the service, this fix requires a service side change. 
+If the resource pointed by the rule is not a tracked resource, this warning may be a false positive, please clarify this with your PR reviewer.
+
+**Impact on generated code**: Generated SDK code will expose the corresponding GET operation only if it's present in the specification.
+
+**Examples**: N/A
+
+Links: [Index](#index) | [Error vs. Warning](#error-vs-warning) | [Automated Rules](#automated-rules) | [RPC](#rpc-violations): [Errors](#rpc-errors) or [Warnings](#rpc-warnings) | [SDK](#sdk-violations): [Errors](#sdk-errors) or [Warnings](#sdk-warnings)
+
+### <a name="R3026" />R3026 TrackedResourcePatchOperationValidation
+**Output Message**: Tracked resource '{0}' must have patch operation that at least supports the update of tags.
+
+**Description**: Verifies if a tracked resource has a corresponding PATCH operation. 
+What's a tracked resource? A Tracked Resource is an ARM Resource with "location" as a required property.
+
+**Why the rule is important**: Per ARM guidelines, each tracked resource must have a PATCH operation supporting at least the update of tags.
+
+**How to fix the violation**: Add a PATCH operation that allows at least the update of tags for the tracked resource - if the operation does not exist for the service, this fix requires a service side change. 
+If the resource pointed by the rule is not a tracked resource, this warning may be a false positive, please clarify this with your PR reviewer.
+
+**Impact on generated code**: Generated SDK code will expose the corresponding PATCH operation only if it's present in the specification.
+
+**Examples**: N/A
+
+Links: [Index](#index) | [Error vs. Warning](#error-vs-warning) | [Automated Rules](#automated-rules) | [RPC](#rpc-violations): [Errors](#rpc-errors) or [Warnings](#rpc-warnings) | [SDK](#sdk-violations): [Errors](#sdk-errors) or [Warnings](#sdk-warnings)
+
+### <a name="R3027" />R3027 TrackedResourceListByResourceGroup
+**Output Message**: The tracked resource, '{0}', must have a list by resource group operation.
+
+**Description**: Verifies if a tracked resource has a corresponding ListByResourceGroup operation. 
+What's a tracked resource? A Tracked Resource is an ARM Resource with "location" as a required property.
+
+**Why the rule is important**: Per ARM guidelines, each tracked resource must have a corresponding ListByResourceGroup operation.
+
+**How to fix the violation**: Add a corresponding ListByResourceGroup operation for the tracked resource - if the operation does not exist for the service, this fix requires a service side change. If the operation already exists and it is not named following the naming convention "ListbyResourceGroup", consider updating the operation name. 
+If the resource pointed by the rule is not a tracked resource or the operation that allows listing by resource group does not follow the naming convention "ListByResourceGroup", this warning may be a false positive, please clarify this with your PR reviewer.
+
+**Impact on generated code**: Generated SDK code will expose the corresponding ListByResourceGroup operation as included in the specification.
+
+**Examples**: N/A
+
+Links: [Index](#index) | [Error vs. Warning](#error-vs-warning) | [Automated Rules](#automated-rules) | [RPC](#rpc-violations): [Errors](#rpc-errors) or [Warnings](#rpc-warnings) | [SDK](#sdk-violations): [Errors](#sdk-errors) or [Warnings](#sdk-warnings)
+
+### <a name="R3028" />R3028 TrackedResourceListBySubscription
+**Output Message**: The tracked resource, '{0}', must have a list by subscriptions operation.
+
+**Description**: Verifies if a tracked resource has a corresponding ListByResourceGroup operation. 
+What's a tracked resource? A Tracked Resource is an ARM Resource with "location" as a required property.
+
+**Why the rule is important**: Per ARM guidelines, each tracked resource must have a corresponding ListBySubscription operation.
+
+**How to fix the violation**: Add a corresponding ListBySubscription operation for the tracked resource - if the operation does not exist for the service, this fix requires a service side change. If the operation already exists and it is not named following the naming conventions: List, ListBySubscriptionId, ListBySubscription or ListBySubscriptions, consider updating the operation name. 
+If the resource pointed by the rule is not a tracked resource or the operation that allows listing by subscription ID does not follow the naming convention mentioned above, this warning may be a false positive, please clarify this with your PR reviewer.
+
+**Impact on generated code**: Generated SDK code will expose the corresponding ListBySubscription operation as included in the specification.
+
+**Examples**: N/A
+
+Links: [Index](#index) | [Error vs. Warning](#error-vs-warning) | [Automated Rules](#automated-rules) | [RPC](#rpc-violations): [Errors](#rpc-errors) or [Warnings](#rpc-warnings) | [SDK](#sdk-violations): [Errors](#sdk-errors) or [Warnings](#sdk-warnings)
+
+### <a name="R3010" />R3010 TrackedResourceListByImmediateParent
+**Output Message**: Validates if the child tracked resources have list by immediate parent operation.
+
+**Description**: Verifies if a tracked resource has a corresponding list by immediate parent operation. 
+What's a tracked resource? A Tracked Resource is an ARM Resource with "location" as a required property.
+
+**Why the rule is important**: Per ARM guidelines, each tracked resource must have a corresponding "list by immediate parent" operation.
+
+**How to fix the violation**: Add an operation that allows listing the tracked resource by its immediate parent - if the operation does not exist for the service, this fix requires a service side change. If the operation already exists, please double check the name of the operation, our rule is matching the parent and child resource names to the operation names, if those don't match 100%, this warning may be a false positive, please evaluate whether the named picked is appropriate or needs update. 
+If the resource pointed by the rule is not a tracked resource this warning may be a false positive, please clarify this with your PR reviewer.
+
+**Impact on generated code**: Generated SDK code will expose the corresponding "list by immediate parent" operation as included in the specification.
+
+**Examples**: N/A
+
+Links: [Index](#index) | [Error vs. Warning](#error-vs-warning) | [Automated Rules](#automated-rules) | [RPC](#rpc-violations): [Errors](#rpc-errors) or [Warnings](#rpc-warnings) | [SDK](#sdk-violations): [Errors](#sdk-errors) or [Warnings](#sdk-warnings)
+
+### <a name="R3018" />R3018 EnumInsteadOfBoolean
+**Output Message**: Booleans are not descriptive and make them hard to use. Instead use string enums with allowed set of values defined.
+
+**Description**: Booleans properties are not descriptive in all cases and can make them to use, evaluate whether is makes sense to keep the property as boolean or turn it into an enum. 
+
+**Why the rule is important**: Evaluate whether the property is really a boolean or not, the intent is to consider if there could be more than 2 values possible for the property in the future or not. If the answer is no, then a boolean is fine, if the answer is yes, there could be other values added in the future, making it an enum can help avoid breaking changes in the SDKs in the future.
+
+**How to fix the violation**: Create an enum property, follow autorest [x-ms-enum extension](https://github.com/Azure/autorest/blob/master/docs/extensions/readme.md#x-ms-enum) guidelines.
+
+**Impact on generated code**: Boolean property will turn into a String or an Enum (if SDK language supports it), this will depend on "modelAsString" property value as specified in [x-ms-enum extension](https://github.com/Azure/autorest/blob/master/docs/extensions/readme.md#x-ms-enum) guidelines.
+
+**Examples**: N/A
 
 Links: [Index](#index) | [Error vs. Warning](#error-vs-warning) | [Automated Rules](#automated-rules) | [RPC](#rpc-violations): [Errors](#rpc-errors) or [Warnings](#rpc-warnings) | [SDK](#sdk-violations): [Errors](#sdk-errors) or [Warnings](#sdk-warnings)

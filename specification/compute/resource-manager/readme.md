@@ -34,7 +34,21 @@ These are the global settings for the Compute API.
 # common 
 title: Compute
 description: Compute Client
-api-version: 2016-04-30-preview
+api-version: 2017-03-30
+
+```
+
+
+# API Version: 2017-03-30
+
+These settings apply only when `--api-version=2017-03-30` is specified on the command line.
+
+``` yaml $(api-version) == '2017-03-30'
+input-file:
+- Microsoft.Compute/2017-03-30/compute.json
+- Microsoft.Compute/2017-03-30/disk.json
+- Microsoft.Compute/2017-03-30/runCommands.json
+- Microsoft.ContainerService/2017-01-31/containerService.json
 
 ```
 

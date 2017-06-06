@@ -122,18 +122,18 @@
   "definitions": {
     "Resource":{
       "description":"ARM resource.",
-      "properties":{  
-        "id":{  
+      "properties":{
+        "id":{
           "readOnly":true,
           "type":"string",
           "description":"Resource ID."
         },
-        "name":{  
+        "name":{
           "readOnly":true,
           "type":"string",
           "description":"Resource name."
         },
-        "type":{  
+        "type":{
           "readOnly":true,
           "type":"string",
           "description":"Resource type."
@@ -141,43 +141,43 @@
       },
       "x-ms-azure-resource": true
     },
-    "TrackedResource":{  
+    "TrackedResource":{
       "description":"ARM tracked top level resource.",
-      "properties":{  
-        "tags":{  
+      "properties":{
+        "tags":{
           "type":"object",
-          "additionalProperties":{  
+          "additionalProperties":{
             "type":"string"
           },
-          "x-ms-mutability":[  
+          "x-ms-mutability":[
             "read",
             "create",
             "update"
           ],
           "description":"Resource tags."
         },
-        "location":{  
+        "location":{
           "type":"string",
-          "x-ms-mutability":[  
+          "x-ms-mutability":[
             "read",
             "create"
           ],
           "description":"Resource location."
         }
       },
-      "required":[  
+      "required":[
         "location"
       ],
-      "allOf":[  
-        {  
+      "allOf":[
+        {
           "$ref":"#/definitions/Resource"
         }
       ]
     },
-    "ProxyResource":{  
+    "ProxyResource":{
       "description":"ARM proxy resource.",
-      "allOf":[  
-        {  
+      "allOf":[
+        {
           "$ref":"#/definitions/Resource"
         }
       ]
@@ -186,9 +186,9 @@
       "description": "Contains information about a database Threat Detection policy.",
       "type": "object",
       "properties": {
-        "location":{  
+        "location":{
           "type":"string",
-          "x-ms-mutability":[  
+          "x-ms-mutability":[
             "read",
             "create"
           ],
@@ -306,6 +306,17 @@
       "type": "string",
       "description": "The name of the server.",
       "x-ms-parameter-location": "method"
+    }
+  },
+  "securityDefinitions": {
+    "azure_auth": {
+      "type": "oauth2",
+      "description": "Azure Active Directory OAuth2 Flow",
+      "flow": "implicit",
+      "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
+      "scopes": {
+        "user_impersonation": "impersonate your user account"
+      }
     }
   }
 }
