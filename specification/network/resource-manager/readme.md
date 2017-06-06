@@ -127,11 +127,11 @@ input-file:
 
 ```
  
-# API Version: 2015-06-15
+# API Version: 2015-06-15split
 
-These settings apply only when `--api-version=2015-06-15` is specified on the command line.
+These settings apply only when `--api-version=2015-06-15split` is specified on the command line.
 
-``` yaml $(api-version) == '2015-06-15'
+``` yaml $(api-version) == '2015-06-15split'
 input-file:
 - Microsoft.Network/2015-06-15/applicationGateway.json
 - Microsoft.Network/2015-06-15/checkDnsAvailability.json
@@ -145,6 +145,15 @@ input-file:
 - Microsoft.Network/2015-06-15/virtualNetwork.json
 - Microsoft.Network/2015-06-15/virtualNetworkGateway.json
 - microsoft.Compute/2015-06-15/vmssNetworkInterface.json
+```
+ 
+# API Version: 2015-06-15
+
+These settings apply only when `--api-version=2015-06-15` is specified on the command line.
+
+``` yaml $(api-version) == '2015-06-15'
+input-file:
+- Microsoft.Network/2015-06-15/network.json
 ```
  
 # API Version: 2015-05-01-preview

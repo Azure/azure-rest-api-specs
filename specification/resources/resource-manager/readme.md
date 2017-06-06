@@ -40,11 +40,12 @@ These settings apply only when `--api-version=2017-05-10` is specified on the co
 ``` yaml $(api-version) == '2017-05-10'
 input-file:
 - Microsoft.Authorization/2016-09-01/locks.json
-- Microsoft.Authorization/2016-04-01/policy.json
+- Microsoft.Authorization/2016-12-01/policy.json
 - Microsoft.Features/2015-12-01/features.json
 - Microsoft.Resources/2017-05-10/resources.json
 - Microsoft.Resources/2016-06-01/subscriptions.json
 - Microsoft.Scheduler/2016-09-01/links.json
+- Microsoft.Solutions/2016-09-01-preview/managedapplications.json
 
 ```
  

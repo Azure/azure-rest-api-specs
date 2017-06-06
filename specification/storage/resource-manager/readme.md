@@ -28,7 +28,18 @@ These are the global settings for the Storage API.
 # common 
 title: Storage
 description: Storage Client
-api-version: 2016-12-01
+api-version: 2017-06-01
+
+```
+
+
+# API Version: 2017-06-01
+
+These settings apply only when `--api-version=2017-06-01` is specified on the command line.
+
+``` yaml $(api-version) == '2017-06-01'
+input-file:
+- Microsoft.Storage/2017-06-01/storage.json
 
 ```
 
