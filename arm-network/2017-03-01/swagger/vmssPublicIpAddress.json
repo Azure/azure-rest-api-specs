@@ -3,7 +3,7 @@
   "info": {
     "title": "NetworkManagementClient",
     "description": "The Microsoft Azure Network management API provides a RESTful set of web services that interact with Microsoft Azure Networks service to manage your network resources. The API has entities that capture the relationship between an end user and the Microsoft Azure Networks service.",
-    "version": "2017-03-01"
+    "version": "2017-03-30"
   },
   "host": "management.azure.com",
   "schemes": [
@@ -81,6 +81,9 @@
             }
           }
         },
+        "x-ms-examples": {
+          "ListVMSSPublicIP": { "$ref": "../examples/VmssPublicIpListAll.json" }
+        },
         "x-ms-pageable": {
           "nextLinkName": "nextLink"
         }
@@ -151,6 +154,9 @@
               "$ref": "./publicIpAddress.json#/definitions/PublicIPAddressListResult"
             }
           }
+        },
+        "x-ms-examples": {
+          "ListVMSSVMPublicIP": { "$ref": "../examples/VmssVmPublicIpList.json" }
         },
         "x-ms-pageable": {
           "nextLinkName": "nextLink"
@@ -229,6 +235,9 @@
             "description": "Expands referenced resources."
           }
         ],
+        "x-ms-examples": {
+          "GetVMSSPublicIP": { "$ref": "../examples/VmssPublicIpGet.json" }
+        },
         "responses": {
           "200": {
             "description": "Request successful. The operation returns the resulting PublicIPAddress resource.",
