@@ -28,7 +28,18 @@ These are the global settings for the Redis API.
 # common 
 title: Redis
 description: Redis Client
-api-version: 2016-04-01
+api-version: 2017-02-01
+
+```
+
+
+# API Version: 2017-02-01
+
+These settings apply only when `--api-version=2017-02-01` is specified on the command line.
+
+``` yaml $(api-version) == '2017-02-01'
+input-file:
+- Microsoft.Cache/2017-02-01/redis.json
 
 ```
 
