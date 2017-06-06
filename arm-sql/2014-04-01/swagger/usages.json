@@ -44,7 +44,7 @@
           "200": {
             "description": "OK",
             "schema": {
-              "$ref": "#/definitions/ServerMetricListResult"
+              "$ref": "#/definitions/ServerUsageListResult"
             }
           }
         },
@@ -99,7 +99,7 @@
     }
   },
   "definitions": {
-    "ServerMetric": {
+    "ServerUsage": {
       "properties": {
         "name": {
           "readOnly": true,
@@ -142,12 +142,12 @@
       },
       "description": "Represents server metrics."
     },
-    "ServerMetricListResult": {
+    "ServerUsageListResult": {
       "properties": {
         "value": {
           "type": "array",
           "items": {
-            "$ref": "#/definitions/ServerMetric"
+            "$ref": "#/definitions/ServerUsage"
           },
           "description": "The list of server metrics for the server."
         }
