@@ -28,16 +28,16 @@ These are the global settings for the HDInsight API.
 # common 
 title: HDInsight Management
 description: HDInsight Management Client
-api-version: 2015-03-01-preview
+tag: 2015-03-01-preview
 
 ```
 
 
-# API Version: 2015-03-01-preview
+# Tag: 2015-03-01-preview
 
-These settings apply only when `--api-version=2015-03-01-preview` is specified on the command line.
+These settings apply only when `--tag=2015-03-01-preview` is specified on the command line.
 
-``` yaml $(api-version) == '2015-03-01-preview'
+``` yaml $(tag) == '2015-03-01-preview'
 input-file:
 - Microsoft.HDInsight/2015-03-01-preview/cluster.json
 - Microsoft.HDInsight/2015-03-01-preview/applications.json

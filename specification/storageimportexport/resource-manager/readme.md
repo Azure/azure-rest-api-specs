@@ -28,16 +28,16 @@ These are the global settings for the StorageImportExport API.
 # common 
 title: Storage Import Export
 description: Storage Import Export Client
-api-version: 2016-11-01
+tag: 2016-11-01
 
 ```
 
 
-# API Version: 2016-11-01
+# Tag: 2016-11-01
 
-These settings apply only when `--api-version=2016-11-01` is specified on the command line.
+These settings apply only when `--tag=2016-11-01` is specified on the command line.
 
-``` yaml $(api-version) == '2016-11-01'
+``` yaml $(tag) == '2016-11-01'
 input-file:
 - Microsoft.ImportExport/2016-11-01/storageimportexport.json
 

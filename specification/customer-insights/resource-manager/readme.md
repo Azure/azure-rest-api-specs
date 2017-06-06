@@ -28,16 +28,16 @@ These are the global settings for the CustomerInsights API.
 # common 
 title: Customer Insights
 description: Customer Insights Client
-api-version: 2017-01-01
+tag: 2017-01-01
 
 ```
 
 
-# API Version: 2017-01-01
+# Tag: 2017-01-01
 
-These settings apply only when `--api-version=2017-01-01` is specified on the command line.
+These settings apply only when `--tag=2017-01-01` is specified on the command line.
 
-``` yaml $(api-version) == '2017-01-01'
+``` yaml $(tag) == '2017-01-01'
 input-file:
 - Microsoft.CustomerInsights/2017-01-01/customer-insights.json
 

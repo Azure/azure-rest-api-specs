@@ -28,36 +28,36 @@ These are the global settings for the ContainerRegistry API.
 # common 
 title: Container Registry
 description: Container Registry Client
-api-version: 2017-06-01-preview
+tag: 2017-06-01-preview
 
 ```
 
 
-# API Version: 2017-06-01-preview
+# Tag: 2017-06-01-preview
 
-These settings apply only when `--api-version=2017-06-01-preview` is specified on the command line.
+These settings apply only when `--tag=2017-06-01-preview` is specified on the command line.
 
-``` yaml $(api-version) == '2017-06-01-preview'
+``` yaml $(tag) == '2017-06-01-preview'
 input-file:
 - Microsoft.ContainerRegistry/2017-06-01-preview/containerregistry.json
 
 ```
  
-# API Version: 2017-03-01
+# Tag: 2017-03-01
 
-These settings apply only when `--api-version=2017-03-01` is specified on the command line.
+These settings apply only when `--tag=2017-03-01` is specified on the command line.
 
-``` yaml $(api-version) == '2017-03-01'
+``` yaml $(tag) == '2017-03-01'
 input-file:
 - Microsoft.ContainerRegistry/2017-03-01/containerregistry.json
 
 ```
  
-# API Version: 2016-06-27-preview
+# Tag: 2016-06-27-preview
 
-These settings apply only when `--api-version=2016-06-27-preview` is specified on the command line.
+These settings apply only when `--tag=2016-06-27-preview` is specified on the command line.
 
-``` yaml $(api-version) == '2016-06-27-preview'
+``` yaml $(tag) == '2016-06-27-preview'
 input-file:
 - Microsoft.ContainerRegistry/2016-06-27-preview/containerregistry.json
 

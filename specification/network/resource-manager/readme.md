@@ -28,16 +28,16 @@ These are the global settings for the Network API.
 # common 
 title: Network
 description: Network Client
-api-version: 2017-03-01
+tag: 2017-03-01
 
 ```
 
 
-# API Version: 2017-03-01
+# Tag: 2017-03-01
 
-These settings apply only when `--api-version=2017-03-01` is specified on the command line.
+These settings apply only when `--tag=2017-03-01` is specified on the command line.
 
-``` yaml $(api-version) == '2017-03-01'
+``` yaml $(tag) == '2017-03-01'
 input-file:
 - microsoft.Compute/2017-03-01/vmssNetworkInterface.json
 - Microsoft.Network/2017-03-01/applicationGateway.json
@@ -58,11 +58,11 @@ input-file:
 
 ```
  
-# API Version: 2016-12-01
+# Tag: 2016-12-01
 
-These settings apply only when `--api-version=2016-12-01` is specified on the command line.
+These settings apply only when `--tag=2016-12-01` is specified on the command line.
 
-``` yaml $(api-version) == '2016-12-01'
+``` yaml $(tag) == '2016-12-01'
 input-file:
 - microsoft.Compute/2016-12-01/vmssNetworkInterface.json
 - Microsoft.Network/2016-12-01/applicationGateway.json
@@ -83,11 +83,11 @@ input-file:
 
 ```
  
-# API Version: 2016-09-01
+# Tag: 2016-09-01
 
-These settings apply only when `--api-version=2016-09-01` is specified on the command line.
+These settings apply only when `--tag=2016-09-01` is specified on the command line.
 
-``` yaml $(api-version) == '2016-09-01'
+``` yaml $(tag) == '2016-09-01'
 input-file:
 - microsoft.Compute/2016-09-01/vmssNetworkInterface.json
 - Microsoft.Network/2016-09-01/applicationGateway.json
@@ -106,32 +106,32 @@ input-file:
 
 ```
  
-# API Version: 2016-06-01
+# Tag: 2016-06-01
 
-These settings apply only when `--api-version=2016-06-01` is specified on the command line.
+These settings apply only when `--tag=2016-06-01` is specified on the command line.
 
-``` yaml $(api-version) == '2016-06-01'
+``` yaml $(tag) == '2016-06-01'
 input-file:
 - Microsoft.Network/2016-06-01/network.json
 
 
 ```
  
-# API Version: 2016-03-30
+# Tag: 2016-03-30
 
-These settings apply only when `--api-version=2016-03-30` is specified on the command line.
+These settings apply only when `--tag=2016-03-30` is specified on the command line.
 
-``` yaml $(api-version) == '2016-03-30'
+``` yaml $(tag) == '2016-03-30'
 input-file:
 - Microsoft.Network/2016-03-30/network.json
 
 ```
  
-# API Version: 2015-06-15split
+# Tag: 2015-06-15split
 
-These settings apply only when `--api-version=2015-06-15split` is specified on the command line.
+These settings apply only when `--tag=2015-06-15split` is specified on the command line.
 
-``` yaml $(api-version) == '2015-06-15split'
+``` yaml $(tag) == '2015-06-15split'
 input-file:
 - Microsoft.Network/2015-06-15/applicationGateway.json
 - Microsoft.Network/2015-06-15/checkDnsAvailability.json
@@ -147,20 +147,20 @@ input-file:
 - microsoft.Compute/2015-06-15/vmssNetworkInterface.json
 ```
  
-# API Version: 2015-06-15
+# Tag: 2015-06-15
 
-These settings apply only when `--api-version=2015-06-15` is specified on the command line.
+These settings apply only when `--tag=2015-06-15` is specified on the command line.
 
-``` yaml $(api-version) == '2015-06-15'
+``` yaml $(tag) == '2015-06-15'
 input-file:
 - Microsoft.Network/2015-06-15/network.json
 ```
  
-# API Version: 2015-05-01-preview
+# Tag: 2015-05-01-preview
 
-These settings apply only when `--api-version=2015-05-01-preview` is specified on the command line.
+These settings apply only when `--tag=2015-05-01-preview` is specified on the command line.
 
-``` yaml $(api-version) == '2015-05-01-preview'
+``` yaml $(tag) == '2015-05-01-preview'
 input-file:
 - Microsoft.Network/2015-05-01-preview/network.json
 

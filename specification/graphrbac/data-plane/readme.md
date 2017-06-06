@@ -28,16 +28,16 @@ These are the global settings for the GraphRbac API.
 # common 
 title: Graph Rbac
 description: Graph Rbac Client
-api-version: 1.6
+tag: 1.6
 
 ```
 
 
-# API Version: 1.6
+# Tag: 1.6
 
-These settings apply only when `--api-version=1.6` is specified on the command line.
+These settings apply only when `--tag=1.6` is specified on the command line.
 
-``` yaml $(api-version) == '1.6'
+``` yaml $(tag) == '1.6'
 input-file:
 - 1.6/graphrbac.json
 

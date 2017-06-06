@@ -28,16 +28,16 @@ These are the global settings for the Relay API.
 # common 
 title: Relay
 description: Relay Client
-api-version: 2016-07-01
+tag: 2016-07-01
 
 ```
 
 
-# API Version: 2016-07-01
+# Tag: 2016-07-01
 
-These settings apply only when `--api-version=2016-07-01` is specified on the command line.
+These settings apply only when `--tag=2016-07-01` is specified on the command line.
 
-``` yaml $(api-version) == '2016-07-01'
+``` yaml $(tag) == '2016-07-01'
 input-file:
 - Microsoft.Relay/2016-07-01/relay.json
 

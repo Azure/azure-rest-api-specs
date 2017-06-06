@@ -28,36 +28,36 @@ These are the global settings for the Scheduler API.
 # common 
 title: Scheduler
 description: Scheduler Client
-api-version: 2016-03-01
+tag: 2016-03-01
 
 ```
 
 
-# API Version: 2016-03-01
+# Tag: 2016-03-01
 
-These settings apply only when `--api-version=2016-03-01` is specified on the command line.
+These settings apply only when `--tag=2016-03-01` is specified on the command line.
 
-``` yaml $(api-version) == '2016-03-01'
+``` yaml $(tag) == '2016-03-01'
 input-file:
 - Microsoft.Scheduler/2016-03-01/scheduler.json
 
 ```
  
-# API Version: 2016-01-01
+# Tag: 2016-01-01
 
-These settings apply only when `--api-version=2016-01-01` is specified on the command line.
+These settings apply only when `--tag=2016-01-01` is specified on the command line.
 
-``` yaml $(api-version) == '2016-01-01'
+``` yaml $(tag) == '2016-01-01'
 input-file:
 - Microsoft.Scheduler/2016-01-01/scheduler.json
 
 ```
  
-# API Version: 2014-08-01-preview
+# Tag: 2014-08-01-preview
 
-These settings apply only when `--api-version=2014-08-01-preview` is specified on the command line.
+These settings apply only when `--tag=2014-08-01-preview` is specified on the command line.
 
-``` yaml $(api-version) == '2014-08-01-preview'
+``` yaml $(tag) == '2014-08-01-preview'
 input-file:
 - Microsoft.Scheduler/2014-08-01-preview/scheduler.json
 

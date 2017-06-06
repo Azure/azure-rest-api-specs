@@ -28,16 +28,16 @@ These are the global settings for the Automation API.
 # common 
 title: Azure Automation
 description: Automation Client
-api-version: 2015-10-31
+tag: 2015-10-31
 
 ```
 
 
-# API Version: 2015-10-31
+# Tag: 2015-10-31
 
-These settings apply only when `--api-version=2015-10-31` is specified on the command line.
+These settings apply only when `--tag=2015-10-31` is specified on the command line.
 
-``` yaml $(api-version) == '2015-10-31'
+``` yaml $(tag) == '2015-10-31'
 input-file:
 - Microsoft.Automation/2015-10-31/account.json
 - Microsoft.Automation/2015-10-31/certificate.json

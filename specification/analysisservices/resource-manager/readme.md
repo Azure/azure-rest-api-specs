@@ -28,16 +28,16 @@ These are the global settings for the AnalysisServices API.
 # common 
 title: Analysis Services
 description: Analysis Services Client
-api-version: 2016-05-16
+tag: 2016-05-16
 
 ```
 
 
-# API Version: 2016-05-16
+# Tag: 2016-05-16
 
-These settings apply only when `--api-version=2016-05-16` is specified on the command line.
+These settings apply only when `--tag=2016-05-16` is specified on the command line.
 
-``` yaml $(api-version) == '2016-05-16'
+``` yaml $(tag) == '2016-05-16'
 input-file:
 - Microsoft.AnalysisServices/2016-05-16/analysisservices.json
 

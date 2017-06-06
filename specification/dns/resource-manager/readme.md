@@ -28,26 +28,26 @@ These are the global settings for the DNS API.
 # common 
 title: DNS
 description: DNS Client
-api-version: 2016-04-01
+tag: 2016-04-01
 
 ```
 
 
-# API Version: 2016-04-01
+# Tag: 2016-04-01
 
-These settings apply only when `--api-version=2016-04-01` is specified on the command line.
+These settings apply only when `--tag=2016-04-01` is specified on the command line.
 
-``` yaml $(api-version) == '2016-04-01'
+``` yaml $(tag) == '2016-04-01'
 input-file:
 - Microsoft.Network/2016-04-01/dns.json
 
 ```
  
-# API Version: 2015-05-04-preview
+# Tag: 2015-05-04-preview
 
-These settings apply only when `--api-version=2015-05-04-preview` is specified on the command line.
+These settings apply only when `--tag=2015-05-04-preview` is specified on the command line.
 
-``` yaml $(api-version) == '2015-05-04-preview'
+``` yaml $(tag) == '2015-05-04-preview'
 input-file:
 - Microsoft.Network/2015-05-04-preview/dns.json
 

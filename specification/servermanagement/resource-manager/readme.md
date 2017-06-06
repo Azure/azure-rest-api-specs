@@ -28,26 +28,26 @@ These are the global settings for the ServerManagement API.
 # common 
 title: Server Management
 description: Server Management Client
-api-version: 2016-07-01-preview
+tag: 2016-07-01-preview
 
 ```
 
 
-# API Version: 2016-07-01-preview
+# Tag: 2016-07-01-preview
 
-These settings apply only when `--api-version=2016-07-01-preview` is specified on the command line.
+These settings apply only when `--tag=2016-07-01-preview` is specified on the command line.
 
-``` yaml $(api-version) == '2016-07-01-preview'
+``` yaml $(tag) == '2016-07-01-preview'
 input-file:
 - Microsoft.ServerManagement/2016-07-01-preview/servermanagement.json
 
 ```
  
-# API Version: 2015-07-01-preview
+# Tag: 2015-07-01-preview
 
-These settings apply only when `--api-version=2015-07-01-preview` is specified on the command line.
+These settings apply only when `--tag=2015-07-01-preview` is specified on the command line.
 
-``` yaml $(api-version) == '2015-07-01-preview'
+``` yaml $(tag) == '2015-07-01-preview'
 input-file:
 - Microsoft.ServerManagement/2015-07-01-preview/servermanagement.json
 

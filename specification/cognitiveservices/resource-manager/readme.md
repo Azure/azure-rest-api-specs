@@ -29,26 +29,26 @@ These are the global settings for the CognitiveServices API.
 # common 
 title: Cognitive Services
 description: Cognitive Services Client
-api-version: 2017-04-18
+tag: 2017-04-18
 
 ```
 
 
-# API Version: 2017-04-18
+# Tag: 2017-04-18
 
-These settings apply only when `--api-version=2017-04-18` is specified on the command line.
+These settings apply only when `--tag=2017-04-18` is specified on the command line.
 
-``` yaml $(api-version) == '2017-04-18'
+``` yaml $(tag) == '2017-04-18'
 input-file:
 - Microsoft.CognitiveServices/2017-04-18/cognitiveservices.json
 
 ```
  
-# API Version: 2016-02-01-preview
+# Tag: 2016-02-01-preview
 
-These settings apply only when `--api-version=2016-02-01-preview` is specified on the command line.
+These settings apply only when `--tag=2016-02-01-preview` is specified on the command line.
 
-``` yaml $(api-version) == '2016-02-01-preview'
+``` yaml $(tag) == '2016-02-01-preview'
 input-file:
 - Microsoft.CognitiveServices/2016-02-01-preview/cognitiveservices.json
 

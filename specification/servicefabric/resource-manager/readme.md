@@ -28,16 +28,16 @@ These are the global settings for the ServiceFabricClient API.
 # common 
 title: Service Fabric
 description: Service Fabric Client
-api-version: 2016-09-01
+tag: 2016-09-01
 
 ```
 
 
-# API Version: 2016-09-01
+# Tag: 2016-09-01
 
-These settings apply only when `--api-version=2016-09-01` is specified on the command line.
+These settings apply only when `--tag=2016-09-01` is specified on the command line.
 
-``` yaml $(api-version) == '2016-09-01'
+``` yaml $(tag) == '2016-09-01'
 input-file:
 - Microsoft.ServiceFabric/2016-09-01/servicefabric.json
 

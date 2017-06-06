@@ -28,16 +28,16 @@ These are the global settings for the Sql API.
 # common 
 title: Sql
 description: Sql Client
-api-version: 2015-05-01-preview
+tag: 2015-05-01-preview
 
 ```
 
 
-# API Version: 2015-05-01-preview
+# Tag: 2015-05-01-preview
 
-These settings apply only when `--api-version=2015-05-01-preview` is specified on the command line.
+These settings apply only when `--tag=2015-05-01-preview` is specified on the command line.
 
-``` yaml $(api-version) == '2015-05-01-preview'
+``` yaml $(tag) == '2015-05-01-preview'
 input-file:
 - Microsoft.Sql/2014-04-01/backups.json
 - Microsoft.Sql/2014-04-01/capabilities.json
@@ -58,11 +58,11 @@ input-file:
 - Microsoft.Sql/2015-05-01-preview/encryptionProtectors.json
 ```
  
-# API Version: 2014-04-01
+# Tag: 2014-04-01
 
-These settings apply only when `--api-version=2014-04-01` is specified on the command line.
+These settings apply only when `--tag=2014-04-01` is specified on the command line.
 
-``` yaml $(api-version) == '2014-04-01'
+``` yaml $(tag) == '2014-04-01'
 input-file:
 - Microsoft.Sql/2014-04-01/firewallRules.json
 - Microsoft.Sql/2014-04-01/importExport.json

@@ -28,16 +28,16 @@ These are the global settings for the MonitorClient API.
 # common 
 title: Monitor Management Client
 description: Monitor Management Client
-api-version: 2017-03-01
+tag: 2017-03-01
 
 ```
 
 
-# API Version: 2017-03-01
+# Tag: 2017-03-01
 
-These settings apply only when `--api-version=2017-03-01` is specified on the command line.
+These settings apply only when `--tag=2017-03-01` is specified on the command line.
 
-``` yaml $(api-version) == '2017-03-01'
+``` yaml $(tag) == '2017-03-01'
 input-file:
 - microsoft.insights/2015-04-01/autoscale_API.json
 - microsoft.insights/2016-03-01/alertRulesIncidents_API.json

@@ -28,16 +28,16 @@ These are the global settings for the EventHub API.
 # common 
 title: Event Hub
 description: Event Hub Client
-api-version: 2015-08-01
+tag: 2015-08-01
 
 ```
 
 
-# API Version: 2015-08-01
+# Tag: 2015-08-01
 
-These settings apply only when `--api-version=2015-08-01` is specified on the command line.
+These settings apply only when `--tag=2015-08-01` is specified on the command line.
 
-``` yaml $(api-version) == '2015-08-01'
+``` yaml $(tag) == '2015-08-01'
 input-file:
 - Microsoft.EventHub/2015-08-01/EventHub.json
 

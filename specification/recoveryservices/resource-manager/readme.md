@@ -28,16 +28,16 @@ These are the global settings for the RecoveryServices API.
 # common 
 title: Recovery Services
 description: Recovery Services Client
-api-version: 2016-12-01
+tag: 2016-12-01
 
 ```
 
 
-# API Version: 2016-12-01
+# Tag: 2016-12-01
 
-These settings apply only when `--api-version=2016-12-01` is specified on the command line.
+These settings apply only when `--tag=2016-12-01` is specified on the command line.
 
-``` yaml $(api-version) == '2016-12-01'
+``` yaml $(tag) == '2016-12-01'
 input-file:
 - Microsoft.RecoveryServices/2016-12-01/backup.json
 - Microsoft.RecoveryServices/2016-06-01/registeredidentities.json
@@ -47,11 +47,11 @@ input-file:
 
 ```
  
-# API Version: 2016-06-01
+# Tag: 2016-06-01
 
-These settings apply only when `--api-version=2016-06-01` is specified on the command line.
+These settings apply only when `--tag=2016-06-01` is specified on the command line.
 
-``` yaml $(api-version) == '2016-06-01'
+``` yaml $(tag) == '2016-06-01'
 input-file:
 - Microsoft.RecoveryServices/2016-06-01/registeredidentities.json
 - Microsoft.RecoveryServices/2016-06-01/replicationusages.json

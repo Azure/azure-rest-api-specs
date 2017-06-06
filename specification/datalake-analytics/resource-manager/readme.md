@@ -28,16 +28,16 @@ These are the global settings for the DataLakeAnalytics API.
 # common 
 title: DataLake Analytics
 description: DataLake Analytics Client
-api-version: 2016-11-01
+tag: 2016-11-01
 
 ```
 
 
-# API Version: 2016-11-01
+# Tag: 2016-11-01
 
-These settings apply only when `--api-version=2016-11-01` is specified on the command line.
+These settings apply only when `--tag=2016-11-01` is specified on the command line.
 
-``` yaml $(api-version) == '2016-11-01'
+``` yaml $(tag) == '2016-11-01'
 input-file:
 - Microsoft.DataLakeAnalytics/2016-11-01/account.json
 - Microsoft.DataLakeAnalytics/2016-11-01/catalog.json
@@ -45,11 +45,11 @@ input-file:
 
 ```
  
-# API Version: 2016-03-20-preview
+# Tag: 2016-03-20-preview
 
-These settings apply only when `--api-version=2016-03-20-preview` is specified on the command line.
+These settings apply only when `--tag=2016-03-20-preview` is specified on the command line.
 
-``` yaml $(api-version) == '2016-03-20-preview'
+``` yaml $(tag) == '2016-03-20-preview'
 input-file:
 - Microsoft.DataLakeAnalytics/2015-10-01-preview/account.json
 - Microsoft.DataLakeAnalytics/2015-10-01-preview/catalog.json
@@ -57,11 +57,11 @@ input-file:
 
 ```
  
-# API Version: 2015-11-01-preview
+# Tag: 2015-11-01-preview
 
-These settings apply only when `--api-version=2015-11-01-preview` is specified on the command line.
+These settings apply only when `--tag=2015-11-01-preview` is specified on the command line.
 
-``` yaml $(api-version) == '2015-11-01-preview'
+``` yaml $(tag) == '2015-11-01-preview'
 input-file:
 - Microsoft.DataLakeAnalytics/2015-10-01-preview/account.json
 - Microsoft.DataLakeAnalytics/2015-10-01-preview/catalog.json

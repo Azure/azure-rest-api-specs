@@ -28,16 +28,16 @@ These are the global settings for the StorSimple API.
 # common 
 title: StorSimple 8000 Series
 description: StorSimple 8000 Series Client
-api-version: 2017-06-01
+tag: 2017-06-01
 
 ```
 
 
-# API Version: 2017-06-01
+# Tag: 2017-06-01
 
-These settings apply only when `--api-version=2017-06-01` is specified on the command line.
+These settings apply only when `--tag=2017-06-01` is specified on the command line.
 
-``` yaml $(api-version) == '2017-06-01'
+``` yaml $(tag) == '2017-06-01'
 input-file:
 - Microsoft.StorSimple/2017-06-01/storsimple.json
 

@@ -28,29 +28,29 @@ These are the global settings for the RecoveryServicesBackup API.
 # common 
 title: Recovery Services Backup
 description: Open API 2.0 Specs for Azure RecoveryServices Backup service
-api-version: 2016-12-01
+tag: 2016-12-01
 
 azure-arm: true
 license-header: MICROSOFT_MIT
 ```
 
 
-# API Version: 2016-12-01
+# Tag: 2016-12-01
 
-These settings apply only when `--api-version=2016-12-01` is specified on the command line.
+These settings apply only when `--tag=2016-12-01` is specified on the command line.
 
-``` yaml $(api-version) == '2016-12-01'
+``` yaml $(tag) == '2016-12-01'
 input-file:
 - Microsoft.RecoveryServices/2016-12-01/backupManagement.json
 - Microsoft.RecoveryServices/2016-08-10/operations.json
 
 ```
  
-# API Version: 2016-06-01
+# Tag: 2016-06-01
 
-These settings apply only when `--api-version=2016-06-01` is specified on the command line.
+These settings apply only when `--tag=2016-06-01` is specified on the command line.
 
-``` yaml $(api-version) == '2016-06-01'
+``` yaml $(tag) == '2016-06-01'
 input-file:
 - Microsoft.RecoveryServices/2016-06-01/recoveryservicesbackup.json
 - Microsoft.RecoveryServices/2016-06-01/registeredIdentities.json

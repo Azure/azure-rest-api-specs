@@ -28,27 +28,27 @@ These are the global settings for the OperationalInsights API.
 # common 
 title: Operational Insights
 description: Operational Insights Client
-api-version: 2015-11-01-preview
+tag: 2015-11-01-preview
 
 ```
 
 
-# API Version: 2015-11-01-preview
+# Tag: 2015-11-01-preview
 
-These settings apply only when `--api-version=2015-11-01-preview` is specified on the command line.
+These settings apply only when `--tag=2015-11-01-preview` is specified on the command line.
 
-``` yaml $(api-version) == '2015-11-01-preview'
+``` yaml $(tag) == '2015-11-01-preview'
 input-file:
 - Microsoft.OperationalInsights/2015-11-01-preview/OperationalInsights.json
 - Microsoft.OperationalInsights/2015-03-20/OperationalInsights.json
 
 ```
  
-# API Version: 2015-03-20
+# Tag: 2015-03-20
 
-These settings apply only when `--api-version=2015-03-20` is specified on the command line.
+These settings apply only when `--tag=2015-03-20` is specified on the command line.
 
-``` yaml $(api-version) == '2015-03-20'
+``` yaml $(tag) == '2015-03-20'
 input-file:
 - Microsoft.OperationalInsights/2015-03-20/OperationalInsights.json
 

@@ -28,27 +28,27 @@ These are the global settings for the ServiceFabricClient API.
 # common 
 title: Service Fabric
 description: Service Fabric Client
-api-version: 1.0.0
+tag: 1.0.0
 
 ```
 
 
-# API Version: 1.0.0
+# Tag: 1.0.0
 
-These settings apply only when `--api-version=1.0.0` is specified on the command line.
+These settings apply only when `--tag=1.0.0` is specified on the command line.
 
-``` yaml $(api-version) == '1.0.0'
+``` yaml $(tag) == '1.0.0'
 input-file:
 - Microsoft.ServiceFabric/1.0.0/servicefabric.json
 
 ```
 
 
-# API Version: 5.6
+# Tag: 5.6
 
-These settings apply only when `--api-version=5.6` is specified on the command line.
+These settings apply only when `--tag=5.6` is specified on the command line.
 
-``` yaml $(api-version) == '1.0.0'
+``` yaml $(tag) == '1.0.0'
 input-file:
 - Microsoft.ServiceFabric/5.6/servicefabric.json
 

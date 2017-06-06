@@ -28,36 +28,36 @@ These are the global settings for the Advisor API.
 # common 
 title: Advisor
 description: Advisor Client
-api-version: 2017-04-19
+tag: 2017-04-19
 
 ```
 
 
-# API Version: 2017-04-19
+# Tag: 2017-04-19
 
-These settings apply only when `--api-version=2017-04-19` is specified on the command line.
+These settings apply only when `--tag=2017-04-19` is specified on the command line.
 
-``` yaml $(api-version) == '2017-04-19'
+``` yaml $(tag) == '2017-04-19'
 input-file:
 - Microsoft.Advisor/2017-04-19/advisor.json
 
 ```
  
-# API Version: 2017-03-31
+# Tag: 2017-03-31
 
-These settings apply only when `--api-version=2017-03-31` is specified on the command line.
+These settings apply only when `--tag=2017-03-31` is specified on the command line.
 
-``` yaml $(api-version) == '2017-03-31'
+``` yaml $(tag) == '2017-03-31'
 input-file:
 - Microsoft.Advisor/2017-03-31/advisor.json
 
 ```
  
-# API Version: 2016-07-12-preview
+# Tag: 2016-07-12-preview
 
-These settings apply only when `--api-version=2016-07-12-preview` is specified on the command line.
+These settings apply only when `--tag=2016-07-12-preview` is specified on the command line.
 
-``` yaml $(api-version) == '2016-07-12-preview'
+``` yaml $(tag) == '2016-07-12-preview'
 input-file:
 - Microsoft.Advisor/2016-07-12-preview/advisor.json
 

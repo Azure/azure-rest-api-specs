@@ -28,16 +28,16 @@ These are the global settings for the StreamAnalytics API.
 # common 
 title: Stream Analytics Management Client
 description: Stream Analytics Client
-api-version: 2016-03-01
+tag: 2016-03-01
 
 ```
 
 
-# API Version: 2016-03-01
+# Tag: 2016-03-01
 
-These settings apply only when `--api-version=2016-03-01` is specified on the command line.
+These settings apply only when `--tag=2016-03-01` is specified on the command line.
 
-``` yaml $(api-version) == '2016-03-01'
+``` yaml $(tag) == '2016-03-01'
 input-file:
 - Microsoft.StreamAnalytics/2016-03-01/streamingjobs.json
 - Microsoft.StreamAnalytics/2016-03-01/inputs.json

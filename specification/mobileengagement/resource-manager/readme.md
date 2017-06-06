@@ -28,16 +28,16 @@ These are the global settings for the MobileEngagement API.
 # common 
 title: Mobile Engagement
 description: Mobile Engagement Client
-api-version: 2014-12-01
+tag: 2014-12-01
 
 ```
 
 
-# API Version: 2014-12-01
+# Tag: 2014-12-01
 
-These settings apply only when `--api-version=2014-12-01` is specified on the command line.
+These settings apply only when `--tag=2014-12-01` is specified on the command line.
 
-``` yaml $(api-version) == '2014-12-01'
+``` yaml $(tag) == '2014-12-01'
 input-file:
 - Microsoft.MobileEngagement/2014-12-01/mobile-engagement.json
 

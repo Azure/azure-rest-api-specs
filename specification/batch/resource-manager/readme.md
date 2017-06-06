@@ -28,37 +28,37 @@ These are the global settings for the Batch API.
 # common 
 title: Batch
 description: Batch Client
-api-version: 2017-05-01
+tag: 2017-05-01
 
 ```
 
 
-# API Version: 2017-05-01
+# Tag: 2017-05-01
 
-These settings apply only when `--api-version=2017-05-01` is specified on the command line.
+These settings apply only when `--tag=2017-05-01` is specified on the command line.
 
-``` yaml $(api-version) == '2017-05-01'
+``` yaml $(tag) == '2017-05-01'
 input-file:
 - Microsoft.Batch/2017-05-01/BatchManagement.json
 
 ```
 
 
-# API Version: 2017-01-01
+# Tag: 2017-01-01
 
-These settings apply only when `--api-version=2017-01-01` is specified on the command line.
+These settings apply only when `--tag=2017-01-01` is specified on the command line.
 
-``` yaml $(api-version) == '2017-01-01'
+``` yaml $(tag) == '2017-01-01'
 input-file:
 - Microsoft.Batch/2017-01-01/BatchManagement.json
 
 ```
  
-# API Version: 2015-12-01
+# Tag: 2015-12-01
 
-These settings apply only when `--api-version=2015-12-01` is specified on the command line.
+These settings apply only when `--tag=2015-12-01` is specified on the command line.
 
-``` yaml $(api-version) == '2015-12-01'
+``` yaml $(tag) == '2015-12-01'
 input-file:
 - Microsoft.Batch/2015-12-01/BatchManagement.json
 

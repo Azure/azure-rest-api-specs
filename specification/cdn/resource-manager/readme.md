@@ -28,36 +28,36 @@ These are the global settings for the Cdn API.
 # common 
 title: CDN
 description: CDN Client
-api-version: 2016-10-02
+tag: 2016-10-02
 
 ```
 
 
-# API Version: 2016-10-02
+# Tag: 2016-10-02
 
-These settings apply only when `--api-version=2016-10-02` is specified on the command line.
+These settings apply only when `--tag=2016-10-02` is specified on the command line.
 
-``` yaml $(api-version) == '2016-10-02'
+``` yaml $(tag) == '2016-10-02'
 input-file:
 - Microsoft.Cdn/2016-10-02/cdn.json
 
 ```
  
-# API Version: 2016-04-02
+# Tag: 2016-04-02
 
-These settings apply only when `--api-version=2016-04-02` is specified on the command line.
+These settings apply only when `--tag=2016-04-02` is specified on the command line.
 
-``` yaml $(api-version) == '2016-04-02'
+``` yaml $(tag) == '2016-04-02'
 input-file:
 - Microsoft.Cdn/2016-04-02/cdn.json
 
 ```
  
-# API Version: 2015-06-01
+# Tag: 2015-06-01
 
-These settings apply only when `--api-version=2015-06-01` is specified on the command line.
+These settings apply only when `--tag=2015-06-01` is specified on the command line.
 
-``` yaml $(api-version) == '2015-06-01'
+``` yaml $(tag) == '2015-06-01'
 input-file:
 - Microsoft.Cdn/2015-06-01/cdn.json
 

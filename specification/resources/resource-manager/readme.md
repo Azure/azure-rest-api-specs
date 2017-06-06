@@ -28,16 +28,16 @@ These are the global settings for the Resource API.
 # common 
 title: Resource
 description: Resource Client
-api-version: 2017-05-10
+tag: 2017-05-10
 
 ```
 
 
-# API Version: 2017-05-10
+# Tag: 2017-05-10
 
-These settings apply only when `--api-version=2017-05-10` is specified on the command line.
+These settings apply only when `--tag=2017-05-10` is specified on the command line.
 
-``` yaml $(api-version) == '2017-05-10'
+``` yaml $(tag) == '2017-05-10'
 input-file:
 - Microsoft.Authorization/2016-09-01/locks.json
 - Microsoft.Authorization/2016-12-01/policy.json
@@ -49,11 +49,11 @@ input-file:
 
 ```
  
-# API Version: 2016-09-01
+# Tag: 2016-09-01
 
-These settings apply only when `--api-version=2016-09-01` is specified on the command line.
+These settings apply only when `--tag=2016-09-01` is specified on the command line.
 
-``` yaml $(api-version) == '2016-09-01'
+``` yaml $(tag) == '2016-09-01'
 input-file:
 - Microsoft.Authorization/2016-09-01/locks.json
 - Microsoft.Authorization/2016-04-01/policy.json
@@ -64,11 +64,11 @@ input-file:
 
 ```
  
-# API Version: 2016-07-01
+# Tag: 2016-07-01
 
-These settings apply only when `--api-version=2016-07-01` is specified on the command line.
+These settings apply only when `--tag=2016-07-01` is specified on the command line.
 
-``` yaml $(api-version) == '2016-07-01'
+``` yaml $(tag) == '2016-07-01'
 input-file:
 - Microsoft.Authorization/2015-01-01/locks.json
 - Microsoft.Authorization/2016-04-01/policy.json
@@ -78,11 +78,11 @@ input-file:
 
 ```
  
-# API Version: 2016-06-01
+# Tag: 2016-06-01
 
-These settings apply only when `--api-version=2016-06-01` is specified on the command line.
+These settings apply only when `--tag=2016-06-01` is specified on the command line.
 
-``` yaml $(api-version) == '2016-06-01'
+``` yaml $(tag) == '2016-06-01'
 input-file:
 - Microsoft.Authorization/2015-01-01/locks.json
 - Microsoft.Authorization/2016-04-01/policy.json
@@ -92,11 +92,11 @@ input-file:
 
 ```
  
-# API Version: 2016-04-01
+# Tag: 2016-04-01
 
-These settings apply only when `--api-version=2016-04-01` is specified on the command line.
+These settings apply only when `--tag=2016-04-01` is specified on the command line.
 
-``` yaml $(api-version) == '2016-04-01'
+``` yaml $(tag) == '2016-04-01'
 input-file:
 - Microsoft.Authorization/2015-01-01/locks.json
 - Microsoft.Authorization/2016-04-01/policy.json
@@ -106,11 +106,11 @@ input-file:
 
 ```
  
-# API Version: 2016-02-01
+# Tag: 2016-02-01
 
-These settings apply only when `--api-version=2016-02-01` is specified on the command line.
+These settings apply only when `--tag=2016-02-01` is specified on the command line.
 
-``` yaml $(api-version) == '2016-02-01'
+``` yaml $(tag) == '2016-02-01'
 input-file:
 - Microsoft.Authorization/2015-01-01/locks.json
 - Microsoft.Authorization/2015-10-01-preview/policy.json
@@ -120,11 +120,11 @@ input-file:
 
 ```
  
-# API Version: 2015-12-01
+# Tag: 2015-12-01
 
-These settings apply only when `--api-version=2015-12-01` is specified on the command line.
+These settings apply only when `--tag=2015-12-01` is specified on the command line.
 
-``` yaml $(api-version) == '2015-12-01'
+``` yaml $(tag) == '2015-12-01'
 input-file:
 - Microsoft.Authorization/2015-01-01/locks.json
 - Microsoft.Authorization/2015-10-01-preview/policy.json

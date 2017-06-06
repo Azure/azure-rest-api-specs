@@ -28,16 +28,16 @@ These are the global settings for the ServiceMap API.
 # common 
 title: Service Map
 description: Service Map Client
-api-version: 2015-11-01-preview
+tag: 2015-11-01-preview
 
 ```
 
 
-# API Version: 2015-11-01-preview
+# Tag: 2015-11-01-preview
 
-These settings apply only when `--api-version=2015-11-01-preview` is specified on the command line.
+These settings apply only when `--tag=2015-11-01-preview` is specified on the command line.
 
-``` yaml $(api-version) == '2015-11-01-preview'
+``` yaml $(tag) == '2015-11-01-preview'
 input-file:
 - Microsoft.OperationalInsights/2015-11-01-preview/arm-service-map.json
 

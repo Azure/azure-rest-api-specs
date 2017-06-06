@@ -5,7 +5,7 @@
 This is the AutoRest configuration file for Web.
 
 
-The App service RP comprises of services where each service has its own api-version.
+The App service RP comprises of services where each service has its own tag.
 Hence, each sub-service has its own swagger spec. 
 
 All of them are tied together using this configuration and are packaged together into one compute client library.
@@ -34,16 +34,16 @@ These are the global settings for the Web API.
 # common 
 title: Web
 description: Web App Client
-api-version: 2016-09-01
+tag: 2016-09-01
 
 ```
 
 
-# API Version: 2016-09-01
+# Tag: 2016-09-01
 
-These settings apply only when `--api-version=2016-09-01` is specified on the command line.
+These settings apply only when `--tag=2016-09-01` is specified on the command line.
 
-``` yaml $(api-version) == '2016-09-01'
+``` yaml $(tag) == '2016-09-01'
 input-file:
 - Microsoft.CertificateRegistration/2015-08-01/AppServiceCertificateOrders.json
 - Microsoft.DomainRegistration/2015-04-01/Domains.json
@@ -59,11 +59,11 @@ input-file:
 
 ```
  
-# API Version: 2015-08-01-preview
+# Tag: 2015-08-01-preview
 
-These settings apply only when `--api-version=2015-08-01-preview` is specified on the command line.
+These settings apply only when `--tag=2015-08-01-preview` is specified on the command line.
 
-``` yaml $(api-version) == '2015-08-01-preview'
+``` yaml $(tag) == '2015-08-01-preview'
 input-file:
 - Microsoft.Web/2015-08-01/service.json
 - Microsoft.Web/2015-08-01-preview/logicAppsManagementClient.json

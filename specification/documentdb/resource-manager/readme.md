@@ -28,16 +28,16 @@ These are the global settings for the DocumentDB API.
 # common 
 title: Document DB
 description: Document DB Client
-api-version: 2015-04-08
+tag: 2015-04-08
 
 ```
 
 
-# API Version: 2015-04-08
+# Tag: 2015-04-08
 
-These settings apply only when `--api-version=2015-04-08` is specified on the command line.
+These settings apply only when `--tag=2015-04-08` is specified on the command line.
 
-``` yaml $(api-version) == '2015-04-08'
+``` yaml $(tag) == '2015-04-08'
 input-file:
 - Microsoft.DocumentDB/2015-04-08/documentdb.json
 

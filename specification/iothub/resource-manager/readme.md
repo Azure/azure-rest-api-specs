@@ -28,26 +28,26 @@ These are the global settings for the IotHub API.
 # common 
 title: IOT Hub
 description: IOT Hub Client
-api-version: 2017-01-19
+tag: 2017-01-19
 
 ```
 
 
-# API Version: 2017-01-19
+# Tag: 2017-01-19
 
-These settings apply only when `--api-version=2017-01-19` is specified on the command line.
+These settings apply only when `--tag=2017-01-19` is specified on the command line.
 
-``` yaml $(api-version) == '2017-01-19'
+``` yaml $(tag) == '2017-01-19'
 input-file:
 - Microsoft.Devices/2017-01-19/iothub.json
 
 ```
  
-# API Version: 2016-02-03
+# Tag: 2016-02-03
 
-These settings apply only when `--api-version=2016-02-03` is specified on the command line.
+These settings apply only when `--tag=2016-02-03` is specified on the command line.
 
-``` yaml $(api-version) == '2016-02-03'
+``` yaml $(tag) == '2016-02-03'
 input-file:
 - Microsoft.Devices/2016-02-03/iothub.json
 

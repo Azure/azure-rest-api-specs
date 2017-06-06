@@ -28,16 +28,16 @@ These are the global settings for the PowerBI API.
 # common 
 title: Power BI
 description: Power BI Client
-api-version: 2016-01-29
+tag: 2016-01-29
 
 ```
 
 
-# API Version: 2016-01-29
+# Tag: 2016-01-29
 
-These settings apply only when `--api-version=2016-01-29` is specified on the command line.
+These settings apply only when `--tag=2016-01-29` is specified on the command line.
 
-``` yaml $(api-version) == '2016-01-29'
+``` yaml $(tag) == '2016-01-29'
 input-file:
 - Microsoft.PowerBI/2016-01-29/powerbiembedded.json
 

@@ -28,16 +28,16 @@ These are the global settings for the AppInsights API.
 # common 
 title: AppInsights
 description: AppInsights Client
-api-version: 2015-05-01
+tag: 2015-05-01
 
 ```
 
 
-# API Version: 2015-05-01
+# Tag: 2015-05-01
 
-These settings apply only when `--api-version=2015-05-01` is specified on the command line.
+These settings apply only when `--tag=2015-05-01` is specified on the command line.
 
-``` yaml $(api-version) == '2015-05-01'
+``` yaml $(tag) == '2015-05-01'
 input-file:
 - microsoft.insights/2015-05-01/aiOperations_API.json
 - microsoft.insights/2015-05-01/components_API.json

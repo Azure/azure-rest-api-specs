@@ -28,27 +28,27 @@ These are the global settings for the MachineLearning API.
 # common 
 title: Machine Learning
 description: Machine Learning Client
-api-version: 2017-01-01
+tag: 2017-01-01
 
 ```
 
 
-# API Version: 2017-01-01
+# Tag: 2017-01-01
 
-These settings apply only when `--api-version=2017-01-01` is specified on the command line.
+These settings apply only when `--tag=2017-01-01` is specified on the command line.
 
-``` yaml $(api-version) == '2017-01-01'
+``` yaml $(tag) == '2017-01-01'
 input-file:
 - Microsoft.MachineLearning/2016-05-01-preview/commitmentPlans.json
 - Microsoft.MachineLearning/2017-01-01/webservices.json
 
 ```
  
-# API Version: 2016-05-01-preview
+# Tag: 2016-05-01-preview
 
-These settings apply only when `--api-version=2016-05-01-preview` is specified on the command line.
+These settings apply only when `--tag=2016-05-01-preview` is specified on the command line.
 
-``` yaml $(api-version) == '2016-05-01-preview'
+``` yaml $(tag) == '2016-05-01-preview'
 input-file:
 - Microsoft.MachineLearning/2016-05-01-preview/commitmentPlans.json
 - Microsoft.MachineLearning/2016-05-01-preview/webservices.json

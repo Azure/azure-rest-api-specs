@@ -28,16 +28,16 @@ These are the global settings for the RecoveryServicesSiteRecovery API.
 # common 
 title: Recovery Services Site Recovery
 description: Recovery Services Site Recovery Client
-api-version: 2016-08-10
+tag: 2016-08-10
 
 ```
 
 
-# API Version: 2016-08-10
+# Tag: 2016-08-10
 
-These settings apply only when `--api-version=2016-08-10` is specified on the command line.
+These settings apply only when `--tag=2016-08-10` is specified on the command line.
 
-``` yaml $(api-version) == '2016-08-10'
+``` yaml $(tag) == '2016-08-10'
 input-file:
 - Microsoft.RecoveryServices/2016-08-10/service.json
 

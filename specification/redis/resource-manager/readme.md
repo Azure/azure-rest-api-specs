@@ -28,37 +28,37 @@ These are the global settings for the Redis API.
 # common 
 title: Redis
 description: Redis Client
-api-version: 2017-02-01
+tag: 2017-02-01
 
 ```
 
 
-# API Version: 2017-02-01
+# Tag: 2017-02-01
 
-These settings apply only when `--api-version=2017-02-01` is specified on the command line.
+These settings apply only when `--tag=2017-02-01` is specified on the command line.
 
-``` yaml $(api-version) == '2017-02-01'
+``` yaml $(tag) == '2017-02-01'
 input-file:
 - Microsoft.Cache/2017-02-01/redis.json
 
 ```
 
 
-# API Version: 2016-04-01
+# Tag: 2016-04-01
 
-These settings apply only when `--api-version=2016-04-01` is specified on the command line.
+These settings apply only when `--tag=2016-04-01` is specified on the command line.
 
-``` yaml $(api-version) == '2016-04-01'
+``` yaml $(tag) == '2016-04-01'
 input-file:
 - Microsoft.Cache/2016-04-01/redis.json
 
 ```
  
-# API Version: 2015-08-01
+# Tag: 2015-08-01
 
-These settings apply only when `--api-version=2015-08-01` is specified on the command line.
+These settings apply only when `--tag=2015-08-01` is specified on the command line.
 
-``` yaml $(api-version) == '2015-08-01'
+``` yaml $(tag) == '2015-08-01'
 input-file:
 - Microsoft.Cache/2015-08-01/redis.json
 

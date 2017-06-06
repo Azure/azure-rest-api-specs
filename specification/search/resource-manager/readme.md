@@ -28,26 +28,26 @@ These are the global settings for the SearchClient API.
 # common 
 title: Search
 description: Search Client
-api-version: 2015-08-19
+tag: 2015-08-19
 
 ```
 
 
-# API Version: 2015-08-19
+# Tag: 2015-08-19
 
-These settings apply only when `--api-version=2015-08-19` is specified on the command line.
+These settings apply only when `--tag=2015-08-19` is specified on the command line.
 
-``` yaml $(api-version) == '2015-08-19'
+``` yaml $(tag) == '2015-08-19'
 input-file:
 - Microsoft.Search/2015-08-19/search.json
 
 ```
  
-# API Version: 2015-02-28
+# Tag: 2015-02-28
 
-These settings apply only when `--api-version=2015-02-28` is specified on the command line.
+These settings apply only when `--tag=2015-02-28` is specified on the command line.
 
-``` yaml $(api-version) == '2015-02-28'
+``` yaml $(tag) == '2015-02-28'
 input-file:
 - Microsoft.Search/2015-02-28/search.json
 

@@ -28,16 +28,16 @@ These are the global settings for the MediaServices API.
 # common 
 title: Media Services
 description: Media Services Client
-api-version: 2015-10-01
+tag: 2015-10-01
 
 ```
 
 
-# API Version: 2015-10-01
+# Tag: 2015-10-01
 
-These settings apply only when `--api-version=2015-10-01` is specified on the command line.
+These settings apply only when `--tag=2015-10-01` is specified on the command line.
 
-``` yaml $(api-version) == '2015-10-01'
+``` yaml $(tag) == '2015-10-01'
 input-file:
 - Microsoft.Media/2015-10-01/media.json
 
