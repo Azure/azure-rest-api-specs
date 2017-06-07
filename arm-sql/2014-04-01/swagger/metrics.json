@@ -51,7 +51,7 @@
             "in": "query",
             "required": true,
             "type": "string",
-            "description": "An OData filter expression that describes a subset of metrics to return.  Required for getting metrics."
+            "description": "An OData filter expression that describes a subset of metrics to return."
           }
         ],
         "responses": {
@@ -146,7 +146,7 @@
             "in": "query",
             "required": true,
             "type": "string",
-            "description": "An OData filter expression that describes a subset of metrics to return.  Required for getting metrics."
+            "description": "An OData filter expression that describes a subset of metrics to return."
           }
         ],
         "responses": {
@@ -257,10 +257,12 @@
     "MetricName": {
       "properties": {
         "value": {
+          "readOnly": true,
           "type": "string",
           "description": "The name of the database metric."
         },
         "localizedValue": {
+          "readOnly": true,
           "type": "string",
           "description": "The friendly name of the database metric."
         }
@@ -327,9 +329,13 @@
     "MetricAvailability": {
       "properties": {
         "retention": {
+          "readOnly": true,
+          "type": "string",
           "description": "The length of retention for the database metric."
         },
         "timeGrain": {
+          "readOnly": true,
+          "type": "string",
           "description": "The granularity of the database metric."
         }
       },
