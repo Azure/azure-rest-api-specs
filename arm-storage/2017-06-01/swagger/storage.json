@@ -600,7 +600,8 @@
       "description": "Properties of operation, include metric specifications.",
       "properties": {
         "serviceSpecification": {
-          "$ref" : "#/definitions/ServiceSpecification"
+          "$ref" : "#/definitions/ServiceSpecification",
+          "description": "One property of operation, include metric specifications."
         }
       }
     },
@@ -893,6 +894,10 @@
             "failed",
             "networkSourceDeleted"
           ],
+          "x-ms-enum": {
+            "name": "State",
+            "modelAsString": false
+          },
           "description": "Gets the state of virtual network ACL rule."
         }
       },
@@ -934,6 +939,10 @@
             "Metrics",
             "AzureServices"
           ],
+          "x-ms-enum": {
+            "name": "Bypass",
+            "modelAsString": false
+          },
           "x-ms-client-name": "Bypass",
           "default": "AzureServices",
           "description": "Specifies whether traffic is bypassed for Logging/Metrics/AzureServices. Possible values are any combination of Logging|Metrics|AzureServices (For example, \"Logging, Metrics\"), or None to bypass none of those traffics."
@@ -941,6 +950,7 @@
         "virtualNetworkRules": {
           "type": "array",
           "items": {
+            "description": "Virtual Network rule.",
             "$ref": "#/definitions/VirtualNetworkRule"
           },
           "description": "Sets the virtual network ACL rules"
@@ -948,6 +958,7 @@
         "ipRules": {
           "type": "array",
           "items": {
+            "description": "IP rule with specific IP or IP range in CIDR format.",
             "$ref": "#/definitions/IPRule"
           },
           "description": "Sets the IP ACL rules"
@@ -982,7 +993,8 @@
           "description": "Provides the encryption settings on the account. If left unspecified the account encryption settings will remain the same. The default setting is unencrypted."
         },
         "networkAcls": {
-          "$ref": "#/definitions/StorageNetworkAcls"
+          "$ref": "#/definitions/StorageNetworkAcls",
+          "description": "Network ACL"
         },
         "accessTier": {
           "type": "string",
@@ -1210,6 +1222,7 @@
         },
         "networkAcls": {
           "$ref": "#/definitions/StorageNetworkAcls",
+          "description": "Network ACL",
           "readOnly": true
         }
       },
@@ -1347,6 +1360,7 @@
           "description": "Allows https traffic only to storage service if sets to true."
         },
         "networkAcls": {
+          "description": "Network ACL",
           "$ref": "#/definitions/StorageNetworkAcls"
         }
       },
@@ -1499,6 +1513,10 @@
             "c",
             "o"
           ],
+          "x-ms-enum": {
+            "name": "SignedResourceTypes",
+            "modelAsString": true
+          },
           "x-ms-client-name": "ResourceTypes",
           "description": "The signed resource types that are accessible with the account SAS. Service (s): Access to service-level APIs; Container (c): Access to container-level APIs; Object (o): Access to object-level APIs for blobs, queue messages, table entities, and files."
         },
