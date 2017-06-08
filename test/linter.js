@@ -15,7 +15,7 @@ describe('AutoRest Linter validation:', function () {
   // });
   _(swaggersToProcess).each(function (swagger) {
     it(swagger + ' should honor linter validation rules.', function (done) {
-      var cmd = 'autorest --azure-arm=true --input-file=' + swagger + ' --message-format=json';
+      var cmd = 'autorest --azure-validator=true --input-file=' + swagger + ' --message-format=json';
       console.log(`Executing: ${cmd}`);
       let result;
       try {
