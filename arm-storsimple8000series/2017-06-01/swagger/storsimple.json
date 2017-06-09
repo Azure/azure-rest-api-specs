@@ -243,6 +243,51 @@
           }
         },
         "deprecated": false
+      },
+      "patch": {
+        "tags": [
+          "Managers"
+        ],
+        "description": "Updates the StorSimple Manager.",
+        "operationId": "Managers_UpdateManager",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "parameters",
+            "in": "body",
+            "description": "The manager update parameters.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/ManagerPatch"
+            }
+          },
+          {
+            "$ref": "#/parameters/subscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/resourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/managerNameParameter"
+          },
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The StorSimple manager has been successfully updated",
+            "schema": {
+              "$ref": "#/definitions/Manager"
+            }
+          }
+        },
+        "deprecated": false
       }
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.StorSimple/managers/{managerName}/accessControlRecords": {
@@ -719,7 +764,7 @@
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.StorSimple/managers/{managerName}/cloudApplianceConfigurations": {
       "get": {
         "tags": [
-          "CloudAppliance"
+          "CloudAppliances"
         ],
         "description": "Lists supported cloud appliance models and supported configurations.",
         "operationId": "CloudAppliances_ListSupportedConfigurations",
@@ -2252,7 +2297,7 @@
         ],
         "responses": {
           "200": {
-            "description": "OK",
+            "description": "The collection of metrics.",
             "schema": {
               "$ref": "#/definitions/MetricList"
             }
@@ -2297,7 +2342,7 @@
         ],
         "responses": {
           "200": {
-            "description": "OK",
+            "description": "The collection of metric definitions.",
             "schema": {
               "$ref": "#/definitions/MetricDefinitionList"
             }
@@ -2441,57 +2486,6 @@
           }
         },
         "deprecated": false
-      }
-    },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.StorSimple/managers/{managerName}/devices/{deviceName}/publishSupportPackage": {
-      "post": {
-        "tags": [
-          "Devices"
-        ],
-        "description": "Triggers collection of support package on a device.",
-        "operationId": "Devices_PublishSupportPackage",
-        "consumes": [
-          "application/json"
-        ],
-        "produces": [
-          "application/json"
-        ],
-        "parameters": [
-          {
-            "$ref": "#/parameters/deviceNameParameter"
-          },
-          {
-            "name": "parameters",
-            "in": "body",
-            "description": "The publish support package request.",
-            "required": true,
-            "schema": {
-              "$ref": "#/definitions/SupportPackageRequest"
-            }
-          },
-          {
-            "$ref": "#/parameters/subscriptionIdParameter"
-          },
-          {
-            "$ref": "#/parameters/resourceGroupNameParameter"
-          },
-          {
-            "$ref": "#/parameters/managerNameParameter"
-          },
-          {
-            "$ref": "#/parameters/apiVersionParameter"
-          }
-        ],
-        "responses": {
-          "202": {
-            "description": "Accepted the request to publish support package of the device."
-          },
-          "204": {
-            "description": "Successfully published the support package."
-          }
-        },
-        "deprecated": false,
-        "x-ms-long-running-operation": true
       }
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.StorSimple/managers/{managerName}/devices/{deviceName}/scanForUpdates": {
@@ -3058,7 +3052,7 @@
         "tags": [
           "VolumeContainers"
         ],
-        "description": "Gets the metrics for the specified volume container.",
+        "description": "Gets the metrics for the specified volume container .",
         "operationId": "VolumeContainers_ListMetrics",
         "consumes": [
           "application/json"
@@ -3100,14 +3094,17 @@
         ],
         "responses": {
           "200": {
-            "description": "OK",
+            "description": "The collection of metrics.",
             "schema": {
               "$ref": "#/definitions/MetricList"
             }
           }
         },
         "deprecated": false,
-        "x-ms-odata": "#/definitions/MetricFilter"
+        "x-ms-odata": "#/definitions/MetricFilter",
+        "x-ms-pageable": {
+          "nextLinkName": null
+        }
       }
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.StorSimple/managers/{managerName}/devices/{deviceName}/volumeContainers/{volumeContainerName}/metricsDefinitions": {
@@ -3150,7 +3147,7 @@
         ],
         "responses": {
           "200": {
-            "description": "OK",
+            "description": "The collection of metric definitions.",
             "schema": {
               "$ref": "#/definitions/MetricDefinitionList"
             }
@@ -3450,7 +3447,7 @@
         ],
         "responses": {
           "200": {
-            "description": "OK",
+            "description": "The collection of metrics",
             "schema": {
               "$ref": "#/definitions/MetricList"
             }
@@ -3511,7 +3508,7 @@
         ],
         "responses": {
           "200": {
-            "description": "OK",
+            "description": "The collection of metric definitions.",
             "schema": {
               "$ref": "#/definitions/MetricDefinitionList"
             }
@@ -4091,7 +4088,7 @@
             "name": "$filter",
             "in": "query",
             "description": "OData Filter options",
-            "required": false,
+            "required": true,
             "type": "string"
           }
         ],
@@ -4154,7 +4151,7 @@
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.StorSimple/managers/{managerName}/provisionCloudAppliance": {
       "post": {
         "tags": [
-          "CloudAppliance"
+          "CloudAppliances"
         ],
         "description": "Provisions cloud appliance.",
         "operationId": "CloudAppliances_Provision",
@@ -4424,55 +4421,6 @@
         },
         "deprecated": false,
         "x-ms-long-running-operation": true
-      }
-    },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.StorSimple/managers/{managerName}/storageAccountCredentials/{storageAccountCredentialName}/listAccessKey": {
-      "post": {
-        "tags": [
-          "StorageAccountCredentials"
-        ],
-        "description": "Returns the encrypted storage account access key.",
-        "operationId": "StorageAccountCredentials_ListAccessKey",
-        "consumes": [
-          "application/json"
-        ],
-        "produces": [
-          "application/json"
-        ],
-        "parameters": [
-          {
-            "name": "storageAccountCredentialName",
-            "in": "path",
-            "description": "Name of the storage account credential.",
-            "required": true,
-            "type": "string",
-            "x-ms-skip-url-encoding": true
-          },
-          {
-            "$ref": "#/parameters/subscriptionIdParameter"
-          },
-          {
-            "$ref": "#/parameters/resourceGroupNameParameter"
-          },
-          {
-            "$ref": "#/parameters/managerNameParameter"
-          },
-          {
-            "$ref": "#/parameters/apiVersionParameter"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "The encrypted storage account access key.",
-            "schema": {
-              "$ref": "#/definitions/AsymmetricEncryptedSecret"
-            }
-          }
-        },
-        "deprecated": false,
-        "x-ms-pageable": {
-          "nextLinkName": null
-        }
       }
     }
   },
@@ -6064,7 +6012,12 @@
         },
         "provisionedLocalStorageInBytes": {
           "format": "int64",
-          "description": "The storage in bytes that has been provisioned on the device.",
+          "description": "The storage in bytes used for locally pinned volumes on the device (including additional local reservation).",
+          "type": "integer"
+        },
+        "provisionedVolumeSizeInBytes": {
+          "format": "int64",
+          "description": "Total capacity in bytes of tiered and locally pinned volumes on the device",
           "type": "integer"
         },
         "usingStorageInBytes": {
@@ -6940,6 +6893,19 @@
           "type": "array",
           "items": {
             "$ref": "#/definitions/Manager"
+          }
+        }
+      }
+    },
+    "ManagerPatch": {
+      "description": "The StorSimple Manager patch.",
+      "type": "object",
+      "properties": {
+        "tags": {
+          "description": "The tags attached to the Manager.",
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
           }
         }
       }
@@ -7840,89 +7806,6 @@
         }
       }
     },
-    "SupportPackageRequest": {
-      "description": "The support package request entity.",
-      "required": [
-        "sdpPassKey"
-      ],
-      "type": "object",
-      "properties": {
-        "sdpPassKey": {
-          "description": "The SDP(Support Diagnostics Protocol) pass key.",
-          "type": "string"
-        },
-        "packageType": {
-          "description": "The support package type.",
-          "enum": [
-            "None",
-            "IncludeDefault",
-            "IncludeAll",
-            "Mini",
-            "Custom"
-          ],
-          "type": "string",
-          "x-ms-enum": {
-            "name": "SupportPackageType",
-            "modelAsString": false
-          }
-        },
-        "endTime": {
-          "format": "date-time",
-          "description": "The maximum time stamp of the logs.",
-          "type": "string"
-        },
-        "startTime": {
-          "format": "date-time",
-          "description": "The minimum time stamp of the logs.",
-          "type": "string"
-        },
-        "includeArchived": {
-          "description": "The bool which determines whether the archived logs are included or not.",
-          "type": "boolean"
-        },
-        "scope": {
-          "description": "The support package scope (Cluster | Controller).",
-          "enum": [
-            "Cluster",
-            "Controller"
-          ],
-          "type": "string",
-          "x-ms-enum": {
-            "name": "ScopeType",
-            "modelAsString": false
-          }
-        },
-        "customIncludeList": {
-          "description": "The list of log categories",
-          "type": "array",
-          "items": {
-            "enum": [
-              "RegistryKeys",
-              "LogFiles",
-              "ClusterManagementLog",
-              "BmcLogs",
-              "ClusterLog",
-              "CbsLogs",
-              "StorageCmdlets",
-              "ClusterCmdlets",
-              "ConfigurationCmdlets",
-              "Performance",
-              "MdsAgentLogs",
-              "NetworkCmdlets",
-              "NetworkCmds",
-              "EtwLogs",
-              "UpdateLogs",
-              "PeriodicMgmtSvcLogs"
-            ],
-            "type": "string",
-            "x-ms-enum": {
-              "name": "CustomSupportPackageType",
-              "modelAsString": false
-            }
-          }
-        }
-      }
-    },
     "SymmetricEncryptedSecret": {
       "description": "Represents the secrets encrypted using Symmetric Encryption Key.",
       "required": [
@@ -8507,6 +8390,7 @@
       "description": "The device name",
       "required": true,
       "type": "string",
+      "x-ms-parameter-location": "method",
       "x-ms-skip-url-encoding": true
     },
     "managerNameParameter": {
