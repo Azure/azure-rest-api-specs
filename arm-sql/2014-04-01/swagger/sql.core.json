@@ -330,50 +330,6 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/servers/{serverName}/databases/{databaseName}/usages": {
-      "get": {
-        "tags": [
-          "Databases"
-        ],
-        "operationId": "Databases_ListUsages",
-        "description": "Returns database usages.",
-        "x-ms-examples": {
-          "List database usage metrics": { "$ref": "../examples/DatabaseUsageMetricsList.json" }
-        },
-        "parameters": [
-          {
-            "$ref": "#/parameters/ApiVersionParameter"
-          },
-          {
-            "$ref": "#/parameters/SubscriptionIdParameter"
-          },
-          {
-            "$ref": "#/parameters/ResourceGroupParameter"
-          },
-          {
-            "$ref": "#/parameters/ServerNameParameter"
-          },
-          {
-            "name": "databaseName",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "description": "The name of the database."
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "OK",
-            "schema": {
-              "$ref": "#/definitions/DatabaseMetricListResult"
-            }
-          }
-        },
-        "x-ms-pageable": {
-          "nextLinkName": null
-        }
-      }
-    },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/servers/{serverName}/elasticPools/{elasticPoolName}": {
       "put": {
         "tags": [
@@ -2363,7 +2319,7 @@
           "x-nullable": false
         }
       },
-      "description": "Represents a Slo Usage Metric."
+      "description": "A Slo Usage Metric."
     },
     "OperationImpact": {
       "properties": {
@@ -2390,119 +2346,7 @@
           "description": "The relative impact to dimension (null if not applicable)"
         }
       },
-      "description": "Represents impact of an operation, both in absolute and relative terms."
-    },
-    "DatabaseMetric": {
-      "properties": {
-        "resourceName": {
-          "readOnly": true,
-          "type": "string",
-          "description": "The name of the resource."
-        },
-        "displayName": {
-          "readOnly": true,
-          "type": "string",
-          "description": "The metric display name."
-        },
-        "currentValue": {
-          "readOnly": true,
-          "type": "number",
-          "format": "double",
-          "description": "The current value of the metric."
-        },
-        "limit": {
-          "readOnly": true,
-          "type": "number",
-          "format": "double",
-          "description": "The current limit of the metric."
-        },
-        "unit": {
-          "readOnly": true,
-          "type": "string",
-          "description": "The units of the metric."
-        },
-        "nextResetTime": {
-          "readOnly": true,
-          "type": "string",
-          "format": "date-time",
-          "description": "The next reset time for the metric (ISO8601 format)."
-        }
-      },
-      "description": "Represents database metrics.",
-      "allOf": [
-        {
-          "$ref": "#/definitions/SubResource"
-        }
-      ]
-    },
-    "DatabaseMetricListResult": {
-      "properties": {
-        "value": {
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/DatabaseMetric"
-          },
-          "description": "The list of database metrics for the database."
-        }
-      },
-      "required": ["value"],
-      "description": "Represents the response to a list database metrics request."
-    },
-    "ServerMetric": {
-      "properties": {
-        "name": {
-          "readOnly": true,
-          "type": "string",
-          "description": "Name of the server usage metric."
-        },
-        "resourceName": {
-          "readOnly": true,
-          "type": "string",
-          "description": "The name of the resource."
-        },
-        "displayName": {
-          "readOnly": true,
-          "type": "string",
-          "description": "The metric display name."
-        },
-        "currentValue": {
-          "readOnly": true,
-          "type": "number",
-          "format": "double",
-          "description": "The current value of the metric."
-        },
-        "limit": {
-          "readOnly": true,
-          "type": "number",
-          "format": "double",
-          "description": "The current limit of the metric."
-        },
-        "unit": {
-          "readOnly": true,
-          "type": "string",
-          "description": "The units of the metric."
-        },
-        "nextResetTime": {
-          "readOnly": true,
-          "type": "string",
-          "format": "date-time",
-          "description": "The next reset time for the metric (ISO8601 format)."
-        }
-      },
-      "description": "Represents server metrics."
-    },
-    "ServerMetricListResult": {
-      "properties": {
-        "value": {
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/ServerMetric"
-          },
-          "description": "The list of server metrics for the server."
-        }
-      },
-      "required": ["value"],
-      "description": "Represents the response to a list server metrics request."
+      "description": "The impact of an operation, both in absolute and relative terms."
     },
     "ServiceTierAdvisorListResult": {
       "properties": {
