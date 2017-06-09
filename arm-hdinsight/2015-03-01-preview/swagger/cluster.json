@@ -38,7 +38,7 @@
                     "Clusters"
                 ],
                 "operationId": "Clusters_Create",
-                "description": "Begins creating a new HDInsight cluster with the specified parameters.",
+                "description": "Creates a new HDInsight cluster with the specified parameters.",
                 "x-ms-examples": {
                     "Create Hadoop on Linux cluster with SSH password": {
                         "$ref": "../examples/CreateLinuxHadoopSshPassword.json"
@@ -96,62 +96,12 @@
                 },
                 "x-ms-long-running-operation": true
             },
-            "patch": {
-                "tags": [
-                    "Clusters"
-                ],
-                "operationId": "Clusters_Update",
-                "description": "Patch HDInsight cluster with the specified parameters.",
-                "x-ms-examples": {
-                    "Patch HDInsight Linux clusters": {
-                        "$ref": "../examples/PatchLinuxHadoopCluster.json"
-                    }
-                },
-                "parameters": [{
-                        "name": "resourceGroupName",
-                        "in": "path",
-                        "required": true,
-                        "type": "string",
-                        "description": "The name of the resource group."
-                    },
-                    {
-                        "name": "clusterName",
-                        "in": "path",
-                        "required": true,
-                        "type": "string",
-                        "description": "The name of the cluster."
-                    },
-                    {
-                        "name": "parameters",
-                        "in": "body",
-                        "required": true,
-                        "schema": {
-                            "$ref": "#/definitions/ClusterPatchParameters"
-                        },
-                        "description": "The cluster patch request."
-                    },
-                    {
-                        "$ref": "#/parameters/ApiVersionParameter"
-                    },
-                    {
-                        "$ref": "#/parameters/SubscriptionIdParameter"
-                    }
-                ],
-                "responses": {
-                    "200": {
-                        "description": "OK response definition.",
-                        "schema": {
-                            "$ref": "#/definitions/Cluster"
-                        }
-                    }
-                }
-            },
             "delete": {
                 "tags": [
                     "Clusters"
                 ],
                 "operationId": "Clusters_Delete",
-                "description": "Begins deleting the specified HDInsight cluster.",
+                "description": "Deletes the specified HDInsight cluster.",
                 "x-ms-examples": {
                     "Delete Hadoop on Linux cluster": {
                         "$ref": "../examples/DeleteLinuxHadoopCluster.json"
@@ -239,7 +189,7 @@
                     "Clusters"
                 ],
                 "operationId": "Clusters_ListByResourceGroup",
-                "description": "List the HDInsight clusters in a resource group.",
+                "description": "Lists the HDInsight clusters in a resource group.",
                 "x-ms-examples": {
                     "Get All Hadoop on Linux cluster": {
                         "$ref": "../examples/GetLinuxHadoopAllCluster.json"
@@ -278,7 +228,7 @@
                     "Clusters"
                 ],
                 "operationId": "Clusters_Resize",
-                "description": "Begins a resize operation on the specified HDInsight cluster.",
+                "description": "Resizes the specified HDInsight cluster to the specified size.",
                 "parameters": [{
                         "name": "resourceGroupName",
                         "in": "path",
@@ -340,7 +290,7 @@
                     "Clusters"
                 ],
                 "operationId": "Clusters_List",
-                "description": "Lists HDInsight clusters under the subscription.",
+                "description": "Lists all the HDInsight clusters under the subscription.",
                 "parameters": [{
                         "$ref": "#/parameters/ApiVersionParameter"
                     },
@@ -371,12 +321,12 @@
                 },
                 "restAuthCredential.username": {
                     "type": "string",
-                    "description": "Http username."
+                    "description": "The HTTP username."
                 },
                 "restAuthCredential.password": {
                     "type": "string",
                     "format": "password",
-                    "description": "Http user password."
+                    "description": "The HTTP user password."
                 }
             },
             "required": [
@@ -385,7 +335,7 @@
             "description": "The payload for a Configure HTTP settings request."
         },
         "ClusterDefinition": {
-            "description": "The cluste definition.",
+            "description": "The cluster definition.",
             "properties": {
                 "blueprint": {
                     "type": "string",
@@ -428,7 +378,7 @@
                 },
                 "organizationalUnitDN": {
                     "type": "string",
-                    "description": "Distinguished Name for organizational unit."
+                    "description": "The distinguished name for the organizational unit."
                 },
                 "ldapsUrls": {
                     "type": "array",
@@ -462,10 +412,10 @@
                     "description": "The size of the VM"
                 }
             },
-            "description": "Describes the hardware profile."
+            "description": "The hardware profile."
         },
         "VirtualNetworkProfile": {
-            "description": "The Virtual network properties.",
+            "description": "The virtual network properties.",
             "properties": {
                 "id": {
                     "type": "string",
@@ -535,7 +485,7 @@
                 },
                 "isDefault": {
                     "type": "boolean",
-                    "description": "Describes is the storage account is the default storage account."
+                    "description": "Whether or not the storage account is the default storage account."
                 },
                 "container": {
                     "type": "string",
@@ -546,7 +496,7 @@
                     "description": "The storage account access key."
                 }
             },
-            "description": "Describes the storage Account."
+            "description": "The storage Account."
         },
         "StorageProfile": {
             "properties": {
@@ -558,7 +508,7 @@
                     "description": "The list of storage accounts in the cluster."
                 }
             },
-            "description": "Describes the storage profile."
+            "description": "The storage profile."
         },
         "ClusterCreateProperties": {
             "description": "The cluster create parameters.",
@@ -629,21 +579,8 @@
             },
             "description": "The CreateCluster request parameters."
         },
-        "ClusterPatchParameters": {
-            "properties": {
-                "tags": {
-                    "type": "object",
-                    "x-nullable": true,
-                    "additionalProperties": {
-                        "type": "string"
-                    },
-                    "description": "The resource tags."
-                }
-            },
-            "description": "The PatchCluster request parameters"
-        },
         "QuotaInfo": {
-            "description": "Gets or sets Quota properties for the cluster.",
+            "description": "The quota properties for the cluster.",
             "properties": {
                 "coresUsed": {
                     "type": "integer",
@@ -790,7 +727,7 @@
                     "description": "The properties of the cluster."
                 }
             },
-            "description": "Describes the cluster."
+            "description": "The HDInsight cluster."
         },
         "RuntimeScriptAction": {
             "properties": {
@@ -843,7 +780,7 @@
             "required": [
                 "persistOnSuccess"
             ],
-            "description": "Describes the script actions on a running cluster."
+            "description": "The parameters for the script actions to execute on a running cluster."
         },
         "ClusterListPersistedScriptActionsResult": {
             "properties": {
@@ -860,7 +797,7 @@
                     "description": "The link (url) to the next page of results."
                 }
             },
-            "description": "List PersistedScriptActions operations response."
+            "description": "The ListPersistedScriptActions operation response."
         },
         "ScriptActionExecutionSummary": {
             "properties": {
@@ -876,7 +813,7 @@
                     "description": "The instance count for a given script action execution status."
                 }
             },
-            "description": "Describes the execution summary of a script action."
+            "description": "The execution summary of a script action."
         },
         "RuntimeScriptActionDetail": {
             "properties": {
@@ -949,7 +886,7 @@
                 "uri",
                 "roles"
             ],
-            "description": "Describes the execution details of a script action."
+            "description": "The execution details of a script action."
         },
         "ClusterListRuntimeScriptActionDetailResult": {
             "properties": {
@@ -966,12 +903,12 @@
                     "description": "The link (url) to the next page of results."
                 }
             },
-            "description": "The ListScriptExecutionHistory response."
+            "description": "The list runtime script action detail response."
         },
         "ClusterListResult": {
             "properties": {
                 "value": {
-                    "description": "Gets the list of Clusters.",
+                    "description": "The list of Clusters.",
                     "type": "array",
                     "items": {
                         "$ref": "#/definitions/Cluster"
@@ -1022,28 +959,28 @@
                 "id": {
                     "readOnly": true,
                     "type": "string",
-                    "description": "Resource Id"
+                    "description": "The resource Id"
                 },
                 "name": {
                     "readOnly": true,
                     "type": "string",
-                    "description": "Resource name"
+                    "description": "The resource name"
                 },
                 "type": {
                     "readOnly": true,
                     "type": "string",
-                    "description": "Resource type"
+                    "description": "The resource type"
                 },
                 "location": {
                     "type": "string",
-                    "description": "Resource location"
+                    "description": "The resource location"
                 },
                 "tags": {
                     "type": "object",
                     "additionalProperties": {
                         "type": "string"
                     },
-                    "description": "Resource tags"
+                    "description": "The resource tags"
                 }
             },
             "required": [
@@ -1056,33 +993,33 @@
             "properties": {
                 "id": {
                     "type": "string",
-                    "description": "Resource Id"
+                    "description": "The resource Id"
                 }
             },
             "description": "The sub resource definition.",
             "x-ms-azure-resource": true
         },
         "Operation": {
-            "description": "HDInsight REST API operation",
+            "description": "The HDInsight REST API operation.",
             "type": "object",
             "properties": {
                 "name": {
-                    "description": "Operation name: {provider}/{resource}/{operation}",
+                    "description": "The operation name: {provider}/{resource}/{operation}",
                     "type": "string"
                 },
                 "display": {
                     "description": "The object that represents the operation.",
                     "properties": {
                         "provider": {
-                            "description": "Service provider: Microsoft.HDInsight",
+                            "description": "The service provider: Microsoft.HDInsight",
                             "type": "string"
                         },
                         "resource": {
-                            "description": "Resource on which the operation is performed: Profile, endpoint, etc.",
+                            "description": "The resource on which the operation is performed: Cluster, Capabilities, etc.",
                             "type": "string"
                         },
                         "operation": {
-                            "description": "Operation type: Read, write, delete, etc.",
+                            "description": "The operation type: read, write, delete, etc.",
                             "type": "string"
                         }
                     }
@@ -1097,11 +1034,11 @@
                     "items": {
                         "$ref": "#/definitions/Operation"
                     },
-                    "description": "List of HDInsight operations supported by the HDInsight resource provider."
+                    "description": "The list of HDInsight operations supported by the HDInsight resource provider."
                 },
                 "nextLink": {
                     "type": "string",
-                    "description": "URL to get the next set of operation list results if there are any."
+                    "description": "The URL to get the next set of operation list results if there are any."
                 }
             }
         }
@@ -1112,14 +1049,14 @@
             "in": "path",
             "required": true,
             "type": "string",
-            "description": "Gets subscription credentials which uniquely identify Microsoft Azure subscription. The subscription ID forms part of the URI for every service call."
+            "description": "The subscription credentials which uniquely identify Microsoft Azure subscription. The subscription ID forms part of the URI for every service call."
         },
         "ApiVersionParameter": {
             "name": "api-version",
             "in": "query",
             "required": true,
             "type": "string",
-            "description": "Client Api Version."
+            "description": "The HDInsight client API Version."
         }
     }
 }
