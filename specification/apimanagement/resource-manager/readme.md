@@ -28,6 +28,7 @@ These are the global settings for the ApiManagement API.
 # common 
 title: ApiManagementClient
 description: ApiManagement Client
+openapi-type: arm
 tag: 2016-10-10
 
 ```

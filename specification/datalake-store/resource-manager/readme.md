@@ -28,6 +28,7 @@ These are the global settings for the DataLakeStore API.
 # common 
 title: DataLake Store
 description: DataLake Store Client
+openapi-type: arm
 tag: 2016-11-01
 
 ```

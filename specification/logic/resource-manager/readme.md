@@ -28,6 +28,7 @@ These are the global settings for the Logic API.
 # common 
 title: Logic
 description: Logic Client
+openapi-type: arm
 tag: 2016-06-01
 
 ```

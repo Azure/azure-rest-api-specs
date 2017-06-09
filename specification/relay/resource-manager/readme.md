@@ -28,6 +28,7 @@ These are the global settings for the Relay API.
 # common 
 title: Relay
 description: Relay Client
+openapi-type: arm
 tag: 2016-07-01
 
 ```

@@ -28,6 +28,7 @@ These are the global settings for the DataLakeAnalytics API.
 # common 
 title: DataLake Analytics
 description: DataLake Analytics Client
+openapi-type: arm
 tag: 2016-11-01
 
 ```

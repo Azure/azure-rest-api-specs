@@ -29,6 +29,7 @@ These are the global settings for the CognitiveServices API.
 # common 
 title: Cognitive Services
 description: Cognitive Services Client
+openapi-type: arm
 tag: 2017-04-18
 
 ```

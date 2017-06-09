@@ -28,6 +28,7 @@ These are the global settings for the DNS API.
 # common 
 title: DNS
 description: DNS Client
+openapi-type: arm
 tag: 2016-04-01
 
 ```

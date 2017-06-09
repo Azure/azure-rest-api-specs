@@ -28,6 +28,7 @@ These are the global settings for the SearchClient API.
 # common 
 title: Search
 description: Search Client
+openapi-type: arm
 tag: 2015-08-19
 
 ```

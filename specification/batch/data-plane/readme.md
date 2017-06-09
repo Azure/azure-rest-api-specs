@@ -28,6 +28,7 @@ These are the global settings for the Batch API.
 # common 
 title: Batch
 description: Batch Client
+openapi-type: data-plane
 tag: 2017-05-01.5.0
 
 ```

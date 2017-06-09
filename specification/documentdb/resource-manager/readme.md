@@ -28,6 +28,7 @@ These are the global settings for the DocumentDB API.
 # common 
 title: Document DB
 description: Document DB Client
+openapi-type: arm
 tag: 2015-04-08
 
 ```

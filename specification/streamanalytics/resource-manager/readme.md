@@ -28,6 +28,7 @@ These are the global settings for the StreamAnalytics API.
 # common 
 title: Stream Analytics Management Client
 description: Stream Analytics Client
+openapi-type: arm
 tag: 2016-03-01
 
 ```

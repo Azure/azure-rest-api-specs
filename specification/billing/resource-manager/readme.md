@@ -28,6 +28,7 @@ These are the global settings for the Billing API.
 # common 
 title: Billing
 description: Billing Client
+openapi-type: arm
 tag: 2017-04-24-preview
 
 ```

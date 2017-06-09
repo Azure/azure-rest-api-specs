@@ -28,6 +28,7 @@ These are the global settings for the TrafficManager API.
 # common 
 title: Traffic Manager
 description: Traffic Manager Client
+openapi-type: arm
 tag: 2017-05-01
 
 ```

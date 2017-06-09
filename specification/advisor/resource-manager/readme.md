@@ -28,6 +28,7 @@ These are the global settings for the Advisor API.
 # common 
 title: Advisor
 description: Advisor Client
+openapi-type: arm
 tag: 2017-04-19
 
 ```

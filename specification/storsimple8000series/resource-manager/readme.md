@@ -28,6 +28,7 @@ These are the global settings for the StorSimple API.
 # common 
 title: StorSimple 8000 Series
 description: StorSimple 8000 Series Client
+openapi-type: arm
 tag: 2017-06-01
 
 ```

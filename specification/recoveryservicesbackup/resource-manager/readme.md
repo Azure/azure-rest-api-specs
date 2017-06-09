@@ -28,6 +28,7 @@ These are the global settings for the RecoveryServicesBackup API.
 # common 
 title: Recovery Services Backup
 description: Open API 2.0 Specs for Azure RecoveryServices Backup service
+openapi-type: arm
 tag: 2016-12-01
 
 azure-arm: true

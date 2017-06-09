@@ -28,6 +28,7 @@ These are the global settings for the Commerce API.
 # common 
 title: Commerce
 description: Commerce Client
+openapi-type: arm
 tag: 2015-06-01-preview
 
 ```

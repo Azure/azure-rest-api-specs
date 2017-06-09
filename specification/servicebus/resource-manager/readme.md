@@ -28,6 +28,7 @@ These are the global settings for the ServiceBus API.
 # common 
 title: Service Bus
 description: Service Bus Client
+openapi-type: arm
 tag: 2015-08-01
 
 ```

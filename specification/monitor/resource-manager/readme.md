@@ -28,6 +28,7 @@ These are the global settings for the MonitorClient API.
 # common 
 title: Monitor Management Client
 description: Monitor Management Client
+openapi-type: arm
 tag: 2017-03-01
 
 ```

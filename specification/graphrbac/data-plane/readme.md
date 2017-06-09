@@ -28,6 +28,7 @@ These are the global settings for the GraphRbac API.
 # common 
 title: Graph Rbac
 description: Graph Rbac Client
+openapi-type: data-plane
 tag: 1.6
 
 ```

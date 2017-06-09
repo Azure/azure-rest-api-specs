@@ -28,6 +28,7 @@ These are the global settings for the KeyVault API.
 # common 
 title: Key Vault
 description: Key Vault Client
+openapi-type: data-plane
 tag: 2016-10-01
 
 ```

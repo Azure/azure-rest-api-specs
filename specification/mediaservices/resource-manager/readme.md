@@ -28,6 +28,7 @@ These are the global settings for the MediaServices API.
 # common 
 title: Media Services
 description: Media Services Client
+openapi-type: arm
 tag: 2015-10-01
 
 ```

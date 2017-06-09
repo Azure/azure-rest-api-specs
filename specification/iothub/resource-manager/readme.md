@@ -28,6 +28,7 @@ These are the global settings for the IotHub API.
 # common 
 title: IOT Hub
 description: IOT Hub Client
+openapi-type: arm
 tag: 2017-01-19
 
 ```

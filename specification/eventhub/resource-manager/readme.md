@@ -28,6 +28,7 @@ These are the global settings for the EventHub API.
 # common 
 title: Event Hub
 description: Event Hub Client
+openapi-type: arm
 tag: 2015-08-01
 
 ```

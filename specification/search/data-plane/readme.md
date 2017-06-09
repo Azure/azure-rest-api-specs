@@ -28,6 +28,7 @@ These are the global settings for the SearchClient API.
 # common 
 title: Search
 description: Search Client
+openapi-type: data-plane
 tag: 2016-09-01
 
 ```

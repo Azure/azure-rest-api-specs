@@ -28,6 +28,7 @@ These are the global settings for the Scheduler API.
 # common 
 title: Scheduler
 description: Scheduler Client
+openapi-type: arm
 tag: 2016-03-01
 
 ```

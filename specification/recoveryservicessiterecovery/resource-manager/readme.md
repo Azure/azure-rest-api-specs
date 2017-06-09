@@ -28,6 +28,7 @@ These are the global settings for the RecoveryServicesSiteRecovery API.
 # common 
 title: Recovery Services Site Recovery
 description: Recovery Services Site Recovery Client
+openapi-type: arm
 tag: 2016-08-10
 
 ```

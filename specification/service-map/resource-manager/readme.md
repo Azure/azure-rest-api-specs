@@ -28,6 +28,7 @@ These are the global settings for the ServiceMap API.
 # common 
 title: Service Map
 description: Service Map Client
+openapi-type: arm
 tag: 2015-11-01-preview
 
 ```

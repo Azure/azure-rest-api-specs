@@ -28,6 +28,7 @@ These are the global settings for the ServerManagement API.
 # common 
 title: Server Management
 description: Server Management Client
+openapi-type: arm
 tag: 2016-07-01-preview
 
 ```

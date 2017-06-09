@@ -28,6 +28,7 @@ These are the global settings for the Cdn API.
 # common 
 title: CDN
 description: CDN Client
+openapi-type: arm
 tag: 2016-10-02
 
 ```

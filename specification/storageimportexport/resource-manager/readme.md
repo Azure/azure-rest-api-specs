@@ -28,6 +28,7 @@ These are the global settings for the StorageImportExport API.
 # common 
 title: Storage Import Export
 description: Storage Import Export Client
+openapi-type: arm
 tag: 2016-11-01
 
 ```

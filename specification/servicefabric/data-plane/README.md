@@ -28,6 +28,7 @@ These are the global settings for the ServiceFabricClient API.
 # common 
 title: Service Fabric
 description: Service Fabric Client
+openapi-type: data-plane
 tag: 1.0.0
 
 ```

@@ -28,6 +28,7 @@ These are the global settings for the Batch API.
 # common 
 title: Batch
 description: Batch Client
+openapi-type: arm
 tag: 2017-05-01
 
 ```

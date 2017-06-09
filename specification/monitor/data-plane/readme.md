@@ -28,6 +28,7 @@ These are the global settings for the MonitorClient API.
 # common 
 title: Monitor Client
 description: Monitor Client
+openapi-type: data-plane
 tag: 2016-09-01
 
 ```

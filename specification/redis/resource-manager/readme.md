@@ -28,6 +28,7 @@ These are the global settings for the Redis API.
 # common 
 title: Redis
 description: Redis Client
+openapi-type: arm
 tag: 2017-02-01
 
 ```

@@ -28,6 +28,7 @@ These are the global settings for the PowerBI API.
 # common 
 title: Power BI
 description: Power BI Client
+openapi-type: arm
 tag: 2016-01-29
 
 ```

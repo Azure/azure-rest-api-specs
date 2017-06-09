@@ -28,6 +28,7 @@ These are the global settings for the Sql API.
 # common 
 title: Sql
 description: Sql Client
+openapi-type: arm
 tag: 2015-05-01-preview
 
 ```

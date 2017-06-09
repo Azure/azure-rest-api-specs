@@ -28,6 +28,7 @@ These are the global settings for the MachineLearning API.
 # common 
 title: Machine Learning
 description: Machine Learning Client
+openapi-type: arm
 tag: 2017-01-01
 
 ```

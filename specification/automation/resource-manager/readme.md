@@ -28,6 +28,7 @@ These are the global settings for the Automation API.
 # common 
 title: Azure Automation
 description: Automation Client
+openapi-type: arm
 tag: 2015-10-31
 
 ```

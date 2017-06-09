@@ -28,6 +28,7 @@ These are the global settings for the Network API.
 # common 
 title: Network
 description: Network Client
+openapi-type: arm
 tag: 2017-03-01
 
 ```

@@ -28,6 +28,7 @@ These are the global settings for the TimeSeriesInsights API.
 # common 
 title: Time Series Insights
 description: Time Series Insights Client
+openapi-type: arm
 tag: 2017-02-28-preview
 
 ```

@@ -28,6 +28,7 @@ These are the global settings for the MobileEngagement API.
 # common 
 title: Mobile Engagement
 description: Mobile Engagement Client
+openapi-type: arm
 tag: 2014-12-01
 
 ```

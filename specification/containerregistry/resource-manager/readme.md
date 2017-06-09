@@ -28,6 +28,7 @@ These are the global settings for the ContainerRegistry API.
 # common 
 title: Container Registry
 description: Container Registry Client
+openapi-type: arm
 tag: 2017-06-01-preview
 
 ```

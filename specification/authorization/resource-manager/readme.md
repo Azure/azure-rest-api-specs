@@ -28,6 +28,7 @@ These are the global settings for the Authorization API.
 # common 
 title: Authorization
 description: Authorization Client
+openapi-type: arm
 tag: 2015-07-01
 
 ```

@@ -28,6 +28,7 @@ These are the global settings for the HDInsight API.
 # common 
 title: HDInsight Management
 description: HDInsight Management Client
+openapi-type: arm
 tag: 2015-03-01-preview
 
 ```

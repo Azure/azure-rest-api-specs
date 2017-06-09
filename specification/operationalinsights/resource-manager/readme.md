@@ -28,6 +28,7 @@ These are the global settings for the OperationalInsights API.
 # common 
 title: Operational Insights
 description: Operational Insights Client
+openapi-type: arm
 tag: 2015-11-01-preview
 
 ```

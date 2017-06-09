@@ -28,6 +28,7 @@ These are the global settings for the Resource API.
 # common 
 title: Resource
 description: Resource Client
+openapi-type: arm
 tag: 2017-05-10
 
 ```

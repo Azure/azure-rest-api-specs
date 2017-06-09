@@ -28,6 +28,7 @@ These are the global settings for the NotificationHubs API.
 # common 
 title: Notification Hubs
 description: Notification Hubs Client
+openapi-type: arm
 tag: 2017-04-01
 
 ```

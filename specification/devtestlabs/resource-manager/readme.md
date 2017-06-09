@@ -28,6 +28,7 @@ These are the global settings for the DevTestLab API.
 # common 
 title: Dev Test Lab
 description: Dev Test Lab Client
+openapi-type: arm
 tag: 2016-05-15
 
 ```

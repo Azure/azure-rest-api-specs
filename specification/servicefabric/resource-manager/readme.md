@@ -28,6 +28,7 @@ These are the global settings for the ServiceFabricClient API.
 # common 
 title: Service Fabric
 description: Service Fabric Client
+openapi-type: arm
 tag: 2016-09-01
 
 ```

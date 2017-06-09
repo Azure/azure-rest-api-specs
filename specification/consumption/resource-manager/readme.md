@@ -28,6 +28,7 @@ These are the global settings for the Consumption API.
 # common 
 title: Consumption
 description: Consumption Client
+openapi-type: arm
 tag: 2017-04-24-preview
 
 ```

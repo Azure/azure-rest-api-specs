@@ -28,6 +28,7 @@ These are the global settings for the CustomerInsights API.
 # common 
 title: Customer Insights
 description: Customer Insights Client
+openapi-type: arm
 tag: 2017-01-01
 
 ```

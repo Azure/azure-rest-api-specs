@@ -28,6 +28,7 @@ These are the global settings for the AnalysisServices API.
 # common 
 title: Analysis Services
 description: Analysis Services Client
+openapi-type: arm
 tag: 2016-05-16
 
 ```

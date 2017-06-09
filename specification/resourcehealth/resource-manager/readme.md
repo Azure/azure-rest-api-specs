@@ -28,6 +28,7 @@ These are the global settings for the ResourceHealth API.
 # common 
 title: Resource Health
 description: Resource Health Client
+openapi-type: arm
 tag: 2015-01-01
 
 ```

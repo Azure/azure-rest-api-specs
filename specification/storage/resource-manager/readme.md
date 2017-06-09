@@ -28,6 +28,7 @@ These are the global settings for the Storage API.
 # common 
 title: Storage
 description: Storage Client
+openapi-type: arm
 tag: 2017-06-01
 
 ```

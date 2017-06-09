@@ -34,6 +34,7 @@ These are the global settings for the Web API.
 # common 
 title: Web
 description: Web App Client
+openapi-type: arm
 tag: 2016-09-01
 
 ```

@@ -34,6 +34,7 @@ These are the global settings for the Compute API.
 # common 
 title: Compute
 description: Compute Client
+openapi-type: arm
 tag: 2017-03-30
 
 ```

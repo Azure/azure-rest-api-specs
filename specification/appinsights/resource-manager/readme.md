@@ -28,6 +28,7 @@ These are the global settings for the AppInsights API.
 # common 
 title: AppInsights
 description: AppInsights Client
+openapi-type: arm
 tag: 2015-05-01
 
 ```
