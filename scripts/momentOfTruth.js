@@ -11,14 +11,13 @@ const exec = require('child_process').exec,
     _ = require('underscore'),
     fs = require('fs'),
     request = require('request');
-    // azure = require('azure-storage');
 
 // let blobService = azure.createBlobService();
 let swaggersToProcess = utils.getFilesChangedInPR();
 let targetBranch = utils.getTargetBranch();
 let sourceBranch = utils.getSourceBranch();
 let pullRequestNumber = utils.getPullRequestNumber();
-let linterCmd = `autorest --azure-arm=true --message-format=json --input-file=`;
+let linterCmd = `autorest --azure-arm=true --message-format=json --azure-validator=true --input-file=`;
 let gitCheckoutCmd = `git checkout ${targetBranch}`;
 let gitLogCmd = `git log -3`;
 var filename = `${pullRequestNumber}_${utils.getTimeStamp()}.json`;
@@ -74,10 +73,15 @@ function getLinterResult(swaggerPath) {
         throw new Error('swaggerPath is a required parameter of type "string" and it cannot be an empty string.');
     }
 
-    let cmd = linterCmd + swaggerPath;
     return new Promise((result) => {
+        let jsonResult = [];
+        if (!fs.existsSync(swaggerPath)) {
+            result([]);
+            return;
+        }
+        let cmd = linterCmd + swaggerPath;
+        console.log(`Executing: ${cmd}`);
         exec(cmd, { encoding: 'utf8', maxBuffer: 1024 * 1024 * 64 }, (err, stdout, stderr) => {
-            let jsonResult = [];
             let resultString = stderr;
             if (resultString.indexOf('{') !== -1) {
                 resultString = "[" + resultString.substring(resultString.indexOf('{')).trim().replace(/\}\n\{/g, "},\n{") + "]";
@@ -87,13 +91,14 @@ function getLinterResult(swaggerPath) {
                     jsonResult = JSON.parse(resultString);
                     //console.log('>>>>>> Parsed Result...');
                     //console.dir(resultObject, {depth: null, colors: true});
+                    result(jsonResult);
                 } catch (e) {
                     console.log(`An error occurred while executing JSON.parse() on the linter output for ${swaggerPath}:`);
                     console.dir(resultString);
                     console.dir(e, { depth: null, colors: true });
+                    result([]);
                 }
             }
-            result(jsonResult);
         });
     });
 };
@@ -101,17 +106,12 @@ function getLinterResult(swaggerPath) {
 // Uploads the result file to Azure Blob Storage
 function uploadToAzureStorage(json) {
     console.log(logFilepath);
-    // blobService.createBlockBlobFromLocalFile('moment-of-truth', filename, logFilepath, function (error, result, response) {
-    //     if (!error) {
-    //         console.log(error);
-    //     }
-    // });
     request({
-       url: "http://az-bot.azurewebsites.net/process",
-       method: "POST",
-       json: true,
-       body: json 
-    }, function(error, response, body) {
+        url: "http://az-bot.azurewebsites.net/process",
+        method: "POST",
+        json: true,
+        body: json
+    }, function (error, response, body) {
         console.log(body);
     });
 }
@@ -144,6 +144,9 @@ function runScript() {
     // Just update the regex. That will return an array of filtered items.
     // swaggersToProcess = ['/Users/vishrut/git-repos/rest-repo-reorg/azure-rest-api-specs/arm-storage/2016-12-01/swagger/storage.json',
     //                     '/Users/vishrut/git-repos/rest-repo-reorg/azure-rest-api-specs/arm-web/2016-09-01/swagger/AppServicePlans.json'];
+    swaggersToProcess = swaggersToProcess.filter(function (swaggerFile) {
+        return swaggerFile.indexOf('.json') != -1;
+    });
     console.log(swaggersToProcess);
     createLogFile();
     console.log(`The results will be logged here: "${logFilepath}".`)
