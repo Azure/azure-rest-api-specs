@@ -139,47 +139,47 @@
         },
         "parameters": [
           {
-            "$ref": "./apimanagement.json#/parameters/ResourceGroupNameParameter"
+            "$ref": "#/parameters/ResourceGroupNameParameter"
           },
           {
-            "$ref": "./apimanagement.json#/parameters/ServiceNameParameter"
+            "$ref": "#/parameters/ServiceNameParameter"
           },
           {
-            "$ref": "./apimanagement.json#/parameters/PolicyIdParameter"
+            "$ref": "#/parameters/PolicyIdParameter"
           },
           {
             "name": "parameters",
             "in": "body",
             "schema": {
-              "$ref": "./apimanagement.json#/definitions/PolicyContract"
+              "$ref": "#/definitions/PolicyContract"
             },
             "required": true,
             "description": "The policy contents to apply."
           },
           {
-            "$ref": "./apimanagement.json#/parameters/ApiVersionParameter"
+            "$ref": "#/parameters/ApiVersionParameter"
           },
           {
-            "$ref": "./apimanagement.json#/parameters/SubscriptionIdParameter"
+            "$ref": "#/parameters/SubscriptionIdParameter"
           }
         ],
         "responses": {
           "201": {
             "description": "Global policy configuration was successfully created.",
             "schema": {
-              "$ref": "./apimanagement.json#/definitions/PolicyContract"
+              "$ref": "#/definitions/PolicyContract"
             }
           },
           "200": {
             "description": "Global policy configuration of the Api Management service was successfully updated.",
             "schema": {
-              "$ref": "./apimanagement.json#/definitions/PolicyContract"
+              "$ref": "#/definitions/PolicyContract"
             }
           },
           "default": {
             "description": "Error response describing why the operation failed.",
             "schema": {
-              "$ref": "./apimanagement.json#/definitions/ErrorBodyContract"
+              "$ref": "#/definitions/ErrorBodyContract"
             }
           }
         }
@@ -219,7 +219,7 @@
           "default": {
             "description": "Error response describing why the operation failed.",
             "schema": {
-              "$ref": "./apimanagement.json#/definitions/ErrorBodyContract"
+              "$ref": "#/definitions/ErrorBodyContract"
             }
           }
         }
@@ -383,7 +383,7 @@
       },
       "allOf": [
         {
-          "$ref": "./apimanagement.json#/definitions/Resource"
+          "$ref": "#/definitions/Resource"
         }
       ],
       "description": "Policy Contract details."
@@ -478,6 +478,7 @@
     },
     "Resource": {
       "description": "The Resource definition.",
+      "x-ms-azure-resource": true,
       "properties": {
         "id": {
           "readOnly": true,
@@ -487,10 +488,7 @@
         "name": {
           "type": "string",
           "description": "Resource name.",
-          "x-ms-mutability": [
-            "read",
-            "create"
-          ]
+          "readOnly": true
         },
         "type": {
           "readOnly": true,

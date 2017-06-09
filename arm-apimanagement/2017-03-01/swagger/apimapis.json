@@ -187,10 +187,28 @@
         ],
         "responses": {
           "201": {
-            "description": "API was successfully created."
+            "description": "API was successfully created.",
+            "schema": {
+              "$ref": "#/definitions/ApiContract"
+            },
+            "headers": {
+              "ETag": {
+                "description": "Current entity state version. Should be treated as opaque and used to make conditional HTTP requests.",
+                "type": "string"
+              }
+            }
           },
-          "204": {
-            "description": "API was successfully updated."
+          "200": {
+            "description": "API was successfully updated.",
+            "schema": {
+              "$ref": "#/definitions/ApiContract"
+            },
+            "headers": {
+              "ETag": {
+                "description": "Current entity state version. Should be treated as opaque and used to make conditional HTTP requests.",
+                "type": "string"
+              }
+            }
           },
           "default": {
             "description": "Error response describing why the operation failed.",
@@ -1237,10 +1255,12 @@
           "x-ms-enum": {
             "name": "HttpStatusCode",
             "modelAsString": false
-          }
+          },
+          "description": "Result status of Export operation"
         },
         "requestId": {
-          "type": "string"
+          "type": "string",
+          "description": "Identifier of the Request"
         }
       },
       "description": "The response model for the export API output operation."
@@ -1248,7 +1268,8 @@
     "AuthenticationSettingsContract": {
       "properties": {
         "oAuth2": {
-          "$ref": "#/definitions/OAuth2AuthenticationSettingsContract"
+          "$ref": "#/definitions/OAuth2AuthenticationSettingsContract",
+          "description": "OAuth2 Authentication settings"
         }
       },
       "description": "API Authentication Settings."
