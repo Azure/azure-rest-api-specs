@@ -17,7 +17,7 @@ let swaggersToProcess = utils.getFilesChangedInPR();
 let targetBranch = utils.getTargetBranch();
 let sourceBranch = utils.getSourceBranch();
 let pullRequestNumber = utils.getPullRequestNumber();
-let linterCmd = `autorest --azure-arm=true --message-format=json --azure-validator=true --input-file=`;
+let linterCmd = `autorest --message-format=json --azure-validator=true --input-file=`;
 let gitCheckoutCmd = `git checkout ${targetBranch}`;
 let gitLogCmd = `git log -3`;
 var filename = `${pullRequestNumber}_${utils.getTimeStamp()}.json`;
