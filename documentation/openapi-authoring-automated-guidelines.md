@@ -304,7 +304,7 @@ Links: [Index](#index) | [Error vs. Warning](#error-vs-warning) | [Automated Rul
 * Url: /foo/{someResource}/activate
 * OperationId: SomeResourceTypes_StartResource
 
-**Impact on generated code**: Method generated for the POST operation will be named as indicated after the '_'. For eg., OperationId *SomeResourceTypes_ActivateResource* will generate a method named *ActivateResource*
+**Impact on generated code**: Method generated for the POST operation will be named as indicated after the '_\'. For eg., OperationId *SomeResourceTypes_ActivateResource* will generate a method named *ActivateResource*
 
 Links: [Index](#index) | [Error vs. Warning](#error-vs-warning) | [Automated Rules](#automated-rules) | [RPC](#rpc-violations): [Errors](#rpc-errors) or [Warnings](#rpc-warnings) | [SDK](#sdk-violations): [Errors](#sdk-errors) or [Warnings](#sdk-warnings)
 
