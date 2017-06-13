@@ -97,10 +97,9 @@
           "ServerCommunicationLinks"
         ],
         "operationId": "CommunicationLinks_CreateOrUpdate",
-        "description": "Creates or updates a server communication link.",
+        "description": "Creates a server communication link.",
         "x-ms-examples": {
-          "Create a server communication link": { "$ref": "../examples/ServerCommunicationLinkCreate.json" },
-          "Update a server communication link": { "$ref": "../examples/ServerCommunicationLinkUpdate.json" }
+          "Create a server communication link": { "$ref": "../examples/ServerCommunicationLinkCreate.json" }
         },
         "parameters": [
           {
@@ -129,7 +128,7 @@
             "schema": {
               "$ref": "#/definitions/ServerCommunicationLink"
             },
-            "description": "The required parameters for creating or updating a server communication link."
+            "description": "The required parameters for creating a server communication link."
           }
         ],
         "responses": {
@@ -141,12 +140,6 @@
           },
           "202": {
             "description": "Accepted"
-          },
-          "200": {
-            "description": "OK",
-            "schema": {
-              "$ref": "#/definitions/ServerCommunicationLink"
-            }
           }
         },
         "x-ms-long-running-operation": true
@@ -200,6 +193,10 @@
         },
         "partnerServer": {
           "type": "string",
+          "x-ms-mutability": [
+            "create",
+            "read"
+          ],
           "description": "The name of the partner server."
         }
       },
