@@ -35,7 +35,7 @@ We request OpenAPI(Swagger) spec authoring be assigned to engineers who have an
 | [M3016](#M3016)	| [BodyPropertiesNamesCamelCase](#M3016) | Property named: "{0}", must follow camelCase style. Example: "{1}". | Error |
 | [M3016](#M3016)	| [DefinitionsPropertiesNamesCamelCase](#M3016)  | Property named: "{0}", for definition: "{1}" must follow camelCase style. Example: "{2}". | Error |
 | M3006	| BodyTopLevelProperties | Top level properties should be one of name, type, id, location, properties, tags, plan, sku, etag, managedBy, identity. Extra properties found: "{0}". | Error |
-| M3008	| CollectionObjectPropertiesNamingValidation | Collection object {0} returned by list operation {1} with 'x-ms-pageable' extension, has no property named 'value'. | Error |
+| R3008	| CollectionObjectPropertiesNaming | Collection object {0} returned by list operation {1} with 'x-ms-pageable' extension, has no property named 'value'. | Error |
 | M2044	| HttpVerbValidation | Permissible values for HTTP Verb are delete,get,put,patch,head,options,post. | Error |
 | M3023	| OperationsAPIImplementationValidation | Operations API must be implemented for '{0}'. | Error |
 | M3007	| PutGetPatchResponseValidation | {0} has different responses for PUT/GET/PATCH operations. The PUT/GET/PATCH operations must have same schema response. | Error |
@@ -69,7 +69,7 @@ We request OpenAPI(Swagger) spec authoring be assigned to engineers who have an
 | --- | --- | --- | --- |
 | M2026 | AvoidAnonymousTypes, AnonymousBodyParameter |	Inline/anonymous models must not be used, instead define a schema with a model name in the "definitions" section and refer to it. This allows operations to share the models. | Error |
 | M2014	| OperationParametersValidation	| Parameter "subscriptionId" is not allowed in the operations section, define it in the global parameters section instead | Error |
-| M2027	| DefaultMustBeInEnum | The default value is not one of the values enumerated as valid for this element. | Error |
+| R2027	| DefaultMustBeInEnum | The default value is not one of the values enumerated as valid for this element. | Error |
 | M1009	| DeleteOperationNameValidation | 'DELETE' operation '{0}' must use method name 'Delete'. | Error |
 | M1005	| GetOperationNameValidation | 'GET' operation '{0}' must use method name 'Get' or Method name start with 'List' | Error |
 | M1004	| ListByOperationsValidation | Operation must be one of List() - lists all resources under a subscription.  ListByResourceGroup() - list all resources in a resource group within a subscription. ListByParent() - where ""Parent"" is a context specific suffix. It lists all resource under a parent. | Error |
@@ -82,18 +82,19 @@ We request OpenAPI(Swagger) spec authoring be assigned to engineers who have an
 | M2043	| SupportedSchemesWarning | Azure Resource Management only supports HTTPS scheme. | Error | 
 | M2003	| ValidFormats | '{0}' is not a known format.	| Error |
 | M2005	| LongRunningResponseValidationRule | A '{0}' operation '{1}' with x-ms-long-running-operation extension must have a valid terminal success status code {2}. | Error |
-| M2008	| MutabilityWithReadOnlyRule | When property is modeled as "readOnly": true then x-ms-mutability extension can only have "read" value. When property is modeled as "readOnly": false then applying x-ms-mutability extension with only "read" value is not allowed. Extension contains invalid values: '{0}'. | Error |
+| S2008	| MutabilityWithReadOnlyRule | When property is modeled as "readOnly": true then x-ms-mutability extension can only have "read" value. When property is modeled as "readOnly": false then applying x-ms-mutability extension with only "read" value is not allowed. Extension contains invalid values: '{0}'. | Error |
 | M2025	| NextLinkPropertyMustExist	| The property '{0}' specified by nextLinkName does not exist in the 200 response schema. \nPlease, specify the name of the property that provides the nextLink. If the model does not have the nextLink property then specify null. | Error |
 | M2028	| NonEmptyClientName | Empty x-ms-client-name property | Error |
 | M2060 | PageableRequires200Response | A response for the 200 HTTP status code must be defined to use x-ms-pageable | Error |
 | M2019	| ResourceIsMsResourceValidation | A 'Resource' definition must have x-ms-azure-resource extension enabled and set to true. |	Error |
 | M2013	| XmsClientNameParameterValidation, XmsClientNamePropertyValidation | Value of 'x-ms-client-name' cannot be the same as '{0}' Property/Model. | Error |
-| M2058 |XmsPathsMustOverloadPaths | Paths in x-ms-paths must overload a normal path in the paths section, i.e. a path in the x-ms-paths must either be same as a path in the paths section or a path in the paths sections followed by additional parameters. | Error |
+| S2058 |XmsPathsMustOverloadPaths | Paths in x-ms-paths must overload a normal path in the paths section, i.e. a path in the x-ms-paths must either be same as a path in the paths section or a path in the paths sections followed by additional parameters. | Error |
 | M2047	| ParameterNameValidation | Parameter Must have the "name" property defined with non-empty string as its value | Error |
 | M2062	| RequiredReadOnlyPropertiesValidation | Property '{0}' is a required property. It should not be marked as 'readonly'. | Error |
 | M2054	| SecurityDefinitionsStructureValidation | An OpenAPI(swagger) spec must have security definitions and must adhere to the specific structure. | Error |
 | M2022	| XmsExamplesProvidedValidation | Please provide x-ms-examples describing minimum/maximum property set for response/request payloads for operations.{0} | Error |
 | S2006	| ControlCharactersNotAllowed | Specification must not contain any control characters.
+| S2047 | NamePropertyDefinitionInParameter | A parameter must have `name` property defined.
 
 #### SDK Warnings
 
@@ -350,5 +351,116 @@ Control characters are not allowed in a specification.
 **How to fix the violation**: Remove the control characters in the specification.
 
 **Examples**: A list of control characters in unicode can be found [here](https://unicode-table.com/en/).
+
+Links: [Index](#index) | [Error vs. Warning](#error-vs-warning) | [Automated Rules](#automated-rules) | [RPC](#rpc-violations): [Errors](#rpc-errors) or [Warnings](#rpc-warnings) | [SDK](#sdk-violations): [Errors](#sdk-errors) or [Warnings](#sdk-warnings)
+
+### <a name="S2008" />S2008 MutabilityWithReadOnly
+**Output Message**:  When property is modeled as "readOnly": true then x-ms-mutability extension can only have "read" value. When property is modeled as "readOnly": false then applying x-ms-mutability extension with only "read" value is not allowed. Extension contains invalid values: '{0}'
+
+**Description**: Verifies whether a model property which has a readOnly property set has the appropriate `x-ms-mutability` options. If `readonly: true`, `x-ms-mutability` must be `["read"]`. If `readonly: false`, `x-ms-mutability` can be any of the `x-ms-mutability` options.
+
+**Why the rule is important**: Not adhering to the rule violates how the x-ms-mutability extension works. A property cannot be `readonly: true` and yet allow `x-ms-mutability` as `["create", "update"]`. 
+
+**How to fix the violation**: Based on the value of the `readOnly` property, assign appropriate `x-ms-mutability` options. 
+
+**Bad Example**:
+```
+  "prop0":{
+    "type": "string",
+    "readOnly":true,
+    "x-ms-mutability": ["read", "update"]
+  }
+```
+**Good Example**:
+```
+  "prop0":{
+    "type": "string",
+    "readOnly": false,
+    "x-ms-mutability": ["read", "update"]
+  }
+```
+
+Links: [Index](#index) | [Error vs. Warning](#error-vs-warning) | [Automated Rules](#automated-rules) | [RPC](#rpc-violations): [Errors](#rpc-errors) or [Warnings](#rpc-warnings) | [SDK](#sdk-violations): [Errors](#sdk-errors) or [Warnings](#sdk-warnings)
+
+### <a name="R2058" />R2058 XmsPathsMustOverloadPaths 
+**Output Message**: Paths in x-ms-paths must overload a normal path in the paths section, i.e. a path in the x-ms-paths must either be same as a path in the paths section or a path in the paths sections followed by additional parameters. 
+
+**Description**: The `x-ms-paths` extension allows us to overload an existing path based on path parameters. We cannot specify an `x-ms-paths` without a path that already exists in the `paths` section. For more details about this extension please refere [here](https://github.com/Azure/azure-rest-api-specs/blob/dce4da0d748565efd2ab97a43d0683c2979a974a/documentation/swagger-extensions.md#x-ms-paths).
+
+**Why the rule is important**: The `x-ms-paths` overload an existing path only, not adhering to this rule would violate the applicability of the extension itself.
+
+**How to fix the violation**: Ensure that the `x-ms-paths` is overloading an existing url path in the `paths` section.
+
+Links: [Index](#index) | [Error vs. Warning](#error-vs-warning) | [Automated Rules](#automated-rules) | [RPC](#rpc-violations): [Errors](#rpc-errors) or [Warnings](#rpc-warnings) | [SDK](#sdk-violations): [Errors](#sdk-errors) or [Warnings](#sdk-warnings)
+
+### <a name="S2001" />S2001 AvoidNestedProperties
+**Output Message**: Consider using x-ms-client-flatten to provide a better end user experience
+
+**Description**: Nested properties can result into bad user experience especially when creating request objects. `x-ms-client-flatten` flattens the model properties so that the users can analyze and set the properties much more easily.
+
+**Why the rule is important**: Overly nested properties (especially required ones) can result into a bad user experience.
+
+**How to fix the violation**: Either eliminate nesting or use the `x-ms-client-flatten` property for a better user experience. More details about the extension can be found [here](https://github.com/Azure/azure-rest-api-specs/blob/dce4da0d748565efd2ab97a43d0683c2979a974a/documentation/swagger-extensions.md#x-ms-client-flatten).
+
+Links: [Index](#index) | [Error vs. Warning](#error-vs-warning) | [Automated Rules](#automated-rules) | [RPC](#rpc-violations): [Errors](#rpc-errors) or [Warnings](#rpc-warnings) | [SDK](#sdk-violations): [Errors](#sdk-errors) or [Warnings](#sdk-warnings)
+
+### <a name="R3008" />R3008 CollectionObjectPropertiesNaming
+**Output Message**: Collection object '{0}' returned by list operation '{1}' with 'x-ms-pageable' extension, has no property named 'value'. 
+
+**Description**: Per ARM guidelines, a model returned by an `x-ms-pageable` operation must have a property named `value`. This property indicates what type of array the object is.
+
+**Why the rule is important**: To maintain consistency on how `x-ms-pageable` operations and corresponding response objects are modeled and to enable execution of other validation rules based on this consistent structure.
+
+**How to fix the violation**: Ensure that the response object has a property named `value` of `array` type.
+
+Links: [Index](#index) | [Error vs. Warning](#error-vs-warning) | [Automated Rules](#automated-rules) | [RPC](#rpc-violations): [Errors](#rpc-errors) or [Warnings](#rpc-warnings) | [SDK](#sdk-violations): [Errors](#sdk-errors) or [Warnings](#sdk-warnings)
+
+### <a name="S2027" />S2027 DefaultMustBeInEnum
+**Output Message**: The default value is not one of the values enumerated as valid for this element.
+
+**Description**: The value assigned as a default for an enum property must be present in the enums' list.
+
+**Why the rule is important**: SDKs generated may fail to compile if we try to enforce a default value that is not a part of the enums defined in the list.
+
+**How to fix the violation**: Ensure that the default desired actually exists in the enums' list.
+
+**Bad Example**:
+```
+"status":{
+  "type": "string",
+  "enum": [
+    "Succeeded",
+    "Updating",
+    "Deleting",
+    "Failed"
+  ],
+  "default": "Terminated"
+}
+```
+
+Links: [Index](#index) | [Error vs. Warning](#error-vs-warning) | [Automated Rules](#automated-rules) | [RPC](#rpc-violations): [Errors](#rpc-errors) or [Warnings](#rpc-warnings) | [SDK](#sdk-violations): [Errors](#sdk-errors) or [Warnings](#sdk-warnings)
+
+### <a name="S2047" />S2047 NamePropertyDefinitionInParameter
+**Output Message**: Parameter Must have the "name" property defined with non-empty string as its value.
+
+**Description**: A parameter must have a `name` property for the SDK to be properly generated.
+
+**Why the rule is important**: SDKs generated may fail to compile if we try to enforce a default value that is not a part of the enums defined in the list.
+
+**How to fix the violation**: Ensure that the default desired actually exists in the enums' list.
+
+**Bad Example**:
+```
+"status":{
+  "type": "string",
+  "enum": [
+    "Succeeded",
+    "Updating",
+    "Deleting",
+    "Failed"
+  ],
+  "default": "Terminated"
+}
+```
 
 Links: [Index](#index) | [Error vs. Warning](#error-vs-warning) | [Automated Rules](#automated-rules) | [RPC](#rpc-violations): [Errors](#rpc-errors) or [Warnings](#rpc-warnings) | [SDK](#sdk-violations): [Errors](#sdk-errors) or [Warnings](#sdk-warnings)
