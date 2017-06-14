@@ -37,7 +37,7 @@ We request OpenAPI(Swagger) spec authoring be assigned to engineers who have an
 | M3006	| BodyTopLevelProperties | Top level properties should be one of name, type, id, location, properties, tags, plan, sku, etag, managedBy, identity. Extra properties found: "{0}". | Error |
 | R3008	| CollectionObjectPropertiesNaming | Collection object {0} returned by list operation {1} with 'x-ms-pageable' extension, has no property named 'value'. | Error |
 | M2044	| HttpVerbValidation | Permissible values for HTTP Verb are delete,get,put,patch,head,options,post. | Error |
-| M3023	| OperationsAPIImplementationValidation | Operations API must be implemented for '{0}'. | Error |
+| R3023	| OperationsAPIImplementationValidation | Operations API must be implemented for '{0}'. | Error |
 | M3007	| PutGetPatchResponseValidation | {0} has different responses for PUT/GET/PATCH operations. The PUT/GET/PATCH operations must have same schema response. | Error |
 | M3003	| RequiredPropertiesMustExist | Required property does not appear in the list of properties | Error |
 | M3001 | ResourceModelValidation | Model definition '{0}' must have the properties 'name', 'id' and 'type' in its hierarchy and these properties must be marked as readonly. | Error |
@@ -50,6 +50,7 @@ We request OpenAPI(Swagger) spec authoring be assigned to engineers who have an
 | M3027	| TrackedResourceListByResourceGroup | The tracked resource, '{0}', must have a list by resource group operation. | Error |
 | M3027	| TrackedResourceListBySubscription | The tracked resource, '{0}', must have a list by subscriptions operation. | Error |
 | R3011	| DescriptionMustNotBeNodeName | The description provided for a given node (property, parameter, etc.) must not be the same as the name assigned to the node.
+| R2020 | RequiredPropertiesMissingInResourceModel | A `Resource` model must have `name`, `id` and `type` properties defined. 
 
 #### RPC Warnings
 
@@ -68,19 +69,19 @@ We request OpenAPI(Swagger) spec authoring be assigned to engineers who have an
 | Id | Rule Name | Output Message |Severity | 
 | --- | --- | --- | --- |
 | M2026 | AvoidAnonymousTypes, AnonymousBodyParameter |	Inline/anonymous models must not be used, instead define a schema with a model name in the "definitions" section and refer to it. This allows operations to share the models. | Error |
-| M2014	| OperationParametersValidation	| Parameter "subscriptionId" is not allowed in the operations section, define it in the global parameters section instead | Error |
+| S2014	| OperationParametersValidation	| Parameter "subscriptionId" is not allowed in the operations section, define it in the global parameters section instead | Error |
 | R2027	| DefaultMustBeInEnum | The default value is not one of the values enumerated as valid for this element. | Error |
 | M1009	| DeleteOperationNameValidation | 'DELETE' operation '{0}' must use method name 'Delete'. | Error |
 | M1005	| GetOperationNameValidation | 'GET' operation '{0}' must use method name 'Get' or Method name start with 'List' | Error |
 | M1004	| ListByOperationsValidation | Operation must be one of List() - lists all resources under a subscription.  ListByResourceGroup() - list all resources in a resource group within a subscription. ListByParent() - where ""Parent"" is a context specific suffix. It lists all resource under a parent. | Error |
 | M1003	| ListOperationNamingWarning | Since operation '{0}' response has model definition '{1}', it should be of the form "*_list*" | Error |
 | M1001	| OperationIdNounInVerb	| Per the Noun_Verb convention for Operation Ids, the noun '{0}' should not appear after the underscore. | Error |
-| M2055	| OneUnderscoreInOperationId | Only 1 underscore is permitted in the operation id, following Noun_Verb conventions.  | Error |
+| S2055	| OneUnderscoreInOperationId | Only 1 underscore is permitted in the operation id, following Noun_Verb conventions.  | Error |
 | M1007	| PatchOperationNameValidation | 'PATCH' operation '{0}' must use method name 'Update'. | Error |
 | M1006	| PutOperationNameValidation | 'PUT' operation '{0}' must use method name 'Create'. | Error |
 | M2014	| ServiceDefinitionParameters | Parameter "{0}" is referenced but not defined in the global parameters section of Service Definition |Error |
 | M2043	| SupportedSchemesWarning | Azure Resource Management only supports HTTPS scheme. | Error | 
-| M2003	| ValidFormats | '{0}' is not a known format.	| Error |
+| S2003	| ValidFormats | '{0}' is not a known format.	| Error |
 | M2005	| LongRunningResponseValidationRule | A '{0}' operation '{1}' with x-ms-long-running-operation extension must have a valid terminal success status code {2}. | Error |
 | S2008	| MutabilityWithReadOnlyRule | When property is modeled as "readOnly": true then x-ms-mutability extension can only have "read" value. When property is modeled as "readOnly": false then applying x-ms-mutability extension with only "read" value is not allowed. Extension contains invalid values: '{0}'. | Error |
 | M2025	| NextLinkPropertyMustExist	| The property '{0}' specified by nextLinkName does not exist in the 200 response schema. \nPlease, specify the name of the property that provides the nextLink. If the model does not have the nextLink property then specify null. | Error |
@@ -90,7 +91,7 @@ We request OpenAPI(Swagger) spec authoring be assigned to engineers who have an
 | M2013	| XmsClientNameParameterValidation, XmsClientNamePropertyValidation | Value of 'x-ms-client-name' cannot be the same as '{0}' Property/Model. | Error |
 | S2058 |XmsPathsMustOverloadPaths | Paths in x-ms-paths must overload a normal path in the paths section, i.e. a path in the x-ms-paths must either be same as a path in the paths section or a path in the paths sections followed by additional parameters. | Error |
 | M2047	| ParameterNameValidation | Parameter Must have the "name" property defined with non-empty string as its value | Error |
-| M2062	| RequiredReadOnlyPropertiesValidation | Property '{0}' is a required property. It should not be marked as 'readonly'. | Error |
+| S2056	| RequiredReadOnlyProperties | Property '{0}' is a required property. It should not be marked as 'readonly'. | Error |
 | M2054	| SecurityDefinitionsStructureValidation | An OpenAPI(swagger) spec must have security definitions and must adhere to the specific structure. | Error |
 | M2022	| XmsExamplesProvidedValidation | Please provide x-ms-examples describing minimum/maximum property set for response/request payloads for operations.{0} | Error |
 | S2006	| ControlCharactersNotAllowed | Specification must not contain any control characters.
@@ -111,6 +112,8 @@ We request OpenAPI(Swagger) spec authoring be assigned to engineers who have an
 | S4002	| LocationMustHaveXmsMutability | The "location" property of "Resource" model definition in ARM MUST have "x-ms-mutability": ["create", "read"] extension.
 | S2008	| PostOperationIdContainsUrlVerb | A POST operation OperationId must contain the verb at the end of the url related to the operation. 
 | S2009	| ArraySchemaMustHaveItems | A property of type `Array` must have `items` defined in its `Schema`.
+| S1001 | OperationIdNounVerb | An operationId must be of the form `Noun_Verb`.
+| S2015 | ParameterNotDefinedInGlobalParameters | Parameters `subscriptionId` and `api-version` must be declared as global parameters.
 
 ## Rule Descriptions
 
@@ -443,24 +446,142 @@ Links: [Index](#index) | [Error vs. Warning](#error-vs-warning) | [Automated Rul
 ### <a name="S2047" />S2047 NamePropertyDefinitionInParameter
 **Output Message**: Parameter Must have the "name" property defined with non-empty string as its value.
 
-**Description**: A parameter must have a `name` property for the SDK to be properly generated.
+**Description**: A parameter must have a `name` property for the SDK to be properly generated. 
 
-**Why the rule is important**: SDKs generated may fail to compile if we try to enforce a default value that is not a part of the enums defined in the list.
+**Why the rule is important**: AutoRest fails to generate code if the `name` property is not provided for a parameter.
 
-**How to fix the violation**: Ensure that the default desired actually exists in the enums' list.
+**How to fix the violation**: Add a non-empty `name` property to the parameter.
 
 **Bad Example**:
 ```
-"status":{
+"MyParam":{
   "type": "string",
-  "enum": [
-    "Succeeded",
-    "Updating",
-    "Deleting",
-    "Failed"
-  ],
-  "default": "Terminated"
+  "in": "path",
+  "description": "sample param"
 }
 ```
 
 Links: [Index](#index) | [Error vs. Warning](#error-vs-warning) | [Automated Rules](#automated-rules) | [RPC](#rpc-violations): [Errors](#rpc-errors) or [Warnings](#rpc-warnings) | [SDK](#sdk-violations): [Errors](#sdk-errors) or [Warnings](#sdk-warnings)
+
+### <a name="S1001" />S1001 OperationIdNounVerb
+**Output Message**: Per the Noun_Verb convention for Operation Ids, the noun '{0}' should not appear after the underscore.
+
+**Description**: OperationId should be of the form `Noun_Verb`. 
+
+**Why the rule is important**: AutoRest breaks the operation id into its `Noun` and `Verb` where `Noun` becomes name of the operations class and the `Verb` becomes the name of the method in that class. Not adhering to this format can either cause AutoRest to fail or can generate semantically incorrect SDK.
+
+**How to fix the violation**: Ensure operationId is of the form `Noun_Verb`.
+
+**Bad Example**:
+```
+Activate_Certificate
+CertificateActivate
+```
+**Good Example**:
+```
+Certificate_Activate
+```
+
+Links: [Index](#index) | [Error vs. Warning](#error-vs-warning) | [Automated Rules](#automated-rules) | [RPC](#rpc-violations): [Errors](#rpc-errors) or [Warnings](#rpc-warnings) | [SDK](#sdk-violations): [Errors](#sdk-errors) or [Warnings](#sdk-warnings)
+
+### <a name="S2025" />S2025 OneUnderscoreInOperationId
+**Output Message**: Only 1 underscore is permitted in the operation id, following Noun_Verb conventions.
+
+**Description**: An operationId can have exaclty one underscore, not adhering to it can cause errors in code generation.
+
+**Why the rule is important**: Given an operationId of the form `Noun_Verb`, AutoRest breaks the operation id into its `Noun` and `Verb` where `Noun` becomes name of the operations class and the `Verb` becomes the name of the method in that class. Not adhering to this format can cause AutoRest to fail during code generation.
+
+**How to fix the violation**: Ensure operationId is of the form `Noun_Verb` and contains exactly one underscore.
+
+**Bad Example**:
+```
+Activate_Primary_Certificate
+```
+**Good Example**:
+```
+PrimaryCertificate_Activate
+```
+
+Links: [Index](#index) | [Error vs. Warning](#error-vs-warning) | [Automated Rules](#automated-rules) | [RPC](#rpc-violations): [Errors](#rpc-errors) or [Warnings](#rpc-warnings) | [SDK](#sdk-violations): [Errors](#sdk-errors) or [Warnings](#sdk-warnings)
+
+### <a name="R3023" />R3023 OperationsAPIImplementation
+**Output Message**: Operations API must be implemented for '{0}'.
+
+**Description**: Per ARM guidelines, each RP must expose an operations API that returns information about all the operations available with the service.
+
+**Why the rule is important**: For better user experience. Users can query the service to get a list of all possible operations on a service and decide what they have to do.
+
+**How to fix the violation**: Add an operations API endpoint (if not already present) and add details regarding this endpoint in the corresponding OpenAPI document. Examples can be found for most RPs in this repo.
+
+Links: [Index](#index) | [Error vs. Warning](#error-vs-warning) | [Automated Rules](#automated-rules) | [RPC](#rpc-violations): [Errors](#rpc-errors) or [Warnings](#rpc-warnings) | [SDK](#sdk-violations): [Errors](#sdk-errors) or [Warnings](#sdk-warnings)
+
+### <a name="S2015" />S2015 ParameterNotDefinedInGlobalParameters
+**Output Message**: Parameter "{0}" is referenced but not defined in the global parameters section of Service Definition
+
+**Description**: Per ARM guidelines, if `subscriptionId` is used anywhere as a path parameter, it must always be defined as global parameter. `api-version` is almost always an input parameter in any ARM spec and must also be defined as a global parameter.
+
+**Why the rule is important**: To reduce duplication, maintain consistent structure in ARM specifications, and ensure `subscriptionId` and `api-version` are created as client properties in the generated code.
+
+**How to fix the violation**: Ensure `subscriptionId` and `api-version` are declared in the global parameters section of the document.
+
+Links: [Index](#index) | [Error vs. Warning](#error-vs-warning) | [Automated Rules](#automated-rules) | [RPC](#rpc-violations): [Errors](#rpc-errors) or [Warnings](#rpc-warnings) | [SDK](#sdk-violations): [Errors](#sdk-errors) or [Warnings](#sdk-warnings)
+
+### <a name="R2020" />R2020 RequiredPropertiesMissingInResourceModel
+**Output Message**: Model definition '{0}' must have the properties 'name', 'id' and 'type' in its hierarchy and these properties must be marked as readonly.
+
+**Description**: Per ARM guidelines, a `Resource` model must have the `name`, `id` and `type` properties defined as `readOnly` in its hierarchy.
+
+**Why the rule is important**: `name`, `type` and `id` are readonly properties set on the service end. Also, per ARM guidelines each `Resource` type model must have these properties defined in its hierarchy.
+
+**How to fix the violation**: Ensure the `Resource` type model has the properties `name`, `type` and `id` and they are marked as `readOnly:true`. 
+
+Links: [Index](#index) | [Error vs. Warning](#error-vs-warning) | [Automated Rules](#automated-rules) | [RPC](#rpc-violations): [Errors](#rpc-errors) or [Warnings](#rpc-warnings) | [SDK](#sdk-violations): [Errors](#sdk-errors) or [Warnings](#sdk-warnings)
+
+### <a name="S2056" />S2056 RequiredReadOnlyProperties
+**Output Message**: Property '{0}' is a required property. It should not be marked as 'readonly'.
+
+**Description**: A model property cannot be both `readOnly` and `required`. A `readOnly` property is something that the server sets when returning the model object while required is a property required to be set when sending it as a part of the request body.
+
+**Why the rule is important**: SDK generation fails when this rule is violated.
+
+**How to fix the violation**: Ensure that the given property is either marked as `readonly: true` or `required` but not both.
+
+**Bad Example**:
+```
+"MyModel": {
+  "properties":{
+    "MyProp":{
+      "type": "string",
+      "description": "sample prop",
+      "readOnly": true
+    }
+  },
+  "required": ["MyProp"]
+}
+```
+
+
+Links: [Index](#index) | [Error vs. Warning](#error-vs-warning) | [Automated Rules](#automated-rules) | [RPC](#rpc-violations): [Errors](#rpc-errors) or [Warnings](#rpc-warnings) | [SDK](#sdk-violations): [Errors](#sdk-errors) or [Warnings](#sdk-warnings)
+
+### <a name="S2014" />S2014 SubscriptionIdParameterInOperations
+**Output Message**: Parameter "subscriptionId" is not allowed in the operations section, define it in the global parameters section instead
+
+**Description**: `subscriptionId` must not be an operation parameter.
+
+**Why the rule is important**: Per ARM guidelines, `subscriptionId` must be set as a property on the generated client instead of the method signature. 
+
+**How to fix the violation**: Remove `subscriptionId` from the operation parameters and add it to the global parameters section if it doesn't exist there.
+
+Links: [Index](#index) | [Error vs. Warning](#error-vs-warning) | [Automated Rules](#automated-rules) | [RPC](#rpc-violations): [Errors](#rpc-errors) or [Warnings](#rpc-warnings) | [SDK](#sdk-violations): [Errors](#sdk-errors) or [Warnings](#sdk-warnings)
+
+### <a name="S2003" />S2003 ValidFormats
+**Output Message**: '{0}' is not a known format.
+
+**Description**: Only valid types are allowed for properties.
+
+**Why the rule is important**: Invalid formats can cause errors during code generation or result in erraneous generated code.
+
+**How to fix the violation**: Ensure format defined for property is valid. Please refer [here](http://swagger.io/specification/) for allowed types in OpenAPI
+
+Links: [Index](#index) | [Error vs. Warning](#error-vs-warning) | [Automated Rules](#automated-rules) | [RPC](#rpc-violations): [Errors](#rpc-errors) or [Warnings](#rpc-warnings) | [SDK](#sdk-violations): [Errors](#sdk-errors) or [Warnings](#sdk-warnings)
+
