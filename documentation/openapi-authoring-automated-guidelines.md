@@ -358,7 +358,7 @@ Links: [Index](#index) | [Error vs. Warning](#error-vs-warning) | [Automated Rul
 ### <a name="R2008" />R2008 MutabilityWithReadOnly
 **Output Message**:  When property is modeled as "readOnly": true then x-ms-mutability extension can only have "read" value. When property is modeled as "readOnly": false then applying x-ms-mutability extension with only "read" value is not allowed. Extension contains invalid values: '{0}'
 
-**Description**: Verifies whether a model property which has a readOnly property set has the appropriate `x-ms-mutability` options. If `readonly: true`, `x-ms-mutability` must be `["read"]`. If `readonly: false`, `x-ms-mutability` can be any of the `x-ms-mutability` options.
+**Description**: Verifies whether a model property which has a readOnly property set has the appropriate `x-ms-mutability` options. If `readonly: true`, `x-ms-mutability` must be `["read"]`. If `readonly: false`, `x-ms-mutability` can be any of the `x-ms-mutability` options. More details about this extension can be found [here]( https://github.com/Azure/autorest/blob/master/docs/extensions/readme.md#x-ms-mutability).
 
 **Why the rule is important**: Not adhering to the rule violates how the x-ms-mutability extension works. A property cannot be `readonly: true` and yet allow `x-ms-mutability` as `["create", "update"]`. 
 
@@ -426,7 +426,7 @@ Links: [Index](#index) | [Error vs. Warning](#error-vs-warning) | [Automated Rul
 
 **Description**: Nested properties can result into bad user experience especially when creating request objects. `x-ms-client-flatten` flattens the model properties so that the users can analyze and set the properties much more easily.
 
-**Why the rule is important**: Overly nested properties (especially required ones) can result into a bad user experience.
+**Why the rule is important**: Overly nested properties (especially required ones) can result into a non optimal user experience.
 
 **How to fix the violation**: Either eliminate nesting or use the `x-ms-client-flatten` property for a better user experience. More details about the extension can be found [here](https://github.com/Azure/azure-rest-api-specs/blob/dce4da0d748565efd2ab97a43d0683c2979a974a/documentation/swagger-extensions.md#x-ms-client-flatten).
 
@@ -477,6 +477,16 @@ Links: [Index](#index) | [Error vs. Warning](#error-vs-warning) | [Automated Rul
 
 **How to fix the violation**: Add a non-empty `name` property to the parameter.
 
+**Good Example**:
+```
+"MyParam":{
+  "name":"myParam",
+  "type": "string",
+  "in": "path",
+  "description": "sample param"
+}
+```
+
 **Bad Example**:
 ```
 "MyParam":{
@@ -493,7 +503,7 @@ Links: [Index](#index) | [Error vs. Warning](#error-vs-warning) | [Automated Rul
 
 **Description**: OperationId should be of the form `Noun_Verb`. 
 
-**Why the rule is important**: AutoRest breaks the operation id into its `Noun` and `Verb` where `Noun` becomes name of the operations class and the `Verb` becomes the name of the method in that class. Not adhering to this format can either cause AutoRest to fail or can generate semantically incorrect SDK.
+**Impact on generated code**: AutoRest breaks the operation id into its `Noun` and `Verb` where `Noun` becomes name of the operations class and the `Verb` becomes the name of the method in that class, i.e., operations are grouped inside the operations class named after the noun. Not adhering to this format can either cause AutoRest to fail or can generate semantically incorrect SDK.
 
 **How to fix the violation**: Ensure operationId is of the form `Noun_Verb`.
 
@@ -538,6 +548,87 @@ Links: [Index](#index) | [Error vs. Warning](#error-vs-warning) | [Automated Rul
 
 **How to fix the violation**: Add an operations API endpoint (if not already present) and add details regarding this endpoint in the corresponding OpenAPI document. Examples can be found for most RPs in this repo.
 
+**Example**: A typical operations path would look like
+```
+"/providers/Microsoft.ResourceProviderName/operations": {
+    "get": {
+        "tags": [
+            "Operations"
+        ],
+        "description": "Lists all of the available RP operations.",
+        "operationId": "ListOperations",
+        "parameters": [{
+            "$ref": "#/parameters/apiVersionParameter"
+        }],
+        "responses": {
+            "200": {
+                "description": "OK. The request has succeeded.",
+                "schema": {
+                    "$ref": "#/definitions/OperationListResult"
+                }
+            },
+            "default": {
+                "description": "Resource Provider error response describing why the operation failed.",
+                "schema": {
+                    "$ref": "#/definitions/ErrorResponse"
+                }
+            }
+        },
+        "x-ms-pageable": {
+            "nextLinkName": "nextLink"
+        }
+    }
+}
+```
+A typical `OperationsList` and `Operation` model would look like
+```
+
+"Operation": {
+  "description": "REST API operation",
+  "type": "object",
+  "properties": {
+    "name": {
+      "description": "Operation name: {provider}/{resource}/{operation}",
+      "type": "string"
+    },
+    "display": {
+      "description": "The object that represents the operation.",
+      "properties": {
+        "provider": {
+          "description": "Service provider: Microsoft.ResourceProvider",
+          "type": "string"
+        },
+        "resource": {
+          "description": "Resource on which the operation is performed: Profile, endpoint, etc.",
+          "type": "string"
+        },
+        "operation": {
+          "description": "Operation type: Read, write, delete, etc.",
+          "type": "string"
+        }
+      }
+    }
+  }
+},
+"OperationListResult": {
+  "description": "Result of the request to list Resource Provider operations. It contains a list of operations and a URL link to get the next set of results.",
+  "properties": {
+    "value": {
+      "type": "array",
+      "items": {
+        "$ref": "#/definitions/Operation"
+      },
+      "description": "List of Resource Provider operations supported by the Resource Provider resource provider."
+    },
+    "nextLink": {
+      "type": "string",
+      "description": "URL to get the next set of operation list results if there are any."
+    }
+  }
+},
+```
+
+
 Links: [Index](#index) | [Error vs. Warning](#error-vs-warning) | [Automated Rules](#automated-rules) | [RPC](#rpc-violations): [Errors](#rpc-errors) or [Warnings](#rpc-warnings) | [SDK](#sdk-violations): [Errors](#sdk-errors) or [Warnings](#sdk-warnings)
 
 ### <a name="R2015" />R2015 ParameterNotDefinedInGlobalParameters
@@ -545,7 +636,9 @@ Links: [Index](#index) | [Error vs. Warning](#error-vs-warning) | [Automated Rul
 
 **Description**: Per ARM guidelines, if `subscriptionId` is used anywhere as a path parameter, it must always be defined as global parameter. `api-version` is almost always an input parameter in any ARM spec and must also be defined as a global parameter.
 
-**Why the rule is important**: To reduce duplication, maintain consistent structure in ARM specifications, and ensure `subscriptionId` and `api-version` are created as client properties in the generated code.
+**Why the rule is important**: To reduce duplication, maintain consistent structure in ARM specifications.
+
+**Impact on generated code**: `subscriptionId` and `api-version` are created as client properties in the generated code.
 
 **How to fix the violation**: Ensure `subscriptionId` and `api-version` are declared in the global parameters section of the document.
 
@@ -565,7 +658,7 @@ Links: [Index](#index) | [Error vs. Warning](#error-vs-warning) | [Automated Rul
 ### <a name="R2056" />R2056 RequiredReadOnlyProperties
 **Output Message**: Property '{0}' is a required property. It should not be marked as 'readonly'.
 
-**Description**: A model property cannot be both `readOnly` and `required`. A `readOnly` property is something that the server sets when returning the model object while required is a property required to be set when sending it as a part of the request body.
+**Description**: A model property cannot be both `readOnly` and `required`. A `readOnly` property is something that the server sets when returning the model object while `required` is a property to be set when sending it as a part of the request body.
 
 **Why the rule is important**: SDK generation fails when this rule is violated.
 
@@ -605,6 +698,6 @@ Links: [Index](#index) | [Error vs. Warning](#error-vs-warning) | [Automated Rul
 
 **Why the rule is important**: Invalid formats can cause errors during code generation or result in erraneous generated code.
 
-**How to fix the violation**: Ensure format defined for property is valid. Please refer [here](http://swagger.io/specification/) for allowed types in OpenAPI.
+**How to fix the violation**: Ensure format defined for property is valid. Please refer [here](https://github.com/Azure/autorest/blob/81d4d31d06637f4f9ef042d7f2ec64cfea29892f/docs/developer/validation-rules/valid-formats.md) for allowed types in OpenAPI.
 
 Links: [Index](#index) | [Error vs. Warning](#error-vs-warning) | [Automated Rules](#automated-rules) | [RPC](#rpc-violations): [Errors](#rpc-errors) or [Warnings](#rpc-warnings) | [SDK](#sdk-violations): [Errors](#sdk-errors) or [Warnings](#sdk-warnings)
