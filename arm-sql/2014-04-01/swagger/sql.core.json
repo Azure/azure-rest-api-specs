@@ -16,7 +16,46 @@
     "application/json"
   ],
   "paths": {
-        "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/servers/{serverName}/databases/{databaseName}/pause": {
+    "/subscriptions/{subscriptionId}/providers/Microsoft.Sql/checkNameAvailability": {
+      "post": {
+        "tags": [
+          "Servers"
+        ],
+        "operationId": "Servers_CheckNameAvailability",
+        "description": "Determines whether a resource can be created with the specified name.",
+        "x-ms-examples": {
+          "Check for a server name that is available": { "$ref": "../examples/CheckNameAvailabilityServerAvailable.json" },
+          "Check for a server name that already exists": { "$ref": "../examples/CheckNameAvailabilityServerAlreadyExists.json" },
+          "Check for a server name that is invalid": { "$ref": "../examples/CheckNameAvailabilityServerInvalid.json" }
+        },
+        "parameters": [
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "name": "parameters",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/CheckNameAvailabilityRequest"
+            },
+            "description": "The parameters to request for name availability."
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/CheckNameAvailabilityResponse"
+            }
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/servers/{serverName}/databases/{databaseName}/pause": {
       "post": {
         "tags": [
           "DatabaseActivation"
@@ -283,50 +322,6 @@
             "description": "OK",
             "schema": {
               "$ref": "#/definitions/DatabaseListResult"
-            }
-          }
-        },
-        "x-ms-pageable": {
-          "nextLinkName": null
-        }
-      }
-    },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/servers/{serverName}/databases/{databaseName}/usages": {
-      "get": {
-        "tags": [
-          "Databases"
-        ],
-        "operationId": "Databases_ListUsages",
-        "description": "Returns database usages.",
-        "x-ms-examples": {
-          "List database usage metrics": { "$ref": "../examples/DatabaseUsageMetricsList.json" }
-        },
-        "parameters": [
-          {
-            "$ref": "#/parameters/ApiVersionParameter"
-          },
-          {
-            "$ref": "#/parameters/SubscriptionIdParameter"
-          },
-          {
-            "$ref": "#/parameters/ResourceGroupParameter"
-          },
-          {
-            "$ref": "#/parameters/ServerNameParameter"
-          },
-          {
-            "name": "databaseName",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "description": "The name of the database."
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "OK",
-            "schema": {
-              "$ref": "#/definitions/DatabaseMetricListResult"
             }
           }
         },
@@ -1106,18 +1101,18 @@
   "definitions": {
     "Resource":{
       "description":"ARM resource.",
-      "properties":{  
-        "id":{  
+      "properties":{
+        "id":{
           "readOnly":true,
           "type":"string",
           "description":"Resource ID."
         },
-        "name":{  
+        "name":{
           "readOnly":true,
           "type":"string",
           "description":"Resource name."
         },
-        "type":{  
+        "type":{
           "readOnly":true,
           "type":"string",
           "description":"Resource type."
@@ -1125,46 +1120,102 @@
       },
       "x-ms-azure-resource": true
     },
-    "TrackedResource":{  
+    "TrackedResource":{
       "description":"ARM tracked top level resource.",
-      "properties":{  
-        "tags":{  
+      "properties":{
+        "tags":{
           "type":"object",
-          "additionalProperties":{  
+          "additionalProperties":{
             "type":"string"
           },
-          "x-ms-mutability":[  
+          "x-ms-mutability":[
             "read",
             "create",
             "update"
           ],
           "description":"Resource tags."
         },
-        "location":{  
+        "location":{
           "type":"string",
-          "x-ms-mutability":[  
+          "x-ms-mutability":[
             "read",
             "create"
           ],
           "description":"Resource location."
         }
       },
-      "required":[  
+      "required":[
         "location"
       ],
-      "allOf":[  
-        {  
+      "allOf":[
+        {
           "$ref":"#/definitions/Resource"
         }
       ]
     },
-    "ProxyResource":{  
+    "ProxyResource":{
       "description":"ARM proxy resource.",
-      "allOf":[  
-        {  
+      "allOf":[
+        {
           "$ref":"#/definitions/Resource"
         }
       ]
+    },
+    "CheckNameAvailabilityRequest": {
+      "properties":{
+        "name": {
+          "type": "string",
+          "description": "The name whose availability is to be checked."
+        },
+        "type": {
+          "type": "string",
+          "description": "The type of resource that is used as the scope of the availability check.",
+          "enum": [
+            "Microsoft.Sql/servers"
+          ],
+          "x-ms-enum": {
+            "name": "CheckNameAvailabilityResourceType",
+            "modelAsString": false
+          }
+        }
+      },
+      "required": [
+        "name", "type"
+      ],
+      "description": "A request to check whether the specified name for a resource is available."
+    },
+    "CheckNameAvailabilityResponse": {
+      "properties":{
+        "available": {
+          "type": "boolean",
+          "description": "True if the name is available, otherwise false.",
+          "readOnly": true
+        },
+        "message": {
+          "type": "string",
+          "description": "A message explaining why the name is unavailable. Will be null if the name is available.",
+          "readOnly": true
+        },
+        "name": {
+          "type": "string",
+          "description": "The name whose availability was checked.",
+          "readOnly": true
+        },
+        "reason": {
+          "type": "string",
+          "description": "The reason code explaining why the name is unavailable. Will be null if the name is available.",
+          "enum": [
+            "Invalid",
+            "AlreadyExists"
+          ],
+          "x-ms-enum": {
+            "name": "CheckNameAvailabilityReason",
+            "modelAsString": false
+          },
+          "readOnly": true
+        }
+      },
+      "description": "A response indicating whether the specified name for a resource is available."
     },
     "RecommendedElasticPoolMetric": {
       "properties": {
@@ -1516,9 +1567,9 @@
     },
     "ElasticPoolActivity": {
       "properties": {
-        "location":{  
+        "location":{
           "type":"string",
-          "x-ms-mutability":[  
+          "x-ms-mutability":[
             "read",
             "create"
           ],
@@ -1639,9 +1690,9 @@
     },
     "ElasticPoolDatabaseActivity": {
       "properties": {
-        "location":{  
+        "location":{
           "type":"string",
-          "x-ms-mutability":[  
+          "x-ms-mutability":[
             "read",
             "create"
           ],
@@ -2268,7 +2319,7 @@
           "x-nullable": false
         }
       },
-      "description": "Represents a Slo Usage Metric."
+      "description": "A Slo Usage Metric."
     },
     "OperationImpact": {
       "properties": {
@@ -2295,119 +2346,7 @@
           "description": "The relative impact to dimension (null if not applicable)"
         }
       },
-      "description": "Represents impact of an operation, both in absolute and relative terms."
-    },
-    "DatabaseMetric": {
-      "properties": {
-        "resourceName": {
-          "readOnly": true,
-          "type": "string",
-          "description": "The name of the resource."
-        },
-        "displayName": {
-          "readOnly": true,
-          "type": "string",
-          "description": "The metric display name."
-        },
-        "currentValue": {
-          "readOnly": true,
-          "type": "number",
-          "format": "double",
-          "description": "The current value of the metric."
-        },
-        "limit": {
-          "readOnly": true,
-          "type": "number",
-          "format": "double",
-          "description": "The current limit of the metric."
-        },
-        "unit": {
-          "readOnly": true,
-          "type": "string",
-          "description": "The units of the metric."
-        },
-        "nextResetTime": {
-          "readOnly": true,
-          "type": "string",
-          "format": "date-time",
-          "description": "The next reset time for the metric (ISO8601 format)."
-        }
-      },
-      "description": "Represents database metrics.",
-      "allOf": [
-        {
-          "$ref": "#/definitions/SubResource"
-        }
-      ]
-    },
-    "DatabaseMetricListResult": {
-      "properties": {
-        "value": {
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/DatabaseMetric"
-          },
-          "description": "The list of database metrics for the database."
-        }
-      },
-      "required": ["value"],
-      "description": "Represents the response to a list database metrics request."
-    },
-    "ServerMetric": {
-      "properties": {
-        "name": {
-          "readOnly": true,
-          "type": "string",
-          "description": "Name of the server usage metric."
-        },
-        "resourceName": {
-          "readOnly": true,
-          "type": "string",
-          "description": "The name of the resource."
-        },
-        "displayName": {
-          "readOnly": true,
-          "type": "string",
-          "description": "The metric display name."
-        },
-        "currentValue": {
-          "readOnly": true,
-          "type": "number",
-          "format": "double",
-          "description": "The current value of the metric."
-        },
-        "limit": {
-          "readOnly": true,
-          "type": "number",
-          "format": "double",
-          "description": "The current limit of the metric."
-        },
-        "unit": {
-          "readOnly": true,
-          "type": "string",
-          "description": "The units of the metric."
-        },
-        "nextResetTime": {
-          "readOnly": true,
-          "type": "string",
-          "format": "date-time",
-          "description": "The next reset time for the metric (ISO8601 format)."
-        }
-      },
-      "description": "Represents server metrics."
-    },
-    "ServerMetricListResult": {
-      "properties": {
-        "value": {
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/ServerMetric"
-          },
-          "description": "The list of server metrics for the server."
-        }
-      },
-      "required": ["value"],
-      "description": "Represents the response to a list server metrics request."
+      "description": "The impact of an operation, both in absolute and relative terms."
     },
     "ServiceTierAdvisorListResult": {
       "properties": {
@@ -2528,6 +2467,17 @@
       "type": "string",
       "description": "A comma separated list of child objects to expand in the response. Possible properties: serviceTierAdvisors, transparentDataEncryption.",
       "x-ms-parameter-location": "method"
+    }
+  },
+  "securityDefinitions": {
+    "azure_auth": {
+      "type": "oauth2",
+      "description": "Azure Active Directory OAuth2 Flow",
+      "flow": "implicit",
+      "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
+      "scopes": {
+        "user_impersonation": "impersonate your user account"
+      }
     }
   }
 }

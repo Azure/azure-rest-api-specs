@@ -75,7 +75,7 @@ We request OpenAPI(Swagger) spec authoring be assigned to engineers who have an
 | M1005	| GetOperationNameValidation | 'GET' operation '{0}' must use method name 'Get' or Method name start with 'List' | Error |
 | M1004	| ListByOperationsValidation | Operation must be one of List() - lists all resources under a subscription.  ListByResourceGroup() - list all resources in a resource group within a subscription. ListByParent() - where ""Parent"" is a context specific suffix. It lists all resource under a parent. | Error |
 | M1003	| ListOperationNamingWarning | Since operation '{0}' response has model definition '{1}', it should be of the form "*_list*" | Error |
-| M1001	| OperationIdNounInVerb	| Per the Noun_Verb convention for Operation Ids, the noun '{0}' should not appear after the underscore. | Error |
+| S1001	| OperationIdNounInVerb	| Per the Noun_Verb convention for Operation Ids, the noun '{0}' should not appear after the underscore. | Error |
 | S2055	| OneUnderscoreInOperationId | Only 1 underscore is permitted in the operation id, following Noun_Verb conventions.  | Error |
 | M1007	| PatchOperationNameValidation | 'PATCH' operation '{0}' must use method name 'Update'. | Error |
 | M1006	| PutOperationNameValidation | 'PUT' operation '{0}' must use method name 'Create'. | Error |
@@ -95,7 +95,6 @@ We request OpenAPI(Swagger) spec authoring be assigned to engineers who have an
 | M2054	| SecurityDefinitionsStructureValidation | An OpenAPI(swagger) spec must have security definitions and must adhere to the specific structure. | Error |
 | M2022	| XmsExamplesProvidedValidation | Please provide x-ms-examples describing minimum/maximum property set for response/request payloads for operations.{0} | Error |
 | S2006	| ControlCharactersNotAllowed | Specification must not contain any control characters.
-| S2047 | NamePropertyDefinitionInParameter | A parameter must have `name` property defined.
 
 #### SDK Warnings
 
@@ -112,7 +111,6 @@ We request OpenAPI(Swagger) spec authoring be assigned to engineers who have an
 | S4002	| LocationMustHaveXmsMutability | The "location" property of "Resource" model definition in ARM MUST have "x-ms-mutability": ["create", "read"] extension.
 | S2008	| PostOperationIdContainsUrlVerb | A POST operation OperationId must contain the verb at the end of the url related to the operation. 
 | S2009	| ArraySchemaMustHaveItems | A property of type `Array` must have `items` defined in its `Schema`.
-| S1001 | OperationIdNounVerb | An operationId must be of the form `Noun_Verb`.
 | S2015 | ParameterNotDefinedInGlobalParameters | Parameters `subscriptionId` and `api-version` must be declared as global parameters.
 
 ## Rule Descriptions
@@ -584,4 +582,3 @@ Links: [Index](#index) | [Error vs. Warning](#error-vs-warning) | [Automated Rul
 **How to fix the violation**: Ensure format defined for property is valid. Please refer [here](http://swagger.io/specification/) for allowed types in OpenAPI
 
 Links: [Index](#index) | [Error vs. Warning](#error-vs-warning) | [Automated Rules](#automated-rules) | [RPC](#rpc-violations): [Errors](#rpc-errors) or [Warnings](#rpc-warnings) | [SDK](#sdk-violations): [Errors](#sdk-errors) or [Warnings](#sdk-warnings)
-
