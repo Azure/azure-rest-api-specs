@@ -39,7 +39,7 @@
         "tags": [
           "Apis"
         ],
-        "operationId": "Apis_ListByService",
+        "operationId": "Api_ListByService",
         "description": "Lists all APIs of the API Management service instance.",
         "externalDocs": {
           "url": "https://docs.microsoft.com/en-us/azure/api-management/api-management-howto-create-apis"
@@ -101,7 +101,7 @@
         "tags": [
           "Apis"
         ],
-        "operationId": "Apis_Get",
+        "operationId": "Api_Get",
         "description": "Gets the details of the API specified by its identifier.",
         "x-ms-examples": {
           "ApiManagementGetApiContract": {
@@ -150,7 +150,7 @@
         "tags": [
           "Apis"
         ],
-        "operationId": "Apis_CreateOrUpdate",
+        "operationId": "Api_CreateOrUpdate",
         "description": "Creates new or updates existing specified API of the API Management service instance.",
         "parameters": [
           {
@@ -222,7 +222,7 @@
         "tags": [
           "Apis"
         ],
-        "operationId": "Apis_Update",
+        "operationId": "Api_Update",
         "description": "Updates the specified API of the API Management service instance.",
         "parameters": [
           {
@@ -273,7 +273,7 @@
         "tags": [
           "Apis"
         ],
-        "operationId": "Apis_Delete",
+        "operationId": "Api_Delete",
         "description": "Deletes the specified API of the API Management service instance.",
         "parameters": [
           {
@@ -317,7 +317,7 @@
         "tags": [
           "Operations"
         ],
-        "operationId": "ApiOperations_ListByApis",
+        "operationId": "ApiOperation_ListByApi",
         "description": "Lists a collection of the operations for the specified API.",
         "x-ms-examples": {
           "ApiManagementListApiOperations": {
@@ -379,7 +379,7 @@
         "tags": [
           "Operations"
         ],
-        "operationId": "ApiOperations_Get",
+        "operationId": "ApiOperation_Get",
         "description": "Gets the details of the API Operation specified by its identifier.",
         "x-ms-examples": {
           "ApiManagementGetApiOperation": {
@@ -431,7 +431,7 @@
         "tags": [
           "Operations"
         ],
-        "operationId": "ApiOperations_CreateOrUpdate",
+        "operationId": "ApiOperation_CreateOrUpdate",
         "description": "Creates a new API operation or updates an existing one.",
         "x-ms-examples": {
           "ApiManagementCreateApiOperation": {
@@ -492,7 +492,7 @@
         "tags": [
           "Operations"
         ],
-        "operationId": "ApiOperations_Update",
+        "operationId": "ApiOperation_Update",
         "description": "Updates the details of the operation specified by its identifier.",
         "parameters": [
           {
@@ -546,7 +546,7 @@
         "tags": [
           "Operations"
         ],
-        "operationId": "ApiOperations_Delete",
+        "operationId": "ApiOperation_Delete",
         "description": "Deletes the specified operation.",
         "x-ms-examples": {
           "ApiManagementDeleteApiOperation": {
@@ -596,9 +596,9 @@
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ApiManagement/service/{serviceName}/apis/{apiId}/operations/{operationId}/policies/{policyId}": {
       "get": {
         "tags": [
-          "ApiOperationsPolicy"
+          "ApiOperationPolicies"
         ],
-        "operationId": "ApiOperations_GetPolicy",
+        "operationId": "ApiOperationPolicy_Get",
         "description": "Get the policy configuration at the API Operation level.",
         "x-ms-examples": {
           "ApiManagementGetApiOperationPolicy": {
@@ -651,9 +651,9 @@
       },
       "put": {
         "tags": [
-          "ApiOperationsPolicy"
+          "ApiOperationPolicies"
         ],
-        "operationId": "ApiOperations_CreateOrUpdatePolicy",
+        "operationId": "ApiOperationPolicy_CreateOrUpdate",
         "description": "Creates or updates policy configuration for the API Operation level.",
         "parameters": [
           {
@@ -717,9 +717,9 @@
       },
       "delete": {
         "tags": [
-          "ApiOperationsPolicy"
+          "ApiOperationPolicies"
         ],
-        "operationId": "ApiOperations_DeletePolicy",
+        "operationId": "ApiOperationPolicy_Delete",
         "description": "Deletes the policy configuration at the Api Operation.",
         "x-ms-examples": {
           "ApiManagementDeleteOperationPolicy": {
@@ -767,7 +767,7 @@
         "tags": [
           "ApiProducts"
         ],
-        "operationId": "Apis_ListProducts",
+        "operationId": "ApiProducts_ListByApis",
         "description": "Lists all API associated products.",
         "x-ms-examples": {
           "ApiManagementGetProductsForApi": {
@@ -829,7 +829,7 @@
         "tags": [
           "ApiPolicy"
         ],
-        "operationId": "Apis_ListPolicies",
+        "operationId": "ApiPolicy_ListByApi",
         "description": "Get the policy configuration at the API level.",
         "parameters": [
           {
@@ -869,7 +869,7 @@
         "tags": [
           "ApiPolicy"
         ],
-        "operationId": "Apis_GetPolicy",
+        "operationId": "ApiPolicy_Get",
         "description": "Get the policy configuration at the API level.",
         "parameters": [
           {
@@ -910,7 +910,7 @@
         "tags": [
           "ApiPolicy"
         ],
-        "operationId": "Apis_CreateOrUpdatePolicy",
+        "operationId": "ApiPolicy_CreateOrUpdate",
         "description": "Creates or updates policy configuration for the API.",
         "parameters": [
           {
@@ -973,7 +973,7 @@
         "tags": [
           "ApiPolicy"
         ],
-        "operationId": "Apis_DeletePolicy",
+        "operationId": "ApiPolicy_Delete",
         "description": "Deletes the policy configuration at the Api.",
         "parameters": [
           {
