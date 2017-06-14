@@ -3,7 +3,7 @@
   "info": {
     "title": "NetworkManagementClient",
     "description": "The Microsoft Azure Network management API provides a RESTful set of web services that interact with Microsoft Azure Networks service to manage your network resources. The API has entities that capture the relationship between an end user and the Microsoft Azure Networks service.",
-    "version": "2017-03-01"
+    "version": "2017-06-01"
   },
   "host": "management.azure.com",
   "schemes": [
@@ -982,6 +982,13 @@
           },
           "description": "The reference of AdvertisedPublicPrefixes."
         },
+		"advertisedCommunities": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "description": "The communities of bgp peering. Spepcified for microsoft peering"
+        },
         "advertisedPublicPrefixesState": {
           "type": "string",
           "description": "AdvertisedPublicPrefixState of the Peering resource. Possible values are 'NotConfigured', 'Configuring', 'Configured', and 'ValidationNeeded'.",
@@ -1000,6 +1007,11 @@
           "type": "integer",
           "format": "int32",
           "description": "The CustomerASN of the peering."
+        },
+		"legacyMode": {
+          "type": "integer",
+          "format": "int32",
+          "description": "The legacy mode of the peering."
         },
         "routingRegistryName": {
           "type": "string",
