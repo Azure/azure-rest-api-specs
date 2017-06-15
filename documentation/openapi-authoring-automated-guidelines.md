@@ -49,6 +49,7 @@ We request OpenAPI(Swagger) spec authoring be assigned to engineers who have an
 | M2062	| PutResponseResourceValidation | The 200 response model for an ARM PUT operation must have x-ms-azure-resource extension set to true in its hierarchy. Operation: '{0}' Model: '{1}'. | Error |
 | M3027	| TrackedResourceListByResourceGroup | The tracked resource, '{0}', must have a list by resource group operation. | Error |
 | M3027	| TrackedResourceListBySubscription | The tracked resource, '{0}', must have a list by subscriptions operation. | Error |
+| R3011	| DescriptionMustNotBeNodeName | The description provided for a given node (property, parameter, etc.) must not be the same as the name assigned to the node.
 
 #### RPC Warnings
 
@@ -92,6 +93,7 @@ We request OpenAPI(Swagger) spec authoring be assigned to engineers who have an
 | M2062	| RequiredReadOnlyPropertiesValidation | Property '{0}' is a required property. It should not be marked as 'readonly'. | Error |
 | M2054	| SecurityDefinitionsStructureValidation | An OpenAPI(swagger) spec must have security definitions and must adhere to the specific structure. | Error |
 | M2022	| XmsExamplesProvidedValidation | Please provide x-ms-examples describing minimum/maximum property set for response/request payloads for operations.{0} | Error |
+| S2006	| ControlCharactersNotAllowed | Specification must not contain any control characters.
 
 #### SDK Warnings
 
@@ -105,6 +107,9 @@ We request OpenAPI(Swagger) spec authoring be assigned to engineers who have an
 | S2004	| NonAppJsonTypeWarning | Please make sure that media types other than 'application/json' are supported by your service. | Warning |
 | M2063	| BodyParametersValidation | A body parameter must be named 'parameters'. | Warning |
 | M2017	| PutRequestResponseValidation | A PUT operation request body schema should be the same as its 200 response schema, to allow reusing the same entity between GET and PUT. If the schema of the PUT request body is a superset of the GET response body, make sure you have a PATCH operation to make the resource updatable. Operation: '{0}' Request Model: '{1}' Response Model: '{2}' | Warning |
+| S4002	| LocationMustHaveXmsMutability | The "location" property of "Resource" model definition in ARM MUST have "x-ms-mutability": ["create", "read"] extension.
+| S2008	| PostOperationIdContainsUrlVerb | A POST operation OperationId must contain the verb at the end of the url related to the operation. 
+| S2009	| ArraySchemaMustHaveItems | A property of type `Array` must have `items` defined in its `Schema`.
 
 ## Rule Descriptions
 
@@ -260,5 +265,90 @@ Links: [Index](#index) | [Error vs. Warning](#error-vs-warning) | [Automated Rul
 **Impact on generated code**: Boolean property will turn into a String or an Enum (if SDK language supports it), this will depend on "modelAsString" property value as specified in [x-ms-enum extension](https://github.com/Azure/autorest/blob/master/docs/extensions/readme.md#x-ms-enum) guidelines.
 
 **Examples**: N/A
+
+Links: [Index](#index) | [Error vs. Warning](#error-vs-warning) | [Automated Rules](#automated-rules) | [RPC](#rpc-violations): [Errors](#rpc-errors) or [Warnings](#rpc-warnings) | [SDK](#sdk-violations): [Errors](#sdk-errors) or [Warnings](#sdk-warnings)
+
+### <a name="S4002" />S4002	LocationMustHaveXmsMutability
+**Output Message**: Property 'location' must have '\"x-ms-mutability\":[\"read\", \"create\"]' extension defined. Resource Model: '{0}'
+
+**Description**: A tracked resource's `location` property must have the `x-ms-mutability` properties set as `read`, `create`.
+
+**Why the rule is important**: Location is a property that is set once and non-updatable for a tracked resource. Hence, per ARM guidelines the only operations allowed are `read` and `create`.
+
+**How to fix the violation**: Ensure that the `location` property in the tracked resource's hierarchy has `x-ms-mutability` correctly set to `read` and `create`.
+For example:
+```
+"location": {
+  "type": "string",
+  "description": "location of the resource",
+  "x-ms-mutability": [ "create", "read" ]
+}
+```
+
+Links: [Index](#index) | [Error vs. Warning](#error-vs-warning) | [Automated Rules](#automated-rules) | [RPC](#rpc-violations): [Errors](#rpc-errors) or [Warnings](#rpc-warnings) | [SDK](#sdk-violations): [Errors](#sdk-errors) or [Warnings](#sdk-warnings)
+
+### <a name="S2008" />S2008	PostOperationIdContainsUrlVerb
+**Output Message**: OperationId should contain the verb: '{0}' in:'{1}'
+
+**Description**: A POST operation's operationId should contain the verb indicated at the end of the corresponding url.
+
+**Why the rule is important**: The url indicates the action performed by it, the corresponding POST operationId should therefore contain this verb for semantic consistency.
+
+**How to fix the violation**: Ensure that the operationId for POST operation contains the verb indicated at the end of the url.
+
+**Good Examples**: Examples of url and corresponding POST operationIds:
+* Url: /foo/{someResource}/activate
+* OperationId: SomeResourceTypes_ActivateResource
+
+**Bad Examples**: Examples of url and corresponding POST operationIds:
+* Url: /foo/{someResource}/activate
+* OperationId: SomeResourceTypes_StartResource
+
+**Impact on generated code**: Method generated for the POST operation will be named as indicated after the '__underscore__'. For eg., OperationId *SomeResourceTypes_ActivateResource* will generate a method named *ActivateResource*
+
+Links: [Index](#index) | [Error vs. Warning](#error-vs-warning) | [Automated Rules](#automated-rules) | [RPC](#rpc-violations): [Errors](#rpc-errors) or [Warnings](#rpc-warnings) | [SDK](#sdk-violations): [Errors](#sdk-errors) or [Warnings](#sdk-warnings)
+
+### <a name="S2009" />S2009 ArraySchemaMustHaveItems
+**Output Message**: Please provide an items property for array type: '{0}'.
+
+**Description**: A schema of `array` type must always contain an `items` property. without it, AutoRest will fail to generate an SDK.
+
+**Why the rule is important**: AutoRest needs to know the type of item contained in the array so that it can correctly generate the corresponding code.
+
+**How to fix the violation**: Correctly specify the `items` section for given array type. The items can be of any primitive type or can be a reference to another object type.
+
+**Good Examples**:
+Example with primitive type.
+```
+"MyPrimitiveArray":{
+  "type": "array",
+  "items": {
+    type: "number"
+  }
+}
+```
+Example with object reference type
+```
+"MyComplexArray":{
+  "type": "array",
+  "items": {
+    "$ref": "#/definitions/MySimpleObject"
+  }
+}
+```
+
+Links: [Index](#index) | [Error vs. Warning](#error-vs-warning) | [Automated Rules](#automated-rules) | [RPC](#rpc-violations): [Errors](#rpc-errors) or [Warnings](#rpc-warnings) | [SDK](#sdk-violations): [Errors](#sdk-errors) or [Warnings](#sdk-warnings)
+
+### <a name="R3011" />R3011 ControlCharactersNotAllowed
+**Output Message**: May not contain control characters:  Characters:'{0}' in:'{1}'
+
+**Description**: Verifies whether if a specification does not have any control characters in it.
+Control characters are not allowed in a specification.
+
+**Why the rule is important**: Per ARM guidelines, a specification must not contain any control characters.
+
+**How to fix the violation**: Remove the control characters in the specification.
+
+**Examples**: A list of control characters in unicode can be found [here](https://unicode-table.com/en/).
 
 Links: [Index](#index) | [Error vs. Warning](#error-vs-warning) | [Automated Rules](#automated-rules) | [RPC](#rpc-violations): [Errors](#rpc-errors) or [Warnings](#rpc-warnings) | [SDK](#sdk-violations): [Errors](#sdk-errors) or [Warnings](#sdk-warnings)
