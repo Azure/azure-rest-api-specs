@@ -210,7 +210,10 @@
             "in": "body",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/EHNamespace"
+              "$ref": "#/definitions/EHNamespace",
+			  "required": [
+				"location"
+			  ]
             },
             "description": "Parameters for creating a namespace resource."
           },
@@ -394,7 +397,7 @@
         "tags": [
           "Namespaces"
         ],
-        "operationId": "Namespaces_ListAuthorizationRules",
+        "operationId": "AuthorizationRules_ListByNamespace",
         "x-ms-examples": {
           "ListAuthorizationRules": { "$ref": "../examples/NameSpaces/EHNameSpaceAutorizationRuleListAll.json" }
         },
@@ -855,7 +858,7 @@
         "tags": [
           "EventHubs"
         ],
-        "operationId": "EventHubs_ListAuthorizationRules",
+        "operationId": "AuthorizationRules_ListByEventHub",
         "x-ms-examples": {
           "EventHubAutorizationRuleListAll": { "$ref": "../examples/EventHubs/EHEventHubAutorizationRuleListAll.json" }
         },
@@ -1372,9 +1375,6 @@
           "description": "Resource tags"
         }
       },
-      "required": [
-        "location"
-      ],
       "allOf": [
         {
           "$ref": "#/definitions/Resource"
@@ -1386,14 +1386,17 @@
       "properties": {
         "id": {
           "type": "string",
+		  "readOnly": true,
           "description": "Resource Id"
         },
         "name": {
           "type": "string",
+		  "readOnly": true,
           "description": "Resource name"
         },
         "type": {
           "type": "string",
+		  "readOnly": true,
           "description": "Resource type"
         }
       },
