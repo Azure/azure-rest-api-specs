@@ -41,6 +41,11 @@
 				],
 				"operationId": "AuthorizationServers_ListByService",
 				"description": "Lists a collection of authorization servers defined within a service instance.",
+				"x-ms-examples": {
+					"ApiManagementListAuthorizationServers": {
+						"$ref": "../examples/ApiManagementListAuthorizationServers.json"
+					}
+				},
 				"parameters": [
 					{
 						"$ref": "./apimanagement.json#/parameters/ResourceGroupNameParameter"
@@ -89,6 +94,11 @@
 				],
 				"operationId": "AuthorizationServers_Get",
 				"description": "Gets the details of the authorization server specified by its identifier.",
+				"x-ms-examples": {
+					"ApiManagementGetAuthorizationServer": {
+						"$ref": "../examples/ApiManagementGetAuthorizationServer.json"
+					}
+				},
 				"parameters": [
 					{
 						"$ref": "./apimanagement.json#/parameters/ResourceGroupNameParameter"
@@ -133,6 +143,11 @@
 				],
 				"operationId": "AuthorizationServers_CreateOrUpdate",
 				"description": "Creates new authorization server or updates an existing authorization server.",
+				"x-ms-examples": {
+					"ApiManagementCreateAuthorizationServer": {
+						"$ref": "../examples/ApiManagementCreateAuthorizationServer.json"
+					}
+				},
 				"parameters": [
 					{
 						"$ref": "./apimanagement.json#/parameters/ResourceGroupNameParameter"
@@ -237,6 +252,11 @@
 				],
 				"operationId": "AuthorizationServers_Delete",
 				"description": "Deletes specific authorization server instance.",
+				"x-ms-examples": {
+					"ApiManagementDeleteAuthorizationServer": {
+						"$ref": "../examples/ApiManagementDeleteAuthorizationServer.json"
+					}
+				},
 				"parameters": [
 					{
 						"$ref": "./apimanagement.json#/parameters/ResourceGroupNameParameter"
@@ -351,7 +371,7 @@
 							"modelAsString": false
 						}
 					},
-					"description": "HTTP verbs supported by the authorization endpoint. GET must be always present. POST is optional."
+					"description": "HTTP verbs supported by the authorization endpoint. `GET` must be always present. `POST` is optional."
 				},
 				"clientAuthenticationMethod": {
 					"type": "array",
@@ -366,7 +386,7 @@
 							"modelAsString": false
 						}
 					},
-					"description": "Method of authentication supported by the token endpoint of this authorization server. Possible values are Basic and/or Body. When Body is specified, client credentials and other parameters are passed within the request body in the application/x-www-form-urlencoded format."
+					"description": "Method of authentication supported by the token endpoint of this authorization server. Possible values are Basic and/or Body. When Body is specified, client credentials and other parameters are passed within the request body in the `application/x-www-form-urlencoded` format."
 				},
 				"tokenBodyParameters": {
 					"type": "array",
