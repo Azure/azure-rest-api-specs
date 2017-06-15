@@ -3,7 +3,7 @@
   "info": {
     "title": "Relay API",
     "description": "Use these API to manage Azure Relay resources through Azure Resources Manager.",
-    "version": "2016-07-01",
+    "version": "2017-04-01",
     "x-ms-code-generation-settings": { "name": "RelayManagementClient" }
   },
   "host": "management.azure.com",
@@ -209,7 +209,10 @@
             "in": "body",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/RelayNamespace"
+              "$ref": "#/definitions/RelayNamespace",
+              "required": [
+                "location"
+              ]
             },
             "description": "Parameters supplied to create a Namespace Resource."
           },
@@ -328,6 +331,9 @@
           "Namespaces"
         ],
         "operationId": "Namespaces_Update",
+        "x-ms-examples": {
+          "RelayNameSpaceUpdate": { "$ref": "../examples/NameSpaces/RelayNameSpaceUpdate.json" }
+        },
         "description": "Creates or updates a namespace. Once created, this namespace's resource manifest is immutable. This operation is idempotent.",
         "parameters": [
           {
@@ -341,7 +347,7 @@
             "in": "body",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/RelayNamespaceUpdateParameter"
+              "$ref": "#/definitions/RelayNamespace"
             },
             "description": "Parameters for updating a namespace resource."
           },
@@ -570,7 +576,7 @@
           "200": {
             "description": "Successful",
             "schema": {
-              "$ref": "#/definitions/AuthorizationRuleKeys"
+              "$ref": "#/definitions/AccessKeys"
             }
           },
           "default": {
@@ -607,7 +613,7 @@
             "in": "body",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/RegenerateKeysParameters"
+              "$ref": "#/definitions/RegenerateAccessKeyParameters"
             },
             "description": "Parameters supplied to regenerate Auth Rule."
           },
@@ -622,7 +628,7 @@
           "200": {
             "description": "Successful",
             "schema": {
-              "$ref": "#/definitions/AuthorizationRuleKeys"
+              "$ref": "#/definitions/AccessKeys"
             }
           },
           "default": {
@@ -1028,7 +1034,7 @@
           "200": {
             "description": "Request to retirve ConnectionStrings to the HybridConnection succeeded",
             "schema": {
-              "$ref": "#/definitions/AuthorizationRuleKeys"
+              "$ref": "#/definitions/AccessKeys"
             }
           },
           "default": {
@@ -1068,7 +1074,7 @@
             "in": "body",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/RegenerateKeysParameters"
+              "$ref": "#/definitions/RegenerateAccessKeyParameters"
             },
             "description": "Parameters supplied to regenerate Auth Rule."
           },
@@ -1083,7 +1089,7 @@
           "200": {
             "description": "Request to regenerate ConnectionStrings to HybridConnection succeeded",
             "schema": {
-              "$ref": "#/definitions/AuthorizationRuleKeys"
+              "$ref": "#/definitions/AccessKeys"
             }
           },
           "default": {
@@ -1492,7 +1498,7 @@
           "200": {
             "description": "Successful",
             "schema": {
-              "$ref": "#/definitions/AuthorizationRuleKeys"
+              "$ref": "#/definitions/AccessKeys"
             }
           },
           "default": {
@@ -1532,7 +1538,7 @@
             "in": "body",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/RegenerateKeysParameters"
+              "$ref": "#/definitions/RegenerateAccessKeyParameters"
             },
             "description": "Parameters supplied to regenerate Auth Rule."
           },
@@ -1547,7 +1553,7 @@
           "200": {
             "description": "Successful",
             "schema": {
-              "$ref": "#/definitions/AuthorizationRuleKeys"
+              "$ref": "#/definitions/AccessKeys"
             }
           },
           "default": {
@@ -1575,9 +1581,6 @@
           "description": "Resource tags"
         }
       },
-      "required": [
-        "location"
-      ],
       "allOf": [
         {
           "$ref": "#/definitions/Resource"
@@ -1626,8 +1629,37 @@
       "properties": {
         "properties": {
           "x-ms-client-flatten": true,
-          "$ref": "#/definitions/HybridConnectionProperties",
-          "description": "Properties of HybridConnection"
+          "properties": {
+            "createdAt": {
+              "readOnly": true,
+              "format": "date-time",
+              "type": "string",
+              "description": "The time the HybridConnection was created."
+            },
+            "updatedAt": {
+              "readOnly": true,
+              "format": "date-time",
+              "type": "string",
+              "description": "The time the namespace was updated."
+            },
+            "listenerCount": {
+              "readOnly": true,
+              "format": "int32",
+              "type": "integer",
+              "minimum": 0,
+              "maximum": 25,
+              "description": "The number of listeners for this HybridConnection. min : 1 and max:25 supported"
+            },
+            "requiresClientAuthorization": {
+              "type": "boolean",
+              "description": "true if client authorization is needed for this HybridConnection; otherwise, false."
+            },
+            "userMetadata": {
+              "type": "string",
+              "description": "usermetadata is a placeholder to store user-defined string data for the HybridConnection endpoint.e.g. it can be used to store  descriptive data, such as list of teams and their contact information also user-defined configuration settings can be stored."
+            }
+          },
+          "description": "Properties of the HybridConnection."
         }
       },
       "description": "Description of HybridConnection Resource.",
@@ -1636,39 +1668,6 @@
           "$ref": "#/definitions/Resource"
         }
       ]
-    },
-    "HybridConnectionProperties": {
-      "properties": {
-        "createdAt": {
-          "type": "string",
-          "format": "date-time",
-          "readOnly": true,
-          "description": "The time the HybridConnection was created."
-        },
-        "updatedAt": {
-          "type": "string",
-          "format": "date-time",
-          "readOnly": true,
-          "description": "The time the namespace was updated."
-        },
-        "listenerCount": {
-          "format": "int32",
-          "type": "integer",
-          "readOnly": true,
-          "minimum": 1,
-          "maximum": 25,
-          "description": "The number of listeners for this HybridConnection. min : 1 and max:25 supported"
-        },
-        "requiresClientAuthorization": {
-          "type": "boolean",
-          "description": "true if client authorization is needed for this HybridConnection; otherwise, false."
-        },
-        "userMetadata": {
-          "type": "string",
-          "description": "usermetadata is a placeholder to store user-defined string data for the HybridConnection endpoint.e.g. it can be used to store  descriptive data, such as list of teams and their contact information also user-defined configuration settings can be stored."
-        }
-      },
-      "description": "Properties of the HybridConnection."
     },
     "WcfRelaysListResult": {
       "properties": {
@@ -1690,8 +1689,58 @@
       "properties": {
         "properties": {
           "x-ms-client-flatten": true,
-          "$ref": "#/definitions/WcfRelayProperties",
-          "description": "Properties of WcfRelay"
+          "properties": {
+            "isDynamic": {
+              "readOnly": true,
+              "type": "boolean",
+              "description": "true if the relay is dynamic; otherwise, false."
+            },
+            "createdAt": {
+              "readOnly": true,
+              "format": "date-time",
+              "type": "string",
+              "description": "The time the WCFRelay was created."
+            },
+            "updatedAt": {
+              "readOnly": true,
+              "format": "date-time",
+              "type": "string",
+              "description": "The time the namespace was updated."
+            },
+            "listenerCount": {
+              "readOnly": true,
+              "format": "int32",
+              "type": "integer",
+              "minimum": 0,
+              "maximum": 25,
+              "description": "The number of listeners for this relay. min :1 and max:25 supported"
+            },
+            "relayType": {
+              "type": "string",
+              "description": "WCFRelay Type.",
+              "enum": [
+                "NetTcp",
+                "Http"
+              ],
+              "x-ms-enum": {
+                "name": "Relaytype",
+                "modelAsString": false
+              }
+            },
+            "requiresClientAuthorization": {
+              "type": "boolean",
+              "description": "true if client authorization is needed for this relay; otherwise, false."
+            },
+            "requiresTransportSecurity": {
+              "type": "boolean",
+              "description": "true if transport security is needed for this relay; otherwise, false."
+            },
+            "userMetadata": {
+              "type": "string",
+              "description": "usermetadata is a placeholder to store user-defined string data for the HybridConnection endpoint.e.g. it can be used to store  descriptive data, such as list of teams and their contact information also user-defined configuration settings can be stored."
+            }
+          },
+          "description": "Properties of the WcfRelay Properties."
         }
       },
       "description": "Description of WcfRelays Resource.",
@@ -1700,58 +1749,6 @@
           "$ref": "#/definitions/Resource"
         }
       ]
-    },
-    "WcfRelayProperties": {
-      "properties": {
-        "relayType": {
-          "type": "string",
-          "description": "WCFRelay Type.",
-          "enum": [
-            "NetTcp",
-            "Http"
-          ],
-          "x-ms-enum": {
-            "name": "Relaytype",
-            "modelAsString": true
-          }
-        },
-        "createdAt": {
-          "type": "string",
-          "format": "date-time",
-          "readOnly": true,
-          "description": "The time the WCFRelay was created."
-        },
-        "updatedAt": {
-          "type": "string",
-          "format": "date-time",
-          "readOnly": true,
-          "description": "The time the namespace was updated."
-        },
-        "listenerCount": {
-          "format": "int32",
-          "type": "integer",
-          "readOnly": true,
-          "description": "The number of listeners for this relay. min : 1 and max:25 supported"
-        },
-        "requiresClientAuthorization": {
-          "type": "boolean",
-          "description": "true if client authorization is needed for this relay; otherwise, false."
-        },
-        "requiresTransportSecurity": {
-          "type": "boolean",
-          "description": "true if transport security is needed for this relay; otherwise, false."
-        },
-        "isDynamic": {
-          "type": "boolean",
-          "readOnly": true,
-          "description": "true if the relay is dynamic; otherwise, false."
-        },
-        "userMetadata": {
-          "type": "string",
-          "description": "usermetadata is a placeholder to store user-defined string data for the HybridConnection endpoint.e.g. it can be used to store  descriptive data, such as list of teams and their contact information also user-defined configuration settings can be stored."
-        }
-      },
-      "description": "Properties of the WcfRelay Properties."
     },
     "RelayNamespaceListResult": {
       "properties": {
@@ -1777,8 +1774,36 @@
         },
         "properties": {
           "x-ms-client-flatten": true,
-          "$ref": "#/definitions/RelayNamespaceProperties",
-          "description": "Description of Relay Namespace"
+          "properties": {
+            "provisioningState": {
+              "readOnly": true,
+              "type": "string",
+              "description": "Provisioning state of the namespace."
+            },
+            "createdAt": {
+              "readOnly": true,
+              "format": "date-time",
+              "type": "string",
+              "description": "The time the namespace was created."
+            },
+            "updatedAt": {
+              "readOnly": true,
+              "format": "date-time",
+              "type": "string",
+              "description": "The time the namespace was updated."
+            },
+            "serviceBusEndpoint": {
+              "readOnly": true,
+              "type": "string",
+              "description": "Endpoint you can use to perform Service Bus operations."
+            },
+            "metricId": {
+              "readOnly": true,
+              "type": "string",
+              "description": "Identifier for Azure Insights metrics"
+            }
+          },
+          "description": "Properties of the Namespace."
         }
       },
       "description": "Description of a Namespace resource.",
@@ -1787,38 +1812,6 @@
           "$ref": "#/definitions/TrackedResource"
         }
       ]
-    },
-    "RelayNamespaceProperties": {
-      "properties": {
-        "provisioningState": {
-          "type": "string",
-          "readOnly": true,
-          "description": "Provisioning state of the namespace."
-        },
-        "createdAt": {
-          "type": "string",
-          "format": "date-time",
-          "readOnly": true,
-          "description": "The time the namespace was created."
-        },
-        "updatedAt": {
-          "type": "string",
-          "format": "date-time",
-          "readOnly": true,
-          "description": "The time the namespace was updated."
-        },
-        "serviceBusEndpoint": {
-          "type": "string",
-          "readOnly": true,
-          "description": "Endpoint you can use to perform Service Bus operations."
-        },
-        "metricId": {
-          "type": "string",
-          "readOnly": true,
-          "description": "Identifier for Azure Insights metrics"
-        }
-      },
-      "description": "Properties of the Namespace."
     },
     "Sku": {
       "type": "object",
@@ -1831,7 +1824,7 @@
           ],
           "x-ms-enum": {
             "name": "SkuName",
-            "modelAsString": true
+            "modelAsString": false
           }
         },
         "tier": {
@@ -1842,14 +1835,13 @@
           ],
           "x-ms-enum": {
             "name": "SkuTier",
-            "modelAsString": true
+            "modelAsString": false
           }
         }
       },
       "description": "Sku of the Namespace.",
       "required": [
-        "name",
-        "tier"
+        "name"
       ]
     },
     "AuthorizationRuleListResult": {
@@ -1872,8 +1864,29 @@
       "properties": {
         "properties": {
           "x-ms-client-flatten": true,
-          "$ref": "#/definitions/AuthorizationRuleProperties",
-          "description": "Authorization Rule properties"
+          "properties": {
+            "rights": {
+              "type": "array",
+              "uniqueItems": true,
+              "items": {
+                "type": "string",
+                "enum": [
+                  "Manage",
+                  "Send",
+                  "Listen"
+                ],
+                "x-ms-enum": {
+                  "name": "AccessRights",
+                  "modelAsString": false
+                }
+              },
+              "description": "The rights associated with the rule."
+            }
+          },
+          "required": [
+            "rights"
+          ],
+          "description": "AuthorizationRule properties."
         }
       },
       "required": [
@@ -1886,32 +1899,7 @@
       ],
       "description": "Description of a Namespace AuthorizationRules."
     },
-    "AuthorizationRuleProperties": {
-      "properties": {
-        "rights": {
-          "type": "array",
-          "uniqueItems": true,
-          "items": {
-            "type": "string",
-            "enum": [
-              "Manage",
-              "Send",
-              "Listen"
-            ],
-            "x-ms-enum": {
-              "name": "AccessRights",
-              "modelAsString": true
-            }
-          },
-          "description": "The rights associated with the rule."
-        }
-      },
-      "required": [
-        "rights"
-      ],
-      "description": "AuthorizationRule properties."
-    },
-    "AuthorizationRuleKeys": {
+    "AccessKeys": {
       "properties": {
         "primaryConnectionString": {
           "type": "string",
@@ -1936,36 +1924,29 @@
       },
       "description": "Namespace/Relay Connection String"
     },
-    "RegenerateKeysParameters": {
+    "RegenerateAccessKeyParameters": {
       "properties": {
-        "policyKey": {
+        "keyType": {
           "type": "string",
-          "description": "Key that needs to be regenerated.",
+          "description": "The access key to regenerate.",
           "enum": [
             "PrimaryKey",
             "SecondaryKey"
           ],
           "x-ms-enum": {
-            "name": "policyKey",
-            "modelAsString": true
+            "name": "KeyType",
+            "modelAsString": false
           }
+        },
+        "key": {
+          "type": "string",
+          "description": "Optional, if the key value provided, is set for KeyType or autogenerated Key value set for keyType"
         }
       },
-      "description": "Parameters supplied to the Regenerate Authorization Rule operation."
-    },
-    "ErrorResponse": {
-      "description": "Error reponse indicates Relay service is not able to process the incoming request. The reason is provided in the error message.",
-      "type": "object",
-      "properties": {
-        "code": {
-          "description": "Error code.",
-          "type": "string"
-        },
-        "message": {
-          "description": "Error message indicating why the operation failed.",
-          "type": "string"
-        }
-      }
+      "required": [
+        "keyType"
+      ],
+      "description": "Parameters supplied to the Regenerate Authorization Rule operation, specifies which key neeeds to be reset."
     },
     "UnavailableReason": {
       "type": "string",
@@ -1997,6 +1978,11 @@
     },
     "CheckNameAvailabilityResult": {
       "properties": {
+        "message": {
+          "type": "string",
+          "readOnly": true,
+          "description": "The detailed info regarding the reason associated with the namespace."
+        },
         "nameAvailable": {
           "type": "boolean",
           "description": "Value indicating namespace is availability, true if the namespace is available; otherwise, false."
@@ -2004,36 +1990,15 @@
         "reason": {
           "$ref": "#/definitions/UnavailableReason",
           "description": "The reason for unavailability of a namespace."
-        },
-        "message": {
-          "type": "string",
-          "readOnly": true,
-          "description": "The detailed info regarding the reason associated with the namespace."
         }
       },
       "description": "Description of a Check Name availability request properties."
     },
-    "RelayNamespaceUpdateParameter": {
-      "properties": {
-        "tags": {
-          "type": "object",
-          "additionalProperties": {
-            "type": "string"
-          },
-          "description": "Resource tags"
-        },
-        "sku": {
-          "$ref": "#/definitions/Sku",
-          "description": "The sku of the created namespace"
-        }
-      },
-      "description": "Parameters supplied to the Patch Namespace operation."
-    },
     "OperationListResult": {
-      "description": "Result of the request to list EventHub operations. It contains a list of operations and a URL link to get the next set of results.",
+      "description": "Result of the request to list Relay operations. It contains a list of operations and a URL link to get the next set of results.",
       "properties": {
         "value": {
-          "description": "List of EventHub operations supported by the Microsoft.EventHub resource provider.",
+          "description": "List of Relay operations supported by resource provider.",
           "type": "array",
           "readOnly": true,
           "items": {
@@ -2048,7 +2013,7 @@
       }
     },
     "Operation": {
-      "description": "A EventHub REST API operation",
+      "description": "A Relay REST API operation",
       "type": "object",
       "properties": {
         "name": {
@@ -2060,7 +2025,7 @@
           "description": "The object that represents the operation.",
           "properties": {
             "provider": {
-              "description": "Service provider: Microsoft.EventHub",
+              "description": "Service provider: Relay",
               "type": "string",
               "readOnly": true
             },
@@ -2075,6 +2040,20 @@
               "readOnly": true
             }
           }
+        }
+      }
+    },
+    "ErrorResponse": {
+      "description": "Error reponse indicates Relay service is not able to process the incoming request. The reason is provided in the error message.",
+      "type": "object",
+      "properties": {
+        "code": {
+          "description": "Error code.",
+          "type": "string"
+        },
+        "message": {
+          "description": "Error message indicating why the operation failed.",
+          "type": "string"
         }
       }
     }
