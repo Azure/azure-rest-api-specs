@@ -21,7 +21,7 @@
         "tags": [
           "ServerCommunicationLinks"
         ],
-        "operationId": "CommunicationLinks_Delete",
+        "operationId": "ServerCommunicationLinks_Delete",
         "description": "Deletes a server communication link.",
         "x-ms-examples": {
           "Delete a server communication link": { "$ref": "../examples/ServerCommunicationLinkDelete.json" }
@@ -57,7 +57,7 @@
         "tags": [
           "ServerCommunicationLinks"
         ],
-        "operationId": "CommunicationLinks_Get",
+        "operationId": "ServerCommunicationLinks_Get",
         "description": "Returns a server communication link.",
         "x-ms-examples": {
           "Get a server communication link": { "$ref": "../examples/ServerCommunicationLinkGet.json" }
@@ -96,7 +96,7 @@
         "tags": [
           "ServerCommunicationLinks"
         ],
-        "operationId": "CommunicationLinks_Create",
+        "operationId": "ServerCommunicationLinks_Create",
         "description": "Creates a server communication link.",
         "x-ms-examples": {
           "Create a server communication link": { "$ref": "../examples/ServerCommunicationLinkCreate.json" }
@@ -150,7 +150,7 @@
         "tags": [
           "ServerCommunicationLinks"
         ],
-        "operationId": "CommunicationLinks_ListByServer",
+        "operationId": "ServerCommunicationLinks_ListByServer",
         "description": "Gets a list of server communication links.",
         "x-ms-examples": {
           "List server communication links": { "$ref": "../examples/ServerCommunicationLinkList.json" }
@@ -201,7 +201,7 @@
         }
       },
       "required": ["partnerServer"],
-      "description": "The properties of an Server communication link."
+      "description": "The properties of a server communication link."
     },
     "ServerCommunicationLink": {
       "properties": {
@@ -223,7 +223,7 @@
       },
       "allOf": [
         {
-          "$ref": "#/definitions/Resource"
+          "$ref": "#/definitions/ProxyResource"
         }
       ],
       "description": "Server communication link."
@@ -235,7 +235,7 @@
           "items": {
             "$ref": "#/definitions/ServerCommunicationLink"
           },
-          "description": "The list of Server communication links."
+          "description": "The list of server communication links."
         }
       },
       "description": "A list of server communication links."
@@ -260,6 +260,14 @@
         }
       },
       "x-ms-azure-resource": true
+    },
+    "ProxyResource":{
+      "description":"ARM proxy resource.",
+      "allOf":[
+        {
+          "$ref":"#/definitions/Resource"
+        }
+      ]
     }
   },
   "parameters": {

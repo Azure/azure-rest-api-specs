@@ -21,7 +21,7 @@
         "tags": [
           "GeoBackupPolicies"
         ],
-        "operationId": "GeoBackupPolicies_CreateOrUpdate",
+        "operationId": "Databases_CreateOrUpdateGeoBackupPolicy",
         "description": "Updates a database geo backup policy.",
         "x-ms-examples": {
           "Update geo backup policy": { "$ref": "../examples/GeoBackupPoliciesCreateOrUpdate.json" }
@@ -87,7 +87,7 @@
         "tags": [
           "GeoBackupPolicies"
         ],
-        "operationId": "GeoBackupPolicies_Get",
+        "operationId": "Databases_GetGeoBackupPolicy",
         "description": "Gets a geo backup policy.",
         "x-ms-examples": {
           "Get geo backup policy": { "$ref": "../examples/GeoBackupPoliciesGet.json" }
@@ -135,7 +135,7 @@
         "tags": [
           "GeoBackupPolicies"
         ],
-        "operationId": "GeoBackupPolicies_ListByDatabase",
+        "operationId": "Databases_ListGeoBackupPolicies",
         "description": "Returns a list of geo backup policies.",
         "x-ms-examples": {
           "List geo backup policies": { "$ref": "../examples/GeoBackupPoliciesList.json" }
@@ -214,7 +214,7 @@
       ],
       "allOf": [
         {
-          "$ref": "#/definitions/Resource"
+          "$ref": "#/definitions/ProxyResource"
         }
       ],
       "description": "A database geo backup policy."
@@ -251,6 +251,14 @@
         }
       },
       "x-ms-azure-resource": true
+    },
+    "ProxyResource":{
+      "description":"ARM proxy resource.",
+      "allOf":[
+        {
+          "$ref":"#/definitions/Resource"
+        }
+      ]
     }
   },
   "parameters": {
@@ -282,14 +290,6 @@
       "required": true,
       "type": "string",
       "description": "The name of the server.",
-      "x-ms-parameter-location": "method"
-    },
-    "DatabaseExpandParameter": {
-      "name": "$expand",
-      "in": "query",
-      "required": false,
-      "type": "string",
-      "description": "A comma separated list of child objects to expand in the response. Possible properties: serviceTierAdvisors, transparentDataEncryption.",
       "x-ms-parameter-location": "method"
     }
   },
