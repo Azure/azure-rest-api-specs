@@ -632,7 +632,6 @@ Links: [Index](#index) | [Error vs. Warning](#error-vs-warning) | [Automated Rul
             "description": "The name of the resource group."
           },
       ....
->>>>>>> Add documentation for automated guidelines for RPC & SDK Violation category
 ```
 
 Links: [Index](#index) | [Error vs. Warning](#error-vs-warning) | [Automated Rules](#automated-rules) | [RPC](#rpc-violations): [Errors](#rpc-errors) or [Warnings](#rpc-warnings) | [SDK](#sdk-violations): [Errors](#sdk-errors) or [Warnings](#sdk-warnings)
