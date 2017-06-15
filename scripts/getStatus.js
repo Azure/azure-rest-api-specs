@@ -87,7 +87,7 @@ function executePromisesSequentially(promiseFactories) {
 //runs the linter on a given swagger spec.
 function runLinter(swagger) {
   return new Promise((res) => {
-    let cmd = 'autorest --azure-arm=true --input-file=' + swagger + ' --message-format=json';
+    let cmd = 'autorest --azure-validator=true --input-file=' + swagger + ' --message-format=json';
     console.log(`\t- Running Linter.`);
     exec(cmd, { encoding: 'utf8', maxBuffer: 1024 * 1024 * 64 }, (err, stdout, stderr) => {
       let resultObject = [];

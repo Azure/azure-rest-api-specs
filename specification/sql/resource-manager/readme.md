@@ -43,12 +43,15 @@ input-file:
 - Microsoft.Sql/2014-04-01/backups.json
 - Microsoft.Sql/2014-04-01/capabilities.json
 - Microsoft.Sql/2014-04-01/firewallRules.json
+- Microsoft.Sql/2014-04-01/geoBackupPolicies.json
 - Microsoft.Sql/2014-04-01/importExport.json
+- Microsoft.Sql/2014-04-01/metrics.json
 - Microsoft.Sql/2014-04-01/operations.json
 - Microsoft.Sql/2014-04-01/replicationLinks.json
 - Microsoft.Sql/2014-04-01/sql.core.json
 - Microsoft.Sql/2014-04-01/serverAzureADAdministrators.json
 - Microsoft.Sql/2014-04-01/databaseSecurityAlertPolicies.json
+- Microsoft.Sql/2014-04-01/serverCommunicationLinks.json
 - Microsoft.Sql/2014-04-01/serviceObjectives.json
 - Microsoft.Sql/2014-04-01/usages.json
 - Microsoft.Sql/2015-05-01-preview/blobAuditingPolicies.json
@@ -57,6 +60,7 @@ input-file:
 - Microsoft.Sql/2015-05-01-preview/servers.json
 - Microsoft.Sql/2015-05-01-preview/serverKeys.json
 - Microsoft.Sql/2015-05-01-preview/encryptionProtectors.json
+
 ```
  
 # Tag: 2014-04-01

@@ -590,17 +590,18 @@
         "properties": {
           "description": "Properties of operation, include metric specifications.",
           "x-ms-client-flatten": true,
-          "x-ms-client-name": "OperationPerperties",
-          "$ref" : "#/definitions/OperationPerperties"
+          "x-ms-client-name": "OperationProperties",
+          "$ref" : "#/definitions/OperationProperties"
         }
       }
     },
-    "OperationPerperties":
+    "OperationProperties":
     {
       "description": "Properties of operation, include metric specifications.",
       "properties": {
         "serviceSpecification": {
-          "$ref" : "#/definitions/ServiceSpecification"
+          "$ref" : "#/definitions/ServiceSpecification",
+          "description": "One property of operation, include metric specifications."
         }
       }
     },
@@ -865,6 +866,122 @@
       "required": [ "keySource" ],
       "description": "The encryption settings on the storage account."
     },
+    "VirtualNetworkRule": {
+      "properties": {
+        "id": {
+          "type": "string",
+          "x-ms-client-name": "VirtualNetworkResourceId",
+          "description": "A URL of vnet, subnet, classicVnet or classicSubnet."
+        },
+        "action": {
+          "type": "string",
+          "enum": [
+            "Allow"
+          ],
+          "x-ms-enum": {
+            "name": "Action",
+            "modelAsString": false
+          },
+          "default": "Allow",
+          "description": "The action of virtual network ACL rule."
+        },
+        "state": {
+          "type": "string",
+          "enum": [
+            "provisioning",
+            "deprovisioning",
+            "succeeded",
+            "failed",
+            "networkSourceDeleted"
+          ],
+          "x-ms-enum": {
+            "name": "State",
+            "modelAsString": false
+          },
+          "description": "Gets the state of virtual network ACL rule."
+        }
+      },
+      "required": [ "id" ],
+      "description": "Virtual Network rule."
+    },
+    "IPRule": {
+      "properties": {
+        "value": {
+          "type": "string",
+          "x-ms-client-name": "IPAddressOrRange",
+          "description": "Specifies the IP or IP range in CIDR format. Only IPV4 address is allowed."
+        },
+        "action": {
+          "type": "string",
+          "enum": [
+            "Allow"
+          ],
+          "x-ms-enum": {
+            "name": "Action",
+            "modelAsString": false
+          },
+          "default": "Allow",
+          "description": "The action of IP ACL rule."
+        }
+      },
+      "required": [
+        "value"
+      ],
+      "description": "IP rule with specific IP or IP range in CIDR format."
+    },
+    "StorageNetworkAcls": {
+      "properties": {
+        "bypass": {
+          "type": "string",
+          "enum": [
+            "None",
+            "Logging",
+            "Metrics",
+            "AzureServices"
+          ],
+          "x-ms-enum": {
+            "name": "Bypass",
+            "modelAsString": true
+          },
+          "x-ms-client-name": "Bypass",
+          "default": "AzureServices",
+          "description": "Specifies whether traffic is bypassed for Logging/Metrics/AzureServices. Possible values are any combination of Logging|Metrics|AzureServices (For example, \"Logging, Metrics\"), or None to bypass none of those traffics."
+        },
+        "virtualNetworkRules": {
+          "type": "array",
+          "items": {
+            "description": "Virtual Network rule.",
+            "$ref": "#/definitions/VirtualNetworkRule"
+          },
+          "description": "Sets the virtual network ACL rules"
+        },
+        "ipRules": {
+          "type": "array",
+          "items": {
+            "description": "IP rule with specific IP or IP range in CIDR format.",
+            "$ref": "#/definitions/IPRule"
+          },
+          "description": "Sets the IP ACL rules"
+        },
+        "defaultAction": {
+          "type": "string",
+          "enum": [
+            "Allow",
+            "Deny"
+          ],
+          "x-ms-enum": {
+            "name": "DefaultAction",
+            "modelAsString": false
+          },
+          "default": "Allow",
+          "description": "Specifies the default action of allow or deny when no other rules match."
+        }
+      },
+      "required": [
+        "defaultAction"
+      ],
+      "description": "Network ACL"
+    },
     "StorageAccountPropertiesCreateParameters": {
       "properties": {
         "customDomain": {
@@ -874,6 +991,10 @@
         "encryption": {
           "$ref": "#/definitions/Encryption",
           "description": "Provides the encryption settings on the account. If left unspecified the account encryption settings will remain the same. The default setting is unencrypted."
+        },
+        "networkAcls": {
+          "$ref": "#/definitions/StorageNetworkAcls",
+          "description": "Network ACL"
         },
         "accessTier": {
           "type": "string",
@@ -1098,6 +1219,11 @@
           "default": false,
           "x-ms-client-name": "EnableHttpsTrafficOnly",
           "description": "Allows https traffic only to storage service if sets to true."
+        },
+        "networkAcls": {
+          "$ref": "#/definitions/StorageNetworkAcls",
+          "description": "Network ACL",
+          "readOnly": true
         }
       },
       "description": "Properties of the storage account."
@@ -1232,6 +1358,10 @@
           "default": false,
           "x-ms-client-name": "EnableHttpsTrafficOnly",
           "description": "Allows https traffic only to storage service if sets to true."
+        },
+        "networkAcls": {
+          "description": "Network ACL",
+          "$ref": "#/definitions/StorageNetworkAcls"
         }
       },
       "description": "The parameters used when updating a storage account."
@@ -1383,6 +1513,10 @@
             "c",
             "o"
           ],
+          "x-ms-enum": {
+            "name": "SignedResourceTypes",
+            "modelAsString": true
+          },
           "x-ms-client-name": "ResourceTypes",
           "description": "The signed resource types that are accessible with the account SAS. Service (s): Access to service-level APIs; Container (c): Access to container-level APIs; Object (o): Access to object-level APIs for blobs, queue messages, table entities, and files."
         },

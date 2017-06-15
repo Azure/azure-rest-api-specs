@@ -29,7 +29,18 @@ These are the global settings for the Batch API.
 title: Batch
 description: Batch Client
 openapi-type: data-plane
-tag: 2017-05-01.5.0
+tag: 2017-06-01.5.1
+
+```
+
+
+# Tag: 2017-06-01.5.1
+
+These settings apply only when `--tag=2017-06-01.5.1` is specified on the command line.
+
+``` yaml $(tag) == '2017-06-01.5.1'
+input-file:
+- Microsoft.Batch/2017-06-01.5.1/BatchService.json
 
 ```
 

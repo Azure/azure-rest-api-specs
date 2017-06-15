@@ -185,7 +185,7 @@
                 "in": "body",
                 "required": true,
                 "schema": {
-                    "$ref": "#/definitions/ServiceDiagnosticSettingsResource"
+                    "$ref": "#/definitions/ServiceDiagnosticSettingsResourcePatch"
                 },
                 "description": "Parameters supplied to the operation."
             }
@@ -351,6 +351,21 @@
         }
       },
       "description": "Description of a service diagnostic setting"
+    },
+    "ServiceDiagnosticSettingsResourcePatch": {
+      "description": "Service diagnostic setting resource for patch operations",
+      "properties": {
+        "tags": {
+            "additionalProperties": {
+                "type": "string"
+            },
+            "description": "Resource tags"
+        },
+        "properties": {
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/ServiceDiagnosticSettings"
+        }
+      }
     },
     "ErrorResponse": {
       "description": "Describes the format of Error response.",

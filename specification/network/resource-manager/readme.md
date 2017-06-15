@@ -40,7 +40,6 @@ These settings apply only when `--tag=2017-03-01` is specified on the command li
 
 ``` yaml $(tag) == '2017-03-01'
 input-file:
-- microsoft.Compute/2017-03-01/vmssNetworkInterface.json
 - Microsoft.Network/2017-03-01/applicationGateway.json
 - Microsoft.Network/2017-03-01/checkDnsAvailability.json
 - Microsoft.Network/2017-03-01/expressRouteCircuit.json
@@ -56,7 +55,8 @@ input-file:
 - Microsoft.Network/2017-03-01/usage.json
 - Microsoft.Network/2017-03-01/virtualNetwork.json
 - Microsoft.Network/2017-03-01/virtualNetworkGateway.json
-
+- Microsoft.Compute/2017-03-01/vmssNetworkInterface.json
+- Microsoft.Compute/2017-03-01/vmssPublicIpAddress.json
 ```
  
 # Tag: 2016-12-01

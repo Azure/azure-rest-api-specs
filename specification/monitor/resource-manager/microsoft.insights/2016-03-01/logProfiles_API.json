@@ -182,6 +182,44 @@
         "x-ms-examples": {
             "List alert rules": { "$ref": "./examples/createOrUpdateLogProfile.json" }
         }
+      },
+      "patch": {
+          "description": "Updates an existing LogProfilesResource. To update other fields use the CreateOrUpdate method.",
+          "operationId": "LogProfiles_Update",
+          "parameters": [
+              {
+                  "$ref": "#/parameters/SubscriptionIdParameter"
+              },
+              {
+                "$ref": "#/parameters/LogProfileNameParameter"
+              },
+              {
+                  "$ref": "#/parameters/ApiVersionParameter"
+              },
+              {
+                  "name": "logProfilesResource",
+                  "in": "body",
+                  "required": true,
+                  "schema": {
+                      "$ref": "#/definitions/LogProfileResourcePatch"
+                  },
+                  "description": "Parameters supplied to the operation."
+              }
+          ],
+          "responses": {
+              "default": {
+                  "description": "Error response describing why the operation failed.",
+                  "schema": {
+                      "$ref": "#/definitions/ErrorResponse"
+                  }
+              },
+              "200": {
+                  "description": "An existing log profile was successfully updated.",
+                  "schema": {
+                      "$ref": "#/definitions/LogProfileResource"
+                  }
+              }
+          }
       }
     },
     "/subscriptions/{subscriptionId}/providers/microsoft.insights/logprofiles": {
@@ -264,6 +302,7 @@
         "days": {
           "type": "integer",
           "format": "int32",
+          "minimum": 0,
           "description": "the number of days for the retention in days. A value of 0 will retain the events indefinitely."
         }
       },
@@ -317,6 +356,21 @@
       },
       "required": ["properties"],
       "description": "The log profile resource."
+    },
+    "LogProfileResourcePatch": {
+      "description": "The log profile resource for patch operations.",
+      "properties": {
+        "tags": {
+            "additionalProperties": {
+                "type": "string"
+            },
+            "description": "Resource tags"
+        },
+        "properties": {
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/LogProfileProperties"
+        }
+      }
     },
     "LogProfileCollection": {
       "properties": {
