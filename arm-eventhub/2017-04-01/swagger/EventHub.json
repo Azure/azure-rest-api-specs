@@ -3,7 +3,7 @@
   "info": {
     "title": "EventHubManagementClient",
     "description": "Azure Event Hubs client",
-    "version": "2015-08-01"
+    "version": "2017-04-01"
   },
   "host": "management.azure.com",
   "schemes": [
@@ -55,6 +55,12 @@
             "schema": {
               "$ref": "#/definitions/OperationListResult"
             }
+          },
+          "default": {
+            "description": "Eventhub error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
           }
         },
         "x-ms-pageable": {
@@ -95,6 +101,12 @@
             "schema": {
               "$ref": "#/definitions/CheckNameAvailabilityResult"
             }
+          },
+          "default": {
+            "description": "Eventhub error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
           }
         }
       }
@@ -104,7 +116,7 @@
         "tags": [
           "Namespaces"
         ],
-        "operationId": "Namespaces_ListBySubscription",
+        "operationId": "Namespaces_List",
         "x-ms-examples": {
           "NamespacesListBySubscription": { "$ref": "../examples/NameSpaces/EHNameSpaceList.json" }
         },
@@ -121,7 +133,13 @@
           "200": {
             "description": "Namespaces returned successfully.",
             "schema": {
-              "$ref": "#/definitions/NamespaceListResult"
+              "$ref": "#/definitions/EHNamespaceListResult"
+            }
+          },
+          "default": {
+            "description": "Eventhub error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
             }
           }
         },
@@ -155,7 +173,13 @@
           "200": {
             "description": "Namespaces returned successfully.",
             "schema": {
-              "$ref": "#/definitions/NamespaceListResult"
+              "$ref": "#/definitions/EHNamespaceListResult"
+            }
+          },
+          "default": {
+            "description": "Eventhub error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
             }
           }
         },
@@ -186,7 +210,7 @@
             "in": "body",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/NamespaceCreateOrUpdateParameters"
+              "$ref": "#/definitions/EHNamespace"
             },
             "description": "Parameters for creating a namespace resource."
           },
@@ -201,17 +225,23 @@
           "201": {
             "description": "Namespace create request accepted.",
             "schema": {
-              "$ref": "#/definitions/NamespaceResource"
+              "$ref": "#/definitions/EHNamespace"
             }
           },
           "200": {
             "description": "Namespace successfuly created.",
             "schema": {
-              "$ref": "#/definitions/NamespaceResource"
+              "$ref": "#/definitions/EHNamespace"
             }
           },
           "202": {
             "description": "Namespace create or update request accepted."
+          },
+          "default": {
+            "description": "Eventhub error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
           }
         },
         "x-ms-long-running-operation": true
@@ -248,6 +278,12 @@
           },
           "202": {
             "description": "Namespace delete request accepted."
+          },
+          "default": {
+            "description": "Eventhub error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
           }
         },
         "x-ms-long-running-operation": true
@@ -279,13 +315,19 @@
           "200": {
             "description": "Namespace returned successfully.",
             "schema": {
-              "$ref": "#/definitions/NamespaceResource"
+              "$ref": "#/definitions/EHNamespace"
             }
           },
           "201": {
             "description": "Namespace update request accepted.",
             "schema": {
-              "$ref": "#/definitions/NamespaceResource"
+              "$ref": "#/definitions/EHNamespace"
+            }
+          },
+          "default": {
+            "description": "Eventhub error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
             }
           }
         }
@@ -311,7 +353,7 @@
             "in": "body",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/NamespaceUpdateParameter"
+              "$ref": "#/definitions/EHNamespace"
             },
             "description": "Parameters for updating a namespace resource."
           },
@@ -326,17 +368,23 @@
           "201": {
             "description": "Namespace update request accepted.",
             "schema": {
-              "$ref": "#/definitions/NamespaceResource"
+              "$ref": "#/definitions/EHNamespace"
             }
           },
           "200": {
             "description": "Namespace successfuly updated.",
             "schema": {
-              "$ref": "#/definitions/NamespaceResource"
+              "$ref": "#/definitions/EHNamespace"
             }
           },
           "202": {
             "description": "Namespace create or update request accepted."
+          },
+          "default": {
+            "description": "Eventhub error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
           }
         }
       }
@@ -369,7 +417,13 @@
           "200": {
             "description": "Namespace AuthorizationRule successfully returned.",
             "schema": {
-              "$ref": "#/definitions/SharedAccessAuthorizationRuleListResult"
+              "$ref": "#/definitions/AuthorizationRuleListResult"
+            }
+          },
+          "default": {
+            "description": "Eventhub error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
             }
           }
         },
@@ -403,7 +457,7 @@
             "in": "body",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/SharedAccessAuthorizationRuleCreateOrUpdateParameters"
+              "$ref": "#/definitions/AuthorizationRule"
             },
             "description": "The shared access AuthorizationRule."
           },
@@ -418,7 +472,13 @@
           "200": {
             "description": "Namespace AuthorizationRule created",
             "schema": {
-              "$ref": "#/definitions/SharedAccessAuthorizationRuleResource"
+              "$ref": "#/definitions/AuthorizationRule"
+            }
+          },
+          "default": {
+            "description": "Eventhub error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
             }
           }
         }
@@ -455,6 +515,12 @@
           },
           "200": {
             "description": "Namespace AuthorizationRule successfully deleted."
+          },
+          "default": {
+            "description": "Eventhub error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
           }
         }
       },
@@ -488,7 +554,13 @@
           "200": {
             "description": "Namespace AuthorizationRule returned successfully.",
             "schema": {
-              "$ref": "#/definitions/SharedAccessAuthorizationRuleResource"
+              "$ref": "#/definitions/AuthorizationRule"
+            }
+          },
+          "default": {
+            "description": "Eventhub error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
             }
           }
         }
@@ -525,7 +597,13 @@
           "200": {
             "description": "Connection strings returned successfully.",
             "schema": {
-              "$ref": "#/definitions/ResourceListKeys"
+              "$ref": "#/definitions/AccessKeys"
+            }
+          },
+          "default": {
+            "description": "Eventhub error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
             }
           }
         }
@@ -556,7 +634,7 @@
             "in": "body",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/RegenerateKeysParameters"
+              "$ref": "#/definitions/RegenerateAccessKeyParameters"
             },
             "description": "Parameters required to regenerate the connection string."
           },
@@ -571,7 +649,13 @@
           "200": {
             "description": "Connection strings regenerated successfully.",
             "schema": {
-              "$ref": "#/definitions/ResourceListKeys"
+              "$ref": "#/definitions/AccessKeys"
+            }
+          },
+          "default": {
+            "description": "Eventhub error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
             }
           }
         }
@@ -582,7 +666,7 @@
         "tags": [
           "EventHubs"
         ],
-        "operationId": "EventHubs_ListAll",
+        "operationId": "EventHubs_ListByNamespace",
         "x-ms-examples": {
           "EventHubsListAll": { "$ref": "../examples/EventHubs/EHEventHubListByNameSpace.json" }
         },
@@ -609,6 +693,12 @@
             "description": "Successfully retrieved the list of Event Hubs.",
             "schema": {
               "$ref": "#/definitions/EventHubListResult"
+            }
+          },
+          "default": {
+            "description": "Eventhub error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
             }
           }
         },
@@ -645,7 +735,7 @@
             "in": "body",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/EventHubCreateOrUpdateParameters"
+              "$ref": "#/definitions/Eventhub"
             },
             "description": "Parameters supplied to create an Event Hub resource."
           },
@@ -660,7 +750,13 @@
           "200": {
             "description": "Event Hub successfully created.",
             "schema": {
-              "$ref": "#/definitions/EventHubResource"
+              "$ref": "#/definitions/Eventhub"
+            }
+          },
+          "default": {
+            "description": "Eventhub error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
             }
           }
         }
@@ -700,6 +796,12 @@
           },
           "200": {
             "description": "Event Hub successfully deleted."
+          },
+          "default": {
+            "description": "Eventhub error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
           }
         }
       },
@@ -736,7 +838,13 @@
           "200": {
             "description": "Successfully retrieved the Event Hub description.",
             "schema": {
-              "$ref": "#/definitions/EventHubResource"
+              "$ref": "#/definitions/Eventhub"
+            }
+          },
+          "default": {
+            "description": "Eventhub error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
             }
           }
         }
@@ -773,7 +881,13 @@
           "200": {
             "description": "Event Hub AuthorizationRule returned successfully.",
             "schema": {
-              "$ref": "#/definitions/SharedAccessAuthorizationRuleListResult"
+              "$ref": "#/definitions/AuthorizationRuleListResult"
+            }
+          },
+          "default": {
+            "description": "Eventhub error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
             }
           }
         },
@@ -813,7 +927,7 @@
             "in": "body",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/SharedAccessAuthorizationRuleCreateOrUpdateParameters"
+              "$ref": "#/definitions/AuthorizationRule"
             },
             "description": "The shared access AuthorizationRule."
           },
@@ -828,7 +942,13 @@
           "200": {
             "description": "Event Hub AuthorizationRule successfully created.",
             "schema": {
-              "$ref": "#/definitions/SharedAccessAuthorizationRuleResource"
+              "$ref": "#/definitions/AuthorizationRule"
+            }
+          },
+          "default": {
+            "description": "Eventhub error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
             }
           }
         }
@@ -869,7 +989,13 @@
           "200": {
             "description": "Event Hub AuthorizationRule successfully returned.",
             "schema": {
-              "$ref": "#/definitions/SharedAccessAuthorizationRuleResource"
+              "$ref": "#/definitions/AuthorizationRule"
+            }
+          },
+          "default": {
+            "description": "Eventhub error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
             }
           }
         }
@@ -912,6 +1038,12 @@
           },
           "200": {
             "description": "Event Hub AuthorizationRule successfully deleted."
+          },
+          "default": {
+            "description": "Eventhub error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
           }
         }
       }
@@ -953,7 +1085,13 @@
           "200": {
             "description": "Connection strings successfully returned.",
             "schema": {
-              "$ref": "#/definitions/ResourceListKeys"
+              "$ref": "#/definitions/AccessKeys"
+            }
+          },
+          "default": {
+            "description": "Eventhub error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
             }
           }
         }
@@ -990,7 +1128,7 @@
             "in": "body",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/RegenerateKeysParameters"
+              "$ref": "#/definitions/RegenerateAccessKeyParameters"
             },
             "description": "Parameters supplied to regenerate the AuthorizationRule Keys (PrimaryKey/SecondaryKey)."
           },
@@ -1005,7 +1143,13 @@
           "200": {
             "description": "Connection strings successfully regenerated.",
             "schema": {
-              "$ref": "#/definitions/ResourceListKeys"
+              "$ref": "#/definitions/AccessKeys"
+            }
+          },
+          "default": {
+            "description": "Eventhub error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
             }
           }
         }
@@ -1042,7 +1186,7 @@
             "in": "body",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/ConsumerGroupCreateOrUpdateParameters"
+              "$ref": "#/definitions/ConsumerGroup"
             },
             "description": "Parameters supplied to create or update a consumer group resource."
           },
@@ -1057,7 +1201,13 @@
           "200": {
             "description": "Consumer group successfully created.",
             "schema": {
-              "$ref": "#/definitions/ConsumerGroupResource"
+              "$ref": "#/definitions/ConsumerGroup"
+            }
+          },
+          "default": {
+            "description": "Eventhub error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
             }
           }
         }
@@ -1100,6 +1250,12 @@
           },
           "200": {
             "description": "Consumer group deleted."
+          },
+          "default": {
+            "description": "Eventhub error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
           }
         }
       },
@@ -1139,7 +1295,13 @@
           "200": {
             "description": "Successfully retrieved the consumer group description.",
             "schema": {
-              "$ref": "#/definitions/ConsumerGroupResource"
+              "$ref": "#/definitions/ConsumerGroup"
+            }
+          },
+          "default": {
+            "description": "Eventhub error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
             }
           }
         }
@@ -1150,7 +1312,7 @@
         "tags": [
           "ConsumerGroups"
         ],
-        "operationId": "ConsumerGroups_ListAll",
+        "operationId": "ConsumerGroups_ListByEventHub",
         "x-ms-examples": {
           "ConsumerGroupsListAll": { "$ref": "../examples/ConsumerGroup/EHConsumerGroupListByEventHub.json" }
         },
@@ -1181,6 +1343,12 @@
             "schema": {
               "$ref": "#/definitions/ConsumerGroupListResult"
             }
+          },
+          "default": {
+            "description": "Eventhub error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
           }
         },
         "x-ms-pageable": {
@@ -1190,55 +1358,6 @@
     }
   },
   "definitions": {
-    "OperationListResult": {
-      "description": "Result of the request to list Event Hub operations. It contains a list of operations and a URL link to get the next set of results.",
-      "properties": {
-        "value": {
-          "description": "List of Event Hub operations supported by the Microsoft.EventHub resource provider.",
-          "type": "array",
-          "readOnly": true,
-          "items": {
-            "$ref": "#/definitions/Operation"
-          }
-        },
-        "nextLink": {
-          "description": "URL to get the next set of operation list results if there are any.",
-          "type": "string",
-          "readOnly": true
-        }
-      }
-    },
-    "Operation": {
-      "description": "A Event Hub REST API operation",
-      "type": "object",
-      "properties": {
-        "name": {
-          "description": "Operation name: {provider}/{resource}/{operation}",
-          "type": "string",
-          "readOnly": true
-        },
-        "display": {
-          "description": "The object that represents the operation.",
-          "properties": {
-            "provider": {
-              "description": "Service provider: Microsoft.EventHub",
-              "type": "string",
-              "readOnly": true
-            },
-            "resource": {
-              "description": "Resource on which the operation is performed: Invoice, etc.",
-              "type": "string",
-              "readOnly": true
-            },
-            "operation": {
-              "description": "Operation type: Read, write, delete, etc.",
-              "type": "string",
-              "readOnly": true
-            }
-          }
-        }
-      }
-    },
     "TrackedResource": {
       "properties": {
         "location": {
@@ -1266,21 +1385,14 @@
     "Resource": {
       "properties": {
         "id": {
-          "readOnly": true,
           "type": "string",
           "description": "Resource Id"
         },
         "name": {
-          "readOnly": true,
           "type": "string",
           "description": "Resource name"
         },
-        "location": {
-          "type": "string",
-          "description": "Resource location"
-        },
         "type": {
-          "readOnly": true,
           "type": "string",
           "description": "Resource type"
         }
@@ -1288,56 +1400,70 @@
       "description": "The Resource definition",
       "x-ms-azure-resource": true
     },
-    "NamespaceCreateOrUpdateParameters": {
-      "properties": {
-        "location": {
-          "type": "string",
-          "description": "Namespace location."
-        },
-        "sku": {
-          "$ref": "#/definitions/Sku"
-        },
-        "tags": {
-          "type": "object",
-          "additionalProperties": {
-            "type": "string"
-          },
-          "description": "Namespace tags."
-        },
-        "properties": {
-          "x-ms-client-flatten": true,
-          "$ref": "#/definitions/NamespaceProperties"
-        }
-      },
-      "required": [
-        "location"
-      ],
-      "description": "Parameters supplied to the Create Or Update Namespace operation."
-    },
-    "NamespaceListResult": {
+    "EHNamespaceListResult": {
       "properties": {
         "value": {
           "type": "array",
           "items": {
-            "$ref": "#/definitions/NamespaceResource"
+            "$ref": "#/definitions/EHNamespace"
           },
-          "description": "Result of the List Namespace operation."
+          "description": "Result of the List Namespace operation"
         },
         "nextLink": {
           "type": "string",
           "description": "Link to the next set of results. Not empty if Value contains incomplete list of namespaces."
         }
       },
-      "description": "The response of the List Namespace operation."
+      "description": "The response of the List Namespace operation"
     },
-    "NamespaceResource": {
+    "EHNamespace": {
       "properties": {
         "sku": {
           "$ref": "#/definitions/Sku"
         },
         "properties": {
           "x-ms-client-flatten": true,
-          "$ref": "#/definitions/NamespaceProperties"
+          "properties": {
+            "provisioningState": {
+              "readOnly": true,
+              "type": "string",
+              "description": "Provisioning state of the Namespace."
+            },
+            "createdAt": {
+              "readOnly": true,
+              "format": "date-time",
+              "type": "string",
+              "description": "The time the Namespace was created."
+            },
+            "updatedAt": {
+              "readOnly": true,
+              "format": "date-time",
+              "type": "string",
+              "description": "The time the Namespace was updated."
+            },
+            "serviceBusEndpoint": {
+              "readOnly": true,
+              "type": "string",
+              "description": "Endpoint you can use to perform Service Bus operations."
+            },
+            "metricId": {
+              "readOnly": true,
+              "type": "string",
+              "description": "Identifier for Azure Insights metrics."
+            },
+            "isAutoInflateEnabled": {
+              "type": "boolean",
+              "description": "Value that indicates whether AutoInflate is enabled for eventhub namespace."
+            },
+            "maximumThroughputUnits": {
+              "format": "int32",
+              "type": "integer",
+              "maximum": 20,
+              "minimum": 0,
+              "description": "Upper limit of throughput units when AutoInflate is enabled, vaule should be within 0 to 20 throughput units. ( '0' if AutoInflateEnabled = true)"
+            }
+          },
+          "description": "Namespace properties supplied for create namespace operation."
         }
       },
       "allOf": [
@@ -1346,64 +1472,6 @@
         }
       ],
       "description": "Single Namespace item in List or Get Operation"
-    },
-    "NamespaceProperties": {
-      "properties": {
-        "status": {
-          "type": "string",
-          "description": "State of the Namespace.",
-          "enum": [
-            "Unknown",
-            "Creating",
-            "Created",
-            "Activating",
-            "Enabling",
-            "Active",
-            "Disabling",
-            "Disabled",
-            "SoftDeleting",
-            "SoftDeleted",
-            "Removing",
-            "Removed",
-            "Failed"
-          ],
-          "x-ms-enum": {
-            "name": "NamespaceState",
-            "modelAsString": false
-          }
-        },
-        "provisioningState": {
-          "type": "string",
-          "description": "Provisioning state of the Namespace."
-        },
-        "createdAt": {
-          "type": "string",
-          "format": "date-time",
-          "description": "The time the Namespace was created."
-        },
-        "updatedAt": {
-          "type": "string",
-          "format": "date-time",
-          "description": "The time the Namespace was updated."
-        },
-        "serviceBusEndpoint": {
-          "externalDocs": {
-            "url": "http://msdn.microsoft.com/en-us/library/windowsazure/jj873988.aspx"
-          },
-          "type": "string",
-          "description": "Endpoint you can use to perform Service Bus operations."
-        },
-        "metricId": {
-          "type": "string",
-          "readOnly": true,
-          "description": "Identifier for Azure Insights metrics"
-        },
-        "enabled": {
-          "type": "boolean",
-          "description": "Specifies whether this instance is enabled."
-        }
-      },
-      "description": "Properties of the Namespace supplied for create or update Namespace operation"
     },
     "Sku": {
       "type": "object",
@@ -1425,8 +1493,7 @@
           "description": "The billing tier of this particular SKU.",
           "enum": [
             "Basic",
-            "Standard",
-            "Premium"
+            "Standard"
           ],
           "x-ms-enum": {
             "name": "SkuTier",
@@ -1435,38 +1502,23 @@
         },
         "capacity": {
           "format": "int32",
+          "maximum": 20,
+          "minimum": 0,
           "type": "integer",
-          "description": "The Event Hubs throughput units."
+          "description": "The Event Hubs throughput units, vaule should be 0 to 20 throughput units."
         }
       },
       "required": [
-        "tier"
+        "name"
       ],
-      "description": "SKU parameters supplied to the create Namespace operation"
+      "description": "SKU parameters supplied to the create namespace operation"
     },
-    "SharedAccessAuthorizationRuleCreateOrUpdateParameters": {
-      "properties": {
-        "location": {
-          "type": "string",
-          "description": "Data center location."
-        },
-        "name": {
-          "type": "string",
-          "description": "Name of the AuthorizationRule."
-        },
-        "properties": {
-          "x-ms-client-flatten": true,
-          "$ref": "#/definitions/SharedAccessAuthorizationRuleProperties"
-        }
-      },
-      "description": "Parameters supplied to the Create Or Update Authorization Rules operation."
-    },
-    "SharedAccessAuthorizationRuleListResult": {
+    "AuthorizationRuleListResult": {
       "properties": {
         "value": {
           "type": "array",
           "items": {
-            "$ref": "#/definitions/SharedAccessAuthorizationRuleResource"
+            "$ref": "#/definitions/AuthorizationRule"
           },
           "description": "Result of the List Authorization Rules operation."
         },
@@ -1475,13 +1527,34 @@
           "description": "Link to the next set of results. Not empty if Value contains an incomplete list of Authorization Rules"
         }
       },
-      "description": "The response from the List Namespace operation."
+      "description": "The response from the List namespace operation."
     },
-    "SharedAccessAuthorizationRuleResource": {
+    "AuthorizationRule": {
       "properties": {
         "properties": {
           "x-ms-client-flatten": true,
-          "$ref": "#/definitions/SharedAccessAuthorizationRuleProperties"
+          "properties": {
+            "rights": {
+              "type": "array",
+              "items": {
+                "type": "string",
+                "enum": [
+                  "Manage",
+                  "Send",
+                  "Listen"
+                ],
+                "x-ms-enum": {
+                  "name": "AccessRights",
+                  "modelAsString": true
+                }
+              },
+              "description": "The rights associated with the rule."
+            }
+          },
+          "required": [
+            "rights"
+          ],
+          "description": "Properties supplied to create or update AuthorizationRule"
         }
       },
       "allOf": [
@@ -1491,160 +1564,120 @@
       ],
       "description": "Single item in a List or Get AuthorizationRule operation"
     },
-    "SharedAccessAuthorizationRuleProperties": {
-      "properties": {
-        "rights": {
-          "type": "array",
-          "items": {
-            "type": "string",
-            "enum": [
-              "Manage",
-              "Send",
-              "Listen"
-            ],
-            "x-ms-enum": {
-              "name": "AccessRights",
-              "modelAsString": false
-            }
-          },
-          "description": "The rights associated with the rule."
-        }
-      },
-      "required": [
-        "rights"
-      ],
-      "description": "Properties supplied to create or update SharedAccessAuthorizationRule"
-    },
-    "ResourceListKeys": {
+    "AccessKeys": {
       "properties": {
         "primaryConnectionString": {
-          "type": "string",
           "readOnly": true,
-          "description": "Primary connection string of the created Namespace AuthorizationRule."
+          "type": "string",
+          "description": "Primary connection string of the created namespace AuthorizationRule."
         },
         "secondaryConnectionString": {
-          "type": "string",
           "readOnly": true,
-          "description": "Secondary connection string of the created Namespace AuthorizationRule."
+          "type": "string",
+          "description": "Secondary connection string of the created namespace AuthorizationRule."
         },
         "primaryKey": {
-          "type": "string",
           "readOnly": true,
+          "type": "string",
           "description": "A base64-encoded 256-bit primary key for signing and validating the SAS token."
         },
         "secondaryKey": {
-          "type": "string",
           "readOnly": true,
+          "type": "string",
           "description": "A base64-encoded 256-bit primary key for signing and validating the SAS token."
         },
         "keyName": {
-          "type": "string",
           "readOnly": true,
+          "type": "string",
           "description": "A string that describes the AuthorizationRule."
         }
       },
       "description": "Namespace/EventHub Connection String"
     },
-    "RegenerateKeysParameters": {
+    "RegenerateAccessKeyParameters": {
       "properties": {
-        "policykey": {
+        "keyType": {
           "type": "string",
-          "description": "Key that needs to be regenerated.",
+          "description": "The access key to regenerate.",
           "enum": [
             "PrimaryKey",
             "SecondaryKey"
           ],
           "x-ms-enum": {
-            "name": "Policykey",
+            "name": "KeyType",
             "modelAsString": false
           }
-        }
-      },
-      "description": "Parameters supplied to the Regenerate Authorization Rule keys operation."
-    },
-    "EventHubCreateOrUpdateParameters": {
-      "properties": {
-        "location": {
-          "type": "string",
-          "description": "Location of the resource."
         },
-        "type": {
+        "key": {
           "type": "string",
-          "description": "ARM type of the Namespace."
-        },
-        "name": {
-          "type": "string",
-          "description": "Name of the Event Hub."
-        },
-        "properties": {
-          "x-ms-client-flatten": true,
-          "$ref": "#/definitions/EventHubProperties"
+          "description": "Optional, if the key value provided, is set for KeyType or autogenerated Key value set for keyType"
         }
       },
       "required": [
-        "location"
+        "keyType"
       ],
-      "description": "Parameters supplied to the Create Or Update Event Hub operation."
+      "description": "Parameters supplied to the Regenerate Authorization Rule operation, specifies which key neeeds to be reset."
     },
-    "EventHubProperties": {
-      "properties": {
-        "createdAt": {
-          "type": "string",
-          "format": "date-time",
-          "readOnly": true,
-          "description": "Exact time the Event Hub was created."
-        },
-        "messageRetentionInDays": {
-          "format": "int64",
-          "type": "integer",
-          "description": "Number of days to retain the events for this Event Hub."
-        },
-        "partitionCount": {
-          "format": "int64",
-          "type": "integer",
-          "description": "Number of partitions created for the Event Hub."
-        },
-        "partitionIds": {
-          "type": "array",
-          "readOnly": true,
-          "items": {
-            "type": "string"
-          },
-          "description": "Current number of shards on the Event Hub."
-        },
-        "status": {
-          "type": "string",
-          "description": "Enumerates the possible values for the status of the Event Hub.",
-          "enum": [
-            "Active",
-            "Disabled",
-            "Restoring",
-            "SendDisabled",
-            "ReceiveDisabled",
-            "Creating",
-            "Deleting",
-            "Renaming",
-            "Unknown"
-          ],
-          "x-ms-enum": {
-            "name": "EntityStatus",
-            "modelAsString": false
-          }
-        },
-        "updatedAt": {
-          "type": "string",
-          "readOnly": true,
-          "format": "date-time",
-          "description": "The exact time the message was updated."
-        }
-      },
-      "description": "Properties supplied to the Create Or Update Event Hub operation."
-    },
-    "EventHubResource": {
+    "Eventhub": {
       "properties": {
         "properties": {
           "x-ms-client-flatten": true,
-          "$ref": "#/definitions/EventHubProperties"
+          "properties": {
+            "partitionIds": {
+              "readOnly": true,
+              "type": "array",
+              "items": {
+                "type": "string"
+              },
+              "description": "Current number of shards on the Event Hub."
+            },
+            "createdAt": {
+              "readOnly": true,
+              "format": "date-time",
+              "type": "string",
+              "description": "Exact time the Event Hub was created."
+            },
+            "updatedAt": {
+              "readOnly": true,
+              "format": "date-time",
+              "type": "string",
+              "description": "The exact time the message was updated."
+            },
+            "messageRetentionInDays": {
+              "format": "int64",
+              "type": "integer",
+              "maximum": 7,
+              "minimum": 1,
+              "description": "Number of days to retain the events for this Event Hub, value should be 1 to 7 days"
+            },
+            "partitionCount": {
+              "format": "int64",
+              "type": "integer",
+              "maximum": 32,
+              "minimum": 1,
+              "description": "Number of partitions created for the Event Hub, allowed values are from 1 to 32 partitions."
+            },
+            "status": {
+              "type": "string",
+              "description": "Enumerates the possible values for the status of the Event Hub.",
+              "enum": [
+                "Active",
+                "Disabled",
+                "Restoring",
+                "SendDisabled",
+                "ReceiveDisabled",
+                "Creating",
+                "Deleting",
+                "Renaming",
+                "Unknown"
+              ],
+              "x-ms-enum": {
+                "name": "EntityStatus",
+                "modelAsString": false
+              }
+            }
+          },
+          "description": "Properties supplied to the Create Or Update Event Hub operation."
         }
       },
       "allOf": [
@@ -1659,7 +1692,7 @@
         "value": {
           "type": "array",
           "items": {
-            "$ref": "#/definitions/EventHubResource"
+            "$ref": "#/definitions/Eventhub"
           },
           "description": "Result of the List EventHubs operation."
         },
@@ -1670,61 +1703,29 @@
       },
       "description": "The result of the List EventHubs operation."
     },
-    "ConsumerGroupCreateOrUpdateParameters": {
-      "properties": {
-        "location": {
-          "type": "string",
-          "description": "Location of the resource."
-        },
-        "type": {
-          "type": "string",
-          "description": "ARM type of the Namespace."
-        },
-        "name": {
-          "type": "string",
-          "description": "Name of the consumer group."
-        },
-        "properties": {
-          "x-ms-client-flatten": true,
-          "$ref": "#/definitions/ConsumerGroupProperties"
-        }
-      },
-      "required": [
-        "location"
-      ],
-      "description": "Parameters supplied to the Create Or Update Consumer Group operation."
-    },
-    "ConsumerGroupProperties": {
-      "properties": {
-        "createdAt": {
-          "type": "string",
-          "format": "date-time",
-          "readOnly": true,
-          "description": "Exact time the message was created."
-        },
-        "eventHubPath": {
-          "type": "string",
-          "readOnly": true,
-          "description": "The path of the Event Hub."
-        },
-        "updatedAt": {
-          "type": "string",
-          "format": "date-time",
-          "readOnly": true,
-          "description": "The exact time the message was updated."
-        },
-        "userMetadata": {
-          "type": "string",
-          "description": "The user metadata."
-        }
-      },
-      "description": "Properties supplied to the Create Or Update Consumer Group operation."
-    },
-    "ConsumerGroupResource": {
+    "ConsumerGroup": {
       "properties": {
         "properties": {
           "x-ms-client-flatten": true,
-          "$ref": "#/definitions/ConsumerGroupProperties"
+          "properties": {
+            "createdAt": {
+              "readOnly": true,
+              "format": "date-time",
+              "type": "string",
+              "description": "Exact time the message was created."
+            },
+            "updatedAt": {
+              "readOnly": true,
+              "format": "date-time",
+              "type": "string",
+              "description": "The exact time the message was updated."
+            },
+            "userMetadata": {
+              "type": "string",
+              "description": "Usermetadata is a placeholder to store user-defined string data with maximum length 1024. e.g. it can be used to store descriptive data, such as list of teams and their contact information also user-defined configuration settings can be stored."
+            }
+          },
+		"description": "Single item in List or Get Consumer group operation"
         }
       },
       "allOf": [
@@ -1739,7 +1740,7 @@
         "value": {
           "type": "array",
           "items": {
-            "$ref": "#/definitions/ConsumerGroupResource"
+            "$ref": "#/definitions/ConsumerGroup"
           },
           "description": "Result of the List Consumer Group operation."
         },
@@ -1780,6 +1781,11 @@
     },
     "CheckNameAvailabilityResult": {
       "properties": {
+        "message": {
+          "type": "string",
+          "readOnly": true,
+          "description": "The detailed info regarding the reason associated with the Namespace."
+        },
         "nameAvailable": {
           "type": "boolean",
           "description": "Value indicating Namespace is availability, true if the Namespace is available; otherwise, false."
@@ -1787,30 +1793,72 @@
         "reason": {
           "$ref": "#/definitions/UnavailableReason",
           "description": "The reason for unavailability of a Namespace."
-        },
-        "message": {
-          "type": "string",
-          "readOnly": true,
-          "description": "The detailed info regarding the reason associated with the Namespace."
         }
       },
       "description": "The Result of the CheckNameAvailability operation"
     },
-    "NamespaceUpdateParameter": {
+    "OperationListResult": {
+      "description": "Result of the request to list Event Hub operations. It contains a list of operations and a URL link to get the next set of results.",
       "properties": {
-        "tags": {
-          "type": "object",
-          "additionalProperties": {
-            "type": "string"
-          },
-          "description": "Resource tags"
+        "value": {
+          "description": "List of Event Hub operations supported by the Microsoft.EventHub resource provider.",
+          "type": "array",
+          "readOnly": true,
+          "items": {
+            "$ref": "#/definitions/Operation"
+          }
         },
-        "sku": {
-          "$ref": "#/definitions/Sku",
-          "description": "The sku of the created Namespace"
+        "nextLink": {
+          "readOnly": true,
+          "type": "string",
+          "description": "URL to get the next set of operation list results if there are any."
         }
-      },
-      "description": "Parameters supplied to the Patch/update Namespace operation."
+      }
+    },
+    "Operation": {
+      "description": "A Event Hub REST API operation",
+      "type": "object",
+      "properties": {
+        "name": {
+          "readOnly": true,
+          "type": "string",
+          "description": "Operation name: {provider}/{resource}/{operation}"
+        },
+        "display": {
+          "description": "The object that represents the operation.",
+          "properties": {
+            "provider": {
+              "readOnly": true,
+              "type": "string",
+              "description": "Service provider: Microsoft.EventHub"
+            },
+            "resource": {
+              "readOnly": true,
+              "type": "string",
+              "description": "Resource on which the operation is performed: Invoice, etc."
+            },
+            "operation": {
+              "readOnly": true,
+              "type": "string",
+              "description": "Operation type: Read, write, delete, etc."
+            }
+          }
+        }
+      }
+    },
+    "ErrorResponse": {
+      "description": "Error reponse indicates EventHub service is not able to process the incoming request. The reason is provided in the error message.",
+      "type": "object",
+      "properties": {
+        "code": {
+          "description": "Error code.",
+          "type": "string"
+        },
+        "message": {
+          "description": "Error message indicating why the operation failed.",
+          "type": "string"
+        }
+      }
     }
   },
   "parameters": {
