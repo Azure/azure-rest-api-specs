@@ -180,7 +180,12 @@
       "properties": {
         "state": {
           "type": "string",
-          "description": "The state of the geo backup policy."
+          "description": "The state of the geo backup policy.",
+          "enum": ["Disabled", "Enabled"],
+          "x-ms-enum": {
+            "modelAsString": false,
+            "name": "GeoBackupPolicyState"
+          }
         },
         "storageType": {
           "type": "string",
