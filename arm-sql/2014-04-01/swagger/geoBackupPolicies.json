@@ -47,16 +47,7 @@
             "description": "The name of the database."
           },
           {
-            "name": "geoBackupPolicyName",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "enum": ["Default"],
-            "description": "The name of the geo backup policy.",
-            "x-ms-enum":{
-              "modelAsString": true,
-              "name": "GeoBackupPolicyName"
-            }
+            "$ref": "#/parameters/GeoBackupPolicyNameParameter"
           },
           {
             "name": "parameters",
@@ -113,11 +104,7 @@
             "description": "The name of the database."
           },
           {
-            "name": "geoBackupPolicyName",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "description": "The name of the geo backup policy."
+            "$ref": "#/parameters/GeoBackupPolicyNameParameter"
           }
         ],
         "responses": {
@@ -296,6 +283,18 @@
       "type": "string",
       "description": "The name of the server.",
       "x-ms-parameter-location": "method"
+    },
+    "GeoBackupPolicyNameParameter": {
+      "name": "geoBackupPolicyName",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "enum": ["Default"],
+      "description": "The name of the geo backup policy.",
+      "x-ms-enum":{
+        "modelAsString": true,
+        "name": "GeoBackupPolicyName"
+      }
     }
   },
   "securityDefinitions": {
