@@ -101,7 +101,6 @@ We request OpenAPI(Swagger) spec authoring be assigned to engineers who have an
 | M4000 | ParameterDescriptionRequired, OperationDescriptionRequired  | {0} lacks 'description' property. Consider adding a 'description' element. Accurate description is essential for maintaining reference documentation. | Warning |
  M4000 | DescriptiveDescriptionRequired | The value provided for description is not descriptive enough. Accurate and descriptive description is essential for maintaining reference documentation. | Warning |
 | [R2001](#R2001)	| AvoidNestedProperties | Consider using x-ms-client-flatten to provide a better end user experience | Warning |
-of the GET response body, make sure you have a PATCH operation to make the resource updatable. Operation: '{0}' Request Model: '{1}' Response Model: '{2}' | Warning |
 | [R4002](#R4002)	| LocationMustHaveXmsMutability | The "location" property of "Resource" model definition in ARM MUST have "x-ms-mutability": ["create", "read"] extension. | Warning |
 | [R2064](#R2064)	| PostOperationIdContainsUrlVerb | A POST operation OperationId must contain the verb at the end of the url related to the operation. | Warning |
 | [R2015](#R2015) | ParameterNotDefinedInGlobalParameters | Parameters `subscriptionId` and `api-version` must be declared as global parameters. | Warning |
