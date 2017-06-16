@@ -3,7 +3,7 @@
   "info": {
     "title": "NetworkManagementClient",
     "description": "The Microsoft Azure Network management API provides a RESTful set of web services that interact with Microsoft Azure Networks service to manage your network resources. The API has entities that capture the relationship between an end user and the Microsoft Azure Networks service.",
-    "version": "2017-03-01"
+    "version": "2017-06-01"
   },
   "host": "management.azure.com",
   "schemes": [
@@ -87,6 +87,14 @@
             "type": "string"
           },
           "description": "The prefixes that the bgp community contains."
+        },
+        "isAuthorizedToUse": {
+          "type": "boolean",
+          "description": "Customer is authorized to use bgp community or not."
+        },
+        "serviceGroup": {
+          "type": "string",
+          "description": "The service group of the bgp community contains."
         }
       },
       "description": "Contains bgp community information offered in Service Community resources."
