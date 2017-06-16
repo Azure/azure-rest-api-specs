@@ -3,7 +3,7 @@
   "info": {
     "title": "NetworkManagementClient",
     "description": "The Microsoft Azure Network management API provides a RESTful set of web services that interact with Microsoft Azure Networks service to manage your network resources. The API has entities that capture the relationship between an end user and the Microsoft Azure Networks service.",
-    "version": "2017-03-01"
+    "version": "2017-06-01"
   },
   "host": "management.azure.com",
   "schemes": [
@@ -1350,11 +1350,31 @@
             "name": "ProcessorArchitecture",
             "modelAsString": true
           }
+        },
+        "authenticationMethod": {
+          "type": "string",
+          "description": "VPN client Authentication Method. Possible values are: 'EAPTLS' and 'EAPMSCHAPv2'.",
+          "enum": [
+            "EAPTLS",
+            "EAPMSCHAPv2"
+          ],
+          "x-ms-enum": {
+            "name": "AuthenticationMethod",
+            "modelAsString": true
+          }
+        },
+        "RadiusServerAuthCertificate": {
+          "type": "string",
+          "description": "The public certificate data for the radius server authentication certificate as a Base-64 encoded string. Required only if external radius authentication has been configured with EAPTLS authentication."
+        },
+        "ClientRootCertificates": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "description": "A list of client root certificates public certificate data encoded as Base-64 strings. Optional parameter for external radius based authentication with EAPTLS."
         }
       },
-      "required": [
-        "processorArchitecture"
-      ],
       "description": "Vpn Client Parameters for package generation"
     },
 	"VirtualNetworkGatewayListResult": {
