@@ -30,37 +30,37 @@ We request OpenAPI(Swagger) spec authoring be assigned to engineers who have an
 
 | Id | Rule Name | Output Message |Severity | 
 | --- | --- | --- | --- |
-| [M3012](#M3012)	| [APIVersionPattern](#M3012)	| API Version must be in the format: yyyy-MM-dd, optionally followed by -preview, -alpha, -beta, -rc, -privatepreview.	|  Error |
-| M3019	| ARMResourcePropertiesBag	| Top level property names should not be repeated inside the properties bag for ARM resource '{0}'. Properties [{1}] conflict with ARM top level properties. Please rename these. | Error |
-| [M3016](#M3016)	| [BodyPropertiesNamesCamelCase](#M3016) | Property named: "{0}", must follow camelCase style. Example: "{1}". | Error |
-| [M3016](#M3016)	| [DefinitionsPropertiesNamesCamelCase](#M3016)  | Property named: "{0}", for definition: "{1}" must follow camelCase style. Example: "{2}". | Error |
-| M3006	| BodyTopLevelProperties | Top level properties should be one of name, type, id, location, properties, tags, plan, sku, etag, managedBy, identity. Extra properties found: "{0}". | Error |
-| [R3008](#R3008)	| CollectionObjectPropertiesNaming | Collection object {0} returned by list operation {1} with 'x-ms-pageable' extension, has no property named 'value'. | Error |
+| [R3012](#R3012)	| [APIVersionPattern](#R3012)	| API Version must be in the format: yyyy-MM-dd, optionally followed by -preview, -alpha, -beta, -rc, -privatepreview.	|  Error |
+| [R3019](#R3019)	| [ARMResourcePropertiesBag](#R3019)	| Top level property names should not be repeated inside the properties bag for ARM resource '{0}'. Properties [{1}] conflict with ARM top level properties. Please rename these. | Error |
+| [R3014](#R3014)	| [BodyPropertiesNamesCamelCase](#R3014) | Property named: "{0}", must follow camelCase style. Example: "{1}". | Error |
+| [R3016](#R3016)	| [DefinitionsPropertiesNamesCamelCase](#R3016)  | Property named: "{0}", for definition: "{1}" must follow camelCase style. Example: "{2}". | Error |
+| [R3006](#R3006)	| BodyTopLevelProperties(#R3006) | Top level properties should be one of name, type, id, location, properties, tags, plan, sku, etag, managedBy, identity. Extra properties found: "{0}". | Error |
+| [R3008](#R3008)	| [CollectionObjectPropertiesNaming](#R3008) | Collection object {0} returned by list operation {1} with 'x-ms-pageable' extension, has no property named 'value'. | Error |
 | M2044	| HttpVerbValidation | Permissible values for HTTP Verb are delete,get,put,patch,head,options,post. | Error |
-| [R3023](#R3023)	| OperationsAPIImplementation | Operations API must be implemented for '{0}'. | Error |
+| [R3023](#R3023)	| [OperationsAPIImplementation](#R3023) | Operations API must be implemented for '{0}'. | Error |
 | M3007	| PutGetPatchResponseValidation | {0} has different responses for PUT/GET/PATCH operations. The PUT/GET/PATCH operations must have same schema response. | Error |
 | M3003	| RequiredPropertiesMustExist | Required property does not appear in the list of properties | Error |
 | M3001 | ResourceModelValidation | Model definition '{0}' must have the properties 'name', 'id' and 'type' in its hierarchy and these properties must be marked as readonly. | Error |
-| M3027	| TrackedResourceGetOperationValidation | Tracked resource '{0}' must have a get operation | Error |
-| [R3026](#R3026)	| TrackedResourcePatchOperationValidation | Tracked resource '{0}' must have patch operation that at least supports the update of tags | Error |
-| [R2059](#R2059)	| UniqueResourcePaths | Multiple resource providers are not allowed in a single spec. More than one the resource paths were found: '{0}'. | Error |
+| [R3025](#R3025)	| [TrackedResourceGetOperationValidation](#R3025) | Tracked resource '{0}' must have a get operation | Error |
+| [R3026](#R3026)	| [TrackedResourcePatchOperationValidation](#R3026) | Tracked resource '{0}' must have patch operation that at least supports the update of tags | Error |
+| [R2059](#R2059)	| [UniqueResourcePaths](#R2059) | Multiple resource providers are not allowed in a single spec. More than one the resource paths were found: '{0}'. | Error |
 | M3013	| DeleteMustNotHaveRequestBody | 'Delete' operation must not have a request body. | Error |
 | M2016	| PatchBodyParametersSchemaValidation | Properties of a PATCH request body must not be {0}. PATCH operation: '{1}' Model Definition: '{2}' Property: '{3}' | Error |
 | M2062	| PutResponseResourceValidation | The 200 response model for an ARM PUT operation must have x-ms-azure-resource extension set to true in its hierarchy. Operation: '{0}' Model: '{1}'. | Error |
-| [R3027](#R3027)	| TrackedResourceListByResourceGroup | The tracked resource, '{0}', must have a list by resource group operation. | Error |
-| [R3028](#R3028)	| TrackedResourceListBySubscription | The tracked resource, '{0}', must have a list by subscriptions operation. | Error |
-| [R3011](#R3011)	| DescriptionMustNotBeNodeName | The description provided for a given node (property, parameter, etc.) must not be the same as the name assigned to the node. | Error |
-| [R2020](#R2020) | RequiredPropertiesMissingInResourceModel | A `Resource` model must have `name`, `id` and `type` properties defined. | Error |
+| [R3027](#R3027)	| [TrackedResourceListByResourceGroup](#R3027) | The tracked resource, '{0}', must have a list by resource group operation. | Error |
+| [R3028](#R3028)	| [TrackedResourceListBySubscription](#R3028) | The tracked resource, '{0}', must have a list by subscriptions operation. | Error |
+| [R3011](#R3011)	| [DescriptionMustNotBeNodeName](#R3011) | The description provided for a given node (property, parameter, etc.) must not be the same as the name assigned to the node. | Error |
+| [R2020](#R2020) | [RequiredPropertiesMissingInResourceModel](#R2020) | A `Resource` model must have `name`, `id` and `type` properties defined. | Error |
 
 #### RPC Warnings
 
 | Id | Rule Name | Output Message |Severity | 
 | --- | --- | --- | --- |
 | M2061	| ProvidersPathValidation |	Type values \"{0}\" have default value(s), please consider parameterizing them | Warning |
-| [R3018](#R3018)	| BooleanPropertyNotRecommended	| Booleans are not descriptive and make them hard to use. Instead use string enums with allowed set of values defined. |	Warning |
-| [R3017](#R3017)	| GuidUsage | Guid used in model definition '{1}' for property '{0}'. Usage of Guid is not recommanded. If GUIDs are absolutely required in your service, please get sign off from the Azure API review board. | Warning |
-| M2057	| SkuModelValidation | Sku Model is not valid. A Sku model must have 'name' property. It can also have 'tier', 'size', 'family', 'capacity' as optional properties. | Warning |
-| [R3010](#R3010)	| TrackedResourceListByImmediateParent | The child tracked resource, '{0}' with immediate parent '{1}', must have a list by immediate parent operation. | Warning |
+| [R3018](#R3018)	| [EnumInsteadOfBoolean](#R3018)	| Booleans are not descriptive and make them hard to use. Consider using string enums with allowed set of values defined. Property: {0}. |	Warning |
+| [R3017](#R3017)	| [GuidUsage](#R3017) | Guid used in model definition '{1}' for property '{0}'. Usage of Guid is not recommanded. If GUIDs are absolutely required in your service, please get sign off from the Azure API review board. | Warning |
+| [R2057](#R2057)	| [InvalidSkuModel](#R2057) | Sku Model is not valid. A Sku model must have 'name' property. It can also have 'tier', 'size', 'family', 'capacity' as optional properties. | Warning |
+| [R3010](#R3010)	| [TrackedResourceListByImmediateParent](#R3010) | The child tracked resource, '{0}' with immediate parent '{1}', must have a list by immediate parent operation. | Warning |
 
 ### SDK Violations
 
@@ -68,29 +68,30 @@ We request OpenAPI(Swagger) spec authoring be assigned to engineers who have an
 
 | Id | Rule Name | Output Message |Severity | 
 | --- | --- | --- | --- |
-| M2026 | AvoidAnonymousTypes, AnonymousBodyParameter |	Inline/anonymous models must not be used, instead define a schema with a model name in the "definitions" section and refer to it. This allows operations to share the models. | Error |
-| [R2014](#R2014)	| OperationParametersValidation	| Parameter "subscriptionId" is not allowed in the operations section, define it in the global parameters section instead | Error |
-| [R2027](#R2027)	| DefaultMustBeInEnum | The default value is not one of the values enumerated as valid for this element. | Error |
+| [R2024](#R2024) | [AnonymousBodyParameter](#R2024) |	Inline/anonymous models must not be used, instead define a schema with a model name in the "definitions" section and refer to it. This allows operations to share the models. | Error |
+| [R2026](#R2026) | [AvoidAnonymousTypes](#R2026) |	Inline/anonymous models must not be used, instead define a schema with a model name in the "definitions" section and refer to it. This allows operations to share the models. | Error |
+| [R2014](#R2014)	| [OperationParametersValidation](#R2014)	| Parameter "subscriptionId" is not allowed in the operations section, define it in the global parameters section instead | Error |
+| [R2027](#R2027)	| [DefaultMustBeInEnum](#R2027) | The default value is not one of the values enumerated as valid for this element. | Error |
 | M1004	| ListByOperationsValidation | Operation must be one of List() - lists all resources under a subscription.  ListByResourceGroup() - list all resources in a resource group within a subscription. ListByParent() - where ""Parent"" is a context specific suffix. It lists all resource under a parent. | Error |
-| [R1001](#R1001)	| OperationIdNounInVerb	| Per the Noun_Verb convention for Operation Ids, the noun '{0}' should not appear after the underscore. | Error |
-| [R2055](#R2055)	| OneUnderscoreInOperationId | Only 1 underscore is permitted in the operation id, following Noun_Verb conventions.  | Error |
-| [R2014](#R2014)	| ServiceDefinitionParameters | Parameter "{0}" is referenced but not defined in the global parameters section of Service Definition |Error |
+| [R1001](#R1001)	| [OperationIdNounInVerb](#R1001)	| Per the Noun_Verb convention for Operation Ids, the noun '{0}' should not appear after the underscore. | Error |
+| [R2055](#R2055)	| [OneUnderscoreInOperationId](#R2055) | Only 1 underscore is permitted in the operation id, following Noun_Verb conventions.  | Error |
+| [R2014](#R2014)	| [ServiceDefinitionParameters](#R2014) | Parameter "{0}" is referenced but not defined in the global parameters section of Service Definition |Error |
 | M2043	| SupportedSchemesWarning | Azure Resource Management only supports HTTPS scheme. | Error | 
-| [R2003](#R2003)	| ValidFormats | '{0}' is not a known format.	| Error |
+| [R2003](#R2003)	| [ValidFormats](#R2003)	 | '{0}' is not a known format.	| Error |
 | M2005	| LongRunningResponseValidationRule | A '{0}' operation '{1}' with x-ms-long-running-operation extension must have a valid terminal success status code {2}. | Error |
-| [R2008](#R2008)	| MutabilityWithReadOnlyRule | When property is modeled as "readOnly": true then x-ms-mutability extension can only have "read" value. When property is modeled as "readOnly": false then applying x-ms-mutability extension with only "read" value is not allowed. Extension contains invalid values: '{0}'. | Error |
-| M2025	| NextLinkPropertyMustExist	| The property '{0}' specified by nextLinkName does not exist in the 200 response schema. \nPlease, specify the name of the property that provides the nextLink. If the model does not have the nextLink property then specify null. | Error |
+| [R2008](#R2008)	| [MutabilityWithReadOnlyRule](#R2008) | When property is modeled as "readOnly": true then x-ms-mutability extension can only have "read" value. When property is modeled as "readOnly": false then applying x-ms-mutability extension with only "read" value is not allowed. Extension contains invalid values: '{0}'. | Error |
+| [R2025](#R2025)	| [NextLinkPropertyMustExist](#R2025)	| The property '{0}' specified by nextLinkName does not exist in the 200 response schema. Please, specify the name of the property that provides the nextLink. If the model does not have the nextLink property then specify null. | Error |
 | [R2028](#R2028) | [NonEmptyClientName](#R2028) | Empty x-ms-client-name property | Error |
-| M2060 | PageableRequires200Response | A response for the 200 HTTP status code must be defined to use x-ms-pageable | Error |
+| [R2060](#R2060) | [PageableRequires200Response](#R2060) | A response for the 200 HTTP status code must be defined to use x-ms-pageable | Error |
 | M2019	| ResourceIsMsResourceValidation | A 'Resource' definition must have x-ms-azure-resource extension enabled and set to true. |	Error |
-| [R2058](#R2058) |XmsPathsMustOverloadPaths | Paths in `x-ms-paths` must overload a normal path in the paths section, i.e. a path in the `x-ms-paths` must either be same as a path in the paths section or a path in the paths sections followed by additional parameters. | Error |
+| [R2058](#R2058) |[XmsPathsMustOverloadPaths](#R2058) | Paths in `x-ms-paths` must overload a normal path in the paths section, i.e. a path in the `x-ms-paths` must either be same as a path in the paths section or a path in the paths sections followed by additional parameters. | Error |
 | [R2012](#R2012)	| [XmsClientNameParameter](#R2012) | Value of 'x-ms-client-name' cannot be the same as '{0}' Property/Model. | Error |
 | [R2013](#R2013)	| [XmsClientNameProperty](#R2013) | Value of 'x-ms-client-name' cannot be the same as '{0}' Property/Model. | Error |
 | M2047	| ParameterNameValidation | Parameter Must have the "name" property defined with non-empty string as its value | Error |
-| [R2056](#R2056)	| RequiredReadOnlyProperties | Property '{0}' is a required property. It should not be marked as 'readonly'. | Error |
+| [R2056](#R2056)	| [RequiredReadOnlyProperties](#R2056) | Property '{0}' is a required property. It should not be marked as 'readonly'. | Error |
 | M2054	| SecurityDefinitionsStructureValidation | An OpenAPI(swagger) spec must have security definitions and must adhere to the specific structure. | Error |
-| [R2006](#R2006)	| ControlCharactersNotAllowed | Specification must not contain any control characters. | Error |
-| [R2009](#R2009)	| ArraySchemaMustHaveItems | A property of type `Array` must have `items` defined in its `Schema`. | Error |
+| [R2006](#R2006)	| [ControlCharactersNotAllowed](#R2006) | Specification must not contain any control characters. | Error |
+| [R2009](#R2009)	| [ArraySchemaMustHaveItems](#R2009) | A property of type `Array` must have `items` defined in its `Schema`. | Error |
 | [R2022](#R2022) | [XmsExamplesRequired](#R2022) | Please provide x-ms-examples describing minimum/maximum property set for response/request payloads for operations.{0} | Error |
 
 #### SDK Warnings
@@ -100,13 +101,12 @@ We request OpenAPI(Swagger) spec authoring be assigned to engineers who have an
 | M4000 | ModelTypeIncomplete |	This definition lacks the property 'description', which is required for model types	| Warning |
 | M4000 | ParameterDescriptionRequired, OperationDescriptionRequired  | {0} lacks 'description' property. Consider adding a 'description' element. Accurate description is essential for maintaining reference documentation. | Warning |
  M4000 | DescriptiveDescriptionRequired | The value provided for description is not descriptive enough. Accurate and descriptive description is essential for maintaining reference documentation. | Warning |
-| [R2001](#R2001)	| AvoidNestedProperties | Consider using x-ms-client-flatten to provide a better end user experience | Warning |
-| [R4002](#R4002)	| LocationMustHaveXmsMutability | The "location" property of "Resource" model definition in ARM MUST have "x-ms-mutability": ["create", "read"] extension. | Warning |
-| [R2064](#R2064)	| PostOperationIdContainsUrlVerb | A POST operation OperationId must contain the verb at the end of the url related to the operation. | Warning |
-| [R2015](#R2015) | ParameterNotDefinedInGlobalParameters | Parameters `subscriptionId` and `api-version` must be declared as global parameters. | Warning |
+| [R2001](#R2001)	| [AvoidNestedProperties](#R2001) | Consider using x-ms-client-flatten to provide a better end user experience | Warning |
+| [R4002](#R4002)	| [LocationMustHaveXmsMutability](#R4002) | The "location" property of "Resource" model definition in ARM MUST have "x-ms-mutability": ["create", "read"] extension. | Warning |
+| [R2064](#R2064)	| [PostOperationIdContainsUrlVerb](#R2064) | A POST operation OperationId must contain the verb at the end of the url related to the operation. | Warning |
+| [R2015](#R2015) | [ParameterNotDefinedInGlobalParameters](#R2015) | Parameters `subscriptionId` and `api-version` must be declared as global parameters. | Warning |
 | [R1010](#R1010) | [AvoidMSDNReferences](#R1010) |	For better generated code quality, remove all references to "msdn.microsoft.com". | Warning |
 | [R2004](#R2004)	| [NonApplicationJsonType](#R2004) | Please make sure that media types other than 'application/json' are supported by your service. | Warning |
-| M2063	| BodyParametersValidation | A body parameter must be named 'parameters'. | Warning |
 | M2017	| PutRequestResponseValidation | A PUT operation request body schema should be the same as its 200 response schema, to allow reusing the same entity between GET and PUT. If the schema of the PUT request body is a superset of the GET response body, make sure you have a PATCH operation to make the resource updatable. Operation: '{0}' Request Model: '{1}' Response Model: '{2}' | Warning |
 | [R1009](#R1009) | [DeleteInOperationName](#R1009) | 'DELETE' operation '{0}' should use method name 'Delete'. Note: If you have already shipped an SDK on top of this spec, fixing this warning may introduce a breaking change. | Warning |
 | [R1005](#R1005) | [GetInOperationName](#R1005) | 'GET' operation '{0}' should use method name 'Get' or Method name start with 'List'. Note: If you have already shipped an SDK on top of this spec, fixing this warning may introduce a breaking change. | Warning |
@@ -114,10 +114,11 @@ We request OpenAPI(Swagger) spec authoring be assigned to engineers who have an
 | [R1006](#R1006)	| [PutInOperationName](#R1006) | 'PUT' operation '{0}' should use method name 'Create'. Note: If you have already shipped an SDK on top of this spec, fixing this warning may introduce a breaking change. | Warning |
 | [R1007](#R1007) | [PatchInOperationName](#R1007) | 'PATCH' operation '{0}' should use method name 'Update'. Note: If you have already shipped an SDK on top of this spec, fixing this warning may introduce a breaking change. | Warning |
 | [R1011](#R1011) | [HttpsSupportedScheme](#R1011) | 'Azure Resource Management only supports HTTPS scheme. | Warning |
+| [R2018](#R2018) | [XmsEnumValidation](#R2018) | The enum types should have x-ms-enum type extension set with appropriate options. Property name: {0}. | Warning |
 
 ## Rule Descriptions
 
-### <a name="M3012" />M3012 APIVersionPattern
+### <a name="R3012" />R3012 APIVersionPattern
 **Output Message**: API Version must be in the format: yyyy-MM-dd, optionally followed by -preview, -alpha, -beta, -rc, -privatepreview.
 
 **Description**: The API Version paramemter MUST be in the Year-Month-Date format (i.e. 2016-07-04.)  NOTE that this is the en-US ordering of month and date.  
@@ -128,6 +129,12 @@ The date MAY optionally be followed by one of:
 * -beta
 * -rc (release candidate)
 * -privatepreview
+
+**Why the rule is important**: Per [ARM guidelines](https://github.com/Azure/azure-resource-manager-rpc/blob/master/v1.0/resource-api-reference.md), API version should follow a consistent date format.
+
+**How to fix the violation**: Adopt API version format as indicated by the rule.
+
+**Impact on generated code**: The API version specified wil be used by the generated client.
 
 **Good Examples**: Examples of valid version patterns include:
 * 2016-07-04
@@ -143,7 +150,8 @@ The date MAY optionally be followed by one of:
 
 Links: [Index](#index) | [Error vs. Warning](#error-vs-warning) | [Automated Rules](#automated-rules) | [RPC](#rpc-violations): [Errors](#rpc-errors) or [Warnings](#rpc-warnings) | [SDK](#sdk-violations): [Errors](#sdk-errors) or [Warnings](#sdk-warnings)
 
-### <a name="M3016" />M3016 PropertiesNamesCamelCase
+### <a name="R3014" />R3014 BodyPropertiesNamesCamelCase
+### <a name="R3016" />R3016 DefinitionsPropertiesNamesCamelCase
 **Output Message**: Property named: "{0}", must follow camelCase style. Example: "{1}".
 **Output Message**: Property named: "{0}", for definition: "{1}" must follow camelCase style. Example: "{2}".
 
@@ -152,6 +160,12 @@ If the property is a single word (ex: foo, bar, etc.) it will be all lowercase.
 Two-letter acronmys (ex: ID, IO, IP, etc.) should be capitalized. 
 Three-letter acronyms (ex: API, URL, etc.) should only have the first letter capitalized (ex: Api, Url, etc.) 
 For more capitalization guidance, see: [https://msdn.microsoft.com/en-us/library/141e06ef(v=vs.71).aspx](https://msdn.microsoft.com/en-us/library/141e06ef(v=vs.71).aspx)
+
+**Why the rule is important**: Per [ARM guidelines](https://github.com/Azure/azure-resource-manager-rpc/blob/master/v1.0/resource-api-reference.md), properties should follow camel case format as specified at [https://msdn.microsoft.com/en-us/library/141e06ef(v=vs.71).aspx](https://msdn.microsoft.com/en-us/library/141e06ef(v=vs.71).aspx).
+
+**How to fix the violation**: Adopt camel case format as indicated by the rule. Please note that this may require a service side update and may cause a breaking change.
+
+**Impact on generated code**: Serialization of the property by the SDK will follow casing as defined in the spec file. Make sure casing matches the service implementation.
 
 **Good Examples**: Examples of lowerCamelCase style:
 * camelCase
@@ -258,7 +272,7 @@ If the resource pointed by the rule is not a tracked resource this warning may b
 Links: [Index](#index) | [Error vs. Warning](#error-vs-warning) | [Automated Rules](#automated-rules) | [RPC](#rpc-violations): [Errors](#rpc-errors) or [Warnings](#rpc-warnings) | [SDK](#sdk-violations): [Errors](#sdk-errors) or [Warnings](#sdk-warnings)
 
 ### <a name="R3018" />R3018 EnumInsteadOfBoolean
-**Output Message**: Booleans are not descriptive and make them hard to use. Instead use string enums with allowed set of values defined.
+**Output Message**: Booleans are not descriptive and make them hard to use. Consider using string enums with allowed set of values defined. Property: {0}.
 
 **Description**: Booleans properties are not descriptive in all cases and can make them to use, evaluate whether is makes sense to keep the property as boolean or turn it into an enum. 
 
@@ -1011,5 +1025,230 @@ Links: [Index](#index) | [Error vs. Warning](#error-vs-warning) | [Automated Rul
 **Impact on generated code**: N/A.
 
 **Examples**: Please refer the documentation of [x-ms-examples](https://github.com/Azure/azure-rest-api-specs/blob/master/documentation/x-ms-examples.md#why-x-ms-examples).
+
+Links: [Index](#index) | [Error vs. Warning](#error-vs-warning) | [Automated Rules](#automated-rules) | [RPC](#rpc-violations): [Errors](#rpc-errors) or [Warnings](#rpc-warnings) | [SDK](#sdk-violations): [Errors](#sdk-errors) or [Warnings](#sdk-warnings)
+
+### <a name="R2025" />R2025 NextLinkPropertyMustExist
+**Output Message**: The property '{0}' specified by nextLinkName does not exist in the 200 response schema. Please, specify the name of the property that provides the nextLink. If the model does not have the nextLink property then specify null.
+
+**Description**: Per definition of AutoRest [x-ms-pageable extension](https://github.com/Azure/autorest/blob/master/docs/extensions/readme.md#x-ms-pageable), the property specified by nextLinkName must exist in the 200 response schema.
+
+**Why the rule is important**: Generated SDK may not work, as the nextLink won't be tied to a property of the response schema. 
+
+**How to fix the violation**: Please refer the documentation of [x-ms-pageable](https://github.com/Azure/autorest/blob/master/docs/extensions/readme.md#x-ms-pageable).
+
+**Impact on generated code**: NexLink may be broken as property may not be found, paging may not work.
+
+**Examples**: Please refer the documentation of [x-ms-pageable](https://github.com/Azure/autorest/blob/master/docs/extensions/readme.md#x-ms-pageable).
+
+Links: [Index](#index) | [Error vs. Warning](#error-vs-warning) | [Automated Rules](#automated-rules) | [RPC](#rpc-violations): [Errors](#rpc-errors) or [Warnings](#rpc-warnings) | [SDK](#sdk-violations): [Errors](#sdk-errors) or [Warnings](#sdk-warnings)
+
+### <a name="R2060" />R2060 PageableRequires200Response
+**Output Message**: A response for the 200 HTTP status code must be defined to use x-ms-pageable.
+
+**Description**: Per definition of AutoRest [x-ms-pageable extension](https://github.com/Azure/autorest/blob/master/docs/extensions/readme.md#x-ms-pageable), the response shema must contain a 200 response schema.
+
+**Why the rule is important**: Pageable operation needs to have a response schema to be used by the SDK to serialize/deserialize the result. 
+
+**How to fix the violation**: Add a 200 status code response with corresponding schema. Please refer the documentation of [x-ms-pageable](https://github.com/Azure/autorest/blob/master/docs/extensions/readme.md#x-ms-pageable). Note that this may require a service side change and may be a breaking change.
+
+**Impact on generated code**: Response schema is used to serialize/deserialize result.
+
+**Examples**: Please refer the documentation of [x-ms-pageable](https://github.com/Azure/autorest/blob/master/docs/extensions/readme.md#x-ms-pageable).
+
+Links: [Index](#index) | [Error vs. Warning](#error-vs-warning) | [Automated Rules](#automated-rules) | [RPC](#rpc-violations): [Errors](#rpc-errors) or [Warnings](#rpc-warnings) | [SDK](#sdk-violations): [Errors](#sdk-errors) or [Warnings](#sdk-warnings)
+
+### <a name="R2024" />R2024 AnonymousBodyParameter
+### <a name="R2026" />R2026 AvoidAnonymousTypes
+**Output Message**: Inline/anonymous models must not be used, instead define a schema with a model name in the "definitions" section and refer to it. This allows operations to share the models.
+
+**Description**: This rule appears when you define a model type inline, rather than in the definitions section. If the model represents the same type as another parameter in a different operation, then it becomes impossible to reuse that same class for both operations.
+
+**Why the rule is important**: Name of the model will convert into a class name, if not given explicitely, it'll be automatically generated/ non-descriptive, which results in non-optimal user experience. Also, if the model is used by another operation, it won't be shared unless it's named and referenced by the operation.
+
+**How to fix the violation**: Move the schema to the definitions section and reference it using $ref.
+
+**Impact on generated code**: 
+**Before**
+**Spec**
+```json5
+…
+"parameters":[
+    {
+        "name": "foo",
+        "in": "body",
+        "schema": {
+            "type": "object",
+            "properties": {
+                …
+            }
+        }
+    }
+]
+…
+```
+**Generated code**
+```csharp
+public class FooParameter1 {
+    …
+}
+```
+**After**
+**Spec**
+```json5
+…
+"parameters": [
+    {
+        "name": "foo",
+        "in": "body",
+        "schema": {
+            "$ref": "#/definition/FooCreationSettings"
+        }
+    }
+],
+…
+"definitions": {
+    "FooCreationSettings": {
+        "type": "object",
+        "properties": {
+            …
+        }
+    }
+}
+…
+```
+**Generated code**
+```csharp
+public class FooCreationSettings {
+    …
+}
+```
+
+**Examples**: N/A.
+
+Links: [Index](#index) | [Error vs. Warning](#error-vs-warning) | [Automated Rules](#automated-rules) | [RPC](#rpc-violations): [Errors](#rpc-errors) or [Warnings](#rpc-warnings) | [SDK](#sdk-violations): [Errors](#sdk-errors) or [Warnings](#sdk-warnings)
+
+### <a name="R3019" />R3019 ArmResourcePropertiesBag
+**Output Message**: Top level property names should not be repeated inside the properties bag for ARM resource '{0}'. Properties [{1}] conflict with ARM top level properties. Please rename these.
+
+**Description**: Per [ARM guidelines](https://github.com/Azure/azure-resource-manager-rpc/blob/master/v1.0/resource-api-reference.md), top level properties should not be repeated inside th properties bag for ARM resources.
+
+**Why the rule is important**: [ARM guidelines](https://github.com/Azure/azure-resource-manager-rpc/blob/master/v1.0/resource-api-reference.md) enforce this rule. 
+
+**How to fix the violation**: Rename or remove conflicting property. Note that this may require a change on the service side and may cause a breaking change.
+
+**Examples**: 
+**Bad example**: "id" property is repeated in the model, as "Resource" already contains "id".
+```json
+"VersionedApplicationType": {
+  "description": "The versioned application type resource",
+  "properties": {
+    "properties": {
+      "id": {
+        "type": "string",
+        "description": "The name of the application type"
+      }
+    }
+  },
+  "allOf": [
+  {
+    "$ref": "#/definitions/Resource"
+  }
+  ]
+},
+"Resource":{  
+  "properties":{  
+    "id":{  
+      "readOnly":true,
+      "type":"string",
+      "description":"Fully qualified resource Id for the resource. Ex - /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/{resourceProviderNamespace}/{resourceType}/{resourceName}"
+    },
+    "name":{  
+      "readOnly":true,
+      "type":"string",
+      "description":"The name of the resource"
+    },
+    "type":{  
+      "readOnly":true,
+      "type":"string",
+      "description":"The type of the resource. Ex- Microsoft.Compute/virtualMachines or Microsoft.Storage/storageAccounts."
+    }
+  },
+  "x-ms-azure-resource": true
+}
+```
+Links: [Index](#index) | [Error vs. Warning](#error-vs-warning) | [Automated Rules](#automated-rules) | [RPC](#rpc-violations): [Errors](#rpc-errors) or [Warnings](#rpc-warnings) | [SDK](#sdk-violations): [Errors](#sdk-errors) or [Warnings](#sdk-warnings)
+
+### <a name="R3006" />R3006 BodyTopLevelProperties
+**Output Message**: Top level properties should be one of name, type, id, location, properties, tags, plan, sku, etag, managedBy, identity. Model definition '{0}' has extra properties ['{1}'].
+
+**Description**: Per [ARM guidelines](https://github.com/Azure/azure-resource-manager-rpc/blob/master/v1.0/resource-api-reference.md), top level properties of a resource should be only ones from the allowed set.
+
+**Why the rule is important**: [ARM guidelines](https://github.com/Azure/azure-resource-manager-rpc/blob/master/v1.0/resource-api-reference.md) enforce this rule. 
+
+**How to fix the violation**: Consider moving extra properties into "properties" bag of the resource model.
+
+**Examples**: 
+**Bad example**: "extraProperty" is not allowed at top level of the resource model.
+```json
+"VersionedApplicationType": {
+  "description": "The versioned application type resource",
+  "properties": {
+    "extraProperty": {
+      "type": "string",
+      "description": "Extra property description"
+    }
+  },
+  "allOf": [
+  {
+    "$ref": "#/definitions/Resource"
+  }
+  ]
+}
+```
+**Good example**: Notice that "extraProperty" is inside "properties" bag, and not at top level.
+```json
+"VersionedApplicationType": {
+  "description": "The versioned application type resource",
+  "properties": {
+    "properties":{
+      "extraProperty": {
+        "type": "string",
+        "description": "Extra property description"
+      }
+    }
+  },
+  "allOf": [
+  {
+    "$ref": "#/definitions/Resource"
+  }
+  ]
+}
+```
+Links: [Index](#index) | [Error vs. Warning](#error-vs-warning) | [Automated Rules](#automated-rules) | [RPC](#rpc-violations): [Errors](#rpc-errors) or [Warnings](#rpc-warnings) | [SDK](#sdk-violations): [Errors](#sdk-errors) or [Warnings](#sdk-warnings)
+
+### <a name="R2057" />R2057 InvalidSkuModel
+**Output Message**: Sku Model definition '{0}' is not valid. A Sku model must have 'name' property. It can also have 'tier', 'size', 'family', 'capacity' as optional properties.
+
+**Description**: Sku model definition needs to follow [ARM guidelines](https://github.com/Azure/azure-resource-manager-rpc/blob/master/v1.0/resource-api-reference.md) and can contain only a certain set of properties as described in the message. 
+
+**Why the rule is important**: Per [ARM guidelines](https://github.com/Azure/azure-resource-manager-rpc/blob/master/v1.0/resource-api-reference.md) this rule is enforced.
+
+**How to fix the violation**: Update the sku model definition.
+
+**Examples**: N/A
+
+Links: [Index](#index) | [Error vs. Warning](#error-vs-warning) | [Automated Rules](#automated-rules) | [RPC](#rpc-violations): [Errors](#rpc-errors) or [Warnings](#rpc-warnings) | [SDK](#sdk-violations): [Errors](#sdk-errors) or [Warnings](#sdk-warnings)
+
+### <a name="R2018" />R2018 XmsEnumValidation
+**Output Message**: The enum types should have x-ms-enum type extension set with appropriate options. Property name: {0}.
+
+**Description**: AutoRest defines [x-ms-enum extension](https://github.com/Azure/autorest/blob/master/docs/extensions/readme.md#x-ms-enum) to provide more flexibily for enum types, please refer to the documentation.
+
+**Why the rule is important**: Including [x-ms-enum extension](https://github.com/Azure/autorest/blob/master/docs/extensions/readme.md#x-ms-enum) provides more flexibilty for enum types in SDK generated code.
+
+**How to fix the violation**: Include the [x-ms-enum extension](https://github.com/Azure/autorest/blob/master/docs/extensions/readme.md#x-ms-enum) per indicated in its documentation.
+
+**Examples**: Please refer to [x-ms-enum extension](https://github.com/Azure/autorest/blob/master/docs/extensions/readme.md#x-ms-enum).
 
 Links: [Index](#index) | [Error vs. Warning](#error-vs-warning) | [Automated Rules](#automated-rules) | [RPC](#rpc-violations): [Errors](#rpc-errors) or [Warnings](#rpc-warnings) | [SDK](#sdk-violations): [Errors](#sdk-errors) or [Warnings](#sdk-warnings)
