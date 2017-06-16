@@ -2094,19 +2094,43 @@
       "properties": {
         "id": {
           "type": "string",
+		  "readOnly": true,
           "description": "Resource Id"
         },
         "name": {
           "type": "string",
+		  "readOnly": true,
           "description": "Resource name"
         },
         "type": {
           "type": "string",
+		  "readOnly": true,
           "description": "Resource type"
         }
       },
       "x-ms-azure-resource": true,
       "description": "The Resource definition for other than namespace."
+    },
+	"ResourceNamespacePatch": {
+      "properties": {
+        "location": {
+          "type": "string",
+          "description": "Resource location"
+        },
+        "tags": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          },
+          "description": "Resource tags"
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "#/definitions/Resource"
+        }
+      ],
+      "description": "The Resource definition."
     },
     "SBNamespaceListResult": {
       "properties": {
@@ -2131,41 +2155,31 @@
         },
         "properties": {
           "x-ms-client-flatten": true,
-          "properties": {
-            "provisioningState": {
-              "readOnly": true,
-              "type": "string",
-              "description": "Provisioning state of the namespace."
-            },
-            "createdAt": {
-              "readOnly": true,
-              "format": "date-time",
-              "type": "string",
-              "description": "The time the namespace was created."
-            },
-            "updatedAt": {
-              "readOnly": true,
-              "format": "date-time",
-              "type": "string",
-              "description": "The time the namespace was updated."
-            },
-            "serviceBusEndpoint": {
-              "readOnly": true,
-              "type": "string",
-              "description": "Endpoint you can use to perform Service Bus operations."
-            },
-            "metricId": {
-              "readOnly": true,
-              "type": "string",
-              "description": "Identifier for Azure Insights metrics"
-            }
-          },
+          "$ref": "#/definitions/SBNamespaceProperties",
           "description": "Properties of the namespace."
         }
       },
       "allOf": [
         {
           "$ref": "#/definitions/TrackedResource"
+        }
+      ],
+      "description": "Description of a namespace resource."
+    },
+	"SBNamespaceUpdateParameters": {
+      "properties": {
+        "sku": {
+          "$ref": "#/definitions/SBSku"
+        },
+        "properties": {
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/SBNamespaceProperties",
+          "description": "Properties of the namespace."
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "#/definitions/ResourceNamespacePatch"
         }
       ],
       "description": "Description of a namespace resource."
