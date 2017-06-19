@@ -193,7 +193,7 @@
             "description": "May be used to limit the number of results to the most recent N invoices.",
             "in": "query",
             "required": false,
-            "type": "integer",
+            "type": "string",
             "minimum": 1,
             "maximum": 100
           }
@@ -282,7 +282,7 @@
         ],
         "responses": {
           "200": {
-            "description": "OK. The request has succeeded.",
+            "description": "OK...The request has succeeded.",
             "schema": {
               "$ref": "#/definitions/Invoice"
             }
@@ -305,7 +305,7 @@
         "description": "Lists all of the available billing REST API operations.",
         "parameters": [
           {
-            "$ref": "#/parameters/apiVersionParameter"
+            "$ref": "#/parameters/apiVersion"
           }
         ],
         "responses": {
