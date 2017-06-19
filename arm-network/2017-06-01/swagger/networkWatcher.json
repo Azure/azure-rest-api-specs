@@ -3,7 +3,7 @@
   "info": {
     "title": "NetworkManagementClient",
     "description": "The Microsoft Azure Network management API provides a RESTful set of web services that interact with Microsoft Azure Networks service to manage your network resources. The API has entities that capture the relationship between an end user and the Microsoft Azure Networks service.",
-    "version": "2017-03-01"
+    "version": "2017-06-01"
   },
   "host": "management.azure.com",
   "schemes": [
@@ -947,6 +947,61 @@
           }
         }
       }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/networkWatchers/{networkWatcherName}/connectivityCheck": {
+      "post": {
+        "tags": [
+          "NetworkWatchers"
+        ],
+        "operationId": "NetworkWatchers_CheckConnectivity",
+        "x-ms-long-running-operation": true,
+        "description": "Verifies the possibility of establishing a direct TCP connection from a virtual machine to a given endpoint including another VM or an arbitrary remote server.",
+        "parameters": [
+          {
+            "name": "resourceGroupName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the network watcher resource group."
+          },
+          {
+            "name": "networkWatcherName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the network watcher resource."
+          },
+          {
+            "name": "parameters",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/ConnectivityParameters"
+            },
+            "description": "Parameters that determine how the connectivity check will be performed."
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful request for checking connectivity.",
+            "schema": {
+              "$ref": "#/definitions/ConnectivityInformation"
+            }
+          },
+          "202": {
+            "description": "Accepted and the operation will complete asynchronously.",
+            "schema": {
+              "$ref": "#/definitions/ConnectivityInformation"
+            }
+          }
+        }
+      }
     }
   },
   "definitions": {
@@ -1713,6 +1768,193 @@
           "x-ms-client-flatten": true,
           "$ref": "#/definitions/FlowLogProperties"
         }
+      }
+    },
+    "ConnectivityParameters": {
+      "description": "Parameters that determine how the connectivity check will be performed.",
+      "required": [
+        "source",
+        "destination"
+      ],
+      "properties": {
+        "source": {
+          "$ref": "#/definitions/ConnectivitySource"
+        },
+        "destination": {
+          "$ref": "#/definitions/ConnectivityDestination"
+        }
+      }
+    },
+    "ConnectivitySource": {
+      "description": "Parameters that define the source of the connection.",
+      "required": [
+        "resourceId"
+      ],
+      "properties": {
+        "resourceId": {
+          "description": "The ID of the resource from which a connectivity check will be initiated.",
+          "type": "string"
+        },
+        "port": {
+          "description": "The source port from which a connectivity check will be performed.",
+          "type": "integer"
+        }
+      }
+    },
+    "ConnectivityDestination": {
+      "description": "Parameters that define destination of connection.",
+      "properties": {
+        "resourceId": {
+          "description": "The ID of the resource to which a connection attempt will be made.",
+          "type": "string"
+        },
+        "address": {
+          "description": "The IP address or URI the resource to which a connection attempt will be made.",
+          "type": "string"
+        },
+        "port": {
+          "description": "Port on which check connectivity will be performed.",
+          "type": "integer"
+        }
+      }
+    },
+    "ConnectivityInformation": {
+      "description": "Information on the connectivity status.",
+      "properties": {
+        "hops": {
+          "readOnly": true,
+          "type": "array",
+          "description": "List of hops between the source and the destination.",
+          "items": {
+            "$ref": "#/definitions/ConnectivityHop"
+          }
+        },
+        "connectionStatus": {
+          "readOnly": true,
+          "type": "string",
+          "enum": [ "Unknown", "Connected", "Disconnected", "Degraded" ],
+          "x-ms-enum": {
+            "name": "ConnectionStatus",
+            "modelAsString": true
+          },
+          "description": "The connection status."
+        },
+        "avgLatencyInMs": {
+          "description": "Average latency in milliseconds.",
+          "readOnly": true,
+          "type": "integer"
+        },
+        "minLatencyInMs": {
+          "description": "Minimum latency in milliseconds.",
+          "readOnly": true,
+          "type": "integer"
+        },
+        "maxLatencyInMs": {
+          "description": "Maximum latency in milliseconds.",
+          "readOnly": true,
+          "type": "integer"
+        },
+        "probesSent": {
+          "description": "Total number of probes sent.",
+          "readOnly": true,
+          "type": "integer"
+        },
+        "probesFailed": {
+          "description": "Number of failed probes.",
+          "readOnly": true,
+          "type": "integer"
+        }
+      }
+    },
+    "ConnectivityHop": {
+      "description": "Information about a hop between the source and the destination.",
+      "properties": {
+        "type": {
+          "description": "The type of the hop.",
+          "readOnly": true,
+          "type": "string"
+        },
+        "id": {
+          "description": "The ID of the hop.",
+          "readOnly": true,
+          "type": "string"
+        },
+        "address": {
+          "description": "The IP address of the hop.",
+          "readOnly": true,
+          "type": "string"
+        },
+        "resourceId": {
+          "description": "The ID of the resource corresponding to this hop.",
+          "readOnly": true,
+          "type": "string"
+        },
+        "nextHopIds": {
+          "readOnly": true,
+          "type": "array",
+          "description": "List of next hop identifiers.",
+          "items": {
+            "type": "string"
+          }
+        },
+        "issues": {
+          "readOnly": true,
+          "type": "array",
+          "description": "List of issues.",
+          "items": {
+            "$ref": "#/definitions/ConnectivityIssue"
+          }
+        }
+      }
+    },
+    "ConnectivityIssue": {
+      "description": "Information about an issue encountered in the process of checking for connectivity.",
+      "properties": {
+        "origin": {
+          "readOnly": true,
+          "type": "string",
+          "enum": [ "Local", "Inbound", "Outbound" ],
+          "x-ms-enum": {
+            "name": "Origin",
+            "modelAsString": true
+          },
+          "description": "The origin of the issue."
+        },
+        "severity": {
+          "readOnly": true,
+          "type": "string",
+          "enum": [ "Error", "Warning" ],
+          "x-ms-enum": {
+            "name": "Severity",
+            "modelAsString": true
+          },
+          "description": "The severity of the issue."
+        },
+        "type": {
+          "readOnly": true,
+          "type": "string",
+          "enum": [ "Unknown", "AgentStopped", "GuestFirewall", "DnsResolution", "SocketBind", "NetworkSecurityRule", "UserDefinedRoute", "PortThrottled", "Platform" ],
+          "x-ms-enum": {
+            "name": "IssueType",
+            "modelAsString": true
+          },
+          "description": "The type of issue."
+        },
+        "context": {
+          "readOnly": true,
+          "type": "array",
+          "description": "Provides additional context on the issue.",
+          "items": {
+            "$ref": "#/definitions/IssueContext"
+          }
+        }
+      }
+    },
+    "IssueContext": {
+      "description": "A key-value pair that provides additional context on the issue.",
+      "type": "object",
+      "additionalProperties": {
+        "type": "string"
       }
     }
   },
