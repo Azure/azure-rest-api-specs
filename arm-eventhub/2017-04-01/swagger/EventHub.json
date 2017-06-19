@@ -397,7 +397,7 @@
         "tags": [
           "Namespaces"
         ],
-        "operationId": "AuthorizationRules_ListByNamespace",
+        "operationId": "Namespaces_ListAuthorizationRules",
         "x-ms-examples": {
           "ListAuthorizationRules": { "$ref": "../examples/NameSpaces/EHNameSpaceAutorizationRuleListAll.json" }
         },
@@ -1422,7 +1422,8 @@
     "EHNamespace": {
       "properties": {
         "sku": {
-          "$ref": "#/definitions/Sku"
+          "$ref": "#/definitions/Sku",
+		  "description": "Properties of sku resource"
         },
         "properties": {
           "x-ms-client-flatten": true,
