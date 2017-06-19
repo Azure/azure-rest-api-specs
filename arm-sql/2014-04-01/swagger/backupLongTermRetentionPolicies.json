@@ -76,8 +76,8 @@
                 "tags": [
                     "BackupLongTermRetentionPolicies"
                 ],
-                "operationId": "Databases_CreateLongTermRetentionPolicy",
-                "description": "Updates a database backup long term retention policy",
+                "operationId": "Databases_CreateOrUpdateLongTermRetentionPolicy",
+                "description": "Creates or updates a database backup long term retention policy",
                 "x-ms-examples": {
                     "Update backup long term retention policy": {
                         "$ref": "../examples/BackupLongTermRetentionPolicyUpdate.json"
@@ -196,6 +196,7 @@
                     "description": "The azure recovery services backup protection policy resource id"
                 }
             },
+            "required": ["state", "recoveryServicesBackupPolicyResourceId"],
             "description": "The properties of a backup long term retention policy"
         },
         "BackupLongTermRetentionPolicy": {
