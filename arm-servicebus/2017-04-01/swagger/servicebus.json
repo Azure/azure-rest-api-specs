@@ -1920,6 +1920,12 @@
             "schema": {
               "$ref": "#/definitions/RuleListResult"
             }
+          },
+          "default": {
+            "description": "ServiceBus error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
           }
         },
         "x-ms-pageable": {
@@ -1936,7 +1942,7 @@
         "x-ms-examples": {
           "RulesCreateOrUpdate": { "$ref": "../examples/Rules/RuleUpdate.json" }
         },
-        "description": "Creates a new rule",
+        "description": "Creates a new rule and updates an existing rule",
         "parameters": [
           {
             "$ref": "#/parameters/resourceGroupNameParameter"
@@ -1974,6 +1980,12 @@
             "description": "Rule created.",
             "schema": {
               "$ref": "#/definitions/Rule"
+            }
+          },
+          "default": {
+            "description": "ServiceBus error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
             }
           }
         }
@@ -2016,6 +2028,12 @@
           },
           "200": {
             "description": "Rule deleted."
+          },
+          "default": {
+            "description": "ServiceBus error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
           }
         }
       },
@@ -2060,6 +2078,12 @@
             "schema": {
               "$ref": "#/definitions/Rule"
             }
+          },
+          "default": {
+            "description": "ServiceBus error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
           }
         }
       }
@@ -2070,13 +2094,22 @@
       "properties": {
         "location": {
           "type": "string",
-          "description": "Resource location"
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ],
+          "description": "The Geo-location where the resource live"
         },
         "tags": {
           "type": "object",
           "additionalProperties": {
             "type": "string"
           },
+          "x-ms-mutability": [
+            "read",
+            "create",
+            "update"
+          ],
           "description": "Resource tags"
         }
       },
@@ -2094,24 +2127,24 @@
       "properties": {
         "id": {
           "type": "string",
-		  "readOnly": true,
+          "readOnly": true,
           "description": "Resource Id"
         },
         "name": {
           "type": "string",
-		  "readOnly": true,
+          "readOnly": true,
           "description": "Resource name"
         },
         "type": {
           "type": "string",
-		  "readOnly": true,
+          "readOnly": true,
           "description": "Resource type"
         }
       },
       "x-ms-azure-resource": true,
       "description": "The Resource definition for other than namespace."
     },
-	"ResourceNamespacePatch": {
+    "ResourceNamespacePatch": {
       "properties": {
         "location": {
           "type": "string",
@@ -2151,7 +2184,8 @@
     "SBNamespace": {
       "properties": {
         "sku": {
-          "$ref": "#/definitions/SBSku"
+          "$ref": "#/definitions/SBSku",
+          "description": "Porperties of Sku"
         },
         "properties": {
           "x-ms-client-flatten": true,
@@ -2166,10 +2200,11 @@
       ],
       "description": "Description of a namespace resource."
     },
-	"SBNamespaceUpdateParameters": {
+    "SBNamespaceUpdateParameters": {
       "properties": {
         "sku": {
-          "$ref": "#/definitions/SBSku"
+          "$ref": "#/definitions/SBSku",
+          "description": "Porperties of Sku"
         },
         "properties": {
           "x-ms-client-flatten": true,
@@ -2405,7 +2440,8 @@
       "properties": {
         "properties": {
           "x-ms-client-flatten": true,
-          "$ref": "#/definitions/SBQueueProperties"
+          "$ref": "#/definitions/SBQueueProperties",
+          "description": "Queue Properties"
         }
       },
       "allOf": [
@@ -2419,7 +2455,8 @@
       "properties": {
         "countDetails": {
           "readOnly": true,
-          "$ref": "#/definitions/MessageCountDetails"
+          "$ref": "#/definitions/MessageCountDetails",
+          "description": "Message Count Details."
         },
         "createdAt": {
           "readOnly": true,
@@ -2564,7 +2601,8 @@
       "properties": {
         "properties": {
           "x-ms-client-flatten": true,
-          "$ref": "#/definitions/SBTopicProperties"
+          "$ref": "#/definitions/SBTopicProperties",
+          "description": "Properties of topic resource."
         }
       },
       "allOf": [
@@ -2608,7 +2646,8 @@
         },
         "countDetails": {
           "readOnly": true,
-          "$ref": "#/definitions/MessageCountDetails"
+          "$ref": "#/definitions/MessageCountDetails",
+          "description": "Message count deatils"
         },
         "defaultMessageTimeToLive": {
           "format": "duration",
@@ -2677,7 +2716,8 @@
       "properties": {
         "properties": {
           "x-ms-client-flatten": true,
-          "$ref": "#/definitions/SBSubscriptionProperties"
+          "$ref": "#/definitions/SBSubscriptionProperties",
+          "description": "Properties of subscriptions resource."
         }
       },
       "allOf": [
@@ -2715,7 +2755,8 @@
         },
         "countDetails": {
           "readOnly": true,
-          "$ref": "#/definitions/MessageCountDetails"
+          "$ref": "#/definitions/MessageCountDetails",
+          "description": "Message count details"
         },
         "lockDuration": {
           "format": "duration",
@@ -2887,7 +2928,8 @@
           "description": "Error message indicating why the operation failed.",
           "type": "string"
         }
-      }
+      },
+      "description": "Properties of Error response"
     },
     "Rule": {
       "properties": {
@@ -2915,11 +2957,11 @@
         },
         "sqlFilter": {
           "$ref": "#/definitions/SqlFilter",
-          "description": ""
+          "description": "Properties of sqlFilter"
         },
         "correlationFilter": {
           "$ref": "#/definitions/CorrelationFilter",
-          "description": ""
+          "description": "Properties of correlationFilter"
         }
       },
       "description": "Description of Rule Resource."
@@ -3020,7 +3062,7 @@
     "Action": {
       "type": "object",
       "properties": {
-		"sqlExpression": {
+        "sqlExpression": {
           "type": "string",
           "description": "SQL expression. e.g. MyProperty='ABC'"
         },
@@ -3029,9 +3071,9 @@
           "type": "integer",
           "description": "This property is reserved for future use. An integer value showing the compatibility level, currently hard-coded to 20."
         },
-		"requiresPreprocessing": {
+        "requiresPreprocessing": {
           "type": "boolean",
-		  "default": true,
+          "default": true,
           "description": "Value that indicates whether the rule action requires preprocessing."
         }
       },
@@ -3049,13 +3091,13 @@
           "type": "integer",
           "description": "This property is reserved for future use. An integer value showing the compatibility level, currently hard-coded to 20."
         },
-		"requiresPreprocessing": {
+        "requiresPreprocessing": {
           "type": "boolean",
-		  "default": true,
+          "default": true,
           "description": "Value that indicates whether the rule action requires preprocessing."
         }
       },
-	  "allOf": [
+      "allOf": [
         {
           "$ref": "#/definitions/Action"
         }
