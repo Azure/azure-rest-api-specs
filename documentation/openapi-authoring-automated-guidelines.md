@@ -92,7 +92,6 @@ We request OpenAPI(Swagger) spec authoring be assigned to engineers who have an
 | [R2006](#R2006)	| ControlCharactersNotAllowed | Specification must not contain any control characters. | Error |
 | [R2009](#R2009)	| ArraySchemaMustHaveItems | A property of type `Array` must have `items` defined in its `Schema`. | Error |
 | [R2022](#R2022) | [XmsExamplesRequired](#R2022) | Please provide x-ms-examples describing minimum/maximum property set for response/request payloads for operations.{0} | Error |
-| [R2064](#R2064) | [LicenseMissing](#R2064) | Please provide correct licensing information here. Acceptable value: "name": "MICROSOFT\_MIT\_NO\_VERSION" | Error |
 
 #### SDK Warnings
 
@@ -115,6 +114,7 @@ We request OpenAPI(Swagger) spec authoring be assigned to engineers who have an
 | [R1006](#R1006)	| [PutInOperationName](#R1006) | 'PUT' operation '{0}' should use method name 'Create'. Note: If you have already shipped an SDK on top of this spec, fixing this warning may introduce a breaking change. | Warning |
 | [R1007](#R1007) | [PatchInOperationName](#R1007) | 'PATCH' operation '{0}' should use method name 'Update'. Note: If you have already shipped an SDK on top of this spec, fixing this warning may introduce a breaking change. | Warning |
 | [R1011](#R1011) | [HttpsSupportedScheme](#R1011) | 'Azure Resource Management only supports HTTPS scheme. | Warning |
+| [R2065](#R2065) | [LicenseHeaderMustNotBeSpecified](#R2065) | License header must not be specified in the OpenAPI document. | Warning |
 
 ## Rule Descriptions
 
@@ -1015,13 +1015,13 @@ Links: [Index](#index) | [Error vs. Warning](#error-vs-warning) | [Automated Rul
 
 Links: [Index](#index) | [Error vs. Warning](#error-vs-warning) | [Automated Rules](#automated-rules) | [RPC](#rpc-violations): [Errors](#rpc-errors) or [Warnings](#rpc-warnings) | [SDK](#sdk-violations): [Errors](#sdk-errors) or [Warnings](#sdk-warnings)
 
-### <a name="R2064" />R2064 LicenseMissing
-**Output Message**: Please provide correct licensing information here. Acceptable value: "name": "MICROSOFT\_MIT\_NO\_VERSION"
+### <a name="R2065" />R2065 LicenseHeaderMustNotBeSpecified
+**Output Message**: License header must not be specified in the OpenAPI document.
 
-**Description**: Each OpenAPI json document must contain the license object in its `info` section which must set the name to `MICROSOFT\_MIT\_NO\_VERSION`. This is necessary for AutoRest to insert the appropriate headers in the generated code.
+**Description**: `x-ms-code-generation-settings` must not have the header section specified in the OpenAPI documents since each SDK has a different licensing header, this information must be provided either from the command line or the configuration file.
 
-**Why the rule is important**: Missing or invalid license information can cause incorrect or empty headers in the generated code.
+**Why the rule is important**: License information must not be specified in the OpenAPI document since different SDKs have different headers.
 
-**How to fix the violation**: Ensure the `info` section of OpenAPI document has the name property set to `MICROSOFT\_MIT\_NO\_VERSION`.
+**How to fix the violation**: Ensure the `x-ms-code-generation-settings` does not have `header` section.
 
 Links: [Index](#index) | [Error vs. Warning](#error-vs-warning) | [Automated Rules](#automated-rules) | [RPC](#rpc-violations): [Errors](#rpc-errors) or [Warnings](#rpc-warnings) | [SDK](#sdk-violations): [Errors](#sdk-errors) or [Warnings](#sdk-warnings)
