@@ -1,8 +1,8 @@
 {
     "swagger": "2.0",
     "info": {
-        "title": "Azure SQL Database Datamasking Policies",
-        "description": "Provides create, read, update and delete functionality for Azure SQL Database datamasking policies.",
+        "title": "Azure SQL Database Datamasking Policies and Rules",
+        "description": "Provides create, read, update and delete functionality for Azure SQL Database datamasking policies and rules.",
         "version": "2014-04-01"
     },
     "host": "management.azure.com",
@@ -45,7 +45,7 @@
                         "in": "path",
                         "required": true,
                         "type": "string",
-                        "description": "The name of the database."
+                        "description": "The name of the database on which the data masking policy is set."
                     },
                     {
                         "$ref": "#/parameters/DataMaskingPolicyNameParameter"
@@ -61,12 +61,6 @@
                     }
                 ],
                 "responses": {
-                    "201": {
-                        "description": "Created",
-                        "schema": {
-                            "$ref": "#/definitions/DataMaskingPolicy"
-                        }
-                    },
                     "200": {
                         "description": "OK",
                         "schema": {
@@ -102,7 +96,7 @@
                         "in": "path",
                         "required": true,
                         "type": "string",
-                        "description": "The name of the database."
+                        "description": "The name of the database on which the data masking policy is set."
                     },
                     {
                         "$ref": "#/parameters/DataMaskingPolicyNameParameter"
@@ -121,15 +115,15 @@
         "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/servers/{serverName}/databases/{databaseName}/dataMaskingPolicies/{dataMaskingPolicyName}/rules/{dataMaskingRuleName}": {
             "put": {
                 "tags": [
-                    "DataMaskingPolicies"
+                    "DataMaskingRules"
                 ],
                 "operationId": "Databases_CreateOrUpdateDataMaskingRule",
-                "description": "Creates or updates an Azure SQL Server Firewall rule.",
+                "description": "Creates or updates a database data masking rule.",
                 "x-ms-examples": {
-                "Create/Update data masking policy for text": { "$ref": "../examples/DataMaskingRuleCreateOrUpdateText.json" },
-                "Create/Update data masking policy for numbers": { "$ref": "../examples/DataMaskingRuleCreateOrUpdateNumber.json" },
-                "Create/Update data masking policy for default min": { "$ref": "../examples/DataMaskingRuleCreateOrUpdateDefaultMin.json" },
-                "Create/Update data masking policy for default max": { "$ref": "../examples/DataMaskingRuleCreateOrUpdateDefaultMax.json" }
+                "Create/Update data masking rule for text": { "$ref": "../examples/DataMaskingRuleCreateOrUpdateText.json" },
+                "Create/Update data masking rule for numbers": { "$ref": "../examples/DataMaskingRuleCreateOrUpdateNumber.json" },
+                "Create/Update data masking rule for default min": { "$ref": "../examples/DataMaskingRuleCreateOrUpdateDefaultMin.json" },
+                "Create/Update data masking rule for default max": { "$ref": "../examples/DataMaskingRuleCreateOrUpdateDefaultMax.json" }
                 },
                 "parameters": [
                     {
@@ -190,12 +184,12 @@
         "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/servers/{serverName}/databases/{databaseName}/dataMaskingPolicies/{dataMaskingPolicyName}/rules": {
             "get": {
                 "tags": [
-                    "DataMaskingPolicies"
+                    "DataMaskingRules"
                 ],
                 "operationId": "Databases_ListDataMaskingRules",
                 "description": "Gets a list of database data masking rules.",
                 "x-ms-examples": {
-                "List data masking policies": { "$ref": "../examples/DataMaskingRuleList.json" }
+                "List data masking rules": { "$ref": "../examples/DataMaskingRuleList.json" }
                 },
                 "parameters": [
                     {
@@ -347,23 +341,23 @@
                 },
                 "numberFrom": {
                     "type": "string",
-                    "description": "The numberFrom property of the masking rule. Required if maskingFunction is set to Number, otherwise ignored."
+                    "description": "The numberFrom property of the masking rule. Required if maskingFunction is set to Number, otherwise this parameter will be ignored."
                 },
                 "numberTo": {
                     "type": "string",
-                    "description": "The numberTo property of the data masking rule. Required if maskingFunction is set to Number, otherwise ignored."
+                    "description": "The numberTo property of the data masking rule. Required if maskingFunction is set to Number, otherwise this parameter will be ignored."
                 },
                 "prefixSize": {
                     "type": "string",
-                    "description": "The prefixSize property that is used for the data masking rule. If maskingFunction is not set to Text, then this parameter should be ignored."
+                    "description": "If maskingFunction is set to Text, the prefixSize property that is used for the data masking rule.  Otherwise, this parameter will be ignored."
                 },
                 "suffixSize": {
                     "type": "string",
-                    "description": "The suffixSize property that is used for the data masking rule. Specifies the number of characters to show unmasked at the end of the string. If maskingFunction is not set to Text, then this parameter should be ignored."
+                    "description": "If maskingFunction is set to Text, the number of characters to show unmasked at the end of the string. Otherwise, this parameter will be ignored."
                 },
                 "replacementString": {
                     "type": "string",
-                    "description": "The replacementString property that is used for the data masking rule. Specifies the character to use for masking the unexposed part of the string. If maskingFunction is not set to Text, then this parameter should be ignored."
+                    "description": "If maskingFunction is set to Text, the character to use for masking the unexposed part of the string.  Otherwise, this parameter will be ignored."
                 }
             },
             "required": [
