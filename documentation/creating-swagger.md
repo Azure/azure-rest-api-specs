@@ -269,7 +269,7 @@ Query parameters are appended to the request URI. They can be specified as requi
 ```
 The user doesn't need to know where the parameter is placed. Doc comments surface the required/optional distinction.
 
-####Body Parameters<a name="BodyParameters"></a>
+#### Body Parameters<a name="BodyParameters"></a>
 Body parameters include schema for the payload. In this example, the schema element is a `$ref` to the type details 
 in the `#/definitions` section of the spec. More on the `#/definitions` later.
 ```json5
@@ -784,7 +784,7 @@ terminal states`Succeeded|Failed|Canceled`.
 }
 ```
 
-##Global parameters<a name="globalParam"></a>
+## Global parameters<a name="globalParam"></a>
 Swagger allows for parameters to be defined separately from the operation where they are used. By convention, AutoRest 
 treats global parameter definitions as Client properties. For example, almost all Azure Resource Manager APIs require 
 `subscriptionId` and `api-version`. These are defined as global parameters and become properties of the client.
@@ -836,4 +836,4 @@ If an operation requires that a parameter is exposed as a method parameter, it i
 
 TODO: naming standards for operations Create, CreateOrUpdate, Update (respect etag), Get, List, Delete, Patch
 TODO: patch => no validate
-[Swagger-spec2.0]:https://github.com/OAI/OpenAPI-Specification/blob/master/versions/2.0.md
+[Swagger-spec2.0](https://github.com/OAI/OpenAPI-Specification/blob/master/versions/2.0.md)
