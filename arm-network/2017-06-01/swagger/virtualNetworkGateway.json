@@ -1129,7 +1129,7 @@
       ],
       "description": "VPN client revoked certificate of virtual network gateway."
     },
-	"VpnClientConfiguration": {
+    "VpnClientConfiguration": {
       "properties": {
         "vpnClientAddressPool": {
           "$ref": "./virtualNetwork.json#/definitions/AddressSpace",
@@ -1148,6 +1148,22 @@
             "$ref": "#/definitions/VpnClientRevokedCertificate"
           },
           "description": "VpnClientRevokedCertificate for Virtual network gateway."
+        },
+        "vpnClientProtocols": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "description": "VPN client protocol enabled for the virtual network gateway.",
+            "enum": [
+              "IkeV2",
+              "SSTP"
+            ],
+            "x-ms-enum": {
+              "name": "VpnClientProtocol",
+              "modelAsString": true
+            }
+          },
+          "description": "VpnClientProtocols for Virtual network gateway."
         }
       },
       "description": "VpnClientConfiguration for P2S client."
