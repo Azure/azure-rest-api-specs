@@ -846,7 +846,7 @@
         "tags": [
           "EventHubs"
         ],
-        "operationId": "AuthorizationRules_ListByEventHub",
+        "operationId": "EventHubs_ListAuthorizationRules",
         "x-ms-examples": {
           "EventHubAutorizationRuleListAll": { "$ref": "../examples/EventHubs/EHEventHubAutorizationRuleListAll.json" }
         },
@@ -1326,6 +1326,10 @@
       "properties": {
         "location": {
           "type": "string",
+		  "x-ms-mutability": [
+            "read",
+            "create"
+          ],
           "description": "Resource location"
         },
         "tags": {
@@ -1333,6 +1337,11 @@
           "additionalProperties": {
             "type": "string"
           },
+		  "x-ms-mutability": [
+            "read",
+            "create",
+            "update"
+          ],
           "description": "Resource tags"
         }
       },
