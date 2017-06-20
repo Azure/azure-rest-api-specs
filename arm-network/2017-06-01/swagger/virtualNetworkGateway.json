@@ -555,7 +555,7 @@
             "schema": {
               "$ref": "#/definitions/ConnectionSharedKey"
             },
-            "description": "Parameters supplied to the Begin Set Virtual Network Gateway connection Shared key operation throughNetwork resource provider."
+            "description": "Parameters specifying the shared key for the connection"
           },
           {
             "$ref": "#/parameters/ApiVersionParameter"
@@ -854,7 +854,7 @@
       "properties": {
         "privateIPAllocationMethod": {
           "type": "string",
-          "description": "The private IP allocation method. Possible values are: 'Static' and 'Dynamic'.",
+          "description": "The private IP allocation method.",
           "enum": [
             "Static",
             "Dynamic"
@@ -875,10 +875,20 @@
         "provisioningState": {
           "readOnly": true,
           "type": "string",
-          "description": "The provisioning state of the public IP resource. Possible values are: 'Updating', 'Deleting', and 'Failed'."
+          "description": "The provisioning state of the public IP resource.",
+          "enum": [
+            "Succeeded",
+            "Updating",
+            "Deleting",
+            "Failed"
+          ],
+          "x-ms-enum": {
+            "name": "ProvisioningState",
+            "modelAsString": true
+          }
         }
       },
-      "description": "Properties of VirtualNetworkGatewayIPConfiguration"
+      "description": "Properties of an IP configuration for a virtual network gateway"
     },
     "VirtualNetworkGatewayIPConfiguration": {
       "properties": {
@@ -966,7 +976,17 @@
         "provisioningState": {
           "readOnly": true,
           "type": "string",
-          "description": "The provisioning state of the VirtualNetworkGateway resource. Possible values are: 'Updating', 'Deleting', and 'Failed'."
+          "description": "The provisioning state of the VirtualNetworkGateway resource.",
+          "enum": [
+            "Succeeded",
+            "Updating",
+            "Deleting",
+            "Failed"
+          ],
+          "x-ms-enum": {
+            "name": "ProvisioningState",
+            "modelAsString": true
+          }
         }
       },
       "description": "VirtualNetworkGateway properties"
@@ -980,7 +1000,17 @@
         "provisioningState": {
           "readOnly": true,
           "type": "string",
-          "description": "The provisioning state of the VPN client root certificate resource. Possible values are: 'Updating', 'Deleting', and 'Failed'."
+          "description": "The provisioning state of the VPN client root certificate resource.",
+          "enum": [
+            "Succeeded",
+            "Updating",
+            "Deleting",
+            "Failed"
+          ],
+          "x-ms-enum": {
+            "name": "ProvisioningState",
+            "modelAsString": true
+          }
         }
       },
       "required": [
@@ -1357,7 +1387,7 @@
       "properties": {
         "authorizationKey": {
           "type": "string",
-          "description": "The authorizationKey."
+          "description": "The authorization key."
         },
         "virtualNetworkGateway1": {
           "$ref": "#/definitions/VirtualNetworkGateway"
