@@ -1,0 +1,47 @@
+{
+    "parameters": {
+        "wanName": "wan1",
+        "resourceGroupName": "rg1",
+        "api-version": "2017-03-01",
+        "subscriptionId": "subid",
+        "WANParameters": {
+            "tags": {
+                "key1": "value1",
+                "key2": "value2"
+            },
+            "properties": {
+                "disableVPNEncryption": "false"
+            }
+        }
+    },
+    "responses": {
+        "200": {
+            "body": {
+                "id": "/subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Network/WANs/wanName",
+                "etag": "w/\\00000000-0000-0000-0000-000000000000\\",
+                "location": "West US",
+                "name": "wan1",
+                "type": "Microsoft.Network/WANs",
+                "tags": {
+                    "key1": "value1",
+                    "key2": "value2"
+                },
+                "properties": {
+                    "provisioningState": "Succeeded",
+                    "disableVPNEncryption": "false",
+                    "hubs": [
+                        "/subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Network/hubs/hub1",
+                        "/subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Network/hubs/hub2"
+                    ],
+                    "vpnSites": [
+                        "/subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Network/vpnSites/vpnSite1",
+                        "/subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Network/vpnSites/vpnSite2"
+                    ]
+                }
+            }
+        },
+        "202": {
+            "description": "Request received successfully. WAN is not yet provisioned; follow the Location header to poll for the WAN."
+        }
+    }
+}
