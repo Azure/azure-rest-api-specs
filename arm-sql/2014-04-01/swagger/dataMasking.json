@@ -41,11 +41,7 @@
                         "$ref": "#/parameters/ServerNameParameter"
                     },
                     {
-                        "name": "databaseName",
-                        "in": "path",
-                        "required": true,
-                        "type": "string",
-                        "description": "The name of the database on which the data masking policy is set."
+                        "$ref": "#/parameters/DatabaseNameParameter"
                     },
                     {
                         "$ref": "#/parameters/DataMaskingPolicyNameParameter"
@@ -92,11 +88,7 @@
                         "$ref": "#/parameters/ServerNameParameter"
                     },
                     {
-                        "name": "databaseName",
-                        "in": "path",
-                        "required": true,
-                        "type": "string",
-                        "description": "The name of the database on which the data masking policy is set."
+                        "$ref": "#/parameters/DatabaseNameParameter"
                     },
                     {
                         "$ref": "#/parameters/DataMaskingPolicyNameParameter"
@@ -139,11 +131,7 @@
                         "$ref": "#/parameters/ServerNameParameter"
                     },
                     {
-                        "name": "databaseName",
-                        "in": "path",
-                        "required": true,
-                        "type": "string",
-                        "description": "The name of the database."
+                        "$ref": "#/parameters/DatabaseNameParameter"
                     },
                     {
                         "$ref": "#/parameters/DataMaskingPolicyNameParameter"
@@ -205,11 +193,7 @@
                         "$ref": "#/parameters/ServerNameParameter"
                     },
                     {
-                        "name": "databaseName",
-                        "in": "path",
-                        "required": true,
-                        "type": "string",
-                        "description": "The name of the database."
+                        "$ref": "#/parameters/DatabaseNameParameter"
                     },
                     {
                         "$ref": "#/parameters/DataMaskingPolicyNameParameter"
@@ -246,16 +230,16 @@
                 },
                 "exemptPrincipals": {
                     "type": "string",
-                    "description": "The list of the exempt principals.  Specifies the semicolon-separated list of database users for which the data masking policy does not apply. The specified users receive data results without masking for all of the database queries."
+                    "description": "The list of the exempt principals. Specifies the semicolon-separated list of database users for which the data masking policy does not apply. The specified users receive data results without masking for all of the database queries."
                 },
                 "applicationPrincipals": {
                     "type": "string",
-                    "description": "The list of the application principals.  This is a legacy parameter and is no longer used.",
+                    "description": "The list of the application principals. This is a legacy parameter and is no longer used.",
                     "readOnly": true
                 },
                 "maskingLevel": {
                     "type": "string",
-                    "description": "The masking level.  This is a legacy parameter and is no longer used.",
+                    "description": "The masking level. This is a legacy parameter and is no longer used.",
                     "readOnly": true
                 }
             },
@@ -279,7 +263,7 @@
                 "kind": {
                     "type": "string",
                     "readOnly": true,
-                    "description": "The kind of Data Masking Policy.  Metadata, used for Azure portal."
+                    "description": "The kind of Data Masking Policy. Metadata, used for Azure portal."
                 }
             },
             "allOf": [
@@ -293,15 +277,16 @@
             "properties": {
                 "id": {
                     "type": "string",
-                    "description": "The rule Id."
+                    "description": "The rule Id.",
+                    "readOnly": true
                 },
                 "aliasName": {
                     "type": "string",
-                    "description": "The alias name.  This is a legacy parameter and is no longer used."
+                    "description": "The alias name. This is a legacy parameter and is no longer used."
                 },
                 "ruleState": {
                     "type": "string",
-                    "description": "The rule state.  Also used to delete a rule.  To delete an existing rule, specify the schemaName, tableName, columnName, maskingFunction, and specify ruleState as disabled.  However, if the rule doesn't already exist, this will create the rule with ruleState set to Enabled.",
+                    "description": "The rule state. Used to delete a rule. To delete an existing rule, specify the schemaName, tableName, columnName, maskingFunction, and specify ruleState as disabled. However, if the rule doesn't already exist, the rule will be created with ruleState set to enabled, regardless of the provided value of ruleState.",
                     "enum": [
                         "Disabled",
                         "Enabled"
@@ -349,7 +334,7 @@
                 },
                 "prefixSize": {
                     "type": "string",
-                    "description": "If maskingFunction is set to Text, the number of characters to show unmasked in the beginning of the string.  Otherwise, this parameter will be ignored."
+                    "description": "If maskingFunction is set to Text, the number of characters to show unmasked in the beginning of the string. Otherwise, this parameter will be ignored."
                 },
                 "suffixSize": {
                     "type": "string",
@@ -357,7 +342,7 @@
                 },
                 "replacementString": {
                     "type": "string",
-                    "description": "If maskingFunction is set to Text, the character to use for masking the unexposed part of the string.  Otherwise, this parameter will be ignored."
+                    "description": "If maskingFunction is set to Text, the character to use for masking the unexposed part of the string. Otherwise, this parameter will be ignored."
                 }
             },
             "required": [
@@ -383,7 +368,7 @@
                 "kind": {
                     "type": "string",
                     "readOnly": true,
-                    "description": "The kind of Data Masking Rule.  Metadata, used for Azure portal."
+                    "description": "The kind of Data Masking Rule. Metadata, used for Azure portal."
                 }
             },
             "allOf": [
@@ -464,6 +449,14 @@
             "required": true,
             "type": "string",
             "description": "The name of the server.",
+            "x-ms-parameter-location": "method"
+        },
+        "DatabaseNameParameter": {
+            "name": "databaseName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the database.",
             "x-ms-parameter-location": "method"
         },
         "DataMaskingPolicyNameParameter": {
