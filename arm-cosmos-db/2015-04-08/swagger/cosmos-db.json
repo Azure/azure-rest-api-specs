@@ -1,8 +1,8 @@
 {
   "swagger": "2.0",
   "info": {
-    "title": "DocumentDB",
-    "description": "Azure DocumentDB Database Service Resource Provider REST API",
+    "title": "Cosmos DB",
+    "description": "Azure Cosmos DB Database Service Resource Provider REST API",
     "version": "2015-04-08"
   },
   "host": "management.azure.com",
@@ -38,9 +38,9 @@
       "get": {
         "operationId": "DatabaseAccounts_Get",
         "x-ms-examples": {
-          "DocumentDBDatabaseAccountGet": { "$ref": "../examples/DocumentDBDatabaseAccountGet.json" }
+          "CosmosDBDatabaseAccountGet": { "$ref": "../examples/CosmosDBDatabaseAccountGet.json" }
         },
-        "description": "Retrieves the properties of an existing Azure DocumentDB database account.",
+        "description": "Retrieves the properties of an existing Azure Cosmos DB database account.",
         "parameters": [
           {
             "$ref": "#/parameters/subscriptionIdParameter"
@@ -67,9 +67,9 @@
       "patch": {
         "operationId": "DatabaseAccounts_Patch",
         "x-ms-examples": {
-          "DocumentDBDatabaseAccountPatch": { "$ref": "../examples/DocumentDBDatabaseAccountPatch.json" }
+          "CosmosDBDatabaseAccountPatch": { "$ref": "../examples/CosmosDBDatabaseAccountPatch.json" }
         },
-        "description": "Patches the properties of an existing Azure DocumentDB database account.",
+        "description": "Patches the properties of an existing Azure Cosmos DB database account.",
         "x-ms-long-running-operation": true,
         "parameters": [
           {
@@ -106,10 +106,10 @@
       "put": {
         "operationId": "DatabaseAccounts_CreateOrUpdate",
         "x-ms-examples": {
-          "DocumentDBDatabaseAccountCreateMin": { "$ref": "../examples/DocumentDBDatabaseAccountCreateMin.json" },
-          "DocumentDBDatabaseAccountCreateMax": { "$ref": "../examples/DocumentDBDatabaseAccountCreateMax.json" }
+          "CosmosDBDatabaseAccountCreateMin": { "$ref": "../examples/CosmosDBDatabaseAccountCreateMin.json" },
+          "CosmosDBDatabaseAccountCreateMax": { "$ref": "../examples/CosmosDBDatabaseAccountCreateMax.json" }
         },
-        "description": "Creates or updates an Azure DocumentDB database account.",
+        "description": "Creates or updates an Azure Cosmos DB database account.",
         "x-ms-long-running-operation": true,
         "parameters": [
           {
@@ -146,9 +146,9 @@
       "delete": {
         "operationId": "DatabaseAccounts_Delete",
         "x-ms-examples": {
-          "DocumentDBDatabaseAccountDelete": { "$ref": "../examples/DocumentDBDatabaseAccountDelete.json" }
+          "CosmosDBDatabaseAccountDelete": { "$ref": "../examples/CosmosDBDatabaseAccountDelete.json" }
         },
-        "description": "Deletes an existing Azure DocumentDB database account.",
+        "description": "Deletes an existing Azure Cosmos DB database account.",
         "x-ms-long-running-operation": true,
         "parameters": [
           {
@@ -178,9 +178,9 @@
       "post": {
         "operationId": "DatabaseAccounts_FailoverPriorityChange",
         "x-ms-examples": {
-          "DocumentDBDatabaseAccountFailoverPriorityChange": { "$ref": "../examples/DocumentDBDatabaseAccountFailoverPriorityChange.json" }
+          "CosmosDBDatabaseAccountFailoverPriorityChange": { "$ref": "../examples/CosmosDBDatabaseAccountFailoverPriorityChange.json" }
         },
-        "description": "Changes the failover priority for the Azure DocumentDB database account. A failover priority of 0 indicates a write region. The maximum value for a failover priority = (total number of regions - 1). Failover priority values must be unique for each of the regions in which the database account exists.",
+        "description": "Changes the failover priority for the Azure Cosmos DB database account. A failover priority of 0 indicates a write region. The maximum value for a failover priority = (total number of regions - 1). Failover priority values must be unique for each of the regions in which the database account exists.",
         "x-ms-long-running-operation": true,
         "parameters": [
           {
@@ -219,9 +219,9 @@
       "get": {
         "operationId": "DatabaseAccounts_List",
         "x-ms-examples": {
-          "DocumentDBDatabaseAccountList": { "$ref": "../examples/DocumentDBDatabaseAccountList.json" }
+          "CosmosDBDatabaseAccountList": { "$ref": "../examples/CosmosDBDatabaseAccountList.json" }
         },
-        "description": "Lists all the Azure DocumentDB database accounts available under the subscription.",
+        "description": "Lists all the Azure Cosmos DB database accounts available under the subscription.",
         "parameters": [
           {
             "$ref": "#/parameters/apiVersionParameter"
@@ -247,9 +247,9 @@
       "get": {
         "operationId": "DatabaseAccounts_ListByResourceGroup",
         "x-ms-examples": {
-          "DocumentDBDatabaseAccountListByResourceGroup": { "$ref": "../examples/DocumentDBDatabaseAccountListByResourceGroup.json" }
+          "CosmosDBDatabaseAccountListByResourceGroup": { "$ref": "../examples/CosmosDBDatabaseAccountListByResourceGroup.json" }
         },
-        "description": "Lists all the Azure DocumentDB database accounts available under the given resource group.",
+        "description": "Lists all the Azure Cosmos DB database accounts available under the given resource group.",
         "parameters": [
           {
             "$ref": "#/parameters/resourceGroupNameParameter"
@@ -278,9 +278,9 @@
       "post": {
         "operationId": "DatabaseAccounts_ListKeys",
         "x-ms-examples": {
-          "DocumentDBDatabaseAccountListKeys": { "$ref": "../examples/DocumentDBDatabaseAccountListKeys.json" }
+          "CosmosDBDatabaseAccountListKeys": { "$ref": "../examples/CosmosDBDatabaseAccountListKeys.json" }
         },
-        "description": "Lists the access keys for the specified Azure DocumentDB database account.",
+        "description": "Lists the access keys for the specified Azure Cosmos DB database account.",
         "parameters": [
           {
             "$ref": "#/parameters/subscriptionIdParameter"
@@ -309,10 +309,10 @@
       "post": {
         "operationId": "DatabaseAccounts_ListConnectionStrings",
         "x-ms-examples": {
-          "DocumentDBDatabaseAccountListConnectionStrings": { "$ref": "../examples/DocumentDBDatabaseAccountListConnectionStrings.json" },
-          "DocumentDBDatabaseAccountListConnectionStringsMongo": { "$ref": "../examples/DocumentDBDatabaseAccountListConnectionStringsMongo.json" }
+          "CosmosDBDatabaseAccountListConnectionStrings": { "$ref": "../examples/CosmosDBDatabaseAccountListConnectionStrings.json" },
+          "CosmosDBDatabaseAccountListConnectionStringsMongo": { "$ref": "../examples/CosmosDBDatabaseAccountListConnectionStringsMongo.json" }
         },
-        "description": "Lists the connection strings for the specified Azure DocumentDB database account.",
+        "description": "Lists the connection strings for the specified Azure Cosmos DB database account.",
         "parameters": [
           {
             "$ref": "#/parameters/subscriptionIdParameter"
@@ -341,9 +341,9 @@
       "get": {
         "operationId": "DatabaseAccounts_ListReadOnlyKeys",
         "x-ms-examples": {
-          "DocumentDBDatabaseAccountListReadOnlyKeys": { "$ref": "../examples/DocumentDBDatabaseAccountListReadOnlyKeys.json" }
+          "CosmosDBDatabaseAccountListReadOnlyKeys": { "$ref": "../examples/CosmosDBDatabaseAccountListReadOnlyKeys.json" }
         },
-        "description": "Lists the read-only access keys for the specified Azure DocumentDB database account.",
+        "description": "Lists the read-only access keys for the specified Azure Cosmos DB database account.",
         "parameters": [
           {
             "$ref": "#/parameters/subscriptionIdParameter"
@@ -372,9 +372,9 @@
       "post": {
         "operationId": "DatabaseAccounts_RegenerateKey",
         "x-ms-examples": {
-          "DocumentDBDatabaseAccountRegenerateKey": { "$ref": "../examples/DocumentDBDatabaseAccountRegenerateKey.json" }
+          "CosmosDBDatabaseAccountRegenerateKey": { "$ref": "../examples/CosmosDBDatabaseAccountRegenerateKey.json" }
         },
-        "description": "Regenerates an access key for the specified Azure DocumentDB database account.",
+        "description": "Regenerates an access key for the specified Azure Cosmos DB database account.",
         "x-ms-long-running-operation": true,
         "parameters": [
           {
@@ -413,9 +413,9 @@
       "head": {
         "operationId": "DatabaseAccounts_CheckNameExists",
         "x-ms-examples": {
-          "DocumentDBDatabaseAccountCheckNameExists": { "$ref": "../examples/DocumentDBDatabaseAccountCheckNameExists.json" }
+          "CosmosDBDatabaseAccountCheckNameExists": { "$ref": "../examples/CosmosDBDatabaseAccountCheckNameExists.json" }
         },
-        "description": "Checks that the Azure DocumentDB account name already exists. A valid account name may contain only lowercase letters, numbers, and the '-' character, and must be between 3 and 50 characters.",
+        "description": "Checks that the Azure Cosmos DB account name already exists. A valid account name may contain only lowercase letters, numbers, and the '-' character, and must be between 3 and 50 characters.",
         "parameters": [
           {
             "$ref": "#/parameters/accountNameParameter"
@@ -483,7 +483,7 @@
       }
     },
     "Location": {
-      "description": "A region in which the Azure DocumentDB database account is deployed.",
+      "description": "A region in which the Azure Cosmos DB database account is deployed.",
       "type": "object",
       "properties": {
         "id": {
@@ -544,7 +544,7 @@
       "x-ms-azure-resource": true
     },
     "DatabaseAccount": {
-      "description": "A DocumentDB database account.",
+      "description": "An Azure Cosmos DB database account.",
       "type": "object",
       "properties": {
         "kind": {
@@ -574,10 +574,10 @@
     },
     "ConsistencyPolicy": {
       "type": "object",
-      "description": "The consistency policy for the DocumentDB database account.",
+      "description": "The consistency policy for the Cosmos DB database account.",
       "properties": {
         "defaultConsistencyLevel": {
-          "description": "The default consistency level and configuration settings of the DocumentDB account.",
+          "description": "The default consistency level and configuration settings of the Cosmos DB account.",
           "type": "string",
           "enum": [
             "Eventual",
@@ -618,17 +618,17 @@
           "$ref": "#/definitions/ProvisioningState"
         },
         "documentEndpoint": {
-          "description": "The connection endpoint for the DocumentDB database account.",
+          "description": "The connection endpoint for the Cosmos DB database account.",
           "type": "string",
           "readOnly": true
         },
         "databaseAccountOfferType": {
-          "description": "The offer type for the DocumentDB database account. Default value: Standard.",
+          "description": "The offer type for the Cosmos DB database account. Default value: Standard.",
           "readOnly": true,
           "$ref": "#/definitions/DatabaseAccountOfferType"
         },
         "ipRangeFilter": {
-          "description": "DocumentDB Firewall Support: This value specifies the set of IP addresses or IP address ranges in CIDR form to be included as the allowed list of client IPs for a given database account. IP addresses/ranges must be comma separated and must not contain any spaces.",
+          "description": "Cosmos DB Firewall Support: This value specifies the set of IP addresses or IP address ranges in CIDR form to be included as the allowed list of client IPs for a given database account. IP addresses/ranges must be comma separated and must not contain any spaces.",
           "$ref": "#/definitions/IPRangeFilter"
         },
         "enableAutomaticFailover": {
@@ -636,13 +636,13 @@
           "type": "boolean"
         },
         "consistencyPolicy": {
-          "description": "The consistency policy for the DocumentDB database account.",
+          "description": "The consistency policy for the Cosmos DB database account.",
           "$ref": "#/definitions/ConsistencyPolicy"
         },
         "writeLocations": {
           "type": "array",
           "readOnly": true,
-          "description": "An array that contains the write location for the DocumentDB account.",
+          "description": "An array that contains the write location for the Cosmos DB account.",
           "items": {
             "$ref": "#/definitions/Location"
           }
@@ -650,7 +650,7 @@
         "readLocations": {
           "type": "array",
           "readOnly": true,
-          "description": "An array that contains of the read locations enabled for the DocumentDB account.",
+          "description": "An array that contains of the read locations enabled for the Cosmos DB account.",
           "items": {
             "$ref": "#/definitions/Location"
           }
@@ -666,16 +666,16 @@
       }
     },
     "DatabaseAccountCreateUpdateProperties": {
-      "description": "Properties to create and update Azure DocumentDB database accounts.",
+      "description": "Properties to create and update Azure Cosmos DB database accounts.",
       "type": "object",
       "properties": {
         "consistencyPolicy": {
-          "description": "The consistency policy for the DocumentDB account.",
+          "description": "The consistency policy for the Cosmos DB account.",
           "$ref": "#/definitions/ConsistencyPolicy"
         },
         "locations": {
           "type": "array",
-          "description": "An array that contains the georeplication locations enabled for the DocumentDB account.",
+          "description": "An array that contains the georeplication locations enabled for the Cosmos DB account.",
           "items": {
             "$ref": "#/definitions/Location"
           }
@@ -684,7 +684,7 @@
           "$ref": "#/definitions/DatabaseAccountOfferType"
         },
         "ipRangeFilter": {
-          "description": "DocumentDB Firewall Support: This value specifies the set of IP addresses or IP address ranges in CIDR form to be included as the allowed list of client IPs for a given database account. IP addresses/ranges must be comma separated and must not contain any spaces.",
+          "description": "Cosmos DB Firewall Support: This value specifies the set of IP addresses or IP address ranges in CIDR form to be included as the allowed list of client IPs for a given database account. IP addresses/ranges must be comma separated and must not contain any spaces.",
           "$ref": "#/definitions/IPRangeFilter"
         },
         "enableAutomaticFailover": {
@@ -698,7 +698,7 @@
       ]
     },
     "DatabaseAccountCreateUpdateParameters": {
-      "description": "Parameters to create and update DocumentDB database accounts.",
+      "description": "Parameters to create and update Cosmos DB database accounts.",
       "type": "object",
       "properties": {
         "kind": {
@@ -730,7 +730,7 @@
       ]
     },
     "DatabaseAccountPatchParameters": {
-      "description": "Parameters for patching Azure DocumentDB database account properties.",
+      "description": "Parameters for patching Azure Cosmos DB database account properties.",
       "type": "object",
       "properties": {
         "tags": {
@@ -776,7 +776,7 @@
       }
     },
     "DatabaseAccountConnectionString": {
-      "description": "Connection string for the DocumentDB account",
+      "description": "Connection string for the Cosmos DB account",
       "properties": {
         "connectionString": {
           "readOnly": true,
@@ -795,7 +795,7 @@
       "properties": {
         "connectionStrings": {
           "type": "array",
-          "description": "An array that contains the connection strings for the DocumentDB account.",
+          "description": "An array that contains the connection strings for the Cosmos DB account.",
           "items": {
             "$ref": "#/definitions/DatabaseAccountConnectionString"
           }
@@ -826,7 +826,7 @@
       ]
     },
     "DatabaseAccountOfferType": {
-      "description": "The offer type for the DocumentDB database account.",
+      "description": "The offer type for the Cosmos DB database account.",
       "type": "string",
       "enum": [
         "Standard"
@@ -846,11 +846,11 @@
     "ProvisioningState": {
       "type": "string",
       "readOnly": true,
-      "description": "The status of the DocumentDB account at the time the operation was called. The status can be one of following. 'Creating' – the DocumentDB account is being created. When an account is in Creating state, only properties that are specified as input for the Create DocumentDB account operation are returned. 'Succeeded' – the DocumentDB account is active for use. 'Updating' – the DocumentDB account is being updated. 'Deleting' – the DocumentDB account is being deleted. 'Failed' – the DocumentDB account failed creation."
+      "description": "The status of the Cosmos DB account at the time the operation was called. The status can be one of following. 'Creating' – the Cosmos DB account is being created. When an account is in Creating state, only properties that are specified as input for the Create Cosmos DB account operation are returned. 'Succeeded' – the Cosmos DB account is active for use. 'Updating' – the Cosmos DB account is being updated. 'Deleting' – the Cosmos DB account is being deleted. 'Failed' – the Cosmos DB account failed creation."
     },
     "IPRangeFilter": {
       "type": "string",
-      "description": "DocumentDB Firewall Support: This value specifies the set of IP addresses or IP address ranges in CIDR form to be included as the allowed list of client IPs for a given database account. IP addresses/ranges must be comma separated and must not contain any spaces."
+      "description": "Cosmos DB Firewall Support: This value specifies the set of IP addresses or IP address ranges in CIDR form to be included as the allowed list of client IPs for a given database account. IP addresses/ranges must be comma separated and must not contain any spaces."
     }
   },
   "parameters": {
@@ -885,7 +885,7 @@
       "required": true,
       "type": "string",
       "x-ms-parameter-location": "method",
-      "description": "DocumentDB database account name.",
+      "description": "Cosmos DB database account name.",
       "minLength": 3,
       "maxLength": 50
     }
