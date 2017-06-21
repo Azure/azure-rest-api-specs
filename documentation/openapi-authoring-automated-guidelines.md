@@ -41,8 +41,8 @@ We request OpenAPI(Swagger) spec authoring be assigned to engineers who have an
 | M3007	| PutGetPatchResponseValidation | {0} has different responses for PUT/GET/PATCH operations. The PUT/GET/PATCH operations must have same schema response. | Error |
 | M3003	| RequiredPropertiesMustExist | Required property does not appear in the list of properties | Error |
 | M3001 | ResourceModelValidation | Model definition '{0}' must have the properties 'name', 'id' and 'type' in its hierarchy and these properties must be marked as readonly. | Error |
-| [R3025](#R3025)	| [TrackedResourceGetOperationValidation](#R3025) | Tracked resource '{0}' must have a get operation | Error |
-| [R3026](#R3026)	| [TrackedResourcePatchOperationValidation](#R3026) | Tracked resource '{0}' must have patch operation that at least supports the update of tags | Error |
+| [R3025](#R3025)	| [TrackedResourceGetOperation](#R3025) | Tracked resource '{0}' must have a get operation | Error |
+| [R3026](#R3026)	| [TrackedResourcePatchOperation](#R3026) | Tracked resource '{0}' must have patch operation that at least supports the update of tags | Error |
 | [R2059](#R2059)	| [UniqueResourcePaths](#R2059) | Multiple resource providers are not allowed in a single spec. More than one the resource paths were found: '{0}'. | Error |
 | M3013	| DeleteMustNotHaveRequestBody | 'Delete' operation must not have a request body. | Error |
 | M2016	| PatchBodyParametersSchemaValidation | Properties of a PATCH request body must not be {0}. PATCH operation: '{1}' Model Definition: '{2}' Property: '{3}' | Error |
@@ -186,13 +186,13 @@ For more capitalization guidance, see: [https://msdn.microsoft.com/en-us/library
 
 Links: [Index](#index) | [Error vs. Warning](#error-vs-warning) | [Automated Rules](#automated-rules) | [RPC](#rpc-violations): [Errors](#rpc-errors) or [Warnings](#rpc-warnings) | [SDK](#sdk-violations): [Errors](#sdk-errors) or [Warnings](#sdk-warnings)
 
-### <a name="R3025" />R3025 TrackedResourceGetOperationValidation
+### <a name="R3025" />R3025 TrackedResourceGetOperation
 **Output Message**: Tracked resource '{0}' must have a get operation.
 
 **Description**: Verifies if a tracked resource has a corresponding GET operation. 
 What's a tracked resource? A Tracked Resource is an ARM Resource with "location" as a required property.
 
-**Why the rule is important**: Per ARM guidelines, each tracked resource must have a GET operation.
+**Why the rule is important**: Per [ARM guidelines](https://github.com/Azure/azure-resource-manager-rpc/blob/master/v1.0/resource-api-reference.md), each tracked resource must have a GET operation.
 
 **How to fix the violation**: Add a GET operation that returns the tracked resource pointed out by the rule - if the operation does not exist for the service, this fix requires a service side change. 
 If the resource pointed by the rule is not a tracked resource, this warning may be a false positive, please clarify this with your PR reviewer.
@@ -203,13 +203,13 @@ If the resource pointed by the rule is not a tracked resource, this warning may 
 
 Links: [Index](#index) | [Error vs. Warning](#error-vs-warning) | [Automated Rules](#automated-rules) | [RPC](#rpc-violations): [Errors](#rpc-errors) or [Warnings](#rpc-warnings) | [SDK](#sdk-violations): [Errors](#sdk-errors) or [Warnings](#sdk-warnings)
 
-### <a name="R3026" />R3026 TrackedResourcePatchOperationValidation
+### <a name="R3026" />R3026 TrackedResourcePatchOperation
 **Output Message**: Tracked resource '{0}' must have patch operation that at least supports the update of tags.
 
 **Description**: Verifies if a tracked resource has a corresponding PATCH operation. 
 What's a tracked resource? A Tracked Resource is an ARM Resource with "location" as a required property.
 
-**Why the rule is important**: Per ARM guidelines, each tracked resource must have a PATCH operation supporting at least the update of tags.
+**Why the rule is important**: Per [ARM guidelines](https://github.com/Azure/azure-resource-manager-rpc/blob/master/v1.0/resource-api-reference.md), each tracked resource must have a PATCH operation supporting at least the update of tags.
 
 **How to fix the violation**: Add a PATCH operation that allows at least the update of tags for the tracked resource - if the operation does not exist for the service, this fix requires a service side change. 
 If the resource pointed by the rule is not a tracked resource, this warning may be a false positive, please clarify this with your PR reviewer.
@@ -226,7 +226,7 @@ Links: [Index](#index) | [Error vs. Warning](#error-vs-warning) | [Automated Rul
 **Description**: Verifies if a tracked resource has a corresponding ListByResourceGroup operation. 
 What's a tracked resource? A Tracked Resource is an ARM Resource with "location" as a required property.
 
-**Why the rule is important**: Per ARM guidelines, each tracked resource must have a corresponding ListByResourceGroup operation.
+**Why the rule is important**: Per [ARM guidelines](https://github.com/Azure/azure-resource-manager-rpc/blob/master/v1.0/resource-api-reference.md), each tracked resource must have a corresponding ListByResourceGroup operation.
 
 **How to fix the violation**: Add a corresponding ListByResourceGroup operation for the tracked resource - if the operation does not exist for the service, this fix requires a service side change. If the operation already exists and it is not named following the naming convention "ListbyResourceGroup", consider updating the operation name. 
 If the resource pointed by the rule is not a tracked resource or the operation that allows listing by resource group does not follow the naming convention "ListByResourceGroup", this warning may be a false positive, please clarify this with your PR reviewer.
@@ -243,7 +243,7 @@ Links: [Index](#index) | [Error vs. Warning](#error-vs-warning) | [Automated Rul
 **Description**: Verifies if a tracked resource has a corresponding ListByResourceGroup operation. 
 What's a tracked resource? A Tracked Resource is an ARM Resource with "location" as a required property.
 
-**Why the rule is important**: Per ARM guidelines, each tracked resource must have a corresponding ListBySubscription operation.
+**Why the rule is important**: Per [ARM guidelines](https://github.com/Azure/azure-resource-manager-rpc/blob/master/v1.0/resource-api-reference.md), each tracked resource must have a corresponding ListBySubscription operation.
 
 **How to fix the violation**: Add a corresponding ListBySubscription operation for the tracked resource - if the operation does not exist for the service, this fix requires a service side change. If the operation already exists and it is not named following the naming conventions: List, ListBySubscriptionId, ListBySubscription or ListBySubscriptions, consider updating the operation name. 
 If the resource pointed by the rule is not a tracked resource or the operation that allows listing by subscription ID does not follow the naming convention mentioned above, this warning may be a false positive, please clarify this with your PR reviewer.
@@ -260,7 +260,7 @@ Links: [Index](#index) | [Error vs. Warning](#error-vs-warning) | [Automated Rul
 **Description**: Verifies if a tracked resource has a corresponding list by immediate parent operation. 
 What's a tracked resource? A Tracked Resource is an ARM Resource with "location" as a required property.
 
-**Why the rule is important**: Per ARM guidelines, each tracked resource must have a corresponding "list by immediate parent" operation.
+**Why the rule is important**: Per [ARM guidelines](https://github.com/Azure/azure-resource-manager-rpc/blob/master/v1.0/resource-api-reference.md), each tracked resource must have a corresponding "list by immediate parent" operation.
 
 **How to fix the violation**: Add an operation that allows listing the tracked resource by its immediate parent - if the operation does not exist for the service, this fix requires a service side change. If the operation already exists, please double check the name of the operation, our rule is matching the parent and child resource names to the operation names, if those don't match 100%, this warning may be a false positive, please evaluate whether the named picked is appropriate or needs update. 
 If the resource pointed by the rule is not a tracked resource this warning may be a false positive, please clarify this with your PR reviewer.
@@ -555,7 +555,7 @@ Links: [Index](#index) | [Error vs. Warning](#error-vs-warning) | [Automated Rul
 
 **Description**: Verifies whether format is specified as "uuid" or not.
 
-**Why the rule is important**: Per ARM guidelines, GUID usage are discouraged.
+**Why the rule is important**: Per [ARM guidelines](https://github.com/Azure/azure-resource-manager-rpc/blob/master/v1.0/resource-api-reference.md), GUID usage are discouraged.
 
 **How to fix the violation**: If GUIDs are absolutely required in your service, please get sign off from the Azure API review board.
 
@@ -605,7 +605,7 @@ Links: [Index](#index) | [Error vs. Warning](#error-vs-warning) | [Automated Rul
 
 **Description**: Verifies whether more than one resource providers exists in the specification or not.
 
-**Why the rule is important**: Per the ARM guidelines, each swagger specification must contain one resource provider.
+**Why the rule is important**: Per the [ARM guidelines](https://github.com/Azure/azure-resource-manager-rpc/blob/master/v1.0/resource-api-reference.md), each swagger specification must contain one resource provider.
 
 **How to fix the violation**: One swagger specification must have one resource provider. Please create multiple swaggers, each for one provider. Please refer
 [Literate Configuration](https://github.com/Azure/autorest/blob/185e337137c990b9cc1b8ebbb272e76eeeef43a1/docs/user/literate-file-formats/configuration.md).
@@ -853,7 +853,7 @@ Links: [Index](#index) | [Error vs. Warning](#error-vs-warning) | [Automated Rul
 ### <a name="R3023" />R3023 OperationsAPIImplementation
 **Output Message**: Operations API must be implemented for '{0}'.
 
-**Description**: Per ARM guidelines, each RP must expose an operations API that returns information about all the operations available with the service.
+**Description**: Per [ARM guidelines](https://github.com/Azure/azure-resource-manager-rpc/blob/master/v1.0/resource-api-reference.md), each RP must expose an operations API that returns information about all the operations available with the service.
 
 **Why the rule is important**: For better user experience. Users can query the service to get a list of all possible operations on a service and decide what they have to do.
 
@@ -958,7 +958,7 @@ Links: [Index](#index) | [Error vs. Warning](#error-vs-warning) | [Automated Rul
 ### <a name="R2020" />R2020 RequiredPropertiesMissingInResourceModel
 **Output Message**: Model definition '{0}' must have the properties 'name', 'id' and 'type' in its hierarchy and these properties must be marked as readonly.
 
-**Description**: Per ARM guidelines, a `Resource` model must have the `name`, `id` and `type` properties defined as `readOnly` in its hierarchy.
+**Description**: Per [ARM guidelines](https://github.com/Azure/azure-resource-manager-rpc/blob/master/v1.0/resource-api-reference.md), a `Resource` model must have the `name`, `id` and `type` properties defined as `readOnly` in its hierarchy.
 
 **Why the rule is important**: `name`, `type` and `id` are readonly properties set on the service end. Also, per ARM guidelines each `Resource` type model must have these properties defined in its hierarchy. An example `Resource` definition can be found [here](https://github.com/Azure/azure-rest-api-specs-pr/blob/master/common-types/resource-management/v1/types.json#L3).
 
@@ -1037,9 +1037,9 @@ Links: [Index](#index) | [Error vs. Warning](#error-vs-warning) | [Automated Rul
 
 **How to fix the violation**: Please refer the documentation of [x-ms-pageable](https://github.com/Azure/autorest/blob/master/docs/extensions/readme.md#x-ms-pageable).
 
-**Impact on generated code**: NexLink may be broken as property may not be found, paging may not work.
+**Impact on generated code**: NextLink may be broken as property may not be found, paging may not work. Please note this may cause a breaking change in the generated SDK.
 
-**Examples**: Please refer the documentation of [x-ms-pageable](https://github.com/Azure/autorest/blob/master/docs/extensions/readme.md#x-ms-pageable).
+**Examples**: Please refer the documentation of [x-ms-pageable](https://github.com/Azure/autorest/blob/master/docs/extensions/readme.md#x-ms-pageable) and [examples](https://github.com/Azure/azure-rest-api-specs/tree/master/documentation/x-ms-pageable).
 
 Links: [Index](#index) | [Error vs. Warning](#error-vs-warning) | [Automated Rules](#automated-rules) | [RPC](#rpc-violations): [Errors](#rpc-errors) or [Warnings](#rpc-warnings) | [SDK](#sdk-violations): [Errors](#sdk-errors) or [Warnings](#sdk-warnings)
 
@@ -1052,7 +1052,7 @@ Links: [Index](#index) | [Error vs. Warning](#error-vs-warning) | [Automated Rul
 
 **How to fix the violation**: Add a 200 status code response with corresponding schema. Please refer the documentation of [x-ms-pageable](https://github.com/Azure/autorest/blob/master/docs/extensions/readme.md#x-ms-pageable). Note that this may require a service side change and may be a breaking change.
 
-**Impact on generated code**: Response schema is used to serialize/deserialize result.
+**Impact on generated code**: Response schema is used to serialize/deserialize result, if 200 response is not specified, the generated SDK operation may not return the proper results, with the link its next page.
 
 **Examples**: Please refer the documentation of [x-ms-pageable](https://github.com/Azure/autorest/blob/master/docs/extensions/readme.md#x-ms-pageable).
 
@@ -1064,13 +1064,15 @@ Links: [Index](#index) | [Error vs. Warning](#error-vs-warning) | [Automated Rul
 
 **Description**: This rule appears when you define a model type inline, rather than in the definitions section. If the model represents the same type as another parameter in a different operation, then it becomes impossible to reuse that same class for both operations.
 
-**Why the rule is important**: Name of the model will convert into a class name, if not given explicitely, it'll be automatically generated/ non-descriptive, which results in non-optimal user experience. Also, if the model is used by another operation, it won't be shared unless it's named and referenced by the operation.
+**Why the rule is important**: Anonymous parameters will be autogenerated as non-descriptive parameters which the client will not be able to share across operations or provide good documentation for, thereby resulting in poor user experience.
 
 **How to fix the violation**: Move the schema to the definitions section and reference it using $ref.
 
 **Impact on generated code**: 
+
 **Before**
-**Spec**
+
+Spec:
 ```json5
 …
 "parameters":[
@@ -1087,14 +1089,15 @@ Links: [Index](#index) | [Error vs. Warning](#error-vs-warning) | [Automated Rul
 ]
 …
 ```
-**Generated code**
+Generated code:
 ```csharp
 public class FooParameter1 {
     …
 }
 ```
 **After**
-**Spec**
+
+Spec:
 ```json5
 …
 "parameters": [
@@ -1117,7 +1120,7 @@ public class FooParameter1 {
 }
 …
 ```
-**Generated code**
+Generated code:
 ```csharp
 public class FooCreationSettings {
     …
@@ -1131,15 +1134,15 @@ Links: [Index](#index) | [Error vs. Warning](#error-vs-warning) | [Automated Rul
 ### <a name="R3019" />R3019 ArmResourcePropertiesBag
 **Output Message**: Top level property names should not be repeated inside the properties bag for ARM resource '{0}'. Properties [{1}] conflict with ARM top level properties. Please rename these.
 
-**Description**: Per [ARM guidelines](https://github.com/Azure/azure-resource-manager-rpc/blob/master/v1.0/resource-api-reference.md), top level properties should not be repeated inside th properties bag for ARM resources.
+**Description**: Per [ARM guidelines](https://github.com/Azure/azure-resource-manager-rpc/blob/master/v1.0/resource-api-reference.md), top level properties should not be repeated inside the properties bag for ARM resources.
 
-**Why the rule is important**: [ARM guidelines](https://github.com/Azure/azure-resource-manager-rpc/blob/master/v1.0/resource-api-reference.md) enforce this rule. 
+**Why the rule is important**: [ARM guidelines](https://github.com/Azure/azure-resource-manager-rpc/blob/master/v1.0/resource-api-reference.md).
 
 **How to fix the violation**: Rename or remove conflicting property. Note that this may require a change on the service side and may cause a breaking change.
 
 **Examples**: 
 **Bad example**: "id" property is repeated in the model, as "Resource" already contains "id".
-```json
+```json5
 "VersionedApplicationType": {
   "description": "The versioned application type resource",
   "properties": {
@@ -1184,13 +1187,13 @@ Links: [Index](#index) | [Error vs. Warning](#error-vs-warning) | [Automated Rul
 
 **Description**: Per [ARM guidelines](https://github.com/Azure/azure-resource-manager-rpc/blob/master/v1.0/resource-api-reference.md), top level properties of a resource should be only ones from the allowed set.
 
-**Why the rule is important**: [ARM guidelines](https://github.com/Azure/azure-resource-manager-rpc/blob/master/v1.0/resource-api-reference.md) enforce this rule. 
+**Why the rule is important**: [ARM guidelines](https://github.com/Azure/azure-resource-manager-rpc/blob/master/v1.0/resource-api-reference.md). 
 
 **How to fix the violation**: Consider moving extra properties into "properties" bag of the resource model.
 
 **Examples**: 
 **Bad example**: "extraProperty" is not allowed at top level of the resource model.
-```json
+```json5
 "VersionedApplicationType": {
   "description": "The versioned application type resource",
   "properties": {
@@ -1207,7 +1210,7 @@ Links: [Index](#index) | [Error vs. Warning](#error-vs-warning) | [Automated Rul
 }
 ```
 **Good example**: Notice that "extraProperty" is inside "properties" bag, and not at top level.
-```json
+```json5
 "VersionedApplicationType": {
   "description": "The versioned application type resource",
   "properties": {
@@ -1232,7 +1235,7 @@ Links: [Index](#index) | [Error vs. Warning](#error-vs-warning) | [Automated Rul
 
 **Description**: Sku model definition needs to follow [ARM guidelines](https://github.com/Azure/azure-resource-manager-rpc/blob/master/v1.0/resource-api-reference.md) and can contain only a certain set of properties as described in the message. 
 
-**Why the rule is important**: Per [ARM guidelines](https://github.com/Azure/azure-resource-manager-rpc/blob/master/v1.0/resource-api-reference.md) this rule is enforced.
+**Why the rule is important**: Per [ARM guidelines](https://github.com/Azure/azure-resource-manager-rpc/blob/master/v1.0/resource-api-reference.md).
 
 **How to fix the violation**: Update the sku model definition.
 
@@ -1247,7 +1250,7 @@ Links: [Index](#index) | [Error vs. Warning](#error-vs-warning) | [Automated Rul
 
 **Why the rule is important**: Including [x-ms-enum extension](https://github.com/Azure/autorest/blob/master/docs/extensions/readme.md#x-ms-enum) provides more flexibilty for enum types in SDK generated code.
 
-**How to fix the violation**: Include the [x-ms-enum extension](https://github.com/Azure/autorest/blob/master/docs/extensions/readme.md#x-ms-enum) per indicated in its documentation.
+**How to fix the violation**: Include the [x-ms-enum extension](https://github.com/Azure/autorest/blob/master/docs/extensions/readme.md#x-ms-enum) per indicated in its documentation. Consider setting "modelAsString": true, if you'd like the enum to be modeled as a string in generated SDKs, no enum validation will happen, though the values are exposed to the user for a better experience.
 
 **Examples**: Please refer to [x-ms-enum extension](https://github.com/Azure/autorest/blob/master/docs/extensions/readme.md#x-ms-enum).
 
