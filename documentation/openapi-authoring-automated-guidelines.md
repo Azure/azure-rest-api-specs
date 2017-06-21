@@ -93,6 +93,7 @@ We request OpenAPI(Swagger) spec authoring be assigned to engineers who have an
 | [R2006](#R2006)	| [ControlCharactersNotAllowed](#R2006) | Specification must not contain any control characters. | Error |
 | [R2009](#R2009)	| [ArraySchemaMustHaveItems](#R2009) | A property of type `Array` must have `items` defined in its `Schema`. | Error |
 | [R2022](#R2022) | [XmsExamplesRequired](#R2022) | Please provide x-ms-examples describing minimum/maximum property set for response/request payloads for operations.{0} | Error |
+| [R2064](#R2064) | [LicenseMissing](#R2064) | Please provide correct licensing information here. Acceptable value: "name": "MICROSOFT\_MIT\_NO\_VERSION" | Error |
 
 #### SDK Warnings
 
@@ -1025,6 +1026,17 @@ Links: [Index](#index) | [Error vs. Warning](#error-vs-warning) | [Automated Rul
 **Impact on generated code**: N/A.
 
 **Examples**: Please refer the documentation of [x-ms-examples](https://github.com/Azure/azure-rest-api-specs/blob/master/documentation/x-ms-examples.md#why-x-ms-examples).
+
+Links: [Index](#index) | [Error vs. Warning](#error-vs-warning) | [Automated Rules](#automated-rules) | [RPC](#rpc-violations): [Errors](#rpc-errors) or [Warnings](#rpc-warnings) | [SDK](#sdk-violations): [Errors](#sdk-errors) or [Warnings](#sdk-warnings)
+
+### <a name="R2064" />R2064 LicenseMissing
+**Output Message**: Please provide correct licensing information here. Acceptable value: "name": "MICROSOFT\_MIT\_NO\_VERSION"
+
+**Description**: Each OpenAPI json document must contain the license object in its `info` section which must set the name to `MICROSOFT\_MIT\_NO\_VERSION`. This is necessary for AutoRest to insert the appropriate headers in the generated code.
+
+**Why the rule is important**: Missing or invalid license information can cause incorrect or empty headers in the generated code.
+
+**How to fix the violation**: Ensure the `info` section of OpenAPI document has the name property set to `MICROSOFT\_MIT\_NO\_VERSION`.
 
 Links: [Index](#index) | [Error vs. Warning](#error-vs-warning) | [Automated Rules](#automated-rules) | [RPC](#rpc-violations): [Errors](#rpc-errors) or [Warnings](#rpc-warnings) | [SDK](#sdk-violations): [Errors](#sdk-errors) or [Warnings](#sdk-warnings)
 
