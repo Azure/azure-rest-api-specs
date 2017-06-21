@@ -235,7 +235,7 @@
           },
           "201": {
             "description": "Namespace create request accepted",
-			"schema": {
+            "schema": {
               "$ref": "#/definitions/RelayNamespace"
             }
           },
@@ -373,7 +373,7 @@
           },
           "201": {
             "description": "Namespace update request accepted",
-			"schema": {
+            "schema": {
               "$ref": "#/definitions/RelayNamespace"
             }
           },
@@ -383,7 +383,8 @@
               "$ref": "#/definitions/ErrorResponse"
             }
           }
-        }
+        },
+        "x-ms-long-running-operation": true
       }
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Relay/namespaces/{namespaceName}/authorizationRules": {
@@ -1595,7 +1596,7 @@
       "properties": {
         "location": {
           "type": "string",
-		  "x-ms-mutability": [
+          "x-ms-mutability": [
             "read",
             "create"
           ],
@@ -1606,11 +1607,6 @@
           "additionalProperties": {
             "type": "string"
           },
-          "x-ms-mutability": [
-            "read",
-            "create",
-            "update"
-          ],
           "description": "Resource tags"
         }
       },
@@ -1842,8 +1838,17 @@
       "properties": {
         "provisioningState": {
           "type": "string",
-          "readOnly": true,
-          "description": "Provisioning state of the namespace. supported value - Created/Succeeded/Deleted/Failed/Unknown"
+          "enum": [
+            "Created",
+            "Succeeded",
+            "Deleted",
+            "Failed",
+            "Unknown"
+          ],
+          "x-ms-enum": {
+            "name": "provisioningStateEnum",
+            "modelAsString": false
+          }
         },
         "createdAt": {
           "type": "string",
