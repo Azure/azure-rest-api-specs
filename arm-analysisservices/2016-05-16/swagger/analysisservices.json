@@ -323,6 +323,9 @@
     "/subscriptions/{subscriptionId}/providers/Microsoft.AnalysisServices/skus": {
       "get": {
         "description": "Lists eligible SKUs for Analysis Services resource provider.",
+        "x-ms-examples": {
+          "List eligible SKUs for a new server": { "$ref": "../examples/listSkusForNew.json" }
+        },
         "operationId": "Servers_ListSkusForNew",
         "parameters": [
           {
@@ -343,6 +346,9 @@
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AnalysisServices/servers/{serverName}/skus": {
       "get": {
         "description": "Lists eligible SKUs for an Analysis Services resource.",
+        "x-ms-examples": {
+          "List eligible SKUs for an existing server": { "$ref": "../examples/listSkusForExisting.json" }
+        },
         "tags": [ "Servers" ],
         "operationId": "Servers_ListSkusForExisting",
         "parameters": [
@@ -558,7 +564,8 @@
       "type": "object",
       "properties": {
         "asAdministrators": {
-          "$ref": "#/definitions/ServerAdministrators"
+          "$ref": "#/definitions/ServerAdministrators",
+          "description": "A collection of AS server administrators"
         },
         "backupBlobContainerUri": {
           "type": "string",
