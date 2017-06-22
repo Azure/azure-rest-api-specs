@@ -293,13 +293,14 @@
           }
         ],
         "responses": {
-          "202": {
+          "200": {
             "description": "VPN client package URL.",
             "schema": {
               "type": "string"
             }
           }
-        }
+        },
+        "x-ms-long-running-operation": true
       }
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/virtualNetworkGateways/{virtualNetworkGatewayName}/generatevpnprofile": {
@@ -341,13 +342,14 @@
           }
         ],
         "responses": {
-          "202": {
+          "200": {
             "description": "VPN profile package URL.",
             "schema": {
               "type": "string"
             }
           }
-        }
+        },
+        "x-ms-long-running-operation": true
       }
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/virtualNetworkGateways/{virtualNetworkGatewayName}/getBgpPeerStatus": {
@@ -1398,30 +1400,30 @@
             "name": "ProcessorArchitecture",
             "modelAsString": true
           }
-        }
-      },
-      "authenticationMethod": {
-        "type": "string",
-        "description": "VPN client Authentication Method. Possible values are: 'EAPTLS' and 'EAPMSCHAPv2'.",
-        "enum": [
-          "EAPTLS",
-          "EAPMSCHAPv2"
-        ],
-        "x-ms-enum": {
-          "name": "AuthenticationMethod",
-          "modelAsString": true
-        }
-      },
-      "radiusServerAuthCertificate": {
-        "type": "string",
-        "description": "The public certificate data for the radius server authentication certificate as a Base-64 encoded string. Required only if external radius authentication has been configured with EAPTLS authentication."
-      },
-      "clientRootCertificates": {
-        "type": "array",
-        "items": {
-          "type": "string"
         },
-        "description": "A list of client root certificates public certificate data encoded as Base-64 strings. Optional parameter for external radius based authentication with EAPTLS."
+        "authenticationMethod": {
+          "type": "string",
+          "description": "VPN client Authentication Method. Possible values are: 'EAPTLS' and 'EAPMSCHAPv2'.",
+          "enum": [
+            "EAPTLS",
+            "EAPMSCHAPv2"
+          ],
+          "x-ms-enum": {
+            "name": "AuthenticationMethod",
+            "modelAsString": true
+          }
+        },
+        "radiusServerAuthCertificate": {
+          "type": "string",
+          "description": "The public certificate data for the radius server authentication certificate as a Base-64 encoded string. Required only if external radius authentication has been configured with EAPTLS authentication."
+        },
+        "clientRootCertificates": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "description": "A list of client root certificates public certificate data encoded as Base-64 strings. Optional parameter for external radius based authentication with EAPTLS."
+        }
       },
       "description": "Vpn Client Parameters for package generation"
     },
