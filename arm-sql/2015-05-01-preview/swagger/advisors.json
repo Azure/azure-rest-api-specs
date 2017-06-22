@@ -212,11 +212,11 @@
           }
         },
         "x-ms-examples": {
-          "List of database recommended actions for all advisors": {
-            "$ref": "../examples/DatabaseRecommendedActionListExpand.json"
-          },
           "List of database recommended actions": {
             "$ref": "../examples/DatabaseRecommendedActionList.json"
+          },
+          "List of database recommended actions for all advisors": {
+            "$ref": "../examples/DatabaseRecommendedActionListExpand.json"
           }
         }
       }
@@ -567,6 +567,58 @@
         }
       }
     },
+    "AdvisorProperties": {
+      "description": "Properties for a Database, Server or Elastic Pool Advisor.",
+      "type": "object",
+      "properties": {
+        "advisorStatus": {
+          "description": "Gets the status of availability of this advisor to customers. Possible values are 'GA', 'PublicPreview', 'LimitedPublicPreview' and 'PrivatePreview'.",
+          "enum": [
+            "GA",
+            "PublicPreview",
+            "LimitedPublicPreview",
+            "PrivatePreview"
+          ],
+          "type": "string"
+        },
+        "autoExecuteStatus": {
+          "description": "Gets the auto-execute status (whether to let the system execute the recommendations) of this advisor. Possible values are 'Enabled' and 'Disabled'",
+          "enum": [
+            "Enabled",
+            "Disabled",
+            "Default"
+          ],
+          "type": "string"
+        },
+        "autoExecuteStatusInheritedFrom": {
+          "description": "Gets the resource from which current value of auto-execute status is inherited. Auto-execute status can be set on (and inhertied from) different levels in the resource heirarchy. Possible values are 'Subscription', 'Server', 'ElasticPool', 'Database' and 'Default' (when status is not explicitly set on any level).",
+          "enum": [
+            "Default",
+            "Subscription",
+            "Server",
+            "ElasticPool",
+            "Database"
+          ],
+          "type": "string"
+        },
+        "recommendationsStatus": {
+          "description": "Gets that status of recommendations for this advisor and reason for not having any recommendations. Possible values include, but are not limited to, 'Ok' (Recommendations available),LowActivity (not enough workload to analyze), 'DbSeemsTuned' (Database is doing well), etc.",
+          "type": "string"
+        },
+        "lastChecked": {
+          "format": "date-time",
+          "description": "Gets the time when the current resource was analyzed for recommendations by this advisor.",
+          "type": "string"
+        },
+        "recommendedActions": {
+          "description": "Gets the recommended actions for this advisor.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/RecommendedAction"
+          }
+        }
+      }
+    },
     "RecommendedActionProperties": {
       "description": "Properties for a Database, Server or Elastic Pool Recommended Action.",
       "type": "object",
@@ -836,6 +888,26 @@
         }
       ],
       "properties": {
+        "kind": {
+          "description": "Kind of encryption protector. This is metadata used for the Azure portal experience.",
+          "enum": [
+            "None",
+            "v2.0",
+            "v12.0",
+            "user",
+            "system",
+            "datawarehouse"
+          ],
+          "type": "string"
+        },
+        "location": {
+          "description": "Resource location.",
+          "type": "string",
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
+        },
         "properties": {
           "$ref": "#/definitions/RecommendedActionProperties",
           "description": "Resource properties.",
