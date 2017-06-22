@@ -13,8 +13,10 @@ override-info:
 
 ``` yaml 
 input-file:
-  - ./swagger/backupManagement.json
+  - ./2016-12-01/swagger/backupManagement.json
+  - ./2016-08-10/swagger/operations.json
 azure-arm: true
+license-header: MICROSOFT_MIT
 ```
 
 ## Suppression
@@ -29,8 +31,24 @@ directive:
 
 ### C#
 
-```yaml
+```yaml $(csharp)
 csharp:
   namespace: Microsoft.Azure.Management.RecoveryServices.Backup
-  output-folder: Generated/CSharp
+  output-folder: $(output-folder)Generated/CSharp
+```
+
+### Python
+
+```yaml $(python)
+python:
+  namespace: azure.mgmt.recoveryservicesbackup
+  package-version: 0.1.0
+  output-folder: $(output-folder)Generated/Python
+  payload-flattening-threshold: 2
+  license-header: MICROSOFT_MIT_NO_VERSION
+```
+
+```yaml $(python) && $(create)
+python:
+  package-name: azure-mgmt-recoveryservicesbackup
 ```
