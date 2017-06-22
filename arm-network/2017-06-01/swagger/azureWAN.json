@@ -74,7 +74,7 @@
             "put": {
                 "operationId": "WAN_CreateOrUpdate",
                 "x-ms-examples": {
-                    "WANCreate": { "$ref": "../examples/WANCreate.json" }
+                    "WANCreate": { "$ref": "../examples/WANPut.json" }
                 },
                 "description": "Creates a WAN resource if it doesn't exist else updates the existing WAN.",
                 "parameters": [
@@ -316,7 +316,7 @@
             "put": {
                 "operationId": "VpnSite_CreateOrUpdate",
                 "x-ms-examples": {
-                    "VpnSiteCreate": { "$ref": "../examples/VpnSiteCreate.json" }
+                    "VpnSiteCreate": { "$ref": "../examples/VpnSitePut.json" }
                 },
                 "description": "Creates a VpnSite resource if it doesn't exist else updates the existing VpnSite.",
                 "parameters": [
@@ -517,7 +517,7 @@
                 }
             }
         },
-        
+
         "/subscriptions/{subscriptionId}/resourceGroup/{resourceGroupName}/providers/Microsoft.Network/vpnSites/vpnConfiguration": {
             "post": {
                 "operationId": "VpnSitesConfiguration_Download",
@@ -533,11 +533,7 @@
                         "$ref": "#/parameters/ResourceGroupParameter"
                     },
                     {
-                        "name": "wan",
-                        "in": "body",
-                        "required": true,
-                        "type": "string",
-                        "description": "The resource uri of the WAN to which the vpnSites belong."
+                        "$ref": "#/parameters/WanParameter"
                     },
                     {
                         "$ref": "#/parameters/ApiVersionParameter"
@@ -790,6 +786,9 @@
         "/subscriptions/{subscriptionId}/resourceGroup/{resourceGroupName}/providers/Microsoft.Network/hubs/{hubName}/scalableVpnGateways/{gatewayName}": {
             "get": {
                 "operationId": "ScalableVpnGateway_Get",
+                "x-ms-examples": {
+                    "HubList": { "$ref": "../examples/ScalableVpnGatewayGet.json" }
+                },
                 "description": "Retrieves the details of a scalable vpn gateway.",
                 "parameters": [
                     {
@@ -822,6 +821,9 @@
             },
             "put": {
                 "operationId": "ScalableVpnGateway_CreateOrUpdate",
+                "x-ms-examples": {
+                    "HubList": { "$ref": "../examples/ScalableVpnGatewayPut.json" }
+                },
                 "description": "Creates a scalable vpn gateway if it doesn't exist else updates the existing gateway.",
                 "parameters": [
                     {
@@ -867,6 +869,9 @@
             },
             "patch": {
                 "operationId": "ScalableVpnGateway_Update",
+                "x-ms-examples": {
+                    "HubList": { "$ref": "../examples/ScalableVpnGatewayUpdate.json" }
+                },
                 "description": "Updates a scalable vpn gateway.",
                 "parameters": [
                     {
@@ -912,6 +917,9 @@
             },
             "delete": {
                 "operationId": "ScalableVpnGateway_Delete",
+                "x-ms-examples": {
+                    "HubList": { "$ref": "../examples/ScalableVpnGatewayDelete.json" }
+                },
                 "description": "Deletes a sacalable vpn gateway.",
                 "parameters": [
                     {
@@ -950,6 +958,9 @@
         "/subscriptions/{subscriptionId}/resourceGroup/{resourceGroupName}/providers/Microsoft.Network/hubs/{hubName}/scalableVpnGateways/{gatewayName}/vpnConnections/{connectionName}": {
             "get": {
                 "operationId": "VpnConnectionToScalableVpnGateway_Get",
+                "x-ms-examples": {
+                    "HubList": { "$ref": "../examples/VpnConnectionGet.json" }
+                },
                 "description": "Retrieves the details of a vpn connection.",
                 "parameters": [
                     {
@@ -985,6 +996,9 @@
             },
             "put": {
                 "operationId": "VpnConnectionToScalableVpnGateway_CreateOrUpdate",
+                "x-ms-examples": {
+                    "HubList": { "$ref": "../examples/VpnConnectionPut.json" }
+                },
                 "description": "Creates a vpn connection to a scalable vpn gateway if it doesn't exist else updates the existing connection.",
                 "parameters": [
                     {
@@ -1033,6 +1047,9 @@
             },
             "patch": {
                 "operationId": "VpnConnectionToScalableVpnGateway_Update",
+                "x-ms-examples": {
+                    "HubList": { "$ref": "../examples/VpnConnectionUpdate.json" }
+                },
                 "description": "Updates a vpn connection.",
                 "parameters": [
                     {
@@ -1081,6 +1098,9 @@
             },
             "delete": {
                 "operationId": "VpnConnectionToScalableVpnGateway_Delete",
+                "x-ms-examples": {
+                    "HubList": { "$ref": "../examples/VpnConnectionDelete.json" }
+                },
                 "description": "Deletes a vpn connection.",
                 "parameters": [
                     {
@@ -1122,6 +1142,9 @@
         "/subscriptions/{subscriptionId}/providers/Microsoft.Network/hubs/{hubName}/scalableVpnGateways/{gatewayName}/vpnConnections": {
             "get": {
                 "operationId": "VpnConnectionsForGateway_ListByScalableVpnGateway",
+                "x-ms-examples": {
+                    "HubList": { "$ref": "../examples/VpnConnectionList.json" }
+                },
                 "description": "Retrieves all vpn connections for a particular scalable vpn gateway.",
                 "parameters": [
                     {
@@ -1157,6 +1180,9 @@
         "/subscriptions/{subscriptionId}/resourceGroup/{resourceGroupName}/providers/Microsoft.Network/hubs/{hubName}/scalableVpnGateways/{gatewayName}/VpnClientConfigurations/{configName}": {
             "get": {
                 "operationId": "VpnClientConfiguration_Get",
+                "x-ms-examples": {
+                    "HubList": { "$ref": "../examples/VpnClientConfigurationGet.json" }
+                },
                 "description": "Retrieves the details of a vpn client configuration.",
                 "parameters": [
                     {
@@ -1192,6 +1218,9 @@
             },
             "put": {
                 "operationId": "VpnClientConfiguration_CreateOrUpdate",
+                "x-ms-examples": {
+                    "HubList": { "$ref": "../examples/VpnClientConfigurationPut.json" }
+                },
                 "description": "Creates a vpn client configuration if it doesn't exist else updates the existing configuration.",
                 "parameters": [
                     {
@@ -1240,6 +1269,9 @@
             },
             "patch": {
                 "operationId": "VpnClientConfiguration_Update",
+                "x-ms-examples": {
+                    "HubList": { "$ref": "../examples/VpnClientConfigurationUpdate.json" }
+                },
                 "description": "Updates a vpn client configuration.",
                 "parameters": [
                     {
@@ -1288,6 +1320,9 @@
             },
             "delete": {
                 "operationId": "VpnClientConfiguration_Delete",
+                "x-ms-examples": {
+                    "HubList": { "$ref": "../examples/VpnClientConfigurationDelete.json" }
+                },
                 "description": "Deletes a vpn clinet configuration.",
                 "parameters": [
                     {
@@ -1372,6 +1407,9 @@
         "/subscriptions/{subscriptionId}/resourceGroup/{resourceGroupName}/providers/Microsoft.Network/hubs/{hubName}/scalableExpressRouteGateways/{gatewayName}": {
             "get": {
                 "operationId": "ScalableExpressRouteGateway_Get",
+                "x-ms-examples": {
+                    "HubList": { "$ref": "../examples/ScalableExpressRouteGatewayGet.json" }
+                },
                 "description": "Retrieves the details of a scalable ExpressRoute gateway.",
                 "parameters": [
                     {
@@ -1404,6 +1442,9 @@
             },
             "put": {
                 "operationId": "ScalableExpressRouteGateway_CreateOrUpdate",
+                "x-ms-examples": {
+                    "HubList": { "$ref": "../examples/ScalableExpressRouteGatewayPut.json" }
+                },
                 "description": "Creates a scalable ExpressRoute gateway if it doesn't exist else updates the existing gateway.",
                 "parameters": [
                     {
@@ -1449,6 +1490,9 @@
             },
             "patch": {
                 "operationId": "ScalableExpressRouteGateway_Update",
+                "x-ms-examples": {
+                    "HubList": { "$ref": "../examples/ScalableExpressRouteGatewayUpdate.json" }
+                },
                 "description": "Updates a scalable ExpressRoute gateway.",
                 "parameters": [
                     {
@@ -1494,6 +1538,9 @@
             },
             "delete": {
                 "operationId": "ScalableExpressRouteGateway_Delete",
+                "x-ms-examples": {
+                    "HubList": { "$ref": "../examples/ScalableExpressRouteGatewayDelete.json" }
+                },
                 "description": "Deletes a sacalable ExpressRoute gateway.",
                 "parameters": [
                     {
@@ -1532,6 +1579,9 @@
         "/subscriptions/{subscriptionId}/resourceGroup/{resourceGroupName}/providers/Microsoft.Network/hubs/{hubName}/scalableExpressRouteGateways/{gatewayName}/expressRouteConnections/{connectionName}": {
             "get": {
                 "operationId": "ExpressRouteConnection_Get",
+                "x-ms-examples": {
+                    "HubList": { "$ref": "../examples/ExpressRouteConnectionGet.json" }
+                },
                 "description": "Retrieves the details of an ExpressRoute connection.",
                 "parameters": [
                     {
@@ -1567,6 +1617,9 @@
             },
             "put": {
                 "operationId": "ExpressRouteConnection_CreateOrUpdate",
+                "x-ms-examples": {
+                    "HubList": { "$ref": "../examples/ExpressRouteConnectionPut.json" }
+                },
                 "description": "Creates an ExpressRoute connection to a scalable ExpressRoute gateway if it doesn't exist else updates the existing connection.",
                 "parameters": [
                     {
@@ -1615,6 +1668,9 @@
             },
             "patch": {
                 "operationId": "ExpressRouteConnection_Update",
+                "x-ms-examples": {
+                    "HubList": { "$ref": "../examples/ExpressRouteConnectionUpdate.json" }
+                },
                 "description": "Updates an ExpressRoute connection.",
                 "parameters": [
                     {
@@ -1663,6 +1719,9 @@
             },
             "delete": {
                 "operationId": "ExpressRouteConnection_Delete",
+                "x-ms-examples": {
+                    "HubList": { "$ref": "../examples/ExpressRouteConnectionDelete.json" }
+                },
                 "description": "Deletes an ExpressRoute connection.",
                 "parameters": [
                     {
@@ -1704,6 +1763,9 @@
         "/subscriptions/{subscriptionId}/resourceGroup/{resourceGroupName}/providers/Microsoft.Network/hubs/{hubName}/scalableExpressRouteGateways/{gatewayName}/expressRouteConnections": {
             "get": {
                 "operationId": "ExpressRouteConnections_List",
+                "x-ms-examples": {
+                    "HubList": { "$ref": "../examples/ExpressRouteConnectionList.json" }
+                },
                 "description": "Retrieves the details of all ExpressRoute connections for a particular scalable ExpressRoute gateway.",
                 "parameters": [
                     {
@@ -1742,6 +1804,9 @@
         "/subscriptions/{subscriptionId}/resourceGroup/{resourceGroupName}/providers/Microsoft.Network/hubs/{hubName}/HubVnetConnections/{connectionName}": {
             "get": {
                 "operationId": "HubVnetConnection_Get",
+                "x-ms-examples": {
+                    "HubList": { "$ref": "../examples/HubVnetConnectionGet.json" }
+                },
                 "description": "Retrieves the details of a HubVnet connection.",
                 "parameters": [
                     {
@@ -1774,6 +1839,9 @@
             },
             "put": {
                 "operationId": "HubVnetConnection_CreateOrUpdate",
+                "x-ms-examples": {
+                    "HubList": { "$ref": "../examples/HubVnetConnectionPut.json" }
+                },
                 "description": "Creates a HubVnet connection if it doesn't exist else updates the existing hub vnet connection.",
                 "parameters": [
                     {
@@ -1819,6 +1887,9 @@
             },
             "patch": {
                 "operationId": "HubVnetConnection_Update",
+                "x-ms-examples": {
+                    "HubList": { "$ref": "../examples/HubVnetConnectionUpdate.json" }
+                },
                 "description": "Updates a HubVnet connection.",
                 "parameters": [
                     {
@@ -1864,6 +1935,9 @@
             },
             "delete": {
                 "operationId": "HubVnetConnection_Delete",
+                "x-ms-examples": {
+                    "HubList": { "$ref": "../examples/HubVnetConnectionDelete.json" }
+                },
                 "description": "Deletes a HubVnet connection.",
                 "parameters": [
                     {
@@ -1902,6 +1976,9 @@
         "/subscriptions/{subscriptionId}/resourceGroup/{resourceGroupName}/providers/Microsoft.Network/hubs/{hubName}/HubVnetConnections": {
             "get": {
                 "operationId": "HubVnetConnections_ListAll",
+                "x-ms-examples": {
+                    "HubList": { "$ref": "../examples/HubVnetConnectionList.json" }
+                },
                 "description": "Retrieves the details of all HubVnet connections.",
                 "parameters": [
                     {
@@ -1942,11 +2019,6 @@
                     "$ref": "./network.json#/definitions/Resource"
                 }
             ],
-            "etag": {
-                "type": "string",
-                "readOnly": true,
-                "description": "Gets a unique read-only string that changes whenever the resource is updated."
-            },
             "properties": {
                 "provisioningState": {
                     "type": "string",
@@ -1962,6 +2034,11 @@
                         "name": "ProvisioningState",
                         "modelAsString": true
                     }
+                },
+                "etag": {
+                    "type": "string",
+                    "readOnly": true,
+                    "description": "Gets a unique read-only string that changes whenever the resource is updated."
                 },
                 "disableVPNEncryption": {
                     "type": "boolean",
@@ -2031,14 +2108,14 @@
                     "$ref": "./network.json#/definitions/Resource"
                 }
             ],
-            "etag": {
-                "type": "string",
-                "readOnly": true,
-                "description": "Gets a unique read-only string that changes whenever the resource is updated."
-            },
             "properties": {
                 "provisioningState": {
                     "$ref": "#/definitions/provisioningState"
+                },
+                "etag": {
+                    "type": "string",
+                    "readOnly": true,
+                    "description": "Gets a unique read-only string that changes whenever the resource is updated."
                 },
                 "WAN": {
                     "type": "string",
@@ -2140,14 +2217,14 @@
                     "$ref": "./network.json#/definitions/Resource"
                 }
             ],
-            "etag": {
-                "type": "string",
-                "readOnly": true,
-                "description": "Gets a unique read-only string that changes whenever the resource is updated."
-            },
             "properties": {
                 "provisioningState": {
                     "$ref": "#/definitions/provisioningState"
+                },
+                "etag": {
+                    "type": "string",
+                    "readOnly": true,
+                    "description": "Gets a unique read-only string that changes whenever the resource is updated."
                 },
                 "WAN": {
                     "type": "string",
@@ -2258,14 +2335,14 @@
                     "$ref": "./network.json#/definitions/Resource"
                 }
             ],
-            "etag": {
-                "type": "string",
-                "readOnly": true,
-                "description": "Gets a unique read-only string that changes whenever the resource is updated."
-            },
             "properties": {
                 "provisioningState": {
                     "$ref": "#/definitions/provisioningState"
+                },
+                "etag": {
+                    "type": "string",
+                    "readOnly": true,
+                    "description": "Gets a unique read-only string that changes whenever the resource is updated."
                 },
                 "vpnConnections": {
                     "type": "array",
@@ -2324,14 +2401,14 @@
                     "$ref": "./network.json#/definitions/Resource"
                 }
             ],
-            "etag": {
-                "type": "string",
-                "readOnly": true,
-                "description": "Gets a unique read-only string that changes whenever the resource is updated."
-            },
             "properties": {
                 "provisioningState": {
                     "$ref": "#/definitions/provisioningState"
+                },
+                "etag": {
+                    "type": "string",
+                    "readOnly": true,
+                    "description": "Gets a unique read-only string that changes whenever the resource is updated."
                 },
                 "connectedSite": {
                     "type": "string",
@@ -2424,21 +2501,21 @@
                     "$ref": "./network.json#/definitions/Resource"
                 }
             ],
-            "etag": {
-                "type": "string",
-                "readOnly": true,
-                "description": "Gets a unique read-only string that changes whenever the resource is updated."
-            },
             "properties": {
                 "provisioningState": {
                     "$ref": "#/definitions/provisioningState"
                 },
+                "etag": {
+                    "type": "string",
+                    "readOnly": true,
+                    "description": "Gets a unique read-only string that changes whenever the resource is updated."
+                },
                 "vpnClientRootCertificates": {
                     "type": "array",
-                    "description": "list of all Vpn Client Root Certificates.",
                     "items": {
                         "type": "string"
-                    }
+                    },
+                    "description": "The collection of all Vpn Client Root Certificates."
                 },
                 "vpnClientRevokedCertificates": {
                     "type": "array",
@@ -2502,14 +2579,14 @@
                     "$ref": "./network.json#/definitions/Resource"
                 }
             ],
-            "etag": {
-                "type": "string",
-                "readOnly": true,
-                "description": "Gets a unique read-only string that changes whenever the resource is updated."
-            },
             "properties": {
                 "provisioningState": {
                     "$ref": "#/definitions/provisioningState"
+                },
+                "etag": {
+                    "type": "string",
+                    "readOnly": true,
+                    "description": "Gets a unique read-only string that changes whenever the resource is updated."
                 },
                 "expressRouteConnections": {
                     "type": "array",
@@ -2554,14 +2631,14 @@
                     "$ref": "./network.json#/definitions/Resource"
                 }
             ],
-            "etag": {
-                "type": "string",
-                "readOnly": true,
-                "description": "Gets a unique read-only string that changes whenever the resource is updated."
-            },
             "properties": {
                 "provisioningState": {
                     "$ref": "#/definitions/provisioningState"
+                },
+                "etag": {
+                    "type": "string",
+                    "readOnly": true,
+                    "description": "Gets a unique read-only string that changes whenever the resource is updated."
                 },
                 "connectedCircuit": {
                     "type": "string",
@@ -2651,14 +2728,14 @@
                     "$ref": "./network.json#/definitions/Resource"
                 }
             ],
-            "etag": {
-                "type": "string",
-                "readOnly": true,
-                "description": "Gets a unique read-only string that changes whenever the resource is updated."
-            },
             "properties": {
                 "provisioningState": {
                     "$ref": "#/definitions/provisioningState"
+                },
+                "etag": {
+                    "type": "string",
+                    "readOnly": true,
+                    "description": "Gets a unique read-only string that changes whenever the resource is updated."
                 },
                 "connectedVNet": {
                     "type": "string",
@@ -2893,6 +2970,13 @@
             "required": true,
             "type": "string",
             "description": "The name of the Hub."
+        },
+        "WanParameter": {
+            "name": "wanName",
+            "in": "body",
+            "required": true,
+            "type": "string",
+            "description": "The resource uri of the WAN."
         },
         "GatewayParameter": {
             "name": "gatewayName",
