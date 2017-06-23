@@ -26,7 +26,8 @@
 							"isLocalizedString": false,
 							"isName": false,
 							"isRequired": true,
-							"propertyId": "id1"
+							"propertyId": "id1",
+							"dataSourcePrecedenceRules": []
 						},
 						{
 							"fieldName": "profile1",
@@ -38,7 +39,19 @@
 							"isLocalizedString": false,
 							"isName": false,
 							"isRequired": true,
-							"propertyId": "id1"
+							"propertyId": "id1",
+							"dataSourcePrecedenceRules": [
+								{
+									"dataSource": {
+										"datasourcereferenceid": "70",
+										"datasourcetype": "Connector",
+										"name": "crm2",
+										"status": "Active",
+										"id": 1
+									},
+									"precedence": 50
+								}
+							],							
 						}],
 						"instancesCount": 0,
 						"provisioningState": "Provisioning",
@@ -46,7 +59,27 @@
 						"typeName": "TestInteractionType6358",
 						"largeImage": "\\\\Images\\\\LargeImage",
 						"mediumImage": "\\\\Images\\\\MediumImage",
-						"smallImage": "\\\\Images\\\\smallImage"
+						"smallImage": "\\\\Images\\\\smallImage",
+						"defaultDataSource": {
+							"datasourcereferenceid": "DefaultDataSourceReferenceId",
+							"datasourcetype": "SystemDefault",
+							"name": "DefaultDataSource",
+							"status": "None",
+							"id": -1
+						},
+						"dataSourcePrecedenceRules": [
+							{
+								"dataSource": {
+									"datasourcereferenceid": "70",
+									"datasourcetype": "Connector",
+									"name": "crm2",
+									"status": "Active",
+									"id": 1
+								},
+								"precedence": 50
+							}
+						],
+						"isActivity": true
 					},
 					"type": "Microsoft.CustomerInsights/hubs/interactions"
 				}]
