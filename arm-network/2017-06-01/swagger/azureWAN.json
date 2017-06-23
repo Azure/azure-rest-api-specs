@@ -1214,7 +1214,7 @@
                     "200": {
                         "description": "Request successful. Returns the details of the vpn client configuration.",
                         "schema": {
-                            "$ref": "#/definitions/VpnClientConfiguration"
+                            "$ref": "./virtualNetworkGateway.json#/definitions/VpnClientConfiguration"
                         }
                     },
                     "default": {
@@ -1261,7 +1261,7 @@
                     "200": {
                         "description": "Request successful. Returns the details of the vpn client configuration created or updated.",
                         "schema": {
-                            "$ref": "#/definitions/VpnClientConfiguration"
+                            "$ref": "./virtualNetworkGateway.json#/definitions/VpnClientConfiguration"
                         }
                     },
                     "202": {
@@ -1312,7 +1312,7 @@
                     "200": {
                         "description": "Request successful. Returns the details of the updated vpn client configuration.",
                         "schema": {
-                            "$ref": "#/definitions/VpnClientConfiguration"
+                            "$ref": "./virtualNetworkGateway.json#/definitions/VpnClientConfiguration"
                         }
                     },
                     "202": {
@@ -2361,7 +2361,7 @@
                     "type": "array",
                     "description": "list of all vpn client configurations to the gateway.",
                     "items": {
-                        "$ref": "#/definitions/VpnClientConfiguration"
+                        "$ref": "./virtualNetworkGateway.json#/definitions/VpnClientConfiguration"
                     }
                 }
             },
@@ -2395,7 +2395,7 @@
                     "type": "array",
                     "description": "list of all vpn client configurations to the gateway.",
                     "items": {
-                        "$ref": "#/definitions/VpnClientConfiguration"
+                        "$ref": "./virtualNetworkGateway.json#/definitions/VpnClientConfiguration"
                     }
                 }
             },
@@ -2500,44 +2500,6 @@
                 }
             },
             "description": "List of parameters to create or update vpn connection."
-        },
-        "VpnClientConfiguration": {
-            "allOf": [
-                {
-                    "$ref": "./network.json#/definitions/Resource"
-                }
-            ],
-            "properties": {
-                "provisioningState": {
-                    "$ref": "#/definitions/provisioningState"
-                },
-                "etag": {
-                    "type": "string",
-                    "readOnly": true,
-                    "description": "Gets a unique read-only string that changes whenever the resource is updated."
-                },
-                "vpnClientRootCertificates": {
-                    "type": "array",
-                    "items": {
-                        "type": "string"
-                    },
-                    "description": "The collection of all Vpn Client Root Certificates."
-                },
-                "vpnClientRevokedCertificates": {
-                    "type": "array",
-                    "description": "list of all Vpn Client revoked Certificates.",
-                    "items": {
-                        "type": "string"
-                    }
-                },
-                "vpnClientAddressPool": {
-                    "$ref": "#/definitions/vpnClientAddressPool"
-                },
-                "vpnClientConnectionHealth": {
-                    "$ref": "#/definitions/vpnClientConnectionHealth"
-                }
-            },
-            "description": "Details of Vpn Client Configuration."
         },
         "VpnClientConfigurationParameters": {
             "properties": {
@@ -2946,7 +2908,7 @@
                 }
             },
             "description": "Details of Vpn client Connection health."
-        },        
+        },
         "WanParameter": {
             "type": "string",
             "description": "The resource uri of the WAN."
