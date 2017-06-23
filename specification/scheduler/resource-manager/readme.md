@@ -29,36 +29,36 @@ These are the global settings for the Scheduler API.
 title: Scheduler
 description: Scheduler Client
 openapi-type: arm
-tag: 2016-03-01
+tag: package-2016-03
 
 ```
 
 
-# Tag: 2016-03-01
+# Tag: package-2016-03
 
-These settings apply only when `--tag=2016-03-01` is specified on the command line.
+These settings apply only when `--tag=package-2016-03` is specified on the command line.
 
-``` yaml $(tag) == '2016-03-01'
+``` yaml $(tag) == 'package-2016-03'
 input-file:
 - Microsoft.Scheduler/2016-03-01/scheduler.json
 
 ```
  
-# Tag: 2016-01-01
+# Tag: package-2016-01
 
-These settings apply only when `--tag=2016-01-01` is specified on the command line.
+These settings apply only when `--tag=package-2016-01` is specified on the command line.
 
-``` yaml $(tag) == '2016-01-01'
+``` yaml $(tag) == 'package-2016-01'
 input-file:
 - Microsoft.Scheduler/2016-01-01/scheduler.json
 
 ```
  
-# Tag: 2014-08-01-preview
+# Tag: package-2014-08-preview
 
-These settings apply only when `--tag=2014-08-01-preview` is specified on the command line.
+These settings apply only when `--tag=package-2014-08-preview` is specified on the command line.
 
-``` yaml $(tag) == '2014-08-01-preview'
+``` yaml $(tag) == 'package-2014-08-preview'
 input-file:
 - Microsoft.Scheduler/2014-08-01-preview/scheduler.json
 

@@ -29,37 +29,37 @@ These are the global settings for the TrafficManager API.
 title: Traffic Manager
 description: Traffic Manager Client
 openapi-type: arm
-tag: 2017-05-01
+tag: package-2017-05
 
 ```
 
 
-# Tag: 2017-05-01
+# Tag: package-2017-05
 
-These settings apply only when `--tag=2017-05-01` is specified on the command line.
+These settings apply only when `--tag=package-2017-05` is specified on the command line.
 
-``` yaml $(tag) == '2017-05-01'
+``` yaml $(tag) == 'package-2017-05'
 input-file:
 - Microsoft.Network/2017-05-01/trafficmanager.json
 
 ```
 
 
-# Tag: 2017-03-01
+# Tag: package-2017-03
 
-These settings apply only when `--tag=2017-03-01` is specified on the command line.
+These settings apply only when `--tag=package-2017-03` is specified on the command line.
 
-``` yaml $(tag) == '2017-03-01'
+``` yaml $(tag) == 'package-2017-03'
 input-file:
 - Microsoft.Network/2017-03-01/trafficmanager.json
 
 ```
  
-# Tag: 2015-11-01
+# Tag: package-2015-11
 
-These settings apply only when `--tag=2015-11-01` is specified on the command line.
+These settings apply only when `--tag=package-2015-11` is specified on the command line.
 
-``` yaml $(tag) == '2015-11-01'
+``` yaml $(tag) == 'package-2015-11'
 input-file:
 - Microsoft.Network/2015-11-01/trafficmanager.json
 

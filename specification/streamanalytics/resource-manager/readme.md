@@ -29,16 +29,16 @@ These are the global settings for the StreamAnalytics API.
 title: Stream Analytics Management Client
 description: Stream Analytics Client
 openapi-type: arm
-tag: 2016-03-01
+tag: package-2016-03
 
 ```
 
 
-# Tag: 2016-03-01
+# Tag: package-2016-03
 
-These settings apply only when `--tag=2016-03-01` is specified on the command line.
+These settings apply only when `--tag=package-2016-03` is specified on the command line.
 
-``` yaml $(tag) == '2016-03-01'
+``` yaml $(tag) == 'package-2016-03'
 input-file:
 - Microsoft.StreamAnalytics/2016-03-01/streamingjobs.json
 - Microsoft.StreamAnalytics/2016-03-01/inputs.json

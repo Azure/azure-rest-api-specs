@@ -29,16 +29,16 @@ These are the global settings for the ResourceHealth API.
 title: Resource Health
 description: Resource Health Client
 openapi-type: arm
-tag: 2015-01-01
+tag: package-2015-01
 
 ```
 
 
-# Tag: 2015-01-01
+# Tag: package-2015-01
 
-These settings apply only when `--tag=2015-01-01` is specified on the command line.
+These settings apply only when `--tag=package-2015-01` is specified on the command line.
 
-``` yaml $(tag) == '2015-01-01'
+``` yaml $(tag) == 'package-2015-01'
 input-file:
 - Microsoft.ResourceHealth/2015-01-01/resourcehealth.json
 

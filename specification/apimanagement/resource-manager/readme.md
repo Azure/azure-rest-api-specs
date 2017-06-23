@@ -29,16 +29,16 @@ These are the global settings for the ApiManagement API.
 title: ApiManagementClient
 description: ApiManagement Client
 openapi-type: arm
-tag: 2016-10-10
+tag: package-2016-10
 
 ```
 
 
-# Tag: 2016-10-10
+# Tag: package-2016-10
 
-These settings apply only when `--tag=2016-10-10` is specified on the command line.
+These settings apply only when `--tag=package-2016-10` is specified on the command line.
 
-``` yaml $(tag) == '2016-10-10'
+``` yaml $(tag) == 'package-2016-10'
 input-file:
 - Microsoft.ApiManagement/2016-10-10/apimanagement.json
 - Microsoft.ApiManagement/2016-10-10/apimapis.json
@@ -61,11 +61,11 @@ input-file:
 
 ```
  
-# Tag: 2016-07-07
+# Tag: package-2016-07
 
-These settings apply only when `--tag=2016-07-07` is specified on the command line.
+These settings apply only when `--tag=package-2016-07` is specified on the command line.
 
-``` yaml $(tag) == '2016-07-07'
+``` yaml $(tag) == 'package-2016-07'
 input-file:
 - Microsoft.ApiManagement/2016-07-07/apimanagement.json
 - Microsoft.ApiManagement/2016-07-07/apimdeployment.json

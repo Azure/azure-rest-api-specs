@@ -35,16 +35,16 @@ These are the global settings for the Compute API.
 title: Compute
 description: Compute Client
 openapi-type: arm
-tag: 2017-03-30
+tag: package-2017-03
 
 ```
 
 
-# Tag: 2017-03-30
+# Tag: package-2017-03
 
-These settings apply only when `--tag=2017-03-30` is specified on the command line.
+These settings apply only when `--tag=package-2017-03` is specified on the command line.
 
-``` yaml $(tag) == '2017-03-30'
+``` yaml $(tag) == 'package-2017-03'
 input-file:
 - Microsoft.Compute/2017-03-30/compute.json
 - Microsoft.Compute/2017-03-30/disk.json
@@ -54,11 +54,11 @@ input-file:
 ```
 
 
-# Tag: 2016-04-30-preview
+# Tag: package-2016-04-preview
 
-These settings apply only when `--tag=2016-04-30-preview` is specified on the command line.
+These settings apply only when `--tag=package-2016-04-preview` is specified on the command line.
 
-``` yaml $(tag) == '2016-04-30-preview'
+``` yaml $(tag) == 'package-2016-04-preview'
 input-file:
 - Microsoft.Compute/2016-04-30-preview/compute.json
 - Microsoft.Compute/2016-04-30-preview/disk.json
@@ -66,22 +66,22 @@ input-file:
 
 ```
  
-# Tag: 2016-03-30
+# Tag: package-2016-03
 
-These settings apply only when `--tag=2016-03-30` is specified on the command line.
+These settings apply only when `--tag=package-2016-03` is specified on the command line.
 
-``` yaml $(tag) == '2016-03-30'
+``` yaml $(tag) == 'package-2016-03'
 input-file:
 - Microsoft.Compute/2016-03-30/compute.json
 - Microsoft.ContainerService/2016-03-30/containerService.json
 
 ```
  
-# Tag: 2015-06-15-preview
+# Tag: package-2015-06-preview
 
-These settings apply only when `--tag=2015-06-15-preview` is specified on the command line.
+These settings apply only when `--tag=package-2015-06-preview` is specified on the command line.
 
-``` yaml $(tag) == '2015-06-15-preview'
+``` yaml $(tag) == 'package-2015-06-preview'
 input-file:
 - Microsoft.Compute/2015-06-15/compute.json
 - Microsoft.ContainerService/2015-11-01-preview/containerService.json

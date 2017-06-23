@@ -29,16 +29,16 @@ These are the global settings for the AnalysisServices API.
 title: Analysis Services
 description: Analysis Services Client
 openapi-type: arm
-tag: 2016-05-16
+tag: package-2016-05
 
 ```
 
 
-# Tag: 2016-05-16
+# Tag: package-2016-05
 
-These settings apply only when `--tag=2016-05-16` is specified on the command line.
+These settings apply only when `--tag=package-2016-05` is specified on the command line.
 
-``` yaml $(tag) == '2016-05-16'
+``` yaml $(tag) == 'package-2016-05'
 input-file:
 - Microsoft.AnalysisServices/2016-05-16/analysisservices.json
 

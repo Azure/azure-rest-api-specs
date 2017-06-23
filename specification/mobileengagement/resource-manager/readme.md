@@ -29,16 +29,16 @@ These are the global settings for the MobileEngagement API.
 title: Mobile Engagement
 description: Mobile Engagement Client
 openapi-type: arm
-tag: 2014-12-01
+tag: package-2014-12
 
 ```
 
 
-# Tag: 2014-12-01
+# Tag: package-2014-12
 
-These settings apply only when `--tag=2014-12-01` is specified on the command line.
+These settings apply only when `--tag=package-2014-12` is specified on the command line.
 
-``` yaml $(tag) == '2014-12-01'
+``` yaml $(tag) == 'package-2014-12'
 input-file:
 - Microsoft.MobileEngagement/2014-12-01/mobile-engagement.json
 

@@ -29,26 +29,26 @@ These are the global settings for the SearchClient API.
 title: Search
 description: Search Client
 openapi-type: arm
-tag: 2015-08-19
+tag: package-2015-08
 
 ```
 
 
-# Tag: 2015-08-19
+# Tag: package-2015-08
 
-These settings apply only when `--tag=2015-08-19` is specified on the command line.
+These settings apply only when `--tag=package-2015-08` is specified on the command line.
 
-``` yaml $(tag) == '2015-08-19'
+``` yaml $(tag) == 'package-2015-08'
 input-file:
 - Microsoft.Search/2015-08-19/search.json
 
 ```
  
-# Tag: 2015-02-28
+# Tag: package-2015-02
 
-These settings apply only when `--tag=2015-02-28` is specified on the command line.
+These settings apply only when `--tag=package-2015-02` is specified on the command line.
 
-``` yaml $(tag) == '2015-02-28'
+``` yaml $(tag) == 'package-2015-02'
 input-file:
 - Microsoft.Search/2015-02-28/search.json
 

@@ -29,36 +29,36 @@ These are the global settings for the Logic API.
 title: Logic
 description: Logic Client
 openapi-type: arm
-tag: 2016-06-01
+tag: package-2016-06
 
 ```
 
 
-# Tag: 2016-06-01
+# Tag: package-2016-06
 
-These settings apply only when `--tag=2016-06-01` is specified on the command line.
+These settings apply only when `--tag=package-2016-06` is specified on the command line.
 
-``` yaml $(tag) == '2016-06-01'
+``` yaml $(tag) == 'package-2016-06'
 input-file:
 - Microsoft.Logic/2016-06-01/logic.json
 
 ```
  
-# Tag: 2015-08-01-preview
+# Tag: package-2015-08-preview
 
-These settings apply only when `--tag=2015-08-01-preview` is specified on the command line.
+These settings apply only when `--tag=package-2015-08-preview` is specified on the command line.
 
-``` yaml $(tag) == '2015-08-01-preview'
+``` yaml $(tag) == 'package-2015-08-preview'
 input-file:
 - Microsoft.Logic/2015-08-01-preview/logic.json
 
 ```
  
-# Tag: 2015-02-01-preview
+# Tag: package-2015-02-preview
 
-These settings apply only when `--tag=2015-02-01-preview` is specified on the command line.
+These settings apply only when `--tag=package-2015-02-preview` is specified on the command line.
 
-``` yaml $(tag) == '2015-02-01-preview'
+``` yaml $(tag) == 'package-2015-02-preview'
 input-file:
 - Microsoft.Logic/2015-02-01-preview/logic.json
 

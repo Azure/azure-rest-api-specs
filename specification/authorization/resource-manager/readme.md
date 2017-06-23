@@ -29,16 +29,16 @@ These are the global settings for the Authorization API.
 title: Authorization
 description: Authorization Client
 openapi-type: arm
-tag: 2015-07-01
+tag: package-2015-07
 
 ```
 
 
-# Tag: 2015-07-01
+# Tag: package-2015-07
 
-These settings apply only when `--tag=2015-07-01` is specified on the command line.
+These settings apply only when `--tag=package-2015-07` is specified on the command line.
 
-``` yaml $(tag) == '2015-07-01'
+``` yaml $(tag) == 'package-2015-07'
 input-file:
 - Microsoft.Authorization/2015-07-01/authorization.json
 

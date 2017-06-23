@@ -29,16 +29,16 @@ These are the global settings for the Consumption API.
 title: Consumption
 description: Consumption Client
 openapi-type: arm
-tag: 2017-04-24-preview
+tag: package-2017-04-preview
 
 ```
 
 
-# Tag: 2017-04-24-preview
+# Tag: package-2017-04-preview
 
-These settings apply only when `--tag=2017-04-24-preview` is specified on the command line.
+These settings apply only when `--tag=package-2017-04-preview` is specified on the command line.
 
-``` yaml $(tag) == '2017-04-24-preview'
+``` yaml $(tag) == 'package-2017-04-preview'
 input-file:
 - Microsoft.Consumption/2017-04-24-preview/consumption.json
 

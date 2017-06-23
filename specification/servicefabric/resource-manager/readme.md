@@ -29,16 +29,16 @@ These are the global settings for the ServiceFabricClient API.
 title: Service Fabric
 description: Service Fabric Client
 openapi-type: arm
-tag: 2016-09-01
+tag: package-2016-09
 
 ```
 
 
-# Tag: 2016-09-01
+# Tag: package-2016-09
 
-These settings apply only when `--tag=2016-09-01` is specified on the command line.
+These settings apply only when `--tag=package-2016-09` is specified on the command line.
 
-``` yaml $(tag) == '2016-09-01'
+``` yaml $(tag) == 'package-2016-09'
 input-file:
 - Microsoft.ServiceFabric/2016-09-01/servicefabric.json
 

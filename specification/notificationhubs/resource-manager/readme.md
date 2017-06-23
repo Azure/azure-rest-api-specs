@@ -29,36 +29,36 @@ These are the global settings for the NotificationHubs API.
 title: Notification Hubs
 description: Notification Hubs Client
 openapi-type: arm
-tag: 2017-04-01
+tag: package-2017-04
 
 ```
 
 
-# Tag: 2017-04-01
+# Tag: package-2017-04
 
-These settings apply only when `--tag=2017-04-01` is specified on the command line.
+These settings apply only when `--tag=package-2017-04` is specified on the command line.
 
-``` yaml $(tag) == '2017-04-01'
+``` yaml $(tag) == 'package-2017-04'
 input-file:
 - Microsoft.NotificationHubs/2017-04-01/notificationhubs.json
 
 ```
  
-# Tag: 2016-03-01
+# Tag: package-2016-03
 
-These settings apply only when `--tag=2016-03-01` is specified on the command line.
+These settings apply only when `--tag=package-2016-03` is specified on the command line.
 
-``` yaml $(tag) == '2016-03-01'
+``` yaml $(tag) == 'package-2016-03'
 input-file:
 - Microsoft.NotificationHubs/2016-03-01/notificationhubs.json
 
 ```
  
-# Tag: 2014-09-01
+# Tag: package-2014-09
 
-These settings apply only when `--tag=2014-09-01` is specified on the command line.
+These settings apply only when `--tag=package-2014-09` is specified on the command line.
 
-``` yaml $(tag) == '2014-09-01'
+``` yaml $(tag) == 'package-2014-09'
 input-file:
 - Microsoft.NotificationHubs/2014-09-01/notificationhubs.json
 

@@ -29,37 +29,37 @@ These are the global settings for the Redis API.
 title: Redis
 description: Redis Client
 openapi-type: arm
-tag: 2017-02-01
+tag: package-2017-02
 
 ```
 
 
-# Tag: 2017-02-01
+# Tag: package-2017-02
 
-These settings apply only when `--tag=2017-02-01` is specified on the command line.
+These settings apply only when `--tag=package-2017-02` is specified on the command line.
 
-``` yaml $(tag) == '2017-02-01'
+``` yaml $(tag) == 'package-2017-02'
 input-file:
 - Microsoft.Cache/2017-02-01/redis.json
 
 ```
 
 
-# Tag: 2016-04-01
+# Tag: package-2016-04
 
-These settings apply only when `--tag=2016-04-01` is specified on the command line.
+These settings apply only when `--tag=package-2016-04` is specified on the command line.
 
-``` yaml $(tag) == '2016-04-01'
+``` yaml $(tag) == 'package-2016-04'
 input-file:
 - Microsoft.Cache/2016-04-01/redis.json
 
 ```
  
-# Tag: 2015-08-01
+# Tag: package-2015-08
 
-These settings apply only when `--tag=2015-08-01` is specified on the command line.
+These settings apply only when `--tag=package-2015-08` is specified on the command line.
 
-``` yaml $(tag) == '2015-08-01'
+``` yaml $(tag) == 'package-2015-08'
 input-file:
 - Microsoft.Cache/2015-08-01/redis.json
 

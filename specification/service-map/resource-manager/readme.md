@@ -29,16 +29,16 @@ These are the global settings for the ServiceMap API.
 title: Service Map
 description: Service Map Client
 openapi-type: arm
-tag: 2015-11-01-preview
+tag: package-2015-11-preview
 
 ```
 
 
-# Tag: 2015-11-01-preview
+# Tag: package-2015-11-preview
 
-These settings apply only when `--tag=2015-11-01-preview` is specified on the command line.
+These settings apply only when `--tag=package-2015-11-preview` is specified on the command line.
 
-``` yaml $(tag) == '2015-11-01-preview'
+``` yaml $(tag) == 'package-2015-11-preview'
 input-file:
 - Microsoft.OperationalInsights/2015-11-01-preview/arm-service-map.json
 

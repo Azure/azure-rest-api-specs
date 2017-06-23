@@ -29,16 +29,16 @@ These are the global settings for the MediaServices API.
 title: Media Services
 description: Media Services Client
 openapi-type: arm
-tag: 2015-10-01
+tag: package-2015-10
 
 ```
 
 
-# Tag: 2015-10-01
+# Tag: package-2015-10
 
-These settings apply only when `--tag=2015-10-01` is specified on the command line.
+These settings apply only when `--tag=package-2015-10` is specified on the command line.
 
-``` yaml $(tag) == '2015-10-01'
+``` yaml $(tag) == 'package-2015-10'
 input-file:
 - Microsoft.Media/2015-10-01/media.json
 

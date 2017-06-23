@@ -29,16 +29,16 @@ These are the global settings for the ServiceBus API.
 title: Service Bus
 description: Service Bus Client
 openapi-type: arm
-tag: 2015-08-01
+tag: package-2015-08
 
 ```
 
 
-# Tag: 2015-08-01
+# Tag: package-2015-08
 
-These settings apply only when `--tag=2015-08-01` is specified on the command line.
+These settings apply only when `--tag=package-2015-08` is specified on the command line.
 
-``` yaml $(tag) == '2015-08-01'
+``` yaml $(tag) == 'package-2015-08'
 input-file:
 - Microsoft.ServiceBus/2015-08-01/servicebus.json
 
