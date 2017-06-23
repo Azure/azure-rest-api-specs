@@ -29,38 +29,38 @@ These are the global settings for the SearchClient API.
 title: Search
 description: Search Client
 openapi-type: data-plane
-tag: 2016-09-01
+tag: package-2016-09
 
 ```
 
 
-# Tag: 2016-09-01
+# Tag: package-2016-09
 
-These settings apply only when `--tag=2016-09-01` is specified on the command line.
+These settings apply only when `--tag=package-2016-09` is specified on the command line.
 
-``` yaml $(tag) == '2016-09-01'
+``` yaml $(tag) == 'package-2016-09'
 input-file:
 - Microsoft.Search/2016-09-01/searchindex.json
 - Microsoft.Search/2016-09-01/searchservice.json
 
 ```
  
-# Tag: 2015-02-28-preview
+# Tag: package-2015-02-preview
 
-These settings apply only when `--tag=2015-02-28-preview` is specified on the command line.
+These settings apply only when `--tag=package-2015-02-preview` is specified on the command line.
 
-``` yaml $(tag) == '2015-02-28-preview'
+``` yaml $(tag) == 'package-2015-02-preview'
 input-file:
 - Microsoft.Search/2015-02-28-preview/searchindex.json
 - Microsoft.Search/2015-02-28-preview/searchservice.json
 
 ```
  
-# Tag: 2015-02-28
+# Tag: package-2015-02
 
-These settings apply only when `--tag=2015-02-28` is specified on the command line.
+These settings apply only when `--tag=package-2015-02` is specified on the command line.
 
-``` yaml $(tag) == '2015-02-28'
+``` yaml $(tag) == 'package-2015-02'
 input-file:
 - Microsoft.Search/2015-02-28/searchindex.json
 - Microsoft.Search/2015-02-28/searchservice.json

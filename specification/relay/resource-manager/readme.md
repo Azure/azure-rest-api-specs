@@ -29,16 +29,16 @@ These are the global settings for the Relay API.
 title: Relay
 description: Relay Client
 openapi-type: arm
-tag: 2016-07-01
+tag: package-2016-07
 
 ```
 
 
-# Tag: 2016-07-01
+# Tag: package-2016-07
 
-These settings apply only when `--tag=2016-07-01` is specified on the command line.
+These settings apply only when `--tag=package-2016-07` is specified on the command line.
 
-``` yaml $(tag) == '2016-07-01'
+``` yaml $(tag) == 'package-2016-07'
 input-file:
 - Microsoft.Relay/2016-07-01/relay.json
 

@@ -29,16 +29,16 @@ These are the global settings for the AppInsights API.
 title: AppInsights
 description: AppInsights Client
 openapi-type: arm
-tag: 2015-05-01
+tag: package-2015-05
 
 ```
 
 
-# Tag: 2015-05-01
+# Tag: package-2015-05
 
-These settings apply only when `--tag=2015-05-01` is specified on the command line.
+These settings apply only when `--tag=package-2015-05` is specified on the command line.
 
-``` yaml $(tag) == '2015-05-01'
+``` yaml $(tag) == 'package-2015-05'
 input-file:
 - microsoft.insights/2015-05-01/aiOperations_API.json
 - microsoft.insights/2015-05-01/components_API.json

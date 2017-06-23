@@ -29,16 +29,16 @@ These are the global settings for the StorSimple API.
 title: StorSimple 8000 Series
 description: StorSimple 8000 Series Client
 openapi-type: arm
-tag: 2017-06-01
+tag: package-2017-06
 
 ```
 
 
-# Tag: 2017-06-01
+# Tag: package-2017-06
 
-These settings apply only when `--tag=2017-06-01` is specified on the command line.
+These settings apply only when `--tag=package-2017-06` is specified on the command line.
 
-``` yaml $(tag) == '2017-06-01'
+``` yaml $(tag) == 'package-2017-06'
 input-file:
 - Microsoft.StorSimple/2017-06-01/storsimple.json
 

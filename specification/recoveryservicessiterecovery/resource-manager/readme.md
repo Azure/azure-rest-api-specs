@@ -29,16 +29,16 @@ These are the global settings for the RecoveryServicesSiteRecovery API.
 title: Recovery Services Site Recovery
 description: Recovery Services Site Recovery Client
 openapi-type: arm
-tag: 2016-08-10
+tag: package-2016-08
 
 ```
 
 
-# Tag: 2016-08-10
+# Tag: package-2016-08
 
-These settings apply only when `--tag=2016-08-10` is specified on the command line.
+These settings apply only when `--tag=package-2016-08` is specified on the command line.
 
-``` yaml $(tag) == '2016-08-10'
+``` yaml $(tag) == 'package-2016-08'
 input-file:
 - Microsoft.RecoveryServices/2016-08-10/service.json
 

@@ -29,26 +29,26 @@ These are the global settings for the DevTestLab API.
 title: Dev Test Lab
 description: Dev Test Lab Client
 openapi-type: arm
-tag: 2016-05-15
+tag: package-2016-05
 
 ```
 
 
-# Tag: 2016-05-15
+# Tag: package-2016-05
 
-These settings apply only when `--tag=2016-05-15` is specified on the command line.
+These settings apply only when `--tag=package-2016-05` is specified on the command line.
 
-``` yaml $(tag) == '2016-05-15'
+``` yaml $(tag) == 'package-2016-05'
 input-file:
 - Microsoft.DevTestLab/2016-05-15/DTL.json
 
 ```
  
-# Tag: 2015-05-21-preview
+# Tag: package-2015-05-preview
 
-These settings apply only when `--tag=2015-05-21-preview` is specified on the command line.
+These settings apply only when `--tag=package-2015-05-preview` is specified on the command line.
 
-``` yaml $(tag) == '2015-05-21-preview'
+``` yaml $(tag) == 'package-2015-05-preview'
 input-file:
 - Microsoft.DevTestLab/2015-05-21-preview/DTL.json
 

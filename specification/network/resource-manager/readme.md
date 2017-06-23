@@ -29,16 +29,16 @@ These are the global settings for the Network API.
 title: Network
 description: Network Client
 openapi-type: arm
-tag: 2017-03-01
+tag: package-2017-03
 
 ```
 
 
-# Tag: 2017-03-01
+# Tag: package-2017-03
 
-These settings apply only when `--tag=2017-03-01` is specified on the command line.
+These settings apply only when `--tag=package-2017-03` is specified on the command line.
 
-``` yaml $(tag) == '2017-03-01'
+``` yaml $(tag) == 'package-2017-03'
 input-file:
 - Microsoft.Network/2017-03-01/applicationGateway.json
 - Microsoft.Network/2017-03-01/checkDnsAvailability.json
@@ -59,11 +59,11 @@ input-file:
 - Microsoft.Compute/2017-03-01/vmssPublicIpAddress.json
 ```
  
-# Tag: 2016-12-01
+# Tag: package-2016-12
 
-These settings apply only when `--tag=2016-12-01` is specified on the command line.
+These settings apply only when `--tag=package-2016-12` is specified on the command line.
 
-``` yaml $(tag) == '2016-12-01'
+``` yaml $(tag) == 'package-2016-12'
 input-file:
 - microsoft.Compute/2016-12-01/vmssNetworkInterface.json
 - Microsoft.Network/2016-12-01/applicationGateway.json
@@ -84,11 +84,11 @@ input-file:
 
 ```
  
-# Tag: 2016-09-01
+# Tag: package-2016-09
 
-These settings apply only when `--tag=2016-09-01` is specified on the command line.
+These settings apply only when `--tag=package-2016-09` is specified on the command line.
 
-``` yaml $(tag) == '2016-09-01'
+``` yaml $(tag) == 'package-2016-09'
 input-file:
 - microsoft.Compute/2016-09-01/vmssNetworkInterface.json
 - Microsoft.Network/2016-09-01/applicationGateway.json
@@ -107,32 +107,32 @@ input-file:
 
 ```
  
-# Tag: 2016-06-01
+# Tag: package-2016-06
 
-These settings apply only when `--tag=2016-06-01` is specified on the command line.
+These settings apply only when `--tag=package-2016-06` is specified on the command line.
 
-``` yaml $(tag) == '2016-06-01'
+``` yaml $(tag) == 'package-2016-06'
 input-file:
 - Microsoft.Network/2016-06-01/network.json
 
 
 ```
  
-# Tag: 2016-03-30
+# Tag: package-2016-03
 
-These settings apply only when `--tag=2016-03-30` is specified on the command line.
+These settings apply only when `--tag=package-2016-03` is specified on the command line.
 
-``` yaml $(tag) == '2016-03-30'
+``` yaml $(tag) == 'package-2016-03'
 input-file:
 - Microsoft.Network/2016-03-30/network.json
 
 ```
  
-# Tag: 2015-06-15split
+# Tag: package-2015-06split
 
-These settings apply only when `--tag=2015-06-15split` is specified on the command line.
+These settings apply only when `--tag=package-2015-06split` is specified on the command line.
 
-``` yaml $(tag) == '2015-06-15split'
+``` yaml $(tag) == 'package-2015-06split'
 input-file:
 - Microsoft.Network/2015-06-15/applicationGateway.json
 - Microsoft.Network/2015-06-15/checkDnsAvailability.json
@@ -148,20 +148,20 @@ input-file:
 - microsoft.Compute/2015-06-15/vmssNetworkInterface.json
 ```
  
-# Tag: 2015-06-15
+# Tag: package-2015-06
 
-These settings apply only when `--tag=2015-06-15` is specified on the command line.
+These settings apply only when `--tag=package-2015-06` is specified on the command line.
 
-``` yaml $(tag) == '2015-06-15'
+``` yaml $(tag) == 'package-2015-06'
 input-file:
 - Microsoft.Network/2015-06-15/network.json
 ```
  
-# Tag: 2015-05-01-preview
+# Tag: package-2015-05-preview
 
-These settings apply only when `--tag=2015-05-01-preview` is specified on the command line.
+These settings apply only when `--tag=package-2015-05-preview` is specified on the command line.
 
-``` yaml $(tag) == '2015-05-01-preview'
+``` yaml $(tag) == 'package-2015-05-preview'
 input-file:
 - Microsoft.Network/2015-05-01-preview/network.json
 

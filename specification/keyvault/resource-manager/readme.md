@@ -29,27 +29,27 @@ These are the global settings for the KeyVault API.
 title: Key Vault
 description: Key Vault Client
 openapi-type: arm
-tag: 2016-10-01
+tag: package-2016-10
 
 ```
 
 
-# Tag: 2016-10-01
+# Tag: package-2016-10
 
-These settings apply only when `--tag=2016-10-01` is specified on the command line.
+These settings apply only when `--tag=package-2016-10` is specified on the command line.
 
-``` yaml $(tag) == '2016-10-01'
+``` yaml $(tag) == 'package-2016-10'
 input-file:
 - Microsoft.KeyVault/2016-10-01/keyvault.json
 
 ```
 
 
-# Tag: 2015-06-01
+# Tag: package-2015-06
 
-These settings apply only when `--tag=2015-06-01` is specified on the command line.
+These settings apply only when `--tag=package-2015-06` is specified on the command line.
 
-``` yaml $(tag) == '2015-06-01'
+``` yaml $(tag) == 'package-2015-06'
 input-file:
 - Microsoft.KeyVault/2015-06-01/keyvault.json
 

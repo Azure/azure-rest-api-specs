@@ -29,16 +29,16 @@ These are the global settings for the Commerce API.
 title: Commerce
 description: Commerce Client
 openapi-type: arm
-tag: 2015-06-01-preview
+tag: package-2015-06-preview
 
 ```
 
 
-# Tag: 2015-06-01-preview
+# Tag: package-2015-06-preview
 
-These settings apply only when `--tag=2015-06-01-preview` is specified on the command line.
+These settings apply only when `--tag=package-2015-06-preview` is specified on the command line.
 
-``` yaml $(tag) == '2015-06-01-preview'
+``` yaml $(tag) == 'package-2015-06-preview'
 input-file:
 - Microsoft.Commerce/2015-06-01-preview/commerce.json
 

@@ -35,16 +35,16 @@ These are the global settings for the Web API.
 title: Web
 description: Web App Client
 openapi-type: arm
-tag: 2016-09-01
+tag: package-2016-09
 
 ```
 
 
-# Tag: 2016-09-01
+# Tag: package-2016-09
 
-These settings apply only when `--tag=2016-09-01` is specified on the command line.
+These settings apply only when `--tag=package-2016-09` is specified on the command line.
 
-``` yaml $(tag) == '2016-09-01'
+``` yaml $(tag) == 'package-2016-09'
 input-file:
 - Microsoft.CertificateRegistration/2015-08-01/AppServiceCertificateOrders.json
 - Microsoft.DomainRegistration/2015-04-01/Domains.json
@@ -60,11 +60,11 @@ input-file:
 
 ```
  
-# Tag: 2015-08-01-preview
+# Tag: package-2015-08-preview
 
-These settings apply only when `--tag=2015-08-01-preview` is specified on the command line.
+These settings apply only when `--tag=package-2015-08-preview` is specified on the command line.
 
-``` yaml $(tag) == '2015-08-01-preview'
+``` yaml $(tag) == 'package-2015-08-preview'
 input-file:
 - Microsoft.Web/2015-08-01/service.json
 - Microsoft.Web/2015-08-01-preview/logicAppsManagementClient.json

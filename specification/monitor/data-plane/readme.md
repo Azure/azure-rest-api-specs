@@ -29,16 +29,16 @@ These are the global settings for the MonitorClient API.
 title: Monitor Client
 description: Monitor Client
 openapi-type: data-plane
-tag: 2016-09-01
+tag: package-2016-09
 
 ```
 
 
-# Tag: 2016-09-01
+# Tag: package-2016-09
 
-These settings apply only when `--tag=2016-09-01` is specified on the command line.
+These settings apply only when `--tag=package-2016-09` is specified on the command line.
 
-``` yaml $(tag) == '2016-09-01'
+``` yaml $(tag) == 'package-2016-09'
 input-file:
 - microsoft.insights/2014-04-01/usageMetrics_API.json
 - microsoft.insights/2015-04-01/activityLogs_API.json

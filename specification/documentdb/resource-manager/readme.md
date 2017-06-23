@@ -29,16 +29,16 @@ These are the global settings for the DocumentDB API.
 title: Document DB
 description: Document DB Client
 openapi-type: arm
-tag: 2015-04-08
+tag: package-2015-04
 
 ```
 
 
-# Tag: 2015-04-08
+# Tag: package-2015-04
 
-These settings apply only when `--tag=2015-04-08` is specified on the command line.
+These settings apply only when `--tag=package-2015-04` is specified on the command line.
 
-``` yaml $(tag) == '2015-04-08'
+``` yaml $(tag) == 'package-2015-04'
 input-file:
 - Microsoft.DocumentDB/2015-04-08/documentdb.json
 

@@ -29,68 +29,68 @@ These are the global settings for the Batch API.
 title: Batch
 description: Batch Client
 openapi-type: data-plane
-tag: 2017-06-01.5.1
+tag: package-2017-06.5.1
 
 ```
 
 
-# Tag: 2017-06-01.5.1
+# Tag: package-2017-06.5.1
 
-These settings apply only when `--tag=2017-06-01.5.1` is specified on the command line.
+These settings apply only when `--tag=package-2017-06.5.1` is specified on the command line.
 
-``` yaml $(tag) == '2017-06-01.5.1'
+``` yaml $(tag) == 'package-2017-06.5.1'
 input-file:
 - Microsoft.Batch/2017-06-01.5.1/BatchService.json
 
 ```
 
 
-# Tag: 2017-05-01.5.0
+# Tag: package-2017-05.5.0
 
-These settings apply only when `--tag=2017-05-01.5.0` is specified on the command line.
+These settings apply only when `--tag=package-2017-05.5.0` is specified on the command line.
 
-``` yaml $(tag) == '2017-05-01.5.0'
+``` yaml $(tag) == 'package-2017-05.5.0'
 input-file:
 - Microsoft.Batch/2017-05-01.5.0/BatchService.json
 
 ```
 
 
-# Tag: 2017-01-01.4.0
+# Tag: package-2017-01.4.0
 
-These settings apply only when `--tag=2017-01-01.4.0` is specified on the command line.
+These settings apply only when `--tag=package-2017-01.4.0` is specified on the command line.
 
-``` yaml $(tag) == '2017-01-01.4.0'
+``` yaml $(tag) == 'package-2017-01.4.0'
 input-file:
 - Microsoft.Batch/2017-01-01.4.0/BatchService.json
 
 ```
  
-# Tag: 2016-07-01.3.1
+# Tag: package-2016-07.3.1
 
-These settings apply only when `--tag=2016-07-01.3.1` is specified on the command line.
+These settings apply only when `--tag=package-2016-07.3.1` is specified on the command line.
 
-``` yaml $(tag) == '2016-07-01.3.1'
+``` yaml $(tag) == 'package-2016-07.3.1'
 input-file:
 - Microsoft.Batch/2016-07-01.3.1/BatchService.json
 
 ```
  
-# Tag: 2016-02-01.3.0
+# Tag: package-2016-02.3.0
 
-These settings apply only when `--tag=2016-02-01.3.0` is specified on the command line.
+These settings apply only when `--tag=package-2016-02.3.0` is specified on the command line.
 
-``` yaml $(tag) == '2016-02-01.3.0'
+``` yaml $(tag) == 'package-2016-02.3.0'
 input-file:
 - Microsoft.Batch/2016-02-01.3.0/BatchService.json
 
 ```
  
-# Tag: 2015-12-01.2.2
+# Tag: package-2015-12.2.2
 
-These settings apply only when `--tag=2015-12-01.2.2` is specified on the command line.
+These settings apply only when `--tag=package-2015-12.2.2` is specified on the command line.
 
-``` yaml $(tag) == '2015-12-01.2.2'
+``` yaml $(tag) == 'package-2015-12.2.2'
 input-file:
 - Microsoft.Batch/2015-12-01.2.2/BatchService.json
 

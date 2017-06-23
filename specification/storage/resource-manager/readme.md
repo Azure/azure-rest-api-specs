@@ -29,67 +29,67 @@ These are the global settings for the Storage API.
 title: Storage
 description: Storage Client
 openapi-type: arm
-tag: 2017-06-01
+tag: package-2017-06
 
 ```
 
 
-# Tag: 2017-06-01
+# Tag: package-2017-06
 
-These settings apply only when `--tag=2017-06-01` is specified on the command line.
+These settings apply only when `--tag=package-2017-06` is specified on the command line.
 
-``` yaml $(tag) == '2017-06-01'
+``` yaml $(tag) == 'package-2017-06'
 input-file:
 - Microsoft.Storage/2017-06-01/storage.json
 
 ```
 
 
-# Tag: 2016-12-01
+# Tag: package-2016-12
 
-These settings apply only when `--tag=2016-12-01` is specified on the command line.
+These settings apply only when `--tag=package-2016-12` is specified on the command line.
 
-``` yaml $(tag) == '2016-12-01'
+``` yaml $(tag) == 'package-2016-12'
 input-file:
 - Microsoft.Storage/2016-12-01/storage.json
 
 ```
  
-# Tag: 2016-05-01
+# Tag: package-2016-05
 
-These settings apply only when `--tag=2016-05-01` is specified on the command line.
+These settings apply only when `--tag=package-2016-05` is specified on the command line.
 
-``` yaml $(tag) == '2016-05-01'
+``` yaml $(tag) == 'package-2016-05'
 input-file:
 - Microsoft.Storage/2016-05-01/storage.json
 
 ```
  
-# Tag: 2016-01-01
+# Tag: package-2016-01
 
-These settings apply only when `--tag=2016-01-01` is specified on the command line.
+These settings apply only when `--tag=package-2016-01` is specified on the command line.
 
-``` yaml $(tag) == '2016-01-01'
+``` yaml $(tag) == 'package-2016-01'
 input-file:
 - Microsoft.Storage/2016-01-01/storage.json
 
 ```
  
-# Tag: 2015-06-15
+# Tag: package-2015-06
 
-These settings apply only when `--tag=2015-06-15` is specified on the command line.
+These settings apply only when `--tag=package-2015-06` is specified on the command line.
 
-``` yaml $(tag) == '2015-06-15'
+``` yaml $(tag) == 'package-2015-06'
 input-file:
 - Microsoft.Storage/2015-06-15/storage.json
 
 ```
  
-# Tag: 2015-05-01-preview
+# Tag: package-2015-05-preview
 
-These settings apply only when `--tag=2015-05-01-preview` is specified on the command line.
+These settings apply only when `--tag=package-2015-05-preview` is specified on the command line.
 
-``` yaml $(tag) == '2015-05-01-preview'
+``` yaml $(tag) == 'package-2015-05-preview'
 input-file:
 - Microsoft.Storage/2015-05-01-preview/storage.json
 

@@ -29,16 +29,16 @@ These are the global settings for the StorageImportExport API.
 title: Storage Import Export
 description: Storage Import Export Client
 openapi-type: arm
-tag: 2016-11-01
+tag: package-2016-11
 
 ```
 
 
-# Tag: 2016-11-01
+# Tag: package-2016-11
 
-These settings apply only when `--tag=2016-11-01` is specified on the command line.
+These settings apply only when `--tag=package-2016-11` is specified on the command line.
 
-``` yaml $(tag) == '2016-11-01'
+``` yaml $(tag) == 'package-2016-11'
 input-file:
 - Microsoft.ImportExport/2016-11-01/storageimportexport.json
 

@@ -29,26 +29,26 @@ These are the global settings for the DNS API.
 title: DNS
 description: DNS Client
 openapi-type: arm
-tag: 2016-04-01
+tag: package-2016-04
 
 ```
 
 
-# Tag: 2016-04-01
+# Tag: package-2016-04
 
-These settings apply only when `--tag=2016-04-01` is specified on the command line.
+These settings apply only when `--tag=package-2016-04` is specified on the command line.
 
-``` yaml $(tag) == '2016-04-01'
+``` yaml $(tag) == 'package-2016-04'
 input-file:
 - Microsoft.Network/2016-04-01/dns.json
 
 ```
  
-# Tag: 2015-05-04-preview
+# Tag: package-2015-05-preview
 
-These settings apply only when `--tag=2015-05-04-preview` is specified on the command line.
+These settings apply only when `--tag=package-2015-05-preview` is specified on the command line.
 
-``` yaml $(tag) == '2015-05-04-preview'
+``` yaml $(tag) == 'package-2015-05-preview'
 input-file:
 - Microsoft.Network/2015-05-04-preview/dns.json
 

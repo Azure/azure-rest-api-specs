@@ -29,16 +29,16 @@ These are the global settings for the Automation API.
 title: Azure Automation
 description: Automation Client
 openapi-type: arm
-tag: 2015-10-31
+tag: package-2015-10
 
 ```
 
 
-# Tag: 2015-10-31
+# Tag: package-2015-10
 
-These settings apply only when `--tag=2015-10-31` is specified on the command line.
+These settings apply only when `--tag=package-2015-10` is specified on the command line.
 
-``` yaml $(tag) == '2015-10-31'
+``` yaml $(tag) == 'package-2015-10'
 input-file:
 - Microsoft.Automation/2015-10-31/account.json
 - Microsoft.Automation/2015-10-31/certificate.json

@@ -29,26 +29,26 @@ These are the global settings for the Billing API.
 title: Billing
 description: Billing Client
 openapi-type: arm
-tag: 2017-04-24-preview
+tag: package-2017-04-preview
 
 ```
 
 
-# Tag: 2017-04-24-preview
+# Tag: package-2017-04-preview
 
-These settings apply only when `--tag=2017-04-24-preview` is specified on the command line.
+These settings apply only when `--tag=package-2017-04-preview` is specified on the command line.
 
-``` yaml $(tag) == '2017-04-24-preview'
+``` yaml $(tag) == 'package-2017-04-preview'
 input-file:
 - Microsoft.Billing/2017-04-24-preview/billing.json
 
 ```
  
-# Tag: 2017-02-27-preview
+# Tag: package-2017-02-preview
 
-These settings apply only when `--tag=2017-02-27-preview` is specified on the command line.
+These settings apply only when `--tag=package-2017-02-preview` is specified on the command line.
 
-``` yaml $(tag) == '2017-02-27-preview'
+``` yaml $(tag) == 'package-2017-02-preview'
 input-file:
 - Microsoft.Billing/2017-02-27-preview/billing.json
 

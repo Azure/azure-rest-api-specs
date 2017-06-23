@@ -29,16 +29,16 @@ These are the global settings for the PowerBI API.
 title: Power BI
 description: Power BI Client
 openapi-type: arm
-tag: 2016-01-29
+tag: package-2016-01
 
 ```
 
 
-# Tag: 2016-01-29
+# Tag: package-2016-01
 
-These settings apply only when `--tag=2016-01-29` is specified on the command line.
+These settings apply only when `--tag=package-2016-01` is specified on the command line.
 
-``` yaml $(tag) == '2016-01-29'
+``` yaml $(tag) == 'package-2016-01'
 input-file:
 - Microsoft.PowerBI/2016-01-29/powerbiembedded.json
 

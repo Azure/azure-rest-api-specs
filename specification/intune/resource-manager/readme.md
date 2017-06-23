@@ -29,26 +29,26 @@ These are the global settings for the Intune API.
 title: Intune
 description: Intune Client
 openapi-type: arm
-tag: 2015-01-14-preview
+tag: package-2015-01-preview
 
 ```
 
 
-# Tag: 2015-01-14-preview
+# Tag: package-2015-01-preview
 
-These settings apply only when `--tag=2015-01-14-preview` is specified on the command line.
+These settings apply only when `--tag=package-2015-01-preview` is specified on the command line.
 
-``` yaml $(tag) == '2015-01-14-preview'
+``` yaml $(tag) == 'package-2015-01-preview'
 input-file:
 - Microsoft.Intune/2015-01-14-preview/intune.json
 
 ```
  
-# Tag: 2015-01-14-privatepreview
+# Tag: package-2015-01-privatepreview
 
-These settings apply only when `--tag=2015-01-14-privatepreview` is specified on the command line.
+These settings apply only when `--tag=package-2015-01-privatepreview` is specified on the command line.
 
-``` yaml $(tag) == '2015-01-14-privatepreview'
+``` yaml $(tag) == 'package-2015-01-privatepreview'
 input-file:
 - Microsoft.Intune/2015-01-14-privatepreview/intune.json
 

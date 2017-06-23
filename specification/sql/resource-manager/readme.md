@@ -29,16 +29,16 @@ These are the global settings for the Sql API.
 title: Sql
 description: Sql Client
 openapi-type: arm
-tag: 2015-05-01-preview
+tag: package-2015-05-preview
 
 ```
 
 
-# Tag: 2015-05-01-preview
+# Tag: package-2015-05-preview
 
-These settings apply only when `--tag=2015-05-01-preview` is specified on the command line.
+These settings apply only when `--tag=package-2015-05-preview` is specified on the command line.
 
-``` yaml $(tag) == '2015-05-01-preview'
+``` yaml $(tag) == 'package-2015-05-preview'
 input-file:
 - Microsoft.Sql/2014-04-01/backups.json
 - Microsoft.Sql/2014-04-01/capabilities.json
@@ -63,11 +63,11 @@ input-file:
 
 ```
  
-# Tag: 2014-04-01
+# Tag: package-2014-04
 
-These settings apply only when `--tag=2014-04-01` is specified on the command line.
+These settings apply only when `--tag=package-2014-04` is specified on the command line.
 
-``` yaml $(tag) == '2014-04-01'
+``` yaml $(tag) == 'package-2014-04'
 input-file:
 - Microsoft.Sql/2014-04-01/firewallRules.json
 - Microsoft.Sql/2014-04-01/importExport.json
