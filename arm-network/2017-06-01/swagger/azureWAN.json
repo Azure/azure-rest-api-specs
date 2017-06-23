@@ -533,7 +533,13 @@
                         "$ref": "#/parameters/ResourceGroupParameter"
                     },
                     {
-                        "$ref": "#/parameters/WanParameter"
+                        "name": "WanParameter",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/WanParameter"
+                        },
+                        "description": "Parameters supplied to generate the configuration for vpn-sites."
                     },
                     {
                         "$ref": "#/parameters/ApiVersionParameter"
@@ -2940,6 +2946,10 @@
                 }
             },
             "description": "Details of Vpn client Connection health."
+        },        
+        "WanParameter": {
+            "type": "string",
+            "description": "The resource uri of the WAN."
         }
     },
     "parameters": {
@@ -2970,13 +2980,6 @@
             "required": true,
             "type": "string",
             "description": "The name of the Hub."
-        },
-        "WanParameter": {
-            "name": "wanName",
-            "in": "body",
-            "required": true,
-            "type": "string",
-            "description": "The resource uri of the WAN."
         },
         "GatewayParameter": {
             "name": "gatewayName",
