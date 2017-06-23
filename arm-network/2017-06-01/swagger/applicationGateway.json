@@ -462,7 +462,11 @@
             "$ref": "#/parameters/SubscriptionIdParameter"
           },
           {
-            "$ref": "#/parameters/PredefinedPolicyNameParameter"
+            "name": "predefinedPolicyName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "Name of Ssl predefined policy."
           }
         ],
         "responses": {
@@ -1828,6 +1832,10 @@
             "$ref": "#/definitions/ApplicationGatewaySslPredefinedPolicy"
           },
           "description": "List of available Ssl predefined policy."
+        },
+        "nextLink": {
+          "type": "string",
+          "description": "URL to get the next set of results."
         }
       },
       "description": "Response for ApplicationGatewayAvailableSslOptions API service call."
@@ -1955,13 +1963,6 @@
       "required": true,
       "type": "string",
       "description": "Client API version."
-    },
-    "PredefinedPolicyNameParameter": {
-      "name": "predefinedPolicyName",
-      "in": "path",
-      "required": true,
-      "type": "string",
-      "description": "Name of Ssl predefined policy."
     }
   }
 }
