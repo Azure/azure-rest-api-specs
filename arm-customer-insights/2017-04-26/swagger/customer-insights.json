@@ -4361,8 +4361,10 @@
     },
     "LinkDefinition": {
       "required": [
-        "sourceInteractionType",
-        "targetProfileType",
+        "sourceEntityType",
+        "targetEntityType",
+        "sourceEntityTypeName",
+        "targetEntityTypeName",
         "participantPropertyReferences"
       ],
       "properties": {
@@ -4376,13 +4378,41 @@
           "readOnly": true,
           "description": "The link name."
         },
-        "sourceInteractionType": {
+        "sourceEntityType": {
           "type": "string",
-          "description": "Name of the source Interaction Type."
+          "enum": [
+            "None",
+            "Profile",
+            "Interaction",
+            "Relationship"
+          ],
+          "x-ms-enum": {
+            "name": "EntityType",
+            "modelAsString": false
+          },
+          "description": "Type of entity."
         },
-        "targetProfileType": {
+        "targetEntityType": {
           "type": "string",
-          "description": "Name of the target Profile Type."
+          "enum": [
+            "None",
+            "Profile",
+            "Interaction",
+            "Relationship"
+          ],
+          "x-ms-enum": {
+            "name": "EntityType",
+            "modelAsString": false
+          },
+          "description": "Type of entity."
+        },
+        "sourceEntityTypeName": {
+          "type": "string",
+          "description": "Name of the source Entity Type."
+        },
+        "targetEntityTypeName": {
+          "type": "string",
+          "description": "Name of the target Entity Type."
         },
         "displayName": {
           "type": "object",
@@ -4656,21 +4686,17 @@
     },
     "TypePropertiesMapping": {
       "required": [
-        "interactionTypePropertyName",
-        "profileTypePropertyName"
+        "sourcePropertyName",
+        "targetPropertyName"
       ],
       "properties": {
-        "interactionTypePropertyName": {
+        "sourcePropertyName": {
           "type": "string",
-          "description": " Property name on the source Interaction Type."
+          "description": " Property name on the source Entity Type."
         },
-        "profileTypePropertyName": {
+        "targetPropertyName": {
           "type": "string",
-          "description": "Property name on the target Profile Type."
-        },
-        "isProfileTypeId": {
-          "type": "boolean",
-          "description": "Flag to indicate whether the Profile Type property is an id on the Profile Type."
+          "description": "Property name on the target Entity Type."
         },
         "linkType": {
           "type": "string",
@@ -4732,17 +4758,17 @@
     },
     "ParticipantPropertyReference": {
       "required": [
-        "interactionPropertyName",
-        "profilePropertyName"
+        "sourcePropertyName",
+        "targetPropertyName"
       ],
       "properties": {
-        "interactionPropertyName": {
+        "sourcePropertyName": {
           "type": "string",
-          "description": "The interaction property that maps to the profile property."
+          "description": "The source property that maps to the target property."
         },
-        "profilePropertyName": {
+        "targetPropertyName": {
           "type": "string",
-          "description": "The profile property that maps to the interaction property."
+          "description": "The target property that maps to the source property."
         }
       },
       "description": "The participant property reference."
