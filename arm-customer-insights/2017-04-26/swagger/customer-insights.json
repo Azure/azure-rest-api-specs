@@ -4651,7 +4651,7 @@
         "profilePropertyReferences": {
           "type": "array",
           "items": {
-            "$ref": "#/definitions/ParticipantPropertyReference"
+            "$ref": "#/definitions/ParticipantProfilePropertyReference"
           },
           "description": "The property references for the Profile of the Relationship."
         },
@@ -4663,7 +4663,7 @@
         "relatedProfilePropertyReferences": {
           "type": "array",
           "items": {
-            "$ref": "#/definitions/ParticipantPropertyReference"
+            "$ref": "#/definitions/ParticipantProfilePropertyReference"
           },
           "description": "The property references for the Related Profile of the Relationship."
         },
@@ -4773,6 +4773,23 @@
       },
       "description": "The participant property reference."
     },
+    "ParticipantProfilePropertyReference": {
+      "required": [
+        "interactionPropertyName",
+        "profilePropertyName"
+      ],
+      "properties": {
+        "interactionPropertyName": {
+          "type": "string",
+          "description": "The source interaction property that maps to the target profile property."
+        },
+        "profilePropertyName": {
+          "type": "string",
+          "description": "The target profile property that maps to the source interaction property."
+        }
+      },
+      "description": "The participant profile property reference."
+    },
     "InteractionTypeDefinition": {
       "description": "The Interaction Type Definition",
       "allOf": [
@@ -4854,7 +4871,7 @@
           "description": "The data source status."
         },
         "id": {
-          "type": "string",
+          "type": "integer",
           "readOnly": true,
           "description": "The data source ID."
         },
@@ -5604,7 +5621,7 @@
         "profilePropertyReferences": {
           "type": "array",
           "items": {
-            "$ref": "#/definitions/ParticipantPropertyReference"
+            "$ref": "#/definitions/ParticipantProfilePropertyReference"
           },
           "readOnly": true,
           "description": "The property references for the profile type."
@@ -5617,7 +5634,7 @@
         "relatedProfilePropertyReferences": {
           "type": "array",
           "items": {
-            "$ref": "#/definitions/ParticipantPropertyReference"
+            "$ref": "#/definitions/ParticipantProfilePropertyReference"
           },
           "readOnly": true,
           "description": "The property references for the related profile type."
