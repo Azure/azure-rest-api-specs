@@ -194,132 +194,23 @@
           "nextLinkName": null
         }
       }
-    },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/servers/{serverName}/usages": {
-      "get": {
-        "tags": [
-          "Servers"
-        ],
-        "operationId": "Servers_ListUsages",
-        "description": "Returns server usages.",
-        "x-ms-examples":{
-          "List servers usages": { "$ref": "../examples/ServerUsageMetricsList.json" }
-        },
-        "parameters": [
-          {
-            "$ref": "#/parameters/ApiVersionParameter"
-          },
-          {
-            "$ref": "#/parameters/SubscriptionIdParameter"
-          },
-          {
-            "$ref": "#/parameters/ResourceGroupParameter"
-          },
-          {
-            "$ref": "#/parameters/ServerNameParameter"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "OK",
-            "schema": {
-              "$ref": "#/definitions/ServerMetricListResult"
-            }
-          }
-        },
-        "x-ms-pageable": {
-          "nextLinkName": null
-        }
-      }
-    },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/servers/{serverName}/serviceObjectives/{serviceObjectiveName}": {
-      "get": {
-        "tags": [
-          "ServiceObjectives"
-        ],
-        "operationId": "Servers_GetServiceObjective",
-        "description": "Gets a database service objective.",
-        "parameters": [
-          {
-            "$ref": "#/parameters/ApiVersionParameter"
-          },
-          {
-            "$ref": "#/parameters/SubscriptionIdParameter"
-          },
-          {
-            "$ref": "#/parameters/ResourceGroupParameter"
-          },
-          {
-            "$ref": "#/parameters/ServerNameParameter"
-          },
-          {
-            "name": "serviceObjectiveName",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "description": "The name of the service objective to retrieve."
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "OK",
-            "schema": {
-              "$ref": "#/definitions/ServiceObjective"
-            }
-          }
-        }
-      }
-    },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/servers/{serverName}/serviceObjectives": {
-      "get": {
-        "tags": [
-          "ServiceObjectives"
-        ],
-        "operationId": "Servers_ListServiceObjectives",
-        "description": "Returns database service objectives.",
-        "parameters": [
-          {
-            "$ref": "#/parameters/ApiVersionParameter"
-          },
-          {
-            "$ref": "#/parameters/SubscriptionIdParameter"
-          },
-          {
-            "$ref": "#/parameters/ResourceGroupParameter"
-          },
-          {
-            "$ref": "#/parameters/ServerNameParameter"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "OK",
-            "schema": {
-              "$ref": "#/definitions/ServiceObjectiveListResult"
-            }
-          }
-        },
-        "x-ms-pageable": {
-          "nextLinkName": null
-        }
-      }
     }
   },
   "definitions": {
     "Resource":{
       "description":"ARM resource.",
-      "properties":{  
-        "id":{  
+      "properties":{
+        "id":{
           "readOnly":true,
           "type":"string",
           "description":"Resource ID."
         },
-        "name":{  
+        "name":{
           "readOnly":true,
           "type":"string",
           "description":"Resource name."
         },
-        "type":{  
+        "type":{
           "readOnly":true,
           "type":"string",
           "description":"Resource type."
@@ -327,58 +218,43 @@
       },
       "x-ms-azure-resource": true
     },
-    "SubResource": {
-      "description": "Subresource properties",
-      "properties": {
-        "name": {
-          "readOnly": true,
-          "type": "string",
-          "description": "Resource name"
-        },
-        "id": {
-          "readOnly": true,
-          "type": "string",
-          "description": "The resource ID."
-        }
-      }
-    },
-    "TrackedResource":{  
+    "TrackedResource":{
       "description":"ARM tracked top level resource.",
-      "properties":{  
-        "tags":{  
+      "properties":{
+        "tags":{
           "type":"object",
-          "additionalProperties":{  
+          "additionalProperties":{
             "type":"string"
           },
-          "x-ms-mutability":[  
+          "x-ms-mutability":[
             "read",
             "create",
             "update"
           ],
           "description":"Resource tags."
         },
-        "location":{  
+        "location":{
           "type":"string",
-          "x-ms-mutability":[  
+          "x-ms-mutability":[
             "read",
             "create"
           ],
           "description":"Resource location."
         }
       },
-      "required":[  
+      "required":[
         "location"
       ],
-      "allOf":[  
-        {  
+      "allOf":[
+        {
           "$ref":"#/definitions/Resource"
         }
       ]
     },
-    "ProxyResource":{  
+    "ProxyResource":{
       "description":"ARM proxy resource.",
-      "allOf":[  
-        {  
+      "allOf":[
+        {
           "$ref":"#/definitions/Resource"
         }
       ]
@@ -464,123 +340,6 @@
       },
       "required": ["value"],
       "description": "Represents the response to a get server request."
-    },
-    "ServerMetric": {
-      "properties": {
-        "name": {
-          "readOnly": true,
-          "type": "string",
-          "description": "Name of the server usage metric."
-        },
-        "resourceName": {
-          "readOnly": true,
-          "type": "string",
-          "description": "The name of the resource."
-        },
-        "displayName": {
-          "readOnly": true,
-          "type": "string",
-          "description": "The metric display name."
-        },
-        "currentValue": {
-          "readOnly": true,
-          "type": "number",
-          "format": "double",
-          "description": "The current value of the metric."
-        },
-        "limit": {
-          "readOnly": true,
-          "type": "number",
-          "format": "double",
-          "description": "The current limit of the metric."
-        },
-        "unit": {
-          "readOnly": true,
-          "type": "string",
-          "description": "The units of the metric."
-        },
-        "nextResetTime": {
-          "readOnly": true,
-          "type": "string",
-          "format": "date-time",
-          "description": "The next reset time for the metric (ISO8601 format)."
-        }
-      },
-      "description": "Represents server metrics."
-    },
-    "ServerMetricListResult": {
-      "properties": {
-        "value": {
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/ServerMetric"
-          },
-          "description": "The list of server metrics for the server."
-        }
-      },
-      "required": ["value"],
-      "description": "Represents the response to a list server metrics request."
-    },
-    "ServiceObjective": {
-      "properties": {
-        "properties": {
-          "x-ms-client-flatten": true,
-          "$ref": "#/definitions/ServiceObjectiveProperties",
-          "description": "Represents the properties of the resource."
-        }
-      },
-      "allOf": [
-        {
-          "$ref": "#/definitions/SubResource"
-        }
-      ],
-      "description": "Represents a database service objective."
-    },
-    "ServiceObjectiveProperties": {
-      "properties": {
-        "serviceObjectiveName": {
-          "readOnly": true,
-          "type": "string",
-          "description": "The name for the service objective."
-        },
-        "isDefault": {
-          "readOnly": true,
-          "type": "boolean",
-          "description": "Gets whether the service level objective is the default service objective.",
-          "x-nullable": false
-        },
-        "isSystem": {
-          "readOnly": true,
-          "type": "boolean",
-          "description": "Gets whether the service level objective is a system service objective.",
-          "x-nullable": false
-        },
-        "description": {
-          "readOnly": true,
-          "type": "string",
-          "description": "The description for the service level objective."
-        },
-        "enabled": {
-          "readOnly": true,
-          "type": "boolean",
-          "description": "Gets whether the service level objective is enabled.",
-          "x-nullable": false
-        }
-      },
-      "description": "Represents the properties of a database service objective."
-    },
-    "ServiceObjectiveListResult": {
-      "properties": {
-        "value": {
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/ServiceObjective"
-          },
-          "description": "The list of database service objectives."
-        }
-      },
-      "required": ["value"],
-      "description": "Represents the response to a get database service objectives request."
     }
   },
   "parameters": {
@@ -621,6 +380,17 @@
       "type": "string",
       "description": "A comma separated list of child objects to expand in the response. Possible properties: serviceTierAdvisors, transparentDataEncryption.",
       "x-ms-parameter-location": "method"
+    }
+  },
+  "securityDefinitions": {
+    "azure_auth": {
+      "type": "oauth2",
+      "description": "Azure Active Directory OAuth2 Flow",
+      "flow": "implicit",
+      "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
+      "scopes": {
+        "user_impersonation": "impersonate your user account"
+      }
     }
   }
 }
