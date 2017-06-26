@@ -875,9 +875,8 @@
         "provisioningState": {
           "readOnly": true,
           "type": "string",
-          "description": "The provisioning state of the public IP resource.",
+          "description": "The provisioning state of the resource.",
           "enum": [
-            "Succeeded",
             "Updating",
             "Deleting",
             "Failed"
@@ -976,9 +975,8 @@
         "provisioningState": {
           "readOnly": true,
           "type": "string",
-          "description": "The provisioning state of the VirtualNetworkGateway resource.",
+          "description": "The provisioning state of the resource.",
           "enum": [
-            "Succeeded",
             "Updating",
             "Deleting",
             "Failed"
@@ -1000,9 +998,8 @@
         "provisioningState": {
           "readOnly": true,
           "type": "string",
-          "description": "The provisioning state of the VPN client root certificate resource.",
+          "description": "The provisioning state of the resource.",
           "enum": [
-            "Succeeded",
             "Updating",
             "Deleting",
             "Failed"
@@ -1052,7 +1049,16 @@
         "provisioningState": {
           "readOnly": true,
           "type": "string",
-          "description": "The provisioning state of the VPN client revoked certificate resource. Possible values are: 'Updating', 'Deleting', and 'Failed'."
+          "description": "The provisioning state of the resource.",
+          "enum": [
+            "Updating",
+            "Deleting",
+            "Failed"
+          ],
+          "x-ms-enum": {
+            "name": "ProvisioningState",
+            "modelAsString": true
+          }
         }
       },
       "description": "Properties of the revoked VPN client certificate of virtual network gateway."
@@ -1482,7 +1488,16 @@
         "provisioningState": {
           "readOnly": true,
           "type": "string",
-          "description": "The provisioning state of the VirtualNetworkGatewayConnection resource. Possible values are: 'Updating', 'Deleting', and 'Failed'."
+          "description": "The provisioning state of the resource.",
+          "enum": [
+            "Updating",
+            "Deleting",
+            "Failed"
+          ],
+          "x-ms-enum": {
+            "name": "ProvisioningState",
+            "modelAsString": true
+          }
         }
       },
       "required": [
@@ -1700,7 +1715,16 @@
         "provisioningState": {
           "readOnly": true,
           "type": "string",
-          "description": "The provisioning state of the LocalNetworkGateway resource. Possible values are: 'Updating', 'Deleting', and 'Failed'."
+          "description": "The provisioning state of the resource.",
+          "enum": [
+            "Updating",
+            "Deleting",
+            "Failed"
+          ],
+          "x-ms-enum": {
+            "name": "ProvisioningState",
+            "modelAsString": true
+          }
         }
       },
       "description": "LocalNetworkGateway properties"
