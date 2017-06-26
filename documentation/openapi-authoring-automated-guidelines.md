@@ -1017,7 +1017,7 @@ Links: [Index](#index) | [Error vs. Warning](#error-vs-warning) | [Automated Rul
 Links: [Index](#index) | [Error vs. Warning](#error-vs-warning) | [Automated Rules](#automated-rules) | [RPC](#rpc-violations): [Errors](#rpc-errors) or [Warnings](#rpc-warnings) | [SDK](#sdk-violations): [Errors](#sdk-errors) or [Warnings](#sdk-warnings)
 
 ### <a name="R2065" />R2065 LicenseHeaderMustNotBeSpecified
-**Output Message**: License header must not be specified inside x-ms-code-generation settings. This is different for different sdks generated.
+**Output Message**: License header must not be specified inside x-ms-code-generation settings. This is different for different sdks generated and is passed via command line/config file when generating the sdk.
 
 **Description**: `x-ms-code-generation-settings` must not have the license section specified in the OpenAPI documents since each SDK has a different licensing header, this information must be provided either from the command line or the configuration file when actually generating the sdk.
 
