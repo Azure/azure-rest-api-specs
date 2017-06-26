@@ -517,6 +517,9 @@
     },
     "AdvisorProperties": {
       "description": "Properties for a Database, Server or Elastic Pool Advisor.",
+      "required": [
+        "autoExecuteStatus"
+      ],
       "type": "object",
       "properties": {
         "advisorStatus": {
@@ -569,6 +572,9 @@
     },
     "RecommendedActionProperties": {
       "description": "Properties for a Database, Server or Elastic Pool Recommended Action.",
+      "required": [
+        "state"
+      ],
       "type": "object",
       "properties": {
         "recommendationReason": {
@@ -697,6 +703,9 @@
     },
     "RecommendedActionStateInfo": {
       "description": "Contains information of current state for an Azure SQL Database, Server or Elastic Pool Recommended Action.",
+      "required": [
+        "currentValue"
+      ],
       "type": "object",
       "properties": {
         "currentValue": {
@@ -838,14 +847,6 @@
       "properties": {
         "kind": {
           "description": "Kind of encryption protector. This is metadata used for the Azure portal experience.",
-          "enum": [
-            "None",
-            "v2.0",
-            "v12.0",
-            "user",
-            "system",
-            "datawarehouse"
-          ],
           "type": "string"
         },
         "location": {
@@ -874,14 +875,6 @@
       "properties": {
         "kind": {
           "description": "Kind of encryption protector. This is metadata used for the Azure portal experience.",
-          "enum": [
-            "None",
-            "v2.0",
-            "v12.0",
-            "user",
-            "system",
-            "datawarehouse"
-          ],
           "type": "string"
         },
         "location": {
