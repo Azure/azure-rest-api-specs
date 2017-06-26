@@ -42,6 +42,7 @@ These settings apply only when `--tag=package-2015-05-preview` is specified on t
 input-file:
 - Microsoft.Sql/2014-04-01/backups.json
 - Microsoft.Sql/2014-04-01/capabilities.json
+- Microsoft.Sql/2014-04-01/dataMasking.json
 - Microsoft.Sql/2014-04-01/firewallRules.json
 - Microsoft.Sql/2014-04-01/geoBackupPolicies.json
 - Microsoft.Sql/2014-04-01/importExport.json
@@ -53,6 +54,8 @@ input-file:
 - Microsoft.Sql/2014-04-01/databaseSecurityAlertPolicies.json
 - Microsoft.Sql/2014-04-01/serverCommunicationLinks.json
 - Microsoft.Sql/2014-04-01/serviceObjectives.json
+- Microsoft.Sql/2014-04-01/backupLongTermRetentionVaults.json
+- Microsoft.Sql/2014-04-01/backupLongTermRetentionPolicies.json
 - Microsoft.Sql/2014-04-01/usages.json
 - Microsoft.Sql/2015-05-01-preview/blobAuditingPolicies.json
 - Microsoft.Sql/2015-05-01-preview/failoverGroups.json

@@ -102,7 +102,7 @@
           {
             "name": "skipToken",
             "in": "query",
-            "description": "The pagination token.\r\n            Possible values: \"FabricId\" or \"FabricId_CloudId\" or null",
+            "description": "The pagination token. Possible values: \"FabricId\" or \"FabricId_CloudId\" or null",
             "required": false,
             "type": "string"
           },
@@ -1158,7 +1158,7 @@
           "ReplicationProtectedItems"
         ],
         "summary": "Resynchronize or repair replication.",
-        "description": "The operation to start resynchronize/repair replication for a replication protected item\r\n            requiring resynchronization.",
+        "description": "The operation to start resynchronize/repair replication for a replication protected item requiring resynchronization.",
         "operationId": "ReplicationProtectedItems_RepairReplication",
         "produces": [
           "application/json"
@@ -1223,7 +1223,7 @@
           "ReplicationProtectedItems"
         ],
         "summary": "Update the mobility service on a protected item.",
-        "description": "The operation to update(push update) the installed mobility service software on a \r\n            replication protected item to the latest available version.",
+        "description": "The operation to update(push update) the installed mobility service software on a replication protected item to the latest available version.",
         "operationId": "ReplicationProtectedItems_UpdateMobilityService",
         "consumes": [
           "application/json"
@@ -1254,21 +1254,21 @@
           {
             "name": "protectionContainerName",
             "in": "path",
-            "description": "The name of the container containing the\r\n            protected item.",
+            "description": "The name of the container containing the protected item.",
             "required": true,
             "type": "string"
           },
           {
             "name": "replicationProtectedItemName",
             "in": "path",
-            "description": "The name of the protected item on which the\r\n            agent is to be updated.",
+            "description": "The name of the protected item on which the agent is to be updated.",
             "required": true,
             "type": "string"
           },
           {
             "name": "updateMobilityServiceRequest",
             "in": "body",
-            "description": "Request to update the mobility\r\n            service on the protected item.",
+            "description": "Request to update the mobility service on the protected item.",
             "required": true,
             "schema": {
               "$ref": "#/definitions/UpdateMobilityServiceRequest"
@@ -1750,7 +1750,7 @@
           "ReplicationProtectedItems"
         ],
         "summary": "Disables protection.",
-        "description": "The operation to disable replication on a replication protected item. This will also\r\n            remove the item.",
+        "description": "The operation to disable replication on a replication protected item. This will also remove the item.",
         "operationId": "ReplicationProtectedItems_Delete",
         "consumes": [
           "application/json"
@@ -1958,7 +1958,7 @@
           "ReplicationProtectedItems"
         ],
         "summary": "Purges protection.",
-        "description": "The operation to delete or purge a replication protected item. This operation will\r\n            force delete the replication protected item. Use the remove operation on\r\n            replication protected item to perform a clean disable replication for the item.",
+        "description": "The operation to delete or purge a replication protected item. This operation will force delete the replication protected item. Use the remove operation on replication protected item to perform a clean disable replication for the item.",
         "operationId": "ReplicationProtectedItems_Purge",
         "produces": [
           "application/json"
@@ -2152,7 +2152,7 @@
         "tags": [
           "ReplicationRecoveryServicesProviders"
         ],
-        "summary": "Deletes provider from fabric.\r\n            Note: Deleting provider for any fabric other than SingleHost is unsupported. To\r\n            maintain backward compatibility for released clients the object \"deleteRspInput\" is\r\n            used (if the object is empty we assume that it is old client and continue the old\r\n            behavior).",
+        "summary": "Deletes provider from fabric. Note: Deleting provider for any fabric other than SingleHost is unsupported. To maintain backward compatibility for released clients the object \"deleteRspInput\" is used (if the object is empty we assume that it is old client and continue the old behavior).",
         "description": "The operation to removes/delete(unregister) a recovery services provider from the vault",
         "operationId": "ReplicationRecoveryServicesProviders_Delete",
         "produces": [
@@ -2196,8 +2196,8 @@
         },
         "x-ms-long-running-operation": true,
         "x-ms-examples": {
-          "Deletes provider from fabric.\r\n            Note: Deleting provider for any fabric other than SingleHost is unsupported. To\r\n            maintain backward compatibility for released clients the object \"deleteRspInput\" is\r\n            used (if the object is empty we assume that it is old client and continue the old\r\n            behavior).": {
-            "$ref": "./examples/ReplicationRecoveryServicesProviders_Delete.json"
+          "Deletes provider from fabric. Note: Deleting provider for any fabric other than SingleHost is unsupported. To maintain backward compatibility for released clients the object \"deleteRspInput\" is used (if the object is empty we assume that it is old client and continue the old behavior).": {
+            "$ref": "../examples/ReplicationRecoveryServicesProviders_Delete.json"
           }
         }
       }
@@ -2364,7 +2364,7 @@
         "tags": [
           "ReplicationRecoveryServicesProviders"
         ],
-        "summary": "Gets the list of registered recovery services providers in the vault.\r\n            This is a view only api.",
+        "summary": "Gets the list of registered recovery services providers in the vault. This is a view only api.",
         "description": "Lists the registered recovery services providers in the vault",
         "operationId": "ReplicationRecoveryServicesProviders_List",
         "produces": [
@@ -2396,8 +2396,8 @@
           "nextLinkName": "nextLink"
         },
         "x-ms-examples": {
-          "Gets the list of registered recovery services providers in the vault.\r\n            This is a view only api.": {
-            "$ref": "./examples/ReplicationRecoveryServicesProviders_List.json"
+          "Gets the list of registered recovery services providers in the vault. This is a view only api.": {
+            "$ref": "../examples/ReplicationRecoveryServicesProviders_List.json"
           }
         }
       }
@@ -3151,8 +3151,8 @@
         "tags": [
           "ReplicationProtectionContainers"
         ],
-        "summary": "Switches protection from one container to another or one replication provider to\r\n            another.",
-        "description": "Operation to switch protection from one container to another or one replication \r\n            provider to another.",
+        "summary": "Switches protection from one container to another or one replication provider to another.",
+        "description": "Operation to switch protection from one container to another or one replication provider to another.",
         "operationId": "ReplicationProtectionContainers_SwitchProtection",
         "consumes": [
           "application/json"
@@ -3210,8 +3210,8 @@
         },
         "x-ms-long-running-operation": true,
         "x-ms-examples": {
-          "Switches protection from one container to another or one replication provider to\r\n            another.": {
-            "$ref": "./examples/ReplicationProtectionContainers_SwitchProtection.json"
+          "Switches protection from one container to another or one replication provider to another.": {
+            "$ref": "../examples/ReplicationProtectionContainers_SwitchProtection.json"
           }
         }
       }
@@ -3315,7 +3315,7 @@
           {
             "name": "discoverProtectableItemRequest",
             "in": "body",
-            "description": "The request object to add a protectable\r\n            item.",
+            "description": "The request object to add a protectable item.",
             "required": true,
             "schema": {
               "$ref": "#/definitions/DiscoverProtectableItemRequest"
@@ -5220,7 +5220,7 @@
           {
             "name": "failoverProcessServerRequest",
             "in": "body",
-            "description": "The input to the failover process\r\n            server operation.",
+            "description": "The input to the failover process server operation.",
             "required": true,
             "schema": {
               "$ref": "#/definitions/FailoverProcessServerRequest"
@@ -5910,11 +5910,11 @@
           "type": "string"
         },
         "eventType": {
-          "description": "The type of the event.\r\n            for example: VM Health, Server Health, Job Failure etc.",
+          "description": "The type of the event. for example: VM Health, Server Health, Job Failure etc.",
           "type": "string"
         },
         "affectedObjectFriendlyName": {
-          "description": "The friendly name of the source of the event on which it \r\n            is raised (for example, VM, VMM etc).",
+          "description": "The friendly name of the source of the event on which it is raised (for example, VM, VMM etc).",
           "type": "string"
         },
         "severity": {
@@ -5939,7 +5939,7 @@
           "description": "The event specific settings."
         },
         "healthErrors": {
-          "description": "The list of errors / warnings capturing details associated with the\r\n            issue(s).",
+          "description": "The list of errors / warnings capturing details associated with the issue(s).",
           "type": "array",
           "items": {
             "$ref": "#/definitions/HealthError"
@@ -6182,7 +6182,7 @@
           "description": "The custom data."
         },
         "status": {
-          "description": "The status of the Job. ARM expects the terminal status to be one of\r\n            (1) Succeeded, (2) Failed or (3) Canceled.\r\n            All other values imply that the operation is still running / being applied.",
+          "description": "The status of the Job. ARM expects the terminal status to be one of (1) Succeeded, (2) Failed or (3) Canceled. All other values imply that the operation is still running / being applied.",
           "type": "string"
         },
         "error": {
@@ -6216,11 +6216,11 @@
           "type": "string"
         },
         "state": {
-          "description": "The status of the Job. It is one of these values - NotStarted, InProgress,\r\n            Succeeded, Failed, Cancelled, Suspended or Other.",
+          "description": "The status of the Job. It is one of these values - NotStarted, InProgress, Succeeded, Failed, Cancelled, Suspended or Other.",
           "type": "string"
         },
         "stateDescription": {
-          "description": "The description of the state of the Job. For e.g. - For Succeeded state,\r\n            description can be Completed, PartiallySucceeded, CompletedWithInformation or Skipped.",
+          "description": "The description of the state of the Job. For e.g. - For Succeeded state, description can be Completed, PartiallySucceeded, CompletedWithInformation or Skipped.",
           "type": "string"
         },
         "tasks": {
@@ -6263,7 +6263,7 @@
           "type": "string"
         },
         "targetInstanceType": {
-          "description": "The type of the affected object which is\r\n            of {Microsoft.Azure.SiteRecovery.V2015_11_10.AffectedObjectType} class.",
+          "description": "The type of the affected object which is of {Microsoft.Azure.SiteRecovery.V2015_11_10.AffectedObjectType} class.",
           "type": "string"
         },
         "customDetails": {
@@ -6335,11 +6335,11 @@
           "type": "string"
         },
         "state": {
-          "description": "The State. It is one of these values - NotStarted, InProgress,\r\n            Succeeded, Failed, Cancelled, Suspended or Other.",
+          "description": "The State. It is one of these values - NotStarted, InProgress, Succeeded, Failed, Cancelled, Suspended or Other.",
           "type": "string"
         },
         "stateDescription": {
-          "description": "The description of the task state. For example - For Succeeded state,\r\n            description can be Completed, PartiallySucceeded, CompletedWithInformation or Skipped.",
+          "description": "The description of the task state. For example - For Succeeded state, description can be Completed, PartiallySucceeded, CompletedWithInformation or Skipped.",
           "type": "string"
         },
         "taskType": {
@@ -6352,7 +6352,7 @@
         },
         "groupTaskCustomDetails": {
           "$ref": "#/definitions/GroupTaskDetails",
-          "description": "The custom task details based on the task type, if the task type is\r\n            GroupTaskDetails or one of the types derived from it."
+          "description": "The custom task details based on the task type, if the task type is GroupTaskDetails or one of the types derived from it."
         },
         "errors": {
           "description": "The task error details.",
@@ -6400,7 +6400,7 @@
           "readOnly": true
         },
         "affectedObjectDetails": {
-          "description": "The affected object properties like source server, source cloud, target\r\n            server, target cloud etc. based on the workflow object details.",
+          "description": "The affected object properties like source server, source cloud, target server, target cloud etc. based on the workflow object details.",
           "type": "object",
           "additionalProperties": {
             "type": "string"
@@ -6521,7 +6521,7 @@
       "discriminator": "instanceType"
     },
     "GroupTaskDetails": {
-      "description": "This class represents the group task details when parent child relationship exists\r\n            in the drill down.",
+      "description": "This class represents the group task details when parent child relationship exists in the drill down.",
       "type": "object",
       "properties": {
         "instanceType": {
@@ -6719,7 +6719,7 @@
       }
     },
     "NetworkMapping": {
-      "description": "Network Mapping model.\r\n            Ideally it should have been possible to inherit this class from prev version in \r\n            InheritedModels as long as there is no difference in structure or method signature.\r\n            Since there were no base Models for certain fields and methods viz NetworkMappingProperties\r\n            and Load with required return type, the class has been introduced in its entirety with \r\n            references to base models to facilitate exensions in subsequent versions.",
+      "description": "Network Mapping model. Ideally it should have been possible to inherit this class from prev version in InheritedModels as long as there is no difference in structure or method signature. Since there were no base Models for certain fields and methods viz NetworkMappingProperties and Load with required return type, the class has been introduced in its entirety with references to base models to facilitate exensions in subsequent versions.",
       "type": "object",
       "allOf": [
         {
@@ -6965,7 +6965,7 @@
       "type": "object",
       "properties": {
         "name": {
-          "description": "Name of the API. \r\n            The name of the operation being performed on this particular object. It should match the action name that appears in RBAC / the event service.\r\n            Examples of operations include:  \r\n            * Microsoft.Compute/virtualMachine/capture/action \r\n            * Microsoft.Compute/virtualMachine/restart/action \r\n            * Microsoft.Compute/virtualMachine/write \r\n            * Microsoft.Compute/virtualMachine/read \r\n            * Microsoft.Compute/virtualMachine/delete  \r\n            Each action should include, in order:  \r\n            (1) Resource Provider Namespace \r\n            (2) Type hierarchy for which the action applies (e.g. server/databases for a SQL Azure database) \r\n            (3) Read, Write, Action or Delete indicating which type applies. If it is a PUT/PATCH on a collection or named value, Write should be used. \r\n            If it is a GET, Read should be used. If it is a DELETE, Delete should be used. If it is a POST, Action should be used.   \r\n            As a note: all resource providers would need to include the \"{Resource Provider Namespace}/register/action\" operation in their response.  \r\n            This API is used to register for their service, and should include details about the operation (e.g. a localized name for the resource provider + any special considerations like PII release)",
+          "description": "Name of the API. The name of the operation being performed on this particular object. It should match the action name that appears in RBAC / the event service. Examples of operations include:  * Microsoft.Compute/virtualMachine/capture/action * Microsoft.Compute/virtualMachine/restart/action * Microsoft.Compute/virtualMachine/write * Microsoft.Compute/virtualMachine/read * Microsoft.Compute/virtualMachine/delete  Each action should include, in order:  (1) Resource Provider Namespace (2) Type hierarchy for which the action applies (e.g. server/databases for a SQL Azure database) (3) Read, Write, Action or Delete indicating which type applies. If it is a PUT/PATCH on a collection or named value, Write should be used. If it is a GET, Read should be used. If it is a DELETE, Delete should be used. If it is a POST, Action should be used.   As a note: all resource providers would need to include the \"{Resource Provider Namespace}/register/action\" operation in their response.  This API is used to register for their service, and should include details about the operation (e.g. a localized name for the resource provider + any special considerations like PII release)",
           "type": "string"
         },
         "display": {
@@ -6973,7 +6973,7 @@
           "description": "Object type"
         },
         "origin": {
-          "description": "Origin.\r\n            The intended executor of the operation; governs the display of the operation in the RBAC UX and the audit logs UX.   \r\n            Default value is \"user,system\"",
+          "description": "Origin. The intended executor of the operation; governs the display of the operation in the RBAC UX and the audit logs UX.   Default value is \"user,system\"",
           "type": "string"
         },
         "properties": {
@@ -6983,23 +6983,23 @@
       }
     },
     "Display": {
-      "description": "Contains the localized display information for this particular operation / action. These value will be used by several clients for \r\n            (1) custom role definitions for RBAC; \r\n            (2) complex query filters for the event service; and \r\n            (3) audit history / records for management operations.",
+      "description": "Contains the localized display information for this particular operation / action. These value will be used by several clients for (1) custom role definitions for RBAC; (2) complex query filters for the event service; and (3) audit history / records for management operations.",
       "type": "object",
       "properties": {
         "provider": {
-          "description": "The provider.\r\n            The localized friendly form of the resource provider name � it is expected to also include the publisher/company responsible. \r\n            It should use Title Casing and begin with \"Microsoft\" for 1st party services.   \r\n            e.g. \"Microsoft Monitoring Insights\" or \"Microsoft Compute.\"",
+          "description": "The provider. The localized friendly form of the resource provider name � it is expected to also include the publisher/company responsible. It should use Title Casing and begin with \"Microsoft\" for 1st party services.   e.g. \"Microsoft Monitoring Insights\" or \"Microsoft Compute.\"",
           "type": "string"
         },
         "resource": {
-          "description": "The resource.\r\n            The localized friendly form of the resource related to this action/operation � it should match the public documentation for the resource provider. \r\n            It should use Title Casing.   \r\n            This value should be unique for a particular URL type (e.g. nested types should *not* reuse their parent�s display.resource field).  \r\n            e.g. \"Virtual Machines\" or \"Scheduler Job Collections\", or \"Virtual Machine VM Sizes\" or \"Scheduler Jobs\"",
+          "description": "The resource. The localized friendly form of the resource related to this action/operation � it should match the public documentation for the resource provider. It should use Title Casing.   This value should be unique for a particular URL type (e.g. nested types should *not* reuse their parent�s display.resource field).  e.g. \"Virtual Machines\" or \"Scheduler Job Collections\", or \"Virtual Machine VM Sizes\" or \"Scheduler Jobs\"",
           "type": "string"
         },
         "operation": {
-          "description": "The operation.\r\n            The localized friendly name for the operation, as it should be shown to the user. \r\n            It should be concise (to fit in drop downs) but clear (i.e. self-documenting). \r\n            It should use Title Casing.  \r\n            Prescriptive guidance: Read Create or Update Delete 'ActionName'",
+          "description": "The operation. The localized friendly name for the operation, as it should be shown to the user. It should be concise (to fit in drop downs) but clear (i.e. self-documenting). It should use Title Casing.  Prescriptive guidance: Read Create or Update Delete 'ActionName'",
           "type": "string"
         },
         "description": {
-          "description": "The description.\r\n            The localized friendly description for the operation, as it should be shown to the user. \r\n            It should be thorough, yet concise � it will be used in tool tips and detailed views.   \r\n            Prescriptive guidance for namespaces: \r\n            Read any 'display.provider'  resource \r\n            Create or Update any  'display.provider'  resource \r\n            Delete any  'display.provider'  resource \r\n            Perform any other action on any  'display.provider'  resource  \r\n            Prescriptive guidance for namespaces: \r\n            Read any 'display.resource' Create or Update any  'display.resource' Delete any 'display.resource' 'ActionName' any 'display.resources'",
+          "description": "The description. The localized friendly description for the operation, as it should be shown to the user. It should be thorough, yet concise � it will be used in tool tips and detailed views.   Prescriptive guidance for namespaces: Read any 'display.provider'  resource Create or Update any  'display.provider'  resource Delete any  'display.provider'  resource Perform any other action on any  'display.provider'  resource  Prescriptive guidance for namespaces: Read any 'display.resource' Create or Update any  'display.resource' Delete any 'display.resource' 'ActionName' any 'display.resources'",
           "type": "string"
         }
       }
@@ -7770,7 +7770,7 @@
       "type": "object",
       "properties": {
         "instanceType": {
-          "description": "Gets the type of action details (see RecoveryPlanActionDetailsTypes enum for\r\n            possible values).",
+          "description": "Gets the type of action details (see RecoveryPlanActionDetailsTypes enum for possible values).",
           "type": "string",
           "readOnly": true
         }
@@ -8260,7 +8260,7 @@
           }
         },
         "replicationHealth": {
-          "description": "The consolidated protection health for the VM taking any issues with SRS\r\n            as well as all the replication units associated with the VM's replication group into\r\n            account. This is a string representation of the ProtectionHealth enumeration.",
+          "description": "The consolidated protection health for the VM taking any issues with SRS as well as all the replication units associated with the VM's replication group into account. This is a string representation of the ProtectionHealth enumeration.",
           "type": "string"
         },
         "replicationHealthErrors": {
@@ -8400,7 +8400,7 @@
         },
         "providerSpecificDetails": {
           "$ref": "#/definitions/EnableProtectionProviderSpecificInput",
-          "description": "The ReplicationProviderInput.\r\n            For HyperVReplicaAzure provider, it will be AzureEnableProtectionInput object.\r\n            For San provider, it will be SanEnableProtectionInput object.\r\n            For HyperVReplicaAzure provider, it can be null."
+          "description": "The ReplicationProviderInput. For HyperVReplicaAzure provider, it will be AzureEnableProtectionInput object. For San provider, it will be SanEnableProtectionInput object. For HyperVReplicaAzure provider, it can be null."
         }
       }
     },
@@ -8442,7 +8442,7 @@
           "type": "string"
         },
         "enableRDPOnTargetOption": {
-          "description": "The selected option to enable RDP\\SSH on target vm after failover.\r\n            String value of {SrsDataContract.EnableRDPOnTargetOption} enum.",
+          "description": "The selected option to enable RDP\\SSH on target vm after failover. String value of {SrsDataContract.EnableRDPOnTargetOption} enum.",
           "type": "string"
         },
         "vmNics": {
@@ -9039,7 +9039,7 @@
       }
     },
     "NetworkMappingCollection": {
-      "description": "List of network mappings.\r\n            As with NetworkMapping, it should be possible to reuse a prev version of this class.\r\n            It doesn't seem likely this class could be anything more than a slightly bespoke collection\r\n            of NetworkMapping. Hence it makes sense to override Load with Base.NetworkMapping instead \r\n            of existing CurrentVersion.NetworkMapping.",
+      "description": "List of network mappings. As with NetworkMapping, it should be possible to reuse a prev version of this class. It doesn't seem likely this class could be anything more than a slightly bespoke collection of NetworkMapping. Hence it makes sense to override Load with Base.NetworkMapping instead of existing CurrentVersion.NetworkMapping.",
       "type": "object",
       "properties": {
         "value": {
@@ -9129,7 +9129,7 @@
       "x-ms-discriminator-value": "VmmToVmm"
     },
     "AzureToAzureCreateNetworkMappingInput": {
-      "description": "Create network mappings input properties/behaviour specific to Azure to Azure Network \r\n            mapping.",
+      "description": "Create network mappings input properties/behaviour specific to Azure to Azure Network mapping.",
       "type": "object",
       "allOf": [
         {
@@ -9145,7 +9145,7 @@
       "x-ms-discriminator-value": "AzureToAzure"
     },
     "VmmToAzureCreateNetworkMappingInput": {
-      "description": "Create network mappings input properties/behaviour specific to Vmm to Azure Network \r\n            mapping.",
+      "description": "Create network mappings input properties/behaviour specific to Vmm to Azure Network mapping.",
       "type": "object",
       "allOf": [
         {
@@ -9266,7 +9266,7 @@
           }
         },
         "masterTargetServers": {
-          "description": "The list of Master Target servers associated with\r\n            the fabric.",
+          "description": "The list of Master Target servers associated with the fabric.",
           "type": "array",
           "items": {
             "$ref": "#/definitions/MasterTargetServer"
@@ -9431,7 +9431,7 @@
           "type": "string"
         },
         "mobilityServiceUpdates": {
-          "description": "The list of the mobility service updates available on the\r\n            Process Server.",
+          "description": "The list of the mobility service updates available on the Process Server.",
           "type": "array",
           "items": {
             "$ref": "#/definitions/MobilityServiceUpdate"
@@ -9882,7 +9882,7 @@
           "type": "string"
         },
         "recoveryAzureLogStorageAccountId": {
-          "description": "The ARM id of the log storage acount used for replication.\r\n            This will be set to null if no log storage account was provided during enable\r\n            protection.",
+          "description": "The ARM id of the log storage acount used for replication. This will be set to null if no log storage account was provided during enable protection.",
           "type": "string"
         },
         "lastReplicatedTime": {
@@ -9936,7 +9936,7 @@
           "type": "integer"
         },
         "enableRDPOnTargetOption": {
-          "description": "The selected option to enable RDP\\SSH on target vm after failover.\r\n            String value of {SrsDataContract.EnableRDPOnTargetOption} enum.",
+          "description": "The selected option to enable RDP\\SSH on target vm after failover. String value of {SrsDataContract.EnableRDPOnTargetOption} enum.",
           "type": "string"
         },
         "recoveryAzureResourceGroupId": {
@@ -10058,7 +10058,7 @@
           "type": "string"
         },
         "isRebootAfterUpdateRequired": {
-          "description": "A value indicating whether the source server requires a restart after\r\n            update.",
+          "description": "A value indicating whether the source server requires a restart after update.",
           "type": "string"
         },
         "lastHeartbeat": {
@@ -10139,7 +10139,7 @@
           "type": "string"
         },
         "recoveryAzureLogStorageAccountId": {
-          "description": "The ARM id of the log storage acount used for replication.\r\n            This will be set to null if no log storage account was provided during enable\r\n            protection.",
+          "description": "The ARM id of the log storage acount used for replication. This will be set to null if no log storage account was provided during enable protection.",
           "type": "string"
         },
         "vmNics": {
@@ -10154,22 +10154,22 @@
           "type": "string"
         },
         "discoveryType": {
-          "description": "A value inidicating the discovery type of the machine.\r\n            Value can be vCenter or physical.",
+          "description": "A value inidicating the discovery type of the machine. Value can be vCenter or physical.",
           "type": "string"
         },
         "enableRDPOnTargetOption": {
-          "description": "The selected option to enable RDP\\SSH on target vm after failover.\r\n            String value of {SrsDataContract.EnableRDPOnTargetOption} enum.",
+          "description": "The selected option to enable RDP\\SSH on target vm after failover. String value of {SrsDataContract.EnableRDPOnTargetOption} enum.",
           "type": "string"
         },
         "datastores": {
-          "description": "The datastores of the on-premise machine.\r\n            Value can be list of strings that contain datastore names.",
+          "description": "The datastores of the on-premise machine. Value can be list of strings that contain datastore names.",
           "type": "array",
           "items": {
             "type": "string"
           }
         },
         "targetVmId": {
-          "description": "The ARM Id of the target Azure VM.\r\n            This value will be null until the VM is failed over.\r\n            Only after failure it will be populated with the ARM Id of the Azure VM.",
+          "description": "The ARM Id of the target Azure VM. This value will be null until the VM is failed over. Only after failure it will be populated with the ARM Id of the Azure VM.",
           "type": "string"
         },
         "recoveryAzureResourceGroupId": {
@@ -10189,7 +10189,7 @@
           "type": "string"
         },
         "validationErrors": {
-          "description": "The validation errors of the on-premise machine\r\n            Value can be list of validation errors.",
+          "description": "The validation errors of the on-premise machine Value can be list of validation errors.",
           "type": "array",
           "items": {
             "$ref": "#/definitions/HealthError"
@@ -10278,7 +10278,7 @@
       ],
       "properties": {
         "activeSiteType": {
-          "description": "The active location of the VM. If the VM is being protected\r\n            from Azure, this field will take values from { Azure, OnPrem }. If the VM\r\n            is being protected between two data-centers, this field will be OnPrem always.",
+          "description": "The active location of the VM. If the VM is being protected from Azure, this field will take values from { Azure, OnPrem }. If the VM is being protected between two data-centers, this field will be OnPrem always.",
           "type": "string"
         },
         "sourceVmCPUCount": {
@@ -10377,7 +10377,7 @@
           "type": "string"
         },
         "rebootAfterUpdateStatus": {
-          "description": "A value indicating whether the source server requires a restart after\r\n            update.",
+          "description": "A value indicating whether the source server requires a restart after update.",
           "type": "string"
         },
         "multiVmGroupId": {
@@ -10416,18 +10416,18 @@
           "type": "string"
         },
         "azureStorageAccountId": {
-          "description": "A value indicating the underlying Azure storage account. If\r\n            the VM is not running in Azure, this value shall be set to null.",
+          "description": "A value indicating the underlying Azure storage account. If the VM is not running in Azure, this value shall be set to null.",
           "type": "string"
         },
         "datastores": {
-          "description": "The datastores of the on-premise machine\r\n            Value can be list of strings that contain datastore names",
+          "description": "The datastores of the on-premise machine Value can be list of strings that contain datastore names",
           "type": "array",
           "items": {
             "type": "string"
           }
         },
         "validationErrors": {
-          "description": "The validation errors of the on-premise machine\r\n            Value can be list of validation errors",
+          "description": "The validation errors of the on-premise machine Value can be list of validation errors",
           "type": "array",
           "items": {
             "$ref": "#/definitions/HealthError"
@@ -10623,11 +10623,11 @@
         },
         "monitoringPercentageCompletion": {
           "format": "int32",
-          "description": "The percentage of the monitoring job. The type of the monitoring job\r\n            is defined by MonitoringJobType property.",
+          "description": "The percentage of the monitoring job. The type of the monitoring job is defined by MonitoringJobType property.",
           "type": "integer"
         },
         "monitoringJobType": {
-          "description": "The type of the monitoring job. The progress is contained in\r\n            MonitoringPercentageCompletion property.",
+          "description": "The type of the monitoring job. The progress is contained in MonitoringPercentageCompletion property.",
           "type": "string"
         },
         "lastHeartbeat": {
@@ -10656,7 +10656,7 @@
           "type": "string"
         },
         "lifecycleId": {
-          "description": "An id associated with the PE that survives actions like switch protection\r\n            which change the backing PE/CPE objects internally.The lifecycle id gets carried\r\n            forward to have a link/continuity in being able to have an Id that denotes the \"same\"\r\n            protected item even though other internal Ids/ARM Id might be changing.",
+          "description": "An id associated with the PE that survives actions like switch protection which change the backing PE/CPE objects internally.The lifecycle id gets carried forward to have a link/continuity in being able to have an Id that denotes the \"same\" protected item even though other internal Ids/ARM Id might be changing.",
           "type": "string"
         }
       },
@@ -10705,11 +10705,11 @@
         },
         "monitoringPercentageCompletion": {
           "format": "int32",
-          "description": "The percentage of the monitoring job. The type of the monitoring job\r\n            is defined by MonitoringJobType property.",
+          "description": "The percentage of the monitoring job. The type of the monitoring job is defined by MonitoringJobType property.",
           "type": "integer"
         },
         "monitoringJobType": {
-          "description": "The type of the monitoring job. The progress is contained in\r\n            MonitoringPercentageCompletion property.",
+          "description": "The type of the monitoring job. The progress is contained in MonitoringPercentageCompletion property.",
           "type": "string"
         },
         "dataPendingInStagingStorageAccountInMB": {
@@ -10839,7 +10839,7 @@
           "type": "string"
         },
         "enableRDPOnTargetOption": {
-          "description": "The selected option to enable RDP\\SSH on target vm after failover.\r\n            String value of {SrsDataContract.EnableRDPOnTargetOption} enum.",
+          "description": "The selected option to enable RDP\\SSH on target vm after failover. String value of {SrsDataContract.EnableRDPOnTargetOption} enum.",
           "type": "string"
         },
         "targetAzureVmName": {
@@ -10858,11 +10858,11 @@
           }
         },
         "targetAzureV1ResourceGroupId": {
-          "description": "The Id of the target resource group (for classic deployment) in which the\r\n            failover VM is to be created.",
+          "description": "The Id of the target resource group (for classic deployment) in which the failover VM is to be created.",
           "type": "string"
         },
         "targetAzureV2ResourceGroupId": {
-          "description": "The Id of the target resource group (for resource manager deployment) in\r\n            which the failover VM is to be created.",
+          "description": "The Id of the target resource group (for resource manager deployment) in which the failover VM is to be created.",
           "type": "string"
         },
         "useManagedDisks": {
@@ -10935,7 +10935,7 @@
           "type": "string"
         },
         "enableRDPOnTargetOption": {
-          "description": "The selected option to enable RDP\\SSH on target vm after failover.\r\n            String value of {SrsDataContract.EnableRDPOnTargetOption} enum.",
+          "description": "The selected option to enable RDP\\SSH on target vm after failover. String value of {SrsDataContract.EnableRDPOnTargetOption} enum.",
           "type": "string"
         },
         "targetAzureVmName": {
@@ -10943,15 +10943,15 @@
           "type": "string"
         },
         "logStorageAccountId": {
-          "description": "The storage account to be used for logging\r\n            during replication.",
+          "description": "The storage account to be used for logging during replication.",
           "type": "string"
         },
         "targetAzureV1ResourceGroupId": {
-          "description": "The Id of the target resource group (for classic deployment) in which the\r\n            failover VM is to be created.",
+          "description": "The Id of the target resource group (for classic deployment) in which the failover VM is to be created.",
           "type": "string"
         },
         "targetAzureV2ResourceGroupId": {
-          "description": "The Id of the target resource group (for resource manager deployment) in\r\n            which the failover VM is to be created.",
+          "description": "The Id of the target resource group (for resource manager deployment) in which the failover VM is to be created.",
           "type": "string"
         },
         "useManagedDisks": {
@@ -11302,7 +11302,7 @@
       ],
       "properties": {
         "eventType": {
-          "description": "InMage Event type.\r\n            Takes one of the values of {InMageDataContract.InMageMonitoringEventType}.",
+          "description": "InMage Event type. Takes one of the values of {InMageDataContract.InMageMonitoringEventType}.",
           "type": "string"
         },
         "category": {
@@ -11454,7 +11454,7 @@
       ],
       "properties": {
         "agentGeneratedId": {
-          "description": "The ID generated by the InMage agent after it gets installed on guest. This is the ID\r\n            to be used during InMage CreateProtection.",
+          "description": "The ID generated by the InMage agent after it gets installed on guest. This is the ID to be used during InMage CreateProtection.",
           "type": "string"
         },
         "agentInstalled": {
@@ -11482,7 +11482,7 @@
           "type": "string"
         },
         "discoveryType": {
-          "description": "A value inidicating the discovery type of the machine.\r\n            Value can be vCenter or physical.",
+          "description": "A value inidicating the discovery type of the machine. Value can be vCenter or physical.",
           "type": "string"
         },
         "diskDetails": {
@@ -11570,7 +11570,7 @@
       ],
       "properties": {
         "replicaVmDeletionStatus": {
-          "description": "A value indicating whether the replica VM should be destroyed or retained.\r\n            Values from Delete and Retain.",
+          "description": "A value indicating whether the replica VM should be destroyed or retained. Values from Delete and Retain.",
           "type": "string"
         }
       },
@@ -11598,7 +11598,7 @@
           "type": "string"
         },
         "recoveryPointId": {
-          "description": "The recovery point id to be passed to failover to a particular recovery \r\n            point. In case of latest recovery point, null should be passed.",
+          "description": "The recovery point id to be passed to failover to a particular recovery point. In case of latest recovery point, null should be passed.",
           "type": "string"
         }
       },
@@ -11642,7 +11642,7 @@
           "type": "string"
         },
         "recoveryPointId": {
-          "description": "The recovery point id to be passed to failover to a particular recovery \r\n            point. In case of latest recovery point, null should be passed.",
+          "description": "The recovery point id to be passed to failover to a particular recovery point. In case of latest recovery point, null should be passed.",
           "type": "string"
         }
       },
@@ -11658,11 +11658,11 @@
       ],
       "properties": {
         "recoveryPointType": {
-          "description": "The recovery point type. Values from LatestTime,\r\n            LatestTag or Custom. In the case of custom, the recovery point provided by\r\n            RecoveryPointId will be used. In the other two cases, recovery point id\r\n            will be ignored.",
+          "description": "The recovery point type. Values from LatestTime, LatestTag or Custom. In the case of custom, the recovery point provided by RecoveryPointId will be used. In the other two cases, recovery point id will be ignored.",
           "type": "string"
         },
         "recoveryPointId": {
-          "description": "The recovery point id to be passed to failover to a particular recovery \r\n            point. In case of latest recovery point, null should be passed.",
+          "description": "The recovery point id to be passed to failover to a particular recovery point. In case of latest recovery point, null should be passed.",
           "type": "string"
         }
       },
@@ -11678,7 +11678,7 @@
       ],
       "properties": {
         "recoveryPointId": {
-          "description": "The recovery point id to be passed to failover to a particular recovery \r\n            point. In case of latest recovery point, null should be passed.",
+          "description": "The recovery point id to be passed to failover to a particular recovery point. In case of latest recovery point, null should be passed.",
           "type": "string"
         },
         "cloudServiceCreationOption": {
@@ -11754,7 +11754,7 @@
           "type": "string"
         },
         "logStorageAccountId": {
-          "description": "The storage account to be used for logging\r\n            during replication.",
+          "description": "The storage account to be used for logging during replication.",
           "type": "string"
         },
         "disksToInclude": {
@@ -11835,21 +11835,21 @@
       }
     },
     "InMageVolumeExclusionOptions": {
-      "description": "Guest disk signature based disk exclusion option when doing enable protection of \r\n            virtual machine in InMage provider.",
+      "description": "Guest disk signature based disk exclusion option when doing enable protection of virtual machine in InMage provider.",
       "type": "object",
       "properties": {
         "volumeLabel": {
-          "description": "The volume label. The disk having any volume with this label will be\r\n            excluded from replication.",
+          "description": "The volume label. The disk having any volume with this label will be excluded from replication.",
           "type": "string"
         },
         "OnlyExcludeIfSingleVolume": {
-          "description": "The value indicating whether to exclude multi volume disk or not. \r\n            If a disk has multiple volumes and one of the volume has label matching with \r\n            VolumeLabel this disk will be excluded from replication if \r\n            OnlyExcludeIfSingleVolume is false.",
+          "description": "The value indicating whether to exclude multi volume disk or not. If a disk has multiple volumes and one of the volume has label matching with VolumeLabel this disk will be excluded from replication if OnlyExcludeIfSingleVolume is false.",
           "type": "string"
         }
       }
     },
     "InMageDiskSignatureExclusionOptions": {
-      "description": "Guest disk signature based disk exclusion option when doing enable protection of \r\n            virtual machine in InMage provider.",
+      "description": "Guest disk signature based disk exclusion option when doing enable protection of virtual machine in InMage provider.",
       "type": "object",
       "properties": {
         "diskSignature": {
@@ -11967,7 +11967,7 @@
       "x-ms-discriminator-value": "A2A"
     },
     "JobTaskDetails": {
-      "description": "This class represents a task which is actually a workflow so that one can navigate\r\n            to its individual drill down.",
+      "description": "This class represents a task which is actually a workflow so that one can navigate to its individual drill down.",
       "type": "object",
       "allOf": [
         {
@@ -12156,7 +12156,7 @@
       "x-ms-discriminator-value": "ConsistencyCheckTaskDetails"
     },
     "InconsistentVmDetails": {
-      "description": "This class stores the monitoring details for consistency check of\r\n            inconsistent Protected Entity.",
+      "description": "This class stores the monitoring details for consistency check of inconsistent Protected Entity.",
       "type": "object",
       "properties": {
         "vmName": {
@@ -12168,7 +12168,7 @@
           "type": "string"
         },
         "details": {
-          "description": "The list of details regarding state of the\r\n            Protected Entity in SRS and On prem.",
+          "description": "The list of details regarding state of the Protected Entity in SRS and On prem.",
           "type": "array",
           "items": {
             "type": "string"
@@ -12479,12 +12479,12 @@
       "properties": {
         "recoveryPointHistoryDurationInHours": {
           "format": "int32",
-          "description": "The duration (in hours) to which point the recovery history needs to be \r\n            maintained.",
+          "description": "The duration (in hours) to which point the recovery history needs to be maintained.",
           "type": "integer"
         },
         "applicationConsistentSnapshotFrequencyInHours": {
           "format": "int32",
-          "description": "The interval (in hours) at which Hyper-V Replica should create an\r\n            application consistent snapshot within the VM.",
+          "description": "The interval (in hours) at which Hyper-V Replica should create an application consistent snapshot within the VM.",
           "type": "integer"
         },
         "replicationInterval": {
@@ -12493,11 +12493,11 @@
           "type": "integer"
         },
         "onlineReplicationStartTime": {
-          "description": "The scheduled start time for the initial replication. If this parameter \r\n            is Null, the initial replication starts immediately.",
+          "description": "The scheduled start time for the initial replication. If this parameter is Null, the initial replication starts immediately.",
           "type": "string"
         },
         "encryption": {
-          "description": "A value indicating whether encryption is enabled for virtual machines\r\n            in this cloud.",
+          "description": "A value indicating whether encryption is enabled for virtual machines in this cloud.",
           "type": "string"
         },
         "activeStorageAccountId": {
@@ -12557,7 +12557,7 @@
           "type": "integer"
         },
         "replicaDeletionOption": {
-          "description": "A value indicating whether the VM has to be auto deleted.\r\n            Supported Values: String.Empty, None, OnRecoveryCloud",
+          "description": "A value indicating whether the VM has to be auto deleted. Supported Values: String.Empty, None, OnRecoveryCloud",
           "type": "string"
         }
       },
@@ -12613,7 +12613,7 @@
           "type": "integer"
         },
         "replicaDeletionOption": {
-          "description": "A value indicating whether the VM has to be auto deleted.\r\n            Supported Values: String.Empty, None, OnRecoveryCloud",
+          "description": "A value indicating whether the VM has to be auto deleted. Supported Values: String.Empty, None, OnRecoveryCloud",
           "type": "string"
         }
       },
@@ -12674,7 +12674,7 @@
           "type": "integer"
         },
         "replicaDeletionOption": {
-          "description": "A value indicating whether the VM has to be auto deleted.\r\n            Supported Values: String.Empty, None, OnRecoveryCloud",
+          "description": "A value indicating whether the VM has to be auto deleted. Supported Values: String.Empty, None, OnRecoveryCloud",
           "type": "string"
         }
       },
@@ -12696,7 +12696,7 @@
         },
         "recoveryPointHistory": {
           "format": "int32",
-          "description": "The duration in minutes until which the recovery points need to be \r\n            stored.",
+          "description": "The duration in minutes until which the recovery points need to be stored.",
           "type": "integer"
         },
         "appConsistentFrequencyInMinutes": {
@@ -12732,7 +12732,7 @@
         },
         "recoveryPointHistory": {
           "format": "int32",
-          "description": "The duration in minutes until which the recovery points need to be \r\n            stored.",
+          "description": "The duration in minutes until which the recovery points need to be stored.",
           "type": "integer"
         },
         "appConsistentFrequencyInMinutes": {
@@ -12763,7 +12763,7 @@
         },
         "recoveryPointHistory": {
           "format": "int32",
-          "description": "The duration in minutes until which the recovery points need to be \r\n            stored.",
+          "description": "The duration in minutes until which the recovery points need to be stored.",
           "type": "integer"
         },
         "appConsistentFrequencyInMinutes": {
@@ -12794,7 +12794,7 @@
         },
         "recoveryPointHistory": {
           "format": "int32",
-          "description": "The duration in minutes until which the recovery points need to be \r\n            stored.",
+          "description": "The duration in minutes until which the recovery points need to be stored.",
           "type": "integer"
         },
         "appConsistentFrequencyInMinutes": {
@@ -12825,12 +12825,12 @@
       "properties": {
         "recoveryPointHistoryDuration": {
           "format": "int32",
-          "description": "The duration (in hours) to which point the recovery history needs to be \r\n            maintained.",
+          "description": "The duration (in hours) to which point the recovery history needs to be maintained.",
           "type": "integer"
         },
         "applicationConsistentSnapshotFrequencyInHours": {
           "format": "int32",
-          "description": "The interval (in hours) at which Hyper-V Replica should create an\r\n            application consistent snapshot within the VM.",
+          "description": "The interval (in hours) at which Hyper-V Replica should create an application consistent snapshot within the VM.",
           "type": "integer"
         },
         "replicationInterval": {
@@ -12839,7 +12839,7 @@
           "type": "integer"
         },
         "onlineReplicationStartTime": {
-          "description": "The scheduled start time for the initial replication. If this parameter \r\n            is Null, the initial replication starts immediately.",
+          "description": "The scheduled start time for the initial replication. If this parameter is Null, the initial replication starts immediately.",
           "type": "string"
         },
         "encryption": {
@@ -12847,7 +12847,7 @@
           "type": "string"
         },
         "storageAccounts": {
-          "description": "The list of storage accounts to which the VMs in the primary cloud can \r\n            replicate to.",
+          "description": "The list of storage accounts to which the VMs in the primary cloud can replicate to.",
           "type": "array",
           "items": {
             "type": "string"
@@ -12992,7 +12992,7 @@
         },
         "recoveryPointHistory": {
           "format": "int32",
-          "description": "The duration in minutes until which the recovery points need to be \r\n            stored.",
+          "description": "The duration in minutes until which the recovery points need to be stored.",
           "type": "integer"
         },
         "crashConsistentFrequencyInMinutes": {
@@ -13006,7 +13006,7 @@
           "type": "integer"
         },
         "multiVmSyncStatus": {
-          "description": "A value indicating whether multi-VM sync has to be enabled.\r\n            Value should be 'Enabled' or 'Disabled'.",
+          "description": "A value indicating whether multi-VM sync has to be enabled. Value should be 'Enabled' or 'Disabled'.",
           "enum": [
             "Enable",
             "Disable"
@@ -13039,7 +13039,7 @@
         },
         "recoveryPointHistory": {
           "format": "int32",
-          "description": "The duration in minutes until which the recovery points need to be \r\n            stored.",
+          "description": "The duration in minutes until which the recovery points need to be stored.",
           "type": "integer"
         },
         "appConsistentFrequencyInMinutes": {
@@ -13048,7 +13048,7 @@
           "type": "integer"
         },
         "multiVmSyncStatus": {
-          "description": "A value indicating whether multi-VM sync has to be enabled.\r\n            Value should be 'Enabled' or 'Disabled'.",
+          "description": "A value indicating whether multi-VM sync has to be enabled. Value should be 'Enabled' or 'Disabled'.",
           "enum": [
             "Enable",
             "Disable"
@@ -13076,7 +13076,7 @@
       "properties": {
         "recoveryPointHistory": {
           "format": "int32",
-          "description": "The duration in minutes until which the recovery points need to be \r\n            stored.",
+          "description": "The duration in minutes until which the recovery points need to be stored.",
           "type": "integer"
         },
         "crashConsistentFrequencyInMinutes": {
@@ -13090,7 +13090,7 @@
           "type": "integer"
         },
         "multiVmSyncStatus": {
-          "description": "A value indicating whether multi-VM sync has to be enabled.\r\n            Value should be 'Enabled' or 'Disabled'.",
+          "description": "A value indicating whether multi-VM sync has to be enabled. Value should be 'Enabled' or 'Disabled'.",
           "enum": [
             "Enable",
             "Disable"

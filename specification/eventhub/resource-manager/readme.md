@@ -29,7 +29,18 @@ These are the global settings for the EventHub API.
 title: Event Hub
 description: Event Hub Client
 openapi-type: arm
-tag: package-2015-08
+tag: package-2017-04
+
+```
+
+
+# Tag: package-2017-04
+
+These settings apply only when `--tag=package-2017-04` is specified on the command line.
+
+``` yaml $(tag) == 'package-2017-04'
+input-file:
+- Microsoft.EventHub/2017-04-01/EventHub.json
 
 ```
 

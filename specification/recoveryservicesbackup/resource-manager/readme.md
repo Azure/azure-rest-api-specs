@@ -1,4 +1,4 @@
-# RecoveryServicesBackup
+# RecoveryServices.Backup
     
 > see https://aka.ms/autorest
 
@@ -25,9 +25,10 @@ To see additional help and options, run:
 These are the global settings for the RecoveryServicesBackup API.
 
 ``` yaml
-# common 
-title: Recovery Services Backup
-description: Open API 2.0 Specs for Azure RecoveryServices Backup service
+# common
+override-info:
+  title: Recovery Services Backup Client
+  description: Open API 2.0 Specs for Azure RecoveryServices Backup service
 openapi-type: arm
 tag: package-2016-12
 
@@ -66,24 +67,30 @@ input-file:
 
 These settings apply only when `--csharp` is specified on the command line.
 
-``` yaml $(csharp)
+```yaml $(csharp)
 csharp:
+  azure-arm: true
+  license-header: MICROSOFT_MIT
   namespace: Microsoft.Azure.Management.RecoveryServices.Backup
-  output-folder: Generated/CSharp
+  output-folder: $(output-folder)Generated/CSharp
 ```
 
 ## Python
 
-```yaml
+```yaml $(python)
 python:
+  azure-arm: true
   namespace: azure.mgmt.recoveryservicesbackup
-  package-name: azure-mgmt-recoveryservicesbackup
   package-version: 0.1.0
-  output-folder: Generated/Python
+  output-folder: $(output-folder)Generated/Python
   payload-flattening-threshold: 2
   license-header: MICROSOFT_MIT_NO_VERSION
 ```
 
+```yaml $(python) && $(create)
+python:
+  package-name: azure-mgmt-recoveryservicesbackup
+```
 
 ---
 # Validation
