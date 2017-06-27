@@ -114,7 +114,7 @@
           "DatabaseAdvisors"
         ],
         "description": "Updates a Database Advisor.",
-        "operationId": "Databases_WriteAdvisors",
+        "operationId": "Databases_UpdateAdvisors",
         "parameters": [
           {
             "$ref": "#/parameters/ResourceGroupParameter"
@@ -530,7 +530,11 @@
             "LimitedPublicPreview",
             "PrivatePreview"
           ],
-          "type": "string"
+          "type": "string",
+          "x-ms-enum": {
+            "name": "AdvisorStatus",
+            "modelAsString": true
+          }
         },
         "autoExecuteStatus": {
           "description": "Gets the auto-execute status (whether to let the system execute the recommendations) of this advisor. Possible values are 'Enabled' and 'Disabled'",
@@ -539,7 +543,11 @@
             "Disabled",
             "Default"
           ],
-          "type": "string"
+          "type": "string",
+          "x-ms-enum": {
+            "name": "AutoExecuteStatus",
+            "modelAsString": true
+          }
         },
         "autoExecuteStatusInheritedFrom": {
           "description": "Gets the resource from which current value of auto-execute status is inherited. Auto-execute status can be set on (and inhertied from) different levels in the resource heirarchy. Possible values are 'Subscription', 'Server', 'ElasticPool', 'Database' and 'Default' (when status is not explicitly set on any level).",
@@ -550,7 +558,11 @@
             "ElasticPool",
             "Database"
           ],
-          "type": "string"
+          "type": "string",
+          "x-ms-enum": {
+            "name": "AutoExecuteStatusInheritedFrom",
+            "modelAsString": true
+          }
         },
         "recommendationsStatus": {
           "description": "Gets that status of recommendations for this advisor and reason for not having any recommendations. Possible values include, but are not limited to, 'Ok' (Recommendations available),LowActivity (not enough workload to analyze), 'DbSeemsTuned' (Database is doing well), etc.",
@@ -631,7 +643,11 @@
             "User",
             "System"
           ],
-          "type": "string"
+          "type": "string",
+          "x-ms-enum": {
+            "name": "ActionInitiatedBy",
+            "modelAsString": true
+          }
         },
         "executeActionInitiatedTime": {
           "format": "date-time",
@@ -644,7 +660,11 @@
             "User",
             "System"
           ],
-          "type": "string"
+          "type": "string",
+          "x-ms-enum": {
+            "name": "ActionInitiatedBy",
+            "modelAsString": true
+          }
         },
         "revertActionInitiatedTime": {
           "format": "date-time",
@@ -726,7 +746,11 @@
             "Success",
             "Error"
           ],
-          "type": "string"
+          "type": "string",
+          "x-ms-enum": {
+            "name": "CurrentState",
+            "modelAsString": true
+          }
         },
         "actionInitiatedBy": {
           "description": "Gets who initiated the execution of this recommended action. Possible Value are: User    -> When user explicity notified system to apply the recommended action. System  -> When auto-execute status of this advisor was set to 'Enabled', in which case the system applied it.",
@@ -734,7 +758,11 @@
             "User",
             "System"
           ],
-          "type": "string"
+          "type": "string",
+          "x-ms-enum": {
+            "name": "ActionInitiatedBy",
+            "modelAsString": true
+          }
         },
         "lastModified": {
           "format": "date-time",
@@ -753,7 +781,11 @@
             "TSql",
             "AzurePowerShell"
           ],
-          "type": "string"
+          "type": "string",
+          "x-ms-enum": {
+            "name": "ImplementationMethod",
+            "modelAsString": true
+          }
         },
         "script": {
           "description": "Gets the manual implementation script. e.g., T-SQL script that could be executed on the database.",
