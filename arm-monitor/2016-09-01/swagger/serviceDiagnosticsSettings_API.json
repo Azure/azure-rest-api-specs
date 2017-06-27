@@ -38,7 +38,6 @@
         "tags": [
           "ServiceDiagnosticSettings"
         ],
-        "deprecated": true,
         "operationId": "ServiceDiagnosticSettings_Get",
         "description": "Gets the active diagnostic settings for the specified resource. **WARNING**: This method will be deprecated in future releases.",
         "parameters": [
@@ -96,13 +95,15 @@
               }
             }
           }
+        },
+        "x-ms-examples": {
+          "Get service diagnostic setting": { "$ref": "../examples/getServiceDiagnosticSetting.json" }
         }
       },
       "put": {
         "tags": [
           "ServiceDiagnosticSettings"
         ],
-        "deprecated": true,
         "operationId": "ServiceDiagnosticSettings_CreateOrUpdate",
         "description": "Create or update new diagnostic settings for the specified resource. **WARNING**: This method will be deprecated in future releases.",
         "parameters": [
@@ -164,10 +165,12 @@
               }
             }
           }
+        },
+        "x-ms-examples": {
+          "Create or update a service diagnostic setting": { "$ref": "../examples/createOrUpdateServiceDiagnosticSetting.json" }
         }
       },
       "patch": {
-        "deprecated": true,
         "description": "Updates an existing ServiceDiagnosticSettingsResource. To update other fields use the CreateOrUpdate method. **WARNING**: This method will be deprecated in future releases.",
         "operationId": "ServiceDiagnosticSettings_Update",
         "parameters": [
@@ -182,7 +185,7 @@
                 "in": "body",
                 "required": true,
                 "schema": {
-                    "$ref": "#/definitions/ServiceDiagnosticSettingsResource"
+                    "$ref": "#/definitions/ServiceDiagnosticSettingsResourcePatch"
                 },
                 "description": "Parameters supplied to the operation."
             }
@@ -200,7 +203,10 @@
                     "$ref": "#/definitions/ServiceDiagnosticSettingsResource"
                 }
             }
-          }
+        },
+        "x-ms-examples": {
+          "Update a service diagnostic setting": { "$ref": "../examples/updateServiceDiagnosticSetting.json" }
+        }
       }
     }
   },
@@ -345,6 +351,21 @@
         }
       },
       "description": "Description of a service diagnostic setting"
+    },
+    "ServiceDiagnosticSettingsResourcePatch": {
+      "description": "Service diagnostic setting resource for patch operations",
+      "properties": {
+        "tags": {
+            "additionalProperties": {
+                "type": "string"
+            },
+            "description": "Resource tags"
+        },
+        "properties": {
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/ServiceDiagnosticSettings"
+        }
+      }
     },
     "ErrorResponse": {
       "description": "Describes the format of Error response.",

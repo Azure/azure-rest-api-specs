@@ -2,7 +2,7 @@
   "swagger": "2.0",
   "info": {
     "title": "Azure SQL Database",
-    "description": "Provides create, read, update and delete functionality for Azure SQL Database resources including servers, databases, elastic pools, recommendations, operations, and usage metrics.",
+    "description": "Provides create, read, update and delete functionality for Azure SQL Database resources including servers, databases, elastic pools, recommendations, and operations.",
     "version": "2014-04-01"
   },
   "host": "management.azure.com",
@@ -16,7 +16,46 @@
     "application/json"
   ],
   "paths": {
-        "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/servers/{serverName}/databases/{databaseName}/pause": {
+    "/subscriptions/{subscriptionId}/providers/Microsoft.Sql/checkNameAvailability": {
+      "post": {
+        "tags": [
+          "Servers"
+        ],
+        "operationId": "Servers_CheckNameAvailability",
+        "description": "Determines whether a resource can be created with the specified name.",
+        "x-ms-examples": {
+          "Check for a server name that is available": { "$ref": "../examples/CheckNameAvailabilityServerAvailable.json" },
+          "Check for a server name that already exists": { "$ref": "../examples/CheckNameAvailabilityServerAlreadyExists.json" },
+          "Check for a server name that is invalid": { "$ref": "../examples/CheckNameAvailabilityServerInvalid.json" }
+        },
+        "parameters": [
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "name": "parameters",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/CheckNameAvailabilityRequest"
+            },
+            "description": "The parameters to request for name availability."
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/CheckNameAvailabilityResponse"
+            }
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/servers/{serverName}/databases/{databaseName}/pause": {
       "post": {
         "tags": [
           "DatabaseActivation"
@@ -108,6 +147,10 @@
           "Create a database as an online secondary": { "$ref": "../examples/DatabaseCreateOnlineSecondary.json" },
           "Create a database as a non-readable secondary": { "$ref": "../examples/DatabaseCreateNonReadableSecondary.json" },
           "Create a database as a point in time restore": { "$ref": "../examples/DatabaseCreatePointInTimeRestore.json" },
+          "Create a database as a dropped database restore to deletion time": { "$ref": "../examples/DatabaseCreateDroppedDatabaseRestore.json" },
+          "Create a database as a dropped database restore to a specific point in time": { "$ref": "../examples/DatabaseCreateDroppedDatabaseRestoreToPointInTime.json" },
+          "Create a database as a geo restore": { "$ref": "../examples/DatabaseCreateGeoRestore.json" },
+          "Create a database from a long term retention backup": { "$ref": "../examples/DatabaseCreateLongTermRetentionRestore.json" },
           "Update a database's elastic pool'": { "$ref": "../examples/DatabaseUpdateElasticPool.json" },
           "Update a database max": { "$ref": "../examples/DatabaseUpdateMax.json" },
           "Update a database min": { "$ref": "../examples/DatabaseUpdateMin.json" }
@@ -283,50 +326,6 @@
             "description": "OK",
             "schema": {
               "$ref": "#/definitions/DatabaseListResult"
-            }
-          }
-        },
-        "x-ms-pageable": {
-          "nextLinkName": null
-        }
-      }
-    },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/servers/{serverName}/databases/{databaseName}/usages": {
-      "get": {
-        "tags": [
-          "Databases"
-        ],
-        "operationId": "Databases_ListUsages",
-        "description": "Returns database usages.",
-        "x-ms-examples": {
-          "List database usage metrics": { "$ref": "../examples/DatabaseUsageMetricsList.json" }
-        },
-        "parameters": [
-          {
-            "$ref": "#/parameters/ApiVersionParameter"
-          },
-          {
-            "$ref": "#/parameters/SubscriptionIdParameter"
-          },
-          {
-            "$ref": "#/parameters/ResourceGroupParameter"
-          },
-          {
-            "$ref": "#/parameters/ServerNameParameter"
-          },
-          {
-            "name": "databaseName",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "description": "The name of the database."
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "OK",
-            "schema": {
-              "$ref": "#/definitions/DatabaseMetricListResult"
             }
           }
         },
@@ -972,78 +971,6 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/servers/{serverName}/serviceObjectives/{serviceObjectiveName}": {
-      "get": {
-        "tags": [
-          "ServiceObjectives"
-        ],
-        "operationId": "Servers_GetServiceObjective",
-        "description": "Gets a database service objective.",
-        "parameters": [
-          {
-            "$ref": "#/parameters/ApiVersionParameter"
-          },
-          {
-            "$ref": "#/parameters/SubscriptionIdParameter"
-          },
-          {
-            "$ref": "#/parameters/ResourceGroupParameter"
-          },
-          {
-            "$ref": "#/parameters/ServerNameParameter"
-          },
-          {
-            "name": "serviceObjectiveName",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "description": "The name of the service objective to retrieve."
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "OK",
-            "schema": {
-              "$ref": "#/definitions/ServiceObjective"
-            }
-          }
-        }
-      }
-    },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/servers/{serverName}/serviceObjectives": {
-      "get": {
-        "tags": [
-          "ServiceObjectives"
-        ],
-        "operationId": "Servers_ListServiceObjectives",
-        "description": "Returns database service objectives.",
-        "parameters": [
-          {
-            "$ref": "#/parameters/ApiVersionParameter"
-          },
-          {
-            "$ref": "#/parameters/SubscriptionIdParameter"
-          },
-          {
-            "$ref": "#/parameters/ResourceGroupParameter"
-          },
-          {
-            "$ref": "#/parameters/ServerNameParameter"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "OK",
-            "schema": {
-              "$ref": "#/definitions/ServiceObjectiveListResult"
-            }
-          }
-        },
-        "x-ms-pageable": {
-          "nextLinkName": null
-        }
-      }
-    },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/servers/{serverName}/databases/{databaseName}/transparentDataEncryption/current": {
       "put": {
         "tags": [
@@ -1178,18 +1105,18 @@
   "definitions": {
     "Resource":{
       "description":"ARM resource.",
-      "properties":{  
-        "id":{  
+      "properties":{
+        "id":{
           "readOnly":true,
           "type":"string",
           "description":"Resource ID."
         },
-        "name":{  
+        "name":{
           "readOnly":true,
           "type":"string",
           "description":"Resource name."
         },
-        "type":{  
+        "type":{
           "readOnly":true,
           "type":"string",
           "description":"Resource type."
@@ -1197,46 +1124,102 @@
       },
       "x-ms-azure-resource": true
     },
-    "TrackedResource":{  
+    "TrackedResource":{
       "description":"ARM tracked top level resource.",
-      "properties":{  
-        "tags":{  
+      "properties":{
+        "tags":{
           "type":"object",
-          "additionalProperties":{  
+          "additionalProperties":{
             "type":"string"
           },
-          "x-ms-mutability":[  
+          "x-ms-mutability":[
             "read",
             "create",
             "update"
           ],
           "description":"Resource tags."
         },
-        "location":{  
+        "location":{
           "type":"string",
-          "x-ms-mutability":[  
+          "x-ms-mutability":[
             "read",
             "create"
           ],
           "description":"Resource location."
         }
       },
-      "required":[  
+      "required":[
         "location"
       ],
-      "allOf":[  
-        {  
+      "allOf":[
+        {
           "$ref":"#/definitions/Resource"
         }
       ]
     },
-    "ProxyResource":{  
+    "ProxyResource":{
       "description":"ARM proxy resource.",
-      "allOf":[  
-        {  
+      "allOf":[
+        {
           "$ref":"#/definitions/Resource"
         }
       ]
+    },
+    "CheckNameAvailabilityRequest": {
+      "properties":{
+        "name": {
+          "type": "string",
+          "description": "The name whose availability is to be checked."
+        },
+        "type": {
+          "type": "string",
+          "description": "The type of resource that is used as the scope of the availability check.",
+          "enum": [
+            "Microsoft.Sql/servers"
+          ],
+          "x-ms-enum": {
+            "name": "CheckNameAvailabilityResourceType",
+            "modelAsString": false
+          }
+        }
+      },
+      "required": [
+        "name", "type"
+      ],
+      "description": "A request to check whether the specified name for a resource is available."
+    },
+    "CheckNameAvailabilityResponse": {
+      "properties":{
+        "available": {
+          "type": "boolean",
+          "description": "True if the name is available, otherwise false.",
+          "readOnly": true
+        },
+        "message": {
+          "type": "string",
+          "description": "A message explaining why the name is unavailable. Will be null if the name is available.",
+          "readOnly": true
+        },
+        "name": {
+          "type": "string",
+          "description": "The name whose availability was checked.",
+          "readOnly": true
+        },
+        "reason": {
+          "type": "string",
+          "description": "The reason code explaining why the name is unavailable. Will be null if the name is available.",
+          "enum": [
+            "Invalid",
+            "AlreadyExists"
+          ],
+          "x-ms-enum": {
+            "name": "CheckNameAvailabilityReason",
+            "modelAsString": false
+          },
+          "readOnly": true
+        }
+      },
+      "description": "A response indicating whether the specified name for a resource is available."
     },
     "RecommendedElasticPoolMetric": {
       "properties": {
@@ -1499,7 +1482,9 @@
         "operationId": {
           "readOnly": true,
           "type": "string",
-          "description": "The unique operation ID."
+          "format": "uuid",
+          "description": "The unique operation ID.",
+          "x-nullable": false
         },
         "percentComplete": {
           "readOnly": true,
@@ -1586,9 +1571,9 @@
     },
     "ElasticPoolActivity": {
       "properties": {
-        "location":{  
+        "location":{
           "type":"string",
-          "x-ms-mutability":[  
+          "x-ms-mutability":[
             "read",
             "create"
           ],
@@ -1659,7 +1644,8 @@
           "readOnly": true,
           "type": "string",
           "format": "uuid",
-          "description": "The unique operation ID."
+          "description": "The unique operation ID.",
+          "x-nullable": false
         },
         "percentComplete": {
           "readOnly": true,
@@ -1708,9 +1694,9 @@
     },
     "ElasticPoolDatabaseActivity": {
       "properties": {
-        "location":{  
+        "location":{
           "type":"string",
-          "x-ms-mutability":[  
+          "x-ms-mutability":[
             "read",
             "create"
           ],
@@ -1924,31 +1910,12 @@
           "readOnly": true,
           "type": "string",
           "format": "uuid",
-          "enum": [
-            "dd6d99bb-f193-4ec1-86f2-43d3bccbc49c",
-            "f1173c43-91bd-4aaa-973c-54e79e15235b",
-            "1b1ebd4d-d903-4baa-97f9-4ea675f5e928",
-            "455330e1-00cd-488b-b5fa-177c226f28b7",
-            "789681b8-ca10-4eb0-bdf2-e0b050601b40",
-            "7203483a-c4fb-4304-9e9f-17c71c904f5d",
-            "a7d1b92d-c987-4375-b54d-2b1d0e0f5bb0",
-            "a7c4c615-cfb1-464b-b252-925be0a19446",
-            "26e021db-f1f9-4c98-84c6-92af8ef433d7",
-            "29dd7459-4a7c-4e56-be22-f0adda49440d",
-            "c99ac918-dbea-463f-a475-16ec020fdc12",
-            "620323bf-2879-4807-b30d-c2e6d7b3b3aa",
-            "33d0db1f-6893-4210-99f9-463fb9b496a4",
-            "da24338c-a6c9-46c2-a4bf-4ac95b496ae4"
-            ],
-          "description": "The current service level objective ID of the database. This is the ID of the service level objective that is currently active.",
-          "x-ms-enum": {
-            "modelAsString": true,
-            "name": "ServiceObjectiveId"
-          }
+          "description": "The current service level objective ID of the database. This is the ID of the service level objective that is currently active."
         },
         "databaseId": {
           "readOnly": true,
           "type": "string",
+          "format": "uuid",
           "description": "The ID of the database."
         },
         "earliestRestoreDate": {
@@ -1995,7 +1962,6 @@
         },
         "recoveryServicesRecoveryPointResourceId": {
           "type": "string",
-          "format": "date-time",
           "description": "Conditional. If createMode is RestoreLongTermRetentionBackup, then this value is required. Specifies the resource ID of the recovery point to restore from.",
           "x-ms-mutability": [ "create" ]
         },
@@ -2026,27 +1992,7 @@
         "requestedServiceObjectiveId": {
           "type": "string",
           "format": "uuid",
-          "enum": [
-            "dd6d99bb-f193-4ec1-86f2-43d3bccbc49c",
-            "f1173c43-91bd-4aaa-973c-54e79e15235b",
-            "1b1ebd4d-d903-4baa-97f9-4ea675f5e928",
-            "455330e1-00cd-488b-b5fa-177c226f28b7",
-            "789681b8-ca10-4eb0-bdf2-e0b050601b40",
-            "7203483a-c4fb-4304-9e9f-17c71c904f5d",
-            "a7d1b92d-c987-4375-b54d-2b1d0e0f5bb0",
-            "a7c4c615-cfb1-464b-b252-925be0a19446",
-            "26e021db-f1f9-4c98-84c6-92af8ef433d7",
-            "29dd7459-4a7c-4e56-be22-f0adda49440d",
-            "c99ac918-dbea-463f-a475-16ec020fdc12",
-            "620323bf-2879-4807-b30d-c2e6d7b3b3aa",
-            "33d0db1f-6893-4210-99f9-463fb9b496a4",
-            "da24338c-a6c9-46c2-a4bf-4ac95b496ae4"
-            ],
-          "description": "The configured service level objective ID of the database. This is the service level objective that is in the process of being applied to the database. Once successfully updated, it will match the value of currentServiceObjectiveId property. If requestedServiceObjectiveId and requestedServiceObjectiveName are both updated, the value of requestedServiceObjectiveId overrides the value of requestedServiceObjectiveName. To see possible values, query the capabilities API (/subscriptions/{subscriptionId}/providers/Microsoft.Sql/locations/{locationID}/capabilities) referred to by operationId: \"Capabilities_ListByLocation.\"",
-          "x-ms-enum": {
-            "modelAsString": true,
-            "name": "ServiceObjectiveId"
-          }
+          "description": "The configured service level objective ID of the database. This is the service level objective that is in the process of being applied to the database. Once successfully updated, it will match the value of currentServiceObjectiveId property. If requestedServiceObjectiveId and requestedServiceObjectiveName are both updated, the value of requestedServiceObjectiveId overrides the value of requestedServiceObjectiveName. To see possible values, query the capabilities API (/subscriptions/{subscriptionId}/providers/Microsoft.Sql/locations/{locationID}/capabilities) referred to by operationId: \"Capabilities_ListByLocation.\""
         },
         "requestedServiceObjectiveName": {
           "type": "string",
@@ -2140,8 +2086,7 @@
         "failoverGroupId": {
           "readOnly": true,
           "type": "string",
-          "format": "uuid",
-          "description": "The id indicating the failover group containing this database."
+          "description": "The resource identifier of the failover group containing this database."
         },
         "readScale": {
           "type": "string",
@@ -2313,7 +2258,8 @@
           "readOnly": true,
           "type": "number",
           "format": "double",
-          "description": "Gets or sets confidence for service tier advisor."
+          "description": "Gets or sets confidence for service tier advisor.",
+          "x-nullable": false
         }
       },
       "description": "Represents the properties of a Service Tier Advisor."
@@ -2356,43 +2302,28 @@
             "System2",
             "ElasticPool"
             ],
-            "x-ms-enum": {
-            "modelAsString": true,
-            "name": "ServiceObjectiveName"
-          }
+          "x-ms-enum": {
+              "modelAsString": true,
+              "name": "ServiceObjectiveName"
+          },
+          "readOnly": true
         },
         "serviceLevelObjectiveId": {
           "type": "string",
           "format": "uuid",
           "description": "The serviceLevelObjectiveId for SLO usage metric.",
-          "enum": [
-            "dd6d99bb-f193-4ec1-86f2-43d3bccbc49c",
-            "f1173c43-91bd-4aaa-973c-54e79e15235b",
-            "1b1ebd4d-d903-4baa-97f9-4ea675f5e928",
-            "455330e1-00cd-488b-b5fa-177c226f28b7",
-            "789681b8-ca10-4eb0-bdf2-e0b050601b40",
-            "7203483a-c4fb-4304-9e9f-17c71c904f5d",
-            "a7d1b92d-c987-4375-b54d-2b1d0e0f5bb0",
-            "a7c4c615-cfb1-464b-b252-925be0a19446",
-            "26e021db-f1f9-4c98-84c6-92af8ef433d7",
-            "29dd7459-4a7c-4e56-be22-f0adda49440d",
-            "c99ac918-dbea-463f-a475-16ec020fdc12",
-            "620323bf-2879-4807-b30d-c2e6d7b3b3aa",
-            "33d0db1f-6893-4210-99f9-463fb9b496a4",
-            "da24338c-a6c9-46c2-a4bf-4ac95b496ae4"
-            ],
-            "x-ms-enum": {
-            "modelAsString": true,
-            "name": "ServiceObjectiveId"
-          }
+          "readOnly": true,
+          "x-nullable": false
         },
         "inRangeTimeRatio": {
           "type": "number",
           "format": "double",
-          "description": "Gets or sets inRangeTimeRatio for SLO usage metric."
+          "description": "Gets or sets inRangeTimeRatio for SLO usage metric.",
+          "readOnly": true,
+          "x-nullable": false
         }
       },
-      "description": "Represents a Slo Usage Metric."
+      "description": "A Slo Usage Metric."
     },
     "OperationImpact": {
       "properties": {
@@ -2419,119 +2350,7 @@
           "description": "The relative impact to dimension (null if not applicable)"
         }
       },
-      "description": "Represents impact of an operation, both in absolute and relative terms."
-    },
-    "DatabaseMetric": {
-      "properties": {
-        "resourceName": {
-          "readOnly": true,
-          "type": "string",
-          "description": "The name of the resource."
-        },
-        "displayName": {
-          "readOnly": true,
-          "type": "string",
-          "description": "The metric display name."
-        },
-        "currentValue": {
-          "readOnly": true,
-          "type": "number",
-          "format": "double",
-          "description": "The current value of the metric."
-        },
-        "limit": {
-          "readOnly": true,
-          "type": "number",
-          "format": "double",
-          "description": "The current limit of the metric."
-        },
-        "unit": {
-          "readOnly": true,
-          "type": "string",
-          "description": "The units of the metric."
-        },
-        "nextResetTime": {
-          "readOnly": true,
-          "type": "string",
-          "format": "date-time",
-          "description": "The next reset time for the metric (ISO8601 format)."
-        }
-      },
-      "description": "Represents database metrics.",
-      "allOf": [
-        {
-          "$ref": "#/definitions/SubResource"
-        }
-      ]
-    },
-    "DatabaseMetricListResult": {
-      "properties": {
-        "value": {
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/DatabaseMetric"
-          },
-          "description": "The list of database metrics for the database."
-        }
-      },
-      "required": ["value"],
-      "description": "Represents the response to a list database metrics request."
-    },
-    "ServerMetric": {
-      "properties": {
-        "name": {
-          "readOnly": true,
-          "type": "string",
-          "description": "Name of the server usage metric."
-        },
-        "resourceName": {
-          "readOnly": true,
-          "type": "string",
-          "description": "The name of the resource."
-        },
-        "displayName": {
-          "readOnly": true,
-          "type": "string",
-          "description": "The metric display name."
-        },
-        "currentValue": {
-          "readOnly": true,
-          "type": "number",
-          "format": "double",
-          "description": "The current value of the metric."
-        },
-        "limit": {
-          "readOnly": true,
-          "type": "number",
-          "format": "double",
-          "description": "The current limit of the metric."
-        },
-        "unit": {
-          "readOnly": true,
-          "type": "string",
-          "description": "The units of the metric."
-        },
-        "nextResetTime": {
-          "readOnly": true,
-          "type": "string",
-          "format": "date-time",
-          "description": "The next reset time for the metric (ISO8601 format)."
-        }
-      },
-      "description": "Represents server metrics."
-    },
-    "ServerMetricListResult": {
-      "properties": {
-        "value": {
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/ServerMetric"
-          },
-          "description": "The list of server metrics for the server."
-        }
-      },
-      "required": ["value"],
-      "description": "Represents the response to a list server metrics request."
+      "description": "The impact of an operation, both in absolute and relative terms."
     },
     "ServiceTierAdvisorListResult": {
       "properties": {
@@ -2545,64 +2364,6 @@
       },
       "required": ["value"],
       "description": "Represents the response to a list service tier advisor request."
-    },
-    "ServiceObjectiveProperties": {
-      "properties": {
-        "serviceObjectiveName": {
-          "readOnly": true,
-          "type": "string",
-          "description": "The name for the service objective."
-        },
-        "isDefault": {
-          "readOnly": true,
-          "type": "boolean",
-          "description": "Gets whether the service level objective is the default service objective."
-        },
-        "isSystem": {
-          "readOnly": true,
-          "type": "boolean",
-          "description": "Gets whether the service level objective is a system service objective."
-        },
-        "description": {
-          "readOnly": true,
-          "type": "string",
-          "description": "The description for the service level objective."
-        },
-        "enabled": {
-          "readOnly": true,
-          "type": "boolean",
-          "description": "Gets whether the service level objective is enabled."
-        }
-      },
-      "description": "Represents the properties of a database service objective."
-    },
-    "ServiceObjective": {
-      "properties": {
-        "properties": {
-          "x-ms-client-flatten": true,
-          "$ref": "#/definitions/ServiceObjectiveProperties",
-          "description": "Represents the properties of the resource."
-        }
-      },
-      "allOf": [
-        {
-          "$ref": "#/definitions/SubResource"
-        }
-      ],
-      "description": "Represents a database service objective."
-    },
-    "ServiceObjectiveListResult": {
-      "properties": {
-        "value": {
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/ServiceObjective"
-          },
-          "description": "The list of database service objectives."
-        }
-      },
-      "required": ["value"],
-      "description": "Represents the response to a get database service objectives request."
     },
     "TransparentDataEncryptionActivityProperties": {
       "properties": {
@@ -2710,6 +2471,17 @@
       "type": "string",
       "description": "A comma separated list of child objects to expand in the response. Possible properties: serviceTierAdvisors, transparentDataEncryption.",
       "x-ms-parameter-location": "method"
+    }
+  },
+  "securityDefinitions": {
+    "azure_auth": {
+      "type": "oauth2",
+      "description": "Azure Active Directory OAuth2 Flow",
+      "flow": "implicit",
+      "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
+      "scopes": {
+        "user_impersonation": "impersonate your user account"
+      }
     }
   }
 }

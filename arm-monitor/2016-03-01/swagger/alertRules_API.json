@@ -142,6 +142,9 @@
               }
             }
           }
+        },
+        "x-ms-examples": {
+            "Create or update an alert rule": { "$ref": "../examples/createOrUpdateAlertRule.json" }
         }
       },
       "delete": {
@@ -171,6 +174,9 @@
           "200": {
             "description": "Successful request to delete an alert rule"
           }
+        },
+        "x-ms-examples": {
+            "Delete an alert rule": { "$ref": "../examples/deleteAlertRule.json" }
         }
       },
       "get": {
@@ -230,7 +236,51 @@
               }
             }
           }
+        },
+        "x-ms-examples": {
+            "Get an alert rule": { "$ref": "../examples/getAlertRule.json" }
         }
+      },
+      "patch": {
+          "description": "Updates an existing AlertRuleResource. To update other fields use the CreateOrUpdate method.",
+          "operationId": "AlertRules_Update",
+          "parameters": [
+              {
+                  "$ref": "#/parameters/SubscriptionIdParameter"
+              },
+              {
+                  "$ref": "#/parameters/ResourceGroupNameParameter"
+              },
+              {
+                  "$ref": "#/parameters/RuleNameParameter"
+              },
+              {
+                  "$ref": "#/parameters/ApiVersionParameter"
+              },
+              {
+                  "name": "alertRulesResource",
+                  "in": "body",
+                  "required": true,
+                  "schema": {
+                      "$ref": "#/definitions/AlertRuleResourcePatch"
+                  },
+                  "description": "Parameters supplied to the operation."
+              }
+          ],
+          "responses": {
+              "default": {
+                  "description": "Error response describing why the operation failed.",
+                  "schema": {
+                      "$ref": "#/definitions/ErrorResponse"
+                  }
+              },
+              "200": {
+                  "description": "Successful request to update an alert rule",
+                  "schema": {
+                      "$ref": "#/definitions/AlertRuleResource"
+                  }
+              }
+          }
       }
     },
     "/subscriptions/{subscriptionId}/resourcegroups/{resourceGroupName}/providers/microsoft.insights/alertrules": {
@@ -332,6 +382,9 @@
         },
         "x-ms-pageable": {
           "nextLinkName": null
+        },
+        "x-ms-examples": {
+            "List alert rules": { "$ref": "../examples/listAlertRule.json" }
         }
       }
     }
@@ -518,6 +571,7 @@
         "failedLocationCount": {
           "type": "integer",
           "format": "int32",
+          "minimum": 0,
           "description": "the number of locations that must fail to activate the alert."
         }
       },
@@ -715,6 +769,21 @@
         }
       },
       "description": "The alert rule resource."
+    },
+    "AlertRuleResourcePatch": {
+      "description": "The alert rule object for patch operations.",
+      "properties": {
+        "tags": {
+            "additionalProperties": {
+                "type": "string"
+            },
+            "description": "Resource tags"
+        },
+        "properties": {
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/AlertRule"
+        }
+      }
     },
     "AlertRuleResourceCollection": {
       "properties": {

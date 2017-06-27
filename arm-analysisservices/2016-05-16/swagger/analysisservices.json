@@ -186,8 +186,13 @@
           "200": {
             "description": "OK",
             "schema": { "$ref": "#/definitions/AnalysisServicesServer" }
+          },
+          "202": {
+            "description": "Accepted",
+            "schema": { "$ref": "#/definitions/AnalysisServicesServer" }
           }
-        }
+        },
+        "x-ms-long-running-operation": true
       }
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AnalysisServices/servers/{serverName}/suspend": {
@@ -312,6 +317,66 @@
         },
         "x-ms-pageable": {
           "nextLinkName": null
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.AnalysisServices/skus": {
+      "get": {
+        "description": "Lists eligible SKUs for Analysis Services resource provider.",
+        "x-ms-examples": {
+          "List eligible SKUs for a new server": { "$ref": "../examples/listSkusForNew.json" }
+        },
+        "operationId": "Servers_ListSkusForNew",
+        "parameters": [
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": { "$ref": "#/definitions/SkuEnumerationForNewResourceResult" }
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AnalysisServices/servers/{serverName}/skus": {
+      "get": {
+        "description": "Lists eligible SKUs for an Analysis Services resource.",
+        "x-ms-examples": {
+          "List eligible SKUs for an existing server": { "$ref": "../examples/listSkusForExisting.json" }
+        },
+        "tags": [ "Servers" ],
+        "operationId": "Servers_ListSkusForExisting",
+        "parameters": [
+          {
+            "$ref": "#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "serverName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-z][a-z0-9]*$",
+            "minLength": 3,
+            "maxLength": 63,
+            "description": "The name of the Analysis Services server. It must be at least 3 characters in length, and no more than 63."
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": { "$ref": "#/definitions/SkuEnumerationForExistingResourceResult" }
+          }
         }
       }
     }
@@ -474,20 +539,7 @@
       "properties": {
         "name": {
           "type": "string",
-          "enum": [
-            "B1",
-            "B2",
-            "S0",
-            "S1",
-            "S2",
-            "S4",
-            "D1"
-          ],
-          "x-ms-enum": {
-            "name": "SkuName",
-            "modelAsString": true
-          },
-          "description": "Name of the SKU level for the server being provisioned."
+          "description": "Name of the SKU level."
         },
         "tier": {
           "type": "string",
@@ -512,10 +564,12 @@
       "type": "object",
       "properties": {
         "asAdministrators": {
-          "$ref": "#/definitions/ServerAdministrators"
+          "$ref": "#/definitions/ServerAdministrators",
+          "description": "A collection of AS server administrators"
         },
-        "backupConfiguration": {
-          "$ref": "#/definitions/BackupConfiguration"
+        "backupBlobContainerUri": {
+          "type": "string",
+          "description": "The container URI of backup blob."
         }
       }
     },
@@ -533,27 +587,37 @@
         }
       }
     },
-    "BackupConfiguration": {
-      "description": "An object that represents backup configurations",
+    "SkuEnumerationForNewResourceResult": {
+      "description": "An object that represents enumerating SKUs for new resources",
       "type": "object",
       "properties": {
-        "storageAccount": {
-          "type": "string",
-          "description": "Storage account full resource id for backup configuration"
-        },
-        "blobContainer": {
-          "type": "string",
-          "description": "The name of blob container for backup configuration"
-        },
-        "accessKey": {
-          "type": "string",
-          "description": "The access key of storage account used for backup configuration"
+        "value": {
+          "type": "array",
+          "items": { "$ref": "#/definitions/ResourceSku" },
+          "description": "The collection of available SKUs for new resources"
         }
-      },
-      "required": [
-        "storageAccount",
-        "blobContainer"
-      ]
+      }
+    },
+    "SkuEnumerationForExistingResourceResult": {
+      "description": "An object that represents enumerating SKUs for existing resources",
+      "type": "object",
+      "properties": {
+        "value": {
+          "type": "array",
+          "items": { "$ref": "#/definitions/SkuDetailsForExistingResource" },
+          "description": "The collection of available SKUs for existing resources"
+        }
+      }
+    },
+    "SkuDetailsForExistingResource": {
+      "description": "An object that represents SKU details for existing resources",
+      "type": "object",
+      "properties": {
+        "sku": {
+          "$ref": "#/definitions/ResourceSku",
+          "description": "The SKU in SKU details for existing resources."
+        }
+      }
     }
   },
   "parameters": {

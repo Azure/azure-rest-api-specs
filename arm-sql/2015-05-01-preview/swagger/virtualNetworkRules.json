@@ -16,17 +16,14 @@
     "application/json"
   ],
   "paths": {
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/servers/{serverName}/virtualNetworkRules/{vnetFirewallRuleName}": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/servers/{serverName}/virtualNetworkRules/{virtualNetworkRuleName}": {
       "get": {
         "tags": [
-          "VnetFirewallRules"
+          "VirtualNetworkRules"
         ],
         "description": "Gets a virtual network rule.",
-        "operationId": "VnetFirewallRules_Get",
+        "operationId": "VirtualNetworkRules_Get",
         "parameters": [
-          {
-            "$ref": "#/parameters/SubscriptionIdParameter"
-          },
           {
             "$ref": "#/parameters/ResourceGroupParameter"
           },
@@ -34,11 +31,14 @@
             "$ref": "#/parameters/ServerNameParameter"
           },
           {
-            "name": "vnetFirewallRuleName",
+            "name": "virtualNetworkRuleName",
             "in": "path",
             "description": "The name of the virtual network rule.",
             "required": true,
             "type": "string"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
           },
           {
             "$ref": "#/parameters/ApiVersionParameter"
@@ -48,7 +48,7 @@
           "200": {
             "description": "Successfully retrieved a specified virtual network rule.",
             "schema": {
-              "$ref": "#/definitions/VnetFirewallRule"
+              "$ref": "#/definitions/VirtualNetworkRule"
             }
           },
           "default": {
@@ -63,14 +63,11 @@
       },
       "put": {
         "tags": [
-          "VnetFirewallRules"
+          "VirtualNetworkRules"
         ],
         "description": "Creates or updates an existing virtual network rule.",
-        "operationId": "VnetFirewallRules_CreateOrUpdate",
+        "operationId": "VirtualNetworkRules_CreateOrUpdate",
         "parameters": [
-          {
-            "$ref": "#/parameters/SubscriptionIdParameter"
-          },
           {
             "$ref": "#/parameters/ResourceGroupParameter"
           },
@@ -78,7 +75,7 @@
             "$ref": "#/parameters/ServerNameParameter"
           },
           {
-            "name": "vnetFirewallRuleName",
+            "name": "virtualNetworkRuleName",
             "in": "path",
             "description": "The name of the virtual network rule.",
             "required": true,
@@ -87,11 +84,14 @@
           {
             "name": "parameters",
             "in": "body",
-            "description": "The requested vnetFirewall Resource state.",
+            "description": "The requested virtual Network Rule Resource state.",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/VnetFirewallRule"
+              "$ref": "#/definitions/VirtualNetworkRule"
             }
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
           },
           {
             "$ref": "#/parameters/ApiVersionParameter"
@@ -101,11 +101,11 @@
           "200": {
             "description": "Successfully updated a virtual network rule.",
             "schema": {
-              "$ref": "#/definitions/VnetFirewallRule"
+              "$ref": "#/definitions/VirtualNetworkRule"
             }
           },
           "default": {
-            "description": "*** Error Responses: ***\n\n * 400 InvalidResourceId - Invalid resource identifier.\n\n * 400 MismatchingSubscriptionWithUrl - The provided subscription did not match the subscription in the Url.\n\n * 400 MismatchingResourceGroupNameWithUrl - The provided resource group name did not match the name in the Url.\n\n * 400 MismatchingServerNameWithUrl - The provided server name did not match the name in the Url.\n\n * 400 NullVirtualNetworkRequest - Virtual Network Request is Null\n\n * 400 NullVirtualNetworkRequestParameters - Virtual Network Request Parameters are Null\n\n * 400 NullVirtualNetworkSubnetId - The Virtual Network Subnet Id is null\n\n * 400 InvalidVirtualNetworkSubnetId - The Virtual Network Subnet url is missing a section. It should be of the form - \"subscriptions/{VirtualNetworkSubscriptionId}/resourceGroups/{VirtualNetworkResourceGroupName}/providers/{VirtualNetworkType}/virtualNetworks/{VirtualNetworkName}/subnets/{subnetName}\"\n\n * 404 SubscriptionDoesNotHaveServer - The requested server was not found\n\n * 404 OperationIdNotFound - The operation with Id does not exist.\n\n * 409 OperationCancelled - The operation has been cancelled by user.\n\n * 409 OperationInterrupted - The operation on the resource could not be completed because it was interrupted by another operation on the same resource.\n\n * 500 OperationTimedOut - The operation timed out and automatically rolled back. Please retry the operation."
+            "description": "*** Error Responses: ***\n\n * 400 InvalidResourceId - Invalid resource identifier.\n\n * 400 MismatchingSubscriptionWithUrl - The provided subscription did not match the subscription in the Url.\n\n * 400 MismatchingResourceGroupNameWithUrl - The provided resource group name did not match the name in the Url.\n\n * 400 MismatchingServerNameWithUrl - The provided server name did not match the name in the Url.\n\n * 400 NullVirtualNetworkRequest - Virtual Network Request is Null\n\n * 400 NullVirtualNetworkRequestParameters - Virtual Network Request Parameters are Null\n\n * 400 NullVirtualNetworkSubnetId - The Virtual Network Subnet Id is null\n\n * 404 SubscriptionDoesNotHaveServer - The requested server was not found\n\n * 404 OperationIdNotFound - The operation with Id does not exist.\n\n * 409 OperationCancelled - The operation has been cancelled by user.\n\n * 409 OperationInterrupted - The operation on the resource could not be completed because it was interrupted by another operation on the same resource.\n\n * 500 OperationTimedOut - The operation timed out and automatically rolled back. Please retry the operation."
           },
           "202": {
             "description": "Accepted"
@@ -113,7 +113,7 @@
           "201": {
             "description": "Successfully created a virtual network rule.",
             "schema": {
-              "$ref": "#/definitions/VnetFirewallRule"
+              "$ref": "#/definitions/VirtualNetworkRule"
             }
           }
         },
@@ -126,14 +126,11 @@
       },
       "delete": {
         "tags": [
-          "VnetFirewallRules"
+          "VirtualNetworkRules"
         ],
         "description": "Deletes the virtual network rule with the given name.",
-        "operationId": "VnetFirewallRules_Delete",
+        "operationId": "VirtualNetworkRules_Delete",
         "parameters": [
-          {
-            "$ref": "#/parameters/SubscriptionIdParameter"
-          },
           {
             "$ref": "#/parameters/ResourceGroupParameter"
           },
@@ -141,11 +138,14 @@
             "$ref": "#/parameters/ServerNameParameter"
           },
           {
-            "name": "vnetFirewallRuleName",
+            "name": "virtualNetworkRuleName",
             "in": "path",
             "description": "The name of the virtual network rule.",
             "required": true,
             "type": "string"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
           },
           {
             "$ref": "#/parameters/ApiVersionParameter"
@@ -176,19 +176,19 @@
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/servers/{serverName}/virtualNetworkRules": {
       "get": {
         "tags": [
-          "VnetFirewallRules"
+          "VirtualNetworkRules"
         ],
         "description": "Gets a list of virtual network rules in a server.",
-        "operationId": "VnetFirewallRules_ListByServer",
+        "operationId": "VirtualNetworkRules_ListByServer",
         "parameters": [
-          {
-            "$ref": "#/parameters/SubscriptionIdParameter"
-          },
           {
             "$ref": "#/parameters/ResourceGroupParameter"
           },
           {
             "$ref": "#/parameters/ServerNameParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
           },
           {
             "$ref": "#/parameters/ApiVersionParameter"
@@ -198,7 +198,7 @@
           "200": {
             "description": "Successfully retrieved the list of virtual network rules.",
             "schema": {
-              "$ref": "#/definitions/VnetFirewallRuleListResult"
+              "$ref": "#/definitions/VirtualNetworkRuleListResult"
             }
           },
           "default": {
@@ -209,7 +209,7 @@
           "nextLinkName": "nextLink"
         },
         "x-ms-examples": {
-          "List of virtual network rules": {
+          "List virtual network rules": {
             "$ref": "../examples/VirtualNetworkRulesList.json"
           }
         }
@@ -217,12 +217,12 @@
     }
   },
   "definitions": {
-    "VnetFirewallRuleProperties": {
+    "VirtualNetworkRuleProperties": {
       "description": "Properties of a virtual network rule.",
       "type": "object",
       "properties": {
         "virtualNetworkSubnetId": {
-          "description": "The VnetSubnetId",
+          "description": "The resource ID of the virtual network subnet",
           "type": "string"
         }
       }
@@ -259,8 +259,8 @@
       ],
       "properties": {}
     },
-    "VnetFirewallRule": {
-      "description": "A Vnet Firewall Rule Resource.",
+    "VirtualNetworkRule": {
+      "description": "A virtual network rule.",
       "type": "object",
       "allOf": [
         {
@@ -269,27 +269,28 @@
       ],
       "properties": {
         "properties": {
-          "$ref": "#/definitions/VnetFirewallRuleProperties",
+          "$ref": "#/definitions/VirtualNetworkRuleProperties",
           "description": "Resource properties.",
           "x-ms-client-flatten": true
         }
       }
     },
-    "VnetFirewallRuleListResult": {
-      "description": "A list of Vnet Firewall Rule Resource.",
+    "VirtualNetworkRuleListResult": {
+      "description": "A list of virtual network rules.",
       "type": "object",
       "properties": {
-        "nextLink": {
-          "description": "Link to retrieve next page of results.",
-          "type": "string",
-          "readOnly": true
-        },
         "value": {
           "description": "Array of results.",
           "type": "array",
           "items": {
-            "$ref": "#/definitions/VnetFirewallRule"
-          }
+            "$ref": "#/definitions/VirtualNetworkRule"
+          },
+          "readOnly": true
+        },
+        "nextLink": {
+          "description": "Link to retrieve next page of results.",
+          "type": "string",
+          "readOnly": true
         }
       }
     }
@@ -300,7 +301,8 @@
       "in": "path",
       "description": "The subscription ID that identifies an Azure subscription.",
       "required": true,
-      "type": "string"
+      "type": "string",
+      "x-ms-parameter-location": "client"
     },
     "ApiVersionParameter": {
       "name": "api-version",
@@ -333,6 +335,17 @@
       "required": true,
       "type": "string",
       "x-ms-parameter-location": "method"
+    }
+  },
+  "securityDefinitions": {
+    "azure_auth": {
+      "type": "oauth2",
+      "description": "Azure Active Directory OAuth2 Flow",
+      "flow": "implicit",
+      "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
+      "scopes": {
+        "user_impersonation": "impersonate your user account"
+      }
     }
   }
 }
