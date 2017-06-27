@@ -1,29 +1,30 @@
 {
+  "parameters": {
+    "subscriptionId": "741fd0f5-9cb8-442c-91c3-3ef4ca231c2a",
+    "resourceGroupName": "workloadinsight-demos",
+    "serverName": "misosisvr",
+    "advisorName": "CreateIndex",
+    "api-version": "2015-05-01-preview",
     "parameters": {
-        "subscriptionId": "741fd0f5-9cb8-442c-91c3-3ef4ca231c2a",
-        "resourceGroupName": "workloadinsight-demos",
-        "serverName": "misosisvr",
-        "advisorName": "CreateIndex",
-        "api-version": "2015-05-01-preview",
-        "parameters": {
-            "properties": {
-                "autoExecuteValue": "Disabled"
-            }
-        }
-    },
-    "responses": {
-        "200": {
-            "body": {
-                "id": "/subscriptions/741fd0f5-9cb8-442c-91c3-3ef4ca231c2a/resourceGroups/workloadinsight-demos/providers/Microsoft.Sql/servers/misosisvr/advisors/CreateIndex",
-                "name": "CreateIndex",
-                "type": "Microsoft.Sql/servers/advisors",
-                "properties": {
-                    "advisorStatus": "GA",
-                    "autoExecuteValue": "Disabled",
-                    "recommendationsStatus": null,
-                    "lastChecked": null
-                }
-            }
-        }
+      "properties": {
+        "autoExecuteStatus": "Disabled"
+      }
     }
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "kind": "",
+        "properties": {
+          "advisorStatus": "GA",
+          "autoExecuteStatus": "Disabled",
+          "autoExecuteStatusInheritedFrom": "Server"
+        },
+        "location": "East Asia",
+        "id": "/subscriptions/741fd0f5-9cb8-442c-91c3-3ef4ca231c2a/resourceGroups/workloadinsight-demos/providers/Microsoft.Sql/servers/misosisvr/advisors/CreateIndex",
+        "name": "CreateIndex",
+        "type": "Microsoft.Sql/servers/advisors"
+      }
+    }
+  }
 }
