@@ -1105,6 +1105,11 @@
           "description": "The status of the container registry at the time the operation was called.",
           "readOnly": true
         },
+        "registrySize": {
+          "$ref": "#/definitions/RegistrySize",
+          "description": "The allowed size quota and the size already used for a container registry.",
+          "readOnly": true
+        },
         "adminUserEnabled": {
           "description": "The value that indicates whether the admin user is enabled.",
           "default": false,
@@ -1137,6 +1142,21 @@
         }
       }
     },
+    "RegistrySize": {
+      "description": "The allowed size quota and the size already used for a container registry.",
+      "properties": {
+        "quotaInBytes": {
+          "format": "int64",
+          "description": "The allowed size quota in bytes for a container registry.",
+          "type": "integer"
+        },
+        "usedInBytes": {
+          "format": "int64",
+          "description": "The size already used in bytes for a container registry.",
+          "type": "integer"
+        }
+      }
+    },
     "StorageAccountProperties": {
       "description": "The properties of a storage account for a container registry. Only applicable to Basic SKU.",
       "required": [
@@ -1158,6 +1178,10 @@
           "additionalProperties": {
             "type": "string"
           }
+        },
+        "sku": {
+          "$ref": "#/definitions/Sku",
+          "description": "The SKU of the container registry."
         },
         "properties": {
           "$ref": "#/definitions/RegistryPropertiesUpdateParameters",
