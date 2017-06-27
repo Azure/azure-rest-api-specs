@@ -4,7 +4,7 @@
     "resourceGroupName": "resRg",
     "clusterName": "myCluster",
     "api-version": "2016-09-01",
-    "parameters": {
+    "ClusterUpdateParameters": {
       "properties": {
         "nodeTypes": [
           {
@@ -29,7 +29,6 @@
     }
   },
   "responses": {
-    "202":{},
     "200": {
       "headers": {},
       "body": {
@@ -45,11 +44,7 @@
           "clusterState": "Ready",
           "managementEndpoint": "http://myCluster.southcentralus.cloudapp.azure.com:19080",
           "clusterEndpoint": "https://warp-test-winfabrp-southcentralus.trafficmanager.net/runtime/clusters/8d566293-3508-4d62-ba7b-056fa710c3c9",
-          "clientCertificateThumbprints": [],
-          "clientCertificateCommonNames": [],
-          "fabricSettings": [],
           "upgradeDescription": {
-            "overrideUserUpgradePolicy": false,
             "forceRestart": true,
             "upgradeReplicaSetCheckTimeout": "10675199.02:48:05.4775807",
             "healthCheckWaitDuration": "00:00:01",
