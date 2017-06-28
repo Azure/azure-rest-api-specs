@@ -38,7 +38,7 @@ We request OpenAPI(Swagger) spec authoring be assigned to engineers who have an
 | [R3008](#R3008)	| [CollectionObjectPropertiesNaming](#R3008) |
 | [R2044](#R2044)	| [InvalidVerbUsed](#R2044) |
 | [R3023](#R3023)	| [OperationsAPIImplementation](#R3023) |
-| [R3007](#R3007)	| [PutGetPatchResponseValidation](#R3007) |
+| [R3007](#R3007)	| [PutGetPatchResponseSchema](#R3007) |
 | M3003	| RequiredPropertiesMustExist |
 | M3001 | ResourceModelValidation |
 | M3027	| TrackedResourceGetOperationValidation |
@@ -69,7 +69,7 @@ We request OpenAPI(Swagger) spec authoring be assigned to engineers who have an
 | Id | Rule Name |
 | --- | --- |
 | M2026 | AvoidAnonymousTypes, AnonymousBodyParameter |
-| [R2014](#R2014)	| [OperationParametersValidation](#R2014)	|
+| [R2014](#R2014)	| [SubscriptionIdParameterInOperations](#R2014)	|
 | [R2027](#R2027)	| [DefaultMustBeInEnum](#R2027) |
 | M1004	| ListByOperationsValidation |
 | [R1001](#R1001)	| [OperationIdNounInVerb](#R1001)	|
@@ -77,7 +77,7 @@ We request OpenAPI(Swagger) spec authoring be assigned to engineers who have an
 | [R2014](#R2014)	| [ServiceDefinitionParameters](#R2014) |
 | M2043	| SupportedSchemesWarning |
 | [R2003](#R2003)	| [ValidFormats](#R2003) |
-| [R2005](#R2005)	| [LongRunningResponseValidationRule](#R2005) |
+| [R2005](#R2005)	| [LongRunningResponseStatusCode](#R2005) |
 | [R2008](#R2008)	| [MutabilityWithReadOnlyRule](#R2008) |
 | M2025	| NextLinkPropertyMustExist	|
 | [R2028](#R2028) | [NonEmptyClientName](#R2028) |
@@ -92,7 +92,7 @@ We request OpenAPI(Swagger) spec authoring be assigned to engineers who have an
 | [R2006](#R2006)	| [ControlCharactersNotAllowed](#R2006) |
 | [R2009](#R2009)	| [ArraySchemaMustHaveItems](#R2009) |
 | [R2022](#R2022) | [XmsExamplesRequired](#R2022) |
-| [R2064](#R2064) | [LicenseMissing](#R2064) |
+| R2064 | LicenseMissing |
 
 #### SDK Warnings
 
@@ -1032,13 +1032,13 @@ Links: [Index](#index) | [Error vs. Warning](#error-vs-warning) | [Automated Rul
 Links: [Index](#index) | [Error vs. Warning](#error-vs-warning) | [Automated Rules](#automated-rules) | [RPC](#rpc-violations): [Errors](#rpc-errors) or [Warnings](#rpc-warnings) | [SDK](#sdk-violations): [Errors](#sdk-errors) or [Warnings](#sdk-warnings)
 
 ### <a name="R2054" />R2054 SecurityDefinitionsStructure
-**Output Message**: Every swagger/configuration must have a security definitions section and it must adhere to the structure described in: [https://github.com/Azure/autorest/tree/master/docs/developer/validation-rules/security-definitions-structure-validation.md](https://github.com/Azure/autorest/tree/master/docs/developer/validation-rules/security-definitions-structure-validation.md)
+**Output Message**: Every swagger/configuration must have a security definitions section and it must adhere to the structure described [here](https://github.com/Azure/autorest/tree/master/docs/developer/validation-rules/security-definitions-structure-validation.md)
 
 **Description**: Each OpenAPI json document must contain a security definitions section and the section must adhere to a certain format.
 
-**Why the rule is important**: Missing security definitions section does not describe the Azure services security model accurately.
+**Why the rule is important**: Missing security definitions section does not describe the Azure services security model accurately. This is an ARM specific requirement which describes the security mechanism to access the services.
 
-**How to fix the violation**: Ensure that the document has a security definition section as described in [https://github.com/Azure/autorest/tree/master/docs/developer/validation-rules/security-definitions-structure-validation.md](https://github.com/Azure/autorest/tree/master/docs/developer/validation-rules/security-definitions-structure-validation.md)
+**How to fix the violation**: Ensure that the document has a security definition section as described [here](https://github.com/Azure/autorest/tree/master/docs/developer/validation-rules/security-definitions-structure-validation.md)
 
 Links: [Index](#index) | [Error vs. Warning](#error-vs-warning) | [Automated Rules](#automated-rules) | [RPC](#rpc-violations): [Errors](#rpc-errors) or [Warnings](#rpc-warnings) | [SDK](#sdk-violations): [Errors](#sdk-errors) or [Warnings](#sdk-warnings)
 
@@ -1054,11 +1054,11 @@ Links: [Index](#index) | [Error vs. Warning](#error-vs-warning) | [Automated Rul
 Links: [Index](#index) | [Error vs. Warning](#error-vs-warning) | [Automated Rules](#automated-rules) | [RPC](#rpc-violations): [Errors](#rpc-errors) or [Warnings](#rpc-warnings) | [SDK](#sdk-violations): [Errors](#sdk-errors) or [Warnings](#sdk-warnings)
 
 ### <a name="R2044" />R2044 InvalidVerbUsed
-**Output Message**: Permissible values for HTTP Verb are delete,get,put,patch,head,options,post.
+**Output Message**: Permissible values for HTTP Verb are DELETE, GET, PUT, PATCH, HEAD, OPTIONS, POST, TRACE.
 
-**Description**: Each operation definition must have a HTTP verb and it must be delete/get/put/patch/head/options/post.
+**Description**: Each operation definition must have a HTTP verb and it must be DELETE/GET/PUT/PATCH/HEAD/OPTIONS/POST/TRACE.
 
-**Why the rule is important**: Delete/get/put/patch/head/options/post are the only valid HTTP operations.
+**Why the rule is important**: DELETE/GET/PUT/PATCH/HEAD/OPTIONS/POST/TRACE are the only valid HTTP operations.
 
 **How to fix the violation**: Provide a correct HTTP verb.
 
@@ -1069,7 +1069,7 @@ Links: [Index](#index) | [Error vs. Warning](#error-vs-warning) | [Automated Rul
 
 **Description**: A parameter must have 'description' property.
 
-**Why the rule is important**: This will ensure that the parameter is well documented.
+**Why the rule is important**: Appropriate documentation could not be generated without the 'description' property.
 
 **How to fix the violation**: For each parameter, provide a 'description' property.
 
@@ -1078,9 +1078,9 @@ Links: [Index](#index) | [Error vs. Warning](#error-vs-warning) | [Automated Rul
 ### <a name="R4000-3" />R4000 DescriptiveDescriptionRequired
 **Output Message**: The value provided for description is not descriptive enough. Accurate and descriptive description is essential for maintaining reference documentation.
 
-**Description**: The value of the 'description' property must be descriptive.
+**Description**: The value of the 'description' property must be descriptive. It cannot be spaces or empty description.
 
-**Why the rule is important**: This will ensure that the service is well documented.
+**Why the rule is important**: Appropriate documentation could not be generated without a detailed 'description' value.
 
 **How to fix the violation**: For each 'description' property, provide a detailed description value.
 
@@ -1089,11 +1089,11 @@ Links: [Index](#index) | [Error vs. Warning](#error-vs-warning) | [Automated Rul
 ### <a name="R4000-4" />R4000 DescriptionAndTitleMissing
 **Output Message**: {0} lacks 'description' and 'title' property. Consider adding a 'description'/'title' element. Accurate description/title is essential for maintaining reference documentation.
 
-**Description**: The definition must have atleast one of the property - description/title.
+**Description**: The definition must have at least one of the properties - description/title.
 
-**Why the rule is important**: This will ensure that the definition is well documented.
+**Why the rule is important**: Appropriate documentation could not be generated without the 'description'/'title' property.
 
-**How to fix the violation**: For each definition, provide atleast one of the property - description/title.
+**How to fix the violation**: For each definition, provide atleast one of the properties - description/title.
 
 Links: [Index](#index) | [Error vs. Warning](#error-vs-warning) | [Automated Rules](#automated-rules) | [RPC](#rpc-violations): [Errors](#rpc-errors) or [Warnings](#rpc-warnings) | [SDK](#sdk-violations): [Errors](#sdk-errors) or [Warnings](#sdk-warnings)
 
@@ -1102,7 +1102,7 @@ Links: [Index](#index) | [Error vs. Warning](#error-vs-warning) | [Automated Rul
 
 **Description**: Every operation must have a 'description'/'summary' property.
 
-**Why the rule is important**: This will ensure that the operation is well documented.
+**Why the rule is important**: Appropriate documentation could not be generated without the 'description'/'summary' property.
 
 **How to fix the violation**: For each operation, provide atleast one of the property - description/summary.
 
@@ -1115,27 +1115,27 @@ Links: [Index](#index) | [Error vs. Warning](#error-vs-warning) | [Automated Rul
 
 **Why the rule is important**: This will ensure that the delete operation aligns with the RPC guidelines.
 
-**How to fix the violation**: Ensure that the request body of the delete operation is empty.
+**How to fix the violation**: Ensure that the request body of the delete operation is empty. This may involve a service side change and may cause a breaking change in the generated SDK.
 
 Links: [Index](#index) | [Error vs. Warning](#error-vs-warning) | [Automated Rules](#automated-rules) | [RPC](#rpc-violations): [Errors](#rpc-errors) or [Warnings](#rpc-warnings) | [SDK](#sdk-violations): [Errors](#sdk-errors) or [Warnings](#sdk-warnings)
 
 ### <a name="R2005" />R2005 LongRunningResponseStatusCode
 **Output Message**: A '{0}' operation '{1}' with x-ms-long-running-operation extension must have a valid terminal success status code {2}.
 
-**Description**: The allowed response status codes for a long 'delete' operation are "200", "204". The allowed response status codes for a 'post' operation are "200", "201" & "204". The allowed response status codes for a 'put' operation are  "200" & "201".
+**Description**: The allowed response status codes for a long DELETE operation are "200", "204". The allowed response status codes for a POST operation are "200", "201" & "204". The allowed response status codes for a PUT operation are  "200" & "201".
 
-**Why the rule is important**: This will ensure that the 'delete'/'post'/'put' operations are designed correctly.
+**Why the rule is important**: This will ensure that the DELETE/POST/PUT operations are designed correctly.Please refer [here](./swagger-extensions.md#x-ms-long-running-operation) for further details.
 
-**How to fix the violation**: Ensure that the 'delete'/'post'/'put' operations have the allowed response codes.
+**How to fix the violation**: Ensure that the DELETE/POST/PUT operations have the allowed response codes.
 
 Links: [Index](#index) | [Error vs. Warning](#error-vs-warning) | [Automated Rules](#automated-rules) | [RPC](#rpc-violations): [Errors](#rpc-errors) or [Warnings](#rpc-warnings) | [SDK](#sdk-violations): [Errors](#sdk-errors) or [Warnings](#sdk-warnings)
 
 ### <a name="R2019" />R2019 ResourceHasXMsResourceEnabled
 **Output Message**: A 'Resource' definition must have x-ms-azure-resource extension enabled and set to true.
 
-**Description**: A 'Resource' definition must have x-ms-azure-resource extension enabled and set to true.
+**Description**: A 'Resource' definition must have x-ms-azure-resource extension enabled and set to true. This will indicate that the model is an Azure resource.
 
-**Why the rule is important**: This will ensure that the 'Resource' definition is designed correctly.
+**Why the rule is important**: This will ensure that the 'Resource' definition is designed correctly.Please refer [here](./swagger-extensions.md#x-ms-long-running-operation) for further details.
 
 **How to fix the violation**: Ensure that the 'Resource' definition has x-ms-azure-resource extension enabled and set to true.
 
@@ -1144,9 +1144,9 @@ Links: [Index](#index) | [Error vs. Warning](#error-vs-warning) | [Automated Rul
 ### <a name="R2064" />R2064 LROStatusCodesReturnTypeSchema
 **Output Message**: 200/201 Responses of long running operations must have a schema definition for return type. OperationId: '{0}', Response code: '{1}'
 
-**Description**: The '200'/'201' responses of the long running operation must have a schema definition.
+**Description**: The '200'/'201' responses of the long running operation must have a schema definition. 
 
-**Why the rule is important**: This will ensure that the generated SDK understands the operation and the user could get the correct response of the long running operation.
+**Why the rule is important**: Please refer [here](./swagger-extensions.md#x-ms-long-running-operation) for details on the x-ms-long-running-operation. The '201' response code indicates 'Created' & '200' response code indicates 'Success'. In either case, it is logical for the response to be the same.
 
 **How to fix the violation**: Ensure that the '200'/'201' responses of the long running operation has a schema definition.
 
@@ -1155,20 +1155,20 @@ Links: [Index](#index) | [Error vs. Warning](#error-vs-warning) | [Automated Rul
 ### <a name="R3007" />R3007 PutGetPatchResponseSchema
 **Output Message**: {0} has different responses for PUT/GET/PATCH operations. The PUT/GET/PATCH operations must have same schema response.
 
-**Description**: For a given path with 'put', 'get' and 'patch' operations, the schema of the response must be the same.
+**Description**: For a given path with PUT, GET and PATCH operations, the schema of the response must be the same.
 
-**Why the rule is important**: This will provide a consistent experience to the user.
+**Why the rule is important**: This will provide a consistent experience to the user, i.e. the user could use the same model object to perform various operations. Also, within the SDK, this will encourage reuse of the same model objects.
 
-**How to fix the violation**: Ensure that, for a given path with 'put', 'get' and 'patch' operations, the schema of the response is same.
+**How to fix the violation**: Ensure that, for a given path with PUT, GET and PATCH operations, the schema of the response is same.
 
 Links: [Index](#index) | [Error vs. Warning](#error-vs-warning) | [Automated Rules](#automated-rules) | [RPC](#rpc-violations): [Errors](#rpc-errors) or [Warnings](#rpc-warnings) | [SDK](#sdk-violations): [Errors](#sdk-errors) or [Warnings](#sdk-warnings)
 
 ### <a name="R3060" />R3060 XmsPageableListByRGAndSubscriptions
 **Output Message**: For the tracked resource '{0}', the x-ms-pageable extension values must be same for list by resource group and subscriptions operations.
 
-**Description**: When a tracked resource has list by resource group and subscription operations, the x-ms-pageable extension values must be same for both operations.
+**Description**: When a tracked resource has list by resource group and subscription operations, the x-ms-pageable extension values must be same for both operations. A tracked resource is a resource with a 'location' property. If this rule flags a resource which does not have a 'location' property, then it might be a false positive.
 
-**Why the rule is important**: This will provide a consistent experience to the user.
+**Why the rule is important**: This will provide a consistent experience to the user, i.e. the user could expect the same behavior for both list by subscription and resource group. Please refer [here](./swagger-extensions.md#x-ms-pageable) for details on the x-ms-pageable extension.
 
 **How to fix the violation**: Ensure that when a tracked resource has list by resource group and subscription operations, the x-ms-pageable extension values are same for both operations.
 
@@ -1177,11 +1177,11 @@ Links: [Index](#index) | [Error vs. Warning](#error-vs-warning) | [Automated Rul
 ### <a name="R2017" />R2017 PutRequestResponseScheme
 **Output Message**: A PUT operation request body schema should be the same as its 200 response schema, to allow reusing the same entity between GET and PUT. If the schema of the PUT request body is a superset of the GET response body, make sure you have a PATCH operation to make the resource updatable. Operation: '{0}' Request Model: '{1}' Response Model: '{2}'
 
-**Description**: The request & reponse('200') schema of the 'put' operation must be same.
+**Description**: The request & reponse('200') schema of the PUT operation must be same.
 
-**Why the rule is important**: This will provide a consistent experience to the user.
+**Why the rule is important**: This will provide a consistent experience to the user, i.e. the user could use the same model object to perform various operations. Also, within the SDK, this will encourage reuse of the same model objects.
 
-**How to fix the violation**: Ensure the request & reponse('200') schema of the 'put' operation must be same.
+**How to fix the violation**: Ensure the request & reponse('200') schema of the PUT operation must be same. This might involve a service side change which will result cause a breaking change in the generated SDK.
 
 Links: [Index](#index) | [Error vs. Warning](#error-vs-warning) | [Automated Rules](#automated-rules) | [RPC](#rpc-violations): [Errors](#rpc-errors) or [Warnings](#rpc-warnings) | [SDK](#sdk-violations): [Errors](#sdk-errors) or [Warnings](#sdk-warnings)
 
@@ -1190,7 +1190,7 @@ Links: [Index](#index) | [Error vs. Warning](#error-vs-warning) | [Automated Rul
 
 **Description**: The 200 response model for an ARM PUT operation must have x-ms-azure-resource extension set to true in its hierarchy. Operation: '{0}' Model: '{1}'.
 
-**Why the rule is important**: This will ensure that the 'put' operation actually returns a resource.
+**Why the rule is important**: This will ensure that the PUT operation actually returns a resource.Please refer [here](./swagger-extensions.md#x-ms-azure-resource) for details on x-ms-azure-resource extension.
 
 **How to fix the violation**: Ensure that the 200 response model for an ARM PUT operation must have x-ms-azure-resource extension set to true in its hierarchy.
 
@@ -1201,7 +1201,7 @@ Links: [Index](#index) | [Error vs. Warning](#error-vs-warning) | [Automated Rul
 
 **Description**: A request parameter of the Patch Operation must not have a required/default value.
 
-**Why the rule is important**: This will ensure that the existing properties are not accidentally overwritten.
+**Why the rule is important**: A PATCH operation is used to update properties of a resource. So, If the resource has 'X' number of properties and if you wish to change one of them, then a PATCH request could be sent with a value for that specified property. In other words, all the properties in the PATCH request are updated. Now, if any of the values are marked as required/default, it would force the system to update it always which is not the intention of the PATCH operation.
 
 **How to fix the violation**: Ensure that the request parameter of the Patch Operation does not have a required/default value.
 
