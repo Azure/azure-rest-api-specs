@@ -21,7 +21,7 @@
         "tags": [
           "DatabaseAdvisors"
         ],
-        "description": "Returns a list of Database Advisors.",
+        "description": "Returns a list of database advisors.",
         "operationId": "Databases_ListAdvisors",
         "parameters": [
           {
@@ -57,6 +57,9 @@
         "x-ms-examples": {
           "List of database advisors": {
             "$ref": "../examples/DatabaseAdvisorList.json"
+          },
+          "List of database recommended actions for all advisors": {
+            "$ref": "../examples/DatabaseRecommendedActionListExpand.json"
           }
         }
       }
@@ -214,9 +217,6 @@
         "x-ms-examples": {
           "List of database recommended actions": {
             "$ref": "../examples/DatabaseRecommendedActionList.json"
-          },
-          "List of database recommended actions for all advisors": {
-            "$ref": "../examples/DatabaseRecommendedActionListExpand.json"
           }
         }
       }
@@ -345,8 +345,8 @@
         "tags": [
           "ServerAdvisors"
         ],
-        "description": "Gets list of Server Advisors.",
-        "operationId": "Server_ListAdvisors",
+        "description": "Gets list of server advisors.",
+        "operationId": "Servers_ListAdvisors",
         "parameters": [
           {
             "$ref": "#/parameters/ResourceGroupParameter"
@@ -378,6 +378,9 @@
         "x-ms-examples": {
           "List of server advisors": {
             "$ref": "../examples/ServerAdvisorList.json"
+          },
+          "List of server recommended actions for all advisors": {
+            "$ref": "../examples/ServerRecommendedActionListExpand.json"
           }
         }
       }
@@ -388,7 +391,7 @@
           "ServerAdvisors"
         ],
         "description": "Returns details of a Server Advisor.",
-        "operationId": "Server_GetAdvisor",
+        "operationId": "Servers_GetAdvisor",
         "parameters": [
           {
             "$ref": "#/parameters/ResourceGroupParameter"
@@ -432,7 +435,7 @@
           "ServerAdvisors"
         ],
         "description": "Updates a Server Advisor.",
-        "operationId": "Server_UpdateAdvisor",
+        "operationId": "Servers_UpdateAdvisor",
         "parameters": [
           {
             "$ref": "#/parameters/ResourceGroupParameter"
@@ -531,9 +534,10 @@
             "PrivatePreview"
           ],
           "type": "string",
+          "readOnly": true,
           "x-ms-enum": {
             "name": "AdvisorStatus",
-            "modelAsString": true
+            "modelAsString": false
           }
         },
         "autoExecuteStatus": {
@@ -546,7 +550,7 @@
           "type": "string",
           "x-ms-enum": {
             "name": "AutoExecuteStatus",
-            "modelAsString": true
+            "modelAsString": false
           }
         },
         "autoExecuteStatusInheritedFrom": {
@@ -559,26 +563,30 @@
             "Database"
           ],
           "type": "string",
+          "readOnly": true,
           "x-ms-enum": {
             "name": "AutoExecuteStatusInheritedFrom",
-            "modelAsString": true
+            "modelAsString": false
           }
         },
         "recommendationsStatus": {
           "description": "Gets that status of recommendations for this advisor and reason for not having any recommendations. Possible values include, but are not limited to, 'Ok' (Recommendations available),LowActivity (not enough workload to analyze), 'DbSeemsTuned' (Database is doing well), etc.",
-          "type": "string"
+          "type": "string",
+          "readOnly": true
         },
         "lastChecked": {
           "format": "date-time",
           "description": "Gets the time when the current resource was analyzed for recommendations by this advisor.",
-          "type": "string"
+          "type": "string",
+          "readOnly": true
         },
         "recommendedActions": {
           "description": "Gets the recommended actions for this advisor.",
           "type": "array",
           "items": {
             "$ref": "#/definitions/RecommendedAction"
-          }
+          },
+          "readOnly": true
         }
       }
     },
@@ -591,17 +599,20 @@
       "properties": {
         "recommendationReason": {
           "description": "Gets the reason for recommending this action. e.g., DuplicateIndex",
-          "type": "string"
+          "type": "string",
+          "readOnly": true
         },
         "validSince": {
           "format": "date-time",
           "description": "Gets the time since when this recommended action is valid.",
-          "type": "string"
+          "type": "string",
+          "readOnly": true
         },
         "lastRefresh": {
           "format": "date-time",
           "description": "Gets time when this recommended action was last refreshed.",
-          "type": "string"
+          "type": "string",
+          "readOnly": true
         },
         "state": {
           "$ref": "#/definitions/RecommendedActionStateInfo",
@@ -609,33 +620,40 @@
         },
         "isExecutableAction": {
           "description": "Gets if this recommended action is actionable by user",
-          "type": "boolean"
+          "type": "boolean",
+          "readOnly": true
         },
         "isRevertableAction": {
           "description": "Gets if changes applied by this recommended action can be reverted by user",
-          "type": "boolean"
+          "type": "boolean",
+          "readOnly": true
         },
         "isArchivedAction": {
           "description": "Gets if this recommended action was suggested some time ago but user chose to ignore this and system added a new recommended action again.",
-          "type": "boolean"
+          "type": "boolean",
+          "readOnly": true
         },
         "executeActionStartTime": {
           "format": "date-time",
           "description": "Gets the time when system started applying this recommended action on the user resource. e.g., index creation start time",
-          "type": "string"
+          "type": "string",
+          "readOnly": true
         },
         "executeActionDuration": {
           "description": "Gets the time taken for applying this recommended action on user resource. e.g., time taken for index creation",
-          "type": "string"
+          "type": "string",
+          "readOnly": true
         },
         "revertActionStartTime": {
           "format": "date-time",
           "description": "Gets the time when system started reverting changes of this recommended action on user resource. e.g., time when index drop is executed.",
-          "type": "string"
+          "type": "string",
+          "readOnly": true
         },
         "revertActionDuration": {
           "description": "Gets the time taken for reverting changes of this recommended action on user resource. e.g., time taken for dropping the created index.",
-          "type": "string"
+          "type": "string",
+          "readOnly": true
         },
         "executeActionInitiatedBy": {
           "description": "Gets if approval for applying this recommended action was given by user/system.",
@@ -644,15 +662,17 @@
             "System"
           ],
           "type": "string",
+          "readOnly": true,
           "x-ms-enum": {
             "name": "ActionInitiatedBy",
-            "modelAsString": true
+            "modelAsString": false
           }
         },
         "executeActionInitiatedTime": {
           "format": "date-time",
           "description": "Gets the time when this recommended action was approved for execution.",
-          "type": "string"
+          "type": "string",
+          "readOnly": true
         },
         "revertActionInitiatedBy": {
           "description": "Gets if approval for reverting this recommended action was given by user/system.",
@@ -661,63 +681,73 @@
             "System"
           ],
           "type": "string",
+          "readOnly": true,
           "x-ms-enum": {
             "name": "ActionInitiatedBy",
-            "modelAsString": true
+            "modelAsString": false
           }
         },
         "revertActionInitiatedTime": {
           "format": "date-time",
           "description": "Gets the time when this recommended action was approved for revert.",
-          "type": "string"
+          "type": "string",
+          "readOnly": true
         },
         "score": {
           "format": "int32",
           "description": "Gets the impact of this recommended action. Possible values are 1 - Low impact, 2 - Medium Impact and 3 - High Impact",
-          "type": "integer"
+          "type": "integer",
+          "readOnly": true
         },
         "implementationDetails": {
           "$ref": "#/definitions/RecommendedActionImplementationInfo",
-          "description": "Gets the implementation details of this recommended action for user to apply it manually."
+          "description": "Gets the implementation details of this recommended action for user to apply it manually.",
+          "readOnly": true
         },
         "errorDetails": {
           "$ref": "#/definitions/RecommendedActionErrorInfo",
-          "description": "Gets the error details if and why this recommended action is put to error state."
+          "description": "Gets the error details if and why this recommended action is put to error state.",
+          "readOnly": true
         },
         "estimatedImpact": {
           "description": "Gets the estimated impact info for this recommended action e.g., Estimated CPU gain, Estimated Disk Space change",
           "type": "array",
           "items": {
             "$ref": "#/definitions/RecommendedActionImpactRecord"
-          }
+          },
+          "readOnly": true
         },
         "observedImpact": {
           "description": "Gets the observed/actual impact info for this recommended action e.g., Actual CPU gain, Actual Disk Space change",
           "type": "array",
           "items": {
             "$ref": "#/definitions/RecommendedActionImpactRecord"
-          }
+          },
+          "readOnly": true
         },
         "timeSeries": {
           "description": "Gets the time series info of metrics for this recommended action e.g., CPU consumption time series",
           "type": "array",
           "items": {
             "$ref": "#/definitions/RecommendedActionMetricInfo"
-          }
+          },
+          "readOnly": true
         },
         "linkedObjects": {
           "description": "Gets the linked objects, if any.",
           "type": "array",
           "items": {
             "type": "string"
-          }
+          },
+          "readOnly": true
         },
         "details": {
           "description": "Gets additional details specific to this recommended action.",
           "type": "object",
           "additionalProperties": {
             "type": "object"
-          }
+          },
+          "readOnly": true
         }
       }
     },
@@ -748,7 +778,7 @@
           ],
           "type": "string",
           "x-ms-enum": {
-            "name": "CurrentState",
+            "name": "RecommendedActionCurrentState",
             "modelAsString": true
           }
         },
@@ -759,15 +789,17 @@
             "System"
           ],
           "type": "string",
+          "readOnly": true,
           "x-ms-enum": {
-            "name": "ActionInitiatedBy",
-            "modelAsString": true
+            "name": "RecommendedActionInitiatedBy",
+            "modelAsString": false
           }
         },
         "lastModified": {
           "format": "date-time",
           "description": "Gets the time when the state was last modified",
-          "type": "string"
+          "type": "string",
+          "readOnly": true
         }
       }
     },
@@ -782,14 +814,16 @@
             "AzurePowerShell"
           ],
           "type": "string",
+          "readOnly": true,
           "x-ms-enum": {
             "name": "ImplementationMethod",
-            "modelAsString": true
+            "modelAsString": false
           }
         },
         "script": {
           "description": "Gets the manual implementation script. e.g., T-SQL script that could be executed on the database.",
-          "type": "string"
+          "type": "string",
+          "readOnly": true
         }
       }
     },
@@ -799,7 +833,8 @@
       "properties": {
         "errorCode": {
           "description": "Gets the reason why the recommended action was put to error state. e.g., DatabaseHasQdsOff, IndexAlreadyExists",
-          "type": "string"
+          "type": "string",
+          "readOnly": true
         },
         "isRetryable": {
           "description": "Gets whether the error could be ignored and recommended action could be retried. Possible values are: Yes/No",
@@ -807,7 +842,8 @@
             "Yes",
             "No"
           ],
-          "type": "string"
+          "type": "string",
+          "readOnly": true
         }
       }
     },
@@ -817,26 +853,31 @@
       "properties": {
         "dimensionName": {
           "description": "Gets the name of the impact dimension. e.g., CPUChange, DiskSpaceChange, NumberOfQueriesAffected.",
-          "type": "string"
+          "type": "string",
+          "readOnly": true
         },
         "unit": {
           "description": "Gets the name of the impact dimension. e.g., CPUChange, DiskSpaceChange, NumberOfQueriesAffected.",
-          "type": "string"
+          "type": "string",
+          "readOnly": true
         },
         "absoluteValue": {
           "format": "double",
           "description": "Gets the absolute value of this dimension if applicable. e.g., Number of Queries affected",
-          "type": "number"
+          "type": "number",
+          "readOnly": true
         },
         "changeValueAbsolute": {
           "format": "double",
           "description": "Gets the absolute change in the value of this dimension. e.g., Absolute Disk space change in Megabytes",
-          "type": "number"
+          "type": "number",
+          "readOnly": true
         },
         "changeValueRelative": {
           "format": "double",
           "description": "Gets the relative change in the value of this dimension. e.g., Relative Disk space change in Percentage",
-          "type": "number"
+          "type": "number",
+          "readOnly": true
         }
       }
     },
@@ -846,25 +887,30 @@
       "properties": {
         "metricName": {
           "description": "Gets the name of the metric. e.g., CPU, Number of Queries.",
-          "type": "string"
+          "type": "string",
+          "readOnly": true
         },
         "unit": {
           "description": "Gets the unit in which metric is measured. e.g., DTU, Frequency",
-          "type": "string"
+          "type": "string",
+          "readOnly": true
         },
         "timeGrain": {
           "description": "Gets the duration of time interval for the value given by this MetricInfo. e.g., PT1H (1 hour)",
-          "type": "string"
+          "type": "string",
+          "readOnly": true
         },
         "startTime": {
           "format": "date-time",
           "description": "Gets the start time of time interval given by this MetricInfo.",
-          "type": "string"
+          "type": "string",
+          "readOnly": true
         },
         "value": {
           "format": "double",
           "description": "Gets the value of the metric in the time interval given by this MetricInfo.",
-          "type": "number"
+          "type": "number",
+          "readOnly": true
         }
       }
     },
