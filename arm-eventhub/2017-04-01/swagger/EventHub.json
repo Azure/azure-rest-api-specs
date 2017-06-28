@@ -1652,7 +1652,7 @@
             },
             "captureDescription": {
               "$ref": "#/definitions/CaptureDescription",
-              "description": "Properties of Capture Description"
+              "description": "Properties of capture description"
 
             }
           },
@@ -1674,7 +1674,7 @@
         },
         "encoding": {
           "type": "string",
-          "description": "Enumerates the possible values for the encoding format of CaptureDescription.",
+          "description": "Enumerates the possible values for the encoding format of capture description.",
           "enum": [
             "Avro",
             "AvroDeflate"
@@ -1703,7 +1703,7 @@
           "description": "Properties of Destination where capture will be stored. (Storage Account, Blob Names)"
         }
       },
-      "description": "Properties to configure CaptureDescription for Eventhub"
+      "description": "Properties to configure capture description for eventhub"
     },
     "Destination": {
       "properties": {
@@ -1726,10 +1726,11 @@
               "type": "string",
               "description": "Blob naming convention for archive, e.g. {Namespace}/{EventHub}/{PartitionId}/{Year}/{Month}/{Day}/{Hour}/{Minute}/{Second}. Here all the parameters (Namespace,EventHub .. etc) are mandatory irrespective of order"
             }
-          }
+          },
+          "description": "Properties describing the storage account, blob container and acrchive anme format for capture destination"
         }
       },
-      "description": "Capture storage details for capturedescription"
+      "description": "Capture storage details for capture description"
     },
     "EventHubListResult": {
       "properties": {
