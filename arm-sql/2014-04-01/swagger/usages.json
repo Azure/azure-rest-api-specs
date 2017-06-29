@@ -44,7 +44,51 @@
           "200": {
             "description": "OK",
             "schema": {
-              "$ref": "#/definitions/ServerMetricListResult"
+              "$ref": "#/definitions/ServerUsageListResult"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": null
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/servers/{serverName}/databases/{databaseName}/usages": {
+      "get": {
+        "tags": [
+          "Databases"
+        ],
+        "operationId": "Databases_ListUsages",
+        "description": "Returns database usages.",
+        "x-ms-examples": {
+          "List database usage metrics": { "$ref": "../examples/DatabaseUsageMetricsList.json" }
+        },
+        "parameters": [
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupParameter"
+          },
+          {
+            "$ref": "#/parameters/ServerNameParameter"
+          },
+          {
+            "name": "databaseName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the database."
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/DatabaseUsageListResult"
             }
           }
         },
@@ -55,7 +99,7 @@
     }
   },
   "definitions": {
-    "ServerMetric": {
+    "ServerUsage": {
       "properties": {
         "name": {
           "readOnly": true,
@@ -98,18 +142,89 @@
       },
       "description": "Represents server metrics."
     },
-    "ServerMetricListResult": {
+    "ServerUsageListResult": {
       "properties": {
         "value": {
           "type": "array",
           "items": {
-            "$ref": "#/definitions/ServerMetric"
+            "$ref": "#/definitions/ServerUsage"
           },
           "description": "The list of server metrics for the server."
         }
       },
       "required": ["value"],
       "description": "Represents the response to a list server metrics request."
+    },
+    "DatabaseUsage": {
+      "properties": {
+        "resourceName": {
+          "readOnly": true,
+          "type": "string",
+          "description": "The name of the resource."
+        },
+        "displayName": {
+          "readOnly": true,
+          "type": "string",
+          "description": "The usage metric display name."
+        },
+        "currentValue": {
+          "readOnly": true,
+          "type": "number",
+          "format": "double",
+          "description": "The current value of the usage metric."
+        },
+        "limit": {
+          "readOnly": true,
+          "type": "number",
+          "format": "double",
+          "description": "The current limit of the usage metric."
+        },
+        "unit": {
+          "readOnly": true,
+          "type": "string",
+          "description": "The units of the usage metric."
+        },
+        "nextResetTime": {
+          "readOnly": true,
+          "type": "string",
+          "format": "date-time",
+          "description": "The next reset time for the usage metric (ISO8601 format)."
+        }
+      },
+      "description": "The database usages.",
+      "allOf": [
+        {
+          "$ref": "#/definitions/SubResource"
+        }
+      ]
+    },
+    "DatabaseUsageListResult": {
+      "properties": {
+        "value": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/DatabaseUsage"
+          },
+          "description": "The list of database usages for the database."
+        }
+      },
+      "required": ["value"],
+      "description": "The response to a list database metrics request."
+    },
+    "SubResource": {
+      "description": "Subresource properties",
+      "properties": {
+        "name": {
+          "readOnly": true,
+          "type": "string",
+          "description": "Resource name"
+        },
+        "id": {
+          "readOnly": true,
+          "type": "string",
+          "description": "The resource ID."
+        }
+      }
     }
   },
   "parameters": {

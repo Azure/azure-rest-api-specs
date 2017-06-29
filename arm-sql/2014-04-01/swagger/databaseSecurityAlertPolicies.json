@@ -16,7 +16,7 @@
     "application/json"
   ],
   "paths": {
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/servers/{serverName}/databases/{databaseName}/securityAlertPolicies/default": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/servers/{serverName}/databases/{databaseName}/securityAlertPolicies/{securityAlertPolicyName}": {
       "get": {
         "tags": [
           "SecurityAlert"
@@ -42,6 +42,18 @@
             "description": "The name of the database for which database Threat Detection policy is defined.",
             "required": true,
             "type": "string"
+          },
+          {
+            "name": "securityAlertPolicyName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "enum": ["default"],
+            "description": "The name of the security alert policy.",
+            "x-ms-enum": {
+              "modelAsString": true,
+              "name": "SecurityAlertPolicyName"
+            }
           },
           {
             "$ref": "#/parameters/ApiVersionParameter"
