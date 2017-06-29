@@ -278,6 +278,72 @@
                   "description": "Successful request to update an alert rule",
                   "schema": {
                       "$ref": "#/definitions/AlertRuleResource"
+                  },
+                  "examples": {
+                    "application/json": {
+                      "id":"/subscriptions/b67f7fec-69fc-4974-9099-a26bd6ffeda3/resourceGroups/Rac46PostSwapRG/providers/microsoft.insights/alertrules/chiricutin",
+                      "name":"chiricutin",
+                      "type":"Microsoft.Insights/alertRules",
+                      "location":"West US",
+                      "tags": {
+                        "$type":"Microsoft.WindowsAzure.Management.Common.Storage.CasePreservedDictionary, Microsoft.WindowsAzure.Management.Common.Storage","hidden-link:/subscriptions/b67f7fec-69fc-4974-9099-a26bd6ffeda3/resourceGroups/Rac46PostSwapRG/providers/Microsoft.Web/sites/leoalerttest2":"Resource"
+                      },
+                      "properties": {
+                        "name":"chiricutin",
+                        "description":"Pura Vida",
+                        "isEnabled":false,
+                        "condition": {
+                          "odata.type":"Microsoft.Azure.Management.Insights.Models.ThresholdRuleCondition",
+                          "dataSource": {
+                            "odata.type":"Microsoft.Azure.Management.Insights.Models.RuleMetricDataSource",
+                            "resourceUri":"/subscriptions/b67f7fec-69fc-4974-9099-a26bd6ffeda3/resourceGroups/Rac46PostSwapRG/providers/Microsoft.Web/sites/leoalerttest",
+                            "metricName":"Requests"
+                          },
+                          "operator":"GreaterThan",
+                          "threshold":3.0,
+                          "windowSize":"PT5M",
+                          "timeAggregation":"Total"
+                        },
+                        "lastUpdatedTime":"2016-11-23T21:23:52.0221265Z",
+                        "actions":[]
+                      }
+                    }
+                  }
+              },
+              "201": {
+                  "description": "Successful request to update an alert rule that resulted in a creation of the alert rule",
+                  "schema": {
+                      "$ref": "#/definitions/AlertRuleResource"
+                  },
+                  "examples": {
+                    "application/json": {
+                      "id":"/subscriptions/b67f7fec-69fc-4974-9099-a26bd6ffeda3/resourceGroups/Rac46PostSwapRG/providers/microsoft.insights/alertrules/chiricutin",
+                      "name":"chiricutin",
+                      "type":"Microsoft.Insights/alertRules",
+                      "location":"West US",
+                      "tags": {
+                        "$type":"Microsoft.WindowsAzure.Management.Common.Storage.CasePreservedDictionary, Microsoft.WindowsAzure.Management.Common.Storage","hidden-link:/subscriptions/b67f7fec-69fc-4974-9099-a26bd6ffeda3/resourceGroups/Rac46PostSwapRG/providers/Microsoft.Web/sites/leoalerttest2":"Resource"
+                      },
+                      "properties": {
+                        "name":"chiricutin",
+                        "description":"Pura Vida",
+                        "isEnabled":false,
+                        "condition": {
+                          "odata.type":"Microsoft.Azure.Management.Insights.Models.ThresholdRuleCondition",
+                          "dataSource": {
+                            "odata.type":"Microsoft.Azure.Management.Insights.Models.RuleMetricDataSource",
+                            "resourceUri":"/subscriptions/b67f7fec-69fc-4974-9099-a26bd6ffeda3/resourceGroups/Rac46PostSwapRG/providers/Microsoft.Web/sites/leoalerttest",
+                            "metricName":"Requests"
+                          },
+                          "operator":"GreaterThan",
+                          "threshold":3.0,
+                          "windowSize":"PT5M",
+                          "timeAggregation":"Total"
+                        },
+                        "lastUpdatedTime":"2016-11-23T21:23:52.0221265Z",
+                        "actions":[]
+                      }
+                    }
                   }
               }
           }
