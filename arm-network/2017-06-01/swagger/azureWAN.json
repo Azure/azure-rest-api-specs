@@ -1793,11 +1793,6 @@
     "definitions": {
         "WAN": {
             "description": "WAN resource.",
-            "allOf": [
-                {
-                    "$ref": "./network.json#/definitions/Resource"
-                }
-            ],
             "properties": {
                 "provisioningState": {
                     "type": "string",
@@ -1839,7 +1834,12 @@
                     "readOnly": true,
                     "description": "List of vpn-sites in the WAN."
                 }
-            }
+            },
+            "allOf": [
+                {
+                    "$ref": "./network.json#/definitions/Resource"
+                }
+            ]
         },
         "ListWANsResult": {
             "description": "Result of the request to list WANs. It contains a list of WANs and a URL nextLink to get the next set of results.",
@@ -1858,11 +1858,6 @@
             }
         },
         "VpnSite": {
-            "allOf": [
-                {
-                    "$ref": "./network.json#/definitions/Resource"
-                }
-            ],
             "properties": {
                 "provisioningState": {
                     "$ref": "#/definitions/provisioningState"
@@ -1894,6 +1889,11 @@
                     "$ref": "#/definitions/BGPProperties"
                 }
             },
+            "allOf": [
+                {
+                    "$ref": "./network.json#/definitions/Resource"
+                }
+            ],
             "description": "Details of VpnSite resource."
         },
         "ListVpnSitesResult": {
@@ -1926,11 +1926,6 @@
             }
         },
         "Hub": {
-            "allOf": [
-                {
-                    "$ref": "./network.json#/definitions/Resource"
-                }
-            ],
             "properties": {
                 "provisioningState": {
                     "$ref": "#/definitions/provisioningState"
@@ -1973,6 +1968,11 @@
                     }
                 }
             },
+            "allOf": [
+                {
+                    "$ref": "./network.json#/definitions/Resource"
+                }
+            ],
             "description": "Details of Hub."
         },
         "ListHubsResult": {
@@ -1992,11 +1992,7 @@
             }
         },
         "ScalableVpnGateway": {
-            "allOf": [
-                {
-                    "$ref": "./network.json#/definitions/Resource"
-                }
-            ],
+            "description": "Details of scalable vpn gateway.",
             "properties": {
                 "provisioningState": {
                     "$ref": "#/definitions/provisioningState"
@@ -2014,14 +2010,14 @@
                     }
                 }
             },
-            "description": "Details of scalable vpn gateway."
-        },
-        "VpnConnection": {
             "allOf": [
                 {
                     "$ref": "./network.json#/definitions/Resource"
                 }
-            ],
+            ]
+        },
+        "VpnConnection": {
+            "description": "Details of Vpn Connection.",
             "properties": {
                 "provisioningState": {
                     "$ref": "#/definitions/provisioningState"
@@ -2062,8 +2058,12 @@
                     "readOnly": true,
                     "description": "Egress bytes transferred."
                 }
-            },
-            "description": "Details of Vpn Connection."
+            },            
+            "allOf": [
+                {
+                    "$ref": "./network.json#/definitions/Resource"
+                }
+            ]
         },
         "ListVpnConnectionsResult": {
             "description": "Result of the request to list all vpn connections to a scalable vpn gateway. It contains a list of Vpn Connections and a URL nextLink to get the next set of results.",
@@ -2082,11 +2082,7 @@
             }
         },
         "ScalableExpressRouteGateway": {
-            "allOf": [
-                {
-                    "$ref": "./network.json#/definitions/Resource"
-                }
-            ],
+            "description": "Details of Express Route Gateway.",
             "properties": {
                 "provisioningState": {
                     "$ref": "#/definitions/provisioningState"
@@ -2104,14 +2100,14 @@
                     }
                 }
             },
-            "description": "Details of Express Route Gateway."
-        },
-        "ExpressRouteConnection": {
             "allOf": [
                 {
                     "$ref": "./network.json#/definitions/Resource"
                 }
-            ],
+            ]
+        },
+        "ExpressRouteConnection": {
+            "description": "Details of ExpressRoute Connection.",
             "properties": {
                 "provisioningState": {
                     "$ref": "#/definitions/provisioningState"
@@ -2150,7 +2146,11 @@
                     }
                 }
             },
-            "description": "Details of ExpressRoute Connection."
+            "allOf": [
+                {
+                    "$ref": "./network.json#/definitions/Resource"
+                }
+            ]
         },
         "ListExpressRouteConnectionsResult": {
             "description": "Result of the request to list of ExpressRoute connections to a scalable ExpressRoute gateway. It contains a list of ExpressRoute Connections and a URL nextLink to get the next set of results.",
@@ -2169,11 +2169,7 @@
             }
         },
         "HubVnetConnection": {
-            "allOf": [
-                {
-                    "$ref": "./network.json#/definitions/Resource"
-                }
-            ],
+            "description": "Details of Hub-VNet Connection.",
             "properties": {
                 "provisioningState": {
                     "$ref": "#/definitions/provisioningState"
@@ -2203,7 +2199,11 @@
                     "description": "Egress bytes transferred."
                 }
             },
-            "description": "Details of Hub-VNet Connection."
+            "allOf": [
+                {
+                    "$ref": "./network.json#/definitions/Resource"
+                }
+            ]
         },
         "ListHubVnetConnectionsResult": {
             "description": "List of HubVnet Connections and a URL nextLink to get the next set of results.",
