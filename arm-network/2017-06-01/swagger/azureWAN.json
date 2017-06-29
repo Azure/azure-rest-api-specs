@@ -99,7 +99,7 @@
                         "in": "body",
                         "required": true,
                         "schema": {
-                            "$ref": "#/definitions/WANParameters"
+                            "$ref": "#/definitions/WAN"
                         },
                         "description": "Parameters supplied to create or update WAN."
                     }
@@ -148,7 +148,7 @@
                         "in": "body",
                         "required": true,
                         "schema": {
-                            "$ref": "#/definitions/WANParameters"
+                            "$ref": "#/definitions/WAN"
                         },
                         "description": "Parameters supplied to Update WAN."
                     }
@@ -341,7 +341,7 @@
                         "in": "body",
                         "required": true,
                         "schema": {
-                            "$ref": "#/definitions/VpnSiteParameters"
+                            "$ref": "#/definitions/VpnSite"
                         },
                         "description": "Parameters supplied to create or update VpnSite."
                     }
@@ -390,7 +390,7 @@
                         "in": "body",
                         "required": true,
                         "schema": {
-                            "$ref": "#/definitions/VpnSiteParameters"
+                            "$ref": "#/definitions/VpnSite"
                         },
                         "description": "Parameters supplied to Update VpnSite."
                     }
@@ -620,7 +620,7 @@
                         "in": "body",
                         "required": true,
                         "schema": {
-                            "$ref": "#/definitions/HubParameters"
+                            "$ref": "#/definitions/Hub"
                         },
                         "description": "Parameters supplied to create or update Hub."
                     }
@@ -665,7 +665,7 @@
                         "in": "body",
                         "required": true,
                         "schema": {
-                            "$ref": "#/definitions/HubParameters"
+                            "$ref": "#/definitions/Hub"
                         },
                         "description": "Parameters supplied to update Hub."
                     }
@@ -852,7 +852,7 @@
                         "in": "body",
                         "required": true,
                         "schema": {
-                            "$ref": "#/definitions/ScalableVpnGatewayParameters"
+                            "$ref": "#/definitions/ScalableVpnGateway"
                         },
                         "description": "Parameters supplied to create or Update a scalable vpn gateway."
                     }
@@ -900,7 +900,7 @@
                         "in": "body",
                         "required": true,
                         "schema": {
-                            "$ref": "#/definitions/ScalableVpnGatewayParameters"
+                            "$ref": "#/definitions/ScalableVpnGateway"
                         },
                         "description": "Parameters supplied to update a scalable vpn gateway."
                     }
@@ -1030,7 +1030,7 @@
                         "in": "body",
                         "required": true,
                         "schema": {
-                            "$ref": "#/definitions/VpnConnectionParameters"
+                            "$ref": "#/definitions/VpnConnection"
                         },
                         "description": "Parameters supplied to create or update a vpn connection to a scalable vpn gateway."
                     }
@@ -1081,7 +1081,7 @@
                         "in": "body",
                         "required": true,
                         "schema": {
-                            "$ref": "#/definitions/VpnConnectionParameters"
+                            "$ref": "#/definitions/VpnConnection"
                         },
                         "description": "Parameters supplied to update a vpn connection."
                     }
@@ -1246,7 +1246,7 @@
                         "in": "body",
                         "required": true,
                         "schema": {
-                            "$ref": "#/definitions/ScalableExpressRouteGatewayParameters"
+                            "$ref": "#/definitions/ScalableExpressRouteGateway"
                         },
                         "description": "Parameters supplied to create or update a scalable ExpressRoute gateway."
                     }
@@ -1294,7 +1294,7 @@
                         "in": "body",
                         "required": true,
                         "schema": {
-                            "$ref": "#/definitions/ScalableExpressRouteGatewayParameters"
+                            "$ref": "#/definitions/ScalableExpressRouteGateway"
                         },
                         "description": "Parameters supplied to update a scalable ExpressRoute gateway."
                     }
@@ -1424,7 +1424,7 @@
                         "in": "body",
                         "required": true,
                         "schema": {
-                            "$ref": "#/definitions/ExpressRouteConnectionParameters"
+                            "$ref": "#/definitions/ExpressRouteConnection"
                         },
                         "description": "Parameters supplied to create or update a ExpressRoute connection to a scalable ExpressRoute gateway."
                     }
@@ -1475,7 +1475,7 @@
                         "in": "body",
                         "required": true,
                         "schema": {
-                            "$ref": "#/definitions/ExpressRouteConnectionParameters"
+                            "$ref": "#/definitions/ExpressRouteConnection"
                         },
                         "description": "Parameters supplied to update an ExpressRoute connection."
                     }
@@ -1643,7 +1643,7 @@
                         "in": "body",
                         "required": true,
                         "schema": {
-                            "$ref": "#/definitions/HubVnetConnectionParameters"
+                            "$ref": "#/definitions/HubVnetConnection"
                         },
                         "description": "Parameters supplied to create or update a HubVnet connection."
                     }
@@ -1691,7 +1691,7 @@
                         "in": "body",
                         "required": true,
                         "schema": {
-                            "$ref": "#/definitions/HubVnetConnectionParameters"
+                            "$ref": "#/definitions/HubVnetConnection"
                         },
                         "description": "Parameters supplied to update a HubVnet connection."
                     }
@@ -1792,7 +1792,7 @@
     },
     "definitions": {
         "WAN": {
-            "description": "Details of WAN.",
+            "description": "WAN resource.",
             "allOf": [
                 {
                     "$ref": "./network.json#/definitions/Resource"
@@ -1828,6 +1828,7 @@
                     "items": {
                         "type": "string"
                     },
+                    "readOnly": true,
                     "description": "List of Hubs in the WAN."
                 },
                 "vpnSites": {
@@ -1835,35 +1836,10 @@
                     "items": {
                         "type": "string"
                     },
+                    "readOnly": true,
                     "description": "List of vpn-sites in the WAN."
                 }
             }
-        },
-        "WANParameters": {
-            "properties": {
-                "name": {
-                    "type": "string",
-                    "description": "Name of the WAN."
-
-                },
-                "location": {
-                    "type": "string",
-                    "description": "Resource location."
-
-                },
-                "tags": {
-                    "type": "object",
-                    "additionalProperties": {
-                        "type": "string"
-                    },
-                    "description": "Resource tags."
-                },
-                "disableVPNEncryption": {
-                    "type": "boolean",
-                    "description": "Vpn encryption to be disabled or not."
-                }
-            },
-            "description": "List of parameters to create or update WAN."
         },
         "ListWANsResult": {
             "description": "Result of the request to list WANs. It contains a list of WANs and a URL nextLink to get the next set of results.",
@@ -1918,48 +1894,7 @@
                     "$ref": "#/definitions/BGPProperties"
                 }
             },
-            "description": "Details of VpnSite."
-        },
-        "VpnSiteParameters": {
-            "properties": {
-                "name": {
-                    "type": "string",
-                    "description": "Name of the VpnSite."
-                },
-                "location": {
-                    "type": "string",
-                    "description": "Resource location."
-                },
-                "tags": {
-                    "type": "object",
-                    "additionalProperties": {
-                        "type": "string"
-                    },
-                    "description": "Resource tags."
-                },
-                "WAN": {
-                    "type": "string",
-                    "description": "The id of the WAN to which the vpnSite belongs"
-                },
-                "deviceProperties": {
-                    "$ref": "#/definitions/DeviceProperties"
-                },
-                "ipAddress": {
-                    "type": "string",
-                    "description": "The ip-address for the vpn-site."
-                },
-                "subnets": {
-                    "type": "array",
-                    "description": "list of subnets for vpn-site.",
-                    "items": {
-                        "type": "string"
-                    }
-                },
-                "bgpProperties": {
-                    "$ref": "#/definitions/BGPProperties"
-                }
-            },
-            "description": "List of parametrs for creating or updating VpnSite."
+            "description": "Details of VpnSite resource."
         },
         "ListVpnSitesResult": {
             "description": "Result of the request to list VpnSites. It contains a list of VpnSites and a URL nextLink to get the next set of results.",
@@ -2040,58 +1975,6 @@
             },
             "description": "Details of Hub."
         },
-        "HubParameters": {
-            "properties": {
-                "name": {
-                    "type": "string",
-                    "description": "Name of the Hub."
-                },
-                "location": {
-                    "type": "string",
-                    "description": "Resource location."
-                },
-                "tags": {
-                    "type": "object",
-                    "additionalProperties": {
-                        "type": "string"
-                    },
-                    "description": "Resource tags."
-                },
-                "WAN": {
-                    "type": "string",
-                    "description": "The id of the WAN to which the Hub belongs"
-                },
-                "scalableVpnGateways": {
-                    "type": "array",
-                    "description": "list of all scalable vpn gateways with this Hub.",
-                    "items": {
-                        "$ref": "#/definitions/ScalableVpnGateway"
-                    }
-                },
-                "scalableExpressRouteGateways": {
-                    "type": "array",
-                    "description": "list of all scalable express route gateways with this Hub.",
-                    "items": {
-                        "$ref": "#/definitions/ScalableExpressRouteGateway"
-                    }
-                },
-                "HubVnetConnections": {
-                    "type": "array",
-                    "description": "list of all vnet connections with this Hub.",
-                    "items": {
-                        "$ref": "#/definitions/HubVnetConnection"
-                    }
-                },
-                "AddressPrefixes": {
-                    "type": "array",
-                    "description": "list of address-prefixes for this Hub.",
-                    "items": {
-                        "type": "string"
-                    }
-                }
-            },
-            "description": "List of parameters to create or update Hub."
-        },
         "ListHubsResult": {
             "description": "Result of the request to list Hubs. It contains a list of Hubs and a URL nextLink to get the next set of results.",
             "properties": {
@@ -2133,33 +2016,6 @@
             },
             "description": "Details of scalable vpn gateway."
         },
-        "ScalableVpnGatewayParameters": {
-            "properties": {
-                "name": {
-                    "type": "string",
-                    "description": "Name of the ScalableVpnGateway."
-                },
-                "location": {
-                    "type": "string",
-                    "description": "Resource location."
-                },
-                "tags": {
-                    "type": "object",
-                    "additionalProperties": {
-                        "type": "string"
-                    },
-                    "description": "Resource tags."
-                },
-                "vpnConnections": {
-                    "type": "array",
-                    "description": "list of all vpn connections to the gateway.",
-                    "items": {
-                        "$ref": "#/definitions/VpnConnection"
-                    }
-                }
-            },
-            "description": "List of parameters to create Scalable VPN Gateway."
-        },
         "VpnConnection": {
             "allOf": [
                 {
@@ -2179,10 +2035,6 @@
                     "type": "string",
                     "description": "Id of the connected vpn site."
                 },
-                "sharedKey": {
-                    "type": "string",
-                    "description": "Shared key for the vpn connection."
-                },
                 "routingWeight": {
                     "type": "integer",
                     "format": "int32",
@@ -2201,11 +2053,13 @@
                 "ingressBytesTransferred": {
                     "type": "integer",
                     "format": "int32",
+                    "readOnly": true,
                     "description": "Ingress bytes transferred."
                 },
                 "egressBytesTransferred": {
                     "type": "integer",
                     "format": "int32",
+                    "readOnly": true,
                     "description": "Egress bytes transferred."
                 }
             },
@@ -2226,39 +2080,6 @@
                     "description": "URL to get the next set of operation list results if there are any."
                 }
             }
-        },
-        "VpnConnectionParameters": {
-            "properties": {
-                "name": {
-                    "type": "string",
-                    "description": "Name of the Vpn Connection."
-                },
-                "location": {
-                    "type": "string",
-                    "description": "Resource location."
-                },
-                "tags": {
-                    "type": "object",
-                    "additionalProperties": {
-                        "type": "string"
-                    },
-                    "description": "Resource tags."
-                },
-                "connectedSite": {
-                    "type": "string",
-                    "description": "Id of the connected vpn site."
-                },
-                "sharedKey": {
-                    "type": "string",
-                    "description": "Shared key for the vpn connection."
-                },
-                "routingWeight": {
-                    "type": "integer",
-                    "format": "int32",
-                    "description": "routing weight for vpn connection."
-                }
-            },
-            "description": "List of parameters to create or update vpn connection."
         },
         "ScalableExpressRouteGateway": {
             "allOf": [
@@ -2285,33 +2106,6 @@
             },
             "description": "Details of Express Route Gateway."
         },
-        "ScalableExpressRouteGatewayParameters": {
-            "properties": {
-                "name": {
-                    "type": "string",
-                    "description": "Name of the Scalable ExpressRoute Gateway."
-                },
-                "location": {
-                    "type": "string",
-                    "description": "Resource location."
-                },
-                "tags": {
-                    "type": "object",
-                    "additionalProperties": {
-                        "type": "string"
-                    },
-                    "description": "Resource tags."
-                },
-                "expressRouteConnections": {
-                    "type": "array",
-                    "description": "list of all ExpressRoute connections to the gateway.",
-                    "items": {
-                        "$ref": "#/definitions/ExpressRouteConnection"
-                    }
-                }
-            },
-            "description": "Parameters to create or update a scalable Express Route Gateway."
-        },
         "ExpressRouteConnection": {
             "allOf": [
                 {
@@ -2331,10 +2125,6 @@
                     "type": "string",
                     "description": "Id of the connected ExpressRoute circuit."
                 },
-                "authorizationKey": {
-                    "type": "string",
-                    "description": "authorizationKey key for the ExpressRoute connection."
-                },
                 "routingWeight": {
                     "type": "integer",
                     "format": "int32",
@@ -2348,11 +2138,13 @@
                         "ingressBytesTransferred": {
                             "type": "integer",
                             "format": "int32",
+                            "readOnly": true,
                             "description": "Ingress bytes transferred."
                         },
                         "egressBytesTransferred": {
                             "type": "integer",
                             "format": "int32",
+                            "readOnly": true,
                             "description": "Egress bytes transferred."
                         }
                     }
@@ -2375,39 +2167,6 @@
                     "description": "URL to get the next set of operation list results if there are any."
                 }
             }
-        },
-        "ExpressRouteConnectionParameters": {
-            "properties": {
-                "name": {
-                    "type": "string",
-                    "description": "Name of the ExpressRoute Connection."
-                },
-                "location": {
-                    "type": "string",
-                    "description": "Resource location."
-                },
-                "tags": {
-                    "type": "object",
-                    "additionalProperties": {
-                        "type": "string"
-                    },
-                    "description": "Resource tags."
-                },
-                "connectedCircuit": {
-                    "type": "string",
-                    "description": "Id of the connected ExpressRoute circuit."
-                },
-                "authorizationKey": {
-                    "type": "string",
-                    "description": "authorizationKey key for the ExpressRoute connection."
-                },
-                "routingWeight": {
-                    "type": "integer",
-                    "format": "int32",
-                    "description": "routing weight for ExpressRoute connection."
-                }
-            },
-            "description": "List of parameters to create or update ExpressRoute connection."
         },
         "HubVnetConnection": {
             "allOf": [
@@ -2434,11 +2193,13 @@
                 "ingressBytesTransferred": {
                     "type": "integer",
                     "format": "int32",
+                    "readOnly": true,
                     "description": "Ingress bytes transferred."
                 },
                 "egressBytesTransferred": {
                     "type": "integer",
                     "format": "int32",
+                    "readOnly": true,
                     "description": "Egress bytes transferred."
                 }
             },
@@ -2459,30 +2220,6 @@
                     "description": "URL to get the next set of operation list results if there are any."
                 }
             }
-        },
-        "HubVnetConnectionParameters": {
-            "properties": {
-                "name": {
-                    "type": "string",
-                    "description": "Name of the HubVnet Connection."
-                },
-                "location": {
-                    "type": "string",
-                    "description": "Resource location."
-                },
-                "tags": {
-                    "type": "object",
-                    "additionalProperties": {
-                        "type": "string"
-                    },
-                    "description": "Resource tags."
-                },
-                "connectedVNet": {
-                    "type": "string",
-                    "description": "Id of the connected VNet."
-                }
-            },
-            "description": "List of parameters to create or update HubVnet connection."
         },
         "DeviceProperties": {
             "properties": {
@@ -2532,6 +2269,7 @@
         "VpnConnectionStatus": {
             "type": "string",
             "description": "The current state of the vpn connection.",
+            "readOnly": true,
             "enum": [
                 "Unknown",
                 "Connecting",
@@ -2546,6 +2284,7 @@
         "ExpressRouteConnectionStatus": {
             "type": "string",
             "description": "The current state of the express-route connection.",
+            "readOnly": true,
             "enum": [
                 "Unknown",
                 "Connecting",
@@ -2560,6 +2299,7 @@
         "HubVnetConnectionStatus": {
             "type": "string",
             "description": "The current state of the hub to vnet connection.",
+            "readOnly": true,
             "enum": [
                 "Unknown",
                 "Connecting",
