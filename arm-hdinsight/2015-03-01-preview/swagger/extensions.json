@@ -37,7 +37,7 @@
                 "tags": [
                     "Extensions"
                 ],
-                "description": "Create HDInsight cluster extension.",
+                "description": "Creates an HDInsight cluster extension.",
                 "operationId": "Extension_Create",
                 "x-ms-examples": {
                     "Create extensions on Hadoop Linux cluster": {
@@ -98,7 +98,7 @@
                 "tags": [
                     "Extensions"
                 ],
-                "description": "Get extension properties for HDInsight cluster extension.",
+                "description": "Gets the extension properties for the specified HDInsight cluster extension.",
                 "operationId": "Extension_Get",
                 "parameters": [{
                         "name": "resourceGroupName",
@@ -148,7 +148,7 @@
                 "tags": [
                     "Extensions"
                 ],
-                "description": "Delete extension for HDInsight cluster.",
+                "description": "Deletes the specified extension for HDInsight cluster.",
                 "operationId": "Extension_Delete",
                 "parameters": [{
                         "name": "resourceGroupName",
@@ -198,30 +198,30 @@
             "description": "Cluster monitoring extensions",
             "properties": {
                 "workspaceId": {
-                    "description": "Workspace Id for cluster monitoring extension",
+                    "description": "The workspace ID for the cluster monitoring extension.",
                     "type": "string"
                 },
                 "primaryKey": {
-                    "description": "Certificate for monitoring extensions",
+                    "description": "The certificate for the cluster monitoring extensions.",
                     "type": "string"
                 }
             }
         }
     },
-    "parameters": {
-        "SubscriptionIdParameter": {
-            "name": "subscriptionId",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "description": "Gets subscription credentials which uniquely identify Microsoft Azure subscription. The subscription ID forms part of the URI for every service call."
-        },
-        "ApiVersionParameter": {
-            "name": "api-version",
-            "in": "query",
-            "required": true,
-            "type": "string",
-            "description": "Client Api Version."
-        }
-    }
+	"parameters": {
+		"SubscriptionIdParameter": {
+			"name": "subscriptionId",
+			"in": "path",
+			"required": true,
+			"type": "string",
+			"description": "The subscription credentials which uniquely identify Microsoft Azure subscription. The subscription ID forms part of the URI for every service call."
+		},
+		"ApiVersionParameter": {
+			"name": "api-version",
+			"in": "query",
+			"required": true,
+			"type": "string",
+			"description": "The HDInsight client API Version."
+		}
+	}
 }

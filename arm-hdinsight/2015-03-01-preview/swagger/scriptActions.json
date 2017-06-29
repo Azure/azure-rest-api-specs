@@ -38,7 +38,7 @@
                     "ScriptActions"
                 ],
                 "operationId": "ScriptActions_Delete",
-                "description": "Deletes a given persisted script action of the cluster.",
+                "description": "Deletes a specified persisted script action of the cluster.",
                 "parameters": [{
                         "name": "resourceGroupName",
                         "in": "path",
@@ -80,7 +80,7 @@
                     "Clusters"
                 ],
                 "operationId": "Clusters_ExecuteScriptActions",
-                "description": "Begins executing script actions on the specified HDInsight cluster.",
+                "description": "Executes script actions on the specified HDInsight cluster.",
                 "x-ms-examples": {
                     "Execute script action on HDInsight cluster": {
                         "$ref": "../examples/PostExecuteScriptAction.json"
@@ -133,7 +133,7 @@
                     "ScriptActions"
                 ],
                 "operationId": "ScriptActions_List",
-                "description": "Lists all persisted script actions for the given cluster.",
+                "description": "Lists all the persisted script actions for the specified cluster.",
                 "x-ms-examples": {
                     "List all persisted script actions for the given cluster": {
                         "$ref": "../examples/GetLinuxHadoopScriptAction.json"
@@ -179,7 +179,7 @@
                     "ScriptExecutionHistory"
                 ],
                 "operationId": "ScriptExecutionHistory_Get",
-                "description": "Gets the script execution detail for the given script execution id.",
+                "description": "Gets the script execution detail for the given script execution ID.",
                 "x-ms-examples": {
                     "Get script execution history by script id": {
                         "$ref": "../examples/GetScriptActionById.json"
@@ -229,7 +229,7 @@
                     "ScriptExecutionHistory"
                 ],
                 "operationId": "ScriptExecutionHistory_List",
-                "description": "Lists all scripts execution history for the given cluster.",
+                "description": "Lists all scripts' execution history for the specified cluster.",
                 "x-ms-examples": {
                     "Get Script Execution History List": {
                         "$ref": "../examples/GetScriptExecutionHistory.json"
@@ -275,7 +275,7 @@
                     "ScriptExecutionHistory_Promote"
                 ],
                 "operationId": "ScriptExecutionHistory_Promote",
-                "description": "Promote ad-hoc script execution to a persisted script.",
+                "description": "Promotes the specified ad-hoc script execution to a persisted script.",
                 "parameters": [{
                         "name": "resourceGroupName",
                         "in": "path",
@@ -296,7 +296,7 @@
                         "required": true,
                         "type": "integer",
                         "format": "int64",
-                        "description": "The script execution Id"
+                        "description": "The script execution ID."
                     },
                     {
                         "$ref": "#/parameters/ApiVersionParameter"
@@ -315,6 +315,7 @@
     },
     "definitions": {
         "ScriptActionExecutionHistoryList": {
+            "description": "The list script execution history response.",
             "properties": {
                 "value": {
                     "readOnly": true,
@@ -329,11 +330,10 @@
                     "readOnly": true,
                     "description": "The link (url) to the next page of results."
                 }
-            },
-            "description": "The ListScriptExecutionHistory response."
+            }
         },
         "ClusterListRuntimeScriptActionDetailResult": {
-            "description": "The ListScriptExecutionHistory response.",
+            "description": "The list runtime script action detail response.",
             "properties": {
                 "value": {
                     "description": "The list of persisted script action details for the cluster.",
@@ -373,7 +373,7 @@
             "description": "Describes a script action on role on the cluster."
         },
         "ScriptActionPersistedGetResponseSpec": {
-            "description": "The persisted script action for cluster",
+            "description": "The persisted script action for cluster.",
             "properties": {
                 "name": {
                     "type": "string",
@@ -401,7 +401,7 @@
             }
         },
         "ScriptActionsList": {
-            "description": "All persisted script action for the cluster.",
+            "description": "The persisted script action for the cluster.",
             "properties": {
                 "value": {
                     "type": "array",
@@ -424,14 +424,14 @@
             "in": "path",
             "required": true,
             "type": "string",
-            "description": "Gets subscription credentials which uniquely identify Microsoft Azure subscription. The subscription ID forms part of the URI for every service call."
+            "description": "The subscription credentials which uniquely identify Microsoft Azure subscription. The subscription ID forms part of the URI for every service call."
         },
         "ApiVersionParameter": {
             "name": "api-version",
             "in": "query",
             "required": true,
             "type": "string",
-            "description": "Client Api Version."
+            "description": "The HDInsight client API Version."
         }
     }
 }

@@ -38,7 +38,7 @@
                     "Clusters"
                 ],
                 "operationId": "Clusters_ChangeRdpSettings",
-                "description": "Begins changing the RDP settings on the specified cluster.",
+                "description": "Updates the RDP settings on the specified cluster.",
                 "x-ms-examples": {
                     "Change Remote Desktop settings - Enable": {
                         "$ref": "../examples/RdpSettingsEnable.json"
@@ -92,7 +92,7 @@
                     "Configurations"
                 ],
                 "operationId": "Configurations_UpdateHTTPSettings",
-                "description": "Begins configuring the HTTP settings on the specified cluster.",
+                "description": "Configures the HTTP settings on the specified cluster.",
                 "x-ms-examples": {
                     "Enable HTTP connectivity": {
                         "$ref": "../examples/ChangeHttpConnectivityEnable.json"
@@ -245,7 +245,7 @@
             }
         },
         "SshPublicKey": {
-            "description": "The Ssh public key for the cluster nodes.",
+            "description": "The SSH public key for the cluster nodes.",
             "properties": {
                 "certificateData": {
                     "type": "string",
@@ -254,7 +254,7 @@
             }
         },
         "SshProfile": {
-            "description": "The list of Ssh public keys.",
+            "description": "The list of SSH public keys.",
             "properties": {
                 "publicKeys": {
                     "type": "array",
@@ -305,44 +305,44 @@
             "required": [
                 "osProfile"
             ],
-            "description": "Parameters specifying the data factory gateway definition for a create or update operation."
+            "description": "The parameters specifying the data factory gateway definition for a create or update operation."
         },
         "HttpConnectivitySettings": {
             "properties": {
                 "restAuthCredential.isEnabled": {
                     "x-ms-client-name": "enabledCredential",
-                    "type": "string",
-                    "description": "Describes whether HTTP based authorization is enabled or not."
+                    "type": "boolean",
+                    "description": "Whether or not the HTTP based authorization is enabled."
                 },
                 "restAuthCredential.username": {
                     "x-ms-client-name": "username",
                     "type": "string",
-                    "description": "The http username."
+                    "description": "The HTTP username."
                 },
                 "restAuthCredential.password": {
                     "x-ms-client-name": "password",
                     "type": "string",
                     "format": "password",
-                    "description": "The http user password."
+                    "description": "The HTTP user password."
                 }
             },
             "description": "The payload for a Configure HTTP settings request."
         }
     },
-    "parameters": {
-        "SubscriptionIdParameter": {
-            "name": "subscriptionId",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "description": "Gets subscription credentials which uniquely identify Microsoft Azure subscription. The subscription ID forms part of the URI for every service call."
-        },
-        "ApiVersionParameter": {
-            "name": "api-version",
-            "in": "query",
-            "required": true,
-            "type": "string",
-            "description": "Client Api Version."
-        }
-    }
+	"parameters": {
+		"SubscriptionIdParameter": {
+			"name": "subscriptionId",
+			"in": "path",
+			"required": true,
+			"type": "string",
+			"description": "The subscription credentials which uniquely identify Microsoft Azure subscription. The subscription ID forms part of the URI for every service call."
+		},
+		"ApiVersionParameter": {
+			"name": "api-version",
+			"in": "query",
+			"required": true,
+			"type": "string",
+			"description": "The HDInsight client API Version."
+		}
+	}
 }
