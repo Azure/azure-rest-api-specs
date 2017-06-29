@@ -1182,232 +1182,6 @@
                 }
             }
         },
-        "/subscriptions/{subscriptionId}/resourceGroup/{resourceGroupName}/providers/Microsoft.Network/hubs/{hubName}/scalableVpnGateways/{gatewayName}/VpnClientConfigurations/{configName}": {
-            "get": {
-                "operationId": "VpnClientConfiguration_Get",
-                "x-ms-examples": {
-                    "HubList": { "$ref": "../examples/VpnClientConfigurationGet.json" }
-                },
-                "description": "Retrieves the details of a vpn client configuration.",
-                "parameters": [
-                    {
-                        "$ref": "#/parameters/SubscriptionIdParameter"
-                    },
-                    {
-                        "$ref": "#/parameters/ResourceGroupParameter"
-                    },
-                    {
-                        "$ref": "#/parameters/HubParameter"
-                    },
-                    {
-                        "$ref": "#/parameters/GatewayParameter"
-                    },
-                    {
-                        "$ref": "#/parameters/VpnClientConfigurationNameParameter"
-                    },
-                    {
-                        "$ref": "#/parameters/ApiVersionParameter"
-                    }
-                ],
-                "responses": {
-                    "200": {
-                        "description": "Request successful. Returns the details of the vpn client configuration.",
-                        "schema": {
-                            "$ref": "#/definitions/VpnClientConfiguration"
-                        }
-                    },
-                    "default": {
-                        "description": "*** Error Response: ***\n\n * 400 Invalid request."
-                    }
-                }
-            },
-            "put": {
-                "operationId": "VpnClientConfiguration_CreateOrUpdate",
-                "x-ms-examples": {
-                    "HubList": { "$ref": "../examples/VpnClientConfigurationPut.json" }
-                },
-                "description": "Creates a vpn client configuration if it doesn't exist else updates the existing configuration.",
-                "parameters": [
-                    {
-                        "$ref": "#/parameters/SubscriptionIdParameter"
-                    },
-                    {
-                        "$ref": "#/parameters/ResourceGroupParameter"
-                    },
-                    {
-                        "$ref": "#/parameters/HubParameter"
-                    },
-                    {
-                        "$ref": "#/parameters/GatewayParameter"
-                    },
-                    {
-                        "$ref": "#/parameters/VpnClientConfigurationNameParameter"
-                    },
-                    {
-                        "$ref": "#/parameters/ApiVersionParameter"
-                    },
-                    {
-                        "name": "parameters",
-                        "in": "body",
-                        "required": true,
-                        "schema": {
-                            "$ref": "#/definitions/VpnClientConfigurationParameters"
-                        },
-                        "description": "Parameters supplied to create or update a vpn client configuration."
-                    }
-                ],
-                "responses": {
-                    "200": {
-                        "description": "Request successful. Returns the details of the vpn client configuration created or updated.",
-                        "schema": {
-                            "$ref": "#/definitions/VpnClientConfiguration"
-                        }
-                    },
-                    "202": {
-                        "description": "Request received successfully. Vpn client configuration is not yet provisioned; follow the Location header to poll for final outcome."
-                    },
-                    "default": {
-                        "description": "*** Error Response: ***\n\n * 400 Invalid request."
-                    }
-                },
-                "x-ms-long-running-operation": true
-            },
-            "patch": {
-                "operationId": "VpnClientConfiguration_Update",
-                "x-ms-examples": {
-                    "HubList": { "$ref": "../examples/VpnClientConfigurationUpdate.json" }
-                },
-                "description": "Updates a vpn client configuration.",
-                "parameters": [
-                    {
-                        "$ref": "#/parameters/SubscriptionIdParameter"
-                    },
-                    {
-                        "$ref": "#/parameters/ResourceGroupParameter"
-                    },
-                    {
-                        "$ref": "#/parameters/HubParameter"
-                    },
-                    {
-                        "$ref": "#/parameters/GatewayParameter"
-                    },
-                    {
-                        "$ref": "#/parameters/VpnClientConfigurationNameParameter"
-                    },
-                    {
-                        "$ref": "#/parameters/ApiVersionParameter"
-                    },
-                    {
-                        "name": "parameters",
-                        "in": "body",
-                        "required": true,
-                        "schema": {
-                            "$ref": "#/definitions/VpnClientConfigurationParameters"
-                        },
-                        "description": "Parameters supplied to update a vpn client configuration."
-                    }
-                ],
-                "responses": {
-                    "200": {
-                        "description": "Request successful. Returns the details of the updated vpn client configuration.",
-                        "schema": {
-                            "$ref": "#/definitions/VpnClientConfiguration"
-                        }
-                    },
-                    "202": {
-                        "description": "Request received successfully. Vpn Clinet Configuration is not yet updated; follow the Location header to poll for final outcome."
-                    },
-                    "default": {
-                        "description": "*** Error Response: ***\n\n * 400 Invalid request."
-                    }
-                },
-                "x-ms-long-running-operation": true
-            },
-            "delete": {
-                "operationId": "VpnClientConfiguration_Delete",
-                "x-ms-examples": {
-                    "HubList": { "$ref": "../examples/VpnClientConfigurationDelete.json" }
-                },
-                "description": "Deletes a vpn clinet configuration.",
-                "parameters": [
-                    {
-                        "$ref": "#/parameters/SubscriptionIdParameter"
-                    },
-                    {
-                        "$ref": "#/parameters/ResourceGroupParameter"
-                    },
-                    {
-                        "$ref": "#/parameters/HubParameter"
-                    },
-                    {
-                        "$ref": "#/parameters/GatewayParameter"
-                    },
-                    {
-                        "$ref": "#/parameters/VpnClientConfigurationNameParameter"
-                    },
-                    {
-                        "$ref": "#/parameters/ApiVersionParameter"
-                    }
-                ],
-                "responses": {
-                    "200": {
-                        "description": "Request successful. Vpn client configuration is deleted."
-                    },
-                    "202": {
-                        "description": "Request received successfully. Vpn client configuration deletion is in progress; follow the Location header to poll for final outcome."
-                    },
-                    "204": {
-                        "description": "No Vpn client configuration by the name exist."
-                    },
-                    "default": {
-                        "description": "*** Error Response: ***\n\n * 400 Invalid request."
-                    }
-                },
-                "x-ms-long-running-operation": true
-            }
-        },
-        "/subscriptions/{subscriptionId}/resourceGroup/{resourceGroupName}/providers/Microsoft.Network/hubs/{hubName}/scalableVpnGateways/{gatewayName}/vpnClientConfigurations/{configName}/VpnClientPackage": {
-            "post": {
-                "operationId": "VpnClientPackage_Download",
-                "description": "Returns the SAS url for downloading a Vpn Client package to configure Vpn Client to connect to the scalableVpnGateway.",
-                "parameters": [
-                    {
-                        "$ref": "#/parameters/SubscriptionIdParameter"
-                    },
-                    {
-                        "$ref": "#/parameters/ResourceGroupParameter"
-                    },
-                    {
-                        "$ref": "#/parameters/HubParameter"
-                    },
-                    {
-                        "$ref": "#/parameters/GatewayParameter"
-                    },
-                    {
-                        "$ref": "#/parameters/VpnClientConfigurationNameParameter"
-                    },
-                    {
-                        "$ref": "#/parameters/ApiVersionParameter"
-                    }
-                ],
-                "responses": {
-                    "200": {
-                        "description": "Request successful. Returns the SAS url for Vpn client package.",
-                        "schema": {
-                            "type": "string",
-                            "description": "SAS url for vpn client package"
-                        }
-                    },
-                    "202": {
-                        "description": "Request accepted. Operation in progress; follow the Location header to poll for final outcome."
-                    },
-                    "default": {
-                        "description": "*** Error Response: ***\n\n * 400 Invalid request."
-                    }
-                },
-                "x-ms-long-running-operation": true
-            }
-        },
 
         "/subscriptions/{subscriptionId}/resourceGroup/{resourceGroupName}/providers/Microsoft.Network/hubs/{hubName}/scalableExpressRouteGateways/{gatewayName}": {
             "get": {
@@ -2355,13 +2129,6 @@
                     "items": {
                         "$ref": "#/definitions/VpnConnection"
                     }
-                },
-                "vpnClientConfigurations": {
-                    "type": "array",
-                    "description": "list of all vpn client configurations to the gateway.",
-                    "items": {
-                        "$ref": "#/definitions/VpnClientConfiguration"
-                    }
                 }
             },
             "description": "Details of scalable vpn gateway."
@@ -2388,13 +2155,6 @@
                     "description": "list of all vpn connections to the gateway.",
                     "items": {
                         "$ref": "#/definitions/VpnConnection"
-                    }
-                },
-                "vpnClientConfigurations": {
-                    "type": "array",
-                    "description": "list of all vpn client configurations to the gateway.",
-                    "items": {
-                        "$ref": "./virtualNetworkGateway.json#/definitions/VpnClientConfiguration"
                     }
                 }
             },
@@ -2499,46 +2259,6 @@
                 }
             },
             "description": "List of parameters to create or update vpn connection."
-        },
-        "VpnClientConfigurationParameters": {
-            "properties": {
-                "name": {
-                    "type": "string",
-                    "description": "Name of the Vpn client configuration."
-                },
-                "location": {
-                    "type": "string",
-                    "description": "Resource location."
-                },
-                "tags": {
-                    "type": "object",
-                    "additionalProperties": {
-                        "type": "string"
-                    },
-                    "description": "Resource tags."
-                },
-                "vpnClientRootCertificates": {
-                    "type": "array",
-                    "description": "list of all Vpn Client Root Certificates.",
-                    "items": {
-                        "type": "string"
-                    }
-                },
-                "vpnClientRevokedCertificates": {
-                    "type": "array",
-                    "description": "list of all Vpn Client revoked Certificates.",
-                    "items": {
-                        "type": "string"
-                    }
-                },
-                "vpnClientAddressPool": {
-                    "$ref": "#/definitions/vpnClientAddressPool"
-                },
-                "vpnClientConnectionHealth": {
-                    "$ref": "#/definitions/vpnClientConnectionHealth"
-                }
-            },
-            "description": "List of parameters to create or update vpn client configuration."
         },
         "ScalableExpressRouteGateway": {
             "allOf": [
@@ -2955,13 +2675,6 @@
             "required": true,
             "type": "string",
             "description": "The name of the vpn connection."
-        },
-        "VpnClientConfigurationNameParameter": {
-            "name": "configName",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "description": "The name of the vpn client configuration."
         }
     }
 }
