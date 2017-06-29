@@ -982,6 +982,13 @@
           },
           "description": "The reference of AdvertisedPublicPrefixes."
         },
+                   "advertisedCommunities": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "description": "The communities of bgp peering. Spepcified for microsoft peering"
+        },
         "advertisedPublicPrefixesState": {
           "type": "string",
           "description": "AdvertisedPublicPrefixState of the Peering resource. Possible values are 'NotConfigured', 'Configuring', 'Configured', and 'ValidationNeeded'.",
@@ -995,6 +1002,11 @@
             "name": "ExpressRouteCircuitPeeringAdvertisedPublicPrefixState",
             "modelAsString": true
           }
+        },
+        "legacyMode": {
+          "type": "integer",
+          "format": "int32",
+          "description": "The legacy mode of the peering."
         },
         "customerASN": {
           "type": "integer",
