@@ -70,7 +70,7 @@
           "DatabaseAdvisors"
         ],
         "description": "Returns details of a Database Advisor.",
-        "operationId": "Databases_GetAdvisors",
+        "operationId": "Databases_GetAdvisor",
         "parameters": [
           {
             "$ref": "#/parameters/ResourceGroupParameter"
@@ -117,7 +117,7 @@
           "DatabaseAdvisors"
         ],
         "description": "Updates a Database Advisor.",
-        "operationId": "Databases_UpdateAdvisors",
+        "operationId": "Databases_UpdateAdvisor",
         "parameters": [
           {
             "$ref": "#/parameters/ResourceGroupParameter"
@@ -227,7 +227,7 @@
           "DatabaseRecommendedActions"
         ],
         "description": "Returns details of a Database Recommended Action.",
-        "operationId": "Databases_GetRecommendedActions",
+        "operationId": "Databases_GetRecommendedAction",
         "parameters": [
           {
             "$ref": "#/parameters/ResourceGroupParameter"
@@ -281,7 +281,7 @@
           "DatabaseRecommendedActions"
         ],
         "description": "Updates a Database Recommended Action.",
-        "operationId": "Databases_UpdateRecommendedActions",
+        "operationId": "Databases_UpdateRecommendedAction",
         "parameters": [
           {
             "$ref": "#/parameters/ResourceGroupParameter"
@@ -664,7 +664,7 @@
           "type": "string",
           "readOnly": true,
           "x-ms-enum": {
-            "name": "ActionInitiatedBy",
+            "name": "RecommendedActionInitiatedBy",
             "modelAsString": false
           }
         },
@@ -683,7 +683,7 @@
           "type": "string",
           "readOnly": true,
           "x-ms-enum": {
-            "name": "ActionInitiatedBy",
+            "name": "RecommendedActionInitiatedBy",
             "modelAsString": false
           }
         },
@@ -843,7 +843,11 @@
             "No"
           ],
           "type": "string",
-          "readOnly": true
+          "readOnly": true,
+          "x-ms-enum": {
+            "name": "IsRetryable",
+            "modelAsString": false
+          }
         }
       }
     },
@@ -924,8 +928,9 @@
       ],
       "properties": {
         "kind": {
-          "description": "Kind of encryption protector. This is metadata used for the Azure portal experience.",
-          "type": "string"
+          "description": "Resource kind.",
+          "type": "string",
+          "readOnly": true
         },
         "location": {
           "description": "Resource location.",
@@ -949,8 +954,9 @@
       ],
       "properties": {
         "kind": {
-          "description": "Kind of encryption protector. This is metadata used for the Azure portal experience.",
-          "type": "string"
+          "description": "Resource kind.",
+          "type": "string",
+          "readOnly": true
         },
         "location": {
           "description": "Resource location.",
