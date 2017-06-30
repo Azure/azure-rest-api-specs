@@ -61,6 +61,7 @@ We request OpenAPI(Swagger) spec authoring be assigned to engineers who have an
 | [R3017](#R3017)	| [GuidUsage](#R3017) | Guid used in model definition '{1}' for property '{0}'. Usage of Guid is not recommanded. If GUIDs are absolutely required in your service, please get sign off from the Azure API review board. | Warning |
 | [R2057](#R2057)	| [InvalidSkuModel](#R2057) | Sku Model is not valid. A Sku model must have 'name' property. It can also have 'tier', 'size', 'family', 'capacity' as optional properties. | Warning |
 | [R3010](#R3010)	| [TrackedResourceListByImmediateParent](#R3010) | The child tracked resource, '{0}' with immediate parent '{1}', must have a list by immediate parent operation. | Warning |
+| [R2061](#R2061)	| [ParameterizeProperties](#R2061) | Type values \"{0}\" have default value(s), please consider parameterizing them | Warning |
 
 ### SDK Violations
 
@@ -117,6 +118,7 @@ We request OpenAPI(Swagger) spec authoring be assigned to engineers who have an
 | [R1011](#R1011) | [HttpsSupportedScheme](#R1011) | 'Azure Resource Management only supports HTTPS scheme. | Warning |
 | [R2065](#R2065) | [LicenseHeaderMustNotBeSpecified](#R2065) | License header must not be specified inside x-ms-code-generation-settings of OpenAPI document. | Warning |
 | [R2018](#R2018) | [XmsEnumValidation](#R2018) | The enum types should have x-ms-enum type extension set with appropriate options. Property name: {0}. | Warning |
+| [R2063](#R2063) | [OperationIdNounConflictingModelNames](#R2063) | OperationId has a noun that conflicts with one of the model names in definitions section. The model name will be disambiguated to '{0}Model'. Consider using the plural form of '{1}' to avoid this. Note: If you have already shipped an SDK on top of this spec, fixing this warning may introduce a breaking change. | Warning |
 
 ## Rule Descriptions
 
@@ -1262,6 +1264,59 @@ Links: [Index](#index) | [Error vs. Warning](#error-vs-warning) | [Automated Rul
 **Why the rule is important**: Including [x-ms-enum extension](https://github.com/Azure/autorest/blob/master/docs/extensions/readme.md#x-ms-enum) provides more flexibilty for enum types in SDK generated code.
 
 **How to fix the violation**: Include the [x-ms-enum extension](https://github.com/Azure/autorest/blob/master/docs/extensions/readme.md#x-ms-enum) per indicated in its documentation. Consider setting "modelAsString": true, if you'd like the enum to be modeled as a string in generated SDKs, no enum validation will happen, though the values are exposed to the user for a better experience.
+
+**Examples**: Please refer to [x-ms-enum extension](https://github.com/Azure/autorest/blob/master/docs/extensions/readme.md#x-ms-enum).
+
+Links: [Index](#index) | [Error vs. Warning](#error-vs-warning) | [Automated Rules](#automated-rules) | [RPC](#rpc-violations): [Errors](#rpc-errors) or [Warnings](#rpc-warnings) | [SDK](#sdk-violations): [Errors](#sdk-errors) or [Warnings](#sdk-warnings)
+
+### <a name="R2061" />R2061 ParameterizeProperties
+**Output Message**: Type values \"{0}\" have default value(s), please consider parameterizing them
+
+**Description**: Path URLs must be of the form `/subscriptions/{subscriptionId}/providers/<ProviderName>/typename/{typevalue}`, i.e., typevalues must be parameterized.
+
+**Why the rule is important**: Path URLs should follow a consistent pattern across RPs. Consistent URL patterns also ensure determination of a resource from the URL and in turn trigger other resource related rules.
+
+**How to fix the violation**: Parameterize all type values as path parameters.
+
+**Bad Examples**: 
+```
+"/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Storage/storageAccounts/sampleAccount":{
+
+}
+```
+**Good Examples**: 
+```
+"/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Storage/storageAccounts/sampleAccount":{
+  "get":{
+        "parameters": [
+          {
+            "$ref": "#/parameters/ResourceGroupName"
+          },
+          {
+            "name": "accountName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the storage account within the specified resource group. Storage account names must be between 3 and 24 characters in length and use numbers and lower-case letters only.",
+            "maxLength": 24,
+            "minLength": 3
+          },
+          ...
+
+  }
+}
+```
+
+Links: [Index](#index) | [Error vs. Warning](#error-vs-warning) | [Automated Rules](#automated-rules) | [RPC](#rpc-violations): [Errors](#rpc-errors) or [Warnings](#rpc-warnings) | [SDK](#sdk-violations): [Errors](#sdk-errors) or [Warnings](#sdk-warnings)
+
+### <a name="R2063" />R2063 OperationIdNounConflictingModelNames
+**Output Message**: OperationId has a noun that conflicts with one of the model names in definitions section. The model name will be disambiguated to '{0}Model'. Consider using the plural form of '{1}' to avoid this. Note: If you have already shipped an SDK on top of this spec, fixing this warning may introduce a breaking change.
+
+**Description**: The first part of an operation Id separated by an underscore i.e., `Noun` in a `Noun_Verb` should not conflict with names of the models defined in the definitions section. If this happens, AutoRest appends `Model` to the name of the model to resolve the conflict (`NounModel` in given example) with the name of the client itself (which will be named as `Noun` in given example). This can result in an inconsistent user experience.
+
+**Why the rule is important**: To ensure all models are named consistently and exactly as defined in the spec.
+
+**How to fix the violation**: Ensure operation Ids are named in such a way that the `Noun` in `Noun_Verb` is of the plural form and does not conflict with the names of any models in the definitions section of the spec.
 
 **Examples**: Please refer to [x-ms-enum extension](https://github.com/Azure/autorest/blob/master/docs/extensions/readme.md#x-ms-enum).
 
