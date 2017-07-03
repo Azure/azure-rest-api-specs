@@ -102,7 +102,7 @@ input-file:
 - Microsoft.Compute/2017-03-30/runCommands.json
 - Microsoft.ContainerService/2017-01-31/containerService.json
 
-Please take a look at this [readme.md](https://github.com/Azure/azure-rest-api-specs/tree/reorg/specification/compute/resource-manager) to understand how the complete structure looks like.
+Please take a look at this [readme.md](https://github.com/Azure/azure-rest-api-specs/tree/reorg/specification/compute/resource-manager) (Acessible by Azure github org members only) to understand how the complete structure looks like.
 
 
 ## Specs Format
