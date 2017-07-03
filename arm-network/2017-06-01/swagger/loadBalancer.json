@@ -396,10 +396,11 @@
         },
         "protocol": {
           "type": "string",
-          "description": "The transport protocol for the external endpoint. Possible values are 'Udp' or 'Tcp'",
+          "description": "The transport protocol for the external endpoint. Possible values are 'Udp,' 'Tcp,' or 'All.'",
           "enum": [
             "Udp",
-            "Tcp"
+            "Tcp",
+            "All"
           ],
           "x-ms-enum": {
             "name": "TransportProtocol",
@@ -422,12 +423,12 @@
         "frontendPort": {
           "type": "integer",
           "format": "int32",
-          "description": "The port for the external endpoint. Port numbers for each Rule must be unique within the Load Balancer. Acceptable values are between 1 and 65534."
+          "description": "The port for the external endpoint. Port numbers for each Rule must be unique within the Load Balancer. Acceptable values are between 0 and 65534. Note that value 0 enables \"Any Port\""
         },
         "backendPort": {
           "type": "integer",
           "format": "int32",
-          "description": "The port used for internal connections on the endpoint. Acceptable values are between 1 and 65535. "
+          "description": "The port used for internal connections on the endpoint. Acceptable values are between 0 and 65535. Note that value 0 enables \"Any Port\""
         },
         "idleTimeoutInMinutes": {
           "type": "integer",
@@ -469,7 +470,7 @@
           "$ref": "./network.json#/definitions/SubResource"
         }
       ],
-      "description": "A loag balancing rule for a load balancer."
+      "description": "A load balancing rule for a load balancer."
     },
     "ProbePropertiesFormat": {
       "properties": {
@@ -557,10 +558,11 @@
         },
         "protocol": {
           "type": "string",
-          "description": "The transport protocol for the endpoint. Possible values are: 'Udp' or 'Tcp'",
+          "description": "The transport protocol for the endpoint. Possible values are: 'Udp,' 'Tcp,' or 'All.'",
           "enum": [
             "Udp",
-            "Tcp"
+            "Tcp",
+            "All"
           ],
           "x-ms-enum": {
             "name": "TransportProtocol",
@@ -570,12 +572,12 @@
         "frontendPort": {
           "type": "integer",
           "format": "int32",
-          "description": "The port for the external endpoint. Port numbers for each Rule must be unique within the Load Balancer. Acceptable values range from 1 to 65534."
+          "description": "The port for the external endpoint. Port numbers for each rule must be unique within the Load Balancer. Acceptable values range from 0 to 65534. Note that value 0 is used for \"Any Port.\""
         },
         "backendPort": {
           "type": "integer",
           "format": "int32",
-          "description": "The port used for the internal endpoint. Acceptable values range from 1 to 65535."
+          "description": "The port used for the internal endpoint. Acceptable values range from 0 to 65535. Note that value 0 is used for \"Any Port.\""
         },
         "idleTimeoutInMinutes": {
           "type": "integer",
