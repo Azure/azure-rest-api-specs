@@ -3,7 +3,7 @@
   "info": {
     "title": "NetworkManagementClient",
     "description": "The Microsoft Azure Network management API provides a RESTful set of web services that interact with Microsoft Azure Networks service to manage your network resources. The API has entities that capture the relationship between an end user and the Microsoft Azure Networks service.",
-    "version": "2016-09-01"
+    "version": "2017-03-30"
   },
   "host": "management.azure.com",
   "schemes": [
@@ -66,7 +66,18 @@
             "description": "The virtual machine index."
           },
           {
-            "$ref": "#/parameters/ApiVersionParameter"
+            "name": "api-version",
+            "in": "query",
+            "required": true,
+            "type": "string",
+            "enum": [
+              "2017-03-30"
+            ],
+            "x-ms-enum": {
+              "name": "ApiVersion",
+              "modelAsString": true
+            },
+            "description": "Client API version."
           },
           {
             "$ref": "#/parameters/SubscriptionIdParameter"
@@ -76,7 +87,7 @@
           "200": {
             "description": "Request successful. The operation returns a list of NetworkInterface resources.",
             "schema": {
-              "$ref": "../../Microsoft.Network/2016-09-01/networkInterface.json#/definitions/NetworkInterfaceListResult"
+              "$ref": "./networkInterface.json#/definitions/NetworkInterfaceListResult"
             }
           }
         },
@@ -108,7 +119,18 @@
             "description": "The name of the virtual machine scale set."
           },
           {
-            "$ref": "#/parameters/ApiVersionParameter"
+            "name": "api-version",
+            "in": "query",
+            "required": true,
+            "type": "string",
+            "enum": [
+              "2017-03-30"
+            ],
+            "x-ms-enum": {
+              "name": "ApiVersion",
+              "modelAsString": true
+            },
+            "description": "Client API version."
           },
           {
             "$ref": "#/parameters/SubscriptionIdParameter"
@@ -118,7 +140,7 @@
           "200": {
             "description": "Request successful. The operation returns a list of NetworkInterface resources.",
             "schema": {
-              "$ref": "../../Microsoft.Network/2016-09-01/networkInterface.json#/definitions/NetworkInterfaceListResult"
+              "$ref": "./networkInterface.json#/definitions/NetworkInterfaceListResult"
             }
           }
         },
@@ -164,7 +186,18 @@
             "description": "The name of the network interface."
           },
           {
-            "$ref": "#/parameters/ApiVersionParameter"
+            "name": "api-version",
+            "in": "query",
+            "required": true,
+            "type": "string",
+            "enum": [
+              "2017-03-30"
+            ],
+            "x-ms-enum": {
+              "name": "ApiVersion",
+              "modelAsString": true
+            },
+            "description": "Client API version."
           },
           {
             "$ref": "#/parameters/SubscriptionIdParameter"
@@ -181,13 +214,13 @@
           "200": {
             "description": "Request successful. The operation returns the resulting NetworkInterface resource.",
             "schema": {
-              "$ref": "../../Microsoft.Network/2016-09-01/networkInterface.json#/definitions/NetworkInterface"
+              "$ref": "./networkInterface.json#/definitions/NetworkInterface"
             }
           }
         }
       }
     }
-  },  
+  },
   "parameters": {
     "SubscriptionIdParameter": {
       "name": "subscriptionId",
@@ -195,13 +228,6 @@
       "required": true,
       "type": "string",
       "description": "The subscription credentials which uniquely identify the Microsoft Azure subscription. The subscription ID forms part of the URI for every service call."
-    },
-    "ApiVersionParameter": {
-      "name": "api-version",
-      "in": "query",
-      "required": true,
-      "type": "string",
-      "description": "Client API version."
     }
   }
 }
