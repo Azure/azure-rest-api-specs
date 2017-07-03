@@ -1,12 +1,18 @@
 {
   "parameters": {
-    "name": "subnet1",
+    "subnetName": "subnet1",
     "virtualNetworkName": "vnetname",
     "resourceGroupName": "subnet-test",
     "api-version": "2017-06-01",
     "subscriptionId": "subid",
-    "addressPrefix": "10.0.0.0/16",
-    "privateAccessServices": "Microsoft.Storage"
+    "subnetParameters": {
+      "properties": {
+        "addressPrefix": "10.0.0.0/16",
+        "privateAccessServices": [
+          { "service": "Microsoft.Storage" }
+        ]
+      }
+    }
   },
   "responses": {
     "200": {
