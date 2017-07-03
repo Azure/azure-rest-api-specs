@@ -96,8 +96,8 @@ Re-organization is being done to support upcoming profiles work and Data Plane s
 ### Changing the representation of composite swagger metadata
 
 Currently composite swagger metadata is captured in a .json file. The problem with the current representation is that it does not provide a way to track what versions of swagger specs were used in earlier releases. With the upcoming changes, we will be able to keep track of multiple versions of composition. The metadata will be captured in readme.md file under resource-manager folder. There won’t be a need for .json file. New structure in readme.md file looks like below. 
-Tag: 2017-03-30
-These settings apply only when --tag=2017-03-30 is specified on the command line.
+Tag: package-2017-03
+These settings apply only when --tag=package-2017-03 is specified on the command line.
 input-file:
 - Microsoft.Compute/2017-03-30/compute.json
 - Microsoft.Compute/2017-03-30/disk.json
