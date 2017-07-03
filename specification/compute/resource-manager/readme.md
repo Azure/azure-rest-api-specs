@@ -124,14 +124,6 @@ input-file:
 - Microsoft.Compute/2015-06-15/compute.json
 ```
 
-# Tag: package-compute-2015-06 and python
-
-These settings apply only when `--tag=package-compute-2015-06 --python` is specified on the command line.
-
-``` yaml $(tag) == 'package-compute-2015-06' && $(python)
-namespace: azure.mgmt.compute.compute.v2015_06_15
-```
-
 # Tag: package-2015-06-preview
 
 These settings apply only when `--tag=package-2015-06-preview` is specified on the command line.
@@ -196,5 +188,13 @@ These settings apply only when `--tag=package-compute-2016-03 --python` is speci
 
 ``` yaml $(tag) == 'package-compute-2016-03' && $(python)
 namespace: azure.mgmt.compute.compute.v2016_03_30
+```
+
+# Tag: package-compute-2015-06 and python
+
+These settings apply only when `--tag=package-compute-2015-06 --python` is specified on the command line.
+
+``` yaml $(tag) == 'package-compute-2015-06' && $(python)
+namespace: azure.mgmt.compute.compute.v2015_06_15
 ```
 
