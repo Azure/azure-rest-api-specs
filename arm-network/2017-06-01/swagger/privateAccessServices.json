@@ -89,11 +89,6 @@
     },
     "PrivateAccessServiceResult": {
       "properties": {
-        "id": {
-          "type": "string",
-          "description": "Id of of the private access value.",
-          "readOnly": true
-        },
         "name": {
           "type": "string",
           "description": "Name of the private access value.",
@@ -105,6 +100,11 @@
           "readOnly": true
         }
       },
+      "allOf": [
+        {
+          "$ref": "./network.json#/definitions/SubResource"
+        }
+      ],
       "description": "Private access service."
     }
   },
