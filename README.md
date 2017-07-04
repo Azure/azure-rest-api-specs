@@ -63,35 +63,38 @@ Re-organization is being done to support upcoming profiles work and Data Plane s
  
 ```bash
 .
-├──automation
-|   └── resource-manager
-|       └── Microsoft.Automation
-|           └── 2015-10-31
-|               └── examples
-├──batch
-|   └── data-plane
-|   |   └── Microsoft.Batch
-|   |       └── 2015-12-01.2.2
-|   |       └── 2016-02-01.3.0
-|   |       └── 2016-07-01.3.1
-|   |       └── 2017-01-01.4.0
-|   |       |   └── examples
-|   |       └── 2017-05-01.5.0
-|   └── resource-manager
-|       └── Microsoft.Batch
-|           └──2015-12-01
-|           └──2017-01-01
-|           |   └──examples
-|           └──2017-05-01
-|               └──examples
-└── billing
-|   └── resource-manager
-|       └── Microsoft.Billing
-|           └── 2017-02-27-preview
-|           |   └── examples
-|           └── 2017-04-24-preview
-|               └── examples
-└── readme.md
+
+Specification
+└──
+   ├──automation
+   |   └── resource-manager
+   |       └── Microsoft.Automation
+   |           └── 2015-10-31
+   |               └── examples
+   ├──batch
+   |   └── data-plane
+   |   |   └── Microsoft.Batch
+   |   |       └── 2015-12-01.2.2
+   |   |       └── 2016-02-01.3.0
+   |   |       └── 2016-07-01.3.1
+   |   |       └── 2017-01-01.4.0
+   |   |       |   └── examples
+   |   |       └── 2017-05-01.5.0
+   |   └── resource-manager
+   |       └── Microsoft.Batch
+   |           └──2015-12-01
+   |           └──2017-01-01
+   |           |   └──examples
+   |           └──2017-05-01
+   |               └──examples
+   └── billing
+   |   └── resource-manager
+   |       └── Microsoft.Billing
+   |           └── 2017-02-27-preview
+   |           |   └── examples
+   |           └── 2017-04-24-preview
+   |               └── examples
+   └── readme.md
 ```
 ### Changing the representation of composite swagger metadata
 
