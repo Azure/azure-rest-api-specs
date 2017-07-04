@@ -971,7 +971,7 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/servers/{serverName}/databases/{databaseName}/transparentDataEncryption/current": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/servers/{serverName}/databases/{databaseName}/transparentDataEncryption/{transparentDataEncryptionName}": {
       "put": {
         "tags": [
           "TransparentDataEncryption"
@@ -997,6 +997,9 @@
             "required": true,
             "type": "string",
             "description": "The name of the database for which setting the transparent data encryption applies."
+          },
+          {
+            "$ref": "#/parameters/TransparentDataEncryptionNameParameter"
           },
           {
             "name": "parameters",
@@ -1048,6 +1051,9 @@
             "required": true,
             "type": "string",
             "description": "The name of the database for which the transparent data encryption applies."
+          },
+          {
+            "$ref": "#/parameters/TransparentDataEncryptionNameParameter"
           }
         ],
         "responses": {
@@ -1060,7 +1066,7 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/servers/{serverName}/databases/{databaseName}/transparentDataEncryption/current/operationResults": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/servers/{serverName}/databases/{databaseName}/transparentDataEncryption/{transparentDataEncryptionName}/operationResults": {
       "get": {
         "tags": [
           "TransparentDataEncryption"
@@ -1086,6 +1092,9 @@
             "required": true,
             "type": "string",
             "description": "The name of the database for which the transparent data encryption applies."
+          },
+          {
+            "$ref": "#/parameters/TransparentDataEncryptionNameParameter"
           }
         ],
         "responses": {
@@ -2470,6 +2479,19 @@
       "required": false,
       "type": "string",
       "description": "A comma separated list of child objects to expand in the response. Possible properties: serviceTierAdvisors, transparentDataEncryption.",
+      "x-ms-parameter-location": "method"
+    },
+    "TransparentDataEncryptionNameParameter": {
+      "name": "transparentDataEncryptionName",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "enum": ["current"],
+      "description": "The name of the transparent data encryption configuration.",
+      "x-ms-enum":{
+        "modelAsString": true,
+        "name": "TransparentDataEncryptionName"
+      },
       "x-ms-parameter-location": "method"
     }
   },
