@@ -1840,6 +1840,10 @@
             "sendKeyValue": {
               "description": "The value of the Service Bus key. This is used to authenticate to Service Bus. In ARM this key will not be returned\n normally, use the POST /listKeys API instead.",
               "type": "string"
+            },
+            "serviceBusSuffix": {
+              "description": "The suffix for the service bus endpoint. By default this is .servicebus.windows.net",
+              "type": "string"
             }
           },
           "x-ms-client-flatten": true
@@ -2452,11 +2456,6 @@
               },
               "readOnly": true
             },
-            "premiumAppDeployed": {
-              "description": "Indicates whether app is deployed as a premium app.",
-              "type": "boolean",
-              "readOnly": true
-            },
             "scmSiteAlsoStopped": {
               "description": "<code>true</code> to stop SCM (KUDU) site when the app is stopped; otherwise, <code>false</code>. The default is <code>false</code>.",
               "default": false,
@@ -2475,23 +2474,6 @@
                 "read"
               ]
             },
-            "microService": {
-              "description": "Micro services like apps, logic apps.",
-              "default": "WebSites",
-              "type": "string",
-              "x-ms-mutability": [
-                "create",
-                "read"
-              ]
-            },
-            "gatewaySiteName": {
-              "description": "Name of gateway app associated with the app.",
-              "type": "string",
-              "x-ms-mutability": [
-                "create",
-                "read"
-              ]
-            },
             "clientAffinityEnabled": {
               "description": "<code>true</code> to enable client affinity; <code>false</code> to stop sending session affinity cookies, which route client requests in the same session to the same instance. Default is <code>true</code>.",
               "type": "boolean"
@@ -2505,7 +2487,12 @@
               "type": "boolean"
             },
             "outboundIpAddresses": {
-              "description": "List of IP addresses that the app uses for outbound connections (e.g. database access). Read-only.",
+              "description": "List of IP addresses that the app uses for outbound connections (e.g. database access). Includes VIPs from tenants that site can be hosted with current settings. Read-only.",
+              "type": "string",
+              "readOnly": true
+            },
+            "possibleOutboundIpAddresses": {
+              "description": "List of IP addresses that the app uses for outbound connections (e.g. database access). Includes VIPs from all tenants. Read-only.",
               "type": "string",
               "readOnly": true
             },

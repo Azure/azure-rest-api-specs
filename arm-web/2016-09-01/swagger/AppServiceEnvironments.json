@@ -2513,6 +2513,14 @@
       "description": "Body of the error response returned from the API.",
       "type": "object",
       "properties": {
+        "code": {
+          "description": "Basic error code.",
+          "type": "string"
+        },
+        "message": {
+          "description": "Any details of the error.",
+          "type": "string"
+        },
         "extendedCode": {
           "description": "Type of error.",
           "type": "string"
@@ -2534,14 +2542,6 @@
           "items": {
             "$ref": "#/definitions/ErrorEntity"
           }
-        },
-        "code": {
-          "description": "Basic error code.",
-          "type": "string"
-        },
-        "message": {
-          "description": "Any details of the error.",
-          "type": "string"
         }
       }
     },
@@ -3326,11 +3326,6 @@
               },
               "readOnly": true
             },
-            "premiumAppDeployed": {
-              "description": "Indicates whether app is deployed as a premium app.",
-              "type": "boolean",
-              "readOnly": true
-            },
             "scmSiteAlsoStopped": {
               "description": "<code>true</code> to stop SCM (KUDU) site when the app is stopped; otherwise, <code>false</code>. The default is <code>false</code>.",
               "default": false,
@@ -3349,23 +3344,6 @@
                 "read"
               ]
             },
-            "microService": {
-              "description": "Micro services like apps, logic apps.",
-              "default": "WebSites",
-              "type": "string",
-              "x-ms-mutability": [
-                "create",
-                "read"
-              ]
-            },
-            "gatewaySiteName": {
-              "description": "Name of gateway app associated with the app.",
-              "type": "string",
-              "x-ms-mutability": [
-                "create",
-                "read"
-              ]
-            },
             "clientAffinityEnabled": {
               "description": "<code>true</code> to enable client affinity; <code>false</code> to stop sending session affinity cookies, which route client requests in the same session to the same instance. Default is <code>true</code>.",
               "type": "boolean"
@@ -3379,7 +3357,12 @@
               "type": "boolean"
             },
             "outboundIpAddresses": {
-              "description": "List of IP addresses that the app uses for outbound connections (e.g. database access). Read-only.",
+              "description": "List of IP addresses that the app uses for outbound connections (e.g. database access). Includes VIPs from tenants that site can be hosted with current settings. Read-only.",
+              "type": "string",
+              "readOnly": true
+            },
+            "possibleOutboundIpAddresses": {
+              "description": "List of IP addresses that the app uses for outbound connections (e.g. database access). Includes VIPs from all tenants. Read-only.",
               "type": "string",
               "readOnly": true
             },
@@ -3911,10 +3894,13 @@
         "workerSize": {
           "description": "Size of the machines.",
           "enum": [
-            "Default",
             "Small",
+            "Default",
             "Medium",
-            "Large"
+            "Large",
+            "D1",
+            "D2",
+            "D3"
           ],
           "type": "string",
           "x-ms-enum": {
