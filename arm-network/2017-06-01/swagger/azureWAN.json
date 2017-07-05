@@ -1814,7 +1814,7 @@
                     "readOnly": true,
                     "description": "Gets a unique read-only string that changes whenever the resource is updated."
                 },
-                "disableVPNEncryption": {
+                "disableVpnEncryption": {
                     "type": "boolean",
                     "description": "Vpn encryption to be disabled or not."
                 },
@@ -1860,6 +1860,7 @@
         "VpnSite": {
             "properties": {
                 "provisioningState": {
+                    "description": "The current provisisoning state.",
                     "$ref": "#/definitions/provisioningState"
                 },
                 "etag": {
@@ -1867,11 +1868,12 @@
                     "readOnly": true,
                     "description": "Gets a unique read-only string that changes whenever the resource is updated."
                 },
-                "WAN": {
+                "wan": {
                     "type": "string",
                     "description": "The WAN to which the vpnSite belongs"
                 },
                 "deviceProperties": {
+                    "description": "The device properties",
                     "$ref": "#/definitions/DeviceProperties"
                 },
                 "ipAddress": {
@@ -1886,6 +1888,7 @@
                     }
                 },
                 "bgpProperties": {
+                    "description": "The set of bgp properties.",
                     "$ref": "#/definitions/BGPProperties"
                 }
             },
@@ -1913,6 +1916,7 @@
             }
         },
         "VpnSitesConfigurationDownloadResult": {
+            "description": "Result of the request to download configuration for vpn-sites.",
             "properties": {
                 "wan": {
                     "type": "string",
@@ -1928,6 +1932,7 @@
         "Hub": {
             "properties": {
                 "provisioningState": {
+                    "description": "The current provisisoning state.",
                     "$ref": "#/definitions/provisioningState"
                 },
                 "etag": {
@@ -1935,7 +1940,7 @@
                     "readOnly": true,
                     "description": "Gets a unique read-only string that changes whenever the resource is updated."
                 },
-                "WAN": {
+                "wan": {
                     "type": "string",
                     "description": "The WAN to which the Hub belongs"
                 },
@@ -1953,14 +1958,14 @@
                         "$ref": "#/definitions/ScalableExpressRouteGateway"
                     }
                 },
-                "HubVnetConnections": {
+                "hubVnetConnections": {
                     "type": "array",
                     "description": "list of all vnet connections with this Hub.",
                     "items": {
                         "$ref": "#/definitions/HubVnetConnection"
                     }
                 },
-                "AddressPrefixes": {
+                "addressPrefixes": {
                     "type": "array",
                     "description": "list of address-prefixes for this Hub.",
                     "items": {
@@ -2037,6 +2042,7 @@
                     "description": "routing weight for vpn connection."
                 },
                 "connectionStatus": {
+                    "description": "The connection status.",
                     "$ref": "#/definitions/VpnConnectionStatus"
                 },
                 "tunnelConnectionStatus": {
@@ -2085,6 +2091,7 @@
             "description": "Details of Express Route Gateway.",
             "properties": {
                 "provisioningState": {
+                    "description": "The current provisisoning state.",
                     "$ref": "#/definitions/provisioningState"
                 },
                 "etag": {
@@ -2110,6 +2117,7 @@
             "description": "Details of ExpressRoute Connection.",
             "properties": {
                 "provisioningState": {
+                    "description": "The current provisisoning state.",
                     "$ref": "#/definitions/provisioningState"
                 },
                 "etag": {
@@ -2129,6 +2137,7 @@
                 "connectionHealth": {
                     "properties": {
                         "connectionStatus": {
+                            "description": "The connection status.",
                             "$ref": "#/definitions/ExpressRouteConnectionStatus"
                         },
                         "ingressBytesTransferred": {
@@ -2172,6 +2181,7 @@
             "description": "Details of Hub-VNet Connection.",
             "properties": {
                 "provisioningState": {
+                    "description": "The current provisisoning state.",
                     "$ref": "#/definitions/provisioningState"
                 },
                 "etag": {
@@ -2184,6 +2194,7 @@
                     "description": "Id of the connected virtual network."
                 },
                 "connectionStatus": {
+                    "description": "The connection status.",
                     "$ref": "#/definitions/HubVnetConnectionStatus"
                 },
                 "ingressBytesTransferred": {
@@ -2240,7 +2251,7 @@
         },
         "BGPProperties": {
             "properties": {
-                "peeringIPAddress": {
+                "peeringIpAddress": {
                     "type": "string",
                     "description": "IP address for bgp peering."
                 },
@@ -2311,7 +2322,7 @@
                 "modelAsString": true
             }
         },
-        "disableVPNEncryption": {
+        "disableVpnEncryption": {
             "type": "boolean",
             "description": "Vpn encryption to be disabled or not."
         },
