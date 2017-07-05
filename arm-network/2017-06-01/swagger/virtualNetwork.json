@@ -397,7 +397,11 @@
             }
           }
         },
-        "x-ms-long-running-operation": true
+        "x-ms-long-running-operation": true,
+        "x-ms-examples": {
+          "Create subnet": { "$ref": "../examples/SubnetCreate.json" },
+          "Create subnet with private access services": { "$ref": "../examples/SubnetPrivateAccessServiceCreate.json" }
+        }
       }
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/virtualNetworks/{virtualNetworkName}/subnets": {
@@ -780,6 +784,13 @@
           "$ref": "./routeTable.json#/definitions/RouteTable",
           "description": "The reference of the RouteTable resource."
         },
+        "privateAccessServices": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/PrivateAccessServicePropertiesFormat"
+          },
+          "description": "An array of private access services values."
+        },
         "ipConfigurations": {
           "readOnly": true,
           "type": "array",
@@ -800,6 +811,26 @@
           "description": "The provisioning state of the resource."
         }
       }
+    },
+    "PrivateAccessServicePropertiesFormat": {
+      "properties": {
+        "service": {
+          "type": "string",
+          "description": "The type of the private access."
+        },
+        "locations": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "description": "A list of locations."
+        },
+        "provisioningState": {
+          "type": "string",
+          "description": "The provisioning state of the resource."
+        }
+      },
+      "description": "The private access service properties."
     },
     "VirtualNetworkPeeringPropertiesFormat": {
       "properties": {
