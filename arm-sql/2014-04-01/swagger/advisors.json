@@ -76,11 +76,7 @@
             "$ref": "#/parameters/DatabaseNameParameter"
           },
           {
-            "name": "advisorName",
-            "in": "path",
-            "description": "The name of the Database Advisor.",
-            "required": true,
-            "type": "string"
+            "$ref": "#/parameters/AdvisorNameParameter"
           },
           {
             "$ref": "#/parameters/SubscriptionIdParameter"
@@ -120,11 +116,7 @@
             "$ref": "#/parameters/DatabaseNameParameter"
           },
           {
-            "name": "advisorName",
-            "in": "path",
-            "description": "The name of the database advisor.",
-            "required": true,
-            "type": "string"
+            "$ref": "#/parameters/AdvisorNameParameter"
           },
           {
             "name": "parameters",
@@ -315,6 +307,14 @@
       "name": "databaseName",
       "in": "path",
       "description": "The name of the database.",
+      "required": true,
+      "type": "string",
+      "x-ms-parameter-location": "method"
+    },
+    "AdvisorNameParameter": {
+      "name": "advisorName",
+      "in": "path",
+      "description": "The name of the Database Advisor.",
       "required": true,
       "type": "string",
       "x-ms-parameter-location": "method"
