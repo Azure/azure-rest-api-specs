@@ -3,7 +3,7 @@
   "info": {
     "title": "CustomerInsightsManagementClient",
     "description": "The Azure Customer Insights management API provides a RESTful set of web services that interact with Azure Customer Insights service to manage your resources. The API has entities that capture the relationship between an end user and the Azure Customer Insights service.",
-    "version": "2017-01-01",
+    "version": "2017-04-26",
     "x-ms-code-generation-settings": {
       "name": "CustomerInsightsManagementClient"
     }
@@ -4358,8 +4358,10 @@
     },
     "LinkDefinition": {
       "required": [
-        "sourceInteractionType",
-        "targetProfileType",
+        "sourceEntityType",
+        "targetEntityType",
+        "sourceEntityTypeName",
+        "targetEntityTypeName",
         "participantPropertyReferences"
       ],
       "properties": {
@@ -4373,13 +4375,41 @@
           "readOnly": true,
           "description": "The link name."
         },
-        "sourceInteractionType": {
+        "sourceEntityType": {
           "type": "string",
-          "description": "Name of the source Interaction Type."
+          "enum": [
+            "None",
+            "Profile",
+            "Interaction",
+            "Relationship"
+          ],
+          "x-ms-enum": {
+            "name": "EntityType",
+            "modelAsString": false
+          },
+          "description": "Type of source entity."
         },
-        "targetProfileType": {
+        "targetEntityType": {
           "type": "string",
-          "description": "Name of the target Profile Type."
+          "enum": [
+            "None",
+            "Profile",
+            "Interaction",
+            "Relationship"
+          ],
+          "x-ms-enum": {
+            "name": "EntityType",
+            "modelAsString": false
+          },
+          "description": "Type of target entity."
+        },
+        "sourceEntityTypeName": {
+          "type": "string",
+          "description": "Name of the source Entity Type."
+        },
+        "targetEntityTypeName": {
+          "type": "string",
+          "description": "Name of the target Entity Type."
         },
         "displayName": {
           "type": "object",
@@ -4618,7 +4648,7 @@
         "profilePropertyReferences": {
           "type": "array",
           "items": {
-            "$ref": "#/definitions/ParticipantPropertyReference"
+            "$ref": "#/definitions/ParticipantProfilePropertyReference"
           },
           "description": "The property references for the Profile of the Relationship."
         },
@@ -4630,7 +4660,7 @@
         "relatedProfilePropertyReferences": {
           "type": "array",
           "items": {
-            "$ref": "#/definitions/ParticipantPropertyReference"
+            "$ref": "#/definitions/ParticipantProfilePropertyReference"
           },
           "description": "The property references for the Related Profile of the Relationship."
         },
@@ -4653,21 +4683,17 @@
     },
     "TypePropertiesMapping": {
       "required": [
-        "interactionTypePropertyName",
-        "profileTypePropertyName"
+        "sourcePropertyName",
+        "targetPropertyName"
       ],
       "properties": {
-        "interactionTypePropertyName": {
+        "sourcePropertyName": {
           "type": "string",
-          "description": " Property name on the source Interaction Type."
+          "description": " Property name on the source Entity Type."
         },
-        "profileTypePropertyName": {
+        "targetPropertyName": {
           "type": "string",
-          "description": "Property name on the target Profile Type."
-        },
-        "isProfileTypeId": {
-          "type": "boolean",
-          "description": "Flag to indicate whether the Profile Type property is an id on the Profile Type."
+          "description": "Property name on the target Entity Type."
         },
         "linkType": {
           "type": "string",
@@ -4729,20 +4755,37 @@
     },
     "ParticipantPropertyReference": {
       "required": [
+        "sourcePropertyName",
+        "targetPropertyName"
+      ],
+      "properties": {
+        "sourcePropertyName": {
+          "type": "string",
+          "description": "The source property that maps to the target property."
+        },
+        "targetPropertyName": {
+          "type": "string",
+          "description": "The target property that maps to the source property."
+        }
+      },
+      "description": "The participant property reference."
+    },
+    "ParticipantProfilePropertyReference": {
+      "required": [
         "interactionPropertyName",
         "profilePropertyName"
       ],
       "properties": {
         "interactionPropertyName": {
           "type": "string",
-          "description": "The interaction property that maps to the profile property."
+          "description": "The source interaction property that maps to the target profile property."
         },
         "profilePropertyName": {
           "type": "string",
-          "description": "The profile property that maps to the interaction property."
+          "description": "The target profile property that maps to the source interaction property."
         }
       },
-      "description": "The participant property reference."
+      "description": "The participant profile property reference."
     },
     "InteractionTypeDefinition": {
       "description": "The Interaction Type Definition",
@@ -5575,7 +5618,7 @@
         "profilePropertyReferences": {
           "type": "array",
           "items": {
-            "$ref": "#/definitions/ParticipantPropertyReference"
+            "$ref": "#/definitions/ParticipantProfilePropertyReference"
           },
           "readOnly": true,
           "description": "The property references for the profile type."
@@ -5588,7 +5631,7 @@
         "relatedProfilePropertyReferences": {
           "type": "array",
           "items": {
-            "$ref": "#/definitions/ParticipantPropertyReference"
+            "$ref": "#/definitions/ParticipantProfilePropertyReference"
           },
           "readOnly": true,
           "description": "The property references for the related profile type."

@@ -2,9 +2,29 @@
 	"parameters": {
 		"hubName": "sdkTestHub",
 		"resourceGroupName": "TestHubRG",
-		"interactionName": "TestInteractionType6358",
+		"interactionName": "TestProfileType396",
 		"api-version": "2016-01-01",
-		"subscriptionId": "subid"
+		"subscriptionId": "subid",
+		"parameters": {
+			"properties": {
+				"idPropertyNames": ["TestInteractionType6358"],
+				"primaryParticipantProfilePropertyName": "profile1",
+				"apiEntitySetName": "TestInteractionType6358",
+				"fields": [{
+					"fieldName": "TestInteractionType6358",
+					"fieldType": "Edm.String",
+					"isArray": false,
+					"isRequired": true
+				},
+				{
+					"fieldName": "profile1",
+					"fieldType": "Edm.String"
+				}],
+				"smallImage": "\\\\Images\\\\smallImage",
+				"mediumImage": "\\\\Images\\\\MediumImage",
+				"largeImage": "\\\\Images\\\\LargeImage"
+			}
+		}
 	},
 	"responses": {
 		"200": {
@@ -26,8 +46,7 @@
 						"isLocalizedString": false,
 						"isName": false,
 						"isRequired": true,
-						"propertyId": "id1",
-						"dataSourcePrecedenceRules": []
+						"propertyId": "id1"
 					},
 					{
 						"fieldName": "profile1",
@@ -39,19 +58,7 @@
 						"isLocalizedString": false,
 						"isName": false,
 						"isRequired": true,
-						"propertyId": "id1",
-						"dataSourcePrecedenceRules": [
-							{
-								"dataSource": {
-									"dataSourceReferenceId": "70",
-									"dataSourceType": "Connector",
-									"name": "crm2",
-									"status": "Active",
-									"id": 1
-								},
-								"precedence": 50
-							}
-						]
+						"propertyId": "id1"
 					}],
 					"instancesCount": 0,
 					"provisioningState": "Provisioning",
@@ -59,30 +66,13 @@
 					"typeName": "TestInteractionType6358",
 					"largeImage": "\\\\Images\\\\LargeImage",
 					"mediumImage": "\\\\Images\\\\MediumImage",
-					"smallImage": "\\\\Images\\\\smallImage",
-					"defaultDataSource": {
-						"dataSourceReferenceId": "70",
-						"dataSourceType": "Connector",
-						"name": "crm2",
-						"status": "Active",
-						"id": 1
-					},
-					"dataSourcePrecedenceRules": [
-						{
-							"dataSource": {
-								"dataSourceReferenceId": "70",
-								"dataSourceType": "Connector",
-								"name": "crm2",
-								"status": "Active",
-								"id": 1
-							},
-							"precedence": 50
-						}
-					],
-					"isActivity": true
+					"smallImage": "\\\\Images\\\\smallImage"
 				},
 				"type": "Microsoft.CustomerInsights/hubs/interactions"
 			}
+		},
+		"202": {
+
 		}
 	}
 }
