@@ -29,7 +29,18 @@ These are the global settings for the CustomerInsights API.
 title: Customer Insights
 description: Customer Insights Client
 openapi-type: arm
-tag: package-2017-01
+tag: package-2017-04
+
+```
+
+
+# Tag: package-2017-04
+
+These settings apply only when `--tag=package-2017-04` is specified on the command line.
+
+``` yaml $(tag) == 'package-2017-04'
+input-file:
+- Microsoft.CustomerInsights/2017-04-26/customer-insights.json
 
 ```
 

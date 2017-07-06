@@ -3,7 +3,7 @@
   "info": {
     "title": "NetworkManagementClient",
     "description": "The Microsoft Azure Network management API provides a RESTful set of web services that interact with Microsoft Azure Networks service to manage your network resources. The API has entities that capture the relationship between an end user and the Microsoft Azure Networks service.",
-    "version": "2017-03-01"
+    "version": "2017-06-01"
   },
   "host": "management.azure.com",
   "schemes": [
@@ -397,7 +397,11 @@
             }
           }
         },
-        "x-ms-long-running-operation": true
+        "x-ms-long-running-operation": true,
+        "x-ms-examples": {
+          "Create subnet": { "$ref": "./examples/SubnetCreate.json" },
+          "Create subnet with private access services": { "$ref": "./examples/SubnetPrivateAccessServiceCreate.json" }
+        }
       }
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/virtualNetworks/{virtualNetworkName}/subnets": {
@@ -780,6 +784,13 @@
           "$ref": "./routeTable.json#/definitions/RouteTable",
           "description": "The reference of the RouteTable resource."
         },
+        "privateAccessServices": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/PrivateAccessServicePropertiesFormat"
+          },
+          "description": "An array of private access services values."
+        },
         "ipConfigurations": {
           "readOnly": true,
           "type": "array",
@@ -800,6 +811,26 @@
           "description": "The provisioning state of the resource."
         }
       }
+    },
+    "PrivateAccessServicePropertiesFormat": {
+      "properties": {
+        "service": {
+          "type": "string",
+          "description": "The type of the private access."
+        },
+        "locations": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "description": "A list of locations."
+        },
+        "provisioningState": {
+          "type": "string",
+          "description": "The provisioning state of the resource."
+        }
+      },
+      "description": "The private access service properties."
     },
     "VirtualNetworkPeeringPropertiesFormat": {
       "properties": {

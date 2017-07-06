@@ -48,6 +48,7 @@ input-file:
 - Microsoft.Network/2017-06-01/networkInterface.json
 - Microsoft.Network/2017-06-01/networkSecurityGroup.json
 - Microsoft.Network/2017-06-01/networkWatcher.json
+- Microsoft.Compute/2017-06-01/privateAccessServices.json
 - Microsoft.Network/2017-06-01/publicIpAddress.json
 - Microsoft.Network/2017-06-01/routeFilter.json
 - Microsoft.Network/2017-06-01/routeTable.json
@@ -56,6 +57,7 @@ input-file:
 - Microsoft.Network/2017-06-01/virtualNetwork.json
 - Microsoft.Network/2017-06-01/virtualNetworkGateway.json
 - Microsoft.Compute/2017-06-01/vmssNetworkInterface.json
+- Microsoft.Compute/2017-06-01/vmssPublicIpAddress.json
 ```
 
 

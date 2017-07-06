@@ -99,6 +99,18 @@
             "type": "string"
           },
           {
+            "name": "securityAlertPolicyName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "enum": ["default"],
+            "description": "The name of the security alert policy.",
+            "x-ms-enum": {
+              "modelAsString": true,
+              "name": "SecurityAlertPolicyName"
+            }
+          },
+          {
             "name": "parameters",
             "in": "body",
             "description": "The database Threat Detection policy.",
@@ -213,7 +225,8 @@
         },
         "properties": {
           "$ref": "#/definitions/DatabaseSecurityAlertPolicyProperties",
-          "x-ms-client-flatten": true
+          "x-ms-client-flatten": true,
+          "description": "Properties of the security alert policy."
         }
       },
       "allOf": [

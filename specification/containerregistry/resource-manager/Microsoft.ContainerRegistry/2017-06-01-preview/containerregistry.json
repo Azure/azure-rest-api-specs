@@ -399,6 +399,42 @@
         }
       }
     },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ContainerRegistry/registries/{registryName}/listUsages": {
+      "get": {
+        "tags": [
+          "Registries"
+        ],
+        "description": "Gets the quota usages for the specified container registry.",
+        "operationId": "Registries_ListUsages",
+        "parameters": [
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupParameter"
+          },
+          {
+            "$ref": "#/parameters/RegistryNameParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request was successful; the registry usages retrieved and returned successfully.",
+            "schema": {
+              "$ref": "#/definitions/RegistryUsageListResult"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "RegistryListUsages": {
+            "$ref": "./examples/RegistryListUsages.json"
+          }
+        }
+      }
+    },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ContainerRegistry/registries/{registryName}/replications/{replicationName}": {
       "get": {
         "tags": [
@@ -1159,6 +1195,10 @@
             "type": "string"
           }
         },
+        "sku": {
+          "$ref": "#/definitions/Sku",
+          "description": "The SKU of the container registry."
+        },
         "properties": {
           "$ref": "#/definitions/RegistryPropertiesUpdateParameters",
           "description": "The properties that the container registry will be updated with.",
@@ -1248,6 +1288,49 @@
           "x-ms-enum": {
             "name": "PasswordName",
             "modelAsString": false
+          }
+        }
+      }
+    },
+    "RegistryUsageListResult": {
+      "description": "The result of a request to get container registry quota usages.",
+      "properties": {
+        "value": {
+          "description": "The list of container registry quota usages.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/RegistryUsage"
+          }
+        }
+      }
+    },
+    "RegistryUsage": {
+      "description": "The quota usage for a container registry.",
+      "properties": {
+        "name": {
+          "description": "The name of the usage.",
+          "type": "string"
+        },
+        "limit": {
+          "format": "int64",
+          "description": "The limit of the usage.",
+          "type": "integer"
+        },
+        "currentValue": {
+          "format": "int64",
+          "description": "The current value of the usage.",
+          "type": "integer"
+        },
+        "unit": {
+          "description": "The unit of measurement.",
+          "enum": [
+            "Count",
+            "Bytes"
+          ],
+          "type": "string",
+          "x-ms-enum": {
+            "name": "RegistryUsageUnit",
+            "modelAsString": true
           }
         }
       }
