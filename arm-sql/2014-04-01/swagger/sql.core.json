@@ -139,7 +139,7 @@
           "Databases"
         ],
         "operationId": "Databases_CreateOrUpdate",
-        "description": "Creates a new database or updates an existing database. Location is a required property in the request body, and it must be the same as the location of the SQL server.",
+        "description": "Creates a new database or updates an existing database.",
         "x-ms-examples": {
           "Create a database min": { "$ref": "../examples/DatabaseCreateMin.json" },
           "Create a database max": { "$ref": "../examples/DatabaseCreateMax.json" },
@@ -194,6 +194,59 @@
           },
           "201": {
             "description": "Created",
+            "schema": {
+              "$ref": "#/definitions/Database"
+            }
+          },
+          "202": {
+            "description": "Accepted"
+          }
+        },
+        "x-ms-long-running-operation": true
+      },
+      "patch": {
+        "tags": [
+          "Databases"
+        ],
+        "operationId": "Databases_Update",
+        "description": "Updates an existing database.",
+        "x-ms-examples": {
+          "Update a database max": { "$ref": "../examples/DatabaseUpdateMax.json" },
+          "Update a database min": { "$ref": "../examples/DatabaseUpdateMin.json" }
+        },
+        "parameters": [
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupParameter"
+          },
+          {
+            "$ref": "#/parameters/ServerNameParameter"
+          },
+          {
+            "name": "databaseName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the database to be updated."
+          },
+          {
+            "name": "parameters",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/Database"
+            },
+            "description": "The required parameters for creating or updating a database."
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
             "schema": {
               "$ref": "#/definitions/Database"
             }
@@ -386,6 +439,59 @@
           },
           "201": {
             "description": "Created",
+            "schema": {
+              "$ref": "#/definitions/ElasticPool"
+            }
+          },
+          "202": {
+            "description": "Accepted"
+          }
+        },
+        "x-ms-long-running-operation": true
+      },
+      "patch": {
+        "tags": [
+          "ElasticPools"
+        ],
+        "operationId": "ElasticPools_Update",
+        "description": "Updates an existing elastic pool.",
+        "x-ms-examples":{
+          "Update elastic pool max": { "$ref": "../examples/ElasticPoolUpdateMax.json" },
+          "Update elastic pool min": { "$ref": "../examples/ElasticPoolUpdateMin.json" }
+        },
+        "parameters": [
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupParameter"
+          },
+          {
+            "$ref": "#/parameters/ServerNameParameter"
+          },
+          {
+            "name": "elasticPoolName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the elastic pool to be updated."
+          },
+          {
+            "name": "parameters",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/ElasticPool"
+            },
+            "description": "The required parameters for updating an elastic pool."
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
             "schema": {
               "$ref": "#/definitions/ElasticPool"
             }

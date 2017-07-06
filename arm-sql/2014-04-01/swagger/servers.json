@@ -96,6 +96,48 @@
           }
         }
       },
+      "patch": {
+        "tags": [
+          "Servers"
+        ],
+        "operationId": "Servers_Update",
+        "description": "Updates an existing server.",
+        "x-ms-examples": {
+          "Create server min": { "$ref": "../examples/ServerCreateMin.json" },
+          "Create server max": { "$ref": "../examples/ServerCreateMax.json" }
+        },
+        "parameters": [
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupParameter"
+          },
+          {
+            "$ref": "#/parameters/ServerNameParameter"
+          },
+          {
+            "name": "parameters",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/Server"
+            },
+            "description": "The required parameters for updating a server."
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/Server"
+            }
+          }
+        }
+      },
       "delete": {
         "tags": [
           "Servers"
