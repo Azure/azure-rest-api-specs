@@ -3433,6 +3433,14 @@
         "isAvailableInGraph": {
           "type": "boolean",
           "description": "Whether property is available in graph or not."
+        },
+        "dataSourcePrecedenceRules": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/DataSourcePrecedence"
+          },
+          "readOnly": true,
+          "description": "This is specific to interactions modeled as activities. Data sources are used to determine where data is stored and also in precedence rules."
         }
       },
       "description": "Property definition."
@@ -4226,9 +4234,6 @@
           "description": "Resource tags."
         }
       },
-      "required": [
-        "location"
-      ],
       "x-ms-azure-resource": true,
       "description": "Common properties of Azure resource."
     },
@@ -4765,17 +4770,17 @@
           "type": "string",
           "description": "The primary participant property name for an interaction ,This is used to logically represent the agent of the interaction, Specify the participant name here from ParticipantName."
         },
-        "dataSources": {
+        "dataSourcePrecedenceRules": {
           "type": "array",
           "items": {
-            "$ref": "#/definitions/DataSource"
+            "$ref": "#/definitions/DataSourcePrecedence"
           },
           "readOnly": true,
           "description": "This is specific to interactions modeled as activities. Data sources are used to determine where data is stored and also in precedence rules."
         },
-        "defaultDataSourceId": {
-          "type": "string",
-          "readOnly": true,
+        "defaultDataSource": {
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/DataSource",
           "description": "Default data source is specifically used in cases where data source is not specified in an instance."
         },
         "isActivity": {
@@ -4786,10 +4791,15 @@
     },
     "DataSource": {
       "properties": {
+        "name": {
+          "type": "string",
+          "readOnly": true,
+          "description": "The data source name"
+        },
         "dataSourceType": {
           "type": "string",
           "enum": [
-            "ConnectorMapping",
+            "Connector",
             "LinkInteraction",
             "SystemDefault"
           ],
@@ -4800,23 +4810,45 @@
           "readOnly": true,
           "description": "The data source type."
         },
-        "id": {
+        "status": {
           "type": "string",
+          "enum": [
+            "None",
+            "Active",
+            "Deleted"
+          ],
+          "x-ms-enum": {
+            "name": "Status",
+            "modelAsString": true
+          },
+          "readOnly": true,
+          "description": "The data source status."
+        },
+        "id": {
+          "type": "integer",
           "readOnly": true,
           "description": "The data source ID."
         },
-        "linkId": {
+        "dataSourceReferenceId": {
           "type": "string",
           "readOnly": true,
-          "description": "The Link ID if the data source type is LinkInteraction."
-        },
-        "connectorMappingId": {
-          "type": "string",
-          "readOnly": true,
-          "description": "The Connector Mapping ID if the data source type is ConnectorMapping."
+          "description": "The data source reference id."
         }
       },
       "description": "Data Source is a way for us to know the source of instances. A single type can have data coming in from multiple places. In activities we use this to determine precedence rules."
+    },
+    "DataSourcePrecedence": {
+      "properties": {
+        "dataSource": {
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/DataSource"
+        },
+        "precedence": {
+          "type": "integer",
+          "description": "the precedence value."
+        }
+      },
+      "description": "The data source precedence is a way to know the precedence of each data source."
     },
     "StrongId": {
       "required": [

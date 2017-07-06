@@ -786,6 +786,47 @@
         "x-ms-examples": {
             "Get an autoscale setting": { "$ref": "../examples/getAutoscaleSetting.json" }
         }
+      },
+      "patch": {
+          "description": "Updates an existing AutoscaleSettingsResource. To update other fields use the CreateOrUpdate method.",
+          "operationId": "AutoscaleSettings_Update",
+          "parameters": [
+              {
+                  "$ref": "#/parameters/SubscriptionIdParameter"
+              },
+              {
+                "$ref": "#/parameters/ResourceGroupNameParameter"
+              },
+              {
+                "$ref": "#/parameters/AutoscaleSettingNameParameter"
+              },
+              {
+                  "$ref": "#/parameters/ApiVersionParameter"
+              },
+              {
+                  "name": "autoscaleSettingResource",
+                  "in": "body",
+                  "required": true,
+                  "schema": {
+                      "$ref": "#/definitions/AutoscaleSettingResourcePatch"
+                  },
+                  "description": "Parameters supplied to the operation."
+              }
+          ],
+          "responses": {
+              "default": {
+                  "description": "Error response describing why the operation failed.",
+                  "schema": {
+                      "$ref": "#/definitions/ErrorResponse"
+                  }
+              },
+              "200": {
+                  "description": "An existing autoscale setting resource was successfully updated.",
+                  "schema": {
+                      "$ref": "#/definitions/AutoscaleSettingResource"
+                  }
+              }
+          }
       }
     }
   },
@@ -1217,6 +1258,21 @@
         }
       },
       "description": "The autoscale setting resource."
+    },
+    "AutoscaleSettingResourcePatch": {
+      "description": "The autoscale setting object for patch operations.",
+      "properties": {
+        "tags": {
+            "additionalProperties": {
+                "type": "string"
+            },
+            "description": "Resource tags"
+        },
+        "properties": {
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/AutoscaleSetting"
+        }
+      }
     },
     "AutoscaleSettingResourceCollection": {
       "properties": {

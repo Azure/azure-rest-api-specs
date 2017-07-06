@@ -1008,6 +1008,39 @@
       },
       "description": "Specifies the peering configuration."
     },
+    "Ipv6ExpressRouteCircuitPeeringConfig": {
+      "properties": {
+        "primaryPeerAddressPrefix": {
+          "type": "string",
+          "description": "The primary address prefix."
+        },
+        "secondaryPeerAddressPrefix": {
+          "type": "string",
+          "description": "The secondary address prefix."
+        },
+        "microsoftPeeringConfig": {
+          "$ref": "#/definitions/ExpressRouteCircuitPeeringConfig",
+          "description": "The Microsoft peering configuration."
+        },
+        "routeFilter": {
+          "$ref": "./routeFilter.json#/definitions/RouteFilter",
+          "description": "The reference of the RouteFilter resource."
+        },
+        "state": {
+          "type": "string",
+          "description": "The state of peering. Possible values are: 'Disabled' and 'Enabled'",
+          "enum": [
+            "Disabled",
+            "Enabled"
+          ],
+          "x-ms-enum": {
+            "name": "ExpressRouteCircuitPeeringState",
+            "modelAsString": true
+          }
+        }
+      },
+      "description": "Contains IPv6 peering config."
+    },
     "ExpressRouteCircuitStats": {
       "properties": {
         "primarybytesIn": {
@@ -1118,6 +1151,10 @@
         "routeFilter": {
           "$ref": "./routeFilter.json#/definitions/RouteFilter",
           "description": "The reference of the RouteFilter resource."
+        },
+        "ipv6PeeringConfig": {
+          "$ref": "#/definitions/Ipv6ExpressRouteCircuitPeeringConfig",
+          "description": "The IPv6 peering configuration."
         }
       }
     },
