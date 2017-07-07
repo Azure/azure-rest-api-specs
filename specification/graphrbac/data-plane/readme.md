@@ -26,8 +26,8 @@ These are the global settings for the GraphRbac API.
 
 ``` yaml
 # common 
-title: Graph Rbac
-description: Graph Rbac Client
+title: GraphRbacManagementClient
+description: Azure Active Directory Graph RBAC management client.
 openapi-type: data-plane
 tag: 1.6
 

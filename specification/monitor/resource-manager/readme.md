@@ -26,7 +26,7 @@ These are the global settings for the MonitorClient API.
 
 ``` yaml
 # common 
-title: Monitor Management Client
+title: MonitorManagementClient
 description: Monitor Management Client
 openapi-type: arm
 tag: package-2017-03

@@ -32,8 +32,8 @@ These are the global settings for the Web API.
 
 ``` yaml
 # common 
-title: Web
-description: Web App Client
+title: WebSiteManagementClient
+description: WebSite Management Client
 openapi-type: arm
 tag: package-2016-09
 
