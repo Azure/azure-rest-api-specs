@@ -45,11 +45,7 @@
         "description": "Creates or updates a virtual network gateway in the specified resource group.",
         "parameters": [
           {
-            "name": "resourceGroupName",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "description": "The name of the resource group."
+            "$ref": "#/parameters/ResourceGroupNameParameter"
           },
           {
             "name": "virtualNetworkGatewayName",
@@ -98,11 +94,7 @@
         "description": "Gets the specified virtual network gateway by resource group.",
         "parameters": [
           {
-            "name": "resourceGroupName",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "description": "The name of the resource group."
+            "$ref": "#/parameters/ResourceGroupNameParameter"
           },
           {
             "name": "virtualNetworkGatewayName",
@@ -135,11 +127,7 @@
         "description": "Deletes the specified virtual network gateway.",
         "parameters": [
           {
-            "name": "resourceGroupName",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "description": "The name of the resource group."
+            "$ref": "#/parameters/ResourceGroupNameParameter"
           },
           {
             "name": "virtualNetworkGatewayName",
@@ -178,11 +166,7 @@
         "description": "Gets all virtual network gateways by resource group.",
         "parameters": [
           {
-            "name": "resourceGroupName",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "description": "The name of the resource group."
+            "$ref": "#/parameters/ResourceGroupNameParameter"
           },
           {
             "$ref": "#/parameters/ApiVersionParameter"
@@ -213,11 +197,7 @@
         "description": "Resets the primary of the virtual network gateway in the specified resource group.",
         "parameters": [
           {
-            "name": "resourceGroupName",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "description": "The name of the resource group."
+            "$ref": "#/parameters/ResourceGroupNameParameter"
           },
           {
             "name": "virtualNetworkGatewayName",
@@ -263,11 +243,7 @@
         "description": "Generates VPN client package for P2S client of the virtual network gateway in the specified resource group.",
         "parameters": [
           {
-            "name": "resourceGroupName",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "description": "The name of the resource group."
+            "$ref": "#/parameters/ResourceGroupNameParameter"
           },
           {
             "name": "virtualNetworkGatewayName",
@@ -361,11 +337,7 @@
         "description": "The GetBgpPeerStatus operation retrieves the status of all BGP peers.",
         "parameters": [
           {
-            "name": "resourceGroupName",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "description": "The name of the resource group."
+            "$ref": "#/parameters/ResourceGroupNameParameter"
           },
           {
             "name": "virtualNetworkGatewayName",
@@ -411,11 +383,7 @@
         "description": "This operation retrieves a list of routes the virtual network gateway has learned, including routes learned from BGP peers.",
         "parameters": [
           {
-            "name": "resourceGroupName",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "description": "The name of the resource group."
+            "$ref": "#/parameters/ResourceGroupNameParameter"
           },
           {
             "name": "virtualNetworkGatewayName",
@@ -454,11 +422,7 @@
         "description": "This operation retrieves a list of routes the virtual network gateway is advertising to the specified peer.",
         "parameters": [
           {
-            "name": "resourceGroupName",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "description": "The name of the resource group."
+            "$ref": "#/parameters/ResourceGroupNameParameter"
           },
           {
             "name": "virtualNetworkGatewayName",
@@ -504,11 +468,7 @@
         "description": "Creates or updates a virtual network gateway connection in the specified resource group.",
         "parameters": [
           {
-            "name": "resourceGroupName",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "description": "The name of the resource group."
+            "$ref": "#/parameters/ResourceGroupNameParameter"
           },
           {
             "name": "virtualNetworkGatewayConnectionName",
@@ -557,11 +517,7 @@
         "description": "Gets the specified virtual network gateway connection by resource group.",
         "parameters": [
           {
-            "name": "resourceGroupName",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "description": "The name of the resource group."
+            "$ref": "#/parameters/ResourceGroupNameParameter"
           },
           {
             "name": "virtualNetworkGatewayConnectionName",
@@ -594,11 +550,7 @@
         "description": "Deletes the specified virtual network Gateway connection.",
         "parameters": [
           {
-            "name": "resourceGroupName",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "description": "The name of the resource group."
+            "$ref": "#/parameters/ResourceGroupNameParameter"
           },
           {
             "name": "virtualNetworkGatewayConnectionName",
@@ -637,11 +589,7 @@
         "description": "The Put VirtualNetworkGatewayConnectionSharedKey operation sets the virtual network gateway connection shared key for passed virtual network gateway connection in the specified resource group through Network resource provider.",
         "parameters": [
           {
-            "name": "resourceGroupName",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "description": "The name of the resource group."
+            "$ref": "#/parameters/ResourceGroupNameParameter"
           },
           {
             "name": "virtualNetworkGatewayConnectionName",
@@ -657,7 +605,7 @@
             "schema": {
               "$ref": "#/definitions/ConnectionSharedKey"
             },
-            "description": "Parameters supplied to the Begin Set Virtual Network Gateway connection Shared key operation throughNetwork resource provider."
+            "description": "Parameters specifying the shared key for the connection"
           },
           {
             "$ref": "#/parameters/ApiVersionParameter"
@@ -690,11 +638,7 @@
         "description": "The Get VirtualNetworkGatewayConnectionSharedKey operation retrieves information about the specified virtual network gateway connection shared key through Network resource provider.",
         "parameters": [
           {
-            "name": "resourceGroupName",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "description": "The name of the resource group."
+            "$ref": "#/parameters/ResourceGroupNameParameter"
           },
           {
             "name": "virtualNetworkGatewayConnectionName",
@@ -729,11 +673,7 @@
         "description": "The List VirtualNetworkGatewayConnections operation retrieves all the virtual network gateways connections created.",
         "parameters": [
           {
-            "name": "resourceGroupName",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "description": "The name of the resource group."
+            "$ref": "#/parameters/ResourceGroupNameParameter"
           },
           {
             "$ref": "#/parameters/ApiVersionParameter"
@@ -764,11 +704,7 @@
         "description": "The VirtualNetworkGatewayConnectionResetSharedKey operation resets the virtual network gateway connection shared key for passed virtual network gateway connection in the specified resource group through Network resource provider.",
         "parameters": [
           {
-            "name": "resourceGroupName",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "description": "The name of the resource group."
+            "$ref": "#/parameters/ResourceGroupNameParameter"
           },
           {
             "name": "virtualNetworkGatewayConnectionName",
@@ -816,11 +752,7 @@
         "description": "Creates or updates a local network gateway in the specified resource group.",
         "parameters": [
           {
-            "name": "resourceGroupName",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "description": "The name of the resource group."
+            "$ref": "#/parameters/ResourceGroupNameParameter"
           },
           {
             "name": "localNetworkGatewayName",
@@ -870,11 +802,7 @@
         "description": "Gets the specified local network gateway in a resource group.",
         "parameters": [
           {
-            "name": "resourceGroupName",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "description": "The name of the resource group."
+            "$ref": "#/parameters/ResourceGroupNameParameter"
           },
           {
             "name": "localNetworkGatewayName",
@@ -908,11 +836,7 @@
         "description": "Deletes the specified local network gateway.",
         "parameters": [
           {
-            "name": "resourceGroupName",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "description": "The name of the resource group."
+            "$ref": "#/parameters/ResourceGroupNameParameter"
           },
           {
             "name": "localNetworkGatewayName",
@@ -952,11 +876,7 @@
         "description": "Gets all the local network gateways in a resource group.",
         "parameters": [
           {
-            "name": "resourceGroupName",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "description": "The name of the resource group."
+            "$ref": "#/parameters/ResourceGroupNameParameter"
           },
           {
             "$ref": "#/parameters/ApiVersionParameter"
@@ -984,7 +904,7 @@
       "properties": {
         "privateIPAllocationMethod": {
           "type": "string",
-          "description": "The private IP allocation method. Possible values are: 'Static' and 'Dynamic'.",
+          "description": "The private IP allocation method.",
           "enum": [
             "Static",
             "Dynamic"
@@ -1005,10 +925,19 @@
         "provisioningState": {
           "readOnly": true,
           "type": "string",
-          "description": "The provisioning state of the public IP resource. Possible values are: 'Updating', 'Deleting', and 'Failed'."
+          "description": "The provisioning state of the resource.",
+          "enum": [
+            "Updating",
+            "Deleting",
+            "Failed"
+          ],
+          "x-ms-enum": {
+            "name": "ProvisioningState",
+            "modelAsString": true
+          }
         }
       },
-      "description": "Properties of VirtualNetworkGatewayIPConfiguration"
+      "description": "Properties of an IP configuration for a virtual network gateway"
     },
     "VirtualNetworkGatewayIPConfiguration": {
       "properties": {
@@ -1104,7 +1033,16 @@
         "provisioningState": {
           "readOnly": true,
           "type": "string",
-          "description": "The provisioning state of the VirtualNetworkGateway resource. Possible values are: 'Updating', 'Deleting', and 'Failed'."
+          "description": "The provisioning state of the resource.",
+          "enum": [
+            "Updating",
+            "Deleting",
+            "Failed"
+          ],
+          "x-ms-enum": {
+            "name": "ProvisioningState",
+            "modelAsString": true
+          }
         }
       },
       "description": "VirtualNetworkGateway properties"
@@ -1118,7 +1056,16 @@
         "provisioningState": {
           "readOnly": true,
           "type": "string",
-          "description": "The provisioning state of the VPN client root certificate resource. Possible values are: 'Updating', 'Deleting', and 'Failed'."
+          "description": "The provisioning state of the resource.",
+          "enum": [
+            "Updating",
+            "Deleting",
+            "Failed"
+          ],
+          "x-ms-enum": {
+            "name": "ProvisioningState",
+            "modelAsString": true
+          }
         }
       },
       "required": [
@@ -1160,7 +1107,16 @@
         "provisioningState": {
           "readOnly": true,
           "type": "string",
-          "description": "The provisioning state of the VPN client revoked certificate resource. Possible values are: 'Updating', 'Deleting', and 'Failed'."
+          "description": "The provisioning state of the resource.",
+          "enum": [
+            "Updating",
+            "Deleting",
+            "Failed"
+          ],
+          "x-ms-enum": {
+            "name": "ProvisioningState",
+            "modelAsString": true
+          }
         }
       },
       "description": "Properties of the revoked VPN client certificate of virtual network gateway."
@@ -1537,7 +1493,7 @@
       "properties": {
         "authorizationKey": {
           "type": "string",
-          "description": "The authorizationKey."
+          "description": "The authorization key."
         },
         "virtualNetworkGateway1": {
           "$ref": "#/definitions/VirtualNetworkGateway"
@@ -1632,7 +1588,16 @@
         "provisioningState": {
           "readOnly": true,
           "type": "string",
-          "description": "The provisioning state of the VirtualNetworkGatewayConnection resource. Possible values are: 'Updating', 'Deleting', and 'Failed'."
+          "description": "The provisioning state of the resource.",
+          "enum": [
+            "Updating",
+            "Deleting",
+            "Failed"
+          ],
+          "x-ms-enum": {
+            "name": "ProvisioningState",
+            "modelAsString": true
+          }
         }
       },
       "required": [
@@ -1850,7 +1815,16 @@
         "provisioningState": {
           "readOnly": true,
           "type": "string",
-          "description": "The provisioning state of the LocalNetworkGateway resource. Possible values are: 'Updating', 'Deleting', and 'Failed'."
+          "description": "The provisioning state of the resource.",
+          "enum": [
+            "Updating",
+            "Deleting",
+            "Failed"
+          ],
+          "x-ms-enum": {
+            "name": "ProvisioningState",
+            "modelAsString": true
+          }
         }
       },
       "description": "LocalNetworkGateway properties"
@@ -1907,6 +1881,13 @@
       "required": true,
       "type": "string",
       "description": "Client API version."
+    },
+    "ResourceGroupNameParameter": {
+      "name": "resourceGroupName",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "description": "The name of the resource group."
     }
   }
 }
