@@ -239,9 +239,9 @@
             "in": "body",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/Database"
+              "$ref": "#/definitions/DatabaseUpdate"
             },
-            "description": "The required parameters for creating or updating a database."
+            "description": "The required parameters for updating a database."
           }
         ],
         "responses": {
@@ -484,7 +484,7 @@
             "in": "body",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/ElasticPool"
+              "$ref": "#/definitions/ElasticPoolUpdate"
             },
             "description": "The required parameters for updating an elastic pool."
           }
@@ -1590,6 +1590,21 @@
       ],
       "description": "Represents a database elastic pool."
     },
+    "ElasticPoolUpdate": {
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/ElasticPoolProperties",
+          "description": "The properties representing the resource.",
+          "x-ms-client-flatten": true
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "#/definitions/Resource"
+        }
+      ],
+      "description": "Represents an elastic pool update."
+    },
     "ElasticPoolListResult": {
       "properties": {
         "value": {
@@ -2299,6 +2314,21 @@
         }
       ],
       "description": "Represents a database."
+    },
+    "DatabaseUpdate": {
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/DatabaseProperties",
+          "description": "The properties representing the resource.",
+          "x-ms-client-flatten": true
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "#/definitions/Resource"
+        }
+      ],
+      "description": "Represents a database update."
     },
     "DatabaseListResult": {
       "properties": {

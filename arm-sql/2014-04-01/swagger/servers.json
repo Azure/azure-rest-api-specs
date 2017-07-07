@@ -133,7 +133,7 @@
           "200": {
             "description": "OK",
             "schema": {
-              "$ref": "#/definitions/Server"
+              "$ref": "#/definitions/ServerUpdate"
             }
           }
         }
@@ -369,6 +369,21 @@
         }
       ],
       "description": "Represents a server."
+    },
+    "ServerUpdate": {
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/ServerProperties",
+          "description": "Represents the properties of the resource.",
+          "x-ms-client-flatten": true
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "#/definitions/Resource"
+        }
+      ],
+      "description": "Represents an update to a server."
     },
     "ServerListResult": {
       "properties": {
