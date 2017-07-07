@@ -55,8 +55,8 @@
         "operationId": "Servers_CreateOrUpdate",
         "description": "Creates or updates a new server.",
         "x-ms-examples": {
-          "Create server min": { "$ref": "../examples/ServerCreateMin.json" },
-          "Create server max": { "$ref": "../examples/ServerCreateMax.json" }
+          "Create server min": { "$ref": "../examples/ServerCreateOrUpdateMin.json" },
+          "Create server max": { "$ref": "../examples/ServerCreateOrUpdateMax.json" }
         },
         "parameters": [
           {
@@ -103,8 +103,8 @@
         "operationId": "Servers_Update",
         "description": "Updates an existing server.",
         "x-ms-examples": {
-          "Create server min": { "$ref": "../examples/ServerCreateMin.json" },
-          "Create server max": { "$ref": "../examples/ServerCreateMax.json" }
+          "Create server min": { "$ref": "../examples/ServerUpdateMin.json" },
+          "Create server max": { "$ref": "../examples/ServerUpdateMax.json" }
         },
         "parameters": [
           {
@@ -124,7 +124,7 @@
             "in": "body",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/Server"
+              "$ref": "#/definitions/ServerUpdate"
             },
             "description": "The required parameters for updating a server."
           }
@@ -133,7 +133,7 @@
           "200": {
             "description": "OK",
             "schema": {
-              "$ref": "#/definitions/ServerUpdate"
+              "$ref": "#/definitions/Server"
             }
           }
         }
