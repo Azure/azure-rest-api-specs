@@ -1066,45 +1066,6 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/servers/{serverName}/databases/{databaseName}/transparentDataEncryption": {
-      "get": {
-        "tags": [
-          "TransparentDataEncryption"
-        ],
-        "operationId": "Databases_ListTransparentDataEncryptionConfigurations",
-        "description": "Gets a list of a database's transparent data encryption configurations. There is only ever one element, named 'current', so GetTransparentDataEncryptionConfiguration should be used instead.",
-        "deprecated": false,
-        "parameters": [
-          {
-            "$ref": "#/parameters/ApiVersionParameter"
-          },
-          {
-            "$ref": "#/parameters/SubscriptionIdParameter"
-          },
-          {
-            "$ref": "#/parameters/ResourceGroupParameter"
-          },
-          {
-            "$ref": "#/parameters/ServerNameParameter"
-          },
-          {
-            "name": "databaseName",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "description": "The name of the database for which the transparent data encryption applies."
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "OK",
-            "schema": {
-              "$ref": "#/definitions/TransparentDataEncryption"
-            }
-          }
-        }
-      }
-    },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/servers/{serverName}/databases/{databaseName}/transparentDataEncryption/{transparentDataEncryptionName}/operationResults": {
       "get": {
         "tags": [
@@ -1934,18 +1895,6 @@
         }
       ],
       "description": "Represents a database transparent data encryption configuration."
-    },
-    "TransparentDataEncryptionListResult": {
-      "properties": {
-        "value": {
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/TransparentDataEncryption"
-          },
-          "description": "The list of transparent data encryption configurations."
-        }
-      },
-      "description": "Represents the response to a list transparent data encryption configurations request."
     },
     "DatabaseProperties": {
       "properties": {
