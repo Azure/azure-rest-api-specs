@@ -563,42 +563,6 @@
         }
       }
     },
-    "/{tenantID}/groups/{groupObjectId}": {
-      "delete": {
-        "tags": [
-          "Group"
-        ],
-        "operationId": "Groups_Delete",
-        "description": "Delete a group from the directory.",
-        "parameters": [
-          {
-            "name": "groupObjectId",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "description": "The object ID of the group to delete.",
-            "x-ms-skip-url-encoding": true
-          },
-          {
-            "$ref": "#/parameters/ApiVersionParameter"
-          },
-          {
-            "$ref": "#/parameters/tenantIDInPath"
-          }
-        ],
-        "responses": {
-          "204": {
-            "description": "No Content"
-          },
-          "default": {
-            "description": "Error response describing why the operation failed.",
-            "schema": {
-              "$ref": "#/definitions/GraphError"
-            }
-          }
-        }
-      }
-    },
     "/{tenantID}/groups": {
       "post": {
         "tags": [
@@ -752,6 +716,40 @@
             "schema": {
               "$ref": "#/definitions/ADGroup"
             }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/GraphError"
+            }
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "Group"
+        ],
+        "operationId": "Groups_Delete",
+        "description": "Delete a group from the directory.",
+        "parameters": [
+          {
+            "name": "objectId",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The object ID of the group to delete.",
+            "x-ms-skip-url-encoding": true
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/tenantIDInPath"
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "No Content"
           },
           "default": {
             "description": "Error response describing why the operation failed.",
@@ -1420,6 +1418,74 @@
         "x-ms-pageable": {
           "nextLinkName": "odata.nextLink",
           "operationName": "Objects_GetObjectsByObjectIdsNext"
+        }
+      }
+    },
+    "/{tenantID}/domains": {
+      "get": {
+        "tags": [
+          "Domain"
+        ],
+        "operationId": "Domains_List",
+        "description": "Gets a list of domains for the current tenant.",
+        "parameters": [
+          {
+            "name": "$filter",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "description": "The filter to apply to the operation."
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/tenantIDInPath"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK. The operation was successful.",
+            "schema": {
+              "$ref": "#/definitions/DomainListResult"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": null
+        },
+        "x-ms-odata": "#/definitions/User"
+      }
+    },
+    "/{tenantID}/domains({domainName})": {
+      "get": {
+        "tags": [
+          "Domain"
+        ],
+        "operationId": "Domains_Get",
+        "description": "Gets a specific domain in the current tenant.",
+        "parameters": [
+          {
+            "name": "domainName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "name of the domain."
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/tenantIDInPath"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK. The operation was successful.",
+            "schema": {
+              "$ref": "#/definitions/Domain"
+            }
+          }
         }
       }
     }
@@ -2438,7 +2504,46 @@
         "includeDirectoryObjectReferences"
       ],
       "description": "Request parameters for the GetObjectsByObjectIds API."
-    }      
+    },
+    "Domain": {
+      "properties": {
+        "authenticationType": {
+          "type": "string",
+          "description": "the type of the authentication into the domain.",
+          "readOnly": true
+        },
+        "isDefault": {
+          "type": "boolean",
+          "description": "if this is the default domain in the tenant.",
+          "readOnly": true
+        },
+        "isVerified": {
+          "type": "boolean",
+          "description": "if this domain's ownership is verified.",
+          "readOnly": true
+        },
+        "name": {
+          "type": "string",
+          "description": "the domain name."
+        }
+      },
+      "required": [
+        "name"
+      ],
+      "description": "Active Directory Domain information."
+    },
+    "DomainListResult": {
+      "properties": {
+        "value": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Domain"
+          },
+          "description": "the list of domains."
+        }
+      },
+      "description": "Server response for Get tenant domains API call."
+    }
   },
   "parameters": {
     "ApiVersionParameter": {
