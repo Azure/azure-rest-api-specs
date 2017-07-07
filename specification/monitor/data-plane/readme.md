@@ -26,7 +26,7 @@ These are the global settings for the MonitorClient API.
 
 ``` yaml
 # common 
-title: Monitor Client
+title: MonitorClient
 description: Monitor Client
 openapi-type: data-plane
 tag: package-2016-09

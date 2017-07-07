@@ -26,7 +26,7 @@ These are the global settings for the Network API.
 
 ``` yaml
 # common 
-title: Network
+title: NetworkManagementClient
 description: Network Client
 openapi-type: arm
 tag: package-2017-06

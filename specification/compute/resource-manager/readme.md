@@ -32,7 +32,7 @@ These are the global settings for the Compute API.
 
 ``` yaml
 # common 
-title: Compute
+title: ComputeManagementClient
 description: Compute Client
 openapi-type: arm
 tag: package-2017-03
