@@ -289,11 +289,7 @@
             "$ref": "#/parameters/ServerNameParameter"
           },
           {
-            "name": "firewallRuleName",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "description": "The name of the server firewall rule."
+            "$ref": "#/parameters/FirewallRuleNameParameter"
           },
           {
             "name": "parameters",
@@ -347,11 +343,7 @@
             "$ref": "#/parameters/ServerNameParameter"
           },
           {
-            "name": "firewallRuleName",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "description": "The name of the server firewall rule."
+            "$ref": "#/parameters/FirewallRuleNameParameter"
           }
         ],
         "responses": {
@@ -390,11 +382,7 @@
             "$ref": "#/parameters/ServerNameParameter"
           },
           {
-            "name": "firewallRuleName",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "description": "The name of the server firewall rule."
+            "$ref": "#/parameters/FirewallRuleNameParameter"
           }
         ],
         "responses": {
@@ -468,11 +456,7 @@
             "$ref": "#/parameters/ServerNameParameter"
           },
           {
-            "name": "databaseName",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "description": "The name of the database."
+            "$ref": "#/parameters/DatabaseNameParameter"
           },
           {
             "name": "parameters",
@@ -526,11 +510,7 @@
             "$ref": "#/parameters/ServerNameParameter"
           },
           {
-            "name": "databaseName",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "description": "The name of the database to be deleted."
+            "$ref": "#/parameters/DatabaseNameParameter"
           }
         ],
         "responses": {
@@ -569,11 +549,7 @@
             "$ref": "#/parameters/ServerNameParameter"
           },
           {
-            "name": "databaseName",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "description": "The name of the database to be retrieved."
+            "$ref": "#/parameters/DatabaseNameParameter"
           }
         ],
         "responses": {
@@ -647,11 +623,7 @@
             "$ref": "#/parameters/ServerNameParameter"
           },
           {
-            "name": "configurationName",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "description": "The name of the server configuration."
+            "$ref": "#/parameters/ConfigurationNameParameter"
           },
           {
             "name": "parameters",
@@ -699,11 +671,7 @@
             "$ref": "#/parameters/ServerNameParameter"
           },
           {
-            "name": "configurationName",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "description": "The name of the server configuration to be retrieved."
+            "$ref": "#/parameters/ConfigurationNameParameter"
           }
         ],
         "responses": {
@@ -1460,6 +1428,30 @@
       "required": true,
       "type": "string",
       "description": "The name of the server.",
+      "x-ms-parameter-location": "method"
+    },
+    "FirewallRuleNameParameter": {
+      "name": "firewallRuleName",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "description": "The name of the server firewall rule.",
+      "x-ms-parameter-location": "method"
+    },
+    "DatabaseNameParameter": {
+      "name": "databaseName",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "description": "The name of the database.",
+      "x-ms-parameter-location": "method"
+    },
+    "ConfigurationNameParameter": {
+      "name": "configurationName",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "description": "The name of the server configuration.",
       "x-ms-parameter-location": "method"
     }
   }
