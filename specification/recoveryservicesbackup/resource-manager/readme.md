@@ -87,11 +87,6 @@ python:
   license-header: MICROSOFT_MIT_NO_VERSION
 ```
 
-```yaml $(python) && $(create)
-python:
-  package-name: azure-mgmt-recoveryservicesbackup
-```
-
 ---
 # Validation
 

@@ -206,3 +206,55 @@ csharp:
   output-folder: $(output-folder)/csharp
 ```
 
+
+#### Language-specific settings: Python
+
+These settings apply only when `--python` is specified on the command line.
+
+``` yaml $(python)
+python:
+  # override the default output folder
+  output-folder: $(output-folder)/python
+  license-header: MICROSOFT_MIT_NO_VERSION
+  payload-flattening-threshold: 2
+```
+
+# Tag: package-2017-06 and python
+
+These settings apply only when `--tag=package-2017-06 --python` is specified on the command line.
+
+``` yaml $(tag) == 'package-2017-06' && $(python)
+namespace: azure.mgmt.network.v2017_06_01
+```
+
+# Tag: package-2017-03 and python
+
+These settings apply only when `--tag=package-2017-03 --python` is specified on the command line.
+
+``` yaml $(tag) == 'package-2017-03' && $(python)
+namespace: azure.mgmt.network.v2017_03_01
+```
+
+# Tag: package-2016-12 and python
+
+These settings apply only when `--tag=package-2016-12 --python` is specified on the command line.
+
+``` yaml $(tag) == 'package-2016-12' && $(python)
+namespace: azure.mgmt.network.v2016_12_01
+```
+
+# Tag: package-2016-09 and python
+
+These settings apply only when `--tag=package-2016-09 --python` is specified on the command line.
+
+``` yaml $(tag) == 'package-2016-09' && $(python)
+namespace: azure.mgmt.network.v2016_09_01
+```
+
+# Tag: package-2015-06split and python
+
+These settings apply only when `--tag=package-2015-06split --python` is specified on the command line.
+
+``` yaml $(tag) == 'package-2015-06split' && $(python)
+namespace: azure.mgmt.network.v2015_06_01
+```
