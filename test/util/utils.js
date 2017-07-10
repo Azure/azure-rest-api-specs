@@ -148,13 +148,59 @@ exports.getTimeStamp = function getTimeStamp() {
  * Retrieves list of swagger files to be processed for linting
  * @returns {Array} list of files to be processed for linting
  */
+exports.getConfigFilesChangedInPR = function getConfigFilesChangedInPR() {
+  let result = exports.swaggers;
+  if (exports.prOnly === 'true') {
+    let targetBranch, cmd, filesChanged, swaggerFilesInPR;
+    try {
+      targetBranch = exports.getTargetBranch();
+      execSync(`git fetch origin ${targetBranch}`);
+      cmd = `git diff --name-only HEAD $(git merge-base HEAD FETCH_HEAD)`;
+      filesChanged = execSync(cmd, { encoding: 'utf8' }).split('\n');
+      console.log('>>>>> Files changed in this PR are as follows:');
+      console.log(filesChanged);
+
+      // traverse up to readme.md files
+      const configFiles = new Set();
+      for (let fileChanged of filesChanged) {
+        while (fileChanged.startsWith("specification")) {
+          if (fileChanged.toLowerCase().endsWith("readme.md") && fs.existsSync(fileChanged)) {
+            configFiles.add(fileChanged);
+            break;
+          }
+          // select parent readme
+          const parts = configFiles.split('/');
+          parts.pop();
+          parts.pop();
+          parts.push("readme.md");
+          fileChanged = parts.join('/');
+        }
+      }
+      filesChanged = configFiles.values();
+
+      console.log('>>>>> Affected configuration files:');
+      console.log(filesChanged);
+
+      result = filesChanged;
+    } catch (err) {
+      throw err;
+    }
+  }
+  return result;
+};
+
+/**
+ * Retrieves list of swagger files to be processed for linting
+ * @returns {Array} list of files to be processed for linting
+ */
 exports.getFilesChangedInPR = function getFilesChangedInPR() {
   let result = exports.swaggers;
   if (exports.prOnly === 'true') {
     let targetBranch, cmd, filesChanged, swaggerFilesInPR;
     try {
       targetBranch = exports.getTargetBranch();
-      cmd = `git diff --name-only HEAD $(git merge-base HEAD ${targetBranch})`;
+      execSync(`git fetch origin ${targetBranch}`);
+      cmd = `git diff --name-only HEAD $(git merge-base HEAD FETCH_HEAD)`;
       filesChanged = execSync(cmd, { encoding: 'utf8' });
       console.log('>>>>> Files changed in this PR are as follows:')
       console.log(filesChanged);
