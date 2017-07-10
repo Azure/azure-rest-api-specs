@@ -26,8 +26,8 @@ exports.isWindows = (process.platform.lastIndexOf('win') === 0);
 exports.prOnly = undefined !== process.env['PR_ONLY'] ? process.env['PR_ONLY'] : 'false';
 
 exports.globPath = path.join(__dirname, '../', '../', '/specification/**/*.json');
-exports.swaggers = _(glob.sync(exports.globPath, { ignore: ['/**/examples/*.json', '/**/quickstart-templates/*.json', '/**/schema/*.json'] }));
-exports.exampleGlobPath = path.join(__dirname, '../', '../', '/**/examples/*.json');
+exports.swaggers = _(glob.sync(exports.globPath, { ignore: ['**/examples/**/*.json', '**/quickstart-templates/*.json', '**/schema/*.json'] }));
+exports.exampleGlobPath = path.join(__dirname, '../', '../', '/**/examples/**/*.json');
 exports.examples = _(glob.sync(exports.exampleGlobPath));
 
 // Remove byte order marker. This catches EF BB BF (the UTF-8 BOM)
