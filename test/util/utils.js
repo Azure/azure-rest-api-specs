@@ -225,4 +225,4 @@ exports.initializeValidator = function initializeValidator(callback) {
       });
     });
   });
-};`
+};
