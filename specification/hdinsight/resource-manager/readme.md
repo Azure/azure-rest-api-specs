@@ -17,24 +17,22 @@ To see additional help and options, run:
 > `autorest --help`
 ---
 
-## Configuration for generating APIs
+## Configuration
 
 
----
-#### Basic Information 
+
+### Basic Information 
 These are the global settings for the HDInsight API.
 
 ``` yaml
-# common 
-title: HDInsight Management
+title: HDInsightManagementClient
 description: HDInsight Management Client
 openapi-type: arm
 tag: package-2015-03-preview
-
 ```
 
 
-# Tag: package-2015-03-preview
+### Tag: package-2015-03-preview
 
 These settings apply only when `--tag=package-2015-03-preview` is specified on the command line.
 
@@ -47,12 +45,11 @@ input-file:
 - Microsoft.HDInsight/2015-03-01-preview/extensions.json
 - Microsoft.HDInsight/2015-03-01-preview/scriptActions.json
 - Microsoft.HDInsight/2015-03-01-preview/operations.json
-
 ```
 
 
 ---
-#### Language-specific settings: CSharp
+## Language-specific settings: CSharp
 
 These settings apply only when `--csharp` is specified on the command line.
 

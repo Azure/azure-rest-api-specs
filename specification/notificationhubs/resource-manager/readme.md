@@ -17,56 +17,49 @@ To see additional help and options, run:
 > `autorest --help`
 ---
 
-## Configuration for generating APIs
+## Configuration
 
 
----
-#### Basic Information 
+
+### Basic Information 
 These are the global settings for the NotificationHubs API.
 
 ``` yaml
-# common 
-title: Notification Hubs
-description: Notification Hubs Client
 openapi-type: arm
 tag: package-2017-04
-
 ```
 
 
-# Tag: package-2017-04
+### Tag: package-2017-04
 
 These settings apply only when `--tag=package-2017-04` is specified on the command line.
 
 ``` yaml $(tag) == 'package-2017-04'
 input-file:
 - Microsoft.NotificationHubs/2017-04-01/notificationhubs.json
-
 ```
  
-# Tag: package-2016-03
+### Tag: package-2016-03
 
 These settings apply only when `--tag=package-2016-03` is specified on the command line.
 
 ``` yaml $(tag) == 'package-2016-03'
 input-file:
 - Microsoft.NotificationHubs/2016-03-01/notificationhubs.json
-
 ```
  
-# Tag: package-2014-09
+### Tag: package-2014-09
 
 These settings apply only when `--tag=package-2014-09` is specified on the command line.
 
 ``` yaml $(tag) == 'package-2014-09'
 input-file:
 - Microsoft.NotificationHubs/2014-09-01/notificationhubs.json
-
 ```
 
 
 ---
-#### Language-specific settings: CSharp
+## Language-specific settings: CSharp
 
 These settings apply only when `--csharp` is specified on the command line.
 

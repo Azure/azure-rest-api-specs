@@ -17,24 +17,22 @@ To see additional help and options, run:
 > `autorest --help`
 ---
 
-## Configuration for generating APIs
+## Configuration
 
 
----
-#### Basic Information 
+
+### Basic Information 
 These are the global settings for the RecoveryServices API.
 
 ``` yaml
-# common 
-title: Recovery Services
+title: RecoveryServicesClient
 description: Recovery Services Client
 openapi-type: arm
 tag: package-2016-12
-
 ```
 
 
-# Tag: package-2016-12
+### Tag: package-2016-12
 
 These settings apply only when `--tag=package-2016-12` is specified on the command line.
 
@@ -45,10 +43,9 @@ input-file:
 - Microsoft.RecoveryServices/2016-06-01/replicationusages.json
 - Microsoft.RecoveryServices/2016-06-01/vaults.json
 - Microsoft.RecoveryServices/2016-06-01/vaultusages.json
-
 ```
  
-# Tag: package-2016-06
+### Tag: package-2016-06
 
 These settings apply only when `--tag=package-2016-06` is specified on the command line.
 
@@ -58,12 +55,11 @@ input-file:
 - Microsoft.RecoveryServices/2016-06-01/replicationusages.json
 - Microsoft.RecoveryServices/2016-06-01/vaults.json
 - Microsoft.RecoveryServices/2016-06-01/vaultusages.json
-
 ```
 
 
 ---
-#### Language-specific settings: CSharp
+## Language-specific settings: CSharp
 
 These settings apply only when `--csharp` is specified on the command line.
 

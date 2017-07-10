@@ -17,36 +17,31 @@ To see additional help and options, run:
 > `autorest --help`
 ---
 
-## Configuration for generating APIs
+## Configuration
 
 
----
-#### Basic Information 
+
+### Basic Information 
 These are the global settings for the RecoveryServicesSiteRecovery API.
 
 ``` yaml
-# common 
-title: Recovery Services Site Recovery
-description: Recovery Services Site Recovery Client
 openapi-type: arm
 tag: package-2016-08
-
 ```
 
 
-# Tag: package-2016-08
+### Tag: package-2016-08
 
 These settings apply only when `--tag=package-2016-08` is specified on the command line.
 
 ``` yaml $(tag) == 'package-2016-08'
 input-file:
 - Microsoft.RecoveryServices/2016-08-10/service.json
-
 ```
 
 
 ---
-#### Language-specific settings: CSharp
+## Language-specific settings: CSharp
 
 These settings apply only when `--csharp` is specified on the command line.
 

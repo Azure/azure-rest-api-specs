@@ -17,47 +17,41 @@ To see additional help and options, run:
 > `autorest --help`
 ---
 
-## Configuration for generating APIs
+## Configuration
 
 
----
-#### Basic Information 
+
+### Basic Information 
 These are the global settings for the Relay API.
 
 ``` yaml
-# common 
-title: Relay
-description: Relay Client
 openapi-type: arm
 tag: package-2017-04
-
 ```
 
 
-# Tag: package-2017-04
+### Tag: package-2017-04
 
 These settings apply only when `--tag=package-2017-04` is specified on the command line.
 
 ``` yaml $(tag) == 'package-2017-04'
 input-file:
 - Microsoft.Relay/2017-04-01/relay.json
-
 ```
 
 
-# Tag: package-2016-07
+### Tag: package-2016-07
 
 These settings apply only when `--tag=package-2016-07` is specified on the command line.
 
 ``` yaml $(tag) == 'package-2016-07'
 input-file:
 - Microsoft.Relay/2016-07-01/relay.json
-
 ```
 
 
 ---
-#### Language-specific settings: CSharp
+## Language-specific settings: CSharp
 
 These settings apply only when `--csharp` is specified on the command line.
 

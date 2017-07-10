@@ -17,36 +17,31 @@ To see additional help and options, run:
 > `autorest --help`
 ---
 
-## Configuration for generating APIs
+## Configuration
 
 
----
-#### Basic Information 
+
+### Basic Information 
 These are the global settings for the TimeSeriesInsights API.
 
 ``` yaml
-# common 
-title: Time Series Insights
-description: Time Series Insights Client
 openapi-type: arm
 tag: package-2017-02-preview
-
 ```
 
 
-# Tag: package-2017-02-preview
+### Tag: package-2017-02-preview
 
 These settings apply only when `--tag=package-2017-02-preview` is specified on the command line.
 
 ``` yaml $(tag) == 'package-2017-02-preview'
 input-file:
 - Microsoft.TimeSeriesInsights/2017-02-28-preview/timeseriesinsights.json
-
 ```
 
 
 ---
-#### Language-specific settings: CSharp
+## Language-specific settings: CSharp
 
 These settings apply only when `--csharp` is specified on the command line.
 

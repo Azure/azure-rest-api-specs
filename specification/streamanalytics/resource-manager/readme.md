@@ -17,24 +17,22 @@ To see additional help and options, run:
 > `autorest --help`
 ---
 
-## Configuration for generating APIs
+## Configuration
 
 
----
-#### Basic Information 
+
+### Basic Information 
 These are the global settings for the StreamAnalytics API.
 
 ``` yaml
-# common 
 title: Stream Analytics Management Client
 description: Stream Analytics Client
 openapi-type: arm
 tag: package-2016-03
-
 ```
 
 
-# Tag: package-2016-03
+### Tag: package-2016-03
 
 These settings apply only when `--tag=package-2016-03` is specified on the command line.
 
@@ -46,12 +44,11 @@ input-file:
 - Microsoft.StreamAnalytics/2016-03-01/transformations.json
 - Microsoft.StreamAnalytics/2016-03-01/functions.json
 - Microsoft.StreamAnalytics/2016-03-01/subscriptions.json
-
 ```
 
 
 ---
-#### Language-specific settings: CSharp
+## Language-specific settings: CSharp
 
 These settings apply only when `--csharp` is specified on the command line.
 

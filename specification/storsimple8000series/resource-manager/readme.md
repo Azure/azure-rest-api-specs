@@ -17,36 +17,31 @@ To see additional help and options, run:
 > `autorest --help`
 ---
 
-## Configuration for generating APIs
+## Configuration
 
 
----
-#### Basic Information 
+
+### Basic Information 
 These are the global settings for the StorSimple API.
 
 ``` yaml
-# common 
-title: StorSimple 8000 Series
-description: StorSimple 8000 Series Client
 openapi-type: arm
 tag: package-2017-06
-
 ```
 
 
-# Tag: package-2017-06
+### Tag: package-2017-06
 
 These settings apply only when `--tag=package-2017-06` is specified on the command line.
 
 ``` yaml $(tag) == 'package-2017-06'
 input-file:
 - Microsoft.StorSimple/2017-06-01/storsimple.json
-
 ```
 
 
 ---
-#### Language-specific settings: CSharp
+## Language-specific settings: CSharp
 
 These settings apply only when `--csharp` is specified on the command line.
 

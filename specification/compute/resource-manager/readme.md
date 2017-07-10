@@ -23,24 +23,22 @@ To see additional help and options, run:
 > `autorest --help`
 ---
 
-## Configuration for generating APIs
+## Configuration
 
 
----
-#### Basic Information 
+
+### Basic Information 
 These are the global settings for the Compute API.
 
 ``` yaml
-# common 
 title: ComputeManagementClient
 description: Compute Client
 openapi-type: arm
 tag: package-2017-03
-
 ```
 
 
-# Tag: package-2017-03
+### Tag: package-2017-03
 
 These settings apply only when `--tag=package-2017-03` is specified on the command line.
 
@@ -50,10 +48,9 @@ input-file:
 - Microsoft.Compute/2017-03-30/disk.json
 - Microsoft.Compute/2017-03-30/runCommands.json
 - Microsoft.ContainerService/2017-01-31/containerService.json
-
 ```
 
-# Tag: package-compute-2017-03
+### Tag: package-compute-2017-03
 
 These settings apply only when `--tag=package-compute-2017-03` is specified on the command line.
 
@@ -64,7 +61,7 @@ input-file:
 - Microsoft.Compute/2017-03-30/runCommands.json
 ```
 
-# Tag: package-container-service-2017-01
+### Tag: package-container-service-2017-01
 
 These settings apply only when `--tag=package-container-service-2017-01` is specified on the command line.
 
@@ -73,7 +70,7 @@ input-file:
 - Microsoft.ContainerService/2017-01-31/containerService.json
 ```
 
-# Tag: package-2016-04-preview
+### Tag: package-2016-04-preview
 
 These settings apply only when `--tag=package-2016-04-preview` is specified on the command line.
 
@@ -82,10 +79,9 @@ input-file:
 - Microsoft.Compute/2016-04-30-preview/compute.json
 - Microsoft.Compute/2016-04-30-preview/disk.json
 - Microsoft.ContainerService/2017-01-31/containerService.json
-
 ```
 
-# Tag: package-compute-2016-04-preview
+### Tag: package-compute-2016-04-preview
 
 These settings apply only when `--tag=package-compute-2016-04-preview` is specified on the command line.
 
@@ -95,7 +91,7 @@ input-file:
 - Microsoft.Compute/2016-04-30-preview/disk.json
 ```
 
-# Tag: package-2016-03
+### Tag: package-2016-03
 
 These settings apply only when `--tag=package-2016-03` is specified on the command line.
 
@@ -103,10 +99,9 @@ These settings apply only when `--tag=package-2016-03` is specified on the comma
 input-file:
 - Microsoft.Compute/2016-03-30/compute.json
 - Microsoft.ContainerService/2016-03-30/containerService.json
-
 ```
 
-# Tag: package-compute-2016-03
+### Tag: package-compute-2016-03
 
 These settings apply only when `--tag=package-compute-2016-03` is specified on the command line.
 
@@ -115,7 +110,7 @@ input-file:
 - Microsoft.Compute/2016-03-30/compute.json
 ```
 
-# Tag: package-compute-2015-06
+### Tag: package-compute-2015-06
 
 These settings apply only when `--tag=package-compute-2015-06` is specified on the command line.
 
@@ -124,7 +119,7 @@ input-file:
 - Microsoft.Compute/2015-06-15/compute.json
 ```
 
-# Tag: package-2015-06-preview
+### Tag: package-2015-06-preview
 
 These settings apply only when `--tag=package-2015-06-preview` is specified on the command line.
 
@@ -132,11 +127,10 @@ These settings apply only when `--tag=package-2015-06-preview` is specified on t
 input-file:
 - Microsoft.Compute/2015-06-15/compute.json
 - Microsoft.ContainerService/2015-11-01-preview/containerService.json
-
 ```
 
 ---
-#### Language-specific settings: CSharp
+## Language-specific settings: CSharp
 
 These settings apply only when `--csharp` is specified on the command line.
 
@@ -146,7 +140,7 @@ csharp:
   output-folder: $(output-folder)/csharp
 ```
 
-#### Language-specific settings: Python
+## Language-specific settings: Python
 
 These settings apply only when `--python` is specified on the command line.
 
@@ -158,7 +152,7 @@ python:
   payload-flattening-threshold: 2
 ```
 
-# Tag: package-compute-2017-03 and python
+### Tag: package-compute-2017-03 and python
 
 These settings apply only when `--tag=package-compute-2017-03 --python` is specified on the command line.
 
@@ -166,7 +160,7 @@ These settings apply only when `--tag=package-compute-2017-03 --python` is speci
 namespace: azure.mgmt.compute.compute.v2017_03_30
 ```
 
-# Tag: package-container-service-2017-01 and python
+### Tag: package-container-service-2017-01 and python
 
 These settings apply only when `--tag=package-container-service-2017-01 --python` is specified on the command line.
 
@@ -174,7 +168,7 @@ These settings apply only when `--tag=package-container-service-2017-01 --python
 namespace: azure.mgmt.compute.containerservice.v2017_01_31
 ```
 
-# Tag: package-compute-2016-04-preview and python
+### Tag: package-compute-2016-04-preview and python
 
 These settings apply only when `--tag=package-compute-2016-04-preview --python` is specified on the command line.
 
@@ -182,7 +176,7 @@ These settings apply only when `--tag=package-compute-2016-04-preview --python` 
 namespace: azure.mgmt.compute.compute.v2016_04_30_preview
 ```
 
-# Tag: package-compute-2016-03 and python
+### Tag: package-compute-2016-03 and python
 
 These settings apply only when `--tag=package-compute-2016-03 --python` is specified on the command line.
 
@@ -190,7 +184,7 @@ These settings apply only when `--tag=package-compute-2016-03 --python` is speci
 namespace: azure.mgmt.compute.compute.v2016_03_30
 ```
 
-# Tag: package-compute-2015-06 and python
+### Tag: package-compute-2015-06 and python
 
 These settings apply only when `--tag=package-compute-2015-06 --python` is specified on the command line.
 

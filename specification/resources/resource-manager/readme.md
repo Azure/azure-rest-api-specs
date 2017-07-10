@@ -17,24 +17,22 @@ To see additional help and options, run:
 > `autorest --help`
 ---
 
-## Configuration for generating APIs
+## Configuration
 
 
----
-#### Basic Information 
+
+### Basic Information 
 These are the global settings for the Resource API.
 
 ``` yaml
-# common 
-title: Resource
+title: ResourceClient
 description: Resource Client
 openapi-type: arm
 tag: package-2017-05
-
 ```
 
 
-# Tag: package-2017-05
+### Tag: package-2017-05
 
 These settings apply only when `--tag=package-2017-05` is specified on the command line.
 
@@ -47,10 +45,9 @@ input-file:
 - Microsoft.Resources/2016-06-01/subscriptions.json
 - Microsoft.Scheduler/2016-09-01/links.json
 - Microsoft.Solutions/2016-09-01-preview/managedapplications.json
-
 ```
  
-# Tag: package-2016-09
+### Tag: package-2016-09
 
 These settings apply only when `--tag=package-2016-09` is specified on the command line.
 
@@ -62,10 +59,9 @@ input-file:
 - Microsoft.Resources/2016-09-01/resources.json
 - Microsoft.Resources/2016-06-01/subscriptions.json
 - Microsoft.Resources/2016-09-01/links.json
-
 ```
  
-# Tag: package-2016-07
+### Tag: package-2016-07
 
 These settings apply only when `--tag=package-2016-07` is specified on the command line.
 
@@ -76,10 +72,9 @@ input-file:
 - Microsoft.Features/2015-12-01/features.json
 - Microsoft.Resources/2016-07-01/resources.json
 - Microsoft.Resources/2016-06-01/subscriptions.json
-
 ```
  
-# Tag: package-2016-06
+### Tag: package-2016-06
 
 These settings apply only when `--tag=package-2016-06` is specified on the command line.
 
@@ -90,10 +85,9 @@ input-file:
 - Microsoft.Features/2015-12-01/features.json
 - Microsoft.Resources/2016-02-01/resources.json
 - Microsoft.Resources/2016-06-01/subscriptions.json
-
 ```
  
-# Tag: package-2016-04
+### Tag: package-2016-04
 
 These settings apply only when `--tag=package-2016-04` is specified on the command line.
 
@@ -104,10 +98,9 @@ input-file:
 - Microsoft.Features/2015-12-01/features.json
 - Microsoft.Resources/2016-02-01/resources.json
 - Microsoft.Resources/2015-11-01/subscriptions.json
-
 ```
  
-# Tag: package-2016-02
+### Tag: package-2016-02
 
 These settings apply only when `--tag=package-2016-02` is specified on the command line.
 
@@ -118,10 +111,9 @@ input-file:
 - Microsoft.Features/2015-12-01/features.json
 - Microsoft.Resources/2016-02-01/resources.json
 - Microsoft.Resources/2015-11-01/subscriptions.json
-
 ```
  
-# Tag: package-2015-12
+### Tag: package-2015-12
 
 These settings apply only when `--tag=package-2015-12` is specified on the command line.
 
@@ -132,12 +124,11 @@ input-file:
 - Microsoft.Features/2015-12-01/features.json
 - Microsoft.Resources/2015-11-01/resources.json
 - Microsoft.Resources/2015-11-01/subscriptions.json
-
 ```
 
 
 ---
-#### Language-specific settings: CSharp
+## Language-specific settings: CSharp
 
 These settings apply only when `--csharp` is specified on the command line.
 

@@ -17,46 +17,40 @@ To see additional help and options, run:
 > `autorest --help`
 ---
 
-## Configuration for generating APIs
+## Configuration
 
 
----
-#### Basic Information 
+
+### Basic Information 
 These are the global settings for the Billing API.
 
 ``` yaml
-# common 
-title: Billing
-description: Billing Client
 openapi-type: arm
 tag: package-2017-04-preview
-
 ```
 
 
-# Tag: package-2017-04-preview
+### Tag: package-2017-04-preview
 
 These settings apply only when `--tag=package-2017-04-preview` is specified on the command line.
 
 ``` yaml $(tag) == 'package-2017-04-preview'
 input-file:
 - Microsoft.Billing/2017-04-24-preview/billing.json
-
 ```
  
-# Tag: package-2017-02-preview
+### Tag: package-2017-02-preview
 
 These settings apply only when `--tag=package-2017-02-preview` is specified on the command line.
 
 ``` yaml $(tag) == 'package-2017-02-preview'
 input-file:
 - Microsoft.Billing/2017-02-27-preview/billing.json
-
 ```
 
 
 ---
-#### Language-specific settings: CSharp
+## Language-specific settings: CSharp
 
 These settings apply only when `--csharp` is specified on the command line.
 

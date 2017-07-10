@@ -17,24 +17,22 @@ To see additional help and options, run:
 > `autorest --help`
 ---
 
-## Configuration for generating APIs
+## Configuration
 
 
----
-#### Basic Information 
+
+### Basic Information 
 These are the global settings for the MachineLearning API.
 
 ``` yaml
-# common 
 title: Machine Learning
 description: Machine Learning Client
 openapi-type: arm
 tag: package-2017-01
-
 ```
 
 
-# Tag: package-2017-01
+### Tag: package-2017-01
 
 These settings apply only when `--tag=package-2017-01` is specified on the command line.
 
@@ -42,10 +40,9 @@ These settings apply only when `--tag=package-2017-01` is specified on the comma
 input-file:
 - Microsoft.MachineLearning/2016-05-01-preview/commitmentPlans.json
 - Microsoft.MachineLearning/2017-01-01/webservices.json
-
 ```
  
-# Tag: package-2016-05-preview
+### Tag: package-2016-05-preview
 
 These settings apply only when `--tag=package-2016-05-preview` is specified on the command line.
 
@@ -53,12 +50,11 @@ These settings apply only when `--tag=package-2016-05-preview` is specified on t
 input-file:
 - Microsoft.MachineLearning/2016-05-01-preview/commitmentPlans.json
 - Microsoft.MachineLearning/2016-05-01-preview/webservices.json
-
 ```
 
 
 ---
-#### Language-specific settings: CSharp
+## Language-specific settings: CSharp
 
 These settings apply only when `--csharp` is specified on the command line.
 

@@ -17,24 +17,22 @@ To see additional help and options, run:
 > `autorest --help`
 ---
 
-## Configuration for generating APIs
+## Configuration
 
 
----
-#### Basic Information 
+
+### Basic Information 
 These are the global settings for the OperationalInsights API.
 
 ``` yaml
-# common 
-title: Operational Insights
+title: Azure Log Analytics
 description: Operational Insights Client
 openapi-type: arm
 tag: package-2015-11-preview
-
 ```
 
 
-# Tag: package-2015-11-preview
+### Tag: package-2015-11-preview
 
 These settings apply only when `--tag=package-2015-11-preview` is specified on the command line.
 
@@ -42,22 +40,20 @@ These settings apply only when `--tag=package-2015-11-preview` is specified on t
 input-file:
 - Microsoft.OperationalInsights/2015-11-01-preview/OperationalInsights.json
 - Microsoft.OperationalInsights/2015-03-20/OperationalInsights.json
-
 ```
  
-# Tag: package-2015-03
+### Tag: package-2015-03
 
 These settings apply only when `--tag=package-2015-03` is specified on the command line.
 
 ``` yaml $(tag) == 'package-2015-03'
 input-file:
 - Microsoft.OperationalInsights/2015-03-20/OperationalInsights.json
-
 ```
 
 
 ---
-#### Language-specific settings: CSharp
+## Language-specific settings: CSharp
 
 These settings apply only when `--csharp` is specified on the command line.
 

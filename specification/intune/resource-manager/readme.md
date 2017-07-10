@@ -17,46 +17,40 @@ To see additional help and options, run:
 > `autorest --help`
 ---
 
-## Configuration for generating APIs
+## Configuration
 
 
----
-#### Basic Information 
+
+### Basic Information 
 These are the global settings for the Intune API.
 
 ``` yaml
-# common 
-title: Intune
-description: Intune Client
 openapi-type: arm
 tag: package-2015-01-preview
-
 ```
 
 
-# Tag: package-2015-01-preview
+### Tag: package-2015-01-preview
 
 These settings apply only when `--tag=package-2015-01-preview` is specified on the command line.
 
 ``` yaml $(tag) == 'package-2015-01-preview'
 input-file:
 - Microsoft.Intune/2015-01-14-preview/intune.json
-
 ```
  
-# Tag: package-2015-01-privatepreview
+### Tag: package-2015-01-privatepreview
 
 These settings apply only when `--tag=package-2015-01-privatepreview` is specified on the command line.
 
 ``` yaml $(tag) == 'package-2015-01-privatepreview'
 input-file:
 - Microsoft.Intune/2015-01-14-privatepreview/intune.json
-
 ```
 
 
 ---
-#### Language-specific settings: CSharp
+## Language-specific settings: CSharp
 
 These settings apply only when `--csharp` is specified on the command line.
 

@@ -17,24 +17,22 @@ To see additional help and options, run:
 > `autorest --help`
 ---
 
-## Configuration for generating APIs
+## Configuration
 
 
----
-#### Basic Information 
+
+### Basic Information 
 These are the global settings for the Sql API.
 
 ``` yaml
-# common 
 title: SqlManagementClient
 description: The Azure SQL Database management API provides a RESTful set of web services that interact with Azure SQL Database services to manage your databases. The API enables you to create, retrieve, update, and delete databases.
 openapi-type: arm
 tag: package-2015-05-preview
-
 ```
 
 
-# Tag: package-2015-05-preview
+### Tag: package-2015-05-preview
 
 These settings apply only when `--tag=package-2015-05-preview` is specified on the command line.
 
@@ -64,10 +62,9 @@ input-file:
 - Microsoft.Sql/2015-05-01-preview/serverKeys.json
 - Microsoft.Sql/2015-05-01-preview/servers.json
 - Microsoft.Sql/2015-05-01-preview/virtualNetworkRules.json
-
 ```
  
-# Tag: package-2014-04
+### Tag: package-2014-04
 
 These settings apply only when `--tag=package-2014-04` is specified on the command line.
 
@@ -78,12 +75,11 @@ input-file:
 - Microsoft.Sql/2014-04-01/replicationLinks.json
 - Microsoft.Sql/2014-04-01/sql.core.json
 - Microsoft.Sql/2014-04-01/databaseSecurityAlertPolicies.json
-
 ```
 
 
 ---
-#### Language-specific settings: CSharp
+## Language-specific settings: CSharp
 
 These settings apply only when `--csharp` is specified on the command line.
 
@@ -94,7 +90,7 @@ csharp:
 ```
 
 
-#### Language-specific settings: Python
+## Language-specific settings: Python
 
 These settings apply only when `--python` is specified on the command line.
 

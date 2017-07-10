@@ -17,46 +17,40 @@ To see additional help and options, run:
 > `autorest --help`
 ---
 
-## Configuration for generating APIs
+## Configuration
 
 
----
-#### Basic Information 
+
+### Basic Information 
 These are the global settings for the KeyVault API.
 
 ``` yaml
-# common 
-title: Key Vault
-description: Key Vault Client
 openapi-type: data-plane
 tag: package-2016-10
-
 ```
 
 
-# Tag: package-2016-10
+### Tag: package-2016-10
 
 These settings apply only when `--tag=package-2016-10` is specified on the command line.
 
 ``` yaml $(tag) == 'package-2016-10'
 input-file:
 - Microsoft.KeyVault/2016-10-01/keyvault.json
-
 ```
  
-# Tag: package-2015-06
+### Tag: package-2015-06
 
 These settings apply only when `--tag=package-2015-06` is specified on the command line.
 
 ``` yaml $(tag) == 'package-2015-06'
 input-file:
 - Microsoft.KeyVault/2015-06-01/keyvault.json
-
 ```
 
 
 ---
-#### Language-specific settings: CSharp
+## Language-specific settings: CSharp
 
 These settings apply only when `--csharp` is specified on the command line.
 

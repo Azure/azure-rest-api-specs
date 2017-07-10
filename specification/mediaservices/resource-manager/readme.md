@@ -17,36 +17,31 @@ To see additional help and options, run:
 > `autorest --help`
 ---
 
-## Configuration for generating APIs
+## Configuration
 
 
----
-#### Basic Information 
+
+### Basic Information 
 These are the global settings for the MediaServices API.
 
 ``` yaml
-# common 
-title: Media Services
-description: Media Services Client
 openapi-type: arm
 tag: package-2015-10
-
 ```
 
 
-# Tag: package-2015-10
+### Tag: package-2015-10
 
 These settings apply only when `--tag=package-2015-10` is specified on the command line.
 
 ``` yaml $(tag) == 'package-2015-10'
 input-file:
 - Microsoft.Media/2015-10-01/media.json
-
 ```
 
 
 ---
-#### Language-specific settings: CSharp
+## Language-specific settings: CSharp
 
 These settings apply only when `--csharp` is specified on the command line.
 

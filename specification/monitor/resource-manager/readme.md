@@ -17,24 +17,22 @@ To see additional help and options, run:
 > `autorest --help`
 ---
 
-## Configuration for generating APIs
+## Configuration
 
 
----
-#### Basic Information 
+
+### Basic Information 
 These are the global settings for the MonitorClient API.
 
 ``` yaml
-# common 
-title: MonitorManagementClient
+title: MonitorClient
 description: Monitor Management Client
 openapi-type: arm
 tag: package-2017-03
-
 ```
 
 
-# Tag: package-2017-03
+### Tag: package-2017-03
 
 These settings apply only when `--tag=package-2017-03` is specified on the command line.
 
@@ -48,12 +46,11 @@ input-file:
 - microsoft.insights/2017-03-01-preview/activityLogAlerts_API.json
 - microsoft.insights/2017-04-01/actionGroups_API.json
 - microsoft.insights/2017-04-01/activityLogAlerts_API.json
-
 ```
 
 
 ---
-#### Language-specific settings: CSharp
+## Language-specific settings: CSharp
 
 These settings apply only when `--csharp` is specified on the command line.
 
@@ -64,7 +61,7 @@ csharp:
 ```
 
 
-#### Language-specific settings: Python
+## Language-specific settings: Python
 
 These settings apply only when `--python` is specified on the command line.
 

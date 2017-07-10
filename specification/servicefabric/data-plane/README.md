@@ -17,47 +17,41 @@ To see additional help and options, run:
 > `autorest --help`
 ---
 
-## Configuration for generating APIs
+## Configuration
 
 
----
-#### Basic Information 
+
+### Basic Information 
 These are the global settings for the ServiceFabricClient API.
 
 ``` yaml
-# common 
-title: Service Fabric
-description: Service Fabric Client
 openapi-type: data-plane
 tag: 1.0.0
-
 ```
 
 
-# Tag: 1.0.0
+### Tag: 1.0.0
 
 These settings apply only when `--tag=1.0.0` is specified on the command line.
 
 ``` yaml $(tag) == '1.0.0'
 input-file:
 - Microsoft.ServiceFabric/1.0.0/servicefabric.json
-
 ```
 
 
-# Tag: 5.6
+### Tag: 5.6
 
 These settings apply only when `--tag=5.6` is specified on the command line.
 
 ``` yaml $(tag) == '1.0.0'
 input-file:
 - Microsoft.ServiceFabric/5.6/servicefabric.json
-
 ```
 
 
 ---
-#### Language-specific settings: CSharp
+## Language-specific settings: CSharp
 
 These settings apply only when `--csharp` is specified on the command line.
 

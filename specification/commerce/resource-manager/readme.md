@@ -17,36 +17,31 @@ To see additional help and options, run:
 > `autorest --help`
 ---
 
-## Configuration for generating APIs
+## Configuration
 
 
----
-#### Basic Information 
+
+### Basic Information 
 These are the global settings for the Commerce API.
 
 ``` yaml
-# common 
-title: Commerce
-description: Commerce Client
 openapi-type: arm
 tag: package-2015-06-preview
-
 ```
 
 
-# Tag: package-2015-06-preview
+### Tag: package-2015-06-preview
 
 These settings apply only when `--tag=package-2015-06-preview` is specified on the command line.
 
 ``` yaml $(tag) == 'package-2015-06-preview'
 input-file:
 - Microsoft.Commerce/2015-06-01-preview/commerce.json
-
 ```
 
 
 ---
-#### Language-specific settings: CSharp
+## Language-specific settings: CSharp
 
 These settings apply only when `--csharp` is specified on the command line.
 

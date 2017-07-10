@@ -17,24 +17,22 @@ To see additional help and options, run:
 > `autorest --help`
 ---
 
-## Configuration for generating APIs
+## Configuration
 
 
----
-#### Basic Information 
+
+### Basic Information 
 These are the global settings for the Automation API.
 
 ``` yaml
-# common 
-title: Azure Automation
+title: AutomationClient
 description: Automation Client
 openapi-type: arm
 tag: package-2015-10
-
 ```
 
 
-# Tag: package-2015-10
+### Tag: package-2015-10
 
 These settings apply only when `--tag=package-2015-10` is specified on the command line.
 
@@ -58,12 +56,11 @@ input-file:
 - Microsoft.Automation/2015-10-31/schedule.json
 - Microsoft.Automation/2015-10-31/variable.json
 - Microsoft.Automation/2015-10-31/webhook.json
-
 ```
 
 
 ---
-#### Language-specific settings: CSharp
+## Language-specific settings: CSharp
 
 These settings apply only when `--csharp` is specified on the command line.
 

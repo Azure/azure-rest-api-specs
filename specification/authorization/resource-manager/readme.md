@@ -17,36 +17,31 @@ To see additional help and options, run:
 > `autorest --help`
 ---
 
-## Configuration for generating APIs
+## Configuration
 
 
----
-#### Basic Information 
+
+### Basic Information 
 These are the global settings for the Authorization API.
 
 ``` yaml
-# common 
-title: Authorization
-description: Authorization Client
 openapi-type: arm
 tag: package-2015-07
-
 ```
 
 
-# Tag: package-2015-07
+### Tag: package-2015-07
 
 These settings apply only when `--tag=package-2015-07` is specified on the command line.
 
 ``` yaml $(tag) == 'package-2015-07'
 input-file:
 - Microsoft.Authorization/2015-07-01/authorization.json
-
 ```
 
 
 ---
-#### Language-specific settings: CSharp
+## Language-specific settings: CSharp
 
 These settings apply only when `--csharp` is specified on the command line.
 

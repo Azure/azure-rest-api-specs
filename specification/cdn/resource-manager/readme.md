@@ -17,56 +17,49 @@ To see additional help and options, run:
 > `autorest --help`
 ---
 
-## Configuration for generating APIs
+## Configuration
 
 
----
-#### Basic Information 
+
+### Basic Information 
 These are the global settings for the Cdn API.
 
 ``` yaml
-# common 
-title: CDN
-description: CDN Client
 openapi-type: arm
 tag: package-2016-10
-
 ```
 
 
-# Tag: package-2016-10
+### Tag: package-2016-10
 
 These settings apply only when `--tag=package-2016-10` is specified on the command line.
 
 ``` yaml $(tag) == 'package-2016-10'
 input-file:
 - Microsoft.Cdn/2016-10-02/cdn.json
-
 ```
  
-# Tag: package-2016-04
+### Tag: package-2016-04
 
 These settings apply only when `--tag=package-2016-04` is specified on the command line.
 
 ``` yaml $(tag) == 'package-2016-04'
 input-file:
 - Microsoft.Cdn/2016-04-02/cdn.json
-
 ```
  
-# Tag: package-2015-06
+### Tag: package-2015-06
 
 These settings apply only when `--tag=package-2015-06` is specified on the command line.
 
 ``` yaml $(tag) == 'package-2015-06'
 input-file:
 - Microsoft.Cdn/2015-06-01/cdn.json
-
 ```
 
 
 ---
-#### Language-specific settings: CSharp
+## Language-specific settings: CSharp
 
 These settings apply only when `--csharp` is specified on the command line.
 

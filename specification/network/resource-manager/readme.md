@@ -17,24 +17,22 @@ To see additional help and options, run:
 > `autorest --help`
 ---
 
-## Configuration for generating APIs
+## Configuration
 
 
----
-#### Basic Information 
+
+### Basic Information 
 These are the global settings for the Network API.
 
 ``` yaml
-# common 
 title: NetworkManagementClient
 description: Network Client
 openapi-type: arm
 tag: package-2017-06
-
 ```
 
 
-# Tag: package-2017-06
+### Tag: package-2017-06
 
 These settings apply only when `--tag=package-2017-06` is specified on the command line.
 
@@ -61,7 +59,7 @@ input-file:
 ```
 
 
-# Tag: package-2017-03
+### Tag: package-2017-03
 
 These settings apply only when `--tag=package-2017-03` is specified on the command line.
 
@@ -86,7 +84,7 @@ input-file:
 - Microsoft.Compute/2017-03-01/vmssPublicIpAddress.json
 ```
  
-# Tag: package-2016-12
+### Tag: package-2016-12
 
 These settings apply only when `--tag=package-2016-12` is specified on the command line.
 
@@ -108,10 +106,9 @@ input-file:
 - Microsoft.Network/2016-12-01/usage.json
 - Microsoft.Network/2016-12-01/virtualNetwork.json
 - Microsoft.Network/2016-12-01/virtualNetworkGateway.json
-
 ```
  
-# Tag: package-2016-09
+### Tag: package-2016-09
 
 These settings apply only when `--tag=package-2016-09` is specified on the command line.
 
@@ -131,31 +128,27 @@ input-file:
 - Microsoft.Network/2016-09-01/usage.json
 - Microsoft.Network/2016-09-01/virtualNetwork.json
 - Microsoft.Network/2016-09-01/virtualNetworkGateway.json
-
 ```
  
-# Tag: package-2016-06
+### Tag: package-2016-06
 
 These settings apply only when `--tag=package-2016-06` is specified on the command line.
 
 ``` yaml $(tag) == 'package-2016-06'
 input-file:
 - Microsoft.Network/2016-06-01/network.json
-
-
 ```
  
-# Tag: package-2016-03
+### Tag: package-2016-03
 
 These settings apply only when `--tag=package-2016-03` is specified on the command line.
 
 ``` yaml $(tag) == 'package-2016-03'
 input-file:
 - Microsoft.Network/2016-03-30/network.json
-
 ```
  
-# Tag: package-2015-06split
+### Tag: package-2015-06split
 
 These settings apply only when `--tag=package-2015-06split` is specified on the command line.
 
@@ -175,7 +168,7 @@ input-file:
 - microsoft.Compute/2015-06-15/vmssNetworkInterface.json
 ```
  
-# Tag: package-2015-06
+### Tag: package-2015-06
 
 These settings apply only when `--tag=package-2015-06` is specified on the command line.
 
@@ -184,19 +177,18 @@ input-file:
 - Microsoft.Network/2015-06-15/network.json
 ```
  
-# Tag: package-2015-05-preview
+### Tag: package-2015-05-preview
 
 These settings apply only when `--tag=package-2015-05-preview` is specified on the command line.
 
 ``` yaml $(tag) == 'package-2015-05-preview'
 input-file:
 - Microsoft.Network/2015-05-01-preview/network.json
-
 ```
 
 
 ---
-#### Language-specific settings: CSharp
+## Language-specific settings: CSharp
 
 These settings apply only when `--csharp` is specified on the command line.
 
@@ -207,7 +199,7 @@ csharp:
 ```
 
 
-#### Language-specific settings: Python
+## Language-specific settings: Python
 
 These settings apply only when `--python` is specified on the command line.
 
@@ -219,7 +211,7 @@ python:
   payload-flattening-threshold: 2
 ```
 
-# Tag: package-2017-06 and python
+### Tag: package-2017-06 and python
 
 These settings apply only when `--tag=package-2017-06 --python` is specified on the command line.
 
@@ -227,7 +219,7 @@ These settings apply only when `--tag=package-2017-06 --python` is specified on 
 namespace: azure.mgmt.network.v2017_06_01
 ```
 
-# Tag: package-2017-03 and python
+### Tag: package-2017-03 and python
 
 These settings apply only when `--tag=package-2017-03 --python` is specified on the command line.
 
@@ -235,7 +227,7 @@ These settings apply only when `--tag=package-2017-03 --python` is specified on 
 namespace: azure.mgmt.network.v2017_03_01
 ```
 
-# Tag: package-2016-12 and python
+### Tag: package-2016-12 and python
 
 These settings apply only when `--tag=package-2016-12 --python` is specified on the command line.
 
@@ -243,7 +235,7 @@ These settings apply only when `--tag=package-2016-12 --python` is specified on 
 namespace: azure.mgmt.network.v2016_12_01
 ```
 
-# Tag: package-2016-09 and python
+### Tag: package-2016-09 and python
 
 These settings apply only when `--tag=package-2016-09 --python` is specified on the command line.
 
@@ -251,7 +243,7 @@ These settings apply only when `--tag=package-2016-09 --python` is specified on 
 namespace: azure.mgmt.network.v2016_09_01
 ```
 
-# Tag: package-2015-06split and python
+### Tag: package-2015-06split and python
 
 These settings apply only when `--tag=package-2015-06split --python` is specified on the command line.
 

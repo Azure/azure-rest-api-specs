@@ -17,24 +17,22 @@ To see additional help and options, run:
 > `autorest --help`
 ---
 
-## Configuration for generating APIs
+## Configuration
 
 
----
-#### Basic Information 
+
+### Basic Information 
 These are the global settings for the AppInsights API.
 
 ``` yaml
-# common 
-title: AppInsights
-description: AppInsights Client
+title: AppInsightsManagementClient
+description: Composite Swagger for Application Insights Management Client
 openapi-type: arm
 tag: package-2015-05
-
 ```
 
 
-# Tag: package-2015-05
+### Tag: package-2015-05
 
 These settings apply only when `--tag=package-2015-05` is specified on the command line.
 
@@ -43,12 +41,11 @@ input-file:
 - microsoft.insights/2015-05-01/aiOperations_API.json
 - microsoft.insights/2015-05-01/components_API.json
 - microsoft.insights/2015-05-01/webTests_API.json
-
 ```
 
 
 ---
-#### Language-specific settings: CSharp
+## Language-specific settings: CSharp
 
 These settings apply only when `--csharp` is specified on the command line.
 

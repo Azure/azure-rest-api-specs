@@ -17,56 +17,49 @@ To see additional help and options, run:
 > `autorest --help`
 ---
 
-## Configuration for generating APIs
+## Configuration
 
 
----
-#### Basic Information 
+
+### Basic Information 
 These are the global settings for the ContainerRegistry API.
 
 ``` yaml
-# common 
-title: Container Registry
-description: Container Registry Client
 openapi-type: arm
 tag: package-2017-06-preview
-
 ```
 
 
-# Tag: package-2017-06-preview
+### Tag: package-2017-06-preview
 
 These settings apply only when `--tag=package-2017-06-preview` is specified on the command line.
 
 ``` yaml $(tag) == 'package-2017-06-preview'
 input-file:
 - Microsoft.ContainerRegistry/2017-06-01-preview/containerregistry.json
-
 ```
  
-# Tag: package-2017-03
+### Tag: package-2017-03
 
 These settings apply only when `--tag=package-2017-03` is specified on the command line.
 
 ``` yaml $(tag) == 'package-2017-03'
 input-file:
 - Microsoft.ContainerRegistry/2017-03-01/containerregistry.json
-
 ```
  
-# Tag: package-2016-06-preview
+### Tag: package-2016-06-preview
 
 These settings apply only when `--tag=package-2016-06-preview` is specified on the command line.
 
 ``` yaml $(tag) == 'package-2016-06-preview'
 input-file:
 - Microsoft.ContainerRegistry/2016-06-27-preview/containerregistry.json
-
 ```
 
 
 ---
-#### Language-specific settings: CSharp
+## Language-specific settings: CSharp
 
 These settings apply only when `--csharp` is specified on the command line.
 

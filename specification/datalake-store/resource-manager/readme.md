@@ -17,24 +17,23 @@ To see additional help and options, run:
 > `autorest --help`
 ---
 
-## Configuration for generating APIs
+## Configuration
 
 
----
-#### Basic Information 
+
+### Basic Information 
 These are the global settings for the DataLakeStore API.
 
 ``` yaml
-# common 
+ 
 title: DataLake Store
 description: DataLake Store Client
 openapi-type: arm
 tag: package-2016-11
-
 ```
 
 
-# Tag: package-2016-11
+### Tag: package-2016-11
 
 These settings apply only when `--tag=package-2016-11` is specified on the command line.
 
@@ -42,10 +41,9 @@ These settings apply only when `--tag=package-2016-11` is specified on the comma
 input-file:
 - Microsoft.DataLakeStore/2016-11-01/account.json
 - Microsoft.DataLakeStore/2016-11-01/filesystem.json
-
 ```
  
-# Tag: package-2015-10-preview
+### Tag: package-2015-10-preview
 
 These settings apply only when `--tag=package-2015-10-preview` is specified on the command line.
 
@@ -53,12 +51,11 @@ These settings apply only when `--tag=package-2015-10-preview` is specified on t
 input-file:
 - Microsoft.DataLakeStore/2015-10-01-preview/account.json
 - Microsoft.DataLakeStore/2015-10-01-preview/filesystem.json
-
 ```
 
 
 ---
-#### Language-specific settings: CSharp
+## Language-specific settings: CSharp
 
 These settings apply only when `--csharp` is specified on the command line.
 

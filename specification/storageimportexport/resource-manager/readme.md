@@ -17,36 +17,31 @@ To see additional help and options, run:
 > `autorest --help`
 ---
 
-## Configuration for generating APIs
+## Configuration
 
 
----
-#### Basic Information 
+
+### Basic Information 
 These are the global settings for the StorageImportExport API.
 
 ``` yaml
-# common 
-title: Storage Import Export
-description: Storage Import Export Client
 openapi-type: arm
 tag: package-2016-11
-
 ```
 
 
-# Tag: package-2016-11
+### Tag: package-2016-11
 
 These settings apply only when `--tag=package-2016-11` is specified on the command line.
 
 ``` yaml $(tag) == 'package-2016-11'
 input-file:
 - Microsoft.ImportExport/2016-11-01/storageimportexport.json
-
 ```
 
 
 ---
-#### Language-specific settings: CSharp
+## Language-specific settings: CSharp
 
 These settings apply only when `--csharp` is specified on the command line.
 

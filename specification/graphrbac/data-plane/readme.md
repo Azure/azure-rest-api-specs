@@ -17,36 +17,31 @@ To see additional help and options, run:
 > `autorest --help`
 ---
 
-## Configuration for generating APIs
+## Configuration
 
 
----
-#### Basic Information 
+
+### Basic Information 
 These are the global settings for the GraphRbac API.
 
 ``` yaml
-# common 
-title: GraphRbacManagementClient
-description: Azure Active Directory Graph RBAC management client.
 openapi-type: data-plane
 tag: 1.6
-
 ```
 
 
-# Tag: 1.6
+### Tag: 1.6
 
 These settings apply only when `--tag=1.6` is specified on the command line.
 
 ``` yaml $(tag) == '1.6'
 input-file:
 - 1.6/graphrbac.json
-
 ```
 
 
 ---
-#### Language-specific settings: CSharp
+## Language-specific settings: CSharp
 
 These settings apply only when `--csharp` is specified on the command line.
 
@@ -57,7 +52,7 @@ csharp:
 ```
 
 
-#### Language-specific settings: Python
+## Language-specific settings: Python
 
 These settings apply only when `--python` is specified on the command line.
 

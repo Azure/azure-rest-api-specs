@@ -17,36 +17,31 @@ To see additional help and options, run:
 > `autorest --help`
 ---
 
-## Configuration for generating APIs
+## Configuration
 
 
----
-#### Basic Information 
+
+### Basic Information 
 These are the global settings for the MobileEngagement API.
 
 ``` yaml
-# common 
-title: Mobile Engagement
-description: Mobile Engagement Client
 openapi-type: arm
 tag: package-2014-12
-
 ```
 
 
-# Tag: package-2014-12
+### Tag: package-2014-12
 
 These settings apply only when `--tag=package-2014-12` is specified on the command line.
 
 ``` yaml $(tag) == 'package-2014-12'
 input-file:
 - Microsoft.MobileEngagement/2014-12-01/mobile-engagement.json
-
 ```
 
 
 ---
-#### Language-specific settings: CSharp
+## Language-specific settings: CSharp
 
 These settings apply only when `--csharp` is specified on the command line.
 

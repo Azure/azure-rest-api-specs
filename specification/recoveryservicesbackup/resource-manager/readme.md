@@ -17,18 +17,16 @@ To see additional help and options, run:
 > `autorest --help`
 ---
 
-## Configuration for generating APIs
+## Configuration
 
 
----
-#### Basic Information 
+
+### Basic Information 
 These are the global settings for the RecoveryServicesBackup API.
 
 ``` yaml
-# common
-override-info:
-  title: Recovery Services Backup Client
-  description: Open API 2.0 Specs for Azure RecoveryServices Backup service
+title: Recovery Services Backup Client
+description: Open API 2.0 Specs for Azure RecoveryServices Backup service
 openapi-type: arm
 tag: package-2016-12
 
@@ -37,7 +35,7 @@ license-header: MICROSOFT_MIT
 ```
 
 
-# Tag: package-2016-12
+### Tag: package-2016-12
 
 These settings apply only when `--tag=package-2016-12` is specified on the command line.
 
@@ -45,10 +43,9 @@ These settings apply only when `--tag=package-2016-12` is specified on the comma
 input-file:
 - Microsoft.RecoveryServices/2016-12-01/backupManagement.json
 - Microsoft.RecoveryServices/2016-08-10/operations.json
-
 ```
  
-# Tag: package-2016-06
+### Tag: package-2016-06
 
 These settings apply only when `--tag=package-2016-06` is specified on the command line.
 
@@ -56,7 +53,6 @@ These settings apply only when `--tag=package-2016-06` is specified on the comma
 input-file:
 - Microsoft.RecoveryServices/2016-06-01/recoveryservicesbackup.json
 - Microsoft.RecoveryServices/2016-06-01/registeredIdentities.json
-
 ```
 
 

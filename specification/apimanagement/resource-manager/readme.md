@@ -17,24 +17,22 @@ To see additional help and options, run:
 > `autorest --help`
 ---
 
-## Configuration for generating APIs
+## Configuration
 
 
----
-#### Basic Information 
+
+### Basic Information 
 These are the global settings for the ApiManagement API.
 
 ``` yaml
-# common 
 title: ApiManagementClient
 description: ApiManagement Client
 openapi-type: arm
 tag: package-2016-10
-
 ```
 
 
-# Tag: package-2016-10
+### Tag: package-2016-10
 
 These settings apply only when `--tag=package-2016-10` is specified on the command line.
 
@@ -58,10 +56,9 @@ input-file:
 - Microsoft.ApiManagement/2016-10-10/apimsubscriptions.json
 - Microsoft.ApiManagement/2016-10-10/apimtenant.json
 - Microsoft.ApiManagement/2016-10-10/apimusers.json
-
 ```
  
-# Tag: package-2016-07
+### Tag: package-2016-07
 
 These settings apply only when `--tag=package-2016-07` is specified on the command line.
 
@@ -69,12 +66,11 @@ These settings apply only when `--tag=package-2016-07` is specified on the comma
 input-file:
 - Microsoft.ApiManagement/2016-07-07/apimanagement.json
 - Microsoft.ApiManagement/2016-07-07/apimdeployment.json
-
 ```
 
 
 ---
-#### Language-specific settings: CSharp
+## Language-specific settings: CSharp
 
 These settings apply only when `--csharp` is specified on the command line.
 
