@@ -31,6 +31,45 @@ openapi-type: arm
 tag: package-2017-05
 ```
 
+### Tag: package-features
+These settings apply only when `--tag=package-features` is specified on the command line.
+
+``` yaml $(tag) == 'package-features'
+input-file:
+- Microsoft.Features/2015-12-01/features.json
+```
+
+### Tag: package-locks
+These settings apply only when `--tag=package-locks` is specified on the command line.
+
+``` yaml $(tag) == 'package-locks'
+input-file:
+- Microsoft.Authorization/2016-09-01/locks.json
+```
+
+### Tag: package-policy
+These settings apply only when `--tag=package-policy` is specified on the command line.
+
+``` yaml $(tag) == 'package-policy'
+input-file:
+- Microsoft.Authorization/2016-12-01/policy.json
+```
+
+### Tag: package-resources
+These settings apply only when `--tag=package-resources` is specified on the command line.
+
+``` yaml $(tag) == 'package-resources'
+input-file:
+- Microsoft.Resources/2017-05-10/resources.json
+```
+
+### Tag: package-subscriptions
+These settings apply only when `--tag=package-subscriptions` is specified on the command line.
+
+``` yaml $(tag) == 'package-subscriptions'
+input-file:
+- Microsoft.Resources/2016-06-01/subscriptions.json
+```
 
 ### Tag: package-2017-05
 
