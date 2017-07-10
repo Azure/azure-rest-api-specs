@@ -31,42 +31,42 @@ openapi-type: arm
 tag: package-2017-05
 ```
 
-### Tag: package-features
-These settings apply only when `--tag=package-features` is specified on the command line.
+### Tag: package-features-2015-12
+These settings apply only when `--tag=package-features-2015-12` is specified on the command line.
 
-``` yaml $(tag) == 'package-features'
+``` yaml $(tag) == 'package-features-2015-12'
 input-file:
 - Microsoft.Features/2015-12-01/features.json
 ```
 
-### Tag: package-locks
-These settings apply only when `--tag=package-locks` is specified on the command line.
+### Tag: package-locks-2016-09
+These settings apply only when `--tag=package-locks-2016-09` is specified on the command line.
 
-``` yaml $(tag) == 'package-locks'
+``` yaml $(tag) == 'package-locks-2016-09'
 input-file:
 - Microsoft.Authorization/2016-09-01/locks.json
 ```
 
-### Tag: package-policy
-These settings apply only when `--tag=package-policy` is specified on the command line.
+### Tag: package-policy-2016-12
+These settings apply only when `--tag=package-policy-2016-12` is specified on the command line.
 
-``` yaml $(tag) == 'package-policy'
+``` yaml $(tag) == 'package-policy-2016-12'
 input-file:
 - Microsoft.Authorization/2016-12-01/policy.json
 ```
 
-### Tag: package-resources
-These settings apply only when `--tag=package-resources` is specified on the command line.
+### Tag: package-resources-2017-05
+These settings apply only when `--tag=package-resources-2017-05` is specified on the command line.
 
-``` yaml $(tag) == 'package-resources'
+``` yaml $(tag) == 'package-resources-2017-05'
 input-file:
 - Microsoft.Resources/2017-05-10/resources.json
 ```
 
-### Tag: package-subscriptions
-These settings apply only when `--tag=package-subscriptions` is specified on the command line.
+### Tag: package-subscriptions-2016-06
+These settings apply only when `--tag=package-subscriptions-2016-06` is specified on the command line.
 
-``` yaml $(tag) == 'package-subscriptions'
+``` yaml $(tag) == 'package-subscriptions-2016-06'
 input-file:
 - Microsoft.Resources/2016-06-01/subscriptions.json
 ```
