@@ -25,7 +25,7 @@ To see additional help and options, run:
 These are the global settings for the StreamAnalytics API.
 
 ``` yaml
-title: Stream Analytics Management Client
+title: Stream Analytics Management ClientX
 description: Stream Analytics Client
 openapi-type: arm
 tag: package-2016-03
