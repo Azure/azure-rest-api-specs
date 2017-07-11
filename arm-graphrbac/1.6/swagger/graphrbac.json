@@ -2076,6 +2076,10 @@
           "type": "boolean",
           "description": "Whether the AAD object is mail-enabled."
         },
+        "mailNickname": {
+          "type": "string",
+          "description": "The mail alias for the user."
+        },
         "securityEnabled": {
           "type": "boolean",
           "description": "Whether the AAD object is security-enabled."
@@ -2094,6 +2098,43 @@
         "userType": {
           "type": "string",
           "description": "The user type of the object."
+        },
+        "usageLocation": {
+          "type": "string",
+          "description": "A two letter country code (ISO standard 3166). Required for users that will be assigned licenses due to legal requirement to check for availability of services in countries. Examples include: \"US\", \"JP\", and \"GB\"."
+        },
+        "appId": {
+          "type": "string",
+          "description": "The application ID."
+        },
+        "appPermissions": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "description": "The application permissions."
+        },
+        "availableToOtherTenants": {
+          "type": "boolean",
+          "description": "Whether the application is be available to other tenants."
+        },
+        "identifierUris": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "description": "A collection of URIs for the application."
+        },
+        "replyUrls": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "description": "A collection of reply URLs for the application."
+        },
+        "homepage": {
+          "type": "string",
+          "description": "The home page of the application."
         }
       },
       "description": "The properties of an Active Directory object."
