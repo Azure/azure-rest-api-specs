@@ -43,7 +43,6 @@ input-file:
 - microsoft.insights/2016-03-01/alertRules_API.json
 - microsoft.insights/2016-03-01/logProfiles_API.json
 - microsoft.insights/2016-09-01/serviceDiagnosticsSettings_API.json
-- microsoft.insights/2017-03-01-preview/activityLogAlerts_API.json
 - microsoft.insights/2017-04-01/actionGroups_API.json
 - microsoft.insights/2017-04-01/activityLogAlerts_API.json
 ```
