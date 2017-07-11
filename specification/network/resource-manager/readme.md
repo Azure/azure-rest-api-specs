@@ -46,7 +46,7 @@ input-file:
 - Microsoft.Network/2017-06-01/networkInterface.json
 - Microsoft.Network/2017-06-01/networkSecurityGroup.json
 - Microsoft.Network/2017-06-01/networkWatcher.json
-- Microsoft.Compute/2017-06-01/privateAccessServices.json
+- Microsoft.Network/2017-06-01/privateAccessServices.json
 - Microsoft.Network/2017-06-01/publicIpAddress.json
 - Microsoft.Network/2017-06-01/routeFilter.json
 - Microsoft.Network/2017-06-01/routeTable.json
@@ -80,8 +80,8 @@ input-file:
 - Microsoft.Network/2017-03-01/usage.json
 - Microsoft.Network/2017-03-01/virtualNetwork.json
 - Microsoft.Network/2017-03-01/virtualNetworkGateway.json
-- Microsoft.Compute/2017-03-01/vmssNetworkInterface.json
-- Microsoft.Compute/2017-03-01/vmssPublicIpAddress.json
+- Microsoft.Network/2017-03-01/vmssNetworkInterface.json
+- Microsoft.Network/2017-03-01/vmssPublicIpAddress.json
 ```
  
 ### Tag: package-2016-12
@@ -90,7 +90,7 @@ These settings apply only when `--tag=package-2016-12` is specified on the comma
 
 ``` yaml $(tag) == 'package-2016-12'
 input-file:
-- microsoft.Compute/2016-12-01/vmssNetworkInterface.json
+- Microsoft.Network/2016-12-01/vmssNetworkInterface.json
 - Microsoft.Network/2016-12-01/applicationGateway.json
 - Microsoft.Network/2016-12-01/checkDnsAvailability.json
 - Microsoft.Network/2016-12-01/expressRouteCircuit.json
@@ -114,7 +114,7 @@ These settings apply only when `--tag=package-2016-09` is specified on the comma
 
 ``` yaml $(tag) == 'package-2016-09'
 input-file:
-- microsoft.Compute/2016-09-01/vmssNetworkInterface.json
+- microsoft.Network/2016-09-01/vmssNetworkInterface.json
 - Microsoft.Network/2016-09-01/applicationGateway.json
 - Microsoft.Network/2016-09-01/checkDnsAvailability.json
 - Microsoft.Network/2016-09-01/expressRouteCircuit.json
@@ -165,7 +165,7 @@ input-file:
 - Microsoft.Network/2015-06-15/usage.json
 - Microsoft.Network/2015-06-15/virtualNetwork.json
 - Microsoft.Network/2015-06-15/virtualNetworkGateway.json
-- microsoft.Compute/2015-06-15/vmssNetworkInterface.json
+- Microsoft.Network/2015-06-15/vmssNetworkInterface.json
 ```
  
 ### Tag: package-2015-06
