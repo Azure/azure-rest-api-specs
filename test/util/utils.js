@@ -27,7 +27,7 @@ exports.prOnly = undefined !== process.env['PR_ONLY'] ? process.env['PR_ONLY'] :
 
 exports.globPath = path.join(__dirname, '../', '../', '/specification/**/*.json');
 exports.swaggers = _(glob.sync(exports.globPath, { ignore: ['**/examples/**/*.json', '**/quickstart-templates/*.json', '**/schema/*.json'] }));
-exports.exampleGlobPath = path.join(__dirname, '../', '../', '/**/examples/**/*.json');
+exports.exampleGlobPath = path.join(__dirname, '../', '../', '/specification/**/examples/**/*.json');
 exports.examples = _(glob.sync(exports.exampleGlobPath));
 
 // Remove byte order marker. This catches EF BB BF (the UTF-8 BOM)
@@ -148,13 +148,59 @@ exports.getTimeStamp = function getTimeStamp() {
  * Retrieves list of swagger files to be processed for linting
  * @returns {Array} list of files to be processed for linting
  */
+exports.getConfigFilesChangedInPR = function getConfigFilesChangedInPR() {
+  if (exports.prOnly === 'true') {
+    let targetBranch, cmd, filesChanged, swaggerFilesInPR;
+    try {
+      targetBranch = exports.getTargetBranch();
+      execSync(`git fetch origin ${targetBranch}`);
+      cmd = `git diff --name-only HEAD $(git merge-base HEAD FETCH_HEAD)`;
+      filesChanged = execSync(cmd, { encoding: 'utf8' }).split('\n');
+      console.log('>>>>> Files changed in this PR are as follows:');
+      console.log(filesChanged);
+
+      // traverse up to readme.md files
+      const configFiles = new Set();
+      for (let fileChanged of filesChanged) {
+        while (fileChanged.startsWith("specification")) {
+          if (fileChanged.toLowerCase().endsWith("readme.md") && fs.existsSync(fileChanged)) {
+            configFiles.add(fileChanged);
+            break;
+          }
+          // select parent readme
+          const parts = fileChanged.split('/');
+          parts.pop();
+          parts.pop();
+          parts.push("readme.md");
+          fileChanged = parts.join('/');
+        }
+      }
+      filesChanged = [...configFiles.values()];
+
+      console.log('>>>>> Affected configuration files:');
+      console.log(filesChanged);
+
+      return filesChanged;
+    } catch (err) {
+      throw err;
+    }
+  } else {
+    return exports.swaggers;
+  }
+};
+
+/**
+ * Retrieves list of swagger files to be processed for linting
+ * @returns {Array} list of files to be processed for linting
+ */
 exports.getFilesChangedInPR = function getFilesChangedInPR() {
   let result = exports.swaggers;
   if (exports.prOnly === 'true') {
     let targetBranch, cmd, filesChanged, swaggerFilesInPR;
     try {
       targetBranch = exports.getTargetBranch();
-      cmd = `git diff --name-only HEAD $(git merge-base HEAD ${targetBranch})`;
+      execSync(`git fetch origin ${targetBranch}`);
+      cmd = `git diff --name-only HEAD $(git merge-base HEAD FETCH_HEAD)`;
       filesChanged = execSync(cmd, { encoding: 'utf8' });
       console.log('>>>>> Files changed in this PR are as follows:')
       console.log(filesChanged);
