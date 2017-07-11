@@ -38,7 +38,6 @@ These settings apply only when `--tag=package-2017-01` is specified on the comma
 
 ``` yaml $(tag) == 'package-2017-01'
 input-file:
-- Microsoft.MachineLearning/2016-05-01-preview/commitmentPlans.json
 - Microsoft.MachineLearning/2017-01-01/webservices.json
 ```
  

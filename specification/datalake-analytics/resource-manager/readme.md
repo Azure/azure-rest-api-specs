@@ -39,8 +39,6 @@ These settings apply only when `--tag=package-2016-11` is specified on the comma
 ``` yaml $(tag) == 'package-2016-11'
 input-file:
 - Microsoft.DataLakeAnalytics/2016-11-01/account.json
-- Microsoft.DataLakeAnalytics/2016-11-01/catalog.json
-- Microsoft.DataLakeAnalytics/2016-11-01/job.json
 ```
  
 ### Tag: package-2016-03-preview

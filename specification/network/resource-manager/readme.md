@@ -54,8 +54,8 @@ input-file:
 - Microsoft.Network/2017-06-01/usage.json
 - Microsoft.Network/2017-06-01/virtualNetwork.json
 - Microsoft.Network/2017-06-01/virtualNetworkGateway.json
-- Microsoft.Compute/2017-06-01/vmssNetworkInterface.json
-- Microsoft.Compute/2017-06-01/vmssPublicIpAddress.json
+- Microsoft.Network/2017-06-01/vmssNetworkInterface.json
+- Microsoft.Network/2017-06-01/vmssPublicIpAddress.json
 ```
 
 
