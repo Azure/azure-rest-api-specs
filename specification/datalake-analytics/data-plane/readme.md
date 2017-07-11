@@ -31,7 +31,6 @@ openapi-type: data-plane
 tag: package-2016-11
 ```
 
-
 ### Tag: package-2016-11
 
 These settings apply only when `--tag=package-2016-11` is specified on the command line.
@@ -41,24 +40,49 @@ input-file:
 - Microsoft.DataLakeAnalytics/2016-11-01/catalog.json
 - Microsoft.DataLakeAnalytics/2016-11-01/job.json
 ```
+
+### Tag: package-catalog-2016-11
+
+These settings apply only when `--tag=package-catalog-2016-11` is specified on the command line.
+
+``` yaml $(tag) == 'package-catalog-2016-11'
+input-file:
+- Microsoft.DataLakeAnalytics/2016-11-01/catalog.json
+```
  
-### Tag: package-2016-03-preview
+### Tag: package-catalog-2015-10-preview
 
-These settings apply only when `--tag=package-2016-03-preview` is specified on the command line.
+These settings apply only when `--tag=package-catalog-2015-10-preview` is specified on the command line.
 
-``` yaml $(tag) == 'package-2016-03-preview'
+``` yaml $(tag) == 'package-catalog-2015-10-preview'
 input-file:
 - Microsoft.DataLakeAnalytics/2015-10-01-preview/catalog.json
+```
+
+### Tag: package-job-2016-11
+
+These settings apply only when `--tag=package-job-2016-11` is specified on the command line.
+
+``` yaml $(tag) == 'package-job-2016-11'
+input-file:
+- Microsoft.DataLakeAnalytics/2016-11-01/job.json
+```
+ 
+### Tag: package-job-2016-03-preview
+
+These settings apply only when `--tag=package-job-2016-03-preview` is specified on the command line.
+
+``` yaml $(tag) == 'package-job-2016-03-preview'
+input-file:
 - Microsoft.DataLakeAnalytics/2016-03-20-preview/job.json
 ```
  
-### Tag: package-2015-11-preview
+### Tag: package-job-2015-11-preview
 
-These settings apply only when `--tag=package-2015-11-preview` is specified on the command line.
+These settings apply only when `--tag=package-job-2015-11-preview` is specified on the command line.
 
-``` yaml $(tag) == 'package-2015-11-preview'
+``` yaml $(tag) == 'package-job-2015-11-preview'
 input-file:
-- Microsoft.DataLakeAnalytics/2015-10-01-preview/catalog.json
 - Microsoft.DataLakeAnalytics/2015-11-01-preview/job.json
 ```
 
