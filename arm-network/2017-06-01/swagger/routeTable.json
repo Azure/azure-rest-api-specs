@@ -463,6 +463,7 @@
           "description": "The IP address packets should be forwarded to. Next hop values are only allowed in routes where the next hop type is VirtualAppliance."
         },
         "provisioningState": {
+          "readOnly": true,
           "type": "string",
           "description": "The provisioning state of the resource. Possible values are: 'Updating', 'Deleting', and 'Failed'."
         }
@@ -472,7 +473,7 @@
       ],
       "description": "Route resource"
     },
-	"Route": {
+    "Route": {
       "properties": {
         "properties": {
           "x-ms-client-flatten": true,
@@ -483,6 +484,7 @@
           "description": "The name of the resource that is unique within a resource group. This name can be used to access the resource."
         },
         "etag": {
+          "readOnly": true,
           "type": "string",
           "description": "A unique read-only string that changes whenever the resource is updated."
         }
@@ -512,6 +514,7 @@
           "description": "A collection of references to subnets."
         },
         "provisioningState": {
+          "readOnly": true,
           "type": "string",
           "description": "The provisioning state of the resource. Possible values are: 'Updating', 'Deleting', and 'Failed'."
         }
@@ -525,6 +528,7 @@
           "$ref": "#/definitions/RouteTablePropertiesFormat"
         },
         "etag": {
+          "readOnly": true,
           "type": "string",
           "description": "Gets a unique read-only string that changes whenever the resource is updated."
         }
