@@ -26,7 +26,7 @@ These are the global settings for the DataLakeStore API.
 
 ``` yaml
  
-title: DataLake Store
+title: DataLakeStoreAccountManagementClient
 description: DataLake Store Client
 openapi-type: arm
 tag: package-2016-11
