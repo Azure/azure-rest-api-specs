@@ -13,11 +13,11 @@ const exec = require('child_process').exec,
     request = require('request');
 
 // let blobService = azure.createBlobService();
-let swaggersToProcess = utils.getFilesChangedInPR();
+let configsToProcess = utils.getConfigFilesChangedInPR();
 let targetBranch = utils.getTargetBranch();
 let sourceBranch = utils.getSourceBranch();
 let pullRequestNumber = utils.getPullRequestNumber();
-let linterCmd = `autorest --message-format=json --azure-validator=true --input-file=`;
+let linterCmd = `autorest --azure-validator --message-format=json `;
 let gitCheckoutCmd = `git checkout ${targetBranch}`;
 let gitLogCmd = `git log -3`;
 var filename = `${pullRequestNumber}_${utils.getTimeStamp()}.json`;
@@ -142,20 +142,20 @@ function updateResult(spec, errors, beforeOrAfter) {
 function runScript() {
     // Useful when debugging a test for a particular swagger. 
     // Just update the regex. That will return an array of filtered items.
-    // swaggersToProcess = ['/Users/vishrut/git-repos/rest-repo-reorg/azure-rest-api-specs/arm-storage/2016-12-01/swagger/storage.json',
-    //                     '/Users/vishrut/git-repos/rest-repo-reorg/azure-rest-api-specs/arm-web/2016-09-01/swagger/AppServicePlans.json'];
-    swaggersToProcess = swaggersToProcess.filter(function (swaggerFile) {
-        return swaggerFile.indexOf('.json') != -1;
+    // configsToProcess = ['/Users/vishrut/git-repos/azure-rest-api-specs/specification/storage/resource-manager/readme.md',
+    //                    '/Users/vishrut/git-repos/azure-rest-api-specs/specification/web/resource-manager/readme.md'];
+    configsToProcess = configsToProcess.filter(function (configFile) {
+        return configFile.indexOf('.md') != -1;
     });
-    console.log(swaggersToProcess);
+    console.log(configsToProcess);
     createLogFile();
     console.log(`The results will be logged here: "${logFilepath}".`)
 
-    let afterPRPromiseFactories = _(swaggersToProcess).map(function (swagger) {
+    let afterPRPromiseFactories = _(configsToProcess).map(function (swagger) {
         return function () { return runTools(swagger, 'after'); };
     });
 
-    let beforePromiseFactories = _(swaggersToProcess).map(function (swagger) {
+    let beforePromiseFactories = _(configsToProcess).map(function (swagger) {
         return function () { return runTools(swagger, 'before'); };
     });
 
