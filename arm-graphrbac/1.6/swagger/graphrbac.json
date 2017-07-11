@@ -563,6 +563,42 @@
         }
       }
     },
+    "/{tenantID}/groups/{groupObjectId}": {
+      "delete": {
+        "tags": [
+          "Group"
+        ],
+        "operationId": "Groups_Delete",
+        "description": "Delete a group from the directory.",
+        "parameters": [
+          {
+            "name": "groupObjectId",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The object ID of the group to delete.",
+            "x-ms-skip-url-encoding": true
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/tenantIDInPath"
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "No Content"
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/GraphError"
+            }
+          }
+        }
+      }
+    },
     "/{tenantID}/groups": {
       "post": {
         "tags": [
@@ -716,40 +752,6 @@
             "schema": {
               "$ref": "#/definitions/ADGroup"
             }
-          },
-          "default": {
-            "description": "Error response describing why the operation failed.",
-            "schema": {
-              "$ref": "#/definitions/GraphError"
-            }
-          }
-        }
-      },
-      "delete": {
-        "tags": [
-          "Group"
-        ],
-        "operationId": "Groups_Delete",
-        "description": "Delete a group from the directory.",
-        "parameters": [
-          {
-            "name": "objectId",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "description": "The object ID of the group to delete.",
-            "x-ms-skip-url-encoding": true
-          },
-          {
-            "$ref": "#/parameters/ApiVersionParameter"
-          },
-          {
-            "$ref": "#/parameters/tenantIDInPath"
-          }
-        ],
-        "responses": {
-          "204": {
-            "description": "No Content"
           },
           "default": {
             "description": "Error response describing why the operation failed.",
