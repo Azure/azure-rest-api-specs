@@ -1,3 +1,4 @@
+
 # DataLakeAnalytics
     
 > see https://aka.ms/autorest
@@ -25,8 +26,6 @@ To see additional help and options, run:
 These are the global settings for the DataLakeAnalytics API.
 
 ``` yaml
-title: DataLakeAnalyticsAccountManagementClient
-description: DataLake Analytics Client
 openapi-type: arm
 tag: package-2016-11
 ```

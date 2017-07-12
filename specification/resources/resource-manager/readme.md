@@ -25,8 +25,6 @@ To see additional help and options, run:
 These are the global settings for the Resource API.
 
 ``` yaml
-title: ResourceClient
-description: Resource Client
 openapi-type: arm
 tag: package-2017-05
 ```
@@ -76,6 +74,8 @@ input-file:
 These settings apply only when `--tag=package-2017-05` is specified on the command line.
 
 ``` yaml $(tag) == 'package-2017-05'
+title: ResourceClient
+description: Resource Client
 input-file:
 - Microsoft.Authorization/2016-09-01/locks.json
 - Microsoft.Authorization/2016-12-01/policy.json
@@ -91,6 +91,8 @@ input-file:
 These settings apply only when `--tag=package-2016-09` is specified on the command line.
 
 ``` yaml $(tag) == 'package-2016-09'
+title: ResourceClient
+description: Resource Client
 input-file:
 - Microsoft.Authorization/2016-09-01/locks.json
 - Microsoft.Authorization/2016-04-01/policy.json
@@ -105,6 +107,8 @@ input-file:
 These settings apply only when `--tag=package-2016-07` is specified on the command line.
 
 ``` yaml $(tag) == 'package-2016-07'
+title: ResourceClient
+description: Resource Client
 input-file:
 - Microsoft.Authorization/2015-01-01/locks.json
 - Microsoft.Authorization/2016-04-01/policy.json
@@ -118,6 +122,8 @@ input-file:
 These settings apply only when `--tag=package-2016-06` is specified on the command line.
 
 ``` yaml $(tag) == 'package-2016-06'
+title: ResourceClient
+description: Resource Client
 input-file:
 - Microsoft.Authorization/2015-01-01/locks.json
 - Microsoft.Authorization/2016-04-01/policy.json
@@ -131,6 +137,8 @@ input-file:
 These settings apply only when `--tag=package-2016-04` is specified on the command line.
 
 ``` yaml $(tag) == 'package-2016-04'
+title: ResourceClient
+description: Resource Client
 input-file:
 - Microsoft.Authorization/2015-01-01/locks.json
 - Microsoft.Authorization/2016-04-01/policy.json
@@ -144,6 +152,8 @@ input-file:
 These settings apply only when `--tag=package-2016-02` is specified on the command line.
 
 ``` yaml $(tag) == 'package-2016-02'
+title: ResourceClient
+description: Resource Client
 input-file:
 - Microsoft.Authorization/2015-01-01/locks.json
 - Microsoft.Authorization/2015-10-01-preview/policy.json
@@ -157,6 +167,8 @@ input-file:
 These settings apply only when `--tag=package-2015-12` is specified on the command line.
 
 ``` yaml $(tag) == 'package-2015-12'
+title: ResourceClient
+description: Resource Client
 input-file:
 - Microsoft.Authorization/2015-01-01/locks.json
 - Microsoft.Authorization/2015-10-01-preview/policy.json
