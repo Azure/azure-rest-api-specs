@@ -543,6 +543,17 @@
             "$ref": "#/definitions/EffectiveNetworkSecurityRule"
           },
           "description": "A collection of effective security rules."
+        },
+        "tagMap": {
+          "type": "string",
+          "additionalProperties": {
+            "type":"array",
+            "items": {
+              "type": "string"
+            },
+            "description": "List of IP Addresses within the tag (key)"
+          },
+          "description": "Mapping of tags to list of IP Addresses included within the tag."
         }
       },
       "description": "Effective network security group."
@@ -587,6 +598,20 @@
           "type": "string",
           "description": "The destination port or range."
         },
+        "sourcePortRanges": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "description": "The source port ranges. Expected values include a single integer between 0 and 65535, a range using '-' as seperator (e.g. 100-400), or an asterix (*)"
+        },
+        "destinationPortRanges": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "description": "The destination port ranges. Expected values include a single integer between 0 and 65535, a range using '-' as seperator (e.g. 100-400), or an asterix (*)"
+        },
         "sourceAddressPrefix": {
           "type": "string",
           "description": "The source address prefix."
@@ -594,6 +619,20 @@
         "destinationAddressPrefix": {
           "type": "string",
           "description": "The destination address prefix."
+        },
+        "sourceAddressPrefixes" : {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "description": "The source address prefixes. Expected values include CIDR IP ranges, Default Tags (VirtualNetwork, AureLoadBalancer, Internet), System Tags, and the asterix (*)."
+        },
+        "destinationAddressPrefixes" : {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "description": "The destination address prefixes. Expected values include CIDR IP ranges, Default Tags (VirtualNetwork, AureLoadBalancer, Internet), System Tags, and the asterix (*)."
         },
         "expandedSourceAddressPrefix": {
           "type": "array",
