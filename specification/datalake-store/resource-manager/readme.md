@@ -49,7 +49,6 @@ These settings apply only when `--tag=package-2015-10-preview` is specified on t
 ``` yaml $(tag) == 'package-2015-10-preview'
 input-file:
 - Microsoft.DataLakeStore/2015-10-01-preview/account.json
-- Microsoft.DataLakeStore/2015-10-01-preview/filesystem.json
 ```
 
 
