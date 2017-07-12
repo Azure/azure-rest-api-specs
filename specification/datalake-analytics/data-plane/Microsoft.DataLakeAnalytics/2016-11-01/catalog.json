@@ -43,6 +43,9 @@
         "deprecated": true,
         "operationId": "Catalog_CreateSecret",
         "description": "Creates the specified secret for use with external data sources in the specified database. This is deprecated and will be removed in the next release. Please use CreateCredential instead.",
+        "x-ms-examples": {
+          "Creates the specified secret for use with external data sources in the specified database": { "$ref": "../examples/Adla_Catalog_CreateSecret.json" }
+        },
         "parameters": [
           {
             "name": "databaseName",
@@ -84,6 +87,9 @@
         "deprecated": true,
         "operationId": "Catalog_UpdateSecret",
         "description": "Modifies the specified secret for use with external data sources in the specified database. This is deprecated and will be removed in the next release. Please use UpdateCredential instead.",
+        "x-ms-examples": {
+          "Modifies the specified secret for use with external data sources in the specified database": { "$ref": "../examples/Adla_Catalog_UpdateSecret.json" }
+        },
         "parameters": [
           {
             "name": "databaseName",
@@ -118,6 +124,41 @@
           }
         }
       },
+      "delete": {
+        "tags": [
+          "Catalog"
+        ],
+        "operationId": "Catalog_DeleteSecret",
+        "deprecated": true,
+        "description": "Deletes the specified secret in the specified database. This is deprecated and will be removed in the next release. Please use DeleteCredential instead.",
+        "x-ms-examples": {
+          "Deletes the specified secret in the specified database": { "$ref": "../examples/Adla_Catalog_DeleteSecret.json" }
+        },
+        "parameters": [
+          {
+            "name": "databaseName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the database containing the secret."
+          },
+          {
+            "name": "secretName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the secret to delete"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successfully deleted the specified secret from the specified database."
+          }
+        }
+      },
       "get": {
         "tags": [
           "Catalog"
@@ -125,6 +166,9 @@
         "deprecated": true,
         "operationId": "Catalog_GetSecret",
         "description": "Gets the specified secret in the specified database. This is deprecated and will be removed in the next release. Please use GetCredential instead.",
+        "x-ms-examples": {
+          "Gets the specified secret in the specified database": { "$ref": "../examples/Adla_Catalog_GetSecret.json" }
+        },
         "parameters": [
           {
             "name": "databaseName",
@@ -152,38 +196,6 @@
             }
           }
         }
-      },
-      "delete": {
-        "tags": [
-          "Catalog"
-        ],
-        "operationId": "Catalog_DeleteSecret",
-        "deprecated": true,
-        "description": "Deletes the specified secret in the specified database. This is deprecated and will be removed in the next release. Please use DeleteCredential instead.",
-        "parameters": [
-          {
-            "name": "databaseName",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "description": "The name of the database containing the secret."
-          },
-          {
-            "name": "secretName",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "description": "The name of the secret to delete"
-          },
-          {
-            "$ref": "#/parameters/ApiVersionParameter"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Successfully deleted the specified secret from the specified database."
-          }
-        }
       }
     },
     "/catalog/usql/databases/{databaseName}/secrets": {
@@ -191,8 +203,12 @@
         "tags": [
           "Catalog"
         ],
+        "deprecated": true,
         "operationId": "Catalog_DeleteAllSecrets",
         "description": "Deletes all secrets in the specified database. This is deprecated and will be removed in the next release. In the future, please only drop individual credentials using DeleteCredential",
+        "x-ms-examples": {
+          "Deletes all secrets in the specified database": { "$ref": "../examples/Adla_Catalog_DeleteAllSecrets.json" }
+        },
         "parameters": [
           {
             "name": "databaseName",
@@ -219,6 +235,9 @@
         ],
         "operationId": "Catalog_CreateCredential",
         "description": "Creates the specified credential for use with external data sources in the specified database.",
+        "x-ms-examples": {
+          "Creates the specified credential for use with external data sources in the specified database": { "$ref": "../examples/Adla_Catalog_CreateCredential.json" }
+        },
         "parameters": [
           {
             "name": "databaseName",
@@ -259,6 +278,9 @@
         ],
         "operationId": "Catalog_UpdateCredential",
         "description": "Modifies the specified credential for use with external data sources in the specified database",
+        "x-ms-examples": {
+          "Modifies the specified credential for use with external data sources in the specified database": { "$ref": "../examples/Adla_Catalog_UpdateCredential.json" }
+        },
         "parameters": [
           {
             "name": "databaseName",
@@ -293,46 +315,15 @@
           }
         }
       },
-      "get": {
-        "tags": [
-          "Catalog"
-        ],
-        "operationId": "Catalog_GetCredential",
-        "description": "Retrieves the specified credential from the Data Lake Analytics catalog.",
-        "parameters": [
-          {
-            "name": "databaseName",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "description": "The name of the database containing the schema."
-          },
-          {
-            "name": "credentialName",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "description": "The name of the credential."
-          },
-          {
-            "$ref": "#/parameters/ApiVersionParameter"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Successfully retrieved the specified credential (name only) from the specified database.",
-            "schema": {
-              "$ref": "#/definitions/USqlCredential"
-            }
-          }
-        }
-      },
       "post": {
         "tags": [
           "Catalog"
         ],
         "operationId": "Catalog_DeleteCredential",
         "description": "Deletes the specified credential in the specified database",
+        "x-ms-examples": {
+          "Deletes the specified credential in the specified database": { "$ref": "../examples/Adla_Catalog_DeleteCredential.json" }
+        },    
         "parameters": [
           {
             "name": "databaseName",
@@ -374,6 +365,43 @@
             "description": "Successfully deleted the specified credential from the specified database."
           }
         }
+      },
+      "get": {
+        "tags": [
+          "Catalog"
+        ],
+        "operationId": "Catalog_GetCredential",
+        "description": "Retrieves the specified credential from the Data Lake Analytics catalog.",
+        "x-ms-examples": {
+          "Retrieves the specified credential from the Data Lake Analytics catalog": { "$ref": "../examples/Adla_Catalog_GetCredential.json" }
+        },       
+        "parameters": [
+          {
+            "name": "databaseName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the database containing the schema."
+          },
+          {
+            "name": "credentialName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the credential."
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successfully retrieved the specified credential (name only) from the specified database.",
+            "schema": {
+              "$ref": "#/definitions/USqlCredential"
+            }
+          }
+        }
       }
     },
     "/catalog/usql/databases/{databaseName}/credentials": {
@@ -383,6 +411,9 @@
         ],
         "operationId": "Catalog_ListCredentials",
         "description": "Retrieves the list of credentials from the Data Lake Analytics catalog.",
+        "x-ms-examples": {
+          "Retrieves the list of credentials from the Data Lake Analytics catalog": { "$ref": "../examples/Adla_Catalog_ListCredentials.json" }
+        },   
         "parameters": [
           {
             "name": "databaseName",
@@ -462,6 +493,9 @@
         ],
         "operationId": "Catalog_GetExternalDataSource",
         "description": "Retrieves the specified external data source from the Data Lake Analytics catalog.",
+        "x-ms-examples": {
+          "Retrieves the specified external data source from the Data Lake Analytics catalog": { "$ref": "../examples/Adla_Catalog_GetExternalDataSource.json" }
+        },
         "parameters": [
           {
             "name": "databaseName",
@@ -498,6 +532,9 @@
         ],
         "operationId": "Catalog_ListExternalDataSources",
         "description": "Retrieves the list of external data sources from the Data Lake Analytics catalog.",
+        "x-ms-examples": {
+          "Retrieves the list of external data sources from the Data Lake Analytics catalog": { "$ref": "../examples/Adla_Catalog_ListExternalDataSources.json" }
+        },
         "parameters": [
           {
             "name": "databaseName",
@@ -577,6 +614,9 @@
         ],
         "operationId": "Catalog_GetProcedure",
         "description": "Retrieves the specified procedure from the Data Lake Analytics catalog.",
+        "x-ms-examples": {
+          "Retrieves the specified procedure from the Data Lake Analytics catalog": { "$ref": "../examples/Adla_Catalog_GetProcedure.json" }
+        },
         "parameters": [
           {
             "name": "databaseName",
@@ -620,6 +660,9 @@
         ],
         "operationId": "Catalog_ListProcedures",
         "description": "Retrieves the list of procedures from the Data Lake Analytics catalog.",
+        "x-ms-examples": {
+          "Retrieves the list of procedures from the Data Lake Analytics catalog": { "$ref": "../examples/Adla_Catalog_ListProcedures.json" }
+        },
         "parameters": [
           {
             "name": "databaseName",
@@ -706,6 +749,9 @@
         ],
         "operationId": "Catalog_GetTable",
         "description": "Retrieves the specified table from the Data Lake Analytics catalog.",
+        "x-ms-examples": {
+          "Retrieves the specified table from the Data Lake Analytics catalog": { "$ref": "../examples/Adla_Catalog_GetTable.json" }
+        },
         "parameters": [
           {
             "name": "databaseName",
@@ -749,6 +795,9 @@
         ],
         "operationId": "Catalog_ListTables",
         "description": "Retrieves the list of tables from the Data Lake Analytics catalog.",
+        "x-ms-examples": {
+          "Retrieves the list of tables from the Data Lake Analytics catalog": { "$ref": "../examples/Adla_Catalog_ListTables.json" }
+        },
         "parameters": [
           {
             "name": "databaseName",
@@ -844,7 +893,7 @@
         "operationId": "Catalog_ListTableStatisticsByDatabaseAndSchema",
         "description": "Retrieves the list of all table statistics within the specified schema from the Data Lake Analytics catalog.",
         "x-ms-examples": {
-          "List all table statistics in a database and schema": { "$ref": "./examples/AdlCatalogListStatisticsInDatabaseSchema.json" }
+          "Retrieves the list of all table statistics within the specified schema from the Data Lake Analytics catalog": { "$ref": "../examples/Adla_Catalog_ListTableStatisticsByDatabaseAndSchema.json" }
         },
         "parameters": [
           {
@@ -932,6 +981,9 @@
         ],
         "operationId": "Catalog_GetTableType",
         "description": "Retrieves the specified table type from the Data Lake Analytics catalog.",
+        "x-ms-examples": {
+          "Retrieves the specified table type from the Data Lake Analytics catalog": { "$ref": "../examples/Adla_Catalog_GetTableType.json" }
+        },
         "parameters": [
           {
             "name": "databaseName",
@@ -975,6 +1027,9 @@
         ],
         "operationId": "Catalog_ListTableTypes",
         "description": "Retrieves the list of table types from the Data Lake Analytics catalog.",
+        "x-ms-examples": {
+          "Retrieves the list of table types from the Data Lake Analytics catalog": { "$ref": "../examples/Adla_Catalog_ListTableTypes.json" }
+        },
         "parameters": [
           {
             "name": "databaseName",
@@ -1062,7 +1117,7 @@
         "operationId": "Catalog_GetPackage",
         "description": "Retrieves the specified package from the Data Lake Analytics catalog.",
         "x-ms-examples": {
-          "Get a specific package": { "$ref": "./examples/AdlCatalogGetPackage.json" }
+          "Retrieves the specified package from the Data Lake Analytics catalog": { "$ref": "../examples/Adla_Catalog_GetPackage.json" }
         },
         "parameters": [
           {
@@ -1108,7 +1163,7 @@
         "operationId": "Catalog_ListPackages",
         "description": "Retrieves the list of packages from the Data Lake Analytics catalog.",
         "x-ms-examples": {
-          "List all packages in a database and schema": { "$ref": "./examples/AdlCatalogListPackages.json" }
+          "Retrieves the list of packages from the Data Lake Analytics catalog": { "$ref": "../examples/Adla_Catalog_ListPackages.json" }
         },
         "parameters": [
           {
@@ -1196,6 +1251,9 @@
         ],
         "operationId": "Catalog_GetView",
         "description": "Retrieves the specified view from the Data Lake Analytics catalog.",
+        "x-ms-examples": {
+          "Retrieves the specified view from the Data Lake Analytics catalog": { "$ref": "../examples/Adla_Catalog_GetView.json" }
+        },
         "parameters": [
           {
             "name": "databaseName",
@@ -1239,6 +1297,9 @@
         ],
         "operationId": "Catalog_ListViews",
         "description": "Retrieves the list of views from the Data Lake Analytics catalog.",
+        "x-ms-examples": {
+          "Retrieves the list of views from the Data Lake Analytics catalog": { "$ref": "../examples/Adla_Catalog_ListViews.json" }
+        },
         "parameters": [
           {
             "name": "databaseName",
@@ -1325,6 +1386,9 @@
         ],
         "operationId": "Catalog_GetTableStatistic",
         "description": "Retrieves the specified table statistics from the Data Lake Analytics catalog.",
+        "x-ms-examples": {
+          "Retrieves the specified table statistics from the Data Lake Analytics catalog": { "$ref": "../examples/Adla_Catalog_GetTableStatistic.json" }
+        },
         "parameters": [
           {
             "name": "databaseName",
@@ -1375,6 +1439,9 @@
         ],
         "operationId": "Catalog_ListTableStatistics",
         "description": "Retrieves the list of table statistics from the Data Lake Analytics catalog.",
+        "x-ms-examples": {
+          "Retrieves the list of table statistics from the Data Lake Analytics catalog": { "$ref": "../examples/Adla_Catalog_ListTableStatistics.json" }
+        },
         "parameters": [
           {
             "name": "databaseName",
@@ -1468,6 +1535,9 @@
         ],
         "operationId": "Catalog_GetTablePartition",
         "description": "Retrieves the specified table partition from the Data Lake Analytics catalog.",
+        "x-ms-examples": {
+          "Retrieves the specified table partition from the Data Lake Analytics catalog": { "$ref": "../examples/Adla_Catalog_GetTablePartition.json" }
+        },
         "parameters": [
           {
             "name": "databaseName",
@@ -1518,6 +1588,9 @@
         ],
         "operationId": "Catalog_ListTablePartitions",
         "description": "Retrieves the list of table partitions from the Data Lake Analytics catalog.",
+        "x-ms-examples": {
+          "Retrieves the list of table partitions from the Data Lake Analytics catalog": { "$ref": "../examples/Adla_Catalog_ListTablePartitions.json" }
+        },
         "parameters": [
           {
             "name": "databaseName",
@@ -1611,6 +1684,9 @@
         ],
         "operationId": "Catalog_ListTypes",
         "description": "Retrieves the list of types within the specified database and schema from the Data Lake Analytics catalog.",
+        "x-ms-examples": {
+          "Retrieves the list of types within the specified database and schema from the Data Lake Analytics catalog": { "$ref": "../examples/Adla_Catalog_ListTypes.json" }
+        },
         "parameters": [
           {
             "name": "databaseName",
@@ -1697,6 +1773,9 @@
         ],
         "operationId": "Catalog_GetTableValuedFunction",
         "description": "Retrieves the specified table valued function from the Data Lake Analytics catalog.",
+        "x-ms-examples": {
+          "Retrieves the specified table valued function from the Data Lake Analytics catalog": { "$ref": "../examples/Adla_Catalog_GetTableValuedFunction.json" }
+        },
         "parameters": [
           {
             "name": "databaseName",
@@ -1740,6 +1819,9 @@
         ],
         "operationId": "Catalog_ListTableValuedFunctions",
         "description": "Retrieves the list of table valued functions from the Data Lake Analytics catalog.",
+        "x-ms-examples": {
+          "Retrieves the list of table valued functions from the Data Lake Analytics catalog": { "$ref": "../examples/Adla_Catalog_ListTableValuedFunctions.json" }
+        },
         "parameters": [
           {
             "name": "databaseName",
@@ -1826,6 +1908,9 @@
         ],
         "operationId": "Catalog_GetAssembly",
         "description": "Retrieves the specified assembly from the Data Lake Analytics catalog.",
+        "x-ms-examples": {
+          "Retrieves the specified assembly from the Data Lake Analytics catalog": { "$ref": "../examples/Adla_Catalog_GetAssembly.json" }
+        },
         "parameters": [
           {
             "name": "databaseName",
@@ -1862,6 +1947,9 @@
         ],
         "operationId": "Catalog_ListAssemblies",
         "description": "Retrieves the list of assemblies from the Data Lake Analytics catalog.",
+        "x-ms-examples": {
+          "Retrieves the list of assemblies from the Data Lake Analytics catalog": { "$ref": "../examples/Adla_Catalog_ListAssemblies.json" }
+        },
         "parameters": [
           {
             "name": "databaseName",
@@ -1941,6 +2029,9 @@
         ],
         "operationId": "Catalog_GetSchema",
         "description": "Retrieves the specified schema from the Data Lake Analytics catalog.",
+        "x-ms-examples": {
+          "Retrieves the specified schema from the Data Lake Analytics catalog": { "$ref": "../examples/Adla_Catalog_GetSchema.json" }
+        },
         "parameters": [
           {
             "name": "databaseName",
@@ -1977,6 +2068,9 @@
         ],
         "operationId": "Catalog_ListSchemas",
         "description": "Retrieves the list of schemas from the Data Lake Analytics catalog.",
+        "x-ms-examples": {
+          "Retrieves the list of schemas from the Data Lake Analytics catalog": { "$ref": "../examples/Adla_Catalog_ListSchemas.json" }
+        },
         "parameters": [
           {
             "name": "databaseName",
@@ -2057,7 +2151,7 @@
         "operationId": "Catalog_ListTableStatisticsByDatabase",
         "description": "Retrieves the list of all statistics in a database from the Data Lake Analytics catalog.",
         "x-ms-examples": {
-          "List all table statistics in a database": { "$ref": "./examples/AdlCatalogListStatisticsInDatabase.json" }
+          "Retrieves the list of all statistics in a database from the Data Lake Analytics catalog": { "$ref": "../examples/Adla_Catalog_ListTableStatisticsByDatabase.json" }
         },
         "parameters": [
           {
@@ -2139,7 +2233,7 @@
         "operationId": "Catalog_ListTablesByDatabase",
         "description": "Retrieves the list of all tables in a database from the Data Lake Analytics catalog.",
         "x-ms-examples": {
-          "List all tables in a database": { "$ref": "./examples/AdlCatalogListTablesInDatabase.json" }
+          "Retrieves the list of all tables in a database from the Data Lake Analytics catalog": { "$ref": "../examples/Adla_Catalog_ListTablesByDatabase.json" }
         },
         "parameters": [
           {
@@ -2229,7 +2323,7 @@
         "operationId": "Catalog_ListTableValuedFunctionsByDatabase",
         "description": "Retrieves the list of all table valued functions in a database from the Data Lake Analytics catalog.",
         "x-ms-examples": {
-          "List all table valued functions in a database": { "$ref": "./examples/AdlCatalogListTableValuedFunctionsInDatabase.json" }
+          "Retrieves the list of all table valued functions in a database from the Data Lake Analytics catalog": { "$ref": "../examples/Adla_Catalog_ListTableValuedFunctionsByDatabase.json" }
         },
         "parameters": [
           {
@@ -2311,7 +2405,7 @@
         "operationId": "Catalog_ListViewsByDatabase",
         "description": "Retrieves the list of all views in a database from the Data Lake Analytics catalog.",
         "x-ms-examples": {
-          "List all views in a database": { "$ref": "./examples/AdlCatalogListViewsInDatabase.json" }
+          "Retrieves the list of all views in a database from the Data Lake Analytics catalog": { "$ref": "../examples/Adla_Catalog_ListViewsByDatabase.json" }
         },
         "parameters": [
           {
@@ -2392,6 +2486,9 @@
         ],
         "operationId": "Catalog_GetDatabase",
         "description": "Retrieves the specified database from the Data Lake Analytics catalog.",
+        "x-ms-examples": {
+          "Retrieves the specified database from the Data Lake Analytics catalog": { "$ref": "../examples/Adla_Catalog_GetDatabase.json" }
+        },
         "parameters": [
           {
             "name": "databaseName",
@@ -2421,6 +2518,9 @@
         ],
         "operationId": "Catalog_ListDatabases",
         "description": "Retrieves the list of databases from the Data Lake Analytics catalog.",
+        "x-ms-examples": {
+          "Retrieves the list of databases from the Data Lake Analytics catalog": { "$ref": "../examples/Adla_Catalog_ListDatabases.json" }
+        },
         "parameters": [
           {
             "name": "$filter",
@@ -3584,7 +3684,7 @@
           "type": "string",
           "description": "the link to the next page of results."
         }
-      },
+    },
       "description": "A Data Lake Analytics catalog item list."
     }
   },
