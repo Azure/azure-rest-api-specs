@@ -104,13 +104,6 @@
           },
           {
             "$ref": "#/parameters/SubscriptionIdParameter"
-          },
-          {
-            "name": "$expand",
-            "in": "query",
-            "required": false,
-            "type": "string",
-            "description": "Expands referenced resources."
           }
         ],
         "responses": {
@@ -327,26 +320,26 @@
     }
   },
   "definitions": {
-	"NetworkInterfaceIPConfigurationPropertiesFormat": {
+    "NetworkInterfaceIPConfigurationPropertiesFormat": {
       "properties": {
         "applicationGatewayBackendAddressPools": {
           "type": "array",
           "items": {
-            "$ref": "./applicationGateway.json#/definitions/ApplicationGatewayBackendAddressPool"
+            "$ref": "./network.json#/definitions/SubResource"
           },
           "description": "The reference of ApplicationGatewayBackendAddressPool resource."
         },
         "loadBalancerBackendAddressPools": {
           "type": "array",
           "items": {
-            "$ref": "./loadBalancer.json#/definitions/BackendAddressPool"
+            "$ref": "./network.json#/definitions/SubResource"
           },
           "description": "The reference of LoadBalancerBackendAddressPool resource."
         },
         "loadBalancerInboundNatRules": {
           "type": "array",
           "items": {
-            "$ref": "./loadBalancer.json#/definitions/InboundNatRule"
+            "$ref": "./network.json#/definitions/SubResource"
           },
           "description": "A list of references of LoadBalancerInboundNatRules."
         },
@@ -378,14 +371,14 @@
           }
         },
         "subnet": {
-          "$ref": "./virtualNetwork.json#/definitions/Subnet"
+          "$ref": "./network.json#/definitions/SubResource"
         },
         "primary": {
           "type": "boolean",
           "description": "Gets whether this is a primary customer address on the network interface."
         },
         "publicIPAddress": {
-          "$ref": "./publicIpAddress.json#/definitions/PublicIPAddress"
+          "$ref": "./network.json#/definitions/SubResource"
         },
         "provisioningState": {
           "type": "string"
@@ -413,7 +406,10 @@
           "$ref": "./network.json#/definitions/SubResource"
         }
       ],
-      "description": "IPConfiguration in a network interface."
+      "description": "IPConfiguration in a network interface.",
+      "required": [
+        "name"
+      ]
     },
     "NetworkInterfaceDnsSettings": {
       "properties": {
@@ -453,7 +449,7 @@
           "description": "The reference of a virtual machine."
         },
         "networkSecurityGroup": {
-          "$ref": "./networkSecurityGroup.json#/definitions/NetworkSecurityGroup",
+          "$ref": "./network.json#/definitions/SubResource",
           "description": "The reference of the NetworkSecurityGroup resource."
         },
         "ipConfigurations": {
@@ -492,7 +488,10 @@
           "description": "The provisioning state of the public IP resource. Possible values are: 'Updating', 'Deleting', and 'Failed'."
         }
       },
-      "description": "NetworkInterface properties. "
+      "description": "NetworkInterface properties. ",
+      "required": [
+        "ipConfigurations"
+      ]
     },
     "NetworkInterface": {
       "properties": {
@@ -547,7 +546,7 @@
         "tagMap": {
           "type": "string",
           "additionalProperties": {
-            "type":"array",
+            "type": "array",
             "items": {
               "type": "string"
             },
@@ -620,14 +619,14 @@
           "type": "string",
           "description": "The destination address prefix."
         },
-        "sourceAddressPrefixes" : {
+        "sourceAddressPrefixes": {
           "type": "array",
           "items": {
             "type": "string"
           },
           "description": "The source address prefixes. Expected values include CIDR IP ranges, Default Tags (VirtualNetwork, AureLoadBalancer, Internet), System Tags, and the asterix (*)."
         },
-        "destinationAddressPrefixes" : {
+        "destinationAddressPrefixes": {
           "type": "array",
           "items": {
             "type": "string"
@@ -795,11 +794,11 @@
           }
         },
         "subnet": {
-          "$ref": "./virtualNetwork.json#/definitions/Subnet",
+          "$ref": "./network.json#/definitions/SubResource",
           "description": "The reference of the subnet resource."
         },
         "publicIPAddress": {
-          "$ref": "./publicIpAddress.json#/definitions/PublicIPAddress",
+          "$ref": "./network.json#/definitions/SubResource",
           "description": "The reference of the public IP resource."
         },
         "provisioningState": {
