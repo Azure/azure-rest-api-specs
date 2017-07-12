@@ -5,7 +5,6 @@
 var assert = require("assert"),
   fs = require('fs'),
   path = require('path'),
-  _ = require('lodash'),
   async = require('async'),
   RefParser = require('json-schema-ref-parser'),
   util = require('util'),
@@ -25,25 +24,34 @@ var context;
 
 
 describe('Azure swagger schema validation:', function () {
-  before(function (done) {
-    utils.initializeValidator(function (err, result) {
-      if (err) {
-        done(err);
-      }
-      context = result;
-      done();
-    });
+  before(async function (done) {
+    const result = await utils.initializeValidator();
+    context = result;
+    done();
   });
 
-  _(utils.swaggers).each(function (swagger) {
-    it(swagger + ' should be a valid Swagger document.', function (done) {
-      utils.parseJsonFromFile(swagger, function (err, parsedData) {
-        if (err) { done(err); }
-        if (parsedData.documents && util.isArray(parsedData.documents)) {
-          console.log(util.format('Skipping the test for \'%s\' document as it seems to be a composite swagger doc.', swagger));
-          done();
-        }
-        var valid = context.validator.validate(parsedData, context.extensionSwaggerSchema);
+  for (const swagger of utils.swaggers) {
+    it(swagger + ' should be a valid Swagger document.', async function (done) {
+      const parsedData = await utils.parseJsonFromFile(swagger);
+      if (parsedData.documents && util.isArray(parsedData.documents)) {
+        console.log(util.format('Skipping the test for \'%s\' document as it seems to be a composite swagger doc.', swagger));
+        done();
+      }
+      var valid = context.validator.validate(parsedData, context.extensionSwaggerSchema);
+      if (!valid) {
+        var error = context.validator.getLastErrors();
+        throw new Error("Schema validation failed: " + util.inspect(error, { depth: null }));
+      }
+      assert(valid === true);
+      done();
+    });
+  }
+
+  describe('Azure x-ms-example schema validation:', function () {
+    for (const example of utils.examples) {
+      it('x-ms-examples: ' + example + ' should be a valid x-ms-example.', async function (done) {
+        const parsedData = await utils.parseJsonFromFile(example);
+        var valid = context.validator.validate(parsedData, context.exampleSchema);
         if (!valid) {
           var error = context.validator.getLastErrors();
           throw new Error("Schema validation failed: " + util.inspect(error, { depth: null }));
@@ -51,29 +59,12 @@ describe('Azure swagger schema validation:', function () {
         assert(valid === true);
         done();
       });
-    });
-  }).value();
-
-  describe('Azure x-ms-example schema validation:', function () {
-    _(utils.examples).each(function (example) {
-      it('x-ms-examples: ' + example + ' should be a valid x-ms-example.', function (done) {
-        utils.parseJsonFromFile(example, function (err, parsedData) {
-          if (err) { done(err); }
-          var valid = context.validator.validate(parsedData, context.exampleSchema);
-          if (!valid) {
-            var error = context.validator.getLastErrors();
-            throw new Error("Schema validation failed: " + util.inspect(error, { depth: null }));
-          }
-          assert(valid === true);
-          done();
-        });
-      });
-    }).value();
+    }
   });
 });
 
 describe('External file or url references ("$ref") in a swagger spec:', function () {
-  _(utils.swaggers).each(function (swagger) {
+  for (const swagger of utils.swaggers) {
     it(swagger + ' should be completely resolvable.', function (done) {
       RefParser.bundle(swagger, function (bundleErr, bundleResult) {
         if (bundleErr) {
@@ -84,5 +75,5 @@ describe('External file or url references ("$ref") in a swagger spec:', function
         done();
       });
     });
-  }).value();
+  }
 });

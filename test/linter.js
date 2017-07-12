@@ -2,7 +2,7 @@
 // Licensed under the MIT License. See License in the project root for license information.
 
 'use strict';
-var _ = require('lodash'),
+var
   execSync = require('child_process').execSync,
   utils = require('./util/utils');
 
@@ -13,7 +13,7 @@ describe('AutoRest Linter validation:', function () {
   // configsToProcess = configsToProcess.filter(function(item) {
   //   return (item.match(/.Microsoft.ContainerRegistry.*2017-03-01.*/ig) !== null);
   // });
-  _(configsToProcess).each(function (config) {
+  for (const config of configsToProcess) {
     it(config + ' should honor linter validation rules.', function (done) {
       var cmd = `autorest --azure-validator ${config} --message-format=json`;
       console.log(`Executing: ${cmd}`);
@@ -25,5 +25,5 @@ describe('AutoRest Linter validation:', function () {
         done(new Error('AutoRest Linter validation failed.'));
       }
     });
-  }).value();
+  }
 });
