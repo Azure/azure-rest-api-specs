@@ -25,8 +25,6 @@ To see additional help and options, run:
 These are the global settings for the DataLakeAnalytics API.
 
 ``` yaml
-title: DataLakeAnalyticsAccountManagementClient
-description: DataLake Analytics Client
 openapi-type: arm
 tag: package-2016-11
 ```
@@ -46,6 +44,8 @@ input-file:
 These settings apply only when `--tag=package-2016-03-preview` is specified on the command line.
 
 ``` yaml $(tag) == 'package-2016-03-preview'
+title: DataLakeAnalyticsAccountManagementClient
+description: DataLake Analytics Client
 input-file:
 - Microsoft.DataLakeAnalytics/2015-10-01-preview/account.json
 - Microsoft.DataLakeAnalytics/2015-10-01-preview/catalog.json
@@ -57,6 +57,8 @@ input-file:
 These settings apply only when `--tag=package-2015-11-preview` is specified on the command line.
 
 ``` yaml $(tag) == 'package-2015-11-preview'
+title: DataLakeAnalyticsAccountManagementClient
+description: DataLake Analytics Client
 input-file:
 - Microsoft.DataLakeAnalytics/2015-10-01-preview/account.json
 - Microsoft.DataLakeAnalytics/2015-10-01-preview/catalog.json
