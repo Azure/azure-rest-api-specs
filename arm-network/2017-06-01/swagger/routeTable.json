@@ -36,7 +36,7 @@
     }
   },
   "paths": {
-	"/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/routeTables/{routeTableName}": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/routeTables/{routeTableName}": {
       "delete": {
         "tags": [
           "RouteTables"
@@ -104,13 +104,6 @@
           },
           {
             "$ref": "#/parameters/SubscriptionIdParameter"
-          },
-          {
-            "name": "$expand",
-            "in": "query",
-            "required": false,
-            "type": "string",
-            "description": "Expands referenced resources."
           }
         ],
         "responses": {
@@ -434,7 +427,7 @@
           "nextLinkName": "nextLink"
         }
       }
-    }    
+    }
   },
   "definitions": {
     "RoutePropertiesFormat": {
@@ -467,12 +460,13 @@
           "description": "The provisioning state of the resource. Possible values are: 'Updating', 'Deleting', and 'Failed'."
         }
       },
+      "description": "Route resource",
       "required": [
-        "nextHopType"
-      ],
-      "description": "Route resource"
+        "nextHopType",
+        "addressPrefix"
+      ]
     },
-	"Route": {
+    "Route": {
       "properties": {
         "properties": {
           "x-ms-client-flatten": true,
@@ -507,7 +501,7 @@
           "readOnly": true,
           "type": "array",
           "items": {
-            "$ref": "./virtualNetwork.json#/definitions/Subnet"
+            "$ref": "./network.json#/definitions/SubResource"
           },
           "description": "A collection of references to subnets."
         },

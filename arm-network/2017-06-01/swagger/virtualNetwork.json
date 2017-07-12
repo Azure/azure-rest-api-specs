@@ -239,7 +239,7 @@
         }
       }
     },
-     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/virtualNetworks/{virtualNetworkName}/subnets/{subnetName}": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/virtualNetworks/{virtualNetworkName}/subnets/{subnetName}": {
       "delete": {
         "tags": [
           "Subnets"
@@ -321,13 +321,6 @@
           },
           {
             "$ref": "#/parameters/SubscriptionIdParameter"
-          },
-          {
-            "name": "$expand",
-            "in": "query",
-            "required": false,
-            "type": "string",
-            "description": "Expands referenced resources."
           }
         ],
         "responses": {
@@ -399,8 +392,12 @@
         },
         "x-ms-long-running-operation": true,
         "x-ms-examples": {
-          "Create subnet": { "$ref": "../examples/SubnetCreate.json" },
-          "Create subnet with private access services": { "$ref": "../examples/SubnetPrivateAccessServiceCreate.json" }
+          "Create subnet": {
+            "$ref": "../examples/SubnetCreate.json"
+          },
+          "Create subnet with private access services": {
+            "$ref": "../examples/SubnetPrivateAccessServiceCreate.json"
+          }
         }
       }
     },
@@ -720,7 +717,9 @@
           }
         },
         "x-ms-examples": {
-          "VnetGetUsage": { "$ref": "../examples/VirtualNetworkListUsage.json" }
+          "VnetGetUsage": {
+            "$ref": "../examples/VirtualNetworkListUsage.json"
+          }
         },
         "x-ms-pageable": {
           "nextLinkName": "nextLink"
@@ -777,11 +776,11 @@
           "description": "The address prefix for the subnet."
         },
         "networkSecurityGroup": {
-          "$ref": "./networkSecurityGroup.json#/definitions/NetworkSecurityGroup",
+          "$ref": "./network.json#/definitions/SubResource",
           "description": "The reference of the NetworkSecurityGroup resource."
         },
         "routeTable": {
-          "$ref": "./routeTable.json#/definitions/RouteTable",
+          "$ref": "./network.json#/definitions/SubResource",
           "description": "The reference of the RouteTable resource."
         },
         "privateAccessServices": {
@@ -795,7 +794,7 @@
           "readOnly": true,
           "type": "array",
           "items": {
-            "$ref": "./networkInterface.json#/definitions/IPConfiguration"
+            "$ref": "./network.json#/definitions/SubResource"
           },
           "description": "Gets an array of references to the network interface IP configurations using subnet."
         },
@@ -810,7 +809,10 @@
           "type": "string",
           "description": "The provisioning state of the resource."
         }
-      }
+      },
+      "required": [
+        "addressPrefix"
+      ]
     },
     "PrivateAccessServicePropertiesFormat": {
       "properties": {
@@ -871,7 +873,10 @@
           "type": "string",
           "description": "The provisioning state of the resource."
         }
-      }
+      },
+      "required": [
+        "remoteVirtualNetwork"
+      ]
     },
     "Subnet": {
       "properties": {
@@ -893,7 +898,10 @@
           "$ref": "./network.json#/definitions/SubResource"
         }
       ],
-      "description": "Subnet in a virtual network resource."
+      "description": "Subnet in a virtual network resource.",
+      "required": [
+        "name"
+      ]
     },
     "VirtualNetworkPeering": {
       "properties": {
@@ -915,7 +923,10 @@
           "$ref": "./network.json#/definitions/SubResource"
         }
       ],
-      "description": "Peerings in a virtual network resource."
+      "description": "Peerings in a virtual network resource.",
+      "required": [
+        "name"
+      ]
     },
     "SubnetListResult": {
       "properties": {
@@ -981,7 +992,10 @@
           "type": "string",
           "description": "The provisioning state of the PublicIP resource. Possible values are: 'Updating', 'Deleting', and 'Failed'."
         }
-      }
+      },
+      "required": [
+        "addressSpace"
+      ]
     },
     "VirtualNetwork": {
       "properties": {
@@ -1027,7 +1041,10 @@
           "description": "A list of address blocks reserved for this virtual network in CIDR notation."
         }
       },
-      "description": "AddressSpace contains an array of IP address ranges that can be used by subnets of the virtual network."
+      "description": "AddressSpace contains an array of IP address ranges that can be used by subnets of the virtual network.",
+      "required": [
+        "addressPrefixes"
+      ]
     },
     "DhcpOptions": {
       "properties": {
@@ -1039,7 +1056,10 @@
           "description": "The list of DNS servers IP addresses."
         }
       },
-      "description": "DhcpOptions contains an array of DNS servers available to VMs deployed in the virtual network. Standard DHCP option for a subnet overrides VNET DHCP options."
+      "description": "DhcpOptions contains an array of DNS servers available to VMs deployed in the virtual network. Standard DHCP option for a subnet overrides VNET DHCP options.",
+      "required": [
+        "dnsServers"
+      ]
     },
     "IPAddressAvailabilityResult": {
       "properties": {

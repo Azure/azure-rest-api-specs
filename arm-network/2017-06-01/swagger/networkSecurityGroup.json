@@ -36,7 +36,7 @@
     }
   },
   "paths": {
-  	"/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/networkSecurityGroups/{networkSecurityGroupName}": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/networkSecurityGroups/{networkSecurityGroupName}": {
       "delete": {
         "tags": [
           "NetworkSecurityGroups"
@@ -104,13 +104,6 @@
           },
           {
             "$ref": "#/parameters/SubscriptionIdParameter"
-          },
-          {
-            "name": "$expand",
-            "in": "query",
-            "required": false,
-            "type": "string",
-            "description": "Expands referenced resources."
           }
         ],
         "responses": {
@@ -437,7 +430,7 @@
     }
   },
   "definitions": {
-	"SecurityRulePropertiesFormat": {
+    "SecurityRulePropertiesFormat": {
       "properties": {
         "description": {
           "type": "string",
@@ -525,7 +518,10 @@
         "sourceAddressPrefix",
         "destinationAddressPrefix",
         "access",
-        "direction"
+        "direction",
+        "sourcePortRange",
+        "destinationPortRange",
+        "priority"
       ]
     },
     "SecurityRule": {
@@ -550,7 +546,7 @@
       ],
       "description": "Network security rule."
     },
-	"SecurityRuleListResult": {
+    "SecurityRuleListResult": {
       "properties": {
         "value": {
           "type": "array",
@@ -586,7 +582,7 @@
           "readOnly": true,
           "type": "array",
           "items": {
-            "$ref": "./networkInterface.json#/definitions/NetworkInterface"
+            "$ref": "./network.json#/definitions/SubResource"
           },
           "description": "A collection of references to network interfaces."
         },
@@ -594,7 +590,7 @@
           "readOnly": true,
           "type": "array",
           "items": {
-            "$ref": "./virtualNetwork.json#/definitions/Subnet"
+            "$ref": "./network.json#/definitions/SubResource"
           },
           "description": "A collection of references to subnets."
         },
@@ -627,7 +623,7 @@
       ],
       "description": "NetworkSecurityGroup resource."
     },
-	"NetworkSecurityGroupListResult": {
+    "NetworkSecurityGroupListResult": {
       "properties": {
         "value": {
           "type": "array",

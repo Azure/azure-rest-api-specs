@@ -35,8 +35,7 @@
       }
     }
   },
-  "paths": {
-  },
+  "paths": {},
   "definitions": {
     "ErrorDetails": {
       "properties": {
@@ -122,7 +121,10 @@
           "description": "Resource tags."
         }
       },
-      "x-ms-azure-resource": true
+      "x-ms-azure-resource": true,
+      "required": [
+        "location"
+      ]
     },
     "SubResource": {
       "properties": {
@@ -131,7 +133,20 @@
           "description": "Resource ID."
         }
       },
-      "x-ms-azure-resource": true
+      "x-ms-azure-resource": true,
+      "required": [
+        "id"
+      ]
+    },
+    "SubResourceReadOnly": {
+      "properties": {
+        "id": {
+          "readonly": "true",
+          "description": "Resource ID",
+          "type": "string"
+        }
+      },
+      "x-ms-azure-resource": "true"
     }
   },
   "parameters": {
