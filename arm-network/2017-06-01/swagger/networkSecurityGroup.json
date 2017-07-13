@@ -36,7 +36,7 @@
     }
   },
   "paths": {
-  	"/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/networkSecurityGroups/{networkSecurityGroupName}": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/networkSecurityGroups/{networkSecurityGroupName}": {
       "delete": {
         "tags": [
           "NetworkSecurityGroups"
@@ -434,10 +434,104 @@
           "nextLinkName": "nextLink"
         }
       }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/networkSecurityGroups/{networkSecurityGroupName}/defaultSecurityRules": {
+      "get": {
+        "tags": [
+          "SecurityRules"
+        ],
+        "operationId": "DefaultSecurityRules_List",
+        "description": "Gets all default security rules in a network security group.",
+        "parameters": [
+          {
+            "name": "resourceGroupName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the resource group."
+          },
+          {
+            "name": "networkSecurityGroupName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the network security group."
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Request successful. The operation returns a list of SecurityRule resources.",
+            "schema": {
+              "$ref": "#/definitions/SecurityRuleListResult"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "DefaultSecurityRuleList": { "$ref": "../examples/DefaultSecurityRuleList.json" }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/networkSecurityGroups/{networkSecurityGroupName}/defaultSecurityRules/{defaultSecurityRuleName}" : {
+      "get": {
+        "tags": [
+          "SecurityRules"
+        ],
+        "operationId": "DefaultSecurityRules_Get",
+        "description": "Get the specified default network security rule.",
+        "parameters": [
+          {
+            "name": "resourceGroupName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the resource group."
+          },
+          {
+            "name": "networkSecurityGroupName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the network security group."
+          },
+          {
+            "name": "defaultSecurityRuleName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the default security rule."
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Request successful. The operation returns the resulting SecurityRule resource.",
+            "schema": {
+              "$ref": "#/definitions/SecurityRule"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "DefaultSecurityRuleGet": { "$ref": "../examples/DefaultSecurityRuleGet.json" }
+        }
+      }
     }
   },
   "definitions": {
-	"SecurityRulePropertiesFormat": {
+    "SecurityRulePropertiesFormat": {
       "properties": {
         "description": {
           "type": "string",
@@ -484,7 +578,23 @@
           "items": {
             "type": "string"
           },
-          "description": "The destination address prefixes. CIDR or destination IP rangees."
+          "description": "The destination address prefixes. CIDR or destination IP ranges."
+        },
+        "sourcePortRanges": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "description": "The source port."
+          },
+          "description": "The source port ranges."
+        },
+        "destinationPortRanges": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "description": "The destination port."
+          },
+          "description": "The destination port ranges."
         },
         "access": {
           "type": "string",
@@ -550,7 +660,7 @@
       ],
       "description": "Network security rule."
     },
-	"SecurityRuleListResult": {
+    "SecurityRuleListResult": {
       "properties": {
         "value": {
           "type": "array",
@@ -627,7 +737,7 @@
       ],
       "description": "NetworkSecurityGroup resource."
     },
-	"NetworkSecurityGroupListResult": {
+    "NetworkSecurityGroupListResult": {
       "properties": {
         "value": {
           "type": "array",

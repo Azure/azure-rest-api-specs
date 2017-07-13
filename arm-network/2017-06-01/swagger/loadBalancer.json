@@ -238,10 +238,225 @@
           "nextLinkName": "nextLink"
         }
       }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/loadBalancers/{loadBalancerName}/inboundNatRules": {
+      "get": {
+        "tags": [
+          "LoadBalancers"
+        ],
+        "operationId": "InboundNatRules_List",
+        "description": "Gets all the inbound nat rules in a load balancer.",
+        "parameters": [
+          {
+            "name": "resourceGroupName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the resource group."
+          },
+          {
+            "name": "loadBalancerName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the load balancer."
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Request successful. The operation returns a list of LoadBalancer InboundNatRule resources.",
+            "schema": {
+              "$ref": "#/definitions/InboundNatRuleListResult"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        },
+        "x-ms-examples": {
+          "InboundNatRuleList": { "$ref": "../examples/InboundNatRuleList.json" }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/loadBalancers/{loadBalancerName}/inboundNatRules/{inboundNatRuleName}": {
+      "delete": {
+        "tags": [
+          "LoadBalancers"
+        ],
+        "operationId": "InboundNatRules_Delete",
+        "description": "Deletes the specified load balancer inbound nat rule.",
+        "parameters": [
+          {
+            "name": "resourceGroupName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the resource group."
+          },
+          {
+            "name": "loadBalancerName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the load balancer."
+          },
+          {
+            "name": "inboundNatRuleName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the inbound nat rule."
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "Request successful. Resource does not exist."
+          },
+          "202": {
+            "description": "Accepted and the operation will complete asynchronously."
+          },
+          "200": {
+            "description": "Delete successful."
+          }
+        },
+        "x-ms-examples": {
+          "InboundNatRuleDelete": { "$ref": "../examples/InboundNatRuleDelete.json" }
+        },
+        "x-ms-long-running-operation": true
+      },
+      "get": {
+        "tags": [
+          "LoadBalancers"
+        ],
+        "operationId": "InboundNatRules_Get",
+        "description": "Gets the specified load balancer inbound nat rule.",
+        "parameters": [
+          {
+            "name": "resourceGroupName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the resource group."
+          },
+          {
+            "name": "loadBalancerName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the load balancer."
+          },
+          {
+            "name": "inboundNatRuleName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the inbound nat rule."
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "name": "$expand",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "description": "Expands referenced resources."
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Request successful. The operation returns the resulting InboundNatRule resource.",
+            "schema": {
+              "$ref": "#/definitions/InboundNatRule"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "InboundNatRuleGet": { "$ref": "../examples/InboundNatRuleGet.json" }
+        }
+      },
+      "put": {
+        "tags": [
+          "LoadBalancers"
+        ],
+        "operationId": "InboundNatRules_CreateOrUpdate",
+        "description": "Creates or updates a load balancer inbound nat rule.",
+        "parameters": [
+          {
+            "name": "resourceGroupName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the resource group."
+          },
+          {
+            "name": "loadBalancerName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the load balancer."
+          },
+          {
+            "name": "inboundNatRuleName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the load balancer."
+          },
+          {
+            "name": "inboundNatRuleParameters",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/InboundNatRule"
+            },
+            "description": "Parameters supplied to the create or update inbound nat rule operation."
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": "Create successful. The operation returns the resulting InboundNatRule resource.",
+            "schema": {
+              "$ref": "#/definitions/InboundNatRule"
+            }
+          },
+          "200": {
+            "description": "Update successful. The operation returns the resulting InboundNatRule resource.",
+            "schema": {
+              "$ref": "#/definitions/InboundNatRule"
+            }
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-examples": {
+          "InboundNatRuleCreate": { "$ref": "../examples/InboundNatRuleCreate.json" }
+        }
+      }
     }
   },
   "definitions": {
-	"FrontendIPConfigurationPropertiesFormat": {
+    "FrontendIPConfigurationPropertiesFormat": {
       "properties": {
         "inboundNatRules": {
           "readOnly": true,
@@ -828,6 +1043,22 @@
         }
       },
       "description": "Response for ListLoadBalancers API service call."
+    },
+    "InboundNatRuleListResult": {
+      "properties": {
+        "value": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/InboundNatRule"
+          },
+          "description": "A list of inbound nat rules in a load balancer."
+        },
+        "nextLink": {
+          "type": "string",
+          "description": "The URL to get the next set of results."
+        }
+      },
+      "description": "Response for ListInboundNatRule API service call."
     }
   },
   "parameters": {
