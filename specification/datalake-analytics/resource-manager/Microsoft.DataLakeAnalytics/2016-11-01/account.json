@@ -1791,44 +1791,16 @@
       "description": "Data Lake Account list information."
     },
     "DataLakeAnalyticsAccountProperties": {
+      "allOf": [
+        {
+          "$ref": "#/definitions/DataLakeAnalyticsAccountPropertiesBasic"
+        }
+      ],
       "required": [
         "defaultDataLakeStoreAccount",
         "dataLakeStoreAccounts"
       ],
       "properties": {
-        "provisioningState": {
-          "readOnly": true,
-          "type": "string",
-          "description": "the provisioning status of the Data Lake Analytics account.",
-          "enum": [
-            "Failed",
-            "Creating",
-            "Running",
-            "Succeeded",
-            "Patching",
-            "Suspending",
-            "Resuming",
-            "Deleting",
-            "Deleted"
-          ],
-          "x-ms-enum": {
-            "name": "DataLakeAnalyticsAccountStatus",
-            "modelAsString": false
-          }
-        },
-        "state": {
-          "readOnly": true,
-          "type": "string",
-          "description": "the state of the Data Lake Analytics account.",
-          "enum": [
-            "Active",
-            "Suspended"
-          ],
-          "x-ms-enum": {
-            "name": "DataLakeAnalyticsAccountState",
-            "modelAsString": false
-          }
-        },
         "defaultDataLakeStoreAccount": {
           "type": "string",
           "description": "the default data lake storage account associated with this Data Lake Analytics account."
@@ -1880,23 +1852,6 @@
             "$ref": "#/definitions/StorageAccountInfo"
           },
           "description": "the list of Azure Blob storage accounts associated with this account."
-        },
-        "creationTime": {
-          "type": "string",
-          "readOnly": true,
-          "format": "date-time",
-          "description": "the account creation time."
-        },
-        "lastModifiedTime": {
-          "type": "string",
-          "readOnly": true,
-          "format": "date-time",
-          "description": "the account last modified time."
-        },
-        "endpoint": {
-          "type": "string",
-          "readOnly": true,
-          "description": "the full CName endpoint for this account."
         },
         "newTier": {
           "type": "string",
@@ -1988,7 +1943,7 @@
           "description": "the list of compute policies to create in this account."
         }
       },
-      "description": "The account specific properties that are associated with an underlying Data Lake Analytics account."
+      "description": "The account specific properties that are associated with an underlying Data Lake Analytics account. Returned only when retrieving a specific account."
     },
     "UpdateDataLakeAnalyticsAccountProperties": {
       "properties": {
@@ -2273,6 +2228,85 @@
       },
       "description": "The parameters that can be used to update an existing Data Lake Analytics account."
     },
+    "DataLakeAnalyticsAccountBasic": {
+      "allOf": [
+        {
+          "$ref": "#/definitions/Resource"
+        }
+      ],
+      "required": [
+        "properties"
+      ],
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/DataLakeAnalyticsAccountPropertiesBasic",
+          "description": "The properties defined by Data Lake Analytics all properties are specific to each resource provider.",
+          "x-ms-client-flatten": true
+        }
+      },
+      "description": "A Data Lake Analytics account object, containing all information associated with the named Data Lake Analytics account."
+    },
+    "DataLakeAnalyticsAccountPropertiesBasic": {
+      "properties": {
+        "provisioningState": {
+          "readOnly": true,
+          "type": "string",
+          "description": "the provisioning status of the Data Lake Analytics account.",
+          "enum": [
+            "Failed",
+            "Creating",
+            "Running",
+            "Succeeded",
+            "Patching",
+            "Suspending",
+            "Resuming",
+            "Deleting",
+            "Deleted"
+          ],
+          "x-ms-enum": {
+            "name": "DataLakeAnalyticsAccountStatus",
+            "modelAsString": false
+          }
+        },
+        "state": {
+          "readOnly": true,
+          "type": "string",
+          "description": "the state of the Data Lake Analytics account.",
+          "enum": [
+            "Active",
+            "Suspended"
+          ],
+          "x-ms-enum": {
+            "name": "DataLakeAnalyticsAccountState",
+            "modelAsString": false
+          }
+        },
+        "creationTime": {
+          "type": "string",
+          "readOnly": true,
+          "format": "date-time",
+          "description": "the account creation time."
+        },
+        "lastModifiedTime": {
+          "type": "string",
+          "readOnly": true,
+          "format": "date-time",
+          "description": "the account last modified time."
+        },
+        "endpoint": {
+          "type": "string",
+          "readOnly": true,
+          "description": "the full CName endpoint for this account."
+        },
+        "accountId": {
+          "type": "string",
+          "format": "uuid",
+          "readOnly": true,
+          "description": "The unique identifier associated with this Data Lake Analytics account."
+        }
+      },
+      "description": "The basic account specific properties that are associated with an underlying Data Lake Analytics account."
+    },
     "DataLakeAnalyticsAccount": {
       "allOf": [
         {
@@ -2296,7 +2330,7 @@
         "value": {
           "type": "array",
           "items": {
-            "$ref": "#/definitions/DataLakeAnalyticsAccount"
+            "$ref": "#/definitions/DataLakeAnalyticsAccountBasic"
           },
           "readOnly": true,
           "description": "the results of the list operation"
