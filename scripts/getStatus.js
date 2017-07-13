@@ -6,32 +6,13 @@ var exec = require('child_process').exec,
   path = require('path'),
   fs = require('fs'),
   glob = require('glob'),
-  oav = require('oav');
+  oav = require('oav'),
+  utils = require("../test/util/utils");
 
-exports = module.exports;
-exports.globPath = path.join(__dirname, '../', '/**/swagger/*.json');
-exports.swaggers = glob.sync(exports.globPath);
-
-var swaggersToProcess = exports.swaggers;
+var swaggersToProcess = utils.swaggers;
 var finalResult = {};
-var filename = `log_${getTimeStamp()}.log`;
+var filename = `log_${utils.getTimeStamp()}.log`;
 var logFilepath = path.join(getLogDir(), filename);
-
-function getTimeStamp() {
-  // We pad each value so that sorted directory listings show the files in chronological order
-  function pad(number) {
-    return number < 10 ? '0' + number : number;
-  }
-
-  var now = new Date();
-  return now.getFullYear()
-    + pad(now.getMonth() + 1)
-    + pad(now.getDate())
-    + "_"
-    + pad(now.getHours())
-    + pad(now.getMinutes())
-    + pad(now.getSeconds());
-}
 
 function updateResult(spec, errors, updateLog) {
   if (!finalResult[spec]) {
@@ -70,6 +51,7 @@ function writeContent(content) {
 
 //runs the linter on a given swagger spec.
 async function runLinter(swagger) {
+  // TODO: update to use config file... but report grouping is by Swagger right now
   let cmd = 'autorest --azure-validator=true --input-file=' + swagger + ' --message-format=json';
   console.log(`\t- Running Linter.`);
   const {err, stdout, strerr } = await new Promise(res => exec(cmd, { encoding: 'utf8', maxBuffer: 1024 * 1024 * 64 },
@@ -111,8 +93,17 @@ function runSemanticValidator(swagger) {
   });
 }
 
+//runs the validation and linting tools on all the swaggers in the repo.
+async function runTools(swagger) {
+  console.log(`Processing "${swagger}":`);
+  const validationErrors = await runSemanticValidator(swagger);
+  updateResult(swagger, validationErrors, true);
+  const linterErrors = await runLinter(swagger);
+  updateResult(swagger, linterErrors, true);
+}
+
 //main function
-function runScript() {
+async function runScript() {
   // Useful when debugging a test for a particular swagger. 
   // Just update the regex. That will return an array of filtered items.
   // swaggersToProcess = swaggersToProcess.filter(function (item) {
@@ -125,15 +116,6 @@ function runScript() {
   }
   //console.dir(finalResult, { depth: null, colors: true });
   return finalResult;
-}
-
-//runs the validation and linting tools on all the swaggers in the repo.
-async function runTools(swagger) {
-  console.log(`Processing "${swagger}":`);
-  const validationErrors = await runSemanticValidator(swagger);
-  updateResult(swagger, validationErrors, true);
-  const linterErrors = runLinter(swagger);
-  updateResult(swagger, linterErrors, true);
 }
 
 //magic starts here

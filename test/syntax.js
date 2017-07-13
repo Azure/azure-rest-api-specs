@@ -5,7 +5,6 @@
 var assert = require("assert"),
   fs = require('fs'),
   path = require('path'),
-  async = require('async'),
   RefParser = require('json-schema-ref-parser'),
   util = require('util'),
   utils = require('./util/utils');
@@ -33,10 +32,6 @@ describe('Azure swagger schema validation:', function () {
   for (const swagger of utils.swaggers) {
     it(swagger + ' should be a valid Swagger document.', async function (done) {
       const parsedData = await utils.parseJsonFromFile(swagger);
-      if (parsedData.documents && util.isArray(parsedData.documents)) {
-        console.log(util.format('Skipping the test for \'%s\' document as it seems to be a composite swagger doc.', swagger));
-        done();
-      }
       var valid = context.validator.validate(parsedData, context.extensionSwaggerSchema);
       if (!valid) {
         var error = context.validator.getLastErrors();
