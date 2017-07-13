@@ -26,9 +26,15 @@ These are the global settings for the MachineLearning API.
 
 ``` yaml
 openapi-type: arm
-tag: package-webservices-2017-01 # TODO: make validation pick up multiple tags
 ```
 
+``` yaml $(package-webservices)
+tag: package-webservices-2017-01
+```
+
+``` yaml $(package-commitmentPlans)
+tag: package-commitmentPlans-2017-01
+```
 
 ### Tag: package-webservices-2017-01
 

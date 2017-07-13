@@ -72,8 +72,8 @@ Please also specify `--csharp-sdks-folder=<path to "SDKs" directory of your azur
 csharp:
   # last generated with commit 9e35e9c1e14dc46fcb1837ad108bba185ccaf9a9
   azure-arm: true
-  license-header: MICROSOFT_MIT
+  license-header: MICROSOFT_MIT_NO_VERSION
   namespace: Microsoft.Azure.Management.TrafficManager
-  payload-flattening-threshold: 1
+  payload-flattening-threshold: 2
   output-folder: $(csharp-sdks-folder)/TrafficManager/Management.TrafficManager/Generated
 ```

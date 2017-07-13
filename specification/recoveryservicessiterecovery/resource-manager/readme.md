@@ -38,3 +38,20 @@ These settings apply only when `--tag=package-2016-08` is specified on the comma
 input-file:
 - Microsoft.RecoveryServices/2016-08-10/service.json
 ```
+
+---
+# Code Generation
+
+## C#
+
+These settings apply only when `--csharp` is specified on the command line.
+Please also specify `--csharp-sdks-folder=<path to "SDKs" directory of your azure-sdk-for-net clone>`.
+
+```yaml $(csharp)
+csharp:
+  azure-arm: true
+  payload-flattening-threshold: 1
+  license-header: MICROSOFT_MIT
+  namespace: Microsoft.Azure.Management.RecoveryServices.SiteRecovery
+  output-folder: $(csharp-sdks-folder)/RecoveryServices.SiteRecovery/Management.RecoveryServices.SiteRecovery/Generated
+```

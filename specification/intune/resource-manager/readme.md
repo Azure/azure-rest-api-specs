@@ -47,3 +47,19 @@ These settings apply only when `--tag=package-2015-01-privatepreview` is specifi
 input-file:
 - Microsoft.Intune/2015-01-14-privatepreview/intune.json
 ```
+
+---
+# Code Generation
+
+## C# 
+
+These settings apply only when `--csharp` is specified on the command line.
+Please also specify `--csharp-sdks-folder=<path to "SDKs" directory of your azure-sdk-for-net clone>`.
+
+``` yaml $(csharp)
+csharp:
+  azure-arm: true
+  license-header: MICROSOFT_MIT
+  namespace: Microsoft.Azure.Management.Intune
+  output-folder: $(csharp-sdks-folder)/Intune/Intune/Generated
+```

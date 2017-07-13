@@ -60,5 +60,6 @@ csharp:
   azure-arm: true
   license-header: MICROSOFT_MIT
   namespace: Microsoft.Azure.KeyVault
+  sync-methods: None
   output-folder: $(csharp-sdks-folder)/KeyVault/dataPlane/Microsoft.Azure.KeyVault/Generated
 ```

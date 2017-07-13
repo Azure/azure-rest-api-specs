@@ -25,7 +25,6 @@ To see additional help and options, run:
 These are the global settings for the SearchClient API.
 
 ``` yaml
- 
 title: SearchClient
 description: Search Client
 openapi-type: data-plane

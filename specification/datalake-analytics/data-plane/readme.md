@@ -19,8 +19,6 @@ To see additional help and options, run:
 
 ## Configuration
 
-
-
 ### Basic Information 
 These are the global settings for the DataLakeAnalytics API.
 
@@ -28,17 +26,14 @@ These are the global settings for the DataLakeAnalytics API.
 title: DataLake Analytics
 description: DataLake Analytics Client
 openapi-type: data-plane
-tag: validate-package-2016-11
 ```
 
-### Tag: package-2016-11
+``` yaml $(package-catalog)
+tag: package-catalog-2016-11
+```
 
-These settings apply only when `--tag=package-2016-11` is specified on the command line.
-
-``` yaml $(tag) == 'validate-package-2016-11'
-input-file:
-- Microsoft.DataLakeAnalytics/2016-11-01/catalog.json
-- Microsoft.DataLakeAnalytics/2016-11-01/job.json
+``` yaml $(package-job)
+tag: package-job-2016-11
 ```
 
 ### Tag: package-catalog-2016-11
@@ -94,6 +89,14 @@ input-file:
 
 These settings apply only when `--csharp` is specified on the command line.
 Please also specify `--csharp-sdks-folder=<path to "SDKs" directory of your azure-sdk-for-net clone>`.
+
+``` yaml $(csharp)
+csharp:
+  azure-arm: true
+  license-header: MICROSOFT_MIT
+  namespace: Microsoft.Azure.Management.DataLake.Analytics
+  output-folder: $(csharp-sdks-folder)/DataLake.Analytics/Management.DataLake.Analytics/Generated
+```
 
 ``` yaml $(csharp)
 csharp:

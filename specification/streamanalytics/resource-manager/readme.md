@@ -45,3 +45,21 @@ input-file:
 - Microsoft.StreamAnalytics/2016-03-01/functions.json
 - Microsoft.StreamAnalytics/2016-03-01/subscriptions.json
 ```
+
+
+---
+# Code Generation
+
+
+## C# 
+
+These settings apply only when `--csharp` is specified on the command line.
+Please also specify `--csharp-sdks-folder=<path to "SDKs" directory of your azure-sdk-for-net clone>`.
+
+``` yaml $(csharp)
+csharp:
+  azure-arm: true
+  license-header: MICROSOFT_MIT
+  namespace: Microsoft.Azure.Management.StreamAnalytics
+  output-folder: $(csharp-sdks-folder)/StreamAnalytics/Management.StreamAnalytics/Generated
+```

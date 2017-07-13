@@ -54,5 +54,6 @@ csharp:
   azure-arm: true
   license-header: MICROSOFT_MIT
   namespace: Microsoft.Azure.Management.PowerBIEmbedded
+  payload-flattening-threshold: 2
   output-folder: $(csharp-sdks-folder)/PowerBIEmbedded/Management.PowerBIEmbedded/Generated
 ```
