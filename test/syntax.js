@@ -23,14 +23,13 @@ var context;
 
 
 describe('Azure swagger schema validation:', function () {
-  before(async function (done) {
+  before(async function () {
     const result = await utils.initializeValidator();
     context = result;
-    done();
   });
 
   for (const swagger of utils.swaggers) {
-    it(swagger + ' should be a valid Swagger document.', async function (done) {
+    it(swagger + ' should be a valid Swagger document.', async function () {
       const parsedData = await utils.parseJsonFromFile(swagger);
       var valid = context.validator.validate(parsedData, context.extensionSwaggerSchema);
       if (!valid) {
@@ -38,13 +37,12 @@ describe('Azure swagger schema validation:', function () {
         throw new Error("Schema validation failed: " + util.inspect(error, { depth: null }));
       }
       assert(valid === true);
-      done();
     });
   }
 
   describe('Azure x-ms-example schema validation:', function () {
     for (const example of utils.examples) {
-      it('x-ms-examples: ' + example + ' should be a valid x-ms-example.', async function (done) {
+      it('x-ms-examples: ' + example + ' should be a valid x-ms-example.', async function () {
         const parsedData = await utils.parseJsonFromFile(example);
         var valid = context.validator.validate(parsedData, context.exampleSchema);
         if (!valid) {
@@ -52,7 +50,6 @@ describe('Azure swagger schema validation:', function () {
           throw new Error("Schema validation failed: " + util.inspect(error, { depth: null }));
         }
         assert(valid === true);
-        done();
       });
     }
   });
@@ -60,14 +57,13 @@ describe('Azure swagger schema validation:', function () {
 
 describe('External file or url references ("$ref") in a swagger spec:', function () {
   for (const swagger of utils.swaggers) {
-    it(swagger + ' should be completely resolvable.', function (done) {
+    it(swagger + ' should be completely resolvable.', async function () {
       RefParser.bundle(swagger, function (bundleErr, bundleResult) {
         if (bundleErr) {
           var msg = swagger + ' has references that cannot be resolved. They are as follows: \n' + util.inspect(bundleErr.message, { depth: null });
           console.log(msg);
           throw new Error(msg);
         }
-        done();
       });
     });
   }

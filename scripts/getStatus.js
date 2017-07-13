@@ -54,29 +54,24 @@ async function runLinter(swagger) {
   // TODO: update to use config file... but report grouping is by Swagger right now
   let cmd = 'autorest --azure-validator=true --input-file=' + swagger + ' --message-format=json';
   console.log(`\t- Running Linter.`);
-  const {err, stdout, strerr } = await new Promise(res => exec(cmd, { encoding: 'utf8', maxBuffer: 1024 * 1024 * 64 },
+  const {err, stdout, stderr } = await new Promise(res => exec(cmd, { encoding: 'utf8', maxBuffer: 1024 * 1024 * 64 },
     (err, stdout, stderr) => res({ err: err, stdout: stdout, stderr: stderr })));
   let resultObject = [];
-  if (err) {
-    console.log(`An error occurred while running the linter on ${swagger}:`);
-    console.dir(err, { depth: null, colors: true });
-  } else {
-    //console.log('>>>> Actual result...');
+  let resultString = stdout + stderr;
+  //console.log('>>>> Actual result...');
+  //console.log(resultString);
+  if (resultString.indexOf('{') !== -1) {
+    resultString = "[" + resultString.substring(resultString.indexOf('{')).trim().replace(/\}\n\{/g, "},\n{") + "]";
+    //console.log('>>>>>> Trimmed Result...');
     //console.log(resultString);
-    let resultString = stdout + stderr;
-    if (resultString.indexOf('{') !== -1) {
-      resultString = "[" + resultString.substring(resultString.indexOf('{')).trim().replace(/\}\n\{/g, "},\n{") + "]";
-      //console.log('>>>>>> Trimmed Result...');
-      //console.log(resultString);
-      try {
-        resultObject = JSON.parse(resultString);
-        //console.log('>>>>>> Parsed Result...');
-        //console.dir(resultObject, {depth: null, colors: true});
-      } catch (e) {
-        console.log(`An error occurred while executing JSON.parse() on the linter output for ${swagger}:`);
-        console.dir(resultString);
-        console.dir(e, { depth: null, colors: true });
-      }
+    try {
+      resultObject = JSON.parse(resultString);
+      //console.log('>>>>>> Parsed Result...');
+      //console.dir(resultObject, {depth: null, colors: true});
+    } catch (e) {
+      console.log(`An error occurred while executing JSON.parse() on the linter output for ${swagger}:`);
+      console.dir(resultString);
+      console.dir(e, { depth: null, colors: true });
     }
   }
   return resultObject;

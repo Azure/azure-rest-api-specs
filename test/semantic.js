@@ -14,13 +14,15 @@ describe('Azure swagger semantic validation:', function () {
   //   return (item.match(/.*Microsoft.Logic.*2016-06-01.*/ig) !== null);
   // });
   for (const swagger of swaggersToProcess) {
-    it(swagger + ' should be semantically valid.', async function (done) {
+    it(swagger + ' should be semantically valid.', async function () {
       try {
         const validationResult = await oav.validateSpec(swagger, null, {consoleLogLevel: 'error'});
-        done(assert(validationResult.validateSpec && validationResult.validateSpec.errors && validationResult.validateSpec.errors.length === 0, `swagger "${swagger}" contains semantic validation errors.`));
+        return assert(
+          validationResult.validateSpec && validationResult.validateSpec.errors && validationResult.validateSpec.errors.length === 0, 
+          `swagger "${swagger}" contains semantic validation errors.`);
       } catch (err) {
         console.dir(err, {depth: null, colors: true});
-        done(err);
+        throw err;
       }
     });
   }

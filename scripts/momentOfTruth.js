@@ -68,7 +68,7 @@ async function getLinterResult(swaggerPath) {
     }
     let cmd = linterCmd + swaggerPath;
     console.log(`Executing: ${cmd}`);
-    const {err, stdout, strerr } = await new Promise(res => exec(cmd, { encoding: 'utf8', maxBuffer: 1024 * 1024 * 64 },
+    const {err, stdout, stderr } = await new Promise(res => exec(cmd, { encoding: 'utf8', maxBuffer: 1024 * 1024 * 64 },
         (err, stdout, stderr) => res({ err: err, stdout: stdout, stderr: stderr })));
 
     let resultString = stderr;

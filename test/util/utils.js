@@ -49,7 +49,7 @@ exports.stripBOM = function stripBOM(content) {
  * @returns {string} clr command
  */
 exports.parseJsonFromFile = async function parseJsonFromFile(filepath) {
-  const data = fs.readFile(filepath, 'utf8');
+  const data = await fs.readFile(filepath, { encoding: 'utf8' });
   try {
     return YAML.safeLoad(exports.stripBOM(data));
   } catch (error) {
