@@ -28,7 +28,35 @@ These are the global settings for the ApiManagement API.
 title: ApiManagementClient
 description: ApiManagement Client
 openapi-type: arm
-tag: package-2016-10
+tag: package-2017-03
+```
+
+
+### Tag: package-2017-03
+
+These settings apply only when `--tag=package-2017-03` is specified on the command line.
+
+``` yaml $(tag) == 'package-2017-03'
+input-file:
+- Microsoft.ApiManagement/2017-03-01/apimanagement.json
+- Microsoft.ApiManagement/2017-03-01/apimapis.json
+- Microsoft.ApiManagement/2017-03-01/apimauthorizationservers.json
+- Microsoft.ApiManagement/2017-03-01/apimbackends.json
+- Microsoft.ApiManagement/2017-03-01/apimcertificates.json
+- Microsoft.ApiManagement/2017-03-01/apimdeployment.json
+- Microsoft.ApiManagement/2017-03-01/apimemailtemplate.json
+- Microsoft.ApiManagement/2017-03-01/apimgroups.json
+- Microsoft.ApiManagement/2017-03-01/apimidentityprovider.json
+- Microsoft.ApiManagement/2017-03-01/apimloggers.json
+- Microsoft.ApiManagement/2017-03-01/apimnetworkstatus.json
+- Microsoft.ApiManagement/2017-03-01/apimopenidconnectproviders.json
+- Microsoft.ApiManagement/2017-03-01/apimproducts.json
+- Microsoft.ApiManagement/2017-03-01/apimproperties.json
+- Microsoft.ApiManagement/2017-03-01/apimquotas.json
+- Microsoft.ApiManagement/2017-03-01/apimreports.json
+- Microsoft.ApiManagement/2017-03-01/apimsubscriptions.json
+- Microsoft.ApiManagement/2017-03-01/apimtenant.json
+- Microsoft.ApiManagement/2017-03-01/apimusers.json
 ```
 
 

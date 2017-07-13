@@ -25,8 +25,6 @@ To see additional help and options, run:
 These are the global settings for the MachineLearning API.
 
 ``` yaml
-title: Machine Learning
-description: Machine Learning Client
 openapi-type: arm
 tag: package-2017-01
 ```
@@ -46,6 +44,8 @@ input-file:
 These settings apply only when `--tag=package-2016-05-preview` is specified on the command line.
 
 ``` yaml $(tag) == 'package-2016-05-preview'
+title: Azure ML Web Services Management Client
+description: Machine Learning Client
 input-file:
 - Microsoft.MachineLearning/2016-05-01-preview/commitmentPlans.json
 - Microsoft.MachineLearning/2016-05-01-preview/webservices.json

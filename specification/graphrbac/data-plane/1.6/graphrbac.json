@@ -1422,6 +1422,74 @@
           "operationName": "Objects_GetObjectsByObjectIdsNext"
         }
       }
+    },
+    "/{tenantID}/domains": {
+      "get": {
+        "tags": [
+          "Domain"
+        ],
+        "operationId": "Domains_List",
+        "description": "Gets a list of domains for the current tenant.",
+        "parameters": [
+          {
+            "name": "$filter",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "description": "The filter to apply to the operation."
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/tenantIDInPath"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK. The operation was successful.",
+            "schema": {
+              "$ref": "#/definitions/DomainListResult"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": null
+        },
+        "x-ms-odata": "#/definitions/User"
+      }
+    },
+    "/{tenantID}/domains/{domainName}": {
+      "get": {
+        "tags": [
+          "Domain"
+        ],
+        "operationId": "Domains_Get",
+        "description": "Gets a specific domain in the current tenant.",
+        "parameters": [
+          {
+            "name": "domainName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "name of the domain."
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/tenantIDInPath"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK. The operation was successful.",
+            "schema": {
+              "$ref": "#/definitions/Domain"
+            }
+          }
+        }
+      }
     }
   },
   "x-ms-paths": {
@@ -2010,6 +2078,11 @@
           "type": "boolean",
           "description": "Whether the AAD object is mail-enabled."
         },
+        "mailNickname": {
+          "type": "string",
+          "description": "The mail alias for the user.",
+          "readOnly": true
+        },
         "securityEnabled": {
           "type": "boolean",
           "description": "Whether the AAD object is security-enabled."
@@ -2028,6 +2101,50 @@
         "userType": {
           "type": "string",
           "description": "The user type of the object."
+        },
+        "usageLocation": {
+          "type": "string",
+          "description": "A two letter country code (ISO standard 3166). Required for users that will be assigned licenses due to legal requirement to check for availability of services in countries. Examples include: \"US\", \"JP\", and \"GB\".",
+          "readOnly": true
+        },
+        "appId": {
+          "type": "string",
+          "description": "The application ID.",
+          "readOnly": true
+        },
+        "appPermissions": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "description": "The application permissions.",
+          "readOnly": true
+        },
+        "availableToOtherTenants": {
+          "type": "boolean",
+          "description": "Whether the application is be available to other tenants.",
+          "readOnly": true
+        },
+        "identifierUris": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "description": "A collection of URIs for the application.",
+          "readOnly": true
+        },
+        "replyUrls": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "description": "A collection of reply URLs for the application.",
+          "readOnly": true
+        },
+        "homepage": {
+          "type": "string",
+          "description": "The home page of the application.",
+          "readOnly": true
         }
       },
       "description": "The properties of an Active Directory object."
@@ -2438,7 +2555,46 @@
         "includeDirectoryObjectReferences"
       ],
       "description": "Request parameters for the GetObjectsByObjectIds API."
-    }      
+    },
+    "Domain": {
+      "properties": {
+        "authenticationType": {
+          "type": "string",
+          "description": "the type of the authentication into the domain.",
+          "readOnly": true
+        },
+        "isDefault": {
+          "type": "boolean",
+          "description": "if this is the default domain in the tenant.",
+          "readOnly": true
+        },
+        "isVerified": {
+          "type": "boolean",
+          "description": "if this domain's ownership is verified.",
+          "readOnly": true
+        },
+        "name": {
+          "type": "string",
+          "description": "the domain name."
+        }
+      },
+      "required": [
+        "name"
+      ],
+      "description": "Active Directory Domain information."
+    },
+    "DomainListResult": {
+      "properties": {
+        "value": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Domain"
+          },
+          "description": "the list of domains."
+        }
+      },
+      "description": "Server response for Get tenant domains API call."
+    }
   },
   "parameters": {
     "ApiVersionParameter": {

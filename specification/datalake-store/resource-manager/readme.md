@@ -25,9 +25,6 @@ To see additional help and options, run:
 These are the global settings for the DataLakeStore API.
 
 ``` yaml
- 
-title: DataLakeStoreAccountManagementClient
-description: DataLake Store Client
 openapi-type: arm
 tag: package-2016-11
 ```
@@ -47,6 +44,8 @@ input-file:
 These settings apply only when `--tag=package-2015-10-preview` is specified on the command line.
 
 ``` yaml $(tag) == 'package-2015-10-preview'
+title: DataLakeStoreAccountManagementClient
+description: DataLake Store Client
 input-file:
 - Microsoft.DataLakeStore/2015-10-01-preview/account.json
 ```
