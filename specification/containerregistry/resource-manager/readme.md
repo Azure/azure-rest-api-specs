@@ -59,13 +59,20 @@ input-file:
 
 
 ---
-## Language-specific settings: CSharp
+# Code Generation
+
+
+## C# 
 
 These settings apply only when `--csharp` is specified on the command line.
+Please also specify `--csharp-sdks-folder=<path to "SDKs" directory of your azure-sdk-for-net clone>`.
 
 ``` yaml $(csharp)
 csharp:
-  # override the default output folder
-  output-folder: $(output-folder)/csharp
+  # last generated using AutoRest.1.0.0-Nightly20170212 with commit 3b0b26b4b6e3bc5e7cf3610b0866d310abb5b814
+  azure-arm: true
+  license-header: MICROSOFT_MIT
+  namespace: Microsoft.Azure.Management.ContainerRegistry
+  payload-flattening-threshold: 2
+  output-folder: $(csharp-sdks-folder)/ContainerRegistry/Management.ContainerRegistry/Generated
 ```
-

@@ -44,15 +44,3 @@ These settings apply only when `--tag=package-2014-04-preview` is specified on t
 input-file:
 - Microsoft.VisualStudio/2014-04-01-preview/Csm.json
 ```
-
-
----
-## Language-specific settings: CSharp
-
-These settings apply only when `--csharp` is specified on the command line.
-
-``` yaml $(csharp)
-csharp:
-  # override the default output folder
-  output-folder: $(output-folder)/csharp
-```

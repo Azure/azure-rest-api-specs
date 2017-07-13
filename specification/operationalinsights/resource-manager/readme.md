@@ -51,15 +51,21 @@ input-file:
 - Microsoft.OperationalInsights/2015-03-20/OperationalInsights.json
 ```
 
-
 ---
-## Language-specific settings: CSharp
+# Code Generation
+
+
+## C#
 
 These settings apply only when `--csharp` is specified on the command line.
+Please also specify `--csharp-sdks-folder=<path to "SDKs" directory of your azure-sdk-for-net clone>`.
 
-``` yaml $(csharp)
+```yaml $(csharp)
 csharp:
-  # override the default output folder
-  output-folder: $(output-folder)/csharp
+  # last generated using AutoRest.1.0.0-Nightly20170126 
+  azure-arm: true
+  namespace: Microsoft.Azure.Management.OperationalInsights
+  payload-flattening-threshold: 1
+  license-header: MICROSOFT_MIT
+  output-folder: $(csharp-sdks-folder)/OperationalInsights/Management.OperationalInsights/Generated
 ```
-

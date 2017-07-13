@@ -129,18 +129,27 @@ input-file:
 - Microsoft.ContainerService/2015-11-01-preview/containerService.json
 ```
 
+
 ---
-## Language-specific settings: CSharp
+# Code Generation
+
+## C# 
 
 These settings apply only when `--csharp` is specified on the command line.
+Please also specify `--csharp-sdks-folder=<path to "SDKs" directory of your azure-sdk-for-net clone>`.
 
 ``` yaml $(csharp)
 csharp:
-  # override the default output folder
-  output-folder: $(output-folder)/csharp
+  # last generated with AutoRest.1.0.0-Nightly20170126
+  azure-arm: true
+  license-header: MICROSOFT_MIT
+  namespace: Microsoft.Azure.Management.Compute
+  payload-flattening-threshold: 1
+  output-folder: $(csharp-sdks-folder)/Compute/Management.Compute/Generated
 ```
 
-## Language-specific settings: Python
+
+## Python
 
 These settings apply only when `--python` is specified on the command line.
 

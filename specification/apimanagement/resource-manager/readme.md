@@ -95,16 +95,3 @@ input-file:
 - Microsoft.ApiManagement/2016-07-07/apimanagement.json
 - Microsoft.ApiManagement/2016-07-07/apimdeployment.json
 ```
-
-
----
-## Language-specific settings: CSharp
-
-These settings apply only when `--csharp` is specified on the command line.
-
-``` yaml $(csharp)
-csharp:
-  # override the default output folder
-  output-folder: $(output-folder)/csharp
-```
-

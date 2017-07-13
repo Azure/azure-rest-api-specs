@@ -47,16 +47,3 @@ These settings apply only when `--tag=package-2015-01-privatepreview` is specifi
 input-file:
 - Microsoft.Intune/2015-01-14-privatepreview/intune.json
 ```
-
-
----
-## Language-specific settings: CSharp
-
-These settings apply only when `--csharp` is specified on the command line.
-
-``` yaml $(csharp)
-csharp:
-  # override the default output folder
-  output-folder: $(output-folder)/csharp
-```
-

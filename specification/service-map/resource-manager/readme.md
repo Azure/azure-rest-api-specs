@@ -38,16 +38,3 @@ These settings apply only when `--tag=package-2015-11-preview` is specified on t
 input-file:
 - Microsoft.OperationalInsights/2015-11-01-preview/arm-service-map.json
 ```
-
-
----
-## Language-specific settings: CSharp
-
-These settings apply only when `--csharp` is specified on the command line.
-
-``` yaml $(csharp)
-csharp:
-  # override the default output folder
-  output-folder: $(output-folder)/csharp
-```
-

@@ -48,15 +48,16 @@ input-file:
 - Microsoft.Billing/2017-02-27-preview/billing.json
 ```
 
-
 ---
-## Language-specific settings: CSharp
+## C# 
 
 These settings apply only when `--csharp` is specified on the command line.
+Please also specify `--csharp-sdks-folder=<path to "SDKs" directory of your azure-sdk-for-net clone>`.
 
 ``` yaml $(csharp)
 csharp:
-  # override the default output folder
-  output-folder: $(output-folder)/csharp
+  azure-arm: true
+  license-header: MICROSOFT_MIT
+  namespace: Microsoft.Azure.Management.Billing
+  output-folder: $(csharp-sdks-folder)/Billing/Management.Billing/Generated
 ```
-

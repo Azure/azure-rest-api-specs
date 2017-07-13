@@ -39,15 +39,20 @@ input-file:
 - Microsoft.Media/2015-10-01/media.json
 ```
 
-
 ---
-## Language-specific settings: CSharp
+# Code Generation
+
+
+## C# 
 
 These settings apply only when `--csharp` is specified on the command line.
+Please also specify `--csharp-sdks-folder=<path to "SDKs" directory of your azure-sdk-for-net clone>`.
 
 ``` yaml $(csharp)
 csharp:
-  # override the default output folder
-  output-folder: $(output-folder)/csharp
+  # last generated from commit 3586e2989d502434c4f607dd38d40e46aabede5c
+  azure-arm: true
+  license-header: MICROSOFT_MIT
+  namespace: Microsoft.Azure.Management.Media
+  output-folder: $(csharp-sdks-folder)/Media/Management.Media/Generated
 ```
-

@@ -38,16 +38,3 @@ These settings apply only when `--tag=package-2016-08` is specified on the comma
 input-file:
 - Microsoft.RecoveryServices/2016-08-10/service.json
 ```
-
-
----
-## Language-specific settings: CSharp
-
-These settings apply only when `--csharp` is specified on the command line.
-
-``` yaml $(csharp)
-csharp:
-  # override the default output folder
-  output-folder: $(output-folder)/csharp
-```
-

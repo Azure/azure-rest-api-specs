@@ -45,16 +45,3 @@ input-file:
 - Microsoft.StreamAnalytics/2016-03-01/functions.json
 - Microsoft.StreamAnalytics/2016-03-01/subscriptions.json
 ```
-
-
----
-## Language-specific settings: CSharp
-
-These settings apply only when `--csharp` is specified on the command line.
-
-``` yaml $(csharp)
-csharp:
-  # override the default output folder
-  output-folder: $(output-folder)/csharp
-```
-

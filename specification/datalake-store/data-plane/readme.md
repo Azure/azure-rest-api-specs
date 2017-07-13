@@ -51,15 +51,19 @@ input-file:
 - Microsoft.DataLakeStore/2015-10-01-preview/filesystem.json
 ```
 
-
 ---
-## Language-specific settings: CSharp
+# Code Generation
+
+
+## C# 
 
 These settings apply only when `--csharp` is specified on the command line.
+Please also specify `--csharp-sdks-folder=<path to "SDKs" directory of your azure-sdk-for-net clone>`.
 
 ``` yaml $(csharp)
 csharp:
-  # override the default output folder
-  output-folder: $(output-folder)/csharp
+  azure-arm: true
+  license-header: MICROSOFT_MIT
+  namespace: Microsoft.Azure.Management.DataLake.Store
+  output-folder: $(csharp-sdks-folder)/DataLake.Store/Management.DataLake.Store/Generated
 ```
-

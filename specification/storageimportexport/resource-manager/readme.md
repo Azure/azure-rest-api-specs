@@ -38,16 +38,3 @@ These settings apply only when `--tag=package-2016-11` is specified on the comma
 input-file:
 - Microsoft.ImportExport/2016-11-01/storageimportexport.json
 ```
-
-
----
-## Language-specific settings: CSharp
-
-These settings apply only when `--csharp` is specified on the command line.
-
-``` yaml $(csharp)
-csharp:
-  # override the default output folder
-  output-folder: $(output-folder)/csharp
-```
-

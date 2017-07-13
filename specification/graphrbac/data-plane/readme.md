@@ -39,20 +39,23 @@ input-file:
 - 1.6/graphrbac.json
 ```
 
-
 ---
-## Language-specific settings: CSharp
+# Code Generation
+
+## C#
 
 These settings apply only when `--csharp` is specified on the command line.
+Please also specify `--csharp-sdks-folder=<path to "SDKs" directory of your azure-sdk-for-net clone>`.
 
-``` yaml $(csharp)
+```yaml $(csharp)
 csharp:
-  # override the default output folder
-  output-folder: $(output-folder)/csharp
+  azure-arm: true
+  license-header: MICROSOFT_MIT
+  namespace: Microsoft.Azure.Graph.RBAC
+  output-folder: $(csharp-sdks-folder)/Graph.RBAC/Graph.RBAC/Generated
 ```
 
-
-## Language-specific settings: Python
+## Python
 
 These settings apply only when `--python` is specified on the command line.
 

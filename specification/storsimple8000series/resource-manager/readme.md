@@ -38,16 +38,3 @@ These settings apply only when `--tag=package-2017-06` is specified on the comma
 input-file:
 - Microsoft.StorSimple/2017-06-01/storsimple.json
 ```
-
-
----
-## Language-specific settings: CSharp
-
-These settings apply only when `--csharp` is specified on the command line.
-
-``` yaml $(csharp)
-csharp:
-  # override the default output folder
-  output-folder: $(output-folder)/csharp
-```
-
