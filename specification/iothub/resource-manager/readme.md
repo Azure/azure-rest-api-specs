@@ -63,4 +63,5 @@ csharp:
   license-header: MICROSOFT_MIT
   namespace: Microsoft.Azure.Management.IotHub
   output-folder: $(csharp-sdks-folder)/IotHub/Management.IotHub/Generated
+  clear-output-folder: true
 ```

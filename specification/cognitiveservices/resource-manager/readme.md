@@ -65,4 +65,5 @@ csharp:
   license-header: MICROSOFT_MIT
   namespace: Microsoft.Azure.Management.CognitiveServices
   output-folder: $(csharp-sdks-folder)/CognitiveServices/Management.CognitiveServices/Generated
+  clear-output-folder: true
 ```

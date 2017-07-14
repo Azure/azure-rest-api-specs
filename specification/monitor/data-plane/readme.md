@@ -62,6 +62,7 @@ csharp:
   license-header: MICROSOFT_MIT
   namespace: Microsoft.Azure.Management.Monitor
   output-folder: $(csharp-sdks-folder)/Monitor/Management.Monitor/Generated/Monitor
+  clear-output-folder: true
 ```
 
 

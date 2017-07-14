@@ -75,4 +75,5 @@ csharp:
   license-header: MICROSOFT_MIT
   namespace: Microsoft.Azure.Management.Redis
   output-folder: $(csharp-sdks-folder)/RedisCache/Management.Redis/Generated
+  clear-output-folder: true
 ```

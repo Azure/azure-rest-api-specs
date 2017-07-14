@@ -54,4 +54,5 @@ csharp:
   license-header: MICROSOFT_MIT
   namespace: Microsoft.Azure.Management.RecoveryServices.SiteRecovery
   output-folder: $(csharp-sdks-folder)/RecoveryServices.SiteRecovery/Management.RecoveryServices.SiteRecovery/Generated
+  clear-output-folder: true
 ```

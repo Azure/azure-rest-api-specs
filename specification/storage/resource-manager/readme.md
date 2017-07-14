@@ -102,4 +102,5 @@ csharp:
   namespace: Microsoft.Azure.Management.Storage
   payload-flattening-threshold: 2
   output-folder: $(csharp-sdks-folder)/Storage/Management.Storage/Generated
+  clear-output-folder: true
 ```

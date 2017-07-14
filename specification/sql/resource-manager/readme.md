@@ -93,6 +93,7 @@ csharp:
   license-header: MICROSOFT_MIT
   namespace: Microsoft.Azure.Management.Sql
   output-folder: $(csharp-sdks-folder)/SqlManagement/Management.Sql/Generated
+  clear-output-folder: true
 ```
 
 

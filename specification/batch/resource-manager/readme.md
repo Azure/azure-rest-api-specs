@@ -76,4 +76,5 @@ csharp:
   namespace: Microsoft.Azure.Management.Batch
   payload-flattening-threshold: 1
   output-folder: $(csharp-sdks-folder)/Batch/Management/Management.Batch/Generated
+  clear-output-folder: true
 ```

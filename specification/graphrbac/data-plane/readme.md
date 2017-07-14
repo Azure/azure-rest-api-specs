@@ -53,6 +53,7 @@ csharp:
   license-header: MICROSOFT_MIT
   namespace: Microsoft.Azure.Graph.RBAC
   output-folder: $(csharp-sdks-folder)/Graph.RBAC/Graph.RBAC/Generated
+  clear-output-folder: true
 ```
 
 ## Python

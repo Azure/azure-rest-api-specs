@@ -54,4 +54,5 @@ csharp:
   license-header: MICROSOFT_MIT
   namespace: Microsoft.Azure.Management.StorSimple8000Series
   output-folder: $(csharp-sdks-folder)/StorSimple8000Series/Management.StorSimple8000Series/Generated
+  clear-output-folder: true
 ```

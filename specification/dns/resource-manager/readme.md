@@ -65,4 +65,5 @@ csharp:
   namespace: Microsoft.Azure.Management.Dns
   payload-flattening-threshold: 2
   output-folder: $(csharp-sdks-folder)/Dns/Management.Dns/Generated
+  clear-output-folder: true
 ```

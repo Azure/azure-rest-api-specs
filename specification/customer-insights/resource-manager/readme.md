@@ -65,4 +65,5 @@ csharp:
   license-header: MICROSOFT_MIT
   namespace: Microsoft.Azure.Management.CustomerInsights
   output-folder: $(csharp-sdks-folder)/CustomerInsights/Management.CustomerInsights/Generated
+  clear-output-folder: true
 ```

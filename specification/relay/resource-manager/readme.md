@@ -65,4 +65,5 @@ csharp:
   license-header: MICROSOFT_MIT
   namespace: Microsoft.Azure.Management.Relay
   output-folder: $(csharp-sdks-folder)/Relay/Management.Relay/Generated
+  clear-output-folder: true
 ```
