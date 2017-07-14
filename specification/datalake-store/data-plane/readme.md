@@ -25,9 +25,6 @@ To see additional help and options, run:
 These are the global settings for the DataLakeStore API.
 
 ``` yaml
- 
-title: DataLake Store
-description: DataLake Store Client
 openapi-type: data-plane
 tag: package-2016-11
 ```

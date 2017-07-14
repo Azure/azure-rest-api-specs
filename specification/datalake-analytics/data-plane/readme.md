@@ -23,8 +23,6 @@ To see additional help and options, run:
 These are the global settings for the DataLakeAnalytics API.
 
 ``` yaml
-title: DataLake Analytics
-description: DataLake Analytics Client
 openapi-type: data-plane
 ```
 

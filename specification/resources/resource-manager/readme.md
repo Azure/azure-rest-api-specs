@@ -165,7 +165,7 @@ These settings apply only when `--tag=package-managedapplications-2016-09` is sp
 
 ``` yaml $(tag) == 'package-managedapplications-2016-09'
 input-file:
-- Microsoft.Resources/2016-09-01-preview/managedapplications.json
+- Microsoft.Solutions/2016-09-01-preview/managedapplications.json
 ```
 
 ---

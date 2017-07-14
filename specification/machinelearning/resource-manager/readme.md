@@ -33,7 +33,7 @@ tag: package-webservices-2017-01
 ```
 
 ``` yaml $(package-commitmentPlans)
-tag: package-commitmentPlans-2017-01
+tag: package-commitmentPlans-2016-05-preview
 ```
 
 ### Tag: package-webservices-2017-01
