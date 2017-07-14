@@ -38,3 +38,20 @@ These settings apply only when `--tag=package-2017-06` is specified on the comma
 input-file:
 - Microsoft.StorSimple/2017-06-01/storsimple.json
 ```
+
+---
+# Code Generation
+
+
+## C# 
+
+These settings apply only when `--csharp` is specified on the command line.
+Please also specify `--csharp-sdks-folder=<path to "SDKs" directory of your azure-sdk-for-net clone>`.
+
+``` yaml $(csharp)
+csharp:
+  azure-arm: true
+  license-header: MICROSOFT_MIT
+  namespace: Microsoft.Azure.Management.StorSimple8000Series
+  output-folder: $(csharp-sdks-folder)/StorSimple8000Series/Management.StorSimple8000Series/Generated
+```

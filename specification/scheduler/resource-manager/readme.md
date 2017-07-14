@@ -67,7 +67,7 @@ Please also specify `--csharp-sdks-folder=<path to "SDKs" directory of your azur
 ``` yaml $(csharp)
 csharp:
   azure-arm: true
-  license-header: MICROSOFT_MIT
+  license-header: NONE
   namespace: Microsoft.Azure.Management.Scheduler
   output-folder: $(csharp-sdks-folder)/Scheduler/Management.Scheduler/Generated
 ```
