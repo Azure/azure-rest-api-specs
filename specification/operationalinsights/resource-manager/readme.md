@@ -25,7 +25,7 @@ To see additional help and options, run:
 These are the global settings for the OperationalInsights API.
 
 ``` yaml
-title: Azure Log Analytics
+title: OperationalInsightsManagementClient
 description: Operational Insights Client
 openapi-type: arm
 tag: package-2015-11-preview
