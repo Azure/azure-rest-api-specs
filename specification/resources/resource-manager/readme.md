@@ -184,3 +184,18 @@ csharp:
   license-header: MICROSOFT_MIT
   output-folder: $(csharp-sdks-folder)/Resource/Management.ResourceManager/Generated
 ```
+
+# Validation
+
+Since this RP has no unique default package, iterate over all of them for validation:
+
+``` yaml $(validation)
+batch:
+  - package-features: true
+  - package-locks: true
+  - package-policy: true
+  - package-resources: true
+  - package-subscriptions: true
+  - package-links: true
+  - package-managedapplications: true
+```

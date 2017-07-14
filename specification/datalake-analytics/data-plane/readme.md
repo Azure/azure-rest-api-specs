@@ -103,3 +103,13 @@ csharp:
   namespace: Microsoft.Azure.Management.DataLake.Analytics
   output-folder: $(csharp-sdks-folder)/DataLake.Analytics/Management.DataLake.Analytics/Generated
 ```
+
+# Validation
+
+Since this RP has no unique default package, iterate over all of them for validation:
+
+``` yaml $(validation)
+batch:
+  - package-catalog: true
+  - package-job: true
+```

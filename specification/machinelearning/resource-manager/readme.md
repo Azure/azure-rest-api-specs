@@ -91,3 +91,13 @@ csharp:
   namespace: Microsoft.Azure.Management.MachineLearning.WebServices
   output-folder: $(csharp-sdks-folder)/MachineLearning/Management.MachineLearning/Generated/WebServices
 ```
+
+# Validation
+
+Since this RP has no unique default package, iterate over all of them for validation:
+
+``` yaml $(validation)
+batch:
+  - package-webservices: true
+  - package-commitmentPlans: true
+```
