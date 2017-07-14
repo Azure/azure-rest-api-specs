@@ -265,7 +265,7 @@
             "required": true,
             "type": "string",
             "format": "uuid",
-            "description": "JobInfo ID."
+            "description": "Job identifier. Uniquely identifies the job across all jobs submitted to the service."
           },
           {
             "$ref": "#/parameters/ApiVersionParameter"
@@ -326,7 +326,7 @@
             "required": true,
             "type": "string",
             "format": "uuid",
-            "description": "JobInfo ID to cancel."
+            "description": "Job identifier. Uniquely identifies the job across all jobs submitted to the service."
           },
           {
             "$ref": "#/parameters/ApiVersionParameter"
@@ -339,13 +339,13 @@
         }
       }
     },
-    "/Jobs/{jobIdentity}": {
-      "get": {
+    "/Jobs/{jobIdentity}/Yield": {
+      "post": {
         "tags": [
           "Job"
         ],
-        "operationId": "Job_Get",
-        "description": "Gets the job information for the specified job ID.",
+        "operationId": "Job_Yield",
+        "description": "Pauses the specified job and places it back in the job queue, behind other jobs of equal or higher importance, based on priority. (Only for use internally with Scope job type.)",
         "parameters": [
           {
             "name": "jobIdentity",
@@ -353,7 +353,7 @@
             "required": true,
             "type": "string",
             "format": "uuid",
-            "description": "JobInfo ID."
+            "description": "Job identifier. Uniquely identifies the job across all jobs submitted to the service."
           },
           {
             "$ref": "#/parameters/ApiVersionParameter"
@@ -361,13 +361,15 @@
         ],
         "responses": {
           "200": {
-            "description": "Successfully retrieved details of the specified job.",
+            "description": "Successfully yielded the specified job.",
             "schema": {
               "$ref": "#/definitions/JobInformation"
             }
           }
         }
-      },
+      }
+    },
+    "/Jobs/{jobIdentity}": {
       "put": {
         "tags": [
           "Job"
@@ -399,6 +401,71 @@
         "responses": {
           "200": {
             "description": "Successfully submitted the job.",
+            "schema": {
+              "$ref": "#/definitions/JobInformation"
+            }
+          }
+        }
+      },
+      "patch": {
+        "tags": [
+          "Job"
+        ],
+        "operationId": "Job_Update",
+        "description": "Updates the job information for the specified job ID. (Only for use internally with Scope job type.)",
+        "parameters": [
+          {
+            "name": "jobIdentity",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "format": "uuid",
+            "description": "Job identifier. Uniquely identifies the job across all jobs submitted to the service."
+          },
+          {
+            "name": "parameters",
+            "in": "body",
+            "required": false,
+            "schema": {
+              "$ref": "#/definitions/JobInformationUpdateParameters"
+            },
+            "description": "The parameters to update a job."
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successfully updated the details of the specified job.",
+            "schema": {
+              "$ref": "#/definitions/JobInformation"
+            }
+          }
+        }
+      },
+      "get": {
+        "tags": [
+          "Job"
+        ],
+        "operationId": "Job_Get",
+        "description": "Gets the job information for the specified job ID.",
+        "parameters": [
+          {
+            "name": "jobIdentity",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "format": "uuid",
+            "description": "Job identifier. Uniquely identifies the job across all jobs submitted to the service."
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successfully retrieved details of the specified job.",
             "schema": {
               "$ref": "#/definitions/JobInformation"
             }
@@ -799,6 +866,72 @@
       },
       "description": "U-SQL job properties used when submitting and retrieving U-SQL jobs."
     },
+    "ScopeJobProperties": {
+      "x-ms-discriminator-value": "Scope",
+      "allOf": [
+        {
+          "$ref": "#/definitions/JobProperties"
+        }
+      ],
+      "properties": {
+        "resources": {
+          "type": "array",
+          "readOnly": true,
+          "items": {
+            "$ref": "#/definitions/JobResource"
+          },
+          "description": "the list of resources that are required by the job"
+        },
+        "totalCompilationTime": {
+          "type": "string",
+          "format": "duration",
+          "readOnly": true,
+          "description": "the total time this job spent compiling. This value should not be set by the user and will be ignored if it is."
+        },
+        "totalQueuedTime": {
+          "type": "string",
+          "format": "duration",
+          "readOnly": true,
+          "description": "the total time this job spent queued. This value should not be set by the user and will be ignored if it is."
+        },
+        "totalRunningTime": {
+          "type": "string",
+          "format": "duration",
+          "readOnly": true,
+          "description": "the total time this job spent executing. This value should not be set by the user and will be ignored if it is."
+        },
+        "rootProcessNodeId": {
+          "type": "string",
+          "readOnly": true,
+          "description": "the ID used to identify the job manager coordinating job execution. This value should not be set by the user and will be ignored if it is."
+        },
+        "yarnApplicationId": {
+          "type": "string",
+          "readOnly": true,
+          "description": "the ID used to identify the yarn application executing the job. This value should not be set by the user and will be ignored if it is."
+        },
+        "yarnApplicationTimeStamp": {
+          "type": "integer",
+          "readOnly": true,
+          "format": "int64",
+          "description": "the timestamp (in ticks) for the yarn application executing the job. This value should not be set by the user and will be ignored if it is."
+        },
+        "compileMode": {
+          "type": "string",
+          "description": "Optionally enforces a specific compilation mode for the job during execution. If this is not specified during submission, the server will determine the optimal compilation mode.",
+          "enum": [
+            "Semantic",
+            "Full",
+            "SingleBox"
+          ],
+          "x-ms-enum": {
+            "name": "CompileMode",
+            "modelAsString": false
+          }
+        }
+      },
+      "description": "Scope job properties used when submitting and retrieving Scope jobs. (Only for use internally with Scope job type.)"
+    },
     "HiveJobProperties": {
       "x-ms-discriminator-value": "Hive",
       "allOf": [
@@ -849,7 +982,7 @@
         },
         "type": {
           "type": "string",
-          "description": "the job type of the current job (i.e. Hive or U-SQL)."
+          "description": "the job type of the current job (i.e. Hive, U-SQL, or Scope (for internal use only))."
         }
       },
       "description": "The common Data Lake Analytics job properties."
@@ -1311,10 +1444,11 @@
         },
         "type": {
           "type": "string",
-          "description": "the job type of the current job (Hive or USql).",
+          "description": "the job type of the current job (Hive, USql, or Scope (for internal use only)).",
           "enum": [
             "USql",
-            "Hive"
+            "Hive",
+            "Scope"
           ],
           "x-ms-enum": {
             "name": "JobType",
@@ -1426,6 +1560,13 @@
         "related": {
           "$ref": "#/definitions/JobRelationshipProperties",
           "description": "the recurring job relationship information properties."
+        },
+        "tags": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          },
+          "description": "the key-value pairs used to add additional metadata to the job information. (Only for use internally with Scope job type.)"
         }
       },
       "required": [
@@ -1443,7 +1584,7 @@
           "items": {
             "$ref": "#/definitions/JobInformation"
           },
-          "description": "the list of jobInfo items."
+          "description": "the list of JobInfo items."
         },
         "nextLink": {
           "type": "string",
@@ -1451,7 +1592,29 @@
           "description": "the link (url) to the next page of results."
         }
       },
-      "description": "List of jobInfo items."
+      "description": "List of JobInfo items."
+    },
+    "JobInformationUpdateParameters": {
+      "properties": {
+        "degreeOfParallelism": {
+          "type": "integer",
+          "format": "int32",
+          "description": "the degree of parallelism used for this job. This must be greater than 0, if set to less than 0 it will default to 1."
+        },
+        "priority": {
+          "type": "integer",
+          "format": "int32",
+          "description": "the priority value for the current job. Lower numbers have a higher priority. By default, a job has a priority of 1000. This must be greater than 0."
+        },
+        "tags": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          },
+          "description": "the key-value pairs used to add additional metadata to the job information. (Only for use internally with Scope job type.)"
+        }
+      },
+      "description": "The parameters that can be used to update existing Data Lake Analytics job information properties."
     }
   },
   "parameters": {
