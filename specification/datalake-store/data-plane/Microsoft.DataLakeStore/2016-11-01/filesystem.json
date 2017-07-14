@@ -202,10 +202,8 @@
           }
         }
       }
-    }
-  },
-  "x-ms-paths": {
-    "/webhdfs/v1/{path}?op=CHECKACCESS": {
+    },
+    "/webhdfs/v1/{path}": {
       "get": {
         "tags": [
           "FileSystem"
@@ -231,6 +229,16 @@
             "description": "File system operation read/write/execute in string form, matching regex pattern '[rwx-]{3}'"
           },
           {
+            "name": "op",
+            "in": "query",
+            "required": true,
+            "type": "string",
+            "description": "The constant value for the operation.",
+            "enum": [
+              "CHECKACCESS"
+            ]
+          },
+          {
             "$ref": "#/parameters/ApiVersionParameter"
           }
         ],
@@ -247,7 +255,9 @@
           }
         }
       }
-    },
+    }
+  },
+  "x-ms-paths": {
     "/webhdfs/v1/{path}?op=MKDIRS": {
       "put": {
         "tags": [
@@ -273,6 +283,16 @@
             "type": "integer",
             "format": "int32",
             "description": "Optional octal permission with which the directory should be created."
+          },
+          {
+            "name": "op",
+            "in": "query",
+            "required": true,
+            "type": "string",
+            "description": "The constant value for the operation.",
+            "enum": [
+              "MKDIRS"
+            ]
           },
           {
             "$ref": "#/parameters/ApiVersionParameter"
@@ -323,6 +343,16 @@
             },
             "collectionFormat": "csv",
             "description": "A list of comma separated Data Lake Store paths (starting with '/') of the files to concatenate, in the order in which they should be concatenated."
+          },
+          {
+            "name": "op",
+            "in": "query",
+            "required": true,
+            "type": "string",
+            "description": "The constant value for the operation.",
+            "enum": [
+              "CONCAT"
+            ]
           },
           {
             "$ref": "#/parameters/ApiVersionParameter"
@@ -379,6 +409,16 @@
               "format": "file"
             },
             "description": "A list of Data Lake Store paths (starting with '/') of the source files. Must be a comma-separated path list in the format: sources=/file/path/1.txt,/file/path/2.txt,/file/path/lastfile.csv"
+          },
+          {
+            "name": "op",
+            "in": "query",
+            "required": true,
+            "type": "string",
+            "description": "The constant value for the operation.",
+            "enum": [
+              "MSCONCAT"
+            ]
           },
           {
             "$ref": "#/parameters/ApiVersionParameter"
@@ -446,6 +486,16 @@
             "description": "An optional switch to return friendly names in place of owner and group. tooid=false returns friendly names instead of the AAD Object ID. Default value is true, returning AAD object IDs."
           },
           {
+            "name": "op",
+            "in": "query",
+            "required": true,
+            "type": "string",
+            "description": "The constant value for the operation.",
+            "enum": [
+              "LISTSTATUS"
+            ]
+          },
+          {
             "$ref": "#/parameters/ApiVersionParameter"
           }
         ],
@@ -483,6 +533,16 @@
             "required": true,
             "type": "string",
             "description": "The Data Lake Store path (starting with '/') of the file for which to retrieve the summary."
+          },
+          {
+            "name": "op",
+            "in": "query",
+            "required": true,
+            "type": "string",
+            "description": "The constant value for the operation.",
+            "enum": [
+              "GETCONTENTSUMMARY"
+            ]
           },
           {
             "$ref": "#/parameters/ApiVersionParameter"
@@ -529,6 +589,16 @@
             "required": false,
             "type": "boolean",
             "description": "An optional switch to return friendly names in place of owner and group. tooid=false returns friendly names instead of the AAD Object ID. Default value is true, returning AAD object IDs."
+          },
+          {
+            "name": "op",
+            "in": "query",
+            "required": true,
+            "type": "string",
+            "description": "The constant value for the operation.",
+            "enum": [
+              "GETFILESTATUS"
+            ]
           },
           {
             "$ref": "#/parameters/ApiVersionParameter"
@@ -604,6 +674,16 @@
             "type": "string",
             "enum": [
               "true"
+            ]
+          },
+          {
+            "name": "op",
+            "in": "query",
+            "required": true,
+            "type": "string",
+            "description": "The constant value for the operation.",
+            "enum": [
+              "OPEN"
             ]
           },
           {
@@ -710,6 +790,16 @@
             ]
           },
           {
+            "name": "op",
+            "in": "query",
+            "required": true,
+            "type": "string",
+            "description": "The constant value for the operation.",
+            "enum": [
+              "APPEND"
+            ]
+          },
+          {
             "$ref": "#/parameters/ApiVersionParameter"
           }
         ],
@@ -808,6 +898,16 @@
             ]
           },
           {
+            "name": "op",
+            "in": "query",
+            "required": true,
+            "type": "string",
+            "description": "The constant value for the operation.",
+            "enum": [
+              "CREATE"
+            ]
+          },
+          {
             "$ref": "#/parameters/ApiVersionParameter"
           }
         ],
@@ -849,6 +949,16 @@
             "required": true,
             "type": "string",
             "description": "The ACL spec included in ACL creation operations in the format '[default:]user|group|other::r|-w|-x|-'"
+          },
+          {
+            "name": "op",
+            "in": "query",
+            "required": true,
+            "type": "string",
+            "description": "The constant value for the operation.",
+            "enum": [
+              "SETACL"
+            ]
           },
           {
             "$ref": "#/parameters/ApiVersionParameter"
@@ -894,6 +1004,16 @@
             "description": "The ACL specification included in ACL modification operations in the format '[default:]user|group|other::r|-w|-x|-'"
           },
           {
+            "name": "op",
+            "in": "query",
+            "required": true,
+            "type": "string",
+            "description": "The constant value for the operation.",
+            "enum": [
+              "MODIFYACLENTRIES"
+            ]
+          },
+          {
             "$ref": "#/parameters/ApiVersionParameter"
           }
         ],
@@ -937,6 +1057,16 @@
             "description": "The ACL spec included in ACL removal operations in the format '[default:]user|group|other'"
           },
           {
+            "name": "op",
+            "in": "query",
+            "required": true,
+            "type": "string",
+            "description": "The constant value for the operation.",
+            "enum": [
+              "REMOVEACLENTRIES"
+            ]
+          },
+          {
             "$ref": "#/parameters/ApiVersionParameter"
           }
         ],
@@ -973,6 +1103,16 @@
             "description": "The Data Lake Store path (starting with '/') of the directory with the default ACL being removed."
           },
           {
+            "name": "op",
+            "in": "query",
+            "required": true,
+            "type": "string",
+            "description": "The constant value for the operation.",
+            "enum": [
+              "REMOVEDEFAULTACL"
+            ]
+          },
+          {
             "$ref": "#/parameters/ApiVersionParameter"
           }
         ],
@@ -1007,6 +1147,16 @@
             "required": true,
             "type": "string",
             "description": "The Data Lake Store path (starting with '/') of the file or directory with the ACL being removed."
+          },
+          {
+            "name": "op",
+            "in": "query",
+            "required": true,
+            "type": "string",
+            "description": "The constant value for the operation.",
+            "enum": [
+              "REMOVEACL"
+            ]
           },
           {
             "$ref": "#/parameters/ApiVersionParameter"
@@ -1050,6 +1200,16 @@
             "required": false,
             "type": "boolean",
             "description": "An optional switch to return friendly names in place of object ID for ACL entries. tooid=false returns friendly names instead of the AAD Object ID. Default value is true, returning AAD object IDs."
+          },
+          {
+            "name": "op",
+            "in": "query",
+            "required": true,
+            "type": "string",
+            "description": "The constant value for the operation.",
+            "enum": [
+              "GETACLSTATUS"
+            ]
           },
           {
             "$ref": "#/parameters/ApiVersionParameter"
@@ -1098,6 +1258,16 @@
             "description": "The optional switch indicating if the delete should be recursive"
           },
           {
+            "name": "op",
+            "in": "query",
+            "required": true,
+            "type": "string",
+            "description": "The constant value for the operation.",
+            "enum": [
+              "DELETE"
+            ]
+          },
+          {
             "$ref": "#/parameters/ApiVersionParameter"
           }
         ],
@@ -1142,6 +1312,16 @@
             "required": true,
             "type": "string",
             "description": "The path to move/rename the file or folder to"
+          },
+          {
+            "name": "op",
+            "in": "query",
+            "required": true,
+            "type": "string",
+            "description": "The constant value for the operation.",
+            "enum": [
+              "RENAME"
+            ]
           },
           {
             "$ref": "#/parameters/ApiVersionParameter"
@@ -1197,6 +1377,16 @@
             "description": "The AAD Object ID of the group owner of the file or directory. If empty, the property will remain unchanged."
           },
           {
+            "name": "op",
+            "in": "query",
+            "required": true,
+            "type": "string",
+            "description": "The constant value for the operation.",
+            "enum": [
+              "SETOWNER"
+            ]
+          },
+          {
             "$ref": "#/parameters/ApiVersionParameter"
           }
         ],
@@ -1238,6 +1428,16 @@
             "required": false,
             "type": "string",
             "description": "A string representation of the permission (i.e 'rwx'). If empty, this property remains unchanged."
+          },
+          {
+            "name": "op",
+            "in": "query",
+            "required": true,
+            "type": "string",
+            "description": "The constant value for the operation.",
+            "enum": [
+              "SETPERMISSION"
+            ]
           },
           {
             "$ref": "#/parameters/ApiVersionParameter"
