@@ -39,15 +39,19 @@ input-file:
 - Microsoft.RecoveryServices/2016-08-10/service.json
 ```
 
-
 ---
-## Language-specific settings: CSharp
+# Code Generation
+
+## C#
 
 These settings apply only when `--csharp` is specified on the command line.
+Please also specify `--csharp-sdks-folder=<path to "SDKs" directory of your azure-sdk-for-net clone>`.
 
-``` yaml $(csharp)
+```yaml $(csharp)
 csharp:
-  # override the default output folder
-  output-folder: $(output-folder)/csharp
+  azure-arm: true
+  payload-flattening-threshold: 1
+  license-header: MICROSOFT_MIT
+  namespace: Microsoft.Azure.Management.RecoveryServices.SiteRecovery
+  output-folder: $(csharp-sdks-folder)/RecoveryServices.SiteRecovery/Management.RecoveryServices.SiteRecovery/Generated
 ```
-

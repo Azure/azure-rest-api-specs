@@ -60,13 +60,20 @@ input-file:
 
 
 ---
-## Language-specific settings: CSharp
+# Code Generation
+
+
+## C# 
 
 These settings apply only when `--csharp` is specified on the command line.
+Please also specify `--csharp-sdks-folder=<path to "SDKs" directory of your azure-sdk-for-net clone>`.
 
 ``` yaml $(csharp)
 csharp:
-  # override the default output folder
-  output-folder: $(output-folder)/csharp
+  # last generated with commit 9e35e9c1e14dc46fcb1837ad108bba185ccaf9a9
+  azure-arm: true
+  license-header: MICROSOFT_MIT_NO_VERSION
+  namespace: Microsoft.Azure.Management.TrafficManager
+  payload-flattening-threshold: 2
+  output-folder: $(csharp-sdks-folder)/TrafficManager/Management.TrafficManager/Generated
 ```
-

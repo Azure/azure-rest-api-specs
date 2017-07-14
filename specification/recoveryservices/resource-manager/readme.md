@@ -59,13 +59,17 @@ input-file:
 
 
 ---
-## Language-specific settings: CSharp
+## C# 
 
 These settings apply only when `--csharp` is specified on the command line.
+Please also specify `--csharp-sdks-folder=<path to "SDKs" directory of your azure-sdk-for-net clone>`.
 
 ``` yaml $(csharp)
 csharp:
-  # override the default output folder
-  output-folder: $(output-folder)/csharp
+  azure-arm: true
+  license-header: MICROSOFT_MIT
+  payload-flattening-threshold: 1
+  namespace: Microsoft.Azure.Management.RecoveryServices
+  output-folder: $(csharp-sdks-folder)/RecoveryServices/Management.RecoveryServices/Generated
 ```
 

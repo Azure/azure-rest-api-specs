@@ -38,16 +38,3 @@ These settings apply only when `--tag=package-2015-01` is specified on the comma
 input-file:
 - Microsoft.ResourceHealth/2015-01-01/resourcehealth.json
 ```
-
-
----
-## Language-specific settings: CSharp
-
-These settings apply only when `--csharp` is specified on the command line.
-
-``` yaml $(csharp)
-csharp:
-  # override the default output folder
-  output-folder: $(output-folder)/csharp
-```
-

@@ -41,13 +41,19 @@ input-file:
 
 
 ---
-## Language-specific settings: CSharp
+# Code Generation
+
+
+## C# 
 
 These settings apply only when `--csharp` is specified on the command line.
+Please also specify `--csharp-sdks-folder=<path to "SDKs" directory of your azure-sdk-for-net clone>`.
 
 ``` yaml $(csharp)
 csharp:
-  # override the default output folder
-  output-folder: $(output-folder)/csharp
+  azure-arm: true
+  license-header: MICROSOFT_MIT
+  namespace: Microsoft.Azure.Management.PowerBIEmbedded
+  payload-flattening-threshold: 2
+  output-folder: $(csharp-sdks-folder)/PowerBIEmbedded/Management.PowerBIEmbedded/Generated
 ```
-

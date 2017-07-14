@@ -26,7 +26,34 @@ These are the global settings for the Resource API.
 
 ``` yaml
 openapi-type: arm
-tag: package-2017-05
+```
+
+``` yaml $(package-features)
+tag: package-features-2015-12
+```
+
+``` yaml $(package-locks)
+tag: package-locks-2016-09
+```
+
+``` yaml $(package-policy)
+tag: package-policy-2016-12
+```
+
+``` yaml $(package-resources)
+tag: package-resources-2017-05
+```
+
+``` yaml $(package-subscriptions)
+tag: package-subscriptions-2016-06
+```
+
+``` yaml $(package-links)
+tag: package-links-2016-09
+```
+
+``` yaml $(package-managedapplications)
+tag: package-managedapplications-2016-09
 ```
 
 ### Tag: package-features-2015-12
@@ -45,12 +72,36 @@ input-file:
 - Microsoft.Authorization/2016-09-01/locks.json
 ```
 
+### Tag: package-locks-2015-01
+These settings apply only when `--tag=package-locks-2015-01` is specified on the command line.
+
+``` yaml $(tag) == 'package-locks-2015-01'
+input-file:
+- Microsoft.Authorization/2015-01-01/locks.json
+```
+
 ### Tag: package-policy-2016-12
 These settings apply only when `--tag=package-policy-2016-12` is specified on the command line.
 
 ``` yaml $(tag) == 'package-policy-2016-12'
 input-file:
 - Microsoft.Authorization/2016-12-01/policy.json
+```
+
+### Tag: package-policy-2016-04
+These settings apply only when `--tag=package-policy-2016-04` is specified on the command line.
+
+``` yaml $(tag) == 'package-policy-2016-04'
+input-file:
+- Microsoft.Authorization/2016-04-01/policy.json
+```
+
+### Tag: package-policy-2015-10
+These settings apply only when `--tag=package-policy-2015-10` is specified on the command line.
+
+``` yaml $(tag) == 'package-policy-2015-10'
+input-file:
+- Microsoft.Authorization/2015-10-01-preview/policy.json
 ```
 
 ### Tag: package-resources-2017-05
@@ -61,6 +112,30 @@ input-file:
 - Microsoft.Resources/2017-05-10/resources.json
 ```
 
+### Tag: package-resources-2016-09
+These settings apply only when `--tag=package-resources-2016-09` is specified on the command line.
+
+``` yaml $(tag) == 'package-resources-2016-09'
+input-file:
+- Microsoft.Resources/2016-09-01/resources.json
+```
+
+### Tag: package-resources-2016-07
+These settings apply only when `--tag=package-resources-2016-07` is specified on the command line.
+
+``` yaml $(tag) == 'package-resources-2016-07'
+input-file:
+- Microsoft.Resources/2016-07-01/resources.json
+```
+
+### Tag: package-resources-2015-11
+These settings apply only when `--tag=package-resources-2015-11` is specified on the command line.
+
+``` yaml $(tag) == 'package-resources-2015-11'
+input-file:
+- Microsoft.Resources/2015-11-01/resources.json
+```
+
 ### Tag: package-subscriptions-2016-06
 These settings apply only when `--tag=package-subscriptions-2016-06` is specified on the command line.
 
@@ -69,123 +144,43 @@ input-file:
 - Microsoft.Resources/2016-06-01/subscriptions.json
 ```
 
-### Tag: package-2017-05
+### Tag: package-subscriptions-2015-11
+These settings apply only when `--tag=package-subscriptions-2015-11` is specified on the command line.
 
-These settings apply only when `--tag=package-2017-05` is specified on the command line.
-
-``` yaml $(tag) == 'package-2017-05'
-title: ResourceClient
-description: Resource Client
+``` yaml $(tag) == 'package-subscriptions-2015-11'
 input-file:
-- Microsoft.Authorization/2016-09-01/locks.json
-- Microsoft.Authorization/2016-12-01/policy.json
-- Microsoft.Features/2015-12-01/features.json
-- Microsoft.Resources/2017-05-10/resources.json
-- Microsoft.Resources/2016-06-01/subscriptions.json
-- Microsoft.Scheduler/2016-09-01/links.json
-- Microsoft.Solutions/2016-09-01-preview/managedapplications.json
+- Microsoft.Resources/2015-11-01/subscriptions.json
 ```
- 
-### Tag: package-2016-09
 
-These settings apply only when `--tag=package-2016-09` is specified on the command line.
+### Tag: package-links-2016-09
+These settings apply only when `--tag=package-links-2016-09` is specified on the command line.
 
-``` yaml $(tag) == 'package-2016-09'
-title: ResourceClient
-description: Resource Client
+``` yaml $(tag) == 'package-links-2016-09'
 input-file:
-- Microsoft.Authorization/2016-09-01/locks.json
-- Microsoft.Authorization/2016-04-01/policy.json
-- Microsoft.Features/2015-12-01/features.json
-- Microsoft.Resources/2016-09-01/resources.json
-- Microsoft.Resources/2016-06-01/subscriptions.json
 - Microsoft.Resources/2016-09-01/links.json
 ```
- 
-### Tag: package-2016-07
 
-These settings apply only when `--tag=package-2016-07` is specified on the command line.
+### Tag: package-managedapplications-2016-09
+These settings apply only when `--tag=package-managedapplications-2016-09` is specified on the command line.
 
-``` yaml $(tag) == 'package-2016-07'
-title: ResourceClient
-description: Resource Client
+``` yaml $(tag) == 'package-managedapplications-2016-09'
 input-file:
-- Microsoft.Authorization/2015-01-01/locks.json
-- Microsoft.Authorization/2016-04-01/policy.json
-- Microsoft.Features/2015-12-01/features.json
-- Microsoft.Resources/2016-07-01/resources.json
-- Microsoft.Resources/2016-06-01/subscriptions.json
+- Microsoft.Solutions/2016-09-01-preview/managedapplications.json
 ```
- 
-### Tag: package-2016-06
-
-These settings apply only when `--tag=package-2016-06` is specified on the command line.
-
-``` yaml $(tag) == 'package-2016-06'
-title: ResourceClient
-description: Resource Client
-input-file:
-- Microsoft.Authorization/2015-01-01/locks.json
-- Microsoft.Authorization/2016-04-01/policy.json
-- Microsoft.Features/2015-12-01/features.json
-- Microsoft.Resources/2016-02-01/resources.json
-- Microsoft.Resources/2016-06-01/subscriptions.json
-```
- 
-### Tag: package-2016-04
-
-These settings apply only when `--tag=package-2016-04` is specified on the command line.
-
-``` yaml $(tag) == 'package-2016-04'
-title: ResourceClient
-description: Resource Client
-input-file:
-- Microsoft.Authorization/2015-01-01/locks.json
-- Microsoft.Authorization/2016-04-01/policy.json
-- Microsoft.Features/2015-12-01/features.json
-- Microsoft.Resources/2016-02-01/resources.json
-- Microsoft.Resources/2015-11-01/subscriptions.json
-```
- 
-### Tag: package-2016-02
-
-These settings apply only when `--tag=package-2016-02` is specified on the command line.
-
-``` yaml $(tag) == 'package-2016-02'
-title: ResourceClient
-description: Resource Client
-input-file:
-- Microsoft.Authorization/2015-01-01/locks.json
-- Microsoft.Authorization/2015-10-01-preview/policy.json
-- Microsoft.Features/2015-12-01/features.json
-- Microsoft.Resources/2016-02-01/resources.json
-- Microsoft.Resources/2015-11-01/subscriptions.json
-```
- 
-### Tag: package-2015-12
-
-These settings apply only when `--tag=package-2015-12` is specified on the command line.
-
-``` yaml $(tag) == 'package-2015-12'
-title: ResourceClient
-description: Resource Client
-input-file:
-- Microsoft.Authorization/2015-01-01/locks.json
-- Microsoft.Authorization/2015-10-01-preview/policy.json
-- Microsoft.Features/2015-12-01/features.json
-- Microsoft.Resources/2015-11-01/resources.json
-- Microsoft.Resources/2015-11-01/subscriptions.json
-```
-
 
 ---
-## Language-specific settings: CSharp
+# Code Generation
+
+
+## C#
 
 These settings apply only when `--csharp` is specified on the command line.
+Please also specify `--csharp-sdks-folder=<path to "SDKs" directory of your azure-sdk-for-net clone>`.
 
-``` yaml $(csharp)
+```yaml $(csharp)
 csharp:
-  # override the default output folder
-  output-folder: $(output-folder)/csharp
+  azure-arm: true
+  namespace: Microsoft.Azure.Management.ResourceManager
+  license-header: MICROSOFT_MIT
+  output-folder: $(csharp-sdks-folder)/Resource/Management.ResourceManager/Generated
 ```
-

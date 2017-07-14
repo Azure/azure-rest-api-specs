@@ -46,16 +46,3 @@ input-file:
 - Microsoft.HDInsight/2015-03-01-preview/scriptActions.json
 - Microsoft.HDInsight/2015-03-01-preview/operations.json
 ```
-
-
----
-## Language-specific settings: CSharp
-
-These settings apply only when `--csharp` is specified on the command line.
-
-``` yaml $(csharp)
-csharp:
-  # override the default output folder
-  output-folder: $(output-folder)/csharp
-```
-

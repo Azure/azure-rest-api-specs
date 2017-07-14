@@ -38,16 +38,3 @@ These settings apply only when `--tag=package-2017-02-preview` is specified on t
 input-file:
 - Microsoft.TimeSeriesInsights/2017-02-28-preview/timeseriesinsights.json
 ```
-
-
----
-## Language-specific settings: CSharp
-
-These settings apply only when `--csharp` is specified on the command line.
-
-``` yaml $(csharp)
-csharp:
-  # override the default output folder
-  output-folder: $(output-folder)/csharp
-```
-
