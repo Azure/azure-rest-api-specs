@@ -34,7 +34,7 @@
     "application/json"
   ],
   "paths": {
-    "/WebHdfsExt/{filePath}": {
+    "/WebHdfsExt/{path}": {
       "post": {
         "tags": [
           "FileSystem"
@@ -44,9 +44,12 @@
         ],
         "operationId": "FileSystem_ConcurrentAppend",
         "description": "Appends to the specified file, optionally first creating the file if it does not yet exist. This method supports multiple concurrent appends to the file. NOTE: The target must not contain data added by Create or normal (serial) Append. ConcurrentAppend and Append cannot be used interchangeably; once a target file has been modified using either of these append options, the other append option cannot be used on the target file. ConcurrentAppend does not guarantee order and can result in duplicated data landing in the target file.",
+        "x-ms-examples": {
+          "Appends to the specified file, optionally first creating the file if it does not yet exist. This method supports multiple concurrent appends to the file. NOTE: The target must not contain data added by Create or normal (serial) Append. ConcurrentAppend and Append cannot be used interchangeably; once a target file has been modified using either of these append options, the other append option cannot be used on the target file. ConcurrentAppend does not guarantee order and can result in duplicated data landing in the target file": { "$ref": "./examples/Adls_FileSystem_ConcurrentAppend.json" }
+        },
         "parameters": [
           {
-            "name": "filePath",
+            "name": "path",
             "in": "path",
             "required": true,
             "type": "string",
@@ -136,9 +139,12 @@
         ],
         "operationId": "FileSystem_SetFileExpiry",
         "description": "Sets or removes the expiration time on the specified file. This operation can only be executed against files. Folders are not supported.",
+        "x-ms-examples": {
+          "Sets or removes the expiration time on the specified file. This operation can only be executed against files. Folders are not supported": { "$ref": "./examples/Adls_FileSystem_SetFileExpiry.json" }
+        },
         "parameters": [
           {
-            "name": "filePath",
+            "name": "path",
             "in": "path",
             "required": true,
             "type": "string",
@@ -204,6 +210,9 @@
         ],
         "operationId": "FileSystem_CheckAccess",
         "description": "Checks if the specified access is available at the given path.",
+        "x-ms-examples": {
+          "Checks if the specified access is available at the given path": { "$ref": "./examples/Adls_FileSystem_CheckAccess.json" }
+        },
         "parameters": [
           {
             "name": "path",
@@ -245,13 +254,20 @@
             }
           }
         }
-      },
+      }
+    }
+  },
+  "x-ms-paths": {
+    "/webhdfs/v1/{path}?op=MKDIRS": {
       "put": {
         "tags": [
           "FileSystem"
         ],
         "operationId": "FileSystem_Mkdirs",
         "description": "Creates a directory.",
+        "x-ms-examples": {
+          "Creates a directory": { "$ref": "./examples/Adls_FileSystem_Mkdirs.json" }
+        },
         "parameters": [
           {
             "name": "path",
@@ -299,16 +315,19 @@
         }
       }
     },
-    "/webhdfs/v1/{destinationPath}": {
+    "/webhdfs/v1/{path}?op=CONCAT": {
       "post": {
         "tags": [
           "FileSystem"
         ],
         "operationId": "FileSystem_Concat",
         "description": "Concatenates the list of source files into the destination file, removing all source files upon success.",
+        "x-ms-examples": {
+          "Concatenates the list of source files into the destination file, removing all source files upon success": { "$ref": "./examples/Adls_FileSystem_Concat.json" }
+        },
         "parameters": [
           {
-            "name": "destinationPath",
+            "name": "path",
             "in": "path",
             "required": true,
             "type": "string",
@@ -353,7 +372,7 @@
         }
       }
     },
-    "/webhdfs/v1/{msConcatDestinationPath}": {
+    "/webhdfs/v1/{path}?op=MSCONCAT": {
       "post": {
         "tags": [
           "FileSystem"
@@ -363,9 +382,12 @@
         ],
         "operationId": "FileSystem_MsConcat",
         "description": "Concatenates the list of source files into the destination file, deleting all source files upon success. This method accepts more source file paths than the Concat method. This method and the parameters it accepts are subject to change for usability in an upcoming version.",
+        "x-ms-examples": {
+          "Concatenates the list of source files into the destination file, deleting all source files upon success. This method accepts more source file paths than the Concat method. This method and the parameters it accepts are subject to change for usability in an upcoming version": { "$ref": "./examples/Adls_FileSystem_MsConcat.json" }
+        },
         "parameters": [
           {
-            "name": "msConcatDestinationPath",
+            "name": "path",
             "in": "path",
             "required": true,
             "type": "string",
@@ -416,16 +438,19 @@
         }
       }
     },
-    "/webhdfs/v1/{listFilePath}": {
+    "/webhdfs/v1/{path}?op=LISTSTATUS": {
       "get": {
         "tags": [
           "FileSystem"
         ],
         "operationId": "FileSystem_ListFileStatus",
         "description": "Get the list of file status objects specified by the file path, with optional pagination parameters",
+        "x-ms-examples": {
+          "Get the list of file status objects specified by the file path, with optional pagination parameters": { "$ref": "./examples/Adls_FileSystem_ListFileStatus.json" }
+        },
         "parameters": [
           {
-            "name": "listFilePath",
+            "name": "path",
             "in": "path",
             "required": true,
             "type": "string",
@@ -491,16 +516,19 @@
         }
       }
     },
-    "/webhdfs/v1/{getContentSummaryFilePath}": {
+    "/webhdfs/v1/{path}?op=GETCONTENTSUMMARY": {
       "get": {
         "tags": [
           "FileSystem"
         ],
         "operationId": "FileSystem_GetContentSummary",
         "description": "Gets the file content summary object specified by the file path.",
+        "x-ms-examples": {
+          "Gets the file content summary object specified by the file path": { "$ref": "./examples/Adls_FileSystem_GetContentSummary.json" }
+        },
         "parameters": [
           {
-            "name": "getContentSummaryFilePath",
+            "name": "path",
             "in": "path",
             "required": true,
             "type": "string",
@@ -537,16 +565,19 @@
         }
       }
     },
-    "/webhdfs/v1/{getFilePath}": {
+    "/webhdfs/v1/{path}?op=GETFILESTATUS": {
       "get": {
         "tags": [
           "FileSystem"
         ],
         "operationId": "FileSystem_GetFileStatus",
         "description": "Get the file status object specified by the file path.",
+        "x-ms-examples": {
+          "Get the file status object specified by the file path": { "$ref": "./examples/Adls_FileSystem_GetFileStatus.json" }
+        },
         "parameters": [
           {
-            "name": "getFilePath",
+            "name": "path",
             "in": "path",
             "required": true,
             "type": "string",
@@ -590,7 +621,93 @@
         }
       }
     },
-    "/webhdfs/v1/{directFilePath}": {
+    "/webhdfs/v1/{path}?op=OPEN": {
+      "get": {
+        "tags": [
+          "FileSystem"
+        ],
+        "operationId": "FileSystem_Open",
+        "description": "Opens and reads from the specified file.",
+        "x-ms-examples": {
+          "Opens and reads from the specified file": { "$ref": "./examples/Adls_FileSystem_Open.json" }
+        },
+        "produces": [
+          "application/octet-stream"
+        ],
+        "parameters": [
+          {
+            "name": "path",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The Data Lake Store path (starting with '/') of the file to open."
+          },
+          {
+            "name": "length",
+            "in": "query",
+            "required": false,
+            "type": "integer",
+            "format": "int64",
+            "description": "The number of bytes that the server will attempt to retrieve. It will retrieve <= length bytes."
+          },
+          {
+            "name": "offset",
+            "in": "query",
+            "required": false,
+            "type": "integer",
+            "format": "int64",
+            "description": "The byte offset to start reading data from."
+          },
+          {
+            "name": "fileSessionId",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "format": "uuid",
+            "description": "Optional unique GUID per file indicating all the reads with the same fileSessionId are from the same client and same session. This will give a performance benefit."
+          },
+          {
+            "name": "read",
+            "in": "query",
+            "required": true,
+            "description": "Flag to skip redirection. When read=false or not specified, the request is redirected. Submit another HTTP PUT request using the URL in the Location header with the file data to be read. When read=true, this redirection is skipped.",
+            "type": "string",
+            "enum": [
+              "true"
+            ]
+          },
+          {
+            "name": "op",
+            "in": "query",
+            "required": true,
+            "type": "string",
+            "description": "The constant value for the operation.",
+            "enum": [
+              "OPEN"
+            ]
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "type": "file"
+            }
+          },
+          "default": {
+            "description": "An unexpected error from the server.",
+            "schema":
+            {
+              "$ref": "#/definitions/AdlsError"
+            }
+          }
+        }
+      }
+    },
+    "/webhdfs/v1/{path}?op=APPEND": {
       "post": {
         "tags": [
           "FileSystem"
@@ -600,9 +717,12 @@
         ],
         "operationId": "FileSystem_Append",
         "description": "Used for serial appends to the specified file. NOTE: The target must not contain data added by ConcurrentAppend. ConcurrentAppend and Append cannot be used interchangeably; once a target file has been modified using either of these append options, the other append option cannot be used on the target file.",
+        "x-ms-examples": {
+          "Used for serial appends to the specified file. NOTE: The target must not contain data added by ConcurrentAppend. ConcurrentAppend and Append cannot be used interchangeably; once a target file has been modified using either of these append options, the other append option cannot be used on the target file": { "$ref": "./examples/Adls_FileSystem_Append.json" }
+        },
         "parameters": [
           {
-            "name": "directFilePath",
+            "name": "path",
             "in": "path",
             "required": true,
             "type": "string",
@@ -660,16 +780,6 @@
             "description": "Optional unique GUID per file indicating all the appends with the same fileSessionId are from the same client and same session. This will give a performance benefit when syncFlag is DATA or METADATA."
           },
           {
-            "name": "op",
-            "in": "query",
-            "required": true,
-            "type": "string",
-            "description": "The constant value for the operation.",
-            "enum": [
-              "APPEND"
-            ]
-          },
-          {
             "name": "append",
             "in": "query",
             "required": true,
@@ -677,6 +787,16 @@
             "type": "string",
             "enum": [
               "true"
+            ]
+          },
+          {
+            "name": "op",
+            "in": "query",
+            "required": true,
+            "type": "string",
+            "description": "The constant value for the operation.",
+            "enum": [
+              "APPEND"
             ]
           },
           {
@@ -695,7 +815,9 @@
             }
           }
         }
-      },
+      }
+    },
+    "/webhdfs/v1/{path}?op=CREATE": {
       "put": {
         "tags": [
           "FileSystem"
@@ -705,9 +827,12 @@
         ],
         "operationId": "FileSystem_Create",
         "description": "Creates a file with optionally specified content. NOTE: If content is provided, the resulting file cannot be modified using ConcurrentAppend.",
+        "x-ms-examples": {
+          "Creates a file with optionally specified content. NOTE: If content is provided, the resulting file cannot be modified using ConcurrentAppend": { "$ref": "./examples/Adls_FileSystem_Create.json" }
+        },
         "parameters": [
           {
-            "name": "directFilePath",
+            "name": "path",
             "in": "path",
             "required": true,
             "type": "string",
@@ -763,16 +888,6 @@
             "description": "The octal representation of the unnamed user, mask and other permissions that should be set for the file when created. If not specified, it inherits these from the container."
           },
           {
-            "name": "op",
-            "in": "query",
-            "required": true,
-            "type": "string",
-            "description": "The constant value for the operation.",
-            "enum": [
-              "CREATE"
-            ]
-          },
-          {
             "name": "write",
             "in": "query",
             "required": true,
@@ -780,6 +895,16 @@
             "description": "Flag to skip redirection. When write=false or not specified, the request is redirected. Submit another HTTP PUT request using the URL in the Location header with the file data to be written. When write=true, this redirection is skipped.",
             "enum": [
               "true"
+            ]
+          },
+          {
+            "name": "op",
+            "in": "query",
+            "required": true,
+            "type": "string",
+            "description": "The constant value for the operation.",
+            "enum": [
+              "CREATE"
             ]
           },
           {
@@ -798,99 +923,21 @@
             }
           }
         }
-      },
-      "get": {
-        "tags": [
-          "FileSystem"
-        ],
-        "operationId": "FileSystem_Open",
-        "description": "Opens and reads from the specified file.",
-        "produces": [
-          "application/octet-stream"
-        ],
-        "parameters": [
-          {
-            "name": "directFilePath",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "description": "The Data Lake Store path (starting with '/') of the file to open."
-          },
-          {
-            "name": "length",
-            "in": "query",
-            "required": false,
-            "type": "integer",
-            "format": "int64",
-            "description": "The number of bytes that the server will attempt to retrieve. It will retrieve <= length bytes."
-          },
-          {
-            "name": "offset",
-            "in": "query",
-            "required": false,
-            "type": "integer",
-            "format": "int64",
-            "description": "The byte offset to start reading data from."
-          },
-          {
-            "name": "fileSessionId",
-            "in": "query",
-            "required": false,
-            "type": "string",
-            "format": "uuid",
-            "description": "Optional unique GUID per file indicating all the reads with the same fileSessionId are from the same client and same session. This will give a performance benefit."
-          },
-          {
-            "name": "op",
-            "in": "query",
-            "required": true,
-            "type": "string",
-            "description": "The constant value for the operation.",
-            "enum": [
-              "OPEN"
-            ]
-          },
-          {
-            "name": "read",
-            "in": "query",
-            "required": true,
-            "description": "Flag to skip redirection. When read=false or not specified, the request is redirected. Submit another HTTP PUT request using the URL in the Location header with the file data to be read. When read=true, this redirection is skipped.",
-            "type": "string",
-            "enum": [
-              "true"
-            ]
-          },
-          {
-            "$ref": "#/parameters/ApiVersionParameter"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "OK",
-            "schema": {
-              "type": "file"
-            }
-          },
-          "default": {
-            "description": "An unexpected error from the server.",
-            "schema":
-            {
-              "$ref": "#/definitions/AdlsError"
-            }
-          }
-        }
       }
     },
-    "/webhdfs/v1/{setAclFilePath}": {
+    "/webhdfs/v1/{path}?op=SETACL": {
       "put": {
         "tags": [
           "FileSystem"
         ],
         "operationId": "FileSystem_SetAcl",
         "description": "Sets the Access Control List (ACL) for a file or folder.",
+        "x-ms-examples": {
+          "Sets the Access Control List (ACL) for a file or folder": { "$ref": "./examples/Adls_FileSystem_SetAcl.json" }
+        },
         "parameters": [
           {
-            "name": "setAclFilePath",
+            "name": "path",
             "in": "path",
             "required": true,
             "type": "string",
@@ -931,16 +978,19 @@
         }
       }
     },
-    "/webhdfs/v1/{modifyAclFilePath}": {
+    "/webhdfs/v1/{path}?op=MODIFYACLENTRIES": {
       "put": {
         "tags": [
           "FileSystem"
         ],
         "operationId": "FileSystem_ModifyAclEntries",
         "description": "Modifies existing Access Control List (ACL) entries on a file or folder.",
+        "x-ms-examples": {
+          "Modifies existing Access Control List (ACL) entries on a file or folder": { "$ref": "./examples/Adls_FileSystem_ModifyAclEntries.json" }
+        },
         "parameters": [
           {
-            "name": "modifyAclFilePath",
+            "name": "path",
             "in": "path",
             "required": true,
             "type": "string",
@@ -981,16 +1031,19 @@
         }
       }
     },
-    "/webhdfs/v1/{removeAclFilePath}": {
+    "/webhdfs/v1/{path}?op=REMOVEACLENTRIES": {
       "put": {
         "tags": [
           "FileSystem"
         ],
         "operationId": "FileSystem_RemoveAclEntries",
         "description": "Removes existing Access Control List (ACL) entries for a file or folder.",
+        "x-ms-examples": {
+          "Removes existing Access Control List (ACL) entries for a file or folder": { "$ref": "./examples/Adls_FileSystem_RemoveAclEntries.json" }
+        },
         "parameters": [
           {
-            "name": "removeAclFilePath",
+            "name": "path",
             "in": "path",
             "required": true,
             "type": "string",
@@ -1031,16 +1084,19 @@
         }
       }
     },
-    "/webhdfs/v1/{defaultAclFilePath}": {
+    "/webhdfs/v1/{path}?op=REMOVEDEFAULTACL": {
       "put": {
         "tags": [
           "FileSystem"
         ],
         "operationId": "FileSystem_RemoveDefaultAcl",
         "description": "Removes the existing Default Access Control List (ACL) of the specified directory.",
+        "x-ms-examples": {
+          "Removes the existing Default Access Control List (ACL) of the specified directory": { "$ref": "./examples/Adls_FileSystem_RemoveDefaultAcl.json" }
+        },
         "parameters": [
           {
-            "name": "defaultAclFilePath",
+            "name": "path",
             "in": "path",
             "required": true,
             "type": "string",
@@ -1074,16 +1130,19 @@
         }
       }
     },
-    "/webhdfs/v1/{aclFilePath}": {
+    "/webhdfs/v1/{path}?op=REMOVEACL": {
       "put": {
         "tags": [
           "FileSystem"
         ],
         "operationId": "FileSystem_RemoveAcl",
         "description": "Removes the existing Access Control List (ACL) of the specified file or directory.",
+        "x-ms-examples": {
+          "Removes the existing Access Control List (ACL) of the specified file or directory": { "$ref": "./examples/Adls_FileSystem_RemoveAcl.json" }
+        },
         "parameters": [
           {
-            "name": "aclFilePath",
+            "name": "path",
             "in": "path",
             "required": true,
             "type": "string",
@@ -1115,16 +1174,21 @@
             }
           }
         }
-      },
+      }
+    },
+    "/webhdfs/v1/{path}?op=GETACLSTATUS": {
       "get": {
         "tags": [
           "FileSystem"
         ],
         "operationId": "FileSystem_GetAclStatus",
         "description": "Gets Access Control List (ACL) entries for the specified file or directory.",
+        "x-ms-examples": {
+          "Gets Access Control List (ACL) entries for the specified file or directory": { "$ref": "./examples/Adls_FileSystem_GetAclStatus.json" }
+        },
         "parameters": [
           {
-            "name": "aclFilePath",
+            "name": "path",
             "in": "path",
             "required": true,
             "type": "string",
@@ -1168,16 +1232,19 @@
         }
       }
     },
-    "/webhdfs/v1/{filePath}": {
+    "/webhdfs/v1/{path}?op=DELETE": {
       "delete": {
         "tags": [
           "FileSystem"
         ],
         "operationId": "FileSystem_Delete",
         "description": "Deletes the requested file or directory, optionally recursively.",
+        "x-ms-examples": {
+          "Deletes the requested file or directory, optionally recursively": { "$ref": "./examples/Adls_FileSystem_Delete.json" }
+        },
         "parameters": [
           {
-            "name": "filePath",
+            "name": "path",
             "in": "path",
             "required": true,
             "type": "string",
@@ -1221,16 +1288,19 @@
         }
       }
     },
-    "/webhdfs/v1/{renameFilePath}": {
+    "/webhdfs/v1/{path}?op=RENAME": {
       "put": {
         "tags": [
           "FileSystem"
         ],
         "operationId": "FileSystem_Rename",
         "description": "Rename a file or directory.",
+        "x-ms-examples": {
+          "Rename a file or directory": { "$ref": "./examples/Adls_FileSystem_Rename.json" }
+        },
         "parameters": [
           {
-            "name": "renameFilePath",
+            "name": "path",
             "in": "path",
             "required": true,
             "type": "string",
@@ -1274,16 +1344,19 @@
         }
       }
     },
-    "/webhdfs/v1/{setOwnerFilePath}": {
+    "/webhdfs/v1/{path}?op=SETOWNER": {
       "put": {
         "tags": [
           "FileSystem"
         ],
         "operationId": "FileSystem_SetOwner",
         "description": "Sets the owner of a file or directory.",
+        "x-ms-examples": {
+          "Sets the owner of a file or directory": { "$ref": "./examples/Adls_FileSystem_SetOwner.json" }
+        },
         "parameters": [
           {
-            "name": "setOwnerFilePath",
+            "name": "path",
             "in": "path",
             "required": true,
             "type": "string",
@@ -1331,16 +1404,19 @@
         }
       }
     },
-    "/webhdfs/v1/{setPermissionFilePath}": {
+    "/webhdfs/v1/{path}?op=SETPERMISSION": {
       "put": {
         "tags": [
           "FileSystem"
         ],
         "operationId": "FileSystem_SetPermission",
         "description": "Sets the permission of the file or folder.",
+        "x-ms-examples": {
+          "Sets the owner of a file or directory": { "$ref": "./examples/Adls_FileSystem_SetPermission.json" }
+        },
         "parameters": [
           {
-            "name": "setPermissionFilePath",
+            "name": "path",
             "in": "path",
             "required": true,
             "type": "string",
@@ -1683,7 +1759,6 @@
       "properties": {
         "exception": {
           "type": "string",
-          "readOnly": true,
           "description": "the class name of the exception thrown, such as 'IllegalArgumentException'."
         },
         "javaClassName": {
