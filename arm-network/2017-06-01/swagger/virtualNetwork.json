@@ -104,13 +104,6 @@
           },
           {
             "$ref": "#/parameters/SubscriptionIdParameter"
-          },
-          {
-            "name": "$expand",
-            "in": "query",
-            "required": false,
-            "type": "string",
-            "description": "Expands referenced resources."
           }
         ],
         "responses": {
@@ -764,7 +757,7 @@
       },
       "allOf": [
         {
-          "$ref": "./network.json#/definitions/SubResource"
+          "$ref": "./network.json#/definitions/SubResourceReadOnly"
         }
       ],
       "description": "ResourceNavigationLink resource."
@@ -895,7 +888,7 @@
       },
       "allOf": [
         {
-          "$ref": "./network.json#/definitions/SubResource"
+          "$ref": "./network.json#/definitions/SubResourceReadOnly"
         }
       ],
       "description": "Subnet in a virtual network resource.",
@@ -920,7 +913,7 @@
       },
       "allOf": [
         {
-          "$ref": "./network.json#/definitions/SubResource"
+          "$ref": "./network.json#/definitions/SubResourceReadOnly"
         }
       ],
       "description": "Peerings in a virtual network resource.",
