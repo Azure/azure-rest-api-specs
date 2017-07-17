@@ -70,4 +70,5 @@ csharp:
   license-header: NONE
   namespace: Microsoft.Azure.Management.Scheduler
   output-folder: $(csharp-sdks-folder)/Scheduler/Management.Scheduler/Generated
+  clear-output-folder: true
 ```

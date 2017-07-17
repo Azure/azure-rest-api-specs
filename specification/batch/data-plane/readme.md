@@ -102,4 +102,5 @@ csharp:
   payload-flattening-threshold: 1
   namespace: Microsoft.Azure.Batch
   output-folder: $(csharp-sdks-folder)/Batch/DataPlane/Azure.Batch/GeneratedProtocol
+  clear-output-folder: true
 ```

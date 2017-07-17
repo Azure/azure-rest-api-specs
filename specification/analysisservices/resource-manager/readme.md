@@ -53,5 +53,6 @@ csharp:
   license-header: MICROSOFT_MIT
   namespace: Microsoft.Azure.Management.Analysis
   output-folder: $(csharp-sdks-folder)/AnalysisServices/Management.Analysis/Generated
+  clear-output-folder: true
 ```
 

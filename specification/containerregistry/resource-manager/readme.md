@@ -75,4 +75,5 @@ csharp:
   namespace: Microsoft.Azure.Management.ContainerRegistry
   payload-flattening-threshold: 2
   output-folder: $(csharp-sdks-folder)/ContainerRegistry/Management.ContainerRegistry/Generated
+  clear-output-folder: true
 ```

@@ -76,4 +76,5 @@ csharp:
   namespace: Microsoft.Azure.Management.TrafficManager
   payload-flattening-threshold: 2
   output-folder: $(csharp-sdks-folder)/TrafficManager/Management.TrafficManager/Generated
+  clear-output-folder: true
 ```

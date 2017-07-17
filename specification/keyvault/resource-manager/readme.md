@@ -62,4 +62,5 @@ csharp:
   license-header: MICROSOFT_MIT
   namespace: Microsoft.Azure.Management.KeyVault
   output-folder: $(csharp-sdks-folder)/KeyVault/Management/Management.KeyVault/Generated
+  clear-output-folder: true
 ```

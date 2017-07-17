@@ -56,4 +56,5 @@ csharp:
   license-header: MICROSOFT_MIT
   namespace: Microsoft.Azure.Management.Media
   output-folder: $(csharp-sdks-folder)/Media/Management.Media/Generated
+  clear-output-folder: true
 ```

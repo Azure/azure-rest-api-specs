@@ -62,4 +62,5 @@ csharp:
   license-header: MICROSOFT_MIT
   namespace: Microsoft.Azure.Management.StreamAnalytics
   output-folder: $(csharp-sdks-folder)/StreamAnalytics/Management.StreamAnalytics/Generated
+  clear-output-folder: true
 ```

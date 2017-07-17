@@ -75,4 +75,5 @@ csharp:
   namespace: Microsoft.Azure.Management.Cdn
   payload-flattening-threshold: 2
   output-folder: $(csharp-sdks-folder)/Cdn/Management.Cdn/Generated
+  clear-output-folder: true
 ```

@@ -146,6 +146,7 @@ csharp:
   namespace: Microsoft.Azure.Management.Compute
   payload-flattening-threshold: 1
   output-folder: $(csharp-sdks-folder)/Compute/Management.Compute/Generated
+  clear-output-folder: true
 ```
 
 

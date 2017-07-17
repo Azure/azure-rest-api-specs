@@ -68,4 +68,5 @@ csharp:
   payload-flattening-threshold: 1
   license-header: MICROSOFT_MIT
   output-folder: $(csharp-sdks-folder)/OperationalInsights/Management.OperationalInsights/Generated
+  clear-output-folder: true
 ```

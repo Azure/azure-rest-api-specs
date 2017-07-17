@@ -55,4 +55,5 @@ csharp:
   license-header: MICROSOFT_MIT
   namespace: Microsoft.Azure.Management.ServiceFabric
   output-folder: $(csharp-sdks-folder)/ServiceFabric/Management.ServiceFabric/Generated
+  clear-output-folder: true
 ```

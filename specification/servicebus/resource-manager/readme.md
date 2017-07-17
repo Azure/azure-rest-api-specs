@@ -65,4 +65,5 @@ csharp:
   license-header: MICROSOFT_MIT
   namespace: Microsoft.Azure.Management.ServiceBus
   output-folder: $(csharp-sdks-folder)/ServiceBus/Management.ServiceBus/Generated
+  clear-output-folder: true
 ```

@@ -80,14 +80,24 @@ csharp:
   license-header: MICROSOFT_MIT
 ```
 
-```yaml $(csharp) && $(package-commitmentPlans)
+```yaml $(csharp)
 csharp:
-  namespace: Microsoft.Azure.Management.MachineLearning.CommitmentPlans
-  output-folder: $(csharp-sdks-folder)/MachineLearning/Management.MachineLearning/Generated/CommitmentPlans
+  clear-output-folder: true
+batch:
+  - package-webservices: true
+    namespace: Microsoft.Azure.Management.MachineLearning.WebServices
+    output-folder: $(csharp-sdks-folder)/MachineLearning/Management.MachineLearning/Generated/WebServices
+  - package-commitmentPlans: true
+    namespace: Microsoft.Azure.Management.MachineLearning.CommitmentPlans
+    output-folder: $(csharp-sdks-folder)/MachineLearning/Management.MachineLearning/Generated/CommitmentPlans
 ```
 
-```yaml $(csharp) && $(package-webservices)
-csharp:
-  namespace: Microsoft.Azure.Management.MachineLearning.WebServices
-  output-folder: $(csharp-sdks-folder)/MachineLearning/Management.MachineLearning/Generated/WebServices
+# Validation
+
+Since this RP has no unique default package, iterate over all of them for validation:
+
+``` yaml $(validation)
+batch:
+  - package-webservices: true
+  - package-commitmentPlans: true
 ```

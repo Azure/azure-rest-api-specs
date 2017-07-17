@@ -72,4 +72,5 @@ csharp:
   license-header: MICROSOFT_MIT
   namespace: Microsoft.Azure.Management.NotificationHubs
   output-folder: $(csharp-sdks-folder)/NotificationHubs/Management.NotificationHubs/Generated
+  clear-output-folder: true
 ```

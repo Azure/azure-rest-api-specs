@@ -75,4 +75,5 @@ csharp:
   license-header: MICROSOFT_MIT
   namespace: Microsoft.Azure.Search
   output-folder: $(csharp-sdks-folder)/Search/DataPlane/Microsoft.Azure.Search/GeneratedSearchIndex
+  clear-output-folder: true
 ```

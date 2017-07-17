@@ -201,6 +201,7 @@ csharp:
   license-header: MICROSOFT_MIT
   namespace: Microsoft.Azure.Management.Network
   output-folder: $(csharp-sdks-folder)/Network/Management.Network/Generated
+  clear-output-folder: true
 ```
 
 

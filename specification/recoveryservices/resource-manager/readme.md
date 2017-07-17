@@ -71,5 +71,6 @@ csharp:
   payload-flattening-threshold: 1
   namespace: Microsoft.Azure.Management.RecoveryServices
   output-folder: $(csharp-sdks-folder)/RecoveryServices/Management.RecoveryServices/Generated
+  clear-output-folder: true
 ```
 

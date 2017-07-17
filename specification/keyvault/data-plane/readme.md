@@ -62,4 +62,5 @@ csharp:
   namespace: Microsoft.Azure.KeyVault
   sync-methods: None
   output-folder: $(csharp-sdks-folder)/KeyVault/dataPlane/Microsoft.Azure.KeyVault/Generated
+  clear-output-folder: true
 ```

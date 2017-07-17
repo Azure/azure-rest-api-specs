@@ -62,4 +62,5 @@ csharp:
   license-header: MICROSOFT_MIT
   namespace: Microsoft.Azure.Management.Intune
   output-folder: $(csharp-sdks-folder)/Intune/Intune/Generated
+  clear-output-folder: true
 ```
