@@ -1,0 +1,440 @@
+{
+	"swagger": "2.0",
+	"info": {
+		"description": "The Microsoft Azure Network management API provides a RESTful set of web services that interact with Microsoft Azure Networks service to manage your network resources. The API has entities that capture the relationship between an end user and the Microsoft Azure Networks service.",
+		"version": "2017-06-26",
+		"title": "NetworkManagementClient"
+	},
+	"host": "management.azure.com",
+	"schemes":[
+		"https"
+	],
+	"consumes": [
+		"application/json"
+	],
+	"produces": [
+		"application/json"
+	],
+	"security":[
+		{
+			"azure_auth": [
+				"user_impersonation"
+			]
+		}
+	],
+	"securityDefinitions": {
+		"azure_auth": {
+			"type":"oauth2",
+			"authorizationUrl":"https://login.microsoftonline.com/common/oauth2/authorize",
+			"flow":"implicit",
+			"description":"Azure Active Directory OAuth2 Flow",
+			"scopes": {
+				"user_impersonation":"impersonate your user accounts"
+			}
+		}
+	},
+	"paths":{
+		"/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/expressRouteTransport/{expressRouteTransportName}": {
+			"delete": {
+				"tags": [
+					"expressRouteTransports"
+				],
+				"operationId": "expressRouteTransport_Delete",
+				"description": "Deletes the specified Express Route Transport Resource.",
+				"x-ms-examples": {
+                    "ExpressRouteTransportDelete": { "$ref": "../examples/ExpressRouteTransportDelete.json" }
+                },
+				"parameters": [
+					{
+						"name": "resourceGroupName",
+						"in": "path",
+						"required": true,
+						"type": "string",
+						"description": "The name of the resource group."
+					},
+					{
+						"name": "expressRouteTransportName",
+						"in": "path",
+						"required": true,
+						"type": "string",
+						"description": "The name of the Express Route Transport Resource."
+					},
+					{
+						"$ref": "#/parameters/ApiVersionParameter"
+					},
+					{
+						"$ref": "#/parameters/SubscriptionIdParameter"
+					}
+				],
+				"responses": {
+					"202": {
+						"description": "Accepted and the operation will complete asynchronously."
+					},
+					"200": {
+						"description": "Delete successful."
+					},
+					"204": {
+						"description": "Delete successful."
+					},
+					"412": {
+						"description": "Precondition Failed"
+					},
+					"403": {
+						"description": "Forbidden"
+					}
+				},
+				"x-ms-long-running-operation": true
+			},
+			"get": {
+				"tags": [
+					"expressRouteTransport"
+				],
+				"operationId": "expressRouteTransport_Get",
+				"x-ms-examples": {
+                    "RouteFilterGet": { "$ref": "../examples/ExpressRouteTransportGet.json" }
+                },
+				"description": "Gets the specfic Express Route Transport Resource from the specified resource group.",
+				"parameters": [
+					{
+						"name": "resourceGroupName",
+						"in": "path",
+						"required": true,
+						"type": "string",
+						"description": "The name of the resource group."
+					},
+					{
+						"name": "expressRouteTransportName",
+						"in": "path",
+						"required": true,
+						"type": "string",
+						"description": "The name of the Express Route Transport Resource."
+					},
+					{
+						"$ref": "#/parameters/ApiVersionParameter"
+					},
+					{
+						"$ref": "#/parameters/SubscriptionIdParameter"
+					}
+				],
+				"responses": {
+					"200": {
+						"description": "Request successful. The operation returns the Express Route Transport Resource resource.",
+						"schema": {
+							"$ref": "#/definitions/expressRouteTransport"
+						}
+					},
+					"404": {
+						"description": "Resource not found"
+					}
+				},
+				"x-ms-long-running-operation": true
+			},
+			"put": {
+				"tags": [
+					"expressRouteTransport"
+				],
+				"operationId": "expressRouteTransports_CreateOrUpdate",
+				"x-ms-examples": {
+                    "ExpressRouteTransportCreate": { "$ref": "../examples/ExpressRouteTransportCreate.json" }
+                },
+				"description": "Creates or Updates a Express Route Transport Resource between two express route circuits.",
+				"parameters": [
+				  {
+					"name": "resourceGroupName",
+					"in": "path",
+					"required": true,
+					"type": "string",
+					"description": "The name of the resource group."
+				  },
+				  {
+					"name": "expressRouteTransportName",
+					"in": "path",
+					"required": true,
+					"type": "string",
+					"description": "The name of the Express Route Transport Resource."
+				  },
+                  {
+					"name": "routeFilterParameters",
+                    "in": "body",
+                    "required": true,
+                    "schema": {
+                        "$ref": "#/definitions/expressRouteTransport"
+                    },
+                    "description": "Parameters supplied to the create or update express route transport operation."
+                    },
+				  {
+					"$ref": "#/parameters/ApiVersionParameter"
+				  },
+				  {
+					"$ref": "#/parameters/SubscriptionIdParameter"
+				  }
+				],
+				"responses": {
+				  "201": {
+					"description": "Create successful. The operation returns the resulting Express Route Transport Resource resource.",
+					"schema": {
+					  "$ref": "#/definitions/expressRouteTransport"
+					}
+					},
+				  "201": {
+					"description": "Request successful. The operation returns the resulting Express Route Transport Resource resource.",
+					"schema": {
+					  "$ref": "#/definitions/expressRouteTransport"
+					}
+				  },
+				  "400": {
+					"description": "Bad Request"
+				  },
+				  "401": {
+					"description": "Unauthorized"
+				  },
+				  "404": {
+					"description": "Resource Not Found"
+				  },
+				  "412": {
+					"description": "Resource does not pass pre condition"
+				  }
+				},
+				"x-ms-long-running-operation": true
+			},
+			"patch": {
+				"tags": [
+					"expressRouteTransport"
+				],
+				"operationId": "expressRouteTransports_Update",
+				"x-ms-examples": {
+                    "ExpressRouteTransportCreate": { "$ref": "../examples/ExpressRouteTransportUpdate.json" }
+                },
+				"description": "Updates a Express Route Transport Resource between two express route circuits.",
+				"parameters": [
+				  {
+					"name": "resourceGroupName",
+					"in": "path",
+					"required": true,
+					"type": "string",
+					"description": "The name of the resource group."
+				  },
+				  {
+					"name": "expressRouteTransportName",
+					"in": "path",
+					"required": true,
+					"type": "string",
+					"description": "The name of the Express Route Transport Resource."
+				  },
+                  {
+					"name": "routeFilterParameters",
+                    "in": "body",
+                    "required": true,
+                    "schema": {
+                        "$ref": "#/definitions/expressRouteTransport"
+                    },
+                    "description": "Parameters supplied to the create or update express route transport operation."
+                    },
+				  {
+					"$ref": "#/parameters/ApiVersionParameter"
+				  },
+				  {
+					"$ref": "#/parameters/SubscriptionIdParameter"
+				  }
+				],
+				"responses": {
+				  "201": {
+					"description": "Request successful. The operation returns the resulting Express Route Transport Resource resource.",
+					"schema": {
+					  "$ref": "#/definitions/expressRouteTransport"
+					}
+				  },
+				  "201": {
+					"description": "Request successful. The operation returns the resulting Express Route Transport Resource resource.",
+					"schema": {
+					  "$ref": "#/definitions/expressRouteTransport"
+					}
+				  },
+				  "400": {
+					"description": "Bad Request"
+				  },
+				  "401": {
+					"description": "Unauthorized"
+				  },
+				  "404": {
+					"description": "Resource Not Found"
+				  },
+				  "412": {
+					"description": "Resource does not pass pre condition"
+				  }
+				},
+				"x-ms-long-running-operation": true
+			}
+		},
+	 "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/expressRouteTransports": {
+		  "get": {
+			"tags": [
+			  "ExpressRouteTransports"
+			],
+			"operationId": "ExpressRouteCircuitTransports_ListByResourceGroup",
+			"x-ms-examples": {
+                    "RouteFilterListByResourceGroup": { "$ref": "../examples/ExpressRouteTransportsByResourceGroup.json" }
+            },
+			"description": "Gets all express route transport resources in a given resource group and subscription.",
+			"parameters": [
+			  {
+				"name": "resourceGroupName",
+				"in": "path",
+				"required": true,
+				"type": "string",
+				"description": "The name of the resource group."
+			  },
+			  {
+				"$ref": "#/parameters/ApiVersionParameter"
+			  },
+			  {
+				"$ref": "#/parameters/SubscriptionIdParameter"
+			  }
+			],
+			"responses": {
+			  "200": {
+				"description": "Request successful. The operation returns a list of Express Route Transport resources.",
+				"schema": {
+				  "$ref": "#/definitions/expressRouteTransportListResult"
+				}
+			  }
+			},
+			"x-ms-pageable": {
+			  "nextLinkName": "nextLink"
+			}
+		  }
+		},	
+	"/subscriptions/{subscriptionId}/providers/Microsoft.Network/expressRouteTransports": {
+		  "get": {
+			"tags": [
+			  "ExpressRouteTransports"
+			],
+			"operationId": "ExpressRouteCircuitTransports_List",
+			"description": "Gets all express route transport resources in a given subscrption.",
+			"parameters": [
+			  {
+				"$ref": "#/parameters/ApiVersionParameter"
+			  },
+			  {
+				"$ref": "#/parameters/SubscriptionIdParameter"
+			  }
+			],
+			"responses": {
+			  "200": {
+				"description": "Request successful. The operation returns a list of Express Route Transport resources.",
+				"schema": {
+				  "$ref": "#/definitions/expressRouteTransportListResult"
+				}
+			  }
+			},
+			"x-ms-pageable": {
+			  "nextLinkName": "nextLink"
+			}
+		  }
+		}	
+	},	 
+	"definitions": {	
+		"expressRouteTransportPropertiesFormat": {
+			"required": [
+				"circuits",
+				"subnet"
+			],
+			"properties": {
+				"circuits": {
+					"type": "array",
+					"items": {
+						"$ref": "./network.json#/definitions/SubResource",
+						"description": "The reference to the express route circuit resource."
+					},
+					"description": "List of Express Route Circuits."
+				},
+				"authorizations": {
+					"type": "array",
+					"items": {
+						"type": "string",
+						"description": "Authorization Key"
+					},
+					"description": "List of Circuit Authorization Keys."
+				},
+				"Subnet": {
+				  "$ref": "./network.json#/definitions/SubResource",
+				  "description": "The reference of the subnet resource."
+				},
+				"connectionStatus": {
+					"type": "string",
+					"readOnly": true,
+					"description": "Specifies the state of Transport Link : Succeeded / Failed / In Progress."
+				}
+			},	
+			"description": "Properties of Express Route Transport Resource."
+		},
+		"expressRouteTransport": {
+		  "properties": {
+			"location": {
+			  "type": "string",
+			  "description": "Azure region where Express Route Transport Resource is deployed."
+			},
+			"properties": {
+			  "x-ms-client-flatten": true,
+			  "$ref": "#/definitions/expressRouteTransportPropertiesFormat"
+			},
+			"etag": {
+			  "readOnly": true,
+			  "type": "string",
+			  "description": "Gets a unique read-only string that changes whenever the resource is updated."
+			},
+			"name": {
+              "type": "string",
+              "readOnly": true,
+              "description": "The name of the resource that is unique within a resource group. This name can be used to access the resource."
+            },
+            "tags": {
+                "type": "object",
+                "additionalProperties": {
+                    "type": "string"
+                },
+                "description": "Resource tags."
+            }
+		  },
+		  "allOf": [
+			{
+			  "$ref": "./network.json#/definitions/Resource"
+			}
+		  ],
+		  "description": "Express Route Transport Resource resource"
+		},
+					
+		"expressRouteTransportListResult": {
+		  "properties": {
+			"value": {
+			  "type": "array",
+			  "items": {
+				"$ref": "#/definitions/expressRouteTransport"
+			  },
+			  "description": "A list of Express Route Transport Resource in a resource group."
+			},
+			"nextLink": {
+			  "type": "string",
+			  "description": "The URL to get the next set of results."
+			}
+		  },
+		  "description": "Response for ListExpressRouteCircuit API service call."
+		}
+	},
+	"parameters": {
+		"SubscriptionIdParameter": {
+		  "name": "subscriptionId",
+		  "in": "path",
+		  "required": true,
+		  "type": "string",
+		  "description": "The subscription credentials which uniquely identify the Microsoft Azure subscription. The subscription ID forms part of the URI for every service call."
+		},
+		"ApiVersionParameter": {
+		  "name": "api-version",
+		  "in": "query",
+		  "required": true,
+		  "type": "string",
+		  "description": "Client API version."
+		}
+	}
+ }
