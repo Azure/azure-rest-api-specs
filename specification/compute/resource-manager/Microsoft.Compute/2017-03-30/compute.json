@@ -2597,6 +2597,15 @@
             "description": "The name of the VM scale set."
           },
           {
+            "name": "vmInstanceIDs",
+            "in": "body",
+            "required": false,
+            "schema": {
+              "$ref": "#/definitions/VirtualMachineScaleSetVMInstanceIDs"
+            },
+            "description": "A list of virtual machine instance IDs from the VM scale set."
+          },
+          {
             "$ref": "#/parameters/ApiVersionParameter"
           },
           {
@@ -2638,6 +2647,15 @@
             "required": true,
             "type": "string",
             "description": "The name of the VM scale set."
+          },
+          {
+            "name": "vmInstanceIDs",
+            "in": "body",
+            "required": false,
+            "schema": {
+              "$ref": "#/definitions/VirtualMachineScaleSetVMInstanceIDs"
+            },
+            "description": "A list of virtual machine instance IDs from the VM scale set."
           },
           {
             "$ref": "#/parameters/ApiVersionParameter"
@@ -4372,6 +4390,13 @@
           "type": "string",
           "description": "The disk name."
         },
+        "encryptionSettings": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/DiskEncryptionSettings"
+          },
+          "description": "The encryption settings of the disk."
+        },
         "statuses": {
           "type": "array",
           "items": {
@@ -5437,6 +5462,10 @@
     },
     "VirtualMachineScaleSetExtensionProperties": {
       "properties": {
+        "forceUpdateTag": {
+          "type": "string",
+          "description": "If a value is provided and is different from the previous value, the extension handler will be forced to update even if the extension configuration has not changed."
+        },
         "publisher": {
           "type": "string",
           "description": "The name of the extension handler publisher."
@@ -5615,7 +5644,7 @@
           "items": {
             "type": "string"
           },
-          "description": "The virtual machine scale set instance ids."
+          "description": "The virtual machine scale set instance ids. Omitting the virtual machine scale set instance ids will result in the operation being performed on all virtual machines in the virtual machine scale set."
         }
       },
       "description": "Specifies a list of virtual machine instance IDs from the VM scale set."
