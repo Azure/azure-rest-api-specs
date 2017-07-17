@@ -14,7 +14,7 @@ describe('Azure swagger model validation using x-ms-examples and examples in spe
   //   return (item.match(/.*Microsoft.Logic.*2016-06-01.*/ig) !== null);
   // });
   for (const swagger of swaggersToProcess) {
-    it(swagger + ' should have valid examples.', async function (done) {
+    it(swagger + ' should have valid examples.', async function () {
       try {
         const validationResult = await oav.validateExamples(swagger, null, {consoleLogLevel: 'error'});
         return assert(
