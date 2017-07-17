@@ -55,4 +55,5 @@ csharp:
   license-header: MICROSOFT_MIT
   namespace: Microsoft.Azure.Management.Consumption
   output-folder: $(csharp-sdks-folder)/Consumption/Management.Consumption/Generated
+  clear-output-folder: true
 ```

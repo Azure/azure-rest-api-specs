@@ -75,5 +75,6 @@ csharp:
   license-header: MICROSOFT_MIT
   namespace: Microsoft.Azure.Management.Automation
   output-folder: $(csharp-sdks-folder)/Automation/Management.Automation/Generated
+  clear-output-folder: true
 ```
 

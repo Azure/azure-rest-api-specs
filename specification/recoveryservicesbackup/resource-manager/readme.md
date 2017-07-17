@@ -71,6 +71,7 @@ csharp:
   license-header: MICROSOFT_MIT
   namespace: Microsoft.Azure.Management.RecoveryServices.Backup
   output-folder: $(csharp-sdks-folder)/RecoveryServices.Backup/Management.RecoveryServices.Backup/Generated
+  clear-output-folder: true
 ```
 
 ## Python

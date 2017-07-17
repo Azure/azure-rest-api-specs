@@ -84,6 +84,7 @@ csharp:
   license-header: MICROSOFT_MIT
   namespace: Microsoft.Azure.Management.WebSites
   output-folder: $(csharp-sdks-folder)/WebSites/Management.WebSites/Generated
+  clear-output-folder: true
 ```
 
 

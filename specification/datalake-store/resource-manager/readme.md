@@ -65,4 +65,5 @@ csharp:
   license-header: MICROSOFT_MIT
   namespace: Microsoft.Azure.Management.DataLake.Store
   output-folder: $(csharp-sdks-folder)/DataLake.Store/Management.DataLake.Store/Generated
+  clear-output-folder: true
 ```

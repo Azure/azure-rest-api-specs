@@ -61,4 +61,5 @@ csharp:
   license-header: MICROSOFT_MIT
   namespace: Microsoft.Azure.Management.Search
   output-folder: $(csharp-sdks-folder)/Search/Management/Management.Search/Generated
+  clear-output-folder: true
 ```

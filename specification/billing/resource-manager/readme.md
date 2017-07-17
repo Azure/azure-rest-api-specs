@@ -60,4 +60,5 @@ csharp:
   license-header: MICROSOFT_MIT
   namespace: Microsoft.Azure.Management.Billing
   output-folder: $(csharp-sdks-folder)/Billing/Management.Billing/Generated
+  clear-output-folder: true
 ```

@@ -56,4 +56,5 @@ csharp:
   license-header: MICROSOFT_MIT
   namespace: Microsoft.Azure.Management.Authorization
   output-folder: $(csharp-sdks-folder)/Authorization/Management.Authorization/Generated
+  clear-output-folder: true
 ```

@@ -64,4 +64,5 @@ csharp:
   license-header: MICROSOFT_MIT
   namespace: Microsoft.Azure.Management.DevTestLabs
   output-folder: $(csharp-sdks-folder)/DevTestLabs/Management.DevTestLabs/Generated
+  clear-output-folder: true
 ```

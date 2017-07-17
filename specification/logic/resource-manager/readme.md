@@ -72,4 +72,5 @@ csharp:
   azure-arm: true
   namespace: Microsoft.Azure.Management.Logic
   output-folder: $(csharp-sdks-folder)/Logic/Management.Logic/Generated
+  clear-output-folder: true
 ```

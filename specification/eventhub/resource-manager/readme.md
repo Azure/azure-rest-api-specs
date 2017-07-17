@@ -65,4 +65,5 @@ csharp:
   license-header: MICROSOFT_MIT
   namespace: Microsoft.Azure.Management.EventHub
   output-folder: $(csharp-sdks-folder)/EventHub/Management.EventHub/Generated
+  clear-output-folder: true
 ```
