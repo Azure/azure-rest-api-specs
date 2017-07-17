@@ -1184,46 +1184,12 @@
       "description": "The Key Vault update information used for user managed key rotation."
     },
     "DataLakeStoreAccountProperties": {
+      "allOf": [
+        {
+          "$ref": "#/definitions/DataLakeStoreAccountPropertiesBasic"
+        }
+      ],
       "properties": {
-        "provisioningState": {
-          "readOnly": true,
-          "type": "string",
-          "description": "the status of the Data Lake Store account while being provisioned.",
-          "enum": [
-            "Failed",
-            "Creating",
-            "Running",
-            "Succeeded",
-            "Patching",
-            "Suspending",
-            "Resuming",
-            "Deleting",
-            "Deleted"
-          ],
-          "x-ms-enum": {
-            "name": "DataLakeStoreAccountStatus",
-            "modelAsString": false
-          }
-        },
-        "state": {
-          "readOnly": true,
-          "type": "string",
-          "description": "the status of the Data Lake Store account after provisioning has completed.",
-          "enum": [
-            "Active",
-            "Suspended"
-          ],
-          "x-ms-enum": {
-            "name": "DataLakeStoreAccountState",
-            "modelAsString": false
-          }
-        },
-        "creationTime": {
-          "type": "string",
-          "readOnly": true,
-          "format": "date-time",
-          "description": "the account creation time."
-        },
         "encryptionState": {
           "type": "string",
           "description": "The current state of encryption for this Data Lake store account.",
@@ -1290,17 +1256,6 @@
             "$ref": "#/definitions/TrustedIdProvider"
           },
           "description": "The list of trusted identity providers associated with this Data Lake store account."
-        },
-        "lastModifiedTime": {
-          "type": "string",
-          "readOnly": true,
-          "format": "date-time",
-          "description": "the account last modified time."
-        },
-        "endpoint": {
-          "type": "string",
-          "readOnly": true,
-          "description": "the gateway host."
         },
         "defaultGroup": {
           "type": "string",
@@ -1458,13 +1413,89 @@
       },
       "description": "Data Lake Store account information"
     },
+    "DataLakeStoreAccountBasic": {
+      "allOf": [
+        {
+          "$ref": "#/definitions/Resource"
+        }
+      ],
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/DataLakeStoreAccountPropertiesBasic",
+          "description": "the basic Data Lake Store account properties.",
+          "x-ms-client-flatten": true
+        }
+      },
+      "description": "Basic Data Lake Store account information, returned on list calls."
+    },
+    "DataLakeStoreAccountPropertiesBasic": {
+      "properties": {
+        "provisioningState": {
+          "readOnly": true,
+          "type": "string",
+          "description": "the provisioning status of the Data Lake Store account.",
+          "enum": [
+            "Failed",
+            "Creating",
+            "Running",
+            "Succeeded",
+            "Patching",
+            "Suspending",
+            "Resuming",
+            "Deleting",
+            "Deleted"
+          ],
+          "x-ms-enum": {
+            "name": "DataLakeStoreAccountStatus",
+            "modelAsString": false
+          }
+        },
+        "state": {
+          "readOnly": true,
+          "type": "string",
+          "description": "the state of the Data Lake Store account.",
+          "enum": [
+            "Active",
+            "Suspended"
+          ],
+          "x-ms-enum": {
+            "name": "DataLakeStoreAccountState",
+            "modelAsString": false
+          }
+        },
+        "creationTime": {
+          "type": "string",
+          "readOnly": true,
+          "format": "date-time",
+          "description": "the account creation time."
+        },
+        "lastModifiedTime": {
+          "type": "string",
+          "readOnly": true,
+          "format": "date-time",
+          "description": "the account last modified time."
+        },
+        "endpoint": {
+          "type": "string",
+          "readOnly": true,
+          "description": "the full CName endpoint for this account."
+        },
+        "accountId": {
+          "type": "string",
+          "format": "uuid",
+          "readOnly": true,
+          "description": "The unique identifier associated with this Data Lake Store account."
+        }
+      },
+      "description": "The basic account specific properties that are associated with an underlying Data Lake Store account."
+    },
     "DataLakeStoreAccountListResult": {
       "properties": {
         "value": {
           "type": "array",
           "readOnly": true,
           "items": {
-            "$ref": "#/definitions/DataLakeStoreAccount"
+            "$ref": "#/definitions/DataLakeStoreAccountBasic"
           },
           "description": "the results of the list operation"
         },
