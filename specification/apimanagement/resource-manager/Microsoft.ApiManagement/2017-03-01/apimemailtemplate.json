@@ -370,10 +370,25 @@
           "minLength": 1,
           "maxLength": 1000
         },
+        "title": {
+          "type": "string",
+          "description": "Title of the Template."
+        },
+        "description": {
+          "type": "string",
+          "description": "Description of the Email Template."
+        },
         "body": {
           "type": "string",
           "description": "Email Template Body. This should be a valid XDocument",
           "minLength": 1
+        },
+        "parameters": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/EmailTemplateParametersContractProperties"
+          },
+          "description": "Email Template Parameter values."
         }
       },
       "description": "Email Template Update Contract properties."
