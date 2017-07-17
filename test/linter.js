@@ -15,7 +15,7 @@ describe('AutoRest Linter validation:', function () {
   // });
   for (const config of configsToProcess) {
     it(config + ' should honor linter validation rules.', async function (done) {
-      var cmd = `autorest --azure-validator ${config} --message-format=json`;
+      var cmd = `autorest --validation --azure-validator ${config} --message-format=json`;
       console.log(`Executing: ${cmd}`);
       let result;
       try {

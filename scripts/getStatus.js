@@ -52,7 +52,7 @@ function writeContent(content) {
 //runs the linter on a given swagger spec.
 async function runLinter(swagger) {
   // TODO: update to use config file... but report grouping is by Swagger right now
-  let cmd = 'autorest --azure-validator=true --input-file=' + swagger + ' --message-format=json';
+  let cmd = 'autorest --validation --azure-validator --input-file=' + swagger + ' --message-format=json';
   console.log(`\t- Running Linter.`);
   const {err, stdout, stderr } = await new Promise(res => exec(cmd, { encoding: 'utf8', maxBuffer: 1024 * 1024 * 64 },
     (err, stdout, stderr) => res({ err: err, stdout: stdout, stderr: stderr })));
