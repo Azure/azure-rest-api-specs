@@ -14,14 +14,15 @@ describe('AutoRest Linter validation:', function () {
   //   return (item.match(/.Microsoft.ContainerRegistry.*2017-03-01.*/ig) !== null);
   // });
   for (const config of configsToProcess) {
-    it(config + ' should honor linter validation rules.', async function (done) {
+    it(config + ' should honor linter validation rules.', async function () {
       var cmd = `autorest --validation --azure-validator ${config} --message-format=json`;
       console.log(`Executing: ${cmd}`);
       let result;
       try {
         result = execSync(cmd, { encoding: 'utf8' });
       } catch (err) {
-        throw new Error('AutoRest Linter validation failed.');
+        console.dir(err, {depth: null, colors: true});
+        throw err;
       }
     });
   }
