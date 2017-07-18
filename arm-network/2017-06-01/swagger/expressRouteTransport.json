@@ -46,18 +46,10 @@
                 },
 				"parameters": [
 					{
-						"name": "resourceGroupName",
-						"in": "path",
-						"required": true,
-						"type": "string",
-						"description": "The name of the resource group."
+						"$ref": "#/parameters/ResourceGroupNameParameter"
 					},
 					{
-						"name": "expressRouteTransportName",
-						"in": "path",
-						"required": true,
-						"type": "string",
-						"description": "The name of the Express Route Transport Resource."
+						"$ref": "#/parameters/ExpressRouteTransportNameParameter"
 					},
 					{
 						"$ref": "#/parameters/ApiVersionParameter"
@@ -96,18 +88,10 @@
 				"description": "Gets the specfic Express Route Transport Resource from the specified resource group.",
 				"parameters": [
 					{
-						"name": "resourceGroupName",
-						"in": "path",
-						"required": true,
-						"type": "string",
-						"description": "The name of the resource group."
+						"$ref": "#/parameters/ResourceGroupNameParameter"
 					},
 					{
-						"name": "expressRouteTransportName",
-						"in": "path",
-						"required": true,
-						"type": "string",
-						"description": "The name of the Express Route Transport Resource."
+						"$ref": "#/parameters/ExpressRouteTransportNameParameter"
 					},
 					{
 						"$ref": "#/parameters/ApiVersionParameter"
@@ -140,21 +124,13 @@
 				"description": "Creates or Updates a Express Route Transport Resource between two express route circuits.",
 				"parameters": [
 				  {
-					"name": "resourceGroupName",
-					"in": "path",
-					"required": true,
-					"type": "string",
-					"description": "The name of the resource group."
+					"$ref": "#/parameters/ResourceGroupNameParameter"
 				  },
 				  {
-					"name": "expressRouteTransportName",
-					"in": "path",
-					"required": true,
-					"type": "string",
-					"description": "The name of the Express Route Transport Resource."
+					"$ref": "#/parameters/ExpressRouteTransportNameParameter"
 				  },
                   {
-					"name": "routeFilterParameters",
+					"name": "expressRouteTransportParameters",
                     "in": "body",
                     "required": true,
                     "schema": {
@@ -208,21 +184,13 @@
 				"description": "Updates a Express Route Transport Resource between two express route circuits.",
 				"parameters": [
 				  {
-					"name": "resourceGroupName",
-					"in": "path",
-					"required": true,
-					"type": "string",
-					"description": "The name of the resource group."
+					"$ref": "#/parameters/ResourceGroupNameParameter"
 				  },
 				  {
-					"name": "expressRouteTransportName",
-					"in": "path",
-					"required": true,
-					"type": "string",
-					"description": "The name of the Express Route Transport Resource."
+					"$ref": "#/parameters/ExpressRouteTransportNameParameter"
 				  },
                   {
-					"name": "routeFilterParameters",
+					"name": "expressRouteTransportParameters",
                     "in": "body",
                     "required": true,
                     "schema": {
@@ -272,11 +240,7 @@
 			"description": "Gets all express route transport resources in a given resource group and subscription.",
 			"parameters": [
 			  {
-				"name": "resourceGroupName",
-				"in": "path",
-				"required": true,
-				"type": "string",
-				"description": "The name of the resource group."
+				"$ref": "#/parameters/ResourceGroupNameParameter"
 			  },
 			  {
 				"$ref": "#/parameters/ApiVersionParameter"
@@ -429,6 +393,20 @@
 		  "required": true,
 		  "type": "string",
 		  "description": "Client API version."
+		},
+		"ResourceGroupNameParameter": {
+			"name": "resourceGroupName",
+			"in": "path",
+			"required": true,
+			"type": "string",
+			"description": "The name of the resource group in which Express Route Transport Resource would reside."
+		},
+		"ExpressRouteTransportNameParameter": {
+			"name": "expressRouteTransportName",
+			"in": "path",
+			"required": true,
+			"type": "string",
+			"description": "The name of the Express Route Transport Resource."
 		}
 	}
  }
