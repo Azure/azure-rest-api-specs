@@ -303,7 +303,7 @@
             "in": "body",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/JobInformation"
+              "$ref": "#/definitions/BuildJobParameters"
             },
             "description": "The parameters to build a job."
           },
@@ -1370,22 +1370,15 @@
       "description": "Run info for a specific job pipeline."
     },
     "CreateJobParameters": {
+      "allOf": [
+        {
+          "$ref": "#/definitions/BuildJobParameters"
+        }
+      ],
       "properties": {
         "name": {
           "type": "string",
-          "description": "the friendly name of the job."
-        },
-        "type": {
-          "type": "string",
-          "description": "the job type of the current job (Hive or USql).",
-          "enum": [
-            "USql",
-            "Hive"
-          ],
-          "x-ms-enum": {
-            "name": "JobType",
-            "modelAsString": false
-          }
+          "description": "the friendly name of the job to submit."
         },
         "degreeOfParallelism": {
           "type": "integer",
@@ -1405,21 +1398,40 @@
           },        
           "description": "the list of log file name patterns to find in the logFolder. '*' is the only matching character allowed. Example format: jobExecution*.log or *mylog*.txt"
         },
-        "properties": {
-          "$ref": "#/definitions/CreateJobProperties",
-          "description": "the job specific properties."
-        },
         "related": {
           "$ref": "#/definitions/JobRelationshipProperties",
           "description": "the recurring job relationship information properties."
         }
       },
       "required": [
-        "name",
+        "name"
+      ],
+      "description": "The parameters used to submit a new Data Lake Analytics job."
+    },
+    "BuildJobParameters": {
+      "properties": {
+        "type": {
+          "type": "string",
+          "description": "the job type of the current job (Hive or USql).",
+          "enum": [
+            "USql",
+            "Hive"
+          ],
+          "x-ms-enum": {
+            "name": "JobType",
+            "modelAsString": false
+          }
+        },
+        "properties": {
+          "$ref": "#/definitions/CreateJobProperties",
+          "description": "the job specific properties."
+        }
+      },
+      "required": [
         "type",
         "properties"
       ],
-      "description": "The parameters used to submit a new Data Lake Analytics job."
+      "description": "The parameters used to build a new Data Lake Analytics job."
     },
     "JobInformationBasic": {
       "properties": {
