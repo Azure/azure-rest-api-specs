@@ -53,7 +53,7 @@ Please also specify `--csharp-sdks-folder=<path to "SDKs" directory of your azur
 ``` yaml $(csharp)
 csharp:
   azure-arm: true
-  license-header: MICROSOFT_MIT
+  license-header: MICROSOFT_MIT_NO_VERSION
   namespace: Microsoft.Azure.Management.Authorization
   output-folder: $(csharp-sdks-folder)/Authorization/Management.Authorization/Generated
   clear-output-folder: true

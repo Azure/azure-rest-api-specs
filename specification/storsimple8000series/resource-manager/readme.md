@@ -51,7 +51,7 @@ Please also specify `--csharp-sdks-folder=<path to "SDKs" directory of your azur
 ``` yaml $(csharp)
 csharp:
   azure-arm: true
-  license-header: MICROSOFT_MIT
+  license-header: MICROSOFT_MIT_NO_VERSION
   namespace: Microsoft.Azure.Management.StorSimple8000Series
   output-folder: $(csharp-sdks-folder)/StorSimple8000Series/Management.StorSimple8000Series/Generated
   clear-output-folder: true

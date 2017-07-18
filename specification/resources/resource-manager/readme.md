@@ -181,7 +181,7 @@ Please also specify `--csharp-sdks-folder=<path to "SDKs" directory of your azur
 csharp:
   azure-arm: true
   namespace: Microsoft.Azure.Management.ResourceManager
-  license-header: MICROSOFT_MIT
+  license-header: MICROSOFT_MIT_NO_VERSION
   output-folder: $(csharp-sdks-folder)/Resource/Management.ResourceManager/Generated
 batch:
   - package-features: true
