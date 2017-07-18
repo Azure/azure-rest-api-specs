@@ -36,7 +36,7 @@
     }
   },
   "paths": {
-  	"/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/expressRouteCircuits/{circuitName}/authorizations/{authorizationName}": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/expressRouteCircuits/{circuitName}/authorizations/{authorizationName}": {
       "delete": {
         "tags": [
           "ExpressRouteCircuitAuthorizations"
@@ -925,7 +925,7 @@
           ],
           "x-ms-enum": {
             "name": "AuthorizationUseStatus",
-            "modelAsString": true
+            "modelAsString": false
           }
         },
         "provisioningState": {
@@ -952,7 +952,7 @@
       },
       "allOf": [
         {
-          "$ref": "./network.json#/definitions/SubResource"
+          "$ref": "./network.json#/definitions/SubResourceReadOnly"
         }
       ],
       "description": "Authorization in an ExpressRouteCircuit resource."
@@ -1000,7 +1000,7 @@
           ],
           "x-ms-enum": {
             "name": "ExpressRouteCircuitPeeringAdvertisedPublicPrefixState",
-            "modelAsString": true
+            "modelAsString": false
           }
         },
         "legacyMode": {
@@ -1035,7 +1035,7 @@
           "description": "The Microsoft peering configuration."
         },
         "routeFilter": {
-          "$ref": "./routeFilter.json#/definitions/RouteFilter",
+          "$ref": "./network.json#/definitions/SubResource",
           "description": "The reference of the RouteFilter resource."
         },
         "state": {
@@ -1047,7 +1047,7 @@
           ],
           "x-ms-enum": {
             "name": "ExpressRouteCircuitPeeringState",
-            "modelAsString": true
+            "modelAsString": false
           }
         }
       },
@@ -1090,7 +1090,7 @@
           ],
           "x-ms-enum": {
             "name": "ExpressRouteCircuitPeeringType",
-            "modelAsString": true
+            "modelAsString": false
           }
         },
         "state": {
@@ -1102,7 +1102,7 @@
           ],
           "x-ms-enum": {
             "name": "ExpressRouteCircuitPeeringState",
-            "modelAsString": true
+            "modelAsString": false
           }
         },
         "azureASN": {
@@ -1157,11 +1157,11 @@
           "description": "The GatewayManager Etag."
         },
         "lastModifiedBy": {
-            "type": "string",
-            "description": "Gets whether the provider or the customer last modified the peering."
+          "type": "string",
+          "description": "Gets whether the provider or the customer last modified the peering."
         },
         "routeFilter": {
-          "$ref": "./routeFilter.json#/definitions/RouteFilter",
+          "$ref": "./network.json#/definitions/SubResource",
           "description": "The reference of the RouteFilter resource."
         },
         "ipv6PeeringConfig": {
@@ -1188,7 +1188,7 @@
       },
       "allOf": [
         {
-          "$ref": "./network.json#/definitions/SubResource"
+          "$ref": "./network.json#/definitions/SubResourceReadOnly"
         }
       ],
       "description": "Peering in an ExpressRouteCircuit resource."
@@ -1224,7 +1224,7 @@
           ],
           "x-ms-enum": {
             "name": "ExpressRouteCircuitSkuTier",
-            "modelAsString": true
+            "modelAsString": false
           }
         },
         "family": {
@@ -1236,7 +1236,7 @@
           ],
           "x-ms-enum": {
             "name": "ExpressRouteCircuitSkuFamily",
-            "modelAsString": true
+            "modelAsString": false
           }
         }
       },
@@ -1281,7 +1281,7 @@
           ],
           "x-ms-enum": {
             "name": "ServiceProviderProvisioningState",
-            "modelAsString": true
+            "modelAsString": false
           }
         },
         "authorizations": {

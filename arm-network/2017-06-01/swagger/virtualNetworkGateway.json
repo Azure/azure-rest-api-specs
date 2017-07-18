@@ -36,7 +36,7 @@
     }
   },
   "paths": {
-  	"/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/virtualNetworkGateways/{virtualNetworkGatewayName}": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/virtualNetworkGateways/{virtualNetworkGatewayName}": {
       "put": {
         "tags": [
           "VirtualNetworkGateways"
@@ -226,8 +226,8 @@
             "type": "string",
             "description": "The name of the virtual network gateway."
           },
-          { 
-            "name": "gatewayVip",		
+          {
+            "name": "gatewayVip",
             "in": "query",
             "required": false,
             "type": "string",
@@ -627,7 +627,7 @@
         },
         "x-ms-long-running-operation": true
       }
-    },    
+    },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/connections/{virtualNetworkGatewayConnectionName}/sharedkey": {
       "put": {
         "tags": [
@@ -718,9 +718,9 @@
             }
           }
         }
-      }	  
+      }
     },
-	"/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/connections": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/connections": {
       "get": {
         "tags": [
           "VirtualNetworkGatewayConnections"
@@ -807,7 +807,7 @@
         "x-ms-long-running-operation": true
       }
     },
-	"/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/localNetworkGateways/{localNetworkGatewayName}": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/localNetworkGateways/{localNetworkGatewayName}": {
       "put": {
         "tags": [
           "LocalNetworkGateways"
@@ -980,7 +980,7 @@
     }
   },
   "definitions": {
-	"VirtualNetworkGatewayIPConfigurationPropertiesFormat": {
+    "VirtualNetworkGatewayIPConfigurationPropertiesFormat": {
       "properties": {
         "privateIPAllocationMethod": {
           "type": "string",
@@ -991,7 +991,7 @@
           ],
           "x-ms-enum": {
             "name": "IPAllocationMethod",
-            "modelAsString": true
+            "modelAsString": false
           }
         },
         "subnet": {
@@ -1027,7 +1027,7 @@
       },
       "allOf": [
         {
-          "$ref": "./network.json#/definitions/SubResource"
+          "$ref": "./network.json#/definitions/SubResourceReadOnly"
         }
       ],
       "description": "IP configuration for virtual network gateway"
@@ -1050,7 +1050,7 @@
           ],
           "x-ms-enum": {
             "name": "VirtualNetworkGatewayType",
-            "modelAsString": true
+            "modelAsString": false
           }
         },
         "vpnType": {
@@ -1062,14 +1062,14 @@
           ],
           "x-ms-enum": {
             "name": "VpnType",
-            "modelAsString": true
+            "modelAsString": false
           }
         },
         "enableBgp": {
           "type": "boolean",
           "description": "Whether BGP is enabled for this virtual network gateway or not."
         },
-	    "activeActive": {
+        "activeActive": {
           "type": "boolean",
           "description": "ActiveActive flag"
         },
@@ -1109,7 +1109,7 @@
       },
       "description": "VirtualNetworkGateway properties"
     },
-	"VpnClientRootCertificatePropertiesFormat": {
+    "VpnClientRootCertificatePropertiesFormat": {
       "properties": {
         "publicCertData": {
           "type": "string",
@@ -1143,7 +1143,7 @@
       },
       "allOf": [
         {
-          "$ref": "./network.json#/definitions/SubResource"
+          "$ref": "./network.json#/definitions/SubResourceReadOnly"
         }
       ],
       "required": [
@@ -1151,7 +1151,7 @@
       ],
       "description": "VPN client root certificate of virtual network gateway"
     },
-	"VpnClientRevokedCertificatePropertiesFormat": {
+    "VpnClientRevokedCertificatePropertiesFormat": {
       "properties": {
         "thumbprint": {
           "type": "string",
@@ -1182,7 +1182,7 @@
       },
       "allOf": [
         {
-          "$ref": "./network.json#/definitions/SubResource"
+          "$ref": "./network.json#/definitions/SubResourceReadOnly"
         }
       ],
       "description": "VPN client revoked certificate of virtual network gateway."
@@ -1218,7 +1218,7 @@
             ],
             "x-ms-enum": {
               "name": "VpnClientProtocol",
-              "modelAsString": true
+              "modelAsString": false
             }
           },
           "description": "VpnClientProtocols for Virtual network gateway."
@@ -1242,7 +1242,7 @@
           ],
           "x-ms-enum": {
             "name": "VirtualNetworkGatewaySkuName",
-            "modelAsString": true
+            "modelAsString": false
           }
         },
         "tier": {
@@ -1259,7 +1259,7 @@
           ],
           "x-ms-enum": {
             "name": "VirtualNetworkGatewaySkuTier",
-            "modelAsString": true
+            "modelAsString": false
           }
         },
         "capacity": {
@@ -1270,7 +1270,7 @@
       },
       "description": "VirtualNetworkGatewaySku details"
     },
-	"BgpSettings": {
+    "BgpSettings": {
       "properties": {
         "asn": {
           "type": "integer",
@@ -1320,7 +1320,7 @@
           ],
           "x-ms-enum": {
             "name": "BgpPeerState",
-            "modelAsString": true
+            "modelAsString": false
           }
         },
         "connectedDuration": {
@@ -1411,7 +1411,7 @@
       ],
       "description": "A common class for general resource information"
     },
-	"VpnClientParameters": {
+    "VpnClientParameters": {
       "properties": {
         "processorArchitecture": {
           "type": "string",
@@ -1422,7 +1422,7 @@
           ],
           "x-ms-enum": {
             "name": "ProcessorArchitecture",
-            "modelAsString": true
+            "modelAsString": false
           }
         },
         "authenticationMethod": {
@@ -1434,7 +1434,7 @@
           ],
           "x-ms-enum": {
             "name": "AuthenticationMethod",
-            "modelAsString": true
+            "modelAsString": false
           }
         },
         "radiusServerAuthCertificate": {
@@ -1451,7 +1451,7 @@
       },
       "description": "Vpn Client Parameters for package generation"
     },
-	"VirtualNetworkGatewayListResult": {
+    "VirtualNetworkGatewayListResult": {
       "properties": {
         "value": {
           "type": "array",
@@ -1510,23 +1510,23 @@
           ],
           "x-ms-enum": {
             "name": "VirtualNetworkGatewayConnectionStatus",
-            "modelAsString": true
+            "modelAsString": false
           }
         },
         "ingressBytesTransferred": {
-          "readOnly": true,		
+          "readOnly": true,
           "type": "integer",
           "format": "int64",
           "description": "The Ingress Bytes Transferred in this connection"
         },
         "egressBytesTransferred": {
-          "readOnly": true,		
+          "readOnly": true,
           "type": "integer",
           "format": "int64",
           "description": "The Egress Bytes Transferred in this connection"
-        },		
+        },
         "lastConnectionEstablishedUtcTime": {
-          "readOnly": true,		
+          "readOnly": true,
           "type": "string",
           "description": "The time at which connection was established in Utc format."
         }
@@ -1559,7 +1559,7 @@
           ],
           "x-ms-enum": {
             "name": "VirtualNetworkGatewayConnectionType",
-            "modelAsString": true
+            "modelAsString": false
           }
         },
         "routingWeight": {
@@ -1583,7 +1583,7 @@
           ],
           "x-ms-enum": {
             "name": "VirtualNetworkGatewayConnectionStatus",
-            "modelAsString": true
+            "modelAsString": false
           }
         },
         "tunnelConnectionStatus": {
@@ -1702,7 +1702,7 @@
       },
       "required": [
         "value"
-      ],	  
+      ],
       "description": "Response for GetConnectionSharedKey API service call"
     },
     "IpsecPolicy": {
@@ -1733,7 +1733,7 @@
           ],
           "x-ms-enum": {
             "name": "IpsecEncryption",
-            "modelAsString": true
+            "modelAsString": false
           }
         },
         "ipsecIntegrity": {
@@ -1749,7 +1749,7 @@
           ],
           "x-ms-enum": {
             "name": "IpsecIntegrity",
-            "modelAsString": true
+            "modelAsString": false
           }
         },
         "ikeEncryption": {
@@ -1764,7 +1764,7 @@
           ],
           "x-ms-enum": {
             "name": "IkeEncryption",
-            "modelAsString": true
+            "modelAsString": false
           }
         },
         "ikeIntegrity": {
@@ -1778,7 +1778,7 @@
           ],
           "x-ms-enum": {
             "name": "IkeIntegrity",
-            "modelAsString": true
+            "modelAsString": false
           }
         },
         "dhGroup": {
@@ -1796,7 +1796,7 @@
           ],
           "x-ms-enum": {
             "name": "DhGroup",
-            "modelAsString": true
+            "modelAsString": false
           }
         },
         "pfsGroup": {
@@ -1813,7 +1813,7 @@
           ],
           "x-ms-enum": {
             "name": "PfsGroup",
-            "modelAsString": true
+            "modelAsString": false
           }
         }
       },
@@ -1829,7 +1829,7 @@
       ],
       "description": "An IPSec Policy configuration for a virtual network gateway connection"
     },
-	"LocalNetworkGatewayPropertiesFormat": {
+    "LocalNetworkGatewayPropertiesFormat": {
       "properties": {
         "localNetworkAddressSpace": {
           "$ref": "./virtualNetwork.json#/definitions/AddressSpace",

@@ -35,8 +35,7 @@
       }
     }
   },
-  "paths": {
-  },
+  "paths": {},
   "definitions": {
     "ErrorDetails": {
       "properties": {
@@ -85,7 +84,7 @@
           ],
           "x-ms-enum": {
             "name": "NetworkOperationStatus",
-            "modelAsString": true
+            "modelAsString": false
           }
         },
         "error": {
@@ -98,7 +97,8 @@
       "properties": {
         "id": {
           "type": "string",
-          "description": "Resource ID."
+          "description": "Resource ID.",
+          "readOnly": true
         },
         "name": {
           "readOnly": true,
@@ -122,13 +122,29 @@
           "description": "Resource tags."
         }
       },
-      "x-ms-azure-resource": true
+      "x-ms-azure-resource": true,
+      "required": [
+        "location"
+      ]
     },
     "SubResource": {
       "properties": {
         "id": {
           "type": "string",
           "description": "Resource ID."
+        }
+      },
+      "x-ms-azure-resource": true,
+      "required": [
+        "id"
+      ]
+    },
+    "SubResourceReadOnly": {
+      "properties": {
+        "id": {
+          "readOnly": true,
+          "description": "Resource ID",
+          "type": "string"
         }
       },
       "x-ms-azure-resource": true
