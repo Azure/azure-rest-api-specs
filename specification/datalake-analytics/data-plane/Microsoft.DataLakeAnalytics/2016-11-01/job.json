@@ -1372,7 +1372,7 @@
     "CreateJobParameters": {
       "allOf": [
         {
-          "$ref": "#/definitions/BuildJobParameters"
+          "$ref": "#/definitions/BaseJobParameters"
         }
       ],
       "properties": {
@@ -1409,6 +1409,20 @@
       "description": "The parameters used to submit a new Data Lake Analytics job."
     },
     "BuildJobParameters": {
+      "allOf": [
+        {
+          "$ref": "#/definitions/BaseJobParameters"
+        }
+      ],
+        "properties": {
+        "name": {
+          "type": "string",
+          "description": "the friendly name of the job to build."
+        }
+      },
+      "description": "The parameters used to build a new Data Lake Analytics job."
+    },
+    "BaseJobParameters": {
       "properties": {
         "type": {
           "type": "string",
@@ -1431,7 +1445,7 @@
         "type",
         "properties"
       ],
-      "description": "The parameters used to build a new Data Lake Analytics job."
+      "description": "Data Lake Analytics Job Parameters base class for build and submit."
     },
     "JobInformationBasic": {
       "properties": {
