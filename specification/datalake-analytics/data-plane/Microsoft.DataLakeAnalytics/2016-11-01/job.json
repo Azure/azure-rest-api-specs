@@ -470,7 +470,7 @@
             "in": "body",
             "required": false,
             "schema": {
-              "$ref": "#/definitions/JobInformationUpdateParameters"
+              "$ref": "#/definitions/UpdateJobParameters"
             },
             "description": "The parameters to update a job."
           },
@@ -941,7 +941,7 @@
         },
         "compileMode": {
           "type": "string",
-          "description": "Optionally enforces a specific compilation mode for the job during execution. If this is not specified during submission, the server will determine the optimal compilation mode.",
+          "description": "the specific compilation mode for the job used during execution. If this is not specified during submission, the server will determine the optimal compilation mode.",
           "enum": [
             "Semantic",
             "Full",
@@ -1005,7 +1005,7 @@
         },
         "type": {
           "type": "string",
-          "description": "the job type of the current job (i.e. Hive, U-SQL, or Scope (for internal use only))."
+          "description": "the job type of the current job (Hive, USql, or Scope (for internal use only))."
         }
       },
       "description": "The common Data Lake Analytics job properties."
@@ -1020,7 +1020,7 @@
       "properties": {
         "compileMode": {
           "type": "string",
-          "description": "Optionally enforces a specific compilation mode for the job during execution. If this is not specified during submission, the server will determine the optimal compilation mode.",
+          "description": "the specific compilation mode for the job used during execution. If this is not specified during submission, the server will determine the optimal compilation mode.",
           "enum": [
             "Semantic",
             "Full",
@@ -1033,6 +1033,30 @@
         }
       },
       "description": "U-SQL job properties used when submitting U-SQL jobs."
+    },
+    "CreateScopeJobProperties": {
+      "x-ms-discriminator-value": "Scope",
+      "allOf": [
+        {
+          "$ref": "#/definitions/CreateJobProperties"
+        }
+      ],
+      "properties": {
+        "compileMode": {
+          "type": "string",
+          "description": "the specific compilation mode for the job used during execution. If this is not specified during submission, the server will determine the optimal compilation mode.",
+          "enum": [
+            "Semantic",
+            "Full",
+            "SingleBox"
+          ],
+          "x-ms-enum": {
+            "name": "CompileMode",
+            "modelAsString": false
+          }
+        }
+      },
+      "description": "Scope job properties used when submitting Scope jobs."
     },
     "CreateJobProperties": {
       "discriminator": "type",
@@ -1051,7 +1075,7 @@
         },
         "type": {
           "type": "string",
-          "description": "the job type of the current job (i.e. U-SQL)."
+          "description": "the job type of the current job (Hive, USql, or Scope (for internal use only))."
         }
       },
       "description": "The common Data Lake Analytics job properties for job submission."
@@ -1499,6 +1523,23 @@
       },
       "description": "Run info for a specific job pipeline."
     },
+    "CreateScopeJobParameters": {
+      "allOf": [
+        {
+          "$ref": "#/definitions/CreateJobParameters"
+        }
+      ],
+      "properties": {
+        "tags": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          },
+          "description": "the key-value pairs used to add additional metadata to the job information. (Only for use internally with Scope job type.)"
+        }
+      },
+      "description": "The parameters used to submit a new Data Lake Analytics Scope job. (Only for use internally with Scope job type.)"
+    },
     "CreateJobParameters": {
       "allOf": [
         {
@@ -1544,7 +1585,7 @@
           "$ref": "#/definitions/BaseJobParameters"
         }
       ],
-        "properties": {
+      "properties": {
         "name": {
           "type": "string",
           "description": "the friendly name of the job to build."
@@ -1556,7 +1597,7 @@
       "properties": {
         "type": {
           "type": "string",
-          "description": "the job type of the current job (Hive or USql).",
+          "description": "the job type of the current job (Hive, USql, or Scope (for internal use only)).",
           "enum": [
             "USql",
             "Hive",
@@ -1754,7 +1795,7 @@
       },
       "description": "List of JobInfo items."
     },
-    "JobInformationUpdateParameters": {
+    "UpdateJobParameters": {
       "properties": {
         "degreeOfParallelism": {
           "type": "integer",
@@ -1774,7 +1815,7 @@
           "description": "the key-value pairs used to add additional metadata to the job information. (Only for use internally with Scope job type.)"
         }
       },
-      "description": "The parameters that can be used to update existing Data Lake Analytics job information properties."
+      "description": "The parameters that can be used to update existing Data Lake Analytics job information properties. (Only for use internally with Scope job type.)"
     }
   },
   "parameters": {
