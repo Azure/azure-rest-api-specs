@@ -314,16 +314,55 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/providers/Microsoft.ServiceFabric/locations/{location}/environments/{environment}/clusterVersions": {
+    "/subscriptions/{subscriptionId}/providers/Microsoft.ServiceFabric/locations/{location}/clusterVersions": {
       "get": {
         "tags": [
-          "ClusterVersionsListOperation"
+          "ClusterVersion"
         ],
         "operationId": "ClusterVersions_List",
         "description": "List cluster code versions by location",
         "x-ms-examples": {
           "List clusters": {
             "$ref": "./examples/ClusterVersionsList_example.json"
+          }
+        },
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/locationForClusterCodeVersions"
+          },
+          {
+            "$ref": "#/parameters/api-version"
+          },
+          {
+            "$ref": "#/parameters/subscriptionId"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK - List cluster code versions successfully",
+            "schema": {
+              "$ref": "#/definitions/ClusterCodeVersionsListResult"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.ServiceFabric/locations/{location}/environments/{environment}/clusterVersions": {
+      "get": {
+        "tags": [
+          "ClusterVersion"
+        ],
+        "operationId": "ClusterVersions_ListByEnvironment",
+        "description": "List cluster code versions by environment",
+        "x-ms-examples": {
+          "Get cluster version": {
+            "$ref": "./examples/ClusterVersionsListByEnvironment.json"
           }
         },
         "produces": [
@@ -346,6 +385,96 @@
         "responses": {
           "200": {
             "description": "OK - List cluster code versions successfully",
+            "schema": {
+              "$ref": "#/definitions/ClusterCodeVersionsListResult"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.ServiceFabric/locations/{location}/environments/{environment}/clusterVersions/{clusterVersion}": {
+      "get": {
+        "tags": [
+          "ClusterVersion"
+        ],
+        "operationId": "ClusterVersions_GetByEnvironment",
+        "description": "Get cluster code versions by environment",
+        "x-ms-examples": {
+          "Get cluster version": {
+            "$ref": "./examples/ClusterVersionsGetByEnvironment_example.json"
+          }
+        },
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/locationForClusterCodeVersions"
+          },
+          {
+            "$ref": "#/parameters/environment"
+          },
+          {
+            "$ref": "#/parameters/api-version"
+          },
+          {
+            "$ref": "#/parameters/subscriptionId"
+          },
+          {
+            "$ref": "#/parameters/clusterVersion"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK - Get cluster code versions successfully",
+            "schema": {
+              "$ref": "#/definitions/ClusterCodeVersionsListResult"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.ServiceFabric/locations/{location}/clusterVersions/{clusterVersion}": {
+      "get": {
+        "tags": [
+          "ClusterVersionsListOperation"
+        ],
+        "operationId": "ClusterVersions_Get",
+        "description": "Get cluster code versions by location",
+        "x-ms-examples": {
+          "Get cluster version": {
+            "$ref": "./examples/ClusterVersionsGet_example.json"
+          }
+        },
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/locationForClusterCodeVersions"
+          },
+          {
+            "$ref": "#/parameters/environment"
+          },
+          {
+            "$ref": "#/parameters/api-version"
+          },
+          {
+            "$ref": "#/parameters/subscriptionId"
+          },
+          {
+            "$ref": "#/parameters/clusterVersion"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK - Get cluster code versions successfully",
             "schema": {
               "$ref": "#/definitions/ClusterCodeVersionsListResult"
             }
@@ -1208,7 +1337,6 @@
       "in": "path",
       "type": "string",
       "enum": [
-        "Default",
         "Windows",
         "Linux"
       ],
