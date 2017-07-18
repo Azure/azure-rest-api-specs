@@ -3,15 +3,16 @@
 
 'use strict';
 var assert = require("assert"),
-  fs = require('fs'),
+  fs = require('fs-extra'),
   glob = require('glob'),
   path = require('path'),
-  _ = require('lodash'),
   z = require('z-schema'),
   YAML = require('js-yaml'),
   request = require('request'),
   util = require('util'),
   execSync = require('child_process').execSync;
+
+const asyncJsonRequest = url => new Promise((res, rej) => request({ url: url, json: true }, (error, _, body) => error ? rej(error) : res(body)));
 
 exports = module.exports;
 
@@ -26,9 +27,9 @@ exports.isWindows = (process.platform.lastIndexOf('win') === 0);
 exports.prOnly = undefined !== process.env['PR_ONLY'] ? process.env['PR_ONLY'] : 'false';
 
 exports.globPath = path.join(__dirname, '../', '../', '/specification/**/*.json');
-exports.swaggers = _(glob.sync(exports.globPath, { ignore: ['**/examples/**/*.json', '**/quickstart-templates/*.json', '**/schema/*.json'] }));
+exports.swaggers = glob.sync(exports.globPath, { ignore: ['**/examples/**/*.json', '**/quickstart-templates/*.json', '**/schema/*.json'] });
 exports.exampleGlobPath = path.join(__dirname, '../', '../', '/specification/**/examples/**/*.json');
-exports.examples = _(glob.sync(exports.exampleGlobPath));
+exports.examples = glob.sync(exports.exampleGlobPath);
 
 // Remove byte order marker. This catches EF BB BF (the UTF-8 BOM)
 // because the buffer-to-string conversion in `fs.readFile()`
@@ -47,16 +48,13 @@ exports.stripBOM = function stripBOM(content) {
  * Parses the json from the given filepath
  * @returns {string} clr command
  */
-exports.parseJsonFromFile = function parseJsonFromFile(filepath, callback) {
-  fs.readFile(filepath, 'utf8', function (err, data) {
-    if (err) return callback(err);
-    try {
-      return callback(null, YAML.safeLoad(exports.stripBOM(data)));
-    } catch (error) {
-      let e = new Error(`swagger "${filepath}" is an invalid JSON.\n${util.inspect(error, { depth: null })}`);
-      return callback(e);
-    }
-  });
+exports.parseJsonFromFile = async function parseJsonFromFile(filepath) {
+  const data = await fs.readFile(filepath, { encoding: 'utf8' });
+  try {
+    return YAML.safeLoad(exports.stripBOM(data));
+  } catch (error) {
+    throw new Error(`swagger "${filepath}" is an invalid JSON.\n${util.inspect(error, { depth: null })}`);
+  }
 };
 
 /**
@@ -238,37 +236,17 @@ exports.getFilesChangedInPR = function getFilesChangedInPR() {
  * Downloads the remote schemas and initializes the validator with remote references.
  * @returns {Object} context Provides the schemas in json format and the validator.
  */
-exports.initializeValidator = function initializeValidator(callback) {
-  request({ url: exports.extensionSwaggerSchemaUrl, json: true }, function (error, response, extensionSwaggerSchemaBody) {
-    if (error) {
-      return callback(error);
-    }
-    request({ url: exports.swaggerSchemaAltUrl, json: true }, function (error, response, swaggerSchemaBody) {
-      if (error) {
-        return callback(error);
-      }
-      request({ url: exports.exampleSchemaUrl, json: true }, function (error, response, exampleSchemaBody) {
-        if (error) {
-          return callback(error);
-        }
-        request({ url: exports.compositeSchemaUrl, json: true }, function (error, response, compositeSchemaBody) {
-          if (error) {
-            return callback(error);
-          }
-          let context = {
-            extensionSwaggerSchema: extensionSwaggerSchemaBody,
-            swaggerSchema: swaggerSchemaBody,
-            exampleSchema: exampleSchemaBody,
-            compositeSchema: compositeSchemaBody
-          };
-          let validator = new z({ breakOnFirstError: false });
-          validator.setRemoteReference(exports.swaggerSchemaUrl, context.swaggerSchema);
-          validator.setRemoteReference(exports.exampleSchemaUrl, context.exampleSchema);
-          validator.setRemoteReference(exports.compositeSchemaUrl, context.compositeSchema);
-          context.validator = validator;
-          return callback(null, context);
-        });
-      });
-    });
-  });
+exports.initializeValidator = async function initializeValidator() {
+  const context = {
+    extensionSwaggerSchema: await asyncJsonRequest(exports.extensionSwaggerSchemaUrl),
+    swaggerSchema: await asyncJsonRequest(exports.swaggerSchemaAltUrl),
+    exampleSchema: await asyncJsonRequest(exports.exampleSchemaUrl),
+    compositeSchema: await asyncJsonRequest(exports.compositeSchemaUrl)
+  };
+  let validator = new z({ breakOnFirstError: false });
+  validator.setRemoteReference(exports.swaggerSchemaUrl, context.swaggerSchema);
+  validator.setRemoteReference(exports.exampleSchemaUrl, context.exampleSchema);
+  validator.setRemoteReference(exports.compositeSchemaUrl, context.compositeSchema);
+  context.validator = validator;
+  return context;
 };

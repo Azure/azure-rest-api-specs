@@ -8,7 +8,6 @@ const exec = require('child_process').exec,
     path = require('path'),
     util = require('util'),
     utils = require('../test/util/utils'),
-    _ = require('underscore'),
     fs = require('fs'),
     request = require('request');
 
@@ -17,7 +16,7 @@ let configsToProcess = utils.getConfigFilesChangedInPR();
 let targetBranch = utils.getTargetBranch();
 let sourceBranch = utils.getSourceBranch();
 let pullRequestNumber = utils.getPullRequestNumber();
-let linterCmd = `autorest --azure-validator --message-format=json `;
+let linterCmd = `autorest --validation --azure-validator --message-format=json `;
 let gitCheckoutCmd = `git checkout ${targetBranch}`;
 let gitLogCmd = `git log -3`;
 var filename = `${pullRequestNumber}_${utils.getTimeStamp()}.json`;
@@ -50,7 +49,6 @@ function createLogFile() {
     if (!fs.existsSync(logFilepath)) {
         fs.writeFileSync(logFilepath, '');
     }
-    return;
 }
 
 //appends the content to the log file
@@ -58,49 +56,38 @@ function writeContent(content) {
     fs.writeFileSync(logFilepath, content);
 }
 
-//executes promises sequentially by chaining them.
-function executePromisesSequentially(promiseFactories) {
-    let result = Promise.resolve();
-    promiseFactories.forEach(function (promiseFactory) {
-        result = result.then(promiseFactory);
-    });
-    return result;
-};
-
 // Executes linter on given swagger path and returns structured JSON of linter output
-function getLinterResult(swaggerPath) {
+async function getLinterResult(swaggerPath) {
     if (swaggerPath === null || swaggerPath === undefined || typeof swaggerPath.valueOf() !== 'string' || !swaggerPath.trim().length) {
         throw new Error('swaggerPath is a required parameter of type "string" and it cannot be an empty string.');
     }
 
-    return new Promise((result) => {
-        let jsonResult = [];
-        if (!fs.existsSync(swaggerPath)) {
-            result([]);
-            return;
+    let jsonResult = [];
+    if (!fs.existsSync(swaggerPath)) {
+        return [];
+    }
+    let cmd = linterCmd + swaggerPath;
+    console.log(`Executing: ${cmd}`);
+    const {err, stdout, stderr } = await new Promise(res => exec(cmd, { encoding: 'utf8', maxBuffer: 1024 * 1024 * 64 },
+        (err, stdout, stderr) => res({ err: err, stdout: stdout, stderr: stderr })));
+
+    let resultString = stderr;
+    if (resultString.indexOf('{') !== -1) {
+        resultString = "[" + resultString.substring(resultString.indexOf('{')).trim().replace(/\}\n\{/g, "},\n{") + "]";
+        //console.log('>>>>>> Trimmed Result...');
+        //console.log(resultString);
+        try {
+            jsonResult = JSON.parse(resultString);
+            //console.log('>>>>>> Parsed Result...');
+            //console.dir(resultObject, {depth: null, colors: true});
+            return jsonResult;
+        } catch (e) {
+            console.log(`An error occurred while executing JSON.parse() on the linter output for ${swaggerPath}:`);
+            console.dir(resultString);
+            console.dir(e, { depth: null, colors: true });
         }
-        let cmd = linterCmd + swaggerPath;
-        console.log(`Executing: ${cmd}`);
-        exec(cmd, { encoding: 'utf8', maxBuffer: 1024 * 1024 * 64 }, (err, stdout, stderr) => {
-            let resultString = stderr;
-            if (resultString.indexOf('{') !== -1) {
-                resultString = "[" + resultString.substring(resultString.indexOf('{')).trim().replace(/\}\n\{/g, "},\n{") + "]";
-                //console.log('>>>>>> Trimmed Result...');
-                //console.log(resultString);
-                try {
-                    jsonResult = JSON.parse(resultString);
-                    //console.log('>>>>>> Parsed Result...');
-                    //console.dir(resultObject, {depth: null, colors: true});
-                    result(jsonResult);
-                } catch (e) {
-                    console.log(`An error occurred while executing JSON.parse() on the linter output for ${swaggerPath}:`);
-                    console.dir(resultString);
-                    console.dir(e, { depth: null, colors: true });
-                    result([]);
-                }
-            }
-        });
-    });
+    }
+    return [];
 };
 
 // Uploads the result file to Azure Blob Storage
@@ -117,13 +104,11 @@ function uploadToAzureStorage(json) {
 }
 
 // Run linter tool
-function runTools(swagger, beforeOrAfter) {
+async function runTools(swagger, beforeOrAfter) {
     console.log(`Processing "${swagger}":`);
-    return getLinterResult(swagger).then(function (linterErrors) {
-        console.log(linterErrors);
-        updateResult(swagger, linterErrors, beforeOrAfter);
-        return;
-    });
+    const linterErrors = await getLinterResult(swagger);
+    console.log(linterErrors);
+    updateResult(swagger, linterErrors, beforeOrAfter);
 };
 
 // Updates final result json to be written to the output file
@@ -135,7 +120,6 @@ function updateResult(spec, errors, beforeOrAfter) {
         finalResult['files'][spec][beforeOrAfter] = {};
     }
     finalResult['files'][spec][beforeOrAfter] = errors;
-    return;
 }
 
 //main function
@@ -151,22 +135,16 @@ function runScript() {
     createLogFile();
     console.log(`The results will be logged here: "${logFilepath}".`)
 
-    let afterPRPromiseFactories = _(configsToProcess).map(function (swagger) {
-        return function () { return runTools(swagger, 'after'); };
-    });
-
-    let beforePromiseFactories = _(configsToProcess).map(function (swagger) {
-        return function () { return runTools(swagger, 'before'); };
-    });
-
-    executePromisesSequentially(afterPRPromiseFactories).then(() => {
-        execSync(`${gitCheckoutCmd}`, { encoding: 'utf8' });
-        execSync(`${gitLogCmd}`, { encoding: 'utf8' });
-        executePromisesSequentially(beforePromiseFactories).then(() => {
-            writeContent(JSON.stringify(finalResult, null, 2));
-            return uploadToAzureStorage(finalResult);
-        })
-    });
+    for (const configFile of configsToProcess) {
+        await runTools(configFile, 'after');
+    }
+    execSync(`${gitCheckoutCmd}`, { encoding: 'utf8' });
+    execSync(`${gitLogCmd}`, { encoding: 'utf8' });
+    for (const configFile of configsToProcess) {
+        await runTools(configFile, 'before');
+    }
+    writeContent(JSON.stringify(finalResult, null, 2));
+    return uploadToAzureStorage(finalResult);
 }
 
 // magic starts here

@@ -21,7 +21,7 @@
         "tags": [
           "Servers"
         ],
-        "description": "Returns a list of servers.",
+        "description": "Gets a list of all servers in the subscription.",
         "operationId": "Servers_List",
         "parameters": [
           {
@@ -180,11 +180,11 @@
         },
         "x-ms-long-running-operation": true,
         "x-ms-examples": {
-          "Create server with minimal properties": {
-            "$ref": "./examples/ServerCreateMin.json"
-          },
           "Create server with all properties": {
             "$ref": "./examples/ServerCreateMax.json"
+          },
+          "Create server with minimal properties": {
+            "$ref": "./examples/ServerCreateMin.json"
           }
         }
       },
@@ -248,7 +248,7 @@
             "description": "The requested server resource state.",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/Server"
+              "$ref": "#/definitions/ServerUpdate"
             }
           },
           {
@@ -393,6 +393,9 @@
     },
     "TrackedResource": {
       "description": "ARM tracked top level resource.",
+      "required": [
+        "location"
+      ],
       "type": "object",
       "allOf": [
         {
@@ -419,6 +422,9 @@
     },
     "Server": {
       "description": "An Azure SQL Database server.",
+      "required": [
+        "location"
+      ],
       "type": "object",
       "allOf": [
         {
@@ -436,14 +442,6 @@
         },
         "kind": {
           "description": "Kind of sql server. This is metadata used for the Azure portal experience.",
-          "enum": [
-            "",
-            "v2.0",
-            "v12.0",
-            "user",
-            "system",
-            "datawarehouse"
-          ],
           "type": "string",
           "readOnly": true
         },
@@ -451,6 +449,24 @@
           "$ref": "#/definitions/ServerProperties",
           "description": "Resource properties.",
           "x-ms-client-flatten": true
+        }
+      }
+    },
+    "ServerUpdate": {
+      "description": "An update request for an Azure SQL Database server.",
+      "type": "object",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/ServerProperties",
+          "description": "Resource properties.",
+          "x-ms-client-flatten": true
+        },
+        "tags": {
+          "description": "Resource tags.",
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          }
         }
       }
     }

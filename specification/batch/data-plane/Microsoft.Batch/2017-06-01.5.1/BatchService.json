@@ -5594,6 +5594,104 @@
         }
       }
     },
+    "/jobs/{jobId}/taskcounts": {
+      "get": {
+        "tags": [
+          "Jobs"
+        ],
+        "operationId": "Job_GetTaskCounts",
+        "x-ms-examples": {
+          "Job get task counts": { "$ref": "./examples/JobGetTaskCounts.json" }
+        },
+        "summary": "Gets the task counts for the specified job.",
+        "description": "Task counts provide a count of the tasks by active, running or completed task state, and a count of tasks which succeeded or failed. Tasks in the preparing state are counted as running. If the validationStatus is unvalidated, then the Batch service has not been able to check state counts against the task states as reported in the List Tasks API. The validationStatus may be unvalidated if the job contains more than 200,000 tasks.",
+        "x-ms-request-id": "request-id",
+        "parameters": [
+          {
+            "name": "jobId",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The ID of the job."
+          },
+          {
+            "name": "timeout",
+            "in": "query",
+            "required": false,
+            "type": "integer",
+            "format": "int32",
+            "default": 30,
+            "description": "The maximum time that the server can spend processing the request, in seconds. The default is 30 seconds.",
+            "x-ms-parameter-grouping": {
+              "postfix": "Options"
+            }
+          },
+          {
+            "name": "client-request-id",
+            "in": "header",
+            "required": false,
+            "type": "string",
+            "format": "uuid",
+            "description": "The caller-generated request identity, in the form of a GUID with no decoration such as curly braces, e.g. 9C4D50EE-2D56-4CD3-8152-34347DC9F2B0.",
+            "x-ms-parameter-grouping": {
+              "postfix": "Options"
+            },
+            "x-ms-client-request-id": true
+          },
+          {
+            "name": "return-client-request-id",
+            "default": false,
+            "in": "header",
+            "required": false,
+            "type": "boolean",
+            "description": "Whether the server should return the client-request-id in the response.",
+            "x-ms-parameter-grouping": {
+              "postfix": "Options"
+            }
+          },
+          {
+            "name": "ocp-date",
+            "in": "header",
+            "required": false,
+            "type": "string",
+            "format": "date-time-rfc1123",
+            "description": "The time the request was issued. Client libraries typically set this to the current system clock time; set it explicitly if you are calling the REST API directly.",
+            "x-ms-parameter-grouping": {
+              "postfix": "Options"
+            }
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "headers": {
+              "client-request-id": {
+                "description": "The client-request-id provided by the client during the request. This will be returned only if the return-client-request-id parameter was set to true.",
+                "type": "string",
+                "format": "uuid"
+              },
+              "request-id": {
+                "description": "A unique identifier for the request that was made to the Batch service. If a request is consistently failing and you have verified that the request is properly formulated, you may use this value to report the error to Microsoft. In your report, include the value of this request ID, the approximate time that the request was made, the Batch account against which the request was made, and the region that account resides in.",
+                "type": "string",
+                "format": "uuid"
+              }
+            },
+            "description": "A response containing the task counts for the specified job.",
+            "schema": {
+              "$ref": "#/definitions/TaskCounts"
+            }
+          },
+          "default": {
+            "description": "The error from the Batch service.",
+            "schema": {
+              "$ref": "#/definitions/BatchError"
+            }
+          }
+        }
+      }
+    },
     "/pools": {
       "post": {
         "tags": [
@@ -12284,6 +12382,49 @@
         }
       },
       "title": "The result of listing the status of the Job Preparation and Job Release tasks for a job."
+    },
+    "TaskCounts": {
+      "properties": {
+        "active": {
+          "type": "integer",
+          "format": "int32",
+          "title": "The number of tasks in the active state."
+        },
+        "running": {
+          "type": "integer",
+          "format": "int32",
+          "title": "The number of tasks in the running or preparing state."
+        },
+        "completed": {
+          "type": "integer",
+          "format": "int32",
+          "title": "The number of tasks in the completed state."
+        },
+        "succeeded": {
+          "type": "integer",
+          "format": "int32",
+          "title": "The number of tasks which succeeded. A task succeeds if its result (found in the executionInfo property) is 'success'."
+        },
+        "failed": {
+          "type": "integer",
+          "format": "int32",
+          "title": "The number of tasks which failed. A task fails if its result (found in the executionInfo property) is 'failure'."
+        },
+        "validationStatus": {
+          "type": "string",
+          "title": "Whether the task counts have been validated. If the validationStatus is unvalidated, then the Batch service has not been able to check state counts against the task states as reported in the List Tasks API. The validationStatus may be unvalidated if the job contains more than 200,000 tasks.",
+          "enum": [
+            "validated",
+            "unvalidated"
+          ],
+          "x-ms-enum": {
+            "name": "ValidationStatus",
+            "modelAsString": false
+          }
+        }
+      },
+      "required": ["active", "running", "completed", "succeeded", "failed", "validationStatus"],
+      "title": "The task counts for a job."
     },
     "AutoScaleRunError": {
       "properties": {
