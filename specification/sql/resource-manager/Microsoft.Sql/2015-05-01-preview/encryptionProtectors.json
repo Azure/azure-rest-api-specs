@@ -21,8 +21,8 @@
         "tags": [
           "EncryptionProtectors"
         ],
-        "description": "Returns a list of the server encryption protectors",
-        "operationId": "Servers_ListEncryptionProtectors",
+        "description": "Gets a list of server encryption protectors",
+        "operationId": "EncryptionProtectors_ListByServer",
         "parameters": [
           {
             "$ref": "#/parameters/ResourceGroupParameter"
@@ -63,8 +63,8 @@
         "tags": [
           "EncryptionProtectors"
         ],
-        "description": "Returns the server encryption protector.",
-        "operationId": "Servers_GetEncryptionProtector",
+        "description": "Gets a server encryption protector.",
+        "operationId": "EncryptionProtectors_Get",
         "parameters": [
           {
             "$ref": "#/parameters/ResourceGroupParameter"
@@ -115,7 +115,7 @@
           "EncryptionProtectors"
         ],
         "description": "Updates an existing encryption protector.",
-        "operationId": "Servers_CreateOrUpdateEncryptionProtector",
+        "operationId": "EncryptionProtectors_CreateOrUpdate",
         "parameters": [
           {
             "$ref": "#/parameters/ResourceGroupParameter"
@@ -169,11 +169,11 @@
         },
         "x-ms-long-running-operation": true,
         "x-ms-examples": {
-          "Update the encryption protector to service managed": {
-            "$ref": "./examples/EncryptionProtectorCreateOrUpdateServiceManaged.json"
-          },
           "Update the encryption protector to key vault": {
             "$ref": "./examples/EncryptionProtectorCreateOrUpdateKeyVault.json"
+          },
+          "Update the encryption protector to service managed": {
+            "$ref": "./examples/EncryptionProtectorCreateOrUpdateServiceManaged.json"
           }
         }
       }
@@ -201,6 +201,9 @@
     },
     "EncryptionProtectorProperties": {
       "description": "Properties for an encryption protector execution.",
+      "required": [
+        "serverKeyType"
+      ],
       "type": "object",
       "properties": {
         "subregion": {
