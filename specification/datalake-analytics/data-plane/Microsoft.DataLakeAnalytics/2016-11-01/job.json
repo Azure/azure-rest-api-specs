@@ -303,7 +303,7 @@
             "in": "body",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/JobInformation"
+              "$ref": "#/definitions/BuildJobParameters"
             },
             "description": "The parameters to build a job."
           },
@@ -406,7 +406,7 @@
             "in": "body",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/JobInformation"
+              "$ref": "#/definitions/CreateJobParameters"
             },
             "description": "The parameters to submit a job."
           },
@@ -739,6 +739,7 @@
       "properties": {
         "resources": {
           "type": "array",
+          "readOnly": true,
           "items": {
             "$ref": "#/definitions/JobResource"
           },
@@ -746,14 +747,17 @@
         },
         "statistics": {
           "$ref": "#/definitions/JobStatistics",
+          "readOnly": true,
           "description": "the job specific statistics."
         },
         "debugData": {
           "$ref": "#/definitions/JobDataPath",
+          "readOnly": true,
           "description": "the job specific debug data locations."
         },
         "diagnostics": {
           "type": "array",
+          "readOnly": true,
           "items": {
             "$ref": "#/definitions/Diagnostics"
           },
@@ -806,7 +810,8 @@
         },
         "compileMode": {
           "type": "string",
-          "description": "Optionally enforces a specific compilation mode for the job during execution. If this is not specified during submission, the server will determine the optimal compilation mode.",
+          "readOnly": true,
+          "description": "the specific compilation mode for the job used during execution. If this is not specified during submission, the server will determine the optimal compilation mode.",
           "enum": [
             "Semantic",
             "Full",
@@ -818,7 +823,7 @@
           }
         }
       },
-      "description": "U-SQL job properties used when submitting and retrieving U-SQL jobs."
+      "description": "U-SQL job properties used when retrieving U-SQL jobs."
     },
     "HiveJobProperties": {
       "x-ms-discriminator-value": "Hive",
@@ -851,7 +856,7 @@
           "description": "the number of statements that have been run based on the script"
         }
       },
-      "description": "Hive job properties used when submitting and retrieving Hive jobs."
+      "description": "Hive job properties used when retrieving Hive jobs."
     },
     "JobProperties": {
       "discriminator": "type",
@@ -874,6 +879,52 @@
         }
       },
       "description": "The common Data Lake Analytics job properties."
+    },
+    "CreateUSqlJobProperties": {
+      "x-ms-discriminator-value": "USql",
+      "allOf": [
+        {
+          "$ref": "#/definitions/CreateJobProperties"
+        }
+      ],
+      "properties": {
+        "compileMode": {
+          "type": "string",
+          "description": "Optionally enforces a specific compilation mode for the job during execution. If this is not specified during submission, the server will determine the optimal compilation mode.",
+          "enum": [
+            "Semantic",
+            "Full",
+            "SingleBox"
+          ],
+          "x-ms-enum": {
+            "name": "CompileMode",
+            "modelAsString": false
+          }
+        }
+      },
+      "description": "U-SQL job properties used when submitting U-SQL jobs."
+    },
+    "CreateJobProperties": {
+      "discriminator": "type",
+      "required": [
+        "script",
+        "type"
+      ],
+      "properties": {
+        "runtimeVersion": {
+          "type": "string",
+          "description": "the runtime version of the Data Lake Analytics engine to use for the specific type of job being run."
+        },
+        "script": {
+          "type": "string",
+          "description": "the script to run"
+        },
+        "type": {
+          "type": "string",
+          "description": "the job type of the current job (i.e. U-SQL)."
+        }
+      },
+      "description": "The common Data Lake Analytics job properties for job submission."
     },
     "Diagnostics" : {
       "properties": {
@@ -1318,7 +1369,85 @@
       },
       "description": "Run info for a specific job pipeline."
     },
-    "JobInformation": {
+    "CreateJobParameters": {
+      "allOf": [
+        {
+          "$ref": "#/definitions/BaseJobParameters"
+        }
+      ],
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "the friendly name of the job to submit."
+        },
+        "degreeOfParallelism": {
+          "type": "integer",
+          "default": 1,
+          "format": "int32",
+          "description": "the degree of parallelism to use for this job. This must be greater than 0, if set to less than 0 it will default to 1."
+        },
+        "priority": {
+          "type": "integer",
+          "format": "int32",
+          "description": "the priority value to use for the current job. Lower numbers have a higher priority. By default, a job has a priority of 1000. This must be greater than 0."
+        },
+        "logFilePatterns": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },        
+          "description": "the list of log file name patterns to find in the logFolder. '*' is the only matching character allowed. Example format: jobExecution*.log or *mylog*.txt"
+        },
+        "related": {
+          "$ref": "#/definitions/JobRelationshipProperties",
+          "description": "the recurring job relationship information properties."
+        }
+      },
+      "required": [
+        "name"
+      ],
+      "description": "The parameters used to submit a new Data Lake Analytics job."
+    },
+    "BuildJobParameters": {
+      "allOf": [
+        {
+          "$ref": "#/definitions/BaseJobParameters"
+        }
+      ],
+        "properties": {
+        "name": {
+          "type": "string",
+          "description": "the friendly name of the job to build."
+        }
+      },
+      "description": "The parameters used to build a new Data Lake Analytics job."
+    },
+    "BaseJobParameters": {
+      "properties": {
+        "type": {
+          "type": "string",
+          "description": "the job type of the current job (Hive or USql).",
+          "enum": [
+            "USql",
+            "Hive"
+          ],
+          "x-ms-enum": {
+            "name": "JobType",
+            "modelAsString": false
+          }
+        },
+        "properties": {
+          "$ref": "#/definitions/CreateJobProperties",
+          "description": "the job specific properties."
+        }
+      },
+      "required": [
+        "type",
+        "properties"
+      ],
+      "description": "Data Lake Analytics Job Parameters base class for build and submit."
+    },
+    "JobInformationBasic": {
       "properties": {
         "jobId": {
           "type": "string",
@@ -1346,14 +1475,6 @@
           "type": "string",
           "readOnly": true,
           "description": "the user or account that submitted the job."
-        },
-        "errorMessage": {
-          "type": "array",
-          "readOnly": true,
-          "items": {
-            "$ref": "#/definitions/JobErrorDetails"
-          },
-          "description": "the error message details for the job, if the job failed."
         },
         "degreeOfParallelism": {
           "type": "integer",
@@ -1432,6 +1553,32 @@
           },        
           "description": "the list of log file name patterns to find in the logFolder. '*' is the only matching character allowed. Example format: jobExecution*.log or *mylog*.txt"
         },
+        "related": {
+          "$ref": "#/definitions/JobRelationshipProperties",
+          "description": "the recurring job relationship information properties."
+        }
+      },
+      "required": [
+        "name",
+        "type"
+      ],
+      "description": "The common Data Lake Analytics job information properties."
+    },
+    "JobInformation": {
+      "allOf": [
+        {
+          "$ref": "#/definitions/JobInformationBasic"
+        }
+      ],
+      "properties": {
+        "errorMessage": {
+          "type": "array",
+          "readOnly": true,
+          "items": {
+            "$ref": "#/definitions/JobErrorDetails"
+          },
+          "description": "the error message details for the job, if the job failed."
+        },
         "stateAuditRecords": {
           "type": "array",
           "readOnly": true,
@@ -1443,18 +1590,12 @@
         "properties": {
           "$ref": "#/definitions/JobProperties",
           "description": "the job specific properties."
-        },
-        "related": {
-          "$ref": "#/definitions/JobRelationshipProperties",
-          "description": "the recurring job relationship information properties."
         }
       },
       "required": [
-        "name",
-        "type",
         "properties"
       ],
-      "description": "The common Data Lake Analytics job information properties."
+      "description": "The extended Data Lake Analytics job information properties returned when retrieving a specific job."
     },
     "JobInfoListResult": {
       "properties": {
@@ -1462,7 +1603,7 @@
           "type": "array",
           "readOnly": true,
           "items": {
-            "$ref": "#/definitions/JobInformation"
+            "$ref": "#/definitions/JobInformationBasic"
           },
           "description": "the list of jobInfo items."
         },
