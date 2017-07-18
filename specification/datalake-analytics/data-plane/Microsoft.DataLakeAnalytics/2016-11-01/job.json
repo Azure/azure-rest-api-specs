@@ -382,6 +382,34 @@
       }
     },
     "/Jobs/{jobIdentity}": {
+      "get": {
+        "tags": [
+          "Job"
+        ],
+        "operationId": "Job_Get",
+        "description": "Gets the job information for the specified job ID.",
+        "parameters": [
+          {
+            "name": "jobIdentity",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "format": "uuid",
+            "description": "Job identifier. Uniquely identifies the job across all jobs submitted to the service."
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successfully retrieved details of the specified job.",
+            "schema": {
+              "$ref": "#/definitions/JobInformation"
+            }
+          }
+        }
+      },
       "put": {
         "tags": [
           "Job"
@@ -453,34 +481,6 @@
         "responses": {
           "200": {
             "description": "Successfully updated the details of the specified job.",
-            "schema": {
-              "$ref": "#/definitions/JobInformation"
-            }
-          }
-        }
-      },
-      "get": {
-        "tags": [
-          "Job"
-        ],
-        "operationId": "Job_Get",
-        "description": "Gets the job information for the specified job ID.",
-        "parameters": [
-          {
-            "name": "jobIdentity",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "format": "uuid",
-            "description": "Job identifier. Uniquely identifies the job across all jobs submitted to the service."
-          },
-          {
-            "$ref": "#/parameters/ApiVersionParameter"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Successfully retrieved details of the specified job.",
             "schema": {
               "$ref": "#/definitions/JobInformation"
             }
