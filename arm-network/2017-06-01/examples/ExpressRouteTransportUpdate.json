@@ -1,0 +1,51 @@
+{
+	"parameters": {
+		"expressRouteTransportName":"transportCktAB",
+		"resourceGroupName":"rg1",
+		"api-version":"2017-06-01",
+		"subscriptionId":"subid",
+		"expressRouteTransportParameters":{
+			"location": "West US",
+			"tags":{
+				"key1":"value1"
+			},
+			"properties": {
+				"circuits": [
+					"/subscriptions/CustomerSubscriptionUS/resourceGroups/ExpressRouteResourceGroupUS/providers/Microsoft.Network/expressRouteCircuits/ExpressRouteARMCircuitA",
+					"/subscriptions/CustomerSubscriptionAus/resourceGroups/ExpressRouteResourceGroupAus/providers/Microsoft.Network/expressRouteCircuits/ExpressRouteARMCircuitB"
+				],
+				"authorizations": [
+					"abcdefgh^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^",
+					"^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^"
+				],
+				"Subnet":"10.0.0.0/24"
+			}
+		}
+	},
+	"responses":{
+		"200":{
+			"body":{
+					"id": "/subscriptions/subid/resourceGroups/rg1/providers/Microsofot.Network/expressRouteTransport/transportCktAB",
+					"etag": "w/\\00000000-0000-0000-0000-000000000000\\",
+					"location": "West US",
+					"name": "transportCktAB",
+					"type": "Microsofot.Network/expressRouteTransport",
+					"tags": {
+						"key1": "value1"
+					},
+					"properties": {
+						"circuits": [
+							"/subscriptions/CustomerSubscriptionUS/resourceGroups/ExpressRouteResourceGroupUS/providers/Microsoft.Network/expressRouteCircuits/ExpressRouteARMCircuitA",
+							"/subscriptions/CustomerSubscriptionAus/resourceGroups/ExpressRouteResourceGroupAus/providers/Microsoft.Network/expressRouteCircuits/ExpressRouteARMCircuitB"
+						],
+						"authorizations": [
+							"abcdefgh^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^",
+							"^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^"
+						],
+						"Subnet":"10.0.0.0/24",
+						"connectionStatus":"Connected"
+					}
+			}
+		}
+	}
+}
