@@ -72,7 +72,7 @@ Please also specify `--csharp-sdks-folder=<path to "SDKs" directory of your azur
 csharp:
   # last generated with AutoRest.0.17.3
   azure-arm: true
-  license-header: MICROSOFT_MIT
+  license-header: MICROSOFT_MIT_NO_VERSION
   namespace: Microsoft.Azure.Management.Redis
   output-folder: $(csharp-sdks-folder)/RedisCache/Management.Redis/Generated
   clear-output-folder: true
