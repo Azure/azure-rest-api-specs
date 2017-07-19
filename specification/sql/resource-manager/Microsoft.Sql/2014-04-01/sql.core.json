@@ -1135,6 +1135,9 @@
         ],
         "operationId": "TransparentDataEncryptionConfigurations_Get",
         "description": "Gets a database's transparent data encryption configuration.",
+        "x-ms-examples": {
+          "Get a database's transparent data encryption configurations": { "$ref": "./examples/DatabaseTransparentDataEncryptionGet.json" }
+        },
         "parameters": [
           {
             "$ref": "#/parameters/ApiVersionParameter"
@@ -2008,6 +2011,11 @@
     },
     "TransparentDataEncryption": {
       "properties": {
+        "location": {
+          "type":"string",
+          "readOnly": true,
+          "description":"Resource location."
+        },
         "properties": {
           "x-ms-client-flatten": true,
           "$ref": "#/definitions/TransparentDataEncryptionProperties",
