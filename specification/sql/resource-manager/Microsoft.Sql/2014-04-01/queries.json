@@ -21,10 +21,10 @@
         "tags": [
           "Queries"
         ],
-        "operationId": "TopQueries_ListByDatabase",
-        "description": "Gets top queries by database.",
+        "operationId": "Queries_ListByDatabase",
+        "description": "Gets a list of top queries by database.",
         "x-ms-examples":{
-          "": { "$ref": "./examples/TopQueriesList.json" }
+          "List top queries": { "$ref": "./examples/TopQueriesList.json" }
         },
         "parameters": [
           {
@@ -41,6 +41,60 @@
           },
           {
             "$ref": "#/parameters/DatabaseNameParameter"
+          },
+          {
+            "name": "$filter",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "description": "An OData filter expression that describes the query to use to select top queries."
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/TopQueriesListResult"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": null
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/servers/{serverName}/databases/{databaseName}/topQueries{queryId}/statistics": {
+      "get": {
+        "tags": [
+          "Queries"
+        ],
+        "operationId": "Queries_Get",
+        "description": "Gets a query.",
+        "x-ms-examples":{
+          "Get a query": { "$ref": "./examples/QueriesGet.json" }
+        },
+        "parameters": [
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupParameter"
+          },
+          {
+            "$ref": "#/parameters/ServerNameParameter"
+          },
+          {
+            "$ref": "#/parameters/DatabaseNameParameter"
+          },
+          {
+            "name": "$filter",
+            "in": "query",
+            "required": true,
+            "type": "string",
+            "description": "An OData filter expression that describes the query to use to select top queries."
           }
         ],
         "responses": {
@@ -61,13 +115,34 @@
     "TopQueries": {
       "properties": {
         "aggregationFunction": {
-          "description": "TODO (ISO8601 format)",
+          "description": "The function that is used to aggregate each query's metrics.",
           "type": "string",
+          "enum":[
+            "min",
+            "max",
+            "avg",
+            "sum"
+          ],
+          "x-ms-enum": {
+            "name": "QueryAggregationFunction",
+            "modelAsString": false
+          },
           "readOnly": true
         },
         "executionType": {
-          "description": "TODO (ISO8601 format)",
+          "description": "The execution type that is used to filter the query instances that are returned.",
           "type": "string",
+          "enum": [
+            "any",
+            "regular",
+            "irregular",
+            "aborted",
+            "exception"
+          ],
+          "x-ms-enum":{
+            "name": "QueryExecutionType",
+            "modelAsString": false
+          },
           "readOnly": true
         },
         "intervalType": {
@@ -76,26 +151,37 @@
           "readOnly": true
         },
         "numberOfTopQueries": {
-          "description": "TODO",
+          "description": "The number of requested queries.",
           "type": "number",
           "format": "int32",
           "readOnly": true
         },
         "observationStartTime": {
-          "description": "TODO (ISO8601 format)",
+          "description": "The start time for queries that are returned (ISO8601 format)",
           "type": "string",
           "format": "date-time",
           "readOnly": true
         },
         "observationEndTime": {
-          "description": "TODO (ISO8601 format)",
+          "description": "The end time for queries that are returned (ISO8601 format)",
           "type": "string",
           "format": "date-time",
           "readOnly": true
         },
         "observedMetric": {
-          "description": "TODO (ISO8601 format)",
+          "description": "The type of metric to use for ordering the top metrics.",
           "type": "string",
+          "enum":[
+            "cpu",
+            "io",
+            "logio",
+            "duration",
+            "executionCount"
+          ],
+          "x-ms-enum": {
+            "name": "QueryObservedMetricType",
+            "modelAsString": false
+          },
           "readOnly": true
         },
         "queries": {
