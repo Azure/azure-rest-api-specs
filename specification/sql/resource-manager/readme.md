@@ -1,5 +1,5 @@
 # Sql
-    
+
 > see https://aka.ms/autorest
 
 This is the AutoRest configuration file for Sql.
@@ -7,7 +7,7 @@ This is the AutoRest configuration file for Sql.
 
 
 ---
-## Getting Started 
+## Getting Started
 To build the SDK for Sql, simply [Install AutoRest](https://aka.ms/autorest/install) and in this folder, run:
 
 > `autorest`
@@ -21,7 +21,7 @@ To see additional help and options, run:
 
 
 
-### Basic Information 
+### Basic Information
 These are the global settings for the Sql API.
 
 ``` yaml
@@ -63,7 +63,7 @@ input-file:
 - Microsoft.Sql/2015-05-01-preview/servers.json
 - Microsoft.Sql/2015-05-01-preview/virtualNetworkRules.json
 ```
- 
+
 ### Tag: package-2014-04
 
 These settings apply only when `--tag=package-2014-04` is specified on the command line.
@@ -82,7 +82,7 @@ input-file:
 # Code Generation
 
 
-## C# 
+## C#
 
 These settings apply only when `--csharp` is specified on the command line.
 Please also specify `--csharp-sdks-folder=<path to "SDKs" directory of your azure-sdk-for-net clone>`.
@@ -108,4 +108,16 @@ python:
   license-header: MICROSOFT_MIT_NO_VERSION
   payload-flattening-threshold: 2
   namespace: azure.mgmt.sql
+```
+
+# Validation
+
+``` yaml
+directive:
+  - suppress: TrackedResourceListByImmediateParent
+    reason: This warning gives many false positives for proxy resources.
+  - suppress: GuidUsage
+    reason: This warning gives many positives for existing APIs that cannot be changed.
+  - suppress: EnumInsteadOfBoolean
+    reason: This warning gives many positives for existing APIs that cannot be changed.
 ```

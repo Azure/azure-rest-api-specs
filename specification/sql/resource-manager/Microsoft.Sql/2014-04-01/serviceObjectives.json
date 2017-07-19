@@ -96,20 +96,34 @@
     }
   },
   "definitions": {
-    "SubResource": {
-      "description": "Subresource properties",
-      "properties": {
-        "name": {
-          "readOnly": true,
-          "type": "string",
-          "description": "Resource name"
+    "Resource":{
+      "description":"ARM resource.",
+      "properties":{
+        "id":{
+          "readOnly":true,
+          "type":"string",
+          "description":"Resource ID."
         },
-        "id": {
-          "readOnly": true,
-          "type": "string",
-          "description": "The resource ID."
+        "name":{
+          "readOnly":true,
+          "type":"string",
+          "description":"Resource name."
+        },
+        "type":{
+          "readOnly":true,
+          "type":"string",
+          "description":"Resource type."
         }
-      }
+      },
+      "x-ms-azure-resource": true
+    },
+    "ProxyResource":{
+      "description":"ARM proxy resource.",
+      "allOf":[
+        {
+          "$ref":"#/definitions/Resource"
+        }
+      ]
     },
     "ServiceObjective": {
       "properties": {
@@ -121,7 +135,7 @@
       },
       "allOf": [
         {
-          "$ref": "#/definitions/SubResource"
+          "$ref": "#/definitions/ProxyResource"
         }
       ],
       "description": "Represents a database service objective."
