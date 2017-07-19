@@ -62,6 +62,10 @@ input-file:
 - Microsoft.Sql/2015-05-01-preview/serverKeys.json
 - Microsoft.Sql/2015-05-01-preview/servers.json
 - Microsoft.Sql/2015-05-01-preview/virtualNetworkRules.json
+
+# Needed when there is more than one input file
+override-info:
+  title: SqlManagementClient
 ```
  
 ### Tag: package-2014-04
@@ -75,6 +79,10 @@ input-file:
 - Microsoft.Sql/2014-04-01/replicationLinks.json
 - Microsoft.Sql/2014-04-01/sql.core.json
 - Microsoft.Sql/2014-04-01/databaseSecurityAlertPolicies.json
+
+# Needed when there is more than one input file
+override-info:
+  title: SqlManagementClient
 ```
 
 
