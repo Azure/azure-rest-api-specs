@@ -41,13 +41,6 @@
           },
           {
             "$ref": "#/parameters/DatabaseNameParameter"
-          },
-          {
-            "name": "$filter",
-            "in": "query",
-            "required": false,
-            "type": "string",
-            "description": "An OData filter expression that describes the query to use to select top queries."
           }
         ],
         "responses": {
@@ -63,7 +56,7 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/servers/{serverName}/databases/{databaseName}/topQueries{queryId}/statistics": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/topQueries/{queryId}/statistics": {
       "get": {
         "tags": [
           "Queries"
@@ -90,18 +83,17 @@
             "$ref": "#/parameters/DatabaseNameParameter"
           },
           {
-            "name": "$filter",
-            "in": "query",
-            "required": true,
-            "type": "string",
-            "description": "An OData filter expression that describes the query to use to select top queries."
+            "name": "queryId",
+            "description": "The id of the query",
+            "required": "true",
+            "in": "path"
           }
         ],
         "responses": {
           "200": {
             "description": "OK",
             "schema": {
-              "$ref": "#/definitions/TopQueriesListResult"
+              "$ref": "#/definitions/QueryListResult"
             }
           }
         },
@@ -285,6 +277,19 @@
       },
       "required": ["value"],
       "description": "Represents the response to a get top queries request."
+    },
+    "QueryListResult": {
+      "properties": {
+        "value": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Query"
+          },
+          "description": "The query."
+        }
+      },
+      "required": ["value"],
+      "description": "Represents the response to a get query request."
     }
   },
   "parameters": {
