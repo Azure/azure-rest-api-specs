@@ -254,5 +254,5 @@ namespace: azure.mgmt.network.v2016_09_01
 These settings apply only when `--tag=package-2015-06split --python` is specified on the command line.
 
 ``` yaml $(tag) == 'package-2015-06split' && $(python)
-namespace: azure.mgmt.network.v2015_06_01
+namespace: azure.mgmt.network.v2015_06_15
 ```
