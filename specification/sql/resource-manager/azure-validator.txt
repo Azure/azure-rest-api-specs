@@ -1,18 +1,13 @@
 ﻿AutoRest Code Generator
 (c) 2017 Microsoft Corporation. https://aka.ms/autorest
-autorest : ERROR (XmsExamplesRequired/R2022/SDKViolation): Please provide x-ms-examples describing minimum/maximum property set for response/request payloads for operations. Operation: 
-'Databases_ListRestorePoints'
+autorest : WARNING (TrackedResourceListByResourceGroup/R3027/RPCViolation): The tracked resource, 'Database', must have a list by resource group operation.(This rule does not apply for tenant 
+level resources.)
 At C:\git\azure-rest-api-specs\specification\sql\resource-manager\validate.ps1:1 char:1
 + autorest --azure-validator 2>&1 | Out-File .\azure-validator.txt -Enc ...
 + ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-    + CategoryInfo          : NotSpecified: (ERROR (XmsExamp...tRestorePoints':String) [], RemoteException
+    + CategoryInfo          : NotSpecified: (WARNING (Tracke...vel resources.):String) [], RemoteException
     + FullyQualifiedErrorId : NativeCommandError
  
-    - file:///C:/git/azure-rest-api-specs/specification/sql/resource-manager/Microsoft.Sql/2014-04-01/backups.json:20:12 
-($.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/servers/{serverName}/databases/{databaseName}/restorePoints"].get)
-
-WARNING (TrackedResourceListByResourceGroup/R3027/RPCViolation): The tracked resource, 'Database', must have a list by resource group operation.(This rule does not apply for tenant level 
-resources.)
     - file:///C:/git/azure-rest-api-specs/specification/sql/resource-manager/Microsoft.Sql/2014-04-01/sql.core.json:2251:4 ($.definitions.Database)
 
 WARNING (TrackedResourceListByResourceGroup/R3027/RPCViolation): The tracked resource, 'ElasticPool', must have a list by resource group operation.(This rule does not apply for tenant level 
