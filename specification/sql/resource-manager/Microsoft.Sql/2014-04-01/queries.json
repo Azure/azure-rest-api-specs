@@ -21,10 +21,10 @@
         "tags": [
           "Queries"
         ],
-        "operationId": "Queries_ListByDatabase",
-        "description": "Returns database service objectives.",
+        "operationId": "TopQueries_ListByDatabase",
+        "description": "Gets top queries by database.",
         "x-ms-examples":{
-          "List service objectives": { "$ref": "./examples/ServiceObjectiveList.json" }
+          "": { "$ref": "./examples/TopQueriesList.json" }
         },
         "parameters": [
           {
@@ -47,7 +47,7 @@
           "200": {
             "description": "OK",
             "schema": {
-              "$ref": "#/definitions/QueryListResult"
+              "$ref": "#/definitions/TopQueriesListResult"
             }
           }
         },
@@ -61,35 +61,130 @@
     "TopQueries": {
       "properties": {
         "aggregationFunction": {
-
+          "description": "TODO (ISO8601 format)",
+          "type": "string",
+          "readOnly": true
         },
         "executionType": {
-
+          "description": "TODO (ISO8601 format)",
+          "type": "string",
+          "readOnly": true
         },
         "intervalType": {
-
+          "description": "The duration of the interval (ISO8601 duration format).",
+          "type": "string",
+          "readOnly": true
         },
         "numberOfTopQueries": {
-
+          "description": "TODO",
+          "type": "number",
+          "format": "int32",
+          "readOnly": true
         },
         "observationStartTime": {
-
+          "description": "TODO (ISO8601 format)",
+          "type": "string",
+          "format": "date-time",
+          "readOnly": true
         },
         "observationEndTime": {
-
+          "description": "TODO (ISO8601 format)",
+          "type": "string",
+          "format": "date-time",
+          "readOnly": true
         },
         "observedMetric": {
-
+          "description": "TODO (ISO8601 format)",
+          "type": "string",
+          "readOnly": true
         },
         "queries": {
-
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Query"
+          },
+          "description": "The list of queries.",
+          "readOnly": true
         }
       },
-      "allOf": [
-        {
-          "$ref": "#/definitions/SubResource"
+      "description": "A database query."
+    },
+    "Query": {
+      "properties": {
+        "queryId": {
+          "description": "The id of the query",
+          "type": "string",
+          "readOnly": true
+        },
+        "intervals": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/QueryInterval"
+          },
+          "description": "The list of query intervals.",
+          "readOnly": true
         }
-      ],
+      },
+      "description": "A database query."
+    },
+    "QueryInterval": {
+      "properties": {
+        "intervalStartTime": {
+          "description": "The start time of the measurement interval (ISO8601 format).",
+          "type": "string",
+          "format": "date-time",
+          "readOnly": true
+        },
+        "executionCount": {
+          "description": "The number of times the query was executed during this interval.",
+          "type": "number",
+          "format": "int32",
+          "readOnly": true
+        },
+        "metrics": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/QueryMetric"
+          },
+          "description": "The list of query metrics during this interval.",
+          "readOnly": true
+        }
+      },
+      "description": "A database query."
+    },
+    "QueryMetric": {
+      "properties": {
+        "name": {
+          "description": "The name of the metric",
+          "type": "string",
+          "readOnly": true
+        },
+        "displayName": {
+          "description": "The name of the metric for display in user interface",
+          "type": "string",
+          "readOnly": true
+        },
+        "unit": {
+          "description": "The unit of measurement",
+          "type": "string",
+          "enum": [
+            "percentage",
+            "KB",
+            "microseconds"
+          ],
+          "x-ms-enum": {
+            "name": "QueryMetricUnit",
+            "modelAsString": false
+          },
+          "readOnly": true
+        },
+        "value": {
+          "description": "The measured value",
+          "type": "number",
+          "format": "double",
+          "readOnly": true
+        }
+      },
       "description": "A database query."
     },
     "TopQueriesListResult": {
