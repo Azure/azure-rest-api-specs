@@ -91,16 +91,17 @@ async function getLinterResult(swaggerPath) {
 };
 
 // Uploads the result file to Azure Blob Storage
-function uploadToAzureStorage(json) {
-    console.log(logFilepath);
-    request({
+async function uploadToAzureStorage(json) {
+    console.log(`Uploading data...`);
+
+    const {error, response, body } = await new Promise(res => request({
         url: "http://az-bot.azurewebsites.net/process",
         method: "POST",
         json: true,
         body: json
-    }, function (error, response, body) {
-        console.log(body);
-    });
+    }, (error, response, body) => res({ error: error, response: response, body: body })));
+
+    console.log(body);
 }
 
 // Run linter tool
@@ -108,11 +109,11 @@ async function runTools(swagger, beforeOrAfter) {
     console.log(`Processing "${swagger}":`);
     const linterErrors = await getLinterResult(swagger);
     console.log(linterErrors);
-    updateResult(swagger, linterErrors, beforeOrAfter);
+    await updateResult(swagger, linterErrors, beforeOrAfter);
 };
 
 // Updates final result json to be written to the output file
-function updateResult(spec, errors, beforeOrAfter) {
+async function updateResult(spec, errors, beforeOrAfter) {
     if (!finalResult['files'][spec]) {
         finalResult['files'][spec] = {};
     }
@@ -123,7 +124,7 @@ function updateResult(spec, errors, beforeOrAfter) {
 }
 
 //main function
-function runScript() {
+async function runScript() {
     // Useful when debugging a test for a particular swagger. 
     // Just update the regex. That will return an array of filtered items.
     // configsToProcess = ['/Users/vishrut/git-repos/azure-rest-api-specs/specification/storage/resource-manager/readme.md',
@@ -144,8 +145,12 @@ function runScript() {
         await runTools(configFile, 'before');
     }
     writeContent(JSON.stringify(finalResult, null, 2));
-    return uploadToAzureStorage(finalResult);
+    await uploadToAzureStorage(finalResult);
 }
 
 // magic starts here
-runScript();
+runScript().then(success => {
+    process.exit(0);
+}).catch(err => {
+    process.exit(1);
+})

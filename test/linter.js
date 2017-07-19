@@ -10,19 +10,16 @@ describe('AutoRest Linter validation:', function () {
   let configsToProcess = utils.getConfigFilesChangedInPR();
   // Useful when debugging a test for a particular swagger. 
   // Just update the regex. That will return an array of filtered items.
-  // configsToProcess = configsToProcess.filter(function(item) {
-  //   return (item.match(/.Microsoft.ContainerRegistry.*2017-03-01.*/ig) !== null);
-  // });
+  // configsToProcess = ['specification/sql/resource-manager/readme.md'];
   for (const config of configsToProcess) {
     it(config + ' should honor linter validation rules.', async function () {
       var cmd = `autorest --validation --azure-validator ${config} --message-format=json`;
       console.log(`Executing: ${cmd}`);
-      let result;
+
       try {
-        result = execSync(cmd, { encoding: 'utf8' });
+        let result = execSync(cmd, { encoding: 'utf8', maxBuffer: 1024 * 1024 * 64 });
       } catch (err) {
-        console.dir(err, {depth: null, colors: true});
-        throw err;
+        throw new Error('Linter validation contains error(s)');
       }
     });
   }
