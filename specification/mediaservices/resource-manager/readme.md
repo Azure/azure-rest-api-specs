@@ -53,7 +53,7 @@ csharp:
   # last generated from commit 3586e2989d502434c4f607dd38d40e46aabede5c
   azure-arm: true
   payload-flattening-threshold: 2
-  license-header: MICROSOFT_MIT
+  license-header: MICROSOFT_MIT_NO_VERSION
   namespace: Microsoft.Azure.Management.Media
   output-folder: $(csharp-sdks-folder)/Media/Management.Media/Generated
   clear-output-folder: true

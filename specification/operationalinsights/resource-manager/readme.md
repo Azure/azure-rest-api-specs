@@ -66,7 +66,7 @@ csharp:
   azure-arm: true
   namespace: Microsoft.Azure.Management.OperationalInsights
   payload-flattening-threshold: 1
-  license-header: MICROSOFT_MIT
+  license-header: MICROSOFT_MIT_NO_VERSION
   output-folder: $(csharp-sdks-folder)/OperationalInsights/Management.OperationalInsights/Generated
   clear-output-folder: true
 ```
