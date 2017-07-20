@@ -77,11 +77,7 @@ Please also specify `--csharp-sdks-folder=<path to "SDKs" directory of your azur
 csharp:
   azure-arm: true
   payload-flattening-threshold: 1
-  license-header: MICROSOFT_MIT
-```
-
-```yaml $(csharp)
-csharp:
+  license-header: MICROSOFT_MIT_NO_VERSION
   clear-output-folder: true
 batch:
   - package-webservices: true
