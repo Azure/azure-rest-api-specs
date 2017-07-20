@@ -76,6 +76,9 @@
             "description": "Delete successful."
           }
         },
+        "x-ms-examples": {
+          "Delete load balancer": { "$ref": "./examples/LoadBalancerDelete.json" }
+        },
         "x-ms-long-running-operation": true
       },
       "get": {
@@ -120,6 +123,9 @@
               "$ref": "#/definitions/LoadBalancer"
             }
           }
+        },
+        "x-ms-examples": {
+          "Get load balancer": { "$ref": "./examples/LoadBalancerGet.json" }
         }
       },
       "put": {
@@ -173,6 +179,9 @@
             }
           }
         },
+        "x-ms-examples": {
+          "Create load balancer": { "$ref": "./examples/LoadBalancerCreate.json" }
+        },
         "x-ms-long-running-operation": true
       }
     },
@@ -198,6 +207,9 @@
               "$ref": "#/definitions/LoadBalancerListResult"
             }
           }
+        },
+        "x-ms-examples": {
+          "List all load balancers": { "$ref": "./examples/LoadBalancerListAll.json" }
         },
         "x-ms-pageable": {
           "nextLinkName": "nextLink"
@@ -233,6 +245,9 @@
               "$ref": "#/definitions/LoadBalancerListResult"
             }
           }
+        },
+        "x-ms-examples": {
+          "List load balancers in resource group": { "$ref": "./examples/LoadBalancerList.json" }
         },
         "x-ms-pageable": {
           "nextLinkName": "nextLink"
@@ -525,7 +540,8 @@
       "properties": {
         "properties": {
           "x-ms-client-flatten": true,
-          "$ref": "#/definitions/FrontendIPConfigurationPropertiesFormat"
+          "$ref": "#/definitions/FrontendIPConfigurationPropertiesFormat",
+          "description": "Properties of the load balancer probe."
         },
         "name": {
           "type": "string",
@@ -577,7 +593,8 @@
       "properties": {
         "properties": {
           "x-ms-client-flatten": true,
-          "$ref": "#/definitions/BackendAddressPoolPropertiesFormat"
+          "$ref": "#/definitions/BackendAddressPoolPropertiesFormat",
+          "description": "Properties of load balancer backend address pool."
         },
         "name": {
           "type": "string",
@@ -668,7 +685,8 @@
       "properties": {
         "properties": {
           "x-ms-client-flatten": true,
-          "$ref": "#/definitions/LoadBalancingRulePropertiesFormat"
+          "$ref": "#/definitions/LoadBalancingRulePropertiesFormat",
+          "description": "Properties of load balancer load balancing rule."
         },
         "name": {
           "type": "string",
@@ -684,7 +702,7 @@
           "$ref": "./network.json#/definitions/SubResource"
         }
       ],
-      "description": "A loag balancing rule for a load balancer."
+      "description": "A load balancing rule for a load balancer."
     },
     "ProbePropertiesFormat": {
       "properties": {
@@ -735,13 +753,15 @@
       "required": [
         "protocol",
         "port"
-      ]
+      ],
+      "description": "Load balancer probe resource."
     },
     "Probe": {
       "properties": {
         "properties": {
           "x-ms-client-flatten": true,
-          "$ref": "#/definitions/ProbePropertiesFormat"
+          "$ref": "#/definitions/ProbePropertiesFormat",
+          "description": "Properties of load balancer probe."
         },
         "name": {
           "type": "string",
@@ -768,7 +788,7 @@
         "backendIPConfiguration": {
           "readOnly": true,
           "$ref": "./networkInterface.json#/definitions/NetworkInterfaceIPConfiguration",
-          "description": "A reference to a private IP address defined on a network interface of a VM. Traffic sent to the frontend port of each of the frontend IP configurations is forwarded to the backed IP."
+          "description": "A reference to a private IP address defined on a network interface of a VM. Traffic sent to the frontend port of each of the frontend IP configurations is forwarded to the backend IP."
         },
         "protocol": {
           "type": "string",
@@ -812,7 +832,8 @@
       "properties": {
         "properties": {
           "x-ms-client-flatten": true,
-          "$ref": "#/definitions/InboundNatRulePropertiesFormat"
+          "$ref": "#/definitions/InboundNatRulePropertiesFormat",
+          "description": "Properties of load balancer inbound nat rule."
         },
         "name": {
           "type": "string",
@@ -880,7 +901,8 @@
       "properties": {
         "properties": {
           "x-ms-client-flatten": true,
-          "$ref": "#/definitions/InboundNatPoolPropertiesFormat"
+          "$ref": "#/definitions/InboundNatPoolPropertiesFormat",
+          "description": "Properties of load balancer inbound nat pool."
         },
         "name": {
           "type": "string",
@@ -930,7 +952,8 @@
       "properties": {
         "properties": {
           "x-ms-client-flatten": true,
-          "$ref": "#/definitions/OutboundNatRulePropertiesFormat"
+          "$ref": "#/definitions/OutboundNatRulePropertiesFormat",
+          "description": "Properties of load balancer outbound nat rule."
         },
         "name": {
           "type": "string",
@@ -1014,7 +1037,8 @@
       "properties": {
         "properties": {
           "x-ms-client-flatten": true,
-          "$ref": "#/definitions/LoadBalancerPropertiesFormat"
+          "$ref": "#/definitions/LoadBalancerPropertiesFormat",
+          "description": "Properties of load balancer."
         },
         "etag": {
           "type": "string",
