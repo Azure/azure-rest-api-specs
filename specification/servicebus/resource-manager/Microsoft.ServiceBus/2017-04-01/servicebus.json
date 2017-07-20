@@ -2094,6 +2094,9 @@
           "Regions"
         ],
         "operationId": "Sku_RegionList",
+		"x-ms-examples": {
+          "RulesCreateOrUpdate": { "$ref": "./examples/SkuRegions/Skuregions.json" }
+        },
         "description": "Gets the available Regions for a given sku",
         "parameters": [
           {
@@ -2131,6 +2134,9 @@
           "PremiumMessagingRegions"
         ],
         "operationId": "PremiumMessagingRegions_List",
+		"x-ms-examples": {
+          "RulesCreateOrUpdate": { "$ref": "./examples/SkuRegions/PremiumMessagingRegions.json" }
+        },
         "description": "Gets the available premium messaging regions for servicebus ",
         "parameters": [
           {
@@ -2165,6 +2171,9 @@
           "EventHubs"
         ],
         "operationId": "EventHubs_ListByNamespace",
+		"x-ms-examples": {
+          "RulesCreateOrUpdate": { "$ref": "./examples/SkuRegions/Eventhubs.json" }
+        },
         "description": "Gets all the Event Hubs in a service bus Namespace.",
         "parameters": [
           {
@@ -3230,7 +3239,7 @@
       },
       "allOf": [
         {
-          "$ref": "#/definitions/TrackedResource"
+          "$ref": "#/definitions/RegionResource"
         }
       ],
       "description": "Premium Messaging Region"
@@ -3406,7 +3415,40 @@
         }
       },
       "description": "Capture storage details for capture description"
-    }
+    },
+	"RegionResource": {
+      "properties": {
+        "location": {
+          "type": "string",
+		  "readOnly": true,
+          "description": "The Geo-location where the resource live"
+        },
+        "tags": {
+          "type": "object",
+		  "readOnly": true,
+          "additionalProperties": {
+            "type": "string"
+          },
+          "description": "Resource tags"
+        },
+		"id": {
+          "type": "string",
+          "readOnly": true,
+          "description": "Resource Id"
+        },
+        "name": {
+          "type": "string",
+          "readOnly": true,
+          "description": "Resource name"
+        },
+        "type": {
+          "type": "string",
+          "readOnly": true,
+          "description": "Resource type"
+        }
+      }
+      "description": "The Resource definition."
+    },
   },
   "parameters": {
     "SubscriptionIdParameter": {
