@@ -3225,17 +3225,22 @@
       "description": "Represents set of actions written in SQL language-based syntax that is performed against a ServiceBus.Messaging.BrokeredMessage "
     },
     "PremiumMessagingRegions": {
-      "properties": {
-        "code": {
-          "readOnly": true,
-          "type": "string",
-          "description": "Region code"
-        },
-        "fullName": {
-          "readOnly": true,
-          "type": "string",
-          "description": "Full name of the region"
-        }
+      "properties": {	  
+        "properties": {
+		"x-ms-client-flatten": true,
+			"properties": {
+				"code": {
+				  "readOnly": true,
+				  "type": "string",
+				  "description": "Region code"
+				},
+				"fullName": {
+				  "readOnly": true,
+				  "type": "string",
+				  "description": "Full name of the region"
+				}
+			}
+		}
       },
       "allOf": [
         {
@@ -3446,9 +3451,9 @@
           "readOnly": true,
           "description": "Resource type"
         }
-      }
+      },
       "description": "The Resource definition."
-    },
+    }
   },
   "parameters": {
     "SubscriptionIdParameter": {
