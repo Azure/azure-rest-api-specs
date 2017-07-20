@@ -198,6 +198,7 @@ batch:
       - ../specification/network/resource-manager/Microsoft.Network/2017-03-01/usage.json
       - ../specification/network/resource-manager/Microsoft.Network/2017-03-01/virtualNetwork.json
       - ../specification/network/resource-manager/Microsoft.Network/2017-03-01/virtualNetworkGateway.json
+      - ../specification/network/resource-manager/Microsoft.Network/2017-06-01/expressRouteConnector.json
       - ../specification/notificationhubs/resource-manager/Microsoft.NotificationHubs/2014-09-01/notificationhubs.json
       - ../specification/notificationhubs/resource-manager/Microsoft.NotificationHubs/2016-03-01/notificationhubs.json
       - ../specification/notificationhubs/resource-manager/Microsoft.NotificationHubs/2017-04-01/notificationhubs.json
