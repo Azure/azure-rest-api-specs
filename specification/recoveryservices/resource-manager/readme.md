@@ -87,3 +87,11 @@ python:
   payload-flattening-threshold: 2
   license-header: MICROSOFT_MIT_NO_VERSION
 ```
+
+## Suppression
+
+``` yaml
+directive:
+  - suppress: DefinitionsPropertiesNamesCamelCase
+    reason: Autorest invalidates two letter acronyms as well and changes in data contracts require service wide changes and require more time
+```
