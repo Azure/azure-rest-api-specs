@@ -50,7 +50,7 @@
         }
       }
     },
-    "/Subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.RecoveryServices/operations": {
+    "/providers/Microsoft.RecoveryServices/operations": {
       "get": {
         "tags": [
           "Operations"
@@ -81,7 +81,13 @@
         },
         "deprecated": false,
         "x-ms-pageable": {
-          "nextLinkName": "NextLink"
+          "nextLinkName": "NextLink",
+          "itemName": "Value"
+        },
+        "x-ms-examples": {
+          "ListOperations": {
+            "$ref": "./examples/ListOperations.json"
+          }
         }
       }
     },
