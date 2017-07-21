@@ -116,7 +116,7 @@
 				"tags": [
 					"expressRouteConnector"
 				],
-				"operationId": "expressRouteConnectors_CreateOrUpdate",
+				"operationId": "expressRouteConnectors_Create",
 				"x-ms-examples": {
                     "ExpressRouteConnectorCreate": { "$ref": "./examples/ExpressRouteConnectorCreate.json" }
                 },
@@ -239,7 +239,9 @@
 			  }
 			},
 			"x-ms-pageable": {
-			  "nextLinkName": "nextLink"
+			  "type": "string",
+			  "readOnly": true,
+			  "nextLinkName": "The link (url) to the next set of results."
 			}
 		  }
 		},	
@@ -270,7 +272,9 @@
 			  }
 			},
 			"x-ms-pageable": {
-			  "nextLinkName": "nextLink"
+			  "type": "string",
+			  "readOnly": true,
+			  "nextLinkName": "The link (url) to the next set of results."
 			}
 		  }
 		}	
@@ -341,6 +345,7 @@
 			},
 			"nextLink": {
 			  "type": "string",
+			  "readOnly": true,
 			  "description": "The URL to get the next set of results."
 			}
 		  },
