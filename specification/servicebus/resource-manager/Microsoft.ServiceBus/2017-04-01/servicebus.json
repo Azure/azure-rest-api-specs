@@ -2093,9 +2093,9 @@
         "tags": [
           "Regions"
         ],
-        "operationId": "Sku_ListRegions",
+        "operationId": "Regions_ListBySku",
         "x-ms-examples": {
-          "RulesCreateOrUpdate": { "$ref": "./examples/SkuRegions/Skuregions.json" }
+          "RulesCreateOrUpdate": { "$ref": "./examples/SkuRegions/SkuRegions.json" }
         },
         "description": "Gets the available Regions for a given sku",
         "parameters": [
@@ -2172,7 +2172,7 @@
         ],
         "operationId": "EventHubs_ListByNamespace",
         "x-ms-examples": {
-          "RulesCreateOrUpdate": { "$ref": "./examples/SkuRegions/Eventhubs.json" }
+          "RulesCreateOrUpdate": { "$ref": "./examples/SkuRegions/EventHubs.json" }
         },
         "description": "Gets all the Event Hubs in a service bus Namespace.",
         "parameters": [
@@ -2218,7 +2218,7 @@
             "read",
             "create"
           ],
-          "description": "The Geo-location where the resource live"
+          "description": "The Geo-location where the resource lives"
         },
         "tags": {
           "type": "object",
@@ -3243,7 +3243,7 @@
       },
       "allOf": [
         {
-          "$ref": "#/definitions/RegionResource"
+          "$ref": "#/definitions/TrackedResource"
         }
       ],
       "description": "Premium Messaging Region"
@@ -3386,7 +3386,7 @@
           "type": "integer",
           "maximum": 524288000,
           "minimum": 10485760,
-          "description": "The size window defines the amount of data built up in your Event Hub before an capture operation, value should be between 10485760 to 524288000 bytes"
+          "description": "The size window defines the amount of data built up in your Event Hub before an capture operation, value should be between 10485760 and 524288000 bytes"
         },
         "destination": {
           "$ref": "#/definitions/Destination",
@@ -3417,43 +3417,10 @@
               "description": "Blob naming convention for archive, e.g. {Namespace}/{EventHub}/{PartitionId}/{Year}/{Month}/{Day}/{Hour}/{Minute}/{Second}. Here all the parameters (Namespace,EventHub .. etc) are mandatory irrespective of order"
             }
           },
-          "description": "Properties describing the storage account, blob container and acrchive anme format for capture destination"
+          "description": "Properties describing the storage account, blob container and acrchive name format for capture destination"
         }
       },
       "description": "Capture storage details for capture description"
-    },
-    "RegionResource": {
-      "properties": {
-        "location": {
-          "type": "string",
-          "readOnly": true,
-          "description": "The Geo-location where the resource live"
-        },
-        "tags": {
-          "type": "object",
-          "readOnly": true,
-          "additionalProperties": {
-            "type": "string"
-          },
-          "description": "Resource tags"
-        },
-        "id": {
-          "type": "string",
-          "readOnly": true,
-          "description": "Resource Id"
-        },
-        "name": {
-          "type": "string",
-          "readOnly": true,
-          "description": "Resource name"
-        },
-        "type": {
-          "type": "string",
-          "readOnly": true,
-          "description": "Resource type"
-        }
-      },
-      "description": "The Resource definition."
     }
   },
   "parameters": {
@@ -3549,7 +3516,7 @@
       "minLength": 1,
       "maxLength": 50,
       "x-ms-parameter-location": "method",
-      "description": "The sky type."
+      "description": "The sku type."
     }
   }
 }
