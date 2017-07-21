@@ -156,18 +156,6 @@
 					"schema": {
 					  "$ref": "#/definitions/expressRouteConnector"
 					}
-				  },
-				  "400": {
-					"description": "Bad Request"
-				  },
-				  "409": {
-					"description": "Unauthorized"
-				  },
-				  "404": {
-					"description": "Resource Not Found"
-				  },
-				  "412": {
-					"description": "Resource does not pass pre condition"
 				  }
 				},
 				"x-ms-long-running-operation": true
@@ -216,18 +204,6 @@
 					"schema": {
 					  "$ref": "#/definitions/expressRouteConnector"
 					}
-				  },
-				  "400": {
-					"description": "Bad Request"
-				  },
-				  "409": {
-					"description": "Unauthorized"
-				  },
-				  "404": {
-					"description": "Resource Not Found"
-				  },
-				  "412": {
-					"description": "Resource does not pass pre condition"
 				  }
 				},
 				"x-ms-long-running-operation": true
@@ -240,7 +216,7 @@
 			],
 			"operationId": "ExpressRouteCircuitConnectors_ListByResourceGroup",
 			"x-ms-examples": {
-                    "RouteFilterListByResourceGroup": { "$ref": "./examples/ExpressRouteConnectorListByResourceGroup.json" }
+                    "ExpressRouteConnectorListByResourceGroup": { "$ref": "./examples/ExpressRouteConnectorListByResourceGroup.json" }
             },
 			"description": "Gets all express route Connector resources in a given resource group and subscription.",
 			"parameters": [
@@ -272,7 +248,10 @@
 			"tags": [
 			  "ExpressRouteConnectors"
 			],
-			"operationId": "ExpressRouteCircuitConnectors_List",
+			"operationId": "ExpressRouteCircuitConnectors_ListBySubscription",
+			"x-ms-examples": {
+                    "ExpressRouteConnectorListBySubscription": { "$ref": "./examples/ExpressRouteConnectorListBySubscription.json" }
+            },
 			"description": "Gets all express route Connector resources in a given subscrption.",
 			"parameters": [
 			  {
