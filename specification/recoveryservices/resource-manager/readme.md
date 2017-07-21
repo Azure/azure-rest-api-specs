@@ -81,7 +81,7 @@ These settings apply only when `--python` is specified on the command line.
 ```yaml $(python)
 python:
   azure-arm: true
-  namespace: azure.mgmt.recoveryservicesbackup
+  namespace: azure.mgmt.recoveryservices
   package-version: 0.1.0
   output-folder: $(output-folder)Generated/Python
   payload-flattening-threshold: 2
