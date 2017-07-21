@@ -35,7 +35,7 @@
     "application/json"
   ],
   "paths": {
-    "/pipelines" : {
+    "/pipelines": {
       "get": {
         "tags": [
           "Pipeline"
@@ -128,7 +128,7 @@
         }
       }
     },
-    "/recurrences" : {
+    "/recurrences": {
       "get": {
         "tags": [
           "Recurrence"
@@ -352,37 +352,6 @@
       }
     },
     "/Jobs/{jobIdentity}": {
-      "get": {
-        "tags": [
-          "Job"
-        ],
-        "operationId": "Job_Get",
-        "description": "Gets the job information for the specified job ID.",
-        "x-ms-examples": {
-          "Gets the job information for the specified job ID": { "$ref": "./examples/Adla_Job_Get.json" }
-        },
-        "parameters": [
-          {
-            "name": "jobIdentity",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "format": "uuid",
-            "description": "JobInfo ID."
-          },
-          {
-            "$ref": "#/parameters/ApiVersionParameter"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Successfully retrieved details of the specified job.",
-            "schema": {
-              "$ref": "#/definitions/JobInformation"
-            }
-          }
-        }
-      },
       "put": {
         "tags": [
           "Job"
@@ -417,6 +386,37 @@
         "responses": {
           "200": {
             "description": "Successfully submitted the job.",
+            "schema": {
+              "$ref": "#/definitions/JobInformation"
+            }
+          }
+        }
+      },
+      "get": {
+        "tags": [
+          "Job"
+        ],
+        "operationId": "Job_Get",
+        "description": "Gets the job information for the specified job ID.",
+        "x-ms-examples": {
+          "Gets the job information for the specified job ID": { "$ref": "./examples/Adla_Job_Get.json" }
+        },
+        "parameters": [
+          {
+            "name": "jobIdentity",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "format": "uuid",
+            "description": "JobInfo ID."
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successfully retrieved details of the specified job.",
             "schema": {
               "$ref": "#/definitions/JobInformation"
             }
@@ -695,7 +695,7 @@
         "details": {
           "type": "string",
           "readOnly": true,
-          "description": " the details of the audit log."
+          "description": "the details of the audit log."
         }
       },
       "description": "The Data Lake Analytics job state audit records for tracking the lifecycle of a job."
@@ -926,32 +926,32 @@
       },
       "description": "The common Data Lake Analytics job properties for job submission."
     },
-    "Diagnostics" : {
+    "Diagnostics": {
       "properties": {
-        "columnNumber" : {
+        "columnNumber": {
           "description": "the column where the error occured.",
           "type": "integer",
           "format": "int32",
           "readOnly": true
         },
-        "end" : {
+        "end": {
           "description": "the ending index of the error.",
           "type": "integer",
           "format": "int32",
           "readOnly": true
         },
-        "lineNumber" : {
+        "lineNumber": {
           "description": "the line number the error occured on.",
           "type": "integer",
           "format": "int32",
           "readOnly": true
         },
-        "message" : {
+        "message": {
           "description": "the error message.",
           "type": "string",
           "readOnly": true
         },
-        "severity" : {
+        "severity": {
           "description": "the severity of the error.",
           "readOnly": true,
           "type": "string",
@@ -968,7 +968,7 @@
             "modelAsString": false
           }
         },
-        "start" : {
+        "start": {
           "description": "the starting index of the error.",
           "type": "integer",
           "format": "int32",
