@@ -2093,8 +2093,8 @@
         "tags": [
           "Regions"
         ],
-        "operationId": "Sku_RegionList",
-		"x-ms-examples": {
+        "operationId": "Sku_ListRegions",
+        "x-ms-examples": {
           "RulesCreateOrUpdate": { "$ref": "./examples/SkuRegions/Skuregions.json" }
         },
         "description": "Gets the available Regions for a given sku",
@@ -2134,7 +2134,7 @@
           "PremiumMessagingRegions"
         ],
         "operationId": "PremiumMessagingRegions_List",
-		"x-ms-examples": {
+        "x-ms-examples": {
           "RulesCreateOrUpdate": { "$ref": "./examples/SkuRegions/PremiumMessagingRegions.json" }
         },
         "description": "Gets the available premium messaging regions for servicebus ",
@@ -2171,7 +2171,7 @@
           "EventHubs"
         ],
         "operationId": "EventHubs_ListByNamespace",
-		"x-ms-examples": {
+        "x-ms-examples": {
           "RulesCreateOrUpdate": { "$ref": "./examples/SkuRegions/Eventhubs.json" }
         },
         "description": "Gets all the Event Hubs in a service bus Namespace.",
@@ -3225,22 +3225,21 @@
       "description": "Represents set of actions written in SQL language-based syntax that is performed against a ServiceBus.Messaging.BrokeredMessage "
     },
     "PremiumMessagingRegions": {
-      "properties": {	  
+      "properties": {
         "properties": {
-		"x-ms-client-flatten": true,
-			"properties": {
-				"code": {
-				  "readOnly": true,
-				  "type": "string",
-				  "description": "Region code"
-				},
-				"fullName": {
-				  "readOnly": true,
-				  "type": "string",
-				  "description": "Full name of the region"
-				}
-			}
-		}
+          "properties": {
+            "code": {
+              "readOnly": true,
+              "type": "string",
+              "description": "Region code"
+            },
+            "fullName": {
+              "readOnly": true,
+              "type": "string",
+              "description": "Full name of the region"
+            }
+          }
+        }
       },
       "allOf": [
         {
@@ -3260,6 +3259,7 @@
         },
         "nextLink": {
           "type": "string",
+          "readOnly": true,
           "description": "Link to the next set of results. Not empty if Value contains incomplete list of PremiumMessagingRegions."
         }
       },
@@ -3350,6 +3350,7 @@
         },
         "nextLink": {
           "type": "string",
+          "readOnly": true,
           "description": "Link to the next set of results. Not empty if Value contains incomplete list of EventHubs."
         }
       },
@@ -3421,22 +3422,22 @@
       },
       "description": "Capture storage details for capture description"
     },
-	"RegionResource": {
+    "RegionResource": {
       "properties": {
         "location": {
           "type": "string",
-		  "readOnly": true,
+          "readOnly": true,
           "description": "The Geo-location where the resource live"
         },
         "tags": {
           "type": "object",
-		  "readOnly": true,
+          "readOnly": true,
           "additionalProperties": {
             "type": "string"
           },
           "description": "Resource tags"
         },
-		"id": {
+        "id": {
           "type": "string",
           "readOnly": true,
           "description": "Resource Id"
