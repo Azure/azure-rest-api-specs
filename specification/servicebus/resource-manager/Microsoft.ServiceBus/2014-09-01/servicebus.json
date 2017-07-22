@@ -1491,6 +1491,88 @@
           }
         }
       }
+    },
+	"/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ServiceBus/namespaces/{namespaceName}/eventhubs/{eventhubName}/authorizationRules": {
+      "get": {
+        "tags": [
+          "EventHub"
+        ],
+        "operationId": "EventHub_ListAuthorizationRules",
+        "description": "Gets authorization rules for a eventhub.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/resourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/namespaceNameParameter"
+          },
+          {
+            "name": "eventhubName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The eventhub name."
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Authorization rules successfully returned.",
+            "schema": {
+              "$ref": "#/definitions/SharedAccessAuthorizationRuleListResult"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ServiceBus/namespaces/{namespaceName}/eventhubs/{eventhubName}/authorizationRules/{authorizationRuleName}": {
+      "get": {
+        "tags": [
+          "EventHub"
+        ],
+        "operationId": "EventHub_GetAuthorizationRule",
+        "description": "Returns the specified authorization rule.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/resourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/namespaceNameParameter"
+          },
+          {
+            "name": "eventhubName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The eventhub name."
+          },
+          {
+            "$ref": "#/parameters/authorizationRuleNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Eventhub authorization rule returned successfully.",
+            "schema": {
+              "$ref": "#/definitions/SharedAccessAuthorizationRuleResource"
+            }
+          }
+        }
+      }
     }
   },
   "definitions": {
