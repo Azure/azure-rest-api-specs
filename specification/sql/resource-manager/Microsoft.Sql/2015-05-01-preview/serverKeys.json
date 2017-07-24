@@ -21,7 +21,7 @@
         "tags": [
           "ServerKeys"
         ],
-        "description": "Returns a list of server keys.",
+        "description": "Gets a list of server keys.",
         "operationId": "ServerKeys_ListByServer",
         "parameters": [
           {
@@ -63,7 +63,7 @@
         "tags": [
           "ServerKeys"
         ],
-        "description": "Returns a server key.",
+        "description": "Gets a server key.",
         "operationId": "ServerKeys_Get",
         "parameters": [
           {
@@ -238,6 +238,9 @@
     },
     "ServerKeyProperties": {
       "description": "Properties for a server key execution.",
+      "required": [
+        "serverKeyType"
+      ],
       "type": "object",
       "properties": {
         "subregion": {
@@ -315,11 +318,6 @@
       "properties": {
         "kind": {
           "description": "Kind of encryption protector. This is metadata used for the Azure portal experience.",
-          "enum": [
-            "",
-            "azurekeyvault",
-            "servicemanaged"
-          ],
           "type": "string"
         },
         "location": {

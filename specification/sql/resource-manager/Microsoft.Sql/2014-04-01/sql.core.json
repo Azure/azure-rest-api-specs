@@ -620,7 +620,7 @@
         "tags": [
           "ElasticPools"
         ],
-        "operationId": "ElasticPools_ListActivity",
+        "operationId": "ElasticPoolActivities_ListByElasticPool",
         "description": "Returns elastic pool activities.",
         "x-ms-examples":{
           "List Elastic pool activity": { "$ref": "./examples/ElasticPoolActivityList.json" }
@@ -664,7 +664,7 @@
         "tags": [
           "ElasticPools"
         ],
-        "operationId": "ElasticPools_ListDatabaseActivity",
+        "operationId": "ElasticPoolDatabaseActivities_ListByElasticPool",
         "description": "Returns activity on databases inside of an elastic pool.",
         "x-ms-examples":{
           "List elastic pool database activity": { "$ref": "./examples/ElasticPoolDatabaseActivityList.json" }
@@ -708,7 +708,7 @@
         "tags": [
           "ElasticPools"
         ],
-        "operationId": "ElasticPools_GetDatabase",
+        "operationId": "Databases_GetByElasticPool",
         "description": "Gets a database inside of an elastic pool.",
         "parameters": [
           {
@@ -751,9 +751,9 @@
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/servers/{serverName}/elasticPools/{elasticPoolName}/databases": {
       "get": {
         "tags": [
-          "ElasticPools"
+          "Databases"
         ],
-        "operationId": "ElasticPools_ListDatabases",
+        "operationId": "Databases_ListByElasticPool",
         "description": "Returns a list of databases in an elastic pool.",
         "parameters": [
           {
@@ -830,9 +830,9 @@
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/servers/{serverName}/recommendedElasticPools/{recommendedElasticPoolName}/databases/{databaseName}": {
       "get": {
         "tags": [
-          "RecommendedElasticPools"
+          "Databases"
         ],
-        "operationId": "RecommendedElasticPools_GetDatabases",
+        "operationId": "Databases_GetByRecommendedElasticPool",
         "description": "Gets a database inside of a recommented elastic pool.",
         "parameters": [
           {
@@ -909,9 +909,9 @@
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/servers/{serverName}/recommendedElasticPools/{recommendedElasticPoolName}/databases": {
       "get": {
         "tags": [
-          "RecommendedElasticPools"
+          "Databases"
         ],
-        "operationId": "RecommendedElasticPools_ListDatabases",
+        "operationId": "Databases_ListByRecommendedElasticPool",
         "description": "Returns a list of databases inside a recommented elastic pool.",
         "parameters": [
           {
@@ -993,7 +993,7 @@
         "tags": [
           "ServiceTierAdvisors"
         ],
-        "operationId": "Databases_GetServiceTierAdvisor",
+        "operationId": "ServiceTierAdvisors_Get",
         "description": "Gets a service tier advisor.",
         "parameters": [
           {
@@ -1038,7 +1038,7 @@
         "tags": [
           "ServiceTierAdvisors"
         ],
-        "operationId": "Databases_ListServiceTierAdvisors",
+        "operationId": "ServiceTierAdvisors_ListByDatabase",
         "description": "Returns service tier advisors for specified database.",
         "parameters": [
           {
@@ -1079,7 +1079,7 @@
         "tags": [
           "TransparentDataEncryption"
         ],
-        "operationId": "Databases_CreateOrUpdateTransparentDataEncryptionConfiguration",
+        "operationId": "TransparentDataEncryptionConfigurations_CreateOrUpdate",
         "description": "Creates or updates a database's transparent data encryption configuration.",
         "parameters": [
           {
@@ -1133,8 +1133,11 @@
         "tags": [
           "TransparentDataEncryption"
         ],
-        "operationId": "Databases_GetTransparentDataEncryptionConfiguration",
+        "operationId": "TransparentDataEncryptionConfigurations_Get",
         "description": "Gets a database's transparent data encryption configuration.",
+        "x-ms-examples": {
+          "Get a database's transparent data encryption configurations": { "$ref": "./examples/DatabaseTransparentDataEncryptionGet.json" }
+        },
         "parameters": [
           {
             "$ref": "#/parameters/ApiVersionParameter"
@@ -1174,7 +1177,7 @@
         "tags": [
           "TransparentDataEncryption"
         ],
-        "operationId": "Databases_ListTransparentDataEncryptionActivity",
+        "operationId": "TransparentDataEncryptionActivities_ListByConfiguration",
         "description": "Returns a database's transparent data encryption operation result.",
         "parameters": [
           {
@@ -2008,6 +2011,11 @@
     },
     "TransparentDataEncryption": {
       "properties": {
+        "location": {
+          "type":"string",
+          "readOnly": true,
+          "description":"Resource location."
+        },
         "properties": {
           "x-ms-client-flatten": true,
           "$ref": "#/definitions/TransparentDataEncryptionProperties",
@@ -2016,7 +2024,7 @@
       },
       "allOf": [
         {
-          "$ref": "#/definitions/SubResource"
+          "$ref": "#/definitions/ProxyResource"
         }
       ],
       "description": "Represents a database transparent data encryption configuration."
@@ -2431,7 +2439,7 @@
       },
       "allOf": [
         {
-          "$ref": "#/definitions/SubResource"
+          "$ref": "#/definitions/ProxyResource"
         }
       ],
       "description": "Represents a Service Tier Advisor."
@@ -2555,7 +2563,7 @@
       },
       "allOf": [
         {
-          "$ref": "#/definitions/SubResource"
+          "$ref": "#/definitions/ProxyResource"
         }
       ],
       "description": "Represents a database transparent data encryption Scan."
@@ -2572,21 +2580,6 @@
       },
       "required": ["value"],
       "description": "Represents the response to a list database transparent data encryption activity request."
-    },
-    "SubResource": {
-      "description": "Subresource properties",
-      "properties": {
-        "name": {
-          "readOnly": true,
-          "type": "string",
-          "description": "Resource name"
-        },
-        "id": {
-          "readOnly": true,
-          "type": "string",
-          "description": "The resource ID."
-        }
-      }
     }
   },
   "parameters": {
