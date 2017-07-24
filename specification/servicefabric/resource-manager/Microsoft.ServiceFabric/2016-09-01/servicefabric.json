@@ -400,11 +400,11 @@
         "tags": [
           "ClusterVersion"
         ],
-        "operationId": "ClusterVersions_ListByEnvironmentAndVersion",
-        "description": "List cluster code versions by environment and version",
+        "operationId": "ClusterVersions_Get",
+        "description": "Get cluster code versions by environment and version",
         "x-ms-examples": {
           "List cluster version": {
-            "$ref": "./examples/ClusterVersionsListByEnvironmentAndVersion_example.json"
+            "$ref": "./examples/ClusterVersionsGet_example.json"
           }
         },
         "produces": [
@@ -431,12 +431,9 @@
           "200": {
             "description": "OK - Get cluster code versions successfully",
             "schema": {
-              "$ref": "#/definitions/ClusterCodeVersionsListResult"
+              "$ref": "#/definitions/ClusterCodeVersionsResult"
             }
           }
-        },
-        "x-ms-pageable": {
-          "nextLinkName": "nextLink"
         }
       }
     },
