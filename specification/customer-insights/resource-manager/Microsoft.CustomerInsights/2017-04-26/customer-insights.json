@@ -3183,7 +3183,6 @@
             "required": true,
             "type": "string",
             "description": "The name of the Prediction.",
-            "pattern": "^[a-zA-Z][a-zA-Z0-9_]+$",
             "minLength": 1,
             "maxLength": 512
           },
@@ -6351,7 +6350,7 @@
             "name": "PredictionModelLifeCycle",
             "modelAsString": true
           },
-          "description": "Prediction model life cycle."
+          "description": "Prediction model life cycle.  When prediction is in PendingModelConfirmation status, it is allowed to update the status to PendingFeaturing or Active through API."
         },
         "message": {
           "type": "string",
