@@ -35,6 +35,75 @@
   ],
   "paths": {
     "/WebHdfsExt/{path}": {
+      "put": {
+        "tags": [
+          "FileSystem"
+        ],
+        "operationId": "FileSystem_SetFileExpiry",
+        "description": "Sets or removes the expiration time on the specified file. This operation can only be executed against files. Folders are not supported.",
+        "x-ms-examples": {
+          "Sets or removes the expiration time on the specified file. This operation can only be executed against files. Folders are not supported": { "$ref": "./examples/Adls_FileSystem_SetFileExpiry.json" }
+        },
+        "parameters": [
+          {
+            "name": "path",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The Data Lake Store path (starting with '/') of the file on which to set or remove the expiration time."
+          },
+          {
+            "name": "expiryOption",
+            "in": "query",
+            "required": true,
+            "type": "string",
+            "enum": [
+              "NeverExpire",
+              "RelativeToNow",
+              "RelativeToCreationDate",
+              "Absolute"
+            ],
+            "x-ms-enum": {
+              "name": "ExpiryOptionType",
+              "modelAsString": false
+            },
+            "description": "Indicates the type of expiration to use for the file: 1. NeverExpire: ExpireTime is ignored. 2. RelativeToNow: ExpireTime is an integer in milliseconds representing the expiration date relative to when file expiration is updated. 3. RelativeToCreationDate: ExpireTime is an integer in milliseconds representing the expiration date relative to file creation. 4. Absolute: ExpireTime is an integer in milliseconds, as a Unix timestamp relative to 1/1/1970 00:00:00."
+          },
+          {
+            "name": "expireTime",
+            "in": "query",
+            "required": false,
+            "type": "integer",
+            "format": "int64",
+            "description": "The time that the file will expire, corresponding to the ExpiryOption that was set."
+          },
+          {
+            "name": "op",
+            "in": "query",
+            "required": true,
+            "type": "string",
+            "description": "The constant value for the operation.",
+            "enum": [
+              "SETEXPIRY"
+            ]
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successfully set the expiration time on the specified file."
+          },
+          "default": {
+            "description": "An unexpected error from the server.",
+            "schema":
+            {
+              "$ref": "#/definitions/AdlsError"
+            }
+          }
+        }
+      },
       "post": {
         "tags": [
           "FileSystem"
@@ -123,75 +192,6 @@
         "responses": {
           "200": {
             "description": "OK"
-          },
-          "default": {
-            "description": "An unexpected error from the server.",
-            "schema":
-            {
-              "$ref": "#/definitions/AdlsError"
-            }
-          }
-        }
-      },
-      "put": {
-        "tags": [
-          "FileSystem"
-        ],
-        "operationId": "FileSystem_SetFileExpiry",
-        "description": "Sets or removes the expiration time on the specified file. This operation can only be executed against files. Folders are not supported.",
-        "x-ms-examples": {
-          "Sets or removes the expiration time on the specified file. This operation can only be executed against files. Folders are not supported": { "$ref": "./examples/Adls_FileSystem_SetFileExpiry.json" }
-        },
-        "parameters": [
-          {
-            "name": "path",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "description": "The Data Lake Store path (starting with '/') of the file on which to set or remove the expiration time."
-          },
-          {
-            "name": "expiryOption",
-            "in": "query",
-            "required": true,
-            "type": "string",
-            "enum": [
-              "NeverExpire",
-              "RelativeToNow",
-              "RelativeToCreationDate",
-              "Absolute"
-            ],
-            "x-ms-enum": {
-              "name": "ExpiryOptionType",
-              "modelAsString": false
-            },
-            "description": "Indicates the type of expiration to use for the file: 1. NeverExpire: ExpireTime is ignored. 2. RelativeToNow: ExpireTime is an integer in milliseconds representing the expiration date relative to when file expiration is updated. 3. RelativeToCreationDate: ExpireTime is an integer in milliseconds representing the expiration date relative to file creation. 4. Absolute: ExpireTime is an integer in milliseconds, as a Unix timestamp relative to 1/1/1970 00:00:00."
-          },
-          {
-            "name": "expireTime",
-            "in": "query",
-            "required": false,
-            "type": "integer",
-            "format": "int64",
-            "description": "The time that the file will expire, corresponding to the ExpiryOption that was set."
-          },
-          {
-            "name": "op",
-            "in": "query",
-            "required": true,
-            "type": "string",
-            "description": "The constant value for the operation.",
-            "enum": [
-              "SETEXPIRY"
-            ]
-          },
-          {
-            "$ref": "#/parameters/ApiVersionParameter"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Successfully set the expiration time on the specified file."
           },
           "default": {
             "description": "An unexpected error from the server.",
