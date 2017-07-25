@@ -158,6 +158,7 @@ input-file:
 - Microsoft.Network/2015-06-15/checkDnsAvailability.json
 - Microsoft.Network/2015-06-15/expressRouteCircuit.json
 - Microsoft.Network/2015-06-15/loadBalancer.json
+- Microsoft.Network/2015-06-15/network.json
 - Microsoft.Network/2015-06-15/networkInterface.json
 - Microsoft.Network/2015-06-15/networkSecurityGroup.json
 - Microsoft.Network/2015-06-15/publicIpAddress.json
@@ -166,15 +167,6 @@ input-file:
 - Microsoft.Network/2015-06-15/virtualNetwork.json
 - Microsoft.Network/2015-06-15/virtualNetworkGateway.json
 - Microsoft.Network/2015-06-15/vmssNetworkInterface.json
-```
- 
-### Tag: package-2015-06
-
-These settings apply only when `--tag=package-2015-06` is specified on the command line.
-
-``` yaml $(tag) == 'package-2015-06'
-input-file:
-- Microsoft.Network/2015-06-15/network.json
 ```
  
 ### Tag: package-2015-05-preview
