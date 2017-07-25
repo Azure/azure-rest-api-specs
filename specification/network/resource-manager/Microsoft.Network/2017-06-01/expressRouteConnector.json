@@ -69,7 +69,10 @@
 						"description": "Delete successful."
 					},
 					"default": {
-						"description": "*** Error Responses: ***\n\n * 400 Bad Request\n\n * 409 Unauthorized \n\n * 404 Resource Not Found \n\n * 412 Precondition Failed *."
+						"description": "*** Error Responses: ***\n\n * 400 Bad Request\n\n * 409 Unauthorized \n\n * 404 Resource Not Found \n\n * 412 Precondition Failed *.",
+						"schema": {
+							"$ref": "#/definitions/ErrorResponse"
+						}
 					}
 				},
 				"x-ms-long-running-operation": true
@@ -152,7 +155,10 @@
 					}
 				  },
 				  "default": {
-					"description": "*** Error Responses: ***\n\n * 400 Bad Request\n\n * 409 Unauthorized \n\n * 404 Resource Not Found \n\n * 412 Precondition Failed *."
+					"description": "*** Error Responses: ***\n\n * 400 Bad Request\n\n * 409 Unauthorized \n\n * 404 Resource Not Found \n\n * 412 Precondition Failed *.",
+					"schema": {
+						"$ref": "#/definitions/ErrorResponse"
+					}
 				  }
 				},
 				"x-ms-long-running-operation": true
@@ -203,7 +209,10 @@
 					}
 				  },
 				  "default": {
-					"description": "*** Error Responses: ***\n\n * 400 Bad Request\n\n * 409 Unauthorized \n\n * 404 Resource Not Found \n\n * 412 Precondition Failed *."
+					"description": "*** Error Responses: ***\n\n * 400 Bad Request\n\n * 409 Unauthorized \n\n * 404 Resource Not Found \n\n * 412 Precondition Failed *.",
+					"schema": {
+						"$ref": "#/definitions/ErrorResponse"
+					}
 				  }
 				},
 				"x-ms-long-running-operation": true
@@ -238,7 +247,10 @@
 				}
 			  },
 			  "default": {
-				"description": "*** Error Responses: ***\n\n * 400 Bad Request\n\n * 409 Unauthorized \n\n * 404 Resource Group Not Found \n\n *."
+				"description": "*** Error Responses: ***\n\n * 400 Bad Request\n\n * 409 Unauthorized \n\n * 404 Resource Group Not Found \n\n *.",
+				"schema": {
+					"$ref": "#/definitions/ErrorResponse"
+				}
 			  }
 			},
 			"x-ms-pageable": {
@@ -271,7 +283,10 @@
 				  "$ref": "#/definitions/expressRouteConnectorListResult"
 				},
 				"default": {
-					"description": "*** Error Responses: ***\n\n * 400 Bad Request\n\n * 409 Unauthorized \n\n * 404 Subscription Not Found \n\n *."
+					"description": "*** Error Responses: ***\n\n * 400 Bad Request\n\n * 409 Unauthorized \n\n * 404 Subscription Not Found \n\n *.",
+					"schema": {
+						"$ref": "#/definitions/ErrorResponse"
+					}
 				}
 			  },
 			  "description": "*** Error Responses: ***\n\n * 404 Resource Not Found \n\n *."
@@ -283,6 +298,19 @@
 		}	
 	},	 
 	"definitions": {
+		"ErrorResponse": {     
+		  "properties": {
+			"code": {
+			  "description": "Error code.",
+			  "type": "string"
+			},
+			"message": {
+			  "description": "Error message indicating why the operation failed.",
+			  "type": "string"
+			}
+		  },
+		  "description": "Error Response."
+		},
 		"expressRouteConnectorReturnObjectPropertiesFormat": {
 			"properties": {
 				"circuits": {
