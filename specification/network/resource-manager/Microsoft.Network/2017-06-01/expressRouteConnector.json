@@ -69,9 +69,9 @@
 						"description": "Delete successful."
 					},
 					"default": {
-						"description": "*** Error Responses: ***\n\n * 400 Bad Request\n\n * 409 Unauthorized \n\n * 404 Resource Not Found \n\n * 412 Precondition Failed *.",
+						"description": "Error",
 						"schema": {
-							"$ref": "#/definitions/ErrorResponse"
+							"$ref": "#/definitions/ErrorModel"
 						}
 					}
 				},
@@ -105,6 +105,12 @@
 						"description": "Request successful. The operation returns the Express Route Connector Resource resource.",
 						"schema": {
 							"$ref": "#/definitions/expressRouteConnectorReturnObject"
+						}
+					},
+					"default": {
+						"description": "Error",
+						"schema": {
+						  "$ref": "#/definitions/ErrorModel"
 						}
 					}
 				}
@@ -145,19 +151,19 @@
 				  "201": {
 					"description": "Create successful. The operation returns the resulting Express Route Connector Resource.",
 					"schema": {
-					  "$ref": "#/definitions/expressRouteConnector"
+					  "$ref": "#/definitions/expressRouteConnectorReturnObject"
 					}
 				  },
 				  "200": {
 					"description": "Request successful. The operation returns the resulting Express Route Connector Resource.",
 					"schema": {
-					  "$ref": "#/definitions/expressRouteConnector"
+					  "$ref": "#/definitions/expressRouteConnectorReturnObject"
 					}
 				  },
 				  "default": {
-					"description": "*** Error Responses: ***\n\n * 400 Bad Request\n\n * 409 Unauthorized \n\n * 404 Resource Not Found \n\n * 412 Precondition Failed *.",
+					"description": "Error",
 					"schema": {
-						"$ref": "#/definitions/ErrorResponse"
+					  "$ref": "#/definitions/ErrorModel"
 					}
 				  }
 				},
@@ -199,19 +205,19 @@
 				  "200": {
 					"description": "Request successful. The operation returns the resulting Express Route Connector Resource.",
 					"schema": {
-					  "$ref": "#/definitions/expressRouteConnector"
+					  "$ref": "#/definitions/expressRouteConnectorReturnObject"
 					}
 				  },
 				  "201": {
 					"description": "Request successful. The operation returns the resulting Express Route Connector Resource.",
 					"schema": {
-					  "$ref": "#/definitions/expressRouteConnector"
+					  "$ref": "#/definitions/expressRouteConnectorReturnObject"
 					}
 				  },
 				  "default": {
-					"description": "*** Error Responses: ***\n\n * 400 Bad Request\n\n * 409 Unauthorized \n\n * 404 Resource Not Found \n\n * 412 Precondition Failed *.",
+					"description": "Error",
 					"schema": {
-						"$ref": "#/definitions/ErrorResponse"
+					  "$ref": "#/definitions/ErrorModel"
 					}
 				  }
 				},
@@ -247,9 +253,9 @@
 				}
 			  },
 			  "default": {
-				"description": "*** Error Responses: ***\n\n * 400 Bad Request\n\n * 409 Unauthorized \n\n * 404 Resource Group Not Found \n\n *.",
+				"description": "Error",
 				"schema": {
-					"$ref": "#/definitions/ErrorResponse"
+				  "$ref": "#/definitions/ErrorModel"
 				}
 			  }
 			},
@@ -284,9 +290,9 @@
 				}
 			  },
 			  "default": {
-				"description": "*** Error Responses: ***\n\n * 400 Bad Request\n\n * 409 Unauthorized \n\n * 404 Subscription Not Found \n\n *.",
+				"description": "Error",
 				"schema": {
-					"$ref": "#/definitions/ErrorResponse"
+				  "$ref": "#/definitions/ErrorModel"
 				}
 			  }
 			},
@@ -297,18 +303,23 @@
 		}	
 	},	 
 	"definitions": {
-		"ErrorResponse": {     
+		"ErrorModel": {
+		  "description": "The structure of the error",
 		  "properties": {
-			"code": {
-			  "description": "Error code.",
-			  "type": "string"
-			},
-			"message": {
-			  "description": "Error message indicating why the operation failed.",
-			  "type": "string"
+			"error": {
+			  "description": "The error detail ",
+			  "properties": {
+				"code": {
+				  "description": "The error code",
+				  "type": "string"
+				},
+				"message": {
+				  "description": "The error message",
+				  "type": "string"
+				}
+			  }
 			}
-		  },
-		  "description": "Error Response."
+		  }
 		},
 		"expressRouteConnectorReturnObjectPropertiesFormat": {
 			"properties": {
