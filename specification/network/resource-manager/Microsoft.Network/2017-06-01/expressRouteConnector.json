@@ -67,6 +67,9 @@
 					},
 					"204": {
 						"description": "Delete successful."
+					},
+					"default": {
+						"description": "*** Error Responses: ***\n\n * 400 Bad Request\n\n * 409 Unauthorized \n\n * 404 Resource Not Found \n\n * 412 Precondition Failed *."
 					}
 				},
 				"x-ms-long-running-operation": true
@@ -98,7 +101,7 @@
 					"200": {
 						"description": "Request successful. The operation returns the Express Route Connector Resource resource.",
 						"schema": {
-							"$ref": "#/definitions/expressRouteConnector"
+							"$ref": "#/definitions/expressRouteConnectorReturnObject"
 						}
 					}
 				}
@@ -147,6 +150,9 @@
 					"schema": {
 					  "$ref": "#/definitions/expressRouteConnector"
 					}
+				  },
+				  "default": {
+					"description": "*** Error Responses: ***\n\n * 400 Bad Request\n\n * 409 Unauthorized \n\n * 404 Resource Not Found \n\n * 412 Precondition Failed *."
 				  }
 				},
 				"x-ms-long-running-operation": true
@@ -195,6 +201,9 @@
 					"schema": {
 					  "$ref": "#/definitions/expressRouteConnector"
 					}
+				  },
+				  "default": {
+					"description": "*** Error Responses: ***\n\n * 400 Bad Request\n\n * 409 Unauthorized \n\n * 404 Resource Not Found \n\n * 412 Precondition Failed *."
 				  }
 				},
 				"x-ms-long-running-operation": true
@@ -227,6 +236,9 @@
 				"schema": {
 				  "$ref": "#/definitions/expressRouteConnectorListResult"
 				}
+			  },
+			  "default": {
+				"description": "*** Error Responses: ***\n\n * 400 Bad Request\n\n * 409 Unauthorized \n\n * 404 Resource Group Not Found \n\n *."
 			  }
 			},
 			"x-ms-pageable": {
@@ -257,8 +269,12 @@
 				"description": "Request successful. The operation returns a list of Express Route Connector resources.",
 				"schema": {
 				  "$ref": "#/definitions/expressRouteConnectorListResult"
+				},
+				"default": {
+					"description": "*** Error Responses: ***\n\n * 400 Bad Request\n\n * 409 Unauthorized \n\n * 404 Subscription Not Found \n\n *."
 				}
-			  }
+			  },
+			  "description": "*** Error Responses: ***\n\n * 404 Resource Not Found \n\n *."
 			},
 			"x-ms-pageable": {
 				"nextLinkName": "nextLink"
@@ -266,7 +282,48 @@
 		  }
 		}	
 	},	 
-	"definitions": {	
+	"definitions": {
+		"expressRouteConnectorReturnObjectPropertiesFormat": {
+			"properties": {
+				"circuits": {
+					"type": "array",
+					"items": {
+						"$ref": "./network.json#/definitions/SubResource",
+						"description": "The reference to the express route circuit resource."
+					},
+					"description": "List of Express Route Circuits."
+				},
+				"addressPrefix": {
+				  "type": "string",
+				  "description": "The reference of the addressPrefix resource."
+				},
+				"provisioningState": {
+					"type": "string",
+					"readOnly": true,
+					"description": "The provisioning state of the Express Route Connector Resource. Possible Values 'Updating', 'Deleting', and 'Failed'."
+				}
+			},	
+			"description": "Properties of Express Route Connector Resource Without Authorization Keys."
+		},
+		"expressRouteConnectorReturnObject": {
+			"properties": {
+				"properties": {
+				  "x-ms-client-flatten": true,
+				  "$ref": "#/definitions/expressRouteConnectorReturnObjectPropertiesFormat"
+				},
+				"etag": {
+				  "readOnly": true,
+				  "type": "string",
+				  "description": "Gets a unique read-only string that changes whenever the resource is updated."
+				}
+			  },
+			  "allOf": [
+				{
+				  "$ref": "./network.json#/definitions/Resource"
+				}
+			  ],
+			  "description": "Express Route Connector Resource without Authorization Key"
+		},
 		"expressRouteConnectorPropertiesFormat": {
 			"required": [
 				"circuits",
@@ -326,7 +383,7 @@
 			"value": {
 			  "type": "array",
 			  "items": {
-				"$ref": "#/definitions/expressRouteConnector"
+				"$ref": "#/definitions/expressRouteConnectorReturnObject"
 			  },
 			  "description": "A list of Express Route Connector Resource in a resource group."
 			},
