@@ -21,7 +21,7 @@
         "tags": [
           "DatabaseReplicationLinks"
         ],
-        "operationId": "Databases_DeleteReplicationLink",
+        "operationId": "ReplicationLinks_Delete",
         "description": "Deletes a database replication link. Cannot be done during failover.",
         "x-ms-examples": {
           "Delete a replication link": { "$ref": "./examples/ReplicationLinkDelete.json" }
@@ -67,7 +67,7 @@
         "tags": [
           "DatabaseReplicationLinks"
         ],
-        "operationId": "Databases_GetReplicationLink",
+        "operationId": "ReplicationLinks_Get",
         "description": "Gets a database replication link.",
         "x-ms-examples": {
           "Get a replication link": { "$ref": "./examples/ReplicationLinkGet.json" }
@@ -115,7 +115,7 @@
         "tags": [
           "DatabaseReplicationLinks"
         ],
-        "operationId": "Databases_FailoverReplicationLink",
+        "operationId": "ReplicationLinks_Failover",
         "description": "Sets which replica database is primary by failing over from the current primary replica database.",
         "x-ms-examples": {
           "Failover a replication link": { "$ref": "./examples/ReplicationLinkFailover.json" }
@@ -164,8 +164,11 @@
         "tags": [
           "DatabaseReplicationLinks"
         ],
-        "operationId": "Databases_FailoverReplicationLinkAllowDataLoss",
+        "operationId": "ReplicationLinks_FailoverAllowDataLoss",
         "description": "Sets which replica database is primary by failing over from the current primary replica database. This operation might result in data loss.",
+        "x-ms-examples": {
+          "Failover a replication link": { "$ref": "./examples/ReplicationLinkFailover.json" }
+        },
         "parameters": [
           {
             "$ref": "#/parameters/ApiVersionParameter"
@@ -210,7 +213,7 @@
         "tags": [
           "DatabaseReplicationLinks"
         ],
-        "operationId": "Databases_ListReplicationLinks",
+        "operationId": "ReplicationLinks_ListByDatabase",
         "description": "Lists a database's replication links.",
         "x-ms-examples": {
           "List Replication links": { "$ref": "./examples/ReplicationLinkList.json" }
@@ -251,20 +254,34 @@
     }
   },
   "definitions": {
-    "SubResource": {
-      "description": "Subresource properties",
-      "properties": {
-        "name": {
-          "readOnly": true,
-          "type": "string",
-          "description": "Resource name"
+    "Resource":{
+      "description":"ARM resource.",
+      "properties":{
+        "id":{
+          "readOnly":true,
+          "type":"string",
+          "description":"Resource ID."
         },
-        "id": {
-          "readOnly": true,
-          "type": "string",
-          "description": "The resource ID."
+        "name":{
+          "readOnly":true,
+          "type":"string",
+          "description":"Resource name."
+        },
+        "type":{
+          "readOnly":true,
+          "type":"string",
+          "description":"Resource type."
         }
-      }
+      },
+      "x-ms-azure-resource": true
+    },
+    "ProxyResource":{
+      "description":"ARM proxy resource.",
+      "allOf":[
+        {
+          "$ref":"#/definitions/Resource"
+        }
+      ]
     },
     "ReplicationLinkProperties": {
       "properties": {
@@ -373,7 +390,7 @@
       },
       "allOf": [
         {
-          "$ref": "#/definitions/SubResource"
+          "$ref": "#/definitions/ProxyResource"
         }
       ],
       "description": "Represents a database replication link."

@@ -21,8 +21,8 @@
         "tags": [
           "DatabaseAdvisors"
         ],
-        "description": "Returns a list of database advisors.",
-        "operationId": "Databases_ListAdvisors",
+        "description": "Gets a list of database advisors.",
+        "operationId": "DatabaseAdvisors_ListByDatabase",
         "parameters": [
           {
             "$ref": "#/parameters/ResourceGroupParameter"
@@ -51,15 +51,15 @@
             }
           },
           "default": {
-            "description": "*** Error Responses: ***\n\n * 400 InvalidIdentifier - The identifier contains NULL or an invalid unicode character.\n\n * 404 SubscriptionDoesNotHaveElasticPool - The requested elastic pool was not found\n\n * 404 SubscriptionDoesNotHaveServer - The requested server was not found\n\n * 404 DatabaseDoesNotExist - The requested database was not found\n\n * 404 AdvisorNotFound - The requested advisor was not found.\n\n * 405 NotSupported - This functionality is not supported.\n\n * 409 Conflict - Request could not be processed because of conflict in the request.\n\n * 503 ServiceTemporarilyUnavailable - Feature temporarily unavailable."
+            "description": "*** Error Responses: ***\n\n * 400 InvalidIdentifier - The identifier contains NULL or an invalid unicode character.\n\n * 404 SubscriptionDoesNotHaveServer - The requested server was not found\n\n * 404 DatabaseDoesNotExist - The requested database was not found\n\n * 404 SubscriptionDoesNotHaveElasticPool - The requested elastic pool was not found\n\n * 404 AdvisorNotFound - The requested advisor was not found.\n\n * 405 NotSupported - This functionality is not supported.\n\n * 409 Conflict - Request could not be processed because of conflict in the request.\n\n * 503 ServiceTemporarilyUnavailable - Feature temporarily unavailable."
           }
         },
         "x-ms-examples": {
-          "List of database advisors": {
-            "$ref": "./examples/DatabaseAdvisorList.json"
-          },
           "List of database recommended actions for all advisors": {
             "$ref": "./examples/DatabaseRecommendedActionListExpand.json"
+          },
+          "List of database advisors": {
+            "$ref": "./examples/DatabaseAdvisorList.json"
           }
         }
       }
@@ -69,8 +69,8 @@
         "tags": [
           "DatabaseAdvisors"
         ],
-        "description": "Returns details of a Database Advisor.",
-        "operationId": "Databases_GetAdvisor",
+        "description": "Gets a database advisor.",
+        "operationId": "DatabaseAdvisors_Get",
         "parameters": [
           {
             "$ref": "#/parameters/ResourceGroupParameter"
@@ -103,7 +103,7 @@
             }
           },
           "default": {
-            "description": "*** Error Responses: ***\n\n * 400 InvalidIdentifier - The identifier contains NULL or an invalid unicode character.\n\n * 404 SubscriptionDoesNotHaveElasticPool - The requested elastic pool was not found\n\n * 404 SubscriptionDoesNotHaveServer - The requested server was not found\n\n * 404 DatabaseDoesNotExist - The requested database was not found\n\n * 404 AdvisorNotFound - The requested advisor was not found.\n\n * 405 NotSupported - This functionality is not supported.\n\n * 409 Conflict - Request could not be processed because of conflict in the request.\n\n * 503 ServiceTemporarilyUnavailable - Feature temporarily unavailable."
+            "description": "*** Error Responses: ***\n\n * 400 InvalidIdentifier - The identifier contains NULL or an invalid unicode character.\n\n * 404 SubscriptionDoesNotHaveServer - The requested server was not found\n\n * 404 DatabaseDoesNotExist - The requested database was not found\n\n * 404 SubscriptionDoesNotHaveElasticPool - The requested elastic pool was not found\n\n * 404 AdvisorNotFound - The requested advisor was not found.\n\n * 405 NotSupported - This functionality is not supported.\n\n * 409 Conflict - Request could not be processed because of conflict in the request.\n\n * 503 ServiceTemporarilyUnavailable - Feature temporarily unavailable."
           }
         },
         "x-ms-examples": {
@@ -116,8 +116,8 @@
         "tags": [
           "DatabaseAdvisors"
         ],
-        "description": "Updates a Database Advisor.",
-        "operationId": "Databases_UpdateAdvisor",
+        "description": "Updates a database advisor.",
+        "operationId": "DatabaseAdvisors_Update",
         "parameters": [
           {
             "$ref": "#/parameters/ResourceGroupParameter"
@@ -159,7 +159,7 @@
             }
           },
           "default": {
-            "description": "*** Error Responses: ***\n\n * 400 InvalidIdentifier - The identifier contains NULL or an invalid unicode character.\n\n * 400 InvalidAdvisorUpsertRequest - The update advisor request body does not exist or has no properties object.\n\n * 400 InvalidAdvisorAutoExecuteStatus - Specified auto-execute status for the advisor is not allowed.\n\n * 404 SubscriptionDoesNotHaveElasticPool - The requested elastic pool was not found\n\n * 404 SubscriptionDoesNotHaveServer - The requested server was not found\n\n * 404 DatabaseDoesNotExist - The requested database was not found\n\n * 404 AdvisorNotFound - The requested advisor was not found.\n\n * 405 NotSupported - This functionality is not supported.\n\n * 409 Conflict - Request could not be processed because of conflict in the request.\n\n * 503 ServiceTemporarilyUnavailable - Feature temporarily unavailable."
+            "description": "*** Error Responses: ***\n\n * 400 InvalidIdentifier - The identifier contains NULL or an invalid unicode character.\n\n * 400 InvalidAdvisorUpsertRequest - The update advisor request body does not exist or has no properties object.\n\n * 400 InvalidAdvisorAutoExecuteStatus - Specified auto-execute status for the advisor is not allowed.\n\n * 404 SubscriptionDoesNotHaveServer - The requested server was not found\n\n * 404 DatabaseDoesNotExist - The requested database was not found\n\n * 404 SubscriptionDoesNotHaveElasticPool - The requested elastic pool was not found\n\n * 404 AdvisorNotFound - The requested advisor was not found.\n\n * 405 NotSupported - This functionality is not supported.\n\n * 409 Conflict - Request could not be processed because of conflict in the request.\n\n * 503 ServiceTemporarilyUnavailable - Feature temporarily unavailable."
           }
         },
         "x-ms-examples": {
@@ -175,7 +175,7 @@
           "DatabaseRecommendedActions"
         ],
         "description": "Gets list of Database Recommended Actions.",
-        "operationId": "Databases_ListRecommendedActions",
+        "operationId": "DatabaseRecommendedActions_ListByDatabaseAdvisor",
         "parameters": [
           {
             "$ref": "#/parameters/ResourceGroupParameter"
@@ -211,7 +211,7 @@
             }
           },
           "default": {
-            "description": "*** Error Responses: ***\n\n * 400 InvalidIdentifier - The identifier contains NULL or an invalid unicode character.\n\n * 404 SubscriptionDoesNotHaveElasticPool - The requested elastic pool was not found\n\n * 404 SubscriptionDoesNotHaveServer - The requested server was not found\n\n * 404 DatabaseDoesNotExist - The requested database was not found\n\n * 404 AdvisorNotFound - The requested advisor was not found.\n\n * 404 RecommendedActionNotFound - The requested recommended action was not found.\n\n * 404 AdvisorNotFound - The requested advisor was not found.\n\n * 404 RecommendedActionNotFound - The requested recommended action was not found.\n\n * 405 NotSupported - This functionality is not supported.\n\n * 409 Conflict - Request could not be processed because of conflict in the request.\n\n * 503 ServiceTemporarilyUnavailable - Feature temporarily unavailable."
+            "description": "*** Error Responses: ***\n\n * 400 InvalidIdentifier - The identifier contains NULL or an invalid unicode character.\n\n * 404 SubscriptionDoesNotHaveServer - The requested server was not found\n\n * 404 DatabaseDoesNotExist - The requested database was not found\n\n * 404 SubscriptionDoesNotHaveElasticPool - The requested elastic pool was not found\n\n * 404 AdvisorNotFound - The requested advisor was not found.\n\n * 404 RecommendedActionNotFound - The requested recommended action was not found.\n\n * 404 AdvisorNotFound - The requested advisor was not found.\n\n * 404 RecommendedActionNotFound - The requested recommended action was not found.\n\n * 405 NotSupported - This functionality is not supported.\n\n * 409 Conflict - Request could not be processed because of conflict in the request.\n\n * 503 ServiceTemporarilyUnavailable - Feature temporarily unavailable."
           }
         },
         "x-ms-examples": {
@@ -226,8 +226,8 @@
         "tags": [
           "DatabaseRecommendedActions"
         ],
-        "description": "Returns details of a Database Recommended Action.",
-        "operationId": "Databases_GetRecommendedAction",
+        "description": "Gets a database recommended action.",
+        "operationId": "DatabaseRecommendedActions_Get",
         "parameters": [
           {
             "$ref": "#/parameters/ResourceGroupParameter"
@@ -267,7 +267,7 @@
             }
           },
           "default": {
-            "description": "*** Error Responses: ***\n\n * 400 InvalidIdentifier - The identifier contains NULL or an invalid unicode character.\n\n * 404 SubscriptionDoesNotHaveElasticPool - The requested elastic pool was not found\n\n * 404 SubscriptionDoesNotHaveServer - The requested server was not found\n\n * 404 DatabaseDoesNotExist - The requested database was not found\n\n * 404 AdvisorNotFound - The requested advisor was not found.\n\n * 404 RecommendedActionNotFound - The requested recommended action was not found.\n\n * 404 AdvisorNotFound - The requested advisor was not found.\n\n * 404 RecommendedActionNotFound - The requested recommended action was not found.\n\n * 405 NotSupported - This functionality is not supported.\n\n * 409 Conflict - Request could not be processed because of conflict in the request.\n\n * 503 ServiceTemporarilyUnavailable - Feature temporarily unavailable."
+            "description": "*** Error Responses: ***\n\n * 400 InvalidIdentifier - The identifier contains NULL or an invalid unicode character.\n\n * 404 SubscriptionDoesNotHaveServer - The requested server was not found\n\n * 404 DatabaseDoesNotExist - The requested database was not found\n\n * 404 SubscriptionDoesNotHaveElasticPool - The requested elastic pool was not found\n\n * 404 AdvisorNotFound - The requested advisor was not found.\n\n * 404 RecommendedActionNotFound - The requested recommended action was not found.\n\n * 404 AdvisorNotFound - The requested advisor was not found.\n\n * 404 RecommendedActionNotFound - The requested recommended action was not found.\n\n * 405 NotSupported - This functionality is not supported.\n\n * 409 Conflict - Request could not be processed because of conflict in the request.\n\n * 503 ServiceTemporarilyUnavailable - Feature temporarily unavailable."
           }
         },
         "x-ms-examples": {
@@ -280,8 +280,8 @@
         "tags": [
           "DatabaseRecommendedActions"
         ],
-        "description": "Updates a Database Recommended Action.",
-        "operationId": "Databases_UpdateRecommendedAction",
+        "description": "Updates a database recommended action.",
+        "operationId": "DatabaseRecommendedActions_Update",
         "parameters": [
           {
             "$ref": "#/parameters/ResourceGroupParameter"
@@ -330,7 +330,7 @@
             }
           },
           "default": {
-            "description": "*** Error Responses: ***\n\n * 400 InvalidIdentifier - The identifier contains NULL or an invalid unicode character.\n\n * 400 InvalidRecommendedActionUpsertRequest - The update recommended action request body does not exist or has no properties or state object.\n\n * 400 InvalidRecommendedActionState - The specified state for recommended action is invalid\n\n * 404 SubscriptionDoesNotHaveElasticPool - The requested elastic pool was not found\n\n * 404 SubscriptionDoesNotHaveServer - The requested server was not found\n\n * 404 DatabaseDoesNotExist - The requested database was not found\n\n * 404 AdvisorNotFound - The requested advisor was not found.\n\n * 404 RecommendedActionNotFound - The requested recommended action was not found.\n\n * 404 AdvisorNotFound - The requested advisor was not found.\n\n * 404 RecommendedActionNotFound - The requested recommended action was not found.\n\n * 405 NotSupported - This functionality is not supported.\n\n * 409 Conflict - Request could not be processed because of conflict in the request.\n\n * 503 ServiceTemporarilyUnavailable - Feature temporarily unavailable."
+            "description": "*** Error Responses: ***\n\n * 400 InvalidIdentifier - The identifier contains NULL or an invalid unicode character.\n\n * 400 InvalidRecommendedActionUpsertRequest - The update recommended action request body does not exist or has no properties or state object.\n\n * 400 InvalidRecommendedActionState - The specified state for recommended action is invalid\n\n * 404 SubscriptionDoesNotHaveServer - The requested server was not found\n\n * 404 DatabaseDoesNotExist - The requested database was not found\n\n * 404 SubscriptionDoesNotHaveElasticPool - The requested elastic pool was not found\n\n * 404 AdvisorNotFound - The requested advisor was not found.\n\n * 404 RecommendedActionNotFound - The requested recommended action was not found.\n\n * 404 AdvisorNotFound - The requested advisor was not found.\n\n * 404 RecommendedActionNotFound - The requested recommended action was not found.\n\n * 405 NotSupported - This functionality is not supported.\n\n * 409 Conflict - Request could not be processed because of conflict in the request.\n\n * 503 ServiceTemporarilyUnavailable - Feature temporarily unavailable."
           }
         },
         "x-ms-examples": {
@@ -345,8 +345,8 @@
         "tags": [
           "ServerAdvisors"
         ],
-        "description": "Gets list of server advisors.",
-        "operationId": "Servers_ListAdvisors",
+        "description": "Gets a list of server advisors.",
+        "operationId": "ServerAdvisors_ListByServer",
         "parameters": [
           {
             "$ref": "#/parameters/ResourceGroupParameter"
@@ -372,7 +372,7 @@
             }
           },
           "default": {
-            "description": "*** Error Responses: ***\n\n * 400 InvalidIdentifier - The identifier contains NULL or an invalid unicode character.\n\n * 404 SubscriptionDoesNotHaveElasticPool - The requested elastic pool was not found\n\n * 404 SubscriptionDoesNotHaveServer - The requested server was not found\n\n * 404 DatabaseDoesNotExist - The requested database was not found\n\n * 404 AdvisorNotFound - The requested advisor was not found.\n\n * 405 NotSupported - This functionality is not supported.\n\n * 409 Conflict - Request could not be processed because of conflict in the request.\n\n * 503 ServiceTemporarilyUnavailable - Feature temporarily unavailable."
+            "description": "*** Error Responses: ***\n\n * 400 InvalidIdentifier - The identifier contains NULL or an invalid unicode character.\n\n * 404 SubscriptionDoesNotHaveServer - The requested server was not found\n\n * 404 DatabaseDoesNotExist - The requested database was not found\n\n * 404 SubscriptionDoesNotHaveElasticPool - The requested elastic pool was not found\n\n * 404 AdvisorNotFound - The requested advisor was not found.\n\n * 405 NotSupported - This functionality is not supported.\n\n * 409 Conflict - Request could not be processed because of conflict in the request.\n\n * 503 ServiceTemporarilyUnavailable - Feature temporarily unavailable."
           }
         },
         "x-ms-examples": {
@@ -390,8 +390,8 @@
         "tags": [
           "ServerAdvisors"
         ],
-        "description": "Returns details of a Server Advisor.",
-        "operationId": "Servers_GetAdvisor",
+        "description": "Gets a server advisor.",
+        "operationId": "ServerAdvisors_Get",
         "parameters": [
           {
             "$ref": "#/parameters/ResourceGroupParameter"
@@ -421,7 +421,7 @@
             }
           },
           "default": {
-            "description": "*** Error Responses: ***\n\n * 400 InvalidIdentifier - The identifier contains NULL or an invalid unicode character.\n\n * 404 SubscriptionDoesNotHaveElasticPool - The requested elastic pool was not found\n\n * 404 SubscriptionDoesNotHaveServer - The requested server was not found\n\n * 404 DatabaseDoesNotExist - The requested database was not found\n\n * 404 AdvisorNotFound - The requested advisor was not found.\n\n * 405 NotSupported - This functionality is not supported.\n\n * 409 Conflict - Request could not be processed because of conflict in the request.\n\n * 503 ServiceTemporarilyUnavailable - Feature temporarily unavailable."
+            "description": "*** Error Responses: ***\n\n * 400 InvalidIdentifier - The identifier contains NULL or an invalid unicode character.\n\n * 404 SubscriptionDoesNotHaveServer - The requested server was not found\n\n * 404 DatabaseDoesNotExist - The requested database was not found\n\n * 404 SubscriptionDoesNotHaveElasticPool - The requested elastic pool was not found\n\n * 404 AdvisorNotFound - The requested advisor was not found.\n\n * 405 NotSupported - This functionality is not supported.\n\n * 409 Conflict - Request could not be processed because of conflict in the request.\n\n * 503 ServiceTemporarilyUnavailable - Feature temporarily unavailable."
           }
         },
         "x-ms-examples": {
@@ -434,8 +434,8 @@
         "tags": [
           "ServerAdvisors"
         ],
-        "description": "Updates a Server Advisor.",
-        "operationId": "Servers_UpdateAdvisor",
+        "description": "Updates a server advisor.",
+        "operationId": "ServerAdvisors_Update",
         "parameters": [
           {
             "$ref": "#/parameters/ResourceGroupParameter"
@@ -474,7 +474,7 @@
             }
           },
           "default": {
-            "description": "*** Error Responses: ***\n\n * 400 InvalidIdentifier - The identifier contains NULL or an invalid unicode character.\n\n * 400 InvalidAdvisorUpsertRequest - The update advisor request body does not exist or has no properties object.\n\n * 400 InvalidAdvisorAutoExecuteStatus - Specified auto-execute status for the advisor is not allowed.\n\n * 404 SubscriptionDoesNotHaveElasticPool - The requested elastic pool was not found\n\n * 404 SubscriptionDoesNotHaveServer - The requested server was not found\n\n * 404 DatabaseDoesNotExist - The requested database was not found\n\n * 404 AdvisorNotFound - The requested advisor was not found.\n\n * 405 NotSupported - This functionality is not supported.\n\n * 409 Conflict - Request could not be processed because of conflict in the request.\n\n * 503 ServiceTemporarilyUnavailable - Feature temporarily unavailable."
+            "description": "*** Error Responses: ***\n\n * 400 InvalidIdentifier - The identifier contains NULL or an invalid unicode character.\n\n * 400 InvalidAdvisorUpsertRequest - The update advisor request body does not exist or has no properties object.\n\n * 400 InvalidAdvisorAutoExecuteStatus - Specified auto-execute status for the advisor is not allowed.\n\n * 404 SubscriptionDoesNotHaveServer - The requested server was not found\n\n * 404 DatabaseDoesNotExist - The requested database was not found\n\n * 404 SubscriptionDoesNotHaveElasticPool - The requested elastic pool was not found\n\n * 404 AdvisorNotFound - The requested advisor was not found.\n\n * 405 NotSupported - This functionality is not supported.\n\n * 409 Conflict - Request could not be processed because of conflict in the request.\n\n * 503 ServiceTemporarilyUnavailable - Feature temporarily unavailable."
           }
         },
         "x-ms-examples": {

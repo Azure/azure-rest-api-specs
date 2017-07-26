@@ -39,6 +39,111 @@ input-file:
 - Microsoft.Batch/2017-06-01.5.1/BatchService.json
 ```
 
+## Suppression
+
+Note that this setting should be removed once [this GitHub bug](https://github.com/Azure/azure-openapi-validator/issues/68) is fixed.
+``` yaml
+directive:
+  - suppress: R2063
+    from: BatchService.json
+    reason: Bug in linter
+```
+
+Note that this setting should be removed once [this GitHub bug](https://github.com/Azure/azure-openapi-validator/issues/69) is fixed.
+``` yaml
+directive:
+  - suppress: R2064
+    from: BatchService.json
+    reason: This is a data plane swagger specification, LRO's do not apply
+```
+
+``` yaml
+directive:
+  - suppress: R3016
+    from: BatchService.json
+    where: $..["odata.nextLink"]
+    reason: The casing of this property is not incorrect.
+```
+
+``` yaml
+directive:
+  - suppress: R3016
+    from: BatchService.json
+    where: $..["publicFQDN"]
+    reason: The suggested casing of this property is worse than the casing that we're using
+```
+
+``` yaml
+directive:
+  - suppress: R3016
+    from: BatchService.json
+    where: $.definitions.JobScheduleStatistics.properties.kernelCPUTime
+    reason: The suggested casing of this property is worse than the casing that we're using
+```
+
+``` yaml
+directive:
+  - suppress: R3016
+    from: BatchService.json
+    where: $.definitions.TaskStatistics.properties.userCPUTime
+    reason: The suggested casing of this property is worse than the casing that we're using
+```
+
+``` yaml
+directive:
+  - suppress: R3016
+    from: BatchService.json
+    where: $.definitions.TaskStatistics.properties.kernelCPUTime
+    reason: The suggested casing of this property is worse than the casing that we're using
+```
+
+``` yaml
+directive:
+  - suppress: R3016
+    from: BatchService.json
+    where: $.definitions.JobScheduleStatistics.properties.userCPUTime
+    reason: The suggested casing of this property is worse than the casing that we're using
+```
+
+``` yaml
+directive:
+  - suppress: R3016
+    from: BatchService.json
+    where: $.definitions.JobStatistics.properties.kernelCPUTime
+    reason: The suggested casing of this property is worse than the casing that we're using
+```
+
+``` yaml
+directive:
+  - suppress: R3016
+    from: BatchService.json
+    where: $.definitions.JobStatistics.properties.userCPUTime
+    reason: The suggested casing of this property is worse than the casing that we're using
+```
+
+``` yaml
+directive:
+  - suppress: R3016
+    from: BatchService.json
+    where: $.definitions.ResourceStatistics.properties.avgCPUPercentage
+    reason: The suggested casing of this property is worse than the casing that we're using
+```
+
+``` yaml
+directive:
+  - suppress: R3016
+    from: BatchService.json
+    where: $.definitions.PoolEndpointConfiguration.properties.inboundNATPools
+    reason: The suggested casing of this property is worse than the casing that we're using
+```
+
+``` yaml
+directive:
+  - suppress: R3016
+    from: BatchService.json
+    where: $.definitions.VirtualMachineConfiguration.properties.nodeAgentSKUId
+    reason: The suggested casing of this property is worse than the casing that we're using
+```
 
 ### Tag: package-2017-05.5.0
 
@@ -98,7 +203,7 @@ Please also specify `--csharp-sdks-folder=<path to "SDKs" directory of your azur
 ``` yaml $(csharp)
 csharp:
   azure-arm: true
-  license-header: MICROSOFT_MIT
+  license-header: MICROSOFT_MIT_NO_VERSION
   payload-flattening-threshold: 1
   namespace: Microsoft.Azure.Batch
   output-folder: $(csharp-sdks-folder)/Batch/DataPlane/Azure.Batch/GeneratedProtocol

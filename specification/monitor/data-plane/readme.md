@@ -59,7 +59,7 @@ Please also specify `--csharp-sdks-folder=<path to "SDKs" directory of your azur
 csharp:
   azure-arm: true
   payload-flattening-threshold: 1
-  license-header: MICROSOFT_MIT
+  license-header: MICROSOFT_MIT_NO_VERSION
   namespace: Microsoft.Azure.Management.Monitor
   output-folder: $(csharp-sdks-folder)/Monitor/Management.Monitor/Generated/Monitor
   clear-output-folder: true

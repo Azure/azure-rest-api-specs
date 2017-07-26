@@ -72,7 +72,7 @@ Please also specify `--csharp-sdks-folder=<path to "SDKs" directory of your azur
 csharp:
   # last generated with AutoRest.1.0.0-Nightly20170129 from commit 19f63015ea5a8a0fc64b9d7e2cdfeac447d93eaf 
   azure-arm: true
-  license-header: MICROSOFT_MIT
+  license-header: MICROSOFT_MIT_NO_VERSION
   namespace: Microsoft.Azure.Management.Batch
   payload-flattening-threshold: 1
   output-folder: $(csharp-sdks-folder)/Batch/Management/Management.Batch/Generated
