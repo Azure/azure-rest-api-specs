@@ -1416,7 +1416,7 @@ Links: [Index](#index) | [Error vs. Warning](#error-vs-warning) | [Automated Rul
 ### <a name="R3060" />R3060 XmsPageableListByRGAndSubscriptions
 **Output Message**: For the tracked resource '{0}', the x-ms-pageable extension values must be same for list by resource group and subscriptions operations.
 
-**Description**: When a tracked resource has list by resource group and subscription operations, the x-ms-pageable extension values must be same for both operations. A tracked resource is a resource with a 'location' property. If this rule flags a resource which does not have a 'location' property, then it might be a false positive.
+**Description**: When a tracked resource has list by resource group and subscription operations, the x-ms-pageable extension values must be same for both operations. A tracked resource is a resource with a 'location' property as required. If this rule flags a resource which does not have a 'location' property, then it might be a false positive.
 
 **Why the rule is important**: This will provide a consistent experience to the user, i.e. the user could expect the same behavior for both list by subscription and resource group. Please refer [here](./swagger-extensions.md#x-ms-pageable) for details on the x-ms-pageable extension.
 
