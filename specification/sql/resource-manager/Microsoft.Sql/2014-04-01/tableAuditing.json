@@ -284,6 +284,109 @@
           }
         }
       }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/servers/{serverName}/databases/{databaseName}/connectionPolicies/{connectionPolicyName}": {
+      "get": {
+        "tags": [
+          "TableAuditing"
+        ],
+        "description": "Gets a database's connection policy, which is used with table auditing. Table auditing is deprecated, use blob auditing instead.",
+        "deprecated": true,
+        "operationId": "DatabaseConnectionPolicies_Get",
+        "x-ms-examples": {
+          "Get database table auditing policy": { "$ref": "./examples/DatabaseConnectionPolicyGet.json" }
+        },
+        "parameters": [
+          {
+            "$ref": "#/parameters/ResourceGroupParameter"
+          },
+          {
+            "$ref": "#/parameters/ServerNameParameter"
+          },
+          {
+            "name": "databaseName",
+            "in": "path",
+            "description": "The name of the database for which the connection policy is defined.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "$ref": "#/parameters/ConnectionPolicyNameParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successfully retrieved the database connection policy.",
+            "schema": {
+              "$ref": "#/definitions/DatabaseConnectionPolicy"
+            }
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "TableAuditing"
+        ],
+        "description": "Creates or updates a database's connection policy, which is used with table auditing. Table auditing is deprecated, use blob auditing instead.",
+        "deprecated": true,
+        "operationId": "DatabaseConnectionPolicies_CreateOrUpdate",
+        "x-ms-examples": {
+          "Create or update database connection policy": { "$ref": "./examples/DatabaseConnectionPolicyCreateOrUpdate.json" }
+        },
+        "parameters": [
+          {
+            "$ref": "#/parameters/ResourceGroupParameter"
+          },
+          {
+            "$ref": "#/parameters/ServerNameParameter"
+          },
+          {
+            "name": "databaseName",
+            "in": "path",
+            "description": "The name of the database for which the connection policy will be defined.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "$ref": "#/parameters/ConnectionPolicyNameParameter"
+          },
+          {
+            "name": "parameters",
+            "in": "body",
+            "description": "The database connection policy.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/DatabaseConnectionPolicy"
+            }
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successfully set the database connection policy.",
+            "schema": {
+              "$ref": "#/definitions/DatabaseConnectionPolicy"
+            }
+          },
+          "201": {
+            "description": "Successfully created the database connection policy.",
+            "schema": {
+              "$ref": "#/definitions/DatabaseConnectionPolicy"
+            }
+          }
+        }
+      }
     }
   },
   "definitions": {
@@ -359,6 +462,66 @@
           "$ref": "#/definitions/TableAuditingPolicyProperties"
         }
       ]
+    },
+    "DatabaseConnectionPolicyProperties": {
+      "description": "Properties of a database connection policy.",
+      "type": "object",
+      "properties": {
+        "securityEnabledAccess": {
+          "description": "The state of security access.",
+          "type": "string"
+        },
+        "proxyDnsName": {
+          "description": "The fully qualified host name of the auditing proxy.",
+          "type": "string"
+        },
+        "proxyPort": {
+          "description": "The port number of the auditing proxy.",
+          "type": "string"
+        },
+        "visibility": {
+          "description": "The visibility of the auditing proxy.",
+          "type": "string"
+        },
+        "useServerDefault": {
+          "description": "Whether server default is enabled or disabled.",
+          "type": "string"
+        },
+        "redirectionState": {
+          "description": "The state of proxy redirection.",
+          "type": "string"
+        },
+        "state": {
+          "description": "The connection policy state.",
+          "type": "string"
+        }
+      }
+    },
+    "DatabaseConnectionPolicy": {
+      "description": "A database connection policy.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/ProxyResource"
+        }
+      ],
+      "properties": {
+        "kind": {
+          "description": "Resource kind.",
+          "type": "string",
+          "readOnly": true
+        },
+        "location":{
+          "type":"string",
+          "readOnly": true,
+          "description":"Resource location."
+        },
+        "properties": {
+          "$ref": "#/definitions/DatabaseConnectionPolicyProperties",
+          "description": "Resource properties.",
+          "x-ms-client-flatten": true
+        }
+      }
     },
     "Resource": {
       "description": "ARM resource.",
@@ -522,7 +685,22 @@
         "default"
       ],
       "x-ms-enum": {
-        "name": "tableAuditingPolicyName",
+        "name": "TableAuditingPolicyName",
+        "modelAsString": true
+      },
+      "x-ms-parameter-location": "method"
+    },
+    "ConnectionPolicyNameParameter": {
+      "name": "connectionPolicyName",
+      "in": "path",
+      "description": "The name of the connection policy.",
+      "required": true,
+      "type": "string",
+      "enum": [
+        "default"
+      ],
+      "x-ms-enum": {
+        "name": "ConnectionPolicyName",
         "modelAsString": true
       },
       "x-ms-parameter-location": "method"
