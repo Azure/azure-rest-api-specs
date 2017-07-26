@@ -61,8 +61,8 @@
         "tags": [
           "Queries"
         ],
-        "operationId": "Queries_Get",
-        "description": "Gets a query.",
+        "operationId": "QueryStatistics_ListByQuery",
+        "description": "Lists a query's statistics.",
         "x-ms-examples":{
           "Get a query": { "$ref": "./examples/QueriesGet.json" }
         },
@@ -93,7 +93,7 @@
           "200": {
             "description": "OK",
             "schema": {
-              "$ref": "#/definitions/QueryListResult"
+              "$ref": "#/definitions/QueryStatisticListResult"
             }
           }
         },
@@ -179,7 +179,7 @@
         "queries": {
           "type": "array",
           "items": {
-            "$ref": "#/definitions/Query"
+            "$ref": "#/definitions/QueryStatistic"
           },
           "description": "The list of queries.",
           "readOnly": true
@@ -187,7 +187,7 @@
       },
       "description": "A database query."
     },
-    "Query": {
+    "QueryStatistic": {
       "properties": {
         "queryId": {
           "description": "The id of the query",
@@ -278,12 +278,12 @@
       "required": ["value"],
       "description": "Represents the response to a get top queries request."
     },
-    "QueryListResult": {
+    "QueryStatisticListResult": {
       "properties": {
         "value": {
           "type": "array",
           "items": {
-            "$ref": "#/definitions/Query"
+            "$ref": "#/definitions/QueryStatistic"
           },
           "description": "The query."
         }
