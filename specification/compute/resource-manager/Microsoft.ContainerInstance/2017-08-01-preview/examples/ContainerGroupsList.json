@@ -1,6 +1,7 @@
 {
   "parameters": {
     "subscriptionId": "subid",
+    "resourceGroupName": "demo",
     "api-version": "2017-08-01-preview"
   },
   "responses": {
@@ -8,45 +9,71 @@
       "body": {
         "value": [
           {
-            "id": "/subscriptions/subid/resourceGroups/demo/providers/Microsoft.ContainerInstance/containerGroups/demo1",
-            "location": "west us",
-            "name": "demo1",
-            "properties": {
-              "containers": [
-                {
-                  "name": "demo1",
-                  "properties": {
-                    "command": null,
-                    "environmentVariables": [],
-                    "image": "nginx",
-                    "instanceView": null,
-                    "ports": [
-                      {
-                        "port": 80
-                      }
-                    ],
-                    "resources": null
-                  }
-                }
-              ],
-              "imageRegistryCredentials": null,
-              "ipAddress": {
-                "ip": "10.0.0.0",
+            "containers": [
+              {
+                "command": null,
+                "environmentVariables": [],
+                "image": "nginx",
+                "instanceView": null,
+                "name": "demo1",
                 "ports": [
                   {
-                    "port": 80,
-                    "protocol": "TCP"
+                    "port": 80
+                  }
+                ],
+                "resources": {
+                  "limits": null,
+                  "requests": {
+                    "cpu": 1,
+                    "memoryInGb": 1.5
+                  }
+                },
+                "volumeMounts": [
+                  {
+                    "mountPath": "/mnt/volume1",
+                    "name": "volume1",
+                    "readOnly": false
                   }
                 ]
-              },
-              "osType": "Linux",
-              "provisioningState": "Succeeded",
-              "restartPolicy": null,
-              "state": null
+              }
+            ],
+            "id": "/subscriptions/subid/resourceGroups/demo/providers/Microsoft.ContainerInstance/containerGroups/demo1",
+            "imageRegistryCredentials": [
+              {
+                "password": null,
+                "server": "azcloudconsoleregistry.azurecr.io",
+                "username": "azcloudconsoleregistry"
+              }
+            ],
+            "ipAddress": {
+              "ip": "10.0.0.1",
+              "ports": [
+                {
+                  "port": 80,
+                  "protocol": "TCP"
+                }
+              ]
             },
+            "location": "WestUs",
+            "name": "volumet1",
+            "osType": "Linux",
+            "provisioningState": "Succeeded",
             "resourceGroup": "demo",
+            "restartPolicy": null,
+            "state": null,
             "tags": null,
-            "type": "Microsoft.ContainerInstance/containerGroups"
+            "type": "Microsoft.ContainerInstance/containerGroups",
+            "volumes": [
+              {
+                "azureFile": {
+                  "readOnly": null,
+                  "shareName": "share1",
+                  "storageAccountKey": null,
+                  "storageAccountName": "stroage1"
+                },
+                "name": "volume1"
+              }
+            ]
           }
         ]
       }

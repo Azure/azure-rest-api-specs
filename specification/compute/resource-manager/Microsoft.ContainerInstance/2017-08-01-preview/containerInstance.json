@@ -57,6 +57,9 @@
               "$ref": "#/definitions/ContainerGroupListResult"
             }
           }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
         }
       }
     },
@@ -91,6 +94,9 @@
               "$ref": "#/definitions/ContainerGroupListResult"
             }
           }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
         }
       }
     },
@@ -333,6 +339,7 @@
           }
         },
         "environmentVariables": {
+          "description": "The environment variables to set in this container",
           "type": "array",
           "items": {
             "$ref": "#/definitions/EnvironmentVariable"
@@ -356,6 +363,7 @@
               "$ref": "#/definitions/ContainerState"
             },
             "events": {
+              "description": "The events of this container instance.",
               "type": "array",
               "items": {
                 "$ref": "#/definitions/ContainerEvent"
@@ -390,7 +398,8 @@
           "description": "Date/time when the container state started."
         },
         "exitCode": {
-          "type": "integer"
+          "type": "integer",
+          "description": "The container exit code."
         },
         "finishTime": {
           "type": "string",
@@ -573,12 +582,14 @@
                 },
                 "containers": {
                   "type": "array",
+                  "description": "The containers in this container group.",
                   "items": {
                     "$ref": "#/definitions/Container"
                   }
                 },
                 "imageRegistryCredentials": {
                   "type": "array",
+                  "description": "The image registry credentials by which the container group is created from.",
                   "items": {
                     "$ref": "#/definitions/ImageRegistryCredential"
                   }
@@ -591,10 +602,11 @@
                   ],
                   "x-ms-enum": {
                     "name": "ContainerRestartPolicy",
-                    "modelAsString": false
+                    "modelAsString": true
                   }
                 },
                 "ipAddress": {
+                  "description": "The IP address type.",
                   "$ref": "#/definitions/IpAddress"
                 },
                 "osType": {
@@ -606,7 +618,7 @@
                   ],
                   "x-ms-enum": {
                     "name": "OperatingSystemTypes",
-                    "modelAsString": false
+                    "modelAsString": true
                   }
                 },
                 "state": {
@@ -616,6 +628,7 @@
                 },
                 "volumes": {
                   "type": "array",
+                  "description": "The volumes for this container group.",
                   "items": {
                     "$ref": "#/definitions/Volume"
                   }
@@ -636,14 +649,15 @@
       "properties": {
         "server": {
           "type": "string",
-          "description": "docker image registry server, without protocol such as \"http\" and \"https\"."
+          "description": "Docker image registry server, without protocol such as \"http\" and \"https\"."
         },
         "username": {
-          "type": "string"
+          "type": "string",
+          "description": "The username for the private registry."
         },
         "password": {
           "type": "string",
-          "description": "Password for the private registry. In most cases, this will be pulled from KeyVault."
+          "description": "The password for the private registry."
         }
       },
       "required": [
@@ -657,6 +671,7 @@
       "properties": {
         "ports": {
           "type": "array",
+          "description": "The ports.",
           "items": {
             "$ref": "#/definitions/Port"
           }
@@ -669,7 +684,7 @@
           ],
           "x-ms-enum": {
             "name": "ContainerGroupIpAddressType",
-            "modelAsString": false
+            "modelAsString": true
           }
         },
         "ip": {
@@ -688,17 +703,19 @@
       "properties": {
         "protocol": {
           "type": "string",
+          "description": "The protocol associated with the port.",
           "enum": [
             "TCP",
             "UDP"
           ],
           "x-ms-enum": {
             "name": "ContainerGroupNetworkProtocol",
-            "modelAsString": false
+            "modelAsString": true
           }
         },
         "port": {
           "type": "integer",
+          "description": "The port.",
           "format": "int32"
         }
       },
@@ -725,10 +742,12 @@
       "type": "object",
       "properties": {
         "name": {
-          "type": "string"
+          "type": "string",
+          "description": "The name of the environment variable."
         },
         "value": {
-          "type": "string"
+          "type": "string",
+          "description": "The value of the environment variable."
         }
       },
       "required": [
