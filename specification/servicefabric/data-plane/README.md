@@ -48,16 +48,3 @@ These settings apply only when `--tag=5.6` is specified on the command line.
 input-file:
 - Microsoft.ServiceFabric/5.6/servicefabric.json
 ```
-
-
----
-## Language-specific settings: CSharp
-
-These settings apply only when `--csharp` is specified on the command line.
-
-``` yaml $(csharp)
-csharp:
-  # override the default output folder
-  output-folder: $(output-folder)/csharp
-```
-

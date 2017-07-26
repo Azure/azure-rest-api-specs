@@ -56,16 +56,3 @@ These settings apply only when `--tag=package-2016-07-preview` is specified on t
 input-file:
 - Microsoft.Advisor/2016-07-12-preview/advisor.json
 ```
-
-
----
-## Language-specific settings: CSharp
-
-These settings apply only when `--csharp` is specified on the command line.
-
-``` yaml $(csharp)
-csharp:
-  # override the default output folder
-  output-folder: $(output-folder)/csharp
-```
-

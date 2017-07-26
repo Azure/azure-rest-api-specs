@@ -38,16 +38,3 @@ These settings apply only when `--tag=package-2015-06-preview` is specified on t
 input-file:
 - Microsoft.Commerce/2015-06-01-preview/commerce.json
 ```
-
-
----
-## Language-specific settings: CSharp
-
-These settings apply only when `--csharp` is specified on the command line.
-
-``` yaml $(csharp)
-csharp:
-  # override the default output folder
-  output-folder: $(output-folder)/csharp
-```
-

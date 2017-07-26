@@ -38,15 +38,3 @@ These settings apply only when `--tag=package-2017-04-preview` is specified on t
 input-file:
 - Microsoft.DBforPostgreSQL/2017-04-30-preview/postgresql.json
 ```
-
-
----
-## Language-specific settings: CSharp
-
-These settings apply only when `--csharp` is specified on the command line.
-
-``` yaml $(csharp)
-csharp:
-  # override the default output folder
-  output-folder: $(output-folder)/csharp
-```

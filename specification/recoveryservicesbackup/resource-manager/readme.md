@@ -62,16 +62,21 @@ input-file:
 ## C#
 
 These settings apply only when `--csharp` is specified on the command line.
+Please also specify `--csharp-sdks-folder=<path to "SDKs" directory of your azure-sdk-for-net clone>`.
 
 ```yaml $(csharp)
 csharp:
   azure-arm: true
-  license-header: MICROSOFT_MIT
+  payload-flattening-threshold: 1
+  license-header: MICROSOFT_MIT_NO_VERSION
   namespace: Microsoft.Azure.Management.RecoveryServices.Backup
-  output-folder: $(output-folder)Generated/CSharp
+  output-folder: $(csharp-sdks-folder)/RecoveryServices.Backup/Management.RecoveryServices.Backup/Generated
+  clear-output-folder: true
 ```
 
 ## Python
+
+These settings apply only when `--python` is specified on the command line.
 
 ```yaml $(python)
 python:

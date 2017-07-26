@@ -233,6 +233,54 @@
         }
       }
     },
+    "/Subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.RecoveryServices/vaults/{resourceName}/replicationFabrics/{fabricName}/migratetoaad": {
+      "post": {
+        "tags": [
+          "ReplicationFabrics"
+        ],
+        "summary": "Migrates the site to AAD.",
+        "description": "The operation to migrate an Azure Site Recovery fabric to AAD.",
+        "operationId": "ReplicationFabrics_MigrateToAad",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/ApiVersion"
+          },
+          {
+            "$ref": "#/parameters/ResourceName"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupName"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionId"
+          },
+          {
+            "name": "fabricName",
+            "in": "path",
+            "description": "ASR fabric to migrate.",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "202": {
+            "description": "Accepted"
+          },
+          "204": {
+            "description": "NoContent"
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-examples": {
+          "Migrates the site to AAD.": {
+            "$ref": "./examples/ReplicationFabrics_MigrateToAad.json"
+          }
+        }
+      }
+    },
     "/Subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.RecoveryServices/vaults/{resourceName}/replicationFabrics/{fabricName}/renewCertificate": {
       "post": {
         "tags": [

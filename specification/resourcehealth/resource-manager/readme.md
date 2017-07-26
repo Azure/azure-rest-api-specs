@@ -26,7 +26,17 @@ These are the global settings for the ResourceHealth API.
 
 ``` yaml
 openapi-type: arm
-tag: package-2015-01
+tag: package-2017-07
+```
+
+
+### Tag: package-2017-07
+
+These settings apply only when `--tag=package-2017-07` is specified on the command line.
+
+``` yaml $(tag) == 'package-2017-07'
+input-file:
+- Microsoft.ResourceHealth/2017-07-01/resourcehealth.json
 ```
 
 
@@ -38,16 +48,3 @@ These settings apply only when `--tag=package-2015-01` is specified on the comma
 input-file:
 - Microsoft.ResourceHealth/2015-01-01/resourcehealth.json
 ```
-
-
----
-## Language-specific settings: CSharp
-
-These settings apply only when `--csharp` is specified on the command line.
-
-``` yaml $(csharp)
-csharp:
-  # override the default output folder
-  output-folder: $(output-folder)/csharp
-```
-

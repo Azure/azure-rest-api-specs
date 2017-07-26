@@ -1,3 +1,4 @@
+
 # DataLakeAnalytics
     
 > see https://aka.ms/autorest
@@ -25,8 +26,6 @@ To see additional help and options, run:
 These are the global settings for the DataLakeAnalytics API.
 
 ``` yaml
-title: DataLakeAnalyticsAccountManagementClient
-description: DataLake Analytics Client
 openapi-type: arm
 tag: package-2016-11
 ```
@@ -41,37 +40,29 @@ input-file:
 - Microsoft.DataLakeAnalytics/2016-11-01/account.json
 ```
  
-### Tag: package-2016-03-preview
+### Tag: package-2015-10-preview
 
-These settings apply only when `--tag=package-2016-03-preview` is specified on the command line.
+These settings apply only when `--tag=package-2015-10-preview` is specified on the command line.
 
-``` yaml $(tag) == 'package-2016-03-preview'
+``` yaml $(tag) == 'package-2015-10-preview'
 input-file:
 - Microsoft.DataLakeAnalytics/2015-10-01-preview/account.json
-- Microsoft.DataLakeAnalytics/2015-10-01-preview/catalog.json
-- Microsoft.DataLakeAnalytics/2016-03-20-preview/job.json
 ```
- 
-### Tag: package-2015-11-preview
-
-These settings apply only when `--tag=package-2015-11-preview` is specified on the command line.
-
-``` yaml $(tag) == 'package-2015-11-preview'
-input-file:
-- Microsoft.DataLakeAnalytics/2015-10-01-preview/account.json
-- Microsoft.DataLakeAnalytics/2015-10-01-preview/catalog.json
-- Microsoft.DataLakeAnalytics/2015-11-01-preview/job.json
-```
-
 
 ---
-## Language-specific settings: CSharp
+# Code Generation
+
+
+## C# 
 
 These settings apply only when `--csharp` is specified on the command line.
+Please also specify `--csharp-sdks-folder=<path to "SDKs" directory of your azure-sdk-for-net clone>`.
 
 ``` yaml $(csharp)
 csharp:
-  # override the default output folder
-  output-folder: $(output-folder)/csharp
+  azure-arm: true
+  license-header: MICROSOFT_MIT_NO_VERSION
+  namespace: Microsoft.Azure.Management.DataLake.Analytics
+  output-folder: $(csharp-sdks-folder)/DataLake.Analytics/Management.DataLake.Analytics/Generated
+  clear-output-folder: true
 ```
-

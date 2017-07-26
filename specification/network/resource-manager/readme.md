@@ -114,7 +114,7 @@ These settings apply only when `--tag=package-2016-09` is specified on the comma
 
 ``` yaml $(tag) == 'package-2016-09'
 input-file:
-- microsoft.Network/2016-09-01/vmssNetworkInterface.json
+- Microsoft.Network/2016-09-01/vmssNetworkInterface.json
 - Microsoft.Network/2016-09-01/applicationGateway.json
 - Microsoft.Network/2016-09-01/checkDnsAvailability.json
 - Microsoft.Network/2016-09-01/expressRouteCircuit.json
@@ -186,20 +186,26 @@ input-file:
 - Microsoft.Network/2015-05-01-preview/network.json
 ```
 
-
 ---
-## Language-specific settings: CSharp
+# Code Generation
+
+
+## C# 
 
 These settings apply only when `--csharp` is specified on the command line.
+Please also specify `--csharp-sdks-folder=<path to "SDKs" directory of your azure-sdk-for-net clone>`.
 
 ``` yaml $(csharp)
 csharp:
-  # override the default output folder
-  output-folder: $(output-folder)/csharp
+  azure-arm: true
+  license-header: MICROSOFT_MIT_NO_VERSION
+  namespace: Microsoft.Azure.Management.Network
+  output-folder: $(csharp-sdks-folder)/Network/Management.Network/Generated
+  clear-output-folder: true
 ```
 
 
-## Language-specific settings: Python
+## Python
 
 These settings apply only when `--python` is specified on the command line.
 
@@ -248,5 +254,5 @@ namespace: azure.mgmt.network.v2016_09_01
 These settings apply only when `--tag=package-2015-06split --python` is specified on the command line.
 
 ``` yaml $(tag) == 'package-2015-06split' && $(python)
-namespace: azure.mgmt.network.v2015_06_01
+namespace: azure.mgmt.network.v2015_06_15
 ```

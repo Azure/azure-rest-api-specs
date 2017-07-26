@@ -69,18 +69,26 @@ input-file:
 
 
 ---
-## Language-specific settings: CSharp
+# Code Generation
+
+
+## C# 
 
 These settings apply only when `--csharp` is specified on the command line.
+Please also specify `--csharp-sdks-folder=<path to "SDKs" directory of your azure-sdk-for-net clone>`.
 
 ``` yaml $(csharp)
 csharp:
-  # override the default output folder
-  output-folder: $(output-folder)/csharp
+  # last generated with commit e416af734666d658a04530df605f60480c01cc10
+  azure-arm: true
+  license-header: MICROSOFT_MIT_NO_VERSION
+  namespace: Microsoft.Azure.Management.WebSites
+  output-folder: $(csharp-sdks-folder)/WebSites/Management.WebSites/Generated
+  clear-output-folder: true
 ```
 
 
-## Language-specific settings: Python
+## Python
 
 These settings apply only when `--python` is specified on the command line.
 

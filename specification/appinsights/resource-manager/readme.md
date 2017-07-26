@@ -42,16 +42,3 @@ input-file:
 - microsoft.insights/2015-05-01/components_API.json
 - microsoft.insights/2015-05-01/webTests_API.json
 ```
-
-
----
-## Language-specific settings: CSharp
-
-These settings apply only when `--csharp` is specified on the command line.
-
-``` yaml $(csharp)
-csharp:
-  # override the default output folder
-  output-folder: $(output-folder)/csharp
-```
-
