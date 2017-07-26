@@ -39,8 +39,6 @@ We request OpenAPI(Swagger) spec authoring be assigned to engineers who have an
 | [R2044](#R2044)	| [InvalidVerbUsed](#R2044) |
 | [R3023](#R3023)	| [OperationsAPIImplementation](#R3023) |
 | [R3007](#R3007)	| [PutGetPatchResponseSchema](#R3007) |
-| M3003	| RequiredPropertiesMustExist |
-| M3001 | ResourceModelValidation |
 | [R3025](#R3025)	| [TrackedResourceGetOperation](#R3025) |
 | [R3026](#R3026)	| [TrackedResourcePatchOperation](#R3026) |
 | [R2059](#R2059)	| [UniqueResourcePaths](#R2059) |
@@ -55,7 +53,6 @@ We request OpenAPI(Swagger) spec authoring be assigned to engineers who have an
 
 | Id | Rule Name |
 | --- | --- |
-| M2061	| ProvidersPathValidation |
 | [R3018](#R3018)	| [EnumInsteadOfBoolean](#R3018)	|
 | [R3017](#R3017)	| [GuidUsage](#R3017) |
 | [R2057](#R2057)	| [InvalidSkuModel](#R2057) |
@@ -70,12 +67,10 @@ We request OpenAPI(Swagger) spec authoring be assigned to engineers who have an
 | --- | --- |
 | [R2024](#R2024) | [AnonymousBodyParameter](#R2024) |
 | [R2026](#R2026) | [AvoidAnonymousTypes](#R2026) |
-| [R2014](#R2014)	| [OperationParametersValidation](#R2014)	|
+| [R2014](#R2014)	| [SubscriptionIdParameterInOperations](#R2014)	|
 | [R2027](#R2027)	| [DefaultMustBeInEnum](#R2027) |
-| M1004	| ListByOperationsValidation |
 | [R1001](#R1001)	| [OperationIdNounInVerb](#R1001)	|
 | [R2055](#R2055)	| [OneUnderscoreInOperationId](#R2055) |
-| [R2014](#R2014)	| [ServiceDefinitionParameters](#R2014) |
 | [R2003](#R2003)	| [ValidFormats](#R2003)	 |
 | [R2005](#R2005)	| [LongRunningResponseStatusCode](#R2005) |
 | [R2008](#R2008)	| [MutabilityWithReadOnlyRule](#R2008) |
@@ -86,7 +81,7 @@ We request OpenAPI(Swagger) spec authoring be assigned to engineers who have an
 | [R2058](#R2058) | [XmsPathsMustOverloadPaths](#R2058) |
 | [R2012](#R2012)	| [XmsClientNameParameter](#R2012) |
 | [R2013](#R2013)	| [XmsClientNameProperty](#R2013) |
-| M2047	| ParameterNameValidation |
+| [R2047](#R2047)	| [NamePropertyDefinitionInParameter](#R2047) |
 | [R2056](#R2056)	| [RequiredReadOnlyProperties](#R2056) |
 | [R2054](#R2054)	| [SecurityDefinitionsStructure](#R2054) |
 | [R2006](#R2006)	| [ControlCharactersNotAllowed](#R2006) |
@@ -98,7 +93,6 @@ We request OpenAPI(Swagger) spec authoring be assigned to engineers who have an
 
 | Id | Rule Name |
 | --- | --- |
-| M4000 | ModelTypeIncomplete |
 | [R4000](#R4000-2) | [ParameterDescriptionRequired](#R4000-2) |
 | [R4000](#R4000-3) | [DescriptiveDescriptionRequired](#R4000-3) |
 | [R4000](#R4000-4) | [DescriptionAndTitleMissing](#R4000-4) |
@@ -998,7 +992,7 @@ Links: [Index](#index) | [Error vs. Warning](#error-vs-warning) | [Automated Rul
 
 Links: [Index](#index) | [Error vs. Warning](#error-vs-warning) | [Automated Rules](#automated-rules) | [RPC](#rpc-violations): [Errors](#rpc-errors) or [Warnings](#rpc-warnings) | [SDK](#sdk-violations): [Errors](#sdk-errors) or [Warnings](#sdk-warnings)
 
-### <a name="R2014" />R2014 SubscriptionIdParameterInOperations/ServiceDefinitionParameters
+### <a name="R2014" />R2014 SubscriptionIdParameterInOperations
 **Output Message**: Parameter "subscriptionId" is not allowed in the operations section, define it in the global parameters section instead/Parameter "{0}" is referenced but not defined in the global parameters section of Service Definition
 
 **Description**: `subscriptionId` must not be an operation parameter and must be declared in the global parameters section.
@@ -1341,7 +1335,7 @@ Links: [Index](#index) | [Error vs. Warning](#error-vs-warning) | [Automated Rul
 
 **Description**: A 'Resource' definition must have x-ms-azure-resource extension enabled and set to true. This will indicate that the model is an Azure resource.
 
-**Why the rule is important**: This will ensure that the 'Resource' definition is designed correctly.Please refer [here](./swagger-extensions.md#x-ms-azure-resource) for further details.
+**Why the rule is important**: This will ensure that the 'Resource' definition is designed correctly in code generation.Please refer [here](./swagger-extensions.md#x-ms-azure-resource) for further details.
 
 **How to fix the violation**: Ensure that the 'Resource' definition has x-ms-azure-resource extension enabled and set to true.
 
@@ -1387,7 +1381,7 @@ Links: [Index](#index) | [Error vs. Warning](#error-vs-warning) | [Automated Rul
 
 **Why the rule is important**: This will provide a consistent experience to the user, i.e. the user could use the same model object to perform various operations. Also, within the SDK, this will encourage reuse of the same model objects.
 
-**How to fix the violation**: Ensure that, for a given path with PUT, GET and PATCH operations, the schema of the response is same.
+**How to fix the violation**: Ensure that, for a given path with PUT, GET and PATCH operations, the schema of the response is same. This might involve a service side change which will result in a breaking change in the generated SDK.
 
 Links: [Index](#index) | [Error vs. Warning](#error-vs-warning) | [Automated Rules](#automated-rules) | [RPC](#rpc-violations): [Errors](#rpc-errors) or [Warnings](#rpc-warnings) | [SDK](#sdk-violations): [Errors](#sdk-errors) or [Warnings](#sdk-warnings)
 
@@ -1407,7 +1401,7 @@ Links: [Index](#index) | [Error vs. Warning](#error-vs-warning) | [Automated Rul
 
 **Description**: The 200 response model for an ARM PUT operation must have x-ms-azure-resource extension set to true in its hierarchy. Operation: '{0}' Model: '{1}'.
 
-**Why the rule is important**: This will ensure that the PUT operation actually returns a resource.Please refer [here](./swagger-extensions.md#x-ms-azure-resource) for details on x-ms-azure-resource extension.
+**Why the rule is important**: This will ensure that the PUT operation actually returns a resource model.Please refer [here](./swagger-extensions.md#x-ms-azure-resource) for details on x-ms-azure-resource extension.
 
 **How to fix the violation**: Ensure that the 200 response model for an ARM PUT operation must have x-ms-azure-resource extension set to true in its hierarchy.
 
@@ -1420,7 +1414,7 @@ Links: [Index](#index) | [Error vs. Warning](#error-vs-warning) | [Automated Rul
 
 **Why the rule is important**: This will provide a consistent experience to the user, i.e. the user could expect the same behavior for both list by subscription and resource group. Please refer [here](./swagger-extensions.md#x-ms-pageable) for details on the x-ms-pageable extension.
 
-**How to fix the violation**: Ensure that when a tracked resource has list by resource group and subscription operations, the x-ms-pageable extension values are same for both operations.
+**How to fix the violation**: Ensure that when a tracked resource has list by resource group and subscription operations, the x-ms-pageable extension values are same for both operations. This might involve a service side change which will result in a breaking change in the generated SDK.
 
 Links: [Index](#index) | [Error vs. Warning](#error-vs-warning) | [Automated Rules](#automated-rules) | [RPC](#rpc-violations): [Errors](#rpc-errors) or [Warnings](#rpc-warnings) | [SDK](#sdk-violations): [Errors](#sdk-errors) or [Warnings](#sdk-warnings)
 
@@ -1431,7 +1425,7 @@ Links: [Index](#index) | [Error vs. Warning](#error-vs-warning) | [Automated Rul
 
 **Why the rule is important**: Please refer [here](./swagger-extensions.md#x-ms-long-running-operation) for details on the x-ms-long-running-operation. The '201' response code indicates 'Created' & '200' response code indicates 'Success'. In either case, it is logical for the response to be the same.
 
-**How to fix the violation**: Ensure that the '200'/'201' responses of the long running operation has a schema definition.
+**How to fix the violation**: Ensure that the '200'/'201' responses of the long running operation has a schema definition. This might involve a service side change which will result in a breaking change in the generated SDK.
 
 Links: [Index](#index) | [Error vs. Warning](#error-vs-warning) | [Automated Rules](#automated-rules) | [RPC](#rpc-violations): [Errors](#rpc-errors) or [Warnings](#rpc-warnings) | [SDK](#sdk-violations): [Errors](#sdk-errors) or [Warnings](#sdk-warnings)
 
