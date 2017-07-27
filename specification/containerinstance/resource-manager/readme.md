@@ -30,11 +30,11 @@ tag: package-2017-08-preview
 ```
 
 
-### Tag: package-container-instance-2017-08-preview
+### Tag: package-2017-08-preview
 
-These settings apply only when `--tag=package-container-instance-2017-08-preview` is specified on the command line.
+These settings apply only when `--tag=package-2017-08-preview` is specified on the command line.
 
-``` yaml $(tag) == 'package-container-instance-2017-08-preview'
+``` yaml $(tag) == 'package-2017-08-preview'
 input-file:
 - Microsoft.ContainerInstance/2017-08-01-preview/containerInstance.json
 ```
