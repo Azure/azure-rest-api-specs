@@ -303,6 +303,14 @@
 		}	
 	},	 
 	"definitions": {
+	    "SubResource": {
+		  "properties": {
+			"id": {
+			  "type": "string",
+			  "description": "Resource ID."
+			}
+		  }
+		},
 		"ErrorModel": {
 		  "description": "The structure of the error",
 		  "properties": {
@@ -326,7 +334,7 @@
 				"circuit": {
 					"type": "array",
 					"items": {
-						"$ref": "./network.json#/definitions/SubResource",
+						"$ref": "#/definitions/SubResource",
 						"description": "The reference to the express route circuit resource."
 					},
 					"description": "List of Express Route Circuits."
