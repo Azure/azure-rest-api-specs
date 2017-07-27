@@ -331,7 +331,7 @@
 		},
 		"expressRouteConnectorReturnObjectPropertiesFormat": {
 			"properties": {
-				"circuit": {
+				"circuits": {
 					"type": "array",
 					"items": {
 						"$ref": "#/definitions/SubResource",
@@ -368,15 +368,15 @@
 				  "$ref": "./network.json#/definitions/Resource"
 				}
 			  ],
-			  "description": "Express Route Connector Resource without Authorization Key"
+			  "description": "Express Route Connector Resource without Authorization Keys"
 		},
 		"expressRouteConnectorPropertiesFormat": {
 			"required": [
-				"circuit",
+				"circuits",
 				"addressPrefix"
 			],
 			"properties": {
-				"circuit": {
+				"circuits": {
 					"type": "array",
 					"items": {
 						"$ref": "./network.json#/definitions/SubResource",
@@ -384,7 +384,7 @@
 					},
 					"description": "List of Express Route Circuits."
 				},
-				"authorization": {
+				"authorizationKeys": {
 					"type": "array",
 					"items": {
 						"type": "string",
