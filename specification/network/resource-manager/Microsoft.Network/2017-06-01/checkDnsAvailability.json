@@ -36,7 +36,7 @@
     }
   },
   "paths": {
-  	"/subscriptions/{subscriptionId}/providers/Microsoft.Network/locations/{location}/CheckDnsNameAvailability": {
+    "/subscriptions/{subscriptionId}/providers/Microsoft.Network/locations/{location}/CheckDnsNameAvailability": {
       "get": {
         "operationId": "CheckDnsNameAvailability",
         "description": "Checks whether a domain name in the cloudapp.net zone is available for use.",
@@ -69,12 +69,15 @@
               "$ref": "#/definitions/DnsNameAvailabilityResult"
             }
           }
+        },
+        "x-ms-examples": {
+          "Check Dns Name Availability": { "$ref": "./examples/CheckDnsNameAvailability.json" }
         }
       }
     }
   },
   "definitions": {
-	"DnsNameAvailabilityResult": {
+    "DnsNameAvailabilityResult": {
       "properties": {
         "available": {
           "type": "boolean",
