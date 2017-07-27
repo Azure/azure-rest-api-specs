@@ -2,7 +2,7 @@
   "swagger": "2.0",
   "info": {
     "version": "2017-08-01-preview",
-    "title": "Microsoft Container Instance Management Client"
+    "title": "ContainerInstanceManagementClient"
   },
   "host": "management.azure.com",
   "schemes": [
@@ -35,10 +35,10 @@
   "paths": {
     "/subscriptions/{subscriptionId}/providers/Microsoft.ContainerInstance/containerGroups": {
       "get": {
-        "operationId": "ContainerGroups_ListAll",
+        "operationId": "ContainerGroups_List",
         "x-ms-examples": {
-          "ContainerGroupsListAll": {
-            "$ref": "./examples/ContainerGroupsListAll.json"
+          "ContainerGroupsList": {
+            "$ref": "./examples/ContainerGroupsList.json"
           }
         },
         "description": "Get the list of container groups in a given subscription.",
@@ -65,10 +65,10 @@
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ContainerInstance/containerGroups": {
       "get": {
-        "operationId": "ContainerGroups_List",
+        "operationId": "ContainerGroups_ListByResourceGroup",
         "x-ms-examples": {
-          "ContainerGroupsList": {
-            "$ref": "./examples/ContainerGroupsList.json"
+          "ContainerGroupsListByResourceGroup": {
+            "$ref": "./examples/ContainerGroupsListByResourceGroup.json"
           }
         },
         "description": "Get the list of container groups in a given resource group.",
@@ -278,7 +278,7 @@
             "name": "tail",
             "in": "query",
             "description": "Only show this number of log lines. If not provided, all available logs are shown.",
-            "type": "string"
+            "type": "integer"
           }
         ],
         "responses": {
