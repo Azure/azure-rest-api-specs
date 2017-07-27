@@ -137,6 +137,7 @@ input-file:
  - ./Microsoft.Sql/2014-04-01/servers.json
  - ./Microsoft.Sql/2014-04-01/serviceObjectives.json
  - ./Microsoft.Sql/2014-04-01/sql.core.json
+ - ./Microsoft.Sql/2014-04-01/tableAuditing.json
  - ./Microsoft.Sql/2014-04-01/usages.json
 
 # Needed when there is more than one input file
