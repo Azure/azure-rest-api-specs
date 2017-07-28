@@ -294,6 +294,9 @@
             "description": "Accepted and the operation will complete asynchronously."
           }
         },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        },
         "x-ms-examples": {
           "Show network interface effective route tables": { "$ref": "./examples/NetworkInterfaceEffectiveRouteTableList.json" }
         },
@@ -339,6 +342,9 @@
           "202": {
             "description": "Accepted and the operation will complete asynchronously."
           }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
         },
         "x-ms-examples": {
           "List network interface effective network security groups": { "$ref": "./examples/NetworkInterfaceEffectiveNSGList.json" }
@@ -688,6 +694,7 @@
           "description": "A list of network interfaces in a resource group."
         },
         "nextLink": {
+          "readOnly": true,
           "type": "string",
           "description": "The URL to get the next set of results."
         }
@@ -704,6 +711,7 @@
           "description": "A list of ip configurations."
         },
         "nextLink": {
+          "readOnly": true,
           "type": "string",
           "description": "The URL to get the next set of results."
         }
@@ -720,6 +728,7 @@
           "description": "A list of load balancers."
         },
         "nextLink": {
+          "readOnly": true,
           "type": "string",
           "description": "The URL to get the next set of results."
         }
@@ -889,6 +898,7 @@
           "description": "A list of effective network security groups."
         },
         "nextLink": {
+          "readOnly": true,
           "type": "string",
           "description": "The URL to get the next set of results."
         }
@@ -969,6 +979,7 @@
           "description": "A list of effective routes."
         },
         "nextLink": {
+          "readOnly": true,
           "type": "string",
           "description": "The URL to get the next set of results."
         }
@@ -1029,7 +1040,7 @@
           "$ref": "./network.json#/definitions/SubResource"
         }
       ],
-      "description": "IPConfiguration"
+      "description": "IP configuration"
     }
   },
   "parameters": {

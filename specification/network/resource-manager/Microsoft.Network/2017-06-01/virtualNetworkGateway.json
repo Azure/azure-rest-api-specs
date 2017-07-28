@@ -241,6 +241,9 @@
             }
           }
         },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        },
         "x-ms-examples": {
           "VirtualNetworkGatewaysListConnections": { "$ref": "./examples/VirtualNetworkGatewaysListConnections.json" }
         }
@@ -1056,7 +1059,8 @@
       "properties": {
         "properties": {
           "x-ms-client-flatten": true,
-          "$ref": "#/definitions/VirtualNetworkGatewayIPConfigurationPropertiesFormat"
+          "$ref": "#/definitions/VirtualNetworkGatewayIPConfigurationPropertiesFormat",
+          "description": "Properties of the virtual network gateway ip configuration."
         },
         "name": {
           "type": "string",
@@ -1172,7 +1176,8 @@
       "properties": {
         "properties": {
           "x-ms-client-flatten": true,
-          "$ref": "#/definitions/VpnClientRootCertificatePropertiesFormat"
+          "$ref": "#/definitions/VpnClientRootCertificatePropertiesFormat",
+          "description": "Properties of the vpn client root certificate."
         },
         "name": {
           "type": "string",
@@ -1211,7 +1216,8 @@
       "properties": {
         "properties": {
           "x-ms-client-flatten": true,
-          "$ref": "#/definitions/VpnClientRevokedCertificatePropertiesFormat"
+          "$ref": "#/definitions/VpnClientRevokedCertificatePropertiesFormat",
+          "description": "Properties of the vpn client revoked certificate."
         },
         "name": {
           "type": "string",
@@ -1436,7 +1442,8 @@
       "properties": {
         "properties": {
           "x-ms-client-flatten": true,
-          "$ref": "#/definitions/VirtualNetworkGatewayPropertiesFormat"
+          "$ref": "#/definitions/VirtualNetworkGatewayPropertiesFormat",
+          "description": "Properties of the virtual network gateway."
         },
         "etag": {
           "type": "string",
@@ -1503,6 +1510,7 @@
           "description": "Gets a list of VirtualNetworkGateway resources that exists in a resource group."
         },
         "nextLink": {
+          "readOnly": true,
           "type": "string",
           "description": "The URL to get the next set of results."
         }
@@ -1594,13 +1602,16 @@
           "description": "The authorizationKey."
         },
         "virtualNetworkGateway1": {
-          "$ref": "#/definitions/GatewayReference"
+          "$ref": "#/definitions/GatewayReference",
+          "description": "The reference to virtual network gateway resource."
         },
         "virtualNetworkGateway2": {
-          "$ref": "#/definitions/GatewayReference"
+          "$ref": "#/definitions/GatewayReference",
+          "description": "The reference to virtual network gateway resource."
         },
         "localNetworkGateway2": {
-          "$ref": "#/definitions/GatewayReference"
+          "$ref": "#/definitions/GatewayReference",
+          "description": "The reference to local network gateway resource."
         },
         "connectionType": {
           "type": "string",
@@ -1699,7 +1710,8 @@
       "properties": {
         "properties": {
           "x-ms-client-flatten": true,
-          "$ref": "#/definitions/VirtualNetworkGatewayConnectionPropertiesFormat"
+          "$ref": "#/definitions/VirtualNetworkGatewayConnectionPropertiesFormat",
+          "description": "Properties of the virtual network gateway connection."
         },
         "etag": {
           "type": "string",
@@ -1726,6 +1738,7 @@
           "description": "Gets a list of VirtualNetworkGatewayConnection resources that exists in a resource group."
         },
         "nextLink": {
+          "readOnly": true,
           "type": "string",
           "description": "The URL to get the next set of results."
         }
@@ -1913,7 +1926,8 @@
       "properties": {
         "properties": {
           "x-ms-client-flatten": true,
-          "$ref": "#/definitions/LocalNetworkGatewayPropertiesFormat"
+          "$ref": "#/definitions/LocalNetworkGatewayPropertiesFormat",
+          "description": "Properties of the local network gateway."
         },
         "etag": {
           "type": "string",
@@ -1940,6 +1954,7 @@
           "description": "A list of local network gateways that exists in a resource group."
         },
         "nextLink": {
+          "readOnly": true,
           "type": "string",
           "description": "The URL to get the next set of results."
         }
