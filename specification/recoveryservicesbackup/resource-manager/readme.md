@@ -30,7 +30,6 @@ description: Open API 2.0 Specs for Azure RecoveryServices Backup service
 openapi-type: arm
 tag: package-2016-12
 
-azure-arm: true
 license-header: MICROSOFT_MIT
 ```
 
