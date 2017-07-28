@@ -13768,44 +13768,55 @@
     "MSDeployStatus": {
       "description": "MSDeploy ARM response",
       "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/Resource"
+        }
+      ],
       "properties": {
-        "deployer": {
-          "description": "Username of deployer",
-          "type": "string",
-          "readOnly": true
-        },
-        "provisioningState": {
-          "description": "Provisioning state",
-          "enum": [
-            "accepted",
-            "running",
-            "succeeded",
-            "failed",
-            "canceled"
-          ],
-          "type": "string",
-          "readOnly": true,
-          "x-ms-enum": {
-            "name": "MSDeployProvisioningState",
-            "modelAsString": false
-          }
-        },
-        "startTime": {
-          "format": "date-time",
-          "description": "Start time of deploy operation",
-          "type": "string",
-          "readOnly": true
-        },
-        "endTime": {
-          "format": "date-time",
-          "description": "End time of deploy operation",
-          "type": "string",
-          "readOnly": true
-        },
-        "complete": {
-          "description": "Whether the deployment operation has completed",
-          "type": "boolean",
-          "readOnly": true
+        "properties": {
+          "description": "MSDeployStatus resource specific properties",
+          "properties": {
+            "deployer": {
+              "description": "Username of deployer",
+              "type": "string",
+              "readOnly": true
+            },
+            "provisioningState": {
+              "description": "Provisioning state",
+              "enum": [
+                "accepted",
+                "running",
+                "succeeded",
+                "failed",
+                "canceled"
+              ],
+              "type": "string",
+              "readOnly": true,
+              "x-ms-enum": {
+                "name": "MSDeployProvisioningState",
+                "modelAsString": false
+              }
+            },
+            "startTime": {
+              "format": "date-time",
+              "description": "Start time of deploy operation",
+              "type": "string",
+              "readOnly": true
+            },
+            "endTime": {
+              "format": "date-time",
+              "description": "End time of deploy operation",
+              "type": "string",
+              "readOnly": true
+            },
+            "complete": {
+              "description": "Whether the deployment operation has completed",
+              "type": "boolean",
+              "readOnly": true
+            }
+          },
+          "x-ms-client-flatten": true
         }
       }
     },
@@ -14364,7 +14375,8 @@
         },
         "name": {
           "description": "Resource Name.",
-          "type": "string"
+          "type": "string",
+          "readOnly": true
         },
         "kind": {
           "description": "Kind of resource.",
@@ -14376,7 +14388,8 @@
         },
         "type": {
           "description": "Resource type.",
-          "type": "string"
+          "type": "string",
+          "readOnly": true
         },
         "tags": {
           "description": "Resource tags.",
