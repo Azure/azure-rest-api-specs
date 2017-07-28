@@ -50,8 +50,8 @@ function processViaAutoRest(swaggerPath) {
 
   console.log(`Processing via AutoRest...`);
 
-  let outputFileNameWithExt = swaggerPath.split('/').pop();
-  let outputFileNameWithoutExt = outputFileNameWithExt.split('.')[0];
+  let outputFileNameWithExt = path.basename(swaggerPath);
+  let outputFileNameWithoutExt = path.basename(swaggerPath, '.json');
   let autoRestCmd = `autorest --input-file=${swaggerPath} --output-artifact=swagger-document.json --output-file=${outputFileNameWithoutExt} --output-folder=${outputFolder}`;
 
   console.log(`Executing : ${autoRestCmd}`);
@@ -97,7 +97,7 @@ async function runScript() {
   console.dir(resolvedMapForNewSpecs);
 
   for (const swagger of swaggersToProcess) {
-    let outputFileNameWithExt = swagger.split('/').pop();
+    let outputFileNameWithExt = path.basename(swagger);
 
     console.log(outputFileNameWithExt);
     if (resolvedMapForNewSpecs[outputFileNameWithExt]) {
