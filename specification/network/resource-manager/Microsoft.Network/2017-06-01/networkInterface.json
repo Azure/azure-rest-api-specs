@@ -76,6 +76,9 @@
             "description": "Delete successful."
           }
         },
+        "x-ms-examples": {
+          "Delete network interface": { "$ref": "./examples/NetworkInterfaceDelete.json" }
+        },
         "x-ms-long-running-operation": true
       },
       "get": {
@@ -120,6 +123,9 @@
               "$ref": "#/definitions/NetworkInterface"
             }
           }
+        },
+        "x-ms-examples": {
+          "Get network interface": { "$ref": "./examples/NetworkInterfaceGet.json" }
         }
       },
       "put": {
@@ -173,6 +179,9 @@
             }
           }
         },
+        "x-ms-examples": {
+          "Create network interface": { "$ref": "./examples/NetworkInterfaceCreate.json" }
+        },
         "x-ms-long-running-operation": true
       }
     },
@@ -198,6 +207,9 @@
               "$ref": "#/definitions/NetworkInterfaceListResult"
             }
           }
+        },
+        "x-ms-examples": {
+          "List all network interfaces": { "$ref": "./examples/NetworkInterfaceListAll.json" }
         },
         "x-ms-pageable": {
           "nextLinkName": "nextLink"
@@ -233,6 +245,9 @@
               "$ref": "#/definitions/NetworkInterfaceListResult"
             }
           }
+        },
+        "x-ms-examples": {
+          "List network interfaces in resource group": { "$ref": "./examples/NetworkInterfaceList.json" }
         },
         "x-ms-pageable": {
           "nextLinkName": "nextLink"
@@ -279,6 +294,9 @@
             "description": "Accepted and the operation will complete asynchronously."
           }
         },
+        "x-ms-examples": {
+          "Show network interface effective route tables": { "$ref": "./examples/NetworkInterfaceEffectiveRouteTableList.json" }
+        },
         "x-ms-long-running-operation": true
       }
     },
@@ -322,12 +340,15 @@
             "description": "Accepted and the operation will complete asynchronously."
           }
         },
+        "x-ms-examples": {
+          "List network interface effective network security groups": { "$ref": "./examples/NetworkInterfaceEffectiveNSGList.json" }
+        },
         "x-ms-long-running-operation": true
       }
     }
   },
   "definitions": {
-	"NetworkInterfaceIPConfigurationPropertiesFormat": {
+    "NetworkInterfaceIPConfigurationPropertiesFormat": {
       "properties": {
         "applicationGatewayBackendAddressPools": {
           "type": "array",
@@ -351,7 +372,8 @@
           "description": "A list of references of LoadBalancerInboundNatRules."
         },
         "privateIPAddress": {
-          "type": "string"
+          "type": "string",
+          "description": "Private IP address of the IP configuration."
         },
         "privateIPAllocationMethod": {
           "type": "string",
@@ -378,17 +400,20 @@
           }
         },
         "subnet": {
-          "$ref": "./virtualNetwork.json#/definitions/Subnet"
+          "$ref": "./virtualNetwork.json#/definitions/Subnet",
+          "description": "Subnet bound to the IP configuration."
         },
         "primary": {
           "type": "boolean",
           "description": "Gets whether this is a primary customer address on the network interface."
         },
         "publicIPAddress": {
-          "$ref": "./publicIpAddress.json#/definitions/PublicIPAddress"
+          "$ref": "./publicIpAddress.json#/definitions/PublicIPAddress",
+          "description": "Public IP address bound to the IP configuration."
         },
         "provisioningState": {
-          "type": "string"
+          "type": "string",
+          "description": "The provisioning state of the network interface IP configuration. Possible values are: 'Updating', 'Deleting', and 'Failed'."
         }
       },
       "description": "Properties of IP configuration."
@@ -397,7 +422,8 @@
       "properties": {
         "properties": {
           "x-ms-client-flatten": true,
-          "$ref": "#/definitions/NetworkInterfaceIPConfigurationPropertiesFormat"
+          "$ref": "#/definitions/NetworkInterfaceIPConfigurationPropertiesFormat",
+          "description": "Network interface IP configuration properties."
         },
         "name": {
           "type": "string",
@@ -498,7 +524,8 @@
       "properties": {
         "properties": {
           "x-ms-client-flatten": true,
-          "$ref": "#/definitions/NetworkInterfacePropertiesFormat"
+          "$ref": "#/definitions/NetworkInterfacePropertiesFormat",
+          "description": "Properties of the network interface."
         },
         "etag": {
           "type": "string",
@@ -535,7 +562,8 @@
           "description": "The ID of network security group that is applied."
         },
         "association": {
-          "$ref": "#/definitions/EffectiveNetworkSecurityGroupAssociation"
+          "$ref": "#/definitions/EffectiveNetworkSecurityGroupAssociation",
+          "description": "Associated resources."
         },
         "effectiveSecurityRules": {
           "type": "array",
@@ -579,14 +607,14 @@
         },
         "protocol": {
           "type": "string",
-          "description": "The network protocol this rule applies to. Possible values are: 'Tcp', 'Udp', and '*'.",
+          "description": "The network protocol this rule applies to. Possible values are: 'Tcp', 'Udp', and 'All'.",
           "enum": [
             "Tcp",
             "Udp",
-            "*"
+            "All"
           ],
           "x-ms-enum": {
-            "name": "SecurityRuleProtocol",
+            "name": "EffectiveSecurityRuleProtocol",
             "modelAsString": true
           }
         },
@@ -813,7 +841,8 @@
       "properties": {
         "properties": {
           "x-ms-client-flatten": true,
-          "$ref": "#/definitions/IPConfigurationPropertiesFormat"
+          "$ref": "#/definitions/IPConfigurationPropertiesFormat",
+          "description": "Properties of the IP configuration"
         },
         "name": {
           "type": "string",
