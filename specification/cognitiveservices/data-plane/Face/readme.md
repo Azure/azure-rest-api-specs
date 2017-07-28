@@ -27,11 +27,4 @@ csharp:
   namespace: Microsoft.CognitiveServices.Face
 
 ```
-## NodeJS Settings
 
-These settings apply only when `--csharp` is specified on the command line.
-``` yaml $(nodejs) 
-nodejs: 
-  namespace: Microsoft.CognitiveServices.Face
-
-```
