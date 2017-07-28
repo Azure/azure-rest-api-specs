@@ -77,11 +77,12 @@ async function runScript() {
   }
 
   let swaggersToProcess = utils.getFilesChangedInPR();
-  if (!isRunningInTraviCI) {
-    // Useful when debugging a test for a particular swagger.
-    swaggersToProcess = [ '/Users/vishrut/git-repos/azure-rest-api-specs/specification/storage/resource-manager/Microsoft.Storage/2017-06-01/storage.json',
-                          '/Users/vishrut/git-repos/azure-rest-api-specs/specification/network/resource-manager/Microsoft.Network/2017-06-01/applicationGateway.json' ];
-  }
+
+  // For debugging in your repo, please uncomment following section and update swaggersToProcess array for the desired swaggers
+  // if (!isRunningInTraviCI) {
+  //   swaggersToProcess = [ '/Users/vishrut/git-repos/azure-rest-api-specs/specification/storage/resource-manager/Microsoft.Storage/2017-06-01/storage.json',
+  //                         '/Users/vishrut/git-repos/azure-rest-api-specs/specification/network/resource-manager/Microsoft.Network/2017-06-01/applicationGateway.json' ];
+  // }
   console.log(swaggersToProcess);
 
   for (const swagger of swaggersToProcess) {

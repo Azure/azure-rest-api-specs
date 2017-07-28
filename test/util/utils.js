@@ -73,13 +73,11 @@ exports.getTargetBranch = function getTargetBranch() {
 };
 
 /**
- * Checkouts targetBranch
- *
- * @param {string} swaggerPath Path to the swagger specification file.
+ * Checkout the targetBranch
  */
 exports.checkoutTargetBranch = function checkoutTargetBranch() {
   let targetBranch = exports.getTargetBranch();
-  
+
   console.log(`Changing the branch to ${targetBranch}...`);
   execSync(`git remote -vv`, { encoding: 'utf8' });
   execSync(`git branch --all`, { encoding: 'utf8' });
@@ -219,7 +217,7 @@ exports.getFilesChangedInPR = function getFilesChangedInPR() {
       console.log('>>>>> Files changed in this PR are as follows:')
       console.log(filesChanged);
       swaggerFilesInPR = filesChanged.split('\n').filter(function (item) {
-        if (item.match(/.*json$/ig) == null || item.match(/package.json$/ig) != null) {
+        if (item.match(/.*json$/ig) == null || item.match(/.*specification$/ig) == null) {
           return false;
         }
         if (item.match(/.*\/examples\/*/ig) !== null) {
