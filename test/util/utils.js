@@ -217,7 +217,7 @@ exports.getFilesChangedInPR = function getFilesChangedInPR() {
       console.log('>>>>> Files changed in this PR are as follows:')
       console.log(filesChanged);
       swaggerFilesInPR = filesChanged.split('\n').filter(function (item) {
-        if (item.match(/.*json$/ig) == null || item.match(/.*specification$/ig) == null) {
+        if (item.match(/.*json$/ig) == null || item.match(/.*specification.*/ig) == null) {
           return false;
         }
         if (item.match(/.*\/examples\/*/ig) !== null) {
