@@ -883,7 +883,7 @@
             "modelAsString": false
           },
           "default": "Allow",
-          "description": "The action of virtual network ACL rule."
+          "description": "The action of virtual network rule."
         },
         "state": {
           "type": "string",
@@ -898,7 +898,7 @@
             "name": "State",
             "modelAsString": false
           },
-          "description": "Gets the state of virtual network ACL rule."
+          "description": "Gets the state of virtual network rule."
         }
       },
       "required": [ "id" ],
@@ -929,7 +929,7 @@
       ],
       "description": "IP rule with specific IP or IP range in CIDR format."
     },
-    "StorageNetworkAcls": {
+    "NetworkRuleSet": {
       "properties": {
         "bypass": {
           "type": "string",
@@ -953,7 +953,7 @@
             "description": "Virtual Network rule.",
             "$ref": "#/definitions/VirtualNetworkRule"
           },
-          "description": "Sets the virtual network ACL rules"
+          "description": "Sets the virtual network rules"
         },
         "ipRules": {
           "type": "array",
@@ -980,7 +980,7 @@
       "required": [
         "defaultAction"
       ],
-      "description": "Network ACL"
+      "description": "Network rule set"
     },
     "StorageAccountPropertiesCreateParameters": {
       "properties": {
@@ -993,8 +993,9 @@
           "description": "Provides the encryption settings on the account. If left unspecified the account encryption settings will remain the same. The default setting is unencrypted."
         },
         "networkAcls": {
-          "$ref": "#/definitions/StorageNetworkAcls",
-          "description": "Network ACL"
+          "$ref": "#/definitions/NetworkRuleSet",
+          "x-ms-client-name": "NetworkRuleSet",
+          "description": "Network rule set"
         },
         "accessTier": {
           "type": "string",
@@ -1221,8 +1222,9 @@
           "description": "Allows https traffic only to storage service if sets to true."
         },
         "networkAcls": {
-          "$ref": "#/definitions/StorageNetworkAcls",
-          "description": "Network ACL",
+          "$ref": "#/definitions/NetworkRuleSet",
+          "x-ms-client-name": "NetworkRuleSet",
+          "description": "Network rule set",
           "readOnly": true
         }
       },
@@ -1360,8 +1362,9 @@
           "description": "Allows https traffic only to storage service if sets to true."
         },
         "networkAcls": {
-          "description": "Network ACL",
-          "$ref": "#/definitions/StorageNetworkAcls"
+          "description": "Network rule set",
+          "x-ms-client-name": "NetworkRuleSet",
+          "$ref": "#/definitions/NetworkRuleSet"
         }
       },
       "description": "The parameters used when updating a storage account."
