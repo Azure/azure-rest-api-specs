@@ -536,10 +536,8 @@
                         "name": "VirtualWANName",
                         "in": "path",
                         "required": true,
-                        "schema": {
-                            "$ref": "#/definitions/VirtualWANParameter"
-                        },
-                        "description": "Parameters supplied to generate the configuration for all vpn-sites under a particular virtual-wan."
+                        "type": "string",
+                        "description": "The name of the VirtualWAN for which configuration of all vpn-sites is needed."
                     },
                     {
                         "$ref": "#/parameters/VpnSiteParameter"
@@ -1909,9 +1907,9 @@
                     "type": "string",
                     "description": "The ip-address for the vpn-site."
                 },
-                "subnets": {
+                "AddressPrefixes": {
                     "type": "array",
-                    "description": "list of subnets for vpn-site.",
+                    "description": "list of address-prefixes for vpn-site.",
                     "items": {
                         "type": "string"
                     }
@@ -2661,8 +2659,7 @@
                 "Succeeded",
                 "Updating",
                 "Deleting",
-                "Failed",
-                "Cancelled"
+                "Failed"
             ],
             "x-ms-enum": {
                 "name": "ProvisioningState",
@@ -2770,10 +2767,6 @@
                 }
             },
             "description": "Details of Vpn client Connection health."
-        },
-        "VirtualWANParameter": {
-            "type": "string",
-            "description": "The name of the VirtualWAN."
         }
     },
     "parameters": {
@@ -2806,9 +2799,9 @@
             "description": "The name of the VirtualHub."
         },
         "VpnSiteParameter": {
-            "name": "api-version",
-            "in": "query",
-            "required": true,
+            "name": "VpnSiteParameter",
+            "in": "body",
+            "required": false,
             "type": "string",
             "description": "Resource Uri of the Vpn-Site."
         },
