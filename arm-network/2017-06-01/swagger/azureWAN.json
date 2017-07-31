@@ -34,7 +34,7 @@
         }
     },
     "paths": {
-        "/subscriptions/{subscriptionId}/resourceGroup/{resourceGroupName}/providers/Microsoft.Network/VirtualWANs/{VirtualWANName}": {
+        "/subscriptions/{subscriptionId}/resourceGroup/{resourceGroupName}/providers/Microsoft.Network/virtualWANs/{VirtualWANName}": {
             "get": {
                 "operationId": "VirtualWANs_Get",
                 "x-ms-examples": {
@@ -210,7 +210,7 @@
                 "x-ms-long-running-operation": true
             }
         },
-        "/subscriptions/{subscriptionId}/resourceGroup/{resourceGroupName}/providers/Microsoft.Network/VirtualWANs": {
+        "/subscriptions/{subscriptionId}/resourceGroup/{resourceGroupName}/providers/Microsoft.Network/virtualWANs": {
             "get": {
                 "operationId": "VirtualWANs_ListByResourceGroup",
                 "x-ms-examples": {
@@ -244,7 +244,7 @@
                 }
             }
         },
-        "/subscriptions/{subscriptionId}/providers/Microsoft.Network/VirtualWANs": {
+        "/subscriptions/{subscriptionId}/providers/Microsoft.Network/virtualWANs": {
             "get": {
                 "operationId": "VirtualWANs_ListBySubscriptionId",
                 "x-ms-examples": {
@@ -518,7 +518,7 @@
             }
         },
 
-        "/subscriptions/{subscriptionId}/resourceGroup/{resourceGroupName}/providers/Microsoft.Network/vpnSites/vpnConfiguration": {
+        "/subscriptions/{subscriptionId}/resourceGroup/{resourceGroupName}/providers/Microsoft.Network/virtualWANs/{VirtualWANName}/vpnConfiguration": {
             "post": {
                 "operationId": "VpnSitesConfiguration_Download",
                 "x-ms-examples": {
@@ -533,13 +533,16 @@
                         "$ref": "#/parameters/ResourceGroupParameter"
                     },
                     {
-                        "name": "VirtualWANParameter",
-                        "in": "body",
+                        "name": "VirtualWANName",
+                        "in": "path",
                         "required": true,
                         "schema": {
                             "$ref": "#/definitions/VirtualWANParameter"
                         },
-                        "description": "Parameters supplied to generate the configuration for vpn-sites."
+                        "description": "Parameters supplied to generate the configuration for all vpn-sites under a particular virtual-wan."
+                    },
+                    {
+                        "$ref": "#/parameters/VpnSiteParameter"
                     },
                     {
                         "$ref": "#/parameters/ApiVersionParameter"
@@ -562,8 +565,8 @@
                 "x-ms-long-running-operation": true
             }
         },
-
-        "/subscriptions/{subscriptionId}/resourceGroup/{resourceGroupName}/providers/Microsoft.Network/VirtualHubs/{VirtualHubName}": {
+        
+        "/subscriptions/{subscriptionId}/resourceGroup/{resourceGroupName}/providers/Microsoft.Network/virtualHubs/{virtualHubName}": {
             "get": {
                 "operationId": "VirtualHubs_Get",
                 "x-ms-examples": {
@@ -723,7 +726,7 @@
                 "x-ms-long-running-operation": true
             }
         },
-        "/subscriptions/{subscriptionId}/resourceGroup/{resourceGroupName}/providers/Microsoft.Network/VirtualHubs": {
+        "/subscriptions/{subscriptionId}/resourceGroup/{resourceGroupName}/providers/Microsoft.Network/virtualHubs": {
             "get": {
                 "operationId": "VirtualHubs_ListByResourceGroup",
                 "x-ms-examples": {
@@ -757,7 +760,7 @@
                 }
             }
         },
-        "/subscriptions/{subscriptionId}/providers/Microsoft.Network/VirtualHubs": {
+        "/subscriptions/{subscriptionId}/providers/Microsoft.Network/virtualHubs": {
             "get": {
                 "operationId": "VirtualHubs_ListBySubscriptionId",
                 "x-ms-examples": {
@@ -789,7 +792,7 @@
             }
         },
 
-        "/subscriptions/{subscriptionId}/resourceGroup/{resourceGroupName}/providers/Microsoft.Network/VirtualHubs/{VirtualHubName}/scalableVpnGateways/{gatewayName}": {
+        "/subscriptions/{subscriptionId}/resourceGroup/{resourceGroupName}/providers/Microsoft.Network/virtualHubs/{virtualHubName}/scalableVpnGateways/{gatewayName}": {
             "get": {
                 "operationId": "ScalableVpnGateways_Get",
                 "x-ms-examples": {
@@ -961,7 +964,7 @@
                 "x-ms-long-running-operation": true
             }
         },
-        "/subscriptions/{subscriptionId}/resourceGroup/{resourceGroupName}/providers/Microsoft.Network/VirtualHubs/{VirtualHubName}/scalableVpnGateways/{gatewayName}/vpnConnections/{connectionName}": {
+        "/subscriptions/{subscriptionId}/resourceGroup/{resourceGroupName}/providers/Microsoft.Network/virtualHubs/{virtualHubName}/scalableVpnGateways/{gatewayName}/vpnConnections/{connectionName}": {
             "get": {
                 "operationId": "VpnConnections_Get",
                 "x-ms-examples": {
@@ -1145,7 +1148,7 @@
                 "x-ms-long-running-operation": true
             }
         },
-        "/subscriptions/{subscriptionId}/providers/Microsoft.Network/VirtualHubs/{VirtualHubName}/scalableVpnGateways/{gatewayName}/vpnConnections": {
+        "/subscriptions/{subscriptionId}/providers/Microsoft.Network/virtualHubs/{virtualHubName}/scalableVpnGateways/{gatewayName}/vpnConnections": {
             "get": {
                 "operationId": "VpnConnections_ListByScalableVpnGateway",
                 "x-ms-examples": {
@@ -1183,7 +1186,7 @@
             }
         },
 
-        "/subscriptions/{subscriptionId}/resourceGroup/{resourceGroupName}/providers/Microsoft.Network/VirtualHubs/{VirtualHubName}/scalableExpressRouteGateways/{gatewayName}": {
+        "/subscriptions/{subscriptionId}/resourceGroup/{resourceGroupName}/providers/Microsoft.Network/virtualHubs/{virtualHubName}/scalableExpressRouteGateways/{gatewayName}": {
             "get": {
                 "operationId": "ScalableExpressRouteGateways_Get",
                 "x-ms-examples": {
@@ -1355,7 +1358,7 @@
                 "x-ms-long-running-operation": true
             }
         },
-        "/subscriptions/{subscriptionId}/resourceGroup/{resourceGroupName}/providers/Microsoft.Network/VirtualHubs/{VirtualHubName}/scalableExpressRouteGateways/{gatewayName}/expressRouteConnections/{connectionName}": {
+        "/subscriptions/{subscriptionId}/resourceGroup/{resourceGroupName}/providers/Microsoft.Network/virtualHubs/{virtualHubName}/scalableExpressRouteGateways/{gatewayName}/expressRouteConnections/{connectionName}": {
             "get": {
                 "operationId": "ExpressRouteConnections_Get",
                 "x-ms-examples": {
@@ -1539,7 +1542,7 @@
                 "x-ms-long-running-operation": true
             }
         },
-        "/subscriptions/{subscriptionId}/resourceGroup/{resourceGroupName}/providers/Microsoft.Network/VirtualHubs/{VirtualHubName}/scalableExpressRouteGateways/{gatewayName}/expressRouteConnections": {
+        "/subscriptions/{subscriptionId}/resourceGroup/{resourceGroupName}/providers/Microsoft.Network/virtualHubs/{virtualHubName}/scalableExpressRouteGateways/{gatewayName}/expressRouteConnections": {
             "get": {
                 "operationId": "ExpressRouteConnections_List",
                 "x-ms-examples": {
@@ -1580,7 +1583,7 @@
             }
         },
 
-        "/subscriptions/{subscriptionId}/resourceGroup/{resourceGroupName}/providers/Microsoft.Network/VirtualHubs/{VirtualHubName}/VirtualHubVnetConnections/{connectionName}": {
+        "/subscriptions/{subscriptionId}/resourceGroup/{resourceGroupName}/providers/Microsoft.Network/virtualHubs/{virtualHubName}/virtualHubVnetConnections/{connectionName}": {
             "get": {
                 "operationId": "VirtualHubVnetConnections_Get",
                 "x-ms-examples": {
@@ -1752,7 +1755,7 @@
                 "x-ms-long-running-operation": true
             }
         },
-        "/subscriptions/{subscriptionId}/resourceGroup/{resourceGroupName}/providers/Microsoft.Network/VirtualHubs/{VirtualHubName}/VirtualHubVnetConnections": {
+        "/subscriptions/{subscriptionId}/resourceGroup/{resourceGroupName}/providers/Microsoft.Network/virtualHubs/{virtualHubName}/virtualHubVnetConnections": {
             "get": {
                 "operationId": "VirtualHubVnetConnections_ListAll",
                 "x-ms-examples": {
@@ -2238,6 +2241,12 @@
                     "readOnly": true,
                     "description": "Egress bytes transferred."
                 },
+                "ExpectedBandwidthInMbps": {
+                    "type": "integer",
+                    "format": "int32",
+                    "readOnly": true,
+                    "description": "Expected bandwidth in MBPS."
+                },
                 "provisioningState": {
                     "type": "string",
                     "readOnly": true,
@@ -2623,8 +2632,9 @@
                     "type": "string",
                     "description": "Model of the device."
                 },
-                "linkSpeed": {
-                    "type": "string",
+                "linkSpeedInMbps": {
+                    "type": "integer",
+                    "format": "int32",
                     "description": "Link speed."
                 }
             },
@@ -2651,7 +2661,8 @@
                 "Succeeded",
                 "Updating",
                 "Deleting",
-                "Failed"
+                "Failed",
+                "Cancelled"
             ],
             "x-ms-enum": {
                 "name": "ProvisioningState",
@@ -2762,7 +2773,7 @@
         },
         "VirtualWANParameter": {
             "type": "string",
-            "description": "The resource uri of the VirtualWAN."
+            "description": "The name of the VirtualWAN."
         }
     },
     "parameters": {
@@ -2793,6 +2804,13 @@
             "required": true,
             "type": "string",
             "description": "The name of the VirtualHub."
+        },
+        "VpnSiteParameter": {
+            "name": "api-version",
+            "in": "query",
+            "required": true,
+            "type": "string",
+            "description": "Resource Uri of the Vpn-Site."
         },
         "GatewayParameter": {
             "name": "gatewayName",
