@@ -237,7 +237,7 @@
           "200": {
             "description": "Request successful. The operation returns a list of VirtualNetworkGatewayConnection resource.",
             "schema": {
-              "$ref": "#/definitions/VirtualNetworkGatewayConnectionListResult"
+              "$ref": "#/definitions/VirtualNetworkGatewayListConnectionsResult"
             }
           }
         },
@@ -271,7 +271,7 @@
             "type": "string",
             "description": "The name of the virtual network gateway."
           },
-          { 
+          {
             "name": "gatewayVip",
             "in": "query",
             "required": false,
@@ -672,7 +672,7 @@
         },
         "x-ms-long-running-operation": true
       }
-    },    
+    },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/connections/{virtualNetworkGatewayConnectionName}/sharedkey": {
       "put": {
         "tags": [
@@ -1583,18 +1583,6 @@
       },
       "description": "VirtualNetworkGatewayConnection properties"
     },
-    "GatewayReference": {
-      "properties": {
-        "id": {
-          "type": "string",
-          "description": "The ID of VirtualNetworkGateway or LocalNetworkGateway resource."
-        }
-      },
-      "required": [
-        "id"
-      ],
-      "description": "A reference to VirtualNetworkGateway or LocalNetworkGateway resource."
-    },
     "VirtualNetworkGatewayConnectionPropertiesFormat": {
       "properties": {
         "authorizationKey": {
@@ -1602,15 +1590,15 @@
           "description": "The authorizationKey."
         },
         "virtualNetworkGateway1": {
-          "$ref": "#/definitions/GatewayReference",
+          "$ref": "#/definitions/VirtualNetworkGateway",
           "description": "The reference to virtual network gateway resource."
         },
         "virtualNetworkGateway2": {
-          "$ref": "#/definitions/GatewayReference",
+          "$ref": "#/definitions/VirtualNetworkGateway",
           "description": "The reference to virtual network gateway resource."
         },
         "localNetworkGateway2": {
-          "$ref": "#/definitions/GatewayReference",
+          "$ref": "#/definitions/LocalNetworkGateway",
           "description": "The reference to local network gateway resource."
         },
         "connectionType": {
@@ -1960,6 +1948,168 @@
         }
       },
       "description": "Response for ListLocalNetworkGateways API service call."
+    },
+    "virtualNetworkConnectionGatewayReference": {
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "The ID of VirtualNetworkGateway or LocalNetworkGateway resource."
+        }
+      },
+      "required": [
+        "id"
+      ],
+      "description": "A reference to VirtualNetworkGateway or LocalNetworkGateway resource."
+    },
+    "VirtualNetworkGatewayConnectionListEntityPropertiesFormat": {
+      "properties": {
+        "authorizationKey": {
+          "type": "string",
+          "description": "The authorizationKey."
+        },
+        "virtualNetworkGateway1": {
+          "$ref": "#/definitions/virtualNetworkConnectionGatewayReference",
+          "description": "The reference to virtual network gateway resource."
+        },
+        "virtualNetworkGateway2": {
+          "$ref": "#/definitions/virtualNetworkConnectionGatewayReference",
+          "description": "The reference to virtual network gateway resource."
+        },
+        "localNetworkGateway2": {
+          "$ref": "#/definitions/virtualNetworkConnectionGatewayReference",
+          "description": "The reference to local network gateway resource."
+        },
+        "connectionType": {
+          "type": "string",
+          "description": "Gateway connection type. Possible values are: 'Ipsec','Vnet2Vnet','ExpressRoute', and 'VPNClient.",
+          "enum": [
+            "IPsec",
+            "Vnet2Vnet",
+            "ExpressRoute",
+            "VPNClient"
+          ],
+          "x-ms-enum": {
+            "name": "VirtualNetworkGatewayConnectionType",
+            "modelAsString": true
+          }
+        },
+        "routingWeight": {
+          "type": "integer",
+          "format": "int32",
+          "description": "The routing weight."
+        },
+        "sharedKey": {
+          "type": "string",
+          "description": "The IPSec shared key."
+        },
+        "connectionStatus": {
+          "readOnly": true,
+          "type": "string",
+          "description": "Virtual network Gateway connection status. Possible values are 'Unknown', 'Connecting', 'Connected' and 'NotConnected'.",
+          "enum": [
+            "Unknown",
+            "Connecting",
+            "Connected",
+            "NotConnected"
+          ],
+          "x-ms-enum": {
+            "name": "VirtualNetworkGatewayConnectionStatus",
+            "modelAsString": true
+          }
+        },
+        "tunnelConnectionStatus": {
+          "readOnly": true,
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/TunnelConnectionHealth"
+          },
+          "description": "Collection of all tunnels' connection health status."
+        },
+        "egressBytesTransferred": {
+          "readOnly": true,
+          "type": "integer",
+          "format": "int64",
+          "description": "The egress bytes transferred in this connection."
+        },
+        "ingressBytesTransferred": {
+          "readOnly": true,
+          "type": "integer",
+          "format": "int64",
+          "description": "The ingress bytes transferred in this connection."
+        },
+        "peer": {
+          "$ref": "./network.json#/definitions/SubResource",
+          "description": "The reference to peerings resource."
+        },
+        "enableBgp": {
+          "type": "boolean",
+          "description": "EnableBgp flag"
+        },
+        "usePolicyBasedTrafficSelectors": {
+          "type": "boolean",
+          "description": "Enable policy-based traffic selectors."
+        },
+        "ipsecPolicies": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/IpsecPolicy"
+          },
+          "description": "The IPSec Policies to be considered by this connection."
+        },
+        "resourceGuid": {
+          "type": "string",
+          "description": "The resource GUID property of the VirtualNetworkGatewayConnection resource."
+        },
+        "provisioningState": {
+          "readOnly": true,
+          "type": "string",
+          "description": "The provisioning state of the VirtualNetworkGatewayConnection resource. Possible values are: 'Updating', 'Deleting', and 'Failed'."
+        }
+      },
+      "required": [
+        "virtualNetworkGateway1",
+        "connectionType"
+      ],
+      "description": "VirtualNetworkGatewayConnection properties"
+    },
+    "VirtualNetworkGatewayConnectionListEntity": {
+      "properties": {
+        "properties": {
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/VirtualNetworkGatewayConnectionListEntityPropertiesFormat",
+          "description": "Properties of the virtual network gateway connection."
+        },
+        "etag": {
+          "type": "string",
+          "description": "Gets a unique read-only string that changes whenever the resource is updated."
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "./network.json#/definitions/Resource"
+        }
+      ],
+      "required": [
+        "properties"
+      ],
+      "description": "A common class for general resource information"
+    },
+    "VirtualNetworkGatewayListConnectionsResult": {
+      "properties": {
+        "value": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/VirtualNetworkGatewayConnectionListEntity"
+          },
+          "description": "Gets a list of VirtualNetworkGatewayConnection resources that exists in a resource group."
+        },
+        "nextLink": {
+          "readOnly": true,
+          "type": "string",
+          "description": "The URL to get the next set of results."
+        }
+      },
+      "description": "Response for the VirtualNetworkGatewayListConnections API service call"
     }
   },
   "parameters": {
