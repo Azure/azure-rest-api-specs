@@ -540,7 +540,11 @@
                         "description": "The name of the VirtualWAN for which configuration of all vpn-sites is needed."
                     },
                     {
-                        "$ref": "#/parameters/VpnSiteParameter"
+                        "name": "VpnSite",
+                        "in": "body",
+                        "required": false,
+                        "type": "string",
+                        "description": "Resource Uri of the VpnSite for which config is to be fetched."
                     },
                     {
                         "$ref": "#/parameters/ApiVersionParameter"
@@ -1812,9 +1816,8 @@
                     }
                 },
                 "provisioningState": {
-                    "type": "string",
-                    "readOnly": true,
-                    "description": "The provisioning state of the resource. Possible values are: 'Updating', 'Deleting', 'Succeeded' and 'Failed'."
+                    "description": "The provisioning state of the resource.",
+                    "$ref": "#/definitions/ProvisioningState"
                 }
             },
             "description": "Parameters for VirtualWAN"
@@ -1919,9 +1922,8 @@
                     "$ref": "#/definitions/BGPProperties"
                 },
                 "provisioningState": {
-                    "type": "string",
-                    "readOnly": true,
-                    "description": "The provisioning state of the resource. Possible values are: 'Updating', 'Deleting', 'Succeeded' and 'Failed'."
+                    "description": "The provisioning state of the resource.",
+                    "$ref": "#/definitions/ProvisioningState"
                 }
             },
             "description": "Parameters for VpnSite"
@@ -2049,9 +2051,8 @@
                     }
                 },
                 "provisioningState": {
-                    "type": "string",
-                    "readOnly": true,
-                    "description": "The provisioning state of the resource. Possible values are: 'Updating', 'Deleting', 'Succeeded' and 'Failed'."
+                    "description": "The provisioning state of the resource.",
+                    "$ref": "#/definitions/ProvisioningState"
                 }
             },
             "description": "Parameters for VirtualHub"
@@ -2140,9 +2141,8 @@
                     }
                 },
                 "provisioningState": {
-                    "type": "string",
-                    "readOnly": true,
-                    "description": "The provisioning state of the resource. Possible values are: 'Updating', 'Deleting', 'Succeeded' and 'Failed'."
+                    "description": "The provisioning state of the resource.",
+                    "$ref": "#/definitions/ProvisioningState"
                 }
             },
             "description": "Parameters for ScalableVpnGateway"
@@ -2246,9 +2246,8 @@
                     "description": "Expected bandwidth in MBPS."
                 },
                 "provisioningState": {
-                    "type": "string",
-                    "readOnly": true,
-                    "description": "The provisioning state of the resource. Possible values are: 'Updating', 'Deleting', 'Succeeded' and 'Failed'."
+                    "description": "The provisioning state of the resource.",
+                    "$ref": "#/definitions/ProvisioningState"
                 }
             },
             "description": "Parameters for VpnConnection"
@@ -2337,9 +2336,8 @@
                     }
                 },
                 "provisioningState": {
-                    "type": "string",
-                    "readOnly": true,
-                    "description": "The provisioning state of the resource. Possible values are: 'Updating', 'Deleting', 'Succeeded' and 'Failed'."
+                    "description": "The provisioning state of the resource.",
+                    "$ref": "#/definitions/ProvisioningState"
                 }
             },
             "description": "Parameters for ScalableExpressRouteGateway"
@@ -2435,9 +2433,8 @@
                     }
                 },
                 "provisioningState": {
-                    "type": "string",
-                    "readOnly": true,
-                    "description": "The provisioning state of the resource. Possible values are: 'Updating', 'Deleting', 'Succeeded' and 'Failed'."
+                    "description": "The provisioning state of the resource.",
+                    "$ref": "#/definitions/ProvisioningState"
                 }
             },
             "description": "Parameters for ExpressRouteConnection"
@@ -2539,9 +2536,8 @@
                     "description": "Egress bytes transferred."
                 },
                 "provisioningState": {
-                    "type": "string",
-                    "readOnly": true,
-                    "description": "The provisioning state of the resource. Possible values are: 'Updating', 'Deleting', 'Succeeded' and 'Failed'."
+                    "description": "The provisioning state of the resource.",
+                    "$ref": "#/definitions/ProvisioningState"
                 }
             },
             "description": "Parameters for VirtualHubVnetConnection"
@@ -2651,7 +2647,7 @@
             },
             "description": "List of bgp properties."
         },
-        "provisioningState": {
+        "ProvisioningState": {
             "type": "string",
             "readOnly": true,
             "description": "The current provisisoning state.",
@@ -2797,13 +2793,6 @@
             "required": true,
             "type": "string",
             "description": "The name of the VirtualHub."
-        },
-        "VpnSiteParameter": {
-            "name": "VpnSiteParameter",
-            "in": "body",
-            "required": false,
-            "type": "string",
-            "description": "Resource Uri of the Vpn-Site."
         },
         "GatewayParameter": {
             "name": "gatewayName",
