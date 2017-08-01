@@ -66,8 +66,11 @@
                             "$ref": "#/definitions/VirtualWAN"
                         }
                     },
-                    "default": {
-                        "description": "*** Error Response: ***\n\n * 404 VirtualWAN doesn't exist."
+                    "default": {                        
+                        "description": "Error",
+                        "schema": {
+                            "$ref": "#/definitions/ErrorModel"
+                        }
                     }
                 }
             },
@@ -114,8 +117,11 @@
                     "202": {
                         "description": "Request received successfully. VirtualWAN is not yet provisioned; follow the Location header to poll for the VirtualWAN."
                     },
-                    "default": {
-                        "description": "*** Error Response: ***\n\n * 400 Invalid request."
+                    "default": {                        
+                        "description": "Error",
+                        "schema": {
+                            "$ref": "#/definitions/ErrorModel"
+                        }
                     }
                 },
                 "x-ms-long-running-operation": true
@@ -163,8 +169,11 @@
                     "202": {
                         "description": "Request received successfully. VirtualWAN is not yet provisioned; follow the Location header to poll for the VirtualWAN."
                     },
-                    "default": {
-                        "description": "*** Error Response: ***\n\n * 400 Invalid request."
+                    "default": {                        
+                        "description": "Error",
+                        "schema": {
+                            "$ref": "#/definitions/ErrorModel"
+                        }
                     }
                 },
                 "x-ms-long-running-operation": true
@@ -203,8 +212,11 @@
                     "204": {
                         "description": "No VirtualWANs exist by the name provided."
                     },
-                    "default": {
-                        "description": "*** Error Response: ***\n\n * 400 Invalid request. VirtualWAN still has VirtualHubs, cannot delete."
+                    "default": {                        
+                        "description": "Error",
+                        "schema": {
+                            "$ref": "#/definitions/ErrorModel"
+                        }
                     }
                 },
                 "x-ms-long-running-operation": true
@@ -235,8 +247,11 @@
                             "$ref": "#/definitions/ListVirtualWANsResult"
                         }
                     },
-                    "default": {
-                        "description": "*** Error Response: ***\n\n * 400 Invalid request."
+                    "default": {                        
+                        "description": "Error",
+                        "schema": {
+                            "$ref": "#/definitions/ErrorModel"
+                        }
                     }
                 },
                 "x-ms-pageable": {
@@ -266,8 +281,11 @@
                             "$ref": "#/definitions/ListVirtualWANsResult"
                         }
                     },
-                    "default": {
-                        "description": "*** Error Response: ***\n\n * 400 Invalid request."
+                    "default": {                        
+                        "description": "Error",
+                        "schema": {
+                            "$ref": "#/definitions/ErrorModel"
+                        }
                     }
                 },
                 "x-ms-pageable": {
@@ -308,8 +326,11 @@
                             "$ref": "#/definitions/VpnSite"
                         }
                     },
-                    "default": {
-                        "description": "*** Error Response: ***\n\n * 400 Invalid request ***\n\n * 404 VpnSite doesn't exist."
+                    "default": {                        
+                        "description": "Error",
+                        "schema": {
+                            "$ref": "#/definitions/ErrorModel"
+                        }
                     }
                 }
             },
@@ -356,8 +377,11 @@
                     "202": {
                         "description": "Request received successfully. VpnSite is not yet provisioned; follow the Location header to poll for the VpnSite."
                     },
-                    "default": {
-                        "description": "*** Error Response: ***\n\n * 400 Invalid request."
+                    "default": {                        
+                        "description": "Error",
+                        "schema": {
+                            "$ref": "#/definitions/ErrorModel"
+                        }
                     }
                 },
                 "x-ms-long-running-operation": true
@@ -405,8 +429,11 @@
                     "202": {
                         "description": "Request received successfully. VpnSite is not yet updated; follow the Location header to poll for final outcome."
                     },
-                    "default": {
-                        "description": "*** Error Response: ***\n\n * 400 Invalid request."
+                    "default": {                        
+                        "description": "Error",
+                        "schema": {
+                            "$ref": "#/definitions/ErrorModel"
+                        }
                     }
                 },
                 "x-ms-long-running-operation": true
@@ -445,8 +472,11 @@
                     "204": {
                         "description": "No VpnSites exist by the name provided."
                     },
-                    "default": {
-                        "description": "*** Error Response: ***\n\n * 400 Invalid request."
+                    "default": {                        
+                        "description": "Error",
+                        "schema": {
+                            "$ref": "#/definitions/ErrorModel"
+                        }
                     }
                 },
                 "x-ms-long-running-operation": true
@@ -477,8 +507,11 @@
                             "$ref": "#/definitions/ListVpnSitesResult"
                         }
                     },
-                    "default": {
-                        "description": "*** Error Response: ***\n\n * 400 Invalid request."
+                    "default": {                        
+                        "description": "Error",
+                        "schema": {
+                            "$ref": "#/definitions/ErrorModel"
+                        }
                     }
                 },
                 "x-ms-pageable": {
@@ -508,8 +541,11 @@
                             "$ref": "#/definitions/ListVpnSitesResult"
                         }
                     },
-                    "default": {
-                        "description": "*** Error Response: ***\n\n * 400 Invalid request."
+                    "default": {                        
+                        "description": "Error",
+                        "schema": {
+                            "$ref": "#/definitions/ErrorModel"
+                        }
                     }
                 },
                 "x-ms-pageable": {
@@ -540,10 +576,12 @@
                         "description": "The name of the VirtualWAN for which configuration of all vpn-sites is needed."
                     },
                     {
-                        "name": "VpnSite",
+                        "name": "parameters",
                         "in": "body",
                         "required": false,
-                        "type": "string",
+                        "schema": {
+                            "$ref": "#/definitions/VpnSiteId"
+                        },
                         "description": "Resource Uri of the VpnSite for which config is to be fetched."
                     },
                     {
@@ -560,14 +598,17 @@
                     "202": {
                         "description": "Accepted and the operation will complete asynchronously."
                     },
-                    "default": {
-                        "description": "*** Error Response: ***\n\n * 400 Invalid request."
+                    "default": {                        
+                        "description": "Error",
+                        "schema": {
+                            "$ref": "#/definitions/ErrorModel"
+                        }
                     }
                 },
                 "x-ms-long-running-operation": true
             }
         },
-        
+
         "/subscriptions/{subscriptionId}/resourceGroup/{resourceGroupName}/providers/Microsoft.Network/virtualHubs/{virtualHubName}": {
             "get": {
                 "operationId": "VirtualHubs_Get",
@@ -596,8 +637,11 @@
                             "$ref": "#/definitions/VirtualHub"
                         }
                     },
-                    "default": {
-                        "description": "*** Error Response: ***\n\n * 400 Invalid request. ***\n\n * 404 VirtualHub Not Found."
+                    "default": {                        
+                        "description": "Error",
+                        "schema": {
+                            "$ref": "#/definitions/ErrorModel"
+                        }
                     }
                 }
             },
@@ -640,8 +684,11 @@
                     "202": {
                         "description": "Request received successfully. VirtualHub is not yet provisioned; follow the Location header to poll for final outcome."
                     },
-                    "default": {
-                        "description": "*** Error Response: ***\n\n * 400 Invalid request."
+                    "default": {                        
+                        "description": "Error",
+                        "schema": {
+                            "$ref": "#/definitions/ErrorModel"
+                        }
                     }
                 },
                 "x-ms-long-running-operation": true
@@ -685,8 +732,11 @@
                     "202": {
                         "description": "Request received successfully. VirtualHub is not yet updated; follow the Location header to poll for final outcome."
                     },
-                    "default": {
-                        "description": "*** Error Response: ***\n\n * 400 Invalid request."
+                    "default": {                        
+                        "description": "Error",
+                        "schema": {
+                            "$ref": "#/definitions/ErrorModel"
+                        }
                     }
                 },
                 "x-ms-long-running-operation": true
@@ -721,8 +771,11 @@
                     "204": {
                         "description": "No VirtualHubs exist by the name provided."
                     },
-                    "default": {
-                        "description": "*** Error Response: ***\n\n * 400 Invalid request. Cannot delete, VirtualHub is still referenced by a VirtualWAN."
+                    "default": {                        
+                        "description": "Error",
+                        "schema": {
+                            "$ref": "#/definitions/ErrorModel"
+                        }
                     }
                 },
                 "x-ms-long-running-operation": true
@@ -753,8 +806,11 @@
                             "$ref": "#/definitions/ListVirtualHubsResult"
                         }
                     },
-                    "default": {
-                        "description": "*** Error Response: ***\n\n * 400 Invalid request."
+                    "default": {                        
+                        "description": "Error",
+                        "schema": {
+                            "$ref": "#/definitions/ErrorModel"
+                        }
                     }
                 },
                 "x-ms-pageable": {
@@ -784,8 +840,11 @@
                             "$ref": "#/definitions/ListVirtualHubsResult"
                         }
                     },
-                    "default": {
-                        "description": "*** Error Response: ***\n\n * 400 Invalid request."
+                    "default": {                        
+                        "description": "Error",
+                        "schema": {
+                            "$ref": "#/definitions/ErrorModel"
+                        }
                     }
                 },
                 "x-ms-pageable": {
@@ -825,8 +884,11 @@
                             "$ref": "#/definitions/ScalableVpnGateway"
                         }
                     },
-                    "default": {
-                        "description": "*** Error Response: ***\n\n * 400 Invalid request."
+                    "default": {                        
+                        "description": "Error",
+                        "schema": {
+                            "$ref": "#/definitions/ErrorModel"
+                        }
                     }
                 }
             },
@@ -872,8 +934,11 @@
                     "202": {
                         "description": "Request received successfully. Scalabale Vpn Gateway is not yet provisioned; follow the Location header to poll for final outcome."
                     },
-                    "default": {
-                        "description": "*** Error Response: ***\n\n * 400 Invalid request."
+                    "default": {                        
+                        "description": "Error",
+                        "schema": {
+                            "$ref": "#/definitions/ErrorModel"
+                        }
                     }
                 },
                 "x-ms-long-running-operation": true
@@ -920,8 +985,11 @@
                     "202": {
                         "description": "Request received successfully. ScalableVpnGateway is not yet updated; follow the Location header to poll for final outcome."
                     },
-                    "default": {
-                        "description": "*** Error Response: ***\n\n * 400 Invalid request."
+                    "default": {                        
+                        "description": "Error",
+                        "schema": {
+                            "$ref": "#/definitions/ErrorModel"
+                        }
                     }
                 },
                 "x-ms-long-running-operation": true
@@ -959,8 +1027,11 @@
                     "204": {
                         "description": "No scalable Vpn gateways exist by the name provided."
                     },
-                    "default": {
-                        "description": "*** Error Response: ***\n\n * 400 Invalid request."
+                    "default": {                        
+                        "description": "Error",
+                        "schema": {
+                            "$ref": "#/definitions/ErrorModel"
+                        }
                     }
                 },
                 "x-ms-long-running-operation": true
@@ -1000,8 +1071,11 @@
                             "$ref": "#/definitions/VpnConnection"
                         }
                     },
-                    "default": {
-                        "description": "*** Error Response: ***\n\n * 400 Invalid request."
+                    "default": {                        
+                        "description": "Error",
+                        "schema": {
+                            "$ref": "#/definitions/ErrorModel"
+                        }
                     }
                 }
             },
@@ -1050,8 +1124,11 @@
                     "202": {
                         "description": "Request received successfully. Vpn connection is not yet provisioned; follow the Location header to poll for final outcome."
                     },
-                    "default": {
-                        "description": "*** Error Response: ***\n\n * 400 Invalid request."
+                    "default": {                        
+                        "description": "Error",
+                        "schema": {
+                            "$ref": "#/definitions/ErrorModel"
+                        }
                     }
                 },
                 "x-ms-long-running-operation": true
@@ -1101,8 +1178,11 @@
                     "202": {
                         "description": "Request received successfully. Vpn connection is not yet updated; follow the Location header to poll for final outcome."
                     },
-                    "default": {
-                        "description": "*** Error Response: ***\n\n * 400 Invalid request."
+                    "default": {                        
+                        "description": "Error",
+                        "schema": {
+                            "$ref": "#/definitions/ErrorModel"
+                        }
                     }
                 },
                 "x-ms-long-running-operation": true
@@ -1143,8 +1223,11 @@
                     "204": {
                         "description": "No connections by the name exist."
                     },
-                    "default": {
-                        "description": "*** Error Response: ***\n\n * 400 Invalid request."
+                    "default": {                        
+                        "description": "Error",
+                        "schema": {
+                            "$ref": "#/definitions/ErrorModel"
+                        }
                     }
                 },
                 "x-ms-long-running-operation": true
@@ -1178,8 +1261,11 @@
                             "$ref": "#/definitions/ListVpnConnectionsResult"
                         }
                     },
-                    "default": {
-                        "description": "*** Error Response: ***\n\n * 400 Invalid request."
+                    "default": {                        
+                        "description": "Error",
+                        "schema": {
+                            "$ref": "#/definitions/ErrorModel"
+                        }
                     }
                 },
                 "x-ms-pageable": {
@@ -1219,8 +1305,11 @@
                             "$ref": "#/definitions/ScalableExpressRouteGateway"
                         }
                     },
-                    "default": {
-                        "description": "*** Error Response: ***\n\n * 400 Invalid request."
+                    "default": {                        
+                        "description": "Error",
+                        "schema": {
+                            "$ref": "#/definitions/ErrorModel"
+                        }
                     }
                 }
             },
@@ -1266,8 +1355,11 @@
                     "202": {
                         "description": "Request received successfully. Scalabale ExpressRoute Gateway is not yet provisioned; follow the Location header to poll for final outcome."
                     },
-                    "default": {
-                        "description": "*** Error Response: ***\n\n * 400 Invalid request."
+                    "default": {                        
+                        "description": "Error",
+                        "schema": {
+                            "$ref": "#/definitions/ErrorModel"
+                        }
                     }
                 },
                 "x-ms-long-running-operation": true
@@ -1314,8 +1406,11 @@
                     "202": {
                         "description": "Request received successfully. ScalableExpressRouteGateway is not yet updated; follow the Location header to poll for final outcome."
                     },
-                    "default": {
-                        "description": "*** Error Response: ***\n\n * 400 Invalid request."
+                    "default": {                        
+                        "description": "Error",
+                        "schema": {
+                            "$ref": "#/definitions/ErrorModel"
+                        }
                     }
                 },
                 "x-ms-long-running-operation": true
@@ -1353,8 +1448,11 @@
                     "204": {
                         "description": "No scalable ExpressRoute gateways exist by the name provided."
                     },
-                    "default": {
-                        "description": "*** Error Response: ***\n\n * 400 Invalid request."
+                    "default": {                        
+                        "description": "Error",
+                        "schema": {
+                            "$ref": "#/definitions/ErrorModel"
+                        }
                     }
                 },
                 "x-ms-long-running-operation": true
@@ -1394,8 +1492,11 @@
                             "$ref": "#/definitions/ExpressRouteConnection"
                         }
                     },
-                    "default": {
-                        "description": "*** Error Response: ***\n\n * 400 Invalid request."
+                    "default": {                        
+                        "description": "Error",
+                        "schema": {
+                            "$ref": "#/definitions/ErrorModel"
+                        }
                     }
                 }
             },
@@ -1444,8 +1545,11 @@
                     "202": {
                         "description": "Request received successfully. ExpressRoute connection is not yet provisioned; follow the Location header to poll for final outcome."
                     },
-                    "default": {
-                        "description": "*** Error Response: ***\n\n * 400 Invalid request."
+                    "default": {                        
+                        "description": "Error",
+                        "schema": {
+                            "$ref": "#/definitions/ErrorModel"
+                        }
                     }
                 },
                 "x-ms-long-running-operation": true
@@ -1495,8 +1599,11 @@
                     "202": {
                         "description": "Request received successfully. ExpressRoute connection is not yet updated; follow the Location header to poll for final outcome."
                     },
-                    "default": {
-                        "description": "*** Error Response: ***\n\n * 400 Invalid request."
+                    "default": {                        
+                        "description": "Error",
+                        "schema": {
+                            "$ref": "#/definitions/ErrorModel"
+                        }
                     }
                 },
                 "x-ms-long-running-operation": true
@@ -1537,8 +1644,11 @@
                     "204": {
                         "description": "No connections by the name exist."
                     },
-                    "default": {
-                        "description": "*** Error Response: ***\n\n * 400 Invalid request."
+                    "default": {                        
+                        "description": "Error",
+                        "schema": {
+                            "$ref": "#/definitions/ErrorModel"
+                        }
                     }
                 },
                 "x-ms-long-running-operation": true
@@ -1575,8 +1685,11 @@
                             "$ref": "#/definitions/ListExpressRouteConnectionsResult"
                         }
                     },
-                    "default": {
-                        "description": "*** Error Response: ***\n\n * 400 Invalid request."
+                    "default": {                        
+                        "description": "Error",
+                        "schema": {
+                            "$ref": "#/definitions/ErrorModel"
+                        }
                     }
                 },
                 "x-ms-pageable": {
@@ -1616,8 +1729,11 @@
                             "$ref": "#/definitions/VirtualHubVnetConnection"
                         }
                     },
-                    "default": {
-                        "description": "*** Error Response: ***\n\n * 400 Invalid request."
+                    "default": {                        
+                        "description": "Error",
+                        "schema": {
+                            "$ref": "#/definitions/ErrorModel"
+                        }
                     }
                 }
             },
@@ -1663,8 +1779,11 @@
                     "202": {
                         "description": "Request received successfully. VirtualHubVnet connection is not yet provisioned; follow the Location header to poll for final outcome."
                     },
-                    "default": {
-                        "description": "*** Error Response: ***\n\n * 400 Invalid request."
+                    "default": {                        
+                        "description": "Error",
+                        "schema": {
+                            "$ref": "#/definitions/ErrorModel"
+                        }
                     }
                 },
                 "x-ms-long-running-operation": true
@@ -1711,8 +1830,11 @@
                     "202": {
                         "description": "Request received successfully. VirtualHubVnet connection is not yet updated; follow the Location header to poll for final outcome."
                     },
-                    "default": {
-                        "description": "*** Error Response: ***\n\n * 400 Invalid request."
+                    "default": {                        
+                        "description": "Error",
+                        "schema": {
+                            "$ref": "#/definitions/ErrorModel"
+                        }
                     }
                 },
                 "x-ms-long-running-operation": true
@@ -1750,8 +1872,11 @@
                     "204": {
                         "description": "No connections by the name exist."
                     },
-                    "default": {
-                        "description": "*** Error Response: ***\n\n * 400 Invalid request."
+                    "default": {                        
+                        "description": "Error",
+                        "schema": {
+                            "$ref": "#/definitions/ErrorModel"
+                        }
                     }
                 },
                 "x-ms-long-running-operation": true
@@ -1785,8 +1910,11 @@
                             "$ref": "#/definitions/ListVirtualHubVnetConnectionsResult"
                         }
                     },
-                    "default": {
-                        "description": "*** Error Response: ***\n\n * 400 Invalid request."
+                    "default": {                        
+                        "description": "Error",
+                        "schema": {
+                            "$ref": "#/definitions/ErrorModel"
+                        }
                     }
                 },
                 "x-ms-pageable": {
@@ -2015,7 +2143,7 @@
                     "description": "The sas-url to download the configurations for vpn-sites "
                 }
             }
-        },      
+        },
         "VirtualHubProperties": {
             "properties": {
                 "VirtualWAN": {
@@ -2616,6 +2744,16 @@
                 }
             }
         },
+        "VpnSiteId": {
+            "properties": {
+                "vpnSite": {
+                    "type": "string",
+                    "readOnly": true,
+                    "description": "The resource-uri of the vpn-site for which config is to be fetched."
+                }
+            },
+            "description": "VirtualHubVnetConnection Resource."
+        },
         "DeviceProperties": {
             "properties": {
                 "deviceVendor": {
@@ -2763,6 +2901,24 @@
                 }
             },
             "description": "Details of Vpn client Connection health."
+        },
+        "ErrorModel": {
+            "description": "The structure of the error",
+            "properties": {
+                "error": {
+                    "description": "The error detail",
+                    "properties": {
+                        "code": {
+                            "description": "The error code",
+                            "type": "string"
+                        },
+                        "message": {
+                            "description": "The error message",
+                            "type": "string"
+                        }
+                    }
+                }
+            }
         }
     },
     "parameters": {
