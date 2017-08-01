@@ -32,8 +32,10 @@ function runOad(oldSpec, newSpec) {
     return Promise.reject(new Error('newSpec is a required parameter of type "string" and it cannot be an empty string.'));
   }
 
+  console.log(`>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>`);
   console.log(`Old Spec: "${oldSpec}"`);
   console.log(`New Spec: "${newSpec}"`);
+  console.log(`>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>`);
 
   return Promise.resolve(oad.compare(oldSpec, newSpec, { consoleLogLevel: 'warn', json: true }));
 }
@@ -60,7 +62,7 @@ function processViaAutoRest(swaggerPath) {
     let result = execSync(`${autoRestCmd}`, { encoding: 'utf8', maxBuffer: 1024 * 1024 * 64 });
     resolvedMapForNewSpecs[outputFileNameWithExt] = path.join(outputFolder, outputFileNameWithExt);
   } catch (err) {
-    // Do not updage map in case of errors
+    // Do not update map in case of errors
   }
 
   return Promise.resolve();
