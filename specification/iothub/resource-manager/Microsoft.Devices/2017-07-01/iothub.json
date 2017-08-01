@@ -13,6 +13,37 @@
   "consumes": [ "application/json" ],
   "produces": [ "application/json" ],
   "paths": {
+    "/providers/Microsoft.Devices/operations": {
+      "get": {
+        "tags": [
+          "Operations"
+        ],
+        "operationId": "Operations_List",
+        "description": "Lists all of the available IoT Hub REST API operations.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/api-version"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK. The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/OperationListResult"
+            }
+          },
+          "default": {
+            "description": "DefaultErrorResponse",
+            "schema": {
+              "$ref": "#/definitions/ErrorDetails"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Devices/IotHubs/{resourceName}": {
       "get": {
         "tags": [ "GET" ],
@@ -1074,7 +1105,7 @@
           "$ref": "#/definitions/CloudToDeviceProperties"
         },
         "comments": {
-          "description": "Comments.",
+          "description": "IoT hub comments.",
           "type": "string"
         },
         "operationsMonitoringProperties": {
@@ -1649,6 +1680,55 @@
           "description": "The next link.",
           "type": "string",
           "readOnly": true
+        }
+      }
+    },
+    "OperationListResult": {
+      "description": "Result of the request to list IoT Hub operations. It contains a list of operations and a URL link to get the next set of results.",
+      "properties": {
+        "value": {
+          "description": "List of IoT Hub operations supported by the Microsoft.Devices resource provider.",
+          "type": "array",
+          "readOnly": true,
+          "items": {
+            "$ref": "#/definitions/Operation"
+          }
+        },
+        "nextLink": {
+          "readOnly": true,
+          "type": "string",
+          "description": "URL to get the next set of operation list results if there are any."
+        }
+      }
+    },
+    "Operation": {
+      "description": "A IoT Hub REST API operation",
+      "type": "object",
+      "properties": {
+        "name": {
+          "readOnly": true,
+          "type": "string",
+          "description": "Operation name: {provider}/{resource}/{read | write | action | delete}"
+        },
+        "display": {
+          "description": "The object that represents the operation.",
+          "properties": {
+            "provider": {
+              "readOnly": true,
+              "type": "string",
+            },
+              "description": "Service provider: Microsoft Devices"
+            "resource": {
+              "readOnly": true,
+              "type": "string",
+              "description": "Resource Type: IotHubs"
+            },
+            "operation": {
+              "readOnly": true,
+              "type": "string",
+              "description": "Name of the operation"
+            }
+          }
         }
       }
     },
