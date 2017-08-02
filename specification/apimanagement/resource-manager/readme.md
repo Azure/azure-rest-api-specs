@@ -109,8 +109,7 @@ Please also specify `--csharp-sdks-folder=<path to "SDKs" directory of your azur
 csharp:
   azure-arm: true
   license-header: MICROSOFT_MIT_NO_VERSION
-  namespace: Microsoft.Azure.Management.ApiManagement
-  payload-flattening-threshold: 2
+  namespace: Microsoft.Azure.Management.ApiManagement  
   output-folder: $(csharp-sdks-folder)/ApiManagement/Management.ApiManagement/Generated
   clear-output-folder: true
 ```
