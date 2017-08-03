@@ -66,7 +66,7 @@ async function getTagsFromConfig(config) {
     // config files have relative paths to the input files
     let allModifiedFiles = utils.getFilesChangedInPR();
     allModifiedFiles = allModifiedFiles.map(mfile => {
-      return mfile.replace(path.dirname, '');
+      return path.normalize(mfile.replace(path.dirname+path.sep, ''));
     });
 
     // for each tag->files, find if there are any modified files and select those tags
