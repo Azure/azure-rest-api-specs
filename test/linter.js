@@ -10,10 +10,10 @@ var
 
 function getTagsFromConfig(config){
   // get hold of all tags and their corresponding input files using the literate config tool
-  let result = execSync(`node node_modules/@microsoft.azure/literate/dist/app.js all --file=${path.resolve(config)}`);
+  const result = execSync(`node node_modules/@microsoft.azure/literate/dist/app.js all --file=${path.resolve(config)}`);
   // can't get JS to parse a string with "'" 
-  let tagsMap = JSON.parse(result.toString().replace(/'/g,'"'));
-  let tags = Object.keys(tagsMap);
+  const tagsMap = JSON.parse(result.toString().replace(/'/g,'"'));
+  const tags = Object.keys(tagsMap);
   
   // filter the tags
   if(utils.prOnly)
@@ -27,7 +27,7 @@ function getTagsFromConfig(config){
     
     // for each tag->files, find if there are any modified files and select those tags
     return tags.filter(tag=>{
-      let tagFiles = (tagsMap[tag]+'').split(',');
+      const tagFiles = (tagsMap[tag]+'').split(',');
       // find intersection with the modified files
       return tagFiles.filter(tagFile=>{
         return allModifiedFiles.indexOf(path.normalize(tagFile))>-1;
