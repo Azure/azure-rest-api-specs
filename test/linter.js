@@ -51,9 +51,6 @@ function scanForTags(content) {
 
 async function getTagsFromConfig(config) {
   // get hold of all tags and their corresponding input files using the literate config tool
-  // const result = execSync(`node node_modules/@microsoft.azure/literate/dist/app.js all --file=${path.resolve(config)}`);
-  // can't get JS to parse a string with "'" 
-  // const tagsMap = JSON.parse(result.toString().replace(/'/g,'"'));
   const tagsMap = await getTagsMapFromConfig({ file: config });
   if (tagsMap === null) {
     return null;
@@ -66,7 +63,7 @@ async function getTagsFromConfig(config) {
     // config files have relative paths to the input files
     let allModifiedFiles = utils.getFilesChangedInPR();
     allModifiedFiles = allModifiedFiles.map(mfile => {
-      return mfile.replace(path.dirname+'/', '');
+      return mfile.replace(path.dirname + '/', '');
     });
 
     // for each tag->files, find if there are any modified files and select those tags
@@ -93,13 +90,12 @@ function execLinterCommand(config, tag) {
 }
 
 describe('AutoRest Linter validation:', function () {
+  // Useful when debugging a test for a particular swagger. 
+  // Just update the regex. That will return an array of filtered items.
+  // configsToProcess = ['specification/sql/resource-manager/readme.md'];
   let configsToProcess = utils.getConfigFilesChangedInPR();
   for (const config of configsToProcess) {
     it(config + ' should honor linter validation rules.', async function () {
-
-      // Useful when debugging a test for a particular swagger. 
-      // Just update the regex. That will return an array of filtered items.
-      // configsToProcess = ['specification/sql/resource-manager/readme.md'];
 
       // find all tags in the config file
       const tagsToProcess = await getTagsFromConfig(config);
@@ -111,11 +107,11 @@ describe('AutoRest Linter validation:', function () {
         // but in the same directory tree as the config file
         const filesChangedInPR = utils.getFilesChangedInPR();
         const configDir = path.dirname(config);
-        filesChangedInPR.filter(prfile=>{
+        filesChangedInPR.filter(prfile => {
           // set any type to string
-          prFile+='';
-          return prFile.startsWith(configDir) && prfile.indexOf('examples')===-1 && prFile.endsWith('.json');
-        }).forEach(prFileInConfigFile=>{
+          prFile += '';
+          return prFile.startsWith(configDir) && prfile.indexOf('examples') === -1 && prFile.endsWith('.json');
+        }).forEach(prFileInConfigFile => {
           execLinterCommand(`--input-file=${prFileInConfigFile}`, '');
         });
       }
