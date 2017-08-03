@@ -66,7 +66,7 @@ async function getTagsFromConfig(config) {
     // config files have relative paths to the input files
     let allModifiedFiles = utils.getFilesChangedInPR();
     allModifiedFiles = allModifiedFiles.map(mfile => {
-      return path.normalize(mfile.replace(path.dirname+path.sep, ''));
+      return mfile.replace(path.dirname+'/', '');
     });
 
     // for each tag->files, find if there are any modified files and select those tags
@@ -74,7 +74,7 @@ async function getTagsFromConfig(config) {
       const tagFiles = (tagsMap[tag] + '').split(',');
       // find intersection with the modified files
       return tagFiles.filter(tagFile => {
-        return allModifiedFiles.indexOf(path.normalize(tagFile)) > -1;
+        return allModifiedFiles.indexOf(tagFile) > -1;
       }).length > 0;
     });
   }
@@ -105,7 +105,19 @@ describe('AutoRest Linter validation:', function () {
       const tagsToProcess = await getTagsFromConfig(config);
       // if no tags found to process, run with the defaults    
       if (tagsToProcess === null || tagsToProcess.length === 0) {
-        execLinterCommand(config, '');
+        // no tags found
+        // this means we need to run validator against the individual 
+        // json files included in the PR
+        // but in the same directory tree as the config file
+        const filesChangedInPR = utils.getFilesChangedInPR();
+        const configDir = path.dirname(config);
+        filesChangedInPR.filter(prfile=>{
+          // set any type to string
+          prFile+='';
+          return prFile.startsWith(configDir) && prfile.indexOf('examples')===-1 && prFile.endsWith('.json');
+        }).forEach(prFileInConfigFile=>{
+          execLinterCommand(`--input-file=${prFileInConfigFile}`, '');
+        });
       }
       else {
         // if tags found, run linter against every single tag
