@@ -131,6 +131,7 @@ input-file:
  - ./Microsoft.Sql/2014-04-01/importExport.json
  - ./Microsoft.Sql/2014-04-01/metrics.json
  - ./Microsoft.Sql/2014-04-01/operations.json
+ - ./Microsoft.Sql/2014-04-01/queries.json
  - ./Microsoft.Sql/2014-04-01/replicationLinks.json
  - ./Microsoft.Sql/2014-04-01/serverAzureADAdministrators.json
  - ./Microsoft.Sql/2014-04-01/serverCommunicationLinks.json
