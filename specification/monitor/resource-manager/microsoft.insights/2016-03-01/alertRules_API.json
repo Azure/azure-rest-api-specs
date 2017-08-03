@@ -572,7 +572,8 @@
       "x-ms-enum": {
         "name": "ConditionOperator",
         "modelAsString": false
-      }
+      },
+      "description": "Operators allowed in the rule condition."
     },
     "TimeAggregationOperator": {
        "type": "string",
@@ -586,7 +587,8 @@
       "x-ms-enum": {
         "name": "TimeAggregationOperator",
         "modelAsString": false
-      }
+      },
+      "description": "Aggregation operators allowed in a rule."
     },
     "ThresholdRuleCondition": {
       "x-ms-discriminator-value": "Microsoft.Azure.Management.Insights.Models.ThresholdRuleCondition",
@@ -831,7 +833,8 @@
       "properties": {
         "properties": {
           "x-ms-client-flatten": true,
-          "$ref": "#/definitions/AlertRule"
+          "$ref": "#/definitions/AlertRule",
+          "description": "The alert rule properties of the resource."
         }
       },
       "description": "The alert rule resource."
@@ -847,7 +850,8 @@
         },
         "properties": {
           "x-ms-client-flatten": true,
-          "$ref": "#/definitions/AlertRule"
+          "$ref": "#/definitions/AlertRule",
+          "description": "The properties of an alert rule."
         }
       }
     },
