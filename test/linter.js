@@ -63,12 +63,13 @@ async function getTagsFromConfig(config) {
     // config files have relative paths to the input files
     let allModifiedFiles = utils.getFilesChangedInPR();
     allModifiedFiles = allModifiedFiles.map(mfile => {
-      return mfile.replace(path.dirname + '/', '');
+      return mfile.replace(path.dirname(config) + '/', '');
     });
 
     // for each tag->files, find if there are any modified files and select those tags
     return tags.filter(tag => {
-      const tagFiles = (tagsMap[tag] + '').split(',');
+      
+      const tagFiles = (String(tagsMap[tag])).split(',');
       // find intersection with the modified files
       return tagFiles.filter(tagFile => {
         return allModifiedFiles.indexOf(tagFile) > -1;
