@@ -61,16 +61,6 @@ input-file:
 - Microsoft.Compute/2017-03-30/runCommands.json
 ```
 
-### Tag: package-container-instance-2017-08-preview
-
-These settings apply only when `--tag=package-container-instance-2017-08-preview` is specified on the command line.
-
-``` yaml $(tag) == 'package-container-instance-2017-08-preview'
-input-file:
-- Microsoft.ContainerInstance/2017-08-01-preview/containerInstance.json
-```
-
-
 ### Tag: package-container-service-2017-01
 
 These settings apply only when `--tag=package-container-service-2017-01` is specified on the command line.
