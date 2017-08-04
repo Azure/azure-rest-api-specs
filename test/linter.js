@@ -113,6 +113,7 @@ describe('AutoRest Linter validation:', function () {
           prFile += '';
           return prFile.startsWith(configDir) && prfile.indexOf('examples') === -1 && prFile.endsWith('.json');
         }).forEach(prFileInConfigFile => {
+          console.warn(`Configuration file not found for file: ${prFileInConfigFile}, running validation rules against it in individual context.`);
           execLinterCommand(`--input-file=${prFileInConfigFile}`, '');
         });
       }
