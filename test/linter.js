@@ -68,7 +68,7 @@ async function getTagsFromConfig(config) {
 
     // for each tag->files, find if there are any modified files and select those tags
     return tags.filter(tag => {
-      
+
       const tagFiles = (String(tagsMap[tag])).split(',');
       // find intersection with the modified files
       return tagFiles.filter(tagFile => {
@@ -79,8 +79,8 @@ async function getTagsFromConfig(config) {
   return tags;
 }
 
-function execLinterCommand(config, tag) {
-  var cmd = `autorest --validation --azure-validator ${config} --message-format=json ${tag}`.trim();
+function execLinterCommand(args) {
+  var cmd = `autorest --validation --azure-validator --message-format=json ${args}`.trim();
   console.log(`Executing: ${cmd}`);
   try {
     let result = execSync(cmd, { encoding: 'utf8', maxBuffer: 1024 * 1024 * 64 });
@@ -91,39 +91,48 @@ function execLinterCommand(config, tag) {
 }
 
 describe('AutoRest Linter validation:', function () {
-  // Useful when debugging a test for a particular swagger. 
-  // Just update the regex. That will return an array of filtered items.
-  // configsToProcess = ['specification/sql/resource-manager/readme.md'];
-  let configsToProcess = utils.getConfigFilesChangedInPR();
-  for (const config of configsToProcess) {
-    it(config + ' should honor linter validation rules.', async function () {
+  if (utils.prOnly) {
+    // Useful when debugging a test for a particular swagger. 
+    // Just update the regex. That will return an array of filtered items.
+    // configsToProcess = ['specification/sql/resource-manager/readme.md'];
+    let configsToProcess = utils.getConfigFilesChangedInPR();
+    for (const config of configsToProcess) {
+      it(config + ' should honor linter validation rules.', async function () {
 
-      // find all tags in the config file
-      const tagsToProcess = await getTagsFromConfig(config);
-      // if no tags found to process, run with the defaults    
-      if (tagsToProcess === null || tagsToProcess.length === 0) {
-        // no tags found
-        // this means we need to run validator against the individual 
-        // json files included in the PR
-        // but in the same directory tree as the config file
-        const filesChangedInPR = utils.getFilesChangedInPR();
-        const configDir = path.dirname(config);
-        filesChangedInPR.filter(prfile => {
-          // set any type to string
-          prFile += '';
-          return prFile.startsWith(configDir) && prfile.indexOf('examples') === -1 && prFile.endsWith('.json');
-        }).forEach(prFileInConfigFile => {
-          console.warn(`Configuration file not found for file: ${prFileInConfigFile}, running validation rules against it in individual context.`);
-          execLinterCommand(`--input-file=${prFileInConfigFile}`, '');
-        });
-      }
-      else {
-        // if tags found, run linter against every single tag
-        tagsToProcess.forEach((tagToProcess) => {
-          execLinterCommand(config, `--tag=${tagToProcess}`);
-        }, this);
-      }
-    });
+        // find all tags in the config file
+        const tagsToProcess = await getTagsFromConfig(config);
+        // if no tags found to process, run with the defaults    
+        if (tagsToProcess === null || tagsToProcess.length === 0) {
+          // no tags found
+          // this means we need to run validator against the individual 
+          // json files included in the PR
+          // but in the same directory tree as the config file
+          const filesChangedInPR = utils.getFilesChangedInPR();
+          const configDir = path.dirname(config);
+          filesChangedInPR.filter(prfile => {
+            // set any type to string
+            prFile += '';
+            return prFile.startsWith(configDir) && prfile.indexOf('examples') === -1 && prFile.endsWith('.json');
+          }).forEach(prFileInConfigFile => {
+            console.warn(`Configuration file not found for file: ${prFileInConfigFile}, running validation rules against it in individual context.`);
+            execLinterCommand(`--input-file=${prFileInConfigFile}`);
+          });
+        }
+        else {
+          // if tags found, run linter against every single tag
+          tagsToProcess.forEach((tagToProcess) => {
+            execLinterCommand(`${config} --tag=${tagToProcess}`);
+          }, this);
+        }
+      });
+    }
   }
-
+  else {
+    // we are not handling pr_only=false case today, 
+    // to enable, we need to write logic to calculate
+    // all config files in the repo and run linter with 
+    // every tag in the md file; we can get tags each 
+    // config file from getTagsFromCinfig file
+    console.warn('Cannot run linter in pr_only false mode');
+  }
 });
