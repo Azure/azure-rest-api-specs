@@ -13632,44 +13632,24 @@
     "MSDeploy": {
       "description": "MSDeploy ARM PUT information",
       "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/Resource"
+        }
+      ],
       "properties": {
-        "addOnPackages": {
-          "description": "List of Add-On packages. Add-On packages implicitly enable the Do Not Delete MSDeploy rule.",
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/MSDeployCore"
-          }
-        },
-        "packageUri": {
-          "description": "Package URI",
-          "type": "string"
-        },
-        "connectionString": {
-          "description": "SQL Connection String",
-          "type": "string"
-        },
-        "dbType": {
-          "description": "Database Type",
-          "type": "string"
-        },
-        "setParametersXmlFileUri": {
-          "description": "URI of MSDeploy Parameters file. Must not be set if SetParameters is used.",
-          "type": "string"
-        },
-        "setParameters": {
-          "description": "MSDeploy Parameters. Must not be set if SetParametersXmlFileUri is used.",
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/MSDeployParameterEntry"
-          }
-        },
-        "skipAppData": {
-          "description": "Controls whether the MSDeploy operation skips the AppData directory. If set to true, the existing AppData directory on the destination will not be deleted and overwritten.",
-          "type": "boolean"
-        },
-        "appOffline": {
-          "description": "Sets the AppOffline rule while the MSDeploy operation executes.",
-          "type": "boolean"
+        "properties": {
+          "$ref": "#/definitions/MSDeployCore",
+          "properties": {
+            "addOnPackages": {
+              "description": "List of Add-On packages. Add-On packages implicitly enable the Do Not Delete MSDeploy rule.",
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/MSDeployCore"
+              }
+            }
+          },
+          "x-ms-client-flatten": true
         }
       }
     },
@@ -13713,14 +13693,25 @@
     "MSDeployLog": {
       "description": "MSDeploy log",
       "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/Resource"
+        }
+      ],
       "properties": {
-        "entries": {
-          "description": "List of log entry messages",
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/MSDeployLogEntry"
+        "properties": {
+          "description": "MSDeployLog resource specific properties",
+          "properties": {
+            "entries": {
+              "description": "List of log entry messages",
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/MSDeployLogEntry"
+              },
+              "readOnly": true
+            }
           },
-          "readOnly": true
+          "x-ms-client-flatten": true
         }
       }
     },
