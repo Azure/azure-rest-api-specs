@@ -46,7 +46,6 @@ input-file:
 - Microsoft.Network/2017-06-01/networkInterface.json
 - Microsoft.Network/2017-06-01/networkSecurityGroup.json
 - Microsoft.Network/2017-06-01/networkWatcher.json
-- Microsoft.Network/2017-06-01/privateAccessServices.json
 - Microsoft.Network/2017-06-01/publicIpAddress.json
 - Microsoft.Network/2017-06-01/routeFilter.json
 - Microsoft.Network/2017-06-01/routeTable.json
