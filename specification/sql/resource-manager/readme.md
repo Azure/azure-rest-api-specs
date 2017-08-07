@@ -56,11 +56,15 @@ input-file:
 - Microsoft.Sql/2014-04-01/serviceObjectives.json
 - Microsoft.Sql/2014-04-01/sql.core.json
 - Microsoft.Sql/2014-04-01/usages.json
+- Microsoft.Sql/2015-05-01-preview/advisors.json
 - Microsoft.Sql/2015-05-01-preview/blobAuditingPolicies.json
 - Microsoft.Sql/2015-05-01-preview/encryptionProtectors.json
 - Microsoft.Sql/2015-05-01-preview/failoverGroups.json
 - Microsoft.Sql/2015-05-01-preview/serverKeys.json
 - Microsoft.Sql/2015-05-01-preview/servers.json
+- Microsoft.Sql/2015-05-01-preview/syncAgents.json
+- Microsoft.Sql/2015-05-01-preview/syncGroups.json
+- Microsoft.Sql/2015-05-01-preview/syncMembers.json
 - Microsoft.Sql/2015-05-01-preview/virtualNetworkRules.json
 
 # Needed when there is more than one input file
