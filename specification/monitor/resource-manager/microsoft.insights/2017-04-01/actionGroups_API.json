@@ -115,11 +115,8 @@
                             "$ref": "#/definitions/ActionGroupResource"
                         }
                     },
-                    "404": {
-                        "description": "The action group does not exist."
-                    },
                     "default": {
-                        "description": "An error occurred and the action group could not be retrieved."
+                        "description": "An error occurred and the action group could not be retrieved. 404: The action group does not exist."
                     }
                 }
             },
@@ -263,14 +260,8 @@
                     "200": {
                         "description": "The receiver was successfully enabled."
                     },
-                    "409": {
-                        "description": "The receiver is already enabled in the action group."
-                    },
-                    "404": {
-                        "description": "The action group was not found or no matching receiver was found in the action group."
-                    },
                     "default": {
-                        "description": "An error occurred and the receiver could not be enabled."
+                        "description": "An error occurred and the receiver could not be enabled. 409: The receiver is already enabled in the action group. 404: The action group was not found or no matching receiver was found in the action group."
                     }
                 }
             }
