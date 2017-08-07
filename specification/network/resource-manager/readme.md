@@ -52,6 +52,10 @@ input-file:
 - Microsoft.Network/2017-08-01/routeTable.json
 - Microsoft.Network/2017-08-01/serviceCommunity.json
 - Microsoft.Network/2017-08-01/usage.json
+- Microsoft.Network/2017-08-01/virtualNetwork.json
+- Microsoft.Network/2017-08-01/virtualNetworkGateway.json
+- Microsoft.Network/2017-08-01/vmssNetworkInterface.json
+- Microsoft.Network/2017-08-01/vmssPublicIpAddress.json
 ```
 
 
