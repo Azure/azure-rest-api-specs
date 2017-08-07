@@ -588,13 +588,13 @@
                         "description": "The name of the VirtualWAN for which configuration of all vpn-sites is needed."
                     },
                     {
-                        "name": "VpnSite",
+                        "name": "parameters",
                         "in": "body",
-                        "required": false,
+                        "required": true,
                         "schema": {
-                            "$ref": "./network.json#/definitions/SubResource"
+                            "$ref": "#/definitions/VpnSiteConfigDownloadInputFormat"
                         },
-                        "description": "The refrence to the VpnSite for which config is to be fetched."
+                        "description": "Parameters supplied to download vpn-sites configuration."
                     },
                     {
                         "$ref": "#/parameters/ApiVersionParameter"
@@ -1982,7 +1982,7 @@
                     "type": "array",
                     "readOnly": true,
                     "items": {
-                        "type": "string"
+                        "$ref": "./network.json#/definitions/SubResource"
                     },
                     "description": "List of VirtualHubs in the VirtualWAN."
                 },
@@ -1990,7 +1990,7 @@
                     "type": "array",
                     "readOnly": true,
                     "items": {
-                        "type": "string"
+                        "$ref": "./network.json#/definitions/SubResource"
                     }
                 },
                 "provisioningState": {
@@ -2077,7 +2077,7 @@
         "VpnSiteProperties": {
             "properties": {
                 "VirtualWAN": {
-                    "type": "string",
+                    "$ref": "./network.json#/definitions/SubResource",
                     "description": "The VirtualWAN to which the vpnSite belongs"
                 },
                 "deviceProperties": {
@@ -2180,13 +2180,21 @@
                 }
             }
         },
+        "VpnSiteConfigDownloadInputFormat": {
+            "properties": {
+                "vpnSItes": {
+                    "type": "array",
+                    "items": {
+                        "$ref": "./network.json#/definitions/SubResource"
+                    },
+                    "description": "List of resource-ids of the vpn-sites for which config is to be downloaded."
+                }
+            },
+            "description": "List of Vpn-Sites"
+        },
         "VpnSitesConfigurationDownloadResult": {
             "description": "Result of the request to download configuration for vpn-sites.",
             "properties": {
-                "VirtualWAN": {
-                    "type": "string",
-                    "description": "The nrp resource uri of the VirtualWAN."
-                },
                 "configuration": {
                     "type": "string",
                     "readOnly": true,
@@ -2197,7 +2205,7 @@
         "VirtualHubProperties": {
             "properties": {
                 "VirtualWAN": {
-                    "type": "string",
+                    "$ref": "./network.json#/definitions/SubResource",
                     "description": "The VirtualWAN to which the VirtualHub belongs"
                 },
                 "scalableVpnGateways": {
@@ -2326,9 +2334,6 @@
             "description": "Parameters for ScalableVpnGateway"
         },
         "ScalableVpnGateway": {
-            "required": [
-                "location"
-            ],
             "properties": {
                 "properties": {
                     "x-ms-client-flatten": true,
@@ -2342,7 +2347,7 @@
             },
             "allOf": [
                 {
-                    "$ref": "./network.json#/definitions/Resource"
+                    "$ref": "./network.json#/definitions/SubResource"
                 }
             ],
             "description": "ScalableVpnGateway Resource."
@@ -2367,13 +2372,6 @@
                     "readOnly": true,
                     "type": "string",
                     "description": "Resource type."
-                },
-                "tags": {
-                    "type": "object",
-                    "additionalProperties": {
-                        "type": "string"
-                    },
-                    "description": "Resource tags."
                 }
             },
             "allOf": [
@@ -2428,9 +2426,6 @@
             "description": "Parameters for VpnConnection"
         },
         "VpnConnection": {
-            "required": [
-                "location"
-            ],
             "properties": {
                 "properties": {
                     "x-ms-client-flatten": true,
@@ -2444,7 +2439,7 @@
             },
             "allOf": [
                 {
-                    "$ref": "./network.json#/definitions/Resource"
+                    "$ref": "./network.json#/definitions/SubResource"
                 }
             ],
             "description": "VpnConnection Resource."
@@ -2469,13 +2464,6 @@
                     "readOnly": true,
                     "type": "string",
                     "description": "Resource type."
-                },
-                "tags": {
-                    "type": "object",
-                    "additionalProperties": {
-                        "type": "string"
-                    },
-                    "description": "Resource tags."
                 }
             },
             "allOf": [
@@ -2518,9 +2506,6 @@
             "description": "Parameters for ScalableExpressRouteGateway"
         },
         "ScalableExpressRouteGateway": {
-            "required": [
-                "location"
-            ],
             "properties": {
                 "properties": {
                     "x-ms-client-flatten": true,
@@ -2534,7 +2519,7 @@
             },
             "allOf": [
                 {
-                    "$ref": "./network.json#/definitions/Resource"
+                    "$ref": "./network.json#/definitions/SubResource"
                 }
             ],
             "description": "ScalableExpressRouteGateway Resource."
@@ -2559,13 +2544,6 @@
                     "readOnly": true,
                     "type": "string",
                     "description": "Resource type."
-                },
-                "tags": {
-                    "type": "object",
-                    "additionalProperties": {
-                        "type": "string"
-                    },
-                    "description": "Resource tags."
                 }
             },
             "allOf": [
@@ -2615,9 +2593,6 @@
             "description": "Parameters for ExpressRouteConnection"
         },
         "ExpressRouteConnection": {
-            "required": [
-                "location"
-            ],
             "properties": {
                 "properties": {
                     "x-ms-client-flatten": true,
@@ -2631,7 +2606,7 @@
             },
             "allOf": [
                 {
-                    "$ref": "./network.json#/definitions/Resource"
+                    "$ref": "./network.json#/definitions/SubResource"
                 }
             ],
             "description": "ExpressRouteConnection Resource."
@@ -2656,13 +2631,6 @@
                     "readOnly": true,
                     "type": "string",
                     "description": "Resource type."
-                },
-                "tags": {
-                    "type": "object",
-                    "additionalProperties": {
-                        "type": "string"
-                    },
-                    "description": "Resource tags."
                 }
             },
             "allOf": [
@@ -2719,9 +2687,6 @@
             "description": "Parameters for VirtualHubVnetConnection"
         },
         "VirtualHubVnetConnection": {
-            "required": [
-                "location"
-            ],
             "properties": {
                 "properties": {
                     "x-ms-client-flatten": true,
@@ -2735,7 +2700,7 @@
             },
             "allOf": [
                 {
-                    "$ref": "./network.json#/definitions/Resource"
+                    "$ref": "./network.json#/definitions/SubResource"
                 }
             ],
             "description": "VirtualHubVnetConnection Resource."
@@ -2760,13 +2725,6 @@
                     "readOnly": true,
                     "type": "string",
                     "description": "Resource type."
-                },
-                "tags": {
-                    "type": "object",
-                    "additionalProperties": {
-                        "type": "string"
-                    },
-                    "description": "Resource tags."
                 }
             },
             "allOf": [
