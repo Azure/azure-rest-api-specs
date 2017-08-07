@@ -20,15 +20,22 @@ To see additional help and options, run:
 ## Configuration
 
 
-
 ### Basic Information 
 These are the global settings for the AnalysisServices API.
 
 ``` yaml
 openapi-type: arm
-tag: package-2016-05
+tag: package-2017-07
 ```
 
+### Tag: package-2017-07
+
+These settings apply only when `--tag=package-2017-07` is specified on the command line.
+
+``` yaml $(tag) == 'package-2017-07'
+input-file:
+- Microsoft.AnalysisServices/2017-07-14/analysisservices.json
+```
 
 ### Tag: package-2016-05
 
