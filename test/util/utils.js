@@ -26,9 +26,9 @@ exports.compositeSchemaUrl = "https://raw.githubusercontent.com/Azure/autorest/m
 exports.isWindows = (process.platform.lastIndexOf('win') === 0);
 exports.prOnly = undefined !== process.env['PR_ONLY'] ? process.env['PR_ONLY'] : 'false';
 
-exports.globPath = path.join(__dirname, '../', '../', '/specification/**/*.json');
-exports.swaggers = glob.sync(exports.globPath, { ignore: ['**/examples/**/*.json', '**/quickstart-templates/*.json', '**/schema/*.json'] });
-exports.exampleGlobPath = path.join(__dirname, '../', '../', '/specification/**/examples/**/*.json');
+exports.globPath = path.join(__dirname, '../', '../', '/specification/**/*.(json|yaml)');
+exports.swaggers = glob.sync(exports.globPath, { ignore: ['**/examples/**/*.(json|yaml)', '**/quickstart-templates/*.(json|yaml)', '**/schema/*.(json|yaml)'] });
+exports.exampleGlobPath = path.join(__dirname, '../', '../', '/specification/**/examples/**/*.(json|yaml)');
 exports.examples = glob.sync(exports.exampleGlobPath);
 
 // Remove byte order marker. This catches EF BB BF (the UTF-8 BOM)
@@ -217,7 +217,7 @@ exports.getFilesChangedInPR = function getFilesChangedInPR() {
       console.log('>>>>> Files changed in this PR are as follows:')
       console.log(filesChanged);
       swaggerFilesInPR = filesChanged.split('\n').filter(function (item) {
-        if (item.match(/.*json$/ig) == null || item.match(/.*specification.*/ig) == null) {
+        if (item.match(/.*(json|yaml)$/ig) == null || item.match(/.*specification.*/ig) == null) {
           return false;
         }
         if (item.match(/.*\/examples\/*/ig) !== null) {
