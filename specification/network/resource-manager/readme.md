@@ -49,12 +49,12 @@ input-file:
 - Microsoft.Network/2017-06-01/publicIpAddress.json
 - Microsoft.Network/2017-06-01/routeFilter.json
 - Microsoft.Network/2017-06-01/routeTable.json
-- Microsoft.Network/2017-06-01/serviceCommunity.json
+- Microsoft.Network/2017-06-01/serviceCommunity.yaml
 - Microsoft.Network/2017-06-01/usage.json
 - Microsoft.Network/2017-06-01/virtualNetwork.json
-- Microsoft.Network/2017-06-01/virtualNetworkGateway.json
-- Microsoft.Network/2017-06-01/vmssNetworkInterface.json
-- Microsoft.Network/2017-06-01/vmssPublicIpAddress.json
+- Microsoft.Network/2017-06-01/virtualNetworkGateway.yaml
+- Microsoft.Network/2017-06-01/vmssNetworkInterface.yaml
+- Microsoft.Network/2017-06-01/vmssPublicIpAddress.yaml
 ```
 
 
