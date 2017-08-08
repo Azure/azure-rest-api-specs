@@ -36,7 +36,7 @@
     }
   },
   "paths": {
-	"/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/publicIPAddresses/{publicIpAddressName}": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/publicIPAddresses/{publicIpAddressName}": {
       "delete": {
         "tags": [
           "PublicIPAddresses"
@@ -76,9 +76,12 @@
             "description": "Delete successful."
           }
         },
+        "x-ms-examples": {
+          "Delete public IP address": { "$ref": "./examples/PublicIpAddressDelete.json" }
+        },
         "x-ms-long-running-operation": true
       },
-	  "get": {
+      "get": {
         "tags": [
           "PublicIPAddresses"
         ],
@@ -120,6 +123,9 @@
               "$ref": "#/definitions/PublicIPAddress"
             }
           }
+        },
+        "x-ms-examples": {
+          "Get public IP address": { "$ref": "./examples/PublicIpAddressGet.json" }
         }
       },
       "put": {
@@ -173,10 +179,15 @@
             }
           }
         },
+        "x-ms-examples": {
+          "Create public IP address defaults": { "$ref": "./examples/PublicIpAddressCreateDefaults.json" },
+          "Create public IP address allocation method": { "$ref": "./examples/PublicIpAddressCreateCustomizedValues.json" },
+          "Create public IP address DNS": { "$ref": "./examples/PublicIpAddressCreateDns.json" }
+        },
         "x-ms-long-running-operation": true
       }
     },
-	"/subscriptions/{subscriptionId}/providers/Microsoft.Network/publicIPAddresses": {
+    "/subscriptions/{subscriptionId}/providers/Microsoft.Network/publicIPAddresses": {
       "get": {
         "tags": [
           "PublicIPAddresses"
@@ -198,6 +209,9 @@
               "$ref": "#/definitions/PublicIPAddressListResult"
             }
           }
+        },
+        "x-ms-examples": {
+          "List all public IP addresses": { "$ref": "./examples/PublicIpAddressListAll.json" }
         },
         "x-ms-pageable": {
           "nextLinkName": "nextLink"
@@ -233,6 +247,9 @@
               "$ref": "#/definitions/PublicIPAddressListResult"
             }
           }
+        },
+        "x-ms-examples": {
+          "List resource group public IP addresses": { "$ref": "./examples/PublicIpAddressList.json" }
         },
         "x-ms-pageable": {
           "nextLinkName": "nextLink"
@@ -286,14 +303,16 @@
         },
         "ipConfiguration": {
           "readOnly": true,
-          "$ref": "./networkInterface.json#/definitions/IPConfiguration"
+          "$ref": "./networkInterface.json#/definitions/IPConfiguration",
+          "description": "The IP configuration associated with the public IP address."
         },
         "dnsSettings": {
           "$ref": "#/definitions/PublicIPAddressDnsSettings",
           "description": "The FQDN of the DNS record associated with the public IP address."
         },
         "ipAddress": {
-          "type": "string"
+          "type": "string",
+          "description": "The IP address associated with the public IP address resource."
         },
         "idleTimeoutInMinutes": {
           "type": "integer",
@@ -319,8 +338,9 @@
         },
         "properties": {
           "x-ms-client-flatten": true,
-          "$ref": "#/definitions/PublicIPAddressPropertiesFormat"
-        },        
+          "$ref": "#/definitions/PublicIPAddressPropertiesFormat",
+          "description": "Public IP address properties."
+        },
         "etag": {
           "type": "string",
           "description": "A unique read-only string that changes whenever the resource is updated."
@@ -349,7 +369,7 @@
       },
       "description": "Response for ListPublicIpAddresses API service call."
     },
-	"PublicIPAddressDnsSettings": {
+    "PublicIPAddressDnsSettings": {
       "properties": {
         "domainNameLabel": {
           "type": "string",
