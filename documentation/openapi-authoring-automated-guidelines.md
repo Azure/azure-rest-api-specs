@@ -28,96 +28,93 @@ We request OpenAPI(Swagger) spec authoring be assigned to engineers who have an
 
 #### RPC Errors
 
-| Id | Rule Name | Output Message |Severity | 
-| --- | --- | --- | --- |
-| [R3012](#R3012)	| [APIVersionPattern](#R3012)	| API Version must be in the format: yyyy-MM-dd, optionally followed by -preview, -alpha, -beta, -rc, -privatepreview.	|  Error |
-| [R3019](#R3019)	| [ARMResourcePropertiesBag](#R3019)	| Top level property names should not be repeated inside the properties bag for ARM resource '{0}'. Properties [{1}] conflict with ARM top level properties. Please rename these. | Error |
-| [R3014](#R3014)	| [BodyPropertiesNamesCamelCase](#R3014) | Property named: "{0}", must follow camelCase style. Example: "{1}". | Error |
-| [R3016](#R3016)	| [DefinitionsPropertiesNamesCamelCase](#R3016)  | Property named: "{0}", for definition: "{1}" must follow camelCase style. Example: "{2}". | Error |
-| [R3006](#R3006)	| BodyTopLevelProperties(#R3006) | Top level properties should be one of name, type, id, location, properties, tags, plan, sku, etag, managedBy, identity. Extra properties found: "{0}". | Error |
-| [R3008](#R3008)	| [CollectionObjectPropertiesNaming](#R3008) | Collection object {0} returned by list operation {1} with 'x-ms-pageable' extension, has no property named 'value'. | Error |
-| M2044	| HttpVerbValidation | Permissible values for HTTP Verb are delete,get,put,patch,head,options,post. | Error |
-| [R3023](#R3023)	| [OperationsAPIImplementation](#R3023) | Operations API must be implemented for '{0}'. | Error |
-| M3007	| PutGetPatchResponseValidation | {0} has different responses for PUT/GET/PATCH operations. The PUT/GET/PATCH operations must have same schema response. | Error |
-| M3003	| RequiredPropertiesMustExist | Required property does not appear in the list of properties | Error |
-| M3001 | ResourceModelValidation | Model definition '{0}' must have the properties 'name', 'id' and 'type' in its hierarchy and these properties must be marked as readonly. | Error |
-| [R3025](#R3025)	| [TrackedResourceGetOperation](#R3025) | Tracked resource '{0}' must have a get operation | Error |
-| [R3026](#R3026)	| [TrackedResourcePatchOperation](#R3026) | Tracked resource '{0}' must have patch operation that at least supports the update of tags | Error |
-| [R2059](#R2059)	| [UniqueResourcePaths](#R2059) | Multiple resource providers are not allowed in a single spec. More than one the resource paths were found: '{0}'. | Error |
-| M3013	| DeleteMustNotHaveRequestBody | 'Delete' operation must not have a request body. | Error |
-| M2016	| PatchBodyParametersSchemaValidation | Properties of a PATCH request body must not be {0}. PATCH operation: '{1}' Model Definition: '{2}' Property: '{3}' | Error |
-| M2062	| PutResponseResourceValidation | The 200 response model for an ARM PUT operation must have x-ms-azure-resource extension set to true in its hierarchy. Operation: '{0}' Model: '{1}'. | Error |
-| [R3027](#R3027)	| [TrackedResourceListByResourceGroup](#R3027) | The tracked resource, '{0}', must have a list by resource group operation. | Error |
-| [R3028](#R3028)	| [TrackedResourceListBySubscription](#R3028) | The tracked resource, '{0}', must have a list by subscriptions operation. | Error |
-| [R3011](#R3011)	| [DescriptionMustNotBeNodeName](#R3011) | The description provided for a given node (property, parameter, etc.) must not be the same as the name assigned to the node. | Error |
-| [R2020](#R2020) | [RequiredPropertiesMissingInResourceModel](#R2020) | A `Resource` model must have `name`, `id` and `type` properties defined. | Error |
+| Id | Rule Name |
+| --- | --- |
+| [R3012](#R3012)	| [APIVersionPattern](#R3012)	|
+| [R3019](#R3019)	| [ARMResourcePropertiesBag](#R3019)	|
+| [R3014](#R3014)	| [BodyPropertiesNamesCamelCase](#R3014) |
+| [R3016](#R3016)	| [DefinitionsPropertiesNamesCamelCase](#R3016)  |
+| [R3006](#R3006)	| [BodyTopLevelProperties](#R3006) |
+| [R3008](#R3008)	| [CollectionObjectPropertiesNaming](#R3008) |
+| [R2044](#R2044)	| [InvalidVerbUsed](#R2044) |
+| [R3023](#R3023)	| [OperationsAPIImplementation](#R3023) |
+| [R3007](#R3007)	| [PutGetPatchResponseSchema](#R3007) |
+| [R3025](#R3025)	| [TrackedResourceGetOperation](#R3025) |
+| [R3026](#R3026)	| [TrackedResourcePatchOperation](#R3026) |
+| [R2059](#R2059)	| [UniqueResourcePaths](#R2059) |
+| [R2016](#R2016)	| [PatchBodyParametersSchema](#R2016) |
+| [R2062](#R2062)	| [XmsResourceInPutResponse](#R2062) |
+| [R3027](#R3027)	| [TrackedResourceListByResourceGroup](#R3027) |
+| [R3028](#R3028)	| [TrackedResourceListBySubscription](#R3028) |
+| [R3011](#R3011)	| [DescriptionMustNotBeNodeName](#R3011) |
+| [R2020](#R2020) | [RequiredPropertiesMissingInResourceModel](#R2020) |
 
 #### RPC Warnings
 
-| Id | Rule Name | Output Message |Severity | 
-| --- | --- | --- | --- |
-| M2061	| ProvidersPathValidation |	Type values \"{0}\" have default value(s), please consider parameterizing them | Warning |
-| [R3018](#R3018)	| [EnumInsteadOfBoolean](#R3018)	| Booleans are not descriptive and make them hard to use. Consider using string enums with allowed set of values defined. Property: {0}. |	Warning |
-| [R3017](#R3017)	| [GuidUsage](#R3017) | Guid used in model definition '{1}' for property '{0}'. Usage of Guid is not recommanded. If GUIDs are absolutely required in your service, please get sign off from the Azure API review board. | Warning |
-| [R2057](#R2057)	| [InvalidSkuModel](#R2057) | Sku Model is not valid. A Sku model must have 'name' property. It can also have 'tier', 'size', 'family', 'capacity' as optional properties. | Warning |
-| [R3010](#R3010)	| [TrackedResourceListByImmediateParent](#R3010) | The child tracked resource, '{0}' with immediate parent '{1}', must have a list by immediate parent operation. | Warning |
-| [R2061](#R2061)	| [ParameterizeProperties](#R2061) | Type values \"{0}\" have default value(s), please consider parameterizing them | Warning |
+| Id | Rule Name |
+| --- | --- |
+| [R3018](#R3018)	| [EnumInsteadOfBoolean](#R3018)	|
+| [R3017](#R3017)	| [GuidUsage](#R3017) |
+| [R2057](#R2057)	| [InvalidSkuModel](#R2057) |
+| [R3010](#R3010)	| [TrackedResourceListByImmediateParent](#R3010) |
+| [R2004](#R2004)	| [NonApplicationJsonType](#R2004) |
 
 ### SDK Violations
 
 #### SDK Errors
 
-| Id | Rule Name | Output Message |Severity | 
-| --- | --- | --- | --- |
-| [R2024](#R2024) | [AnonymousBodyParameter](#R2024) |	Inline/anonymous models must not be used, instead define a schema with a model name in the "definitions" section and refer to it. This allows operations to share the models. | Error |
-| [R2026](#R2026) | [AvoidAnonymousTypes](#R2026) |	Inline/anonymous models must not be used, instead define a schema with a model name in the "definitions" section and refer to it. This allows operations to share the models. | Error |
-| [R2014](#R2014)	| [OperationParametersValidation](#R2014)	| Parameter "subscriptionId" is not allowed in the operations section, define it in the global parameters section instead | Error |
-| [R2027](#R2027)	| [DefaultMustBeInEnum](#R2027) | The default value is not one of the values enumerated as valid for this element. | Error |
-| M1004	| ListByOperationsValidation | Operation must be one of List() - lists all resources under a subscription.  ListByResourceGroup() - list all resources in a resource group within a subscription. ListByParent() - where ""Parent"" is a context specific suffix. It lists all resource under a parent. | Error |
-| [R1001](#R1001)	| [OperationIdNounInVerb](#R1001)	| Per the Noun_Verb convention for Operation Ids, the noun '{0}' should not appear after the underscore. | Error |
-| [R2055](#R2055)	| [OneUnderscoreInOperationId](#R2055) | Only 1 underscore is permitted in the operation id, following Noun_Verb conventions.  | Error |
-| [R2014](#R2014)	| [ServiceDefinitionParameters](#R2014) | Parameter "{0}" is referenced but not defined in the global parameters section of Service Definition |Error |
-| M2043	| SupportedSchemesWarning | Azure Resource Management only supports HTTPS scheme. | Error | 
-| [R2003](#R2003)	| [ValidFormats](#R2003)	 | '{0}' is not a known format.	| Error |
-| M2005	| LongRunningResponseValidationRule | A '{0}' operation '{1}' with x-ms-long-running-operation extension must have a valid terminal success status code {2}. | Error |
-| [R2008](#R2008)	| [MutabilityWithReadOnlyRule](#R2008) | When property is modeled as "readOnly": true then x-ms-mutability extension can only have "read" value. When property is modeled as "readOnly": false then applying x-ms-mutability extension with only "read" value is not allowed. Extension contains invalid values: '{0}'. | Error |
-| [R2025](#R2025)	| [NextLinkPropertyMustExist](#R2025)	| The property '{0}' specified by nextLinkName does not exist in the 200 response schema. Please, specify the name of the property that provides the nextLink. If the model does not have the nextLink property then specify null. | Error |
-| [R2028](#R2028) | [NonEmptyClientName](#R2028) | Empty x-ms-client-name property | Error |
-| [R2060](#R2060) | [PageableRequires200Response](#R2060) | A response for the 200 HTTP status code must be defined to use x-ms-pageable | Error |
-| M2019	| ResourceIsMsResourceValidation | A 'Resource' definition must have x-ms-azure-resource extension enabled and set to true. |	Error |
-| [R2058](#R2058) |[XmsPathsMustOverloadPaths](#R2058) | Paths in `x-ms-paths` must overload a normal path in the paths section, i.e. a path in the `x-ms-paths` must either be same as a path in the paths section or a path in the paths sections followed by additional parameters. | Error |
-| [R2012](#R2012)	| [XmsClientNameParameter](#R2012) | Value of 'x-ms-client-name' cannot be the same as '{0}' Property/Model. | Error |
-| [R2013](#R2013)	| [XmsClientNameProperty](#R2013) | Value of 'x-ms-client-name' cannot be the same as '{0}' Property/Model. | Error |
-| M2047	| ParameterNameValidation | Parameter Must have the "name" property defined with non-empty string as its value | Error |
-| [R2056](#R2056)	| [RequiredReadOnlyProperties](#R2056) | Property '{0}' is a required property. It should not be marked as 'readonly'. | Error |
-| M2054	| SecurityDefinitionsStructureValidation | An OpenAPI(swagger) spec must have security definitions and must adhere to the specific structure. | Error |
-| [R2006](#R2006)	| [ControlCharactersNotAllowed](#R2006) | Specification must not contain any control characters. | Error |
-| [R2009](#R2009)	| [ArraySchemaMustHaveItems](#R2009) | A property of type `Array` must have `items` defined in its `Schema`. | Error |
-| [R2022](#R2022) | [XmsExamplesRequired](#R2022) | Please provide x-ms-examples describing minimum/maximum property set for response/request payloads for operations.{0} | Error |
+| Id | Rule Name |
+| --- | --- |
+| [R2024](#R2024) | [AnonymousBodyParameter](#R2024) |
+| [R2026](#R2026) | [AvoidAnonymousTypes](#R2026) |
+| [R2014](#R2014)	| [SubscriptionIdParameterInOperations](#R2014)	|
+| [R2027](#R2027)	| [DefaultMustBeInEnum](#R2027) |
+| [R1001](#R1001)	| [OperationIdNounInVerb](#R1001)	|
+| [R2055](#R2055)	| [OneUnderscoreInOperationId](#R2055) |
+| [R2003](#R2003)	| [ValidFormats](#R2003)	 |
+| [R2005](#R2005)	| [LongRunningResponseStatusCode](#R2005) |
+| [R2008](#R2008)	| [MutabilityWithReadOnlyRule](#R2008) |
+| [R2025](#R2025)	| [NextLinkPropertyMustExist](#R2025)	|
+| [R2028](#R2028) | [NonEmptyClientName](#R2028) |
+| [R2060](#R2060) | [PageableRequires200Response](#R2060) |
+| [R2019](#R2019)	| [ResourceHasXMsResourceEnabled](#R2019) |
+| [R2058](#R2058) | [XmsPathsMustOverloadPaths](#R2058) |
+| [R2012](#R2012)	| [XmsClientNameParameter](#R2012) |
+| [R2013](#R2013)	| [XmsClientNameProperty](#R2013) |
+| [R2047](#R2047)	| [NamePropertyDefinitionInParameter](#R2047) |
+| [R2056](#R2056)	| [RequiredReadOnlyProperties](#R2056) |
+| [R2054](#R2054)	| [SecurityDefinitionsStructure](#R2054) |
+| [R2006](#R2006)	| [ControlCharactersNotAllowed](#R2006) |
+| [R2009](#R2009)	| [ArraySchemaMustHaveItems](#R2009) |
+| [R2022](#R2022) | [XmsExamplesRequired](#R2022) |
+| [R3013](#R3013)	| [DeleteMustNotHaveRequestBody](#R3013) |
 
 #### SDK Warnings
 
-| Id | Rule Name | Output Message |Severity | 
-| --- | --- | --- | --- |
-| M4000 | ModelTypeIncomplete |	This definition lacks the property 'description', which is required for model types	| Warning |
-| M4000 | ParameterDescriptionRequired, OperationDescriptionRequired  | {0} lacks 'description' property. Consider adding a 'description' element. Accurate description is essential for maintaining reference documentation. | Warning |
- M4000 | DescriptiveDescriptionRequired | The value provided for description is not descriptive enough. Accurate and descriptive description is essential for maintaining reference documentation. | Warning |
-| [R2001](#R2001)	| [AvoidNestedProperties](#R2001) | Consider using x-ms-client-flatten to provide a better end user experience | Warning |
-| [R4002](#R4002)	| [LocationMustHaveXmsMutability](#R4002) | The "location" property of "Resource" model definition in ARM MUST have "x-ms-mutability": ["create", "read"] extension. | Warning |
-| [R2064](#R2064)	| [PostOperationIdContainsUrlVerb](#R2064) | A POST operation OperationId must contain the verb at the end of the url related to the operation. | Warning |
-| [R2015](#R2015) | [ParameterNotDefinedInGlobalParameters](#R2015) | Parameters `subscriptionId` and `api-version` must be declared as global parameters. | Warning |
-| [R1010](#R1010) | [AvoidMSDNReferences](#R1010) |	For better generated code quality, remove all references to "msdn.microsoft.com". | Warning |
-| [R2004](#R2004)	| [NonApplicationJsonType](#R2004) | Please make sure that media types other than 'application/json' are supported by your service. | Warning |
-| M2017	| PutRequestResponseValidation | A PUT operation request body schema should be the same as its 200 response schema, to allow reusing the same entity between GET and PUT. If the schema of the PUT request body is a superset of the GET response body, make sure you have a PATCH operation to make the resource updatable. Operation: '{0}' Request Model: '{1}' Response Model: '{2}' | Warning |
-| [R1009](#R1009) | [DeleteInOperationName](#R1009) | 'DELETE' operation '{0}' should use method name 'Delete'. Note: If you have already shipped an SDK on top of this spec, fixing this warning may introduce a breaking change. | Warning |
-| [R1005](#R1005) | [GetInOperationName](#R1005) | 'GET' operation '{0}' should use method name 'Get' or Method name start with 'List'. Note: If you have already shipped an SDK on top of this spec, fixing this warning may introduce a breaking change. | Warning |
-| [R1003](#R1003) | [ListInOperationName](#R1003) | Since operation '{0}' response has model definition '{1}', it should be of the form "*_list*" | Warning |
-| [R1006](#R1006)	| [PutInOperationName](#R1006) | 'PUT' operation '{0}' should use method name 'Create'. Note: If you have already shipped an SDK on top of this spec, fixing this warning may introduce a breaking change. | Warning |
-| [R1007](#R1007) | [PatchInOperationName](#R1007) | 'PATCH' operation '{0}' should use method name 'Update'. Note: If you have already shipped an SDK on top of this spec, fixing this warning may introduce a breaking change. | Warning |
-| [R1011](#R1011) | [HttpsSupportedScheme](#R1011) | 'Azure Resource Management only supports HTTPS scheme. | Warning |
-| [R2065](#R2065) | [LicenseHeaderMustNotBeSpecified](#R2065) | License header must not be specified inside x-ms-code-generation-settings of OpenAPI document. | Warning |
-| [R2018](#R2018) | [XmsEnumValidation](#R2018) | The enum types should have x-ms-enum type extension set with appropriate options. Property name: {0}. | Warning |
-| [R2063](#R2063) | [OperationIdNounConflictingModelNames](#R2063) | OperationId has a noun that conflicts with one of the model names in definitions section. The model name will be disambiguated to '{0}Model'. Consider using the plural form of '{1}' to avoid this. Note: If you have already shipped an SDK on top of this spec, fixing this warning may introduce a breaking change. | Warning |
+| Id | Rule Name |
+| --- | --- |
+| [R4000](#R4000-2) | [ParameterDescriptionRequired](#R4000-2) |
+| [R4000](#R4000-3) | [DescriptiveDescriptionRequired](#R4000-3) |
+| [R4000](#R4000-4) | [DescriptionAndTitleMissing](#R4000-4) |
+| [R4000](#R4000-5) | [OperationDescriptionOrSummaryRequired](#R4000-5)  |
+| [R2001](#R2001)	| [AvoidNestedProperties](#R2001) |
+| [R4002](#R4002)	| [LocationMustHaveXmsMutability](#R4002) |
+| [R2066](#R2066)	| [PostOperationIdContainsUrlVerb](#R2066) |
+| [R2015](#R2015) | [ParameterNotDefinedInGlobalParameters](#R2015) |
+| [R1010](#R1010) | [AvoidMSDNReferences](#R1010) |
+| [R2017](#R2017)	| [PutRequestResponseScheme](#R2017) |
+| [R1009](#R1009) | [DeleteInOperationName](#R1009) |
+| [R1005](#R1005) | [GetInOperationName](#R1005) |
+| [R1003](#R1003) | [ListInOperationName](#R1003) |
+| [R1006](#R1006)	| [PutInOperationName](#R1006) |
+| [R1007](#R1007) | [PatchInOperationName](#R1007) |
+| [R1011](#R1011) | [HttpsSupportedScheme](#R1011) |
+| [R2065](#R2065) | [LicenseHeaderMustNotBeSpecified](#R2065) |
+| [R2018](#R2018) | [XmsEnumValidation](#R2018) |
+| [R3060](#R3060) | [XmsPageableListByRGAndSubscriptions](#R3060) |
+| [R2063](#R2063) | [OperationIdNounConflictingModelNames](#R2063) |
+| [R2064](#R2064) | [LROStatusCodesReturnTypeSchema](#R2064) |
+| [R2023](#R2023) | [SummaryAndDescriptionMustNotBeSame](#R2023) |
 
 ## Rule Descriptions
 
@@ -217,7 +214,7 @@ What's a tracked resource? A Tracked Resource is an ARM Resource with "location"
 **How to fix the violation**: Add a PATCH operation that allows at least the update of tags for the tracked resource - if the operation does not exist for the service, this fix requires a service side change. 
 If the resource pointed by the rule is not a tracked resource, this warning may be a false positive, please clarify this with your PR reviewer.
 
-**Impact on generated code**: Generated SDK code will expose the corresponding PATCH operation only if it's present in the specification.
+**Impact on generated code**: Generated SDK code will expose the corresponding PATCH operation only if it's present in the specification. If PATCH operation only supports updating tags, then you will potentially have two operations in the SDK: "Update" & "CreateOrUpdate", the first updates only tags while the second allows updating a bigger set of properties, which is not the best customer experience. Please strongly consider adding all mutable properties to the "Update" operation.
 
 **Examples**: N/A
 
@@ -328,7 +325,7 @@ Links: [Index](#index) | [Error vs. Warning](#error-vs-warning) | [Automated Rul
 
 Links: [Index](#index) | [Error vs. Warning](#error-vs-warning) | [Automated Rules](#automated-rules) | [RPC](#rpc-violations): [Errors](#rpc-errors) or [Warnings](#rpc-warnings) | [SDK](#sdk-violations): [Errors](#sdk-errors) or [Warnings](#sdk-warnings)
 
-### <a name="R2064" />R2064	PostOperationIdContainsUrlVerb
+### <a name="R2066" />R2066	PostOperationIdContainsUrlVerb
 **Output Message**: OperationId should contain the verb: '{0}' in:'{1}'
 
 **Description**: A POST operation's operationId should contain the verb indicated at the end of the corresponding url.
@@ -589,15 +586,13 @@ Links: [Index](#index) | [Error vs. Warning](#error-vs-warning) | [Automated Rul
 Links: [Index](#index) | [Error vs. Warning](#error-vs-warning) | [Automated Rules](#automated-rules) | [RPC](#rpc-violations): [Errors](#rpc-errors) or [Warnings](#rpc-warnings) | [SDK](#sdk-violations): [Errors](#sdk-errors) or [Warnings](#sdk-warnings)
 
 ### <a name="R2004" />R2004 NonApplicationJsonType
-**Output Message**: Please make sure that media types other than 'application/json' are supported by your service.
+**Output Message**: Only content-type 'application/json' is supported by ARM..
 
 **Description**: Verifies whether operation supports "application/json" as consumes or produces section.
 
-**Why the rule is important**: Per the ARM SDK guidelines, the AutoRest is used to generated the language SDKs. All the supported language generator currently handles "application/json" but some SDKs may support other content-types. This rule is in place to warn the swagger writter that not all the SDKs would work with other content-types.
+**Why the rule is important**: Per [ARM SDK guidelines](https://github.com/Azure/azure-resource-manager-rpc/blob/master/v1.0/common-api-details.md#client-request-headers) only content-type 'application/json' is supported.
 
-**How to fix the violation**: Please consult with AutoRest to ensure that the content type desired can be supported.
-
-**Impact on generated code**: If the other than `application/json` type is provided, not all SDKs would support that content-type.
+**How to fix the violation**: Make sure to include only 'application/json' in the spec consumes/produces. Make sure your service supports 'application/json'.
 
 **Examples**: N/A
 
@@ -994,7 +989,7 @@ Links: [Index](#index) | [Error vs. Warning](#error-vs-warning) | [Automated Rul
 
 Links: [Index](#index) | [Error vs. Warning](#error-vs-warning) | [Automated Rules](#automated-rules) | [RPC](#rpc-violations): [Errors](#rpc-errors) or [Warnings](#rpc-warnings) | [SDK](#sdk-violations): [Errors](#sdk-errors) or [Warnings](#sdk-warnings)
 
-### <a name="R2014" />R2014 SubscriptionIdParameterInOperations/ServiceDefinitionParameters
+### <a name="R2014" />R2014 SubscriptionIdParameterInOperations
 **Output Message**: Parameter "subscriptionId" is not allowed in the operations section, define it in the global parameters section instead/Parameter "{0}" is referenced but not defined in the global parameters section of Service Definition
 
 **Description**: `subscriptionId` must not be an operation parameter and must be declared in the global parameters section.
@@ -1268,46 +1263,6 @@ Links: [Index](#index) | [Error vs. Warning](#error-vs-warning) | [Automated Rul
 
 Links: [Index](#index) | [Error vs. Warning](#error-vs-warning) | [Automated Rules](#automated-rules) | [RPC](#rpc-violations): [Errors](#rpc-errors) or [Warnings](#rpc-warnings) | [SDK](#sdk-violations): [Errors](#sdk-errors) or [Warnings](#sdk-warnings)
 
-### <a name="R2061" />R2061 ParameterizeProperties
-**Output Message**: Type values \"{0}\" have default value(s), please consider parameterizing them
-
-**Description**: Path URLs must be of the form `/subscriptions/{subscriptionId}/providers/<ProviderName>/typename/{typevalue}`, i.e., typevalues must be parameterized.
-
-**Why the rule is important**: Path URLs should follow a consistent pattern across RPs. Consistent URL patterns also ensure determination of a resource from the URL and in turn trigger other resource related rules.
-
-**How to fix the violation**: Parameterize all type values as path parameters.
-
-**Bad Examples**: 
-```
-"/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Storage/storageAccounts/sampleAccount":{
-
-}
-```
-**Good Examples**: 
-```
-"/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Storage/storageAccounts/{accountName}":{
-  "get":{
-        "parameters": [
-          {
-            "$ref": "#/parameters/ResourceGroupName"
-          },
-          {
-            "name": "accountName",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "description": "The name of the storage account within the specified resource group. Storage account names must be between 3 and 24 characters in length and use numbers and lower-case letters only.",
-            "maxLength": 24,
-            "minLength": 3
-          },
-          ...
-
-  }
-}
-```
-
-Links: [Index](#index) | [Error vs. Warning](#error-vs-warning) | [Automated Rules](#automated-rules) | [RPC](#rpc-violations): [Errors](#rpc-errors) or [Warnings](#rpc-warnings) | [SDK](#sdk-violations): [Errors](#sdk-errors) or [Warnings](#sdk-warnings)
-
 ### <a name="R2063" />R2063 OperationIdNounConflictingModelNames
 **Output Message**: OperationId has a noun that conflicts with one of the model names in definitions section. The model name will be disambiguated to '{0}Model'. Consider using the plural form of '{1}' to avoid this. Note: If you have already shipped an SDK on top of this spec, fixing this warning may introduce a breaking change.
 
@@ -1318,5 +1273,209 @@ Links: [Index](#index) | [Error vs. Warning](#error-vs-warning) | [Automated Rul
 **How to fix the violation**: Ensure operation Ids are named in such a way that the `Noun` in `Noun_Verb` is of the plural form and does not conflict with the names of any models in the definitions section of the spec.
 
 **Examples**: Please refer to [x-ms-enum extension](https://github.com/Azure/autorest/blob/master/docs/extensions/readme.md#x-ms-enum).
+
+Links: [Index](#index) | [Error vs. Warning](#error-vs-warning) | [Automated Rules](#automated-rules) | [RPC](#rpc-violations): [Errors](#rpc-errors) or [Warnings](#rpc-warnings) | [SDK](#sdk-violations): [Errors](#sdk-errors) or [Warnings](#sdk-warnings)
+
+### <a name="R2054" />R2054 SecurityDefinitionsStructure
+**Output Message**: Every swagger/configuration must have a security definitions section and it must adhere to the structure described [here](https://github.com/Azure/autorest/tree/master/docs/developer/validation-rules/security-definitions-structure-validation.md)
+
+**Description**: Each OpenAPI json document must contain a security definitions section and the section must adhere to a certain format.
+
+**Why the rule is important**: Missing security definitions section does not describe the Azure services security model accurately. This is an ARM specific requirement which describes the security mechanism to access the services.
+
+**How to fix the violation**: Ensure that the document has a security definition section as described [here](https://github.com/Azure/autorest/tree/master/docs/developer/validation-rules/security-definitions-structure-validation.md)
+
+Links: [Index](#index) | [Error vs. Warning](#error-vs-warning) | [Automated Rules](#automated-rules) | [RPC](#rpc-violations): [Errors](#rpc-errors) or [Warnings](#rpc-warnings) | [SDK](#sdk-violations): [Errors](#sdk-errors) or [Warnings](#sdk-warnings)
+
+### <a name="R2019" />R2019 ResourceHasXMsResourceEnabled
+**Output Message**: A 'Resource' definition must have x-ms-azure-resource extension enabled and set to true.
+
+**Description**: A 'Resource' definition must have x-ms-azure-resource extension enabled and set to true. This will indicate that the model is an Azure resource.
+
+**Why the rule is important**: This will ensure that the 'Resource' definition is designed correctly in code generation.Please refer [here](./swagger-extensions.md#x-ms-azure-resource) for further details.
+
+**How to fix the violation**: Ensure that the 'Resource' definition has x-ms-azure-resource extension enabled and set to true.
+
+Links: [Index](#index) | [Error vs. Warning](#error-vs-warning) | [Automated Rules](#automated-rules) | [RPC](#rpc-violations): [Errors](#rpc-errors) or [Warnings](#rpc-warnings) | [SDK](#sdk-violations): [Errors](#sdk-errors) or [Warnings](#sdk-warnings)
+
+### <a name="R2017" />R2017 PutRequestResponseScheme
+**Output Message**: A PUT operation request body schema should be the same as its 200 response schema, to allow reusing the same entity between GET and PUT. If the schema of the PUT request body is a superset of the GET response body, make sure you have a PATCH operation to make the resource updatable. Operation: '{0}' Request Model: '{1}' Response Model: '{2}'
+
+**Description**: The request & reponse('200') schema of the PUT operation must be same.
+
+**Why the rule is important**: This will provide a consistent experience to the user, i.e. the user could use the same model object to perform various operations. Also, within the SDK, this will encourage reuse of the same model objects.
+
+**How to fix the violation**: Ensure the request & reponse('200') schema of the PUT operation must be same. This might involve a service side change which will result cause a breaking change in the generated SDK.
+
+Links: [Index](#index) | [Error vs. Warning](#error-vs-warning) | [Automated Rules](#automated-rules) | [RPC](#rpc-violations): [Errors](#rpc-errors) or [Warnings](#rpc-warnings) | [SDK](#sdk-violations): [Errors](#sdk-errors) or [Warnings](#sdk-warnings)
+
+### <a name="R2005" />R2005 LongRunningResponseStatusCode
+**Output Message**: A '{0}' operation '{1}' with x-ms-long-running-operation extension must have a valid terminal success status code {2}.
+
+**Description**: The allowed response status codes for a long DELETE operation are "200", "204". The allowed response status codes for a POST operation are "200", "201" & "204". The allowed response status codes for a PUT operation are  "200" & "201".
+
+**Why the rule is important**: This will ensure that the DELETE/POST/PUT operations are designed correctly.Please refer [here](./swagger-extensions.md#x-ms-long-running-operation) for further details.
+
+**How to fix the violation**: Ensure that the DELETE/POST/PUT operations have the allowed response codes.
+
+Links: [Index](#index) | [Error vs. Warning](#error-vs-warning) | [Automated Rules](#automated-rules) | [RPC](#rpc-violations): [Errors](#rpc-errors) or [Warnings](#rpc-warnings) | [SDK](#sdk-violations): [Errors](#sdk-errors) or [Warnings](#sdk-warnings)
+
+### <a name="R2044" />R2044 InvalidVerbUsed
+**Output Message**: Permissible values for HTTP Verb are DELETE, GET, PUT, PATCH, HEAD, OPTIONS, POST, TRACE.
+
+**Description**: Each operation definition must have a HTTP verb and it must be DELETE/GET/PUT/PATCH/HEAD/OPTIONS/POST/TRACE.
+
+**Why the rule is important**: DELETE/GET/PUT/PATCH/HEAD/OPTIONS/POST/TRACE are the only valid HTTP operations.
+
+**How to fix the violation**: Provide a correct HTTP verb.
+
+Links: [Index](#index) | [Error vs. Warning](#error-vs-warning) | [Automated Rules](#automated-rules) | [RPC](#rpc-violations): [Errors](#rpc-errors) or [Warnings](#rpc-warnings) | [SDK](#sdk-violations): [Errors](#sdk-errors) or [Warnings](#sdk-warnings)
+
+### <a name="R3007" />R3007 PutGetPatchResponseSchema
+**Output Message**: {0} has different responses for PUT/GET/PATCH operations. The PUT/GET/PATCH operations must have same schema response.
+
+**Description**: For a given path with PUT, GET and PATCH operations, the schema of the response must be the same.
+
+**Why the rule is important**: This will provide a consistent experience to the user, i.e. the user could use the same model object to perform various operations. Also, within the SDK, this will encourage reuse of the same model objects.
+
+**How to fix the violation**: Ensure that, for a given path with PUT, GET and PATCH operations, the schema of the response is same. This might involve a service side change which will result in a breaking change in the generated SDK.
+
+Links: [Index](#index) | [Error vs. Warning](#error-vs-warning) | [Automated Rules](#automated-rules) | [RPC](#rpc-violations): [Errors](#rpc-errors) or [Warnings](#rpc-warnings) | [SDK](#sdk-violations): [Errors](#sdk-errors) or [Warnings](#sdk-warnings)
+
+### <a name="R3013" />R3013 DeleteMustNotHaveRequestBody
+**Output Message**: 'Delete' operation '{0}' must not have a request body.
+
+**Description**: The request body of a delete operation must be empty.
+
+**Why the rule is important**: This will ensure that the delete operation aligns with the [ARM guidelines](https://github.com/Azure/azure-resource-manager-rpc/blob/master/v1.0/resource-api-reference.md).
+
+**How to fix the violation**: Ensure that the request body of the delete operation is empty. This may involve a service side change and may cause a breaking change in the generated SDK.
+
+Links: [Index](#index) | [Error vs. Warning](#error-vs-warning) | [Automated Rules](#automated-rules) | [RPC](#rpc-violations): [Errors](#rpc-errors) or [Warnings](#rpc-warnings) | [SDK](#sdk-violations): [Errors](#sdk-errors) or [Warnings](#sdk-warnings)
+
+### <a name="R2062" />R2062 XmsResourceInPutResponse
+**Output Message**: The 200 response model for an ARM PUT operation must have x-ms-azure-resource extension set to true in its hierarchy. Operation: '{0}' Model: '{1}'.
+
+**Description**: The 200 response model for an ARM PUT operation must have x-ms-azure-resource extension set to true in its hierarchy. Operation: '{0}' Model: '{1}'.
+
+**Why the rule is important**: This will ensure that the PUT operation actually returns a resource model.Please refer [here](./swagger-extensions.md#x-ms-azure-resource) for details on x-ms-azure-resource extension.
+
+**How to fix the violation**: Ensure that the 200 response model for an ARM PUT operation must have x-ms-azure-resource extension set to true in its hierarchy.
+
+Links: [Index](#index) | [Error vs. Warning](#error-vs-warning) | [Automated Rules](#automated-rules) | [RPC](#rpc-violations): [Errors](#rpc-errors) or [Warnings](#rpc-warnings) | [SDK](#sdk-violations): [Errors](#sdk-errors) or [Warnings](#sdk-warnings)
+
+### <a name="R3060" />R3060 XmsPageableListByRGAndSubscriptions
+**Output Message**: For the tracked resource '{0}', the x-ms-pageable extension values must be same for list by resource group and subscriptions operations.
+
+**Description**: When a tracked resource has list by resource group and subscription operations, the x-ms-pageable extension values must be same for both operations. A tracked resource is a resource with a 'location' property as required. If this rule flags a resource which does not have a 'location' property, then it might be a false positive.
+
+**Why the rule is important**: This will provide a consistent experience to the user, i.e. the user could expect the same behavior for both list by subscription and resource group. Please refer [here](./swagger-extensions.md#x-ms-pageable) for details on the x-ms-pageable extension.
+
+**How to fix the violation**: Ensure that when a tracked resource has list by resource group and subscription operations, the x-ms-pageable extension values are same for both operations. This might involve a service side change which will result in a breaking change in the generated SDK.
+
+Links: [Index](#index) | [Error vs. Warning](#error-vs-warning) | [Automated Rules](#automated-rules) | [RPC](#rpc-violations): [Errors](#rpc-errors) or [Warnings](#rpc-warnings) | [SDK](#sdk-violations): [Errors](#sdk-errors) or [Warnings](#sdk-warnings)
+
+### <a name="R2064" />R2064 LROStatusCodesReturnTypeSchema
+**Output Message**: 200/201 Responses of long running operations must have a schema definition for return type. OperationId: '{0}', Response code: '{1}'
+
+**Description**: The '200'/'201' responses of the long running operation must have a schema definition. 
+
+**Why the rule is important**: Please refer [here](./swagger-extensions.md#x-ms-long-running-operation) for details on the x-ms-long-running-operation. The '201' response code indicates 'Created' & '200' response code indicates 'Success'. In either case, it is logical for the response to be the same.
+
+**How to fix the violation**: Ensure that the '200'/'201' responses of the long running operation has a schema definition. This might involve a service side change which will result in a breaking change in the generated SDK.
+
+Links: [Index](#index) | [Error vs. Warning](#error-vs-warning) | [Automated Rules](#automated-rules) | [RPC](#rpc-violations): [Errors](#rpc-errors) or [Warnings](#rpc-warnings) | [SDK](#sdk-violations): [Errors](#sdk-errors) or [Warnings](#sdk-warnings)
+
+### <a name="R2016" />R2016 PatchBodyParametersSchema
+**Output Message**: Properties of a PATCH request body must not be {0}. PATCH operation: '{1}' Model Definition: '{2}' Property: '{3}'
+
+**Description**: A request parameter of the Patch Operation must not have a required/default value.
+
+**Why the rule is important**: A PATCH operation is used to update properties of a resource. So, If the resource has 'X' number of properties and if you wish to change one of them, then a PATCH request could be sent with a value for that specified property. In other words, all the properties in the PATCH request are updated. Now, if any of the values are marked as required/default, it would force the system to update it always which is not the intention of the PATCH operation.
+
+**How to fix the violation**: Ensure that the request parameter of the Patch Operation does not have a required/default value.
+
+Links: [Index](#index) | [Error vs. Warning](#error-vs-warning) | [Automated Rules](#automated-rules) | [RPC](#rpc-violations): [Errors](#rpc-errors) or [Warnings](#rpc-warnings) | [SDK](#sdk-violations): [Errors](#sdk-errors) or [Warnings](#sdk-warnings)
+
+### <a name="R4000-2" />R4000 ParameterDescriptionRequired
+**Output Message**: {0} lacks 'description' property. Consider adding a 'description' element. Accurate description is essential for maintaining reference documentation.
+
+**Description**: A parameter must have 'description' property.
+
+**Why the rule is important**: Appropriate documentation could not be generated without the 'description' property.
+
+**How to fix the violation**: For each parameter, provide a 'description' property.
+
+Links: [Index](#index) | [Error vs. Warning](#error-vs-warning) | [Automated Rules](#automated-rules) | [RPC](#rpc-violations): [Errors](#rpc-errors) or [Warnings](#rpc-warnings) | [SDK](#sdk-violations): [Errors](#sdk-errors) or [Warnings](#sdk-warnings)
+
+### <a name="R4000-3" />R4000 DescriptiveDescriptionRequired
+**Output Message**: The value provided for description is not descriptive enough. Accurate and descriptive description is essential for maintaining reference documentation.
+
+**Description**: The value of the 'description' property must be descriptive. It cannot be spaces or empty description.
+
+**Why the rule is important**: Appropriate documentation could not be generated without a detailed 'description' value.
+
+**How to fix the violation**: For each 'description' property, provide a detailed description value.
+
+Links: [Index](#index) | [Error vs. Warning](#error-vs-warning) | [Automated Rules](#automated-rules) | [RPC](#rpc-violations): [Errors](#rpc-errors) or [Warnings](#rpc-warnings) | [SDK](#sdk-violations): [Errors](#sdk-errors) or [Warnings](#sdk-warnings)
+
+### <a name="R4000-4" />R4000 DescriptionAndTitleMissing
+**Output Message**: {0} lacks 'description' and 'title' property. Consider adding a 'description'/'title' element. Accurate description/title is essential for maintaining reference documentation.
+
+**Description**: The definition must have at least one of the properties - description/title.
+
+**Why the rule is important**: Appropriate documentation could not be generated without the 'description'/'title' property.
+
+**How to fix the violation**: For each definition, provide atleast one of the properties - description/title.
+
+Links: [Index](#index) | [Error vs. Warning](#error-vs-warning) | [Automated Rules](#automated-rules) | [RPC](#rpc-violations): [Errors](#rpc-errors) or [Warnings](#rpc-warnings) | [SDK](#sdk-violations): [Errors](#sdk-errors) or [Warnings](#sdk-warnings)
+
+### <a name="R4000-5" />R4000 OperationDescriptionOrSummaryRequired
+**Output Message**: {0} lacks 'description' and 'summary' property. Consider adding a 'description'/'summary' element. Accurate description/summary is essential for maintaining reference documentation.
+
+**Description**: Every operation must have a 'description'/'summary' property.
+
+**Why the rule is important**: Appropriate documentation could not be generated without the 'description'/'summary' property.
+
+**How to fix the violation**: For each operation, provide atleast one of the property - description/summary.
+
+Links: [Index](#index) | [Error vs. Warning](#error-vs-warning) | [Automated Rules](#automated-rules) | [RPC](#rpc-violations): [Errors](#rpc-errors) or [Warnings](#rpc-warnings) | [SDK](#sdk-violations): [Errors](#sdk-errors) or [Warnings](#sdk-warnings)
+
+### <a name="R2023" />R2023 SummaryAndDescriptionMustNotBeSame
+**Output Message**: The summary and description values should not be same.
+
+**Description**: Each operation has a summary and description values. They must not be same.
+
+**Why the rule is important**: The summary must provide a short summary of the operation. The description must provide a detailed description of the operation. This will ensure that all the operations are well documented. 
+
+**How to fix the violation**: Provide a short summary for the summary section and a detailed description for the description section.
+
+**Good Examples**: The following operation is a good example:
+```
+......
+......
+"put": {
+  "summary": "Creates or Updates an availabilty set",
+  "description": "This operation creates or updates an availability set. This takes the resourceGroupName and availabiltySetName as input. If an availability set with the same name exists, then the same is updated. Else a new availabilty set is created.",
+  .....
+  .....
+}
+......
+......
+```
+
+**Bad Examples**: The following would be invalid:
+```
+......
+......
+"put": {
+  "summary": "Creates or Updates an availabilty set",
+  "description": "Creates or Updates an availabilty set",
+  .....
+  .....
+}
+......
+......
+```
 
 Links: [Index](#index) | [Error vs. Warning](#error-vs-warning) | [Automated Rules](#automated-rules) | [RPC](#rpc-violations): [Errors](#rpc-errors) or [Warnings](#rpc-warnings) | [SDK](#sdk-violations): [Errors](#sdk-errors) or [Warnings](#sdk-warnings)

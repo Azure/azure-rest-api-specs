@@ -76,7 +76,10 @@
             "description": "Delete successful."
           }
         },
-        "x-ms-long-running-operation": true
+        "x-ms-long-running-operation": true,
+        "x-ms-examples": {
+          "Delete virtual network": { "$ref": "./examples/VirtualNetworkDelete.json" }
+        }
       },
       "get": {
         "tags": [
@@ -120,6 +123,9 @@
               "$ref": "#/definitions/VirtualNetwork"
             }
           }
+        },
+        "x-ms-examples": {
+          "Get virtual network": { "$ref": "./examples/VirtualNetworkGet.json" }
         }
       },
       "put": {
@@ -173,7 +179,12 @@
             }
           }
         },
-        "x-ms-long-running-operation": true
+        "x-ms-long-running-operation": true,
+        "x-ms-examples": {
+          "Create virtual network": { "$ref": "./examples/VirtualNetworkCreate.json" },
+          "Create virtual network with subnet": { "$ref": "./examples/VirtualNetworkCreateSubnet.json" },
+          "Create virtual network with peering": { "$ref": "./examples/VirtualNetworkCreatePeering.json" }
+        }
       }
     },
     "/subscriptions/{subscriptionId}/providers/Microsoft.Network/virtualNetworks": {
@@ -198,6 +209,9 @@
               "$ref": "#/definitions/VirtualNetworkListResult"
             }
           }
+        },
+        "x-ms-examples": {
+          "List all virtual networks": { "$ref": "./examples/VirtualNetworkListAll.json" }
         },
         "x-ms-pageable": {
           "nextLinkName": "nextLink"
@@ -233,6 +247,9 @@
               "$ref": "#/definitions/VirtualNetworkListResult"
             }
           }
+        },
+        "x-ms-examples": {
+          "List virtual networks in resource group": { "$ref": "./examples/VirtualNetworkList.json" }
         },
         "x-ms-pageable": {
           "nextLinkName": "nextLink"
@@ -286,6 +303,9 @@
             "description": "Accepted and the operation will complete asynchronously."
           }
         },
+        "x-ms-examples": {
+          "Delete subnet": { "$ref": "./examples/SubnetDelete.json" }
+        },
         "x-ms-long-running-operation": true
       },
       "get": {
@@ -337,6 +357,9 @@
               "$ref": "#/definitions/Subnet"
             }
           }
+        },
+        "x-ms-examples": {
+          "Get subnet": { "$ref": "./examples/SubnetGet.json" }
         }
       },
       "put": {
@@ -399,8 +422,7 @@
         },
         "x-ms-long-running-operation": true,
         "x-ms-examples": {
-          "Create subnet": { "$ref": "./examples/SubnetCreate.json" },
-          "Create subnet with private access services": { "$ref": "./examples/SubnetPrivateAccessServiceCreate.json" }
+          "Create subnet": { "$ref": "./examples/SubnetCreate.json" }
         }
       }
     },
@@ -443,6 +465,9 @@
         },
         "x-ms-pageable": {
           "nextLinkName": "nextLink"
+        },
+        "x-ms-examples": {
+          "List subnets": { "$ref": "./examples/SubnetList.json" }
         }
       }
     },
@@ -493,6 +518,9 @@
             "description": "Accepted and the operation will complete asynchronously."
           }
         },
+        "x-ms-examples": {
+          "Delete peering": { "$ref": "./examples/VirtualNetworkPeeringDelete.json" }
+        },
         "x-ms-long-running-operation": true
       },
       "get": {
@@ -537,6 +565,9 @@
               "$ref": "#/definitions/VirtualNetworkPeering"
             }
           }
+        },
+        "x-ms-examples": {
+          "Get peering": { "$ref": "./examples/VirtualNetworkPeeringGet.json" }
         }
       },
       "put": {
@@ -597,6 +628,9 @@
             }
           }
         },
+        "x-ms-examples": {
+          "Create peering": { "$ref": "./examples/VirtualNetworkPeeringCreate.json" }
+        },
         "x-ms-long-running-operation": true
       }
     },
@@ -639,6 +673,9 @@
         },
         "x-ms-pageable": {
           "nextLinkName": "nextLink"
+        },
+        "x-ms-examples": {
+          "List peerings": { "$ref": "./examples/VirtualNetworkPeeringList.json" }
         }
       }
     },
@@ -682,6 +719,9 @@
               "$ref": "#/definitions/IPAddressAvailabilityResult"
             }
           }
+        },
+        "x-ms-examples": {
+          "Check IP address availability": { "$ref": "./examples/VirtualNetworkCheckIPAddressAvailability.json" }
         }
       }
     },
@@ -751,7 +791,8 @@
       "properties": {
         "properties": {
           "x-ms-client-flatten": true,
-          "$ref": "#/definitions/ResourceNavigationLinkFormat"
+          "$ref": "#/definitions/ResourceNavigationLinkFormat",
+          "description": "Resource navigation link properties format."
         },
         "name": {
           "type": "string",
@@ -784,13 +825,6 @@
           "$ref": "./routeTable.json#/definitions/RouteTable",
           "description": "The reference of the RouteTable resource."
         },
-        "privateAccessServices": {
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/PrivateAccessServicePropertiesFormat"
-          },
-          "description": "An array of private access services values."
-        },
         "ipConfigurations": {
           "readOnly": true,
           "type": "array",
@@ -810,27 +844,8 @@
           "type": "string",
           "description": "The provisioning state of the resource."
         }
-      }
-    },
-    "PrivateAccessServicePropertiesFormat": {
-      "properties": {
-        "service": {
-          "type": "string",
-          "description": "The type of the private access."
-        },
-        "locations": {
-          "type": "array",
-          "items": {
-            "type": "string"
-          },
-          "description": "A list of locations."
-        },
-        "provisioningState": {
-          "type": "string",
-          "description": "The provisioning state of the resource."
-        }
       },
-      "description": "The private access service properties."
+      "description": "Properties of the subnet."
     },
     "VirtualNetworkPeeringPropertiesFormat": {
       "properties": {
@@ -871,13 +886,15 @@
           "type": "string",
           "description": "The provisioning state of the resource."
         }
-      }
+      },
+      "description": "Properties of the virtual network peering."
     },
     "Subnet": {
       "properties": {
         "properties": {
           "x-ms-client-flatten": true,
-          "$ref": "#/definitions/SubnetPropertiesFormat"
+          "$ref": "#/definitions/SubnetPropertiesFormat",
+          "description": "Properties of the subnet."
         },
         "name": {
           "type": "string",
@@ -899,7 +916,8 @@
       "properties": {
         "properties": {
           "x-ms-client-flatten": true,
-          "$ref": "#/definitions/VirtualNetworkPeeringPropertiesFormat"
+          "$ref": "#/definitions/VirtualNetworkPeeringPropertiesFormat",
+          "description": "Properties of the virtual network peering."
         },
         "name": {
           "type": "string",
@@ -981,13 +999,15 @@
           "type": "string",
           "description": "The provisioning state of the PublicIP resource. Possible values are: 'Updating', 'Deleting', and 'Failed'."
         }
-      }
+      },
+      "description": "Properties of the virtual network."
     },
     "VirtualNetwork": {
       "properties": {
         "properties": {
           "x-ms-client-flatten": true,
-          "$ref": "#/definitions/VirtualNetworkPropertiesFormat"
+          "$ref": "#/definitions/VirtualNetworkPropertiesFormat",
+          "description": "Properties of the virtual network."
         },
         "etag": {
           "type": "string",

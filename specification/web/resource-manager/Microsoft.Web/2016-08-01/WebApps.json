@@ -2362,6 +2362,190 @@
         }
       }
     },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Web/sites/{name}/extensions/MSDeploy": {
+      "get": {
+        "tags": [
+          "WebApps"
+        ],
+        "summary": "Invoke the MSDeploy web app extension as pass-through API",
+        "description": "Invoke the MSDeploy web app extension as pass-through API",
+        "operationId": "WebApps_GetMSDeployStatus",
+        "produces": [
+          "application/json",
+          "text/json",
+          "application/xml",
+          "text/xml"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/resourceGroupNameParameter"
+          },
+          {
+            "name": "name",
+            "in": "path",
+            "description": "Name of web app",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "$ref": "#/parameters/subscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/MSDeployStatus"
+            }
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "WebApps"
+        ],
+        "summary": "Invoke the MSDeploy web app extension as pass-through API",
+        "description": "Invoke the MSDeploy web app extension as pass-through API",
+        "operationId": "WebApps_CreateMSDeployOperation",
+        "consumes": [
+          "application/json",
+          "text/json",
+          "application/x-www-form-urlencoded"
+        ],
+        "produces": [
+          "application/json",
+          "text/json",
+          "application/xml",
+          "text/xml"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/resourceGroupNameParameter"
+          },
+          {
+            "name": "name",
+            "in": "path",
+            "description": "Name of web app",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "MSDeploy",
+            "in": "body",
+            "description": "Details of MSDeploy operation",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/MSDeploy"
+            }
+          },
+          {
+            "$ref": "#/parameters/subscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": "Deployment is scheduled",
+            "schema": {
+              "$ref": "#/definitions/MSDeployStatus"
+            }
+          },
+          "409": {
+            "description": "Another deployment is in progress"
+          }
+        },
+        "x-ms-long-running-operation": true
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Web/sites/{name}/extensions/MSDeploy/log": {
+      "get": {
+        "tags": [
+          "WebApps"
+        ],
+        "summary": "Invoke the MSDeploy Log web app extension as pass-through API",
+        "description": "Invoke the MSDeploy Log web app extension as pass-through API",
+        "operationId": "WebApps_GetMSDeployLog",
+        "produces": [
+          "application/json",
+          "text/json",
+          "application/xml",
+          "text/xml"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/resourceGroupNameParameter"
+          },
+          {
+            "name": "name",
+            "in": "path",
+            "description": "Name of web app",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "$ref": "#/parameters/subscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/MSDeployLog"
+            }
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Web/sites/{name}/functions/admin/token": {
+      "get": {
+        "tags": [
+          "WebApps"
+        ],
+        "summary": "Fetch a short lived token that can be exchanged for a master key.",
+        "description": "Fetch a short lived token that can be exchanged for a master key.",
+        "operationId": "WebApps_GetFunctionsAdminToken",
+        "produces": [
+          "application/json",
+          "text/json",
+          "application/xml",
+          "text/xml"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/resourceGroupNameParameter"
+          },
+          {
+            "name": "name",
+            "in": "path",
+            "description": "Name of web app",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "$ref": "#/parameters/subscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "type": "string"
+            }
+          }
+        }
+      }
+    },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Web/sites/{name}/hostNameBindings": {
       "get": {
         "tags": [
@@ -3413,6 +3597,169 @@
         }
       }
     },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Web/sites/{name}/instances/{instanceId}/extensions/MSDeploy": {
+      "get": {
+        "tags": [
+          "WebApps"
+        ],
+        "summary": "Invoke the MSDeploy web app extension as pass-through API",
+        "description": "Invoke the MSDeploy web app extension as pass-through API",
+        "operationId": "WebApps_GetInstanceMsDeployStatus",
+        "produces": [
+          "application/json",
+          "text/json",
+          "application/xml",
+          "text/xml"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/resourceGroupNameParameter"
+          },
+          {
+            "name": "name",
+            "in": "path",
+            "description": "Name of web app",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "instanceId",
+            "in": "path",
+            "description": "Id of web app instance",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "$ref": "#/parameters/subscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/MSDeployStatus"
+            }
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "WebApps"
+        ],
+        "summary": "Invoke the MSDeploy web app extension as pass-through API",
+        "description": "Invoke the MSDeploy web app extension as pass-through API",
+        "operationId": "WebApps_CreateInstanceMSDeployOperation",
+        "consumes": [
+          "application/json",
+          "text/json",
+          "application/x-www-form-urlencoded"
+        ],
+        "produces": [
+          "application/json",
+          "text/json",
+          "application/xml",
+          "text/xml"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/resourceGroupNameParameter"
+          },
+          {
+            "name": "name",
+            "in": "path",
+            "description": "Name of web app",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "instanceId",
+            "in": "path",
+            "description": "Id of web app instance",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "MSDeploy",
+            "in": "body",
+            "description": "Details of MSDeploy operation",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/MSDeploy"
+            }
+          },
+          {
+            "$ref": "#/parameters/subscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": "Deployment is scheduled",
+            "schema": {
+              "$ref": "#/definitions/MSDeployStatus"
+            }
+          },
+          "409": {
+            "description": "Another deployment is in progress"
+          }
+        },
+        "x-ms-long-running-operation": true
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Web/sites/{name}/instances/{instanceId}/extensions/MSDeploy/log": {
+      "get": {
+        "tags": [
+          "WebApps"
+        ],
+        "summary": "Invoke the MSDeploy Log web app extension as pass-through API",
+        "description": "Invoke the MSDeploy Log web app extension as pass-through API",
+        "operationId": "WebApps_GetInstanceMSDeployLog",
+        "produces": [
+          "application/json",
+          "text/json",
+          "application/xml",
+          "text/xml"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/resourceGroupNameParameter"
+          },
+          {
+            "name": "name",
+            "in": "path",
+            "description": "Name of web app",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "instanceId",
+            "in": "path",
+            "description": "Id of web app instance",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "$ref": "#/parameters/subscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/MSDeployLog"
+            }
+          }
+        }
+      }
+    },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Web/sites/{name}/iscloneable": {
       "post": {
         "tags": [
@@ -4188,6 +4535,200 @@
         }
       }
     },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Web/sites/{name}/publicCertificates": {
+      "get": {
+        "tags": [
+          "WebApps"
+        ],
+        "summary": "Get public certificates for an app or a deployment slot.",
+        "description": "Get public certificates for an app or a deployment slot.",
+        "operationId": "WebApps_ListPublicCertificates",
+        "produces": [
+          "application/json",
+          "text/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/resourceGroupNameParameter"
+          },
+          {
+            "name": "name",
+            "in": "path",
+            "description": "Name of the app.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "$ref": "#/parameters/subscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/PublicCertificateCollection"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Web/sites/{name}/publicCertificates/{publicCertificateName}": {
+      "get": {
+        "tags": [
+          "WebApps"
+        ],
+        "summary": "Get the named public certificate for an app (or deployment slot, if specified).",
+        "description": "Get the named public certificate for an app (or deployment slot, if specified).",
+        "operationId": "WebApps_GetPublicCertificate",
+        "produces": [
+          "application/json",
+          "text/json",
+          "application/xml",
+          "text/xml"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/resourceGroupNameParameter"
+          },
+          {
+            "name": "name",
+            "in": "path",
+            "description": "Name of the app.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "publicCertificateName",
+            "in": "path",
+            "description": "Public CertificateName",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "$ref": "#/parameters/subscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/PublicCertificate"
+            }
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "WebApps"
+        ],
+        "summary": "Creates a hostname binding for an app.",
+        "description": "Creates a hostname binding for an app.",
+        "operationId": "WebApps_CreateOrUpdatePublicCertificate",
+        "consumes": [
+          "application/json",
+          "text/json",
+          "application/x-www-form-urlencoded"
+        ],
+        "produces": [
+          "application/json",
+          "text/json",
+          "application/xml",
+          "text/xml"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/resourceGroupNameParameter"
+          },
+          {
+            "name": "name",
+            "in": "path",
+            "description": "Name of the app.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "publicCertificateName",
+            "in": "path",
+            "description": "Public certificate name.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "publicCertificate",
+            "in": "body",
+            "description": "Public certificate details. This is the JSON representation of a PublicCertificate object.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/PublicCertificate"
+            }
+          },
+          {
+            "$ref": "#/parameters/subscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/PublicCertificate"
+            }
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "WebApps"
+        ],
+        "summary": "Deletes a hostname binding for an app.",
+        "description": "Deletes a hostname binding for an app.",
+        "operationId": "WebApps_DeletePublicCertificate",
+        "parameters": [
+          {
+            "$ref": "#/parameters/resourceGroupNameParameter"
+          },
+          {
+            "name": "name",
+            "in": "path",
+            "description": "Name of the app.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "publicCertificateName",
+            "in": "path",
+            "description": "Public Certificate Name.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "$ref": "#/parameters/subscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Succesfully deleted hostname binding"
+          },
+          "204": {
+            "description": "Hostname binding does not exist"
+          }
+        }
+      }
+    },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Web/sites/{name}/publishxml": {
       "post": {
         "tags": [
@@ -4257,8 +4798,6 @@
         "consumes": [
           "application/json",
           "text/json",
-          "application/xml",
-          "text/xml",
           "application/x-www-form-urlencoded"
         ],
         "produces": [
@@ -4284,7 +4823,7 @@
             "description": "Snapshot data used for web app recovery. Snapshot information can be obtained by calling GetDeletedSites or GetSiteSnapshots API.",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/CsmSiteRecoveryEntity"
+              "$ref": "#/definitions/SnapshotRecoveryRequest"
             }
           },
           {
@@ -4334,48 +4873,6 @@
         "responses": {
           "200": {
             "description": "OK"
-          }
-        }
-      }
-    },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Web/sites/{name}/resourceHealthMetadata": {
-      "get": {
-        "tags": [
-          "WebApps"
-        ],
-        "summary": "Gets the category of ResourceHealthMetadata to use for the given site",
-        "description": "Gets the category of ResourceHealthMetadata to use for the given site",
-        "operationId": "WebApps_GetResourceHealthMetadata",
-        "produces": [
-          "application/json",
-          "text/json",
-          "application/xml",
-          "text/xml"
-        ],
-        "parameters": [
-          {
-            "$ref": "#/parameters/resourceGroupNameParameter"
-          },
-          {
-            "name": "name",
-            "in": "path",
-            "description": "Name of web app",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "$ref": "#/parameters/subscriptionIdParameter"
-          },
-          {
-            "$ref": "#/parameters/apiVersionParameter"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "OK",
-            "schema": {
-              "$ref": "#/definitions/ResourceHealthMetadata"
-            }
           }
         }
       }
@@ -6958,6 +7455,218 @@
         }
       }
     },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Web/sites/{name}/slots/{slot}/extensions/MSDeploy": {
+      "get": {
+        "tags": [
+          "WebApps"
+        ],
+        "summary": "Invoke the MSDeploy web app extension as pass-through API",
+        "description": "Invoke the MSDeploy web app extension as pass-through API",
+        "operationId": "WebApps_GetMSDeployStatusSlot",
+        "produces": [
+          "application/json",
+          "text/json",
+          "application/xml",
+          "text/xml"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/resourceGroupNameParameter"
+          },
+          {
+            "name": "name",
+            "in": "path",
+            "description": "Name of web app",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "slot",
+            "in": "path",
+            "description": "Name of web app slot. If not specified then will default to production slot.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "$ref": "#/parameters/subscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/MSDeployStatus"
+            }
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "WebApps"
+        ],
+        "summary": "Invoke the MSDeploy web app extension as pass-through API",
+        "description": "Invoke the MSDeploy web app extension as pass-through API",
+        "operationId": "WebApps_CreateMSDeployOperationSlot",
+        "consumes": [
+          "application/json",
+          "text/json",
+          "application/x-www-form-urlencoded"
+        ],
+        "produces": [
+          "application/json",
+          "text/json",
+          "application/xml",
+          "text/xml"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/resourceGroupNameParameter"
+          },
+          {
+            "name": "name",
+            "in": "path",
+            "description": "Name of web app",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "slot",
+            "in": "path",
+            "description": "Name of web app slot. If not specified then will default to production slot.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "MSDeploy",
+            "in": "body",
+            "description": "Details of MSDeploy operation",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/MSDeploy"
+            }
+          },
+          {
+            "$ref": "#/parameters/subscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": "Deployment is scheduled",
+            "schema": {
+              "$ref": "#/definitions/MSDeployStatus"
+            }
+          },
+          "409": {
+            "description": "Another deployment is in progress"
+          }
+        },
+        "x-ms-long-running-operation": true
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Web/sites/{name}/slots/{slot}/extensions/MSDeploy/log": {
+      "get": {
+        "tags": [
+          "WebApps"
+        ],
+        "summary": "Invoke the MSDeploy Log web app extension as pass-through API",
+        "description": "Invoke the MSDeploy Log web app extension as pass-through API",
+        "operationId": "WebApps_GetMSDeployLogSlot",
+        "produces": [
+          "application/json",
+          "text/json",
+          "application/xml",
+          "text/xml"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/resourceGroupNameParameter"
+          },
+          {
+            "name": "name",
+            "in": "path",
+            "description": "Name of web app",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "slot",
+            "in": "path",
+            "description": "Name of web app slot. If not specified then will default to production slot.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "$ref": "#/parameters/subscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/MSDeployLog"
+            }
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Web/sites/{name}/slots/{slot}/functions/admin/token": {
+      "get": {
+        "tags": [
+          "WebApps"
+        ],
+        "summary": "Fetch a short lived token that can be exchanged for a master key.",
+        "description": "Fetch a short lived token that can be exchanged for a master key.",
+        "operationId": "WebApps_GetFunctionsAdminTokenSlot",
+        "produces": [
+          "application/json",
+          "text/json",
+          "application/xml",
+          "text/xml"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/resourceGroupNameParameter"
+          },
+          {
+            "name": "name",
+            "in": "path",
+            "description": "Name of web app",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "slot",
+            "in": "path",
+            "description": "Name of web app slot. If not specified then will default to production slot.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "$ref": "#/parameters/subscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "type": "string"
+            }
+          }
+        }
+      }
+    },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Web/sites/{name}/slots/{slot}/hostNameBindings": {
       "get": {
         "tags": [
@@ -8149,6 +8858,190 @@
         }
       }
     },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Web/sites/{name}/slots/{slot}/instances/{instanceId}/extensions/MSDeploy": {
+      "get": {
+        "tags": [
+          "WebApps"
+        ],
+        "summary": "Invoke the MSDeploy web app extension as pass-through API",
+        "description": "Invoke the MSDeploy web app extension as pass-through API",
+        "operationId": "WebApps_GetInstanceMsDeployStatusSlot",
+        "produces": [
+          "application/json",
+          "text/json",
+          "application/xml",
+          "text/xml"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/resourceGroupNameParameter"
+          },
+          {
+            "name": "name",
+            "in": "path",
+            "description": "Name of web app",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "slot",
+            "in": "path",
+            "description": "Name of web app slot. If not specified then will default to production slot.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "instanceId",
+            "in": "path",
+            "description": "Id of web app instance",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "$ref": "#/parameters/subscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/MSDeployStatus"
+            }
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "WebApps"
+        ],
+        "summary": "Invoke the MSDeploy web app extension as pass-through API",
+        "description": "Invoke the MSDeploy web app extension as pass-through API",
+        "operationId": "WebApps_CreateInstanceMSDeployOperationSlot",
+        "consumes": [
+          "application/json",
+          "text/json",
+          "application/x-www-form-urlencoded"
+        ],
+        "produces": [
+          "application/json",
+          "text/json",
+          "application/xml",
+          "text/xml"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/resourceGroupNameParameter"
+          },
+          {
+            "name": "name",
+            "in": "path",
+            "description": "Name of web app",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "slot",
+            "in": "path",
+            "description": "Name of web app slot. If not specified then will default to production slot.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "instanceId",
+            "in": "path",
+            "description": "Id of web app instance",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "MSDeploy",
+            "in": "body",
+            "description": "Details of MSDeploy operation",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/MSDeploy"
+            }
+          },
+          {
+            "$ref": "#/parameters/subscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": "Deployment is scheduled",
+            "schema": {
+              "$ref": "#/definitions/MSDeployStatus"
+            }
+          },
+          "409": {
+            "description": "Another deployment is in progress"
+          }
+        },
+        "x-ms-long-running-operation": true
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Web/sites/{name}/slots/{slot}/instances/{instanceId}/extensions/MSDeploy/log": {
+      "get": {
+        "tags": [
+          "WebApps"
+        ],
+        "summary": "Invoke the MSDeploy Log web app extension as pass-through API",
+        "description": "Invoke the MSDeploy Log web app extension as pass-through API",
+        "operationId": "WebApps_GetInstanceMSDeployLogSlot",
+        "produces": [
+          "application/json",
+          "text/json",
+          "application/xml",
+          "text/xml"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/resourceGroupNameParameter"
+          },
+          {
+            "name": "name",
+            "in": "path",
+            "description": "Name of web app",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "slot",
+            "in": "path",
+            "description": "Name of web app slot. If not specified then will default to production slot.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "instanceId",
+            "in": "path",
+            "description": "Id of web app instance",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "$ref": "#/parameters/subscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/MSDeployLog"
+            }
+          }
+        }
+      }
+    },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Web/sites/{name}/slots/{slot}/iscloneable": {
       "post": {
         "tags": [
@@ -8603,7 +9496,7 @@
           {
             "name": "slot",
             "in": "path",
-            "description": "Name of web app slot. If not specified then will default to production slot. **** CURRENTLY UNUSED *****",
+            "description": "Name of web app slot. If not specified then will default to production slot.",
             "required": true,
             "type": "string"
           },
@@ -8901,6 +9794,228 @@
         }
       }
     },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Web/sites/{name}/slots/{slot}/publicCertificates": {
+      "get": {
+        "tags": [
+          "WebApps"
+        ],
+        "summary": "Get public certificates for an app or a deployment slot.",
+        "description": "Get public certificates for an app or a deployment slot.",
+        "operationId": "WebApps_ListPublicCertificatesSlot",
+        "produces": [
+          "application/json",
+          "text/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/resourceGroupNameParameter"
+          },
+          {
+            "name": "name",
+            "in": "path",
+            "description": "Name of the app.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "slot",
+            "in": "path",
+            "description": "Name of the deployment slot. If a slot is not specified, the API gets hostname bindings for the production slot.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "$ref": "#/parameters/subscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/PublicCertificateCollection"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Web/sites/{name}/slots/{slot}/publicCertificates/{publicCertificateName}": {
+      "get": {
+        "tags": [
+          "WebApps"
+        ],
+        "summary": "Get the named public certificate for an app (or deployment slot, if specified).",
+        "description": "Get the named public certificate for an app (or deployment slot, if specified).",
+        "operationId": "WebApps_GetPublicCertificateSlot",
+        "produces": [
+          "application/json",
+          "text/json",
+          "application/xml",
+          "text/xml"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/resourceGroupNameParameter"
+          },
+          {
+            "name": "name",
+            "in": "path",
+            "description": "Name of the app.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "slot",
+            "in": "path",
+            "description": "Name of the deployment slot. If a slot is not specified, the API the named binding for the production slot.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "publicCertificateName",
+            "in": "path",
+            "description": "Public CertificateName",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "$ref": "#/parameters/subscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/PublicCertificate"
+            }
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "WebApps"
+        ],
+        "summary": "Creates a hostname binding for an app.",
+        "description": "Creates a hostname binding for an app.",
+        "operationId": "WebApps_CreateOrUpdatePublicCertificateSlot",
+        "consumes": [
+          "application/json",
+          "text/json",
+          "application/x-www-form-urlencoded"
+        ],
+        "produces": [
+          "application/json",
+          "text/json",
+          "application/xml",
+          "text/xml"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/resourceGroupNameParameter"
+          },
+          {
+            "name": "name",
+            "in": "path",
+            "description": "Name of the app.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "publicCertificateName",
+            "in": "path",
+            "description": "Public certificate name.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "publicCertificate",
+            "in": "body",
+            "description": "Public certificate details. This is the JSON representation of a PublicCertificate object.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/PublicCertificate"
+            }
+          },
+          {
+            "name": "slot",
+            "in": "path",
+            "description": "Name of the deployment slot. If a slot is not specified, the API will create a binding for the production slot.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "$ref": "#/parameters/subscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/PublicCertificate"
+            }
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "WebApps"
+        ],
+        "summary": "Deletes a hostname binding for an app.",
+        "description": "Deletes a hostname binding for an app.",
+        "operationId": "WebApps_DeletePublicCertificateSlot",
+        "parameters": [
+          {
+            "$ref": "#/parameters/resourceGroupNameParameter"
+          },
+          {
+            "name": "name",
+            "in": "path",
+            "description": "Name of the app.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "slot",
+            "in": "path",
+            "description": "Name of the deployment slot. If a slot is not specified, the API will delete the binding for the production slot.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "publicCertificateName",
+            "in": "path",
+            "description": "Public Certificate Name.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "$ref": "#/parameters/subscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Succesfully deleted hostname binding"
+          },
+          "204": {
+            "description": "Hostname binding does not exist"
+          }
+        }
+      }
+    },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Web/sites/{name}/slots/{slot}/publishxml": {
       "post": {
         "tags": [
@@ -8977,8 +10092,6 @@
         "consumes": [
           "application/json",
           "text/json",
-          "application/xml",
-          "text/xml",
           "application/x-www-form-urlencoded"
         ],
         "produces": [
@@ -9004,7 +10117,7 @@
             "description": "Snapshot data used for web app recovery. Snapshot information can be obtained by calling GetDeletedSites or GetSiteSnapshots API.",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/CsmSiteRecoveryEntity"
+              "$ref": "#/definitions/SnapshotRecoveryRequest"
             }
           },
           {
@@ -9068,55 +10181,6 @@
         "responses": {
           "200": {
             "description": "OK"
-          }
-        }
-      }
-    },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Web/sites/{name}/slots/{slot}/resourceHealthMetadata": {
-      "get": {
-        "tags": [
-          "WebApps"
-        ],
-        "summary": "Gets the category of ResourceHealthMetadata to use for the given site",
-        "description": "Gets the category of ResourceHealthMetadata to use for the given site",
-        "operationId": "WebApps_GetResourceHealthMetadataSlot",
-        "produces": [
-          "application/json",
-          "text/json",
-          "application/xml",
-          "text/xml"
-        ],
-        "parameters": [
-          {
-            "$ref": "#/parameters/resourceGroupNameParameter"
-          },
-          {
-            "name": "name",
-            "in": "path",
-            "description": "Name of web app",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "name": "slot",
-            "in": "path",
-            "description": "Name of web app slot. If not specified then will default to production slot.",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "$ref": "#/parameters/subscriptionIdParameter"
-          },
-          {
-            "$ref": "#/parameters/apiVersionParameter"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "OK",
-            "schema": {
-              "$ref": "#/definitions/ResourceHealthMetadata"
-            }
           }
         }
       }
@@ -9624,8 +10688,8 @@
           }
         ],
         "responses": {
-          "204": {
-            "description": "No Content"
+          "200": {
+            "description": "Successfully sync sourcecontrol."
           }
         }
       }
@@ -10623,8 +11687,8 @@
           }
         ],
         "responses": {
-          "204": {
-            "description": "No Content"
+          "200": {
+            "description": "Successfully sync sourcecontrol."
           }
         }
       }
@@ -11530,7 +12594,8 @@
               "enum": [
                 "Default",
                 "Clone",
-                "Relocation"
+                "Relocation",
+                "Snapshot"
               ],
               "type": "string",
               "x-ms-enum": {
@@ -11770,25 +12835,6 @@
             "name": "PublishingProfileFormat",
             "modelAsString": true
           }
-        }
-      }
-    },
-    "CsmSiteRecoveryEntity": {
-      "description": "Details about app recovery operation.",
-      "type": "object",
-      "properties": {
-        "snapshotTime": {
-          "format": "date-time",
-          "description": "Point in time in which the app recovery should be attempted.",
-          "type": "string"
-        },
-        "siteName": {
-          "description": "[Optional] Destination app name into which app should be recovered. This is case when new app should be created instead.",
-          "type": "string"
-        },
-        "slotName": {
-          "description": "[Optional] Destination app slot name into which app should be recovered.",
-          "type": "string"
         }
       }
     },
@@ -12086,6 +13132,14 @@
       "description": "Body of the error response returned from the API.",
       "type": "object",
       "properties": {
+        "code": {
+          "description": "Basic error code.",
+          "type": "string"
+        },
+        "message": {
+          "description": "Any details of the error.",
+          "type": "string"
+        },
         "extendedCode": {
           "description": "Type of error.",
           "type": "string"
@@ -12107,14 +13161,6 @@
           "items": {
             "$ref": "#/definitions/ErrorEntity"
           }
-        },
-        "code": {
-          "description": "Basic error code.",
-          "type": "string"
-        },
-        "message": {
-          "description": "Any details of the error.",
-          "type": "string"
         }
       }
     },
@@ -12474,6 +13520,10 @@
             "sendKeyValue": {
               "description": "The value of the Service Bus key. This is used to authenticate to Service Bus. In ARM this key will not be returned\n normally, use the POST /listKeys API instead.",
               "type": "string"
+            },
+            "serviceBusSuffix": {
+              "description": "The suffix for the service bus endpoint. By default this is .servicebus.windows.net",
+              "type": "string"
             }
           },
           "x-ms-client-flatten": true
@@ -12579,6 +13629,201 @@
         }
       }
     },
+    "MSDeploy": {
+      "description": "MSDeploy ARM PUT information",
+      "type": "object",
+      "properties": {
+        "addOnPackages": {
+          "description": "List of Add-On packages. Add-On packages implicitly enable the Do Not Delete MSDeploy rule.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/MSDeployCore"
+          }
+        },
+        "packageUri": {
+          "description": "Package URI",
+          "type": "string"
+        },
+        "connectionString": {
+          "description": "SQL Connection String",
+          "type": "string"
+        },
+        "dbType": {
+          "description": "Database Type",
+          "type": "string"
+        },
+        "setParametersXmlFileUri": {
+          "description": "URI of MSDeploy Parameters file. Must not be set if SetParameters is used.",
+          "type": "string"
+        },
+        "setParameters": {
+          "description": "MSDeploy Parameters. Must not be set if SetParametersXmlFileUri is used.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/MSDeployParameterEntry"
+          }
+        },
+        "skipAppData": {
+          "description": "Controls whether the MSDeploy operation skips the AppData directory. If set to true, the existing AppData directory on the destination will not be deleted and overwritten.",
+          "type": "boolean"
+        },
+        "appOffline": {
+          "description": "Sets the AppOffline rule while the MSDeploy operation executes.",
+          "type": "boolean"
+        }
+      }
+    },
+    "MSDeployCore": {
+      "description": "MSDeploy ARM PUT core information",
+      "type": "object",
+      "properties": {
+        "packageUri": {
+          "description": "Package URI",
+          "type": "string"
+        },
+        "connectionString": {
+          "description": "SQL Connection String",
+          "type": "string"
+        },
+        "dbType": {
+          "description": "Database Type",
+          "type": "string"
+        },
+        "setParametersXmlFileUri": {
+          "description": "URI of MSDeploy Parameters file. Must not be set if SetParameters is used.",
+          "type": "string"
+        },
+        "setParameters": {
+          "description": "MSDeploy Parameters. Must not be set if SetParametersXmlFileUri is used.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/MSDeployParameterEntry"
+          }
+        },
+        "skipAppData": {
+          "description": "Controls whether the MSDeploy operation skips the AppData directory. If set to true, the existing AppData directory on the destination will not be deleted and overwritten.",
+          "type": "boolean"
+        },
+        "appOffline": {
+          "description": "Sets the AppOffline rule while the MSDeploy operation executes.",
+          "type": "boolean"
+        }
+      }
+    },
+    "MSDeployLog": {
+      "description": "MSDeploy log",
+      "type": "object",
+      "properties": {
+        "entries": {
+          "description": "List of log entry messages",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/MSDeployLogEntry"
+          },
+          "readOnly": true
+        }
+      }
+    },
+    "MSDeployLogEntry": {
+      "description": "MSDeploy log entry",
+      "type": "object",
+      "properties": {
+        "time": {
+          "format": "date-time",
+          "description": "Timestamp of log entry",
+          "type": "string",
+          "readOnly": true
+        },
+        "type": {
+          "description": "Log entry type",
+          "enum": [
+            "Message",
+            "Warning",
+            "Error"
+          ],
+          "type": "string",
+          "readOnly": true,
+          "x-ms-enum": {
+            "name": "MSDeployLogEntryType",
+            "modelAsString": false
+          }
+        },
+        "message": {
+          "description": "Log entry message",
+          "type": "string",
+          "readOnly": true
+        }
+      }
+    },
+    "MSDeployParameterEntry": {
+      "description": "MSDeploy ARM PUT core information",
+      "type": "object",
+      "properties": {
+        "name": {
+          "description": "Parameter name",
+          "type": "string"
+        },
+        "value": {
+          "description": "Parameter value",
+          "type": "string"
+        }
+      }
+    },
+    "MSDeployStatus": {
+      "description": "MSDeploy ARM response",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/Resource"
+        }
+      ],
+      "properties": {
+        "properties": {
+          "description": "MSDeployStatus resource specific properties",
+          "properties": {
+            "deployer": {
+              "description": "Username of deployer",
+              "type": "string",
+              "readOnly": true
+            },
+            "provisioningState": {
+              "description": "Provisioning state",
+              "enum": [
+                "accepted",
+                "running",
+                "succeeded",
+                "failed",
+                "canceled"
+              ],
+              "type": "string",
+              "readOnly": true,
+              "x-ms-enum": {
+                "name": "MSDeployProvisioningState",
+                "modelAsString": false
+              }
+            },
+            "startTime": {
+              "format": "date-time",
+              "description": "Start time of deploy operation",
+              "type": "string",
+              "readOnly": true
+            },
+            "endTime": {
+              "format": "date-time",
+              "description": "End time of deploy operation",
+              "type": "string",
+              "readOnly": true
+            },
+            "complete": {
+              "description": "Whether the deployment operation has completed",
+              "type": "boolean",
+              "readOnly": true
+            }
+          },
+          "x-ms-client-flatten": true
+        }
+      }
+    },
     "MigrateMySqlRequest": {
       "description": "MySQL migration request.",
       "type": "object",
@@ -12591,12 +13836,25 @@
         "properties": {
           "description": "MigrateMySqlRequest resource specific properties",
           "required": [
-            "connectionString"
+            "connectionString",
+            "migrationType"
           ],
           "properties": {
             "connectionString": {
-              "description": "Connection string to the remote MySQL database to which data should be migrated.",
+              "description": "Connection string to the remote MySQL database.",
               "type": "string"
+            },
+            "migrationType": {
+              "description": "The type of migration operation to be done",
+              "enum": [
+                "LocalToRemote",
+                "RemoteToLocal"
+              ],
+              "type": "string",
+              "x-ms-enum": {
+                "name": "MySqlMigrationType",
+                "modelAsString": false
+              }
             }
           },
           "x-ms-client-flatten": true
@@ -12813,6 +14071,11 @@
           "format": "double",
           "description": "Value of counter at a certain time.",
           "type": "number"
+        },
+        "coreCount": {
+          "format": "int32",
+          "description": "Core Count of worker. Not a data member",
+          "type": "integer"
         }
       }
     },
@@ -12897,6 +14160,65 @@
             }
           },
           "x-ms-client-flatten": true
+        }
+      }
+    },
+    "PublicCertificate": {
+      "description": "Public certificate object",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/Resource"
+        }
+      ],
+      "properties": {
+        "properties": {
+          "description": "PublicCertificate resource specific properties",
+          "properties": {
+            "blob": {
+              "description": "Public Certificate byte array",
+              "type": "string"
+            },
+            "publicCertificateLocation": {
+              "description": "Public Certificate Location",
+              "enum": [
+                "CurrentUserMy",
+                "LocalMachineMy",
+                "Unknown"
+              ],
+              "type": "string",
+              "x-ms-enum": {
+                "name": "PublicCertificateLocation",
+                "modelAsString": false
+              }
+            },
+            "thumbprint": {
+              "description": "Certificate Thumbprint",
+              "type": "string",
+              "readOnly": true
+            }
+          },
+          "x-ms-client-flatten": true
+        }
+      }
+    },
+    "PublicCertificateCollection": {
+      "description": "Collection of public certificates",
+      "required": [
+        "value"
+      ],
+      "type": "object",
+      "properties": {
+        "value": {
+          "description": "Collection of resources.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/PublicCertificate"
+          }
+        },
+        "nextLink": {
+          "description": "Link to next page of resources.",
+          "type": "string"
         }
       }
     },
@@ -13057,7 +14379,8 @@
         },
         "name": {
           "description": "Resource Name.",
-          "type": "string"
+          "type": "string",
+          "readOnly": true
         },
         "kind": {
           "description": "Kind of resource.",
@@ -13069,7 +14392,8 @@
         },
         "type": {
           "description": "Resource type.",
-          "type": "string"
+          "type": "string",
+          "readOnly": true
         },
         "tags": {
           "description": "Resource tags.",
@@ -13077,36 +14401,6 @@
           "additionalProperties": {
             "type": "string"
           }
-        }
-      },
-      "x-ms-azure-resource": true
-    },
-    "ResourceHealthMetadata": {
-      "description": "Used for getting ResourceHealthCheck settings.",
-      "type": "object",
-      "allOf": [
-        {
-          "$ref": "#/definitions/Resource"
-        }
-      ],
-      "properties": {
-        "properties": {
-          "description": "ResourceHealthMetadata resource specific properties",
-          "properties": {
-            "id": {
-              "description": "ARM Resource Id",
-              "type": "string"
-            },
-            "category": {
-              "description": "The category that the resource matches in the RHC Policy File",
-              "type": "string"
-            },
-            "signalAvailability": {
-              "description": "Is there a health signal for the resource",
-              "type": "boolean"
-            }
-          },
-          "x-ms-client-flatten": true
         }
       }
     },
@@ -13406,13 +14700,19 @@
               "default": false,
               "type": "boolean"
             },
+            "ignoreDatabases": {
+              "description": "Ignore the databases and only restore the site content",
+              "default": false,
+              "type": "boolean"
+            },
             "operationType": {
               "description": "Operation type.",
               "default": "Default",
               "enum": [
                 "Default",
                 "Clone",
-                "Relocation"
+                "Relocation",
+                "Snapshot"
               ],
               "type": "string",
               "x-ms-enum": {
@@ -13562,11 +14862,6 @@
               },
               "readOnly": true
             },
-            "premiumAppDeployed": {
-              "description": "Indicates whether app is deployed as a premium app.",
-              "type": "boolean",
-              "readOnly": true
-            },
             "scmSiteAlsoStopped": {
               "description": "<code>true</code> to stop SCM (KUDU) site when the app is stopped; otherwise, <code>false</code>. The default is <code>false</code>.",
               "default": false,
@@ -13580,23 +14875,6 @@
             "hostingEnvironmentProfile": {
               "$ref": "#/definitions/HostingEnvironmentProfile",
               "description": "App Service Environment to use for the app.",
-              "x-ms-mutability": [
-                "create",
-                "read"
-              ]
-            },
-            "microService": {
-              "description": "Micro services like apps, logic apps.",
-              "default": "WebSites",
-              "type": "string",
-              "x-ms-mutability": [
-                "create",
-                "read"
-              ]
-            },
-            "gatewaySiteName": {
-              "description": "Name of gateway app associated with the app.",
-              "type": "string",
               "x-ms-mutability": [
                 "create",
                 "read"
@@ -14557,6 +15835,57 @@
         },
         "nextLink": {
           "description": "Link to next page of resources.",
+          "type": "string"
+        }
+      }
+    },
+    "SnapshotRecoveryRequest": {
+      "description": "Details about app recovery operation.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/Resource"
+        }
+      ],
+      "properties": {
+        "properties": {
+          "description": "SnapshotRecoveryRequest resource specific properties",
+          "required": [
+            "overwrite"
+          ],
+          "properties": {
+            "snapshotTime": {
+              "format": "date-time",
+              "description": "Point in time in which the app recovery should be attempted.",
+              "type": "string"
+            },
+            "recoveryTarget": {
+              "$ref": "#/definitions/SnapshotRecoveryTarget",
+              "description": "Specifies the web app that snapshot contents will be written to."
+            },
+            "overwrite": {
+              "description": "<code>true</code> if the recovery operation can overwrite source app; otherwise, <code>false</code>.",
+              "type": "boolean"
+            },
+            "recoverConfiguration": {
+              "description": "Site configuration, in addition to content, will be reverted if this is true.",
+              "type": "boolean"
+            }
+          },
+          "x-ms-client-flatten": true
+        }
+      }
+    },
+    "SnapshotRecoveryTarget": {
+      "description": "Specifies the web app that snapshot contents will be written to.",
+      "type": "object",
+      "properties": {
+        "location": {
+          "description": "Geographical location of the target web app, e.g. SouthEastAsia, SouthCentralUS",
+          "type": "string"
+        },
+        "id": {
+          "description": "ARM resource ID of the target app. \n /subscriptions/{subId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Web/sites/{siteName} for production slots and \n /subscriptions/{subId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Web/sites/{siteName}/slots/{slotName} for other slots.",
           "type": "string"
         }
       }

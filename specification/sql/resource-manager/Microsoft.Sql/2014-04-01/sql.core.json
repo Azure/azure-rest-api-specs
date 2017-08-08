@@ -62,6 +62,9 @@
         ],
         "operationId": "Databases_Pause",
         "description": "Pauses a data warehouse.",
+        "x-ms-examples": {
+          "Pause a data warehouse": { "$ref": "./examples/DatabasePause.json" }
+        },
         "parameters": [
           {
             "$ref": "#/parameters/ApiVersionParameter"
@@ -101,6 +104,9 @@
         ],
         "operationId": "Databases_Resume",
         "description": "Resumes a data warehouse.",
+        "x-ms-examples": {
+          "Resume a data warehouse": { "$ref": "./examples/DatabaseResume.json" }
+        },
         "parameters": [
           {
             "$ref": "#/parameters/ApiVersionParameter"
@@ -710,6 +716,9 @@
         ],
         "operationId": "Databases_GetByElasticPool",
         "description": "Gets a database inside of an elastic pool.",
+        "x-ms-examples": {
+          "Get a database in an elastic pool": { "$ref": "./examples/DatabaseGetByElasticPool.json" }
+        },
         "parameters": [
           {
             "$ref": "#/parameters/ApiVersionParameter"
@@ -755,6 +764,9 @@
         ],
         "operationId": "Databases_ListByElasticPool",
         "description": "Returns a list of databases in an elastic pool.",
+        "x-ms-examples": {
+          "Gets databases in an elastic pool": { "$ref": "./examples/DatabaseListByElasticPool.json" }
+        },
         "parameters": [
           {
             "$ref": "#/parameters/ApiVersionParameter"
@@ -796,6 +808,9 @@
         ],
         "operationId": "RecommendedElasticPools_Get",
         "description": "Gets a recommented elastic pool.",
+        "x-ms-examples": {
+          "Get a recommended elastic pool": { "$ref": "./examples/RecommendedElasticPoolGet.json" }
+        },
         "parameters": [
           {
             "$ref": "#/parameters/ApiVersionParameter"
@@ -834,6 +849,9 @@
         ],
         "operationId": "Databases_GetByRecommendedElasticPool",
         "description": "Gets a database inside of a recommented elastic pool.",
+        "x-ms-examples": {
+          "Get a database in a recommended elastic pool": { "$ref": "./examples/DatabaseGetByRecommendedElasticPool.json" }
+        },
         "parameters": [
           {
             "$ref": "#/parameters/ApiVersionParameter"
@@ -879,6 +897,9 @@
         ],
         "operationId": "RecommendedElasticPools_ListByServer",
         "description": "Returns recommended elastic pools.",
+        "x-ms-examples": {
+          "List recommended elastic pools": { "$ref": "./examples/RecommendedElasticPoolList.json" }
+        },
         "parameters": [
           {
             "$ref": "#/parameters/ApiVersionParameter"
@@ -913,6 +934,9 @@
         ],
         "operationId": "Databases_ListByRecommendedElasticPool",
         "description": "Returns a list of databases inside a recommented elastic pool.",
+        "x-ms-examples": {
+          "Gets databases in an elastic pool": { "$ref": "./examples/DatabaseListByRecommendedElasticPool.json" }
+        },
         "parameters": [
           {
             "$ref": "#/parameters/ApiVersionParameter"
@@ -953,7 +977,10 @@
           "RecommendedElasticPools"
         ],
         "operationId": "RecommendedElasticPools_ListMetrics",
-        "description": "Returns a recommented elastic pool metrics.",
+        "description": "Returns recommented elastic pool metrics.",
+        "x-ms-examples": {
+          "Get recommended elastic pool metrics": { "$ref": "./examples/RecommendedElasticPoolListMetrics.json" }
+        },
         "parameters": [
           {
             "$ref": "#/parameters/ApiVersionParameter"
@@ -995,6 +1022,9 @@
         ],
         "operationId": "ServiceTierAdvisors_Get",
         "description": "Gets a service tier advisor.",
+        "x-ms-examples": {
+          "Get a service tier advisor": { "$ref": "./examples/ServiceTierAdvisorGet.json" }
+        },
         "parameters": [
           {
             "$ref": "#/parameters/ApiVersionParameter"
@@ -1040,6 +1070,9 @@
         ],
         "operationId": "ServiceTierAdvisors_ListByDatabase",
         "description": "Returns service tier advisors for specified database.",
+        "x-ms-examples": {
+          "Get a list of a service tier advisors": { "$ref": "./examples/ServiceTierAdvisorList.json" }
+        },
         "parameters": [
           {
             "$ref": "#/parameters/ApiVersionParameter"
@@ -1079,8 +1112,11 @@
         "tags": [
           "TransparentDataEncryption"
         ],
-        "operationId": "TransparentDataEncryptionConfigurations_CreateOrUpdate",
+        "operationId": "TransparentDataEncryptions_CreateOrUpdate",
         "description": "Creates or updates a database's transparent data encryption configuration.",
+        "x-ms-examples": {
+          "Create or update a database's transparent data encryption configuration": { "$ref": "./examples/DatabaseTransparentDataEncryptionCreateOrUpdate.json" }
+        },
         "parameters": [
           {
             "$ref": "#/parameters/ApiVersionParameter"
@@ -1133,10 +1169,10 @@
         "tags": [
           "TransparentDataEncryption"
         ],
-        "operationId": "TransparentDataEncryptionConfigurations_Get",
+        "operationId": "TransparentDataEncryptions_Get",
         "description": "Gets a database's transparent data encryption configuration.",
         "x-ms-examples": {
-          "Get a database's transparent data encryption configurations": { "$ref": "./examples/DatabaseTransparentDataEncryptionGet.json" }
+          "Get a database's transparent data encryption configuration": { "$ref": "./examples/DatabaseTransparentDataEncryptionGet.json" }
         },
         "parameters": [
           {
@@ -1179,6 +1215,9 @@
         ],
         "operationId": "TransparentDataEncryptionActivities_ListByConfiguration",
         "description": "Returns a database's transparent data encryption operation result.",
+        "x-ms-examples": {
+          "List a database's transparent data encryption activities": { "$ref": "./examples/DatabaseTransparentDataEncryptionActivityList.json" }
+        },
         "parameters": [
           {
             "$ref": "#/parameters/ApiVersionParameter"
@@ -2555,6 +2594,11 @@
     },
     "TransparentDataEncryptionActivity": {
       "properties": {
+        "location":{
+          "type":"string",
+          "readOnly": true,
+          "description":"Resource location."
+        },
         "properties": {
           "x-ms-client-flatten": true,
           "$ref": "#/definitions/TransparentDataEncryptionActivityProperties",
