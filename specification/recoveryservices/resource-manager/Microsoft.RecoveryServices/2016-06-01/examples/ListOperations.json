@@ -1187,6 +1187,42 @@
                         "Origin": "user"
                     },
                     {
+                        "Name": "Microsoft.RecoveryServices/Vaults/providers/Microsoft.Insights/logDefinitions/read",
+                        "Display": {
+                            "Provider": "Microsoft.RecoveryServices",
+                            "Resource": "Vaults",
+                            "Operation": "AzureBackup Logs",
+                            "Description": "Azure Backup Logs"
+                        },
+                        "Origin": "system",
+                        "Properties": {
+                            "serviceSpecification": {
+                                "logSpecifications": [
+                                    {
+                                        "name": "AzureBackupReport",
+                                        "displayName": "AzureBackup Reporting Data",
+                                        "blobDuration": "PT1H"
+                                    },
+                                    {
+                                        "name": "AzureSiteRecoveryJobs",
+                                        "displayName": "AzureSite Recovery Jobs",
+                                        "blobDuration": "PT1H"
+                                    },
+                                    {
+                                        "name": "AzureSiteRecoveryEvents",
+                                        "displayName": "AzureSite Recovery Events",
+                                        "blobDuration": "PT1H"
+                                    },
+                                    {
+                                        "name": "AzureSiteRecoveryReplicatedItems",
+                                        "displayName": "AzureSite Recovery Replicated Items",
+                                        "blobDuration": "PT1H"
+                                    }
+                                ]
+                            }
+                        }
+                    },
+                    {
                         "Name": "Microsoft.RecoveryServices/Vaults/providers/Microsoft.Insights/metricDefinitions/read",
                         "Display": {
                             "Provider": "Microsoft.RecoveryServices",
