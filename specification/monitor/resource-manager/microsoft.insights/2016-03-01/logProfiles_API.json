@@ -57,7 +57,7 @@
           }
         },
         "x-ms-examples": {
-            "List alert rules": { "$ref": "./examples/deleteLogProfile.json" }
+            "Delete log profile": { "$ref": "./examples/deleteLogProfile.json" }
         }
       },
       "get": {
@@ -117,7 +117,7 @@
           }
         },
         "x-ms-examples": {
-            "List alert rules": { "$ref": "./examples/getLogProfile.json" }
+            "Get log profile": { "$ref": "./examples/getLogProfile.json" }
         }
       },
       "put": {
@@ -180,7 +180,7 @@
           }
         },
         "x-ms-examples": {
-            "List alert rules": { "$ref": "./examples/createOrUpdateLogProfile.json" }
+            "Create or update a log profile": { "$ref": "./examples/createOrUpdateLogProfile.json" }
         }
       },
       "patch": {
@@ -249,7 +249,7 @@
           "nextLinkName": null
         },
         "x-ms-examples": {
-            "List alert rules": { "$ref": "./examples/listLogProfile.json" }
+            "List log profiles": { "$ref": "./examples/listLogProfile.json" }
         }
       }
     }
@@ -351,7 +351,8 @@
       "properties": {
        "properties": {
           "x-ms-client-flatten": true,
-          "$ref": "#/definitions/LogProfileProperties"
+          "$ref": "#/definitions/LogProfileProperties",
+          "description": "The log profile properties of the resource."
         }
       },
       "required": ["properties"],
@@ -368,7 +369,8 @@
         },
         "properties": {
           "x-ms-client-flatten": true,
-          "$ref": "#/definitions/LogProfileProperties"
+          "$ref": "#/definitions/LogProfileProperties",
+          "description": "The log profile properties for an update operation."
         }
       }
     },
