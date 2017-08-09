@@ -476,7 +476,7 @@
       "type": "object",
       "allOf": [
         {
-          "$ref": "#/definitions/Resource"
+          "$ref": "#/definitions/ProxyOnlyResource"
         }
       ],
       "properties": {
@@ -560,7 +560,7 @@
       "type": "object",
       "allOf": [
         {
-          "$ref": "#/definitions/Resource"
+          "$ref": "#/definitions/ProxyOnlyResource"
         }
       ],
       "properties": {
@@ -649,11 +649,8 @@
         }
       }
     },
-    "Resource": {
-      "description": "Azure resource.",
-      "required": [
-        "location"
-      ],
+    "ProxyOnlyResource": {
+      "description": "Azure proxy only resource. This resource is not tracked by Azure Resource Manager.",
       "properties": {
         "id": {
           "description": "Resource Id.",
@@ -669,21 +666,10 @@
           "description": "Kind of resource.",
           "type": "string"
         },
-        "location": {
-          "description": "Resource Location.",
-          "type": "string"
-        },
         "type": {
           "description": "Resource type.",
           "type": "string",
           "readOnly": true
-        },
-        "tags": {
-          "description": "Resource tags.",
-          "type": "object",
-          "additionalProperties": {
-            "type": "string"
-          }
         }
       },
       "x-ms-azure-resource": true
@@ -792,7 +778,7 @@
       "type": "object",
       "allOf": [
         {
-          "$ref": "#/definitions/Resource"
+          "$ref": "#/definitions/ProxyOnlyResource"
         }
       ],
       "properties": {
@@ -850,7 +836,7 @@
       "type": "object",
       "allOf": [
         {
-          "$ref": "#/definitions/Resource"
+          "$ref": "#/definitions/ProxyOnlyResource"
         }
       ],
       "properties": {
