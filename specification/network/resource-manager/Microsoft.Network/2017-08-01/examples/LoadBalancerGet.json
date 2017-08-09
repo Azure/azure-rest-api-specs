@@ -12,6 +12,9 @@
         "id": "/subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Network/loadBalancers/lb",
         "type": "Microsoft.Network/loadBalancers",
         "location": "westus",
+        "sku": {
+            "name": "Basic"
+        },        
         "properties": {
           "provisioningState": "Succeeded",
           "frontendIPConfigurations": [
@@ -72,7 +75,8 @@
                 },
                 "probe": {
                   "id": "/subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Network/loadBalancers/lb/probes/probe-lb"
-                }
+                },
+                "disableOutboundSnat": false
               }
             }
           ],
