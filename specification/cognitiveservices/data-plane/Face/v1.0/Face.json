@@ -28,7 +28,7 @@
   "/findsimilars": {
    "post": {
     "description": "Given query face's faceId, find the similar-looking faces from a faceId array or a faceListId.",
-    "operationId": "Faces_FindSimilar",
+    "operationId": "Face_FindSimilar",
     "parameters": [
      {
       "$ref": "#/parameters/SubscriptionKey"
@@ -50,7 +50,7 @@
      "200": {
       "description": "A successful call returns an array of the most similar faces represented in faceId if the input parameter is faceIds or persistedFaceId if the input parameter is faceListId.",
       "schema": {
-       "$ref": "#/definitions/FindSimilarResponse"
+       "$ref": "#/definitions/SimilarFaceResults"
       },
       "examples": {
        "application/json": [
@@ -76,7 +76,7 @@
   "/group": {
    "post": {
     "description": "Divide candidate faces into groups based on face similarity.",
-    "operationId": "Faces_Group",
+    "operationId": "Face_Group",
     "parameters": [
      {
       "$ref": "#/parameters/SubscriptionKey"
@@ -135,7 +135,7 @@
   "/identify": {
    "post": {
     "description": "Identify unknown faces from a person group.",
-    "operationId": "Faces_Identify",
+    "operationId": "Face_Identify",
     "parameters": [
      {
       "$ref": "#/parameters/SubscriptionKey"
@@ -157,7 +157,7 @@
      "200": {
       "description": "A successful call returns the identified candidate person(s) for each query face.",
       "schema": {
-       "$ref": "#/definitions/IdentifyResponse"
+       "$ref": "#/definitions/IdentifyResult"
       },
       "examples": {
        "application/json": [
@@ -197,7 +197,7 @@
   "/verify": {
    "post": {
     "description": "Verify whether two faces belong to a same person or whether one face belongs to a person.",
-    "operationId": "Faces_Verify",
+    "operationId": "Face_Verify",
     "parameters": [
      {
       "$ref": "#/parameters/SubscriptionKey"
@@ -219,7 +219,7 @@
      "200": {
       "description": "A successful call returns the verification result.",
       "schema": {
-       "$ref": "#/definitions/VerifyResponse"
+       "$ref": "#/definitions/VerifyResult"
       },
       "examples": {
        "application/json": {
@@ -243,7 +243,7 @@
   "/persongroups/{personGroupId}/persons": {
    "post": {
     "description": "Create a new person in a specified person group.",
-    "operationId": "Persons_Create",
+    "operationId": "Person_Create",
     "parameters": [
      {
       "name": "personGroupId",
@@ -272,7 +272,7 @@
      "200": {
       "description": "A successful call returns a new personId created.",
       "schema": {
-       "$ref": "#/definitions/CreatePersonResponse"
+       "$ref": "#/definitions/CreatePersonResult"
       },
       "examples": {
        "application/json": {
@@ -293,7 +293,7 @@
    },
    "get": {
     "description": "List all persons in a person group, and retrieve person information (including personId, name, userData and persistedFaceIds of registered faces of the person).",
-    "operationId": "Persons_List",
+    "operationId": "Person_List",
     "parameters": [
      {
       "name": "personGroupId",
@@ -310,7 +310,7 @@
      "200": {
       "description": "A successful call returns an array of person information that belong to the person group.",
       "schema": {
-       "$ref": "#/definitions/ListPersonsResponse"
+       "$ref": "#/definitions/PersonResults"
       },
       "examples": {
        "application/json": [
@@ -351,7 +351,7 @@
   "/persongroups/{personGroupId}/persons/{personId}": {
    "delete": {
     "description": "Delete an existing person from a person group. Persisted face images of the person will also be deleted.",
-    "operationId": "Persons_Delete",
+    "operationId": "Person_Delete",
     "parameters": [
      {
       "name": "personGroupId",
@@ -388,7 +388,7 @@
    },
    "get": {
     "description": "Retrieve a person's information, including registered persisted faces, name and userData.",
-    "operationId": "Persons_Get",
+    "operationId": "Person_Get",
     "parameters": [
      {
       "name": "personGroupId",
@@ -412,7 +412,7 @@
      "200": {
       "description": "A successful call returns the person's information.",
       "schema": {
-       "$ref": "#/definitions/GetPersonResponse"
+       "$ref": "#/definitions/PersonResult"
       },
       "examples": {
        "application/json": {
@@ -440,7 +440,7 @@
    },
    "patch": {
     "description": "Update name or userData of a person.",
-    "operationId": "Persons_Update",
+    "operationId": "Person_Update",
     "parameters": [
      {
       "name": "personGroupId",
@@ -491,7 +491,7 @@
   "/persongroups/{personGroupId}/persons/{personId}/persistedFaces/{persistedFaceId}": {
    "delete": {
     "description": "Delete a face from a person. Relative image for the persisted face will also be deleted.",
-    "operationId": "Persons_DeleteFace",
+    "operationId": "Person_DeleteFace",
     "parameters": [
      {
       "name": "personGroupId",
@@ -535,7 +535,7 @@
    },
    "get": {
     "description": "Retrieve information about a persisted face (specified by persistedFaceId, personId and its belonging personGroupId).",
-    "operationId": "Persons_GetFace",
+    "operationId": "Person_GetFace",
     "parameters": [
      {
       "name": "personGroupId",
@@ -566,7 +566,7 @@
      "200": {
       "description": "A successful call returns target persisted face's information (persistedFaceId and userData).",
       "schema": {
-       "$ref": "#/definitions/GetPersonFaceResponse"
+       "$ref": "#/definitions/PersonFaceResult"
       },
       "examples": {
        "application/json": {
@@ -588,7 +588,7 @@
    },
    "patch": {
     "description": "Update a person persisted face's userData field.",
-    "operationId": "Persons_UpdateFace",
+    "operationId": "Person_UpdateFace",
     "parameters": [
      {
       "name": "personGroupId",
@@ -646,14 +646,16 @@
   "/persongroups/{personGroupId}": {
    "put": {
     "description": "Create a new person group with specified personGroupId, name and user-provided userData.",
-    "operationId": "PersonGroups_Create",
+    "operationId": "PersonGroup_Create",
     "parameters": [
      {
       "name": "personGroupId",
       "in": "path",
-      "description": "User-provided personGroupId as a string. The valid characters include numbers, English letters in lower case, '-' and '_'. The maximum length of the personGroupId is 64.\n        ",
+      "description": "User-provided personGroupId as a string.",
       "required": true,
-      "type": "string"
+      "type": "string",
+      "maxLength": 64,
+      "pattern": "^[a-z0-9-_]+$"
      },
      {
       "$ref": "#/parameters/SubscriptionKey"
@@ -688,7 +690,7 @@
    },
    "delete": {
     "description": "Delete an existing person group. Persisted face images of all people in the person group will also be deleted.",
-    "operationId": "PersonGroups_Delete",
+    "operationId": "PersonGroup_Delete",
     "parameters": [
      {
       "name": "personGroupId",
@@ -718,7 +720,7 @@
    },
    "get": {
     "description": "Retrieve the information of a person group, including its name and userData.",
-    "operationId": "PersonGroups_Get",
+    "operationId": "PersonGroup_Get",
     "parameters": [
      {
       "name": "personGroupId",
@@ -735,7 +737,7 @@
      "200": {
       "description": "A successful call returns the person group's information.",
       "schema": {
-       "$ref": "#/definitions/GetPersonGroupResponse"
+       "$ref": "#/definitions/PersonGroupResult"
       },
       "examples": {
        "application/json": {
@@ -758,7 +760,7 @@
    },
    "patch": {
     "description": "Update an existing person group's display name and userData. The properties which does not appear in request body will not be updated.",
-    "operationId": "PersonGroups_Update",
+    "operationId": "PersonGroup_Update",
     "parameters": [
      {
       "name": "personGroupId",
@@ -802,7 +804,7 @@
   "/persongroups/{personGroupId}/training": {
    "get": {
     "description": "Retrieve the training status of a person group (completed or ongoing).",
-    "operationId": "PersonGroups_GetTrainingStatus",
+    "operationId": "PersonGroup_GetTrainingStatus",
     "parameters": [
      {
       "name": "personGroupId",
@@ -845,26 +847,23 @@
   "/persongroups": {
    "get": {
     "description": "List person groups and their information.",
-    "operationId": "PersonGroups_List",
+    "operationId": "PersonGroup_List",
     "parameters": [
      {
       "name": "start",
       "in": "query",
-      "description": "List person groups from the least personGroupId greater than the \"start\". It contains no more than 64 characters. Default is empty. ",
+      "description": "List person groups from the least personGroupId greater than the \"start\".",
       "type": "string",
-      "enum": [
-       ""
-      ]
+      "maxLength": 64
      },
      {
       "name": "top",
       "in": "query",
-      "description": "The number of person groups to list, ranging in [1, 1000]. Default is 1000. ",
+      "description": "The number of person groups to list.",
       "type": "integer",
-      "default": "1000",
-      "enum": [
-       "1000"
-      ]
+      "minimum": 1,
+      "maximum": 1000,
+      "default": 1000
      },
      {
       "$ref": "#/parameters/SubscriptionKey"
@@ -872,9 +871,9 @@
     ],
     "responses": {
      "200": {
-      "description": "A successful call returns an array of person groups and their information (personGroupId, name and userData).",
+      "description": "A successful call returns an array of person groups and their information.",
       "schema": {
-       "$ref": "#/definitions/ListPersonGroupResponse"
+       "$ref": "#/definitions/PersonGroupResults"
       },
       "examples": {
        "application/json": [
@@ -906,7 +905,7 @@
   "/persongroups/{personGroupId}/train": {
    "post": {
     "description": "Queue a person group training task, the training task may not be started immediately.",
-    "operationId": "PersonGroups_Train",
+    "operationId": "PersonGroup_Train",
     "parameters": [
      {
       "name": "personGroupId",
@@ -921,7 +920,7 @@
     ],
     "responses": {
      "202": {
-      "description": "A successful call returns an empty JSON body.  "
+      "description": "The training task was queued successfully."
      },
      "default": {
       "description": "Error response.",
@@ -937,15 +936,17 @@
   },
   "/facelists/{faceListId}": {
    "put": {
-    "description": "Create an empty face list with user-specified faceListId, name and an optional userData. Up to 64 face lists are allowed to exist in one subscription.",
-    "operationId": "FaceLists_Create",
+    "description": "Create an empty face list. Up to 64 face lists are allowed to exist in one subscription.",
+    "operationId": "FaceList_Create",
     "parameters": [
      {
       "name": "faceListId",
       "in": "path",
-      "description": "Valid character is letter in lower case or digit or '-' or '_', maximum length is 64.",
+      "description": "Id referencing a particular face list.",
       "required": true,
-      "type": "string"
+      "type": "string",
+      "maxLength": 64,
+      "pattern": "^[a-z0-9-_]+$"
      },
      {
       "$ref": "#/parameters/SubscriptionKey"
@@ -979,15 +980,17 @@
     ]
    },
    "get": {
-    "description": "Retrieve a face list's information, including faceListId, name, userData and faces in the face list. ",
-    "operationId": "FaceLists_Get",
+    "description": "Retrieve a face list's information.",
+    "operationId": "FaceList_Get",
     "parameters": [
      {
       "name": "faceListId",
       "in": "path",
-      "description": "Valid character is letter in lower case or digit or '-' or '_', maximum length is 64.",
+      "description": "Id referencing a Face List.",
       "required": true,
-      "type": "string"
+      "type": "string",
+      "maxLength": 64,
+      "pattern": "^[a-z0-9-_]+$"
      },
      {
       "$ref": "#/parameters/SubscriptionKey"
@@ -997,7 +1000,7 @@
      "200": {
       "description": "A successful call returns the face list's information.",
       "schema": {
-       "$ref": "#/definitions/GetFaceListResponse"
+       "$ref": "#/definitions/GetFaceListResult"
       },
       "examples": {
        "application/json": {
@@ -1025,15 +1028,17 @@
     ]
    },
    "patch": {
-    "description": "Update information of a face list, including name and userData. ",
-    "operationId": "FaceLists_Update",
+    "description": "Update information of a face list. ",
+    "operationId": "FaceList_Update",
     "parameters": [
      {
       "name": "faceListId",
       "in": "path",
-      "description": "Valid character is letter in lower case or digit or '-' or '_', maximum length is 64.",
+      "description": "Id referencing a Face List.",
       "required": true,
-      "type": "string"
+      "type": "string",
+      "maxLength": 64,
+      "pattern": "^[a-z0-9-_]+$"
      },
      {
       "$ref": "#/parameters/SubscriptionKey"
@@ -1068,14 +1073,16 @@
    },
    "delete": {
     "description": "Delete an existing face list according to faceListId. Persisted face images in the face list will also be deleted.",
-    "operationId": "FaceLists_Delete",
+    "operationId": "FaceList_Delete",
     "parameters": [
      {
       "name": "faceListId",
       "in": "path",
-      "description": "Valid character is letter in lower case or digit or '-' or '_', maximum length is 64.",
+      "description": "Id referencing a Face List.",
       "required": true,
-      "type": "string"
+      "type": "string",
+      "pattern": "^[a-z0-9-_]+$",
+      "maxLength": 64
      },
      {
       "$ref": "#/parameters/SubscriptionKey"
@@ -1100,7 +1107,7 @@
   "/facelists": {
    "get": {
     "description": "Retrieve information about all existing face lists. Only faceListId, name and userData will be returned.",
-    "operationId": "FaceLists_List",
+    "operationId": "FaceList_List",
     "parameters": [
      {
       "$ref": "#/parameters/SubscriptionKey"
@@ -1110,7 +1117,7 @@
      "200": {
       "description": "A successful call returns an array of faceList.",
       "schema": {
-       "$ref": "#/definitions/ListFaceListResponse"
+       "$ref": "#/definitions/FaceListResults"
       },
       "examples": {
        "application/json": [
@@ -1137,19 +1144,21 @@
   "/facelists/{faceListId}/persistedFaces/{persistedFaceId}": {
    "delete": {
     "description": "Delete an existing face from a face list (given by a persisitedFaceId and a faceListId). Persisted image related to the face will also be deleted.",
-    "operationId": "FaceLists_DeleteFace",
+    "operationId": "FaceList_DeleteFace",
     "parameters": [
      {
       "name": "faceListId",
       "in": "path",
-      "description": "faceListId of an existing face list. Valid character is letter in lower case or digit or '-' or '_', maximum length is 64.",
+      "description": "faceListId of an existing face list.",
       "required": true,
-      "type": "string"
+      "type": "string",
+      "maxLength": 64,
+      "pattern": "^[a-z0-9-_]+$"
      },
      {
       "name": "persistedFaceId",
       "in": "path",
-      "description": "persistedFaceId of an existing face. Valid character is letter in lower case or digit or '-' or '_', maximum length is 64.",
+      "description": "persistedFaceId of an existing face. ",
       "required": true,
       "type": "string"
      },
@@ -1178,29 +1187,21 @@
   "/detect?overload=url": {
    "post": {
     "description": "Detect human faces in an image and returns face locations, and optionally with faceIds, landmarks, and attributes.",
-    "operationId": "Faces_Detect",
+    "operationId": "Face_Detect",
     "parameters": [
      {
       "name": "returnFaceId",
       "in": "query",
-      "description": "Return faceIds of the detected faces or not. The default value is true. ",
+      "description": "A value indicating whether the operation should return faceIds of detected faces.",
       "type": "boolean",
-      "default": "true",
-      "enum": [
-       "false",
-       "true"
-      ]
+      "default": true
      },
      {
       "name": "returnFaceLandmarks",
       "in": "query",
-      "description": "Return face landmarks of the detected faces or not. The default value is false. ",
+      "description": "A value indicating whether the operation should return landmarks of the detected faces.",
       "type": "boolean",
-      "default": "false",
-      "enum": [
-       "false",
-       "true"
-      ]
+      "default": false
      },
      {
       "name": "returnFaceAttributes",
@@ -1222,7 +1223,7 @@
      "200": {
       "description": "A successful call returns an array of face entries ranked by face rectangle size in descendingorder. An empty response indicates no faces detected. ",
       "schema": {
-       "$ref": "#/definitions/DetectResponse"
+       "$ref": "#/definitions/DetectionResult"
       },
       "examples": {
        "application/json": [
@@ -1389,29 +1390,21 @@
   "/detect?overload=stream": {
    "post": {
     "description": "Detect human faces in an image and returns face locations, and optionally with faceIds, landmarks, and attributes.",
-    "operationId": "Faces_DetectInStream",
+    "operationId": "Face_DetectInStream",
     "parameters": [
      {
       "name": "returnFaceId",
       "in": "query",
-      "description": "Return faceIds of the detected faces or not. The default value is true. ",
+      "description": "A value indicating whether the operation should return faceIds of detected faces.",
       "type": "boolean",
-      "default": "true",
-      "enum": [
-       "false",
-       "true"
-      ]
+      "default": true
      },
      {
       "name": "returnFaceLandmarks",
       "in": "query",
-      "description": "Return face landmarks of the detected faces or not. The default value is false. ",
+      "description": "A value indicating whether the operation should return landmarks of the detected faces.",
       "type": "boolean",
-      "default": "false",
-      "enum": [
-       "false",
-       "true"
-      ]
+      "default": false
      },
      {
       "name": "returnFaceAttributes",
@@ -1433,7 +1426,7 @@
      "200": {
       "description": "A successful call returns an array of face entries ranked by face rectangle size in descendingorder. An empty response indicates no faces detected. ",
       "schema": {
-       "$ref": "#/definitions/DetectResponse"
+       "$ref": "#/definitions/DetectionResult"
       },
       "examples": {
        "application/json": [
@@ -1599,8 +1592,8 @@
   },
   "/persongroups/{personGroupId}/persons/{personId}/persistedFaces?overload=url": {
    "post": {
-    "description": "Add a representative face to a person for identification. The input face is specified as an image with a targetFace rectangle.It returns a persistedFaceId representing the added face and this persistedFaceId will not expire. ",
-    "operationId": "Persons_AddFace",
+    "description": "Add a representative face to a person for identification. The input face is specified as an image with a targetFace rectangle.",
+    "operationId": "Person_AddFace",
     "parameters": [
      {
       "name": "personGroupId",
@@ -1660,7 +1653,7 @@
   "/persongroups/{personGroupId}/persons/{personId}/persistedFaces?overload=stream": {
    "post": {
     "description": "Add a representative face to a person for identification. The input face is specified as an image with a targetFace rectangle.",
-    "operationId": "Persons_AddFaceFromStream",
+    "operationId": "Person_AddFaceFromStream",
     "parameters": [
      {
       "name": "personGroupId",
@@ -1720,14 +1713,16 @@
   "/facelists/{faceListId}/persistedFaces?overload=url": {
    "post": {
     "description": "Add a face to a face list. The input face is specified as an image with a targetFace rectangle. It returns a persistedFaceId representing the added face, and persistedFaceId will not expire. ",
-    "operationId": "FaceLists_AddFace",
+    "operationId": "FaceList_AddFace",
     "parameters": [
      {
       "name": "faceListId",
       "in": "path",
-      "description": "Valid character is letter in lower case or digit or '-' or '_', maximum length is 64.",
+      "description": "Id referencing a Face List.",
       "required": true,
-      "type": "string"
+      "type": "string",
+      "maxLength": 64,
+      "pattern": "^[a-z0-9-_]+$"
      },
      {
       "name": "userData",
@@ -1773,14 +1768,16 @@
   "/facelists/{faceListId}/persistedFaces?overload=stream": {
    "post": {
     "description": "Add a face to a face list. The input face is specified as an image with a targetFace rectangle. It returns a persistedFaceId representing the added face, and persistedFaceId will not expire.",
-    "operationId": "FaceLists_AddFaceFromStream",
+    "operationId": "FaceList_AddFaceFromStream",
     "parameters": [
      {
       "name": "faceListId",
       "in": "path",
-      "description": "Valid character is letter in lower case or digit or '-' or '_', maximum length is 64.",
+      "description": "Id referencing a Face List.",
       "required": true,
-      "type": "string"
+      "type": "string",
+      "maxLength": 64,
+      "pattern": "^[a-z0-9-_]+$"
      },
      {
       "name": "userData",
@@ -1857,21 +1854,22 @@
     }
    }
   },
-  "DetectResponse": {
+  "DetectionResult": {
    "type": "array",
    "items": {
-    "$ref": "#/definitions/DetectResponseElement"
+    "$ref": "#/definitions/DetectedFace"
    }
   },
-  "DetectResponseElement": {
+  "DetectedFace": {
    "type": "object",
    "required": [
     "faceRectangle"
    ],
-   "description": "",
+   "description": "Detected Face object.",
    "properties": {
     "faceId": {
-     "type": "string"
+     "type": "string",
+     "maxLength": 64
     },
     "faceRectangle": {
      "$ref": "#/definitions/FaceRectangle"
@@ -2065,7 +2063,7 @@
   },
   "FacialHairProperties": {
    "type": "object",
-   "description": "",
+   "description": "Properties describing facial hair attributes.",
    "properties": {
     "mustache": {
      "type": "number",
@@ -2086,7 +2084,7 @@
   },
   "HeadPoseProperties": {
    "type": "object",
-   "description": "",
+   "description": "Properties indicating head pose of the face.",
    "properties": {
     "roll": {
      "type": "number"
@@ -2101,7 +2099,7 @@
   },
   "EmotionProperties": {
    "type": "object",
-   "description": "",
+   "description": "Properties describing facial emotion.",
    "properties": {
     "anger": {
      "type": "number",
@@ -2150,34 +2148,38 @@
    "required": [
     "faceId"
    ],
-   "description": "",
+   "description": "Request body for find similar operation.",
    "properties": {
     "faceId": {
      "type": "string",
-     "description": "FaceId of the query face. User needs to call Face - Detect first to get a valid faceId. Note that this faceId is not persisted and will expire 24 hours after the detection call"
+     "description": "FaceId of the query face. User needs to call Face - Detect first to get a valid faceId. Note that this faceId is not persisted and will expire 24 hours after the detection call",
+     "maxLength": 64
     },
     "faceListId": {
      "type": "string",
-     "description": "An existing user-specified unique candidate face list, created in Face List - Create a Face List. Face list contains a set of persistedFaceIds which are persisted and will never expire. Parameter faceListId and faceIds should not be provided at the same time"
+     "description": "An existing user-specified unique candidate face list, created in Face List - Create a Face List. Face list contains a set of persistedFaceIds which are persisted and will never expire. Parameter faceListId and faceIds should not be provided at the same time",
+     "maxLength": 64,
+     "pattern": "^[a-z0-9-_]+$"
     },
     "faceIds": {
      "type": "array",
-     "description": "An array of candidate faceIds. All of them are created by Face - Detect and the faceIds will expire 24 hours after the detection call. The number of faceIds is limited to 1000. Parameter faceListId and faceIds should not be provided at the same time.",
-     "maxLength": 1000,
+     "description": "An array of candidate faceIds. All of them are created by Face - Detect and the faceIds will expire 24 hours after the detection call.",
+     "maxItems": 1000,
      "items": {
-      "type": "string"
+      "type": "string",
+      "maxLength": 64
      }
     },
     "maxNumOfCandidatesReturned": {
      "type": "integer",
-     "description": "The number of top similar faces returned. The valid range is [1, 1000].It defaults to 20.",
+     "description": "The number of top similar faces returned. The valid range is [1, 1000].",
      "default": 20,
      "minimum": 1,
      "maximum": 1000
     },
     "mode": {
      "type": "string",
-     "description": "Similar face searching mode. It can be \"matchPerson\" or \"matchFace\". It defaults to \"matchPerson\".",
+     "description": "Similar face searching mode. It can be \"matchPerson\" or \"matchFace\".",
      "default": "matchPerson",
      "enum": [
       "matchPerson",
@@ -2186,23 +2188,24 @@
     }
    }
   },
-  "FindSimilarResponse": {
+  "SimilarFaceResults": {
    "type": "array",
    "items": {
-    "$ref": "#/definitions/FindSimilarResponseElement"
+    "$ref": "#/definitions/SimilarFaceResult"
    }
   },
-  "FindSimilarResponseElement": {
+  "SimilarFaceResult": {
    "type": "object",
    "required": [
     "faceId",
     "persistedFaceId"
    ],
-   "description": "",
+   "description": "Response body for find similar face operation.",
    "properties": {
     "faceId": {
      "type": "string",
-     "description": "faceId of candidate face when find by faceIds. faceId is created by Face - Detect and will expire 24 hours after the detection call"
+     "description": "faceId of candidate face when find by faceIds. faceId is created by Face - Detect and will expire 24 hours after the detection call",
+     "maxLength": 64
     },
     "persistedFaceId": {
      "type": "string",
@@ -2219,14 +2222,15 @@
    "required": [
     "faceIds"
    ],
-   "description": "",
+   "description": "Request body for group request.",
    "properties": {
     "faceIds": {
      "type": "array",
      "description": "Array of candidate faceId created by Face - Detect. The maximum is 1000 faces",
-     "maxLength": 1000,
+     "maxItems": 1000,
      "items": {
-      "type": "string"
+      "type": "string",
+      "maxLength": 64
      }
     }
    }
@@ -2236,7 +2240,7 @@
    "required": [
     "groups"
    ],
-   "description": "",
+   "description": "An array of face groups based on face similarity.",
    "properties": {
     "groups": {
      "type": "array",
@@ -2263,7 +2267,7 @@
     "personGroupId",
     "faceIds"
    ],
-   "description": "",
+   "description": "Request body for identify face operation.",
    "properties": {
     "personGroupId": {
      "type": "string",
@@ -2271,59 +2275,61 @@
     },
     "faceIds": {
      "type": "array",
-     "description": "Array of candidate faceId created by Face - Detect. The maximum is 1000 faces",
-     "maxLength": 10,
+     "description": "Array of candidate faceId created by Face - Detect.",
+     "maxItems": 1000,
      "items": {
       "type": "string"
      }
     },
     "maxNumOfCandidatesReturned": {
      "type": "integer",
-     "description": "The number of top similar faces returned. The valid range is [1, 1000].It defaults to 20.",
+     "description": "The number of top similar faces returned.",
      "default": 1,
      "minimum": 1,
-     "maximum": 5
+     "maximum": 1000
     },
     "confidenceThreshold": {
      "type": "number",
-     "description": "Confidence threshold of identification, used to judge whether one face belong to one person. The range of confidenceThreshold is [0, 1] (default specified by algorithm).",
+     "description": "Confidence threshold of identification, used to judge whether one face belong to one person.",
      "minimum": 0,
      "maximum": 1
     }
    }
   },
-  "IdentifyResponse": {
+  "IdentifyResult": {
    "type": "array",
-   "items": {}
+   "items": {
+    "$ref": "#/definitions/IdentifyResultItem"
+   }
   },
-  "IdentifyResponseElement": {
+  "IdentifyResultItem": {
    "type": "object",
    "required": [
     "faceId",
     "candidates"
    ],
-   "description": "",
+   "description": "Response body for identify face operation.",
    "properties": {
     "faceId": {
      "type": "string",
-     "description": "faceId of the query face"
+     "description": "faceId of the query face",
+     "maxLength": 64
     },
     "candidates": {
      "type": "array",
-     "description": "",
      "items": {
-      "$ref": "#/definitions/IdentifyResponseCandidatesElement"
+      "$ref": "#/definitions/IdentifyResultCandidate"
      }
     }
    }
   },
-  "IdentifyResponseCandidatesElement": {
+  "IdentifyResultCandidate": {
    "type": "object",
    "required": [
     "personId",
     "confidence"
    ],
-   "description": "",
+   "description": "All possible faces that may qualify.",
    "properties": {
     "personId": {
      "type": "string",
@@ -2344,11 +2350,12 @@
     "personId",
     "personGroupId"
    ],
-   "description": "",
+   "description": "Request body for verify operation.",
    "properties": {
     "faceId": {
      "type": "string",
-     "description": "faceId the face, comes from Face - Detect"
+     "description": "faceId the face, comes from Face - Detect",
+     "maxLength": 64
     },
     "personId": {
      "type": "string",
@@ -2360,12 +2367,12 @@
     }
    }
   },
-  "VerifyResponse": {
+  "VerifyResult": {
    "type": "object",
    "required": [
     "isIdentical"
    ],
-   "description": "",
+   "description": "Result of the verify operation.",
    "properties": {
     "isIdentical": {
      "type": "boolean",
@@ -2381,7 +2388,7 @@
   },
   "CreateFaceListRequest": {
    "type": "object",
-   "description": "",
+   "description": "Request to create a face list.",
    "properties": {
     "name": {
      "type": "string",
@@ -2395,17 +2402,18 @@
     }
    }
   },
-  "GetFaceListResponse": {
+  "GetFaceListResult": {
    "type": "object",
    "required": [
     "faceListId"
    ],
-   "description": "",
+   "description": "Result of the GetFaceList operation.",
    "properties": {
     "faceListId": {
      "type": "string",
      "description": "faceListId of the target face list.",
-     "maxLength": 128
+     "maxLength": 64,
+     "pattern": "^[a-z0-9-_]+$"
     },
     "name": {
      "type": "string",
@@ -2419,16 +2427,16 @@
     }
    }
   },
-  "ListFaceListResponse": {
+  "FaceListResults": {
    "type": "array",
-   "description": "",
+   "description": "An array of face list results.",
    "items": {
-    "$ref": "#/definitions/GetFaceListResponse"
+    "$ref": "#/definitions/GetFaceListResult"
    }
   },
   "CreatePersonGroupRequest": {
    "type": "object",
-   "description": "",
+   "description": "Request to create a person group.",
    "properties": {
     "name": {
      "type": "string",
@@ -2442,12 +2450,12 @@
     }
    }
   },
-  "GetPersonGroupResponse": {
+  "PersonGroupResult": {
    "type": "object",
    "required": [
     "personGroupId"
    ],
-   "description": "",
+   "description": "Person group object.",
    "properties": {
     "personGroupId": {
      "type": "string",
@@ -2466,16 +2474,16 @@
     }
    }
   },
-  "ListPersonGroupResponse": {
+  "PersonGroupResults": {
    "type": "array",
-   "description": "",
+   "description": "An array of person groups.",
    "items": {
-    "$ref": "#/definitions/GetPersonGroupResponse"
+    "$ref": "#/definitions/PersonGroupResult"
    }
   },
   "CreatePersonRequest": {
    "type": "object",
-   "description": "",
+   "description": "Request to create a person object.",
    "properties": {
     "name": {
      "type": "string",
@@ -2489,12 +2497,12 @@
     }
    }
   },
-  "CreatePersonResponse": {
+  "CreatePersonResult": {
    "type": "object",
    "required": [
     "personId"
    ],
-   "description": "",
+   "description": "Result of creating person.",
    "properties": {
     "personId": {
      "type": "string",
@@ -2502,12 +2510,12 @@
     }
    }
   },
-  "GetPersonResponse": {
+  "PersonResult": {
    "type": "object",
    "required": [
     "personId"
    ],
-   "description": "",
+   "description": "Person object.",
    "properties": {
     "personId": {
      "type": "string",
@@ -2530,19 +2538,19 @@
     }
    }
   },
-  "ListPersonsResponse": {
+  "PersonResults": {
    "type": "array",
-   "description": "",
+   "description": "An array of PersonResults.",
    "items": {
-    "$ref": "#/definitions/GetPersonResponse"
+    "$ref": "#/definitions/PersonResult"
    }
   },
-  "GetPersonFaceResponse": {
+  "PersonFaceResult": {
    "type": "object",
    "required": [
     "persistedFaceId"
    ],
-   "description": "",
+   "description": "PersonFace object.",
    "properties": {
     "persistedFaceId": {
      "type": "string",
@@ -2556,7 +2564,7 @@
   },
   "UpdatePersonFaceDataRequest": {
    "type": "object",
-   "description": "",
+   "description": "Request to update person face data.",
    "properties": {
     "userData": {
      "type": "string",
@@ -2570,7 +2578,7 @@
    "required": [
     "status"
    ],
-   "description": "",
+   "description": "Training status object.",
    "properties": {
     "status": {
      "type": "string",

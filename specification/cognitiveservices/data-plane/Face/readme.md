@@ -2,7 +2,7 @@
 
 > see https://aka.ms/autorest
 
-Example configuration for generating Face SDK.
+Configuration for generating Face SDK.
 
 The current release is `release_1_0`.
 
@@ -17,7 +17,7 @@ These settings apply only when `--tag=release_1_0` is specified on the command l
 
 ``` yaml $(tag) == 'release_1_0'
 input-file: v1.0/Face.json
-
+log-file: logs/log.txt
 ```
 
 ## CSharp Settings
@@ -25,6 +25,6 @@ These settings apply only when `--csharp` is specified on the command line.
 ``` yaml $(csharp) 
 csharp: 
   namespace: Microsoft.CognitiveServices.Face
-
+  output-folder: out/csharp
 ```
 
