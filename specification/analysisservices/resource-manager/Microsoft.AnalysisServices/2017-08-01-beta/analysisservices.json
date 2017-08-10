@@ -411,12 +411,8 @@
             "description": "OK.",
             "schema": { "$ref": "#/definitions/GatewayListStatusLive" }
           },
-          "400": {
-            "description": "Gateway not live or not configured.",
-            "schema": { "$ref": "#/definitions/GatewayListStatusError" }
-          },
-          "404": {
-            "description": "Server or Gateway not found.",
+          "default": {
+            "description": "Default response as an error",
             "schema": { "$ref": "#/definitions/GatewayListStatusError" }
           }
         }
