@@ -379,9 +379,8 @@
           }
         }
       }
-    }
-  },
-  "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AnalysisServices/servers/{serverName}/listGatewayStatus": {
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AnalysisServices/servers/{serverName}/listGatewayStatus": {
       "post": {
         "description": "Return the gateway status of the specified Analysis Services server instance.",
         "tags": [ "Servers" ],
@@ -418,6 +417,7 @@
           }
         }
       }
+    }
   },
   "definitions": {
     "Resource": {
@@ -655,7 +655,9 @@
       "properties": {
         "status": {
           "type": "string",
-          "enum": ["Live"],
+          "enum": [
+            "Live"
+          ],
           "description": "Live message of list gateway."
         }
       }
