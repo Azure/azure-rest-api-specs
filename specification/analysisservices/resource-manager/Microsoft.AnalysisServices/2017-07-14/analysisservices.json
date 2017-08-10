@@ -381,48 +381,6 @@
       }
     }
   },
-  "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AnalysisServices/servers/{serverName}/listGatewayStatus": {
-      "post": {
-        "description": "Return the gateway status of the specified Analysis Services server instance.",
-        "tags": [ "Servers" ],
-        "operationId": "Servers_ListGatewayStatus",
-        "parameters": [
-          {
-            "$ref": "#/parameters/ResourceGroupNameParameter"
-          },
-          {
-            "name": "serverName",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "pattern": "^[a-z][a-z0-9]*$",
-            "minLength": 3,
-            "maxLength": 63,
-            "description": "The name of the Analysis Services server. It must be at least 3 characters in length, and no more than 63."
-          },
-          {
-            "$ref": "#/parameters/ApiVersionParameter"
-          },
-          {
-            "$ref": "#/parameters/SubscriptionIdParameter"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "OK.",
-            "schema": { "$ref": "#/definitions/GatewayListStatusLive" }
-          },
-          "400": {
-            "description": "Gateway not live or not configured.",
-            "schema": { "$ref": "#/definitions/GatewayListStatusError" }
-          },
-          "404": {
-            "description": "Server or Gateway not found.",
-            "schema": { "$ref": "#/definitions/GatewayListStatusError" }
-          }
-        }
-      }
-  },
   "definitions": {
     "Resource": {
       "description": "Represents an instance of an Analysis Services resource.",
@@ -595,13 +553,6 @@
             "modelAsString": true
           },
           "description": "The name of the Azure pricing tier to which the SKU applies."
-        },
-        "capacity": {
-          "type": "integer",
-          "minimum": 1,
-          "maximum": 8,
-          "default": 1,
-          "description": "The number of instances in the read only query pool."
         }
       },
       "required": [
@@ -619,23 +570,6 @@
         "backupBlobContainerUri": {
           "type": "string",
           "description": "The container URI of backup blob."
-        },
-        "gatewayDetails": {
-          "$ref": "#/definitions/GatewayDetails",
-          "description": "The gateway details configured for the AS server."
-        },
-        "querypoolConnectionMode": {
-          "type":"string",
-          "description": "How the read-write server's participation in the query pool is controlled.<br/>It can have the following values: <ul><li>readOnly - indicates that the read-write server is intended not to participate in query operations</li><li>all - indicates that the read-write server can participate in query operations</li></ul>Specifying readOnly when capacity is 1 results in error.",
-          "enum": [
-            "All",
-            "ReadOnly"
-          ],
-          "x-ms-enum": {
-            "modelAsString": false,
-            "name": "ConnectionMode"
-          },
-          "default": "All"
         }
       }
     },
@@ -650,60 +584,6 @@
             "description": "The UPN of the user. For example: johnsmith@contoso.com."
           },
           "description": "An array of administrator user identities."
-        }
-      }
-    },
-    "GatewayDetails": {
-      "description": "The gateway details.",
-      "type": "object",
-      "properties": {
-        "gatewayResourceId": {
-          "type": "string",
-          "description": "Gateway resource to be associated with the server. Only supported with api versions 2017-07-14 or higher."
-        },
-        "gatewayObjectId": {
-          "type": "string",
-          "readOnly": true,
-          "description": "Gateway object id from in the DMTS cluster for the gateway resource. Only supported with api versions 2017-07-14 or higher."
-        },
-        "dmtsClusterUri": {
-          "type": "string",
-          "readOnly": true,
-          "description": "Uri of the DMTS cluster. Only supported with api versions 2017-07-14 or higher."
-        }
-      }
-    },
-    "GatewayListStatusLive": {
-      "description": "Status of gateway is live",
-      "type": "object",
-      "properties": {
-        "status": {
-          "type": "string",
-          "description": "Live message of list gateway."
-        }
-      }
-    },
-    "GatewayListStatusError": {
-      "description": "Status of gateway is error",
-      "type": "object",
-      "properties": {
-        "error": {
-          "$ref": "#/definitions/GatewayErrors",
-          "description": "Error of the list gateway status."
-        }
-      }
-    },
-    "GatewayErrors": {
-      "description": "Detail of gateway errors",
-      "type": "object",
-      "properties": {
-        "code": {
-          "type": "string",
-          "description": "Error code of list gateway."
-        },
-        "message": {
-          "type": "string",
-          "description": "Error message of list gateway."
         }
       }
     },
