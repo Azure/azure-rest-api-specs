@@ -659,17 +659,17 @@
       "properties": {
         "gatewayResourceId": {
           "type": "string",
-          "description": "Gateway resource to be associated with the server. Only supported with api versions 2017-07-14 or higher."
+          "description": "Gateway resource to be associated with the server."
         },
         "gatewayObjectId": {
           "type": "string",
           "readOnly": true,
-          "description": "Gateway object id from in the DMTS cluster for the gateway resource. Only supported with api versions 2017-07-14 or higher."
+          "description": "Gateway object id from in the DMTS cluster for the gateway resource."
         },
         "dmtsClusterUri": {
           "type": "string",
           "readOnly": true,
-          "description": "Uri of the DMTS cluster. Only supported with api versions 2017-07-14 or higher."
+          "description": "Uri of the DMTS cluster."
         }
       }
     },
@@ -679,6 +679,7 @@
       "properties": {
         "status": {
           "type": "string",
+          "enum": ["Live"],
           "description": "Live message of list gateway."
         }
       }
@@ -688,12 +689,12 @@
       "type": "object",
       "properties": {
         "error": {
-          "$ref": "#/definitions/GatewayErrors",
+          "$ref": "#/definitions/GatewayError",
           "description": "Error of the list gateway status."
         }
       }
     },
-    "GatewayErrors": {
+    "GatewayError": {
       "description": "Detail of gateway errors",
       "type": "object",
       "properties": {
