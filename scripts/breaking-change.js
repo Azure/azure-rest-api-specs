@@ -38,6 +38,7 @@ function runOad(oldSpec, newSpec) {
   console.log(`>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>`);
 
   return oad.compare(oldSpec, newSpec, { consoleLogLevel: 'warn', json: true }).then((result) => {
+    console.log(result);
     if (result !== undefined && typeof result.valueOf() === 'string' && result.indexOf(`"type": "Error"`) > -1) {
       console.log(`There are potential breaking changes in this PR. Please review before moving forward. Thanks!`);
       process.exitCode = 1;
