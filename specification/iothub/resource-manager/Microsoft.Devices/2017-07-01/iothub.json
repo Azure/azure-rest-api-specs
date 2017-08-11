@@ -1016,10 +1016,10 @@
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Devices/IotHubs/{resourceName}/certificates": {
       "get": {
-        "tags": [ "GET" ],
+        "tags": [ "Certificates" ],
         "summary": "Get the certificate list.",
-        "description": "Get the certificate list.",
-        "operationId": "IotHubResource_ListCertificates",
+        "description": "Returns the list of certificates.",
+        "operationId": "Certificates_ListByIoTHub",
         "parameters": [
           {
             "$ref": "#/parameters/api-version"
@@ -1061,10 +1061,10 @@
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Devices/IotHubs/{resourceName}/certificates/{certificateName}": {
       "get": {
-        "tags": [ "GET" ],
+        "tags": [ "Certificates" ],
         "summary": "Get the certificate.",
         "description": "Returns the certificate.",
-        "operationId": "Certificate_Get",
+        "operationId": "Certificates_Get",
         "parameters": [
           {
             "$ref": "#/parameters/api-version"
@@ -1111,10 +1111,10 @@
         "deprecated": false
       },
       "put": {
-        "tags": [ "PUT" ],
+        "tags": [ "Certificates" ],
         "summary": "Upload the certificate to the IoT hub.",
         "description": "Adds new or replaces existing certificate.",
-        "operationId": "Certificate_CreateOrUpdate",
+        "operationId": "Certificates_CreateOrUpdate",
         "parameters": [
           {
             "$ref": "#/parameters/api-version"
@@ -1142,7 +1142,7 @@
             "description":"The name of the certificate create or update.",
             "required":true,
             "type":"string",
-			"maxLength": 256
+            "maxLength": 256
           },
           {
             "name": "certificateDescription",
@@ -1177,10 +1177,10 @@
         "deprecated": false
       },
       "delete": {
-        "tags": [ "DELETE" ],
+        "tags": [ "Certificates" ],
         "summary": "Delete an X509 certificate.",
         "description": "Deletes an existing X509 certificate or does nothing if it does not exist.",
-        "operationId": "Certificate_Delete",
+        "operationId": "Certificates_Delete",
         "parameters": [
           {
             "$ref": "#/parameters/api-version"
@@ -1213,8 +1213,11 @@
         "responses": {
           "200": {
             "description": "Certificate has been deleted."
+          },          
+          "204": {
+            "description": "Certificate does not exist."
           },
-          "default": {
+		  "default": {
             "description": "DefaultErrorResponse",
             "schema": {
               "$ref": "#/definitions/ErrorDetails"
@@ -1226,10 +1229,10 @@
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Devices/IotHubs/{resourceName}/certificates/{certificateName}/generateVerificationCode": {
       "post": {
-        "tags": [ "POST" ],
+        "tags": [ "Certificates" ],
         "summary": "Generate verification code for proof of posession flow.",
         "description": "Generates verification code for proof of posession flow. The verifification code will be used to generate a leaf certificate.",
-        "operationId": "Certificate_GenerateVerificationCode",
+        "operationId": "Certificates_GenerateVerificationCode",
         "parameters": [
           {
             "$ref": "#/parameters/api-version"
@@ -1278,10 +1281,10 @@
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Devices/IotHubs/{resourceName}/certificates/{certificateName}/verify": {
       "post": {
-        "tags": [ "POST" ],
+        "tags": [ "Certificates" ],
         "summary": "Verify certificate's private key posession.",
         "description": "Verifies the certificate's private key posession by providing the leaf cert issued by the verifying pre uploaded certificate.",
-        "operationId": "Certificate_Verify",
+        "operationId": "Certificates_Verify",
         "parameters": [
           {
             "$ref": "#/parameters/api-version"
