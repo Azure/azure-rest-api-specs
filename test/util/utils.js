@@ -83,6 +83,8 @@ exports.checkoutTargetBranch = function checkoutTargetBranch() {
   execSync(`git remote -vv`, { encoding: 'utf8' });
   execSync(`git branch --all`, { encoding: 'utf8' });
   execSync(`git fetch origin ${targetBranch}`, { encoding: 'utf8' });
+  execSync(`git diff`, { encoding: 'utf8' });
+  execSync(`git stash`, { encoding: 'utf8' });
   execSync(`git checkout ${targetBranch}`, { encoding: 'utf8' });
   execSync(`git log -3`, { encoding: 'utf8' });
 }
