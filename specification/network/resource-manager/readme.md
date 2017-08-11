@@ -41,6 +41,7 @@ input-file:
 - Microsoft.Network/2017-06-01/applicationGateway.json
 - Microsoft.Network/2017-06-01/checkDnsAvailability.json
 - Microsoft.Network/2017-06-01/expressRouteCircuit.json
+- Microsoft.Network/2017-06-01/expressRouteConnector.json
 - Microsoft.Network/2017-06-01/loadBalancer.json
 - Microsoft.Network/2017-06-01/network.json
 - Microsoft.Network/2017-06-01/networkInterface.json

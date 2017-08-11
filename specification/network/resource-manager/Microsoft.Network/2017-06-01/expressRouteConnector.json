@@ -1,0 +1,475 @@
+{
+	"swagger": "2.0",
+	"info": {
+		"description": "The Microsoft Azure Network management API provides a RESTful set of web services that interact with Microsoft Azure Networks service to manage your network resources. The API has entities that capture the relationship between an end user and the Microsoft Azure Networks service.",
+		"version": "2017-06-01",
+		"title": "NetworkManagementClient"
+	},
+	"host": "management.azure.com",
+	"schemes":[
+		"https"
+	],
+	"consumes": [
+		"application/json"
+	],
+	"produces": [
+		"application/json"
+	],
+	"security":[
+		{
+			"azure_auth": [
+				"user_impersonation"
+			]
+		}
+	],
+	"securityDefinitions": {
+		"azure_auth": {
+			"type":"oauth2",
+			"authorizationUrl":"https://login.microsoftonline.com/common/oauth2/authorize",
+			"flow":"implicit",
+			"description":"Azure Active Directory OAuth2 Flow",
+			"scopes": {
+				"user_impersonation":"impersonate your user account"
+			}
+		}
+	},
+	"paths":{
+		"/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/expressRouteConnectors/{expressRouteConnectorName}": {
+			"delete": {
+				"tags": [
+					"expressRouteConnectors"
+				],
+				"operationId": "expressRouteConnector_Delete",
+				"description": "Deletes the specified Express Route Connector Resource.",
+				"x-ms-examples": {
+                    "ExpressRouteConnectorDelete": { "$ref": "./examples/ExpressRouteConnectorDelete.json" }
+                },
+				"parameters": [
+					{
+						"$ref": "#/parameters/ResourceGroupNameParameter"
+					},
+					{
+						"$ref": "#/parameters/ExpressRouteConnectorNameParameter"
+					},
+					{
+						"$ref": "#/parameters/ApiVersionParameter"
+					},
+					{
+						"$ref": "#/parameters/SubscriptionIdParameter"
+					}
+				],
+				"responses": {
+					"202": {
+						"description": "Accepted and the operation will complete asynchronously."
+					},
+					"200": {
+						"description": "Delete successful."
+					},
+					"204": {
+						"description": "Delete successful."
+					},
+					"default": {
+						"description": "Error",
+						"schema": {
+							"$ref": "#/definitions/ErrorModel"
+						}
+					}
+				},
+				"x-ms-long-running-operation": true
+			},
+			"get": {
+				"tags": [
+					"expressRouteConnector"
+				],
+				"operationId": "expressRouteConnector_Get",
+				"x-ms-examples": {
+                    "ExpressRouteConnectorGet": { "$ref": "./examples/ExpressRouteConnectorGet.json" }
+                },
+				"description": "Gets the specfic Express Route Connector Resource from the specified resource group.",
+				"parameters": [
+					{
+						"$ref": "#/parameters/ResourceGroupNameParameter"
+					},
+					{
+						"$ref": "#/parameters/ExpressRouteConnectorNameParameter"
+					},
+					{
+						"$ref": "#/parameters/ApiVersionParameter"
+					},
+					{
+						"$ref": "#/parameters/SubscriptionIdParameter"
+					}
+				],
+				"responses": {
+					"200": {
+						"description": "Request successful. The operation returns the Express Route Connector Resource resource.",
+						"schema": {
+							"$ref": "#/definitions/expressRouteConnectorReturnObject"
+						}
+					},
+					"default": {
+						"description": "Error",
+						"schema": {
+						  "$ref": "#/definitions/ErrorModel"
+						}
+					}
+				}
+			},
+			"put": {
+				"tags": [
+					"expressRouteConnector"
+				],
+				"operationId": "expressRouteConnectors_Create",
+				"x-ms-examples": {
+                    "ExpressRouteConnectorCreate": { "$ref": "./examples/ExpressRouteConnectorCreate.json" }
+                },
+				"description": "Creates a Express Route Connector Resource between two express route circuits.",
+				"parameters": [
+				  {
+					"$ref": "#/parameters/ResourceGroupNameParameter"
+				  },
+				  {
+					"$ref": "#/parameters/ExpressRouteConnectorNameParameter"
+				  },
+                  {
+					"name": "expressRouteConnectorParameters",
+                    "in": "body",
+                    "required": true,
+                    "schema": {
+                        "$ref": "#/definitions/expressRouteConnector"
+                    },
+                    "description": "Parameters supplied to the create express route Connector operation."
+                    },
+				  {
+					"$ref": "#/parameters/ApiVersionParameter"
+				  },
+				  {
+					"$ref": "#/parameters/SubscriptionIdParameter"
+				  }
+				],
+				"responses": {
+				  "201": {
+					"description": "Create successful. The operation returns the resulting Express Route Connector Resource.",
+					"schema": {
+					  "$ref": "#/definitions/expressRouteConnectorReturnObject"
+					}
+				  },
+				  "200": {
+					"description": "Request successful. The operation returns the resulting Express Route Connector Resource.",
+					"schema": {
+					  "$ref": "#/definitions/expressRouteConnectorReturnObject"
+					}
+				  },
+				  "default": {
+					"description": "Error",
+					"schema": {
+					  "$ref": "#/definitions/ErrorModel"
+					}
+				  }
+				},
+				"x-ms-long-running-operation": true
+			},
+			"patch": {
+				"tags": [
+					"expressRouteConnector"
+				],
+				"operationId": "expressRouteConnectors_Update",
+				"x-ms-examples": {
+                    "ExpressRouteConnectorUpdate": { "$ref": "./examples/ExpressRouteConnectorUpdate.json" }
+                },
+				"description": "Updates a Express Route Connector Resource between two express route circuits.",
+				"parameters": [
+				  {
+					"$ref": "#/parameters/ResourceGroupNameParameter"
+				  },
+				  {
+					"$ref": "#/parameters/ExpressRouteConnectorNameParameter"
+				  },
+                  {
+					"name": "expressRouteConnectorParameters",
+                    "in": "body",
+                    "required": true,
+                    "schema": {
+                        "$ref": "#/definitions/expressRouteConnector"
+                    },
+                    "description": "Parameters supplied to the create express route Connector operation."
+                   },
+				  {
+					"$ref": "#/parameters/ApiVersionParameter"
+				  },
+				  {
+					"$ref": "#/parameters/SubscriptionIdParameter"
+				  }
+				],
+				"responses": {
+				  "200": {
+					"description": "Request successful. The operation returns the resulting Express Route Connector Resource.",
+					"schema": {
+					  "$ref": "#/definitions/expressRouteConnectorReturnObject"
+					}
+				  },
+				  "201": {
+					"description": "Request successful. The operation returns the resulting Express Route Connector Resource.",
+					"schema": {
+					  "$ref": "#/definitions/expressRouteConnectorReturnObject"
+					}
+				  },
+				  "default": {
+					"description": "Error",
+					"schema": {
+					  "$ref": "#/definitions/ErrorModel"
+					}
+				  }
+				},
+				"x-ms-long-running-operation": true
+			}
+		},
+	 "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/expressRouteConnectors": {
+		  "get": {
+			"tags": [
+			  "ExpressRouteConnectors"
+			],
+			"operationId": "ExpressRouteCircuitConnectors_ListByResourceGroup",
+			"x-ms-examples": {
+                    "ExpressRouteConnectorListByResourceGroup": { "$ref": "./examples/ExpressRouteConnectorListByResourceGroup.json" }
+            },
+			"description": "Gets all express route Connector resources in a given resource group and subscription.",
+			"parameters": [
+			  {
+				"$ref": "#/parameters/ResourceGroupNameParameter"
+			  },
+			  {
+				"$ref": "#/parameters/ApiVersionParameter"
+			  },
+			  {
+				"$ref": "#/parameters/SubscriptionIdParameter"
+			  }
+			],
+			"responses": {
+			  "200": {
+				"description": "Request successful. The operation returns a list of Express Route Connector resources.",
+				"schema": {
+				  "$ref": "#/definitions/expressRouteConnectorListResult"
+				}
+			  },
+			  "default": {
+				"description": "Error",
+				"schema": {
+				  "$ref": "#/definitions/ErrorModel"
+				}
+			  }
+			},
+			"x-ms-pageable": {
+				"nextLinkName": "nextLink"
+			}
+		  }
+		},	
+	"/subscriptions/{subscriptionId}/providers/Microsoft.Network/expressRouteConnectors": {
+		  "get": {
+			"tags": [
+			  "ExpressRouteConnectors"
+			],
+			"operationId": "ExpressRouteCircuitConnectors_ListBySubscription",
+			"x-ms-examples": {
+                    "ExpressRouteConnectorListBySubscription": { "$ref": "./examples/ExpressRouteConnectorListBySubscription.json" }
+            },
+			"description": "Gets all express route Connector resources in a given subscrption.",
+			"parameters": [
+			  {
+				"$ref": "#/parameters/ApiVersionParameter"
+			  },
+			  {
+				"$ref": "#/parameters/SubscriptionIdParameter"
+			  }
+			],
+			"responses": {
+			  "200": {
+				"description": "Request successful. The operation returns a list of Express Route Connector resources.",
+				"schema": {
+				  "$ref": "#/definitions/expressRouteConnectorListResult"
+				}
+			  },
+			  "default": {
+				"description": "Error",
+				"schema": {
+				  "$ref": "#/definitions/ErrorModel"
+				}
+			  }
+			},
+			"x-ms-pageable": {
+				"nextLinkName": "nextLink"
+			}
+		  }
+		}	
+	},	 
+	"definitions": {
+	    "SubResource": {
+		  "properties": {
+			"id": {
+			  "type": "string",
+			  "description": "Resource ID."
+			}
+		  }
+		},
+		"ErrorModel": {
+		  "description": "The structure of the error",
+		  "properties": {
+			"error": {
+			  "description": "The error detail ",
+			  "properties": {
+				"code": {
+				  "description": "The error code",
+				  "type": "string"
+				},
+				"message": {
+				  "description": "The error message",
+				  "type": "string"
+				}
+			  }
+			}
+		  }
+		},
+		"expressRouteConnectorReturnObjectPropertiesFormat": {
+			"properties": {
+				"circuits": {
+					"type": "array",
+					"items": {
+						"$ref": "#/definitions/SubResource",
+						"description": "The reference to the express route circuit resource."
+					},
+					"description": "List of Express Route Circuits."
+				},
+				"addressPrefix": {
+				  "type": "string",
+				  "description": "The reference of the addressPrefix resource."
+				},
+				"provisioningState": {
+					"type": "string",
+					"readOnly": true,
+					"description": "The provisioning state of the Express Route Connector Resource. Possible Values 'Updating', 'Deleting', and 'Failed'."
+				}
+			},	
+			"description": "Properties of Express Route Connector Resource Without Authorization Keys."
+		},
+		"expressRouteConnectorReturnObject": {
+			"properties": {
+				"properties": {
+				  "x-ms-client-flatten": true,
+				  "$ref": "#/definitions/expressRouteConnectorReturnObjectPropertiesFormat"
+				},
+				"etag": {
+				  "readOnly": true,
+				  "type": "string",
+				  "description": "Gets a unique read-only string that changes whenever the resource is updated."
+				}
+			  },
+			  "allOf": [
+				{
+				  "$ref": "./network.json#/definitions/Resource"
+				}
+			  ],
+			  "description": "Express Route Connector Resource without Authorization Keys"
+		},
+		"expressRouteConnectorPropertiesFormat": {
+			"required": [
+				"circuits",
+				"addressPrefix"
+			],
+			"properties": {
+				"circuits": {
+					"type": "array",
+					"items": {
+						"$ref": "./network.json#/definitions/SubResource",
+						"description": "The reference to the express route circuit resource."
+					},
+					"description": "List of Express Route Circuits."
+				},
+				"authorizationKeys": {
+					"type": "array",
+					"items": {
+						"type": "string",
+						"description": "Authorization Key"
+					},
+					"description": "List of Circuit Authorization Keys."
+				},
+				"addressPrefix": {
+				  "type": "string",
+				  "description": "The reference of the addressPrefix resource."
+				},
+				"provisioningState": {
+					"type": "string",
+					"readOnly": true,
+					"description": "The provisioning state of the Express Route Connector Resource. Possible Values 'Updating', 'Deleting', and 'Failed'."
+				}
+			},	
+			"description": "Properties of Express Route Connector Resource."
+		},
+		"expressRouteConnector": {
+		  "properties": {
+			"properties": {
+			  "x-ms-client-flatten": true,
+			  "$ref": "#/definitions/expressRouteConnectorPropertiesFormat"
+			},
+			"etag": {
+			  "readOnly": true,
+			  "type": "string",
+			  "description": "Gets a unique read-only string that changes whenever the resource is updated."
+			}
+		  },
+		  "allOf": [
+			{
+			  "$ref": "./network.json#/definitions/Resource"
+			}
+		  ],
+		  "description": "Express Route Connector Resource"
+		},
+					
+		"expressRouteConnectorListResult": {
+		  "properties": {
+			"value": {
+			  "type": "array",
+			  "items": {
+				"$ref": "#/definitions/expressRouteConnectorReturnObject"
+			  },
+			  "description": "A list of Express Route Connector Resource in a resource group."
+			},
+			"nextLink": {
+			  "type": "string",
+			  "readOnly": true,
+			  "description": "The URL to get the next set of results."
+			}
+		  },
+		  "description": "Response for ListExpressRouteCircuit API service call."
+		}
+	},
+	"parameters": {
+		"SubscriptionIdParameter": {
+		  "name": "subscriptionId",
+		  "in": "path",
+		  "required": true,
+		  "type": "string",
+		  "description": "The subscription credentials which uniquely identify the Microsoft Azure subscription. The subscription ID forms part of the URI for every service call."
+		},
+		"ApiVersionParameter": {
+		  "name": "api-version",
+		  "in": "query",
+		  "required": true,
+		  "type": "string",
+		  "description": "Client API version."
+		},
+		"ResourceGroupNameParameter": {
+			"name": "resourceGroupName",
+			"in": "path",
+			"required": true,
+			"type": "string",
+			"description": "The name of the resource group in which Express Route Connector Resource would reside."
+		},
+		"ExpressRouteConnectorNameParameter": {
+			"name": "expressRouteConnectorName",
+			"in": "path",
+			"required": true,
+			"type": "string",
+			"description": "The name of the Express Route Connector Resource."
+		}
+	}
+ }
