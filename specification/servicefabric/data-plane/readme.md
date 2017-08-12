@@ -44,7 +44,7 @@ input-file:
 
 These settings apply only when `--tag=5.6` is specified on the command line.
 
-``` yaml $(tag) == '1.0.0'
+``` yaml $(tag) == '5.6'
 input-file:
 - Microsoft.ServiceFabric/5.6/servicefabric.json
 ```
