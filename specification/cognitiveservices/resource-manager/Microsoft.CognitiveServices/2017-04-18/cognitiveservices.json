@@ -559,11 +559,7 @@
             "$ref": "#/parameters/apiVersionParameter"
           },
           {
-            "name": "location",
-            "in": "path",
-            "description": "Resource location.",
-            "required": true,
-            "type": "string"
+            "$ref": "#/parameters/locationParameter"
           },
           {
             "name": "parameters",
@@ -1032,6 +1028,14 @@
       "required": true,
       "type": "string",
       "description": "Version of the API to be used with the client request. Current version is 2017-04-18"
+    },
+    "locationParameter": {
+      "name": "location",
+      "in": "path",
+      "description": "Resource location.",
+      "required": true,
+      "type": "string",
+      "x-ms-parameter-location": "method"
     }
   }
 }
