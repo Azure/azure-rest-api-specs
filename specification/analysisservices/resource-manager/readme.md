@@ -26,7 +26,7 @@ These are the global settings for the AnalysisServices API.
 
 ``` yaml
 openapi-type: arm
-tag: package-2016-05
+tag: package-2017-08
 ```
 
 
@@ -37,6 +37,15 @@ These settings apply only when `--tag=package-2016-05` is specified on the comma
 ``` yaml $(tag) == 'package-2016-05'
 input-file:
 - Microsoft.AnalysisServices/2016-05-16/analysisservices.json
+```
+
+### Tag: package-2017-08
+
+These settings apply only when `--tag=package-2017-08` is specified on the command line.
+
+``` yaml $(tag) == 'package-2017-08'
+input-file:
+- Microsoft.AnalysisServices/2017-08-01-beta/analysisservices.json
 ```
 
 ---
