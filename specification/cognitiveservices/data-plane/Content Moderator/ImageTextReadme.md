@@ -2,7 +2,7 @@
 
 > see https://aka.ms/autorest
 
-Configuration for generating Face SDK.
+Configuration for generating Content Moderator SDK.
 
 The current release is `release_1_0`.
 
