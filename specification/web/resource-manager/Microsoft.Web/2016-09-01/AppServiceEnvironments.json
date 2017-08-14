@@ -2707,7 +2707,7 @@
       "type": "object",
       "allOf": [
         {
-          "$ref": "#/definitions/Resource"
+          "$ref": "#/definitions/ProxyOnlyResource"
         }
       ],
       "properties": {
@@ -2847,28 +2847,64 @@
         }
       }
     },
+    "ProxyOnlyResource": {
+      "description": "Azure proxy only resource. This resource is not tracked by Azure Resource Manager.",
+      "properties": {
+        "id": {
+          "description": "Resource Id.",
+          "type": "string",
+          "readOnly": true
+        },
+        "name": {
+          "description": "Resource Name.",
+          "type": "string",
+          "readOnly": true
+        },
+        "kind": {
+          "description": "Kind of resource.",
+          "type": "string"
+        },
+        "type": {
+          "description": "Resource type.",
+          "type": "string",
+          "readOnly": true
+        }
+      },
+      "x-ms-azure-resource": true
+    },
     "PushSettings": {
       "description": "Push settings for the App.",
-      "required": [
-        "isPushEnabled"
-      ],
       "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/ProxyOnlyResource"
+        }
+      ],
       "properties": {
-        "isPushEnabled": {
-          "description": "Gets or sets a flag indicating whether the Push endpoint is enabled.",
-          "type": "boolean"
-        },
-        "tagWhitelistJson": {
-          "description": "Gets or sets a JSON string containing a list of tags that are whitelisted for use by the push registration endpoint.",
-          "type": "string"
-        },
-        "tagsRequiringAuth": {
-          "description": "Gets or sets a JSON string containing a list of tags that require user authentication to be used in the push registration endpoint.\n Tags can consist of alphanumeric characters and the following:\n '_', '@', '#', '.', ':', '-'. \n Validation should be performed at the PushRequestHandler.",
-          "type": "string"
-        },
-        "dynamicTagsJson": {
-          "description": "Gets or sets a JSON string containing a list of dynamic tags that will be evaluated from user claims in the push registration endpoint.",
-          "type": "string"
+        "properties": {
+          "description": "PushSettings resource specific properties",
+          "required": [
+            "isPushEnabled"
+          ],
+          "properties": {
+            "isPushEnabled": {
+              "description": "Gets or sets a flag indicating whether the Push endpoint is enabled.",
+              "type": "boolean"
+            },
+            "tagWhitelistJson": {
+              "description": "Gets or sets a JSON string containing a list of tags that are whitelisted for use by the push registration endpoint.",
+              "type": "string"
+            },
+            "tagsRequiringAuth": {
+              "description": "Gets or sets a JSON string containing a list of tags that require user authentication to be used in the push registration endpoint.\n Tags can consist of alphanumeric characters and the following:\n '_', '@', '#', '.', ':', '-'. \n Validation should be performed at the PushRequestHandler.",
+              "type": "string"
+            },
+            "dynamicTagsJson": {
+              "description": "Gets or sets a JSON string containing a list of dynamic tags that will be evaluated from user claims in the push registration endpoint.",
+              "type": "string"
+            }
+          },
+          "x-ms-client-flatten": true
         }
       }
     },
@@ -2931,7 +2967,7 @@
       }
     },
     "Resource": {
-      "description": "Azure resource.",
+      "description": "Azure resource. This resource is tracked in Azure Resource Manager",
       "required": [
         "location"
       ],
@@ -3069,7 +3105,7 @@
       "type": "object",
       "allOf": [
         {
-          "$ref": "#/definitions/Resource"
+          "$ref": "#/definitions/ProxyOnlyResource"
         }
       ],
       "properties": {
@@ -3998,7 +4034,7 @@
       "type": "object",
       "allOf": [
         {
-          "$ref": "#/definitions/Resource"
+          "$ref": "#/definitions/ProxyOnlyResource"
         }
       ],
       "properties": {
@@ -4260,7 +4296,7 @@
       "type": "object",
       "allOf": [
         {
-          "$ref": "#/definitions/Resource"
+          "$ref": "#/definitions/ProxyOnlyResource"
         }
       ],
       "properties": {

@@ -26,10 +26,11 @@ exports.compositeSchemaUrl = "https://raw.githubusercontent.com/Azure/autorest/m
 exports.isWindows = (process.platform.lastIndexOf('win') === 0);
 exports.prOnly = undefined !== process.env['PR_ONLY'] ? process.env['PR_ONLY'] : 'false';
 
-exports.globPath = path.join(__dirname, '../', '../', '/specification/**/*.(json|yaml)');
-exports.swaggers = glob.sync(exports.globPath, { ignore: ['**/examples/**/*.(json|yaml)', '**/quickstart-templates/*.(json|yaml)', '**/schema/*.(json|yaml)'] });
-exports.exampleGlobPath = path.join(__dirname, '../', '../', '/specification/**/examples/**/*.(json|yaml)');
+exports.globPath = path.join(__dirname, '../', '../', '/specification/**/*.json');
+exports.swaggers = glob.sync(exports.globPath, { ignore: ['**/examples/**/*.json', '**/quickstart-templates/*.json', '**/schema/*.json'] });
+exports.exampleGlobPath = path.join(__dirname, '../', '../', '/specification/**/examples/**/*.json');
 exports.examples = glob.sync(exports.exampleGlobPath);
+exports.readmes =  glob.sync(path.join(__dirname, '../', '../', '/specification/**/readme.md'));
 
 // Remove byte order marker. This catches EF BB BF (the UTF-8 BOM)
 // because the buffer-to-string conversion in `fs.readFile()`
@@ -82,6 +83,8 @@ exports.checkoutTargetBranch = function checkoutTargetBranch() {
   execSync(`git remote -vv`, { encoding: 'utf8' });
   execSync(`git branch --all`, { encoding: 'utf8' });
   execSync(`git fetch origin ${targetBranch}`, { encoding: 'utf8' });
+  execSync(`git diff`, { encoding: 'utf8' });
+  execSync(`git stash`, { encoding: 'utf8' });
   execSync(`git checkout ${targetBranch}`, { encoding: 'utf8' });
   execSync(`git log -3`, { encoding: 'utf8' });
 }
