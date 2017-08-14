@@ -2343,6 +2343,69 @@
           }
         }
       },
+      "put": {
+        "tags": [
+          "ReplicationRecoveryServicesProviders"
+        ],
+        "summary": "Adds a recovery services provider.",
+        "description": "The operation to add a recovery services provider.",
+        "operationId": "ReplicationRecoveryServicesProviders_Create",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/ApiVersion"
+          },
+          {
+            "$ref": "#/parameters/ResourceName"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupName"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionId"
+          },
+          {
+            "name": "fabricName",
+            "in": "path",
+            "description": "Fabric name.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "providerName",
+            "in": "path",
+            "description": "Recovery services provider name.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "addProviderInput",
+            "in": "body",
+            "description": "Add provider input.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/AddRecoveryServicesProviderInput"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/RecoveryServicesProvider"
+            }
+          },
+          "202": {
+            "description": "Accepted"
+          }
+        },
+        "x-ms-long-running-operation": true
+      },
       "delete": {
         "tags": [
           "ReplicationRecoveryServicesProviders"
@@ -6224,13 +6287,6 @@
             "$ref": "#/definitions/HealthError"
           }
         },
-        "failoverHealthErrorDetails": {
-          "description": "Gets or sets failover health error details.",
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/HealthError"
-          }
-        },
         "health": {
           "description": "Health of fabric.",
           "type": "string"
@@ -8376,7 +8432,7 @@
           "type": "integer"
         },
         "allowedScenarios": {
-          "description": "The scenarions allowed on this provider.",
+          "description": "The scenarios allowed on this provider.",
           "type": "array",
           "items": {
             "type": "string"
@@ -8388,8 +8444,94 @@
           "items": {
             "$ref": "#/definitions/HealthError"
           }
+        },
+        "draIdentifier": {
+          "description": "The DRA Id.",
+          "type": "string"
+        },
+        "identityDetails": {
+          "$ref": "#/definitions/IdentityInformation",
+          "description": "The identity details."
         }
       }
+    },
+    "IdentityInformation": {
+      "description": "Identity details.",
+      "type": "object",
+      "properties": {
+        "identityProviderType": {
+          "description": "The identity provider type. Value is the ToString() of a IdentityProviderType value.",
+          "enum": [
+            "RecoveryServicesActiveDirectory",
+            "CustomerActiveDirectory"
+          ],
+          "type": "string",
+          "x-ms-enum": {
+            "name": "IdentityProviderType",
+            "modelAsString": false
+          }
+        },
+        "tenantId": {
+          "description": "The tenant Id for the service principal with which the on-premise management/data plane components would communicate with our Azure services.",
+          "type": "string"
+        },
+        "applicationId": {
+          "description": "The application/client Id for the service principal with which the on-premise management/data plane components would communicate with our Azure services.",
+          "type": "string"
+        },
+        "objectId": {
+          "description": "The object Id of the service principal with which the on-premise management/data plane components would communicate with our Azure services.",
+          "type": "string"
+        },
+        "audience": {
+          "description": "The intended Audience of the service principal with which the on-premise management/data plane components would communicate with our Azure services.",
+          "type": "string"
+        },
+        "aadAuthority": {
+          "description": "The base authority for Azure Active Directory authentication.",
+          "type": "string"
+        },
+        "certificateThumbprint": {
+          "description": "The certificate thumbprint. Applicable only if IdentityProviderType is RecoveryServicesActiveDirectory.",
+          "type": "string"
+        }
+      }
+    },
+    "AddRecoveryServicesProviderInput": {
+      "description": "Input required to add a provider.",
+      "type": "object",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/AddRecoveryServicesProviderInputProperties",
+          "description": "The properties of an add provider request."
+        }
+      }
+    },
+    "AddRecoveryServicesProviderInputProperties": {
+      "description": "The properties of an add provider request.",
+      "type": "object",
+      "properties": {
+        "machineName": {
+          "description": "The name of the machine where the provider is getting added.",
+          "type": "string"
+        },
+        "identityProviderInput": {
+          "$ref": "#/definitions/IdentityProviderInput",
+          "description": "The identity provider input for the DRA."
+        }
+      }
+    },
+    "IdentityProviderInput": {
+      "description": "Identity provider specific settings.",
+      "type": "object",
+      "properties": {
+        "instanceType": {
+          "description": "Gets the class type.",
+          "type": "string",
+          "readOnly": true
+        }
+      },
+      "discriminator": "instanceType"
     },
     "ReplicationProtectedItem": {
       "description": "Replication protected item.",
@@ -9295,7 +9437,7 @@
           "description": "The list of errors on the vault.",
           "type": "array",
           "items": {
-            "$ref": "#/definitions/HealthErrorSummary"
+            "$ref": "#/definitions/HealthError"
           }
         },
         "protectedItemsHealth": {
@@ -9305,6 +9447,24 @@
         "fabricsHealth": {
           "$ref": "#/definitions/ResourceHealthSummary",
           "description": "The list of the health detail of the fabrics in the vault."
+        }
+      }
+    },
+    "ResourceHealthSummary": {
+      "description": "Base class to define the health summary of the resources contained under an Arm resource.",
+      "type": "object",
+      "properties": {
+        "resourceCount": {
+          "format": "int32",
+          "description": "The count of total resources umder the container.",
+          "type": "integer"
+        },
+        "issues": {
+          "description": "The list of summary of health errors across the resources under the container.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/HealthErrorSummary"
+          }
         }
       }
     },
@@ -9318,11 +9478,30 @@
         },
         "category": {
           "description": "The category of the health error.",
-          "type": "string"
+          "enum": [
+            "Replication",
+            "TestFailover",
+            "Configuration"
+          ],
+          "type": "string",
+          "x-ms-enum": {
+            "name": "HealthErrorCategory",
+            "modelAsString": false
+          }
         },
         "severity": {
           "description": "Severity of error.",
-          "type": "string"
+          "enum": [
+            "NONE",
+            "Warning",
+            "Error",
+            "Info"
+          ],
+          "type": "string",
+          "x-ms-enum": {
+            "name": "Severity",
+            "modelAsString": false
+          }
         },
         "summaryMessage": {
           "description": "The summary message of the health error.",
@@ -9341,24 +9520,6 @@
           "type": "array",
           "items": {
             "type": "string"
-          }
-        }
-      }
-    },
-    "ResourceHealthSummary": {
-      "description": "Base class to define the health summary of the resources contained under an Arm resource.",
-      "type": "object",
-      "properties": {
-        "resourceCount": {
-          "format": "int32",
-          "description": "The count of total resources umder the container.",
-          "type": "integer"
-        },
-        "issues": {
-          "description": "The list of summary of health errors across the resources under the container.",
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/HealthErrorSummary"
           }
         }
       }
@@ -9783,6 +9944,10 @@
           "format": "int32",
           "description": "CS SSL cert expiry date.",
           "type": "integer"
+        },
+        "osVersion": {
+          "description": "OS Version of the process server. Note: This will get populated if user has CS version greater than 9.12.0.0.",
+          "type": "string"
         }
       }
     },
@@ -9844,6 +10009,10 @@
           "format": "int32",
           "description": "Disk count of the master target.",
           "type": "integer"
+        },
+        "osVersion": {
+          "description": "OS Version of the master target.",
+          "type": "string"
         }
       }
     },
@@ -9938,7 +10107,16 @@
           "$ref": "#/definitions/FabricSpecificDetails"
         }
       ],
-      "properties": {},
+      "properties": {
+        "srsServiceEndpoint": {
+          "description": "The endpoint for making requests to the SRS Service.",
+          "type": "string"
+        },
+        "rcmServiceEndpoint": {
+          "description": "The endpoint for making requests to the RCM Service.",
+          "type": "string"
+        }
+      },
       "x-ms-discriminator-value": "VMwareV2"
     },
     "HyperVReplicaBaseReplicationDetails": {
@@ -10034,6 +10212,10 @@
         },
         "selectionType": {
           "description": "Selection type for failover.",
+          "type": "string"
+        },
+        "recoveryNicIpAddressType": {
+          "description": "IP allocation type for recoery VM.",
           "type": "string"
         }
       }
@@ -10531,6 +10713,10 @@
         "replicaId": {
           "description": "The replica id of the protected item.",
           "type": "string"
+        },
+        "osVersion": {
+          "description": "The OS Version of the protected item.",
+          "type": "string"
         }
       },
       "x-ms-discriminator-value": "InMageAzureV2"
@@ -10787,6 +10973,10 @@
         },
         "replicaId": {
           "description": "The replica id of the protected item.",
+          "type": "string"
+        },
+        "osVersion": {
+          "description": "The OS Version of the protected item.",
           "type": "string"
         }
       },
@@ -13979,6 +14169,54 @@
       },
       "x-ms-discriminator-value": "A2A"
     },
+    "CustomerAadIdentityProviderInput": {
+      "description": "Identity provider specific settings.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/IdentityProviderInput"
+        }
+      ],
+      "properties": {
+        "tenantId": {
+          "description": "The tenant Id for the service principal with which the on-premise management/data plane components would communicate with our Azure services.",
+          "type": "string"
+        },
+        "applicationId": {
+          "description": "The application/client Id for the service principal with which the on-premise management/data plane components would communicate with our Azure services.",
+          "type": "string"
+        },
+        "objectId": {
+          "description": "The object Id of the service principal with which the on-premise management/data plane components would communicate with our Azure services.",
+          "type": "string"
+        },
+        "audience": {
+          "description": "The intended Audience of the service principal with which the on-premise management/data plane components would communicate with our Azure services.",
+          "type": "string"
+        },
+        "aadAuthority": {
+          "description": "The base authority for Azure Active Directory authentication.",
+          "type": "string"
+        }
+      },
+      "x-ms-discriminator-value": "CustomerActiveDirectory"
+    },
+    "RecoveryServicesAadIdentityProviderInput": {
+      "description": "Identity provider specific settings.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/IdentityProviderInput"
+        }
+      ],
+      "properties": {
+        "rawCertData": {
+          "description": "The raw certificate data (no private key).",
+          "type": "string"
+        }
+      },
+      "x-ms-discriminator-value": "RecoveryServicesActiveDirectory"
+    },
     "AzureFabricCreationInput": {
       "description": "Fabric provider specific settings.",
       "type": "object",
@@ -13994,6 +14232,17 @@
         }
       },
       "x-ms-discriminator-value": "A2A"
+    },
+    "VMwareV2FabricCreationInput": {
+      "description": "Fabric provider specific settings.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/FabricSpecificCreationInput"
+        }
+      ],
+      "properties": {},
+      "x-ms-discriminator-value": "VMwareV2"
     }
   },
   "parameters": {
