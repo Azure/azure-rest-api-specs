@@ -4792,19 +4792,13 @@
         "tags": [
           "WebApps"
         ],
-        "summary": "Recovers a deleted web app.",
-        "description": "Recovers a deleted web app.",
+        "summary": "Recovers a web app to a previous snapshot.",
+        "description": "Recovers a web app to a previous snapshot.",
         "operationId": "WebApps_Recover",
         "consumes": [
           "application/json",
           "text/json",
           "application/x-www-form-urlencoded"
-        ],
-        "produces": [
-          "application/json",
-          "text/json",
-          "application/xml",
-          "text/xml"
         ],
         "parameters": [
           {
@@ -4834,11 +4828,8 @@
           }
         ],
         "responses": {
-          "200": {
-            "description": "OK",
-            "schema": {
-              "$ref": "#/definitions/RecoverResponse"
-            }
+          "202": {
+            "description": "Recovery operation started"
           }
         },
         "x-ms-long-running-operation": true
@@ -10086,19 +10077,13 @@
         "tags": [
           "WebApps"
         ],
-        "summary": "Recovers a deleted web app.",
-        "description": "Recovers a deleted web app.",
+        "summary": "Recovers a web app to a previous snapshot.",
+        "description": "Recovers a web app to a previous snapshot.",
         "operationId": "WebApps_RecoverSlot",
         "consumes": [
           "application/json",
           "text/json",
           "application/x-www-form-urlencoded"
-        ],
-        "produces": [
-          "application/json",
-          "text/json",
-          "application/xml",
-          "text/xml"
         ],
         "parameters": [
           {
@@ -10135,11 +10120,8 @@
           }
         ],
         "responses": {
-          "200": {
-            "description": "OK",
-            "schema": {
-              "$ref": "#/definitions/RecoverResponse"
-            }
+          "202": {
+            "description": "Recovery operation started"
           }
         },
         "x-ms-long-running-operation": true
@@ -14301,28 +14283,6 @@
         }
       }
     },
-    "RecoverResponse": {
-      "description": "Response for an app recovery request.",
-      "type": "object",
-      "allOf": [
-        {
-          "$ref": "#/definitions/Resource"
-        }
-      ],
-      "properties": {
-        "properties": {
-          "description": "RecoverResponse resource specific properties",
-          "properties": {
-            "operationId": {
-              "description": "ID of the recovery operation. Can be used to check the status of the corresponding operation.",
-              "type": "string",
-              "readOnly": true
-            }
-          },
-          "x-ms-client-flatten": true
-        }
-      }
-    },
     "RelayServiceConnectionEntity": {
       "description": "Hybrid Connection for an App Service app.",
       "type": "object",
@@ -14933,6 +14893,13 @@
             "cloningInfo": {
               "$ref": "#/definitions/CloningInfo",
               "description": "If specified during app creation, the app is cloned from a source app.",
+              "x-ms-mutability": [
+                "create"
+              ]
+            },
+            "snapshotInfo": {
+              "$ref": "#/definitions/SnapshotRecoveryRequest",
+              "description": "If specified during app creation, the app is created from a previous snapshot.",
               "x-ms-mutability": [
                 "create"
               ]
@@ -15820,7 +15787,6 @@
           "description": "Snapshot resource specific properties",
           "properties": {
             "time": {
-              "format": "date-time",
               "description": "The time the snapshot was taken.",
               "type": "string",
               "readOnly": true
@@ -15866,8 +15832,7 @@
           ],
           "properties": {
             "snapshotTime": {
-              "format": "date-time",
-              "description": "Point in time in which the app recovery should be attempted.",
+              "description": "Point in time in which the app recovery should be attempted, formatted as a DateTime string.",
               "type": "string"
             },
             "recoveryTarget": {
@@ -15875,11 +15840,15 @@
               "description": "Specifies the web app that snapshot contents will be written to."
             },
             "overwrite": {
-              "description": "<code>true</code> if the recovery operation can overwrite source app; otherwise, <code>false</code>.",
+              "description": "If <code>true</code> the recovery operation can overwrite source app; otherwise, <code>false</code>.",
               "type": "boolean"
             },
             "recoverConfiguration": {
-              "description": "Site configuration, in addition to content, will be reverted if this is true.",
+              "description": "If true, site configuration, in addition to content, will be reverted.",
+              "type": "boolean"
+            },
+            "ignoreConflictingHostNames": {
+              "description": "If true, custom hostname conflicts will be ignored when recovering to a target web app.\n This setting is only necessary when RecoverConfiguration is enabled.",
               "type": "boolean"
             }
           },
