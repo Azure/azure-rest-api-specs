@@ -26,7 +26,7 @@ These are the global settings for the AnalysisServices API.
 
 ``` yaml
 openapi-type: arm
-tag: package-2017-07-08-beta
+tag: package-2017-08-beta
 ```
 
 
