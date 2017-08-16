@@ -57,7 +57,7 @@ We request OpenAPI(Swagger) spec authoring be assigned to engineers who have an
 | [R3017](#R3017)	| [GuidUsage](#R3017) |
 | [R2057](#R2057)	| [InvalidSkuModel](#R2057) |
 | [R3010](#R3010)	| [TrackedResourceListByImmediateParent](#R3010) |
-| [R2061](#R2061)	| [ParameterizeProperties](#R2061) |
+| [R2004](#R2004)	| [NonApplicationJsonType](#R2004) |
 
 ### SDK Violations
 
@@ -102,7 +102,6 @@ We request OpenAPI(Swagger) spec authoring be assigned to engineers who have an
 | [R2066](#R2066)	| [PostOperationIdContainsUrlVerb](#R2066) |
 | [R2015](#R2015) | [ParameterNotDefinedInGlobalParameters](#R2015) |
 | [R1010](#R1010) | [AvoidMSDNReferences](#R1010) |
-| [R2004](#R2004)	| [NonApplicationJsonType](#R2004) |
 | [R2017](#R2017)	| [PutRequestResponseScheme](#R2017) |
 | [R1009](#R1009) | [DeleteInOperationName](#R1009) |
 | [R1005](#R1005) | [GetInOperationName](#R1005) |
@@ -215,7 +214,7 @@ What's a tracked resource? A Tracked Resource is an ARM Resource with "location"
 **How to fix the violation**: Add a PATCH operation that allows at least the update of tags for the tracked resource - if the operation does not exist for the service, this fix requires a service side change. 
 If the resource pointed by the rule is not a tracked resource, this warning may be a false positive, please clarify this with your PR reviewer.
 
-**Impact on generated code**: Generated SDK code will expose the corresponding PATCH operation only if it's present in the specification.
+**Impact on generated code**: Generated SDK code will expose the corresponding PATCH operation only if it's present in the specification. If PATCH operation only supports updating tags, then you will potentially have two operations in the SDK: "Update" & "CreateOrUpdate", the first updates only tags while the second allows updating a bigger set of properties, which is not the best customer experience. Please strongly consider adding all mutable properties to the "Update" operation.
 
 **Examples**: N/A
 
@@ -587,15 +586,13 @@ Links: [Index](#index) | [Error vs. Warning](#error-vs-warning) | [Automated Rul
 Links: [Index](#index) | [Error vs. Warning](#error-vs-warning) | [Automated Rules](#automated-rules) | [RPC](#rpc-violations): [Errors](#rpc-errors) or [Warnings](#rpc-warnings) | [SDK](#sdk-violations): [Errors](#sdk-errors) or [Warnings](#sdk-warnings)
 
 ### <a name="R2004" />R2004 NonApplicationJsonType
-**Output Message**: Please make sure that media types other than 'application/json' are supported by your service.
+**Output Message**: Only content-type 'application/json' is supported by ARM..
 
 **Description**: Verifies whether operation supports "application/json" as consumes or produces section.
 
-**Why the rule is important**: Per the ARM SDK guidelines, the AutoRest is used to generated the language SDKs. All the supported language generator currently handles "application/json" but some SDKs may support other content-types. This rule is in place to warn the swagger writter that not all the SDKs would work with other content-types.
+**Why the rule is important**: Per [ARM SDK guidelines](https://github.com/Azure/azure-resource-manager-rpc/blob/master/v1.0/common-api-details.md#client-request-headers) only content-type 'application/json' is supported.
 
-**How to fix the violation**: Please consult with AutoRest to ensure that the content type desired can be supported.
-
-**Impact on generated code**: If the other than `application/json` type is provided, not all SDKs would support that content-type.
+**How to fix the violation**: Make sure to include only 'application/json' in the spec consumes/produces. Make sure your service supports 'application/json'.
 
 **Examples**: N/A
 
@@ -1263,46 +1260,6 @@ Links: [Index](#index) | [Error vs. Warning](#error-vs-warning) | [Automated Rul
 **How to fix the violation**: Include the [x-ms-enum extension](https://github.com/Azure/autorest/blob/master/docs/extensions/readme.md#x-ms-enum) per indicated in its documentation. Consider setting "modelAsString": true, if you'd like the enum to be modeled as a string in generated SDKs, no enum validation will happen, though the values are exposed to the user for a better experience.
 
 **Examples**: Please refer to [x-ms-enum extension](https://github.com/Azure/autorest/blob/master/docs/extensions/readme.md#x-ms-enum).
-
-Links: [Index](#index) | [Error vs. Warning](#error-vs-warning) | [Automated Rules](#automated-rules) | [RPC](#rpc-violations): [Errors](#rpc-errors) or [Warnings](#rpc-warnings) | [SDK](#sdk-violations): [Errors](#sdk-errors) or [Warnings](#sdk-warnings)
-
-### <a name="R2061" />R2061 ParameterizeProperties
-**Output Message**: Type values \"{0}\" have default value(s), please consider parameterizing them
-
-**Description**: Path URLs must be of the form `/subscriptions/{subscriptionId}/providers/<ProviderName>/typename/{typevalue}`, i.e., typevalues must be parameterized.
-
-**Why the rule is important**: Path URLs should follow a consistent pattern across RPs. Consistent URL patterns also ensure determination of a resource from the URL and in turn trigger other resource related rules.
-
-**How to fix the violation**: Parameterize all type values as path parameters.
-
-**Bad Examples**: 
-```
-"/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Storage/storageAccounts/sampleAccount":{
-
-}
-```
-**Good Examples**: 
-```
-"/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Storage/storageAccounts/{accountName}":{
-  "get":{
-        "parameters": [
-          {
-            "$ref": "#/parameters/ResourceGroupName"
-          },
-          {
-            "name": "accountName",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "description": "The name of the storage account within the specified resource group. Storage account names must be between 3 and 24 characters in length and use numbers and lower-case letters only.",
-            "maxLength": 24,
-            "minLength": 3
-          },
-          ...
-
-  }
-}
-```
 
 Links: [Index](#index) | [Error vs. Warning](#error-vs-warning) | [Automated Rules](#automated-rules) | [RPC](#rpc-violations): [Errors](#rpc-errors) or [Warnings](#rpc-warnings) | [SDK](#sdk-violations): [Errors](#sdk-errors) or [Warnings](#sdk-warnings)
 

@@ -30,6 +30,7 @@ exports.globPath = path.join(__dirname, '../', '../', '/specification/**/*.json'
 exports.swaggers = glob.sync(exports.globPath, { ignore: ['**/examples/**/*.json', '**/quickstart-templates/*.json', '**/schema/*.json'] });
 exports.exampleGlobPath = path.join(__dirname, '../', '../', '/specification/**/examples/**/*.json');
 exports.examples = glob.sync(exports.exampleGlobPath);
+exports.readmes =  glob.sync(path.join(__dirname, '../', '../', '/specification/**/readme.md'));
 
 // Remove byte order marker. This catches EF BB BF (the UTF-8 BOM)
 // because the buffer-to-string conversion in `fs.readFile()`
@@ -71,6 +72,22 @@ exports.getTargetBranch = function getTargetBranch() {
   console.log(`>>>>> The target branch is: "${result}".`);
   return result;
 };
+
+/**
+ * Checkout the targetBranch
+ */
+exports.checkoutTargetBranch = function checkoutTargetBranch() {
+  let targetBranch = exports.getTargetBranch();
+
+  console.log(`Changing the branch to ${targetBranch}...`);
+  execSync(`git remote -vv`, { encoding: 'utf8' });
+  execSync(`git branch --all`, { encoding: 'utf8' });
+  execSync(`git fetch origin ${targetBranch}`, { encoding: 'utf8' });
+  execSync(`git diff`, { encoding: 'utf8' });
+  execSync(`git stash`, { encoding: 'utf8' });
+  execSync(`git checkout ${targetBranch}`, { encoding: 'utf8' });
+  execSync(`git log -3`, { encoding: 'utf8' });
+}
 
 /**
  * Gets the name of the source branch from which the PR is sent.
@@ -203,7 +220,7 @@ exports.getFilesChangedInPR = function getFilesChangedInPR() {
       console.log('>>>>> Files changed in this PR are as follows:')
       console.log(filesChanged);
       swaggerFilesInPR = filesChanged.split('\n').filter(function (item) {
-        if (item.match(/.*json$/ig) == null) {
+        if (item.match(/.*(json|yaml)$/ig) == null || item.match(/.*specification.*/ig) == null) {
           return false;
         }
         if (item.match(/.*\/examples\/*/ig) !== null) {

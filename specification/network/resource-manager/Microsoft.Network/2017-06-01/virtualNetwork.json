@@ -423,7 +423,7 @@
         "x-ms-long-running-operation": true,
         "x-ms-examples": {
           "Create subnet": { "$ref": "./examples/SubnetCreate.json" },
-          "Create subnet with private access services": { "$ref": "./examples/SubnetPrivateAccessServiceCreate.json" }
+          "Create subnet with service endpoints": { "$ref": "./examples/SubnetCreateServiceEndpoint.json" }
         }
       }
     },
@@ -826,12 +826,12 @@
           "$ref": "./routeTable.json#/definitions/RouteTable",
           "description": "The reference of the RouteTable resource."
         },
-        "privateAccessServices": {
-          "type": "array",
+        "serviceEndpoints": {
+        "type": "array",
           "items": {
-            "$ref": "#/definitions/PrivateAccessServicePropertiesFormat"
+            "$ref": "#/definitions/ServiceEndpointPropertiesFormat"
           },
-          "description": "An array of private access services values."
+          "description": "An array of service endpoints."
         },
         "ipConfigurations": {
           "readOnly": true,
@@ -855,11 +855,11 @@
       },
       "description": "Properties of the subnet."
     },
-    "PrivateAccessServicePropertiesFormat": {
+    "ServiceEndpointPropertiesFormat": {
       "properties": {
         "service": {
           "type": "string",
-          "description": "The type of the private access."
+          "description": "The type of the endpoint service."
         },
         "locations": {
           "type": "array",
@@ -873,7 +873,7 @@
           "description": "The provisioning state of the resource."
         }
       },
-      "description": "The private access service properties."
+      "description": "The service endpoint properties."
     },
     "VirtualNetworkPeeringPropertiesFormat": {
       "properties": {
