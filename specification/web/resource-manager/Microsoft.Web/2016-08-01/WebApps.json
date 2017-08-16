@@ -1913,6 +1913,252 @@
         }
       }
     },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Web/sites/{name}/continuouswebjobs": {
+      "get": {
+        "tags": [
+          "WebApps"
+        ],
+        "summary": "List continuous web jobs for an app, a specific deployment slot, and/or a specific scaled-out instance.",
+        "description": "List continuous web jobs for an app, a specific deployment slot, and/or a specific scaled-out instance.",
+        "operationId": "WebApps_ListContinuousWebJobs",
+        "produces": [
+          "application/json",
+          "text/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/resourceGroupNameParameter"
+          },
+          {
+            "name": "name",
+            "in": "path",
+            "description": "Site name.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "$ref": "#/parameters/subscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/ContinuousWebJobCollection"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Web/sites/{name}/continuouswebjobs/{webJobName}": {
+      "get": {
+        "tags": [
+          "WebApps"
+        ],
+        "summary": "Gets a continuous web job by its ID for an app, a specific deployment slot, and/or a specific scaled-out instance.",
+        "description": "Gets a continuous web job by its ID for an app, a specific deployment slot, and/or a specific scaled-out instance.",
+        "operationId": "WebApps_GetContinuousWebJob",
+        "produces": [
+          "application/json",
+          "text/json",
+          "application/xml",
+          "text/xml"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/resourceGroupNameParameter"
+          },
+          {
+            "name": "name",
+            "in": "path",
+            "description": "Site name.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "webJobId",
+            "in": "query",
+            "description": "Web job ID.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "webJobName",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "$ref": "#/parameters/subscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Found continuous web job",
+            "schema": {
+              "$ref": "#/definitions/ContinuousWebJob"
+            }
+          },
+          "404": {
+            "description": "Continuous web job does not exist"
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "WebApps"
+        ],
+        "summary": "Delete a continuous web job by its ID for an app, a specific deployment slot, and/or a specific scaled-out instance.",
+        "description": "Delete a continuous web job by its ID for an app, a specific deployment slot, and/or a specific scaled-out instance.",
+        "operationId": "WebApps_DeleteContinuousWebJob",
+        "parameters": [
+          {
+            "$ref": "#/parameters/resourceGroupNameParameter"
+          },
+          {
+            "name": "name",
+            "in": "path",
+            "description": "Site name.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "webJobId",
+            "in": "query",
+            "description": "Web job ID.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "webJobName",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "$ref": "#/parameters/subscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Succesfully deleted continuous web job"
+          },
+          "204": {
+            "description": "Continuous web job does not exist"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Web/sites/{name}/continuouswebjobs/{webJobName}/start": {
+      "post": {
+        "tags": [
+          "WebApps"
+        ],
+        "summary": "Start a continuous web job for an app, a specific deployment slot, and/or a specific scaled-out instance.",
+        "description": "Start a continuous web job for an app, a specific deployment slot, and/or a specific scaled-out instance.",
+        "operationId": "WebApps_StartContinuousWebJob",
+        "parameters": [
+          {
+            "$ref": "#/parameters/resourceGroupNameParameter"
+          },
+          {
+            "name": "name",
+            "in": "path",
+            "description": "Site name.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "webJobId",
+            "in": "query",
+            "description": "Web job ID.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "webJobName",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "$ref": "#/parameters/subscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Found continuous web job"
+          },
+          "404": {
+            "description": "Continuous web job does not exist"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Web/sites/{name}/continuouswebjobs/{webJobName}/stop": {
+      "post": {
+        "tags": [
+          "WebApps"
+        ],
+        "summary": "Stop a continuous web job for an app, a specific deployment slot, and/or a specific scaled-out instance.",
+        "description": "Stop a continuous web job for an app, a specific deployment slot, and/or a specific scaled-out instance.",
+        "operationId": "WebApps_StopContinuousWebJob",
+        "parameters": [
+          {
+            "$ref": "#/parameters/resourceGroupNameParameter"
+          },
+          {
+            "name": "name",
+            "in": "path",
+            "description": "Site name.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "webJobId",
+            "in": "query",
+            "description": "Web job ID.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "webJobName",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "$ref": "#/parameters/subscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Found continuous web job"
+          },
+          "404": {
+            "description": "Continuous web job does not exist"
+          }
+        }
+      }
+    },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Web/sites/{name}/deployments": {
       "get": {
         "tags": [
@@ -2103,6 +2349,55 @@
           },
           "204": {
             "description": "Deployment does not exist"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Web/sites/{name}/deployments/{id}/log": {
+      "get": {
+        "tags": [
+          "WebApps"
+        ],
+        "summary": "List deployment log for specific deployment for an app, or a deployment slot, or for an instance of a scaled-out app.",
+        "description": "List deployment log for specific deployment for an app, or a deployment slot, or for an instance of a scaled-out app.",
+        "operationId": "WebApps_ListDeploymentLog",
+        "produces": [
+          "application/json",
+          "text/json",
+          "application/xml",
+          "text/xml"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/resourceGroupNameParameter"
+          },
+          {
+            "name": "name",
+            "in": "path",
+            "description": "Name of the app.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "id",
+            "in": "path",
+            "description": "The ID of a specific deployment. This is the value of the name property in the JSON response from \"GET /api/sites/{siteName}/deployments\"",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "$ref": "#/parameters/subscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/Deployment"
+            }
           }
         }
       }
@@ -2504,6 +2799,52 @@
         }
       }
     },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Web/sites/{name}/functions": {
+      "get": {
+        "tags": [
+          "WebApps"
+        ],
+        "summary": "Get list of functions for a web site, or for a specific scaled-out instance in a web site.",
+        "description": "Get list of functions for a web site, or for a specific scaled-out instance in a web site.",
+        "operationId": "WebApps_ListInstanceFunctions",
+        "produces": [
+          "application/json",
+          "text/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/resourceGroupNameParameter"
+          },
+          {
+            "name": "name",
+            "in": "path",
+            "description": "Site name.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "$ref": "#/parameters/subscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "SiteExtension terminated",
+            "schema": {
+              "$ref": "#/definitions/FunctionEnvelopeCollection"
+            }
+          },
+          "404": {
+            "description": "SiteExtension with an Id of {functionName} is not running"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Web/sites/{name}/functions/admin/token": {
       "get": {
         "tags": [
@@ -2541,6 +2882,209 @@
             "description": "OK",
             "schema": {
               "type": "string"
+            }
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Web/sites/{name}/functions/{functionName}": {
+      "get": {
+        "tags": [
+          "WebApps"
+        ],
+        "summary": "Get function information by its ID for a specific scaled-out instance in a web site.",
+        "description": "Get function information by its ID for a specific scaled-out instance in a web site.",
+        "operationId": "WebApps_GetInstanceFunction",
+        "produces": [
+          "application/json",
+          "text/json",
+          "application/xml",
+          "text/xml"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/resourceGroupNameParameter"
+          },
+          {
+            "name": "name",
+            "in": "path",
+            "description": "Site name.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "functionName",
+            "in": "path",
+            "description": "Function name.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "$ref": "#/parameters/subscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Function information returned",
+            "schema": {
+              "$ref": "#/definitions/FunctionEnvelope"
+            }
+          },
+          "404": {
+            "description": "Function with an name of {functionName} is not running"
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "WebApps"
+        ],
+        "summary": "Get function information by its ID for a specific scaled-out instance in a web site.",
+        "description": "Get function information by its ID for a specific scaled-out instance in a web site.",
+        "operationId": "WebApps_CreateInstanceFunction",
+        "consumes": [
+          "application/json",
+          "text/json",
+          "application/x-www-form-urlencoded"
+        ],
+        "produces": [
+          "application/json",
+          "text/json",
+          "application/xml",
+          "text/xml"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/resourceGroupNameParameter"
+          },
+          {
+            "name": "name",
+            "in": "path",
+            "description": "Site name.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "functionName",
+            "in": "path",
+            "description": "Function name.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "function_envelope",
+            "in": "body",
+            "description": "Function details.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/FunctionEnvelope"
+            }
+          },
+          {
+            "$ref": "#/parameters/subscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": "Function created",
+            "schema": {
+              "$ref": "#/definitions/FunctionEnvelope"
+            }
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "WebApps"
+        ],
+        "summary": "Delete a function for web site, or a specific scaled-out instance in a web site.",
+        "description": "Delete a function for web site, or a specific scaled-out instance in a web site.",
+        "operationId": "WebApps_DeleteInstanceFunction",
+        "parameters": [
+          {
+            "$ref": "#/parameters/resourceGroupNameParameter"
+          },
+          {
+            "name": "name",
+            "in": "path",
+            "description": "Site name.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "functionName",
+            "in": "path",
+            "description": "Function name.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "$ref": "#/parameters/subscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "Function deleted"
+          },
+          "404": {
+            "description": "Function does not exist"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Web/sites/{name}/functions/{functionName}/listsecrets": {
+      "post": {
+        "tags": [
+          "WebApps"
+        ],
+        "summary": "Get function secrets for a function in a web site.",
+        "description": "Get function secrets for a function in a web site.",
+        "operationId": "WebApps_ListFunctionSecrets",
+        "produces": [
+          "application/json",
+          "text/json",
+          "application/xml",
+          "text/xml"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/resourceGroupNameParameter"
+          },
+          {
+            "name": "name",
+            "in": "path",
+            "description": "Site name.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "functionName",
+            "in": "path",
+            "description": "Function name.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "$ref": "#/parameters/subscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Function secrets returned",
+            "schema": {
+              "$ref": "#/definitions/FunctionSecrets"
             }
           }
         }
@@ -3375,6 +3919,287 @@
         }
       }
     },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Web/sites/{name}/instances/{instanceId}/continuouswebjobs": {
+      "get": {
+        "tags": [
+          "WebApps"
+        ],
+        "summary": "List continuous web jobs for an app, a specific deployment slot, and/or a specific scaled-out instance.",
+        "description": "List continuous web jobs for an app, a specific deployment slot, and/or a specific scaled-out instance.",
+        "operationId": "WebApps_ListInstanceContinuousWebJobs",
+        "produces": [
+          "application/json",
+          "text/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/resourceGroupNameParameter"
+          },
+          {
+            "name": "name",
+            "in": "path",
+            "description": "Site name.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "instanceId",
+            "in": "path",
+            "description": "ID of a specific scaled-out instance. This is the value of the name property in the JSON response from \"GET api/sites/{siteName}/instances\"",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "$ref": "#/parameters/subscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/ContinuousWebJobCollection"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Web/sites/{name}/instances/{instanceId}/continuouswebjobs/{webJobName}": {
+      "get": {
+        "tags": [
+          "WebApps"
+        ],
+        "summary": "Gets a continuous web job by its ID for an app, a specific deployment slot, and/or a specific scaled-out instance.",
+        "description": "Gets a continuous web job by its ID for an app, a specific deployment slot, and/or a specific scaled-out instance.",
+        "operationId": "WebApps_GetInstanceContinuousWebJob",
+        "produces": [
+          "application/json",
+          "text/json",
+          "application/xml",
+          "text/xml"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/resourceGroupNameParameter"
+          },
+          {
+            "name": "name",
+            "in": "path",
+            "description": "Site name.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "webJobId",
+            "in": "query",
+            "description": "Web job ID.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "instanceId",
+            "in": "path",
+            "description": "ID of a specific scaled-out instance. This is the value of the name property in the JSON response from \"GET api/sites/{siteName}/instances\"",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "webJobName",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "$ref": "#/parameters/subscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Found continuous web job",
+            "schema": {
+              "$ref": "#/definitions/ContinuousWebJob"
+            }
+          },
+          "404": {
+            "description": "Continuous web job does not exist"
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "WebApps"
+        ],
+        "summary": "Delete a continuous web job by its ID for an app, a specific deployment slot, and/or a specific scaled-out instance.",
+        "description": "Delete a continuous web job by its ID for an app, a specific deployment slot, and/or a specific scaled-out instance.",
+        "operationId": "WebApps_DeleteInstanceContinuousWebJob",
+        "parameters": [
+          {
+            "$ref": "#/parameters/resourceGroupNameParameter"
+          },
+          {
+            "name": "name",
+            "in": "path",
+            "description": "Site name.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "webJobId",
+            "in": "query",
+            "description": "Web job ID.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "instanceId",
+            "in": "path",
+            "description": "ID of a specific scaled-out instance. This is the value of the name property in the JSON response from \"GET api/sites/{siteName}/instances\"",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "webJobName",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "$ref": "#/parameters/subscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Succesfully deleted continuous web job"
+          },
+          "204": {
+            "description": "Continuous web job does not exist"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Web/sites/{name}/instances/{instanceId}/continuouswebjobs/{webJobName}/start": {
+      "post": {
+        "tags": [
+          "WebApps"
+        ],
+        "summary": "Start a continuous web job for an app, a specific deployment slot, and/or a specific scaled-out instance.",
+        "description": "Start a continuous web job for an app, a specific deployment slot, and/or a specific scaled-out instance.",
+        "operationId": "WebApps_StartInstanceContinuousWebJob",
+        "parameters": [
+          {
+            "$ref": "#/parameters/resourceGroupNameParameter"
+          },
+          {
+            "name": "name",
+            "in": "path",
+            "description": "Site name.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "webJobId",
+            "in": "query",
+            "description": "Web job ID.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "instanceId",
+            "in": "path",
+            "description": "ID of a specific scaled-out instance. This is the value of the name property in the JSON response from \"GET api/sites/{siteName}/instances\"",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "webJobName",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "$ref": "#/parameters/subscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Found continuous web job"
+          },
+          "404": {
+            "description": "Continuous web job does not exist"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Web/sites/{name}/instances/{instanceId}/continuouswebjobs/{webJobName}/stop": {
+      "post": {
+        "tags": [
+          "WebApps"
+        ],
+        "summary": "Stop a continuous web job for an app, a specific deployment slot, and/or a specific scaled-out instance.",
+        "description": "Stop a continuous web job for an app, a specific deployment slot, and/or a specific scaled-out instance.",
+        "operationId": "WebApps_StopInstanceContinuousWebJob",
+        "parameters": [
+          {
+            "$ref": "#/parameters/resourceGroupNameParameter"
+          },
+          {
+            "name": "name",
+            "in": "path",
+            "description": "Site name.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "webJobId",
+            "in": "query",
+            "description": "Web job ID.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "instanceId",
+            "in": "path",
+            "description": "ID of a specific scaled-out instance. This is the value of the name property in the JSON response from \"GET api/sites/{siteName}/instances\"",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "webJobName",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "$ref": "#/parameters/subscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Found continuous web job"
+          },
+          "404": {
+            "description": "Continuous web job does not exist"
+          }
+        }
+      }
+    },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Web/sites/{name}/instances/{instanceId}/deployments": {
       "get": {
         "tags": [
@@ -3597,6 +4422,62 @@
         }
       }
     },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Web/sites/{name}/instances/{instanceId}/deployments/{id}/log": {
+      "get": {
+        "tags": [
+          "WebApps"
+        ],
+        "summary": "List deployment log for specific deployment for an app, or a deployment slot, or for an instance of a scaled-out app.",
+        "description": "List deployment log for specific deployment for an app, or a deployment slot, or for an instance of a scaled-out app.",
+        "operationId": "WebApps_ListInstanceDeploymentLog",
+        "produces": [
+          "application/json",
+          "text/json",
+          "application/xml",
+          "text/xml"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/resourceGroupNameParameter"
+          },
+          {
+            "name": "name",
+            "in": "path",
+            "description": "Name of the app.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "id",
+            "in": "path",
+            "description": "The ID of a specific deployment. This is the value of the name property in the JSON response from \"GET /api/sites/{siteName}/deployments\"",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "instanceId",
+            "in": "path",
+            "description": "The ID of a specific scaled-out instance. This is the value of the name property in the JSON response from \"GET api/sites/{siteName}/instances\"",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "$ref": "#/parameters/subscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/Deployment"
+            }
+          }
+        }
+      }
+    },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Web/sites/{name}/instances/{instanceId}/extensions/MSDeploy": {
       "get": {
         "tags": [
@@ -3760,6 +4641,1104 @@
         }
       }
     },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Web/sites/{name}/instances/{instanceId}/functions": {
+      "get": {
+        "tags": [
+          "WebApps"
+        ],
+        "summary": "Get list of functions for a web site, or for a specific scaled-out instance in a web site.",
+        "description": "Get list of functions for a web site, or for a specific scaled-out instance in a web site.",
+        "operationId": "WebApps_ListInstanceFunctions",
+        "produces": [
+          "application/json",
+          "text/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/resourceGroupNameParameter"
+          },
+          {
+            "name": "name",
+            "in": "path",
+            "description": "Site name.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "instanceId",
+            "in": "path",
+            "description": "ID of a specific scaled-out instance. This is the value of the name property in the JSON response from \"GET api/sites/{siteName}/instances\"",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "$ref": "#/parameters/subscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "SiteExtension terminated",
+            "schema": {
+              "$ref": "#/definitions/FunctionEnvelopeCollection"
+            }
+          },
+          "404": {
+            "description": "SiteExtension with an Id of {functionName} is not running"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Web/sites/{name}/instances/{instanceId}/functions/{functionName}": {
+      "get": {
+        "tags": [
+          "WebApps"
+        ],
+        "summary": "Get function information by its ID for a specific scaled-out instance in a web site.",
+        "description": "Get function information by its ID for a specific scaled-out instance in a web site.",
+        "operationId": "WebApps_GetInstanceFunction",
+        "produces": [
+          "application/json",
+          "text/json",
+          "application/xml",
+          "text/xml"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/resourceGroupNameParameter"
+          },
+          {
+            "name": "name",
+            "in": "path",
+            "description": "Site name.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "functionName",
+            "in": "path",
+            "description": "Function name.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "instanceId",
+            "in": "path",
+            "description": "ID of a specific scaled-out instance. This is the value of the name property in the JSON response from \"GET api/sites/{siteName}/instances\"",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "$ref": "#/parameters/subscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Function information returned",
+            "schema": {
+              "$ref": "#/definitions/FunctionEnvelope"
+            }
+          },
+          "404": {
+            "description": "Function with an name of {functionName} is not running"
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "WebApps"
+        ],
+        "summary": "Get function information by its ID for a specific scaled-out instance in a web site.",
+        "description": "Get function information by its ID for a specific scaled-out instance in a web site.",
+        "operationId": "WebApps_CreateInstanceFunction",
+        "consumes": [
+          "application/json",
+          "text/json",
+          "application/x-www-form-urlencoded"
+        ],
+        "produces": [
+          "application/json",
+          "text/json",
+          "application/xml",
+          "text/xml"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/resourceGroupNameParameter"
+          },
+          {
+            "name": "name",
+            "in": "path",
+            "description": "Site name.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "functionName",
+            "in": "path",
+            "description": "Function name.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "instanceId",
+            "in": "path",
+            "description": "ID of a specific scaled-out instance. This is the value of the name property in the JSON response from \"GET api/sites/{siteName}/instances\"",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "function_envelope",
+            "in": "body",
+            "description": "Function details.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/FunctionEnvelope"
+            }
+          },
+          {
+            "$ref": "#/parameters/subscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": "Function created",
+            "schema": {
+              "$ref": "#/definitions/FunctionEnvelope"
+            }
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "WebApps"
+        ],
+        "summary": "Delete a function for web site, or a specific scaled-out instance in a web site.",
+        "description": "Delete a function for web site, or a specific scaled-out instance in a web site.",
+        "operationId": "WebApps_DeleteInstanceFunction",
+        "parameters": [
+          {
+            "$ref": "#/parameters/resourceGroupNameParameter"
+          },
+          {
+            "name": "name",
+            "in": "path",
+            "description": "Site name.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "functionName",
+            "in": "path",
+            "description": "Function name.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "instanceId",
+            "in": "path",
+            "description": "ID of a specific scaled-out instance. This is the value of the name property in the JSON response from \"GET api/sites/{siteName}/instances\"",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "$ref": "#/parameters/subscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "Function deleted"
+          },
+          "404": {
+            "description": "Function does not exist"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Web/sites/{name}/instances/{instanceId}/processes": {
+      "get": {
+        "tags": [
+          "WebApps"
+        ],
+        "summary": "Get list of processes for a web site, or for a specific scaled-out instance in a web site.",
+        "description": "Get list of processes for a web site, or for a specific scaled-out instance in a web site.",
+        "operationId": "WebApps_ListInstanceProcesses",
+        "produces": [
+          "application/json",
+          "text/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/resourceGroupNameParameter"
+          },
+          {
+            "name": "name",
+            "in": "path",
+            "description": "Site name.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "instanceId",
+            "in": "path",
+            "description": "ID of a specific scaled-out instance. This is the value of the name property in the JSON response from \"GET api/sites/{siteName}/instances\"",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "$ref": "#/parameters/subscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Process terminated",
+            "schema": {
+              "$ref": "#/definitions/ProcessInfoCollection"
+            }
+          },
+          "404": {
+            "description": "Process with an Id of {processId} is not running"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Web/sites/{name}/instances/{instanceId}/processes/{processId}": {
+      "get": {
+        "tags": [
+          "WebApps"
+        ],
+        "summary": "Get process information by its ID for a specific scaled-out instance in a web site.",
+        "description": "Get process information by its ID for a specific scaled-out instance in a web site.",
+        "operationId": "WebApps_GetInstanceProcess",
+        "produces": [
+          "application/json",
+          "text/json",
+          "application/xml",
+          "text/xml"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/resourceGroupNameParameter"
+          },
+          {
+            "name": "name",
+            "in": "path",
+            "description": "Site name.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "processId",
+            "in": "path",
+            "description": "PID",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "instanceId",
+            "in": "path",
+            "description": "ID of a specific scaled-out instance. This is the value of the name property in the JSON response from \"GET api/sites/{siteName}/instances\"",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "$ref": "#/parameters/subscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Process information returned",
+            "schema": {
+              "$ref": "#/definitions/ProcessInfo"
+            }
+          },
+          "404": {
+            "description": "Process with an Id of {processId} is not running"
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "WebApps"
+        ],
+        "summary": "Terminate a process by its ID for a specific scaled-out instance in a web site.",
+        "description": "Terminate a process by its ID for a specific scaled-out instance in a web site.",
+        "operationId": "WebApps_DeleteInstanceProcess",
+        "parameters": [
+          {
+            "$ref": "#/parameters/resourceGroupNameParameter"
+          },
+          {
+            "name": "name",
+            "in": "path",
+            "description": "Site name.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "processId",
+            "in": "path",
+            "description": "PID",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "instanceId",
+            "in": "path",
+            "description": "ID of a specific scaled-out instance. This is the value of the name property in the JSON response from \"GET api/sites/{siteName}/instances\"",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "$ref": "#/parameters/subscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "Process terminated"
+          },
+          "404": {
+            "description": "Process with an Id of {processId} is not running"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Web/sites/{name}/instances/{instanceId}/siteextensions": {
+      "get": {
+        "tags": [
+          "WebApps"
+        ],
+        "summary": "Get list of siteextensions for a web site, or for a specific scaled-out instance in a web site.",
+        "description": "Get list of siteextensions for a web site, or for a specific scaled-out instance in a web site.",
+        "operationId": "WebApps_ListInstanceSiteExtensions",
+        "produces": [
+          "application/json",
+          "text/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/resourceGroupNameParameter"
+          },
+          {
+            "name": "name",
+            "in": "path",
+            "description": "Site name.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "instanceId",
+            "in": "path",
+            "description": "ID of a specific scaled-out instance. This is the value of the name property in the JSON response from \"GET api/sites/{siteName}/instances\"",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "$ref": "#/parameters/subscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "SiteExtension information returned",
+            "schema": {
+              "$ref": "#/definitions/SiteExtensionInfoCollection"
+            }
+          },
+          "404": {
+            "description": "SiteExtension not found"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Web/sites/{name}/instances/{instanceId}/siteextensions/{extensionName}": {
+      "get": {
+        "tags": [
+          "WebApps"
+        ],
+        "summary": "Get site extension information by its ID for a specific scaled-out instance in a web site.",
+        "description": "Get site extension information by its ID for a specific scaled-out instance in a web site.",
+        "operationId": "WebApps_GetInstanceSiteExtension",
+        "produces": [
+          "application/json",
+          "text/json",
+          "application/xml",
+          "text/xml"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/resourceGroupNameParameter"
+          },
+          {
+            "name": "name",
+            "in": "path",
+            "description": "Site name.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "siteExtensionId",
+            "in": "query",
+            "description": "Site extension name.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "instanceId",
+            "in": "path",
+            "description": "ID of a specific scaled-out instance. This is the value of the name property in the JSON response from \"GET api/sites/{siteName}/instances\"",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "extensionName",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "$ref": "#/parameters/subscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "SiteExtension information returned",
+            "schema": {
+              "$ref": "#/definitions/SiteExtensionInfo"
+            }
+          },
+          "404": {
+            "description": "SiteExtension with an Id of {siteExtensionId} is not running"
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "WebApps"
+        ],
+        "summary": "Install site extension on a web site, for a specific scaled-out instance in a web site.",
+        "description": "Install site extension on a web site, for a specific scaled-out instance in a web site.",
+        "operationId": "WebApps_InstallInstanceSiteExtension",
+        "produces": [
+          "application/json",
+          "text/json",
+          "application/xml",
+          "text/xml"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/resourceGroupNameParameter"
+          },
+          {
+            "name": "name",
+            "in": "path",
+            "description": "Site name.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "siteExtensionId",
+            "in": "query",
+            "description": "Site extension name.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "instanceId",
+            "in": "path",
+            "description": "ID of a specific scaled-out instance. This is the value of the name property in the JSON response from \"GET api/sites/{siteName}/instances\"",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "extensionName",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "$ref": "#/parameters/subscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": "Site Extension created.",
+            "schema": {
+              "$ref": "#/definitions/SiteExtensionInfo"
+            }
+          },
+          "200": {
+            "description": "Site Extension created.",
+            "schema": {
+              "$ref": "#/definitions/SiteExtensionInfo"
+            }
+          },
+          "429": {
+            "description": "Site Extension is being installed on another request: Rejecting current request."
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "WebApps"
+        ],
+        "summary": "Terminate a process by its ID for a specific scaled-out instance in a web site.",
+        "description": "Terminate a process by its ID for a specific scaled-out instance in a web site.",
+        "operationId": "WebApps_DeleteSiteExtension",
+        "parameters": [
+          {
+            "$ref": "#/parameters/resourceGroupNameParameter"
+          },
+          {
+            "name": "name",
+            "in": "path",
+            "description": "Site name.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "siteExtensionId",
+            "in": "query",
+            "description": "PID",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "instanceId",
+            "in": "path",
+            "description": "ID of a specific scaled-out instance. This is the value of the name property in the JSON response from \"GET api/sites/{siteName}/instances\"",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "extensionName",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "$ref": "#/parameters/subscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "SiteExtension terminated"
+          },
+          "404": {
+            "description": "SiteExtension with an Id of {siteExtensionId} is not running"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Web/sites/{name}/instances/{instanceId}/triggeredwebjobs": {
+      "get": {
+        "tags": [
+          "WebApps"
+        ],
+        "summary": "List triggered web jobs for an app, a specific deployment slot, and/or a specific scaled-out instance.",
+        "description": "List triggered web jobs for an app, a specific deployment slot, and/or a specific scaled-out instance.",
+        "operationId": "WebApps_ListInstanceTriggeredWebJobs",
+        "produces": [
+          "application/json",
+          "text/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/resourceGroupNameParameter"
+          },
+          {
+            "name": "name",
+            "in": "path",
+            "description": "Site name.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "instanceId",
+            "in": "path",
+            "description": "ID of a specific scaled-out instance. This is the value of the name property in the JSON response from \"GET api/sites/{siteName}/instances\"",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "$ref": "#/parameters/subscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/TriggeredWebJobCollection"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Web/sites/{name}/instances/{instanceId}/triggeredwebjobs/{webJobName}": {
+      "get": {
+        "tags": [
+          "WebApps"
+        ],
+        "summary": "Gets a triggered web job by its ID for an app, a specific deployment slot, and/or a specific scaled-out instance.",
+        "description": "Gets a triggered web job by its ID for an app, a specific deployment slot, and/or a specific scaled-out instance.",
+        "operationId": "WebApps_GetInstanceTriggeredWebJob",
+        "produces": [
+          "application/json",
+          "text/json",
+          "application/xml",
+          "text/xml"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/resourceGroupNameParameter"
+          },
+          {
+            "name": "name",
+            "in": "path",
+            "description": "Site name.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "webJobId",
+            "in": "query",
+            "description": "Web job ID.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "instanceId",
+            "in": "path",
+            "description": "ID of a specific scaled-out instance. This is the value of the name property in the JSON response from \"GET api/sites/{siteName}/instances\"",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "webJobName",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "$ref": "#/parameters/subscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Found continuous web job",
+            "schema": {
+              "$ref": "#/definitions/TriggeredWebJob"
+            }
+          },
+          "404": {
+            "description": "Triggered web job does not exist"
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "WebApps"
+        ],
+        "summary": "Delete a triggered web job by its ID for an app, a specific deployment slot, and/or a specific scaled-out instance.",
+        "description": "Delete a triggered web job by its ID for an app, a specific deployment slot, and/or a specific scaled-out instance.",
+        "operationId": "WebApps_DeleteInstanceTriggeredWebJob",
+        "parameters": [
+          {
+            "$ref": "#/parameters/resourceGroupNameParameter"
+          },
+          {
+            "name": "name",
+            "in": "path",
+            "description": "Site name.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "webJobId",
+            "in": "query",
+            "description": "Web job ID.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "instanceId",
+            "in": "path",
+            "description": "ID of a specific scaled-out instance. This is the value of the name property in the JSON response from \"GET api/sites/{siteName}/instances\"",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "webJobName",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "$ref": "#/parameters/subscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Succesfully deleted continuous web job"
+          },
+          "204": {
+            "description": "Triggered web job does not exist"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Web/sites/{name}/instances/{instanceId}/triggeredwebjobs/{webJobName}/history": {
+      "get": {
+        "tags": [
+          "WebApps"
+        ],
+        "summary": "List a triggered web job's history for an app, a specific deployment slot, and/or a specific scaled-out instance.",
+        "description": "List a triggered web job's history for an app, a specific deployment slot, and/or a specific scaled-out instance.",
+        "operationId": "WebApps_ListInstanceTriggeredWebJobHistory",
+        "produces": [
+          "application/json",
+          "text/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/resourceGroupNameParameter"
+          },
+          {
+            "name": "name",
+            "in": "path",
+            "description": "Site name.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "webJobId",
+            "in": "query",
+            "description": "Web job ID.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "instanceId",
+            "in": "path",
+            "description": "ID of a specific scaled-out instance. This is the value of the name property in the JSON response from \"GET api/sites/{siteName}/instances\"",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "webJobName",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "$ref": "#/parameters/subscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Found continuous web job",
+            "schema": {
+              "$ref": "#/definitions/TriggeredJobHistoryCollection"
+            }
+          },
+          "404": {
+            "description": "Triggered web job does not exist"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Web/sites/{name}/instances/{instanceId}/triggeredwebjobs/{webJobName}/history/{id}": {
+      "get": {
+        "tags": [
+          "WebApps"
+        ],
+        "summary": "Gets a triggered web job's history by its ID for an app, a specific deployment slot, and/or a specific scaled-out instance.",
+        "description": "Gets a triggered web job's history by its ID for an app, a specific deployment slot, and/or a specific scaled-out instance.",
+        "operationId": "WebApps_GetInstanceTriggeredWebJobHistory",
+        "produces": [
+          "application/json",
+          "text/json",
+          "application/xml",
+          "text/xml"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/resourceGroupNameParameter"
+          },
+          {
+            "name": "name",
+            "in": "path",
+            "description": "Site name.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "webJobId",
+            "in": "query",
+            "description": "Web job ID.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "id",
+            "in": "path",
+            "description": "History ID.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "instanceId",
+            "in": "path",
+            "description": "ID of a specific scaled-out instance. This is the value of the name property in the JSON response from \"GET api/sites/{siteName}/instances\"",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "webJobName",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "$ref": "#/parameters/subscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Found continuous web job",
+            "schema": {
+              "$ref": "#/definitions/TriggeredJobHistory"
+            }
+          },
+          "404": {
+            "description": "Triggered web job does not exist"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Web/sites/{name}/instances/{instanceId}/triggeredwebjobs/{webJobName}/run": {
+      "post": {
+        "tags": [
+          "WebApps"
+        ],
+        "summary": "Run a triggered web job for an app, a specific deployment slot, and/or a specific scaled-out instance.",
+        "description": "Run a triggered web job for an app, a specific deployment slot, and/or a specific scaled-out instance.",
+        "operationId": "WebApps_RunInstanceTriggeredWebJob",
+        "parameters": [
+          {
+            "$ref": "#/parameters/resourceGroupNameParameter"
+          },
+          {
+            "name": "name",
+            "in": "path",
+            "description": "Site name.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "webJobId",
+            "in": "query",
+            "description": "Web job ID.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "instanceId",
+            "in": "path",
+            "description": "ID of a specific scaled-out instance. This is the value of the name property in the JSON response from \"GET api/sites/{siteName}/instances\"",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "webJobName",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "$ref": "#/parameters/subscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Found continuous web job"
+          },
+          "404": {
+            "description": "Triggered web job does not exist"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Web/sites/{name}/instances/{instanceId}/webjobs": {
+      "get": {
+        "tags": [
+          "WebApps"
+        ],
+        "summary": "List webjobs for an app, or a deployment slot, or for an instance of a scaled-out app.",
+        "description": "List webjobs for an app, or a deployment slot, or for an instance of a scaled-out app.",
+        "operationId": "WebApps_ListInstanceWebJobs",
+        "produces": [
+          "application/json",
+          "text/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/resourceGroupNameParameter"
+          },
+          {
+            "name": "name",
+            "in": "path",
+            "description": "Site name.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "instanceId",
+            "in": "path",
+            "description": "The ID of a specific scaled-out instance. This is the value of the name property in the JSON response from \"GET api/sites/{siteName}/instances\"",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "$ref": "#/parameters/subscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/WebJobCollection"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Web/sites/{name}/instances/{instanceId}/webjobs/{webJobName}": {
+      "get": {
+        "tags": [
+          "WebApps"
+        ],
+        "summary": "Get webjob information for an app, or a deployment slot, or for an instance of a scaled-out app.",
+        "description": "Get webjob information for an app, or a deployment slot, or for an instance of a scaled-out app.",
+        "operationId": "WebApps_GetWebJob",
+        "produces": [
+          "application/json",
+          "text/json",
+          "application/xml",
+          "text/xml"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/resourceGroupNameParameter"
+          },
+          {
+            "name": "name",
+            "in": "path",
+            "description": "Site name.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "webJobName",
+            "in": "path",
+            "description": "Name of the web job.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "instanceId",
+            "in": "path",
+            "description": "The ID of a specific scaled-out instance. This is the value of the name property in the JSON response from \"GET api/sites/{siteName}/instances\"",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "$ref": "#/parameters/subscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/WebJob"
+            }
+          }
+        }
+      }
+    },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Web/sites/{name}/iscloneable": {
       "post": {
         "tags": [
@@ -3797,6 +5776,48 @@
             "description": "OK",
             "schema": {
               "$ref": "#/definitions/SiteCloneability"
+            }
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Web/sites/{name}/listsyncfunctiontriggerstatus": {
+      "post": {
+        "tags": [
+          "WebApps"
+        ],
+        "summary": "this is to allow calling via powershell and ARM template",
+        "description": "this is to allow calling via powershell and ARM template",
+        "operationId": "WebApps_ListSyncFunctionTriggers",
+        "produces": [
+          "application/json",
+          "text/json",
+          "application/xml",
+          "text/xml"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/resourceGroupNameParameter"
+          },
+          {
+            "name": "name",
+            "in": "path",
+            "description": "Name of the app.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "$ref": "#/parameters/subscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/FunctionSecrets"
             }
           }
         }
@@ -4535,6 +6556,145 @@
         }
       }
     },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Web/sites/{name}/processes": {
+      "get": {
+        "tags": [
+          "WebApps"
+        ],
+        "summary": "Get list of processes for a web site, or for a specific scaled-out instance in a web site.",
+        "description": "Get list of processes for a web site, or for a specific scaled-out instance in a web site.",
+        "operationId": "WebApps_ListInstanceProcesses",
+        "produces": [
+          "application/json",
+          "text/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/resourceGroupNameParameter"
+          },
+          {
+            "name": "name",
+            "in": "path",
+            "description": "Site name.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "$ref": "#/parameters/subscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Process terminated",
+            "schema": {
+              "$ref": "#/definitions/ProcessInfoCollection"
+            }
+          },
+          "404": {
+            "description": "Process with an Id of {processId} is not running"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Web/sites/{name}/processes/{processId}": {
+      "get": {
+        "tags": [
+          "WebApps"
+        ],
+        "summary": "Get process information by its ID for a specific scaled-out instance in a web site.",
+        "description": "Get process information by its ID for a specific scaled-out instance in a web site.",
+        "operationId": "WebApps_GetInstanceProcess",
+        "produces": [
+          "application/json",
+          "text/json",
+          "application/xml",
+          "text/xml"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/resourceGroupNameParameter"
+          },
+          {
+            "name": "name",
+            "in": "path",
+            "description": "Site name.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "processId",
+            "in": "path",
+            "description": "PID",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "$ref": "#/parameters/subscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Process information returned",
+            "schema": {
+              "$ref": "#/definitions/ProcessInfo"
+            }
+          },
+          "404": {
+            "description": "Process with an Id of {processId} is not running"
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "WebApps"
+        ],
+        "summary": "Terminate a process by its ID for a specific scaled-out instance in a web site.",
+        "description": "Terminate a process by its ID for a specific scaled-out instance in a web site.",
+        "operationId": "WebApps_DeleteProcess",
+        "parameters": [
+          {
+            "$ref": "#/parameters/resourceGroupNameParameter"
+          },
+          {
+            "name": "name",
+            "in": "path",
+            "description": "Site name.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "processId",
+            "in": "path",
+            "description": "PID",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "$ref": "#/parameters/subscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "Process terminated"
+          },
+          "404": {
+            "description": "Process with an Id of {processId} is not running"
+          }
+        }
+      }
+    },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Web/sites/{name}/publicCertificates": {
       "get": {
         "tags": [
@@ -4837,7 +6997,8 @@
           "200": {
             "description": "OK",
             "schema": {
-              "$ref": "#/definitions/RecoverResponse"
+                "$ref": "#/definitions/RecoverResponse"
+
             }
           }
         },
@@ -4918,6 +7079,219 @@
         "responses": {
           "200": {
             "description": "Successfully restarted app."
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Web/sites/{name}/siteextensions": {
+      "get": {
+        "tags": [
+          "WebApps"
+        ],
+        "summary": "Get list of siteextensions for a web site, or for a specific scaled-out instance in a web site.",
+        "description": "Get list of siteextensions for a web site, or for a specific scaled-out instance in a web site.",
+        "operationId": "WebApps_ListInstanceSiteExtensions",
+        "produces": [
+          "application/json",
+          "text/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/resourceGroupNameParameter"
+          },
+          {
+            "name": "name",
+            "in": "path",
+            "description": "Site name.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "$ref": "#/parameters/subscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "SiteExtension information returned",
+            "schema": {
+              "$ref": "#/definitions/SiteExtensionInfoCollection"
+            }
+          },
+          "404": {
+            "description": "SiteExtension not found"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Web/sites/{name}/siteextensions/{extensionName}": {
+      "get": {
+        "tags": [
+          "WebApps"
+        ],
+        "summary": "Get site extension information by its ID for a specific scaled-out instance in a web site.",
+        "description": "Get site extension information by its ID for a specific scaled-out instance in a web site.",
+        "operationId": "WebApps_GetInstanceSiteExtension",
+        "produces": [
+          "application/json",
+          "text/json",
+          "application/xml",
+          "text/xml"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/resourceGroupNameParameter"
+          },
+          {
+            "name": "name",
+            "in": "path",
+            "description": "Site name.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "siteExtensionId",
+            "in": "query",
+            "description": "Site extension name.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "extensionName",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "$ref": "#/parameters/subscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "SiteExtension information returned",
+            "schema": {
+              "$ref": "#/definitions/SiteExtensionInfo"
+            }
+          },
+          "404": {
+            "description": "SiteExtension with an Id of {siteExtensionId} is not running"
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "WebApps"
+        ],
+        "summary": "Install site extension on a web site, for a specific scaled-out instance in a web site.",
+        "description": "Install site extension on a web site, for a specific scaled-out instance in a web site.",
+        "operationId": "WebApps_InstallInstanceSiteExtension",
+        "produces": [
+          "application/json",
+          "text/json",
+          "application/xml",
+          "text/xml"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/resourceGroupNameParameter"
+          },
+          {
+            "name": "name",
+            "in": "path",
+            "description": "Site name.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "siteExtensionId",
+            "in": "query",
+            "description": "Site extension name.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "extensionName",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "$ref": "#/parameters/subscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": "Site Extension created.",
+            "schema": {
+              "$ref": "#/definitions/SiteExtensionInfo"
+            }
+          },
+          "200": {
+            "description": "Site Extension created.",
+            "schema": {
+              "$ref": "#/definitions/SiteExtensionInfo"
+            }
+          },
+          "429": {
+            "description": "Site Extension is being installed on another request: Rejecting current request."
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "WebApps"
+        ],
+        "summary": "Terminate a process by its ID for a specific scaled-out instance in a web site.",
+        "description": "Terminate a process by its ID for a specific scaled-out instance in a web site.",
+        "operationId": "WebApps_DeleteSiteExtension",
+        "parameters": [
+          {
+            "$ref": "#/parameters/resourceGroupNameParameter"
+          },
+          {
+            "name": "name",
+            "in": "path",
+            "description": "Site name.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "siteExtensionId",
+            "in": "query",
+            "description": "PID",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "extensionName",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "$ref": "#/parameters/subscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "SiteExtension terminated"
+          },
+          "404": {
+            "description": "SiteExtension with an Id of {siteExtensionId} is not running"
           }
         }
       }
@@ -6943,6 +9317,287 @@
         }
       }
     },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Web/sites/{name}/slots/{slot}/continuouswebjobs": {
+      "get": {
+        "tags": [
+          "WebApps"
+        ],
+        "summary": "List continuous web jobs for an app, a specific deployment slot, and/or a specific scaled-out instance.",
+        "description": "List continuous web jobs for an app, a specific deployment slot, and/or a specific scaled-out instance.",
+        "operationId": "WebApps_ListContinuousWebJobsSlot",
+        "produces": [
+          "application/json",
+          "text/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/resourceGroupNameParameter"
+          },
+          {
+            "name": "name",
+            "in": "path",
+            "description": "Site name.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "slot",
+            "in": "path",
+            "description": "Name of the deployment slot. If a slot is not specified, the API deletes a deployment for the production slot.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "$ref": "#/parameters/subscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/ContinuousWebJobCollection"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Web/sites/{name}/slots/{slot}/continuouswebjobs/{webJobName}": {
+      "get": {
+        "tags": [
+          "WebApps"
+        ],
+        "summary": "Gets a continuous web job by its ID for an app, a specific deployment slot, and/or a specific scaled-out instance.",
+        "description": "Gets a continuous web job by its ID for an app, a specific deployment slot, and/or a specific scaled-out instance.",
+        "operationId": "WebApps_GetContinuousWebJobSlot",
+        "produces": [
+          "application/json",
+          "text/json",
+          "application/xml",
+          "text/xml"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/resourceGroupNameParameter"
+          },
+          {
+            "name": "name",
+            "in": "path",
+            "description": "Site name.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "webJobId",
+            "in": "query",
+            "description": "Web job ID.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "slot",
+            "in": "path",
+            "description": "Name of the deployment slot. If a slot is not specified, the API deletes a deployment for the production slot.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "webJobName",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "$ref": "#/parameters/subscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Found continuous web job",
+            "schema": {
+              "$ref": "#/definitions/ContinuousWebJob"
+            }
+          },
+          "404": {
+            "description": "Continuous web job does not exist"
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "WebApps"
+        ],
+        "summary": "Delete a continuous web job by its ID for an app, a specific deployment slot, and/or a specific scaled-out instance.",
+        "description": "Delete a continuous web job by its ID for an app, a specific deployment slot, and/or a specific scaled-out instance.",
+        "operationId": "WebApps_DeleteContinuousWebJobSlot",
+        "parameters": [
+          {
+            "$ref": "#/parameters/resourceGroupNameParameter"
+          },
+          {
+            "name": "name",
+            "in": "path",
+            "description": "Site name.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "webJobId",
+            "in": "query",
+            "description": "Web job ID.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "slot",
+            "in": "path",
+            "description": "Name of the deployment slot. If a slot is not specified, the API deletes a deployment for the production slot.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "webJobName",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "$ref": "#/parameters/subscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Succesfully deleted continuous web job"
+          },
+          "204": {
+            "description": "Continuous web job does not exist"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Web/sites/{name}/slots/{slot}/continuouswebjobs/{webJobName}/start": {
+      "post": {
+        "tags": [
+          "WebApps"
+        ],
+        "summary": "Start a continuous web job for an app, a specific deployment slot, and/or a specific scaled-out instance.",
+        "description": "Start a continuous web job for an app, a specific deployment slot, and/or a specific scaled-out instance.",
+        "operationId": "WebApps_StartContinuousWebJobSlot",
+        "parameters": [
+          {
+            "$ref": "#/parameters/resourceGroupNameParameter"
+          },
+          {
+            "name": "name",
+            "in": "path",
+            "description": "Site name.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "webJobId",
+            "in": "query",
+            "description": "Web job ID.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "slot",
+            "in": "path",
+            "description": "Name of the deployment slot. If a slot is not specified, the API deletes a deployment for the production slot.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "webJobName",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "$ref": "#/parameters/subscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Found continuous web job"
+          },
+          "404": {
+            "description": "Continuous web job does not exist"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Web/sites/{name}/slots/{slot}/continuouswebjobs/{webJobName}/stop": {
+      "post": {
+        "tags": [
+          "WebApps"
+        ],
+        "summary": "Stop a continuous web job for an app, a specific deployment slot, and/or a specific scaled-out instance.",
+        "description": "Stop a continuous web job for an app, a specific deployment slot, and/or a specific scaled-out instance.",
+        "operationId": "WebApps_StopContinuousWebJobSlot",
+        "parameters": [
+          {
+            "$ref": "#/parameters/resourceGroupNameParameter"
+          },
+          {
+            "name": "name",
+            "in": "path",
+            "description": "Site name.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "webJobId",
+            "in": "query",
+            "description": "Web job ID.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "slot",
+            "in": "path",
+            "description": "Name of the deployment slot. If a slot is not specified, the API deletes a deployment for the production slot.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "webJobName",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "$ref": "#/parameters/subscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Found continuous web job"
+          },
+          "404": {
+            "description": "Continuous web job does not exist"
+          }
+        }
+      }
+    },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Web/sites/{name}/slots/{slot}/deployments": {
       "get": {
         "tags": [
@@ -7161,6 +9816,62 @@
           },
           "204": {
             "description": "Deployment does not exist"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Web/sites/{name}/slots/{slot}/deployments/{id}/log": {
+      "get": {
+        "tags": [
+          "WebApps"
+        ],
+        "summary": "List deployment log for specific deployment for an app, or a deployment slot, or for an instance of a scaled-out app.",
+        "description": "List deployment log for specific deployment for an app, or a deployment slot, or for an instance of a scaled-out app.",
+        "operationId": "WebApps_ListDeploymentLogSlot",
+        "produces": [
+          "application/json",
+          "text/json",
+          "application/xml",
+          "text/xml"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/resourceGroupNameParameter"
+          },
+          {
+            "name": "name",
+            "in": "path",
+            "description": "Name of the app.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "id",
+            "in": "path",
+            "description": "The ID of a specific deployment. This is the value of the name property in the JSON response from \"GET /api/sites/{siteName}/deployments\"",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "slot",
+            "in": "path",
+            "description": "Name of the deployment slot. If a slot is not specified, the API returns deployments for the production slot.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "$ref": "#/parameters/subscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/Deployment"
+            }
           }
         }
       }
@@ -8608,6 +11319,322 @@
         }
       }
     },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Web/sites/{name}/slots/{slot}/instances/{instanceId}/continuouswebjobs": {
+      "get": {
+        "tags": [
+          "WebApps"
+        ],
+        "summary": "List continuous web jobs for an app, a specific deployment slot, and/or a specific scaled-out instance.",
+        "description": "List continuous web jobs for an app, a specific deployment slot, and/or a specific scaled-out instance.",
+        "operationId": "WebApps_ListInstanceContinuousWebJobsSlot",
+        "produces": [
+          "application/json",
+          "text/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/resourceGroupNameParameter"
+          },
+          {
+            "name": "name",
+            "in": "path",
+            "description": "Site name.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "slot",
+            "in": "path",
+            "description": "Name of the deployment slot. If a slot is not specified, the API deletes a deployment for the production slot.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "instanceId",
+            "in": "path",
+            "description": "ID of a specific scaled-out instance. This is the value of the name property in the JSON response from \"GET api/sites/{siteName}/instances\"",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "$ref": "#/parameters/subscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/ContinuousWebJobCollection"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Web/sites/{name}/slots/{slot}/instances/{instanceId}/continuouswebjobs/{webJobName}": {
+      "get": {
+        "tags": [
+          "WebApps"
+        ],
+        "summary": "Gets a continuous web job by its ID for an app, a specific deployment slot, and/or a specific scaled-out instance.",
+        "description": "Gets a continuous web job by its ID for an app, a specific deployment slot, and/or a specific scaled-out instance.",
+        "operationId": "WebApps_GetInstanceContinuousWebJobSlot",
+        "produces": [
+          "application/json",
+          "text/json",
+          "application/xml",
+          "text/xml"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/resourceGroupNameParameter"
+          },
+          {
+            "name": "name",
+            "in": "path",
+            "description": "Site name.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "webJobId",
+            "in": "query",
+            "description": "Web job ID.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "slot",
+            "in": "path",
+            "description": "Name of the deployment slot. If a slot is not specified, the API deletes a deployment for the production slot.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "instanceId",
+            "in": "path",
+            "description": "ID of a specific scaled-out instance. This is the value of the name property in the JSON response from \"GET api/sites/{siteName}/instances\"",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "webJobName",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "$ref": "#/parameters/subscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Found continuous web job",
+            "schema": {
+              "$ref": "#/definitions/ContinuousWebJob"
+            }
+          },
+          "404": {
+            "description": "Continuous web job does not exist"
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "WebApps"
+        ],
+        "summary": "Delete a continuous web job by its ID for an app, a specific deployment slot, and/or a specific scaled-out instance.",
+        "description": "Delete a continuous web job by its ID for an app, a specific deployment slot, and/or a specific scaled-out instance.",
+        "operationId": "WebApps_DeleteInstanceContinuousWebJobSlot",
+        "parameters": [
+          {
+            "$ref": "#/parameters/resourceGroupNameParameter"
+          },
+          {
+            "name": "name",
+            "in": "path",
+            "description": "Site name.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "webJobId",
+            "in": "query",
+            "description": "Web job ID.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "slot",
+            "in": "path",
+            "description": "Name of the deployment slot. If a slot is not specified, the API deletes a deployment for the production slot.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "instanceId",
+            "in": "path",
+            "description": "ID of a specific scaled-out instance. This is the value of the name property in the JSON response from \"GET api/sites/{siteName}/instances\"",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "webJobName",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "$ref": "#/parameters/subscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Succesfully deleted continuous web job"
+          },
+          "204": {
+            "description": "Continuous web job does not exist"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Web/sites/{name}/slots/{slot}/instances/{instanceId}/continuouswebjobs/{webJobName}/start": {
+      "post": {
+        "tags": [
+          "WebApps"
+        ],
+        "summary": "Start a continuous web job for an app, a specific deployment slot, and/or a specific scaled-out instance.",
+        "description": "Start a continuous web job for an app, a specific deployment slot, and/or a specific scaled-out instance.",
+        "operationId": "WebApps_StartInstanceContinuousWebJobSlot",
+        "parameters": [
+          {
+            "$ref": "#/parameters/resourceGroupNameParameter"
+          },
+          {
+            "name": "name",
+            "in": "path",
+            "description": "Site name.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "webJobId",
+            "in": "query",
+            "description": "Web job ID.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "slot",
+            "in": "path",
+            "description": "Name of the deployment slot. If a slot is not specified, the API deletes a deployment for the production slot.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "instanceId",
+            "in": "path",
+            "description": "ID of a specific scaled-out instance. This is the value of the name property in the JSON response from \"GET api/sites/{siteName}/instances\"",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "webJobName",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "$ref": "#/parameters/subscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Found continuous web job"
+          },
+          "404": {
+            "description": "Continuous web job does not exist"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Web/sites/{name}/slots/{slot}/instances/{instanceId}/continuouswebjobs/{webJobName}/stop": {
+      "post": {
+        "tags": [
+          "WebApps"
+        ],
+        "summary": "Stop a continuous web job for an app, a specific deployment slot, and/or a specific scaled-out instance.",
+        "description": "Stop a continuous web job for an app, a specific deployment slot, and/or a specific scaled-out instance.",
+        "operationId": "WebApps_StopInstanceContinuousWebJobSlot",
+        "parameters": [
+          {
+            "$ref": "#/parameters/resourceGroupNameParameter"
+          },
+          {
+            "name": "name",
+            "in": "path",
+            "description": "Site name.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "webJobId",
+            "in": "query",
+            "description": "Web job ID.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "slot",
+            "in": "path",
+            "description": "Name of the deployment slot. If a slot is not specified, the API deletes a deployment for the production slot.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "instanceId",
+            "in": "path",
+            "description": "ID of a specific scaled-out instance. This is the value of the name property in the JSON response from \"GET api/sites/{siteName}/instances\"",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "webJobName",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "$ref": "#/parameters/subscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Found continuous web job"
+          },
+          "404": {
+            "description": "Continuous web job does not exist"
+          }
+        }
+      }
+    },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Web/sites/{name}/slots/{slot}/instances/{instanceId}/deployments": {
       "get": {
         "tags": [
@@ -8858,6 +11885,69 @@
         }
       }
     },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Web/sites/{name}/slots/{slot}/instances/{instanceId}/deployments/{id}/log": {
+      "get": {
+        "tags": [
+          "WebApps"
+        ],
+        "summary": "List deployment log for specific deployment for an app, or a deployment slot, or for an instance of a scaled-out app.",
+        "description": "List deployment log for specific deployment for an app, or a deployment slot, or for an instance of a scaled-out app.",
+        "operationId": "WebApps_ListInstanceDeploymentLogSlot",
+        "produces": [
+          "application/json",
+          "text/json",
+          "application/xml",
+          "text/xml"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/resourceGroupNameParameter"
+          },
+          {
+            "name": "name",
+            "in": "path",
+            "description": "Name of the app.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "id",
+            "in": "path",
+            "description": "The ID of a specific deployment. This is the value of the name property in the JSON response from \"GET /api/sites/{siteName}/deployments\"",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "slot",
+            "in": "path",
+            "description": "Name of the deployment slot. If a slot is not specified, the API returns deployments for the production slot.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "instanceId",
+            "in": "path",
+            "description": "The ID of a specific scaled-out instance. This is the value of the name property in the JSON response from \"GET api/sites/{siteName}/instances\"",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "$ref": "#/parameters/subscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/Deployment"
+            }
+          }
+        }
+      }
+    },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Web/sites/{name}/slots/{slot}/instances/{instanceId}/extensions/MSDeploy": {
       "get": {
         "tags": [
@@ -9042,6 +12132,531 @@
         }
       }
     },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Web/sites/{name}/slots/{slot}/instances/{instanceId}/triggeredwebjobs": {
+      "get": {
+        "tags": [
+          "WebApps"
+        ],
+        "summary": "List triggered web jobs for an app, a specific deployment slot, and/or a specific scaled-out instance.",
+        "description": "List triggered web jobs for an app, a specific deployment slot, and/or a specific scaled-out instance.",
+        "operationId": "WebApps_ListInstanceTriggeredWebJobsSlot",
+        "produces": [
+          "application/json",
+          "text/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/resourceGroupNameParameter"
+          },
+          {
+            "name": "name",
+            "in": "path",
+            "description": "Site name.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "slot",
+            "in": "path",
+            "description": "Name of the deployment slot. If a slot is not specified, the API deletes a deployment for the production slot.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "instanceId",
+            "in": "path",
+            "description": "ID of a specific scaled-out instance. This is the value of the name property in the JSON response from \"GET api/sites/{siteName}/instances\"",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "$ref": "#/parameters/subscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/TriggeredWebJobCollection"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Web/sites/{name}/slots/{slot}/instances/{instanceId}/triggeredwebjobs/{webJobName}": {
+      "get": {
+        "tags": [
+          "WebApps"
+        ],
+        "summary": "Gets a triggered web job by its ID for an app, a specific deployment slot, and/or a specific scaled-out instance.",
+        "description": "Gets a triggered web job by its ID for an app, a specific deployment slot, and/or a specific scaled-out instance.",
+        "operationId": "WebApps_GetInstanceTriggeredWebJobSlot",
+        "produces": [
+          "application/json",
+          "text/json",
+          "application/xml",
+          "text/xml"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/resourceGroupNameParameter"
+          },
+          {
+            "name": "name",
+            "in": "path",
+            "description": "Site name.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "webJobId",
+            "in": "query",
+            "description": "Web job ID.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "slot",
+            "in": "path",
+            "description": "Name of the deployment slot. If a slot is not specified, the API deletes a deployment for the production slot.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "instanceId",
+            "in": "path",
+            "description": "ID of a specific scaled-out instance. This is the value of the name property in the JSON response from \"GET api/sites/{siteName}/instances\"",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "webJobName",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "$ref": "#/parameters/subscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Found continuous web job",
+            "schema": {
+              "$ref": "#/definitions/TriggeredWebJob"
+            }
+          },
+          "404": {
+            "description": "Triggered web job does not exist"
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "WebApps"
+        ],
+        "summary": "Delete a triggered web job by its ID for an app, a specific deployment slot, and/or a specific scaled-out instance.",
+        "description": "Delete a triggered web job by its ID for an app, a specific deployment slot, and/or a specific scaled-out instance.",
+        "operationId": "WebApps_DeleteInstanceTriggeredWebJobSlot",
+        "parameters": [
+          {
+            "$ref": "#/parameters/resourceGroupNameParameter"
+          },
+          {
+            "name": "name",
+            "in": "path",
+            "description": "Site name.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "webJobId",
+            "in": "query",
+            "description": "Web job ID.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "slot",
+            "in": "path",
+            "description": "Name of the deployment slot. If a slot is not specified, the API deletes a deployment for the production slot.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "instanceId",
+            "in": "path",
+            "description": "ID of a specific scaled-out instance. This is the value of the name property in the JSON response from \"GET api/sites/{siteName}/instances\"",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "webJobName",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "$ref": "#/parameters/subscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Succesfully deleted continuous web job"
+          },
+          "204": {
+            "description": "Triggered web job does not exist"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Web/sites/{name}/slots/{slot}/instances/{instanceId}/triggeredwebjobs/{webJobName}/history": {
+      "get": {
+        "tags": [
+          "WebApps"
+        ],
+        "summary": "List a triggered web job's history for an app, a specific deployment slot, and/or a specific scaled-out instance.",
+        "description": "List a triggered web job's history for an app, a specific deployment slot, and/or a specific scaled-out instance.",
+        "operationId": "WebApps_ListInstanceTriggeredWebJobHistorySlot",
+        "produces": [
+          "application/json",
+          "text/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/resourceGroupNameParameter"
+          },
+          {
+            "name": "name",
+            "in": "path",
+            "description": "Site name.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "webJobId",
+            "in": "query",
+            "description": "Web job ID.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "slot",
+            "in": "path",
+            "description": "Name of the deployment slot. If a slot is not specified, the API deletes a deployment for the production slot.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "instanceId",
+            "in": "path",
+            "description": "ID of a specific scaled-out instance. This is the value of the name property in the JSON response from \"GET api/sites/{siteName}/instances\"",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "webJobName",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "$ref": "#/parameters/subscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Found continuous web job",
+            "schema": {
+              "$ref": "#/definitions/TriggeredJobHistoryCollection"
+            }
+          },
+          "404": {
+            "description": "Triggered web job does not exist"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Web/sites/{name}/slots/{slot}/instances/{instanceId}/triggeredwebjobs/{webJobName}/history/{id}": {
+      "get": {
+        "tags": [
+          "WebApps"
+        ],
+        "summary": "Gets a triggered web job's history by its ID for an app, a specific deployment slot, and/or a specific scaled-out instance.",
+        "description": "Gets a triggered web job's history by its ID for an app, a specific deployment slot, and/or a specific scaled-out instance.",
+        "operationId": "WebApps_GetInstanceTriggeredWebJobHistorySlot",
+        "produces": [
+          "application/json",
+          "text/json",
+          "application/xml",
+          "text/xml"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/resourceGroupNameParameter"
+          },
+          {
+            "name": "name",
+            "in": "path",
+            "description": "Site name.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "webJobId",
+            "in": "query",
+            "description": "Web job ID.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "id",
+            "in": "path",
+            "description": "History ID.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "slot",
+            "in": "path",
+            "description": "Name of the deployment slot. If a slot is not specified, the API deletes a deployment for the production slot.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "instanceId",
+            "in": "path",
+            "description": "ID of a specific scaled-out instance. This is the value of the name property in the JSON response from \"GET api/sites/{siteName}/instances\"",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "webJobName",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "$ref": "#/parameters/subscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Found continuous web job",
+            "schema": {
+              "$ref": "#/definitions/TriggeredJobHistory"
+            }
+          },
+          "404": {
+            "description": "Triggered web job does not exist"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Web/sites/{name}/slots/{slot}/instances/{instanceId}/triggeredwebjobs/{webJobName}/run": {
+      "post": {
+        "tags": [
+          "WebApps"
+        ],
+        "summary": "Run a triggered web job for an app, a specific deployment slot, and/or a specific scaled-out instance.",
+        "description": "Run a triggered web job for an app, a specific deployment slot, and/or a specific scaled-out instance.",
+        "operationId": "WebApps_RunInstanceTriggeredWebJobSlot",
+        "parameters": [
+          {
+            "$ref": "#/parameters/resourceGroupNameParameter"
+          },
+          {
+            "name": "name",
+            "in": "path",
+            "description": "Site name.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "webJobId",
+            "in": "query",
+            "description": "Web job ID.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "slot",
+            "in": "path",
+            "description": "Name of the deployment slot. If a slot is not specified, the API deletes a deployment for the production slot.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "instanceId",
+            "in": "path",
+            "description": "ID of a specific scaled-out instance. This is the value of the name property in the JSON response from \"GET api/sites/{siteName}/instances\"",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "webJobName",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "$ref": "#/parameters/subscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Found continuous web job"
+          },
+          "404": {
+            "description": "Triggered web job does not exist"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Web/sites/{name}/slots/{slot}/instances/{instanceId}/webjobs": {
+      "get": {
+        "tags": [
+          "WebApps"
+        ],
+        "summary": "List webjobs for an app, or a deployment slot, or for an instance of a scaled-out app.",
+        "description": "List webjobs for an app, or a deployment slot, or for an instance of a scaled-out app.",
+        "operationId": "WebApps_ListInstanceWebJobsSlot",
+        "produces": [
+          "application/json",
+          "text/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/resourceGroupNameParameter"
+          },
+          {
+            "name": "name",
+            "in": "path",
+            "description": "Site name.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "slot",
+            "in": "path",
+            "description": "Name of the deployment slot. If a slot is not specified, the API returns deployments for the production slot.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "instanceId",
+            "in": "path",
+            "description": "The ID of a specific scaled-out instance. This is the value of the name property in the JSON response from \"GET api/sites/{siteName}/instances\"",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "$ref": "#/parameters/subscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/WebJobCollection"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Web/sites/{name}/slots/{slot}/instances/{instanceId}/webjobs/{webJobName}": {
+      "get": {
+        "tags": [
+          "WebApps"
+        ],
+        "summary": "Get webjob information for an app, or a deployment slot, or for an instance of a scaled-out app.",
+        "description": "Get webjob information for an app, or a deployment slot, or for an instance of a scaled-out app.",
+        "operationId": "WebApps_GetWebJobSlot",
+        "produces": [
+          "application/json",
+          "text/json",
+          "application/xml",
+          "text/xml"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/resourceGroupNameParameter"
+          },
+          {
+            "name": "name",
+            "in": "path",
+            "description": "Site name.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "webJobName",
+            "in": "path",
+            "description": "Name of the web job.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "slot",
+            "in": "path",
+            "description": "Name of the deployment slot. If a slot is not specified, the API returns deployments for the production slot.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "instanceId",
+            "in": "path",
+            "description": "The ID of a specific scaled-out instance. This is the value of the name property in the JSON response from \"GET api/sites/{siteName}/instances\"",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "$ref": "#/parameters/subscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/WebJob"
+            }
+          }
+        }
+      }
+    },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Web/sites/{name}/slots/{slot}/iscloneable": {
       "post": {
         "tags": [
@@ -9086,6 +12701,55 @@
             "description": "OK",
             "schema": {
               "$ref": "#/definitions/SiteCloneability"
+            }
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Web/sites/{name}/slots/{slot}/listsyncfunctiontriggerstatus": {
+      "post": {
+        "tags": [
+          "WebApps"
+        ],
+        "summary": "this is to allow calling via powershell and ARM template",
+        "description": "this is to allow calling via powershell and ARM template",
+        "operationId": "WebApps_ListSyncFunctionTriggersSlot",
+        "produces": [
+          "application/json",
+          "text/json",
+          "application/xml",
+          "text/xml"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/resourceGroupNameParameter"
+          },
+          {
+            "name": "name",
+            "in": "path",
+            "description": "Name of the app.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "slot",
+            "in": "path",
+            "description": "Name of the deployment slot. If a slot is not specified, the API will restore a backup of the production slot.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "$ref": "#/parameters/subscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/FunctionSecrets"
             }
           }
         }
@@ -10734,6 +14398,369 @@
         }
       }
     },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Web/sites/{name}/slots/{slot}/triggeredwebjobs": {
+      "get": {
+        "tags": [
+          "WebApps"
+        ],
+        "summary": "List triggered web jobs for an app, a specific deployment slot, and/or a specific scaled-out instance.",
+        "description": "List triggered web jobs for an app, a specific deployment slot, and/or a specific scaled-out instance.",
+        "operationId": "WebApps_ListTriggeredWebJobsSlot",
+        "produces": [
+          "application/json",
+          "text/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/resourceGroupNameParameter"
+          },
+          {
+            "name": "name",
+            "in": "path",
+            "description": "Site name.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "slot",
+            "in": "path",
+            "description": "Name of the deployment slot. If a slot is not specified, the API deletes a deployment for the production slot.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "$ref": "#/parameters/subscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/TriggeredWebJobCollection"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Web/sites/{name}/slots/{slot}/triggeredwebjobs/{webJobName}": {
+      "get": {
+        "tags": [
+          "WebApps"
+        ],
+        "summary": "Gets a triggered web job by its ID for an app, a specific deployment slot, and/or a specific scaled-out instance.",
+        "description": "Gets a triggered web job by its ID for an app, a specific deployment slot, and/or a specific scaled-out instance.",
+        "operationId": "WebApps_GetTriggeredWebJobSlot",
+        "produces": [
+          "application/json",
+          "text/json",
+          "application/xml",
+          "text/xml"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/resourceGroupNameParameter"
+          },
+          {
+            "name": "name",
+            "in": "path",
+            "description": "Site name.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "webJobId",
+            "in": "query",
+            "description": "Web job ID.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "slot",
+            "in": "path",
+            "description": "Name of the deployment slot. If a slot is not specified, the API deletes a deployment for the production slot.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "webJobName",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "$ref": "#/parameters/subscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Found continuous web job",
+            "schema": {
+              "$ref": "#/definitions/TriggeredWebJob"
+            }
+          },
+          "404": {
+            "description": "Triggered web job does not exist"
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "WebApps"
+        ],
+        "summary": "Delete a triggered web job by its ID for an app, a specific deployment slot, and/or a specific scaled-out instance.",
+        "description": "Delete a triggered web job by its ID for an app, a specific deployment slot, and/or a specific scaled-out instance.",
+        "operationId": "WebApps_DeleteTriggeredWebJobSlot",
+        "parameters": [
+          {
+            "$ref": "#/parameters/resourceGroupNameParameter"
+          },
+          {
+            "name": "name",
+            "in": "path",
+            "description": "Site name.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "webJobId",
+            "in": "query",
+            "description": "Web job ID.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "slot",
+            "in": "path",
+            "description": "Name of the deployment slot. If a slot is not specified, the API deletes a deployment for the production slot.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "webJobName",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "$ref": "#/parameters/subscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Succesfully deleted continuous web job"
+          },
+          "204": {
+            "description": "Triggered web job does not exist"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Web/sites/{name}/slots/{slot}/triggeredwebjobs/{webJobName}/history": {
+      "get": {
+        "tags": [
+          "WebApps"
+        ],
+        "summary": "List a triggered web job's history for an app, a specific deployment slot, and/or a specific scaled-out instance.",
+        "description": "List a triggered web job's history for an app, a specific deployment slot, and/or a specific scaled-out instance.",
+        "operationId": "WebApps_ListTriggeredWebJobHistorySlot",
+        "produces": [
+          "application/json",
+          "text/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/resourceGroupNameParameter"
+          },
+          {
+            "name": "name",
+            "in": "path",
+            "description": "Site name.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "webJobId",
+            "in": "query",
+            "description": "Web job ID.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "slot",
+            "in": "path",
+            "description": "Name of the deployment slot. If a slot is not specified, the API deletes a deployment for the production slot.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "webJobName",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "$ref": "#/parameters/subscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Found continuous web job",
+            "schema": {
+              "$ref": "#/definitions/TriggeredJobHistoryCollection"
+            }
+          },
+          "404": {
+            "description": "Triggered web job does not exist"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Web/sites/{name}/slots/{slot}/triggeredwebjobs/{webJobName}/history/{id}": {
+      "get": {
+        "tags": [
+          "WebApps"
+        ],
+        "summary": "Gets a triggered web job's history by its ID for an app, a specific deployment slot, and/or a specific scaled-out instance.",
+        "description": "Gets a triggered web job's history by its ID for an app, a specific deployment slot, and/or a specific scaled-out instance.",
+        "operationId": "WebApps_GetTriggeredWebJobHistorySlot",
+        "produces": [
+          "application/json",
+          "text/json",
+          "application/xml",
+          "text/xml"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/resourceGroupNameParameter"
+          },
+          {
+            "name": "name",
+            "in": "path",
+            "description": "Site name.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "webJobId",
+            "in": "query",
+            "description": "Web job ID.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "id",
+            "in": "path",
+            "description": "History ID.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "slot",
+            "in": "path",
+            "description": "Name of the deployment slot. If a slot is not specified, the API deletes a deployment for the production slot.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "webJobName",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "$ref": "#/parameters/subscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Found continuous web job",
+            "schema": {
+              "$ref": "#/definitions/TriggeredJobHistory"
+            }
+          },
+          "404": {
+            "description": "Triggered web job does not exist"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Web/sites/{name}/slots/{slot}/triggeredwebjobs/{webJobName}/run": {
+      "post": {
+        "tags": [
+          "WebApps"
+        ],
+        "summary": "Run a triggered web job for an app, a specific deployment slot, and/or a specific scaled-out instance.",
+        "description": "Run a triggered web job for an app, a specific deployment slot, and/or a specific scaled-out instance.",
+        "operationId": "WebApps_RunTriggeredWebJobSlot",
+        "parameters": [
+          {
+            "$ref": "#/parameters/resourceGroupNameParameter"
+          },
+          {
+            "name": "name",
+            "in": "path",
+            "description": "Site name.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "webJobId",
+            "in": "query",
+            "description": "Web job ID.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "slot",
+            "in": "path",
+            "description": "Name of the deployment slot. If a slot is not specified, the API deletes a deployment for the production slot.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "webJobName",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "$ref": "#/parameters/subscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Found continuous web job"
+          },
+          "404": {
+            "description": "Triggered web job does not exist"
+          }
+        }
+      }
+    },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Web/sites/{name}/slots/{slot}/usages": {
       "get": {
         "tags": [
@@ -11299,6 +15326,112 @@
         }
       }
     },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Web/sites/{name}/slots/{slot}/webjobs": {
+      "get": {
+        "tags": [
+          "WebApps"
+        ],
+        "summary": "List webjobs for an app, or a deployment slot, or for an instance of a scaled-out app.",
+        "description": "List webjobs for an app, or a deployment slot, or for an instance of a scaled-out app.",
+        "operationId": "WebApps_ListWebJobsSlot",
+        "produces": [
+          "application/json",
+          "text/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/resourceGroupNameParameter"
+          },
+          {
+            "name": "name",
+            "in": "path",
+            "description": "Site name.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "slot",
+            "in": "path",
+            "description": "Name of the deployment slot. If a slot is not specified, the API returns deployments for the production slot.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "$ref": "#/parameters/subscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/WebJobCollection"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Web/sites/{name}/slots/{slot}/webjobs/{webJobName}": {
+      "get": {
+        "tags": [
+          "WebApps"
+        ],
+        "summary": "Get webjob information for an app, or a deployment slot, or for an instance of a scaled-out app.",
+        "description": "Get webjob information for an app, or a deployment slot, or for an instance of a scaled-out app.",
+        "operationId": "WebApps_GetWebJobSlot",
+        "produces": [
+          "application/json",
+          "text/json",
+          "application/xml",
+          "text/xml"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/resourceGroupNameParameter"
+          },
+          {
+            "name": "name",
+            "in": "path",
+            "description": "Site name.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "webJobName",
+            "in": "path",
+            "description": "Name of the web job.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "slot",
+            "in": "path",
+            "description": "Name of the deployment slot. If a slot is not specified, the API returns deployments for the production slot.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "$ref": "#/parameters/subscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/WebJob"
+            }
+          }
+        }
+      }
+    },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Web/sites/{name}/slotsdiffs": {
       "post": {
         "tags": [
@@ -11722,6 +15855,327 @@
         "responses": {
           "204": {
             "description": "No Content"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Web/sites/{name}/triggeredwebjobs": {
+      "get": {
+        "tags": [
+          "WebApps"
+        ],
+        "summary": "List triggered web jobs for an app, a specific deployment slot, and/or a specific scaled-out instance.",
+        "description": "List triggered web jobs for an app, a specific deployment slot, and/or a specific scaled-out instance.",
+        "operationId": "WebApps_ListTriggeredWebJobs",
+        "produces": [
+          "application/json",
+          "text/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/resourceGroupNameParameter"
+          },
+          {
+            "name": "name",
+            "in": "path",
+            "description": "Site name.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "$ref": "#/parameters/subscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/TriggeredWebJobCollection"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Web/sites/{name}/triggeredwebjobs/{webJobName}": {
+      "get": {
+        "tags": [
+          "WebApps"
+        ],
+        "summary": "Gets a triggered web job by its ID for an app, a specific deployment slot, and/or a specific scaled-out instance.",
+        "description": "Gets a triggered web job by its ID for an app, a specific deployment slot, and/or a specific scaled-out instance.",
+        "operationId": "WebApps_GetTriggeredWebJob",
+        "produces": [
+          "application/json",
+          "text/json",
+          "application/xml",
+          "text/xml"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/resourceGroupNameParameter"
+          },
+          {
+            "name": "name",
+            "in": "path",
+            "description": "Site name.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "webJobId",
+            "in": "query",
+            "description": "Web job ID.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "webJobName",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "$ref": "#/parameters/subscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Found continuous web job",
+            "schema": {
+              "$ref": "#/definitions/TriggeredWebJob"
+            }
+          },
+          "404": {
+            "description": "Triggered web job does not exist"
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "WebApps"
+        ],
+        "summary": "Delete a triggered web job by its ID for an app, a specific deployment slot, and/or a specific scaled-out instance.",
+        "description": "Delete a triggered web job by its ID for an app, a specific deployment slot, and/or a specific scaled-out instance.",
+        "operationId": "WebApps_DeleteTriggeredWebJob",
+        "parameters": [
+          {
+            "$ref": "#/parameters/resourceGroupNameParameter"
+          },
+          {
+            "name": "name",
+            "in": "path",
+            "description": "Site name.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "webJobId",
+            "in": "query",
+            "description": "Web job ID.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "webJobName",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "$ref": "#/parameters/subscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Succesfully deleted continuous web job"
+          },
+          "204": {
+            "description": "Triggered web job does not exist"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Web/sites/{name}/triggeredwebjobs/{webJobName}/history": {
+      "get": {
+        "tags": [
+          "WebApps"
+        ],
+        "summary": "List a triggered web job's history for an app, a specific deployment slot, and/or a specific scaled-out instance.",
+        "description": "List a triggered web job's history for an app, a specific deployment slot, and/or a specific scaled-out instance.",
+        "operationId": "WebApps_ListTriggeredWebJobHistory",
+        "produces": [
+          "application/json",
+          "text/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/resourceGroupNameParameter"
+          },
+          {
+            "name": "name",
+            "in": "path",
+            "description": "Site name.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "webJobId",
+            "in": "query",
+            "description": "Web job ID.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "webJobName",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "$ref": "#/parameters/subscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Found continuous web job",
+            "schema": {
+              "$ref": "#/definitions/TriggeredJobHistoryCollection"
+            }
+          },
+          "404": {
+            "description": "Triggered web job does not exist"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Web/sites/{name}/triggeredwebjobs/{webJobName}/history/{id}": {
+      "get": {
+        "tags": [
+          "WebApps"
+        ],
+        "summary": "Gets a triggered web job's history by its ID for an app, a specific deployment slot, and/or a specific scaled-out instance.",
+        "description": "Gets a triggered web job's history by its ID for an app, a specific deployment slot, and/or a specific scaled-out instance.",
+        "operationId": "WebApps_GetTriggeredWebJobHistory",
+        "produces": [
+          "application/json",
+          "text/json",
+          "application/xml",
+          "text/xml"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/resourceGroupNameParameter"
+          },
+          {
+            "name": "name",
+            "in": "path",
+            "description": "Site name.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "webJobId",
+            "in": "query",
+            "description": "Web job ID.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "id",
+            "in": "path",
+            "description": "History ID.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "webJobName",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "$ref": "#/parameters/subscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Found continuous web job",
+            "schema": {
+              "$ref": "#/definitions/TriggeredJobHistory"
+            }
+          },
+          "404": {
+            "description": "Triggered web job does not exist"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Web/sites/{name}/triggeredwebjobs/{webJobName}/run": {
+      "post": {
+        "tags": [
+          "WebApps"
+        ],
+        "summary": "Run a triggered web job for an app, a specific deployment slot, and/or a specific scaled-out instance.",
+        "description": "Run a triggered web job for an app, a specific deployment slot, and/or a specific scaled-out instance.",
+        "operationId": "WebApps_RunTriggeredWebJob",
+        "parameters": [
+          {
+            "$ref": "#/parameters/resourceGroupNameParameter"
+          },
+          {
+            "name": "name",
+            "in": "path",
+            "description": "Site name.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "webJobId",
+            "in": "query",
+            "description": "Web job ID.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "webJobName",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "$ref": "#/parameters/subscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Found continuous web job"
+          },
+          "404": {
+            "description": "Triggered web job does not exist"
           }
         }
       }
@@ -12223,6 +16677,98 @@
             "description": "OK",
             "schema": {
               "$ref": "#/definitions/VnetGateway"
+            }
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Web/sites/{name}/webjobs": {
+      "get": {
+        "tags": [
+          "WebApps"
+        ],
+        "summary": "List webjobs for an app, or a deployment slot, or for an instance of a scaled-out app.",
+        "description": "List webjobs for an app, or a deployment slot, or for an instance of a scaled-out app.",
+        "operationId": "WebApps_ListWebJobs",
+        "produces": [
+          "application/json",
+          "text/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/resourceGroupNameParameter"
+          },
+          {
+            "name": "name",
+            "in": "path",
+            "description": "Site name.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "$ref": "#/parameters/subscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/WebJobCollection"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Web/sites/{name}/webjobs/{webJobName}": {
+      "get": {
+        "tags": [
+          "WebApps"
+        ],
+        "summary": "Get webjob information for an app, or a deployment slot, or for an instance of a scaled-out app.",
+        "description": "Get webjob information for an app, or a deployment slot, or for an instance of a scaled-out app.",
+        "operationId": "WebApps_GetWebJob",
+        "produces": [
+          "application/json",
+          "text/json",
+          "application/xml",
+          "text/xml"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/resourceGroupNameParameter"
+          },
+          {
+            "name": "name",
+            "in": "path",
+            "description": "Site name.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "webJobName",
+            "in": "path",
+            "description": "Name of the web job.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "$ref": "#/parameters/subscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/WebJob"
             }
           }
         }
@@ -12806,6 +17352,90 @@
         }
       }
     },
+    "ContinuousWebJob": {
+      "description": "Continuous Web Job Information.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/ProxyOnlyResource"
+        }
+      ],
+      "properties": {
+        "properties": {
+          "description": "ContinuousWebJob resource specific properties",
+          "properties": {
+            "status": {
+              "description": "Job status.",
+              "type": "string"
+            },
+            "detailedStatus": {
+              "description": "Detailed status.",
+              "type": "string"
+            },
+            "logUrl": {
+              "description": "Log URL.",
+              "type": "string"
+            },
+            "name": {
+              "description": "Job name. Used as job identifier in ARM resource URI.",
+              "type": "string"
+            },
+            "runCommand": {
+              "description": "Run command.",
+              "type": "string"
+            },
+            "url": {
+              "description": "Job URL.",
+              "type": "string"
+            },
+            "extraInfoUrl": {
+              "description": "Extra Info URL.",
+              "type": "string"
+            },
+            "jobType": {
+              "description": "Job type.",
+              "type": "string"
+            },
+            "error": {
+              "description": "Error information.",
+              "type": "string"
+            },
+            "usingSdk": {
+              "description": "Using SDK?",
+              "type": "boolean"
+            },
+            "settings": {
+              "description": "Job settings.",
+              "type": "object",
+              "additionalProperties": {
+                "$ref": "#/definitions/Object"
+              }
+            }
+          },
+          "x-ms-client-flatten": true
+        }
+      }
+    },
+    "ContinuousWebJobCollection": {
+      "description": "Collection of Kudu continuous web job information elements.",
+      "required": [
+        "value"
+      ],
+      "type": "object",
+      "properties": {
+        "value": {
+          "description": "Collection of resources.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ContinuousWebJob"
+          }
+        },
+        "nextLink": {
+          "description": "Link to next page of resources.",
+          "type": "string"
+        }
+      }
+    },
     "CorsSettings": {
       "description": "Cross-Origin Resource Sharing (CORS) settings for the app.",
       "type": "object",
@@ -13218,6 +17848,111 @@
         "enabled": {
           "description": "True if configuration is enabled, false if it is disabled and null if configuration is not set.",
           "type": "boolean"
+        }
+      }
+    },
+    "FunctionEnvelope": {
+      "description": "Web Job Information.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/ProxyOnlyResource"
+        }
+      ],
+      "properties": {
+        "properties": {
+          "description": "FunctionEnvelope resource specific properties",
+          "properties": {
+            "name": {
+              "description": "Function name.",
+              "type": "string"
+            },
+            "functionAppId": {
+              "description": "Function App ID.",
+              "type": "string"
+            },
+            "scriptRootPathHref": {
+              "description": "Script root path URI.",
+              "type": "string"
+            },
+            "scriptHref": {
+              "description": "Script URI.",
+              "type": "string"
+            },
+            "configHref": {
+              "description": "Config URI.",
+              "type": "string"
+            },
+            "secretsFileHref": {
+              "description": "Secrets file URI.",
+              "type": "string"
+            },
+            "href": {
+              "description": "Function URI.",
+              "type": "string"
+            },
+            "config": {
+              "$ref": "#/definitions/Object",
+              "description": "Config information."
+            },
+            "files": {
+              "description": "File list.",
+              "type": "object",
+              "additionalProperties": {
+                "type": "string"
+              }
+            },
+            "testData": {
+              "description": "Test data.",
+              "type": "string"
+            }
+          },
+          "x-ms-client-flatten": true
+        }
+      }
+    },
+    "FunctionEnvelopeCollection": {
+      "description": "Collection of Kudu function information elements.",
+      "required": [
+        "value"
+      ],
+      "type": "object",
+      "properties": {
+        "value": {
+          "description": "Collection of resources.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/FunctionEnvelope"
+          }
+        },
+        "nextLink": {
+          "description": "Link to next page of resources.",
+          "type": "string"
+        }
+      }
+    },
+    "FunctionSecrets": {
+      "description": "Function secrets.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/ProxyOnlyResource"
+        }
+      ],
+      "properties": {
+        "properties": {
+          "description": "FunctionSecrets resource specific properties",
+          "properties": {
+            "key": {
+              "description": "Secret key.",
+              "type": "string"
+            },
+            "triggerUrl": {
+              "description": "Trigger URL.",
+              "type": "string"
+            }
+          },
+          "x-ms-client-flatten": true
         }
       }
     },
@@ -13936,6 +18671,10 @@
         }
       }
     },
+    "Object": {
+      "type": "object",
+      "properties": {}
+    },
     "Operation": {
       "description": "Operation.",
       "type": "object",
@@ -14131,6 +18870,357 @@
             },
             "marketplaceOffer": {
               "description": "Marketplace offer.",
+              "type": "string"
+            }
+          },
+          "x-ms-client-flatten": true
+        }
+      }
+    },
+    "ProcessInfo": {
+      "description": "Process Information.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/ProxyOnlyResource"
+        }
+      ],
+      "properties": {
+        "properties": {
+          "description": "ProcessInfo resource specific properties",
+          "properties": {
+            "id": {
+              "format": "int32",
+              "description": "ARM Identifier for deployment.",
+              "type": "integer",
+              "x-ms-mutability": [
+                "create",
+                "read"
+              ]
+            },
+            "name": {
+              "description": "Deployment name.",
+              "type": "string"
+            },
+            "href": {
+              "description": "HRef URI.",
+              "type": "string"
+            },
+            "miniDump": {
+              "description": "Minidump URI.",
+              "type": "string"
+            },
+            "isProfileRunning": {
+              "description": "Is profile running?",
+              "type": "boolean"
+            },
+            "isIisProfileRunning": {
+              "description": "Is the IIS Profile running?",
+              "type": "boolean"
+            },
+            "iisProfileTimeoutInSeconds": {
+              "format": "double",
+              "description": "IIS Profile timeout (seconds).",
+              "type": "number"
+            },
+            "parent": {
+              "description": "Parent process.",
+              "type": "string"
+            },
+            "children": {
+              "description": "Child process list.",
+              "type": "array",
+              "items": {
+                "type": "string"
+              }
+            },
+            "threads": {
+              "description": "Thread list.",
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/ProcessThreadInfo"
+              }
+            },
+            "openFileHandles": {
+              "description": "List of open files.",
+              "type": "array",
+              "items": {
+                "type": "string"
+              }
+            },
+            "modules": {
+              "description": "List of modules.",
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/ProcessModuleInfo"
+              }
+            },
+            "fileName": {
+              "description": "File name of this process.",
+              "type": "string"
+            },
+            "commandLine": {
+              "description": "Command line.",
+              "type": "string"
+            },
+            "userName": {
+              "description": "User name.",
+              "type": "string"
+            },
+            "handleCount": {
+              "format": "int32",
+              "description": "Handle count.",
+              "type": "integer"
+            },
+            "moduleCount": {
+              "format": "int32",
+              "description": "Module count.",
+              "type": "integer"
+            },
+            "threadCount": {
+              "format": "int32",
+              "description": "Thread count.",
+              "type": "integer"
+            },
+            "startTime": {
+              "format": "date-time",
+              "description": "Start time.",
+              "type": "string"
+            },
+            "totalProcessorTime": {
+              "description": "Total CPU time.",
+              "type": "string"
+            },
+            "userProcessorTime": {
+              "description": "User CPU time.",
+              "type": "string"
+            },
+            "privilegedProcessorTime": {
+              "description": "Privileged CPU time.",
+              "type": "string"
+            },
+            "workingSet64": {
+              "format": "int64",
+              "description": "Working set.",
+              "type": "integer"
+            },
+            "peakWorkingSet64": {
+              "format": "int64",
+              "description": "Peak working set.",
+              "type": "integer"
+            },
+            "privateMemorySize64": {
+              "format": "int64",
+              "description": "Private memory size.",
+              "type": "integer"
+            },
+            "virtualMemorySize64": {
+              "format": "int64",
+              "description": "Virtual memory size.",
+              "type": "integer"
+            },
+            "peakVirtualMemorySize64": {
+              "format": "int64",
+              "description": "Peak virtual memory usage.",
+              "type": "integer"
+            },
+            "pagedSystemMemorySize64": {
+              "format": "int64",
+              "description": "Paged system memory.",
+              "type": "integer"
+            },
+            "nonpagedSystemMemorySize64": {
+              "format": "int64",
+              "description": "Non-paged system memory.",
+              "type": "integer"
+            },
+            "pagedMemorySize64": {
+              "format": "int64",
+              "description": "Paged memory.",
+              "type": "integer"
+            },
+            "peakPagedMemorySize64": {
+              "format": "int64",
+              "description": "Peak paged memory.",
+              "type": "integer"
+            },
+            "timeStamp": {
+              "format": "date-time",
+              "description": "Time stamp.",
+              "type": "string"
+            },
+            "environmentVariables": {
+              "description": "List of environment variables.",
+              "type": "object",
+              "additionalProperties": {
+                "type": "string"
+              }
+            },
+            "isScmSite": {
+              "description": "Is this the SCM site?",
+              "type": "boolean"
+            },
+            "isWebJob": {
+              "description": "Is this a Web Job?",
+              "type": "boolean"
+            },
+            "description": {
+              "description": "Description of process.",
+              "type": "string"
+            }
+          },
+          "x-ms-client-flatten": true
+        }
+      }
+    },
+    "ProcessInfoCollection": {
+      "description": "Collection of Kudu process information elements.",
+      "required": [
+        "value"
+      ],
+      "type": "object",
+      "properties": {
+        "value": {
+          "description": "Collection of resources.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ProcessInfo"
+          }
+        },
+        "nextLink": {
+          "description": "Link to next page of resources.",
+          "type": "string"
+        }
+      }
+    },
+    "ProcessModuleInfo": {
+      "description": "Process Module Information.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/ProxyOnlyResource"
+        }
+      ],
+      "properties": {
+        "properties": {
+          "description": "ProcessModuleInfo resource specific properties",
+          "properties": {
+            "baseAddress": {
+              "description": "Base address. Used as module identifier in ARM resource URI.",
+              "type": "string"
+            },
+            "fileName": {
+              "description": "File name.",
+              "type": "string"
+            },
+            "href": {
+              "description": "HRef URI.",
+              "type": "string"
+            },
+            "filePath": {
+              "description": "File path.",
+              "type": "string"
+            },
+            "moduleMemorySize": {
+              "format": "int32",
+              "description": "Module memory size.",
+              "type": "integer"
+            },
+            "fileVersion": {
+              "description": "File version.",
+              "type": "string"
+            },
+            "fileDescription": {
+              "description": "File description.",
+              "type": "string"
+            },
+            "product": {
+              "description": "Product name.",
+              "type": "string"
+            },
+            "productVersion": {
+              "description": "Product version.",
+              "type": "string"
+            },
+            "isDebug": {
+              "description": "Is debug?",
+              "type": "boolean"
+            },
+            "language": {
+              "description": "Module language (locale).",
+              "type": "string"
+            }
+          },
+          "x-ms-client-flatten": true
+        }
+      }
+    },
+    "ProcessThreadInfo": {
+      "description": "Process Thread Information.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/ProxyOnlyResource"
+        }
+      ],
+      "properties": {
+        "properties": {
+          "description": "ProcessThreadInfo resource specific properties",
+          "properties": {
+            "id": {
+              "format": "int32",
+              "description": "ARM Identifier for deployment.",
+              "type": "integer"
+            },
+            "href": {
+              "description": "HRef URI.",
+              "type": "string"
+            },
+            "process": {
+              "description": "Process URI.",
+              "type": "string"
+            },
+            "startAddress": {
+              "description": "Start address.",
+              "type": "string"
+            },
+            "currentPriority": {
+              "format": "int32",
+              "description": "Current thread priority.",
+              "type": "integer"
+            },
+            "priorityLevel": {
+              "description": "Thread priority level.",
+              "type": "string"
+            },
+            "basePriority": {
+              "format": "int32",
+              "description": "Base priority.",
+              "type": "integer"
+            },
+            "startTime": {
+              "format": "date-time",
+              "description": "Start time.",
+              "type": "string"
+            },
+            "totalProcessorTime": {
+              "description": "Total processor time.",
+              "type": "string"
+            },
+            "userProcessorTime": {
+              "description": "User processor time.",
+              "type": "string"
+            },
+            "priviledgedProcessorTime": {
+              "description": "Priviledged processor time.",
+              "type": "string"
+            },
+            "state": {
+              "description": "Thread state.",
+              "type": "string"
+            },
+            "waitReason": {
+              "description": "Wait reason.",
               "type": "string"
             }
           },
@@ -15471,6 +20561,137 @@
         }
       }
     },
+    "SiteExtensionInfo": {
+      "description": "Site Extension Information.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/ProxyOnlyResource"
+        }
+      ],
+      "properties": {
+        "properties": {
+          "description": "SiteExtensionInfo resource specific properties",
+          "properties": {
+            "id": {
+              "description": "Site extension ID.",
+              "type": "string"
+            },
+            "title": {
+              "description": "Site extension title.",
+              "type": "string"
+            },
+            "type": {
+              "description": "Site extension type.",
+              "enum": [
+                "Gallery",
+                "WebRoot"
+              ],
+              "type": "string",
+              "x-ms-enum": {
+                "name": "SiteExtensionType",
+                "modelAsString": false
+              }
+            },
+            "summary": {
+              "description": "Summary description.",
+              "type": "string"
+            },
+            "description": {
+              "description": "Detailed description.",
+              "type": "string"
+            },
+            "version": {
+              "description": "Version information.",
+              "type": "string"
+            },
+            "extensionUrl": {
+              "description": "Extension URL.",
+              "type": "string"
+            },
+            "projectUrl": {
+              "description": "Project URL.",
+              "type": "string"
+            },
+            "iconUrl": {
+              "description": "Icon URL.",
+              "type": "string"
+            },
+            "licenseUrl": {
+              "description": "License URL.",
+              "type": "string"
+            },
+            "feedUrl": {
+              "description": "Feed URL.",
+              "type": "string"
+            },
+            "authors": {
+              "description": "List of authors.",
+              "type": "array",
+              "items": {
+                "type": "string"
+              }
+            },
+            "installationArgs": {
+              "description": "Installer command line parameters.",
+              "type": "string"
+            },
+            "publishedDateTime": {
+              "format": "date-time",
+              "description": "Published timestamp.",
+              "type": "string"
+            },
+            "downloadCount": {
+              "format": "int32",
+              "description": "Count of downloads.",
+              "type": "integer"
+            },
+            "localIsLatestVersion": {
+              "description": "<code>true</code> if the local version is the latest version; <code>false</code> otherwise.",
+              "type": "boolean"
+            },
+            "localPath": {
+              "description": "Local path.",
+              "type": "string"
+            },
+            "installedDateTime": {
+              "format": "date-time",
+              "description": "Installed timestamp.",
+              "type": "string"
+            },
+            "provisioningState": {
+              "description": "Provisioning state.",
+              "type": "string"
+            },
+            "comment": {
+              "description": "Site Extension comment.",
+              "type": "string"
+            }
+          },
+          "x-ms-client-flatten": true
+        }
+      }
+    },
+    "SiteExtensionInfoCollection": {
+      "description": "Collection of Kudu site extension information elements.",
+      "required": [
+        "value"
+      ],
+      "type": "object",
+      "properties": {
+        "value": {
+          "description": "Collection of resources.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/SiteExtensionInfo"
+          }
+        },
+        "nextLink": {
+          "description": "Link to next page of resources.",
+          "type": "string"
+        }
+      }
+    },
     "SiteInstance": {
       "description": "Instance of an app.",
       "type": "object",
@@ -16023,6 +21244,202 @@
         }
       }
     },
+    "TriggeredJobHistory": {
+      "description": "Triggered Web Job History. List of Triggered Web Job Run Information elements.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/ProxyOnlyResource"
+        }
+      ],
+      "properties": {
+        "properties": {
+          "description": "TriggeredJobHistory resource specific properties",
+          "properties": {
+            "triggeredJobRuns": {
+              "description": "List of triggered web job runs.",
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/TriggeredJobRun"
+              }
+            }
+          },
+          "x-ms-client-flatten": true
+        }
+      }
+    },
+    "TriggeredJobHistoryCollection": {
+      "description": "Collection of Kudu continuous web job information elements.",
+      "required": [
+        "value"
+      ],
+      "type": "object",
+      "properties": {
+        "value": {
+          "description": "Collection of resources.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/TriggeredJobHistory"
+          }
+        },
+        "nextLink": {
+          "description": "Link to next page of resources.",
+          "type": "string"
+        }
+      }
+    },
+    "TriggeredJobRun": {
+      "description": "Triggered Web Job Run Information.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/ProxyOnlyResource"
+        }
+      ],
+      "properties": {
+        "properties": {
+          "description": "TriggeredJobRun resource specific properties",
+          "properties": {
+            "id": {
+              "description": "Job ID.",
+              "type": "string",
+              "x-ms-mutability": [
+                "create",
+                "read"
+              ]
+            },
+            "name": {
+              "description": "Job name.",
+              "type": "string",
+              "readOnly": true
+            },
+            "status": {
+              "description": "Job status.",
+              "type": "string"
+            },
+            "startTime": {
+              "format": "date-time",
+              "description": "Start time.",
+              "type": "string"
+            },
+            "endTime": {
+              "format": "date-time",
+              "description": "End time.",
+              "type": "string"
+            },
+            "duration": {
+              "description": "Job duration.",
+              "type": "string"
+            },
+            "outputUrl": {
+              "description": "Output URL.",
+              "type": "string"
+            },
+            "errorUrl": {
+              "description": "Error URL.",
+              "type": "string"
+            },
+            "url": {
+              "description": "Job URL.",
+              "type": "string"
+            },
+            "jobName": {
+              "description": "Job name.",
+              "type": "string"
+            },
+            "trigger": {
+              "description": "Job trigger.",
+              "type": "string"
+            }
+          },
+          "x-ms-client-flatten": true
+        }
+      }
+    },
+    "TriggeredWebJob": {
+      "description": "Triggered Web Job Information.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/ProxyOnlyResource"
+        }
+      ],
+      "properties": {
+        "properties": {
+          "description": "TriggeredWebJob resource specific properties",
+          "properties": {
+            "latestRun": {
+              "$ref": "#/definitions/TriggeredJobRun",
+              "description": "Latest job run information."
+            },
+            "historyUrl": {
+              "description": "History URL.",
+              "type": "string"
+            },
+            "schedulerLogsUrl": {
+              "description": "Scheduler Logs URL.",
+              "type": "string"
+            },
+            "name": {
+              "description": "Job name. Used as job identifier in ARM resource URI.",
+              "type": "string"
+            },
+            "runCommand": {
+              "description": "Run command.",
+              "type": "string"
+            },
+            "url": {
+              "description": "Job URL.",
+              "type": "string"
+            },
+            "extraInfoUrl": {
+              "description": "Extra Info URL.",
+              "type": "string"
+            },
+            "jobType": {
+              "description": "Job type.",
+              "type": "string"
+            },
+            "error": {
+              "description": "Error information.",
+              "type": "string"
+            },
+            "usingSdk": {
+              "description": "Using SDK?",
+              "type": "boolean"
+            },
+            "settings": {
+              "description": "Job settings.",
+              "type": "object",
+              "additionalProperties": {
+                "$ref": "#/definitions/Object"
+              }
+            }
+          },
+          "x-ms-client-flatten": true
+        }
+      }
+    },
+    "TriggeredWebJobCollection": {
+      "description": "Collection of Kudu continuous web job information elements.",
+      "required": [
+        "value"
+      ],
+      "type": "object",
+      "properties": {
+        "value": {
+          "description": "Collection of resources.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/TriggeredWebJob"
+          }
+        },
+        "nextLink": {
+          "description": "Link to next page of resources.",
+          "type": "string"
+        }
+      }
+    },
     "User": {
       "description": "User crendentials used for publishing activity.",
       "type": "object",
@@ -16268,6 +21685,78 @@
           "type": "array",
           "items": {
             "$ref": "#/definitions/SiteInstance"
+          }
+        },
+        "nextLink": {
+          "description": "Link to next page of resources.",
+          "type": "string"
+        }
+      }
+    },
+    "WebJob": {
+      "description": "Web Job Information.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/ProxyOnlyResource"
+        }
+      ],
+      "properties": {
+        "properties": {
+          "description": "WebJob resource specific properties",
+          "properties": {
+            "name": {
+              "description": "Job name. Used as job identifier in ARM resource URI.",
+              "type": "string"
+            },
+            "runCommand": {
+              "description": "Run command.",
+              "type": "string"
+            },
+            "url": {
+              "description": "Job URL.",
+              "type": "string"
+            },
+            "extraInfoUrl": {
+              "description": "Extra Info URL.",
+              "type": "string"
+            },
+            "jobType": {
+              "description": "Job type.",
+              "type": "string"
+            },
+            "error": {
+              "description": "Error information.",
+              "type": "string"
+            },
+            "usingSdk": {
+              "description": "Using SDK?",
+              "type": "boolean"
+            },
+            "settings": {
+              "description": "Job settings.",
+              "type": "object",
+              "additionalProperties": {
+                "$ref": "#/definitions/Object"
+              }
+            }
+          },
+          "x-ms-client-flatten": true
+        }
+      }
+    },
+    "WebJobCollection": {
+      "description": "Collection of Kudu web job information elements.",
+      "required": [
+        "value"
+      ],
+      "type": "object",
+      "properties": {
+        "value": {
+          "description": "Collection of resources.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/WebJob"
           }
         },
         "nextLink": {
