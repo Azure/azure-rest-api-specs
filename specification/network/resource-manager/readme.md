@@ -40,6 +40,7 @@ These settings apply only when `--tag=package-2017-08` is specified on the comma
 input-file:
 - Microsoft.Network/2017-08-01/applicationGateway.json
 - Microsoft.Network/2017-08-01/checkDnsAvailability.json
+- Microsoft.Network/2017-08-01/endpointService.json
 - Microsoft.Network/2017-08-01/expressRouteCircuit.json
 - Microsoft.Network/2017-08-01/loadBalancer.json
 - Microsoft.Network/2017-08-01/network.json
@@ -66,6 +67,7 @@ These settings apply only when `--tag=package-2017-06` is specified on the comma
 input-file:
 - Microsoft.Network/2017-06-01/applicationGateway.json
 - Microsoft.Network/2017-06-01/checkDnsAvailability.json
+- Microsoft.Network/2017-06-01/endpointService.json
 - Microsoft.Network/2017-06-01/expressRouteCircuit.json
 - Microsoft.Network/2017-06-01/loadBalancer.json
 - Microsoft.Network/2017-06-01/network.json
