@@ -1,0 +1,723 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "DataFactoryManagementExtendedClient",
+    "version": "2015-10-01"
+  },
+  "host": "management.azure.com",
+  "schemes": [
+    "https"
+  ],
+  "consumes": [
+    "application/json",
+    "text/json"
+  ],
+  "produces": [
+    "application/json",
+    "text/json"
+  ],
+  "paths": {
+    "/subscriptions/{subscriptionId}/resourcegroups/{resourceGroupName}/providers/Microsoft.DataFactory/datafactories/{dataFactoryName}/gateways/{gatewayName}": {
+      "patch": {
+        "tags": [
+          "gatewaysExtended"
+        ],
+        "operationId": "GatewaysExtended_Update",
+        "description": "Update a data factory gateway.",
+        "parameters": [
+         {
+            "$ref": "#/parameters/resourceGroupName"
+          },
+          {
+            "$ref": "#/parameters/dataFactoryName"
+          },
+          {
+            "$ref": "#/parameters/gatewayName"
+          },
+          {
+            "name": "parameters",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/GatewayExtended"
+            },
+            "description": "The parameters required to update a data factory gateway."
+          },
+          {
+            "$ref": "#/parameters/apiVersion"
+          },
+          {
+            "$ref": "#/parameters/subscriptionId"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK response definition.",
+            "schema": {
+              "$ref": "#/definitions/GatewayExtended"
+            }
+          },
+          "201": {
+            "description": "Created response definition.",
+            "schema": {
+              "$ref": "#/definitions/GatewayExtended"
+            }
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourcegroups/{resourceGroupName}/providers/Microsoft.DataFactory/datafactories/{dataFactoryName}/gateways": {
+      "get": {
+        "tags": [
+          "gatewaysExtended"
+        ],
+        "operationId": "GatewaysExtended_List",
+        "description": "List all gateways under a data factory.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/resourceGroupName"
+          },
+          {
+            "$ref": "#/parameters/dataFactoryName"
+          },
+          {
+            "$ref": "#/parameters/apiVersion"
+          },
+          {
+            "$ref": "#/parameters/subscriptionId"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK response definition.",
+            "schema": {
+              "$ref": "#/definitions/GatewayExtendedListResult"
+            }
+          },
+          "default": {
+            "description": "An error response received from the Azure Data Factory service.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": null
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourcegroups/{resourceGroupName}/providers/Microsoft.DataFactory/datafactories/{dataFactoryName}/gateways/{gatewayName}/updatenode": {
+      "post": {
+        "tags": [
+          "gatewaysExtended"
+        ],
+        "operationId": "GatewaysExtended_UpdateNode",
+        "description": "Update gateway node settings.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/resourceGroupName"
+          },
+          {
+            "$ref": "#/parameters/dataFactoryName"
+          },
+          {
+            "$ref": "#/parameters/apiVersion"
+          },
+          {
+            "$ref": "#/parameters/subscriptionId"
+          },
+          {
+            "$ref": "#/parameters/gatewayName"
+          },
+          {
+            "name": "parameters",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/GatewayExtendedUpdateNodeParameters"
+            },
+            "description": "Node settings to be udpated."
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK response definition."
+          },
+          "default": {
+            "description": "An error response received from the Azure Data Factory service.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourcegroups/{resourceGroupName}/providers/Microsoft.DataFactory/datafactories/{dataFactoryName}/gateways/{gatewayName}/removenode": {
+      "post": {
+        "tags": [
+          "gatewaysExtended"
+        ],
+        "operationId": "GatewaysExtended_DeleteNode",
+        "description": "Delete specific gateway node.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/resourceGroupName"
+          },
+          {
+            "$ref": "#/parameters/dataFactoryName"
+          },
+          {
+            "$ref": "#/parameters/apiVersion"
+          },
+          {
+            "$ref": "#/parameters/subscriptionId"
+          },
+          {
+            "$ref": "#/parameters/gatewayName"
+          },
+          {
+            "name": "parameters",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/GatewayExtendedDeleteNodeParameters"
+            },
+            "description": "Parameters of the node to be deleted."
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK response definition."
+          },
+          "default": {
+            "description": "An error response received from the Azure Data Factory service.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourcegroups/{resourceGroupName}/providers/Microsoft.DataFactory/datafactories/{dataFactoryName}/gateways/{gatewayName}/synccredential": {
+      "post": {
+        "tags": [
+          "gatewaysExtended"
+        ],
+        "operationId": "GatewaysExtended_forceSyncCredential",
+        "description": "Force sync credentials between gateway nodes to solve credentail out of sync issue.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/resourceGroupName"
+          },
+          {
+            "$ref": "#/parameters/dataFactoryName"
+          },
+          {
+            "$ref": "#/parameters/apiVersion"
+          },
+          {
+            "$ref": "#/parameters/subscriptionId"
+          },
+          {
+            "$ref": "#/parameters/gatewayName"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK response definition."
+          },
+          "default": {
+            "description": "An error response received from the Azure Data Factory service.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        }
+      }
+    }
+  },
+  "definitions": {
+    "GatewayNode": {
+      "properties": {
+        "nodeName": {
+          "type": "string",
+          "description": "Name of the gateway node."
+        },
+        "description": {
+          "type": "string",
+          "description": "Description of the data factory gateway node."
+        },
+        "machineName": {
+          "type": "string",
+          "readOnly": true,
+          "description": "Name of the machine that installed the gateway."
+        },
+        "capabilities": {
+          "description": "The gateway node capabilities, represented by dictionary",
+          "type": "object",
+          "readOnly": true,
+          "additionalProperties": {
+            "type": "string"
+          }
+        },
+        "hostServiceUri": {
+          "description": "URI for the host machine of the gateway node.",
+          "type": "string",
+          "readOnly": true
+        },
+        "isActiveDispatcher": {
+          "type": "Boolean",
+          "readOnly": true,
+          "description": "True if this node is active dispatcher, otherwise it's worker node."
+        },
+        "version": {
+          "type": "string",
+          "readOnly": true,
+          "description": "Gateway version is set by the service side and read-only on the client side."
+        },
+        "status": {
+          "type": "string",
+          "readOnly": true,
+          "description": "Gateway status is set by the service side and read-only on the client side. It can be NeedRegistration, Online or Offline.",
+          "enum": [
+            "Online",
+            "Offline",
+            "Limited"
+          ],
+          "x-ms-enum": {
+            "name": "NodeStatus",
+            "modelAsString": true
+          }
+        },
+        "versionStatus": {
+          "type": "string",
+          "readOnly": true,
+          "description": "Gateway version status is set by the service side and read-only on the client side. It can be None, UpToDate, Expiring or Expired.",
+          "enum": [
+            "None",
+            "UpToDate",
+            "Expiring",
+            "Expired"
+          ],
+          "x-ms-enum": {
+            "name": "GatewayExtendedVersionStatus",
+            "modelAsString": true
+          }
+        },
+        "createTime": {
+          "type": "string",
+          "format": "date-time",
+          "readOnly": true,
+          "description": "Create time of the data factory gateway is set by the service side and read-only on the client side."
+        },
+        "registerTime": {
+          "type": "string",
+          "format": "date-time",
+          "readOnly": true,
+          "description": "Register time of the data factory gateway is set by the service side and read-only on the client side."
+        },
+        "lastConnectTime": {
+          "type": "string",
+          "format": "date-time",
+          "readOnly": true,
+          "description": "Last connect time of the data factory gateway is set by the service side and read-only on the client side."
+        },
+        "expiryTime": {
+          "type": "string",
+          "format": "date-time",
+          "readOnly": true,
+          "description": "Expiry time of the data factory gateway is set by the service side and read-only on the client side."
+        },
+        "provisioningState": {
+          "type": "string",
+          "readOnly": true,
+          "description": "The provisioning state of the data factory gateway.",
+          "enum": [
+            "NotSpecified",
+            "Succeeded",
+            "Failed",
+            "Canceled",
+            "PendingCreation",
+            "PendingUpdate",
+            "PendingDeletion",
+            "PendingRecreation",
+            "Disabled"
+          ],
+          "x-ms-enum": {
+            "name": "EntityStatusExtended",
+            "modelAsString": true
+          }
+        },
+        "lastUpgradeResult": {
+          "type": "string",
+          "description": "Result of last automatic upgrade."
+        },
+        "lastStartUpgradeTime": {
+          "type": "string",
+          "format": "date-time",
+          "readOnly": true,
+          "description": "Start time of last automatic upgrade."
+        },
+        "lastEndUpgradeTime": {
+          "type": "string",
+          "format": "date-time",
+          "readOnly": true,
+          "description": "End time of last automatic upgrade."
+        },
+        "maxConcurrentJobs": {
+          "type": "string",
+          "readOnly": true,
+          "description": "Max concurrent jobs the node can support."
+        },
+        "limitConcurrentJobs": {
+          "type": "string",
+          "description": "Current concurrent job limit set on the node."
+        },
+        "runningConcurrentJobs": {
+          "type": "string",
+          "readOnly": true,
+          "description": "Running concurrent jobs on the node."
+        },
+        "availableMemory": {
+          "type": "string",
+          "readOnly": true,
+          "description": "Available memeory on the node."
+        },
+        "cpuUtilization": {
+          "type": "string",
+          "readOnly": true,
+          "description": "CPU Utilization on the node."
+        },
+        "network": {
+          "type": "string",
+          "readOnly": true,
+          "description": "Network usage on the node."
+        }
+      },
+      "description": "Basic information about a gateway."
+    },
+    "GatewayExtendedProperties": {
+      "properties": {
+        "description": {
+          "type": "string",
+          "description": "Description of the data factory gateway."
+        },
+        "key": {
+          "type": "string",
+          "readOnly": true,
+          "description": "Gateway key is set by the service side when creating a new gateway and read-only on the client side. Its value will be null in all other scenarios."
+        },
+        "version": {
+          "type": "string",
+          "readOnly": true,
+          "description": "Gateway version is set by the service side and read-only on the client side."
+        },
+        "capabilities": {
+          "description": "The gateway capabilities, represented by dictionary",
+          "type": "object",
+          "readOnly": true,
+          "additionalProperties": {
+            "type": "string"
+          }
+        },
+        "serviceUrls": {
+          "description": "The URLs for the services used in gateway backend service.",
+          "type": "array",
+          "items": {
+            "description": "The service URL",
+            "type": "string"
+          },
+          "readOnly": true
+        },
+        "hostServiceUri": {
+          "description": "URI for the host machine of the gateway.",
+          "type": "string",
+          "readOnly": true
+        },
+        "status": {
+          "type": "string",
+          "readOnly": true,
+          "description": "Gateway status is set by the service side and read-only on the client side. It can be NeedRegistration, Online or Offline.",
+          "enum": [
+            "NeedRegistration",
+            "Online",
+            "Offline",
+            "Limited"
+          ],
+          "x-ms-enum": {
+            "name": "GatewayExtendedStatus",
+            "modelAsString": true
+          }
+        },
+        "versionStatus": {
+          "type": "string",
+          "readOnly": true,
+          "description": "Gateway version status is set by the service side and read-only on the client side. It can be None, UpToDate, Expiring or Expired.",
+          "enum": [
+            "None",
+            "UpToDate",
+            "Expiring",
+            "Expired"
+          ],
+          "x-ms-enum": {
+            "name": "GatewayExtendedVersionStatus",
+            "modelAsString": true
+          }
+        },
+        "createTime": {
+          "type": "string",
+          "format": "date-time",
+          "readOnly": true,
+          "description": "Create time of the data factory gateway is set by the service side and read-only on the client side."
+        },
+        "registerTime": {
+          "type": "string",
+          "format": "date-time",
+          "readOnly": true,
+          "description": "Register time of the data factory gateway is set by the service side and read-only on the client side."
+        },
+        "lastConnectTime": {
+          "type": "string",
+          "format": "date-time",
+          "readOnly": true,
+          "description": "Last connect time of the data factory gateway is set by the service side and read-only on the client side."
+        },
+        "expiryTime": {
+          "type": "string",
+          "format": "date-time",
+          "readOnly": true,
+          "description": "Expiry time of the data factory gateway is set by the service side and read-only on the client side."
+        },
+        "provisioningState": {
+          "type": "string",
+          "readOnly": true,
+          "description": "The provisioning state of the data factory gateway.",
+          "enum": [
+            "NotSpecified",
+            "Succeeded",
+            "Failed",
+            "Canceled",
+            "PendingCreation",
+            "PendingUpdate",
+            "PendingDeletion",
+            "PendingRecreation",
+            "Disabled"
+          ],
+          "x-ms-enum": {
+            "name": "EntityStatusExtended",
+            "modelAsString": true
+          }
+        },
+        "lastUpgradeResult": {
+          "type": "string",
+          "description": "Result of last automatic upgrade."
+        },
+        "lastStartUpgradeTime": {
+          "type": "string",
+          "format": "date-time",
+          "readOnly": true,
+          "description": "Start time of last automatic upgrade."
+        },
+        "lastEndUpgradeTime": {
+          "type": "string",
+          "format": "date-time",
+          "readOnly": true,
+          "description": "End time of last automatic upgrade."
+        },
+        "scheduledUpgradeStartTime": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Scheduled date time of automatic upgrade."
+        },
+        "scheduledUpgradeTime": {
+          "type": "string",
+          "Description": "Scheduled time of automatic upgrade."
+        },
+        "scheduledUpgradeDate": {
+          "type": "string",
+          "format": "date-time",
+          "readOnly": true,
+          "Description": "Scheduled date of automatic upgrade"
+        },
+        "isAutoUpdateOff": {
+          "type": "Boolean",
+          "readOnly": true,
+          "description": "True if automatic upgrade is on and this gateway will be auto upgraded when new version comes."
+        },
+        "multiNodeSupportEnabled": {
+          "type": "Boolean",
+          "description": "True if this is High Availability Gateway which allows to install more than 1 node"
+        },
+        "isOnPremCredentialEnabled": {
+          "type": "Boolean",
+          "description": "True if this gateway stores data source credentials on local machine."
+        },
+        "dataFactoryName": {
+          "type": "string",
+          "description": "Name of the data factory which the gateway belongs to."
+        },
+        "nodeCommunicationChannelEncryptionMode": {
+          "type": "string",
+          "readOnly": true,
+          "description": "The encryption mode used by communication channel in gateway.",
+          "enum": [
+            "NonEncryption",
+            "Ssl"
+          ],
+          "x-ms-enum": {
+            "name": "CommunicationChannelEncryptionMode",
+            "modelAsString": true
+          }
+        },
+        "nodes": {
+          "description": "The list of nodes for this gateway, may be more than one if multi-node gateway is enabled",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/GatewayNode"
+          }
+        }
+      },
+      "required": [
+        "multiNodeSupportEnabled"
+      ],
+      "description": "Basic information about a gateway."
+    },
+    "GatewayExtended": {
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "Name of the data factory gateway."
+        },
+        "properties": {
+          "$ref": "#/definitions/GatewayExtendedProperties",
+          "description": "Properties of the data factory gateway. Only the Description property is applicable in the PUT/PATCH request. Other properties are only applicable in service response, and they will be ignored in the PUT/PATCH request."
+        },
+        "id": {
+          "type": "string",
+          "description": "Resource id of the data factory gateway."
+        }
+      },
+      "required": [
+        "name",
+        "properties"
+      ],
+      "description": "Data factory gateway resource definition."
+    },
+    "GatewayExtendedListResult": {
+      "type": "object",
+      "properties": {
+        "value": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/GatewayExtended"
+          }
+        }
+      },
+      "required":[
+        "value"
+      ],
+      "description": "The List data factory gateways operation response."
+    },
+    "GatewayExtendedUpdateNodeParameters": {
+      "properties": {
+        "NodeName": {
+          "type": "string",
+          "description": "Name of the gateway node to be updated."
+        },
+        "LimitConcurrentJobs": {
+          "type":"Integer",
+          "description": "Limit concurrent jobs that can be executed on this node."
+        }
+      },
+      "required": [
+        "NodeName"
+      ]
+    },
+    "GatewayExtendedDeleteNodeParameters": {
+      "properties": {
+        "NodeName": {
+          "type": "string",
+          "description": "Name of the gateway node to be deleted."
+        }
+      },
+      "required": [
+        "NodeName"
+      ]
+    },
+    "ErrorResponse": {
+      "description": "The object that defines the structure of an Azure Data Factory response.",
+      "type": "object",
+      "properties": {
+        "code": {
+          "description": "Error code.",
+          "type": "string"
+        },
+        "message": {
+          "description": "Error message.",
+          "type": "string"
+        },
+        "target": {
+          "description": "Property name/path in request associated with error.",
+          "type": "string"
+        },
+        "details": {
+          "description": "Array with additional error details.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ErrorResponse"
+          }
+        },
+        "error": {
+          "description": "Nested error information.",
+          "$ref": "#/definitions/ErrorResponse"
+        }
+      },
+      "required": [
+        "code",
+        "message"
+      ]
+    }
+  },
+  "parameters": {
+    "resourceGroupName": {
+      "name": "resourceGroupName",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "description": "The resource group name of the data factory.",
+      "pattern": "^[-\\w\\._\\(\\)]+$",
+      "x-ms-parameter-location": "method"
+    },
+    "dataFactoryName": {
+      "name": "dataFactoryName",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "description": "A unique data factory instance name.",
+      "pattern": "^[A-Za-z0-9]+(?:-[A-Za-z0-9]+)*$",
+      "x-ms-parameter-location": "method"
+    },
+    "subscriptionId": {
+      "name": "subscriptionId",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "description": "Gets subscription credentials which uniquely identify Microsoft Azure subscription. The subscription ID forms part of the URI for every service call."
+    },
+    "apiVersion": {
+      "name": "api-version",
+      "in": "query",
+      "required": true,
+      "type": "string",
+      "description": "Client Api Version."
+    },
+    "gatewayName": {
+        "name": "gatewayName",
+        "in": "path",
+        "required": true,
+        "type": "string",
+        "description": "Name of the data factory gateway.",
+        "x-ms-parameter-location": "method"
+    }
+  }
+}
