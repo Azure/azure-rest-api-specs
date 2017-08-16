@@ -1,7 +1,7 @@
 {
   "swagger": "2.0",
   "info": {
-    "version": "2.0",
+    "version": "2015-05-01-preview",
     "title": "SqlManagementClient",
     "description": "The Azure SQL Database management API provides a RESTful set of web APIs that interact with Azure SQL Database services to manage your databases. The API enables users to create, retrieve, update, and delete databases, servers, and other entities."
   },
@@ -219,34 +219,11 @@
   "definitions": {
     "VirtualNetworkRuleProperties": {
       "description": "Properties of a virtual network rule.",
-      "required": [
-        "virtualNetworkSubnetId"
-      ],
       "type": "object",
       "properties": {
         "virtualNetworkSubnetId": {
-          "description": "The ARM resource id of the virtual network subnet.",
+          "description": "The resource ID of the virtual network subnet",
           "type": "string"
-        },
-        "ignoreVnetPrivateAccessConfiguration": {
-          "description": "Create firewall rule before the virtual network has private access enabled.",
-          "type": "boolean"
-        },
-        "state": {
-          "description": "Virtual Network Rule State",
-          "enum": [
-            "Initializing",
-            "InProgress",
-            "Ready",
-            "Deleting",
-            "Unknown"
-          ],
-          "type": "string",
-          "readOnly": true,
-          "x-ms-enum": {
-            "name": "VirtualNetworkRuleState",
-            "modelAsString": true
-          }
         }
       }
     },
