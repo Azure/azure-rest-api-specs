@@ -664,6 +664,251 @@
         }
       }
     },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.EventHub/namespaces/{namespaceName}/disasterRecoveryConfig": {
+      "get": {
+        "tags": [
+          "DisasterRecoveryConfig"
+        ],
+        "operationId": "DisasterRecoveryConfig_ListByNamespace",
+        "x-ms-examples": {
+          "EventHubsListAll": { "$ref": "./examples/EventHubs/EHEventHubListByNameSpace.json" }
+        },
+        "description": "Gets all the Disaster Recovery in a Namespace.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/resourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/namespaceNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successfully retrieved the list of Event Hubs.",
+            "schema": {
+              "$ref": "#/definitions/ArmDisasterRecoveryListResult"
+            }
+          },
+          "default": {
+            "description": "Eventhub error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.EventHub/namespaces/{namespaceName}/disasterRecoveryConfig/{disasterRecoveryName}": {
+      "put": {
+        "tags": [
+          "DisasterRecoveryConfig"
+        ],
+        "operationId": "DisasterRecoveryConfig_CreateOrUpdate",
+        "description": "Creates or updates a new Disaster Recovery as a nested resource within a Namespace.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/resourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/namespaceNameParameter"
+          },
+          {
+            "$ref": "#/parameters/disasterRecoveryNameParameter"
+          },
+          {
+            "name": "parameters",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/ArmDisasterRecovery"
+            },
+            "description": "Parameters supplied to create an Disaster Recovery resource."
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Create Disaster Recovery config operation is successful",
+            "schema": {
+              "$ref": "#/definitions/ArmDisasterRecovery"
+            }
+          },
+          "201": {
+            "description": "Disaster Recovery config creation request received"
+          },
+          "default": {
+            "description": "Eventhub error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "DisasterRecoveryConfig"
+        ],
+        "operationId": "DisasterRecoveryConfig_Delete",
+        "description": "Deletes an Event Hub from the specified Namespace and resource group.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/resourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/namespaceNameParameter"
+          },
+          {
+            "$ref": "#/parameters/disasterRecoveryNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": "Delete Disaster Recovery config request accepted"
+          },
+          "default": {
+            "description": "Eventhub error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        }
+      },
+      "get": {
+        "tags": [
+          "DisasterRecoveryConfig"
+        ],
+        "operationId": "DisasterRecoveryConfig_Get",
+        "x-ms-examples": {
+          "EventHubGet": { "$ref": "./examples/EventHubs/EHEventHubGet.json" }
+        },
+        "description": "Retrieves Disaster Recovery config description via bith primary or secondary namespace",
+        "parameters": [
+          {
+            "$ref": "#/parameters/resourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/namespaceNameParameter"
+          },
+          {
+            "$ref": "#/parameters/disasterRecoveryNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successfully retrieved the Disaster Recovery config description.",
+            "schema": {
+              "$ref": "#/definitions/ArmDisasterRecovery"
+            }
+          },
+          "default": {
+            "description": "Eventhub error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.EventHub/namespaces/{namespaceName}/disasterRecoveryConfig/{disasterRecoveryName}/breakpairing": {
+      "post": {
+        "tags": [
+          "DisasterRecoveryConfig"
+        ],
+        "operationId": "DisasterRecoveryConfig_BreakPairing",
+        "description": "This operation stops replication from the Primary to the Secondary namespace.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/resourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/namespaceNameParameter"
+          },
+          {
+            "$ref": "#/parameters/disasterRecoveryNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Break-Pairing operation is successful."
+          },
+          "default": {
+            "description": "Eventhub error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.EventHub/namespaces/{namespaceName}/disasterRecoveryConfig/{disasterRecoveryName}/failover": {
+      "post": {
+        "tags": [
+          "DisasterRecoveryConfig"
+        ],
+        "operationId": "DisasterRecoveryConfig_FailOver",
+        "description": "Creates Secondary namespace role as primary and removes the role from the pervious primary namespace ",
+        "parameters": [
+          {
+            "$ref": "#/parameters/resourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/namespaceNameParameter"
+          },
+          {
+            "$ref": "#/parameters/disasterRecoveryNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Failover operation is successful."
+          },
+          "default": {
+            "description": "Eventhub error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        }
+      }
+    },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.EventHub/namespaces/{namespaceName}/eventhubs": {
       "get": {
         "tags": [
@@ -1904,6 +2149,82 @@
           "type": "string"
         }
       }
+    },
+    "ArmDisasterRecovery": {
+      "properties": {
+        "properties": {
+          "x-ms-client-flatten": true,
+          "properties": {
+            "provisioningState": {
+              "readOnly": true,
+              "type": "string",
+              "description": "Provisioning state of the disaster recovery"
+            },
+            "partnerNamespace": {
+              "type": "string",
+              "description": "A value that indicates partner namespace "
+            },
+            "role": {
+              "readOnly": true,
+              "type": "string",
+              "description": "Enumerates the possible values for the encoding format of capture description.",
+              "enum": [
+                "Unspecified",
+                "Primary",
+                "PrimaryNotReplicating",
+                "Secondary"
+              ],
+              "x-ms-enum": {
+                "name": "RoleDisasterRecovery",
+                "modelAsString": false
+              }
+            },
+            "type": {
+              "readOnly": true,
+              "type": "string",
+              "description": "Enumerates the possible values for the encoding format of capture description.",
+              "enum": [
+                "MetadataReplication",
+                "DataReplication"
+              ],
+              "x-ms-enum": {
+                "name": "ReplicationType",
+                "modelAsString": false
+              }
+            },
+            "lastSynced": {
+              "readOnly": true,
+              "format": "date-time",
+              "type": "string",
+              "description": "Time of Last Synced"
+            }
+          },
+          "description": "Properties supplied to the Create Or Update DisasterRecovery operation."
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "#/definitions/Resource"
+        }
+      ],
+      "description": "Single item in List or Get DisasterRecovery operation"
+    },
+    "ArmDisasterRecoveryListResult": {
+      "properties": {
+        "value": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ArmDisasterRecovery"
+          },
+          "description": "Result of the List Disaster Recovery operation."
+        },
+        "nextLink": {
+          "type": "string",
+          "readOnly": true,
+          "description": "Link to the next set of results. Not empty if Value contains incomplete list of Disaster Recovery."
+        }
+      },
+      "description": "The result of the List Disaster Recovery operation."
     }
   },
   "parameters": {
@@ -1959,12 +2280,23 @@
       "x-ms-parameter-location": "method",
       "description": "The Event Hub name"
     },
+    "disasterRecoveryNameParameter": {
+      "name": "disasterRecoveryName",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 50,
+      "x-ms-parameter-location": "method",
+      "description": "The Disaster Recovery name"
+    },
     "consumerGroupNameParameter": {
       "name": "consumerGroupName",
       "in": "path",
       "required": true,
       "type": "string",
       "minLength": 1,
+      "maxLength": 50,
       "x-ms-parameter-location": "method",
       "description": "The consumer group name"
     }
