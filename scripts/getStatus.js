@@ -10,6 +10,7 @@ var exec = require('child_process').exec,
   utils = require("../test/util/utils");
 
 var swaggersToProcess = utils.swaggers;
+var readmesToProcess = utils.readmes;
 var finalResult = {};
 var filename = `log_${utils.getTimeStamp()}.log`;
 var logFilepath = path.join(getLogDir(), filename);
@@ -50,9 +51,9 @@ function writeContent(content) {
 }
 
 //runs the linter on a given swagger spec.
-async function runLinter(swagger) {
-  // TODO: update to use config file... but report grouping is by Swagger right now
-  let cmd = 'autorest --validation --azure-validator --input-file=' + swagger + ' --message-format=json';
+async function runLinter(readme) {
+    let cmd = 'autorest ' + readme + ' --azure-validator=true --message-format=json';
+  console.log(cmd);
   console.log(`\t- Running Linter.`);
   const {err, stdout, stderr } = await new Promise(res => exec(cmd, { encoding: 'utf8', maxBuffer: 1024 * 1024 * 64 },
     (err, stdout, stderr) => res({ err: err, stdout: stdout, stderr: stderr })));
@@ -69,7 +70,7 @@ async function runLinter(swagger) {
       //console.log('>>>>>> Parsed Result...');
       //console.dir(resultObject, {depth: null, colors: true});
     } catch (e) {
-      console.log(`An error occurred while executing JSON.parse() on the linter output for ${swagger}:`);
+      console.log(`An error occurred while executing JSON.parse() on the linter output for ${readme}:`);
       console.dir(resultString);
       console.dir(e, { depth: null, colors: true });
     }
@@ -88,27 +89,35 @@ function runSemanticValidator(swagger) {
   });
 }
 
-//runs the validation and linting tools on all the swaggers in the repo.
-async function runTools(swagger) {
-  console.log(`Processing "${swagger}":`);
-  const validationErrors = await runSemanticValidator(swagger);
-  updateResult(swagger, validationErrors, true);
-  const linterErrors = await runLinter(swagger);
-  updateResult(swagger, linterErrors, true);
-}
-
 //main function
 async function runScript() {
   // Useful when debugging a test for a particular swagger. 
   // Just update the regex. That will return an array of filtered items.
-  // swaggersToProcess = swaggersToProcess.filter(function (item) {
-  //   return (item.match(/.*arm-network/ig) !== null);
-  // });
+   // swaggersToProcess = swaggersToProcess.filter(function (item) {
+   //   return (item.match(/.*Microsoft.network/ig) !== null);
+   // });
+   // readmesToProcess = readmesToProcess.filter(function (item) {
+   //   return (item.match(/.*.network/ig) !== null);
+   // });
   createLogFile();
   console.log(`The results will be logged here: "${logFilepath}".`);
-  for (const swagger of swaggersToProcess) {
-    await runTools(swagger);
+  
+  for (let swagger of swaggersToProcess) {
+      const validationErrors = await runSemanticValidator(swagger);
+	  swagger = swagger.split(/\/Microsoft\./gi)[0] + "/readme.md";
+	  console.log(`File Name: "${swagger}"`);
+	  if (validationErrors != null)
+	  {
+		updateResult(swagger, validationErrors, true);
+	  }
   }
+  
+  for (let readme of readmesToProcess) {
+	  console.log(`Configuration file: "${readme}"`);
+      const linterErrors = await runLinter(readme);
+      updateResult(readme, linterErrors, true);
+  }
+  
   //console.dir(finalResult, { depth: null, colors: true });
   return finalResult;
 }

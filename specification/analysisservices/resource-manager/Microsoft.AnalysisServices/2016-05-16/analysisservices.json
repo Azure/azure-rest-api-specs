@@ -553,13 +553,6 @@
             "modelAsString": true
           },
           "description": "The name of the Azure pricing tier to which the SKU applies."
-        },
-        "capacity": {
-          "type": "integer",
-          "minimum": 1,
-          "maximum": 8,
-          "default": 1,
-          "description": "The number of instances in the read only query pool."
         }
       },
       "required": [
@@ -577,19 +570,6 @@
         "backupBlobContainerUri": {
           "type": "string",
           "description": "The container URI of backup blob."
-        },
-        "defaultConnectionMode": {
-          "type":"string",
-          "description": "How the read-write server's participation in the query pool is controlled.<br/>It can have the following values: <ul><li>readOnly - indicates that the read-write server is intended not to participate in query operations</li><li>all - indicates that the read-write server can participate in query operations</li></ul>Specifying readOnly when capacity is 1 results in error.",
-          "enum": [
-            "all",
-            "readOnly"
-          ],
-          "x-ms-enum": {
-            "modelAsString": false,
-            "name": "ConnectionMode"
-          },
-          "default": "all"
         }
       }
     },
