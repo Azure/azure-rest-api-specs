@@ -9,13 +9,29 @@
     "https"
   ],
   "consumes": [
-    "application/json",
-    "text/json"
+    "application/json"
   ],
   "produces": [
-    "application/json",
-    "text/json"
+    "application/json"
   ],
+  "security": [
+    {
+      "azure_auth": [
+        "user_impersonation"
+      ]
+    }
+  ],
+  "securityDefinitions": {
+    "azure_auth": {
+      "type": "oauth2",
+      "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
+      "flow": "implicit",
+      "description": "Azure Active Directory OAuth2 Flow.",
+      "scopes": {
+        "user_impersonation": "impersonate your user account"
+      }
+    }
+  },
   "paths": {
     "/subscriptions/{subscriptionId}/resourcegroups/{resourceGroupName}/providers/Microsoft.DataFactory/datafactories/{dataFactoryName}/gateways/{gatewayName}": {
       "patch": {
@@ -23,6 +39,11 @@
           "gatewaysExtended"
         ],
         "operationId": "GatewaysExtended_Update",
+        "x-ms-examples": {
+          "GatewaysExtended_Update": {
+              "$ref": "../examples/GatewaysExtended_Update.json"
+          }
+        },
         "description": "Update a data factory gateway.",
         "parameters": [
          {
@@ -56,12 +77,6 @@
             "schema": {
               "$ref": "#/definitions/GatewayExtended"
             }
-          },
-          "201": {
-            "description": "Created response definition.",
-            "schema": {
-              "$ref": "#/definitions/GatewayExtended"
-            }
           }
         }
       }
@@ -72,6 +87,11 @@
           "gatewaysExtended"
         ],
         "operationId": "GatewaysExtended_List",
+        "x-ms-examples": {
+          "GatewaysExtended_List": {
+              "$ref": "../examples/GatewaysExtended_List.json"
+          }
+        },
         "description": "List all gateways under a data factory.",
         "parameters": [
           {
@@ -112,6 +132,11 @@
           "gatewaysExtended"
         ],
         "operationId": "GatewaysExtended_UpdateNode",
+        "x-ms-examples": {
+          "GatewaysExtended_UpdateNode": {
+              "$ref": "../examples/GatewaysExtended_UpdateNode.json"
+          }
+        },        
         "description": "Update gateway node settings.",
         "parameters": [
           {
@@ -158,6 +183,11 @@
           "gatewaysExtended"
         ],
         "operationId": "GatewaysExtended_DeleteNode",
+        "x-ms-examples": {
+          "GatewaysExtended_DeleteNode": {
+              "$ref": "../examples/GatewaysExtended_DeleteNode.json"
+          }
+        }, 
         "description": "Delete specific gateway node.",
         "parameters": [
           {
@@ -204,6 +234,11 @@
           "gatewaysExtended"
         ],
         "operationId": "GatewaysExtended_forceSyncCredential",
+        "x-ms-examples": {
+          "GatewaysExtended_forceSyncCredential": {
+              "$ref": "../examples/GatewaysExtended_forceSyncCredential.json"
+          }
+        }, 
         "description": "Force sync credentials between gateway nodes to solve credentail out of sync issue.",
         "parameters": [
           {
@@ -266,7 +301,7 @@
           "readOnly": true
         },
         "isActiveDispatcher": {
-          "type": "Boolean",
+          "type": "boolean",
           "readOnly": true,
           "description": "True if this node is active dispatcher, otherwise it's worker node."
         },
@@ -531,25 +566,25 @@
         },
         "scheduledUpgradeTime": {
           "type": "string",
-          "Description": "Scheduled time of automatic upgrade."
+          "description": "Scheduled time of automatic upgrade."
         },
         "scheduledUpgradeDate": {
           "type": "string",
           "format": "date-time",
           "readOnly": true,
-          "Description": "Scheduled date of automatic upgrade"
+          "description": "Scheduled date of automatic upgrade"
         },
         "isAutoUpdateOff": {
-          "type": "Boolean",
+          "type": "boolean",
           "readOnly": true,
           "description": "True if automatic upgrade is on and this gateway will be auto upgraded when new version comes."
         },
         "multiNodeSupportEnabled": {
-          "type": "Boolean",
+          "type": "boolean",
           "description": "True if this is High Availability Gateway which allows to install more than 1 node"
         },
         "isOnPremCredentialEnabled": {
-          "type": "Boolean",
+          "type": "boolean",
           "description": "True if this gateway stores data source credentials on local machine."
         },
         "dataFactoryName": {
@@ -597,10 +632,6 @@
           "description": "Resource id of the data factory gateway."
         }
       },
-      "required": [
-        "name",
-        "properties"
-      ],
       "description": "Data factory gateway resource definition."
     },
     "GatewayExtendedListResult": {
@@ -608,6 +639,7 @@
       "properties": {
         "value": {
           "type": "array",
+          "description": "List of gateways.",
           "items": {
             "$ref": "#/definitions/GatewayExtended"
           }
@@ -620,29 +652,31 @@
     },
     "GatewayExtendedUpdateNodeParameters": {
       "properties": {
-        "NodeName": {
+        "nodeName": {
           "type": "string",
           "description": "Name of the gateway node to be updated."
         },
-        "LimitConcurrentJobs": {
-          "type":"Integer",
+        "limitConcurrentJobs": {
+          "type":"integer",
           "description": "Limit concurrent jobs that can be executed on this node."
         }
       },
       "required": [
-        "NodeName"
-      ]
+        "nodeName"
+      ],
+      "description": "Parameters to to update gateway node."
     },
     "GatewayExtendedDeleteNodeParameters": {
       "properties": {
-        "NodeName": {
+        "nodeName": {
           "type": "string",
           "description": "Name of the gateway node to be deleted."
         }
       },
       "required": [
-        "NodeName"
-      ]
+        "nodeName"
+      ],
+      "description": "Parameters to to delete gateway node."
     },
     "ErrorResponse": {
       "description": "The object that defines the structure of an Azure Data Factory response.",
