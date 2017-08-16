@@ -61,6 +61,9 @@ input-file:
 - Microsoft.Sql/2015-05-01-preview/failoverGroups.json
 - Microsoft.Sql/2015-05-01-preview/serverKeys.json
 - Microsoft.Sql/2015-05-01-preview/servers.json
+- Microsoft.Sql/2015-05-01-preview/syncAgents.json
+- Microsoft.Sql/2015-05-01-preview/syncGroups.json
+- Microsoft.Sql/2015-05-01-preview/syncMembers.json
 - Microsoft.Sql/2015-05-01-preview/virtualNetworkRules.json
 
 # Needed when there is more than one input file
@@ -131,6 +134,7 @@ input-file:
  - ./Microsoft.Sql/2014-04-01/importExport.json
  - ./Microsoft.Sql/2014-04-01/metrics.json
  - ./Microsoft.Sql/2014-04-01/operations.json
+ - ./Microsoft.Sql/2014-04-01/queries.json
  - ./Microsoft.Sql/2014-04-01/replicationLinks.json
  - ./Microsoft.Sql/2014-04-01/serverAzureADAdministrators.json
  - ./Microsoft.Sql/2014-04-01/serverCommunicationLinks.json
