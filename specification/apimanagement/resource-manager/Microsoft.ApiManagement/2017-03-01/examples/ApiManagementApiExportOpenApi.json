@@ -1,0 +1,180 @@
+{
+  "parameters": {
+    "serviceName": "apimService1",
+    "resourceGroupName": "rg1",
+    "api-version": "2017-03-01",
+    "subscriptionId": "subid",
+    "apiId": "calcapi",
+    "Accept": "application/vnd.swagger.doc+json"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "swagger": "2.0",
+        "info": {
+          "title": "Calculator",
+          "version": "1.0",
+          "description": "Arithemtics over HTTP!"
+        },
+        "host": "apimService1.azure-api.net",
+        "basePath": "/calc1",
+        "schemes": [
+          "http",
+          "https"
+        ],
+        "securityDefinitions": {
+          "apiKeyHeader": {
+            "type": "apiKey",
+            "name": "Ocp-Apim-Subscription-Key",
+            "in": "header"
+          },
+          "apiKeyQuery": {
+            "type": "apiKey",
+            "name": "subscription-key",
+            "in": "query"
+          }
+        },
+        "security": [
+          {
+            "apiKeyHeader": []
+          },
+          {
+            "apiKeyQuery": []
+          }
+        ],
+        "paths": {
+          "/add": {
+            "get": {
+              "description": "Responds with a sum of two numbers.",
+              "operationId": "Add two integers",
+              "parameters": [
+                {
+                  "name": "a",
+                  "in": "query",
+                  "description": "First operand. Default value is <code>51</code>.",
+                  "required": true,
+                  "type": "integer",
+                  "default": "51",
+                  "enum": [
+                    "51"
+                  ]
+                },
+                {
+                  "name": "b",
+                  "in": "query",
+                  "description": "Second operand. Default value is <code>49</code>.",
+                  "required": true,
+                  "type": "integer",
+                  "default": "49",
+                  "enum": [
+                    "49"
+                  ]
+                }
+              ],
+              "responses": {}
+            }
+          },
+          "/sub": {
+            "get": {
+              "description": "Responds with a difference between two numbers.",
+              "operationId": "Subtract two integers",
+              "parameters": [
+                {
+                  "name": "a",
+                  "in": "query",
+                  "description": "First operand. Default value is <code>100</code>.",
+                  "required": true,
+                  "type": "integer",
+                  "default": "100",
+                  "enum": [
+                    "100"
+                  ]
+                },
+                {
+                  "name": "b",
+                  "in": "query",
+                  "description": "Second operand. Default value is <code>50</code>.",
+                  "required": true,
+                  "type": "integer",
+                  "default": "50",
+                  "enum": [
+                    "50"
+                  ]
+                }
+              ],
+              "responses": {}
+            }
+          },
+          "/div": {
+            "get": {
+              "description": "Responds with a quotient of two numbers.",
+              "operationId": "Divide two integers",
+              "parameters": [
+                {
+                  "name": "a",
+                  "in": "query",
+                  "description": "First operand. Default value is <code>100</code>.",
+                  "required": true,
+                  "type": "integer",
+                  "default": "100",
+                  "enum": [
+                    "100"
+                  ]
+                },
+                {
+                  "name": "b",
+                  "in": "query",
+                  "description": "Second operand. Default value is <code>20</code>.",
+                  "required": true,
+                  "type": "integer",
+                  "default": "20",
+                  "enum": [
+                    "20"
+                  ]
+                }
+              ],
+              "responses": {}
+            }
+          },
+          "/mul": {
+            "get": {
+              "description": "Responds with a product of two numbers.",
+              "operationId": "Multiply two integers",
+              "parameters": [
+                {
+                  "name": "a",
+                  "in": "query",
+                  "description": "First operand. Default value is <code>20</code>.",
+                  "required": true,
+                  "type": "integer",
+                  "default": "20",
+                  "enum": [
+                    "20"
+                  ]
+                },
+                {
+                  "name": "b",
+                  "in": "query",
+                  "description": "Second operand. Default value is <code>5</code>.",
+                  "required": true,
+                  "type": "integer",
+                  "default": "5",
+                  "enum": [
+                    "5"
+                  ]
+                }
+              ],
+              "responses": {}
+            }
+          },
+          "/test": {
+            "get": {
+              "operationId": "testy",
+              "responses": {}
+            }
+          }
+        }
+      }
+    }
+  }
+}
