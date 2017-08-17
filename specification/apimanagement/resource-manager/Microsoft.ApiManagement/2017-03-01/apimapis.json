@@ -1083,35 +1083,32 @@
             "name": "Accept",
             "in": "header",
             "required": true,
-            "type": "array",
-            "items": {
-              "type": "string",
-              "enum": [
-                "application/vnd.swagger.doc+json",
-                "application/wsdl+xml",
-                "application/vnd.sun.wadl+xml"
-              ],
-              "x-ms-enum": {
-                "name": "ExportFormat",
-                "modelAsString": false,
-                "values": [
-                  {
-                    "value": "application/vnd.swagger.doc+json",
-                    "description": "Export in Swager 2.0 format",
-                    "name": "OpenApi2"
-                  },
-                  {
-                    "value": "application/wsdl+xml",
-                    "description": "Export in WSDL Schema",
-                    "name": "Wsdl"
-                  },
-                  {
-                    "value": "application/vnd.sun.wadl+xml",
-                    "description": "Export in WADL Schema",
-                    "name": "Wadl"
-                  }
-                ]
-              }
+            "type": "string",
+            "enum": [
+              "application/vnd.swagger.doc+json",
+              "application/wsdl+xml",
+              "application/vnd.sun.wadl+xml"
+            ],
+            "x-ms-enum": {
+              "name": "ExportFormat",
+              "modelAsString": false,
+              "values": [
+                {
+                  "value": "application/vnd.swagger.doc+json",
+                  "description": "Export in Swager 2.0 format",
+                  "name": "OpenApi2"
+                },
+                {
+                  "value": "application/wsdl+xml",
+                  "description": "Export in WSDL Schema",
+                  "name": "Wsdl"
+                },
+                {
+                  "value": "application/vnd.sun.wadl+xml",
+                  "description": "Export in WADL Schema",
+                  "name": "Wadl"
+                }
+              ]
             },
             "description": "Format in which to export the Api Details."
           },
@@ -1126,7 +1123,7 @@
           "200": {
             "description": "The response contains a stream with a full set of API metadata and includes API entity with an embedded array of operation entities.",
             "schema": {
-              "type":"string",
+              "type": "string",
               "format": "byte",
               "description": "Api details."
             }
