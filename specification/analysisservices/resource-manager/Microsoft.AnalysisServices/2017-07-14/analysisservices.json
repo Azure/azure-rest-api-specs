@@ -1,7 +1,7 @@
 {
   "swagger": "2.0",
   "info": {
-    "version": "2017-08-01-beta",
+    "version": "2017-07-14",
     "title": "AzureAnalysisServices",
     "description": "The Azure Analysis Services Web API provides a RESTful set of web services that enables users to create, retrieve, update, and delete Analysis Services servers",
     "x-ms-code-generation-settings": {
@@ -397,7 +397,7 @@
             "pattern": "^[a-z][a-z0-9]*$",
             "minLength": 3,
             "maxLength": 63,
-            "description": "The name of the Analysis Services server."
+            "description": "The name of the Analysis Services server. It must be at least 3 characters in length, and no more than 63."
           },
           {
             "$ref": "#/parameters/ApiVersionParameter"
@@ -591,13 +591,6 @@
             "modelAsString": true
           },
           "description": "The name of the Azure pricing tier to which the SKU applies."
-        },
-        "capacity": {
-          "type": "integer",
-          "minimum": 1,
-          "maximum": 8,
-          "default": 1,
-          "description": "The number of instances in the read only query pool."
         }
       },
       "required": [
@@ -619,19 +612,6 @@
         "gatewayDetails": {
           "$ref": "#/definitions/GatewayDetails",
           "description": "The gateway details configured for the AS server."
-        },
-        "querypoolConnectionMode": {
-          "type":"string",
-          "description": "How the read-write server's participation in the query pool is controlled.<br/>It can have the following values: <ul><li>readOnly - indicates that the read-write server is intended not to participate in query operations</li><li>all - indicates that the read-write server can participate in query operations</li></ul>Specifying readOnly when capacity is 1 results in error.",
-          "enum": [
-            "All",
-            "ReadOnly"
-          ],
-          "x-ms-enum": {
-            "modelAsString": false,
-            "name": "ConnectionMode"
-          },
-          "default": "All"
         }
       }
     },
