@@ -2939,10 +2939,10 @@
         },
         "crv": {
           "type": "string",
-          "description": "Elliptic curve name. For valid values, see JsonWebKeyECName.",
+          "description": "Elliptic curve name. For valid values, see JsonWebKeyCurveName.",
           "enum": [ "P-256", "P-384", "P-521", "SECP256K1" ],
           "x-ms-enum": {
-            "name": "JsonWebKeyECName",
+            "name": "JsonWebKeyCurveName",
             "modelAsString": true
           }
         },
@@ -3841,16 +3841,6 @@
             "modelAsString": true
           }
         },
-        "crv": {
-          "x-ms-client-name": "curve",
-          "type": "string",
-          "description": "Elliptic curve name. For valid values, see JsonWebKeyECName.",
-          "enum": [ "P-256", "P-384", "P-521", "SECP256K1" ],
-          "x-ms-enum": {
-            "name": "JsonWebKeyECName",
-            "modelAsString": true
-          }
-        },
         "key_size": {
           "type": "integer",
           "format": "int32",
@@ -3878,6 +3868,16 @@
             "type": "string"
           },
           "description": "Application specific metadata in the form of key-value pairs."
+        },
+        "crv": {
+          "x-ms-client-name": "curve",
+          "type": "string",
+          "description": "Elliptic curve name. For valid values, see JsonWebKeyCurveName.",
+          "enum": [ "P-256", "P-384", "P-521", "SECP256K1" ],
+          "x-ms-enum": {
+            "name": "JsonWebKeyCurveName",
+            "modelAsString": true
+          }
         }
       },
       "description": "The key create parameters.",
