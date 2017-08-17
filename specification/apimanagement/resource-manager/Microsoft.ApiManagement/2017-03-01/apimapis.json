@@ -1126,13 +1126,9 @@
           "200": {
             "description": "The response contains a stream with a full set of API metadata and includes API entity with an embedded array of operation entities.",
             "schema": {
-              "$ref": "#/definitions/ApiExportResult"
-            }
-          },
-          "default": {
-            "description": "Error response describing why the operation failed.",
-            "schema": {
-              "$ref": "./apimanagement.json#/definitions/ErrorBodyContract"
+              "type":"string",
+              "format": "byte",
+              "description": "Api details."
             }
           }
         }
@@ -1140,16 +1136,6 @@
     }
   },
   "definitions": {
-    "ApiExportResult": {
-      "properties": {
-        "content": {
-          "type": "string",
-          "format": "byte",
-          "description": "Api Export Response content bytes."
-        }
-      },
-      "description": "."
-    },
     "ApiCollection": {
       "properties": {
         "value": {
