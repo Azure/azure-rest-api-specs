@@ -620,6 +620,10 @@
           "$ref": "#/definitions/GatewayDetails",
           "description": "The gateway details configured for the AS server."
         },
+        "ipV4FirewallSettings": {
+          "$ref": "#/definitions/IPv4FirewallSettings",
+          "description": "The firewall settings for the AS server."
+        },
         "querypoolConnectionMode": {
           "type":"string",
           "description": "How the read-write server's participation in the query pool is controlled.<br/>It can have the following values: <ul><li>readOnly - indicates that the read-write server is intended not to participate in query operations</li><li>all - indicates that the read-write server can participate in query operations</li></ul>Specifying readOnly when capacity is 1 results in error.",
@@ -636,7 +640,7 @@
       }
     },
     "ServerAdministrators": {
-      "description": "An array of administrator user identities",
+      "description": "An array of administrator user identities.",
       "type": "object",
       "properties": {
         "members": {
@@ -646,6 +650,38 @@
             "description": "The UPN of the user. For example: johnsmith@contoso.com."
           },
           "description": "An array of administrator user identities."
+        }
+      }
+    },
+    "IPv4FirewallSettings": {
+      "description": "An array of firewall rules.",
+      "type": "object",
+      "properties": {
+        "firewallRules": {
+          "type": "array",
+          "items": { 
+            "$ref": "#/definitions/IPv4FirewallRule",
+            "description": "The content of firewall rule."
+          }
+        },
+        "enablePowerBIService": { "type": "string" }
+      }
+    },
+    "IPv4FirewallRule": {
+      "description": "The detail of firewall rule.",
+      "type": "object",
+      "properties": {
+        "firewallRuleName": {
+          "type": "string",
+          "description": "The rule name."
+        },
+        "rangeStart": {
+          "type": "string",
+          "description": "The start range of IPv4."
+        },
+        "rangeEnd": {
+          "type": "string",
+          "description": "The end range of IPv4."
         }
       }
     },
@@ -670,7 +706,7 @@
       }
     },
     "GatewayListStatusLive": {
-      "description": "Status of gateway is live",
+      "description": "Status of gateway is live.",
       "type": "object",
       "properties": {
         "status": {
@@ -687,7 +723,7 @@
       }
     },
     "GatewayListStatusError": {
-      "description": "Status of gateway is error",
+      "description": "Status of gateway is error.",
       "type": "object",
       "properties": {
         "error": {
@@ -697,7 +733,7 @@
       }
     },
     "GatewayError": {
-      "description": "Detail of gateway errors",
+      "description": "Detail of gateway errors.",
       "type": "object",
       "properties": {
         "code": {
@@ -711,29 +747,29 @@
       }
     },
     "SkuEnumerationForNewResourceResult": {
-      "description": "An object that represents enumerating SKUs for new resources",
+      "description": "An object that represents enumerating SKUs for new resources.",
       "type": "object",
       "properties": {
         "value": {
           "type": "array",
           "items": { "$ref": "#/definitions/ResourceSku" },
-          "description": "The collection of available SKUs for new resources"
+          "description": "The collection of available SKUs for new resources."
         }
       }
     },
     "SkuEnumerationForExistingResourceResult": {
-      "description": "An object that represents enumerating SKUs for existing resources",
+      "description": "An object that represents enumerating SKUs for existing resources.",
       "type": "object",
       "properties": {
         "value": {
           "type": "array",
           "items": { "$ref": "#/definitions/SkuDetailsForExistingResource" },
-          "description": "The collection of available SKUs for existing resources"
+          "description": "The collection of available SKUs for existing resources."
         }
       }
     },
     "SkuDetailsForExistingResource": {
-      "description": "An object that represents SKU details for existing resources",
+      "description": "An object that represents SKU details for existing resources.",
       "type": "object",
       "properties": {
         "sku": {
