@@ -347,7 +347,12 @@
         "responses": {
           "200": {
             "description": "Successfully cancelled the job."
+          },
+          "202": {
+            "description": "Successfully initiated the cancellation of the specified job."
           }
+        },
+        "x-ms-long-running-operation": true
         }
       }
     },
@@ -376,12 +381,13 @@
         ],
         "responses": {
           "200": {
-            "description": "Successfully yielded the specified job.",
-            "schema": {
-              "$ref": "#/definitions/JobInformation"
-            }
+            "description": "Successfully yielded the specified job."
+          },
+          "202": {
+            "description": "Successfully initiated the yielding of the specified job."
           }
-        }
+        },
+        "x-ms-long-running-operation": true
       }
     },
     "/Jobs/{jobIdentity}": {
@@ -493,8 +499,12 @@
             "schema": {
               "$ref": "#/definitions/JobInformation"
             }
+          },
+          "202": {
+            "description": "Successfully initiated an update of the specified job."
           }
-        }
+        },
+        "x-ms-long-running-operation": true
       }
     },
     "/Jobs": {
