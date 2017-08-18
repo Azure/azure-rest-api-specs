@@ -430,7 +430,7 @@
         "description": "Lists all of the available consumption REST API operations.",
         "parameters": [
           {
-            "$ref": "#/parameters/apiVersionParameter"
+            "$ref": "#/parameters/ApiVersionParameter"
           }
         ],
         "responses": {
@@ -489,7 +489,7 @@
       "description": "Result of listing consumption operations. It contains a list of operations and a URL link to get the next set of results.",
       "properties": {
         "value": {
-          "description": "List of consumption operations supported by the Microsoft.Consumption resource provider.",
+          "description": "List of analysis services operations supported by the Microsoft.AnalysisServices resource provider.",
           "type": "array",
           "readOnly": true,
           "items": {
@@ -866,6 +866,20 @@
         "sku": {
           "$ref": "#/definitions/ResourceSku",
           "description": "The SKU in SKU details for existing resources."
+        }
+      }
+    },
+    "ErrorResponse": {
+      "description": "Describes the format of Error response.",
+      "type": "object",
+      "properties": {
+        "code": {
+          "description": "Error code",
+          "type": "string"
+        },
+        "message": {
+          "description": "Error message indicating why the operation failed.",
+          "type": "string"
         }
       }
     }
