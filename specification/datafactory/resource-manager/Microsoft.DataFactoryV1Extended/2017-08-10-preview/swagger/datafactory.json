@@ -34,6 +34,43 @@
   },
   "paths": {
     "/subscriptions/{subscriptionId}/resourcegroups/{resourceGroupName}/providers/Microsoft.DataFactory/datafactories/{dataFactoryName}/gateways/{gatewayName}": {
+      "get": {
+        "tags": [
+          "gatewaysExtended"
+        ],
+        "operationId": "GatewaysExtended_Get",
+        "x-ms-examples": {
+          "GatewaysExtended_Get": {
+              "$ref": "../examples/GatewaysExtended_Get.json"
+          }
+        },
+        "description": "Get a data factory gateway.",
+        "parameters": [
+         {
+            "$ref": "#/parameters/resourceGroupName"
+          },
+          {
+            "$ref": "#/parameters/dataFactoryName"
+          },
+          {
+            "$ref": "#/parameters/gatewayName"
+          },
+          {
+            "$ref": "#/parameters/apiVersion"
+          },
+          {
+            "$ref": "#/parameters/subscriptionId"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK response definition.",
+            "schema": {
+              "$ref": "#/definitions/GatewayExtended"
+            }
+          }
+        }
+      },
       "patch": {
         "tags": [
           "gatewaysExtended"
