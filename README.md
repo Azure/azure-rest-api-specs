@@ -39,35 +39,36 @@ The structure of the directory should strictly follow these rules:
 The structure should appear like so:
 ```bash
 .
-+---automation
-|   \---resource-manager
-|       \---Microsoft.Automation
-|           \---2015-10-31
-|               \---examples
-+---batch
-|   +---data-plane
-|   |   \---Microsoft.Batch
-|   |       +---2015-12-01.2.2
-|   |       +---2016-02-01.3.0
-|   |       +---2016-07-01.3.1
-|   |       +---2017-01-01.4.0
-|   |       |   \---examples
-|   |       \---2017-05-01.5.0
-|   \---resource-manager
-|       \---Microsoft.Batch
-|           +---2015-12-01
-|           +---2017-01-01
-|           |   \---examples
-|           \---2017-05-01
-|               \---examples
-+---billing
-|   \---resource-manager
-|       \---Microsoft.Billing
-|           +---2017-02-27-preview
-|           |   \---examples
-|           \---2017-04-24-preview
-|               \---examples
-└── readme.md
+\---specification
+|    +---automation
+|    |   \---resource-manager
+|    |       \---Microsoft.Automation
+|    |           \---2015-10-31
+|    |               \---examples
+|    +---batch
+|    |   +---data-plane
+|    |   |   \---Microsoft.Batch
+|    |   |       +---2015-12-01.2.2
+|    |   |       +---2016-02-01.3.0
+|    |   |       +---2016-07-01.3.1
+|    |   |       +---2017-01-01.4.0
+|    |   |       |   \---examples
+|    |   |       \---2017-05-01.5.0
+|    |   \---resource-manager
+|    |       \---Microsoft.Batch
+|    |           +---2015-12-01
+|    |           +---2017-01-01
+|    |           |   \---examples
+|    |           \---2017-05-01
+|    |               \---examples
+|    +---billing
+|        \---resource-manager
+|            \---Microsoft.Billing
+|                +---2017-02-27-preview
+|                |   \---examples
+|                \---2017-04-24-preview
+|                    \---examples
+\--- readme.md
 ```
 
 Currently, the specifications are expected to be in Swagger JSON format
@@ -77,4 +78,3 @@ The next step in the process after a spec is completed is to generate SDKs and A
 
 ---
 _This project has adopted the [Microsoft Open Source Code of Conduct](https://opensource.microsoft.com/codeofconduct/). For more information see the [Code of Conduct FAQ](https://opensource.microsoft.com/codeofconduct/faq/) or contact [opencode@microsoft.com](mailto:opencode@microsoft.com) with any additional questions or comments._
-
