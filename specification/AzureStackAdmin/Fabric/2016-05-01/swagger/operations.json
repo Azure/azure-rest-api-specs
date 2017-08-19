@@ -1,0 +1,163 @@
+{
+    "swagger": "2.0",
+    "info": {
+        "description": "Operation status operation endpoints and objects.",
+        "version": "2016-05-01"
+    },
+    "host": "adminmanagement.local.azurestack.external",
+    "schemes": [
+        "https"
+    ],
+    "paths": {
+        "/subscriptions/{subscriptionId}/resourceGroups/System.{location}/providers/{provider}/fabricLocations/{location}/computeOperationResults/{computeOperationResult}": {
+            "get": {
+                "x-ms-examples": {
+                    "Get a compute fabric operation status": "examples/Operations/ComputeFabricGet_example.json"
+                },
+                "tags": [
+                    "ComputeFabricOperations"
+                ],
+                "description": "Get the status of a compute fabric operation.",
+                "operationId": "ComputeFabricOperations_Get",
+                "parameters": [
+                    {
+                        "$ref": "fabric.json#/parameters/SubscriptionIdParameter"
+                    },
+                    {
+                        "$ref": "fabric.json#/parameters/LocationParameter"
+                    },
+                    {
+                        "$ref": "#/parameters/ProviderParameter"
+                    },
+                    {
+                        "$ref": "#/parameters/ComputeOperationResultParameter"
+                    },
+                    {
+                        "$ref": "fabric.json#/parameters/ApiVersionParameter"
+                    }
+                ],
+                "responses": {
+                    "202": {
+                        "description": "ACCEPTED",
+                        "schema": {
+                            "$ref": "#/definitions/OperationStatus"
+                        }
+                    }
+                },
+                "produces": [
+                    "application/json"
+                ],
+                "consumes": [
+                    "application/json"
+                ]
+            }
+        },
+        "/subscriptions/{subscriptionId}/resourceGroups/System.{location}/providers/{provider}/fabricLocations/{location}/networkOperationResults/{networkOperationResult}": {
+            "get": {
+                "x-ms-examples": {
+                    "Get a network fabric operation status": "examples/Operations/NetworkFabricGet_example.json"
+                },
+                "tags": [
+                    "NetworkFabricOperations"
+                ],
+                "description": "Get the status of a network fabric operation.",
+                "operationId": "NetworkFabricOperations_Get",
+                "parameters": [
+                    {
+                        "$ref": "fabric.json#/parameters/SubscriptionIdParameter"
+                    },
+                    {
+                        "$ref": "fabric.json#/parameters/LocationParameter"
+                    },
+                    {
+                        "$ref": "#/parameters/ProviderParameter"
+                    },
+                    {
+                        "$ref": "#/parameters/NetworkOperationResultParameter"
+                    },
+                    {
+                        "$ref": "fabric.json#/parameters/ApiVersionParameter"
+                    }
+                ],
+                "responses": {
+                    "202": {
+                        "description": "ACCEPTED",
+                        "schema": {
+                            "$ref": "#/definitions/OperationStatus"
+                        }
+                    }
+                },
+                "produces": [
+                    "application/json"
+                ],
+                "consumes": [
+                    "application/json"
+                ]
+            }
+        }
+    },
+    "definitions": {
+        "OperationStatus": {
+            "description": "Status of the compute operation.",
+            "properties": {
+                "properties": {
+                    "description" : "The state of the operation.",
+                    "x-ms-client-flatten": true,
+                    "$ref" : "#/definitions/ProvisioningState"
+                }
+            }
+        },
+        "ProvisioningState" : {
+            "description" : "The state of the operation.",
+            "properties" : {
+                "provisioningState" : {
+                    "description" : "The state of the operation.",
+                    "x-ms-client-name" : "provisioningState",
+                    "type" : "string"
+                }
+            }
+        }
+    },
+    "parameters": {
+        "ApplicationOperationResultParameter": {
+            "name": "applicationOperationResult",
+            "description": "Id of an infra role operation.",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "x-ms-parameter-location": "method"
+        },
+        "ComputeOperationResultParameter": {
+            "description": "Id of a compute fabric operation.",
+            "name": "computeOperationResult",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "x-ms-parameter-location": "method"
+        },
+        "StorageOperationResultParameter": {
+            "description": "Id of a storage fabric operation.",
+            "name": "storageOperationResult",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "x-ms-parameter-location": "method"
+        },
+        "NetworkOperationResultParameter": {
+            "description": "Id of a network fabric operation.",
+            "name": "networkOperationResult",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "x-ms-parameter-location": "method"
+        },
+        "ProviderParameter": {
+            "name": "provider",
+            "description": "Name of the provider.",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "x-ms-parameter-location": "method"
+        }
+    }
+}
