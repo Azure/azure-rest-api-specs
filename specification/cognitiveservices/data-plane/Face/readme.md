@@ -24,7 +24,7 @@ log-file: logs/log.txt
 These settings apply only when `--csharp` is specified on the command line.
 ``` yaml $(csharp) 
 csharp: 
-  namespace: Microsoft.CognitiveServices.Face
+  namespace: Microsoft.CognitiveServices.Vision.Face
   output-folder: out/csharp
 ```
 
