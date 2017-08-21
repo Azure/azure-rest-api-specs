@@ -73,6 +73,9 @@
       },
       "put": {
         "description": "Provisions the specified Analysis Services server based on the configuration specified in the request.",
+        "x-ms-examples": {
+          "Create a server.": { "$ref": "./examples/createServer.json" }
+        },
         "tags": [ "Servers" ],
         "operationId": "Servers_Create",
         "parameters": [
@@ -117,6 +120,9 @@
       },
       "delete": {
         "description": "Deletes the specified Analysis Services server.",
+        "x-ms-examples": {
+          "Delete a server.": { "$ref": "./examples/deleteServer.json" }
+        },
         "tags": [ "Servers" ],
         "operationId": "Servers_Delete",
         "parameters": [
@@ -155,6 +161,9 @@
       },
       "patch": {
         "description": "Updates the current state of the specified Analysis Services server.",
+        "x-ms-examples": {
+          "Update a server.": { "$ref": "./examples/updateServer.json" }
+        },
         "tags": [ "Servers" ],
         "operationId": "Servers_Update",
         "parameters": [
@@ -201,6 +210,9 @@
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AnalysisServices/servers/{serverName}/suspend": {
       "post": {
         "description": "Supends operation of the specified Analysis Services server instance.",
+        "x-ms-examples": {
+          "Suspend a server.": { "$ref": "./examples/suspendServer.json" }
+        },
         "tags": [ "Servers" ],
         "operationId": "Servers_Suspend",
         "parameters": [
@@ -238,6 +250,9 @@
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AnalysisServices/servers/{serverName}/resume": {
       "post": {
         "description": "Resumes operation of the specified Analysis Services server instance.",
+        "x-ms-examples": {
+          "Resume a server.": { "$ref": "./examples/resumeServer.json" }
+        },
         "tags": [ "Servers" ],
         "operationId": "Servers_Resume",
         "parameters": [
@@ -275,6 +290,9 @@
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AnalysisServices/servers": {
       "get": {
         "description": "Gets all the Analysis Services servers for the given resource group.",
+        "x-ms-examples": {
+          "List existing servers in the resource group.": { "$ref": "./examples/listServersInResourceGroup.json" }
+        },
         "tags": [ "Servers" ],
         "operationId": "Servers_ListByResourceGroup",
         "parameters": [
@@ -302,6 +320,9 @@
     "/subscriptions/{subscriptionId}/providers/Microsoft.AnalysisServices/servers": {
       "get": {
         "description": "Lists all the Analysis Services servers for the given subscription.",
+        "x-ms-examples": {
+          "List existing servers under the subscription.": { "$ref": "./examples/listServers.json" }
+        },
         "tags": [ "Servers" ],
         "operationId": "Servers_List",
         "parameters": [
@@ -386,6 +407,9 @@
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AnalysisServices/servers/{serverName}/listGatewayStatus": {
       "post": {
         "description": "Return the gateway status of the specified Analysis Services server instance.",
+        "x-ms-examples": {
+          "Get details of a server": { "$ref": "./examples/listGatewayStatus.json" }
+        },
         "tags": [ "Servers" ],
         "operationId": "Servers_ListGatewayStatus",
         "parameters": [
