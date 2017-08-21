@@ -38,6 +38,9 @@
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AnalysisServices/servers/{serverName}": {
       "get": {
         "description": "Gets details about the specified Analysis Services server.",
+        "x-ms-examples": {
+          "Get details of a server": { "$ref": "./examples/getServer.json" }
+        },
         "tags": [ "Servers" ],
         "operationId": "Servers_GetDetails",
         "parameters": [
@@ -70,6 +73,9 @@
       },
       "put": {
         "description": "Provisions the specified Analysis Services server based on the configuration specified in the request.",
+        "x-ms-examples": {
+          "Create a server.": { "$ref": "./examples/createServer.json" }
+        },
         "tags": [ "Servers" ],
         "operationId": "Servers_Create",
         "parameters": [
@@ -114,6 +120,9 @@
       },
       "delete": {
         "description": "Deletes the specified Analysis Services server.",
+        "x-ms-examples": {
+          "Delete a server.": { "$ref": "./examples/deleteServer.json" }
+        },
         "tags": [ "Servers" ],
         "operationId": "Servers_Delete",
         "parameters": [
@@ -152,6 +161,9 @@
       },
       "patch": {
         "description": "Updates the current state of the specified Analysis Services server.",
+        "x-ms-examples": {
+          "Update a server.": { "$ref": "./examples/updateServer.json" }
+        },
         "tags": [ "Servers" ],
         "operationId": "Servers_Update",
         "parameters": [
@@ -198,6 +210,9 @@
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AnalysisServices/servers/{serverName}/suspend": {
       "post": {
         "description": "Supends operation of the specified Analysis Services server instance.",
+        "x-ms-examples": {
+          "Suspend a server.": { "$ref": "./examples/suspendServer.json" }
+        },
         "tags": [ "Servers" ],
         "operationId": "Servers_Suspend",
         "parameters": [
@@ -235,6 +250,9 @@
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AnalysisServices/servers/{serverName}/resume": {
       "post": {
         "description": "Resumes operation of the specified Analysis Services server instance.",
+        "x-ms-examples": {
+          "Resume a server.": { "$ref": "./examples/resumeServer.json" }
+        },
         "tags": [ "Servers" ],
         "operationId": "Servers_Resume",
         "parameters": [
@@ -272,6 +290,9 @@
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AnalysisServices/servers": {
       "get": {
         "description": "Gets all the Analysis Services servers for the given resource group.",
+        "x-ms-examples": {
+          "List existing servers in the resource group.": { "$ref": "./examples/listServersInResourceGroup.json" }
+        },
         "tags": [ "Servers" ],
         "operationId": "Servers_ListByResourceGroup",
         "parameters": [
@@ -299,6 +320,9 @@
     "/subscriptions/{subscriptionId}/providers/Microsoft.AnalysisServices/servers": {
       "get": {
         "description": "Lists all the Analysis Services servers for the given subscription.",
+        "x-ms-examples": {
+          "List existing servers under the subscription.": { "$ref": "./examples/listServers.json" }
+        },
         "tags": [ "Servers" ],
         "operationId": "Servers_List",
         "parameters": [
@@ -383,6 +407,9 @@
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AnalysisServices/servers/{serverName}/listGatewayStatus": {
       "post": {
         "description": "Return the gateway status of the specified Analysis Services server instance.",
+        "x-ms-examples": {
+          "Get details of a server": { "$ref": "./examples/listGatewayStatus.json" }
+        },
         "tags": [ "Servers" ],
         "operationId": "Servers_ListGatewayStatus",
         "parameters": [
@@ -417,9 +444,89 @@
           }
         }
       }
+    },
+    "/providers/Microsoft.AnalysisServices/operations": {
+      "get": {
+        "tags": [
+          "Operations"
+        ],
+        "operationId": "Operations_List",
+        "description": "Lists all of the available consumption REST API operations.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK. The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/OperationListResult"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
     }
   },
   "definitions": {
+    "Operation": {
+      "description": "A Consumption REST API operation.",
+      "type": "object",
+      "properties": {
+        "name": {
+          "description": "Operation name: {provider}/{resource}/{operation}.",
+          "type": "string",
+          "readOnly": true
+        },
+        "display": {
+          "description": "The object that represents the operation.",
+          "properties": {
+            "provider": {
+              "description": "Service provider: Microsoft.Consumption.",
+              "type": "string",
+              "readOnly": true
+            },
+            "resource": {
+              "description": "Resource on which the operation is performed: UsageDetail, etc.",
+              "type": "string",
+              "readOnly": true
+            },
+            "operation": {
+              "description": "Operation type: Read, write, delete, etc.",
+              "type": "string",
+              "readOnly": true
+            }
+          }
+        }
+      }
+    },
+    "OperationListResult": {
+      "description": "Result of listing consumption operations. It contains a list of operations and a URL link to get the next set of results.",
+      "properties": {
+        "value": {
+          "description": "List of analysis services operations supported by the Microsoft.AnalysisServices resource provider.",
+          "type": "array",
+          "readOnly": true,
+          "items": {
+            "$ref": "#/definitions/Operation"
+          }
+        },
+        "nextLink": {
+          "description": "URL to get the next set of operation list results if there are any.",
+          "type": "string",
+          "readOnly": true
+        }
+      }
+    },
     "Resource": {
       "description": "Represents an instance of an Analysis Services resource.",
       "type": "object",
@@ -441,7 +548,11 @@
         },
         "location": {
           "type": "string",
-          "description": "Location of the Analysis Services resource."
+          "description": "Location of the Analysis Services resource.",
+          "x-ms-mutability": [
+            "create", 
+            "read"
+          ]
         },
         "sku": {
           "$ref": "#/definitions/ResourceSku",
@@ -620,6 +731,10 @@
           "$ref": "#/definitions/GatewayDetails",
           "description": "The gateway details configured for the AS server."
         },
+        "ipV4FirewallSettings": {
+          "$ref": "#/definitions/IPv4FirewallSettings",
+          "description": "The firewall settings for the AS server."
+        },
         "querypoolConnectionMode": {
           "type":"string",
           "description": "How the read-write server's participation in the query pool is controlled.<br/>It can have the following values: <ul><li>readOnly - indicates that the read-write server is intended not to participate in query operations</li><li>all - indicates that the read-write server can participate in query operations</li></ul>Specifying readOnly when capacity is 1 results in error.",
@@ -636,7 +751,7 @@
       }
     },
     "ServerAdministrators": {
-      "description": "An array of administrator user identities",
+      "description": "An array of administrator user identities.",
       "type": "object",
       "properties": {
         "members": {
@@ -646,6 +761,42 @@
             "description": "The UPN of the user. For example: johnsmith@contoso.com."
           },
           "description": "An array of administrator user identities."
+        }
+      }
+    },
+    "IPv4FirewallSettings": {
+      "description": "An array of firewall rules.",
+      "type": "object",
+      "properties": {
+        "firewallRules": {
+          "type": "array",
+          "items": { 
+            "$ref": "#/definitions/IPv4FirewallRule",
+            "description": "The content of firewall rule."
+          },
+          "description": "An array of firewall rules."
+        },
+        "enablePowerBIService": {
+          "type": "string",
+          "description": "The indicator of enableing PBI service."
+        }
+      }
+    },
+    "IPv4FirewallRule": {
+      "description": "The detail of firewall rule.",
+      "type": "object",
+      "properties": {
+        "firewallRuleName": {
+          "type": "string",
+          "description": "The rule name."
+        },
+        "rangeStart": {
+          "type": "string",
+          "description": "The start range of IPv4."
+        },
+        "rangeEnd": {
+          "type": "string",
+          "description": "The end range of IPv4."
         }
       }
     },
@@ -670,7 +821,7 @@
       }
     },
     "GatewayListStatusLive": {
-      "description": "Status of gateway is live",
+      "description": "Status of gateway is live.",
       "type": "object",
       "properties": {
         "status": {
@@ -687,7 +838,7 @@
       }
     },
     "GatewayListStatusError": {
-      "description": "Status of gateway is error",
+      "description": "Status of gateway is error.",
       "type": "object",
       "properties": {
         "error": {
@@ -697,7 +848,7 @@
       }
     },
     "GatewayError": {
-      "description": "Detail of gateway errors",
+      "description": "Detail of gateway errors.",
       "type": "object",
       "properties": {
         "code": {
@@ -711,34 +862,48 @@
       }
     },
     "SkuEnumerationForNewResourceResult": {
-      "description": "An object that represents enumerating SKUs for new resources",
+      "description": "An object that represents enumerating SKUs for new resources.",
       "type": "object",
       "properties": {
         "value": {
           "type": "array",
           "items": { "$ref": "#/definitions/ResourceSku" },
-          "description": "The collection of available SKUs for new resources"
+          "description": "The collection of available SKUs for new resources."
         }
       }
     },
     "SkuEnumerationForExistingResourceResult": {
-      "description": "An object that represents enumerating SKUs for existing resources",
+      "description": "An object that represents enumerating SKUs for existing resources.",
       "type": "object",
       "properties": {
         "value": {
           "type": "array",
           "items": { "$ref": "#/definitions/SkuDetailsForExistingResource" },
-          "description": "The collection of available SKUs for existing resources"
+          "description": "The collection of available SKUs for existing resources."
         }
       }
     },
     "SkuDetailsForExistingResource": {
-      "description": "An object that represents SKU details for existing resources",
+      "description": "An object that represents SKU details for existing resources.",
       "type": "object",
       "properties": {
         "sku": {
           "$ref": "#/definitions/ResourceSku",
           "description": "The SKU in SKU details for existing resources."
+        }
+      }
+    },
+    "ErrorResponse": {
+      "description": "Describes the format of Error response.",
+      "type": "object",
+      "properties": {
+        "code": {
+          "description": "Error code",
+          "type": "string"
+        },
+        "message": {
+          "description": "Error message indicating why the operation failed.",
+          "type": "string"
         }
       }
     }
