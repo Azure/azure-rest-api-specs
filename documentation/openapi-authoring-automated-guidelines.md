@@ -1,6 +1,6 @@
 # OpenAPI Specifications Authoring - Automated Guidelines #
 
-This document lists the set of automated rules that can be validated against OpenAPI(swagger) spec by running [validation tools](https://github.com/Azure/adx-documentation-pr/wiki/OpenAPI-Validation-tools). Please visit [here for Manual guidelines](openapi-authoring-manual-guidelines.md).
+This document lists the set of automated rules that can be validated against OpenAPI(swagger) spec by running [validation tools](https://github.com/Azure/adx-documentation-pr/blob/master/tools/tools.md). Please visit [here for Manual guidelines](openapi-authoring-manual-guidelines.md).
 
 It is a requirement to conform to all manual and automated rules with severity "Error" before sending a pull request for review.
 
@@ -30,34 +30,34 @@ We request OpenAPI(Swagger) spec authoring be assigned to engineers who have an
 
 | Id | Rule Name | Applies to |
 | --- | --- | --- |
-| [R3012](#R3012)	| [APIVersionPattern](#R3012)	| ARM Swagger specs |
-| [R3019](#R3019)	| [ARMResourcePropertiesBag](#R3019)	| ARM and Data plane Swagger specs |
-| [R3014](#R3014)	| [BodyPropertiesNamesCamelCase](#R3014) | ARM and Data plane Swagger specs |
-| [R3016](#R3016)	| [DefinitionsPropertiesNamesCamelCase](#R3016)  | ARM and Data plane Swagger specs |
-| [R3006](#R3006)	| [BodyTopLevelProperties](#R3006) | ARM Swagger specs |
-| [R3008](#R3008)	| [CollectionObjectPropertiesNaming](#R3008) | ARM and Data plane Swagger specs |
-| [R2044](#R2044)	| [InvalidVerbUsed](#R2044) | ARM and Data plane Swagger specs |
-| [R3023](#R3023)	| [OperationsAPIImplementation](#R3023) | ARM Swagger specs |
-| [R3007](#R3007)	| [PutGetPatchResponseSchema](#R3007) | ARM and Data plane Swagger specs |
-| [R3025](#R3025)	| [TrackedResourceGetOperation](#R3025) | ARM Swagger specs |
-| [R3026](#R3026)	| [TrackedResourcePatchOperation](#R3026) | ARM Swagger specs |
-| [R2059](#R2059)	| [UniqueResourcePaths](#R2059) | ARM Swagger specs |
-| [R2016](#R2016)	| [PatchBodyParametersSchema](#R2016) | ARM and Data plane Swagger specs |
-| [R2062](#R2062)	| [XmsResourceInPutResponse](#R2062) | ARM Swagger specs |
-| [R3027](#R3027)	| [TrackedResourceListByResourceGroup](#R3027) | ARM Swagger specs |
-| [R3028](#R3028)	| [TrackedResourceListBySubscription](#R3028) | ARM Swagger specs |
-| [R3011](#R3011)	| [DescriptionMustNotBeNodeName](#R3011) | ARM and Data plane Swagger specs |
-| [R2020](#R2020) | [RequiredPropertiesMissingInResourceModel](#R2020) | ARM Swagger specs |
+| [R3012](#R3012)	| [APIVersionPattern](#R3012)	| ARM OpenAPI(swagger) specs |
+| [R3019](#R3019)	| [ARMResourcePropertiesBag](#R3019)	| ARM and Data plane OpenAPI(swagger) specs |
+| [R3014](#R3014)	| [BodyPropertiesNamesCamelCase](#R3014) | ARM and Data plane OpenAPI(swagger) specs |
+| [R3016](#R3016)	| [DefinitionsPropertiesNamesCamelCase](#R3016)  | ARM and Data plane OpenAPI(swagger) specs |
+| [R3006](#R3006)	| [BodyTopLevelProperties](#R3006) | ARM OpenAPI(swagger) specs |
+| [R3008](#R3008)	| [CollectionObjectPropertiesNaming](#R3008) | ARM and Data plane OpenAPI(swagger) specs |
+| [R2044](#R2044)	| [InvalidVerbUsed](#R2044) | ARM and Data plane OpenAPI(swagger) specs |
+| [R3023](#R3023)	| [OperationsAPIImplementation](#R3023) | ARM OpenAPI(swagger) specs |
+| [R3007](#R3007)	| [PutGetPatchResponseSchema](#R3007) | ARM and Data plane OpenAPI(swagger) specs |
+| [R3025](#R3025)	| [TrackedResourceGetOperation](#R3025) | ARM OpenAPI(swagger) specs |
+| [R3026](#R3026)	| [TrackedResourcePatchOperation](#R3026) | ARM OpenAPI(swagger) specs |
+| [R2059](#R2059)	| [UniqueResourcePaths](#R2059) | ARM OpenAPI(swagger) specs |
+| [R2016](#R2016)	| [PatchBodyParametersSchema](#R2016) | ARM and Data plane OpenAPI(swagger) specs |
+| [R2062](#R2062)	| [XmsResourceInPutResponse](#R2062) | ARM OpenAPI(swagger) specs |
+| [R3027](#R3027)	| [TrackedResourceListByResourceGroup](#R3027) | ARM OpenAPI(swagger) specs |
+| [R3028](#R3028)	| [TrackedResourceListBySubscription](#R3028) | ARM OpenAPI(swagger) specs |
+| [R3011](#R3011)	| [DescriptionMustNotBeNodeName](#R3011) | ARM and Data plane OpenAPI(swagger) specs |
+| [R2020](#R2020) | [RequiredPropertiesMissingInResourceModel](#R2020) | ARM OpenAPI(swagger) specs |
 
 #### RPC Warnings
 
 | Id | Rule Name | Applies to |
 | --- | --- | --- |
-| [R3018](#R3018)	| [EnumInsteadOfBoolean](#R3018) | ARM and Data plane Swagger specs |
-| [R3017](#R3017)	| [GuidUsage](#R3017) | ARM and Data plane Swagger specs |
-| [R2057](#R2057)	| [InvalidSkuModel](#R2057) | ARM Swagger specs |
-| [R3010](#R3010)	| [TrackedResourceListByImmediateParent](#R3010) | ARM Swagger specs |
-| [R2004](#R2004)	| [NonApplicationJsonType](#R2004) | ARM Swagger specs |
+| [R3018](#R3018)	| [EnumInsteadOfBoolean](#R3018) | ARM and Data plane OpenAPI(swagger) specs |
+| [R3017](#R3017)	| [GuidUsage](#R3017) | ARM and Data plane OpenAPI(swagger) specs |
+| [R2057](#R2057)	| [InvalidSkuModel](#R2057) | ARM OpenAPI(swagger) specs |
+| [R3010](#R3010)	| [TrackedResourceListByImmediateParent](#R3010) | ARM OpenAPI(swagger) specs |
+| [R2004](#R2004)	| [NonApplicationJsonType](#R2004) | ARM OpenAPI(swagger) specs |
 
 ### SDK Violations
 
@@ -65,63 +65,63 @@ We request OpenAPI(Swagger) spec authoring be assigned to engineers who have an
 
 | Id | Rule Name | Applies to |
 | --- | --- | --- |
-| [R2024](#R2024) | [AnonymousBodyParameter](#R2024) | ARM and Data plane Swagger specs |
-| [R2026](#R2026) | [AvoidAnonymousTypes](#R2026) | ARM and Data plane Swagger specs |
-| [R2014](#R2014)	| [SubscriptionIdParameterInOperations](#R2014)	| ARM and Data plane Swagger specs |
-| [R2027](#R2027)	| [DefaultMustBeInEnum](#R2027) | ARM and Data plane Swagger specs |
-| [R1001](#R1001)	| [OperationIdNounInVerb](#R1001)	| ARM and Data plane Swagger specs |
-| [R2055](#R2055)	| [OneUnderscoreInOperationId](#R2055) | ARM and Data plane Swagger specs |
-| [R2003](#R2003)	| [ValidFormats](#R2003)	 | ARM and Data plane Swagger specs |
-| [R2005](#R2005)	| [LongRunningResponseStatusCode](#R2005) | ARM and Data plane Swagger specs |
-| [R2008](#R2008)	| [MutabilityWithReadOnlyRule](#R2008) | ARM and Data plane Swagger specs |
-| [R2025](#R2025)	| [NextLinkPropertyMustExist](#R2025)	| ARM and Data plane Swagger specs |
-| [R2028](#R2028) | [NonEmptyClientName](#R2028) | ARM and Data plane Swagger specs |
-| [R2060](#R2060) | [PageableRequires200Response](#R2060) | ARM and Data plane Swagger specs |
-| [R2019](#R2019)	| [ResourceHasXMsResourceEnabled](#R2019) | ARM Swagger specs |
-| [R2058](#R2058) | [XmsPathsMustOverloadPaths](#R2058) | ARM and Data plane Swagger specs |
-| [R2012](#R2012)	| [XmsClientNameParameter](#R2012) | ARM and Data plane Swagger specs |
-| [R2013](#R2013)	| [XmsClientNameProperty](#R2013) | ARM and Data plane Swagger specs |
-| [R2047](#R2047)	| [NamePropertyDefinitionInParameter](#R2047) | ARM and Data plane Swagger specs |
-| [R2056](#R2056)	| [RequiredReadOnlyProperties](#R2056) | ARM and Data plane Swagger specs |
-| [R2054](#R2054)	| [SecurityDefinitionsStructure](#R2054) | ARM Swagger specs |
-| [R2006](#R2006)	| [ControlCharactersNotAllowed](#R2006) | ARM and Data plane Swagger specs |
-| [R2009](#R2009)	| [ArraySchemaMustHaveItems](#R2009) | ARM and Data plane Swagger specs |
-| [R2022](#R2022) | [XmsExamplesRequired](#R2022) | ARM and Data plane Swagger specs |
-| [R3013](#R3013)	| [DeleteMustNotHaveRequestBody](#R3013) | ARM and Data plane Swagger specs |
+| [R2024](#R2024) | [AnonymousBodyParameter](#R2024) | ARM and Data plane OpenAPI(swagger) specs |
+| [R2026](#R2026) | [AvoidAnonymousTypes](#R2026) | ARM and Data plane OpenAPI(swagger) specs |
+| [R2014](#R2014)	| [SubscriptionIdParameterInOperations](#R2014)	| ARM and Data plane OpenAPI(swagger) specs |
+| [R2027](#R2027)	| [DefaultMustBeInEnum](#R2027) | ARM and Data plane OpenAPI(swagger) specs |
+| [R1001](#R1001)	| [OperationIdNounInVerb](#R1001)	| ARM and Data plane OpenAPI(swagger) specs |
+| [R2055](#R2055)	| [OneUnderscoreInOperationId](#R2055) | ARM and Data plane OpenAPI(swagger) specs |
+| [R2003](#R2003)	| [ValidFormats](#R2003)	 | ARM and Data plane OpenAPI(swagger) specs |
+| [R2005](#R2005)	| [LongRunningResponseStatusCode](#R2005) | ARM and Data plane OpenAPI(swagger) specs |
+| [R2008](#R2008)	| [MutabilityWithReadOnlyRule](#R2008) | ARM and Data plane OpenAPI(swagger) specs |
+| [R2025](#R2025)	| [NextLinkPropertyMustExist](#R2025)	| ARM and Data plane OpenAPI(swagger) specs |
+| [R2028](#R2028) | [NonEmptyClientName](#R2028) | ARM and Data plane OpenAPI(swagger) specs |
+| [R2060](#R2060) | [PageableRequires200Response](#R2060) | ARM and Data plane OpenAPI(swagger) specs |
+| [R2019](#R2019)	| [ResourceHasXMsResourceEnabled](#R2019) | ARM OpenAPI(swagger) specs |
+| [R2058](#R2058) | [XmsPathsMustOverloadPaths](#R2058) | ARM and Data plane OpenAPI(swagger) specs |
+| [R2012](#R2012)	| [XmsClientNameParameter](#R2012) | ARM and Data plane OpenAPI(swagger) specs |
+| [R2013](#R2013)	| [XmsClientNameProperty](#R2013) | ARM and Data plane OpenAPI(swagger) specs |
+| [R2047](#R2047)	| [NamePropertyDefinitionInParameter](#R2047) | ARM and Data plane OpenAPI(swagger) specs |
+| [R2056](#R2056)	| [RequiredReadOnlyProperties](#R2056) | ARM and Data plane OpenAPI(swagger) specs |
+| [R2054](#R2054)	| [SecurityDefinitionsStructure](#R2054) | ARM OpenAPI(swagger) specs |
+| [R2006](#R2006)	| [ControlCharactersNotAllowed](#R2006) | ARM and Data plane OpenAPI(swagger) specs |
+| [R2009](#R2009)	| [ArraySchemaMustHaveItems](#R2009) | ARM and Data plane OpenAPI(swagger) specs |
+| [R2022](#R2022) | [XmsExamplesRequired](#R2022) | ARM and Data plane OpenAPI(swagger) specs |
+| [R3013](#R3013)	| [DeleteMustNotHaveRequestBody](#R3013) | ARM and Data plane OpenAPI(swagger) specs |
 
 #### SDK Warnings
 
 | Id | Rule Name | Applies to |
 | --- | --- | --- |
-| [R4000](#R4000-2) | [ParameterDescriptionRequired](#R4000-2) | ARM and Data plane Swagger specs |
-| [R4000](#R4000-3) | [DescriptiveDescriptionRequired](#R4000-3) | ARM and Data plane Swagger specs |
-| [R4000](#R4000-4) | [DescriptionAndTitleMissing](#R4000-4) | ARM and Data plane Swagger specs |
-| [R4000](#R4000-5) | [OperationDescriptionOrSummaryRequired](#R4000-5)  | ARM and Data plane Swagger specs |
-| [R2001](#R2001)	| [AvoidNestedProperties](#R2001) | ARM and Data plane Swagger specs |
-| [R4002](#R4002)	| [LocationMustHaveXmsMutability](#R4002) | ARM Swagger specs |
-| [R2066](#R2066)	| [PostOperationIdContainsUrlVerb](#R2066) | ARM and Data plane Swagger specs |
-| [R2015](#R2015) | [ParameterNotDefinedInGlobalParameters](#R2015) | ARM and Data plane Swagger specs |
-| [R1010](#R1010) | [AvoidMSDNReferences](#R1010) | ARM and Data plane Swagger specs |
-| [R2017](#R2017)	| [PutRequestResponseScheme](#R2017) | ARM and Data plane Swagger specs |
-| [R1009](#R1009) | [DeleteInOperationName](#R1009) | ARM and Data plane Swagger specs |
-| [R1005](#R1005) | [GetInOperationName](#R1005) | ARM and Data plane Swagger specs |
-| [R1003](#R1003) | [ListInOperationName](#R1003) | ARM and Data plane Swagger specs |
-| [R1006](#R1006)	| [PutInOperationName](#R1006) | ARM and Data plane Swagger specs |
-| [R1007](#R1007) | [PatchInOperationName](#R1007) | ARM and Data plane Swagger specs |
-| [R1011](#R1011) | [HttpsSupportedScheme](#R1011) | ARM Swagger specs |
-| [R2065](#R2065) | [LicenseHeaderMustNotBeSpecified](#R2065) | ARM and Data plane Swagger specs |
-| [R2018](#R2018) | [XmsEnumValidation](#R2018) | ARM and Data plane Swagger specs |
-| [R3060](#R3060) | [XmsPageableListByRGAndSubscriptions](#R3060) | ARM Swagger specs |
-| [R2063](#R2063) | [OperationIdNounConflictingModelNames](#R2063) | ARM and Data plane Swagger specs |
-| [R2064](#R2064) | [LROStatusCodesReturnTypeSchema](#R2064) | ARM and Data plane Swagger specs |
-| [R2023](#R2023) | [SummaryAndDescriptionMustNotBeSame](#R2023) | ARM and Data plane Swagger specs |
+| [R4000](#R4000-2) | [ParameterDescriptionRequired](#R4000-2) | ARM and Data plane OpenAPI(swagger) specs |
+| [R4000](#R4000-3) | [DescriptiveDescriptionRequired](#R4000-3) | ARM and Data plane OpenAPI(swagger) specs |
+| [R4000](#R4000-4) | [DescriptionAndTitleMissing](#R4000-4) | ARM and Data plane OpenAPI(swagger) specs |
+| [R4000](#R4000-5) | [OperationDescriptionOrSummaryRequired](#R4000-5)  | ARM and Data plane OpenAPI(swagger) specs |
+| [R2001](#R2001)	| [AvoidNestedProperties](#R2001) | ARM and Data plane OpenAPI(swagger) specs |
+| [R4002](#R4002)	| [LocationMustHaveXmsMutability](#R4002) | ARM OpenAPI(swagger) specs |
+| [R2066](#R2066)	| [PostOperationIdContainsUrlVerb](#R2066) | ARM and Data plane OpenAPI(swagger) specs |
+| [R2015](#R2015) | [ParameterNotDefinedInGlobalParameters](#R2015) | ARM and Data plane OpenAPI(swagger) specs |
+| [R1010](#R1010) | [AvoidMSDNReferences](#R1010) | ARM and Data plane OpenAPI(swagger) specs |
+| [R2017](#R2017)	| [PutRequestResponseScheme](#R2017) | ARM and Data plane OpenAPI(swagger) specs |
+| [R1009](#R1009) | [DeleteInOperationName](#R1009) | ARM and Data plane OpenAPI(swagger) specs |
+| [R1005](#R1005) | [GetInOperationName](#R1005) | ARM and Data plane OpenAPI(swagger) specs |
+| [R1003](#R1003) | [ListInOperationName](#R1003) | ARM and Data plane OpenAPI(swagger) specs |
+| [R1006](#R1006)	| [PutInOperationName](#R1006) | ARM and Data plane OpenAPI(swagger) specs |
+| [R1007](#R1007) | [PatchInOperationName](#R1007) | ARM and Data plane OpenAPI(swagger) specs |
+| [R1011](#R1011) | [HttpsSupportedScheme](#R1011) | ARM OpenAPI(swagger) specs |
+| [R2065](#R2065) | [LicenseHeaderMustNotBeSpecified](#R2065) | ARM and Data plane OpenAPI(swagger) specs |
+| [R2018](#R2018) | [XmsEnumValidation](#R2018) | ARM and Data plane OpenAPI(swagger) specs |
+| [R3060](#R3060) | [XmsPageableListByRGAndSubscriptions](#R3060) | ARM OpenAPI(swagger) specs |
+| [R2063](#R2063) | [OperationIdNounConflictingModelNames](#R2063) | ARM and Data plane OpenAPI(swagger) specs |
+| [R2064](#R2064) | [LROStatusCodesReturnTypeSchema](#R2064) | ARM and Data plane OpenAPI(swagger) specs |
+| [R2023](#R2023) | [SummaryAndDescriptionMustNotBeSame](#R2023) | ARM and Data plane OpenAPI(swagger) specs |
 
 ## Rule Descriptions
 
 ### <a name="R3012" />R3012 APIVersionPattern 
 **Category** : Error
 
-**Applies to**: ARM swagger specs
+**Applies to**: ARM OpenAPI(swagger) specs
 
 **Output Message**: API Version must be in the format: yyyy-MM-dd, optionally followed by -preview, -alpha, -beta, -rc, -privatepreview.
 
@@ -158,7 +158,7 @@ Links: [Index](#index) | [Error vs. Warning](#error-vs-warning) | [Automated Rul
 ### <a name="R3016" />R3016 DefinitionsPropertiesNamesCamelCase
 **Category** : Error
 
-**Applies to** : ARM and Data Plane swagger specs
+**Applies to** : ARM and Data Plane OpenAPI(swagger) specs
 
 **Output Message**: Property named: "{0}", must follow camelCase style. Example: "{1}".
 **Output Message**: Property named: "{0}", for definition: "{1}" must follow camelCase style. Example: "{2}".
@@ -197,7 +197,7 @@ Links: [Index](#index) | [Error vs. Warning](#error-vs-warning) | [Automated Rul
 ### <a name="R3025" />R3025 TrackedResourceGetOperation
 **Category** : Error
 
-**Applies to** : ARM swagger specs
+**Applies to** : ARM OpenAPI(swagger) specs
 
 **Output Message**: Tracked resource '{0}' must have a get operation.
 
@@ -218,7 +218,7 @@ Links: [Index](#index) | [Error vs. Warning](#error-vs-warning) | [Automated Rul
 ### <a name="R3026" />R3026 TrackedResourcePatchOperation
 **Category** : Error
 
-**Applies to** : ARM swagger specs
+**Applies to** : ARM OpenAPI(swagger) specs
 
 **Output Message**: Tracked resource '{0}' must have patch operation that at least supports the update of tags.
 
@@ -239,7 +239,7 @@ Links: [Index](#index) | [Error vs. Warning](#error-vs-warning) | [Automated Rul
 ### <a name="R3027" />R3027 TrackedResourceListByResourceGroup
 **Category** : Error
 
-**Applies to** : ARM swagger specs
+**Applies to** : ARM OpenAPI(swagger) specs
 
 **Output Message**: The tracked resource, '{0}', must have a list by resource group operation.
 
@@ -260,7 +260,7 @@ Links: [Index](#index) | [Error vs. Warning](#error-vs-warning) | [Automated Rul
 ### <a name="R3028" />R3028 TrackedResourceListBySubscription
 **Category** : Error
 
-**Applies to** : ARM swagger specs
+**Applies to** : ARM OpenAPI(swagger) specs
 
 **Output Message**: The tracked resource, '{0}', must have a list by subscriptions operation.
 
@@ -281,7 +281,7 @@ Links: [Index](#index) | [Error vs. Warning](#error-vs-warning) | [Automated Rul
 ### <a name="R3010" />R3010 TrackedResourceListByImmediateParent
 **Category** : Warning
 
-**Applies to** : ARM swagger specs
+**Applies to** : ARM OpenAPI(swagger) specs
 
 **Output Message**: The child tracked resource, '{0}' with immediate parent '{1}', must have a list by immediate parent operation.
 
@@ -302,7 +302,7 @@ Links: [Index](#index) | [Error vs. Warning](#error-vs-warning) | [Automated Rul
 ### <a name="R3018" />R3018 EnumInsteadOfBoolean
 **Category** : Warning
 
-**Applies to** : ARM and Data plane swagger specs
+**Applies to** : ARM and Data plane OpenAPI(swagger) specs
 
 **Output Message**: Booleans are not descriptive and make them hard to use. Consider using string enums with allowed set of values defined. Property: {0}.
 
@@ -321,7 +321,7 @@ Links: [Index](#index) | [Error vs. Warning](#error-vs-warning) | [Automated Rul
 ### <a name="R4002" />R4002	LocationMustHaveXmsMutability
 **Category** : SDK Warning
 
-**Applies to** : ARM swagger specs
+**Applies to** : ARM OpenAPI(swagger) specs
 
 **Output Message**: Property 'location' must have '\"x-ms-mutability\":[\"read\", \"create\"]' extension defined. Resource Model: '{0}'
 
@@ -344,7 +344,7 @@ Links: [Index](#index) | [Error vs. Warning](#error-vs-warning) | [Automated Rul
 ### <a name="R2028" />R2028 NonEmptyClientName
 **Category** : SDK Error
 
-**Applies to** : ARM and Data plane swagger specs
+**Applies to** : ARM and Data plane OpenAPI(swagger) specs
 
 **Output Message**: Empty x-ms-client-name property.
 
@@ -368,7 +368,7 @@ Links: [Index](#index) | [Error vs. Warning](#error-vs-warning) | [Automated Rul
 ### <a name="R2066" />R2066	PostOperationIdContainsUrlVerb
 **Category** : SDK Warning
 
-**Applies to** : ARM and Data plane swagger specs
+**Applies to** : ARM and Data plane OpenAPI(swagger) specs
 
 **Output Message**: OperationId should contain the verb: '{0}' in:'{1}'
 
@@ -393,7 +393,7 @@ Links: [Index](#index) | [Error vs. Warning](#error-vs-warning) | [Automated Rul
 ### <a name="R2009" />R2009 ArraySchemaMustHaveItems
 **Category** : SDK Error
 
-**Applies to** : ARM and Data Plane swagger specs
+**Applies to** : ARM and Data Plane OpenAPI(swagger) specs
 
 **Output Message**: Please provide an items property for array type: '{0}'.
 
@@ -428,7 +428,7 @@ Links: [Index](#index) | [Error vs. Warning](#error-vs-warning) | [Automated Rul
 ### <a name="R2012" />R2012 XmsClientNameParameter
 **Category** : SDK Error
 
-**Applies to** : ARM and Data plane swagger specs
+**Applies to** : ARM and Data plane OpenAPI(swagger) specs
 
 **Output Message**: Value of 'x-ms-client-name' cannot be the same as '{0}' Property/Model.
 
@@ -470,7 +470,7 @@ Links: [Index](#index) | [Error vs. Warning](#error-vs-warning) | [Automated Rul
 ### <a name="R2013" />R2013 XmsClientNameProperty
 **Category** : SDK Error
 
-**Applies to** : ARM and Data plane swagger specs
+**Applies to** : ARM and Data plane OpenAPI(swagger) specs
 
 **Output Message**: Value of 'x-ms-client-name' cannot be the same as '{0}' Property/Model.
 
@@ -503,11 +503,11 @@ Links: [Index](#index) | [Error vs. Warning](#error-vs-warning) | [Automated Rul
 ### <a name="R1010" />R1010 AvoidMsdnReferences
 **Category** : SDK Warning
 
-**Applies to** : ARM and Data plane swagger specs
+**Applies to** : ARM and Data plane OpenAPI(swagger) specs
 
 **Output Message**: For better generated code quality, remove all references to "msdn.microsoft.com".
 
-**Description**: The documentation is being generated from the swagger and published at "docs.microsoft.com". From that perspective, documentation team would like to avoid having links to the "msdn.microsoft.com" in the swagger and SDK documentations.
+**Description**: The documentation is being generated from the OpenAPI(swagger) and published at "docs.microsoft.com". From that perspective, documentation team would like to avoid having links to the "msdn.microsoft.com" in the OpenAPI(swagger) and SDK documentations.
 
 **Why the rule is important**: Facilitate decoupling of "msdn.microsoft.com" from "docs.microsoft.com".
 
@@ -522,7 +522,7 @@ Links: [Index](#index) | [Error vs. Warning](#error-vs-warning) | [Automated Rul
 ### <a name="R1009" />R1009 DeleteInOperationName
 **Category** : SDK Warning
 
-**Applies to** : ARM and Data plane swagger specs
+**Applies to** : ARM and Data plane OpenAPI(swagger) specs
 
 **Output Message**: 'DELETE' operation '{0}' should use method name 'Delete'. Note: If you have already shipped an SDK on top of this spec, fixing this warning may introduce a breaking change.
 
@@ -545,7 +545,7 @@ Links: [Index](#index) | [Error vs. Warning](#error-vs-warning) | [Automated Rul
 ### <a name="R1005" />R1005 GetInOperationName
 **Category** : SDK Warning
 
-**Applies to** : ARM and Data plane swagger specs
+**Applies to** : ARM and Data plane OpenAPI(swagger) specs
 
 **Output Message**: 'GET' operation '{0}' should use method name 'Get' or Method name start with 'List'. Note: If you have already shipped an SDK on top of this spec, fixing this warning may introduce a breaking change.
 
@@ -568,7 +568,7 @@ Links: [Index](#index) | [Error vs. Warning](#error-vs-warning) | [Automated Rul
 ### <a name="R1003" />R1003 ListInOperationName
 **Category** : SDK Warning
 
-**Applies to** : ARM and Data plane swagger specs
+**Applies to** : ARM and Data plane OpenAPI(swagger) specs
 
 **Output Message**: Since operation '{0}' response has model definition '{1}', it should be of the form "*_list*".
 
@@ -590,7 +590,7 @@ Links: [Index](#index) | [Error vs. Warning](#error-vs-warning) | [Automated Rul
 ### <a name="R1006" />R1006 PutInOperationName
 **Category** : SDK Warning
 
-**Applies to** : ARM and Data plane swagger specs
+**Applies to** : ARM and Data plane OpenAPI(swagger) specs
 
 **Output Message**: 'PUT' operation '{0}' should use method name 'Create'. Note: If you have already shipped an SDK on top of this spec, fixing this warning may introduce a breaking change.
 
@@ -612,7 +612,7 @@ Links: [Index](#index) | [Error vs. Warning](#error-vs-warning) | [Automated Rul
 ### <a name="R1007" />R1007 PatchInOperationName
 **Category** : SDK Warning
 
-**Applies to** : ARM and Data plane swagger specs
+**Applies to** : ARM and Data plane OpenAPI(swagger) specs
 
 **Output Message**: 'PATCH' operation '{0}' should use method name 'Update'. Note: If you have already shipped an SDK on top of this spec, fixing this warning may introduce a breaking change.
 
@@ -633,7 +633,7 @@ Links: [Index](#index) | [Error vs. Warning](#error-vs-warning) | [Automated Rul
 ### <a name="R3017" />R3017 GuidUsage
 **Category** : Warning
 
-**Applies to** : ARM and Data plane swagger specs
+**Applies to** : ARM and Data plane OpenAPI(swagger) specs
 
 **Output Message**: Guid used in model definition '{1}' for property '{0}'. Usage of Guid is not recommanded. If GUIDs are absolutely required in your service, please get sign off from the Azure API review board.
 
@@ -652,7 +652,7 @@ Links: [Index](#index) | [Error vs. Warning](#error-vs-warning) | [Automated Rul
 ### <a name="R1011" />R1011 HttpsSupportedScheme
 **Category** : SDK Warning
 
-**Applies to** : ARM swagger specs
+**Applies to** : ARM OpenAPI(swagger) specs
 
 **Output Message**: Azure Resource Management only supports HTTPS scheme.
 
@@ -676,7 +676,7 @@ Links: [Index](#index) | [Error vs. Warning](#error-vs-warning) | [Automated Rul
 ### <a name="R2004" />R2004 NonApplicationJsonType
 **Category** : RPC Warning
 
-**Applies to** : ARM swagger specs
+**Applies to** : ARM OpenAPI(swagger) specs
 
 **Output Message**: Only content-type 'application/json' is supported by ARM..
 
@@ -693,15 +693,15 @@ Links: [Index](#index) | [Error vs. Warning](#error-vs-warning) | [Automated Rul
 ### <a name="R2059" />R2059 UniqueResourcePaths
 **Category** : Error
 
-**Applies to** : ARM swagger specs
+**Applies to** : ARM OpenAPI(swagger) specs
 
 **Output Message**: Multiple resource providers are not allowed in a single spec. More than one the resource paths were found: '{0}'.
 
 **Description**: Verifies whether more than one resource providers exists in the specification or not.
 
-**Why the rule is important**: Per the [ARM guidelines](https://github.com/Azure/azure-resource-manager-rpc/blob/master/v1.0/resource-api-reference.md), each swagger specification must contain one resource provider.
+**Why the rule is important**: Per the [ARM guidelines](https://github.com/Azure/azure-resource-manager-rpc/blob/master/v1.0/resource-api-reference.md), each OpenAPI(swagger) specification must contain one resource provider.
 
-**How to fix the violation**: One swagger specification must have one resource provider. Please create multiple swaggers, each for one provider. Please refer
+**How to fix the violation**: One OpenAPI(swagger) specification must have one resource provider. Please create multiple OpenAPI(swagger) specs, each for one provider. Please refer
 [Literate Configuration](https://github.com/Azure/autorest/blob/185e337137c990b9cc1b8ebbb272e76eeeef43a1/docs/user/literate-file-formats/configuration.md).
 
 **Impact on generated code**: N/A.
@@ -749,7 +749,7 @@ Links: [Index](#index) | [Error vs. Warning](#error-vs-warning) | [Automated Rul
 ### <a name="R2006" />R2006 ControlCharactersNotAllowed
 **Category** : SDK Error
 
-**Applies to** : ARM and Data plane swagger specs
+**Applies to** : ARM and Data plane OpenAPI(swagger) specs
 
 **Output Message**: May not contain control characters:  Characters:'{0}' in:'{1}'
 
@@ -767,7 +767,7 @@ Links: [Index](#index) | [Error vs. Warning](#error-vs-warning) | [Automated Rul
 ### <a name="R2008" />R2008 MutabilityWithReadOnly
 **Category** : SDK Error
 
-**Applies to** : ARM and Data plane swagger specs
+**Applies to** : ARM and Data plane OpenAPI(swagger) specs
 
 **Output Message**:  When property is modeled as "readOnly": true then x-ms-mutability extension can only have "read" value. When property is modeled as "readOnly": false then applying x-ms-mutability extension with only "read" value is not allowed. Extension contains invalid values: '{0}'
 
@@ -799,7 +799,7 @@ Links: [Index](#index) | [Error vs. Warning](#error-vs-warning) | [Automated Rul
 ### <a name="R2058" />R2058 XmsPathsMustOverloadPaths 
 **Category** : SDK Error
 
-**Applies to** : ARM and Data plane swagger specs
+**Applies to** : ARM and Data plane OpenAPI(swagger) specs
 
 **Output Message**: Paths in x-ms-paths must overload a normal path in the paths section, i.e. a path in the x-ms-paths must either be same as a path in the paths section or a path in the paths sections followed by additional parameters. 
 
@@ -841,7 +841,7 @@ Links: [Index](#index) | [Error vs. Warning](#error-vs-warning) | [Automated Rul
 ### <a name="R2001" />R2001 AvoidNestedProperties
 **Category** : SDK Warning
 
-**Applies to** : ARM and Data plane swagger specs
+**Applies to** : ARM and Data plane OpenAPI(swagger) specs
 
 **Output Message**: Consider using x-ms-client-flatten to provide a better end user experience
 
@@ -856,7 +856,7 @@ Links: [Index](#index) | [Error vs. Warning](#error-vs-warning) | [Automated Rul
 ### <a name="R3008" />R3008 CollectionObjectPropertiesNaming
 **Category** : Error
 
-**Applies to** : ARM and Data plane swagger specs
+**Applies to** : ARM and Data plane OpenAPI(swagger) specs
 
 **Output Message**: Collection object '{0}' returned by list operation '{1}' with 'x-ms-pageable' extension, has no property named 'value'. 
 
@@ -871,7 +871,7 @@ Links: [Index](#index) | [Error vs. Warning](#error-vs-warning) | [Automated Rul
 ### <a name="R2027" />R2027 DefaultMustBeInEnum
 **Category** : Error
 
-**Applies to** : ARM and Data plane swagger specs
+**Applies to** : ARM and Data plane OpenAPI(swagger) specs
 
 **Output Message**: The default value is not one of the values enumerated as valid for this element.
 
@@ -900,7 +900,7 @@ Links: [Index](#index) | [Error vs. Warning](#error-vs-warning) | [Automated Rul
 ### <a name="R2047" />R2047 NamePropertyDefinitionInParameter
 **Category** : SDK Error
 
-**Applies to** : ARM and Data plane swagger specs
+**Applies to** : ARM and Data plane OpenAPI(swagger) specs
 
 **Output Message**: Parameter Must have the "name" property defined with non-empty string as its value.
 
@@ -934,7 +934,7 @@ Links: [Index](#index) | [Error vs. Warning](#error-vs-warning) | [Automated Rul
 ### <a name="R1001" />R1001 OperationIdNounVerb
 **Category** : SDK Error
 
-**Applies to** : ARM and Data plane swagger specs
+**Applies to** : ARM and Data plane OpenAPI(swagger) specs
 
 **Output Message**: Per the Noun_Verb convention for Operation Ids, the noun '{0}' should not appear after the underscore.
 
@@ -959,7 +959,7 @@ Links: [Index](#index) | [Error vs. Warning](#error-vs-warning) | [Automated Rul
 ### <a name="R2055" />R2055 OneUnderscoreInOperationId
 **Category** : SDK Error
 
-**Applies to** : ARM and Data plane swagger specs
+**Applies to** : ARM and Data plane OpenAPI(swagger) specs
 
 **Output Message**: Only 1 underscore is permitted in the operation id, following Noun_Verb conventions.
 
@@ -983,7 +983,7 @@ Links: [Index](#index) | [Error vs. Warning](#error-vs-warning) | [Automated Rul
 ### <a name="R3023" />R3023 OperationsAPIImplementation
 **Category** : Error
 
-**Applies to** : ARM swagger specs
+**Applies to** : ARM OpenAPI(swagger) specs
 
 **Output Message**: Operations API must be implemented for '{0}'.
 
@@ -1079,7 +1079,7 @@ Links: [Index](#index) | [Error vs. Warning](#error-vs-warning) | [Automated Rul
 ### <a name="R2015" />R2015 ParameterNotDefinedInGlobalParameters
 **Category** : SDK Warning
 
-**Applies to** : ARM and Data plane swagger specs
+**Applies to** : ARM and Data plane OpenAPI(swagger) specs
 
 **Output Message**: Parameter "{0}" is referenced but not defined in the global parameters section of Service Definition
 
@@ -1096,7 +1096,7 @@ Links: [Index](#index) | [Error vs. Warning](#error-vs-warning) | [Automated Rul
 ### <a name="R2020" />R2020 RequiredPropertiesMissingInResourceModel
 **Category** : Error
 
-**Applies to** : ARM swagger specs
+**Applies to** : ARM OpenAPI(swagger) specs
 
 **Output Message**: Model definition '{0}' must have the properties 'name', 'id' and 'type' in its hierarchy and these properties must be marked as readonly.
 
@@ -1111,7 +1111,7 @@ Links: [Index](#index) | [Error vs. Warning](#error-vs-warning) | [Automated Rul
 ### <a name="R2056" />R2056 RequiredReadOnlyProperties
 **Category** : SDK Error
 
-**Applies to** : ARM and Data plane swagger specs
+**Applies to** : ARM and Data plane OpenAPI(swagger) specs
 
 **Output Message**: Property '{0}' is a required property. It should not be marked as 'readonly'.
 
@@ -1140,7 +1140,7 @@ Links: [Index](#index) | [Error vs. Warning](#error-vs-warning) | [Automated Rul
 ### <a name="R2014" />R2014 SubscriptionIdParameterInOperations
 **Category** : SDK Error
 
-**Applies to** : ARM and Data plane swagger specs
+**Applies to** : ARM and Data plane OpenAPI(swagger) specs
 
 **Output Message**: Parameter "subscriptionId" is not allowed in the operations section, define it in the global parameters section instead/Parameter "{0}" is referenced but not defined in the global parameters section of Service Definition
 
@@ -1155,7 +1155,7 @@ Links: [Index](#index) | [Error vs. Warning](#error-vs-warning) | [Automated Rul
 ### <a name="R2003" />R2003 ValidFormats
 **Category** : SDK Error
 
-**Applies to** : ARM and Data plane swagger specs
+**Applies to** : ARM and Data plane OpenAPI(swagger) specs
 
 **Output Message**: '{0}' is not a known format.
 
@@ -1170,7 +1170,7 @@ Links: [Index](#index) | [Error vs. Warning](#error-vs-warning) | [Automated Rul
 ### <a name="R2022" />R2022 XmsExamplesRequired
 **Category** : SDK Error
 
-**Applies to** : ARM and Data plane swagger specs
+**Applies to** : ARM and Data plane OpenAPI(swagger) specs
 
 **Output Message**: Please provide x-ms-examples describing minimum/maximum property set for response/request payloads for operations.{0}.
 
@@ -1189,7 +1189,7 @@ Links: [Index](#index) | [Error vs. Warning](#error-vs-warning) | [Automated Rul
 ### <a name="R2065" />R2065 LicenseHeaderMustNotBeSpecified
 **Category** : SDK Warning
 
-**Applies to** : ARM and Data plane swagger specs
+**Applies to** : ARM and Data plane OpenAPI(swagger) specs
 
 **Output Message**: License header must not be specified inside x-ms-code-generation-settings. The license can vary for different SDKs generated and is passed via command line/config file when generating the SDK.
 
@@ -1202,7 +1202,7 @@ Links: [Index](#index) | [Error vs. Warning](#error-vs-warning) | [Automated Rul
 ### <a name="R2025" />R2025 NextLinkPropertyMustExist
 **Category** : SDK Error
 
-**Applies to** : ARM and Data plane swagger specs
+**Applies to** : ARM and Data plane OpenAPI(swagger) specs
 
 **Output Message**: The property '{0}' specified by nextLinkName does not exist in the 200 response schema. Please, specify the name of the property that provides the nextLink. If the model does not have the nextLink property then specify null.
 
@@ -1221,7 +1221,7 @@ Links: [Index](#index) | [Error vs. Warning](#error-vs-warning) | [Automated Rul
 ### <a name="R2060" />R2060 PageableRequires200Response
 **Category** : SDK Error
 
-**Applies to** : ARM and Data plane swagger specs
+**Applies to** : ARM and Data plane OpenAPI(swagger) specs
 
 **Output Message**: A response for the 200 HTTP status code must be defined to use x-ms-pageable.
 
@@ -1241,7 +1241,7 @@ Links: [Index](#index) | [Error vs. Warning](#error-vs-warning) | [Automated Rul
 ### <a name="R2026" />R2026 AvoidAnonymousTypes
 **Category** : SDK Error
 
-**Applies to** : ARM and Data plane swagger specs
+**Applies to** : ARM and Data plane OpenAPI(swagger) specs
 
 **Output Message**: Inline/anonymous models must not be used, instead define a schema with a model name in the "definitions" section and refer to it. This allows operations to share the models.
 
@@ -1317,7 +1317,7 @@ Links: [Index](#index) | [Error vs. Warning](#error-vs-warning) | [Automated Rul
 ### <a name="R3019" />R3019 ArmResourcePropertiesBag
 **Category** : Error
 
-**Applies to** : ARM and Data plane swagger specs
+**Applies to** : ARM and Data plane OpenAPI(swagger) specs
 
 **Output Message**: Top level property names should not be repeated inside the properties bag for ARM resource '{0}'. Properties [{1}] conflict with ARM top level properties. Please rename these.
 
@@ -1372,7 +1372,7 @@ Links: [Index](#index) | [Error vs. Warning](#error-vs-warning) | [Automated Rul
 ### <a name="R3006" />R3006 BodyTopLevelProperties
 **Category** : Error
 
-**Applies to** : ARM swagger specs
+**Applies to** : ARM OpenAPI(swagger) specs
 
 **Output Message**: Top level properties should be one of name, type, id, location, properties, tags, plan, sku, etag, managedBy, identity. Model definition '{0}' has extra properties ['{1}'].
 
@@ -1424,7 +1424,7 @@ Links: [Index](#index) | [Error vs. Warning](#error-vs-warning) | [Automated Rul
 ### <a name="R2057" />R2057 InvalidSkuModel
 **Category** : Warning
 
-**Applies to** : ARM swagger specs
+**Applies to** : ARM OpenAPI(swagger) specs
 
 **Output Message**: Sku Model definition '{0}' is not valid. A Sku model must have 'name' property. It can also have 'tier', 'size', 'family', 'capacity' as optional properties.
 
@@ -1441,7 +1441,7 @@ Links: [Index](#index) | [Error vs. Warning](#error-vs-warning) | [Automated Rul
 ### <a name="R2018" />R2018 XmsEnumValidation
 **Category** : SDK Warning
 
-**Applies to** : ARM and Data plane swagger specs
+**Applies to** : ARM and Data plane OpenAPI(swagger) specs
 
 **Output Message**: The enum types should have x-ms-enum type extension set with appropriate options. Property name: {0}.
 
@@ -1458,7 +1458,7 @@ Links: [Index](#index) | [Error vs. Warning](#error-vs-warning) | [Automated Rul
 ### <a name="R2063" />R2063 OperationIdNounConflictingModelNames
 **Category** : SDK Warning
 
-**Applies to** : ARM and Data plane swagger specs
+**Applies to** : ARM and Data plane OpenAPI(swagger) specs
 
 **Output Message**: OperationId has a noun that conflicts with one of the model names in definitions section. The model name will be disambiguated to '{0}Model'. Consider using the plural form of '{1}' to avoid this. Note: If you have already shipped an SDK on top of this spec, fixing this warning may introduce a breaking change.
 
@@ -1473,9 +1473,9 @@ Links: [Index](#index) | [Error vs. Warning](#error-vs-warning) | [Automated Rul
 ### <a name="R2054" />R2054 SecurityDefinitionsStructure
 **Category** : SDK Error
 
-**Applies to** : ARM swagger specs
+**Applies to** : ARM OpenAPI(swagger) specs
 
-**Output Message**: Every swagger/configuration must have a security definitions section and it must adhere to the structure described [here](https://github.com/Azure/autorest/tree/master/docs/developer/validation-rules/security-definitions-structure-validation.md)
+**Output Message**: Every OpenAPI(swagger) spec/configuration must have a security definitions section and it must adhere to the structure described [here](https://github.com/Azure/autorest/tree/master/docs/developer/validation-rules/security-definitions-structure-validation.md)
 
 **Description**: Each OpenAPI json document must contain a security definitions section and the section must adhere to a certain format.
 
@@ -1488,7 +1488,7 @@ Links: [Index](#index) | [Error vs. Warning](#error-vs-warning) | [Automated Rul
 ### <a name="R2019" />R2019 ResourceHasXMsResourceEnabled
 **Category** : SDK Error
 
-**Applies to** : ARM swagger specs
+**Applies to** : ARM OpenAPI(swagger) specs
 
 **Output Message**: A 'Resource' definition must have x-ms-azure-resource extension enabled and set to true.
 
@@ -1503,7 +1503,7 @@ Links: [Index](#index) | [Error vs. Warning](#error-vs-warning) | [Automated Rul
 ### <a name="R2017" />R2017 PutRequestResponseScheme
 **Category** : SDK Warning
 
-**Applies to** : ARM and Data plane swagger specs
+**Applies to** : ARM and Data plane OpenAPI(swagger) specs
 
 **Output Message**: A PUT operation request body schema should be the same as its 200 response schema, to allow reusing the same entity between GET and PUT. If the schema of the PUT request body is a superset of the GET response body, make sure you have a PATCH operation to make the resource updatable. Operation: '{0}' Request Model: '{1}' Response Model: '{2}'
 
@@ -1518,7 +1518,7 @@ Links: [Index](#index) | [Error vs. Warning](#error-vs-warning) | [Automated Rul
 ### <a name="R2005" />R2005 LongRunningResponseStatusCode
 **Category** : SDK Error
 
-**Applies to** : ARM and Data plane swagger specs
+**Applies to** : ARM and Data plane OpenAPI(swagger) specs
 
 **Output Message**: A '{0}' operation '{1}' with x-ms-long-running-operation extension must have a valid terminal success status code {2}.
 
@@ -1533,7 +1533,7 @@ Links: [Index](#index) | [Error vs. Warning](#error-vs-warning) | [Automated Rul
 ### <a name="R2044" />R2044 InvalidVerbUsed
 **Category** : Error
 
-**Applies to** : ARM and Data plane swagger specs
+**Applies to** : ARM and Data plane OpenAPI(swagger) specs
 
 **Output Message**: Permissible values for HTTP Verb are DELETE, GET, PUT, PATCH, HEAD, OPTIONS, POST, TRACE.
 
@@ -1548,7 +1548,7 @@ Links: [Index](#index) | [Error vs. Warning](#error-vs-warning) | [Automated Rul
 ### <a name="R3007" />R3007 PutGetPatchResponseSchema
 **Category** : Error
 
-**Applies to** : ARM and Data plane swagger specs
+**Applies to** : ARM and Data plane OpenAPI(swagger) specs
 
 **Output Message**: {0} has different responses for PUT/GET/PATCH operations. The PUT/GET/PATCH operations must have same schema response.
 
@@ -1563,7 +1563,7 @@ Links: [Index](#index) | [Error vs. Warning](#error-vs-warning) | [Automated Rul
 ### <a name="R3013" />R3013 DeleteMustNotHaveRequestBody
 **Category** : SDK Error
 
-**Applies to** : ARM and Data plane swagger specs
+**Applies to** : ARM and Data plane OpenAPI(swagger) specs
 
 **Output Message**: 'Delete' operation '{0}' must not have a request body.
 
@@ -1578,7 +1578,7 @@ Links: [Index](#index) | [Error vs. Warning](#error-vs-warning) | [Automated Rul
 ### <a name="R2062" />R2062 XmsResourceInPutResponse
 **Category** : Error
 
-**Applies to** : ARM swagger specs
+**Applies to** : ARM OpenAPI(swagger) specs
 
 **Output Message**: The 200 response model for an ARM PUT operation must have x-ms-azure-resource extension set to true in its hierarchy. Operation: '{0}' Model: '{1}'.
 
@@ -1593,7 +1593,7 @@ Links: [Index](#index) | [Error vs. Warning](#error-vs-warning) | [Automated Rul
 ### <a name="R3060" />R3060 XmsPageableListByRGAndSubscriptions
 **Category** : SDK Warning
 
-**Applies to** : ARM swagger specs
+**Applies to** : ARM OpenAPI(swagger) specs
 
 **Output Message**: For the tracked resource '{0}', the x-ms-pageable extension values must be same for list by resource group and subscriptions operations.
 
@@ -1608,7 +1608,7 @@ Links: [Index](#index) | [Error vs. Warning](#error-vs-warning) | [Automated Rul
 ### <a name="R2064" />R2064 LROStatusCodesReturnTypeSchema
 **Category** : SDK Warning
 
-**Applies to** : ARM and Data plane swagger specs
+**Applies to** : ARM and Data plane OpenAPI(swagger) specs
 
 **Output Message**: 200/201 Responses of long running operations must have a schema definition for return type. OperationId: '{0}', Response code: '{1}'
 
@@ -1623,7 +1623,7 @@ Links: [Index](#index) | [Error vs. Warning](#error-vs-warning) | [Automated Rul
 ### <a name="R2016" />R2016 PatchBodyParametersSchema
 **Category** : Error
 
-**Applies to** : ARM and Data plane swagger specs
+**Applies to** : ARM and Data plane OpenAPI(swagger) specs
 
 **Output Message**: Properties of a PATCH request body must not be {0}. PATCH operation: '{1}' Model Definition: '{2}' Property: '{3}'
 
@@ -1638,7 +1638,7 @@ Links: [Index](#index) | [Error vs. Warning](#error-vs-warning) | [Automated Rul
 ### <a name="R4000-2" />R4000 ParameterDescriptionRequired
 **Category** : SDK Warning
 
-**Applies to** : ARM and Data plane swagger specs
+**Applies to** : ARM and Data plane OpenAPI(swagger) specs
 
 **Output Message**: {0} lacks 'description' property. Consider adding a 'description' element. Accurate description is essential for maintaining reference documentation.
 
@@ -1653,7 +1653,7 @@ Links: [Index](#index) | [Error vs. Warning](#error-vs-warning) | [Automated Rul
 ### <a name="R4000-3" />R4000 DescriptiveDescriptionRequired
 **Category** : SDK Warning
 
-**Applies to** : ARM and Data plane swagger specs
+**Applies to** : ARM and Data plane OpenAPI(swagger) specs
 
 **Output Message**: The value provided for description is not descriptive enough. Accurate and descriptive description is essential for maintaining reference documentation.
 
@@ -1668,7 +1668,7 @@ Links: [Index](#index) | [Error vs. Warning](#error-vs-warning) | [Automated Rul
 ### <a name="R4000-4" />R4000 DescriptionAndTitleMissing
 **Category** : SDK Warning
 
-**Applies to** : ARM and Data plane swagger specs
+**Applies to** : ARM and Data plane OpenAPI(swagger) specs
 
 **Output Message**: {0} lacks 'description' and 'title' property. Consider adding a 'description'/'title' element. Accurate description/title is essential for maintaining reference documentation.
 
@@ -1683,7 +1683,7 @@ Links: [Index](#index) | [Error vs. Warning](#error-vs-warning) | [Automated Rul
 ### <a name="R4000-5" />R4000 OperationDescriptionOrSummaryRequired
 **Category** : SDK Warning
 
-**Applies to** : ARM and Data plane swagger specs
+**Applies to** : ARM and Data plane OpenAPI(swagger) specs
 
 **Output Message**: {0} lacks 'description' and 'summary' property. Consider adding a 'description'/'summary' element. Accurate description/summary is essential for maintaining reference documentation.
 
@@ -1698,7 +1698,7 @@ Links: [Index](#index) | [Error vs. Warning](#error-vs-warning) | [Automated Rul
 ### <a name="R2023" />R2023 SummaryAndDescriptionMustNotBeSame
 **Category** : SDK Warning
 
-**Applies to** : ARM and Data plane swagger specs
+**Applies to** : ARM and Data plane OpenAPI(swagger) specs
 
 **Output Message**: The summary and description values should not be same.
 
@@ -1741,7 +1741,7 @@ Links: [Index](#index) | [Error vs. Warning](#error-vs-warning) | [Automated Rul
 ### <a name="R3011" />R3011 DescriptionMustNotBeNodeName
 **Category** : Error
 
-**Applies to** : ARM and Data plane swagger specs
+**Applies to** : ARM and Data plane OpenAPI(swagger) specs
 
 **Output Message**: Description must not match the name of the node it is supposed to describe.
 
