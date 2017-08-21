@@ -34,7 +34,8 @@
                                 "expiry": "2018-03-17T21:55:07+00:00",
                                 "thumbprint": "918D7785B926AC5AEE66322778A147BCE7237CF3",
                                 "subject": "CN=*.contoso.net"
-                            }
+                            },
+                            "defaultSslBinding": true
                         },
                         {
                             "type": "Proxy",
@@ -44,7 +45,8 @@
                                 "expiry": "2018-03-17T21:55:07+00:00",
                                 "thumbprint": "918D7785B926AC5AEE66322778A147BCE7237CF3",
                                 "subject": "CN=*.contoso.net"
-                            }
+                            },
+                            "defaultSslBinding": true
                         },
                         {
                             "type": "Portal",
@@ -54,7 +56,8 @@
                                 "expiry": "2018-03-17T21:55:07+00:00",
                                 "thumbprint": "918D7785B926AC5AEE66322778A147BCE7237CF3",
                                 "subject": "CN=*.contoso.net"
-                            }
+                            },
+                            "defaultSslBinding": true
                         }
                     ],
                     "staticIps": [
@@ -72,7 +75,17 @@
                             ]
                         }
                     ],
-                    "virtualNetworkType": "None"
+                    "virtualNetworkType": "None",
+                    "certificates": [
+                        {
+                            "storeName": "Root",
+                            "certificate": {
+                                "expiry": "2018-03-17T21:55:07+00:00",
+                                "thumbprint": "418D7785B926AC5AEE66322778A147BCE7237CF2",
+                                "subject": "CN=*.private.contoso.net"
+                            }
+                        }
+                    ]
                 },
                 "sku": {
                     "name": "Premium",
