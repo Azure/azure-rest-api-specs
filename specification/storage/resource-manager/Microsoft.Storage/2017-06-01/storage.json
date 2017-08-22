@@ -48,6 +48,37 @@
         }
       }
     },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.Storage/skus": {
+      "get": {
+        "tags": [
+          "SKU"
+        ],
+        "operationId": "SKUs_List",
+        "description": "Lists the available SKUs supported by Microsoft.Storage for given subscription.",
+        "x-ms-examples": {
+          "StorageAccountCheckNameAvailability": { "$ref": "./examples/StorageAccountCheckNameAvailability.json" }
+        },
+        "parameters": [
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK -- List of storage SKUs in the given subscription retrieved and returned successfully.",
+            "schema": {
+              "$ref": "#/definitions/StorageSkuListResult"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": null
+        }
+      }
+    },
     "/subscriptions/{subscriptionId}/providers/Microsoft.Storage/checkNameAvailability": {
       "post": {
         "tags": [
@@ -700,6 +731,34 @@
       ],
       "description": "The parameters used to check the availabity of the storage account name."
     },
+    "SKUCapability": {
+      "properties": {
+        "name": {
+          "readOnly": true,
+          "type": "string",
+          "description": "The name of capability, The capability information in the specified sku, including file encryption, network acls, change notification, etc."
+        },
+        "value": {
+          "readOnly": true,
+          "type": "boolean",
+          "description": "A boolean value to indicate given capability is enabled or not."
+        }
+      },
+      "description": "The capability information in the specified sku, including file encryption, network acls, change notification, etc."
+    },
+    "StorageSkuListResult": {
+      "properties": {
+        "value": {
+          "readOnly": true,
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Sku"
+          },
+          "description": "Get the list result of storage SKUs and their properties."
+        }
+      },
+      "description": "The response from the List Storage SKUs operation."
+    },
     "CheckNameAvailabilityResult": {
       "properties": {
         "nameAvailable": {
@@ -757,6 +816,47 @@
             "name": "SkuTier",
             "modelAsString": false
           }
+        },
+        "resourceType":{
+          "readOnly": true,
+          "type": "string",
+          "description": "The type of the resource, usually it is 'storageAccounts'."
+        },
+        "kind": {
+          "readOnly": true,
+          "type": "string",
+          "description": "Indicates the type of storage account.",
+          "enum": [
+            "Storage",
+            "BlobStorage"
+          ],
+          "x-ms-enum": {
+            "name": "Kind",
+            "modelAsString": false
+          }
+        },
+        "locations": {
+          "readOnly": true,
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "description": "The location of the resource. This will be one of the supported and registered Azure Geo Regions (e.g. West US, East US, Southeast Asia, etc.)."
+        },
+        "capabilities": {
+          "readOnly": true,
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/SKUCapability"
+          },
+          "description": "The capability information in the specified sku, including file encryption, network acls, change notification, etc."
+        },
+        "restrictions": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "description": "The restrictions in the specified sku."
         }
       },
       "required": [
