@@ -685,12 +685,12 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/trafficmanagerprofiles/{profileName}/heatMaps/{heatMapType}s": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/trafficmanagerprofiles/{profileName}/heatMaps/{heatMapType}": {
       "get": {
         "tags": [
           "HeatMaps"
         ],
-        "operationId": "HeatMaps_GetLatest",
+        "operationId": "HeatMap_Get",
         "description": "Gets latest heatmap for Traffic Manager profile.",
         "parameters": [
           {
@@ -726,7 +726,7 @@
           "200": {
             "description": "The Traffic Manager heatmap.",
             "schema": {
-              "$ref": "#/definitions/HeatMap"
+              "$ref": "#/definitions/HeatMapModel"
             }
           },
           "default": {
@@ -739,6 +739,129 @@
         "x-ms-examples": {
           "HeatMap-GET": {
             "$ref": "./examples/HeatMap-GET.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.Network/trafficManagerRealUserMetricsKey": {
+      "get": {
+        "tags": [
+          "RealUserMetrics"
+        ],
+        "operationId": "RealUserMetricsKey_Get",
+        "description": "Get the subscription-level Real User Metrics key for the given subscription.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The subscription-level Traffic Manager Real User Metrics key.",
+            "schema": {
+              "$ref": "#/definitions/RealUserMetricsKeyModel" 
+            }
+          },
+          "default": {
+            "description": "Default response. It will be deserialized as per the Error definition.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "RealUserMetricsKey-GET": {
+            "$ref": "./examples/RealUserMetricsKey-GET.json"
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "RealUserMetrics"
+        ],
+        "operationId": "RealUserMetricsKey_CreateOrUpdate",
+        "description": "Create or update a Traffic Manager Real User Metrics key.",
+        "parameters": [
+          {
+            "name": "parameters",
+            "in": "body",
+            "required": false,
+            "schema": {
+              "type": "string",
+              "enum": [""]
+            },
+            "description": "This body should be empty, Traffic Manager will provide a new key in the returned response."
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The created or updated Traffic Manager Real User Metrics key.",
+            "schema": {
+              "$ref": "#/definitions/RealUserMetricsKeyModel" 
+            }
+          },
+          "201": {
+            "description": "The created or updated Traffic Manager Real User Metrics key.",
+            "schema": {
+              "$ref": "#/definitions/RealUserMetricsKeyModel" 
+            }
+          },
+          "default": {
+            "description": "Default response. It will be deserialized as per the Error definition.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "RealUserMetricsKey-PUT": {
+            "$ref": "./examples/RealUserMetricsKey-PUT.json"
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "RealUserMetricsKey"
+        ],
+        "operationId": "RealUserMetricsKey_Delete",
+        "description": "Deletes a subscription-level Traffic Manager Real User Metrics key.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The Traffic Manager Real User Metrics key was deleted successfully.",
+            "schema": {
+              "$ref": "#/definitions/DeleteOperationResult"
+            }
+          },
+          "204": {
+            "description": "The Real User Metrics key does not exist. It could have been deleted on a previous request."
+          },
+          "default": {
+            "description": "Default response. It will be deserialized as per the Error definition.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "RealUserMetricsKey-DELETE": {
+            "$ref": "./examples/RealUserMetricsKey-DELETE.json"
           }
         }
       }
@@ -1181,7 +1304,7 @@
           "type": "array",
           "description": "The endpoints used in this HeatMap calculation.",
           "items": {
-            "$ref": "#/definitions/HeatMapEndpoint"
+            "$ref": "#/definitions/HeatMapModelEndpoint"
           }
         },
         "trafficFlows": {
@@ -1243,11 +1366,11 @@
       },
       "description": "Class representing a Traffic Manager HeatMap query experience properties."
     },
-    "HeatMap": {
+    "HeatMapModel": {
       "properties": {
         "properties": {
           "x-ms-client-flatten": true,
-          "$ref": "#/definitions/HeatMapProperties",
+          "$ref": "#/definitions/HeatMapModelProperties",
           "description": "The properties of the Traffic Manager HeatMap."
         }
       },
@@ -1257,6 +1380,30 @@
         }
       ],
       "description": "Class representing a Traffic Manager HeatMap."
+    },
+    "RealUserMetricsKeyProperties": {
+      "properties": {
+        "key": {
+          "type" : "string",
+          "description": "The key returned by the Real User Metrics operation."
+        }
+      },
+      "description": "Class representing the properties of a Real User Metrics key operation response."
+    },
+    "RealUserMetricsKeyModel": {
+      "properties": {
+        "properties": {
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/RealUserMetricsKeyModelProperties",
+          "description": "The key properties returned from a RealUserMetrics GET or PUT operation."
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "#/definitions/ProxyResource"
+        }
+      ],
+      "description": "Class representing a Traffic Manager Real User Metrics key response."
     }
   },
   "parameters": {
