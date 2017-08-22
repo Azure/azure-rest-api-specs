@@ -307,6 +307,51 @@
         }
       }
     },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.Web/verifyHostingEnvironmentVnet": {
+      "post": {
+        "summary": "Verifies if this VNET is compatible with an App Service Environment by analyzing the Network Security Group rules",
+        "description": "Verifies if this VNET is compatible with an App Service Environment by analyzing the Network Security Group rules",
+        "operationId": "VerifyHostingEnvironmentVnet",
+        "consumes": [
+          "application/json",
+          "text/json",
+          "application/xml",
+          "text/xml",
+          "application/x-www-form-urlencoded"
+        ],
+        "produces": [
+          "application/json",
+          "text/json",
+          "application/xml",
+          "text/xml"
+        ],
+        "parameters": [
+          {
+            "name": "parameters",
+            "in": "body",
+            "description": "VNET information",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/VnetParameters"
+            }
+          },
+          {
+            "$ref": "#/parameters/subscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/Object"
+            }
+          }
+        }
+      }
+    },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/moveResources": {
       "post": {
         "summary": "Move resources between resource groups.",
@@ -554,6 +599,10 @@
           }
         }
       }
+    },
+    "Object": {
+      "type": "object",
+      "properties": {}
     },
     "PremierAddOnOffer": {
       "description": "Premier add-on offer.",
@@ -965,6 +1014,35 @@
         "message": {
           "description": "Validation error message.",
           "type": "string"
+        }
+      }
+    },
+    "VnetParameters": {
+      "description": "",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/ProxyOnlyResource"
+        }
+      ],
+      "properties": {
+        "properties": {
+          "description": "VnetParameters resource specific properties",
+          "properties": {
+            "vnetResourceGroup": {
+              "description": "The Resource Group of the VNET to be validated",
+              "type": "string"
+            },
+            "vnetName": {
+              "description": "The name of the VNET to be validated",
+              "type": "string"
+            },
+            "vnetSubnetName": {
+              "description": "The subnet name to be validated",
+              "type": "string"
+            }
+          },
+          "x-ms-client-flatten": true
         }
       }
     }
