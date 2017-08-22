@@ -2164,8 +2164,8 @@
         "tags": [
           "WebApps"
         ],
-        "summary": "List deployments for an app, or a deployment slot.",
-        "description": "List deployments for an app, or a deployment slot.",
+        "summary": "List deployments for an app, or a deployment slot, or for an instance of a scaled-out app.",
+        "description": "List deployments for an app, or a deployment slot, or for an instance of a scaled-out app.",
         "operationId": "WebApps_ListDeployments",
         "produces": [
           "application/json",
@@ -2207,8 +2207,8 @@
         "tags": [
           "WebApps"
         ],
-        "summary": "Get a deployment by its ID for an app, or a deployment slot.",
-        "description": "Get a deployment by its ID for an app, or a deployment slot.",
+        "summary": "Get a deployment by its ID for an app, a specific deployment slot, and/or a specific scaled-out instance.",
+        "description": "Get a deployment by its ID for an app, a specific deployment slot, and/or a specific scaled-out instance.",
         "operationId": "WebApps_GetDeployment",
         "produces": [
           "application/json",
@@ -2254,8 +2254,8 @@
         "tags": [
           "WebApps"
         ],
-        "summary": "Create a deployment for an app, or a deployment slot.",
-        "description": "Create a deployment for an app, or a deployment slot.",
+        "summary": "Create a deployment for an app, a specific deployment slot, and/or a specific scaled-out instance.",
+        "description": "Create a deployment for an app, a specific deployment slot, and/or a specific scaled-out instance.",
         "operationId": "WebApps_CreateDeployment",
         "consumes": [
           "application/json",
@@ -2315,8 +2315,8 @@
         "tags": [
           "WebApps"
         ],
-        "summary": "Delete a deployment by its ID for an app, or a deployment slot.",
-        "description": "Delete a deployment by its ID for an app, or a deployment slot.",
+        "summary": "Delete a deployment by its ID for an app, a specific deployment slot, and/or a specific scaled-out instance.",
+        "description": "Delete a deployment by its ID for an app, a specific deployment slot, and/or a specific scaled-out instance.",
         "operationId": "WebApps_DeleteDeployment",
         "parameters": [
           {
@@ -2997,7 +2997,8 @@
               "$ref": "#/definitions/FunctionEnvelope"
             }
           }
-        }
+        },
+        "x-ms-long-running-operation": true
       },
       "delete": {
         "tags": [
@@ -4242,6 +4243,317 @@
         }
       }
     },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Web/sites/{name}/instances/{instanceId}/processes/{processId}/dump": {
+      "get": {
+        "tags": [
+          "WebApps"
+        ],
+        "summary": "Get a memory dump of a process by its ID for a specific scaled-out instance in a web site.",
+        "description": "Get a memory dump of a process by its ID for a specific scaled-out instance in a web site.",
+        "operationId": "WebApps_GetInstanceProcessDump",
+        "parameters": [
+          {
+            "$ref": "#/parameters/resourceGroupNameParameter"
+          },
+          {
+            "name": "name",
+            "in": "path",
+            "description": "Site name.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "processId",
+            "in": "path",
+            "description": "PID",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "instanceId",
+            "in": "path",
+            "description": "ID of a specific scaled-out instance. This is the value of the name property in the JSON response from \"GET api/sites/{siteName}/instances\"",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "$ref": "#/parameters/subscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "type": "file"
+            }
+          },
+          "404": {
+            "description": "Process with an Id of {processId} is not running"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Web/sites/{name}/instances/{instanceId}/processes/{processId}/modules": {
+      "get": {
+        "tags": [
+          "WebApps"
+        ],
+        "summary": "List module information for a process by its ID for a specific scaled-out instance in a web site.",
+        "description": "List module information for a process by its ID for a specific scaled-out instance in a web site.",
+        "operationId": "WebApps_ListInstanceProcessModules",
+        "produces": [
+          "application/json",
+          "text/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/resourceGroupNameParameter"
+          },
+          {
+            "name": "name",
+            "in": "path",
+            "description": "Site name.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "processId",
+            "in": "path",
+            "description": "PID",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "instanceId",
+            "in": "path",
+            "description": "ID of a specific scaled-out instance. This is the value of the name property in the JSON response from \"GET api/sites/{siteName}/instances\"",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "$ref": "#/parameters/subscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Module information returned",
+            "schema": {
+              "$ref": "#/definitions/ProcessModuleInfoCollection"
+            }
+          },
+          "404": {
+            "description": "Process with an Id of {processId} is not running"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Web/sites/{name}/instances/{instanceId}/processes/{processId}/modules/{base_address}": {
+      "get": {
+        "tags": [
+          "WebApps"
+        ],
+        "summary": "Get process information by its ID for a specific scaled-out instance in a web site.",
+        "description": "Get process information by its ID for a specific scaled-out instance in a web site.",
+        "operationId": "WebApps_GetInstanceProcessModule",
+        "produces": [
+          "application/json",
+          "text/json",
+          "application/xml",
+          "text/xml"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/resourceGroupNameParameter"
+          },
+          {
+            "name": "name",
+            "in": "path",
+            "description": "Site name.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "processId",
+            "in": "path",
+            "description": "PID",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "baseAddress",
+            "in": "query",
+            "description": "Module base address.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "instanceId",
+            "in": "path",
+            "description": "ID of a specific scaled-out instance. This is the value of the name property in the JSON response from \"GET api/sites/{siteName}/instances\"",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "base_address",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "$ref": "#/parameters/subscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Module information returned",
+            "schema": {
+              "$ref": "#/definitions/ProcessModuleInfo"
+            }
+          },
+          "404": {
+            "description": "Process with an Id of {processId} is not running, or a module with the specific {base_address} is not found."
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Web/sites/{name}/instances/{instanceId}/processes/{processId}/threads": {
+      "get": {
+        "tags": [
+          "WebApps"
+        ],
+        "summary": "List the threads in a process by its ID for a specific scaled-out instance in a web site.",
+        "description": "List the threads in a process by its ID for a specific scaled-out instance in a web site.",
+        "operationId": "WebApps_ListInstanceProcessThreads",
+        "produces": [
+          "application/json",
+          "text/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/resourceGroupNameParameter"
+          },
+          {
+            "name": "name",
+            "in": "path",
+            "description": "Site name.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "processId",
+            "in": "path",
+            "description": "PID",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "instanceId",
+            "in": "path",
+            "description": "ID of a specific scaled-out instance. This is the value of the name property in the JSON response from \"GET api/sites/{siteName}/instances\"",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "$ref": "#/parameters/subscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Thread information returned",
+            "schema": {
+              "$ref": "#/definitions/ProcessThreadInfoCollection"
+            }
+          },
+          "404": {
+            "description": "Process with an ID of {processId} is not running."
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Web/sites/{name}/instances/{instanceId}/processes/{processId}/threads/{threadId}": {
+      "get": {
+        "tags": [
+          "WebApps"
+        ],
+        "summary": "Get thread information by Thread ID for a specific process, in a specific scaled-out instance in a web site.",
+        "description": "Get thread information by Thread ID for a specific process, in a specific scaled-out instance in a web site.",
+        "operationId": "WebApps_GetInstanceProcessThread",
+        "produces": [
+          "application/json",
+          "text/json",
+          "application/xml",
+          "text/xml"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/resourceGroupNameParameter"
+          },
+          {
+            "name": "name",
+            "in": "path",
+            "description": "Site name.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "processId",
+            "in": "path",
+            "description": "PID",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "threadId",
+            "in": "path",
+            "description": "TID",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "instanceId",
+            "in": "path",
+            "description": "ID of a specific scaled-out instance. This is the value of the name property in the JSON response from \"GET api/sites/{siteName}/instances\"",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "$ref": "#/parameters/subscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Process information returned",
+            "schema": {
+              "$ref": "#/definitions/ProcessThreadInfo"
+            }
+          },
+          "404": {
+            "description": "Process with an Id of {processId} is not running"
+          }
+        }
+      }
+    },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Web/sites/{name}/iscloneable": {
       "post": {
         "tags": [
@@ -5198,6 +5510,282 @@
         }
       }
     },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Web/sites/{name}/processes/{processId}/dump": {
+      "get": {
+        "tags": [
+          "WebApps"
+        ],
+        "summary": "Get a memory dump of a process by its ID for a specific scaled-out instance in a web site.",
+        "description": "Get a memory dump of a process by its ID for a specific scaled-out instance in a web site.",
+        "operationId": "WebApps_GetProcessDump",
+        "parameters": [
+          {
+            "$ref": "#/parameters/resourceGroupNameParameter"
+          },
+          {
+            "name": "name",
+            "in": "path",
+            "description": "Site name.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "processId",
+            "in": "path",
+            "description": "PID",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "$ref": "#/parameters/subscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "type": "file"
+            }
+          },
+          "404": {
+            "description": "Process with an Id of {processId} is not running"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Web/sites/{name}/processes/{processId}/modules": {
+      "get": {
+        "tags": [
+          "WebApps"
+        ],
+        "summary": "List module information for a process by its ID for a specific scaled-out instance in a web site.",
+        "description": "List module information for a process by its ID for a specific scaled-out instance in a web site.",
+        "operationId": "WebApps_ListProcessModules",
+        "produces": [
+          "application/json",
+          "text/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/resourceGroupNameParameter"
+          },
+          {
+            "name": "name",
+            "in": "path",
+            "description": "Site name.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "processId",
+            "in": "path",
+            "description": "PID",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "$ref": "#/parameters/subscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Module information returned",
+            "schema": {
+              "$ref": "#/definitions/ProcessModuleInfoCollection"
+            }
+          },
+          "404": {
+            "description": "Process with an Id of {processId} is not running"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Web/sites/{name}/processes/{processId}/modules/{base_address}": {
+      "get": {
+        "tags": [
+          "WebApps"
+        ],
+        "summary": "Get process information by its ID for a specific scaled-out instance in a web site.",
+        "description": "Get process information by its ID for a specific scaled-out instance in a web site.",
+        "operationId": "WebApps_GetProcessModule",
+        "produces": [
+          "application/json",
+          "text/json",
+          "application/xml",
+          "text/xml"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/resourceGroupNameParameter"
+          },
+          {
+            "name": "name",
+            "in": "path",
+            "description": "Site name.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "processId",
+            "in": "path",
+            "description": "PID",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "baseAddress",
+            "in": "query",
+            "description": "Module base address.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "base_address",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "$ref": "#/parameters/subscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Module information returned",
+            "schema": {
+              "$ref": "#/definitions/ProcessModuleInfo"
+            }
+          },
+          "404": {
+            "description": "Process with an Id of {processId} is not running, or a module with the specific {base_address} is not found."
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Web/sites/{name}/processes/{processId}/threads": {
+      "get": {
+        "tags": [
+          "WebApps"
+        ],
+        "summary": "List the threads in a process by its ID for a specific scaled-out instance in a web site.",
+        "description": "List the threads in a process by its ID for a specific scaled-out instance in a web site.",
+        "operationId": "WebApps_ListProcessThreads",
+        "produces": [
+          "application/json",
+          "text/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/resourceGroupNameParameter"
+          },
+          {
+            "name": "name",
+            "in": "path",
+            "description": "Site name.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "processId",
+            "in": "path",
+            "description": "PID",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "$ref": "#/parameters/subscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Thread information returned",
+            "schema": {
+              "$ref": "#/definitions/ProcessThreadInfoCollection"
+            }
+          },
+          "404": {
+            "description": "Process with an ID of {processId} is not running."
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Web/sites/{name}/processes/{processId}/threads/{threadId}": {
+      "get": {
+        "tags": [
+          "WebApps"
+        ],
+        "summary": "Get thread information by Thread ID for a specific process, in a specific scaled-out instance in a web site.",
+        "description": "Get thread information by Thread ID for a specific process, in a specific scaled-out instance in a web site.",
+        "operationId": "WebApps_GetProcessThread",
+        "produces": [
+          "application/json",
+          "text/json",
+          "application/xml",
+          "text/xml"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/resourceGroupNameParameter"
+          },
+          {
+            "name": "name",
+            "in": "path",
+            "description": "Site name.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "processId",
+            "in": "path",
+            "description": "PID",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "threadId",
+            "in": "path",
+            "description": "TID",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "$ref": "#/parameters/subscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Process information returned",
+            "schema": {
+              "$ref": "#/definitions/ProcessThreadInfo"
+            }
+          },
+          "404": {
+            "description": "Process with an Id of {processId} is not running"
+          }
+        }
+      }
+    },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Web/sites/{name}/publicCertificates": {
       "get": {
         "tags": [
@@ -5748,7 +6336,8 @@
           "429": {
             "description": "Site Extension is being installed on another request: Rejecting current request."
           }
-        }
+        },
+        "x-ms-long-running-operation": true
       },
       "delete": {
         "tags": [
@@ -8105,8 +8694,8 @@
         "tags": [
           "WebApps"
         ],
-        "summary": "List deployments for an app, or a deployment slot.",
-        "description": "List deployments for an app, or a deployment slot.",
+        "summary": "List deployments for an app, or a deployment slot, or for an instance of a scaled-out app.",
+        "description": "List deployments for an app, or a deployment slot, or for an instance of a scaled-out app.",
         "operationId": "WebApps_ListDeploymentsSlot",
         "produces": [
           "application/json",
@@ -8155,8 +8744,8 @@
         "tags": [
           "WebApps"
         ],
-        "summary": "Get a deployment by its ID for an app, or a deployment slot.",
-        "description": "Get a deployment by its ID for an app, or a deployment slot.",
+        "summary": "Get a deployment by its ID for an app, a specific deployment slot, and/or a specific scaled-out instance.",
+        "description": "Get a deployment by its ID for an app, a specific deployment slot, and/or a specific scaled-out instance.",
         "operationId": "WebApps_GetDeploymentSlot",
         "produces": [
           "application/json",
@@ -8209,8 +8798,8 @@
         "tags": [
           "WebApps"
         ],
-        "summary": "Create a deployment for an app, or a deployment slot.",
-        "description": "Create a deployment for an app, or a deployment slot.",
+        "summary": "Create a deployment for an app, a specific deployment slot, and/or a specific scaled-out instance.",
+        "description": "Create a deployment for an app, a specific deployment slot, and/or a specific scaled-out instance.",
         "operationId": "WebApps_CreateDeploymentSlot",
         "consumes": [
           "application/json",
@@ -8277,8 +8866,8 @@
         "tags": [
           "WebApps"
         ],
-        "summary": "Delete a deployment by its ID for an app, or a deployment slot.",
-        "description": "Delete a deployment by its ID for an app, or a deployment slot.",
+        "summary": "Delete a deployment by its ID for an app, a specific deployment slot, and/or a specific scaled-out instance.",
+        "description": "Delete a deployment by its ID for an app, a specific deployment slot, and/or a specific scaled-out instance.",
         "operationId": "WebApps_DeleteDeploymentSlot",
         "parameters": [
           {
@@ -8995,8 +9584,8 @@
         "tags": [
           "WebApps"
         ],
-        "summary": "Get function information by its ID for web site, or a deployment slot.",
-        "description": "Get function information by its ID for web site, or a deployment slot.",
+        "summary": "Create function for web site, or a deployment slot.",
+        "description": "Create function for web site, or a deployment slot.",
         "operationId": "WebApps_CreateInstanceFunctionSlot",
         "consumes": [
           "application/json",
@@ -9057,7 +9646,8 @@
               "$ref": "#/definitions/FunctionEnvelope"
             }
           }
-        }
+        },
+        "x-ms-long-running-operation": true
       },
       "delete": {
         "tags": [
@@ -10470,6 +11060,352 @@
         }
       }
     },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Web/sites/{name}/slots/{slot}/instances/{instanceId}/processes/{processId}/dump": {
+      "get": {
+        "tags": [
+          "WebApps"
+        ],
+        "summary": "Get a memory dump of a process by its ID for a specific scaled-out instance in a web site.",
+        "description": "Get a memory dump of a process by its ID for a specific scaled-out instance in a web site.",
+        "operationId": "WebApps_GetInstanceProcessDumpSlot",
+        "parameters": [
+          {
+            "$ref": "#/parameters/resourceGroupNameParameter"
+          },
+          {
+            "name": "name",
+            "in": "path",
+            "description": "Site name.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "processId",
+            "in": "path",
+            "description": "PID",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "slot",
+            "in": "path",
+            "description": "Name of the deployment slot. If a slot is not specified, the API returns deployments for the production slot.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "instanceId",
+            "in": "path",
+            "description": "ID of a specific scaled-out instance. This is the value of the name property in the JSON response from \"GET api/sites/{siteName}/instances\"",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "$ref": "#/parameters/subscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "type": "file"
+            }
+          },
+          "404": {
+            "description": "Process with an Id of {processId} is not running"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Web/sites/{name}/slots/{slot}/instances/{instanceId}/processes/{processId}/modules": {
+      "get": {
+        "tags": [
+          "WebApps"
+        ],
+        "summary": "List module information for a process by its ID for a specific scaled-out instance in a web site.",
+        "description": "List module information for a process by its ID for a specific scaled-out instance in a web site.",
+        "operationId": "WebApps_ListInstanceProcessModulesSlot",
+        "produces": [
+          "application/json",
+          "text/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/resourceGroupNameParameter"
+          },
+          {
+            "name": "name",
+            "in": "path",
+            "description": "Site name.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "processId",
+            "in": "path",
+            "description": "PID",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "slot",
+            "in": "path",
+            "description": "Name of the deployment slot. If a slot is not specified, the API returns deployments for the production slot.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "instanceId",
+            "in": "path",
+            "description": "ID of a specific scaled-out instance. This is the value of the name property in the JSON response from \"GET api/sites/{siteName}/instances\"",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "$ref": "#/parameters/subscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Module information returned",
+            "schema": {
+              "$ref": "#/definitions/ProcessModuleInfoCollection"
+            }
+          },
+          "404": {
+            "description": "Process with an Id of {processId} is not running"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Web/sites/{name}/slots/{slot}/instances/{instanceId}/processes/{processId}/modules/{base_address}": {
+      "get": {
+        "tags": [
+          "WebApps"
+        ],
+        "summary": "Get process information by its ID for a specific scaled-out instance in a web site.",
+        "description": "Get process information by its ID for a specific scaled-out instance in a web site.",
+        "operationId": "WebApps_GetInstanceProcessModuleSlot",
+        "produces": [
+          "application/json",
+          "text/json",
+          "application/xml",
+          "text/xml"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/resourceGroupNameParameter"
+          },
+          {
+            "name": "name",
+            "in": "path",
+            "description": "Site name.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "processId",
+            "in": "path",
+            "description": "PID",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "baseAddress",
+            "in": "query",
+            "description": "Module base address.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "slot",
+            "in": "path",
+            "description": "Name of the deployment slot. If a slot is not specified, the API returns deployments for the production slot.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "instanceId",
+            "in": "path",
+            "description": "ID of a specific scaled-out instance. This is the value of the name property in the JSON response from \"GET api/sites/{siteName}/instances\"",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "base_address",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "$ref": "#/parameters/subscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Module information returned",
+            "schema": {
+              "$ref": "#/definitions/ProcessModuleInfo"
+            }
+          },
+          "404": {
+            "description": "Process with an Id of {processId} is not running, or a module with the specific {base_address} is not found."
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Web/sites/{name}/slots/{slot}/instances/{instanceId}/processes/{processId}/threads": {
+      "get": {
+        "tags": [
+          "WebApps"
+        ],
+        "summary": "List the threads in a process by its ID for a specific scaled-out instance in a web site.",
+        "description": "List the threads in a process by its ID for a specific scaled-out instance in a web site.",
+        "operationId": "WebApps_ListInstanceProcessThreadsSlot",
+        "produces": [
+          "application/json",
+          "text/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/resourceGroupNameParameter"
+          },
+          {
+            "name": "name",
+            "in": "path",
+            "description": "Site name.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "processId",
+            "in": "path",
+            "description": "PID",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "slot",
+            "in": "path",
+            "description": "Name of the deployment slot. If a slot is not specified, the API returns deployments for the production slot.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "instanceId",
+            "in": "path",
+            "description": "ID of a specific scaled-out instance. This is the value of the name property in the JSON response from \"GET api/sites/{siteName}/instances\"",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "$ref": "#/parameters/subscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Thread information returned",
+            "schema": {
+              "$ref": "#/definitions/ProcessThreadInfoCollection"
+            }
+          },
+          "404": {
+            "description": "Process with an ID of {processId} is not running."
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Web/sites/{name}/slots/{slot}/instances/{instanceId}/processes/{processId}/threads/{threadId}": {
+      "get": {
+        "tags": [
+          "WebApps"
+        ],
+        "summary": "Get thread information by Thread ID for a specific process, in a specific scaled-out instance in a web site.",
+        "description": "Get thread information by Thread ID for a specific process, in a specific scaled-out instance in a web site.",
+        "operationId": "WebApps_GetInstanceProcessThreadSlot",
+        "produces": [
+          "application/json",
+          "text/json",
+          "application/xml",
+          "text/xml"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/resourceGroupNameParameter"
+          },
+          {
+            "name": "name",
+            "in": "path",
+            "description": "Site name.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "processId",
+            "in": "path",
+            "description": "PID",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "threadId",
+            "in": "path",
+            "description": "TID",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "slot",
+            "in": "path",
+            "description": "Name of the deployment slot. If a slot is not specified, the API returns deployments for the production slot.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "instanceId",
+            "in": "path",
+            "description": "ID of a specific scaled-out instance. This is the value of the name property in the JSON response from \"GET api/sites/{siteName}/instances\"",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "$ref": "#/parameters/subscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Process information returned",
+            "schema": {
+              "$ref": "#/definitions/ProcessThreadInfo"
+            }
+          },
+          "404": {
+            "description": "Process with an Id of {processId} is not running"
+          }
+        }
+      }
+    },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Web/sites/{name}/slots/{slot}/iscloneable": {
       "post": {
         "tags": [
@@ -11431,6 +12367,317 @@
         }
       }
     },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Web/sites/{name}/slots/{slot}/processes/{processId}/dump": {
+      "get": {
+        "tags": [
+          "WebApps"
+        ],
+        "summary": "Get a memory dump of a process by its ID for a specific scaled-out instance in a web site.",
+        "description": "Get a memory dump of a process by its ID for a specific scaled-out instance in a web site.",
+        "operationId": "WebApps_GetProcessDumpSlot",
+        "parameters": [
+          {
+            "$ref": "#/parameters/resourceGroupNameParameter"
+          },
+          {
+            "name": "name",
+            "in": "path",
+            "description": "Site name.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "processId",
+            "in": "path",
+            "description": "PID",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "slot",
+            "in": "path",
+            "description": "Name of the deployment slot. If a slot is not specified, the API returns deployments for the production slot.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "$ref": "#/parameters/subscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "type": "file"
+            }
+          },
+          "404": {
+            "description": "Process with an Id of {processId} is not running"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Web/sites/{name}/slots/{slot}/processes/{processId}/modules": {
+      "get": {
+        "tags": [
+          "WebApps"
+        ],
+        "summary": "List module information for a process by its ID for a specific scaled-out instance in a web site.",
+        "description": "List module information for a process by its ID for a specific scaled-out instance in a web site.",
+        "operationId": "WebApps_ListProcessModulesSlot",
+        "produces": [
+          "application/json",
+          "text/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/resourceGroupNameParameter"
+          },
+          {
+            "name": "name",
+            "in": "path",
+            "description": "Site name.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "processId",
+            "in": "path",
+            "description": "PID",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "slot",
+            "in": "path",
+            "description": "Name of the deployment slot. If a slot is not specified, the API returns deployments for the production slot.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "$ref": "#/parameters/subscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Module information returned",
+            "schema": {
+              "$ref": "#/definitions/ProcessModuleInfoCollection"
+            }
+          },
+          "404": {
+            "description": "Process with an Id of {processId} is not running"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Web/sites/{name}/slots/{slot}/processes/{processId}/modules/{base_address}": {
+      "get": {
+        "tags": [
+          "WebApps"
+        ],
+        "summary": "Get process information by its ID for a specific scaled-out instance in a web site.",
+        "description": "Get process information by its ID for a specific scaled-out instance in a web site.",
+        "operationId": "WebApps_GetProcessModuleSlot",
+        "produces": [
+          "application/json",
+          "text/json",
+          "application/xml",
+          "text/xml"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/resourceGroupNameParameter"
+          },
+          {
+            "name": "name",
+            "in": "path",
+            "description": "Site name.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "processId",
+            "in": "path",
+            "description": "PID",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "baseAddress",
+            "in": "query",
+            "description": "Module base address.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "slot",
+            "in": "path",
+            "description": "Name of the deployment slot. If a slot is not specified, the API returns deployments for the production slot.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "base_address",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "$ref": "#/parameters/subscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Module information returned",
+            "schema": {
+              "$ref": "#/definitions/ProcessModuleInfo"
+            }
+          },
+          "404": {
+            "description": "Process with an Id of {processId} is not running, or a module with the specific {base_address} is not found."
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Web/sites/{name}/slots/{slot}/processes/{processId}/threads": {
+      "get": {
+        "tags": [
+          "WebApps"
+        ],
+        "summary": "List the threads in a process by its ID for a specific scaled-out instance in a web site.",
+        "description": "List the threads in a process by its ID for a specific scaled-out instance in a web site.",
+        "operationId": "WebApps_ListProcessThreadsSlot",
+        "produces": [
+          "application/json",
+          "text/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/resourceGroupNameParameter"
+          },
+          {
+            "name": "name",
+            "in": "path",
+            "description": "Site name.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "processId",
+            "in": "path",
+            "description": "PID",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "slot",
+            "in": "path",
+            "description": "Name of the deployment slot. If a slot is not specified, the API returns deployments for the production slot.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "$ref": "#/parameters/subscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Thread information returned",
+            "schema": {
+              "$ref": "#/definitions/ProcessThreadInfoCollection"
+            }
+          },
+          "404": {
+            "description": "Process with an ID of {processId} is not running."
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Web/sites/{name}/slots/{slot}/processes/{processId}/threads/{threadId}": {
+      "get": {
+        "tags": [
+          "WebApps"
+        ],
+        "summary": "Get thread information by Thread ID for a specific process, in a specific scaled-out instance in a web site.",
+        "description": "Get thread information by Thread ID for a specific process, in a specific scaled-out instance in a web site.",
+        "operationId": "WebApps_GetProcessThreadSlot",
+        "produces": [
+          "application/json",
+          "text/json",
+          "application/xml",
+          "text/xml"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/resourceGroupNameParameter"
+          },
+          {
+            "name": "name",
+            "in": "path",
+            "description": "Site name.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "processId",
+            "in": "path",
+            "description": "PID",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "threadId",
+            "in": "path",
+            "description": "TID",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "slot",
+            "in": "path",
+            "description": "Name of the deployment slot. If a slot is not specified, the API returns deployments for the production slot.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "$ref": "#/parameters/subscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Process information returned",
+            "schema": {
+              "$ref": "#/definitions/ProcessThreadInfo"
+            }
+          },
+          "404": {
+            "description": "Process with an Id of {processId} is not running"
+          }
+        }
+      }
+    },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Web/sites/{name}/slots/{slot}/publicCertificates": {
       "get": {
         "tags": [
@@ -12058,7 +13305,8 @@
           "429": {
             "description": "Site Extension is being installed on another request: Rejecting current request."
           }
-        }
+        },
+        "x-ms-long-running-operation": true
       },
       "delete": {
         "tags": [
@@ -15580,7 +16828,18 @@
           "properties": {
             "status": {
               "description": "Job status.",
-              "type": "string"
+              "enum": [
+                "Initializing",
+                "Starting",
+                "Running",
+                "PendingRestart",
+                "Stopped"
+              ],
+              "type": "string",
+              "x-ms-enum": {
+                "name": "ContinuousWebJobStatus",
+                "modelAsString": false
+              }
             },
             "detailedStatus": {
               "description": "Detailed status.",
@@ -15608,7 +16867,15 @@
             },
             "jobType": {
               "description": "Job type.",
-              "type": "string"
+              "enum": [
+                "Continuous",
+                "Triggered"
+              ],
+              "type": "string",
+              "x-ms-enum": {
+                "name": "WebJobType",
+                "modelAsString": false
+              }
             },
             "error": {
               "description": "Error information.",
@@ -15620,10 +16887,7 @@
             },
             "settings": {
               "description": "Job settings.",
-              "type": "object",
-              "additionalProperties": {
-                "$ref": "#/definitions/Object"
-              }
+              "type": "object"
             }
           },
           "x-ms-client-flatten": true
@@ -16106,8 +17370,8 @@
               "type": "string"
             },
             "config": {
-              "$ref": "#/definitions/Object",
-              "description": "Config information."
+              "description": "Config information.",
+              "type": "object"
             },
             "files": {
               "description": "File list.",
@@ -16885,10 +18149,6 @@
         }
       }
     },
-    "Object": {
-      "type": "object",
-      "properties": {}
-    },
     "Operation": {
       "description": "Operation.",
       "type": "object",
@@ -17369,6 +18629,26 @@
         }
       }
     },
+    "ProcessModuleInfoCollection": {
+      "description": "Collection of Kudu thread information elements.",
+      "required": [
+        "value"
+      ],
+      "type": "object",
+      "properties": {
+        "value": {
+          "description": "Collection of resources.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ProcessModuleInfo"
+          }
+        },
+        "nextLink": {
+          "description": "Link to next page of resources.",
+          "type": "string"
+        }
+      }
+    },
     "ProcessThreadInfo": {
       "description": "Process Thread Information.",
       "type": "object",
@@ -17439,6 +18719,26 @@
             }
           },
           "x-ms-client-flatten": true
+        }
+      }
+    },
+    "ProcessThreadInfoCollection": {
+      "description": "Collection of Kudu thread information elements.",
+      "required": [
+        "value"
+      ],
+      "type": "object",
+      "properties": {
+        "value": {
+          "description": "Collection of resources.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ProcessThreadInfo"
+          }
+        },
+        "nextLink": {
+          "description": "Link to next page of resources.",
+          "type": "string"
         }
       }
     },
@@ -19529,7 +20829,16 @@
             },
             "status": {
               "description": "Job status.",
-              "type": "string"
+              "enum": [
+                "Success",
+                "Failed",
+                "Error"
+              ],
+              "type": "string",
+              "x-ms-enum": {
+                "name": "TriggeredWebJobStatus",
+                "modelAsString": false
+              }
             },
             "startTime": {
               "format": "date-time",
@@ -19612,7 +20921,15 @@
             },
             "jobType": {
               "description": "Job type.",
-              "type": "string"
+              "enum": [
+                "Continuous",
+                "Triggered"
+              ],
+              "type": "string",
+              "x-ms-enum": {
+                "name": "WebJobType",
+                "modelAsString": false
+              }
             },
             "error": {
               "description": "Error information.",
@@ -19624,10 +20941,7 @@
             },
             "settings": {
               "description": "Job settings.",
-              "type": "object",
-              "additionalProperties": {
-                "$ref": "#/definitions/Object"
-              }
+              "type": "object"
             }
           },
           "x-ms-client-flatten": true
@@ -19937,7 +21251,15 @@
             },
             "jobType": {
               "description": "Job type.",
-              "type": "string"
+              "enum": [
+                "Continuous",
+                "Triggered"
+              ],
+              "type": "string",
+              "x-ms-enum": {
+                "name": "WebJobType",
+                "modelAsString": false
+              }
             },
             "error": {
               "description": "Error information.",
@@ -19949,10 +21271,7 @@
             },
             "settings": {
               "description": "Job settings.",
-              "type": "object",
-              "additionalProperties": {
-                "$ref": "#/definitions/Object"
-              }
+              "type": "object"
             }
           },
           "x-ms-client-flatten": true
