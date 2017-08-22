@@ -608,7 +608,7 @@
         },
         "defaultSslBinding": {
           "type": "boolean",
-          "description": "Specify true to setup the certificate associated with this Hostname as the Default SSL Certificate. If a client does not send the SNI header, then this will be the certificate that will be challenged. The property is only useful if a service has multiple custom hostname enabled and it needs to decide on the default ssl certificate.",
+          "description": "Specify true to setup the certificate associated with this Hostname as the Default SSL Certificate. If a client does not send the SNI header, then this will be the certificate that will be challenged. The property is useful if a service has multiple custom hostname enabled and it needs to decide on the default ssl certificate.",
           "default": false
         },
         "negotiateClientCertificate": {
@@ -824,6 +824,13 @@
           },
           "description": "Custom properties of the API Management service, like disabling TLS 1.0."
         },
+        "certificates": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/CertificateConfiguration"
+          },
+          "description": "List of Certificates that need to be installed in the API Management service. Max supported certificates that can be installed is 10."
+        },
         "virtualNetworkType": {
           "type": "string",
           "description": "The type of VPN in which API Managemet service needs to be configured in. None (Default Value) means the API Management service is not part of any Virtual Network, External means the API Management deployment is set up inside a Virtual Network having an Internet Facing Endpoint, and Internal means that API Management deployment is setup inside a Virtual Network having an Intranet Facing Endpoint only.",
@@ -837,261 +844,253 @@
             "name": "VirtualNetworkType",
             "modelAsString": false
           }
+        }
+      },
+      "description": "Base Properties of an API Management service resource description."
+    },
+    "ApiManagementServiceSkuProperties": {
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "Name of the Sku.",
+          "externalDocs": {
+            "url": "https://azure.microsoft.com/en-us/pricing/details/api-management/"
+          },
+          "enum": [
+            "Developer",
+            "Standard",
+            "Premium"
+          ],
+          "x-ms-enum": {
+            "name": "SkuType",
+            "modelAsString": false
+          }
         },
-        "certificates": {
+        "capacity": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Capacity of the SKU (number of deployed units of the SKU). The default value is 1.",
+          "default": 1
+        }
+      },
+      "required": [
+        "name"
+      ],
+      "description": "API Management service resource SKU properties."
+    },
+    "ApiManagementServiceResource": {
+      "properties": {
+        "properties": {
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/ApiManagementServiceProperties",
+          "description": "Properties of the API Management service."
+        },
+        "sku": {
+          "$ref": "#/definitions/ApiManagementServiceSkuProperties",
+          "description": "SKU properties of the API Management service."
+        },
+        "location": {
+          "type": "string",
+          "description": "Resource location.",
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
+        },
+        "etag": {
+          "type": "string",
+          "description": "ETag of the resource.",
+          "readOnly": true
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "#/definitions/ApimResource"
+        }
+      ],
+      "required": [
+        "location",
+        "sku",
+        "properties"
+      ],
+      "description": "A single API Management service resource in List or Get response."
+    },
+    "ApimResource": {
+      "description": "The Resource definition.",
+      "properties": {
+        "id": {
+          "readOnly": true,
+          "type": "string",
+          "description": "Resource ID."
+        },
+        "name": {
+          "type": "string",
+          "description": "Resource name.",
+          "readOnly": true
+        },
+        "type": {
+          "readOnly": true,
+          "type": "string",
+          "description": "Resource type for API Management resource is set to Microsoft.ApiManagement."
+        },
+        "tags": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          },
+          "description": "Resource tags."
+        }
+      },
+      "x-ms-azure-resource": true
+    },
+    "ApiManagementServiceUpdateParameters": {
+      "properties": {
+        "properties": {
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/ApiManagementServiceUpdateProperties",
+          "description": "Properties of the API Management service."
+        },
+        "sku": {
+          "$ref": "#/definitions/ApiManagementServiceSkuProperties",
+          "description": "SKU properties of the API Management service."
+        },
+        "etag": {
+          "type": "string",
+          "description": "ETag of the resource.",
+          "readOnly": true
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "#/definitions/ApimResource"
+        }
+      ],
+      "description": "Parameter supplied to Update Api Management Service."
+    },
+    "ApiManagementServiceListResult": {
+      "properties": {
+        "value": {
           "type": "array",
           "items": {
-            "$ref": "#/definitions/CertificateConfiguration"
+            "$ref": "#/definitions/ApiManagementServiceResource"
           },
-          "description": "List of Certificates that need to be installed in the API Management service. Max supported certificates that can be installed is 10."
-        }
-      }
-    },
-    "description": "Base Properties of an API Management service resource description."
-  },
-  "ApiManagementServiceSkuProperties": {
-    "properties": {
-      "name": {
-        "type": "string",
-        "description": "Name of the Sku.",
-        "externalDocs": {
-          "url": "https://azure.microsoft.com/en-us/pricing/details/api-management/"
+          "description": "Result of the List API Management services operation."
         },
-        "enum": [
-          "Developer",
-          "Standard",
-          "Premium"
-        ],
-        "x-ms-enum": {
-          "name": "SkuType",
-          "modelAsString": false
+        "nextLink": {
+          "type": "string",
+          "description": "Link to the next set of results. Not empty if Value contains incomplete list of API Management services."
         }
       },
-      "capacity": {
-        "type": "integer",
-        "format": "int32",
-        "description": "Capacity of the SKU (number of deployed units of the SKU). The default value is 1.",
-        "default": 1
-      }
+      "required": [
+        "value"
+      ],
+      "description": "The response of the List API Management services operation."
     },
-    "required": [
-      "name"
-    ],
-    "description": "API Management service resource SKU properties."
-  },
-  "ApiManagementServiceResource": {
-    "properties": {
+    "ApiManagementServiceGetSsoTokenResult": {
       "properties": {
-        "x-ms-client-flatten": true,
-        "$ref": "#/definitions/ApiManagementServiceProperties",
-        "description": "Properties of the API Management service."
+        "redirectUri": {
+          "type": "string",
+          "description": "Redirect URL to the Publisher Portal containing the SSO token."
+        }
       },
-      "sku": {
-        "$ref": "#/definitions/ApiManagementServiceSkuProperties",
-        "description": "SKU properties of the API Management service."
-      },
-      "location": {
-        "type": "string",
-        "description": "Resource location.",
-        "x-ms-mutability": [
-          "read",
-          "create"
-        ]
-      },
-      "etag": {
-        "type": "string",
-        "description": "ETag of the resource.",
-        "readOnly": true
-      }
+      "description": "The response of the GetSsoToken operation."
     },
-    "allOf": [
-      {
-        "$ref": "#/definitions/ApimResource"
-      }
-    ],
-    "required": [
-      "location",
-      "sku",
-      "properties"
-    ],
-    "description": "A single API Management service resource in List or Get response."
-  },
-  "ApimResource": {
-    "description": "The Resource definition.",
-    "properties": {
-      "id": {
-        "readOnly": true,
-        "type": "string",
-        "description": "Resource ID."
+    "ApiManagementServiceCheckNameAvailabilityParameters": {
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "The name to check for availability."
+        }
       },
-      "name": {
-        "type": "string",
-        "description": "Resource name.",
-        "readOnly": true
+      "required": [
+        "name"
+      ],
+      "description": "Parameters supplied to the CheckNameAvailability operation."
+    },
+    "ApiManagementServiceNameAvailabilityResult": {
+      "properties": {
+        "nameAvailable": {
+          "type": "boolean",
+          "description": "True if the name is available and can be used to create a new API Management service; otherwise false.",
+          "readOnly": true
+        },
+        "message": {
+          "type": "string",
+          "description": "If reason == invalid, provide the user with the reason why the given name is invalid, and provide the resource naming requirements so that the user can select a valid name. If reason == AlreadyExists, explain that <resourceName> is already in use, and direct them to select a different name.",
+          "readOnly": true
+        },
+        "reason": {
+          "type": "string",
+          "description": "Invalid indicates the name provided does not match the resource provider’s naming requirements (incorrect length, unsupported characters, etc.)  AlreadyExists indicates that the name is already in use and is therefore unavailable.",
+          "enum": [
+            "Valid",
+            "Invalid",
+            "AlreadyExists"
+          ],
+          "x-ms-enum": {
+            "name": "NameAvailabilityReason",
+            "modelAsString": false
+          }
+        }
       },
-      "type": {
-        "readOnly": true,
-        "type": "string",
-        "description": "Resource type for API Management resource is set to Microsoft.ApiManagement."
+      "description": "Response of the CheckNameAvailability operation."
+    },
+    "ApiManagementServiceApplyNetworkConfigurationParameters": {
+      "properties": {
+        "location": {
+          "type": "string",
+          "description": "Location of the Api Management service to update for a multi-region service. For a service deployed in a single region, this parameter is not required."
+        }
       },
-      "tags": {
-        "type": "object",
-        "additionalProperties": {
+      "description": "Parameter supplied to the Apply Network configuration operation."
+    },
+    "Operation": {
+      "description": "REST API operation",
+      "type": "object",
+      "properties": {
+        "name": {
+          "description": "Operation name: {provider}/{resource}/{operation}",
           "type": "string"
         },
-        "description": "Resource tags."
-      }
-    },
-    "x-ms-azure-resource": true
-  },
-  "ApiManagementServiceUpdateParameters": {
-    "properties": {
-      "properties": {
-        "x-ms-client-flatten": true,
-        "$ref": "#/definitions/ApiManagementServiceUpdateProperties",
-        "description": "Properties of the API Management service."
-      },
-      "sku": {
-        "$ref": "#/definitions/ApiManagementServiceSkuProperties",
-        "description": "SKU properties of the API Management service."
-      },
-      "etag": {
-        "type": "string",
-        "description": "ETag of the resource.",
-        "readOnly": true
-      }
-    },
-    "allOf": [
-      {
-        "$ref": "#/definitions/ApimResource"
-      }
-    ],
-    "description": "Parameter supplied to Update Api Management Service."
-  },
-  "ApiManagementServiceListResult": {
-    "properties": {
-      "value": {
-        "type": "array",
-        "items": {
-          "$ref": "#/definitions/ApiManagementServiceResource"
-        },
-        "description": "Result of the List API Management services operation."
-      },
-      "nextLink": {
-        "type": "string",
-        "description": "Link to the next set of results. Not empty if Value contains incomplete list of API Management services."
-      }
-    },
-    "required": [
-      "value"
-    ],
-    "description": "The response of the List API Management services operation."
-  },
-  "ApiManagementServiceGetSsoTokenResult": {
-    "properties": {
-      "redirectUri": {
-        "type": "string",
-        "description": "Redirect URL to the Publisher Portal containing the SSO token."
-      }
-    },
-    "description": "The response of the GetSsoToken operation."
-  },
-  "ApiManagementServiceCheckNameAvailabilityParameters": {
-    "properties": {
-      "name": {
-        "type": "string",
-        "description": "The name to check for availability."
-      }
-    },
-    "required": [
-      "name"
-    ],
-    "description": "Parameters supplied to the CheckNameAvailability operation."
-  },
-  "ApiManagementServiceNameAvailabilityResult": {
-    "properties": {
-      "nameAvailable": {
-        "type": "boolean",
-        "description": "True if the name is available and can be used to create a new API Management service; otherwise false.",
-        "readOnly": true
-      },
-      "message": {
-        "type": "string",
-        "description": "If reason == invalid, provide the user with the reason why the given name is invalid, and provide the resource naming requirements so that the user can select a valid name. If reason == AlreadyExists, explain that <resourceName> is already in use, and direct them to select a different name.",
-        "readOnly": true
-      },
-      "reason": {
-        "type": "string",
-        "description": "Invalid indicates the name provided does not match the resource provider’s naming requirements (incorrect length, unsupported characters, etc.)  AlreadyExists indicates that the name is already in use and is therefore unavailable.",
-        "enum": [
-          "Valid",
-          "Invalid",
-          "AlreadyExists"
-        ],
-        "x-ms-enum": {
-          "name": "NameAvailabilityReason",
-          "modelAsString": false
-        }
-      }
-    },
-    "description": "Response of the CheckNameAvailability operation."
-  },
-  "ApiManagementServiceApplyNetworkConfigurationParameters": {
-    "properties": {
-      "location": {
-        "type": "string",
-        "description": "Location of the Api Management service to update for a multi-region service. For a service deployed in a single region, this parameter is not required."
-      }
-    },
-    "description": "Parameter supplied to the Apply Network configuration operation."
-  },
-  "Operation": {
-    "description": "REST API operation",
-    "type": "object",
-    "properties": {
-      "name": {
-        "description": "Operation name: {provider}/{resource}/{operation}",
-        "type": "string"
-      },
-      "display": {
-        "description": "The object that describes the operation.",
-        "properties": {
-          "provider": {
-            "description": "Friendly name of the resource provider",
-            "type": "string"
-          },
-          "operation": {
-            "description": "Operation type: read, write, delete, listKeys/action, etc.",
-            "type": "string"
-          },
-          "resource": {
-            "description": "Resource type on which the operation is performed.",
-            "type": "string"
-          },
-          "description": {
-            "description": "Friendly name of the operation",
-            "type": "string"
+        "display": {
+          "description": "The object that describes the operation.",
+          "properties": {
+            "provider": {
+              "description": "Friendly name of the resource provider",
+              "type": "string"
+            },
+            "operation": {
+              "description": "Operation type: read, write, delete, listKeys/action, etc.",
+              "type": "string"
+            },
+            "resource": {
+              "description": "Resource type on which the operation is performed.",
+              "type": "string"
+            },
+            "description": {
+              "description": "Friendly name of the operation",
+              "type": "string"
+            }
           }
         }
       }
-    }
-  },
-  "OperationListResult": {
-    "description": "Result of the request to list REST API operations. It contains a list of operations and a URL nextLink to get the next set of results.",
-    "properties": {
-      "value": {
-        "type": "array",
-        "items": {
-          "$ref": "#/definitions/Operation"
+    },
+    "OperationListResult": {
+      "description": "Result of the request to list REST API operations. It contains a list of operations and a URL nextLink to get the next set of results.",
+      "properties": {
+        "value": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Operation"
+          },
+          "description": "List of operations supported by the resource provider."
         },
-        "description": "List of operations supported by the resource provider."
-      },
-      "nextLink": {
-        "type": "string",
-        "description": "URL to get the next set of operation list results if there are any."
+        "nextLink": {
+          "type": "string",
+          "description": "URL to get the next set of operation list results if there are any."
+        }
       }
     }
-  }
-},
-"parameters": {}
+  },
+  "parameters": {}
 }
