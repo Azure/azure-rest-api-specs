@@ -31,20 +31,24 @@ directive:
 
 ### C#
 
-```yaml
+```yaml $(csharp)
 csharp:
   namespace: Microsoft.Azure.Management.RecoveryServices.Backup
-  output-folder: Generated/CSharp
+  output-folder: $(output-folder)Generated/CSharp
 ```
 
 ### Python
 
-```yaml
+```yaml $(python)
 python:
   namespace: azure.mgmt.recoveryservicesbackup
-  package-name: azure-mgmt-recoveryservicesbackup
   package-version: 0.1.0
-  output-folder: Generated/Python
+  output-folder: $(output-folder)Generated/Python
   payload-flattening-threshold: 2
   license-header: MICROSOFT_MIT_NO_VERSION
+```
+
+```yaml $(python) && $(create)
+python:
+  package-name: azure-mgmt-recoveryservicesbackup
 ```

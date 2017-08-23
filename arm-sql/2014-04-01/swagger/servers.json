@@ -55,8 +55,8 @@
         "operationId": "Servers_CreateOrUpdate",
         "description": "Creates or updates a new server.",
         "x-ms-examples": {
-          "Create server min": { "$ref": "../examples/ServerCreateMin.json" },
-          "Create server max": { "$ref": "../examples/ServerCreateMax.json" }
+          "Create server min": { "$ref": "../examples/ServerCreateOrUpdateMin.json" },
+          "Create server max": { "$ref": "../examples/ServerCreateOrUpdateMax.json" }
         },
         "parameters": [
           {
@@ -90,6 +90,48 @@
           },
           "201": {
             "description": "Created",
+            "schema": {
+              "$ref": "#/definitions/Server"
+            }
+          }
+        }
+      },
+      "patch": {
+        "tags": [
+          "Servers"
+        ],
+        "operationId": "Servers_Update",
+        "description": "Updates an existing server.",
+        "x-ms-examples": {
+          "Create server min": { "$ref": "../examples/ServerUpdateMin.json" },
+          "Create server max": { "$ref": "../examples/ServerUpdateMax.json" }
+        },
+        "parameters": [
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupParameter"
+          },
+          {
+            "$ref": "#/parameters/ServerNameParameter"
+          },
+          {
+            "name": "parameters",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/ServerUpdate"
+            },
+            "description": "The required parameters for updating a server."
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
             "schema": {
               "$ref": "#/definitions/Server"
             }
@@ -327,6 +369,28 @@
         }
       ],
       "description": "Represents a server."
+    },
+    "ServerUpdate": {
+      "properties": {
+        "tags":{
+          "type":"object",
+          "additionalProperties":{
+            "type":"string"
+          },
+          "description":"Resource tags."
+        },
+        "properties": {
+          "$ref": "#/definitions/ServerProperties",
+          "description": "Represents the properties of the resource.",
+          "x-ms-client-flatten": true
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "#/definitions/Resource"
+        }
+      ],
+      "description": "Represents an update to a server."
     },
     "ServerListResult": {
       "properties": {
