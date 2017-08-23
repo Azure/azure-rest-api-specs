@@ -400,26 +400,6 @@
           "readOnly": true,
           "description": "Expiry time of the data factory gateway is set by the service side and read-only on the client side."
         },
-        "provisioningState": {
-          "type": "string",
-          "readOnly": true,
-          "description": "The provisioning state of the data factory gateway.",
-          "enum": [
-            "NotSpecified",
-            "Succeeded",
-            "Failed",
-            "Canceled",
-            "PendingCreation",
-            "PendingUpdate",
-            "PendingDeletion",
-            "PendingRecreation",
-            "Disabled"
-          ],
-          "x-ms-enum": {
-            "name": "EntityStatusExtended",
-            "modelAsString": true
-          }
-        },
         "lastUpgradeResult": {
           "type": "string",
           "description": "Result of last automatic upgrade."
@@ -466,7 +446,7 @@
           "description": "Network usage on the node."
         }
       },
-      "description": "Basic information about a gateway."
+      "description": "Basic information about a gateway node."
     },
     "GatewayExtendedProperties": {
       "properties": {
