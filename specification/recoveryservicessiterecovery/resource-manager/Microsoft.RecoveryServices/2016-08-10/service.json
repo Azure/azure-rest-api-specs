@@ -2343,69 +2343,6 @@
           }
         }
       },
-      "put": {
-        "tags": [
-          "ReplicationRecoveryServicesProviders"
-        ],
-        "summary": "Adds a recovery services provider.",
-        "description": "The operation to add a recovery services provider.",
-        "operationId": "ReplicationRecoveryServicesProviders_Create",
-        "consumes": [
-          "application/json"
-        ],
-        "produces": [
-          "application/json"
-        ],
-        "parameters": [
-          {
-            "$ref": "#/parameters/ApiVersion"
-          },
-          {
-            "$ref": "#/parameters/ResourceName"
-          },
-          {
-            "$ref": "#/parameters/ResourceGroupName"
-          },
-          {
-            "$ref": "#/parameters/SubscriptionId"
-          },
-          {
-            "name": "fabricName",
-            "in": "path",
-            "description": "Fabric name.",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "name": "providerName",
-            "in": "path",
-            "description": "Recovery services provider name.",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "name": "addProviderInput",
-            "in": "body",
-            "description": "Add provider input.",
-            "required": true,
-            "schema": {
-              "$ref": "#/definitions/AddRecoveryServicesProviderInput"
-            }
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "OK",
-            "schema": {
-              "$ref": "#/definitions/RecoveryServicesProvider"
-            }
-          },
-          "202": {
-            "description": "Accepted"
-          }
-        },
-        "x-ms-long-running-operation": true
-      },
       "delete": {
         "tags": [
           "ReplicationRecoveryServicesProviders"
@@ -8497,42 +8434,6 @@
         }
       }
     },
-    "AddRecoveryServicesProviderInput": {
-      "description": "Input required to add a provider.",
-      "type": "object",
-      "properties": {
-        "properties": {
-          "$ref": "#/definitions/AddRecoveryServicesProviderInputProperties",
-          "description": "The properties of an add provider request."
-        }
-      }
-    },
-    "AddRecoveryServicesProviderInputProperties": {
-      "description": "The properties of an add provider request.",
-      "type": "object",
-      "properties": {
-        "machineName": {
-          "description": "The name of the machine where the provider is getting added.",
-          "type": "string"
-        },
-        "identityProviderInput": {
-          "$ref": "#/definitions/IdentityProviderInput",
-          "description": "The identity provider input for the DRA."
-        }
-      }
-    },
-    "IdentityProviderInput": {
-      "description": "Identity provider specific settings.",
-      "type": "object",
-      "properties": {
-        "instanceType": {
-          "description": "Gets the class type.",
-          "type": "string",
-          "readOnly": true
-        }
-      },
-      "discriminator": "instanceType"
-    },
     "ReplicationProtectedItem": {
       "description": "Replication protected item.",
       "type": "object",
@@ -9411,6 +9312,10 @@
         "recoveryPlanName": {
           "description": "The recovery plan filter.",
           "type": "string"
+        },
+        "vCenterName": {
+          "description": "The vCenter name filter.",
+          "type": "string"
         }
       }
     },
@@ -10215,7 +10120,7 @@
           "type": "string"
         },
         "recoveryNicIpAddressType": {
-          "description": "IP allocation type for recoery VM.",
+          "description": "IP allocation type for recovery VM.",
           "type": "string"
         }
       }
@@ -10357,7 +10262,7 @@
           "type": "string"
         },
         "recoveryAzureLogStorageAccountId": {
-          "description": "The ARM id of the log storage acount used for replication. This will be set to null if no log storage account was provided during enable protection.",
+          "description": "The ARM id of the log storage account used for replication. This will be set to null if no log storage account was provided during enable protection.",
           "type": "string"
         },
         "lastReplicatedTime": {
@@ -10644,7 +10549,7 @@
           "type": "string"
         },
         "recoveryAzureLogStorageAccountId": {
-          "description": "The ARM id of the log storage acount used for replication. This will be set to null if no log storage account was provided during enable protection.",
+          "description": "The ARM id of the log storage account used for replication. This will be set to null if no log storage account was provided during enable protection.",
           "type": "string"
         },
         "vmNics": {
@@ -10659,7 +10564,7 @@
           "type": "string"
         },
         "discoveryType": {
-          "description": "A value inidicating the discovery type of the machine. Value can be vCenter or physical.",
+          "description": "A value indicating the discovery type of the machine. Value can be vCenter or physical.",
           "type": "string"
         },
         "enableRDPOnTargetOption": {
@@ -10940,7 +10845,7 @@
           }
         },
         "discoveryType": {
-          "description": "A value inidicating the discovery type of the machine.",
+          "description": "A value indicating the discovery type of the machine.",
           "type": "string"
         },
         "azureStorageAccountId": {
@@ -13145,6 +13050,13 @@
             "$ref": "#/definitions/A2AVmDiskInputDetails"
           }
         },
+        "vmManagedDisks": {
+          "description": "The list of vm managed disk details.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/A2AVmManagedDiskInputDetails"
+          }
+        },
         "recoveryResourceGroupId": {
           "description": "The recovery resource group Id. Valid for V2 scenarios.",
           "type": "string"
@@ -14168,54 +14080,6 @@
         }
       },
       "x-ms-discriminator-value": "A2A"
-    },
-    "CustomerAadIdentityProviderInput": {
-      "description": "Identity provider specific settings.",
-      "type": "object",
-      "allOf": [
-        {
-          "$ref": "#/definitions/IdentityProviderInput"
-        }
-      ],
-      "properties": {
-        "tenantId": {
-          "description": "The tenant Id for the service principal with which the on-premise management/data plane components would communicate with our Azure services.",
-          "type": "string"
-        },
-        "applicationId": {
-          "description": "The application/client Id for the service principal with which the on-premise management/data plane components would communicate with our Azure services.",
-          "type": "string"
-        },
-        "objectId": {
-          "description": "The object Id of the service principal with which the on-premise management/data plane components would communicate with our Azure services.",
-          "type": "string"
-        },
-        "audience": {
-          "description": "The intended Audience of the service principal with which the on-premise management/data plane components would communicate with our Azure services.",
-          "type": "string"
-        },
-        "aadAuthority": {
-          "description": "The base authority for Azure Active Directory authentication.",
-          "type": "string"
-        }
-      },
-      "x-ms-discriminator-value": "CustomerActiveDirectory"
-    },
-    "RecoveryServicesAadIdentityProviderInput": {
-      "description": "Identity provider specific settings.",
-      "type": "object",
-      "allOf": [
-        {
-          "$ref": "#/definitions/IdentityProviderInput"
-        }
-      ],
-      "properties": {
-        "rawCertData": {
-          "description": "The raw certificate data (no private key).",
-          "type": "string"
-        }
-      },
-      "x-ms-discriminator-value": "RecoveryServicesActiveDirectory"
     },
     "AzureFabricCreationInput": {
       "description": "Fabric provider specific settings.",
