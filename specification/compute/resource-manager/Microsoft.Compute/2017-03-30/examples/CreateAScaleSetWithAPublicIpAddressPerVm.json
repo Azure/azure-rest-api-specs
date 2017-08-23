@@ -1,0 +1,73 @@
+{
+  "parameters": {
+    "subscriptionId": "<subscription-id>", 
+    "resourceGroupName": "<resource-group-name>", 
+    "name": "<vmss-name>", 
+    "api-version": "2017-03-30", 
+    "parameters": {
+      "sku": {
+        "tier": "Standard", 
+        "capacity": 3, 
+        "name": "Standard_D1_v2"
+      }, 
+      "location": "westus", 
+      "properties": {
+        "overprovision": true, 
+        "virtualMachineProfile": {
+          "storageProfile": {
+            "imageReference": {
+              "sku": "2016-Datacenter", 
+              "publisher": "MicrosoftWindowsServer", 
+              "version": "latest", 
+              "offer": "WindowsServer"
+            }, 
+            "osDisk": {
+              "caching": "ReadWrite", 
+              "managedDisk": {
+                "storageAccountType": "Standard_LRS"
+              }, 
+              "createOption": "fromImage"
+            }
+          }, 
+          "osProfile": {
+            "computerNamePrefix": "myVMSS", 
+            "adminUsername": "<your-username>", 
+            "adminPassword": "<your-password>"
+          }, 
+          "networkProfile": {
+            "networkInterfaceConfigurations": [
+              {
+                "name": "myVMSS", 
+                "properties": {
+                  "primary": true, 
+                  "ipConfigurations": [
+                    {
+                      "name": "myVMSS", 
+                      "properties": {
+                        "subnet": {
+                          "id": "/subscriptions/<subscription-id>/resourceGroups/<resource-group-name>/providers/Microsoft.Network/virtualNetworks/<existing-virtual-network-name>/subnets/<existing-subnet-name>"
+                        }, 
+                        "publicIpAddressConfiguration": {
+                          "name": "pubip", 
+                          "properties": {
+                            "idleTimeoutInMinutes": 15
+                          }
+                        }
+                      }
+                    }
+                  ]
+                }
+              }
+            ]
+          }
+        }, 
+        "upgradePolicy": {
+          "mode": "Manual"
+        }
+      }
+    }
+  }, 
+  "responses": {
+    "```201": {}
+  }
+}
