@@ -56,7 +56,7 @@
         "operationId": "SKUs_List",
         "description": "Lists the available SKUs supported by Microsoft.Storage for given subscription.",
         "x-ms-examples": {
-          "StorageAccountCheckNameAvailability": { "$ref": "./examples/StorageAccountCheckNameAvailability.json" }
+          "SKUList": { "$ref": "./examples/SKUList.json" }
         },
         "parameters": [
           {
@@ -740,8 +740,8 @@
         },
         "value": {
           "readOnly": true,
-          "type": "boolean",
-          "description": "A boolean value to indicate given capability is enabled or not."
+          "type": "string",
+          "description": "A string value to indicate states of given capability. Possibly 'true' or 'false'."
         }
       },
       "description": "The capability information in the specified sku, including file encryption, network acls, change notification, etc."
