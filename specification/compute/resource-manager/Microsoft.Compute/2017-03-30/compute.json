@@ -194,6 +194,34 @@
         }
       }
     },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.Compute/availabilitySets": {
+      "get": {
+        "tags": [
+          "AvailabilitySets"
+        ],
+        "operationId": "AvailabilitySets_ListAll",
+        "description": "Gets the list of availability sets in the subscription. Use nextLink property in the response to get the next page of Images. Do this till nextLink is not null to fetch all the availability sets.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/AvailabilitySetListResult"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/availabilitySets/{availabilitySetName}/vmSizes": {
       "get": {
         "tags": [
@@ -4452,22 +4480,22 @@
           "type": "boolean",
           "description": "True, if customer is allowed to perform Maintenance."
         },
-        "preMaintenanceWindowStartTime" : {
+        "preMaintenanceWindowStartTime": {
           "type": "string",
           "format": "date-time",
           "description": "Start Time for the Pre Maintenance Window."
         },
-        "preMaintenanceWindowEndTime" : {
+        "preMaintenanceWindowEndTime": {
           "type": "string",
           "format": "date-time",
           "description": "End Time for the Pre Maintenance Window."
         },
-        "maintenanceWindowStartTime" : {
+        "maintenanceWindowStartTime": {
           "type": "string",
           "format": "date-time",
           "description": "Start Time for the Maintenance Window."
         },
-        "maintenanceWindowEndTime" : {
+        "maintenanceWindowEndTime": {
           "type": "string",
           "format": "date-time",
           "description": "End Time for the Maintenance Window."
@@ -4961,7 +4989,7 @@
           "description": "An invariant to show the extended unit."
         }
       },
-      "description" : "Describes metadata for retrieving price info."
+      "description": "Describes metadata for retrieving price info."
     },
     "ResourceSkuCapabilities": {
       "properties": {
@@ -4976,7 +5004,7 @@
           "description": "An invariant if the feature is measured by quantity."
         }
       },
-      "description" : "Describes The SKU capabilites object."
+      "description": "Describes The SKU capabilites object."
     },
     "ResourceSkuRestrictions": {
       "properties": {
@@ -5069,7 +5097,7 @@
           },
           "description": "The api versions that support this SKU."
         },
-         "costs": {
+        "costs": {
           "type": "array",
           "readOnly": true,
           "items": {
