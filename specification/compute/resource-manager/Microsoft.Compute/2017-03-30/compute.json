@@ -79,6 +79,11 @@
               "$ref": "#/definitions/AvailabilitySet"
             }
           }
+        },
+        "x-ms-examples": {
+          "Create an availability set.": {
+            "$ref": "./examples/CreateAnAvailabilitySet.json"
+          }
         }
       },
       "delete": {
@@ -1233,6 +1238,38 @@
             }
           }
         },
+        "x-ms-examples": {
+          "Create a vm with password authentication.": {
+            "$ref": "./examples/CreateAVmWithPasswordAuthentication.json"
+          },
+          "Create a vm with ssh authentication.": {
+            "$ref": "./examples/CreateAVmWithSshAuthentication.json"
+          },
+          "Create a vm with premium storage.": {
+            "$ref": "./examples/CreateAVmWithPremiumStorage.json"
+          },
+          "Create a vm in an availability set.": {
+            "$ref": "./examples/CreateAVmInAnAvailabilitySet.json"
+          },
+          "Create a vm with boot diagnostics.": {
+            "$ref": "./examples/CreateAVmWithBootDiagnostics.json"
+          },
+          "Create a vm with empty data disks.": {
+            "$ref": "./examples/CreateAVmWithEmptyDataDisks.json"
+          },
+          "Create a vm with a marketplace image plan.": {
+            "$ref": "./examples/CreateAVmWithAMarketplaceImagePlan.json"
+          },
+          "Create a vm from a custom image.": {
+            "$ref": "./examples/CreateAVmFromACustomImage.json"
+          },
+          "Create a platform-image vm with unmanaged os and data disks.": {
+            "$ref": "./examples/CreateAPlatformImageVmWithUnmanagedOsAndDataDisks.json"
+          },
+          "Create a custom-image vm from an unmanaged generalized os image.": {
+            "$ref": "./examples/CreateACustomImageVmFromAnUnmanagedGeneralizedOsImage.json"
+          }
+        },
         "x-ms-long-running-operation": true
       },
       "delete": {
@@ -1826,6 +1863,44 @@
             "schema": {
               "$ref": "#/definitions/VirtualMachineScaleSet"
             }
+          }
+        },
+        "x-ms-examples": {
+          "Create a scale set with password authentication.": {
+            "$ref": "./examples/CreateAScaleSetWithPasswordAuthentication.json"
+          },
+          "Create a scale set with ssh authentication.": {
+            "$ref": "./examples/CreateAScaleSetWithSshAuthentication.json"
+          },
+          "Create a scale set with premium storage.": {
+            "$ref": "./examples/CreateAScaleSetWithPremiumStorage.json"
+          },
+          "Create a scale set with empty data disks on each vm.": {
+            "$ref": "./examples/CreateAScaleSetWithEmptyDataDisksOnEachVm.json"
+          },
+          "Create a scale set with an azure load balancer.": {
+            "$ref": "./examples/CreateAScaleSetWithAnAzureLoadBalancer.json"
+          },
+          "Create a scale set with an azure application gateway.": {
+            "$ref": "./examples/CreateAScaleSetWithAnAzureApplicationGateway.json"
+          },
+          "Create a scale set with a public ip address per vm.": {
+            "$ref": "./examples/CreateAScaleSetWithAPublicIpAddressPerVm.json"
+          },
+          "Create a scale set with boot diagnostics.": {
+            "$ref": "./examples/CreateAScaleSetWithBootDiagnostics.json"
+          },
+          "Create a scale set with a marketplace image plan.": {
+            "$ref": "./examples/CreateAScaleSetWithAMarketplaceImagePlan.json"
+          },
+          "Create a scale set from a custom image.": {
+            "$ref": "./examples/CreateAScaleSetFromACustomImage.json"
+          },
+          "Create a platform-image scale set with unmanaged os disks.": {
+            "$ref": "./examples/CreateAPlatformImageScaleSetWithUnmanagedOsDisks.json"
+          },
+          "Create a custom-image scale set from an unmanaged generalized os image.": {
+            "$ref": "./examples/CreateACustomImageScaleSetFromAnUnmanagedGeneralizedOsImage.json"
           }
         },
         "x-ms-long-running-operation": true
@@ -4452,22 +4527,22 @@
           "type": "boolean",
           "description": "True, if customer is allowed to perform Maintenance."
         },
-        "preMaintenanceWindowStartTime" : {
+        "preMaintenanceWindowStartTime": {
           "type": "string",
           "format": "date-time",
           "description": "Start Time for the Pre Maintenance Window."
         },
-        "preMaintenanceWindowEndTime" : {
+        "preMaintenanceWindowEndTime": {
           "type": "string",
           "format": "date-time",
           "description": "End Time for the Pre Maintenance Window."
         },
-        "maintenanceWindowStartTime" : {
+        "maintenanceWindowStartTime": {
           "type": "string",
           "format": "date-time",
           "description": "Start Time for the Maintenance Window."
         },
-        "maintenanceWindowEndTime" : {
+        "maintenanceWindowEndTime": {
           "type": "string",
           "format": "date-time",
           "description": "End Time for the Maintenance Window."
@@ -4961,7 +5036,7 @@
           "description": "An invariant to show the extended unit."
         }
       },
-      "description" : "Describes metadata for retrieving price info."
+      "description": "Describes metadata for retrieving price info."
     },
     "ResourceSkuCapabilities": {
       "properties": {
@@ -4976,7 +5051,7 @@
           "description": "An invariant if the feature is measured by quantity."
         }
       },
-      "description" : "Describes The SKU capabilites object."
+      "description": "Describes The SKU capabilites object."
     },
     "ResourceSkuRestrictions": {
       "properties": {
@@ -5069,7 +5144,7 @@
           },
           "description": "The api versions that support this SKU."
         },
-         "costs": {
+        "costs": {
           "type": "array",
           "readOnly": true,
           "items": {
