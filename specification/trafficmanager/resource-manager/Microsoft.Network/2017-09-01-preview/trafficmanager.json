@@ -694,6 +694,9 @@
         "description": "Gets latest heatmap for Traffic Manager profile.",
         "parameters": [
           {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
             "name": "resourceGroupName",
             "in": "path",
             "required": true,
@@ -712,14 +715,41 @@
             "in": "path",
             "required": true,
             "type": "string",
-            "enum": [ "latencyVolumeByLocation" ],
+            "enum": [ "default" ],
             "description": "The type of HeatMap for the Traffic Manager profile."
           },
           {
-            "$ref": "#/parameters/ApiVersionParameter"
+            "name": "topLeft",
+            "in": "query",
+            "required": false,
+            "allowEmptyValue": true,
+            "description": "The top left latitude,longitude pair of the rectangular viewport to query for.",
+            "type": "array",
+            "minItems": 2,
+            "maxItems": 2,
+            "collectionFormat": "csv",
+            "items": {
+              "type": "number",
+              "format": "double"
+            }
           },
           {
-            "$ref": "#/parameters/SubscriptionIdParameter"
+            "name": "botRight",
+            "in": "query",
+            "required": false,
+            "allowEmptyValue": true,
+            "description": "The bottom right latitude,longitude pair of the rectangular viewport to query for.",
+            "type": "array",
+            "minItems": 2,
+            "maxItems": 2,
+            "collectionFormat": "csv",
+            "items": {
+              "type": "number",
+              "format": "double"
+            }
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
           }
         ],
         "responses": {
@@ -739,129 +769,9 @@
         "x-ms-examples": {
           "HeatMap-GET": {
             "$ref": "./examples/HeatMap-GET.json"
-          }
-        }
-      }
-    },
-    "/subscriptions/{subscriptionId}/providers/Microsoft.Network/trafficManagerRealUserMetricsKey": {
-      "get": {
-        "tags": [
-          "RealUserMetrics"
-        ],
-        "operationId": "RealUserMetricsKey_Get",
-        "description": "Get the subscription-level Real User Metrics key for the given subscription.",
-        "parameters": [
-          {
-            "$ref": "#/parameters/ApiVersionParameter"
           },
-          {
-            "$ref": "#/parameters/SubscriptionIdParameter"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "The subscription-level Traffic Manager Real User Metrics key.",
-            "schema": {
-              "$ref": "#/definitions/RealUserMetricsKeyModel" 
-            }
-          },
-          "default": {
-            "description": "Default response. It will be deserialized as per the Error definition.",
-            "schema": {
-              "$ref": "#/definitions/CloudError"
-            }
-          }
-        },
-        "x-ms-examples": {
-          "RealUserMetricsKey-GET": {
-            "$ref": "./examples/RealUserMetricsKey-GET.json"
-          }
-        }
-      },
-      "put": {
-        "tags": [
-          "RealUserMetrics"
-        ],
-        "operationId": "RealUserMetricsKey_CreateOrUpdate",
-        "description": "Create or update a Traffic Manager Real User Metrics key.",
-        "parameters": [
-          {
-            "name": "parameters",
-            "in": "body",
-            "required": false,
-            "schema": {
-              "type": "string",
-              "enum": [""]
-            },
-            "description": "This body should be empty, Traffic Manager will provide a new key in the returned response."
-          },
-          {
-            "$ref": "#/parameters/ApiVersionParameter"
-          },
-          {
-            "$ref": "#/parameters/SubscriptionIdParameter"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "The created or updated Traffic Manager Real User Metrics key.",
-            "schema": {
-              "$ref": "#/definitions/RealUserMetricsKeyModel" 
-            }
-          },
-          "201": {
-            "description": "The created or updated Traffic Manager Real User Metrics key.",
-            "schema": {
-              "$ref": "#/definitions/RealUserMetricsKeyModel" 
-            }
-          },
-          "default": {
-            "description": "Default response. It will be deserialized as per the Error definition.",
-            "schema": {
-              "$ref": "#/definitions/CloudError"
-            }
-          }
-        },
-        "x-ms-examples": {
-          "RealUserMetricsKey-PUT": {
-            "$ref": "./examples/RealUserMetricsKey-PUT.json"
-          }
-        }
-      },
-      "delete": {
-        "tags": [
-          "RealUserMetricsKey"
-        ],
-        "operationId": "RealUserMetricsKey_Delete",
-        "description": "Deletes a subscription-level Traffic Manager Real User Metrics key.",
-        "parameters": [
-          {
-            "$ref": "#/parameters/ApiVersionParameter"
-          },
-          {
-            "$ref": "#/parameters/SubscriptionIdParameter"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "The Traffic Manager Real User Metrics key was deleted successfully.",
-            "schema": {
-              "$ref": "#/definitions/DeleteOperationResult"
-            }
-          },
-          "204": {
-            "description": "The Real User Metrics key does not exist. It could have been deleted on a previous request."
-          },
-          "default": {
-            "description": "Default response. It will be deserialized as per the Error definition.",
-            "schema": {
-              "$ref": "#/definitions/CloudError"
-            }
-          }
-        },
-        "x-ms-examples": {
-          "RealUserMetricsKey-DELETE": {
-            "$ref": "./examples/RealUserMetricsKey-DELETE.json"
+          "HeatMap-GET-With-TopLeft-BotRight": {
+            "$ref": "./examples/HeatMap-GET-With-TopLeft-BotRight.json"
           }
         }
       }
@@ -1309,9 +1219,9 @@
         },
         "trafficFlows": {
           "type": "array",
-          "description": "The query experiences produced in this HeatMap calculation.",
+          "description": "The traffic flows produced in this HeatMap calculation.",
           "items": {
-            "$ref": "#/definitions/QueryExperience"
+            "$ref": "#/definitions/TrafficFlow"
           }
         }
       },
@@ -1319,41 +1229,22 @@
     },
     "HeatMapEndpoint": {
       "properties": {
-        "location": {
-          "type": "string",
-          "description": "The Azure location that this endpoint is located closest to."
-        },
-        "target": {
-          "type": "string",
-          "description": "The domain name or IP Address to which this endpoint refers to."
-        },
         "resourceId": {
           "type": "string",
           "description": "The ARM Resource ID of this Traffic Manager endpoint."
+        },
+        "endpointId": {
+          "type": "integer",
+          "description": "A number uniquely identifying this endpoint in query experiences."
         }
       },
       "description": "Class which is a sparse representation of a Traffic Manager endpoint."
     },
     "QueryExperience": {
       "properties": {
-          "sourceIps": {
-            "type": "array",
-            "items": {
-              "type": "string"
-            },
-            "description": "The IPs that these queries originated from."
-          },
-          "sourceIp": {
-              "type": "string",
-              "description": "The IP address that this query experience originated from."
-          },
-          "latitude": {
-            "type": "number",
-            "description": "The approximate latitude that these queries originated from."
-          },
-          "longitude": {
-            "type": "number",
-            "description": "The approximate longitude that these queries originated from."
+          "endpointId": {
+            "type": "integer",
+            "description": "The id of the endpoint from the 'endpoints' array which these queries were routed to."
           },
           "queryCount": {
             "type": "integer",
@@ -1361,10 +1252,37 @@
           },
           "latency": {
             "type": "number",
+            "format": "double",
             "description": "The latency experienced by queries originating from this location."
           }
       },
       "description": "Class representing a Traffic Manager HeatMap query experience properties."
+    },
+    "TrafficFlow": {
+      "properties": {
+          "sourceIp": {
+              "type": "string",
+              "description": "The IP address that this query experience originated from."
+          },
+          "latitude": {
+            "type": "number",
+            "format": "double",
+            "description": "The approximate latitude that these queries originated from."
+          },
+          "longitude": {
+            "type": "number",
+            "format": "double",
+            "description": "The approximate longitude that these queries originated from."
+          },
+          "queryExperiences": {
+            "type": "array",
+            "description": "The query experiences produced in this HeatMap calculation.",
+            "items": {
+              "$ref": "#/definitions/QueryExperience"
+            }
+          }
+      },
+      "description": "Class representing a Traffic Manager HeatMap traffic flow properties."
     },
     "HeatMapModel": {
       "properties": {
@@ -1380,30 +1298,6 @@
         }
       ],
       "description": "Class representing a Traffic Manager HeatMap."
-    },
-    "RealUserMetricsKeyProperties": {
-      "properties": {
-        "key": {
-          "type" : "string",
-          "description": "The key returned by the Real User Metrics operation."
-        }
-      },
-      "description": "Class representing the properties of a Real User Metrics key operation response."
-    },
-    "RealUserMetricsKeyModel": {
-      "properties": {
-        "properties": {
-          "x-ms-client-flatten": true,
-          "$ref": "#/definitions/RealUserMetricsKeyProperties",
-          "description": "The key properties returned from a RealUserMetrics GET or PUT operation."
-        }
-      },
-      "allOf": [
-        {
-          "$ref": "#/definitions/ProxyResource"
-        }
-      ],
-      "description": "Class representing a Traffic Manager Real User Metrics key response."
     }
   },
   "parameters": {
