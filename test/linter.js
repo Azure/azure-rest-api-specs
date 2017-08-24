@@ -109,10 +109,10 @@ describe('AutoRest Linter validation:', function () {
           // but in the same directory tree as the config file
           const filesChangedInPR = utils.getFilesChangedInPR();
           const configDir = path.dirname(config);
-          filesChangedInPR.filter(prfile => {
+          filesChangedInPR.filter(prFile => {
             // set any type to string
             prFile += '';
-            return prFile.startsWith(configDir) && prfile.indexOf('examples') === -1 && prFile.endsWith('.json');
+            return prFile.startsWith(configDir) && prFile.indexOf('examples') === -1 && prFile.endsWith('.json');
           }).forEach(prFileInConfigFile => {
             console.warn(`Configuration file not found for file: ${prFileInConfigFile}, running validation rules against it in individual context.`);
             execLinterCommand(`--input-file=${prFileInConfigFile}`);
