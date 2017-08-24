@@ -1948,7 +1948,11 @@
         },
         "location": {
           "description": "The location of the resource. This cannot be changed after the resource is created.",
-          "type": "string"
+          "type": "string",
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
         },
         "tags": {
           "description": "The tags of the resource.",
@@ -1958,11 +1962,7 @@
           }
         }
       },
-      "x-ms-azure-resource": true,
-      "x-ms-mutability": [
-        "read",
-        "create"
-      ]
+      "x-ms-azure-resource": true
     }
   },
   "parameters": {
