@@ -1,7 +1,15 @@
 {
     "parameters": {
         "api-version": "2016-11-01",
-        "jobIdentity": "076713da-9018-41ae-a3bd-9eab14e54d09"
+        "parameters": {
+            "type": "USql",
+            "properties": {
+                "runtimeVersion": "test_runtime_version",
+                "script": "test_script",
+                "type": "USql"
+            },
+            "name": "test_name"
+        }
     },
     "responses": {
         "200": {
@@ -29,6 +37,9 @@
                     "runId": "67034c12-b250-468e-992d-39fb978bde2c",
                     "recurrenceId": "67034c12-b250-468e-992d-39fb978bde2d",
                     "recurrenceName": "test_recurrence_name"
+                },
+                "tags": {
+                    "test_key": "test_value"
                 },
                 "errorMessage": [{
                     "description": "test_description",
