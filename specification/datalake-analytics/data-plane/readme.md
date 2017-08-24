@@ -59,6 +59,7 @@ These settings apply only when `--tag=package-job-2017-09-preview` is specified 
 ``` yaml $(tag) == 'package-job-2017-09-preview'
 input-file:
 - Microsoft.DataLakeAnalytics/2017-09-01-preview/job.json
+```
 
 ### Tag: package-job-2016-11
 
