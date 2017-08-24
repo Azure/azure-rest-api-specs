@@ -1056,6 +1056,77 @@
       }
     }
   },
+  "x-ms-paths": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ApiManagement/service/{serviceName}/apis/{apiId}?export=true": {
+      "get": {
+        "tags": [
+          "Apis"
+        ],
+        "operationId": "Api_Export",
+        "description": "Exports the Api details in the desired Format.",
+        "parameters": [
+          {
+            "$ref": "./apimanagement.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "./apimanagement.json#/parameters/ServiceNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ApiIdParameter"
+          },
+          {
+            "name": "Accept",
+            "in": "header",
+            "required": true,
+            "type": "string",
+            "enum": [
+              "application/vnd.swagger.doc+json",
+              "application/wsdl+xml",
+              "application/vnd.sun.wadl+xml"
+            ],
+            "x-ms-enum": {
+              "name": "ExportFormat",
+              "modelAsString": false,
+              "values": [
+                {
+                  "value": "application/vnd.swagger.doc+json",
+                  "description": "Export in OpenApi Specification 2.0 format",
+                  "name": "OpenApi2"
+                },
+                {
+                  "value": "application/wsdl+xml",
+                  "description": "Export in WSDL Schema",
+                  "name": "Wsdl"
+                },
+                {
+                  "value": "application/vnd.sun.wadl+xml",
+                  "description": "Export in WADL Schema",
+                  "name": "Wadl"
+                }
+              ]
+            },
+            "description": "Format in which to export the Api Details."
+          },
+          {
+            "$ref": "./apimanagement.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "./apimanagement.json#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The response contains a stream with a full set of API metadata and includes API entity with an embedded array of operation entities.",
+            "schema": {
+              "type": "string",
+              "format": "byte",
+              "description": "Api details in the format desired."
+            }
+          }
+        }
+      }
+    }
+  },
   "definitions": {
     "ApiCollection": {
       "properties": {
