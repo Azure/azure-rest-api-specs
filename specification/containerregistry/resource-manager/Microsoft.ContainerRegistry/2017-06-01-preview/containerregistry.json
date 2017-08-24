@@ -240,13 +240,20 @@
             "schema": {
               "$ref": "#/definitions/Registry"
             }
+          },
+          "201": {
+            "description": "The request was successful; the operation will complete asynchronously.",
+            "schema": {
+              "$ref": "#/definitions/Registry"
+            }
           }
         },
         "x-ms-examples": {
           "RegistryUpdate": {
             "$ref": "./examples/RegistryUpdate.json"
           }
-        }
+        },
+        "x-ms-long-running-operation": true
       }
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ContainerRegistry/registries": {
@@ -1951,7 +1958,11 @@
           }
         }
       },
-      "x-ms-azure-resource": true
+      "x-ms-azure-resource": true,
+      "x-ms-mutability": [
+        "read",
+        "create"
+      ]
     }
   },
   "parameters": {
