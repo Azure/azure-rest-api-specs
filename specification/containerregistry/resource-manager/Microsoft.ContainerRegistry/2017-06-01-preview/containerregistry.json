@@ -477,8 +477,8 @@
         "tags": [
           "Replications"
         ],
-        "description": "Creates or updates a replication for a container registry with the specified parameters.",
-        "operationId": "Replications_CreateOrUpdate",
+        "description": "Creates a replication for a container registry with the specified parameters.",
+        "operationId": "Replications_Create",
         "parameters": [
           {
             "$ref": "#/parameters/ApiVersionParameter"
@@ -498,7 +498,7 @@
           {
             "name": "replication",
             "in": "body",
-            "description": "The parameters for creating or updating a replication.",
+            "description": "The parameters for creating a replication.",
             "required": true,
             "schema": {
               "$ref": "#/definitions/Replication"
@@ -520,8 +520,8 @@
           }
         },
         "x-ms-examples": {
-          "ReplicationCreateOrUpdate": {
-            "$ref": "./examples/ReplicationCreateOrUpdate.json"
+          "ReplicationCreate": {
+            "$ref": "./examples/ReplicationCreate.json"
           }
         },
         "x-ms-long-running-operation": true
@@ -563,6 +563,59 @@
         "x-ms-examples": {
           "ReplicationDelete": {
             "$ref": "./examples/ReplicationDelete.json"
+          }
+        },
+        "x-ms-long-running-operation": true
+      },
+      "patch": {
+        "tags": [
+          "Replications"
+        ],
+        "description": "Updates a replication for a container registry with the specified parameters.",
+        "operationId": "Replications_Update",
+        "parameters": [
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupParameter"
+          },
+          {
+            "$ref": "#/parameters/RegistryNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ReplicationNameParameter"
+          },
+          {
+            "name": "replicationUpdateParameters",
+            "in": "body",
+            "description": "The parameters for updating a replication.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/ReplicationUpdateParameters"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request was successful; the request was well-formed and received properly.",
+            "schema": {
+              "$ref": "#/definitions/Replication"
+            }
+          },
+          "201": {
+            "description": "The request was successful; the operation will complete asynchronously.",
+            "schema": {
+              "$ref": "#/definitions/Replication"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "ReplicationUpdate": {
+            "$ref": "./examples/ReplicationUpdate.json"
           }
         },
         "x-ms-long-running-operation": true
@@ -1374,6 +1427,18 @@
           "$ref": "#/definitions/Status",
           "description": "The status of the replication at the time the operation was called.",
           "readOnly": true
+        }
+      }
+    },
+    "ReplicationUpdateParameters": {
+      "description": "The parameters for updating a replication.",
+      "properties": {
+        "tags": {
+          "description": "The tags for the replication.",
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          }
         }
       }
     },
