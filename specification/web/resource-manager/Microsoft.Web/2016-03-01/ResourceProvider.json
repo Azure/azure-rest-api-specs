@@ -309,8 +309,8 @@
     },
     "/subscriptions/{subscriptionId}/providers/Microsoft.Web/verifyHostingEnvironmentVnet": {
       "post": {
-        "summary": "Verifies if this VNET is compatible with an App Service Environment by analyzing the Network Security Group rules",
-        "description": "Verifies if this VNET is compatible with an App Service Environment by analyzing the Network Security Group rules",
+        "summary": "Verifies if this VNET is compatible with an App Service Environment.",
+        "description": "Verifies if this VNET is compatible with an App Service Environment.",
         "operationId": "VerifyHostingEnvironmentVnet",
         "consumes": [
           "application/json",
@@ -346,7 +346,7 @@
           "200": {
             "description": "OK",
             "schema": {
-              "$ref": "#/definitions/Object"
+              "$ref": "#/definitions/VnetValidationFailureDetails"
             }
           }
         }
@@ -599,10 +599,6 @@
           }
         }
       }
-    },
-    "Object": {
-      "type": "object",
-      "properties": {}
     },
     "PremierAddOnOffer": {
       "description": "Premier add-on offer.",
@@ -1018,7 +1014,7 @@
       }
     },
     "VnetParameters": {
-      "description": "",
+      "description": "The required set of inputs to validate a VNET",
       "type": "object",
       "allOf": [
         {
@@ -1039,6 +1035,55 @@
             },
             "vnetSubnetName": {
               "description": "The subnet name to be validated",
+              "type": "string"
+            }
+          },
+          "x-ms-client-flatten": true
+        }
+      }
+    },
+    "VnetValidationFailureDetails": {
+      "description": "A class that describes the reason for a validation failure.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/ProxyOnlyResource"
+        }
+      ],
+      "properties": {
+        "properties": {
+          "description": "VnetValidationFailureDetails resource specific properties",
+          "properties": {
+            "failed": {
+              "type": "boolean"
+            },
+            "failedTests": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/VnetValidationTestFailure"
+              }
+            }
+          },
+          "x-ms-client-flatten": true
+        }
+      }
+    },
+    "VnetValidationTestFailure": {
+      "description": "A class that describes a test that failed during NSG and UDR validation.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/ProxyOnlyResource"
+        }
+      ],
+      "properties": {
+        "properties": {
+          "description": "VnetValidationTestFailure resource specific properties",
+          "properties": {
+            "testName": {
+              "type": "string"
+            },
+            "details": {
               "type": "string"
             }
           },
