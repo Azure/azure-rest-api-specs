@@ -205,7 +205,7 @@ csharp:
   azure-arm: true
   license-header: MICROSOFT_MIT_NO_VERSION
   payload-flattening-threshold: 1
-  namespace: Microsoft.Azure.Batch
+  namespace: Microsoft.Azure.Batch.Protocol
   output-folder: $(csharp-sdks-folder)/Batch/DataPlane/Azure.Batch/GeneratedProtocol
   clear-output-folder: true
 ```
