@@ -1055,9 +1055,11 @@
           "description": "VnetValidationFailureDetails resource specific properties",
           "properties": {
             "failed": {
+              "description": "A flag describing whether or not validation failed.",
               "type": "boolean"
             },
             "failedTests": {
+              "description": "A list of tests that failed in the validation.",
               "type": "array",
               "items": {
                 "$ref": "#/definitions/VnetValidationTestFailure"
@@ -1081,9 +1083,11 @@
           "description": "VnetValidationTestFailure resource specific properties",
           "properties": {
             "testName": {
+              "description": "The name of the test that failed.",
               "type": "string"
             },
             "details": {
+              "description": "The details of what caused the failure, e.g. the blocking rule name, etc.",
               "type": "string"
             }
           },
