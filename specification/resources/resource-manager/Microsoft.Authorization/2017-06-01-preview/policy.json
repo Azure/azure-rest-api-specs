@@ -901,6 +901,22 @@
       },
       "description": "The policy assignment properties."
     },
+    "PolicySku": {
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "The name of the policy sku. Possible values are A0 and A1."
+        },
+        "tier": {
+          "type": "string",
+          "description": "The policy sku tier. Possible values are Free and Standard."
+        }
+      },
+      "required": [
+        "name"
+      ],
+      "description": "The policy sku."
+    },
     "PolicyAssignment": {
       "properties": {
         "properties": {
@@ -919,9 +935,13 @@
         "name": {
           "type": "string",
           "description": "The name of the policy assignment."
+        },
+        "sku": {
+          "$ref": "#/definitions/PolicySku",
+          "description": "The policy sku."
         }
       },
-      "description": "The policy definition.",
+      "description": "The policy assignment.",
       "x-ms-azure-resource": true
     },
     "PolicyAssignmentListResult": {
