@@ -1,0 +1,91 @@
+{
+  "parameters": {
+    "api-version": "2017-03-30", 
+    "subscriptionId": "<subscription-id>", 
+    "vmName": "<vm-name>", 
+    "resourceGroupName": "myRG"
+  }, 
+  "responses": {
+    "200": {
+      "body": {
+        "name": "<vm-name>", 
+        "properties": {
+          "osProfile": {
+            "adminUsername": "negat", 
+            "secrets": [], 
+            "computerName": "<vm-name>", 
+            "windowsConfiguration": {
+              "provisionVMAgent": true, 
+              "enableAutomaticUpdates": true
+            }
+          }, 
+          "networkProfile": {
+            "networkInterfaces": [
+              {
+                "id": "/subscriptions/<subscription-id>/resourceGroups/myRG/providers/Microsoft.Network/networkInterfaces/<network-interface-name>"
+              }
+            ]
+          }, 
+          "storageProfile": {
+            "imageReference": {
+              "sku": "2016-Datacenter", 
+              "publisher": "MicrosoftWindowsServer", 
+              "version": "latest", 
+              "offer": "WindowsServer"
+            }, 
+            "osDisk": {
+              "name": "<vm-os-disk-name>", 
+              "diskSizeGB": 127, 
+              "managedDisk": {
+                "storageAccountType": "Premium_LRS", 
+                "id": "/subscriptions/<subscription-id>/resourceGroups/myRG/providers/Microsoft.Compute/disks/<vm-os-disk-name>"
+              }, 
+              "caching": "ReadWrite", 
+              "createOption": "FromImage", 
+              "osType": "Windows"
+            }, 
+            "dataDisks": []
+          }, 
+          "vmId": "39b75775-cd35-48f3-95eb-35b46ceef155", 
+          "hardwareProfile": {
+            "vmSize": "Standard_DS2_v2"
+          }, 
+          "provisioningState": "Updating"
+        }, 
+        "location": "westus", 
+        "type": "Microsoft.Compute/virtualMachines", 
+        "id": "/subscriptions/<subscription-id>/resourceGroups/myRG/providers/Microsoft.Compute/virtualMachines/<vm-name>", 
+        "resources": [
+          {
+            "id": "/subscriptions/<subscription-id>/resourceGroups/myRG/providers/Microsoft.Compute/virtualMachines/<vm-name>/extensions/<vm-extension-name>", 
+            "type": "Microsoft.Compute/virtualMachines/extensions", 
+            "properties": {
+              "publisher": "Microsoft.Azure.Security", 
+              "settings": {
+                "ScheduledScanSettings": {
+                  "isEnabled": "false", 
+                  "scanType": "Quick", 
+                  "day": "7", 
+                  "time": "120"
+                }, 
+                "RealtimeProtectionEnabled": "true", 
+                "Exclusions": {
+                  "Paths": "", 
+                  "Processes": "", 
+                  "Extensions": ""
+                }, 
+                "AntimalwareEnabled": true
+              }, 
+              "typeHandlerVersion": "1.3", 
+              "autoUpgradeMinorVersion": true, 
+              "type": "<vm-extension-name>", 
+              "provisioningState": "Succeeded"
+            }, 
+            "name": "<vm-extension-name>", 
+            "location": "westus"
+          }
+        ]
+      }
+    }
+  }
+}

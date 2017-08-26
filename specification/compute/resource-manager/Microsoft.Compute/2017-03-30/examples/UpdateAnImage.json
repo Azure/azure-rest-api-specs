@@ -1,0 +1,35 @@
+{
+  "parameters": {
+    "api-version": "2017-03-30", 
+    "subscriptionId": "<subscription-id>", 
+    "imageName": "<image-name>", 
+    "resourceGroupName": "myRG"
+  }, 
+  "responses": {
+    "200": {
+      "body": {
+        "id": "/subscriptions/<subscription-id>/resourceGroups/myRG/providers/Microsoft.Compute/images/<image-name>", 
+        "type": "Microsoft.Compute/images", 
+        "properties": {
+          "storageProfile": {
+            "osDisk": {
+              "osType": "Linux", 
+              "caching": "ReadWrite", 
+              "osState": "Generalized", 
+              "managedDisk": {
+                "id": "/subscriptions/<subscription-id>/resourceGroups/myRG/providers/Microsoft.Compute/disks/<disk-name>"
+              }
+            }, 
+            "dataDisks": []
+          }, 
+          "provisioningState": "Succeeded", 
+          "sourceVirtualMachine": {
+            "id": "/subscriptions/<subscription-id>/resourceGroups/myRG/providers/Microsoft.Compute/virtualMachines/<image-name>"
+          }
+        }, 
+        "name": "<image-name>", 
+        "location": "westus"
+      }
+    }
+  }
+}

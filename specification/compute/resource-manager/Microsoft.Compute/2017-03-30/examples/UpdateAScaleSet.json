@@ -1,0 +1,89 @@
+{
+  "parameters": {
+    "api-version": "2017-03-30", 
+    "vmScaleSetName": "<scaleset-name>", 
+    "subscriptionId": "<subscription-id>", 
+    "resourceGroupName": "myRG"
+  }, 
+  "responses": {
+    "200": {
+      "body": {
+        "sku": {
+          "tier": "Standard", 
+          "capacity": 3, 
+          "name": "Standard_D1_v2"
+        }, 
+        "name": "<scaleset-name>", 
+        "properties": {
+          "singlePlacementGroup": true, 
+          "overprovision": true, 
+          "uniqueId": "35011493-59ca-4820-9e0e-362917d36180", 
+          "virtualMachineProfile": {
+            "storageProfile": {
+              "imageReference": {
+                "sku": "2016-Datacenter", 
+                "publisher": "MicrosoftWindowsServer", 
+                "version": "latest", 
+                "offer": "WindowsServer"
+              }, 
+              "osDisk": {
+                "caching": "ReadWrite", 
+                "managedDisk": {
+                  "storageAccountType": "Standard_LRS"
+                }, 
+                "createOption": "FromImage"
+              }
+            }, 
+            "diagnosticsProfile": {
+              "bootDiagnostics": {
+                "storageUri": "<diagnostics-storage-account-uri>", 
+                "enabled": true
+              }
+            }, 
+            "osProfile": {
+              "computerNamePrefix": "<scaleset-name>", 
+              "adminUsername": "negat", 
+              "secrets": [], 
+              "windowsConfiguration": {
+                "provisionVMAgent": true, 
+                "enableAutomaticUpdates": true
+              }
+            }, 
+            "networkProfile": {
+              "networkInterfaceConfigurations": [
+                {
+                  "name": "<scaleset-name>", 
+                  "properties": {
+                    "dnsSettings": {
+                      "dnsServers": []
+                    }, 
+                    "primary": true, 
+                    "ipConfigurations": [
+                      {
+                        "name": "<scaleset-name>", 
+                        "properties": {
+                          "subnet": {
+                            "id": "/subscriptions/<subscription-id>/resourceGroups/myRG/providers/Microsoft.Network/virtualNetworks/nsgExistingVnet/subnets/nsgExistingSubnet"
+                          }, 
+                          "privateIPAddressVersion": "IPv4"
+                        }
+                      }
+                    ], 
+                    "enableAcceleratedNetworking": false
+                  }
+                }
+              ]
+            }
+          }, 
+          "upgradePolicy": {
+            "mode": "Manual"
+          }, 
+          "provisioningState": "Updating"
+        }, 
+        "location": "westus", 
+        "type": "Microsoft.Compute/virtualMachineScaleSets", 
+        "id": "/subscriptions/<subscription-id>/resourceGroups/myRG/providers/Microsoft.Compute/virtualMachineScaleSets/<scaleset-name>"
+      }
+    }
+  }
+}
