@@ -2,6 +2,7 @@
     "swagger": "2.0",
     "info": {
         "description": "Scale unit node operation endpoints and objects.",
+        "title": "FabricAdminClient",
         "version": "2016-05-01"
     },
     "host": "adminmanagement.local.azurestack.external",
@@ -45,7 +46,7 @@
                     "202": {
                         "description": "ACCEPTED",
                         "x-ms-headers": {
-                            "$ref" : "Fabric.json#/definitions/OperationStatusLocation"
+                            "$ref": "Fabric.json#/definitions/OperationStatusLocation"
                         }
                     }
                 }
@@ -81,7 +82,7 @@
                     "202": {
                         "description": "ACCEPTED",
                         "x-ms-headers": {
-                            "$ref" : "Fabric.json#/definitions/OperationStatusLocation"
+                            "$ref": "Fabric.json#/definitions/OperationStatusLocation"
                         }
                     }
                 }
@@ -117,7 +118,7 @@
                     "202": {
                         "description": "ACCEPTED",
                         "x-ms-headers": {
-                            "$ref" : "Fabric.json#/definitions/OperationStatusLocation"
+                            "$ref": "Fabric.json#/definitions/OperationStatusLocation"
                         }
                     }
                 }
@@ -153,7 +154,7 @@
                     "202": {
                         "description": "ACCEPTED",
                         "x-ms-headers": {
-                            "$ref" : "Fabric.json#/definitions/OperationStatusLocation"
+                            "$ref": "Fabric.json#/definitions/OperationStatusLocation"
                         }
                     }
                 }
@@ -218,7 +219,7 @@
                         "$ref": "fabric.json#/parameters/ApiVersionParameter"
                     },
                     {
-                        "$ref": "#/parameters/FilterParameter"
+                        "$ref": "fabric.json#/parameters/FilterParameter"
                     }
                 ],
                 "responses": {
@@ -316,9 +317,13 @@
                     "description": "Bios version of the physical machine.",
                     "type": "string"
                 },
-                "capacity": {
+                "macAddress": {
                     "description": "MacAddress of the physical machine.",
-                    "$ref": "#/definitions/ScaleUnitCapacity"
+                    "type" : "string"
+                },
+                "capacity": {
+                    "description": "Capacity of the physical machine.",
+                    "$ref": "ScaleUnit.json#/definitions/ScaleUnitCapacity"
                 }
             }
         },
@@ -350,22 +355,22 @@
             "x-ms-parameter-location": "method"
         }
     },
- "securityDefinitions": {
-  "azure_auth": {
-   "type": "oauth2",
-   "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
-   "flow": "implicit",
-   "description": "Azure Active Directory OAuth2 Flow",
-   "scopes": {
-    "user_impersonation": "impersonate your user account"
-   }
-  }
- },
- "security": [
-  {
-   "azure_auth": [
-    "user_impersonation"
-   ]
-  }
- ]
+    "securityDefinitions": {
+        "azure_auth": {
+            "type": "oauth2",
+            "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
+            "flow": "implicit",
+            "description": "Azure Active Directory OAuth2 Flow",
+            "scopes": {
+                "user_impersonation": "impersonate your user account"
+            }
+        }
+    },
+    "security": [
+        {
+            "azure_auth": [
+                "user_impersonation"
+            ]
+        }
+    ]
 }

@@ -74,33 +74,6 @@
    },
    "x-ms-azure-resource": true
   },
-  "MarkupElementType": {
-   "type": "string",
-   "description": "The type of MarkupElement",
-   "enum": [
-    "Text",
-    "NewLine",
-    "LinkBegin",
-    "LinkEnd"
-   ],
-   "x-ms-enum": {
-    "name": "MarkupElementType",
-    "modelAsString": true
-   }
-  },
-  "MarkupElement": {
-   "description": "A markup element.",
-   "properties": {
-    "text": {
-     "description": "Value of the MarkupElement",
-     "type": "string"
-    },
-    "type": {
-     "description": "Type of the MarkupElement",
-     "$ref": "#/definitions/MarkupElementType"
-    }
-   }
-  },
   "AlertSummary": {
    "description": "Summary of the alerts.",
    "properties": {
@@ -168,11 +141,11 @@
    "enum": [
     "One",
     "Percentage",
-    "Byte",
-    "KiloByte",
-    "MegaByte",
-    "GigaByte",
-    "TeraByte"
+    "B",
+    "KB",
+    "MB",
+    "GB",
+    "TB"
    ],
    "x-ms-enum": {
     "name": "MetricsUnit",
@@ -227,6 +200,7 @@
    "description": "Location name.",
    "name": "location",
    "in": "path",
+   "required": true,
    "type": "string",
    "x-ms-parameter-location": "method"
   },

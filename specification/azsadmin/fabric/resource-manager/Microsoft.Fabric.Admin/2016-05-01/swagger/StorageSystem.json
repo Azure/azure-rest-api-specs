@@ -2,6 +2,7 @@
     "swagger": "2.0",
     "info": {
         "description": "Storage system operation endpoints and objects.",
+        "title": "FabricAdminClient",
         "version": "2016-05-01"
     },
     "host": "adminmanagement.local.azurestack.external",
@@ -54,7 +55,7 @@
         "/subscriptions/{subscriptionId}/resourceGroups/System.{location}/providers/Microsoft.Fabric.Admin/fabricLocations/{location}/storageSubSystems": {
             "get": {
                 "x-ms-examples": {
-                    "List allstorage systems": {
+                    "List all storage systems": {
                         "$ref": "./examples/StorageSystem/StorageSystemListOperation_example.json"
                     }
                 },
@@ -74,7 +75,7 @@
                         "$ref": "fabric.json#/parameters/ApiVersionParameter"
                     },
                     {
-                        "$ref": "#/parameters/FilterParameter"
+                        "$ref": "fabric.json#/parameters/FilterParameter"
                     }
                 ],
                 "responses": {
@@ -148,22 +149,22 @@
             "x-ms-parameter-location": "method"
         }
     },
- "securityDefinitions": {
-  "azure_auth": {
-   "type": "oauth2",
-   "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
-   "flow": "implicit",
-   "description": "Azure Active Directory OAuth2 Flow",
-   "scopes": {
-    "user_impersonation": "impersonate your user account"
-   }
-  }
- },
- "security": [
-  {
-   "azure_auth": [
-    "user_impersonation"
-   ]
-  }
- ]
+    "securityDefinitions": {
+        "azure_auth": {
+            "type": "oauth2",
+            "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
+            "flow": "implicit",
+            "description": "Azure Active Directory OAuth2 Flow",
+            "scopes": {
+                "user_impersonation": "impersonate your user account"
+            }
+        }
+    },
+    "security": [
+        {
+            "azure_auth": [
+                "user_impersonation"
+            ]
+        }
+    ]
 }

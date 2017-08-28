@@ -2,6 +2,7 @@
     "swagger": "2.0",
     "info": {
         "description": "Resource health operation endpoints and objects.",
+        "title": "InfrastructureInsightsManagementClient",
         "version": "2016-05-01"
     },
     "host": "adminmanagement.local.azurestack.external",
@@ -12,7 +13,9 @@
         "/subscriptions/{subscriptionId}/resourceGroups/System.{location}/providers/Microsoft.InfrastructureInsights.Admin/regionHealths/{location}/serviceHealths/{serviceRegistrationId}/resourceHealths": {
             "get": {
                 "x-ms-examples": {
-                    "Get a list of resource health items": "./examples/ResourceHealth/ResourceHealthsListOperation_example.json"
+                    "Get a list of resource health items": {
+                        "$ref": "./examples/ResourceHealth/ResourceHealthListOperation_example.json"
+                    }
                 },
                 "tags": [
                     "Resources"
@@ -59,7 +62,9 @@
         "/subscriptions/{subscriptionId}/resourceGroups/System.{location}/providers/Microsoft.InfrastructureInsights.Admin/regionHealths/{location}/serviceHealths/{serviceRegistrationId}/resourceHealths/{resourceRegistrationId}": {
             "get": {
                 "x-ms-examples": {
-                    "Get health information about a resource": "./examples/Resources/ResourceGetOperation_example.json"
+                    "Get health information about a resource": {
+                        "$ref": "./examples/ResourceHealth/ResourceHealthGetOperation_example.json"
+                    }
                 },
                 "tags": [
                     "Resources"

@@ -2,6 +2,7 @@
     "swagger": "2.0",
     "info": {
         "description": "Region health operation endpoints and objects.",
+        "title": "InfrastructureInsightsManagementClient",
         "version": "2016-05-01"
     },
     "host": "adminmanagement.local.azurestack.external",
@@ -12,7 +13,9 @@
         "/subscriptions/{subscriptionId}/resourceGroups/System.{location}/providers/Microsoft.InfrastructureInsights.Admin/regionHealths": {
             "get": {
                 "x-ms-examples": {
-                    "Get the list of all health items for the region": "./examples/RegionHealths/RegionHealthsListOperation_example.json"
+                    "Get the list of all health items for the region": {
+                        "$ref": "./examples/RegionHealth/RegionHealthListOperation_example.json"
+                    }
                 },
                 "tags": [
                     "RegionHealths"
@@ -56,7 +59,9 @@
         "/subscriptions/{subscriptionId}/resourceGroups/System.{location}/providers/Microsoft.InfrastructureInsights.Admin/regionHealths/{region}": {
             "get": {
                 "x-ms-examples": {
-                    "Get the health status of a region": "./examples/RegionHealths/RegionHealthsGetOperation_example.json"
+                    "Get the health status of a region": {
+                        "$ref": "./examples/RegionHealth/RegionHealthGetOperation_example.json"
+                    }
                 },
                 "tags": [
                     "RegionHealths"

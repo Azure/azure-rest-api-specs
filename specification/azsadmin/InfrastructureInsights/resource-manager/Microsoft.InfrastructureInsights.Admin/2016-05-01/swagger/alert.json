@@ -2,6 +2,7 @@
     "swagger": "2.0",
     "info": {
         "description": "Alert operation endpoints and objects.",
+        "title": "InfrastructureInsightsManagementClient",
         "version": "2016-05-01"
     },
     "host": "adminmanagement.local.azurestack.external",
@@ -12,7 +13,9 @@
         "/subscriptions/{subscriptionId}/resourceGroups/System.{location}/providers/Microsoft.InfrastructureInsights.Admin/regionHealths/{location}/alerts": {
             "get": {
                 "x-ms-examples": {
-                    "List all alerts": "./examples/Alert/AlertListOperation_example.json"
+                    "List all alerts": {
+                        "$ref": "./examples/Alert/AlertListOperation_example.json"
+                    }
                 },
                 "tags": [
                     "Alerts"
@@ -56,7 +59,9 @@
         "/subscriptions/{subscriptionId}/resourceGroups/System.{location}/providers/Microsoft.InfrastructureInsights.Admin/regionHealths/{location}/alerts/{alertName}": {
             "get": {
                 "x-ms-examples": {
-                    "Get an alert": "./examples/Alert/AlertGetOperation_example.json"
+                    "Get an alert": {
+                        "$ref": "./examples/Alert/AlertGetOperation_example.json"
+                    }
                 },
                 "tags": [
                     "Alerts"
@@ -94,7 +99,9 @@
             },
             "put": {
                 "x-ms-examples": {
-                    "Close an alert": "./examples/Alert/AlertCloseOperation_example.json"
+                    "Close an alert": {
+                        "$ref": "./examples/Alert/AlertCloseOperation_example.json"
+                    }
                 },
                 "tags": [
                     "Alerts"
@@ -167,9 +174,9 @@
                 },
                 "description": {
                     "description": "Gets or sets the description of the alert.",
-                    "type": "array",
-                    "items": {
-                        "$ref": "infrastructureinsights.json#/definitions/MarkupElement"
+                    "type": "object",
+                    "additionalProperties": {
+                        "type": "string"
                     }
                 },
                 "faultId": {
@@ -197,9 +204,9 @@
                 },
                 "remediation": {
                     "description": "Gets or sets the admin friendly remediation instructions for the alert.",
-                    "type": "array",
-                    "items": {
-                        "$ref": "infrastructureinsights.json#/definitions/MarkupElement"
+                    "type": "object",
+                    "additionalProperties": {
+                        "type": "string"
                     }
                 },
                 "resourceRegistrationId": {

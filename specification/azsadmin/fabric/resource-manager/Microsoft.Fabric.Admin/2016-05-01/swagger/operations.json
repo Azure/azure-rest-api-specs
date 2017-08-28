@@ -2,6 +2,7 @@
     "swagger": "2.0",
     "info": {
         "description": "Operation status operation endpoints and objects.",
+        "title": "FabricAdminClient",
         "version": "2016-05-01"
     },
     "host": "adminmanagement.local.azurestack.external",
@@ -11,9 +12,6 @@
     "paths": {
         "/subscriptions/{subscriptionId}/resourceGroups/System.{location}/providers/{provider}/fabricLocations/{location}/computeOperationResults/{computeOperationResult}": {
             "get": {
-                "x-ms-examples": {
-                    "Get a compute fabric operation status": "examples/Operations/ComputeFabricGet_example.json"
-                },
                 "tags": [
                     "ComputeFabricOperations"
                 ],
@@ -54,9 +52,6 @@
         },
         "/subscriptions/{subscriptionId}/resourceGroups/System.{location}/providers/{provider}/fabricLocations/{location}/networkOperationResults/{networkOperationResult}": {
             "get": {
-                "x-ms-examples": {
-                    "Get a network fabric operation status": "examples/Operations/NetworkFabricGet_example.json"
-                },
                 "tags": [
                     "NetworkFabricOperations"
                 ],
@@ -101,19 +96,19 @@
             "description": "Status of the compute operation.",
             "properties": {
                 "properties": {
-                    "description" : "The state of the operation.",
+                    "description": "The state of the operation.",
                     "x-ms-client-flatten": true,
-                    "$ref" : "#/definitions/ProvisioningState"
+                    "$ref": "#/definitions/ProvisioningState"
                 }
             }
         },
-        "ProvisioningState" : {
-            "description" : "The state of the operation.",
-            "properties" : {
-                "provisioningState" : {
-                    "description" : "The state of the operation.",
-                    "x-ms-client-name" : "provisioningState",
-                    "type" : "string"
+        "ProvisioningState": {
+            "description": "The state of the operation.",
+            "properties": {
+                "provisioningState": {
+                    "description": "The state of the operation.",
+                    "x-ms-client-name": "provisioningState",
+                    "type": "string"
                 }
             }
         }
@@ -160,22 +155,22 @@
             "x-ms-parameter-location": "method"
         }
     },
- "securityDefinitions": {
-  "azure_auth": {
-   "type": "oauth2",
-   "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
-   "flow": "implicit",
-   "description": "Azure Active Directory OAuth2 Flow",
-   "scopes": {
-    "user_impersonation": "impersonate your user account"
-   }
-  }
- },
- "security": [
-  {
-   "azure_auth": [
-    "user_impersonation"
-   ]
-  }
- ]
+    "securityDefinitions": {
+        "azure_auth": {
+            "type": "oauth2",
+            "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
+            "flow": "implicit",
+            "description": "Azure Active Directory OAuth2 Flow",
+            "scopes": {
+                "user_impersonation": "impersonate your user account"
+            }
+        }
+    },
+    "security": [
+        {
+            "azure_auth": [
+                "user_impersonation"
+            ]
+        }
+    ]
 }

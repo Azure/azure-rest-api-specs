@@ -2,6 +2,7 @@
     "swagger": "2.0",
     "info": {
         "description": "Service health operation endpoints and objects.",
+        "title": "InfrastructureInsightsManagementClient",
         "version": "2016-05-01"
     },
     "host": "adminmanagement.local.azurestack.external",
@@ -12,7 +13,9 @@
         "/subscriptions/{subscriptionId}/resourceGroups/System.{location}/providers/Microsoft.InfrastructureInsights.Admin/regionHealths/{location}/serviceHealths": {
             "get": {
                 "x-ms-examples": {
-                    "List all services health": "./examples/ServiceHealth/ServiceHealthListOperation_example.json"
+                    "List all services health": {
+                        "$ref": "./examples/ServiceHealth/ServiceHealthListOperation_example.json"
+                    }
                 },
                 "tags": [
                     "ServiceHealths"
@@ -56,7 +59,9 @@
         "/subscriptions/{subscriptionId}/resourceGroups/System.{location}/providers/Microsoft.InfrastructureInsights.Admin/regionHealths/{location}/serviceHealths/{serviceHealth}": {
             "get": {
                 "x-ms-examples": {
-                    "Get a services health": "./examples/ServiceHealth/ServiceHealthGetOperation_example.json"
+                    "Get a services health": {
+                        "$ref": "./examples/ServiceHealth/ServiceHealthGetOperation_example.json"
+                    }
                 },
                 "tags": [
                     "ServiceHealths"
@@ -79,6 +84,7 @@
                 ],
                 "responses": {
                     "200": {
+                        "description": "OK",
                         "schema": {
                             "$ref": "#/definitions/ServiceHealth"
                         }
@@ -105,7 +111,7 @@
             },
             "allOf": [
                 {
-                    "$ref": "#/definitions/Resource"
+                    "$ref": "infrastructureinsights.json#/definitions/Resource"
                 }
             ]
         },
@@ -158,22 +164,22 @@
             "x-ms-parameter-location": "method"
         }
     },
- "securityDefinitions": {
-  "azure_auth": {
-   "type": "oauth2",
-   "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
-   "flow": "implicit",
-   "description": "Azure Active Directory OAuth2 Flow",
-   "scopes": {
-    "user_impersonation": "impersonate your user account"
-   }
-  }
- },
- "security": [
-  {
-   "azure_auth": [
-    "user_impersonation"
-   ]
-  }
- ]
+    "securityDefinitions": {
+        "azure_auth": {
+            "type": "oauth2",
+            "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
+            "flow": "implicit",
+            "description": "Azure Active Directory OAuth2 Flow",
+            "scopes": {
+                "user_impersonation": "impersonate your user account"
+            }
+        }
+    },
+    "security": [
+        {
+            "azure_auth": [
+                "user_impersonation"
+            ]
+        }
+    ]
 }
