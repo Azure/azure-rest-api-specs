@@ -1,26 +1,31 @@
 {
   "parameters": {
-    "api-version": "2017-03-30", 
-    "subscriptionId": "<subscription-id>", 
-    "resourceGroupName": "myRG", 
+    "api-version": "2017-03-30",
+    "subscriptionId": "<subscription-id>",
+    "resourceGroupName": "myRG",
+    "parameters": {
+      "tags": {
+        "new_tag_key": "new_tag_value"
+      }
+    },
     "availabilitySetName": "<availability-set-name>"
-  }, 
+  },
   "responses": {
     "200": {
       "body": {
         "sku": {
           "name": "Classic"
-        }, 
-        "name": "<availability-set-name>", 
+        },
+        "name": "<availability-set-name>",
         "tags": {
           "new_tag_key": "new_tag_value"
-        }, 
+        },
         "properties": {
-          "platformFaultDomainCount": 2, 
+          "platformFaultDomainCount": 2,
           "platformUpdateDomainCount": 20
-        }, 
-        "location": "westus", 
-        "type": "Microsoft.Compute/availabilitySets", 
+        },
+        "location": "westus",
+        "type": "Microsoft.Compute/availabilitySets",
         "id": "/subscriptions/<subscription-id>/resourceGroups/myRG/providers/Microsoft.Compute/availabilitySets/<availability-set-name>"
       }
     }

@@ -1,40 +1,48 @@
 {
   "parameters": {
-    "api-version": "2017-03-30", 
-    "vmName": "<vm-name>", 
-    "subscriptionId": "<subscription-id>", 
-    "vmExtensionName": "<vm-extension-name>", 
-    "resourceGroupName": "myRG"
-  }, 
+    "vmExtensionName": "<vm-extension-name>",
+    "resourceGroupName": "myRG",
+    "api-version": "2017-03-30",
+    "subscriptionId": "<subscription-id>",
+    "vmName": "<vm-name>",
+    "parameters": {
+      "tags": {
+        "new_tag_key": "new_tag_value"
+      }
+    }
+  },
   "responses": {
     "200": {
       "body": {
-        "id": "/subscriptions/<subscription-id>/resourceGroups/myRG/providers/Microsoft.Compute/virtualMachines/<vm-name>/extensions/<vm-extension-name>", 
-        "type": "Microsoft.Compute/virtualMachines/extensions", 
+        "name": "<vm-extension-name>",
+        "tags": {
+          "new_tag_key": "new_tag_value"
+        },
         "properties": {
-          "publisher": "Microsoft.Azure.Security", 
+          "publisher": "Microsoft.Azure.Security",
           "settings": {
             "ScheduledScanSettings": {
-              "isEnabled": "false", 
-              "scanType": "Quick", 
-              "day": "7", 
+              "isEnabled": "false",
+              "scanType": "Quick",
+              "day": "7",
               "time": "120"
-            }, 
-            "RealtimeProtectionEnabled": "true", 
+            },
+            "RealtimeProtectionEnabled": "true",
             "Exclusions": {
-              "Paths": "", 
-              "Processes": "", 
+              "Paths": "",
+              "Processes": "",
               "Extensions": ""
-            }, 
+            },
             "AntimalwareEnabled": true
-          }, 
-          "typeHandlerVersion": "1.3", 
-          "autoUpgradeMinorVersion": true, 
-          "type": "<vm-extension-name>", 
+          },
+          "typeHandlerVersion": "1.3",
+          "autoUpgradeMinorVersion": true,
+          "type": "<vm-extension-name>",
           "provisioningState": "Updating"
-        }, 
-        "name": "<vm-extension-name>", 
-        "location": "westus"
+        },
+        "location": "westus",
+        "type": "Microsoft.Compute/virtualMachines/extensions",
+        "id": "/subscriptions/<subscription-id>/resourceGroups/myRG/providers/Microsoft.Compute/virtualMachines/<vm-name>/extensions/<vm-extension-name>"
       }
     }
   }

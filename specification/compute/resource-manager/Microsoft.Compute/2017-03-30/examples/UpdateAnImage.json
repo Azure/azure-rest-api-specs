@@ -1,34 +1,42 @@
 {
   "parameters": {
-    "api-version": "2017-03-30", 
-    "subscriptionId": "<subscription-id>", 
-    "imageName": "<image-name>", 
-    "resourceGroupName": "myRG"
-  }, 
+    "api-version": "2017-03-30",
+    "subscriptionId": "<subscription-id>",
+    "imageName": "<image-name>",
+    "resourceGroupName": "myRG",
+    "parameters": {
+      "tags": {
+        "new_tag_key": "new_tag_value"
+      }
+    }
+  },
   "responses": {
     "200": {
       "body": {
-        "id": "/subscriptions/<subscription-id>/resourceGroups/myRG/providers/Microsoft.Compute/images/<image-name>", 
-        "type": "Microsoft.Compute/images", 
+        "name": "<image-name>",
+        "tags": {
+          "new_tag_key": "new_tag_value"
+        },
         "properties": {
           "storageProfile": {
             "osDisk": {
-              "osType": "Linux", 
-              "caching": "ReadWrite", 
-              "osState": "Generalized", 
+              "osType": "Linux",
+              "caching": "ReadWrite",
+              "osState": "Generalized",
               "managedDisk": {
                 "id": "/subscriptions/<subscription-id>/resourceGroups/myRG/providers/Microsoft.Compute/disks/<disk-name>"
               }
-            }, 
+            },
             "dataDisks": []
-          }, 
-          "provisioningState": "Succeeded", 
+          },
+          "provisioningState": "Updating",
           "sourceVirtualMachine": {
             "id": "/subscriptions/<subscription-id>/resourceGroups/myRG/providers/Microsoft.Compute/virtualMachines/<image-name>"
           }
-        }, 
-        "name": "<image-name>", 
-        "location": "westus"
+        },
+        "location": "westus",
+        "type": "Microsoft.Compute/images",
+        "id": "/subscriptions/<subscription-id>/resourceGroups/myRG/providers/Microsoft.Compute/images/<image-name>"
       }
     }
   }
