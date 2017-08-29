@@ -41,7 +41,6 @@ input-file:
 - Microsoft.Sql/2014-04-01/backupLongTermRetentionPolicies.json
 - Microsoft.Sql/2014-04-01/backupLongTermRetentionVaults.json
 - Microsoft.Sql/2014-04-01/backups.json
-- Microsoft.Sql/2014-04-01/capabilities.json
 - Microsoft.Sql/2014-04-01/connectionPolicies.json
 - Microsoft.Sql/2014-04-01/databaseSecurityAlertPolicies.json
 - Microsoft.Sql/2014-04-01/dataMasking.json
@@ -56,6 +55,7 @@ input-file:
 - Microsoft.Sql/2014-04-01/sql.core.json
 - Microsoft.Sql/2014-04-01/usages.json
 - Microsoft.Sql/2015-05-01-preview/blobAuditingPolicies.json
+- Microsoft.Sql/2015-05-01/capabilities.json
 - Microsoft.Sql/2015-05-01-preview/encryptionProtectors.json
 - Microsoft.Sql/2015-05-01-preview/failoverGroups.json
 - Microsoft.Sql/2015-05-01-preview/operations.json
