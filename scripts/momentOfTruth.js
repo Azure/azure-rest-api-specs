@@ -139,8 +139,9 @@ async function runScript() {
     for (const configFile of configsToProcess) {
         await runTools(configFile, 'after');
     }
-    execSync(`${gitCheckoutCmd}`, { encoding: 'utf8' });
-    execSync(`${gitLogCmd}`, { encoding: 'utf8' });
+
+    utils.checkoutTargetBranch();
+
     for (const configFile of configsToProcess) {
         await runTools(configFile, 'before');
     }

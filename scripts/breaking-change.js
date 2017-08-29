@@ -37,7 +37,16 @@ function runOad(oldSpec, newSpec) {
   console.log(`New Spec: "${newSpec}"`);
   console.log(`>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>`);
 
-  return Promise.resolve(oad.compare(oldSpec, newSpec, { consoleLogLevel: 'warn', json: true }));
+  return oad.compare(oldSpec, newSpec, { consoleLogLevel: 'warn', json: true }).then((result) => {
+    console.log(result);
+    if (result !== undefined && typeof result.valueOf() === 'string' && result.indexOf(`"type": "Error"`) > -1) {
+      console.log(`There are potential breaking changes in this PR. Please review before moving forward. Thanks!`);
+      process.exitCode = 1;
+    }
+    return Promise.resolve();
+  }).catch(err => {
+    console.log(err);
+  });
 }
 
 /**
@@ -99,8 +108,13 @@ async function runScript() {
   console.dir(resolvedMapForNewSpecs);
 
   for (const swagger of swaggersToProcess) {
-    let outputFileNameWithExt = path.basename(swagger);
+    // If file does not exists in the previous commits then we ignore it as it's new file
+    if (!fs.existsSync(swagger)) {
+      console.log(`File: "${swagger}" looks to be newly added in this PR.`);
+      continue;
+    }
 
+    let outputFileNameWithExt = path.basename(swagger);
     console.log(outputFileNameWithExt);
     if (resolvedMapForNewSpecs[outputFileNameWithExt]) {
       await runOad(swagger, resolvedMapForNewSpecs[outputFileNameWithExt]);
@@ -110,8 +124,9 @@ async function runScript() {
 
 // magic starts here
 runScript().then(success => {
-  process.exit(0);
+  console.log(`Thanks for using breaking change tool to review.`);
+  console.log(`If you encounter any issue(s), please open issue(s) at https://github.com/Azure/openapi-diff/issues .`);
 }).catch(err => {
   console.log(err);
-  process.exit(1);
+  process.exitCode = 1;
 })

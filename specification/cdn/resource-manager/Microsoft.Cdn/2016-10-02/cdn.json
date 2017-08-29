@@ -343,6 +343,47 @@
         }
       }
     },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Cdn/profiles/{profileName}/getSupportedOptimizationTypes": {
+      "post": {
+        "tags": [
+          "Profiles"
+        ],
+        "description": "Gets the supported optimization types for the current profile. A user can create an endpoint with an optimization type from the listed values.",
+        "operationId": "Profiles_GetSupportedOptimizationTypes",
+        "parameters": [
+          {
+            "$ref": "#/parameters/resourceGroupNameParameter"
+          },
+          {
+            "name": "profileName",
+            "in": "path",
+            "description": "Name of the CDN profile which is unique within the resource group.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "$ref": "#/parameters/subscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK. The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/SupportedOptimizationTypesResult"
+            }
+          },
+          "default": {
+            "description": "CDN error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        }
+      }
+    },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Cdn/profiles/{profileName}/checkResourceUsage": {
       "post": {
         "tags": [
@@ -1729,6 +1770,19 @@
         }
       }
     },
+    "SupportedOptimizationTypesResult": {
+      "description": "The result of the GetSupportedOptimizationTypes API",
+      "type": "object",
+      "properties": {
+        "supportedOptimizationTypes": {
+          "description": "Supported optimization types for a profile.",
+          "items": {
+            "$ref": "#/definitions/OptimizationType"
+          },
+          "type": "array"
+        }
+      }
+    },
     "Endpoint": {
       "description": "CDN endpoint is the entity within a CDN profile containing configuration information such as origin, protocol, content caching and delivery behavior. The CDN endpoint uses the URL format <endpointname>.azureedge.net.",
       "type": "object",
@@ -1861,7 +1915,7 @@
         },
         "optimizationType": {
           "description": "Customer can specify what scenario they want this CDN endpoint to optimize, e.g. Download, Media services. With this information we can apply scenario driven optimization.",
-          "type": "string"
+          "$ref": "#/definitions/OptimizationType"
         },
         "geoFilters": {
           "description": "List of rules defining user geo access within a CDN endpoint. Each geo filter defines an acess rule to a specified path or content, e.g. block APAC for path /pictures/",
@@ -2516,6 +2570,21 @@
         }
       },
       "type": "object"
+    },
+    "OptimizationType": {
+      "description": "Customer can specify what scenario they want this CDN endpoint to optimize, e.g. Download, Media services. With this information we can apply scenario driven optimization.",
+      "enum": [
+        "GeneralWebDelivery",
+        "GeneralMediaStreaming",
+        "VideoOnDemandMediaStreaming",
+        "LargeFileDownload",
+        "DynamicSiteAcceleration"
+      ],
+      "type": "string",
+      "x-ms-enum": {
+        "name": "OptimizationType",
+        "modelAsString": true
+      }
     },
     "ErrorResponse": {
       "description": "Error reponse indicates CDN service is not able to process the incoming request. The reason is provided in the error message.",
