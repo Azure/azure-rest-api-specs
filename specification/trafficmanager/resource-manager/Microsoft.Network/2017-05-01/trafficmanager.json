@@ -684,6 +684,110 @@
           }
         }
       }
+    },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.Network/realtimeUserMetricsKeyForTrafficManagement": {
+      "get": {
+        "tags": [
+          "RealtimeUserMetrics"
+        ],
+        "operationId": "RealtimeUserMetricsKeyForTrafficManagement_Get",
+        "description": "Get the subscription-level key used for Realtime User Metrics collection.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The subscription-level Traffic Manager Realtime User Metrics key.",
+            "schema": {
+              "$ref": "#/definitions/realtimeUserMetricsKeyForTrafficManagementModel" 
+            }
+          },
+          "204": {
+            "description": "There is no Realtime User Metrics key for this subscription."
+          },
+          "default": {
+            "description": "Default response. It will be deserialized as per the Error definition.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "RealtimeUserMetricsKeyForTrafficManagement-GET": {
+            "$ref": "./examples/realtimeUserMetricsKeyForTrafficManagement-GET.json"
+          }
+        }
+      },
+      "post": {
+        "tags": [
+          "RealtimeUserMetrics"
+        ],
+        "operationId": "RealtimeUserMetricsKeyForTrafficManagement_CreateOrUpdate",
+        "description": "Create or update a subscription-level key used for Realtime User Metrics collection.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": "A new subscription-level key has been created for Realtime User Metrics collection.",
+          },
+          "default": {
+            "description": "Default response. It will be deserialized as per the Error definition.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "RealtimeUserMetricsKeyForTrafficManagement-POST": {
+            "$ref": "./examples/RealtimeUserMetricsKeyForTrafficManagement-POST.json"
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "RealtimeUserMetrics"
+        ],
+        "operationId": "RealtimeUserMetricsKeyForTrafficManagement_Delete",
+        "description": "Deletes a subscription-level Traffic Manager Realtime User Metrics key.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The Traffic Manager Realtime User Metrics key was deleted successfully.",
+            "schema": {
+              "$ref": "#/definitions/DeleteOperationResult"
+            }
+          },
+          "default": {
+            "description": "Default response. It will be deserialized as per the Error definition.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "RealtimeUserMetricsKeyForTrafficManagement-DELETE": {
+            "$ref": "./examples/RealtimeUserMetricsKeyForTrafficManagement-DELETE.json"
+          }
+        }
+      }
     }
   },
   "definitions": {
