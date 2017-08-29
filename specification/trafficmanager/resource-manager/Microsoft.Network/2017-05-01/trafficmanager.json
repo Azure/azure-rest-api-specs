@@ -685,12 +685,12 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/providers/Microsoft.Network/realtimeUserMetricsKeyForTrafficManagement": {
+    "/subscriptions/{subscriptionId}/providers/Microsoft.Network/trafficManagerUserMetricsKey/default": {
       "get": {
         "tags": [
           "RealtimeUserMetrics"
         ],
-        "operationId": "RealtimeUserMetricsKeyForTrafficManagement_Get",
+        "operationId": "TrafficManagerUserMetricsKey_GetDefault",
         "description": "Get the subscription-level key used for Realtime User Metrics collection.",
         "parameters": [
           {
@@ -704,7 +704,7 @@
           "200": {
             "description": "The subscription-level Traffic Manager Realtime User Metrics key.",
             "schema": {
-              "$ref": "#/definitions/realtimeUserMetricsKeyForTrafficManagementModel" 
+              "$ref": "#/definitions/TrafficManagerUserMetricsKeyModel" 
             }
           },
           "204": {
@@ -718,16 +718,16 @@
           }
         },
         "x-ms-examples": {
-          "RealtimeUserMetricsKeyForTrafficManagement-GET": {
-            "$ref": "./examples/realtimeUserMetricsKeyForTrafficManagement-GET.json"
+          "TrafficManagerUserMetricsKey-GET-default": {
+            "$ref": "./examples/TrafficManagerUserMetricsKey-GET-default.json"
           }
         }
       },
-      "post": {
+      "put": {
         "tags": [
           "RealtimeUserMetrics"
         ],
-        "operationId": "RealtimeUserMetricsKeyForTrafficManagement_CreateOrUpdate",
+        "operationId": "TrafficManagerUserMetricsKey_CreateOrUpdate",
         "description": "Create or update a subscription-level key used for Realtime User Metrics collection.",
         "parameters": [
           {
@@ -749,8 +749,8 @@
           }
         },
         "x-ms-examples": {
-          "RealtimeUserMetricsKeyForTrafficManagement-POST": {
-            "$ref": "./examples/RealtimeUserMetricsKeyForTrafficManagement-POST.json"
+          "TrafficManagerUserMetricsKey-PUT": {
+            "$ref": "./examples/TrafficManagerUserMetricsKey-PUT.json"
           }
         }
       },
@@ -758,7 +758,7 @@
         "tags": [
           "RealtimeUserMetrics"
         ],
-        "operationId": "RealtimeUserMetricsKeyForTrafficManagement_Delete",
+        "operationId": "TrafficManagerUserMetricsKey_Delete",
         "description": "Deletes a subscription-level Traffic Manager Realtime User Metrics key.",
         "parameters": [
           {
@@ -783,8 +783,8 @@
           }
         },
         "x-ms-examples": {
-          "RealtimeUserMetricsKeyForTrafficManagement-DELETE": {
-            "$ref": "./examples/RealtimeUserMetricsKeyForTrafficManagement-DELETE.json"
+          "TrafficManagerUserMetricsKey-DELETE": {
+            "$ref": "./examples/TrafficManagerUserMetricsKey-DELETE.json"
           }
         }
       }
@@ -1211,7 +1211,7 @@
       "description": "The content of an error returned by the Azure Resource Manager",
       "x-ms-external": true
     },
-    "RealtimeUserMetricsKeyForTrafficManagementProperties": {
+    "TrafficManagerUserMetricsKeyProperties": {
       "properties": {
         "key": {
           "type" : "string",
@@ -1220,12 +1220,12 @@
       },
       "description": "Class representing the properties of a Real User Metrics key operation response."
     },
-    "realtimeUserMetricsKeyForTrafficManagementModel": {
+    "TrafficManagerUserMetricsKeyModel": {
       "properties": {
         "properties": {
           "x-ms-client-flatten": true,
-          "$ref": "#/definitions/RealtimeUserMetricsKeyForTrafficManagementProperties",
-          "description": "The key property returned from a RealtimeUserMetrics GET operation."
+          "$ref": "#/definitions/TrafficManagerUserMetricsKeyProperties",
+          "description": "The key property returned from a Realtime User Metrics GET operation."
         }
       },
       "allOf": [
