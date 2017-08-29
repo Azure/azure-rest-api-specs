@@ -1210,6 +1210,30 @@
       },
       "description": "The content of an error returned by the Azure Resource Manager",
       "x-ms-external": true
+    },
+    "RealtimeUserMetricsKeyForTrafficManagementProperties": {
+      "properties": {
+        "key": {
+          "type" : "string",
+          "description": "The key returned by the Realtime User Metrics operation."
+        }
+      },
+      "description": "Class representing the properties of a Real User Metrics key operation response."
+    },
+    "realtimeUserMetricsKeyForTrafficManagementModel": {
+      "properties": {
+        "properties": {
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/RealtimeUserMetricsKeyForTrafficManagementProperties",
+          "description": "The key property returned from a RealtimeUserMetrics GET operation."
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "#/definitions/ProxyResource"
+        }
+      ],
+      "description": "Class representing a Traffic Manager Real User Metrics key response."
     }
   },
   "parameters": {
