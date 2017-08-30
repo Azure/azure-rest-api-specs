@@ -433,6 +433,32 @@
           }
         }
       }
+    },
+    "/providers/Microsoft.DocumentDB/operations": {
+      "get": {
+        "tags": [
+            "Operations"
+        ],
+        "description": "Lists all of the available Cosmos DB Resource Provider operations.",
+        "operationId": "Operations_List",
+        "x-ms-examples": {
+          "CosmosDBOperationsList": { "$ref": "./examples/CosmosDBOperationsList.json" }
+        },
+        "parameters": [{
+            "$ref": "#/parameters/apiVersionParameter"
+        }],
+        "responses": {
+            "200": {
+                "description": "OK",
+                "schema": {
+                    "$ref": "#/definitions/OperationListResult"
+                }
+            }
+        },
+        "x-ms-pageable": {
+            "nextLinkName": "nextLink"
+        }
+      }
     }
   },
   "definitions": {
@@ -736,10 +762,7 @@
         "tags": {
           "$ref": "#/definitions/Tags"
         }
-      },
-      "required": [
-        "tags"
-      ]
+      }
     },
     "DatabaseAccountListReadOnlyKeysResult": {
       "description": "The read-only access keys for the given database account.",
@@ -851,6 +874,53 @@
     "IPRangeFilter": {
       "type": "string",
       "description": "Cosmos DB Firewall Support: This value specifies the set of IP addresses or IP address ranges in CIDR form to be included as the allowed list of client IPs for a given database account. IP addresses/ranges must be comma separated and must not contain any spaces."
+    },
+    "Operation": {
+      "description": "REST API operation",
+      "type": "object",
+      "properties": {
+        "name": {
+          "description": "Operation name: {provider}/{resource}/{operation}",
+          "type": "string"
+        },
+        "display": {
+          "description": "The object that represents the operation.",
+          "properties": {
+            "Provider": {
+              "description": "Service provider: Microsoft.ResourceProvider",
+              "type": "string"
+            },
+            "Resource": {
+              "description": "Resource on which the operation is performed: Profile, endpoint, etc.",
+              "type": "string"
+            },
+            "Operation": {
+              "description": "Operation type: Read, write, delete, etc.",
+              "type": "string"
+            },
+            "Description": {
+              "description": "Description of operation",
+              "type": "string"
+            }
+          }
+        }
+      }
+    },
+    "OperationListResult": {
+      "description": "Result of the request to list Resource Provider operations. It contains a list of operations and a URL link to get the next set of results.",
+      "properties": {
+        "value": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Operation"
+          },
+          "description": "List of operations supported by the Resource Provider."
+        },
+        "nextLink": {
+          "type": "string",
+          "description": "URL to get the next set of operation list results if there are any."
+        }
+      }
     }
   },
   "parameters": {
