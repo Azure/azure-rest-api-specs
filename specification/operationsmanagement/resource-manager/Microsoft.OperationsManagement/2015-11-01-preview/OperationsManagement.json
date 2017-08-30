@@ -72,7 +72,7 @@
                     "200": {
                         "description": "OK response definition.",
                         "schema": {
-                            "$ref": "#/definitions/SolutionOutput"
+                            "$ref": "#/definitions/Solution"
                         }
                     },
                     "default": {
@@ -239,7 +239,8 @@
                 }
             }
         },
-        "Operation": {           
+        "Operation": {
+            "description": "Supported operation of OperationsManagement resource provider.",      
             "properties": {
                 "name": {
                     "description": "Operation name: {provider}/{resource}/{operation}",
@@ -265,6 +266,7 @@
             }
         },
         "SolutionProperties": {
+            "description": "Solution properties supported by the OperationsManagement resource provider.",
             "properties": {
                 "workspaceResourceId": {
                     "type": "string",
@@ -305,6 +307,7 @@
           "description":"the list of solution response"
         },
         "SolutionPlan":{
+            "description": "Plan for solution object supported by the OperationsManagement resource provider.",
             "properties":{
                 "name":{
                   "type":"string",
@@ -325,21 +328,6 @@
             }
         },
         "Solution": {
-            "properties": {               
-                "location": {
-                    "type": "string",
-                    "description": "Resource location"
-                },
-                "plan":{                 
-                  "$ref":"#/definitions/SolutionPlan"                  
-                },
-                "properties": {                    
-                    "$ref": "#/definitions/SolutionProperties"                    
-                }               
-            },  
-            "description": "The container for solution."
-        },
-        "SolutionOutput": {
             "properties": {
                 "id": {
                     "readOnly": true,
@@ -360,10 +348,12 @@
                     "type": "string",
                     "description": "Resource location"
                 },
-                "plan":{                  
+                "plan":{
+                  "description": "Plan for solution object supported by the OperationsManagement resource provider.",               
                   "$ref":"#/definitions/SolutionPlan"
                 },
                 "properties": {
+                    "description": "Properties for solution object supported by the OperationsManagement resource provider.",   
                     "$ref": "#/definitions/SolutionProperties"                    
                 }   
             },  
