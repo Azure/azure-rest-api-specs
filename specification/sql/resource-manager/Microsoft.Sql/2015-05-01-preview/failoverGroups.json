@@ -214,7 +214,7 @@
             "description": "The failover group parameters.",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/FailoverGroup"
+              "$ref": "#/definitions/FailoverGroupUpdate"
             }
           },
           {
@@ -404,6 +404,10 @@
   "definitions": {
     "FailoverGroupProperties": {
       "description": "Properties of a failover group.",
+      "required": [
+        "readWriteEndpoint",
+        "partnerServers"
+      ],
       "type": "object",
       "properties": {
         "readWriteEndpoint": {
@@ -454,10 +458,13 @@
     },
     "FailoverGroupReadWriteEndpoint": {
       "description": "Read-write endpoint of the failover group instance.",
+      "required": [
+        "failoverPolicy"
+      ],
       "type": "object",
       "properties": {
         "failoverPolicy": {
-          "description": "Failover policy of the read-write endpoint for the failover group.",
+          "description": "Failover policy of the read-write endpoint for the failover group. If failoverPolicy is Automatic then failoverWithDataLossGracePeriodMinutes is required.",
           "enum": [
             "Manual",
             "Automatic"
@@ -470,7 +477,7 @@
         },
         "failoverWithDataLossGracePeriodMinutes": {
           "format": "int32",
-          "description": "Grace period before failover with data loss is attempted for the read-write endpoint.",
+          "description": "Grace period before failover with data loss is attempted for the read-write endpoint. If failoverPolicy is Automatic then failoverWithDataLossGracePeriodMinutes is required.",
           "type": "integer"
         }
       }
@@ -495,6 +502,9 @@
     },
     "PartnerInfo": {
       "description": "Partner server information for the failover group.",
+      "required": [
+        "id"
+      ],
       "type": "object",
       "properties": {
         "id": {
@@ -578,6 +588,45 @@
           "$ref": "#/definitions/FailoverGroupProperties",
           "description": "Resource properties.",
           "x-ms-client-flatten": true
+        }
+      }
+    },
+    "FailoverGroupUpdate": {
+      "description": "A failover group update request.",
+      "type": "object",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/FailoverGroupUpdateProperties",
+          "description": "Resource properties.",
+          "x-ms-client-flatten": true
+        },
+        "tags": {
+          "description": "Resource tags.",
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "FailoverGroupUpdateProperties": {
+      "description": "Properties of a failover group update.",
+      "type": "object",
+      "properties": {
+        "readWriteEndpoint": {
+          "$ref": "#/definitions/FailoverGroupReadWriteEndpoint",
+          "description": "Read-write endpoint of the failover group instance."
+        },
+        "readOnlyEndpoint": {
+          "$ref": "#/definitions/FailoverGroupReadOnlyEndpoint",
+          "description": "Read-only endpoint of the failover group instance."
+        },
+        "databases": {
+          "description": "List of databases in the failover group.",
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
         }
       }
     },

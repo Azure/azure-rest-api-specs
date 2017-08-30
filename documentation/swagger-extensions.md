@@ -26,7 +26,7 @@ The following documents describes AutoRest specific vendor extensions for [Swagg
 * [x-ms-request-id](#x-ms-request-id) - allows to overwrite the request id header name
 * [x-ms-client-request-id](#x-ms-client-request-id) - allows to overwrite the client request id header name
 
-##x-ms-code-generation-settings
+## x-ms-code-generation-settings
 `x-ms-code-generation-settings` extension on `info` element enables passing code generation settings via swagger document.
 
 **Parent element**: [Info Object](https://github.com/swagger-api/swagger-spec/blob/master/versions/2.0.md#infoObject)
@@ -106,7 +106,7 @@ modelAsString | `boolean` | **Default: false** When set to `true` the enum will 
   - Explanation: The above condition specifies that the server always expects the model property or the parameter and with a specific value. Hence, it makes sense to treat it as a constant. In the future, if more values are added to the enum then, it is a breaking change to the API provided by the client library.
 - If the **single value** enum is an **optional** model property or an **optional** parameter and if `x-ms-enum` extension is provided then it will be honoured.
 
-##x-ms-parameter-grouping
+## x-ms-parameter-grouping
 By default operation parameters are generated in the client as method arguments. This behavior can sometimes be undesirable when the number of parameters is high. `x-ms-parameter-grouping` extension is used to group multiple primitive parameters into a composite type to improve the API.
 
 **Parent element**: [Parameter Object](https://github.com/swagger-api/swagger-spec/blob/master/versions/2.0.md#parameterObject)

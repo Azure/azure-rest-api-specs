@@ -28,19 +28,21 @@ These are the global settings for the RecoveryServicesBackup API.
 title: Recovery Services Backup Client
 description: Open API 2.0 Specs for Azure RecoveryServices Backup service
 openapi-type: arm
-tag: package-2016-12
+tag: package-2017-07
+output-folder: ./
+csharp-sdks-folder: ./Generated/CSharp
 
-azure-arm: true
 license-header: MICROSOFT_MIT
 ```
 
 
-### Tag: package-2016-12
+### Tag: package-2017-07
 
-These settings apply only when `--tag=package-2016-12` is specified on the command line.
+These settings apply only when `--tag=package-2017-07` is specified on the command line.
 
-``` yaml $(tag) == 'package-2016-12'
+``` yaml $(tag) == 'package-2017-07'
 input-file:
+- Microsoft.RecoveryServices/2017-07-01/jobs.json
 - Microsoft.RecoveryServices/2016-12-01/backupManagement.json
 - Microsoft.RecoveryServices/2016-08-10/operations.json
 ```
@@ -82,7 +84,7 @@ These settings apply only when `--python` is specified on the command line.
 python:
   azure-arm: true
   namespace: azure.mgmt.recoveryservicesbackup
-  package-version: 0.1.0
+  package-version: 0.2.0
   output-folder: $(output-folder)Generated/Python
   payload-flattening-threshold: 2
   license-header: MICROSOFT_MIT_NO_VERSION

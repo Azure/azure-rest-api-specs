@@ -932,7 +932,7 @@
             "in": "path",
             "required": true,
             "type": "string",
-            "description": "The name of the resource group containing the rsources to move.",
+            "description": "The name of the resource group containing the resources to move.",
             "pattern": "^[-\\w\\._\\(\\)]+$",
             "minLength": 1,
             "maxLength": 90
@@ -959,6 +959,55 @@
           },
           "204": {
             "description": "No Content"
+          }
+        },
+        "x-ms-long-running-operation": true
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{sourceResourceGroupName}/validateMoveResources": {
+      "post": {
+        "tags": [
+          "Resources"
+        ],
+        "operationId": "Resources_ValidateMoveResources",
+        "summary": "Validates whether resources can be moved from one resource group to another resource group.",
+        "description": "This operation checks whether the specified resources can be moved to the target. The resources to move must be in the same source resource group. The target resource group may be in a different subscription. If validation succeeds, it returns HTTP response code 204 (no content). If validation fails, it returns HTTP response code 409 (Conflict) with an error message. Retrieve the URL in the Location header value to check the result of the long-running operation.",
+        "parameters": [
+          {
+            "name": "sourceResourceGroupName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the resource group containing the resources to validate for move.",
+            "pattern": "^[-\\w\\._\\(\\)]+$",
+            "minLength": 1,
+            "maxLength": 90
+          },
+          {
+            "name": "parameters",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/ResourcesMoveInfo"
+            },
+            "description": "Parameters for moving resources."
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "202": {
+            "description": "Accepted"
+          },
+          "204": {
+            "description": "No Content"
+          },
+          "409": {
+            "description": "Conflict"
           }
         },
         "x-ms-long-running-operation": true
