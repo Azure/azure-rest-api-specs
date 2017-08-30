@@ -24,16 +24,16 @@
                 "operationId": "RegionHealths_List",
                 "parameters": [
                     {
-                        "$ref": "infrastructureinsights.json#/parameters/SubscriptionIdParameter"
+                        "$ref": "InfrastructureInsights.json#/parameters/SubscriptionIdParameter"
                     },
                     {
-                        "$ref": "infrastructureinsights.json#/parameters/LocationParameter"
+                        "$ref": "InfrastructureInsights.json#/parameters/LocationParameter"
                     },
                     {
-                        "$ref": "infrastructureinsights.json#/parameters/ApiVersionParameter"
+                        "$ref": "InfrastructureInsights.json#/parameters/ApiVersionParameter"
                     },
                     {
-                        "$ref": "infrastructureinsights.json#/parameters/FilterParameter"
+                        "$ref": "InfrastructureInsights.json#/parameters/FilterParameter"
                     }
                 ],
                 "responses": {
@@ -70,16 +70,16 @@
                 "operationId": "RegionHealths_Get",
                 "parameters": [
                     {
-                        "$ref": "infrastructureinsights.json#/parameters/SubscriptionIdParameter"
+                        "$ref": "InfrastructureInsights.json#/parameters/SubscriptionIdParameter"
                     },
                     {
-                        "$ref": "infrastructureinsights.json#/parameters/LocationParameter"
+                        "$ref": "InfrastructureInsights.json#/parameters/LocationParameter"
                     },
                     {
                         "$ref": "#/parameters/RegionParameter"
                     },
                     {
-                        "$ref": "infrastructureinsights.json#/parameters/ApiVersionParameter"
+                        "$ref": "InfrastructureInsights.json#/parameters/ApiVersionParameter"
                     }
                 ],
                 "responses": {
@@ -111,7 +111,7 @@
             },
             "allOf": [
                 {
-                    "$ref": "infrastructureinsights.json#/definitions/Resource"
+                    "$ref": "InfrastructureInsights.json#/definitions/Resource"
                 }
             ]
         },
@@ -120,13 +120,13 @@
             "properties": {
                 "alertSummary": {
                     "description": "Summary of alerts.",
-                    "$ref": "infrastructureinsights.json#/definitions/AlertSummary"
+                    "$ref": "InfrastructureInsights.json#/definitions/AlertSummary"
                 },
                 "usageMetrics": {
                     "description": "List of usage metrics for this region.",
                     "type": "array",
                     "items": {
-                        "$ref": "infrastructureinsights.json#/definitions/UsageMetrics"
+                        "$ref": "InfrastructureInsights.json#/definitions/UsageMetrics"
                     }
                 }
             }
