@@ -25,16 +25,16 @@
         "operationId": "ScaleUnits_ScaleOut",
         "parameters": [
           {
-            "$ref": "fabric.json#/parameters/SubscriptionIdParameter"
+            "$ref": "Fabric.json#/parameters/SubscriptionIdParameter"
           },
           {
-            "$ref": "fabric.json#/parameters/LocationParameter"
+            "$ref": "Fabric.json#/parameters/LocationParameter"
           },
           {
             "$ref": "#/parameters/ScaleUnitParameter"
           },
           {
-            "$ref": "fabric.json#/parameters/ApiVersionParameter"
+            "$ref": "Fabric.json#/parameters/ApiVersionParameter"
           },
           {
             "$ref": "#/parameters/ServersToBeAddedParameter"
@@ -53,13 +53,14 @@
               "$ref": "operations.json#/definitions/ProvisioningState"
             }
           },
-          "default": {
-            "description": "DEFAULT",
+          "500": {
+            "description": "FAILURE",
             "schema": {
               "$ref": "operations.json#/definitions/ProvisioningState"
             }
           }
-        }
+        },
+        "x-ms-long-running-operation": true
       }
     },
     "/subscriptions/{subscriptionId}/resourceGroups/System.{location}/providers/Microsoft.Fabric.Admin/fabricLocations/{location}/scaleUnits/{scaleUnit}": {
@@ -76,16 +77,16 @@
         "operationId": "ScaleUnits_Get",
         "parameters": [
           {
-            "$ref": "fabric.json#/parameters/SubscriptionIdParameter"
+            "$ref": "Fabric.json#/parameters/SubscriptionIdParameter"
           },
           {
-            "$ref": "fabric.json#/parameters/LocationParameter"
+            "$ref": "Fabric.json#/parameters/LocationParameter"
           },
           {
             "$ref": "#/parameters/ScaleUnitParameter"
           },
           {
-            "$ref": "fabric.json#/parameters/ApiVersionParameter"
+            "$ref": "Fabric.json#/parameters/ApiVersionParameter"
           }
         ],
         "responses": {
@@ -112,16 +113,16 @@
         "operationId": "ScaleUnits_List",
         "parameters": [
           {
-            "$ref": "fabric.json#/parameters/SubscriptionIdParameter"
+            "$ref": "Fabric.json#/parameters/SubscriptionIdParameter"
           },
           {
-            "$ref": "fabric.json#/parameters/LocationParameter"
+            "$ref": "Fabric.json#/parameters/LocationParameter"
           },
           {
-            "$ref": "fabric.json#/parameters/ApiVersionParameter"
+            "$ref": "Fabric.json#/parameters/ApiVersionParameter"
           },
           {
-            "$ref": "fabric.json#/parameters/FilterParameter"
+            "$ref": "Fabric.json#/parameters/FilterParameter"
           }
         ],
         "responses": {
@@ -206,7 +207,7 @@
       },
       "allOf": [
         {
-          "$ref": "fabric.json#/definitions/Resource"
+          "$ref": "Fabric.json#/definitions/Resource"
         }
       ]
     },

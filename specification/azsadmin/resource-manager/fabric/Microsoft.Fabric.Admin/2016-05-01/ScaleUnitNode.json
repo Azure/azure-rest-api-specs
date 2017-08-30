@@ -30,16 +30,16 @@
                 "operationId": "ScaleUnitNodes_PowerOff",
                 "parameters": [
                     {
-                        "$ref": "fabric.json#/parameters/SubscriptionIdParameter"
+                        "$ref": "Fabric.json#/parameters/SubscriptionIdParameter"
                     },
                     {
-                        "$ref": "fabric.json#/parameters/LocationParameter"
+                        "$ref": "Fabric.json#/parameters/LocationParameter"
                     },
                     {
                         "$ref": "#/parameters/ScaleUnitNodeParameter"
                     },
                     {
-                        "$ref": "fabric.json#/parameters/ApiVersionParameter"
+                        "$ref": "Fabric.json#/parameters/ApiVersionParameter"
                     }
                 ],
                 "responses": {
@@ -55,13 +55,14 @@
                             "$ref": "operations.json#/definitions/ProvisioningState"
                         }
                     },
-                    "default": {
-                        "description": "DEFAULT",
+                    "500": {
+                        "description": "FAILURE",
                         "schema": {
                             "$ref": "operations.json#/definitions/ProvisioningState"
                         }
                     }
-                }
+                },
+                "x-ms-long-running-operation": true
             }
         },
         "/subscriptions/{subscriptionId}/resourceGroups/System.{location}/providers/Microsoft.Fabric.Admin/fabricLocations/{location}/scaleUnitNodes/{scaleUnitNode}/PowerOn": {
@@ -78,16 +79,16 @@
                 "operationId": "ScaleUnitNodes_PowerOn",
                 "parameters": [
                     {
-                        "$ref": "fabric.json#/parameters/SubscriptionIdParameter"
+                        "$ref": "Fabric.json#/parameters/SubscriptionIdParameter"
                     },
                     {
-                        "$ref": "fabric.json#/parameters/LocationParameter"
+                        "$ref": "Fabric.json#/parameters/LocationParameter"
                     },
                     {
                         "$ref": "#/parameters/ScaleUnitNodeParameter"
                     },
                     {
-                        "$ref": "fabric.json#/parameters/ApiVersionParameter"
+                        "$ref": "Fabric.json#/parameters/ApiVersionParameter"
                     }
                 ],
                 "responses": {
@@ -103,13 +104,14 @@
                             "$ref": "operations.json#/definitions/ProvisioningState"
                         }
                     },
-                    "default": {
-                        "description": "DEFAULT",
+                    "500": {
+                        "description": "FAILURE",
                         "schema": {
                             "$ref": "operations.json#/definitions/ProvisioningState"
                         }
                     }
-                }
+                },
+                "x-ms-long-running-operation": true
             }
         },
         "/subscriptions/{subscriptionId}/resourceGroups/System.{location}/providers/Microsoft.Fabric.Admin/fabricLocations/{location}/scaleUnitNodes/{scaleUnitNode}/StartMaintenanceMode": {
@@ -126,16 +128,16 @@
                 "operationId": "ScaleUnitNodes_StartMaintenanceMode",
                 "parameters": [
                     {
-                        "$ref": "fabric.json#/parameters/SubscriptionIdParameter"
+                        "$ref": "Fabric.json#/parameters/SubscriptionIdParameter"
                     },
                     {
-                        "$ref": "fabric.json#/parameters/LocationParameter"
+                        "$ref": "Fabric.json#/parameters/LocationParameter"
                     },
                     {
                         "$ref": "#/parameters/ScaleUnitNodeParameter"
                     },
                     {
-                        "$ref": "fabric.json#/parameters/ApiVersionParameter"
+                        "$ref": "Fabric.json#/parameters/ApiVersionParameter"
                     }
                 ],
                 "responses": {
@@ -151,13 +153,14 @@
                             "$ref": "operations.json#/definitions/ProvisioningState"
                         }
                     },
-                    "default": {
-                        "description": "DEFAULT",
+                    "500": {
+                        "description": "FAILURE",
                         "schema": {
                             "$ref": "operations.json#/definitions/ProvisioningState"
                         }
                     }
-                }
+                },
+                "x-ms-long-running-operation": true
             }
         },
         "/subscriptions/{subscriptionId}/resourceGroups/System.{location}/providers/Microsoft.Fabric.Admin/fabricLocations/{location}/scaleUnitNodes/{scaleUnitNode}/StopMaintenanceMode": {
@@ -174,16 +177,16 @@
                 "operationId": "ScaleUnitNodes_StopMaintenanceMode",
                 "parameters": [
                     {
-                        "$ref": "fabric.json#/parameters/SubscriptionIdParameter"
+                        "$ref": "Fabric.json#/parameters/SubscriptionIdParameter"
                     },
                     {
-                        "$ref": "fabric.json#/parameters/LocationParameter"
+                        "$ref": "Fabric.json#/parameters/LocationParameter"
                     },
                     {
                         "$ref": "#/parameters/ScaleUnitNodeParameter"
                     },
                     {
-                        "$ref": "fabric.json#/parameters/ApiVersionParameter"
+                        "$ref": "Fabric.json#/parameters/ApiVersionParameter"
                     }
                 ],
                 "responses": {
@@ -199,13 +202,14 @@
                             "$ref": "operations.json#/definitions/ProvisioningState"
                         }
                     },
-                    "default": {
-                        "description": "DEFAULT",
+                    "500": {
+                        "description": "FAILURE",
                         "schema": {
                             "$ref": "operations.json#/definitions/ProvisioningState"
                         }
                     }
-                }
+                },
+                "x-ms-long-running-operation": true
             }
         },
         "/subscriptions/{subscriptionId}/resourceGroups/System.{location}/providers/Microsoft.Fabric.Admin/fabricLocations/{location}/scaleUnitNodes/{scaleUnitNode}": {
@@ -222,16 +226,16 @@
                 "operationId": "ScaleUnitNodes_Get",
                 "parameters": [
                     {
-                        "$ref": "fabric.json#/parameters/SubscriptionIdParameter"
+                        "$ref": "Fabric.json#/parameters/SubscriptionIdParameter"
                     },
                     {
-                        "$ref": "fabric.json#/parameters/LocationParameter"
+                        "$ref": "Fabric.json#/parameters/LocationParameter"
                     },
                     {
                         "$ref": "#/parameters/ScaleUnitNodeParameter"
                     },
                     {
-                        "$ref": "fabric.json#/parameters/ApiVersionParameter"
+                        "$ref": "Fabric.json#/parameters/ApiVersionParameter"
                     }
                 ],
                 "responses": {
@@ -258,16 +262,16 @@
                 "operationId": "ScaleUnitNodes_List",
                 "parameters": [
                     {
-                        "$ref": "fabric.json#/parameters/SubscriptionIdParameter"
+                        "$ref": "Fabric.json#/parameters/SubscriptionIdParameter"
                     },
                     {
-                        "$ref": "fabric.json#/parameters/LocationParameter"
+                        "$ref": "Fabric.json#/parameters/LocationParameter"
                     },
                     {
-                        "$ref": "fabric.json#/parameters/ApiVersionParameter"
+                        "$ref": "Fabric.json#/parameters/ApiVersionParameter"
                     },
                     {
-                        "$ref": "fabric.json#/parameters/FilterParameter"
+                        "$ref": "Fabric.json#/parameters/FilterParameter"
                     }
                 ],
                 "responses": {
@@ -298,7 +302,7 @@
             },
             "allOf": [
                 {
-                    "$ref": "fabric.json#/definitions/Resource"
+                    "$ref": "Fabric.json#/definitions/Resource"
                 }
             ]
         },
