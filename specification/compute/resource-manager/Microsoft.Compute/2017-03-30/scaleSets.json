@@ -1,0 +1,2430 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "Scale Sets",
+    "description": "Scale Sets Management Client.",
+    "version": "2017-03-30"
+  },
+  "host": "management.azure.com",
+  "schemes": [
+    "https"
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "produces": [
+    "application/json"
+  ],
+  "security": [
+    {
+      "azure_auth": [
+        "user_impersonation"
+      ]
+    }
+  ],
+  "securityDefinitions": {
+    "azure_auth": {
+      "type": "oauth2",
+      "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
+      "flow": "implicit",
+      "description": "Azure Active Directory OAuth2 Flow",
+      "scopes": {
+        "user_impersonation": "impersonate your user account"
+      }
+    }
+  },
+  "paths": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/virtualMachineScaleSets/{vmScaleSetName}": {
+      "put": {
+        "tags": [
+          "VirtualMachineScaleSets"
+        ],
+        "operationId": "VirtualMachineScaleSets_CreateOrUpdate",
+        "description": "Create or update a VM scale set.",
+        "parameters": [
+          {
+            "name": "resourceGroupName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the resource group."
+          },
+          {
+            "name": "vmScaleSetName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the VM scale set to create or update."
+          },
+          {
+            "name": "parameters",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/VirtualMachineScaleSet"
+            },
+            "description": "The scale set object."
+          },
+          {
+            "$ref": "./compute.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "./compute.json#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/VirtualMachineScaleSet"
+            }
+          },
+          "201": {
+            "description": "Created",
+            "schema": {
+              "$ref": "#/definitions/VirtualMachineScaleSet"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Create a scale set with password authentication.": {
+            "$ref": "./examples/CreateAScaleSetWithPasswordAuthentication.json"
+          },
+          "Create a scale set with ssh authentication.": {
+            "$ref": "./examples/CreateAScaleSetWithSshAuthentication.json"
+          },
+          "Create a scale set with premium storage.": {
+            "$ref": "./examples/CreateAScaleSetWithPremiumStorage.json"
+          },
+          "Create a scale set with empty data disks on each vm.": {
+            "$ref": "./examples/CreateAScaleSetWithEmptyDataDisksOnEachVm.json"
+          },
+          "Create a scale set with an azure load balancer.": {
+            "$ref": "./examples/CreateAScaleSetWithAnAzureLoadBalancer.json"
+          },
+          "Create a scale set with an azure application gateway.": {
+            "$ref": "./examples/CreateAScaleSetWithAnAzureApplicationGateway.json"
+          },
+          "Create a scale set with a public ip address per vm.": {
+            "$ref": "./examples/CreateAScaleSetWithAPublicIpAddressPerVm.json"
+          },
+          "Create a scale set with boot diagnostics.": {
+            "$ref": "./examples/CreateAScaleSetWithBootDiagnostics.json"
+          },
+          "Create a scale set with a marketplace image plan.": {
+            "$ref": "./examples/CreateAScaleSetWithAMarketplaceImagePlan.json"
+          },
+          "Create a scale set from a custom image.": {
+            "$ref": "./examples/CreateAScaleSetFromACustomImage.json"
+          },
+          "Create a platform-image scale set with unmanaged os disks.": {
+            "$ref": "./examples/CreateAPlatformImageScaleSetWithUnmanagedOsDisks.json"
+          },
+          "Create a custom-image scale set from an unmanaged generalized os image.": {
+            "$ref": "./examples/CreateACustomImageScaleSetFromAnUnmanagedGeneralizedOsImage.json"
+          }
+        },
+        "x-ms-long-running-operation": true
+      },
+      "delete": {
+        "tags": [
+          "VirtualMachineScaleSets"
+        ],
+        "operationId": "VirtualMachineScaleSets_Delete",
+        "description": "Deletes a VM scale set.",
+        "parameters": [
+          {
+            "name": "resourceGroupName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the resource group."
+          },
+          {
+            "name": "vmScaleSetName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the VM scale set."
+          },
+          {
+            "$ref": "./compute.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "./compute.json#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "./compute.json#/definitions/OperationStatusResponse"
+            }
+          },
+          "202": {
+            "description": "Accepted"
+          },
+          "204": {
+            "description": "No Content"
+          }
+        },
+        "x-ms-long-running-operation": true
+      },
+      "get": {
+        "tags": [
+          "VirtualMachineScaleSets"
+        ],
+        "operationId": "VirtualMachineScaleSets_Get",
+        "description": "Display information about a virtual machine scale set.",
+        "parameters": [
+          {
+            "name": "resourceGroupName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the resource group."
+          },
+          {
+            "name": "vmScaleSetName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the VM scale set."
+          },
+          {
+            "$ref": "./compute.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "./compute.json#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/VirtualMachineScaleSet"
+            }
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/virtualMachineScaleSets/{vmScaleSetName}/deallocate": {
+      "post": {
+        "tags": [
+          "VirtualMachineScaleSets"
+        ],
+        "operationId": "VirtualMachineScaleSets_Deallocate",
+        "description": "Deallocates specific virtual machines in a VM scale set. Shuts down the virtual machines and releases the compute resources. You are not billed for the compute resources that this virtual machine scale set deallocates.",
+        "parameters": [
+          {
+            "name": "resourceGroupName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the resource group."
+          },
+          {
+            "name": "vmScaleSetName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the VM scale set."
+          },
+          {
+            "name": "vmInstanceIDs",
+            "in": "body",
+            "required": false,
+            "schema": {
+              "$ref": "#/definitions/VirtualMachineScaleSetVMInstanceIDs"
+            },
+            "description": "A list of virtual machine instance IDs from the VM scale set."
+          },
+          {
+            "$ref": "./compute.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "./compute.json#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "./compute.json#/definitions/OperationStatusResponse"
+            }
+          },
+          "202": {
+            "description": "Accepted"
+          }
+        },
+        "x-ms-long-running-operation": true
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/virtualMachineScaleSets/{vmScaleSetName}/delete": {
+      "post": {
+        "tags": [
+          "VirtualMachineScaleSets"
+        ],
+        "operationId": "VirtualMachineScaleSets_DeleteInstances",
+        "description": "Deletes virtual machines in a VM scale set.",
+        "parameters": [
+          {
+            "name": "resourceGroupName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the resource group."
+          },
+          {
+            "name": "vmScaleSetName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the VM scale set."
+          },
+          {
+            "name": "vmInstanceIDs",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/VirtualMachineScaleSetVMInstanceRequiredIDs"
+            },
+            "description": "A list of virtual machine instance IDs from the VM scale set."
+          },
+          {
+            "$ref": "./compute.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "./compute.json#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "./compute.json#/definitions/OperationStatusResponse"
+            }
+          },
+          "202": {
+            "description": "Accepted"
+          }
+        },
+        "x-ms-long-running-operation": true
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/virtualMachineScaleSets/{vmScaleSetName}/instanceView": {
+      "get": {
+        "tags": [
+          "VirtualMachineScaleSets"
+        ],
+        "operationId": "VirtualMachineScaleSets_GetInstanceView",
+        "description": "Gets the status of a VM scale set instance.",
+        "parameters": [
+          {
+            "name": "resourceGroupName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the resource group."
+          },
+          {
+            "name": "vmScaleSetName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the VM scale set."
+          },
+          {
+            "$ref": "./compute.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "./compute.json#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/VirtualMachineScaleSetInstanceView"
+            }
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/virtualMachineScaleSets": {
+      "get": {
+        "tags": [
+          "VirtualMachineScaleSets"
+        ],
+        "operationId": "VirtualMachineScaleSets_List",
+        "description": "Gets a list of all VM scale sets under a resource group.",
+        "parameters": [
+          {
+            "name": "resourceGroupName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the resource group."
+          },
+          {
+            "$ref": "./compute.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "./compute.json#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/VirtualMachineScaleSetListResult"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/virtualMachineScaleSets/{vmScaleSetName}/extensions/{vmssExtensionName}": {
+      "put": {
+        "tags": [
+          "VirtualMachineScaleSetExtensions"
+        ],
+        "operationId": "VirtualMachineScaleSetExtensions_CreateOrUpdate",
+        "description": "The operation to create or update an extension.",
+        "parameters": [
+          {
+            "name": "resourceGroupName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the resource group."
+          },
+          {
+            "name": "vmScaleSetName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the VM scale set where the extension should be create or updated."
+          },
+          {
+            "name": "vmssExtensionName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the VM scale set extension."
+          },
+          {
+            "name": "extensionParameters",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/VirtualMachineScaleSetExtension"
+            },
+            "description": "Parameters supplied to the Create VM scale set Extension operation."
+          },
+          {
+            "$ref": "./compute.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "./compute.json#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/VirtualMachineScaleSetExtension"
+            }
+          },
+          "201": {
+            "description": "Created",
+            "schema": {
+              "$ref": "#/definitions/VirtualMachineScaleSetExtension"
+            }
+          }
+        },
+        "x-ms-long-running-operation": true
+      },
+      "delete": {
+        "tags": [
+          "VirtualMachineScaleSetExtensions"
+        ],
+        "operationId": "VirtualMachineScaleSetExtensions_Delete",
+        "description": "The operation to delete the extension.",
+        "parameters": [
+          {
+            "name": "resourceGroupName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the resource group."
+          },
+          {
+            "name": "vmScaleSetName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the VM scale set where the extension should be deleted."
+          },
+          {
+            "name": "vmssExtensionName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the VM scale set extension."
+          },
+          {
+            "$ref": "./compute.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "./compute.json#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "./compute.json#/definitions/OperationStatusResponse"
+            }
+          },
+          "202": {
+            "description": "Accepted"
+          },
+          "204": {
+            "description": "No Content"
+          }
+        },
+        "x-ms-long-running-operation": true
+      },
+      "get": {
+        "tags": [
+          "VirtualMachineScaleSetExtensions"
+        ],
+        "operationId": "VirtualMachineScaleSetExtensions_Get",
+        "description": "The operation to get the extension.",
+        "parameters": [
+          {
+            "name": "resourceGroupName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the resource group."
+          },
+          {
+            "name": "vmScaleSetName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the VM scale set containing the extension."
+          },
+          {
+            "name": "vmssExtensionName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the VM scale set extension."
+          },
+          {
+            "name": "$expand",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "description": "The expand expression to apply on the operation."
+          },
+          {
+            "$ref": "./compute.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "./compute.json#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/VirtualMachineScaleSetExtension"
+            }
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/virtualMachineScaleSets/{vmScaleSetName}/extensions": {
+      "get": {
+        "tags": [
+          "VirtualMachineScaleSetExtensions"
+        ],
+        "operationId": "VirtualMachineScaleSetExtensions_List",
+        "description": "Gets a list of all extensions in a VM scale set.",
+        "parameters": [
+          {
+            "name": "resourceGroupName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the resource group."
+          },
+          {
+            "name": "vmScaleSetName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the VM scale set containing the extension."
+          },
+          {
+            "$ref": "./compute.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "./compute.json#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/VirtualMachineScaleSetExtensionListResult"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.Compute/virtualMachineScaleSets": {
+      "get": {
+        "tags": [
+          "VirtualMachineScaleSets"
+        ],
+        "operationId": "VirtualMachineScaleSets_ListAll",
+        "description": "Gets a list of all VM Scale Sets in the subscription, regardless of the associated resource group. Use nextLink property in the response to get the next page of VM Scale Sets. Do this till nextLink is not null to fetch all the VM Scale Sets.",
+        "parameters": [
+          {
+            "$ref": "./compute.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "./compute.json#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/VirtualMachineScaleSetListWithLinkResult"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/virtualMachineScaleSets/{vmScaleSetName}/skus": {
+      "get": {
+        "tags": [
+          "VirtualMachineScaleSets"
+        ],
+        "operationId": "VirtualMachineScaleSets_ListSkus",
+        "description": "Gets a list of SKUs available for your VM scale set, including the minimum and maximum VM instances allowed for each SKU.",
+        "parameters": [
+          {
+            "name": "resourceGroupName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the resource group."
+          },
+          {
+            "name": "vmScaleSetName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the VM scale set."
+          },
+          {
+            "$ref": "./compute.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "./compute.json#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/VirtualMachineScaleSetListSkusResult"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/virtualMachineScaleSets/{vmScaleSetName}/poweroff": {
+      "post": {
+        "tags": [
+          "VirtualMachineScaleSets"
+        ],
+        "operationId": "VirtualMachineScaleSets_PowerOff",
+        "description": "Power off (stop) one or more virtual machines in a VM scale set. Note that resources are still attached and you are getting charged for the resources. Instead, use deallocate to release resources and avoid charges.",
+        "parameters": [
+          {
+            "name": "resourceGroupName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the resource group."
+          },
+          {
+            "name": "vmScaleSetName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the VM scale set."
+          },
+          {
+            "name": "vmInstanceIDs",
+            "in": "body",
+            "required": false,
+            "schema": {
+              "$ref": "#/definitions/VirtualMachineScaleSetVMInstanceIDs"
+            },
+            "description": "A list of virtual machine instance IDs from the VM scale set."
+          },
+          {
+            "$ref": "./compute.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "./compute.json#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "./compute.json#/definitions/OperationStatusResponse"
+            }
+          },
+          "202": {
+            "description": "Accepted"
+          }
+        },
+        "x-ms-long-running-operation": true
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/virtualMachineScaleSets/{vmScaleSetName}/restart": {
+      "post": {
+        "tags": [
+          "VirtualMachineScaleSets"
+        ],
+        "operationId": "VirtualMachineScaleSets_Restart",
+        "description": "Restarts one or more virtual machines in a VM scale set.",
+        "parameters": [
+          {
+            "name": "resourceGroupName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the resource group."
+          },
+          {
+            "name": "vmScaleSetName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the VM scale set."
+          },
+          {
+            "name": "vmInstanceIDs",
+            "in": "body",
+            "required": false,
+            "schema": {
+              "$ref": "#/definitions/VirtualMachineScaleSetVMInstanceIDs"
+            },
+            "description": "A list of virtual machine instance IDs from the VM scale set."
+          },
+          {
+            "$ref": "./compute.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "./compute.json#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "./compute.json#/definitions/OperationStatusResponse"
+            }
+          },
+          "202": {
+            "description": "Accepted"
+          }
+        },
+        "x-ms-long-running-operation": true
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/virtualMachineScaleSets/{vmScaleSetName}/start": {
+      "post": {
+        "tags": [
+          "VirtualMachineScaleSets"
+        ],
+        "operationId": "VirtualMachineScaleSets_Start",
+        "description": "Starts one or more virtual machines in a VM scale set.",
+        "parameters": [
+          {
+            "name": "resourceGroupName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the resource group."
+          },
+          {
+            "name": "vmScaleSetName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the VM scale set."
+          },
+          {
+            "name": "vmInstanceIDs",
+            "in": "body",
+            "required": false,
+            "schema": {
+              "$ref": "#/definitions/VirtualMachineScaleSetVMInstanceIDs"
+            },
+            "description": "A list of virtual machine instance IDs from the VM scale set."
+          },
+          {
+            "$ref": "./compute.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "./compute.json#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "./compute.json#/definitions/OperationStatusResponse"
+            }
+          },
+          "202": {
+            "description": "Accepted"
+          }
+        },
+        "x-ms-long-running-operation": true
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/virtualMachineScaleSets/{vmScaleSetName}/manualupgrade": {
+      "post": {
+        "tags": [
+          "VirtualMachineScaleSets"
+        ],
+        "operationId": "VirtualMachineScaleSets_UpdateInstances",
+        "description": "Upgrades one or more virtual machines to the latest SKU set in the VM scale set model.",
+        "parameters": [
+          {
+            "name": "resourceGroupName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the resource group."
+          },
+          {
+            "name": "vmScaleSetName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the VM scale set."
+          },
+          {
+            "name": "vmInstanceIDs",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/VirtualMachineScaleSetVMInstanceRequiredIDs"
+            },
+            "description": "A list of virtual machine instance IDs from the VM scale set."
+          },
+          {
+            "$ref": "./compute.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "./compute.json#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "./compute.json#/definitions/OperationStatusResponse"
+            }
+          },
+          "202": {
+            "description": "Accepted"
+          }
+        },
+        "x-ms-long-running-operation": true
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/virtualMachineScaleSets/{vmScaleSetName}/reimage": {
+      "post": {
+        "tags": [
+          "VirtualMachineScaleSets"
+        ],
+        "operationId": "VirtualMachineScaleSets_Reimage",
+        "description": "Reimages (upgrade the operating system) one or more virtual machines in a VM scale set.",
+        "parameters": [
+          {
+            "name": "resourceGroupName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the resource group."
+          },
+          {
+            "name": "vmScaleSetName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the VM scale set."
+          },
+          {
+            "name": "vmInstanceIDs",
+            "in": "body",
+            "required": false,
+            "schema": {
+              "$ref": "#/definitions/VirtualMachineScaleSetVMInstanceIDs"
+            },
+            "description": "A list of virtual machine instance IDs from the VM scale set."
+          },
+          {
+            "$ref": "./compute.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "./compute.json#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "./compute.json#/definitions/OperationStatusResponse"
+            }
+          },
+          "202": {
+            "description": "Accepted"
+          }
+        },
+        "x-ms-long-running-operation": true
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/virtualMachineScaleSets/{vmScaleSetName}/reimageall": {
+      "post": {
+        "tags": [
+          "VirtualMachineScaleSets"
+        ],
+        "operationId": "VirtualMachineScaleSets_ReimageAll",
+        "description": "Reimages all the disks ( including data disks ) in the virtual machines in a VM scale set. This operation is only supported for managed disks.",
+        "parameters": [
+          {
+            "name": "resourceGroupName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the resource group."
+          },
+          {
+            "name": "vmScaleSetName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the VM scale set."
+          },
+          {
+            "name": "vmInstanceIDs",
+            "in": "body",
+            "required": false,
+            "schema": {
+              "$ref": "#/definitions/VirtualMachineScaleSetVMInstanceIDs"
+            },
+            "description": "A list of virtual machine instance IDs from the VM scale set."
+          },
+          {
+            "$ref": "./compute.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "./compute.json#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "./compute.json#/definitions/OperationStatusResponse"
+            }
+          },
+          "202": {
+            "description": "Accepted"
+          }
+        },
+        "x-ms-long-running-operation": true
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/virtualMachineScaleSets/{vmScaleSetName}/virtualmachines/{instanceId}/reimage": {
+      "post": {
+        "tags": [
+          "VirtualMachineScaleSetVMs"
+        ],
+        "operationId": "VirtualMachineScaleSetVMs_Reimage",
+        "description": "Reimages (upgrade the operating system) a specific virtual machine in a VM scale set.",
+        "parameters": [
+          {
+            "name": "resourceGroupName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the resource group."
+          },
+          {
+            "name": "vmScaleSetName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the VM scale set."
+          },
+          {
+            "name": "instanceId",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The instance ID of the virtual machine."
+          },
+          {
+            "$ref": "./compute.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "./compute.json#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "./compute.json#/definitions/OperationStatusResponse"
+            }
+          },
+          "202": {
+            "description": "Accepted"
+          }
+        },
+        "x-ms-long-running-operation": true
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/virtualMachineScaleSets/{vmScaleSetName}/virtualmachines/{instanceId}/reimageall": {
+      "post": {
+        "tags": [
+          "VirtualMachineScaleSetVMs"
+        ],
+        "operationId": "VirtualMachineScaleSetVMs_ReimageAll",
+        "description": "Allows you to re-image all the disks ( including data disks ) in the a VM scale set instance. This operation is only supported for managed disks.",
+        "parameters": [
+          {
+            "name": "resourceGroupName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the resource group."
+          },
+          {
+            "name": "vmScaleSetName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the VM scale set."
+          },
+          {
+            "name": "instanceId",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The instance ID of the virtual machine."
+          },
+          {
+            "$ref": "./compute.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "./compute.json#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "./compute.json#/definitions/OperationStatusResponse"
+            }
+          },
+          "202": {
+            "description": "Accepted"
+          }
+        },
+        "x-ms-long-running-operation": true
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/virtualMachineScaleSets/{vmScaleSetName}/virtualmachines/{instanceId}/deallocate": {
+      "post": {
+        "tags": [
+          "VirtualMachineScaleSetVMs"
+        ],
+        "operationId": "VirtualMachineScaleSetVMs_Deallocate",
+        "description": "Deallocates a specific virtual machine in a VM scale set. Shuts down the virtual machine and releases the compute resources it uses. You are not billed for the compute resources of this virtual machine once it is deallocated.",
+        "parameters": [
+          {
+            "name": "resourceGroupName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the resource group."
+          },
+          {
+            "name": "vmScaleSetName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the VM scale set."
+          },
+          {
+            "name": "instanceId",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The instance ID of the virtual machine."
+          },
+          {
+            "$ref": "./compute.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "./compute.json#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "./compute.json#/definitions/OperationStatusResponse"
+            }
+          },
+          "202": {
+            "description": "Accepted"
+          }
+        },
+        "x-ms-long-running-operation": true
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/virtualMachineScaleSets/{vmScaleSetName}/virtualmachines/{instanceId}": {
+      "delete": {
+        "tags": [
+          "VirtualMachineScaleSetVMs"
+        ],
+        "operationId": "VirtualMachineScaleSetVMs_Delete",
+        "description": "Deletes a virtual machine from a VM scale set.",
+        "parameters": [
+          {
+            "name": "resourceGroupName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the resource group."
+          },
+          {
+            "name": "vmScaleSetName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the VM scale set."
+          },
+          {
+            "name": "instanceId",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The instance ID of the virtual machine."
+          },
+          {
+            "$ref": "./compute.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "./compute.json#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "./compute.json#/definitions/OperationStatusResponse"
+            }
+          },
+          "202": {
+            "description": "Accepted"
+          },
+          "204": {
+            "description": "No Content"
+          }
+        },
+        "x-ms-long-running-operation": true
+      },
+      "get": {
+        "tags": [
+          "VirtualMachineScaleSetVMs"
+        ],
+        "operationId": "VirtualMachineScaleSetVMs_Get",
+        "description": "Gets a virtual machine from a VM scale set.",
+        "parameters": [
+          {
+            "name": "resourceGroupName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the resource group."
+          },
+          {
+            "name": "vmScaleSetName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the VM scale set."
+          },
+          {
+            "name": "instanceId",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The instance ID of the virtual machine."
+          },
+          {
+            "$ref": "./compute.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "./compute.json#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/VirtualMachineScaleSetVM"
+            }
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/virtualMachineScaleSets/{vmScaleSetName}/virtualmachines/{instanceId}/instanceView": {
+      "get": {
+        "tags": [
+          "VirtualMachineScaleSetVMs"
+        ],
+        "operationId": "VirtualMachineScaleSetVMs_GetInstanceView",
+        "description": "Gets the status of a virtual machine from a VM scale set.",
+        "parameters": [
+          {
+            "name": "resourceGroupName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the resource group."
+          },
+          {
+            "name": "vmScaleSetName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the VM scale set."
+          },
+          {
+            "name": "instanceId",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The instance ID of the virtual machine."
+          },
+          {
+            "$ref": "./compute.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "./compute.json#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/VirtualMachineScaleSetVMInstanceView"
+            }
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/virtualMachineScaleSets/{virtualMachineScaleSetName}/virtualMachines": {
+      "get": {
+        "tags": [
+          "VirtualMachineScaleSetVMs"
+        ],
+        "operationId": "VirtualMachineScaleSetVMs_List",
+        "description": "Gets a list of all virtual machines in a VM scale sets.",
+        "parameters": [
+          {
+            "name": "resourceGroupName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the resource group."
+          },
+          {
+            "name": "virtualMachineScaleSetName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the VM scale set."
+          },
+          {
+            "name": "$filter",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "description": "The filter to apply to the operation."
+          },
+          {
+            "name": "$select",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "description": "The list parameters."
+          },
+          {
+            "name": "$expand",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "description": "The expand expression to apply to the operation."
+          },
+          {
+            "$ref": "./compute.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "./compute.json#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/VirtualMachineScaleSetVMListResult"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        },
+        "x-ms-odata": "#/definitions/VirtualMachineScaleSetVM"
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/virtualMachineScaleSets/{vmScaleSetName}/virtualmachines/{instanceId}/poweroff": {
+      "post": {
+        "tags": [
+          "VirtualMachineScaleSetVMs"
+        ],
+        "operationId": "VirtualMachineScaleSetVMs_PowerOff",
+        "description": "Power off (stop) a virtual machine in a VM scale set. Note that resources are still attached and you are getting charged for the resources. Instead, use deallocate to release resources and avoid charges.",
+        "parameters": [
+          {
+            "name": "resourceGroupName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the resource group."
+          },
+          {
+            "name": "vmScaleSetName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the VM scale set."
+          },
+          {
+            "name": "instanceId",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The instance ID of the virtual machine."
+          },
+          {
+            "$ref": "./compute.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "./compute.json#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "./compute.json#/definitions/OperationStatusResponse"
+            }
+          },
+          "202": {
+            "description": "Accepted"
+          }
+        },
+        "x-ms-long-running-operation": true
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/virtualMachineScaleSets/{vmScaleSetName}/virtualmachines/{instanceId}/restart": {
+      "post": {
+        "tags": [
+          "VirtualMachineScaleSetVMs"
+        ],
+        "operationId": "VirtualMachineScaleSetVMs_Restart",
+        "description": "Restarts a virtual machine in a VM scale set.",
+        "parameters": [
+          {
+            "name": "resourceGroupName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the resource group."
+          },
+          {
+            "name": "vmScaleSetName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the VM scale set."
+          },
+          {
+            "name": "instanceId",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The instance ID of the virtual machine."
+          },
+          {
+            "$ref": "./compute.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "./compute.json#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "./compute.json#/definitions/OperationStatusResponse"
+            }
+          },
+          "202": {
+            "description": "Accepted"
+          }
+        },
+        "x-ms-long-running-operation": true
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/virtualMachineScaleSets/{vmScaleSetName}/virtualmachines/{instanceId}/start": {
+      "post": {
+        "tags": [
+          "VirtualMachineScaleSetVMs"
+        ],
+        "operationId": "VirtualMachineScaleSetVMs_Start",
+        "description": "Starts a virtual machine in a VM scale set.",
+        "parameters": [
+          {
+            "name": "resourceGroupName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the resource group."
+          },
+          {
+            "name": "vmScaleSetName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the VM scale set."
+          },
+          {
+            "name": "instanceId",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The instance ID of the virtual machine."
+          },
+          {
+            "$ref": "./compute.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "./compute.json#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "./compute.json#/definitions/OperationStatusResponse"
+            }
+          },
+          "202": {
+            "description": "Accepted"
+          }
+        },
+        "x-ms-long-running-operation": true
+      }
+    }
+  },
+  "definitions": {
+    "VirtualMachineScaleSet": {
+      "properties": {
+        "sku": {
+          "$ref": "./compute.json#/definitions/Sku",
+          "description": "The virtual machine scale set sku."
+        },
+        "plan": {
+          "$ref": "./compute.json#/definitions/Plan",
+          "description": "Specifies information about the marketplace image used to create the virtual machine. This element is only used for marketplace images. Before you can use a marketplace image from an API, you must enable the image for programmatic use.  In the Azure portal, find the marketplace image that you want to use and then click **Want to deploy programmatically, Get Started ->**. Enter any required information and then click **Save**."
+        },
+        "properties": {
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/VirtualMachineScaleSetProperties"
+        },
+        "identity": {
+          "$ref": "#/definitions/VirtualMachineScaleSetIdentity",
+          "description": "The identity of the virtual machine scale set, if configured."
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "./compute.json#/definitions/Resource"
+        }
+      ],
+      "description": "Describes a Virtual Machine Scale Set."
+    },
+    "VirtualMachineScaleSetProperties": {
+      "properties": {
+        "upgradePolicy": {
+          "$ref": "#/definitions/UpgradePolicy",
+          "description": "The upgrade policy."
+        },
+        "virtualMachineProfile": {
+          "$ref": "#/definitions/VirtualMachineScaleSetVMProfile",
+          "description": "The virtual machine profile."
+        },
+        "provisioningState": {
+          "readOnly": true,
+          "type": "string",
+          "description": "The provisioning state, which only appears in the response."
+        },
+        "overprovision": {
+          "type": "boolean",
+          "description": "Specifies whether the Virtual Machine Scale Set should be overprovisioned."
+        },
+        "uniqueId": {
+          "readOnly": true,
+          "type": "string",
+          "description": "Specifies the ID which uniquely identifies a Virtual Machine Scale Set."
+        },
+        "singlePlacementGroup": {
+          "type": "boolean",
+          "description": "When true this limits the scale set to a single placement group, of max size 100 virtual machines."
+        }
+      },
+      "description": "Describes the properties of a Virtual Machine Scale Set."
+    },
+    "UpgradePolicy": {
+      "properties": {
+        "mode": {
+          "type": "string",
+          "description": "Specifies the mode of an upgrade to virtual machines in the scale set.<br /><br /> Possible values are:<br /><br /> **Manual** - You  control the application of updates to virtual machines in the scale set. You do this by using the manualUpgrade action.<br /><br /> **Automatic** - All virtual machines in the scale set are  automatically updated at the same time.",
+          "enum": [
+            "Automatic",
+            "Manual"
+          ],
+          "x-ms-enum": {
+            "name": "UpgradeMode",
+            "modelAsString": false
+          }
+        }
+      },
+      "description": "Describes an upgrade policy - automatic or manual."
+    },
+    "VirtualMachineScaleSetVMProfile": {
+      "properties": {
+        "osProfile": {
+          "$ref": "#/definitions/VirtualMachineScaleSetOSProfile",
+          "description": "Specifies the operating system settings for the virtual machines in the scale set."
+        },
+        "storageProfile": {
+          "$ref": "#/definitions/VirtualMachineScaleSetStorageProfile",
+          "description": "Specifies the storage settings for the virtual machine disks."
+        },
+        "networkProfile": {
+          "$ref": "#/definitions/VirtualMachineScaleSetNetworkProfile",
+          "description": "Specifies properties of the network interfaces of the virtual machines in the scale set."
+        },
+        "diagnosticsProfile": {
+          "$ref": "./compute.json#/definitions/DiagnosticsProfile",
+          "description": "Specifies the boot diagnostic settings state. <br><br>Minimum api-version: 2015-06-15."
+        },
+        "extensionProfile": {
+          "$ref": "#/definitions/VirtualMachineScaleSetExtensionProfile",
+          "description": "Specifies a collection of settings for extensions installed on virtual machines in the scale set."
+        },
+        "licenseType": {
+          "type": "string",
+          "description": "Specifies that the image or disk that is being used was licensed on-premises. This element is only used for images that contain the Windows Server operating system. <br><br> Possible values are: <br><br> Windows_Client <br><br> Windows_Server <br><br> If this element is included in a request for an update, the value must match the initial value. This value cannot be updated. <br><br> For more information, see [Azure Hybrid Use Benefit for Windows Server](https://docs.microsoft.com/azure/virtual-machines/virtual-machines-windows-hybrid-use-benefit-licensing?toc=%2fazure%2fvirtual-machines%2fwindows%2ftoc.json) <br><br> Minimum api-version: 2015-06-15"
+        }
+      },
+      "description": "Describes a virtual machine scale set virtual machine profile."
+    },
+    "VirtualMachineScaleSetOSProfile": {
+      "properties": {
+        "computerNamePrefix": {
+          "type": "string",
+          "description": "Specifies the computer name prefix for all of the virtual machines in the scale set. Computer name prefixes must be 1 to 15 characters long."
+        },
+        "adminUsername": {
+          "type": "string",
+          "description": "Specifies the name of the administrator account. <br><br> **Windows-only restriction:** Cannot end in \".\" <br><br> **Disallowed values:** \"administrator\", \"admin\", \"user\", \"user1\", \"test\", \"user2\", \"test1\", \"user3\", \"admin1\", \"1\", \"123\", \"a\", \"actuser\", \"adm\", \"admin2\", \"aspnet\", \"backup\", \"console\", \"david\", \"guest\", \"john\", \"owner\", \"root\", \"server\", \"sql\", \"support\", \"support_388945a0\", \"sys\", \"test2\", \"test3\", \"user4\", \"user5\". <br><br> **Minimum-length (Linux):** 1  character <br><br> **Max-length (Linux):** 64 characters <br><br> **Max-length (Windows):** 20 characters  <br><br><li> For root access to the Linux VM, see [Using root privileges on Linux virtual machines in Azure](https://docs.microsoft.com/azure/virtual-machines/virtual-machines-linux-use-root-privileges?toc=%2fazure%2fvirtual-machines%2flinux%2ftoc.json)<br><li> For a list of built-in system users on Linux that should not be used in this field, see [Selecting User Names for Linux on Azure](https://docs.microsoft.com/azure/virtual-machines/virtual-machines-linux-usernames?toc=%2fazure%2fvirtual-machines%2flinux%2ftoc.json)"
+        },
+        "adminPassword": {
+          "type": "string",
+          "description": "Specifies the password of the administrator account. <br><br> **Minimum-length (Windows):** 8 characters <br><br> **Minimum-length (Linux):** 6 characters <br><br> **Max-length (Windows):** 123 characters <br><br> **Max-length (Linux):** 72 characters <br><br> **Complexity requirements:** 3 out of 4 conditions below need to be fulfilled <br> Has lower characters <br>Has upper characters <br> Has a digit <br> Has a special character (Regex match [\\W_]) <br><br> **Disallowed values:** \"abc@123\", \"P@$$w0rd\", \"P@ssw0rd\", \"P@ssword123\", \"Pa$$word\", \"pass@word1\", \"Password!\", \"Password1\", \"Password22\", \"iloveyou!\" <br><br> For resetting the password, see [How to reset the Remote Desktop service or its login password in a Windows VM](https://docs.microsoft.com/azure/virtual-machines/virtual-machines-windows-reset-rdp?toc=%2fazure%2fvirtual-machines%2fwindows%2ftoc.json) <br><br> For resetting root password, see [Manage users, SSH, and check or repair disks on Azure Linux VMs using the VMAccess Extension](https://docs.microsoft.com/azure/virtual-machines/virtual-machines-linux-using-vmaccess-extension?toc=%2fazure%2fvirtual-machines%2flinux%2ftoc.json#reset-root-password)"
+        },
+        "customData": {
+          "type": "string",
+          "description": "Specifies a base-64 encoded string of custom data. The base-64 encoded string is decoded to a binary array that is saved as a file on the Virtual Machine. The maximum length of the binary array is 65535 bytes. <br><br> For using cloud-init for your VM, see [Using cloud-init to customize a Linux VM during creation](https://docs.microsoft.com/azure/virtual-machines/virtual-machines-linux-using-cloud-init?toc=%2fazure%2fvirtual-machines%2flinux%2ftoc.json)"
+        },
+        "windowsConfiguration": {
+          "$ref": "./compute.json#/definitions/WindowsConfiguration",
+          "description": "Specifies Windows operating system settings on the virtual machine."
+        },
+        "linuxConfiguration": {
+          "$ref": "./compute.json#/definitions/LinuxConfiguration",
+          "description": "Specifies the Linux operating system settings on the virtual machine. <br><br>For a list of supported Linux distributions, see [Linux on Azure-Endorsed Distributions](https://docs.microsoft.com/azure/virtual-machines/virtual-machines-linux-endorsed-distros?toc=%2fazure%2fvirtual-machines%2flinux%2ftoc.json) <br><br> For running non-endorsed distributions, see [Information for Non-Endorsed Distributions](https://docs.microsoft.com/azure/virtual-machines/virtual-machines-linux-create-upload-generic?toc=%2fazure%2fvirtual-machines%2flinux%2ftoc.json)."
+        },
+        "secrets": {
+          "type": "array",
+          "items": {
+            "$ref": "./compute.json#/definitions/VaultSecretGroup"
+          },
+          "description": "Specifies set of certificates that should be installed onto the virtual machines in the scale set."
+        }
+      },
+      "description": "Describes a virtual machine scale set OS profile."
+    },
+    "VirtualMachineScaleSetStorageProfile": {
+      "properties": {
+        "imageReference": {
+          "$ref": "./compute.json#/definitions/ImageReference",
+          "description": "Specifies information about the image to use. You can specify information about platform images, marketplace images, or virtual machine images. This element is required when you want to use a platform image, marketplace image, or virtual machine image, but is not used in other creation operations."
+        },
+        "osDisk": {
+          "$ref": "#/definitions/VirtualMachineScaleSetOSDisk",
+          "description": "Specifies information about the operating system disk used by the virtual machines in the scale set. <br><br> For more information about disks, see [About disks and VHDs for Azure virtual machines](https://docs.microsoft.com/azure/virtual-machines/virtual-machines-windows-about-disks-vhds?toc=%2fazure%2fvirtual-machines%2fwindows%2ftoc.json)."
+        },
+        "dataDisks": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/VirtualMachineScaleSetDataDisk"
+          },
+          "description": "Specifies the parameters that are used to add data disks to the virtual machines in the scale set. <br><br> For more information about disks, see [About disks and VHDs for Azure virtual machines](https://docs.microsoft.com/azure/virtual-machines/virtual-machines-windows-about-disks-vhds?toc=%2fazure%2fvirtual-machines%2fwindows%2ftoc.json)."
+        }
+      },
+      "description": "Describes a virtual machine scale set storage profile."
+    },
+    "VirtualMachineScaleSetOSDisk": {
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "The disk name."
+        },
+        "caching": {
+          "$ref": "./compute.json#/definitions/Caching",
+          "description": "Specifies the caching requirements. <br><br> Possible values are: <br><br> **None** <br><br> **ReadOnly** <br><br> **ReadWrite** <br><br> Default: **None for Standard storage. ReadOnly for Premium storage**"
+        },
+        "createOption": {
+          "$ref": "./compute.json#/definitions/CreateOption",
+          "description": "Specifies how the virtual machines in the scale set should be created.<br><br> The only allowed value is: **FromImage** \\u2013 This value is used when you are using an image to create the virtual machine. If you are using a platform image, you also use the imageReference element described above. If you are using a marketplace image, you  also use the plan element previously described."
+        },
+        "osType": {
+          "type": "string",
+          "description": "This property allows you to specify the type of the OS that is included in the disk if creating a VM from user-image or a specialized VHD. <br><br> Possible values are: <br><br> **Windows** <br><br> **Linux**",
+          "enum": [
+            "Windows",
+            "Linux"
+          ],
+          "x-ms-enum": {
+            "name": "OperatingSystemTypes",
+            "modelAsString": false
+          }
+        },
+        "image": {
+          "$ref": "./compute.json#/definitions/VirtualHardDisk",
+          "description": "Specifies information about the unmanaged user image to base the scale set on."
+        },
+        "vhdContainers": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "description": "Specifies the container urls that are used to store operating system disks for the scale set."
+        },
+        "managedDisk": {
+          "description": "The managed disk parameters.",
+          "$ref": "#/definitions/VirtualMachineScaleSetManagedDiskParameters"
+        }
+      },
+      "required": [
+        "createOption"
+      ],
+      "description": "Describes a virtual machine scale set operating system disk."
+    },
+    "VirtualMachineScaleSetManagedDiskParameters": {
+      "properties": {
+        "storageAccountType": {
+          "$ref": "./compute.json#/definitions/StorageAccountType",
+          "description": "Specifies the storage account type for the managed disk. Possible values are: Standard_LRS or Premium_LRS."
+        }
+      },
+      "description": "Describes the parameters of a ScaleSet managed disk."
+    },
+    "VirtualMachineScaleSetDataDisk": {
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "The disk name."
+        },
+        "lun": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Specifies the logical unit number of the data disk. This value is used to identify data disks within the VM and therefore must be unique for each data disk attached to a VM."
+        },
+        "caching": {
+          "$ref": "./compute.json#/definitions/Caching",
+          "description": "Specifies the caching requirements. <br><br> Possible values are: <br><br> **None** <br><br> **ReadOnly** <br><br> **ReadWrite** <br><br> Default: **None for Standard storage. ReadOnly for Premium storage**"
+        },
+        "createOption": {
+          "$ref": "./compute.json#/definitions/CreateOption",
+          "description": "The create option."
+        },
+        "diskSizeGB": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Specifies the size of an empty data disk in gigabytes. This element can be used to overwrite the name of the disk in a virtual machine image. <br><br> This value cannot be larger than 1023 GB"
+        },
+        "managedDisk": {
+          "description": "The managed disk parameters.",
+          "$ref": "#/definitions/VirtualMachineScaleSetManagedDiskParameters"
+        }
+      },
+      "required": [
+        "lun",
+        "createOption"
+      ],
+      "description": "Describes a virtual machine scale set data disk."
+    },
+    "VirtualMachineScaleSetNetworkProfile": {
+      "properties": {
+        "networkInterfaceConfigurations": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/VirtualMachineScaleSetNetworkConfiguration"
+          },
+          "description": "The list of network configurations."
+        }
+      },
+      "description": "Describes a virtual machine scale set network profile."
+    },
+    "VirtualMachineScaleSetNetworkConfiguration": {
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "The network configuration name."
+        },
+        "properties": {
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/VirtualMachineScaleSetNetworkConfigurationProperties"
+        }
+      },
+      "required": [
+        "name"
+      ],
+      "allOf": [
+        {
+          "$ref": "./compute.json#/definitions/SubResource"
+        }
+      ],
+      "description": "Describes a virtual machine scale set network profile's network configurations."
+    },
+    "VirtualMachineScaleSetNetworkConfigurationProperties": {
+      "properties": {
+        "primary": {
+          "type": "boolean",
+          "description": "Specifies the primary network interface in case the virtual machine has more than 1 network interface."
+        },
+        "enableAcceleratedNetworking": {
+          "type": "boolean",
+          "description": "Specifies whether the network interface is accelerated networking-enabled."
+        },
+        "networkSecurityGroup": {
+          "$ref": "./compute.json#/definitions/SubResource",
+          "description": "The network security group."
+        },
+        "dnsSettings": {
+          "$ref": "#/definitions/VirtualMachineScaleSetNetworkConfigurationDnsSettings",
+          "description": "The dns settings to be applied on the network interfaces."
+        },
+        "ipConfigurations": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/VirtualMachineScaleSetIPConfiguration"
+          },
+          "description": "Specifies the IP configurations of the network interface."
+        }
+      },
+      "required": [
+        "ipConfigurations"
+      ],
+      "description": "Describes a virtual machine scale set network profile's IP configuration."
+    },
+    "VirtualMachineScaleSetNetworkConfigurationDnsSettings": {
+      "properties": {
+        "dnsServers": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "description": "List of DNS servers IP addresses"
+        }
+      },
+      "description": "Describes a virtual machines scale sets network configuration's DNS settings."
+    },
+    "VirtualMachineScaleSetIPConfiguration": {
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "The IP configuration name."
+        },
+        "properties": {
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/VirtualMachineScaleSetIPConfigurationProperties"
+        }
+      },
+      "required": [
+        "name"
+      ],
+      "allOf": [
+        {
+          "$ref": "./compute.json#/definitions/SubResource"
+        }
+      ],
+      "description": "Describes a virtual machine scale set network profile's IP configuration."
+    },
+    "VirtualMachineScaleSetIPConfigurationProperties": {
+      "properties": {
+        "subnet": {
+          "$ref": "#/definitions/ApiEntityReference",
+          "description": "Specifies the identifier of the subnet."
+        },
+        "primary": {
+          "type": "boolean",
+          "description": "Specifies the primary network interface in case the virtual machine has more than 1 network interface."
+        },
+        "publicIPAddressConfiguration": {
+          "$ref": "#/definitions/VirtualMachineScaleSetPublicIPAddressConfiguration",
+          "description": "The publicIPAddressConfiguration."
+        },
+        "privateIPAddressVersion": {
+          "type": "string",
+          "description": "Available from Api-Version 2017-03-30 onwards, it represents whether the specific ipconfiguration is IPv4 or IPv6. Default is taken as IPv4.  Possible values are: 'IPv4' and 'IPv6'.",
+          "enum": [
+            "IPv4",
+            "IPv6"
+          ],
+          "x-ms-enum": {
+            "name": "IPVersion",
+            "modelAsString": true
+          }
+        },
+        "applicationGatewayBackendAddressPools": {
+          "type": "array",
+          "items": {
+            "$ref": "./compute.json#/definitions/SubResource"
+          },
+          "description": "Specifies an array of references to backend address pools of application gateways. A scale set can reference backend address pools of multiple application gateways. Multiple scale sets cannot use the same application gateway."
+        },
+        "loadBalancerBackendAddressPools": {
+          "type": "array",
+          "items": {
+            "$ref": "./compute.json#/definitions/SubResource"
+          },
+          "description": "Specifies an array of references to backend address pools of load balancers. A scale set can reference backend address pools of one public and one internal load balancer. Multiple scale sets cannot use the same load balancer."
+        },
+        "loadBalancerInboundNatPools": {
+          "type": "array",
+          "items": {
+            "$ref": "./compute.json#/definitions/SubResource"
+          },
+          "description": "Specifies an array of references to inbound Nat pools of the load balancers. A scale set can reference inbound nat pools of one public and one internal load balancer. Multiple scale sets cannot use the same load balancer"
+        }
+      },
+      "description": "Describes a virtual machine scale set network profile's IP configuration properties."
+    },
+    "ApiEntityReference": {
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "The ARM resource id in the form of /subscriptions/{SubcriptionId}/resourceGroups/{ResourceGroupName}/..."
+        }
+      },
+      "description": "The API entity reference."
+    },
+    "VirtualMachineScaleSetPublicIPAddressConfiguration": {
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "The publicIP address configuration name."
+        },
+        "properties": {
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/VirtualMachineScaleSetPublicIPAddressConfigurationProperties"
+        }
+      },
+      "required": [
+        "name"
+      ],
+      "description": "Describes a virtual machines scale set IP Configuration's PublicIPAddress configuration"
+    },
+    "VirtualMachineScaleSetPublicIPAddressConfigurationProperties": {
+      "properties": {
+        "idleTimeoutInMinutes": {
+          "type": "integer",
+          "format": "int32",
+          "description": "The idle timeout of the public IP address."
+        },
+        "dnsSettings": {
+          "$ref": "#/definitions/VirtualMachineScaleSetPublicIPAddressConfigurationDnsSettings",
+          "description": "The dns settings to be applied on the publicIP addresses ."
+        }
+      },
+      "description": "Describes a virtual machines scale set IP Configuration's PublicIPAddress configuration"
+    },
+    "VirtualMachineScaleSetPublicIPAddressConfigurationDnsSettings": {
+      "properties": {
+        "domainNameLabel": {
+          "type": "string",
+          "description": "The Domain name label.The concatenation of the domain name label and vm index will be the domain name labels of the PublicIPAddress resources that will be created"
+        }
+      },
+      "required": [
+        "domainNameLabel"
+      ],
+      "description": "Describes a virtual machines scale sets network configuration's DNS settings."
+    },
+    "VirtualMachineScaleSetExtensionProfile": {
+      "properties": {
+        "extensions": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/VirtualMachineScaleSetExtension"
+          },
+          "description": "The virtual machine scale set child extension resources."
+        }
+      },
+      "description": "Describes a virtual machine scale set extension profile."
+    },
+    "VirtualMachineScaleSetExtension": {
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "The name of the extension."
+        },
+        "properties": {
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/VirtualMachineScaleSetExtensionProperties"
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "#/definitions/SubResourceReadOnly"
+        }
+      ],
+      "description": "Describes a Virtual Machine Scale Set Extension."
+    },
+    "VirtualMachineScaleSetExtensionProperties": {
+      "properties": {
+        "forceUpdateTag": {
+          "type": "string",
+          "description": "If a value is provided and is different from the previous value, the extension handler will be forced to update even if the extension configuration has not changed."
+        },
+        "publisher": {
+          "type": "string",
+          "description": "The name of the extension handler publisher."
+        },
+        "type": {
+          "type": "string",
+          "description": "Specifies the type of the extension; an example is \"CustomScriptExtension\"."
+        },
+        "typeHandlerVersion": {
+          "type": "string",
+          "description": "Specifies the version of the script handler."
+        },
+        "autoUpgradeMinorVersion": {
+          "type": "boolean",
+          "description": "Indicates whether the extension should use a newer minor version if one is available at deployment time. Once deployed, however, the extension will not upgrade minor versions unless redeployed, even with this property set to true."
+        },
+        "settings": {
+          "type": "object",
+          "description": "Json formatted public settings for the extension."
+        },
+        "protectedSettings": {
+          "type": "object",
+          "description": "The extension can contain either protectedSettings or protectedSettingsFromKeyVault or no protected settings at all."
+        },
+        "provisioningState": {
+          "readOnly": true,
+          "type": "string",
+          "description": "The provisioning state, which only appears in the response."
+        }
+      },
+      "description": "Describes the properties of a Virtual Machine Scale Set Extension."
+    },
+    "SubResourceReadOnly": {
+      "properties": {
+        "id": {
+          "readOnly": true,
+          "type": "string",
+          "description": "Resource Id"
+        }
+      },
+      "x-ms-azure-resource": true
+    },
+    "VirtualMachineScaleSetIdentity": {
+      "properties": {
+        "principalId": {
+          "readOnly": true,
+          "type": "string",
+          "description": "The principal id of virtual machine scale set identity."
+        },
+        "tenantId": {
+          "readOnly": true,
+          "type": "string",
+          "description": "The tenant id associated with the virtual machine scale set."
+        },
+        "type": {
+          "type": "string",
+          "description": "The type of identity used for the virtual machine. Currently, the only supported type is 'SystemAssigned', which implicitly creates an identity.",
+          "enum": [
+            "SystemAssigned"
+          ],
+          "x-ms-enum": {
+            "name": "ResourceIdentityType",
+            "modelAsString": false
+          }
+        }
+      },
+      "description": "Identity for the virtual machine scale set."
+    },
+    "VirtualMachineScaleSetVMInstanceIDs": {
+      "properties": {
+        "instanceIds": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "description": "The virtual machine scale set instance ids. Omitting the virtual machine scale set instance ids will result in the operation being performed on all virtual machines in the virtual machine scale set."
+        }
+      },
+      "description": "Specifies a list of virtual machine instance IDs from the VM scale set."
+    },
+    "VirtualMachineScaleSetVMInstanceRequiredIDs": {
+      "properties": {
+        "instanceIds": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "description": "The virtual machine scale set instance ids."
+        }
+      },
+      "required": [
+        "instanceIds"
+      ],
+      "description": "Specifies a list of virtual machine instance IDs from the VM scale set."
+    },
+    "VirtualMachineScaleSetInstanceView": {
+      "properties": {
+        "virtualMachine": {
+          "$ref": "#/definitions/VirtualMachineScaleSetInstanceViewStatusesSummary",
+          "readOnly": true,
+          "description": "The instance view status summary for the virtual machine scale set."
+        },
+        "extensions": {
+          "readOnly": true,
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/VirtualMachineScaleSetVMExtensionsSummary"
+          },
+          "description": "The extensions information."
+        },
+        "statuses": {
+          "type": "array",
+          "items": {
+            "$ref": "./compute.json#/definitions/InstanceViewStatus"
+          },
+          "description": "The resource status information."
+        }
+      },
+      "description": "The instance view of a virtual machine scale set."
+    },
+    "VirtualMachineScaleSetInstanceViewStatusesSummary": {
+      "properties": {
+        "statusesSummary": {
+          "readOnly": true,
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/VirtualMachineStatusCodeCount"
+          },
+          "description": "The extensions information."
+        }
+      },
+      "description": "Instance view statuses summary for virtual machines of a virtual machine scale set."
+    },
+    "VirtualMachineStatusCodeCount": {
+      "properties": {
+        "code": {
+          "readOnly": true,
+          "type": "string",
+          "description": "The instance view status code."
+        },
+        "count": {
+          "readOnly": true,
+          "type": "integer",
+          "format": "int32",
+          "description": "The number of instances having a particular status code."
+        }
+      },
+      "description": "The status code and count of the virtual machine scale set instance view status summary."
+    },
+    "VirtualMachineScaleSetVMExtensionsSummary": {
+      "properties": {
+        "name": {
+          "readOnly": true,
+          "type": "string",
+          "description": "The extension name."
+        },
+        "statusesSummary": {
+          "readOnly": true,
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/VirtualMachineStatusCodeCount"
+          },
+          "description": "The extensions information."
+        }
+      },
+      "description": "Extensions summary for virtual machines of a virtual machine scale set."
+    },
+    "VirtualMachineScaleSetListResult": {
+      "properties": {
+        "value": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/VirtualMachineScaleSet"
+          },
+          "description": "The list of virtual machine scale sets."
+        },
+        "nextLink": {
+          "type": "string",
+          "description": "The uri to fetch the next page of Virtual Machine Scale Sets. Call ListNext() with this to fetch the next page of VMSS."
+        }
+      },
+      "required": [
+        "value"
+      ],
+      "description": "The List Virtual Machine operation response."
+    },
+    "VirtualMachineScaleSetExtensionListResult": {
+      "properties": {
+        "value": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/VirtualMachineScaleSetExtension"
+          },
+          "description": "The list of VM scale set extensions."
+        },
+        "nextLink": {
+          "type": "string",
+          "description": "The uri to fetch the next page of VM scale set extensions. Call ListNext() with this to fetch the next page of VM scale set extensions."
+        }
+      },
+      "required": [
+        "value"
+      ],
+      "description": "The List VM scale set extension operation response."
+    },
+    "VirtualMachineScaleSetListWithLinkResult": {
+      "properties": {
+        "value": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/VirtualMachineScaleSet"
+          },
+          "description": "The list of virtual machine scale sets."
+        },
+        "nextLink": {
+          "type": "string",
+          "description": "The uri to fetch the next page of Virtual Machine Scale Sets. Call ListNext() with this to fetch the next page of Virtual Machine Scale Sets."
+        }
+      },
+      "required": [
+        "value"
+      ],
+      "description": "The List Virtual Machine operation response."
+    },
+    "VirtualMachineScaleSetListSkusResult": {
+      "properties": {
+        "value": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/VirtualMachineScaleSetSku"
+          },
+          "description": "The list of skus available for the virtual machine scale set."
+        },
+        "nextLink": {
+          "type": "string",
+          "description": "The uri to fetch the next page of Virtual Machine Scale Set Skus. Call ListNext() with this to fetch the next page of VMSS Skus."
+        }
+      },
+      "required": [
+        "value"
+      ],
+      "description": "The Virtual Machine Scale Set List Skus operation response."
+    },
+    "VirtualMachineScaleSetSku": {
+      "properties": {
+        "resourceType": {
+          "readOnly": true,
+          "type": "string",
+          "description": "The type of resource the sku applies to."
+        },
+        "sku": {
+          "$ref": "./compute.json#/definitions/Sku",
+          "readOnly": true,
+          "description": "The Sku."
+        },
+        "capacity": {
+          "$ref": "#/definitions/VirtualMachineScaleSetSkuCapacity",
+          "readOnly": true,
+          "description": "Specifies the number of virtual machines in the scale set."
+        }
+      },
+      "description": "Describes an available virtual machine scale set sku."
+    },
+    "VirtualMachineScaleSetSkuCapacity": {
+      "properties": {
+        "minimum": {
+          "readOnly": true,
+          "type": "integer",
+          "format": "int64",
+          "description": "The minimum capacity."
+        },
+        "maximum": {
+          "readOnly": true,
+          "type": "integer",
+          "format": "int64",
+          "description": "The maximum capacity that can be set."
+        },
+        "defaultCapacity": {
+          "readOnly": true,
+          "type": "integer",
+          "format": "int64",
+          "description": "The default capacity."
+        },
+        "scaleType": {
+          "readOnly": true,
+          "type": "string",
+          "description": "The scale type applicable to the sku.",
+          "enum": [
+            "Automatic",
+            "None"
+          ],
+          "x-ms-enum": {
+            "name": "VirtualMachineScaleSetSkuScaleType",
+            "modelAsString": false
+          }
+        }
+      },
+      "description": "Describes scaling information of a sku."
+    },
+    "VirtualMachineScaleSetVM": {
+      "properties": {
+        "instanceId": {
+          "readOnly": true,
+          "type": "string",
+          "description": "The virtual machine instance ID."
+        },
+        "sku": {
+          "$ref": "./compute.json#/definitions/Sku",
+          "readOnly": true,
+          "description": "The virtual machine SKU."
+        },
+        "properties": {
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/VirtualMachineScaleSetVMProperties"
+        },
+        "plan": {
+          "$ref": "./compute.json#/definitions/Plan",
+          "description": "Specifies information about the marketplace image used to create the virtual machine. This element is only used for marketplace images. Before you can use a marketplace image from an API, you must enable the image for programmatic use.  In the Azure portal, find the marketplace image that you want to use and then click **Want to deploy programmatically, Get Started ->**. Enter any required information and then click **Save**."
+        },
+        "resources": {
+          "readOnly": true,
+          "type": "array",
+          "items": {
+            "$ref": "./compute.json#/definitions/VirtualMachineExtension"
+          },
+          "description": "The virtual machine child extension resources."
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "./compute.json#/definitions/Resource"
+        }
+      ],
+      "description": "Describes a virtual machine scale set virtual machine."
+    },
+    "VirtualMachineScaleSetVMProperties": {
+      "properties": {
+        "latestModelApplied": {
+          "readOnly": true,
+          "type": "boolean",
+          "description": "Specifies whether the latest model has been applied to the virtual machine."
+        },
+        "vmId": {
+          "readOnly": true,
+          "type": "string",
+          "description": "Azure VM unique ID."
+        },
+        "instanceView": {
+          "$ref": "./compute.json#/definitions/VirtualMachineInstanceView",
+          "readOnly": true,
+          "description": "The virtual machine instance view."
+        },
+        "hardwareProfile": {
+          "$ref": "./compute.json#/definitions/HardwareProfile",
+          "description": "Specifies the hardware settings for the virtual machine."
+        },
+        "storageProfile": {
+          "$ref": "./compute.json#/definitions/StorageProfile",
+          "description": "Specifies the storage settings for the virtual machine disks."
+        },
+        "osProfile": {
+          "$ref": "./compute.json#/definitions/OSProfile",
+          "description": "Specifies the operating system settings for the virtual machine."
+        },
+        "networkProfile": {
+          "$ref": "./compute.json#/definitions/NetworkProfile",
+          "description": "Specifies the network interfaces of the virtual machine."
+        },
+        "diagnosticsProfile": {
+          "$ref": "./compute.json#/definitions/DiagnosticsProfile",
+          "description": "Specifies the boot diagnostic settings state. <br><br>Minimum api-version: 2015-06-15."
+        },
+        "availabilitySet": {
+          "$ref": "./compute.json#/definitions/SubResource",
+          "description": "Specifies information about the availability set that the virtual machine should be assigned to. Virtual machines specified in the same availability set are allocated to different nodes to maximize availability. For more information about availability sets, see [Manage the availability of virtual machines](https://docs.microsoft.com/azure/virtual-machines/virtual-machines-windows-manage-availability?toc=%2fazure%2fvirtual-machines%2fwindows%2ftoc.json). <br><br> For more information on Azure planned maintainance, see [Planned maintenance for virtual machines in Azure](https://docs.microsoft.com/azure/virtual-machines/virtual-machines-windows-planned-maintenance?toc=%2fazure%2fvirtual-machines%2fwindows%2ftoc.json) <br><br> Currently, a VM can only be added to availability set at creation time. An existing VM cannot be added to an availability set."
+        },
+        "provisioningState": {
+          "readOnly": true,
+          "type": "string",
+          "description": "The provisioning state, which only appears in the response."
+        },
+        "licenseType": {
+          "type": "string",
+          "description": "Specifies that the image or disk that is being used was licensed on-premises. This element is only used for images that contain the Windows Server operating system. <br><br> Possible values are: <br><br> Windows_Client <br><br> Windows_Server <br><br> If this element is included in a request for an update, the value must match the initial value. This value cannot be updated. <br><br> For more information, see [Azure Hybrid Use Benefit for Windows Server](https://docs.microsoft.com/azure/virtual-machines/virtual-machines-windows-hybrid-use-benefit-licensing?toc=%2fazure%2fvirtual-machines%2fwindows%2ftoc.json) <br><br> Minimum api-version: 2015-06-15"
+        }
+      },
+      "description": "Describes the properties of a virtual machine scale set virtual machine."
+    },
+    "VirtualMachineScaleSetVMInstanceView": {
+      "properties": {
+        "platformUpdateDomain": {
+          "type": "integer",
+          "format": "int32",
+          "description": "The Update Domain count."
+        },
+        "platformFaultDomain": {
+          "type": "integer",
+          "format": "int32",
+          "description": "The Fault Domain count."
+        },
+        "rdpThumbPrint": {
+          "type": "string",
+          "description": "The Remote desktop certificate thumbprint."
+        },
+        "vmAgent": {
+          "$ref": "./compute.json#/definitions/VirtualMachineAgentInstanceView",
+          "description": "The VM Agent running on the virtual machine."
+        },
+        "disks": {
+          "type": "array",
+          "items": {
+            "$ref": "./compute.json#/definitions/DiskInstanceView"
+          },
+          "description": "The disks information."
+        },
+        "extensions": {
+          "type": "array",
+          "items": {
+            "$ref": "./compute.json#/definitions/VirtualMachineExtensionInstanceView"
+          },
+          "description": "The extensions information."
+        },
+        "bootDiagnostics": {
+          "$ref": "./compute.json#/definitions/BootDiagnosticsInstanceView",
+          "description": "Boot Diagnostics is a debugging feature which allows you to view Console Output and Screenshot to diagnose VM status. <br><br> For Linux Virtual Machines, you can easily view the output of your console log. <br><br> For both Windows and Linux virtual machines, Azure also enables you to see a screenshot of the VM from the hypervisor."
+        },
+        "statuses": {
+          "type": "array",
+          "items": {
+            "$ref": "./compute.json#/definitions/InstanceViewStatus"
+          },
+          "description": "The resource status information."
+        },
+        "placementGroupId": {
+          "type": "string",
+          "description": "The placement group in which the VM is running. If the VM is deallocated it will not have a placementGroupId."
+        }
+      },
+      "description": "The instance view of a virtual machine scale set VM."
+    },
+    "VirtualMachineScaleSetVMListResult": {
+      "properties": {
+        "value": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/VirtualMachineScaleSetVM"
+          },
+          "description": "The list of virtual machine scale sets VMs."
+        },
+        "nextLink": {
+          "type": "string",
+          "description": "The uri to fetch the next page of Virtual Machine Scale Set VMs. Call ListNext() with this to fetch the next page of VMSS VMs"
+        }
+      },
+      "required": [
+        "value"
+      ],
+      "description": "The List Virtual Machine Scale Set VMs operation response."
+    }
+  }
+}

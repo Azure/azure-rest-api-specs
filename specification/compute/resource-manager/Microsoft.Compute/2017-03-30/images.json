@@ -1,0 +1,430 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "Images",
+    "description": "Images Management Client.",
+    "version": "2017-03-30"
+  },
+  "host": "management.azure.com",
+  "schemes": [
+    "https"
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "produces": [
+    "application/json"
+  ],
+  "security": [
+    {
+      "azure_auth": [
+        "user_impersonation"
+      ]
+    }
+  ],
+  "securityDefinitions": {
+    "azure_auth": {
+      "type": "oauth2",
+      "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
+      "flow": "implicit",
+      "description": "Azure Active Directory OAuth2 Flow",
+      "scopes": {
+        "user_impersonation": "impersonate your user account"
+      }
+    }
+  },
+  "paths": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/images/{imageName}": {
+      "put": {
+        "tags": [
+          "Images"
+        ],
+        "operationId": "Images_CreateOrUpdate",
+        "description": "Create or update an image.",
+        "parameters": [
+          {
+            "name": "resourceGroupName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the resource group."
+          },
+          {
+            "name": "imageName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the image."
+          },
+          {
+            "name": "parameters",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/Image"
+            },
+            "description": "Parameters supplied to the Create Image operation."
+          },
+          {
+            "$ref": "./compute.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "./compute.json#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/Image"
+            }
+          },
+          "201": {
+            "description": "Created",
+            "schema": {
+              "$ref": "#/definitions/Image"
+            }
+          }
+        },
+        "x-ms-long-running-operation": true
+      },
+      "delete": {
+        "tags": [
+          "Images"
+        ],
+        "operationId": "Images_Delete",
+        "description": "Deletes an Image.",
+        "parameters": [
+          {
+            "name": "resourceGroupName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the resource group."
+          },
+          {
+            "name": "imageName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the image."
+          },
+          {
+            "$ref": "./compute.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "./compute.json#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "./compute.json#/definitions/OperationStatusResponse"
+            }
+          },
+          "202": {
+            "description": "Accepted"
+          },
+          "204": {
+            "description": "No Content"
+          }
+        },
+        "x-ms-long-running-operation": true
+      },
+      "get": {
+        "tags": [
+          "Images"
+        ],
+        "operationId": "Images_Get",
+        "description": "Gets an image.",
+        "parameters": [
+          {
+            "name": "resourceGroupName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the resource group."
+          },
+          {
+            "name": "imageName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the image."
+          },
+          {
+            "name": "$expand",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "description": "The expand expression to apply on the operation."
+          },
+          {
+            "$ref": "./compute.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "./compute.json#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/Image"
+            }
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/images": {
+      "get": {
+        "tags": [
+          "Images"
+        ],
+        "operationId": "Images_ListByResourceGroup",
+        "description": "Gets the list of images under a resource group.",
+        "parameters": [
+          {
+            "name": "resourceGroupName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the resource group."
+          },
+          {
+            "$ref": "./compute.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "./compute.json#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/ImageListResult"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.Compute/images": {
+      "get": {
+        "tags": [
+          "Images"
+        ],
+        "operationId": "Images_List",
+        "description": "Gets the list of Images in the subscription. Use nextLink property in the response to get the next page of Images. Do this till nextLink is not null to fetch all the Images.",
+        "parameters": [
+          {
+            "$ref": "./compute.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "./compute.json#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/ImageListResult"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    }
+  },
+  "definitions": {
+    "Image": {
+      "properties": {
+        "properties": {
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/ImageProperties"
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "./compute.json#/definitions/Resource"
+        }
+      ],
+      "description": "The source user image virtual hard disk. The virtual hard disk will be copied before being attached to the virtual machine. If SourceImage is provided, the destination virtual hard drive must not exist."
+    },
+    "ImageProperties": {
+      "properties": {
+        "sourceVirtualMachine": {
+          "$ref": "./compute.json#/definitions/SubResource",
+          "description": "The source virtual machine from which Image is created."
+        },
+        "storageProfile": {
+          "$ref": "#/definitions/ImageStorageProfile",
+          "description": "Specifies the storage settings for the virtual machine disks."
+        },
+        "provisioningState": {
+          "readOnly": true,
+          "type": "string",
+          "description": "The provisioning state."
+        }
+      },
+      "description": "Describes the properties of an Image."
+    },
+    "ImageStorageProfile": {
+      "properties": {
+        "osDisk": {
+          "$ref": "#/definitions/ImageOSDisk",
+          "description": "Specifies information about the operating system disk used by the virtual machine. <br><br> For more information about disks, see [About disks and VHDs for Azure virtual machines](https://docs.microsoft.com/azure/virtual-machines/virtual-machines-windows-about-disks-vhds?toc=%2fazure%2fvirtual-machines%2fwindows%2ftoc.json)."
+        },
+        "dataDisks": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ImageDataDisk"
+          },
+          "description": "Specifies the parameters that are used to add a data disk to a virtual machine. <br><br> For more information about disks, see [About disks and VHDs for Azure virtual machines](https://docs.microsoft.com/azure/virtual-machines/virtual-machines-windows-about-disks-vhds?toc=%2fazure%2fvirtual-machines%2fwindows%2ftoc.json)."
+        }
+      },
+      "required": [
+        "osDisk"
+      ],
+      "description": "Describes a storage profile."
+    },
+    "ImageOSDisk": {
+      "properties": {
+        "osType": {
+          "type": "string",
+          "description": "This property allows you to specify the type of the OS that is included in the disk if creating a VM from a custom image. <br><br> Possible values are: <br><br> **Windows** <br><br> **Linux**",
+          "enum": [
+            "Windows",
+            "Linux"
+          ],
+          "x-ms-enum": {
+            "name": "OperatingSystemTypes",
+            "modelAsString": false
+          }
+        },
+        "osState": {
+          "type": "string",
+          "description": "The OS State.",
+          "enum": [
+            "Generalized",
+            "Specialized"
+          ],
+          "x-ms-enum": {
+            "name": "OperatingSystemStateTypes",
+            "modelAsString": false
+          }
+        },
+        "snapshot": {
+          "$ref": "./compute.json#/definitions/SubResource",
+          "description": "The snapshot."
+        },
+        "managedDisk": {
+          "$ref": "./compute.json#/definitions/SubResource",
+          "description": "The managedDisk."
+        },
+        "blobUri": {
+          "type": "string",
+          "description": "The Virtual Hard Disk."
+        },
+        "caching": {
+          "type": "string",
+          "description": "Specifies the caching requirements. <br><br> Possible values are: <br><br> **None** <br><br> **ReadOnly** <br><br> **ReadWrite** <br><br> Default: **None for Standard storage. ReadOnly for Premium storage**",
+          "enum": [
+            "None",
+            "ReadOnly",
+            "ReadWrite"
+          ],
+          "x-ms-enum": {
+            "name": "CachingTypes",
+            "modelAsString": false
+          }
+        },
+        "diskSizeGB": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Specifies the size of empty data disks in gigabytes. This element can be used to overwrite the name of the disk in a virtual machine image. <br><br> This value cannot be larger than 1023 GB"
+        },
+        "storageAccountType": {
+          "$ref": "./compute.json#/definitions/StorageAccountType",
+          "description": "Specifies the storage account type for the managed disk. Possible values are: Standard_LRS or Premium_LRS."
+        }
+      },
+      "required": [
+        "osType",
+        "osState"
+      ],
+      "description": "Describes an Operating System disk."
+    },
+    "ImageDataDisk": {
+      "properties": {
+        "lun": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Specifies the logical unit number of the data disk. This value is used to identify data disks within the VM and therefore must be unique for each data disk attached to a VM."
+        },
+        "snapshot": {
+          "$ref": "./compute.json#/definitions/SubResource",
+          "description": "The snapshot."
+        },
+        "managedDisk": {
+          "$ref": "./compute.json#/definitions/SubResource",
+          "description": "The managedDisk."
+        },
+        "blobUri": {
+          "type": "string",
+          "description": "The Virtual Hard Disk."
+        },
+        "caching": {
+          "type": "string",
+          "description": "Specifies the caching requirements. <br><br> Possible values are: <br><br> **None** <br><br> **ReadOnly** <br><br> **ReadWrite** <br><br> Default: **None for Standard storage. ReadOnly for Premium storage**",
+          "enum": [
+            "None",
+            "ReadOnly",
+            "ReadWrite"
+          ],
+          "x-ms-enum": {
+            "name": "CachingTypes",
+            "modelAsString": false
+          }
+        },
+        "diskSizeGB": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Specifies the size of empty data disks in gigabytes. This element can be used to overwrite the name of the disk in a virtual machine image. <br><br> This value cannot be larger than 1023 GB"
+        },
+        "storageAccountType": {
+          "$ref": "./compute.json#/definitions/StorageAccountType",
+          "description": "Specifies the storage account type for the managed disk. Possible values are: Standard_LRS or Premium_LRS."
+        }
+      },
+      "required": [
+        "lun"
+      ],
+      "description": "Describes a data disk."
+    },
+    "ImageListResult": {
+      "properties": {
+        "value": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Image"
+          },
+          "description": "The list of Images."
+        },
+        "nextLink": {
+          "type": "string",
+          "description": "The uri to fetch the next page of Images. Call ListNext() with this to fetch the next page of Images."
+        }
+      },
+      "required": [
+        "value"
+      ],
+      "description": "The List Image operation response."
+    }
+  }
+}
