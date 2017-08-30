@@ -307,6 +307,47 @@
         }
       }
     },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.Web/verifyHostingEnvironmentVnet": {
+      "post": {
+        "summary": "Verifies if this VNET is compatible with an App Service Environment.",
+        "description": "Verifies if this VNET is compatible with an App Service Environment by analyzing the Network Security Group rules.",
+        "operationId": "VerifyHostingEnvironmentVnet",
+        "x-ms-examples": {
+          "VerifyHostingEnvironmentVnet": { "$ref": "./examples/VerifyHostingEnvironmentVnet.json" }
+        },
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "parameters",
+            "in": "body",
+            "description": "VNET information",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/VnetParameters"
+            }
+          },
+          {
+            "$ref": "#/parameters/subscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/VnetValidationFailureDetails"
+            }
+          }
+        }
+      }
+    },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/moveResources": {
       "post": {
         "summary": "Move resources between resource groups.",
@@ -965,6 +1006,88 @@
         "message": {
           "description": "Validation error message.",
           "type": "string"
+        }
+      }
+    },
+    "VnetParameters": {
+      "description": "The required set of inputs to validate a VNET",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/ProxyOnlyResource"
+        }
+      ],
+      "properties": {
+        "properties": {
+          "description": "VnetParameters resource specific properties",
+          "properties": {
+            "vnetResourceGroup": {
+              "description": "The Resource Group of the VNET to be validated",
+              "type": "string"
+            },
+            "vnetName": {
+              "description": "The name of the VNET to be validated",
+              "type": "string"
+            },
+            "vnetSubnetName": {
+              "description": "The subnet name to be validated",
+              "type": "string"
+            }
+          },
+          "x-ms-client-flatten": true
+        }
+      }
+    },
+    "VnetValidationFailureDetails": {
+      "description": "A class that describes the reason for a validation failure.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/ProxyOnlyResource"
+        }
+      ],
+      "properties": {
+        "properties": {
+          "description": "VnetValidationFailureDetails resource specific properties",
+          "properties": {
+            "failed": {
+              "description": "A flag describing whether or not validation failed.",
+              "type": "boolean"
+            },
+            "failedTests": {
+              "description": "A list of tests that failed in the validation.",
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/VnetValidationTestFailure"
+              }
+            }
+          },
+          "x-ms-client-flatten": true
+        }
+      }
+    },
+    "VnetValidationTestFailure": {
+      "description": "A class that describes a test that failed during NSG and UDR validation.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/ProxyOnlyResource"
+        }
+      ],
+      "properties": {
+        "properties": {
+          "description": "VnetValidationTestFailure resource specific properties",
+          "properties": {
+            "testName": {
+              "description": "The name of the test that failed.",
+              "type": "string"
+            },
+            "details": {
+              "description": "The details of what caused the failure, e.g. the blocking rule name, etc.",
+              "type": "string"
+            }
+          },
+          "x-ms-client-flatten": true
         }
       }
     }
