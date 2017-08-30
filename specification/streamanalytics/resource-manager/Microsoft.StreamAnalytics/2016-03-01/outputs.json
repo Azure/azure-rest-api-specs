@@ -47,7 +47,9 @@
           "Create a DocumentDB output": { "$ref": "./examples/Output_Create_DocumentDB.json" },
           "Create an Event Hub output with JSON serialization": { "$ref": "./examples/Output_Create_EventHub_JSON.json" },
           "Create a Service Bus Queue output with Avro serialization": { "$ref": "./examples/Output_Create_ServiceBusQueue_Avro.json" },
-          "Create a Service Bus Topic  output with CSV serialization": { "$ref": "./examples/Output_Create_ServiceBusTopic_CSV.json" }
+          "Create a Service Bus Topic output with CSV serialization": { "$ref": "./examples/Output_Create_ServiceBusTopic_CSV.json" },
+          "Create a Power BI output": { "$ref": "./examples/Output_Create_PowerBI.json" },
+          "Create an Azure Data Lake Store output with JSON serialization": { "$ref": "./examples/Output_Create_AzureDataLakeStore_JSON.json" }
         },
         "parameters": [
           {
@@ -131,7 +133,9 @@
           "Update a DocumentDB output": { "$ref": "./examples/Output_Update_DocumentDB.json" },
           "Update an Event Hub output with JSON serialization": { "$ref": "./examples/Output_Update_EventHub.json" },
           "Update a Service Bus Queue output with Avro serialization": { "$ref": "./examples/Output_Update_ServiceBusQueue.json" },
-          "Update a Service Bus Topic  output with CSV serialization": { "$ref": "./examples/Output_Update_ServiceBusTopic.json" }
+          "Update a Service Bus Topic output with CSV serialization": { "$ref": "./examples/Output_Update_ServiceBusTopic.json" },
+          "Update a Power BI output": { "$ref": "./examples/Output_Update_PowerBI.json" },
+          "Update an Azure Data Lake Store output with JSON serialization": { "$ref": "./examples/Output_Update_AzureDataLakeStore.json" }
         },
         "parameters": [
           {
@@ -230,7 +234,9 @@
           "Get a DocumentDB output": { "$ref": "./examples/Output_Get_DocumentDB.json" },
           "Get an Event Hub output with JSON serialization": { "$ref": "./examples/Output_Get_EventHub_JSON.json" },
           "Get a Service Bus Queue output with Avro serialization": { "$ref": "./examples/Output_Get_ServiceBusQueue_Avro.json" },
-          "Get a Service Bus Topic  output with CSV serialization": { "$ref": "./examples/Output_Get_ServiceBusTopic_CSV.json" }
+          "Get a Service Bus Topic output with CSV serialization": { "$ref": "./examples/Output_Get_ServiceBusTopic_CSV.json" },
+          "Get a Power BI output": { "$ref": "./examples/Output_Get_PowerBI.json" },
+          "Get an Azure Data Lake Store output with JSON serialization": { "$ref": "./examples/Output_Get_AzureDataLakeStore_JSON.json" }
         },
         "parameters": [
           {
@@ -435,7 +441,7 @@
       "properties": {}
     },
     "AzureTableOutputDataSource": {
-      "description": "Describes an Azure Table data source.",
+      "description": "Describes an Azure Table output data source.",
       "x-ms-discriminator-value": "Microsoft.Storage/Table",
       "allOf": [
         {
@@ -543,7 +549,7 @@
       "properties": {}
     },
     "DocumentDbOutputDataSource": {
-      "description": "Describes a DocumentDB data source.",
+      "description": "Describes a DocumentDB output data source.",
       "x-ms-discriminator-value": "Microsoft.Storage/DocumentDB",
       "allOf": [
         {
@@ -588,7 +594,7 @@
       }
     },
     "ServiceBusQueueOutputDataSource": {
-      "description": "Describes a Service Bus Queue data source.",
+      "description": "Describes a Service Bus Queue output data source.",
       "x-ms-discriminator-value": "Microsoft.ServiceBus/Queue",
       "allOf": [
         {
@@ -625,7 +631,7 @@
       }
     },
     "ServiceBusTopicOutputDataSource": {
-      "description": "Describes a Service Bus Topic data source.",
+      "description": "Describes a Service Bus Topic output data source.",
       "x-ms-discriminator-value": "Microsoft.ServiceBus/Topic",
       "allOf": [
         {
@@ -658,6 +664,94 @@
             "type": "string"
           },
           "description": "A string array of the names of output columns to be attached to Service Bus messages as custom properties."
+        }
+      }
+    },
+    "PowerBIOutputDataSource": {
+      "description": "Describes a Power BI output data source.",
+      "x-ms-discriminator-value": "PowerBI",
+      "allOf": [
+        {
+          "$ref": "#/definitions/OutputDataSource"
+        }
+      ],
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/PowerBIOutputDataSourceProperties",
+          "description": "The properties that are associated with a Power BI output. Required on PUT (CreateOrReplace) requests.",
+          "x-ms-client-flatten": true
+        }
+      }
+    },
+    "PowerBIOutputDataSourceProperties": {
+      "description": "The properties that are associated with a Power BI output.",
+      "allOf": [
+        {
+          "$ref": "#/definitions/OAuthBasedDataSourceProperties"
+        }
+      ],
+      "properties": {
+        "dataset": {
+          "type": "string",
+          "description": "The name of the Power BI dataset. Required on PUT (CreateOrReplace) requests."
+        },
+        "table": {
+          "type": "string",
+          "description": "The name of the Power BI table under the specified dataset. Required on PUT (CreateOrReplace) requests."
+        },
+        "groupId": {
+          "type": "string",
+          "description": "The ID of the Power BI group."
+        },
+        "groupName": {
+          "type": "string",
+          "description": "The name of the Power BI group. Use this property to help remember which specific Power BI group id was used."
+        }
+      }
+    },
+    "AzureDataLakeStoreOutputDataSource": {
+      "description": "Describes an Azure Data Lake Store output data source.",
+      "x-ms-discriminator-value": "Microsoft.DataLake/Accounts",
+      "allOf": [
+        {
+          "$ref": "#/definitions/OutputDataSource"
+        }
+      ],
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/AzureDataLakeStoreOutputDataSourceProperties",
+          "description": "The properties that are associated with an Azure Data Lake Store output. Required on PUT (CreateOrReplace) requests.",
+          "x-ms-client-flatten": true
+        }
+      }
+    },
+    "AzureDataLakeStoreOutputDataSourceProperties": {
+      "description": "The properties that are associated with an Azure Data Lake Store.",
+      "allOf": [
+        {
+          "$ref": "#/definitions/OAuthBasedDataSourceProperties"
+        }
+      ],
+      "properties": {
+        "accountName": {
+          "type": "string",
+          "description": "The name of the Azure Data Lake Store account. Required on PUT (CreateOrReplace) requests."
+        },
+        "tenantId": {
+          "type": "string",
+          "description": "The tenant id of the user used to obtain the refresh token. Required on PUT (CreateOrReplace) requests."
+        },
+        "filePathPrefix": {
+          "type": "string",
+          "description": "The location of the file to which the output should be written to. Required on PUT (CreateOrReplace) requests."
+        },
+        "dateFormat": {
+          "type": "string",
+          "description": "The date format. Wherever {date} appears in filePathPrefix, the value of this property is used as the date format instead."
+        },
+        "timeFormat": {
+          "type": "string",
+          "description": "The time format. Wherever {time} appears in filePathPrefix, the value of this property is used as the time format instead."
         }
       }
     },
@@ -701,6 +795,23 @@
         "table": {
           "type": "string",
           "description": "The name of the table in the Azure SQL database. Required on PUT (CreateOrReplace) requests."
+        }
+      }
+    },
+    "OAuthBasedDataSourceProperties": {
+      "description": "The properties that are associated with data sources that use OAuth as their authentication model.",
+      "properties": {
+        "refreshToken": {
+          "type": "string",
+          "description": "A refresh token that can be used to obtain a valid access token that can then be used to authenticate with the data source. A valid refresh token is currently only obtainable via the Azure Portal. It is recommended to put a dummy string value here when creating the data source and then going to the Azure Portal to authenticate the data source which will update this property with a valid refresh token. Required on PUT (CreateOrReplace) requests."
+        },
+        "tokenUserPrincipalName": {
+          "type": "string",
+          "description": "The user principal name (UPN) of the user that was used to obtain the refresh token. Use this property to help remember which user was used to obtain the refresh token."
+        },
+        "tokenUserDisplayName": {
+          "type": "string",
+          "description": "The user display name of the user that was used to obtain the refresh token. Use this property to help remember which user was used to obtain the refresh token."
         }
       }
     },
