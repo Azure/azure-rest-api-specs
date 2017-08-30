@@ -43,10 +43,22 @@
                     }
                 ],
                 "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "operations.json#/definitions/ProvisioningState"
+                        }
+                    },
                     "202": {
                         "description": "ACCEPTED",
-                        "x-ms-headers": {
-                            "$ref": "Fabric.json#/definitions/OperationStatusLocation"
+                        "schema": {
+                            "$ref": "operations.json#/definitions/ProvisioningState"
+                        }
+                    },
+                    "default": {
+                        "description": "DEFAULT",
+                        "schema": {
+                            "$ref": "operations.json#/definitions/ProvisioningState"
                         }
                     }
                 }
@@ -79,10 +91,22 @@
                     }
                 ],
                 "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "operations.json#/definitions/ProvisioningState"
+                        }
+                    },
                     "202": {
                         "description": "ACCEPTED",
-                        "x-ms-headers": {
-                            "$ref": "Fabric.json#/definitions/OperationStatusLocation"
+                        "schema": {
+                            "$ref": "operations.json#/definitions/ProvisioningState"
+                        }
+                    },
+                    "default": {
+                        "description": "DEFAULT",
+                        "schema": {
+                            "$ref": "operations.json#/definitions/ProvisioningState"
                         }
                     }
                 }
@@ -115,10 +139,22 @@
                     }
                 ],
                 "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "operations.json#/definitions/ProvisioningState"
+                        }
+                    },
                     "202": {
                         "description": "ACCEPTED",
-                        "x-ms-headers": {
-                            "$ref": "Fabric.json#/definitions/OperationStatusLocation"
+                        "schema": {
+                            "$ref": "operations.json#/definitions/ProvisioningState"
+                        }
+                    },
+                    "default": {
+                        "description": "DEFAULT",
+                        "schema": {
+                            "$ref": "operations.json#/definitions/ProvisioningState"
                         }
                     }
                 }
@@ -151,10 +187,22 @@
                     }
                 ],
                 "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "operations.json#/definitions/ProvisioningState"
+                        }
+                    },
                     "202": {
                         "description": "ACCEPTED",
-                        "x-ms-headers": {
-                            "$ref": "Fabric.json#/definitions/OperationStatusLocation"
+                        "schema": {
+                            "$ref": "operations.json#/definitions/ProvisioningState"
+                        }
+                    },
+                    "default": {
+                        "description": "DEFAULT",
+                        "schema": {
+                            "$ref": "operations.json#/definitions/ProvisioningState"
                         }
                     }
                 }
@@ -319,7 +367,7 @@
                 },
                 "macAddress": {
                     "description": "MacAddress of the physical machine.",
-                    "type" : "string"
+                    "type": "string"
                 },
                 "capacity": {
                     "description": "Capacity of the physical machine.",
