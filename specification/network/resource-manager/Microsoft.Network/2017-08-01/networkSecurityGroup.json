@@ -597,6 +597,10 @@
           },
           "description": "The CIDR or source IP ranges."
         },
+        "sourceApplicationSecurityGroup": {
+          "$ref": "./applicationSecurityGroup.json#/definitions/ApplicationSecurityGroup",
+          "description": "Application security group specified as source."
+        },
         "destinationAddressPrefix": {
           "type": "string",
           "description": "The destination address prefix. CIDR or destination IP range. Asterix '*' can also be used to match all source IPs. Default tags such as 'VirtualNetwork', 'AzureLoadBalancer' and 'Internet' can also be used."
@@ -607,6 +611,10 @@
             "type": "string"
           },
           "description": "The destination address prefixes. CIDR or destination IP ranges."
+        },
+        "destinationApplicationSecurityGroup": {
+          "$ref": "./applicationSecurityGroup.json#/definitions/ApplicationSecurityGroup",
+          "description": "Application security group specified as destination."
         },
         "sourcePortRanges": {
           "type": "array",
