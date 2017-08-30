@@ -1,546 +1,548 @@
 {
-  "swagger": "2.0",
-  "info": {
-    "version": "v2.0",
-    "title": "Text Analytics API",
-    "description": "The Text Analytics API is a suite of text analytics web services built with best-in-class Microsoft machine learning algorithms. \r\nThe API can be used to analyze unstructured text for tasks such as sentiment analysis, key phrase extraction and language detection. \r\nNo training data is needed to use this API; just bring your text data. \r\nThis API uses advanced natural language processing techniques to deliver best in class predictions.\r\n\r\nFurther documentation can be found in https://docs.microsoft.com/en-us/azure/cognitive-services/text-analytics/overview",
-    "contact": {
-      "name": "Microsoft Cognitive Services",
-      "url": "https://azure.microsoft.com/en-us/services/cognitive-services/text-analytics/",
-      "email": "mlapi@microsoft.com"
-    }
+ "swagger": "2.0",
+ "info": {
+  "version": "v2.0",
+  "contact": {
+   "name": "Microsoft Cognitive Services",
+   "url": "https://azure.microsoft.com/en-us/services/cognitive-services/text-analytics/",
+   "email": "mlapi@microsoft.com"
   },
-  "x-ms-parameterized-host": {
-    "hostTemplate": "{azureRegion}.api.cognitive.microsoft.com",
-    "parameters": [{
-        "$ref": "#/parameters/AzureRegion"
-    }]
-  },
-  "securityDefinitions": {
-    "apim_key": {
-      "type": "apiKey",
-      "name": "Ocp-Apim-Subscription-Key",
-      "in": "header"
-    }
-  },
-  "basePath": "/text/analytics",
-  "schemes": [
-    "https"
-  ],
-  "paths": {
-    "/v2.0/keyPhrases": {
-      "post": {
-        "tags": [
-          "Key Phrases"
-        ],
-        "summary": "The API returns a list of strings denoting the key talking points in the input text. \r\n            We employ techniques from Microsoft Office's sophisticated Natural Language Processing toolkit. \r\n            See the <a href=\"https://docs.microsoft.com/en-us/azure/cognitive-services/text-analytics/overview#supported-languages\">Text Analytics Documentation</a> for details about the languages that are supported by key phrase extraction.",
-        "operationId": "Key Phrases",
-        "consumes": [
-          "application/json"
-        ],
-        "produces": [
-          "application/json"
-        ],
-        "parameters": [
-          {
-            "$ref": "#/parameters/SubscriptionKey"
-          },
-          {
-            "name": "input",
-            "in": "body",
-            "description": "Collection of documents to analyze. Documents can now contain a language field to indicate the text language",
-            "required": true,
-            "schema": {
-              "$ref": "#/definitions/MultiLanguageBatchInputV2"
-            }
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "A successful response results in 0 or more key phrases identified in each valid document",
-            "schema": {
-              "$ref": "#/definitions/KeyPhraseBatchResultV2"
-            },
-            "examples": {
-              "application/json": {
-                "documents": [
-                  {
-                    "keyPhrases": [
-                      "world",
-                      "input text"
-                    ],
-                    "id": "1"
-                  },
-                  {
-                    "keyPhrases": [
-                      "monde"
-                    ],
-                    "id": "2"
-                  },
-                  {
-                    "keyPhrases": [
-                      "carretera",
-                      "tráfico",
-                      "día"
-                    ],
-                    "id": "3"
-                  }
-                ],
-                "errors": null
-              }
-            }
-          },
-          "default": {
-            "description": "Error Response",
-            "schema": {
-              "$ref": "#/definitions/ErrorResponse"
-            }
-          }
-        },
-        "deprecated": false
-      }
-    },
-    "/v2.0/languages": {
-      "post": {
-        "tags": [
-          "Detect Language"
-        ],
-        "summary": "The API returns the detected language and a numeric score between 0 and 1. \r\n            Scores close to 1 indicate 100% certainty that the identified language is true. \r\n            A total of 120 languages are supported.",
-        "operationId": "Detect Language",
-        "consumes": [
-          "application/json"
-        ],
-        "produces": [
-          "application/json"
-        ],
-        "parameters": [
-          {
-            "$ref": "#/parameters/SubscriptionKey"
-          },
-          {
-            "name": "input",
-            "in": "body",
-            "description": "Collection of documents to analyze.",
-            "required": true,
-            "schema": {
-              "$ref": "#/definitions/BatchInputV2"
-            }
-          },
-          {
-            "name": "numberOfLanguagesToDetect",
-            "in": "query",
-            "description": "(Optional. Deprecated) Number of languages to detect. Set to 1 by default. Irrespective of the value, the language with the highest score is returned.",
-            "required": false,
-            "type": "integer",
-            "format": "int32"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "A successful call results in the detected language with the highest probability for each valid document",
-            "schema": {
-              "$ref": "#/definitions/LanguageBatchResultV2"
-            },
-            "examples": {
-              "application/json": {
-                "documents": [
-                  {
-                    "id": "1",
-                    "detectedLanguages": [
-                      {
-                        "name": "English",
-                        "iso6391Name": "en",
-                        "score": 1.0
-                      }
-                    ]
-                  },
-                  {
-                    "id": "2",
-                    "detectedLanguages": [
-                      {
-                        "name": "French",
-                        "iso6391Name": "fr",
-                        "score": 1.0
-                      }
-                    ]
-                  },
-                  {
-                    "id": "3",
-                    "detectedLanguages": [
-                      {
-                        "name": "Spanish",
-                        "iso6391Name": "es",
-                        "score": 1.0
-                      }
-                    ]
-                  },
-                  {
-                    "id": "4",
-                    "detectedLanguages": [
-                      {
-                        "name": "(Unknown)",
-                        "iso6391Name": "(Unknown)",
-                        "score": 0.0
-                      }
-                    ]
-                  }
-                ],
-                "errors": null
-              }
-            }
-          },
-          "default": {
-            "description": "Error Response",
-            "schema": {
-              "$ref": "#/definitions/ErrorResponse"
-            }
-          }
-        },
-        "deprecated": false
-      }
-    },
-    "/v2.0/sentiment": {
-      "post": {
-        "tags": [
-          "Sentiment"
-        ],
-        "summary": "The API returns a numeric score between 0 and 1. \r\n            Scores close to 1 indicate positive sentiment, while scores close to 0 indicate negative sentiment. \r\n            Sentiment score is generated using classification techniques. \r\n            The input features to the classifier include n-grams, features generated from part-of-speech tags, and word embeddings. \r\n            See the <a href=\"https://docs.microsoft.com/en-us/azure/cognitive-services/text-analytics/overview#supported-languages\">Text Analytics Documentation</a> for details about the languages that are supported by sentiment analysis.",
-        "operationId": "Sentiment",
-        "consumes": [
-          "application/json"
-        ],
-        "produces": [
-          "application/json"
-        ],
-        "parameters": [
-          {
-            "$ref": "#/parameters/SubscriptionKey"
-          },
-          {
-            "name": "input",
-            "in": "body",
-            "description": "Collection of documents to analyze.",
-            "required": true,
-            "schema": {
-              "$ref": "#/definitions/MultiLanguageBatchInputV2"
-            }
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "A successful call results in each valid document getting a sentiment score between 0 and 1",
-            "schema": {
-              "$ref": "#/definitions/SentimentBatchResultV2"
-            },
-            "examples": {
-              "application/json": {
-                "documents": [
-                  {
-                    "score": 0.92,
-                    "id": "1"
-                  },
-                  {
-                    "score": 0.85,
-                    "id": "2"
-                  },
-                  {
-                    "score": 0.34,
-                    "id": "3"
-                  }
-                ],
-                "errors": null
-              }
-            }
-          },
-          "default": {
-            "description": "Error Response",
-            "schema": {
-              "$ref": "#/definitions/ErrorResponse"
-            }
-          }
-        },
-        "deprecated": false
-      }
-    }
-  },
-  "definitions": {
-    "MultiLanguageBatchInputV2": {
-      "type": "object",
-      "properties": {
-        "documents": {
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/MultiLanguageInputV2"
-          }
-        }
-      },
-      "example": {
-        "documents": [
-          {
-            "language": "en",
-            "id": "1",
-            "text": "Hello world. This is some input text that I love."
-          },
-          {
-            "language": "fr",
-            "id": "2",
-            "text": "Bonjour tout le monde"
-          },
-          {
-            "language": "es",
-            "id": "3",
-            "text": "La carretera estaba atascada. Había mucho tráfico el día de ayer."
-          }
-        ]
-      }
-    },
-    "MultiLanguageInputV2": {
-      "type": "object",
-      "properties": {
-        "language": {
-          "description": "This is the 2 letter ISO 639-1 representation of a language.\r\n            For example, use \"en\" for English; \"es\" for Spanish etc.,",
-          "type": "string"
-        },
-        "id": {
-          "description": "Unique, non-empty document identifier.",
-          "type": "string"
-        },
-        "text": {
-          "type": "string"
-        }
-      }
-    },
-    "Object": {
-      "type": "object",
-      "properties": { }
-    },
-    "KeyPhraseBatchResultV2": {
-      "type": "object",
-      "properties": {
-        "documents": {
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/KeyPhraseBatchResultItemV2"
-          }
-        },
-        "errors": {
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/ErrorRecordV2"
-          }
-        }
-      }
-    },
-    "KeyPhraseBatchResultItemV2": {
-      "type": "object",
-      "properties": {
-        "keyPhrases": {
-          "description": "A list of representative words or phrases. The number of key phrases returned is proportional to the number of words in the input document.",
-          "type": "array",
-          "items": {
-            "type": "string"
-          }
-        },
-        "id": {
-          "description": "Unique document identifier.",
-          "type": "string"
-        }
-      }
-    },
-    "ErrorRecordV2": {
-      "type": "object",
-      "properties": {
-        "id": {
-          "description": "Input document unique identifier the error refers to.",
-          "type": "string"
-        },
-        "message": {
-          "description": "Error message.",
-          "type": "string"
-        }
-      }
-    },
-    "ErrorResponse": {
-      "type": "object",
-      "properties": {
-        "code": {
-          "type": "string"
-        },
-        "message": {
-          "type": "string"
-        },
-        "target": {
-          "type": "string"
-        },
-        "innerError": {
-          "$ref": "#/definitions/InternalError"
-        }
-      }
-    },
-    "InternalError": {
-      "type": "object",
-      "properties": {
-        "code": {
-          "type": "string"
-        },
-        "message": {
-          "type": "string"
-        },
-        "innerError": {
-          "$ref": "#/definitions/InternalError"
-        }
-      }
-    },
-    "BatchInputV2": {
-      "type": "object",
-      "properties": {
-        "documents": {
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/InputV2"
-          }
-        }
-      },
-      "example": {
-        "documents": [
-          {
-            "id": "1",
-            "text": "Hello world"
-          },
-          {
-            "id": "2",
-            "text": "Bonjour tout le monde"
-          },
-          {
-            "id": "3",
-            "text": "La carretera estaba atascada. Había mucho tráfico el día de ayer."
-          },
-          {
-            "id": "4",
-            "text": ":) :( :D"
-          }
-        ]
-      }
-    },
-    "InputV2": {
-      "type": "object",
-      "properties": {
-        "id": {
-          "description": "Unique, non-empty document identifier.",
-          "type": "string"
-        },
-        "text": {
-          "type": "string"
-        }
-      }
-    },
-    "LanguageBatchResultV2": {
-      "type": "object",
-      "properties": {
-        "documents": {
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/LanguageBatchResultItemV2"
-          }
-        },
-        "errors": {
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/ErrorRecordV2"
-          }
-        }
-      }
-    },
-    "LanguageBatchResultItemV2": {
-      "type": "object",
-      "properties": {
-        "id": {
-          "description": "Unique document identifier.",
-          "type": "string"
-        },
-        "detectedLanguages": {
-          "description": "A list of extracted languages.",
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/DetectedLanguageV2"
-          }
-        }
-      }
-    },
-    "DetectedLanguageV2": {
-      "type": "object",
-      "properties": {
-        "name": {
-          "description": "Long name of a detected language (e.g. English, French).",
-          "type": "string"
-        },
-        "iso6391Name": {
-          "description": "A two letter representation of the detected language according to the ISO 639-1 standard (e.g. en, fr).",
-          "type": "string"
-        },
-        "score": {
-          "format": "double",
-          "description": "A confidence score between 0 and 1. Scores close to 1 indicate 100% certainty that the identified language is true.",
-          "type": "number"
-        }
-      }
-    },
-    "SentimentBatchResultV2": {
-      "type": "object",
-      "properties": {
-        "documents": {
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/SentimentBatchResultItemV2"
-          }
-        },
-        "errors": {
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/ErrorRecordV2"
-          }
-        }
-      }
-    },
-    "SentimentBatchResultItemV2": {
-      "type": "object",
-      "properties": {
-        "score": {
-          "format": "double",
-          "description": "A decimal number between 0 and 1 denoting the sentiment of the document. \r\n            A score above 0.7 usually refers to a positive document while a score below 0.3 normally has a negative connotation.\r\n            Mid values refer to neutral text.",
-          "type": "number"
-        },
-        "id": {
-          "description": "Unique document identifier.",
-          "type": "string"
-        }
-      }
-    }
-  },
-  "parameters": {
-    "AzureRegion": {
-      "name": "azureRegion",
-      "description": "Supported Azure regions for Face Detection endpoints",
-      "x-ms-parameter-location": "client",
-      "required": true,
-      "type": "string",
-      "in": "path",
-      "x-ms-skip-url-encoding": true,
-      "x-ms-enum": {
-        "name": "AzureRegion",
-        "modelAsString": true
-      },
-      "enum": [
-        "westus"
-      ]
-    },
-    "SubscriptionKey": {
-      "name": "Ocp-Apim-Subscription-Key",
-      "x-ms-client-name": "SubscriptionKey",
-      "in": "header",
-      "required": true,
-      "description": "Subscription key in header",
-      "type": "string"
-    }
+  "title": "Text Analytics API",
+  "description": "The Text Analytics API is a suite of text analytics web services built with best-in-class Microsoft machine learning algorithms. \r\nThe API can be used to analyze unstructured text for tasks such as sentiment analysis, key phrase extraction and language detection. \r\nNo training data is needed to use this API; just bring your text data. \r\nThis API uses advanced natural language processing techniques to deliver best in class predictions.\r\n\r\nFurther documentation can be found in https://docs.microsoft.com/en-us/azure/cognitive-services/text-analytics/overview"
+ },
+ "x-ms-parameterized-host": {
+  "hostTemplate": "{azureRegion}.api.cognitive.microsoft.com",
+  "parameters": [
+   {
+    "$ref": "#/parameters/AzureRegion"
+   }
+  ]
+ },
+ "securityDefinitions": {
+  "apim_key": {
+   "type": "apiKey",
+   "name": "Ocp-Apim-Subscription-Key",
+   "in": "header"
   }
+ },
+ "basePath": "/text/analytics",
+ "schemes": [
+  "https"
+ ],
+ "paths": {
+  "/v2.0/keyPhrases": {
+   "post": {
+    "tags": [
+     "Key Phrases"
+    ],
+    "summary": "The API returns a list of strings denoting the key talking points in the input text. \r\n            We employ techniques from Microsoft Office's sophisticated Natural Language Processing toolkit. \r\n            See the <a href=\"https://docs.microsoft.com/en-us/azure/cognitive-services/text-analytics/overview#supported-languages\">Text Analytics Documentation</a> for details about the languages that are supported by key phrase extraction.",
+    "operationId": "Key Phrases",
+    "consumes": [
+     "application/json"
+    ],
+    "produces": [
+     "application/json"
+    ],
+    "parameters": [
+     {
+      "$ref": "#/parameters/SubscriptionKey"
+     },
+     {
+      "name": "input",
+      "in": "body",
+      "description": "Collection of documents to analyze. Documents can now contain a language field to indicate the text language",
+      "required": true,
+      "schema": {
+       "$ref": "#/definitions/MultiLanguageBatchInputV2"
+      }
+     }
+    ],
+    "responses": {
+     "200": {
+      "description": "A successful response results in 0 or more key phrases identified in each valid document",
+      "schema": {
+       "$ref": "#/definitions/KeyPhraseBatchResultV2"
+      },
+      "examples": {
+       "application/json": {
+        "documents": [
+         {
+          "keyPhrases": [
+           "world",
+           "input text"
+          ],
+          "id": "1"
+         },
+         {
+          "keyPhrases": [
+           "monde"
+          ],
+          "id": "2"
+         },
+         {
+          "keyPhrases": [
+           "carretera",
+           "tráfico",
+           "día"
+          ],
+          "id": "3"
+         }
+        ],
+        "errors": null
+       }
+      }
+     },
+     "default": {
+      "description": "Error Response",
+      "schema": {
+       "$ref": "#/definitions/ErrorResponse"
+      }
+     }
+    },
+    "deprecated": false
+   }
+  },
+  "/v2.0/languages": {
+   "post": {
+    "tags": [
+     "Detect Language"
+    ],
+    "summary": "The API returns the detected language and a numeric score between 0 and 1. \r\n            Scores close to 1 indicate 100% certainty that the identified language is true. \r\n            A total of 120 languages are supported.",
+    "operationId": "Detect Language",
+    "consumes": [
+     "application/json"
+    ],
+    "produces": [
+     "application/json"
+    ],
+    "parameters": [
+     {
+      "$ref": "#/parameters/SubscriptionKey"
+     },
+     {
+      "name": "input",
+      "in": "body",
+      "description": "Collection of documents to analyze.",
+      "required": true,
+      "schema": {
+       "$ref": "#/definitions/BatchInputV2"
+      }
+     },
+     {
+      "name": "numberOfLanguagesToDetect",
+      "in": "query",
+      "description": "(Optional. Deprecated) Number of languages to detect. Set to 1 by default. Irrespective of the value, the language with the highest score is returned.",
+      "required": false,
+      "type": "integer",
+      "format": "int32"
+     }
+    ],
+    "responses": {
+     "200": {
+      "description": "A successful call results in the detected language with the highest probability for each valid document",
+      "schema": {
+       "$ref": "#/definitions/LanguageBatchResultV2"
+      },
+      "examples": {
+       "application/json": {
+        "documents": [
+         {
+          "id": "1",
+          "detectedLanguages": [
+           {
+            "name": "English",
+            "iso6391Name": "en",
+            "score": 1
+           }
+          ]
+         },
+         {
+          "id": "2",
+          "detectedLanguages": [
+           {
+            "name": "French",
+            "iso6391Name": "fr",
+            "score": 1
+           }
+          ]
+         },
+         {
+          "id": "3",
+          "detectedLanguages": [
+           {
+            "name": "Spanish",
+            "iso6391Name": "es",
+            "score": 1
+           }
+          ]
+         },
+         {
+          "id": "4",
+          "detectedLanguages": [
+           {
+            "name": "(Unknown)",
+            "iso6391Name": "(Unknown)",
+            "score": 0
+           }
+          ]
+         }
+        ],
+        "errors": null
+       }
+      }
+     },
+     "default": {
+      "description": "Error Response",
+      "schema": {
+       "$ref": "#/definitions/ErrorResponse"
+      }
+     }
+    },
+    "deprecated": false
+   }
+  },
+  "/v2.0/sentiment": {
+   "post": {
+    "tags": [
+     "Sentiment"
+    ],
+    "summary": "The API returns a numeric score between 0 and 1. \r\n            Scores close to 1 indicate positive sentiment, while scores close to 0 indicate negative sentiment. \r\n            Sentiment score is generated using classification techniques. \r\n            The input features to the classifier include n-grams, features generated from part-of-speech tags, and word embeddings. \r\n            See the <a href=\"https://docs.microsoft.com/en-us/azure/cognitive-services/text-analytics/overview#supported-languages\">Text Analytics Documentation</a> for details about the languages that are supported by sentiment analysis.",
+    "operationId": "Sentiment",
+    "consumes": [
+     "application/json"
+    ],
+    "produces": [
+     "application/json"
+    ],
+    "parameters": [
+     {
+      "$ref": "#/parameters/SubscriptionKey"
+     },
+     {
+      "name": "input",
+      "in": "body",
+      "description": "Collection of documents to analyze.",
+      "required": true,
+      "schema": {
+       "$ref": "#/definitions/MultiLanguageBatchInputV2"
+      }
+     }
+    ],
+    "responses": {
+     "200": {
+      "description": "A successful call results in each valid document getting a sentiment score between 0 and 1",
+      "schema": {
+       "$ref": "#/definitions/SentimentBatchResultV2"
+      },
+      "examples": {
+       "application/json": {
+        "documents": [
+         {
+          "score": 0.92,
+          "id": "1"
+         },
+         {
+          "score": 0.85,
+          "id": "2"
+         },
+         {
+          "score": 0.34,
+          "id": "3"
+         }
+        ],
+        "errors": null
+       }
+      }
+     },
+     "default": {
+      "description": "Error Response",
+      "schema": {
+       "$ref": "#/definitions/ErrorResponse"
+      }
+     }
+    },
+    "deprecated": false
+   }
+  }
+ },
+ "definitions": {
+  "MultiLanguageBatchInputV2": {
+   "type": "object",
+   "properties": {
+    "documents": {
+     "type": "array",
+     "items": {
+      "$ref": "#/definitions/MultiLanguageInputV2"
+     }
+    }
+   },
+   "example": {
+    "documents": [
+     {
+      "language": "en",
+      "id": "1",
+      "text": "Hello world. This is some input text that I love."
+     },
+     {
+      "language": "fr",
+      "id": "2",
+      "text": "Bonjour tout le monde"
+     },
+     {
+      "language": "es",
+      "id": "3",
+      "text": "La carretera estaba atascada. Había mucho tráfico el día de ayer."
+     }
+    ]
+   }
+  },
+  "MultiLanguageInputV2": {
+   "type": "object",
+   "properties": {
+    "language": {
+     "description": "This is the 2 letter ISO 639-1 representation of a language.\r\n            For example, use \"en\" for English; \"es\" for Spanish etc.,",
+     "type": "string"
+    },
+    "id": {
+     "description": "Unique, non-empty document identifier.",
+     "type": "string"
+    },
+    "text": {
+     "type": "string"
+    }
+   }
+  },
+  "Object": {
+   "type": "object",
+   "properties": {}
+  },
+  "KeyPhraseBatchResultV2": {
+   "type": "object",
+   "properties": {
+    "documents": {
+     "type": "array",
+     "items": {
+      "$ref": "#/definitions/KeyPhraseBatchResultItemV2"
+     }
+    },
+    "errors": {
+     "type": "array",
+     "items": {
+      "$ref": "#/definitions/ErrorRecordV2"
+     }
+    }
+   }
+  },
+  "KeyPhraseBatchResultItemV2": {
+   "type": "object",
+   "properties": {
+    "keyPhrases": {
+     "description": "A list of representative words or phrases. The number of key phrases returned is proportional to the number of words in the input document.",
+     "type": "array",
+     "items": {
+      "type": "string"
+     }
+    },
+    "id": {
+     "description": "Unique document identifier.",
+     "type": "string"
+    }
+   }
+  },
+  "ErrorRecordV2": {
+   "type": "object",
+   "properties": {
+    "id": {
+     "description": "Input document unique identifier the error refers to.",
+     "type": "string"
+    },
+    "message": {
+     "description": "Error message.",
+     "type": "string"
+    }
+   }
+  },
+  "ErrorResponse": {
+   "type": "object",
+   "properties": {
+    "code": {
+     "type": "string"
+    },
+    "message": {
+     "type": "string"
+    },
+    "target": {
+     "type": "string"
+    },
+    "innerError": {
+     "$ref": "#/definitions/InternalError"
+    }
+   }
+  },
+  "InternalError": {
+   "type": "object",
+   "properties": {
+    "code": {
+     "type": "string"
+    },
+    "message": {
+     "type": "string"
+    },
+    "innerError": {
+     "$ref": "#/definitions/InternalError"
+    }
+   }
+  },
+  "BatchInputV2": {
+   "type": "object",
+   "properties": {
+    "documents": {
+     "type": "array",
+     "items": {
+      "$ref": "#/definitions/InputV2"
+     }
+    }
+   },
+   "example": {
+    "documents": [
+     {
+      "id": "1",
+      "text": "Hello world"
+     },
+     {
+      "id": "2",
+      "text": "Bonjour tout le monde"
+     },
+     {
+      "id": "3",
+      "text": "La carretera estaba atascada. Había mucho tráfico el día de ayer."
+     },
+     {
+      "id": "4",
+      "text": ":) :( :D"
+     }
+    ]
+   }
+  },
+  "InputV2": {
+   "type": "object",
+   "properties": {
+    "id": {
+     "description": "Unique, non-empty document identifier.",
+     "type": "string"
+    },
+    "text": {
+     "type": "string"
+    }
+   }
+  },
+  "LanguageBatchResultV2": {
+   "type": "object",
+   "properties": {
+    "documents": {
+     "type": "array",
+     "items": {
+      "$ref": "#/definitions/LanguageBatchResultItemV2"
+     }
+    },
+    "errors": {
+     "type": "array",
+     "items": {
+      "$ref": "#/definitions/ErrorRecordV2"
+     }
+    }
+   }
+  },
+  "LanguageBatchResultItemV2": {
+   "type": "object",
+   "properties": {
+    "id": {
+     "description": "Unique document identifier.",
+     "type": "string"
+    },
+    "detectedLanguages": {
+     "description": "A list of extracted languages.",
+     "type": "array",
+     "items": {
+      "$ref": "#/definitions/DetectedLanguageV2"
+     }
+    }
+   }
+  },
+  "DetectedLanguageV2": {
+   "type": "object",
+   "properties": {
+    "name": {
+     "description": "Long name of a detected language (e.g. English, French).",
+     "type": "string"
+    },
+    "iso6391Name": {
+     "description": "A two letter representation of the detected language according to the ISO 639-1 standard (e.g. en, fr).",
+     "type": "string"
+    },
+    "score": {
+     "format": "double",
+     "description": "A confidence score between 0 and 1. Scores close to 1 indicate 100% certainty that the identified language is true.",
+     "type": "number"
+    }
+   }
+  },
+  "SentimentBatchResultV2": {
+   "type": "object",
+   "properties": {
+    "documents": {
+     "type": "array",
+     "items": {
+      "$ref": "#/definitions/SentimentBatchResultItemV2"
+     }
+    },
+    "errors": {
+     "type": "array",
+     "items": {
+      "$ref": "#/definitions/ErrorRecordV2"
+     }
+    }
+   }
+  },
+  "SentimentBatchResultItemV2": {
+   "type": "object",
+   "properties": {
+    "score": {
+     "format": "double",
+     "description": "A decimal number between 0 and 1 denoting the sentiment of the document. \r\n            A score above 0.7 usually refers to a positive document while a score below 0.3 normally has a negative connotation.\r\n            Mid values refer to neutral text.",
+     "type": "number"
+    },
+    "id": {
+     "description": "Unique document identifier.",
+     "type": "string"
+    }
+   }
+  }
+ },
+ "parameters": {
+  "AzureRegion": {
+   "name": "azureRegion",
+   "description": "Supported Azure regions for Cognitive Services endpoints",
+   "x-ms-parameter-location": "client",
+   "required": true,
+   "type": "string",
+   "in": "path",
+   "x-ms-skip-url-encoding": true,
+   "x-ms-enum": {
+    "name": "AzureRegion",
+    "modelAsString": true
+   },
+   "enum": [
+    "westus"
+   ]
+  },
+  "SubscriptionKey": {
+   "name": "Ocp-Apim-Subscription-Key",
+   "x-ms-client-name": "SubscriptionKey",
+   "in": "header",
+   "required": true,
+   "description": "Subscription key in header",
+   "type": "string"
+  }
+ }
 }
