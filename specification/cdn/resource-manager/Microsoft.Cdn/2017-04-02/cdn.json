@@ -1772,6 +1772,7 @@
       "properties": {
         "value": {
           "type": "array",
+          "readOnly": true,
           "items": {
             "$ref": "#/definitions/Profile"
           },
@@ -1806,6 +1807,7 @@
       "properties": {
         "ssoUriValue": {
           "description": "The URI used to login to the supplemental portal.",
+          "readOnly": true,
           "type": "string"
         }
       }
@@ -1816,6 +1818,7 @@
       "properties": {
         "supportedOptimizationTypes": {
           "description": "Supported optimization types for a profile.",
+          "readOnly": true,
           "items": {
             "$ref": "#/definitions/OptimizationType"
           },
@@ -1890,6 +1893,7 @@
       "properties": {
         "value": {
           "type": "array",
+          "readOnly": true,
           "items": {
             "$ref": "#/definitions/Endpoint"
           },
@@ -2187,6 +2191,7 @@
       "properties": {
         "value": {
           "type": "array",
+          "readOnly": true,
           "items": {
             "$ref": "#/definitions/Origin"
           },
@@ -2312,6 +2317,7 @@
       "properties": {
         "value": {
           "type": "array",
+          "readOnly": true,
           "items": {
             "$ref": "#/definitions/CustomDomain"
           },
@@ -2342,14 +2348,17 @@
       "properties": {
         "customDomainValidated": {
           "description": "Indicates whether the custom domain is valid or not.",
+          "readOnly": true,
           "type": "boolean"
         },
         "reason": {
           "description": "The reason why the custom domain is not valid.",
+          "readOnly": true,
           "type": "string"
         },
         "message": {
           "description": "Error message describing why the custom domain is not valid.",
+          "readOnly": true,
           "type": "string"
         }
       }
@@ -2378,14 +2387,17 @@
       "properties": {
         "nameAvailable": {
           "description": "Indicates whether the name is available.",
+          "readOnly": true,
           "type": "boolean"
         },
         "reason": {
           "description": "The reason why the name is not available.",
+          "readOnly": true,
           "type": "string"
         },
         "message": {
           "description": "The detailed error message describing why the name is not available.",
+          "readOnly": true,
           "type": "string"
         }
       }
@@ -2408,20 +2420,20 @@
       "properties": {
         "isValid": {
           "description": "Indicates whether the probe URL is accepted or not.",
+          "readOnly": true,
           "type": "boolean"
         },
         "errorCode": {
           "description": "Specifies the error code when the probe url is not accepted.",
+          "readOnly": true,
           "type": "string"
         },
         "message": {
           "description": "The detailed error message describing why the probe URL is not accepted.",
+          "readOnly": true,
           "type": "string"
         }
       },
-      "required": [
-        "isValid"
-      ],
       "type": "object"
     },
     "ResourceUsageListResult": {
@@ -2429,6 +2441,7 @@
       "properties": {
         "value": {
           "type": "array",
+          "readOnly": true,
           "items": {
             "$ref": "#/definitions/ResourceUsage"
           },
@@ -2446,18 +2459,22 @@
       "properties": {
         "resourceType": {
           "type": "string",
+          "readOnly": true,
           "description": "Resource type for which the usage is provided."
         },
         "unit": {
           "type": "string",
+          "readOnly": true,
           "description": "Unit of the usage. e.g. Count."
         },
         "currentValue": {
           "type": "integer",
+          "readOnly": true,
           "description": "Actual value of usage on the specified resource type."
         },
         "limit": {
           "type": "integer",
+          "readOnly": true,
           "description": "Quota of the specified resource type."
         }
       }
@@ -2479,6 +2496,7 @@
       "properties": {
         "name": {
           "description": "Operation name: {provider}/{resource}/{operation}",
+          "readOnly": true,
           "type": "string"
         },
         "display": {
@@ -2486,14 +2504,17 @@
           "properties": {
             "provider": {
               "description": "Service provider: Microsoft.Cdn",
+              "readOnly": true,
               "type": "string"
             },
             "resource": {
               "description": "Resource on which the operation is performed: Profile, endpoint, etc.",
+              "readOnly": true,
               "type": "string"
             },
             "operation": {
               "description": "Operation type: Read, write, delete, etc.",
+              "readOnly": true,
               "type": "string"
             }
           }
@@ -2505,6 +2526,7 @@
       "properties": {
         "value": {
           "type": "array",
+          "readOnly": true,
           "items": {
             "$ref": "#/definitions/Operation"
           },
@@ -2521,6 +2543,7 @@
       "properties": {
         "value": {
           "type": "array",
+          "readOnly": true,
           "items": {
             "$ref": "#/definitions/EdgeNode"
           },
@@ -2691,10 +2714,12 @@
       "properties": {
         "code": {
           "description": "Error code.",
+          "readOnly": true,
           "type": "string"
         },
         "message": {
           "description": "Error message indicating why the operation failed.",
+          "readOnly": true,
           "type": "string"
         }
       }
