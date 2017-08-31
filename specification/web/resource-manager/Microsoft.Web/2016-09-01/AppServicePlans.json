@@ -2576,6 +2576,13 @@
                 "create"
               ]
             },
+            "snapshotInfo": {
+              "$ref": "#/definitions/SnapshotRecoveryRequest",
+              "description": "If specified during app creation, the app is created from a previous snapshot.",
+              "x-ms-mutability": [
+                "create"
+              ]
+            },
             "resourceGroup": {
               "description": "Name of the resource group the app belongs to. Read-only.",
               "type": "string",
@@ -2995,6 +3002,60 @@
         },
         "timeInterval": {
           "description": "Time interval.",
+          "type": "string"
+        }
+      }
+    },
+    "SnapshotRecoveryRequest": {
+      "description": "Details about app recovery operation.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/ProxyOnlyResource"
+        }
+      ],
+      "properties": {
+        "properties": {
+          "description": "SnapshotRecoveryRequest resource specific properties",
+          "required": [
+            "overwrite"
+          ],
+          "properties": {
+            "snapshotTime": {
+              "description": "Point in time in which the app recovery should be attempted, formatted as a DateTime string.",
+              "type": "string"
+            },
+            "recoveryTarget": {
+              "$ref": "#/definitions/SnapshotRecoveryTarget",
+              "description": "Specifies the web app that snapshot contents will be written to."
+            },
+            "overwrite": {
+              "description": "If <code>true</code> the recovery operation can overwrite source app; otherwise, <code>false</code>.",
+              "type": "boolean"
+            },
+            "recoverConfiguration": {
+              "description": "If true, site configuration, in addition to content, will be reverted.",
+              "type": "boolean"
+            },
+            "ignoreConflictingHostNames": {
+              "description": "If true, custom hostname conflicts will be ignored when recovering to a target web app.\n This setting is only necessary when RecoverConfiguration is enabled.",
+              "type": "boolean"
+            }
+          },
+          "x-ms-client-flatten": true
+        }
+      }
+    },
+    "SnapshotRecoveryTarget": {
+      "description": "Specifies the web app that snapshot contents will be written to.",
+      "type": "object",
+      "properties": {
+        "location": {
+          "description": "Geographical location of the target web app, e.g. SouthEastAsia, SouthCentralUS",
+          "type": "string"
+        },
+        "id": {
+          "description": "ARM resource ID of the target app. \n /subscriptions/{subId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Web/sites/{siteName} for production slots and \n /subscriptions/{subId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Web/sites/{siteName}/slots/{slotName} for other slots.",
           "type": "string"
         }
       }
