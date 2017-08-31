@@ -550,6 +550,13 @@
           "$ref": "./publicIpAddress.json#/definitions/PublicIPAddress",
           "description": "Public IP address bound to the IP configuration."
         },
+        "applicationSecurityGroups": {
+          "type": "array",
+          "items": {
+            "$ref": "./applicationSecurityGroup.json#/definitions/ApplicationSecurityGroup"
+          },
+          "description": "Application security groups in which the IP configuration is included."
+        },
         "provisioningState": {
           "type": "string",
           "description": "The provisioning state of the network interface IP configuration. Possible values are: 'Updating', 'Deleting', and 'Failed'."
