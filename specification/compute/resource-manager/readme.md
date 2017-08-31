@@ -45,6 +45,10 @@ These settings apply only when `--tag=package-2017-03` is specified on the comma
 ``` yaml $(tag) == 'package-2017-03'
 input-file:
 - Microsoft.Compute/2017-03-30/compute.json
+- Microsoft.Compute/2017-03-30/availabilitySets.json
+- Microsoft.Compute/2017-03-30/extensionImages.json
+- Microsoft.Compute/2017-03-30/images.json
+- Microsoft.Compute/2017-03-30/scaleSets.json
 - Microsoft.Compute/2017-03-30/disk.json
 - Microsoft.Compute/2017-03-30/runCommands.json
 - Microsoft.ContainerService/2017-01-31/containerService.json
@@ -57,6 +61,10 @@ These settings apply only when `--tag=package-compute-2017-03` is specified on t
 ``` yaml $(tag) == 'package-compute-2017-03'
 input-file:
 - Microsoft.Compute/2017-03-30/compute.json
+- Microsoft.Compute/2017-03-30/availabilitySets.json
+- Microsoft.Compute/2017-03-30/extensionImages.json
+- Microsoft.Compute/2017-03-30/images.json
+- Microsoft.Compute/2017-03-30/scaleSets.json
 - Microsoft.Compute/2017-03-30/disk.json
 - Microsoft.Compute/2017-03-30/runCommands.json
 ```
