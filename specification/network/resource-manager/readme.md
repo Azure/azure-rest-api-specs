@@ -28,7 +28,19 @@ These are the global settings for the Network API.
 title: NetworkManagementClient
 description: Network Client
 openapi-type: arm
-tag: package-2017-08
+tag: package-2017-09
+```
+
+
+### Tag: package-2017-09
+
+These settings apply only when `--tag=package-2017-09` is specified on the command line.
+
+``` yaml $(tag) == 'package-2017-09'
+input-file:
+- Microsoft.Network/2017-09-01/applicationSecurityGroup.json
+- Microsoft.Network/2017-09-01/networkInterface.json
+- Microsoft.Network/2017-09-01/networkSecurityGroup.json
 ```
 
 
