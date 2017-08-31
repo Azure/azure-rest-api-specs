@@ -166,7 +166,7 @@
           {
             "name": "skipDnsRegistration",
             "in": "query",
-            "description": "If true web app hostname is not registered with DNS on creation. This parameter is\n only used for app creation",
+            "description": "If true web app hostname is not registered with DNS on creation. This parameter is\n only used for app creation.",
             "type": "boolean"
           },
           {
@@ -178,13 +178,13 @@
           {
             "name": "forceDnsRegistration",
             "in": "query",
-            "description": "If true, web app hostname is force registered with DNS",
+            "description": "If true, web app hostname is force registered with DNS.",
             "type": "boolean"
           },
           {
             "name": "ttlInSeconds",
             "in": "query",
-            "description": "Time to live in seconds for web app's default domain name",
+            "description": "Time to live in seconds for web app's default domain name.",
             "type": "string"
           },
           {
@@ -196,13 +196,13 @@
         ],
         "responses": {
           "200": {
-            "description": "OK",
+            "description": "OK.",
             "schema": {
               "$ref": "#/definitions/Site"
             }
           },
           "202": {
-            "description": "Asynchronous operation in progress",
+            "description": "Asynchronous operation in progress.",
             "schema": {
               "$ref": "#/definitions/Site"
             }
@@ -231,7 +231,7 @@
           {
             "name": "deleteMetrics",
             "in": "query",
-            "description": "If true, web app metrics are also deleted",
+            "description": "If true, web app metrics are also deleted.",
             "type": "boolean"
           },
           {
@@ -243,7 +243,7 @@
           {
             "name": "skipDnsRegistration",
             "in": "query",
-            "description": "If true, DNS registration is skipped",
+            "description": "If true, DNS registration is skipped.",
             "type": "boolean"
           },
           {
@@ -255,10 +255,10 @@
         ],
         "responses": {
           "200": {
-            "description": "Succesfully deleted web app"
+            "description": "Succesfully deleted web app."
           },
           "404": {
-            "description": "Web app not found"
+            "description": "Web app not found."
           }
         }
       }
@@ -284,14 +284,14 @@
           {
             "name": "name",
             "in": "path",
-            "description": "Name of web app",
+            "description": "Name of web app.",
             "required": true,
             "type": "string"
           },
           {
             "name": "hostName",
             "in": "query",
-            "description": "Custom hostname",
+            "description": "Custom hostname.",
             "type": "string"
           },
           {
@@ -355,7 +355,7 @@
         ],
         "responses": {
           "200": {
-            "description": "OK"
+            "description": "OK."
           }
         }
       }
@@ -631,21 +631,21 @@
           {
             "name": "name",
             "in": "path",
-            "description": "Name of web app",
+            "description": "Name of web app.",
             "required": true,
             "type": "string"
           },
           {
             "name": "backupId",
             "in": "path",
-            "description": "Id of backup",
+            "description": "ID of backup.",
             "required": true,
             "type": "string"
           },
           {
             "name": "request",
             "in": "body",
-            "description": "Information on backup request",
+            "description": "Information on backup request.",
             "required": true,
             "schema": {
               "$ref": "#/definitions/BackupRequest"
@@ -708,7 +708,7 @@
           {
             "name": "request",
             "in": "body",
-            "description": "Information on restore request",
+            "description": "Information on restore request .",
             "required": true,
             "schema": {
               "$ref": "#/definitions/RestoreRequest"
@@ -899,14 +899,14 @@
           {
             "name": "name",
             "in": "path",
-            "description": "Name of web app",
+            "description": "Name of web app.",
             "required": true,
             "type": "string"
           },
           {
             "name": "siteAuthSettings",
             "in": "body",
-            "description": "Auth settings associated with web app",
+            "description": "Auth settings associated with web app.",
             "required": true,
             "schema": {
               "$ref": "#/definitions/SiteAuthSettings"
@@ -1461,14 +1461,14 @@
           {
             "name": "name",
             "in": "path",
-            "description": "Name of web app",
+            "description": "Name of web app.",
             "required": true,
             "type": "string"
           },
           {
             "name": "pushSettings",
             "in": "body",
-            "description": "Push settings associated with web app",
+            "description": "Push settings associated with web app.",
             "required": true,
             "schema": {
               "$ref": "#/definitions/PushSettings"
@@ -1512,7 +1512,7 @@
           {
             "name": "name",
             "in": "path",
-            "description": "Name of web app",
+            "description": "Name of web app.",
             "required": true,
             "type": "string"
           },
@@ -2003,13 +2003,13 @@
         ],
         "responses": {
           "200": {
-            "description": "Found continuous web job",
+            "description": "Found continuous web job.",
             "schema": {
               "$ref": "#/definitions/ContinuousWebJob"
             }
           },
           "404": {
-            "description": "Continuous web job does not exist"
+            "description": "Continuous web job does not exist."
           }
         }
       },
@@ -2053,10 +2053,10 @@
         ],
         "responses": {
           "200": {
-            "description": "Succesfully deleted continuous web job"
+            "description": "Succesfully deleted continuous web job."
           },
           "204": {
-            "description": "Continuous web job does not exist"
+            "description": "Continuous web job does not exist."
           }
         }
       }
@@ -2102,10 +2102,10 @@
         ],
         "responses": {
           "200": {
-            "description": "Found continuous web job"
+            "description": "Found continuous web job."
           },
           "404": {
-            "description": "Continuous web job does not exist"
+            "description": "Continuous web job does not exist."
           }
         }
       }
@@ -2151,10 +2151,10 @@
         ],
         "responses": {
           "200": {
-            "description": "Found continuous web job"
+            "description": "Found continuous web job."
           },
           "404": {
-            "description": "Continuous web job does not exist"
+            "description": "Continuous web job does not exist."
           }
         }
       }
@@ -2164,8 +2164,8 @@
         "tags": [
           "WebApps"
         ],
-        "summary": "List deployments for an app, or a deployment slot, or for an instance of a scaled-out app.",
-        "description": "List deployments for an app, or a deployment slot, or for an instance of a scaled-out app.",
+        "summary": "List deployments for an app, or a deployment slot.",
+        "description": "List deployments for an app, or a deployment slot.",
         "operationId": "WebApps_ListDeployments",
         "produces": [
           "application/json",
@@ -2207,8 +2207,8 @@
         "tags": [
           "WebApps"
         ],
-        "summary": "Get a deployment by its ID for an app, a specific deployment slot, and/or a specific scaled-out instance.",
-        "description": "Get a deployment by its ID for an app, a specific deployment slot, and/or a specific scaled-out instance.",
+        "summary": "Get a deployment by its ID for an app, or a deployment slot.",
+        "description": "Get a deployment by its ID for an app, or a deployment slot.",
         "operationId": "WebApps_GetDeployment",
         "produces": [
           "application/json",
@@ -2254,8 +2254,8 @@
         "tags": [
           "WebApps"
         ],
-        "summary": "Create a deployment for an app, a specific deployment slot, and/or a specific scaled-out instance.",
-        "description": "Create a deployment for an app, a specific deployment slot, and/or a specific scaled-out instance.",
+        "summary": "Create a deployment for an app, or a deployment slot.",
+        "description": "Create a deployment for an app, or a deployment slot.",
         "operationId": "WebApps_CreateDeployment",
         "consumes": [
           "application/json",
@@ -2315,8 +2315,8 @@
         "tags": [
           "WebApps"
         ],
-        "summary": "Delete a deployment by its ID for an app, a specific deployment slot, and/or a specific scaled-out instance.",
-        "description": "Delete a deployment by its ID for an app, a specific deployment slot, and/or a specific scaled-out instance.",
+        "summary": "Delete a deployment by its ID for an app, or a deployment slot.",
+        "description": "Delete a deployment by its ID for an app, or a deployment slot.",
         "operationId": "WebApps_DeleteDeployment",
         "parameters": [
           {
@@ -2345,10 +2345,10 @@
         ],
         "responses": {
           "200": {
-            "description": "Succesfully deleted deployment"
+            "description": "Succesfully deleted deployment."
           },
           "204": {
-            "description": "Deployment does not exist"
+            "description": "Deployment does not exist."
           }
         }
       }
@@ -2381,7 +2381,7 @@
           {
             "name": "id",
             "in": "path",
-            "description": "The ID of a specific deployment. This is the value of the name property in the JSON response from \"GET /api/sites/{siteName}/deployments\"",
+            "description": "The ID of a specific deployment. This is the value of the name property in the JSON response from \"GET /api/sites/{siteName}/deployments\".",
             "required": true,
             "type": "string"
           },
@@ -2662,8 +2662,8 @@
         "tags": [
           "WebApps"
         ],
-        "summary": "Invoke the MSDeploy web app extension as pass-through API",
-        "description": "Invoke the MSDeploy web app extension as pass-through API",
+        "summary": "Get the status of the last MSDeploy operation.",
+        "description": "Get the status of the last MSDeploy operation.",
         "operationId": "WebApps_GetMSDeployStatus",
         "produces": [
           "application/json",
@@ -2678,7 +2678,7 @@
           {
             "name": "name",
             "in": "path",
-            "description": "Name of web app",
+            "description": "Name of web app.",
             "required": true,
             "type": "string"
           },
@@ -2702,8 +2702,8 @@
         "tags": [
           "WebApps"
         ],
-        "summary": "Invoke the MSDeploy web app extension as pass-through API",
-        "description": "Invoke the MSDeploy web app extension as pass-through API",
+        "summary": "Invoke the MSDeploy web app extension.",
+        "description": "Invoke the MSDeploy web app extension.",
         "operationId": "WebApps_CreateMSDeployOperation",
         "consumes": [
           "application/json",
@@ -2723,7 +2723,7 @@
           {
             "name": "name",
             "in": "path",
-            "description": "Name of web app",
+            "description": "Name of web app.",
             "required": true,
             "type": "string"
           },
@@ -2745,13 +2745,13 @@
         ],
         "responses": {
           "201": {
-            "description": "Deployment is scheduled",
+            "description": "Deployment is scheduled.",
             "schema": {
               "$ref": "#/definitions/MSDeployStatus"
             }
           },
           "409": {
-            "description": "Another deployment is in progress"
+            "description": "Another deployment is in progress."
           }
         },
         "x-ms-long-running-operation": true
@@ -2762,8 +2762,8 @@
         "tags": [
           "WebApps"
         ],
-        "summary": "Invoke the MSDeploy Log web app extension as pass-through API",
-        "description": "Invoke the MSDeploy Log web app extension as pass-through API",
+        "summary": "Get the MSDeploy Log for the last MSDeploy operation.",
+        "description": "Get the MSDeploy Log for the last MSDeploy operation.",
         "operationId": "WebApps_GetMSDeployLog",
         "produces": [
           "application/json",
@@ -2778,7 +2778,7 @@
           {
             "name": "name",
             "in": "path",
-            "description": "Name of web app",
+            "description": "Name of web app.",
             "required": true,
             "type": "string"
           },
@@ -2791,10 +2791,13 @@
         ],
         "responses": {
           "200": {
-            "description": "OK",
+            "description": "MSDeploy log returned.",
             "schema": {
               "$ref": "#/definitions/MSDeployLog"
             }
+          },
+          "404": {
+            "description": "MSDeploy log not found."
           }
         }
       }
@@ -2804,8 +2807,8 @@
         "tags": [
           "WebApps"
         ],
-        "summary": "Get list of functions for a web site, or a deployment slot.",
-        "description": "Get list of functions for a web site, or a deployment slot.",
+        "summary": "List the functions for a web site, or a deployment slot.",
+        "description": "List the functions for a web site, or a deployment slot.",
         "operationId": "WebApps_ListFunctions",
         "produces": [
           "application/json",
@@ -2831,13 +2834,13 @@
         ],
         "responses": {
           "200": {
-            "description": "SiteExtension terminated",
+            "description": "Function information returned.",
             "schema": {
               "$ref": "#/definitions/FunctionEnvelopeCollection"
             }
           },
           "404": {
-            "description": "SiteExtension with an Id of {functionName} is not running"
+            "description": "Function with an ID of {functionName} is not running."
           }
         },
         "x-ms-pageable": {
@@ -2866,7 +2869,7 @@
           {
             "name": "name",
             "in": "path",
-            "description": "Name of web app",
+            "description": "Name of web app.",
             "required": true,
             "type": "string"
           },
@@ -2928,13 +2931,13 @@
         ],
         "responses": {
           "200": {
-            "description": "Function information returned",
+            "description": "Function information returned.",
             "schema": {
               "$ref": "#/definitions/FunctionEnvelope"
             }
           },
           "404": {
-            "description": "Function with an name of {functionName} is not running"
+            "description": "Function with an name of {functionName} is not running."
           }
         }
       },
@@ -2992,7 +2995,7 @@
         ],
         "responses": {
           "201": {
-            "description": "Function created",
+            "description": "Function created.",
             "schema": {
               "$ref": "#/definitions/FunctionEnvelope"
             }
@@ -3034,10 +3037,10 @@
         ],
         "responses": {
           "204": {
-            "description": "Function deleted"
+            "description": "Function deleted."
           },
           "404": {
-            "description": "Function does not exist"
+            "description": "Function does not exist."
           }
         }
       }
@@ -3083,7 +3086,7 @@
         ],
         "responses": {
           "200": {
-            "description": "Function secrets returned",
+            "description": "Function secrets returned.",
             "schema": {
               "$ref": "#/definitions/FunctionSecrets"
             }
@@ -3277,10 +3280,10 @@
         ],
         "responses": {
           "200": {
-            "description": "Succesfully deleted hostname binding"
+            "description": "Succesfully deleted hostname binding."
           },
           "204": {
-            "description": "Hostname binding does not exist"
+            "description": "Hostname binding does not exist."
           }
         }
       }
@@ -3306,21 +3309,21 @@
           {
             "name": "name",
             "in": "path",
-            "description": "The name of the web app",
+            "description": "The name of the web app.",
             "required": true,
             "type": "string"
           },
           {
             "name": "namespaceName",
             "in": "path",
-            "description": "The namespace for this hybrid connection",
+            "description": "The namespace for this hybrid connection.",
             "required": true,
             "type": "string"
           },
           {
             "name": "relayName",
             "in": "path",
-            "description": "The relay name for this hybrid connection",
+            "description": "The relay name for this hybrid connection.",
             "required": true,
             "type": "string"
           },
@@ -3365,28 +3368,28 @@
           {
             "name": "name",
             "in": "path",
-            "description": "The name of the web app",
+            "description": "The name of the web app.",
             "required": true,
             "type": "string"
           },
           {
             "name": "namespaceName",
             "in": "path",
-            "description": "The namespace for this hybrid connection",
+            "description": "The namespace for this hybrid connection.",
             "required": true,
             "type": "string"
           },
           {
             "name": "relayName",
             "in": "path",
-            "description": "The relay name for this hybrid connection",
+            "description": "The relay name for this hybrid connection.",
             "required": true,
             "type": "string"
           },
           {
             "name": "connectionEnvelope",
             "in": "body",
-            "description": "The details of the hybrid connection",
+            "description": "The details of the hybrid connection.",
             "required": true,
             "schema": {
               "$ref": "#/definitions/HybridConnection"
@@ -3422,21 +3425,21 @@
           {
             "name": "name",
             "in": "path",
-            "description": "The name of the web app",
+            "description": "The name of the web app.",
             "required": true,
             "type": "string"
           },
           {
             "name": "namespaceName",
             "in": "path",
-            "description": "The namespace for this hybrid connection",
+            "description": "The namespace for this hybrid connection.",
             "required": true,
             "type": "string"
           },
           {
             "name": "relayName",
             "in": "path",
-            "description": "The relay name for this hybrid connection",
+            "description": "The relay name for this hybrid connection.",
             "required": true,
             "type": "string"
           },
@@ -3481,28 +3484,28 @@
           {
             "name": "name",
             "in": "path",
-            "description": "The name of the web app",
+            "description": "The name of the web app.",
             "required": true,
             "type": "string"
           },
           {
             "name": "namespaceName",
             "in": "path",
-            "description": "The namespace for this hybrid connection",
+            "description": "The namespace for this hybrid connection.",
             "required": true,
             "type": "string"
           },
           {
             "name": "relayName",
             "in": "path",
-            "description": "The relay name for this hybrid connection",
+            "description": "The relay name for this hybrid connection.",
             "required": true,
             "type": "string"
           },
           {
             "name": "connectionEnvelope",
             "in": "body",
-            "description": "The details of the hybrid connection",
+            "description": "The details of the hybrid connection.",
             "required": true,
             "schema": {
               "$ref": "#/definitions/HybridConnection"
@@ -3546,21 +3549,21 @@
           {
             "name": "name",
             "in": "path",
-            "description": "The name of the web app",
+            "description": "The name of the web app.",
             "required": true,
             "type": "string"
           },
           {
             "name": "namespaceName",
             "in": "path",
-            "description": "The namespace for this hybrid connection",
+            "description": "The namespace for this hybrid connection.",
             "required": true,
             "type": "string"
           },
           {
             "name": "relayName",
             "in": "path",
-            "description": "The relay name for this hybrid connection",
+            "description": "The relay name for this hybrid connection.",
             "required": true,
             "type": "string"
           },
@@ -3602,7 +3605,7 @@
           {
             "name": "name",
             "in": "path",
-            "description": "The name of the web app",
+            "description": "The name of the web app.",
             "required": true,
             "type": "string"
           },
@@ -3925,8 +3928,8 @@
         "tags": [
           "WebApps"
         ],
-        "summary": "Invoke the MSDeploy web app extension as pass-through API",
-        "description": "Invoke the MSDeploy web app extension as pass-through API",
+        "summary": "Get the status of the last MSDeploy operation.",
+        "description": "Get the status of the last MSDeploy operation.",
         "operationId": "WebApps_GetInstanceMsDeployStatus",
         "produces": [
           "application/json",
@@ -3941,14 +3944,14 @@
           {
             "name": "name",
             "in": "path",
-            "description": "Name of web app",
+            "description": "Name of web app.",
             "required": true,
             "type": "string"
           },
           {
             "name": "instanceId",
             "in": "path",
-            "description": "Id of web app instance",
+            "description": "ID of web app instance.",
             "required": true,
             "type": "string"
           },
@@ -3972,8 +3975,8 @@
         "tags": [
           "WebApps"
         ],
-        "summary": "Invoke the MSDeploy web app extension as pass-through API",
-        "description": "Invoke the MSDeploy web app extension as pass-through API",
+        "summary": "Invoke the MSDeploy web app extension.",
+        "description": "Invoke the MSDeploy web app extension.",
         "operationId": "WebApps_CreateInstanceMSDeployOperation",
         "consumes": [
           "application/json",
@@ -3993,14 +3996,14 @@
           {
             "name": "name",
             "in": "path",
-            "description": "Name of web app",
+            "description": "Name of web app.",
             "required": true,
             "type": "string"
           },
           {
             "name": "instanceId",
             "in": "path",
-            "description": "Id of web app instance",
+            "description": "ID of web app instance.",
             "required": true,
             "type": "string"
           },
@@ -4022,13 +4025,13 @@
         ],
         "responses": {
           "201": {
-            "description": "Deployment is scheduled",
+            "description": "Deployment is scheduled.",
             "schema": {
               "$ref": "#/definitions/MSDeployStatus"
             }
           },
           "409": {
-            "description": "Another deployment is in progress"
+            "description": "Another deployment is in progress."
           }
         },
         "x-ms-long-running-operation": true
@@ -4039,8 +4042,8 @@
         "tags": [
           "WebApps"
         ],
-        "summary": "Invoke the MSDeploy Log web app extension as pass-through API",
-        "description": "Invoke the MSDeploy Log web app extension as pass-through API",
+        "summary": "Get the MSDeploy Log for the last MSDeploy operation.",
+        "description": "Get the MSDeploy Log for the last MSDeploy operation.",
         "operationId": "WebApps_GetInstanceMSDeployLog",
         "produces": [
           "application/json",
@@ -4055,14 +4058,14 @@
           {
             "name": "name",
             "in": "path",
-            "description": "Name of web app",
+            "description": "Name of web app.",
             "required": true,
             "type": "string"
           },
           {
             "name": "instanceId",
             "in": "path",
-            "description": "Id of web app instance",
+            "description": "ID of web app instance.",
             "required": true,
             "type": "string"
           },
@@ -4075,10 +4078,13 @@
         ],
         "responses": {
           "200": {
-            "description": "OK",
+            "description": "MSDeploy log returned.",
             "schema": {
               "$ref": "#/definitions/MSDeployLog"
             }
+          },
+          "404": {
+            "description": "MSDeploy log not found."
           }
         }
       }
@@ -4109,7 +4115,7 @@
           {
             "name": "instanceId",
             "in": "path",
-            "description": "ID of a specific scaled-out instance. This is the value of the name property in the JSON response from \"GET api/sites/{siteName}/instances\"",
+            "description": "ID of a specific scaled-out instance. This is the value of the name property in the JSON response from \"GET api/sites/{siteName}/instances\".",
             "required": true,
             "type": "string"
           },
@@ -4122,13 +4128,13 @@
         ],
         "responses": {
           "200": {
-            "description": "Process terminated",
+            "description": "Process terminated.",
             "schema": {
               "$ref": "#/definitions/ProcessInfoCollection"
             }
           },
           "404": {
-            "description": "Process with an Id of {processId} is not running"
+            "description": "Process with the specified ID is not running."
           }
         },
         "x-ms-pageable": {
@@ -4164,14 +4170,14 @@
           {
             "name": "processId",
             "in": "path",
-            "description": "PID",
+            "description": "PID.",
             "required": true,
             "type": "string"
           },
           {
             "name": "instanceId",
             "in": "path",
-            "description": "ID of a specific scaled-out instance. This is the value of the name property in the JSON response from \"GET api/sites/{siteName}/instances\"",
+            "description": "ID of a specific scaled-out instance. This is the value of the name property in the JSON response from \"GET api/sites/{siteName}/instances\".",
             "required": true,
             "type": "string"
           },
@@ -4184,13 +4190,13 @@
         ],
         "responses": {
           "200": {
-            "description": "Process information returned",
+            "description": "Process information returned.",
             "schema": {
               "$ref": "#/definitions/ProcessInfo"
             }
           },
           "404": {
-            "description": "Process with an Id of {processId} is not running"
+            "description": "Process with the specified ID is not running."
           }
         }
       },
@@ -4215,14 +4221,14 @@
           {
             "name": "processId",
             "in": "path",
-            "description": "PID",
+            "description": "PID.",
             "required": true,
             "type": "string"
           },
           {
             "name": "instanceId",
             "in": "path",
-            "description": "ID of a specific scaled-out instance. This is the value of the name property in the JSON response from \"GET api/sites/{siteName}/instances\"",
+            "description": "ID of a specific scaled-out instance. This is the value of the name property in the JSON response from \"GET api/sites/{siteName}/instances\".",
             "required": true,
             "type": "string"
           },
@@ -4235,10 +4241,10 @@
         ],
         "responses": {
           "204": {
-            "description": "Process terminated"
+            "description": "Process terminated."
           },
           "404": {
-            "description": "Process with an Id of {processId} is not running"
+            "description": "Process with the specified ID is not running."
           }
         }
       }
@@ -4265,14 +4271,14 @@
           {
             "name": "processId",
             "in": "path",
-            "description": "PID",
+            "description": "PID.",
             "required": true,
             "type": "string"
           },
           {
             "name": "instanceId",
             "in": "path",
-            "description": "ID of a specific scaled-out instance. This is the value of the name property in the JSON response from \"GET api/sites/{siteName}/instances\"",
+            "description": "ID of a specific scaled-out instance. This is the value of the name property in the JSON response from \"GET api/sites/{siteName}/instances\".",
             "required": true,
             "type": "string"
           },
@@ -4291,7 +4297,7 @@
             }
           },
           "404": {
-            "description": "Process with an Id of {processId} is not running"
+            "description": "Process with the specified ID is not running."
           }
         }
       }
@@ -4322,14 +4328,14 @@
           {
             "name": "processId",
             "in": "path",
-            "description": "PID",
+            "description": "PID.",
             "required": true,
             "type": "string"
           },
           {
             "name": "instanceId",
             "in": "path",
-            "description": "ID of a specific scaled-out instance. This is the value of the name property in the JSON response from \"GET api/sites/{siteName}/instances\"",
+            "description": "ID of a specific scaled-out instance. This is the value of the name property in the JSON response from \"GET api/sites/{siteName}/instances\".",
             "required": true,
             "type": "string"
           },
@@ -4342,13 +4348,13 @@
         ],
         "responses": {
           "200": {
-            "description": "Module information returned",
+            "description": "Module information returned.",
             "schema": {
               "$ref": "#/definitions/ProcessModuleInfoCollection"
             }
           },
           "404": {
-            "description": "Process with an Id of {processId} is not running"
+            "description": "Process with the specified ID is not running."
           }
         },
         "x-ms-pageable": {
@@ -4384,7 +4390,7 @@
           {
             "name": "processId",
             "in": "path",
-            "description": "PID",
+            "description": "PID.",
             "required": true,
             "type": "string"
           },
@@ -4398,7 +4404,7 @@
           {
             "name": "instanceId",
             "in": "path",
-            "description": "ID of a specific scaled-out instance. This is the value of the name property in the JSON response from \"GET api/sites/{siteName}/instances\"",
+            "description": "ID of a specific scaled-out instance. This is the value of the name property in the JSON response from \"GET api/sites/{siteName}/instances\".",
             "required": true,
             "type": "string"
           },
@@ -4417,13 +4423,13 @@
         ],
         "responses": {
           "200": {
-            "description": "Module information returned",
+            "description": "Module information returned.",
             "schema": {
               "$ref": "#/definitions/ProcessModuleInfo"
             }
           },
           "404": {
-            "description": "Process with an Id of {processId} is not running, or a module with the specific {base_address} is not found."
+            "description": "Process with the specified ID is not running, or a module with the specified base_address was not found."
           }
         }
       }
@@ -4454,14 +4460,14 @@
           {
             "name": "processId",
             "in": "path",
-            "description": "PID",
+            "description": "PID.",
             "required": true,
             "type": "string"
           },
           {
             "name": "instanceId",
             "in": "path",
-            "description": "ID of a specific scaled-out instance. This is the value of the name property in the JSON response from \"GET api/sites/{siteName}/instances\"",
+            "description": "ID of a specific scaled-out instance. This is the value of the name property in the JSON response from \"GET api/sites/{siteName}/instances\".",
             "required": true,
             "type": "string"
           },
@@ -4474,13 +4480,13 @@
         ],
         "responses": {
           "200": {
-            "description": "Thread information returned",
+            "description": "Thread information returned.",
             "schema": {
               "$ref": "#/definitions/ProcessThreadInfoCollection"
             }
           },
           "404": {
-            "description": "Process with an ID of {processId} is not running."
+            "description": "Process with the specified ID is not running."
           }
         },
         "x-ms-pageable": {
@@ -4516,21 +4522,21 @@
           {
             "name": "processId",
             "in": "path",
-            "description": "PID",
+            "description": "PID.",
             "required": true,
             "type": "string"
           },
           {
             "name": "threadId",
             "in": "path",
-            "description": "TID",
+            "description": "TID.",
             "required": true,
             "type": "string"
           },
           {
             "name": "instanceId",
             "in": "path",
-            "description": "ID of a specific scaled-out instance. This is the value of the name property in the JSON response from \"GET api/sites/{siteName}/instances\"",
+            "description": "ID of a specific scaled-out instance. This is the value of the name property in the JSON response from \"GET api/sites/{siteName}/instances\".",
             "required": true,
             "type": "string"
           },
@@ -4543,13 +4549,13 @@
         ],
         "responses": {
           "200": {
-            "description": "Process information returned",
+            "description": "Thread information returned.",
             "schema": {
               "$ref": "#/definitions/ProcessThreadInfo"
             }
           },
           "404": {
-            "description": "Process with an Id of {processId} is not running"
+            "description": "Either the thread with the specified TID was not found, or the process with the specified PID is not running."
           }
         }
       }
@@ -4588,7 +4594,7 @@
         ],
         "responses": {
           "200": {
-            "description": "OK",
+            "description": "OK.",
             "schema": {
               "$ref": "#/definitions/SiteCloneability"
             }
@@ -4601,8 +4607,8 @@
         "tags": [
           "WebApps"
         ],
-        "summary": "this is to allow calling via powershell and ARM template",
-        "description": "this is to allow calling via powershell and ARM template",
+        "summary": "This is to allow calling via powershell and ARM template.",
+        "description": "This is to allow calling via powershell and ARM template.",
         "operationId": "WebApps_ListSyncFunctionTriggers",
         "produces": [
           "application/json",
@@ -4760,7 +4766,7 @@
           {
             "name": "subscriptionName",
             "in": "query",
-            "description": "Azure subscription",
+            "description": "Azure subscription.",
             "required": true,
             "type": "string"
           },
@@ -4770,14 +4776,14 @@
           {
             "name": "name",
             "in": "path",
-            "description": "Name of web app",
+            "description": "Name of web app.",
             "required": true,
             "type": "string"
           },
           {
             "name": "migrationOptions",
             "in": "body",
-            "description": "Migration migrationOptions",
+            "description": "Migration migrationOptions.",
             "required": true,
             "schema": {
               "$ref": "#/definitions/StorageMigrationOptions"
@@ -4827,14 +4833,14 @@
           {
             "name": "name",
             "in": "path",
-            "description": "Name of web app",
+            "description": "Name of web app.",
             "required": true,
             "type": "string"
           },
           {
             "name": "migrationRequestEnvelope",
             "in": "body",
-            "description": "MySql migration options",
+            "description": "MySql migration options.",
             "required": true,
             "schema": {
               "$ref": "#/definitions/MigrateMySqlRequest"
@@ -4879,7 +4885,7 @@
           {
             "name": "name",
             "in": "path",
-            "description": "Name of web app",
+            "description": "Name of web app.",
             "required": true,
             "type": "string"
           },
@@ -4941,7 +4947,7 @@
         ],
         "responses": {
           "200": {
-            "description": "OK",
+            "description": "OK.",
             "schema": {
               "$ref": "#/definitions/NetworkFeatures"
             }
@@ -5006,7 +5012,7 @@
         ],
         "responses": {
           "200": {
-            "description": "OK",
+            "description": "OK.",
             "schema": {
               "type": "string"
             }
@@ -5048,7 +5054,7 @@
         ],
         "responses": {
           "200": {
-            "description": "OK",
+            "description": "OK.",
             "schema": {
               "type": "string"
             }
@@ -5108,7 +5114,7 @@
           {
             "name": "name",
             "in": "path",
-            "description": "Name of web app",
+            "description": "Name of web app.",
             "required": true,
             "type": "string"
           },
@@ -5160,7 +5166,7 @@
           {
             "name": "name",
             "in": "path",
-            "description": "Name of web app",
+            "description": "Name of web app.",
             "required": true,
             "type": "string"
           },
@@ -5403,13 +5409,13 @@
         ],
         "responses": {
           "200": {
-            "description": "Process terminated",
+            "description": "Process terminated.",
             "schema": {
               "$ref": "#/definitions/ProcessInfoCollection"
             }
           },
           "404": {
-            "description": "Process with an Id of {processId} is not running"
+            "description": "Process with the specified ID is not running."
           }
         },
         "x-ms-pageable": {
@@ -5445,7 +5451,7 @@
           {
             "name": "processId",
             "in": "path",
-            "description": "PID",
+            "description": "PID.",
             "required": true,
             "type": "string"
           },
@@ -5458,13 +5464,13 @@
         ],
         "responses": {
           "200": {
-            "description": "Process information returned",
+            "description": "Process information returned.",
             "schema": {
               "$ref": "#/definitions/ProcessInfo"
             }
           },
           "404": {
-            "description": "Process with an Id of {processId} is not running"
+            "description": "Process with the specified ID is not running."
           }
         }
       },
@@ -5489,7 +5495,7 @@
           {
             "name": "processId",
             "in": "path",
-            "description": "PID",
+            "description": "PID.",
             "required": true,
             "type": "string"
           },
@@ -5502,10 +5508,10 @@
         ],
         "responses": {
           "204": {
-            "description": "Process terminated"
+            "description": "Process terminated."
           },
           "404": {
-            "description": "Process with an Id of {processId} is not running"
+            "description": "Process with the specified ID is not running."
           }
         }
       }
@@ -5532,7 +5538,7 @@
           {
             "name": "processId",
             "in": "path",
-            "description": "PID",
+            "description": "PID.",
             "required": true,
             "type": "string"
           },
@@ -5551,7 +5557,7 @@
             }
           },
           "404": {
-            "description": "Process with an Id of {processId} is not running"
+            "description": "Process with the specified ID is not running."
           }
         }
       }
@@ -5582,7 +5588,7 @@
           {
             "name": "processId",
             "in": "path",
-            "description": "PID",
+            "description": "PID.",
             "required": true,
             "type": "string"
           },
@@ -5595,13 +5601,13 @@
         ],
         "responses": {
           "200": {
-            "description": "Module information returned",
+            "description": "Module information returned.",
             "schema": {
               "$ref": "#/definitions/ProcessModuleInfoCollection"
             }
           },
           "404": {
-            "description": "Process with an Id of {processId} is not running"
+            "description": "Process with the specified ID is not running."
           }
         },
         "x-ms-pageable": {
@@ -5637,7 +5643,7 @@
           {
             "name": "processId",
             "in": "path",
-            "description": "PID",
+            "description": "PID.",
             "required": true,
             "type": "string"
           },
@@ -5663,13 +5669,13 @@
         ],
         "responses": {
           "200": {
-            "description": "Module information returned",
+            "description": "Module information returned.",
             "schema": {
               "$ref": "#/definitions/ProcessModuleInfo"
             }
           },
           "404": {
-            "description": "Process with an Id of {processId} is not running, or a module with the specific {base_address} is not found."
+            "description": "Process with the specified ID is not running, or a module with the specified base_address was not found."
           }
         }
       }
@@ -5700,7 +5706,7 @@
           {
             "name": "processId",
             "in": "path",
-            "description": "PID",
+            "description": "PID.",
             "required": true,
             "type": "string"
           },
@@ -5713,13 +5719,13 @@
         ],
         "responses": {
           "200": {
-            "description": "Thread information returned",
+            "description": "Thread information returned.",
             "schema": {
               "$ref": "#/definitions/ProcessThreadInfoCollection"
             }
           },
           "404": {
-            "description": "Process with an ID of {processId} is not running."
+            "description": "Process with the specified ID is not running."
           }
         },
         "x-ms-pageable": {
@@ -5755,14 +5761,14 @@
           {
             "name": "processId",
             "in": "path",
-            "description": "PID",
+            "description": "PID.",
             "required": true,
             "type": "string"
           },
           {
             "name": "threadId",
             "in": "path",
-            "description": "TID",
+            "description": "TID.",
             "required": true,
             "type": "string"
           },
@@ -5775,13 +5781,13 @@
         ],
         "responses": {
           "200": {
-            "description": "Process information returned",
+            "description": "Thread information returned.",
             "schema": {
               "$ref": "#/definitions/ProcessThreadInfo"
             }
           },
           "404": {
-            "description": "Process with an Id of {processId} is not running"
+            "description": "Either the thread with the specified TID was not found, or the process with the specified PID is not running."
           }
         }
       }
@@ -5857,7 +5863,7 @@
           {
             "name": "publicCertificateName",
             "in": "path",
-            "description": "Public CertificateName",
+            "description": "Public certificate name.",
             "required": true,
             "type": "string"
           },
@@ -5959,7 +5965,7 @@
           {
             "name": "publicCertificateName",
             "in": "path",
-            "description": "Public Certificate Name.",
+            "description": "Public certificate name.",
             "required": true,
             "type": "string"
           },
@@ -5972,10 +5978,10 @@
         ],
         "responses": {
           "200": {
-            "description": "Succesfully deleted hostname binding"
+            "description": "Succesfully deleted hostname binding."
           },
           "204": {
-            "description": "Hostname binding does not exist"
+            "description": "Hostname binding does not exist."
           }
         }
       }
@@ -6058,7 +6064,7 @@
           {
             "name": "name",
             "in": "path",
-            "description": "Name of web app",
+            "description": "Name of web app.",
             "required": true,
             "type": "string"
           },
@@ -6080,7 +6086,7 @@
         ],
         "responses": {
           "202": {
-            "description": "Recovery operation started"
+            "description": "Recovery operation started."
           }
         },
         "x-ms-long-running-operation": true
@@ -6114,7 +6120,7 @@
         ],
         "responses": {
           "200": {
-            "description": "OK"
+            "description": "OK."
           }
         }
       }
@@ -6196,13 +6202,13 @@
         ],
         "responses": {
           "200": {
-            "description": "SiteExtension information returned",
+            "description": "SiteExtension information returned.",
             "schema": {
               "$ref": "#/definitions/SiteExtensionInfoCollection"
             }
           },
           "404": {
-            "description": "SiteExtension not found"
+            "description": "SiteExtension not found."
           }
         },
         "x-ms-pageable": {
@@ -6257,13 +6263,13 @@
         ],
         "responses": {
           "200": {
-            "description": "SiteExtension information returned",
+            "description": "SiteExtension information returned.",
             "schema": {
               "$ref": "#/definitions/SiteExtensionInfo"
             }
           },
           "404": {
-            "description": "SiteExtension with an Id of {siteExtensionId} is not running"
+            "description": "SiteExtension with an ID of {siteExtensionId} is not running."
           }
         }
       },
@@ -6370,10 +6376,10 @@
         ],
         "responses": {
           "204": {
-            "description": "SiteExtension terminated"
+            "description": "SiteExtension terminated."
           },
           "404": {
-            "description": "SiteExtension with an Id of {siteExtensionId} is not running"
+            "description": "SiteExtension with an ID of {siteExtensionId} is not running."
           }
         }
       }
@@ -6517,7 +6523,7 @@
           {
             "name": "skipDnsRegistration",
             "in": "query",
-            "description": "If true web app hostname is not registered with DNS on creation. This parameter is\n only used for app creation",
+            "description": "If true web app hostname is not registered with DNS on creation. This parameter is\n only used for app creation.",
             "type": "boolean"
           },
           {
@@ -6529,13 +6535,13 @@
           {
             "name": "forceDnsRegistration",
             "in": "query",
-            "description": "If true, web app hostname is force registered with DNS",
+            "description": "If true, web app hostname is force registered with DNS.",
             "type": "boolean"
           },
           {
             "name": "ttlInSeconds",
             "in": "query",
-            "description": "Time to live in seconds for web app's default domain name",
+            "description": "Time to live in seconds for web app's default domain name.",
             "type": "string"
           },
           {
@@ -6547,13 +6553,13 @@
         ],
         "responses": {
           "200": {
-            "description": "OK",
+            "description": "OK.",
             "schema": {
               "$ref": "#/definitions/Site"
             }
           },
           "202": {
-            "description": "Asynchronous operation in progress",
+            "description": "Asynchronous operation in progress.",
             "schema": {
               "$ref": "#/definitions/Site"
             }
@@ -6589,7 +6595,7 @@
           {
             "name": "deleteMetrics",
             "in": "query",
-            "description": "If true, web app metrics are also deleted",
+            "description": "If true, web app metrics are also deleted.",
             "type": "boolean"
           },
           {
@@ -6601,7 +6607,7 @@
           {
             "name": "skipDnsRegistration",
             "in": "query",
-            "description": "If true, DNS registration is skipped",
+            "description": "If true, DNS registration is skipped.",
             "type": "boolean"
           },
           {
@@ -6613,10 +6619,10 @@
         ],
         "responses": {
           "200": {
-            "description": "Succesfully deleted web app"
+            "description": "Succesfully deleted web app."
           },
           "404": {
-            "description": "Web app not found"
+            "description": "Web app not found."
           }
         }
       }
@@ -6642,7 +6648,7 @@
           {
             "name": "name",
             "in": "path",
-            "description": "Name of web app",
+            "description": "Name of web app.",
             "required": true,
             "type": "string"
           },
@@ -6656,7 +6662,7 @@
           {
             "name": "hostName",
             "in": "query",
-            "description": "Custom hostname",
+            "description": "Custom hostname.",
             "type": "string"
           },
           {
@@ -6727,7 +6733,7 @@
         ],
         "responses": {
           "200": {
-            "description": "OK"
+            "description": "OK."
           }
         }
       }
@@ -7038,21 +7044,21 @@
           {
             "name": "name",
             "in": "path",
-            "description": "Name of web app",
+            "description": "Name of web app.",
             "required": true,
             "type": "string"
           },
           {
             "name": "backupId",
             "in": "path",
-            "description": "Id of backup",
+            "description": "ID of backup.",
             "required": true,
             "type": "string"
           },
           {
             "name": "request",
             "in": "body",
-            "description": "Information on backup request",
+            "description": "Information on backup request.",
             "required": true,
             "schema": {
               "$ref": "#/definitions/BackupRequest"
@@ -7122,7 +7128,7 @@
           {
             "name": "request",
             "in": "body",
-            "description": "Information on restore request",
+            "description": "Information on restore request .",
             "required": true,
             "schema": {
               "$ref": "#/definitions/RestoreRequest"
@@ -7341,14 +7347,14 @@
           {
             "name": "name",
             "in": "path",
-            "description": "Name of web app",
+            "description": "Name of web app.",
             "required": true,
             "type": "string"
           },
           {
             "name": "siteAuthSettings",
             "in": "body",
-            "description": "Auth settings associated with web app",
+            "description": "Auth settings associated with web app.",
             "required": true,
             "schema": {
               "$ref": "#/definitions/SiteAuthSettings"
@@ -7987,14 +7993,14 @@
           {
             "name": "name",
             "in": "path",
-            "description": "Name of web app",
+            "description": "Name of web app.",
             "required": true,
             "type": "string"
           },
           {
             "name": "pushSettings",
             "in": "body",
-            "description": "Push settings associated with web app",
+            "description": "Push settings associated with web app.",
             "required": true,
             "schema": {
               "$ref": "#/definitions/PushSettings"
@@ -8045,7 +8051,7 @@
           {
             "name": "name",
             "in": "path",
-            "description": "Name of web app",
+            "description": "Name of web app.",
             "required": true,
             "type": "string"
           },
@@ -8503,13 +8509,13 @@
         ],
         "responses": {
           "200": {
-            "description": "Found continuous web job",
+            "description": "Found continuous web job.",
             "schema": {
               "$ref": "#/definitions/ContinuousWebJob"
             }
           },
           "404": {
-            "description": "Continuous web job does not exist"
+            "description": "Continuous web job does not exist."
           }
         }
       },
@@ -8560,10 +8566,10 @@
         ],
         "responses": {
           "200": {
-            "description": "Succesfully deleted continuous web job"
+            "description": "Succesfully deleted continuous web job."
           },
           "204": {
-            "description": "Continuous web job does not exist"
+            "description": "Continuous web job does not exist."
           }
         }
       }
@@ -8616,10 +8622,10 @@
         ],
         "responses": {
           "200": {
-            "description": "Found continuous web job"
+            "description": "Found continuous web job."
           },
           "404": {
-            "description": "Continuous web job does not exist"
+            "description": "Continuous web job does not exist."
           }
         }
       }
@@ -8672,10 +8678,10 @@
         ],
         "responses": {
           "200": {
-            "description": "Found continuous web job"
+            "description": "Found continuous web job."
           },
           "404": {
-            "description": "Continuous web job does not exist"
+            "description": "Continuous web job does not exist."
           }
         }
       }
@@ -8685,8 +8691,8 @@
         "tags": [
           "WebApps"
         ],
-        "summary": "List deployments for an app, or a deployment slot, or for an instance of a scaled-out app.",
-        "description": "List deployments for an app, or a deployment slot, or for an instance of a scaled-out app.",
+        "summary": "List deployments for an app, or a deployment slot.",
+        "description": "List deployments for an app, or a deployment slot.",
         "operationId": "WebApps_ListDeploymentsSlot",
         "produces": [
           "application/json",
@@ -8735,8 +8741,8 @@
         "tags": [
           "WebApps"
         ],
-        "summary": "Get a deployment by its ID for an app, a specific deployment slot, and/or a specific scaled-out instance.",
-        "description": "Get a deployment by its ID for an app, a specific deployment slot, and/or a specific scaled-out instance.",
+        "summary": "Get a deployment by its ID for an app, or a deployment slot.",
+        "description": "Get a deployment by its ID for an app, or a deployment slot.",
         "operationId": "WebApps_GetDeploymentSlot",
         "produces": [
           "application/json",
@@ -8789,8 +8795,8 @@
         "tags": [
           "WebApps"
         ],
-        "summary": "Create a deployment for an app, a specific deployment slot, and/or a specific scaled-out instance.",
-        "description": "Create a deployment for an app, a specific deployment slot, and/or a specific scaled-out instance.",
+        "summary": "Create a deployment for an app, or a deployment slot.",
+        "description": "Create a deployment for an app, or a deployment slot.",
         "operationId": "WebApps_CreateDeploymentSlot",
         "consumes": [
           "application/json",
@@ -8857,8 +8863,8 @@
         "tags": [
           "WebApps"
         ],
-        "summary": "Delete a deployment by its ID for an app, a specific deployment slot, and/or a specific scaled-out instance.",
-        "description": "Delete a deployment by its ID for an app, a specific deployment slot, and/or a specific scaled-out instance.",
+        "summary": "Delete a deployment by its ID for an app, or a deployment slot.",
+        "description": "Delete a deployment by its ID for an app, or a deployment slot.",
         "operationId": "WebApps_DeleteDeploymentSlot",
         "parameters": [
           {
@@ -8894,10 +8900,10 @@
         ],
         "responses": {
           "200": {
-            "description": "Succesfully deleted deployment"
+            "description": "Succesfully deleted deployment."
           },
           "204": {
-            "description": "Deployment does not exist"
+            "description": "Deployment does not exist."
           }
         }
       }
@@ -8930,7 +8936,7 @@
           {
             "name": "id",
             "in": "path",
-            "description": "The ID of a specific deployment. This is the value of the name property in the JSON response from \"GET /api/sites/{siteName}/deployments\"",
+            "description": "The ID of a specific deployment. This is the value of the name property in the JSON response from \"GET /api/sites/{siteName}/deployments\".",
             "required": true,
             "type": "string"
           },
@@ -9253,8 +9259,8 @@
         "tags": [
           "WebApps"
         ],
-        "summary": "Invoke the MSDeploy web app extension as pass-through API",
-        "description": "Invoke the MSDeploy web app extension as pass-through API",
+        "summary": "Get the status of the last MSDeploy operation.",
+        "description": "Get the status of the last MSDeploy operation.",
         "operationId": "WebApps_GetMSDeployStatusSlot",
         "produces": [
           "application/json",
@@ -9269,7 +9275,7 @@
           {
             "name": "name",
             "in": "path",
-            "description": "Name of web app",
+            "description": "Name of web app.",
             "required": true,
             "type": "string"
           },
@@ -9300,8 +9306,8 @@
         "tags": [
           "WebApps"
         ],
-        "summary": "Invoke the MSDeploy web app extension as pass-through API",
-        "description": "Invoke the MSDeploy web app extension as pass-through API",
+        "summary": "Invoke the MSDeploy web app extension.",
+        "description": "Invoke the MSDeploy web app extension.",
         "operationId": "WebApps_CreateMSDeployOperationSlot",
         "consumes": [
           "application/json",
@@ -9321,7 +9327,7 @@
           {
             "name": "name",
             "in": "path",
-            "description": "Name of web app",
+            "description": "Name of web app.",
             "required": true,
             "type": "string"
           },
@@ -9350,13 +9356,13 @@
         ],
         "responses": {
           "201": {
-            "description": "Deployment is scheduled",
+            "description": "Deployment is scheduled.",
             "schema": {
               "$ref": "#/definitions/MSDeployStatus"
             }
           },
           "409": {
-            "description": "Another deployment is in progress"
+            "description": "Another deployment is in progress."
           }
         },
         "x-ms-long-running-operation": true
@@ -9367,8 +9373,8 @@
         "tags": [
           "WebApps"
         ],
-        "summary": "Invoke the MSDeploy Log web app extension as pass-through API",
-        "description": "Invoke the MSDeploy Log web app extension as pass-through API",
+        "summary": "Get the MSDeploy Log for the last MSDeploy operation.",
+        "description": "Get the MSDeploy Log for the last MSDeploy operation.",
         "operationId": "WebApps_GetMSDeployLogSlot",
         "produces": [
           "application/json",
@@ -9383,7 +9389,7 @@
           {
             "name": "name",
             "in": "path",
-            "description": "Name of web app",
+            "description": "Name of web app.",
             "required": true,
             "type": "string"
           },
@@ -9403,10 +9409,13 @@
         ],
         "responses": {
           "200": {
-            "description": "OK",
+            "description": "MSDeploy log returned.",
             "schema": {
               "$ref": "#/definitions/MSDeployLog"
             }
+          },
+          "404": {
+            "description": "MSDeploy log not found."
           }
         }
       }
@@ -9416,8 +9425,8 @@
         "tags": [
           "WebApps"
         ],
-        "summary": "Get list of functions for a web site, or a deployment slot.",
-        "description": "Get list of functions for a web site, or a deployment slot.",
+        "summary": "List the functions for a web site, or a deployment slot.",
+        "description": "List the functions for a web site, or a deployment slot.",
         "operationId": "WebApps_ListInstanceFunctionsSlot",
         "produces": [
           "application/json",
@@ -9450,13 +9459,13 @@
         ],
         "responses": {
           "200": {
-            "description": "SiteExtension terminated",
+            "description": "Function information returned.",
             "schema": {
               "$ref": "#/definitions/FunctionEnvelopeCollection"
             }
           },
           "404": {
-            "description": "SiteExtension with an Id of {functionName} is not running"
+            "description": "Function with an ID of {functionName} is not running."
           }
         },
         "x-ms-pageable": {
@@ -9485,7 +9494,7 @@
           {
             "name": "name",
             "in": "path",
-            "description": "Name of web app",
+            "description": "Name of web app.",
             "required": true,
             "type": "string"
           },
@@ -9561,13 +9570,13 @@
         ],
         "responses": {
           "200": {
-            "description": "Function information returned",
+            "description": "Function information returned.",
             "schema": {
               "$ref": "#/definitions/FunctionEnvelope"
             }
           },
           "404": {
-            "description": "Function with an name of {functionName} is not running"
+            "description": "Function with an name of {functionName} is not running."
           }
         }
       },
@@ -9632,7 +9641,7 @@
         ],
         "responses": {
           "201": {
-            "description": "Function created",
+            "description": "Function created.",
             "schema": {
               "$ref": "#/definitions/FunctionEnvelope"
             }
@@ -9681,10 +9690,10 @@
         ],
         "responses": {
           "204": {
-            "description": "Function deleted"
+            "description": "Function deleted."
           },
           "404": {
-            "description": "Function does not exist"
+            "description": "Function does not exist."
           }
         }
       }
@@ -9737,7 +9746,7 @@
         ],
         "responses": {
           "200": {
-            "description": "Function secrets returned",
+            "description": "Function secrets returned.",
             "schema": {
               "$ref": "#/definitions/FunctionSecrets"
             }
@@ -9959,10 +9968,10 @@
         ],
         "responses": {
           "200": {
-            "description": "Succesfully deleted hostname binding"
+            "description": "Succesfully deleted hostname binding."
           },
           "204": {
-            "description": "Hostname binding does not exist"
+            "description": "Hostname binding does not exist."
           }
         }
       }
@@ -9988,21 +9997,21 @@
           {
             "name": "name",
             "in": "path",
-            "description": "The name of the web app",
+            "description": "The name of the web app.",
             "required": true,
             "type": "string"
           },
           {
             "name": "namespaceName",
             "in": "path",
-            "description": "The namespace for this hybrid connection",
+            "description": "The namespace for this hybrid connection.",
             "required": true,
             "type": "string"
           },
           {
             "name": "relayName",
             "in": "path",
-            "description": "The relay name for this hybrid connection",
+            "description": "The relay name for this hybrid connection.",
             "required": true,
             "type": "string"
           },
@@ -10054,28 +10063,28 @@
           {
             "name": "name",
             "in": "path",
-            "description": "The name of the web app",
+            "description": "The name of the web app.",
             "required": true,
             "type": "string"
           },
           {
             "name": "namespaceName",
             "in": "path",
-            "description": "The namespace for this hybrid connection",
+            "description": "The namespace for this hybrid connection.",
             "required": true,
             "type": "string"
           },
           {
             "name": "relayName",
             "in": "path",
-            "description": "The relay name for this hybrid connection",
+            "description": "The relay name for this hybrid connection.",
             "required": true,
             "type": "string"
           },
           {
             "name": "connectionEnvelope",
             "in": "body",
-            "description": "The details of the hybrid connection",
+            "description": "The details of the hybrid connection.",
             "required": true,
             "schema": {
               "$ref": "#/definitions/HybridConnection"
@@ -10118,21 +10127,21 @@
           {
             "name": "name",
             "in": "path",
-            "description": "The name of the web app",
+            "description": "The name of the web app.",
             "required": true,
             "type": "string"
           },
           {
             "name": "namespaceName",
             "in": "path",
-            "description": "The namespace for this hybrid connection",
+            "description": "The namespace for this hybrid connection.",
             "required": true,
             "type": "string"
           },
           {
             "name": "relayName",
             "in": "path",
-            "description": "The relay name for this hybrid connection",
+            "description": "The relay name for this hybrid connection.",
             "required": true,
             "type": "string"
           },
@@ -10184,28 +10193,28 @@
           {
             "name": "name",
             "in": "path",
-            "description": "The name of the web app",
+            "description": "The name of the web app.",
             "required": true,
             "type": "string"
           },
           {
             "name": "namespaceName",
             "in": "path",
-            "description": "The namespace for this hybrid connection",
+            "description": "The namespace for this hybrid connection.",
             "required": true,
             "type": "string"
           },
           {
             "name": "relayName",
             "in": "path",
-            "description": "The relay name for this hybrid connection",
+            "description": "The relay name for this hybrid connection.",
             "required": true,
             "type": "string"
           },
           {
             "name": "connectionEnvelope",
             "in": "body",
-            "description": "The details of the hybrid connection",
+            "description": "The details of the hybrid connection.",
             "required": true,
             "schema": {
               "$ref": "#/definitions/HybridConnection"
@@ -10256,21 +10265,21 @@
           {
             "name": "name",
             "in": "path",
-            "description": "The name of the web app",
+            "description": "The name of the web app.",
             "required": true,
             "type": "string"
           },
           {
             "name": "namespaceName",
             "in": "path",
-            "description": "The namespace for this hybrid connection",
+            "description": "The namespace for this hybrid connection.",
             "required": true,
             "type": "string"
           },
           {
             "name": "relayName",
             "in": "path",
-            "description": "The relay name for this hybrid connection",
+            "description": "The relay name for this hybrid connection.",
             "required": true,
             "type": "string"
           },
@@ -10319,7 +10328,7 @@
           {
             "name": "name",
             "in": "path",
-            "description": "The name of the web app",
+            "description": "The name of the web app.",
             "required": true,
             "type": "string"
           },
@@ -10691,8 +10700,8 @@
         "tags": [
           "WebApps"
         ],
-        "summary": "Invoke the MSDeploy web app extension as pass-through API",
-        "description": "Invoke the MSDeploy web app extension as pass-through API",
+        "summary": "Get the status of the last MSDeploy operation.",
+        "description": "Get the status of the last MSDeploy operation.",
         "operationId": "WebApps_GetInstanceMsDeployStatusSlot",
         "produces": [
           "application/json",
@@ -10707,7 +10716,7 @@
           {
             "name": "name",
             "in": "path",
-            "description": "Name of web app",
+            "description": "Name of web app.",
             "required": true,
             "type": "string"
           },
@@ -10721,7 +10730,7 @@
           {
             "name": "instanceId",
             "in": "path",
-            "description": "Id of web app instance",
+            "description": "ID of web app instance.",
             "required": true,
             "type": "string"
           },
@@ -10745,8 +10754,8 @@
         "tags": [
           "WebApps"
         ],
-        "summary": "Invoke the MSDeploy web app extension as pass-through API",
-        "description": "Invoke the MSDeploy web app extension as pass-through API",
+        "summary": "Invoke the MSDeploy web app extension.",
+        "description": "Invoke the MSDeploy web app extension.",
         "operationId": "WebApps_CreateInstanceMSDeployOperationSlot",
         "consumes": [
           "application/json",
@@ -10766,7 +10775,7 @@
           {
             "name": "name",
             "in": "path",
-            "description": "Name of web app",
+            "description": "Name of web app.",
             "required": true,
             "type": "string"
           },
@@ -10780,7 +10789,7 @@
           {
             "name": "instanceId",
             "in": "path",
-            "description": "Id of web app instance",
+            "description": "ID of web app instance.",
             "required": true,
             "type": "string"
           },
@@ -10802,13 +10811,13 @@
         ],
         "responses": {
           "201": {
-            "description": "Deployment is scheduled",
+            "description": "Deployment is scheduled.",
             "schema": {
               "$ref": "#/definitions/MSDeployStatus"
             }
           },
           "409": {
-            "description": "Another deployment is in progress"
+            "description": "Another deployment is in progress."
           }
         },
         "x-ms-long-running-operation": true
@@ -10819,8 +10828,8 @@
         "tags": [
           "WebApps"
         ],
-        "summary": "Invoke the MSDeploy Log web app extension as pass-through API",
-        "description": "Invoke the MSDeploy Log web app extension as pass-through API",
+        "summary": "Get the MSDeploy Log for the last MSDeploy operation.",
+        "description": "Get the MSDeploy Log for the last MSDeploy operation.",
         "operationId": "WebApps_GetInstanceMSDeployLogSlot",
         "produces": [
           "application/json",
@@ -10835,7 +10844,7 @@
           {
             "name": "name",
             "in": "path",
-            "description": "Name of web app",
+            "description": "Name of web app.",
             "required": true,
             "type": "string"
           },
@@ -10849,7 +10858,7 @@
           {
             "name": "instanceId",
             "in": "path",
-            "description": "Id of web app instance",
+            "description": "ID of web app instance.",
             "required": true,
             "type": "string"
           },
@@ -10862,10 +10871,13 @@
         ],
         "responses": {
           "200": {
-            "description": "OK",
+            "description": "MSDeploy log returned.",
             "schema": {
               "$ref": "#/definitions/MSDeployLog"
             }
+          },
+          "404": {
+            "description": "MSDeploy log not found."
           }
         }
       }
@@ -10903,7 +10915,7 @@
           {
             "name": "instanceId",
             "in": "path",
-            "description": "ID of a specific scaled-out instance. This is the value of the name property in the JSON response from \"GET api/sites/{siteName}/instances\"",
+            "description": "ID of a specific scaled-out instance. This is the value of the name property in the JSON response from \"GET api/sites/{siteName}/instances\".",
             "required": true,
             "type": "string"
           },
@@ -10916,13 +10928,13 @@
         ],
         "responses": {
           "200": {
-            "description": "Process terminated",
+            "description": "Process terminated.",
             "schema": {
               "$ref": "#/definitions/ProcessInfoCollection"
             }
           },
           "404": {
-            "description": "Process with an Id of {processId} is not running"
+            "description": "Process with the specified ID is not running."
           }
         },
         "x-ms-pageable": {
@@ -10958,7 +10970,7 @@
           {
             "name": "processId",
             "in": "path",
-            "description": "PID",
+            "description": "PID.",
             "required": true,
             "type": "string"
           },
@@ -10972,7 +10984,7 @@
           {
             "name": "instanceId",
             "in": "path",
-            "description": "ID of a specific scaled-out instance. This is the value of the name property in the JSON response from \"GET api/sites/{siteName}/instances\"",
+            "description": "ID of a specific scaled-out instance. This is the value of the name property in the JSON response from \"GET api/sites/{siteName}/instances\".",
             "required": true,
             "type": "string"
           },
@@ -10985,13 +10997,13 @@
         ],
         "responses": {
           "200": {
-            "description": "Process information returned",
+            "description": "Process information returned.",
             "schema": {
               "$ref": "#/definitions/ProcessInfo"
             }
           },
           "404": {
-            "description": "Process with an Id of {processId} is not running"
+            "description": "Process with the specified ID is not running."
           }
         }
       },
@@ -11016,7 +11028,7 @@
           {
             "name": "processId",
             "in": "path",
-            "description": "PID",
+            "description": "PID.",
             "required": true,
             "type": "string"
           },
@@ -11030,7 +11042,7 @@
           {
             "name": "instanceId",
             "in": "path",
-            "description": "ID of a specific scaled-out instance. This is the value of the name property in the JSON response from \"GET api/sites/{siteName}/instances\"",
+            "description": "ID of a specific scaled-out instance. This is the value of the name property in the JSON response from \"GET api/sites/{siteName}/instances\".",
             "required": true,
             "type": "string"
           },
@@ -11043,10 +11055,10 @@
         ],
         "responses": {
           "204": {
-            "description": "Process terminated"
+            "description": "Process terminated."
           },
           "404": {
-            "description": "Process with an Id of {processId} is not running"
+            "description": "Process with the specified ID is not running."
           }
         }
       }
@@ -11073,7 +11085,7 @@
           {
             "name": "processId",
             "in": "path",
-            "description": "PID",
+            "description": "PID.",
             "required": true,
             "type": "string"
           },
@@ -11087,7 +11099,7 @@
           {
             "name": "instanceId",
             "in": "path",
-            "description": "ID of a specific scaled-out instance. This is the value of the name property in the JSON response from \"GET api/sites/{siteName}/instances\"",
+            "description": "ID of a specific scaled-out instance. This is the value of the name property in the JSON response from \"GET api/sites/{siteName}/instances\".",
             "required": true,
             "type": "string"
           },
@@ -11106,7 +11118,7 @@
             }
           },
           "404": {
-            "description": "Process with an Id of {processId} is not running"
+            "description": "Process with the specified ID is not running."
           }
         }
       }
@@ -11137,7 +11149,7 @@
           {
             "name": "processId",
             "in": "path",
-            "description": "PID",
+            "description": "PID.",
             "required": true,
             "type": "string"
           },
@@ -11151,7 +11163,7 @@
           {
             "name": "instanceId",
             "in": "path",
-            "description": "ID of a specific scaled-out instance. This is the value of the name property in the JSON response from \"GET api/sites/{siteName}/instances\"",
+            "description": "ID of a specific scaled-out instance. This is the value of the name property in the JSON response from \"GET api/sites/{siteName}/instances\".",
             "required": true,
             "type": "string"
           },
@@ -11164,13 +11176,13 @@
         ],
         "responses": {
           "200": {
-            "description": "Module information returned",
+            "description": "Module information returned.",
             "schema": {
               "$ref": "#/definitions/ProcessModuleInfoCollection"
             }
           },
           "404": {
-            "description": "Process with an Id of {processId} is not running"
+            "description": "Process with the specified ID is not running."
           }
         },
         "x-ms-pageable": {
@@ -11206,7 +11218,7 @@
           {
             "name": "processId",
             "in": "path",
-            "description": "PID",
+            "description": "PID.",
             "required": true,
             "type": "string"
           },
@@ -11227,7 +11239,7 @@
           {
             "name": "instanceId",
             "in": "path",
-            "description": "ID of a specific scaled-out instance. This is the value of the name property in the JSON response from \"GET api/sites/{siteName}/instances\"",
+            "description": "ID of a specific scaled-out instance. This is the value of the name property in the JSON response from \"GET api/sites/{siteName}/instances\".",
             "required": true,
             "type": "string"
           },
@@ -11246,13 +11258,13 @@
         ],
         "responses": {
           "200": {
-            "description": "Module information returned",
+            "description": "Module information returned.",
             "schema": {
               "$ref": "#/definitions/ProcessModuleInfo"
             }
           },
           "404": {
-            "description": "Process with an Id of {processId} is not running, or a module with the specific {base_address} is not found."
+            "description": "Process with the specified ID is not running, or a module with the specified base_address was not found."
           }
         }
       }
@@ -11283,7 +11295,7 @@
           {
             "name": "processId",
             "in": "path",
-            "description": "PID",
+            "description": "PID.",
             "required": true,
             "type": "string"
           },
@@ -11297,7 +11309,7 @@
           {
             "name": "instanceId",
             "in": "path",
-            "description": "ID of a specific scaled-out instance. This is the value of the name property in the JSON response from \"GET api/sites/{siteName}/instances\"",
+            "description": "ID of a specific scaled-out instance. This is the value of the name property in the JSON response from \"GET api/sites/{siteName}/instances\".",
             "required": true,
             "type": "string"
           },
@@ -11310,13 +11322,13 @@
         ],
         "responses": {
           "200": {
-            "description": "Thread information returned",
+            "description": "Thread information returned.",
             "schema": {
               "$ref": "#/definitions/ProcessThreadInfoCollection"
             }
           },
           "404": {
-            "description": "Process with an ID of {processId} is not running."
+            "description": "Process with the specified ID is not running."
           }
         },
         "x-ms-pageable": {
@@ -11352,14 +11364,14 @@
           {
             "name": "processId",
             "in": "path",
-            "description": "PID",
+            "description": "PID.",
             "required": true,
             "type": "string"
           },
           {
             "name": "threadId",
             "in": "path",
-            "description": "TID",
+            "description": "TID.",
             "required": true,
             "type": "string"
           },
@@ -11373,7 +11385,7 @@
           {
             "name": "instanceId",
             "in": "path",
-            "description": "ID of a specific scaled-out instance. This is the value of the name property in the JSON response from \"GET api/sites/{siteName}/instances\"",
+            "description": "ID of a specific scaled-out instance. This is the value of the name property in the JSON response from \"GET api/sites/{siteName}/instances\".",
             "required": true,
             "type": "string"
           },
@@ -11386,13 +11398,13 @@
         ],
         "responses": {
           "200": {
-            "description": "Process information returned",
+            "description": "Thread information returned.",
             "schema": {
               "$ref": "#/definitions/ProcessThreadInfo"
             }
           },
           "404": {
-            "description": "Process with an Id of {processId} is not running"
+            "description": "Either the thread with the specified TID was not found, or the process with the specified PID is not running."
           }
         }
       }
@@ -11438,7 +11450,7 @@
         ],
         "responses": {
           "200": {
-            "description": "OK",
+            "description": "OK.",
             "schema": {
               "$ref": "#/definitions/SiteCloneability"
             }
@@ -11451,8 +11463,8 @@
         "tags": [
           "WebApps"
         ],
-        "summary": "this is to allow calling via powershell and ARM template",
-        "description": "this is to allow calling via powershell and ARM template",
+        "summary": "This is to allow calling via powershell and ARM template.",
+        "description": "This is to allow calling via powershell and ARM template.",
         "operationId": "WebApps_ListSyncFunctionTriggersSlot",
         "produces": [
           "application/json",
@@ -11629,14 +11641,14 @@
           {
             "name": "name",
             "in": "path",
-            "description": "Name of web app",
+            "description": "Name of web app.",
             "required": true,
             "type": "string"
           },
           {
             "name": "slot",
             "in": "path",
-            "description": "Name of the deployment slot",
+            "description": "Name of the deployment slot.",
             "required": true,
             "type": "string"
           },
@@ -11705,7 +11717,7 @@
         ],
         "responses": {
           "200": {
-            "description": "OK",
+            "description": "OK.",
             "schema": {
               "$ref": "#/definitions/NetworkFeatures"
             }
@@ -11777,7 +11789,7 @@
         ],
         "responses": {
           "200": {
-            "description": "OK",
+            "description": "OK.",
             "schema": {
               "type": "string"
             }
@@ -11826,7 +11838,7 @@
         ],
         "responses": {
           "200": {
-            "description": "OK",
+            "description": "OK.",
             "schema": {
               "type": "string"
             }
@@ -11893,7 +11905,7 @@
           {
             "name": "name",
             "in": "path",
-            "description": "Name of web app",
+            "description": "Name of web app.",
             "required": true,
             "type": "string"
           },
@@ -11952,7 +11964,7 @@
           {
             "name": "name",
             "in": "path",
-            "description": "Name of web app",
+            "description": "Name of web app.",
             "required": true,
             "type": "string"
           },
@@ -12237,13 +12249,13 @@
         ],
         "responses": {
           "200": {
-            "description": "Process terminated",
+            "description": "Process terminated.",
             "schema": {
               "$ref": "#/definitions/ProcessInfoCollection"
             }
           },
           "404": {
-            "description": "Process with an Id of {processId} is not running"
+            "description": "Process with the specified ID is not running."
           }
         },
         "x-ms-pageable": {
@@ -12279,7 +12291,7 @@
           {
             "name": "processId",
             "in": "path",
-            "description": "PID",
+            "description": "PID.",
             "required": true,
             "type": "string"
           },
@@ -12299,13 +12311,13 @@
         ],
         "responses": {
           "200": {
-            "description": "Process information returned",
+            "description": "Process information returned.",
             "schema": {
               "$ref": "#/definitions/ProcessInfo"
             }
           },
           "404": {
-            "description": "Process with an Id of {processId} is not running"
+            "description": "Process with the specified ID is not running."
           }
         }
       },
@@ -12330,7 +12342,7 @@
           {
             "name": "processId",
             "in": "path",
-            "description": "PID",
+            "description": "PID.",
             "required": true,
             "type": "string"
           },
@@ -12350,10 +12362,10 @@
         ],
         "responses": {
           "204": {
-            "description": "Process terminated"
+            "description": "Process terminated."
           },
           "404": {
-            "description": "Process with an Id of {processId} is not running"
+            "description": "Process with the specified ID is not running."
           }
         }
       }
@@ -12380,7 +12392,7 @@
           {
             "name": "processId",
             "in": "path",
-            "description": "PID",
+            "description": "PID.",
             "required": true,
             "type": "string"
           },
@@ -12406,7 +12418,7 @@
             }
           },
           "404": {
-            "description": "Process with an Id of {processId} is not running"
+            "description": "Process with the specified ID is not running."
           }
         }
       }
@@ -12437,7 +12449,7 @@
           {
             "name": "processId",
             "in": "path",
-            "description": "PID",
+            "description": "PID.",
             "required": true,
             "type": "string"
           },
@@ -12457,13 +12469,13 @@
         ],
         "responses": {
           "200": {
-            "description": "Module information returned",
+            "description": "Module information returned.",
             "schema": {
               "$ref": "#/definitions/ProcessModuleInfoCollection"
             }
           },
           "404": {
-            "description": "Process with an Id of {processId} is not running"
+            "description": "Process with the specified ID is not running."
           }
         },
         "x-ms-pageable": {
@@ -12499,7 +12511,7 @@
           {
             "name": "processId",
             "in": "path",
-            "description": "PID",
+            "description": "PID.",
             "required": true,
             "type": "string"
           },
@@ -12532,13 +12544,13 @@
         ],
         "responses": {
           "200": {
-            "description": "Module information returned",
+            "description": "Module information returned.",
             "schema": {
               "$ref": "#/definitions/ProcessModuleInfo"
             }
           },
           "404": {
-            "description": "Process with an Id of {processId} is not running, or a module with the specific {base_address} is not found."
+            "description": "Process with the specified ID is not running, or a module with the specified base_address was not found."
           }
         }
       }
@@ -12569,7 +12581,7 @@
           {
             "name": "processId",
             "in": "path",
-            "description": "PID",
+            "description": "PID.",
             "required": true,
             "type": "string"
           },
@@ -12589,13 +12601,13 @@
         ],
         "responses": {
           "200": {
-            "description": "Thread information returned",
+            "description": "Thread information returned.",
             "schema": {
               "$ref": "#/definitions/ProcessThreadInfoCollection"
             }
           },
           "404": {
-            "description": "Process with an ID of {processId} is not running."
+            "description": "Process with the specified ID is not running."
           }
         },
         "x-ms-pageable": {
@@ -12631,14 +12643,14 @@
           {
             "name": "processId",
             "in": "path",
-            "description": "PID",
+            "description": "PID.",
             "required": true,
             "type": "string"
           },
           {
             "name": "threadId",
             "in": "path",
-            "description": "TID",
+            "description": "TID.",
             "required": true,
             "type": "string"
           },
@@ -12658,13 +12670,13 @@
         ],
         "responses": {
           "200": {
-            "description": "Process information returned",
+            "description": "Thread information returned.",
             "schema": {
               "$ref": "#/definitions/ProcessThreadInfo"
             }
           },
           "404": {
-            "description": "Process with an Id of {processId} is not running"
+            "description": "Either the thread with the specified TID was not found, or the process with the specified PID is not running."
           }
         }
       }
@@ -12754,7 +12766,7 @@
           {
             "name": "publicCertificateName",
             "in": "path",
-            "description": "Public CertificateName",
+            "description": "Public certificate name.",
             "required": true,
             "type": "string"
           },
@@ -12870,7 +12882,7 @@
           {
             "name": "publicCertificateName",
             "in": "path",
-            "description": "Public Certificate Name.",
+            "description": "Public certificate name.",
             "required": true,
             "type": "string"
           },
@@ -12883,10 +12895,10 @@
         ],
         "responses": {
           "200": {
-            "description": "Succesfully deleted hostname binding"
+            "description": "Succesfully deleted hostname binding."
           },
           "204": {
-            "description": "Hostname binding does not exist"
+            "description": "Hostname binding does not exist."
           }
         }
       }
@@ -12976,7 +12988,7 @@
           {
             "name": "name",
             "in": "path",
-            "description": "Name of web app",
+            "description": "Name of web app.",
             "required": true,
             "type": "string"
           },
@@ -13005,7 +13017,7 @@
         ],
         "responses": {
           "202": {
- +            "description": "Recovery operation started"
+            "description": "Recovery operation started."
           }
         },
         "x-ms-long-running-operation": true
@@ -13046,7 +13058,7 @@
         ],
         "responses": {
           "200": {
-            "description": "OK"
+            "description": "OK."
           }
         }
       }
@@ -13142,13 +13154,13 @@
         ],
         "responses": {
           "200": {
-            "description": "SiteExtension information returned",
+            "description": "SiteExtension information returned.",
             "schema": {
               "$ref": "#/definitions/SiteExtensionInfoCollection"
             }
           },
           "404": {
-            "description": "SiteExtension not found"
+            "description": "SiteExtension not found."
           }
         },
         "x-ms-pageable": {
@@ -13210,13 +13222,13 @@
         ],
         "responses": {
           "200": {
-            "description": "SiteExtension information returned",
+            "description": "SiteExtension information returned.",
             "schema": {
               "$ref": "#/definitions/SiteExtensionInfo"
             }
           },
           "404": {
-            "description": "SiteExtension with an Id of {siteExtensionId} is not running"
+            "description": "SiteExtension with an ID of {siteExtensionId} is not running."
           }
         }
       },
@@ -13337,10 +13349,10 @@
         ],
         "responses": {
           "204": {
-            "description": "SiteExtension terminated"
+            "description": "SiteExtension terminated."
           },
           "404": {
-            "description": "SiteExtension with an Id of {siteExtensionId} is not running"
+            "description": "SiteExtension with an ID of {siteExtensionId} is not running."
           }
         }
       }
@@ -13462,10 +13474,10 @@
         ],
         "responses": {
           "200": {
-            "description": "OK"
+            "description": "OK."
           },
           "202": {
-            "description": "Operation is in progress"
+            "description": "Operation is in progress."
           }
         },
         "x-ms-long-running-operation": true
@@ -13490,14 +13502,14 @@
           {
             "name": "name",
             "in": "path",
-            "description": "Website Name",
+            "description": "Website Name.",
             "required": true,
             "type": "string"
           },
           {
             "name": "slot",
             "in": "path",
-            "description": "Website Slot",
+            "description": "Website Slot.",
             "required": true,
             "type": "string"
           },
@@ -13777,7 +13789,7 @@
           {
             "name": "name",
             "in": "path",
-            "description": "Name of web app",
+            "description": "Name of web app.",
             "required": true,
             "type": "string"
           },
@@ -13946,13 +13958,13 @@
         ],
         "responses": {
           "200": {
-            "description": "Found continuous web job",
+            "description": "Found continuous web job.",
             "schema": {
               "$ref": "#/definitions/TriggeredWebJob"
             }
           },
           "404": {
-            "description": "Triggered web job does not exist"
+            "description": "Triggered web job does not exist."
           }
         }
       },
@@ -14003,10 +14015,10 @@
         ],
         "responses": {
           "200": {
-            "description": "Succesfully deleted continuous web job"
+            "description": "Succesfully deleted continuous web job."
           },
           "204": {
-            "description": "Triggered web job does not exist"
+            "description": "Triggered web job does not exist."
           }
         }
       }
@@ -14063,13 +14075,13 @@
         ],
         "responses": {
           "200": {
-            "description": "Found continuous web job",
+            "description": "Found continuous web job.",
             "schema": {
               "$ref": "#/definitions/TriggeredJobHistoryCollection"
             }
           },
           "404": {
-            "description": "Triggered web job does not exist"
+            "description": "Triggered web job does not exist."
           }
         },
         "x-ms-pageable": {
@@ -14138,13 +14150,13 @@
         ],
         "responses": {
           "200": {
-            "description": "Found continuous web job",
+            "description": "Found continuous web job.",
             "schema": {
               "$ref": "#/definitions/TriggeredJobHistory"
             }
           },
           "404": {
-            "description": "Triggered web job does not exist"
+            "description": "Triggered web job does not exist."
           }
         }
       }
@@ -14197,10 +14209,10 @@
         ],
         "responses": {
           "200": {
-            "description": "Found continuous web job"
+            "description": "Found continuous web job."
           },
           "404": {
-            "description": "Triggered web job does not exist"
+            "description": "Triggered web job does not exist."
           }
         }
       }
@@ -14609,7 +14621,7 @@
         ],
         "responses": {
           "200": {
-            "description": "OK",
+            "description": "OK.",
             "schema": {
               "$ref": "#/definitions/VnetGateway"
             }
@@ -14979,10 +14991,10 @@
         ],
         "responses": {
           "200": {
-            "description": "OK"
+            "description": "OK."
           },
           "202": {
-            "description": "Operation is in progress"
+            "description": "Operation is in progress."
           }
         },
         "x-ms-long-running-operation": true
@@ -15007,7 +15019,7 @@
           {
             "name": "name",
             "in": "path",
-            "description": "Website Name",
+            "description": "Website Name.",
             "required": true,
             "type": "string"
           },
@@ -15252,7 +15264,7 @@
           {
             "name": "name",
             "in": "path",
-            "description": "Name of web app",
+            "description": "Name of web app.",
             "required": true,
             "type": "string"
           },
@@ -15393,13 +15405,13 @@
         ],
         "responses": {
           "200": {
-            "description": "Found continuous web job",
+            "description": "Found continuous web job.",
             "schema": {
               "$ref": "#/definitions/TriggeredWebJob"
             }
           },
           "404": {
-            "description": "Triggered web job does not exist"
+            "description": "Triggered web job does not exist."
           }
         }
       },
@@ -15443,10 +15455,10 @@
         ],
         "responses": {
           "200": {
-            "description": "Succesfully deleted continuous web job"
+            "description": "Succesfully deleted continuous web job."
           },
           "204": {
-            "description": "Triggered web job does not exist"
+            "description": "Triggered web job does not exist."
           }
         }
       }
@@ -15496,13 +15508,13 @@
         ],
         "responses": {
           "200": {
-            "description": "Found continuous web job",
+            "description": "Found continuous web job.",
             "schema": {
               "$ref": "#/definitions/TriggeredJobHistoryCollection"
             }
           },
           "404": {
-            "description": "Triggered web job does not exist"
+            "description": "Triggered web job does not exist."
           }
         },
         "x-ms-pageable": {
@@ -15564,13 +15576,13 @@
         ],
         "responses": {
           "200": {
-            "description": "Found continuous web job",
+            "description": "Found continuous web job.",
             "schema": {
               "$ref": "#/definitions/TriggeredJobHistory"
             }
           },
           "404": {
-            "description": "Triggered web job does not exist"
+            "description": "Triggered web job does not exist."
           }
         }
       }
@@ -15616,10 +15628,10 @@
         ],
         "responses": {
           "200": {
-            "description": "Found continuous web job"
+            "description": "Found continuous web job."
           },
           "404": {
-            "description": "Triggered web job does not exist"
+            "description": "Triggered web job does not exist."
           }
         }
       }
@@ -15979,7 +15991,7 @@
         ],
         "responses": {
           "200": {
-            "description": "OK",
+            "description": "OK.",
             "schema": {
               "$ref": "#/definitions/VnetGateway"
             }
@@ -17877,11 +17889,11 @@
           }
         },
         "skipAppData": {
-          "description": "Controls whether the MSDeploy operation skips the AppData directory. If set to true, the existing AppData directory on the destination will not be deleted and overwritten.",
+          "description": "Controls whether the MSDeploy operation skips the App_Data directory.\n If set to <code>true</code>, the existing App_Data directory on the destination\n will not be deleted, and any App_Data directory in the source will be ignored.\n Setting is <code>false</code> by default.",
           "type": "boolean"
         },
         "appOffline": {
-          "description": "Sets the AppOffline rule while the MSDeploy operation executes.",
+          "description": "Sets the AppOffline rule while the MSDeploy operation executes.\n Setting is <code>false</code> by default.",
           "type": "boolean"
         }
       }
@@ -19283,6 +19295,10 @@
               "default": false,
               "type": "boolean"
             },
+            "appServicePlan": {
+              "description": "Specify app service plan that will own restored site.",
+              "type": "string"
+            },
             "operationType": {
               "description": "Operation type.",
               "default": "Default",
@@ -20570,7 +20586,8 @@
           ],
           "properties": {
             "snapshotTime": {
-              "description": "Point in time in which the app recovery should be attempted, formatted as a DateTime string.",              "type": "string"
+              "description": "Point in time in which the app recovery should be attempted, formatted as a DateTime string.",
+              "type": "string"
             },
             "recoveryTarget": {
               "$ref": "#/definitions/SnapshotRecoveryTarget",
