@@ -31,7 +31,6 @@ openapi-type: arm
 tag: package-2017-09
 ```
 
-
 ### Tag: package-2017-09
 
 These settings apply only when `--tag=package-2017-09` is specified on the command line.
@@ -58,7 +57,6 @@ input-file:
 - Microsoft.Network/2017-09-01/vmssNetworkInterface.json
 - Microsoft.Network/2017-09-01/vmssPublicIpAddress.json
 ```
-
 
 ### Tag: package-2017-08
 
