@@ -1,13 +1,13 @@
 {
     "parameters":{
-        "name":"solution1",
+        "solutionName":"solution1",
         "resourceGroupName":"rg1",
         "api-version":"2015-11-01-preview",
         "subscriptionId":"subid",
         "parameters":{
             "location":"East US",
             "properties":{
-                "workspaceresourceid":"/subscriptions/sub2/resourceGroups/rg2/providers/Microsoft.OperationalInsights/workspaces/ws1",
+                "workspaceResourceId":"/subscriptions/sub2/resourceGroups/rg2/providers/Microsoft.OperationalInsights/workspaces/ws1",
                  "containedResources":[
                         "/subscriptions/sub2/resourceGroups/rg2/providers/provider1/resources/resource1",
                         "/subscriptions/sub2/resourceGroups/rg2/providers/provider2/resources/resource2"
@@ -31,9 +31,9 @@
                 "id":"subscriptions/subid/resourcegroups/rg1/providers/Microsoft.OperationsManagement/solutions/solution1",
                 "location":"East US",
                 "name":"solution1",
-                "type":"Microsoft.OperationsManagement/solution",
-                "tags":{},
+                "type":"Microsoft.OperationsManagement/solution",                
                 "properties":{
+                    "provisioningState": "Succeeded",
                     "workspaceResourceId":"/subscriptions/sub2/resourceGroups/rg2/providers/Microsoft.OperationalInsights/workspaces/ws1",
                     "containedResources":[
                         "/subscriptions/sub2/resourceGroups/rg2/providers/provider1/resources/resource1",
@@ -42,9 +42,8 @@
                      "referencedResources":[
                         "/subscriptions/sub2/resourceGroups/rg2/providers/provider1/resources/resource2",
                         "/subscriptions/sub2/resourceGroups/rg2/providers/provider2/resources/resource3"
-                    ]                   
+                    ]                 
                 },
-                "provisioningSate": "Succeeded",
                 "plan":{
                     "name":"name1",
                     "publisher":"publisher1",

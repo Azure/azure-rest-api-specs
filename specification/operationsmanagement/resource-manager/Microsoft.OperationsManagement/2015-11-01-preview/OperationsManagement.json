@@ -147,7 +147,7 @@
                     "200": {
                         "description": "OK response definition.",
                         "schema": {
-                            "$ref": "#/definitions/SolutionOutput"
+                            "$ref": "#/definitions/Solution"
                         }
                     },
                     "default": {
@@ -272,6 +272,11 @@
                     "type": "string",
                     "description": "The azure resourceId for the workspace where the solution will be deployed/enabled."
                 },
+                "provisioningState": {
+                    "type": "string",
+                    "description": "The provisioning state for the solution.",
+                    "readOnly": "true"
+                },
                 "containedResources": {
                     "type": "array",
                     "items":{
@@ -299,7 +304,7 @@
             "value":{
               "type":"array",
               "items":{
-                "$ref":"#/definitions/SolutionOutput"
+                "$ref":"#/definitions/Solution"
               },
               "description":"List of solution properites within the subscription."
             }
@@ -313,7 +318,7 @@
                   "type":"string",
                   "description":"name of the solution to be created. For Microsoft published solution it should be in the format of solutionType(workspaceName). SolutionType part is case sensitive. For third party solution, it can be anything."
                 },
-                "pulbisher": {
+                "publisher": {
                   "type":"string",
                   "description": "Publisher name. For gallery solution, it is Microsoft."
                 },
