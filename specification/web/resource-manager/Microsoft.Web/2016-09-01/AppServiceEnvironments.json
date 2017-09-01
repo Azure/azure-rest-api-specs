@@ -2707,7 +2707,7 @@
       "type": "object",
       "allOf": [
         {
-          "$ref": "#/definitions/Resource"
+          "$ref": "#/definitions/ProxyOnlyResource"
         }
       ],
       "properties": {
@@ -2847,28 +2847,64 @@
         }
       }
     },
+    "ProxyOnlyResource": {
+      "description": "Azure proxy only resource. This resource is not tracked by Azure Resource Manager.",
+      "properties": {
+        "id": {
+          "description": "Resource Id.",
+          "type": "string",
+          "readOnly": true
+        },
+        "name": {
+          "description": "Resource Name.",
+          "type": "string",
+          "readOnly": true
+        },
+        "kind": {
+          "description": "Kind of resource.",
+          "type": "string"
+        },
+        "type": {
+          "description": "Resource type.",
+          "type": "string",
+          "readOnly": true
+        }
+      },
+      "x-ms-azure-resource": true
+    },
     "PushSettings": {
       "description": "Push settings for the App.",
-      "required": [
-        "isPushEnabled"
-      ],
       "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/ProxyOnlyResource"
+        }
+      ],
       "properties": {
-        "isPushEnabled": {
-          "description": "Gets or sets a flag indicating whether the Push endpoint is enabled.",
-          "type": "boolean"
-        },
-        "tagWhitelistJson": {
-          "description": "Gets or sets a JSON string containing a list of tags that are whitelisted for use by the push registration endpoint.",
-          "type": "string"
-        },
-        "tagsRequiringAuth": {
-          "description": "Gets or sets a JSON string containing a list of tags that require user authentication to be used in the push registration endpoint.\n Tags can consist of alphanumeric characters and the following:\n '_', '@', '#', '.', ':', '-'. \n Validation should be performed at the PushRequestHandler.",
-          "type": "string"
-        },
-        "dynamicTagsJson": {
-          "description": "Gets or sets a JSON string containing a list of dynamic tags that will be evaluated from user claims in the push registration endpoint.",
-          "type": "string"
+        "properties": {
+          "description": "PushSettings resource specific properties",
+          "required": [
+            "isPushEnabled"
+          ],
+          "properties": {
+            "isPushEnabled": {
+              "description": "Gets or sets a flag indicating whether the Push endpoint is enabled.",
+              "type": "boolean"
+            },
+            "tagWhitelistJson": {
+              "description": "Gets or sets a JSON string containing a list of tags that are whitelisted for use by the push registration endpoint.",
+              "type": "string"
+            },
+            "tagsRequiringAuth": {
+              "description": "Gets or sets a JSON string containing a list of tags that require user authentication to be used in the push registration endpoint.\n Tags can consist of alphanumeric characters and the following:\n '_', '@', '#', '.', ':', '-'. \n Validation should be performed at the PushRequestHandler.",
+              "type": "string"
+            },
+            "dynamicTagsJson": {
+              "description": "Gets or sets a JSON string containing a list of dynamic tags that will be evaluated from user claims in the push registration endpoint.",
+              "type": "string"
+            }
+          },
+          "x-ms-client-flatten": true
         }
       }
     },
@@ -2931,7 +2967,7 @@
       }
     },
     "Resource": {
-      "description": "Azure resource.",
+      "description": "Azure resource. This resource is tracked in Azure Resource Manager",
       "required": [
         "location"
       ],
@@ -2943,7 +2979,8 @@
         },
         "name": {
           "description": "Resource Name.",
-          "type": "string"
+          "type": "string",
+          "readOnly": true
         },
         "kind": {
           "description": "Kind of resource.",
@@ -2955,7 +2992,8 @@
         },
         "type": {
           "description": "Resource type.",
-          "type": "string"
+          "type": "string",
+          "readOnly": true
         },
         "tags": {
           "description": "Resource tags.",
@@ -3067,7 +3105,7 @@
       "type": "object",
       "allOf": [
         {
-          "$ref": "#/definitions/Resource"
+          "$ref": "#/definitions/ProxyOnlyResource"
         }
       ],
       "properties": {
@@ -3408,6 +3446,13 @@
             "cloningInfo": {
               "$ref": "#/definitions/CloningInfo",
               "description": "If specified during app creation, the app is cloned from a source app.",
+              "x-ms-mutability": [
+                "create"
+              ]
+            },
+            "snapshotInfo": {
+              "$ref": "#/definitions/SnapshotRecoveryRequest",
+              "description": "If specified during app creation, the app is created from a previous snapshot.",
               "x-ms-mutability": [
                 "create"
               ]
@@ -3873,6 +3918,60 @@
         }
       }
     },
+    "SnapshotRecoveryRequest": {
+      "description": "Details about app recovery operation.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/ProxyOnlyResource"
+        }
+      ],
+      "properties": {
+        "properties": {
+          "description": "SnapshotRecoveryRequest resource specific properties",
+          "required": [
+            "overwrite"
+          ],
+          "properties": {
+            "snapshotTime": {
+              "description": "Point in time in which the app recovery should be attempted, formatted as a DateTime string.",
+              "type": "string"
+            },
+            "recoveryTarget": {
+              "$ref": "#/definitions/SnapshotRecoveryTarget",
+              "description": "Specifies the web app that snapshot contents will be written to."
+            },
+            "overwrite": {
+              "description": "If <code>true</code> the recovery operation can overwrite source app; otherwise, <code>false</code>.",
+              "type": "boolean"
+            },
+            "recoverConfiguration": {
+              "description": "If true, site configuration, in addition to content, will be reverted.",
+              "type": "boolean"
+            },
+            "ignoreConflictingHostNames": {
+              "description": "If true, custom hostname conflicts will be ignored when recovering to a target web app.\n This setting is only necessary when RecoverConfiguration is enabled.",
+              "type": "boolean"
+            }
+          },
+          "x-ms-client-flatten": true
+        }
+      }
+    },
+    "SnapshotRecoveryTarget": {
+      "description": "Specifies the web app that snapshot contents will be written to.",
+      "type": "object",
+      "properties": {
+        "location": {
+          "description": "Geographical location of the target web app, e.g. SouthEastAsia, SouthCentralUS",
+          "type": "string"
+        },
+        "id": {
+          "description": "ARM resource ID of the target app. \n /subscriptions/{subId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Web/sites/{siteName} for production slots and \n /subscriptions/{subId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Web/sites/{siteName}/slots/{slotName} for other slots.",
+          "type": "string"
+        }
+      }
+    },
     "StampCapacity": {
       "description": "Stamp capacity information.",
       "type": "object",
@@ -3996,7 +4095,7 @@
       "type": "object",
       "allOf": [
         {
-          "$ref": "#/definitions/Resource"
+          "$ref": "#/definitions/ProxyOnlyResource"
         }
       ],
       "properties": {
@@ -4258,7 +4357,7 @@
       "type": "object",
       "allOf": [
         {
-          "$ref": "#/definitions/Resource"
+          "$ref": "#/definitions/ProxyOnlyResource"
         }
       ],
       "properties": {

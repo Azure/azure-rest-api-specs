@@ -1,29 +1,20 @@
 {
     "parameters": {
-        "subscriptionId": "b67f7fec-69fc-4974-9099-a26bd6ffeda3",
+        "subscriptionId": "df602c9c-7aa0-407d-a6fb-eb20c8bd1192",
         "logProfileName": "Rac46PostSwapRG",
         "api-version": "2016-03-01",
         "parameters": {
-            "location": "West US",
+            "location": "",
             "tags": { },
             "properties": {
-                "name":"chiricutin",
-                "description":"Pura Vida",
-                "isEnabled":true,
-                "condition": {
-                    "odata.type":"Microsoft.Azure.Management.Insights.Models.ThresholdRuleCondition",
-                    "dataSource": {
-                        "odata.type":"Microsoft.Azure.Management.Insights.Models.RuleMetricDataSource",
-                        "resourceUri":"/subscriptions/b67f7fec-69fc-4974-9099-a26bd6ffeda3/resourceGroups/Rac46PostSwapRG/providers/Microsoft.Web/sites/leoalerttest",
-                        "metricName":"Requests"
-                    },
-                    "operator":"GreaterThan",
-                    "threshold":3.0,
-                    "windowSize":"PT5M",
-                    "timeAggregation":"Total"
+                "locations": [ "global" ],
+                "categories": [ "Write", "Delete", "Action" ],
+                "retentionPolicy": {
+                    "enabled": true,
+                    "days": 3
                 },
-                "lastUpdatedTime":"2016-11-23T21:23:52.0221265Z",
-                "actions":[]
+                "storageAccountId": "/subscriptions/df602c9c-7aa0-407d-a6fb-eb20c8bd1192/resourceGroups/JohnKemTest/providers/Microsoft.Storage/storageAccounts/johnkemtest8162",
+                "serviceBusRuleId": ""
             }
         }
     },
@@ -31,62 +22,26 @@
         "200": {
             "headers": { },
             "body": {
-                "id":"/subscriptions/b67f7fec-69fc-4974-9099-a26bd6ffeda3/resourceGroups/Rac46PostSwapRG/providers/microsoft.insights/alertrules/chiricutin",
-                "name":"chiricutin",
-                "type":"Microsoft.Insights/alertRules",
-                "location":"West US",
-                "tags": {
-                    "$type":"Microsoft.WindowsAzure.Management.Common.Storage.CasePreservedDictionary, Microsoft.WindowsAzure.Management.Common.Storage","hidden-link:/subscriptions/b67f7fec-69fc-4974-9099-a26bd6ffeda3/resourceGroups/Rac46PostSwapRG/providers/Microsoft.Web/sites/leoalerttest":"Resource"
-                },
+                "id":"/subscriptions/df602c9c-7aa0-407d-a6fb-eb20c8bd1192/providers/microsoft.insights/logprofiles/default",
+                "type":"",
+                "name":"default",
+                "location":"",
+                "tags":null,
                 "properties": {
-                    "name":"chiricutin",
-                    "description":"Pura Vida",
-                    "isEnabled":true,
-                    "condition": {
-                        "odata.type":"Microsoft.Azure.Management.Insights.Models.ThresholdRuleCondition",
-                        "dataSource": {
-                            "odata.type":"Microsoft.Azure.Management.Insights.Models.RuleMetricDataSource",
-                            "resourceUri":"/subscriptions/b67f7fec-69fc-4974-9099-a26bd6ffeda3/resourceGroups/Rac46PostSwapRG/providers/Microsoft.Web/sites/leoalerttest",
-                            "metricName":"Requests"
-                        },
-                        "operator":"GreaterThan",
-                        "threshold":3.0,
-                        "windowSize":"PT5M",
-                        "timeAggregation":"Total"
-                    },
-                    "lastUpdatedTime":"2016-11-23T21:23:52.0221265Z",
-                    "actions":[]
-                }
-            }
-        },
-        "201": {
-            "headers": { },
-            "body": {
-                "id":"/subscriptions/b67f7fec-69fc-4974-9099-a26bd6ffeda3/resourceGroups/Rac46PostSwapRG/providers/microsoft.insights/alertrules/chiricutin",
-                "name":"chiricutin",
-                "type":"Microsoft.Insights/alertRules",
-                "location":"West US",
-                "tags": {
-                    "$type":"Microsoft.WindowsAzure.Management.Common.Storage.CasePreservedDictionary, Microsoft.WindowsAzure.Management.Common.Storage","hidden-link:/subscriptions/b67f7fec-69fc-4974-9099-a26bd6ffeda3/resourceGroups/Rac46PostSwapRG/providers/Microsoft.Web/sites/leoalerttest":"Resource"
-                },
-                "properties": {
-                    "name":"chiricutin",
-                    "description":"Pura Vida",
-                    "isEnabled":true,
-                    "condition": {
-                        "odata.type":"Microsoft.Azure.Management.Insights.Models.ThresholdRuleCondition",
-                        "dataSource": {
-                            "odata.type":"Microsoft.Azure.Management.Insights.Models.RuleMetricDataSource",
-                            "resourceUri":"/subscriptions/b67f7fec-69fc-4974-9099-a26bd6ffeda3/resourceGroups/Rac46PostSwapRG/providers/Microsoft.Web/sites/leoalerttest",
-                            "metricName":"Requests"
-                        },
-                        "operator":"GreaterThan",
-                        "threshold":3.0,
-                        "windowSize":"PT5M",
-                        "timeAggregation":"Total"
-                    },
-                    "lastUpdatedTime":"2016-11-23T21:23:52.0221265Z",
-                    "actions":[]
+                  "storageAccountId":"/subscriptions/df602c9c-7aa0-407d-a6fb-eb20c8bd1192/resourceGroups/JohnKemTest/providers/Microsoft.Storage/storageAccounts/johnkemtest8162",
+                  "serviceBusRuleId":"",
+                  "locations":[
+                    "global"
+                  ],
+                  "categories": [
+                    "Delete",
+                    "Write",
+                    "Action"
+                  ],
+                  "retentionPolicy": {
+                    "enabled":true,
+                    "days":3
+                  }
                 }
             }
         }
