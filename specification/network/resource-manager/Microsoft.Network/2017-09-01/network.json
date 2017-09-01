@@ -134,6 +134,32 @@
       },
       "description": "Reference to another subresource.",
       "x-ms-azure-resource": true
+    },
+    "ResourceReference": {
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "Resource ID."
+        }
+      },
+      "description": "Reference to a resource."
+    },
+    "ResourceReferenceResultList": {
+      "properties": {
+        "value": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ResourceReference"
+          },
+          "description": "A list of resource references."
+        },
+        "nextLink": {
+          "readOnly": true,
+          "type": "string",
+          "description": "The URL to get the next set of results."
+        }
+      },
+      "description": "A list of resource references."
     }
   },
   "parameters": {

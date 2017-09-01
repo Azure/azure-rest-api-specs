@@ -184,7 +184,7 @@
           "200": {
             "description": "Request successful. The operation returns the IP configurations that reference the specified application security group resource.",
             "schema": {
-              "$ref": "./networkInterface.json#/definitions/NetworkInterfaceIPConfigurationListResult"
+              "$ref": "./network.json#/definitions/ResourceReferenceResultList"
             }
           }
         }
@@ -209,20 +209,13 @@
           },
           {
             "$ref": "./network.json#/parameters/SubscriptionIdParameter"
-          },
-          {
-            "name": "$expand",
-            "in": "query",
-            "required": false,
-            "type": "string",
-            "description": "Expands referenced resources."
           }
         ],
         "responses": {
           "200": {
             "description": "Request successful. The operation returns the security rules that reference the specified application security group resource.",
             "schema": {
-              "$ref": "./networkSecurityGroup.json#/definitions/SecurityRuleListResult"
+              "$ref": "./network.json#/definitions/ResourceReferenceResultList"
             }
           }
         }
