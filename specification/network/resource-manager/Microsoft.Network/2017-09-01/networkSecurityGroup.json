@@ -597,8 +597,11 @@
           },
           "description": "The CIDR or source IP ranges."
         },
-        "sourceApplicationSecurityGroup": {
-          "$ref": "./applicationSecurityGroup.json#/definitions/ApplicationSecurityGroup",
+        "sourceApplicationSecurityGroups": {
+          "type": "array",
+          "items": {
+            "$ref": "./applicationSecurityGroup.json#/definitions/ApplicationSecurityGroup"
+          },
           "description": "The application security group specified as source."
         },
         "destinationAddressPrefix": {
@@ -612,8 +615,11 @@
           },
           "description": "The destination address prefixes. CIDR or destination IP ranges."
         },
-        "destinationApplicationSecurityGroup": {
-          "$ref": "./applicationSecurityGroup.json#/definitions/ApplicationSecurityGroup",
+        "destinationApplicationSecurityGroups": {
+          "type": "array",
+          "items": {
+            "$ref": "./applicationSecurityGroup.json#/definitions/ApplicationSecurityGroup"
+          },
           "description": "The application security group specified as destination."
         },
         "sourcePortRanges": {
