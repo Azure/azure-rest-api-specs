@@ -145,6 +145,34 @@
         "x-ms-long-running-operation": true
       }
     },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.Network/applicationSecurityGroups": {
+      "get": {
+        "tags": [
+          "ApplicationSecurityGroups"
+        ],
+        "operationId": "ApplicationSecurityGroups_ListAll",
+        "description": "Gets all application security groups in a subscription.",
+        "parameters": [
+          {
+            "$ref": "./network.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "./network.json#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Request successful. The operation returns a list of application security group resources.",
+            "schema": {
+              "$ref": "#/definitions/ApplicationSecurityGroupListResult"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/applicationSecurityGroups/{applicationSecurityGroupName}/ipConfigurations/$ref": {
       "get": {
         "tags": [
@@ -173,6 +201,9 @@
               "$ref": "./network.json#/definitions/ResourceReferenceResultList"
             }
           }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
         }
       }
     },
@@ -204,6 +235,9 @@
               "$ref": "./network.json#/definitions/ResourceReferenceResultList"
             }
           }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
         }
       }
     }
@@ -240,6 +274,23 @@
         }
       },
       "description": "Application security group properties."
+    },
+    "ApplicationSecurityGroupListResult": {
+      "properties": {
+        "value": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ApplicationSecurityGroup"
+          },
+          "description": "A list of application security groups."
+        },
+        "nextLink": {
+          "readOnly": true,
+          "type": "string",
+          "description": "The URL to get the next set of results."
+        }
+      },
+      "description": "A list of application security groups."
     }
   },
   "parameters": {
