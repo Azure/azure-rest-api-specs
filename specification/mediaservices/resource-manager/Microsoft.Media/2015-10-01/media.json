@@ -34,6 +34,25 @@
     }
   },
   "paths": {
+    "/providers/Microsoft.Media/operations": {
+      "get": {
+        "operationId": "Operations_List",
+        "description": "Lists all of the available Media Services REST API operations.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success. Returns a list of operations.",
+            "schema": {
+              "$ref": "#/definitions/OperationListResult"
+            }
+          }
+        }
+      }
+    },
     "/subscriptions/{subscriptionId}/providers/Microsoft.Media/CheckNameAvailability": {
       "post": {
         "operationId": "MediaService_CheckNameAvailability",
@@ -645,6 +664,7 @@
       },
       "properties": {
         "properties": {
+          "description": "The additional properties of a Media Service resource.",
           "x-ms-client-flatten": true,
           "$ref": "#/definitions/MediaServiceProperties"
         }
@@ -659,6 +679,7 @@
       "description": "The collection of Media Service resources.",
       "properties": {
         "value": {
+          "description": "The collection of Media Service resources.",
           "type": "array",
           "items": {
             "$ref": "#/definitions/MediaService"
@@ -820,6 +841,55 @@
           "type": "string"
         }
       }
+    },
+    "OperationListResult": {
+      "description": "Result of the request to list Media Services operations.",
+      "properties": {
+        "value": {
+          "description": "List of Media Services operations supported by the Microsoft.Media resource provider.",
+          "type": "array",
+          "readOnly": true,
+          "items": {
+            "$ref": "#/definitions/Operation"
+          }
+        },
+        "nextLink": {
+          "description": "URL to get the next set of operation list results if there are any.",
+          "type": "string",
+          "readOnly": true
+        }
+      }
+    },
+    "Operation": {
+      "description": "A Media Services REST API operation",
+      "type": "object",
+      "properties": {
+        "name": {
+          "description": "Operation name: {provider}/{resource}/{operation}",
+          "type": "string",
+          "readOnly": true
+        },
+        "display": {
+          "description": "The object that represents the operation.",
+          "properties": {
+            "provider": {
+              "description": "Service provider: Microsoft.Media",
+              "type": "string",
+              "readOnly": true
+            },
+            "resource": {
+              "description": "Resource on which the operation is performed: Invoice, etc.",
+              "type": "string",
+              "readOnly": true
+            },
+            "operation": {
+              "description": "Operation type: Read, write, delete, etc.",
+              "type": "string",
+              "readOnly": true
+            }
+          }
+        }
+      }
     }
   },
   "parameters": {
@@ -851,7 +921,7 @@
     },
     "apiVersionParameter": {
       "name": "api-version",
-      "description": "Version of the API to be used with the client request. Current version is 2015-10-01",
+      "description": "Version of the API to be used with the client request. The current version is 2015-10-01.",
       "in": "query",
       "required": true,
       "type": "string"
