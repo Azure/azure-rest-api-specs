@@ -28,7 +28,34 @@ These are the global settings for the Network API.
 title: NetworkManagementClient
 description: Network Client
 openapi-type: arm
-tag: package-2017-06
+tag: package-2017-08
+```
+
+
+### Tag: package-2017-08
+
+These settings apply only when `--tag=package-2017-08` is specified on the command line.
+
+``` yaml $(tag) == 'package-2017-08'
+input-file:
+- Microsoft.Network/2017-08-01/applicationGateway.json
+- Microsoft.Network/2017-08-01/checkDnsAvailability.json
+- Microsoft.Network/2017-08-01/endpointService.json
+- Microsoft.Network/2017-08-01/expressRouteCircuit.json
+- Microsoft.Network/2017-08-01/loadBalancer.json
+- Microsoft.Network/2017-08-01/network.json
+- Microsoft.Network/2017-08-01/networkInterface.json
+- Microsoft.Network/2017-08-01/networkSecurityGroup.json
+- Microsoft.Network/2017-08-01/networkWatcher.json
+- Microsoft.Network/2017-08-01/publicIpAddress.json
+- Microsoft.Network/2017-08-01/routeFilter.json
+- Microsoft.Network/2017-08-01/routeTable.json
+- Microsoft.Network/2017-08-01/serviceCommunity.json
+- Microsoft.Network/2017-08-01/usage.json
+- Microsoft.Network/2017-08-01/virtualNetwork.json
+- Microsoft.Network/2017-08-01/virtualNetworkGateway.json
+- Microsoft.Network/2017-08-01/vmssNetworkInterface.json
+- Microsoft.Network/2017-08-01/vmssPublicIpAddress.json
 ```
 
 
@@ -40,13 +67,13 @@ These settings apply only when `--tag=package-2017-06` is specified on the comma
 input-file:
 - Microsoft.Network/2017-06-01/applicationGateway.json
 - Microsoft.Network/2017-06-01/checkDnsAvailability.json
+- Microsoft.Network/2017-06-01/endpointService.json
 - Microsoft.Network/2017-06-01/expressRouteCircuit.json
 - Microsoft.Network/2017-06-01/loadBalancer.json
 - Microsoft.Network/2017-06-01/network.json
 - Microsoft.Network/2017-06-01/networkInterface.json
 - Microsoft.Network/2017-06-01/networkSecurityGroup.json
 - Microsoft.Network/2017-06-01/networkWatcher.json
-- Microsoft.Network/2017-06-01/privateAccessServices.json
 - Microsoft.Network/2017-06-01/publicIpAddress.json
 - Microsoft.Network/2017-06-01/routeFilter.json
 - Microsoft.Network/2017-06-01/routeTable.json
@@ -114,7 +141,7 @@ These settings apply only when `--tag=package-2016-09` is specified on the comma
 
 ``` yaml $(tag) == 'package-2016-09'
 input-file:
-- microsoft.Network/2016-09-01/vmssNetworkInterface.json
+- Microsoft.Network/2016-09-01/vmssNetworkInterface.json
 - Microsoft.Network/2016-09-01/applicationGateway.json
 - Microsoft.Network/2016-09-01/checkDnsAvailability.json
 - Microsoft.Network/2016-09-01/expressRouteCircuit.json
@@ -158,6 +185,7 @@ input-file:
 - Microsoft.Network/2015-06-15/checkDnsAvailability.json
 - Microsoft.Network/2015-06-15/expressRouteCircuit.json
 - Microsoft.Network/2015-06-15/loadBalancer.json
+- Microsoft.Network/2015-06-15/network.json
 - Microsoft.Network/2015-06-15/networkInterface.json
 - Microsoft.Network/2015-06-15/networkSecurityGroup.json
 - Microsoft.Network/2015-06-15/publicIpAddress.json
@@ -166,15 +194,6 @@ input-file:
 - Microsoft.Network/2015-06-15/virtualNetwork.json
 - Microsoft.Network/2015-06-15/virtualNetworkGateway.json
 - Microsoft.Network/2015-06-15/vmssNetworkInterface.json
-```
- 
-### Tag: package-2015-06
-
-These settings apply only when `--tag=package-2015-06` is specified on the command line.
-
-``` yaml $(tag) == 'package-2015-06'
-input-file:
-- Microsoft.Network/2015-06-15/network.json
 ```
  
 ### Tag: package-2015-05-preview
@@ -198,9 +217,10 @@ Please also specify `--csharp-sdks-folder=<path to "SDKs" directory of your azur
 ``` yaml $(csharp)
 csharp:
   azure-arm: true
-  license-header: MICROSOFT_MIT
+  license-header: MICROSOFT_MIT_NO_VERSION
   namespace: Microsoft.Azure.Management.Network
   output-folder: $(csharp-sdks-folder)/Network/Management.Network/Generated
+  clear-output-folder: true
 ```
 
 
@@ -214,6 +234,14 @@ python:
   output-folder: $(output-folder)/python
   license-header: MICROSOFT_MIT_NO_VERSION
   payload-flattening-threshold: 2
+```
+
+### Tag: package-2017-08 and python
+
+These settings apply only when `--tag=package-2017-08 --python` is specified on the command line.
+
+``` yaml $(tag) == 'package-2017-08' && $(python)
+namespace: azure.mgmt.network.v2017_08_01
 ```
 
 ### Tag: package-2017-06 and python
@@ -253,5 +281,5 @@ namespace: azure.mgmt.network.v2016_09_01
 These settings apply only when `--tag=package-2015-06split --python` is specified on the command line.
 
 ``` yaml $(tag) == 'package-2015-06split' && $(python)
-namespace: azure.mgmt.network.v2015_06_01
+namespace: azure.mgmt.network.v2015_06_15
 ```

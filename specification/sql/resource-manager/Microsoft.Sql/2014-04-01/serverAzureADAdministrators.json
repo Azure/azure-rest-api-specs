@@ -23,8 +23,8 @@
             ],
             "operationId":"ServerAzureADAdministrators_CreateOrUpdate",
             "description":"Creates a new Server Active Directory Administrator or updates an existing server Active Directory Administrator.",
-            "x-ms-examples":{  
-               "Create/Update a server administrator":{  
+            "x-ms-examples":{
+               "Create/Update a server administrator":{
                   "$ref":"./examples/ServerAdminCreateUpdate.json"
                }
             },
@@ -82,8 +82,8 @@
             ],
             "operationId":"ServerAzureADAdministrators_Delete",
             "description":"Deletes an existing server Active Directory Administrator.",
-            "x-ms-examples":{  
-               "Delete a server administrator":{  
+            "x-ms-examples":{
+               "Delete a server administrator":{
                   "$ref":"./examples/ServerAdminDelete.json"
                }
             },
@@ -132,8 +132,8 @@
             ],
             "operationId":"ServerAzureADAdministrators_Get",
             "description":"Returns an server Administrator.",
-            "x-ms-examples":{  
-               "Get the Active Directory Administrator":{  
+            "x-ms-examples":{
+               "Get the Active Directory Administrator":{
                   "$ref":"./examples/ServerAdminGet.json"
                }
             },
@@ -169,7 +169,7 @@
             "tags":[
                "ServerAdministrators"
             ],
-            "operationId":"ServerAzureADAdministrators_List",
+            "operationId":"ServerAzureADAdministrators_ListByServer",
             "description":"Returns a list of server Administrators.",
             "x-ms-examples":{
                "get a list of server administrators":{
@@ -205,6 +205,35 @@
       }
    },
    "definitions":{
+    "Resource":{
+      "description":"ARM resource.",
+      "properties":{
+        "id":{
+          "readOnly":true,
+          "type":"string",
+          "description":"Resource ID."
+        },
+        "name":{
+          "readOnly":true,
+          "type":"string",
+          "description":"Resource name."
+        },
+        "type":{
+          "readOnly":true,
+          "type":"string",
+          "description":"Resource type."
+        }
+      },
+      "x-ms-azure-resource": true
+    },
+    "ProxyResource":{
+      "description":"ARM proxy resource.",
+      "allOf":[
+        {
+          "$ref":"#/definitions/Resource"
+        }
+      ]
+    },
       "ServerAdministratorProperties":{
          "properties":{
             "administratorType":{
@@ -250,7 +279,7 @@
          },
          "allOf":[
             {
-               "$ref":"#/definitions/SqlSubResource"
+               "$ref":"#/definitions/ProxyResource"
             }
          ],
          "description":"An server Active Directory Administrator."
@@ -266,21 +295,6 @@
             }
          },
          "description":"The response to a list Active Directory Administrators request."
-      },
-      "SqlSubResource":{
-         "description":"Subresource properties",
-         "properties":{
-            "name":{
-               "readOnly":true,
-               "type":"string",
-               "description":"Resource name"
-            },
-            "id":{
-               "readOnly":true,
-               "type":"string",
-               "description":"Resource Id"
-            }
-         }
       }
    },
    "parameters":{

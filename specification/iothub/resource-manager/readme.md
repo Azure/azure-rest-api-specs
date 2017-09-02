@@ -26,9 +26,17 @@ These are the global settings for the IotHub API.
 
 ``` yaml
 openapi-type: arm
-tag: package-2017-01
+tag: package-2017-07
 ```
 
+### Tag: package-2017-07
+
+These settings apply only when `--tag=package-2017-07` is specified on the command line.
+
+``` yaml $(tag) == 'package-2017-07'
+input-file:
+- Microsoft.Devices/2017-07-01/iothub.json
+```
 
 ### Tag: package-2017-01
 
@@ -60,7 +68,8 @@ Please also specify `--csharp-sdks-folder=<path to "SDKs" directory of your azur
 ``` yaml $(csharp)
 csharp:
   azure-arm: true
-  license-header: MICROSOFT_MIT
+  license-header: MICROSOFT_MIT_NO_VERSION
   namespace: Microsoft.Azure.Management.IotHub
   output-folder: $(csharp-sdks-folder)/IotHub/Management.IotHub/Generated
+  clear-output-folder: true
 ```

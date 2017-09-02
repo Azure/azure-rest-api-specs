@@ -36,7 +36,7 @@
     }
   },
   "paths": {
-  	"/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/networkSecurityGroups/{networkSecurityGroupName}": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/networkSecurityGroups/{networkSecurityGroupName}": {
       "delete": {
         "tags": [
           "NetworkSecurityGroups"
@@ -75,6 +75,9 @@
           "204": {
             "description": "Request successful. Resource does not exist."
           }
+        },
+        "x-ms-examples": {
+          "Delete network security group": { "$ref": "./examples/NetworkSecurityGroupDelete.json" }
         },
         "x-ms-long-running-operation": true
       },
@@ -120,6 +123,9 @@
               "$ref": "#/definitions/NetworkSecurityGroup"
             }
           }
+        },
+        "x-ms-examples": {
+          "Get network security group": { "$ref": "./examples/NetworkSecurityGroupGet.json" }
         }
       },
       "put": {
@@ -173,6 +179,10 @@
             }
           }
         },
+        "x-ms-examples": {
+          "Create network security group": { "$ref": "./examples/NetworkSecurityGroupCreate.json" },
+          "Create network security group with rule": { "$ref": "./examples/NetworkSecurityGroupCreateWithRule.json" }
+        },
         "x-ms-long-running-operation": true
       }
     },
@@ -198,6 +208,9 @@
               "$ref": "#/definitions/NetworkSecurityGroupListResult"
             }
           }
+        },
+        "x-ms-examples": {
+          "List all network security groups": { "$ref": "./examples/NetworkSecurityGroupListAll.json" }
         },
         "x-ms-pageable": {
           "nextLinkName": "nextLink"
@@ -233,6 +246,9 @@
               "$ref": "#/definitions/NetworkSecurityGroupListResult"
             }
           }
+        },
+        "x-ms-examples": {
+          "List network security groups in resource group": { "$ref": "./examples/NetworkSecurityGroupList.json" }
         },
         "x-ms-pageable": {
           "nextLinkName": "nextLink"
@@ -286,6 +302,9 @@
             "description": "Delete successful."
           }
         },
+        "x-ms-examples": {
+          "Delete network security rule from network security group": { "$ref": "./examples/NetworkSecurityGroupRuleDelete.json" }
+        },
         "x-ms-long-running-operation": true
       },
       "get": {
@@ -330,6 +349,9 @@
               "$ref": "#/definitions/SecurityRule"
             }
           }
+        },
+        "x-ms-examples": {
+          "Get network security rule in network security group": { "$ref": "./examples/NetworkSecurityGroupRuleGet.json" }
         }
       },
       "put": {
@@ -390,6 +412,9 @@
             }
           }
         },
+        "x-ms-examples": {
+          "Create security rule": { "$ref": "./examples/NetworkSecurityGroupRuleCreate.json" }
+        },
         "x-ms-long-running-operation": true
       }
     },
@@ -430,14 +455,111 @@
             }
           }
         },
+        "x-ms-examples": {
+          "List network security rules in network security group": { "$ref": "./examples/NetworkSecurityGroupRuleList.json" }
+        },
         "x-ms-pageable": {
           "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/networkSecurityGroups/{networkSecurityGroupName}/defaultSecurityRules": {
+      "get": {
+        "tags": [
+          "SecurityRules"
+        ],
+        "operationId": "DefaultSecurityRules_List",
+        "description": "Gets all default security rules in a network security group.",
+        "parameters": [
+          {
+            "name": "resourceGroupName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the resource group."
+          },
+          {
+            "name": "networkSecurityGroupName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the network security group."
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Request successful. The operation returns a list of SecurityRule resources.",
+            "schema": {
+              "$ref": "#/definitions/SecurityRuleListResult"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "DefaultSecurityRuleList": { "$ref": "./examples/DefaultSecurityRuleList.json" }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/networkSecurityGroups/{networkSecurityGroupName}/defaultSecurityRules/{defaultSecurityRuleName}" : {
+      "get": {
+        "tags": [
+          "SecurityRules"
+        ],
+        "operationId": "DefaultSecurityRules_Get",
+        "description": "Get the specified default network security rule.",
+        "parameters": [
+          {
+            "name": "resourceGroupName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the resource group."
+          },
+          {
+            "name": "networkSecurityGroupName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the network security group."
+          },
+          {
+            "name": "defaultSecurityRuleName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the default security rule."
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Request successful. The operation returns the resulting SecurityRule resource.",
+            "schema": {
+              "$ref": "#/definitions/SecurityRule"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "DefaultSecurityRuleGet": { "$ref": "./examples/DefaultSecurityRuleGet.json" }
         }
       }
     }
   },
   "definitions": {
-	"SecurityRulePropertiesFormat": {
+    "SecurityRulePropertiesFormat": {
       "properties": {
         "description": {
           "type": "string",
@@ -484,7 +606,23 @@
           "items": {
             "type": "string"
           },
-          "description": "The destination address prefixes. CIDR or destination IP rangees."
+          "description": "The destination address prefixes. CIDR or destination IP ranges."
+        },
+        "sourcePortRanges": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "description": "The source port."
+          },
+          "description": "The source port ranges."
+        },
+        "destinationPortRanges": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "description": "The destination port."
+          },
+          "description": "The destination port ranges."
         },
         "access": {
           "type": "string",
@@ -526,13 +664,15 @@
         "destinationAddressPrefix",
         "access",
         "direction"
-      ]
+      ],
+      "description": "Security rule resource."
     },
     "SecurityRule": {
       "properties": {
         "properties": {
           "x-ms-client-flatten": true,
-          "$ref": "#/definitions/SecurityRulePropertiesFormat"
+          "$ref": "#/definitions/SecurityRulePropertiesFormat",
+          "description": "Properties of the security rule"
         },
         "name": {
           "type": "string",
@@ -550,7 +690,7 @@
       ],
       "description": "Network security rule."
     },
-	"SecurityRuleListResult": {
+    "SecurityRuleListResult": {
       "properties": {
         "value": {
           "type": "array",
@@ -613,7 +753,8 @@
       "properties": {
         "properties": {
           "x-ms-client-flatten": true,
-          "$ref": "#/definitions/NetworkSecurityGroupPropertiesFormat"
+          "$ref": "#/definitions/NetworkSecurityGroupPropertiesFormat",
+          "description": "Properties of the network security group"
         },
         "etag": {
           "type": "string",
@@ -627,7 +768,7 @@
       ],
       "description": "NetworkSecurityGroup resource."
     },
-	"NetworkSecurityGroupListResult": {
+    "NetworkSecurityGroupListResult": {
       "properties": {
         "value": {
           "type": "array",

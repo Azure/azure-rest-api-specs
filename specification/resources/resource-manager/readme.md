@@ -181,6 +181,30 @@ Please also specify `--csharp-sdks-folder=<path to "SDKs" directory of your azur
 csharp:
   azure-arm: true
   namespace: Microsoft.Azure.Management.ResourceManager
-  license-header: MICROSOFT_MIT
+  license-header: MICROSOFT_MIT_NO_VERSION
   output-folder: $(csharp-sdks-folder)/Resource/Management.ResourceManager/Generated
+batch:
+  - package-features: true
+    clear-output-folder: true # clear output folder on first run
+  - package-locks: true
+  - package-policy: true
+  - package-resources: true
+  - package-subscriptions: true
+  - package-links: true
+#  - package-managedapplications: true
+```
+
+# Validation
+
+Since this RP has no unique default package, iterate over all of them for validation:
+
+``` yaml $(validation)
+batch:
+  - package-features: true
+  - package-locks: true
+  - package-policy: true
+  - package-resources: true
+  - package-subscriptions: true
+  - package-links: true
+  - package-managedapplications: true
 ```

@@ -77,17 +77,23 @@ Please also specify `--csharp-sdks-folder=<path to "SDKs" directory of your azur
 csharp:
   azure-arm: true
   payload-flattening-threshold: 1
-  license-header: MICROSOFT_MIT
+  license-header: MICROSOFT_MIT_NO_VERSION
+  clear-output-folder: true
+batch:
+  - package-webservices: true
+    namespace: Microsoft.Azure.Management.MachineLearning.WebServices
+    output-folder: $(csharp-sdks-folder)/MachineLearning/Management.MachineLearning/Generated/WebServices
+  - package-commitmentPlans: true
+    namespace: Microsoft.Azure.Management.MachineLearning.CommitmentPlans
+    output-folder: $(csharp-sdks-folder)/MachineLearning/Management.MachineLearning/Generated/CommitmentPlans
 ```
 
-```yaml $(csharp) && $(package-commitmentPlans)
-csharp:
-  namespace: Microsoft.Azure.Management.MachineLearning.CommitmentPlans
-  output-folder: $(csharp-sdks-folder)/MachineLearning/Management.MachineLearning/Generated/CommitmentPlans
-```
+# Validation
 
-```yaml $(csharp) && $(package-webservices)
-csharp:
-  namespace: Microsoft.Azure.Management.MachineLearning.WebServices
-  output-folder: $(csharp-sdks-folder)/MachineLearning/Management.MachineLearning/Generated/WebServices
+Since this RP has no unique default package, iterate over all of them for validation:
+
+``` yaml $(validation)
+batch:
+  - package-webservices: true
+  - package-commitmentPlans: true
 ```

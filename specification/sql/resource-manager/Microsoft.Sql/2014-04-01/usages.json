@@ -21,7 +21,7 @@
         "tags": [
           "Servers"
         ],
-        "operationId": "Servers_ListUsages",
+        "operationId": "ServerUsages_ListByServer",
         "description": "Returns server usages.",
         "x-ms-examples":{
           "List servers usages": { "$ref": "./examples/ServerUsageMetricsList.json" }
@@ -58,7 +58,7 @@
         "tags": [
           "Databases"
         ],
-        "operationId": "Databases_ListUsages",
+        "operationId": "DatabaseUsages_ListByDatabase",
         "description": "Returns database usages.",
         "x-ms-examples": {
           "List database usage metrics": { "$ref": "./examples/DatabaseUsageMetricsList.json" }
@@ -99,6 +99,35 @@
     }
   },
   "definitions": {
+    "Resource":{
+      "description":"ARM resource.",
+      "properties":{
+        "id":{
+          "readOnly":true,
+          "type":"string",
+          "description":"Resource ID."
+        },
+        "name":{
+          "readOnly":true,
+          "type":"string",
+          "description":"Resource name."
+        },
+        "type":{
+          "readOnly":true,
+          "type":"string",
+          "description":"Resource type."
+        }
+      },
+      "x-ms-azure-resource": true
+    },
+    "ProxyResource":{
+      "description":"ARM proxy resource.",
+      "allOf":[
+        {
+          "$ref":"#/definitions/Resource"
+        }
+      ]
+    },
     "ServerUsage": {
       "properties": {
         "name": {
@@ -157,6 +186,11 @@
     },
     "DatabaseUsage": {
       "properties": {
+        "name": {
+          "readOnly": true,
+          "type": "string",
+          "description": "The name of the usage metric."
+        },
         "resourceName": {
           "readOnly": true,
           "type": "string",
@@ -191,12 +225,7 @@
           "description": "The next reset time for the usage metric (ISO8601 format)."
         }
       },
-      "description": "The database usages.",
-      "allOf": [
-        {
-          "$ref": "#/definitions/SubResource"
-        }
-      ]
+      "description": "The database usages."
     },
     "DatabaseUsageListResult": {
       "properties": {
@@ -210,21 +239,6 @@
       },
       "required": ["value"],
       "description": "The response to a list database metrics request."
-    },
-    "SubResource": {
-      "description": "Subresource properties",
-      "properties": {
-        "name": {
-          "readOnly": true,
-          "type": "string",
-          "description": "Resource name"
-        },
-        "id": {
-          "readOnly": true,
-          "type": "string",
-          "description": "The resource ID."
-        }
-      }
     }
   },
   "parameters": {

@@ -24,7 +24,9 @@ To see additional help and options, run:
 ### Basic Information 
 These are the global settings for the SearchClient API.
 
-``` yaml
+C# packages this RP a little different from the others, so the following defaults don't apply to it.
+
+``` yaml !$(csharp)
 title: SearchClient
 description: Search Client
 openapi-type: data-plane
@@ -72,7 +74,8 @@ Please also specify `--csharp-sdks-folder=<path to "SDKs" directory of your azur
 ``` yaml $(csharp)
 csharp:
   azure-arm: true
-  license-header: MICROSOFT_MIT
+  license-header: MICROSOFT_MIT_NO_VERSION
   namespace: Microsoft.Azure.Search
-  output-folder: $(csharp-sdks-folder)/Search/DataPlane/Microsoft.Azure.Search/GeneratedSearchIndex
+  output-folder: $(csharp-sdks-folder)/Search/DataPlane/Microsoft.Azure.Search/Generated$(search-folder)
+  clear-output-folder: true
 ```

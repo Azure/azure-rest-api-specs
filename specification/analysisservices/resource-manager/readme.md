@@ -26,9 +26,27 @@ These are the global settings for the AnalysisServices API.
 
 ``` yaml
 openapi-type: arm
-tag: package-2016-05
+tag: package-2017-08-beta
 ```
 
+
+### Tag: package-2017-08-beta
+
+These settings apply only when `--tag=package-2017-08-beta` is specified on the command line.
+
+``` yaml $(tag) == 'package-2017-08-beta'
+input-file:
+- Microsoft.AnalysisServices/2017-08-01-beta/analysisservices.json
+```
+
+### Tag: package-2017-07
+
+These settings apply only when `--tag=package-2017-07` is specified on the command line.
+
+``` yaml $(tag) == 'package-2017-07'
+input-file:
+- Microsoft.AnalysisServices/2017-07-14/analysisservices.json
+```
 
 ### Tag: package-2016-05
 
@@ -50,8 +68,9 @@ Please also specify `--csharp-sdks-folder=<path to "SDKs" directory of your azur
 ``` yaml $(csharp)
 csharp:
   azure-arm: true
-  license-header: MICROSOFT_MIT
+  license-header: MICROSOFT_MIT_NO_VERSION
   namespace: Microsoft.Azure.Management.Analysis
   output-folder: $(csharp-sdks-folder)/AnalysisServices/Management.Analysis/Generated
+  clear-output-folder: true
 ```
 

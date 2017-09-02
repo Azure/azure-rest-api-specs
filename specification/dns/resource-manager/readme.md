@@ -61,8 +61,9 @@ Please also specify `--csharp-sdks-folder=<path to "SDKs" directory of your azur
 ``` yaml $(csharp)
 csharp:
   azure-arm: true
-  license-header: MICROSOFT_MIT
+  license-header: MICROSOFT_MIT_NO_VERSION
   namespace: Microsoft.Azure.Management.Dns
   payload-flattening-threshold: 2
   output-folder: $(csharp-sdks-folder)/Dns/Management.Dns/Generated
+  clear-output-folder: true
 ```
