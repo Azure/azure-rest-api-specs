@@ -206,7 +206,7 @@
           }
         },
         "summary": "Delete the specified container groups.",
-        "description": "Delete the specified container groups in the specified subscription and resource group. The operation does not delete other resources created as part of creating a container group such as volumes. All other resources created with the container group are part of the same resource group and can be deleted individually.",
+        "description": "Delete the specified container groups in the specified subscription and resource group. The operation does not delete other resources provided by the user such as volumes.",
         "parameters": [
           {
             "$ref": "#/parameters/SubscriptionIdParameter"
@@ -250,7 +250,7 @@
             "$ref": "./examples/ContainerLogsList.json"
           }
         },
-        "summary": "Get the logs for a specified container instance in a specified resource group and container group.",
+        "summary": "Get the logs for a specified container instance.",
         "description": "Get the logs for a specified container instance in a specified resource group and container group.",
         "parameters": [
           {
@@ -405,7 +405,7 @@
         },
         "exitCode": {
           "type": "integer",
-          "description": "The container instance exit code."
+          "description": "The container instance exit code. Exit codes map to output from `docker run`."
         },
         "finishTime": {
           "type": "string",
@@ -500,7 +500,7 @@
       }
     },
     "AzureFileVolume": {
-      "description": "The properties of the Azure File volume.",
+      "description": "The properties of the Azure File volume. Azure File shares are mounted as volumes.",
       "type": "object",
       "required": [
         "shareName",
@@ -508,19 +508,19 @@
       ],
       "properties": {
         "shareName": {
-          "description": "The name of the Azure File volume.",
+          "description": "The name of the Azure File share to be mounted as a volume.",
           "type": "string"
         },
         "readOnly": {
-          "description": "The flag indicating whether the Azure File volume is read-only.",
+          "description": "The flag indicating whether the Azure File shared mounted as a volume is read-only.",
           "type": "boolean"
         },
         "storageAccountName": {
-          "description": "The name of the storage account that contains the Azure File volume.",
+          "description": "The name of the storage account that contains the Azure File share.",
           "type": "string"
         },
         "storageAccountKey": {
-          "description": "The storage account key used to access the Azure File volume.",
+          "description": "The storage account access key used to access the Azure File share.",
           "type": "string"
         }
       }
@@ -538,7 +538,7 @@
           "type": "string"
         },
         "azureFile": {
-          "description": "The Azure File volume.",
+          "description": "The name of the Azure File volume.",
           "$ref": "#/definitions/AzureFileVolume"
         }
       }
@@ -556,7 +556,7 @@
           "type": "string"
         },
         "mountPath": {
-          "description": "The path within the container where the volume should be mounted. Must not contain ':' (colon).",
+          "description": "The path within the container where the volume should be mounted. Must not contain colon (:).",
           "type": "string"
         },
         "readOnly": {
@@ -672,19 +672,19 @@
       ]
     },
     "IpAddress": {
-      "description": "IP address for the group.",
+      "description": "IP address for the container group.",
       "type": "object",
       "properties": {
         "ports": {
           "type": "array",
-          "description": "The ports.",
+          "description": "The ports exposed on the container group.",
           "items": {
             "$ref": "#/definitions/Port"
           }
         },
         "type": {
           "type": "string",
-          "description": "The type of IP address determining whether the IP is exposed to the public internet.",
+          "description": "Specifies if the IP is exposed to the public internet.",
           "enum": [
             "Public"
           ],
@@ -704,7 +704,7 @@
       ]
     },
     "Port": {
-      "description": "The port.",
+      "description": "The port exposed on the container group.",
       "type": "object",
       "properties": {
         "protocol": {
@@ -721,7 +721,7 @@
         },
         "port": {
           "type": "integer",
-          "description": "The port.",
+          "description": "The port number.",
           "format": "int32"
         }
       },
@@ -736,7 +736,7 @@
         "port": {
           "type": "integer",
           "format": "int32",
-          "description": "The port number to expose within the container group."
+          "description": "The port number exposed within the container group."
         }
       },
       "required": [
