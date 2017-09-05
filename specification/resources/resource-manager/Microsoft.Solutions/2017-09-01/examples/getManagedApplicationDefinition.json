@@ -2,16 +2,16 @@
   "parameters": {
     "subscriptionId": "subid",
     "resourceGroupName": "rg",
-    "applianceName": "myApplianceDef",
-    "api-version": "2016-09-01-preview"
+    "managedApplicationName": "myManagedApplicationDef",
+    "api-version": "2017-09-01"
   },
   "responses": {
     "200": {
       "headers": {},
       "body": {
-        "name": "myApplianceDef",
-        "id": "/subscriptions/subid/resourceGroups/rg/providers/Microsoft.Solutions/applianceDefinitions/myApplianceDef",
-        "type": "Microsoft.Solutions/applianceDefinitions",
+        "name": "myManagedApplicationDef",
+        "id": "/subscriptions/subid/resourceGroups/rg/providers/Microsoft.Solutions/managedApplicationDefinitions/myManagedApplicationDef",
+        "type": "Microsoft.Solutions/managedApplicationDefinitions",
         "location": "East US 2",
         "managedBy": null,
         "resourceGroup": "rg",
@@ -23,10 +23,10 @@
             {
               "name": "CreateUiDefinition",
               "type": "Custom",
-              "uri": "https://path/to/applianceCreateUiDefinition.json"
+              "uri": "https://path/to/managedApplicationCreateUiDefinition.json"
             },
             {
-              "name": "ApplianceResourceTemplate",
+              "name": "ManagedApplicationResourceTemplate",
               "type": "Template",
               "uri": "https://path/to/mainTemplate.json"
             }
@@ -37,8 +37,8 @@
               "roleDefinitionId": "validroleguid"
             }
           ],
-          "description": "myApplianceDef description",
-          "displayName": "myApplianceDef",
+          "description": "myManagedApplicationDef description",
+          "displayName": "myManagedApplicationDef",
           "lockLevel": null,
           "packageFileUri": "https://path/to/packagezipfile"
         }

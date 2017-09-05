@@ -2,14 +2,14 @@
   "parameters": {
     "subscriptionId": "subid",
     "resourceGroupName": "rg",
-    "applianceName": "myAppliance",
-    "api-version": "2016-09-01-preview",
+    "managedApplicationName": "myManagedApplication",
+    "api-version": "2017-09-01",
     "parameters": {
       "properties": {
-        "applianceDefinitionId": "/subscriptions/subid/resourceGroups/rg/providers/Microsoft.Solutions/applianceDefinitions/myAppDef",
+        "managedApplicationDefinitionId": "/subscriptions/subid/resourceGroups/rg/providers/Microsoft.Solutions/managedApplicationDefinitions/myAppDef",
         "managedResourceGroupId": "/subscriptions/subid/resourceGroups/myManagedRG"
       },
-      "name": "myAppliance",
+      "name": "myManagedApplication",
       "location": "East US 2",
       "kind":  "ServiceCatalog"
     }
@@ -18,9 +18,9 @@
     "201": {
       "headers": {},
       "body": {
-        "name": "myAppliance",
-        "id": "/subscriptions/subid/resourceGroups/rg/providers/Microsoft.Solutions/appliances/myAppliance",
-        "type": "Microsoft.Solutions/appliances",
+        "name": "myManagedApplication",
+        "id": "/subscriptions/subid/resourceGroups/rg/providers/Microsoft.Solutions/managedApplications/myManagedApplication",
+        "type": "Microsoft.Solutions/managedApplications",
         "location": "East US 2",
         "managedBy": null,
         "resourceGroup": "rg",
@@ -30,12 +30,12 @@
         "kind": "ServiceCatalog",
         "sku":  null,
         "properties": {
-          "applianceDefinitionId": "/subscriptions/subid/resourceGroups/rg/providers/Microsoft.Solutions/applianceDefinitions/myAppDef",
+          "managedApplicationDefinitionId": "/subscriptions/subid/resourceGroups/rg/providers/Microsoft.Solutions/managedApplicationDefinitions/myAppDef",
           "managedResourceGroupId": "/subscriptions/subid/resourceGroups/myManagedRG",
           "outputs": null,
           "parameters": null,
           "provisioningState": "Created",
-          "uiDefinitionUri": "https://path/to/applianceCreateUiDefinition.json"
+          "uiDefinitionUri": "https://path/to/managedApplicationCreateUiDefinition.json"
         }
       }
     }
