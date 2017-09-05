@@ -204,7 +204,7 @@
                     }
                 },
                 "x-ms-examples": {
-                    "Path an activity log alert": {
+                    "Patch an activity log alert": {
                         "$ref": "./examples/patchActivityLogAlert.json"
                     }
                 }
@@ -335,7 +335,8 @@
             "properties": {
                 "properties": {
                     "x-ms-client-flatten": true,
-                    "$ref": "#/definitions/ActivityLogAlert"
+                    "$ref": "#/definitions/ActivityLogAlert",
+                    "description": "The activity log alert properties of the resource."
                 }
             }
         },
@@ -351,7 +352,7 @@
                 },
                 "nextLink": {
                     "type": "string",
-                    "description": "Provides the link to retrive the next set of elements."
+                    "description": "Provides the link to retrieve the next set of elements."
                 }
             }
         },
@@ -372,7 +373,7 @@
                 },
                 "condition": {
                     "$ref": "#/definitions/ActivityLogAlertAllOfCondition",
-                    "description": "The conditon that will cause this alert to activate."
+                    "description": "The condition that will cause this alert to activate."
                 },
                 "actions": {
                     "$ref": "#/definitions/ActivityLogAlertActionList",
@@ -476,7 +477,8 @@
                 },
                 "properties": {
                     "x-ms-client-flatten": true,
-                    "$ref": "#/definitions/ActivityLogAlertPatch"
+                    "$ref": "#/definitions/ActivityLogAlertPatch",
+                    "description": "The activity log alert settings for an update operation."
                 }
             }
         },

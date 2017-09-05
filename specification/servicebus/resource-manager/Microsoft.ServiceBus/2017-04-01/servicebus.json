@@ -2087,6 +2087,126 @@
           }
         }
       }
+    },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.ServiceBus/sku/{sku}/regions": {
+      "get": {
+        "tags": [
+          "Regions"
+        ],
+        "operationId": "Regions_ListBySku",
+        "x-ms-examples": {
+          "RulesCreateOrUpdate": { "$ref": "./examples/SkuRegions/SkuRegions.json" }
+        },
+        "description": "Gets the available Regions for a given sku",
+        "parameters": [
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/skuNameParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Regions successfully returned.",
+            "schema": {
+              "$ref": "#/definitions/PremiumMessagingRegionsListResult"
+            }
+          },
+          "default": {
+            "description": "ServiceBus error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.ServiceBus/premiumMessagingRegions": {
+      "get": {
+        "tags": [
+          "PremiumMessagingRegions"
+        ],
+        "operationId": "PremiumMessagingRegions_List",
+        "x-ms-examples": {
+          "RulesCreateOrUpdate": { "$ref": "./examples/SkuRegions/PremiumMessagingRegions.json" }
+        },
+        "description": "Gets the available premium messaging regions for servicebus ",
+        "parameters": [
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Premium messaging regions successfully returned.",
+            "schema": {
+              "$ref": "#/definitions/PremiumMessagingRegionsListResult"
+            }
+          },
+          "default": {
+            "description": "ServiceBus error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ServiceBus/namespaces/{namespaceName}/eventhubs": {
+      "get": {
+        "tags": [
+          "EventHubs"
+        ],
+        "operationId": "EventHubs_ListByNamespace",
+        "x-ms-examples": {
+          "RulesCreateOrUpdate": { "$ref": "./examples/SkuRegions/EventHubs.json" }
+        },
+        "description": "Gets all the Event Hubs in a service bus Namespace.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/resourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/namespaceNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successfully retrieved the list of Event Hubs.",
+            "schema": {
+              "$ref": "#/definitions/EventHubListResult"
+            }
+          },
+          "default": {
+            "description": "Eventhub error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
     }
   },
   "definitions": {
@@ -2098,7 +2218,7 @@
             "read",
             "create"
           ],
-          "description": "The Geo-location where the resource live"
+          "description": "The Geo-location where the resource lives"
         },
         "tags": {
           "type": "object",
@@ -2935,7 +3055,7 @@
         "properties": {
           "x-ms-client-flatten": true,
           "$ref": "#/definitions/Ruleproperties",
-		  "description": "Properties of Rule resource"
+          "description": "Properties of Rule resource"
         }
       },
       "allOf": [
@@ -3103,6 +3223,204 @@
         }
       ],
       "description": "Represents set of actions written in SQL language-based syntax that is performed against a ServiceBus.Messaging.BrokeredMessage "
+    },
+    "PremiumMessagingRegions": {
+      "properties": {
+        "properties": {
+          "properties": {
+            "code": {
+              "readOnly": true,
+              "type": "string",
+              "description": "Region code"
+            },
+            "fullName": {
+              "readOnly": true,
+              "type": "string",
+              "description": "Full name of the region"
+            }
+          }
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "#/definitions/ResourceNamespacePatch"
+        }
+      ],
+      "description": "Premium Messaging Region"
+    },
+    "PremiumMessagingRegionsListResult": {
+      "properties": {
+        "value": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/PremiumMessagingRegions"
+          },
+          "description": "Result of the List PremiumMessagingRegions type."
+        },
+        "nextLink": {
+          "type": "string",
+          "readOnly": true,
+          "description": "Link to the next set of results. Not empty if Value contains incomplete list of PremiumMessagingRegions."
+        }
+      },
+      "description": "The response of the List PremiumMessagingRegions operation."
+    },
+    "Eventhub": {
+      "properties": {
+        "properties": {
+          "x-ms-client-flatten": true,
+          "properties": {
+            "partitionIds": {
+              "readOnly": true,
+              "type": "array",
+              "items": {
+                "type": "string"
+              },
+              "description": "Current number of shards on the Event Hub."
+            },
+            "createdAt": {
+              "readOnly": true,
+              "format": "date-time",
+              "type": "string",
+              "description": "Exact time the Event Hub was created."
+            },
+            "updatedAt": {
+              "readOnly": true,
+              "format": "date-time",
+              "type": "string",
+              "description": "The exact time the message was updated."
+            },
+            "messageRetentionInDays": {
+              "format": "int64",
+              "type": "integer",
+              "maximum": 7,
+              "minimum": 1,
+              "description": "Number of days to retain the events for this Event Hub, value should be 1 to 7 days"
+            },
+            "partitionCount": {
+              "format": "int64",
+              "type": "integer",
+              "maximum": 32,
+              "minimum": 1,
+              "description": "Number of partitions created for the Event Hub, allowed values are from 1 to 32 partitions."
+            },
+            "status": {
+              "type": "string",
+              "description": "Enumerates the possible values for the status of the Event Hub.",
+              "enum": [
+                "Active",
+                "Disabled",
+                "Restoring",
+                "SendDisabled",
+                "ReceiveDisabled",
+                "Creating",
+                "Deleting",
+                "Renaming",
+                "Unknown"
+              ],
+              "x-ms-enum": {
+                "name": "EntityStatus",
+                "modelAsString": false
+              }
+            },
+            "captureDescription": {
+              "$ref": "#/definitions/CaptureDescription",
+              "description": "Properties of capture description"
+
+            }
+          },
+          "description": "Properties supplied to the Create Or Update Event Hub operation."
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "#/definitions/Resource"
+        }
+      ],
+      "description": "Single item in List or Get Event Hub operation"
+    },
+    "EventHubListResult": {
+      "properties": {
+        "value": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Eventhub"
+          },
+          "description": "Result of the List EventHubs operation."
+        },
+        "nextLink": {
+          "type": "string",
+          "readOnly": true,
+          "description": "Link to the next set of results. Not empty if Value contains incomplete list of EventHubs."
+        }
+      },
+      "description": "The result of the List EventHubs operation."
+    },
+    "CaptureDescription": {
+      "properties": {
+        "enabled": {
+          "type": "boolean",
+          "description": "A value that indicates whether capture description is enabled. "
+        },
+        "encoding": {
+          "type": "string",
+          "description": "Enumerates the possible values for the encoding format of capture description.",
+          "enum": [
+            "Avro",
+            "AvroDeflate"
+          ],
+          "x-ms-enum": {
+            "name": "EncodingCaptureDescription",
+            "modelAsString": false
+          }
+        },
+        "intervalInSeconds": {
+          "format": "int32",
+          "type": "integer",
+          "maximum": 900,
+          "minimum": 60,
+          "description": "The time window allows you to set the frequency with which the capture to Azure Blobs will happen, value should between 60 to 900 seconds"
+        },
+        "sizeLimitInBytes": {
+          "format": "int32",
+          "type": "integer",
+          "maximum": 524288000,
+          "minimum": 10485760,
+          "description": "The size window defines the amount of data built up in your Event Hub before an capture operation, value should be between 10485760 and 524288000 bytes"
+        },
+        "destination": {
+          "$ref": "#/definitions/Destination",
+          "description": "Properties of Destination where capture will be stored. (Storage Account, Blob Names)"
+        }
+      },
+      "description": "Properties to configure capture description for eventhub"
+    },
+    "Destination": {
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "Name for capture destination"
+        },
+        "properties": {
+          "x-ms-client-flatten": true,
+          "properties": {
+            "storageAccountResourceId": {
+              "type": "string",
+              "description": "Resource id of the storage account to be used to create the blobs"
+            },
+            "blobContainer": {
+              "type": "string",
+              "description": "Blob container Name"
+            },
+            "archiveNameFormat": {
+              "type": "string",
+              "description": "Blob naming convention for archive, e.g. {Namespace}/{EventHub}/{PartitionId}/{Year}/{Month}/{Day}/{Hour}/{Minute}/{Second}. Here all the parameters (Namespace,EventHub .. etc) are mandatory irrespective of order"
+            }
+          },
+          "description": "Properties describing the storage account, blob container and acrchive name format for capture destination"
+        }
+      },
+      "description": "Capture storage details for capture description"
     }
   },
   "parameters": {
@@ -3146,7 +3464,6 @@
       "required": true,
       "type": "string",
       "minLength": 1,
-      "maxLength": 50,
       "x-ms-parameter-location": "method",
       "description": "The authorizationrule name."
     },
@@ -3156,7 +3473,6 @@
       "required": true,
       "type": "string",
       "minLength": 1,
-      "maxLength": 50,
       "x-ms-parameter-location": "method",
       "description": "The queue name."
     },
@@ -3166,7 +3482,6 @@
       "required": true,
       "type": "string",
       "minLength": 1,
-      "maxLength": 50,
       "x-ms-parameter-location": "method",
       "description": "The topic name."
     },
@@ -3176,7 +3491,6 @@
       "required": true,
       "type": "string",
       "minLength": 1,
-      "maxLength": 50,
       "x-ms-parameter-location": "method",
       "description": "The subscription name."
     },
@@ -3186,9 +3500,17 @@
       "required": true,
       "type": "string",
       "minLength": 1,
-      "maxLength": 50,
       "x-ms-parameter-location": "method",
       "description": "The rule name."
+    },
+    "skuNameParameter": {
+      "name": "sku",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "minLength": 1,
+      "x-ms-parameter-location": "method",
+      "description": "The sku type."
     }
   }
 }
