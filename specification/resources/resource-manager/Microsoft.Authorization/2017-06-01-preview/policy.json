@@ -474,118 +474,118 @@
         ],
         "operationId": "PolicyDefinitions_CreateOrUpdate",
         "description": "Creates or updates a policy definition.",
-        "parameters": [
-          {
-            "name": "policyDefinitionName",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "description": "The name of the policy definition to create."
-          },
-          {
-            "name": "parameters",
-            "in": "body",
-            "required": true,
-            "schema": {
-              "$ref": "#/definitions/PolicyDefinition"
+          "parameters": [
+            {
+              "name": "policyDefinitionName",
+              "in": "path",
+              "required": true,
+              "type": "string",
+              "description": "The name of the policy definition to create."
             },
-            "description": "The policy definition properties."
-          },
-          {
-            "$ref": "#/parameters/ApiVersionParameter"
-          },
-          {
-            "$ref": "#/parameters/SubscriptionIdParameter"
-          }
-        ],
-        "responses": {
-          "201": {
-            "description": "Created - Returns information about the policy definition.",
-            "schema": {
-              "$ref": "#/definitions/PolicyDefinition"
+            {
+              "name": "parameters",
+              "in": "body",
+              "required": true,
+              "schema": {
+                "$ref": "#/definitions/PolicyDefinition"
+              },
+              "description": "The policy definition properties."
+            },
+            {
+              "$ref": "#/parameters/ApiVersionParameter"
+            },
+            {
+              "$ref": "#/parameters/SubscriptionIdParameter"
             }
-          },
-          "default": {
-            "description": "Error response describing why the operation failed.",
-            "schema": {
-              "$ref": "#/definitions/ErrorResponse"
-            }
-          }
-        }
-      },
-      "delete": {
-        "tags": [
-          "PolicyDefinitions"
-        ],
-        "operationId": "PolicyDefinitions_Delete",
-        "description": "Deletes a policy definition.",
-        "parameters": [
-          {
-            "name": "policyDefinitionName",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "description": "The name of the policy definition to delete."
-          },
-          {
-            "$ref": "#/parameters/ApiVersionParameter"
-          },
-          {
-            "$ref": "#/parameters/SubscriptionIdParameter"
-          }
-        ],
-        "responses": {
-          "204": {
-            "description": "No Content"
-          },
-          "200": {
-            "description": "OK"
-          },
-          "default": {
-            "description": "Error response describing why the operation failed.",
-            "schema": {
-              "$ref": "#/definitions/ErrorResponse"
+          ],
+          "responses": {
+            "201": {
+              "description": "Created - Returns information about the policy definition.",
+              "schema": {
+                "$ref": "#/definitions/PolicyDefinition"
+              }
+            },
+            "default": {
+              "description": "Error response describing why the operation failed.",
+              "schema": {
+                "$ref": "#/definitions/ErrorResponse"
+              }
             }
           }
-        }
-      },
-      "get": {
-        "tags": [
-          "PolicyDefinitions"
-        ],
-        "operationId": "PolicyDefinitions_Get",
-        "description": "Gets the policy definition.",
-        "parameters": [
-          {
-            "name": "policyDefinitionName",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "description": "The name of the policy definition to get."
-          },
-          {
-            "$ref": "#/parameters/ApiVersionParameter"
-          },
-          {
-            "$ref": "#/parameters/SubscriptionIdParameter"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "OK - Returns information about the policy definition.",
-            "schema": {
-              "$ref": "#/definitions/PolicyDefinition"
+        },
+        "delete": {
+          "tags": [
+            "PolicyDefinitions"
+          ],
+          "operationId": "PolicyDefinitions_Delete",
+          "description": "Deletes a policy definition.",
+          "parameters": [
+            {
+              "name": "policyDefinitionName",
+              "in": "path",
+              "required": true,
+              "type": "string",
+              "description": "The name of the policy definition to delete."
+            },
+            {
+              "$ref": "#/parameters/ApiVersionParameter"
+            },
+            {
+              "$ref": "#/parameters/SubscriptionIdParameter"
             }
-          },
-          "default": {
-            "description": "Error response describing why the operation failed.",
-            "schema": {
-              "$ref": "#/definitions/ErrorResponse"
+          ],
+          "responses": {
+            "204": {
+              "description": "No Content"
+            },
+            "200": {
+              "description": "OK"
+            },
+            "default": {
+              "description": "Error response describing why the operation failed.",
+              "schema": {
+                "$ref": "#/definitions/ErrorResponse"
+              }
             }
           }
-        }
-      }
-    },
+        },
+        "get": {
+          "tags": [
+            "PolicyDefinitions"
+          ],
+          "operationId": "PolicyDefinitions_Get",
+          "description": "Gets the policy definition.",
+          "parameters": [
+              {
+                "name": "policyDefinitionName",
+                "in": "path",
+                "required": true,
+                "type": "string",
+                "description": "The name of the policy definition to get."
+              },
+              {
+                "$ref": "#/parameters/ApiVersionParameter"
+              },
+              {
+                "$ref": "#/parameters/SubscriptionIdParameter"
+              }
+            ],
+          "responses": {
+              "200": {
+                "description": "OK - Returns information about the policy definition.",
+                "schema": {
+                  "$ref": "#/definitions/PolicyDefinition"
+                }
+              },
+              "default": {
+                "description": "Error response describing why the operation failed.",
+                "schema": {
+                  "$ref": "#/definitions/ErrorResponse"
+                }
+              }
+            }
+          }
+        },
     "/subscriptions/{subscriptionId}/providers/Microsoft.Authorization/policysetdefinitions/{policySetDefinitionName}": {
       "put": {
         "tags": [
@@ -593,93 +593,103 @@
         ],
         "operationId": "PolicySetDefinitions_CreateOrUpdate",
         "description": "Creates or updates a policy set definition.",
+        "x-ms-examples": {
+          "Put a policy set definition": {
+            "$ref": "./examples/createOrUpdatePolicySetDefinition.json"
+          }
+        },
         "parameters": [
-          {
-            "name": "policySetDefinitionName",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "description": "The name of the policy set definition to create."
-          },
-          {
-            "name": "parameters",
-            "in": "body",
-            "required": true,
-            "schema": {
-              "$ref": "#/definitions/PolicySetDefinition"
+            {
+              "name": "policySetDefinitionName",
+              "in": "path",
+              "required": true,
+              "type": "string",
+              "description": "The name of the policy set definition to create."
             },
-            "description": "The policy set definition properties."
-          },
-          {
-            "$ref": "#/parameters/ApiVersionParameter"
-          },
-          {
-            "$ref": "#/parameters/SubscriptionIdParameter"
-          }
-        ],
+            {
+              "name": "parameters",
+              "in": "body",
+              "required": true,
+              "schema": {
+                "$ref": "#/definitions/PolicySetDefinition"
+              },
+              "description": "The policy set definition properties."
+            },
+            {
+              "$ref": "#/parameters/ApiVersionParameter"
+            },
+            {
+              "$ref": "#/parameters/SubscriptionIdParameter"
+            }
+          ],
         "responses": {
-          "201": {
-            "description": "Created - Returns information about the policy set definition.",
-            "schema": {
-              "$ref": "#/definitions/PolicySetDefinition"
-            }
-          },
-          "200": {
-            "description": "OK - Returns information about the policy set definition.",
-            "schema": {
-              "$ref": "#/definitions/PolicySetDefinition"
-            }
-          },
-          "default": {
-            "description": "Error response describing why the operation failed.",
-            "schema": {
-              "$ref": "#/definitions/ErrorResponse"
-            }
-          }
-        }
-      },
-      "delete": {
-        "tags": [
-          "PolicySetDefinitions"
-        ],
-        "operationId": "PolicySetDefinitions_Delete",
-        "description": "Deletes a policy set definition.",
-        "parameters": [
-          {
-            "name": "policySetDefinitionName",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "description": "The name of the policy set definition to delete."
-          },
-          {
-            "$ref": "#/parameters/ApiVersionParameter"
-          },
-          {
-            "$ref": "#/parameters/SubscriptionIdParameter"
-          }
-        ],
-        "responses": {
-          "204": {
-            "description": "No Content"
-          },
-          "200": {
-            "description": "OK"
-          },
-          "default": {
-            "description": "Error response describing why the operation failed.",
-            "schema": {
-              "$ref": "#/definitions/ErrorResponse"
+            "201": {
+              "description": "Created - Returns information about the policy set definition.",
+              "schema": {
+                "$ref": "#/definitions/PolicySetDefinition"
+              }
+            },
+            "200": {
+              "description": "OK - Returns information about the policy set definition.",
+              "schema": {
+                "$ref": "#/definitions/PolicySetDefinition"
+              }
+            },
+            "default": {
+              "description": "Error response describing why the operation failed.",
+              "schema": {
+                "$ref": "#/definitions/ErrorResponse"
+              }
             }
           }
-        }
-      },
+        },
+        "delete": {
+          "tags": [
+            "PolicySetDefinitions"
+          ],
+          "operationId": "PolicySetDefinitions_Delete",
+          "description": "Deletes a policy set definition.",
+          "parameters": [
+            {
+              "name": "policySetDefinitionName",
+              "in": "path",
+              "required": true,
+              "type": "string",
+              "description": "The name of the policy set definition to delete."
+            },
+            {
+              "$ref": "#/parameters/ApiVersionParameter"
+            },
+            {
+              "$ref": "#/parameters/SubscriptionIdParameter"
+            }
+          ],
+          "responses": {
+            "204": {
+              "description": "No Content"
+            },
+            "200": {
+              "description": "OK"
+            },
+            "default": {
+              "description": "Error response describing why the operation failed.",
+              "schema": {
+                "$ref": "#/definitions/ErrorResponse"
+              }
+            }
+          }
+        },
       "get": {
         "tags": [
           "PolicySetDefinitions"
         ],
         "operationId": "PolicySetDefinitions_Get",
         "description": "Gets the policy set definition.",
+        "x-ms-examples": {
+          "Get a policy set definition": {
+            "$ref": "./examples/getPolicySetDefinition.json"
+          }
+        },
         "parameters": [
           {
             "name": "policySetDefinitionName",
@@ -710,7 +720,7 @@
           }
         }
       }
-    },
+      },
     "/subscriptions/{subscriptionId}/providers/Microsoft.Authorization/policysetdefinitions": {
       "get": {
         "tags": [
@@ -718,14 +728,12 @@
         ],
         "operationId": "PolicySetDefinitions_List",
         "description": "Gets all the policy set definitions for a subscription.",
+        "x-ms-examples": {
+          "List policy set definitions": {
+            "$ref": "./examples/listPolicySetDefinitions.json"
+          }
+        },
         "parameters": [
-          {
-            "name": "$filter",
-            "in": "query",
-            "required": false,
-            "type": "string",
-            "description": "The filter to apply on the operation."
-          },
           {
             "$ref": "#/parameters/ApiVersionParameter"
           },
@@ -761,13 +769,6 @@
         "operationId": "PolicyDefinitions_List",
         "description": "Gets all the policy definitions for a subscription.",
         "parameters": [
-          {
-            "name": "$filter",
-            "in": "query",
-            "required": false,
-            "type": "string",
-            "description": "The filter to apply on the operation."
-          },
           {
             "$ref": "#/parameters/ApiVersionParameter"
           },
@@ -837,6 +838,10 @@
           "type": "object",
           "description": "The policy rule."
         },
+        "metadata": {
+          "type": "object",
+          "description": "The policy definition metadata."
+        },
         "parameters": {
           "type": "object",
           "description": "Required if a parameter is used in policy rule."
@@ -861,11 +866,11 @@
         },
         "displayName": {
           "type": "string",
-          "description": "The display name of the policy definition."
+          "description": "The display name of the policy set definition."
         },
         "description": {
           "type": "string",
-          "description": "The policy definition description."
+          "description": "The policy set definition description."
         },
         "metadata": {
           "type": "object",
@@ -873,7 +878,7 @@
         },
         "parameters": {
           "type": "object",
-          "description": "Required if a parameter is used in policy rule."
+          "description": "The policy set definition parameters that can be used in policy definition references."
         },
         "policyDefinitions": {
           "type": "array",
@@ -892,7 +897,7 @@
       "properties": {
         "policyDefinitionId": {
           "type": "string",
-          "description": "The ID of the policy definition."
+          "description": "The ID of the policy definition or policy set definition."
         },
         "parameters": {
           "type": "object",
@@ -1001,6 +1006,10 @@
         "description": {
           "type": "string",
           "description": "This message will be part of response in case of policy violation."
+        },
+        "metadata": {
+          "type": "object",
+          "description": "The policy assignment metadata."
         }
       },
       "description": "The policy assignment properties."
@@ -1063,23 +1072,23 @@
         }
       },
       "description": "List of policy assignments."
-    }
-  },
-  "ErrorResponse": {
-    "description": "Error reponse indicates ARM is not able to process the incoming request. The reason is provided in the error message.",
-    "type": "object",
-    "properties": {
-      "httpStatus": {
-        "description": "Http status code.",
-        "type": "string"
-      },
-      "errorCode": {
-        "description": "Error code.",
-        "type": "string"
-      },
-      "errorMessage": {
-        "description": "Error message indicating why the operation failed.",
-        "type": "string"
+    },
+    "ErrorResponse": {
+      "description": "Error reponse indicates ARM is not able to process the incoming request. The reason is provided in the error message.",
+      "type": "object",
+      "properties": {
+        "httpStatus": {
+          "description": "Http status code.",
+          "type": "string"
+        },
+        "errorCode": {
+          "description": "Error code.",
+          "type": "string"
+        },
+        "errorMessage": {
+          "description": "Error message indicating why the operation failed.",
+          "type": "string"
+        }
       }
     }
   },

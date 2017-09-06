@@ -80,6 +80,14 @@ input-file:
 - Microsoft.Authorization/2015-01-01/locks.json
 ```
 
+### Tag: package-policy-2017-06
+These settings apply only when `--tag=package-policy-2017-06` is specified on the command line.
+
+``` yaml $(tag) == 'package-policy-2017-06'
+input-file:
+- Microsoft.Authorization/2017-06-01-preview/policy.json
+```
+
 ### Tag: package-policy-2016-12
 These settings apply only when `--tag=package-policy-2016-12` is specified on the command line.
 
