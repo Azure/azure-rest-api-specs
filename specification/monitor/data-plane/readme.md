@@ -28,9 +28,22 @@ These are the global settings for the MonitorClient API.
 title: MonitorClient
 description: Monitor Client
 openapi-type: data-plane
-tag: package-2016-09
+tag: package-2017-05
 ```
 
+### Tag: package-2017-05
+
+These settings apply only when `--tag=package-2017-05` is specified on the command line.
+
+``` yaml $(tag) == 'package-2017-05'
+input-file:
+- microsoft.insights/2014-04-01/usageMetrics_API.json
+- microsoft.insights/2015-04-01/activityLogs_API.json
+- microsoft.insights/2015-04-01/eventCategories_API.json
+- microsoft.insights/2015-04-01/tenantActivityLogs_API.json
+- microsoft.insights/2017-05-01-preview/metricDefinitions_API.json
+- microsoft.insights/2017-05-01-preview/metrics_API.json
+```
 
 ### Tag: package-2016-09
 
