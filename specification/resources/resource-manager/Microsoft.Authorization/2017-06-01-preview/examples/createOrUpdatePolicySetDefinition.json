@@ -12,7 +12,14 @@
         },
         "policyDefinitions": [
           {
-            "policyDefinitionId": "/subscriptions/subId/providers/Microsoft.Authorization/policyDefinitions/vmSkus"
+            "policyDefinitionId": "/subscriptions/subId/providers/Microsoft.Authorization/policyDefinitions/storageSkus",
+            "parameters": {
+              "listOfAllowedSKUs": {
+                "value": [
+                  "Standard_GRS",
+                  "Standard_LRS"
+                ] }
+            }
           }
         ]
       }
@@ -33,7 +40,15 @@
           },
           "policyDefinitions": [
             {
-              "policyDefinitionId": "/subscriptions/subid/providers/Microsoft.Authorization/policyDefinitions/vmSkus"
+              "policyDefinitionId": "/subscriptions/subid/providers/Microsoft.Authorization/policyDefinitions/storageSkus",
+              "parameters": {
+                "listOfAllowedSKUs": {
+                  "value": [
+                    "Standard_GRS",
+                    "Standard_LRS"
+                  ]
+                }
+              }
             }
           ],
           "policyType": "Custom"
