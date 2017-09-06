@@ -39,7 +39,7 @@
     "/subscriptions/{subscriptionId}/providers/Microsoft.Network/locations/{location}/CheckDnsNameAvailability": {
       "get": {
         "operationId": "CheckDnsNameAvailability",
-        "description": "Checks whether a domain name in the cloudapp.net zone is available for use.",
+        "description": "Checks whether a domain name in the cloudapp.azure.com zone is available for use.",
         "parameters": [
           {
             "name": "location",
@@ -51,7 +51,7 @@
           {
             "name": "domainNameLabel",
             "in": "query",
-            "required": false,
+            "required": true,
             "type": "string",
             "description": "The domain name to be verified. It must conform to the following regular expression: ^[a-z][a-z0-9-]{1,61}[a-z0-9]$."
           },
