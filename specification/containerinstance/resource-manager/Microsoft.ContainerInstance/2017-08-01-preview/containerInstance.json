@@ -206,7 +206,7 @@
           }
         },
         "summary": "Delete the specified container groups.",
-        "description": "Delete the specified container groups in the specified subscription and resource group. The operation does not delete other resources provided by the user such as volumes.",
+        "description": "Delete the specified container groups in the specified subscription and resource group. The operation does not delete other resources provided by the user, such as volumes.",
         "parameters": [
           {
             "$ref": "#/parameters/SubscriptionIdParameter"
@@ -405,7 +405,7 @@
         },
         "exitCode": {
           "type": "integer",
-          "description": "The container instance exit code. Exit codes map to output from `docker run`."
+          "description": "The container instance exit codes correspond to those from the `docker run` command."
         },
         "finishTime": {
           "type": "string",
@@ -602,7 +602,7 @@
                 },
                 "restartPolicy": {
                   "type": "string",
-                  "description": "Restart policy for all containers within the container group. Only option is Always.",
+                  "description": "Restart policy for all containers within the container group. Currently the only available option is `always`.",
                   "enum": [
                     "always"
                   ],
@@ -677,7 +677,7 @@
       "properties": {
         "ports": {
           "type": "array",
-          "description": "The ports exposed on the container group.",
+          "description": "The list of ports exposed on the container group.",
           "items": {
             "$ref": "#/definitions/Port"
           }
@@ -730,7 +730,7 @@
       ]
     },
     "ContainerPort": {
-      "description": "The container port.",
+      "description": "The port exposed on the container instance.",
       "type": "object",
       "properties": {
         "port": {
@@ -744,7 +744,7 @@
       ]
     },
     "EnvironmentVariable": {
-      "description": "The environment variable to set within the container.",
+      "description": "The environment variable to set within the container instance.",
       "type": "object",
       "properties": {
         "name": {
