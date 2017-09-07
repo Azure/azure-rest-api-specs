@@ -1,0 +1,258 @@
+{
+    "parameters": {
+        "api-version": "2017-06-15-preview"
+    },
+    "responses": {
+        "200": {
+            "body": [
+                {
+                    "name": "Microsoft.EventGrid/register/action",
+                    "display": {
+                        "provider": "Microsoft Event Grid",
+                        "resource": "EventGrid Resource Provider",
+                        "operation": "Registers the EventGrid Resource Provider",
+                        "description": "Registers the eventSubscription for the EventGrid resource provider and enables the creation of Event Grid subscriptions."
+                    },
+                    "origin": 2,
+                    "properties": null
+                },
+                {
+                    "name": "Microsoft.EventGrid/eventSubscriptions/write",
+                    "display": {
+                        "provider": "Microsoft Event Grid",
+                        "resource": "eventSubscriptions",
+                        "operation": "Write EventSubscription",
+                        "description": "Create or update a eventSubscription"
+                    },
+                    "origin": 2,
+                    "properties": null
+                },
+                {
+                    "name": "Microsoft.EventGrid/eventSubscriptions/read",
+                    "display": {
+                        "provider": "Microsoft Event Grid",
+                        "resource": "eventSubscriptions",
+                        "operation": "Read EventSubscription",
+                        "description": "Read a eventSubscription"
+                    },
+                    "origin": 2,
+                    "properties": null
+                },
+                {
+                    "name": "Microsoft.EventGrid/eventSubscriptions/delete",
+                    "display": {
+                        "provider": "Microsoft Event Grid",
+                        "resource": "eventSubscriptions",
+                        "operation": "Delete EventSubscription",
+                        "description": "Delete a eventSubscription"
+                    },
+                    "origin": 2,
+                    "properties": null
+                },
+                {
+                    "name": "Microsoft.EventGrid/topics/write",
+                    "display": {
+                        "provider": "Microsoft Event Grid",
+                        "resource": "topics",
+                        "operation": "Write Topic",
+                        "description": "Create or update a topic"
+                    },
+                    "origin": 2,
+                    "properties": null
+                },
+                {
+                    "name": "Microsoft.EventGrid/topics/read",
+                    "display": {
+                        "provider": "Microsoft Event Grid",
+                        "resource": "topics",
+                        "operation": "Read Topic",
+                        "description": "Read a topic"
+                    },
+                    "origin": 2,
+                    "properties": null
+                },
+                {
+                    "name": "Microsoft.EventGrid/topics/delete",
+                    "display": {
+                        "provider": "Microsoft Event Grid",
+                        "resource": "topics",
+                        "operation": "Delete Topic",
+                        "description": "Delete a topic"
+                    },
+                    "origin": 2,
+                    "properties": null
+                },
+                {
+                    "name": "Microsoft.EventGrid/topics/providers/Microsoft.Insights/metricDefinitions/read",
+                    "display": {
+                        "provider": "Microsoft Event Grid",
+                        "resource": "Topics Metrics",
+                        "operation": "Read topic metric definitions",
+                        "description": "Gets the available metrics for topics"
+                    },
+                    "origin": 1,
+                    "properties": {
+                        "serviceSpecification": {
+                            "metricSpecifications": [
+                                {
+                                    "name": "PublishedEvents",
+                                    "displayName": "Count of events published to this topic",
+                                    "displayDescription": "Count of events published to this topic",
+                                    "unit": "Count",
+                                    "aggregationType": "Total",
+                                    "fillGapWithZero": true
+                                },
+                                {
+                                    "name": "UnmatchedEvents",
+                                    "displayName": "Count of events not matching any of the event subscriptions for this topic",
+                                    "displayDescription": "Count of events not matching any of the event subscriptions for this topic",
+                                    "unit": "Count",
+                                    "aggregationType": "Total",
+                                    "fillGapWithZero": true
+                                }
+                            ]
+                        }
+                    }
+                },
+                {
+                    "name": "Microsoft.EventGrid/topics/providers/Microsoft.Insights/diagnosticSettings/read",
+                    "display": {
+                        "provider": "Microsoft Event Grid",
+                        "resource": "Topics Diagnostics",
+                        "operation": "Read diagnostic setting",
+                        "description": "Gets the diagnostic setting for topics"
+                    },
+                    "origin": 1,
+                    "properties": null
+                },
+                {
+                    "name": "Microsoft.EventGrid/topics/providers/Microsoft.Insights/diagnosticSettings/write",
+                    "display": {
+                        "provider": "Microsoft Event Grid",
+                        "resource": "Topics Diagnostics",
+                        "operation": "Write diagnostic setting",
+                        "description": "Creates or updates the diagnostic setting for topics"
+                    },
+                    "origin": 1,
+                    "properties": null
+                },
+                {
+                    "name": "Microsoft.EventGrid/eventSubscriptions/providers/Microsoft.Insights/metricDefinitions/read",
+                    "display": {
+                        "provider": "Microsoft Event Grid",
+                        "resource": "EventSubscription Metrics",
+                        "operation": "Read eventSubscription metric definitions",
+                        "description": "Gets the available metrics for eventSubscriptions"
+                    },
+                    "origin": 1,
+                    "properties": {
+                        "serviceSpecification": {
+                            "metricSpecifications": [
+                                {
+                                    "name": "MatchedEvents",
+                                    "displayName": "Count of events matching this event subscription",
+                                    "displayDescription": "Count of events matching this event subscription",
+                                    "unit": "Count",
+                                    "aggregationType": "Total",
+                                    "fillGapWithZero": true
+                                },
+                                {
+                                    "name": "DeliveredEvents",
+                                    "displayName": "Count of events delivered for this event subscription",
+                                    "displayDescription": "Count of events delivered for this event subscription",
+                                    "unit": "Count",
+                                    "aggregationType": "Total",
+                                    "fillGapWithZero": true
+                                },
+                                {
+                                    "name": "FailedDeliveryAttempts",
+                                    "displayName": "Count of failed delivery attempts for this event subscription",
+                                    "displayDescription": "Count of failed delivery attempts for this event subscription",
+                                    "unit": "Count",
+                                    "aggregationType": "Total",
+                                    "fillGapWithZero": true
+                                }
+                            ]
+                        }
+                    }
+                },
+                {
+                    "name": "Microsoft.EventGrid/eventSubscriptions/providers/Microsoft.Insights/diagnosticSettings/read",
+                    "display": {
+                        "provider": "Microsoft Event Grid",
+                        "resource": "EventSubscription Diagnostics",
+                        "operation": "Read diagnostic setting",
+                        "description": "Gets the diagnostic setting for event subscriptions"
+                    },
+                    "origin": 1,
+                    "properties": null
+                },
+                {
+                    "name": "Microsoft.EventGrid/eventSubscriptions/providers/Microsoft.Insights/diagnosticSettings/write",
+                    "display": {
+                        "provider": "Microsoft Event Grid",
+                        "resource": "EventSubscription Diagnostics",
+                        "operation": "Write diagnostic setting",
+                        "description": "Creates or updates the diagnostic setting for event subscriptions"
+                    },
+                    "origin": 1,
+                    "properties": null
+                },
+                {
+                    "name": "Microsoft.EventGrid/implicitTopics/providers/Microsoft.Insights/metricDefinitions/read",
+                    "display": {
+                        "provider": "Microsoft Event Grid",
+                        "resource": "Topics Metrics",
+                        "operation": "Read topic metric definitions",
+                        "description": "Gets the available metrics for topics"
+                    },
+                    "origin": 1,
+                    "properties": {
+                        "serviceSpecification": {
+                            "metricSpecifications": [
+                                {
+                                    "name": "PublishedEvents",
+                                    "displayName": "Count of events published to this topic",
+                                    "displayDescription": "Count of events published to this topic",
+                                    "unit": "Count",
+                                    "aggregationType": "Total",
+                                    "fillGapWithZero": true
+                                },
+                                {
+                                    "name": "UnmatchedEvents",
+                                    "displayName": "Count of events not matching any of the event subscriptions for this topic",
+                                    "displayDescription": "Count of events not matching any of the event subscriptions for this topic",
+                                    "unit": "Count",
+                                    "aggregationType": "Total",
+                                    "fillGapWithZero": true
+                                }
+                            ]
+                        }
+                    }
+                },
+                {
+                    "name": "Microsoft.EventGrid/implicitTopics/providers/Microsoft.Insights/diagnosticSettings/read",
+                    "display": {
+                        "provider": "Microsoft Event Grid",
+                        "resource": "Topics Diagnostics",
+                        "operation": "Read diagnostic setting",
+                        "description": "Gets the diagnostic setting for topics"
+                    },
+                    "origin": 1,
+                    "properties": null
+                },
+                {
+                    "name": "Microsoft.EventGrid/implicitTopics/providers/Microsoft.Insights/diagnosticSettings/write",
+                    "display": {
+                        "provider": "Microsoft Event Grid",
+                        "resource": "Topics Diagnostics",
+                        "operation": "Write diagnostic setting",
+                        "description": "Creates or updates the diagnostic setting for topics"
+                    },
+                    "origin": 1,
+                    "properties": null
+                }
+            ]
+        }
+    }
+}
