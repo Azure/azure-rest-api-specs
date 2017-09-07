@@ -197,6 +197,41 @@
                 }
             }
         },
+         "/subscriptions/{subscriptionId}/providers/Microsoft.OperationsManagement/solutions": {
+            "get": {
+                "tags": [
+                    "Solution"
+                ],                
+                "operationId": "Solutions_ListBySubscription",
+                 "x-ms-examples": {
+                     "SolutionList": { "$ref": "./examples/SolutionListForSubscription.json" }
+                },
+                "summary": "Retrieves the solution list for the subscription",
+                "description": "Retrieves the solution list. It will retrieve both first party and third party solutions",
+                "parameters": [
+                    {
+                        "$ref": "#/parameters/SubscriptionIdParameter"
+                    },                    
+                    {
+                        "$ref": "#/parameters/ApiVersionParameter"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK response definition.",
+                        "schema": {
+                            "$ref": "#/definitions/SolutionPropertiesList"
+                        }
+                    },
+                    "default": {
+                        "schema": {
+                            "$ref": "#/definitions/CodeMessageError"
+                        },
+                        "description": "Error response definition."
+                    }
+                }
+            }
+        },
         "/providers/Microsoft.OperationsManagement/operations":{
             "get": {
                 "tags": [
