@@ -175,7 +175,7 @@
           },
           {
             "name": "containerGroup",
-            "description": "The properties of the container group to be created.",
+            "description": "The properties of the container group to be created or updated.",
             "required": true,
             "in": "body",
             "schema": {
@@ -185,7 +185,7 @@
         ],
         "responses": {
           "200": {
-            "description": "OK - the container group already exists and is now updated.",
+            "description": "OK",
             "schema": {
               "$ref": "#/definitions/ContainerGroup"
             }
@@ -205,8 +205,8 @@
             "$ref": "./examples/ContainerGroupsDelete.json"
           }
         },
-        "summary": "Delete the specified container groups.",
-        "description": "Delete the specified container groups in the specified subscription and resource group. The operation does not delete other resources provided by the user, such as volumes.",
+        "summary": "Delete the specified container group.",
+        "description": "Delete the specified container group in the specified subscription and resource group. The operation does not delete other resources provided by the user, such as volumes.",
         "parameters": [
           {
             "$ref": "#/parameters/SubscriptionIdParameter"
@@ -231,7 +231,7 @@
         ],
         "responses": {
           "200": {
-            "description": "OK - the container group has been deleted.",
+            "description": "OK",
             "schema": {
               "$ref": "#/definitions/ContainerGroup"
             }
