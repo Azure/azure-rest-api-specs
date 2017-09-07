@@ -782,6 +782,19 @@
       },
       "description": "The Data Lake Analytics job state audit records for tracking the lifecycle of a job."
     },
+    "ScopeJobResource": {
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "the name of the resource."
+        },
+        "path": {
+          "type": "string",
+          "description": "the path to the resource."
+        }
+      },
+      "description": "The Scope job resources. (Only for use internally with Scope job type.)"
+    },
     "JobResource": {
       "properties": {
         "name": {
@@ -805,7 +818,7 @@
           ],
           "x-ms-enum": {
             "name": "JobResourceType",
-            "modelAsString": false
+            "modelAsString": true
           }
         }
       },
@@ -829,12 +842,10 @@
         },
         "statistics": {
           "$ref": "#/definitions/JobStatistics",
-          "readOnly": true,
           "description": "the job specific statistics."
         },
         "debugData": {
           "$ref": "#/definitions/JobDataPath",
-          "readOnly": true,
           "description": "the job specific debug data locations."
         },
         "diagnostics": {
@@ -856,7 +867,7 @@
           "readOnly": true,
           "description": "the total time this job spent compiling. This value should not be set by the user and will be ignored if it is."
         },
-        "totalPauseTime": {
+        "totalPausedTime": {
           "type": "string",
           "format": "duration",
           "readOnly": true,
@@ -901,7 +912,7 @@
           ],
           "x-ms-enum": {
             "name": "CompileMode",
-            "modelAsString": false
+            "modelAsString": true
           }
         }
       },
@@ -919,15 +930,26 @@
           "type": "array",
           "readOnly": true,
           "items": {
-            "$ref": "#/definitions/JobResource"
+            "$ref": "#/definitions/ScopeJobResource"
           },
           "description": "the list of resources that are required by the job"
+        },
+        "userAlgebraPath": {
+          "type": "string",
+          "readOnly": true,
+          "description": "the algebra file path after the job has completed"
         },
         "totalCompilationTime": {
           "type": "string",
           "format": "duration",
           "readOnly": true,
           "description": "the total time this job spent compiling. This value should not be set by the user and will be ignored if it is."
+        },
+        "totalPausedTime": {
+          "type": "string",
+          "format": "duration",
+          "readOnly": true,
+          "description": "the total time this job spent paused. This value should not be set by the user and will be ignored if it is."
         },
         "totalQueuedTime": {
           "type": "string",
@@ -950,26 +972,6 @@
           "type": "string",
           "readOnly": true,
           "description": "the ID used to identify the yarn application executing the job. This value should not be set by the user and will be ignored if it is."
-        },
-        "yarnApplicationTimeStamp": {
-          "type": "integer",
-          "readOnly": true,
-          "format": "int64",
-          "description": "the timestamp (in ticks) for the yarn application executing the job. This value should not be set by the user and will be ignored if it is."
-        },
-        "compileMode": {
-          "type": "string",
-          "readOnly": true,
-          "description": "the specific compilation mode for the job used during execution. If this is not specified during submission, the server will determine the optimal compilation mode.",
-          "enum": [
-            "Semantic",
-            "Full",
-            "SingleBox"
-          ],
-          "x-ms-enum": {
-            "name": "CompileMode",
-            "modelAsString": false
-          }
         }
       },
       "description": "Scope job properties used when submitting and retrieving Scope jobs. (Only for use internally with Scope job type.)"
@@ -1047,7 +1049,7 @@
           ],
           "x-ms-enum": {
             "name": "CompileMode",
-            "modelAsString": false
+            "modelAsString": true
           }
         }
       },
@@ -1061,18 +1063,12 @@
         }
       ],
       "properties": {
-        "compileMode": {
-          "type": "string",
-          "description": "the specific compilation mode for the job used during execution. If this is not specified during submission, the server will determine the optimal compilation mode.",
-          "enum": [
-            "Semantic",
-            "Full",
-            "SingleBox"
-          ],
-          "x-ms-enum": {
-            "name": "CompileMode",
-            "modelAsString": false
-          }
+        "resources": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ScopeJobResource"
+          },
+          "description": "the list of resources that are required by the job"
         }
       },
       "description": "Scope job properties used when submitting Scope jobs."
@@ -1138,7 +1134,7 @@
           ],
           "x-ms-enum": {
             "name": "SeverityTypes",
-            "modelAsString": false
+            "modelAsString": true
           }
         },
         "start": {
@@ -1223,7 +1219,7 @@
           ],
           "x-ms-enum": {
             "name": "SeverityTypes",
-            "modelAsString": false
+            "modelAsString": true
           }
         },
         "source": {
@@ -1262,7 +1258,7 @@
           ],
           "x-ms-enum": {
             "name": "SeverityTypes",
-            "modelAsString": false
+            "modelAsString": true
           }
         },
         "details": {
@@ -1629,7 +1625,7 @@
           ],
           "x-ms-enum": {
             "name": "JobType",
-            "modelAsString": false
+            "modelAsString": true
           }
         },
         "properties": {
@@ -1665,7 +1661,7 @@
           ],
           "x-ms-enum": {
             "name": "JobType",
-            "modelAsString": false
+            "modelAsString": true
           }
         },
         "submitter": {
@@ -1720,7 +1716,7 @@
           ],
           "x-ms-enum": {
             "name": "JobState",
-            "modelAsString": false
+            "modelAsString": true
           }
         },
         "result": {
@@ -1735,7 +1731,7 @@
           ],
           "x-ms-enum": {
             "name": "JobResult",
-            "modelAsString": false
+            "modelAsString": true
           }
         },
         "logFolder": {
