@@ -747,12 +747,10 @@
         },
         "statistics": {
           "$ref": "#/definitions/JobStatistics",
-          "readOnly": true,
           "description": "the job specific statistics."
         },
         "debugData": {
           "$ref": "#/definitions/JobDataPath",
-          "readOnly": true,
           "description": "the job specific debug data locations."
         },
         "diagnostics": {
@@ -1136,6 +1134,11 @@
           "type": "string",
           "readOnly": true,
           "description": "the error message description"
+        },
+        "innerError": {
+          "$ref": "#/definitions/JobInnerError",
+          "readOnly": true,
+          "description": "the inner error of this specific job error message, if any."
         }
       },
       "description": "The Data Lake Analytics job error details."
@@ -1173,7 +1176,7 @@
         }
       },
       "required": [
-          "recurrenceId"
+        "recurrenceId"
       ],
       "description": "Job relationship information properties including pipeline information, correlation information, etc."
     },
@@ -1395,7 +1398,7 @@
           "type": "array",
           "items": {
             "type": "string"
-          },        
+          },
           "description": "the list of log file name patterns to find in the logFolder. '*' is the only matching character allowed. Example format: jobExecution*.log or *mylog*.txt"
         },
         "related": {
@@ -1414,7 +1417,7 @@
           "$ref": "#/definitions/BaseJobParameters"
         }
       ],
-        "properties": {
+      "properties": {
         "name": {
           "type": "string",
           "description": "the friendly name of the job to build."
@@ -1550,7 +1553,7 @@
           "type": "array",
           "items": {
             "type": "string"
-          },        
+          },
           "description": "the list of log file name patterns to find in the logFolder. '*' is the only matching character allowed. Example format: jobExecution*.log or *mylog*.txt"
         },
         "related": {
