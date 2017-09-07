@@ -86,6 +86,11 @@ These settings apply only when `--tag=package-policy-2017-06` is specified on th
 ``` yaml $(tag) == 'package-policy-2017-06'
 input-file:
 - Microsoft.Authorization/2017-06-01-preview/policy.json
+- Microsoft.Authorization/2016-12-01/policy.json
+
+# Needed when there is more than one input file
+override-info:
+  title: PolicyClient
 ```
 
 ### Tag: package-policy-2016-12
