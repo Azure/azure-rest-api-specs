@@ -1056,7 +1056,96 @@
       }
     }
   },
+  "x-ms-paths": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ApiManagement/service/{serviceName}/apis/{apiId}?export=true": {
+      "get": {
+        "tags": [
+          "Apis"
+        ],
+        "operationId": "ApiExport_Get",
+        "description": "Gets the details of the API specified by its identifier in the format specified to the Storage Blob with SAS Key valid for 5 minutes.",
+        "x-ms-examples": {
+          "ApiManagementGetApiPolicy": {
+            "$ref": "./examples/ApiManagementGetApiExportInOpenApi2dot0.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "./apimanagement.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "./apimanagement.json#/parameters/ServiceNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ApiIdParameter"
+          },
+          {
+            "name": "Accept",
+            "in": "header",
+            "required": true,
+            "type": "string",
+            "enum": [
+              "application/vnd.swagger.link+json",
+              "application/vnd.sun.wadl.link+json",
+              "application/vnd.ms.wsdl.link+xml"
+            ],
+            "x-ms-enum": {
+              "name": "ExportFormat",
+              "modelAsString": false,
+              "values": [
+                {
+                  "value": "application/vnd.swagger.link+json",
+                  "description": "Export the Api Definition in OpenApi Specification 2.0 format to the Storage Blob.",
+                  "name": "OpenApi2"
+                },
+                {
+                  "value": "application/vnd.ms.wsdl.link+xml",
+                  "description": "Export the Api Definition in WSDL Schema to Storage Blob.",
+                  "name": "Wsdl"
+                },
+                {
+                  "value": "application/vnd.sun.wadl.link+json",
+                  "description": "Export the Api Definition in WADL Schema to Storage Blob.",
+                  "name": "Wadl"
+                }
+              ]
+            },
+            "description": "Format in which to export the Api Details to the Storage Blob with Sas Key valid for 5 minutes."
+          },
+          {
+            "$ref": "./apimanagement.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "./apimanagement.json#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The response contains a stream with a full set of API metadata and includes API entity with an embedded array of operation entities.",
+            "schema": {
+              "$ref": "#/definitions/ApiExportResult"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "./apimanagement.json#/definitions/ErrorBodyContract"
+            }
+          }
+        }
+      }
+    }
+  },
   "definitions": {
+    "ApiExportResult": {
+      "properties": {
+        "link": {
+          "type": "string",
+          "description": "Link to the Storage Blob containing the result of the export operation. The Blob Uri is only valid for 5 minutes."
+        }
+      },
+      "description": "API Export result Blob Uri."
+    },
     "ApiCollection": {
       "properties": {
         "value": {
