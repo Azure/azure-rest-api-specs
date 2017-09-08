@@ -38,6 +38,7 @@ These settings apply only when `--tag=package-2017-09` is specified on the comma
 ``` yaml $(tag) == 'package-2017-09'
 input-file:
 - Microsoft.Network/2017-09-01/applicationGateway.json
+- Microsoft.Network/2017-09-01/applicationSecurityGroup.json
 - Microsoft.Network/2017-09-01/checkDnsAvailability.json
 - Microsoft.Network/2017-09-01/endpointService.json
 - Microsoft.Network/2017-09-01/expressRouteCircuit.json
