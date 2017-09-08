@@ -38,6 +38,12 @@
       "get": {
         "operationId": "Operations_List",
         "description": "Lists all of the available Media Services REST API operations.",
+        "externalDocs": {
+          "url": "https://aka.ms/media-manage"
+        },
+        "x-ms-examples": {
+          "OperationsList": { "$ref": "./examples/OperationsList.json" }
+        },
         "parameters": [
           {
             "$ref": "#/parameters/apiVersionParameter"
@@ -60,6 +66,9 @@
         "externalDocs": {
           "url": "https://aka.ms/media-manage"
         },
+        "x-ms-examples": {
+          "MediaServiceCheckNameAvailability": { "$ref": "./examples/MediaServiceCheckNameAvailability.json" }
+        },
         "parameters": [
           {
             "$ref": "#/parameters/subscriptionIdParameter"
@@ -68,14 +77,14 @@
             "$ref": "#/parameters/apiVersionParameter"
           },
           {
-            "name": "CheckNameAvailabilityInput",
+            "name": "parameters",
             "description": "Properties needed to check the availability of a name.",
             "in": "body",
             "required": true,
             "schema": {
               "$ref": "#/definitions/CheckNameAvailabilityInput"
             }
-         }
+          }
         ],
         "responses": {
           "200": {
@@ -85,13 +94,9 @@
             },
             "examples": { 
               "application/json": {
-                "value": [
-                  {  
-                    "nameAvailable": false,
-                    "reason": "AlreadyExists",
-                    "message": "Already in use by another Media Service instance. Please try again with a name that is not likely to be in use."
-                  }  
-                ]
+                "nameAvailable": false,
+                "reason": "AlreadyExists",
+                "message": "Already in use by another Media Service instance. Please try again with a name that is not likely to be in use."
               }  
             }
           },
@@ -110,6 +115,9 @@
         "description": "Lists all of the Media Services in a resource group.",
         "externalDocs": {
           "url": "https://aka.ms/media-manage"
+        },
+        "x-ms-examples": {
+          "MediaServiceListByResourceGroup": { "$ref": "./examples/MediaServiceListByResourceGroup.json" }
         },
         "parameters": [
           {
@@ -133,7 +141,7 @@
                 "value": [
                   {
                     "name": "contosomedia",
-                    "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/contoso-media/providers/Microsoft.Media/mediaservices/contosomedia",
+                    "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/contosoresources/providers/Microsoft.Media/mediaservices/contosomedia",
                     "type": "Microsoft.Media/mediaservices",
                     "location": "West US",
                     "properties":{  
@@ -145,7 +153,7 @@
                       ],
                       "storageAccounts":[  
                         {  
-                          "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/contoso-media/providers/Microsoft.Storage/storageAccounts/contosomedia",
+                          "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/contosoresources/providers/Microsoft.Storage/storageAccounts/contosomedia",
                           "isPrimary": true
                         }
                       ]
@@ -174,6 +182,9 @@
         "externalDocs": {
           "url": "https://aka.ms/media-manage"
         },
+        "x-ms-examples": {
+          "MediaServiceGet": { "$ref": "./examples/MediaServiceGet.json" }
+        },
         "parameters": [
           {
             "$ref": "#/parameters/subscriptionIdParameter"
@@ -197,7 +208,7 @@
             "examples" : {
               "application/json": {
                 "name": "contosomedia",
-                "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/contoso-media/providers/Microsoft.Media/mediaservices/contosomedia",
+                "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/contosoresources/providers/Microsoft.Media/mediaservices/contosomedia",
                 "type": "Microsoft.Media/mediaservices",
                 "location": "West US",
                 "properties":{  
@@ -209,7 +220,7 @@
                   ],
                   "storageAccounts":[  
                     {  
-                      "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/contoso-media/providers/Microsoft.Storage/storageAccounts/contosomedia",
+                      "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/contosoresources/providers/Microsoft.Storage/storageAccounts/contosomedia",
                       "isPrimary": true
                     }
                   ]
@@ -226,10 +237,13 @@
         }
       },
       "put": {
-        "description": "Creates a Media Service.",
         "operationId": "MediaService_Create",
+        "description": "Creates a Media Service.",
         "externalDocs": {
           "url": "https://aka.ms/media-manage"
+        },
+        "x-ms-examples": {
+          "MediaServiceCreate": { "$ref": "./examples/MediaServiceCreate.json" }
         },
         "parameters": [
           {
@@ -245,7 +259,7 @@
             "$ref": "#/parameters/mediaResourceNameParameter"
           },
           {
-            "name": "MediaService",
+            "name": "parameters",
             "description": "Media Service properties needed for creation.",
             "in": "body",
             "required": true,
@@ -263,7 +277,7 @@
             "examples" : {
               "application/json": {
                 "name": "contosomedia",
-                "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/contoso-media/providers/Microsoft.Media/mediaservices/contosomedia",
+                "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/contosoresources/providers/Microsoft.Media/mediaservices/contosomedia",
                 "type": "Microsoft.Media/mediaservices",
                 "location": "West US",
                 "properties":{  
@@ -275,7 +289,7 @@
                   ],
                   "storageAccounts":[  
                     {  
-                      "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/contoso-media/providers/Microsoft.Storage/storageAccounts/contosomedia",
+                      "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/contosoresources/providers/Microsoft.Storage/storageAccounts/contosomedia",
                       "isPrimary": true
                     }
                   ]
@@ -296,6 +310,9 @@
         "description": "Deletes a Media Service.",
         "externalDocs": {
           "url": "https://aka.ms/media-manage"
+        },
+        "x-ms-examples": {
+          "MediaServiceDelete": { "$ref": "./examples/MediaServiceDelete.json" }
         },
         "parameters": [
           {
@@ -332,6 +349,9 @@
         "externalDocs": {
           "url": "https://aka.ms/media-manage"
         },
+        "x-ms-examples": {
+          "MediaServiceUpdate": { "$ref": "./examples/MediaServiceUpdate.json" }
+        },
         "parameters": [
           {
             "$ref": "#/parameters/subscriptionIdParameter"
@@ -346,7 +366,7 @@
             "$ref": "#/parameters/mediaResourceNameParameter"
           },
           {
-            "name": "MediaService",
+            "name": "parameters",
             "description": "Media Service properties needed for update.",
             "in": "body",
             "required": true,
@@ -364,7 +384,7 @@
             "examples" : {
               "application/json": {
                 "name": "contosomedia",
-                "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/contoso-media/providers/Microsoft.Media/mediaservices/contosomedia",
+                "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/contosoresources/providers/Microsoft.Media/mediaservices/contosomedia",
                 "type": "Microsoft.Media/mediaservices",
                 "location": "West US",
                 "properties":{  
@@ -376,7 +396,7 @@
                   ],
                   "storageAccounts":[  
                     {  
-                      "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/contoso-media/providers/Microsoft.Storage/storageAccounts/contosomedia",
+                      "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/contosoresources/providers/Microsoft.Storage/storageAccounts/contosomedia",
                       "isPrimary": true
                     }
                   ]
@@ -400,6 +420,9 @@
         "externalDocs": {
           "url": "https://aka.ms/media-manage"
         },
+        "x-ms-examples": {
+          "MediaServiceRegenerateKey": { "$ref": "./examples/MediaServiceRegenerateKey.json" }
+        },
         "parameters": [
           {
             "$ref": "#/parameters/subscriptionIdParameter"
@@ -414,7 +437,7 @@
             "$ref": "#/parameters/mediaResourceNameParameter"
           },
           {
-            "name": "RegenerateKeyInput",
+            "name": "parameters",
             "description": "Properties needed to regenerate the Media Service key.",
             "in": "body",
             "required": true,
@@ -450,6 +473,9 @@
         "description": "Lists the keys for a Media Service.",
         "externalDocs": {
           "url": "https://aka.ms/media-manage"
+        },
+        "x-ms-examples": {
+          "MediaServiceListKeys": { "$ref": "./examples/MediaServiceListKeys.json" }
         },
         "parameters": [
           {
@@ -497,6 +523,9 @@
         "externalDocs": {
           "url": "https://aka.ms/media-manage"
         },
+        "x-ms-examples": {
+          "MediaServiceSyncStorageKeys": { "$ref": "./examples/MediaServiceSyncStorageKeys.json" }
+        },
         "parameters": [
           {
             "$ref": "#/parameters/subscriptionIdParameter"
@@ -511,7 +540,7 @@
             "$ref": "#/parameters/mediaResourceNameParameter"
           },
           {
-            "name": "SyncStorageKeysInput",
+            "name": "parameters",
             "description": "Properties needed to synchronize the keys for a storage account to the Media Service.",
             "in": "body",
             "required": true,
@@ -585,7 +614,7 @@
         "name": {
           "description": "The name of the resource. A name must be globally unique.",
           "type": "string",
-          "pattern": "^[a-z0-9]",
+          "pattern": "^[a-z0-9]{3,24}$",
           "minLength": 3,
           "maxLength": 24
         },
@@ -608,29 +637,31 @@
     },    
     "CheckNameAvailabilityOutput": {
       "description": "The response body for CheckNameAvailability API.",
-       "example": { 
-         "value": [
-           {
-             "NameAvailable": true
-           }, 
-           {  
-             "NameAvailable": false,
-             "Reason": "AlreadyExists",
-             "Message": "Already in use by another Media Service instance. Please try again with a name that is not likely to be in use."
-           },
-           {
-             "NameAvailable": false,
-             "Reason": "Invalid",
-             "Message": "The media service name should be between 3 and 24 characters and may contain only lowercase letters and numbers."
-           }  
-         ]
-      },  
+       "examples": {
+        "application/json": {
+          "value": [  
+            {
+             "nameAvailable": true
+            }, 
+            {
+              "nameAvailable": false,
+              "reason": "AlreadyExists",
+              "message": "Already in use by another Media Service instance. Please try again with a name that is not likely to be in use."
+            },
+            {
+              "nameAvailable": false,
+              "reason": "Invalid",
+              "message": "The media service name should be between 3 and 24 characters and may contain only lowercase letters and numbers."
+            }  
+          ]
+        }
+      },
       "properties": {
-        "NameAvailable": {
+        "nameAvailable": {
           "description": "Specifies if the name is available.",
           "type": "boolean"
         },
-        "Reason": {
+        "reason": {
           "description": "Specifies the reason if the name is not available.",
           "type": "string",
           "enum": [
@@ -643,7 +674,7 @@
             "modelAsString": false
           }  
         },
-        "Message": {
+        "message": {
           "description": "Specifies the detailed reason if the name is not available.",
           "type": "string"
         }
@@ -656,8 +687,8 @@
         "properties": {
           "storageAccounts": [
             {
-              "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/contoso-media/providers/Microsoft.Storage/storageAccounts/contosomedia",
-            "isPrimary": true
+              "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/contosoresources/providers/Microsoft.Storage/storageAccounts/contosomedia",
+              "isPrimary": true
             }
           ]
         }
@@ -809,7 +840,7 @@
     "StorageAccount": {
       "description": "The properties of a storage account associated with this resource.",
        "example": {
-        "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/contoso-media/providers/Microsoft.Storage/storageAccounts/contosomedia",
+        "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/contosoresources/providers/Microsoft.Storage/storageAccounts/contosomedia",
         "isPrimary": true
       },
       "required": [
@@ -830,7 +861,7 @@
     "SyncStorageKeysInput": {
       "description": "The request  body for a SyncStorageKeys API.",
       "example": {
-        "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/contoso-media/providers/Microsoft.Storage/storageAccounts/contosomedia"
+        "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/contosoresources/providers/Microsoft.Storage/storageAccounts/contosomedia"
       },
       "required": [
         "id"
@@ -914,7 +945,7 @@
       "in": "path",
       "required": true,
       "type": "string",
-      "pattern": "^[a-z0-9]",
+      "pattern": "^[a-z0-9]{3,24}$",
       "minLength": 3,
       "maxLength": 24,
       "x-ms-parameter-location": "method"
