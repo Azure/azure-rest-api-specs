@@ -3,7 +3,7 @@
         "scope": "/subscriptions/5b4b650e-28b9-4790-b3ab-ddbd88d727c4/resourceGroups/examplerg/providers/Microsoft.EventHub/namespaces/examplenamespace1",
         "eventSubscriptionName": "examplesubscription10",
         "api-version": "2017-06-15-preview",
-        "parameters": {
+        "eventSubscriptionInfo": {
             "properties": {
                 "destination": {
                     "endpointType": "WebHook",
@@ -22,25 +22,26 @@
     "responses": {
         "201": {
             "body": {
-                "destination": {
-                    "endpointBaseUrl": "https://requestb.in/15ksip71",
-                    "endpointType": "WebHook",
-                    "endpointUrl": null
-                },
-                "filter": {
-                    "includedEventTypes": [
-                        "All"
-                    ],
-                    "isSubjectCaseSensitive": false,
-                    "subjectBeginsWith": "ExamplePrefix",
-                    "subjectEndsWith": "ExampleSuffix"
+                "properties": {
+                    "destination": {
+                        "properties": {
+                            "endpointBaseUrl": "https://requestb.in/15ksip71"
+                        },
+                        "endpointType": "WebHook"
+                    },
+                    "filter": {
+                        "includedEventTypes": [
+                            "All"
+                        ],
+                        "isSubjectCaseSensitive": false,
+                        "subjectBeginsWith": "ExamplePrefix",
+                        "subjectEndsWith": "ExampleSuffix"
+                    },
+                    "provisioningState": "Succeeded",
+                    "topic": "/subscriptions/5b4b650e-28b9-4790-b3ab-ddbd88d727c4/resourceGroups/examplerg/providers/Microsoft.EventHub/namespaces/examplenamespace1"
                 },
                 "id": "/subscriptions/5b4b650e-28b9-4790-b3ab-ddbd88d727c4/resourceGroups/examplerg/providers/Microsoft.EventHub/namespaces/examplenamespace1/providers/Microsoft.EventGrid/eventSubscriptions/examplesubscription10",
-                "labels": null,
                 "name": "examplesubscription10",
-                "provisioningState": "Succeeded",
-                "resourceGroup": "examplerg",
-                "topic": "/subscriptions/5b4b650e-28b9-4790-b3ab-ddbd88d727c4/resourceGroups/examplerg/providers/Microsoft.EventHub/namespaces/examplenamespace1",
                 "type": "Microsoft.EventGrid/eventSubscriptions"
             }
         }

@@ -3,7 +3,7 @@
         "scope": "/subscriptions/5b4b650e-28b9-4790-b3ab-ddbd88d727c4/resourceGroups/examplerg",
         "eventSubscriptionName": "examplesubscription2",
         "api-version": "2017-06-15-preview",
-        "parameters": {
+        "eventSubscriptionInfo": {
             "properties": {
                 "destination": {
                     "endpointType": "WebHook",
@@ -22,25 +22,26 @@
     "responses": {
         "201": {
             "body": {
-                "destination": {
-                    "endpointBaseUrl": "https://requestb.in/15ksip71",
-                    "endpointType": "WebHook",
-                    "endpointUrl": null
-                },
-                "filter": {
-                    "includedEventTypes": [
-                        "All"
-                    ],
-                    "isSubjectCaseSensitive": false,
-                    "subjectBeginsWith": "ExamplePrefix",
-                    "subjectEndsWith": "ExampleSuffix"
+                "properties": {
+                    "destination": {
+                        "properties": {
+                            "endpointBaseUrl": "https://requestb.in/15ksip71"
+                        },
+                        "endpointType": "WebHook"
+                    },
+                    "filter": {
+                        "includedEventTypes": [
+                            "All"
+                        ],
+                        "isSubjectCaseSensitive": false,
+                        "subjectBeginsWith": "ExamplePrefix",
+                        "subjectEndsWith": "ExampleSuffix"
+                    },
+                    "provisioningState": "Succeeded",
+                    "topic": "/subscriptions/5b4b650e-28b9-4790-b3ab-ddbd88d727c4/resourceGroups/examplerg"
                 },
                 "id": "/subscriptions/5b4b650e-28b9-4790-b3ab-ddbd88d727c4/resourceGroups/examplerg/providers/Microsoft.EventGrid/eventSubscriptions/examplesubscription2",
-                "labels": null,
                 "name": "examplesubscription2",
-                "provisioningState": "Succeeded",
-                "resourceGroup": "examplerg",
-                "topic": "/subscriptions/5b4b650e-28b9-4790-b3ab-ddbd88d727c4/resourceGroups/examplerg",
                 "type": "Microsoft.EventGrid/eventSubscriptions"
             }
         }

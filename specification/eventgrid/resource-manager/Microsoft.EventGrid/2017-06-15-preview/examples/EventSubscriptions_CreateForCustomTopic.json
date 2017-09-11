@@ -1,9 +1,9 @@
 {
     "parameters": {
+        "api-version": "2017-06-15-preview",
         "scope": "/subscriptions/5b4b650e-28b9-4790-b3ab-ddbd88d727c4/resourceGroups/examplerg/providers/Microsoft.EventGrid/topics/exampletopic1",
         "eventSubscriptionName": "examplesubscription1",
-        "api-version": "2017-06-15-preview",
-        "parameters": {
+        "eventSubscriptionInfo": {
             "properties": {
                 "destination": {
                     "endpointType": "WebHook",
@@ -21,28 +21,29 @@
     },
     "responses": {
         "201": {
-          "body": {
-            "destination": {
-              "endpointBaseUrl": "https://requestb.in/15ksip71",
-              "endpointType": "WebHook",
-              "endpointUrl": null
-            },
-            "filter": {
-              "includedEventTypes": [
-                "All"
-              ],
-              "isSubjectCaseSensitive": false,
-              "subjectBeginsWith": "ExamplePrefix",
-              "subjectEndsWith": "ExampleSuffix"
-            },
-            "id": "/subscriptions/5b4b650e-28b9-4790-b3ab-ddbd88d727c4/resourceGroups/examplerg/providers/Microsoft.EventGrid/topics/exampletopic1/providers/Microsoft.EventGrid/eventSubscriptions/examplesubscription1",
-            "labels": null,
-            "name": "examplesubscription1",
-            "provisioningState": "Succeeded",
-            "resourceGroup": "examplerg",
-            "topic": "/subscriptions/5b4b650e-28b9-4790-b3ab-ddbd88d727c4/resourceGroups/examplerg/providers/microsoft.eventgrid/topics/exampletopic1",
-            "type": "Microsoft.EventGrid/eventSubscriptions"
-          }
+            "body": {
+                "properties": {
+                    "destination": {
+                        "properties": {
+                            "endpointBaseUrl": "https://requestb.in/15ksip71"
+                        },
+                        "endpointType": "WebHook"
+                    },
+                    "filter": {
+                        "includedEventTypes": [
+                            "All"
+                        ],
+                        "isSubjectCaseSensitive": false,
+                        "subjectBeginsWith": "ExamplePrefix",
+                        "subjectEndsWith": "ExampleSuffix"
+                    },
+                    "provisioningState": "Succeeded",
+                    "topic": "/subscriptions/5b4b650e-28b9-4790-b3ab-ddbd88d727c4/resourceGroups/examplerg/providers/microsoft.eventgrid/topics/exampletopic1"
+                },
+                "id": "/subscriptions/5b4b650e-28b9-4790-b3ab-ddbd88d727c4/resourceGroups/examplerg/providers/Microsoft.EventGrid/topics/exampletopic1/providers/Microsoft.EventGrid/eventSubscriptions/examplesubscription1",
+                "name": "examplesubscription1",
+                "type": "Microsoft.EventGrid/eventSubscriptions"
+            }
         }
     }
 }
