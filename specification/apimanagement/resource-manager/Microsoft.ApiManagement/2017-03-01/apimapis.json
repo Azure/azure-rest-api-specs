@@ -1112,6 +1112,11 @@
         ],
         "operationId": "ApiExport_Get",
         "description": "Gets the details of the API specified by its identifier in the format specified to the Storage Blob with SAS Key valid for 5 minutes.",
+        "x-ms-examples": {
+          "ApiManagementListApiOperationPolicies": {
+            "$ref": "./examples/ApiManagementListApiOperationPolicies.json"
+          }
+        },
         "parameters": [
           {
             "$ref": "./apimanagement.json#/parameters/ResourceGroupNameParameter"
@@ -1172,7 +1177,7 @@
           "default": {
             "description": "Error response describing why the operation failed.",
             "schema": {
-              "$ref": "./apimanagement.json#/definitions/ErrorBodyContract"
+              "$ref": "./apimanagement.json#/definitions/ErrorResponse"
             }
           }
         }
