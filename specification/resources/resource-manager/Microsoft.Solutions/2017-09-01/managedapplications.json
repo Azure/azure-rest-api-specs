@@ -1,9 +1,9 @@
 {
   "swagger": "2.0",
   "info": {
-    "title": "ManagedApplicationClient",
+    "title": "ApplicationClient",
     "version": "2017-09-01",
-    "description": "ARM managed applications"
+    "description": "ARM applications"
   },
   "host": "management.azure.com",
   "schemes": [
@@ -34,16 +34,16 @@
     }
   },
   "paths": {
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Solutions/managedApplications/{managedApplicationName}": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Solutions/applications/{applicationName}": {
       "get": {
         "tags": [
-          "ManagedApplications"
+          "Applications"
         ],
-        "operationId": "ManagedApplications_Get",
+        "operationId": "Applications_Get",
         "description": "Gets the managed application.",
         "x-ms-examples": {
           "Get a managed application": {
-            "$ref": "./examples/getManagedApplication.json"
+            "$ref": "./examples/getApplication.json"
           }
         },
         "parameters": [
@@ -58,7 +58,7 @@
             "maxLength": 90
           },
           {
-            "name": "managedApplicationName",
+            "name": "applicationName",
             "in": "path",
             "required": true,
             "type": "string",
@@ -77,7 +77,7 @@
           "200": {
             "description": "OK - Returns the managed application.",
             "schema": {
-              "$ref": "#/definitions/ManagedApplication"
+              "$ref": "#/definitions/Application"
             }
           },
           "404": {
@@ -93,9 +93,9 @@
       },
       "delete": {
         "tags": [
-          "ManagedApplications"
+          "Applications"
         ],
-        "operationId": "ManagedApplications_Delete",
+        "operationId": "Applications_Delete",
         "description": "Deletes the managed application.",
         "parameters": [
           {
@@ -109,7 +109,7 @@
             "maxLength": 90
           },
           {
-            "name": "managedApplicationName",
+            "name": "applicationName",
             "in": "path",
             "required": true,
             "type": "string",
@@ -142,13 +142,13 @@
       },
       "put": {
         "tags": [
-          "ManagedApplications"
+          "Applications"
         ],
-        "operationId": "ManagedApplications_CreateOrUpdate",
+        "operationId": "Applications_CreateOrUpdate",
         "description": "Creates a new managed application.",
         "x-ms-examples": {
           "Create or update managed application": {
-            "$ref": "./examples/createOrUpdateManagedApplication.json"
+            "$ref": "./examples/createOrUpdateApplication.json"
           }
         },
         "parameters": [
@@ -163,7 +163,7 @@
             "maxLength": 90
           },
           {
-            "name": "managedApplicationName",
+            "name": "applicationName",
             "in": "path",
             "required": true,
             "type": "string",
@@ -176,7 +176,7 @@
             "in": "body",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/ManagedApplication"
+              "$ref": "#/definitions/Application"
             },
             "description": "Parameters supplied to the create or update a managed application."
           },
@@ -191,13 +191,13 @@
           "200": {
             "description": "Created - Returns information about the managed application, including provisioning status.",
             "schema": {
-              "$ref": "#/definitions/ManagedApplication"
+              "$ref": "#/definitions/Application"
             }
           },
           "201": {
             "description": "Created - Returns information about the managed application, including provisioning status.",
             "schema": {
-              "$ref": "#/definitions/ManagedApplication"
+              "$ref": "#/definitions/Application"
             }
           },
           "default": {
@@ -211,9 +211,9 @@
       },
       "patch": {
         "tags": [
-          "ManagedApplications"
+          "Applications"
         ],
-        "operationId": "ManagedApplications_Update",
+        "operationId": "Applications_Update",
         "description": "Updates an existing managed application. The only value that can be updated via PATCH currently is the tags.",
         "parameters": [
           {
@@ -227,7 +227,7 @@
             "maxLength": 90
           },
           {
-            "name": "managedApplicationName",
+            "name": "applicationName",
             "in": "path",
             "required": true,
             "type": "string",
@@ -239,7 +239,7 @@
             "name": "parameters",
             "in": "body",
             "schema": {
-              "$ref": "#/definitions/ManagedApplication"
+              "$ref": "#/definitions/Application"
             },
             "description": "Parameters supplied to update an existing managed application."
           },
@@ -254,7 +254,7 @@
           "200": {
             "description": "Created - Returns information about the managed application, including provisioning status.",
             "schema": {
-              "$ref": "#/definitions/ManagedApplication"
+              "$ref": "#/definitions/Application"
             }
           },
           "default": {
@@ -266,16 +266,16 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Solutions/managedApplicationDefinitions/{managedApplicationDefinitionName}": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Solutions/applicationDefinitions/{applicationDefinitionName}": {
       "get": {
         "tags": [
-          "ManagedApplicationDefinitions"
+          "ApplicationDefinitions"
         ],
-        "operationId": "ManagedApplicationDefinitions_Get",
+        "operationId": "ApplicationDefinitions_Get",
         "description": "Gets the managed application definition.",
         "x-ms-examples": {
           "Get managed application definition": {
-            "$ref": "./examples/getManagedApplicationDefinition.json"
+            "$ref": "./examples/getApplicationDefinition.json"
           }
         },
         "parameters": [
@@ -290,7 +290,7 @@
             "maxLength": 90
           },
           {
-            "name": "managedApplicationDefinitionName",
+            "name": "applicationDefinitionName",
             "in": "path",
             "required": true,
             "type": "string",
@@ -309,7 +309,7 @@
           "200": {
             "description": "OK - Returns the managed application definition.",
             "schema": {
-              "$ref": "#/definitions/ManagedApplicationDefinition"
+              "$ref": "#/definitions/ApplicationDefinition"
             }
           },
           "404": {
@@ -325,9 +325,9 @@
       },
       "delete": {
         "tags": [
-          "ManagedApplicationDefinitions"
+          "ApplicationDefinitions"
         ],
-        "operationId": "ManagedApplicationDefinitions_Delete",
+        "operationId": "ApplicationDefinitions_Delete",
         "description": "Deletes the managed application definition.",
         "parameters": [
           {
@@ -341,7 +341,7 @@
             "maxLength": 90
           },
           {
-            "name": "managedApplicationDefinitionName",
+            "name": "applicationDefinitionName",
             "in": "path",
             "required": true,
             "type": "string",
@@ -377,13 +377,13 @@
       },
       "put": {
         "tags": [
-          "ManagedApplicationDefinitions"
+          "ApplicationDefinitions"
         ],
-        "operationId": "ManagedApplicationDefinitions_CreateOrUpdate",
+        "operationId": "ApplicationDefinitions_CreateOrUpdate",
         "description": "Creates a new managed application definition.",
         "x-ms-examples": {
           "Create or update managed application definition": {
-            "$ref": "./examples/createOrUpdateManagedApplicationDefinition.json"
+            "$ref": "./examples/createOrUpdateApplicationDefinition.json"
           }
         },
         "parameters": [
@@ -398,7 +398,7 @@
             "maxLength": 90
           },
           {
-            "name": "managedApplicationDefinitionName",
+            "name": "applicationDefinitionName",
             "in": "path",
             "required": true,
             "type": "string",
@@ -411,7 +411,7 @@
             "in": "body",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/ManagedApplicationDefinition"
+              "$ref": "#/definitions/ApplicationDefinition"
             },
             "description": "Parameters supplied to the create or update an managed application definition."
           },
@@ -426,13 +426,13 @@
           "200": {
             "description": "OK - Returns information about the managed application definition, including provisioning status.",
             "schema": {
-              "$ref": "#/definitions/ManagedApplicationDefinition"
+              "$ref": "#/definitions/ApplicationDefinition"
             }
           },
           "201": {
             "description": "Created - Returns information about the managed application definition, including provisioning status.",
             "schema": {
-              "$ref": "#/definitions/ManagedApplicationDefinition"
+              "$ref": "#/definitions/ApplicationDefinition"
             }
           },
           "default": {
@@ -445,16 +445,16 @@
         "x-ms-long-running-operation": true
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Solutions/managedApplicationDefinitions": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Solutions/applicationDefinitions": {
       "get": {
         "tags": [
-          "ManagedApplicationDefinitions"
+          "ApplicationDefinitions"
         ],
-        "operationId": "ManagedApplicationDefinitions_ListByResourceGroup",
+        "operationId": "ApplicationDefinitions_ListByResourceGroup",
         "description": "Lists the managed application definitions in a resource group.",
         "x-ms-examples": {
           "List managed application definitions": {
-            "$ref": "./examples/listManagedApplicationDefinitionsByResourceGroup.json"
+            "$ref": "./examples/listApplicationDefinitionsByResourceGroup.json"
           }
         },
         "parameters": [
@@ -479,7 +479,7 @@
           "200": {
             "description": "OK - Returns an array of managed application definitions.",
             "schema": {
-              "$ref": "#/definitions/ManagedApplicationDefinitionListResult"
+              "$ref": "#/definitions/ApplicationDefinitionListResult"
             }
           },
           "default": {
@@ -494,16 +494,16 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Solutions/managedApplications": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Solutions/applications": {
       "get": {
         "tags": [
-          "ManagedApplications"
+          "Applications"
         ],
-        "operationId": "ManagedApplications_ListByResourceGroup",
-        "description": "Gets all the managedApplications within a resource group.",
+        "operationId": "Applications_ListByResourceGroup",
+        "description": "Gets all the applications within a resource group.",
         "x-ms-examples": {
-          "Lists managedApplications": {
-            "$ref": "./examples/listManagedApplicationsByResourceGroup.json"
+          "Lists applications": {
+            "$ref": "./examples/listApplicationsByResourceGroup.json"
           }
         },
         "parameters": [
@@ -526,9 +526,9 @@
         ],
         "responses": {
           "200": {
-            "description": "OK - Returns an array of managedApplications.",
+            "description": "OK - Returns an array of applications.",
             "schema": {
-              "$ref": "#/definitions/ManagedApplicationListResult"
+              "$ref": "#/definitions/ApplicationListResult"
             }
           },
           "default": {
@@ -543,13 +543,13 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/providers/Microsoft.Solutions/managedApplications": {
+    "/subscriptions/{subscriptionId}/providers/Microsoft.Solutions/applications": {
       "get": {
         "tags": [
-          "ManagedApplications"
+          "Applications"
         ],
-        "operationId": "ManagedApplications_ListBySubscription",
-        "description": "Gets all the managedApplications within a subscription.",
+        "operationId": "Applications_ListBySubscription",
+        "description": "Gets all the applications within a subscription.",
         "parameters": [
           {
             "$ref": "#/parameters/ApiVersionParameter"
@@ -560,9 +560,9 @@
         ],
         "responses": {
           "200": {
-            "description": "OK - Returns an array of managedApplications.",
+            "description": "OK - Returns an array of applications.",
             "schema": {
-              "$ref": "#/definitions/ManagedApplicationListResult"
+              "$ref": "#/definitions/ApplicationListResult"
             }
           },
           "default": {
@@ -577,20 +577,20 @@
         }
       }
     },
-    "/{managedApplicationId}": {
+    "/{applicationId}": {
       "get": {
         "tags": [
-          "ManagedApplications"
+          "Applications"
         ],
-        "operationId": "ManagedApplications_GetById",
+        "operationId": "Applications_GetById",
         "description": "Gets the managed application.",
         "parameters": [
           {
-            "name": "managedApplicationId",
+            "name": "applicationId",
             "in": "path",
             "required": true,
             "type": "string",
-            "description": "The fully qualified ID of the managed application, including the managed application name and the managed application resource type. Use the format, /subscriptions/{guid}/resourceGroups/{resource-group-name}/Microsoft.Solutions/managedApplications/{managedApplication-name}",
+            "description": "The fully qualified ID of the managed application, including the managed application name and the managed application resource type. Use the format, /subscriptions/{guid}/resourceGroups/{resource-group-name}/Microsoft.Solutions/applications/{application-name}",
             "x-ms-skip-url-encoding": true
           },
           {
@@ -604,7 +604,7 @@
           "200": {
             "description": "OK - Returns the managed application.",
             "schema": {
-              "$ref": "#/definitions/ManagedApplication"
+              "$ref": "#/definitions/Application"
             }
           },
           "404": {
@@ -620,17 +620,17 @@
       },
       "delete": {
         "tags": [
-          "ManagedApplications"
+          "Applications"
         ],
-        "operationId": "ManagedApplications_DeleteById",
+        "operationId": "Applications_DeleteById",
         "description": "Deletes the managed application.",
         "parameters": [
           {
-            "name": "managedApplicationId",
+            "name": "applicationId",
             "in": "path",
             "required": true,
             "type": "string",
-            "description": "The fully qualified ID of the managed application, including the managed application name and the managed application resource type. Use the format, /subscriptions/{guid}/resourceGroups/{resource-group-name}/Microsoft.Solutions/managedApplications/{managedApplication-name}",
+            "description": "The fully qualified ID of the managed application, including the managed application name and the managed application resource type. Use the format, /subscriptions/{guid}/resourceGroups/{resource-group-name}/Microsoft.Solutions/applications/{application-name}",
             "x-ms-skip-url-encoding": true
           },
           {
@@ -658,17 +658,17 @@
       },
       "put": {
         "tags": [
-          "ManagedApplications"
+          "Applications"
         ],
-        "operationId": "ManagedApplications_CreateOrUpdateById",
+        "operationId": "Applications_CreateOrUpdateById",
         "description": "Creates a new managed application.",
         "parameters": [
           {
-            "name": "managedApplicationId",
+            "name": "applicationId",
             "in": "path",
             "required": true,
             "type": "string",
-            "description": "The fully qualified ID of the managed application, including the managed application name and the managed application resource type. Use the format, /subscriptions/{guid}/resourceGroups/{resource-group-name}/Microsoft.Solutions/managedApplications/{managedApplication-name}",
+            "description": "The fully qualified ID of the managed application, including the managed application name and the managed application resource type. Use the format, /subscriptions/{guid}/resourceGroups/{resource-group-name}/Microsoft.Solutions/applications/{application-name}",
             "x-ms-skip-url-encoding": true
           },
           {
@@ -676,7 +676,7 @@
             "in": "body",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/ManagedApplication"
+              "$ref": "#/definitions/Application"
             },
             "description": "Parameters supplied to the create or update a managed application."
           },
@@ -691,13 +691,13 @@
           "200": {
             "description": "Created - Returns information about the managed application, including provisioning status.",
             "schema": {
-              "$ref": "#/definitions/ManagedApplication"
+              "$ref": "#/definitions/Application"
             }
           },
           "201": {
             "description": "Created - Returns information about the managed application, including provisioning status.",
             "schema": {
-              "$ref": "#/definitions/ManagedApplication"
+              "$ref": "#/definitions/Application"
             }
           },
           "default": {
@@ -711,24 +711,24 @@
       },
       "patch": {
         "tags": [
-          "ManagedApplications"
+          "Applications"
         ],
-        "operationId": "ManagedApplications_UpdateById",
+        "operationId": "Applications_UpdateById",
         "description": "Updates an existing managed application. The only value that can be updated via PATCH currently is the tags.",
         "parameters": [
           {
-            "name": "managedApplicationId",
+            "name": "applicationId",
             "in": "path",
             "required": true,
             "type": "string",
-            "description": "The fully qualified ID of the managed application, including the managed application name and the managed application resource type. Use the format, /subscriptions/{guid}/resourceGroups/{resource-group-name}/Microsoft.Solutions/managedApplications/{managedApplication-name}",
+            "description": "The fully qualified ID of the managed application, including the managed application name and the managed application resource type. Use the format, /subscriptions/{guid}/resourceGroups/{resource-group-name}/Microsoft.Solutions/applications/{application-name}",
             "x-ms-skip-url-encoding": true
           },
           {
             "name": "parameters",
             "in": "body",
             "schema": {
-              "$ref": "#/definitions/ManagedApplication"
+              "$ref": "#/definitions/Application"
             },
             "description": "Parameters supplied to update an existing managed application."
           },
@@ -743,7 +743,7 @@
           "200": {
             "description": "Created - Returns information about the managed application, including provisioning status.",
             "schema": {
-              "$ref": "#/definitions/ManagedApplication"
+              "$ref": "#/definitions/Application"
             }
           },
           "default": {
@@ -755,20 +755,20 @@
         }
       }
     },
-    "/{managedApplicationDefinitionId}": {
+    "/{applicationDefinitionId}": {
       "get": {
         "tags": [
-          "ManagedApplicationDefinitions"
+          "ApplicationDefinitions"
         ],
-        "operationId": "ManagedApplicationDefinitions_GetById",
+        "operationId": "ApplicationDefinitions_GetById",
         "description": "Gets the managed application definition.",
         "parameters": [
           {
-            "name": "managedApplicationDefinitionId",
+            "name": "applicationDefinitionId",
             "in": "path",
             "required": true,
             "type": "string",
-            "description": "The fully qualified ID of the managed application definition, including the managed application name and the managed application definition resource type. Use the format, /subscriptions/{guid}/resourceGroups/{resource-group-name}/Microsoft.Solutions/managedApplicationDefinitions/{managedApplicationDefinition-name}",
+            "description": "The fully qualified ID of the managed application definition, including the managed application name and the managed application definition resource type. Use the format, /subscriptions/{guid}/resourceGroups/{resource-group-name}/Microsoft.Solutions/applicationDefinitions/{applicationDefinition-name}",
             "x-ms-skip-url-encoding": true
           },
           {
@@ -782,7 +782,7 @@
           "200": {
             "description": "OK - Returns the managed application definition.",
             "schema": {
-              "$ref": "#/definitions/ManagedApplicationDefinition"
+              "$ref": "#/definitions/ApplicationDefinition"
             }
           },
           "404": {
@@ -798,17 +798,17 @@
       },
       "delete": {
         "tags": [
-          "ManagedApplicationDefinitions"
+          "ApplicationDefinitions"
         ],
-        "operationId": "ManagedApplicationDefinitions_DeleteById",
+        "operationId": "ApplicationDefinitions_DeleteById",
         "description": "Deletes the managed application definition.",
         "parameters": [
           {
-            "name": "managedApplicationDefinitionId",
+            "name": "applicationDefinitionId",
             "in": "path",
             "required": true,
             "type": "string",
-            "description": "The fully qualified ID of the managed application definition, including the managed application name and the managed application definition resource type. Use the format, /subscriptions/{guid}/resourceGroups/{resource-group-name}/Microsoft.Solutions/managedApplicationDefinitions/{managedApplicationDefinition-name}",
+            "description": "The fully qualified ID of the managed application definition, including the managed application name and the managed application definition resource type. Use the format, /subscriptions/{guid}/resourceGroups/{resource-group-name}/Microsoft.Solutions/applicationDefinitions/{applicationDefinition-name}",
             "x-ms-skip-url-encoding": true
           },
           {
@@ -839,17 +839,17 @@
       },
       "put": {
         "tags": [
-          "ManagedApplicationDefinitions"
+          "ApplicationDefinitions"
         ],
-        "operationId": "ManagedApplicationDefinitions_CreateOrUpdateById",
+        "operationId": "ApplicationDefinitions_CreateOrUpdateById",
         "description": "Creates a new managed application definition.",
         "parameters": [
           {
-            "name": "managedApplicationDefinitionId",
+            "name": "applicationDefinitionId",
             "in": "path",
             "required": true,
             "type": "string",
-            "description": "The fully qualified ID of the managed application definition, including the managed application name and the managed application definition resource type. Use the format, /subscriptions/{guid}/resourceGroups/{resource-group-name}/Microsoft.Solutions/managedApplicationDefinitions/{managedApplicationDefinition-name}",
+            "description": "The fully qualified ID of the managed application definition, including the managed application name and the managed application definition resource type. Use the format, /subscriptions/{guid}/resourceGroups/{resource-group-name}/Microsoft.Solutions/applicationDefinitions/{applicationDefinition-name}",
             "x-ms-skip-url-encoding": true
           },
           {
@@ -857,7 +857,7 @@
             "in": "body",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/ManagedApplicationDefinition"
+              "$ref": "#/definitions/ApplicationDefinition"
             },
             "description": "Parameters supplied to the create or update a managed application definition."
           },
@@ -872,13 +872,13 @@
           "200": {
             "description": "OK - Returns information about the managed application definition, including provisioning status.",
             "schema": {
-              "$ref": "#/definitions/ManagedApplicationDefinition"
+              "$ref": "#/definitions/ApplicationDefinition"
             }
           },
           "201": {
             "description": "Created - Returns information about the managed application definition, including provisioning status.",
             "schema": {
-              "$ref": "#/definitions/ManagedApplicationDefinition"
+              "$ref": "#/definitions/ApplicationDefinition"
             }
           },
           "default": {
@@ -893,11 +893,11 @@
     }
   },
   "definitions": {
-    "ManagedApplication": {
+    "Application": {
       "properties": {
         "properties": {
           "x-ms-client-flatten": true,
-          "$ref": "#/definitions/ManagedApplicationProperties",
+          "$ref": "#/definitions/ApplicationProperties",
           "description": "The managed application properties."
         },
         "plan": {
@@ -921,11 +921,11 @@
       ],
       "description": "Information about managed application."
     },
-    "ManagedApplicationPatchable": {
+    "ApplicationPatchable": {
       "properties": {
         "properties": {
           "x-ms-client-flatten": true,
-          "$ref": "#/definitions/ManagedApplicationPropertiesPatchable",
+          "$ref": "#/definitions/ApplicationPropertiesPatchable",
           "description": "The managed application properties."
         },
         "plan": {
@@ -945,11 +945,11 @@
       ],
       "description": "Information about managed application."
     },
-    "ManagedApplicationDefinition": {
+    "ApplicationDefinition": {
       "properties": {
         "properties": {
           "x-ms-client-flatten": true,
-          "$ref": "#/definitions/ManagedApplicationDefinitionProperties",
+          "$ref": "#/definitions/ApplicationDefinitionProperties",
           "description": "The managed application definition properties."
         }
       },
@@ -963,13 +963,13 @@
       ],
       "description": "Information about managed application definition."
     },
-    "ManagedApplicationProperties": {
+    "ApplicationProperties": {
       "properties": {
         "managedResourceGroupId": {
           "type": "string",
           "description": "The managed resource group Id."
         },
-        "managedApplicationDefinitionId": {
+        "applicationDefinitionId": {
           "type": "string",
           "description": "The fully qualified path of managed application definition Id."
         },
@@ -997,13 +997,13 @@
       ],
       "description": "The managed application properties."
     },
-    "ManagedApplicationPropertiesPatchable": {
+    "ApplicationPropertiesPatchable": {
       "properties": {
         "managedResourceGroupId": {
           "type": "string",
           "description": "The managed resource group Id."
         },
-        "managedApplicationDefinitionId": {
+        "applicationDefinitionId": {
           "type": "string",
           "description": "The fully qualified path of managed application definition Id."
         },
@@ -1028,28 +1028,32 @@
       },
       "description": "The managed application properties."
     },
-    "ManagedApplicationDefinitionProperties": {
+    "ApplicationDefinitionProperties": {
       "properties": {
         "lockLevel": {
-          "$ref": "#/definitions/ManagedApplicationLockLevel",
+          "$ref": "#/definitions/ApplicationLockLevel",
           "description": "The managed application lock level."
         },
         "displayName": {
           "type": "string",
           "description": "The managed application definition display name."
         },
+        "isEnabled": {
+          "type": "string",
+          "description": "A value indicating whether the package is enabled or not."
+        },
         "authorizations": {
           "description": "The managed application provider authorizations.",
           "type": "array",
           "items": {
-            "$ref": "#/definitions/ManagedApplicationProviderAuthorization"
+            "$ref": "#/definitions/ApplicationProviderAuthorization"
           }
         },
         "artifacts": {
           "description": "The collection of managed application artifacts. The portal will use the files specified as artifacts to construct the user experience of creating a managed application from a managed application definition.",
           "type": "array",
           "items": {
-            "$ref": "#/definitions/ManagedApplicationArtifact"
+            "$ref": "#/definitions/ApplicationArtifact"
           }
         },
         "description": {
@@ -1058,13 +1062,20 @@
         },
         "packageFileUri": {
           "type": "string",
-          "description": "The managed application definition package file Uri."
+          "description": "The managed application definition package file Uri. Use this element"
+        },
+        "mainTemplate": {
+          "type": "object",
+          "description": "The inline main template json which has resources to be provisioned. It can be a JObject or well-formed JSON string."
+        },
+        "createUiDefinition": {
+          "type": "object",
+          "description": "The createUiDefinition json for the backing template with Microsoft.Solutions/applications resource. It can be a JObject or well-formed JSON string."
         }
       },
       "required": [
         "lockLevel",
-        "authorizations",
-        "packageFileUri"
+        "authorizations"
       ],
       "description": "The managed application definition properties."
     },
@@ -1237,12 +1248,12 @@
       "description": "Resource information.",
       "x-ms-azure-resource": true
     },
-    "ManagedApplicationListResult": {
+    "ApplicationListResult": {
       "properties": {
         "value": {
           "type": "array",
           "items": {
-            "$ref": "#/definitions/ManagedApplication"
+            "$ref": "#/definitions/Application"
           },
           "description": "The array of managed applications."
         },
@@ -1253,12 +1264,12 @@
       },
       "description": "List of managed applications."
     },
-    "ManagedApplicationDefinitionListResult": {
+    "ApplicationDefinitionListResult": {
       "properties": {
         "value": {
           "type": "array",
           "items": {
-            "$ref": "#/definitions/ManagedApplicationDefinition"
+            "$ref": "#/definitions/ApplicationDefinition"
           },
           "description": "The array of managed application definitions."
         },
@@ -1291,7 +1302,7 @@
         "modelAsString": true
       }
     },
-    "ManagedApplicationLockLevel": {
+    "ApplicationLockLevel": {
       "description": "The managed application lock level.",
       "enum": [
         "CanNotDelete",
@@ -1300,11 +1311,11 @@
       ],
       "type": "string",
       "x-ms-enum": {
-        "name": "ManagedApplicationLockLevel",
+        "name": "ApplicationLockLevel",
         "modelAsString": false
       }
     },
-    "ManagedApplicationArtifactType": {
+    "ApplicationArtifactType": {
       "description": "The managed application artifact type.",
       "enum": [
         "Template",
@@ -1312,11 +1323,11 @@
       ],
       "type": "string",
       "x-ms-enum": {
-        "name": "ManagedApplicationArtifactType",
+        "name": "ApplicationArtifactType",
         "modelAsString": false
       }
     },
-    "ManagedApplicationArtifact": {
+    "ApplicationArtifact": {
       "properties": {
         "name": {
           "type": "string",
@@ -1327,13 +1338,13 @@
           "description": "The managed application artifact blob uri."
         },
         "type": {
-          "$ref": "#/definitions/ManagedApplicationArtifactType",
+          "$ref": "#/definitions/ApplicationArtifactType",
           "description": "The managed application artifact type."
         }
       },
       "description": "Managed application artifact."
     },
-    "ManagedApplicationProviderAuthorization": {
+    "ApplicationProviderAuthorization": {
       "properties": {
         "principalId": {
           "type": "string",
