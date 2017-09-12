@@ -190,8 +190,13 @@
     "DiagnosticSettingsCategory": {
       "properties": {
         "categoryType": {
+          "enum": ["Metrics", "Logs"],
           "type": "string",
-          "description": "The type of the diagnostic settings category. Can be 'Logs' or 'Metrics'."
+          "x-ms-enum": {
+             "name": "categoryType"
+          },
+          "x-nullable": false,
+          "description": "The type of the diagnostic settings category."
         }
       },
       "description": "The diagnostic settings Category."
