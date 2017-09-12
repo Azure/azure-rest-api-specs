@@ -20,7 +20,7 @@
         "tags": [
           "Operation"
         ],
-        "description": "Checks whether the container registry name is available for use. The name must contain only alphanumeric characters, be globally unique, and between 5 and 60 characters in length.",
+        "description": "Checks whether the container registry name is available for use. The name must contain only alphanumeric characters, be globally unique, and between 5 and 50 characters in length.",
         "operationId": "Registries_CheckNameAvailability",
         "parameters": [
           {
@@ -409,7 +409,7 @@
           "type": "string"
         },
         "type": {
-          "description": "The resource type of the container registry. This field must be set to \"Microsoft.ContainerRegistry/registries\".",
+          "description": "The resource type of the container registry. This field must be set to 'Microsoft.ContainerRegistry/registries'.",
           "enum": [
             "Microsoft.ContainerRegistry/registries"
           ],
@@ -517,7 +517,7 @@
       ],
       "properties": {
         "name": {
-          "description": "The SKU name of the the container registry. Required for registry creation. Allowed value: Basic.",
+          "description": "The SKU name of the container registry. Required for registry creation. Allowed value: Basic.",
           "type": "string"
         },
         "tier": {
@@ -549,7 +549,7 @@
           "readOnly": true
         },
         "provisioningState": {
-          "description": "The status of the container registry at the time the operation was called.",
+          "description": "The provisioning state of the container registry at the time the operation was called.",
           "enum": [
             "Creating",
             "Succeeded"
@@ -562,7 +562,7 @@
           }
         },
         "adminUserEnabled": {
-          "description": "The value that indicates whether the admin user is enabled. This value is false by default.",
+          "description": "The value that indicates whether the admin user is enabled.",
           "default": false,
           "type": "boolean"
         },
@@ -617,7 +617,8 @@
       ],
       "properties": {
         "adminUserEnabled": {
-          "description": "The value that indicates whether the admin user is enabled. This value is false by default.",
+          "description": "The value that indicates whether the admin user is enabled.",
+          "default": false,
           "type": "boolean"
         },
         "storageAccount": {
@@ -664,7 +665,7 @@
       "description": "The parameters for updating the properties of a container registry.",
       "properties": {
         "adminUserEnabled": {
-          "description": "The value that indicates whether the admin user is enabled. This value is false by default.",
+          "description": "The value that indicates whether the admin user is enabled.",
           "type": "boolean"
         },
         "storageAccount": {
@@ -769,7 +770,11 @@
         },
         "location": {
           "description": "The location of the resource. This cannot be changed after the resource is created.",
-          "type": "string"
+          "type": "string",
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
         },
         "tags": {
           "description": "The tags of the resource.",
@@ -816,5 +821,23 @@
       "pattern": "^[a-zA-Z0-9]*$",
       "x-ms-parameter-location": "method"
     }
-  }
+  },
+  "securityDefinitions": {
+    "azure_auth": {
+      "type": "oauth2",
+      "description": "Azure Active Directory OAuth2 Flow",
+      "flow": "implicit",
+      "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
+      "scopes": {
+        "user_impersonation": "impersonate your user account"
+      }
+    }
+  },
+  "security": [
+    {
+      "azure_auth": [
+        "user_impersonation"
+      ]
+    }
+  ]
 }

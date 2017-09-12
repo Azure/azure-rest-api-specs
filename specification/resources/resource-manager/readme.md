@@ -37,7 +37,7 @@ tag: package-locks-2016-09
 ```
 
 ``` yaml $(package-policy)
-tag: package-policy-2016-12
+tag: package-policy-2017-06
 ```
 
 ``` yaml $(package-resources)
@@ -78,6 +78,19 @@ These settings apply only when `--tag=package-locks-2015-01` is specified on the
 ``` yaml $(tag) == 'package-locks-2015-01'
 input-file:
 - Microsoft.Authorization/2015-01-01/locks.json
+```
+
+### Tag: package-policy-2017-06
+These settings apply only when `--tag=package-policy-2017-06` is specified on the command line.
+
+``` yaml $(tag) == 'package-policy-2017-06'
+input-file:
+- Microsoft.Authorization/2017-06-01-preview/policy.json
+- Microsoft.Authorization/2016-12-01/policy.json
+
+# Needed when there is more than one input file
+override-info:
+  title: PolicyClient
 ```
 
 ### Tag: package-policy-2016-12
