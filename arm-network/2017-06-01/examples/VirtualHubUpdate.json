@@ -1,0 +1,45 @@
+{
+    "parameters": {
+        "virtualHubName": "virtualHub1",
+        "resourceGroupName": "rg1",
+        "api-version": "2017-06-01",
+        "subscriptionId": "subid",
+        "virtualHubParameters": {
+            "tags": {
+                "key1": "value1"
+            },
+            "properties": {
+                "virtualWan": "/subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Network/virtualWans/virtualWan1",
+                "scalableVpnGateways": [ ],
+                "scalableExpressRouteGateways": [ ],
+                "virtualHubVnetConnections": [ ],
+                "AddressPrefixes": [ ]
+            }
+        }
+    },
+    "responses": {
+        "200": {
+            "body": {
+                "id": "/subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Network/virtualHubs/virtualHub1",
+                "etag": "w/\\00000000-0000-0000-0000-000000000000\\",
+                "location": "West US",
+                "name": "virtualHub1",
+                "type": "Microsoft.Network/virtualHubs",
+                "tags": {
+                    "key1": "value1"
+                },
+                "properties": {
+                    "provisioningState": "Succeeded",
+                    "virtualWan": "/subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Network/virtualWans/virtualWan1",
+                    "scalableVpnGateways": [ ],
+                    "scalableExpressRouteGateways": [ ],
+                    "virtualHubVnetConnections": [ ],
+                    "AddressPrefixes": [ ]
+                }
+            }
+        },
+        "202": {
+            "description": "Request received successfully. VirtualHub is not yet updated; follow the Location header to poll for the virtualHub."
+        }
+    }
+}
