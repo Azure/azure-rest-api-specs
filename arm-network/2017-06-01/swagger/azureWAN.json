@@ -2092,16 +2092,13 @@
                     "type": "string",
                     "description": "The key for vpn-site that can be used for connections."
                 },
-                "AddressPrefixes": {
-                    "type": "array",
-                    "description": "list of address-prefixes for vpn-site.",
-                    "items": {
-                        "type": "string"
-                    }
+                "addressSpace": {
+                    "$ref": "./virtualNetwork.json#/definitions/AddressSpace",
+                    "description": "The AddressSpace that contains an array of IP address ranges."
                 },
                 "bgpProperties": {
-                    "description": "The set of bgp properties.",
-                    "$ref": "#/definitions/BGPProperties"
+                    "$ref": "./virtualNetworkGateway.json#/definitions/BgpSettings",
+                    "description": "The set of bgp properties."
                 },
                 "provisioningState": {
                     "description": "The provisioning state of the resource.",
@@ -2946,48 +2943,48 @@
             }
         }
     },
-        "parameters": {
-            "ApiVersionParameter": {
-                "name": "api-version",
-                "in": "query",
-                "required": true,
-                "type": "string",
-                "description": "Client API version."
-            },
-            "SubscriptionIdParameter": {
-                "name": "subscriptionId",
-                "in": "path",
-                "required": true,
-                "type": "string",
-                "description": "The subscription credentials which uniquely identify the Microsoft Azure subscription. The subscription ID forms part of the URI for every service call."
-            },
-            "ResourceGroupParameter": {
-                "name": "resourceGroupName",
-                "in": "path",
-                "required": true,
-                "type": "string",
-                "description": "The resource group name of the VirtualHub."
-            },
-            "VirtualHubParameter": {
-                "name": "VirtualHubName",
-                "in": "path",
-                "required": true,
-                "type": "string",
-                "description": "The name of the VirtualHub."
-            },
-            "GatewayParameter": {
-                "name": "gatewayName",
-                "in": "path",
-                "required": true,
-                "type": "string",
-                "description": "The name of the gateway."
-            },
-            "ConnectionNameParameter": {
-                "name": "connectionName",
-                "in": "path",
-                "required": true,
-                "type": "string",
-                "description": "The name of the vpn connection."
-            }
+    "parameters": {
+        "ApiVersionParameter": {
+            "name": "api-version",
+            "in": "query",
+            "required": true,
+            "type": "string",
+            "description": "Client API version."
+        },
+        "SubscriptionIdParameter": {
+            "name": "subscriptionId",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The subscription credentials which uniquely identify the Microsoft Azure subscription. The subscription ID forms part of the URI for every service call."
+        },
+        "ResourceGroupParameter": {
+            "name": "resourceGroupName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The resource group name of the VirtualHub."
+        },
+        "VirtualHubParameter": {
+            "name": "VirtualHubName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the VirtualHub."
+        },
+        "GatewayParameter": {
+            "name": "gatewayName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the gateway."
+        },
+        "ConnectionNameParameter": {
+            "name": "connectionName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the vpn connection."
         }
     }
+}
