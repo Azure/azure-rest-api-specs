@@ -1307,28 +1307,6 @@
             },
             "x-ms-azure-resource": true
         },
-        "EventSubscriptionDestination": {
-            "description": "Information about the destination for an event subscription",
-            "type": "object",
-            "properties": {
-                "endpointType": {
-                    "description": "Type of the endpoint for the event subscription destination",
-                    "enum": [
-                        "WebHook"
-                    ],
-                    "type": "string",
-                    "x-ms-enum": {
-                        "name": "EndpointType",
-                        "modelAsString": true
-                    }
-                },
-                "properties": {
-                    "$ref": "#/definitions/EventSubscriptionDestinationProperties",
-                    "description": "Properties of the event subscription destination",
-                    "x-ms-client-flatten": true
-                }
-            }
-        },
         "EventSubscriptionFilter": {
             "description": "Filter for the Event Subscription",
             "type": "object",
@@ -1355,8 +1333,8 @@
                 }
             }
         },
-        "EventSubscriptionDestinationProperties": {
-            "description": "Properties of the event subscription destination",
+        "WebHookEventSubscriptionDestinationProperties": {
+            "description": "Information about the webhook destination properties for an event subscription",
             "type": "object",
             "properties": {
                 "endpointUrl": {
@@ -1369,6 +1347,69 @@
                     "readOnly": true
                 }
             }
+        },
+        "WebHookEventSubscriptionDestination": {
+            "description": "Information about the webhook destination for an event subscription",
+            "type": "object",
+            "allOf": [
+                {
+                    "$ref": "#/definitions/EventSubscriptionDestination"
+                }
+            ],
+            "properties": {
+                "properties": {
+                    "$ref": "#/definitions/WebHookEventSubscriptionDestinationProperties",
+                    "description": "WebHook Properties of the event subscription destination",
+                    "x-ms-client-flatten": true
+                }
+            },
+            "x-ms-discriminator": "WebHook"
+        },
+        "EventHubEventSubscriptionDestinationProperties": {
+            "description": "The properties for a event hub destination.",
+            "type": "object",
+            "properties": {
+                "resourceId": {
+                    "description": "The Azure Resource Id that represents the endpoint of an Event Hub destination of an event subscription.",
+                    "type": "string"
+                }
+            }
+        },
+        "EventHubEventSubscriptionDestination": {
+            "description": "Information about the event hub destination for an event subscription",
+            "type": "object",
+            "allOf": [
+                {
+                    "$ref": "#/definitions/EventSubscriptionDestination"
+                }
+            ],
+            "properties": {
+                "properties": {
+                    "$ref": "#/definitions/EventHubEventSubscriptionDestinationProperties",
+                    "description": "Event Hub Properties of the event subscription destination",
+                    "x-ms-client-flatten": true
+                }
+            },
+            "x-ms-discriminator": "EventHub"
+        },
+        "EventSubscriptionDestination": {
+            "description": "Information about the destination for an event subscription",
+            "type": "object",
+            "properties": {
+                "endpointType": {
+                    "description": "Type of the endpoint for the event subscription destination",
+                    "enum": [
+                        "WebHook",
+                        "EventHub"
+                    ],
+                    "type": "string",
+                    "x-ms-enum": {
+                        "name": "EndpointType",
+                        "modelAsString": true
+                    }
+                }
+            },
+            "discriminator": "endpointType"
         },
         "EventSubscription": {
             "description": "Event Subscription",
@@ -1712,6 +1753,13 @@
                     "x-ms-enum": {
                         "name": "TopicTypeProvisioningState",
                         "modelAsString": true
+                    }
+                },
+                "supportedLocations": {
+                    "description": "List of locations supported by this topic type.",
+                    "type": "array",
+                    "items": {
+                        "type": "string"
                     }
                 }
             }
