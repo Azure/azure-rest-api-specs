@@ -7682,6 +7682,7 @@
           "Add a task with exit conditions": { "$ref": "./examples/TaskAdd_ExitConditions.json" }
         },
         "summary": "Adds a task to the specified job.",
+        "description": "The maximum lifetime of a task from addition to completion is 7 days. If a task has not completed within 7 days of being added it will be terminated by the Batch service and left in whatever state it was in at that time.",
         "x-ms-request-id": "request-id",
         "parameters": [
           {
@@ -7952,7 +7953,7 @@
           "Add a complex collection of tasks": { "$ref": "./examples/TaskAddCollection_Complex.json" }
         },
         "summary": "Adds a collection of tasks to the specified job.",
-        "description": "Note that each task must have a unique ID. The Batch service may not return the results for each task in the same order the tasks were submitted in this request. If the server times out or the connection is closed during the request, the request may have been partially or fully processed, or not at all. In such cases, the user should re-issue the request. Note that it is up to the user to correctly handle failures when re-issuing a request. For example, you should use the same task IDs during a retry so that if the prior operation succeeded, the retry will not create extra tasks unexpectedly. If the response contains any tasks which failed to add, a client can retry the request. In a retry, it is most efficient to resubmit only tasks that failed to add, and to omit tasks that were successfully added on the first attempt.",
+        "description": "Note that each task must have a unique ID. The Batch service may not return the results for each task in the same order the tasks were submitted in this request. If the server times out or the connection is closed during the request, the request may have been partially or fully processed, or not at all. In such cases, the user should re-issue the request. Note that it is up to the user to correctly handle failures when re-issuing a request. For example, you should use the same task IDs during a retry so that if the prior operation succeeded, the retry will not create extra tasks unexpectedly. If the response contains any tasks which failed to add, a client can retry the request. In a retry, it is most efficient to resubmit only tasks that failed to add, and to omit tasks that were successfully added on the first attempt. The maximum lifetime of a task from addition to completion is 7 days. If a task has not completed within 7 days of being added it will be terminated by the Batch service and left in whatever state it was in at that time.",
         "x-ms-request-id": "request-id",
         "parameters": [
           {
@@ -10376,7 +10377,7 @@
           "items": {
             "$ref": "#/definitions/ImageReference"
           },
-          "title": "The list of images verified to be compatible with this node agent SKU.",
+          "title": "The list of Azure Marketplace images verified to be compatible with this node agent SKU.",
           "description": "This collection is not exhaustive (the node agent may be compatible with other images)."
         },
         "osType": {
@@ -10912,6 +10913,27 @@
       },
       "title": "The execution constraints for a job."
     },
+    "TaskContainerSettings": {
+      "properties": {
+        "containerRunOptions": {
+          "type": "string",
+          "title": "Additional options to the container create command.",
+          "description": "These additional options are supplied as arguments to the \"docker create\" command, in addition to those controlled by the Batch Service."
+        },
+        "imageName": {
+          "type": "string",
+          "title": "The image to use to create the container in which the task will run.",
+          "description": "This is the full image reference, as would be specified to \"docker pull\". If no tag is provided as part of the image name, the tag \":latest\" is used as a default."
+        },
+        "registry": {
+          "$ref": "#/definitions/ContainerRegistry",
+          "title": "The private registry which contains the container image.",
+          "description": "This setting can be omitted if was already provided at pool creation."
+        }
+      },
+      "required": [ "imageName" ],
+      "title": "The container settings for a task."
+    },
     "ResourceFile": {
       "properties": {
         "blobSource": {
@@ -11172,6 +11194,11 @@
           "title": "The command line of the Job Manager task.",
           "description": "The command line does not run under a shell, and therefore cannot take advantage of shell features such as environment variable expansion. If you want to take advantage of such features, you should invoke the shell in the command line, for example using \"cmd /c MyCommand\" in Windows or \"/bin/sh -c MyCommand\" in Linux."
         },
+        "containerSettings": {
+          "$ref": "#/definitions/TaskContainerSettings",
+          "title": "The settings for the container under which the Job Manager task runs.",
+          "description": "If the pool that will run this task has containerConfiguration set, this must be set as well. If the pool that will run this task doesn't have containerConfiguration set, this must not be set. When this is specified, all directories recursively below the AZ_BATCH_NODE_ROOT_DIR (the root of Azure Batch directories on the node) are mapped into the container, all task environment variables are mapped into the container, and the task command line is executed in the container."
+        },
         "resourceFiles": {
           "type": "array",
           "items": {
@@ -11249,6 +11276,11 @@
           "title": "The command line of the Job Preparation task.",
           "description": "The command line does not run under a shell, and therefore cannot take advantage of shell features such as environment variable expansion. If you want to take advantage of such features, you should invoke the shell in the command line, for example using \"cmd /c MyCommand\" in Windows or \"/bin/sh -c MyCommand\" in Linux."
         },
+        "containerSettings": {
+          "$ref": "#/definitions/TaskContainerSettings",
+          "title": "The settings for the container under which the Job Preparation task runs.",
+          "description": "When this is specified, all directories recursively below the AZ_BATCH_NODE_ROOT_DIR (the root of Azure Batch directories on the node) are mapped into the container, all task environment variables are mapped into the container, and the task command line is executed in the container."
+        },
         "resourceFiles": {
           "type": "array",
           "items": {
@@ -11299,6 +11331,11 @@
           "type": "string",
           "title": "The command line of the Job Release task.",
           "description": "The command line does not run under a shell, and therefore cannot take advantage of shell features such as environment variable expansion. If you want to take advantage of such features, you should invoke the shell in the command line, for example using \"cmd /c MyCommand\" in Windows or \"/bin/sh -c MyCommand\" in Linux."
+        },
+        "containerSettings": {
+          "$ref": "#/definitions/TaskContainerSettings",
+          "title": "The settings for the container under which the Job Release task runs.",
+          "description": "When this is specified, all directories recursively below the AZ_BATCH_NODE_ROOT_DIR (the root of Azure Batch directories on the node) are mapped into the container, all task environment variables are mapped into the container, and the task command line is executed in the container."
         },
         "resourceFiles": {
           "type": "array",
@@ -11360,6 +11397,11 @@
           "type": "string",
           "title": "The command line of the start task.",
           "description": "The command line does not run under a shell, and therefore cannot take advantage of shell features such as environment variable expansion. If you want to take advantage of such features, you should invoke the shell in the command line, for example using \"cmd /c MyCommand\" in Windows or \"/bin/sh -c MyCommand\" in Linux."
+        },
+        "containerSettings": {
+          "$ref": "#/definitions/TaskContainerSettings",
+          "title": "The settings for the container under which the start task runs.",
+          "description": "When this is specified, all directories recursively below the AZ_BATCH_NODE_ROOT_DIR (the root of Azure Batch directories on the node) are mapped into the container, all task environment variables are mapped into the container, and the task command line is executed in the container."
         },
         "resourceFiles": {
           "type": "array",
@@ -12206,6 +12248,25 @@
       },
       "title": "The result of listing the jobs in an account."
     },
+    "TaskContainerExecutionInformation": {
+      "properties": {
+        "containerId": {
+          "type": "string",
+          "title": "The ID of the container."
+        },
+        "state": {
+          "type": "string",
+          "title": "The state of the container.",
+          "description": "This is the state of the container according to the Docker service. It is equivalent to the status field returned by \"docker inspect\"."
+        },
+        "error": {
+          "type": "string",
+          "title": "Detailed error information about the container.",
+          "description": "This is the detailed error string from the Docker service, if available. It is equivalent to the error field returned by \"docker inspect\"."
+        }
+      },
+      "title": "Contains information about the container which a task is executing."
+    },
     "TaskFailureInformation": {
       "properties": {
         "category": {
@@ -12271,6 +12332,11 @@
           "format": "int32",
           "title": "The exit code of the program specified on the task command line.",
           "description": "This parameter is returned only if the task is in the completed state. The exit code for a process reflects the specific convention implemented by the application developer for that process. If you use the exit code value to make decisions in your code, be sure that you know the exit code convention used by the application process. Note that the exit code may also be generated by the compute node operating system, such as when a process is forcibly terminated."
+        },
+        "containerInfo": {
+          "$ref": "#/definitions/TaskContainerExecutionInformation",
+          "title": "Information about the container under which the task is executing.",
+          "description": "This property is set only if the task runs in a container context."
         },
         "failureInfo": {
           "$ref": "#/definitions/TaskFailureInformation",
@@ -12338,6 +12404,11 @@
           "format": "int32",
           "title": "The exit code of the program specified on the task command line.",
           "description": "This parameter is returned only if the task is in the completed state. The exit code for a process reflects the specific convention implemented by the application developer for that process. If you use the exit code value to make decisions in your code, be sure that you know the exit code convention used by the application process. Note that the exit code may also be generated by the compute node operating system, such as when a process is forcibly terminated."
+        },
+        "containerInfo": {
+          "$ref": "#/definitions/TaskContainerExecutionInformation",
+          "title": "Information about the container under which the task is executing.",
+          "description": "This property is set only if the task runs in a container context."
         },
         "failureInfo": {
           "$ref": "#/definitions/TaskFailureInformation",
@@ -12513,6 +12584,7 @@
         },
         "currentOSVersion": {
           "type": "string",
+          "readOnly": true,
           "title": "The Azure Guest OS Version currently installed on the virtual machines in the pool.",
           "description": "This may differ from targetOSVersion if the pool state is Upgrading. In this case some virtual machines may be on the targetOSVersion and some may be on the currentOSVersion during the upgrade process. Once all virtual machines have upgraded, currentOSVersion is updated to be the same as targetOSVersion."
         }
@@ -12541,38 +12613,24 @@
           "type": "string",
           "title": "The version of the Azure Virtual Machines Marketplace image.",
           "description": "A value of 'latest' can be specified to select the latest version of an image. If omitted, the default is 'latest'."
+        },
+        "virtualMachineImageId": {
+          "type": "string",
+          "title": "The ARM resource identifier of the virtual machine image. Computes nodes of the pool will be created using this custom image. This is of the form /subscriptions/{subscriptionId}/resourceGroups/{resourceGroup}/providers/Microsoft.Compute/images/{imageName}",
+          "description": "This property is mutually exclusive with other ImageReference properties. The virtual machine image must be in the same region and subscription as the Azure Batch account. For information about the firewall settings for the Batch node agent to communicate with the Batch service see https://docs.microsoft.com/en-us/azure/batch/batch-api-basics#virtual-network-vnet-and-firewall-configuration."
         }
       },
-      "required": [ "publisher", "offer", "sku" ],
-      "title": "A reference to an Azure Virtual Machines Marketplace image. To get the list of all imageReferences verified by Azure Batch, see the 'List supported node agent SKUs' operation."
+      "title": "A reference to an Azure Virtual Machines Marketplace image or a custom Azure Virtual Machine image. To get the list of all Azure Marketplace image references verified by Azure Batch, see the 'List node agent SKUs' operation."
     },
     "OSDisk": {
       "properties": {
-        "imageUris": {
-          "type": "array",
-          "items": {
-            "type": "string"
-          },
-          "title": "The collection of Virtual Hard Disk (VHD) URIs.",
-          "description": "All the VHDs must be identical and must reside in an Azure Storage account within the same subscription and same region as the Batch account. For best performance, it is recommended that each VHD resides in a separate Azure Storage account. Each VHD can serve upto 20 Windows compute nodes or 40 Linux compute nodes. You must supply enough VHD URIs to satisfy the 'targetDedicated' property of the pool. If you do not supply enough VHD URIs, the pool will partially allocate compute nodes, and a resize error will occur."
-        },
         "caching": {
-          "type": "string",
           "title": "The type of caching to enable for the OS disk.",
           "description": "Values are:\n\n none - The caching mode for the disk is not enabled.\n readOnly - The caching mode for the disk is read only.\n readWrite - The caching mode for the disk is read and write.\n\n The default value for caching is none. For information about the caching options see: https://blogs.msdn.microsoft.com/windowsazurestorage/2012/06/27/exploring-windows-azure-drives-disks-and-images/.",
-          "enum": [
-            "none",
-            "readOnly",
-            "readWrite"
-          ],
-          "x-ms-enum": {
-            "name": "CachingType",
-            "modelAsString": false
-          }
+          "$ref": "#/definitions/CachingType"
         }
       },
-      "required": [ "imageUris" ],
-      "title": "A reference to an OS disk image."
+      "title": "Settings for the operating system disk of the virtual machine."
     },
     "WindowsConfiguration": {
       "properties": {
@@ -12584,17 +12642,71 @@
       },
       "title": "Windows operating system settings to apply to the virtual machine."
     },
+    "DataDisk": {
+      "properties": {
+        "lun": {
+          "type": "integer",
+          "format": "int32",
+          "title": "The logical unit number.",
+          "description": "The lun is used to uniquely identify each data disk. If attaching multiple disks, each should have a distinct lun."
+        },
+        "caching": {
+          "$ref": "#/definitions/CachingType",
+          "title": "The type of caching to be enabled for the data disks.",
+          "description": "Values are:\n\n none - The caching mode for the disk is not enabled.\n readOnly - The caching mode for the disk is read only.\n readWrite - The caching mode for the disk is read and write.\n\n The default value for caching is none. For information about the caching options see: https://blogs.msdn.microsoft.com/windowsazurestorage/2012/06/27/exploring-windows-azure-drives-disks-and-images/."
+        },
+        "diskSizeGB": {
+          "type": "integer",
+          "format": "int32",
+          "title": "The initial disk size in gigabytes."
+        },
+        "storageAccountType": {
+          "title": "The storage account type to be used for the data disk.",
+          "description": "If omitted, the default is \"Standard_LRS\". Values are:\n\n Standard_LRS - The data disk should use standard locally redundant storage.\n Premium_LRS - The data disk should use premium locally redundant storage.",
+          "$ref": "#/definitions/StorageAccountType"
+        }
+      },
+      "required": [
+        "lun",
+        "diskSizeGB"
+      ],
+      "title": "Settings which will be used by the data disks associated to compute nodes in the pool."
+    },
+    "StorageAccountType": {
+      "type": "string",
+      "title": "The storage account type for use in creating data disks.",
+      "enum": [
+        "Standard_LRS",
+        "Premium_LRS"
+      ],
+      "x-ms-enum": {
+        "name": "StorageAccountType",
+        "modelAsString": false
+      }
+    },
+    "CachingType": {
+      "type": "string",
+      "title": "The type of caching to enable for the disk.",
+      "description": "Values are:\n\n none - The caching mode for the disk is not enabled.\n readOnly - The caching mode for the disk is read only.\n readWrite - The caching mode for the disk is read and write.\n\n The default value for caching is none. For information about the caching options see: https://blogs.msdn.microsoft.com/windowsazurestorage/2012/06/27/exploring-windows-azure-drives-disks-and-images/.",
+      "enum": [
+        "none",
+        "readOnly",
+        "readWrite"
+      ],
+      "x-ms-enum": {
+        "name": "CachingType",
+        "modelAsString": false
+      }
+    },
     "VirtualMachineConfiguration": {
       "properties": {
         "imageReference": {
           "$ref": "#/definitions/ImageReference",
-          "title": "A reference to the Azure Virtual Machines Marketplace image to use.",
-          "description": "This property and osDisk are mutually exclusive and one of the properties must be specified."
+          "title": "A reference to the Azure Virtual Machines Marketplace image or the custom Virtual Machine image to use."
         },
         "osDisk": {
           "$ref": "#/definitions/OSDisk",
-          "title": "A reference to the OS disk image to use.",
-          "description": "This property can be specified only if the Batch account was created with its poolAllocationMode property set to 'UserSubscription'. This property and imageReference are mutually exclusive and one of the properties must be specified."
+          "title": "Settings for the operating system disk of the Virtual Machine."
         },
         "nodeAgentSKUId": {
           "type": "string",
@@ -12605,17 +12717,89 @@
           "$ref": "#/definitions/WindowsConfiguration",
           "title": "Windows operating system settings on the virtual machine.",
           "description": "This property must not be specified if the imageReference or osDisk property specifies a Linux OS image."
+        },
+        "dataDisks": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/DataDisk"
+          },
+          "title": "The configuration for data disks attached to the comptue nodes in the pool.",
+          "description": "This property must be specified if the compute nodes in the pool need to have empty data disks attached to them. This cannot be updated."
+        },
+        "licenseType": {
+          "type": "string",
+          "title": "The type of on-premises license to be used when deploying the operating system.",
+          "description": "This only applies to images that contain the Windows operating system, and should only be used when you hold valid on-premises licenses for the nodes which will be deployed. If omitted, no on-premises licensing discount is applied. Values are:\n\n Windows_Server - The on-premises license is for Windows Server.\n Windows_Client - The on-premises license is for Windows Client.\n"
+        },
+        "containerConfiguration": {
+          "$ref": "#/definitions/ContainerConfiguration",
+          "title": "The container configuration for the pool.",
+          "description": "If specified, setup is performed on each node in the pool to allow tasks to run in containers. All regular tasks and job manager tasks run on this pool must specify the containerSettings property, and all other tasks may specify it."
         }
       },
-      "required": [ "nodeAgentSKUId" ],
+      "required": [ "nodeAgentSKUId", "imageReference" ],
       "title": "The configuration for compute nodes in a pool based on the Azure Virtual Machines infrastructure."
+    },
+    "ContainerRegistry": {
+      "properties": {
+        "registryServer": {
+          "type": "string",
+          "title": "The registry URL.",
+          "description": "If omitted, the default is \"docker.io\"."
+        },
+        "username": {
+          "type": "string",
+          "x-ms-client-name": "userName",
+          "title": "The user name to log into the registry server."
+        },
+        "password": {
+          "type": "string",
+          "title": "The password to log into the registry server."
+        }
+      },
+      "required": [ "username", "password" ],
+      "title": "A private container registry."
+    },
+    "ContainerConfiguration": {
+      "properties": {
+        "type": {
+          "type": "string",
+          "title": "The container technology to be used.",
+          "description": "Values are:\n\n docker - Docker will be used to launch the containers.",
+          "enum": [
+            "docker"
+          ],
+          "x-ms-enum": {
+            "name": "ContainerType",
+            "modelAsString": false
+          }
+        },
+        "containerImageNames": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "title": "The collection of container image names.",
+          "description": "This is the full image reference, as would be specified to \"docker pull\". An image will be sourced from the default Docker registry unless the image is fully qualified with an alternative registry."
+        },
+        "containerRegistries": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ContainerRegistry"
+          },
+          "title": "Additional private registries from which containers can be pulled.",
+          "description": "If any images must be downloaded from a private registry which requires credentials, then those credentials must be provided here."
+        }
+      },
+      "required": [ "type" ],
+      "title": "The configuration for container-enabled pools."
     },
     "NetworkConfiguration": {
       "properties": {
         "subnetId": {
           "type": "string",
           "title": "The ARM resource identifier of the virtual network subnet which the compute nodes of the pool will join. This is of the form /subscriptions/{subscription}/resourceGroups/{group}/providers/{provider}/virtualNetworks/{network}/subnets/{subnet}.",
-          "description": "The virtual network must be in the same region and subscription as the Azure Batch account. The specified subnet should have enough free IP addresses to accommodate the number of nodes in the pool. If the subnet doesn't have enough free IP addresses, the pool will partially allocate compute nodes, and a resize error will occur. The 'MicrosoftAzureBatch' service principal must have the 'Classic Virtual Machine Contributor' Role-Based Access Control (RBAC) role for the specified VNet. The specified subnet must allow communication from the Azure Batch service to be able to schedule tasks on the compute nodes. This can be verified by checking if the specified VNet has any associated Network Security Groups (NSG). If communication to the compute nodes in the specified subnet is denied by an NSG, then the Batch service will set the state of the compute nodes to unusable. For pools created via virtualMachineConfiguration the Batch account must have poolAllocationMode userSubscription in order to use a VNet. If the specified VNet has any associated Network Security Groups (NSG), then a few reserved system ports must be enabled for inbound communication. For pools created with a virtual machine configuration, enable ports 29876 and 29877, as well as port 22 for Linux and port 3389 for Windows. For pools created with a cloud service configuration, enable ports 10100, 20100, and 30100. Also enable outbound connections to Azure Storage on port 443. For more details see: https://docs.microsoft.com/en-us/azure/batch/batch-api-basics#virtual-network-vnet-and-firewall-configuration",
+          "description": "The virtual network must be in the same region and subscription as the Azure Batch account. The specified subnet should have enough free IP addresses to accommodate the number of nodes in the pool. If the subnet doesn't have enough free IP addresses, the pool will partially allocate compute nodes, and a resize error will occur. The 'MicrosoftAzureBatch' service principal must have the 'Classic Virtual Machine Contributor' Role-Based Access Control (RBAC) role for the specified VNet. The specified subnet must allow communication from the Azure Batch service to be able to schedule tasks on the compute nodes. This can be verified by checking if the specified VNet has any associated Network Security Groups (NSG). If communication to the compute nodes in the specified subnet is denied by an NSG, then the Batch service will set the state of the compute nodes to unusable. For pools created with virtualMachineConfiguration only ARM virtual networks ('Microsoft.Network/virtualNetworks') are supported, but for pools created with cloudServiceConfiguration both ARM and classic virtual networks are supported. If the specified VNet has any associated Network Security Groups (NSG), then a few reserved system ports must be enabled for inbound communication. For pools created with a virtual machine configuration, enable ports 29876 and 29877, as well as port 22 for Linux and port 3389 for Windows. For pools created with a cloud service configuration, enable ports 10100, 20100, and 30100. Also enable outbound connections to Azure Storage on port 443. For more details see: https://docs.microsoft.com/en-us/azure/batch/batch-api-basics#virtual-network-vnet-and-firewall-configuration",
           "externalDocs": {
             "url": "https://azure.microsoft.com/en-us/documentation/articles/role-based-access-built-in-roles/#classic-virtual-machine-contributor",
             "description": "Setting up RBAC for Azure Batch VNETs"
@@ -13026,6 +13210,11 @@
           "title": "The exit code of the program specified on the task command line.",
           "description": "This property is set only if the task is in the completed state. In general, the exit code for a process reflects the specific convention implemented by the application developer for that process. If you use the exit code value to make decisions in your code, be sure that you know the exit code convention used by the application process. However, if the Batch service terminates the task (due to timeout, or user termination via the API) you may see an operating system-defined exit code."
         },
+        "containerInfo": {
+          "$ref": "#/definitions/TaskContainerExecutionInformation",
+          "title": "Information about the container under which the task is executing.",
+          "description": "This property is set only if the task runs in a container context."
+        },
         "failureInfo": {
           "$ref": "#/definitions/TaskFailureInformation",
           "title": "Information describing the task failure, if any.",
@@ -13098,7 +13287,8 @@
         "numberOfInstances": {
           "type": "integer",
           "format": "int32",
-          "title": "The number of compute nodes required by the task."
+          "title": "The number of compute nodes required by the task.",
+          "description": "If omitted, the default is 1."
         },
         "coordinationCommandLine": {
           "type": "string",
@@ -13114,7 +13304,7 @@
           "description": "The difference between common resource files and task resource files is that common resource files are downloaded for all subtasks including the primary, whereas task resource files are downloaded only for the primary. Also note that these resource files are not downloaded to the task working directory, but instead are downloaded to the task root directory (one directory above the working directory)."
         }
       },
-      "required": [ "numberOfInstances" ],
+      "required": [ "coordinationCommandLine" ],
       "title": "Settings which specify how to run a multi-instance task.",
       "description": "Multi-instance tasks are commonly used to support MPI tasks."
     },
@@ -13276,6 +13466,11 @@
           "title": "The command line of the task.",
           "description": "For multi-instance tasks, the command line is executed as the primary task, after the primary task and all subtasks have finished executing the coordination command line. The command line does not run under a shell, and therefore cannot take advantage of shell features such as environment variable expansion. If you want to take advantage of such features, you should invoke the shell in the command line, for example using \"cmd /c MyCommand\" in Windows or \"/bin/sh -c MyCommand\" in Linux."
         },
+        "containerSettings": {
+          "$ref": "#/definitions/TaskContainerSettings",
+          "title": "The settings for the container under which the task runs.",
+          "description": "If the pool that will run this task has containerConfiguration set, this must be set as well. If the pool that will run this task doesn't have containerConfiguration set, this must not be set. When this is specified, all directories recursively below the AZ_BATCH_NODE_ROOT_DIR (the root of Azure Batch directories on the node) are mapped into the container, all task environment variables are mapped into the container, and the task command line is executed in the container."
+        },
         "resourceFiles": {
           "type": "array",
           "items": {
@@ -13365,6 +13560,11 @@
           "type": "string",
           "title": "The command line of the task.",
           "description": "For multi-instance tasks, the command line is executed as the primary task, after the primary task and all subtasks have finished executing the coordination command line. The command line does not run under a shell, and therefore cannot take advantage of shell features such as environment variable expansion. If you want to take advantage of such features, you should invoke the shell in the command line, for example using \"cmd /c MyCommand\" in Windows or \"/bin/sh -c MyCommand\" in Linux."
+        },
+        "containerSettings": {
+          "$ref": "#/definitions/TaskContainerSettings",
+          "title": "The settings for the container under which the task runs.",
+          "description": "If the pool that will run this task has containerConfiguration set, this must be set as well. If the pool that will run this task doesn't have containerConfiguration set, this must not be set. When this is specified, all directories recursively below the AZ_BATCH_NODE_ROOT_DIR (the root of Azure Batch directories on the node) are mapped into the container, all task environment variables are mapped into the container, and the task command line is executed in the container."
         },
         "exitConditions": {
           "$ref": "#/definitions/ExitConditions",
@@ -13527,6 +13727,11 @@
           "title": "The exit code of the program specified on the subtask command line.",
           "description": "This property is set only if the subtask is in the completed state. In general, the exit code for a process reflects the specific convention implemented by the application developer for that process. If you use the exit code value to make decisions in your code, be sure that you know the exit code convention used by the application process. However, if the Batch service terminates the subtask (due to timeout, or user termination via the API) you may see an operating system-defined exit code."
         },
+        "containerInfo": {
+          "$ref": "#/definitions/TaskContainerExecutionInformation",
+          "title": "Information about the container under which the task is executing.",
+          "description": "This property is set only if the task runs in a container context."
+        },
         "failureInfo": {
           "$ref": "#/definitions/TaskFailureInformation",
           "title": "Information describing the task failure, if any.",
@@ -13651,6 +13856,11 @@
           "format": "int32",
           "title": "The exit code of the program specified on the start task command line.",
           "description": "This property is set only if the start task is in the completed state. In general, the exit code for a process reflects the specific convention implemented by the application developer for that process. If you use the exit code value to make decisions in your code, be sure that you know the exit code convention used by the application process. However, if the Batch service terminates the start task (due to timeout, or user termination via the API) you may see an operating system-defined exit code."
+        },
+        "containerInfo": {
+          "$ref": "#/definitions/TaskContainerExecutionInformation",
+          "title": "Information about the container under which the task is executing.",
+          "description": "This property is set only if the task runs in a container context."
         },
         "failureInfo": {
           "$ref": "#/definitions/TaskFailureInformation",
