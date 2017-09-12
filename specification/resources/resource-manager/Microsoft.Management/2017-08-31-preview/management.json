@@ -15,6 +15,24 @@
  "produces": [
   "application/json"
  ],
+ "security": [
+  {
+    "azure_auth": [
+      "user_impersonation"
+    ]
+  }
+],
+"securityDefinitions": {
+  "azure_auth": {
+    "type": "oauth2",
+    "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
+    "flow": "implicit",
+    "description": "Azure Active Directory OAuth2 Flow.",
+    "scopes": {
+      "user_impersonation": "impersonate your user account"
+    }
+  }
+},
  "tags": [
   {
    "name": "ManagementGroups",
@@ -27,6 +45,7 @@
     "tags": [
      "ManagementGroups"
     ],
+    "operationId": "ManagementGroups_List",
     "description": "List management groups for the authenticated user.\n",
     "parameters": [
      {
@@ -65,6 +84,7 @@
     "tags": [
      "ManagementGroups"
     ],
+    "operationId": "ManagementGroups_Get",
     "description": "Get the details of the management group.\n",
     "parameters": [
      {
@@ -92,8 +112,9 @@
       "schema": {
        "$ref": "#/definitions/ErrorResponse"
       }
-     },
-     "x-ms-examples": {
+     }
+    },
+    "x-ms-examples": {
       "GetManagementGroup": {
          "$ref": "./examples/GetManagementGroup.json"
        },
@@ -104,8 +125,38 @@
         "$ref": "./examples/GetManagementGroupWithExpandAndRecurse.json"
       }
      }
-    }
    }
+  },
+  "/providers/Microsoft.Management/operations": {
+    "get": {
+      "tags": [
+        "Operations"
+      ],
+      "operationId": "Operations_List",
+      "description": "Lists all of the available management REST API operations.",
+      "parameters": [
+        {
+          "$ref": "#/parameters/ApiVersionParameter"
+        }
+      ],
+      "responses": {
+        "200": {
+          "description": "OK. The request has succeeded.",
+          "schema": {
+            "$ref": "#/definitions/OperationListResult"
+          }
+        },
+        "default": {
+          "description": "Error response describing why the operation failed.",
+          "schema": {
+            "$ref": "#/definitions/ErrorResponse"
+          }
+        }
+      },
+      "x-ms-pageable": {
+        "nextLinkName": "nextLink"
+      }
+    }
   }
  },
  "definitions": {
@@ -113,6 +164,7 @@
    "description": "The error object.",
    "properties": {
     "error": {
+     "title": "Error",
      "$ref": "#/definitions/ErrorDetails"
     }
    }
@@ -137,6 +189,55 @@
     }
    }
   },
+  "Operation": {
+    "description": "A Management REST API operation.",
+    "type": "object",
+    "properties": {
+      "name": {
+        "description": "Operation name: {provider}/{resource}/{operation}.",
+        "type": "string",
+        "readOnly": true
+      },
+      "display": {
+        "description": "The object that represents the operation.",
+        "properties": {
+          "provider": {
+            "description": "Service provider: Microsoft.Management.",
+            "type": "string",
+            "readOnly": true
+          },
+          "resource": {
+            "description": "Resource on which the operation is performed: Invoice, etc.",
+            "type": "string",
+            "readOnly": true
+          },
+          "operation": {
+            "description": "Operation type: Read, write, delete, etc.",
+            "type": "string",
+            "readOnly": true
+          }
+        }
+      }
+    }
+  },
+  "OperationListResult": {
+    "description": "Result listing  operations. It contains a list of operations and a URL link to get the next set of results.",
+    "properties": {
+      "value": {
+        "description": "List of management operations supported by the Microsoft.Management resource provider.",
+        "type": "array",
+        "readOnly": true,
+        "items": {
+          "$ref": "#/definitions/Operation"
+        }
+      },
+      "nextLink": {
+        "description": "URL to get the next set of operation list results if there are any.",
+        "type": "string",
+        "readOnly": true
+      }
+    }
+  },
   "ManagementGroupListResult": {
    "description": "The result of listing management groups.",
    "properties": {
@@ -150,7 +251,6 @@
     "nextLink": {
      "description": "The link (URL) to the next page of results.",
      "type": "string",
-     "format": "URL",
      "example": null
     }
    }
@@ -160,23 +260,23 @@
    "properties": {
     "id": {
      "type": "string",
-     "format": "/providers/Microsoft.Management/managementGroups/{groupId}",
      "description": "The ID of the management group.",
      "example": "/providers/Microsoft.Management/managementGroups/20000000-0000-0000-0000-000000000000"
     },
     "type": {
      "type": "string",
-     "format": "/providers/Microsoft.Management/managementGroups",
      "description": "The type of the resource.",
      "example": "/providers/Microsoft.Management/managementGroups"
     },
     "name": {
      "type": "string",
-     "format": "GUID",
+     "format": "uuid",
      "description": "The name of the management group.",
      "example": "20000000-0000-0000-0000-000000000000"
     },
     "properties": {
+     "title": "Properties",
+     "x-ms-client-flatten" : true,
      "$ref": "#/definitions/ManagementGroupInfoProperties"
     }
    }
@@ -187,7 +287,7 @@
    "properties": {
     "tenantId": {
      "type": "string",
-     "format": "GUID",
+     "format": "uuid",
      "description": "The AAD Tenant ID associated with the management group.",
      "example": "10000000-0000-0000-0000-000000000000"
     },
@@ -203,23 +303,23 @@
    "properties": {
     "id": {
      "type": "string",
-     "format": "/providers/Microsoft.Management/managementGroups/{groupId}",
      "description": "The ID of the management group.",
      "example": "/providers/Microsoft.Management/managementGroups/20000000-0000-0000-0000-000000000000"
     },
     "type": {
      "type": "string",
-     "format": "/providers/Microsoft.Management/managementGroups",
      "description": "The type of the resource.",
      "example": "/providers/Microsoft.Management/managementGroups"
     },
     "name": {
      "type": "string",
-     "format": "GUID",
+     "format": "uuid",
      "description": "The name of the management group.",
      "example": "20000000-0000-0000-0000-000000000000"
     },
     "properties": {
+     "title": "Properties",
+     "x-ms-client-flatten" : true,
      "$ref": "#/definitions/ManagementGroupProperties"
     }
    }
@@ -230,7 +330,7 @@
    "properties": {
     "tenantId": {
      "type": "string",
-     "format": "GUID",
+     "format": "uuid",
      "description": "The AAD Tenant ID associated with the management group.",
      "example": "10000000-0000-0000-0000-000000000000"
     },
@@ -240,6 +340,7 @@
      "example": "Sample display name"
     },
     "details": {
+     "title": "Details",
      "$ref": "#/definitions/ManagementGroupDetailsProperties"
     }
    }
@@ -250,7 +351,7 @@
    "properties": {
     "version": {
      "type": "number",
-     "format": "uint32",
+     "format": "int32",
      "description": "The version number of the object."
     },
     "updatedTime": {
@@ -264,9 +365,11 @@
      "example": "Sample identity"
     },
     "parent": {
+     "title": "Parent",
      "$ref": "#/definitions/ParentGroupInfo"
     },
     "managementGroupType": {
+     "title": "Management Group Type",
      "$ref": "#/definitions/ManagementGroupType"
     }
    }
@@ -276,7 +379,6 @@
    "properties": {
     "parentId": {
      "type": "string",
-     "format": "/providers/Microsoft.Management/managementGroups/{groupId}",
      "description": "The ID of the parent management group.",
      "example": "/providers/Microsoft.Management/managementGroups/30000000-0000-0000-0000-000000000000"
     },
@@ -303,23 +405,23 @@
    "properties": {
     "id": {
      "type": "string",
-     "format": "/providers/Microsoft.Management/managementGroups/{groupId}",
      "description": "The ID of the management group.",
      "example": "/providers/Microsoft.Management/managementGroups/20000000-0000-0000-0000-000000000000"
     },
     "type": {
      "type": "string",
-     "format": "/providers/Microsoft.Management/managementGroups",
      "description": "The type of the resource.",
      "example": "/providers/Microsoft.Management/managementGroups"
     },
     "name": {
      "type": "string",
-     "format": "GUID",
+     "format": "uuid",
      "description": "The name of the management group.",
      "example": "20000000-0000-0000-0000-000000000000"
     },
     "properties": {
+     "title": "Properties",
+     "x-ms-client-flatten" : true,
      "$ref": "#/definitions/ManagementGroupPropertiesWithChildren"
     }
    }
@@ -330,7 +432,7 @@
    "properties": {
     "tenantId": {
      "type": "string",
-     "format": "GUID",
+     "format": "uuid",
      "description": "The AAD Tenant ID associated with the management group.",
      "example": "10000000-0000-0000-0000-000000000000"
     },
@@ -340,6 +442,7 @@
      "example": "Sample display name"
     },
     "details": {
+     "title" : "Details",
      "$ref": "#/definitions/ManagementGroupDetailsProperties"
     },
     "children": {
@@ -355,11 +458,11 @@
    "description": "The unique identifier (ID) of a management group.",
    "properties": {
     "childType": {
+      "title" : "Managment Group Child Info",
      "$ref": "#/definitions/ManagementGroupType"
     },
     "childId": {
      "type": "string",
-     "format": "/providers/Microsoft.Management/managementGroups/{groupId} or /subscriptions/{subscriptionId}",
      "description": "The ID of the child resource (management group or subscription).",
      "example": "/providers/Microsoft.Management/managementGroups/40000000-0000-0000-0000-000000000000"
     },
@@ -370,7 +473,7 @@
     },
     "tenantId": {
      "type": "string",
-     "format": "GUID",
+     "format": "uuid",
      "description": "(Optional) The AAD Tenant ID associated with the child resource.",
      "example": null
     }
@@ -381,23 +484,23 @@
    "properties": {
     "id": {
      "type": "string",
-     "format": "/providers/Microsoft.Management/managementGroups/{groupId}",
      "description": "The ID of the management group.",
      "example": "/providers/Microsoft.Management/managementGroups/20000000-0000-0000-0000-000000000000"
     },
     "type": {
      "type": "string",
-     "format": "/providers/Microsoft.Management/managementGroups",
      "description": "The type of the resource.",
      "example": "/providers/Microsoft.Management/managementGroups"
     },
     "name": {
      "type": "string",
-     "format": "GUID",
+     "format": "uuid",
      "description": "The name of the management group.",
      "example": "20000000-0000-0000-0000-000000000000"
     },
     "properties": {
+     "title": "Properties",
+     "x-ms-client-flatten" : true,
      "$ref": "#/definitions/ManagementGroupPropertiesWithHierarchy"
     }
    }
@@ -408,7 +511,7 @@
    "properties": {
     "tenantId": {
      "type": "string",
-     "format": "GUID",
+     "format": "uuid",
      "description": "The AAD Tenant ID associated with the management group.",
      "example": "10000000-0000-0000-0000-000000000000"
     },
@@ -418,6 +521,7 @@
      "example": "Sample display name"
     },
     "details": {
+     "title" : "Details",
      "$ref": "#/definitions/ManagementGroupDetailsProperties"
     },
     "children": {
@@ -433,11 +537,11 @@
    "description": "The unique identifier (ID) of a management group.",
    "properties": {
     "childType": {
+     "title" : "Managment Group Recursive Child Info",
      "$ref": "#/definitions/ManagementGroupType"
     },
     "childId": {
      "type": "string",
-     "format": "/providers/Microsoft.Management/managementGroups/{groupId} or /subscriptions/{subscriptionId}",
      "description": "The ID of the child resource (management group or subscription).",
      "example": "/providers/Microsoft.Management/managementGroups/40000000-0000-0000-0000-000000000000"
     },
@@ -448,7 +552,7 @@
     },
     "tenantId": {
      "type": "string",
-     "format": "GUID",
+     "format": "uuid",
      "description": "(Optional) The AAD Tenant ID associated with the child resource.",
      "example": null
     },
@@ -468,7 +572,7 @@
    "in": "path",
    "required": true,
    "type": "string",
-   "format": "GUID",
+   "format": "uuid",
    "description": "Management Group ID."
   },
   "ApiVersionParameter": {
