@@ -1,0 +1,42 @@
+{
+  "parameters": {
+    "api-version": "2017-06-01.5.1",
+    "jobId": "jobId",
+    "taskId": "taskId",
+    "client-request-id": "00000000-0000-0000-0000-000000000000",
+    "ocp-data": "Fri, 17 Feb 2017 00:00:00 GMT"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "id": "testTask",
+        "url": "https://account.region.batch.azure.com/jobs/jobId/tasks/taskId",
+        "eTag": "0x8D3D62350711C55",
+        "creationTime": "2016-09-06T06:59:15.1161429Z",
+        "lastModified": "2016-09-06T06:59:15.1161429Z",
+        "state": "active",
+        "stateTransitionTime": "2016-09-06T06:59:15.1161429Z",
+        "commandLine": "cmd /c hostname",
+        "userIdentity":{
+          "autoUser": {
+            "scope": "task",
+            "elevationLevel": "nonAdmin"
+          }
+        },
+        "multiInstanceSettings": {
+          "numberOfInstances": 3,
+          "coordinationCommandLine": "cmd /c echo coordinating"
+        },
+        "constraints": {
+          "maxWallClockTime": "P10675199DT2H48M5.4775807S",
+          "retentionTime": "P10675199DT2H48M5.4775807S",
+          "maxTaskRetryCount": 0
+        },
+        "executionInfo": {
+          "retryCount": 0,
+          "requeueCount": 0
+        }
+      }
+    }
+  }
+}
