@@ -14,7 +14,7 @@
   "hostTemplate": "{azureRegion}.api.cognitive.microsoft.com",
   "parameters": [
    {
-    "$ref": "#/parameters/AzureRegion"
+    "$ref": "../../Common/Parameters.json#/parameters/AzureRegion"
    }
   ]
  },
@@ -35,7 +35,8 @@
     "tags": [
      "Key Phrases"
     ],
-    "summary": "The API returns a list of strings denoting the key talking points in the input text. \r\n            We employ techniques from Microsoft Office's sophisticated Natural Language Processing toolkit. \r\n            See the <a href=\"https://docs.microsoft.com/en-us/azure/cognitive-services/text-analytics/overview#supported-languages\">Text Analytics Documentation</a> for details about the languages that are supported by key phrase extraction.",
+    "summary": "The API returns a list of strings denoting the key talking points in the input text.",
+    "description": "We employ techniques from Microsoft Office's sophisticated Natural Language Processing toolkit. \r\n            See the <a href=\"https://docs.microsoft.com/en-us/azure/cognitive-services/text-analytics/overview#supported-languages\">Text Analytics Documentation</a> for details about the languages that are supported by key phrase extraction.",
     "operationId": "Key Phrases",
     "consumes": [
      "application/json"
@@ -45,7 +46,7 @@
     ],
     "parameters": [
      {
-      "$ref": "#/parameters/SubscriptionKey"
+      "$ref": "../../Common/Parameters.json#/parameters/SubscriptionKey"
      },
      {
       "name": "input",
@@ -107,7 +108,8 @@
     "tags": [
      "Detect Language"
     ],
-    "summary": "The API returns the detected language and a numeric score between 0 and 1. \r\n            Scores close to 1 indicate 100% certainty that the identified language is true. \r\n            A total of 120 languages are supported.",
+    "summary": "The API returns the detected language and a numeric score between 0 and 1.",
+    "description": "Scores close to 1 indicate 100% certainty that the identified language is true. \r\n            A total of 120 languages are supported.",
     "operationId": "Detect Language",
     "consumes": [
      "application/json"
@@ -117,7 +119,7 @@
     ],
     "parameters": [
      {
-      "$ref": "#/parameters/SubscriptionKey"
+      "$ref": "../../Common/Parameters.json#/parameters/SubscriptionKey"
      },
      {
       "name": "input",
@@ -216,7 +218,7 @@
     ],
     "parameters": [
      {
-      "$ref": "#/parameters/SubscriptionKey"
+      "$ref": "../../Common/Parameters.json#/parameters/SubscriptionKey"
      },
      {
       "name": "input",
@@ -321,12 +323,14 @@
    "properties": {
     "documents": {
      "type": "array",
+     "readOnly": true,
      "items": {
       "$ref": "#/definitions/KeyPhraseBatchResultItemV2"
      }
     },
     "errors": {
      "type": "array",
+     "readOnly": true,
      "items": {
       "$ref": "#/definitions/ErrorRecordV2"
      }
@@ -339,25 +343,30 @@
     "keyPhrases": {
      "description": "A list of representative words or phrases. The number of key phrases returned is proportional to the number of words in the input document.",
      "type": "array",
+     "readOnly": true,
      "items": {
       "type": "string"
      }
     },
     "id": {
      "description": "Unique document identifier.",
+     "readOnly": true,
      "type": "string"
     }
    }
   },
   "ErrorRecordV2": {
    "type": "object",
+   "readOnly": true,
    "properties": {
     "id": {
      "description": "Input document unique identifier the error refers to.",
+     "readOnly": true,
      "type": "string"
     },
     "message": {
      "description": "Error message.",
+     "readOnly": true,
      "type": "string"
     }
    }
@@ -366,13 +375,16 @@
    "type": "object",
    "properties": {
     "code": {
-     "type": "string"
+     "type": "string",
+     "readOnly": true
     },
     "message": {
-     "type": "string"
+     "type": "string",
+     "readOnly": true
     },
     "target": {
-     "type": "string"
+     "type": "string",
+     "readOnly": true
     },
     "innerError": {
      "$ref": "#/definitions/InternalError"
@@ -383,10 +395,12 @@
    "type": "object",
    "properties": {
     "code": {
-     "type": "string"
+     "type": "string",
+     "readOnly": true
     },
     "message": {
-     "type": "string"
+     "type": "string",
+     "readOnly": true
     },
     "innerError": {
      "$ref": "#/definitions/InternalError"
@@ -441,12 +455,14 @@
    "properties": {
     "documents": {
      "type": "array",
+     "readOnly": true,
      "items": {
       "$ref": "#/definitions/LanguageBatchResultItemV2"
      }
     },
     "errors": {
      "type": "array",
+     "readOnly": true,
      "items": {
       "$ref": "#/definitions/ErrorRecordV2"
      }
@@ -458,11 +474,13 @@
    "properties": {
     "id": {
      "description": "Unique document identifier.",
+     "readOnly": true,
      "type": "string"
     },
     "detectedLanguages": {
      "description": "A list of extracted languages.",
      "type": "array",
+     "readOnly": true,
      "items": {
       "$ref": "#/definitions/DetectedLanguageV2"
      }
@@ -492,12 +510,14 @@
    "properties": {
     "documents": {
      "type": "array",
+     "readOnly": true,
      "items": {
       "$ref": "#/definitions/SentimentBatchResultItemV2"
      }
     },
     "errors": {
      "type": "array",
+     "readOnly": true,
      "items": {
       "$ref": "#/definitions/ErrorRecordV2"
      }
@@ -510,10 +530,12 @@
     "score": {
      "format": "double",
      "description": "A decimal number between 0 and 1 denoting the sentiment of the document. \r\n            A score above 0.7 usually refers to a positive document while a score below 0.3 normally has a negative connotation.\r\n            Mid values refer to neutral text.",
+     "readOnly": true,
      "type": "number"
     },
     "id": {
      "description": "Unique document identifier.",
+     "readOnly": true,
      "type": "string"
     }
    }
