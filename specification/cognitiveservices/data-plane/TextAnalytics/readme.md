@@ -1,8 +1,8 @@
-# Cognitive Services Text Analytics SDK
+# Cognitive Services Language SDK
 
 > see https://aka.ms/autorest
 
-Configuration for generating Text Analytics SDK.
+Configuration for generating Language SDK.
 
 The current release is `release_2_0`.
 
@@ -24,7 +24,10 @@ log-file: logs/log.txt
 These settings apply only when `--csharp` is specified on the command line.
 ``` yaml $(csharp) 
 csharp: 
+  license-header: MICROSOFT_MIT_NO_VERSION
+  azure-arm: false
   namespace: Microsoft.CognitiveServices.Language.TextAnalytics
-  output-folder: out/csharp
+  output-folder: $(csharp-sdks-folder)/CognitiveServices/dataPlane/Vision/Microsoft.CognitiveServices.Language/Generated/TextAnalytics
+  clear-output-folder: true
 ```
 
