@@ -1913,6 +1913,84 @@
         }
       }
     },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Web/sites/{name}/containerlogs": {
+      "post": {
+        "tags": [
+          "WebApps"
+        ],
+        "summary": "Gets the last lines of docker logs for the given site",
+        "description": "Gets the last lines of docker logs for the given site",
+        "operationId": "WebApps_GetWebSiteContainerLogs",
+        "parameters": [
+          {
+            "$ref": "#/parameters/resourceGroupNameParameter"
+          },
+          {
+            "name": "name",
+            "in": "path",
+            "description": "Name of web app.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "$ref": "#/parameters/subscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "No Content"
+          },
+          "200": {
+            "description": "OK",
+            "schema": {
+              "type": "file"
+            }
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Web/sites/{name}/containerlogs/zip": {
+      "post": {
+        "tags": [
+          "WebApps"
+        ],
+        "summary": "Gets the ZIP archived docker log files for the given site",
+        "description": "Gets the ZIP archived docker log files for the given site",
+        "operationId": "WebApps_GetWebSiteContainerLogsZip",
+        "parameters": [
+          {
+            "$ref": "#/parameters/resourceGroupNameParameter"
+          },
+          {
+            "name": "name",
+            "in": "path",
+            "description": "Name of web app.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "$ref": "#/parameters/subscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "No Content"
+          },
+          "200": {
+            "description": "OK",
+            "schema": {
+              "type": "file"
+            }
+          }
+        }
+      }
+    },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Web/sites/{name}/continuouswebjobs": {
       "get": {
         "tags": [
@@ -8401,6 +8479,98 @@
         "responses": {
           "204": {
             "description": "No Content"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Web/sites/{name}/slots/{slot}/containerlogs": {
+      "post": {
+        "tags": [
+          "WebApps"
+        ],
+        "summary": "Gets the last lines of docker logs for the given site",
+        "description": "Gets the last lines of docker logs for the given site",
+        "operationId": "WebApps_GetWebSiteContainerLogsSlot",
+        "parameters": [
+          {
+            "$ref": "#/parameters/resourceGroupNameParameter"
+          },
+          {
+            "name": "name",
+            "in": "path",
+            "description": "Name of web app.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "slot",
+            "in": "path",
+            "description": "Name of web app slot. If not specified then will default to production slot.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "$ref": "#/parameters/subscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "No Content"
+          },
+          "200": {
+            "description": "OK",
+            "schema": {
+              "type": "file"
+            }
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Web/sites/{name}/slots/{slot}/containerlogs/zip": {
+      "post": {
+        "tags": [
+          "WebApps"
+        ],
+        "summary": "Gets the ZIP archived docker log files for the given site",
+        "description": "Gets the ZIP archived docker log files for the given site",
+        "operationId": "WebApps_GetWebSiteContainerLogsZipSlot",
+        "parameters": [
+          {
+            "$ref": "#/parameters/resourceGroupNameParameter"
+          },
+          {
+            "name": "name",
+            "in": "path",
+            "description": "Name of web app.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "slot",
+            "in": "path",
+            "description": "Name of web app slot. If not specified then will default to production slot.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "$ref": "#/parameters/subscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "No Content"
+          },
+          "200": {
+            "description": "OK",
+            "schema": {
+              "type": "file"
+            }
           }
         }
       }
