@@ -174,18 +174,15 @@
    "properties": {
     "code": {
      "description": "One of a server-defined set of error codes.",
-     "type": "string",
-     "example": "SampleErrorCode"
+     "type": "string"
     },
     "message": {
      "description": "A human-readable representation of the error.",
-     "type": "string",
-     "example": "Sample error description"
+     "type": "string"
     },
     "target": {
      "description": "(Optional) The target of the error.",
-     "type": "string",
-     "example": null
+     "type": "string"
     }
    }
   },
@@ -249,9 +246,9 @@
      }
     },
     "nextLink": {
-     "description": "The link (URL) to the next page of results.",
+     "description": "The URL to the next page of results.",
      "type": "string",
-     "example": null
+     "readOnly" : true
     }
    }
   },
@@ -260,21 +257,18 @@
    "properties": {
     "id": {
      "type": "string",
-     "description": "The ID of the management group.",
-     "example": "/providers/Microsoft.Management/managementGroups/20000000-0000-0000-0000-000000000000",
+     "description": "The ID of the management group. E.g. /providers/Microsoft.Management/managementGroups/20000000-0000-0000-0000-000000000000",
      "readOnly": true
     },
     "type": {
      "type": "string",
-     "description": "The type of the resource.",
-     "example": "/providers/Microsoft.Management/managementGroups",
+     "description": "The type of the resource. E.g. /providers/Microsoft.Management/managementGroups",
      "readOnly": true
     },
     "name": {
      "type": "string",
      "format": "uuid",
-     "description": "The name of the management group.",
-     "example": "20000000-0000-0000-0000-000000000000",
+     "description": "The name of the management group. E.g. 20000000-0000-0000-0000-000000000000",
      "readOnly": true
     },
     "properties": {
@@ -291,13 +285,11 @@
     "tenantId": {
      "type": "string",
      "format": "uuid",
-     "description": "The AAD Tenant ID associated with the management group.",
-     "example": "10000000-0000-0000-0000-000000000000"
+     "description": "The AAD Tenant ID associated with the management group. E.g. 10000000-0000-0000-0000-000000000000"
     },
     "displayName": {
      "type": "string",
-     "description": "The friendly name of the management group.",
-     "example": "Sample display name"
+     "description": "The friendly name of the management group."
     }
    }
   },
@@ -306,21 +298,18 @@
    "properties": {
     "id": {
      "type": "string",
-     "description": "The ID of the management group.",
-     "example": "/providers/Microsoft.Management/managementGroups/20000000-0000-0000-0000-000000000000",
+     "description": "The ID of the management group. E.g. /providers/Microsoft.Management/managementGroups/20000000-0000-0000-0000-000000000000",
      "readOnly": true
     },
     "type": {
      "type": "string",
-     "description": "The type of the resource.",
-     "example": "/providers/Microsoft.Management/managementGroups",
+     "description": "The type of the resource. E.g. /providers/Microsoft.Management/managementGroups",
      "readOnly": true
     },
     "name": {
      "type": "string",
      "format": "uuid",
-     "description": "The name of the management group.",
-     "example": "20000000-0000-0000-0000-000000000000",
+     "description": "The name of the management group. E.g. 20000000-0000-0000-0000-000000000000",
      "readOnly": true
     },
     "properties": {
@@ -337,13 +326,11 @@
     "tenantId": {
      "type": "string",
      "format": "uuid",
-     "description": "The AAD Tenant ID associated with the management group.",
-     "example": "10000000-0000-0000-0000-000000000000"
+     "description": "The AAD Tenant ID associated with the management group. E.g. 10000000-0000-0000-0000-000000000000"
     },
     "displayName": {
      "type": "string",
-     "description": "The friendly name of the management group.",
-     "example": "Sample display name"
+     "description": "The friendly name of the management group."
     },
     "details": {
      "title": "Details",
@@ -367,8 +354,7 @@
     },
     "updatedBy": {
      "type": "string",
-     "description": "The identity of the principal or process that updated the object.",
-     "example": "Sample identity"
+     "description": "The identity of the principal or process that updated the object."
     },
     "parent": {
      "title": "Parent",
@@ -385,13 +371,11 @@
    "properties": {
     "parentId": {
      "type": "string",
-     "description": "The ID of the parent management group.",
-     "example": "/providers/Microsoft.Management/managementGroups/30000000-0000-0000-0000-000000000000"
+     "description": "The ID of the parent management group. E.g. /providers/Microsoft.Management/managementGroups/30000000-0000-0000-0000-000000000000"
     },
     "displayName": {
      "type": "string",
-     "description": "The friendly name of the management group.",
-     "example": "Sample display name"
+     "description": "The friendly name of the management group."
     }
    }
   },
@@ -403,29 +387,25 @@
     "Account",
     "Subscription"
    ],
-   "description": "(Optional) The type of the management group.",
-   "example": "Account"
+   "description": "(Optional) The type of the management group."
   },
   "ManagementGroupWithChildren": {
    "description": "The management group details.",
    "properties": {
     "id": {
      "type": "string",
-     "description": "The ID of the management group.",
-     "example": "/providers/Microsoft.Management/managementGroups/20000000-0000-0000-0000-000000000000",
+     "description": "The ID of the management group. E.g. /providers/Microsoft.Management/managementGroups/20000000-0000-0000-0000-000000000000",
      "readOnly": true
     },
     "type": {
      "type": "string",
-     "description": "The type of the resource.",
-     "example": "/providers/Microsoft.Management/managementGroups",
+     "description": "The type of the resource. E.g. /providers/Microsoft.Management/managementGroups",
      "readOnly": true
     },
     "name": {
      "type": "string",
      "format": "uuid",
-     "description": "The name of the management group.",
-     "example": "20000000-0000-0000-0000-000000000000",
+     "description": "The name of the management group. E.g. 20000000-0000-0000-0000-000000000000",
      "readOnly": true
     },
     "properties": {
@@ -442,13 +422,11 @@
     "tenantId": {
      "type": "string",
      "format": "uuid",
-     "description": "The AAD Tenant ID associated with the management group.",
-     "example": "10000000-0000-0000-0000-000000000000"
+     "description": "The AAD Tenant ID associated with the management group. E.g. 10000000-0000-0000-0000-000000000000"
     },
     "displayName": {
      "type": "string",
-     "description": "The friendly name of the management group.",
-     "example": "Sample display name"
+     "description": "The friendly name of the management group."
     },
     "details": {
      "title" : "Details",
@@ -472,19 +450,16 @@
     },
     "childId": {
      "type": "string",
-     "description": "The ID of the child resource (management group or subscription).",
-     "example": "/providers/Microsoft.Management/managementGroups/40000000-0000-0000-0000-000000000000"
+     "description": "The ID of the child resource (management group or subscription). E.g. /providers/Microsoft.Management/managementGroups/40000000-0000-0000-0000-000000000000"
     },
     "displayName": {
      "type": "string",
-     "description": "The friendly name of the child resource.",
-     "example": "Sample display name"
+     "description": "The friendly name of the child resource."
     },
     "tenantId": {
      "type": "string",
      "format": "uuid",
-     "description": "(Optional) The AAD Tenant ID associated with the child resource.",
-     "example": null
+     "description": "(Optional) The AAD Tenant ID associated with the child resource."
     }
    }
   },
@@ -493,21 +468,18 @@
    "properties": {
     "id": {
      "type": "string",
-     "description": "The ID of the management group.",
-     "example": "/providers/Microsoft.Management/managementGroups/20000000-0000-0000-0000-000000000000",
+     "description": "The ID of the management group. E.g. /providers/Microsoft.Management/managementGroups/20000000-0000-0000-0000-000000000000",
      "readOnly": true
     },
     "type": {
      "type": "string",
-     "description": "The type of the resource.",
-     "example": "/providers/Microsoft.Management/managementGroups",
+     "description": "The type of the resource. E.g. /providers/Microsoft.Management/managementGroups",
      "readOnly": true
     },
     "name": {
      "type": "string",
      "format": "uuid",
-     "description": "The name of the management group.",
-     "example": "20000000-0000-0000-0000-000000000000",
+     "description": "The name of the management group. E.g. 20000000-0000-0000-0000-000000000000",
      "readOnly": true
     },
     "properties": {
@@ -524,13 +496,11 @@
     "tenantId": {
      "type": "string",
      "format": "uuid",
-     "description": "The AAD Tenant ID associated with the management group.",
-     "example": "10000000-0000-0000-0000-000000000000"
+     "description": "The AAD Tenant ID associated with the management group. E.g. 10000000-0000-0000-0000-000000000000"
     },
     "displayName": {
      "type": "string",
-     "description": "The friendly name of the management group.",
-     "example": "Sample display name"
+     "description": "The friendly name of the management group."
     },
     "details": {
      "title" : "Details",
@@ -554,19 +524,16 @@
     },
     "childId": {
      "type": "string",
-     "description": "The ID of the child resource (management group or subscription).",
-     "example": "/providers/Microsoft.Management/managementGroups/40000000-0000-0000-0000-000000000000"
+     "description": "The ID of the child resource (management group or subscription). E.g. /providers/Microsoft.Management/managementGroups/40000000-0000-0000-0000-000000000000"
     },
     "displayName": {
      "type": "string",
-     "description": "The friendly name of the child resource.",
-     "example": "Sample display name"
+     "description": "The friendly name of the child resource."
     },
     "tenantId": {
      "type": "string",
      "format": "uuid",
-     "description": "(Optional) The AAD Tenant ID associated with the child resource.",
-     "example": null
+     "description": "(Optional) The AAD Tenant ID associated with the child resource."
     },
     "children": {
      "description": "The list of children.",
@@ -594,28 +561,31 @@
    "type": "string",
    "description": "Version of the API to be used with the client request. The current version is 2017-08-31-preview."
   },
-  "PageTokenParameter": {
-   "name": "token",
+  "SkipToken": {
+   "name": "$skiptoken",
    "in": "query",
    "required": false,
    "type": "string",
+   "x-ms-parameter-location" : "method",
    "description": "Page continuation token is only used if a previous operation returned a partial result. \nIf a previous response contains a nextLink element, the value of the nextLink element will include a token parameter that specifies a starting point to use for subsequent calls.\n"
   },
   "ExpandParameter": {
-   "name": "expand",
+   "name": "$expand",
    "in": "query",
    "required": false,
    "type": "string",
    "enum": [
     "children"
    ],
+   "x-ms-parameter-location" : "method",
    "description": "The $expand=children query string parameter allows clients to request inclusion of children in the response payload."
   },
   "RecurseParameter": {
-   "name": "recurse",
+   "name": "$recurse",
    "in": "query",
    "required": false,
    "type": "boolean",
+   "x-ms-parameter-location" : "method",
    "description": "The $recurse=true query string parameter allows clients to request inclusion of entire hierarchy in the response payload."
   }
  }
