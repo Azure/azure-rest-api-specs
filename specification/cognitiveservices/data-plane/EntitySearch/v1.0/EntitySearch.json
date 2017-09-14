@@ -66,7 +66,7 @@
     "/entities": {
       "get": {
         "summary": "The Entity Search API lets you send a search query to Bing and get back search results that include entities and places. Place results include restaurants, hotel, or other local businesses. For places, the query can specify the name of the local business or it can ask for a list (for example, restaurants near me). Entity results include persons, places, or things. Place in this context is tourist attractions, states, countries, etc.",
-        "operationId": "entitiesGet",
+        "operationId": "Entities_Search",
         "tags": [
           "BingEntitySearch"
         ],
@@ -218,32 +218,8 @@
               "$ref": "#/definitions/SearchResponse"
             }
           },
-          "400": {
-            "description": "Invalid request.",
-            "schema": {
-              "$ref": "#/definitions/ErrorResponse"
-            }
-          },
-          "401": {
-            "description": "Invalid authorization.",
-            "schema": {
-              "$ref": "#/definitions/ErrorResponse"
-            }
-          },
-          "403": {
-            "description": "Insufficient authorization.",
-            "schema": {
-              "$ref": "#/definitions/ErrorResponse"
-            }
-          },
-          "429": {
-            "description": "Rate limit exceeded.",
-            "schema": {
-              "$ref": "#/definitions/ErrorResponse"
-            }
-          },
-          "500": {
-            "description": "Server error.",
+          "default": {
+            "description": "An error has occurred. Check the response type and/or status code for more details.",
             "schema": {
               "$ref": "#/definitions/ErrorResponse"
             }
