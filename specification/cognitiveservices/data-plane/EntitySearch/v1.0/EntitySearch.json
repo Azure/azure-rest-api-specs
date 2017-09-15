@@ -291,7 +291,6 @@
       "properties": {
         "originalQuery": {
           "description": "The query string as specified in the request.",
-          "readOnly": true,
           "type": "string"
         },
         "alteredQuery": {
@@ -347,7 +346,6 @@
             },
             "value": {
               "description": "A list of entities.",
-              "readOnly": true,
               "type": "array",
               "items": {
                 "$ref": "#/definitions/Thing"
@@ -371,7 +369,6 @@
           "properties": {
             "value": {
               "description": "A list of local entities, such as restaurants or hotels.",
-              "readOnly": true,
               "type": "array",
               "items": {
                 "$ref": "#/definitions/Thing"
@@ -438,7 +435,6 @@
           "properties": {
             "errors": {
               "description": "A list of errors that describe the reasons why the request failed.",
-              "readOnly": true,
               "type": "array",
               "items": {
                 "$ref": "#/definitions/Error"
@@ -582,7 +578,6 @@
       "properties": {
         "code": {
           "description": "The error code that identifies the category of error.",
-          "readOnly": true,
           "type": "string",
           "default": "None",
           "enum": [
@@ -622,7 +617,6 @@
         },
         "message": {
           "description": "A description of the error.",
-          "readOnly": true,
           "type": "string"
         },
         "moreDetails": {
@@ -690,7 +684,6 @@
       "properties": {
         "entityScenario": {
           "description": "The supported scenario.",
-          "readOnly": true,
           "type": "string",
           "default": "DominantEntity",
           "enum": [
@@ -951,12 +944,10 @@
           "properties": {
             "text": {
               "description": "The attribution text.",
-              "readOnly": true,
               "type": "string"
             },
             "url": {
               "description": "The URL to the provider's website. Use text and URL to create the hyperlink.",
-              "readOnly": true,
               "type": "string"
             },
             "optionalForListDisplay": {
@@ -1002,7 +993,6 @@
           "properties": {
             "text": {
               "description": "The attribution text. Text attribution applies to the entity as a whole and should be displayed immediately following the entity presentation. If there are multiple text or link attribution rules that do not specify a target, you should concatenate them and display them using a \"Data from:\" label.",
-              "readOnly": true,
               "type": "string"
             },
             "optionalForListDisplay": {
