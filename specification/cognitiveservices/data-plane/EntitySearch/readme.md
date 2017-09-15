@@ -9,6 +9,7 @@ The current release is `release_1_0`.
 ``` yaml
 
 tag: release_1_0
+openapi-type: data-plane
 ```
 # Releases
 
@@ -17,7 +18,6 @@ These settings apply only when `--tag=release_1_0` is specified on the command l
 
 ``` yaml $(tag) == 'release_1_0'
 input-file: v1.0/EntitySearch.json
-log-file: logs/log.txt
 ```
 
 ## CSharp Settings
