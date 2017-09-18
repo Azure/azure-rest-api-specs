@@ -16,53 +16,6 @@
     "application/json"
   ],
   "paths": {
-    "/subscriptions/{subscriptionId}/resourceGroups/System.{location}/providers/Microsoft.Fabric.Admin/fabricLocations/{location}/scaleUnits/{scaleUnit}/ScaleOut": {
-      "post": {
-        "tags": [
-          "ScaleUnits"
-        ],
-        "description": "Scales out the cluster.",
-        "operationId": "ScaleUnits_ScaleOut",
-        "parameters": [
-          {
-            "$ref": "Fabric.json#/parameters/SubscriptionIdParameter"
-          },
-          {
-            "$ref": "Fabric.json#/parameters/LocationParameter"
-          },
-          {
-            "$ref": "#/parameters/ScaleUnitParameter"
-          },
-          {
-            "$ref": "Fabric.json#/parameters/ApiVersionParameter"
-          },
-          {
-            "$ref": "#/parameters/ServersToBeAddedParameter"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "OK",
-            "schema": {
-              "$ref": "Operations.json#/definitions/ProvisioningState"
-            }
-          },
-          "202": {
-            "description": "ACCEPTED",
-            "schema": {
-              "$ref": "Operations.json#/definitions/ProvisioningState"
-            }
-          },
-          "500": {
-            "description": "FAILURE",
-            "schema": {
-              "$ref": "Operations.json#/definitions/ProvisioningState"
-            }
-          }
-        },
-        "x-ms-long-running-operation": true
-      }
-    },
     "/subscriptions/{subscriptionId}/resourceGroups/System.{location}/providers/Microsoft.Fabric.Admin/fabricLocations/{location}/scaleUnits/{scaleUnit}": {
       "get": {
         "x-ms-examples": {
@@ -154,44 +107,6 @@
           "description": "The number of CPU cores for the physical machine.",
           "type": "integer",
           "format": "int64"
-        }
-      }
-    },
-    "BareMetalNodeDescription": {
-      "description": "The description of a bare metal node used for ScaleOut operation on a cluster.",
-      "type": "object",
-      "properties": {
-        "bmcAddress": {
-          "description": "Bmc address of the physical machine.",
-          "type": "string"
-        },
-        "vendor": {
-          "description": "Vendor of the physical machine.",
-          "type": "string"
-        },
-        "model": {
-          "description": "Model of the physical machine.",
-          "type": "string"
-        },
-        "serialNumber": {
-          "description": "Serial number of the physical machine.",
-          "type": "string"
-        },
-        "biosVersion": {
-          "description": "Bios version of the physical machine.",
-          "type": "string"
-        },
-        "computerName": {
-          "description": "Name of the computer.",
-          "type": "string"
-        },
-        "id": {
-          "description": "Name of the cluster.",
-          "type": "string"
-        },
-        "macAddress": {
-          "description": "Mac address of the bare metal node.",
-          "type": "string"
         }
       }
     },
@@ -291,16 +206,6 @@
       "in": "path",
       "required": true,
       "type": "string",
-      "x-ms-parameter-location": "method"
-    },
-    "ServersToBeAddedParameter": {
-      "name": "serversToBeAdded",
-      "description": "Descripion of the server to be added.",
-      "in": "body",
-      "required": true,
-      "schema": {
-        "$ref": "#/definitions/BareMetalNodeDescription"
-      },
       "x-ms-parameter-location": "method"
     }
   },
