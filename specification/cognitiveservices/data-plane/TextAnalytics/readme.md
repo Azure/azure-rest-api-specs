@@ -26,7 +26,7 @@ These settings apply only when `--csharp` is specified on the command line.
 csharp: 
   license-header: MICROSOFT_MIT_NO_VERSION
   azure-arm: false
-  namespace: Microsoft.CognitiveServices.Language.TextAnalytics
+  namespace: Microsoft.Azure.CognitiveServices.Language.TextAnalytics
   output-folder: $(csharp-sdks-folder)/CognitiveServices/dataPlane/Language/Microsoft.CognitiveServices.Language/Generated/TextAnalytics
   clear-output-folder: true
 ```
