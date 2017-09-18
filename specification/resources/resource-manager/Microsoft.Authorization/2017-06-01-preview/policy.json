@@ -88,11 +88,6 @@
         "operationId": "PolicyAssignments_Create",
         "summary": "Creates a policy assignment.",
         "description": "Policy assignments are inherited by child resources. For example, when you apply a policy to a resource group that policy is assigned to all resources in the group.",
-        "x-ms-examples": {
-          "Put a policy assignment": {
-            "$ref": "./examples/createPolicyAssignment.json"
-          }
-        },
         "parameters": [
           {
             "name": "scope",
@@ -143,11 +138,6 @@
         ],
         "operationId": "PolicyAssignments_Get",
         "description": "Gets a policy assignment.",
-        "x-ms-examples": {
-          "Get a policy assignment": {
-            "$ref": "./examples/getPolicyAssignment.json"
-          }
-        },
         "parameters": [
           {
             "name": "scope",
@@ -326,11 +316,6 @@
         ],
         "operationId": "PolicyAssignments_List",
         "description": "Gets all the policy assignments for a subscription.",
-        "x-ms-examples": {
-          "List policy assignments": {
-            "$ref": "./examples/listPolicyAssignments.json"
-          }
-        },
         "parameters": [
           {
             "name": "$filter",
@@ -481,9 +466,282 @@
           }
         }
       }
+    },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.Authorization/policysetdefinitions/{policySetDefinitionName}": {
+      "put": {
+        "tags": [
+          "PolicySetDefinitions"
+        ],
+        "operationId": "PolicySetDefinitions_CreateOrUpdate",
+        "description": "Creates or updates a policy set definition.",
+        "x-ms-examples": {
+          "Put a policy set definition": {
+            "$ref": "./examples/createOrUpdatePolicySetDefinition.json"
+          }
+        },
+        "parameters": [
+            {
+              "name": "policySetDefinitionName",
+              "in": "path",
+              "required": true,
+              "type": "string",
+              "description": "The name of the policy set definition to create."
+            },
+            {
+              "name": "parameters",
+              "in": "body",
+              "required": true,
+              "schema": {
+                "$ref": "#/definitions/PolicySetDefinition"
+              },
+              "description": "The policy set definition properties."
+            },
+            {
+              "$ref": "#/parameters/ApiVersionParameter"
+            },
+            {
+              "$ref": "#/parameters/SubscriptionIdParameter"
+            }
+          ],
+        "responses": {
+            "201": {
+              "description": "Created - Returns information about the policy set definition.",
+              "schema": {
+                "$ref": "#/definitions/PolicySetDefinition"
+              }
+            },
+            "200": {
+              "description": "OK - Returns information about the policy set definition.",
+              "schema": {
+                "$ref": "#/definitions/PolicySetDefinition"
+              }
+            },
+            "default": {
+              "description": "Error response describing why the operation failed.",
+              "schema": {
+                "$ref": "#/definitions/ErrorResponse"
+              }
+            }
+          }
+        },
+      "delete": {
+          "tags": [
+            "PolicySetDefinitions"
+          ],
+          "operationId": "PolicySetDefinitions_Delete",
+          "description": "Deletes a policy set definition.",
+          "parameters": [
+            {
+              "name": "policySetDefinitionName",
+              "in": "path",
+              "required": true,
+              "type": "string",
+              "description": "The name of the policy set definition to delete."
+            },
+            {
+              "$ref": "#/parameters/ApiVersionParameter"
+            },
+            {
+              "$ref": "#/parameters/SubscriptionIdParameter"
+            }
+          ],
+          "responses": {
+            "204": {
+              "description": "No Content - the policy set definition doesn't exist in the subscription."
+            },
+            "200": {
+              "description": "OK"
+            },
+            "default": {
+              "description": "Error response describing why the operation failed.",
+              "schema": {
+                "$ref": "#/definitions/ErrorResponse"
+              }
+            }
+          }
+        },
+      "get": {
+        "tags": [
+          "PolicySetDefinitions"
+        ],
+        "operationId": "PolicySetDefinitions_Get",
+        "description": "Gets the policy set definition.",
+        "x-ms-examples": {
+          "Get a policy set definition": {
+            "$ref": "./examples/getPolicySetDefinition.json"
+          }
+        },
+        "parameters": [
+          {
+            "name": "policySetDefinitionName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the policy set definition to get."
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK - Returns information about the policy set definition.",
+            "schema": {
+              "$ref": "#/definitions/PolicySetDefinition"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        }
+      }
+      },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.Authorization/policysetdefinitions": {
+      "get": {
+        "tags": [
+          "PolicySetDefinitions"
+        ],
+        "operationId": "PolicySetDefinitions_List",
+        "description": "Gets all the policy set definitions for a subscription.",
+        "x-ms-examples": {
+          "List policy set definitions": {
+            "$ref": "./examples/listPolicySetDefinitions.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK - Returns an array of policy set definitions.",
+            "schema": {
+              "$ref": "#/definitions/PolicySetDefinitionListResult"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        },
+        "x-ms-odata": "#/definitions/PolicySetDefinition"
+      }
     }
   },
   "definitions": {
+    "PolicySetDefinitionProperties": {
+      "properties": {
+        "policyType": {
+          "type": "string",
+          "description": "The type of policy definition. Possible values are NotSpecified, BuiltIn, and Custom.",
+          "enum": [
+            "NotSpecified",
+            "BuiltIn",
+            "Custom"
+          ],
+          "x-ms-enum": {
+            "name": "policyType",
+            "modelAsString": true
+          }
+        },
+        "displayName": {
+          "type": "string",
+          "description": "The display name of the policy set definition."
+        },
+        "description": {
+          "type": "string",
+          "description": "The policy set definition description."
+        },
+        "metadata": {
+          "type": "object",
+          "description": "The policy set definition metadata."
+        },
+        "parameters": {
+          "type": "object",
+          "description": "The policy set definition parameters that can be used in policy definition references."
+        },
+        "policyDefinitions": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/PolicyDefinitionReference"
+          },
+          "description": "An array of policy definition references."
+        }
+      },
+      "required": [
+        "policyDefinitions"
+      ],
+      "description": "The policy set definition properties."
+    },
+    "PolicyDefinitionReference": {
+      "properties": {
+        "policyDefinitionId": {
+          "type": "string",
+          "description": "The ID of the policy definition or policy set definition."
+        },
+        "parameters": {
+          "type": "object",
+          "description": "Required if a parameter is used in policy rule."
+        }
+      },
+      "description": "The policy definition reference."
+    },
+    "PolicySetDefinition": {
+      "properties": {
+        "properties": {
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/PolicySetDefinitionProperties",
+          "description": "The policy definition properties."
+        },
+        "id": {
+          "readOnly": true,
+          "type": "string",
+          "description": "The ID of the policy set definition."
+        },
+        "name": {
+          "type": "string",
+          "description": "The name of the policy set definition. If you do not specify a value for name, the value is inferred from the name value in the request URI."
+        },
+        "type": {
+          "readOnly": true,
+          "type": "string",
+          "description": "The type of the resource (Microsoft.Authorization/policySetDefinitions)."
+        }
+      },
+      "description": "The policy set definition.",
+      "x-ms-azure-resource": true
+    },
+    "PolicySetDefinitionListResult": {
+      "properties": {
+        "value": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/PolicySetDefinition"
+          },
+          "description": "An array of policy set definitions."
+        },
+        "nextLink": {
+          "type": "string",
+          "description": "The URL to use for getting the next set of results."
+        }
+      },
+      "description": "List of policy set definitions."
+    },
     "PolicyAssignmentProperties": {
       "properties": {
         "displayName": {
@@ -545,18 +803,15 @@
         },
         "id": {
           "type": "string",
-          "description": "The ID of the policy assignment.",
-          "readOnly": true
+          "description": "The ID of the policy assignment."
         },
         "type": {
           "type": "string",
-          "description": "The type of the policy assignment.",
-          "readOnly": true
+          "description": "The type of the policy assignment."
         },
         "name": {
           "type": "string",
-          "description": "The name of the policy assignment.",
-          "readOnly": true
+          "description": "The name of the policy assignment."
         },
         "sku": {
           "$ref": "#/definitions/PolicySku",
