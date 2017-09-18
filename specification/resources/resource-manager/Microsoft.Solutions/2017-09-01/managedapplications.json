@@ -1,9 +1,9 @@
 {
   "swagger": "2.0",
   "info": {
-    "title": "ManagedApplicationClient",
-    "version": "2016-09-01-preview",
-    "description": "ARM managed applications (appliances)"
+    "title": "ApplicationClient",
+    "version": "2017-09-01",
+    "description": "ARM applications"
   },
   "host": "management.azure.com",
   "schemes": [
@@ -34,16 +34,16 @@
     }
   },
   "paths": {
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Solutions/appliances/{applianceName}": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Solutions/applications/{applicationName}": {
       "get": {
         "tags": [
-          "Appliances"
+          "Applications"
         ],
-        "operationId": "Appliances_Get",
-        "description": "Gets the appliance.",
+        "operationId": "Applications_Get",
+        "description": "Gets the managed application.",
         "x-ms-examples": {
-          "Get an appliance": {
-            "$ref": "./examples/getAppliance.json"
+          "Get a managed application": {
+            "$ref": "./examples/getApplication.json"
           }
         },
         "parameters": [
@@ -58,11 +58,11 @@
             "maxLength": 90
           },
           {
-            "name": "applianceName",
+            "name": "applicationName",
             "in": "path",
             "required": true,
             "type": "string",
-            "description": "The name of the appliance.",
+            "description": "The name of the managed application.",
             "minLength": 3,
             "maxLength": 64
           },
@@ -75,9 +75,9 @@
         ],
         "responses": {
           "200": {
-            "description": "OK - Returns the appliance.",
+            "description": "OK - Returns the managed application.",
             "schema": {
-              "$ref": "#/definitions/Appliance"
+              "$ref": "#/definitions/Application"
             }
           },
           "404": {
@@ -93,10 +93,10 @@
       },
       "delete": {
         "tags": [
-          "Appliances"
+          "Applications"
         ],
-        "operationId": "Appliances_Delete",
-        "description": "Deletes the appliance.",
+        "operationId": "Applications_Delete",
+        "description": "Deletes the managed application.",
         "parameters": [
           {
             "name": "resourceGroupName",
@@ -109,11 +109,11 @@
             "maxLength": 90
           },
           {
-            "name": "applianceName",
+            "name": "applicationName",
             "in": "path",
             "required": true,
             "type": "string",
-            "description": "The name of the appliance.",
+            "description": "The name of the managed application.",
             "minLength": 3,
             "maxLength": 64
           },
@@ -142,13 +142,13 @@
       },
       "put": {
         "tags": [
-          "Appliances"
+          "Applications"
         ],
-        "operationId": "Appliances_CreateOrUpdate",
-        "description": "Creates a new appliance.",
+        "operationId": "Applications_CreateOrUpdate",
+        "description": "Creates a new managed application.",
         "x-ms-examples": {
-          "Create or update appliance": {
-            "$ref": "./examples/createOrUpdateAppliance.json"
+          "Create or update managed application": {
+            "$ref": "./examples/createOrUpdateApplication.json"
           }
         },
         "parameters": [
@@ -163,11 +163,11 @@
             "maxLength": 90
           },
           {
-            "name": "applianceName",
+            "name": "applicationName",
             "in": "path",
             "required": true,
             "type": "string",
-            "description": "The name of the appliance.",
+            "description": "The name of the managed application.",
             "minLength": 3,
             "maxLength": 64
           },
@@ -176,9 +176,9 @@
             "in": "body",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/Appliance"
+              "$ref": "#/definitions/Application"
             },
-            "description": "Parameters supplied to the create or update an appliance."
+            "description": "Parameters supplied to the create or update a managed application."
           },
           {
             "$ref": "#/parameters/ApiVersionParameter"
@@ -189,15 +189,15 @@
         ],
         "responses": {
           "200": {
-            "description": "Created - Returns information about the appliance, including provisioning status.",
+            "description": "Created - Returns information about the managed application, including provisioning status.",
             "schema": {
-              "$ref": "#/definitions/Appliance"
+              "$ref": "#/definitions/Application"
             }
           },
           "201": {
-            "description": "Created - Returns information about the appliance, including provisioning status.",
+            "description": "Created - Returns information about the managed application, including provisioning status.",
             "schema": {
-              "$ref": "#/definitions/Appliance"
+              "$ref": "#/definitions/Application"
             }
           },
           "default": {
@@ -211,10 +211,10 @@
       },
       "patch": {
         "tags": [
-          "Appliances"
+          "Applications"
         ],
-        "operationId": "Appliances_Update",
-        "description": "Updates an existing appliance. The only value that can be updated via PATCH currently is the tags.",
+        "operationId": "Applications_Update",
+        "description": "Updates an existing managed application. The only value that can be updated via PATCH currently is the tags.",
         "parameters": [
           {
             "name": "resourceGroupName",
@@ -227,11 +227,11 @@
             "maxLength": 90
           },
           {
-            "name": "applianceName",
+            "name": "applicationName",
             "in": "path",
             "required": true,
             "type": "string",
-            "description": "The name of the appliance.",
+            "description": "The name of the managed application.",
             "minLength": 3,
             "maxLength": 64
           },
@@ -239,9 +239,9 @@
             "name": "parameters",
             "in": "body",
             "schema": {
-              "$ref": "#/definitions/Appliance"
+              "$ref": "#/definitions/Application"
             },
-            "description": "Parameters supplied to update an existing appliance."
+            "description": "Parameters supplied to update an existing managed application."
           },
           {
             "$ref": "#/parameters/ApiVersionParameter"
@@ -252,9 +252,9 @@
         ],
         "responses": {
           "200": {
-            "description": "Created - Returns information about the appliance, including provisioning status.",
+            "description": "Created - Returns information about the managed application, including provisioning status.",
             "schema": {
-              "$ref": "#/definitions/Appliance"
+              "$ref": "#/definitions/Application"
             }
           },
           "default": {
@@ -266,16 +266,16 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Solutions/applianceDefinitions/{applianceDefinitionName}": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Solutions/applicationDefinitions/{applicationDefinitionName}": {
       "get": {
         "tags": [
-          "ApplianceDefinitions"
+          "ApplicationDefinitions"
         ],
-        "operationId": "ApplianceDefinitions_Get",
-        "description": "Gets the appliance definition.",
+        "operationId": "ApplicationDefinitions_Get",
+        "description": "Gets the managed application definition.",
         "x-ms-examples": {
-          "Get appliance definition": {
-            "$ref": "./examples/getApplianceDefinition.json"
+          "Get managed application definition": {
+            "$ref": "./examples/getApplicationDefinition.json"
           }
         },
         "parameters": [
@@ -290,11 +290,11 @@
             "maxLength": 90
           },
           {
-            "name": "applianceDefinitionName",
+            "name": "applicationDefinitionName",
             "in": "path",
             "required": true,
             "type": "string",
-            "description": "The name of the appliance definition.",
+            "description": "The name of the managed application definition.",
             "minLength": 3,
             "maxLength": 64
           },
@@ -307,9 +307,9 @@
         ],
         "responses": {
           "200": {
-            "description": "OK - Returns the appliance definition.",
+            "description": "OK - Returns the managed application definition.",
             "schema": {
-              "$ref": "#/definitions/ApplianceDefinition"
+              "$ref": "#/definitions/ApplicationDefinition"
             }
           },
           "404": {
@@ -325,10 +325,10 @@
       },
       "delete": {
         "tags": [
-          "ApplianceDefinitions"
+          "ApplicationDefinitions"
         ],
-        "operationId": "ApplianceDefinitions_Delete",
-        "description": "Deletes the appliance definition.",
+        "operationId": "ApplicationDefinitions_Delete",
+        "description": "Deletes the managed application definition.",
         "parameters": [
           {
             "name": "resourceGroupName",
@@ -341,11 +341,11 @@
             "maxLength": 90
           },
           {
-            "name": "applianceDefinitionName",
+            "name": "applicationDefinitionName",
             "in": "path",
             "required": true,
             "type": "string",
-            "description": "The name of the appliance definition to delete.",
+            "description": "The name of the managed application definition to delete.",
             "minLength": 3,
             "maxLength": 64
           },
@@ -377,13 +377,13 @@
       },
       "put": {
         "tags": [
-          "ApplianceDefinitions"
+          "ApplicationDefinitions"
         ],
-        "operationId": "ApplianceDefinitions_CreateOrUpdate",
-        "description": "Creates a new appliance definition.",
+        "operationId": "ApplicationDefinitions_CreateOrUpdate",
+        "description": "Creates a new managed application definition.",
         "x-ms-examples": {
-          "Create or update appliance definition": {
-            "$ref": "./examples/createOrUpdateApplianceDefinition.json"
+          "Create or update managed application definition": {
+            "$ref": "./examples/createOrUpdateApplicationDefinition.json"
           }
         },
         "parameters": [
@@ -398,11 +398,11 @@
             "maxLength": 90
           },
           {
-            "name": "applianceDefinitionName",
+            "name": "applicationDefinitionName",
             "in": "path",
             "required": true,
             "type": "string",
-            "description": "The name of the appliance definition.",
+            "description": "The name of the managed application definition.",
             "minLength": 3,
             "maxLength": 64
           },
@@ -411,9 +411,9 @@
             "in": "body",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/ApplianceDefinition"
+              "$ref": "#/definitions/ApplicationDefinition"
             },
-            "description": "Parameters supplied to the create or update an appliance definition."
+            "description": "Parameters supplied to the create or update an managed application definition."
           },
           {
             "$ref": "#/parameters/ApiVersionParameter"
@@ -424,15 +424,15 @@
         ],
         "responses": {
           "200": {
-            "description": "OK - Returns information about the appliance definition, including provisioning status.",
+            "description": "OK - Returns information about the managed application definition, including provisioning status.",
             "schema": {
-              "$ref": "#/definitions/ApplianceDefinition"
+              "$ref": "#/definitions/ApplicationDefinition"
             }
           },
           "201": {
-            "description": "Created - Returns information about the appliance definition, including provisioning status.",
+            "description": "Created - Returns information about the managed application definition, including provisioning status.",
             "schema": {
-              "$ref": "#/definitions/ApplianceDefinition"
+              "$ref": "#/definitions/ApplicationDefinition"
             }
           },
           "default": {
@@ -445,16 +445,16 @@
         "x-ms-long-running-operation": true
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Solutions/applianceDefinitions": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Solutions/applicationDefinitions": {
       "get": {
         "tags": [
-          "ApplianceDefinitions"
+          "ApplicationDefinitions"
         ],
-        "operationId": "ApplianceDefinitions_ListByResourceGroup",
-        "description": "Lists the appliance definitions in a resource group.",
+        "operationId": "ApplicationDefinitions_ListByResourceGroup",
+        "description": "Lists the managed application definitions in a resource group.",
         "x-ms-examples": {
-          "List appliance definitions": {
-            "$ref": "./examples/listApplianceDefinitionsByResourceGroup.json"
+          "List managed application definitions": {
+            "$ref": "./examples/listApplicationDefinitionsByResourceGroup.json"
           }
         },
         "parameters": [
@@ -477,9 +477,9 @@
         ],
         "responses": {
           "200": {
-            "description": "OK - Returns an array of appliance definitions.",
+            "description": "OK - Returns an array of managed application definitions.",
             "schema": {
-              "$ref": "#/definitions/ApplianceDefinitionListResult"
+              "$ref": "#/definitions/ApplicationDefinitionListResult"
             }
           },
           "default": {
@@ -494,16 +494,16 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Solutions/appliances": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Solutions/applications": {
       "get": {
         "tags": [
-          "Appliances"
+          "Applications"
         ],
-        "operationId": "Appliances_ListByResourceGroup",
-        "description": "Gets all the appliances within a resource group.",
+        "operationId": "Applications_ListByResourceGroup",
+        "description": "Gets all the applications within a resource group.",
         "x-ms-examples": {
-          "Lists appliances": {
-            "$ref": "./examples/listAppliancesByResourceGroup.json"
+          "Lists applications": {
+            "$ref": "./examples/listApplicationsByResourceGroup.json"
           }
         },
         "parameters": [
@@ -526,9 +526,9 @@
         ],
         "responses": {
           "200": {
-            "description": "OK - Returns an array of appliances.",
+            "description": "OK - Returns an array of applications.",
             "schema": {
-              "$ref": "#/definitions/ApplianceListResult"
+              "$ref": "#/definitions/ApplicationListResult"
             }
           },
           "default": {
@@ -543,13 +543,13 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/providers/Microsoft.Solutions/appliances": {
+    "/subscriptions/{subscriptionId}/providers/Microsoft.Solutions/applications": {
       "get": {
         "tags": [
-          "Appliances"
+          "Applications"
         ],
-        "operationId": "Appliances_ListBySubscription",
-        "description": "Gets all the appliances within a subscription.",
+        "operationId": "Applications_ListBySubscription",
+        "description": "Gets all the applications within a subscription.",
         "parameters": [
           {
             "$ref": "#/parameters/ApiVersionParameter"
@@ -560,9 +560,9 @@
         ],
         "responses": {
           "200": {
-            "description": "OK - Returns an array of appliances.",
+            "description": "OK - Returns an array of applications.",
             "schema": {
-              "$ref": "#/definitions/ApplianceListResult"
+              "$ref": "#/definitions/ApplicationListResult"
             }
           },
           "default": {
@@ -577,20 +577,20 @@
         }
       }
     },
-    "/{applianceId}": {
+    "/{applicationId}": {
       "get": {
         "tags": [
-          "Appliances"
+          "Applications"
         ],
-        "operationId": "Appliances_GetById",
-        "description": "Gets the appliance.",
+        "operationId": "Applications_GetById",
+        "description": "Gets the managed application.",
         "parameters": [
           {
-            "name": "applianceId",
+            "name": "applicationId",
             "in": "path",
             "required": true,
             "type": "string",
-            "description": "The fully qualified ID of the appliance, including the appliance name and the appliance resource type. Use the format, /subscriptions/{guid}/resourceGroups/{resource-group-name}/Microsoft.Solutions/appliances/{appliance-name}",
+            "description": "The fully qualified ID of the managed application, including the managed application name and the managed application resource type. Use the format, /subscriptions/{guid}/resourceGroups/{resource-group-name}/Microsoft.Solutions/applications/{application-name}",
             "x-ms-skip-url-encoding": true
           },
           {
@@ -599,9 +599,9 @@
         ],
         "responses": {
           "200": {
-            "description": "OK - Returns the appliance.",
+            "description": "OK - Returns the managed application.",
             "schema": {
-              "$ref": "#/definitions/Appliance"
+              "$ref": "#/definitions/Application"
             }
           },
           "404": {
@@ -617,17 +617,17 @@
       },
       "delete": {
         "tags": [
-          "Appliances"
+          "Applications"
         ],
-        "operationId": "Appliances_DeleteById",
-        "description": "Deletes the appliance.",
+        "operationId": "Applications_DeleteById",
+        "description": "Deletes the managed application.",
         "parameters": [
           {
-            "name": "applianceId",
+            "name": "applicationId",
             "in": "path",
             "required": true,
             "type": "string",
-            "description": "The fully qualified ID of the appliance, including the appliance name and the appliance resource type. Use the format, /subscriptions/{guid}/resourceGroups/{resource-group-name}/Microsoft.Solutions/appliances/{appliance-name}",
+            "description": "The fully qualified ID of the managed application, including the managed application name and the managed application resource type. Use the format, /subscriptions/{guid}/resourceGroups/{resource-group-name}/Microsoft.Solutions/applications/{application-name}",
             "x-ms-skip-url-encoding": true
           },
           {
@@ -652,17 +652,17 @@
       },
       "put": {
         "tags": [
-          "Appliances"
+          "Applications"
         ],
-        "operationId": "Appliances_CreateOrUpdateById",
-        "description": "Creates a new appliance.",
+        "operationId": "Applications_CreateOrUpdateById",
+        "description": "Creates a new managed application.",
         "parameters": [
           {
-            "name": "applianceId",
+            "name": "applicationId",
             "in": "path",
             "required": true,
             "type": "string",
-            "description": "The fully qualified ID of the appliance, including the appliance name and the appliance resource type. Use the format, /subscriptions/{guid}/resourceGroups/{resource-group-name}/Microsoft.Solutions/appliances/{appliance-name}",
+            "description": "The fully qualified ID of the managed application, including the managed application name and the managed application resource type. Use the format, /subscriptions/{guid}/resourceGroups/{resource-group-name}/Microsoft.Solutions/applications/{application-name}",
             "x-ms-skip-url-encoding": true
           },
           {
@@ -670,9 +670,9 @@
             "in": "body",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/Appliance"
+              "$ref": "#/definitions/Application"
             },
-            "description": "Parameters supplied to the create or update an appliance."
+            "description": "Parameters supplied to the create or update a managed application."
           },
           {
             "$ref": "#/parameters/ApiVersionParameter"
@@ -680,15 +680,15 @@
         ],
         "responses": {
           "200": {
-            "description": "Created - Returns information about the appliance, including provisioning status.",
+            "description": "Created - Returns information about the managed application, including provisioning status.",
             "schema": {
-              "$ref": "#/definitions/Appliance"
+              "$ref": "#/definitions/Application"
             }
           },
           "201": {
-            "description": "Created - Returns information about the appliance, including provisioning status.",
+            "description": "Created - Returns information about the managed application, including provisioning status.",
             "schema": {
-              "$ref": "#/definitions/Appliance"
+              "$ref": "#/definitions/Application"
             }
           },
           "default": {
@@ -702,26 +702,26 @@
       },
       "patch": {
         "tags": [
-          "Appliances"
+          "Applications"
         ],
-        "operationId": "Appliances_UpdateById",
-        "description": "Updates an existing appliance. The only value that can be updated via PATCH currently is the tags.",
+        "operationId": "Applications_UpdateById",
+        "description": "Updates an existing managed application. The only value that can be updated via PATCH currently is the tags.",
         "parameters": [
           {
-            "name": "applianceId",
+            "name": "applicationId",
             "in": "path",
             "required": true,
             "type": "string",
-            "description": "The fully qualified ID of the appliance, including the appliance name and the appliance resource type. Use the format, /subscriptions/{guid}/resourceGroups/{resource-group-name}/Microsoft.Solutions/appliances/{appliance-name}",
+            "description": "The fully qualified ID of the managed application, including the managed application name and the managed application resource type. Use the format, /subscriptions/{guid}/resourceGroups/{resource-group-name}/Microsoft.Solutions/applications/{application-name}",
             "x-ms-skip-url-encoding": true
           },
           {
             "name": "parameters",
             "in": "body",
             "schema": {
-              "$ref": "#/definitions/Appliance"
+              "$ref": "#/definitions/Application"
             },
-            "description": "Parameters supplied to update an existing appliance."
+            "description": "Parameters supplied to update an existing managed application."
           },
           {
             "$ref": "#/parameters/ApiVersionParameter"
@@ -729,9 +729,9 @@
         ],
         "responses": {
           "200": {
-            "description": "Created - Returns information about the appliance, including provisioning status.",
+            "description": "Created - Returns information about the managed application, including provisioning status.",
             "schema": {
-              "$ref": "#/definitions/Appliance"
+              "$ref": "#/definitions/Application"
             }
           },
           "default": {
@@ -743,20 +743,20 @@
         }
       }
     },
-    "/{applianceDefinitionId}": {
+    "/{applicationDefinitionId}": {
       "get": {
         "tags": [
-          "ApplianceDefinitions"
+          "ApplicationDefinitions"
         ],
-        "operationId": "ApplianceDefinitions_GetById",
-        "description": "Gets the appliance definition.",
+        "operationId": "ApplicationDefinitions_GetById",
+        "description": "Gets the managed application definition.",
         "parameters": [
           {
-            "name": "applianceDefinitionId",
+            "name": "applicationDefinitionId",
             "in": "path",
             "required": true,
             "type": "string",
-            "description": "The fully qualified ID of the appliance definition, including the appliance name and the appliance definition resource type. Use the format, /subscriptions/{guid}/resourceGroups/{resource-group-name}/Microsoft.Solutions/applianceDefinitions/{applianceDefinition-name}",
+            "description": "The fully qualified ID of the managed application definition, including the managed application name and the managed application definition resource type. Use the format, /subscriptions/{guid}/resourceGroups/{resource-group-name}/Microsoft.Solutions/applicationDefinitions/{applicationDefinition-name}",
             "x-ms-skip-url-encoding": true
           },
           {
@@ -765,9 +765,9 @@
         ],
         "responses": {
           "200": {
-            "description": "OK - Returns the appliance definition.",
+            "description": "OK - Returns the managed application definition.",
             "schema": {
-              "$ref": "#/definitions/ApplianceDefinition"
+              "$ref": "#/definitions/ApplicationDefinition"
             }
           },
           "404": {
@@ -783,17 +783,17 @@
       },
       "delete": {
         "tags": [
-          "ApplianceDefinitions"
+          "ApplicationDefinitions"
         ],
-        "operationId": "ApplianceDefinitions_DeleteById",
-        "description": "Deletes the appliance definition.",
+        "operationId": "ApplicationDefinitions_DeleteById",
+        "description": "Deletes the managed application definition.",
         "parameters": [
           {
-            "name": "applianceDefinitionId",
+            "name": "applicationDefinitionId",
             "in": "path",
             "required": true,
             "type": "string",
-            "description": "The fully qualified ID of the appliance definition, including the appliance name and the appliance definition resource type. Use the format, /subscriptions/{guid}/resourceGroups/{resource-group-name}/Microsoft.Solutions/applianceDefinitions/{applianceDefinition-name}",
+            "description": "The fully qualified ID of the managed application definition, including the managed application name and the managed application definition resource type. Use the format, /subscriptions/{guid}/resourceGroups/{resource-group-name}/Microsoft.Solutions/applicationDefinitions/{applicationDefinition-name}",
             "x-ms-skip-url-encoding": true
           },
           {
@@ -821,17 +821,17 @@
       },
       "put": {
         "tags": [
-          "ApplianceDefinitions"
+          "ApplicationDefinitions"
         ],
-        "operationId": "ApplianceDefinitions_CreateOrUpdateById",
-        "description": "Creates a new appliance definition.",
+        "operationId": "ApplicationDefinitions_CreateOrUpdateById",
+        "description": "Creates a new managed application definition.",
         "parameters": [
           {
-            "name": "applianceDefinitionId",
+            "name": "applicationDefinitionId",
             "in": "path",
             "required": true,
             "type": "string",
-            "description": "The fully qualified ID of the appliance definition, including the appliance name and the appliance definition resource type. Use the format, /subscriptions/{guid}/resourceGroups/{resource-group-name}/Microsoft.Solutions/applianceDefinitions/{applianceDefinition-name}",
+            "description": "The fully qualified ID of the managed application definition, including the managed application name and the managed application definition resource type. Use the format, /subscriptions/{guid}/resourceGroups/{resource-group-name}/Microsoft.Solutions/applicationDefinitions/{applicationDefinition-name}",
             "x-ms-skip-url-encoding": true
           },
           {
@@ -839,9 +839,9 @@
             "in": "body",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/ApplianceDefinition"
+              "$ref": "#/definitions/ApplicationDefinition"
             },
-            "description": "Parameters supplied to the create or update an appliance definition."
+            "description": "Parameters supplied to the create or update a managed application definition."
           },
           {
             "$ref": "#/parameters/ApiVersionParameter"
@@ -849,15 +849,15 @@
         ],
         "responses": {
           "200": {
-            "description": "OK - Returns information about the appliance definition, including provisioning status.",
+            "description": "OK - Returns information about the managed application definition, including provisioning status.",
             "schema": {
-              "$ref": "#/definitions/ApplianceDefinition"
+              "$ref": "#/definitions/ApplicationDefinition"
             }
           },
           "201": {
-            "description": "Created - Returns information about the appliance definition, including provisioning status.",
+            "description": "Created - Returns information about the managed application definition, including provisioning status.",
             "schema": {
-              "$ref": "#/definitions/ApplianceDefinition"
+              "$ref": "#/definitions/ApplicationDefinition"
             }
           },
           "default": {
@@ -872,12 +872,12 @@
     }
   },
   "definitions": {
-    "Appliance": {
+    "Application": {
       "properties": {
         "properties": {
           "x-ms-client-flatten": true,
-          "$ref": "#/definitions/ApplianceProperties",
-          "description": "The appliance properties."
+          "$ref": "#/definitions/ApplicationProperties",
+          "description": "The managed application properties."
         },
         "plan": {
           "$ref": "#/definitions/Plan",
@@ -885,7 +885,7 @@
         },
         "kind": {
           "type": "string",
-          "description": "The kind of the appliance. Allowed values are MarketPlace and ServiceCatalog.",
+          "description": "The kind of the managed application. Allowed values are MarketPlace and ServiceCatalog.",
           "pattern": "^[-\\w\\._,\\(\\)]+$"
         }
       },
@@ -898,14 +898,14 @@
           "$ref": "#/definitions/GenericResource"
         }
       ],
-      "description": "Information about appliance."
+      "description": "Information about managed application."
     },
-    "AppliancePatchable": {
+    "ApplicationPatchable": {
       "properties": {
         "properties": {
           "x-ms-client-flatten": true,
-          "$ref": "#/definitions/AppliancePropertiesPatchable",
-          "description": "The appliance properties."
+          "$ref": "#/definitions/ApplicationPropertiesPatchable",
+          "description": "The managed application properties."
         },
         "plan": {
           "$ref": "#/definitions/PlanPatchable",
@@ -913,7 +913,7 @@
         },
         "kind": {
           "type": "string",
-          "description": "The kind of the appliance. Allowed values are MarketPlace and ServiceCatalog.",
+          "description": "The kind of the managed application. Allowed values are MarketPlace and ServiceCatalog.",
           "pattern": "^[-\\w\\._,\\(\\)]+$"
         }
       },
@@ -922,14 +922,14 @@
           "$ref": "#/definitions/GenericResource"
         }
       ],
-      "description": "Information about appliance."
+      "description": "Information about managed application."
     },
-    "ApplianceDefinition": {
+    "ApplicationDefinition": {
       "properties": {
         "properties": {
           "x-ms-client-flatten": true,
-          "$ref": "#/definitions/ApplianceDefinitionProperties",
-          "description": "The appliance definition properties."
+          "$ref": "#/definitions/ApplicationDefinitionProperties",
+          "description": "The managed application definition properties."
         }
       },
       "required": [
@@ -940,31 +940,31 @@
           "$ref": "#/definitions/GenericResource"
         }
       ],
-      "description": "Information about appliance definition."
+      "description": "Information about managed application definition."
     },
-    "ApplianceProperties": {
+    "ApplicationProperties": {
       "properties": {
         "managedResourceGroupId": {
           "type": "string",
           "description": "The managed resource group Id."
         },
-        "applianceDefinitionId": {
+        "applicationDefinitionId": {
           "type": "string",
-          "description": "The fully qualified path of appliance definition Id."
+          "description": "The fully qualified path of managed application definition Id."
         },
         "parameters": {
           "type": "object",
-          "description": "Name and value pairs that define the appliance parameters. It can be a JObject or a well formed JSON string."
+          "description": "Name and value pairs that define the managed application parameters. It can be a JObject or a well formed JSON string."
         },
         "outputs": {
           "readOnly": true,
           "type": "object",
-          "description": "Name and value pairs that define the appliance outputs."
+          "description": "Name and value pairs that define the managed application outputs."
         },
         "provisioningState": {
           "readOnly": true,
           "$ref": "#/definitions/ProvisioningState",
-          "description": "The appliance provisioning state."
+          "description": "The managed application provisioning state."
         },
         "uiDefinitionUri": {
           "type": "string",
@@ -974,78 +974,89 @@
       "required": [
         "managedResourceGroupId"
       ],
-      "description": "The appliance properties."
+      "description": "The managed application properties."
     },
-    "AppliancePropertiesPatchable": {
+    "ApplicationPropertiesPatchable": {
       "properties": {
         "managedResourceGroupId": {
           "type": "string",
           "description": "The managed resource group Id."
         },
-        "applianceDefinitionId": {
+        "applicationDefinitionId": {
           "type": "string",
-          "description": "The fully qualified path of appliance definition Id."
+          "description": "The fully qualified path of managed application definition Id."
         },
         "parameters": {
           "type": "object",
-          "description": "Name and value pairs that define the appliance parameters. It can be a JObject or a well formed JSON string."
+          "description": "Name and value pairs that define the managed application parameters. It can be a JObject or a well formed JSON string."
         },
         "outputs": {
           "readOnly": true,
           "type": "object",
-          "description": "Name and value pairs that define the appliance outputs."
+          "description": "Name and value pairs that define the managed application outputs."
         },
         "provisioningState": {
           "readOnly": true,
           "$ref": "#/definitions/ProvisioningState",
-          "description": "The appliance provisioning state."
+          "description": "The managed application provisioning state."
         },
         "uiDefinitionUri": {
           "type": "string",
           "description": "The blob URI where the UI definition file is located."
         }
       },
-      "description": "The appliance properties."
+      "description": "The managed application properties."
     },
-    "ApplianceDefinitionProperties": {
+    "ApplicationDefinitionProperties": {
       "properties": {
         "lockLevel": {
-          "$ref": "#/definitions/ApplianceLockLevel",
-          "description": "The appliance lock level."
+          "$ref": "#/definitions/ApplicationLockLevel",
+          "description": "The managed application lock level."
         },
         "displayName": {
           "type": "string",
-          "description": "The appliance definition display name."
+          "description": "The managed application definition display name."
+        },
+        "isEnabled": {
+          "type": "string",
+          "description": "A value indicating whether the package is enabled or not."
         },
         "authorizations": {
-          "description": "The appliance provider authorizations.",
+          "description": "The managed application provider authorizations.",
           "type": "array",
           "items": {
-            "$ref": "#/definitions/ApplianceProviderAuthorization"
+            "$ref": "#/definitions/ApplicationProviderAuthorization"
           }
         },
         "artifacts": {
-          "description": "The collection of appliance artifacts. The portal will use the files specified as artifacts to construct the user experience of creating an appliance from an appliance definition.",
+          "description": "The collection of managed application artifacts. The portal will use the files specified as artifacts to construct the user experience of creating a managed application from a managed application definition.",
           "type": "array",
           "items": {
-            "$ref": "#/definitions/ApplianceArtifact"
+            "$ref": "#/definitions/ApplicationArtifact"
           }
         },
         "description": {
           "type": "string",
-          "description": "The appliance definition description."
+          "description": "The managed application definition description."
         },
         "packageFileUri": {
           "type": "string",
-          "description": "The appliance definition package file Uri."
+          "description": "The managed application definition package file Uri. Use this element"
+        },
+        "mainTemplate": {
+          "type": "object",
+          "description": "The inline main template json which has resources to be provisioned. It can be a JObject or well-formed JSON string."
+        },
+        "createUiDefinition": {
+          "type": "object",
+          "description": "The createUiDefinition json for the backing template with Microsoft.Solutions/applications resource. It can be a JObject or well-formed JSON string."
         }
       },
       "required": [
         "lockLevel",
-        "authorizations",
-        "packageFileUri"
+        "authorizations"
       ],
-      "description": "The appliance definition properties."
+      "description": "The managed application definition properties."
     },
     "Plan": {
       "properties": {
@@ -1076,7 +1087,7 @@
         "product",
         "version"
       ],
-      "description": "Plan for the appliance."
+      "description": "Plan for the managed application."
     },
     "PlanPatchable": {
       "properties": {
@@ -1101,7 +1112,7 @@
           "description": "The plan's version."
         }
       },
-      "description": "Plan for the appliance."
+      "description": "Plan for the managed application."
     },
     "GenericResource": {
       "properties": {
@@ -1216,40 +1227,40 @@
       "description": "Resource information.",
       "x-ms-azure-resource": true
     },
-    "ApplianceListResult": {
+    "ApplicationListResult": {
       "properties": {
         "value": {
           "type": "array",
           "items": {
-            "$ref": "#/definitions/Appliance"
+            "$ref": "#/definitions/Application"
           },
-          "description": "The array of appliances."
+          "description": "The array of managed applications."
         },
         "nextLink": {
           "type": "string",
           "description": "The URL to use for getting the next set of results."
         }
       },
-      "description": "List of appliances."
+      "description": "List of managed applications."
     },
-    "ApplianceDefinitionListResult": {
+    "ApplicationDefinitionListResult": {
       "properties": {
         "value": {
           "type": "array",
           "items": {
-            "$ref": "#/definitions/ApplianceDefinition"
+            "$ref": "#/definitions/ApplicationDefinition"
           },
-          "description": "The array of appliance definitions."
+          "description": "The array of managed application definitions."
         },
         "nextLink": {
           "type": "string",
           "description": "The URL to use for getting the next set of results."
         }
       },
-      "description": "List of appliance definitions."
+      "description": "List of managed application definitions."
     },
     "ProvisioningState": {
-      "description": "Provisioning status of the appliance.",
+      "description": "Provisioning status of the managed application.",
       "readOnly": true,
       "enum": [
         "Accepted",
@@ -1270,8 +1281,8 @@
         "modelAsString": true
       }
     },
-    "ApplianceLockLevel": {
-      "description": "The appliance lock level.",
+    "ApplicationLockLevel": {
+      "description": "The managed application lock level.",
       "enum": [
         "CanNotDelete",
         "ReadOnly",
@@ -1279,58 +1290,58 @@
       ],
       "type": "string",
       "x-ms-enum": {
-        "name": "ApplianceLockLevel",
+        "name": "ApplicationLockLevel",
         "modelAsString": false
       }
     },
-    "ApplianceArtifactType": {
-      "description": "The appliance artifact type.",
+    "ApplicationArtifactType": {
+      "description": "The managed application artifact type.",
       "enum": [
         "Template",
         "Custom"
       ],
       "type": "string",
       "x-ms-enum": {
-        "name": "ApplianceArtifactType",
+        "name": "ApplicationArtifactType",
         "modelAsString": false
       }
     },
-    "ApplianceArtifact": {
+    "ApplicationArtifact": {
       "properties": {
         "name": {
           "type": "string",
-          "description": "The appliance artifact name."
+          "description": "The managed application artifact name."
         },
         "uri": {
           "type": "string",
-          "description": "The appliance artifact blob uri."
+          "description": "The managed application artifact blob uri."
         },
         "type": {
-          "$ref": "#/definitions/ApplianceArtifactType",
-          "description": "The the appliance artifact type."
+          "$ref": "#/definitions/ApplicationArtifactType",
+          "description": "The managed application artifact type."
         }
       },
-      "description": "Appliance artifact."
+      "description": "Managed application artifact."
     },
-    "ApplianceProviderAuthorization": {
+    "ApplicationProviderAuthorization": {
       "properties": {
         "principalId": {
           "type": "string",
-          "description": "The provider's principal identifier. This is the identity that the provider will use to call ARM to manage the appliance resources."
+          "description": "The provider's principal identifier. This is the identity that the provider will use to call ARM to manage the managed application resources."
         },
         "roleDefinitionId": {
           "type": "string",
-          "description": "The provider's role definition identifier. This role will define all the permissions that the provider must have on the appliance's container resource group. This role definition cannot have permission to delete the resource group."
+          "description": "The provider's role definition identifier. This role will define all the permissions that the provider must have on the managed application's container resource group. This role definition cannot have permission to delete the resource group."
         }
       },
       "required": [
         "principalId",
         "roleDefinitionId"
       ],
-      "description": "The appliance provider authorization."
+      "description": "The managed application provider authorization."
     },
     "ErrorResponse": {
-      "description": "Error reponse indicates ARM appliance is not able to process the incoming request. The reason is provided in the error message.",
+      "description": "Error reponse indicates managed application is not able to process the incoming request. The reason is provided in the error message.",
       "type": "object",
       "properties": {
         "httpStatus": {
