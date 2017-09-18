@@ -299,7 +299,7 @@
     }
   },
   "definitions": {
-    "Resource": {
+    "ProxyOnlyResource": {
       "properties": {
         "id": {
           "type": "string",
@@ -315,27 +315,10 @@
           "type": "string",
           "readOnly": true,
           "description": "Azure resource type"
-        },
-        "location": {
-          "type": "string",
-          "description": "Resource location",
-          "x-ms-mutability": [
-              "create",
-              "read"
-          ]
-        },
-        "tags": {
-          "additionalProperties": {
-            "type": "string"
-          },
-          "description": "Resource tags"
         }
       },
-      "required": [
-        "location"
-      ],
       "x-ms-azure-resource": true,
-      "description": "An azure resource object"
+      "description": "A proxy only azure resource object"
     },
     "RetentionPolicy": {
       "properties": {
@@ -433,7 +416,7 @@
       "type": "object",
       "allOf": [
         {
-          "$ref": "#/definitions/Resource"
+          "$ref": "#/definitions/ProxyOnlyResource"
         }
       ],
       "properties": {
@@ -442,7 +425,7 @@
           "$ref": "#/definitions/DiagnosticSettings"
         }
       },
-      "description": "Description of diagnostic setting resource."
+      "description": "The diagnostic setting resource."
     },
     "DiagnosticSettingsResourceCollection": {
       "properties": {

@@ -39,6 +39,7 @@ These settings apply only when `--tag=package-2017-08` is specified on the comma
 ``` yaml $(tag) == 'package-2017-08'
 input-file:
 - microsoft.insights/2015-04-01/autoscale_API.json
+- microsoft.insights/2015-04-01/operations_API.json
 - microsoft.insights/2016-03-01/alertRulesIncidents_API.json
 - microsoft.insights/2016-03-01/alertRules_API.json
 - microsoft.insights/2016-03-01/logProfiles_API.json

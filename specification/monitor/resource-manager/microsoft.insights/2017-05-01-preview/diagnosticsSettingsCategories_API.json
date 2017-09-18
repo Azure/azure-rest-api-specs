@@ -149,7 +149,7 @@
     }
   },
   "definitions": {
-    "Resource": {
+    "ProxyOnlyResource": {
       "properties": {
         "id": {
           "type": "string",
@@ -165,33 +165,21 @@
           "type": "string",
           "readOnly": true,
           "description": "Azure resource type"
-        },
-        "location": {
-          "type": "string",
-          "description": "Resource location",
-          "x-ms-mutability": [
-              "create",
-              "read"
-          ]
-        },
-        "tags": {
-          "additionalProperties": {
-            "type": "string"
-          },
-          "description": "Resource tags"
         }
       },
-      "required": [
-        "location"
-      ],
       "x-ms-azure-resource": true,
-      "description": "An azure resource object"
+      "description": "A proxy only azure resource object"
     },
     "DiagnosticSettingsCategory": {
       "properties": {
         "categoryType": {
+          "enum": ["Metrics", "Logs"],
           "type": "string",
-          "description": "The type of the diagnostic settings category. Can be 'Logs' or 'Metrics'."
+          "x-ms-enum": {
+             "name": "categoryType"
+          },
+          "x-nullable": false,
+          "description": "The type of the diagnostic settings category."
         }
       },
       "description": "The diagnostic settings Category."
@@ -200,7 +188,7 @@
       "type": "object",
       "allOf": [
         {
-          "$ref": "#/definitions/Resource"
+          "$ref": "#/definitions/ProxyOnlyResource"
         }
       ],
       "properties": {
@@ -209,7 +197,7 @@
           "$ref": "#/definitions/DiagnosticSettingsCategory"
         }
       },
-      "description": "Description of diagnostic setting category."
+      "description": "The diagnostic settings category resource."
     },
     "DiagnosticSettingsCategoryResourceCollection": {
       "properties": {
