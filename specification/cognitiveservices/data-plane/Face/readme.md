@@ -26,7 +26,7 @@ These settings apply only when `--csharp` is specified on the command line.
 csharp: 
   license-header: MICROSOFT_MIT_NO_VERSION
   azure-arm: false
-  namespace: Microsoft.CognitiveServices.Vision.Face
+  namespace: Microsoft.Azure.CognitiveServices.Vision.Face
   output-folder: $(csharp-sdks-folder)/CognitiveServices/dataPlane/Vision/Microsoft.CognitiveServices.Vision/Generated/Face
   clear-output-folder: true
 ```
