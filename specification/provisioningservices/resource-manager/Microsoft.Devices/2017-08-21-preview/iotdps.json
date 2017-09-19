@@ -1,1600 +1,1370 @@
 {
-	"swagger": "2.0",
-	"info": {
-		"version": "2017-08-21-preview",
-		"title": "iotDpsClient",
-		"description": "API for using the IoT Device Provisioning Service Features",
-		"x-ms-code-generation-settings": {
-			"header": "MICROSOFT_MIT_NO_VERSION"
-		}
-	},
-	"host": "management.azure.com",
-	"schemes": ["https"],
-	"consumes": [ "application/json" ],
-	"produces": [ "application/json" ],
-	"paths": {
-		"/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Devices/provisioningServices/{provisioningServiceName}/certificates/{certificateName}": {
-			"get": {
-				"tags": ["GET"],
-				"operationId": "DpsCertificate_Get",
-				"consumes": [],
-				"produces": ["application/json"],
-				"parameters": [{
-					"name": "certificateName",
-					"in": "path",
-					"required": true,
-					"type": "string"
-				}, {
-					"$ref": "#/parameters/subscriptionId"
-				}, {
-					"name": "resourceGroupName",
-					"in": "path",
-					"required": true,
-					"type": "string"
-				}, {
-					"name": "provisioningServiceName",
-					"in": "path",
-					"required": true,
-					"type": "string"
-				}, {
-					"$ref": "#/parameters/api-version"
-				}],
-				"responses": {
-					"200": {
-						"description": "OK",
-						"schema": {
-							"$ref": "#/definitions/CertificateResponse"
-						}
-					},
-					"default": {
-						"description": "DefaultErrorResponse",
-						"schema": {
-							"$ref": "#/definitions/ErrorDetails"
-						}
-					}
-				},
-				"deprecated": false
-			},
-			"delete": {
-				"tags": ["DELETE"],
-				"operationId": "DpsCertificate_Delete",
-				"consumes": [],
-				"produces": ["application/json"],
-				"parameters": [{
-					"$ref": "#/parameters/subscriptionId"
-				}, {
-					"name": "resourceGroupName",
-					"in": "path",
-					"required": true,
-					"type": "string"
-				}, {
-					"name": "provisioningServiceName",
-					"in": "path",
-					"required": true,
-					"type": "string"
-				}, {
-					"name": "certificateName",
-					"in": "path",
-					"required": true,
-					"type": "string"
-				}, {
-					"name": "certificate.name",
-					"in": "query",
-					"required": false,
-					"type": "string"
-				}, {
-					"name": "certificate.rawBytes",
-					"in": "query",
-					"required": false,
-					"type": "string",
-					"format": "byte"
-				}, {
-					"name": "certificate.isVerified",
-					"in": "query",
-					"required": false,
-					"type": "boolean"
-				}, {
-					"name": "certificate.purpose",
-					"in": "query",
-					"required": false,
-					"type": "string",
-					"enum": ["clientAuthentication", "serverAuthentication"]
-				}, {
-					"name": "certificate.created",
-					"in": "query",
-					"required": false,
-					"type": "string",
-					"format": "date-time"
-				}, {
-					"name": "certificate.lastUpdated",
-					"in": "query",
-					"required": false,
-					"type": "string",
-					"format": "date-time"
-				}, {
-					"name": "certificate.hasPrivateKey",
-					"in": "query",
-					"required": false,
-					"type": "boolean"
-				}, {
-					"name": "certificate.nonce",
-					"in": "query",
-					"required": false,
-					"type": "string"
-				}, {
-					"$ref": "#/parameters/api-version"
-				}],
-				"responses": {
-					"200": {
-						"description": "OK"
-					},
-					"204": {
-						"description": "NoContent"
-					},
-					"default": {
-						"description": "DefaultErrorResponse",
-						"schema": {
-							"$ref": "#/definitions/ErrorDetails"
-						}
-					}
-				},
-				"deprecated": false
-			}
-		},
-		"/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Devices/provisioningServices/{provisioningServiceName}": {
-			"get": {
-				"tags": ["GET"],
-				"operationId": "IotDpsResource_Get",
-				"summary": "Get the non-security related metadata of a provisioning service.",
-				"description": "Get the non-security related metadata of a provisioning service.",
-				"parameters": [{
-					"name": "provisioningServiceName",
-					"in": "path",
-					"required": true,
-					"type": "string"
-				}, {
-					"$ref": "#/parameters/subscriptionId"
-				}, {
-					"name": "resourceGroupName",
-					"in": "path",
-					"required": true,
-					"type": "string"
-				}, {
-					"$ref": "#/parameters/api-version"
-				}],
-				"responses": {
-					"200": {
-						"description": "OK",
-						"schema": {
-							"$ref": "#/definitions/ProvisioningServiceDescription"
-						}
-					},
-					"default": {
-						"description": "DefaultErrorResponse",
-						"schema": {
-							"$ref": "#/definitions/ErrorDetails"
-						}
-					}
-				},
-				"deprecated": false
-			},
-			"put": {
-				"tags": ["PUT"],
-				"operationId": "IotDpsResource_CreateOrUpdate",
-				"summary": "Create or update the metadata of a provisioning service.",
-				"description": "Create or update the metadata of a provisioning service. The usual pattern to modify a property is to retrieve the provisioning service metadata and security metadata, and then combine them with the modified values in a new body to update the provisioning service.",
-				"x-ms-long-running-operation": true,
-				"parameters": [{
-					"$ref": "#/parameters/subscriptionId"
-				}, {
-					"name": "resourceGroupName",
-					"in": "path",
-					"required": true,
-					"type": "string"
-				}, {
-					"name": "provisioningServiceName",
-					"in": "path",
-					"required": true,
-					"type": "string"
-				}, {
-					"name": "ProvisioningServiceDescription",
-					"in": "body",
-					"required": true,
-					"schema": {
-						"$ref": "#/definitions/ProvisioningServiceDescription"
-					}
-				}, {
-					"$ref": "#/parameters/api-version"
-				}],
-				"responses": {
-					"200": {
-						"description": "This is returned as a response to the status polling request for the create or update operation. The body contains the resource representation that indicates a transitional provisioning state.",
-						"schema": {
-							"$ref": "#/definitions/Object"
-						}
-					},
-					"201": {
-						"description": "Created",
-						"schema": {
-							"$ref": "#/definitions/ProvisioningServiceDescription"
-						}
-					},
-					"default": {
-						"description": "DefaultErrorResponse",
-						"schema": {
-							"$ref": "#/definitions/ErrorDetails"
-						}
-					}
-				},
-				"deprecated": false
-			},
-			"delete": {
-				"tags": ["DELETE"],
-				"operationId": "IotDpsResource_Delete",
-				"consumes": [],
-				"produces": ["application/json"],
-				"parameters": [{
-					"name": "provisioningServiceName",
-					"in": "path",
-					"required": true,
-					"type": "string"
-				}, {
-					"$ref": "#/parameters/subscriptionId"
-				}, {
-					"name": "resourceGroupName",
-					"in": "path",
-					"required": true,
-					"type": "string"
-				}, {
-					"$ref": "#/parameters/api-version"
-				}],
-				"responses": {
-					"200": {
-						"description": "This is returned as a response to the status polling request for the delete operation. The body contains the resource representation that indicates a transitional provisioning state.",
-						"schema": {
-							"$ref": "#/definitions/Object"
-						}
-					},
-					"202": {
-						"description": "The provisioning service resource provider always returns a 202 Accepted status code with valid Location and Retry-After headers. The resource provider also sets the Azure-AsyncOperation header with a URL that points to the operation resource for this operation. Subsequent GET attempts on the resource after a DELETE operation return a resource representation that indicates a transitional provisioning state (such as Terminating). To retrieve the status of the operation, a client can either poll the URL returned in the Location header after the Retry-After interval, get the provisioning service status directly, or query the operation resource.",
-						"schema": {
-							"$ref": "#/definitions/ProvisioningServiceDescription"
-						},
-					"204": {
-						"description": "Once the long running delete operation completes successfully, a 204 No Content status code is returned when the status polling request finds the provisioning service metadata in the service and the status of the delete operation is set to a completed state.",
-						"schema": {
-							"$ref": "#/definitions/ProvisioningServiceDescription"
-						}					
-					},
-					"404": {
-						"description": "After the long running delete operation completes successfully, a 404 Not Found is returned when the status polling request no longer finds the provisioning service metadata in the service."
-					},
-					"default": {
-						"description": "DefaultErrorResponse",
-						"schema": {
-							"$ref": "#/definitions/ErrorDetails"
-						}
-					}
-				},
-				"deprecated": false
-			}
-		},
-		"/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Devices/provisioningServices/{provisioningServiceName}/certificates": {
-			"get": {
-				"tags": ["GET"],
-				"operationId": "DpsCertificates_GetAll",
-				"consumes": [],
-				"produces": ["application/json"],
-				"parameters": [{
-					"$ref": "#/parameters/subscriptionId"
-				}, {
-					"name": "resourceGroupName",
-					"in": "path",
-					"required": true,
-					"type": "string"
-				}, {
-					"name": "provisioningServiceName",
-					"in": "path",
-					"required": true,
-					"type": "string"
-				}, {
-					"$ref": "#/parameters/api-version"
-				}],
-				"responses": {
-					"200": {
-						"description": "OK",
-						"schema": {
-							"type": "array",
-							"items": {
-								"$ref": "#/definitions/CertificateResponse"
-							}
-						}
-					},
-					"default": {
-						"description": "DefaultErrorResponse",
-						"schema": {
-							"$ref": "#/definitions/ErrorDetails"
-						}
-					}
-				},
-				"deprecated": false
-			}
-		},
-		"/subscriptions/{subscriptionId}/providers/Microsoft.Devices/provisioningServices": {
-			"get": {
-				"tags": ["GET"],
-				"operationId": "IotDpsResource_ListBySubscription",
-				"summary": "Get all the provisioning services in a subscription.",
-				"description": "Get all the provisioning services in a subscription.",
-				"parameters": [{
-					"$ref": "#/parameters/subscriptionId"
-				}, {
-					"$ref": "#/parameters/api-version"
-				}],
-				"responses": {
-					"200": {
-						"description": "This is a synchronous operation. The body contains a JSON-serialized array of the metadata from all the provisioning services in the subscription.",
-						"schema": {
-							"$ref": "#/definitions/ProvisioningServiceDescriptionListResult"
-						}
-					},
-					"default": {
-						"description": "DefaultErrorResponse",
-						"schema": {
-							"$ref": "#/definitions/ErrorDetails"
-						}
-					}
-				},
-				"deprecated": false,
-				"x-ms-pageable": {
-					"nextLinkName": "nextLink"
-				}
-			}
-		},
-		"/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Devices/provisioningServices": {
-			"get": {
-				"tags": ["GET"],
-				"operationId": "IotDpsResource_ListByResourceGroup",
-				"consumes": [],
-				"produces": ["application/json"],
-				"parameters": [{
-					"$ref": "#/parameters/subscriptionId"
-				}, {
-					"name": "resourceGroupName",
-					"in": "path",
-					"required": true,
-					"type": "string"
-				}, {
-					"$ref": "#/parameters/api-version"
-				}],
-				"responses": {
-					"200": {
-						"description": "OK",
-						"schema": {
-							"$ref": "#/definitions/ProvisioningServiceDescriptionListResult"
-						}
-					},
-					"default": {
-						"description": "DefaultErrorResponse",
-						"schema": {
-							"$ref": "#/definitions/ErrorDetails"
-						}
-					}
-				},
-				"deprecated": false,
-				"x-ms-pageable": {
-					"nextLinkName": "nextLink"
-				}
-			}
-		},
-		"/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Devices/provisioningServices/{provisioningServiceName}/skus": {
-			"get": {
-				"tags": ["GET"],
-				"operationId": "IotDpsResource_GetValidSkus",
-				"summary": "Get the list of valid SKUs for a provisioning service.",
-				"description": "Get the list of valid SKUs for a provisioning service.",
-				"parameters": [{
-					"name": "provisioningServiceName",
-					"in": "path",
-					"required": true,
-					"type": "string"
-				}, {
-					"$ref": "#/parameters/subscriptionId"
-				}, {
-					"name": "resourceGroupName",
-					"in": "path",
-					"required": true,
-					"type": "string"
-				}, {
-					"$ref": "#/parameters/api-version"
-				}],
-				"responses": {
-					"200": {
-						"description": "This is a synchronous operation. The body contains a JSON-serialized array of the valid SKUs for this provisioning service.",
-						"schema": {
-							"$ref": "#/definitions/IotDpsSkuDefinitionListResult"
-						}
-					},
-					"default": {
-						"description": "DefaultErrorResponse",
-						"schema": {
-							"$ref": "#/definitions/ErrorDetails"
-						}
-					}
-				},
-				"deprecated": false,
-				"x-ms-pageable": {
-					"nextLinkName": "nextLink"
-				}
-			}
-		},
-		"/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Devices/provisioningServices/{provisioningServiceName}/certificates/{certificateName}/generateVerificationCode": {
-			"post": {
-				"tags": ["POST"],
-				"operationId": "DpsCertificate_GenerateVerificationCode",
-				"consumes": [],
-				"produces": ["application/json"],
-				"parameters": [{
-					"name": "certificateName",
-					"in": "path",
-					"required": true,
-					"type": "string"
-				}, {
-					"$ref": "#/parameters/subscriptionId"
-				}, {
-					"name": "resourceGroupName",
-					"in": "path",
-					"required": true,
-					"type": "string"
-				}, {
-					"name": "provisioningServiceName",
-					"in": "path",
-					"required": true,
-					"type": "string"
-				}, {
-					"name": "certificate.name",
-					"in": "query",
-					"required": false,
-					"type": "string"
-				}, {
-					"name": "certificate.rawBytes",
-					"in": "query",
-					"required": false,
-					"type": "string",
-					"format": "byte"
-				}, {
-					"name": "certificate.isVerified",
-					"in": "query",
-					"required": false,
-					"type": "boolean"
-				}, {
-					"name": "certificate.purpose",
-					"in": "query",
-					"required": false,
-					"type": "string",
-					"enum": ["clientAuthentication", "serverAuthentication"]
-				}, {
-					"name": "certificate.created",
-					"in": "query",
-					"required": false,
-					"type": "string",
-					"format": "date-time"
-				}, {
-					"name": "certificate.lastUpdated",
-					"in": "query",
-					"required": false,
-					"type": "string",
-					"format": "date-time"
-				}, {
-					"name": "certificate.hasPrivateKey",
-					"in": "query",
-					"required": false,
-					"type": "boolean"
-				}, {
-					"name": "certificate.nonce",
-					"in": "query",
-					"required": false,
-					"type": "string"
-				}, {
-					"$ref": "#/parameters/api-version"
-				}],
-				"responses": {
-					"200": {
-						"description": "OK",
-						"schema": {
-							"$ref": "#/definitions/VerificationCodeResponse"
-						}
-					},
-					"default": {
-						"description": "DefaultErrorResponse",
-						"schema": {
-							"$ref": "#/definitions/ErrorDetails"
-						}
-					}
-				},
-				"deprecated": false
-			}
-		},
-		"/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Devices/provisioningServices/{provisioningServiceName}/certificates/{certificateName}/verify": {
-			"post": {
-				"tags": ["POST"],
-				"operationId": "DpsCertificate_VerifyCertificate",
-				"consumes": ["application/json"],
-				"produces": ["application/json"],
-				"parameters": [{
-					"name": "certificateName",
-					"in": "path",
-					"required": true,
-					"type": "string"
-				}, {
-					"name": "request",
-					"in": "body",
-					"required": true,
-					"schema": {
-						"$ref": "#/definitions/VerificationCodeRequest"
-					}
-				}, {
-					"$ref": "#/parameters/subscriptionId"
-				}, {
-					"name": "resourceGroupName",
-					"in": "path",
-					"required": true,
-					"type": "string"
-				}, {
-					"name": "provisioningServiceName",
-					"in": "path",
-					"required": true,
-					"type": "string"
-				}, {
-					"name": "certificate.name",
-					"in": "query",
-					"required": false,
-					"type": "string"
-				}, {
-					"name": "certificate.rawBytes",
-					"in": "query",
-					"required": false,
-					"type": "string",
-					"format": "byte"
-				}, {
-					"name": "certificate.isVerified",
-					"in": "query",
-					"required": false,
-					"type": "boolean"
-				}, {
-					"name": "certificate.purpose",
-					"in": "query",
-					"required": false,
-					"type": "string",
-					"enum": ["clientAuthentication", "serverAuthentication"]
-				}, {
-					"name": "certificate.created",
-					"in": "query",
-					"required": false,
-					"type": "string",
-					"format": "date-time"
-				}, {
-					"name": "certificate.lastUpdated",
-					"in": "query",
-					"required": false,
-					"type": "string",
-					"format": "date-time"
-				}, {
-					"name": "certificate.hasPrivateKey",
-					"in": "query",
-					"required": false,
-					"type": "boolean"
-				}, {
-					"name": "certificate.nonce",
-					"in": "query",
-					"required": false,
-					"type": "string"
-				}, {
-					"$ref": "#/parameters/api-version"
-				}],
-				"responses": {
-					"200": {
-						"description": "OK",
-						"schema": {
-							"$ref": "#/definitions/CertificateResponse"
-						}
-					},
-					"default": {
-						"description": "DefaultErrorResponse",
-						"schema": {
-							"$ref": "#/definitions/ErrorDetails"
-						}
-					}
-				},
-				"deprecated": false
-			}
-		},
-		"/subscriptions/{subscriptionId}/providers/Microsoft.Devices/checkProvisioningServiceNameAvailability": {
-			"post": {
-				"tags": ["POST"],
-				"operationId": "IotDpsResource_CheckNameAvailability",
-				"summary": "Check if a provisioning service name is available.",
-				"description": "Check if a provisioning service name is available.",
-				"parameters": [{
-					"$ref": "#/parameters/subscriptionId"
-				}, {
-					"name": "arguments",
-					"in": "body",
-					"description": "Set the name parameter in the OperationInputs structure to the name of the provisioning service to check.",
-					"required": true,
-					"schema": {
-						"$ref": "#/definitions/OperationInputs"
-					}
-				}, {
-					"$ref": "#/parameters/api-version"
-				}],
-				"responses": {
-					"200": {
-						"description": "This is a synchronous operation. The body contains a JSON-serialized response that specifies whether the provisioning service name is available. If the name is not available, the body contains the reason.",
-						"schema": {
-							"$ref": "#/definitions/NameAvailabilityInfo"
-						}
-					},
-					"default": {
-						"description": "DefaultErrorResponse",
-						"schema": {
-							"$ref": "#/definitions/ErrorDetails"
-						}
-					}
-				},
-				"deprecated": false
-			}
-		},
-		"/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Devices/provisioningServices/{provisioningServiceName}/listkeys": {
-			"post": {
-				"tags": ["POST"],
-				"operationId": "IotDpsResource_ListKeys",
-				"summary": "Get the security metadata for a provisioning service.",
-				"description": "Get the security metadata for a provisioning service.",
-				"parameters": [{
-					"name": "provisioningServiceName",
-					"in": "path",
-					"required": true,
-					"type": "string"
-				}, {
-					"$ref": "#/parameters/subscriptionId"
-				}, {
-					"name": "resourceGroupName",
-					"in": "path",
-					"required": true,
-					"type": "string"
-				}, {
-					"$ref": "#/parameters/api-version"
-				}],
-				"responses": {
-					"200": {
-						"description": "This is a synchronous operation. The body contains a JSON-serialized array of shared access policies, including keys, that you can use to access the provisioning service endpoints.",,
-						"schema": {
-							"$ref": "#/definitions/SharedAccessSignatureAuthorizationRuleListResult"
-						}
-					},
-					"default": {
-						"description": "DefaultErrorResponse",
-						"schema": {
-							"$ref": "#/definitions/ErrorDetails"
-						}
-					}
-				},
-				"deprecated": false,
-				"x-ms-pageable": {
-					"nextLinkName": "nextLink"
-				}
-			}
-		},
-		"/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Devices/provisioningServices/{provisioningServiceName}/keys/{keyName}/listkeys": {
-			"post": {
-				"tags": ["POST"],
-				"operationId": "IotDpsResource_GetKeysForKeyName",
-				"summary": "Get a shared access policy by name from a provisioning service.",
-				"description": "Get a shared access policy by name from a provisioning service.",
-				"parameters": [{
-					"name": "provisioningServiceName",
-					"in": "path",
-					"required": true,
-					"type": "string"
-				}, {
-					"name": "keyName",
-					"in": "path",
-					"required": true,
-					"type": "string"
-				}, {
-					"$ref": "#/parameters/subscriptionId"
-				}, {
-					"name": "resourceGroupName",
-					"in": "path",
-					"description": "The name of the resource group that contains the provisioning service.",
-					"required": true,
-					"type": "string"
-				}, {
-					"$ref": "#/parameters/api-version"
-				}],
-				"responses": {
-					"200": {
-						"description": "This is a synchronous operation. The body contains a JSON-serialized shared access policy, including keys, that you can use to access one or more provisioning service endpoints.",
-						"schema": {
-							"$ref": "#/definitions/SharedAccessSignatureAuthorizationRule"
-						}
-					},
-					"default": {
-						"description": "DefaultErrorResponse",
-						"schema": {
-							"$ref": "#/definitions/ErrorDetails"
-						}
-					}
-				},
-				"deprecated": false
-			}
-		}
-	},
-	"definitions": {
-		"EventHubProperties": {
-			"type": "object",
-			"properties": {
-				"retentionTimeInDays": {
-					"format": "int64",
-					"type": "integer"
-				},
-				"partitionCount": {
-					"format": "int32",
-					"type": "integer"
-				},
-				"partitionIds": {
-					"type": "array",
-					"items": {
-						"type": "string"
-					}
-				},
-				"path": {
-					"type": "string"
-				},
-				"endpoint": {
-					"type": "string"
-				},
-				"internalAuthorizationPolicies": {
-					"type": "array",
-					"items": {
-						"$ref": "#/definitions/SharedAccessAuthorizationRule"
-					}
-				},
-				"authorizationPolicies": {
-					"type": "array",
-					"items": {
-						"$ref": "#/definitions/SharedAccessAuthorizationRule"
-					}
-				}
-			}
-		},
-		"SharedAccessSignatureAuthorizationRule": {
-			"type": "object",
-			"properties": {
-				"keyName": {
-					"type": "string"
-				},
-				"primaryKey": {
-					"type": "string"
-				},
-				"secondaryKey": {
-					"type": "string"
-				},
-				"rights": {
-					"enum": ["RegistryRead", "RegistryWrite", "ServiceConnect", "DeviceConnect"],
-					"type": "string",
-					"x-ms-enum": {
-						"name": "AccessRights",
-						"modelAsString": "True"
-					}
-				}
-			}
-		},
-		"IotHubSkuInfo": {
-			"type": "object",
-			"properties": {
-				"name": {
-					"enum": ["F1", "S1", "S2", "S3", "ElasticPool"],
-					"type": "string",
-					"x-ms-enum": {
-						"name": "IotHubSku",
-						"modelAsString": "True"
-					}
-				},
-				"tier": {
-					"enum": ["Free", "Standard"],
-					"type": "string",
-					"readOnly": true,
-					"x-ms-enum": {
-						"name": "IotHubSkuTier",
-						"modelAsString": "True"
-					}
-				},
-				"capacity": {
-					"format": "int64",
-					"type": "integer"
-				}
-			}
-		},
-		"SharedAccessAuthorizationRule": {
-			"type": "object",
-			"properties": {
-				"KeyName": {
-					"type": "string"
-				},
-				"PrimaryKey": {
-					"type": "string"
-				},
-				"IssuerName": {
-					"type": "string"
-				},
-				"SecondaryKey": {
-					"type": "string"
-				},
-				"ClaimType": {
-					"type": "string"
-				},
-				"ClaimValue": {
-					"type": "string"
-				},
-				"Rights": {
-					"type": "array",
-					"items": {
-						"enum": ["Manage", "Send", "Listen", "ManageNotificationHub"],
-						"type": "string"
-					}
-				},
-				"CreatedTime": {
-					"format": "date-time",
-					"type": "string"
-				},
-				"ModifiedTime": {
-					"format": "date-time",
-					"type": "string"
-				},
-				"Revision": {
-					"format": "int64",
-					"type": "integer"
-				}
-			}
-		},
-		"IpFilterRule": {
-			"type": "object",
-			"properties": {
-				"filterName": {
-					"type": "string"
-				},
-				"action": {
-					"enum": ["Accept", "Reject"],
-					"type": "string",
-					"x-ms-enum": {
-						"name": "IpFilterActionType",
-						"modelAsString": "True"
-					}
-				},
-				"ipMask": {
-					"type": "string"
-				}
-			}
-		},
-		"RoutingProperties": {
-			"type": "object",
-			"properties": {
-				"endpoints": {
-					"$ref": "#/definitions/Endpoints"
-				},
-				"routes": {
-					"type": "array",
-					"items": {
-						"$ref": "#/definitions/RouteProperties"
-					}
-				},
-				"fallbackRoute": {
-					"$ref": "#/definitions/RouteProperties"
-				}
-			}
-		},
-		"StorageEndpointProperties": {
-			"type": "object",
-			"properties": {
-				"sasTtlAsIso8601": {
-					"format": "date-time",
-					"type": "string"
-				},
-				"connectionString": {
-					"type": "string"
-				},
-				"containerName": {
-					"type": "string"
-				}
-			}
-		},
-		"MessagingEndpointProperties": {
-			"type": "object",
-			"properties": {
-				"lockDurationAsIso8601": {
-					"format": "date-time",
-					"type": "string"
-				},
-				"ttlAsIso8601": {
-					"format": "date-time",
-					"type": "string"
-				},
-				"maxDeliveryCount": {
-					"format": "int32",
-					"type": "integer"
-				}
-			}
-		},
-		"CloudToDeviceProperties": {
-			"type": "object",
-			"properties": {
-				"maxDeliveryCount": {
-					"format": "int32",
-					"type": "integer"
-				},
-				"defaultTtlAsIso8601": {
-					"format": "date-time",
-					"type": "string"
-				},
-				"feedback": {
-					"$ref": "#/definitions/FeedbackProperties"
-				}
-			}
-		},
-		"OperationsMonitoringProperties": {
-			"type": "object",
-			"properties": {
-				"events": {
-					"type": "object",
-					"additionalProperties": {
-						"enum": ["None", "Error", "Information"],
-						"type": "string"
-					}
-				}
-			}
-		},
-		"Endpoints": {
-			"type": "object",
-			"properties": {
-				"serviceBusQueues": {
-					"type": "array",
-					"items": {
-						"$ref": "#/definitions/RouteMessagingEndpointProperties"
-					}
-				},
-				"serviceBusTopics": {
-					"type": "array",
-					"items": {
-						"$ref": "#/definitions/RouteMessagingEndpointProperties"
-					}
-				},
-				"eventHubs": {
-					"type": "array",
-					"items": {
-						"$ref": "#/definitions/RouteEventHubProperties"
-					}
-				},
-				"storageContainers": {
-					"type": "array",
-					"items": {
-						"$ref": "#/definitions/RouteStorageEndpointProperties"
-					}
-				}
-			}
-		},
-		"RouteProperties": {
-			"type": "object",
-			"properties": {
-				"name": {
-					"type": "string"
-				},
-				"source": {
-					"enum": ["Invalid", "DeviceMessages", "TwinChangeEvents", "DeviceLifecycleEvents", "DeviceJobLifecycleEvents"],
-					"type": "string",
-					"x-ms-enum": {
-						"name": "RoutingSource",
-						"modelAsString": "True"
-					}
-				},
-				"condition": {
-					"type": "string"
-				},
-				"endpointNames": {
-					"type": "array",
-					"items": {
-						"type": "string"
-					}
-				},
-				"isEnabled": {
-					"type": "boolean"
-				}
-			}
-		},
-		"FeedbackProperties": {
-			"type": "object",
-			"properties": {
-				"lockDurationAsIso8601": {
-					"format": "date-time",
-					"type": "string"
-				},
-				"ttlAsIso8601": {
-					"format": "date-time",
-					"type": "string"
-				},
-				"maxDeliveryCount": {
-					"format": "int32",
-					"type": "integer"
-				}
-			}
-		},
-		"RouteMessagingEndpointProperties": {
-			"type": "object",
-			"properties": {
-				"connectionString": {
-					"type": "string"
-				},
-				"name": {
-					"type": "string"
-				},
-				"id": {
-					"type": "string"
-				},
-				"subscriptionId": {
-					"type": "string"
-				},
-				"resourceGroup": {
-					"type": "string"
-				}
-			}
-		},
-		"RouteEventHubProperties": {
-			"type": "object",
-			"properties": {
-				"connectionString": {
-					"type": "string"
-				},
-				"name": {
-					"type": "string"
-				},
-				"id": {
-					"type": "string"
-				},
-				"subscriptionId": {
-					"type": "string"
-				},
-				"resourceGroup": {
-					"type": "string"
-				}
-			}
-		},
-		"RouteStorageEndpointProperties": {
-			"type": "object",
-			"properties": {
-				"connectionString": {
-					"type": "string"
-				},
-				"containerName": {
-					"type": "string"
-				},
-				"fileNameFormat": {
-					"type": "string"
-				},
-				"batchFrequencyInSeconds": {
-					"format": "int32",
-					"type": "integer"
-				},
-				"maxChunkSizeInBytes": {
-					"format": "int32",
-					"type": "integer"
-				},
-				"encoding": {
-					"type": "string"
-				},
-				"name": {
-					"type": "string"
-				},
-				"id": {
-					"type": "string"
-				},
-				"subscriptionId": {
-					"type": "string"
-				},
-				"resourceGroup": {
-					"type": "string"
-				}
-			}
-		},
-		"Object": {
-			"type": "object",
-			"properties": {}
-		},
-		"IotHubDescription": {
-			"type": "object",
-			"properties": {
-				"id": {
-					"type": "string",
-					"readOnly": true
-				},
-				"name": {
-					"type": "string"
-				},
-				"type": {
-					"type": "string",
-					"readOnly": true
-				},
-				"location": {
-					"type": "string"
-				},
-				"tags": {
-					"type": "object",
-					"additionalProperties": {
-						"type": "string"
-					},
-					"readOnly": true
-				},
-				"subscriptionid": {
-					"type": "string"
-				},
-				"resourcegroup": {
-					"type": "string"
-				},
-				"etag": {
-					"type": "string"
-				},
-				"properties": {
-					"$ref": "#/definitions/IotHubPropertiesDescription"
-				},
-				"sku": {
-					"$ref": "#/definitions/IotHubSkuInfo"
-				}
-			},
-			"x-ms-azure-resource": true
-		},
-		"IotHubPropertiesDescription": {
-			"type": "object",
-			"properties": {
-				"operationsMonitoringProperties": {
-					"$ref": "#/definitions/OperationsMonitoringProperties"
-				},
-				"state": {
-					"enum": ["Activating", "Active", "Deleting", "Deleted", "ActivationFailed", "DeletionFailed", "Transitioning", "Suspending", "Suspended", "Resuming", "FailingOver", "FailoverFailed", "TenantCommitted"],
-					"type": "string",
-					"x-ms-enum": {
-						"name": "Nullable`1",
-						"modelAsString": "True"
-					}
-				},
-				"provisioningState": {
-					"type": "string"
-				},
-				"authorizationPolicies": {
-					"type": "array",
-					"items": {
-						"$ref": "#/definitions/SharedAccessSignatureAuthorizationRule"
-					}
-				},
-				"ipFilterRules": {
-					"type": "array",
-					"items": {
-						"$ref": "#/definitions/IpFilterRule"
-					}
-				},
-				"hostName": {
-					"type": "string"
-				},
-				"eventHubEndpoints": {
-					"type": "object",
-					"additionalProperties": {
-						"$ref": "#/definitions/EventHubProperties"
-					}
-				},
-				"routing": {
-					"$ref": "#/definitions/RoutingProperties"
-				},
-				"storageEndpoints": {
-					"type": "object",
-					"additionalProperties": {
-						"$ref": "#/definitions/StorageEndpointProperties"
-					}
-				},
-				"messagingEndpoints": {
-					"type": "object",
-					"additionalProperties": {
-						"$ref": "#/definitions/MessagingEndpointProperties"
-					}
-				},
-				"enableFileUploadNotifications": {
-					"type": "boolean"
-				},
-				"cloudToDevice": {
-					"$ref": "#/definitions/CloudToDeviceProperties"
-				},
-				"comments": {
-					"type": "string"
-				},
-				"systemProperties": {
-					"type": "object",
-					"additionalProperties": {
-						"type": "string"
-					}
-				},
-				"features": {
-					"enum": ["None", "DeviceManagement"],
-					"type": "string",
-					"x-ms-enum": {
-						"name": "Capabilities",
-						"modelAsString": "True"
-					}
-				}
-			}
-		},
-		"CertificateResponse": {
-			"type": "object",
-			"properties": {
-				"name": {
-					"type": "string"
-				},
-				"etag": {
-					"type": "string"
-				},
-				"subject": {
-					"type": "string"
-				},
-				"expiry": {
-					"format": "date-time",
-					"type": "string"
-				},
-				"thumbprint": {
-					"type": "string"
-				},
-				"isVerified": {
-					"type": "boolean"
-				},
-				"created": {
-					"format": "date-time",
-					"type": "string"
-				},
-				"updated": {
-					"format": "date-time",
-					"type": "string"
-				}
-			}
-		},
-		"IotDpsSkuInfo": {
-			"type": "object",
-			"properties": {
-				"name": {
-					"enum": ["S1"],
-					"type": "string",
-					"x-ms-enum": {
-						"name": "IotDpsSku",
-						"modelAsString": "True"
-					}
-				},
-				"tier": {
-					"type": "string",
-					"readOnly": true
-				},
-				"capacity": {
-					"format": "int64",
-					"type": "integer"
-				}
-			}
-		},
-		"ProvisioningServiceDescription": {
-			"type": "object",
-			"properties": {
-				"etag": {
-					"type": "string"
-				},
-				"name": {
-					"type": "string",
-					"readOnly": "true"
-				},
-				"location": {
-					"type": "string"
-				},
-				"properties": {
-					"$ref": "#/definitions/IotDpsPropertiesDescription"
-				},
-				"type": {
-					"type": "string",
-					"readOnly": true
-				},
-				"id": {
-					"type": "string",
-					"readOnly": true
-				},
-				"tags": {
-					"type": "object",
-					"additionalProperties": {
-						"type": "string"
-					}
-				}
-			}
-		},
-		"IotDpsPropertiesDescription": {
-			"type": "object",
-			"properties": {
-				"state": {
-					"enum": ["Activating", "Active", "Deleting", "Deleted", "ActivationFailed", "DeletionFailed", "Transitioning", "Suspending", "Suspended", "Resuming", "FailingOver", "FailoverFailed"],
-					"type": "string",
-					"x-ms-enum": {
-						"name": "Nullable`1",
-						"modelAsString": "True"
-					}
-				},
-				"provisioningState": {
-					"type": "string"
-				},
-				"iotHubs": {
-					"type": "array",
-					"items": {
-						"$ref": "#/definitions/IotHubDefinitionDescription"
-					}
-				},
-				"allocationPolicy": {
-					"enum": ["Hashed", "GeoLatency", "Static"],
-					"type": "string",
-					"x-ms-enum": {
-						"name": "AllocationPolicy",
-						"modelAsString": "True"
-					}
-				},
-				"serviceOperationsHostName": {
-					"type": "string",
-					"readOnly": "true"
-				},
-				"deviceProvisioningHostName": {
-					"type": "string",
-					"readOnly": "true"
-				},
-				"idScope": {
-					"type": "string"
-				},
-				"authorizationPolicies": {
-					"type": "array",
-					"items": {
-						"$ref": "#/definitions/SharedAccessSignatureAuthorizationRule[AccessRightsDescription]"
-					}
-				}
-			}
-		},
-		"IotHubDefinitionDescription": {
-			"type": "object",
-			"properties": {
-				"applyAllocationPolicy": {
-					"type": "boolean"
-				},
-				"allocationWeight": {
-					"format": "int32",
-					"type": "integer"
-				},
-				"name": {
-					"type": "string",
-					"readOnly": "true"
-				},
-				"connectionString": {
-					"type": "string"
-				},
-				"location": {
-					"type": "string"
-				}
-			}
-		},
-		"SharedAccessSignatureAuthorizationRule[AccessRightsDescription]": {
-			"type": "object",
-			"properties": {
-				"keyName": {
-					"type": "string"
-				},
-				"primaryKey": {
-					"type": "string"
-				},
-				"secondaryKey": {
-					"type": "string"
-				},
-				"rights": {
-					"enum": ["ServiceConfig", "EnrollmentRead", "EnrollmentWrite", "DeviceConnect", "RegistrationStatusRead", "RegistrationStatusWrite"],
-					"type": "string",
-					"x-ms-enum": {
-						"name": "AccessRightsDescription",
-						"modelAsString": "True"
-					}
-				}
-			}
-		},
-		"ErrorDetails": {
-			"type": "object",
-			"properties": {
-				"Code": {
-					"type": "string",
-					"x-ms-enum": {
-						"name": "ErrorCode",
-						"modelAsString": "True"
-					}
-				},
-				"HttpStatusCode": {
-					"type": "string",
-					"readOnly": true
-				},
-				"Message": {
-					"type": "string"
-				},
-				"Details": {
-					"type": "string"
-				}
-			}
-		},
-		"SharedAccessSignatureAuthorizationRuleListResult": {
-			"type": "object",
-			"properties": {
-				"value": {
-					"type": "array",
-					"items": {
-						"$ref": "#/definitions/SharedAccessSignatureAuthorizationRule"
-					}
-				},
-				"nextLink": {
-					"type": "string",
-					"readOnly": true
-				}
-			}
-		},
-		"IotDpsSkuDefinitionListResult": {
-			"type": "object",
-			"properties": {
-				"value": {
-					"type": "array",
-					"items": {
-						"$ref": "#/definitions/IotDpsSkuDefinition"
-					}
-				},
-				"nextLink": {
-					"type": "string",
-					"readOnly": true
-				}
-			}
-		},
-		"IotDpsSkuDefinition": {
-			"type": "object",
-			"properties": {
-				"Name": {
-					"enum": ["S1"],
-					"type": "string",
-					"x-ms-enum": {
-						"name": "IotDpsSku",
-						"modelAsString": "True"
-					}
-				}
-			}
-		},
-		"OperationInputs": {
-			"type": "object",
-			"properties": {
-				"Name": {
-					"type": "string"
-				},
-				"ResourceType": {
-					"type": "string"
-				},
-				"Key": {
-					"type": "string"
-				},
-				"TokenLifeTimeInMinutes": {
-					"format": "int32",
-					"type": "integer"
-				},
-				"ConnectionString": {
-					"type": "string"
-				},
-				"MoveResource": {
-					"type": "boolean"
-				},
-				"IotHubDescription": {
-					"$ref": "#/definitions/IotHubDescription"
-				},
-				"SerializedIotHubDescription": {
-					"type": "string"
-				}
-			}
-		},
-		"NameAvailabilityInfo": {
-			"type": "object",
-			"properties": {
-				"nameAvailable": {
-					"type": "boolean"
-				},
-				"reason": {
-					"enum": ["Invalid", "AlreadyExists"],
-					"type": "string",
-					"x-ms-enum": {
-						"name": "NameUnavailabilityReason",
-						"modelAsString": "True"
-					}
-				},
-				"message": {
-					"type": "string"
-				}
-			}
-		},
-		"ProvisioningServiceDescriptionListResult": {
-			"type": "object",
-			"properties": {
-				"value": {
-					"type": "array",
-					"items": {
-						"$ref": "#/definitions/ProvisioningServiceDescription"
-					}
-				},
-				"nextLink": {
-					"type": "string",
-					"readOnly": true
-				}
-			}
-		},
-		"VerificationCodeResponse": {
-			"type": "object",
-			"properties": {
-				"verificationCode": {
-					"type": "string"
-				},
-				"name": {
-					"type": "string"
-				},
-				"etag": {
-					"type": "string"
-				},
-				"subject": {
-					"type": "string"
-				},
-				"expiry": {
-					"format": "date-time",
-					"type": "string"
-				},
-				"thumbprint": {
-					"type": "string"
-				},
-				"isVerified": {
-					"type": "boolean"
-				},
-				"created": {
-					"format": "date-time",
-					"type": "string"
-				},
-				"updated": {
-					"format": "date-time",
-					"type": "string"
-				}
-			}
-		},
-		"VerificationCodeRequest": {
-			"type": "object",
-			"properties": {
-				"certificate": {
-					"type": "string"
-				}
-			}
-		}
-	},
-	"parameters": {
-		"subscriptionId": {
-			"name": "subscriptionId",
-			"in": "path",
-			"description": "The subscription identifier.",
-			"required": true,
-			"type": "string"
-		},
-		"api-version": {
-			"name": "api-version",
-			"in": "query",
-			"description": "Version of the Api.",
-			"required": true,
-			"type": "string",
-			"default": "2017-08-31-preview"
-		}
-	},
-	"security": []
+  "swagger": "2.0",
+  "info": {
+    "version": "2017-08-21-preview",
+    "title": "iotDpsClient",
+    "description": "API for using the IoT Device Provisioning Service Features",
+    "x-ms-code-generation-settings": {
+      "header": "MICROSOFT_MIT_NO_VERSION",
+      "host": "management.azure.com"
+    }
+  },
+  "host": "management.azure.com",
+  "schemes": [
+    "https"
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "produces": [
+    "application/json"
+  ],
+  "paths": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Devices/provisioningServices/{provisioningServiceName}/certificates/{certificateName}": {
+      "get": {
+        "tags": [
+          "GET"
+        ],
+        "operationId": "DpsCertificate_Get",
+        "consumes": [
+          
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "certificateName",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "$ref": "#/parameters/subscriptionId"
+          },
+          {
+            "name": "resourceGroupName",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "provisioningServiceName",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "$ref": "#/parameters/api-version"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/CertificateResponse"
+            }
+          },
+          "default": {
+            "description": "DefaultErrorResponse",
+            "schema": {
+              "$ref": "#/definitions/ErrorDetails"
+            }
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "DELETE"
+        ],
+        "operationId": "DpsCertificate_Delete",
+        "consumes": [
+          
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/subscriptionId"
+          },
+          {
+            "name": "resourceGroupName",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "provisioningServiceName",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "certificateName",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "certificate.name",
+            "in": "query",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "certificate.rawBytes",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "format": "byte"
+          },
+          {
+            "name": "certificate.isVerified",
+            "in": "query",
+            "required": false,
+            "type": "boolean"
+          },
+          {
+            "name": "certificate.purpose",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "enum": [
+              "clientAuthentication",
+              "serverAuthentication"
+            ],
+            "x-ms-enum": {
+              "name": "CertificatePurpose",
+              "modelAsString": "True"
+            }
+          },
+          {
+            "name": "certificate.created",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "format": "date-time"
+          },
+          {
+            "name": "certificate.lastUpdated",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "format": "date-time"
+          },
+          {
+            "name": "certificate.hasPrivateKey",
+            "in": "query",
+            "required": false,
+            "type": "boolean"
+          },
+          {
+            "name": "certificate.nonce",
+            "in": "query",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "$ref": "#/parameters/api-version"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "204": {
+            "description": "NoContent"
+          },
+          "default": {
+            "description": "DefaultErrorResponse",
+            "schema": {
+              "$ref": "#/definitions/ErrorDetails"
+            }
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Devices/provisioningServices/{provisioningServiceName}": {
+      "get": {
+        "tags": [
+          "GET"
+        ],
+        "summary": "Get the non-security related metadata of a provisioning service.",
+        "description": "Get the non-security related metadata of a provisioning service.",
+        "operationId": "IotDpsResource_Get",
+        "parameters": [
+          {
+            "name": "provisioningServiceName",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "$ref": "#/parameters/subscriptionId"
+          },
+          {
+            "name": "resourceGroupName",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "$ref": "#/parameters/api-version"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/ProvisioningServiceDescription"
+            }
+          },
+          "default": {
+            "description": "DefaultErrorResponse",
+            "schema": {
+              "$ref": "#/definitions/ErrorDetails"
+            }
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "PUT"
+        ],
+        "summary": "Create or update the metadata of a provisioning service.",
+        "description": "Create or update the metadata of a provisioning service. The usual pattern to modify a property is to retrieve the provisioning service metadata and security metadata, and then combine them with the modified values in a new body to update the provisioning service.",
+        "x-ms-long-running-operation": true,
+        "operationId": "IotDpsResource_CreateOrUpdate",
+        "parameters": [
+          {
+            "$ref": "#/parameters/subscriptionId"
+          },
+          {
+            "name": "resourceGroupName",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "provisioningServiceName",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "iotDpsDescription",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/ProvisioningServiceDescription"
+            }
+          },
+          {
+            "$ref": "#/parameters/api-version"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The body contains all the non-security properties of the provisioning service. Security-related properties are set to null.",
+            "schema": {
+              "type": "#/definitions/ProvisioningServiceDescription"
+            }
+          },
+          "201": {
+            "description": "This is a long running operation. The operation returns a 201 if the validation is complete. The response includes an Azure-AsyncOperation header that contains a status URL. Clients are expected to poll the status URL for the status of the operation. If successful, the operation returns HTTP status code of 201 (OK).",
+            "schema": {
+              "$ref": "#/definitions/ProvisioningServiceDescription"
+            }
+          },
+          "default": {
+            "description": "DefaultErrorResponse",
+            "schema": {
+              "$ref": "#/definitions/ErrorDetails"
+            }
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "DELETE"
+        ],
+        "x-ms-long-running-operation": true,
+        "operationId": "IotDpsResource_Delete",
+        "consumes": [
+          
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "provisioningServiceName",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "$ref": "#/parameters/subscriptionId"
+          },
+          {
+            "name": "resourceGroupName",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "$ref": "#/parameters/api-version"
+          }
+        ],
+        "responses": {
+          "202": {
+            "description": "The provisioning service resource provider always returns a 202 Accepted status code with valid Location and Retry-After headers. The resource provider also sets the Azure-AsyncOperation header with a URL that points to the operation resource for this operation. Subsequent GET attempts on the resource after a DELETE operation return a resource representation that indicates a transitional provisioning state (such as Terminating). To retrieve the status of the operation, a client can either poll the URL returned in the Location header after the Retry-After interval, get the provisioning service status directly, or query the operation resource.",
+            "200": {
+              "description": "This is returned as a response to the status polling request for the delete operation. The body contains the resource representation that indicates a transitional provisioning state.",
+              "204": {
+                "description": "Once the long running delete operation completes successfully, a 204 No Content status code is returned when the status polling request finds the provisioning service metadata in the service and the status of the delete operation is set to a completed state."
+              },
+              "404": {
+                "description": "After the long running delete operation completes successfully, a 404 Not Found is returned when the status polling request no longer finds the provisioning service metadata in the service."
+              },
+              "default": {
+                "description": "DefaultErrorResponse",
+                "schema": {
+                  "$ref": "#/definitions/ErrorDetails"
+                }
+              }
+            }
+          }
+        },
+        "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Devices/provisioningServices/{provisioningServiceName}/certificates": {
+          "get": {
+            "tags": [
+              "GET"
+            ],
+            "operationId": "DpsCertificates_GetAll",
+            "consumes": [
+              
+            ],
+            "produces": [
+              "application/json"
+            ],
+            "parameters": [
+              {
+                "$ref": "#/parameters/subscriptionId"
+              },
+              {
+                "name": "resourceGroupName",
+                "in": "path",
+                "required": true,
+                "type": "string"
+              },
+              {
+                "name": "provisioningServiceName",
+                "in": "path",
+                "required": true,
+                "type": "string"
+              },
+              {
+                "$ref": "#/parameters/api-version"
+              }
+            ],
+            "responses": {
+              "200": {
+                "description": "OK",
+                "schema": {
+                  "value": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/definitions/CertificateResponse"
+                  }
+                }
+                }
+              },
+              "default": {
+                "description": "DefaultErrorResponse",
+                "schema": {
+                  "$ref": "#/definitions/ErrorDetails"
+                }
+              }
+            }
+          }
+        },
+        "/subscriptions/{subscriptionId}/providers/Microsoft.Devices/provisioningServices": {
+          "get": {
+            "tags": [
+              "GET"
+            ],
+            "summary": "Get all the provisioning services in a subscription.",
+            "description": "Get all the provisioning services in a subscription.",
+            "operationId": "IotDpsResource_ListBySubscription",
+            "parameters": [
+              {
+                "$ref": "#/parameters/subscriptionId"
+              },
+              {
+                "$ref": "#/parameters/api-version"
+              }
+            ],
+            "responses": {
+              "200": {
+                "description": "This is a synchronous operation. The body contains a JSON-serialized array of the metadata from all the provisioning services in the subscription.",
+                "schema": {
+                  "$ref": "#/definitions/ProvisioningServiceDescriptionListResult"
+                }
+              },
+              "default": {
+                "description": "DefaultErrorResponse",
+                "schema": {
+                  "$ref": "#/definitions/ErrorDetails"
+                }
+              }
+            },
+            "x-ms-pageable": {
+              "nextLinkName": "nextLink"
+            }
+          }
+        },
+        "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Devices/provisioningServices": {
+          "get": {
+            "tags": [
+              "GET"
+            ],
+            "operationId": "IotDpsResource_ListByResourceGroup",
+            "consumes": [
+              
+            ],
+            "produces": [
+              "application/json"
+            ],
+            "parameters": [
+              {
+                "$ref": "#/parameters/subscriptionId"
+              },
+              {
+                "name": "resourceGroupName",
+                "in": "path",
+                "required": true,
+                "type": "string"
+              },
+              {
+                "$ref": "#/parameters/api-version"
+              }
+            ],
+            "responses": {
+              "200": {
+                "description": "OK",
+                "schema": {
+                  "$ref": "#/definitions/ProvisioningServiceDescriptionListResult"
+                }
+              },
+              "default": {
+                "description": "DefaultErrorResponse",
+                "schema": {
+                  "$ref": "#/definitions/ErrorDetails"
+                }
+              }
+            },
+            "x-ms-pageable": {
+              "nextLinkName": "nextLink"
+            }
+          }
+        },
+        "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Devices/provisioningServices/{provisioningServiceName}/operationresults/{operationId}": {
+          "get": {
+            "tags": [
+              "GET"
+            ],
+            "operationId": "IotDpsResource_GetOperationResult",
+            "consumes": [
+              
+            ],
+            "produces": [
+              "application/json"
+            ],
+            "parameters": [
+              {
+                "name": "operationId",
+                "in": "path",
+                "required": true,
+                "type": "string"
+              },
+              {
+                "$ref": "#/parameters/subscriptionId"
+              },
+              {
+                "name": "resourceGroupName",
+                "in": "path",
+                "required": true,
+                "type": "string"
+              },
+              {
+                "name": "provisioningServiceName",
+                "in": "path",
+                "required": true,
+                "type": "string"
+              },
+              {
+                "name": "asyncinfo",
+                "in": "query",
+                "description": "asyncinfo flag",
+                "required": true,
+                "type": "string",
+                "default": "true"
+              },
+              {
+                "$ref": "#/parameters/api-version"
+              }
+            ],
+            "responses": {
+              "200": {
+                "description": "OK",
+                "schema": {
+                  "$ref": "#/definitions/AsyncOperationResult"
+                }
+              },
+              "default": {
+                "description": "DefaultErrorResponse",
+                "schema": {
+                  "$ref": "#/definitions/ErrorDetails"
+                }
+              }
+            }
+          }
+        },
+        "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Devices/provisioningServices/{provisioningServiceName}/skus": {
+          "get": {
+            "tags": [
+              "GET"
+            ],
+            "summary": "Get the list of valid SKUs for a provisioning service.",
+            "description": "Get the list of valid SKUs for a provisioning service.",
+            "operationId": "IotDpsResource_GetValidSkus",
+            "parameters": [
+              {
+                "name": "provisioningServiceName",
+                "in": "path",
+                "required": true,
+                "type": "string"
+              },
+              {
+                "$ref": "#/parameters/subscriptionId"
+              },
+              {
+                "name": "resourceGroupName",
+                "in": "path",
+                "required": true,
+                "type": "string"
+              },
+              {
+                "$ref": "#/parameters/api-version"
+              }
+            ],
+            "responses": {
+              "200": {
+                "description": "This is a synchronous operation. The body contains a JSON-serialized array of the valid SKUs for this provisioning service.",
+                "schema": {
+                  "$ref": "#/definitions/IotDpsSkuDefinitionListResult"
+                }
+              },
+              "default": {
+                "description": "DefaultErrorResponse",
+                "schema": {
+                  "$ref": "#/definitions/ErrorDetails"
+                }
+              }
+            },
+            "x-ms-pageable": {
+              "nextLinkName": "nextLink"
+            }
+          }
+        },
+        "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Devices/provisioningServices/{provisioningServiceName}/certificates/{certificateName}/generateVerificationCode": {
+          "post": {
+            "tags": [
+              "POST"
+            ],
+            "operationId": "DpsCertificate_GenerateVerificationCode",
+            "consumes": [
+              
+            ],
+            "produces": [
+              "application/json"
+            ],
+            "parameters": [
+              {
+                "name": "certificateName",
+                "in": "path",
+                "required": true,
+                "type": "string"
+              },
+              {
+                "$ref": "#/parameters/subscriptionId"
+              },
+              {
+                "name": "resourceGroupName",
+                "in": "path",
+                "required": true,
+                "type": "string"
+              },
+              {
+                "name": "provisioningServiceName",
+                "in": "path",
+                "required": true,
+                "type": "string"
+              },
+              {
+                "name": "certificate.name",
+                "in": "query",
+                "required": false,
+                "type": "string"
+              },
+              {
+                "name": "certificate.rawBytes",
+                "in": "query",
+                "required": false,
+                "type": "string",
+                "format": "byte"
+              },
+              {
+                "name": "certificate.isVerified",
+                "in": "query",
+                "required": false,
+                "type": "boolean"
+              },
+              {
+                "name": "certificate.purpose",
+                "in": "query",
+                "required": false,
+                "type": "string",
+                "enum": [
+                  "clientAuthentication",
+                  "serverAuthentication"
+                ],
+                "x-ms-enum": {
+                  "name": "CertificatePurpose",
+                  "modelAsString": "True"
+                }
+              },
+              {
+                "name": "certificate.created",
+                "in": "query",
+                "required": false,
+                "type": "string",
+                "format": "date-time"
+              },
+              {
+                "name": "certificate.lastUpdated",
+                "in": "query",
+                "required": false,
+                "type": "string",
+                "format": "date-time"
+              },
+              {
+                "name": "certificate.hasPrivateKey",
+                "in": "query",
+                "required": false,
+                "type": "boolean"
+              },
+              {
+                "name": "certificate.nonce",
+                "in": "query",
+                "required": false,
+                "type": "string"
+              },
+              {
+                "$ref": "#/parameters/api-version"
+              }
+            ],
+            "responses": {
+              "200": {
+                "description": "OK",
+                "schema": {
+                  "$ref": "#/definitions/VerificationCodeResponse"
+                }
+              },
+              "default": {
+                "description": "DefaultErrorResponse",
+                "schema": {
+                  "$ref": "#/definitions/ErrorDetails"
+                }
+              }
+            }
+          }
+        },
+        "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Devices/provisioningServices/{provisioningServiceName}/certificates/{certificateName}/verify": {
+          "post": {
+            "tags": [
+              "POST"
+            ],
+            "operationId": "DpsCertificate_VerifyCertificate",
+            "consumes": [
+              "application/json"
+            ],
+            "produces": [
+              "application/json"
+            ],
+            "parameters": [
+              {
+                "name": "certificateName",
+                "in": "path",
+                "required": true,
+                "type": "string"
+              },
+              {
+                "name": "request",
+                "in": "body",
+                "required": true,
+                "schema": {
+                  "$ref": "#/definitions/VerificationCodeRequest"
+                }
+              },
+              {
+                "$ref": "#/parameters/subscriptionId"
+              },
+              {
+                "name": "resourceGroupName",
+                "in": "path",
+                "required": true,
+                "type": "string"
+              },
+              {
+                "name": "provisioningServiceName",
+                "in": "path",
+                "required": true,
+                "type": "string"
+              },
+              {
+                "name": "certificate.name",
+                "in": "query",
+                "required": false,
+                "type": "string"
+              },
+              {
+                "name": "certificate.rawBytes",
+                "in": "query",
+                "required": false,
+                "type": "string",
+                "format": "byte"
+              },
+              {
+                "name": "certificate.isVerified",
+                "in": "query",
+                "required": false,
+                "type": "boolean"
+              },
+              {
+                "name": "certificate.purpose",
+                "in": "query",
+                "required": false,
+                "type": "string",
+                "enum": [
+                  "clientAuthentication",
+                  "serverAuthentication"
+                ],
+                "x-ms-enum": {
+                  "name": "CertificatePurpose",
+                  "modelAsString": "True"
+                }
+              },
+              {
+                "name": "certificate.created",
+                "in": "query",
+                "required": false,
+                "type": "string",
+                "format": "date-time"
+              },
+              {
+                "name": "certificate.lastUpdated",
+                "in": "query",
+                "required": false,
+                "type": "string",
+                "format": "date-time"
+              },
+              {
+                "name": "certificate.hasPrivateKey",
+                "in": "query",
+                "required": false,
+                "type": "boolean"
+              },
+              {
+                "name": "certificate.nonce",
+                "in": "query",
+                "required": false,
+                "type": "string"
+              },
+              {
+                "$ref": "#/parameters/api-version"
+              }
+            ],
+            "responses": {
+              "200": {
+                "description": "OK",
+                "schema": {
+                  "$ref": "#/definitions/CertificateResponse"
+                }
+              },
+              "default": {
+                "description": "DefaultErrorResponse",
+                "schema": {
+                  "$ref": "#/definitions/ErrorDetails"
+                }
+              }
+            }
+          }
+        },
+        "/subscriptions/{subscriptionId}/providers/Microsoft.Devices/checkProvisioningServiceNameAvailability": {
+          "post": {
+            "tags": [
+              "POST"
+            ],
+            "operationId": "IotDpsResource_CheckNameAvailability",
+            "summary": "Check if a provisioning service name is available.",
+            "description": "Check if a provisioning service name is available.",
+            "parameters": [
+              {
+                "$ref": "#/parameters/subscriptionId"
+              },
+              {
+                "name": "arguments",
+                "in": "body",
+                "required": true,
+                "description": "Set the name parameter in the OperationInputs structure to the name of the provisioning service to check.",
+                "schema": {
+                  "$ref": "#/definitions/OperationInputs"
+                }
+              },
+              {
+                "$ref": "#/parameters/api-version"
+              }
+            ],
+            "responses": {
+              "200": {
+                "description": "This is a synchronous operation. The body contains a JSON-serialized response that specifies whether the provisioning service name is available. If the name is not available, the body contains the reason.",
+                "schema": {
+                  "$ref": "#/definitions/NameAvailabilityInfo"
+                }
+              },
+              "default": {
+                "description": "DefaultErrorResponse",
+                "schema": {
+                  "$ref": "#/definitions/ErrorDetails"
+                }
+              }
+            }
+          }
+        },
+        "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Devices/provisioningServices/{provisioningServiceName}/listkeys": {
+          "post": {
+            "tags": [
+              "POST"
+            ],
+            "operationId": "IotDpsResource_ListKeys",
+            "summary": "Get the security metadata for a provisioning service.",
+            "description": "Get the security metadata for a provisioning service.",
+            "parameters": [
+              {
+                "name": "provisioningServiceName",
+                "in": "path",
+                "required": true,
+                "type": "string"
+              },
+              {
+                "$ref": "#/parameters/subscriptionId"
+              },
+              {
+                "name": "resourceGroupName",
+                "in": "path",
+                "required": true,
+                "type": "string"
+              },
+              {
+                "$ref": "#/parameters/api-version"
+              }
+            ],
+            "responses": {
+              "200": {
+                "description": "This is a synchronous operation. The body contains a JSON-serialized array of shared access policies, including keys, that you can use to access the provisioning service endpoints.",
+                "schema": {
+                  "$ref": "#/definitions/SharedAccessSignatureAuthorizationRuleListResult"
+                }
+              },
+              "default": {
+                "description": "DefaultErrorResponse",
+                "schema": {
+                  "$ref": "#/definitions/ErrorDetails"
+                }
+              }
+            },
+            "x-ms-pageable": {
+              "nextLinkName": "nextLink"
+            }
+          }
+        },
+        "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Devices/provisioningServices/{provisioningServiceName}/keys/{keyName}/listkeys": {
+          "post": {
+            "tags": [
+              "POST"
+            ],
+            "operationId": "IotDpsResource_GetKeysForKeyName",
+            "summary": "Get a shared access policy by name from a provisioning service.",
+            "description": "Get a shared access policy by name from a provisioning service.",
+            "parameters": [
+              {
+                "name": "provisioningServiceName",
+                "in": "path",
+                "required": true,
+                "type": "string"
+              },
+              {
+                "name": "keyName",
+                "in": "path",
+                "required": true,
+                "type": "string"
+              },
+              {
+                "$ref": "#/parameters/subscriptionId"
+              },
+              {
+                "name": "resourceGroupName",
+                "description": "The name of the resource group that contains the provisioning service.",
+                "in": "path",
+                "required": true,
+                "type": "string"
+              },
+              {
+                "$ref": "#/parameters/api-version"
+              }
+            ],
+            "responses": {
+              "200": {
+                "description": "This is a synchronous operation. The body contains a JSON-serialized shared access policy, including keys, that you can use to access one or more provisioning service endpoints.",
+                "schema": {
+                  "$ref": "#/definitions/SharedAccessSignatureAuthorizationRule"
+                }
+              },
+              "default": {
+                "description": "DefaultErrorResponse",
+                "schema": {
+                  "$ref": "#/definitions/ErrorDetails"
+                }
+              }
+            }
+          }
+        }
+      },
+      "definitions": {
+        "AsyncOperationResult": {
+          "type": "object",
+          "properties": {
+            "status": {
+              "type": "string"
+            },
+            "error": {
+              "$ref": "#/definitions/ErrorMesssage"
+            }
+          }
+        },
+        "ErrorMesssage": {
+          "type": "object",
+          "properties": {
+            "code": {
+              "type": "string"
+            },
+            "message": {
+              "type": "string"
+            },
+            "details": {
+              "type": "string"
+            }
+          }
+        },
+        "CertificateResponse": {
+          "type": "object",
+          "properties": {
+            "name": {
+              "type": "string"
+            },
+            "etag": {
+              "type": "string"
+            },
+            "subject": {
+              "type": "string"
+            },
+            "expiry": {
+              "format": "date-time",
+              "type": "string"
+            },
+            "thumbprint": {
+              "type": "string"
+            },
+            "isVerified": {
+              "type": "boolean"
+            },
+            "created": {
+              "format": "date-time",
+              "type": "string"
+            },
+            "updated": {
+              "format": "date-time",
+              "type": "string"
+            }
+          }
+        },
+        "IotDpsSkuInfo": {
+          "type": "object",
+          "properties": {
+            "name": {
+              "enum": [
+                "S1"
+              ],
+              "type": "string",
+              "x-ms-enum": {
+                "name": "IotDpsSku",
+                "modelAsString": "True"
+              }
+            },
+            "tier": {
+              "type": "string",
+              "readOnly": true
+            },
+            "capacity": {
+              "format": "int64",
+              "type": "integer"
+            }
+          }
+        },
+        "ProvisioningServiceDescription": {
+          "type": "object",
+          "properties": {
+            "etag": {
+              "type": "string"
+            },
+            "name": {
+              "type": "string"
+            },
+            "location": {
+              "type": "string"
+            },
+            "properties": {
+              "$ref": "#/definitions/IotDpsPropertiesDescription"
+            },
+            "resourcegroup": {
+              "type": "string"
+            },
+            "type": {
+              "type": "string",
+              "readOnly": true
+            },
+            "id": {
+              "type": "string",
+              "readOnly": true
+            },
+            "subscriptionid": {
+              "type": "string"
+            },
+            "tags": {
+              "type": "object",
+              "additionalProperties": {
+                "type": "string"
+              }
+            },
+            "sku": {
+              "$ref": "#/definitions/IotDpsSkuInfo"
+            },
+            "required": [
+              "name",
+              "subscriptionid",
+              "resourcegroup",
+              "location"
+            ]
+          }
+        },
+        "IotDpsPropertiesDescription": {
+          "type": "object",
+          "properties": {
+            "state": {
+              "enum": [
+                "Activating",
+                "Active",
+                "Deleting",
+                "Deleted",
+                "ActivationFailed",
+                "DeletionFailed",
+                "Transitioning",
+                "Suspending",
+                "Suspended",
+                "Resuming",
+                "FailingOver",
+                "FailoverFailed"
+              ],
+              "type": "string",
+              "x-ms-enum": {
+                "name": "Nullable`1",
+                "modelAsString": "True"
+              }
+            },
+            "provisioningState": {
+              "type": "string"
+            },
+            "iotHubs": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/IotHubDefinitionDescription"
+              }
+            },
+            "allocationPolicy": {
+              "enum": [
+                "Hashed",
+                "GeoLatency",
+                "Static"
+              ],
+              "type": "string",
+              "x-ms-enum": {
+                "name": "AllocationPolicy",
+                "modelAsString": "True"
+              }
+            },
+            "serviceOperationsHostName": {
+              "type": "string"
+            },
+            "deviceProvisioningHostName": {
+              "type": "string"
+            },
+            "idScope": {
+              "type": "string"
+            },
+            "authorizationPolicies": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/SharedAccessSignatureAuthorizationRule[AccessRightsDescription]"
+              }
+            }
+          }
+        },
+        "IotHubDefinitionDescription": {
+          "type": "object",
+          "properties": {
+            "applyAllocationPolicy": {
+              "type": "boolean"
+            },
+            "allocationWeight": {
+              "format": "int32",
+              "type": "integer"
+            },
+            "name": {
+              "type": "string",
+              "readOnly": true
+            },
+            "connectionString": {
+              "type": "string"
+            },
+            "location": {
+              "type": "string"
+            },
+            "required": [
+              "connectionString",
+              "location"
+            ]
+          }
+        },
+        "SharedAccessSignatureAuthorizationRule[AccessRightsDescription]": {
+          "type": "object",
+          "properties": {
+            "keyName": {
+              "type": "string"
+            },
+            "primaryKey": {
+              "type": "string"
+            },
+            "secondaryKey": {
+              "type": "string"
+            },
+            "rights": {
+              "enum": [
+                "ServiceConfig",
+                "EnrollmentRead",
+                "EnrollmentWrite",
+                "DeviceConnect",
+                "RegistrationStatusRead",
+                "RegistrationStatusWrite"
+              ],
+              "type": "string",
+              "x-ms-enum": {
+                "name": "AccessRightsDescription",
+                "modelAsString": "True"
+              }
+            }
+          }
+        },
+        "ErrorDetails": {
+          "type": "object",
+          "properties": {
+            "Code": {
+              "type": "string",
+              "x-ms-enum": {
+                "name": "ErrorCode",
+                "modelAsString": "True"
+              }
+            },
+            "HttpStatusCode": {
+              "type": "string",
+              "readOnly": true
+            },
+            "Message": {
+              "type": "string"
+            },
+            "Details": {
+              "type": "string"
+            }
+          }
+        },
+        "SharedAccessSignatureAuthorizationRuleListResult": {
+          "type": "object",
+          "properties": {
+            "value": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/SharedAccessSignatureAuthorizationRule[AccessRightsDescription]"
+              }
+            },
+            "nextLink": {
+              "type": "string",
+              "readOnly": true
+            }
+          }
+        },
+        "IotDpsSkuDefinitionListResult": {
+          "type": "object",
+          "properties": {
+            "value": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/IotDpsSkuDefinition"
+              }
+            },
+            "nextLink": {
+              "type": "string",
+              "readOnly": true
+            }
+          }
+        },
+        "IotDpsSkuDefinition": {
+          "type": "object",
+          "properties": {
+            "Name": {
+              "enum": [
+                "S1"
+              ],
+              "type": "string",
+              "x-ms-enum": {
+                "name": "IotDpsSku",
+                "modelAsString": "True"
+              }
+            }
+          }
+        },
+        "NameAvailabilityInfo": {
+          "type": "object",
+          "properties": {
+            "nameAvailable": {
+              "type": "boolean"
+            },
+            "reason": {
+              "enum": [
+                "Invalid",
+                "AlreadyExists"
+              ],
+              "type": "string",
+              "x-ms-enum": {
+                "name": "NameUnavailabilityReason",
+                "modelAsString": "True"
+              }
+            },
+            "message": {
+              "type": "string"
+            }
+          }
+        },
+        "ProvisioningServiceDescriptionListResult": {
+          "type": "object",
+          "properties": {
+            "value": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/ProvisioningServiceDescription"
+              }
+            },
+            "nextLink": {
+              "type": "string",
+              "readOnly": true
+            }
+          }
+        },
+        "VerificationCodeResponse": {
+          "type": "object",
+          "properties": {
+            "verificationCode": {
+              "type": "string"
+            },
+            "name": {
+              "type": "string"
+            },
+            "etag": {
+              "type": "string"
+            },
+            "subject": {
+              "type": "string"
+            },
+            "expiry": {
+              "format": "date-time",
+              "type": "string"
+            },
+            "thumbprint": {
+              "type": "string"
+            },
+            "isVerified": {
+              "type": "boolean"
+            },
+            "created": {
+              "format": "date-time",
+              "type": "string"
+            },
+            "updated": {
+              "format": "date-time",
+              "type": "string"
+            }
+          }
+        },
+        "VerificationCodeRequest": {
+          "type": "object",
+          "properties": {
+            "certificate": {
+              "type": "string"
+            }
+          }
+        }
+      },
+      "parameters": {
+        "subscriptionId": {
+          "name": "subscriptionId",
+          "in": "path",
+          "description": "The subscription identifier.",
+          "required": true,
+          "type": "string"
+        },
+        "api-version": {
+          "name": "api-version",
+          "in": "query",
+          "description": "Version of the Api.",
+          "required": true,
+          "type": "string",
+          "default": "2016-02-03"
+        }
+      },
+      "security": [
+        
+      ]
+    }
+  }
 }
