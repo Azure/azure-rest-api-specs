@@ -1,7 +1,7 @@
 ﻿{
   "swagger": "2.0",
   "info": {
-    "title": "Bing Entity Search API",
+    "title": "Entity Search API",
     "description": "The Entity Search API lets you send a search query to Bing and get back search results that include entities and places. Place results include restaurants, hotel, or other local businesses. For places, the query can specify the name of the local business or it can ask for a list (for example, restaurants near me). Entity results include persons, places, or things. Place in this context is tourist attractions, states, countries, etc.",
     "version": "1.0"
   },
@@ -68,7 +68,7 @@
         "summary": "The Entity Search API lets you send a search query to Bing and get back search results that include entities and places. Place results include restaurants, hotel, or other local businesses. For places, the query can specify the name of the local business or it can ask for a list (for example, restaurants near me). Entity results include persons, places, or things. Place in this context is tourist attractions, states, countries, etc.",
         "operationId": "Entities_Search",
         "tags": [
-          "BingEntitySearch"
+          "EntitySearch"
         ],
         "parameters": [
           {
@@ -234,53 +234,53 @@
       "allOf": [
         {
           "$ref": "#/definitions/Response"
-        },
-        {
-          "type": "object",
-          "properties": {
-            "queryContext": {
-              "description": "An object that contains the query string that Bing used for the request. This object contains the query string as entered by the user. It may also contain an altered query string that Bing used for the query if the query string contained a spelling mistake.",
-              "$ref": "#/definitions/QueryContext",
-              "readOnly": true
-            },
-            "entities": {
-              "description": "A list of entities that are relevant to the search query.",
-              "$ref": "#/definitions/Entities",
-              "readOnly": true
-            },
-            "places": {
-              "description": "A list of local entities such as restaurants or hotels that are relevant to the query.",
-              "$ref": "#/definitions/Places",
-              "readOnly": true
-            }
-          }
         }
-      ]
+      ],
+      "type": "object",
+      "properties": {
+        "queryContext": {
+          "description": "An object that contains the query string that Bing used for the request. This object contains the query string as entered by the user. It may also contain an altered query string that Bing used for the query if the query string contained a spelling mistake.",
+          "$ref": "#/definitions/QueryContext",
+          "readOnly": true
+        },
+        "entities": {
+          "description": "A list of entities that are relevant to the search query.",
+          "$ref": "#/definitions/Entities",
+          "readOnly": true
+        },
+        "places": {
+          "description": "A list of local entities such as restaurants or hotels that are relevant to the query.",
+          "$ref": "#/definitions/Places",
+          "readOnly": true
+        }
+      }
     },
     "Response": {
       "allOf": [
         {
           "$ref": "#/definitions/Identifiable"
+        }
+      ],
+      "type": "object",
+      "properties": {
+        "readLink": {
+          "readOnly": true,
+          "type": "string"
         },
-        {
-          "type": "object",
-          "properties": {
-            "contractualRules": {
-              "description": "A list of rules that you must adhere to if you display the item.",
-              "readOnly": true,
-              "type": "array",
-              "items": {
-                "$ref": "#/definitions/ContractualRulesContractualRule"
-              }
-            },
-            "webSearchUrl": {
-              "description": "The URL To Bing's search result for this item.",
-              "readOnly": true,
-              "type": "string"
-            }
+        "contractualRules": {
+          "description": "A list of rules that you must adhere to if you display the item.",
+          "readOnly": true,
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ContractualRulesContractualRule"
           }
         }
-      ]
+        "webSearchUrl": {
+          "description": "The URL To Bing's search result for this item.",
+          "readOnly": true,
+          "type": "string"
+        }
+      }
     },
     "QueryContext": {
       "description": "Defines the query context that Bing used for the request.",
@@ -320,170 +320,156 @@
       "allOf": [
         {
           "$ref": "#/definitions/SearchResultsAnswer"
-        },
-        {
-          "type": "object",
-          "required": [
-            "value"
+        }
+      ],
+      "type": "object",
+      "required": [
+        "value"
+      ],
+      "properties": {
+        "queryScenario": {
+          "description": "The supported query scenario. This field is set to DominantEntity or DisambiguationItem. The field is set to DominantEntity if Bing determines that only a single entity satisfies the request. For example, a book, movie, person, or attraction. If multiple entities could satisfy the request, the field is set to DisambiguationItem. For example, if the request uses the generic title of a movie franchise, the entity's type would likely be DisambiguationItem. But, if the request specifies a specific title from the franchise, the entity's type would likely be DominantEntity.",
+          "readOnly": true,
+          "type": "string",
+          "default": "DominantEntity",
+          "enum": [
+            "DominantEntity",
+            "DominantEntityWithDisambiguation",
+            "Disambiguation",
+            "List",
+            "ListWithPivot"
           ],
-          "properties": {
-            "queryScenario": {
-              "description": "The supported query scenario. This field is set to DominantEntity or DisambiguationItem. The field is set to DominantEntity if Bing determines that only a single entity satisfies the request. For example, a book, movie, person, or attraction. If multiple entities could satisfy the request, the field is set to DisambiguationItem. For example, if the request uses the generic title of a movie franchise, the entity's type would likely be DisambiguationItem. But, if the request specifies a specific title from the franchise, the entity's type would likely be DominantEntity.",
-              "readOnly": true,
-              "type": "string",
-              "default": "DominantEntity",
-              "enum": [
-                "DominantEntity",
-                "DominantEntityWithDisambiguation",
-                "Disambiguation",
-                "List",
-                "ListWithPivot"
-              ],
-              "x-ms-enum": {
-                "name": "EntityQueryScenario",
-                "modelAsString": false
-              }
-            },
-            "value": {
-              "description": "A list of entities.",
-              "type": "array",
-              "items": {
-                "$ref": "#/definitions/Thing"
-              }
-            }
+          "x-ms-enum": {
+            "name": "EntityQueryScenario",
+            "modelAsString": false
+          }
+        },
+        "value": {
+          "description": "A list of entities.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Thing"
           }
         }
-      ]
+      }
     },
     "Places": {
       "description": "Defines a local entity answer.",
       "allOf": [
         {
           "$ref": "#/definitions/SearchResultsAnswer"
-        },
-        {
-          "type": "object",
-          "required": [
-            "value"
-          ],
-          "properties": {
-            "value": {
-              "description": "A list of local entities, such as restaurants or hotels.",
-              "type": "array",
-              "items": {
-                "$ref": "#/definitions/Thing"
-              }
-            }
+        }
+      ],
+      "type": "object",
+      "required": [
+        "value"
+      ],
+      "properties": {
+        "value": {
+          "description": "A list of local entities, such as restaurants or hotels.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Thing"
           }
         }
-      ]
+      }
     },
     "SearchResultsAnswer": {
       "allOf": [
         {
           "$ref": "#/definitions/Answer"
-        },
-        {
-          "type": "object",
-          "properties": {
-            "queryContext": {
-              "$ref": "#/definitions/QueryContext",
-              "readOnly": true
-            }
-          }
         }
-      ]
+      ],
+      "type": "object",
+      "properties": {
+        "queryContext": {
+          "$ref": "#/definitions/QueryContext",
+          "readOnly": true
+        }
+      }
     },
     "Identifiable": {
       "allOf": [
         {
           "$ref": "#/definitions/ResponseBase"
-        },
-        {
-          "type": "object",
-          "properties": {
-            "id": {
-              "readOnly": true,
-              "type": "string"
-            }
-          }
         }
-      ]
+      ],
+      "type": "object",
+      "properties": {
+        "id": {
+          "readOnly": true,
+          "type": "string"
+        }
+      }
     },
     "Answer": {
       "allOf": [
         {
           "$ref": "#/definitions/Response"
-        },
-        {
-          "type": "object",
-          "properties": {}
         }
-      ]
+      ],
+      "type": "object",
+      "properties": {}
     },
     "ErrorResponse": {
       "description": "The top-level response that represents a failed request.",
       "allOf": [
         {
           "$ref": "#/definitions/Response"
-        },
-        {
-          "type": "object",
-          "required": [
-            "errors"
-          ],
-          "properties": {
-            "errors": {
-              "description": "A list of errors that describe the reasons why the request failed.",
-              "type": "array",
-              "items": {
-                "$ref": "#/definitions/Error"
-              }
-            }
+        }
+      ],
+      "type": "object",
+      "required": [
+        "errors"
+      ],
+      "properties": {
+        "errors": {
+          "description": "A list of errors that describe the reasons why the request failed.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Error"
           }
         }
-      ]
+      }
     },
     "Thing": {
       "allOf": [
         {
           "$ref": "#/definitions/Response"
-        },
-        {
-          "type": "object",
-          "properties": {
-            "name": {
-              "description": "The name of the thing represented by this object.",
-              "readOnly": true,
-              "type": "string"
-            },
-            "url": {
-              "description": "The URL to get more information about the thing represented by this object.",
-              "readOnly": true,
-              "type": "string"
-            },
-            "image": {
-              "$ref": "#/definitions/ImageObject",
-              "readOnly": true
-            },
-            "description": {
-              "description": "A short description of the item.",
-              "readOnly": true,
-              "type": "string"
-            },
-            "entityPresentationInfo": {
-              "description": "Additional information about the entity such as hints that you can use to determine the entity's type. To determine the entity's type, use the entityScenario and entityTypeHint fields.",
-              "$ref": "#/definitions/EntitiesEntityPresentationInfo",
-              "readOnly": true
-            },
-            "bingId": {
-              "description": "An ID that uniquely identifies this item.",
-              "readOnly": true,
-              "type": "string"
-            }
-          }
         }
-      ]
+      ],
+      "type": "object",
+      "properties": {
+        "name": {
+          "description": "The name of the thing represented by this object.",
+          "readOnly": true,
+          "type": "string"
+        },
+        "url": {
+          "description": "The URL to get more information about the thing represented by this object.",
+          "readOnly": true,
+          "type": "string"
+        },
+        "image": {
+          "$ref": "#/definitions/ImageObject",
+          "readOnly": true
+        },
+        "description": {
+          "description": "A short description of the item.",
+          "readOnly": true,
+          "type": "string"
+        },
+        "entityPresentationInfo": {
+          "description": "Additional information about the entity such as hints that you can use to determine the entity's type. To determine the entity's type, use the entityScenario and entityTypeHint fields.",
+          "$ref": "#/definitions/EntitiesEntityPresentationInfo",
+          "readOnly": true
+        },
+        "bingId": {
+          "description": "An ID that uniquely identifies this item.",
+          "readOnly": true,
+          "type": "string"
+        }
+      }
     },
     "ContractualRulesContractualRule": {
       "x-ms-discriminator-value": "ContractualRules/ContractualRule",
@@ -508,53 +494,47 @@
       "allOf": [
         {
           "$ref": "#/definitions/MediaObject"
-        },
-        {
-          "type": "object",
-          "properties": {
-            "thumbnail": {
-              "description": "The URL to a thumbnail of the image",
-              "$ref": "#/definitions/ImageObject",
-              "readOnly": true
-            }
-          }
         }
-      ]
+      ],
+      "type": "object",
+      "properties": {
+        "thumbnail": {
+          "description": "The URL to a thumbnail of the image",
+          "$ref": "#/definitions/ImageObject",
+          "readOnly": true
+        }
+      }
     },
     "Place": {
       "description": "Defines information about a local entity, such as a restaurant or hotel.",
       "allOf": [
         {
           "$ref": "#/definitions/Thing"
-        },
-        {
-          "type": "object",
-          "properties": {
-            "address": {
-              "description": "The postal address of where the entity is located",
-              "$ref": "#/definitions/PostalAddress",
-              "readOnly": true
-            },
-            "telephone": {
-              "description": "The entity's telephone number",
-              "readOnly": true,
-              "type": "string"
-            }
-          }
         }
-      ]
+      ],
+      "type": "object",
+      "properties": {
+        "address": {
+          "description": "The postal address of where the entity is located",
+          "$ref": "#/definitions/PostalAddress",
+          "readOnly": true
+        },
+        "telephone": {
+          "description": "The entity's telephone number",
+          "readOnly": true,
+          "type": "string"
+        }
+      }
     },
     "Organization": {
       "description": "Defines an organization.",
       "allOf": [
         {
           "$ref": "#/definitions/Thing"
-        },
-        {
-          "type": "object",
-          "properties": {}
         }
-      ]
+      ],
+      "type": "object",
+      "properties": {}
     },
     "ResponseBase": {
       "discriminator": "_type",
@@ -640,39 +620,36 @@
       "allOf": [
         {
           "$ref": "#/definitions/Thing"
-        },
-        {
-          "type": "object",
-          "properties": {
-            "thumbnailUrl": {
-              "description": "The URL to a thumbnail of the item.",
-              "readOnly": true,
-              "type": "string"
-            },
-            "provider": {
-              "description": "The source of the creative work.",
-              "readOnly": true,
-              "type": "array",
-              "items": {
-                "$ref": "#/definitions/Thing"
-              }
-            },
-            "text": {
-              "type": "string"
-            }
-          }
         }
-      ]
+      ],
+      "type": "object",
+      "properties": {
+        "thumbnailUrl": {
+          "description": "The URL to a thumbnail of the item.",
+          "readOnly": true,
+          "type": "string"
+        },
+        "provider": {
+          "description": "The source of the creative work.",
+          "readOnly": true,
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Thing"
+          }
+        },
+        "text": {
+          "readOnly": true,
+          "type": "string"
+        }
+      }
     },
     "Intangible": {
       "allOf": [
         {
           "$ref": "#/definitions/Thing"
-        },
-        {
-          "type": "object"
         }
-      ]
+      ],
+      "type": "object"
     },
     "EntitiesEntityPresentationInfo": {
       "description": "Defines additional information about an entity such as type hints.",
@@ -771,138 +748,128 @@
       "allOf": [
         {
           "$ref": "#/definitions/ContractualRulesContractualRule"
-        },
-        {
-          "type": "object",
-          "properties": {
-            "mustBeCloseToContent": {
-              "description": "A Boolean value that determines whether the contents of the rule must be placed in close proximity to the field that the rule applies to. If true, the contents must be placed in close proximity. If false, or this field does not exist, the contents may be placed at the caller's discretion.",
-              "readOnly": true,
-              "type": "boolean"
-            }
-          }
         }
-      ]
+      ],
+      "type": "object",
+      "properties": {
+        "mustBeCloseToContent": {
+          "description": "A Boolean value that determines whether the contents of the rule must be placed in close proximity to the field that the rule applies to. If true, the contents must be placed in close proximity. If false, or this field does not exist, the contents may be placed at the caller's discretion.",
+          "readOnly": true,
+          "type": "boolean"
+        }
+      }
     },
     "MediaObject": {
       "allOf": [
         {
           "$ref": "#/definitions/CreativeWork"
-        },
-        {
-          "type": "object",
-          "properties": {
-            "contentUrl": {
-              "description": "Original URL to retrieve the source (file) for the media object (e.g the source URL for the image).",
-              "readOnly": true,
-              "type": "string"
-            },
-            "hostPageUrl": {
-              "description": "URL of the page that hosts the media object.",
-              "readOnly": true,
-              "type": "string"
-            },
-            "width": {
-              "description": "The width of the source media object, in pixels.",
-              "readOnly": true,
-              "type": "integer",
-              "format": "int32"
-            },
-            "height": {
-              "description": "The height of the source media object, in pixels.",
-              "readOnly": true,
-              "type": "integer",
-              "format": "int32"
-            }
-          }
         }
-      ]
+      ],
+      "type": "object",
+      "properties": {
+        "contentUrl": {
+          "description": "Original URL to retrieve the source (file) for the media object (e.g the source URL for the image).",
+          "readOnly": true,
+          "type": "string"
+        },
+        "hostPageUrl": {
+          "description": "URL of the page that hosts the media object.",
+          "readOnly": true,
+          "type": "string"
+        },
+        "width": {
+          "description": "The width of the source media object, in pixels.",
+          "readOnly": true,
+          "type": "integer",
+          "format": "int32"
+        },
+        "height": {
+          "description": "The height of the source media object, in pixels.",
+          "readOnly": true,
+          "type": "integer",
+          "format": "int32"
+        }
+      }
     },
     "PostalAddress": {
       "description": "Defines a postal address.",
       "allOf": [
         {
           "$ref": "#/definitions/StructuredValue"
-        },
-        {
-          "type": "object",
-          "properties": {
-            "streetAddress": {
-              "readOnly": true,
-              "type": "string"
-            },
-            "addressLocality": {
-              "description": "The city where the street address is located. For example, Seattle.",
-              "readOnly": true,
-              "type": "string"
-            },
-            "addressSubregion": {
-              "readOnly": true,
-              "type": "string"
-            },
-            "addressRegion": {
-              "description": "The state or province code where the street address is located. This could be the two-letter code. For example, WA, or the full name , Washington.",
-              "readOnly": true,
-              "type": "string"
-            },
-            "postalCode": {
-              "description": "The zip code or postal code where the street address is located. For example, 98052.",
-              "readOnly": true,
-              "type": "string"
-            },
-            "postOfficeBoxNumber": {
-              "readOnly": true,
-              "type": "string"
-            },
-            "addressCountry": {
-              "description": "The country/region where the street address is located. This could be the two-letter ISO code. For example, US, or the full name, United States.",
-              "readOnly": true,
-              "type": "string"
-            },
-            "countryIso": {
-              "description": "The two letter ISO code of this countr. For example, US.",
-              "readOnly": true,
-              "type": "string"
-            },
-            "neighborhood": {
-              "description": "The neighborhood where the street address is located. For example, Westlake.",
-              "readOnly": true,
-              "type": "string"
-            },
-            "addressRegionAbbreviation": {
-              "description": "Region Abbreviation. For example, WA.",
-              "readOnly": true,
-              "type": "string"
-            },
-            "text": {
-              "description": "The complete address. For example, 2100 Westlake Ave N, Bellevue, WA 98052.",
-              "readOnly": true,
-              "type": "string"
-            }
-          }
         }
-      ]
+      ],
+      "type": "object",
+      "properties": {
+        "streetAddress": {
+          "readOnly": true,
+          "type": "string"
+        },
+        "addressLocality": {
+          "description": "The city where the street address is located. For example, Seattle.",
+          "readOnly": true,
+          "type": "string"
+        },
+        "addressSubregion": {
+          "readOnly": true,
+          "type": "string"
+        },
+        "addressRegion": {
+          "description": "The state or province code where the street address is located. This could be the two-letter code. For example, WA, or the full name , Washington.",
+          "readOnly": true,
+          "type": "string"
+        },
+        "postalCode": {
+          "description": "The zip code or postal code where the street address is located. For example, 98052.",
+          "readOnly": true,
+          "type": "string"
+        },
+        "postOfficeBoxNumber": {
+          "readOnly": true,
+          "type": "string"
+        },
+        "addressCountry": {
+          "description": "The country/region where the street address is located. This could be the two-letter ISO code. For example, US, or the full name, United States.",
+          "readOnly": true,
+          "type": "string"
+        },
+        "countryIso": {
+          "description": "The two letter ISO code of this countr. For example, US.",
+          "readOnly": true,
+          "type": "string"
+        },
+        "neighborhood": {
+          "description": "The neighborhood where the street address is located. For example, Westlake.",
+          "readOnly": true,
+          "type": "string"
+        },
+        "addressRegionAbbreviation": {
+          "description": "Region Abbreviation. For example, WA.",
+          "readOnly": true,
+          "type": "string"
+        },
+        "text": {
+          "description": "The complete address. For example, 2100 Westlake Ave N, Bellevue, WA 98052.",
+          "readOnly": true,
+          "type": "string"
+        }
+      }
     },
     "License": {
       "description": "Defines the license under which the text or photo may be used.",
       "allOf": [
         {
           "$ref": "#/definitions/CreativeWork"
-        },
-        {
-          "type": "object"
         }
-      ]
+      ],
+      "type": "object"
     },
     "StructuredValue": {
       "allOf": [
         {
           "$ref": "#/definitions/Intangible"
-        },
-        {
-          "type": "object"
         }
-      ]
+      ],
+      "type": "object"
     },
     "ContractualRulesLicenseAttribution": {
       "description": "Defines a contractual rule for license attribution.",
@@ -910,23 +877,21 @@
       "allOf": [
         {
           "$ref": "#/definitions/ContractualRulesAttribution"
-        },
-        {
-          "type": "object",
-          "properties": {
-            "license": {
-              "description": "The license under which the content may be used.",
-              "$ref": "#/definitions/License",
-              "readOnly": true
-            },
-            "licenseNotice": {
-              "description": "The license to display next to the targeted field.",
-              "readOnly": true,
-              "type": "string"
-            }
-          }
         }
-      ]
+      ],
+      "type": "object",
+      "properties": {
+        "license": {
+          "description": "The license under which the content may be used.",
+          "$ref": "#/definitions/License",
+          "readOnly": true
+        },
+        "licenseNotice": {
+          "description": "The license to display next to the targeted field.",
+          "readOnly": true,
+          "type": "string"
+        }
+      }
     },
     "ContractualRulesLinkAttribution": {
       "description": "Defines a contractual rule for link attribution.",
@@ -934,30 +899,28 @@
       "allOf": [
         {
           "$ref": "#/definitions/ContractualRulesAttribution"
-        },
-        {
-          "type": "object",
-          "required": [
-            "text",
-            "url"
-          ],
-          "properties": {
-            "text": {
-              "description": "The attribution text.",
-              "type": "string"
-            },
-            "url": {
-              "description": "The URL to the provider's website. Use text and URL to create the hyperlink.",
-              "type": "string"
-            },
-            "optionalForListDisplay": {
-              "description": "Indicates whether this provider's attribution is optional.",
-              "readOnly": true,
-              "type": "boolean"
-            }
-          }
         }
-      ]
+      ],
+      "type": "object",
+      "required": [
+        "text",
+        "url"
+      ],
+      "properties": {
+        "text": {
+          "description": "The attribution text.",
+          "type": "string"
+        },
+        "url": {
+          "description": "The URL to the provider's website. Use text and URL to create the hyperlink.",
+          "type": "string"
+        },
+        "optionalForListDisplay": {
+          "description": "Indicates whether this provider's attribution is optional.",
+          "readOnly": true,
+          "type": "boolean"
+        }
+      }
     },
     "ContractualRulesMediaAttribution": {
       "description": "Defines a contractual rule for media attribution.",
@@ -965,18 +928,16 @@
       "allOf": [
         {
           "$ref": "#/definitions/ContractualRulesAttribution"
-        },
-        {
-          "type": "object",
-          "properties": {
-            "url": {
-              "description": "The URL that you use to create of hyperlink of the media content. For example, if the target is an image, you would use the URL to make the image clickable.",
-              "readOnly": true,
-              "type": "string"
-            }
-          }
         }
-      ]
+      ],
+      "type": "object",
+      "properties": {
+        "url": {
+          "description": "The URL that you use to create of hyperlink of the media content. For example, if the target is an image, you would use the URL to make the image clickable.",
+          "readOnly": true,
+          "type": "string"
+        }
+      }
     },
     "ContractualRulesTextAttribution": {
       "description": "Defines a contractual rule for text attribution.",
@@ -984,25 +945,23 @@
       "allOf": [
         {
           "$ref": "#/definitions/ContractualRulesAttribution"
-        },
-        {
-          "type": "object",
-          "required": [
-            "text"
-          ],
-          "properties": {
-            "text": {
-              "description": "The attribution text. Text attribution applies to the entity as a whole and should be displayed immediately following the entity presentation. If there are multiple text or link attribution rules that do not specify a target, you should concatenate them and display them using a \"Data from:\" label.",
-              "type": "string"
-            },
-            "optionalForListDisplay": {
-              "description": "Indicates whether this provider's attribution is optional.",
-              "readOnly": true,
-              "type": "boolean"
-            }
-          }
         }
-      ]
+      ],
+      "type": "object",
+      "required": [
+        "text"
+      ],
+      "properties": {
+        "text": {
+          "description": "The attribution text. Text attribution applies to the entity as a whole and should be displayed immediately following the entity presentation. If there are multiple text or link attribution rules that do not specify a target, you should concatenate them and display them using a \"Data from:\" label.",
+          "type": "string"
+        },
+        "optionalForListDisplay": {
+          "description": "Indicates whether this provider's attribution is optional.",
+          "readOnly": true,
+          "type": "boolean"
+        }
+      }
     }
   }
 }
