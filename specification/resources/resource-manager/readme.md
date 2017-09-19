@@ -56,6 +56,10 @@ tag: package-links-2016-09
 tag: package-managedapplications-2016-09
 ```
 
+``` yaml $(package-managedapplications)
+tag: package-management-2017-08
+```
+
 ### Tag: package-features-2015-12
 These settings apply only when `--tag=package-features-2015-12` is specified on the command line.
 
@@ -187,6 +191,14 @@ input-file:
 - Microsoft.Solutions/2016-09-01-preview/managedapplications.json
 ```
 
+### Tag: package-management-2017-08
+These settings apply only when `--tag=package-management-2017-08` is specified on the command line.
+
+``` yaml $(tag) == 'package-management-2017-08'
+input-file:
+- Microsoft.Management/2017-08-31-preview/management.json
+```
+
 ---
 # Code Generation
 
@@ -210,6 +222,7 @@ batch:
   - package-resources: true
   - package-subscriptions: true
   - package-links: true
+  - package-management: true
 #  - package-managedapplications: true
 ```
 
@@ -226,4 +239,5 @@ batch:
   - package-subscriptions: true
   - package-links: true
   - package-managedapplications: true
+  - package-management: true
 ```
