@@ -560,7 +560,7 @@
           "description": "Certificate Password."
         },
         "storeName": {
-          "description": "The local certificate store location",
+          "description": "The local certificate store location. Only Root and CertificateAuthority are valid locations.",
           "type": "string",
           "enum": [
             "CertificateAuthority",
@@ -576,7 +576,7 @@
       "required": [
         "storeName"
       ],
-      "description": "Certificate configuration."
+      "description": "Certificate configuration which consist of non-trusted intermediates and root certificates."
     },
     "HostnameConfiguration": {
       "properties": {
