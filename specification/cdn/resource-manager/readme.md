@@ -26,10 +26,18 @@ These are the global settings for the Cdn API.
 
 ``` yaml
 openapi-type: arm
-tag: package-2016-10
+tag: package-2017-04
 ```
 
+### Tag: package-2017-04
 
+These settings apply only when `--tag=package-2017-04` is specified on the command line.
+
+``` yaml $(tag) == 'package-2017-04'
+input-file:
+- Microsoft.Cdn/2017-04-02/cdn.json
+```
+ 
 ### Tag: package-2016-10
 
 These settings apply only when `--tag=package-2016-10` is specified on the command line.
