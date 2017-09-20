@@ -669,11 +669,8 @@
         "tags": [
           "DisasterRecoveryConfig"
         ],
-        "operationId": "DisasterRecoveryConfig_ListByNamespace",
-        "x-ms-examples": {
-          "EventHubsListAll": { "$ref": "./examples/EventHubs/EHEventHubListByNameSpace.json" }
-        },
-        "description": "Gets all the Alias(Disaster Recovery configurations)",
+        "operationId": "DisasterRecoveryConfig_List",
+        "description": "Gets all Alias(Disaster Recovery configurations)",
         "parameters": [
           {
             "$ref": "#/parameters/resourceGroupNameParameter"
@@ -690,7 +687,7 @@
         ],
         "responses": {
           "200": {
-            "description": "Successfully retrieved the list of Alias(Disaster Recovery configurations)",
+            "description": "Successfully retrieved the list of Alias(Disaster Recovery configurations) for eventhub namespace",
             "schema": {
               "$ref": "#/definitions/ArmDisasterRecoveryListResult"
             }
@@ -713,7 +710,7 @@
           "DisasterRecoveryConfig"
         ],
         "operationId": "DisasterRecoveryConfig_CreateOrUpdate",
-        "description": "Creates or updates a new Alias(Disaster Recovery configurations)",
+        "description": "Creates or updates a new Alias(Disaster Recovery configuration)",
         "parameters": [
           {
             "$ref": "#/parameters/resourceGroupNameParameter"
@@ -798,10 +795,7 @@
           "DisasterRecoveryConfig"
         ],
         "operationId": "DisasterRecoveryConfig_Get",
-        "x-ms-examples": {
-          "EventHubGet": { "$ref": "./examples/EventHubs/EHEventHubGet.json" }
-        },
-        "description": "Retrieves Alias(Disaster Recovery configuration) via primary or secondary namespace",
+        "description": "Retrieves Alias(Disaster Recovery configuration) for primary or secondary namespace",
         "parameters": [
           {
             "$ref": "#/parameters/resourceGroupNameParameter"
@@ -841,7 +835,7 @@
           "DisasterRecoveryConfig"
         ],
         "operationId": "DisasterRecoveryConfig_BreakPairing",
-        "description": "This operation changes replication from the Primary to the Secondary namespace.",
+        "description": "This operation disables the Disaster Recovery and stops replicating changes from primary to secondary namespaces",
         "parameters": [
           {
             "$ref": "#/parameters/resourceGroupNameParameter"
@@ -878,7 +872,7 @@
           "DisasterRecoveryConfig"
         ],
         "operationId": "DisasterRecoveryConfig_FailOver",
-        "description": "Updates Secondary namespace role as primary and removes the role from the pervious primary namespace",
+        "description": "envokes GEO DR failover and reconfigure the alias to point to the secondary namespace",
         "parameters": [
           {
             "$ref": "#/parameters/resourceGroupNameParameter"
@@ -1795,15 +1789,15 @@
           "type": "string",
           "description": "Secondary connection string of the created namespace AuthorizationRule."
         },
-		"aliasPrimaryConnectionString": {
+        "aliasPrimaryConnectionString": {
           "readOnly": true,
           "type": "string",
-          "description": "Alias Primary connection string of the created namespace AuthorizationRule."
+          "description": "Primary connection string of the alias if GEO DR is enabled"
         },
         "aliasSecondaryConnectionString": {
           "readOnly": true,
           "type": "string",
-          "description": "Alias Secondary connection string of the created namespace AuthorizationRule."
+          "description": "Secondary  connection string of the alias if GEO DR is enabled"
         },
         "primaryKey": {
           "readOnly": true,
@@ -2168,18 +2162,17 @@
             "provisioningState": {
               "readOnly": true,
               "type": "string",
-              "description": "Provisioning state of the Alias(Disaster Recovery configurations)"
+              "description": "Provisioning state of the Alias(Disaster Recovery configurations) - possible values 'Accepted' or 'Succeeded'"
             },
             "partnerNamespace": {
               "type": "string",
-              "description": "A value that indicates partner namespace "
+              "description": "Primary/Secondary eventhub namespace name, which is part of GEO DR pairning"
             },
             "role": {
               "readOnly": true,
               "type": "string",
-              "description": "role type of namespace",
+              "description": "role of namespace in GEO DR - possible values 'Primary' or 'PrimaryNotReplicating' or 'Secondary'",
               "enum": [
-                "Unspecified",
                 "Primary",
                 "PrimaryNotReplicating",
                 "Secondary"
@@ -2189,24 +2182,11 @@
                 "modelAsString": false
               }
             },
-            "type": {
-              "readOnly": true,
-              "type": "string",
-              "description": "Replication type",
-              "enum": [
-                "MetadataReplication",
-                "DataReplication"
-              ],
-              "x-ms-enum": {
-                "name": "ReplicationType",
-                "modelAsString": false
-              }
-            },
             "lastSynced": {
               "readOnly": true,
               "format": "date-time",
               "type": "string",
-              "description": "Time of Last Synced"
+              "description": "Timestamp of when Data/Metdata was last synced with Primary and Secondary namespce"
             }
           },
           "description": "Properties required to the Create Or Update Alias(Disaster Recovery configurations)"
@@ -2217,7 +2197,7 @@
           "$ref": "#/definitions/Resource"
         }
       ],
-      "description": "Single item in List or Get Alias(Disaster Recovery configurations)"
+      "description": "Single item in List or Get Alias(Disaster Recovery configuration) operation"
     },
     "ArmDisasterRecoveryListResult": {
       "properties": {
@@ -2231,10 +2211,10 @@
         "nextLink": {
           "type": "string",
           "readOnly": true,
-          "description": "Link to the next set of results. Not empty if Value contains incomplete list of Alias(Disaster Recovery configurations)"
+          "description": "Link to the next set of results. Not empty if Value contains incomplete list of Alias(Disaster Recovery configuration)"
         }
       },
-      "description": "The result of the List Alias(Disaster Recovery configurations) operation."
+      "description": "The result of the List Alias(Disaster Recovery configuration) operation."
     }
   },
   "parameters": {
@@ -2306,6 +2286,7 @@
       "required": true,
       "type": "string",
       "minLength": 1,
+      "maxLength": 50,
       "x-ms-parameter-location": "method",
       "description": "The consumer group name"
     }
