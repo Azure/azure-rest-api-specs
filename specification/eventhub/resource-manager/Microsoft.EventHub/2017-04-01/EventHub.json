@@ -673,7 +673,7 @@
         "x-ms-examples": {
           "EventHubsListAll": { "$ref": "./examples/EventHubs/EHEventHubListByNameSpace.json" }
         },
-        "description": "Gets all the Disaster Recovery in a Namespace.",
+        "description": "Gets all the Alias(Disaster Recovery configurations)",
         "parameters": [
           {
             "$ref": "#/parameters/resourceGroupNameParameter"
@@ -690,7 +690,7 @@
         ],
         "responses": {
           "200": {
-            "description": "Successfully retrieved the list of Event Hubs.",
+            "description": "Successfully retrieved the list of Alias(Disaster Recovery configurations)",
             "schema": {
               "$ref": "#/definitions/ArmDisasterRecoveryListResult"
             }
@@ -707,13 +707,13 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.EventHub/namespaces/{namespaceName}/disasterRecoveryConfig/{disasterRecoveryName}": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.EventHub/namespaces/{namespaceName}/disasterRecoveryConfig/{alias}": {
       "put": {
         "tags": [
           "DisasterRecoveryConfig"
         ],
         "operationId": "DisasterRecoveryConfig_CreateOrUpdate",
-        "description": "Creates or updates a new Disaster Recovery as a nested resource within a Namespace.",
+        "description": "Creates or updates a new Alias(Disaster Recovery configurations)",
         "parameters": [
           {
             "$ref": "#/parameters/resourceGroupNameParameter"
@@ -722,7 +722,7 @@
             "$ref": "#/parameters/namespaceNameParameter"
           },
           {
-            "$ref": "#/parameters/disasterRecoveryNameParameter"
+            "$ref": "#/parameters/aliasNameParameter"
           },
           {
             "name": "parameters",
@@ -731,7 +731,7 @@
             "schema": {
               "$ref": "#/definitions/ArmDisasterRecovery"
             },
-            "description": "Parameters supplied to create an Disaster Recovery resource."
+            "description": "Parameters required to create an Alias(Disaster Recovery configuration)"
           },
           {
             "$ref": "#/parameters/ApiVersionParameter"
@@ -742,13 +742,13 @@
         ],
         "responses": {
           "200": {
-            "description": "Create Disaster Recovery config operation is successful",
+            "description": "Alias(Disaster Recovery configuration) successfully created",
             "schema": {
               "$ref": "#/definitions/ArmDisasterRecovery"
             }
           },
           "201": {
-            "description": "Disaster Recovery config creation request received"
+            "description": "Alias(Disaster Recovery configuration) creation request received"
           },
           "default": {
             "description": "Eventhub error response describing why the operation failed.",
@@ -763,7 +763,7 @@
           "DisasterRecoveryConfig"
         ],
         "operationId": "DisasterRecoveryConfig_Delete",
-        "description": "Deletes an Event Hub from the specified Namespace and resource group.",
+        "description": "Deletes an Alias(Disaster Recovery configuration)",
         "parameters": [
           {
             "$ref": "#/parameters/resourceGroupNameParameter"
@@ -772,7 +772,7 @@
             "$ref": "#/parameters/namespaceNameParameter"
           },
           {
-            "$ref": "#/parameters/disasterRecoveryNameParameter"
+            "$ref": "#/parameters/aliasNameParameter"
           },
           {
             "$ref": "#/parameters/ApiVersionParameter"
@@ -783,7 +783,7 @@
         ],
         "responses": {
           "201": {
-            "description": "Delete Disaster Recovery config request accepted"
+            "description": "Delete Alias(Disaster Recovery configuration) request accepted"
           },
           "default": {
             "description": "Eventhub error response describing why the operation failed.",
@@ -801,7 +801,7 @@
         "x-ms-examples": {
           "EventHubGet": { "$ref": "./examples/EventHubs/EHEventHubGet.json" }
         },
-        "description": "Retrieves Disaster Recovery config description via bith primary or secondary namespace",
+        "description": "Retrieves Alias(Disaster Recovery configuration) via primary or secondary namespace",
         "parameters": [
           {
             "$ref": "#/parameters/resourceGroupNameParameter"
@@ -810,7 +810,7 @@
             "$ref": "#/parameters/namespaceNameParameter"
           },
           {
-            "$ref": "#/parameters/disasterRecoveryNameParameter"
+            "$ref": "#/parameters/aliasNameParameter"
           },
           {
             "$ref": "#/parameters/ApiVersionParameter"
@@ -821,7 +821,7 @@
         ],
         "responses": {
           "200": {
-            "description": "Successfully retrieved the Disaster Recovery config description.",
+            "description": "Successfully retrieved the Alias(Disaster Recovery configurations)",
             "schema": {
               "$ref": "#/definitions/ArmDisasterRecovery"
             }
@@ -835,13 +835,13 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.EventHub/namespaces/{namespaceName}/disasterRecoveryConfig/{disasterRecoveryName}/breakpairing": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.EventHub/namespaces/{namespaceName}/disasterRecoveryConfig/{alias}/breakpairing": {
       "post": {
         "tags": [
           "DisasterRecoveryConfig"
         ],
         "operationId": "DisasterRecoveryConfig_BreakPairing",
-        "description": "This operation stops replication from the Primary to the Secondary namespace.",
+        "description": "This operation changes replication from the Primary to the Secondary namespace.",
         "parameters": [
           {
             "$ref": "#/parameters/resourceGroupNameParameter"
@@ -850,7 +850,7 @@
             "$ref": "#/parameters/namespaceNameParameter"
           },
           {
-            "$ref": "#/parameters/disasterRecoveryNameParameter"
+            "$ref": "#/parameters/aliasNameParameter"
           },
           {
             "$ref": "#/parameters/ApiVersionParameter"
@@ -872,13 +872,13 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.EventHub/namespaces/{namespaceName}/disasterRecoveryConfig/{disasterRecoveryName}/failover": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.EventHub/namespaces/{namespaceName}/disasterRecoveryConfig/{alias}/failover": {
       "post": {
         "tags": [
           "DisasterRecoveryConfig"
         ],
         "operationId": "DisasterRecoveryConfig_FailOver",
-        "description": "Creates Secondary namespace role as primary and removes the role from the pervious primary namespace ",
+        "description": "Updates Secondary namespace role as primary and removes the role from the pervious primary namespace",
         "parameters": [
           {
             "$ref": "#/parameters/resourceGroupNameParameter"
@@ -887,7 +887,7 @@
             "$ref": "#/parameters/namespaceNameParameter"
           },
           {
-            "$ref": "#/parameters/disasterRecoveryNameParameter"
+            "$ref": "#/parameters/aliasNameParameter"
           },
           {
             "$ref": "#/parameters/ApiVersionParameter"
@@ -1795,6 +1795,16 @@
           "type": "string",
           "description": "Secondary connection string of the created namespace AuthorizationRule."
         },
+		"aliasPrimaryConnectionString": {
+          "readOnly": true,
+          "type": "string",
+          "description": "Alias Primary connection string of the created namespace AuthorizationRule."
+        },
+        "aliasSecondaryConnectionString": {
+          "readOnly": true,
+          "type": "string",
+          "description": "Alias Secondary connection string of the created namespace AuthorizationRule."
+        },
         "primaryKey": {
           "readOnly": true,
           "type": "string",
@@ -2158,7 +2168,7 @@
             "provisioningState": {
               "readOnly": true,
               "type": "string",
-              "description": "Provisioning state of the disaster recovery"
+              "description": "Provisioning state of the Alias(Disaster Recovery configurations)"
             },
             "partnerNamespace": {
               "type": "string",
@@ -2199,7 +2209,7 @@
               "description": "Time of Last Synced"
             }
           },
-          "description": "Properties supplied to the Create Or Update DisasterRecovery operation."
+          "description": "Properties required to the Create Or Update Alias(Disaster Recovery configurations)"
         }
       },
       "allOf": [
@@ -2207,7 +2217,7 @@
           "$ref": "#/definitions/Resource"
         }
       ],
-      "description": "Single item in List or Get DisasterRecovery operation"
+      "description": "Single item in List or Get Alias(Disaster Recovery configurations)"
     },
     "ArmDisasterRecoveryListResult": {
       "properties": {
@@ -2216,15 +2226,15 @@
           "items": {
             "$ref": "#/definitions/ArmDisasterRecovery"
           },
-          "description": "Result of the List Disaster Recovery operation."
+          "description": "List of Alias(Disaster Recovery configurations)"
         },
         "nextLink": {
           "type": "string",
           "readOnly": true,
-          "description": "Link to the next set of results. Not empty if Value contains incomplete list of Disaster Recovery."
+          "description": "Link to the next set of results. Not empty if Value contains incomplete list of Alias(Disaster Recovery configurations)"
         }
       },
-      "description": "The result of the List Disaster Recovery operation."
+      "description": "The result of the List Alias(Disaster Recovery configurations) operation."
     }
   },
   "parameters": {
@@ -2280,15 +2290,15 @@
       "x-ms-parameter-location": "method",
       "description": "The Event Hub name"
     },
-    "disasterRecoveryNameParameter": {
-      "name": "disasterRecoveryName",
+    "aliasNameParameter": {
+      "name": "alias",
       "in": "path",
       "required": true,
       "type": "string",
       "minLength": 1,
       "maxLength": 50,
       "x-ms-parameter-location": "method",
-      "description": "The Disaster Recovery name"
+      "description": "The Disaster Recovery configuration name"
     },
     "consumerGroupNameParameter": {
       "name": "consumerGroupName",
