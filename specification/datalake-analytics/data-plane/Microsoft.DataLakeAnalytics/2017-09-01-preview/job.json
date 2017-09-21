@@ -583,6 +583,63 @@
     }
   },
   "definitions": {
+    "ResourceUsageStatistics": {
+      "properties": {
+        "average": {
+          "type": "number",
+          "readOnly": true,
+          "format": "double",
+          "description": "the average value."
+        },
+        "minimum": {
+          "type": "integer",
+          "readOnly": true,
+          "format": "int64",
+          "description": "the minimum value."
+        },
+        "maximum": {
+          "type": "integer",
+          "readOnly": true,
+          "format": "int64",
+          "description": "the maximum value."
+        }
+      },
+      "description": "the statistics information for resource usage."
+    },
+    "JobStatisticsVertex": {
+      "properties": {
+        "name": {
+          "type": "string",
+          "readOnly": true,
+          "description": "the name of the vertex."
+        },
+        "vertexId": {
+          "type": "string",
+          "readOnly": true,
+          "format": "uuid",
+          "description": "the id of the vertex."
+        },
+        "executionTime": {
+          "type": "string",
+          "readOnly": true,
+          "format": "duration",
+          "description": "the amount of execution time of the vertex."
+        },
+        "dataRead": {
+          "type": "integer",
+          "readOnly": true,
+          "format": "int64",
+          "description": "the amount of data read of the vertex, in bytes."
+        },
+        "peakMemUsage": {
+          "type": "integer",
+          "readOnly": true,
+          "format": "int64",
+          "description": "the amount of peak memory usage of the vertex, in bytes."
+        }
+      },
+      "description": "the detailed information for a vertex."
+    },
     "JobStatisticsVertexStage": {
       "properties": {
         "dataRead": {
@@ -703,6 +760,64 @@
           "readOnly": true,
           "format": "duration",
           "description": "the amount of time all successful vertices took in this stage."
+        },
+        "totalPeakMemUsage": {
+          "type": "integer",
+          "readOnly": true,
+          "format": "int64",
+          "description": "the sum of the peak memory usage of all the vertices in the stage, in bytes."
+        },
+        "totalExecutionTime": {
+          "type": "string",
+          "readOnly": true,
+          "format": "duration",
+          "description": "the sum of the total execution time of all the vertices in the stage."
+        },
+        "maxDataReadVertex": {
+          "$ref": "#/definitions/JobStatisticsVertex",
+          "description": "the vertex with the maximum amount of data read."
+        },
+        "maxExecutionTimeVertex": {
+          "$ref": "#/definitions/JobStatisticsVertex",
+          "description": "the vertex with the maximum execution time."
+        },
+        "maxPeakMemUsageVertex": {
+          "$ref": "#/definitions/JobStatisticsVertex",
+          "description": "the vertex with the maximum peak memory usage."
+        },
+        "estimatedVertexCpuCoreCount": {
+          "type": "integer",
+          "readOnly": true,
+          "format": "int32",
+          "description": "the estimated vertex CPU core count."
+        },
+        "estimatedVertexPeakCpuCoreCount": {
+          "type": "integer",
+          "readOnly": true,
+          "format": "int32",
+          "description": "the estimated vertex peak CPU core count."
+        },
+        "estimatedVertexMemSize": {
+          "type": "integer",
+          "readOnly": true,
+          "format": "int64",
+          "description": "the estimated vertex memory size, in bytes."
+        },
+        "allocatedContainerCpuCoreCount": {
+          "$ref": "#/definitions/ResourceUsageStatistics",
+          "description": "the statistics information for the allocated container CPU core count."
+        },
+        "allocatedContainerMemSize": {
+          "$ref": "#/definitions/ResourceUsageStatistics",
+          "description": "the statistics information for the allocated container memory size."
+        },
+        "usedVertexCpuCoreCount": {
+          "$ref": "#/definitions/ResourceUsageStatistics",
+          "description": "the statistics information for the used vertex CPU core count."
+        },
+        "usedVertexPeakMemSize": {
+          "$ref": "#/definitions/ResourceUsageStatistics",
+          "description": "the statistics information for the used vertex peak memory size."
         }
       },
       "description": "The Data Lake Analytics job statistics vertex stage information."
