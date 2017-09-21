@@ -1161,6 +1161,20 @@
             "description": "Format in which to export the Api Details to the Storage Blob with Sas Key valid for 5 minutes."
           },
           {
+            "name": "export",
+            "in": "query",
+            "required": true,
+            "type": "string",
+            "enum": [
+              "true"
+            ],
+            "x-ms-enum": {
+              "modelAsString": true,
+              "name": "ExportApi"
+            },
+            "description": "Query parameter required to export the API details."
+          },
+          {
             "$ref": "./apimanagement.json#/parameters/ApiVersionParameter"
           },
           {
