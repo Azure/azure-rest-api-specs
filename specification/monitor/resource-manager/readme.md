@@ -81,3 +81,16 @@ python:
   payload-flattening-threshold: 2
   namespace: azure.mgmt.monitor
 ```
+
+## Java
+
+These settings apply only when `--java` is specified on the command line.
+
+``` yaml $(java)
+java:
+  # override the default output folder
+  output-folder: $(output-folder)/azure-mgmt-monitor/src/main/java/com/microsoft/azure/management/monitor
+  license-header: MICROSOFT_MIT_NO_VERSION
+  payload-flattening-threshold: 2
+  namespace: com.microsoft.azure.management.monitor
+```
