@@ -1837,6 +1837,41 @@
       },
       "description": "Active Directory Password Credential information."
     },
+    "RequiredResourceAccess": {
+      "properties": {
+        "resourceAccess": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ResourceAccess"
+          },
+          "description": "The list of OAuth2.0 permission scopes and app roles that the application requires from the specified resource."
+        },
+        "resourceAppId" : {
+          "type": "string",
+          "description": "The unique identifier for the resource that the application requires access to. This should be equal to the appId declared on the target resource application."
+        }
+      },
+      "required": [
+        "resourceAccess"
+      ],
+      "description": "Specifies the set of OAuth 2.0 permission scopes and app roles under the specified resource that an application requires access to. The specified OAuth 2.0 permission scopes may be requested by client applications (through the requiredResourceAccess collection) when calling a resource application. The requiredResourceAccess property of the Application entity is a collection of ReqiredResourceAccess."
+    },
+    "ResourceAccess": {
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "The unique identifier for one of the OAuth2Permission or AppRole instances that the resource application exposes."
+        },
+        "type": {
+          "type": "string",
+          "description": "Specifies whether the id property references an OAuth2Permission or an AppRole. Possible values are \"scope\" or \"role\"."
+        }
+      },
+      "required": [
+        "id"
+      ],
+      "description": "Specifies an OAuth 2.0 permission scope or an app role that an application requires. The resourceAccess property of the RequiredResourceAccess type is a collection of ResourceAccess."
+    },
     "ApplicationCreateParameters": {
       "properties": {
         "availableToOtherTenants": {
@@ -1882,6 +1917,13 @@
         "oauth2AllowImplicitFlow" : {
           "type": "boolean",
           "description": "Whether to allow implicit grant flow for OAuth2"
+        },
+        "requiredResourceAccess" : {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/RequiredResourceAccess"
+          },
+          "description": "Specifies resources that this application requires access to and the set of OAuth permission scopes and application roles that it needs under each of those resources. This pre-configuration of required resource access drives the consent experience."
         }
       },
       "required": [
@@ -1936,6 +1978,13 @@
         "oauth2AllowImplicitFlow" : {
           "type": "boolean",
           "description": "Whether to allow implicit grant flow for OAuth2"
+        },
+        "requiredResourceAccess" : {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/RequiredResourceAccess"
+          },
+          "description": "Specifies resources that this application requires access to and the set of OAuth permission scopes and application roles that it needs under each of those resources. This pre-configuration of required resource access drives the consent experience."
         }
       },
       "description": "Request parameters for updating an existing application."
