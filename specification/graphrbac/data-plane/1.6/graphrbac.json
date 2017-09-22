@@ -2449,7 +2449,44 @@
       ],
       "description": "The password profile associated with a user."
     },
+    "UserBase": {
+      "properties": {
+        "immutableId": {
+          "type": "string",
+          "description": "This must be specified if you are using a federated domain for the user's userPrincipalName (UPN) property when creating a new user account. It is used to associate an on-premises Active Directory user account with their Azure AD user object."
+        },
+        "usageLocation": {
+          "type": "string",
+          "description": "A two letter country code (ISO standard 3166). Required for users that will be assigned licenses due to legal requirement to check for availability of services in countries. Examples include: \"US\", \"JP\", and \"GB\"."
+        },
+        "givenName": {
+          "type": "string",
+          "description": "The given name for the user."
+        },
+        "surname": {
+          "type": "string",
+          "description": "The user's surname (family name or last name)."
+        },
+        "userType": {
+          "type": "string",
+          "description": "A string value that can be used to classify user types in your directory, such as 'Member' and 'Guest'.",
+          "enum": [
+            "Member",
+            "Guest"
+          ],
+          "x-ms-enum": {
+            "name": "UserType",
+            "modelAsString": true
+          }
+        }
+      }
+    },
     "UserCreateParameters": {
+      "allOf": [
+        {
+          "$ref": "#/definitions/UserBase"
+        }
+      ],
       "properties": {
         "accountEnabled": {
           "type": "boolean",
@@ -2471,13 +2508,9 @@
           "type": "string",
           "description": "The mail alias for the user."
         },
-        "immutableId": {
+        "mail": {
           "type": "string",
-          "description": "This must be specified if you are using a federated domain for the user's userPrincipalName (UPN) property when creating a new user account. It is used to associate an on-premises Active Directory user account with their Azure AD user object."
-        },
-        "usageLocation": {
-          "type": "string",
-          "description": "A two letter country code (ISO standard 3166). Required for users that will be assigned licenses due to legal requirement to check for availability of services in countries. Examples include: \"US\", \"JP\", and \"GB\"."
+          "description": "The primary email address of the user."
         }
       },
       "required": [
@@ -2490,6 +2523,11 @@
       "description": "Request parameters for creating a new work or school account user."
     },
     "UserUpdateParameters": {
+      "allOf": [
+        {
+          "$ref": "#/definitions/UserBase"
+        }
+      ],
       "properties": {
         "accountEnabled": {
           "type": "boolean",
@@ -2503,19 +2541,44 @@
           "$ref": "#/definitions/PasswordProfile",
           "description": "The password profile of the user."
         },
+        "userPrincipalName": {
+          "type": "string",
+          "description": "The user principal name (someuser@contoso.com). It must contain one of the verified domains for the tenant."
+        },
         "mailNickname": {
           "type": "string",
           "description": "The mail alias for the user."
-        },
-        "usageLocation": {
-          "type": "string",
-          "description": "A two letter country code (ISO standard 3166). Required for users that will be assigned licenses due to legal requirement to check for availability of services in countries. Examples include: \"US\", \"JP\", and \"GB\"."
         }
       },
       "description": "Request parameters for updating an existing work or school account user."
     },
     "User": {
+      "allOf": [
+        {
+          "$ref": "#/definitions/UserBase"
+        }
+      ],
       "properties": {
+        "accountEnabled": {
+          "type": "boolean",
+          "description": "Whether the account is enabled."
+        },
+        "displayName": {
+          "type": "string",
+          "description": "The display name of the user."
+        },
+        "userPrincipalName": {
+          "type": "string",
+          "description": "The principal name of the user."
+        },
+        "mailNickname": {
+          "type": "string",
+          "description": "The mail alias for the user."
+        },
+        "mail": {
+          "type": "string",
+          "description": "The primary email address of the user."
+        },
         "objectId": {
           "type": "string",
           "description": "The object ID."
@@ -2524,32 +2587,28 @@
           "type": "string",
           "description": "The object type."
         },
-        "userPrincipalName": {
-          "type": "string",
-          "description": "The principal name of the user."
-        },
-        "displayName": {
-          "type": "string",
-          "description": "The display name of the user."
-        },
-        "signInName": {
-          "type": "string",
-          "description": "The sign-in name of the user."
-        },
-        "mail": {
-          "type": "string",
-          "description": "The primary email address of the user."
-        },
-        "mailNickname": {
-          "type": "string",
-          "description": "The mail alias for the user."
-        },
-        "usageLocation": {
-          "type": "string",
-          "description": "A two letter country code (ISO standard 3166). Required for users that will be assigned licenses due to legal requirement to check for availability of services in countries. Examples include: \"US\", \"JP\", and \"GB\"."
+        "signInNames": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/SignInName"
+          },
+          "description": "The sign-in names of the user."
         }
       },
       "description": "Active Directory user information."
+    },
+    "SignInName": {
+      "properties": {
+        "type": {
+          "type": "string",
+          "description": "A string value that can be used to classify user sign-in types in your directory, such as 'emailAddress' or 'userName'."
+        },
+        "value": {
+          "type": "string",
+          "description": "The sign-in used by the local account. Must be unique across the company/tenant. For example, 'johnc@example.com'."
+        }
+      },
+      "description": "Contains information about a sign-in name of a local account user in an Azure Active Directory B2C tenant."
     },
     "UserGetMemberGroupsParameters": {
       "properties": {
