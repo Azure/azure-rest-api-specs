@@ -1002,6 +1002,126 @@
           }
         }
       }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/networkWatchers/{networkWatcherName}/azureReachabilityReport": {
+      "post": {
+        "tags": [
+          "NetworkWatchers"
+        ],
+        "operationId": "NetworkWatchers_GetAzureReachabilityReport",
+        "x-ms-long-running-operation": true,
+        "description": "Gets the relative latency score for internet service providers from a specified location to Azure regions.",
+        "parameters": [
+          {
+            "name": "resourceGroupName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the network watcher resource group."
+          },
+          {
+            "name": "networkWatcherName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the network watcher resource."
+          },
+          {
+            "name": "parameters",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/AzureReachabilityReportParameters"
+            },
+            "description": "Parameters that determine Azure reachability report configuration."
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful request for Azure reachability report.",
+            "schema": {
+              "$ref": "#/definitions/AzureReachabilityReport"
+            }
+          },
+          "202": {
+            "description": "Accepted and the operation will complete asynchronously.",
+            "schema": {
+              "$ref": "#/definitions/AzureReachabilityReport"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Get Azure Reachability Report": {
+            "$ref": "./examples/NetworkWatcherAzureReachabilityReportGet.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/networkWatchers/{networkWatcherName}/availableProvidersList": {
+      "post": {
+        "tags": [
+          "NetworkWatchers"
+        ],
+        "operationId": "NetworkWatchers_ListAvailableProviders",
+        "x-ms-long-running-operation": true,
+        "description": "Lists all available internet service providers for a specified Azure region.",
+        "parameters": [
+          {
+            "name": "resourceGroupName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the network watcher resource group."
+          },
+          {
+            "name": "networkWatcherName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the network watcher resource."
+          },
+          {
+            "name": "parameters",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/AvailableProvidersListParameters"
+            },
+            "description": "Parameters that scope the list of available providers."
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful request for list of available providers.",
+            "schema": {
+              "$ref": "#/definitions/AvailableProvidersList"
+            }
+          },
+          "202": {
+            "description": "Accepted and the operation will complete asynchronously.",
+            "schema": {
+              "$ref": "#/definitions/AvailableProvidersList"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Get Azure Reachability Report": {
+            "$ref": "./examples/NetworkWatcherAvailableProvidersListGet.json"
+          }
+        }
+      }
     }
   },
   "definitions": {
@@ -1130,7 +1250,10 @@
         },
         "associationType": {
           "type": "string",
-          "enum": [ "Associated", "Contains" ],
+          "enum": [
+            "Associated",
+            "Contains"
+          ],
           "x-ms-enum": {
             "name": "AssociationType",
             "modelAsString": true
@@ -1207,7 +1330,10 @@
       "properties": {
         "access": {
           "type": "string",
-          "enum": [ "Allow", "Deny" ],
+          "enum": [
+            "Allow",
+            "Deny"
+          ],
           "x-ms-enum": {
             "name": "Access",
             "modelAsString": true
@@ -1570,11 +1696,11 @@
           "items": {
             "type": "string",
             "enum": [
-            "InternalError",
-            "AgentStopped",
-            "CaptureFailed",
-            "LocalFileFailed",
-            "StorageFailed"
+              "InternalError",
+              "AgentStopped",
+              "CaptureFailed",
+              "LocalFileFailed",
+              "StorageFailed"
             ],
             "x-ms-enum": {
               "name": "PcError",
@@ -1832,7 +1958,12 @@
         "connectionStatus": {
           "readOnly": true,
           "type": "string",
-          "enum": [ "Unknown", "Connected", "Disconnected", "Degraded" ],
+          "enum": [
+            "Unknown",
+            "Connected",
+            "Disconnected",
+            "Degraded"
+          ],
           "x-ms-enum": {
             "name": "ConnectionStatus",
             "modelAsString": true
@@ -1913,7 +2044,11 @@
         "origin": {
           "readOnly": true,
           "type": "string",
-          "enum": [ "Local", "Inbound", "Outbound" ],
+          "enum": [
+            "Local",
+            "Inbound",
+            "Outbound"
+          ],
           "x-ms-enum": {
             "name": "Origin",
             "modelAsString": true
@@ -1923,7 +2058,10 @@
         "severity": {
           "readOnly": true,
           "type": "string",
-          "enum": [ "Error", "Warning" ],
+          "enum": [
+            "Error",
+            "Warning"
+          ],
           "x-ms-enum": {
             "name": "Severity",
             "modelAsString": true
@@ -1933,7 +2071,17 @@
         "type": {
           "readOnly": true,
           "type": "string",
-          "enum": [ "Unknown", "AgentStopped", "GuestFirewall", "DnsResolution", "SocketBind", "NetworkSecurityRule", "UserDefinedRoute", "PortThrottled", "Platform" ],
+          "enum": [
+            "Unknown",
+            "AgentStopped",
+            "GuestFirewall",
+            "DnsResolution",
+            "SocketBind",
+            "NetworkSecurityRule",
+            "UserDefinedRoute",
+            "PortThrottled",
+            "Platform"
+          ],
           "x-ms-enum": {
             "name": "IssueType",
             "modelAsString": true
@@ -1956,6 +2104,224 @@
       "additionalProperties": {
         "type": "string"
       }
+    },
+    "AzureReachabilityReportParameters": {
+      "properties": {
+        "providerLocation": {
+          "$ref": "#/definitions/AzureReachabilityReportLocation"
+        },
+        "providers": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "description": "List of Internet service providers."
+        },
+        "azureLocations": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "description": "Optional Azure regions to scope the query to."
+        },
+        "startTime": {
+          "type": "string",
+          "format": "date-time",
+          "description": "The start time for the Azure reachability report."
+        },
+        "endTime": {
+          "type": "string",
+          "format": "date-time",
+          "description": "The end time for the Azure reachability report."
+        }
+      },
+      "required": [
+        "providerLocation",
+        "startTime",
+        "endTime"
+      ],
+      "description": "Geographic and time constraints for Azure reachability report."
+    },
+    "AzureReachabilityReportLocation": {
+      "properties": {
+        "country": {
+          "type": "string",
+          "description": "The name of the country."
+        },
+        "state": {
+          "type": "string",
+          "description": "The name of the state."
+        },
+        "city": {
+          "type": "string",
+          "description": "The name of the city or town."
+        }
+      },
+      "required": [
+        "country"
+      ],
+      "description": "Parameters that define a geographic location."
+    },
+    "AzureReachabilityReport": {
+      "properties": {
+        "aggregationLevel": {
+          "type": "string",
+          "description": "The aggregation level of Azure reachability report. Can be Country, State or City."
+        },
+        "providerLocation": {
+          "$ref": "#/definitions/AzureReachabilityReportLocation"
+        },
+        "reachabilityReport": {
+          "type": "array",
+          "description": "List of Azure reachability report items.",
+          "items": {
+            "$ref": "#/definitions/AzureReachabilityReportItem"
+          }
+        }
+      },
+      "required": [
+        "aggregationLevel",
+        "providerLocation",
+        "reachabilityReport"
+      ],
+      "description": "Azure reachability report details."
+    },
+    "AzureReachabilityReportItem": {
+      "properties": {
+        "provider": {
+          "type": "string",
+          "description": "The Internet service provider."
+        },
+        "azureLocation": {
+          "type": "string",
+          "description": "The Azure region."
+        },
+        "latencies": {
+          "type": "array",
+          "description": "List of latency details for each of the time series.",
+          "items": {
+            "$ref": "#/definitions/AzureReachabilityReportLatencyInfo"
+          }
+        }
+      },
+      "description": "Azure reachability report details for a given provider location."
+    },
+    "AzureReachabilityReportLatencyInfo": {
+      "properties": {
+        "timeStamp": {
+          "type": "string",
+          "format": "date-time",
+          "description": "The time stamp."
+        },
+        "score": {
+          "type": "integer",
+          "description": "The relative latency score between 1 and 100, higher values indicating a faster connection.",
+          "minimum": 1,
+          "maximum": 100
+        }
+      },
+      "description": "Details on latency for a time series."
+    },
+    "AvailableProvidersListParameters": {
+      "properties": {
+        "azureLocations": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "description": "A list of Azure regions."
+        },
+        "country": {
+          "type": "string",
+          "description": "The country for available providers list."
+        },
+        "state": {
+          "type": "string",
+          "description": "The state for available providers list."
+        },
+        "city": {
+          "type": "string",
+          "description": "The city or town for available providers list."
+        }
+      },
+      "description": "Constraints that determine the list of available Internet service providers."
+    },
+    "AvailableProvidersList": {
+      "properties": {
+        "countries": {
+          "type": "array",
+          "description": "List of available countries.",
+          "items": {
+            "$ref": "#/definitions/AvailableProvidersListCountry"
+          }
+        }
+      },
+      "required": [
+        "countries"
+      ],
+      "description": "List of available countries with details."
+    },
+    "AvailableProvidersListCountry": {
+      "properties": {
+        "countryName": {
+          "type": "string",
+          "description": "The country name."
+        },
+        "providers": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "description": "A list of Internet service providers."
+        },
+        "states": {
+          "type": "array",
+          "description": "List of available states in the country.",
+          "items": {
+            "$ref": "#/definitions/AvailableProvidersListState"
+          }
+        }
+      },
+      "description": "Country details."
+    },
+    "AvailableProvidersListState": {
+      "properties": {
+        "stateName": {
+          "type": "string",
+          "description": "The state name."
+        },
+        "providers": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "description": "A list of Internet service providers."
+        },
+        "cities": {
+          "type": "array",
+          "description": "List of available cities or towns in the state.",
+          "items": {
+            "$ref": "#/definitions/AvailableProvidersListCity"
+          }
+        }
+      },
+      "description": "State details."
+    },
+    "AvailableProvidersListCity": {
+      "properties": {
+        "cityName": {
+          "type": "string",
+          "description": "The city or town name."
+        },
+        "providers": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "description": "A list of Internet service providers."
+        }
+      },
+      "description": "City or town details."
     }
   },
   "parameters": {
