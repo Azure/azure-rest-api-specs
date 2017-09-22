@@ -692,12 +692,15 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ServiceBus/namespaces/{namespaceName}/disasterRecoveryConfig": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ServiceBus/namespaces/{namespaceName}/disasterRecoveryConfigs": {
       "get": {
         "tags": [
           "DisasterRecoveryConfig"
         ],
         "operationId": "DisasterRecoveryConfig_List",
+        "x-ms-examples": {
+          "SBAliasList": { "$ref": "./examples/disasterRecoveryConfigs/SBAliasList.json" }
+        },
         "description": "Gets all Alias(Disaster Recovery configurations)",
         "parameters": [
           {
@@ -732,12 +735,15 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ServiceBus/namespaces/{namespaceName}/disasterRecoveryConfig/{alias}": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ServiceBus/namespaces/{namespaceName}/disasterRecoveryConfigs/{alias}": {
       "put": {
         "tags": [
           "DisasterRecoveryConfig"
         ],
         "operationId": "DisasterRecoveryConfig_CreateOrUpdate",
+        "x-ms-examples": {
+          "SBAliasCreate": { "$ref": "./examples/disasterRecoveryConfigs/SBAliasCreate.json" }
+        },
         "description": "Creates or updates a new Alias(Disaster Recovery configuration)",
         "parameters": [
           {
@@ -788,6 +794,9 @@
           "DisasterRecoveryConfig"
         ],
         "operationId": "DisasterRecoveryConfig_Delete",
+        "x-ms-examples": {
+          "SBAliasDelete": { "$ref": "./examples/disasterRecoveryConfigs/SBAliasDelete.json" }
+        },
         "description": "Deletes an Alias(Disaster Recovery configuration)",
         "parameters": [
           {
@@ -807,7 +816,7 @@
           }
         ],
         "responses": {
-          "201": {
+          "202": {
             "description": "Delete Alias(Disaster Recovery configuration) request accepted"
           },
           "default": {
@@ -823,6 +832,9 @@
           "DisasterRecoveryConfig"
         ],
         "operationId": "DisasterRecoveryConfig_Get",
+        "x-ms-examples": {
+          "SBAliasGet": { "$ref": "./examples/disasterRecoveryConfigs/SBAliasGet.json" }
+        },
         "description": "Retrieves Alias(Disaster Recovery configuration) for primary or secondary namespace",
         "parameters": [
           {
@@ -857,12 +869,15 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ServiceBus/namespaces/{namespaceName}/disasterRecoveryConfig/{alias}/breakpairing": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ServiceBus/namespaces/{namespaceName}/disasterRecoveryConfigs/{alias}/breakPairing": {
       "post": {
         "tags": [
           "DisasterRecoveryConfig"
         ],
         "operationId": "DisasterRecoveryConfig_BreakPairing",
+        "x-ms-examples": {
+          "SBEHAliasBreakPairing": { "$ref": "./examples/disasterRecoveryConfigs/SBEHAliasBreakPairing.json" }
+        },
         "description": "This operation disables the Disaster Recovery and stops replicating changes from primary to secondary namespaces",
         "parameters": [
           {
@@ -894,12 +909,15 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ServiceBus/namespaces/{namespaceName}/disasterRecoveryConfig/{alias}/failover": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ServiceBus/namespaces/{namespaceName}/disasterRecoveryConfigs/{alias}/failover": {
       "post": {
         "tags": [
           "DisasterRecoveryConfig"
         ],
         "operationId": "DisasterRecoveryConfig_FailOver",
+        "x-ms-examples": {
+          "SBAliasFailOver": { "$ref": "./examples/disasterRecoveryConfigs/SBAliasFailOver.json" }
+        },
         "description": "envokes GEO DR failover and reconfigure the alias to point to the secondary namespace",
         "parameters": [
           {
@@ -3679,7 +3697,16 @@
             "provisioningState": {
               "readOnly": true,
               "type": "string",
-              "description": "Provisioning state of the Alias(Disaster Recovery configurations) - possible values 'Accepted' or 'Succeeded'"
+              "description": "Provisioning state of the Alias(Disaster Recovery configuration) - possible values 'Accepted' or 'Succeeded' or 'Failed'",
+              "enum": [
+                "Accepted",
+                "Succeeded",
+                "Failed"
+              ],
+              "x-ms-enum": {
+                "name": "ProvisioningStateDR",
+                "modelAsString": false
+              }
             },
             "partnerNamespace": {
               "type": "string",
