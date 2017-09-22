@@ -73,6 +73,72 @@
           }
         }
       },
+       "put": {
+        "tags": [ "Certificates" ],
+         "summary": "Upload the certificate to the provisioning service.",
+         "description": "Adds new or replaces existing certificate.",
+         "operationId": "DpsCertificate_CreateOrUpdate",
+         "parameters": [
+           {
+             "$ref": "#/parameters/api-version"
+           },
+           {
+             "$ref": "#/parameters/subscriptionId"
+           },
+           {
+             "name": "resourceGroupName",
+             "in": "path",
+             "description": "The name of the resource group that contains the provisioning service.",
+             "required": true,
+             "type": "string"
+           },
+           {
+             "name": "resourceName",
+             "in": "path",
+             "description": "The name of the provisioning service.",
+             "required": true,
+             "type": "string"
+           },
+         {
+            "name": "certificateName",
+             "in":"path",
+             "description":"The name of the certificate create or update.",
+             "required":true,
+             "type":"string",
+             "maxLength": 256
+           },
+           {
+             "name": "certificateDescription",
+             "in": "body",
+             "description": "The certificate body.",
+             "required": true,
+             "schema": {
+               "$ref": "#/definitions/CertificateBodyDescription"
+             }
+           }
+         ],
+         "responses": {
+           "201": {
+             "description": "If certificate didn't exist creation was successful, the operation returns HTTP status code of 201 (OK).",
+             "schema": {
+               "$ref": "#/definitions/CertificateResponse"
+             }
+           },
+           "200": {
+             "description": "If certificate already exist and update was successful, the operation returns HTTP status code of 201 (OK).",
+             "schema": {
+               "$ref": "#/definitions/CertificateResponse"
+             }
+           },
+           "default": {
+             "description": "DefaultErrorResponse",
+             "schema": {
+               "$ref": "#/definitions/ErrorDetails"
+             }
+           }
+         },
+         "deprecated": false
+       },  
       "delete": {
         "tags": [
           "DELETE"
@@ -979,6 +1045,16 @@
             }
           }
         },
+        "CertificateBodyDescription":{
+          "description": "The JSON-serialized X509 Certificate.",
+          "type": "object",
+          "properties": {
+            "certificate": {
+              "description": "base-64 representation of the X509 leaf certificate .cer file or just .pem file content.",
+              "type": "string"
+            }
+          }
+        },
         "CertificateResponse": {
           "type": "object",
           "properties": {
@@ -1361,10 +1437,7 @@
           "type": "string",
           "default": "2016-02-03"
         }
-      },
-      "security": [
-        
-      ]
+      }
     }
   }
 }
