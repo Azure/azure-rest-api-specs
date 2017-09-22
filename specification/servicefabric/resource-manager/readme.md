@@ -25,10 +25,21 @@ To see additional help and options, run:
 These are the global settings for the ServiceFabricClient API.
 
 ``` yaml
+title: ServiceFabricClient
+description: ServiceFabric Client
 openapi-type: arm
 tag: package-2017-07
 ```
 
+
+### Tag: package-2016-09
+
+These settings apply only when `--tag=package-2016-09` is specified on the command line.
+
+``` yaml $(tag) == 'package-2016-09'
+input-file:
+- Microsoft.ServiceFabric/2016-09-01/servicefabric.json
+```
 
 ### Tag: package-2017-07
 
