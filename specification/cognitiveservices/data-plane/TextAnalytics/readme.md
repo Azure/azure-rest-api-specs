@@ -110,6 +110,9 @@ namespace ConsoleApp1
 }
 ```
 # Releases
+
+> see https://aka.ms/autorest
+
 The current release is `release_2_0`.
 ``` yaml
 tag: release_2_0
