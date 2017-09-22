@@ -67,7 +67,7 @@
             "$ref": "./examples/ClusterPutOperation_example_max.json"
           }
         },
-        "x-ms-long-running-operation": "true",
+        "x-ms-long-running-operation": true,
         "responses": {
           "200": {
             "description": "OK - Put cluster successfully",
@@ -192,7 +192,7 @@
         "tags": [
           "Cluster"
         ],
-        "x-ms-long-running-operation": "true",
+        "x-ms-long-running-operation": true,
         "x-ms-examples": {
           "Patch a cluster": {
             "$ref": "./examples/ClusterPatchOperation_example.json"
@@ -1474,14 +1474,6 @@
         "ServiceTypeHealthPolicyMap": {
           "$ref": "#/definitions/ServiceTypeHealthPolicyMap"
         }
-      },
-      "x-ms-sf-documentation": {
-        "DefaultServiceTypeHealthPolicy": {
-          "description": "The health policy used by default to evaluate the health of a service type."
-        },
-        "ServiceTypeHealthPolicyMap": {
-          "description": "The map with service type health policy per service type name. The map is empty be default."
-        }
       }
     },
     "ApplicationMetricDescription": {
@@ -1619,11 +1611,6 @@
         "Value": {
           "$ref": "#/definitions/ServiceTypeHealthPolicy"
         }
-      },
-      "x-ms-sf-documentation": {
-        "Value": {
-          "description": "The value of the service type health policy map item. This is the ServiceTypeHealthPolicy for this service type."
-        }
       }
     },
     "UpgradeDomainTimeout": {
@@ -1676,14 +1663,6 @@
         "ServiceName": {
           "$ref": "#/definitions/ServiceName"
         }
-      },
-      "x-ms-sf-documentation": {
-        "Scheme": {
-          "description": "The ServiceCorrelationScheme which describes the relationship between this service and the service specified via ServiceName."
-        },
-        "ServiceName": {
-          "description": "The name of the service that the correlation relationship is established with."
-        }
       }
     },
     "ServiceCorrelationScheme": {
@@ -1728,11 +1707,6 @@
         "DefaultLoad": {
           "type": "integer",
           "description": "Used only for Stateless services. The default amount of load, as a number, that this service creates for this metric."
-        }
-      },
-      "x-ms-sf-documentation": {
-        "Weight": {
-          "description": "The service load metric relative weight, compared to other metrics configured for this service, as a number."
         }
       }
     },
@@ -1798,11 +1772,6 @@
       "properties": {
         "PartitionScheme": {
           "$ref": "#/definitions/PartitionScheme"
-        }
-      },
-      "x-ms-sf-documentation": {
-        "PartitionScheme": {
-          "description": "Specifies how the service is partitioned."
         }
       }
     },
@@ -1904,7 +1873,7 @@
       "description": "The application type name resource",
       "properties": {
         "properties": {
-          "x-ms-client-flatten": "True",
+          "x-ms-client-flatten": true,
           "$ref": "#/definitions/ApplicationTypeProperties"
         }
       },
@@ -1939,7 +1908,7 @@
       "description": "A version resource for the specified application type name.",
       "properties": {
         "properties": {
-          "x-ms-client-flatten": "true",
+          "x-ms-client-flatten": true,
           "$ref": "#/definitions/VersionProperties"
         }
       },
@@ -1982,7 +1951,7 @@
       "description": "The application resource.",
       "properties": {
         "properties": {
-          "x-ms-client-flatten": "true",
+          "x-ms-client-flatten": true,
           "$ref": "#/definitions/ApplicationProperties"
         }
       },
@@ -2025,7 +1994,7 @@
       "description": "The application resource for patch operations.",
       "properties": {
         "properties": {
-          "x-ms-client-flatten": "true",
+          "x-ms-client-flatten": true,
           "$ref": "#/definitions/ApplicationUpdateProperties"
         }
       },
@@ -2090,7 +2059,7 @@
       "description": "The service resource.",
       "properties": {
         "properties": {
-          "x-ms-client-flatten": "true",
+          "x-ms-client-flatten": true,
           "$ref": "#/definitions/ServiceProperties"
         }
       },
@@ -2172,7 +2141,7 @@
       "description": "The service resource for patch operations.",
       "properties": {
         "properties": {
-          "x-ms-client-flatten": "true",
+          "x-ms-client-flatten": true,
           "$ref": "#/definitions/ServiceUpdateProperties"
         }
       },
@@ -2429,7 +2398,7 @@
           "properties": {
             "properties": {
               "description": "The cluster resource properties",
-              "x-ms-client-flatten": "True",
+              "x-ms-client-flatten": true,
               "$ref": "#/definitions/ClusterProperties"
             }
           }
@@ -2466,7 +2435,7 @@
           "description": "The result resource type"
         },
         "properties": {
-          "x-ms-client-flatten": "true",
+          "x-ms-client-flatten": true,
           "$ref": "#/definitions/ClusterVersionDetails"
         }
       },
@@ -2587,7 +2556,7 @@
           ],
           "x-ms-enum": {
             "name": "ProvisioningState",
-            "modelAsString": "true"
+            "modelAsString": true
           }
         },
         "vmImage": {
@@ -2688,7 +2657,7 @@
     "ClusterUpdateParameters": {
       "properties": {
         "properties": {
-          "x-ms-client-flatten": "True",
+          "x-ms-client-flatten": true,
           "$ref": "#/definitions/ClusterPropertiesUpdateParameters"
         },
         "tags": {
@@ -2987,7 +2956,7 @@
         }
       },
       "description": "The resource model definition.",
-      "x-ms-azure-resource": "true"
+      "x-ms-azure-resource": true
     },
     "Resource": {
       "required": [
@@ -3022,7 +2991,7 @@
         }
       },
       "description": "The resource model definition.",
-      "x-ms-azure-resource": "true"
+      "x-ms-azure-resource": true
     },
     "RollingUpgradeMonitoringPolicy": {
       "description": "The policy used for monitoring the application upgrade",
