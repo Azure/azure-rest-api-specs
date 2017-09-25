@@ -493,6 +493,45 @@
         "x-ms-long-running-operation": true
       }
     },
+	"/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/virtualNetworkGateways/{virtualNetworkGatewayName}/supportedvpndevices": {
+      "post": {
+        "tags": [
+          "VirtualNetworkGateways"
+        ],
+        "operationId": "VirtualNetworkGateways_SupportedVpnDevices",
+        "description": "Gets a xml format representation for supported vpn devices.",
+        "parameters": [
+          {
+            "name": "resourceGroupName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the resource group."
+          },
+          {
+            "name": "virtualNetworkGatewayName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the virtual network gateway."
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Xml format representation for supported vpn devices.",
+            "schema": {
+              "type": "string"
+            }
+          }
+        }
+      }
+    },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/virtualNetworkGateways/{virtualNetworkGatewayName}/getLearnedRoutes": {
       "post": {
         "tags": [
@@ -584,6 +623,54 @@
           }
         },
         "x-ms-long-running-operation": true
+      }
+    },
+	"/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/connections/{virtualNetworkGatewayConnectionName}/vpndeviceconfigurationscript": {
+      "post": {
+        "tags": [
+          "VirtualNetworkGateways"
+        ],
+        "operationId": "VirtualNetworkGateways_VpnDeviceConfigurationScript",
+        "description": "Gets a xml format representation for vpn device configuration script.",
+        "parameters": [
+          {
+            "name": "resourceGroupName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the resource group."
+          },
+          {
+            "name": "virtualNetworkGatewayConnectionName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the virtual network gateway connection for which the configuration script is generated."
+          },
+          {
+            "name": "parameters",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/VpnDeviceScriptParameters"
+            },
+            "description": "Parameters supplied to the generate vpn device script operation."
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Xml format representation for vpn device configuration script.",
+            "schema": {
+              "type": "string"
+            }
+          }
+        }
       }
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/connections/{virtualNetworkGatewayConnectionName}": {
@@ -2156,6 +2243,23 @@
         }
       },
       "description": "Response for the VirtualNetworkGatewayListConnections API service call"
+    },
+    "VpnDeviceScriptParameters": {
+      "properties": {
+        "vendor": {
+          "type": "string",
+          "description": "The vendor for the vpn device."
+        },
+        "deviceFamily": {
+          "type": "string",
+          "description": "The device family for the vpn device."
+        },
+        "firmwareVersion": {
+          "type": "string",
+          "description": "The firmware version for the vpn device."
+        }
+      },
+      "description": "Vpn device configuration script generation parameters"
     }
   },
   "parameters": {
