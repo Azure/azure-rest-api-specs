@@ -3,7 +3,7 @@
   "info": {
     "title": "DataLakeAnalyticsJobManagementClient",
     "description": "Creates an Azure Data Lake Analytics job client.",
-    "version": "2016-11-01",
+    "version": "2017-09-01-preview",
     "x-ms-code-generation-settings": {
       "useDateTimeOffset": true,
       "internalConstructors": true
@@ -347,8 +347,46 @@
         "responses": {
           "200": {
             "description": "Successfully cancelled the job."
+          },
+          "202": {
+            "description": "Successfully initiated the cancellation of the specified job."
           }
-        }
+        },
+        "x-ms-long-running-operation": true
+      }
+    },
+    "/Jobs/{jobIdentity}/Yield": {
+      "post": {
+        "tags": [
+          "Job"
+        ],
+        "operationId": "Job_Yield",
+        "description": "Pauses the specified job and places it back in the job queue, behind other jobs of equal or higher importance, based on priority. (Only for use internally with Scope job type.)",
+        "x-ms-examples": {
+          "Pauses the specified job and places it back in the job queue, behind other jobs of equal or higher importance, based on priority. (Only for use internally with Scope job type.)": { "$ref": "./examples/Adla_Job_Yield.json" }
+        },
+        "parameters": [
+          {
+            "name": "jobIdentity",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "format": "uuid",
+            "description": "Job identifier. Uniquely identifies the job across all jobs submitted to the service."
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successfully yielded the specified job."
+          },
+          "202": {
+            "description": "Successfully initiated the yielding of the specified job."
+          }
+        },
+        "x-ms-long-running-operation": true
       }
     },
     "/Jobs/{jobIdentity}": {
@@ -422,6 +460,50 @@
             }
           }
         }
+      },
+      "patch": {
+        "tags": [
+          "Job"
+        ],
+        "operationId": "Job_Update",
+        "description": "Updates the job information for the specified job ID. (Only for use internally with Scope job type.)",
+        "x-ms-examples": {
+          "Updates the job information for the specified job ID. (Only for use internally with Scope job type.)": { "$ref": "./examples/Adla_Job_Update.json" }
+        },
+        "parameters": [
+          {
+            "name": "jobIdentity",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "format": "uuid",
+            "description": "Job identifier. Uniquely identifies the job across all jobs submitted to the service."
+          },
+          {
+            "name": "parameters",
+            "in": "body",
+            "required": false,
+            "schema": {
+              "$ref": "#/definitions/UpdateJobParameters"
+            },
+            "description": "The parameters to update a job."
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successfully updated the details of the specified job.",
+            "schema": {
+              "$ref": "#/definitions/JobInformation"
+            }
+          },
+          "202": {
+            "description": "Successfully initiated an update of the specified job."
+          }
+        },
+        "x-ms-long-running-operation": true
       }
     },
     "/Jobs": {
@@ -501,6 +583,63 @@
     }
   },
   "definitions": {
+    "ResourceUsageStatistics": {
+      "properties": {
+        "average": {
+          "type": "number",
+          "readOnly": true,
+          "format": "double",
+          "description": "the average value."
+        },
+        "minimum": {
+          "type": "integer",
+          "readOnly": true,
+          "format": "int64",
+          "description": "the minimum value."
+        },
+        "maximum": {
+          "type": "integer",
+          "readOnly": true,
+          "format": "int64",
+          "description": "the maximum value."
+        }
+      },
+      "description": "the statistics information for resource usage."
+    },
+    "JobStatisticsVertex": {
+      "properties": {
+        "name": {
+          "type": "string",
+          "readOnly": true,
+          "description": "the name of the vertex."
+        },
+        "vertexId": {
+          "type": "string",
+          "readOnly": true,
+          "format": "uuid",
+          "description": "the id of the vertex."
+        },
+        "executionTime": {
+          "type": "string",
+          "readOnly": true,
+          "format": "duration",
+          "description": "the amount of execution time of the vertex."
+        },
+        "dataRead": {
+          "type": "integer",
+          "readOnly": true,
+          "format": "int64",
+          "description": "the amount of data read of the vertex, in bytes."
+        },
+        "peakMemUsage": {
+          "type": "integer",
+          "readOnly": true,
+          "format": "int64",
+          "description": "the amount of peak memory usage of the vertex, in bytes."
+        }
+      },
+      "description": "the detailed information for a vertex."
+    },
     "JobStatisticsVertexStage": {
       "properties": {
         "dataRead": {
@@ -621,6 +760,64 @@
           "readOnly": true,
           "format": "duration",
           "description": "the amount of time all successful vertices took in this stage."
+        },
+        "totalPeakMemUsage": {
+          "type": "integer",
+          "readOnly": true,
+          "format": "int64",
+          "description": "the sum of the peak memory usage of all the vertices in the stage, in bytes."
+        },
+        "totalExecutionTime": {
+          "type": "string",
+          "readOnly": true,
+          "format": "duration",
+          "description": "the sum of the total execution time of all the vertices in the stage."
+        },
+        "maxDataReadVertex": {
+          "$ref": "#/definitions/JobStatisticsVertex",
+          "description": "the vertex with the maximum amount of data read."
+        },
+        "maxExecutionTimeVertex": {
+          "$ref": "#/definitions/JobStatisticsVertex",
+          "description": "the vertex with the maximum execution time."
+        },
+        "maxPeakMemUsageVertex": {
+          "$ref": "#/definitions/JobStatisticsVertex",
+          "description": "the vertex with the maximum peak memory usage."
+        },
+        "estimatedVertexCpuCoreCount": {
+          "type": "integer",
+          "readOnly": true,
+          "format": "int32",
+          "description": "the estimated vertex CPU core count."
+        },
+        "estimatedVertexPeakCpuCoreCount": {
+          "type": "integer",
+          "readOnly": true,
+          "format": "int32",
+          "description": "the estimated vertex peak CPU core count."
+        },
+        "estimatedVertexMemSize": {
+          "type": "integer",
+          "readOnly": true,
+          "format": "int64",
+          "description": "the estimated vertex memory size, in bytes."
+        },
+        "allocatedContainerCpuCoreCount": {
+          "$ref": "#/definitions/ResourceUsageStatistics",
+          "description": "the statistics information for the allocated container CPU core count."
+        },
+        "allocatedContainerMemSize": {
+          "$ref": "#/definitions/ResourceUsageStatistics",
+          "description": "the statistics information for the allocated container memory size."
+        },
+        "usedVertexCpuCoreCount": {
+          "$ref": "#/definitions/ResourceUsageStatistics",
+          "description": "the statistics information for the used vertex CPU core count."
+        },
+        "usedVertexPeakMemSize": {
+          "$ref": "#/definitions/ResourceUsageStatistics",
+          "description": "the statistics information for the used vertex peak memory size."
         }
       },
       "description": "The Data Lake Analytics job statistics vertex stage information."
@@ -700,6 +897,19 @@
       },
       "description": "The Data Lake Analytics job state audit records for tracking the lifecycle of a job."
     },
+    "ScopeJobResource": {
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "the name of the resource."
+        },
+        "path": {
+          "type": "string",
+          "description": "the path to the resource."
+        }
+      },
+      "description": "The Scope job resources. (Only for use internally with Scope job type.)"
+    },
     "JobResource": {
       "properties": {
         "name": {
@@ -772,7 +982,7 @@
           "readOnly": true,
           "description": "the total time this job spent compiling. This value should not be set by the user and will be ignored if it is."
         },
-        "totalPauseTime": {
+        "totalPausedTime": {
           "type": "string",
           "format": "duration",
           "readOnly": true,
@@ -822,6 +1032,64 @@
         }
       },
       "description": "U-SQL job properties used when retrieving U-SQL jobs."
+    },
+    "ScopeJobProperties": {
+      "x-ms-discriminator-value": "Scope",
+      "allOf": [
+        {
+          "$ref": "#/definitions/JobProperties"
+        }
+      ],
+      "properties": {
+        "resources": {
+          "type": "array",
+          "readOnly": true,
+          "items": {
+            "$ref": "#/definitions/ScopeJobResource"
+          },
+          "description": "the list of resources that are required by the job"
+        },
+        "userAlgebraPath": {
+          "type": "string",
+          "readOnly": true,
+          "description": "the algebra file path after the job has completed"
+        },
+        "totalCompilationTime": {
+          "type": "string",
+          "format": "duration",
+          "readOnly": true,
+          "description": "the total time this job spent compiling. This value should not be set by the user and will be ignored if it is."
+        },
+        "totalPausedTime": {
+          "type": "string",
+          "format": "duration",
+          "readOnly": true,
+          "description": "the total time this job spent paused. This value should not be set by the user and will be ignored if it is."
+        },
+        "totalQueuedTime": {
+          "type": "string",
+          "format": "duration",
+          "readOnly": true,
+          "description": "the total time this job spent queued. This value should not be set by the user and will be ignored if it is."
+        },
+        "totalRunningTime": {
+          "type": "string",
+          "format": "duration",
+          "readOnly": true,
+          "description": "the total time this job spent executing. This value should not be set by the user and will be ignored if it is."
+        },
+        "rootProcessNodeId": {
+          "type": "string",
+          "readOnly": true,
+          "description": "the ID used to identify the job manager coordinating job execution. This value should not be set by the user and will be ignored if it is."
+        },
+        "yarnApplicationId": {
+          "type": "string",
+          "readOnly": true,
+          "description": "the ID used to identify the yarn application executing the job. This value should not be set by the user and will be ignored if it is."
+        }
+      },
+      "description": "Scope job properties used when submitting and retrieving Scope jobs. (Only for use internally with Scope job type.)"
     },
     "HiveJobProperties": {
       "x-ms-discriminator-value": "Hive",
@@ -873,7 +1141,7 @@
         },
         "type": {
           "type": "string",
-          "description": "the job type of the current job (i.e. Hive or USql)."
+          "description": "the job type of the current job (Hive, USql, or Scope (for internal use only))."
         }
       },
       "description": "The common Data Lake Analytics job properties."
@@ -902,6 +1170,24 @@
       },
       "description": "U-SQL job properties used when submitting U-SQL jobs."
     },
+    "CreateScopeJobProperties": {
+      "x-ms-discriminator-value": "Scope",
+      "allOf": [
+        {
+          "$ref": "#/definitions/CreateJobProperties"
+        }
+      ],
+      "properties": {
+        "resources": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ScopeJobResource"
+          },
+          "description": "the list of resources that are required by the job"
+        }
+      },
+      "description": "Scope job properties used when submitting Scope jobs."
+    },
     "CreateJobProperties": {
       "discriminator": "type",
       "required": [
@@ -919,7 +1205,7 @@
         },
         "type": {
           "type": "string",
-          "description": "the job type of the current job (i.e. USql)."
+          "description": "the job type of the current job (Hive, USql, or Scope (for internal use only))."
         }
       },
       "description": "The common Data Lake Analytics job properties for job submission."
@@ -1372,6 +1658,23 @@
       },
       "description": "Run info for a specific job pipeline."
     },
+    "CreateScopeJobParameters": {
+      "allOf": [
+        {
+          "$ref": "#/definitions/CreateJobParameters"
+        }
+      ],
+      "properties": {
+        "tags": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          },
+          "description": "the key-value pairs used to add additional metadata to the job information. (Only for use internally with Scope job type.)"
+        }
+      },
+      "description": "The parameters used to submit a new Data Lake Analytics Scope job. (Only for use internally with Scope job type.)"
+    },
     "CreateJobParameters": {
       "allOf": [
         {
@@ -1429,10 +1732,11 @@
       "properties": {
         "type": {
           "type": "string",
-          "description": "the job type of the current job (Hive or USql).",
+          "description": "the job type of the current job (Hive, USql, or Scope (for internal use only)).",
           "enum": [
             "USql",
-            "Hive"
+            "Hive",
+            "Scope"
           ],
           "x-ms-enum": {
             "name": "JobType",
@@ -1464,10 +1768,11 @@
         },
         "type": {
           "type": "string",
-          "description": "the job type of the current job (Hive or USql).",
+          "description": "the job type of the current job (Hive, USql, or Scope (for internal use only)).",
           "enum": [
             "USql",
-            "Hive"
+            "Hive",
+            "Scope"
           ],
           "x-ms-enum": {
             "name": "JobType",
@@ -1559,6 +1864,13 @@
         "related": {
           "$ref": "#/definitions/JobRelationshipProperties",
           "description": "the recurring job relationship information properties."
+        },
+        "tags": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          },
+          "description": "the key-value pairs used to add additional metadata to the job information. (Only for use internally with Scope job type.)"
         }
       },
       "required": [
@@ -1617,6 +1929,28 @@
         }
       },
       "description": "List of JobInfo items."
+    },
+    "UpdateJobParameters": {
+      "properties": {
+        "degreeOfParallelism": {
+          "type": "integer",
+          "format": "int32",
+          "description": "the degree of parallelism used for this job. This must be greater than 0, if set to less than 0 it will default to 1."
+        },
+        "priority": {
+          "type": "integer",
+          "format": "int32",
+          "description": "the priority value for the current job. Lower numbers have a higher priority. By default, a job has a priority of 1000. This must be greater than 0."
+        },
+        "tags": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          },
+          "description": "the key-value pairs used to add additional metadata to the job information. (Only for use internally with Scope job type.)"
+        }
+      },
+      "description": "The parameters that can be used to update existing Data Lake Analytics job information properties. (Only for use internally with Scope job type.)"
     }
   },
   "parameters": {
