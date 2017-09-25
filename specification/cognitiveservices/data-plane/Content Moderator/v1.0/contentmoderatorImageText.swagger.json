@@ -1,0 +1,592 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "Content Moderator Image Text Client",
+    "version": "1.0",
+    "description": "You use the API to scan your content as it is generated. Content Moderator then processes your content and sends the results along with relevant information either back to your systems or to the built-in review tool. You can use this information to take decisions e.g. take it down, send to human judge, etc.\r\n\r\nWhen using the API, images need to have a minimum of 128 pixels and a maximum file size of 4MB. \r\nText can be at most 1024 characters long. \r\nIf the content passed to the text API or the image API exceeds the size limits, the API will return an error code that informs about the issue.\r\n\r\nThis API is currently available in:\r\n\r\n* West US - westus.api.cognitive.microsoft.com\r\n* East US 2 - eastus2.api.cognitive.microsoft.com\r\n* West Central US - westcentralus.api.cognitive.microsoft.com\r\n* West Europe - westeurope.api.cognitive.microsoft.com\r\n* Southeast Asia - southeastasia.api.cognitive.microsoft.com"
+  },
+  "x-ms-parameterized-host": {
+    "hostTemplate": "{azureRegion}.api.cognitive.microsoft.com",
+    "parameters": [
+      {
+        "$ref": "#/parameters/AzureRegion"
+      }
+    ]
+  },
+  "basePath": "/contentmoderator/moderate/v1.0",
+  "schemes": [
+    "https"
+  ],
+  "paths": {
+    "/ProcessImage/FindFaces": {
+      "post": {
+        "tags": [
+          "Images"
+        ],
+        "operationId": "Images_FindFaces",
+        "description": "Returns the list of found faces.",
+        "parameters": [
+          {
+            "name": "CacheImage",
+            "in": "query",
+            "description": "Whether to retain the submitted image for future use; defaults to false if omitted",
+            "type": "boolean"
+          },
+          {
+            "$ref": "#/parameters/ocpApimSubscriptionKeyParameter"
+          },
+          {
+            "$ref": "#/parameters/contentTypeHeader2"
+          },
+          {
+            "name": "file",
+            "in": "body",
+            "required": true,
+            "schema": {
+                "type": "object",
+                "format": "file"
+            },
+            "description": "The file location."
+          }
+        ],
+        "consumes": [
+          "image/gif",
+          "image/jpeg",
+          "image/png",
+          "image/bmp",
+          "image/tiff"
+        ],
+        "responses": {
+          "200": {
+            "description": "The list of found faces.",
+            "schema": {
+              "$ref": "#/definitions/FoundFaces"
+            }
+          },
+          "default": {
+            "description": ""
+          }
+        },
+        "produces": [
+          "application/json"
+        ]
+      }
+    },
+    "/ProcessImage/OCR": {
+      "post": {
+        "tags": [
+          "Images"
+        ],
+        "operationId": "Images_OCR",
+        "description": "Returns any text found in the image for the language specified. If no language is specified in input then the detection defaults to English.",
+        "parameters": [
+          {
+            "name": "language",
+            "in": "query",
+            "description": "<a href=\"http://www-01.sil.org/iso639-3/codes.asp\">ISO 639-3 code</a>",
+            "required": true,
+            "type": "string",
+            "default": "eng",
+            "enum": [
+              "eng"
+            ]
+          },
+          {
+            "name": "CacheImage",
+            "in": "query",
+            "description": "Whether to retain the submitted image for future use; defaults to false if omitted",
+            "type": "boolean",
+            "default": "false",
+            "enum": [
+              "false"
+            ]
+          },
+          {
+            "name": "enhanced",
+            "in": "query",
+            "description": "When set to True, the image goes through additional processing to come with additional candidates.\n\nimage/tiff is not supported when enhanced is set to true\n\nNote: This impacts the response time.",
+            "type": "boolean",
+            "default": "false",
+            "enum": [
+              "false"
+            ]
+          },
+          {
+            "$ref": "#/parameters/ocpApimSubscriptionKeyParameter"
+          },
+          {
+            "$ref": "#/parameters/contentTypeHeader3"
+          },
+          {
+            "name": "file",
+            "in": "body",
+            "required": true,
+            "schema": {
+                "type": "object",
+                "format": "file"
+            },
+            "description": "The file location."
+          }
+        ],
+        "consumes": [
+          "image/gif",
+          "image/jpeg",
+          "image/png",
+          "image/bmp",
+          "image/tiff"
+        ],
+        "responses": {
+          "200": {
+            "description": "The found text and list of candidate text.",
+            "schema": {
+              "$ref": "#/definitions/OCRResponse"
+            }
+          },
+          "default": {
+            "description": ""
+          }
+
+        },
+        "produces": [
+          "application/json"
+        ]
+      }
+    },
+    "/ProcessImage/Evaluate": {
+      "post": {
+        "tags": [
+          "Images"
+        ],
+        "operationId": "Images_Evaluate",
+        "description": "Returns probabilities of the image containing racy or adult content.",
+        "parameters": [
+          {
+            "name": "CacheImage",
+            "in": "query",
+            "description": "Whether to retain the submitted image for future use; defaults to false if omitted",
+            "type": "boolean"
+          },
+          {
+            "$ref": "#/parameters/ocpApimSubscriptionKeyParameter"
+          },
+          {
+            "$ref": "#/parameters/contentTypeHeader4"
+          },
+          {
+            "name": "file",
+            "in": "body",
+            "required": true,
+            "schema": {
+                "type": "object",
+                "format": "file"
+            },
+            "description": "The file location."
+          }
+        ],
+        "consumes": [
+          "image/gif",
+          "image/jpeg",
+          "image/png",
+          "image/bmp",
+          "image/tiff"
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "schema": {
+              "$ref": "#/definitions/EvaluateResponse"
+            }
+          },
+          "default": {
+            "description": ""
+          }
+        },
+        "produces": [
+          "application/json"
+        ]
+      }
+    },
+    "/ProcessImage/Match": {
+      "post": {
+        "tags": [
+          "Images"
+        ],
+        "operationId": "Images_Match",
+        "description": "Fuzzily match an image against one of your custom Image Lists. You can create and manage your custom image lists using <a href=\"/docs/services/578ff44d2703741568569ab9/operations/578ff7b12703741568569abe\">this</a> API. \r\n\r\nReturns ID and tags of matching image.<br/>\r\n<br/>\r\nNote: Refresh Index must be run on the corresponding Image List before additions and removals are reflected in the response.",
+        "parameters": [
+          {
+            "name": "listId",
+            "in": "query",
+            "description": "The list id.",
+            "type": "string"
+          },
+          {
+            "name": "cacheimage",
+            "in": "query",
+            "description": "Use cached image.",
+            "type": "boolean"
+          },
+          {
+            "$ref": "#/parameters/ocpApimSubscriptionKeyParameter"
+          },
+          {
+            "$ref": "#/parameters/contentTypeHeader5"
+          },
+          {
+            "name": "file",
+            "in": "body",
+            "required": true,
+            "schema": {
+                "type": "object",
+                "format": "file"
+            },
+            "description": "The file location."
+          }
+        ],
+        "consumes": [
+          "image/gif",
+          "image/jpeg",
+          "image/png",
+          "image/bmp",
+          "image/tiff"
+        ],
+        "responses": {
+          "200": {
+            "description": "Supported values for tags are:\r\n<ul>\r\n<li>101: Nudity</li>\r\n<li>102: Sexual Content</li>\r\n<li>201: Alcohol</li>\r\n<li>202: Tobacco</li>\r\n<li>203: Drugs</li>\r\n<li>301: Child Exploitation</li>\r\n<li>401: Violence</li>\r\n<li>402: Weapons</li>\r\n<li>403: Gore</li>\r\n<li>501: Profanity</li>\r\n<li>502: Vulgarity</li>\r\n</ul>",
+            "schema": {
+              "$ref": "#/definitions/MatchResponse"
+            }
+          },
+          "default": {
+            "description": ""
+          }
+        },
+        "produces": [
+          "application/json"
+        ]
+      }
+    },
+    "/ProcessText/DetectLanguage": {
+      "post": {
+        "tags": [
+          "Text"
+        ],
+        "operationId": "Text_DetectLanguage",
+        "description": "This operation will detect the language of given input content. Returns the <a href=\"http://www-01.sil.org/iso639-3/codes.asp\">ISO 639-3 code</a> for the predominant language comprising the submitted text. Over 110 languages supported.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/ocpApimSubscriptionKeyParameter"
+          },
+          {
+            "$ref": "#/parameters/contentTypeHeader"
+          },
+          {
+            "name": "text",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "type": "string"
+            },
+            "description": "The parameters to provide for the created account."
+          }
+        ],
+        "consumes": [
+          "text/plain",
+          "text/html",
+          "text/xml",
+          "text/markdown"
+        ],
+        "responses": {
+          "200": {
+            "description": "The detected language result",
+            "schema": {
+              "$ref": "#/definitions/DetectedLanguageResult"
+            }
+          },
+          "default": {
+            "description": ""
+          }
+        },
+        "produces": [
+          "application/json"
+        ]
+      }
+    }
+  },
+  "definitions": {
+    "FoundFaces": {
+      "description": "Request object the contains found faces.",
+      "properties": {
+        "trackingId": {
+          "description": "The tracking id.",
+          "type": "string"
+        },
+        "cacheId": {
+          "description": "The cache id.",
+          "type": "string"
+        },
+        "result": {
+          "description": "True if result was found.",
+          "type": "boolean"
+        },
+        "count": {
+          "description": "Number of faces found.",
+          "type": "integer"
+        },
+        "faces": {
+          "description": "The list of faces.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/FoundFace"
+          }
+        }
+      }
+    },
+    "FoundFace": {
+      "description": "Coordinates to the found face.",
+      "properties": {
+        "bottom": {
+          "description": "The bottom coordinate.",
+          "type": "integer"
+        },
+        "left": {
+          "description": "The left coordinate.",
+          "type": "integer"
+        },
+        "right": {
+          "description": "The right coordinate.",
+          "type": "integer"
+        },
+        "top": {
+          "description": "The top coordinate.",
+          "type": "integer"
+        }
+      }
+    },
+    "OCRResponse": {
+      "description": "Contains the text found in image for the language specified",
+      "properties": {
+        "trackingId": {
+          "description": "The tracking id.",
+          "type": "string"
+        },
+        "cacheId": {
+          "description": "The cache id.",
+          "type": "string"
+        },
+        "language": {
+          "description": "The ISO 639-3 code.",
+          "type": "string"
+        },
+        "text": {
+          "description": "The text found.",
+          "type": "string"
+        },
+        "candidates": {
+          "description": "The list of candidate text.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Candidate"
+          }
+        }
+      }
+    },
+    "Candidate" : {
+      "description": "OCR candidate text.",
+      "properties" : {
+        "text": {
+          "description": "The text found.",
+          "type": "string"
+        },
+        "confidence": {
+          "description": "The confidence level.",
+          "type": "number"
+        }
+      }
+    },
+    "EvaluateResponse" : {
+      "description": "Evaluate response object.",
+      "properties" : {
+        "trackingId": {
+          "description": "The tracking id.",
+          "type": "string"
+        },
+        "adultClassificationScore": {
+          "description": "The adult classification score.",
+          "type": "number"
+        },
+        "isImageAdultClassified": {
+          "description": "Indicates if image is classified as adult.",
+          "type": "boolean"
+        },
+        "racyClassificationScore": {
+          "description": "The racy classication score.",
+          "type": "number"
+        },
+        "isImageRacyClassified": {
+          "description": "Indicates if the image is classifeid as racy.",
+          "type": "boolean"
+        },
+        "advancedInfo": {
+          "description": "The advanced info.",
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "status": {
+            "description": "The evaulate status",
+            "$ref": "#/definitions/EvaluateResponseStatus"
+        }
+      }
+    },
+    "EvaluateResponseStatus": {
+      "description": "The evaluate response status object.",
+      "properties" : {
+        "code": {
+          "description": "Evaluate response status code.",
+          "type": "integer"
+        },
+        "description": {
+          "description": "Description of evaulate response status code.",
+          "type": "string"
+        },
+        "exception": {
+          "description": "The evaluate response exception object."
+        }
+      }
+    },
+    "MatchResponse": {
+      "description": "The response for a Match request.",
+      "properties": {
+        "trackingId": {
+          "description": "The tracking id.",
+          "type": "string"
+        },
+        "cacheId": {
+          "description": "The cache id.",
+          "type": "string"
+        },
+        "isMatch": {
+          "description": "Indicates if there is a match.",
+          "type": "boolean"
+        },
+        "matchDetails": {
+          "description": "The match details.",
+          "$ref": "#/definitions/MatchDetailProperties"
+        }
+      }
+    },
+    "MatchDetailProperties": {
+      "description": "The match detail.",
+      "properties": {
+        "matchId": {
+          "description": "The match id.",
+          "type": "string"
+        },
+        "source": {
+          "description": "The source.",
+          "type": "string"
+        },
+        "tags": {
+          "description": "The tags for match details.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/MatchDetailTag"
+          }
+        },
+        "label": {
+          "description": "The label.",
+          "type": "string"
+        }
+      }
+    },
+    "MatchDetailTag": {
+      "description": "The details for a match.",
+      "properties": {
+        "key": {
+          "description": "The key.",
+          "type": "string"
+        },
+        "value": {
+          "description": "The value.",
+          "type": "string"
+        }
+      }      
+    },
+    "DetectedLanguageResult": {
+      "description": "The result for detected langauge.",
+      "properties": {
+        "detectedLanguage": {
+          "description": "The detected language.",
+          "type": "string"
+        }
+      }
+    }
+  },
+  "parameters": {
+    "contentTypeHeader": {
+      "name": "Content-Type",
+      "description": "The content type.",
+      "required": true,
+      "type": "string",
+      "in": "header"
+    },
+    "contentTypeHeader2": {
+      "name": "Content-Type",
+      "description": "The content type.",
+      "required": true,
+      "type": "string",
+      "in": "header"
+    },
+    "contentTypeHeader3": {
+      "name": "Content-Type",
+      "description": "The content type.",
+      "required": true,
+      "type": "string",
+      "in": "header"
+    },
+    "contentTypeHeader4": {
+      "name": "Content-Type",
+      "description": "The content type.",
+      "required": true,
+      "type": "string",
+      "in": "header"
+    },
+    "contentTypeHeader5": {
+      "name": "Content-Type",
+      "description": "The content type.",
+      "required": true,
+      "type": "string",
+      "in": "header"
+    },
+    "ocpApimSubscriptionKeyParameter": {
+      "name": "Ocp-Apim-Subscription-Key",
+      "description": "The subscription key in header",
+      "x-ms-parameter-location": "client",
+      "required": true,
+      "type": "string",
+      "in": "header"
+    },
+    "AzureRegion": {
+      "name": "azureRegion",
+      "description": "Supported Azure regions for Computer Vision endpoints",
+      "x-ms-parameter-location": "client",
+      "required": true,
+      "type": "string",
+      "in": "path",
+      "x-ms-skip-url-encoding": true,
+      "x-ms-enum": {
+        "name": "AzureRegion",
+        "modelAsString": true
+      },
+      "enum": [
+        "westus",
+        "westeurope",
+        "southeastasia",
+        "eastus2",
+        "westcentralus"
+      ]
+    }
+  }
+}
