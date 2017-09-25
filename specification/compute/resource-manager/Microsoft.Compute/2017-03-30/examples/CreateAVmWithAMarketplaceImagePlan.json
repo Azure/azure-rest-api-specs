@@ -29,7 +29,7 @@
               "storageAccountType": "Standard_LRS"
             }, 
             "name": "myVMosdisk", 
-            "createOption": "fromImage"
+            "createOption": "FromImage"
           }
         }, 
         "osProfile": {
@@ -49,8 +49,65 @@
         }
       }
     }
-  }, 
+  },
   "responses": {
+    "200": {
+      "body": {
+        "name": "myVM", 
+        "properties": {
+          "osProfile": {
+            "adminUsername": "negat", 
+            "secrets": [], 
+            "computerName": "myVM", 
+            "windowsConfiguration": {
+              "provisionVMAgent": true, 
+              "enableAutomaticUpdates": true
+            }
+          }, 
+          "networkProfile": {
+            "networkInterfaces": [
+              {
+                "id": "/subscriptions/5a810961-5236-4bbd-b50a-bda258eb00c0/resourceGroups/nsgExampleRg/providers/Microsoft.Network/networkInterfaces/nsgExistingNic", 
+                "properties": {
+                  "primary": true
+                }
+              }
+            ]
+          }, 
+          "storageProfile": {
+            "imageReference": {
+              "sku": "standard-data-science-vm", 
+              "publisher": "microsoft-ads", 
+              "version": "latest", 
+              "offer": "standard-data-science-vm"
+            }, 
+            "osDisk": {
+              "osType": "Windows", 
+              "caching": "ReadWrite", 
+              "createOption": "FromImage", 
+              "name": "myVMosdisk", 
+              "managedDisk": {
+                "storageAccountType": "Standard_LRS"
+              }
+            }, 
+            "dataDisks": []
+          }, 
+          "vmId": "5c0d55a7-c407-4ed6-bf7d-ddb810267c85", 
+          "hardwareProfile": {
+            "vmSize": "Standard_D1_v2"
+          }, 
+          "provisioningState": "Creating"
+        }, 
+        "plan": {
+          "publisher": "microsoft-ads", 
+          "product": "standard-data-science-vm", 
+          "name": "standard-data-science-vm"
+        }, 
+        "type": "Microsoft.Compute/virtualMachines", 
+        "id": "/subscriptions/5a810961-5236-4bbd-b50a-bda258eb00c0/resourceGroups/nsgExampleRg/providers/Microsoft.Compute/virtualMachines/myVM", 
+        "location": "westus"
+      }
+    },
     "201": {
       "body": {
         "name": "myVM", 
