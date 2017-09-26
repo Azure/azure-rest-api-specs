@@ -1019,7 +1019,26 @@
           }
         }
       },
-      "definitions": {
+      "parameters": {
+        "subscriptionId": {
+          "name": "subscriptionId",
+          "in": "path",
+          "description": "The subscription identifier.",
+          "required": true,
+          "type": "string"
+        },
+        "api-version": {
+          "name": "api-version",
+          "in": "query",
+          "description": "Version of the Api.",
+          "required": true,
+          "type": "string",
+          "default": "2016-02-03"
+        }
+      }
+    }
+  },
+        "definitions": {
         "AsyncOperationResult": {
           "type": "object",
           "properties": {
@@ -1420,24 +1439,5 @@
             }
           }
         }
-      },
-      "parameters": {
-        "subscriptionId": {
-          "name": "subscriptionId",
-          "in": "path",
-          "description": "The subscription identifier.",
-          "required": true,
-          "type": "string"
-        },
-        "api-version": {
-          "name": "api-version",
-          "in": "query",
-          "description": "Version of the Api.",
-          "required": true,
-          "type": "string",
-          "default": "2016-02-03"
-        }
       }
-    }
-  }
 }
