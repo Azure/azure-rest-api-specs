@@ -23,7 +23,7 @@
               "storageAccountType": "Standard_LRS"
             }, 
             "name": "myVMosdisk", 
-            "createOption": "fromImage"
+            "createOption": "FromImage"
           }
         }, 
         "networkProfile": {
@@ -50,8 +50,66 @@
       }, 
       "name": "myVM"
     }
-  }, 
+  },
   "responses": {
+    "200": {
+      "body": {
+        "id": "/subscriptions/5a810961-5236-4bbd-b50a-bda258eb00c0/resourceGroups/nsgExampleRg/providers/Microsoft.Compute/virtualMachines/myVM", 
+        "type": "Microsoft.Compute/virtualMachines", 
+        "properties": {
+          "osProfile": {
+            "adminUsername": "negat", 
+            "secrets": [], 
+            "computerName": "myVM", 
+            "windowsConfiguration": {
+              "provisionVMAgent": true, 
+              "enableAutomaticUpdates": true
+            }
+          }, 
+          "networkProfile": {
+            "networkInterfaces": [
+              {
+                "id": "/subscriptions/5a810961-5236-4bbd-b50a-bda258eb00c0/resourceGroups/nsgExampleRg/providers/Microsoft.Network/networkInterfaces/nsgExistingNic", 
+                "properties": {
+                  "primary": true
+                }
+              }
+            ]
+          }, 
+          "storageProfile": {
+            "imageReference": {
+              "sku": "2016-Datacenter", 
+              "publisher": "MicrosoftWindowsServer", 
+              "version": "latest", 
+              "offer": "WindowsServer"
+            }, 
+            "osDisk": {
+              "osType": "Windows", 
+              "caching": "ReadWrite", 
+              "createOption": "FromImage", 
+              "name": "myVMosdisk", 
+              "managedDisk": {
+                "storageAccountType": "Standard_LRS"
+              }
+            }, 
+            "dataDisks": []
+          }, 
+          "diagnosticsProfile": {
+            "bootDiagnostics": {
+              "storageUri": "http://nsgdiagnostic.blob.core.windows.net", 
+              "enabled": true
+            }
+          }, 
+          "vmId": "676420ba-7a24-4bfe-80bd-9c841ee184fa", 
+          "hardwareProfile": {
+            "vmSize": "Standard_D1_v2"
+          }, 
+          "provisioningState": "Creating"
+        }, 
+        "name": "myVM", 
+        "location": "westus"
+      }
+    },
     "201": {
       "body": {
         "id": "/subscriptions/5a810961-5236-4bbd-b50a-bda258eb00c0/resourceGroups/nsgExampleRg/providers/Microsoft.Compute/virtualMachines/myVM", 

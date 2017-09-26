@@ -25,6 +25,8 @@ To see additional help and options, run:
 These are the global settings for the ServiceFabricClient API.
 
 ``` yaml
+title: ServiceFabricClient
+description: ServiceFabric Client
 openapi-type: arm
 tag: package-2017-07
 ```

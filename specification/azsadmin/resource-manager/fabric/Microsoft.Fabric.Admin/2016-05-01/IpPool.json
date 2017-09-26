@@ -83,10 +83,17 @@
                     "200": {
                         "description": "OK",
                         "schema": {
-                            "$ref": "#/definitions/IpPool"
+                            "$ref": "Operations.json#/definitions/OperationStatus"
+                        }
+                    },
+                    "202": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "Operations.json#/definitions/OperationStatus"
                         }
                     }
-                }
+                },
+                "x-ms-long-running-operation": true
             }
         },
         "/subscriptions/{subscriptionId}/resourceGroups/System.{location}/providers/Microsoft.Fabric.Admin/fabricLocations/{location}/ipPools": {
