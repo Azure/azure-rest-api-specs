@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="en-us">
+  <head>
+    <meta charset="UTF-8">
+    <title>Azure-rest-api-specs by chainoy</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" type="text/css" href="stylesheets/normalize.css" media="screen">
+    <link href='https://fonts.googleapis.com/css?family=Open+Sans:400,700' rel='stylesheet' type='text/css'>
+    <link rel="stylesheet" type="text/css" href="stylesheets/stylesheet.css" media="screen">
+    <link rel="stylesheet" type="text/css" href="stylesheets/github-light.css" media="screen">
+  </head>
+  <body>
+    <section class="page-header">
+      <h1 class="project-name">Azure-rest-api-specs</h1>
+      <h2 class="project-tagline">The source for REST API specifications for Microsoft Azure.</h2>
+      <a href="https://github.com/chainoy/azure-rest-api-specs" class="btn">View on GitHub</a>
+      <a href="https://github.com/chainoy/azure-rest-api-specs/zipball/master" class="btn">Download .zip</a>
+      <a href="https://github.com/chainoy/azure-rest-api-specs/tarball/master" class="btn">Download .tar.gz</a>
+    </section>
+
+    <section class="main-content">
+      <p><a href="https://travis-ci.org/Azure/azure-rest-api-specs"><img src="http://img.shields.io/travis/Azure/azure-rest-api-specs/master.svg?style=flat-square&amp;label=repo-status" alt="Repo Status"></a></p>
+
+<h1>
+<a id="azure-rest-api-specifications" class="anchor" href="#azure-rest-api-specifications" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Azure REST API Specifications</h1>
+
+<h2>
+<a id="description" class="anchor" href="#description" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Description</h2>
+
+<p>This repository is the canonical source for REST API specifications for Microsoft Azure.</p>
+
+<h2>
+<a id="basics" class="anchor" href="#basics" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Basics</h2>
+
+<p>In the Azure Developer Experience workflow, you are at Step 3:</p>
+
+<p><a href="https://github.com/Azure/adx-documentation-pr#begin-api-design-review">API Design Review</a> -&gt; <a href="https://github.com/Azure/adx-documentation-pr/blob/master/README.md#engage-with-adx-team">Engage with ADX team</a> -&gt; <em><strong><a href="https://github.com/Azure/adx-documentation-pr#create-swagger-specification">Swagger specification</a></strong></em> -&gt; <a href="https://github.com/Azure/adx-documentation-pr#sdks">SDKs</a> -&gt; <a href="https://github.com/Azure/adx-documentation-pr#clis">CLIs</a></p>
+
+<p>If you're a spec author looking for information about all of of the repositories and steps in the pipeline, go back to the <a href="https://github.com/Azure/adx-documentation-pr">adx-documentation-pr</a> repository. Make sure to <a href="http://aka.ms/azuregithub">join the Github Azure organization</a> to get access to that repo.</p>
+
+<h2>
+<a id="getting-started" class="anchor" href="#getting-started" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Getting started</h2>
+
+<ul>
+<li>Our <a href="./.github/CONTRIBUTING.md">Contribution guidelines</a> walks you through the process of contributing to this repository.</li>
+<li>The <a href="./documentation/">/documentation</a> folder contains reference documentation for all aspects of Swagger and our recommended patterns. Start with the <a href="./documentation/creating-swagger.md">Creating Swagger</a> page.</li>
+<li>If you are using <strong>Swashbuckle</strong> to generate a swagger spec from your .NET WEB API then please take a look at this <a href="https://github.com/Azure/swashbuckle-resource-provider">repo</a>.</li>
+</ul>
+
+<h2>
+<a id="directory-structure" class="anchor" href="#directory-structure" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Directory Structure</h2>
+
+<p>The structure of the directory should strictly follow these rules:</p>
+
+<ul>
+<li>The top level folder must be the service name</li>
+<li>The second level must be the API versions</li>
+<li>The third level must be the format of the specification</li>
+<li>The fourth level must be the specifications</li>
+</ul>
+
+<p>The structure should appear like so:</p>
+
+<div class="highlight highlight-source-shell"><pre><span class="pl-c1">.</span>
+├── arm-authorization
+│   └── 2015-01-01
+│       └── swagger
+│           └── authorization.json
+├── arm-compute
+│   └── 2015-06-15
+│       └── swagger
+│           └── service.json
+├── arm-features
+│   └── 2014-08-01-preview
+│       └── swagger
+│           └── features.json
+├── arm-network
+│   └── 2015-05-01-preview
+│       └── swagger
+│           └── service.json
+├── arm-resources
+│   └── 2014-04-01-preview
+│       └── swagger
+│           └── service.json
+├── arm-storage
+│   └── 2015-05-01-preview
+│       └── swagger
+│           └── service.json
+├── arm-subscriptions
+│   └── 2014-04-01-preview
+│       └── swagger
+│           └── service.json
+├── arm-web
+├── documentation
+└── readme.md</pre></div>
+
+<p>Currently, the specifications are expected to be in Swagger JSON format</p>
+
+<h2>
+<a id="next-steps" class="anchor" href="#next-steps" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Next steps</h2>
+
+<p>The next step in the process after a spec is completed is to generate SDKs. Go to the <a href="https://github.com/Azure/adx-documentation-pr#sdks">SDKs section</a> of the Azure Developer Experience guide for more information.</p>
+
+<hr>
+
+<p><em>This project has adopted the <a href="https://opensource.microsoft.com/codeofconduct/">Microsoft Open Source Code of Conduct</a>. For more information see the <a href="https://opensource.microsoft.com/codeofconduct/faq/">Code of Conduct FAQ</a> or contact <a href="mailto:opencode@microsoft.com">opencode@microsoft.com</a> with any additional questions or comments.</em></p>
+
+      <footer class="site-footer">
+        <span class="site-footer-owner"><a href="https://github.com/chainoy/azure-rest-api-specs">Azure-rest-api-specs</a> is maintained by <a href="https://github.com/chainoy">chainoy</a>.</span>
+
+        <span class="site-footer-credits">This page was generated by <a href="https://pages.github.com">GitHub Pages</a> using the <a href="https://github.com/jasonlong/cayman-theme">Cayman theme</a> by <a href="https://twitter.com/jasonlong">Jason Long</a>.</span>
+      </footer>
+
+    </section>
+
+  
+  </body>
+</html>
