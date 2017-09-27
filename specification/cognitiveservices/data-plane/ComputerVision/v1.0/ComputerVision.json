@@ -28,7 +28,7 @@
         "/models": {
             "get": {
                 "description": "This operation returns the list of domain-specific models that are supported by the Computer Vision API.  Currently, the API only supports one domain-specific model: a celebrity recognizer. A successful response will be returned in JSON.  If the request failed, the response will contain an error code and a message to help understand what went wrong.",
-                "operationId": "List Domain Specific Models",
+                "operationId": "ListModels",
                 "produces": [
                     "application/json"
                 ],
@@ -44,6 +44,7 @@
                         }
                     },
                     "default": {
+                        "description": "Error response.",
                         "schema": {
                             "$ref": "#/definitions/ComputerVisionError"
                         }
@@ -59,7 +60,7 @@
         "/analyze?overload=url": {
             "post": {
                 "description": "This operation extracts a rich set of visual features based on the image content. Two input methods are supported -- (1) Uploading an image or (2) specifying an image URL.  Within your request, there is an optional parameter to allow you to choose which features to return.  By default, image categories are returned in the response.",
-                "operationId": "Analyze Image",
+                "operationId": "AnalyzeImage",
                 "consumes": [
                     "application/json"
                 ],
@@ -144,6 +145,7 @@
                         }
                     },
                     "default": {
+                        "description": "Error response.",
                         "schema": {
                             "$ref": "#/definitions/ComputerVisionError"
                         }
@@ -207,6 +209,7 @@
                         }
                     },
                     "default": {
+                        "description": "Error response.",
                         "schema": {
                             "$ref": "#/definitions/ComputerVisionError"
                         }
@@ -251,6 +254,7 @@
                         }
                     },
                     "default": {
+                        "description": "Error response.",
                         "schema": {
                             "$ref": "#/definitions/ComputerVisionError"
                         }
@@ -296,6 +300,7 @@
                         }
                     },
                     "default": {
+                        "description": "Error response.",
                         "schema": {
                             "$ref": "#/definitions/ComputerVisionError"
                         }
@@ -333,6 +338,7 @@
                         }
                     },
                     "default": {
+                        "description": "Error response.",
                         "schema": {
                             "$ref": "#/definitions/ComputerVisionError"
                         }
@@ -348,7 +354,7 @@
         "/models/{model}/analyze?overload=url": {
             "post": {
                 "description": "This operation recognizes content within an image by applying a domain-specific model.  The list of domain-specific models that are supported by the Computer Vision API can be retrieved using the /models GET request.  Currently, the API only provides a single domain-specific model: celebrities. Two input methods are supported -- (1) Uploading an image or (2) specifying an image URL. A successful response will be returned in JSON.  If the request failed, the response will contain an error code and a message to help understand what went wrong.",
-                "operationId": "Recognize Domain Specific Content",
+                "operationId": "AnalyzeImageByDomain",
                 "consumes": [
                     "application/json"
                 ],
@@ -386,6 +392,7 @@
                         }
                     },
                     "default": {
+                        "description": "Error response.",
                         "schema": {
                             "$ref": "#/definitions/ComputerVisionError"
                         }
@@ -430,6 +437,7 @@
                         }
                     },
                     "default": {
+                        "description": "Error response.",
                         "schema": {
                             "$ref": "#/definitions/ComputerVisionError"
                         }
@@ -469,6 +477,7 @@
                         }
                     },
                     "default": {
+                        "description": "Error response.",
                         "schema": {
                             "$ref": "#/definitions/ComputerVisionError"
                         }
@@ -486,7 +495,7 @@
         "/analyze?overload=stream": {
             "post": {
                 "description": "This operation extracts a rich set of visual features based on the image content.",
-                "operationId": "Analyze Image In Stream",
+                "operationId": "AnalyzeImageInStream",
                 "consumes": [
                     "application/octet-stream"
                 ],
@@ -552,6 +561,7 @@
                         }
                     },
                     "default": {
+                        "description": "Error response.",
                         "schema": {
                             "$ref": "#/definitions/ComputerVisionError"
                         }
@@ -562,7 +572,7 @@
         "/generateThumbnail?overload=stream": {
             "post": {
                 "description": "This operation generates a thumbnail image with the user-specified width and height. By default, the service analyzes the image, identifies the region of interest (ROI), and generates smart cropping coordinates based on the ROI. Smart cropping helps when you specify an aspect ratio that differs from that of the input image. A successful response contains the thumbnail image binary. If the request failed, the response contains an error code and a message to help determine what went wrong.",
-                "operationId": "GenerateThumbnailFromStream",
+                "operationId": "GenerateThumbnailInStream",
                 "consumes": [
                     "application/octet-stream"
                 ],
@@ -611,6 +621,7 @@
                         }
                     },
                     "default": {
+                        "description": "Error response.",
                         "schema": {
                             "$ref": "#/definitions/ComputerVisionError"
                         }
@@ -650,6 +661,7 @@
                         }
                     },
                     "default": {
+                        "description": "Error response.",
                         "schema": {
                             "$ref": "#/definitions/ComputerVisionError"
                         }
@@ -690,6 +702,7 @@
                         }
                     },
                     "default": {
+                        "description": "Error response.",
                         "schema": {
                             "$ref": "#/definitions/ComputerVisionError"
                         }
@@ -722,6 +735,7 @@
                         }
                     },
                     "default": {
+                        "description": "Error response.",
                         "schema": {
                             "$ref": "#/definitions/ComputerVisionError"
                         }
@@ -732,7 +746,7 @@
         "/models/{model}/analyze?overload=stream": {
             "post": {
                 "description": "This operation recognizes content within an image by applying a domain-specific model.  The list of domain-specific models that are supported by the Computer Vision API can be retrieved using the /models GET request.  Currently, the API only provides a single domain-specific model: celebrities. Two input methods are supported -- (1) Uploading an image or (2) specifying an image URL. A successful response will be returned in JSON.  If the request failed, the response will contain an error code and a message to help understand what went wrong.",
-                "operationId": "Recognize Domain Specific Content In Stream",
+                "operationId": "AnalyzeImageByDomainInStream",
                 "consumes": [
                     "application/octet-stream"
                 ],
@@ -761,6 +775,7 @@
                         }
                     },
                     "default": {
+                        "description": "Error response.",
                         "schema": {
                             "$ref": "#/definitions/ComputerVisionError"
                         }
@@ -800,6 +815,7 @@
                         }
                     },
                     "default": {
+                        "description": "Error response.",
                         "schema": {
                             "$ref": "#/definitions/ComputerVisionError"
                         }
