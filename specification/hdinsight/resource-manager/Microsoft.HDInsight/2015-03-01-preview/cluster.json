@@ -403,26 +403,26 @@
                 }
             }
         },
-		"DataDisksGroups": {
-			"description": "The data disks groups for the role.",
-			"properties": {
-				"disksPerNode": {
+        "DataDisksGroups": {
+            "description": "The data disks groups for the role.",
+            "properties": {
+                "disksPerNode": {
                     "type": "integer",
                     "format": "int32",
-					"description": "The number of disks per node."
-				},
-				"storageAccountType": {
-					"type": "string",
-					"description": "ReadOnly. The storage account type. Do not set this value.",
-					"readOnly": true
-				},
-				"diskSizeGB": {
-					"type": "integer",
-					"description": "ReadOnly. The DiskSize in GB. Do not set this value.",
-					"readOnly": true
-				}
-			}
-		},
+                    "description": "The number of disks per node."
+                },
+                "storageAccountType": {
+                    "type": "string",
+                    "description": "ReadOnly. The storage account type. Do not set this value.",
+                    "readOnly": true
+                },
+                "diskSizeGB": {
+                    "type": "integer",
+                    "description": "ReadOnly. The DiskSize in GB. Do not set this value.",
+                    "readOnly": true
+                }
+            }
+        },
         "Role": {
             "properties": {
                 "name": {
@@ -451,13 +451,13 @@
                     "$ref": "#/definitions/VirtualNetworkProfile",
                     "description": "The virtual network profile."
                 },
-				"dataDisksGroups": {
-					"type": "array",
-					"items": {
-						"$ref": "#/definitions/DataDisksGroups"
-					},
-					"description": "The data disks groups for the role."
-				},
+                "dataDisksGroups": {
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/definitions/DataDisksGroups"
+                    },
+                    "description": "The data disks groups for the role."
+                },
                 "scriptActions": {
                     "type": "array",
                     "items": {
@@ -819,52 +819,53 @@
             "description": "The execution summary of a script action."
         },
         "RuntimeScriptActionDetail": {
-			"extends": "#/definitions/RuntimeScriptAction",
-            "properties": {
-                "scriptExecutionId": {
-                    "readOnly": true,
-                    "type": "integer",
-                    "format": "int64",
-                    "description": "The execution id of the script action."
+            "allOf": [
+                {
+                    "$ref": "#/definitions/RuntimeScriptAction"
                 },
-                "startTime": {
-                    "readOnly": true,
-                    "type": "string",
-                    "description": "The start time of script action execution."
-                },
-                "endTime": {
-                    "readOnly": true,
-                    "type": "string",
-                    "description": "The end time of script action execution."
-                },
-                "status": {
-                    "readOnly": true,
-                    "type": "string",
-                    "description": "The current execution status of the script action."
-                },
-                "operation": {
-                    "readOnly": true,
-                    "type": "string",
-                    "description": "The reason why the script action was executed."
-                },
-                "executionSummary": {
-                    "readOnly": true,
-                    "type": "array",
-                    "items": {
-                        "$ref": "#/definitions/ScriptActionExecutionSummary"
-                    },
-                    "description": "The summary of script action execution result."
-                },
-                "debugInformation": {
-                    "readOnly": true,
-                    "type": "string",
-                    "description": "The script action execution debug information."
+                {
+                    "properties": {
+                        "scriptExecutionId": {
+                            "readOnly": true,
+                            "type": "integer",
+                            "format": "int64",
+                            "description": "The execution id of the script action."
+                        },
+                        "startTime": {
+                            "readOnly": true,
+                            "type": "string",
+                            "description": "The start time of script action execution."
+                        },
+                        "endTime": {
+                            "readOnly": true,
+                            "type": "string",
+                            "description": "The end time of script action execution."
+                        },
+                        "status": {
+                            "readOnly": true,
+                            "type": "string",
+                            "description": "The current execution status of the script action."
+                        },
+                        "operation": {
+                            "readOnly": true,
+                            "type": "string",
+                            "description": "The reason why the script action was executed."
+                        },
+                        "executionSummary": {
+                            "readOnly": true,
+                            "type": "array",
+                            "items": {
+                                "$ref": "#/definitions/ScriptActionExecutionSummary"
+                            },
+                            "description": "The summary of script action execution result."
+                        },
+                        "debugInformation": {
+                            "readOnly": true,
+                            "type": "string",
+                            "description": "The script action execution debug information."
+                        }
+                    }
                 }
-            },
-            "required": [
-                "name",
-                "uri",
-                "roles"
             ],
             "description": "The execution details of a script action."
         },
