@@ -132,7 +132,7 @@
                 "tags": [
                     "ScriptActions"
                 ],
-                "operationId": "ScriptActions_List",
+                "operationId": "ScriptActions_ListPersistedScripts",
                 "description": "Lists all the persisted script actions for the specified cluster.",
                 "x-ms-examples": {
                     "List all persisted script actions for the given cluster": {
@@ -178,7 +178,7 @@
                 "tags": [
                     "ScriptExecutionHistory"
                 ],
-                "operationId": "ScriptExecutionHistory_Get",
+                "operationId": "ScriptActions_GetExecutionDetail",
                 "description": "Gets the script execution detail for the given script execution ID.",
                 "x-ms-examples": {
                     "Get script execution history by script id": {
@@ -272,7 +272,7 @@
         "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.HDInsight/clusters/{clusterName}/scriptExecutionHistory/{scriptExecutionId}/promote": {
             "post": {
                 "tags": [
-                    "ScriptExecutionHistory_Promote"
+                    "Promote"
                 ],
                 "operationId": "ScriptExecutionHistory_Promote",
                 "description": "Promotes the specified ad-hoc script execution to a persisted script.",

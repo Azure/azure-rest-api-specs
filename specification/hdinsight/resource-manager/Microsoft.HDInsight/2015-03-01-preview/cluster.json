@@ -49,9 +49,6 @@
                     "Create Spark on Linux Cluster with SSH password": {
                         "$ref": "../examples/CreateLinuxSparkSshPassword.json"
                     },
-                    "Create Windows Cluster": {
-                        "$ref": "../examples/CreateWindowsHadoopRdp.json"
-                    },
                     "Create Secure Hadoop cluster": {
                         "$ref": "../examples/CreateLinuxHadoopSecureHadoop.json"
                     }
@@ -313,27 +310,6 @@
         }
     },
     "definitions": {
-        "HttpSettingsParameters": {
-            "properties": {
-                "restAuthCredential.isEnabled": {
-                    "type": "string",
-                    "description": "Whether HTTP auth is enabled or disabled."
-                },
-                "restAuthCredential.username": {
-                    "type": "string",
-                    "description": "The HTTP username."
-                },
-                "restAuthCredential.password": {
-                    "type": "string",
-                    "format": "password",
-                    "description": "The HTTP user password."
-                }
-            },
-            "required": [
-                "restAuthCredential.isEnabled"
-            ],
-            "description": "The payload for a Configure HTTP settings request."
-        },
         "ClusterDefinition": {
             "description": "The cluster definition.",
             "properties": {
@@ -427,6 +403,26 @@
                 }
             }
         },
+		"DataDisksGroups": {
+			"description": "The data disks groups for the role.",
+			"properties": {
+				"disksPerNode": {
+                    "type": "integer",
+                    "format": "int32",
+					"description": "The number of disks per node."
+				},
+				"storageAccountType": {
+					"type": "string",
+					"description": "ReadOnly. The storage account type. Do not set this value.",
+					"readOnly": true
+				},
+				"diskSizeGB": {
+					"type": "integer",
+					"description": "ReadOnly. The DiskSize in GB. Do not set this value.",
+					"readOnly": true
+				}
+			}
+		},
         "Role": {
             "properties": {
                 "name": {
@@ -455,6 +451,13 @@
                     "$ref": "#/definitions/VirtualNetworkProfile",
                     "description": "The virtual network profile."
                 },
+				"dataDisksGroups": {
+					"type": "array",
+					"items": {
+						"$ref": "#/definitions/DataDisksGroups"
+					},
+					"description": "The data disks groups for the role."
+				},
                 "scriptActions": {
                     "type": "array",
                     "items": {
@@ -773,7 +776,7 @@
                     "description": "The list of run time script actions."
                 },
                 "persistOnSuccess": {
-                    "type": "string",
+                    "type": "boolean",
                     "description": "Gets or sets if the scripts needs to be persisted."
                 }
             },
@@ -816,6 +819,7 @@
             "description": "The execution summary of a script action."
         },
         "RuntimeScriptActionDetail": {
+			"extends": "#/definitions/RuntimeScriptAction",
             "properties": {
                 "scriptExecutionId": {
                     "readOnly": true,
@@ -855,30 +859,6 @@
                     "readOnly": true,
                     "type": "string",
                     "description": "The script action execution debug information."
-                },
-                "name": {
-                    "type": "string",
-                    "description": "The name of the script action."
-                },
-                "uri": {
-                    "type": "string",
-                    "description": "The URI to the script."
-                },
-                "parameters": {
-                    "type": "string",
-                    "description": "The parameters for the script"
-                },
-                "roles": {
-                    "type": "array",
-                    "items": {
-                        "type": "string"
-                    },
-                    "description": "The list of roles where script will be executed."
-                },
-                "applicationName": {
-                    "readOnly": true,
-                    "type": "string",
-                    "description": "The application name of the script action, if any."
                 }
             },
             "required": [
