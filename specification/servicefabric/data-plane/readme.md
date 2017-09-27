@@ -26,7 +26,7 @@ These are the global settings for the ServiceFabricClient API.
 
 ``` yaml
 openapi-type: data-plane
-tag: 6.0
+tag: '6.0'
 ```
 
 
