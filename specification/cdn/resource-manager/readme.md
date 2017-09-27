@@ -85,3 +85,47 @@ csharp:
   output-folder: $(csharp-sdks-folder)/Cdn/Management.Cdn/Generated
   clear-output-folder: true
 ```
+
+## Go
+
+These settings apply only when `--go` is specified on the command line.
+
+``` yaml $(go)
+go:
+  license-header: MICROSOFT_APACHE
+  namespace: cdn
+  clear-output-folder: true
+```
+
+### Tag: package-2017-04 and go
+
+These settings apply only when `--tag=package-2017-04 --go` is specified on the command line.
+
+``` yaml $(tag) == 'package-2017-04' && $(go)
+output-folder: $(go-sdk-folder)/services/cdn/mgmt/2017-04-02/cdn
+```
+
+### Tag: package-2016-10 and go
+
+These settings apply only when `--tag=package-2016-10 --go` is specified on the command line.
+
+``` yaml $(tag) == 'package-2016-10'  && $(go)
+output-folder: $(go-sdk-folder)/services/cdn/mgmt/2016-10-02/cdn
+```
+
+
+### Tag: package-2016-04 and go
+
+These settings apply only when `--tag=package-2016-04 --go` is specified on the command line.
+
+``` yaml $(tag) == 'package-2016-04' && $(go)
+output-folder: $(go-sdk-folder)/services/cdn/mgmt/2016-04-02/cdn
+```
+
+### Tag: package-2015-06 and go
+
+These settings apply only when `--tag=package-2015-06 --go` is specified on the command line.
+
+``` yaml $(tag) == 'package-2015-06' && $(go)
+output-folder: $(go-sdk-folder)/services/cdn/mgmt/2015-06-01/cdn
+```
