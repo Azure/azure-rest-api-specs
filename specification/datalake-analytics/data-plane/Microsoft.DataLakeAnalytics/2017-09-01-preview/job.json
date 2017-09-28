@@ -1054,6 +1054,10 @@
           "readOnly": true,
           "description": "the algebra file path after the job has completed"
         },
+        "notifier": {
+          "type": "string",
+          "description": "the list of email addresses, separated by semi-colons, to notify when the job reaches a terminal state."
+        },
         "totalCompilationTime": {
           "type": "string",
           "format": "duration",
@@ -1183,7 +1187,11 @@
           "items": {
             "$ref": "#/definitions/ScopeJobResource"
           },
-          "description": "the list of resources that are required by the job"
+          "description": "the list of resources that are required by the job."
+        },
+        "notifier": {
+          "type": "string",
+          "description": "the list of email addresses, separated by semi-colons, to notify when the job reaches a terminal state."
         }
       },
       "description": "Scope job properties used when submitting Scope jobs."
