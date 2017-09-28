@@ -31,7 +31,7 @@ tag: package-catalog-2016-11
 ```
 
 ``` yaml $(package-job)
-tag: package-job-2016-11
+tag: package-job-2017-09-preview
 ```
 
 ### Tag: package-catalog-2016-11
@@ -50,6 +50,15 @@ These settings apply only when `--tag=package-catalog-2015-10-preview` is specif
 ``` yaml $(tag) == 'package-catalog-2015-10-preview'
 input-file:
 - Microsoft.DataLakeAnalytics/2015-10-01-preview/catalog.json
+```
+
+### Tag: package-job-2017-09-preview
+
+These settings apply only when `--tag=package-job-2017-09-preview` is specified on the command line.
+
+``` yaml $(tag) == 'package-job-2017-09-preview'
+input-file:
+- Microsoft.DataLakeAnalytics/2017-09-01-preview/job.json
 ```
 
 ### Tag: package-job-2016-11
