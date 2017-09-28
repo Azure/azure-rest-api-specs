@@ -758,6 +758,113 @@
         }
       }
     },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.DBforMySQL/performanceTiers": {
+      "get": {
+        "tags": [
+          "PerformanceTiers"
+        ],
+        "operationId": "PerformanceTiers_List",
+        "x-ms-examples": {
+          "PerformanceTiersList": {
+            "$ref": "./examples/PerformanceTiersList.json"
+          }
+        },
+        "description": "List all the performance tiers in a given subscription.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/PerformanceTierListResult"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": null
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.DBforMySQL/locations/{locationName}/performanceTiers": {
+      "get": {
+        "tags": [
+          "LocationBasedPerformanceTier"
+        ],
+        "operationId": "LocationBasedPerformanceTier_List",
+        "x-ms-examples": {
+          "PerformanceTiersList": {
+            "$ref": "./examples/PerformanceTiersListByLocation.json"
+          }
+        },
+        "description": "List all the performance tiers at specified location in a given subscription.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/LocationNameParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/PerformanceTierListResult"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": null
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.DBforMySQL/checkNameAvailability": {
+      "post": {
+          "tags": [
+              "CheckNameAvailability"
+          ],
+          "operationId": "CheckNameAvailability_Execute",
+          "x-ms-examples": {
+              "NameAvailability": { "$ref": "./examples/CheckNameAvailability.json" }
+          },
+          "description": "Check the availability of name for resource",
+          "parameters": [
+              {
+                  "$ref": "#/parameters/ApiVersionParameter"
+              },
+              {
+                  "$ref": "#/parameters/SubscriptionIdParameter"
+              },
+              {
+                  "name": "nameAvailabilityRequest",
+                  "in": "body",
+                  "required": true,
+                  "schema": {
+                      "$ref": "#/definitions/NameAvailabilityRequest"
+                  },
+                  "description": "The required parameters for checking if resource name is available."
+              }
+
+          ],
+          "responses": {
+              "200": {
+                  "description": "OK",
+                  "schema": {
+                      "$ref": "#/definitions/NameAvailability"
+                  }
+              }
+          }
+      }
+    },
     "/providers/Microsoft.DBforMySQL/operations": {
       "get": {
         "tags": [
@@ -1397,6 +1504,89 @@
         }
       },
       "description": "A list of log files."
+    },
+    "PerformanceTierServiceLevelObjectives": {
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "ID for the service level objective."
+        },
+        "edition": {
+          "type": "string",
+          "description": "Edition of the performance tier."
+        },
+        "dtu": {
+          "type": "integer",
+          "description": "Database throughput unit associated with the service level objective"
+        },
+        "storageMB": {
+          "type": "integer",
+          "description": "Maximum storage in MB associated with the service level objective"
+        }
+      },
+      "description": "Service level objectives for performance tier."
+    },
+    "PerformanceTierProperties": {
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "ID of the performance tier."
+        },
+        "backupRetentionDays": {
+          "type": "integer",
+          "description": "Backup retention in days for the performance tier edition"
+        },
+        "serviceLevelObjectives": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/PerformanceTierServiceLevelObjectives"
+          },
+          "description": "Service level objectives associated with the performance tier"
+        }
+      },
+      "description": "Performance tier properties"
+    },
+    "PerformanceTierListResult": {
+      "properties": {
+        "value": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/PerformanceTierProperties"
+          },
+          "description": "The list of performance tiers"
+        }
+      },
+      "description": "A list of performance tiers."
+    },
+    "NameAvailabilityRequest": {
+        "properties": {
+            "name": {
+                "type": "string",
+                "description": "Resource name to verify."
+            },
+            "type": {
+                "type": "string",
+                "description": "Resource type used for verification."
+            }
+        },
+        "description": "Request from client to check resource name availability."
+    },
+    "NameAvailability": {
+        "properties": {
+            "message": {
+                "type": "string",
+                "description": "Error Message."
+            },
+            "nameAvailable": {
+                "type": "boolean",
+                "description": "Indicates whether the resource name is available."
+            },
+            "reason": {
+                "type": "string",
+                "description": "Reason for name being unavailable."
+            }
+        },
+        "description": "Represents a resource name availability."
     }
   },
   "parameters": {
@@ -1452,6 +1642,14 @@
       "required": true,
       "type": "string",
       "description": "The name of the server configuration.",
+      "x-ms-parameter-location": "method"
+    },
+    "LocationNameParameter": {
+      "name": "locationName",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "description": "The name of the location.",
       "x-ms-parameter-location": "method"
     }
   }

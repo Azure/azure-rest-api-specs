@@ -52,7 +52,7 @@ Please also specify `--csharp-sdks-folder=<path to "SDKs" directory of your azur
 csharp:
   azure-arm: true
   license-header: MICROSOFT_MIT_NO_VERSION
-  namespace: Microsoft.AzureStack.InfrastructureInsights.Admin
+  namespace: Microsoft.AzureStack.Management.InfrastructureInsights.Admin
   payload-flattening-threshold: 1
   output-folder: $(csharp-sdks-folder)/InfrastructureInsights/InfrastructureInsights.Admin/Generated
   clear-output-folder: true

@@ -28,9 +28,22 @@ These are the global settings for the MonitorClient API.
 title: MonitorClient
 description: Monitor Client
 openapi-type: data-plane
-tag: package-2016-09
+tag: package-2017-05
 ```
 
+### Tag: package-2017-05
+
+These settings apply only when `--tag=package-2017-05` is specified on the command line.
+
+``` yaml $(tag) == 'package-2017-05'
+input-file:
+- microsoft.insights/2014-04-01/usageMetrics_API.json
+- microsoft.insights/2015-04-01/activityLogs_API.json
+- microsoft.insights/2015-04-01/eventCategories_API.json
+- microsoft.insights/2015-04-01/tenantActivityLogs_API.json
+- microsoft.insights/2017-05-01-preview/metricDefinitions_API.json
+- microsoft.insights/2017-05-01-preview/metrics_API.json
+```
 
 ### Tag: package-2016-09
 
@@ -77,4 +90,17 @@ python:
   license-header: MICROSOFT_MIT_NO_VERSION
   payload-flattening-threshold: 2
   namespace: azure.monitor
+```
+
+## Java
+
+These settings apply only when `--java` is specified on the command line.
+
+``` yaml $(java)
+java:
+  # override the default output folder
+  output-folder: $(output-folder)/azure-mgmt-monitor/src/main/java/com/microsoft/azure/management/monitor
+  license-header: MICROSOFT_MIT_NO_VERSION
+  payload-flattening-threshold: 2
+  namespace: com.microsoft.azure.management.monitor
 ```

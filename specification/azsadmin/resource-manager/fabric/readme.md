@@ -1,12 +1,12 @@
-# Commerce Admin
+# Fabric Admin
     
 > see https://aka.ms/autorest
 
-This is the AutoRest configuration file for Commerce Admin.
+This is the AutoRest configuration file for Fabric Admin.
 
 ---
 ## Getting Started 
-To build the SDK for Commerce Admin, simply [Install AutoRest](https://aka.ms/autorest/install) and in this folder, run:
+To build the SDK for Fabric Admin, simply [Install AutoRest](https://aka.ms/autorest/install) and in this folder, run:
 
 > `autorest`
 
@@ -18,7 +18,7 @@ To see additional help and options, run:
 ## Configuration
 
 ### Basic Information 
-These are the global settings for the Commerce API.
+These are the global settings for the Fabric API.
 
 ``` yaml
 title: FabricAdminClient
@@ -65,7 +65,7 @@ Please also specify `--csharp-sdks-folder=<path to "SDKs" directory of your azur
 csharp:
   azure-arm: true
   license-header: MICROSOFT_MIT_NO_VERSION
-  namespace: Microsoft.AzureStack.Fabric.Admin
+  namespace: Microsoft.AzureStack.Management.Fabric.Admin
   payload-flattening-threshold: 1
   output-folder: $(csharp-sdks-folder)/Fabric/Fabric.Admin/Generated
   clear-output-folder: true

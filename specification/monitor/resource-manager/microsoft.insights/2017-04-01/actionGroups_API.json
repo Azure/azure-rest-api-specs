@@ -82,7 +82,10 @@
                         }
                     },
                     "default": {
-                        "description": "An error occurred and the action group could not be created or updated."
+                        "description": "An error occurred and the action group could not be created or updated.",
+                        "schema": {
+                            "$ref": "#/definitions/ErrorResponse"
+                        }
                     }
                 }
             },
@@ -116,7 +119,10 @@
                         }
                     },
                     "default": {
-                        "description": "An error occurred and the action group could not be retrieved. 404: The action group does not exist."
+                        "description": "An error occurred and the action group could not be retrieved. 404: The action group does not exist.",
+                        "schema": {
+                            "$ref": "#/definitions/ErrorResponse"
+                        }
                     }
                 }
             },
@@ -150,7 +156,10 @@
                         "description": "The action group does not exist. It may have already been deleted."
                     },
                     "default": {
-                        "description": "An error occurred and the action group could not be deleted."
+                        "description": "An error occurred and the action group could not be deleted.",
+                        "schema": {
+                            "$ref": "#/definitions/ErrorResponse"
+                        }
                     }
                 }
             }
@@ -183,7 +192,10 @@
                         }
                     },
                     "default": {
-                        "description": "An error occurred and the list of action groups could not be retrieved."
+                        "description": "An error occurred and the list of action groups could not be retrieved.",
+                        "schema": {
+                            "$ref": "#/definitions/ErrorResponse"
+                        }
                     }
                 }
             }
@@ -219,7 +231,10 @@
                         }
                     },
                     "default": {
-                        "description": "An error occurred and the list of action groups could not be retrieved."
+                        "description": "An error occurred and the list of action groups could not be retrieved.",
+                        "schema": {
+                            "$ref": "#/definitions/ErrorResponse"
+                        }
                     }
                 }
             }
@@ -260,8 +275,14 @@
                     "200": {
                         "description": "The receiver was successfully enabled."
                     },
+                    "409": {
+                        "description": "The receiver is already enabled in the action group."
+                    },
                     "default": {
-                        "description": "An error occurred and the receiver could not be enabled. 409: The receiver is already enabled in the action group. 404: The action group was not found or no matching receiver was found in the action group."
+                        "description": "An error occurred and the receiver could not be enabled, e.g.: 404: The action group was not found or no matching receiver was found in the action group.",
+                        "schema": {
+                            "$ref": "#/definitions/ErrorResponse"
+                        }
                     }
                 }
             }
@@ -333,7 +354,7 @@
                 },
                 "nextLink": {
                     "type": "string",
-                    "description": "Provides the link to retrive the next set of elements."
+                    "description": "Provides the link to retrieve the next set of elements."
                 }
             }
         },
@@ -348,7 +369,7 @@
                 "enabled": {
                     "type": "boolean",
                     "default": true,
-                    "description": "Indicates whether this action group is enabled. If an action group is not enabled, then none of its receviers will receive communications."
+                    "description": "Indicates whether this action group is enabled. If an action group is not enabled, then none of its receivers will receive communications."
                 },
                 "emailReceivers": {
                     "type": "array",
@@ -467,6 +488,20 @@
             "required": [
                 "receiverName"
             ]
+        },
+        "ErrorResponse": {
+            "description": "Describes the format of Error response.",
+            "type": "object",
+            "properties": {
+                "code": {
+                    "description": "Error code",
+                    "type": "string"
+                },
+                "message": {
+                    "description": "Error message indicating why the operation failed.",
+                    "type": "string"
+                }
+            }
         }
     },
     "parameters": {

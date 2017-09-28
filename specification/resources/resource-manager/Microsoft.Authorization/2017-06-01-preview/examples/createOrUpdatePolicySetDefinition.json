@@ -1,0 +1,88 @@
+{
+  "parameters": {
+    "subscriptionId": "subid",
+    "policySetDefinitionName": "costManagement",
+    "api-version": "2017-06-01-preview",
+    "parameters": {
+      "properties": {
+        "displayName": "VM and Storage Cost Management",
+        "description": "Policies required to minimize the risk of accidental cost overruns",
+        "metadata": {
+          "category": "Cost Management"
+        },
+        "policyDefinitions": [
+          {
+            "policyDefinitionId": "/subscriptions/subId/providers/Microsoft.Authorization/policyDefinitions/storageSkus",
+            "parameters": {
+              "listOfAllowedSKUs": {
+                "value": [
+                  "Standard_GRS",
+                  "Standard_LRS"
+                ] }
+            }
+          }
+        ]
+      }
+    }
+  },
+  "responses": {
+    "201": {
+      "headers": {},
+      "body": {
+        "id": "/subscriptions/subid/providers/Microsoft.Authorization/policySetDefinitions/costManagement",
+        "type": "Microsoft.Authorization/policySetDefinitions",
+        "name": "costManagement",
+        "properties": {
+          "displayName": "VM and Storage Cost Management",
+          "description": "Policies required to minimize the risk of accidental cost overruns",
+          "metadata": {
+            "category": "Cost Management"
+          },
+          "policyDefinitions": [
+            {
+              "policyDefinitionId": "/subscriptions/subid/providers/Microsoft.Authorization/policyDefinitions/storageSkus",
+              "parameters": {
+                "listOfAllowedSKUs": {
+                  "value": [
+                    "Standard_GRS",
+                    "Standard_LRS"
+                  ]
+                }
+              }
+            }
+          ],
+          "policyType": "Custom"
+        }
+      }
+    },
+    "200": {
+      "headers": {},
+      "body": {
+        "id": "/subscriptions/subid/providers/Microsoft.Authorization/policySetDefinitions/costManagement",
+        "type": "Microsoft.Authorization/policySetDefinitions",
+        "name": "costManagement",
+        "properties": {
+          "displayName": "VM and Storage Cost Management",
+          "description": "Policies required to minimize the risk of accidental cost overruns",
+          "metadata": {
+            "category": "Cost Management"
+          },
+          "policyDefinitions": [
+            {
+              "policyDefinitionId": "/subscriptions/subid/providers/Microsoft.Authorization/policyDefinitions/storageSkus",
+              "parameters": {
+                "listOfAllowedSKUs": {
+                  "value": [
+                    "Standard_GRS",
+                    "Standard_LRS"
+                  ]
+                }
+              }
+            }
+          ],
+          "policyType": "Custom"
+        }
+      }
+    }
+  }
+}

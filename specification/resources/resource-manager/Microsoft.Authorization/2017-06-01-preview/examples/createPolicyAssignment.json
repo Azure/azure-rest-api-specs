@@ -1,0 +1,48 @@
+{
+  "parameters": {
+    "api-version": "2017-06-01-preview",
+    "policyAssignmentName": "costManagement",
+    "scope": "/subscriptions/subId",
+    "parameters": {
+      "properties": {
+        "displayName": "Storage Cost Management",
+        "description": "Policies required to minimize the risk of accidental cost overruns",
+        "metadata": {
+          "category": "Cost Management"
+        },
+        "policyDefinitionId": "/subscriptions/subId/providers/Microsoft.Authorization/policyDefinitions/storageSkus",
+        "parameters": { "allowedSkus": { "type": "Array" } },
+        "notScopes":  [ "/subscriptions/subId/resourcegroups/testingResourceGroup" ] 
+      },
+      "sku": {
+        "name": "A0",
+        "tier":  "Free" 
+      }
+    }
+  },
+  "responses": {
+    "201": {
+      "headers": {},
+      "body": {
+        "id": "/subscriptions/subId/providers/Microsoft.Authorization/policyAssignments/costManagement",
+        "type": "Microsoft.Authorization/policyAssignments",
+        "name": "costManagement",
+        "properties": {
+          "displayName": "Storage Cost Management",
+          "description": "Policies required to minimize the risk of accidental cost overruns",
+          "metadata": {
+            "category": "Cost Management"
+          },
+          "policyDefinitionId": "/subscriptions/subId/providers/Microsoft.Authorization/policyDefinitions/storageSkus",
+          "parameters": { "allowedSkus": { "type": "Array" } },
+          "notScopes": [ "/subscriptions/subId/resourcegroups/testingResourceGroup" ],
+          "scope":  "/subscriptions/subId" 
+        },
+        "sku": {
+          "name": "A0",
+          "tier": "Free"
+        }
+      }
+    }
+  }
+}
