@@ -26,9 +26,17 @@ These are the global settings for the Batch API.
 
 ``` yaml
 openapi-type: data-plane
-tag: package-2017-06.5.1
+tag: package-2017-09.6.0
 ```
 
+### Tag: package-2017-09.6.0
+
+These settings apply only when `--tag=package-2017-09.6.0` is specified on the command line.
+
+``` yaml $(tag) == 'package-2017-09.6.0'
+input-file:
+- Microsoft.Batch/2017-09-01.6.0/BatchService.json
+```
 
 ### Tag: package-2017-06.5.1
 
@@ -205,7 +213,7 @@ csharp:
   azure-arm: true
   license-header: MICROSOFT_MIT_NO_VERSION
   payload-flattening-threshold: 1
-  namespace: Microsoft.Azure.Batch
+  namespace: Microsoft.Azure.Batch.Protocol
   output-folder: $(csharp-sdks-folder)/Batch/DataPlane/Azure.Batch/GeneratedProtocol
   clear-output-folder: true
 ```

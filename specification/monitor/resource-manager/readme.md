@@ -28,21 +28,23 @@ These are the global settings for the MonitorClient API.
 title: MonitorClient
 description: Monitor Management Client
 openapi-type: arm
-tag: package-2017-03
+tag: package-2017-08
 ```
 
 
-### Tag: package-2017-03
+### Tag: package-2017-08
 
-These settings apply only when `--tag=package-2017-03` is specified on the command line.
+These settings apply only when `--tag=package-2017-08` is specified on the command line.
 
-``` yaml $(tag) == 'package-2017-03'
+``` yaml $(tag) == 'package-2017-08'
 input-file:
 - microsoft.insights/2015-04-01/autoscale_API.json
+- microsoft.insights/2015-04-01/operations_API.json
 - microsoft.insights/2016-03-01/alertRulesIncidents_API.json
 - microsoft.insights/2016-03-01/alertRules_API.json
 - microsoft.insights/2016-03-01/logProfiles_API.json
-- microsoft.insights/2016-09-01/serviceDiagnosticsSettings_API.json
+- microsoft.insights/2017-05-01-preview/diagnosticsSettings_API.json
+- microsoft.insights/2017-05-01-preview/diagnosticsSettingsCategories_API.json
 - microsoft.insights/2017-04-01/actionGroups_API.json
 - microsoft.insights/2017-04-01/activityLogAlerts_API.json
 ```
@@ -78,4 +80,17 @@ python:
   license-header: MICROSOFT_MIT_NO_VERSION
   payload-flattening-threshold: 2
   namespace: azure.mgmt.monitor
+```
+
+## Java
+
+These settings apply only when `--java` is specified on the command line.
+
+``` yaml $(java)
+java:
+  # override the default output folder
+  output-folder: $(output-folder)/azure-mgmt-monitor/src/main/java/com/microsoft/azure/management/monitor
+  license-header: MICROSOFT_MIT_NO_VERSION
+  payload-flattening-threshold: 2
+  namespace: com.microsoft.azure.management.monitor
 ```

@@ -28,9 +28,35 @@ These are the global settings for the Network API.
 title: NetworkManagementClient
 description: Network Client
 openapi-type: arm
-tag: package-2017-08
+tag: package-2017-09
 ```
 
+### Tag: package-2017-09
+
+These settings apply only when `--tag=package-2017-09` is specified on the command line.
+
+``` yaml $(tag) == 'package-2017-09'
+input-file:
+- Microsoft.Network/2017-09-01/applicationGateway.json
+- Microsoft.Network/2017-09-01/applicationSecurityGroup.json
+- Microsoft.Network/2017-09-01/checkDnsAvailability.json
+- Microsoft.Network/2017-09-01/endpointService.json
+- Microsoft.Network/2017-09-01/expressRouteCircuit.json
+- Microsoft.Network/2017-09-01/loadBalancer.json
+- Microsoft.Network/2017-09-01/network.json
+- Microsoft.Network/2017-09-01/networkInterface.json
+- Microsoft.Network/2017-09-01/networkSecurityGroup.json
+- Microsoft.Network/2017-09-01/networkWatcher.json
+- Microsoft.Network/2017-09-01/publicIpAddress.json
+- Microsoft.Network/2017-09-01/routeFilter.json
+- Microsoft.Network/2017-09-01/routeTable.json
+- Microsoft.Network/2017-09-01/serviceCommunity.json
+- Microsoft.Network/2017-09-01/usage.json
+- Microsoft.Network/2017-09-01/virtualNetwork.json
+- Microsoft.Network/2017-09-01/virtualNetworkGateway.json
+- Microsoft.Network/2017-09-01/vmssNetworkInterface.json
+- Microsoft.Network/2017-09-01/vmssPublicIpAddress.json
+```
 
 ### Tag: package-2017-08
 
@@ -40,6 +66,7 @@ These settings apply only when `--tag=package-2017-08` is specified on the comma
 input-file:
 - Microsoft.Network/2017-08-01/applicationGateway.json
 - Microsoft.Network/2017-08-01/checkDnsAvailability.json
+- Microsoft.Network/2017-08-01/endpointService.json
 - Microsoft.Network/2017-08-01/expressRouteCircuit.json
 - Microsoft.Network/2017-08-01/loadBalancer.json
 - Microsoft.Network/2017-08-01/network.json
@@ -66,6 +93,7 @@ These settings apply only when `--tag=package-2017-06` is specified on the comma
 input-file:
 - Microsoft.Network/2017-06-01/applicationGateway.json
 - Microsoft.Network/2017-06-01/checkDnsAvailability.json
+- Microsoft.Network/2017-06-01/endpointService.json
 - Microsoft.Network/2017-06-01/expressRouteCircuit.json
 - Microsoft.Network/2017-06-01/loadBalancer.json
 - Microsoft.Network/2017-06-01/network.json

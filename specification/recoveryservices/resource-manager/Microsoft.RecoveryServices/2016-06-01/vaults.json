@@ -50,7 +50,7 @@
         }
       }
     },
-    "/Subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.RecoveryServices/operations": {
+    "/providers/Microsoft.RecoveryServices/operations": {
       "get": {
         "tags": [
           "Operations"
@@ -62,13 +62,7 @@
         ],
         "parameters": [
           {
-            "$ref": "#/parameters/SubscriptionId"
-          },
-          {
             "$ref": "#/parameters/ApiVersion"
-          },
-          {
-            "$ref": "#/parameters/ResourceGroupName"
           }
         ],
         "responses": {
@@ -81,7 +75,13 @@
         },
         "deprecated": false,
         "x-ms-pageable": {
-          "nextLinkName": "NextLink"
+          "nextLinkName": "NextLink",
+          "itemName": "Value"
+        },
+        "x-ms-examples": {
+          "ListOperations": {
+            "$ref": "./examples/ListOperations.json"
+          }
         }
       }
     },
@@ -419,51 +419,53 @@
       "type": "object",
       "properties": {
         "Provider": {
-          "description": "Name of the resource provider.",
-          "type": "string",
-          "readOnly": true
+          "description": "Name of the provider for display purposes",
+          "type": "string"
         },
         "Resource": {
-          "description": "Type of the resource.",
-          "type": "string",
-          "readOnly": true
+          "description": "Name of the resource type for display purposes",
+          "type": "string"
         },
         "Operation": {
-          "description": "Name of the operation.",
-          "type": "string",
-          "readOnly": true
+          "description": "Name of the operation for display purposes",
+          "type": "string"
         },
         "Description": {
-          "description": "Operation description.",
-          "type": "string",
-          "readOnly": true
+          "description": "Description of the operation for display purposes",
+          "type": "string"
         }
       }
     },
     "ClientDiscoveryForLogSpecification": {
-      "description": "Log specification for the operation.",
+      "description": "Class to represent shoebox log specification in json client discovery.",
       "type": "object",
       "properties": {
         "name": {
           "description": "Name of the log.",
-          "type": "string",
-          "readOnly": true
+          "type": "string"
         },
         "displayName": {
-          "description": "Localized display name.",
-          "type": "string",
-          "readOnly": true
+          "description": "Localized display name",
+          "type": "string"
         },
         "blobDuration": {
-          "description": "Blob duration.",
-          "format": "date-time",
-          "type": "string",
-          "readOnly": true
+          "description": "Blobs created in customer storage account per hour",
+          "type": "string"
+        }
+      }
+    },
+    "ClientDiscoveryForProperties": {
+      "description": "Class to represent shoebox properties in json client discovery.",
+      "type": "object",
+      "properties": {
+        "serviceSpecification": {
+          "$ref": "#/definitions/ClientDiscoveryForServiceSpecification",
+          "description": "Operation properties."
         }
       }
     },
     "ClientDiscoveryForServiceSpecification": {
-      "description": "Operation properties.",
+      "description": "Class to represent shoebox service specification in json client discovery.",
       "type": "object",
       "properties": {
         "logSpecifications": {
@@ -471,24 +473,12 @@
           "type": "array",
           "items": {
             "$ref": "#/definitions/ClientDiscoveryForLogSpecification"
-          },
-          "readOnly": true
-        }
-      }
-    },
-    "ClientDiscoveryProperties": {
-      "description": "Operation properties.",
-      "type": "object",
-      "properties": {
-        "serviceSpecification": {
-          "$ref": "#/definitions/ClientDiscoveryForServiceSpecification",
-          "description": "Operation properties.",
-          "readOnly": true
+          }
         }
       }
     },
     "ClientDiscoveryResponse": {
-      "description": "List of available operations.",
+      "description": "Operations List response which contains list of available APIs.",
       "type": "object",
       "properties": {
         "Value": {
@@ -496,13 +486,11 @@
           "type": "array",
           "items": {
             "$ref": "#/definitions/ClientDiscoveryValueForSingleApi"
-          },
-          "readOnly": true
+          }
         },
         "NextLink": {
-          "description": "NextLink",
-          "type": "string",
-          "readOnly": true
+          "description": "NextLink of the Response.",
+          "type": "string"
         }
       }
     },
@@ -511,25 +499,20 @@
       "type": "object",
       "properties": {
         "Name": {
-          "description": "Name of the operation.",
-          "type": "string",
-          "readOnly": true
+          "description": "Name of the operation",
+          "type": "string"
         },
         "Display": {
           "$ref": "#/definitions/ClientDiscoveryDisplay",
-          "description": "Contains the localized display information for this particular operation.",
-          "readOnly": true
+          "description": "Contains the localized display information for this particular operation"
         },
         "Origin": {
-          "description": "The intended executor of the operation.",
-          "type": "string",
-          "readOnly": true
+          "description": "The intended executor of the operation;governs the display of the operation in the RBAC UX and the audit logs UX",
+          "type": "string"
         },
         "Properties": {
-          "$ref": "#/definitions/ClientDiscoveryProperties",
-          "description": "Properties of the operation.",
-          "readOnly": true,
-          "x-ms-client-flatten": true
+          "$ref": "#/definitions/ClientDiscoveryForProperties",
+          "description": "Properties"
         }
       }
     },

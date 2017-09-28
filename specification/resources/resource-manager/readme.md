@@ -37,7 +37,7 @@ tag: package-locks-2016-09
 ```
 
 ``` yaml $(package-policy)
-tag: package-policy-2016-12
+tag: package-policy-2017-06
 ```
 
 ``` yaml $(package-resources)
@@ -54,6 +54,10 @@ tag: package-links-2016-09
 
 ``` yaml $(package-managedapplications)
 tag: package-managedapplications-2016-09
+```
+
+``` yaml $(package-managedapplications)
+tag: package-management-2017-08
 ```
 
 ### Tag: package-features-2015-12
@@ -80,12 +84,31 @@ input-file:
 - Microsoft.Authorization/2015-01-01/locks.json
 ```
 
+### Tag: package-policy-2017-06
+These settings apply only when `--tag=package-policy-2017-06` is specified on the command line.
+
+``` yaml $(tag) == 'package-policy-2017-06'
+input-file:
+- Microsoft.Authorization/2017-06-01-preview/policyAssignments.json
+- Microsoft.Authorization/2017-06-01-preview/policySetDefinitions.json
+- Microsoft.Authorization/2016-12-01/policyDefinitions.json
+
+# Needed when there is more than one input file
+override-info:
+  title: PolicyClient
+```
+
 ### Tag: package-policy-2016-12
 These settings apply only when `--tag=package-policy-2016-12` is specified on the command line.
 
 ``` yaml $(tag) == 'package-policy-2016-12'
 input-file:
-- Microsoft.Authorization/2016-12-01/policy.json
+- Microsoft.Authorization/2016-12-01/policyDefinitions.json
+- Microsoft.Authorization/2016-12-01/policyAssignments.json
+
+# Needed when there is more than one input file
+override-info:
+  title: PolicyClient
 ```
 
 ### Tag: package-policy-2016-04
@@ -168,6 +191,14 @@ input-file:
 - Microsoft.Solutions/2016-09-01-preview/managedapplications.json
 ```
 
+### Tag: package-management-2017-08
+These settings apply only when `--tag=package-management-2017-08` is specified on the command line.
+
+``` yaml $(tag) == 'package-management-2017-08'
+input-file:
+- Microsoft.Management/2017-08-31-preview/management.json
+```
+
 ---
 # Code Generation
 
@@ -191,6 +222,7 @@ batch:
   - package-resources: true
   - package-subscriptions: true
   - package-links: true
+  - package-management: true
 #  - package-managedapplications: true
 ```
 
@@ -207,4 +239,5 @@ batch:
   - package-subscriptions: true
   - package-links: true
   - package-managedapplications: true
+  - package-management: true
 ```
