@@ -49,7 +49,7 @@
             "in": "query",
             "type": "string",
             "required": false,
-            "description": "Reduces the set of data collected. <br>The **$filter** is very restricted and allows only the following patterns.<br>- List events for a resource group: $filter=eventTimestamp ge '<Start Time>' and eventTimestamp le '<End Time>' and eventChannels eq 'Admin, Operation' and resourceGroupName eq '<ResourceGroupName>'.<br>- List events for resource: $filter=eventTimestamp ge '<Start Time>' and eventTimestamp le '<End Time>' and eventChannels eq 'Admin, Operation' and resourceUri eq '<ResourceURI>'.<br>- List events for a subscription: $filter=eventTimestamp ge '<Start Time>' and eventTimestamp le '<End Time>' and eventChannels eq 'Admin, Operation'.<br>- List evetns for a resource provider: $filter=eventTimestamp ge '<Start Time>' and eventTimestamp le '<End Time>' and eventChannels eq 'Admin, Operation' and resourceProvider eq '<ResourceProviderName>'.<br>- List events for a correlation Id: api-version=2014-04-01&$filter=eventTimestamp ge '2014-07-16T04:36:37.6407898Z' and eventTimestamp le '2014-07-20T04:36:37.6407898Z' and eventChannels eq 'Admin, Operation' and correlationId eq '<CorrelationID>'.<br>**NOTE**: No other syntax is allowed."
+            "description": "Reduces the set of data collected. <br>The **$filter** is very restricted and allows only the following patterns.<br>- List events for a resource group: $filter=eventTimestamp ge '<Start Time>' and eventTimestamp le '<End Time>' and eventChannels eq 'Admin, Operation' and resourceGroupName eq '<ResourceGroupName>'.<br>- List events for resource: $filter=eventTimestamp ge '<Start Time>' and eventTimestamp le '<End Time>' and eventChannels eq 'Admin, Operation' and resourceUri eq '<ResourceURI>'.<br>- List events for a subscription: $filter=eventTimestamp ge '<Start Time>' and eventTimestamp le '<End Time>' and eventChannels eq 'Admin, Operation'.<br>- List events for a resource provider: $filter=eventTimestamp ge '<Start Time>' and eventTimestamp le '<End Time>' and eventChannels eq 'Admin, Operation' and resourceProvider eq '<ResourceProviderName>'.<br>- List events for a correlation Id: api-version=2014-04-01&$filter=eventTimestamp ge '2014-07-16T04:36:37.6407898Z' and eventTimestamp le '2014-07-20T04:36:37.6407898Z' and eventChannels eq 'Admin, Operation' and correlationId eq '<CorrelationID>'.<br>**NOTE**: No other syntax is allowed."
           },
           {
             "$ref": "#/parameters/SelectParameter"
@@ -146,7 +146,13 @@
         "x-ms-pageable": {
           "nextLinkName": "nextLink"
         },
-        "x-ms-odata": "#/definitions/EventData"
+        "x-ms-odata": "#/definitions/EventData",
+        "x-ms-examples": {
+          "Get Tenant Activity Logs without filter or select": { "$ref": "./examples/GetTenantActivityLogsNoParams.json" },
+          "Get Tenant Activity Logs with filter": { "$ref": "./examples/GetTenantActivityLogsFiltered.json" },
+          "Get Tenant Activity Logs with select": { "$ref": "./examples/GetTenantActivityLogsSelected.json" },
+          "Get Tenant Activity Logs with filter and select": { "$ref": "./examples/GetTenantActivityLogsFilteredAndSelected.json" }
+        }
       }
     }
   },
@@ -322,7 +328,7 @@
         "submissionTimestamp": {
           "type": "string",
           "format": "date-time",
-          "description": "the timestamp of when the event became available for querying via this API. It is in ISO 8601 format. This value should not be confused eventTimestamp. As there might be a delay between the occurence time of the event, and the time that the event is submitted to the Azure logging infrastructure."
+          "description": "the timestamp of when the event became available for querying via this API. It is in ISO 8601 format. This value should not be confused eventTimestamp. As there might be a delay between the occurrence time of the event, and the time that the event is submitted to the Azure logging infrastructure."
         },
         "subscriptionId": {
           "type": "string",
@@ -346,7 +352,7 @@
         },
         "nextLink": {
           "type": "string",
-          "description": "Provides the link to retrive the next set of events."
+          "description": "Provides the link to retrieve the next set of events."
         }
       },
       "required": [ "value" ],

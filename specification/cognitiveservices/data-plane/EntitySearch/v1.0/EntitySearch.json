@@ -9,31 +9,9 @@
     "hostTemplate": "{azureRegion}.api.cognitive.microsoft.com",
     "parameters": [
       {
-        "$ref": "#/parameters/AzureRegion"
+        "$ref": "../../Common/Parameters.json#/parameters/AzureRegion"
       }
     ]
-  },
-  "parameters": {
-    "AzureRegion": {
-      "name": "azureRegion",
-      "description": "Supported Azure regions for Entity Search endpoints",
-      "x-ms-parameter-location": "client",
-      "required": true,
-      "type": "string",
-      "in": "path",
-      "x-ms-skip-url-encoding": true,
-      "x-ms-enum": {
-        "name": "AzureRegion",
-        "modelAsString": true
-      },
-      "enum": [
-        "westus",
-        "westeurope",
-        "southeastasia",
-        "eastus2",
-        "westcentralus"
-      ]
-    }
   },
   "schemes": [
     "https"
