@@ -1,4 +1,4 @@
-# IotHub
+# Provisioning Services
     
 > see https://aka.ms/autorest
 
@@ -35,7 +35,7 @@ These settings apply only when `--tag=package-2017-08` is specified on the comma
 
 ``` yaml $(tag) == 'package-2017-08'
 input-file:
-- Microsoft.Devices/2017-08-21-preview/iothub.json
+- Microsoft.Devices/2017-08-21-preview/iotdps.json
 ```
 
 ---
@@ -52,6 +52,6 @@ csharp:
   azure-arm: true
   license-header: MICROSOFT_MIT_NO_VERSION
   namespace: Microsoft.Azure.Management.IotHub
-  output-folder: $(csharp-sdks-folder)/IotHub/Management.IotHub/Generated
+  output-folder: $(csharp-sdks-folder)/ProvisioningServices/Management.ProvisioningServices/Generated
   clear-output-folder: true
 ```
