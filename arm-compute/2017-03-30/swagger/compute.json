@@ -248,7 +248,8 @@
             "name": "location",
             "in": "path",
             "required": true,
-            "type": "string"
+            "type": "string",
+            "description": "The name of a supported Azure region."
           },
           {
             "name": "publisherName",
@@ -297,7 +298,8 @@
             "name": "location",
             "in": "path",
             "required": true,
-            "type": "string"
+            "type": "string",
+            "description": "The name of a supported Azure region."
           },
           {
             "name": "publisherName",
@@ -337,7 +339,8 @@
             "name": "location",
             "in": "path",
             "required": true,
-            "type": "string"
+            "type": "string",
+            "description": "The name of a supported Azure region."
           },
           {
             "name": "publisherName",
@@ -5249,6 +5252,10 @@
           "$ref": "#/definitions/ApiEntityReference",
           "description": "The subnet."
         },
+        "primary": {
+          "type": "boolean",
+          "description": "Specifies the primary IP Configuration in case the network interface has more than one IP Configuration."
+        },
         "publicIPAddressConfiguration": {
           "$ref": "#/definitions/VirtualMachineScaleSetPublicIPAddressConfiguration",
           "description": "The publicIPAddressConfiguration."
@@ -5315,6 +5322,10 @@
         "primary": {
           "type": "boolean",
           "description": "Whether this is a primary NIC on a virtual machine."
+        },
+        "enableAcceleratedNetworking": {
+          "type": "boolean",
+          "description": "Specifies whether the network interface is accelerated networking-enabled."
         },
         "networkSecurityGroup": {
           "$ref": "#/definitions/SubResource",
