@@ -86,6 +86,7 @@ csharp:
   clear-output-folder: true
 ```
 
+
 ## Go
 
 These settings apply only when `--go` is specified on the command line.
@@ -112,7 +113,6 @@ These settings apply only when `--tag=package-2016-10 --go` is specified on the 
 ``` yaml $(tag) == 'package-2016-10'  && $(go)
 output-folder: $(go-sdk-folder)/services/cdn/mgmt/2016-10-02/cdn
 ```
-
 
 ### Tag: package-2016-04 and go
 
