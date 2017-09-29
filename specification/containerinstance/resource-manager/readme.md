@@ -59,6 +59,26 @@ csharp:
 ```
 
 
+## Go
+
+These settings apply only when `--go` is specified on the command line.
+
+``` yaml $(go)
+go:
+  license-header: MICROSOFT_APACHE_NO_VERSION
+  namespace: containerinstance
+  clear-output-folder: true
+```
+
+### Tag: package-2017-08-preview and go
+
+These settings apply only when `--tag=package-2017-08-preview --go` is specified on the command line.
+
+``` yaml $(tag) == 'package-2017-08-preview' && $(go)
+output-folder: $(go-sdk-folder)/services/containerinstance/mgmt/2017-08-01-preview/containerinstance
+```
+
+
 ## Python
 
 These settings apply only when `--python` is specified on the command line.
