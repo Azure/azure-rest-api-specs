@@ -73,7 +73,7 @@ Please also specify `--go-sdk-folder=<path to the root directory of your azure-s
 
 ``` yaml $(go)
 go:
-  license-header: MICROSOFT_APACHE
+  license-header: MICROSOFT_APACHE_NO_VERSION
   namespace: keyvault
   clear-output-folder: true
 ```
