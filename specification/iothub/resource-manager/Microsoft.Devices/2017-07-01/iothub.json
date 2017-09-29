@@ -1179,39 +1179,7 @@
       "type": "object",
       "properties": {
 		"properties" : {
-			"subject": {
-			  "description": "The certificate's subject name.",
-			  "type": "string",
-			  "readOnly": true
-			},
-			"expiry": {
-			  "description": "The certificate's expiration date and time.",
-			  "type": "string",
-			  "format": "date-time-rfc1123",
-			  "readOnly": true
-			},
-			"thumbprint": {
-			  "description": "The certificate's thumbprint.",
-			  "type": "string",
-			  "readOnly": true
-			},
-			"isVerified": {
-			  "description": "Determines wether certificate has been verified.",
-			  "type": "boolean",
-			  "readOnly": true
-			},
-			"created": {
-			  "description": "The certificate's create date and time.",
-			  "type": "string",
-			  "format": "date-time-rfc1123",
-			  "readOnly": true
-			},
-			"updated": {
-			  "description": "The certificate's last update date and time.",
-			  "type": "string",
-			  "format": "date-time-rfc1123",
-			  "readOnly": true
-			}
+          "$ref": "#/definitions/CertificateProperties"
 		},
 		"id": {
           "readOnly": true,
@@ -1240,45 +1208,8 @@
       "description": "The X509 Certificate.",
       "type": "object",
       "properties": {
-	    "properties": {
-			"subject": {
-			  "description": "The certificate's subject name.",
-			  "type": "string",
-			  "readOnly": true
-			},
-			"expiry": {
-			  "description": "The certificate's expiration date and time.",
-			  "type": "string",
-			  "format": "date-time-rfc1123",
-			  "readOnly": true
-			},
-			"thumbprint": {
-			  "description": "The certificate's thumbprint.",
-			  "type": "string",
-			  "readOnly": true
-			},
-			"isVerified": {
-			  "description": "Determines wether certificate has been verified.",
-			  "type": "boolean",
-			  "readOnly": true
-			},
-			"created": {
-			  "description": "The certificate's create date and time.",
-			  "type": "string",
-			  "format": "date-time-rfc1123",
-			  "readOnly": true
-			},
-			"updated": {
-			  "description": "The certificate's last update date and time.",
-			  "type": "string",
-			  "format": "date-time-rfc1123",
-			  "readOnly": true
-			},
-			"verificationCode": {
-			  "description": "The certificate's verification code that will be used for proof of posession.",
-			  "type": "string",
-			  "readOnly": true
-			}
+	    "properties" : {
+          "$ref": "#/definitions/CertificatePropertiesWithNonce"
 		},
 	    "id": {
 	      "readOnly": true,
@@ -1350,6 +1281,91 @@
         "rights"
       ]
     },
+	"CertificateProperties":
+	{
+	  "description": "The description of an X509 CA Certificate.",
+	  "type": "object",
+	  "properties": {
+		"subject": {
+		  "description": "The certificate's subject name.",
+		  "type": "string",
+		  "readOnly": true
+		},
+		"expiry": {
+		  "description": "The certificate's expiration date and time.",
+		  "type": "string",
+		  "format": "date-time-rfc1123",
+		  "readOnly": true
+		},
+		"thumbprint": {
+		  "description": "The certificate's thumbprint.",
+		  "type": "string",
+		  "readOnly": true
+		},
+		"isVerified": {
+		  "description": "Determines wether certificate has been verified.",
+		  "type": "boolean",
+		  "readOnly": true
+		},
+		"created": {
+		  "description": "The certificate's create date and time.",
+		  "type": "string",
+		  "format": "date-time-rfc1123",
+		  "readOnly": true
+		},
+		"updated": {
+		  "description": "The certificate's last update date and time.",
+		  "type": "string",
+		  "format": "date-time-rfc1123",
+		  "readOnly": true
+		}
+	  }
+	},
+	"CertificatePropertiesWithNonce":
+	{
+	  "description": "The description of an X509 CA Certificate including the challenge nonce issued for the Proof-Of-Possession flow.",
+	  "type": "object",
+	  "properties": {
+		"subject": {
+		  "description": "The certificate's subject name.",
+		  "type": "string",
+		  "readOnly": true
+		},
+		"expiry": {
+		  "description": "The certificate's expiration date and time.",
+		  "type": "string",
+		  "format": "date-time-rfc1123",
+		  "readOnly": true
+		},
+		"thumbprint": {
+		  "description": "The certificate's thumbprint.",
+		  "type": "string",
+		  "readOnly": true
+		},
+		"isVerified": {
+		  "description": "Determines wether certificate has been verified.",
+		  "type": "boolean",
+		  "readOnly": true
+		},
+		"created": {
+		  "description": "The certificate's create date and time.",
+		  "type": "string",
+		  "format": "date-time-rfc1123",
+		  "readOnly": true
+		},
+		"updated": {
+		  "description": "The certificate's last update date and time.",
+		  "type": "string",
+		  "format": "date-time-rfc1123",
+		  "readOnly": true
+		},
+		"verificationCode": {
+		  "description": "The certificate's verification code that will be used for proof of posession.",
+		  "type": "string",
+		  "readOnly": true
+		}
+	  }
+	},
     "IotHubProperties": {
       "description": "The properties of an IoT hub.",
       "type": "object",
