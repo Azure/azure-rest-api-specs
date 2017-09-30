@@ -13,7 +13,7 @@
         "type": "Microsoft.BatchAI/FileServers",
         "location": "eastus",
         "properties": {
-          "provisioningState": "Succeeded",
+          "provisioningState": "succeeded",
           "creationTime": "2017-09-27T21:45:28.159Z",
           "provisioningStateTransitionTime": "2017-09-27T21:49:25.416Z",
           "vmSize": "STANDARD_NC6",
@@ -23,10 +23,10 @@
             }
           },
           "dataDisks": {
-            "fileSystemType": "BRTFS",
+            "fileSystemType": "btrfs",
             "raidLevel": "NoRaid",
             "diskSizeInGB": 10,
-            "cachingType": "None",
+            "cachingType": "none",
             "diskCount": 2,
             "storageAccountType": "Standard_LRS"
           },
@@ -37,16 +37,8 @@
             "mountPoint": "/mnt/data",
             "fileServerPublicIP": "13.90.141.66",
             "fileServerInternalIP": "10.0.0.4",
-            "fileServerType": "NFS"
+            "fileServerType": "nfs"
           }
-        }
-      }
-    },
-    "404": {
-      "body": {
-        "error": {
-          "code": "ResourceNotFound",
-          "message": "The Resource 'Microsoft.BatchAI/fileservers/demo_nfs' under resource group 'demo_resource_group' was not found."
         }
       }
     }
