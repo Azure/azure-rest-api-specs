@@ -260,7 +260,11 @@
         },
         "location": {
           "type": "string",
-          "description": "Resource location"
+          "description": "Resource location",
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
         },
         "tags": {
           "type": "object",
@@ -465,6 +469,7 @@
           "description": "the secret version"
         }
       },
+      "description": "Reference to a secret stored in Azure Key Vault.",
       "required": [
         "vaultID",
         "secretName"
@@ -481,7 +486,8 @@
           "description": "The secret password associated with the service principal in plain text."
         },
         "keyVaultSecretRef": {
-          "$ref": "#/definitions/KeyVaultSecretRef"
+          "$ref": "#/definitions/KeyVaultSecretRef",
+          "description": "Reference to a secret stored in Azure Key Vault.",
         }
       },
       "description": "Information about a service principal identity for the cluster to use for manipulating Azure APIs. Exact one of secret or keyVaultSecretRef need to be specified",
@@ -531,6 +537,10 @@
             3,
             5
           ],
+          "x-ms-enum": {
+            "name": "Count",
+            "modelAsString": false
+          },
           "description": "Number of masters (VMs) in the container service cluster. Allowed values are 1, 3, and 5. The default value is 1.",
           "default": 1
         },
@@ -539,13 +549,16 @@
           "description": "DNS prefix to be used to create the FQDN for the master pool"
         },
         "vmSize": {
-          "$ref": "#/definitions/ContainerServiceVMSize"
+          "$ref": "#/definitions/ContainerServiceVMSize",
+          "description": "Size of agent VMs."
         },
         "osDiskSizeGB": {
-          "$ref": "#/definitions/ContainerServiceOSDisk"
+          "$ref": "#/definitions/ContainerServiceOSDisk",
+          "description": "OS Disk Size in GB to be used to specify the disk size for every machine in this master/agent pool. If you specify 0, it will apply the default osDisk size according to the vmSize specified."
         },
         "vnetSubnetID": {
-          "$ref": "#/definitions/ContainerServiceVnetSubnetID"
+          "$ref": "#/definitions/ContainerServiceVnetSubnetID",
+          "description": "VNet SubnetID specifies the vnet's subnet identifier. If you specify either master VNet Subnet, or agent VNet Subnet, you need to specify both. And they have to be in the same VNet."
         },
         "firstConsecutiveStaticIP": {
           "type": "string",
@@ -553,7 +566,8 @@
           "default": "10.240.255.5"
         },
         "storageProfile": {
-          "$ref": "#/definitions/ContainerServiceStorageProfile"
+          "$ref": "#/definitions/ContainerServiceStorageProfile",
+          "description": "storage profile specifies what kind of storage used. Choose from StorageAccount and ManagedDisks. Leave it empty, we will choose for you based on the orchestrator choice."
         },
         "fqdn": {
           "readOnly": true,
@@ -583,10 +597,12 @@
           "default": 1
         },
         "vmSize": {
-          "$ref": "#/definitions/ContainerServiceVMSize"
+          "$ref": "#/definitions/ContainerServiceVMSize",
+          "description": "Size of agent VMs."
         },
         "osDiskSizeGB": {
-          "$ref": "#/definitions/ContainerServiceOSDisk"
+          "$ref": "#/definitions/ContainerServiceOSDisk",
+          "description": "OS Disk Size in GB to be used to specify the disk size for every machine in this master/agent pool. If you specify 0, it will apply the default osDisk size according to the vmSize specified."
         },
         "dnsPrefix": {
           "type": "string",
@@ -607,10 +623,12 @@
           "description": "ports number array used to expose on this agent pool. The default opened ports are different based on your choice of orchestrator."
         },
         "storageProfile": {
-          "$ref": "#/definitions/ContainerServiceStorageProfile"
+          "$ref": "#/definitions/ContainerServiceStorageProfile",
+          "description": "storage profile specifies what kind of storage used. Choose from StorageAccount and ManagedDisks. Leave it empty, we will choose for you based on the orchestrator choice."
         },
         "vnetSubnetID": {
-          "$ref": "#/definitions/ContainerServiceVnetSubnetID"
+          "$ref": "#/definitions/ContainerServiceVnetSubnetID",
+          "description": "VNet SubnetID specifies the vnet's subnet identifier. If you specify either master VNet Subnet, or agent VNet Subnet, you need to specify both. And they have to be in the same VNet."
         },
         "osType": {
           "type": "string",
@@ -619,6 +637,9 @@
             "Linux",
             "Windows"
           ],
+          "x-ms-enum": {
+            "name": "OSType"
+          },
           "description": "osType to be used to specify os type. Choose from Linux and Windows. Default to Linux"
         }
       },
@@ -656,7 +677,8 @@
           "pattern": "^[a-z][a-z0-9_-]*$"
         },
         "ssh": {
-          "$ref": "#/definitions/ContainerServiceSshConfiguration"
+          "$ref": "#/definitions/ContainerServiceSshConfiguration",
+          "description": "SSH configuration for Linux-based VMs running on Azure."
         }
       },
       "required": [
@@ -695,9 +717,11 @@
     "ContainerServiceDiagnosticsProfile": {
       "properties": {
         "vmDiagnostics": {
-          "$ref": "#/definitions/ContainerServiceVMDiagnostics"
+          "$ref": "#/definitions/ContainerServiceVMDiagnostics",
+          "description": "Profile for diagnostics on the container service VMs."
         }
       },
+      "description": "Profile for diagnostics on the container service cluster.",
       "required": [
         "vmDiagnostics"
       ]
@@ -758,16 +782,20 @@
           "description": "the current deployment or provisioning state, which only appears in the response."
         },
         "orchestratorProfile": {
-          "$ref": "#/definitions/ContainerServiceOrchestratorProfile"
+          "$ref": "#/definitions/ContainerServiceOrchestratorProfile",
+          "description": "Profile for the container service orchestrator."
         },
         "customProfile": {
-          "$ref": "#/definitions/ContainerServiceCustomProfile"
+          "$ref": "#/definitions/ContainerServiceCustomProfile",
+          "description": "Properties to configure a custom container service cluster."
         },
         "servicePrincipalProfile": {
-          "$ref": "#/definitions/ContainerServiceServicePrincipalProfile"
+          "$ref": "#/definitions/ContainerServiceServicePrincipalProfile",
+          "description": "Information about a service principal identity for the cluster to use for manipulating Azure APIs. Exact one of secret or keyVaultSecretRef need to be specified"
         },
         "masterProfile": {
-          "$ref": "#/definitions/ContainerServiceMasterProfile"
+          "$ref": "#/definitions/ContainerServiceMasterProfile",
+          "description": "Profile for the container service master."
         },
         "agentPoolProfiles": {
           "type": "array",
@@ -777,13 +805,16 @@
           "description": "Properties of the agent pool."
         },
         "windowsProfile": {
-          "$ref": "#/definitions/ContainerServiceWindowsProfile"
+          "$ref": "#/definitions/ContainerServiceWindowsProfile",
+          "description": "Profile for Windows VMs in the container service cluster."
         },
         "linuxProfile": {
-          "$ref": "#/definitions/ContainerServiceLinuxProfile"
+          "$ref": "#/definitions/ContainerServiceLinuxProfile",
+          "description": "Profile for Linux VMs in the container service cluster."
         },
         "diagnosticsProfile": {
-          "$ref": "#/definitions/ContainerServiceDiagnosticsProfile"
+          "$ref": "#/definitions/ContainerServiceDiagnosticsProfile",
+          "description": "Profile for diagnostics in the container service cluster."
         }
       },
       "required": [
