@@ -1062,49 +1062,8 @@
       },
       "description": "Values returned by the List operation."
     },
-    "RaidLevel": {
-      "type": "string",
-      "title": "The RAID level to apply to the disks.",
-      "description": "Allowed Enums: NoRAID, RAID0, RAID1, RAID2, RAID3, RAID4, RAID5, RAID6. At least two disks per virtual machine are required for RAID-0 and beyond. Default is NoRAID.",
-      "default": "NoRaid",
-      "enum": [
-        "NoRaid",
-        "RAID0",
-        "RAID1",
-        "RAID2",
-        "RAID3",
-        "RAID4",
-        "RAID5",
-        "RAID6"
-      ],
-      "x-ms-enum": {
-        "name": "RaidLevel",
-        "modelAsString": false
-      }
-    },
     "DataDisks": {
-      "properties": {
-        "fileSystemType": {
-          "type": "string",
-          "readOnly": true,
-          "title": "The type of filesystem to use. Valid values are btrfs, ext4, ext3 and ext2. Default value is btrfs.",
-          "default": "btrfs",
-          "enum": [
-            "btrfs",
-            "ext4",
-            "ext3",
-            "ext2"
-          ],
-          "x-ms-enum": {
-            "name": "FileSystemType",
-            "modelAsString": true
-          }
-        },
-        "raidLevel": {
-          "title": "The RAID level to apply to the disks.",
-          "readOnly": true,
-          "$ref": "#/definitions/RaidLevel"
-        },
+      "properties": {        
         "diskSizeInGB": {
           "type": "integer",
           "format": "int32",
@@ -1130,7 +1089,7 @@
           "type": "integer",
           "format": "int32",
           "readOnly": false,
-          "title": "Number of data disks to be attached to the VM."
+          "title": "Number of data disks to be attached to the VM. RAID level 0 will be applied in the case of multiple disks."
         },
         "storageAccountType": {
           "type": "string",
