@@ -118,7 +118,6 @@
             "$ref": "#/parameters/contentTypeHeader"
           },
           {
-            "x-ms-summary": "Team Name",
             "name": "teamName",
             "description": "Your team name.",
             "in": "path",
@@ -126,7 +125,6 @@
             "type": "string"
           },
           {
-            "x-ms-summary": "SubTeam",
             "description": "SubTeam of your team, you want to assign the created review to.",
             "name": "subTeam",
             "in": "query",
@@ -150,7 +148,6 @@
                 "description": "Schema items of the body.",
                 "properties": {
                   "Type": {
-                    "x-ms-summary": "Content Type",
                     "description": "Type of the content.",
                     "enum": [
                       "Image",
@@ -159,22 +156,18 @@
                     "type": "string"
                   },
                   "Content": {
-                    "x-ms-summary": "Content Url",
                     "description": "Content to review.",
                     "type": "string"
                   },
                   "ContentId": {
-                    "x-ms-summary": "Content Id",
                     "description": "Content Identifier.",
                     "type": "string"
                   },
                   "CallbackEndpoint": {
-                    "x-ms-summary": "Callback Endpoint",
                     "description": "Optional CallbackEndpoint.",
                     "type": "string"
                   },
                   "Metadata": {
-                    "x-ms-summary": "Optional Metadata",
                     "description": "Optional metadata details.",
                     "type": "array",
                     "items": {
@@ -185,12 +178,10 @@
                       "type": "object",
                       "properties": {
                         "Key": {
-                          "x-ms-summary": "Key Parameter",
                           "description": "Your key parameter.",
                           "type": "string"
                         },
                         "Value": {
-                          "x-ms-summary": "Value Parameter",
                           "description": "Your value parameter.",
                           "type": "string"
                         }
@@ -282,11 +273,7 @@
             "$ref": "#/parameters/ocpApimSubscriptionKeyParameter"
           },
           {
-            "name": "Content-Type",
-            "in": "header",
-            "description": "Type of the content.",
-            "required": false,
-            "type": "string"
+            "$ref": "#/parameters/contentTypeHeader"
           },
           {
             "name": "Content",
@@ -300,7 +287,6 @@
               "type": "object",
               "properties": {
                 "contentValue": {
-                  "x-ms-summary": "Content Value",
                   "description": "Content to evaluate for a job.",
                   "type": "string"
                 }
