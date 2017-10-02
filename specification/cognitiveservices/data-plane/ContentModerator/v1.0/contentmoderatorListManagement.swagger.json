@@ -1,0 +1,1446 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "Content Moderator List Management Client",
+    "version": "1.0",
+    "description": "Use this API to create and manage your custom lists of Images and Text. The lists that you create can be used in the Image/Match and Text/Screen APIs."
+  },
+  "produces": [
+    "application/json"
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "x-ms-parameterized-host": {
+    "hostTemplate": "{azureRegion}.api.cognitive.microsoft.com",
+    "parameters": [
+      {
+        "$ref": "#/parameters/AzureRegion"
+      }
+    ]
+  },
+  "basePath": "/",
+  "schemes": [
+    "https"
+  ],
+  "paths": {
+    "/contentmoderator/lists/v1.0/imagelists/{listId}": {
+      "get": {
+        "tags": [
+          "ImageList"
+        ],
+        "operationId": "ImageList_GetListIdDetails",
+        "description": "Returns the details of the list Id passed.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/ocpApimSubscriptionKeyParameter"
+          },
+          {
+            "name": "listId",
+            "in": "path",
+            "description": "List Id of the image list.",
+            "required": true,
+            "type": "string"
+          }
+
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/ImageListGetDetailsResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Get List Id Details request": {
+            "$ref": "./examples/GetImageListIdDetailsResource.json"
+          }
+        },
+        "produces": [
+          "application/json"
+        ]
+      },
+      "delete": {
+        "tags": [
+          "ImageList"
+        ],
+        "operationId": "ImageList_DeleteImageList",
+        "description": "Deletes list with the list Id equal to list Id passed.",
+        "parameters": [
+          {
+            "name": "listId",
+            "in": "path",
+            "description": "List Id of the image.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "$ref": "#/parameters/ocpApimSubscriptionKeyParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "type": "string"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Delete Imagelist request": {
+            "$ref": "./examples/DeleteImageListResource.json"
+          }
+        },
+        "produces": [
+          "application/json"
+        ]
+      },
+      "put": {
+        "tags": [
+          "ImageList"
+        ],
+        "operationId": "ImageList_UpdateImageList",
+        "description": "Updates an image list with list Id equal to list Id passed.",
+        "parameters": [
+          {
+            "name": "listId",
+            "in": "path",
+            "description": "List Id of the image.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "$ref": "#/parameters/contentTypeHeader"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "description": "Schema of the body.",
+            "required": true,
+            "schema": {
+              "type": "object",
+
+              "properties": {
+
+                "name": {
+                  "description": "Image List Name.",
+                  "type": "string"
+                },
+                "description": {
+                  "description": "Description for image list.",
+                  "type": "string"
+                },
+                "metadata": {
+                  "description": "Image List Metadata.",
+                  "type": "object",
+
+                  "properties": {
+                    "sample string 1": {
+                      "description": "Optional Key value pair to describe your list.",
+                      "type": "string"
+                    },
+                    "sample string 2": {
+                      "description": "Optional Key value pair to describe your list.",
+                      "type": "string"
+                    }
+                  }
+
+                }
+              }
+
+            }
+          },
+          {
+            "$ref": "#/parameters/ocpApimSubscriptionKeyParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/UpdateImageListResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Update Imagelist request": {
+            "$ref": "./examples/UpdateImageListResource.json"
+          }
+        },
+        "produces": [
+          "application/json"
+        ]
+      }
+    },
+    "/contentmoderator/lists/v1.0/imagelists": {
+      "post": {
+        "tags": [
+          "ImageList"
+        ],
+        "operationId": "ImageList_CreateImageList",
+        "description": "Creates an image list.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/contentTypeHeader"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "description": "Schema of the body.",
+            "required": true,
+            "schema": {
+              "type": "object",
+              "properties": {
+                "name": {
+                  "description": "Name of the image list.",
+                  "type": "string"
+                },
+                "description": {
+                  "description": "Description of the image list.",
+                  "type": "string"
+                },
+                "metadata": {
+                  "description": "Metadata of the image list.",
+                  "type": "object",
+                  "properties": {
+                    "sample string 1": {
+                      "description": "Optional Key value pair to describe your list.",
+                      "type": "string"
+                    },
+                    "sample string 2": {
+                      "description": "Optional Key value pair to describe your list.",
+                      "type": "string"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          {
+            "$ref": "#/parameters/ocpApimSubscriptionKeyParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/CreateImageListResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Create Imagelist request": {
+            "$ref": "./examples/CreateImageListResource.json"
+          }
+        },
+        "produces": [
+          "application/json"
+        ]
+      },
+      "get": {
+        "tags": [
+          "ImageList"
+        ],
+        "operationId": "ImageList_GetAllImageLists",
+        "description": "Gets all the Image Lists.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/ocpApimSubscriptionKeyParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/GetAllImageListResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Get All Imagelists request": {
+            "$ref": "./examples/GetImageListsResource.json"
+          }
+        },
+        "produces": [
+          "application/json"
+        ]
+      }
+    },
+    "/contentmoderator/lists/v1.0/imagelists/{listId}/RefreshIndex": {
+      "post": {
+        "tags": [
+          "ImageList"
+        ],
+        "operationId": "ImageList_RefreshIndex",
+        "description": "Refreshes the index of the list with list Id equal to list Id passed.",
+        "parameters": [
+          {
+            "name": "listId",
+            "in": "path",
+            "description": "List Id",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "$ref": "#/parameters/ocpApimSubscriptionKeyParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/RefreshIndexResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Refresh Image Index request": {
+            "$ref": "./examples/RefreshImageIndexResource.json"
+          }
+        },
+        "produces": [
+          "application/json"
+        ]
+      }
+    },
+    "/contentmoderator/lists/v1.0/termlists/{listId}": {
+      "get": {
+        "tags": [
+          "TermsLists"
+        ],
+        "operationId": "TermsLists_GetListIdDetails",
+        "description": "Returns list Id details of the list with list Id equal to list Id passed.",
+        "parameters": [
+          {
+            "name": "listId",
+            "in": "path",
+            "description": "List Id",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "$ref": "#/parameters/ocpApimSubscriptionKeyParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/TermListGetListIdDetailsResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Get Term ListId Details request": {
+            "$ref": "./examples/GetTermListIdDetailsResource.json"
+          }
+        },
+        "produces": [
+          "application/json"
+        ]
+      },
+      "delete": {
+        "tags": [
+          "Termlists"
+        ],
+        "operationId": "Termlists_DeleteList",
+        "description": "Deletes term list with the list Id passed.",
+        "parameters": [
+          {
+            "name": "listId",
+            "in": "path",
+            "description": "List Id",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "$ref": "#/parameters/ocpApimSubscriptionKeyParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "type": "string"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Delete Termlist request": {
+            "$ref": "./examples/DeleteTermListResource.json"
+          }
+        },
+        "produces": [
+          "application/json"
+        ]
+      },
+      "put": {
+        "tags": [
+          "Termlists"
+        ],
+        "operationId": "Termlists_UpdateTermList",
+        "description": "Updates an Term List.",
+        "parameters": [
+          {
+            "name": "listId",
+            "in": "path",
+            "description": "List Id of the term list.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "$ref": "#/parameters/contentTypeHeader"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "description": "Schema of the body.",
+            "required": true,
+            "schema": {
+              "type": "object",
+              "properties": {
+                "name": {
+                  "description": "Term list Name.",
+                  "type": "string"
+                },
+                "description": {
+                  "description": "Description of the term list.",
+                  "type": "string"
+                },
+                "metadata": {
+                  "description": "Term list metadata.",
+                  "type": "object",
+                  "properties": {
+                    "key One": {
+                      "description": "Optional Key value pair to describe your list",
+                      "type": "string"
+                    },
+                    "key Two": {
+                      "description": "Optional Key value pair to describe your list",
+                      "type": "string"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          {
+            "$ref": "#/parameters/ocpApimSubscriptionKeyParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/UpdateTermListResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Update Termlist request": {
+            "$ref": "./examples/UpdateTermListResource.json"
+          }
+        },
+        "produces": [
+          "application/json"
+        ]
+      }
+    },
+    "/contentmoderator/lists/v1.0/termlists": {
+      "post": {
+        "tags": [
+          "Termlists"
+        ],
+        "operationId": "Termlists_CreateTermlists",
+        "description": "Creates a Term List",
+        "parameters": [
+          {
+            "$ref": "#/parameters/contentTypeHeader"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "description": "Schema of the body.",
+            "required": true,
+            "schema": {
+              "type": "object",
+              "properties": {
+                "name": {
+                  "description": "Term list name.",
+                  "type": "string"
+                },
+                "description": {
+                  "description": "Description for the term list.",
+                  "type": "string"
+                },
+                "metadata": {
+                  "description": "Term list metadata.",
+                  "type": "object",
+                  "properties": {
+                    "key One": {
+                      "description": "Optional key value pair to identify your list.",
+                      "type": "string"
+                    },
+                    "key Two": {
+                      "description": "Optional key value pair to identify your list.",
+                      "type": "string"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          {
+            "$ref": "#/parameters/ocpApimSubscriptionKeyParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/CreateTermListResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Create Termlist request": {
+            "$ref": "./examples/CreateTermListResource.json"
+          }
+        },
+        "produces": [
+          "application/json"
+        ]
+      },
+      "get": {
+        "tags": [
+          "Termlists"
+        ],
+        "operationId": "Termlists_GetAllTermLists",
+        "description": "gets all the Term Lists",
+        "parameters": [
+          {
+            "$ref": "#/parameters/ocpApimSubscriptionKeyParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/GetAllTermListResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Get All Termlists request": {
+            "$ref": "./examples/GetTermListsResource.json"
+          }
+        },
+        "produces": [
+          "application/json"
+        ]
+      }
+    },
+    "/contentmoderator/lists/v1.0/termlists/{listId}/RefreshIndex": {
+      "post": {
+        "tags": [
+          "Termlists"
+        ],
+        "operationId": "Termlists_RefreshIndex",
+        "description": "Refreshes the index of the list with list Id equal to list ID passed.",
+        "parameters": [
+          {
+            "name": "listId",
+            "in": "path",
+            "description": "Id of the term list.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "$ref": "#/parameters/ocpApimSubscriptionKeyParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/RefreshIndexResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Refresh Term Index request": {
+            "$ref": "./examples/RefreshTermIndexResource.json"
+          }
+        },
+        "produces": [
+          "application/json"
+        ]
+      }
+    },
+    "/contentmoderator/lists/v1.0/imagelists/{listId}/images": {
+      "post": {
+        "tags": [
+          "ImageList"
+        ],
+        "operationId": "ImageList_AddImage",
+        "description": "Add an image to the list with list Id equal to list Id passed.",
+        "parameters": [
+          {
+            "name": "listId",
+            "in": "path",
+            "description": "Id of the image list.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "tag",
+            "in": "query",
+            "description": "Tag for the image.",
+            "type": "number",
+            "required": false
+          },
+          {
+            "name": "label",
+            "in": "query",
+            "description": "The image label.",
+            "type": "string",
+            "required": false
+          },
+          {
+            "$ref": "#/parameters/ocpApimSubscriptionKeyParameter"
+          },
+          {
+            "$ref": "#/parameters/contentTypeHeader"
+          },
+          {
+            "name": "file",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "type": "object",
+              "format": "file"
+            },
+            "description": "The image file location or image url."
+          }
+        ],
+        "consumes": [
+          "image/gif",
+          "image/jpeg",
+          "image/png",
+          "image/bmp",
+          "image/tiff",
+          "application/json"
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/AddImageResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Add Image request": {
+            "$ref": "./examples/AddImageResource.json"
+          }
+        },
+        "produces": [
+          "application/json"
+        ]
+      },
+      "delete": {
+        "tags": [
+          "ImageList"
+        ],
+        "operationId": "ImageList_DeleteAllImages",
+        "description": "Deletes all images from the list with list Id equal to list Id passed.",
+        "parameters": [
+          {
+            "name": "listId",
+            "in": "path",
+            "description": "Id of the list.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "$ref": "#/parameters/ocpApimSubscriptionKeyParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "type": "string"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Delete All Images request": {
+            "$ref": "./examples/DeleteAllImagesResource.json"
+          }
+        },
+        "produces": [
+          "application/json"
+        ]
+      },
+      "get": {
+        "tags": [
+          "ImageList"
+        ],
+        "operationId": "ImageList_GetAllImageIds",
+        "description": "Gets all image Ids from the list with list Id equal to list Id passed.",
+        "parameters": [
+          {
+            "name": "listId",
+            "in": "path",
+            "description": "Id of the image list.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "$ref": "#/parameters/ocpApimSubscriptionKeyParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/GetAllImageIdsResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Get All Image Ids request": {
+            "$ref": "./examples/GetAllImageIdsResource.json"
+          }
+        },
+        "produces": [
+          "application/json"
+        ]
+      }
+    },
+    "/contentmoderator/lists/v1.0/imagelists/{listId}/images/{ImageId}": {
+      "delete": {
+        "tags": [
+          "ImageList"
+        ],
+        "operationId": "ImageList_DeleteImage",
+        "description": "Deletes an image from the list with list Id and image Id passed.",
+        "parameters": [
+          {
+            "name": "listId",
+            "in": "path",
+            "description": "Id of the image list.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "ImageId",
+            "in": "path",
+            "description": "Id of the image.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "$ref": "#/parameters/ocpApimSubscriptionKeyParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "type": "string"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Delete Image request": {
+            "$ref": "./examples/DeleteImageResource.json"
+          }
+        },
+        "produces": [
+          "application/json"
+        ]
+      }
+    },
+    "/contentmoderator/lists/v1.0/termlists/{listId}/terms/{term}": {
+      "post": {
+        "tags": [
+          "TermLists"
+        ],
+        "operationId": "TermLists_AddTerm",
+        "description": "Add a term to the list with list Id equal to list Id passed.",
+        "parameters": [
+          {
+            "name": "listId",
+            "in": "path",
+            "description": "Id of the term list.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "term",
+            "in": "path",
+            "required": true,
+            "description": "Term to be added to the list.",
+            "type": "string"
+          },
+          {
+            "name": "language",
+            "in": "query",
+            "required": true,
+            "description": "Language of the term.",
+            "type": "string"
+          },
+          {
+            "$ref": "#/parameters/ocpApimSubscriptionKeyParameter"
+          }
+
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Add Term request": {
+            "$ref": "./examples/AddTermResource.json"
+          }
+        },
+        "produces": [
+          "application/json"
+        ]
+      },
+      "delete": {
+        "tags": [
+          "TermsLists"
+        ],
+        "operationId": "TermsLists_DeleteTerm",
+        "description": "Deletes a term from the list with list Id equal to the list Id passed.",
+        "parameters": [
+          {
+            "name": "listId",
+            "in": "path",
+            "description": "Id of the term list.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "term",
+            "in": "path",
+            "description": "Term to be deleted",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "language",
+            "in": "query",
+            "description": "Language of the term",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "$ref": "#/parameters/ocpApimSubscriptionKeyParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "type": "string"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Delete Term request": {
+            "$ref": "./examples/DeleteTermResource.json"
+          }
+        },
+        "produces": [
+          "application/json"
+        ]
+      }
+    },
+    "/contentmoderator/lists/v1.0/termlists/{listId}/terms": {
+      "get": {
+        "tags": [
+          "Termlists"
+        ],
+        "operationId": "Termlists_GetAllTerms",
+        "description": "Gets all terms from the list with list Id equal to the list Id passed.",
+        "parameters": [
+          {
+            "name": "listId",
+            "in": "path",
+            "description": "Id of the term list.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "language",
+            "in": "query",
+            "description": "language of the terms.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "$ref": "#/parameters/ocpApimSubscriptionKeyParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/GetAllTermsResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Get All Terms request": {
+            "$ref": "./examples/GetAllTermsResource.json"
+          }
+        },
+        "produces": [
+          "application/json"
+        ]
+      },
+      "delete": {
+        "tags": [
+          "Termlists"
+        ],
+        "operationId": "Termlists_DeleteAllTerms",
+        "description": "Deletes all terms from the list with list Id equal to the list Id passed.",
+        "parameters": [
+          {
+            "name": "listId",
+            "in": "path",
+            "description": "Id of the term list.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "language",
+            "in": "query",
+            "description": "Language of the terms.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "$ref": "#/parameters/ocpApimSubscriptionKeyParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "type": "string"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Delete AllTerms request": {
+            "$ref": "./examples/DeleteAllTermsResource.json"
+          }
+        },
+        "produces": [
+          "application/json"
+        ]
+      }
+    }
+  },
+  "definitions": {
+    "CreateImageListResponse": {
+      "description": "Create Image List Response.",
+      "properties": {
+        "id": {
+          "description": "Image List Id.",
+          "type": "number"
+        },
+        "name": {
+          "description": "Image List Name.",
+          "type": "string"
+        },
+        "description": {
+          "description": "Description for image list.",
+          "type": "string"
+        },
+        "metadata": {
+          "description": "Image List Metadata.",
+          "type": "object",
+
+          "properties": {
+            "sample string 1": {
+              "description": "Optional Key value pair to describe your list.",
+              "type": "string"
+            },
+            "sample string 2": {
+              "description": "Optional Key value pair to describe your list.",
+              "type": "string"
+            }
+          }
+
+        }
+      }
+    },
+    "CreateTermListResponse": {
+      "description": "Create Term List Response.",
+      "properties": {
+        "id": {
+          "description": "Term list Id.",
+          "type": "number"
+        },
+        "name": {
+          "description": "Term list name.",
+          "type": "string"
+        },
+        "description": {
+          "description": "Description for term list.",
+          "type": "string"
+        },
+        "metadata": {
+          "description": "Term list metadata.",
+          "type": "object",
+          "properties": {
+            "sample string 1": {
+              "description": "Optional Key value pair to describe your list.",
+              "type": "string"
+            },
+            "sample string 2": {
+              "description": "Optional Key value pair to describe your list.",
+              "type": "string"
+            }
+          }
+        }
+      }
+    },
+    "ImageListGetDetailsResponse": {
+      "description": "Get Image List Details Response.",
+      "properties": {
+        "id": {
+          "description": "Id of the image list.",
+          "type": "number"
+        },
+        "name": {
+          "description": "Name of the image list.",
+          "type": "string"
+        },
+        "description": {
+          "description": "Description of the image list.",
+          "type": "string"
+        },
+        "metadata": {
+          "description": "Metadata of the image list.",
+          "type": "object",
+          "properties": {
+            "sample string 1": {
+              "description": "Optional Key value pair to describe your list.",
+              "type": "string"
+            },
+            "sample string 2": {
+              "description": "Optional Key value pair to describe your list.",
+              "type": "string"
+            }
+          }
+        }
+      }
+    },
+    "TermListGetListIdDetailsResponse": {
+      "description": "Get Term List Details Response.",
+      "properties": {
+        "id": {
+          "description": "Term list Id.",
+          "type": "number"
+        },
+        "name": {
+          "description": "Term list name.",
+          "type": "string"
+        },
+        "description": {
+          "description": "Description of the term list.",
+          "type": "string"
+        },
+        "metadata": {
+          "description": "Term List metadata.",
+          "type": "object",
+
+          "properties": {
+            "sample string 1": {
+              "description": "Optional Key value pair to describe your list.",
+              "type": "string"
+            },
+            "sample string 2": {
+              "description": "Optional Key value pair to describe your list.",
+              "type": "string"
+            }
+          }
+
+        }
+      }
+    },
+    "GetAllImageListResponse": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "description": "Image list Id.",
+            "type": "number"
+          },
+          "name": {
+            "description": "Image list name.",
+            "type": "string"
+          },
+          "description": {
+            "description": "Description for image list.",
+            "type": "string"
+          },
+          "metadata": {
+            "description": "Image list metadata.",
+            "type": "object",
+
+            "properties": {
+              "sample string 1": {
+                "description": "Optional Key value pair to describe your list.",
+                "type": "string"
+              },
+              "sample string 2": {
+                "description": "Optional Key value pair to describe your list.",
+                "type": "string"
+              }
+            }
+
+          }
+        }
+      }
+    },
+    "GetAllTermListResponse": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "description": "Term list id.",
+            "type": "number"
+          },
+          "name": {
+            "description": "Term list name.",
+            "type": "string"
+          },
+          "description": {
+            "description": "Description for the term list.",
+            "type": "string"
+          },
+          "metadata": {
+            "description": "Term list metadata.",
+            "type": "object",
+
+            "properties": {
+              "sample string 1": {
+                "description": "Optional Key value pair to describe your list.",
+                "type": "string"
+              },
+              "sample string 2": {
+                "description": "Optional Key value pair to describe your list.",
+                "type": "string"
+              }
+            }
+
+          }
+        }
+      }
+    },
+    "RefreshIndexResponse": {
+      "description": "Refresh Index Response.",
+      "properties": {
+        "contentSourceId": {
+          "description": "Content source Id.",
+          "type": "string"
+        },
+        "isUpdateSuccess": {
+          "description": "Update success status.",
+          "type": "boolean"
+        },
+        "advancedInfo": {
+          "description": "Advanced info list.",
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "key one": {
+                "description": "Key value pair.",
+                "type": "string"
+              },
+              "key two": {
+                "description": "Key value pair.",
+                "type": "string"
+              }
+            }
+          }
+        },
+        "status": {
+          "description": "Refresh index status.",
+          "$ref": "#/definitions/AddGetRefreshStatusResponse"
+        },
+        "trackingId": {
+          "description": "Tracking Id.",
+          "type": "string"
+        }
+      }
+    },
+    "UpdateImageListResponse": {
+      "description": "Update Image List Response.",
+      "properties": {
+        "id": {
+          "description": "Id of the image list.",
+          "type": "number"
+        },
+        "name": {
+          "description": "Name of the image list.",
+          "type": "string"
+        },
+        "description": {
+          "description": "Description of the image list.",
+          "type": "string"
+        },
+        "metadata": {
+          "description": "Metadata of the image list.",
+          "type": "object",
+
+          "properties": {
+            "sample string 1": {
+              "description": "Optional Key value pair to describe your list.",
+              "type": "string"
+            },
+            "sample string 2": {
+              "description": "Optional Key value pair to describe your list.",
+              "type": "string"
+            }
+          }
+        }
+      }
+    },
+    "UpdateTermListResponse": {
+      "description": "Update Term List Response.",
+      "properties": {
+        "id": {
+          "description": "Term List Id.",
+          "type": "number"
+        },
+        "name": {
+          "description": "Term List Name.",
+          "type": "string"
+        },
+        "description": {
+          "description": "Description for term list.",
+          "type": "string"
+        },
+        "metadata": {
+          "description": "Term List Metadata.",
+          "type": "object",
+
+          "properties": {
+            "sample string 1": {
+              "description": "Optional Key value pair to describe your list.",
+              "type": "string"
+            },
+            "sample string 2": {
+              "description": "Optional Key value pair to describe your list.",
+              "type": "string"
+            }
+          }
+
+        }
+      }
+    },
+    "AddImageResponse": {
+      "description": "Add Image Response.",
+      "properties": {
+
+        "contentId": {
+          "description": "Content Id.",
+          "type": "string"
+        },
+        "additionalInfo": {
+          "description": "Advanced info list.",
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "key": {
+                "description": "Key parameter.",
+                "type": "string"
+              },
+              "value": {
+                "description": "Value parameter.",
+                "type": "string"
+              }
+            }
+          }
+        },
+        "status": {
+          "description": "Add image response status.",
+          "$ref": "#/definitions/AddGetRefreshStatusResponse"
+        },
+        "trackingId": {
+          "description": "Tracking Id.",
+          "type": "string"
+        }
+      }
+
+    },
+    "AddGetRefreshStatusResponse": {
+      "description": "Add and Get status response properties",
+      "properties": {
+        "code": {
+          "description": "Status code.",
+          "type": "number"
+        },
+        "description": {
+          "description": "Status description.",
+          "type": "string"
+        },
+        "exception": {
+          "description": "Exception status.",
+          "type": "string"
+        }
+      }
+    },
+    "GetAllImageIdsResponse": {
+      "description": "Gets all image Id response properties.",
+      "properties": {
+        "contentSource": {
+          "description": "Source of thecontent.",
+          "type": "string"
+        },
+        "contentIds": {
+          "description": "Id of the contents.",
+          "type": "array",
+          "items": {
+            "type": "number"
+          }
+        },
+        "status": {
+          "description": "Get Image status.",
+          "type": "object",
+          "$ref": "#/definitions/AddGetRefreshStatusResponse"
+        },
+        "trackingId": {
+          "description": "Tracking Id.",
+          "type": "string"
+        }
+      }
+    },
+    "GetAllTermsResponse": {
+      "description": "Gets all term Id response properties.",
+      "properties": {
+        "data": {
+          "description": "Term data details.",
+          "$ref": "#/definitions/TermDataResponse"
+        },
+        "paging": {
+          "description": "Paging details.",
+          "properties": {
+            "Total": {
+              "description": "Total details.",
+              "type": "number"
+            },
+            "Limit": {
+              "description": "Limit details.",
+              "type": "number"
+            },
+            "Offset": {
+              "description": "Offset details.",
+              "type": "number"
+            },
+            "Returned": {
+              "description": "Returned text details.",
+              "type": "number"
+            }
+          }
+        }
+      }
+    },
+    "TermDataResponse": {
+      "description": "Gets all term Id response properties.",
+      "properties": {
+        "language": {
+          "description": "Language of the terms.",
+          "type": "string"
+        },
+        "terms": {
+          "description": "List of terms.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/termsInListResponse"
+          }
+        },
+        "status": {
+          "description": "Get Term Status.",
+          "type": "object",
+          "$ref": "#/definitions/AddGetRefreshStatusResponse"
+        },
+        "trackingId": {
+          "description": "Tracking Id.",
+          "type": "string"
+        }
+      }
+    },
+    "termsInListResponse": {
+      "description": "Terms in list Id passed.",
+      "properties": {
+        "term": {
+          "description": "Added term details.",
+          "type": "string"
+        }
+      }
+    }
+  },
+  "parameters": {
+    "listIdTst": {
+      "name": "ListId",
+      "in": "path",
+      "description": "List Id of the image list.",
+      "required": true,
+      "type": "string"
+    },
+    "contentTypeHeader": {
+      "name": "Content-Type",
+      "description": "The content type.",
+      "required": true,
+      "type": "string",
+      "in": "header"
+    },
+    "ocpApimSubscriptionKeyParameter": {
+      "name": "Ocp-Apim-Subscription-Key",
+      "description": "Subscription key in the header.",
+      "x-ms-parameter-location": "client",
+      "required": true,
+      "type": "string",
+      "in": "header"
+    },
+    "AzureRegion": {
+      "name": "azureRegion",
+      "description": "Supported Azure regions for Computer Vision endpoints.",
+      "x-ms-parameter-location": "client",
+      "required": true,
+      "type": "string",
+      "in": "path",
+      "x-ms-skip-url-encoding": true,
+      "x-ms-enum": {
+        "name": "AzureRegion",
+        "modelAsString": true
+      },
+      "enum": [
+        "westus",
+        "westeurope",
+        "southeastasia",
+        "eastus2",
+        "westcentralus"
+      ]
+    }
+  }
+}

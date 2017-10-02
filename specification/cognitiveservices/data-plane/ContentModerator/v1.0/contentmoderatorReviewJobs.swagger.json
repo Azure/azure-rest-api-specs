@@ -1,0 +1,532 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "Content Moderator Review Job Workflows Client",
+    "version": "1.0",
+    "description": "Use this API to create reviews in Content Moderator. Before you can create reviews you will need a moderation Team. If you don't already have one Sign Up here: https://contentmoderator.cognitive.microsoft.com\r\n\r\nThis API is currently available in:\r\n\r\n* West US - westus.api.cognitive.microsoft.com\r\n* East US 2 - eastus2.api.cognitive.microsoft.com\r\n* West Central US - westcentralus.api.cognitive.microsoft.com\r\n* West Europe - westeurope.api.cognitive.microsoft.com\r\n* Southeast Asia - southeastasia.api.cognitive.microsoft.com."
+  },
+  "x-ms-parameterized-host": {
+    "hostTemplate": "{azureRegion}.api.cognitive.microsoft.com",
+    "parameters": [
+      {
+        "$ref": "#/parameters/AzureRegion"
+      }
+    ]
+  },
+  "basePath": "/",
+  "schemes": [
+    "https"
+  ],
+  "paths": {
+    "/contentmoderator/review/v1.0/teams/{teamName}/reviews/{reviewId}": {
+      "get": {
+        "tags": [
+          "Reviews"
+        ],
+        "operationId": "Reviews_GetReview",
+        "description": "Returns review details for the review Id passed.",
+        "parameters": [
+          {
+            "name": "teamName",
+            "in": "path",
+            "description": "Your Team Name.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "reviewId",
+            "in": "path",
+            "description": "Id of the review.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "$ref": "#/parameters/ocpApimSubscriptionKeyParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/Review"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Get Review request": {
+            "$ref": "./examples/GetReviewResource.json"
+          }
+        },
+        "produces": [
+          "application/json"
+        ]
+      }
+    },
+    "/contentmoderator/review/v1.0/teams/{teamName}/jobs/{JobId}": {
+      "get": {
+        "tags": [
+          "Jobs"
+        ],
+        "operationId": "Jobs_GetJobDetails",
+        "description": "Get the Job Details for a Job Id.",
+        "parameters": [
+          {
+            "name": "teamName",
+            "in": "path",
+            "description": "Your Team Name.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "JobId",
+            "in": "path",
+            "description": "Id of the job.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "$ref": "#/parameters/ocpApimSubscriptionKeyParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/Job"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Get Job Details request": {
+            "$ref": "./examples/GetJobDetailsResource.json"
+          }
+        },
+        "produces": [
+          "application/json"
+        ]
+      }
+    },
+    "/contentmoderator/review/v1.0/teams/{teamName}/reviews": {
+      "post": {
+        "tags": [
+          "Reviews"
+        ],
+        "operationId": "Reviews_CreateReviews",
+        "description": "The reviews created would show up for Reviewers on your team. As Reviewers complete reviewing, results of the Review would be POSTED (i.e. HTTP POST) on the specified CallBackEndpoint.\r\n\r\n<h3>CallBack Schemas </h3>\r\n<h4>Review Completion CallBack Sample</h4>\r\n<p>\r\n{<br/>\r\n  \"ReviewId\": \"<Review Id>\",<br/>\r\n  \"ModifiedOn\": \"2016-10-11T22:36:32.9934851Z\",<br/>\r\n  \"ModifiedBy\": \"<Name of the Reviewer>\",<br/>\r\n  \"CallBackType\": \"Review\",<br/>\r\n  \"ContentId\": \"<The ContentId that was specified input>\",<br/>\r\n  \"Metadata\": {<br/>\r\n    \"adultscore\": \"0.xxx\",<br/>\r\n    \"a\": \"False\",<br/>\r\n    \"racyscore\": \"0.xxx\",<br/>\r\n    \"r\": \"True\"<br/>\r\n  },<br/>\r\n  \"ReviewerResultTags\": {<br/>\r\n    \"a\": \"False\",<br/>\r\n    \"r\": \"True\"<br/>\r\n  }<br/>\r\n}<br/>\r\n\r\n</p>.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/contentTypeHeader"
+          },
+          {
+            "x-ms-summary": "Team Name",
+            "name": "teamName",
+            "description": "Your team name.",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "x-ms-summary": "SubTeam",
+            "description": "SubTeam of your team, you want to assign the created review to.",
+            "name": "subTeam",
+            "in": "query",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "type": "array",
+              "description": "Schema of the body.",
+              "items": {
+                "required": [
+                  "Content",
+                  "ContentId",
+                  "Type"
+                ],
+                "type": "object",
+                "description": "Schema items of the body.",
+                "properties": {
+                  "Type": {
+                    "x-ms-summary": "Content Type",
+                    "description": "Type of the content.",
+                    "enum": [
+                      "Image",
+                      "Text"
+                    ],
+                    "type": "string"
+                  },
+                  "Content": {
+                    "x-ms-summary": "Content Url",
+                    "description": "Content to review.",
+                    "type": "string"
+                  },
+                  "ContentId": {
+                    "x-ms-summary": "Content Id",
+                    "description": "Content Identifier.",
+                    "type": "string"
+                  },
+                  "CallbackEndpoint": {
+                    "x-ms-summary": "Callback Endpoint",
+                    "description": "Optional CallbackEndpoint.",
+                    "type": "string"
+                  },
+                  "Metadata": {
+                    "x-ms-summary": "Optional Metadata",
+                    "description": "Optional metadata details.",
+                    "type": "array",
+                    "items": {
+                      "required": [
+                        "Key",
+                        "Value"
+                      ],
+                      "type": "object",
+                      "properties": {
+                        "Key": {
+                          "x-ms-summary": "Key Parameter",
+                          "description": "Your key parameter.",
+                          "type": "string"
+                        },
+                        "Value": {
+                          "x-ms-summary": "Value Parameter",
+                          "description": "Your value parameter.",
+                          "type": "string"
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            },
+            "x-examples": {
+              "application/json": "[\n  {\n    \"Metadata\": [\n      {\n        \"Key\": \"string\",\n        \"Value\": \"string\"\n      }\n    ],\n    \"Type\": \"Image\",\n    \"Content\": \"<Content Url>\",\n    \"ContentId\": \"<Your identifier for this content>\",\n    \"CallbackEndpoint\": \"<Url where you would receive callbacks>\"\n  }\n]"
+            }
+          },
+          {
+            "$ref": "#/parameters/ocpApimSubscriptionKeyParameter"
+          }
+        ],
+        "consumes": [
+          "application/json"
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/ReviewListResult"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Create Review request": {
+            "$ref": "./examples/CreateReviewResource.json"
+          }
+        },
+        "produces": [
+          "application/json"
+        ]
+
+      }
+    },
+    "/contentmoderator/review/v1.0/teams/{teamName}/jobs": {
+      "post": {
+        "tags": [
+          "Jobs"
+        ],
+        "operationId": "Jobs_CreateJob",
+        "description": "A job Id will be returned for the content posted on this endpoint. \r\n\r\nOnce the content is evaluated against the Workflow provided the review will be created or ignored based on the workflow expression.\r\n\r\n<h3>CallBack Schemas </h3>\r\n\r\n<p>\r\n<h4>Job Completion CallBack Sample</h4><br/>\r\n\r\n{<br/>\r\n  \"JobId\": \"<Job Id>,<br/>\r\n  \"ReviewId\": \"<Review Id, if the Job resulted in a Review to be created>\",<br/>\r\n  \"WorkFlowId\": \"default\",<br/>\r\n  \"Status\": \"<This will be one of Complete, InProgress, Error>\",<br/>\r\n  \"ContentType\": \"Image\",<br/>\r\n  \"ContentId\": \"<This is the ContentId that was specified on input>\",<br/>\r\n  \"CallBackType\": \"Job\",<br/>\r\n  \"Metadata\": {<br/>\r\n    \"adultscore\": \"0.xxx\",<br/>\r\n    \"a\": \"False\",<br/>\r\n    \"racyscore\": \"0.xxx\",<br/>\r\n    \"r\": \"True\"<br/>\r\n  }<br/>\r\n}<br/>\r\n\r\n</p>\r\n<p>\r\n<h4>Review Completion CallBack Sample</h4><br/>\r\n\r\n{\r\n  \"ReviewId\": \"<Review Id>\",<br/>\r\n  \"ModifiedOn\": \"2016-10-11T22:36:32.9934851Z\",<br/>\r\n  \"ModifiedBy\": \"<Name of the Reviewer>\",<br/>\r\n  \"CallBackType\": \"Review\",<br/>\r\n  \"ContentId\": \"<The ContentId that was specified input>\",<br/>\r\n  \"Metadata\": {<br/>\r\n    \"adultscore\": \"0.xxx\",\r\n    \"a\": \"False\",<br/>\r\n    \"racyscore\": \"0.xxx\",<br/>\r\n    \"r\": \"True\"<br/>\r\n  },<br/>\r\n  \"ReviewerResultTags\": {<br/>\r\n    \"a\": \"False\",<br/>\r\n    \"r\": \"True\"<br/>\r\n  }<br/>\r\n}<br/>\r\n\r\n</p>.",
+        "parameters": [
+          {
+            "name": "teamName",
+            "in": "path",
+            "description": "Your team name.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "ContentType",
+            "in": "query",
+            "description": "Image, Text or Video.",
+            "required": true,
+            "type": "string",
+            "default": "Image",
+            "enum": [
+              "Image",
+              "Text",
+              "Video"
+            ]
+          },
+          {
+            "name": "ContentId",
+            "in": "query",
+            "description": "Id/Name to identify the content submitted.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "WorkflowName",
+            "in": "query",
+            "description": "Workflow Name that you want to invoke.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "CallBackEndpoint",
+            "in": "query",
+            "description": "Callback endpoint for posting the create job result.",
+            "type": "string"
+          },
+          {
+            "$ref": "#/parameters/ocpApimSubscriptionKeyParameter"
+          },
+          {
+            "name": "Content-Type",
+            "in": "header",
+            "description": "Type of the content.",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "Content",
+            "description": "Content to evaluate.",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "required": [
+                "contentValue"
+              ],
+              "type": "object",
+              "properties": {
+                "contentValue": {
+                  "x-ms-summary": "Content Value",
+                  "description": "Content to evaluate for a job.",
+                  "type": "string"
+                }
+              }
+            },
+            "x-examples": {
+              "application/json": "{\n  \"ContentValue\": \"<Replace with you Image Url>\"\n}"
+            }
+          }
+        ],
+        "consumes": [
+          "application/json",
+          "image/jpeg"
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "jobId": {
+                  "description": "Id of the created job.",
+                  "type": "string"
+                }
+              }
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Create Job request": {
+            "$ref": "./examples/CreateJobResource.json"
+          }
+        },
+        "produces": [
+          "application/json",
+          "text/json"
+        ]
+      }
+    }
+
+  },
+  "definitions": {
+    "Review": {
+      "description": "The Review object.",
+      "properties": {
+        "reviewId": {
+          "description": "Id of the review.",
+          "type": "string"
+        },
+        "subTeam": {
+          "description": "Name of the subteam.",
+          "type": "string"
+        },
+        "status": {
+          "description": "The status string (<Pending, Complete>).",
+          "type": "string"
+        },
+        "reviewerResultTags": {
+          "description": "Array of KeyValue with Reviewer set Tags.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/KeyValuePair"
+          }
+        },
+        "createdBy": {
+          "description": "The reviewer name.",
+          "type": "string"
+        },
+        "metadata": {
+          "description": "Array of KeyValue.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/KeyValuePair"
+          }
+        },
+        "type": {
+          "description": "The type of content.",
+          "type": "string"
+        },
+        "content": {
+          "description": "The content value.",
+          "type": "string"
+        },
+        "contentId": {
+          "description": "Id of the content.",
+          "type": "string"
+        },
+        "callbackEndpoint": {
+          "description": "The callback endpoint.",
+          "type": "string"
+        }
+      }
+    },
+    "KeyValuePair": {
+      "description": "The key value pair object properties.",
+      "properties": {
+        "key": {
+          "description": "The key parameter.",
+          "type": "string"
+        },
+        "value": {
+          "description": "The value parameter.",
+          "type": "string"
+        }
+      }
+    },
+    "Job": {
+      "description": "The Job object.",
+      "properties": {
+        "id": {
+          "description": "The job id.",
+          "type": "string"
+        },
+        "teamName": {
+          "description": "The team name associated with the job.",
+          "type": "string"
+        },
+        "status": {
+          "description": "The status string (<Pending, Failed, Completed>).",
+          "type": "string"
+        },
+        "workflowId": {
+          "description": "The Id of the workflow.",
+          "type": "string"
+        },
+        "type": {
+          "description": "Type of the content.",
+          "type": "string"
+        },
+        "callBackEndpoint": {
+          "description": "The callback endpoint.",
+          "type": "string"
+        },
+        "reviewId": {
+          "description": "Review Id if one is created.",
+          "type": "string"
+        },
+        "resultMetaData": {
+          "description": "Array of KeyValue pairs.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/KeyValuePair"
+          }
+        },
+        "jobExecutionReport": {
+          "description": "Job execution report- Array of KeyValue pairs object.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/jobExecutionReportValues"
+          }
+        }
+      }
+    },
+    "jobExecutionReportValues": {
+      "description": "Job Execution Report Values.",
+      "properties": {
+        "ts": {
+          "description": "Time details.",
+          "type": "string"
+        },
+        "msg": {
+          "description": "Message details.",
+          "type": "string"
+        }
+      }
+    },
+    "ReviewListResult": {
+      "description": "The list of review ids.",
+      "properties": {
+        "value": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "description": "The Id of the review."
+        }
+      }
+    },
+    "JobListResult": {
+      "description": "The list of job ids.",
+      "properties": {
+        "value": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "description": "The job id."
+        }
+      }
+    }
+  },
+  "parameters": {
+    "contentTypeHeader": {
+      "name": "Content-Type",
+      "description": "The content type.",
+      "required": true,
+      "type": "string",
+      "in": "header"
+    },
+    "ocpApimSubscriptionKeyParameter": {
+      "name": "Ocp-Apim-Subscription-Key",
+      "description": "subscription key in the header.",
+      "x-ms-parameter-location": "client",
+      "required": true,
+      "type": "string",
+      "in": "header"
+    },
+    "AzureRegion": {
+      "name": "azureRegion",
+      "description": "Supported Azure regions for Computer Vision endpoints.",
+      "x-ms-parameter-location": "client",
+      "required": true,
+      "type": "string",
+      "in": "path",
+      "x-ms-skip-url-encoding": true,
+      "x-ms-enum": {
+        "name": "AzureRegion",
+        "modelAsString": true
+      },
+      "enum": [
+        "westus",
+        "westeurope",
+        "southeastasia",
+        "eastus2",
+        "westcentralus"
+      ]
+    }
+  }
+}
