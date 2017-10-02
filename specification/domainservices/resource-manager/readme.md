@@ -64,3 +64,23 @@ csharp:
   output-folder: $(csharp-sdks-folder)/DomainServices/Management.DomainServices/Generated
   clear-output-folder: true
 ```
+
+
+## Go
+
+These settings apply only when `--go` is specified on the command line.
+
+``` yaml $(go)
+go:
+  license-header: MICROSOFT_APACHE_NO_VERSION
+  namespace: aad
+  clear-output-folder: true
+```
+
+### Tag: package-2017-01 and go
+
+These settings apply only when `--tag=package-2017-01 --go` is specified on the command line.
+
+``` yaml $(tag) == 'package-2017-01' && $(go)
+output-folder: $(go-sdk-folder)/services/domainservices/mgmt/2017-01-01/aad
+```
