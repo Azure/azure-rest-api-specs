@@ -174,6 +174,49 @@
         }
       }
     },
+    "/providers/Microsoft.Authorization/policysetdefinitions/{policySetDefinitionName}": {
+      "get": {
+        "tags": [
+          "PolicySetDefinitions"
+        ],
+        "operationId": "PolicySetDefinitions_GetBuiltIn",
+        "description": "Gets the built in policy set definition.",
+        "x-ms-examples": {
+          "Get a built in policy set definition": {
+            "$ref": "./examples/getBuiltInPolicySetDefinition.json"
+          }
+        },
+        "parameters": [
+          {
+            "name": "policySetDefinitionName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the policy set definition to get."
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK - Returns information about the built in policy set definition.",
+            "schema": {
+              "$ref": "#/definitions/PolicySetDefinition"
+            }
+          },
+          "404": {
+            "description": "Not Found - the built in policy set definition was not found."
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        }
+      }
+    },
     "/subscriptions/{subscriptionId}/providers/Microsoft.Authorization/policysetdefinitions": {
       "get": {
         "tags": [
@@ -197,6 +240,42 @@
         "responses": {
           "200": {
             "description": "OK - Returns an array of policy set definitions.",
+            "schema": {
+              "$ref": "#/definitions/PolicySetDefinitionListResult"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/providers/Microsoft.Authorization/policysetdefinitions": {
+      "get": {
+        "tags": [
+          "PolicySetDefinitions"
+        ],
+        "operationId": "PolicySetDefinitions_ListBuiltIn",
+        "description": "Gets all the built in policy set definitions.",
+        "x-ms-examples": {
+          "List policy set definitions": {
+            "$ref": "./examples/listBuiltInPolicySetDefinitions.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK - Returns an array of built in policy set definitions.",
             "schema": {
               "$ref": "#/definitions/PolicySetDefinitionListResult"
             }
