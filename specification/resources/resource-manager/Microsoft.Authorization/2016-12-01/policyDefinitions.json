@@ -137,28 +137,109 @@
         }
       }
     },
-    "/providers/Microsoft.Authorization/policydefinitions/{policyDefinitionName}": {
-      "get": {
+    "/providers/Microsoft.Management/managementgroups/{managementGroupId}/providers/Microsoft.Authorization/policydefinitions/{policyDefinitionName}": {
+      "put": {
         "tags": [
           "PolicyDefinitions"
         ],
-        "operationId": "PolicyDefinitions_GetBuiltIn",
-        "description": "Gets the built in policy definition.",
+        "operationId": "PolicyDefinitions_CreateOrUpdateAtManagementGroup",
+        "description": "Creates or updates a policy definition at management group level.",
         "parameters": [
           {
             "name": "policyDefinitionName",
             "in": "path",
             "required": true,
             "type": "string",
-            "description": "The name of the built in policy definition to get."
+            "description": "The name of the policy definition to create."
+          },
+          {
+            "name": "parameters",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/PolicyDefinition"
+            },
+            "description": "The policy definition properties."
           },
           {
             "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ManagementGroupIdParameter"
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": "Created - Returns information about the policy definition.",
+            "schema": {
+              "$ref": "#/definitions/PolicyDefinition"
+            }
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "PolicyDefinitions"
+        ],
+        "operationId": "PolicyDefinitions_DeleteAtManagementGroup",
+        "description": "Deletes a policy definition at management group level.",
+        "parameters": [
+          {
+            "name": "policyDefinitionName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the policy definition to delete."
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ManagementGroupIdParameter"
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "No Content"
+          },
+          "200": {
+            "description": "OK"
+          }
+        }
+      },
+      "get": {
+        "tags": [
+          "PolicyDefinitions"
+        ],
+        "operationId": "PolicyDefinitions_GetAtManagementGroup",
+        "description": "Gets the policy definition at management group level.",
+        "parameters": [
+          {
+            "name": "policyDefinitionName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the policy definition to get."
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ManagementGroupIdParameter"
           }
         ],
         "responses": {
           "200": {
-            "description": "OK - Returns information about the built in policy definition.",
+            "description": "OK - Returns information about the policy definition.",
             "schema": {
               "$ref": "#/definitions/PolicyDefinition"
             }
@@ -202,13 +283,13 @@
         "x-ms-odata": "#/definitions/PolicyDefinition"
       }
     },
-    "/providers/Microsoft.Authorization/policydefinitions": {
+    "/providers/Microsoft.Management/managementgroups/{managementGroupId}/providers/Microsoft.Authorization/policydefinitions": {
       "get": {
         "tags": [
           "PolicyDefinitions"
         ],
-        "operationId": "PolicyDefinitions_ListBuiltIn",
-        "description": "Gets all the built in policy definitions.",
+        "operationId": "PolicyDefinitions_ListByManagementGroup",
+        "description": "Gets all the policy definitions for a subscription at management group level.",
         "parameters": [
           {
             "name": "$filter",
@@ -219,11 +300,17 @@
           },
           {
             "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ManagementGroupIdParameter"
           }
         ],
         "responses": {
           "200": {
-            "description": "OK - Returns ana array of built in policy definitions.",
+            "description": "OK - Returns ana array of policy definitions.",
             "schema": {
               "$ref": "#/definitions/PolicyDefinitionListResult"
             }
@@ -333,6 +420,14 @@
       "required": true,
       "type": "string",
       "description": "The ID of the target subscription."
+    },
+    "ManagementGroupIdParameter": {
+      "name": "managementGroupId",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "description": "The ID of the management group.",
+      "x-ms-parameter-location": "method"
     },
     "ApiVersionParameter": {
       "name": "api-version",

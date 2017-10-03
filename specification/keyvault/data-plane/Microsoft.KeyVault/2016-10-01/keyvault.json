@@ -2937,15 +2937,6 @@
             "description": "Supported key operations."
           }
         },
-        "crv": {
-          "type": "string",
-          "description": "Elliptic curve name. For valid values, see JsonWebKeyCurveName.",
-          "enum": [ "P-256", "P-384", "P-521", "SECP256K1" ],
-          "x-ms-enum": {
-            "name": "JsonWebKeyCurveName",
-            "modelAsString": true
-          }
-        },
         "n": {
           "type": "string",
           "format": "base64url",
@@ -2989,16 +2980,6 @@
           "format": "base64url",
           "description": "RSA secret prime, with p < q."
         },
-        "x": {
-          "type": "string",
-          "format": "base64url",
-          "description": "X component of an EC public key."
-        },
-        "y": {
-          "type": "string",
-          "format": "base64url",
-          "description": "Y component of an EC public key."
-        },
         "k": {
           "type": "string",
           "format": "base64url",
@@ -3009,6 +2990,25 @@
           "type": "string",
           "format": "base64url",
           "description": "HSM Token, used with 'Bring Your Own Key'."
+        },
+        "crv": {
+          "type": "string",
+          "description": "Elliptic curve name. For valid values, see JsonWebKeyCurveName.",
+          "enum": [ "P-256", "P-384", "P-521", "SECP256K1" ],
+          "x-ms-enum": {
+            "name": "JsonWebKeyCurveName",
+            "modelAsString": true
+          }
+        },
+        "x": {
+          "type": "string",
+          "format": "base64url",
+          "description": "X component of an EC public key."
+        },
+        "y": {
+          "type": "string",
+          "format": "base64url",
+          "description": "Y component of an EC public key."
         }
       },
       "description": "As of http://tools.ietf.org/html/draft-ietf-jose-json-web-key-18"

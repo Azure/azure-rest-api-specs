@@ -37,9 +37,6 @@ before_install:
   - sudo apt-get install libunwind8 libicu52 -y
 install:
   - npm install
-  - npm install -g autorest
-  - autorest --version=latest
-  - autorest --help
 script:
   - DOCKER_CMD="docker run --rm --env-file /tmp/env_file -e GH_TOKEN -v $PWD:/git-restapi/ lmazuel/swagger-to-sdk"
   - if [[ $MODE == 'python' ]]; then $DOCKER_CMD AutorestCI/azure-sdk-for-python --pr-repo-id Azure/azure-sdk-for-python -o master -v; fi
