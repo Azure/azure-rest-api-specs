@@ -67,3 +67,31 @@ csharp:
   output-folder: $(csharp-sdks-folder)/EventGrid/Management.EventGrid/Generated
   clear-output-folder: true
 ```
+
+
+## Go
+
+These settings apply only when `--go` is specified on the command line.
+
+``` yaml $(go)
+go:
+  license-header: MICROSOFT_APACHE_NO_VERSION
+  namespace: eventgrid
+  clear-output-folder: true
+```
+
+### Tag: package-2017-09-preview and go
+
+These settings apply only when `--tag=package-2017-09-preview --go` is specified on the command line.
+
+``` yaml $(tag) == 'package-2017-09-preview' && $(go)
+output-folder: $(go-sdk-folder)/services/eventgrid/mgmt/2017-09-15-preview/eventgrid
+```
+
+### Tag: package-2017-06-preview and go
+
+These settings apply only when `--tag=package-2017-06-preview --go` is specified on the command line.
+
+``` yaml $(tag) == 'package-2017-06-preview' && $(go)
+output-folder: $(go-sdk-folder)/services/eventgrid/mgmt/2017-06-15-preview/eventgrid
+```
