@@ -7,18 +7,18 @@
     "parameters": {
       "location": "eastus",
       "properties": {
-        "stdOutErrPathPrefix": "$AZ_LEARNING_MOUNT_ROOT/azfiles",
+        "stdOutErrPathPrefix": "$AZ_BATCHAI_MOUNT_ROOT/azfiles",
         "cluster": {
           "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/demo_resource_group/providers/Microsoft.BatchAI/clusters/demo_cluster"
         },
         "nodeCount": 1,
         "customToolkitSettings": {
-          "commandLine": "echo hi | tee $AZ_LEARNING_OUTPUT_OUTPUTS/hi.txt"
+          "commandLine": "echo hi | tee $AZ_BATCHAI_OUTPUT_OUTPUTS/hi.txt"
         },
         "inputDirectories": [
           {
             "id": "INPUT",
-            "path": "$AZ_LEARNING_MOUNT_ROOT/azfiles/input"
+            "path": "$AZ_BATCHAI_MOUNT_ROOT/azfiles/input"
           }
         ],
         "priority": 0,
@@ -29,7 +29,7 @@
         },
         "outputDirectories": [
           {
-            "pathPrefix": "$AZ_LEARNING_MOUNT_ROOT/azfiles/",
+            "pathPrefix": "$AZ_BATCHAI_MOUNT_ROOT/azfiles/",
             "type": "custom",
             "id": "OUTPUTS",
             "pathSuffix": "files",
@@ -64,19 +64,19 @@
           },
           "toolType": "custom",
           "customToolkitSettings": {
-            "commandLine": "echo hi | tee $AZ_LEARNING_OUTPUT_OUTPUTS/hi.txt"
+            "commandLine": "echo hi | tee $AZ_BATCHAI_OUTPUT_OUTPUTS/hi.txt"
           },
-          "stdOutErrPathPrefix": "$AZ_LEARNING_MOUNT_ROOT/azfiles",
+          "stdOutErrPathPrefix": "$AZ_BATCHAI_MOUNT_ROOT/azfiles",
           "inputDirectories": [
             {
               "id": "INPUT",
-              "path": "$AZ_LEARNING_MOUNT_ROOT/azfiles/input"
+              "path": "$AZ_BATCHAI_MOUNT_ROOT/azfiles/input"
             }
           ],
           "outputDirectories": [
             {
               "id": "OUTPUTS",
-              "pathPrefix": "$AZ_LEARNING_MOUNT_ROOT/azfiles/",
+              "pathPrefix": "$AZ_BATCHAI_MOUNT_ROOT/azfiles/",
               "pathSuffix": "files",
               "type": "custom",
               "createNew": true

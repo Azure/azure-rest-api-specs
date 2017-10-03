@@ -1865,7 +1865,7 @@
             "$ref": "#/definitions/EnvironmentSetting"
           },
           "title": "Additional environment variables to set on the job.",
-          "description": "Batch AI service sets the following environment variables for all jobs: AZ_LEARNING_INPUT_id, AZ_LEARNING_OUTPUT_id, AZ_LEARNING_NUM_GPUS_PER_NODE. For distributed TensorFlow jobs, following additional environment variables are set by the Batch AI Service: AZ_LEARNING_PS_HOSTS, AZ_LEARNING_WORKER_HOSTS"
+          "description": "Batch AI service sets the following environment variables for all jobs: AZ_BATCHAI_INPUT_id, AZ_BATCHAI_OUTPUT_id, AZ_BATCHAI_NUM_GPUS_PER_NODE. For distributed TensorFlow jobs, following additional environment variables are set by the Batch AI Service: AZ_BATCHAI_PS_HOSTS, AZ_BATCHAI_WORKER_HOSTS"
         },
         "constraints": {
           "properties": {
@@ -1993,7 +1993,7 @@
             "$ref": "#/definitions/EnvironmentSetting"
           },
           "title": "Additional environment variables to be passed to the job.",
-          "description": "Batch AI services sends the following environment variables for all jobs: AZ_LEARNING_INPUT_id, AZ_LEARNING_OUTPUT_id, AZ_LEARNING_NUM_GPUS_PER_NODE, For distributed TensorFlow jobs, following additional environment variables are set by the Batch AI Service: AZ_LEARNING_PS_HOSTS, AZ_LEARNING_WORKER_HOSTS"
+          "description": "Batch AI services sends the following environment variables for all jobs: AZ_BATCHAI_INPUT_id, AZ_BATCHAI_OUTPUT_id, AZ_BATCHAI_NUM_GPUS_PER_NODE, For distributed TensorFlow jobs, following additional environment variables are set by the Batch AI Service: AZ_BATCHAI_PS_HOSTS, AZ_BATCHAI_WORKER_HOSTS"
         },
         "constraints": {
           "properties": {
@@ -2391,7 +2391,7 @@
         "id": {
           "type": "string",
           "title": "The id for the input directory.",
-          "description": "It will be available for the job as an environment variable under AZ_LEARNING_INPUT_id. The learning service will also provide the following  environment variable: AZ_LEARNING_PREV_OUTPUT_Name. The value of the variable will be populated if the job is being retried after a previous failure, otherwise it will be set to nothing."
+          "description": "It will be available for the job as an environment variable under AZ_BATCHAI_INPUT_id. The service will also provide the following  environment variable: AZ_BATCHAI_PREV_OUTPUT_Name. The value of the variable will be populated if the job is being retried after a previous failure, otherwise it will be set to nothing."
         },
         "path": {
           "type": "string",
@@ -2409,17 +2409,17 @@
         "id": {
           "type": "string",
           "title": "The name for the output directory.",
-          "description": "It will be available for the job as an environment variable under AZ_LEARNING_OUTPUT_id."
+          "description": "It will be available for the job as an environment variable under AZ_BATCHAI_OUTPUT_id."
         },
         "pathPrefix": {
           "type": "string",
           "title": "The prefix path where the output directory will be created.",
-          "description": "NOTE: This is an absolute path to prefix. E.g. $AZ_LEARNING_MOUNT_ROOT/MyNFS/MyLearningLogs."
+          "description": "NOTE: This is an absolute path to prefix. E.g. $AZ_BATCHAI_MOUNT_ROOT/MyNFS/MyLogs."
         },
         "pathSuffix": {
           "type": "string",
-          "title": "The path of the directory to create.",
-          "description": "The learning system will create the following directory on user's behalf: PathPrefix/JobID/jobVersion/directoryName, where the JobID is a unique name created by the Batch AI Service and jobVersion is the version of the job. The Batch AI Service will also populate a file under this the PathPrefix/JobID/jobVersion directory, which maps the directory to a job ARM resource ID."
+          "title": "The suffix path where the output directory will be created.",
+          "description": "The suffix path where the output directory will be created."
         },
         "type": {
           "type": "string",
@@ -2482,7 +2482,7 @@
         "relativeMountPath": {
           "type": "string",
           "title": "Specifies the relative path on the compute node where the Azure file share will be mounted.",
-          "description": "Note that all file shares will be mounted under $AZ_LEARNING_MOUNT_ROOT location."
+          "description": "Note that all file shares will be mounted under $AZ_BATCHAI_MOUNT_ROOT location."
         },
         "fileMode": {
           "type": "string",
@@ -2522,7 +2522,7 @@
         "relativeMountPath": {
           "type": "string",
           "title": "Specifies the relative path on the compute node where the Azure Blob file system will be mounted.",
-          "description": "Note that all blob file systems will be mounted under $AZ_LEARNING_MOUNT_ROOT location."
+          "description": "Note that all blob file systems will be mounted under $AZ_BATCHAI_MOUNT_ROOT location."
         },
         "mountOptions": {
           "type": "string",
@@ -2551,7 +2551,7 @@
         "relativeMountPath": {
           "type": "string",
           "title": "Specifies the relative path on the compute node where the file server will be mounted.",
-          "description": "Note that all file shares will be mounted under $AZ_LEARNING_MOUNT_ROOT location."
+          "description": "Note that all file shares will be mounted under $AZ_BATCHAI_MOUNT_ROOT location."
         },
         "mountOptions": {
           "type": "string",
@@ -2573,7 +2573,7 @@
         "relativeMountPath": {
           "type": "string",
           "title": "Specifies the relative path on the compute cluster node where the file system will be mounted.",
-          "description": "Note that all file shares will be mounted under $AZ_LEARNING_MOUNT_ROOT location."
+          "description": "Note that all file shares will be mounted under $AZ_BATCHAI_MOUNT_ROOT location."
         }
       },
       "description": "Details of the file system to mount on the compute cluster.",
@@ -2732,7 +2732,7 @@
       "properties": {
         "commandLine": {
           "type": "string",
-          "title": "The command line to execute the custom toolkit learning Job."
+          "title": "The command line to execute the custom toolkit Job."
         }
       },
       "description": "Specifies the settings for a custom tool kit job."
