@@ -26,30 +26,24 @@
       }
     }
   },
-  "security": [
-    {
-      "azure_auth": [
-        "user_impersonation"
-      ]
-    }
-  ],
   "paths": {
     "/providers/Microsoft.AAD/operations": {
       "get": {
         "tags": [
-          "Operations"
+          "DomainServices"
         ],
-        "summary": "Operations_List",
-        "description": "Gets the details of all operations possible on the Microsoft.AAD resource provider.",
-        "operationId": "Operations_List",
-		"produces": [
-          "application/json"
+        "description": "Lists all the available Domain Services operations.",
+        "operationId": "DomainServiceOperations_List",
+        "parameters": [
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          }
         ],
         "responses": {
           "200": {
-            "description": "The operation succeeded. The response contains the possible operations on the Microsoft.AAD resource provider.",
+            "description": "HTTP 200 (OK) if the operation was successful.",
             "schema": {
-              "$ref": "#/definitions/OperationListResult"
+              "$ref": "#/definitions/OperationEntityListResult"
             }
           }
         },
@@ -65,12 +59,9 @@
         "tags": [
           "DomainServices"
         ],
+        "operationId": "DomainServices_List",
         "summary": "List Domain Services in Subscription (GET Resources)",
         "description": "The List Domain Services in Subscription operation lists all the domain services available under the given subscription (and across all resource groups within that subscription).",
-        "operationId": "DomainServices_List",
-        "produces": [
-          "application/json"
-        ],
         "parameters": [
           {
             "$ref": "#/parameters/ApiVersionParameter"
@@ -91,7 +82,8 @@
           "List Domain Service": {
             "$ref": "./examples/ListDomainServicesBySubscription.json"
           }
-        }
+        },
+        "x-ms-pageable": {}
       }
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AAD/domainServices": {
@@ -99,9 +91,9 @@
         "tags": [
           "DomainServices"
         ],
+        "operationId": "DomainServices_ListByResourceGroup",
         "summary": "List Domain Services in Resource Group (GET Resources)",
         "description": "The List Domain Services in Resource Group operation lists all the domain services available under the given resource group.",
-        "operationId": "DomainServices_ListByResourceGroup",
         "parameters": [
           {
             "$ref": "#/parameters/ApiVersionParameter"
@@ -125,7 +117,8 @@
           "List Domain Service": {
             "$ref": "./examples/ListDomainServicesByResourceGroup.json"
           }
-        }
+        },
+        "x-ms-pageable": {}
       }
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AAD/domainServices/{domainServiceName}": {
@@ -133,9 +126,9 @@
         "tags": [
           "DomainServices"
         ],
+        "operationId": "DomainServices_CreateOrUpdate",
         "summary": "Create or Update Domain Service (PUT Resource)",
         "description": "The Create Domain Service operation creates a new domain service with the specified parameters. If the specific service already exists, then any patchable properties will be updated and any immutable properties will remain unchanged.",
-        "operationId": "DomainServices_CreateOrUpdate",
         "parameters": [
           {
             "$ref": "#/parameters/ApiVersionParameter"
@@ -509,51 +502,55 @@
         }
       }
     },
-    "Operation": {
-      "description": "Properties of an operation supported by the resource provider.",
-      "type": "object",
-      "properties": {
-        "display": {
-          "description": "The properties of the resource operation.",
-          "$ref": "#/definitions/OperationProperties"
-        },
-        "name": {
-          "description": "The name of the resource operation.",
-          "type": "string"
-        }
-      }
-    },
-    "OperationListResult": {
-      "description": "Container for a list of operations supported by a resource provider.",
+    "OperationEntityListResult": {
+      "description": "The list of domain service operation response.",
       "type": "object",
       "properties": {
         "value": {
-          "description": "A list of operations supported by a resource provider.",
+          "description": "The list of operations.",
           "type": "array",
           "items": {
-            "$ref": "#/definitions/Operation"
+            "$ref": "#/definitions/OperationEntity"
           }
         }
       }
     },
-    "OperationProperties": {
-      "description": "Properties of an operation supported by the resource provider.",
+    "OperationEntity": {
+      "description": "The operation supported by Domain Services.",
+      "type": "object",
+      "properties": {
+        "name": {
+          "description": "Operation name: {provider}/{resource}/{operation}.",
+          "type": "string"
+        },
+        "display": {
+          "$ref": "#/definitions/OperationDisplayInfo",
+          "description": "The operation supported by Domain Services."
+        },
+        "origin": {
+          "description": "The origin of the operation.",
+          "type": "string"
+        }
+      }
+    },
+    "OperationDisplayInfo": {
+      "description": "The operation supported by Domain Services.",
       "type": "object",
       "properties": {
         "description": {
-          "description": "The description of the resource operation.",
+          "description": "The description of the operation.",
           "type": "string"
         },
         "operation": {
-          "description": "The operation name.",
+          "description": "The action that users can perform, based on their permission level.",
           "type": "string"
         },
         "provider": {
-          "description": "The provider name.",
+          "description": "Service provider: Domain Services.",
           "type": "string"
         },
         "resource": {
-          "description": "The resource name.",
+          "description": "Resource on which the operation is performed.",
           "type": "string"
         }
       }
