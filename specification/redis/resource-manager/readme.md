@@ -77,3 +77,39 @@ csharp:
   output-folder: $(csharp-sdks-folder)/RedisCache/Management.Redis/Generated
   clear-output-folder: true
 ```
+
+
+## Go
+
+These settings apply only when `--go` is specified on the command line.
+
+``` yaml $(go)
+go:
+  license-header: MICROSOFT_APACHE_NO_VERSION
+  namespace: cache
+  clear-output-folder: true
+```
+
+### Tag: package-2017-02 and go
+
+These settings apply only when `--tag=package-2017-02 --go` is specified on the command line.
+
+``` yaml $(tag) == 'package-2017-02' && $(go)
+output-folder: $(go-sdk-folder)/services/redis/mgmt/2017-02-01/cache
+```
+
+### Tag: package-2016-04 and go
+
+These settings apply only when `--tag=package-2016-04 --go` is specified on the command line.
+
+``` yaml $(tag) == 'package-2016-04' && $(go)
+output-folder: $(go-sdk-folder)/services/redis/mgmt/2016-04-01/cache
+```
+
+### Tag: package-2015-08 and go
+
+These settings apply only when `--tag=package-2015-08 --go` is specified on the command line.
+
+``` yaml $(tag) == 'package-2015-08' && $(go)
+output-folder: $(go-sdk-folder)/services/redis/mgmt/2015-08-01/cache
+```
