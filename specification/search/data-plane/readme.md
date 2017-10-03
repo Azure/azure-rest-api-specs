@@ -66,6 +66,9 @@ input-file:
 
 
 ---
+# Code Generation
+
+
 ## C# 
 
 These settings apply only when `--csharp` is specified on the command line.
@@ -78,4 +81,40 @@ csharp:
   namespace: Microsoft.Azure.Search
   output-folder: $(csharp-sdks-folder)/Search/DataPlane/Microsoft.Azure.Search/Generated$(search-folder)
   clear-output-folder: true
+```
+
+
+## Go
+
+These settings apply only when `--go` is specified on the command line.
+
+``` yaml $(go)
+go:
+  license-header: MICROSOFT_APACHE_NO_VERSION
+  namespace: search
+  clear-output-folder: true
+```
+
+### Tag: package-2016-09 and go
+
+These settings apply only when `--tag=package-2016-09 --go` is specified on the command line.
+
+``` yaml $(tag) == 'package-2016-09' && $(go)
+output-folder: $(go-sdk-folder)/services/search/2016-09-01/search
+```
+
+### Tag: package-2015-02-preview and go
+
+These settings apply only when `--tag=package-2015-02-preview --go` is specified on the command line.
+
+``` yaml $(tag) == 'package-2015-02-preview' && $(go)
+output-folder: $(go-sdk-folder)/services/search/2015-02-28-preview/search
+```
+
+### Tag: package-2015-02 and go
+
+These settings apply only when `--tag=package-2015-02 --go` is specified on the command line.
+
+``` yaml $(tag) == 'package-2015-02' && $(go)
+output-folder: $(go-sdk-folder)/services/search/2015-02-28/search
 ```
