@@ -137,6 +137,35 @@
         }
       }
     },
+    "/providers/Microsoft.Authorization/policydefinitions/{policyDefinitionName}": {
+      "get": {
+        "tags": [
+          "PolicyDefinitions"
+        ],
+        "operationId": "PolicyDefinitions_GetBuiltIn",
+        "description": "Gets the built in policy definition.",
+        "parameters": [
+          {
+            "name": "policyDefinitionName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the built in policy definition to get."
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK - Returns information about the built in policy definition.",
+            "schema": {
+              "$ref": "#/definitions/PolicyDefinition"
+            }
+          }
+        }
+      }
+    },
     "/subscriptions/{subscriptionId}/providers/Microsoft.Authorization/policydefinitions": {
       "get": {
         "tags": [
@@ -162,6 +191,39 @@
         "responses": {
           "200": {
             "description": "OK - Returns ana array of policy definitions.",
+            "schema": {
+              "$ref": "#/definitions/PolicyDefinitionListResult"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        },
+        "x-ms-odata": "#/definitions/PolicyDefinition"
+      }
+    },
+    "/providers/Microsoft.Authorization/policydefinitions": {
+      "get": {
+        "tags": [
+          "PolicyDefinitions"
+        ],
+        "operationId": "PolicyDefinitions_ListBuiltIn",
+        "description": "Gets all the built in policy definitions.",
+        "parameters": [
+          {
+            "name": "$filter",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "description": "The filter to apply on the operation."
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK - Returns ana array of built in policy definitions.",
             "schema": {
               "$ref": "#/definitions/PolicyDefinitionListResult"
             }
