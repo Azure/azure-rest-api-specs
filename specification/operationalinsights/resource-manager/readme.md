@@ -28,9 +28,19 @@ These are the global settings for the OperationalInsights API.
 title: OperationalInsightsManagementClient
 description: Operational Insights Client
 openapi-type: arm
-tag: package-2015-11-preview
+tag: package-2017-03-15-preview
 ```
 
+
+### Tag: package-2017-03-15-preview
+
+These settings apply only when `--tag=package-2017-03-15-preview` is specified on the command line.
+
+``` yaml $(tag) == 'package-2017-03-15-preview'
+input-file:
+- Microsoft.OperationalInsights/2017-03-15-preview/OperationalInsights.json
+- Microsoft.OperationalInsights/2015-03-20/OperationalInsights.json
+```
 
 ### Tag: package-2015-11-preview
 
