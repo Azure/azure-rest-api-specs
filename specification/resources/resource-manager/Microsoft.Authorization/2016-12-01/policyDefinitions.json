@@ -162,6 +162,9 @@
             "schema": {
               "$ref": "#/definitions/PolicyDefinition"
             }
+          },
+          "404": {
+            "description": "Not Found - the built in policy definition was not found."
           }
         }
       }
@@ -276,13 +279,6 @@
         "description": "Gets all the policy definitions for a subscription.",
         "parameters": [
           {
-            "name": "$filter",
-            "in": "query",
-            "required": false,
-            "type": "string",
-            "description": "The filter to apply on the operation."
-          },
-          {
             "$ref": "#/parameters/ApiVersionParameter"
           },
           {
@@ -312,19 +308,12 @@
         "description": "Gets all the built in policy definitions.",
         "parameters": [
           {
-            "name": "$filter",
-            "in": "query",
-            "required": false,
-            "type": "string",
-            "description": "The filter to apply on the operation."
-          },
-          {
             "$ref": "#/parameters/ApiVersionParameter"
           }
         ],
         "responses": {
           "200": {
-            "description": "OK - Returns ana array of built in policy definitions.",
+            "description": "OK - Returns an array of built in policy definitions.",
             "schema": {
               "$ref": "#/definitions/PolicyDefinitionListResult"
             }
@@ -344,13 +333,6 @@
         "operationId": "PolicyDefinitions_ListByManagementGroup",
         "description": "Gets all the policy definitions for a subscription at management group level.",
         "parameters": [
-          {
-            "name": "$filter",
-            "in": "query",
-            "required": false,
-            "type": "string",
-            "description": "The filter to apply on the operation."
-          },
           {
             "$ref": "#/parameters/ApiVersionParameter"
           },
