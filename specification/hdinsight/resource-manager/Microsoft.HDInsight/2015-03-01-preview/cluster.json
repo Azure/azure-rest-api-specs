@@ -781,7 +781,7 @@
         },
         "Cluster": {
             "allOf": [{
-                "$ref": "#/definitions/Resource"
+                "$ref": "#/definitions/TrackedResource"
             }],
             "properties": {
                 "etag": {
@@ -999,49 +999,63 @@
             "description": "The azure async operation response."
         },
         "Resource": {
+            "description": "The core properties of ARM resources",
             "properties": {
                 "id": {
                     "readOnly": true,
                     "type": "string",
-                    "description": "The resource Id"
+                    "description": "Fully qualified resource Id for the resource."
                 },
                 "name": {
                     "readOnly": true,
                     "type": "string",
-                    "description": "The resource name"
+                    "description": "The name of the resource"
                 },
                 "type": {
                     "readOnly": true,
                     "type": "string",
-                    "description": "The resource type"
-                },
+                    "description": "The type of the resource."
+                }
+            },
+            "x-ms-azure-resource": true
+        },
+        "TrackedResource": {
+            "description": "The resource model definition for a ARM tracked top level resource",
+            "properties": {
                 "location": {
                     "type": "string",
-                    "description": "The resource location"
+                    "x-ms-mutability": [
+                        "read",
+                        "create"
+                    ],
+                    "description": "The Azure Region where the resource lives"
                 },
                 "tags": {
                     "type": "object",
                     "additionalProperties": {
                         "type": "string"
                     },
-                    "description": "The resource tags"
+                    "x-ms-mutability": [
+                        "read",
+                        "create",
+                        "update"
+                    ],
+                    "description": "Resource tags."
                 }
             },
-            "required": [
-                "location"
-            ],
-            "description": "The resource definition.",
-            "x-ms-azure-resource": true
+            "allOf": [
+                {
+                    "$ref": "#/definitions/Resource"
+                }
+            ]
         },
-        "SubResource": {
-            "properties": {
-                "id": {
-                    "type": "string",
-                    "description": "The resource Id"
+        "ProxyResource": {
+            "description": "The resource model definition for a ARM proxy resource. It will have everything other than required location and tags",
+            "allOf": [
+                {
+                    "$ref": "#/definitions/Resource"
                 }
-            },
-            "description": "The sub resource definition.",
-            "x-ms-azure-resource": true
+            ]
         },
         "Operation": {
             "description": "The HDInsight REST API operation.",

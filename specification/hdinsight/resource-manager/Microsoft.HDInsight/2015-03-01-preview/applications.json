@@ -380,32 +380,15 @@
         "Application": {
             "description": "The HDInsight cluster application",
             "type": "object",
+            "allOf": [
+                {
+                    "$ref": "./cluster.json#/definitions/ProxyResource"
+                }
+            ],
             "properties": {
-                "id": {
-                    "readOnly": true,
-                    "$ref": "./cluster.json#/definitions/SubResource",
-                    "description": "The resource id for the application"
-                },
-                "name": {
-                    "readOnly": true,
-                    "description": "The name of the application.",
-                    "type": "string"
-                },
-                "type": {
-                    "readOnly": true,
-                    "description": "The type of application.",
-                    "type": "string"
-                },
                 "etag": {
                     "description": "The ETag for the application",
                     "type": "string"
-                },
-                "tags": {
-                    "description": "The tags for the application.",
-                    "type": "object",
-                    "additionalProperties": {
-                        "type": "string"
-                    }
                 },
                 "properties": {
                     "$ref": "#/definitions/ApplicationGetProperties",
