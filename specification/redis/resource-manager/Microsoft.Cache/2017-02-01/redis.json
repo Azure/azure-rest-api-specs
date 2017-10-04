@@ -1248,23 +1248,50 @@
           "readOnly": true,
           "type": "string",
           "description": "Resource type."
-        },
-        "location": {
-          "type": "string",
-          "description": "Resource location."
-        },
+        }
+      },
+      "x-ms-azure-resource": true
+    },
+    "ProxyResource": {
+      "description": "The resource model definition for a ARM proxy resource. It will have everything other than required location and tags",
+      "allOf": [
+        {
+          "$ref": "#/definitions/Resource"
+        }
+      ]
+    },
+    "TrackedResource": {
+      "description": "The resource model definition for a ARM tracked top level resource",
+      "properties": {
         "tags": {
           "type": "object",
           "additionalProperties": {
             "type": "string"
           },
+          "x-ms-mutability": [
+            "read",
+            "create",
+            "update"
+          ],
           "description": "Resource tags."
+        },
+        "location": {
+          "type": "string",
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ],
+          "description": "The geo-location where the resource lives"
         }
       },
       "required": [
         "location"
       ],
-      "x-ms-azure-resource": true
+      "allOf": [
+        {
+          "$ref": "#/definitions/Resource"
+        }
+      ]
     },
     "RedisCreateParameters": {
       "properties": {
@@ -1279,7 +1306,7 @@
       ],
       "allOf": [
         {
-          "$ref": "#/definitions/Resource"
+          "$ref": "#/definitions/TrackedResource"
         }
       ],
       "description": "Parameters supplied to the Create Redis operation."
@@ -1312,21 +1339,6 @@
     "RedisFirewallRule": {
       "description": "A firewall rule on a redis cache has a name, and describes a contiguous range of IP addresses permitted to connect",
       "properties": {
-        "id": {
-          "type": "string",
-          "readOnly": true,
-          "description": "resource ID (of the firewall rule)"
-        },
-        "name": {
-          "type": "string",
-          "readOnly": true,
-          "description": "name of the firewall rule"
-        },
-        "type": {
-          "type": "string",
-          "readOnly": true,
-          "description": "type (of the firewall rule resource = 'Microsoft.Cache/redis/firewallRule')"
-        },
         "properties": {
           "x-ms-client-flatten": true,
           "$ref": "#/definitions/RedisFirewallRuleProperties",
@@ -1335,6 +1347,11 @@
       },
       "required": [
         "properties"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/ProxyResource"
+        }
       ]
     },
     "RedisFirewallRuleProperties": {
@@ -1365,7 +1382,7 @@
         },
         "nextLink": {
           "type": "string",
-          "readOnly":  true,
+          "readOnly": true,
           "description": "Link for next set of locations."
         }
       },
@@ -1432,7 +1449,7 @@
       },
       "allOf": [
         {
-          "$ref": "#/definitions/Resource"
+          "$ref": "#/definitions/TrackedResource"
         }
       ],
       "description": "A single Redis item in List or Get Operation."
