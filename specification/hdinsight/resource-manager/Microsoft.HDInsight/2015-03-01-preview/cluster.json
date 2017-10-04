@@ -328,9 +328,6 @@
                 "responses": {
                     "202": {
                         "description": "Accepted response definition."
-                    },
-                    "200": {
-                        "description": "Ok response definition."
                     }
                 },
                 "x-ms-long-running-operation": true
@@ -410,22 +407,22 @@
                 },
                 "domain": {
                     "type": "string",
-                    "description": "domain."
+                    "description": "The organization's active directory domain."
                 },
                 "organizationalUnitDN": {
                     "type": "string",
-                    "description": "The distinguished name for the organizational unit."
+                    "description": "The organizational unit within the Active Directory to place the cluster and service accounts."
                 },
                 "ldapsUrls": {
                     "type": "array",
                     "items": {
                         "type": "string"
                     },
-                    "description": "The LDAP URLs."
+                    "description": "The LDAPS protocol URLs to communicate with the Active Directory."
                 },
                 "domainUsername": {
                     "type": "string",
-                    "description": "The domain admin user name."
+                    "description": "The domain user account that will have admin privileges on the cluster."
                 },
                 "domainUserPassword": {
                     "type": "string",
