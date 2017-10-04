@@ -238,8 +238,8 @@
                 "operationId": "Clusters_ListByResourceGroup",
                 "description": "Lists the HDInsight clusters in a resource group.",
                 "x-ms-examples": {
-                    "Get All Hadoop on Linux cluster": {
-                        "$ref": "./examples/GetLinuxHadoopAllCluster.json"
+                    "Get All Hadoop on Linux clusters in a resource group": {
+                        "$ref": "./examples/GetLinuxHadoopAllClustersInResourceGroup.json"
                     }
                 },
                 "parameters": [{
@@ -276,6 +276,11 @@
                 ],
                 "operationId": "Clusters_Resize",
                 "description": "Resizes the specified HDInsight cluster to the specified size.",
+                "x-ms-examples": {
+                    "Resize the worker nodes for a Hadoop on Linux cluster": {
+                        "$ref": "./examples/ResizeLinuxHadoopCluster.json"
+                    }
+                },
                 "parameters": [{
                         "name": "resourceGroupName",
                         "in": "path",
@@ -337,6 +342,11 @@
                     "Clusters"
                 ],
                 "operationId": "Clusters_List",
+                "x-ms-examples": {
+                    "Get All Hadoop on Linux clusters": {
+                        "$ref": "./examples/GetLinuxHadoopAllClusters.json"
+                    }
+                },
                 "description": "Lists all the HDInsight clusters under the subscription.",
                 "parameters": [{
                         "$ref": "#/parameters/ApiVersionParameter"
