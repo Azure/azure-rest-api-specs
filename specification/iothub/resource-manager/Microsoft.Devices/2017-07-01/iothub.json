@@ -125,6 +125,13 @@
             "schema": {
               "$ref": "#/definitions/IotHubDescription"
             }
+          },
+                                  {
+            "name": "If-Match",
+            "in": "header",
+            "required": false,
+            "type": "string",
+            "description": "ETag of the IoT Hub. Do not specify for creating a brand new IoT Hub. Required to update an existing IoT Hub."
           }
         ],
         "responses": {
@@ -887,7 +894,7 @@
         "tags": [ "Certificates" ],
         "summary": "Get the certificate list.",
         "description": "Returns the list of certificates.",
-        "operationId": "Certificates_ListByIoTHub",
+        "operationId": "Certificates_ListByIotHub",
         "parameters": [
           {
             "$ref": "#/parameters/api-version"
@@ -987,6 +994,13 @@
             "schema": {
               "$ref": "#/definitions/CertificateBodyDescription"
             }
+          },
+          {
+            "name": "If-Match",
+            "in": "header",
+            "required": false,
+            "type": "string",
+            "description": "ETag of the Certificate. Do not specify for creating a brand new certificate. Required to update an existing certificate."
           }
         ],
         "responses": {
@@ -1031,6 +1045,13 @@
           },
           {
             "$ref": "#/parameters/certificateName"
+          },
+          {
+            "name": "If-Match",
+            "in": "header",
+            "required": true,
+            "type": "string",
+            "description": "ETag of the Certificate."
           }
         ],
         "responses": {
@@ -1040,7 +1061,7 @@
           "204": {
             "description": "Certificate does not exist."
           },
-		  "default": {
+          "default": {
             "description": "DefaultErrorResponse",
             "schema": {
               "$ref": "#/definitions/ErrorDetails"
@@ -1053,8 +1074,8 @@
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Devices/IotHubs/{resourceName}/certificates/{certificateName}/generateVerificationCode": {
       "post": {
         "tags": [ "Certificates" ],
-        "summary": "Generate verification code for proof of posession flow.",
-        "description": "Generates verification code for proof of posession flow. The verifification code will be used to generate a leaf certificate.",
+        "summary": "Generate verification code for proof of possession flow.",
+        "description": "Generates verification code for proof of possession flow. The verification code will be used to generate a leaf certificate.",
         "operationId": "Certificates_GenerateVerificationCode",
         "parameters": [
           {
@@ -1063,14 +1084,21 @@
           {
             "$ref": "#/parameters/subscriptionId"
           },
-		  {
+          {
             "$ref": "#/parameters/resourceGroupName"
           },
-		  {
+          {
             "$ref": "#/parameters/resourceName"
           },
-		  {
+          {
             "$ref": "#/parameters/certificateName"
+          },
+          {
+            "name": "If-Match",
+            "in": "header",
+            "required": true,
+            "type": "string",
+            "description": "ETag of the Certificate."
           }
         ],
         "responses": {
@@ -1093,8 +1121,8 @@
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Devices/IotHubs/{resourceName}/certificates/{certificateName}/verify": {
       "post": {
         "tags": [ "Certificates" ],
-        "summary": "Verify certificate's private key posession.",
-        "description": "Verifies the certificate's private key posession by providing the leaf cert issued by the verifying pre uploaded certificate.",
+        "summary": "Verify certificate's private key possession.",
+        "description": "Verifies the certificate's private key possession by providing the leaf cert issued by the verifying pre uploaded certificate.",
         "operationId": "Certificates_Verify",
         "parameters": [
           {
@@ -1120,6 +1148,13 @@
             "schema": {
               "$ref": "#/definitions/CertificateVerificationDescription"
             }
+          },
+          {
+            "name": "If-Match",
+            "in": "header",
+            "required": true,
+            "type": "string",
+            "description": "ETag of the Certificate."
           }
         ],
         "responses": {
@@ -1141,7 +1176,7 @@
     }
   },
   "definitions": {
-	"CertificateVerificationDescription":{
+    "CertificateVerificationDescription":{
       "description": "The JSON-serialized leaf certificate",
       "type": "object",
       "properties": {
@@ -1178,61 +1213,61 @@
       "description": "The X509 Certificate.",
       "type": "object",
       "properties": {
-		"properties" : {
+        "properties" : {
           "$ref": "#/definitions/CertificateProperties"
-		},
-		"id": {
+        },
+        "id": {
           "readOnly": true,
           "type": "string",
           "description": "The resource identifier."
-		},
-		"name": {
+        },
+        "name": {
           "description": "The name of the certificate.",
           "type": "string",
-		  "readOnly": true
+          "readOnly": true
         },
-	    "etag": {
+        "etag": {
           "description": "The entity tag.",
           "type": "string",
-		  "readOnly": true
-		},
-		"type": {
+          "readOnly": true
+        },
+        "type": {
           "readOnly": true,
           "type": "string",
           "description": "The resource type."
         }
       },
-	  "x-ms-azure-resource": true
+      "x-ms-azure-resource": true
     },
     "CertificateWithNonceDescription": {
-      "description": "The X509 Certificate.",
+     "description": "The X509 Certificate.",
       "type": "object",
       "properties": {
-	    "properties" : {
+        "properties" : {
           "$ref": "#/definitions/CertificatePropertiesWithNonce"
-		},
-	    "id": {
-	      "readOnly": true,
+          },
+        "id": {
+          "readOnly": true,
           "type": "string",
           "description": "The resource identifier."
         },
-	    "name": {
+        "name": {
           "description": "The name of the certificate.",
           "type": "string",
-		  "readOnly": true
+          "readOnly": true
         },
-	    "etag": {
+        "etag": {
           "description": "The entity tag.",
           "type": "string",
-		  "readOnly": true
+          "readOnly": true
         },
-		"type": {
+        "type": {
           "readOnly": true,
           "type": "string",
           "description": "The resource type."
         }
-	  },
-	  "x-ms-azure-resource": true
+      },
+      "x-ms-azure-resource": true
     },
     "SharedAccessSignatureAuthorizationRule": {
       "description": "The properties of an IoT hub shared access policy.",
@@ -1303,7 +1338,7 @@
 		  "readOnly": true
 		},
 		"isVerified": {
-		  "description": "Determines wether certificate has been verified.",
+		  "description": "Determines whether certificate has been verified.",
 		  "type": "boolean",
 		  "readOnly": true
 		},
@@ -1343,7 +1378,7 @@
 		  "readOnly": true
 		},
 		"isVerified": {
-		  "description": "Determines wether certificate has been verified.",
+		  "description": "Determines whether certificate has been verified.",
 		  "type": "boolean",
 		  "readOnly": true
 		},
@@ -1360,7 +1395,7 @@
 		  "readOnly": true
 		},
 		"verificationCode": {
-		  "description": "The certificate's verification code that will be used for proof of posession.",
+		  "description": "The certificate's verification code that will be used for proof of possession.",
 		  "type": "string",
 		  "readOnly": true
 		}
@@ -1488,7 +1523,7 @@
         },
         "partitionCount": {
           "format": "int32",
-          "description": "The number of paritions for receiving device-to-cloud messages in the Event Hub-compatible endpoint. See: https://docs.microsoft.com/azure/iot-hub/iot-hub-devguide-messaging#device-to-cloud-messages.",
+          "description": "The number of partitions for receiving device-to-cloud messages in the Event Hub-compatible endpoint. See: https://docs.microsoft.com/azure/iot-hub/iot-hub-devguide-messaging#device-to-cloud-messages.",
           "type": "integer"
         },
         "partitionIds": {
@@ -1698,7 +1733,7 @@
           "items": {
             "$ref": "#/definitions/RoutingStorageContainerProperties"
           }
-        }
+       }
       }
     },
     "RoutingServiceBusQueueEndpointProperties": {
@@ -1925,7 +1960,7 @@
           "type": "string"
         },
         "resourcegroup": {
-          "description": "The name of the resource group that contains the IoT hub. A resource group name uniquely identifies the resource group within the subscription.",
+         "description": "The name of the resource group that contains the IoT hub. A resource group name uniquely identifies the resource group within the subscription.",
           "type": "string"
         },
         "etag": {
@@ -1947,7 +1982,7 @@
       "required": [
         "subscriptionid",
         "resourcegroup",
-        "sku"
+       "sku"
       ]
     },
     "Resource": {
@@ -2133,7 +2168,7 @@
           }
         },
         "nextLink": {
-          "description": "The next link.",
+         "description": "The next link.",
           "type": "string",
           "readOnly": true
         }
@@ -2442,19 +2477,21 @@
       "required": true,
       "type": "string"
     },
-	"resourceGroupName": {
+    "resourceGroupName": {
       "name": "resourceGroupName",
       "description": "The name of the resource group that contains the IoT hub.",
       "in": "path",
       "required": true,
-      "type": "string"
+      "type": "string",
+      "x-ms-parameter-location": "method"
     },
-	"resourceName":{
+    "resourceName":{
       "name": "resourceName",
       "in": "path",
       "description": "The name of the IoT hub.",
       "required": true,
-      "type": "string"
+      "type": "string",
+      "x-ms-parameter-location": "method"
     },
     "certificateName":{
       "name": "certificateName",
@@ -2462,7 +2499,8 @@
       "description":"The name of the certificate",
       "required":true,
       "type":"string",
-      "pattern":"^[A-Za-z0-9-._]{1,64}$"
+      "pattern":"^[A-Za-z0-9-._]{1,64}$",
+      "x-ms-parameter-location": "method"
     }
   }
 }
