@@ -1077,8 +1077,8 @@
           "default": "none",
           "enum": [
             "none",
-            "readOnly",
-            "readWrite"
+            "readonly",
+            "readwrite"
           ],
           "x-ms-enum": {
             "name": "CachingType",
@@ -1272,52 +1272,9 @@
             "name": "FileServerProvisioningState",
             "modelAsString": false
           }
-        },
-        "statuses": {
-          "type": "array",
-          "readOnly": true,
-          "items": {
-            "$ref": "#/definitions/FileServerStatus"
-          },
-          "title": "Captures file server status."
         }
       },
       "description": "File server specific properties."
-    },
-    "FileServerStatus": {
-      "properties": {
-        "code": {
-          "type": "string",
-          "readOnly": true,
-          "x-nullable": false,
-          "title": "Status Type and Status Code",
-          "description": "Status Type and Status Code: PowerState/Creating - The fileServer is just getting created. PowerState/Running - The file server has been created and is available to be used. PowerState/Suspended - The file Server has been suspended. PowerState/Suspending. The user has requested that the file Server to be suspended, but the deallocation operation has not yet completed. PowerState/Deleting - The user has requested that the cluster be deleted, but the delete operation has not yet completed. PowerState/Failed/ErrorCode - The file server creation has failed with the specified errorCode. Details about the error code are specified in the message field.",
-          "enum": [
-            "PowerState/Creating",
-            "PowerState/Running",
-            "PowerState/Suspended",
-            "PowerState/Suspending",
-            "PowerState/Deleting",
-            "PowerState/Failed/ErrorCode"
-          ],
-          "x-ms-enum": {
-            "name": "Code",
-            "modelAsString": true
-          }
-        },
-        "transitionTime": {
-          "type": "string",
-          "readOnly": true,
-          "format": "date-time",
-          "title": "State transition time for the status changed."
-        },
-        "message": {
-          "type": "string",
-          "readOnly": true,
-          "title": "Detailed message about the status."
-        }
-      },
-      "description": "Status of the file server."
     },
     "FileServer": {
       "properties": {
@@ -1343,12 +1300,12 @@
         },
         "vmPriority": {
           "type": "string",
-          "title": "dedicated or lowPriority.",
+          "title": "dedicated or lowpriority.",
           "description": "Default is dedicated.",
           "default": "dedicated",
           "enum": [
             "dedicated",
-            "lowPriority"
+            "lowpriority"
           ],
           "x-ms-enum": {
             "name": "VmPriority",
@@ -1650,12 +1607,12 @@
         },
         "vmPriority": {
           "type": "string",
-          "title": "dedicated or low-Priority.",
+          "title": "dedicated or lowpriority.",
           "description": "Default is dedicated.",
           "default": "dedicated",
           "enum": [
             "dedicated",
-            "lowPriority"
+            "lowpriority"
           ],
           "x-ms-enum": {
             "name": "VmPriority",
@@ -2475,7 +2432,7 @@
           "type": "string",
           "title": "URL to access the Azure File."
         },
-        "credentialsInfo": {
+        "credentials": {
           "title": "Information of the Azure File credentials.",
           "$ref": "#/definitions/AzureStorageCredentialsInfo"
         },
@@ -2501,7 +2458,7 @@
       "required": [
         "accountName",
         "azureFileUrl",
-        "credentialsInfo",
+        "credentials",
         "relativeMountPath"
       ]
     },
@@ -2515,7 +2472,7 @@
           "type": "string",
           "title": "Name of the Azure Blob Storage container to mount on the cluster."
         },
-        "credentialsInfo": {
+        "credentials": {
           "title": "Information of the Azure Blob Storage account credentials.",
           "$ref": "#/definitions/AzureStorageCredentialsInfo"
         },
@@ -2533,7 +2490,7 @@
       "required": [
         "accountName",
         "containerName",
-        "credentialsInfo",
+        "credentials",
         "relativeMountPath"
       ]
     },
