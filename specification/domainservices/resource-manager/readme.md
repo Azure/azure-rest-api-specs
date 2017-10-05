@@ -26,17 +26,7 @@ These are the global settings for the DomainServices API.
 
 ``` yaml
 openapi-type: arm
-tag: package-2017-01
-```
-
-
-### Tag: package-2017-01
-
-These settings apply only when `--tag=package-2017-01` is specified on the command line.
-
-``` yaml $(tag) == 'package-2017-01'
-input-file:
-- Microsoft.AAD/2017-01-01/domainservices.json
+tag: package-2017-06
 ```
 
 ### Tag: package-2017-06
@@ -46,6 +36,15 @@ These settings apply only when `--tag=package-2017-06` is specified on the comma
 ``` yaml $(tag) == 'package-2017-06'
 input-file:
 - Microsoft.AAD/2017-06-01/domainservices.json
+```
+
+### Tag: package-2017-01
+
+These settings apply only when `--tag=package-2017-01` is specified on the command line.
+
+``` yaml $(tag) == 'package-2017-01'
+input-file:
+- Microsoft.AAD/2017-01-01/domainservices.json
 ```
 
 ---
