@@ -330,7 +330,7 @@
         "StorageAccount",
         "ManagedDisks"
       ],
-      "description": "storage profile specifies what kind of storage used. Choose from StorageAccount and ManagedDisks. Leave it empty, we will choose for you based on the orchestrator choice."
+      "description": "Storage profile specifies what kind of storage used. Choose from StorageAccount and ManagedDisks. Leave it empty, we will choose for you based on the orchestrator choice."
     },
     "ContainerServiceVnetSubnetID": {
       "type": "string",
@@ -480,15 +480,15 @@
       "properties": {
         "vaultID": {
           "type": "string",
-          "description": "key vault identifier"
+          "description": "Key vault identifier."
         },
         "secretName": {
           "type": "string",
-          "description": "the secret name"
+          "description": "The secret name."
         },
         "version": {
           "type": "string",
-          "description": "the secret version"
+          "description": "The secret version."
         }
       },
       "description": "Reference to a secret stored in Azure Key Vault.",
@@ -512,7 +512,7 @@
           "description": "Reference to a secret stored in Azure Key Vault."
         }
       },
-      "description": "Information about a service principal identity for the cluster to use for manipulating Azure APIs. Either secret or keyVaultSecretRef must be specified",
+      "description": "Information about a service principal identity for the cluster to use for manipulating Azure APIs. Either secret or keyVaultSecretRef must be specified.",
       "required": [
         "clientId"
       ]
@@ -536,7 +536,7 @@
         },
         "dnsPrefix": {
           "type": "string",
-          "description": "DNS prefix to be used to create the FQDN for the master pool"
+          "description": "DNS prefix to be used to create the FQDN for the master pool."
         },
         "vmSize": {
           "$ref": "#/definitions/ContainerServiceVMSize",
@@ -552,12 +552,12 @@
         },
         "firstConsecutiveStaticIP": {
           "type": "string",
-          "description": "firstConsecutiveStaticIP used to specify the first static ip of masters.",
+          "description": "FirstConsecutiveStaticIP used to specify the first static ip of masters.",
           "default": "10.240.255.5"
         },
         "storageProfile": {
           "$ref": "#/definitions/ContainerServiceStorageProfile",
-          "description": "storage profile specifies what kind of storage used. Choose from StorageAccount and ManagedDisks. Leave it empty, we will choose for you based on the orchestrator choice."
+          "description": "Storage profile specifies what kind of storage used. Choose from StorageAccount and ManagedDisks. Leave it empty, we will choose for you based on the orchestrator choice."
         },
         "fqdn": {
           "readOnly": true,
@@ -610,11 +610,11 @@
             "minimum": 1,
             "maximum": 65535
           },
-          "description": "ports number array used to expose on this agent pool. The default opened ports are different based on your choice of orchestrator."
+          "description": "Ports number array used to expose on this agent pool. The default opened ports are different based on your choice of orchestrator."
         },
         "storageProfile": {
           "$ref": "#/definitions/ContainerServiceStorageProfile",
-          "description": "storage profile specifies what kind of storage used. Choose from StorageAccount and ManagedDisks. Leave it empty, we will choose for you based on the orchestrator choice."
+          "description": "Storage profile specifies what kind of storage used. Choose from StorageAccount and ManagedDisks. Leave it empty, we will choose for you based on the orchestrator choice."
         },
         "vnetSubnetID": {
           "$ref": "#/definitions/ContainerServiceVnetSubnetID",
@@ -622,7 +622,7 @@
         },
         "osType": {
           "$ref": "#/definitions/OSType",
-          "description": "osType to be used to specify os type. Choose from Linux and Windows. Default to Linux"
+          "description": "OsType to be used to specify os type. Choose from Linux and Windows. Default to Linux."
         }
       },
       "required": [
@@ -676,7 +676,7 @@
           "items": {
             "$ref": "#/definitions/ContainerServiceSshPublicKey"
           },
-          "description": "the list of SSH public keys used to authenticate with Linux-based VMs. Only expect one key specified"
+          "description": "The list of SSH public keys used to authenticate with Linux-based VMs. Only expect one key specified."
         }
       },
       "description": "SSH configuration for Linux-based VMs running on Azure.",
@@ -732,7 +732,7 @@
           "items": {
             "$ref": "#/definitions/ManagedCluster"
           },
-          "description": "the list of managed clusters."
+          "description": "The list of managed clusters."
         },
         "nextLink": {
           "type": "string",
@@ -761,7 +761,7 @@
         "provisioningState": {
           "readOnly": true,
           "type": "string",
-          "description": "the current deployment or provisioning state, which only appears in the response."
+          "description": "The current deployment or provisioning state, which only appears in the response."
         },
         "dnsPrefix": {
           "type": "string",
@@ -781,11 +781,11 @@
           "properties": {
             "clusterAdmin": {
               "$ref": "#/definitions/AccessProfile",
-              "description": "An access profile with administrative privileges to the cluster"
+              "description": "An access profile with administrative privileges to the cluster."
             },
             "clusterUser": {
               "$ref": "#/definitions/AccessProfile",
-              "description": "An access profile with user-level privileges to the cluster"
+              "description": "An access profile with user-level privileges to the cluster."
             }
           },
           "description": "Access profiles for the managed cluster."
@@ -803,7 +803,7 @@
         },
         "servicePrincipalProfile": {
           "$ref": "#/definitions/ContainerServiceServicePrincipalProfile",
-          "description": "Information about a service principal identity for the cluster to use for manipulating Azure APIs. Either secret or keyVaultSecretRef must be specified"
+          "description": "Information about a service principal identity for the cluster to use for manipulating Azure APIs. Either secret or keyVaultSecretRef must be specified."
         }
       },
       "description": "Properties of the managed cluster."
@@ -851,7 +851,15 @@
         },
         "osType": {
           "$ref": "#/definitions/OSType",
-          "description": "osType to be used to specify os type. Choose from Linux and Windows. Default to Linux"
+          "enum": [
+            "Linux",
+            "Windows"
+          ],
+          "x-ms-enum": {
+            "name": "ContainerServiceOSTypes",
+            "modelAsString": true
+          },
+          "description": "OsType to be used to specify os type. Choose from Linux and Windows. Default to Linux."
         },
         "upgrades": {
           "type": "array",
@@ -865,7 +873,7 @@
         "orchestratorVersion",
         "osType"
       ],
-      "description": "the list of available upgrade versions."
+      "description": "The list of available upgrade versions."
     },
     "UpgradeProfileProperties": {
       "properties": {
@@ -883,24 +891,24 @@
         "controlPlaneProfile",
         "agentPoolProfiles"
       ],
-      "description": "control plane and agent pool upgrade profiles."
+      "description": "Control plane and agent pool upgrade profiles."
     },
     "UpgradeProfile": {
       "properties": {
         "id": {
           "readOnly": true,
           "type": "string",
-          "description": "id of upgrade profile"
+          "description": "Id of upgrade profile."
         },
         "name": {
           "readOnly": true,
           "type": "string",
-          "description": "name of upgrade profile"
+          "description": "Name of upgrade profile."
         },
         "type": {
           "readOnly": true,
           "type": "string",
-          "description": "type of upgrade profile"
+          "description": "Type of upgrade profile."
         },
         "properties": {
           "$ref": "#/definitions/UpgradeProfileProperties"
@@ -909,7 +917,7 @@
       "required": [
         "properties"
       ],
-      "description": "the list of available upgrades for compute pools."
+      "description": "The list of available upgrades for compute pools."
     },
     "OSType": {
       "type": "string",
@@ -922,7 +930,7 @@
         "name": "OSType",
         "modelAsString": true
       },
-      "description": "osType to be used to specify os type. Choose from Linux and Windows. Default to Linux"
+      "description": "OsType to be used to specify os type. Choose from Linux and Windows. Default to Linux."
     }
   },
   "parameters": {
