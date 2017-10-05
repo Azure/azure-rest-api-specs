@@ -34,7 +34,12 @@ These settings apply only when `--tag=package-2017-09-preview` is specified on t
 
 ``` yaml $(tag) == 'package-2017-09-preview'
 input-file:
-- Microsoft.Network/2017-09-01-preview/trafficmanager.json
+- Microsoft.Network/2017-05-01/trafficmanager.json
+- Microsoft.Network/2017-09-01-preview/trafficmanageranalytics.json
+
+# Needed when there is more than one input file
+override-info:
+  title: TrafficManagerManagementClient
 ```
 
 
