@@ -1182,7 +1182,7 @@
           "items": {
             "type": "string"
           },
-          "title": "List of source IPs range to be allowed for SSH connection to VMsfs.",
+          "title": "List of source IP ranges to allow SSH connection to VM.",
           "description": "Default value is '*' can be used to match all source IPs. Maximum number of publicIPs that can be specified are 400."
         },
         "userAccountSettings": {
@@ -1260,7 +1260,7 @@
           "readOnly": true,
           "x-nullable": false,
           "title": "Specifies the provisioning state of the File Server.",
-          "description": "Possible values: creating - The File Server is getting created. Updating - The File Server creation has been accepted and it is getting updated. Deleting - The user has requested that the File Server be deleted, and it is in the process of being deleted. Failed - The File Server creation has failed with the specified errorCode. Details about the error code are specified in the message field. Succeeded - The File Server creation has succeeded.",
+          "description": "Possible values: creating - The File Server is getting created. updating - The File Server creation has been accepted and it is getting updated. deleting - The user has requested that the File Server be deleted, and it is in the process of being deleted. failed - The File Server creation has failed with the specified errorCode. Details about the error code are specified in the message field. succeeded - The File Server creation has succeeded.",
           "enum": [
             "creating",
             "updating",
@@ -1375,7 +1375,7 @@
           "title": "The scale for the cluster by autoscale settings"
         }
       },
-      "description": "At least one of manual or autoScale settings must be specified. Only one of manual or autoScale settings can be specified. if autoScale settings are specified, the system automatically scales the cluster up and down (within the supplied limits) based on the pending jobs on the cluster."
+      "description": "At least one of manual or autoScale settings must be specified. Only one of manual or autoScale settings can be specified. If autoScale settings are specified, the system automatically scales the cluster up and down (within the supplied limits) based on the pending jobs on the cluster."
     },
     "AutoScaleSettings": {
       "properties": {
@@ -1621,7 +1621,7 @@
         },
         "scaleSettings": {
           "$ref": "#/definitions/ScaleSettings",
-          "title": "Desired scale for the Cluster"
+          "title": "Desired scale for the Cluster."
         },
         "virtualMachineConfiguration": {
           "title": "Settings for OS image and mounted data volumes.",
@@ -1950,7 +1950,7 @@
             "$ref": "#/definitions/EnvironmentSetting"
           },
           "title": "Additional environment variables to be passed to the job.",
-          "description": "Batch AI services sets the following environment variables for all jobs: AZ_BATCHAI_INPUT_id, AZ_BATCHAI_OUTPUT_id, AZ_BATCHAI_NUM_GPUS_PER_NODE, For distributed TensorFlow jobs, following additional environment variables are set by the Batch AI Service: AZ_BATCHAI_PS_HOSTS, AZ_BATCHAI_WORKER_HOSTS"
+          "description": "Batch AI services sets the following environment variables for all jobs: AZ_BATCHAI_INPUT_id, AZ_BATCHAI_OUTPUT_id, AZ_BATCHAI_NUM_GPUS_PER_NODE, For distributed TensorFlow jobs, following additional environment variables are set by the Batch AI Service: AZ_BATCHAI_PS_HOSTS, AZ_BATCHAI_WORKER_HOSTS."
         },
         "constraints": {
           "properties": {
@@ -2929,7 +2929,7 @@
       "required": false,
       "type": "string",
       "x-ms-parameter-location": "method",
-      "description": "An OData $select clause. Used to select the properties to be returned in the GET respnose",
+      "description": "An OData $select clause. Used to select the properties to be returned in the GET respnose.",
       "x-ms-parameter-grouping": {
         "postfix": "Options"
       }
@@ -2940,7 +2940,7 @@
       "required": false,
       "type": "string",
       "x-ms-parameter-location": "method",
-      "description": "An OData $filter clause.. Used to filter results that are returned in the GET respnose",
+      "description": "An OData $filter clause.. Used to filter results that are returned in the GET respnose.",
       "x-ms-parameter-grouping": {
         "postfix": "Options"
       }
@@ -2967,7 +2967,7 @@
       "required": true,
       "type": "string",
       "x-ms-parameter-location": "method",
-      "description": "Id of the job output directory. This is the OutputDirectory-->id parameter that is given by the user during Create Job",
+      "description": "Id of the job output directory. This is the OutputDirectory-->id parameter that is given by the user during Create Job.",
       "x-ms-parameter-grouping": {
         "postfix": "Options"
       }
