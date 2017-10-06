@@ -329,8 +329,10 @@
           "type": "string"
         },
         "recommendationId": {
+          "format": "uuid",
           "description": "A GUID value that each recommendation object is associated with.",
-          "type": "string"
+          "type": "string",
+          "example": "00000000-0000-0000-0000-000000000000"
         },
         "resourceId": {
           "description": "Full ARM resource ID string that this recommendation object is associated with.",
@@ -467,8 +469,9 @@
         },
         "recommendationId": {
           "format": "uuid",
-          "description": "Recommendation ID of an associated recommendation object tied to the rule, if exists.\n If such an object doesn't exist, it is set to null.",
-          "type": "string"
+          "description": "Recommendation ID of an associated recommendation object tied to the rule, if exists.\nIf such an object doesn't exist, it is set to null.",
+          "type": "string",
+          "example": "00000000-0000-0000-0000-000000000000"
         },
         "description": {
           "description": "Localized detailed description of the rule.",

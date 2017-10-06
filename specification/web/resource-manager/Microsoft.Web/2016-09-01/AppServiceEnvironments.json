@@ -238,6 +238,75 @@
           }
         },
         "x-ms-long-running-operation": true
+      },
+      "patch": {
+        "tags": [
+          "AppServiceEnvironments"
+        ],
+        "summary": "Create or update an App Service Environment.",
+        "description": "Create or update an App Service Environment.",
+        "operationId": "AppServiceEnvironments_Update",
+        "consumes": [
+          "application/json",
+          "text/json",
+          "application/x-www-form-urlencoded"
+        ],
+        "produces": [
+          "application/json",
+          "text/json",
+          "application/xml",
+          "text/xml"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/resourceGroupNameParameter"
+          },
+          {
+            "name": "name",
+            "in": "path",
+            "description": "Name of the App Service Environment.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "hostingEnvironmentEnvelope",
+            "in": "body",
+            "description": "Configuration details of the App Service Environment.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/AppServiceEnvironmentResource"
+            }
+          },
+          {
+            "$ref": "#/parameters/subscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/AppServiceEnvironmentResource"
+            }
+          },
+          "202": {
+            "description": "Operation is in progress.",
+            "schema": {
+              "$ref": "#/definitions/AppServiceEnvironmentResource"
+            }
+          },
+          "400": {
+            "description": "Bad request."
+          },
+          "404": {
+            "description": "Not found."
+          },
+          "409": {
+            "description": "Conflict."
+          }
+        }
       }
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Web/hostingEnvironments/{name}/capacities/compute": {
@@ -670,6 +739,75 @@
           }
         },
         "x-ms-long-running-operation": true
+      },
+      "patch": {
+        "tags": [
+          "AppServiceEnvironments"
+        ],
+        "summary": "Create or update a multi-role pool.",
+        "description": "Create or update a multi-role pool.",
+        "operationId": "AppServiceEnvironments_UpdateMultiRolePool",
+        "consumes": [
+          "application/json",
+          "text/json",
+          "application/x-www-form-urlencoded"
+        ],
+        "produces": [
+          "application/json",
+          "text/json",
+          "application/xml",
+          "text/xml"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/resourceGroupNameParameter"
+          },
+          {
+            "name": "name",
+            "in": "path",
+            "description": "Name of the App Service Environment.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "multiRolePoolEnvelope",
+            "in": "body",
+            "description": "Properties of the multi-role pool.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/WorkerPoolResource"
+            }
+          },
+          {
+            "$ref": "#/parameters/subscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK.",
+            "schema": {
+              "$ref": "#/definitions/WorkerPoolResource"
+            }
+          },
+          "202": {
+            "description": "Operation is in progress.",
+            "schema": {
+              "$ref": "#/definitions/WorkerPoolResource"
+            }
+          },
+          "400": {
+            "description": "Bad request."
+          },
+          "404": {
+            "description": "Not found."
+          },
+          "409": {
+            "description": "Conflict."
+          }
+        }
       }
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Web/hostingEnvironments/{name}/multiRolePools/default/instances/{instance}/metricdefinitions": {
@@ -1477,6 +1615,82 @@
           }
         },
         "x-ms-long-running-operation": true
+      },
+      "patch": {
+        "tags": [
+          "AppServiceEnvironments"
+        ],
+        "summary": "Create or update a worker pool.",
+        "description": "Create or update a worker pool.",
+        "operationId": "AppServiceEnvironments_UpdateWorkerPool",
+        "consumes": [
+          "application/json",
+          "text/json",
+          "application/x-www-form-urlencoded"
+        ],
+        "produces": [
+          "application/json",
+          "text/json",
+          "application/xml",
+          "text/xml"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/resourceGroupNameParameter"
+          },
+          {
+            "name": "name",
+            "in": "path",
+            "description": "Name of the App Service Environment.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "workerPoolName",
+            "in": "path",
+            "description": "Name of the worker pool.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "workerPoolEnvelope",
+            "in": "body",
+            "description": "Properties of the worker pool.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/WorkerPoolResource"
+            }
+          },
+          {
+            "$ref": "#/parameters/subscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK.",
+            "schema": {
+              "$ref": "#/definitions/WorkerPoolResource"
+            }
+          },
+          "202": {
+            "description": "Operation is in progress.",
+            "schema": {
+              "$ref": "#/definitions/WorkerPoolResource"
+            }
+          },
+          "400": {
+            "description": "Bad request."
+          },
+          "404": {
+            "description": "Not found."
+          },
+          "409": {
+            "description": "Conflict."
+          }
+        }
       }
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Web/hostingEnvironments/{name}/workerPools/{workerPoolName}/instances/{instance}/metricdefinitions": {
@@ -2067,7 +2281,7 @@
           "type": "boolean"
         },
         "dynamicCacheEnabled": {
-          "description": "True/false indicating whether the App Service Environment is suspended. The environment can be suspended e.g. when the management endpoint is no longer available\n (most likely because NSG blocked the incoming traffic).",
+          "description": "True/false indicating whether the App Service Environment is suspended. The environment can be suspended e.g. when the management endpoint is no longer available\n(most likely because NSG blocked the incoming traffic).",
           "type": "boolean"
         },
         "clusterSettings": {
@@ -2141,7 +2355,8 @@
               "description": "App Service plan status.",
               "enum": [
                 "Ready",
-                "Pending"
+                "Pending",
+                "Creating"
               ],
               "type": "string",
               "readOnly": true,
@@ -2179,7 +2394,7 @@
               "readOnly": true
             },
             "perSiteScaling": {
-              "description": "If <code>true</code>, apps assigned to this App Service plan can be scaled independently.\n If <code>false</code>, apps assigned to this App Service plan will scale to all instances of the plan.",
+              "description": "If <code>true</code>, apps assigned to this App Service plan can be scaled independently.\nIf <code>false</code>, apps assigned to this App Service plan will scale to all instances of the plan.",
               "default": false,
               "type": "boolean"
             },
@@ -2279,13 +2494,13 @@
           "description": "Custom action to be taken."
         },
         "minProcessExecutionTime": {
-          "description": "Minimum time the process must execute\n before taking the action",
+          "description": "Minimum time the process must execute\nbefore taking the action",
           "type": "string"
         }
       }
     },
     "AutoHealCustomAction": {
-      "description": "Custom action to be executed\n when an auto heal rule is triggered.",
+      "description": "Custom action to be executed\nwhen an auto heal rule is triggered.",
       "type": "object",
       "properties": {
         "exe": {
@@ -2364,8 +2579,10 @@
       "type": "object",
       "properties": {
         "correlationId": {
-          "description": "Correlation ID of cloning operation. This ID ties multiple cloning operations\n together to use the same snapshot.",
-          "type": "string"
+          "format": "uuid",
+          "description": "Correlation ID of cloning operation. This ID ties multiple cloning operations\ntogether to use the same snapshot.",
+          "type": "string",
+          "example": "00000000-0000-0000-0000-000000000000"
         },
         "overwrite": {
           "description": "<code>true</code> to overwrite destination app; otherwise, <code>false</code>.",
@@ -2380,7 +2597,7 @@
           "type": "boolean"
         },
         "sourceWebAppId": {
-          "description": "ARM resource ID of the source app. App resource ID is of the form \n /subscriptions/{subId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Web/sites/{siteName} for production slots and \n /subscriptions/{subId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Web/sites/{siteName}/slots/{slotName} for other slots.",
+          "description": "ARM resource ID of the source app. App resource ID is of the form \n/subscriptions/{subId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Web/sites/{siteName} for production slots and \n/subscriptions/{subId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Web/sites/{siteName}/slots/{slotName} for other slots.",
           "type": "string"
         },
         "hostingEnvironment": {
@@ -2388,7 +2605,7 @@
           "type": "string"
         },
         "appSettingsOverrides": {
-          "description": "Application setting overrides for cloned app. If specified, these settings override the settings cloned \n from source app. Otherwise, application settings from source app are retained.",
+          "description": "Application setting overrides for cloned app. If specified, these settings override the settings cloned \nfrom source app. Otherwise, application settings from source app are retained.",
           "type": "object",
           "additionalProperties": {
             "type": "string"
@@ -2399,16 +2616,12 @@
           "type": "boolean"
         },
         "trafficManagerProfileId": {
-          "description": "ARM resource ID of the Traffic Manager profile to use, if it exists. Traffic Manager resource ID is of the form \n /subscriptions/{subId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/trafficManagerProfiles/{profileName}.",
+          "description": "ARM resource ID of the Traffic Manager profile to use, if it exists. Traffic Manager resource ID is of the form \n/subscriptions/{subId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/trafficManagerProfiles/{profileName}.",
           "type": "string"
         },
         "trafficManagerProfileName": {
           "description": "Name of Traffic Manager profile to create. This is only needed if Traffic Manager profile does not already exist.",
           "type": "string"
-        },
-        "ignoreQuotas": {
-          "description": "<code>true</code> if quotas should be ignored; otherwise, <code>false</code>.",
-          "type": "boolean"
         }
       }
     },
@@ -2452,7 +2665,7 @@
       "type": "object",
       "properties": {
         "allowedOrigins": {
-          "description": "Gets or sets the list of origins that should be allowed to make cross-origin\n calls (for example: http://example.com:12345). Use \"*\" to allow all.",
+          "description": "Gets or sets the list of origins that should be allowed to make cross-origin\ncalls (for example: http://example.com:12345). Use \"*\" to allow all.",
           "type": "array",
           "items": {
             "type": "string"
@@ -2559,7 +2772,7 @@
       }
     },
     "HandlerMapping": {
-      "description": "The IIS handler mappings used to define which handler processes HTTP requests with certain extension. \n For example, it is used to configure php-cgi.exe process to handle all HTTP requests with *.php extension.",
+      "description": "The IIS handler mappings used to define which handler processes HTTP requests with certain extension. \nFor example, it is used to configure php-cgi.exe process to handle all HTTP requests with *.php extension.",
       "type": "object",
       "properties": {
         "extension": {
@@ -2842,8 +3055,10 @@
           "type": "string"
         },
         "geoMasterOperationId": {
+          "format": "uuid",
           "description": "Applicable only for stamp operation ids.",
-          "type": "string"
+          "type": "string",
+          "example": "00000000-0000-0000-0000-000000000000"
         }
       }
     },
@@ -2896,7 +3111,7 @@
               "type": "string"
             },
             "tagsRequiringAuth": {
-              "description": "Gets or sets a JSON string containing a list of tags that require user authentication to be used in the push registration endpoint.\n Tags can consist of alphanumeric characters and the following:\n '_', '@', '#', '.', ':', '-'. \n Validation should be performed at the PushRequestHandler.",
+              "description": "Gets or sets a JSON string containing a list of tags that require user authentication to be used in the push registration endpoint.\nTags can consist of alphanumeric characters and the following:\n'_', '@', '#', '.', ':', '-'. \nValidation should be performed at the PushRequestHandler.",
               "type": "string"
             },
             "dynamicTagsJson": {
@@ -2923,7 +3138,7 @@
         },
         "changeStep": {
           "format": "double",
-          "description": "In auto ramp up scenario this is the step to to add/remove from <code>ReroutePercentage</code> until it reaches \n <code>MinReroutePercentage</code> or <code>MaxReroutePercentage</code>. Site metrics are checked every N minutes specificed in <code>ChangeIntervalInMinutes</code>.\n Custom decision algorithm can be provided in TiPCallback site extension which URL can be specified in <code>ChangeDecisionCallbackUrl</code>.",
+          "description": "In auto ramp up scenario this is the step to to add/remove from <code>ReroutePercentage</code> until it reaches \n<code>MinReroutePercentage</code> or <code>MaxReroutePercentage</code>. Site metrics are checked every N minutes specificed in <code>ChangeIntervalInMinutes</code>.\nCustom decision algorithm can be provided in TiPCallback site extension which URL can be specified in <code>ChangeDecisionCallbackUrl</code>.",
           "type": "number"
         },
         "changeIntervalInMinutes": {
@@ -2942,7 +3157,7 @@
           "type": "number"
         },
         "changeDecisionCallbackUrl": {
-          "description": "Custom decision algorithm can be provided in TiPCallback site extension which URL can be specified. See TiPCallback site extension for the scaffold and contracts.\n https://www.siteextensions.net/packages/TiPCallback/",
+          "description": "Custom decision algorithm can be provided in TiPCallback site extension which URL can be specified. See TiPCallback site extension for the scaffold and contracts.\nhttps://www.siteextensions.net/packages/TiPCallback/",
           "type": "string"
         },
         "name": {
@@ -3305,7 +3520,7 @@
               "type": "boolean"
             },
             "enabledHostNames": {
-              "description": "Enabled hostnames for the app.Hostnames need to be assigned (see HostNames) AND enabled. Otherwise,\n the app is not served on those hostnames.",
+              "description": "Enabled hostnames for the app.Hostnames need to be assigned (see HostNames) AND enabled. Otherwise,\nthe app is not served on those hostnames.",
               "type": "array",
               "items": {
                 "type": "string"
@@ -3476,6 +3691,10 @@
               "$ref": "#/definitions/SlotSwapStatus",
               "description": "Status of the last deployment slot swap operation.",
               "readOnly": true
+            },
+            "httpsOnly": {
+              "description": "HttpsOnly: configures a web site to accept only https requests. Issues redirect for\nhttp requests",
+              "type": "boolean"
             }
           },
           "x-ms-client-flatten": true
@@ -3950,7 +4169,7 @@
               "type": "boolean"
             },
             "ignoreConflictingHostNames": {
-              "description": "If true, custom hostname conflicts will be ignored when recovering to a target web app.\n This setting is only necessary when RecoverConfiguration is enabled.",
+              "description": "If true, custom hostname conflicts will be ignored when recovering to a target web app.\nThis setting is only necessary when RecoverConfiguration is enabled.",
               "type": "boolean"
             }
           },
@@ -3967,7 +4186,7 @@
           "type": "string"
         },
         "id": {
-          "description": "ARM resource ID of the target app. \n /subscriptions/{subId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Web/sites/{siteName} for production slots and \n /subscriptions/{subId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Web/sites/{siteName}/slots/{slotName} for other slots.",
+          "description": "ARM resource ID of the target app. \n/subscriptions/{subId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Web/sites/{siteName} for production slots and \n/subscriptions/{subId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Web/sites/{siteName}/slots/{slotName} for other slots.",
           "type": "string"
         }
       }
@@ -4010,10 +4229,13 @@
         "workerSize": {
           "description": "Size of the machines.",
           "enum": [
-            "Default",
             "Small",
             "Medium",
-            "Large"
+            "Large",
+            "D1",
+            "D2",
+            "D3",
+            "Default"
           ],
           "type": "string",
           "x-ms-enum": {
@@ -4023,11 +4245,11 @@
         },
         "workerSizeId": {
           "format": "int32",
-          "description": "Size ID of machines: \n 0 - Small\n 1 - Medium\n 2 - Large",
+          "description": "Size ID of machines: \n0 - Small\n1 - Medium\n2 - Large",
           "type": "integer"
         },
         "excludeFromCapacityAllocation": {
-          "description": "If <code>true</code>, it includes basic apps.\n Basic apps are not used for capacity allocation.",
+          "description": "If <code>true</code>, it includes basic apps.\nBasic apps are not used for capacity allocation.",
           "type": "boolean"
         },
         "isApplicableForAllComputeModes": {
