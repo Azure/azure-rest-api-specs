@@ -557,7 +557,7 @@
                             "$ref": "#/definitions/ReturnAddress"
                         },
                         "returnShipping":{
-                            "description": "Specifies the return carrier and customer�s account with the carrier.",
+                            "description": "Specifies the return carrier and customer's account with the carrier.",
                             "$ref": "#/definitions/ReturnShipping"
                         },
                         "deliveryPackage":{
@@ -644,7 +644,7 @@
                             "$ref": "#/definitions/ReturnAddress"
                         },
                         "returnShipping":{
-                            "description": "Specifies the return carrier and customer�s account with the carrier. ",
+                            "description": "Specifies the return carrier and customer's account with the carrier. ",
                             "$ref": "#/definitions/ReturnShipping"
                         },
                         "shippingInformation":{
@@ -816,15 +816,6 @@
         },
         "ReturnAddress": {
             "description": "Specifies the return address information for the job.",
-            "required": [
-                "recipientName",
-                "streetAddress1",
-                "city",
-                "postalCode",
-                "countryOrRegion",
-                "phone",
-                "email"
-            ],
             "properties": {
                 "recipientName": {
                     "type": "string",
@@ -865,28 +856,20 @@
             }
         },
         "ReturnShipping":{
-            "description": "Specifies the return carrier and customer�s account with the carrier.",
-            "required": [
-                "carrierName",
-                "carrierAccountNumber"
-            ],
+            "description": "Specifies the return carrier and customer's account with the carrier.",
             "properties": {
                 "carrierName": {
                     "type": "string",
-                    "description": "The carrier�s name."
+                    "description": "The carrier's name."
                 },
                 "carrierAccountNumber": {
                     "type": "string",
-                    "description": "The customer�s account number with the carrier."
+                    "description": "The customer's account number with the carrier."
                 }
             }
         },
         "ShippingInformation":{
             "description": "Contains information about the Microsoft datacenter to which the drives should be shipped.",
-            "required": [
-                "name",
-                "address"
-            ],
             "properties": {
                 "name": {
                     "type": "string",
@@ -900,12 +883,6 @@
         },
         "PackageInfomation":{
             "description": "Contains information about the package being shipped by the customer to the Microsoft data center.",
-            "required": [
-                "carrierName",
-                "trackingNumber",
-                "driveCount",
-                "shipDate"
-            ],
             "properties": {
                 "carrierName": {
                     "type": "string",
@@ -1097,7 +1074,7 @@
             "name": "Accept-Language",
             "in": "header",
             "description": "Specifies the preferred language for the response.",
-            "required": true,
+            "required": false,
             "type": "string",
             "enum": ["en-us"]
         },
