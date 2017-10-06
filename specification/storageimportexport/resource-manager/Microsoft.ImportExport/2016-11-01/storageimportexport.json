@@ -53,6 +53,7 @@
                 ],
                 "responses": {
                     "200": {
+                        "description": "OK",
                         "schema": {
                             "$ref": "#/definitions/LocationsResponse"
                         }
@@ -83,7 +84,7 @@
                     {
                         "name": "locationName",
                         "in": "path",
-                        "description": "The name of the location. For example, �West US� or �westus�.",
+                        "description": "The name of the location. For example, West US or westus.",
                         "required": true,
                         "type": "string"
                     },
@@ -92,6 +93,7 @@
                 ],
                 "responses": {
                     "200": {
+                        "description": "OK",
                         "schema": {
                             "$ref": "#/definitions/Location"
                         }
@@ -140,6 +142,7 @@
                 ],
                 "responses": {
                     "200": {
+                        "description": "OK",
                         "schema": {
                             "$ref": "#/definitions/ListJobsResponse"
                         }
@@ -191,6 +194,7 @@
                 ],
                 "responses": {
                     "200": {
+                        "description": "OK",
                         "schema": {
                             "$ref": "#/definitions/ListJobsResponse"
                         }
@@ -235,6 +239,7 @@
                 ],
                 "responses": {
                     "200": {
+                        "description": "OK",
                         "schema": {
                             "$ref": "#/definitions/JobResponse"
                         }
@@ -283,6 +288,7 @@
                 ],
                 "responses": {
                     "200": {
+                        "description": "OK",
                         "schema": {
                             "$ref": "#/definitions/JobResponse"
                         }
@@ -319,6 +325,7 @@
                     {"$ref": "#/parameters/resourceGroupName"},
                     {"$ref": "#/parameters/api-version"},
                     {"$ref": "#/parameters/Accept-Language"},
+                    {"$ref": "#/parameters/x-ms-client-tenant-id"},
                     {
                         "name": "PutJobParameters",
                         "in": "body",
@@ -331,11 +338,13 @@
                 ],
                 "responses": {
                     "200": {
+                        "description": "OK",
                         "schema": {
                             "$ref": "#/definitions/JobResponse"
                         }
                     },
                     "201": {
+                        "description": "Created",
                         "schema": {
                             "$ref": "#/definitions/JobResponse"
                         }
@@ -375,8 +384,7 @@
                 ],
                 "responses": {
                     "200": {
-                        "schema": {
-                        }
+                        "description": "OK"
                     },
                     "default": {
                         "description": "An error occurs.",
@@ -415,6 +423,7 @@
                 ],
                 "responses": {
                     "200": {
+                        "description": "OK",
                         "schema": {
                             "$ref": "#/definitions/GetBitLockerKeysResponse"
                         }
@@ -447,6 +456,7 @@
                 ],
                 "responses": {
                     "200": {
+                        "description": "OK",
                         "schema": {  "$ref": "#/definitions/ListOperationsResponse" }
                     },
                     "default": {
@@ -508,7 +518,7 @@
             }
         },
         "PutJobParameters":{
-            "Description": "Put Job parameters",
+            "description": "Put Job parameters",
             "properties": {
                 "location":{
                     "type": "string",
@@ -526,7 +536,7 @@
             }
         },
         "UpdateJobParameters":{
-            "Description": "Update Job parameters",
+            "description": "Update Job parameters",
             "properties": {
                 "tags":{
                     "type": "object",
@@ -562,6 +572,13 @@
                         "backupDriveManifest":{
                             "type": "boolean",
                             "description": "Indicates whether the manifest files on the drives should be copied to block blobs."
+                        },
+                        "driveList":{
+                            "description": "List of drives that comprise the job.",
+                            "type": "array",
+                            "items": {
+                                "$ref": "#/definitions/DriveStatus"
+                            }
                         }
                     },
                     "description": "Specifies the properties of a UpdateJob."
@@ -621,7 +638,7 @@
                         },
                         "jobType":{
                             "type": "string",
-                            "description": "The type of job: Import or Export. "
+                            "description": "The type of job"
                         },
                         "returnAddress":{
                             "description": "Specifies the return address information for the job. ",
@@ -642,6 +659,14 @@
                         "returnPackage":{
                             "description": "Contains information about the package being shipped from the Microsoft data center to the customer to return the drives. The format is the same as the deliveryPackage property above. This property is not included if the drives have not yet been returned. ",
                             "$ref": "#/definitions/PackageInfomation"
+                        },
+                        "userStorageAccountId":{
+                            "type": "string",
+                            "description": "The resource identifier of the user storage account where data will be imported to or exported from.."
+                        },
+                        "userTenantId":{
+                            "type": "string",
+                            "description": "The user tenant identifier"
                         },
                         "diagnosticsPath":{
                             "type": "string",
@@ -947,6 +972,19 @@
                 "manifestUri":{
                     "type": "string",
                     "description": "A URI that points to the blob containing the drive manifest file. "
+                },
+                "bytesSucceeded": {
+                    "type": "integer",
+                    "format": "int64",
+                    "description": "Bytes successfully transferred for the drive."
+                },
+                "currentLocation":{
+                    "type": "string",
+                    "description": "The drive current location."
+                },
+                "returnLocation":{
+                    "type": "string",
+                    "description": "The drive return location after the rental job."
                 }
             }
         },
@@ -1000,8 +1038,22 @@
                     "type": "array",
                     "description": "drive status",
                     "items":{
-                        "$ref": "#/definitions/DriveStatus"
+                        "$ref": "#/definitions/DriveBitLockerKey"
                     }
+                }
+            }
+        },
+        "DriveBitLockerKey": {
+            "x-ms-client-flatten": true,
+            "description": "BitLocker recovery key or password to the specified drive",
+            "properties": {
+                "BitLockerKey": {
+                    "type": "string",
+                    "description": "BitLocker recovery key or password"
+                },
+                "DriveId": {
+                    "type": "string",
+                    "description": "Drive ID"
                 }
             }
         },
@@ -1049,6 +1101,14 @@
             "required": true,
             "type": "string",
             "enum": ["en-us"]
+        },
+        "x-ms-client-tenant-id":{
+            "name": "x-ms-client-tenant-id",
+            "in": "header",
+            "description": "The tenant ID of the client making the request.",
+            "required": false,
+            "type": "string"
         }
+
     }
 }
