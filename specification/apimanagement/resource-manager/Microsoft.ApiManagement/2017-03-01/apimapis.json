@@ -1246,7 +1246,7 @@
           {
             "name": "If-Match",
             "in": "header",
-            "required": true,
+            "required": false,
             "description": "The entity state (Etag) version of the Api Schema to update. A value of \"*\" can be used for If-Match to unconditionally apply the operation.",
             "type": "string"
           },
@@ -1993,14 +1993,24 @@
           "description": "Must be a valid a media type used in a Content-Type header as defined in the RFC 2616. Media type of the schema document (e.g. application/json, application/xml)."
         },
         "document": {
-          "type": "string",
-          "description": "String defining the document representing the Schema."
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/SchemaDocumentProperties",
+          "description": "Properties of the Schema Document."
         }
       },
       "required": [
         "contentType"
       ],
       "description": "Schema contract Properties."
+    },
+    "SchemaDocumentProperties": {
+      "properties": {
+        "value": {
+          "type": "string",
+          "description": "Json escaped string defining the document representing the Schema."
+        }
+      },
+      "description": "Schema Document Properties."
     }
   },
   "parameters": {
