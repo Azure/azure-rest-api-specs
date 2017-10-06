@@ -101,6 +101,37 @@
       }
     },
     "/providers/Microsoft.Web/sourcecontrols/{sourceControlType}": {
+      "get": {
+        "summary": "Gets source control token",
+        "description": "Gets source control token",
+        "operationId": "GetSourceControl",
+        "produces": [
+          "application/json",
+          "text/json",
+          "application/xml",
+          "text/xml"
+        ],
+        "parameters": [
+          {
+            "name": "sourceControlType",
+            "in": "path",
+            "description": "Type of source control",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/SourceControl"
+            }
+          }
+        }
+      },
       "put": {
         "summary": "Updates source control token",
         "description": "Updates source control token",
@@ -188,6 +219,35 @@
             "description": "OK",
             "schema": {
               "$ref": "#/definitions/ResourceNameAvailability"
+            }
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.Web/deploymentLocations": {
+      "get": {
+        "summary": "Gets list of available geo regions plus ministamps",
+        "description": "Gets list of available geo regions plus ministamps",
+        "operationId": "GetSubscriptionDeploymentLocations",
+        "produces": [
+          "application/json",
+          "text/json",
+          "application/xml",
+          "text/xml"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/subscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/DeploymentLocations"
             }
           }
         }
@@ -477,6 +537,233 @@
     }
   },
   "definitions": {
+    "AppServiceEnvironment": {
+      "description": "Description of an App Service Environment.",
+      "required": [
+        "name",
+        "location",
+        "virtualNetwork",
+        "workerPools"
+      ],
+      "type": "object",
+      "properties": {
+        "name": {
+          "description": "Name of the App Service Environment.",
+          "type": "string"
+        },
+        "location": {
+          "description": "Location of the App Service Environment, e.g. \"West US\".",
+          "type": "string"
+        },
+        "provisioningState": {
+          "description": "Provisioning state of the App Service Environment.",
+          "enum": [
+            "Succeeded",
+            "Failed",
+            "Canceled",
+            "InProgress",
+            "Deleting"
+          ],
+          "type": "string",
+          "readOnly": true,
+          "x-ms-enum": {
+            "name": "ProvisioningState",
+            "modelAsString": false
+          }
+        },
+        "status": {
+          "description": "Current status of the App Service Environment.",
+          "enum": [
+            "Preparing",
+            "Ready",
+            "Scaling",
+            "Deleting"
+          ],
+          "type": "string",
+          "readOnly": true,
+          "x-ms-enum": {
+            "name": "HostingEnvironmentStatus",
+            "modelAsString": false
+          }
+        },
+        "vnetName": {
+          "description": "Name of the Virtual Network for the App Service Environment.",
+          "type": "string"
+        },
+        "vnetResourceGroupName": {
+          "description": "Resource group of the Virtual Network.",
+          "type": "string"
+        },
+        "vnetSubnetName": {
+          "description": "Subnet of the Virtual Network.",
+          "type": "string"
+        },
+        "virtualNetwork": {
+          "$ref": "#/definitions/VirtualNetworkProfile",
+          "description": "Description of the Virtual Network."
+        },
+        "internalLoadBalancingMode": {
+          "description": "Specifies which endpoints to serve internally in the Virtual Network for the App Service Environment.",
+          "enum": [
+            "None",
+            "Web",
+            "Publishing"
+          ],
+          "type": "string",
+          "x-ms-enum": {
+            "name": "InternalLoadBalancingMode",
+            "modelAsString": false
+          }
+        },
+        "multiSize": {
+          "description": "Front-end VM size, e.g. \"Medium\", \"Large\".",
+          "type": "string"
+        },
+        "multiRoleCount": {
+          "format": "int32",
+          "description": "Number of front-end instances.",
+          "type": "integer"
+        },
+        "workerPools": {
+          "description": "Description of worker pools with worker size IDs, VM sizes, and number of workers in each pool.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/WorkerPool"
+          }
+        },
+        "ipsslAddressCount": {
+          "format": "int32",
+          "description": "Number of IP SSL addresses reserved for the App Service Environment.",
+          "type": "integer"
+        },
+        "databaseEdition": {
+          "description": "Edition of the metadata database for the App Service Environment, e.g. \"Standard\".",
+          "type": "string",
+          "readOnly": true
+        },
+        "databaseServiceObjective": {
+          "description": "Service objective of the metadata database for the App Service Environment, e.g. \"S0\".",
+          "type": "string",
+          "readOnly": true
+        },
+        "upgradeDomains": {
+          "format": "int32",
+          "description": "Number of upgrade domains of the App Service Environment.",
+          "type": "integer",
+          "readOnly": true
+        },
+        "subscriptionId": {
+          "description": "Subscription of the App Service Environment.",
+          "type": "string",
+          "readOnly": true
+        },
+        "dnsSuffix": {
+          "description": "DNS suffix of the App Service Environment.",
+          "type": "string"
+        },
+        "lastAction": {
+          "description": "Last deployment action on the App Service Environment.",
+          "type": "string",
+          "readOnly": true
+        },
+        "lastActionResult": {
+          "description": "Result of the last deployment action on the App Service Environment.",
+          "type": "string",
+          "readOnly": true
+        },
+        "allowedMultiSizes": {
+          "description": "List of comma separated strings describing which VM sizes are allowed for front-ends.",
+          "type": "string",
+          "readOnly": true
+        },
+        "allowedWorkerSizes": {
+          "description": "List of comma separated strings describing which VM sizes are allowed for workers.",
+          "type": "string",
+          "readOnly": true
+        },
+        "maximumNumberOfMachines": {
+          "format": "int32",
+          "description": "Maximum number of VMs in the App Service Environment.",
+          "type": "integer",
+          "readOnly": true
+        },
+        "vipMappings": {
+          "description": "Description of IP SSL mapping for the App Service Environment.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/VirtualIPMapping"
+          },
+          "readOnly": true
+        },
+        "environmentCapacities": {
+          "description": "Current total, used, and available worker capacities.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/StampCapacity"
+          },
+          "readOnly": true
+        },
+        "networkAccessControlList": {
+          "description": "Access control list for controlling traffic to the App Service Environment.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/NetworkAccessControlEntry"
+          }
+        },
+        "environmentIsHealthy": {
+          "description": "True/false indicating whether the App Service Environment is healthy.",
+          "type": "boolean",
+          "readOnly": true
+        },
+        "environmentStatus": {
+          "description": "Detailed message about with results of the last check of the App Service Environment.",
+          "type": "string",
+          "readOnly": true
+        },
+        "resourceGroup": {
+          "description": "Resource group of the App Service Environment.",
+          "type": "string",
+          "readOnly": true
+        },
+        "frontEndScaleFactor": {
+          "format": "int32",
+          "description": "Scale factor for front-ends.",
+          "type": "integer"
+        },
+        "defaultFrontEndScaleFactor": {
+          "format": "int32",
+          "description": "Default Scale Factor for FrontEnds.",
+          "type": "integer",
+          "readOnly": true
+        },
+        "apiManagementAccountId": {
+          "description": "API Management Account associated with the App Service Environment.",
+          "type": "string"
+        },
+        "suspended": {
+          "description": "<code>true</code> if the App Service Environment is suspended; otherwise, <code>false</code>. The environment can be suspended, e.g. when the management endpoint is no longer available\n (most likely because NSG blocked the incoming traffic).",
+          "type": "boolean"
+        },
+        "dynamicCacheEnabled": {
+          "description": "True/false indicating whether the App Service Environment is suspended. The environment can be suspended e.g. when the management endpoint is no longer available\n(most likely because NSG blocked the incoming traffic).",
+          "type": "boolean"
+        },
+        "clusterSettings": {
+          "description": "Custom settings for changing the behavior of the App Service Environment.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/NameValuePair"
+          }
+        },
+        "userWhitelistedIpRanges": {
+          "description": "User added ip ranges to whitelist on ASE db",
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        }
+      }
+    },
     "Capability": {
       "description": "Describes the capabilities/features allowed for a specific SKU.",
       "type": "object",
@@ -509,6 +796,33 @@
           "type": "array",
           "items": {
             "type": "string"
+          }
+        }
+      }
+    },
+    "DeploymentLocations": {
+      "description": "List of available locations (regions or App Service Environments) for\ndeployment of App Service resources.",
+      "type": "object",
+      "properties": {
+        "locations": {
+          "description": "Available regions.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/GeoRegion"
+          }
+        },
+        "hostingEnvironments": {
+          "description": "Available App Service Environments with full descriptions of the environments.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/AppServiceEnvironment"
+          }
+        },
+        "hostingEnvironmentDeploymentInfos": {
+          "description": "Available App Service Environments with basic information.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/HostingEnvironmentDeploymentInfo"
           }
         }
       }
@@ -594,6 +908,65 @@
           "items": {
             "$ref": "#/definitions/Capability"
           }
+        }
+      }
+    },
+    "HostingEnvironmentDeploymentInfo": {
+      "description": "Information needed to create resources on an App Service Environment.",
+      "type": "object",
+      "properties": {
+        "name": {
+          "description": "Name of the App Service Environment.",
+          "type": "string"
+        },
+        "location": {
+          "description": "Location of the App Service Environment.",
+          "type": "string"
+        }
+      }
+    },
+    "NameValuePair": {
+      "description": "Name value pair.",
+      "type": "object",
+      "properties": {
+        "name": {
+          "description": "Pair name.",
+          "type": "string"
+        },
+        "value": {
+          "description": "Pair value.",
+          "type": "string"
+        }
+      }
+    },
+    "NetworkAccessControlEntry": {
+      "description": "Network access control entry.",
+      "type": "object",
+      "properties": {
+        "action": {
+          "description": "Action object.",
+          "enum": [
+            "Permit",
+            "Deny"
+          ],
+          "type": "string",
+          "x-ms-enum": {
+            "name": "AccessControlEntryAction",
+            "modelAsString": false
+          }
+        },
+        "description": {
+          "description": "Description.",
+          "type": "string"
+        },
+        "order": {
+          "format": "int32",
+          "description": "Order of precedence.",
+          "type": "integer"
+        },
+        "remoteSubnet": {
+          "description": "Remote subnet.",
+          "type": "string"
         }
       }
     },
@@ -873,6 +1246,77 @@
         }
       }
     },
+    "StampCapacity": {
+      "description": "Stamp capacity information.",
+      "type": "object",
+      "properties": {
+        "name": {
+          "description": "Name of the stamp.",
+          "type": "string"
+        },
+        "availableCapacity": {
+          "format": "int64",
+          "description": "Available capacity (# of machines, bytes of storage etc...).",
+          "type": "integer"
+        },
+        "totalCapacity": {
+          "format": "int64",
+          "description": "Total capacity (# of machines, bytes of storage etc...).",
+          "type": "integer"
+        },
+        "unit": {
+          "description": "Name of the unit.",
+          "type": "string"
+        },
+        "computeMode": {
+          "description": "Shared/dedicated workers.",
+          "enum": [
+            "Shared",
+            "Dedicated",
+            "Dynamic"
+          ],
+          "type": "string",
+          "x-ms-enum": {
+            "name": "ComputeModeOptions",
+            "modelAsString": false
+          }
+        },
+        "workerSize": {
+          "description": "Size of the machines.",
+          "enum": [
+            "Small",
+            "Medium",
+            "Large",
+            "D1",
+            "D2",
+            "D3",
+            "Default"
+          ],
+          "type": "string",
+          "x-ms-enum": {
+            "name": "WorkerSizeOptions",
+            "modelAsString": false
+          }
+        },
+        "workerSizeId": {
+          "format": "int32",
+          "description": "Size ID of machines: \n0 - Small\n1 - Medium\n2 - Large",
+          "type": "integer"
+        },
+        "excludeFromCapacityAllocation": {
+          "description": "If <code>true</code>, it includes basic apps.\nBasic apps are not used for capacity allocation.",
+          "type": "boolean"
+        },
+        "isApplicableForAllComputeModes": {
+          "description": "<code>true</code> if capacity is applicable for all apps; otherwise, <code>false</code>.",
+          "type": "boolean"
+        },
+        "siteMode": {
+          "description": "Shared or Dedicated.",
+          "type": "string"
+        }
+      }
+    },
     "User": {
       "description": "User crendentials used for publishing activity.",
       "type": "object",
@@ -1010,6 +1454,54 @@
         }
       }
     },
+    "VirtualIPMapping": {
+      "description": "Virtual IP mapping.",
+      "type": "object",
+      "properties": {
+        "virtualIP": {
+          "description": "Virtual IP address.",
+          "type": "string"
+        },
+        "internalHttpPort": {
+          "format": "int32",
+          "description": "Internal HTTP port.",
+          "type": "integer"
+        },
+        "internalHttpsPort": {
+          "format": "int32",
+          "description": "Internal HTTPS port.",
+          "type": "integer"
+        },
+        "inUse": {
+          "description": "Is virtual IP mapping in use.",
+          "type": "boolean"
+        }
+      }
+    },
+    "VirtualNetworkProfile": {
+      "description": "Specification for using a Virtual Network.",
+      "type": "object",
+      "properties": {
+        "id": {
+          "description": "Resource id of the Virtual Network.",
+          "type": "string"
+        },
+        "name": {
+          "description": "Name of the Virtual Network (read-only).",
+          "type": "string",
+          "readOnly": true
+        },
+        "type": {
+          "description": "Resource type of the Virtual Network (read-only).",
+          "type": "string",
+          "readOnly": true
+        },
+        "subnet": {
+          "description": "Subnet within the Virtual Network.",
+          "type": "string"
+        }
+      }
+    },
     "VnetParameters": {
       "description": "The required set of inputs to validate a VNET",
       "type": "object",
@@ -1089,6 +1581,47 @@
             }
           },
           "x-ms-client-flatten": true
+        }
+      }
+    },
+    "WorkerPool": {
+      "description": "Worker pool of an App Service Environment.",
+      "type": "object",
+      "properties": {
+        "workerSizeId": {
+          "format": "int32",
+          "description": "Worker size ID for referencing this worker pool.",
+          "type": "integer"
+        },
+        "computeMode": {
+          "description": "Shared or dedicated app hosting.",
+          "enum": [
+            "Shared",
+            "Dedicated",
+            "Dynamic"
+          ],
+          "type": "string",
+          "x-ms-enum": {
+            "name": "ComputeModeOptions",
+            "modelAsString": false
+          }
+        },
+        "workerSize": {
+          "description": "VM size of the worker pool instances.",
+          "type": "string"
+        },
+        "workerCount": {
+          "format": "int32",
+          "description": "Number of instances in the worker pool.",
+          "type": "integer"
+        },
+        "instanceNames": {
+          "description": "Names of all instances in the worker pool (read only).",
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "readOnly": true
         }
       }
     }
