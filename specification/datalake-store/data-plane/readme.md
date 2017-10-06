@@ -81,7 +81,7 @@ go:
 
 These settings apply only when `--tag=package-2016-11 --go` is specified on the command line.
 
-``` yaml $(tag) == 'package-2017-04' && $(go)
+``` yaml $(tag) == 'package-2016-11' && $(go)
 output-folder: $(go-sdk-folder)/services/datalake/store/2016-11-01/filesystem
 ```
 
