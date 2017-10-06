@@ -1151,6 +1151,9 @@
               "$ref": "./apimanagement.json#/definitions/ErrorResponse"
             }
           }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
         }
       }
     },
@@ -1213,6 +1216,11 @@
         ],
         "operationId": "ApiSchema_CreateOrUpdate",
         "description": "Creates or updates schema configuration for the API.",
+        "x-ms-examples": {
+          "ApiManagementCreateApiSchema": {
+            "$ref": "./examples/ApiManagementCreateApiSchema.json"
+          }
+        },
         "parameters": [
           {
             "$ref": "./apimanagement.json#/parameters/ResourceGroupNameParameter"
