@@ -871,13 +871,37 @@
         "ShippingInformation":{
             "description": "Contains information about the Microsoft datacenter to which the drives should be shipped.",
             "properties": {
-                "name": {
+                "recipientName": {
                     "type": "string",
-                    "description": "The name of the recipient at the datacenter."
+                    "description": "The name of the recipient who will receive the hard drives when they are returned. "
                 },
-                "address": {
+                "streetAddress1": {
                     "type": "string",
-                    "description": "The address of the datacenter."
+                    "description": "The first line of the street address to use when returning the drives. "
+                },
+                "streetAddress2": {
+                    "type": "string",
+                    "description": "The second line of the street address to use when returning the drives. "
+                },
+                "city": {
+                    "type": "string",
+                    "description": "The city name to use when returning the drives."
+                },
+                "stateOrProvince": {
+                    "type": "string",
+                    "description": "The state or province to use when returning the drives."
+                },
+                "postalCode": {
+                    "type": "string",
+                    "description": "The postal code to use when returning the drives."
+                },
+                "countryOrRegion": {
+                    "type": "string",
+                    "description": "The country or region to use when returning the drives. "
+                },
+                "phone": {
+                    "type": "string",
+                    "description": "Phone number of the recipient of the returned drives."
                 }
             }
         },
@@ -1053,8 +1077,7 @@
             "in": "query",
             "description": "Specifies the API version to use for this request.",
             "required": true,
-            "type": "string",
-            "enum": ["2016-07-01-preview", "2.0"]
+            "type": "string"
         },
         "subscriptionId": {
             "name": "subscriptionId",
@@ -1075,8 +1098,7 @@
             "in": "header",
             "description": "Specifies the preferred language for the response.",
             "required": false,
-            "type": "string",
-            "enum": ["en-us"]
+            "type": "string"
         },
         "x-ms-client-tenant-id":{
             "name": "x-ms-client-tenant-id",
