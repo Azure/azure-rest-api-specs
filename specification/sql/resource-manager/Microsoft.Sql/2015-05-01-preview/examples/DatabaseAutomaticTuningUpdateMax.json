@@ -4,7 +4,23 @@
     "resourceGroupName": "default-sql-onebox",
     "serverName": "testsvr11",
     "databaseName": "db1",
-    "api-version": "2015-05-01-preview"
+    "api-version": "2015-05-01-preview",
+    "parameters": {
+      "properties": {
+        "desiredState": "Auto",
+        "options": {
+          "createIndex": {
+            "desiredState": "Off"
+          },
+          "dropIndex": {
+            "desiredState": "On"
+          },
+          "forceLastGoodPlan": {
+            "desiredState": "Default"
+          }
+        }
+      }
+    }
   },
   "responses": {
     "200": {
@@ -23,16 +39,12 @@
               "reasonDesc": "AutoConfigured"
             },
             "createIndex": {
-              "desiredState": "Default",
-              "actualState": "On",
-              "reasonCode": 2,
-              "reasonDesc": "AutoConfigured"
+              "desiredState": "Off",
+              "actualState": "Off"
             },
             "dropIndex": {
-              "desiredState": "Default",
-              "actualState": "Off",
-              "reasonCode": 2,
-              "reasonDesc": "AutoConfigured"
+              "desiredState": "On",
+              "actualState": "On"
             },
             "maintainIndex": {
               "desiredState": "Default",
