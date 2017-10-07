@@ -66,6 +66,9 @@ batch:
       - ../specification/appinsights/resource-manager/microsoft.insights/2015-05-01/aiOperations_API.json
       - ../specification/appinsights/resource-manager/microsoft.insights/2015-05-01/components_API.json
       - ../specification/appinsights/resource-manager/microsoft.insights/2015-05-01/webTests_API.json
+      - ../specification/appinsights/resource-manager/microsoft.insights/2015-05-01/componentContinuousExport_API.json
+      - ../specification/appinsights/resource-manager/microsoft.insights/2015-05-01/componentFeaturesAndPricing_API.json
+      - ../specification/appinsights/resource-manager/microsoft.insights/2015-05-01/componentApiKeys_API.json
       - ../specification/authorization/resource-manager/Microsoft.Authorization/2015-07-01/authorization.json
       - ../specification/batch/resource-manager/Microsoft.Batch/2015-12-01/BatchManagement.json
       - ../specification/batch/resource-manager/Microsoft.Batch/2017-01-01/BatchManagement.json
