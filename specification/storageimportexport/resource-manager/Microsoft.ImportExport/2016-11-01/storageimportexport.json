@@ -528,9 +528,92 @@
                     "description": "Specifies the tags that will be assigned to the job."
                 },
                 "properties": {
-                    "x-ms-client-flatten": true,
-                    "$ref": "#/definitions/JobResponse",
-                    "description": "Specifies the job response"
+                    "$ref": "#/definitions/JobDetails",
+                    "description": "Specifies the job properties"
+                }
+            }
+        },
+        "JobDetails":{
+            "description": "Specifies the job properties",
+            "properties": {
+                "storageAccountId":{
+                    "type": "string",
+                    "description": "The resource identifier of the storage account where data will be imported to or exported from."
+                },
+                "jobType":{
+                    "type": "string",
+                    "description": "The type of job"
+                },
+                "returnAddress":{
+                    "description": "Specifies the return address information for the job. ",
+                    "$ref": "#/definitions/ReturnAddress"
+                },
+                "returnShipping":{
+                    "description": "Specifies the return carrier and customer's account with the carrier. ",
+                    "$ref": "#/definitions/ReturnShipping"
+                },
+                "shippingInformation":{
+                    "description": "Contains information about the Microsoft datacenter to which the drives should be shipped. ",
+                    "$ref": "#/definitions/ShippingInformation"
+                },
+                "deliveryPackage":{
+                    "description": "Contains information about the package being shipped by the customer to the Microsoft data center. ",
+                    "$ref": "#/definitions/PackageInfomation"
+                },
+                "returnPackage":{
+                    "description": "Contains information about the package being shipped from the Microsoft data center to the customer to return the drives. The format is the same as the deliveryPackage property above. This property is not included if the drives have not yet been returned. ",
+                    "$ref": "#/definitions/PackageInfomation"
+                },
+                "userStorageAccountId":{
+                    "type": "string",
+                    "description": "The resource identifier of the user storage account where data will be imported to or exported from.."
+                },
+                "userTenantId":{
+                    "type": "string",
+                    "description": "The user tenant identifier"
+                },
+                "diagnosticsPath":{
+                    "type": "string",
+                    "description": "The virtual blob directory to which the copy logs and backups of drive manifest files (if enabled) will be stored."
+                },
+                "logLevel":{
+                    "type": "string",
+                    "description": "Default value is Error. Indicates whether error logging or verbose logging will be enabled."
+                },
+                "backupDriveManifest":{
+                    "type": "boolean",
+                    "description": "Default value is false. Indicates whether the manifest files on the drives should be copied to block blobs."
+                },
+                "state":{
+                    "type": "string",
+                    "description": "Current state of the job."
+                },
+                "cancelRequested":{
+                    "type": "boolean",
+                    "description": "Indicates whether a request has been submitted to cancel the job."
+                },
+                "percentComplete":{
+                    "type": "integer",
+                    "description": "Overall percentage completed for the job."
+                },
+                "incompleteBlobListUri":{
+                    "type": "string",
+                    "description": "A blob path that points to a block blob containing a list of blob names that were not exported due to insufficient drive space. If all blobs were exported successfully, then this element is not included in the response."
+                },
+                "driveList":{
+                    "description": "List of up to ten drives that comprise the job. The drive list is a required element for an import job; it is not specified for export jobs.",
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/definitions/DriveStatus"
+                    }
+                },
+                "export":{
+                    "description": "A property containing information about the blobs to be exported for an export job. This property is included for export jobs only.",
+                    "$ref": "#/definitions/Export"
+                },
+                "provisioningState":{
+                    "type": "string",
+                    "description": "Specifies the provisioning state of the job."
                 }
             }
         },
@@ -627,90 +710,9 @@
                     "type": "object",
                     "description": "Specifies the tags that are assigned to the job."
                 },
-                "properties":{
-                    "x-ms-client-flatten": true,
-                    "description": "Specifies the job properties",
-                    "properties": {
-                        "storageAccountId":{
-                            "type": "string",
-                            "description": "The resource identifier of the storage account where data will be imported to or exported from."
-                        },
-                        "jobType":{
-                            "type": "string",
-                            "description": "The type of job"
-                        },
-                        "returnAddress":{
-                            "description": "Specifies the return address information for the job. ",
-                            "$ref": "#/definitions/ReturnAddress"
-                        },
-                        "returnShipping":{
-                            "description": "Specifies the return carrier and customer's account with the carrier. ",
-                            "$ref": "#/definitions/ReturnShipping"
-                        },
-                        "shippingInformation":{
-                            "description": "Contains information about the Microsoft datacenter to which the drives should be shipped. ",
-                            "$ref": "#/definitions/ShippingInformation"
-                        },
-                        "deliveryPackage":{
-                            "description": "Contains information about the package being shipped by the customer to the Microsoft data center. ",
-                            "$ref": "#/definitions/PackageInfomation"
-                        },
-                        "returnPackage":{
-                            "description": "Contains information about the package being shipped from the Microsoft data center to the customer to return the drives. The format is the same as the deliveryPackage property above. This property is not included if the drives have not yet been returned. ",
-                            "$ref": "#/definitions/PackageInfomation"
-                        },
-                        "userStorageAccountId":{
-                            "type": "string",
-                            "description": "The resource identifier of the user storage account where data will be imported to or exported from.."
-                        },
-                        "userTenantId":{
-                            "type": "string",
-                            "description": "The user tenant identifier"
-                        },
-                        "diagnosticsPath":{
-                            "type": "string",
-                            "description": "The virtual blob directory to which the copy logs and backups of drive manifest files (if enabled) will be stored."
-                        },
-                        "logLevel":{
-                            "type": "string",
-                            "description": "Default value is Error. Indicates whether error logging or verbose logging will be enabled."
-                        },
-                        "backupDriveManifest":{
-                            "type": "boolean",
-                            "description": "Default value is false. Indicates whether the manifest files on the drives should be copied to block blobs."
-                        },
-                        "state":{
-                            "type": "string",
-                            "description": "Current state of the job."
-                        },
-                        "cancelRequested":{
-                            "type": "boolean",
-                            "description": "Indicates whether a request has been submitted to cancel the job."
-                        },
-                        "percentComplete":{
-                            "type": "integer",
-                            "description": "Overall percentage completed for the job."
-                        },
-                        "incompleteBlobListUri":{
-                            "type": "string",
-                            "description": "A blob path that points to a block blob containing a list of blob names that were not exported due to insufficient drive space. If all blobs were exported successfully, then this element is not included in the response."
-                        },
-                        "driveList":{
-                            "description": "List of up to ten drives that comprise the job. The drive list is a required element for an import job; it is not specified for export jobs.",
-                            "type": "array",
-                            "items": {
-                                "$ref": "#/definitions/DriveStatus"
-                            }
-                        },
-                        "export":{
-                            "description": "A property containing information about the blobs to be exported for an export job. This property is included for export jobs only.",
-                            "$ref": "#/definitions/Export"
-                        },
-                        "provisioningState":{
-                            "type": "string",
-                            "description": "Specifies the provisioning state of the job."
-                        }
-                    }
+                "properties": {
+                    "$ref": "#/definitions/JobDetails",
+                    "description": "Specifies the job properties"
                 }
             }
         },
