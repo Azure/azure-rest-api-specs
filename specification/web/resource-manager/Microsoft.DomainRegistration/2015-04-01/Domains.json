@@ -349,6 +349,67 @@
             "description": "Domain does not exist in Azure database probably because it has already been deleted"
           }
         }
+      },
+      "patch": {
+        "tags": [
+          "Domains"
+        ],
+        "summary": "Creates or updates a domain.",
+        "description": "Creates or updates a domain.",
+        "operationId": "Domains_Update",
+        "consumes": [
+          "application/json",
+          "text/json",
+          "application/x-www-form-urlencoded"
+        ],
+        "produces": [
+          "application/json",
+          "text/json",
+          "application/xml",
+          "text/xml"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/resourceGroupNameParameter"
+          },
+          {
+            "name": "domainName",
+            "in": "path",
+            "description": "Name of the domain.",
+            "required": true,
+            "type": "string",
+            "pattern": "[a-zA-Z0-9][a-zA-Z0-9\\.-]+"
+          },
+          {
+            "name": "domain",
+            "in": "body",
+            "description": "Domain registration information.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/Domain"
+            }
+          },
+          {
+            "$ref": "#/parameters/subscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          }
+        ],
+        "responses": {
+          "202": {
+            "description": "Domain purchase is in progress.",
+            "schema": {
+              "$ref": "#/definitions/Domain"
+            }
+          },
+          "200": {
+            "description": "Domain purchase was successful.",
+            "schema": {
+              "$ref": "#/definitions/Domain"
+            }
+          }
+        }
       }
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DomainRegistration/domains/{domainName}/domainOwnershipIdentifiers": {
@@ -646,7 +707,7 @@
       }
     },
     "Contact": {
-      "description": "Contact information for domain registration. If 'Domain Privacy' option is not selected then the contact information is made publicly available through the Whois \n directories as per ICANN requirements.",
+      "description": "Contact information for domain registration. If 'Domain Privacy' option is not selected then the contact information is made publicly available through the Whois \ndirectories as per ICANN requirements.",
       "required": [
         "email",
         "nameFirst",
@@ -1130,9 +1191,6 @@
     },
     "Resource": {
       "description": "Azure resource. This resource is tracked in Azure Resource Manager",
-      "required": [
-        "location"
-      ],
       "properties": {
         "id": {
           "description": "Resource Id.",
@@ -1150,7 +1208,11 @@
         },
         "location": {
           "description": "Resource Location.",
-          "type": "string"
+          "type": "string",
+          "x-ms-mutability": [
+            "create",
+            "read"
+          ]
         },
         "type": {
           "description": "Resource type.",

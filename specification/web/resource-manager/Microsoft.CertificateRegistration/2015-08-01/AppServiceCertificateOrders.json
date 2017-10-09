@@ -252,6 +252,66 @@
             "description": "Certificate order does not exist."
           }
         }
+      },
+      "patch": {
+        "tags": [
+          "AppServiceCertificateOrders"
+        ],
+        "summary": "Create or update a certificate purchase order.",
+        "description": "Create or update a certificate purchase order.",
+        "operationId": "AppServiceCertificateOrders_Update",
+        "consumes": [
+          "application/json",
+          "text/json",
+          "application/x-www-form-urlencoded"
+        ],
+        "produces": [
+          "application/json",
+          "text/json",
+          "application/xml",
+          "text/xml"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/resourceGroupNameParameter"
+          },
+          {
+            "name": "certificateOrderName",
+            "in": "path",
+            "description": "Name of the certificate order.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "certificateDistinguishedName",
+            "in": "body",
+            "description": "Distinguished name to to use for the certificate order.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/AppServiceCertificateOrder"
+            }
+          },
+          {
+            "$ref": "#/parameters/subscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "App Service Certificate Order is created.",
+            "schema": {
+              "$ref": "#/definitions/AppServiceCertificateOrder"
+            }
+          },
+          "201": {
+            "description": "App Service Certificate Order creation operation is in progress",
+            "schema": {
+              "$ref": "#/definitions/AppServiceCertificateOrder"
+            }
+          }
+        }
       }
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.CertificateRegistration/certificateOrders/{certificateOrderName}/certificates": {
@@ -451,6 +511,73 @@
           },
           "204": {
             "description": "Certificate does not exist."
+          }
+        }
+      },
+      "patch": {
+        "tags": [
+          "AppServiceCertificateOrders"
+        ],
+        "summary": "Creates or updates a certificate and associates with key vault secret.",
+        "description": "Creates or updates a certificate and associates with key vault secret.",
+        "operationId": "AppServiceCertificateOrders_UpdateCertificate",
+        "consumes": [
+          "application/json",
+          "text/json",
+          "application/x-www-form-urlencoded"
+        ],
+        "produces": [
+          "application/json",
+          "text/json",
+          "application/xml",
+          "text/xml"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/resourceGroupNameParameter"
+          },
+          {
+            "name": "certificateOrderName",
+            "in": "path",
+            "description": "Name of the certificate order.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "name",
+            "in": "path",
+            "description": "Name of the certificate.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "keyVaultCertificate",
+            "in": "body",
+            "description": "Key vault certificate resource Id.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/AppServiceCertificateResource"
+            }
+          },
+          {
+            "$ref": "#/parameters/subscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "App Service Certificate is created.",
+            "schema": {
+              "$ref": "#/definitions/AppServiceCertificateResource"
+            }
+          },
+          "201": {
+            "description": "App Service Certificate creation operation is in progress",
+            "schema": {
+              "$ref": "#/definitions/AppServiceCertificateResource"
+            }
           }
         }
       }
@@ -1321,9 +1448,6 @@
     },
     "Resource": {
       "description": "Azure resource. This resource is tracked in Azure Resource Manager",
-      "required": [
-        "location"
-      ],
       "properties": {
         "id": {
           "description": "Resource Id.",
@@ -1341,7 +1465,11 @@
         },
         "location": {
           "description": "Resource Location.",
-          "type": "string"
+          "type": "string",
+          "x-ms-mutability": [
+            "create",
+            "read"
+          ]
         },
         "type": {
           "description": "Resource type.",
