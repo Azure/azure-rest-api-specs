@@ -66,3 +66,31 @@ csharp:
   output-folder: $(csharp-sdks-folder)/DevTestLabs/Management.DevTestLabs/Generated
   clear-output-folder: true
 ```
+
+
+## Go
+
+These settings apply only when `--go` is specified on the command line.
+
+``` yaml $(go)
+go:
+  license-header: MICROSOFT_APACHE_NO_VERSION
+  namespace: dtl
+  clear-output-folder: true
+```
+
+### Tag: package-2016-05 and go
+
+These settings apply only when `--tag=package-2016-05 --go` is specified on the command line.
+
+``` yaml $(tag) == 'package-2016-05' && $(go)
+output-folder: $(go-sdk-folder)/services/devtestlabs/mgmt/2016-05-15/dtl
+```
+
+### Tag: package-2015-05-preview and go
+
+These settings apply only when `--tag=package-2015-05-preview --go` is specified on the command line.
+
+``` yaml $(tag) == 'package-2015-05-preview' && $(go)
+output-folder: $(go-sdk-folder)/services/devtestlabs/mgmt/2015-05-21-preview/dtl
+```
