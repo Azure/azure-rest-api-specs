@@ -18,7 +18,6 @@ These settings apply only when `--tag=release_1_0` is specified on the command l
 
 ``` yaml $(tag) == 'release_1_0'
 input-file: v1.0/EntitySearch.json
-add-credentials: y
 ```
 
 ## CSharp Settings
@@ -27,5 +26,6 @@ These settings apply only when `--csharp` is specified on the command line.
 csharp: 
   namespace: Microsoft.Azure.CognitiveServices.Search.EntitySearch
   output-folder: $(csharp-sdks-folder)/CognitiveServices/dataPlane/Search/Search/Generated/EntitySearch
+  add-credentials: true
 ```
 
