@@ -1,7 +1,7 @@
 {
   "swagger": "2.0",
   "info": {
-    "title": "AppInsightsManagementClient",
+    "title": "ApplicationInsightsManagementClient",
     "description": "Azure Application Insights client for Components.",
     "version": "2015-05-01"
   },
@@ -121,6 +121,11 @@
           },
           "204": {
             "description": "The specified component does not exist."
+          }
+        },
+        "x-ms-examples": {
+          "webTestDelete": {
+            "$ref": "./examples/ComponentsDelete.json"
           }
         }
       },
@@ -294,6 +299,7 @@
         },
         "properties": {
           "x-ms-client-flatten": true,
+          "description": "Properties that define an Application Insights component resource.",
           "$ref": "#/definitions/ApplicationInsightsComponentProperties"
         }
       },
@@ -332,7 +338,10 @@
             "name": "ApplicationType",
             "modelAsString": true
           },
-          "x-ms-mutability": ["create", "read"]
+          "x-ms-mutability": [
+            "create",
+            "read"
+          ]
         },
         "Flow_Type": {
           "type": "string",
@@ -433,7 +442,7 @@
       "in": "path",
       "required": true,
       "type": "string",
-      "description": "The Azure subscription Id."
+      "description": "The Azure subscription ID."
     },
     "ApiVersionParameter": {
       "name": "api-version",
