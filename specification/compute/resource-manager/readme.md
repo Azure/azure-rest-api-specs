@@ -1,19 +1,19 @@
 # Compute
-    
+
 > see https://aka.ms/autorest
 
 This is the AutoRest configuration file for Compute.
 
 
 The compute RP comprises of small services where each service has its own tag.
-Hence, each sub-service has its own swagger spec. 
+Hence, each sub-service has its own swagger spec.
 
 All of them are tied together using this configuration and are packaged together into one compute client library.
 This makes it easier for customers to download one (nuget/npm/pip/maven/gem) compute client library package rather than installing individual packages for each sub service.
 
 
 ---
-## Getting Started 
+## Getting Started
 To build the SDK for Compute, simply [Install AutoRest](https://aka.ms/autorest/install) and in this folder, run:
 
 > `autorest`
@@ -27,16 +27,29 @@ To see additional help and options, run:
 
 
 
-### Basic Information 
+### Basic Information
 These are the global settings for the Compute API.
 
 ``` yaml
 title: ComputeManagementClient
 description: Compute Client
 openapi-type: arm
-tag: package-2017-03
+tag: package-2017-08
 ```
 
+
+### Tag: package-2017-08
+
+These settings apply only when `--tag=package-2017-08` is specified on the command line.
+
+``` yaml $(tag) == 'package-2017-08'
+input-file:
+- Microsoft.Compute/2017-03-30/compute.json
+- Microsoft.Compute/2017-03-30/disk.json
+- Microsoft.Compute/2017-03-30/runCommands.json
+- Microsoft.ContainerService/2017-07-01/containerService.json
+- Microsoft.ContainerService/2017-08-31/managedClusters.json
+```
 
 ### Tag: package-2017-03
 
@@ -160,7 +173,7 @@ input-file:
 ---
 # Code Generation
 
-## C# 
+## C#
 
 These settings apply only when `--csharp` is specified on the command line.
 Please also specify `--csharp-sdks-folder=<path to "SDKs" directory of your azure-sdk-for-net clone>`.
