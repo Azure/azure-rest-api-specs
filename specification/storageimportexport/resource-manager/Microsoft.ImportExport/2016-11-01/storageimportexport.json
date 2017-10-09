@@ -39,7 +39,7 @@
                 "tags": [
                     "StorageImportExport"
                 ],
-                "operationId": "Locations_list",
+                "operationId": "Locations_List",
                 "description": "Returns a list of locations to which you can ship the disks associated with an import or export job. A location is a Microsoft data center region.",
                 "x-ms-examples": {
                     "List locations": { "$ref": "examples/ListLocations.json" }
@@ -566,11 +566,11 @@
                 },
                 "userStorageAccountId":{
                     "type": "string",
-                    "description": "The resource identifier of the user storage account where data will be imported to or exported from.."
+                    "description": "The resource identifier of the user storage account where data will be imported to or exported from. Only required for Express Disk Service."
                 },
                 "userTenantId":{
                     "type": "string",
-                    "description": "The user tenant identifier"
+                    "description": "The user tenant identifier. Only required for Express Disk Service."
                 },
                 "diagnosticsPath":{
                     "type": "string",
@@ -982,11 +982,11 @@
                 },
                 "currentLocation":{
                     "type": "string",
-                    "description": "The drive current location."
+                    "description": "The drive current location. Only required for Express Disk Service."
                 },
                 "returnLocation":{
                     "type": "string",
-                    "description": "The drive return location after the rental job."
+                    "description": "The drive return location after the rental job. Only required for Express Disk Service."
                 }
             }
         },
