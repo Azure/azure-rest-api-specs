@@ -69,6 +69,26 @@ csharp:
 ```
 
 
+## Go
+
+These settings apply only when `--go` is specified on the command line.
+
+``` yaml $(go)
+go:
+  license-header: MICROSOFT_APACHE_NO_VERSION
+  namespace: insights
+  clear-output-folder: true
+```
+
+### Tag: package-2017-08 and go
+
+These settings apply only when `--tag=package-2017-08 --go` is specified on the command line.
+
+``` yaml $(tag) == 'package-2017-08' && $(go)
+output-folder: $(go-sdk-folder)/services/monitor/mgmt/2017-05-01-preview/insights
+```
+
+
 ## Python
 
 These settings apply only when `--python` is specified on the command line.
