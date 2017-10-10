@@ -1,0 +1,268 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "LUIS Endpoint API",
+    "version": "1.0"
+  },
+  "x-ms-parameterized-host": {
+    "hostTemplate": "{AzureRegion}.api.cognitive.microsoft.com",
+    "parameters": [
+      {
+        "name": "AzureRegion",
+        "description": "Supported Azure regions for Cognitive Services endpoints",
+        "x-ms-parameter-location": "client",
+        "required": true,
+        "type": "string",
+        "in": "path",
+        "x-ms-skip-url-encoding": true,
+        "x-nullable": "false",
+        "x-ms-enum": {
+          "name": "AzureRegions",
+          "modelAsString": false
+        },
+        "enum": [
+          "westus",
+          "westeurope"
+        ]
+      }
+    ]
+  },
+  "basePath": "/luis/v2.0/apps",
+  "schemes": [
+    "https"
+  ],
+  "securityDefinitions": {
+    "apiKeyHeader": {
+      "type": "apiKey",
+      "name": "Ocp-Apim-Subscription-Key",
+      "in": "header"
+    },
+    "apiKeyQuery": {
+      "type": "apiKey",
+      "name": "subscription-key",
+      "in": "query"
+    }
+  },
+  "security": [
+    {
+      "apiKeyHeader": []
+    },
+    {
+      "apiKeyQuery": []
+    }
+  ],
+  "paths": {
+    "/{appId}": {
+      "get": {
+        "description": "Gets the published endpoint predictions for the given query",
+        "operationId": "v2.0 Response - Get predictions from endpoint",
+        "parameters": [
+          {
+            "name": "appId",
+            "in": "path",
+            "description": "Format - guid. The application ID",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "q",
+            "in": "query",
+            "description": "The query to predict",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "timezoneOffset",
+            "in": "query",
+            "description": "The timezone offset for the location of the request",
+            "type": "number"
+          },
+          {
+            "name": "verbose",
+            "in": "query",
+            "description": "If true will return all intents instead of just the topscoring intent",
+            "type": "boolean"
+          },
+          {
+            "name": "spellCheck",
+            "in": "query",
+            "description": "Enable spell checking",
+            "type": "boolean"
+          },
+          {
+            "name": "staging",
+            "in": "query",
+            "description": "Use staging endpoint",
+            "type": "boolean"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "A JSON object containing the predictions",
+            "examples": {
+              "application/json": {
+                "query": "forward to frank 30 dollars through HSBC",
+                "topScoringIntent": {
+                  "intent": "give",
+                  "score": 0.3964121
+                },
+                "entities": [
+                  {
+                    "entity": "30",
+                    "type": "builtin.number",
+                    "startIndex": 17,
+                    "endIndex": 18,
+                    "resolution": {
+                      "value": "30"
+                    }
+                  },
+                  {
+                    "entity": "frank",
+                    "type": "frank",
+                    "startIndex": 11,
+                    "endIndex": 15,
+                    "score": 0.935219169
+                  },
+                  {
+                    "entity": "30 dollars",
+                    "type": "builtin.currency",
+                    "startIndex": 17,
+                    "endIndex": 26,
+                    "resolution": {
+                      "unit": "Dollar",
+                      "value": "30"
+                    }
+                  },
+                  {
+                    "entity": "hsbc",
+                    "type": "Bank",
+                    "startIndex": 36,
+                    "endIndex": 39,
+                    "resolution": {
+                      "values": [
+                        "BankeName"
+                      ]
+                    }
+                  }
+                ]
+              }
+            }
+          }
+        },
+        "produces": [
+          "application/json"
+        ]
+      },
+      "post": {
+        "description": "Gets the published endpoint prediction for the given long query",
+        "operationId": "v2.0 Response - Get predictions from endpoint (post)",
+        "parameters": [
+          {
+            "name": "appId",
+            "in": "path",
+            "description": "Format - guid. The application ID",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "timezoneOffset",
+            "in": "query",
+            "description": "The timezone offset for the location of the request",
+            "type": "number"
+          },
+          {
+            "name": "verbose",
+            "in": "query",
+            "description": "If true will return all intents instead of just the topscoring intent",
+            "type": "boolean"
+          },
+          {
+            "name": "spellCheck",
+            "in": "query",
+            "description": "Enable spell checking",
+            "type": "boolean"
+          },
+          {
+            "name": "staging",
+            "in": "query",
+            "description": "Use staging endpoint",
+            "type": "boolean"
+          },
+          {
+            "name": "q",
+            "in": "body",
+            "schema": {
+              "$ref": "#/definitions/Q"
+            },
+            "description": "The query to predict"
+          }
+        ],
+        "consumes": [
+          "application/json"
+        ],
+        "responses": {
+          "200": {
+            "description": "A JSON object containing the prediction",
+            "examples": {
+              "application/json": {
+                "query": "forward to frank 30 dollars through HSBC",
+                "topScoringIntent": {
+                  "intent": "give",
+                  "score": 0.3964121
+                },
+                "entities": [
+                  {
+                    "entity": "30",
+                    "type": "builtin.number",
+                    "startIndex": 17,
+                    "endIndex": 18,
+                    "resolution": {
+                      "value": "30"
+                    }
+                  },
+                  {
+                    "entity": "frank",
+                    "type": "frank",
+                    "startIndex": 11,
+                    "endIndex": 15,
+                    "score": 0.935219169
+                  },
+                  {
+                    "entity": "30 dollars",
+                    "type": "builtin.currency",
+                    "startIndex": 17,
+                    "endIndex": 26,
+                    "resolution": {
+                      "unit": "Dollar",
+                      "value": "30"
+                    }
+                  },
+                  {
+                    "entity": "hsbc",
+                    "type": "Bank",
+                    "startIndex": 36,
+                    "endIndex": 39,
+                    "resolution": {
+                      "values": [
+                        "BankeName"
+                      ]
+                    }
+                  }
+                ]
+              }
+            }
+          }
+        },
+        "produces": [
+          "application/json"
+        ]
+      }
+    }
+  },
+  "definitions": {
+    "Q": {
+      "type": "string",
+      "example": "\"forward to frank 30 dollars through HSBC\""
+    }
+  }
+}
