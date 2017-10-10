@@ -67,6 +67,449 @@
         }
       }
     },
+	"/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.CustomerInsights/hubs/{hubName}/SuggestTypeSchema": {
+      "post": {
+        "tags": [
+          "Hubs"
+        ],
+        "operationId": "Hubs_SuggestTypeSchema",
+        "x-ms-examples": {
+          "Hubs_SuggestTypeSchema": {
+            "$ref": "./examples/HubsSuggestTypeSchema.json"
+          }
+        },
+        "description": "Suggest the type schema for the hub.",
+        "parameters": [
+          {
+            "name": "resourceGroupName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the resource group."
+          },
+          {
+            "name": "hubName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the Hub.",
+            "pattern": "^[a-zA-Z][a-zA-Z0-9]+$",
+            "minLength": 1,
+            "maxLength": 64
+          },
+          {
+            "name": "parameters",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/SuggestTypeSchemaActionInput"
+            },
+            "description": "Parameters supplied to the SuggestTypeSchema operation."
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK. return the suggested type.",
+            "schema": {
+			  "$ref": "#/definitions/SuggestTypeSchemaActionResult"
+            }
+          }
+        }
+      }
+    },
+	"/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.CustomerInsights/hubs/{hubName}/CrmMetadata/discoverorganizations": {
+      "post": {
+        "tags": [
+          "CrmMetadata"
+        ],
+        "operationId": "CrmMetadata_GetDiscoverorganizations",
+        "x-ms-examples": {
+          "CrmMetadata_discoverorganizations": {
+            "$ref": "./examples/CrmMetadataDiscoverorganizations.json"
+          }
+        },
+        "description": "Discover the organizations for a crm connector.",
+        "parameters": [
+          {
+            "name": "resourceGroupName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the resource group."
+          },
+          {
+            "name": "hubName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the Hub.",
+            "pattern": "^[a-zA-Z][a-zA-Z0-9]+$",
+            "minLength": 1,
+            "maxLength": 64
+          },
+          {
+            "name": "parameters",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/CrmDiscoverEntitySetting"
+            },
+            "description": "Parameters supplied to the discover organizations operation."
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK. return the discovered organizations.",
+            "schema": {
+              "type": "array",
+			  "items": {
+				"$ref": "#/definitions/CrmOrganization"
+			  }
+            }
+          }
+        }
+      }
+    },
+	"/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.CustomerInsights/hubs/{hubName}/CrmMetadata/discoverentities": {
+      "get": {
+        "tags": [
+          "CrmMetadata"
+        ],
+        "operationId": "CrmMetadata_GetDiscoverentities",
+        "x-ms-examples": {
+          "CrmMetadata_discoverentities": {
+            "$ref": "./examples/CrmMetadatadiscoverentities.json"
+          }
+        },
+        "description": "Discover the entities for a crm organization.",
+        "parameters": [
+          {
+            "name": "resourceGroupName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the resource group."
+          },
+          {
+            "name": "hubName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the Hub.",
+            "pattern": "^[a-zA-Z][a-zA-Z0-9]+$",
+            "minLength": 1,
+            "maxLength": 64
+          },
+          {
+            "name": "organizationUrl",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The crm organizationUrl."
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK. return the discovered entities.",
+            "schema": {
+              "type": "array",
+			  "items": {
+				"$ref": "#/definitions/CrmEntities"
+			  }
+            }
+          }
+        }
+      }
+    },
+	"/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.CustomerInsights/hubs/{hubName}/connectors/{connectorName}/mappings/{mappingName}/activate": {
+      "post": {
+        "tags": [
+          "ConnectorMappings"
+        ],
+        "operationId": "ConnectorMappings_Activate",
+        "x-ms-examples": {
+          "ConnectorMappings_Activate": {
+            "$ref": "./examples/ConnectorMappings_Activate.json"
+          }
+        },
+        "description": "Activate a connector mapping in the connector.",
+        "parameters": [
+          {
+            "name": "resourceGroupName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the resource group."
+          },
+          {
+            "name": "hubName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the hub."
+          },
+          {
+            "name": "connectorName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the connector."
+          },
+          {
+            "name": "mappingName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the connector mapping.",
+            "pattern": "^[a-zA-Z][a-zA-Z0-9_]+$",
+            "minLength": 1,
+            "maxLength": 128
+          },       
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK. Successfully activated the connector mapping.",
+            "schema": {
+              "$ref": "#/definitions/ConnectorMappingResourceFormat"
+            }
+          }
+        }
+      }
+    },
+	"/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.CustomerInsights/hubs/{hubName}/connectors/{connectorName}/activate": {
+      "post": {
+        "tags": [
+          "Connectors"
+        ],
+        "operationId": "Connectors_activate",
+        "x-ms-examples": {
+          "Connectors_CreateOrUpdate": {
+            "$ref": "./examples/ConnectorsActivate.json"
+          }
+        },
+        "description": "Activate a connector in the hub.",
+        "parameters": [
+          {
+            "name": "resourceGroupName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the resource group."
+          },
+          {
+            "name": "hubName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the hub."
+          },
+          {
+            "name": "connectorName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the connector.",
+            "pattern": "^[a-zA-Z][a-zA-Z0-9_]+$",
+            "minLength": 1,
+            "maxLength": 128
+          },       
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK. Successfully activated the connector.",
+            "schema": {
+              "$ref": "#/definitions/ConnectorResourceFormat"
+            }
+          }
+        }
+      }
+    },
+	"/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.CustomerInsights/hubs/{hubName}/connectors/{connectorName}/operations/{operation}": {
+      "get": {
+        "tags": [
+          "Connectors"
+        ],
+        "operationId": "Connector_GetOperation",
+        "x-ms-examples": {
+          "Connector_GetOperation": {
+            "$ref": "./examples/ConnectorGetOperation.json"
+          }
+        },
+        "description": "Gets operation information about the specified connector.",
+        "parameters": [
+          {
+            "name": "resourceGroupName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the resource group."
+          },
+          {
+            "name": "hubName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the hub."
+          },
+          {
+            "name": "connectorName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the connector."
+          },
+          {
+            "name": "operation",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "the operation id."
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK. Successfully get the connector operation.",
+            "schema": {
+              "$ref": "#/definitions/ConnectorResourceFormat"
+            }
+          }
+        }
+      }
+    },
+	"/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.CustomerInsights/hubs/{hubName}/segments/": {
+      "get": {
+        "tags": [
+          "segments"
+        ],
+        "operationId": "segments_ListByHub",
+        "x-ms-examples": {
+          "segments_ListByHub": {
+            "$ref": "./examples/segmentsListByHub.json"
+          }
+        },
+        "description": "List all segments in a hub.",
+        "parameters": [
+          {
+            "name": "resourceGroupName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the resource group."
+          },
+          {
+            "name": "hubName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the hub."
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK. Successfully get all the segments in the hub.",
+            "schema": {
+              "$ref": "#/definitions/SegmentListResult"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+	"/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.CustomerInsights/hubs/{hubName}/segments/{segmentName}": {
+      "get": {
+        "tags": [
+          "segments"
+        ],
+        "operationId": "segments_Get",
+        "x-ms-examples": {
+          "segments_Get": {
+            "$ref": "./examples/SegmentsGet.json"
+          }
+        },
+        "description": "Get a segment in a hub.",
+        "parameters": [
+          {
+            "name": "resourceGroupName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the resource group."
+          },
+          {
+            "name": "hubName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the hub."
+          },
+		  {
+            "name": "segmentName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the segment."
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK. Successfully get the segment in the hub.",
+            "schema": {
+              "$ref": "#/definitions/SegmentResourceFormat"
+            }
+          }
+        }
+      }
+	},
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.CustomerInsights/hubs/{hubName}": {
       "put": {
         "tags": [
@@ -635,6 +1078,122 @@
         }
       }
     },
+	"/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.CustomerInsights/hubs/{hubName}/profiles/{profileName}/operations/{operation}": {
+      "get": {
+        "tags": [
+          "Profiles"
+        ],
+        "operationId": "Profile_GetOperation",
+        "x-ms-examples": {
+          "Profile_GetOperation": {
+            "$ref": "./examples/ProfileGetOperation.json"
+          }
+        },
+        "description": "Gets operation information about the specified profile.",
+        "parameters": [
+          {
+            "name": "resourceGroupName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the resource group."
+          },
+          {
+            "name": "hubName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the hub."
+          },
+          {
+            "name": "profileName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the profile."
+          },
+          {
+            "name": "operation",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "the operation id."
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK. Successfully get the profile operation.",
+            "schema": {
+              "$ref": "#/definitions/EntityTypeDefinition"
+            }
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.CustomerInsights/hubs/{hubName}/interactions/{interactionName}/operations/{operation}": {
+      "get": {
+        "tags": [
+          "Interactions"
+        ],
+        "operationId": "Interaction_GetOperation",
+        "x-ms-examples": {
+          "Interaction_GetOperation": {
+            "$ref": "./examples/InteractionGetOperation.json"
+          }
+        },
+        "description": "Gets operation information about the specified interaction.",
+        "parameters": [
+          {
+            "name": "resourceGroupName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the resource group."
+          },
+          {
+            "name": "hubName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the hub."
+          },
+          {
+            "name": "interactionName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the interaction."
+          },
+          {
+            "name": "operation",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "the operation id."
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK. Successfully get the interaction operation.",
+            "schema": {
+              "$ref": "#/definitions/EntityTypeDefinition"
+            }
+          }
+        }
+      }
+    },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.CustomerInsights/hubs/{hubName}/interactions/{interactionName}": {
       "put": {
         "tags": [
@@ -757,6 +1316,67 @@
             }
           }
         }
+      },
+	  "delete": {
+        "tags": [
+          "Interactions"
+        ],
+        "operationId": "Interactions_Delete",
+        "x-ms-examples": {
+          "Interactions_Delete": {
+            "$ref": "./examples/InteractionsDelete.json"
+          }
+        },
+        "description": "Deletes a interaction within a hub",
+        "parameters": [
+          {
+            "name": "resourceGroupName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the resource group."
+          },
+          {
+            "name": "hubName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the hub."
+          },
+          {
+            "name": "interactionName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the interaction."
+          },
+          {
+            "name": "locale-code",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "default": "en-us",
+            "description": "Locale of profile to retrieve, default is en-us."
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK. The interaction is deleted."
+          },
+          "202": {
+            "description": "Accepted. The delete operation is accepted."
+          },
+          "204": {
+            "description": "NoContent. Successfully requested delete operation, but the response is intentionally empty."
+          }
+        },
+        "x-ms-long-running-operation": true
       }
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.CustomerInsights/hubs/{hubName}/interactions": {
@@ -2230,6 +2850,64 @@
         }
       }
     },
+	"/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.CustomerInsights/hubs/{hubName}/kpi/{kpiName}/operations/{operation}": {
+      "get": {
+        "tags": [
+          "Kpi"
+        ],
+        "operationId": "Kpi_GetOperation",
+        "x-ms-examples": {
+          "Kpi_GetOperation": {
+            "$ref": "./examples/kpiGetOperation.json"
+          }
+        },
+        "description": "Gets operation information about the specified kpi.",
+        "parameters": [
+          {
+            "name": "resourceGroupName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the resource group."
+          },
+          {
+            "name": "hubName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the hub."
+          },
+          {
+            "name": "kpiName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the kpi."
+          },
+          {
+            "name": "operation",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "the operation id."
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK. Successfully get the kpi operation.",
+            "schema": {
+              "$ref": "#/definitions/KpiResourceFormat"
+            }
+          }
+        }
+      }
+	},
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.CustomerInsights/hubs/{hubName}/kpi": {
       "get": {
         "tags": [
@@ -2812,6 +3490,64 @@
         }
       }
     },
+	"/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.CustomerInsights/hubs/{hubName}/links/{linkName}/operations/{operation}": {
+      "get": {
+        "tags": [
+          "Links"
+        ],
+        "operationId": "Link_GetOperation",
+        "x-ms-examples": {
+          "Link_GetOperation": {
+            "$ref": "./examples/LinkGetOperation.json"
+          }
+        },
+        "description": "Gets operation information about the specified Link.",
+        "parameters": [
+          {
+            "name": "resourceGroupName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the resource group."
+          },
+          {
+            "name": "hubName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the hub."
+          },
+          {
+            "name": "linkName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the link."
+          },
+          {
+            "name": "operation",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "the operation id."
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK. Successfully get the link operation.",
+            "schema": {
+              "$ref": "#/definitions/LinkResourceFormat"
+            }
+          }
+        }
+      }
+    },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.CustomerInsights/hubs/{hubName}/roles": {
       "get": {
         "tags": [
@@ -3179,7 +3915,247 @@
           }
         }
       }
-    }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.CustomerInsights/hubs/{hubName}/predictiveMatchPolicies": {
+      "get": {
+        "tags": [
+          "PredictiveMatch"
+        ],
+        "operationId": "PredictiveMatch_ListByHub",
+        "x-ms-examples": {
+          "PredictiveMatch_ListByHub": {
+            "$ref": "./examples/PredictiveMatchListByHub.json"
+          }
+        },
+        "description": "Gets all predictive match policies in the hub.",
+        "parameters": [
+          {
+            "name": "resourceGroupName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the resource group."
+          },
+          {
+            "name": "hubName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the hub."
+          },
+          {
+            "name": "locale-code",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "default": "en-us",
+            "description": "Locale of predictive match policy to retrieve, default is en-us."
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK. Successfully get all the predictive match policies in the hub.",
+            "schema": {
+              "$ref": "#/definitions/PredictiveMatchPolicyListResult"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+	"/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.CustomerInsights/hubs/{hubName}/predictiveMatchPolicies/{predictiveMatchPolicyName}": {
+      "put": {
+        "tags": [
+          "PredictiveMatch"
+        ],
+        "operationId": "PredictiveMatch_CreateOrUpdate",
+        "x-ms-examples": {
+          "PredictiveMatch_CreateOrUpdate": {
+            "$ref": "./examples/PredictiveMatchCreateOrUpdate.json"
+          }
+        },
+        "description": "Creates a predictive match within a Hub, or updates an existing predictive match.",
+        "parameters": [
+          {
+            "name": "resourceGroupName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the resource group."
+          },
+          {
+            "name": "hubName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the hub."
+          },
+          {
+            "name": "predictiveMatchPolicyName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the predictive match policy.",
+            "pattern": "^[a-zA-Z][a-zA-Z0-9_]+$",
+            "minLength": 1,
+            "maxLength": 128
+          },
+          {
+            "name": "parameters",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/PredictiveMatchPolicyResourceFormat"
+            },
+            "description": "Parameters supplied to the create/delete predictive match policy type operation"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK. Successfully created the predictive match policy.",
+            "schema": {
+              "$ref": "#/definitions/PredictiveMatchPolicyResourceFormat"
+            }
+          },
+          "202": {
+            "description": "Accepted. The create predictive match policy operation is accepted."
+          }
+        },
+        "x-ms-long-running-operation": true
+      },
+      "get": {
+        "tags": [
+          "PredictiveMatch"
+        ],
+        "operationId": "PredictiveMatch_Get",
+        "x-ms-examples": {
+          "PredictiveMatch_Get": {
+            "$ref": "./examples/PredictiveMatchGet.json"
+          }
+        },
+        "description": "Gets information about the specified predictive match.",
+        "parameters": [
+          {
+            "name": "resourceGroupName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the resource group."
+          },
+          {
+            "name": "hubName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the hub."
+          },
+          {
+            "name": "predictiveMatchPolicyName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the predictive match policy."
+          },
+          {
+            "name": "locale-code",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "default": "en-us",
+            "description": "Locale of predictive match policy to retrieve, default is en-us."
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK. Successfully get the predictive match policy.",
+            "schema": {
+              "$ref": "#/definitions/PredictiveMatchPolicyResourceFormat"
+            }
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "PredictiveMatch"
+        ],
+        "operationId": "PredictiveMatch_Delete",
+        "x-ms-examples": {
+          "PredictiveMatch_Delete": {
+            "$ref": "./examples/PredictiveMatchDelete.json"
+          }
+        },
+        "description": "Deletes a predictive match within a hub",
+        "parameters": [
+          {
+            "name": "resourceGroupName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the resource group."
+          },
+          {
+            "name": "hubName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the hub."
+          },
+          {
+            "name": "predictiveMatchPolicyName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the profile."
+          },
+          {
+            "name": "locale-code",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "default": "en-us",
+            "description": "Locale of predictive match policy to retrieve, default is en-us."
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK. The predictive match policy is deleted."
+          },
+          "202": {
+            "description": "Accepted. The delete operation is accepted."
+          },
+          "204": {
+            "description": "NoContent. Successfully requested delete operation, but the response is intentionally empty."
+          }
+        },
+        "x-ms-long-running-operation": true
+      }
+	}
   },
   "definitions": {
     "HubBillingInfoFormat": {
@@ -5679,6 +6655,415 @@
           }
         }
       }
+    },
+	"SuggestTypeSchemaActionInput": {
+		"type": "object",
+		"properties": {
+			"sampleData":{
+				"type": "string",
+				"description": "sample data."
+			},
+			"columnDelimiter": {
+				"type": "string",
+				"description": "the column delimiter."
+			}
+		},
+		"description": "the Suggest Type Schema Action Input."
+	},
+	"SuggestTypeSchemaActionResult": {
+	  "description": "Result of the request to get type schema for a hub.",
+      "properties": {
+        "value": {
+          "description": "List of type schemas supported in a hub.",
+          "type": "array",
+          "readOnly": true,
+          "items": {
+            "$ref": "#/definitions/PropertyDefinition"
+          }
+        }
+      }
+	},
+	"CrmDiscoverEntitySetting":{
+		"type": "object",
+		"properties": {
+			"accessToken":{
+				"type": "string",
+				"description": "the access token."
+			},
+			"refreshToken": {
+				"type": "string",
+				"description": "the refresh token."
+			},
+			"appName": {
+				"type": "string",
+				"description": "the app name."
+			},
+			"authCode": {
+				"type": "string",
+				"description": "the authentication code."
+			},
+			"clientId": {
+				"type": "string",
+				"description": "the client id."
+			},
+			"redirectUri": {
+				"type": "string",
+				"description": "the redirect url."
+			}
+		}
+	},
+	"CrmOrganization":{
+		"type": "object",
+		"properties": {
+			"connectorUrl":{
+				"type": "string",
+				"description": "the connector url."
+			},
+			"organizationId": {
+				"type": "string",
+				"description": "the organization Id."
+			},
+			"organizationName": {
+				"type": "string",
+				"description": "the organization name."
+			},
+			"organizationUrl": {
+				"type": "string",
+				"description": "the organization url."
+			}
+		},
+		"description": "the crm organization."
+	},
+	"CrmEntities":{
+		"type": "object",
+		"properties": {
+			"displayName":{
+				"type": "string",
+				"description": "the display name."
+			},
+			"isActivity": {
+				"type": "boolean",
+				"description": "the is activity flag."
+			},
+			"logicalName": {
+				"type": "string",
+				"description": "the logical name."
+			}
+		},
+		"description": "the crm entities."
+	},
+	"RpError":{
+		"description": "Error response in RP",
+		"type": "object",
+		"properties": {
+			"error":{
+				"type": "object",
+				"properties": {
+					"message":{
+						"type": "string",
+						"description": "the error message."
+					}
+				},
+				"description": "the error response."
+			}
+		}
+	},
+	"SegmentType": {
+	  "type": "string",
+	  "enum": [
+		"Dynamic",
+		"Static"
+	  ],
+	  "x-ms-enum": {
+		"name": "SegmentTypes",
+		"modelAsString": false
+	  },
+	  "description": "Type of segment."
+	},
+	"SegmentDefinition": {
+	  "description": "The Segment Definition.",
+      "properties": {
+			"description": {
+				"type": "string",
+				"description": "the segment Description."
+			},
+			"targetProfileTypeName": {
+				"type": "string",
+				"description": "the target profile type name."
+			},
+			"tags": {
+				"type": "array",
+				"items":{
+					"type": "string"					
+				},
+				"description": "the segment tags."
+			}
+		}
+	},
+	"SegmentState":{
+		"description": "The Segment state.",
+		"properties": {
+			"segmentSize": {
+				"type": "number",
+				"description": "the segment size."
+			}
+		}
+	},
+	"SegmentProvisioningState": {
+	  "type": "string",
+	  "enum": [
+		"Provisioning",
+		"Provisioned",
+		"Deleting",
+		"Deleted",
+		"Failed"
+	  ],
+	  "x-ms-enum": {
+		"name": "SegmentProvisioningState",
+		"modelAsString": false
+	  },
+	  "description": "Segment provisioning state."
+	},
+	"SegmentSystemData":{
+	  "description": "The Segment system data.",
+      "properties": {
+			"innerKpiName": {
+				"type": "string",
+				"description": "the inner kpi name."
+			},
+			"kpiOnKpiName": {
+				"type": "string",
+				"description": "the kpi on kpi name."
+			}
+		}
+	},
+	"SegmentTypeDefinition": {
+      "description": "The Segment Type Definition.",
+      "properties": {
+		"tenantId": {
+			"type": "string",
+			"description": "the tenant id."
+		},
+		"name": {
+			"type": "string",
+			"description": "the segment name."
+		},
+		"segmentId": {
+			"type": "string",
+			"description": "the segment guid."
+		},
+		"changed": {
+			"type": "string",
+			"description": "the last changed time."
+		},
+		"created": {
+			"type": "string",
+			"description": "the created time."
+		},
+		"version": {
+			"type": "number",
+			"description": "the current version."
+		},
+        "segmentType": {
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/SegmentType",
+          "description": "the segment type."
+        },
+		"segmentDefinition": {
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/SegmentDefinition",
+          "description": "the segment definition."
+        },
+		"segmentState": {
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/SegmentState",
+          "description": "the segment state."
+        },
+		"provisioningState": {
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/SegmentProvisioningState",
+          "description": "the segment provisioning state."
+        },
+		"segmentSystemData": {
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/SegmentSystemData",
+          "description": "the segment system data."
+        }
+      }
+    },
+	"SegmentResourceFormat": {
+      "description": "The segment resource format.",
+      "properties": {
+        "properties": {
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/SegmentTypeDefinition"
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "#/definitions/ProxyResource"
+        }
+      ]
+    },
+	"SegmentListResult": {
+      "properties": {
+        "value": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/SegmentResourceFormat"
+          },
+          "description": "Results of the list operation."
+        },
+        "nextLink": {
+          "type": "string",
+          "description": "Link to the next set of results."
+        }
+      },
+      "description": "The response of list segment operation."
+    },
+	"MatchPolicyPropertyMappingMatchHint": {
+	  "type": "string",
+	  "enum": [
+		"Name",
+		"Email",
+		"Address",
+		"Phone",
+		"OrganizationName",
+		"WebDomain",
+		"Title",
+		"Default"
+	  ],
+	  "x-ms-enum": {
+		"name": "MatchPolicyPropertyMappingMatchHint",
+		"modelAsString": false
+	  },
+	  "description": "Different match hint for match policy property mapping."
+	},
+	"MatchPolicyPropertyMapping": {
+		"type": "object",
+		"properties": {
+			"alternateTypePropertyNames": {
+				"type": "array",
+				"items": {
+				  "type": "string"
+				}
+			},
+          "primaryTypePropertyNames": {
+				"type": "array",
+				"items": {
+				  "type": "string"
+				}
+          },
+		  "matchHint":{
+			  "x-ms-client-flatten": true,
+			  "$ref": "#/definitions/MatchPolicyPropertyMappingMatchHint",
+			  "description": "the match policy property mapping match hint type."
+		  }
+		}
+	},
+	"PredictiveMatchPolicyDefinition": {
+      "description": "The predictive match policy type definition.",
+      "properties": {
+          "alternateTypeName": {
+			"type": "string"
+		  },
+		  "alternateType": {
+			  "type": "string",
+			  "enum": [
+				"None",
+				"Profile",
+				"Interaction",
+				"Relationship"
+			  ],
+			  "x-ms-enum": {
+				"name": "EntityTypes",
+				"modelAsString": false
+			  },
+			  "description": "alternateType."
+			},
+		  "predictiveMatchPolicyName": {
+			"type": "string"
+		  },
+		  "description": {
+			"type": "object",
+			"additionalProperties": {
+			  "type": "string"
+			}
+		  },
+		  "displayName": {
+			"type": "object",
+			"additionalProperties": {
+			  "type": "string"
+			}
+		  },
+		  "mappings": {
+			"type": "object",
+			"schema": {
+				"$ref": "#/definitions/MatchPolicyPropertyMapping"
+			}
+		  },
+		  "primaryTypeName": {
+			"type": "string"
+		  },
+		  "provisioningState": {
+			"x-ms-client-flatten": true,
+			"$ref": "#/definitions/ProvisioningState"
+		  },
+		  "tenantId": {
+			"type": "string"
+		  },
+		  "matchThreshold": {
+			"type": "integer"
+		  },
+		  "isRecurring": {
+			"type": "boolean"
+		  },
+		  "topMatchResultsCount": {
+			"type": "integer"
+		  },
+		  "alternateTypeResolutionId": {
+			"type": "array",
+			"Item": {
+			  "type": "string"
+			}		
+		  },
+		  "lastMatchTime": {
+			"type": "string"
+		  },
+		  "relationshipName": {
+			"type": "string"
+		  }
+      }
+    },
+    "PredictiveMatchPolicyResourceFormat": {
+      "description": "The predictive match policy resource format.",
+      "properties": {
+        "properties": {
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/PredictiveMatchPolicyDefinition"
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "#/definitions/ProxyResource"
+        }
+      ]
+    },
+    "PredictiveMatchPolicyListResult": {
+      "properties": {
+        "value": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/PredictiveMatchPolicyResourceFormat"
+          },
+          "description": "Results of the list operation."
+        },
+        "nextLink": {
+          "type": "string",
+          "description": "Link to the next set of results."
+        }
+      },
+      "description": "The response of list predictive match policy operation."
     }
   },
   "parameters": {
