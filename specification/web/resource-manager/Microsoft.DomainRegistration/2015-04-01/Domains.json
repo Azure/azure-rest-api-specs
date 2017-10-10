@@ -1165,28 +1165,29 @@
           }
         },
         "identity": {
-          "description": "Managed service identity.",
+          "description": "Identity for the resource.",
           "type": "object",
           "properties": {
+            "principalId": {
+              "description": "The principal ID of resource identity.",
+              "type": "string",
+              "readOnly": true
+            },
+            "tenantId": {
+              "description": "The tenant ID of resource.",
+              "type": "string",
+              "readOnly": true
+            },
             "type": {
-              "description": "Type of managed service identity.",
+              "description": "The identity type.",
+              "type": "string",
               "enum": [
                 "SystemAssigned"
               ],
               "x-ms-enum": {
                 "name": "ManagedServiceIdentityType",
-                "modelAsString": true
+                "modelAsString": false
               }
-            },
-            "tenantId": {
-              "description": "Tenant of managed service identity.",
-              "type": "string",
-              "readOnly": true
-            },
-            "principalId": {
-              "description": "Principal Id of managed service identity.",
-              "type": "string",
-              "readOnly": true
             }
           }
         }
