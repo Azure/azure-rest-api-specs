@@ -2,7 +2,7 @@
   "swagger": "2.0",
   "info": {
     "title": "MonitorClient",
-    "version": "2017-05-01-preview"
+    "version": "2016-03-01"
   },
   "host": "management.azure.com",
   "schemes": [
@@ -46,6 +46,13 @@
           },
           {
             "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "name": "$filter",
+            "in": "query",
+            "type": "string",
+            "description": "Reduces the set of data collected by retrieving particular metric definitions from all the definitions available for the resource.<br>For example, to get just the definition for the 'CPU percentage' counter: $filter=name.value eq '\\Processor(_Total)\\% Processor Time'.<br>Multiple metrics can be retrieved by joining together *'name eq <value>'* clauses separated by *or* logical operators.<br>**NOTE**: No other syntax is allowed.",
+            "required": false
           }
         ],
         "responses": {
@@ -62,86 +69,79 @@
             },
             "examples": {
               "application/json": {
-                "value": [{
-                    "id": "/subscriptions/07c0b09d-9f69-4e6e-8d05-f59f67299cb2/resourceGroups/Rac46PostSwapRG/providers/Microsoft.Web/sites/alertruleTest/providers/microsoft.insights/metricdefinitions/CpuTime",
-                    "resourceId": "/subscriptions/07c0b09d-9f69-4e6e-8d05-f59f67299cb2/resourceGroups/Rac46PostSwapRG/providers/Microsoft.Web/sites/alertruleTest",
+                "value":[
+                  {
+                    "resourceId":"/subscriptions/df602c9c-7aa0-407d-a6fb-eb20c8bd1192/resourceGroups/andy0802australia/providers/Microsoft.Logic/workflows/andy0803australia",
                     "name": {
-                      "value": "CpuTime",
-                      "localizedValue": "CPU Time"
+                      "value":"RunsStarted",
+                      "localizedValue":"Runs Started"
                     },
-                    "isDimensionRequired": false,
-                    "unit": "Seconds",
-                    "primaryAggregationType": "Total",
-                    "metricAvailabilities": [{
-                        "timeGrain": "PT1M",
-                        "retention": "P30D"
-                      }, {
-                        "timeGrain": "PT1H",
-                        "retention": "P30D"
+                    "unit":"Count",
+                    "primaryAggregationType":"Total",
+                    "metricAvailabilities":[
+                      {
+                        "timeGrain":"PT1M",
+                        "retention":"P30D"
+                      },
+                      {
+                        "timeGrain":"PT1H",
+                        "retention":"P30D"
                       }
                     ],
-                    "dimensions": [{
-                        "value": "Instance",
-                        "localizedValue": "Instance"
-                      }
-                    ]
-                  }, {
-                    "id": "/subscriptions/07c0b09d-9f69-4e6e-8d05-f59f67299cb2/resourceGroups/Rac46PostSwapRG/providers/Microsoft.Web/sites/alertruleTest/providers/microsoft.insights/metricdefinitions/MemoryWorkingSet",
-                    "resourceId": "/subscriptions/07c0b09d-9f69-4e6e-8d05-f59f67299cb2/resourceGroups/Rac46PostSwapRG/providers/Microsoft.Web/sites/alertruleTest",
+                    "id":"/subscriptions/df602c9c-7aa0-407d-a6fb-eb20c8bd1192/resourceGroups/andy0802australia/providers/Microsoft.Logic/workflows/andy0803australia/providers/microsoft.insights/metricdefinitions/RunsStarted"
+                  },
+                  {
+                    "resourceId":"/subscriptions/df602c9c-7aa0-407d-a6fb-eb20c8bd1192/resourceGroups/andy0802australia/providers/Microsoft.Logic/workflows/andy0803australia",
                     "name": {
-                      "value": "MemoryWorkingSet",
-                      "localizedValue": "Memory working set"
+                      "value":"RunsCompleted",
+                      "localizedValue":"Runs Completed"
                     },
-                    "isDimensionRequired": false,
-                    "unit": "Bytes",
-                    "primaryAggregationType": "Average",
-                    "metricAvailabilities": [{
-                        "timeGrain": "PT1M",
-                        "retention": "P30D"
-                      }, {
-                        "timeGrain": "PT1H",
-                        "retention": "P30D"
+                    "unit":"Count",
+                    "primaryAggregationType":"Total",
+                    "metricAvailabilities": [
+                      {
+                        "timeGrain":"PT1M",
+                        "retention":"P30D"
+                      },
+                      {
+                        "timeGrain":"PT1H",
+                        "retention":"P30D"
                       }
                     ],
-                    "dimensions": [{
-                        "value": "Instance",
-                        "localizedValue": "Instance"
-                      }
-                    ]
-                  }, {
-                    "id": "/subscriptions/07c0b09d-9f69-4e6e-8d05-f59f67299cb2/resourceGroups/Rac46PostSwapRG/providers/Microsoft.Web/sites/alertruleTest/providers/microsoft.insights/metricdefinitions/AverageMemoryWorkingSet",
-                    "resourceId": "/subscriptions/07c0b09d-9f69-4e6e-8d05-f59f67299cb2/resourceGroups/Rac46PostSwapRG/providers/Microsoft.Web/sites/alertruleTest",
+                    "id":"/subscriptions/df602c9c-7aa0-407d-a6fb-eb20c8bd1192/resourceGroups/andy0802australia/providers/Microsoft.Logic/workflows/andy0803australia/providers/microsoft.insights/metricdefinitions/RunsCompleted"
+                  },
+                  {
+                    "resourceId":"/subscriptions/df602c9c-7aa0-407d-a6fb-eb20c8bd1192/resourceGroups/andy0802australia/providers/Microsoft.Logic/workflows/andy0803australia",
                     "name": {
-                      "value": "AverageMemoryWorkingSet",
-                      "localizedValue": "Average memory working set"
+                      "value":"RunsSucceeded",
+                      "localizedValue":"Runs Succeeded"
                     },
-                    "isDimensionRequired": false,
-                    "unit": "Bytes",
-                    "primaryAggregationType": "Average",
-                    "metricAvailabilities": [{
-                        "timeGrain": "PT1M",
-                        "retention": "P30D"
-                      }, {
-                        "timeGrain": "PT1H",
-                        "retention": "P30D"
+                    "unit":"Count",
+                    "primaryAggregationType":"Total",
+                    "metricAvailabilities": [
+                      {
+                        "timeGrain":"PT1M",
+                        "retention":"P30D"
+                      },
+                      {
+                        "timeGrain":"PT1H",
+                        "retention":"P30D"
                       }
                     ],
-                    "dimensions": [{
-                        "value": "Instance",
-                        "localizedValue": "Instance"
-                      }
-                    ]
+                    "id":"/subscriptions/df602c9c-7aa0-407d-a6fb-eb20c8bd1192/resourceGroups/andy0802australia/providers/Microsoft.Logic/workflows/andy0803australia/providers/microsoft.insights/metricdefinitions/RunsSucceeded"
                   }
                 ]
-              } 
+              }
             }
           }
         },
         "x-ms-pageable": {
           "nextLinkName": null
         },
+        "x-ms-odata": "#/definitions/MetricDefinition",
         "x-ms-examples": {
-          "Get Metric Definitions without filter": { "$ref": "./examples/GetMetricDefinitions.json" }
+          "Get Metric Definitions without filter": { "$ref": "./examples/GetMetricDefinitions.json" },
+          "Get Metric Definitions with filter": { "$ref": "./examples/GetMetricDefinitionsFiltered.json" }
         }
       }
     }
@@ -186,9 +186,7 @@
         "CountPerSecond",
         "BytesPerSecond",
         "Percent",
-        "MilliSeconds",
-        "ByteSeconds",
-        "Unspecified"
+        "MilliSeconds"
       ],
       "x-ms-enum": {
         "name": "Unit",
@@ -197,10 +195,6 @@
     },
     "MetricDefinition": {
       "properties": {
-        "isDimensionRequired": {
-          "type": "boolean",
-          "description": "Flag to indicate whether the dimension is required."
-        },
         "resourceId": {
           "type": "string",
           "description": "the resource identifier of the resource that emitted the metric."
@@ -239,13 +233,6 @@
         "id": {
           "type": "string",
           "description": "the resource identifier of the metric definition."
-        },
-        "dimensions": {
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/LocalizableString"
-          },
-          "description": "the name and the display name of the dimension, i.e. it is a localizable string."
         }
       },
       "description": "Metric definition class specifies the metadata for a metric."
