@@ -22,7 +22,7 @@ To see additional help and options, run:
 
 
 ### Basic Information 
-These are the global settings for the AnalysisServices API.
+These are the global settings for the PowerBIDedicated API.
 
 ``` yaml
 openapi-type: arm
@@ -34,9 +34,9 @@ tag: package-2017-10-01
 
 These settings apply only when `--tag=package-2017-10-01` is specified on the command line.
 
-``` yaml $(tag) == package-2017-10-01'
+``` yaml $(tag) == 'package-2017-10-01'
 input-file:
-- Microsoft.PowerBIDedicated/package-2017-10-01/powerbidedicated.json
+- Microsoft.PowerBIDedicated/2017-10-01/powerbidedicated.json
 ```
 
 ---
@@ -52,7 +52,7 @@ csharp:
   azure-arm: true
   license-header: MICROSOFT_MIT_NO_VERSION
   namespace: Microsoft.Azure.Management.PowerBIDedicated
-  output-folder: $(csharp-sdks-folder)/AnalysisServices/Management.PowerBIDedicated/Generated
+  output-folder: $(csharp-sdks-folder)/PowerBIDedicated/Management.PowerBIDedicated/Generated
   clear-output-folder: true
 ```
 
