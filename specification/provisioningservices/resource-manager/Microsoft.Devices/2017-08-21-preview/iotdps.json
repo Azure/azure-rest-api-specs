@@ -511,12 +511,7 @@
      "200": {
       "description": "OK",
       "schema": {
-       "value": {
-        "type": "array",
-        "items": {
-         "$ref": "#/definitions/CertificateResponse"
-        }
-       }
+       "$ref": "#/definitions/CertificateListDescription"
       }
      },
      "default": {
@@ -1111,6 +1106,19 @@
     }
    }
   },
+  "CertificateListDescription": {
+   "description": "The JSON-serialized array of Certificate objects.",
+   "type": "object",
+   "properties": {
+    "value": {
+     "description": "The array of Certificate objects.",
+     "type": "array",
+     "items": {
+      "$ref": "#/definitions/CertificateResponse"
+     }
+    }
+   }
+  },
   "CertificateBodyDescription": {
    "description": "The JSON-serialized X509 Certificate.",
    "type": "object",
@@ -1234,8 +1242,6 @@
     }
    ],
    "required": [
-    "subscriptionid",
-    "resourcegroup",
     "sku"
    ]
   },
