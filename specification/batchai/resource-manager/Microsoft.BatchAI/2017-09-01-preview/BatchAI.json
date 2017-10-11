@@ -58,7 +58,7 @@
           }
         },
         "x-ms-pageable": {
-          "nextLinkName": null
+          "nextLinkName": "nextLink"
         },
         "x-ms-examples": {
           "List of available operations for Batch AI Resource Provider": {
@@ -236,7 +236,7 @@
         ],
         "responses": {
           "200": {
-            "description": "The operation was successful. The response contains the Batch AI cluster.",
+            "description": "The operation was successful. The response contains information abouth the cluster.",
             "schema": {
               "$ref": "#/definitions/Cluster"
             }
@@ -306,7 +306,7 @@
           "Cluster"
         ],
         "operationId": "Clusters_List",
-        "description": "Gets information about the Batch AI Clusters associated with the subscription.",
+        "description": "Gets information about the Clusters associated with the subscription.",
         "parameters": [
           {
             "$ref": "#/parameters/FilterParameter"
@@ -326,7 +326,7 @@
         ],
         "responses": {
           "200": {
-            "description": "The operation was successful. The response contains a list of Batch AI Cluster entities associated with the subscription.",
+            "description": "The operation was successful. The response contains a list of Cluster entities associated with the subscription.",
             "schema": {
               "$ref": "#/definitions/ClusterListResult"
             }
@@ -354,7 +354,7 @@
           "Cluster"
         ],
         "operationId": "Clusters_ListByResourceGroup",
-        "description": "Gets information about the Batch AI Clusters associated within the specified resource group.",
+        "description": "Gets information about the Clusters associated within the specified resource group.",
         "parameters": [
           {
             "$ref": "#/parameters/ResourceGroupNameParameter"
@@ -377,7 +377,7 @@
         ],
         "responses": {
           "200": {
-            "description": "The operation was successful. The response contains a list of Batch AI Cluster entities associated with the resource group.",
+            "description": "The operation was successful. The response contains a list of Cluster entities associated with the resource group.",
             "schema": {
               "$ref": "#/definitions/ClusterListResult"
             }
@@ -632,7 +632,7 @@
           "Job"
         ],
         "operationId": "Jobs_List",
-        "description": "Gets information about the Batch AI jobs associated with the subscription.",
+        "description": "Gets information about the jobs associated with the subscription.",
         "parameters": [
           {
             "$ref": "#/parameters/FilterParameter"
@@ -703,7 +703,7 @@
         ],
         "responses": {
           "200": {
-            "description": "The operation was successful. The response contains a list of Batch AI job entities associated with the resource group.",
+            "description": "The operation was successful. The response contains a list of Job entities associated with the resource group.",
             "schema": {
               "$ref": "#/definitions/JobListResult"
             }
@@ -731,7 +731,7 @@
           "Job"
         ],
         "operationId": "Jobs_ListOutputFiles",
-        "description": "List all files inside the given output directory (Only if the output directory is on Azure File Share).",
+        "description": "List all files inside the given output directory (Only if the output directory is on Azure File Share or Azure Storage container).",
         "parameters": [
           {
             "$ref": "#/parameters/ResourceGroupNameParameter"
@@ -899,7 +899,7 @@
         ],
         "responses": {
           "200": {
-            "description": "The operation was successful. The response contains the Batch AI cluster.",
+            "description": "The operation was successful. The response contains information about the FileServer.",
             "schema": {
               "$ref": "#/definitions/FileServer"
             }
@@ -1053,7 +1053,7 @@
           "items": {
             "$ref": "#/definitions/FileServer"
           },
-          "description": "The collection of returned file servers."
+          "description": "The collection of File Servers."
         },
         "nextLink": {
           "type": "string",
@@ -1068,7 +1068,7 @@
           "type": "integer",
           "format": "int32",
           "readOnly": false,
-          "title": "initial disk size in GB for blank data disks, and the new desired size for resizing existing OS and data disks."
+          "title": "Initial disk size in GB for blank data disks, and the new desired size for resizing existing data disks."
         },
         "cachingType": {
           "type": "string",
@@ -1077,8 +1077,8 @@
           "default": "none",
           "enum": [
             "none",
-            "readOnly",
-            "readWrite"
+            "readonly",
+            "readwrite"
           ],
           "x-ms-enum": {
             "name": "CachingType",
@@ -1110,7 +1110,7 @@
         "diskCount",
         "storageAccountType"
       ],
-      "description": "Settings for the data disk which would be created for the file server."
+      "description": "Settings for the data disk which would be created for the File Server."
     },
     "KeyVaultSecretReference": {
       "properties": {
@@ -1154,7 +1154,7 @@
         },
         "fileServerPublicIP": {
           "type": "string",
-          "title": "Public IP which can be used to access the file Server VM."
+          "title": "Public IP of the File Server VM."
         },
         "fileServerInternalIP": {
           "type": "string",
@@ -1173,7 +1173,7 @@
           }
         }
       },
-      "description": "Details of the file Server."
+      "description": "Details of the File Server."
     },
     "SshConfiguration": {
       "properties": {
@@ -1182,7 +1182,7 @@
           "items": {
             "type": "string"
           },
-          "title": "List of source IPs range which would be allowed to perform SSH with the VMs.",
+          "title": "List of source IP ranges to allow SSH connection to VM.",
           "description": "Default value is '*' can be used to match all source IPs. Maximum number of publicIPs that can be specified are 400."
         },
         "userAccountSettings": {
@@ -1199,18 +1199,18 @@
       "properties": {
         "location": {
           "type": "string",
-          "description": "The region in which to create the cluster."
+          "description": "The region in which to create the File Server."
         },
         "tags": {
           "type": "object",
           "additionalProperties": {
             "type": "string"
           },
-          "description": "The user specified tags associated with the cluster."
+          "description": "The user specified tags associated with the File Server."
         },
         "properties": {
           "$ref": "#/definitions/FileServerBaseProperties",
-          "description": "The properties of the file server.",
+          "description": "The properties of the File Server.",
           "x-ms-client-flatten": true
         }
       },
@@ -1223,15 +1223,15 @@
       "properties": {
         "vmSize": {
           "type": "string",
-          "title": "The size of the virtual machine of the file server.",
-          "description": "For information about available VM sizes for fileservers from the Virtual Machines Marketplace, see Sizes for Virtual Machines (Linux)."
+          "title": "The size of the virtual machine of the File Server.",
+          "description": "For information about available VM sizes for File Server from the Virtual Machines Marketplace, see Sizes for Virtual Machines (Linux)."
         },
         "sshConfiguration": {
-          "title": "SSH settings for the file server.",
+          "title": "SSH settings for the File Server.",
           "$ref": "#/definitions/SshConfiguration"
         },
         "dataDisks": {
-          "title": "Settings for the data disk which would be created for the file server.",
+          "title": "Settings for the data disk which would be created for the File Server.",
           "$ref": "#/definitions/DataDisks"
         },
         "subnet": {
@@ -1239,7 +1239,7 @@
           "$ref": "#/definitions/ResourceId"
         },
         "mountSettings": {
-          "title": "Details of the file Server.",
+          "title": "Details of the File Server.",
           "readOnly": true,
           "$ref": "#/definitions/MountSettings"
         },
@@ -1259,8 +1259,8 @@
           "type": "string",
           "readOnly": true,
           "x-nullable": false,
-          "title": "Specifies the provisioning state of the file server.",
-          "description": "Possible values: creating - The fileServer is just getting created. Updating - The file server creation has been accepted and it is getting updated. Deleting - The user has requested that the cluster be deleted, but the delete operation has not yet completed. Failed - The file server creation has failed with the specified errorCode. Details about the error code are specified in the message field. Succeeded - The file server creation has succeeded.",
+          "title": "Specifies the provisioning state of the File Server.",
+          "description": "Possible values: creating - The File Server is getting created. updating - The File Server creation has been accepted and it is getting updated. deleting - The user has requested that the File Server be deleted, and it is in the process of being deleted. failed - The File Server creation has failed with the specified errorCode. Details about the error code are specified in the message field. succeeded - The File Server creation has succeeded.",
           "enum": [
             "creating",
             "updating",
@@ -1272,59 +1272,16 @@
             "name": "FileServerProvisioningState",
             "modelAsString": false
           }
-        },
-        "statuses": {
-          "type": "array",
-          "readOnly": true,
-          "items": {
-            "$ref": "#/definitions/FileServerStatus"
-          },
-          "title": "Captures file server status."
         }
       },
       "description": "File server specific properties."
-    },
-    "FileServerStatus": {
-      "properties": {
-        "code": {
-          "type": "string",
-          "readOnly": true,
-          "x-nullable": false,
-          "title": "Status Type and Status Code",
-          "description": "Status Type and Status Code: PowerState/Creating - The fileServer is just getting created. PowerState/Running - The file server has been created and is available to be used. PowerState/Suspended - The file Server has been suspended. PowerState/Suspending. The user has requested that the file Server to be suspended, but the deallocation operation has not yet completed. PowerState/Deleting - The user has requested that the cluster be deleted, but the delete operation has not yet completed. PowerState/Failed/ErrorCode - The file server creation has failed with the specified errorCode. Details about the error code are specified in the message field.",
-          "enum": [
-            "PowerState/Creating",
-            "PowerState/Running",
-            "PowerState/Suspended",
-            "PowerState/Suspending",
-            "PowerState/Deleting",
-            "PowerState/Failed/ErrorCode"
-          ],
-          "x-ms-enum": {
-            "name": "Code",
-            "modelAsString": true
-          }
-        },
-        "transitionTime": {
-          "type": "string",
-          "readOnly": true,
-          "format": "date-time",
-          "title": "State transition time for the status changed."
-        },
-        "message": {
-          "type": "string",
-          "readOnly": true,
-          "title": "Detailed message about the status."
-        }
-      },
-      "description": "Status of the file server."
     },
     "FileServer": {
       "properties": {
         "properties": {
           "x-ms-client-flatten": true,
           "$ref": "#/definitions/FileServerProperties",
-          "description": "The properties associated with the file server."
+          "description": "The properties associated with the File Server."
         }
       },
       "allOf": [
@@ -1332,7 +1289,7 @@
           "$ref": "#/definitions/Resource"
         }
       ],
-      "description": "Contains information about an Azure Batch AI file server."
+      "description": "Contains information about the File Server."
     },
     "ClusterBaseProperties": {
       "properties": {
@@ -1343,12 +1300,12 @@
         },
         "vmPriority": {
           "type": "string",
-          "title": "dedicated or lowPriority.",
+          "title": "dedicated or lowpriority.",
           "description": "Default is dedicated.",
           "default": "dedicated",
           "enum": [
             "dedicated",
-            "lowPriority"
+            "lowpriority"
           ],
           "x-ms-enum": {
             "name": "VmPriority",
@@ -1357,7 +1314,7 @@
         },
         "scaleSettings": {
           "$ref": "#/definitions/ScaleSettings",
-          "title": "Desired scale for the cluster"
+          "title": "Desired scale for the cluster."
         },
         "virtualMachineConfiguration": {
           "title": "Settings for OS image and mounted data volumes.",
@@ -1368,19 +1325,19 @@
           "$ref": "#/definitions/NodeSetup"
         },
         "userAccountSettings": {
-          "title": "Settings for user account of compute nodes.",
+          "title": "Settings for user account that will be created on all compute nodes of the cluster.",
           "$ref": "#/definitions/UserAccountSettings"
         },
         "subnet": {
-          "title": "Specifies the identifier of the subnet.",
+          "title": "Specifies the identifier of the subnet. ",
           "$ref": "#/definitions/ResourceId"
         }
       },
       "required": [
-        "vmSize",
+        "vmSize",        
         "userAccountSettings"
       ],
-      "description": "The properties of a Batch AI Cluster."
+      "description": "The properties of a Cluster."
     },
     "ClusterUpdateProperties": {
       "properties": {
@@ -1389,7 +1346,7 @@
           "title": "Desired scale for the cluster"
         }
       },
-      "description": "The properties of a Batch AI Cluster that need to be updated."
+      "description": "The properties of a Cluster that need to be updated."
     },
     "DeallocationOption": {
       "type": "string",
@@ -1418,7 +1375,7 @@
           "title": "The scale for the cluster by autoscale settings"
         }
       },
-      "description": "Specifies the scale settings for the cluster. At least one of manual and autoScale settings must be specified. Only one of manual and autoScale settings can be specified."
+      "description": "At least one of manual or autoScale settings must be specified. Only one of manual or autoScale settings can be specified. If autoScale settings are specified, the system automatically scales the cluster up and down (within the supplied limits) based on the pending jobs on the cluster."
     },
     "AutoScaleSettings": {
       "properties": {
@@ -1436,26 +1393,26 @@
           "type": "integer",
           "format": "int32",
           "title": "Specifies the number of compute nodes to allocate on cluster creation. Note that this value is used only during cluster creation.",
-          "default" : 0
+          "default": 0
         }
       },
       "required": [
         "minimumNodeCount",
         "maximumNodeCount"
       ],
-      "description": "Specifies the autoscale settings for the cluster."
+      "description": "The system automatically scales the cluster up and down (within minimumNodeCount and maximumNodeCount) based on the pending and running jobs on the cluster."
     },
     "ManualScaleSettings": {
       "properties": {
         "targetNodeCount": {
           "type": "integer",
           "format": "int32",
-          "title": "The desired number of compute nodes in the cluster.",
+          "title": "The desired number of compute nodes in the Cluster.",
           "default": 0,
-          "description": "Default is 0. If autoScaleSettings are not specified, then the cluster starts with this target."
+          "description": "Default is 0. If autoScaleSettings are not specified, then the Cluster starts with this target."
         },
         "nodeDeallocationOption": {
-          "title": "Determines what to do with a compute node and its running task(s) if the cluster size is decreasing.",
+          "title": "Determines what to do with the job(s) running on compute node if the Cluster size is decreasing.",
           "description": "The default value is requeue.",
           "default": "requeue",
           "$ref": "#/definitions/DeallocationOption"
@@ -1473,17 +1430,17 @@
           "$ref": "#/definitions/ImageReference"
         }
       },
-      "description": "Settings for OS image and mounted data volumes."
+      "description": "Settings for OS image."
     },
     "ImageReference": {
       "properties": {
         "publisher": {
           "type": "string",
-          "title": "publisher of the image."
+          "title": "Publisher of the image."
         },
         "offer": {
           "type": "string",
-          "title": "offer of the image."
+          "title": "Offer of the image."
         },
         "sku": {
           "type": "string",
@@ -1491,7 +1448,7 @@
         },
         "version": {
           "type": "string",
-          "title": "version of the image"
+          "title": "Version of the image"
         }
       },
       "required": [
@@ -1546,30 +1503,30 @@
         },
         "adminUserSshPublicKey": {
           "type": "string",
-          "title": "SSH public keys used to authenticate with linux based VMs."
+          "title": "SSH public keys used to authenticate with linux based VMs. This does not get returned in a GET response body."
         },
         "adminUserPassword": {
           "type": "string",
-          "title": "Admin user Password (linux and windows)."
+          "title": "Admin user Password (linux only). This does not get returned in a GET response body."
         }
       },
       "required": [
         "adminUserName"
       ],
-      "description": "Settings for user account of VMs."
+      "description": "Settings for user account that gets created on each on the nodes of a cluster."
     },
     "NodeSetup": {
       "properties": {
         "setupTask": {
-          "title": "Specifies a setup task which can be used to customize the compute nodes of the cluster.",
+          "title": "Specifies a setup task which can be used to customize the compute nodes of the cluster. The NodeSetup task runs everytime a VM is rebooted. For that reason the task code needs to be idempotent. Generally it is used to either download static data that is required for all jobs that run on the cluster VMs or to download/install software.",
           "$ref": "#/definitions/SetupTask"
         },
         "mountVolumes": {
-          "title": "Information on shared volumes to be used for the job.",
+          "title": "Information on shared volumes to be used by jobs.",
           "$ref": "#/definitions/MountVolumes"
         }
       },
-      "description": "Setup to be done on all compute nodes in the cluster."
+      "description": "Use this to prepare the VM. NOTE: The volumes specified in mountVolumes are mounted first and then the setupTask is run. Therefore the setup task can use local mountPaths in its execution."
     },
     "SetupTask": {
       "properties": {
@@ -1591,7 +1548,7 @@
         },
         "stdOutErrPathPrefix": {
           "type": "string",
-          "description": "The path where the Batch AI service will upload stdout and stderror of setup task."
+          "description": "The path where the Batch AI service will upload the stdout and stderror of setup task."
         }
       },
       "required": [
@@ -1611,11 +1568,11 @@
           "additionalProperties": {
             "type": "string"
           },
-          "description": "The user specified tags associated with the cluster."
+          "description": "The user specified tags associated with the Cluster."
         },
         "properties": {
           "$ref": "#/definitions/ClusterBaseProperties",
-          "description": "The properties of the cluster.",
+          "description": "The properties of the Cluster.",
           "x-ms-client-flatten": true
         }
       },
@@ -1650,12 +1607,12 @@
         },
         "vmPriority": {
           "type": "string",
-          "title": "dedicated or low-Priority.",
-          "description": "Default is dedicated.",
+          "title": "dedicated or lowpriority.",
+          "description": "The default value is dedicated. The node can get preempted while the task is running if lowpriority is choosen. This is best suited if the workload is checkpointing and can be restarted.",
           "default": "dedicated",
           "enum": [
             "dedicated",
-            "lowPriority"
+            "lowpriority"
           ],
           "x-ms-enum": {
             "name": "VmPriority",
@@ -1664,14 +1621,14 @@
         },
         "scaleSettings": {
           "$ref": "#/definitions/ScaleSettings",
-          "title": "Desired scale for the cluster"
+          "title": "Desired scale for the Cluster."
         },
         "virtualMachineConfiguration": {
           "title": "Settings for OS image and mounted data volumes.",
           "$ref": "#/definitions/VirtualMachineConfiguration"
         },
         "nodeSetup": {
-          "title": "Setup to be done on all compute nodes in the cluster.",
+          "title": "Setup to be done on all compute nodes in the Cluster.",
           "$ref": "#/definitions/NodeSetup"
         },
         "userAccountSettings": {
@@ -1766,7 +1723,7 @@
           "$ref": "#/definitions/Resource"
         }
       ],
-      "description": "Contains information about an Azure Batch AI Cluster."
+      "description": "Contains information about a Cluster."
     },
     "ClusterListResult": {
       "properties": {
@@ -1782,7 +1739,7 @@
           "description": "The continuation token."
         }
       },
-      "description": "Values returned by the List operation."
+      "description": "Values returned by the List Clusters operation."
     },
     "JobBaseProperties": {
       "properties": {
@@ -1837,7 +1794,7 @@
           "$ref": "#/definitions/CustomToolkitSettings"
         },
         "jobPreparation": {
-          "title": "Specifies the actions to be performed before tool kit is launched.",
+          "title": "Specifies the command line to be executed before tool kit is launched.",
           "description" : "The specified actions will run on all the nodes that are part of the job",
           "$ref": "#/definitions/JobPreparation"
         },
@@ -1993,7 +1950,7 @@
             "$ref": "#/definitions/EnvironmentSetting"
           },
           "title": "Additional environment variables to be passed to the job.",
-          "description": "Batch AI services sends the following environment variables for all jobs: AZ_BATCHAI_INPUT_id, AZ_BATCHAI_OUTPUT_id, AZ_BATCHAI_NUM_GPUS_PER_NODE, For distributed TensorFlow jobs, following additional environment variables are set by the Batch AI Service: AZ_BATCHAI_PS_HOSTS, AZ_BATCHAI_WORKER_HOSTS"
+          "description": "Batch AI services sets the following environment variables for all jobs: AZ_BATCHAI_INPUT_id, AZ_BATCHAI_OUTPUT_id, AZ_BATCHAI_NUM_GPUS_PER_NODE, For distributed TensorFlow jobs, following additional environment variables are set by the Batch AI Service: AZ_BATCHAI_PS_HOSTS, AZ_BATCHAI_WORKER_HOSTS."
         },
         "constraints": {
           "properties": {
@@ -2109,7 +2066,7 @@
           "$ref": "#/definitions/Resource"
         }
       ],
-      "description": "Contains information about an Azure Batch AI job."
+      "description": "Contains information about the job."
     },
     "JobListResult": {
       "properties": {
@@ -2233,7 +2190,7 @@
       "required": [
         "id"
       ],
-      "description": "A definition of a resource ID.",
+      "description": "Represents a resource ID. For example, for a subnet, it is the resource URL for the subnet.",
       "x-ms-azure-resource": true
     },
     "Resource": {
@@ -2313,7 +2270,7 @@
       "required": [
         "name"
       ],
-      "description": "An environment variable to be set on a job."
+      "description": "A collection of environment variables to set."
     },
     "LocalDataVolume": {
       "properties": {
@@ -2475,7 +2432,7 @@
           "type": "string",
           "title": "URL to access the Azure File."
         },
-        "credentialsInfo": {
+        "credentials": {
           "title": "Information of the Azure File credentials.",
           "$ref": "#/definitions/AzureStorageCredentialsInfo"
         },
@@ -2486,7 +2443,7 @@
         },
         "fileMode": {
           "type": "string",
-          "title": "Specifies the file Mode.",
+          "title": "Specifies the file mode.",
           "description": "Default value is 0777. Valid only if OS is linux.",
           "default": "0777"
         },
@@ -2501,7 +2458,7 @@
       "required": [
         "accountName",
         "azureFileUrl",
-        "credentialsInfo",
+        "credentials",
         "relativeMountPath"
       ]
     },
@@ -2515,7 +2472,7 @@
           "type": "string",
           "title": "Name of the Azure Blob Storage container to mount on the cluster."
         },
-        "credentialsInfo": {
+        "credentials": {
           "title": "Information of the Azure Blob Storage account credentials.",
           "$ref": "#/definitions/AzureStorageCredentialsInfo"
         },
@@ -2529,11 +2486,11 @@
           "title": "Specifies the various mount options that can be used to configure Blob file system."
         }
       },
-      "description": "Details of the Azure Blob Storage container to mount on the cluster.",
+      "description": "Provides required information, for the service to be able to mount Azure Blob Storage container on the cluster nodes.",
       "required": [
         "accountName",
         "containerName",
-        "credentialsInfo",
+        "credentials",
         "relativeMountPath"
       ]
     },
@@ -2545,20 +2502,20 @@
         },
         "sourceDirectory": {
           "type": "string",
-          "title": "Specifies the source directory in file server that needs to be mounted.",
-          "description": "If this property is not specified, the entire file server will be mounted."
+          "title": "Specifies the source directory in File Server that needs to be mounted.",
+          "description": "If this property is not specified, the entire File Server will be mounted."
         },
         "relativeMountPath": {
           "type": "string",
-          "title": "Specifies the relative path on the compute node where the file server will be mounted.",
+          "title": "Specifies the relative path on the compute node where the File Server will be mounted.",
           "description": "Note that all file shares will be mounted under $AZ_BATCHAI_MOUNT_ROOT location."
         },
         "mountOptions": {
           "type": "string",
-          "title": "Specifies the various mount options required for mounting the file server."
+          "title": "Specifies the mount options for File Server."
         }
       },
-      "description": "Details of the file server to mount on the cluster.",
+      "description": "Provides required information, for the service to be able to mount Azure FileShare on the cluster nodes.",
       "required": [
         "fileServer",
         "relativeMountPath"
@@ -2576,7 +2533,7 @@
           "description": "Note that all file shares will be mounted under $AZ_BATCHAI_MOUNT_ROOT location."
         }
       },
-      "description": "Details of the file system to mount on the compute cluster.",
+      "description": "Details of the file system to mount on the compute cluster nodes.",
       "required": [
         "mountCommand",
         "relativeMountPath"
@@ -2590,7 +2547,7 @@
             "$ref": "#/definitions/AzureFileShareReference"
           },
           "title": "Azure File Share setup configuration.",
-          "description": "Azure File will be mounted to the cluster node."
+          "description": "References to Azure File Shares that are to be mounted to the cluster nodes."
         },
         "azureBlobFileSystems": {
           "type": "array",
@@ -2598,7 +2555,7 @@
             "$ref": "#/definitions/AzureBlobFileSystemReference"
           },
           "title": "Azure Blob FileSystem setup configuration.",
-          "description": "Azure Blob file system will be mounted to the cluster node."
+          "description": "References to Azure Blob FUSE that are to be mounted to the cluster nodes."
         },
         "fileServers": {
           "type": "array",
@@ -2972,7 +2929,7 @@
       "required": false,
       "type": "string",
       "x-ms-parameter-location": "method",
-      "description": "list of files.",
+      "description": "An OData $select clause. Used to select the properties to be returned in the GET respnose.",
       "x-ms-parameter-grouping": {
         "postfix": "Options"
       }
@@ -2983,7 +2940,7 @@
       "required": false,
       "type": "string",
       "x-ms-parameter-location": "method",
-      "description": "An OData $filter clause.",
+      "description": "An OData $filter clause.. Used to filter results that are returned in the GET respnose.",
       "x-ms-parameter-grouping": {
         "postfix": "Options"
       }
@@ -3010,7 +2967,7 @@
       "required": true,
       "type": "string",
       "x-ms-parameter-location": "method",
-      "description": "Id of the job output directory.",
+      "description": "Id of the job output directory. This is the OutputDirectory-->id parameter that is given by the user during Create Job.",
       "x-ms-parameter-grouping": {
         "postfix": "Options"
       }

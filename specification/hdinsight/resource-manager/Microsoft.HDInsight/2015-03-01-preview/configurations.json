@@ -32,67 +32,13 @@
         }
     },
     "paths": {
-        "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.HDInsight/clusters/{clusterName}/changerdpsetting": {
-            "post": {
-                "tags": [
-                    "Clusters"
-                ],
-                "operationId": "Clusters_ChangeRdpSettings",
-                "description": "Begins changing the RDP settings on the specified cluster.",
-                "x-ms-examples": {
-                    "Change Remote Desktop settings - Enable": {
-                        "$ref": "./examples/RdpSettingsEnable.json"
-                    }
-                },
-                "parameters": [{
-                        "name": "resourceGroupName",
-                        "in": "path",
-                        "required": true,
-                        "type": "string",
-                        "description": "The name of the resource group."
-                    },
-                    {
-                        "name": "clusterName",
-                        "in": "path",
-                        "required": true,
-                        "type": "string",
-                        "pattern": "^[0-9a-zA-Z][0-9a-zA-Z-]*[a-zA-Z0-9]$",
-                        "description": "The name of the cluster."
-                    },
-                    {
-                        "name": "parameters",
-                        "in": "body",
-                        "required": true,
-                        "schema": {
-                            "$ref": "#/definitions/RDPSettingsParameters"
-                        },
-                        "description": "The OS profile for RDP."
-                    },
-                    {
-                        "$ref": "#/parameters/ApiVersionParameter"
-                    },
-                    {
-                        "$ref": "#/parameters/SubscriptionIdParameter"
-                    }
-                ],
-                "responses": {
-                    "200": {
-                        "description": "Ok response definition"
-                    },
-                    "202": {
-                        "description": "Accepted response definition"
-                    }
-                },
-                "x-ms-long-running-operation": true
-            }
-        },
         "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.HDInsight/clusters/{clusterName}/configurations/{configurationName}": {
             "post": {
                 "tags": [
                     "Configurations"
                 ],
                 "operationId": "Configurations_UpdateHTTPSettings",
-                "description": "Begins configuring the HTTP settings on the specified cluster.",
+                "description": "Configures the HTTP settings on the specified cluster.",
                 "x-ms-examples": {
                     "Enable HTTP connectivity": {
                         "$ref": "./examples/ChangeHttpConnectivityEnable.json"
@@ -125,7 +71,7 @@
                             "gateway"
                         ],
                         "x-ms-enum": {
-                            "name": "Configurationname",
+                            "name": "ConfigurationName",
                             "modelAsString": false
                         }
                     },
@@ -188,15 +134,7 @@
                         "in": "path",
                         "required": true,
                         "type": "string",
-                        "description": "The constant for configuration type of gateway.",
-                        "enum": [
-                            "gateway",
-                            "core-site"
-                        ],
-                        "x-ms-enum": {
-                            "name": "Configurationname",
-                            "modelAsString": false
-                        }
+                        "description": "The constant for configuration type of gateway."
                     },
                     {
                         "$ref": "#/parameters/ApiVersionParameter"
@@ -209,7 +147,10 @@
                     "200": {
                         "description": "OK response definition.",
                         "schema": {
-                            "$ref": "#/definitions/HttpConnectivitySettings"
+                            "type": "object",
+							"additionalProperties": {
+								"type": "string"
+							}
                         }
                     }
                 }
@@ -217,35 +158,8 @@
         }
     },
     "definitions": {
-        "RdpSettings": {
-            "description": "The RDP settings for the windows cluster.",
-            "properties": {
-                "username": {
-                    "type": "string",
-                    "description": "The username for the RDP user."
-                },
-                "password": {
-                    "type": "string",
-                    "description": "The password for the RDP user."
-                },
-                "expiryDate": {
-                    "type": "string",
-                    "format": "date",
-                    "description": "The RDP expiry date(YYYY-MM-DD)."
-                }
-            }
-        },
-        "WindowsOperatingSystemProfile": {
-            "description": "The Windows operation system settings.",
-            "properties": {
-                "rdpSettings": {
-                    "$ref": "#/definitions/RdpSettings",
-                    "description": "The RDP settings."
-                }
-            }
-        },
         "SshPublicKey": {
-            "description": "The Ssh public key for the cluster nodes.",
+            "description": "The SSH public key for the cluster nodes.",
             "properties": {
                 "certificateData": {
                     "type": "string",
@@ -254,7 +168,7 @@
             }
         },
         "SshProfile": {
-            "description": "The list of Ssh public keys.",
+            "description": "The list of SSH public keys.",
             "properties": {
                 "publicKeys": {
                     "type": "array",
@@ -283,66 +197,54 @@
             }
         },
         "OsProfile": {
-            "description": "The Windows operation systems profile, and configure remote desktop settings.",
+            "description": "The Linux operation systems profile.",
             "properties": {
-                "windowsOperatingSystemProfile": {
-                    "$ref": "#/definitions/WindowsOperatingSystemProfile",
-                    "description": "The Windows OS profile."
-                },
                 "linuxOperatingSystemProfile": {
                     "$ref": "#/definitions/LinuxOperatingSystemProfile",
                     "description": "The Linux OS profile."
                 }
             }
         },
-        "RDPSettingsParameters": {
-            "properties": {
-                "osProfile": {
-                    "$ref": "#/definitions/OsProfile",
-                    "description": "The definition of a data factory gateway to be created or updated."
-                }
-            },
-            "required": [
-                "osProfile"
-            ],
-            "description": "Parameters specifying the data factory gateway definition for a create or update operation."
-        },
         "HttpConnectivitySettings": {
             "properties": {
                 "restAuthCredential.isEnabled": {
                     "x-ms-client-name": "enabledCredential",
                     "type": "string",
-                    "description": "Describes whether HTTP based authorization is enabled or not."
+                    "description": "Whether or not the HTTP based authorization is enabled.",
+                    "enum": [
+                        "true",
+                        "false"
+                    ]
                 },
                 "restAuthCredential.username": {
                     "x-ms-client-name": "username",
                     "type": "string",
-                    "description": "The http username."
+                    "description": "The HTTP username."
                 },
                 "restAuthCredential.password": {
                     "x-ms-client-name": "password",
                     "type": "string",
                     "format": "password",
-                    "description": "The http user password."
+                    "description": "The HTTP user password."
                 }
             },
             "description": "The payload for a Configure HTTP settings request."
         }
     },
-    "parameters": {
-        "SubscriptionIdParameter": {
-            "name": "subscriptionId",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "description": "Gets subscription credentials which uniquely identify Microsoft Azure subscription. The subscription ID forms part of the URI for every service call."
-        },
-        "ApiVersionParameter": {
-            "name": "api-version",
-            "in": "query",
-            "required": true,
-            "type": "string",
-            "description": "Client Api Version."
-        }
-    }
+	"parameters": {
+		"SubscriptionIdParameter": {
+			"name": "subscriptionId",
+			"in": "path",
+			"required": true,
+			"type": "string",
+			"description": "The subscription credentials which uniquely identify Microsoft Azure subscription. The subscription ID forms part of the URI for every service call."
+		},
+		"ApiVersionParameter": {
+			"name": "api-version",
+			"in": "query",
+			"required": true,
+			"type": "string",
+			"description": "The HDInsight client API Version."
+		}
+	}
 }

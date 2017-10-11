@@ -24,7 +24,8 @@ input-file: v1.0/EntitySearch.json
 These settings apply only when `--csharp` is specified on the command line.
 ``` yaml $(csharp) 
 csharp: 
-  namespace: Microsoft.CognitiveServices.EntitySearch
-  output-folder: out/csharp
+  namespace: Microsoft.Azure.CognitiveServices.Search.EntitySearch
+  output-folder: $(csharp-sdks-folder)/CognitiveServices/dataPlane/Search/Search/Generated/EntitySearch
+  add-credentials: true
 ```
 

@@ -56,7 +56,7 @@ tag: package-links-2016-09
 tag: package-managedapplications-2016-09
 ```
 
-``` yaml $(package-managedapplications)
+``` yaml $(package-management)
 tag: package-management-2017-08
 ```
 
