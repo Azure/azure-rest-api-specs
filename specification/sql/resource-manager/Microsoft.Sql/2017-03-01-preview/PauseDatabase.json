@@ -16,53 +16,6 @@
     "application/json"
   ],
   "paths": {
-      "post": {
-        "tags": [
-          "Databases"
-        ],
-        "description": "Exports a database.",
-        "operationId": "Databases_Export",
-        "parameters": [
-          {
-            "$ref": "#/parameters/ResourceGroupParameter"
-          },
-          {
-            "$ref": "#/parameters/ServerNameParameter"
-          },
-          {
-            "$ref": "#/parameters/DatabaseNameParameter"
-          },
-          {
-            "name": "parameters",
-            "in": "body",
-            "description": "The database export request parameters.",
-            "required": true,
-            "schema": {
-              "$ref": "#/definitions/ImportExportDatabaseDefinition"
-            }
-          },
-          {
-            "$ref": "#/parameters/SubscriptionIdParameter"
-          },
-          {
-            "$ref": "#/parameters/ApiVersionParameter"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Successfully exported the database."
-          },
-          "default": {
-            "description": "*** Error Responses: ***\n\n * 400 MissingImportExportInputParameters - Missing ImportExport input parameters.\n\n * 400 PolybaseImportAuthenticationTypeNotSupported - Authentication type parameter is not support for PolybaseImport operation.\n\n * 400 InvalidOperationType - Provide a valid operation type.\n\n * 404 ImportExportOperationIdNotFound - The operation Id for import or export cannot be found.\n\n * 404 ResourceNotFound - Invalid request specifying a non-existent resource.\n\n * 409 ImportExportOperationInProgress - There is an import or export operation in progress on the database."
-          }
-        },
-        "x-ms-examples": {
-          "Exports a database.": {
-            "$ref": "./examples/ExportDatabase.json"
-          }
-        }
-      }
-    },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/servers/{serverName}/databases/{databaseName}/pause": {
       "post": {
         "tags": [
@@ -106,48 +59,6 @@
         }
       }
     },
-      "post": {
-        "tags": [
-          "Databases"
-        ],
-        "description": "Resumes a database.",
-        "operationId": "Databases_Resume",
-        "parameters": [
-          {
-            "$ref": "#/parameters/ResourceGroupParameter"
-          },
-          {
-            "$ref": "#/parameters/ServerNameParameter"
-          },
-          {
-            "name": "databaseName",
-            "in": "path",
-            "description": "The name of the database to be resumed.",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "$ref": "#/parameters/SubscriptionIdParameter"
-          },
-          {
-            "$ref": "#/parameters/ApiVersionParameter"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Successfully resumed the database."
-          },
-          "default": {
-            "description": "*** Error Responses: ***\n\n * 400 FeatureDisabledOnSelectedEdition - User attempted to use a feature which is disabled on current database edition.\n\n * 404 ServerNotInSubscription - Specified server does not exist on the specified subscription.\n\n * 404 SourceDatabaseNotFound - The source database does not exist.\n\n * 500 ActivateOrDeactivateWorkflowThrottling - Activation or deactivation workflow failed because there are too many concurrent workflows"
-          }
-        },
-        "x-ms-examples": {
-          "Resumes a database.": {
-            "$ref": "./examples/ResumeDatabase.json"
-          }
-        }
-      }
-    }
   },
   "definitions": {
     "DatabaseListResult": {

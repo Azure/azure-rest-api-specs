@@ -16,57 +16,6 @@
     "application/json"
   ],
   "paths": {
-      "post": {
-        "tags": [
-          "Databases"
-        ],
-        "description": "Renames a database.",
-        "operationId": "Databases_Rename",
-        "parameters": [
-          {
-            "$ref": "#/parameters/ResourceGroupParameter"
-          },
-          {
-            "$ref": "#/parameters/ServerNameParameter"
-          },
-          {
-            "name": "databaseName",
-            "in": "path",
-            "description": "The name of the database to rename.",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "name": "parameters",
-            "in": "body",
-            "description": "The resource move definition for renaming this database.",
-            "required": true,
-            "schema": {
-              "$ref": "#/definitions/ResourceMoveDefinition"
-            }
-          },
-          {
-            "$ref": "#/parameters/SubscriptionIdParameter"
-          },
-          {
-            "$ref": "#/parameters/ApiVersionParameter"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Successfully renamed the database."
-          },
-          "default": {
-            "description": "*** Error Responses: ***\n\n * 400 InvalidResourceMoveRequest - The resource move request is invalid.\n\n * 400 InvalidMoveTargetResourceId - The target resource identifier in move request is invalid.\n\n * 400 MismatchingSubscriptionWithUrl - The provided subscription did not match the subscription in the Url.\n\n * 400 MismatchingResourceGroupNameWithUrl - The provided resource group name did not match the name in the Url.\n\n * 400 MismatchingServerNameWithUrl - The provided server name did not match the name in the Url.\n\n * 400 UnsupportedServiceName - The specified name is an invalid name because it contains one or more unsupported unicode characters.\n\n * 400 CannotMoveOrDropSyncMetadataDatabase - Cannot drop database used as sync metadata database.\n\n * 400 InvalidIdentifier - The identifier contains NULL or an invalid unicode character.\n\n * 400 TokenTooLong - The provided token is too long.\n\n * 400 CannotMoveOrDropJobAccountDatabase - Cannot drop database associated with job account.\n\n * 400 CannotUseReservedDatabaseName - Cannot use reserved database name in this operation.\n\n * 404 SourceDatabaseNotFound - The source database does not exist."
-          }
-        },
-        "x-ms-examples": {
-          "Renames a database.": {
-            "$ref": "./examples/RenameDatabase.json"
-          }
-        }
-      }
-    },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/servers/{serverName}/databases/{databaseName}/resume": {
       "post": {
         "tags": [
