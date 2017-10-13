@@ -34,6 +34,37 @@
     }
   },
   "paths": {
+    "/providers/Microsoft.MachineLearning/operations": {
+      "get": {
+        "tags": [
+          "Operation"
+        ],
+        "description": "Lists all of the available Azure Machine Learning Studio REST API operations.",
+        "operationId": "Operations_List",
+        "parameters": [
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request was successful; the request was well-formed and received properly.",
+            "schema": {
+              "$ref": "#/definitions/OperationListResult"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": null
+        }
+      }
+    },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.MachineLearning/workspaces/{workspaceName}": {
       "get": {
         "tags": [
@@ -533,11 +564,11 @@
       "type": "object",
       "description": "Workspace authorization keys for a workspace.",
       "properties": {
-        "PrimaryToken": {
+        "primaryToken": {
           "type": "string",
           "description": "Primary authorization key for this workspace."
         },
-        "SecondaryToken": {
+        "secondaryToken": {
           "type": "string",
           "description": "Secondary authorization key for this workspace."
         }
@@ -556,6 +587,49 @@
         "nextLink": {
           "description": "The URI that can be used to request the next list of machine learning workspaces.",
           "type": "string"
+        }
+      }
+    },
+    "Operation": {
+      "description": "Azure Machine Learning Studio REST API operation",
+      "type": "object",
+      "properties": {
+        "name": {
+          "description": "Operation name: {provider}/{resource}/{operation}",
+          "type": "string"
+        },
+        "display": {
+          "description": "Display name of operation",
+          "properties": {
+            "provider": {
+              "description": "The resource provider name: Microsoft.MachineLearning",
+              "type": "string"
+            },
+            "resource": {
+              "description": "The resource on which the operation is performed.",
+              "type": "string"
+            },
+            "operation": {
+              "description": "The operation that users can perform.",
+              "type": "string"
+            },
+            "description": {
+              "description": "The description for the operation.",
+              "type": "string"
+            }
+          }
+        }
+      }
+    },
+    "OperationListResult": {
+      "description": "An array of operations supported by the resource provider.",
+      "properties": {
+        "value": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Operation"
+          },
+          "description": "List of AML Studio operations supported by the AML Studio resource provider."
         }
       }
     },
