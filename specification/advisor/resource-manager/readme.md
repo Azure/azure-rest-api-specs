@@ -93,6 +93,6 @@ output-folder: $(go-sdk-folder)/services/advisor/mgmt/2017-03-31/advisor
 
 These settings apply only when `--tag=package-2016-07-preview --go` is specified on the command line.
 
-``` yaml $(tag) == 'package-2017-04' && $(go)
+``` yaml $(tag) == 'package-2016-07-preview' && $(go)
 output-folder: $(go-sdk-folder)/services/advisor/mgmt/2016-07-12-preview/advisor
 ```
