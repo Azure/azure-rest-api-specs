@@ -83,6 +83,7 @@ go:
 ### Tag: package-2017-09-preview and go
 
 These settings apply only when `--tag=package-2017-09-preview --go` is specified on the command line.
+Please also specify `--go-sdk-folder=<path to the root directory of your azure-sdk-for-go clone>`.
 
 ``` yaml $(tag) == 'package-2017-09-preview' && $(go)
 output-folder: $(go-sdk-folder)/services/eventgrid/mgmt/2017-09-15-preview/eventgrid
@@ -91,6 +92,7 @@ output-folder: $(go-sdk-folder)/services/eventgrid/mgmt/2017-09-15-preview/event
 ### Tag: package-2017-06-preview and go
 
 These settings apply only when `--tag=package-2017-06-preview --go` is specified on the command line.
+Please also specify `--go-sdk-folder=<path to the root directory of your azure-sdk-for-go clone>`.
 
 ``` yaml $(tag) == 'package-2017-06-preview' && $(go)
 output-folder: $(go-sdk-folder)/services/eventgrid/mgmt/2017-06-15-preview/eventgrid

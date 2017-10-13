@@ -57,6 +57,7 @@ go:
 ### Tag: package-2015-06-preview and go
 
 These settings apply only when `--tag=package-2015-06-preview --go` is specified on the command line.
+Please also specify `--go-sdk-folder=<path to the root directory of your azure-sdk-for-go clone>`.
 
 ``` yaml $(tag) == 'package-2015-06-preview' && $(go)
 output-folder: $(go-sdk-folder)/services/commerce/mgmt/2015-06-01-preview/commerce

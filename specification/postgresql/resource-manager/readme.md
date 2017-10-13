@@ -58,6 +58,7 @@ go:
 ### Tag: package-2017-04-preview and go
 
 These settings apply only when `--tag=package-2017-04-preview --go` is specified on the command line.
+Please also specify `--go-sdk-folder=<path to the root directory of your azure-sdk-for-go clone>`.
 
 ``` yaml $(tag) == 'package-2017-04-preview' && $(go)
 output-folder: $(go-sdk-folder)/services/postgresql/mgmt/2017-04-30-preview/postgresql

@@ -101,6 +101,7 @@ go:
 ### Tag: package-2017-04 and go
 
 These settings apply only when `--tag=package-2017-04 --go` is specified on the command line.
+Please also specify `--go-sdk-folder=<path to the root directory of your azure-sdk-for-go clone>`.
 
 ``` yaml $(tag) == 'package-2017-04' && $(go)
 output-folder: $(go-sdk-folder)/services/cdn/mgmt/2017-04-02/cdn
@@ -109,6 +110,7 @@ output-folder: $(go-sdk-folder)/services/cdn/mgmt/2017-04-02/cdn
 ### Tag: package-2016-10 and go
 
 These settings apply only when `--tag=package-2016-10 --go` is specified on the command line.
+Please also specify `--go-sdk-folder=<path to the root directory of your azure-sdk-for-go clone>`.
 
 ``` yaml $(tag) == 'package-2016-10'  && $(go)
 output-folder: $(go-sdk-folder)/services/cdn/mgmt/2016-10-02/cdn
@@ -117,6 +119,7 @@ output-folder: $(go-sdk-folder)/services/cdn/mgmt/2016-10-02/cdn
 ### Tag: package-2016-04 and go
 
 These settings apply only when `--tag=package-2016-04 --go` is specified on the command line.
+Please also specify `--go-sdk-folder=<path to the root directory of your azure-sdk-for-go clone>`.
 
 ``` yaml $(tag) == 'package-2016-04' && $(go)
 output-folder: $(go-sdk-folder)/services/cdn/mgmt/2016-04-02/cdn
@@ -125,6 +128,7 @@ output-folder: $(go-sdk-folder)/services/cdn/mgmt/2016-04-02/cdn
 ### Tag: package-2015-06 and go
 
 These settings apply only when `--tag=package-2015-06 --go` is specified on the command line.
+Please also specify `--go-sdk-folder=<path to the root directory of your azure-sdk-for-go clone>`.
 
 ``` yaml $(tag) == 'package-2015-06' && $(go)
 output-folder: $(go-sdk-folder)/services/cdn/mgmt/2015-06-01/cdn

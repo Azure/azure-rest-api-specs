@@ -82,6 +82,7 @@ go:
 ### Tag: package-2016-05 and go
 
 These settings apply only when `--tag=package-2016-05 --go` is specified on the command line.
+Please also specify `--go-sdk-folder=<path to the root directory of your azure-sdk-for-go clone>`.
 
 ``` yaml $(tag) == 'package-2016-05' && $(go)
 output-folder: $(go-sdk-folder)/services/devtestlabs/mgmt/2016-05-15/dtl
@@ -90,6 +91,7 @@ output-folder: $(go-sdk-folder)/services/devtestlabs/mgmt/2016-05-15/dtl
 ### Tag: package-2015-05-preview and go
 
 These settings apply only when `--tag=package-2015-05-preview --go` is specified on the command line.
+Please also specify `--go-sdk-folder=<path to the root directory of your azure-sdk-for-go clone>`.
 
 ``` yaml $(tag) == 'package-2015-05-preview' && $(go)
 output-folder: $(go-sdk-folder)/services/devtestlabs/mgmt/2015-05-21-preview/dtl

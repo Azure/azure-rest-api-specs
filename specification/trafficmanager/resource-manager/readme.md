@@ -107,6 +107,7 @@ go:
 ### Tag: package-2017-09-preview and go
 
 These settings apply only when `--tag=package-2017-09-preview --go` is specified on the command line.
+Please also specify `--go-sdk-folder=<path to the root directory of your azure-sdk-for-go clone>`.
 
 ``` yaml $(tag) == 'package-2017-09-preview' && $(go)
 output-folder: $(go-sdk-folder)/services/trafficmanager/mgmt/2017-09-01-preview/trafficmanager
@@ -115,6 +116,7 @@ output-folder: $(go-sdk-folder)/services/trafficmanager/mgmt/2017-09-01-preview/
 ### Tag: package-2017-05 and go
 
 These settings apply only when `--tag=package-2017-05 --go` is specified on the command line.
+Please also specify `--go-sdk-folder=<path to the root directory of your azure-sdk-for-go clone>`.
 
 ``` yaml $(tag) == 'package-2017-05' && $(go)
 output-folder: $(go-sdk-folder)/services/trafficmanager/mgmt/2017-05-01/trafficmanager
@@ -123,6 +125,7 @@ output-folder: $(go-sdk-folder)/services/trafficmanager/mgmt/2017-05-01/trafficm
 ### Tag: package-2017-03 and go
 
 These settings apply only when `--tag=package-2017-03 --go` is specified on the command line.
+Please also specify `--go-sdk-folder=<path to the root directory of your azure-sdk-for-go clone>`.
 
 ``` yaml $(tag) == 'package-2017-03' && $(go)
 output-folder: $(go-sdk-folder)/services/trafficmanager/mgmt/2017-03-01/trafficmanager
@@ -131,6 +134,7 @@ output-folder: $(go-sdk-folder)/services/trafficmanager/mgmt/2017-03-01/trafficm
 ### Tag: package-2015-11-01 and go
 
 These settings apply only when `--tag=package-2015-11 --go` is specified on the command line.
+Please also specify `--go-sdk-folder=<path to the root directory of your azure-sdk-for-go clone>`.
 
 ``` yaml $(tag) == 'package-2015-11' && $(go)
 output-folder: $(go-sdk-folder)/services/trafficmanager/mgmt/2015-11-01/trafficmanager
