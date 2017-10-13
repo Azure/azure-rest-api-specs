@@ -105,7 +105,7 @@ These settings apply only when `--tag=package-webservices-2017-01 --go` is speci
 
 ``` yaml $(tag) == 'package-webservices-2017-01' && $(go)
 namespace: webservices
-output-folder: $(go-sdk-folder)/services/machine_learning/mgmt/2017-01-01/webservices
+output-folder: $(go-sdk-folder)/services/machinelearning/mgmt/2017-01-01/webservices
 ```
 
 ### Tag: package-webservices-2016-05-preview and go
@@ -114,7 +114,7 @@ These settings apply only when `--tag=package-webservices-2016-05-preview --go` 
 
 ``` yaml $(tag) == 'package-webservices-2016-05-preview' && $(go)
 namespace: webservices
-output-folder: $(go-sdk-folder)/services/machine_learning/mgmt/2016-05-01-preview/webservices
+output-folder: $(go-sdk-folder)/services/machinelearning/mgmt/2016-05-01-preview/webservices
 ```
 
 ### Tag: package-commitmentPlans-2016-05-preview and go
@@ -123,7 +123,7 @@ These settings apply only when `--tag=package-commitmentPlans-2016-05-preview --
 
 ``` yaml $(tag) == 'package-commitmentPlans-2016-05-preview' && $(go)
 namespace: commitmentplans
-output-folder: $(go-sdk-folder)/services/machine_learning/mgmt/2016-05-01-preview/commitmentplans
+output-folder: $(go-sdk-folder)/services/machinelearning/mgmt/2016-05-01-preview/commitmentplans
 ```
 
 # Validation
