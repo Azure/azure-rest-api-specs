@@ -564,14 +564,6 @@
                     "description": "Contains information about the package being shipped from the Microsoft data center to the customer to return the drives. The format is the same as the deliveryPackage property above. This property is not included if the drives have not yet been returned. ",
                     "$ref": "#/definitions/PackageInfomation"
                 },
-                "userStorageAccountId":{
-                    "type": "string",
-                    "description": "The resource identifier of the user storage account where data will be imported to or exported from. Only required for Express Disk Service."
-                },
-                "userTenantId":{
-                    "type": "string",
-                    "description": "The user tenant identifier. Only required for Express Disk Service."
-                },
                 "diagnosticsPath":{
                     "type": "string",
                     "description": "The virtual blob directory to which the copy logs and backups of drive manifest files (if enabled) will be stored."
@@ -979,14 +971,6 @@
                     "type": "integer",
                     "format": "int64",
                     "description": "Bytes successfully transferred for the drive."
-                },
-                "currentLocation":{
-                    "type": "string",
-                    "description": "The drive current location. Only required for Express Disk Service."
-                },
-                "returnLocation":{
-                    "type": "string",
-                    "description": "The drive return location after the rental job. Only required for Express Disk Service."
                 }
             }
         },
