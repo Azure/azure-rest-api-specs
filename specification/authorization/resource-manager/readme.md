@@ -37,6 +37,7 @@ These settings apply only when `--tag=package-2015-07` is specified on the comma
 ``` yaml $(tag) == 'package-2015-07'
 input-file:
 - Microsoft.Authorization/2015-07-01/authorization.json
+- Microsoft.Authorization/2017-10-01/authorization.json
 ```
 
 
