@@ -30,4 +30,3 @@ csharp:
   output-folder: $(csharp-sdks-folder)/CognitiveServices/dataPlane/Vision/Vision/Generated/Face
   clear-output-folder: true
 ```
-
