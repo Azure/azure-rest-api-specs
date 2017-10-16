@@ -133,7 +133,7 @@
           "200": {
             "description": "OK",
             "schema": {
-              "$ref": "#/definitions/UpgradeProfile"
+              "$ref": "#/definitions/ManagedClusterUpgradeProfile"
             }
           }
         }
@@ -211,7 +211,7 @@
             "in": "body",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/ManagedClusterProperties"
+              "$ref": "#/definitions/ManagedCluster"
             },
             "description": "Parameters supplied to the Create or Update a Managed Cluster operation."
           }
@@ -566,7 +566,6 @@
         }
       },
       "required": [
-        "count",
         "dnsPrefix",
         "vmSize"
       ],
@@ -627,7 +626,6 @@
       },
       "required": [
         "name",
-        "count",
         "vmSize"
       ],
       "description": "Profile for the container service agent pool."
@@ -749,7 +747,9 @@
         {
           "properties": {
             "properties": {
-              "$ref": "#/definitions/ManagedClusterProperties"
+              "description": "Properties of a managed cluster.",
+              "$ref": "#/definitions/ManagedClusterProperties",
+              "x-ms-client-flatten": false
             }
           }
         }
@@ -835,15 +835,11 @@
       ],
       "description": "Contains information about orchestrator."
     },
-    "PoolUpgradeProfile": {
+    "ManagedClusterPoolUpgradeProfile": {
       "properties": {
-        "orchestratorType": {
+        "kubernetesVersion": {
           "type": "string",
-          "description": "Orchestrator type."
-        },
-        "orchestratorVersion": {
-          "type": "string",
-          "description": "Orchestrator version (major, minor, patch)."
+          "description": "Kubernetes version (major, minor, patch)."
         },
         "name": {
           "type": "string",
@@ -864,27 +860,29 @@
         "upgrades": {
           "type": "array",
           "items": {
-            "$ref": "#/definitions/OrchestratorProfile"
-          }
+            "type": "string"
+          },
+          "description": "List of orchestrator types and versions available for upgrade."
         }
       },
       "required": [
-        "orchestratorType",
-        "orchestratorVersion",
+        "kubernetesVersion",
         "osType"
       ],
       "description": "The list of available upgrade versions."
     },
-    "UpgradeProfileProperties": {
+    "ManagedClusterUpgradeProfileProperties": {
       "properties": {
         "controlPlaneProfile": {
-          "$ref": "#/definitions/PoolUpgradeProfile"
+          "$ref": "#/definitions/ManagedClusterPoolUpgradeProfile",
+          "description": "The list of available upgrade versions for the control plane."
         },
         "agentPoolProfiles": {
           "type": "array",
           "items": {
-            "$ref": "#/definitions/PoolUpgradeProfile"
-          }
+            "$ref": "#/definitions/ManagedClusterPoolUpgradeProfile"
+          },
+          "description": "The list of available upgrade versions for agent pools."
         }
       },
       "required": [
@@ -893,7 +891,7 @@
       ],
       "description": "Control plane and agent pool upgrade profiles."
     },
-    "UpgradeProfile": {
+    "ManagedClusterUpgradeProfile": {
       "properties": {
         "id": {
           "readOnly": true,
@@ -911,7 +909,9 @@
           "description": "Type of upgrade profile."
         },
         "properties": {
-          "$ref": "#/definitions/UpgradeProfileProperties"
+          "$ref": "#/definitions/ManagedClusterUpgradeProfileProperties",
+          "description": "Properties of upgrade profile.",
+          "x-ms-client-flatten": false
         }
       },
       "required": [

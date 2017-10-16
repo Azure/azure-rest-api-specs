@@ -227,7 +227,7 @@
         "tags": [
           "ContainerService"
         ],
-        "operationId": "ContainerServicesUpgradeProfiles_Get",
+        "operationId": "ContainerServices_GetUpgradeProfiles",
         "summary": "Gets upgrade profile information for specified container service.",
         "description": "Gets upgrade profile information for specified container service. The operation returns properties of the compute pools including name, OS, orchestrator verison, and available upgrades.",
         "parameters": [
@@ -587,7 +587,6 @@
         }
       },
       "required": [
-        "count",
         "dnsPrefix",
         "vmSize"
       ],
@@ -656,7 +655,6 @@
       },
       "required": [
         "name",
-        "count",
         "vmSize"
       ],
       "description": "Profile for the container service agent pool."
@@ -762,7 +760,9 @@
         {
           "properties": {
             "properties": {
-              "$ref": "#/definitions/ContainerServiceProperties"
+              "description": "Properties of the container service.",
+              "$ref": "#/definitions/ContainerServiceProperties",
+              "x-ms-client-flatten": true
             }
           }
         }
@@ -902,13 +902,15 @@
     "UpgradeProfileProperties": {
       "properties": {
         "controlPlaneProfile": {
-          "$ref": "#/definitions/PoolUpgradeProfile"
+          "$ref": "#/definitions/PoolUpgradeProfile",
+          "description": "The list of available upgrade versions for the control plane."
         },
         "agentPoolProfiles": {
           "type": "array",
           "items": {
             "$ref": "#/definitions/PoolUpgradeProfile"
-          }
+          },
+          "description": "The list of available upgrade versions for agent pools."
         }
       },
       "required": [
@@ -935,7 +937,9 @@
           "description": "Type of upgrade profile."
         },
         "properties": {
-          "$ref": "#/definitions/UpgradeProfileProperties"
+          "$ref": "#/definitions/UpgradeProfileProperties",
+          "description": "Properties of upgrade profile.",
+          "x-ms-client-flatten": false
         }
       },
       "required": [

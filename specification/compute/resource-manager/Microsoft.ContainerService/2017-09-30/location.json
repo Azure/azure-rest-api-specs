@@ -39,7 +39,7 @@
         "tags": [
           "ContainerServices"
         ],
-        "operationId": "ContainerServicesOrchestrators_List",
+        "operationId": "ContainerServices_ListOrchestrators",
         "summary": "Gets a list of supported orchestrators in the specified subscription.",
         "description": "Gets a list of supported orchestrators in the specified subscription. The operation returns properties of each orchestrator including verison and available upgrades.",
         "parameters": [
@@ -109,18 +109,21 @@
         "orchestratorType",
         "upgrades",
         "default"
-      ]
+      ],
+      "description": "The profile of an orchestrator and its available versions."
     },
     "OrchestratorVersionProfileProperties": {
       "properties": {
         "orchestrators": {
           "type": "array",
-          "$ref": "#/definitions/OrchestratorVersionProfile"
+          "$ref": "#/definitions/OrchestratorVersionProfile",
+          "description": "List of orchstrator version profiles."
         }
       },
       "required": [
         "orchestrators"
-      ]
+      ],
+      "description": "The properties of an orchestrator version profile."
     },
     "OrchestratorVersionProfileListResult": {
       "properties": {
@@ -140,7 +143,9 @@
           "description": "Type of the orchestrator version profile list result."
         },
         "properties": {
-          "$ref": "#/definitions/OrchestratorVersionProfileProperties"
+          "$ref": "#/definitions/OrchestratorVersionProfileProperties",
+          "description": "The properties of an orchestrator version profile.",
+          "x-ms-client-flatten": false
         }
       },
       "required": [
