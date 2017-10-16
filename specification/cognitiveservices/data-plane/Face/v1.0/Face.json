@@ -1456,6 +1456,39 @@
                         "type": "string"
                     },
                     {
+                        "name": "returnFaceAttributes",
+                        "in": "query",
+                        "description": "Analyze and return the one or more specified face attributes in the comma-separated string like \"returnFaceAttributes=age,gender\". Supported face attributes include age, gender, headPose, smile, facialHair, glasses and emotion. Note that each face attribute analysis has additional computational and time cost.",
+                        "type": "array",
+                        "required": false,
+                        "collectionFormat": "csv",
+                        "items": {
+                            "type": "string",
+                            "description": "",
+                            "x-nullable": false,
+                            "x-ms-enum": {
+                                "name": "FaceAttributeTypes",
+                                "modelAsString": false
+                            },
+                            "enum": [
+                                "age",
+                                "gender",
+                                "headPose",
+                                "smile",
+                                "facialHair",
+                                "glasses",
+                                "emotion",
+                                "hair",
+                                "makeup",
+                                "occlusion",
+                                "accessories",
+                                "blur",
+                                "exposure",
+                                "noise"
+                            ]
+                        }
+                    },
+                    {
                         "$ref": "../../Common/Parameters.json#/parameters/SubscriptionKey"
                     },
                     {
@@ -2824,7 +2857,6 @@
             }
         },
         "ConfidenceProperty": {
-            "name": "confidence",
             "description": "A number ranging from 0 to 1 indicating a level of confidence associated with a property.",
             "type": "number",
             "minimum": 0,
