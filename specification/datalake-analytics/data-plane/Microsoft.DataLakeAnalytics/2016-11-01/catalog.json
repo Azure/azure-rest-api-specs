@@ -2479,196 +2479,6 @@
         "x-ms-odata": "#/definitions/USqlView"
       }
     },
-    "/catalog/usql/databases/{databaseName}/acl?op=GRANTACE": {
-      "post": {
-        "tags": [
-          "Catalog"
-        ],
-        "operationId": "Catalog_GrantAclToDatabase",
-        "description": "Grants an ACL to the database from the Data Lake Analytics catalog.",
-        "x-ms-examples": {
-          "Grants an ACL to the database from the Data Lake Analytics catalog": { "$ref": "./examples/Adla_Catalog_GrantAclToDatabase.json" }
-        },
-        "parameters": [
-          {
-            "name": "databaseName",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "description": "The name of the database."
-          },
-          {
-            "name": "parameters",
-            "in": "body",
-            "required": true,
-            "schema": {
-              "$ref": "#/definitions/AclCreateOrUpdateParameters"
-            },
-            "description": "Parameters supplied to create or update an ACL for a database."
-          },
-          {
-            "name": "op",
-            "in": "query",
-            "required": true,
-            "type": "string",
-            "description": "The constant value for the operation.",
-            "enum": [
-              "GRANTACE"
-            ]
-          },
-          {
-            "$ref": "#/parameters/ApiVersionParameter"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Successfully granted the ACL to the specified database."
-          },
-          "404": {
-            "description": "Not found."
-          }
-        }
-      }
-    },
-    "/catalog/usql/acl?op=GRANTACE": {
-      "post": {
-        "tags": [
-          "Catalog"
-        ],
-        "operationId": "Catalog_GrantAcl",
-        "description": "Grants an ACL to the Data Lake Analytics account.",
-        "x-ms-examples": {
-          "Grants an ACL to the Data Lake Analytics account": { "$ref": "./examples/Adla_Catalog_GrantAcl.json" }
-        },
-        "parameters": [
-          {
-            "name": "parameters",
-            "in": "body",
-            "required": true,
-            "schema": {
-              "$ref": "#/definitions/AclCreateOrUpdateParameters"
-            },
-            "description": "Parameters supplied to create or update an ACL for a Data Lake Analytics account."
-          },
-          {
-            "name": "op",
-            "in": "query",
-            "required": true,
-            "type": "string",
-            "description": "The constant value for the operation.",
-            "enum": [
-              "GRANTACE"
-            ]
-          },
-          {
-            "$ref": "#/parameters/ApiVersionParameter"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Successfully granted the ACL to the Data Lake Analytics account."
-          },
-          "404": {
-            "description": "Not found."
-          }
-        }
-      }
-    },
-    "/catalog/usql/databases/{databaseName}/acl?op=REVOKEACE": {
-      "post": {
-        "tags": [
-          "Catalog"
-        ],
-        "operationId": "Catalog_RevokeAclFromDatabase",
-        "description": "Revokes an ACL for the database from the Data Lake Analytics catalog.",
-        "x-ms-examples": {
-          "Revokes an ACL for the database from the Data Lake Analytics catalog": { "$ref": "./examples/Adla_Catalog_RevokeAclFromDatabase.json" }
-        },
-        "parameters": [
-          {
-            "name": "databaseName",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "description": "The name of the database."
-          },
-          {
-            "name": "parameters",
-            "in": "body",
-            "required": true,
-            "schema": {
-              "$ref": "#/definitions/AclDeleteParameters"
-            },
-            "description": "Parameters supplied to delete an ACL for a database."
-          },
-          {
-            "name": "op",
-            "in": "query",
-            "required": true,
-            "type": "string",
-            "description": "The constant value for the operation.",
-            "enum": [
-              "REVOKEACE"
-            ]
-          },
-          {
-            "$ref": "#/parameters/ApiVersionParameter"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Successfully revoked the ACL from the specified database."
-          },
-          "404": {
-            "description": "Not found."
-          }
-        }
-      }
-    },
-    "/catalog/usql/acl?op=REVOKEACE": {
-      "post": {
-        "tags": [
-          "Catalog"
-        ],
-        "operationId": "Catalog_RevokeAcl",
-        "description": "Revokes an ACL from the Data Lake Analytics account.",
-        "x-ms-examples": {
-          "Revokes an ACL from the Data Lake Analytics account": { "$ref": "./examples/Adla_Catalog_RevokeAcl.json" }
-        },
-        "parameters": [
-          {
-            "name": "parameters",
-            "in": "body",
-            "required": true,
-            "schema": {
-              "$ref": "#/definitions/AclDeleteParameters"
-            },
-            "description": "Parameters supplied to delete an ACL for a Data Lake Analytics account."
-          },
-          {
-            "name": "op",
-            "in": "query",
-            "required": true,
-            "type": "string",
-            "description": "The constant value for the operation.",
-            "enum": [
-              "REVOKEACE"
-            ]
-          },
-          {
-            "$ref": "#/parameters/ApiVersionParameter"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Successfully revoked the ACL from the Data Lake Analytics account."
-          },
-          "404": {
-            "description": "Not found."
-          }
-        }
-      }
-    },
     "/catalog/usql/databases/{databaseName}/acl": {
       "get": {
         "tags": [
@@ -2937,6 +2747,198 @@
           "nextLinkName": "nextLink"
         },
         "x-ms-odata": "#/definitions/USqlDatabase"
+      }
+    }
+  },
+  "x-ms-paths": {
+    "/catalog/usql/databases/{databaseName}/acl?op=GRANTACE": {
+      "post": {
+        "tags": [
+          "Catalog"
+        ],
+        "operationId": "Catalog_GrantAclToDatabase",
+        "description": "Grants an ACL to the database from the Data Lake Analytics catalog.",
+        "x-ms-examples": {
+          "Grants an ACL to the database from the Data Lake Analytics catalog": { "$ref": "./examples/Adla_Catalog_GrantAclToDatabase.json" }
+        },
+        "parameters": [
+          {
+            "name": "databaseName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the database."
+          },
+          {
+            "name": "parameters",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/AclCreateOrUpdateParameters"
+            },
+            "description": "Parameters supplied to create or update an ACL for a database."
+          },
+          {
+            "name": "op",
+            "in": "query",
+            "required": true,
+            "type": "string",
+            "description": "The constant value for the operation.",
+            "enum": [
+              "GRANTACE"
+            ]
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successfully granted the ACL to the specified database."
+          },
+          "404": {
+            "description": "Not found."
+          }
+        }
+      }
+    },
+    "/catalog/usql/databases/{databaseName}/acl?op=REVOKEACE": {
+      "post": {
+        "tags": [
+          "Catalog"
+        ],
+        "operationId": "Catalog_RevokeAclFromDatabase",
+        "description": "Revokes an ACL for the database from the Data Lake Analytics catalog.",
+        "x-ms-examples": {
+          "Revokes an ACL for the database from the Data Lake Analytics catalog": { "$ref": "./examples/Adla_Catalog_RevokeAclFromDatabase.json" }
+        },
+        "parameters": [
+          {
+            "name": "databaseName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the database."
+          },
+          {
+            "name": "parameters",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/AclDeleteParameters"
+            },
+            "description": "Parameters supplied to delete an ACL for a database."
+          },
+          {
+            "name": "op",
+            "in": "query",
+            "required": true,
+            "type": "string",
+            "description": "The constant value for the operation.",
+            "enum": [
+              "REVOKEACE"
+            ]
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successfully revoked the ACL from the specified database."
+          },
+          "404": {
+            "description": "Not found."
+          }
+        }
+      }
+    },
+    "/catalog/usql/acl?op=GRANTACE": {
+      "post": {
+        "tags": [
+          "Catalog"
+        ],
+        "operationId": "Catalog_GrantAcl",
+        "description": "Grants an ACL to the Data Lake Analytics account.",
+        "x-ms-examples": {
+          "Grants an ACL to the Data Lake Analytics account": { "$ref": "./examples/Adla_Catalog_GrantAcl.json" }
+        },
+        "parameters": [
+          {
+            "name": "parameters",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/AclCreateOrUpdateParameters"
+            },
+            "description": "Parameters supplied to create or update an ACL for a Data Lake Analytics account."
+          },
+          {
+            "name": "op",
+            "in": "query",
+            "required": true,
+            "type": "string",
+            "description": "The constant value for the operation.",
+            "enum": [
+              "GRANTACE"
+            ]
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successfully granted the ACL to the Data Lake Analytics account."
+          },
+          "404": {
+            "description": "Not found."
+          }
+        }
+      }
+    },
+    "/catalog/usql/acl?op=REVOKEACE": {
+      "post": {
+        "tags": [
+          "Catalog"
+        ],
+        "operationId": "Catalog_RevokeAcl",
+        "description": "Revokes an ACL from the Data Lake Analytics account.",
+        "x-ms-examples": {
+          "Revokes an ACL from the Data Lake Analytics account": { "$ref": "./examples/Adla_Catalog_RevokeAcl.json" }
+        },
+        "parameters": [
+          {
+            "name": "parameters",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/AclDeleteParameters"
+            },
+            "description": "Parameters supplied to delete an ACL for a Data Lake Analytics account."
+          },
+          {
+            "name": "op",
+            "in": "query",
+            "required": true,
+            "type": "string",
+            "description": "The constant value for the operation.",
+            "enum": [
+              "REVOKEACE"
+            ]
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successfully revoked the ACL from the Data Lake Analytics account."
+          },
+          "404": {
+            "description": "Not found."
+          }
+        }
       }
     }
   },
