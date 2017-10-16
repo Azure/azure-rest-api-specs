@@ -153,29 +153,29 @@
         },
         "x-ms-long-running-operation": true,
         "x-ms-examples": {
-          "Creates a database from recoverabelDatabaseId.": {
-            "$ref": "./examples/CreateDatabaseRecoveryMode.json"
+          "Creates a database from restore with database deletion time.": {
+            "$ref": "./examples/CreateDatabaseRestoreMode.json"
           },
-          "Creates a database as a copy.": {
-            "$ref": "./examples/CreateDatabaseCopyMode.json"
+          "Creates a database with minimum number of parameters.": {
+            "$ref": "./examples/CreateDatabaseMin.json"
           },
           "Creates a database with default mode.": {
             "$ref": "./examples/CreateDatabaseDefaultMode.json"
           },
-          "Creates a database from PointInTimeRestore.": {
-            "$ref": "./examples/CreateDatabasePITRMode.json"
-          },
-          "Creates a database from restore with database deletion time.": {
-            "$ref": "./examples/CreateDatabaseRestoreMode.json"
-          },
-          "Creates a database from restore with restorableDroppedDatabaseId.": {
-            "$ref": "./examples/CreateDatabaseRestoreMode2.json"
+          "Creates a database as a copy.": {
+            "$ref": "./examples/CreateDatabaseCopyMode.json"
           },
           "Creates a database as an on-line secondary.": {
             "$ref": "./examples/CreateDatabaseSecondaryMode.json"
           },
-          "Creates a database with minimum number of parameters.": {
-            "$ref": "./examples/CreateDatabaseMin.json"
+          "Creates a database from PointInTimeRestore.": {
+            "$ref": "./examples/CreateDatabasePITRMode.json"
+          },
+          "Creates a database from restore with restorableDroppedDatabaseId.": {
+            "$ref": "./examples/CreateDatabaseRestoreMode2.json"
+          },
+          "Creates a database from recoverabelDatabaseId.": {
+            "$ref": "./examples/CreateDatabaseRecoveryMode.json"
           }
         }
       },
@@ -324,6 +324,7 @@
             "description": "Exporting the database is in progress."
           }
         },
+        "x-ms-long-running-operation": true,
         "x-ms-examples": {
           "Exports a database.": {
             "$ref": "./examples/ExportDatabase.json"
@@ -373,6 +374,7 @@
             "description": "Pausing the database is in progress."
           }
         },
+        "x-ms-long-running-operation": true,
         "x-ms-examples": {
           "Pauses a database.": {
             "$ref": "./examples/PauseDatabase.json"
@@ -523,6 +525,7 @@
             "description": "Resuming the database is in progress."
           }
         },
+        "x-ms-long-running-operation": true,
         "x-ms-examples": {
           "Resumes a database.": {
             "$ref": "./examples/ResumeDatabase.json"
@@ -699,6 +702,22 @@
           "description": "Failover Group resource identifier that this database belongs to.",
           "type": "string",
           "readOnly": true
+        },
+        "restorePointInTime": {
+          "format": "date-time",
+          "description": "Specifies the point in time (ISO8601 format) of the source database that will be restored to create the new database.",
+          "type": "string",
+          "x-ms-mutability": [
+            "create"
+          ]
+        },
+        "sourceDatabaseDeletionDate": {
+          "format": "date-time",
+          "description": "Specifies the time that the database was deleted.",
+          "type": "string",
+          "x-ms-mutability": [
+            "create"
+          ]
         },
         "recoveryServicesRecoveryPointId": {
           "description": "The resource identifier of the recovery point associated with create operation of this database.",
