@@ -1225,6 +1225,33 @@
           "additionalProperties": {
             "type": "string"
           }
+        },
+        "identity": {
+          "description": "Identity for the resource.",
+          "type": "object",
+          "properties": {
+            "principalId": {
+              "description": "The principal ID of resource identity.",
+              "type": "string",
+              "readOnly": true
+            },
+            "tenantId": {
+              "description": "The tenant ID of resource.",
+              "type": "string",
+              "readOnly": true
+            },
+            "type": {
+              "description": "The identity type.",
+              "type": "string",
+              "enum": [
+                "SystemAssigned"
+              ],
+              "x-ms-enum": {
+                "name": "ManagedServiceIdentityType",
+                "modelAsString": false
+              }
+            }
+          }
         }
       },
       "x-ms-azure-resource": true
