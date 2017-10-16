@@ -250,6 +250,108 @@ csharp:
 ```
 
 
+## Go
+
+These settings apply only when `--go` is specified on the command line.
+
+``` yaml $(go)
+go:
+  license-header: MICROSOFT_APACHE_NO_VERSION
+  namespace: network
+  clear-output-folder: true
+```
+
+### Tag: package-2017-09 and go
+
+These settings apply only when `--tag=package-2017-09 --go` is specified on the command line.
+Please also specify `--go-sdk-folder=<path to the root directory of your azure-sdk-for-go clone>`.
+
+``` yaml $(tag) == 'package-2017-09' && $(go)
+output-folder: $(go-sdk-folder)/services/network/mgmt/2017-09-01/network
+```
+
+### Tag: package-2017-08 and go
+
+These settings apply only when `--tag=package-2017-08 --go` is specified on the command line.
+Please also specify `--go-sdk-folder=<path to the root directory of your azure-sdk-for-go clone>`.
+
+``` yaml $(tag) == 'package-2017-08' && $(go)
+output-folder: $(go-sdk-folder)/services/network/mgmt/2017-08-01/network
+```
+
+### Tag: package-2017-06 and go
+
+These settings apply only when `--tag=package-2017-06 --go` is specified on the command line.
+Please also specify `--go-sdk-folder=<path to the root directory of your azure-sdk-for-go clone>`.
+
+``` yaml $(tag) == 'package-2017-06' && $(go)
+output-folder: $(go-sdk-folder)/services/network/mgmt/2017-06-01/network
+```
+
+### Tag: package-2017-03 and go
+
+These settings apply only when `--tag=package-2017-03 --go` is specified on the command line.
+Please also specify `--go-sdk-folder=<path to the root directory of your azure-sdk-for-go clone>`.
+
+``` yaml $(tag) == 'package-2017-03' && $(go)
+output-folder: $(go-sdk-folder)/services/network/mgmt/2017-03-01/network
+```
+
+### Tag: package-2016-12 and go
+
+These settings apply only when `--tag=package-2016-12 --go` is specified on the command line.
+Please also specify `--go-sdk-folder=<path to the root directory of your azure-sdk-for-go clone>`.
+
+``` yaml $(tag) == 'package-2016-12' && $(go)
+output-folder: $(go-sdk-folder)/services/network/mgmt/2016-12-01/network
+```
+
+### Tag: package-2016-09 and go
+
+These settings apply only when `--tag=package-2016-09 --go` is specified on the command line.
+Please also specify `--go-sdk-folder=<path to the root directory of your azure-sdk-for-go clone>`.
+
+``` yaml $(tag) == 'package-2016-09' && $(go)
+output-folder: $(go-sdk-folder)/services/network/mgmt/2016-09-01/network
+```
+
+### Tag: package-2016-06 and go
+
+These settings apply only when `--tag=package-2016-06 --go` is specified on the command line.
+Please also specify `--go-sdk-folder=<path to the root directory of your azure-sdk-for-go clone>`.
+
+``` yaml $(tag) == 'package-2016-06' && $(go)
+output-folder: $(go-sdk-folder)/services/network/mgmt/2016-06-01/network
+```
+
+### Tag: package-2016-03 and go
+
+These settings apply only when `--tag=package-2016-03 --go` is specified on the command line.
+Please also specify `--go-sdk-folder=<path to the root directory of your azure-sdk-for-go clone>`.
+
+``` yaml $(tag) == 'package-2016-03' && $(go)
+output-folder: $(go-sdk-folder)/services/network/mgmt/2016-03-30/network
+```
+
+### Tag: package-2015-06split and go
+
+These settings apply only when `--tag=package-2015-06split --go` is specified on the command line.
+Please also specify `--go-sdk-folder=<path to the root directory of your azure-sdk-for-go clone>`.
+
+``` yaml $(tag) == 'package-2015-06split' && $(go)
+output-folder: $(go-sdk-folder)/services/network/mgmt/2015-06-15/network
+```
+
+### Tag: package-2015-05-preview and go
+
+These settings apply only when `--tag=package-2015-05-preview --go` is specified on the command line.
+Please also specify `--go-sdk-folder=<path to the root directory of your azure-sdk-for-go clone>`.
+
+``` yaml $(tag) == 'package-2015-05-preview' && $(go)
+output-folder: $(go-sdk-folder)/services/network/mgmt/2015-05-01-preview/network
+```
+
+
 ## Python
 
 These settings apply only when `--python` is specified on the command line.
