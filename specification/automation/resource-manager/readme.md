@@ -59,6 +59,31 @@ input-file:
 ```
 
 
+### Tag: package-2017-05
+
+These settings apply only when `--tag=package-2017-05` is specified on the command line.
+
+``` yaml $(tag) == 'package-2017-05'
+input-file:
+- Microsoft.Automation/2017-05-15-preview/account.json
+- Microsoft.Automation/2017-05-15-preview/certificate.json
+- Microsoft.Automation/2017-05-15-preview/connection.json
+- Microsoft.Automation/2017-05-15-preview/connectionType.json
+- Microsoft.Automation/2017-05-15-preview/credential.json
+- Microsoft.Automation/2017-05-15-preview/definitions.json
+- Microsoft.Automation/2017-05-15-preview/dscCompilationJob.json
+- Microsoft.Automation/2017-05-15-preview/dscConfiguration.json
+- Microsoft.Automation/2017-05-15-preview/dscNode.json
+- Microsoft.Automation/2017-05-15-preview/dscNodeConfiguration.json
+- Microsoft.Automation/2017-05-15-preview/hybridRunbookWorkerGroup.json
+- Microsoft.Automation/2017-05-15-preview/job.json
+- Microsoft.Automation/2017-05-15-preview/jobSchedule.json
+- Microsoft.Automation/2017-05-15-preview/module.json
+- Microsoft.Automation/2017-05-15-preview/runbook.json
+- Microsoft.Automation/2017-05-15-preview/schedule.json
+- Microsoft.Automation/2017-05-15-preview/variable.json
+- Microsoft.Automation/2017-05-15-preview/webhook.json
+```
 
 ---
 # Code Generation
