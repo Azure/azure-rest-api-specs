@@ -376,29 +376,30 @@
         "ResourceGroup": {
             "properties": {
                 "name": {
-                "type": "string",
-                "description": "Name of the service resource group as specified in the service model input artifact. For ARM resources, this is the resource group name."
-            },
-            "location": {
-                "type": "string",
-                "description": "The root location of all rollout artifacts relative to the blob storage container as specified in the input."
-            },
-            "lastUpdatedTime": {
-                "type": "string",
-                "format": "date-time",
-                "readOnly": "true",
-                "description": "Last time this resource group information was updated in UTC."
-            },
-            "subscriptionId": {
-                "type": "string",
-                "description": "Subscription Id this resource group belongs to, as specified in the service model input artifact."
-            },
-            "resources": {
-                "type": "array",
-                "items": {
-                    "$ref": "#/definitions/Resource"
+                    "type": "string",
+                    "description": "Name of the service resource group as specified in the service model input artifact. For ARM resources, this is the resource group name."
                 },
-                "description": "Set of detailed action result information on target resources."
+                "location": {
+                    "type": "string",
+                    "description": "The root location of all rollout artifacts relative to the blob storage container as specified in the input."
+                },
+                "lastUpdatedTime": {
+                    "type": "string",
+                    "format": "date-time",
+                    "readOnly": "true",
+                    "description": "Last time this resource group information was updated in UTC."
+                },
+                "subscriptionId": {
+                    "type": "string",
+                    "description": "Subscription Id this resource group belongs to, as specified in the service model input artifact."
+                },
+                "resources": {
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/definitions/Resource"
+                    },
+                    "description": "Set of detailed action result information on target resources."
+                }
             },
             "description": "Operational information of a specific resource group deployment."
         },
