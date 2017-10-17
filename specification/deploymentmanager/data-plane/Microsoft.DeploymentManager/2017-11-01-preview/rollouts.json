@@ -209,160 +209,173 @@
     },
     "definitions": {
         "ArtifactSource": {
-            "version": {
-                "type": "string",
-                "required": true,
-                "description": "This object's version."
-            },
-            "type": {
-                "type": "string",
-                "required": true,
-                "enum": [ "AzureStorage" ],
-                "description": "Type of storage where artifacts are stored. 'AzureStorage' here refers to Azure blob storage container. All rollout artifacts must be under a single blob container. Artifacts within the blob container can be organized by mimicking filesystem structure with recursive directories and files"
-            },
-            "serviceGroupRoot": {
-                "type": "string",
-                "required": false,
-                "description": "The root location of all rollout artifacts relative to the blob storage container. If this value is not provided the blob storage container is considered as the root location."
-            },
-            "rolloutSpecificationReference": {
-                "type": "string",
-                "required": true,
-                "description": "Reference path to the rollout specification file within the blob storage container. This reference must be relative to the 'serviceGroupRoot'."
-            },
-            "credential": {
-                "$ref": "#/definitions/Credential",
-                "required": true
+            "properties": {
+                "version": {
+                    "type": "string",
+                    "required": true,
+                    "description": "This object's version."
+                },
+                "type": {
+                    "type": "string",
+                    "required": true,
+                    "enum": [ "AzureStorage" ],
+                    "description": "Type of storage where artifacts are stored. 'AzureStorage' here refers to Azure blob storage container. All rollout artifacts must be under a single blob container. Artifacts within the blob container can be organized by mimicking filesystem structure with recursive directories and files"
+                },
+                "serviceGroupRoot": {
+                    "type": "string",
+                    "required": false,
+                    "description": "The root location of all rollout artifacts relative to the blob storage container. If this value is not provided the blob storage container is considered as the root location."
+                },
+                "rolloutSpecificationReference": {
+                    "type": "string",
+                    "required": true,
+                    "description": "Reference path to the rollout specification file within the blob storage container. This reference must be relative to the 'serviceGroupRoot'."
+                },
+                "credential": {
+                    "$ref": "#/definitions/Credential",
+                    "required": true
+                }
             },
             "description": "Source details of the artifacts that defines the rollout."
         },
         "Credential": {
-            "type": {
-                "type": "string",
-                "enum": [ "AzureStorageSASUri" ],
-                "description": "Describes the type of credentials to use to access artifacts. 'AzureStorageSASUri' here refers to the credential passed in as a uri with the SAS token embedded in the uri"
-            },
-            "source": {
-                "type": "string",
-                "enum": [ "Api" ],
-                "description": "Describes the source of credentials to access artifacts. 'Api' here specifies that the credential is passed inline in the API (as opposed to a pointer to another source like KeyVault.)"
-            },
-            "data": {
-                "type": "object",
-                "description": "Dictionary of key-value pairs. For 'AzureStorageSASUri', the key must be named 'value' and the value must be the full blob container SAS uri.)"
+            "properties": {
+                "type": {
+                    "type": "string",
+                    "enum": [ "AzureStorageSASUri" ],
+                    "description": "Describes the type of credentials to use to access artifacts. 'AzureStorageSASUri' here refers to the credential passed in as a uri with the SAS token embedded in the uri"
+                },
+                "source": {
+                    "type": "string",
+                    "enum": [ "Api" ],
+                    "description": "Describes the source of credentials to access artifacts. 'Api' here specifies that the credential is passed inline in the API (as opposed to a pointer to another source like KeyVault.)"
+                },
+                "data": {
+                    "type": "object",
+                    "description": "Dictionary of key-value pairs. For 'AzureStorageSASUri', the key must be named 'value' and the value must be the full blob container SAS uri.)"
+                }
             },
             "description": "Authentication information required to access artifact source."
         },
         "Rollout": {
-            "rolloutId": {
-                "type": "string",
-                "readOnly": "true",
-                "description": "The unique identifier of the rollout created by the system. This identifier should be used for all subsequent operations on the rollout ."
-            },
-            "rolloutName": {
-                "type": "string",
-                "description": "The name of the rollout as specified in the rollout specifiction input."
-            },
-            "status": {
-                "type": "string",
-                "readOnly": "true",
-                "description": "The current status of the rollout."
-            },
-            "totalRetryAttempts": {
-                "type": "integer",
-                "format": "int32",
-                "description": "The cardinal count of total number of retries performed on the rollout at a given time."
-            },
-            "rolloutDetails": {
-                "$ref": "#/definitions/RolloutDetails",
-                "description": "Detailed information of the rollout."
-            },
-            "rolloutOperationInfo": {
-                "$ref": "#/definitions/RolloutOperationInfo",
-                "description": "Operational information of the rollout."
-            },
-            "resourceGroups": {
-                "type": "array",
-                "items": {
-                    "$ref": "#/definitions/ResourceGroup"
+            "properties": {
+                "rolloutId": {
+                    "type": "string",
+                    "readOnly": "true",
+                    "description": "The unique identifier of the rollout created by the system. This identifier should be used for all subsequent operations on the rollout ."
                 },
-                "description": "Set of detailed action result information on target resource groups."
+                "rolloutName": {
+                    "type": "string",
+                    "description": "The name of the rollout as specified in the rollout specifiction input."
+                },
+                "status": {
+                    "type": "string",
+                    "readOnly": "true",
+                    "description": "The current status of the rollout."
+                },
+                "totalRetryAttempts": {
+                    "type": "integer",
+                    "format": "int32",
+                    "description": "The cardinal count of total number of retries performed on the rollout at a given time."
+                },
+                "rolloutDetails": {
+                    "$ref": "#/definitions/RolloutDetails",
+                    "description": "Detailed information of the rollout."
+                },
+                "rolloutOperationInfo": {
+                    "$ref": "#/definitions/RolloutOperationInfo",
+                    "description": "Operational information of the rollout."
+                },
+                "resourceGroups": {
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/definitions/ResourceGroup"
+                    },
+                    "description": "Set of detailed action result information on target resource groups."
+                }
             },
             "description": "Response containing details of a specific rollout."
         },
         "RolloutDetails": {
-            "serviceGroup": {
-                "type": "string",
-                "description": "The service group name as soecified in the service model input. This infomration is required for all operations on the rollout."
-            },
-            "environment": {
-                "type": "string",
-                "description": "The environment name as specified in the service model input."
-            },
-            "buildVersion": {
-                "type": "string",
-                "description": "The build version as specified in the input."
-            },
-            "caller": {
-                "type": "string",
-                "description": "The user / service principal name that initiated the rollout or the retry attempt."
-            },
-            "artifactSource": {
-                "$ref": "#/definitions/ArtifactSourceResponse",
-                "description": "Artifact source information as specified in the input."
+            "properties": {                
+                "serviceGroup": {
+                    "type": "string",
+                    "description": "The service group name as soecified in the service model input. This infomration is required for all operations on the rollout."
+                },
+                "environment": {
+                    "type": "string",
+                    "description": "The environment name as specified in the service model input."
+                },
+                "buildVersion": {
+                    "type": "string",
+                    "description": "The build version as specified in the input."
+                },
+                "caller": {
+                    "type": "string",
+                    "description": "The user / service principal name that initiated the rollout or the retry attempt."
+                },
+                "artifactSource": {
+                    "$ref": "#/definitions/ArtifactSourceResponse",
+                    "description": "Artifact source information as specified in the input."
+                }
             },
             "description": "Detailed input information of the rollout."
         },
         "RolloutOperationInfo": {
-            "retryAttempt": {
-                "type": "integer",
-                "format": "int32",
-                "description": "The ordinal count of retry attempt. 0 if no retries of the rollout have been performed."
-            },
-            "skipSucceededOnRetry": {
-                "type": "boolean",
-                "description": "True if skipping all successful steps in the given retry attempt was chosen. False otherwise."
-            },
-            "startTime": {
-                "type": "string",
-                "format": "date-time",
-                "readOnly": "true",               
-                "description": "The start time of the rollout in UTC."
-            },
-            "endTime": {
-                "type": "string",
-                "format": "date-time",
-                "readOnly": "true",                
-                "description": "The start time of the rollout in UTC. This property will not be set if the rollout has not completed yet."
-            },
-            "errorInfo": {
-                "$ref": "#/definitions/ErrorInfo",
-                "description": "Detailed error information of the rollout if any."
+            "properties": {
+                "retryAttempt": {
+                    "type": "integer",
+                    "format": "int32",
+                    "description": "The ordinal count of retry attempt. 0 if no retries of the rollout have been performed."
+                },
+                "skipSucceededOnRetry": {
+                    "type": "boolean",
+                    "description": "True if skipping all successful steps in the given retry attempt was chosen. False otherwise."
+                },
+                "startTime": {
+                    "type": "string",
+                    "format": "date-time",
+                    "readOnly": "true",               
+                    "description": "The start time of the rollout in UTC."
+                },
+                "endTime": {
+                    "type": "string",
+                    "format": "date-time",
+                    "readOnly": "true",                
+                    "description": "The start time of the rollout in UTC. This property will not be set if the rollout has not completed yet."
+                },
+                "errorInfo": {
+                    "$ref": "#/definitions/ErrorInfo",
+                    "description": "Detailed error information of the rollout if any."
+                }
             },
             "description": "Detailed runtime information of the rollout."
         },
         "ArtifactSourceResponse": {
-            "type": {
-                "type": "string",
-                "enum": [ "AzureStorage" ],
-                "description": "Type of storage where artifacts are stored as specified in the input. 'AzureStorage' here refers to Azure blob storage container."
-            },
-            "serviceGroupRoot": {
-                "type": "string",
-                "description": "The root location of all rollout artifacts relative to the blob storage container as specified in the input."
-            },
-            "rolloutSpecificationReference": {
-                "type": "string",
-                "description": "Reference path to the rollout specification file within the blob storage container relative to 'serviceGroupRoot' as specified in the input."
-            },
-            "location": {
-                "type": "string",
-                "description": "SAS uri of the source location of artifacts as specified in the input without the signature component."
+            "properties": {
+                "type": {
+                    "type": "string",
+                    "enum": [ "AzureStorage" ],
+                    "description": "Type of storage where artifacts are stored as specified in the input. 'AzureStorage' here refers to Azure blob storage container."
+                },
+                "serviceGroupRoot": {
+                    "type": "string",
+                    "description": "The root location of all rollout artifacts relative to the blob storage container as specified in the input."
+                },
+                "rolloutSpecificationReference": {
+                    "type": "string",
+                    "description": "Reference path to the rollout specification file within the blob storage container relative to 'serviceGroupRoot' as specified in the input."
+                },
+                "location": {
+                    "type": "string",
+                    "description": "SAS uri of the source location of artifacts as specified in the input without the signature component."
+                }
             },
             "description": "Source artifact information as specified in the request."
         },
         "ResourceGroup": {
-            "name": {
+            "properties": {
+                "name": {
                 "type": "string",
                 "description": "Name of the service resource group as specified in the service model input artifact. For ARM resources, this is the resource group name."
             },
@@ -390,136 +403,148 @@
             "description": "Operational information of a specific resource group deployment."
         },
         "Resource": {
-            "name": {
-                "type": "string",
-                "description": "Name of the service resource as specified in the service model input artifact."
-            },
-            "actions": {
-                "type": "array",
-                "items": {
-                    "$ref": "#/definitions/Action"
+            "properties": {
+                "name": {
+                    "type": "string",
+                    "description": "Name of the service resource as specified in the service model input artifact."
                 },
-                "description": "Set of detailed action result information on target resource."
+                "actions": {
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/definitions/Action"
+                    },
+                    "description": "Set of detailed action result information on target resource."
+                }
             },
             "description": "Operational information of a specific resource in a deployment."
         },
         "Action": {
-            "name": {
-                "type": "string",
-                "description": "Name of the action as specified in the rollout specification input artifact."
-            },
-            "status": {
-                "type": "string",
-                "readOnly": "true",
-                "description": "Current state of the action."
-            },
-            "actionOperationInfo": {
-                "$ref": "#/definitions/ActionOperationInfo",
-                "description": "Detailed information of specific action execution."
-            },
-            "resourceOperations": {
-                "type": "array",
-                "items": {
-                    "$ref": "#/definitions/ResourceOperation"
+            "properties": {
+                "name": {
+                    "type": "string",
+                    "description": "Name of the action as specified in the rollout specification input artifact."
                 },
-                "description": "Set of resource operation information."
-            },
-            "messages": {
-                "type": "array",
-                "items": {
-                    "$ref": "#/definitions/Message"
+                "status": {
+                    "type": "string",
+                    "readOnly": "true",
+                    "description": "Current state of the action."
                 },
-                "description": "Supplementary informative messages during rollout."
+                "actionOperationInfo": {
+                    "$ref": "#/definitions/ActionOperationInfo",
+                    "description": "Detailed information of specific action execution."
+                },
+                "resourceOperations": {
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/definitions/ResourceOperation"
+                    },
+                    "description": "Set of resource operation information."
+                },
+                "messages": {
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/definitions/Message"
+                    },
+                    "description": "Supplementary informative messages during rollout."
+                }
             },
             "description": "Detailed result of a specific action on a target resource."
         },
         "ActionOperationInfo": {
-            "correlationId": {
-                "type": "string",
-                "readOnly": "true",                
-                "description": "Unique identifier to track the request for ARM-based resources."
-            },
-            "startTime": {
-                "type": "string",
-                "format": "date-time",
-                "readOnly": "true",                
-                "description": "Start time of the action in UTC."
-            },
-            "endTime": {
-                "type": "string",
-                "format": "date-time",
-                "readOnly": "true",                
-                "description": "End time of the action in UTC."
-            },
-            "lastUpdatedTime": {
-                "type": "string",
-                "format": "date-time",
-                "readOnly": "true",                
-                "description": "Last time in UTC this operation was updated."
-            },
-            "errorInfo": {
-                "type": "string",
-                "description": "Detailed error information of action failure if any."
+            "properties": {
+                "correlationId": {
+                    "type": "string",
+                    "readOnly": "true",                
+                    "description": "Unique identifier to track the request for ARM-based resources."
+                },
+                "startTime": {
+                    "type": "string",
+                    "format": "date-time",
+                    "readOnly": "true",                
+                    "description": "Start time of the action in UTC."
+                },
+                "endTime": {
+                    "type": "string",
+                    "format": "date-time",
+                    "readOnly": "true",                
+                    "description": "End time of the action in UTC."
+                },
+                "lastUpdatedTime": {
+                    "type": "string",
+                    "format": "date-time",
+                    "readOnly": "true",                
+                    "description": "Last time in UTC this operation was updated."
+                },
+                "errorInfo": {
+                    "type": "string",
+                    "description": "Detailed error information of action failure if any."
+                }
             },
             "description": "Detailed information of specific action execution."
         },
         "ResourceOperation": {
-            "resourceName": {
-                "type": "string",
-                "description": "Name of the resource as specified in the artifacts. For ARM resources, this is the name of the resource specified in the template."
-            },
-            "operationId": {
-                "type": "string",
-                "readOnly": "true",                
-                "description": "Unique identifier of the operation. For ARM resources, this is the operationId obtained from ARM service."
-            },
-            "resourceType": {
-                "type": "string",
-                "description": "Type of the resource as specified in the artifacts. For ARM resources, this is the type of the resource specified in the template."
-            },
-            "provisioningState": {
-                "type": "string",
-                "readOnly": "true",                
-                "description": "State of the resource deployment. For ARM resources, this is the current provisioning state of the resource."
-            },
-            "statusMessage": {
-                "type": "string",
-                "description": "Descriptive information of the resource operation."
-            },
-            "statusCode": {
-                "type": "string",
-                "readOnly": "true",                
-                "description": "Http status code of the operation."
+            "properties": {
+                "resourceName": {
+                    "type": "string",
+                    "description": "Name of the resource as specified in the artifacts. For ARM resources, this is the name of the resource specified in the template."
+                },
+                "operationId": {
+                    "type": "string",
+                    "readOnly": "true",                
+                    "description": "Unique identifier of the operation. For ARM resources, this is the operationId obtained from ARM service."
+                },
+                "resourceType": {
+                    "type": "string",
+                    "description": "Type of the resource as specified in the artifacts. For ARM resources, this is the type of the resource specified in the template."
+                },
+                "provisioningState": {
+                    "type": "string",
+                    "readOnly": "true",                
+                    "description": "State of the resource deployment. For ARM resources, this is the current provisioning state of the resource."
+                },
+                "statusMessage": {
+                    "type": "string",
+                    "description": "Descriptive information of the resource operation."
+                },
+                "statusCode": {
+                    "type": "string",
+                    "readOnly": "true",                
+                    "description": "Http status code of the operation."
+                }
             },
             "description": "Individial resource operation information."
         },
         "Message": {
-            "timeStamp": {
-                "type": "string",
-                "format": "date-time",
-                "readOnly": "true",                
-                "description": "Time in UTC this message was provided."
-            },
-            "message": {
-                "type": "string",
-                "readOnly": "true",                
-                "description": "The actual message text."
+            "properties": {
+                "timeStamp": {
+                    "type": "string",
+                    "format": "date-time",
+                    "readOnly": "true",                
+                    "description": "Time in UTC this message was provided."
+                },
+                "message": {
+                    "type": "string",
+                    "readOnly": "true",                
+                    "description": "The actual message text."
+                }
             },
             "description": "Supplementary informative messages during rollout."
         },
         "ErrorInfo": {
-            "errorReason": {
-                "type": "string",
-                "description": "Descriptive error information."
-            },
-            "helpLink": {
-                "type": "string",
-                "readOnly": "true",                
-                "description": "Http link to documentation that may help troubleshooting or fixing the error."
-            },
-            "escalationInfo": {
-                "type": "string",
-                "description": "More detailed error information."
+            "properties": {
+                "errorReason": {
+                    "type": "string",
+                    "description": "Descriptive error information."
+                },
+                "helpLink": {
+                    "type": "string",
+                    "readOnly": "true",                
+                    "description": "Http link to documentation that may help troubleshooting or fixing the error."
+                },
+                "escalationInfo": {
+                    "type": "string",
+                    "description": "More detailed error information."
+                }
             },
             "description": "Detailed error information of action failure if any."
         }
