@@ -93,7 +93,6 @@
                         "in": "query",
                         "required": false,
                         "type": "boolean",
-                        "defaultValue": false,
                         "description": "If true, will return the full result of the rollout. If false, will contain only top-level information. Defaults to false if not specified."
                     },
                     { 
@@ -104,7 +103,8 @@
                     "200": {
                         "description": "OK",
                         "schema": {
-                            "$ref": "#/definitions/Rollout"                        }
+                            "$ref": "#/definitions/Rollout"
+                        }
                     },
                     "default":{
                         "description": "ADM error text describing failure reason. This text is set as Reason-Phrase per HTTP RFC2616"
@@ -189,7 +189,6 @@
                         "in": "query",
                         "required": false,
                         "type": "boolean",
-                        "defaultValue": false,
                         "description": "If true, will skip all succeeded steps so far in the rollout. If false, will execute the entire rollout again regardless of the current state of individual resources. Defaults to false if not specified."
                     },
                     { 
@@ -212,30 +211,26 @@
             "properties": {
                 "version": {
                     "type": "string",
-                    "required": true,
                     "description": "This object's version."
                 },
                 "type": {
                     "type": "string",
-                    "required": true,
                     "enum": [ "AzureStorage" ],
                     "description": "Type of storage where artifacts are stored. 'AzureStorage' here refers to Azure blob storage container. All rollout artifacts must be under a single blob container. Artifacts within the blob container can be organized by mimicking filesystem structure with recursive directories and files"
                 },
                 "serviceGroupRoot": {
                     "type": "string",
-                    "required": false,
                     "description": "The root location of all rollout artifacts relative to the blob storage container. If this value is not provided the blob storage container is considered as the root location."
                 },
                 "rolloutSpecificationReference": {
                     "type": "string",
-                    "required": true,
                     "description": "Reference path to the rollout specification file within the blob storage container. This reference must be relative to the 'serviceGroupRoot'."
                 },
                 "credential": {
-                    "$ref": "#/definitions/Credential",
-                    "required": true
+                    "$ref": "#/definitions/Credential"
                 }
             },
+            "required": [ "version", "type", "rolloutSpecificationReference", "credential" ],
             "description": "Source details of the artifacts that defines the rollout."
         },
         "Credential": {
@@ -261,7 +256,7 @@
             "properties": {
                 "rolloutId": {
                     "type": "string",
-                    "readOnly": "true",
+                    "readOnly": true,
                     "description": "The unique identifier of the rollout created by the system. This identifier should be used for all subsequent operations on the rollout ."
                 },
                 "rolloutName": {
@@ -270,7 +265,7 @@
                 },
                 "status": {
                     "type": "string",
-                    "readOnly": "true",
+                    "readOnly": true,
                     "description": "The current status of the rollout."
                 },
                 "totalRetryAttempts": {
@@ -335,13 +330,13 @@
                 "startTime": {
                     "type": "string",
                     "format": "date-time",
-                    "readOnly": "true",               
+                    "readOnly": true,               
                     "description": "The start time of the rollout in UTC."
                 },
                 "endTime": {
                     "type": "string",
                     "format": "date-time",
-                    "readOnly": "true",                
+                    "readOnly": true,                
                     "description": "The start time of the rollout in UTC. This property will not be set if the rollout has not completed yet."
                 },
                 "errorInfo": {
@@ -386,7 +381,7 @@
                 "lastUpdatedTime": {
                     "type": "string",
                     "format": "date-time",
-                    "readOnly": "true",
+                    "readOnly": true,
                     "description": "Last time this resource group information was updated in UTC."
                 },
                 "subscriptionId": {
@@ -427,7 +422,7 @@
                 },
                 "status": {
                     "type": "string",
-                    "readOnly": "true",
+                    "readOnly": true,
                     "description": "Current state of the action."
                 },
                 "actionOperationInfo": {
@@ -455,25 +450,25 @@
             "properties": {
                 "correlationId": {
                     "type": "string",
-                    "readOnly": "true",                
+                    "readOnly": true,                
                     "description": "Unique identifier to track the request for ARM-based resources."
                 },
                 "startTime": {
                     "type": "string",
                     "format": "date-time",
-                    "readOnly": "true",                
+                    "readOnly": true,                
                     "description": "Start time of the action in UTC."
                 },
                 "endTime": {
                     "type": "string",
                     "format": "date-time",
-                    "readOnly": "true",                
+                    "readOnly": true,                
                     "description": "End time of the action in UTC."
                 },
                 "lastUpdatedTime": {
                     "type": "string",
                     "format": "date-time",
-                    "readOnly": "true",                
+                    "readOnly": true,                
                     "description": "Last time in UTC this operation was updated."
                 },
                 "errorInfo": {
@@ -491,7 +486,7 @@
                 },
                 "operationId": {
                     "type": "string",
-                    "readOnly": "true",                
+                    "readOnly": true,                
                     "description": "Unique identifier of the operation. For ARM resources, this is the operationId obtained from ARM service."
                 },
                 "resourceType": {
@@ -500,7 +495,7 @@
                 },
                 "provisioningState": {
                     "type": "string",
-                    "readOnly": "true",                
+                    "readOnly": true,                
                     "description": "State of the resource deployment. For ARM resources, this is the current provisioning state of the resource."
                 },
                 "statusMessage": {
@@ -509,7 +504,7 @@
                 },
                 "statusCode": {
                     "type": "string",
-                    "readOnly": "true",                
+                    "readOnly": true,                
                     "description": "Http status code of the operation."
                 }
             },
@@ -520,12 +515,12 @@
                 "timeStamp": {
                     "type": "string",
                     "format": "date-time",
-                    "readOnly": "true",                
+                    "readOnly": true,                
                     "description": "Time in UTC this message was provided."
                 },
                 "message": {
                     "type": "string",
-                    "readOnly": "true",                
+                    "readOnly": true,                
                     "description": "The actual message text."
                 }
             },
@@ -539,7 +534,7 @@
                 },
                 "helpLink": {
                     "type": "string",
-                    "readOnly": "true",                
+                    "readOnly": true,                
                     "description": "Http link to documentation that may help troubleshooting or fixing the error."
                 },
                 "escalationInfo": {
