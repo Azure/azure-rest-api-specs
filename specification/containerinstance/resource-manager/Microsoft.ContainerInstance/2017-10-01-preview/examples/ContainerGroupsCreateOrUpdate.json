@@ -4,8 +4,8 @@
     "api-version": "2017-10-01-preview",
     "resourceGroupName": "demo",
     "containerGroupName": "mycontainers",
-    "parameters": {
-      "location": "west us",
+    "containerGroup": {
+      "location": "westus",
       "name": "mycontainers",
       "properties": {
         "containers": [
@@ -41,33 +41,33 @@
               ]
             }
           }
-        ],
-        "imageRegistryCredentials": [],
-        "ipAddress": {
-          "ports": [
-            {
-              "protocol": "TCP",
-              "port": 80
-            }
-          ],
-          "type": "Public"
-        },
-        "osType": "Linux",
-        "volumes": [
-          {
-            "name": "volume1",
-            "azureFile": {
-              "shareName": "shareName",
-              "storageAccountName": "accountName",
-              "storageAccountKey": ""
-            }
-          },
-          {
-            "name": "volume2",
-            "emptyDir": {}
-          }
         ]
       },
+      "imageRegistryCredentials": [],
+      "ipAddress": {
+        "ports": [
+          {
+            "protocol": "TCP",
+            "port": 80
+          }
+        ],
+        "type": "Public"
+      },
+      "osType": "Linux",
+      "volumes": [
+        {
+          "name": "volume1",
+          "azureFile": {
+            "shareName": "shareName",
+            "storageAccountName": "accountName",
+            "storageAccountKey": ""
+          }
+        },
+        {
+          "name": "volume2",
+          "emptyDir": {}
+        }
+      ],
       "type": "Microsoft.ContainerInstance/containerGroups"
     }
   },
