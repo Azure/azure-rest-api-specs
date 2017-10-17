@@ -247,10 +247,13 @@
     },
     "/providers/Microsoft.ContainerInstance/operations": {
       "get": {
-        "operationId": "Operation_List",
+        "tags": [
+          "Operations"
+        ],
+        "operationId": "Operations_List",
         "x-ms-examples": {
           "OperationsList": {
-            "$ref": "./examples/ContainerGroupOperationsList.json"
+            "$ref": "./examples/OperationsList.json"
           }
         },
         "description": "List the operations for Azure Container Instance service.",
@@ -839,10 +842,6 @@
             "$ref": "#/definitions/Operation"
           },
           "description": "The list of operations."
-        },
-        "nextLink": {
-          "type": "string",
-          "description": "The URI to fetch the next page of operations."
         }
       }
     },
@@ -888,11 +887,7 @@
             "modelAsString": true
           }
         }
-      },
-      "required": [
-          "name",
-          "dispaly"
-      ]
+      }
     },        
     "ContainerGroupListResult": {
       "description": "The container group list response that contains the container group properties.",

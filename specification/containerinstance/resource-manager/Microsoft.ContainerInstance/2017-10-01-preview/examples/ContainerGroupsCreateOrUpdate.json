@@ -1,19 +1,18 @@
 {
   "parameters": {
-    "subscriptionId": "subid",
+    "subscriptionId": "ae43b1e3-c35d-4c8c-bc0d-f148b4c52b78",
     "api-version": "2017-10-01-preview",
     "resourceGroupName": "demo",
-    "containerGroupName": "demo1",
+    "containerGroupName": "mycontainers",
     "containerGroup": {
-      "id": "/subscriptions/subid/resourceGroups/demo/providers/Microsoft.ContainerInstance/containerGroups/demo1",
       "location": "west us",
-      "name": "demo1",
+      "name": "mycontainers",
       "properties": {
         "containers": [
           {
-            "name": "demo1",
+            "name": "mycontainers",
             "properties": {
-              "command": null,
+              "command": [],
               "environmentVariables": [],
               "image": "nginx",
               "instanceView": {},
@@ -44,21 +43,25 @@
             }
           }
         ],
-        "imageRegistryCredentials": null,
+        "imageRegistryCredentials": [],
         "ipAddress": {
+          "ports": [
+            {
+              "protocol": "TCP",
+              "port": 80
+            }
+          ],
           "type": "Public"
         },
         "osType": "Linux",
-        "provisioningState": null,
         "restartPolicy": null,
-        "state": null,
         "volumes": [
           {
             "name": "volume1",
             "azureFile": {
               "shareName": "shareName",
               "storageAccountName": "accountName",
-              "storageAccountKey": "accountKey"
+              "storageAccountKey": ""
             }
           },
           {
@@ -75,28 +78,24 @@
   "responses": {
     "200": {
       "body": {
-        "id": "/subscriptions/subid/resourceGroups/demo/providers/Microsoft.ContainerInstance/containerGroups/demo1",
-        "location": "WestUs",
-        "name": "demo1",
         "properties": {
+          "provisioningState": "Creating",
           "containers": [
             {
-              "name": "demo1",
+              "name": "mycontainers",
               "properties": {
-                "command": null,
-                "environmentVariables": [],
                 "image": "nginx",
-                "instanceView": null,
+                "command": [],
                 "ports": [
                   {
                     "port": 80
                   }
                 ],
+                "environmentVariables": [],
                 "resources": {
-                  "limits": null,
                   "requests": {
-                    "cpu": 1,
-                    "memoryInGb": 1.5
+                    "memoryInGB": 1.5,
+                    "cpu": 1
                   }
                 },
                 "volumeMounts": [
@@ -114,27 +113,29 @@
               }
             }
           ],
-          "imageRegistryCredentials": null,
+          "imageRegistryCredentials": [],
           "ipAddress": {
-            "ip": "10.0.0.1",
             "ports": [
               {
-                "port": 80,
-                "protocol": "TCP"
+                "protocol": "TCP",
+                "port": 80
               }
-            ]
+            ],
+            "ip": "13.64.70.13",
+            "type": "Public"
           },
           "osType": "Linux",
-          "provisioningState": "Succeeded",
-          "restartPolicy": null,
-          "state": null,
+          "instanceView": {
+            "events": [],
+            "state": "Pending"
+          },
           "volumes": [
             {
               "name": "volume1",
               "azureFile": {
                 "shareName": "shareName",
                 "storageAccountName": "accountName",
-                "storageAccountKey": "accountKey"
+                "storageAccountKey": ""
               }
             },
             {
@@ -143,35 +144,32 @@
             }
           ]
         },
-        "resourceGroup": "demo",
-        "tags": null,
-        "type": "Microsoft.ContainerInstance/containerGroups"
+        "id": "/subscriptions/ae43b1e3-c35d-4c8c-bc0d-f148b4c52b78/resourceGroups/demo/providers/Microsoft.ContainerInstance/containerGroups/mycontainers",
+        "name": "mycontainers",
+        "type": "Microsoft.ContainerInstance/containerGroups",
+        "location": "westus"
       }
     },
     "201": {
       "body": {
-        "id": "/subscriptions/subid/resourceGroups/demo/providers/Microsoft.ContainerInstance/containerGroups/demo1",
-        "location": "WestUs",
-        "name": "demo1",
         "properties": {
+          "provisioningState": "Creating",
           "containers": [
             {
-              "name": "demo1",
+              "name": "mycontainers",
               "properties": {
-                "command": null,
-                "environmentVariables": [],
                 "image": "nginx",
-                "instanceView": null,
+                "command": [],
                 "ports": [
                   {
                     "port": 80
                   }
                 ],
+                "environmentVariables": [],
                 "resources": {
-                  "limits": null,
                   "requests": {
-                    "cpu": 1,
-                    "memoryInGb": 1.5
+                    "memoryInGB": 1.5,
+                    "cpu": 1
                   }
                 },
                 "volumeMounts": [
@@ -189,27 +187,29 @@
               }
             }
           ],
-          "imageRegistryCredentials": null,
+          "imageRegistryCredentials": [],
           "ipAddress": {
-            "ip": "10.0.0.1",
             "ports": [
               {
-                "port": 80,
-                "protocol": "TCP"
+                "protocol": "TCP",
+                "port": 80
               }
-            ]
+            ],
+            "ip": "13.64.70.13",
+            "type": "Public"
           },
           "osType": "Linux",
-          "provisioningState": "Succeeded",
-          "restartPolicy": null,
-          "state": null,
+          "instanceView": {
+            "events": [],
+            "state": "Pending"
+          },
           "volumes": [
             {
               "name": "volume1",
               "azureFile": {
                 "shareName": "shareName",
                 "storageAccountName": "accountName",
-                "storageAccountKey": "accountKey"
+                "storageAccountKey": ""
               }
             },
             {
@@ -218,9 +218,10 @@
             }
           ]
         },
-        "resourceGroup": "demo",
-        "tags": null,
-        "type": "Microsoft.ContainerInstance/containerGroups"
+        "id": "/subscriptions/ae43b1e3-c35d-4c8c-bc0d-f148b4c52b78/resourceGroups/demo/providers/Microsoft.ContainerInstance/containerGroups/mycontainers",
+        "name": "mycontainers",
+        "type": "Microsoft.ContainerInstance/containerGroups",
+        "location": "westus"
       }
     }
   }

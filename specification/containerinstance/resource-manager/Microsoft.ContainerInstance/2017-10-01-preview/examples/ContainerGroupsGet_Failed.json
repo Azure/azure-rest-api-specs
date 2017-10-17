@@ -7,112 +7,101 @@
   "responses": {
     "200": {
       "body": {
-        "id": "/subscriptions/subid/resourceGroups/demo/providers/Microsoft.ContainerInstance/containerGroups/demo1",
-        "location": "WestUs",
-        "name": "demo1",
         "properties": {
+          "provisioningState": "Succeeded",
           "containers": [
             {
-              "name": "demo1",
+              "name": "mycontainers",
               "properties": {
-                "command": null,
-                "environmentVariables": [],
                 "image": "nginx",
-                "instanceView": {
-                  "restartCount": 0,
-                  "currentState": {
-                    "state": "Waiting",
-                    "startTime": "2017-08-08T00:09:10Z",
-                    "detailStatus": ""
-                  },
-                  "events": [
-                    {
-                      "count": 1,
-                      "firstTimestamp": "2017-08-08T00:09:01Z",
-                      "lastTimestamp": "2017-08-08T00:09:01Z",
-                      "message": "pulling image \"nginx\"",
-                      "name": "Pulling",
-                      "type": "Normal"
-                    },
-                    {
-                      "count": 1,
-                      "firstTimestamp": "2017-08-08T00:09:10Z",
-                      "lastTimestamp": "2017-08-08T00:09:10Z",
-                      "message": "Successfully pulled image \"nginx\"",
-                      "name": "Pulled",
-                      "type": "Normal"
-                    }
-                  ]
-                },
+                "command": [],
                 "ports": [
                   {
                     "port": 80
                   }
                 ],
-                "resources": {
-                  "limits": null,
-                  "requests": {
-                    "cpu": 1,
-                    "memoryInGb": 1.5
-                  }
+                "environmentVariables": [],
+                "instanceView": {
+                  "restartCount": 0,
+                  "currentState": {
+                    "state": "Running",
+                    "startTime": "2017-10-17T17:27:21Z",
+                    "detailStatus": ""
+                  },
+                  "events": [
+                    {
+                      "count": 1,
+                      "firstTimestamp": "2017-10-17T17:27:14Z",
+                      "lastTimestamp": "2017-10-17T17:27:14Z",
+                      "name": "Pulling",
+                      "message": "pulling image \"nginx\"",
+                      "type": "Normal"
+                    },
+                    {
+                      "count": 1,
+                      "firstTimestamp": "2017-10-17T17:27:20Z",
+                      "lastTimestamp": "2017-10-17T17:27:20Z",
+                      "name": "Pulled",
+                      "message": "Successfully pulled image \"nginx\"",
+                      "type": "Normal"
+                    },
+                    {
+                      "count": 1,
+                      "firstTimestamp": "2017-10-17T17:27:20Z",
+                      "lastTimestamp": "2017-10-17T17:27:20Z",
+                      "name": "Created",
+                      "message": "Created container with id 59ac4a83384ce9184c315ecd3c7cff39a7c9a3257646d41309758f8730b9a527",
+                      "type": "Normal"
+                    },
+                    {
+                      "count": 1,
+                      "firstTimestamp": "2017-10-17T17:27:21Z",
+                      "lastTimestamp": "2017-10-17T17:27:21Z",
+                      "name": "Started",
+                      "message": "Started container with id 59ac4a83384ce9184c315ecd3c7cff39a7c9a3257646d41309758f8730b9a527",
+                      "type": "Normal"
+                    }
+                  ]
                 },
-                "volumeMounts": [
-                  {
-                    "mountPath": "/mnt/volume1",
-                    "name": "volume1",
-                    "readOnly": false
+                "resources": {
+                  "requests": {
+                    "memoryInGB": 1.5,
+                    "cpu": 1
                   }
-                ]
+                }
               }
             }
           ],
-          "imageRegistryCredentials": [
-            {
-              "password": null,
-              "server": "azcloudconsoleregistry.azurecr.io",
-              "username": "azcloudconsoleregistry"
-            }
-          ],
+          "imageRegistryCredentials": [],
+          "ipAddress": {
+            "ports": [
+              {
+                "protocol": "TCP",
+                "port": 80
+              }
+            ],
+            "ip": "13.64.70.13",
+            "type": "Public"
+          },
+          "osType": "Linux",
           "instanceView": {
             "events": [
               {
                 "count": 1,
-                "firstTimestamp": "2017-10-08T00:19:10Z",
-                "lastTimestamp": "2017-10-08T00:19:10Z",
+                "firstTimestamp": "2017-10-17T17:19:10Z",
+                "lastTimestamp": "2017-10-17T17:19:10Z",
                 "message": "Output: mount error(2): Permission denied",
                 "name": "FailedMount",
                 "type": "Normal"
               }
             ],
             "state": "Pending"
-          },
-          "ipAddress": {
-            "ip": "10.0.0.1",
-            "ports": [
-              {
-                "port": 80,
-                "protocol": "TCP"
-              }
-            ]
-          },
-          "osType": "Linux",
-          "provisioningState": "Failed",
-          "restartPolicy": null,
-          "volumes": [
-            {
-              "azureFile": {
-                "readOnly": false,
-                "shareName": "share1",
-                "storageAccountKey": "storageaccountkey",
-                "storageAccountName": "stroage1"
-              },
-              "name": "volume1"
-            }
-          ]
+          }
         },
-        "resourceGroup": "demo",
-        "tags": null,
-        "type": "Microsoft.ContainerInstance/containerGroups"
+        "id": "/subscriptions/ae43b1e3-c35d-4c8c-bc0d-f148b4c52b78/resourceGroups/demo/providers/Microsoft.ContainerInstance/containerGroups/mycontainers",
+        "name": "mycontainers",
+        "type": "Microsoft.ContainerInstance/containerGroups",
+        "location": "westus"
       }
     }
   }
