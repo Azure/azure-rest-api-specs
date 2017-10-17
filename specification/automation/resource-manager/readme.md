@@ -61,9 +61,9 @@ input-file:
 
 ### Tag: package-2017-05
 
-These settings apply only when `--tag=package-2017-05` is specified on the command line.
+These settings apply only when `--tag=package-2017-05-preview` is specified on the command line.
 
-``` yaml $(tag) == 'package-2017-05'
+``` yaml $(tag) == 'package-2017-05-preview'
 input-file:
 - Microsoft.Automation/2017-05-15-preview/account.json
 - Microsoft.Automation/2017-05-15-preview/certificate.json
