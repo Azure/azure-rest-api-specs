@@ -34,7 +34,7 @@
     }
   },
   "paths": {
-  	"/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/applicationGateways/{applicationGatewayName}": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/applicationGateways/{applicationGatewayName}": {
       "delete": {
         "tags": [
           "ApplicationGateways"
@@ -163,6 +163,56 @@
               "$ref": "#/definitions/ApplicationGateway"
             }
           }
+        },
+        "x-ms-long-running-operation": true
+      },
+      "patch": {
+        "tags": [
+          "ApplicationGateways"
+        ],
+        "operationId": "ApplicationGateways_UpdateTags",
+        "description": "Updates the specified application gateway tags.",
+        "parameters": [
+          {
+            "name": "resourceGroupName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the resource group."
+          },
+          {
+            "name": "applicationGatewayName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the application gateway."
+          },
+          {
+            "name": "parameters",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "./network.json#/definitions/TagsObject"
+            },
+            "description": "Parameters supplied to update application gateway tags."
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Update successful. The operation returns the resulting ApplicationGateway resource.",
+            "schema": {
+              "$ref": "#/definitions/ApplicationGateway"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Update Application Gateway tags": { "$ref": "./examples/ApplicationGatewayUpdateTags.json" }
         },
         "x-ms-long-running-operation": true
       }
