@@ -1707,7 +1707,7 @@
         "/persongroups/{personGroupId}/persons/{personId}/persistedFaces?overload=url": {
             "post": {
                 "description": "Add a representative face to a person for identification. The input face is specified as an image with a targetFace rectangle.",
-                "operationId": "Person_AddFace",
+                "operationId": "Person_AddPersonFace",
                 "parameters": [
                     {
                         "name": "personGroupId",
@@ -1733,7 +1733,17 @@
                         "name": "targetFace",
                         "in": "query",
                         "description": "A face rectangle to specify the target face to be added to a person in the format of \"targetFace=left,top,width,height\". E.g. \"targetFace=10,10,100,100\". If there is more than one face in the image, targetFace is required to specify which face to add. No targetFace means there is only one face detected in the entire image. ",
-                        "type": "string"
+                        "type": "array",
+                        "collectionFormat": "csv",
+                        "items": {
+                            "type": "integer",
+                            "format": "int32",
+                            "maxItems": 4,
+                            "minItems": 4
+                        }
+                    },
+                    {
+                        "$ref": "#/parameters/ImageUrl"
                     },
                     {
                         "$ref": "../../Common/Parameters.json#/parameters/SubscriptionKey"
@@ -1767,7 +1777,7 @@
         "/persongroups/{personGroupId}/persons/{personId}/persistedFaces?overload=stream": {
             "post": {
                 "description": "Add a representative face to a person for identification. The input face is specified as an image with a targetFace rectangle.",
-                "operationId": "Person_AddFaceFromStream",
+                "operationId": "Person_AddPersonFaceFromStream",
                 "parameters": [
                     {
                         "name": "personGroupId",
@@ -1794,6 +1804,9 @@
                         "in": "query",
                         "description": "A face rectangle to specify the target face to be added to a person, in the format of \"targetFace=left,top,width,height\". E.g. \"targetFace=10,10,100,100\". If there is more than one face in the image, targetFace is required to specify which face to add. No targetFace means there is only one face detected in the entire image. ",
                         "type": "string"
+                    },
+                    {
+                        "$ref": "#/parameters/ImageStream"
                     },
                     {
                         "$ref": "../../Common/Parameters.json#/parameters/SubscriptionKey"
@@ -2144,9 +2157,9 @@
                 "gender": {
                     "type": "string",
                     "description": "Possible gender of the face.",
-                    "x-ms-enum":{
-                      "name": "Gender",
-                      "modelAsString": false
+                    "x-ms-enum": {
+                        "name": "Gender",
+                        "modelAsString": false
                     },
                     "enum": [
                         "male",
@@ -2163,10 +2176,10 @@
                 "glasses": {
                     "type": "string",
                     "description": "Glasses type if any of the face.",
-                    "x-ms-enum":{
+                    "x-ms-enum": {
                         "name": "GlassesTypes",
                         "modelAsString": false
-                      },
+                    },
                     "enum": [
                         "noGlasses",
                         "readingGlasses",
