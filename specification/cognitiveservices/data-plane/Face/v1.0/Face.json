@@ -194,9 +194,55 @@
                 ]
             }
         },
+        "/verify?overload=persongroup": {
+            "post": {
+                "description": "Verify whether two faces belong to a same person. Compares a face Id with a Person Id",
+                "operationId": "Face_VerifyWithPersonGroup",
+                "parameters": [
+                    {
+                        "$ref": "../../Common/Parameters.json#/parameters/SubscriptionKey"
+                    },
+                    {
+                        "name": "body",
+                        "in": "body",
+                        "required": true,
+                        "x-ms-client-flatten": true,
+                        "schema": {
+                            "$ref": "#/definitions/VerifyPersonGroupRequest"
+                        }
+                    }
+                ],
+                "consumes": [
+                    "application/json"
+                ],
+                "responses": {
+                    "200": {
+                        "description": "A successful call returns the verification result.",
+                        "schema": {
+                            "$ref": "#/definitions/VerifyResult"
+                        },
+                        "examples": {
+                            "application/json": {
+                                "isIdentical": true,
+                                "confidence": 0.9
+                            }
+                        }
+                    },
+                    "default": {
+                        "description": "Error response.",
+                        "schema": {
+                            "$ref": "#/definitions/APIError"
+                        }
+                    }
+                },
+                "produces": [
+                    "application/json"
+                ]
+            }
+        },
         "/verify": {
             "post": {
-                "description": "Verify whether two faces belong to a same person or whether one face belongs to a person.",
+                "description": "Verify whether two faces belong to a same person. Compares two different face Ids.",
                 "operationId": "Face_Verify",
                 "parameters": [
                     {
@@ -2596,7 +2642,7 @@
                 }
             }
         },
-        "VerifyRequest": {
+        "VerifyPersonGroupRequest": {
             "type": "object",
             "required": [
                 "faceId",
@@ -2617,6 +2663,26 @@
                 "personGroupId": {
                     "type": "string",
                     "description": "Using existing personGroupId and personId for fast loading a specified person. personGroupId is created in Person Groups.Create."
+                }
+            }
+        },
+        "VerifyRequest": {
+            "type": "object",
+            "required": [
+                "faceId1",
+                "faceId2"
+            ],
+            "description": "Request body for verify operation.",
+            "properties": {
+                "faceId1": {
+                    "type": "string",
+                    "description": "faceId of the first face, comes from Face - Detect",
+                    "maxLength": 64
+                },
+                "faceId2": {
+                    "type": "string",
+                    "description": "faceId of the second face, comes from Face - Detect",
+                    "maxLength": 64
                 }
             }
         },
