@@ -274,7 +274,7 @@ Please also specify `--go-sdk-folder=<path to the root directory of your azure-s
 
 ``` yaml $(tag) == 'package-policy-2017-06' && $(go)
 namespace: policy
-output-folder: $(go-sdk-folder)/services/resources/mgmt/2017-06-01/policy
+output-folder: $(go-sdk-folder)/services/resources/mgmt/2017-06-01-preview/policy
 ```
 
 ### Tag: package-policy-2016-12 and go
