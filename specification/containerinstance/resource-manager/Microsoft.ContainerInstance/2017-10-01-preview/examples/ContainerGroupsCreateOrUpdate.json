@@ -5,8 +5,9 @@
     "resourceGroupName": "demo",
     "containerGroupName": "mycontainers",
     "containerGroup": {
-      "location": "westus",
       "name": "mycontainers",
+      "type": "Microsoft.ContainerInstance/containerGroups",
+      "location": "westus",
       "properties": {
         "containers": [
           {
@@ -41,34 +42,33 @@
               ]
             }
           }
-        ]
-      },
-      "imageRegistryCredentials": [],
-      "ipAddress": {
-        "ports": [
-          {
-            "protocol": "TCP",
-            "port": 80
-          }
         ],
-        "type": "Public"
-      },
-      "osType": "Linux",
-      "volumes": [
-        {
-          "name": "volume1",
-          "azureFile": {
-            "shareName": "shareName",
-            "storageAccountName": "accountName",
-            "storageAccountKey": ""
-          }
+        "imageRegistryCredentials": [],
+        "ipAddress": {
+          "ports": [
+            {
+              "protocol": "TCP",
+              "port": 80
+            }
+          ],
+          "type": "Public"
         },
-        {
-          "name": "volume2",
-          "emptyDir": {}
-        }
-      ],
-      "type": "Microsoft.ContainerInstance/containerGroups"
+        "osType": "Linux",
+        "volumes": [
+          {
+            "name": "volume1",
+            "azureFile": {
+              "shareName": "shareName",
+              "storageAccountName": "accountName",
+              "storageAccountKey": ""
+            }
+          },
+          {
+            "name": "volume2",
+            "emptyDir": {}
+          }
+        ]
+      }
     }
   },
   "responses": {
