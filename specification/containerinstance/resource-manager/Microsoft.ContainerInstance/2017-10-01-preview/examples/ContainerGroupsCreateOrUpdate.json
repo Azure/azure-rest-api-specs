@@ -4,7 +4,7 @@
     "api-version": "2017-10-01-preview",
     "resourceGroupName": "demo",
     "containerGroupName": "mycontainers",
-    "containerGroup": {
+    "parameters": {
       "location": "west us",
       "name": "mycontainers",
       "properties": {
@@ -22,10 +22,9 @@
                 }
               ],
               "resources": {
-                "limits": null,
                 "requests": {
-                  "cpu": 1,
-                  "memoryInGb": 1.5
+                  "memoryInGB": 1.5,
+                  "cpu": 1
                 }
               },
               "volumeMounts": [
@@ -54,7 +53,6 @@
           "type": "Public"
         },
         "osType": "Linux",
-        "restartPolicy": null,
         "volumes": [
           {
             "name": "volume1",
@@ -70,8 +68,6 @@
           }
         ]
       },
-      "resourceGroup": "demo",
-      "tags": null,
       "type": "Microsoft.ContainerInstance/containerGroups"
     }
   },

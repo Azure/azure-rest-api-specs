@@ -387,18 +387,22 @@
           "type": "object",
           "properties": {
             "restartCount": {
+              "readOnly": true,
               "type": "integer",
               "description": "The number of times that the container instance has been restarted."
             },
             "currentState": {
+              "readOnly": true,
               "description": "Current container instance state.",
               "$ref": "#/definitions/ContainerState"
             },
             "previousState": {
+              "readOnly": true,
               "description": "Previous container instance state.",
               "$ref": "#/definitions/ContainerState"
             },
             "events": {
+              "readOnly": true,
               "description": "The events of the container instance.",
               "type": "array",
               "items": {
@@ -686,6 +690,7 @@
                   "properties": {
                     "events": {
                       "description": "The events of this container group.",
+                      "readOnly": true,
                       "type": "array",
                       "items": {
                         "$ref": "#/definitions/Event"
