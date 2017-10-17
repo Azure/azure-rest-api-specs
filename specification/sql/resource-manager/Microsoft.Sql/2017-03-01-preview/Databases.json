@@ -15,7 +15,7 @@
   "produces": [
     "application/json"
   ],
-  "paths": { 
+  "paths": {
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/servers/{serverName}/databases": {
       "get": {
         "tags": [
@@ -314,7 +314,7 @@
           "200": {
             "description": "Successfully exported the database.",
             "schema": {
-              "$ref": "#/definitions/Database"
+              "$ref": "#/definitions/ImportExportOperationResult"
             }
           },
           "default": {
@@ -1072,6 +1072,74 @@
           "x-ms-mutability": [
             "create"
           ]
+        }
+      }
+    },
+    "ImportExportOperationResultProperties": {
+      "description": "Contains the operation result properties for import/export operation.",
+      "type": "object",
+      "properties": {
+        "requestId": {
+          "format": "uuid",
+          "description": "Request Id.",
+          "type": "string",
+          "readOnly": true
+        },
+        "requestType": {
+          "description": "Request type.",
+          "type": "string",
+          "readOnly": true
+        },
+        "queuedTime": {
+          "description": "Queued time.",
+          "type": "string",
+          "readOnly": true
+        },
+        "lastModifiedTime": {
+          "description": "Last modified time.",
+          "type": "string",
+          "readOnly": true
+        },
+        "blobUri": {
+          "description": "Blob Uri.",
+          "type": "string",
+          "readOnly": true
+        },
+        "serverName": {
+          "description": "Server name.",
+          "type": "string",
+          "readOnly": true
+        },
+        "databaseName": {
+          "description": "Database name.",
+          "type": "string",
+          "readOnly": true
+        },
+        "status": {
+          "description": "Operation status.",
+          "type": "string",
+          "readOnly": true
+        },
+        "errorMessage": {
+          "description": "Error message.",
+          "type": "string",
+          "readOnly": true
+        }
+      }
+    },
+    "ImportExportOperationResult": {
+      "description": "An ImportExport operation result resource.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/ProxyResource"
+        }
+      ],
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/ImportExportOperationResultProperties",
+          "description": "Resource properties.",
+          "x-ms-client-flatten": true
         }
       }
     },
