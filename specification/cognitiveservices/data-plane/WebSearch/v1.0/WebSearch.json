@@ -175,6 +175,7 @@
                 "SpellSuggestions",
                 "News",
                 "RelatedSearches",
+                "Videos",
                 "WebPageGroupings",
                 "Computation",
                 "TimeZone"
@@ -308,6 +309,7 @@
       }
     },
     "Response": {
+      "description": "Defines a response. All schemas that could be returned at the root of a response should inherit from this",
       "allOf": [
         {
           "$ref": "#/definitions/Identifiable"
@@ -383,6 +385,7 @@
       }
     },
     "Images": {
+      "description": "Defines an image answer",
       "allOf": [
         {
           "$ref": "#/definitions/SearchResultsAnswer"
@@ -397,6 +400,13 @@
           "readOnly": true,
           "type": "integer",
           "format": "int32"
+        },
+        "value": {
+          "description": "A list of image objects that are relevant to the query. If there are no results, the List is empty.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ImageObject"
+          }
         },
         "queryExpansions": {
           "readOnly": true,
@@ -422,6 +432,7 @@
       }
     },
     "News": {
+      "description": "Defines a news answer.",
       "allOf": [
         {
           "$ref": "#/definitions/SearchResultsAnswer"
@@ -432,6 +443,13 @@
         "value"
       ],
       "properties": {
+        "value": {
+          "description": "An array of NewsArticle objects that contain information about news articles that are relevant to the query. If there are no results to return for the request, the array is empty.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/NewsArticle"
+          }
+        },
         "location": {
           "readOnly": true,
           "type": "string"
@@ -529,6 +547,7 @@
       }
     },
     "Videos": {
+      "description": "Defines a video answer.",
       "allOf": [
         {
           "$ref": "#/definitions/SearchResultsAnswer"
@@ -539,6 +558,13 @@
         "value"
       ],
       "properties": {
+        "value": {
+          "description": "A list of video objects that are relevant to the query.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/VideoObject"
+          }
+        },
         "nextOffset": {
           "readOnly": true,
           "type": "integer",
@@ -561,6 +587,7 @@
       }
     },
     "Computation": {
+      "description": "Defines an expression and its answer",
       "allOf": [
         {
           "$ref": "#/definitions/Answer"
@@ -700,6 +727,10 @@
           "readOnly": true,
           "type": "string"
         },
+        "image": {
+          "$ref": "#/definitions/ImageObject",
+          "readOnly": true
+        },
         "description": {
           "description": "A short description of the item.",
           "readOnly": true,
@@ -709,6 +740,22 @@
           "description": "An ID that uniquely identifies this item.",
           "readOnly": true,
           "type": "string"
+        }
+      }
+    },
+    "ImageObject": {
+      "description": "Defines an image",
+      "allOf": [
+        {
+          "$ref": "#/definitions/MediaObject"
+        }
+      ],
+      "type": "object",
+      "properties": {
+        "thumbnail": {
+          "description": "The URL to a thumbnail of the image",
+          "$ref": "#/definitions/ImageObject",
+          "readOnly": true
         }
       }
     },
@@ -739,6 +786,11 @@
             "$ref": "#/definitions/WebPage"
           }
         },
+        "dateLastCrawled": {
+          "description": "The last time that Bing crawled the webpage. The date is in the form, YYYY-MM-DDTHH:MM:SS. For example, 2015-04-13T05:23:39.",
+          "readOnly": true,
+          "type": "string"
+        },
         "searchTags": {
           "description": "A list of search tags that the webpage owner specified on the webpage. The API returns only indexed search tags. The name field of the MetaTag object contains the indexed search tag. Search tags begin with search.* (for example, search.assetId). The content field contains the tag's value.",
           "readOnly": true,
@@ -746,6 +798,10 @@
           "items": {
             "$ref": "#/definitions/WebMetaTag"
           }
+        },
+        "primaryImageOfPage": {
+          "$ref": "#/definitions/ImageObject",
+          "readOnly": true
         }
       }
     },
@@ -773,8 +829,22 @@
         "searchLink": {
           "readOnly": true,
           "type": "string"
+        },
+        "thumbnail": {
+          "$ref": "#/definitions/ImageObject",
+          "readOnly": true
         }
       }
+    },
+    "NewsArticle": {
+      "description": "Defines a news article.",
+      "allOf": [
+        {
+          "$ref": "#/definitions/Article"
+        }
+      ],
+      "type": "object",
+      "properties": {}
     },
     "TimeZoneTimeZoneInformation": {
       "description": "Defines a date and time for a geographical location.",
@@ -790,9 +860,61 @@
           "description": "The name of the geographical location.For example, County; City; City, State; City, State, Country; or Time Zone.",
           "type": "string"
         },
+        "time": {
+          "description": "The data and time specified in the form, YYYY-MM-DDThh;mm:ss.ssssssZ.",
+          "type": "string"
+        },
         "utcOffset": {
           "description": "The offset from UTC. For example, UTC-7.",
           "type": "string"
+        }
+      }
+    },
+    "VideoObject": {
+      "description": "Defines a video object that is relevant to the query.",
+      "allOf": [
+        {
+          "$ref": "#/definitions/MediaObject"
+        }
+      ],
+      "type": "object",
+      "properties": {
+        "motionThumbnailUrl": {
+          "readOnly": true,
+          "type": "string"
+        },
+        "motionThumbnailId": {
+          "readOnly": true,
+          "type": "string"
+        },
+        "embedHtml": {
+          "readOnly": true,
+          "type": "string"
+        },
+        "allowHttpsEmbed": {
+          "readOnly": true,
+          "type": "boolean"
+        },
+        "viewCount": {
+          "readOnly": true,
+          "type": "integer",
+          "format": "int32"
+        },
+        "thumbnail": {
+          "$ref": "#/definitions/ImageObject",
+          "readOnly": true
+        },
+        "videoId": {
+          "readOnly": true,
+          "type": "string"
+        },
+        "allowMobileEmbed": {
+          "readOnly": true,
+          "type": "boolean"
+        },
+        "isSuperfresh": {
+          "readOnly": true,
+          "type": "boolean"
         }
       }
     },
@@ -926,22 +1048,6 @@
           "readOnly": true,
           "type": "string"
         },
-        "about": {
-          "description": "For internal use only.",
-          "readOnly": true,
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/Thing"
-          }
-        },
-        "mentions": {
-          "description": "For internal use only.",
-          "readOnly": true,
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/Thing"
-          }
-        },
         "provider": {
           "description": "The source of the creative work.",
           "readOnly": true,
@@ -950,47 +1056,9 @@
             "$ref": "#/definitions/Thing"
           }
         },
-        "creator": {
-          "$ref": "#/definitions/Thing",
-          "readOnly": true
-        },
         "text": {
           "readOnly": true,
           "type": "string"
-        },
-        "discussionUrl": {
-          "readOnly": true,
-          "type": "string"
-        },
-        "commentCount": {
-          "readOnly": true,
-          "type": "integer",
-          "format": "int32"
-        },
-        "mainEntity": {
-          "$ref": "#/definitions/Thing",
-          "readOnly": true
-        },
-        "headLine": {
-          "readOnly": true,
-          "type": "string"
-        },
-        "copyrightHolder": {
-          "$ref": "#/definitions/Thing",
-          "readOnly": true
-        },
-        "copyrightYear": {
-          "readOnly": true,
-          "type": "integer",
-          "format": "int32"
-        },
-        "disclaimer": {
-          "readOnly": true,
-          "type": "string"
-        },
-        "isAccessibleForFree": {
-          "readOnly": true,
-          "type": "boolean"
         }
       }
     },
@@ -1001,6 +1069,38 @@
         }
       ],
       "type": "object"
+    },
+    "MediaObject": {
+      "allOf": [
+        {
+          "$ref": "#/definitions/CreativeWork"
+        }
+      ],
+      "type": "object",
+      "properties": {
+        "contentUrl": {
+          "description": "Original URL to retrieve the source (file) for the media object (e.g the source URL for the image).",
+          "readOnly": true,
+          "type": "string"
+        },
+        "hostPageUrl": {
+          "description": "URL of the page that hosts the media object.",
+          "readOnly": true,
+          "type": "string"
+        },
+        "width": {
+          "description": "The width of the source media object, in pixels.",
+          "readOnly": true,
+          "type": "integer",
+          "format": "int32"
+        },
+        "height": {
+          "description": "The height of the source media object, in pixels.",
+          "readOnly": true,
+          "type": "integer",
+          "format": "int32"
+        }
+      }
     },
     "WebMetaTag": {
       "description": "Defines a webpage's metadata.",
@@ -1018,6 +1118,14 @@
           "type": "string"
         }
       }
+    },
+    "Article": {
+      "allOf": [
+        {
+          "$ref": "#/definitions/CreativeWork"
+        }
+      ],
+      "type": "object"
     },
     "RankingRankingItem": {
       "description": "Defines a search result item to display",
@@ -1037,6 +1145,7 @@
             "SpellSuggestions",
             "News",
             "RelatedSearches",
+            "Videos",
             "WebPageGroupings",
             "Computation",
             "TimeZone"
