@@ -64,6 +64,9 @@
                             "$ref": "#/definitions/ErrorResponse"
                         }
                     }
+                },
+                "x-ms-pageable": {
+                    "nextLinkName": null
                 }
             }
         },
@@ -433,6 +436,9 @@
                             "$ref": "#/definitions/ErrorResponse"
                         }
                     }
+                },
+                "x-ms-pageable": {
+                    "nextLinkName": null
                 }
             }
         },
@@ -464,6 +470,9 @@
                             "$ref": "#/definitions/ErrorResponse"
                         }
                     }
+                },
+                "x-ms-pageable": {
+                    "nextLinkName": null
                 }
             }
         }
@@ -710,6 +719,7 @@
         },
         "Operation":{
             "description": "Describes a supported operation by the Storage Import/Export job API.",
+            "required": ["name", "display"],
             "properties": {
                 "name":{
                     "type": "string",
@@ -810,6 +820,15 @@
         },
         "ReturnAddress": {
             "description": "Specifies the return address information for the job.",
+            "required": [
+              "recipientName",
+              "streetAddress1",
+              "city",
+              "postalCode",
+              "countryOrRegion",
+              "phone",
+              "email"
+            ],
             "properties": {
                 "recipientName": {
                     "type": "string",
@@ -851,6 +870,10 @@
         },
         "ReturnShipping":{
             "description": "Specifies the return carrier and customer's account with the carrier.",
+            "required": [
+              "carrierName",
+              "carrierAccountNumber"
+            ],
             "properties": {
                 "carrierName": {
                     "type": "string",
@@ -864,6 +887,10 @@
         },
         "ShippingInformation":{
             "description": "Contains information about the Microsoft datacenter to which the drives should be shipped.",
+            "required": [
+              "name",
+              "address"
+            ],
             "properties": {
                 "recipientName": {
                     "type": "string",
@@ -901,6 +928,12 @@
         },
         "PackageInfomation":{
             "description": "Contains information about the package being shipped by the customer to the Microsoft data center.",
+            "required": [
+              "carrierName",
+              "trackingNumber",
+              "driveCount",
+              "shipDate"
+            ],
             "properties": {
                 "carrierName": {
                     "type": "string",
@@ -945,7 +978,12 @@
                 },
                 "state":{
                     "type": "string",
-                    "description": "The drive's current state. "
+                    "description": "The drive's current state. ",
+                    "enum": [ "Specified", "Received", "NeverReceived", "Transferring", "Completed", "CompletedMoreInfo", "ShippedBack" ],
+                    "x-ms-enum": {
+                      "name": "DriveState",
+                      "modelAsString": true
+                    }
                 },
                 "copyStatus":{
                     "type": "string",
@@ -1004,7 +1042,6 @@
             }
         },
         "LocationsResponse": {
-            "x-ms-client-flatten": true,
             "description": "Locations response",
             "properties": {
                 "value":{
@@ -1017,7 +1054,6 @@
             }
         },
         "GetBitLockerKeysResponse": {
-            "x-ms-client-flatten": true,
             "description": "GetBitLockerKeys response",
             "properties": {
                 "value":{
@@ -1030,7 +1066,6 @@
             }
         },
         "DriveBitLockerKey": {
-            "x-ms-client-flatten": true,
             "description": "BitLocker recovery key or password to the specified drive",
             "properties": {
                 "bitLockerKey": {
@@ -1044,7 +1079,6 @@
             }
         },
         "ListOperationsResponse": {
-            "x-ms-client-flatten": true,
             "description": "List operations response",
             "properties": {
                 "value":{
@@ -1063,7 +1097,10 @@
             "in": "query",
             "description": "Specifies the API version to use for this request.",
             "required": true,
-            "type": "string"
+            "type": "string",
+            "enum": [
+              "2016-11-01"
+            ]
         },
         "subscriptionId": {
             "name": "subscriptionId",
@@ -1077,7 +1114,8 @@
             "in": "path",
             "description": "The resource group name uniquely identifies the resource group within the user subscription.",
             "required": true,
-            "type": "string"
+            "type": "string",
+            "x-ms-parameter-location": "method"
         },
         "Accept-Language":{
             "name": "Accept-Language",
@@ -1091,7 +1129,9 @@
             "in": "header",
             "description": "The tenant ID of the client making the request.",
             "required": false,
-            "type": "string"
+            "type": "string",
+            "x-ms-client-name": "ClientTenantId",
+            "x-ms-parameter-location": "method"
         }
 
     }
