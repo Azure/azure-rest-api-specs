@@ -36,11 +36,7 @@
             "$ref": "#/parameters/ocpApimSubscriptionKeyParameter"
           },
           {
-            "name": "listId",
-            "in": "path",
-            "description": "List Id of the image list.",
-            "required": true,
-            "type": "string"
+            "$ref": "#/parameters/listId"
           }
 
         ],
@@ -48,7 +44,7 @@
           "200": {
             "description": "OK",
             "schema": {
-              "$ref": "#/definitions/ImageListGetDetailsResponse"
+              "$ref": "#/definitions/ImageListGetDetails"
             }
           }
         },
@@ -69,11 +65,7 @@
         "description": "Deletes image list with the list Id equal to list Id passed.",
         "parameters": [
           {
-            "name": "listId",
-            "in": "path",
-            "description": "List Id of the image.",
-            "required": true,
-            "type": "string"
+            "$ref": "#/parameters/listId"
           },
           {
             "$ref": "#/parameters/ocpApimSubscriptionKeyParameter"
@@ -104,52 +96,13 @@
         "description": "Updates an image list with list Id equal to list Id passed.",
         "parameters": [
           {
-            "name": "listId",
-            "in": "path",
-            "description": "List Id of the image.",
-            "required": true,
-            "type": "string"
+             "$ref": "#/parameters/listId"
           },
           {
             "$ref": "#/parameters/contentTypeHeader"
           },
           {
-            "name": "body",
-            "in": "body",
-            "description": "Schema of the body.",
-            "required": true,
-            "schema": {
-              "type": "object",
-
-              "properties": {
-
-                "name": {
-                  "description": "Image List Name.",
-                  "type": "string"
-                },
-                "description": {
-                  "description": "Description for image list.",
-                  "type": "string"
-                },
-                "metadata": {
-                  "description": "Image List Metadata.",
-                  "type": "object",
-
-                  "properties": {
-                    "key One": {
-                      "description": "Optional key value pair to describe your list.",
-                      "type": "string"
-                    },
-                    "key Two": {
-                      "description": "Optional key value pair to describe your list.",
-                      "type": "string"
-                    }
-                  }
-
-                }
-              }
-
-            }
+            "$ref": "#/parameters/body"
           },
           {
             "$ref": "#/parameters/ocpApimSubscriptionKeyParameter"
@@ -159,7 +112,7 @@
           "200": {
             "description": "OK",
             "schema": {
-              "$ref": "#/definitions/UpdateImageListResponse"
+              "$ref": "#/definitions/UpdateImageList"
             }
           }
         },
@@ -185,37 +138,7 @@
             "$ref": "#/parameters/contentTypeHeader"
           },
           {
-            "name": "body",
-            "in": "body",
-            "description": "Schema of the body.",
-            "required": true,
-            "schema": {
-              "type": "object",
-              "properties": {
-                "name": {
-                  "description": "Name of the image list.",
-                  "type": "string"
-                },
-                "description": {
-                  "description": "Description of the image list.",
-                  "type": "string"
-                },
-                "metadata": {
-                  "description": "Metadata of the image list.",
-                  "type": "object",
-                  "properties": {
-                    "key One": {
-                      "description": "Optional Key value pair to describe your list.",
-                      "type": "string"
-                    },
-                    "key Two": {
-                      "description": "Optional Key value pair to describe your list.",
-                      "type": "string"
-                    }
-                  }
-                }
-              }
-            }
+            "$ref": "#/parameters/body"
           },
           {
             "$ref": "#/parameters/ocpApimSubscriptionKeyParameter"
@@ -225,7 +148,7 @@
           "200": {
             "description": "OK",
             "schema": {
-              "$ref": "#/definitions/CreateImageListResponse"
+              "$ref": "#/definitions/CreateImageList"
             }
           }
         },
@@ -253,7 +176,7 @@
           "200": {
             "description": "OK",
             "schema": {
-              "$ref": "#/definitions/GetAllImageListResponse"
+              "$ref": "#/definitions/GetAllImageList"
             }
           }
         },
@@ -276,11 +199,7 @@
         "description": "Refreshes the index of the list with list Id equal to list Id passed.",
         "parameters": [
           {
-            "name": "listId",
-            "in": "path",
-            "description": "List Id",
-            "required": true,
-            "type": "string"
+             "$ref": "#/parameters/listId"
           },
           {
             "$ref": "#/parameters/ocpApimSubscriptionKeyParameter"
@@ -290,7 +209,7 @@
           "200": {
             "description": "OK",
             "schema": {
-              "$ref": "#/definitions/RefreshIndexResponse"
+              "$ref": "#/definitions/RefreshIndex"
             }
           }
         },
@@ -313,11 +232,7 @@
         "description": "Returns list Id details of the term list with list Id equal to list Id passed.",
         "parameters": [
           {
-            "name": "listId",
-            "in": "path",
-            "description": "List Id",
-            "required": true,
-            "type": "string"
+             "$ref": "#/parameters/listId"
           },
           {
             "$ref": "#/parameters/ocpApimSubscriptionKeyParameter"
@@ -327,7 +242,7 @@
           "200": {
             "description": "OK",
             "schema": {
-              "$ref": "#/definitions/TermListGetListIdDetailsResponse"
+              "$ref": "#/definitions/TermListGetListIdDetails"
             }
           }
         },
@@ -348,11 +263,7 @@
         "description": "Deletes term list with the list Id equal to list Id passed.",
         "parameters": [
           {
-            "name": "listId",
-            "in": "path",
-            "description": "List Id",
-            "required": true,
-            "type": "string"
+             "$ref": "#/parameters/listId"
           },
           {
             "$ref": "#/parameters/ocpApimSubscriptionKeyParameter"
@@ -383,47 +294,13 @@
         "description": "Updates an Term List.",
         "parameters": [
           {
-            "name": "listId",
-            "in": "path",
-            "description": "List Id of the term list.",
-            "required": true,
-            "type": "string"
+             "$ref": "#/parameters/listId"
           },
           {
             "$ref": "#/parameters/contentTypeHeader"
           },
           {
-            "name": "body",
-            "in": "body",
-            "description": "Schema of the body.",
-            "required": true,
-            "schema": {
-              "type": "object",
-              "properties": {
-                "name": {
-                  "description": "Term list Name.",
-                  "type": "string"
-                },
-                "description": {
-                  "description": "Description of the term list.",
-                  "type": "string"
-                },
-                "metadata": {
-                  "description": "Term list metadata.",
-                  "type": "object",
-                  "properties": {
-                    "key One": {
-                      "description": "Optional Key value pair to describe your list",
-                      "type": "string"
-                    },
-                    "key Two": {
-                      "description": "Optional Key value pair to describe your list",
-                      "type": "string"
-                    }
-                  }
-                }
-              }
-            }
+            "$ref": "#/parameters/body"
           },
           {
             "$ref": "#/parameters/ocpApimSubscriptionKeyParameter"
@@ -433,7 +310,7 @@
           "200": {
             "description": "OK",
             "schema": {
-              "$ref": "#/definitions/UpdateTermListResponse"
+              "$ref": "#/definitions/UpdateTermList"
             }
           }
         },
@@ -459,37 +336,7 @@
             "$ref": "#/parameters/contentTypeHeader"
           },
           {
-            "name": "body",
-            "in": "body",
-            "description": "Schema of the body.",
-            "required": true,
-            "schema": {
-              "type": "object",
-              "properties": {
-                "name": {
-                  "description": "Term list name.",
-                  "type": "string"
-                },
-                "description": {
-                  "description": "Description for the term list.",
-                  "type": "string"
-                },
-                "metadata": {
-                  "description": "Term list metadata.",
-                  "type": "object",
-                  "properties": {
-                    "key One": {
-                      "description": "Optional key value pair to identify your list.",
-                      "type": "string"
-                    },
-                    "key Two": {
-                      "description": "Optional key value pair to identify your list.",
-                      "type": "string"
-                    }
-                  }
-                }
-              }
-            }
+            "$ref": "#/parameters/body"
           },
           {
             "$ref": "#/parameters/ocpApimSubscriptionKeyParameter"
@@ -499,7 +346,7 @@
           "200": {
             "description": "OK",
             "schema": {
-              "$ref": "#/definitions/CreateTermListResponse"
+              "$ref": "#/definitions/CreateTermList"
             }
           }
         },
@@ -527,7 +374,7 @@
           "200": {
             "description": "OK",
             "schema": {
-              "$ref": "#/definitions/GetAllTermListResponse"
+              "$ref": "#/definitions/GetAllTermList"
             }
           }
         },
@@ -550,11 +397,7 @@
         "description": "Refreshes the index of the list with list Id equal to list ID passed.",
         "parameters": [
           {
-            "name": "listId",
-            "in": "path",
-            "description": "Id of the term list.",
-            "required": true,
-            "type": "string"
+            "$ref": "#/parameters/listId"
           },
           {
             "$ref": "#/parameters/ocpApimSubscriptionKeyParameter"
@@ -564,7 +407,7 @@
           "200": {
             "description": "OK",
             "schema": {
-              "$ref": "#/definitions/RefreshIndexResponse"
+              "$ref": "#/definitions/RefreshIndex"
             }
           }
         },
@@ -587,25 +430,13 @@
         "description": "Add an image to the list with list Id equal to list Id passed.",
         "parameters": [
           {
-            "name": "listId",
-            "in": "path",
-            "description": "Id of the image list.",
-            "required": true,
-            "type": "string"
+             "$ref": "#/parameters/listId"
           },
           {
-            "name": "tag",
-            "in": "query",
-            "description": "Tag for the image.",
-            "type": "number",
-            "required": false
+           "$ref": "#/parameters/tag"
           },
           {
-            "name": "label",
-            "in": "query",
-            "description": "The image label.",
-            "type": "string",
-            "required": false
+            "$ref": "#/parameters/label"
           },
           {
             "$ref": "#/parameters/ocpApimSubscriptionKeyParameter"
@@ -627,7 +458,7 @@
           "200": {
             "description": "OK",
             "schema": {
-              "$ref": "#/definitions/AddImageResponse"
+              "$ref": "#/definitions/AddImage"
             }
           }
         },
@@ -648,11 +479,7 @@
         "description": "Deletes all images from the list with list Id equal to list Id passed.",
         "parameters": [
           {
-            "name": "listId",
-            "in": "path",
-            "description": "Id of the list.",
-            "required": true,
-            "type": "string"
+            "$ref": "#/parameters/listId"
           },
           {
             "$ref": "#/parameters/ocpApimSubscriptionKeyParameter"
@@ -683,11 +510,7 @@
         "description": "Gets all image Ids from the list with list Id equal to list Id passed.",
         "parameters": [
           {
-            "name": "listId",
-            "in": "path",
-            "description": "Id of the image list.",
-            "required": true,
-            "type": "string"
+            "$ref": "#/parameters/listId"
           },
           {
             "$ref": "#/parameters/ocpApimSubscriptionKeyParameter"
@@ -697,7 +520,7 @@
           "200": {
             "description": "OK",
             "schema": {
-              "$ref": "#/definitions/GetAllImageIdsResponse"
+              "$ref": "#/definitions/GetAllImageIds"
             }
           }
         },
@@ -720,18 +543,10 @@
         "description": "Deletes an image from the list with list Id and image Id passed.",
         "parameters": [
           {
-            "name": "listId",
-            "in": "path",
-            "description": "Id of the image list.",
-            "required": true,
-            "type": "string"
+            "$ref": "#/parameters/listId"
           },
           {
-            "name": "ImageId",
-            "in": "path",
-            "description": "Id of the image.",
-            "required": true,
-            "type": "string"
+            "$ref": "#/parameters/ImageId"
           },
           {
             "$ref": "#/parameters/ocpApimSubscriptionKeyParameter"
@@ -764,25 +579,13 @@
         "description": "Add a term to the term list with list Id equal to list Id passed.",
         "parameters": [
           {
-            "name": "listId",
-            "in": "path",
-            "description": "Id of the term list.",
-            "required": true,
-            "type": "string"
+            "$ref": "#/parameters/listId"
           },
           {
-            "name": "term",
-            "in": "path",
-            "required": true,
-            "description": "Term to be added to the list.",
-            "type": "string"
+            "$ref": "#/parameters/term"
           },
           {
-            "name": "language",
-            "in": "query",
-            "required": true,
-            "description": "Language of the term.",
-            "type": "string"
+            "$ref": "#/parameters/language"
           },
           {
             "$ref": "#/parameters/ocpApimSubscriptionKeyParameter"
@@ -814,25 +617,13 @@
         "description": "Deletes a term from the list with list Id equal to the list Id passed.",
         "parameters": [
           {
-            "name": "listId",
-            "in": "path",
-            "description": "Id of the term list.",
-            "required": true,
-            "type": "string"
+            "$ref": "#/parameters/listId"
           },
           {
-            "name": "term",
-            "in": "path",
-            "description": "Term to be deleted",
-            "required": true,
-            "type": "string"
+           "$ref": "#/parameters/term"
           },
           {
-            "name": "language",
-            "in": "query",
-            "description": "Language of the term",
-            "required": true,
-            "type": "string"
+            "$ref": "#/parameters/language"
           },
           {
             "$ref": "#/parameters/ocpApimSubscriptionKeyParameter"
@@ -865,18 +656,10 @@
         "description": "Gets all terms from the list with list Id equal to the list Id passed.",
         "parameters": [
           {
-            "name": "listId",
-            "in": "path",
-            "description": "Id of the term list.",
-            "required": true,
-            "type": "string"
+            "$ref": "#/parameters/listId"
           },
           {
-            "name": "language",
-            "in": "query",
-            "description": "language of the terms.",
-            "required": true,
-            "type": "string"
+            "$ref": "#/parameters/language"
           },
           {
             "$ref": "#/parameters/ocpApimSubscriptionKeyParameter"
@@ -886,7 +669,7 @@
           "200": {
             "description": "OK",
             "schema": {
-              "$ref": "#/definitions/GetAllTermsResponse"
+              "$ref": "#/definitions/GetAllTerms"
             }
           }
         },
@@ -907,18 +690,10 @@
         "description": "Deletes all terms from the list with list Id equal to the list Id passed.",
         "parameters": [
           {
-            "name": "listId",
-            "in": "path",
-            "description": "Id of the term list.",
-            "required": true,
-            "type": "string"
+            "$ref": "#/parameters/listId"
           },
           {
-            "name": "language",
-            "in": "query",
-            "description": "Language of the terms.",
-            "required": true,
-            "type": "string"
+            "$ref": "#/parameters/language"
           },
           {
             "$ref": "#/parameters/ocpApimSubscriptionKeyParameter"
@@ -944,34 +719,22 @@
     }
   },
   "x-ms-paths": {
-    "contentmoderator/lists/v1.0/imagelists/{listId}/images?overload=url": {
+    "/contentmoderator/lists/v1.0/imagelists/{listId}/images?overload=url": {
       "post": {
         "tags": [
           "ImageList"
         ],
-        "operationId": "ImageList_AddImage",
+        "operationId": "ImageList_AddImageUrlInput",
         "description": "Add an image to the list with list Id equal to list Id passed.",
         "parameters": [
           {
-            "name": "listId",
-            "in": "path",
-            "description": "Id of the image list.",
-            "required": true,
-            "type": "string"
+             "$ref": "#/parameters/listId"
           },
           {
-            "name": "tag",
-            "in": "query",
-            "description": "Tag for the image.",
-            "type": "number",
-            "required": false
+            "$ref": "#/parameters/tag"
           },
           {
-            "name": "label",
-            "in": "query",
-            "description": "The image label.",
-            "type": "string",
-            "required": false
+            "$ref": "#/parameters/label"
           },
           {
             "$ref": "#/parameters/ocpApimSubscriptionKeyParameter"
@@ -990,7 +753,7 @@
           "200": {
             "description": "OK",
             "schema": {
-              "$ref": "#/definitions/AddImageResponse"
+              "$ref": "#/definitions/AddImage"
             }
           }
         },
@@ -1004,34 +767,22 @@
         ]
       }
     },
-    "contentmoderator/lists/v1.0/imagelists/{listId}/images?overload=stream": {
+    "/contentmoderator/lists/v1.0/imagelists/{listId}/images?overload=stream": {
       "post": {
         "tags": [
           "ImageList"
         ],
-        "operationId": "ImageList_AddImage",
+        "operationId": "ImageList_AddImageFileInput",
         "description": "Add an image to the list with list Id equal to list Id passed.",
         "parameters": [
           {
-            "name": "listId",
-            "in": "path",
-            "description": "Id of the image list.",
-            "required": true,
-            "type": "string"
+             "$ref": "#/parameters/listId"
           },
           {
-            "name": "tag",
-            "in": "query",
-            "description": "Tag for the image.",
-            "type": "number",
-            "required": false
+            "$ref": "#/parameters/tag"
           },
           {
-            "name": "label",
-            "in": "query",
-            "description": "The image label.",
-            "type": "string",
-            "required": false
+            "$ref": "#/parameters/label"
           },
           {
             "$ref": "#/parameters/ocpApimSubscriptionKeyParameter"
@@ -1054,7 +805,7 @@
           "200": {
             "description": "OK",
             "schema": {
-              "$ref": "#/definitions/AddImageResponse"
+              "$ref": "#/definitions/AddImage"
             }
           }
         },
@@ -1070,7 +821,7 @@
     }
   },
   "definitions": {
-    "CreateImageListResponse": {
+    "CreateImageList": {
       "description": "Create Image List Response.",
       "properties": {
         "id": {
@@ -1103,7 +854,7 @@
         }
       }
     },
-    "CreateTermListResponse": {
+    "CreateTermList": {
       "description": "Create Term List Response.",
       "properties": {
         "id": {
@@ -1134,7 +885,7 @@
         }
       }
     },
-    "ImageListGetDetailsResponse": {
+    "ImageListGetDetails": {
       "description": "Get Image List Details Response.",
       "properties": {
         "id": {
@@ -1165,7 +916,7 @@
         }
       }
     },
-    "TermListGetListIdDetailsResponse": {
+    "TermListGetListIdDetails": {
       "description": "Get Term List Details Response.",
       "properties": {
         "id": {
@@ -1198,7 +949,7 @@
         }
       }
     },
-    "GetAllImageListResponse": {
+    "GetAllImageList": {
       "type": "array",
       "items": {
         "type": "object",
@@ -1234,7 +985,7 @@
         }
       }
     },
-    "GetAllTermListResponse": {
+    "GetAllTermList": {
       "type": "array",
       "items": {
         "type": "object",
@@ -1270,7 +1021,7 @@
         }
       }
     },
-    "RefreshIndexResponse": {
+    "RefreshIndex": {
       "description": "Refresh Index Response.",
       "properties": {
         "contentSourceId": {
@@ -1300,7 +1051,7 @@
         },
         "status": {
           "description": "Refresh index status.",
-          "$ref": "#/definitions/AddGetRefreshStatusResponse"
+          "$ref": "#/definitions/AddGetRefreshStatus"
         },
         "trackingId": {
           "description": "Tracking Id.",
@@ -1308,7 +1059,7 @@
         }
       }
     },
-    "UpdateImageListResponse": {
+    "UpdateImageList": {
       "description": "Update Image List Response.",
       "properties": {
         "id": {
@@ -1340,7 +1091,7 @@
         }
       }
     },
-    "UpdateTermListResponse": {
+    "UpdateTermList": {
       "description": "Update Term List Response.",
       "properties": {
         "id": {
@@ -1373,7 +1124,7 @@
         }
       }
     },
-    "AddImageResponse": {
+    "AddImage": {
       "description": "Add Image Response.",
       "properties": {
 
@@ -1400,7 +1151,7 @@
         },
         "status": {
           "description": "Add image response status.",
-          "$ref": "#/definitions/AddGetRefreshStatusResponse"
+          "$ref": "#/definitions/AddGetRefreshStatus"
         },
         "trackingId": {
           "description": "Tracking Id.",
@@ -1409,7 +1160,7 @@
       }
 
     },
-    "AddGetRefreshStatusResponse": {
+    "AddGetRefreshStatus": {
       "description": "Add and Get status response properties",
       "properties": {
         "code": {
@@ -1426,7 +1177,7 @@
         }
       }
     },
-    "GetAllImageIdsResponse": {
+    "GetAllImageIds": {
       "description": "Gets all image Id response properties.",
       "properties": {
         "contentSource": {
@@ -1443,7 +1194,7 @@
         "status": {
           "description": "Get Image status.",
           "type": "object",
-          "$ref": "#/definitions/AddGetRefreshStatusResponse"
+          "$ref": "#/definitions/AddGetRefreshStatus"
         },
         "trackingId": {
           "description": "Tracking Id.",
@@ -1451,12 +1202,12 @@
         }
       }
     },
-    "GetAllTermsResponse": {
+    "GetAllTerms": {
       "description": "Gets all term Id response properties.",
       "properties": {
         "data": {
           "description": "Term data details.",
-          "$ref": "#/definitions/TermDataResponse"
+          "$ref": "#/definitions/TermData"
         },
         "paging": {
           "description": "Paging details.",
@@ -1481,7 +1232,7 @@
         }
       }
     },
-    "TermDataResponse": {
+    "TermData": {
       "description": "Gets all term Id response properties.",
       "properties": {
         "language": {
@@ -1492,13 +1243,13 @@
           "description": "List of terms.",
           "type": "array",
           "items": {
-            "$ref": "#/definitions/termsInListResponse"
+            "$ref": "#/definitions/termsInList"
           }
         },
         "status": {
           "description": "Get Term Status.",
           "type": "object",
-          "$ref": "#/definitions/AddGetRefreshStatusResponse"
+          "$ref": "#/definitions/AddGetRefreshStatus"
         },
         "trackingId": {
           "description": "Tracking Id.",
@@ -1506,7 +1257,7 @@
         }
       }
     },
-    "termsInListResponse": {
+    "termsInList": {
       "description": "Terms in list Id passed.",
       "properties": {
         "term": {
@@ -1517,8 +1268,81 @@
     }
   },
   "parameters": {
-    "listIdTst": {
-      "name": "ListId",
+    "ImageId": {
+      "name": "ImageId",
+      "in": "path",
+      "description": "Id of the image.",
+      "required": true,
+      "type": "string"
+    },
+    "term": {
+      "name": "term",
+      "in": "path",
+      "description": "Term to be deleted",
+      "required": true,
+      "type": "string"
+    },
+    "label": {
+      "name": "label",
+      "in": "query",
+      "description": "The image label.",
+      "type": "string",
+      "required": false
+    },
+    "language": {
+      "name": "language",
+      "in": "query",
+      "description": "Language of the terms.",
+      "required": true,
+      "type": "string"
+    },
+    "body": {
+      "name": "body",
+      "in": "body",
+      "description": "Schema of the body.",
+      "required": true,
+      "schema": {
+        "type": "object",
+
+        "properties": {
+
+          "name": {
+            "description": "Name of the list.",
+            "type": "string"
+          },
+          "description": {
+            "description": "Description of the list.",
+            "type": "string"
+          },
+          "metadata": {
+            "description": "Metadata of the list.",
+            "type": "object",
+
+            "properties": {
+              "key One": {
+                "description": "Optional key value pair to describe your list.",
+                "type": "string"
+              },
+              "key Two": {
+                "description": "Optional key value pair to describe your list.",
+                "type": "string"
+              }
+            }
+
+          }
+        }
+
+      }
+    },
+    "tag": {
+      "name": "tag",
+      "in": "query",
+      "description": "Tag for the image.",
+      "type": "number",
+      "required": false
+    },
+    "listId": {
+      "name": "listId",
       "in": "path",
       "description": "List Id of the image list.",
       "required": true,
