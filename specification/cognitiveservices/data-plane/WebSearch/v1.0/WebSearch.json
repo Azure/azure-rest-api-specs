@@ -42,6 +42,7 @@
           "WebSearch"
         ],
         "parameters": [
+          { "$ref": "#/parameters/x-bingapis-sdk" },
           {
             "name": "Accept",
             "in": "header",
@@ -1191,5 +1192,20 @@
       ],
       "type": "object"
     }
+  },
+  "parameters": {
+  "x-bingapis-sdk": {
+    "name": "X-BingApis-SDK",
+    "in": "header",
+    "description": "Activate Swagger compliance",
+    "required": true,
+    "type": "string",
+    "enum": ["true"],
+    "x-ms-enum": {
+      "name": "XBingApisSDK",
+      "modelAsString": true
+    },
+    "x-ms-parameter-location": "method"
   }
+ }
 }
