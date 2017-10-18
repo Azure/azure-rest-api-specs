@@ -82,11 +82,7 @@
             "$ref": "#/parameters/ApiVersionParameter"
           },
           {
-            "name": "resourceGroupName",
-            "in": "path",
-            "description": "The name of the resource group that contains the container group.",
-            "required": true,
-            "type": "string"
+            "$ref": "#/parameters/ResourceGroupNameParameter"
           }
         ],
         "responses": {
@@ -123,18 +119,10 @@
             "$ref": "#/parameters/ApiVersionParameter"
           },
           {
-            "name": "resourceGroupName",
-            "in": "path",
-            "description": "The name of the resource group that contains the container group.",
-            "required": true,
-            "type": "string"
+            "$ref": "#/parameters/ResourceGroupNameParameter"
           },
           {
-            "name": "containerGroupName",
-            "in": "path",
-            "description": "The name of the container group.",
-            "required": true,
-            "type": "string"
+            "$ref": "#/parameters/ContainerGroupNameParameter"
           }
         ],
         "responses": {
@@ -163,18 +151,10 @@
             "$ref": "#/parameters/ApiVersionParameter"
           },
           {
-            "name": "resourceGroupName",
-            "in": "path",
-            "description": "The name of the resource group to contain the container group to be created or updated.",
-            "required": true,
-            "type": "string"
+            "$ref": "#/parameters/ResourceGroupNameParameter"
           },
           {
-            "name": "containerGroupName",
-            "in": "path",
-            "description": "The name of the container group to be created or updated.",
-            "required": true,
-            "type": "string"
+            "$ref": "#/parameters/ContainerGroupNameParameter"
           },
           {
             "name": "containerGroup",
@@ -218,18 +198,10 @@
             "$ref": "#/parameters/ApiVersionParameter"
           },
           {
-            "name": "resourceGroupName",
-            "in": "path",
-            "description": "The name of the resource group that contains the container group.",
-            "required": true,
-            "type": "string"
+            "$ref": "#/parameters/ResourceGroupNameParameter"
           },
           {
-            "name": "containerGroupName",
-            "in": "path",
-            "description": "The name of the container group to be deleted.",
-            "required": true,
-            "type": "string"
+            "$ref": "#/parameters/ContainerGroupNameParameter"
           }
         ],
         "responses": {
@@ -290,23 +262,15 @@
             "$ref": "#/parameters/ApiVersionParameter"
           },
           {
-            "name": "resourceGroupName",
-            "in": "path",
-            "description": "The name of the resource group that contains the container instance.",
-            "required": true,
-            "type": "string"
+            "$ref": "#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ContainerGroupNameParameter"
           },
           {
             "name": "containerName",
             "in": "path",
             "description": "The name of the container instance.",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "name": "containerGroupName",
-            "in": "path",
-            "description": "The name of the container group the container instance belongs to.",
             "required": true,
             "type": "string"
           },
@@ -675,7 +639,6 @@
                     "modelAsString": true
                   }
                 },
-
                 "volumes": {
                   "type": "array",
                   "description": "The list of volumes that can be mounted by containers in this container group.",
@@ -837,7 +800,7 @@
         "value"
       ]
     },
-    "OperationListResult":{
+    "OperationListResult": {
       "description": "The operation list response that contains all operations for Azure Container Instance service.",
       "type": "object",
       "properties": {
@@ -893,7 +856,7 @@
           }
         }
       }
-    },        
+    },
     "ContainerGroupListResult": {
       "description": "The container group list response that contains the container group properties.",
       "type": "object",
@@ -964,14 +927,32 @@
       "in": "path",
       "required": true,
       "type": "string",
-      "description": "Subscription credentials which uniquely identify Microsoft Azure subscription. The subscription ID forms part of the URI for every service call."
+      "description": "Subscription credentials which uniquely identify Microsoft Azure subscription. The subscription ID forms part of the URI for every service call.",
+      "x-ms-parameter-location": "client"
     },
     "ApiVersionParameter": {
       "name": "api-version",
       "in": "query",
       "required": true,
       "type": "string",
-      "description": "Client API version"
+      "description": "Client API version",
+      "x-ms-parameter-location": "client"
+    },
+    "ResourceGroupNameParameter": {
+      "name": "resourceGroupName",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "description": "The name of the resource group.",
+      "x-ms-parameter-location": "method"
+    },
+    "ContainerGroupNameParameter": {
+      "name": "containerGroupName",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "description": "The name of the container group.",
+      "x-ms-parameter-location": "method"
     }
   }
 }
