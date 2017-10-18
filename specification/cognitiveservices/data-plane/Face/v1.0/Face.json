@@ -1801,8 +1801,16 @@
                     {
                         "name": "targetFace",
                         "in": "query",
-                        "description": "A face rectangle to specify the target face to be added to a person, in the format of \"targetFace=left,top,width,height\". E.g. \"targetFace=10,10,100,100\". If there is more than one face in the image, targetFace is required to specify which face to add. No targetFace means there is only one face detected in the entire image. ",
-                        "type": "string"
+                        "description": "A face rectangle to specify the target face to be added to a person in the format of \"targetFace=left,top,width,height\". E.g. \"targetFace=10,10,100,100\". If there is more than one face in the image, targetFace is required to specify which face to add. No targetFace means there is only one face detected in the entire image. ",
+                        "type": "array",
+                        "required": false,
+                        "collectionFormat": "csv",
+                        "items": {
+                            "type": "integer",
+                            "format": "int32",
+                            "maxItems": 4,
+                            "minItems": 4
+                        }
                     },
                     {
                         "$ref": "#/parameters/ImageStream"
