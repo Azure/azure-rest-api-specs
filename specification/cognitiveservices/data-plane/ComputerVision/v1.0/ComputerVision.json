@@ -512,24 +512,7 @@
                         "$ref": "../../Common/Parameters.json#/parameters/SubscriptionKey"
                     },
                     {
-                        "name": "visualFeatures",
-                        "in": "query",
-                        "description": "A string indicating what visual feature types to return. Multiple values should be comma-separated.",
-                        "type": "array",
-                        "required": false,
-                        "collectionFormat": "csv",
-                        "items": {
-                            "type": "string",
-                            "enum": [
-                                "ImageType",
-                                "Faces",
-                                "Adult",
-                                "Categories",
-                                "Color",
-                                "Tags",
-                                "Description"
-                            ]
-                        }
+                        "$ref": "#/definitions/VisualFeatures"
                     },
                     {
                         "name": "details",
@@ -834,6 +817,26 @@
         }
     },
     "definitions": {
+        "VisualFeatures": {
+            "name": "visualFeatures",
+            "in": "query",
+            "description": "A string indicating what visual feature types to return. Multiple values should be comma-separated.",
+            "type": "array",
+            "required": false,
+            "collectionFormat": "csv",
+            "items": {
+                "type": "string",
+                "enum": [
+                    "ImageType",
+                    "Faces",
+                    "Adult",
+                    "Categories",
+                    "Color",
+                    "Tags",
+                    "Description"
+                ]
+            }
+        },
         "TextOperationResult": {
             "type": "object",
             "properties": {
