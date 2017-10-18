@@ -839,7 +839,7 @@
             "properties": {
                 "status": {
                     "type": "string",
-                    "description": "",
+                    "description": "Status of the text operation.",
                     "enum": [
                         "Not Started",
                         "Running",
@@ -905,25 +905,25 @@
         },
         "ImageAnalysis": {
             "type": "object",
-            "description": "",
+            "description": "Result of AnalyzeImage operation.",
             "properties": {
                 "categories": {
                     "type": "array",
-                    "description": "",
+                    "description": "An array indicating identified categories.",
                     "items": {
                         "$ref": "#/definitions/Category"
                     }
                 },
                 "adult": {
-                    "description": "",
+                    "description": "A property scoring on whether the image is adult-oriented and/or racy.",
                     "$ref": "#/definitions/AdultInfo"
                 },
                 "color": {
-                    "description": "",
+                    "description": "A property scoring on color spectrums.",
                     "$ref": "#/definitions/ColorInfo"
                 },
                 "imageType": {
-                    "description": "",
+                    "description": "A property indicating type of image (whether it's clipart or line drawing)",
                     "$ref": "#/definitions/ImageType"
                 },
                 "tags": {
@@ -934,19 +934,19 @@
                     }
                 },
                 "description": {
-                    "description": "",
+                    "description": "Description of the image.",
                     "$ref": "#/definitions/ImageDescriptionDetails"
                 },
                 "faces": {
                     "type": "array",
-                    "description": "",
+                    "description": "An array of possible faces within the image.",
                     "items": {
                         "$ref": "#/definitions/FaceDescription"
                     }
                 },
                 "requestId": {
                     "type": "string",
-                    "description": ""
+                    "description": "Id of the request for tracking purposes."
                 },
                 "metadata": {
                     "description": "Image metadata",
@@ -1007,7 +1007,7 @@
         },
         "OcrLine": {
             "type": "object",
-            "description": "",
+            "description": "An object describing a single recognized line of text.",
             "properties": {
                 "boundingBox": {
                     "type": "string",
@@ -1038,12 +1038,12 @@
         },
         "ListModelsResult": {
             "type": "object",
-            "description": "",
+            "description": "Result of the List Domain Models operation.",
             "properties": {
                 "models": {
                     "type": "array",
                     "readOnly": true,
-                    "description": "",
+                    "description": "An array of supported models.",
                     "items": {
                         "$ref": "#/definitions/ModelDescription"
                     }
@@ -1052,7 +1052,7 @@
         },
         "ModelDescription": {
             "type": "object",
-            "description": "",
+            "description": "An object describing supported model by name and categories.",
             "properties": {
                 "name": {
                     "type": "string"
@@ -1067,19 +1067,19 @@
         },
         "DomainModelResults": {
             "type": "object",
-            "description": "",
+            "description": "Result of image analysis using a specific domain model including additional metadata.",
             "properties": {
                 "result": {
-                    "description": "",
+                    "description": "Result of the image analysis.",
                     "x-ms-client-flatten": true,
                     "$ref": "#/definitions/DomainModelResult"
                 },
                 "requestId": {
                     "type": "string",
-                    "description": ""
+                    "description": "Id of the REST API request."
                 },
                 "metadata": {
-                    "description": "Image metadata",
+                    "description": "Additional image metadata",
                     "$ref": "#/definitions/ImageMetadata"
                 }
             }
@@ -1089,7 +1089,7 @@
             "properties": {
                 "celebrities": {
                     "type": "array",
-                    "description": "",
+                    "description": "An array of possible celebritied identified in the image.",
                     "items": {
                         "$ref": "#/definitions/CelebritiesModel"
                     }
@@ -1101,7 +1101,6 @@
             "description": "A collection of content tags, along with a list of captions sorted by confidence level, and image metadata.",
             "properties": {
                 "description": {
-                    "description": "",
                     "x-ms-client-flatten": true,
                     "$ref": "#/definitions/ImageDescriptionDetails"
                 }
@@ -1120,7 +1119,7 @@
                 },
                 "requestId": {
                     "type": "string",
-                    "description": ""
+                    "description": "Id of the REST API request."
                 },
                 "metadata": {
                     "description": "Image metadata",
@@ -1148,7 +1147,7 @@
                 },
                 "requestId": {
                     "type": "string",
-                    "description": ""
+                    "description": "Id of the REST API request."
                 },
                 "metadata": {
                     "description": "Image metadata",
@@ -1208,16 +1207,16 @@
         },
         "CelebritiesModel": {
             "type": "object",
-            "description": "",
+            "description": "An object describing possible celebrity identification.",
             "properties": {
                 "name": {
                     "type": "string",
-                    "description": ""
+                    "description": "Name of the celebrity."
                 },
                 "confidence": {
                     "type": "number",
                     "format": "double",
-                    "description": ""
+                    "description": "Level of confidence ranging from 0 to 1."
                 },
                 "faceRectangle": {
                     "$ref": "#/definitions/FaceRectangle"
@@ -1226,37 +1225,37 @@
         },
         "FaceRectangle": {
             "type": "object",
-            "description": "",
+            "description": "An object describing face rectangle.",
             "properties": {
                 "left": {
                     "type": "integer",
-                    "description": ""
+                    "description": "X-coordinate of the top left point of the face."
                 },
-                "right": {
+                "top": {
                     "type": "integer",
-                    "description": ""
+                    "description": "Y-coordinate of the top left point of the face."
                 },
                 "width": {
                     "type": "integer",
-                    "description": ""
+                    "description": "Width measured from the top-left point of the face."
                 },
                 "height": {
                     "type": "integer",
-                    "description": ""
+                    "description": "Height measured from the top-left point of the face."
                 }
             }
         },
         "FaceDescription": {
             "type": "object",
-            "description": "",
+            "description": "An object describing a face identified in the image.",
             "properties": {
                 "age": {
                     "type": "integer",
-                    "description": ""
+                    "description": "Possible age of the face."
                 },
                 "gender": {
                     "type": "string",
-                    "description": "",
+                    "description": "Possible gender of the face.",
                     "enum": [
                         "Male",
                         "Female"
@@ -1269,98 +1268,98 @@
         },
         "ImageType": {
             "type": "object",
-            "description": "",
+            "description": "An object providing possible image types and matching confidence levels.",
             "properties": {
                 "clipArtType": {
-                    "type": "integer",
-                    "description": ""
+                    "type": "number",
+                    "description": "Confidence level that the image is a clip art."
                 },
                 "lineDrawingType": {
-                    "type": "integer",
-                    "description": ""
+                    "type": "number",
+                    "description": "Confidence level that the image is a line drawing."
                 }
             }
         },
         "ColorInfo": {
             "type": "object",
-            "description": "",
+            "description": "An object providing additional metadata describing color attributes.",
             "properties": {
                 "dominantColorForeground": {
                     "type": "string",
-                    "description": ""
+                    "description": "Possible dominant foreground color."
                 },
                 "dominantColorBackground": {
                     "type": "string",
-                    "description": ""
+                    "description": "Possible dominant background color."
                 },
                 "dominantColors": {
                     "type": "array",
+                    "description": "An array of possible dominant colors.",
                     "items": {
-                        "type": "string",
-                        "description": ""
+                        "type": "string"
                     }
                 },
                 "accentColor": {
                     "type": "string",
-                    "description": ""
+                    "description": "Possible accent color."
                 },
                 "isBWImg": {
                     "type": "boolean",
-                    "description": ""
+                    "description": "A value indicating if the image is black and white."
                 }
             }
         },
         "AdultInfo": {
             "type": "object",
-            "description": "",
+            "description": "An object describing whether the image contains adult-oriented content and/or is racy.",
             "properties": {
                 "isAdultContent": {
                     "type": "boolean",
-                    "description": ""
+                    "description": "A value indicating if the image contains adult-oriented content."
                 },
                 "isRacyContent": {
                     "type": "boolean",
-                    "description": ""
+                    "description": "A value indicating if the image is race."
                 },
                 "adultScore": {
                     "type": "number",
                     "format": "double",
-                    "description": ""
+                    "description": "Score from 0 to 1 that indicates how much of adult content is within the image."
                 },
                 "racyScore": {
                     "type": "number",
                     "format": "double",
-                    "description": ""
+                    "description": "Score from 0 to 1 that indicates how suggestive is the image."
                 }
             }
         },
         "Category": {
             "type": "object",
-            "description": "",
+            "description": "An object describing identified category.",
             "properties": {
                 "name": {
                     "type": "string",
-                    "description": ""
+                    "description": "Name of the category."
                 },
                 "score": {
                     "type": "number",
                     "format": "double",
-                    "description": ""
+                    "description": "Scoring of the category."
                 },
                 "detail": {
                     "type": "object",
-                    "description": "",
+                    "description": "Additional category detail if available.",
                     "$ref": "#/definitions/CategoryDetail"
                 }
             }
         },
         "CategoryDetail": {
             "type": "object",
-            "description": "",
+            "description": "An object describing additional category details.",
             "properties": {
                 "celebrities": {
                     "type": "array",
-                    "description": "",
+                    "description": "An array of celebrities if any identified.",
                     "items": {
                         "$ref": "#/definitions/CelebritiesModel"
                     }
