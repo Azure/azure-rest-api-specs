@@ -59,7 +59,7 @@ input-file:
 ```
 
 
-### Tag: package-2017-05
+### Tag: package-2017-05-preview
 
 These settings apply only when `--tag=package-2017-05-preview` is specified on the command line.
 
