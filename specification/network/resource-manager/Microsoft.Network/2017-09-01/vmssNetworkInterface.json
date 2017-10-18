@@ -228,6 +228,164 @@
           "Get virtual machine scale set network interface": { "$ref": "./examples/VmssNetworkInterfaceGet.json" }
         }
       }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Compute/virtualMachineScaleSets/{virtualMachineScaleSetName}/virtualMachines/{virtualmachineIndex}/networkInterfaces/{networkInterfaceName}/ipConfigurations": {
+      "get": {
+        "tags": [
+          "NetworkInterfaces"
+        ],
+        "operationId": "NetworkInterfaces_ListVirtualMachineScaleSetIpConfigurations",
+        "description": "Get the specified network interface ip configuration in a virtual machine scale set.",
+        "parameters": [
+          {
+            "name": "resourceGroupName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the resource group."
+          },
+          {
+            "name": "virtualMachineScaleSetName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the virtual machine scale set."
+          },
+          {
+            "name": "virtualmachineIndex",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The virtual machine index."
+          },
+          {
+            "name": "networkInterfaceName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the network interface."
+          },
+          {
+            "name": "api-version",
+            "in": "query",
+            "required": true,
+            "type": "string",
+            "enum": [
+              "2017-03-30"
+            ],
+            "x-ms-enum": {
+              "name": "ApiVersion",
+              "modelAsString": true
+            },
+            "description": "Client API version."
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "name": "$expand",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "description": "Expands referenced resources."
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Request successful. The operation returns the list of resulting NetworkInterfaceIPConfigurations resources.",
+            "schema": {
+              "$ref": "./networkInterface.json#/definitions/NetworkInterfaceIPConfigurationListResult"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "List virtual machine scale set network interface ip configurations": { "$ref": "./examples/VmssNetworkInterfaceIpConfigList.json" }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Compute/virtualMachineScaleSets/{virtualMachineScaleSetName}/virtualMachines/{virtualmachineIndex}/networkInterfaces/{networkInterfaceName}/ipConfigurations/{ipConfigurationName}": {
+      "get": {
+        "tags": [
+          "NetworkInterfaces"
+        ],
+        "operationId": "NetworkInterfaces_GetVirtualMachineScaleSetIpConfiguration",
+        "description": "Get the specified network interface ip configuration in a virtual machine scale set.",
+        "parameters": [
+          {
+            "name": "resourceGroupName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the resource group."
+          },
+          {
+            "name": "virtualMachineScaleSetName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the virtual machine scale set."
+          },
+          {
+            "name": "virtualmachineIndex",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The virtual machine index."
+          },
+          {
+            "name": "networkInterfaceName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the network interface."
+          },
+          {
+            "name": "ipConfigurationName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the ip configuration."
+          },
+          {
+            "name": "api-version",
+            "in": "query",
+            "required": true,
+            "type": "string",
+            "enum": [
+              "2017-03-30"
+            ],
+            "x-ms-enum": {
+              "name": "ApiVersion",
+              "modelAsString": true
+            },
+            "description": "Client API version."
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "name": "$expand",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "description": "Expands referenced resources."
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Request successful. The operation returns the resulting NetworkInterfaceIPConfiguration resource.",
+            "schema": {
+              "$ref": "./networkInterface.json#/definitions/NetworkInterfaceIPConfiguration"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Get virtual machine scale set network interface": { "$ref": "./examples/VmssNetworkInterfaceIpConfigGet.json" }
+        }
+      }
     }
   },
   "parameters": {

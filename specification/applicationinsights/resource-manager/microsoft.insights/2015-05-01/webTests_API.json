@@ -1,7 +1,7 @@
 {
   "swagger": "2.0",
   "info": {
-    "title": "AppInsightsManagementClient",
+    "title": "ApplicationInsightsManagementClient",
     "description": "Azure Application Insights client for web test based alerting.",
     "version": "2015-05-01"
   },
@@ -206,6 +206,11 @@
           "200": {
             "description": "Successful request to delete a web test definition."
           }
+        },
+        "x-ms-examples": {
+          "webTestDelete": {
+            "$ref": "./examples/WebTestDelete.json"
+          }
         }
       }
     },
@@ -260,7 +265,11 @@
         },
         "location": {
           "type": "string",
-          "description": "Resource location"
+          "description": "Resource location",
+          "x-ms-mutability": [
+            "create",
+            "read"
+          ]
         },
         "tags": {
           "additionalProperties": {
@@ -328,6 +337,7 @@
         },
         "properties": {
           "x-ms-client-flatten": true,
+          "description": "Metadata describing a web test for an Azure resource.",
           "$ref": "#/definitions/WebTestProperties"
         }
       }
@@ -430,7 +440,7 @@
       "in": "path",
       "required": true,
       "type": "string",
-      "description": "The Azure subscription Id."
+      "description": "The Azure subscription ID."
     },
     "ApiVersionParameter": {
       "name": "api-version",

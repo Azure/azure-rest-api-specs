@@ -36,7 +36,7 @@
     }
   },
   "paths": {
-  	"/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/expressRouteCircuits/{circuitName}/authorizations/{authorizationName}": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/expressRouteCircuits/{circuitName}/authorizations/{authorizationName}": {
       "delete": {
         "tags": [
           "ExpressRouteCircuitAuthorizations"
@@ -557,6 +557,56 @@
               "$ref": "#/definitions/ExpressRouteCircuit"
             }
           }
+        },
+        "x-ms-long-running-operation": true
+      },
+      "patch": {
+        "tags": [
+          "ExpressRouteCircuits"
+        ],
+        "operationId": "ExpressRouteCircuits_UpdateTags",
+        "description": "Updates an express route circuit tags.",
+        "parameters": [
+          {
+            "name": "resourceGroupName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the resource group."
+          },
+          {
+            "name": "circuitName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the circuit."
+          },
+          {
+            "name": "parameters",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "./network.json#/definitions/TagsObject"
+            },
+            "description": "Parameters supplied to update express route circuit tags."
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Update successful. The operation returns the resulting ExpressRouteCircuit resource.",
+            "schema": {
+              "$ref": "#/definitions/ExpressRouteCircuit"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Update Express Route Circuit Tags": { "$ref": "./examples/ExpressRouteCircuitUpdateTags.json" }
         },
         "x-ms-long-running-operation": true
       }
