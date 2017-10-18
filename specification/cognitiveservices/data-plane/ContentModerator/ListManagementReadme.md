@@ -17,7 +17,7 @@ These settings apply only when `--tag=release_1_0` is specified on the command l
 
 ``` yaml $(tag) == 'release_1_0'
 input-file: 
-  - v1.0/contentmoderatorListManagement.swagger.json
+  - v1.0/contentmoderatorListManagement.json
 ```
 
 ## Validation

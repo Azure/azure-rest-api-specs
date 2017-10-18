@@ -29,8 +29,8 @@
         "tags": [
           "ImageList"
         ],
-        "operationId": "ImageList_GetListIdDetails",
-        "description": "Returns the details of the list Id passed.",
+        "operationId": "ImageList_GetDetails",
+        "description": "Returns the details of the image list with list Id equal to list Id passed.",
         "parameters": [
           {
             "$ref": "#/parameters/ocpApimSubscriptionKeyParameter"
@@ -65,8 +65,8 @@
         "tags": [
           "ImageList"
         ],
-        "operationId": "ImageList_DeleteImageList",
-        "description": "Deletes list with the list Id equal to list Id passed.",
+        "operationId": "ImageList_Delete",
+        "description": "Deletes image list with the list Id equal to list Id passed.",
         "parameters": [
           {
             "name": "listId",
@@ -100,7 +100,7 @@
         "tags": [
           "ImageList"
         ],
-        "operationId": "ImageList_UpdateImageList",
+        "operationId": "ImageList_Update",
         "description": "Updates an image list with list Id equal to list Id passed.",
         "parameters": [
           {
@@ -136,12 +136,12 @@
                   "type": "object",
 
                   "properties": {
-                    "sample string 1": {
-                      "description": "Optional Key value pair to describe your list.",
+                    "key One": {
+                      "description": "Optional key value pair to describe your list.",
                       "type": "string"
                     },
-                    "sample string 2": {
-                      "description": "Optional Key value pair to describe your list.",
+                    "key Two": {
+                      "description": "Optional key value pair to describe your list.",
                       "type": "string"
                     }
                   }
@@ -178,7 +178,7 @@
         "tags": [
           "ImageList"
         ],
-        "operationId": "ImageList_CreateImageList",
+        "operationId": "ImageList_Create",
         "description": "Creates an image list.",
         "parameters": [
           {
@@ -204,11 +204,11 @@
                   "description": "Metadata of the image list.",
                   "type": "object",
                   "properties": {
-                    "sample string 1": {
+                    "key One": {
                       "description": "Optional Key value pair to describe your list.",
                       "type": "string"
                     },
-                    "sample string 2": {
+                    "key Two": {
                       "description": "Optional Key value pair to describe your list.",
                       "type": "string"
                     }
@@ -307,10 +307,10 @@
     "/contentmoderator/lists/v1.0/termlists/{listId}": {
       "get": {
         "tags": [
-          "TermsLists"
+          "TermsList"
         ],
-        "operationId": "TermsLists_GetListIdDetails",
-        "description": "Returns list Id details of the list with list Id equal to list Id passed.",
+        "operationId": "TermsList_GetDetails",
+        "description": "Returns list Id details of the term list with list Id equal to list Id passed.",
         "parameters": [
           {
             "name": "listId",
@@ -342,10 +342,10 @@
       },
       "delete": {
         "tags": [
-          "Termlists"
+          "Termlist"
         ],
-        "operationId": "Termlists_DeleteList",
-        "description": "Deletes term list with the list Id passed.",
+        "operationId": "Termlist_Delete",
+        "description": "Deletes term list with the list Id equal to list Id passed.",
         "parameters": [
           {
             "name": "listId",
@@ -377,9 +377,9 @@
       },
       "put": {
         "tags": [
-          "Termlists"
+          "Termlist"
         ],
-        "operationId": "Termlists_UpdateTermList",
+        "operationId": "Termlist_Update",
         "description": "Updates an Term List.",
         "parameters": [
           {
@@ -450,9 +450,9 @@
     "/contentmoderator/lists/v1.0/termlists": {
       "post": {
         "tags": [
-          "Termlists"
+          "Termlist"
         ],
-        "operationId": "Termlists_CreateTermlists",
+        "operationId": "Termlists_Create",
         "description": "Creates a Term List",
         "parameters": [
           {
@@ -514,9 +514,9 @@
       },
       "get": {
         "tags": [
-          "Termlists"
+          "Termlist"
         ],
-        "operationId": "Termlists_GetAllTermLists",
+        "operationId": "Termlist_GetAllTermLists",
         "description": "gets all the Term Lists",
         "parameters": [
           {
@@ -544,9 +544,9 @@
     "/contentmoderator/lists/v1.0/termlists/{listId}/RefreshIndex": {
       "post": {
         "tags": [
-          "Termlists"
+          "Termlist"
         ],
-        "operationId": "Termlists_RefreshIndex",
+        "operationId": "Termlist_RefreshIndex",
         "description": "Refreshes the index of the list with list Id equal to list ID passed.",
         "parameters": [
           {
@@ -612,17 +612,8 @@
           },
           {
             "$ref": "#/parameters/contentTypeHeader"
-          },
-          {
-            "name": "file",
-            "in": "body",
-            "required": true,
-            "schema": {
-              "type": "object",
-              "format": "file"
-            },
-            "description": "The image file location or image url."
           }
+          
         ],
         "consumes": [
           "image/gif",
@@ -767,10 +758,10 @@
     "/contentmoderator/lists/v1.0/termlists/{listId}/terms/{term}": {
       "post": {
         "tags": [
-          "TermLists"
+          "TermList"
         ],
-        "operationId": "TermLists_AddTerm",
-        "description": "Add a term to the list with list Id equal to list Id passed.",
+        "operationId": "TermList_AddTerm",
+        "description": "Add a term to the term list with list Id equal to list Id passed.",
         "parameters": [
           {
             "name": "listId",
@@ -817,9 +808,9 @@
       },
       "delete": {
         "tags": [
-          "TermsLists"
+          "TermsList"
         ],
-        "operationId": "TermsLists_DeleteTerm",
+        "operationId": "TermsList_DeleteTerm",
         "description": "Deletes a term from the list with list Id equal to the list Id passed.",
         "parameters": [
           {
@@ -868,9 +859,9 @@
     "/contentmoderator/lists/v1.0/termlists/{listId}/terms": {
       "get": {
         "tags": [
-          "Termlists"
+          "Termlist"
         ],
-        "operationId": "Termlists_GetAllTerms",
+        "operationId": "Termlist_GetAllTerms",
         "description": "Gets all terms from the list with list Id equal to the list Id passed.",
         "parameters": [
           {
@@ -910,9 +901,9 @@
       },
       "delete": {
         "tags": [
-          "Termlists"
+          "Termlist"
         ],
-        "operationId": "Termlists_DeleteAllTerms",
+        "operationId": "Termlist_DeleteAllTerms",
         "description": "Deletes all terms from the list with list Id equal to the list Id passed.",
         "parameters": [
           {
@@ -952,6 +943,132 @@
       }
     }
   },
+  "x-ms-paths": {
+    "contentmoderator/lists/v1.0/imagelists/{listId}/images?overload=url": {
+      "post": {
+        "tags": [
+          "ImageList"
+        ],
+        "operationId": "ImageList_AddImage",
+        "description": "Add an image to the list with list Id equal to list Id passed.",
+        "parameters": [
+          {
+            "name": "listId",
+            "in": "path",
+            "description": "Id of the image list.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "tag",
+            "in": "query",
+            "description": "Tag for the image.",
+            "type": "number",
+            "required": false
+          },
+          {
+            "name": "label",
+            "in": "query",
+            "description": "The image label.",
+            "type": "string",
+            "required": false
+          },
+          {
+            "$ref": "#/parameters/ocpApimSubscriptionKeyParameter"
+          },
+          {
+            "$ref": "#/parameters/contentTypeHeader"
+          },
+          {
+            "$ref": "#/parameters/ImageUrlParameter"
+          }
+        ],
+        "consumes": [
+          "application/json"
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/AddImageResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Add Image request": {
+            "$ref": "./examples/AddImageResource.json"
+          }
+        },
+        "produces": [
+          "application/json"
+        ]
+      }
+    },
+    "contentmoderator/lists/v1.0/imagelists/{listId}/images?overload=stream": {
+      "post": {
+        "tags": [
+          "ImageList"
+        ],
+        "operationId": "ImageList_AddImage",
+        "description": "Add an image to the list with list Id equal to list Id passed.",
+        "parameters": [
+          {
+            "name": "listId",
+            "in": "path",
+            "description": "Id of the image list.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "tag",
+            "in": "query",
+            "description": "Tag for the image.",
+            "type": "number",
+            "required": false
+          },
+          {
+            "name": "label",
+            "in": "query",
+            "description": "The image label.",
+            "type": "string",
+            "required": false
+          },
+          {
+            "$ref": "#/parameters/ocpApimSubscriptionKeyParameter"
+          },
+          {
+            "$ref": "#/parameters/contentTypeHeader"
+          },
+          {
+            "$ref": "#/parameters/ImageStreamParameter"
+          }
+        ],
+        "consumes": [
+          "image/gif",
+          "image/jpeg",
+          "image/png",
+          "image/bmp",
+          "image/tiff"
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/AddImageResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Add Image request": {
+            "$ref": "./examples/AddImageStreamResource.json"
+          }
+        },
+        "produces": [
+          "application/json"
+        ]
+      }
+    }
+  },
   "definitions": {
     "CreateImageListResponse": {
       "description": "Create Image List Response.",
@@ -973,11 +1090,11 @@
           "type": "object",
 
           "properties": {
-            "sample string 1": {
+            "key One": {
               "description": "Optional Key value pair to describe your list.",
               "type": "string"
             },
-            "sample string 2": {
+            "key Two": {
               "description": "Optional Key value pair to describe your list.",
               "type": "string"
             }
@@ -1005,11 +1122,11 @@
           "description": "Term list metadata.",
           "type": "object",
           "properties": {
-            "sample string 1": {
+            "key One": {
               "description": "Optional Key value pair to describe your list.",
               "type": "string"
             },
-            "sample string 2": {
+            "key Two": {
               "description": "Optional Key value pair to describe your list.",
               "type": "string"
             }
@@ -1036,11 +1153,11 @@
           "description": "Metadata of the image list.",
           "type": "object",
           "properties": {
-            "sample string 1": {
+            "key One": {
               "description": "Optional Key value pair to describe your list.",
               "type": "string"
             },
-            "sample string 2": {
+            "key Two": {
               "description": "Optional Key value pair to describe your list.",
               "type": "string"
             }
@@ -1068,11 +1185,11 @@
           "type": "object",
 
           "properties": {
-            "sample string 1": {
+            "key One": {
               "description": "Optional Key value pair to describe your list.",
               "type": "string"
             },
-            "sample string 2": {
+            "key Two": {
               "description": "Optional Key value pair to describe your list.",
               "type": "string"
             }
@@ -1103,11 +1220,11 @@
             "type": "object",
 
             "properties": {
-              "sample string 1": {
+              "key One": {
                 "description": "Optional Key value pair to describe your list.",
                 "type": "string"
               },
-              "sample string 2": {
+              "key Two": {
                 "description": "Optional Key value pair to describe your list.",
                 "type": "string"
               }
@@ -1139,11 +1256,11 @@
             "type": "object",
 
             "properties": {
-              "sample string 1": {
+              "key One": {
                 "description": "Optional Key value pair to describe your list.",
                 "type": "string"
               },
-              "sample string 2": {
+              "key Two": {
                 "description": "Optional Key value pair to describe your list.",
                 "type": "string"
               }
@@ -1170,11 +1287,11 @@
           "items": {
             "type": "object",
             "properties": {
-              "key one": {
+              "key One": {
                 "description": "Key value pair.",
                 "type": "string"
               },
-              "key two": {
+              "key Two": {
                 "description": "Key value pair.",
                 "type": "string"
               }
@@ -1211,11 +1328,11 @@
           "type": "object",
 
           "properties": {
-            "sample string 1": {
+            "key One": {
               "description": "Optional Key value pair to describe your list.",
               "type": "string"
             },
-            "sample string 2": {
+            "key Two": {
               "description": "Optional Key value pair to describe your list.",
               "type": "string"
             }
@@ -1243,11 +1360,11 @@
           "type": "object",
 
           "properties": {
-            "sample string 1": {
+            "key One": {
               "description": "Optional Key value pair to describe your list.",
               "type": "string"
             },
-            "sample string 2": {
+            "key Two": {
               "description": "Optional Key value pair to describe your list.",
               "type": "string"
             }
@@ -1413,6 +1530,34 @@
       "required": true,
       "type": "string",
       "in": "header"
+    },
+    "ImageUrlParameter": {
+      "name": "ImageUrl",
+      "in": "body",
+      "required": true,
+      "schema": {
+        "type": "object",
+        "properties": {
+          "dataRepresentation": {
+            "type": "string",
+            "default": "URL"
+          },
+          "value": {
+            "type": "string"
+          }
+        }
+      },
+      "description": "The image url."
+    },
+    "ImageStreamParameter": {
+      "name": "ImageStream",
+      "required": true,
+      "in": "body",
+      "schema": {
+        "type": "object",
+        "format": "file"
+      },
+      "description": "The image file."
     },
     "ocpApimSubscriptionKeyParameter": {
       "name": "Ocp-Apim-Subscription-Key",
