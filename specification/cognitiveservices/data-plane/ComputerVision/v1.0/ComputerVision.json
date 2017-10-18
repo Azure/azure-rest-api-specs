@@ -512,7 +512,7 @@
                         "$ref": "../../Common/Parameters.json#/parameters/SubscriptionKey"
                     },
                     {
-                        "$ref": "#/definitions/VisualFeatures"
+                        "$ref": "#/parameters/VisualFeatures"
                     },
                     {
                         "name": "details",
@@ -816,16 +816,21 @@
             }
         }
     },
-    "definitions": {
+    "parameters": {
         "VisualFeatures": {
             "name": "visualFeatures",
             "in": "query",
-            "description": "A string indicating what visual feature types to return. Multiple values should be comma-separated.",
+            "description": "A string indicating what visual feature types to return. Multiple values should be comma-separated. Valid visual feature types include:Categories - categorizes image content according to a taxonomy defined in documentation. Tags - tags the image with a detailed list of words related to the image content. Description - describes the image content with a complete English sentence. Faces - detects if faces are present. If present, generate coordinates, gender and age. ImageType - detects if image is clipart or a line drawing. Color - determines the accent color, dominant color, and whether an image is black&white.Adult - detects if the image is pornographic in nature (depicts nudity or a sex act).  Sexually suggestive content is also detected.",
             "type": "array",
             "required": false,
             "collectionFormat": "csv",
             "items": {
                 "type": "string",
+                "x-nullable": "false",
+                "x-ms-enum": {
+                    "name": "VisualFeatures",
+                    "modelAsString": false
+                },
                 "enum": [
                     "ImageType",
                     "Faces",
@@ -836,7 +841,9 @@
                     "Description"
                 ]
             }
-        },
+        }
+    },
+    "definitions": {
         "TextOperationResult": {
             "type": "object",
             "properties": {
