@@ -65,24 +65,25 @@ These settings apply only when `--tag=package-2017-05-preview` is specified on t
 
 ``` yaml $(tag) == 'package-2017-05-preview'
 input-file:
-- Microsoft.Automation/2017-05-15-preview/account.json
-- Microsoft.Automation/2017-05-15-preview/certificate.json
-- Microsoft.Automation/2017-05-15-preview/connection.json
-- Microsoft.Automation/2017-05-15-preview/connectionType.json
-- Microsoft.Automation/2017-05-15-preview/credential.json
-- Microsoft.Automation/2017-05-15-preview/definitions.json
-- Microsoft.Automation/2017-05-15-preview/dscCompilationJob.json
-- Microsoft.Automation/2017-05-15-preview/dscConfiguration.json
-- Microsoft.Automation/2017-05-15-preview/dscNode.json
-- Microsoft.Automation/2017-05-15-preview/dscNodeConfiguration.json
-- Microsoft.Automation/2017-05-15-preview/hybridRunbookWorkerGroup.json
-- Microsoft.Automation/2017-05-15-preview/job.json
-- Microsoft.Automation/2017-05-15-preview/jobSchedule.json
-- Microsoft.Automation/2017-05-15-preview/module.json
-- Microsoft.Automation/2017-05-15-preview/runbook.json
-- Microsoft.Automation/2017-05-15-preview/schedule.json
-- Microsoft.Automation/2017-05-15-preview/variable.json
-- Microsoft.Automation/2017-05-15-preview/webhook.json
+- Microsoft.Automation/2015-10-31/account.json
+- Microsoft.Automation/2015-10-31/certificate.json
+- Microsoft.Automation/2015-10-31/connection.json
+- Microsoft.Automation/2015-10-31/connectionType.json
+- Microsoft.Automation/2015-10-31/credential.json
+- Microsoft.Automation/2015-10-31/definitions.json
+- Microsoft.Automation/2015-10-31/dscCompilationJob.json
+- Microsoft.Automation/2015-10-31/dscConfiguration.json
+- Microsoft.Automation/2015-10-31/dscNode.json
+- Microsoft.Automation/2015-10-31/dscNodeConfiguration.json
+- Microsoft.Automation/2015-10-31/hybridRunbookWorkerGroup.json
+- Microsoft.Automation/2015-10-31/job.json
+- Microsoft.Automation/2015-10-31/jobSchedule.json
+- Microsoft.Automation/2015-10-31/module.json
+- Microsoft.Automation/2015-10-31/runbook.json
+- Microsoft.Automation/2015-10-31/schedule.json
+- Microsoft.Automation/2015-10-31/variable.json
+- Microsoft.Automation/2015-10-31/webhook.json
+- Microsoft.Automation/2017-05-15-preview/softwareUpdateConfiguration.json
 ```
 
 ---
