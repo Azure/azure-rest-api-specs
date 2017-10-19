@@ -53,7 +53,7 @@
                 },
                 "x-ms-examples": {
                     "Successful List Domains request": {
-                        "$ref": "./examples//SuccessfulListDomainModels.json"
+                        "$ref": "./example/SuccessfulListDomainModels.json"
                     }
                 }
             }
@@ -132,7 +132,7 @@
                 },
                 "x-ms-examples": {
                     "Successful Analyze with Url request": {
-                        "$ref": "./examples//SuccessfulAnalyzeWithUrl.json"
+                        "$ref": "./example/SuccessfulAnalyzeWithUrl.json"
                     }
                 }
             }
@@ -197,7 +197,7 @@
                 },
                 "x-ms-examples": {
                     "Successful Generate Thumbnail request": {
-                        "$ref": "./examples//SuccessfulGenerateThumbnail.json"
+                        "$ref": "./example/SuccessfulGenerateThumbnail.json"
                     }
                 }
             }
@@ -242,7 +242,7 @@
                 },
                 "x-ms-examples": {
                     "Successful Ocr request": {
-                        "$ref": "./examples//SuccessfulOcrWithUrl.json"
+                        "$ref": "./example/SuccessfulOcrWithUrl.json"
                     }
                 }
             }
@@ -289,7 +289,7 @@
                 },
                 "x-ms-examples": {
                     "Successful Describe request": {
-                        "$ref": "./examples//SuccessfulDescribeWithUrl.json"
+                        "$ref": "./example/SuccessfulDescribeWithUrl.json"
                     }
                 }
             }
@@ -328,7 +328,7 @@
                 },
                 "x-ms-examples": {
                     "Successful Tag request": {
-                        "$ref": "./examples//SuccessfulTagWithUrl.json"
+                        "$ref": "./example/SuccessfulTagWithUrl.json"
                     }
                 }
             }
@@ -383,7 +383,7 @@
                 },
                 "x-ms-examples": {
                     "Successful Domain Model analysis request": {
-                        "$ref": "./examples//SuccessfulDomainModelWithUrl.json"
+                        "$ref": "./example/SuccessfulDomainModelWithUrl.json"
                     }
                 }
             }
@@ -428,7 +428,7 @@
                 },
                 "x-ms-examples": {
                     "Successful Domain Model analysis request": {
-                        "$ref": "./examples//SuccessfulRecognizeTextWithUrl.json"
+                        "$ref": "./example/SuccessfulRecognizeTextWithUrl.json"
                     }
                 }
             }
@@ -468,7 +468,7 @@
                 },
                 "x-ms-examples": {
                     "Successful Domain Model analysis request": {
-                        "$ref": "./examples//SuccessfulGetTextOperationResult.json"
+                        "$ref": "./example/SuccessfulGetTextOperationResult.json"
                     }
                 }
             }
@@ -1276,20 +1276,24 @@
             "properties": {
                 "isAdultContent": {
                     "type": "boolean",
+                    "x-nullable" : false,
                     "description": "A value indicating if the image contains adult-oriented content."
                 },
                 "isRacyContent": {
                     "type": "boolean",
+                    "x-nullable" : false,
                     "description": "A value indicating if the image is race."
                 },
                 "adultScore": {
                     "type": "number",
                     "format": "double",
+                    "x-nullable" : false,
                     "description": "Score from 0 to 1 that indicates how much of adult content is within the image."
                 },
                 "racyScore": {
                     "type": "number",
                     "format": "double",
+                    "x-nullable" : false,
                     "description": "Score from 0 to 1 that indicates how suggestive is the image."
                 }
             }
