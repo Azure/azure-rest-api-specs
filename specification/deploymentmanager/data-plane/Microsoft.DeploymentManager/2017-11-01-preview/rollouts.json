@@ -1,0 +1,708 @@
+{
+    "swagger": "2.0",
+    "info": {
+        "version": "2017-11-01-preview",
+        "title": "AzureDeploymentManagerClient",
+        "description": "Azure Deployment Manager (ADM) client performs rollout orchestration of services using Azure Deployment Manager service."
+    },
+    "host": "azureservicedeploy.msft.net",
+    "schemes": [
+        "https"
+    ],
+    "paths": {
+        "/api/serviceGroups/{serviceGroup}": {
+            "put": {
+                "tags": [
+                    "ServiceGroups"
+                ],
+                "operationId": "ServiceGroup_Create",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "summary":"Creates a new service group entity.",
+                "description":"A service group represents a logical collection of services that are likely to be rolled out together.",
+                "parameters": [
+                    {
+                        "$ref": "#/parameters/ServiceGroupParameter" 
+                    },
+                    { 
+                        "name": "ownerGroupObjectId",
+                        "in": "body", 
+                        "required": true, 
+                        "schema": { 
+                            "$ref": "#/definitions/OwnerGroupObjectIds" 
+                        } 
+                    },
+                    { 
+                        "$ref": "#/parameters/ApiVersionParameter" 
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "A service group containing the result of the create request ",
+                        "schema": {
+                            "$ref": "#/definitions/ServiceGroup"
+                            }
+                    },
+                    "default": {
+                        "description": "ADM error describing failure reason.",
+                        "schema": { 
+                            "$ref": "#/definitions/ErrorInfo" 
+                        }
+                    }
+                }
+            },
+            "get": {
+                "tags": [
+                    "ServiceGroups"
+                ],
+                "operationId": "ServiceGroup_Get",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "summary":"Gets information of service group entity.",
+                "description":"A service group represents a logical collection of services that are likely to be rolled out together.",
+                "parameters": [
+                    {
+                        "$ref": "#/parameters/ServiceGroupParameter" 
+                    },
+                    { 
+                        "$ref": "#/parameters/ApiVersionParameter" 
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "A service group containing the result of the get request ",
+                        "schema": {
+                            "$ref": "#/definitions/ServiceGroup"
+                            }
+                    },
+                    "default": {
+                        "description": "ADM error describing failure reason.",
+                        "schema": { 
+                            "$ref": "#/definitions/ErrorInfo" 
+                        }
+                    }
+                }
+            }
+        },
+        "/api/serviceGroups/{serviceGroup}/rollouts/": {
+            "post": {
+                "tags": [
+                    "Rollouts"
+                ],
+                "operationId": "Rollout_Create",
+                "x-ms-long-running-operation": true,
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "summary":"Creates a new rollout.",
+                "description":"This is an asynchronous operation and can be polled to completion using the rollout identifier returned by this operation.",
+                "parameters": [
+                    {
+                        "$ref": "#/parameters/ServiceGroupParameter" 
+                    },
+                    { 
+                        "name": "artifactSource", 
+                        "in": "body", 
+                        "required": true, 
+                        "schema": { 
+                            "$ref": "#/definitions/ArtifactSource" 
+                        }, 
+                        "description": "Source details of the artifacts that defines the rollout."
+                    },
+                    { 
+                        "$ref": "#/parameters/ApiVersionParameter" 
+                    }
+                ],
+                "responses": {
+                    "201": {
+                        "description": "Created",
+                        "schema": {
+                            "$ref": "#/definitions/Rollout"
+                            }
+                    },
+                    "default": {
+                        "description": "ADM error describing failure reason.",
+                        "schema": { 
+                            "$ref": "#/definitions/ErrorInfo" 
+                        }
+                    }
+                }
+            }
+        },
+        "/api/serviceGroups/{serviceGroup}/rollouts/{rolloutId}": {
+            "get": {
+                "tags": [
+                    "Rollouts"
+                ],
+                "operationId": "Rollout_Get",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "summary":"Gets detailed information of an ongoing or completed rollout.",
+                "parameters": [
+                    {
+                        "$ref": "#/parameters/ServiceGroupParameter" 
+                    },
+                    {
+                        "$ref": "#/parameters/RolloutIdParameter" 
+                    },
+                    {
+                        "name": "retryAttempt",
+                        "in": "query",
+                        "required": false,
+                        "type": "integer",
+                        "format": "int32",
+                        "description": "Rollout retry attempt ordinal to get the result of. If not specified, result of the latest attempt will be returned."
+                    },
+                    {
+                        "name": "$expand",
+                        "in": "query",
+                        "required": false,
+                        "type": "boolean",
+                        "description": "Specify $expand=details to populate  full result of the rollout. If not specified, will contain only top-level information."
+                    },
+                    { 
+                        "$ref": "#/parameters/ApiVersionParameter" 
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/Rollout"                        }
+                    },
+                    "default": {
+                        "description": "ADM error describing failure reason.",
+                        "schema": { 
+                            "$ref": "#/definitions/ErrorInfo" 
+                        }
+                    }
+                }
+            }
+        },
+        "/api/serviceGroups/{serviceGroup}/rollouts/{rolloutId}/cancel": {
+            "post": {
+                "tags": [
+                    "Rollouts"
+                ],
+                "operationId": "Rollout_Cancel",
+                "consumes": [
+                    "application/json"                    
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "summary":"Stops a running rollout.",
+                "description":"A rollout can be canceled only if it is in running state.",
+                "parameters": [
+                    {
+                        "$ref": "#/parameters/ServiceGroupParameter" 
+                    },
+                    {
+                        "$ref": "#/parameters/RolloutIdParameter" 
+                    },
+                    { 
+                        "$ref": "#/parameters/ApiVersionParameter" 
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK"
+                    },
+                    "default": {
+                        "description": "ADM error describing failure reason.",
+                        "schema": { 
+                            "$ref": "#/definitions/ErrorInfo" 
+                        }
+                    }
+                }
+            }
+        },        
+        "/api/serviceGroups/{serviceGroup}/rollouts/{rolloutId}/restart": {
+            "post": {
+                "tags": [
+                    "Rollouts"
+                ],
+                "operationId": "Rollout_Restart",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "summary":"Restarts a failed rollout and optionally skips all succeeded actions.",
+                "description":"A rollout can be restarted only if is in a terminal state and failed.",
+                "parameters": [
+                    {
+                        "$ref": "#/parameters/ServiceGroupParameter" 
+                    },
+                    {
+                        "$ref": "#/parameters/RolloutIdParameter" 
+                    },
+                    {
+                        "name": "skipSucceeded",
+                        "in": "query",
+                        "required": false,
+                        "type": "boolean",
+                        "description": "If true, will skip all succeeded steps so far in the rollout. If false, will execute the entire rollout again regardless of the current state of individual resources. Defaults to false if not specified."
+                    },
+                    { 
+                        "$ref": "#/parameters/ApiVersionParameter" 
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK"
+                    },
+                    "default": {
+                        "description": "ADM error describing failure reason.",
+                        "schema": { 
+                            "$ref": "#/definitions/ErrorInfo" 
+                        }
+                    }                }
+            }
+        }
+    },
+    "definitions": {
+        "OwnerGroupObjectIds": {
+            "properties": {
+                "ownerGroupObjectIds": {
+                    "type": "array",
+                    "items": {
+                        "type": "string",
+                        "description": "AAD object id of security group identity that can operate on the service group."
+                    }
+                }
+            }
+        },
+        "OwnerGroupDisplayNames": {
+            "properties": {
+                "ownerGroupDisplayNames": {
+                    "type": "array",
+                    "readOnly": true,
+                    "items": {
+                        "type": "string",
+                        "description": "Display name of security group identity that can operate on the service group."
+                    }
+                }
+            }
+        },
+        "ServiceGroup": {
+            "properties": {
+                "ownerGroupObjectIds": {
+                    "$ref": "#/definitions/OwnerGroupObjectIds"
+                },
+                "ownerGroupDisplayNames": {
+                    "$ref": "#/definitions/OwnerGroupDisplayNames"
+                }
+            }
+        },
+        "ArtifactSource": {
+            "properties": {
+                "version": {
+                    "type": "string",
+                    "description": "This object's version."
+                },
+                "type": {
+                    "type": "string",
+                    "enum": [ "AzureStorage" ],
+                    "x-ms-enum": {
+                        "name": "ArtifactsSourceType",
+                        "modelAsString": true
+                    },
+                    "description": "Type of storage where artifacts are stored. 'AzureStorage' here refers to Azure blob storage container. All rollout artifacts must be under a single blob container. Artifacts within the blob container can be organized by mimicking filesystem structure with recursive directories and files"
+                },
+                "serviceGroupRoot": {
+                    "type": "string",
+                    "description": "The root location of all rollout artifacts relative to the blob storage container. If this value is not provided the blob storage container is considered as the root location."
+                },
+                "rolloutSpecificationReference": {
+                    "type": "string",
+                    "description": "Reference path to the rollout specification file within the blob storage container. This reference must be relative to the 'serviceGroupRoot'."
+                },
+                "credential": {
+                    "$ref": "#/definitions/Credential"
+                }
+            },
+            "required": [ "version", "type", "rolloutSpecificationReference", "credential" ],
+            "description": "Source details of the artifacts that defines the rollout."
+        },
+        "Credential": {
+            "properties": {
+                "type": {
+                    "type": "string",
+                    "enum": [ "AzureStorageSASUri" ],
+                    "x-ms-enum": {
+                        "name": "CredentialType",
+                        "modelAsString": true
+                    },
+                    "description": "Describes the type of credentials to use to access artifacts. 'AzureStorageSASUri' here refers to the credential passed in as a uri with the SAS token embedded in the uri"
+                },
+                "source": {
+                    "type": "string",
+                    "enum": [ "Api" ],
+                    "x-ms-enum": {
+                        "name": "CredentialSource",
+                        "modelAsString": true
+                    },
+                    "description": "Describes the source of credentials to access artifacts. 'Api' here specifies that the credential is passed inline in the API (as opposed to a pointer to another source like KeyVault.)"
+                },
+                "data": {
+                    "type": "object",
+                    "description": "Dictionary of key-value pairs. For 'AzureStorageSASUri', the key must be named 'value' and the value must be the full blob container SAS uri.)"
+                }
+            },
+            "required": [ "type", "source", "data" ],
+            "description": "Authentication information required to access artifact source."
+        },
+        "Rollout": {
+            "properties": {
+                "rolloutId": {
+                    "type": "string",
+                    "readOnly": true,
+                    "description": "The unique identifier of the rollout created by the system. This identifier should be used for all subsequent operations on the rollout ."
+                },
+                "rolloutName": {
+                    "type": "string",
+                    "description": "The name of the rollout as specified in the rollout specifiction input."
+                },
+                "status": {
+                    "type": "string",
+                    "readOnly": true,
+                    "description": "The current status of the rollout."
+                },
+                "totalRetryAttempts": {
+                    "type": "integer",
+                    "format": "int32",
+                    "readOnly": true,
+                    "description": "The cardinal count of total number of retries performed on the rollout at a given time."
+                },
+                "rolloutDetails": {
+                    "$ref": "#/definitions/RolloutDetails",
+                    "description": "Detailed information of the rollout."
+                },
+                "rolloutOperationInfo": {
+                    "$ref": "#/definitions/RolloutOperationInfo",
+                    "description": "Operational information of the rollout."
+                },
+                "resourceGroups": {
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/definitions/ResourceGroup"
+                    },
+                    "description": "Set of detailed action result information on target resource groups."
+                }
+            },
+        "description": "Response containing details of a specific rollout."
+        },
+        "RolloutDetails": {
+            "properties": {
+                "serviceGroup": {
+                    "type": "string",
+                    "description": "The service group name as specified in the input when the rollout is created."
+                },
+                "environment": {
+                    "type": "string",
+                    "description": "The environment name as specified in the service model input."
+                },
+                "buildVersion": {
+                    "type": "string",
+                    "description": "The build version as specified in the input."
+                },
+                "caller": {
+                    "type": "string",
+                    "description": "The user / service principal name that initiated the rollout or the retry attempt."
+                },
+                "artifactSource": {
+                    "$ref": "#/definitions/ArtifactSourceResponse",
+                    "description": "Artifact source information as specified in the input."
+                }
+            },
+        "description": "Detailed input information of the rollout."
+        },
+        "RolloutOperationInfo": {
+            "properties": {
+                "retryAttempt": {
+                    "type": "integer",
+                    "format": "int32",
+                    "description": "The ordinal count of retry attempt. 0 if no retries of the rollout have been performed."
+                },
+                "skipSucceededOnRetry": {
+                    "type": "boolean",
+                    "description": "True if skipping all successful steps in the given retry attempt was chosen. False otherwise."
+                },
+                "startTime": {
+                    "type": "string",
+                    "format": "date-time",
+                    "readOnly": true,
+                    "description": "The start time of the rollout in UTC."
+                },
+                "endTime": {
+                    "type": "string",
+                    "format": "date-time",
+                    "readOnly": true,
+                    "description": "The start time of the rollout in UTC. This property will not be set if the rollout has not completed yet."
+                },
+                "errorInfo": {
+                    "$ref": "#/definitions/ErrorInfo",
+                    "description": "Detailed error information of the rollout if any."
+                }
+            },
+        "description": "Detailed runtime information of the rollout."
+        },
+        "ArtifactSourceResponse": {
+            "properties": {
+                "type": {
+                    "type": "string",
+                    "enum": [ "AzureStorage" ],
+                    "x-ms-enum": {
+                        "name": "ArtifactsSourceType",
+                        "modelAsString": true
+                    },
+                    "description": "Type of storage where artifacts are stored as specified in the input. 'AzureStorage' here refers to Azure blob storage container."
+                },
+                "serviceGroupRoot": {
+                    "type": "string",
+                    "description": "The root location of all rollout artifacts relative to the blob storage container as specified in the input."
+                },
+                "rolloutSpecificationReference": {
+                    "type": "string",
+                    "description": "Reference path to the rollout specification file within the blob storage container relative to 'serviceGroupRoot' as specified in the input."
+                },
+                "location": {
+                    "type": "string",
+                    "description": "SAS uri of the source location of artifacts as specified in the input without the signature component."
+                }
+            },
+            "description": "Source artifact information as specified in the request."
+        },
+        "ResourceGroup": {
+            "properties": {
+                    "name": {
+                    "type": "string",
+                    "description": "Name of the service resource group as specified in the service model input artifact. For ARM resources, this is the resource group name."
+                },
+                "location": {
+                    "type": "string",
+                    "description": "The root location of all rollout artifacts relative to the blob storage container as specified in the input."
+                },
+                "lastUpdatedTime": {
+                    "type": "string",
+                    "format": "date-time",
+                    "readOnly": true,
+                    "description": "Last time this resource group information was updated in UTC."
+                },
+                "subscriptionId": {
+                    "type": "string",
+                    "format":"uuid",
+                    "description": "Subscription Id this resource group belongs to, as specified in the service model input artifact."
+                },
+                "resources": {
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/definitions/Resource"
+                    },
+                    "description": "Set of detailed action result information on target resources."
+                }
+            },
+            "description": "Operational information of a specific resource group deployment."
+        },
+        "Resource": {
+            "properties": {
+                "name": {
+                    "type": "string",
+                    "description": "Name of the service resource as specified in the service model input artifact."
+                },
+                "actions": {
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/definitions/Action"
+                    },
+                    "description": "Set of detailed action result information on target resource."
+                }
+            },
+            "description": "Operational information of a specific resource in a deployment."
+        },
+        "Action": {
+            "properties": {
+                "name": {
+                    "type": "string",
+                    "description": "Name of the action as specified in the rollout specification input artifact."
+                },
+                "status": {
+                    "type": "string",
+                    "readOnly": true,
+                    "description": "Current state of the action."
+                },
+                "actionOperationInfo": {
+                    "$ref": "#/definitions/ActionOperationInfo",
+                    "description": "Detailed information of specific action execution."
+                },
+                "resourceOperations": {
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/definitions/ResourceOperation"
+                    },
+                    "description": "Set of resource operation information."
+                },
+                "messages": {
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/definitions/Message"
+                    },
+                    "description": "Supplementary informative messages during rollout."
+                }
+            },
+            "description": "Detailed result of a specific action on a target resource."
+        },
+        "ActionOperationInfo": {
+            "properties": {
+                "correlationId": {
+                    "type": "string",
+                    "readOnly": true,
+                    "description": "Unique identifier to track the request for ARM-based resources."
+                },
+                "startTime": {
+                    "type": "string",
+                    "format": "date-time",
+                    "readOnly": true,
+                    "description": "Start time of the action in UTC."
+                },
+                "endTime": {
+                    "type": "string",
+                    "format": "date-time",
+                    "readOnly": true,
+                    "description": "End time of the action in UTC."
+                },
+                "lastUpdatedTime": {
+                    "type": "string",
+                    "format": "date-time",
+                    "readOnly": true,
+                    "description": "Last time in UTC this operation was updated."
+                },
+                "errorInfo": {
+                    "type": "string",
+                    "description": "Detailed error information of action failure if any."
+                }
+            },
+            "description": "Detailed information of specific action execution."
+        },
+        "ResourceOperation": {
+            "properties": {
+                "resourceName": {
+                    "type": "string",
+                    "description": "Name of the resource as specified in the artifacts. For ARM resources, this is the name of the resource specified in the template."
+                },
+                "operationId": {
+                    "type": "string",
+                    "readOnly": true,
+                    "description": "Unique identifier of the operation. For ARM resources, this is the operationId obtained from ARM service."
+                },
+                "resourceType": {
+                    "type": "string",
+                    "description": "Type of the resource as specified in the artifacts. For ARM resources, this is the type of the resource specified in the template."
+                },
+                "provisioningState": {
+                    "type": "string",
+                    "readOnly": true,
+                    "description": "State of the resource deployment. For ARM resources, this is the current provisioning state of the resource."
+                },
+                "statusMessage": {
+                    "type": "string",
+                    "readOnly": true,
+                    "description": "Descriptive information of the resource operation."
+                },
+                "statusCode": {
+                    "type": "string",
+                    "readOnly": true,
+                    "description": "Http status code of the operation."
+                }
+            },
+            "description": "Individial resource operation information."
+        },
+        "Message": {
+            "properties": {
+                "timeStamp": {
+                    "type": "string",
+                    "format": "date-time",
+                    "readOnly": true,
+                    "description": "Time in UTC this message was provided."
+                },
+                "message": {
+                    "type": "string",
+                    "readOnly": true,
+                    "description": "The actual message text."
+                }
+            },
+            "description": "Supplementary informative messages during rollout."
+        },
+        "ErrorInfo": {
+            "properties": {
+                "code": {
+                    "type": "string",
+                    "readOnly": true,
+                    "description": "Error code string."
+                },
+                "message": {
+                    "type": "string",
+                    "readOnly": true,                
+                    "description": "Descriptive error information."
+                },
+                "details": {
+                    "readOnly": true,
+                    "$ref": "#/definitions/ErrorInfo",
+                    "description": "More detailed error information."
+                }
+            },
+            "description": "Detailed error information of action failure if any."
+        }
+    },
+    "parameters": {
+        "ServiceGroupParameter": {
+            "name": "serviceGroup",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "Name of the collection of services the rollout is targeted to."
+        },
+        "RolloutIdParameter": {
+            "name": "rolloutId",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "Unique id of  the rollout, created by the ADM service and returned when the rollout is created."
+        },
+        "ApiVersionParameter": { 
+            "name": "api-version", 
+            "in": "query", 
+            "required": true, 
+            "type": "string", 
+            "description": "Service API version."
+        } 
+    },
+     "securityDefinitions": {
+       "azure_auth": {
+            "type": "oauth2",
+            "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
+            "flow": "implicit",
+            "description": "Azure Active Directory OAuth2 Flow",
+            "scopes": {
+                "user_impersonation": "impersonate your user account"
+            }
+        }
+    } 
+}
