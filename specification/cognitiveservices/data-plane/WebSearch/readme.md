@@ -27,5 +27,6 @@ csharp:
   namespace: Microsoft.Azure.CognitiveServices.Search.WebSearch
   output-folder: $(csharp-sdks-folder)/CognitiveServices/dataPlane/Search/Search/Generated/WebSearch
   add-credentials: true
+  sync-methods: none
 ```
 

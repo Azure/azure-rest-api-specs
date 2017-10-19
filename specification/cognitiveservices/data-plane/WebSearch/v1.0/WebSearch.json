@@ -180,9 +180,27 @@
             "name": "promote",
             "x-ms-client-name": "Promote",
             "in": "query",
-            "description": "A comma-delimited list of answers that you want the response to include regardless of their ranking. For example, if you set answerCount to 2 so Bing returns the top two ranked answers, but you also want the response to include news, you'd set promote to news. If the top ranked answers are webpages, images, videos, and relatedSearches, the response includes webpages and images because news is not a ranked answer. But if you set promote to video, Bing would promote the video answer into the response and return webpages, images, and videos. The answers that you want to promote do not count against the answerCount limit. For example, if the ranked answers are news, images, and videos, and you set answerCount to 1 and promote to news, the response contains news and images. Or, if the ranked answers are videos, images, and news, the response contains videos and news. Possible values are Computation, Images, News, RelatedSearches, SpellSuggestions, TimeZone, Videos, Webpages. Use only if you specify answerCount.",
+            "description": "A comma-delimited list of answers that you want the response to include regardless of their ranking. For example, if you set answerCount) to two (2) so Bing returns the top two ranked answers, but you also want the response to include news, you'd set promote to news. If the top ranked answers are webpages, images, videos, and relatedSearches, the response includes webpages and images because news is not a ranked answer. But if you set promote to video, Bing would promote the video answer into the response and return webpages, images, and videos. The answers that you want to promote do not count against the answerCount limit. For example, if the ranked answers are news, images, and videos, and you set answerCount to 1 and promote to news, the response contains news and images. Or, if the ranked answers are videos, images, and news, the response contains videos and news. Possible values are Computation, Images, News, RelatedSearches, SpellSuggestions, TimeZone, Videos, Webpages. Use only if you specify answerCount.",
             "required": false,
-            "type": "string"
+            "type": "array",
+            "items": {
+              "type": "string",
+              "enum": [
+                "WebPages",
+                "Images",
+                "SpellSuggestions",
+                "News",
+                "RelatedSearches",
+                "Videos",
+                "Computation",
+                "TimeZone"
+              ],
+              "x-ms-enum": {
+                "name": "AnswerType",
+                "modelAsString": true
+              }
+            },
+            "collectionFormat": "csv"
           },
           {
             "name": "q",
@@ -208,7 +226,6 @@
                 "News",
                 "RelatedSearches",
                 "Videos",
-                "WebPageGroupings",
                 "Computation",
                 "TimeZone"
               ],
@@ -1186,7 +1203,6 @@
             "News",
             "RelatedSearches",
             "Videos",
-            "WebPageGroupings",
             "Computation",
             "TimeZone"
           ],
