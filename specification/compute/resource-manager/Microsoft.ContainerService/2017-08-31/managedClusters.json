@@ -60,6 +60,11 @@
         },
         "x-ms-pageable": {
           "nextLinkName": "nextLink"
+        },
+        "x-ms-examples": {
+          "List Managed Clusters": {
+            "$ref": "./examples/ManagedClustersList.json"
+          }
         }
       }
     },
@@ -96,6 +101,11 @@
         },
         "x-ms-pageable": {
           "nextLinkName": "nextLink"
+        },
+        "x-ms-examples": {
+          "Get Managed Clusters by Resource Group": {
+            "$ref": "./examples/ManagedClustersListByResourceGroup.json"
+          }
         }
       }
     },
@@ -136,6 +146,11 @@
               "$ref": "#/definitions/ManagedClusterUpgradeProfile"
             }
           }
+        },
+        "x-ms-examples": {
+          "Get Upgrade Profile for Managed Cluster": {
+            "$ref": "./examples/ManagedClustersGetUpgradeProfile.json"
+          }
         }
       }
     },
@@ -175,6 +190,11 @@
             "schema": {
               "$ref": "#/definitions/ManagedCluster"
             }
+          }
+        },
+        "x-ms-examples": {
+          "Get Managed Cluster": {
+            "$ref": "./examples/ManagedClustersGet.json"
           }
         }
       },
@@ -230,7 +250,12 @@
             }
           }
         },
-        "x-ms-long-running-operation": true
+        "x-ms-long-running-operation": true,
+        "x-ms-examples": {
+          "Create/Update Managed Cluster": {
+            "$ref": "./examples/ManagedClustersCreate_Update.json"
+          }
+        }
       },
       "delete": {
         "tags": [
@@ -269,7 +294,12 @@
             "description": "NoContent"
           }
         },
-        "x-ms-long-running-operation": true
+        "x-ms-long-running-operation": true,
+        "x-ms-examples": {
+          "Delete Managed Cluster": {
+            "$ref": "./examples/ManagedClustersDelete.json"
+          }
+        }
       }
     }
   },
