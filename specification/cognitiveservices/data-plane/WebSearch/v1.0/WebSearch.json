@@ -5,6 +5,23 @@
     "description": "The Web Search API lets you send a search query to Bing and get back search results that include links to webpages, images, and more.",
     "version": "1.0"
   },
+  "parameters": {
+    "x-bingapis-sdk": {
+      "name": "X-BingApis-SDK",
+      "description": "Activate swagger compliance",
+      "x-ms-parameter-location": "method",
+      "required": true,
+      "type": "string",
+      "in": "header",
+      "x-ms-enum": {
+        "name": "XBingApisSDK",
+        "modelAsString": true
+      },
+      "enum": [
+        "true"
+      ]
+    }
+  },
   "host": "api.cognitive.microsoft.com",
   "schemes": [
     "https"
@@ -42,7 +59,9 @@
           "WebSearch"
         ],
         "parameters": [
-          { "$ref": "#/parameters/x-bingapis-sdk" },
+          {
+            "$ref": "#/parameters/x-bingapis-sdk"
+          },
           {
             "name": "Accept",
             "in": "header",
@@ -103,7 +122,8 @@
             "in": "query",
             "description": "The number of answers that you want the response to include. The answers that Bing returns are based on ranking. For example, if Bing returns webpages, images, videos, and relatedSearches for a request and you set this parameter to two (2), the response includes webpages and images.If you included the responseFilter query parameter in the same request and set it to webpages and news, the response would include only webpages.",
             "required": false,
-            "type": "string"
+            "type": "integer",
+            "format": "int32"
           },
           {
             "name": "cc",
@@ -119,7 +139,8 @@
             "in": "query",
             "description": "The number of search results to return in the response. The default is 10 and the maximum value is 50. The actual number delivered may be less than requested.Use this parameter along with the offset parameter to page results.For example, if your user interface displays 10 search results per page, set count to 10 and offset to 0 to get the first page of results. For each subsequent page, increment offset by 10 (for example, 0, 10, 20). It is possible for multiple pages to include some overlap in results.",
             "required": false,
-            "type": "string"
+            "type": "integer",
+            "format": "int32"
           },
           {
             "name": "freshness",
@@ -127,7 +148,16 @@
             "in": "query",
             "description": "Filter search results by the following age values: Day—Return webpages that Bing discovered within the last 24 hours. Week—Return webpages that Bing discovered within the last 7 days. Month—Return webpages that discovered within the last 30 days. This filter applies only to webpage results and not to the other results such as news and images.",
             "required": false,
-            "type": "string"
+            "type": "string",
+            "enum": [
+              "Day",
+              "Week",
+              "Month"
+            ],
+            "x-ms-enum": {
+              "name": "Freshness",
+              "modelAsString": false
+            }
           },
           {
             "name": "mkt",
@@ -143,7 +173,8 @@
             "in": "query",
             "description": "The zero-based offset that indicates the number of search results to skip before returning results. The default is 0. The offset should be less than (totalEstimatedMatches - count). Use this parameter along with the count parameter to page results. For example, if your user interface displays 10 search results per page, set count to 10 and offset to 0 to get the first page of results. For each subsequent page, increment offset by 10 (for example, 0, 10, 20). it is possible for multiple pages to include some overlap in results.",
             "required": false,
-            "type": "string"
+            "type": "integer",
+            "format": "int32"
           },
           {
             "name": "promote",
@@ -183,7 +214,7 @@
               ],
               "x-ms-enum": {
                 "name": "AnswerType",
-                "modelAsString": false
+                "modelAsString": true
               }
             },
             "collectionFormat": "csv"
@@ -219,7 +250,7 @@
             "in": "query",
             "description": "A Boolean value that determines whether display strings should contain decoration markers such as hit highlighting characters. If true, the strings may include markers. The default is false. To specify whether to use Unicode characters or HTML tags as the markers, see the textFormat query parameter.",
             "required": false,
-            "type": "string"
+            "type": "boolean"
           },
           {
             "name": "textFormat",
@@ -227,7 +258,15 @@
             "in": "query",
             "description": "The type of markers to use for text decorations (see the textDecorations query parameter). Possible values are Raw—Use Unicode characters to mark content that needs special formatting. The Unicode characters are in the range E000 through E019. For example, Bing uses E000 and E001 to mark the beginning and end of query terms for hit highlighting. HTML—Use HTML tags to mark content that needs special formatting. For example, use <b> tags to highlight query terms in display strings. The default is Raw. For display strings that contain escapable HTML characters such as <, >, and &, if textFormat is set to HTML, Bing escapes the characters as appropriate (for example, < is escaped to &lt;).",
             "required": false,
-            "type": "string"
+            "type": "string",
+            "enum": [
+              "Raw",
+              "Html"
+            ],
+            "x-ms-enum": {
+              "name": "TextFormat",
+              "modelAsString": false
+            }
           }
         ],
         "responses": {
@@ -1192,20 +1231,5 @@
       ],
       "type": "object"
     }
-  },
-  "parameters": {
-  "x-bingapis-sdk": {
-    "name": "X-BingApis-SDK",
-    "in": "header",
-    "description": "Activate Swagger compliance",
-    "required": true,
-    "type": "string",
-    "enum": ["true"],
-    "x-ms-enum": {
-      "name": "XBingApisSDK",
-      "modelAsString": true
-    },
-    "x-ms-parameter-location": "method"
   }
- }
 }
