@@ -2455,6 +2455,10 @@
         "trafficManagerProfileName": {
           "description": "Name of Traffic Manager profile to create. This is only needed if Traffic Manager profile does not already exist.",
           "type": "string"
+        },
+        "ignoreQuotas": {
+          "description": "<code>true</code> if quotas should be ignored; otherwise, <code>false</code>.",
+          "type": "boolean"
         }
       }
     },
@@ -4074,13 +4078,13 @@
         "workerSize": {
           "description": "Size of the machines.",
           "enum": [
+            "Default",
             "Small",
             "Medium",
             "Large",
             "D1",
             "D2",
-            "D3",
-            "Default"
+            "D3"
           ],
           "type": "string",
           "x-ms-enum": {

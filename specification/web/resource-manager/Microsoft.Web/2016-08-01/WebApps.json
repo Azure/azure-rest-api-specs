@@ -15293,6 +15293,10 @@
         "trafficManagerProfileName": {
           "description": "Name of Traffic Manager profile to create. This is only needed if Traffic Manager profile does not already exist.",
           "type": "string"
+        },
+        "ignoreQuotas": {
+          "description": "<code>true</code> if quotas should be ignored; otherwise, <code>false</code>.",
+          "type": "boolean"
         }
       }
     },
@@ -15437,7 +15441,7 @@
               "description": "Extra Info URL.",
               "type": "string"
             },
-            "JobType": {
+            "jobType": {
               "description": "Job type.",
               "enum": [
                 "Continuous",
@@ -16002,7 +16006,7 @@
               "description": "Secret key.",
               "type": "string"
             },
-            "trigger_url": {
+            "triggerUrl": {
               "description": "Trigger URL.",
               "type": "string"
             }
@@ -16854,6 +16858,11 @@
           "format": "double",
           "description": "Value of counter at a certain time.",
           "type": "number"
+        },
+        "coreCount": {
+          "format": "int32",
+          "description": "Core Count of worker. Not a data member",
+          "type": "integer"
         }
       }
     },
@@ -17093,7 +17102,7 @@
               "description": "Paged system memory.",
               "type": "integer"
             },
-            "nonPagedSystemMemorySize64": {
+            "nonpagedSystemMemorySize64": {
               "format": "int64",
               "description": "Non-paged system memory.",
               "type": "integer"
@@ -17501,7 +17510,7 @@
       "type": "object",
       "allOf": [
         {
-          "$ref": "../2016-03-01/CommonDefinitions.json#/definitions/ProxyOnlyResource"
+          "$ref": "#/definitions/ProxyOnlyResource"
         }
       ],
       "properties": {
@@ -18760,7 +18769,7 @@
                 "type": "string"
               }
             },
-            "installerCommandLineParams": {
+            "installationArgs": {
               "description": "Installer command line parameters.",
               "type": "string"
             },
@@ -19599,7 +19608,7 @@
         "properties": {
           "description": "TriggeredJobHistory resource specific properties",
           "properties": {
-            "runs": {
+            "triggeredJobRuns": {
               "description": "List of triggered web job runs.",
               "type": "array",
               "items": {
@@ -19749,7 +19758,7 @@
               "description": "Extra Info URL.",
               "type": "string"
             },
-            "type": {
+            "jobType": {
               "description": "Job type.",
               "enum": [
                 "Continuous",
@@ -20084,7 +20093,7 @@
               "description": "Extra Info URL.",
               "type": "string"
             },
-            "type": {
+            "jobType": {
               "description": "Job type.",
               "enum": [
                 "Continuous",
