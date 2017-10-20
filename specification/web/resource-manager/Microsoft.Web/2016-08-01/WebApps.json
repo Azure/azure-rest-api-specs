@@ -273,7 +273,7 @@
             "description": "A JSON representation of the app properties. See example.",
             "required": true,
             "schema": {
-              "$ref": "../2016-03-01/CommonDefinitions.json#/definitions/SitePatchResource"
+              "$ref": "#/definitions/SitePatchResource"
             }
           },
           {
@@ -755,7 +755,7 @@
           "200": {
             "description": "OK",
             "schema": {
-              "$ref": "../2016-03-01/CommonDefinitions.json#/definitions/SiteConfigResourceCollection"
+              "$ref": "#/definitions/SiteConfigResourceCollection"
             }
           }
         },
@@ -870,7 +870,7 @@
             "description": "Auth settings associated with web app.",
             "required": true,
             "schema": {
-              "$ref": "../2016-03-01/CommonDefinitions.json#/definitions/SiteAuthSettings"
+              "$ref": "#/definitions/SiteAuthSettings"
             }
           },
           {
@@ -884,7 +884,7 @@
           "200": {
             "description": "OK",
             "schema": {
-              "$ref": "../2016-03-01/CommonDefinitions.json#/definitions/SiteAuthSettings"
+              "$ref": "#/definitions/SiteAuthSettings"
             }
           }
         }
@@ -920,7 +920,7 @@
           "200": {
             "description": "OK",
             "schema": {
-              "$ref": "../2016-03-01/CommonDefinitions.json#/definitions/SiteAuthSettings"
+              "$ref": "#/definitions/SiteAuthSettings"
             }
           }
         }
@@ -1149,7 +1149,7 @@
           "200": {
             "description": "OK",
             "schema": {
-              "$ref": "../2016-03-01/CommonDefinitions.json#/definitions/SiteLogsConfig"
+              "$ref": "#/definitions/SiteLogsConfig"
             }
           }
         }
@@ -1178,7 +1178,7 @@
             "description": "A SiteLogsConfig JSON object that contains the logging configuration to change in the \"properties\" property.",
             "required": true,
             "schema": {
-              "$ref": "../2016-03-01/CommonDefinitions.json#/definitions/SiteLogsConfig"
+              "$ref": "#/definitions/SiteLogsConfig"
             }
           },
           {
@@ -1192,7 +1192,7 @@
           "200": {
             "description": "OK",
             "schema": {
-              "$ref": "../2016-03-01/CommonDefinitions.json#/definitions/SiteLogsConfig"
+              "$ref": "#/definitions/SiteLogsConfig"
             }
           }
         }
@@ -1506,7 +1506,7 @@
           "200": {
             "description": "OK",
             "schema": {
-              "$ref": "../2016-03-01/CommonDefinitions.json#/definitions/SiteConfigResource"
+              "$ref": "#/definitions/SiteConfigResource"
             }
           }
         }
@@ -1535,7 +1535,7 @@
             "description": "JSON representation of a SiteConfig object. See example.",
             "required": true,
             "schema": {
-              "$ref": "../2016-03-01/CommonDefinitions.json#/definitions/SiteConfigResource"
+              "$ref": "#/definitions/SiteConfigResource"
             }
           },
           {
@@ -1549,7 +1549,7 @@
           "200": {
             "description": "OK",
             "schema": {
-              "$ref": "../2016-03-01/CommonDefinitions.json#/definitions/SiteConfigResource"
+              "$ref": "#/definitions/SiteConfigResource"
             }
           }
         }
@@ -1578,7 +1578,7 @@
             "description": "JSON representation of a SiteConfig object. See example.",
             "required": true,
             "schema": {
-              "$ref": "../2016-03-01/CommonDefinitions.json#/definitions/SiteConfigResource"
+              "$ref": "#/definitions/SiteConfigResource"
             }
           },
           {
@@ -1592,7 +1592,7 @@
           "200": {
             "description": "OK",
             "schema": {
-              "$ref": "../2016-03-01/CommonDefinitions.json#/definitions/SiteConfigResource"
+              "$ref": "#/definitions/SiteConfigResource"
             }
           }
         }
@@ -1628,7 +1628,7 @@
           "200": {
             "description": "OK",
             "schema": {
-              "$ref": "../2016-03-01/CommonDefinitions.json#/definitions/SiteConfigurationSnapshotInfoCollection"
+              "$ref": "#/definitions/SiteConfigurationSnapshotInfoCollection"
             }
           }
         },
@@ -1674,7 +1674,7 @@
           "200": {
             "description": "OK",
             "schema": {
-              "$ref": "../2016-03-01/CommonDefinitions.json#/definitions/SiteConfigResource"
+              "$ref": "#/definitions/SiteConfigResource"
             }
           }
         }
@@ -1728,45 +1728,6 @@
         "summary": "Gets the last lines of docker logs for the given site",
         "description": "Gets the last lines of docker logs for the given site",
         "operationId": "WebApps_GetWebSiteContainerLogs",
-        "parameters": [
-          {
-            "$ref": "#/parameters/resourceGroupNameParameter"
-          },
-          {
-            "name": "name",
-            "in": "path",
-            "description": "Name of web app.",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "$ref": "#/parameters/subscriptionIdParameter"
-          },
-          {
-            "$ref": "#/parameters/apiVersionParameter"
-          }
-        ],
-        "responses": {
-          "204": {
-            "description": "No Content"
-          },
-          "200": {
-            "description": "OK",
-            "schema": {
-              "type": "file"
-            }
-          }
-        }
-      }
-    },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Web/sites/{name}/containerlogs/zip": {
-      "post": {
-        "tags": [
-          "WebApps"
-        ],
-        "summary": "Gets the ZIP archived docker log files for the given site",
-        "description": "Gets the ZIP archived docker log files for the given site",
-        "operationId": "WebApps_GetContainerLogsZip",
         "parameters": [
           {
             "$ref": "#/parameters/resourceGroupNameParameter"
@@ -4207,7 +4168,7 @@
           "200": {
             "description": "OK.",
             "schema": {
-              "$ref": "../2016-03-01/CommonDefinitions.json#/definitions/SiteCloneability"
+              "$ref": "#/definitions/SiteCloneability"
             }
           }
         }
@@ -4722,7 +4683,7 @@
           "200": {
             "description": "OK",
             "schema": {
-              "$ref": "../2016-03-01/CommonDefinitions.json#/definitions/SitePhpErrorLogFlag"
+              "$ref": "#/definitions/SitePhpErrorLogFlag"
             }
           }
         }
@@ -5646,7 +5607,7 @@
           "200": {
             "description": "SiteExtension information returned.",
             "schema": {
-              "$ref": "../2016-03-01/CommonDefinitions.json#/definitions/SiteExtensionInfoCollection"
+              "$ref": "#/definitions/SiteExtensionInfoCollection"
             }
           },
           "404": {
@@ -5695,7 +5656,7 @@
           "200": {
             "description": "SiteExtension information returned.",
             "schema": {
-              "$ref": "../2016-03-01/CommonDefinitions.json#/definitions/SiteExtensionInfo"
+              "$ref": "#/definitions/SiteExtensionInfo"
             }
           },
           "404": {
@@ -5739,13 +5700,13 @@
           "201": {
             "description": "Site Extension created.",
             "schema": {
-              "$ref": "../2016-03-01/CommonDefinitions.json#/definitions/SiteExtensionInfo"
+              "$ref": "#/definitions/SiteExtensionInfo"
             }
           },
           "200": {
             "description": "Site Extension created.",
             "schema": {
-              "$ref": "../2016-03-01/CommonDefinitions.json#/definitions/SiteExtensionInfo"
+              "$ref": "#/definitions/SiteExtensionInfo"
             }
           },
           "429": {
@@ -6047,7 +6008,7 @@
             "description": "A JSON representation of the app properties. See example.",
             "required": true,
             "schema": {
-              "$ref": "../2016-03-01/CommonDefinitions.json#/definitions/SitePatchResource"
+              "$ref": "#/definitions/SitePatchResource"
             }
           },
           {
@@ -6606,7 +6567,7 @@
           "200": {
             "description": "OK",
             "schema": {
-              "$ref": "../2016-03-01/CommonDefinitions.json#/definitions/SiteConfigResourceCollection"
+              "$ref": "#/definitions/SiteConfigResourceCollection"
             }
           }
         },
@@ -6735,7 +6696,7 @@
             "description": "Auth settings associated with web app.",
             "required": true,
             "schema": {
-              "$ref": "../2016-03-01/CommonDefinitions.json#/definitions/SiteAuthSettings"
+              "$ref": "#/definitions/SiteAuthSettings"
             }
           },
           {
@@ -6756,7 +6717,7 @@
           "200": {
             "description": "OK",
             "schema": {
-              "$ref": "../2016-03-01/CommonDefinitions.json#/definitions/SiteAuthSettings"
+              "$ref": "#/definitions/SiteAuthSettings"
             }
           }
         }
@@ -6799,7 +6760,7 @@
           "200": {
             "description": "OK",
             "schema": {
-              "$ref": "../2016-03-01/CommonDefinitions.json#/definitions/SiteAuthSettings"
+              "$ref": "#/definitions/SiteAuthSettings"
             }
           }
         }
@@ -7070,7 +7031,7 @@
           "200": {
             "description": "OK",
             "schema": {
-              "$ref": "../2016-03-01/CommonDefinitions.json#/definitions/SiteLogsConfig"
+              "$ref": "#/definitions/SiteLogsConfig"
             }
           }
         }
@@ -7099,7 +7060,7 @@
             "description": "A SiteLogsConfig JSON object that contains the logging configuration to change in the \"properties\" property.",
             "required": true,
             "schema": {
-              "$ref": "../2016-03-01/CommonDefinitions.json#/definitions/SiteLogsConfig"
+              "$ref": "#/definitions/SiteLogsConfig"
             }
           },
           {
@@ -7120,7 +7081,7 @@
           "200": {
             "description": "OK",
             "schema": {
-              "$ref": "../2016-03-01/CommonDefinitions.json#/definitions/SiteLogsConfig"
+              "$ref": "#/definitions/SiteLogsConfig"
             }
           }
         }
@@ -7397,7 +7358,7 @@
           "200": {
             "description": "OK",
             "schema": {
-              "$ref": "../2016-03-01/CommonDefinitions.json#/definitions/SiteConfigResource"
+              "$ref": "#/definitions/SiteConfigResource"
             }
           }
         }
@@ -7426,7 +7387,7 @@
             "description": "JSON representation of a SiteConfig object. See example.",
             "required": true,
             "schema": {
-              "$ref": "../2016-03-01/CommonDefinitions.json#/definitions/SiteConfigResource"
+              "$ref": "#/definitions/SiteConfigResource"
             }
           },
           {
@@ -7447,7 +7408,7 @@
           "200": {
             "description": "OK",
             "schema": {
-              "$ref": "../2016-03-01/CommonDefinitions.json#/definitions/SiteConfigResource"
+              "$ref": "#/definitions/SiteConfigResource"
             }
           }
         }
@@ -7476,7 +7437,7 @@
             "description": "JSON representation of a SiteConfig object. See example.",
             "required": true,
             "schema": {
-              "$ref": "../2016-03-01/CommonDefinitions.json#/definitions/SiteConfigResource"
+              "$ref": "#/definitions/SiteConfigResource"
             }
           },
           {
@@ -7497,7 +7458,7 @@
           "200": {
             "description": "OK",
             "schema": {
-              "$ref": "../2016-03-01/CommonDefinitions.json#/definitions/SiteConfigResource"
+              "$ref": "#/definitions/SiteConfigResource"
             }
           }
         }
@@ -7540,7 +7501,7 @@
           "200": {
             "description": "OK",
             "schema": {
-              "$ref": "../2016-03-01/CommonDefinitions.json#/definitions/SiteConfigurationSnapshotInfoCollection"
+              "$ref": "#/definitions/SiteConfigurationSnapshotInfoCollection"
             }
           }
         },
@@ -7593,7 +7554,7 @@
           "200": {
             "description": "OK",
             "schema": {
-              "$ref": "../2016-03-01/CommonDefinitions.json#/definitions/SiteConfigResource"
+              "$ref": "#/definitions/SiteConfigResource"
             }
           }
         }
@@ -7654,52 +7615,6 @@
         "summary": "Gets the last lines of docker logs for the given site",
         "description": "Gets the last lines of docker logs for the given site",
         "operationId": "WebApps_GetWebSiteContainerLogsSlot",
-        "parameters": [
-          {
-            "$ref": "#/parameters/resourceGroupNameParameter"
-          },
-          {
-            "name": "name",
-            "in": "path",
-            "description": "Name of web app.",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "name": "slot",
-            "in": "path",
-            "description": "Name of web app slot. If not specified then will default to production slot.",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "$ref": "#/parameters/subscriptionIdParameter"
-          },
-          {
-            "$ref": "#/parameters/apiVersionParameter"
-          }
-        ],
-        "responses": {
-          "204": {
-            "description": "No Content"
-          },
-          "200": {
-            "description": "OK",
-            "schema": {
-              "type": "file"
-            }
-          }
-        }
-      }
-    },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Web/sites/{name}/slots/{slot}/containerlogs/zip": {
-      "post": {
-        "tags": [
-          "WebApps"
-        ],
-        "summary": "Gets the ZIP archived docker log files for the given site",
-        "description": "Gets the ZIP archived docker log files for the given site",
-        "operationId": "WebApps_GetContainerLogsZipSlot",
         "parameters": [
           {
             "$ref": "#/parameters/resourceGroupNameParameter"
@@ -10518,7 +10433,7 @@
           "200": {
             "description": "OK.",
             "schema": {
-              "$ref": "../2016-03-01/CommonDefinitions.json#/definitions/SiteCloneability"
+              "$ref": "#/definitions/SiteCloneability"
             }
           }
         }
@@ -11004,7 +10919,7 @@
           "200": {
             "description": "OK",
             "schema": {
-              "$ref": "../2016-03-01/CommonDefinitions.json#/definitions/SitePhpErrorLogFlag"
+              "$ref": "#/definitions/SitePhpErrorLogFlag"
             }
           }
         }
@@ -12075,7 +11990,7 @@
           "200": {
             "description": "SiteExtension information returned.",
             "schema": {
-              "$ref": "../2016-03-01/CommonDefinitions.json#/definitions/SiteExtensionInfoCollection"
+              "$ref": "#/definitions/SiteExtensionInfoCollection"
             }
           },
           "404": {
@@ -12131,7 +12046,7 @@
           "200": {
             "description": "SiteExtension information returned.",
             "schema": {
-              "$ref": "../2016-03-01/CommonDefinitions.json#/definitions/SiteExtensionInfo"
+              "$ref": "#/definitions/SiteExtensionInfo"
             }
           },
           "404": {
@@ -12182,13 +12097,13 @@
           "201": {
             "description": "Site Extension created.",
             "schema": {
-              "$ref": "../2016-03-01/CommonDefinitions.json#/definitions/SiteExtensionInfo"
+              "$ref": "#/definitions/SiteExtensionInfo"
             }
           },
           "200": {
             "description": "Site Extension created.",
             "schema": {
-              "$ref": "../2016-03-01/CommonDefinitions.json#/definitions/SiteExtensionInfo"
+              "$ref": "#/definitions/SiteExtensionInfo"
             }
           },
           "429": {
@@ -12437,7 +12352,7 @@
           "200": {
             "description": "OK",
             "schema": {
-              "$ref": "../2016-03-01/CommonDefinitions.json#/definitions/SiteSourceControl"
+              "$ref": "#/definitions/SiteSourceControl"
             }
           }
         }
@@ -12466,7 +12381,7 @@
             "description": "JSON representation of a SiteSourceControl object. See example.",
             "required": true,
             "schema": {
-              "$ref": "../2016-03-01/CommonDefinitions.json#/definitions/SiteSourceControl"
+              "$ref": "#/definitions/SiteSourceControl"
             }
           },
           {
@@ -12487,13 +12402,13 @@
           "200": {
             "description": "Succesfully created or updated source control for web app.",
             "schema": {
-              "$ref": "../2016-03-01/CommonDefinitions.json#/definitions/SiteSourceControl"
+              "$ref": "#/definitions/SiteSourceControl"
             }
           },
           "201": {
             "description": "Create or update source control for web app in progress.",
             "schema": {
-              "$ref": "../2016-03-01/CommonDefinitions.json#/definitions/SiteSourceControl"
+              "$ref": "#/definitions/SiteSourceControl"
             }
           }
         },
@@ -12567,7 +12482,7 @@
             "description": "JSON representation of a SiteSourceControl object. See example.",
             "required": true,
             "schema": {
-              "$ref": "../2016-03-01/CommonDefinitions.json#/definitions/SiteSourceControl"
+              "$ref": "#/definitions/SiteSourceControl"
             }
           },
           {
@@ -12588,13 +12503,13 @@
           "200": {
             "description": "Succesfully created or updated source control for web app.",
             "schema": {
-              "$ref": "../2016-03-01/CommonDefinitions.json#/definitions/SiteSourceControl"
+              "$ref": "#/definitions/SiteSourceControl"
             }
           },
           "201": {
             "description": "Create or update source control for web app in progress.",
             "schema": {
-              "$ref": "../2016-03-01/CommonDefinitions.json#/definitions/SiteSourceControl"
+              "$ref": "#/definitions/SiteSourceControl"
             }
           }
         }
@@ -13831,7 +13746,7 @@
           "200": {
             "description": "OK",
             "schema": {
-              "$ref": "../2016-03-01/CommonDefinitions.json#/definitions/SiteSourceControl"
+              "$ref": "#/definitions/SiteSourceControl"
             }
           }
         }
@@ -13860,7 +13775,7 @@
             "description": "JSON representation of a SiteSourceControl object. See example.",
             "required": true,
             "schema": {
-              "$ref": "../2016-03-01/CommonDefinitions.json#/definitions/SiteSourceControl"
+              "$ref": "#/definitions/SiteSourceControl"
             }
           },
           {
@@ -13874,13 +13789,13 @@
           "200": {
             "description": "Succesfully created or updated source control for web app.",
             "schema": {
-              "$ref": "../2016-03-01/CommonDefinitions.json#/definitions/SiteSourceControl"
+              "$ref": "#/definitions/SiteSourceControl"
             }
           },
           "201": {
             "description": "Create or update source control for web app in progress.",
             "schema": {
-              "$ref": "../2016-03-01/CommonDefinitions.json#/definitions/SiteSourceControl"
+              "$ref": "#/definitions/SiteSourceControl"
             }
           }
         },
@@ -13947,7 +13862,7 @@
             "description": "JSON representation of a SiteSourceControl object. See example.",
             "required": true,
             "schema": {
-              "$ref": "../2016-03-01/CommonDefinitions.json#/definitions/SiteSourceControl"
+              "$ref": "#/definitions/SiteSourceControl"
             }
           },
           {
@@ -13961,13 +13876,13 @@
           "200": {
             "description": "Succesfully created or updated source control for web app.",
             "schema": {
-              "$ref": "../2016-03-01/CommonDefinitions.json#/definitions/SiteSourceControl"
+              "$ref": "#/definitions/SiteSourceControl"
             }
           },
           "201": {
             "description": "Create or update source control for web app in progress.",
             "schema": {
-              "$ref": "../2016-03-01/CommonDefinitions.json#/definitions/SiteSourceControl"
+              "$ref": "#/definitions/SiteSourceControl"
             }
           }
         }
@@ -17193,21 +17108,21 @@
           "description": "List of features enabled on app that prevent cloning.",
           "type": "array",
           "items": {
-            "$ref": "../2016-03-01/CommonDefinitions.json#/definitions/SiteCloneabilityCriterion"
+            "$ref": "#/definitions/SiteCloneabilityCriterion"
           }
         },
         "unsupportedFeatures": {
           "description": "List of features enabled on app that are non-blocking but cannot be cloned. The app can still be cloned\nbut the features in this list will not be set up on cloned app.",
           "type": "array",
           "items": {
-            "$ref": "../2016-03-01/CommonDefinitions.json#/definitions/SiteCloneabilityCriterion"
+            "$ref": "#/definitions/SiteCloneabilityCriterion"
           }
         },
         "blockingCharacteristics": {
           "description": "List of blocking application characteristics.",
           "type": "array",
           "items": {
-            "$ref": "../2016-03-01/CommonDefinitions.json#/definitions/SiteCloneabilityCriterion"
+            "$ref": "#/definitions/SiteCloneabilityCriterion"
           }
         }
       }
@@ -17253,7 +17168,7 @@
           "description": "Collection of resources.",
           "type": "array",
           "items": {
-            "$ref": "../2016-03-01/CommonDefinitions.json#/definitions/SiteConfigResource"
+            "$ref": "#/definitions/SiteConfigResource"
           }
         },
         "nextLink": {
@@ -17302,7 +17217,7 @@
           "description": "Collection of resources.",
           "type": "array",
           "items": {
-            "$ref": "../2016-03-01/CommonDefinitions.json#/definitions/SiteConfigurationSnapshotInfo"
+            "$ref": "#/definitions/SiteConfigurationSnapshotInfo"
           }
         },
         "nextLink": {
@@ -17433,7 +17348,7 @@
           "description": "Collection of resources.",
           "type": "array",
           "items": {
-            "$ref": "../2016-03-01/CommonDefinitions.json#/definitions/SiteExtensionInfo"
+            "$ref": "#/definitions/SiteExtensionInfo"
           }
         },
         "nextLink": {
@@ -18266,7 +18181,7 @@
           "description": "Collection of resources.",
           "type": "array",
           "items": {
-            "$ref": "../2016-03-01/CommonDefinitions.json#/definitions/SiteInstance"
+            "$ref": "#/definitions/SiteInstance"
           }
         },
         "nextLink": {
