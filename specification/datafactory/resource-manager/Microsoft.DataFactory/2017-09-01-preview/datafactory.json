@@ -2244,23 +2244,43 @@
     },
     "SecureString": {
       "description": "Azure Data Factory secure string definition. The string value will be masked with asterisks '*' during Get or List API calls.",
+      "x-ms-discriminator-value": "SecureString",
       "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/SecretBase"
+        }
+      ],
       "properties": {
-        "type": {
-          "type": "string",
-          "description": "SecureString type.",
-          "enum": [
-            "SecureString"
-          ]
-        },
         "value": {
           "type": "string",
           "description": "Value of secure string."
         }
       },
       "required": [
-        "type",
         "value"
+      ]
+    },
+    "SecretBase": {
+      "description": "Base definition of secret type",
+      "discriminator": "type",
+      "type": "object",
+      "properties": {
+        "type": {
+          "description": "Type of secret",
+          "type": "string",
+          "enum": [
+            "SecureString",
+            "AzureKeyVaultSecret"
+          ],
+          "x-ms-enum": {
+            "name": "SecretType",
+            "modelAsString": true
+          }
+        }
+      },
+      "required": [
+        "type"
       ]
     },
     "FactoryListResponse": {
@@ -2591,7 +2611,7 @@
         "type": {
           "type": "string",
           "description": "Pipeline reference type.",
-          "enum" : [
+          "enum": [
             "PipelineReference"
           ]
         },
@@ -2647,7 +2667,7 @@
         }
       ],
       "properties": {
-       "identity": {
+        "identity": {
           "$ref": "#/definitions/FactoryIdentity",
           "description": "Managed service identity of the factory."
         },
@@ -2711,7 +2731,7 @@
         "type": {
           "type": "string",
           "description": "Dataset reference type.",
-          "enum" : [
+          "enum": [
             "DatasetReference"
           ]
         },
@@ -2783,7 +2803,7 @@
         "properties"
       ]
     },
-    "PipelineRunFilterParameters":{
+    "PipelineRunFilterParameters": {
       "description": "Query parameters for listing pipeline runs.",
       "type": "object",
       "properties": {
@@ -2867,7 +2887,7 @@
         "values"
       ]
     },
-    "PipelineRunQueryOrderBy":{
+    "PipelineRunQueryOrderBy": {
       "description": "An object to provide order by options for listing pipeline runs.",
       "type": "object",
       "properties": {
@@ -2883,7 +2903,7 @@
             "modelAsString": true
           }
         },
-        "order":{
+        "order": {
           "description": "Sorting order of the parameter.",
           "type": "string",
           "enum": [
@@ -2983,7 +3003,7 @@
         }
       }
     },
-    "PipelineRunInvokedBy":{
+    "PipelineRunInvokedBy": {
       "description": "Provides entity name and id that started the pipeline run.",
       "type": "object",
       "properties": {
