@@ -30,7 +30,7 @@
             "description": "Name of the domain.",
             "required": true,
             "schema": {
-              "$ref": "../../Microsoft.Web/2016-03-01/CommonDefinitions.json#/definitions/NameIdentifier"
+              "$ref": "#/definitions/NameIdentifier"
             }
           },
           {
@@ -667,7 +667,7 @@
       "type": "object",
       "allOf": [
         {
-          "$ref": "../../Microsoft.Web/2016-03-01/CommonDefinitions.json#/definitions/Resource"
+          "$ref": "#/definitions/Resource"
         }
       ],
       "properties": {
@@ -937,7 +937,7 @@
       "type": "object",
       "allOf": [
         {
-          "$ref": "../../Microsoft.Web/2016-03-01/CommonDefinitions.json#/definitions/ProxyOnlyResource"
+          "$ref": "#/definitions/ProxyOnlyResource"
         }
       ],
       "properties": {
@@ -978,7 +978,7 @@
       "type": "object",
       "allOf": [
         {
-          "$ref": "../../Microsoft.Web/2016-03-01/CommonDefinitions.json#/definitions/ProxyOnlyResource"
+          "$ref": "#/definitions/ProxyOnlyResource"
         }
       ],
       "properties": {
@@ -1270,6 +1270,16 @@
         }
       }
     },
+    "NameIdentifier": {
+      "description": "Identifies an object.",
+      "type": "object",
+      "properties": {
+        "name": {
+          "description": "Name of the object.",
+          "type": "string"
+        }
+      }
+    },
     "NameIdentifierCollection": {
       "description": "Collection of domain name identifiers.",
       "required": [
@@ -1281,7 +1291,7 @@
           "description": "Collection of resources.",
           "type": "array",
           "items": {
-            "$ref": "../../Microsoft.Web/2016-03-01/CommonDefinitions.json#/definitions/NameIdentifier"
+            "$ref": "#/definitions/NameIdentifier"
           }
         },
         "nextLink": {
@@ -1289,6 +1299,71 @@
           "type": "string"
         }
       }
+    },
+    "ProxyOnlyResource": {
+      "description": "Azure proxy only resource. This resource is not tracked by Azure Resource Manager.",
+      "properties": {
+        "id": {
+          "description": "Resource Id.",
+          "type": "string",
+          "readOnly": true
+        },
+        "name": {
+          "description": "Resource Name.",
+          "type": "string",
+          "readOnly": true
+        },
+        "kind": {
+          "description": "Kind of resource.",
+          "type": "string"
+        },
+        "type": {
+          "description": "Resource type.",
+          "type": "string",
+          "readOnly": true
+        }
+      },
+      "x-ms-azure-resource": true
+    },
+    "Resource": {
+      "description": "Azure resource. This resource is tracked in Azure Resource Manager",
+      "properties": {
+        "id": {
+          "description": "Resource Id.",
+          "type": "string",
+          "readOnly": true
+        },
+        "name": {
+          "description": "Resource Name.",
+          "type": "string",
+          "readOnly": true
+        },
+        "kind": {
+          "description": "Kind of resource.",
+          "type": "string"
+        },
+        "location": {
+          "description": "Resource Location.",
+          "type": "string",
+          "x-ms-mutability": [
+            "create",
+            "update"
+          ]
+        },
+        "type": {
+          "description": "Resource type.",
+          "type": "string",
+          "readOnly": true
+        },
+        "tags": {
+          "description": "Resource tags.",
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          }
+        }
+      },
+      "x-ms-azure-resource": true
     }
   },
   "parameters": {

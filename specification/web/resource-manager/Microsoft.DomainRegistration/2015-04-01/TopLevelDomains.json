@@ -124,6 +124,31 @@
     }
   },
   "definitions": {
+    "ProxyOnlyResource": {
+      "description": "Azure proxy only resource. This resource is not tracked by Azure Resource Manager.",
+      "properties": {
+        "id": {
+          "description": "Resource Id.",
+          "type": "string",
+          "readOnly": true
+        },
+        "name": {
+          "description": "Resource Name.",
+          "type": "string",
+          "readOnly": true
+        },
+        "kind": {
+          "description": "Kind of resource.",
+          "type": "string"
+        },
+        "type": {
+          "description": "Resource type.",
+          "type": "string",
+          "readOnly": true
+        }
+      },
+      "x-ms-azure-resource": true
+    },
     "TldLegalAgreement": {
       "description": "Legal agreement for a top level domain.",
       "required": [
@@ -176,7 +201,7 @@
       "type": "object",
       "allOf": [
         {
-          "$ref": "../../Microsoft.Web/2016-03-01/CommonDefinitions.json#/definitions/ProxyOnlyResource"
+          "$ref": "#/definitions/ProxyOnlyResource"
         }
       ],
       "properties": {
