@@ -69,7 +69,11 @@
             "$ref": "#/parameters/scopeParameter"
           },
           {
-            "$ref": "#/parameters/subscriptionDefinitionNameParameter"
+            "name": "subscriptionDefinitionName",
+            "in": "path",
+            "description": "The name of the Azure subscription definition or 'default' for the subscriptions/{subscriptionId} scope.",
+            "required": true,
+            "type": "string"
           },
           {
             "$ref": "#/parameters/apiVersionParameter"
@@ -132,7 +136,11 @@
             "$ref": "#/parameters/scopeParameter"
           },
           {
-            "$ref": "#/parameters/subscriptionDefinitionNameParameter"
+            "name": "subscriptionDefinitionName",
+            "in": "path",
+            "description": "The name of the Azure subscription definition or 'default' for the subscriptions/{subscriptionId} scope.",
+            "required": true,
+            "type": "string"
           },
           {
             "$ref": "#/parameters/apiVersionParameter"
@@ -401,35 +409,12 @@
       "required": true,
       "type": "string"
     },
-    "subscriptionIdParameter": {
-      "name": "subscriptionId",
-      "in": "path",
-      "description": "The Azure subscription ID.",
-      "required": true,
-      "type": "string",
-      "format": "uuid"
-    },
     "apiVersionParameter": {
       "name": "api-version",
       "in": "query",
       "required": true,
       "type": "string",
       "description": "Version of the API to be used with the client request. Current version is 2015-06-01"
-    },
-    "subscriptionDefinitionNameParameter": {
-      "name": "subscriptionDefinitionName",
-      "in": "path",
-      "description": "The name of the Azure subscription definition or 'default' for the subscriptions/{subscriptionId} scope.",
-      "required": true,
-      "type": "string"
-    },
-    "groupNameParameter": {
-      "name": "groupName",
-      "in": "path",
-      "description": "The management group ARM resource name.",
-      "required": true,
-      "type": "string",
-      "format": "uuid"
     }
   },
   "security": [
