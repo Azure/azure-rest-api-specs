@@ -17552,6 +17552,9 @@
     },
     "Resource": {
       "description": "Azure resource. This resource is tracked in Azure Resource Manager",
+      "required": [
+        "location"
+      ],
       "properties": {
         "id": {
           "description": "Resource Id.",
@@ -17569,11 +17572,7 @@
         },
         "location": {
           "description": "Resource Location.",
-          "type": "string",
-          "x-ms-mutability": [
-            "create",
-            "update"
-          ]
+          "type": "string"
         },
         "type": {
           "description": "Resource type.",
