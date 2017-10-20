@@ -8,6 +8,12 @@
   "schemes": [
     "https"
   ],
+  "consumes": [
+    "application/json"
+  ],
+  "produces": [
+    "application/json"
+  ],
   "paths": {
     "/subscriptions/{subscriptionId}/providers/Microsoft.Web/deletedSites": {
       "get": {
@@ -17,10 +23,6 @@
         "summary": "Get all deleted apps for a subscription.",
         "description": "Get all deleted apps for a subscription.",
         "operationId": "DeletedWebApps_List",
-        "produces": [
-          "application/json",
-          "text/json"
-        ],
         "parameters": [
           {
             "$ref": "#/parameters/subscriptionIdParameter"
@@ -48,7 +50,7 @@
       "description": "A deleted app.",
       "type": "object",
       "properties": {
-        "id": {
+        "deletedSiteId": {
           "format": "int32",
           "description": "Numeric id for the deleted site",
           "type": "integer"
@@ -68,8 +70,13 @@
           "type": "string",
           "readOnly": true
         },
-        "name": {
+        "deletedSiteName": {
           "description": "Name of the deleted site",
+          "type": "string",
+          "readOnly": true
+        },
+        "slot": {
+          "description": "Slot of the deleted site",
           "type": "string",
           "readOnly": true
         }

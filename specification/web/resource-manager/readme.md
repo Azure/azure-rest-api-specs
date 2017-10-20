@@ -48,6 +48,7 @@ input-file:
 - Microsoft.DomainRegistration/2015-04-01/Domains.json
 - Microsoft.DomainRegistration/2015-04-01/TopLevelDomains.json
 - Microsoft.Web/2016-03-01/Certificates.json
+- Microsoft.Web/2016-03-01/CommonDefinitions.json
 - Microsoft.Web/2016-03-01/DeletedWebApps.json
 - Microsoft.Web/2016-03-01/Provider.json
 - Microsoft.Web/2016-03-01/Recommendations.json
