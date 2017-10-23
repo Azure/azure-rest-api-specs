@@ -478,6 +478,58 @@
           }
         }
       },
+      "patch": {
+        "tags": [
+          "integrationRuntimes"
+        ],
+        "operationId": "IntegrationRuntimes_Patch",
+        "x-ms-examples": {
+          "IntegrationRuntimes_Patch": {
+            "$ref": "./examples/IntegrationRuntimes_Patch.json"
+          }
+        },
+        "description": "Patches an integration runtime node.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/subscriptionId"
+          },
+          {
+            "$ref": "#/parameters/resourceGroupName"
+          },
+          {
+            "$ref": "#/parameters/factoryName"
+          },
+          {
+            "$ref": "#/parameters/integrationRuntimeName"
+          },
+          {
+            "$ref": "#/parameters/api-version"
+          },
+          {
+            "name": "integrationRuntimePatchRequest",
+            "description": "The parameters for patching an integration runtime.",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/IntegrationRuntimePatchRequest"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK.",
+            "schema": {
+              "$ref": "#/definitions/IntegrationRuntimeStatusResponse"
+            }
+          },
+          "default": {
+            "description": "An error response received from the Azure Data Factory service.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        }
+      },
       "delete": {
         "tags": [
           "integrationRuntimes"
@@ -936,6 +988,109 @@
             "description": "OK.",
             "schema": {
               "$ref": "./entityTypes/IntegrationRuntime.json#/definitions/IntegrationRuntimeMonitoringData"
+            }
+          },
+          "default": {
+            "description": "An error response received from the Azure Data Factory service.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DataFactory/factories/{factoryName}/integrationRuntimes/{integrationRuntimeName}/nodes/{nodeName}": {
+      "delete": {
+        "tags": [
+          "integrationRuntimeNodes"
+        ],
+        "operationId": "IntegrationRuntimeNodes_Delete",
+        "x-ms-examples": {
+          "IntegrationRuntimes_Nodes_Delete": {
+            "$ref": "./examples/IntegrationRuntimeNodes_Delete.json"
+          }
+        },
+        "description": "Deletes an integration runtime node.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/subscriptionId"
+          },
+          {
+            "$ref": "#/parameters/resourceGroupName"
+          },
+          {
+            "$ref": "#/parameters/factoryName"
+          },
+          {
+            "$ref": "#/parameters/integrationRuntimeName"
+          },
+          {
+            "$ref": "#/parameters/nodeName"
+          },
+          {
+            "$ref": "#/parameters/api-version"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK."
+          },
+          "204": {
+            "description": "No Content."
+          },
+          "default": {
+            "description": "An error response received from the Azure Data Factory service.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        }
+      },
+      "patch": {
+        "tags": [
+          "integrationRuntimeNodes"
+        ],
+        "operationId": "IntegrationRuntimeNodes_Patch",
+        "x-ms-examples": {
+          "IntegrationRuntimes_Nodes_Patch": {
+            "$ref": "./examples/IntegrationRuntimeNodes_Patch.json"
+          }
+        },
+        "description": "Patches an integration runtime node.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/subscriptionId"
+          },
+          {
+            "$ref": "#/parameters/resourceGroupName"
+          },
+          {
+            "$ref": "#/parameters/factoryName"
+          },
+          {
+            "$ref": "#/parameters/integrationRuntimeName"
+          },
+          {
+            "$ref": "#/parameters/nodeName"
+          },
+          {
+            "$ref": "#/parameters/api-version"
+          },
+          {
+            "name": "integrationRuntimeNodePatchRequest",
+            "description": "The parameters for patching an integration runtime node.",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/IntegrationRuntimeNodePatchRequest"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK.",
+            "schema": {
+              "$ref": "./entityTypes/IntegrationRuntime.json#/definitions/SelfHostedIntegrationRuntimeNode"
             }
           },
           "default": {
@@ -2381,6 +2536,30 @@
         }
       }
     },
+    "IntegrationRuntimePatchRequest": {
+      "description": "Integration runtime patch parameters.",
+      "type": "object",
+      "properties": {
+        "autoUpdate": {
+          "description": "Whether self-hosted integration runtime auto update has been turned on.",
+          "$ref": "./entityTypes/IntegrationRuntime.json#/definitions/IntegrationRuntimeAutoUpdate"
+        },
+        "updateDelayOffset": {
+          "description": "The time in the date scheduled by service to update the integration runtime, e.g., PT03H is 3 hours",
+          "type": "string"
+        }
+      }
+    },
+    "IntegrationRuntimeNodePatchRequest": {
+      "description": "Integration runtime node patch parameters.",
+      "type": "object",
+      "properties": {
+        "concurrentJobsLimit": {
+          "description": "Maximum concurrent jobs on the integration runtime node.",
+          "type": "integer"
+        }
+      }
+    },
     "LinkedServiceListResponse": {
       "description": "A list of linked service resources.",
       "type": "object",
@@ -2591,7 +2770,7 @@
         "type": {
           "type": "string",
           "description": "Pipeline reference type.",
-          "enum" : [
+          "enum": [
             "PipelineReference"
           ]
         },
@@ -2647,7 +2826,7 @@
         }
       ],
       "properties": {
-       "identity": {
+        "identity": {
           "$ref": "#/definitions/FactoryIdentity",
           "description": "Managed service identity of the factory."
         },
@@ -2711,7 +2890,7 @@
         "type": {
           "type": "string",
           "description": "Dataset reference type.",
-          "enum" : [
+          "enum": [
             "DatasetReference"
           ]
         },
@@ -2783,7 +2962,7 @@
         "properties"
       ]
     },
-    "PipelineRunFilterParameters":{
+    "PipelineRunFilterParameters": {
       "description": "Query parameters for listing pipeline runs.",
       "type": "object",
       "properties": {
@@ -2867,7 +3046,7 @@
         "values"
       ]
     },
-    "PipelineRunQueryOrderBy":{
+    "PipelineRunQueryOrderBy": {
       "description": "An object to provide order by options for listing pipeline runs.",
       "type": "object",
       "properties": {
@@ -2883,7 +3062,7 @@
             "modelAsString": true
           }
         },
-        "order":{
+        "order": {
           "description": "Sorting order of the parameter.",
           "type": "string",
           "enum": [
@@ -2983,7 +3162,7 @@
         }
       }
     },
-    "PipelineRunInvokedBy":{
+    "PipelineRunInvokedBy": {
       "description": "Provides entity name and id that started the pipeline run.",
       "type": "object",
       "properties": {
@@ -3432,6 +3611,17 @@
     "integrationRuntimeName": {
       "name": "integrationRuntimeName",
       "description": "The integration runtime name.",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "pattern": "^[A-Za-z0-9]+(?:-[A-Za-z0-9]+)*$",
+      "minLength": 3,
+      "maxLength": 63,
+      "x-ms-parameter-location": "method"
+    },
+    "nodeName": {
+      "name": "nodeName",
+      "description": "The integration runtime node name.",
       "in": "path",
       "required": true,
       "type": "string",

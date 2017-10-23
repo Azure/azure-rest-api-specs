@@ -140,7 +140,7 @@
             "Standard",
             "Premium",
             "PremiumRS"
-          ], 
+          ],
           "x-ms-enum": {
             "name": "IntegrationRuntimeSsisCatalogPricingTier",
             "modelAsString": true
@@ -440,17 +440,22 @@
         },
         "autoUpdate": {
           "description": "Whether Self-hosted integration runtime auto update has been turned on.",
-          "type": "string",
-          "enum": [
-            "On",
-            "Off"
-          ],
-          "x-ms-enum": {
-            "name": "IntegrationRuntimeAutoUpdate",
-            "modelAsString": true
-          },
+          "$ref": "#/definitions/IntegrationRuntimeAutoUpdate",
           "readOnly": true
         }
+      }
+    },
+    "IntegrationRuntimeAutoUpdate": {
+      "description": "The state of integration runtime auto update.",
+      "type": "string",
+      "readOnly": true,
+      "enum": [
+        "On",
+        "Off"
+      ],
+      "x-ms-enum": {
+        "name": "IntegrationRuntimeAutoUpdate",
+        "modelAsString": true
       }
     },
     "SelfHostedIntegrationRuntimeNode": {
