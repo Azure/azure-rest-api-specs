@@ -488,7 +488,7 @@
             "$ref": "./examples/IntegrationRuntimes_Patch.json"
           }
         },
-        "description": "Patches an integration runtime node.",
+        "description": "Patches an integration runtime.",
         "parameters": [
           {
             "$ref": "#/parameters/subscriptionId"
@@ -1006,7 +1006,7 @@
         ],
         "operationId": "IntegrationRuntimeNodes_Delete",
         "x-ms-examples": {
-          "IntegrationRuntimes_Nodes_Delete": {
+          "IntegrationRuntimesNodes_Delete": {
             "$ref": "./examples/IntegrationRuntimeNodes_Delete.json"
           }
         },
@@ -1052,7 +1052,7 @@
         ],
         "operationId": "IntegrationRuntimeNodes_Patch",
         "x-ms-examples": {
-          "IntegrationRuntimes_Nodes_Patch": {
+          "IntegrationRuntimesNodes_Patch": {
             "$ref": "./examples/IntegrationRuntimeNodes_Patch.json"
           }
         },
@@ -2537,11 +2537,11 @@
       }
     },
     "IntegrationRuntimePatchRequest": {
-      "description": "Integration runtime patch parameters.",
+      "description": "Integration runtime patch request.",
       "type": "object",
       "properties": {
         "autoUpdate": {
-          "description": "Whether self-hosted integration runtime auto update has been turned on.",
+          "description": "Turn on or off self-hosted integration runtime auto update.",
           "$ref": "./entityTypes/IntegrationRuntime.json#/definitions/IntegrationRuntimeAutoUpdate"
         },
         "updateDelayOffset": {
@@ -2551,11 +2551,11 @@
       }
     },
     "IntegrationRuntimeNodePatchRequest": {
-      "description": "Integration runtime node patch parameters.",
+      "description": "Integration runtime node patch request.",
       "type": "object",
       "properties": {
         "concurrentJobsLimit": {
-          "description": "Maximum concurrent jobs on the integration runtime node.",
+          "description": "Concurrent jobs on the integration runtime node. Customers can set this value between 1 and maxConcurrentJobs, which is caculated by integration runtime.",
           "type": "integer"
         }
       }
