@@ -15569,55 +15569,6 @@
         }
       }
     },
-    "ErrorEntity": {
-      "description": "Body of the error response returned from the API.",
-      "type": "object",
-      "properties": {
-        "extendedCode": {
-          "description": "Type of error.",
-          "type": "string"
-        },
-        "messageTemplate": {
-          "description": "Message template.",
-          "type": "string"
-        },
-        "parameters": {
-          "description": "Parameters for the template.",
-          "type": "array",
-          "items": {
-            "type": "string"
-          }
-        },
-        "innerErrors": {
-          "description": "Inner errors.",
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/ErrorEntity"
-          }
-        },
-        "code": {
-          "description": "Basic error code.",
-          "type": "string"
-        },
-        "message": {
-          "description": "Any details of the error.",
-          "type": "string"
-        }
-      }
-    },
-    "Experiments": {
-      "description": "Routing rules in production experiments.",
-      "type": "object",
-      "properties": {
-        "rampUpRules": {
-          "description": "List of ramp-up rules.",
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/RampUpRule"
-          }
-        }
-      }
-    },
     "FileSystemApplicationLogsConfig": {
       "description": "Application logs to file system configuration.",
       "type": "object",
@@ -15667,7 +15618,7 @@
       "type": "object",
       "allOf": [
         {
-          "$ref": "#/definitions/ProxyOnlyResource"
+          "$ref": "../2016-03-01/CommonDefinitions.json#/definitions/ProxyOnlyResource"
         }
       ],
       "properties": {
