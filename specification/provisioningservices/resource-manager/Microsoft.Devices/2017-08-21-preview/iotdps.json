@@ -8,10 +8,17 @@
   "title": "iotDpsClient",
   "description": "API for using the IoT Device Provisioning Service Features"
  },
+ 
  "host": "management.azure.com",
  "schemes": [
   "https"
  ],
+ "consumes": [
+    "application/json"
+  ],
+  "produces": [
+    "application/json"
+  ],
  "security": [
   {
    "azure_auth": [
@@ -37,6 +44,9 @@
      "Operations"
     ],
     "operationId": "Operations_List",
+    "x-ms-examples": {
+        "DPSOperations": { "$ref": "./examples/DPSOperations.json" }
+    },
     "description": "Lists all of the available IoT Hub REST API operations.",
     "parameters": [
      {
@@ -68,6 +78,9 @@
      "GET"
     ],
     "operationId": "DpsCertificate_Get",
+    "x-ms-examples": {
+        "DPSGetCertificate": { "$ref": "./examples/DPSGetCertificate.json" }
+    },
     "consumes": [],
     "produces": [
      "application/json"
@@ -93,15 +106,6 @@
       "in": "path",
       "required": true,
       "type": "string"
-     },
-     {
-      "name": "certificateDescription",
-      "in": "body",
-      "description": "The certificate body.",
-      "required": true,
-      "schema": {
-       "$ref": "#/definitions/CertificateBodyDescription"
-      }
      },
      {
       "name": "If-Match",
@@ -136,6 +140,9 @@
     "summary": "Upload the certificate to the provisioning service.",
     "description": "Adds new or replaces existing certificate.",
     "operationId": "DpsCertificate_CreateOrUpdate",
+    "x-ms-examples": {
+        "DPSCreateOrUpdateCertificate": { "$ref": "./examples/DPSCertificateCreateOrUpdate.json" }
+    },
     "parameters": [
      {
       "$ref": "#/parameters/api-version"
@@ -176,12 +183,6 @@
      }
     ],
     "responses": {
-     "201": {
-      "description": "If certificate didn't exist creation was successful, the operation returns HTTP status code of 201 (OK).",
-      "schema": {
-       "$ref": "#/definitions/CertificateResponse"
-      }
-     },
      "200": {
       "description": "If certificate already exist and update was successful, the operation returns HTTP status code of 201 (OK).",
       "schema": {
@@ -208,6 +209,9 @@
      "DELETE"
     ],
     "operationId": "DpsCertificate_Delete",
+    "x-ms-examples": {
+        "DPSDeleteCertificate": { "$ref": "./examples/DPSDeleteCertificate.json" }
+    },
     "consumes": [],
     "produces": [
      "application/json"
@@ -321,6 +325,9 @@
     "summary": "Get the non-security related metadata of a provisioning service.",
     "description": "Get the non-security related metadata of a provisioning service.",
     "operationId": "IotDpsResource_Get",
+    "x-ms-examples": {
+        "DPSGet": { "$ref": "./examples/DPSGet.json" }
+    },
     "parameters": [
      {
       "name": "provisioningServiceName",
@@ -370,6 +377,9 @@
     "description": "Create or update the metadata of a provisioning service. The usual pattern to modify a property is to retrieve the provisioning service metadata and security metadata, and then combine them with the modified values in a new body to update the provisioning service.",
     "x-ms-long-running-operation": true,
     "operationId": "IotDpsResource_CreateOrUpdate",
+    "x-ms-examples": {
+        "DPSCreate": { "$ref": "./examples/DPSCreate.json" }
+    },
     "parameters": [
      {
       "$ref": "#/parameters/subscriptionId"
@@ -431,6 +441,9 @@
     ],
     "x-ms-long-running-operation": true,
     "operationId": "IotDpsResource_Delete",
+    "x-ms-examples": {
+        "DPSDelete": { "$ref": "./examples/DPSDelete.json" }
+    },
     "consumes": [],
     "produces": [
      "application/json"
@@ -483,6 +496,9 @@
      "GET"
     ],
     "operationId": "DpsCertificates_GetAll",
+    "x-ms-examples": {
+        "DPSGetCertificates": { "$ref": "./examples/DPSGetCertificates.json" }
+    },
     "consumes": [],
     "produces": [
      "application/json"
@@ -531,6 +547,9 @@
     "summary": "Get all the provisioning services in a subscription.",
     "description": "Get all the provisioning services in a subscription.",
     "operationId": "IotDpsResource_ListBySubscription",
+    "x-ms-examples": {
+        "DPSListBySubscription": { "$ref": "./examples/DPSListBySubscription.json" }
+    },
     "parameters": [
      {
       "$ref": "#/parameters/subscriptionId"
@@ -564,6 +583,9 @@
      "GET"
     ],
     "operationId": "IotDpsResource_ListByResourceGroup",
+    "x-ms-examples": {
+        "DPSListByResourceGroup": { "$ref": "./examples/DPSListByResourceGroup.json" }
+    },
     "consumes": [],
     "produces": [
      "application/json"
@@ -607,6 +629,9 @@
      "GET"
     ],
     "operationId": "IotDpsResource_GetOperationResult",
+    "x-ms-examples": {
+        "DPSGetOperationResult": { "$ref": "./examples/DPSGetOperationResult.json" }
+    },
     "consumes": [],
     "produces": [
      "application/json"
@@ -669,6 +694,9 @@
     "summary": "Get the list of valid SKUs for a provisioning service.",
     "description": "Get the list of valid SKUs for a provisioning service.",
     "operationId": "IotDpsResource_GetValidSkus",
+    "x-ms-examples": {
+        "DPSGetValidSku": { "$ref": "./examples/DPSGetValidSku.json" }
+    },
     "parameters": [
      {
       "name": "provisioningServiceName",
@@ -714,10 +742,9 @@
      "POST"
     ],
     "operationId": "DpsCertificate_GenerateVerificationCode",
-    "consumes": [],
-    "produces": [
-     "application/json"
-    ],
+    "x-ms-examples": {
+        "DPSGenerateVerificationCode": { "$ref": "./examples/DPSGenerateVerificationCode.json" }
+    },
     "parameters": [
      {
       "name": "certificateName",
@@ -825,6 +852,9 @@
      "POST"
     ],
     "operationId": "DpsCertificate_VerifyCertificate",
+    "x-ms-examples": {
+        "DPSVerifyCertificate": { "$ref": "./examples/DPSVerifyCertificate.json" }
+    },
     "consumes": [
      "application/json"
     ],
@@ -946,6 +976,9 @@
      "POST"
     ],
     "operationId": "IotDpsResource_CheckNameAvailability",
+    "x-ms-examples": {
+        "DPSCheckName": { "$ref": "./examples/DPSCheckNameAvailability.json" }
+    },
     "summary": "Check if a provisioning service name is available.",
     "description": "Check if a provisioning service name is available.",
     "parameters": [
@@ -987,6 +1020,9 @@
      "POST"
     ],
     "operationId": "IotDpsResource_ListKeys",
+    "x-ms-examples": {
+        "DPSListKeys": { "$ref": "./examples/DPSListKeys.json" }
+    },
     "summary": "Get the security metadata for a provisioning service.",
     "description": "Get the security metadata for a provisioning service.",
     "parameters": [
@@ -1034,6 +1070,9 @@
      "POST"
     ],
     "operationId": "IotDpsResource_GetKeysForKeyName",
+    "x-ms-examples": {
+        "DPSGetKey": { "$ref": "./examples/DPSGetKey.json" }
+    },
     "summary": "Get a shared access policy by name from a provisioning service.",
     "description": "Get a shared access policy by name from a provisioning service.",
     "parameters": [
@@ -1580,7 +1619,6 @@
      "type": "string"
     },
     "expiry": {
-     "format": "date-time",
      "type": "string"
     },
     "thumbprint": {
@@ -1590,11 +1628,9 @@
      "type": "boolean"
     },
     "created": {
-     "format": "date-time",
      "type": "string"
     },
     "updated": {
-     "format": "date-time",
      "type": "string"
     }
    }
