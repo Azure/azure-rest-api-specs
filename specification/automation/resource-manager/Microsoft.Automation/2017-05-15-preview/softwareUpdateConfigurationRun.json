@@ -1,0 +1,233 @@
+{
+    "swagger": "2.0",
+  
+    "info": {
+      "title": "Update Management API",
+      "description": "APIs for managing software update configurations.",
+      "contact": {
+        "name": "Mohamed Enein"
+      },
+      "version": "2017-05-15-preview"
+    },
+  
+    "consumes": [ "application/json" ],
+  
+    "produces": [ "application/json" ],
+  
+    "parameters": {
+      "subscriptionId": {
+        "name": "subscriptionId",
+        "description": "subscription id for tenant issuing the request.",
+        "type": "string",
+        "required": true,
+        "in": "path",
+        "format": "uuid"
+      },
+      "resourceGroupName": {
+        "name": "resourceGroupName",
+        "description": "The name of the resource group within user's subscription.",
+        "type": "string",
+        "required": true,
+        "in": "path"
+      },
+      "automationAccountName": {
+        "name": "automationAccountName",
+        "description": "The name of the automation account.",
+        "type": "string",
+        "required": true,
+        "in": "path",
+        "format": "uuid"
+      },
+      "softwareUpdateConfigurationName": {
+        "name": "softwareUpdateConfigurationName",
+        "description": "The name of the software update configuration to be created.",
+        "type": "string",
+        "required": true,
+        "in": "path"
+      },
+      "softwareUpdateConfigurationRunId": {
+        "name": "softwareUpdateConfigurationRunId",
+        "description": "The Id of the software update configuration run.",
+        "type": "string",
+        "required": true,
+        "in": "path",
+        "format": "uuid"
+      },
+      "softwareUpdateConfigurationMachineRunId": {
+        "name": "softwareUpdateConfigurationMachineRunId",
+        "description": "The Id of the software update configuration machine run.",
+        "type": "string",
+        "required": true,
+        "in": "path",
+        "format": "uuid"
+      },
+      "apiVersion": {
+        "name": "api-version",
+        "description": "The API version.",
+        "type": "string",
+        "required": true,
+        "in": "query"
+      },
+      "clientRequestId": {
+        "name": "clientRequestId",
+        "description": "Identifies this specific client request.",
+        "type": "string",
+        "required": false,
+        "in": "header"
+      }
+    },
+  
+    "schemes": [ "https" ],
+  
+    "host": "management.azure.com",
+  
+    "basePath": "/",
+  
+    "security": [
+      {
+        "azure_auth": [
+          "user_impersonation"
+        ]
+      }
+    ],
+    "securityDefinitions": {
+      "azure_auth": {
+        "type": "oauth2",
+        "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
+        "flow": "implicit",
+        "description": "Azure Active Directory OAuth2 Flow",
+        "scopes": {
+          "user_impersonation": "impersonate your user account"
+        }
+      }
+    },
+  
+    "paths": {
+      "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Automation/automationAccounts/{automationAccountName}/softwareUpdateConfigurationsRuns/{softwareUpdateConfigurationRunId}": {
+        "parameters": [
+          {
+            "$ref": "#/parameters/subscriptionId"
+          },
+          {
+            "$ref": "#/parameters/resourceGroupName"
+          },
+          {
+            "$ref": "#/parameters/automationAccountName"
+          },
+          {
+            "$ref": "#/parameters/softwareUpdateConfigurationRunId"
+          },
+          {
+            "$ref": "#/parameters/apiVersion"
+          },
+          {
+            "$ref": "#/parameters/clientRequestId"
+          }
+        ],
+  
+        "get": {
+          "tags": [ "Software Update Configuration Run" ],
+          "description": "Get a single software update configuration Run by Id.",
+          "externalDocs": {
+            "url": "http://aka.ms/azureautomationsdk/softwareupdateconfigurationrunoperations"
+          },
+          "x-ms-examples": {
+            "List software update configuration machine runs": { "$ref": "./examples/getSoftwareUpdateConfigurationRunById.json" }
+          },
+          "operationId": "softwareUpdateConfigurationRuns_GetById",
+          "responses": {
+            "200": {
+              "description": "A single software update configuration Run.",
+              "schema": {
+                "$ref": "./definitions.json#/definitions/updateConfigurationRun"
+              }
+            },
+            "400": {
+              "description": "Request validation failed."
+            },
+            "404": {
+              "description": "Resource group, account, or software update configuration doesn't exist."
+            }
+          }
+        }
+      },
+  
+  
+      "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Automation/automationAccounts/{automationAccountName}/softwareUpdateConfigurationsRuns": {
+        "parameters": [
+          {
+            "$ref": "#/parameters/subscriptionId"
+          },
+          {
+            "$ref": "#/parameters/resourceGroupName"
+          },
+          {
+            "$ref": "#/parameters/automationAccountName"
+          },
+          {
+            "$ref": "#/parameters/apiVersion"
+          },
+          {
+            "$ref": "#/parameters/clientRequestId"
+          }
+        ],
+  
+        "get": {
+          "tags": [ "Software Update Configuration Run" ],
+          "description": "Return list of software update configuration runs",
+          "externalDocs": {
+            "url": "http://aka.ms/azureautomationsdk/softwareupdateconfigurationoperations"
+          },
+          "x-ms-examples": {
+            "List software update configuration machine runs": { "$ref": "./examples/listSoftwareUpdateConfigurationRuns.json" },
+            "List software update configuration machine run with status equal to 'Failed'": { "$ref": "./examples/listFailedSoftwareUpdateConfigurationRuns.json" }
+          },
+          "parameters": [
+            {
+              "name": "$skip",
+              "in": "query",
+              "required": false,
+              "type": "string",
+              "description": "number of entries you skip before returning results"
+            },
+            {
+              "name": "$top",
+              "in": "query",
+              "required": false,
+              "type": "string",
+              "description": "Maximum number of entries returned in the results collection"
+            },
+            {
+              "name": "$filter",
+              "in": "query",
+              "required": false,
+              "type": "string",
+              "description": "The filter to apply on the operation. You can use the following filters: 'properties/osType', 'properties/status', 'properties/startTime', and 'properties/softwareUpdateConfiguration/name'"
+            }
+          ],
+          "operationId": "softwareUpdateConfigurationRuns_List",
+          "responses": {
+            "200": {
+              "description": "Return list of software update configurations runs.",
+              "schema": {
+                "type": "array",
+                "items": {
+                  "$ref": "./definitions.json#/definitions/updateConfigurationRun"
+                }
+              }
+            },
+            "204": {
+              "description": "No software update configuration run exist for this account."
+            },
+            "400": {
+              "description": "Request validation failed."
+            },
+            "404": {
+              "description": "Resource group, or account doesn't exist."
+            }
+          }
+        }
+      }
+    }
+  }
+  
