@@ -370,41 +370,16 @@
         "password": {
           "description": "Password to access the Dynamics instance.",
           "$ref": "../datafactory.json#/definitions/SecretBase"
+        },
+        "encryptedCredential": {
+          "type": "object",
+          "description": "The encrypted credential used for authentication. Credentials are encrypted using the integration runtime credential manager. Type: string (or Expression with resultType string)."
         }
       },
       "required": [
         "deploymentType",
         "authenticationType",
-        "username",
-        "password"
-      ]
-    },
-    "AzureKeyVaultSecret": {
-      "description": "Azure Key Vault Secret.",
-      "x-ms-discriminator-value": "AzureKeyVaultSecret",
-      "type": "object",
-      "allOf": [
-        {
-          "$ref": "../datafactory.json#/definitions/SecretBase"
-        }
-      ],
-      "properties": {
-        "store": {
-          "description": "The Azure Key Vault LinkedService reference.",
-          "$ref": "../datafactory.json#/definitions/LinkedServiceReference"
-        },
-        "secretName": {
-          "type": "object",
-          "description": "The name of secret in Azure Key Vault. Type: string (or Expression with resultType string)."
-        },
-        "secretVersion": {
-          "type": "object",
-          "description": "The version of the secret in Azure Key Vault. The default value is the latest version of the secret. Type: string (or Expression with resultType string)."
-        }
-      },
-      "required": [
-        "store",
-        "secretName"
+        "username"
       ]
     },
     "HDInsightLinkedService": {

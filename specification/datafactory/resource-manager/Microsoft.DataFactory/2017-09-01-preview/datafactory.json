@@ -2261,6 +2261,34 @@
         "value"
       ]
     },
+    "AzureKeyVaultSecretReference": {
+      "x-ms-discriminator-value": "AzureKeyVaultSecret",
+      "description": "Azure Key Vault secret referece.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/SecretBase"
+        }
+      ],
+      "properties": {
+        "store": {
+          "description": "The Azure Key Vault LinkedService reference.",
+          "$ref": "#/definitions/LinkedServiceReference"
+        },
+        "secretName": {
+          "type": "object",
+          "description": "The name of secret in Azure Key Vault. Type: string (or Expression with resultType string)."
+        },
+        "secretVersion": {
+          "type": "object",
+          "description": "The version of the secret in Azure Key Vault. The default value is the latest version of the secret. Type: string (or Expression with resultType string)."
+        }
+      },
+      "required": [
+        "store",
+        "secretName"
+      ]
+    },
     "SecretBase": {
       "description": "Base definition of secret type",
       "discriminator": "type",
