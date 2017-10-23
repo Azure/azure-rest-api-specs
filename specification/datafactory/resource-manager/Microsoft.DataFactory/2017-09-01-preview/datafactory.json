@@ -1010,7 +1010,7 @@
             "$ref": "./examples/IntegrationRuntimeNodes_Delete.json"
           }
         },
-        "description": "Deletes an integration runtime node.",
+        "description": "Deletes a self-hosted integration runtime node.",
         "parameters": [
           {
             "$ref": "#/parameters/subscriptionId"
@@ -1056,7 +1056,7 @@
             "$ref": "./examples/IntegrationRuntimeNodes_Patch.json"
           }
         },
-        "description": "Patches an integration runtime node.",
+        "description": "Patches a self-hosted integration runtime node.",
         "parameters": [
           {
             "$ref": "#/parameters/subscriptionId"
@@ -2555,8 +2555,9 @@
       "type": "object",
       "properties": {
         "concurrentJobsLimit": {
-          "description": "Concurrent jobs on the integration runtime node. Customers can set this value between 1 and maxConcurrentJobs, which is caculated by integration runtime.",
-          "type": "integer"
+          "description": "Concurrent jobs on the integration runtime node. Customers can set this value between 1 and maxConcurrentJobs, which is calculated by integration runtime.",
+          "type": "integer",
+          "minimum": 1
         }
       }
     },
