@@ -507,5 +507,67 @@
                 }
             }
         }
+    },
+    "parameters": {
+        "subscriptionId": {
+          "name": "subscriptionId",
+          "description": "subscription id for tenant issuing the request.",
+          "type": "string",
+          "required": true,
+          "in": "path",
+          "format": "uuid"
+        },
+        "resourceGroupName": {
+          "name": "resourceGroupName",
+          "description": "The name of the resource group within user's subscription.",
+          "type": "string",
+          "required": true,
+          "in": "path"
+        },
+        "automationAccountName": {
+          "name": "automationAccountName",
+          "description": "The name of the automation account.",
+          "type": "string",
+          "required": true,
+          "in": "path",
+          "format": "uuid"
+        },
+        "softwareUpdateConfigurationName": {
+          "name": "softwareUpdateConfigurationName",
+          "description": "The name of the software update configuration to be created.",
+          "type": "string",
+          "required": true,
+          "in": "path"
+        },
+        "softwareUpdateConfigurationRunId": {
+          "name": "softwareUpdateConfigurationRunId",
+          "description": "The Id of the software update configuration run.",
+          "type": "string",
+          "required": true,
+          "in": "path",
+          "format": "uuid"
+        },
+        "softwareUpdateConfigurationMachineRunId": {
+          "name": "softwareUpdateConfigurationMachineRunId",
+          "description": "The Id of the software update configuration machine run.",
+          "type": "string",
+          "required": true,
+          "in": "path",
+          "format": "uuid"
+        },
+        "apiVersion": {
+          "name": "api-version",
+          "description": "The API version.",
+          "type": "string",
+          "required": true,
+          "in": "query"
+        },
+        "clientRequestId": {
+          "name": "clientRequestId",
+          "description": "Identifies this specific client request.",
+          "type": "string",
+          "required": false,
+          "in": "header"
+        }
     }
 }

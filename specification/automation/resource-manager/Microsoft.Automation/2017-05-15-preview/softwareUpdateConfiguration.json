@@ -14,69 +14,6 @@
 
   "produces": [ "application/json" ],
 
-  "parameters": {
-    "subscriptionId": {
-      "name": "subscriptionId",
-      "description": "subscription id for tenant issuing the request.",
-      "type": "string",
-      "required": true,
-      "in": "path",
-      "format": "uuid"
-    },
-    "resourceGroupName": {
-      "name": "resourceGroupName",
-      "description": "The name of the resource group within user's subscription.",
-      "type": "string",
-      "required": true,
-      "in": "path"
-    },
-    "automationAccountName": {
-      "name": "automationAccountName",
-      "description": "The name of the automation account.",
-      "type": "string",
-      "required": true,
-      "in": "path",
-      "format": "uuid"
-    },
-    "softwareUpdateConfigurationName": {
-      "name": "softwareUpdateConfigurationName",
-      "description": "The name of the software update configuration to be created.",
-      "type": "string",
-      "required": true,
-      "in": "path"
-    },
-    "softwareUpdateConfigurationRunId": {
-      "name": "softwareUpdateConfigurationRunId",
-      "description": "The Id of the software update configuration run.",
-      "type": "string",
-      "required": true,
-      "in": "path",
-      "format": "uuid"
-    },
-    "softwareUpdateConfigurationMachineRunId": {
-      "name": "softwareUpdateConfigurationMachineRunId",
-      "description": "The Id of the software update configuration machine run.",
-      "type": "string",
-      "required": true,
-      "in": "path",
-      "format": "uuid"
-    },
-    "apiVersion": {
-      "name": "api-version",
-      "description": "The API version.",
-      "type": "string",
-      "required": true,
-      "in": "query"
-    },
-    "clientRequestId": {
-      "name": "clientRequestId",
-      "description": "Identifies this specific client request.",
-      "type": "string",
-      "required": false,
-      "in": "header"
-    }
-  },
-
   "schemes": [ "https" ],
 
   "host": "management.azure.com",
@@ -106,22 +43,22 @@
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Automation/automationAccounts/{automationAccountName}/softwareUpdateConfigurations/{softwareUpdateConfigurationName}": {
       "parameters": [
         {
-          "$ref": "#/parameters/subscriptionId"
+          "$ref": "./definitions.json#/parameters/subscriptionId"
         },
         {
-          "$ref": "#/parameters/resourceGroupName"
+          "$ref": "./definitions.json#/parameters/resourceGroupName"
         },
         {
-          "$ref": "#/parameters/automationAccountName"
+          "$ref": "./definitions.json#/parameters/automationAccountName"
         },
         {
-          "$ref": "#/parameters/softwareUpdateConfigurationName"
+          "$ref": "./definitions.json#/parameters/softwareUpdateConfigurationName"
         },
         {
-          "$ref": "#/parameters/apiVersion"
+          "$ref": "./definitions.json#/parameters/apiVersion"
         },
         {
-          "$ref": "#/parameters/clientRequestId"
+          "$ref": "./definitions.json#/parameters/clientRequestId"
         }
       ],
 
@@ -132,7 +69,7 @@
           "url": "http://aka.ms/azureautomationsdk/softwareupdateconfigurationoperations"
         },
         "x-ms-examples": {
-          "Create software update configuration": { "$ref": "./examples/createSoftwareUpdateConfiguration.json" }
+          "Create software update configuration": { "$ref": "./examples/softwareUpdateConfiguration/createSoftwareUpdateConfiguration.json" }
         },
         "operationId": "softwareUpdateConfigurations_Create",
         "parameters": [
@@ -179,7 +116,7 @@
           "url": "http://aka.ms/azureautomationsdk/softwareupdateconfigurationoperations"
         },
         "x-ms-examples": {
-          "Get software update configuration by name": { "$ref": "./examples/listSoftwareUpdateConfigurationByName.json" }
+          "Get software update configuration by name": { "$ref": "./examples/softwareUpdateConfiguration/listSoftwareUpdateConfigurationByName.json" }
         },
         "operationId": "softwareUpdateConfigurations_GetByName",
         "responses": {
@@ -205,7 +142,7 @@
           "url": "http://aka.ms/azureautomationsdk/softwareupdateconfigurationoperations"
         },
         "x-ms-examples": {
-          "Delete software update configuration": { "$ref": "./examples/deleteSoftwareUpdateConfiguration.json" }
+          "Delete software update configuration": { "$ref": "./examples/softwareUpdateConfiguration/deleteSoftwareUpdateConfiguration.json" }
         },
         "operationId": "softwareUpdateConfigurations_Delete",
         "responses": {
@@ -228,19 +165,19 @@
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Automation/automationAccounts/{automationAccountName}/softwareUpdateConfigurations": {
       "parameters": [
         {
-          "$ref": "#/parameters/subscriptionId"
+          "$ref": "./definitions.json#/parameters/subscriptionId"
         },
         {
-          "$ref": "#/parameters/resourceGroupName"
+          "$ref": "./definitions.json#/parameters/resourceGroupName"
         },
         {
-          "$ref": "#/parameters/automationAccountName"
+          "$ref": "./definitions.json#/parameters/automationAccountName"
         },
         {
-          "$ref": "#/parameters/apiVersion"
+          "$ref": "./definitions.json#/parameters/apiVersion"
         },
         {
-          "$ref": "#/parameters/clientRequestId"
+          "$ref": "./definitions.json#/parameters/clientRequestId"
         }
       ],
 
@@ -252,8 +189,8 @@
           "url": "http://aka.ms/azureautomationsdk/softwareupdateconfigurationoperations"
         },
         "x-ms-examples": {
-          "List software update configurations": { "$ref": "./examples/listSoftwareUpdateConfigurations.json" },
-          "List software update configurations Targeting a specific azure virtual machine": { "$ref": "./examples/listSoftwareUpdateConfigurationsByVm.json" }
+          "List software update configurations": { "$ref": "./examples/softwareUpdateConfiguration/listSoftwareUpdateConfigurations.json" },
+          "List software update configurations Targeting a specific azure virtual machine": { "$ref": "./examples/softwareUpdateConfiguration/listSoftwareUpdateConfigurationsByVm.json" }
         },
         "operationId": "softwareUpdateConfigurations_List",
         "parameters": [

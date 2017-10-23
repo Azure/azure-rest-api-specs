@@ -14,69 +14,6 @@
   
     "produces": [ "application/json" ],
   
-    "parameters": {
-      "subscriptionId": {
-        "name": "subscriptionId",
-        "description": "subscription id for tenant issuing the request.",
-        "type": "string",
-        "required": true,
-        "in": "path",
-        "format": "uuid"
-      },
-      "resourceGroupName": {
-        "name": "resourceGroupName",
-        "description": "The name of the resource group within user's subscription.",
-        "type": "string",
-        "required": true,
-        "in": "path"
-      },
-      "automationAccountName": {
-        "name": "automationAccountName",
-        "description": "The name of the automation account.",
-        "type": "string",
-        "required": true,
-        "in": "path",
-        "format": "uuid"
-      },
-      "softwareUpdateConfigurationName": {
-        "name": "softwareUpdateConfigurationName",
-        "description": "The name of the software update configuration to be created.",
-        "type": "string",
-        "required": true,
-        "in": "path"
-      },
-      "softwareUpdateConfigurationRunId": {
-        "name": "softwareUpdateConfigurationRunId",
-        "description": "The Id of the software update configuration run.",
-        "type": "string",
-        "required": true,
-        "in": "path",
-        "format": "uuid"
-      },
-      "softwareUpdateConfigurationMachineRunId": {
-        "name": "softwareUpdateConfigurationMachineRunId",
-        "description": "The Id of the software update configuration machine run.",
-        "type": "string",
-        "required": true,
-        "in": "path",
-        "format": "uuid"
-      },
-      "apiVersion": {
-        "name": "api-version",
-        "description": "The API version.",
-        "type": "string",
-        "required": true,
-        "in": "query"
-      },
-      "clientRequestId": {
-        "name": "clientRequestId",
-        "description": "Identifies this specific client request.",
-        "type": "string",
-        "required": false,
-        "in": "header"
-      }
-    },
-  
     "schemes": [ "https" ],
   
     "host": "management.azure.com",
@@ -106,22 +43,22 @@
       "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Automation/automationAccounts/{automationAccountName}/softwareUpdateConfigurationsRuns/{softwareUpdateConfigurationRunId}": {
         "parameters": [
           {
-            "$ref": "#/parameters/subscriptionId"
+            "$ref": "./definitions.json#/parameters/subscriptionId"
           },
           {
-            "$ref": "#/parameters/resourceGroupName"
+            "$ref": "./definitions.json#/parameters/resourceGroupName"
           },
           {
-            "$ref": "#/parameters/automationAccountName"
+            "$ref": "./definitions.json#/parameters/automationAccountName"
           },
           {
-            "$ref": "#/parameters/softwareUpdateConfigurationRunId"
+            "$ref": "./definitions.json#/parameters/softwareUpdateConfigurationRunId"
           },
           {
-            "$ref": "#/parameters/apiVersion"
+            "$ref": "./definitions.json#/parameters/apiVersion"
           },
           {
-            "$ref": "#/parameters/clientRequestId"
+            "$ref": "./definitions.json#/parameters/clientRequestId"
           }
         ],
   
@@ -132,7 +69,7 @@
             "url": "http://aka.ms/azureautomationsdk/softwareupdateconfigurationrunoperations"
           },
           "x-ms-examples": {
-            "List software update configuration machine runs": { "$ref": "./examples/getSoftwareUpdateConfigurationRunById.json" }
+            "List software update configuration machine runs": { "$ref": "./examples/softwareUpdateConfigurationRun/getSoftwareUpdateConfigurationRunById.json" }
           },
           "operationId": "softwareUpdateConfigurationRuns_GetById",
           "responses": {
@@ -179,8 +116,8 @@
             "url": "http://aka.ms/azureautomationsdk/softwareupdateconfigurationoperations"
           },
           "x-ms-examples": {
-            "List software update configuration machine runs": { "$ref": "./examples/listSoftwareUpdateConfigurationRuns.json" },
-            "List software update configuration machine run with status equal to 'Failed'": { "$ref": "./examples/listFailedSoftwareUpdateConfigurationRuns.json" }
+            "List software update configuration machine runs": { "$ref": "./examples/softwareUpdateConfigurationRun/listSoftwareUpdateConfigurationRuns.json" },
+            "List software update configuration machine run with status equal to 'Failed'": { "$ref": "./examples/softwareUpdateConfigurationRun/listFailedSoftwareUpdateConfigurationRuns.json" }
           },
           "parameters": [
             {
