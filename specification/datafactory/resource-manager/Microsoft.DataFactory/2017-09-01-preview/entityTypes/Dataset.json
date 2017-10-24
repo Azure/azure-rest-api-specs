@@ -643,13 +643,6 @@
         "compression": {
           "description": "The data compression method used for the item(s) in the Azure Data Lake Store.",
           "$ref": "#/definitions/DatasetCompression"
-        },
-        "partitionedBy": {
-          "description": "Specify a dynamic path and filename for time series data.",
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/DatasetPartition"
-          }
         }
       },
       "required": [
@@ -961,10 +954,6 @@
         "additionalHeaders": {
           "type": "object",
           "description": "The headers for the HTTP Request. e.g. request-header-name-1:request-header-value-1\r\n...\r\nrequest-header-name-n:request-header-value-n Type: string (or Expression with resultType string)."
-        },
-        "partitionedBy": {
-          "description": "The HTTP method for the HTTP request.",
-          "$ref": "#/definitions/DatasetPartition"
         },
         "format": {
           "description": "The format of files.",
