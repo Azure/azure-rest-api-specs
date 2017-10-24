@@ -504,7 +504,7 @@
           },
           {
             "name": "updateIntegrationRuntimeRequest",
-            "description": "The parameters for updateing an integration runtime.",
+            "description": "The parameters for updating an integration runtime.",
             "in": "body",
             "required": true,
             "schema": {
@@ -1049,7 +1049,7 @@
         ],
         "operationId": "IntegrationRuntimeNodes_Update",
         "x-ms-examples": {
-          "IntegrationRuntimesNodes_Update": {
+          "IntegrationRuntimeNodes_Update": {
             "$ref": "./examples/IntegrationRuntimeNodes_Update.json"
           }
         },
@@ -2534,11 +2534,11 @@
       }
     },
     "UpdateIntegrationRuntimeRequest": {
-      "description": "Updates Integration runtime request.",
+      "description": "Update integration runtime request.",
       "type": "object",
       "properties": {
         "autoUpdate": {
-          "description": "Enables or disables auto-update feature of the self-hosted integration runtime.",
+          "description": "Enables or disables auto-update feature of the self-hosted integration runtime. See https://go.microsoft.com/fwlink/?linkid=854189.",
           "$ref": "./entityTypes/IntegrationRuntime.json#/definitions/IntegrationRuntimeAutoUpdate"
         },
         "updateDelayOffset": {
@@ -2548,7 +2548,7 @@
       }
     },
     "UpdateIntegrationRuntimeNodeRequest": {
-      "description": "Updates integration runtime node request.",
+      "description": "Update integration runtime node request.",
       "type": "object",
       "properties": {
         "concurrentJobsLimit": {
@@ -3623,6 +3623,9 @@
       "in": "path",
       "required": true,
       "type": "string",
+      "pattern": "^[a-z0-9A-Z][a-z0-9A-Z_-]{0,149}$",
+      "minLength": 1,
+      "maxLength": 150,
       "x-ms-parameter-location": "method"
     },
     "api-version": {
