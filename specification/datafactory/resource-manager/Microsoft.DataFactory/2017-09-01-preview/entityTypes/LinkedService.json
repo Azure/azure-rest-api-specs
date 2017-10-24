@@ -553,6 +553,42 @@
         "connectionString"
       ]
     },
+    "AzureMySqlLinkedService": {
+      "x-ms-discriminator-value": "AzureMySql",
+      "description": "Azure MySQL database linked service.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/LinkedService"
+        }
+      ],
+      "properties": {
+        "typeProperties": {
+          "description": "Azure MySQL database linked service properties.",
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/AzureMySqlLinkedServiceTypeProperties"
+        }
+      },
+      "required": [
+        "typeProperties"
+      ]
+    },
+    "AzureMySqlLinkedServiceTypeProperties": {
+      "description": "Azure MySQL database linked service properties.",
+      "properties": {
+        "connectionString": {
+          "description": "The connection string.",
+          "$ref": "../datafactory.json#/definitions/SecureString"
+        },
+        "encryptedCredential": {
+          "type": "object",
+          "description": "The encrypted credential used for authentication. Credentials are encrypted using the integration runtime credential manager. Type: string (or Expression with resultType string)."
+        }
+      },
+      "required": [
+        "connectionString"
+      ]
+    },
     "MySqlLinkedService": {
       "x-ms-discriminator-value": "MySql",
       "description": "Linked service for MySQL data source.",
