@@ -12,7 +12,7 @@ To build the SDK for Advisor, simply [Install AutoRest](https://aka.ms/autorest/
 
 > `autorest`
 
-To see additional help and options, run:
+To see additional help and options, use:
 
 > `autorest --help`
 ---
