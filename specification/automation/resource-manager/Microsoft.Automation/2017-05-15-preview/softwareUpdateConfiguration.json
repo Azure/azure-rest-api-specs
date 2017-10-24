@@ -79,7 +79,7 @@
             "required": true,
             "in": "body",
             "schema": {
-              "$ref": "#/definitions/updateConfiguration"
+              "$ref": "./definitions.json#/definitions/softwareUpdateConfiguration"
             }
           }
         ],
@@ -87,13 +87,13 @@
           "200": {
             "description": "Software update configuration with the same name and properties already exists.",
             "schema": {
-              "$ref": "#/definitions/updateConfiguration"
+              "$ref": "./definitions.json#/definitions/softwareUpdateConfiguration"
             }
           },
           "201": {
             "description": "Software update configuration is created.",
             "schema": {
-              "$ref": "#/definitions/updateConfiguration"
+              "$ref": "./definitions.json#/definitions/softwareUpdateConfiguration"
             }
           },
           "400": {
@@ -116,14 +116,14 @@
           "url": "http://aka.ms/azureautomationsdk/softwareupdateconfigurationoperations"
         },
         "x-ms-examples": {
-          "Get software update configuration by name": { "$ref": "./examples/softwareUpdateConfiguration/listSoftwareUpdateConfigurationByName.json" }
+          "Get software update configuration by name": { "$ref": "./examples/softwareUpdateConfiguration/getSoftwareUpdateConfigurationByName.json" }
         },
         "operationId": "softwareUpdateConfigurations_GetByName",
         "responses": {
           "200": {
             "description": "A single software update configuration.",
             "schema": {
-              "$ref": "#/definitions/updateConfiguration"
+              "$ref": "./definitions.json#/definitions/softwareUpdateConfiguration"
             }
           },
           "400": {
@@ -208,7 +208,7 @@
             "schema": {
               "type": "array",
               "items": {
-                "$ref": "#/definitions/updateConfigurationCollectionItem"
+                "$ref": "./definitions.json#/definitions/softwareUpdateConfigurationCollectionItem"
               }
             }
           },
