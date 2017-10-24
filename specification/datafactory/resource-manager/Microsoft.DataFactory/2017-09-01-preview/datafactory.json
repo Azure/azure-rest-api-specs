@@ -2272,12 +2272,12 @@
       ],
       "properties": {
         "store": {
-          "description": "The Azure Key Vault LinkedService reference.",
+          "description": "The Azure Key Vault linked service reference.",
           "$ref": "#/definitions/LinkedServiceReference"
         },
         "secretName": {
           "type": "object",
-          "description": "The name of secret in Azure Key Vault. Type: string (or Expression with resultType string)."
+          "description": "The name of the secret in Azure Key Vault. Type: string (or Expression with resultType string)."
         },
         "secretVersion": {
           "type": "object",
@@ -2290,21 +2290,13 @@
       ]
     },
     "SecretBase": {
-      "description": "Base definition of secret type",
+      "description": "The base definition of a secret type.",
       "discriminator": "type",
       "type": "object",
       "properties": {
         "type": {
-          "description": "Type of secret",
           "type": "string",
-          "enum": [
-            "SecureString",
-            "AzureKeyVaultSecret"
-          ],
-          "x-ms-enum": {
-            "name": "SecretType",
-            "modelAsString": true
-          }
+          "description": "Type of the secret."
         }
       },
       "required": [
