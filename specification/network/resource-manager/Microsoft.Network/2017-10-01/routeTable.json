@@ -184,6 +184,56 @@
           "Create route table with route": { "$ref": "./examples/RouteTableCreateWithRoute.json" }
         },
         "x-ms-long-running-operation": true
+      },
+      "patch": {
+        "tags": [
+          "RouteTables"
+        ],
+        "operationId": "RouteTables_UpdateTags",
+        "description": "Updates a route table tags.",
+        "parameters": [
+          {
+            "name": "resourceGroupName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the resource group."
+          },
+          {
+            "name": "routeTableName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the route table."
+          },
+          {
+            "name": "parameters",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "./network.json#/definitions/TagsObject"
+            },
+            "description": "Parameters supplied to update route table tags."
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Request successful. The operation returns the resulting RouteTable resource.",
+            "schema": {
+              "$ref": "#/definitions/RouteTable"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Update route table tags": { "$ref": "./examples/RouteTableUpdateTags.json" }
+        },
+        "x-ms-long-running-operation": true
       }
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/routeTables": {

@@ -167,6 +167,56 @@
           }
         },
         "x-ms-long-running-operation": true
+      },
+      "patch": {
+        "tags": [
+          "VirtualNetworkGateways"
+        ],
+        "operationId": "VirtualNetworkGateways_UpdateTags",
+        "description": "Updates a virtual network gateway tags.",
+        "parameters": [
+          {
+            "name": "resourceGroupName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the resource group."
+          },
+          {
+            "name": "virtualNetworkGatewayName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the virtual network gateway."
+          },
+          {
+            "name": "parameters",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "./network.json#/definitions/TagsObject"
+            },
+            "description": "Parameters supplied to update virtual network gateway tags."
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Update successful. The operation returns the resulting VirtualNetworkGateway resource.",
+            "schema": {
+              "$ref": "#/definitions/VirtualNetworkGateway"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Update Virtual Network Gateway Tags": { "$ref": "./examples/VirtualNetworkGatewayUpdateTags.json" }
+        },
+        "x-ms-long-running-operation": true
       }
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/virtualNetworkGateways": {
@@ -804,6 +854,56 @@
           }
         },
         "x-ms-long-running-operation": true
+      },
+      "patch": {
+        "tags": [
+          "VirtualNetworkGatewayConnections"
+        ],
+        "operationId": "VirtualNetworkGatewayConnections_UpdateTags",
+        "description": "Updates a virtual network gateway connection tags.",
+        "parameters": [
+          {
+            "name": "resourceGroupName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the resource group."
+          },
+          {
+            "name": "virtualNetworkGatewayConnectionName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the virtual network gateway connection."
+          },
+          {
+            "name": "parameters",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "./network.json#/definitions/TagsObject"
+            },
+            "description": "Parameters supplied to update virtual network gateway connection tags."
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Update successful. The operation returns the resulting VirtualNetworkGatewayConnection resource.",
+            "schema": {
+              "$ref": "#/definitions/VirtualNetworkGatewayConnectionListEntity"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Update Virtual Network Gateway Connection Tags": { "$ref": "./examples/VirtualNetworkGatewayConnectionUpdateTags.json" }
+        },
+        "x-ms-long-running-operation": true
       }
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/connections/{virtualNetworkGatewayConnectionName}/sharedkey": {
@@ -1117,6 +1217,57 @@
           "202": {
             "description": "Accepted and the operation will complete asynchronously."
           }
+        },
+        "x-ms-long-running-operation": true
+      },
+      "patch": {
+        "tags": [
+          "LocalNetworkGateways"
+        ],
+        "operationId": "LocalNetworkGateways_UpdateTags",
+        "description": "Updates a local network gateway tags.",
+        "parameters": [
+          {
+            "name": "resourceGroupName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the resource group."
+          },
+          {
+            "name": "localNetworkGatewayName",
+            "in": "path",
+            "required": true,
+            "minLength": 1,
+            "type": "string",
+            "description": "The name of the local network gateway."
+          },
+          {
+            "name": "parameters",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "./network.json#/definitions/TagsObject"
+            },
+            "description": "Parameters supplied to update local network gateway tags."
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Update successful. The operation returns the resulting LocalNetworkGateway resource.",
+            "schema": {
+              "$ref": "#/definitions/LocalNetworkGateway"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Update Local Network Gateway Tags": { "$ref": "./examples/LocalNetworkGatewayUpdateTags.json" }
         },
         "x-ms-long-running-operation": true
       }

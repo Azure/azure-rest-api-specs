@@ -183,6 +183,56 @@
           "Create load balancer": { "$ref": "./examples/LoadBalancerCreate.json" }
         },
         "x-ms-long-running-operation": true
+      },
+      "patch": {
+        "tags": [
+          "LoadBalancers"
+        ],
+        "operationId": "LoadBalancers_UpdateTags",
+        "description": "Updates a load balancer tags.",
+        "parameters": [
+          {
+            "name": "resourceGroupName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the resource group."
+          },
+          {
+            "name": "loadBalancerName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the load balancer."
+          },
+          {
+            "name": "parameters",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "./network.json#/definitions/TagsObject"
+            },
+            "description": "Parameters supplied to update load balancer tags."
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Update successful. The operation returns the resulting LoadBalancer resource.",
+            "schema": {
+              "$ref": "#/definitions/LoadBalancer"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Update load balancer tags": { "$ref": "./examples/LoadBalancerUpdateTags.json" }
+        },
+        "x-ms-long-running-operation": true
       }
     },
     "/subscriptions/{subscriptionId}/providers/Microsoft.Network/loadBalancers": {
