@@ -37,6 +37,19 @@ openapi-type: arm
 tag: package-2017-09
 ```
 
+### Tag: package-2017-09
+
+These settings apply only when `--tag=package-2017-09` is specified on the command line.
+
+``` yaml $(tag) == 'package-2017-09'
+input-file:
+- Microsoft.Compute/2017-03-30/compute.json
+- Microsoft.Compute/2017-03-30/disk.json
+- Microsoft.Compute/2017-03-30/runCommands.json
+- Microsoft.ContainerService/2017-07-01/containerService.json
+- Microsoft.ContainerService/2017-08-31/managedClusters.json
+- Microsoft.ContainerService/2017-09-30/location.json
+```
 
 ### Tag: package-2017-08
 
