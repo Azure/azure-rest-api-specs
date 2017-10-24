@@ -113,6 +113,10 @@
         "catalogInfo": {
           "description": "Catalog information for managed dedicated integration runtime.",
           "$ref": "#/definitions/IntegrationRuntimeSsisCatalogInfo"
+        },
+        "customSetupScriptProperties": {
+          "description": "Custom setup script properties for a managed dedicated integration runtime.",
+          "$ref": "#/definitions/IntegrationRuntimeCustomSetupScriptProperties"
         }
       }
     },
@@ -145,6 +149,20 @@
             "name": "IntegrationRuntimeSsisCatalogPricingTier",
             "modelAsString": true
           }
+        }
+      }
+    },
+    "IntegrationRuntimeCustomSetupScriptProperties": {
+      "description": "Custom setup script properties for a managed dedicated integration runtime.",
+      "type": "object",
+      "properties": {
+        "blobContainerUri": {
+          "description": "The URI of the Azure blob container that contains the custom setup script.",
+          "type": "string"
+        },
+        "sasToken": {
+          "description": "The SAS token of the Azure blob container.",
+          "$ref": "../datafactory.json#/definitions/SecureString"
         }
       }
     },
