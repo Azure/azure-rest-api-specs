@@ -381,9 +381,6 @@
         "x-ms-examples": {
           "IntegrationRuntimes_Create": {
             "$ref": "./examples/IntegrationRuntimes_Create.json"
-          },
-          "IntegrationRuntimes_Update": {
-            "$ref": "./examples/IntegrationRuntimes_Update.json"
           }
         },
         "description": "Creates or updates an integration runtime.",
@@ -482,13 +479,13 @@
         "tags": [
           "integrationRuntimes"
         ],
-        "operationId": "IntegrationRuntimes_Patch",
+        "operationId": "IntegrationRuntimes_Update",
         "x-ms-examples": {
-          "IntegrationRuntimes_Patch": {
-            "$ref": "./examples/IntegrationRuntimes_Patch.json"
+          "IntegrationRuntimes_Update": {
+            "$ref": "./examples/IntegrationRuntimes_Update.json"
           }
         },
-        "description": "Patches an integration runtime.",
+        "description": "Updates an integration runtime.",
         "parameters": [
           {
             "$ref": "#/parameters/subscriptionId"
@@ -506,12 +503,12 @@
             "$ref": "#/parameters/api-version"
           },
           {
-            "name": "integrationRuntimePatchRequest",
-            "description": "The parameters for patching an integration runtime.",
+            "name": "updateIntegrationRuntimeRequest",
+            "description": "The parameters for updateing an integration runtime.",
             "in": "body",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/IntegrationRuntimePatchRequest"
+              "$ref": "#/definitions/UpdateIntegrationRuntimeRequest"
             }
           }
         ],
@@ -1050,13 +1047,13 @@
         "tags": [
           "integrationRuntimeNodes"
         ],
-        "operationId": "IntegrationRuntimeNodes_Patch",
+        "operationId": "IntegrationRuntimeNodes_Update",
         "x-ms-examples": {
-          "IntegrationRuntimesNodes_Patch": {
-            "$ref": "./examples/IntegrationRuntimeNodes_Patch.json"
+          "IntegrationRuntimesNodes_Update": {
+            "$ref": "./examples/IntegrationRuntimeNodes_Update.json"
           }
         },
-        "description": "Patches a self-hosted integration runtime node.",
+        "description": "Updates a self-hosted integration runtime node.",
         "parameters": [
           {
             "$ref": "#/parameters/subscriptionId"
@@ -1077,12 +1074,12 @@
             "$ref": "#/parameters/api-version"
           },
           {
-            "name": "integrationRuntimeNodePatchRequest",
-            "description": "The parameters for patching an integration runtime node.",
+            "name": "updateIntegrationRuntimeNodeRequest",
+            "description": "The parameters for updating an integration runtime node.",
             "in": "body",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/IntegrationRuntimeNodePatchRequest"
+              "$ref": "#/definitions/UpdateIntegrationRuntimeNodeRequest"
             }
           }
         ],
@@ -2536,26 +2533,26 @@
         }
       }
     },
-    "IntegrationRuntimePatchRequest": {
-      "description": "Integration runtime patch request.",
+    "UpdateIntegrationRuntimeRequest": {
+      "description": "Updates Integration runtime request.",
       "type": "object",
       "properties": {
         "autoUpdate": {
-          "description": "Turn on or off self-hosted integration runtime auto update.",
+          "description": "Enables or disables auto-update feature of the self-hosted integration runtime.",
           "$ref": "./entityTypes/IntegrationRuntime.json#/definitions/IntegrationRuntimeAutoUpdate"
         },
         "updateDelayOffset": {
-          "description": "The time in the date scheduled by service to update the integration runtime, e.g., PT03H is 3 hours",
+          "description": "The time offset (in hour) in the date scheduled by service to update the integration runtime, e.g., PT03H is 3 hours",
           "type": "string"
         }
       }
     },
-    "IntegrationRuntimeNodePatchRequest": {
-      "description": "Integration runtime node patch request.",
+    "UpdateIntegrationRuntimeNodeRequest": {
+      "description": "Updates integration runtime node request.",
       "type": "object",
       "properties": {
         "concurrentJobsLimit": {
-          "description": "Concurrent jobs on the integration runtime node. Customers can set this value between 1 and maxConcurrentJobs, which is calculated by integration runtime.",
+          "description": "The number of concurrent jobs permitted to run on the integration runtime node. Values between 1 and maxConcurrentJobs are allowed.",
           "type": "integer",
           "minimum": 1
         }
