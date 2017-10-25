@@ -58,3 +58,24 @@ csharp:
   output-folder: $(csharp-sdks-folder)/Authorization/Management.Authorization/Generated
   clear-output-folder: true
 ```
+
+
+## Go
+
+These settings apply only when `--go` is specified on the command line.
+
+``` yaml $(go)
+go:
+  license-header: MICROSOFT_APACHE_NO_VERSION
+  namespace: authorization
+  clear-output-folder: true
+```
+
+### Tag: package-2015-07 and go
+
+These settings apply only when `--tag=package-2015-07 --go` is specified on he command line.
+Please also specify `--go-sdk-folder=<path to the root directory of your azure-sdk-for-go clone>`.
+
+``` yaml $(tag) == 'package-2015-07' && $(go)
+output-folder: $(go-sdk-folder)/services/authorization/mgmt/2015-07-01/authorization
+```

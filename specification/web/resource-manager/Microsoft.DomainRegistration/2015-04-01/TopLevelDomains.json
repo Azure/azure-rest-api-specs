@@ -8,6 +8,12 @@
   "schemes": [
     "https"
   ],
+  "consumes": [
+    "application/json"
+  ],
+  "produces": [
+    "application/json"
+  ],
   "paths": {
     "/subscriptions/{subscriptionId}/providers/Microsoft.DomainRegistration/topLevelDomains": {
       "get": {
@@ -17,10 +23,6 @@
         "summary": "Get all top-level domains supported for registration.",
         "description": "Get all top-level domains supported for registration.",
         "operationId": "TopLevelDomains_List",
-        "produces": [
-          "application/json",
-          "text/json"
-        ],
         "parameters": [
           {
             "$ref": "#/parameters/subscriptionIdParameter"
@@ -50,12 +52,6 @@
         "summary": "Get details of a top-level domain.",
         "description": "Get details of a top-level domain.",
         "operationId": "TopLevelDomains_Get",
-        "produces": [
-          "application/json",
-          "text/json",
-          "application/xml",
-          "text/xml"
-        ],
         "parameters": [
           {
             "name": "name",
@@ -89,17 +85,6 @@
         "summary": "Gets all legal agreements that user needs to accept before purchasing a domain.",
         "description": "Gets all legal agreements that user needs to accept before purchasing a domain.",
         "operationId": "TopLevelDomains_ListAgreements",
-        "consumes": [
-          "application/json",
-          "text/json",
-          "application/xml",
-          "text/xml",
-          "application/x-www-form-urlencoded"
-        ],
-        "produces": [
-          "application/json",
-          "text/json"
-        ],
         "parameters": [
           {
             "name": "name",
@@ -139,31 +124,6 @@
     }
   },
   "definitions": {
-    "ProxyOnlyResource": {
-      "description": "Azure proxy only resource. This resource is not tracked by Azure Resource Manager.",
-      "properties": {
-        "id": {
-          "description": "Resource Id.",
-          "type": "string",
-          "readOnly": true
-        },
-        "name": {
-          "description": "Resource Name.",
-          "type": "string",
-          "readOnly": true
-        },
-        "kind": {
-          "description": "Kind of resource.",
-          "type": "string"
-        },
-        "type": {
-          "description": "Resource type.",
-          "type": "string",
-          "readOnly": true
-        }
-      },
-      "x-ms-azure-resource": true
-    },
     "TldLegalAgreement": {
       "description": "Legal agreement for a top level domain.",
       "required": [
@@ -216,7 +176,7 @@
       "type": "object",
       "allOf": [
         {
-          "$ref": "#/definitions/ProxyOnlyResource"
+          "$ref": "../../Microsoft.Web/2016-03-01/CommonDefinitions.json#/definitions/ProxyOnlyResource"
         }
       ],
       "properties": {
