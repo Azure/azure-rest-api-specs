@@ -50,6 +50,7 @@ input-file:
 - Microsoft.ApiManagement/2017-03-01/apimloggers.json
 - Microsoft.ApiManagement/2017-03-01/apimnetworkstatus.json
 - Microsoft.ApiManagement/2017-03-01/apimopenidconnectproviders.json
+- Microsoft.ApiManagement/2017-03-01/apimportalsettings.json
 - Microsoft.ApiManagement/2017-03-01/apimproducts.json
 - Microsoft.ApiManagement/2017-03-01/apimproperties.json
 - Microsoft.ApiManagement/2017-03-01/apimquotas.json
@@ -112,4 +113,43 @@ csharp:
   namespace: Microsoft.Azure.Management.ApiManagement  
   output-folder: $(csharp-sdks-folder)/ApiManagement/Management.ApiManagement/Generated
   clear-output-folder: true
+```
+
+
+## Go
+
+These settings apply only when `--go` is specified on the command line.
+
+``` yaml $(go)
+go:
+  license-header: MICROSOFT_APACHE_NO_VERSION
+  namespace: apimanagement
+  clear-output-folder: true
+```
+
+### Tag: package-2017-03 and go
+
+These settings apply only when `--tag=package-2017-03 --go` is specified on the command line.
+Please also specify `--go-sdk-folder=<path to the root directory of your azure-sdk-for-go clone>`.
+
+``` yaml $(tag) == 'package-2017-03' && $(go)
+output-folder: $(go-sdk-folder)/services/apimanagement/mgmt/2017-03-01/apimanagement
+```
+
+### Tag: package-2016-10 and go
+
+These settings apply only when `--tag=package-2016-10 --go` is specified on the command line.
+Please also specify `--go-sdk-folder=<path to the root directory of your azure-sdk-for-go clone>`.
+
+``` yaml $(tag) == 'package-2016-10' && $(go)
+output-folder: $(go-sdk-folder)/services/apimanagement/mgmt/2016-10-10/apimanagement
+```
+
+### Tag: package-2016-07 and go
+
+These settings apply only when `--tag=package-2016-07 --go` is specified on the command line.
+Please also specify `--go-sdk-folder=<path to the root directory of your azure-sdk-for-go clone>`.
+
+``` yaml $(tag) == 'package-2016-07' && $(go)
+output-folder: $(go-sdk-folder)/services/apimanagement/mgmt/2016-07-07/apimanagement
 ```

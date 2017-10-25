@@ -1,8 +1,8 @@
-# Cognitive Services Vision SDK
+# Cognitive Services Face SDK
 
 > see https://aka.ms/autorest
 
-Configuration for generating Vision SDK.
+Configuration for generating Face SDK.
 
 The current release is `release_1_0`.
 
@@ -26,8 +26,8 @@ These settings apply only when `--csharp` is specified on the command line.
 csharp: 
   license-header: MICROSOFT_MIT_NO_VERSION
   azure-arm: false
-  namespace: Microsoft.CognitiveServices.Vision.Face
-  output-folder: $(csharp-sdks-folder)/CognitiveServices/dataPlane/Vision/Microsoft.CognitiveServices.Vision/Generated/Face
+  namespace: Microsoft.Azure.CognitiveServices.Vision.Face
+  output-folder: $(csharp-sdks-folder)/CognitiveServices/dataPlane/Vision/Vision/Generated/Face
   clear-output-folder: true
 ```
 
