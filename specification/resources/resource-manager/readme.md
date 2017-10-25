@@ -151,6 +151,14 @@ input-file:
 - Microsoft.Resources/2016-07-01/resources.json
 ```
 
+### Tag: package-resources-2016-02
+These settings apply only when `--tag=package-resources-2016-02` is specified on the command line.
+
+``` yaml $(tag) == 'package-resources-2016-02'
+input-file:
+- Microsoft.Resources/2016-02-01/resources.json
+```
+
 ### Tag: package-resources-2015-11
 These settings apply only when `--tag=package-resources-2015-11` is specified on the command line.
 
@@ -335,6 +343,16 @@ Please also specify `--go-sdk-folder=<path to the root directory of your azure-s
 ``` yaml $(tag) == 'package-resources-2016-07' && $(go)
 namespace: resources
 output-folder: $(go-sdk-folder)/services/resources/mgmt/2016-07-01/resources
+```
+
+### Tag: package-resources-2016-02 and go
+
+These settings apply only when `--tag=package-resources-2016-02 --go` is specified on the command line.
+Please also specify `--go-sdk-folder=<path to the root directory of your azure-sdk-for-go clone>`.
+
+``` yaml $(tag) == 'package-resources-2016-02' && $(go)
+namespace: resources
+output-folder: $(go-sdk-folder)/services/resources/mgmt/2016-02-01/resources
 ```
 
 ### Tag: package-resources-2015-11 and go
