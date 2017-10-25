@@ -271,7 +271,7 @@
             "required": true,
             "type": "string",
             "format": "uuid",
-            "description": "JobInfo ID."
+            "description": "Job identifier. Uniquely identifies the job across all jobs submitted to the service."
           },
           {
             "$ref": "#/parameters/ApiVersionParameter"
@@ -338,7 +338,7 @@
             "required": true,
             "type": "string",
             "format": "uuid",
-            "description": "JobInfo ID to cancel."
+            "description": "Job identifier. Uniquely identifies the job across all jobs submitted to the service."
           },
           {
             "$ref": "#/parameters/ApiVersionParameter"
@@ -368,7 +368,7 @@
             "required": true,
             "type": "string",
             "format": "uuid",
-            "description": "The job ID (a GUID) for the job being submitted."
+            "description": "Job identifier. Uniquely identifies the job across all jobs submitted to the service."
           },
           {
             "name": "parameters",
@@ -496,7 +496,7 @@
         "x-ms-pageable": {
           "nextLinkName": "nextLink"
         },
-        "x-ms-odata": "#/definitions/JobInformation"
+        "x-ms-odata": "#/definitions/JobInformationBasic"
       }
     }
   },
@@ -869,11 +869,11 @@
         },
         "script": {
           "type": "string",
-          "description": "the script to run"
+          "description": "the script to run. Please note that the maximum script size is 3 MB."
         },
         "type": {
           "type": "string",
-          "description": "the job type of the current job (i.e. Hive or U-SQL)."
+          "description": "the job type of the current job (i.e. Hive or USql)."
         }
       },
       "description": "The common Data Lake Analytics job properties."
@@ -888,7 +888,7 @@
       "properties": {
         "compileMode": {
           "type": "string",
-          "description": "Optionally enforces a specific compilation mode for the job during execution. If this is not specified during submission, the server will determine the optimal compilation mode.",
+          "description": "the specific compilation mode for the job used during execution. If this is not specified during submission, the server will determine the optimal compilation mode.",
           "enum": [
             "Semantic",
             "Full",
@@ -915,11 +915,11 @@
         },
         "script": {
           "type": "string",
-          "description": "the script to run"
+          "description": "the script to run. Please note that the maximum script size is 3 MB."
         },
         "type": {
           "type": "string",
-          "description": "the job type of the current job (i.e. U-SQL)."
+          "description": "the job type of the current job (i.e. USql)."
         }
       },
       "description": "The common Data Lake Analytics job properties for job submission."
@@ -1134,6 +1134,11 @@
           "type": "string",
           "readOnly": true,
           "description": "the error message description"
+        },
+        "innerError": {
+          "$ref": "#/definitions/JobInnerError",
+          "readOnly": true,
+          "description": "the inner error of this specific job error message, if any."
         }
       },
       "description": "The Data Lake Analytics job error details."
@@ -1171,7 +1176,7 @@
         }
       },
       "required": [
-          "recurrenceId"
+        "recurrenceId"
       ],
       "description": "Job relationship information properties including pipeline information, correlation information, etc."
     },
@@ -1260,7 +1265,7 @@
           "items": {
             "$ref": "#/definitions/JobPipelineRunInformation"
           },
-          "description": "the list of recurrence identifiers representing each run of this pipeline."
+          "description": "the list of run identifiers representing each run of this pipeline."
         },
         "recurrences": {
           "type": "array",
@@ -1269,7 +1274,7 @@
             "type": "string",
             "format": "uuid"
           },
-          "description": "the list of recurrence identifiers representing each run of this pipeline."
+          "description": "the list of recurrence identifiers representing each recurrence in this pipeline."
         }
       },
       "description": "Job Pipeline Information, showing the relationship of jobs and recurrences of those jobs in a pipeline."
@@ -1393,7 +1398,7 @@
           "type": "array",
           "items": {
             "type": "string"
-          },        
+          },
           "description": "the list of log file name patterns to find in the logFolder. '*' is the only matching character allowed. Example format: jobExecution*.log or *mylog*.txt"
         },
         "related": {
@@ -1412,7 +1417,7 @@
           "$ref": "#/definitions/BaseJobParameters"
         }
       ],
-        "properties": {
+      "properties": {
         "name": {
           "type": "string",
           "description": "the friendly name of the job to build."
@@ -1548,7 +1553,7 @@
           "type": "array",
           "items": {
             "type": "string"
-          },        
+          },
           "description": "the list of log file name patterns to find in the logFolder. '*' is the only matching character allowed. Example format: jobExecution*.log or *mylog*.txt"
         },
         "related": {
@@ -1603,7 +1608,7 @@
           "items": {
             "$ref": "#/definitions/JobInformationBasic"
           },
-          "description": "the list of jobInfo items."
+          "description": "the list of JobInfo items."
         },
         "nextLink": {
           "type": "string",
@@ -1611,7 +1616,7 @@
           "description": "the link (url) to the next page of results."
         }
       },
-      "description": "List of jobInfo items."
+      "description": "List of JobInfo items."
     }
   },
   "parameters": {

@@ -1211,23 +1211,21 @@
       "description": "The content of an error returned by the Azure Resource Manager",
       "x-ms-external": true
     },
-    "TrafficManagerUserMetricsKeyModel": {
+    "TrafficManagerUserMetricsKeyProperties": {
       "properties": {
-        "id": {
-          "type" : "string",
-          "description": "Fully qualified resource Id for the resource. Ex - /providers/Microsoft.Network/trafficManagerUserMetricsKeys/default"
-        },
-        "name": {
-          "type" : "string",
-          "description": "The word default."
-        },
-        "type": {
-          "type" : "string",
-          "description": "The type of the resource. Ex- Microsoft.Network/trafficManagerUserMetricsKeys."
-        },
         "key": {
           "type" : "string",
-          "description": "The key returned by the Real User Metrics operation."
+          "description": "The key returned by the Realtime User Metrics operation."
+        }
+      },
+      "description": "Class representing the properties of a Real User Metrics key operation response."
+    },
+    "TrafficManagerUserMetricsKeyModel": {
+      "properties": {
+        "properties": {
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/TrafficManagerUserMetricsKeyProperties",
+          "description": "The key property returned from a Realtime User Metrics GET operation."
         }
       },
       "allOf": [

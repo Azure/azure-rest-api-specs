@@ -26,10 +26,18 @@ These are the global settings for the ContainerRegistry API.
 
 ``` yaml
 openapi-type: arm
-tag: package-2017-06-preview
+tag: package-2017-10
 ```
+ 
+### Tag: package-2017-10
 
+These settings apply only when `--tag=package-2017-10` is specified on the command line.
 
+``` yaml $(tag) == 'package-2017-10'
+input-file:
+- Microsoft.ContainerRegistry/2017-10-01/containerregistry.json
+```
+ 
 ### Tag: package-2017-06-preview
 
 These settings apply only when `--tag=package-2017-06-preview` is specified on the command line.
@@ -76,4 +84,52 @@ csharp:
   payload-flattening-threshold: 2
   output-folder: $(csharp-sdks-folder)/ContainerRegistry/Management.ContainerRegistry/Generated
   clear-output-folder: true
+```
+
+
+## Go
+
+These settings apply only when `--go` is specified on the command line.
+
+``` yaml $(go)
+go:
+  license-header: MICROSOFT_APACHE_NO_VERSION
+  namespace: containerregistry
+  clear-output-folder: true
+```
+
+### Tag: package-2017-10 and go
+
+These settings apply only when `--tag=package-2017-10 --go` is specified on he command line.
+Please also specify `--go-sdk-folder=<path to the root directory of your azure-sdk-for-go clone>`.
+
+``` yaml $(tag) == 'package-2017-10' && $(go)
+output-folder: $(go-sdk-folder)/services/containerregistry/mgmt/2017-10-01/containerregistry
+```
+
+### Tag: package-2017-06-preview and go
+
+These settings apply only when `--tag=package-2017-06-preview --go` is specified on he command line.
+Please also specify `--go-sdk-folder=<path to the root directory of your azure-sdk-for-go clone>`.
+
+``` yaml $(tag) == 'package-2017-06-preview' && $(go)
+output-folder: $(go-sdk-folder)/services/containerregistry/mgmt/2017-06-01-preview/containerregistry
+```
+
+### Tag: package-2017-03 and go
+
+These settings apply only when `--tag=package-2017-03 --go` is specified on he command line.
+Please also specify `--go-sdk-folder=<path to the root directory of your azure-sdk-for-go clone>`.
+
+``` yaml $(tag) == 'package-2017-03' && $(go)
+output-folder: $(go-sdk-folder)/services/containerregistry/mgmt/2017-03-01/containerregistry
+```
+
+### Tag: package-2016-06-preview and go
+
+These settings apply only when `--tag=package-2016-06-preview --go` is specified on he command line.
+Please also specify `--go-sdk-folder=<path to the root directory of your azure-sdk-for-go clone>`.
+
+``` yaml $(tag) == 'package-2016-06' && $(go)
+output-folder: $(go-sdk-folder)/services/containerregistry/mgmt/2016-06-27-preview/containerregistry
 ```
