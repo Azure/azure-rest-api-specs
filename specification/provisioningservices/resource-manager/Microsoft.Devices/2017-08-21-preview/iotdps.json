@@ -47,7 +47,7 @@
     "x-ms-examples": {
         "DPSOperations": { "$ref": "./examples/DPSOperations.json" }
     },
-    "description": "Lists all of the available IoT Hub REST API operations.",
+    "description": "Lists all of the available Microsoft.Devices REST API operations.",
     "parameters": [
      {
       "$ref": "#/parameters/api-version"
@@ -90,7 +90,8 @@
       "name": "certificateName",
       "in": "path",
       "required": true,
-      "type": "string"
+      "type": "string",
+      "description": "Name of the certificate to retrieve"
      },
      {
       "$ref": "#/parameters/subscriptionId"
@@ -99,13 +100,15 @@
       "name": "resourceGroupName",
       "in": "path",
       "required": true,
-      "type": "string"
+      "type": "string",
+      "description": "Resource group identifier"
      },
      {
       "name": "provisioningServiceName",
       "in": "path",
       "required": true,
-      "type": "string"
+      "type": "string",
+      "description": "Name of the provisioning service the certificate is assosciated with"
      },
      {
       "name": "If-Match",
@@ -153,7 +156,7 @@
      {
       "name": "resourceGroupName",
       "in": "path",
-      "description": "The name of the resource group that contains the provisioning service.",
+      "description": "Resource group identifier",
       "required": true,
       "type": "string"
      },
@@ -224,44 +227,51 @@
       "name": "resourceGroupName",
       "in": "path",
       "required": true,
-      "type": "string"
+      "type": "string",
+      "description": "Resource group identifier"
      },
      {
       "name": "provisioningServiceName",
       "in": "path",
       "required": true,
-      "type": "string"
+      "type": "string",
+      "description": "The name of the provisioning service."
      },
      {
       "name": "certificateName",
       "in": "path",
       "required": true,
-      "type": "string"
+      "type": "string",
+      "description": "The name of the certificate resource."
      },
      {
       "name": "certificate.name",
       "in": "query",
       "required": false,
-      "type": "string"
+      "type": "string",
+      "description": "The name of the certificate."
      },
      {
       "name": "certificate.rawBytes",
       "in": "query",
       "required": false,
       "type": "string",
-      "format": "byte"
+      "format": "byte",
+      "description": "certificate raw bytes."
      },
      {
       "name": "certificate.isVerified",
       "in": "query",
       "required": false,
-      "type": "boolean"
+      "type": "boolean",
+      "description": "indicator if certificate has been verified by owner of the private key."
      },
      {
       "name": "certificate.purpose",
       "in": "query",
       "required": false,
       "type": "string",
+      "description": "purpose of the certificate",
       "enum": [
        "clientAuthentication",
        "serverAuthentication"
@@ -274,6 +284,7 @@
      {
       "name": "certificate.created",
       "in": "query",
+      "description": "certificate created time",
       "required": false,
       "type": "string",
       "format": "date-time"
@@ -283,13 +294,15 @@
       "in": "query",
       "required": false,
       "type": "string",
+      "description": "certificate last updated time",
       "format": "date-time"
      },
      {
       "name": "certificate.hasPrivateKey",
       "in": "query",
       "required": false,
-      "type": "boolean"
+      "type": "boolean",
+      "description": "certificate contained private key"
      },
      {
       "name": "certificate.nonce",
@@ -333,7 +346,8 @@
       "name": "provisioningServiceName",
       "in": "path",
       "required": true,
-      "type": "string"
+      "type": "string",
+      "description": "name of provisioning service to retrieve"
      },
      {
       "$ref": "#/parameters/subscriptionId"
@@ -342,7 +356,8 @@
       "name": "resourceGroupName",
       "in": "path",
       "required": true,
-      "type": "string"
+      "type": "string",
+      "description": "resource group name"
      },
      {
       "$ref": "#/parameters/api-version"
@@ -388,18 +403,21 @@
       "name": "resourceGroupName",
       "in": "path",
       "required": true,
-      "type": "string"
+      "type": "string",
+      "description": "Resource group identifier"
      },
      {
       "name": "provisioningServiceName",
       "in": "path",
       "required": true,
-      "type": "string"
+      "type": "string",
+      "description": "name of provisioning service to create or update"
      },
      {
       "name": "iotDpsDescription",
       "in": "body",
       "required": true,
+      "description": "description of the provisioning service to create or update",
       "schema": {
        "$ref": "#/definitions/ProvisioningServiceDescription"
       }
@@ -453,7 +471,8 @@
       "name": "provisioningServiceName",
       "in": "path",
       "required": true,
-      "type": "string"
+      "type": "string",
+      "description": "name of provisioning service to delete"
      },
      {
       "$ref": "#/parameters/subscriptionId"
@@ -462,7 +481,8 @@
       "name": "resourceGroupName",
       "in": "path",
       "required": true,
-      "type": "string"
+      "type": "string",
+      "description": "Resource group identifier"
      },
      {
       "$ref": "#/parameters/api-version"
@@ -511,13 +531,15 @@
       "name": "resourceGroupName",
       "in": "path",
       "required": true,
-      "type": "string"
+      "type": "string",
+      "description": "name of resource group"
      },
      {
       "name": "provisioningServiceName",
       "in": "path",
       "required": true,
-      "type": "string"
+      "type": "string",
+      "description": "name of provisioning service to retrieve certificates for"
      },
      {
       "$ref": "#/parameters/api-version"
@@ -598,7 +620,8 @@
       "name": "resourceGroupName",
       "in": "path",
       "required": true,
-      "type": "string"
+      "type": "string",
+      "description": "Resource group identifier"
      },
      {
       "$ref": "#/parameters/api-version"
@@ -641,7 +664,8 @@
       "name": "operationId",
       "in": "path",
       "required": true,
-      "type": "string"
+      "type": "string",
+      "description": "operation id corresponding to long running operation. Use this to poll for the status of long running operation"
      },
      {
       "$ref": "#/parameters/subscriptionId"
@@ -650,18 +674,20 @@
       "name": "resourceGroupName",
       "in": "path",
       "required": true,
-      "type": "string"
+      "type": "string",
+      "description": "Resource group identifier"
      },
      {
       "name": "provisioningServiceName",
       "in": "path",
       "required": true,
-      "type": "string"
+      "type": "string",
+      "description": "name of provisioning service that the operation is running on"
      },
      {
       "name": "asyncinfo",
       "in": "query",
-      "description": "async operation id used to poll on the status of the operation",
+      "description": "async header used to poll on the status of the operation",
       "required": true,
       "type": "string",
       "default": "true"
@@ -702,7 +728,8 @@
       "name": "provisioningServiceName",
       "in": "path",
       "required": true,
-      "type": "string"
+      "type": "string",
+      "description": "name of provisioning service"
      },
      {
       "$ref": "#/parameters/subscriptionId"
@@ -711,7 +738,8 @@
       "name": "resourceGroupName",
       "in": "path",
       "required": true,
-      "type": "string"
+      "type": "string",
+      "description": "name of resource group"
      },
      {
       "$ref": "#/parameters/api-version"
@@ -750,7 +778,8 @@
       "name": "certificateName",
       "in": "path",
       "required": true,
-      "type": "string"
+      "type": "string",
+      "description": "name of certificate"
      },
      {
       "$ref": "#/parameters/subscriptionId"
@@ -759,38 +788,44 @@
       "name": "resourceGroupName",
       "in": "path",
       "required": true,
-      "type": "string"
+      "type": "string",
+      "description": "name of resource group"
      },
      {
       "name": "provisioningServiceName",
       "in": "path",
       "required": true,
-      "type": "string"
+      "type": "string",
+      "description": "name of provisioning service"
      },
      {
       "name": "certificate.name",
       "in": "query",
       "required": false,
-      "type": "string"
+      "type": "string",
+      "description": "certificate subject"
      },
      {
       "name": "certificate.rawBytes",
       "in": "query",
       "required": false,
       "type": "string",
-      "format": "byte"
+      "format": "byte",
+      "description": "raw bytes of certificate"
      },
      {
       "name": "certificate.isVerified",
       "in": "query",
       "required": false,
-      "type": "boolean"
+      "type": "boolean",
+      "description": "indicator if certificate ahs been verified by owner of ther private key"
      },
      {
       "name": "certificate.purpose",
       "in": "query",
       "required": false,
       "type": "string",
+      "description": "purpose of the certificate",
       "enum": [
        "clientAuthentication",
        "serverAuthentication"
@@ -805,20 +840,23 @@
       "in": "query",
       "required": false,
       "type": "string",
-      "format": "date-time"
+      "format": "date-time",
+      "description": "certificate created time"
      },
      {
       "name": "certificate.lastUpdated",
       "in": "query",
       "required": false,
       "type": "string",
-      "format": "date-time"
+      "format": "date-time",
+      "description": "certificate last updated time"
      },
      {
       "name": "certificate.hasPrivateKey",
       "in": "query",
       "required": false,
-      "type": "boolean"
+      "type": "boolean",
+      "description": "certificate contains private key flag"
      },
      {
       "name": "certificate.nonce",
@@ -866,7 +904,8 @@
       "name": "certificateName",
       "in": "path",
       "required": true,
-      "type": "string"
+      "type": "string",
+      "description": "certificate resource name"
      },
      {
       "name": "request",
@@ -883,37 +922,43 @@
       "name": "resourceGroupName",
       "in": "path",
       "required": true,
-      "type": "string"
+      "type": "string",
+      "description": "resource group name"
      },
      {
       "name": "provisioningServiceName",
       "in": "path",
       "required": true,
-      "type": "string"
+      "type": "string",
+      "description": "provisioning service name"
      },
      {
       "name": "certificate.name",
       "in": "query",
       "required": false,
-      "type": "string"
+      "type": "string",
+      "description": "name of the certificate in metadata"
      },
      {
       "name": "certificate.rawBytes",
       "in": "query",
       "required": false,
       "type": "string",
-      "format": "byte"
+      "format": "byte",
+      "description": "raw bytes of certificate"
      },
      {
       "name": "certificate.isVerified",
       "in": "query",
       "required": false,
-      "type": "boolean"
+      "type": "boolean",
+      "description": "indicator of if the certificate has been verified by owner of the private key"
      },
      {
       "name": "certificate.purpose",
       "in": "query",
       "required": false,
+      "description": "purpose of the certificate",
       "type": "string",
       "enum": [
        "clientAuthentication",
@@ -929,20 +974,23 @@
       "in": "query",
       "required": false,
       "type": "string",
-      "format": "date-time"
+      "format": "date-time",
+      "description": "certificate created time"
      },
      {
       "name": "certificate.lastUpdated",
       "in": "query",
       "required": false,
       "type": "string",
-      "format": "date-time"
+      "format": "date-time",
+      "description": "certificate last updated time"
      },
      {
       "name": "certificate.hasPrivateKey",
       "in": "query",
       "required": false,
-      "type": "boolean"
+      "type": "boolean",
+      "description": "certificate contains private key flag"
      },
      {
       "name": "certificate.nonce",
@@ -1030,7 +1078,8 @@
       "name": "provisioningServiceName",
       "in": "path",
       "required": true,
-      "type": "string"
+      "type": "string",
+      "description": "provisioning servicename to get keys for"
      },
      {
       "$ref": "#/parameters/subscriptionId"
@@ -1039,7 +1088,8 @@
       "name": "resourceGroupName",
       "in": "path",
       "required": true,
-      "type": "string"
+      "type": "string",
+      "description": "resource group name"
      },
      {
       "$ref": "#/parameters/api-version"
@@ -1080,13 +1130,15 @@
       "name": "provisioningServiceName",
       "in": "path",
       "required": true,
-      "type": "string"
+      "type": "string",
+      "description": "name of the provisioning service"
      },
      {
       "name": "keyName",
       "in": "path",
       "required": true,
-      "type": "string"
+      "type": "string",
+      "description": "key name to get keys for"
      },
      {
       "$ref": "#/parameters/subscriptionId"
@@ -1122,6 +1174,7 @@
  "definitions": {
   "AsyncOperationResult": {
    "type": "object",
+   "description": "result of a long running operation",
    "properties": {
     "status": {
      "type": "string"
@@ -1132,6 +1185,7 @@
    }
   },
   "ErrorMesssage": {
+   "description": "error response containing message and code",
    "type": "object",
    "properties": {
     "code": {
@@ -1239,6 +1293,7 @@
   },
   "IotDpsSkuInfo": {
    "type": "object",
+   "description": "list of possible provisoning service sku's",
    "properties": {
     "name": {
      "enum": [
@@ -1252,11 +1307,13 @@
     },
     "tier": {
      "type": "string",
-     "readOnly": true
+     "readOnly": true,
+     "description": "provisioning service tier"
     },
     "capacity": {
      "format": "int64",
-     "type": "integer"
+     "type": "integer",
+     "description": "capacity for this sku"
     }
    }
   },
@@ -1288,6 +1345,7 @@
    "type": "object",
    "properties": {
     "state": {
+     "description": "current state of provisioning service",
      "enum": [
       "Activating",
       "Active",
@@ -1309,10 +1367,12 @@
      }
     },
     "provisioningState": {
+     "description": "provisioning state of the provisioning service",
      "type": "string"
     },
     "iotHubs": {
      "type": "array",
+     "description": "list of iot hubs assosciated with this provisioning service",
      "items": {
       "$ref": "#/definitions/IotHubDefinitionDescription"
      }
@@ -1324,19 +1384,26 @@
       "Static"
      ],
      "type": "string",
+     "description": "allocation policy to be used by this provisioning service",
      "x-ms-enum": {
       "name": "AllocationPolicy",
       "modelAsString": true
      }
     },
     "serviceOperationsHostName": {
-     "type": "string"
+     "description": "service endpoint for provisioning service",
+     "type": "string",
+     "readOnly": true
     },
     "deviceProvisioningHostName": {
-     "type": "string"
+     "type": "string",
+     "description": "device endpoint for this provisioning service",
+     "readOnly": true
     },
     "idScope": {
-     "type": "string"
+     "type": "string",
+     "description": "unique identifier of this provisioning service",
+     "readOnly": true
     },
     "authorizationPolicies": {
      "type": "array",
@@ -1358,13 +1425,16 @@
     },
     "name": {
      "type": "string",
-     "readOnly": true
+     "readOnly": true,
+     "description": "host name of the IoT Hub"
     },
     "connectionString": {
-     "type": "string"
+     "type": "string",
+     "description": "connection string og the IoT Hub"
     },
     "location": {
-     "type": "string"
+     "type": "string",
+     "description": "ARM region of the IoT Hub"
     }
    },
    "required": [
@@ -1376,15 +1446,19 @@
    "type": "object",
    "properties": {
     "keyName": {
-     "type": "string"
+     "type": "string",
+     "description": "name of the key"
     },
     "primaryKey": {
-     "type": "string"
+     "type": "string",
+     "description": "primary SAS key value"
     },
     "secondaryKey": {
-     "type": "string"
+     "type": "string",
+     "description": "secondary SAS key value"
     },
     "rights": {
+     "description": "rights that this key has",
      "enum": [
       "ServiceConfig",
       "EnrollmentRead",
@@ -1475,7 +1549,7 @@
       "resource": {
        "readOnly": true,
        "type": "string",
-       "description": "Resource Type: IotHubs"
+       "description": "Resource Type: ProvisioningServices"
       },
       "operation": {
        "readOnly": true,
@@ -1525,6 +1599,7 @@
   },
   "IotDpsSkuDefinitionListResult": {
    "type": "object",
+   "description": "list of available Sku's",
    "properties": {
     "value": {
      "type": "array",
@@ -1540,6 +1615,7 @@
   },
   "IotDpsSkuDefinition": {
    "type": "object",
+   "description": "sku containing tier and units",
    "properties": {
     "name": {
      "enum": [
@@ -1554,7 +1630,7 @@
    }
   },
   "OperationInputs": {
-   "description": "Input values.",
+   "description": "Input values for operationResults",
    "type": "object",
    "properties": {
     "name": {
@@ -1568,6 +1644,7 @@
   },
   "NameAvailabilityInfo": {
    "type": "object",
+   "description": "description of name availability",
    "properties": {
     "nameAvailable": {
      "type": "boolean"
@@ -1590,6 +1667,7 @@
   },
   "ProvisioningServiceDescriptionListResult": {
    "type": "object",
+   "description": "list of provisioning service descriptions",
    "properties": {
     "value": {
      "type": "array",
@@ -1607,36 +1685,46 @@
    "type": "object",
    "properties": {
     "verificationCode": {
-     "type": "string"
+     "type": "string",
+     "description": "verification code"
     },
     "name": {
-     "type": "string"
+     "type": "string",
+     "description": "name of certificate"
     },
     "etag": {
-     "type": "string"
+     "type": "string",
+     "description": "request etag"
     },
     "subject": {
-     "type": "string"
+     "type": "string",
+     "description": "certificate subject"
     },
     "expiry": {
-     "type": "string"
+     "type": "string",
+     "description": "code expiry"
     },
     "thumbprint": {
-     "type": "string"
+     "type": "string",
+     "description": "certificate thumbprint"
     },
     "isVerified": {
-     "type": "boolean"
+     "type": "boolean",
+     "description": "flag is certificate is verified by owner of private key"
     },
     "created": {
-     "type": "string"
+     "type": "string",
+     "description": "certificate created time"
     },
     "updated": {
-     "type": "string"
+     "type": "string",
+     "description": "certificate updated time"
     }
    }
   },
   "VerificationCodeRequest": {
    "type": "object",
+   "description": "certificate to generate verification code for",
    "properties": {
     "certificate": {
      "type": "string"
