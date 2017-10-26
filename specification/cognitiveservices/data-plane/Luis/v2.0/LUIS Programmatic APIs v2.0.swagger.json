@@ -1,0 +1,5225 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "LUIS Programmatic APIs v2.0",
+    "version": "1.0"
+  },
+  "x-ms-parameterized-host": {
+    "hostTemplate": "{AzureRegion}.api.cognitive.microsoft.com",
+    "parameters": [
+      {
+        "name": "AzureRegion",
+        "description": "Supported Azure regions for Cognitive Services endpoints",
+        "x-ms-parameter-location": "client",
+        "required": true,
+        "type": "string",
+        "in": "path",
+        "x-ms-skip-url-encoding": true,
+        "x-nullable": "false",
+        "x-ms-enum": {
+          "name": "AzureRegions",
+          "modelAsString": false
+        },
+        "enum": [
+          "westus",
+          "westeurope"
+        ]
+      }
+    ]
+  },
+  "basePath": "/luis/api/v2.0",
+  "schemes": [
+    "https"
+  ],
+  "securityDefinitions": {
+    "apiKeyHeader": {
+      "type": "apiKey",
+      "name": "Ocp-Apim-Subscription-Key",
+      "in": "header"
+    },
+    "apiKeyQuery": {
+      "type": "apiKey",
+      "name": "subscription-key",
+      "in": "query"
+    }
+  },
+  "security": [
+    {
+      "apiKeyHeader": []
+    },
+    {
+      "apiKeyQuery": []
+    }
+  ],
+  "paths": {
+    "/apps/{appId}/versions/{versionId}/patterns": {
+      "post": {
+        "description": "Creates a new pattern feature.",
+        "operationId": "features - Create pattern feature",
+        "parameters": [
+          {
+            "name": "appId",
+            "in": "path",
+            "description": "Format - guid. The application ID.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "versionId",
+            "in": "path",
+            "description": "The version ID of the task.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "patternCreateObject",
+            "in": "body",
+            "schema": {
+              "$ref": "#/definitions/PatternCreateObject"
+            },
+            "description": "A JSON object containing Name and Pattern of the feature."
+          }
+        ],
+        "consumes": [
+          "application/json"
+        ],
+        "responses": {
+          "201": {
+            "description": "The ID of the created feature.",
+            "examples": {
+              "application/json": "83147"
+            }
+          },
+          "400": {
+            "description": "If the REGEX pattern is too complex.",
+            "examples": {
+              "application/json": {
+                "error": {
+                  "code": "BadArgument",
+                  "message": "Regex is too complex"
+                }
+              }
+            }
+          }
+        },
+        "produces": [
+          "application/json"
+        ]
+      },
+      "get": {
+        "description": "Gets all application version pattern features.",
+        "operationId": "features - Get application version pattern features",
+        "parameters": [
+          {
+            "name": "appId",
+            "in": "path",
+            "description": "Format - guid. The application ID.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "versionId",
+            "in": "path",
+            "description": "The version ID of the task.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "skip",
+            "in": "query",
+            "description": "The number of entries to skip. Default value is 0.",
+            "type": "integer",
+            "default": 0,
+            "x-nullable": "false",
+            "x-ms-enum": {
+              "name": "SkipParameter",
+              "modelAsString": false
+            },
+            "enum": [
+              0
+            ]
+          },
+          {
+            "name": "take",
+            "in": "query",
+            "description": "The number of entries to return. Maximum page size is 500. Default is 100.",
+            "type": "integer",
+            "default": 100,
+            "x-nullable": "false",
+            "x-ms-enum": {
+              "name": "TakeParameter",
+              "modelAsString": false
+            },
+            "enum": [
+              100
+            ]
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "A JSON object containing a list of all pattern features.",
+            "examples": {
+              "application/json": "[  {    \"id\": 89178,    \"name\": \"EmailPattern\",    \"pattern\": \"\\\\b[A-Z0-9._%+-]+@[A-Z0-9.-]+\\\\.[A-Z]{2,}\\\\b\",    \"isActive\": true  }]"
+            }
+          }
+        },
+        "produces": [
+          "application/json"
+        ]
+      }
+    },
+    "/apps/{appId}/versions/{versionId}/phraselists": {
+      "post": {
+        "description": "Creates a new phraselist feature.",
+        "operationId": "features - Create phraselist feature",
+        "parameters": [
+          {
+            "name": "appId",
+            "in": "path",
+            "description": "Format - guid. The application ID.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "versionId",
+            "in": "path",
+            "description": "The version ID of the task.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "phraselistCreateObject",
+            "in": "body",
+            "schema": {
+              "$ref": "#/definitions/PhraselistCreateObject"
+            },
+            "description": "A JSON object containing Name, comma-separated Phrases and the isExchangeable boolean.            Default value for isExchangeable is true."
+          }
+        ],
+        "consumes": [
+          "application/json"
+        ],
+        "responses": {
+          "201": {
+            "description": "The ID of the created feature.",
+            "examples": {
+              "application/json": "1823"
+            }
+          }
+        },
+        "produces": [
+          "application/json"
+        ]
+      },
+      "get": {
+        "description": "Gets all application phraselist features.",
+        "operationId": "features - Get application version phraselist features",
+        "parameters": [
+          {
+            "name": "appId",
+            "in": "path",
+            "description": "Format - guid. The application ID.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "versionId",
+            "in": "path",
+            "description": "The version ID of the task.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "skip",
+            "in": "query",
+            "description": "The number of entries to skip. Default value is 0.",
+            "type": "integer",
+            "default": 0,
+            "x-nullable": "false",
+            "x-ms-enum": {
+              "name": "SkipParameter",
+              "modelAsString": false
+            },
+            "enum": [
+              0
+            ]
+          },
+          {
+            "name": "take",
+            "in": "query",
+            "description": "The number of entries to return. Maximum page size is 500. Default is 100.",
+            "type": "integer",
+            "default": 100,
+            "x-nullable": "false",
+            "x-ms-enum": {
+              "name": "TakeParameter",
+              "modelAsString": false
+            },
+            "enum": [
+              100
+            ]
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "A JSON object containing a list of all phraselist features.",
+            "examples": {
+              "application/json": "[  {    \"id\": 321421,    \"name\": \"Cities\",    \"phrases\": \"Seattle,New York,Paris,Moscow,Beijin\",    \"isExchangeable\": true,    \"isActive\": true  },  {    \"id\": 97832,    \"name\": \"DaysOfWeek\",    \"phrases\": \"monday,tuesday,wednesday,thursday,friday,saturday,sunday\",    \"isExchangeable\": true,    \"isActive\": true  }]"
+            }
+          }
+        },
+        "produces": [
+          "application/json"
+        ]
+      }
+    },
+    "/apps/{appId}/versions/{versionId}/features": {
+      "get": {
+        "description": "Gets all application version features.",
+        "operationId": "features - Get application version features",
+        "parameters": [
+          {
+            "name": "appId",
+            "in": "path",
+            "description": "Format - guid. The application ID.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "versionId",
+            "in": "path",
+            "description": "The version ID of the task.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "skip",
+            "in": "query",
+            "description": "The number of entries to skip. Default value is 0.",
+            "type": "integer",
+            "default": 0,
+            "x-nullable": "false",
+            "x-ms-enum": {
+              "name": "SkipParameter",
+              "modelAsString": false
+            },
+            "enum": [
+              0
+            ]
+          },
+          {
+            "name": "take",
+            "in": "query",
+            "description": "The number of entries to return. Maximum page size is 500. Default is 100.",
+            "type": "integer",
+            "default": 100,
+            "x-nullable": "false",
+            "x-ms-enum": {
+              "name": "TakeParameter",
+              "modelAsString": false
+            },
+            "enum": [
+              100
+            ]
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "A JSON object containing a list of all phraselist features and a list of all pattern featuers in the application.",
+            "examples": {
+              "application/json": {
+                "phraselistFeatures": [
+                  {
+                    "id": 5341,
+                    "name": "Cities",
+                    "phrases": "Seattle,New York,Paris,Moscow,Beijin",
+                    "isExchangeable": true,
+                    "isActive": true
+                  },
+                  {
+                    "id": 74598,
+                    "name": "DaysOfWeek",
+                    "phrases": "monday,tuesday,wednesday,thursday,friday,saturday,sunday",
+                    "isExchangeable": true,
+                    "isActive": true
+                  }
+                ],
+                "patternFeatures": [
+                  {
+                    "id": 81231,
+                    "name": "EmailPattern",
+                    "pattern": "\\b[A-Z0-9._%+-]+@[A-Z0-9.-]+\\.[A-Z]{2,}\\b",
+                    "isActive": true
+                  }
+                ]
+              }
+            }
+          }
+        },
+        "produces": [
+          "application/json"
+        ]
+      }
+    },
+    "/apps/{appId}/versions/{versionId}/patterns/{patternId}": {
+      "get": {
+        "description": "Gets pattern feature info.",
+        "operationId": "features - Get pattern feature info",
+        "parameters": [
+          {
+            "name": "appId",
+            "in": "path",
+            "description": "Format - guid. The application ID.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "versionId",
+            "in": "path",
+            "description": "The version ID of the task.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "patternId",
+            "in": "path",
+            "description": "The pattern feature ID.",
+            "required": true,
+            "type": "integer"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "A JSON object containing the pattern feature info.",
+            "examples": {
+              "application/json": {
+                "id": 7892,
+                "name": "EmailPattern",
+                "pattern": "\\b[A-Z0-9._%+-]+@[A-Z0-9.-]+\\.[A-Z]{2,}\\b",
+                "isActive": true
+              }
+            }
+          }
+        },
+        "produces": [
+          "application/json"
+        ]
+      },
+      "put": {
+        "description": "Updates the pattern, the name and the state of the pattern feature.",
+        "operationId": "features - Update pattern feature",
+        "parameters": [
+          {
+            "name": "appId",
+            "in": "path",
+            "description": "Format - guid. The application ID.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "versionId",
+            "in": "path",
+            "description": "The version ID of the task.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "patternId",
+            "in": "path",
+            "description": "The ID of the feature to be updated.",
+            "required": true,
+            "type": "integer"
+          },
+          {
+            "name": "patternUpdateObject",
+            "in": "body",
+            "schema": {
+              "$ref": "#/definitions/PatternUpdateObject"
+            },
+            "description": "A JSON object containing either:</br>1- Just a boolean called IsActive, in which case the status of the feature will be changed.</br>2- Name, Pattern and a boolean called IsActive to update the feature."
+          }
+        ],
+        "consumes": [
+          "application/json"
+        ],
+        "responses": {
+          "200": {
+            "description": ""
+          }
+        }
+      },
+      "delete": {
+        "description": "Deletes a pattern feature from an application version.",
+        "operationId": "features - Delete pattern feature",
+        "parameters": [
+          {
+            "name": "appId",
+            "in": "path",
+            "description": "Format - guid. The application ID.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "versionId",
+            "in": "path",
+            "description": "The version ID of the task.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "patternId",
+            "in": "path",
+            "description": "The ID of the pattern feature to be deleted.",
+            "required": true,
+            "type": "integer"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": ""
+          }
+        }
+      }
+    },
+    "/apps/{appId}/versions/{versionId}/phraselists/{phraselistId}": {
+      "get": {
+        "description": "Gets phraselist feature info.",
+        "operationId": "features - Get phraselist feature info",
+        "parameters": [
+          {
+            "name": "appId",
+            "in": "path",
+            "description": "Format - guid. The application ID.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "versionId",
+            "in": "path",
+            "description": "The version ID of the task.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "phraselistId",
+            "in": "path",
+            "description": "The phraselist feature ID.",
+            "required": true,
+            "type": "integer"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "A JSON object containing the phraselist feature info.",
+            "examples": {
+              "application/json": {
+                "id": 178384,
+                "name": "DaysOfWeek",
+                "phrases": "monday,tuesday,wednesday,thursday,friday,saturday,sunday",
+                "isExchangeable": true,
+                "isActive": true
+              }
+            }
+          }
+        },
+        "produces": [
+          "application/json"
+        ]
+      },
+      "put": {
+        "description": "Updates the phrases, the state and the name of the phraselist feature.",
+        "operationId": "features - Update phraselist feature",
+        "parameters": [
+          {
+            "name": "appId",
+            "in": "path",
+            "description": "Format - guid. The application ID.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "versionId",
+            "in": "path",
+            "description": "The version ID of the task.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "phraselistId",
+            "in": "path",
+            "description": "The ID of the feature to be updated.",
+            "required": true,
+            "type": "integer"
+          },
+          {
+            "name": "phraselistUpdateObject",
+            "in": "body",
+            "schema": {
+              "$ref": "#/definitions/PhraselistUpdateObject"
+            },
+            "description": "A JSON object containing either:</br>1- Just a boolean called IsActive, in which case the status of the feature will be changed.</br>2- Name, Pattern, Mode, and a boolean called IsActive to update the feature."
+          }
+        ],
+        "consumes": [
+          "application/json"
+        ],
+        "responses": {
+          "200": {
+            "description": ""
+          }
+        }
+      },
+      "delete": {
+        "description": "Deletes a phraselist feature from an application.",
+        "operationId": "features - Delete phraselist feature",
+        "parameters": [
+          {
+            "name": "appId",
+            "in": "path",
+            "description": "Format - guid. The application ID.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "versionId",
+            "in": "path",
+            "description": "The version ID of the task.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "phraselistId",
+            "in": "path",
+            "description": "The ID of the feature to be deleted.",
+            "required": true,
+            "type": "integer"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": ""
+          }
+        }
+      }
+    },
+    "/apps/{appId}/versions/{versionId}/example": {
+      "post": {
+        "description": "Adds a labeled example to the application.",
+        "operationId": "examples - Add label",
+        "parameters": [
+          {
+            "name": "appId",
+            "in": "path",
+            "description": "Format - guid. The application ID.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "versionId",
+            "in": "path",
+            "description": "The task version ID.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "exampleLabelObject",
+            "in": "body",
+            "schema": {
+              "$ref": "#/definitions/ExampleLabelObject"
+            },
+            "description": "A JSON object containing the example label."
+          }
+        ],
+        "consumes": [
+          "application/json"
+        ],
+        "responses": {
+          "201": {
+            "description": "The ID of the created example.",
+            "examples": {
+              "application/json": {
+                "UtteranceText": "book me a flight from cairo to redmond next thursday",
+                "ExampleId": -11
+              }
+            }
+          }
+        },
+        "produces": [
+          "application/json"
+        ]
+      }
+    },
+    "/apps/{appId}/versions/{versionId}/examples": {
+      "post": {
+        "description": "Adds a batch of labeled examples to the specified application.",
+        "operationId": "examples - Batch add labels",
+        "parameters": [
+          {
+            "name": "appId",
+            "in": "path",
+            "description": "Format - guid. The application ID.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "versionId",
+            "in": "path",
+            "description": "The task version ID.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "exampleLabelObjectArray",
+            "in": "body",
+            "schema": {
+              "$ref": "#/definitions/ExampleLabelObjectArray"
+            },
+            "description": "A JSON array containing example labels."
+          }
+        ],
+        "consumes": [
+          "application/json"
+        ],
+        "responses": {
+          "201": {
+            "description": "A string array determining which labels were added successfully.",
+            "examples": {
+              "application/json": "[  {    \"value\": {      \"UtteranceText\": \"book me a flight from cairo to redmond next thursday\",      \"ExampleId\": -11    },    \"hasError\": false  },  {    \"value\": {      \"UtteranceText\": \"what's the weather like in seattle?\",      \"ExampleId\": -12    },    \"hasError\": false  }]"
+            }
+          }
+        },
+        "produces": [
+          "application/json"
+        ]
+      },
+      "get": {
+        "description": "Returns examples to be reviewed.",
+        "operationId": "examples - Review labeled examples",
+        "parameters": [
+          {
+            "name": "appId",
+            "in": "path",
+            "description": "Format - guid. The application ID.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "versionId",
+            "in": "path",
+            "description": "The task version ID.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "skip",
+            "in": "query",
+            "description": "The number of entries to skip. Default value is 0.",
+            "type": "integer",
+            "default": 0,
+            "x-nullable": "false",
+            "x-ms-enum": {
+              "name": "SkipParameter",
+              "modelAsString": false
+            },
+            "enum": [
+              0
+            ]
+          },
+          {
+            "name": "take",
+            "in": "query",
+            "description": "The number of entries to return. Maximum page size is 500. Default is 100.",
+            "type": "integer",
+            "default": 100,
+            "x-nullable": "false",
+            "x-ms-enum": {
+              "name": "TakeParameter",
+              "modelAsString": false
+            },
+            "enum": [
+              100
+            ]
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "A list of predictions and label pairs for every example in the application.",
+            "examples": {
+              "application/json": "[  {    \"id\": -12,    \"text\": \"what's the weather like in seattle?\",    \"tokenizedText\": [      \"what\",      \"'\",      \"s\",      \"the\",      \"weather\",      \"like\",      \"in\",      \"seattle\",      \"?\"    ],    \"intentLabel\": \"GetWeather\",    \"entityLabels\": [      {        \"entityName\": \"Location\",        \"startTokenIndex\": 7,        \"endTokenIndex\": 7      }    ],    \"intentPredictions\": [      {        \"name\": \"GetWeather\",        \"score\": 1      },      {        \"name\": \"None\",        \"score\": 0.21      },      {        \"name\": \"BookFlight\",        \"score\": 0      }    ],    \"entityPredictions\": [      {        \"entityName\": \"Location\",        \"startIndex\": 7,        \"endIndex\": 7,        \"phrase\": \"seattle\"      }    ]  },  {    \"id\": -11,    \"text\": \"book me a flight from cairo to redmond next thursday\",    \"tokenizedText\": [      \"book\",      \"me\",      \"a\",      \"flight\",      \"from\",      \"cairo\",      \"to\",      \"redmond\",      \"next\",      \"thursday\"    ],    \"intentLabel\": \"BookFlight\",    \"entityLabels\": [      {        \"entityName\": \"Location::To\",        \"startTokenIndex\": 7,        \"endTokenIndex\": 7      },      {        \"entityName\": \"Location::From\",        \"startTokenIndex\": 5,        \"endTokenIndex\": 5      }    ],    \"intentPredictions\": [      {        \"name\": \"BookFlight\",        \"score\": 0.93      },      {        \"name\": \"None\",        \"score\": 0.41      },      {        \"name\": \"GetWeather\",        \"score\": 0      }    ],    \"entityPredictions\": [      {        \"entityName\": \"datetime\",        \"startIndex\": 8,        \"endIndex\": 9,        \"phrase\": \"next thursday\"      }    ]  },  {    \"id\": -10,    \"text\": \"what's the weather like in paris?\",    \"tokenizedText\": [      \"what\",      \"'\",      \"s\",      \"the\",      \"weather\",      \"like\",      \"in\",      \"paris\",      \"?\"    ],    \"intentLabel\": \"GetWeather\",    \"entityLabels\": [      {        \"entityName\": \"Location\",        \"startTokenIndex\": 7,        \"endTokenIndex\": 7      }    ],    \"intentPredictions\": [      {        \"name\": \"GetWeather\",        \"score\": 1      },      {        \"name\": \"None\",        \"score\": 0.18      },      {        \"name\": \"BookFlight\",        \"score\": 0      }    ],    \"entityPredictions\": [      {        \"entityName\": \"Location\",        \"startIndex\": 7,        \"endIndex\": 7,        \"phrase\": \"paris\"      }    ]  },  {    \"id\": -9,    \"text\": \"book me a flight from redmond to new york next saturday\",    \"tokenizedText\": [      \"book\",      \"me\",      \"a\",      \"flight\",      \"from\",      \"redmond\",      \"to\",      \"new\",      \"york\",      \"next\",      \"saturday\"    ],    \"intentLabel\": \"BookFlight\",    \"entityLabels\": [      {        \"entityName\": \"Location::To\",        \"startTokenIndex\": 7,        \"endTokenIndex\": 8      },      {        \"entityName\": \"Location::From\",        \"startTokenIndex\": 5,        \"endTokenIndex\": 5      }    ],    \"intentPredictions\": [      {        \"name\": \"BookFlight\",        \"score\": 1      },      {        \"name\": \"None\",        \"score\": 0.16      },      {        \"name\": \"GetWeather\",        \"score\": 0      }    ],    \"entityPredictions\": [      {        \"entityName\": \"Location::From\",        \"startIndex\": 5,        \"endIndex\": 5,        \"phrase\": \"redmond\"      },      {        \"entityName\": \"Location::To\",        \"startIndex\": 7,        \"endIndex\": 8,        \"phrase\": \"new york\"      },      {        \"entityName\": \"datetime\",        \"startIndex\": 9,        \"endIndex\": 10,        \"phrase\": \"next saturday\"      }    ]  }]"
+            }
+          }
+        },
+        "produces": [
+          "application/json"
+        ]
+      }
+    },
+    "/apps/{appId}/versions/{versionId}/examples/{exampleId}": {
+      "delete": {
+        "description": "Deletes the label with the specified ID.",
+        "operationId": "examples - Delete example labels",
+        "parameters": [
+          {
+            "name": "appId",
+            "in": "path",
+            "description": "Format - guid. The application ID.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "versionId",
+            "in": "path",
+            "description": "The task version ID.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "exampleId",
+            "in": "path",
+            "description": "The example ID.",
+            "required": true,
+            "type": "integer"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": ""
+          }
+        }
+      }
+    },
+    "/apps/{appId}/versions/{versionId}/intents": {
+      "post": {
+        "description": "Adds an intent classifier to the application.",
+        "operationId": "models - Create intent classifier",
+        "parameters": [
+          {
+            "name": "appId",
+            "in": "path",
+            "description": "Format - guid. ID of the application.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "versionId",
+            "in": "path",
+            "description": "The task version ID.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "modelCreateObject",
+            "in": "body",
+            "schema": {
+              "$ref": "#/definitions/ModelCreateObject"
+            },
+            "description": "A model object containing the name of the new intent classifier."
+          }
+        ],
+        "consumes": [
+          "application/json"
+        ],
+        "responses": {
+          "201": {
+            "description": "The ID of the created model.",
+            "examples": {
+              "application/json": "\"227a71ed-7d4b-4dce-8f3a-16c4e5cc06e8\""
+            }
+          }
+        },
+        "produces": [
+          "application/json"
+        ]
+      },
+      "get": {
+        "description": "Gets information about the intent models.",
+        "operationId": "models - Get application version intent infos",
+        "parameters": [
+          {
+            "name": "appId",
+            "in": "path",
+            "description": "Format - guid. The application ID.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "versionId",
+            "in": "path",
+            "description": "The task version ID.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "skip",
+            "in": "query",
+            "description": "The number of entries to skip. Default value is 0.",
+            "type": "integer",
+            "default": 0,
+            "x-nullable": "false",
+            "x-ms-enum": {
+              "name": "SkipParameter",
+              "modelAsString": false
+            },
+            "enum": [
+              0
+            ]
+          },
+          {
+            "name": "take",
+            "in": "query",
+            "description": "The number of entries to return. Maximum page size is 500. Default is 100.",
+            "type": "integer",
+            "default": 100,
+            "x-nullable": "false",
+            "x-ms-enum": {
+              "name": "TakeParameter",
+              "modelAsString": false
+            },
+            "enum": [
+              100
+            ]
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "A list of intent model infos.",
+            "examples": {
+              "application/json": "[  {    \"id\": \"227a71ed-7d4b-4dce-8f3a-16c4e5cc06e8\",    \"name\": \"BookFlight\",    \"typeId\": 0,    \"readableType\": \"Intent Classifier\"  },  {    \"id\": \"8285a9ee-6bc0-4409-87f4-82d539f70529\",    \"name\": \"None\",    \"typeId\": 0,    \"readableType\": \"Intent Classifier\"  },  {    \"id\": \"9500536f-ffec-4fab-93ad-6268abb0f73c\",    \"name\": \"$Camera.CapturePhoto\",    \"typeId\": 0,    \"readableType\": \"Intent Classifier\",    \"customPrebuiltDomainName\": \"Camera\",    \"customPrebuiltModelName\": \"CapturePhoto\"  },]"
+            }
+          }
+        },
+        "produces": [
+          "application/json"
+        ]
+      }
+    },
+    "/apps/{appId}/versions/{versionId}/entities": {
+      "post": {
+        "description": "Adds an entity extractor to the application.",
+        "operationId": "models - Create entity extractor",
+        "parameters": [
+          {
+            "name": "appId",
+            "in": "path",
+            "description": "Format - guid. The application ID.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "versionId",
+            "in": "path",
+            "description": "The task version ID.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "modelCreateObject",
+            "in": "body",
+            "schema": {
+              "$ref": "#/definitions/ModelCreateObject"
+            },
+            "description": "A model object containing the name for the new entity extractor."
+          }
+        ],
+        "consumes": [
+          "application/json"
+        ],
+        "responses": {
+          "201": {
+            "description": "The ID of the created model.",
+            "examples": {
+              "application/json": "\"3d73462d-98f0-4dcd-8d30-fab9e65f2e73\""
+            }
+          }
+        },
+        "produces": [
+          "application/json"
+        ]
+      },
+      "get": {
+        "description": "Gets information about the entity models.",
+        "operationId": "models - Get application version entity infos",
+        "parameters": [
+          {
+            "name": "appId",
+            "in": "path",
+            "description": "Format - guid. The application ID.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "versionId",
+            "in": "path",
+            "description": "The task version ID.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "skip",
+            "in": "query",
+            "description": "The number of entries to skip. Default value is 0.",
+            "type": "integer",
+            "default": 0,
+            "x-nullable": "false",
+            "x-ms-enum": {
+              "name": "SkipParameter",
+              "modelAsString": false
+            },
+            "enum": [
+              0
+            ]
+          },
+          {
+            "name": "take",
+            "in": "query",
+            "description": "The number of entries to return. Maximum page size is 500. Default is 100.",
+            "type": "integer",
+            "default": 100,
+            "x-nullable": "false",
+            "x-ms-enum": {
+              "name": "TakeParameter",
+              "modelAsString": false
+            },
+            "enum": [
+              100
+            ]
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "A list of entity model infos.",
+            "examples": {
+              "application/json": "[  {    \"id\": \"3d73462d-98f0-4dcd-8d30-fab9e65f2e73\",    \"name\": \"DayOfWeek\",    \"typeId\": 1,    \"readableType\": \"Entity Extractor\"  },  {    \"id\": \"b8e31be4-300f-455e-894b-6f079abca0a2\",    \"name\": \"$Camera.AppName\",    \"typeId\": 1,    \"readableType\": \"Entity Extractor\",    \"customPrebuiltDomainName\": \"Camera\",    \"customPrebuiltModelName\": \"AppName\"  }]"
+            }
+          }
+        },
+        "produces": [
+          "application/json"
+        ]
+      }
+    },
+    "/apps/{appId}/versions/{versionId}/hierarchicalentities": {
+      "post": {
+        "description": "Adds a hierarchical entity extractor to the application version.",
+        "operationId": "models - Create hierarchical entity extractor",
+        "parameters": [
+          {
+            "name": "appId",
+            "in": "path",
+            "description": "Format - guid. The application ID.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "versionId",
+            "in": "path",
+            "description": "The task version ID.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "hierarchicalModelCreateObject",
+            "in": "body",
+            "schema": {
+              "$ref": "#/definitions/HierarchicalModelCreateObject"
+            },
+            "description": "A model object containing the name and children of the new entity extractor."
+          }
+        ],
+        "consumes": [
+          "application/json"
+        ],
+        "responses": {
+          "201": {
+            "description": "The ID of the created model.",
+            "examples": {
+              "application/json": "\"fe559c31-9778-42ea-ba45-94e0bd7cf767\""
+            }
+          }
+        },
+        "produces": [
+          "application/json"
+        ]
+      },
+      "get": {
+        "description": "Gets information about the hierarchical entity models.",
+        "operationId": "models - Get application version hierarchical entity infos",
+        "parameters": [
+          {
+            "name": "appId",
+            "in": "path",
+            "description": "Format - guid. The application ID.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "versionId",
+            "in": "path",
+            "description": "The task version ID.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "skip",
+            "in": "query",
+            "description": "The number of entries to skip. Default value is 0.",
+            "type": "integer",
+            "default": 0,
+            "x-nullable": "false",
+            "x-ms-enum": {
+              "name": "SkipParameter",
+              "modelAsString": false
+            },
+            "enum": [
+              0
+            ]
+          },
+          {
+            "name": "take",
+            "in": "query",
+            "description": "The number of entries to return. Maximum page size is 500. Default is 100.",
+            "type": "integer",
+            "default": 100,
+            "x-nullable": "false",
+            "x-ms-enum": {
+              "name": "TakeParameter",
+              "modelAsString": false
+            },
+            "enum": [
+              100
+            ]
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "A list of hierarchical entity model infos.",
+            "examples": {
+              "application/json": "[  {    \"id\": \"fe559c31-9778-42ea-ba45-94e0bd7cf767\",    \"name\": \"Location\",    \"typeId\": 3,    \"readableType\": \"Hierarchical Entity Extractor\",    \"children\": [      {        \"id\": \"ec076676-d8d9-42fa-a44e-87989c0a2f82\",        \"name\": \"From\"      },      {        \"id\": \"63ebd752-4e81-4ce7-a698-b59b82bf5519\",        \"name\": \"To\"      }    ]  }]"
+            }
+          }
+        },
+        "produces": [
+          "application/json"
+        ]
+      }
+    },
+    "/apps/{appId}/versions/{versionId}/compositeentities": {
+      "post": {
+        "description": "Adds a composite entity extractor to the application.",
+        "operationId": "models - Create composite entity extractor",
+        "parameters": [
+          {
+            "name": "appId",
+            "in": "path",
+            "description": "Format - guid. The application ID.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "versionId",
+            "in": "path",
+            "description": "The task version ID.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "hierarchicalModelCreateObject",
+            "in": "body",
+            "schema": {
+              "$ref": "#/definitions/HierarchicalModelCreateObject"
+            },
+            "description": "A model object containing the name and children of the new entity extractor."
+          }
+        ],
+        "consumes": [
+          "application/json"
+        ],
+        "responses": {
+          "201": {
+            "description": "The ID of the created Model.",
+            "examples": {
+              "application/json": "\"bc1bae43-7904-48ad-a165-88b1910174f9\""
+            }
+          }
+        },
+        "produces": [
+          "application/json"
+        ]
+      },
+      "get": {
+        "description": "Gets information about the composite entity models.",
+        "operationId": "models - Get application version composite entity infos",
+        "parameters": [
+          {
+            "name": "appId",
+            "in": "path",
+            "description": "Format - guid. The application ID.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "versionId",
+            "in": "path",
+            "description": "The task version ID.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "skip",
+            "in": "query",
+            "description": "The number of entries to skip. Default value is 0.",
+            "type": "integer",
+            "default": 0,
+            "x-nullable": "false",
+            "x-ms-enum": {
+              "name": "SkipParameter",
+              "modelAsString": false
+            },
+            "enum": [
+              0
+            ]
+          },
+          {
+            "name": "take",
+            "in": "query",
+            "description": "The number of entries to return. Maximum page size is 500. Default is 100.",
+            "type": "integer",
+            "default": 100,
+            "x-nullable": "false",
+            "x-ms-enum": {
+              "name": "TakeParameter",
+              "modelAsString": false
+            },
+            "enum": [
+              100
+            ]
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "A list of composite entity model infos.",
+            "examples": {
+              "application/json": "[  {    \"id\": \"bc1bae43-7904-48ad-a165-88b1910174f9\",    \"name\": \"Reservation\",    \"typeId\": 4,    \"readableType\": \"Composite Entity Extractor\",    \"children\": [      {        \"id\": \"63ebd752-4e81-4ce7-a698-b59b82bf5519\",        \"name\": \"Location::To\"      },      {        \"id\": \"a18eaa87-ecd9-4a67-a951-e70cf5b87c7e\",        \"name\": \"datetime\"      }    ]  }]"
+            }
+          }
+        },
+        "produces": [
+          "application/json"
+        ]
+      }
+    },
+    "/apps/{appId}/versions/{versionId}/closedlists": {
+      "post": {
+        "description": "Adds a closed list model to the application.",
+        "operationId": "models - Create closed list entity model",
+        "parameters": [
+          {
+            "name": "appId",
+            "in": "path",
+            "description": "Format - guid. The application ID.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "versionId",
+            "in": "path",
+            "description": "The task version ID.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "closedListModelCreateObject",
+            "in": "body",
+            "schema": {
+              "$ref": "#/definitions/ClosedListModelCreateObject"
+            },
+            "description": "A model object containing the name and words for the new closed list entity extractor."
+          }
+        ],
+        "consumes": [
+          "application/json"
+        ],
+        "responses": {
+          "201": {
+            "description": "The ID of the created model.",
+            "examples": {
+              "application/json": "\"8713b104-78ec-4c4f-9f96-f2e53562cc16\""
+            }
+          }
+        },
+        "produces": [
+          "application/json"
+        ]
+      },
+      "get": {
+        "description": "Gets information about the closedlist models.",
+        "operationId": "models - Get application version closed list infos",
+        "parameters": [
+          {
+            "name": "appId",
+            "in": "path",
+            "description": "Format - guid. The application ID.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "versionId",
+            "in": "path",
+            "description": "The task version ID.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "skip",
+            "in": "query",
+            "description": "The number of entries to skip. Default value is 0.",
+            "type": "integer",
+            "default": 0,
+            "x-nullable": "false",
+            "x-ms-enum": {
+              "name": "SkipParameter",
+              "modelAsString": false
+            },
+            "enum": [
+              0
+            ]
+          },
+          {
+            "name": "take",
+            "in": "query",
+            "description": "The number of entries to return. Maximum page size is 500. Default is 100.",
+            "type": "integer",
+            "default": 100,
+            "x-nullable": "false",
+            "x-ms-enum": {
+              "name": "TakeParameter",
+              "modelAsString": false
+            },
+            "enum": [
+              100
+            ]
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "A list of closedlist entity model infos.",
+            "examples": {
+              "application/json": "[  {    \"id\": \"8713b104-78ec-4c4f-9f96-f2e53562cc16\",    \"name\": \"States\",    \"typeId\": 5,    \"readableType\": \"Closed List Entity Extractor\",    \"subLists\": [      {        \"id\": 1,        \"canonicalForm\": \"new york\",        \"list\": [          \"ny\",          \"new york\"        ]      },      {        \"id\": 2,        \"canonicalForm\": \"washington\",        \"list\": [          \"washington\",          \"wa\"        ]      },      {        \"id\": 3,        \"canonicalForm\": \"california\",        \"list\": [          \"california\",          \"ca\",          \"calif.\",          \"cal.\"        ]      }    ]  }]"
+            }
+          }
+        },
+        "produces": [
+          "application/json"
+        ]
+      }
+    },
+    "/apps/{appId}/versions/{versionId}/prebuilts": {
+      "post": {
+        "description": "Adds a list of prebuilt entity extractors to the application.",
+        "operationId": "models - Add prebuilt entity extractors",
+        "parameters": [
+          {
+            "name": "appId",
+            "in": "path",
+            "description": "Format - guid. The application ID.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "versionId",
+            "in": "path",
+            "description": "The task version ID.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "prebuiltExtractorNames",
+            "in": "body",
+            "schema": {
+              "$ref": "#/definitions/PrebuiltExtractorNames"
+            },
+            "description": "An array of prebuilt entity extractor names."
+          }
+        ],
+        "consumes": [
+          "application/json"
+        ],
+        "responses": {
+          "201": {
+            "description": "An array of the created prebuilt extractor infos.",
+            "examples": {
+              "application/json": "[  {    \"id\": \"a18eaa87-ecd9-4a67-a951-e70cf5b87c7e\",    \"name\": \"datetime\",    \"typeId\": 2,    \"readableType\": \"Prebuilt Entity Extractor\"  }]"
+            }
+          }
+        },
+        "produces": [
+          "application/json"
+        ]
+      },
+      "get": {
+        "description": "Gets information about the prebuilt entity models.",
+        "operationId": "models - Get application version prebuilt infos",
+        "parameters": [
+          {
+            "name": "appId",
+            "in": "path",
+            "description": "Format - guid. The application ID.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "versionId",
+            "in": "path",
+            "description": "The task version ID.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "skip",
+            "in": "query",
+            "description": "The number of entries to skip. Default value is 0.",
+            "type": "integer",
+            "default": 0,
+            "x-nullable": "false",
+            "x-ms-enum": {
+              "name": "SkipParameter",
+              "modelAsString": false
+            },
+            "enum": [
+              0
+            ]
+          },
+          {
+            "name": "take",
+            "in": "query",
+            "description": "The number of entries to return. Maximum page size is 500. Default is 100.",
+            "type": "integer",
+            "default": 100,
+            "x-nullable": "false",
+            "x-ms-enum": {
+              "name": "TakeParameter",
+              "modelAsString": false
+            },
+            "enum": [
+              100
+            ]
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "A list of prebuilt entity models infos.",
+            "examples": {
+              "application/json": "[  {    \"id\": \"a18eaa87-ecd9-4a67-a951-e70cf5b87c7e\",    \"name\": \"datetime\",    \"typeId\": 2,    \"readableType\": \"Prebuilt Entity Extractor\"  }]"
+            }
+          }
+        },
+        "produces": [
+          "application/json"
+        ]
+      }
+    },
+    "/apps/{appId}/versions/{versionId}/listprebuilts": {
+      "get": {
+        "description": "Gets all the available prebuilt entity extractors for the application.",
+        "operationId": "models - Get available prebuilt entity extractors",
+        "parameters": [
+          {
+            "name": "appId",
+            "in": "path",
+            "description": "Format - guid. The application ID.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "versionId",
+            "in": "path",
+            "description": "The task version ID.",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "A list of the possible prebuilt entity extractors.",
+            "examples": {
+              "application/json": "[  {    \"name\": \"geography\",    \"description\": \"Continents, Countries, Cities, Post codes, and other points of interest\",    \"examples\": \"Antarctica, Portugal, Dubai, Sanjiang County, Lake Pontchartrain, CB3 0DS\"  },  {    \"name\": \"datetime\",    \"description\": \"Dates and times, resolved to a canonical form\",    \"examples\": \"June 23, 1976, Jul 11 2012, 7 AM, 6:49 PM, tomorrow at 7 AM\"  },  {    \"name\": \"email\",    \"description\": \"Email Addresses\",    \"examples\": \"user@site.net, user_name@mysite.com.eg\"  },  {    \"name\": \"url\",    \"description\": \"Websites URLs\",    \"examples\": \"www.website.com, http://website.net?name=my_name&age=10, https://www.mywebsite.net.eg/page\"  },  {    \"name\": \"phoneNumber\",    \"description\": \"US phone numbers\",    \"examples\": \"123-456-7890, +1 123 456 789, (123)456-789\"  }]"
+            }
+          }
+        },
+        "produces": [
+          "application/json"
+        ]
+      }
+    },
+    "/apps/{appId}/versions/{versionId}/models": {
+      "get": {
+        "description": "Gets information about the application version models.",
+        "operationId": "models - Get application version model infos",
+        "parameters": [
+          {
+            "name": "appId",
+            "in": "path",
+            "description": "Format - guid. The application ID.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "versionId",
+            "in": "path",
+            "description": "The task version ID.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "skip",
+            "in": "query",
+            "description": "The number of entries to skip. Default value is 0.",
+            "type": "integer",
+            "default": 0,
+            "x-nullable": "false",
+            "x-ms-enum": {
+              "name": "SkipParameter",
+              "modelAsString": false
+            },
+            "enum": [
+              0
+            ]
+          },
+          {
+            "name": "take",
+            "in": "query",
+            "description": "The number of entries to return. Maximum page size is 500. Default is 100.",
+            "type": "integer",
+            "default": 100,
+            "x-nullable": "false",
+            "x-ms-enum": {
+              "name": "TakeParameter",
+              "modelAsString": false
+            },
+            "enum": [
+              100
+            ]
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "A list of application models infos.",
+            "examples": {
+              "application/json": "[  {    \"id\": \"227a71ed-7d4b-4dce-8f3a-16c4e5cc06e8\",    \"name\": \"BookFlight\",    \"typeId\": 0,    \"readableType\": \"Intent Classifier\"  },  {    \"id\": \"a18eaa87-ecd9-4a67-a951-e70cf5b87c7e\",    \"name\": \"datetime\",    \"typeId\": 2,    \"readableType\": \"Prebuilt Entity Extractor\"  },  {    \"id\": \"3d73462d-98f0-4dcd-8d30-fab9e65f2e73\",    \"name\": \"DayOfWeek\",    \"typeId\": 1,    \"readableType\": \"Entity Extractor\"  },  {    \"id\": \"fe559c31-9778-42ea-ba45-94e0bd7cf767\",    \"name\": \"Location\",    \"typeId\": 3,    \"readableType\": \"Hierarchical Entity Extractor\",    \"children\": [      {        \"id\": \"ec076676-d8d9-42fa-a44e-87989c0a2f82\",        \"name\": \"From\"      },      {        \"id\": \"63ebd752-4e81-4ce7-a698-b59b82bf5519\",        \"name\": \"To\"      }    ]  },  {    \"id\": \"8285a9ee-6bc0-4409-87f4-82d539f70529\",    \"name\": \"None\",    \"typeId\": 0,    \"readableType\": \"Intent Classifier\"  },  {    \"id\": \"bc1bae43-7904-48ad-a165-88b1910174f9\",    \"name\": \"Reservation\",    \"typeId\": 4,    \"readableType\": \"Composite Entity Extractor\",    \"children\": [      {        \"id\": \"63ebd752-4e81-4ce7-a698-b59b82bf5519\",        \"name\": \"Location::To\"      },      {        \"id\": \"a18eaa87-ecd9-4a67-a951-e70cf5b87c7e\",        \"name\": \"datetime\"      }    ]  },  {    \"id\": \"8713b104-78ec-4c4f-9f96-f2e53562cc16\",    \"name\": \"States\",    \"typeId\": 5,    \"readableType\": \"Closed List Entity Extractor\",    \"subLists\": [      {        \"id\": 1,        \"canonicalForm\": \"new york\",        \"list\": [          \"ny\",          \"new york\"        ]      },      {        \"id\": 2,        \"canonicalForm\": \"washington\",        \"list\": [          \"washington\",          \"wa\"        ]      },      {        \"id\": 3,        \"canonicalForm\": \"california\",        \"list\": [          \"california\",          \"ca\",          \"calif.\",          \"cal.\"        ]      }    ]  },  {    \"id\": \"b8e31be4-300f-455e-894b-6f079abca0a2\",    \"name\": \"$Camera.AppName\",    \"typeId\": 1,    \"readableType\": \"Entity Extractor\",    \"customPrebuiltDomainName\": \"Camera\",    \"customPrebuiltModelName\": \"AppName\"  },  {    \"id\": \"9500536f-ffec-4fab-93ad-6268abb0f73c\",    \"name\": \"$Camera.CapturePhoto\",    \"typeId\": 0,    \"readableType\": \"Intent Classifier\",    \"customPrebuiltDomainName\": \"Camera\",    \"customPrebuiltModelName\": \"CapturePhoto\"  }]"
+            }
+          }
+        },
+        "produces": [
+          "application/json"
+        ]
+      }
+    },
+    "/apps/{appId}/versions/{versionId}/intents/{intentId}": {
+      "get": {
+        "description": "Gets information about the intent model.",
+        "operationId": "models - Get intent info",
+        "parameters": [
+          {
+            "name": "appId",
+            "in": "path",
+            "description": "Format - guid. The application ID.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "versionId",
+            "in": "path",
+            "description": "The task version ID.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "intentId",
+            "in": "path",
+            "description": "Format - guid. The intent classifier ID.",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "An intent model info.",
+            "examples": {
+              "application/json": {
+                "id": "8285a9ee-6bc0-4409-87f4-82d539f70529",
+                "name": "None",
+                "typeId": 0,
+                "readableType": "Intent Classifier"
+              }
+            }
+          }
+        },
+        "produces": [
+          "application/json"
+        ]
+      },
+      "put": {
+        "description": "Updates the name of an intent classifier.",
+        "operationId": "models - Rename intent model",
+        "parameters": [
+          {
+            "name": "appId",
+            "in": "path",
+            "description": "Format - guid. The application ID.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "versionId",
+            "in": "path",
+            "description": "The task version ID.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "intentId",
+            "in": "path",
+            "description": "Format - guid. The intent classifier ID.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "modelUpdateObject",
+            "in": "body",
+            "schema": {
+              "$ref": "#/definitions/ModelUpdateObject"
+            },
+            "description": "A model object containing the new intent classifier name."
+          }
+        ],
+        "consumes": [
+          "application/json"
+        ],
+        "responses": {
+          "200": {
+            "description": ""
+          }
+        }
+      },
+      "delete": {
+        "description": "Deletes an intent classifier from the application.",
+        "operationId": "models - Delete intent model",
+        "parameters": [
+          {
+            "name": "appId",
+            "in": "path",
+            "description": "Format - guid. The application ID.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "versionId",
+            "in": "path",
+            "description": "The task version ID.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "intentId",
+            "in": "path",
+            "description": "Format - guid. The intent classifier ID.",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": ""
+          }
+        }
+      }
+    },
+    "/apps/{appId}/versions/{versionId}/entities/{entityId}": {
+      "get": {
+        "description": "Gets information about the entity model.",
+        "operationId": "models - Get entity info",
+        "parameters": [
+          {
+            "name": "appId",
+            "in": "path",
+            "description": "Format - guid. The application ID.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "versionId",
+            "in": "path",
+            "description": "The task version ID.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "entityId",
+            "in": "path",
+            "description": "Format - guid. The entity extractor ID.",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "An entity model info.",
+            "examples": {
+              "application/json": {
+                "id": "3d73462d-98f0-4dcd-8d30-fab9e65f2e73",
+                "name": "DayOfWeek",
+                "typeId": 1,
+                "readableType": "Entity Extractor"
+              }
+            }
+          }
+        },
+        "produces": [
+          "application/json"
+        ]
+      },
+      "put": {
+        "description": "Updates the name of an entity extractor.",
+        "operationId": "models - Rename entity model",
+        "parameters": [
+          {
+            "name": "appId",
+            "in": "path",
+            "description": "Format - guid. The application ID.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "versionId",
+            "in": "path",
+            "description": "The task version ID.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "entityId",
+            "in": "path",
+            "description": "Format - guid. The entity extractor ID.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "modelUpdateObject",
+            "in": "body",
+            "schema": {
+              "$ref": "#/definitions/ModelUpdateObject"
+            },
+            "description": "A model object containing the new entity extractor name."
+          }
+        ],
+        "consumes": [
+          "application/json"
+        ],
+        "responses": {
+          "200": {
+            "description": ""
+          }
+        }
+      },
+      "delete": {
+        "description": "Deletes an entity extractor from the application.",
+        "operationId": "models - Delete entity model",
+        "parameters": [
+          {
+            "name": "appId",
+            "in": "path",
+            "description": "Format - guid. The application ID.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "versionId",
+            "in": "path",
+            "description": "The task version ID.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "entityId",
+            "in": "path",
+            "description": "Format - guid. The entity extractor ID.",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": ""
+          }
+        }
+      }
+    },
+    "/apps/{appId}/versions/{versionId}/hierarchicalentities/{hEntityId}": {
+      "get": {
+        "description": "Gets information about the hierarchical entity model.",
+        "operationId": "models - Get hierarchical entity info",
+        "parameters": [
+          {
+            "name": "appId",
+            "in": "path",
+            "description": "Format - guid. The application ID.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "versionId",
+            "in": "path",
+            "description": "The task version ID.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "hEntityId",
+            "in": "path",
+            "description": "Format - guid. The hierarchical entity extractor ID.",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "A hierarchical entity model info.",
+            "examples": {
+              "application/json": {
+                "id": "fe559c31-9778-42ea-ba45-94e0bd7cf767",
+                "name": "Location",
+                "typeId": 3,
+                "readableType": "Hierarchical Entity Extractor",
+                "children": [
+                  {
+                    "id": "ec076676-d8d9-42fa-a44e-87989c0a2f82",
+                    "name": "From"
+                  },
+                  {
+                    "id": "63ebd752-4e81-4ce7-a698-b59b82bf5519",
+                    "name": "To"
+                  }
+                ]
+              }
+            }
+          }
+        },
+        "produces": [
+          "application/json"
+        ]
+      },
+      "put": {
+        "description": "Updates the name and children of a hierarchical entity model.",
+        "operationId": "models - Update hierarchical entity model",
+        "parameters": [
+          {
+            "name": "appId",
+            "in": "path",
+            "description": "Format - guid. The application ID.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "versionId",
+            "in": "path",
+            "description": "The task version ID.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "hEntityId",
+            "in": "path",
+            "description": "Format - guid. The hierarchical entity extractor ID.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "hierarchicalModelUpdateObject",
+            "in": "body",
+            "schema": {
+              "$ref": "#/definitions/HierarchicalModelUpdateObject"
+            },
+            "description": "Model containing names of the children of the hierarchical entity."
+          }
+        ],
+        "consumes": [
+          "application/json"
+        ],
+        "responses": {
+          "200": {
+            "description": ""
+          }
+        }
+      },
+      "delete": {
+        "description": "Deletes a hierarchical entity extractor from the application version.",
+        "operationId": "models - Delete hierarchical entity model",
+        "parameters": [
+          {
+            "name": "appId",
+            "in": "path",
+            "description": "Format - guid. The application ID.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "versionId",
+            "in": "path",
+            "description": "The task version ID.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "hEntityId",
+            "in": "path",
+            "description": "Format - guid. The hierarchical entity extractor ID.",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": ""
+          }
+        }
+      }
+    },
+    "/apps/{appId}/versions/{versionId}/compositeentities/{cEntityId}": {
+      "get": {
+        "description": "Gets information about the composite entity model.",
+        "operationId": "models - Get composite entity info",
+        "parameters": [
+          {
+            "name": "appId",
+            "in": "path",
+            "description": "Format - guid. The application ID.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "versionId",
+            "in": "path",
+            "description": "The task version ID.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "cEntityId",
+            "in": "path",
+            "description": "Format - guid. The composite entity extractor ID.",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The composite entity model info.",
+            "examples": {
+              "application/json": {
+                "id": "bc1bae43-7904-48ad-a165-88b1910174f9",
+                "name": "Reservation",
+                "typeId": 4,
+                "readableType": "Composite Entity Extractor",
+                "children": [
+                  {
+                    "id": "63ebd752-4e81-4ce7-a698-b59b82bf5519",
+                    "name": "Location::To"
+                  },
+                  {
+                    "id": "a18eaa87-ecd9-4a67-a951-e70cf5b87c7e",
+                    "name": "datetime"
+                  }
+                ]
+              }
+            }
+          }
+        },
+        "produces": [
+          "application/json"
+        ]
+      },
+      "put": {
+        "description": "Updates the composite entity extractor.",
+        "operationId": "models - Update composite entity model",
+        "parameters": [
+          {
+            "name": "appId",
+            "in": "path",
+            "description": "Format - guid. The application ID.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "versionId",
+            "in": "path",
+            "description": "The task version ID.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "cEntityId",
+            "in": "path",
+            "description": "Format - guid. The composite entity extractor ID.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "hierarchicalModelUpdateObject",
+            "in": "body",
+            "schema": {
+              "$ref": "#/definitions/HierarchicalModelUpdateObject"
+            },
+            "description": "A model object containing the new entity extractor name and children."
+          }
+        ],
+        "consumes": [
+          "application/json"
+        ],
+        "responses": {
+          "200": {
+            "description": ""
+          }
+        }
+      },
+      "delete": {
+        "description": "Deletes a composite entity extractor from the application.",
+        "operationId": "models - Delete composite entity model",
+        "parameters": [
+          {
+            "name": "appId",
+            "in": "path",
+            "description": "Format - guid. The application ID.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "versionId",
+            "in": "path",
+            "description": "The task version ID.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "cEntityId",
+            "in": "path",
+            "description": "Format - guid. The composite entity extractor ID.",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": ""
+          }
+        }
+      }
+    },
+    "/apps/{appId}/versions/{versionId}/closedlists/{clEntityId}": {
+      "get": {
+        "description": "Gets information of a closed list model.",
+        "operationId": "models - Get closed list entity info",
+        "parameters": [
+          {
+            "name": "appId",
+            "in": "path",
+            "description": "Format - guid. The application ID.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "versionId",
+            "in": "path",
+            "description": "The task version ID.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "clEntityId",
+            "in": "path",
+            "description": "Format - guid. The closed list model ID.",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The closed list model info.",
+            "examples": {
+              "application/json": {
+                "id": "8713b104-78ec-4c4f-9f96-f2e53562cc16",
+                "name": "States",
+                "typeId": 5,
+                "readableType": "Closed List Entity Extractor",
+                "subLists": [
+                  {
+                    "id": 1,
+                    "canonicalForm": "new york",
+                    "list": [
+                      "ny",
+                      "new york"
+                    ]
+                  },
+                  {
+                    "id": 2,
+                    "canonicalForm": "washington",
+                    "list": [
+                      "washington",
+                      "wa"
+                    ]
+                  },
+                  {
+                    "id": 3,
+                    "canonicalForm": "california",
+                    "list": [
+                      "california",
+                      "ca",
+                      "calif.",
+                      "cal."
+                    ]
+                  }
+                ]
+              }
+            }
+          }
+        },
+        "produces": [
+          "application/json"
+        ]
+      },
+      "put": {
+        "description": "Updates the closed list model.",
+        "operationId": "models - Update closed list entity model",
+        "parameters": [
+          {
+            "name": "appId",
+            "in": "path",
+            "description": "Format - guid. The application ID.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "versionId",
+            "in": "path",
+            "description": "The task version ID.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "clEntityId",
+            "in": "path",
+            "description": "Format - guid. The closed list entity extractor ID.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "closedListModelUpdateObject",
+            "in": "body",
+            "schema": {
+              "$ref": "#/definitions/ClosedListModelUpdateObject"
+            },
+            "description": "A json object containing the new entity name and words list."
+          }
+        ],
+        "consumes": [
+          "application/json"
+        ],
+        "responses": {
+          "200": {
+            "description": ""
+          }
+        }
+      },
+      "patch": {
+        "description": "Adds a batch of sublists to an existing closedlist.",
+        "operationId": "models - Patch closed list entity model",
+        "parameters": [
+          {
+            "name": "appId",
+            "in": "path",
+            "description": "Format - guid. The application ID.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "versionId",
+            "in": "path",
+            "description": "The task version ID.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "clEntityId",
+            "in": "path",
+            "description": "Format - guid. The closed list entity extractor ID.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "closedListModelPatchObject",
+            "in": "body",
+            "schema": {
+              "$ref": "#/definitions/ClosedListModelPatchObject"
+            },
+            "description": "A json object containing words list batch."
+          }
+        ],
+        "consumes": [
+          "application/json"
+        ],
+        "responses": {
+          "200": {
+            "description": ""
+          }
+        }
+      },
+      "delete": {
+        "description": "Deletes a closed list model from the application.",
+        "operationId": "models - Delete closed list entity model",
+        "parameters": [
+          {
+            "name": "appId",
+            "in": "path",
+            "description": "Format - guid. The application ID.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "versionId",
+            "in": "path",
+            "description": "The task version ID.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "clEntityId",
+            "in": "path",
+            "description": "Format - guid. The closed list entity extractor ID.",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": ""
+          }
+        }
+      }
+    },
+    "/apps/{appId}/versions/{versionId}/prebuilts/{prebuiltId}": {
+      "get": {
+        "description": "Gets information about the prebuilt entity model.",
+        "operationId": "models - Get prebuilt info",
+        "parameters": [
+          {
+            "name": "appId",
+            "in": "path",
+            "description": "Format - guid. The application ID.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "versionId",
+            "in": "path",
+            "description": "The task version ID.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "prebuiltId",
+            "in": "path",
+            "description": "Format - guid. The prebuilt entity extractor ID.",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "A prebuilt entity models info.",
+            "examples": {
+              "application/json": {
+                "id": "a18eaa87-ecd9-4a67-a951-e70cf5b87c7e",
+                "name": "datetime",
+                "typeId": 2,
+                "readableType": "Prebuilt Entity Extractor"
+              }
+            }
+          }
+        },
+        "produces": [
+          "application/json"
+        ]
+      },
+      "delete": {
+        "description": "Deletes a prebuilt entity extractor from the application.",
+        "operationId": "models - Delete prebuilt model",
+        "parameters": [
+          {
+            "name": "appId",
+            "in": "path",
+            "description": "Format - guid. The application ID.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "versionId",
+            "in": "path",
+            "description": "The task version ID.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "prebuiltId",
+            "in": "path",
+            "description": "Format - guid. The prebuilt entity extractor ID.",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": ""
+          }
+        }
+      }
+    },
+    "/apps/{appId}/versions/{versionId}/closedlists/{clEntityId}/sublists/{subListId}": {
+      "delete": {
+        "description": "Deletes a sublist of a specific closed list model.",
+        "operationId": "models - Delete sub list",
+        "parameters": [
+          {
+            "name": "appId",
+            "in": "path",
+            "description": "Format - guid. The application ID.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "versionId",
+            "in": "path",
+            "description": "The task version ID.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "clEntityId",
+            "in": "path",
+            "description": "Format - guid. The closed list entity extractor ID.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "subListId",
+            "in": "path",
+            "description": "The sublist ID.",
+            "required": true,
+            "type": "integer"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": ""
+          }
+        }
+      },
+      "put": {
+        "description": "Updates one of the closed list's sublists",
+        "operationId": "models - Update closed list's sublist",
+        "parameters": [
+          {
+            "name": "appId",
+            "in": "path",
+            "description": "Format - guid. The application ID.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "versionId",
+            "in": "path",
+            "description": "The task version ID.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "clEntityId",
+            "in": "path",
+            "description": "Format - guid. The closedlist ID.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "subListId",
+            "in": "path",
+            "description": "Format - long. The sublist ID",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "wordListBaseUpdateObject",
+            "in": "body",
+            "schema": {
+              "$ref": "#/definitions/WordListBaseUpdateObject"
+            },
+            "description": "A sublist update object containing the new canonical form and the list of words."
+          }
+        ],
+        "consumes": [
+          "application/json"
+        ],
+        "responses": {
+          "200": {
+            "description": ""
+          }
+        }
+      }
+    },
+    "/apps/{appId}/versions/{versionId}/intents/{intentId}/suggest": {
+      "get": {
+        "description": "Suggests examples that would improve the accuracy of the intent model.",
+        "operationId": "models - Suggest endpoint queries for intents",
+        "parameters": [
+          {
+            "name": "appId",
+            "in": "path",
+            "description": "Format - guid. The application ID.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "versionId",
+            "in": "path",
+            "description": "The task version ID.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "intentId",
+            "in": "path",
+            "description": "Format - guid. The target intent classifier model to enhance.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "take",
+            "in": "query",
+            "description": "Maximum number of queries to be returned. Default is set to 10. Maximum is 500.",
+            "type": "integer",
+            "default": 10,
+            "x-nullable": "false",
+            "x-ms-enum": {
+              "name": "QueryReturnNumberParameter",
+              "modelAsString": false
+            },
+            "enum": [
+              10
+            ]
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "If there's no trained model, nothing is returned in the response.</br>If there's a trained model and the active learning algorithm finds any relevant queries, they are returned with the model predictions.</br>If there's a trained model but the active learning algorithm didn't find any relevant queries, an empty list is returned in the response.",
+            "examples": {
+              "application/json": "[  {    \"text\": \"hello, world!\",    \"tokenizedText\": [      \"hello\",      \",\",      \"world\",      \"!\"    ],    \"intentPredictions\": [      {        \"name\": \"None\",        \"score\": 0.63      },      {        \"name\": \"GetWeather\",        \"score\": 0      },      {        \"name\": \"BookFlight\",        \"score\": 0      }    ],    \"entityPredictions\": []  }]"
+            }
+          }
+        },
+        "produces": [
+          "application/json"
+        ]
+      }
+    },
+    "/apps/{appId}/versions/{versionId}/entities/{entityId}/suggest": {
+      "get": {
+        "description": "Suggests examples that would improve the accuracy of the entity model.",
+        "operationId": "models - Suggest endpoint queries for entities",
+        "parameters": [
+          {
+            "name": "appId",
+            "in": "path",
+            "description": "Format - guid. The application ID.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "versionId",
+            "in": "path",
+            "description": "The task version ID.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "entityId",
+            "in": "path",
+            "description": "Format - guid. The target entity extractor model to enhance.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "take",
+            "in": "query",
+            "description": "Maximum number of queries to be returned. Default is set to 10. Maximum is 500.",
+            "type": "integer",
+            "default": 10,
+            "x-nullable": "false",
+            "x-ms-enum": {
+              "name": "QueryReturnNumberParameter",
+              "modelAsString": false
+            },
+            "enum": [
+              10
+            ]
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "If there's no trained model, nothing is returned in the response.</br>If there's a trained model and the active learning algorithm finds any relevant queries, they are returned with the model predictions.</br>If there's a trained model but the active learning algorithm didn't find any relevant queries, an empty list is returned in the response.",
+            "examples": {
+              "application/json": "[  {    \"text\": \"hello, world!\",    \"tokenizedText\": [      \"hello\",      \",\",      \"world\",      \"!\"    ],    \"intentPredictions\": [      {        \"name\": \"None\",        \"score\": 0.63      },      {        \"name\": \"BookFlight\",        \"score\": 0      },      {        \"name\": \"GetWeather\",        \"score\": 0      }    ],    \"entityPredictions\": []  }]"
+            }
+          }
+        },
+        "produces": [
+          "application/json"
+        ]
+      }
+    },
+    "/apps/": {
+      "post": {
+        "description": "Creates a new LUIS app.",
+        "operationId": "apps - Add application",
+        "parameters": [
+          {
+            "name": "applicationCreateObject",
+            "in": "body",
+            "schema": {
+              "$ref": "#/definitions/ApplicationCreateObject"
+            },
+            "description": "A JSON object containing Name, Description (optional), Culture,            Usage Scenario (optional), Domain (optional) and initial version ID (optional) of the application.            Default value for the version ID is 0.1.Note that the culture cannot be changed after the app is created."
+          }
+        ],
+        "consumes": [
+          "application/json"
+        ],
+        "responses": {
+          "201": {
+            "description": "The ID of the created application.",
+            "examples": {
+              "application/json": "\"363187f1-c573-46b3-bc4c-ae01d686e68e\""
+            }
+          }
+        },
+        "produces": [
+          "application/json"
+        ]
+      },
+      "get": {
+        "description": "Lists all of the user applications.",
+        "operationId": "apps - Get user applications",
+        "parameters": [
+          {
+            "name": "skip",
+            "in": "query",
+            "description": "The number of entries to skip. Default value is 0.",
+            "type": "integer",
+            "default": 0,
+            "x-nullable": "false",
+            "x-ms-enum": {
+              "name": "SkipParameter",
+              "modelAsString": false
+            },
+            "enum": [
+              0
+            ]
+          },
+          {
+            "name": "take",
+            "in": "query",
+            "description": "The number of entries to return. Maximum page size is 500. Default is 100.",
+            "type": "integer",
+            "default": 100,
+            "x-nullable": "false",
+            "x-ms-enum": {
+              "name": "TakeParameter",
+              "modelAsString": false
+            },
+            "enum": [
+              100
+            ]
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "A list of the user applications.",
+            "examples": {
+              "application/json": "[    {      \"id\": \"363187f1-c573-46b3-bc4c-ae01d686e68e\",      \"name\": \"MyFirstDummyApp\",      \"description\": \"This is my first dummy application\",      \"culture\": \"en-us\",      \"usageScenario\": \"IoT\",      \"domain\": \"Comics\",      \"versionsCount\": 3,      \"createdDateTime\": \"2017-01-31T16:15:54Z\",      \"endpoints\": {        \"PRODUCTION\": {          \"versionId\": \"0.1\",          \"isStaging\": false,          \"endpointUrl\": \"DummyUrl\",          \"assignedEndpointKey\": \"\",          \"endpointRegion\":\"westus\",          \"publishedDateTime\": \"2017-02-19T17:09:14Z\"        }      },      \"endpointHitsCount\": 0    }]"
+            }
+          }
+        },
+        "produces": [
+          "application/json"
+        ]
+      }
+    },
+    "/apps/import": {
+      "post": {
+        "description": "Imports an application to LUIS, the application's JSON should be included in in the request body.",
+        "operationId": "apps - Import application",
+        "parameters": [
+          {
+            "name": "appName",
+            "in": "query",
+            "description": "The imported application name.",
+            "type": "string"
+          },
+          {
+            "name": "jSONApp",
+            "in": "body",
+            "schema": {
+              "$ref": "#/definitions/JSONApp"
+            },
+            "description": "A JSON representing the LUIS application structure."
+          }
+        ],
+        "consumes": [
+          "application/json"
+        ],
+        "responses": {
+          "201": {
+            "description": "The ID of the imported application.",
+            "examples": {
+              "application/json": "\"f8c64e2a-8635-4a09-8f78-39d7adc76ec5\""
+            }
+          }
+        },
+        "produces": [
+          "application/json"
+        ]
+      }
+    },
+    "/apps/assistants": {
+      "get": {
+        "description": "Gets the endpoint URLs for the prebuilt Cortana applications.",
+        "operationId": "apps - Get personal assistant applications",
+        "responses": {
+          "200": {
+            "description": "A personal assistant apps JSON object containing the endpoint URLs for Cortana applications            and the user's endpoint keys.",
+            "examples": {
+              "application/json": {
+                "endpointKeys": [],
+                "endpointUrls": {
+                  "English": "EnglishDummyURL",
+                  "Chinese": "ChineseDummyURL",
+                  "French": "FrenchDummyURL",
+                  "Spanish": "SpanishDummyURL",
+                  "Italian": "ItalianDummyURL"
+                }
+              }
+            }
+          }
+        },
+        "produces": [
+          "application/json"
+        ]
+      }
+    },
+    "/apps/domains": {
+      "get": {
+        "description": "Gets the available application domains.",
+        "operationId": "apps - Get application domains",
+        "responses": {
+          "200": {
+            "description": "A list object containing the available application domains.",
+            "examples": {
+              "application/json": "[  \"Booking & Reference\",  \"Business\",  \"Comics\",  \"Communication\",  \"Education\",  \"Entertainment\",  \"Finance\",  \"Food & Nutrition\",  \"Gaming\",  \"Health & Fitness\",  \"Home Automation\",  \"Media & Video\",  \"Medical\",  \"Music & Audio\",  \"Navigation & Maps\",  \"News & Magazines\",  \"Personalization\",  \"Productivity\",  \"Real Estate\",  \"Scheduler\",  \"Shopping\",  \"Social Network\",  \"Sports\",  \"Telecom\",  \"Tools\",  \"Transportation\",  \"Translation\",  \"Travel & Local\",  \"Weather\",  \"Others\"]"
+            }
+          }
+        },
+        "produces": [
+          "application/json"
+        ]
+      }
+    },
+    "/apps/usagescenarios": {
+      "get": {
+        "description": "Gets the application available usage scenarios.",
+        "operationId": "apps - Get application usage scenarios",
+        "responses": {
+          "200": {
+            "description": "A list object containing the available application usage scenarios.",
+            "examples": {
+              "application/json": "[  \"IoT\",  \"Bot\",  \"Mobile Application\",  \"Other\"]"
+            }
+          }
+        },
+        "produces": [
+          "application/json"
+        ]
+      }
+    },
+    "/apps/cultures": {
+      "get": {
+        "description": "Gets the supported application cultures.",
+        "operationId": "apps - Get application cultures",
+        "responses": {
+          "200": {
+            "description": "A list object containing the supported application cultures.",
+            "examples": {
+              "application/json": "[  {    \"name\": \"English\",    \"code\": \"en-us\"  },  {    \"name\": \"Chinese\",    \"code\": \"zh-cn\"  },  {    \"name\": \"French\",    \"code\": \"fr-fr\"  },  {    \"name\": \"Spanish\",    \"code\": \"es-es\"  },  {    \"name\": \"Italian\",    \"code\": \"it-it\"  },  {    \"name\": \"German\",    \"code\": \"de-de\"  },  {    \"name\": \"Japanese\",    \"code\": \"ja-jp\"  },  {    \"name\": \"BRPortuguese\",    \"code\": \"pt-br\"  }]"
+            }
+          }
+        },
+        "produces": [
+          "application/json"
+        ]
+      }
+    },
+    "/apps/{appId}/querylogs": {
+      "get": {
+        "description": "Gets the query logs of the past month for the application.",
+        "operationId": "apps - Download application query logs",
+        "parameters": [
+          {
+            "name": "appId",
+            "in": "path",
+            "description": "Format - guid. The application ID.",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "A CSV file containing the query logs for the past month.",
+            "examples": {
+              "application/octet-stream": "\"Query\",\"UTC DateTime\",\"Response\"\"hello, world!\",01/31/2017 17:17:41,\"{  \"\"query\"\": \"\"Hello, World!\"\",  \"\"topScoringIntent\"\": {    \"\"intent\"\": \"\"None\"\",    \"\"score\"\": 0.6277761  },  \"\"intents\"\": [    {      \"\"intent\"\": \"\"None\"\",      \"\"score\"\": 0.6277761    },    {      \"\"intent\"\": \"\"BookFlight\"\",      \"\"score\"\": 0.002136109    },    {      \"\"intent\"\": \"\"GetWeather\"\",      \"\"score\"\": 0.00142168161    }  ],  \"\"entities\"\": []}\""
+            }
+          }
+        },
+        "produces": [
+          "application/octet-stream"
+        ]
+      }
+    },
+    "/apps/{appId}": {
+      "get": {
+        "description": "Gets the application info.",
+        "operationId": "apps - Get application info",
+        "parameters": [
+          {
+            "name": "appId",
+            "in": "path",
+            "description": "Format - guid. The application ID.",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "A JSON object containing the application info.",
+            "examples": {
+              "application/json": {
+                "id": "363187f1-c573-46b3-bc4c-ae01d686e68e",
+                "name": "MyFirstDummyAp",
+                "description": "This is my first dummy application",
+                "culture": "en-us",
+                "usageScenario": "IoT",
+                "domain": "Comics",
+                "versionsCount": 3,
+                "createdDateTime": "2017-01-31T16:15:54Z",
+                "endpoints": {
+                  "PRODUCTION": {
+                    "versionId": "0.1",
+                    "isStaging": false,
+                    "endpointUrl": "DummyUrl",
+                    "endpointRegion": "westus",
+                    "assignedEndpointKey": "",
+                    "publishedDateTime": "2017-02-19T17:09:14Z"
+                  }
+                },
+                "endpointHitsCount": 0
+              }
+            }
+          }
+        },
+        "produces": [
+          "application/json"
+        ]
+      },
+      "put": {
+        "description": "Updates the name or description of the application.",
+        "operationId": "apps - Rename application",
+        "parameters": [
+          {
+            "name": "appId",
+            "in": "path",
+            "description": "Format - guid. The application ID.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "applicationUpdateObject",
+            "in": "body",
+            "schema": {
+              "$ref": "#/definitions/ApplicationUpdateObject"
+            },
+            "description": "A JSON object containing Name and Description of the application."
+          }
+        ],
+        "consumes": [
+          "application/json"
+        ],
+        "responses": {
+          "200": {
+            "description": ""
+          }
+        }
+      },
+      "delete": {
+        "description": "Deletes an application.",
+        "operationId": "apps - Delete application",
+        "parameters": [
+          {
+            "name": "appId",
+            "in": "path",
+            "description": "Format - guid. The application ID.",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": ""
+          }
+        }
+      }
+    },
+    "/apps/{appId}/versions/{versionId}/clone": {
+      "post": {
+        "description": "Creates a new version equivalent to the current snapshot of the selected application version.",
+        "operationId": "versions - Clone version",
+        "parameters": [
+          {
+            "name": "appId",
+            "in": "path",
+            "description": "Format - guid. The application ID.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "versionId",
+            "in": "path",
+            "description": "The application version ID.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "taskUpdateObject",
+            "in": "body",
+            "schema": {
+              "$ref": "#/definitions/TaskUpdateObject"
+            },
+            "description": "An object containing the new version ID."
+          }
+        ],
+        "consumes": [
+          "application/json"
+        ],
+        "responses": {
+          "201": {
+            "description": "The version ID of the created task.",
+            "examples": {
+              "application/json": "\"0.2\""
+            }
+          }
+        },
+        "produces": [
+          "application/json"
+        ]
+      }
+    },
+    "/apps/{appId}/publish": {
+      "post": {
+        "description": "Publishes a specific version of the application.",
+        "operationId": "apps - Publish application",
+        "parameters": [
+          {
+            "name": "appId",
+            "in": "path",
+            "description": "Format - guid. The application version ID.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "applicationPublishObject",
+            "in": "body",
+            "schema": {
+              "$ref": "#/definitions/ApplicationPublishObject"
+            },
+            "description": "The application publish object.The region is the target region that the application is published to. Possible values are \"westus\", \"eastus2\", \"westcentralus\" or \"southeastasia\" for applications created in west US, and \"westeurope\" for applications created in West Europe."
+          }
+        ],
+        "consumes": [
+          "application/json"
+        ],
+        "responses": {
+          "201": {
+            "description": "An object containing the application endpoint URL and its assigned endpoint key.",
+            "examples": {
+              "application/json": {
+                "endpointUrl": "DummyUrl",
+                "subscription-key": "DummyEndpointKey",
+                "endpointRegion": "westus",
+                "isStaging": false
+              }
+            }
+          }
+        },
+        "produces": [
+          "application/json"
+        ]
+      }
+    },
+    "/apps/{appId}/versions": {
+      "get": {
+        "description": "Gets the application versions info.",
+        "operationId": "versions - Get application versions",
+        "parameters": [
+          {
+            "name": "appId",
+            "in": "path",
+            "description": "Format - guid. The application ID.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "skip",
+            "in": "query",
+            "description": "The number of entries to skip. Default value is 0.",
+            "type": "integer",
+            "default": 0,
+            "x-nullable": "false",
+            "x-ms-enum": {
+              "name": "SkipParameter",
+              "modelAsString": false
+            },
+            "enum": [
+              0
+            ]
+          },
+          {
+            "name": "take",
+            "in": "query",
+            "description": "The number of entries to return. Maximum page size is 500. Default is 100.",
+            "type": "integer",
+            "default": 100,
+            "x-nullable": "false",
+            "x-ms-enum": {
+              "name": "TakeParameter",
+              "modelAsString": false
+            },
+            "enum": [
+              100
+            ]
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "A JSON object containing the tasks info.",
+            "examples": {
+              "application/json": "[  {    \"version\": \"0.1\",    \"createdDateTime\": \"2017-01-31T16:38:06Z\",    \"lastModifiedDateTime\": \"2017-01-31T18:04:35Z\",    \"lastTrainedDateTime\": \"2017-01-31T17:05:25Z\",    \"lastPublishedDateTime\": \"2017-01-31T17:05:37Z\",    \"endpointUrl\": \"DummyUrl\",    \"assignedEndpointKey\": {      \"SubscriptionKey\": \"\",      \"SubscriptionName\": \"\"    },    \"externalApiKeys\": {},    \"intentsCount\": 3,    \"entitiesCount\": 2,    \"endpointHitsCount\": 0  },  {    \"version\": \"0.2\",    \"createdDateTime\": \"2017-01-31T19:10:29Z\",    \"lastModifiedDateTime\": \"2017-01-31T19:12:47Z\",    \"lastTrainedDateTime\": \"2017-01-31T19:13:00Z\",    \"lastPublishedDateTime\": \"2017-01-31T19:13:20Z\",    \"endpointUrl\": \"DummyUrl\",    \"assignedEndpointKey\": {      \"SubscriptionKey\": \"\",      \"SubscriptionName\": \"\"    },    \"externalApiKeys\": {},    \"intentsCount\": 3,    \"entitiesCount\": 2,    \"endpointHitsCount\": 0  }]"
+            }
+          }
+        },
+        "produces": [
+          "application/json"
+        ]
+      }
+    },
+    "/apps/{appId}/versions/{versionId}/": {
+      "get": {
+        "description": "Gets the task info.",
+        "operationId": "versions - Get application version",
+        "parameters": [
+          {
+            "name": "appId",
+            "in": "path",
+            "description": "Format - guid. The application ID.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "versionId",
+            "in": "path",
+            "description": "The task version ID.",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "A JSON object containing the task info.",
+            "examples": {
+              "application/json": {
+                "version": "0.1",
+                "createdDateTime": "2017-01-31T16:38:06Z",
+                "lastModifiedDateTime": "2017-01-31T18:04:35Z",
+                "lastTrainedDateTime": "2017-01-31T17:05:25Z",
+                "lastPublishedDateTime": "2017-01-31T17:05:37Z",
+                "endpointUrl": "DummyUrl",
+                "assignedEndpointKey": {
+                  "SubscriptionKey": "",
+                  "SubscriptionName": ""
+                },
+                "externalApiKeys": {},
+                "intentsCount": 3,
+                "entitiesCount": 2,
+                "endpointHitsCount": 0
+              }
+            }
+          }
+        },
+        "produces": [
+          "application/json"
+        ]
+      },
+      "put": {
+        "description": "Updates the name or description of the application version.",
+        "operationId": "versions - Rename application version",
+        "parameters": [
+          {
+            "name": "appId",
+            "in": "path",
+            "description": "Format - guid. The application version ID.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "versionId",
+            "in": "path",
+            "description": "The application ID.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "taskUpdateObject",
+            "in": "body",
+            "schema": {
+              "$ref": "#/definitions/TaskUpdateObject"
+            },
+            "description": "A JSON object containing Name and Description of the application."
+          }
+        ],
+        "consumes": [
+          "application/json"
+        ],
+        "responses": {
+          "200": {
+            "description": ""
+          }
+        }
+      },
+      "delete": {
+        "description": "Deletes an application version.",
+        "operationId": "versions - Delete application version",
+        "parameters": [
+          {
+            "name": "appId",
+            "in": "path",
+            "description": "Format - guid. The application version ID.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "versionId",
+            "in": "path",
+            "description": "The application ID.",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": ""
+          }
+        }
+      }
+    },
+    "/apps/{appId}/versions/{versionId}/export": {
+      "get": {
+        "description": "Exports a LUIS application to JSON format.",
+        "operationId": "versions - Export application version",
+        "parameters": [
+          {
+            "name": "appId",
+            "in": "path",
+            "description": "Format - guid. The application version ID.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "versionId",
+            "in": "path",
+            "description": "The application ID.",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The JSON string of the exported application.",
+            "examples": {
+              "application/json": {
+                "luis_schema_version": "1.3.0",
+                "name": "DummyImportedApp",
+                "desc": "This is my dummy imported application",
+                "culture": "en-us",
+                "intents": [
+                  {
+                    "name": "BookFlight"
+                  },
+                  {
+                    "name": "GetWeather"
+                  },
+                  {
+                    "name": "None"
+                  }
+                ],
+                "entities": [
+                  {
+                    "name": "Location",
+                    "children": [
+                      "To",
+                      "From"
+                    ]
+                  }
+                ],
+                "composites": [],
+                "closedLists": [],
+                "bing_entities": [
+                  "datetime"
+                ],
+                "actions": [],
+                "model_features": [
+                  {
+                    "name": "Cities",
+                    "mode": true,
+                    "words": "Seattle,New York,Paris,Moscow,Beijin",
+                    "activated": true
+                  }
+                ],
+                "regex_features": [],
+                "utterances": [
+                  {
+                    "text": "what's the weather like in paris?",
+                    "intent": "GetWeather",
+                    "entities": [
+                      {
+                        "entity": "Location",
+                        "startPos": 7,
+                        "endPos": 7
+                      }
+                    ]
+                  },
+                  {
+                    "text": "what's the weather like in seattle?",
+                    "intent": "GetWeather",
+                    "entities": [
+                      {
+                        "entity": "Location",
+                        "startPos": 7,
+                        "endPos": 7
+                      }
+                    ]
+                  },
+                  {
+                    "text": "book me a flight from cairo to redmond next thursday",
+                    "intent": "BookFlight",
+                    "entities": [
+                      {
+                        "entity": "Location::To",
+                        "startPos": 7,
+                        "endPos": 7
+                      },
+                      {
+                        "entity": "Location::From",
+                        "startPos": 5,
+                        "endPos": 5
+                      }
+                    ]
+                  }
+                ]
+              }
+            }
+          }
+        },
+        "produces": [
+          "application/json"
+        ]
+      }
+    },
+    "/apps/{appId}/versions/{versionId}/assignedkey": {
+      "get": {
+        "description": "Gets the given application version's subscription key.",
+        "operationId": "versions - Get application version subscription key",
+        "parameters": [
+          {
+            "name": "appId",
+            "in": "path",
+            "description": "Format - guid. The application version ID.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "versionId",
+            "in": "path",
+            "description": "The id of the app to get the key for.",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The subscription key for this application's endpoint.",
+            "examples": {
+              "application/json": {
+                "subscriptionName": "DummyName",
+                "subscriptionKey": "DummyKey"
+              }
+            }
+          }
+        },
+        "produces": [
+          "application/json"
+        ]
+      },
+      "put": {
+        "description": "Assigns a subscription key to the given application version.",
+        "operationId": "versions - Assign subscription key to version",
+        "parameters": [
+          {
+            "name": "appId",
+            "in": "path",
+            "description": "Format - guid. The application version ID.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "versionId",
+            "in": "path",
+            "description": "The application ID.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "keyValue",
+            "in": "body",
+            "schema": {
+              "$ref": "#/definitions/KeyValue"
+            },
+            "description": "The value of the endpoint key to assign to the application."
+          }
+        ],
+        "consumes": [
+          "application/json"
+        ],
+        "responses": {
+          "200": {
+            "description": ""
+          }
+        }
+      }
+    },
+    "/apps/{appId}/versions/{versionId}/externalKeys": {
+      "put": {
+        "description": "Assigns an external API key to the given application according to the specified key type.",
+        "operationId": "versions - Update application version external key",
+        "parameters": [
+          {
+            "name": "appId",
+            "in": "path",
+            "description": "Format - guid. The application version ID.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "versionId",
+            "in": "path",
+            "description": "The application ID.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "externalKeyUpdateObject",
+            "in": "body",
+            "schema": {
+              "$ref": "#/definitions/ExternalKeyUpdateObject"
+            },
+            "description": "The external api key to be assigned."
+          }
+        ],
+        "consumes": [
+          "application/json"
+        ],
+        "responses": {
+          "200": {
+            "description": ""
+          }
+        }
+      },
+      "get": {
+        "description": "Gets the given application versions's external keys.",
+        "operationId": "versions - Get application version external api keys",
+        "parameters": [
+          {
+            "name": "appId",
+            "in": "path",
+            "description": "Format - guid. The application ID.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "versionId",
+            "in": "path",
+            "description": "The application version ID.",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "An array containing the external keys.",
+            "examples": {
+              "application/json": {
+                "BingSpellCheck": "40fd1383c949492cb16d7b082dcaac82"
+              }
+            }
+          }
+        },
+        "produces": [
+          "application/json"
+        ]
+      }
+    },
+    "/apps/{appId}/versions/{versionId}/externalKeys/{keyType}": {
+      "delete": {
+        "description": "Deletes an external API key currently associated to the given application according for the specified key type.",
+        "operationId": "versions - Delete application version external key",
+        "parameters": [
+          {
+            "name": "appId",
+            "in": "path",
+            "description": "Format - guid. The application version ID.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "versionId",
+            "in": "path",
+            "description": "The application ID.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "keyType",
+            "in": "path",
+            "description": "The external key type.",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": ""
+          }
+        }
+      }
+    },
+    "/apps/{appId}/versions/{versionId}/train": {
+      "post": {
+        "description": "Sends a training request for a version of a specified LUIS app. <br>This POST request initiates a request asynchronously. To determine whether the training request is successful, submit a GET request to get training status.<br><b>Note:</b> The application version is not fully trained unless all the models (intents and entities) are trained successfully or are up to date.<br/><b>To verify training success, get the training status at least once after training is complete.</b>",
+        "operationId": "train - Train application version",
+        "parameters": [
+          {
+            "name": "appId",
+            "in": "path",
+            "description": "Format - guid. The application ID.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "versionId",
+            "in": "path",
+            "description": "The task version ID.",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "202": {
+            "description": ""
+          },
+          "400": {
+            "description": "This response can occur if either of the <b>appId</b> or <b>versionId</b> parameters are incorrect.",
+            "examples": {
+              "JSON": "{  \"error\": {    \"code\": \"BadArgument\",    \"message\": \"Cannot find an application with the specified ID\"  }}OR{  \"error\": {    \"code\": \"BadArgument\",    \"message\": \"Cannot find a task with the specified version ID\"  }}"
+            }
+          }
+        },
+        "produces": [
+          "application/json",
+          "JSON"
+        ]
+      },
+      "get": {
+        "description": "Gets the training status of all models (intents and entities) for the specified LUIS app. You must <a href=\"https://westus.dev.cognitive.microsoft.com/docs/services/5890b47c39e2bb17b84a55ff/operations/5890b47c39e2bb052c5b9c45\">call the train API</a> to train the LUIS app before you call this API to get training status.<br/><b>appID</b> specifies the LUIS app ID.<br/><b>versionId</b> specifies the version number of the LUIS app. For example, \"0.1\".",
+        "operationId": "train - Get application version training status",
+        "parameters": [
+          {
+            "name": "appId",
+            "in": "path",
+            "description": "Format - guid. The application ID.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "versionId",
+            "in": "path",
+            "description": "The task version ID.",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "A successful response provides an array of training status details for a LUIS app that you submitted for training. Each element in the response array provides training status for a model (intent or entity) in the LUIS app.  <br/><br/><b>Note:</b> Training status is not provided for prebuilt entities because they are pretrained. <br/></br>The <b>modelId</b> property identifies which intent or entity the training status corresponds to. To get the name and type of each model, use the models API which has a request URL in this format: <br/></br>https://westus.api.cognitive.microsoft.com/luis/api/v2.0/apps/{appId}/versions/{versionId}/models<br/></br> The details property for each model can contain the following fields: <br/><br/><b>statusId</b>: An integer from 0 to 3 that corresponds to the value of the <b>status</b> field. <br/><br/><b>status</b>: A string with one of the following values: “Success”, “UpToDate”, “InProgress”, “Fail”. If the status is “Fail”, the <b>failureReason</b> property provides the reason for failure. <br/><br/><b>exampleCount</b>: The number of examples used for training. In the case of the None intent or prebuilt domain intents and entities, this number includes example provided internally by the system as well as examples you added to your LUIS app. <br/></br><b>failureReason</b>:  A string that indicates the reason training failed.  The value \"FewLabels\" means that no labeled examples were provided for training. <br/></br><b>trainingDateTime</b>: A string indicating the time the model was last trained. The value uses the ISO 8601 format for representing times in UTC (Coordinated Universal Time) with a UTC designator (“Z”), for example: \"2017-08-10T01:08:34Z\".",
+            "examples": {
+              "application/json": "[  {    \"modelId\": \"f9b00d5b-1f2d-421e-bc99-5ff192d0b998\",    \"details\": {      \"statusId\": 3,      \"status\": \"InProgress\",      \"exampleCount\": 0    }  },  {    \"modelId\": \"51403af3-5342-4926-abaa-91172a42e075\",    \"details\": {      \"statusId\": 2,      \"status\": \"UpToDate\",      \"exampleCount\": 12,      \"trainingDateTime\": \"2017-01-31T21:42:02Z\"    }  },  {    \"modelId\": \"b4cf6402-dc79-4ca3-8666-b0007337e92b\",    \"details\": {      \"statusId\": 1,      \"status\": \"Fail\",      \"exampleCount\": 12,      \"failureReason\": \"FewLabels\"    }  },  {    \"modelId\": \"e8e3135a-acd9-4164-a65c-e2fedbe78cfa\",    \"details\": {      \"statusId\": 3,      \"status\": \"InProgress\",      \"exampleCount\": 0    }  },  {    \"modelId\": \"3291fac9-6368-4c87-9562-e78cae0fa7c6\",    \"details\": {      \"statusId\": 0,      \"status\": \"Success\",      \"exampleCount\": 12,      \"trainingDateTime\": \"2017-01-31T21:42:02Z\"    }  },  {    \"modelId\": \"a193efac-ab02-49d7-b005-ee717d45c4f1\",    \"details\": {      \"statusId\": 3,      \"status\": \"InProgress\",      \"exampleCount\": 0    }  }]"
+            }
+          },
+          "400": {
+            "description": "This response can occur for any of the following reasons: <br>You need to submit a training request before you request training status. <br>The format of <b>appId</b> is incorrect. <br>The value of <b>appId</b> is incorrect. <br>The value of <b>versionId</b> is incorrect. <br>",
+            "examples": {
+              "JSON": "If you need to submit a training request before you request training status:{  \"error\": {    \"code\": \"BadArgument\",    \"message\": \"Training request is required before getting training status\"  }}If the format of appId is incorrect:{  \"error\": {    \"code\": \"BadArgument\",    \"message\": \"Value cannot be null. Parameter name: source\"  }}If the value of appId is incorrect:{  \"error\": {    \"code\": \"BadArgument\",    \"message\": \"Cannot find an application with the specified ID\"  }}If versionId is incorrect:{  \"error\": {    \"code\": \"BadArgument\",    \"message\": \"Cannot find a task with the specified version ID\"  }}"
+            }
+          },
+          "401": {
+            "description": "The request failed, either because the key is invalid or is not associated with the LUIS app ID.",
+            "examples": {
+              "JSON": {
+                "statusCode": 401,
+                "message": "Access denied due to invalid subscription key. Make sure to provide a valid key for an active subscription."
+              }
+            }
+          }
+        },
+        "produces": [
+          "application/json",
+          "JSON"
+        ]
+      }
+    },
+    "/subscriptions": {
+      "post": {
+        "description": "Adds a subscription key to the user.",
+        "operationId": "user - Add subscription key",
+        "parameters": [
+          {
+            "name": "userSubscriptionCreateObject",
+            "in": "body",
+            "schema": {
+              "$ref": "#/definitions/UserSubscriptionCreateObject"
+            },
+            "description": "Subscription key object."
+          }
+        ],
+        "consumes": [
+          "application/json"
+        ],
+        "responses": {
+          "201": {
+            "description": "Returns the added subscription key information",
+            "examples": {
+              "application/json": {
+                "subscriptionKey": "DummyKey",
+                "subscriptionName": "DummyName",
+                "subscriptionRegion": "westus"
+              }
+            }
+          }
+        },
+        "produces": [
+          "application/json"
+        ]
+      },
+      "get": {
+        "description": "Gets the user's endpoint subscription keys.",
+        "operationId": "user - Get user subscription keys",
+        "responses": {
+          "200": {
+            "description": "A list containing subscription keys info.",
+            "examples": {
+              "application/json": "[  {    \"subscriptionKey\": \"dummykey\",    \"subscriptionName\": \"DummyName\",    \"subscriptionRegion\":\"westus\"  }]"
+            }
+          }
+        },
+        "produces": [
+          "application/json"
+        ]
+      },
+      "put": {
+        "description": "Renames a subscription key owned by the user.",
+        "operationId": "user - Rename subscription key",
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "schema": {
+              "example": "{\t\"subscriptionName\": \"DummyName\",\t\"subscriptionKey\": \"DummyKey\"}"
+            },
+            "description": "Subscription key object."
+          }
+        ],
+        "consumes": [
+          "application/json"
+        ],
+        "responses": {
+          "200": {
+            "description": ""
+          }
+        }
+      }
+    },
+    "/externalKeys": {
+      "post": {
+        "description": "Adds an external API key to the user.",
+        "operationId": "user - Add external api key",
+        "parameters": [
+          {
+            "name": "externalKeyCreateObject",
+            "in": "body",
+            "schema": {
+              "$ref": "#/definitions/ExternalKeyCreateObject"
+            },
+            "description": "External API key object."
+          }
+        ],
+        "consumes": [
+          "application/json"
+        ],
+        "responses": {
+          "201": {
+            "description": ""
+          }
+        }
+      },
+      "get": {
+        "description": "Gets a list of the user's external api keys.",
+        "operationId": "user - Get user external api keys",
+        "responses": {
+          "200": {
+            "description": "A list containing user's external keys info.",
+            "examples": {
+              "application/json": "[  {    \"type\": \"bingspellcheck\",    \"values\": [      \"ee29eff4fe914fe282ad75d16328d717\"    ]  }]"
+            }
+          }
+        },
+        "produces": [
+          "application/json"
+        ]
+      }
+    },
+    "/programmatickey": {
+      "put": {
+        "description": "Resets the user programmatic key.",
+        "operationId": "user - Reset programmatic key",
+        "responses": {
+          "200": {
+            "description": "The new programmatic key.",
+            "examples": {
+              "application/json": "\"NewDummyProgrammaticKey\""
+            }
+          }
+        },
+        "produces": [
+          "application/json"
+        ]
+      }
+    },
+    "/subscriptions/{subscriptionKey}": {
+      "delete": {
+        "description": "Deletes a user subscription key.",
+        "operationId": "user - Delete subscription key",
+        "parameters": [
+          {
+            "name": "subscriptionKey",
+            "in": "path",
+            "description": "The subscription key.",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": ""
+          }
+        }
+      }
+    },
+    "/externalKeys/{externalKeyValue}": {
+      "delete": {
+        "description": "Deletes a user external API key.",
+        "operationId": "user - Delete external api key",
+        "parameters": [
+          {
+            "name": "externalKeyValue",
+            "in": "path",
+            "description": "The external API key.",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": ""
+          }
+        }
+      }
+    },
+    "/apps/{appId}/versions/import": {
+      "post": {
+        "description": "Imports a new version into a LUIS application, the version's JSON should be included in in the request body.",
+        "operationId": "versions - Import version to application",
+        "parameters": [
+          {
+            "name": "appId",
+            "in": "path",
+            "description": "Format - guid. The application ID.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "versionId",
+            "in": "query",
+            "description": "The imported versionId.",
+            "type": "string"
+          },
+          {
+            "name": "jSONApp",
+            "in": "body",
+            "schema": {
+              "$ref": "#/definitions/JSONApp"
+            },
+            "description": "A JSON representing the LUIS application structure."
+          }
+        ],
+        "consumes": [
+          "application/json"
+        ],
+        "responses": {
+          "201": {
+            "description": "The created application version.",
+            "examples": {
+              "application/json": "\"0.2\""
+            }
+          }
+        },
+        "produces": [
+          "application/json"
+        ]
+      }
+    },
+    "/apps/{appId}/settings": {
+      "get": {
+        "description": "Get the application settings",
+        "operationId": "apps - Get application settings",
+        "parameters": [
+          {
+            "name": "appId",
+            "in": "path",
+            "description": "Format - guid. The application ID.",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "A JSON object containing the application settings.",
+            "examples": {
+              "application/json": {
+                "id": "51963bf0-08a1-44b7-9c69-735dbb92ce74",
+                "public": false
+              }
+            }
+          }
+        },
+        "produces": [
+          "application/json"
+        ]
+      },
+      "put": {
+        "description": "Updates the application settings",
+        "operationId": "apps - Update application settings",
+        "parameters": [
+          {
+            "name": "appId",
+            "in": "path",
+            "description": "Format - guid. The application ID.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "applicationSettingUpdateObject",
+            "in": "body",
+            "schema": {
+              "$ref": "#/definitions/ApplicationSettingUpdateObject"
+            },
+            "description": "An app setting object contains the new app settings"
+          }
+        ],
+        "consumes": [
+          "application/json"
+        ],
+        "responses": {
+          "200": {
+            "description": ""
+          }
+        }
+      }
+    },
+    "/apps/{appId}/versions/{versionId}/suggest": {
+      "delete": {
+        "description": "Deleted an unlabelled utterance.",
+        "operationId": "versions - Delete unlabelled utterance",
+        "parameters": [
+          {
+            "name": "appId",
+            "in": "path",
+            "description": "Format - guid. The application ID.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "versionId",
+            "in": "path",
+            "description": "The task version ID.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "schema": {
+              "example": "\"Dummy text\""
+            },
+            "description": "The utterance text to delete"
+          }
+        ],
+        "consumes": [
+          "text/plain"
+        ],
+        "responses": {
+          "200": {
+            "description": ""
+          }
+        }
+      }
+    },
+    "/apps/{appId}/permissions": {
+      "get": {
+        "description": "Gets the list of user emails that have permissions to access your application.",
+        "operationId": "permissions - Get application user access list",
+        "parameters": [
+          {
+            "name": "appId",
+            "in": "path",
+            "description": "Format - guid. The application ID.",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": ""
+          }
+        }
+      },
+      "post": {
+        "description": "Adds a user to the allowed list of users to access this LUIS application.Users are added using their email address.",
+        "operationId": "permissions - Add user to the access list",
+        "parameters": [
+          {
+            "name": "appId",
+            "in": "path",
+            "description": "Format - guid. The application ID.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "schema": {
+              "example": "{\t\"email\":\"test@domain.com\"}"
+            },
+            "description": "A JSON object containing the user's email address."
+          }
+        ],
+        "consumes": [
+          "application/json"
+        ],
+        "responses": {
+          "200": {
+            "description": ""
+          }
+        }
+      },
+      "delete": {
+        "description": "Removed a user to the allowed list of users to access this LUIS application.Users are removed using their email address.",
+        "operationId": "permissions - Remove user from access list",
+        "parameters": [
+          {
+            "name": "appId",
+            "in": "path",
+            "description": "Format - guid. The application ID.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "schema": {
+              "example": "{\t\"email\":\"test@domain.com\"}"
+            },
+            "description": "A JSON object containing the user's email address."
+          }
+        ],
+        "consumes": [
+          "application/json"
+        ],
+        "responses": {
+          "200": {
+            "description": ""
+          }
+        }
+      },
+      "put": {
+        "description": "Replaces the current users access list with the one sent in the body.If an empty list is sent, all access to other users will be removed.",
+        "operationId": "permissions - Update access list",
+        "parameters": [
+          {
+            "name": "appId",
+            "in": "path",
+            "description": "Format - guid. The application ID.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "schema": {
+              "example": "{\t\"emails\": [\t\t\"test1@domain.com\",\t\t\"test2@domain.com\"\t]}"
+            },
+            "description": "A JSON object containing a list of user's email addresses."
+          }
+        ],
+        "consumes": [
+          "application/json"
+        ],
+        "responses": {
+          "200": {
+            "description": ""
+          }
+        }
+      }
+    },
+    "/apps/{appId}/endpoints": {
+      "get": {
+        "description": "Returns the available endpoint deployment regions and urls",
+        "operationId": "apps - Get endpoints",
+        "parameters": [
+          {
+            "name": "appId",
+            "in": "path",
+            "description": "Format - guid. The application ID.",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Returns a list of endpoints regions and their corresponding endpoint URL",
+            "examples": {
+              "application/json": {
+                "westus": "https://westus.api.cognitive.microsoft.com/api/v2.0/apps/bb25e72c-2279-46bb-a99b-89fcb921b58a",
+                "eastus2": "https://eastus2.api.cognitive.microsoft.com/api/v2.0/apps/bb25e72c-2279-46bb-a99b-89fcb921b58a",
+                "westcentralus": "https://westcentralus.api.cognitive.microsoft.com/api/v2.0/apps/bb25e72c-2279-46bb-a99b-89fcb921b58a",
+                "southeastasia": "https://southeastasia.api.cognitive.microsoft.com/api/v2.0/apps/bb25e72c-2279-46bb-a99b-89fcb921b58a"
+              }
+            }
+          }
+        },
+        "produces": [
+          "application/json"
+        ]
+      }
+    },
+    "/apps/{appId}/versions/{versionId}/closedlists/{clEntityId}/sublists": {
+      "post": {
+        "description": "Adds a list to an existing closed list",
+        "operationId": "models - Add closed list's sublist",
+        "parameters": [
+          {
+            "name": "appId",
+            "in": "path",
+            "description": "Format - guid. The application ID.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "versionId",
+            "in": "path",
+            "description": "The task version ID.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "clEntityId",
+            "in": "path",
+            "description": "Format - guid. The closed list entity extractor ID.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "wordListCreateObject",
+            "in": "body",
+            "schema": {
+              "$ref": "#/definitions/WordListCreateObject"
+            },
+            "description": "A json object containing words list."
+          }
+        ],
+        "consumes": [
+          "application/json"
+        ],
+        "responses": {
+          "201": {
+            "description": "The id of the newly created list",
+            "examples": {
+              "application/json": "90440"
+            }
+          }
+        },
+        "produces": [
+          "application/json"
+        ]
+      }
+    },
+    "/apps/{appId}/versions/{versionId}/customprebuiltdomains": {
+      "post": {
+        "description": "Adds a customizable prebuilt domain along with all of its models to this application.",
+        "operationId": "models - Add custom prebuilt domain to application",
+        "parameters": [
+          {
+            "name": "appId",
+            "in": "path",
+            "description": "Format - guid. The application ID.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "versionId",
+            "in": "path",
+            "description": "The task version ID.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "prebuiltDomainCreateBaseObject",
+            "in": "body",
+            "schema": {
+              "$ref": "#/definitions/PrebuiltDomainCreateBaseObject"
+            },
+            "description": "A prebuilt domain create object containing the name of the domain"
+          }
+        ],
+        "consumes": [
+          "application/json"
+        ],
+        "responses": {
+          "201": {
+            "description": "An array of the created custom prebuilt domain model Ids.",
+            "examples": {
+              "application/json": "[  \"9500536f-ffec-4fab-93ad-6268abb0f73c\",  \"72a15bcc-538a-4e59-be8c-9fdd43b5338f\",  \"3397fc83-5b1d-4f5f-b4cd-0f2169f076c6\",  \"d116d287-3e53-4bd8-8b7b-4728c58c34d1\",  \"facd34fa-86a3-4805-8bf3-b99e40043b10\",  \"ad2cac73-2abf-41cb-99e2-f79d0dd6ca46\",  \"b8e31be4-300f-455e-894b-6f079abca0a2\",  \"70de3f00-3943-4a93-a88c-09392016b776\"]"
+            }
+          }
+        },
+        "produces": [
+          "application/json"
+        ]
+      }
+    },
+    "/apps/{appId}/versions/{versionId}/customprebuiltintents": {
+      "post": {
+        "description": "Adds a custom prebuilt intent model to the application",
+        "operationId": "models - Add custom prebuilt intent model",
+        "parameters": [
+          {
+            "name": "appId",
+            "in": "path",
+            "description": "Format - guid. The application ID.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "versionId",
+            "in": "path",
+            "description": "The task version ID.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "prebuiltDomainModelCreateObject",
+            "in": "body",
+            "schema": {
+              "$ref": "#/definitions/PrebuiltDomainModelCreateObject"
+            },
+            "description": "A model object containing the name of the custom prebuilt intent and the name of the domain to which this model belongs."
+          }
+        ],
+        "consumes": [
+          "application/json"
+        ],
+        "responses": {
+          "201": {
+            "description": "The ID of the created model.",
+            "examples": {
+              "application/json": "\"c0d59374-cf44-4302-98d1-e853886a4674\""
+            }
+          }
+        },
+        "produces": [
+          "application/json"
+        ]
+      },
+      "get": {
+        "description": "Gets custom prebuilt intents information of this application",
+        "operationId": "models - Get custom prebuilt domain intents info",
+        "parameters": [
+          {
+            "name": "appId",
+            "in": "path",
+            "description": "Format - guid. The application ID.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "versionId",
+            "in": "path",
+            "description": "The task version ID.",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Returns a list of all custom prebuilt intents and their representations.",
+            "examples": {
+              "application/json": "[  {    \"id\": \"9500536f-ffec-4fab-93ad-6268abb0f73c\",    \"name\": \"$Camera.CapturePhoto\",    \"typeId\": 0,    \"readableType\": \"Intent Classifier\",    \"customPrebuiltDomainName\": \"Camera\",    \"customPrebuiltModelName\": \"CapturePhoto\"  },  {    \"id\": \"facd34fa-86a3-4805-8bf3-b99e40043b10\",    \"name\": \"$Camera.CaptureScreenshot\",    \"typeId\": 0,    \"readableType\": \"Intent Classifier\",    \"customPrebuiltDomainName\": \"Camera\",    \"customPrebuiltModelName\": \"CaptureScreenshot\"  },  {    \"id\": \"d116d287-3e53-4bd8-8b7b-4728c58c34d1\",    \"name\": \"$Camera.CaptureSelfie\",    \"typeId\": 0,    \"readableType\": \"Intent Classifier\",    \"customPrebuiltDomainName\": \"Camera\",    \"customPrebuiltModelName\": \"CaptureSelfie\"  },  {    \"id\": \"ad2cac73-2abf-41cb-99e2-f79d0dd6ca46\",    \"name\": \"$Camera.CaptureVideo\",    \"typeId\": 0,    \"readableType\": \"Intent Classifier\",    \"customPrebuiltDomainName\": \"Camera\",    \"customPrebuiltModelName\": \"CaptureVideo\"  },  {    \"id\": \"70de3f00-3943-4a93-a88c-09392016b776\",    \"name\": \"$Camera.StartBroadcasting\",    \"typeId\": 0,    \"readableType\": \"Intent Classifier\",    \"customPrebuiltDomainName\": \"Camera\",    \"customPrebuiltModelName\": \"StartBroadcasting\"  },  {    \"id\": \"3397fc83-5b1d-4f5f-b4cd-0f2169f076c6\",    \"name\": \"$Camera.StopBroadcasting\",    \"typeId\": 0,    \"readableType\": \"Intent Classifier\",    \"customPrebuiltDomainName\": \"Camera\",    \"customPrebuiltModelName\": \"StopBroadcasting\"  },  {    \"id\": \"72a15bcc-538a-4e59-be8c-9fdd43b5338f\",    \"name\": \"$Camera.StopVideoRecording\",    \"typeId\": 0,    \"readableType\": \"Intent Classifier\",    \"customPrebuiltDomainName\": \"Camera\",    \"customPrebuiltModelName\": \"StopVideoRecording\"  }]"
+            }
+          }
+        },
+        "produces": [
+          "application/json"
+        ]
+      }
+    },
+    "/apps/{appId}/versions/{versionId}/customprebuiltentities": {
+      "post": {
+        "description": "Adds a custom prebuilt entity model to the application",
+        "operationId": "models - Add custom prebuilt entity model",
+        "parameters": [
+          {
+            "name": "appId",
+            "in": "path",
+            "description": "Format - guid. The application ID.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "versionId",
+            "in": "path",
+            "description": "The task version ID.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "prebuiltDomainModelCreateObject",
+            "in": "body",
+            "schema": {
+              "$ref": "#/definitions/PrebuiltDomainModelCreateObject"
+            },
+            "description": "A model object containing the name of the custom prebuilt entity and the name of the domain to which this model belongs."
+          }
+        ],
+        "consumes": [
+          "application/json"
+        ],
+        "responses": {
+          "201": {
+            "description": "The ID of the created model.",
+            "examples": {
+              "application/json": "\"1c2e70c1-3cbf-4e89-9703-9583b81102b9\""
+            }
+          }
+        },
+        "produces": [
+          "application/json"
+        ]
+      },
+      "get": {
+        "description": "Gets all custom prebuilt entities information of this application",
+        "operationId": "models - Get custom prebuilt domain entities info",
+        "parameters": [
+          {
+            "name": "appId",
+            "in": "path",
+            "description": "Format - guid. The application ID.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "versionId",
+            "in": "path",
+            "description": "The task version ID.",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Returns a list of all custom prebuilt entities and their representations.",
+            "examples": {
+              "application/json": "[  {    \"id\": \"b8e31be4-300f-455e-894b-6f079abca0a2\",    \"name\": \"$Camera.AppName\",    \"typeId\": 1,    \"readableType\": \"Entity Extractor\",    \"customPrebuiltDomainName\": \"Camera\",    \"customPrebuiltModelName\": \"AppName\"  }]"
+            }
+          }
+        },
+        "produces": [
+          "application/json"
+        ]
+      }
+    },
+    "/apps/{appId}/versions/{versionId}/customprebuiltmodels": {
+      "get": {
+        "description": "Gets all custom prebuilt models information of this application",
+        "operationId": "models - Get custom prebuilt domain models info",
+        "parameters": [
+          {
+            "name": "appId",
+            "in": "path",
+            "description": "Format - guid. The application ID.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "versionId",
+            "in": "path",
+            "description": "The task version ID.",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Returns a list of all custom prebuilt models and their representations.",
+            "examples": {
+              "application/json": "[  {    \"id\": \"b8e31be4-300f-455e-894b-6f079abca0a2\",    \"name\": \"$Camera.AppName\",    \"typeId\": 1,    \"readableType\": \"Entity Extractor\",    \"customPrebuiltDomainName\": \"Camera\",    \"customPrebuiltModelName\": \"AppName\"  },  {    \"id\": \"9500536f-ffec-4fab-93ad-6268abb0f73c\",    \"name\": \"$Camera.CapturePhoto\",    \"typeId\": 0,    \"readableType\": \"Intent Classifier\",    \"customPrebuiltDomainName\": \"Camera\",    \"customPrebuiltModelName\": \"CapturePhoto\"  },  {    \"id\": \"facd34fa-86a3-4805-8bf3-b99e40043b10\",    \"name\": \"$Camera.CaptureScreenshot\",    \"typeId\": 0,    \"readableType\": \"Intent Classifier\",    \"customPrebuiltDomainName\": \"Camera\",    \"customPrebuiltModelName\": \"CaptureScreenshot\"  },  {    \"id\": \"d116d287-3e53-4bd8-8b7b-4728c58c34d1\",    \"name\": \"$Camera.CaptureSelfie\",    \"typeId\": 0,    \"readableType\": \"Intent Classifier\",    \"customPrebuiltDomainName\": \"Camera\",    \"customPrebuiltModelName\": \"CaptureSelfie\"  },  {    \"id\": \"ad2cac73-2abf-41cb-99e2-f79d0dd6ca46\",    \"name\": \"$Camera.CaptureVideo\",    \"typeId\": 0,    \"readableType\": \"Intent Classifier\",    \"customPrebuiltDomainName\": \"Camera\",    \"customPrebuiltModelName\": \"CaptureVideo\"  },  {    \"id\": \"70de3f00-3943-4a93-a88c-09392016b776\",    \"name\": \"$Camera.StartBroadcasting\",    \"typeId\": 0,    \"readableType\": \"Intent Classifier\",    \"customPrebuiltDomainName\": \"Camera\",    \"customPrebuiltModelName\": \"StartBroadcasting\"  },  {    \"id\": \"3397fc83-5b1d-4f5f-b4cd-0f2169f076c6\",    \"name\": \"$Camera.StopBroadcasting\",    \"typeId\": 0,    \"readableType\": \"Intent Classifier\",    \"customPrebuiltDomainName\": \"Camera\",    \"customPrebuiltModelName\": \"StopBroadcasting\"  },  {    \"id\": \"72a15bcc-538a-4e59-be8c-9fdd43b5338f\",    \"name\": \"$Camera.StopVideoRecording\",    \"typeId\": 0,    \"readableType\": \"Intent Classifier\",    \"customPrebuiltDomainName\": \"Camera\",    \"customPrebuiltModelName\": \"StopVideoRecording\"  }]"
+            }
+          }
+        },
+        "produces": [
+          "application/json"
+        ]
+      }
+    },
+    "/apps/{appId}/versions/{versionId}/customprebuiltdomains/{domainName}": {
+      "delete": {
+        "description": "Deletes a prebuilt domain's models from the application.",
+        "operationId": "models - Delete custom prebuilt domain models",
+        "parameters": [
+          {
+            "name": "appId",
+            "in": "path",
+            "description": "Format - guid. The application ID.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "versionId",
+            "in": "path",
+            "description": "The task version ID.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "domainName",
+            "in": "path",
+            "description": "Domain name",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": ""
+          }
+        }
+      }
+    },
+    "/apps/customprebuiltdomains": {
+      "get": {
+        "description": "Gets all the available custom prebuilt domains for all cultures",
+        "operationId": "apps - Get available custom prebuilt domains",
+        "responses": {
+          "200": {
+            "description": "Returns a list of all custom prebuilt domains and their intents/entities representation",
+            "examples": {
+              "application/json": "[ {    \"name\": \"taxi\",    \"culture\": \"en-us\",    \"description\": \"A custom prebuilt domain for taxi booking\",    \"examples\": \"book taxi x on friday at 6 pm, take me to Tinga's from Westin hotel with taxi lux\",    \"intents\": [      {        \"name\": \"book_taxi\",        \"description\": \"Requests/Books taxi\",        \"examples\": \"book taxi x on friday at 6 pm\"      },      {        \"name\": \"cancel_taxi\",        \"description\": \"Cancels taxi request\",        \"examples\": \"I just called an taxi SUV , please cancel, Cancel my taxi\"      }    ],    \"entities\": [      {        \"name\": \"from_place_name\",        \"description\": \"Route starting point\",        \"examples\": \"find taxi x to take me to 9th street from space needle\"      }    ]  },  {    \"name\": \"weather\",    \"culture\": \"en-us\",    \"description\": \"A custom prebuilt domain that gets weather forecast and condition\",    \"examples\": \"Show me the weather for this weekend, What's the weather?\",    \"intents\": [      {        \"name\": \"get_forecast\",        \"description\": \"Gets weather forecast\",        \"examples\": \"What's the weather like tomorrow?\"      },      {        \"name\": \"get_condition\",        \"description\": \"Gets weather condition\",        \"examples\": \"what's the average temperature in India in September?\"      }    ],    \"entities\": [      {        \"name\": \"location\",        \"description\": \"Location of the queried weather\",        \"examples\": \"What's the weather like in Minneapolis\"      },      {        \"name\": \"unit\",        \"description\": \"Temperature measurement unit\",        \"examples\": \"Please change the weather from Fahrenheit to Celsius\"      }    ]  }]"
+            }
+          }
+        },
+        "produces": [
+          "application/json"
+        ]
+      },
+      "post": {
+        "description": "Adds a prebuilt domain along with its models as a new application.",
+        "operationId": "apps - Add custom prebuilt application",
+        "parameters": [
+          {
+            "name": "prebuiltDomainCreateObject",
+            "in": "body",
+            "schema": {
+              "$ref": "#/definitions/PrebuiltDomainCreateObject"
+            },
+            "description": "A prebuilt domain create object containing the name and culture of the domain"
+          }
+        ],
+        "consumes": [
+          "application/json"
+        ],
+        "responses": {
+          "201": {
+            "description": "The ID of the created application.",
+            "examples": {
+              "application/json": "\"739f1513-11f0-4aae-8a19-f660804e6da5\""
+            }
+          }
+        },
+        "produces": [
+          "application/json"
+        ]
+      }
+    },
+    "/apps/customprebuiltdomains/{culture}": {
+      "get": {
+        "description": "Gets all the available custom prebuilt domains for a specific culture",
+        "operationId": "apps - Get available custom prebuilt domains for culture",
+        "parameters": [
+          {
+            "name": "culture",
+            "in": "path",
+            "description": "Format - string. Culture",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Returns a list of all domains and their intents/entities representation for a specific culture",
+            "examples": {
+              "application/json": "[ {    \"name\": \"taxi\",    \"culture\": \"en-us\",    \"description\": \"A custom prebuilt domain for taxi booking\",    \"examples\": \"book taxi x on friday at 6 pm, take me to Tinga's from Westin hotel with taxi lux\",    \"intents\": [      {        \"name\": \"book_taxi\",        \"description\": \"Requests/Books taxi\",        \"examples\": \"book taxi x on friday at 6 pm\"      },      {        \"name\": \"cancel_taxi\",        \"description\": \"Cancels taxi request\",        \"examples\": \"I just called an taxi SUV , please cancel, Cancel my taxi\"      }    ],    \"entities\": [      {        \"name\": \"from_place_name\",        \"description\": \"Route starting point\",        \"examples\": \"find taxi x to take me to 9th street from space needle\"      }    ]  },  {    \"name\": \"weather\",    \"culture\": \"en-us\",    \"description\": \"A custom prebuilt domain that gets weather forecast and condition\",    \"examples\": \"Show me the weather for this weekend, What's the weather?\",    \"intents\": [      {        \"name\": \"get_forecast\",        \"description\": \"Gets weather forecast\",        \"examples\": \"What's the weather like tomorrow?\"      },      {        \"name\": \"get_condition\",        \"description\": \"Gets weather condition\",        \"examples\": \"what's the average temperature in India in September?\"      }    ],    \"entities\": [      {        \"name\": \"location\",        \"description\": \"Location of the queried weather\",        \"examples\": \"What's the weather like in Minneapolis\"      },      {        \"name\": \"unit\",        \"description\": \"Temperature measurement unit\",        \"examples\": \"Please change the weather from Fahrenheit to Celsius\"      }    ]  }]"
+            }
+          }
+        },
+        "produces": [
+          "application/json"
+        ]
+      }
+    },
+    "/apps/{appId}/versions/{versionId}/hierarchicalentities/{hEntityId}/children/{hChildId}": {
+      "get": {
+        "description": "Gets information about the hierarchical entity child model.",
+        "operationId": "models - Get hierarchical entity child info",
+        "parameters": [
+          {
+            "name": "appId",
+            "in": "path",
+            "description": "Format - guid. The application ID.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "versionId",
+            "in": "path",
+            "description": "The task version ID.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "hEntityId",
+            "in": "path",
+            "description": "Format - guid. The hierarchical entity extractor parent ID.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "hChildId",
+            "in": "path",
+            "description": "Format - guid. The hierarchical entity extractor child ID.",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The hierarchical entity child model info.",
+            "examples": {
+              "application/json": {
+                "id": "ef278a6c-d94f-4d20-a602-cf53d0acf0f5",
+                "name": "From",
+                "typeId": 6,
+                "readableType": "Hierarchical Child Entity Extractor"
+              }
+            }
+          }
+        },
+        "produces": [
+          "application/json"
+        ]
+      },
+      "put": {
+        "description": "Renames a single child in an existing hierarchical entity model.",
+        "operationId": "models - Update hierarchical entity child model",
+        "parameters": [
+          {
+            "name": "appId",
+            "in": "path",
+            "description": "Format - guid. The application ID.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "versionId",
+            "in": "path",
+            "description": "The task version ID.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "hEntityId",
+            "in": "path",
+            "description": "Format - guid. The hierarchical entity extractor ID.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "hChildId",
+            "in": "path",
+            "description": "Format - guid. The hierarchical entity extractor child ID.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "schema": {
+              "example": "{\t\"name\": \"Source\"}"
+            },
+            "description": "Model object containing new name of the hierarchical entity child."
+          }
+        ],
+        "consumes": [
+          "application/json"
+        ],
+        "responses": {
+          "200": {
+            "description": ""
+          }
+        }
+      },
+      "delete": {
+        "description": "Deletes a hierarchical entity extractor child from the application.",
+        "operationId": "models - Delete hierarchical entity child model",
+        "parameters": [
+          {
+            "name": "appId",
+            "in": "path",
+            "description": "Format - guid. The application ID.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "versionId",
+            "in": "path",
+            "description": "The task version ID.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "hEntityId",
+            "in": "path",
+            "description": "Format - guid. The hierarchical entity extractor ID.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "hChildId",
+            "in": "path",
+            "description": "Format - guid. The hierarchical entity extractor child ID.",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": ""
+          }
+        }
+      }
+    },
+    "/apps/{appId}/versions/{versionId}/hierarchicalentities/{hEntityId}/children": {
+      "post": {
+        "description": "Creates a single child in an existing hierarchical entity model.",
+        "operationId": "models - Create hierarchical entity child model",
+        "parameters": [
+          {
+            "name": "appId",
+            "in": "path",
+            "description": "Format - guid. The application ID.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "versionId",
+            "in": "path",
+            "description": "The task version ID.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "hEntityId",
+            "in": "path",
+            "description": "Format - guid. The hierarchical entity extractor ID.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "schema": {
+              "example": "{\t\"name\" : \"To\"}"
+            },
+            "description": "A model object containing the name of the new hierarchical child model."
+          }
+        ],
+        "consumes": [
+          "application/json"
+        ],
+        "responses": {
+          "201": {
+            "description": "The ID of the created model.",
+            "examples": {
+              "application/json": "\"891c235f-4f42-4320-bc36-b6256b6c3f2b\""
+            }
+          }
+        },
+        "produces": [
+          "application/json"
+        ]
+      }
+    },
+    "/apps/{appId}/versions/{versionId}/compositeentities/{cEntityId}/children": {
+      "post": {
+        "description": "Creates a single child in an existing composite entity model.",
+        "operationId": "models - Create composite entity child model",
+        "parameters": [
+          {
+            "name": "appId",
+            "in": "path",
+            "description": "Format - guid. The application ID.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "versionId",
+            "in": "path",
+            "description": "The task version ID.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "cEntityId",
+            "in": "path",
+            "description": "Format - guid. The composite entity extractor ID.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "schema": {
+              "example": "{\t\"name\" : \"datetime\"}"
+            },
+            "description": "A model object containing the name of the new composite child model."
+          }
+        ],
+        "consumes": [
+          "application/json"
+        ],
+        "responses": {
+          "201": {
+            "description": "The ID of the created model.",
+            "examples": {
+              "application/json": "\"891c235f-4f42-4320-bc36-b6256b6c3f2b\""
+            }
+          }
+        },
+        "produces": [
+          "application/json"
+        ]
+      }
+    },
+    "/apps/{appId}/versions/{versionId}/compositeentities/{cEntityId}/children/{cChildId}": {
+      "delete": {
+        "description": "Deletes a composite entity extractor child from the application.",
+        "operationId": "models - Delete composite entity child model",
+        "parameters": [
+          {
+            "name": "appId",
+            "in": "path",
+            "description": "Format - guid. The application ID.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "versionId",
+            "in": "path",
+            "description": "The task version ID.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "cEntityId",
+            "in": "path",
+            "description": "Format - guid. The hierarchical entity extractor ID.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "cChildId",
+            "in": "path",
+            "description": "Format - guid. The hierarchical entity extractor child ID.",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": ""
+          }
+        }
+      }
+    }
+  },
+  "definitions": {
+    "ApplicationCreateBaseObject": {
+      "additionalProperties": false,
+      "type": "object",
+      "properties": {
+        "Culture": {
+          "type": "string"
+        },
+        "UsageScenario": {
+          "type": "string"
+        },
+        "Description": {
+          "type": "string"
+        },
+        "Domain": {
+          "type": "string"
+        },
+        "Name": {
+          "type": "string"
+        }
+      }
+    },
+    "EntityLabelObject": {
+      "additionalProperties": false,
+      "type": "object",
+      "properties": {
+        "EntityName": {
+          "type": "string"
+        },
+        "StartCharIndex": {
+          "type": "integer"
+        },
+        "EndCharIndex": {
+          "type": "integer"
+        }
+      }
+    },
+    "ApplicationCreateObject": {
+      "additionalProperties": false,
+      "type": "object",
+      "properties": {
+        "Culture": {
+          "type": "string"
+        },
+        "Domain": {
+          "type": "string"
+        },
+        "Description": {
+          "type": "string"
+        },
+        "InitialVersionId": {
+          "type": "string"
+        },
+        "UsageScenario": {
+          "type": "string"
+        },
+        "Name": {
+          "type": "string"
+        }
+      },
+      "example": "{\t\"name\": \"MyFirstDummyApp\",\t\"description\": \"This is my first dummy application\",\t\"culture\": \"en-us\",\t\"usageScenario\": \"IoT\",\t\"domain\": \"Comics\",\t\"initialVersionId\": \"1.0\"}"
+    },
+    "PrebuiltDomainCreateBaseObject": {
+      "additionalProperties": false,
+      "type": "object",
+      "properties": {
+        "DomainName": {
+          "type": "string"
+        }
+      },
+      "example": "{ \t\"domainName\": \"Camera\" }"
+    },
+    "PrebuiltDomainCreateObject": {
+      "additionalProperties": false,
+      "type": "object",
+      "properties": {
+        "DomainName": {
+          "type": "string"
+        },
+        "Culture": {
+          "type": "string"
+        }
+      },
+      "example": "{\t\"domainName\": \"Web\", \t\"culture\": \"en-us\"}"
+    },
+    "PrebuiltDomainModelCreateObject": {
+      "additionalProperties": false,
+      "type": "object",
+      "properties": {
+        "DomainName": {
+          "type": "string"
+        },
+        "ModelName": {
+          "type": "string"
+        }
+      },
+      "example": "{\t\"domainName\": \"Camera\",        \"modelName\": \"AppName\"}"
+    },
+    "HierarchicalModelUpdateObject": {
+      "additionalProperties": false,
+      "type": "object",
+      "properties": {
+        "Children": {
+          "items": {
+            "type": "string"
+          },
+          "type": "array"
+        },
+        "Name": {
+          "type": "string"
+        }
+      },
+      "example": "{\t\"name\": \"Reservation\",\t\"children\": [ \"Location::To\" ]}"
+    },
+    "JSONEntity": {
+      "additionalProperties": false,
+      "type": "object",
+      "properties": {
+        "startPos": {
+          "type": "integer"
+        },
+        "endPos": {
+          "type": "integer"
+        },
+        "entity": {
+          "type": "string"
+        }
+      }
+    },
+    "ApplicationSettingUpdateObject": {
+      "additionalProperties": false,
+      "type": "object",
+      "properties": {
+        "Public": {
+          "type": "boolean"
+        }
+      },
+      "example": "{\t\"public\": true}"
+    },
+    "ExampleLabelObject": {
+      "additionalProperties": false,
+      "type": "object",
+      "properties": {
+        "Text": {
+          "type": "string"
+        },
+        "EntityLabels": {
+          "items": {
+            "type": "object",
+            "$ref": "#/definitions/EntityLabelObject"
+          },
+          "type": "array"
+        },
+        "IntentName": {
+          "type": "string"
+        }
+      },
+      "example": "{\t\"text\": \"Book me a flight from Cairo to Redmond next Thursday\",\t\"intentName\": \"BookFlight\",\t\"entityLabels\":\t[\t\t{\t\t\t\"entityName\": \"Location::From\",\t\t\t\"startCharIndex\": 22,\t\t\t\"endCharIndex\": 26\t\t},\t\t{\t\t\t\"entityName\": \"Location::To\",\t\t\t\"startCharIndex\": 31,\t\t\t\"endCharIndex\": 37\t\t}\t]}"
+    },
+    "PhraselistCreateObject": {
+      "additionalProperties": false,
+      "type": "object",
+      "properties": {
+        "Phrases": {
+          "type": "string"
+        },
+        "Name": {
+          "type": "string"
+        },
+        "IsExchangeable": {
+          "default": true,
+          "type": "boolean"
+        }
+      },
+      "example": "{\t\"name\": \"DaysOfWeek\",\t\"phrases\": \"monday,tuesday,wednesday,thursday,friday,saturday,sunday\",        \"isExchangeable\": true}"
+    },
+    "JSONSubClosedList": {
+      "additionalProperties": false,
+      "type": "object",
+      "properties": {
+        "CanonicalForm": {
+          "type": "string"
+        },
+        "List": {
+          "items": {
+            "type": "string"
+          },
+          "type": "array"
+        }
+      }
+    },
+    "JSONAction": {
+      "additionalProperties": false,
+      "type": "object",
+      "properties": {
+        "actionName": {
+          "type": "string"
+        },
+        "actionParameters": {
+          "items": {
+            "type": "object",
+            "$ref": "#/definitions/JSONActionParam"
+          },
+          "type": "array"
+        },
+        "intentName": {
+          "type": "string"
+        },
+        "channel": {
+          "type": "object",
+          "$ref": "#/definitions/Channel"
+        }
+      }
+    },
+    "ApplicationUpdateObject": {
+      "additionalProperties": false,
+      "type": "object",
+      "properties": {
+        "Name": {
+          "type": "string"
+        },
+        "Description": {
+          "type": "string"
+        }
+      },
+      "example": "{\t\"name\": \"MyFirstRenamedDummyAp\",\t\"description\": \"This is my first modified dummy description\"}"
+    },
+    "Channel": {
+      "additionalProperties": false,
+      "type": "object",
+      "properties": {
+        "Settings": {
+          "items": {
+            "type": "object",
+            "$ref": "#/definitions/Setting"
+          },
+          "type": "array"
+        },
+        "Name": {
+          "type": "string"
+        },
+        "Method": {
+          "type": "string"
+        }
+      }
+    },
+    "PrebuiltExtractorNames": {
+      "items": {
+        "type": "string"
+      },
+      "type": "array",
+      "example": "[ \"datetimeV2\" ]"
+    },
+    "JSONRegexFeature": {
+      "additionalProperties": false,
+      "type": "object",
+      "properties": {
+        "pattern": {
+          "type": "string"
+        },
+        "activated": {
+          "type": "boolean"
+        },
+        "name": {
+          "type": "string"
+        }
+      }
+    },
+    "PatternUpdateObject": {
+      "additionalProperties": false,
+      "type": "object",
+      "properties": {
+        "Pattern": {
+          "type": "string"
+        },
+        "Name": {
+          "type": "string"
+        },
+        "IsActive": {
+          "default": true,
+          "type": "boolean"
+        }
+      },
+      "example": "{\t\"name\": \"ModifiedEmailPattern\",        \"pattern\": \"\\b[A-Z0-9._%+-]+@[A-Z0-9.-]+\\\\.[A-Z]{2,}\\b\"}"
+    },
+    "JSONClosedList": {
+      "additionalProperties": false,
+      "type": "object",
+      "properties": {
+        "Name": {
+          "type": "string"
+        },
+        "SubLists": {
+          "items": {
+            "type": "object",
+            "$ref": "#/definitions/JSONSubClosedList"
+          },
+          "type": "array"
+        }
+      }
+    },
+    "JSONActionParam": {
+      "additionalProperties": false,
+      "type": "object",
+      "properties": {
+        "phraseListFeatureName": {
+          "type": "string"
+        },
+        "parameterName": {
+          "type": "string"
+        },
+        "entityName": {
+          "type": "string"
+        },
+        "required": {
+          "type": "boolean"
+        },
+        "question": {
+          "type": "string"
+        }
+      }
+    },
+    "ClosedListModelPatchObject": {
+      "additionalProperties": false,
+      "type": "object",
+      "properties": {
+        "SubLists": {
+          "items": {
+            "type": "object",
+            "$ref": "#/definitions/WordListCreateObject"
+          },
+          "type": "array"
+        }
+      },
+      "example": "{\t\"sublists\":\t[\t\t{\t\t\t\"canonicalForm\": \"Ohio\",\t\t\t\"list\": [ \"Ohio\", \"OH\" ]\t\t}\t]}"
+    },
+    "KeyValue": {
+      "type": "string",
+      "example": "\"DummyKey\""
+    },
+    "ExternalKeyCreateObject": {
+      "additionalProperties": false,
+      "type": "object",
+      "properties": {
+        "Type": {
+          "type": "string"
+        },
+        "Value": {
+          "type": "string"
+        }
+      },
+      "example": "{\t\"type\": \"BingSpellCheck\",\t\"value\": \"ee29eff4fe914fe282ad75d16328d717\"}"
+    },
+    "UserSubscriptionCreateObject": {
+      "additionalProperties": false,
+      "type": "object",
+      "properties": {
+        "SubscriptionName": {
+          "type": "string"
+        },
+        "SubscriptionKey": {
+          "type": "string"
+        }
+      },
+      "example": "{\t\"subscriptionName\": \"DummyName\",\t\"subscriptionKey\": \"DummyKey\"}"
+    },
+    "JSONModelFeature": {
+      "additionalProperties": false,
+      "type": "object",
+      "properties": {
+        "activated": {
+          "type": "boolean"
+        },
+        "name": {
+          "type": "string"
+        },
+        "words": {
+          "type": "string"
+        },
+        "mode": {
+          "type": "boolean"
+        }
+      }
+    },
+    "ModelCreateObject": {
+      "additionalProperties": false,
+      "type": "object",
+      "properties": {
+        "Name": {
+          "type": "string"
+        }
+      },
+      "example": "{\t\"name\": \"DayOfWeek\"}"
+    },
+    "Setting": {
+      "additionalProperties": false,
+      "type": "object",
+      "properties": {
+        "Name": {
+          "type": "string"
+        },
+        "Value": {
+          "type": "string"
+        }
+      }
+    },
+    "PatternCreateObject": {
+      "additionalProperties": false,
+      "type": "object",
+      "properties": {
+        "Pattern": {
+          "type": "string"
+        },
+        "Name": {
+          "type": "string"
+        }
+      },
+      "example": "{\t\"name\": \"EmailPattern\",\t\"pattern\": \"\\\\b[A-Z0-9._%+-]+@[A-Z0-9.-]+\\\\.[A-Z]{2,}\\\\b\"}"
+    },
+    "WordListCreateObject": {
+      "additionalProperties": false,
+      "type": "object",
+      "properties": {
+        "CanonicalForm": {
+          "type": "string"
+        },
+        "List": {
+          "items": {
+            "type": "string"
+          },
+          "type": "array"
+        }
+      },
+      "example": "{\t\"canonicalForm\": \"BankName\",\t\"list\": [\t\t\"HSBC\",\t\t\"CitiBank\"\t]}"
+    },
+    "WordListBaseUpdateObject": {
+      "additionalProperties": false,
+      "type": "object",
+      "properties": {
+        "CanonicalForm": {
+          "type": "string"
+        },
+        "List": {
+          "items": {
+            "type": "string"
+          },
+          "type": "array"
+        }
+      },
+      "example": "{\t\"canonicalForm\": \"NewYorkCities\",\t\"list\" : [\"Yonkers\", \"Utica\", \"Olean\", \"Cohoes\", \"Buffalo\"]} "
+    },
+    "JSONUtterance": {
+      "additionalProperties": false,
+      "type": "object",
+      "properties": {
+        "text": {
+          "type": "string"
+        },
+        "intent": {
+          "type": "string"
+        },
+        "entities": {
+          "items": {
+            "type": "object",
+            "$ref": "#/definitions/JSONEntity"
+          },
+          "type": "array"
+        }
+      }
+    },
+    "ModelUpdateObject": {
+      "additionalProperties": false,
+      "type": "object",
+      "properties": {
+        "Name": {
+          "type": "string"
+        }
+      },
+      "example": "{\t\"name\": \"DaysOfWeek\"}"
+    },
+    "ClosedListModelUpdateObject": {
+      "additionalProperties": false,
+      "type": "object",
+      "properties": {
+        "SubLists": {
+          "items": {
+            "type": "object",
+            "$ref": "#/definitions/WordListCreateObject"
+          },
+          "type": "array"
+        },
+        "Name": {
+          "type": "string"
+        }
+      },
+      "example": "{  \"name\": \"States\",  \"subLists\": [    {      \"canonicalForm\": \"new york\",      \"list\": [        \"ny\",        \"new york\"      ]    },    {      \"canonicalForm\": \"washington\",      \"list\": [        \"washington\",        \"wa\"      ]    },    {      \"canonicalForm\": \"california\",      \"list\": [        \"california\",        \"ca\",        \"calif.\",        \"cal.\"      ]    },    {    \t\"canonicalForm\": \"Texas\",    \t\"list\": [    \t\t\"Texas\",    \t\t\"TX\"    \t]    }  ]}"
+    },
+    "ExternalKeyUpdateObject": {
+      "additionalProperties": false,
+      "type": "object",
+      "properties": {
+        "Type": {
+          "type": "string"
+        },
+        "Value": {
+          "type": "string"
+        }
+      },
+      "example": "{\t\"type\": \"BingSpellCheck\",        \"value\": \"ee29eff4fe914fe282ad75d16328d717\"}"
+    },
+    "ClosedListModelCreateObject": {
+      "additionalProperties": false,
+      "type": "object",
+      "properties": {
+        "SubLists": {
+          "items": {
+            "type": "object",
+            "$ref": "#/definitions/WordListCreateObject"
+          },
+          "type": "array"
+        },
+        "Name": {
+          "type": "string"
+        }
+      },
+      "example": "{\t\"name\": \"States\",\t\"sublists\": \t[\t\t{\t\t\t\"canonicalForm\": \"New York\",\t\t\t\"list\": [ \"NY\", \"New York\" ]\t\t},\t\t{\t\t\t\"canonicalForm\": \"Washington\",\t\t\t\"list\": [ \"Washington\", \"WA\" ]\t\t},\t\t{\t\t\t\"canonicalForm\": \"California\",\t\t\t\"list\": [ \"California\", \"CA\", \"Calif.\", \"Cal.\" ]\t\t}\t]}"
+    },
+    "ExampleLabelObjectArray": {
+      "items": {
+        "type": "object",
+        "$ref": "#/definitions/ExampleLabelObject"
+      },
+      "type": "array",
+      "example": "[\t{\t\t\"text\": \"Book me a flight from Cairo to Redmond next Thursday\",\t\t\"intentName\": \"BookFlight\",\t\t\"entityLabels\":\t\t[\t\t\t{\t\t\t\t\"entityName\": \"Location::From\",\t\t\t\t\"startCharIndex\": 22,\t\t\t\t\"endCharIndex\": 26\t\t\t},\t\t\t{\t\t\t\t\"entityName\": \"Location::To\",\t\t\t\t\"startCharIndex\": 31,\t\t\t\t\"endCharIndex\": 37\t\t\t}\t\t]\t},\t{\t\t\"text\": \"What's the weather like in Seattle?\",\t\t\"intentName\": \"GetWeather\",\t\t\"entityLabels\":\t\t[\t\t\t{\t\t\t\t\"entityName\": \"Location\",\t\t\t\t\"startCharIndex\": 27,\t\t\t\t\"endCharIndex\": 33\t\t\t}\t\t]\t}]"
+    },
+    "TaskUpdateObject": {
+      "additionalProperties": false,
+      "type": "object",
+      "properties": {
+        "Version": {
+          "type": "string"
+        }
+      },
+      "example": "{\t\"version\": \"1.0\"}"
+    },
+    "PhraselistUpdateObject": {
+      "additionalProperties": false,
+      "type": "object",
+      "properties": {
+        "Phrases": {
+          "type": "string"
+        },
+        "Name": {
+          "type": "string"
+        },
+        "IsActive": {
+          "default": true,
+          "type": "boolean"
+        },
+        "IsExchangeable": {
+          "default": true,
+          "type": "boolean"
+        }
+      },
+      "example": "{\t\"name\": \"BusinessDaysOfWeek\",\t\"phrases\": \"monday,tuesday,wednesday,thursday,friday\"}"
+    },
+    "HierarchicalModel": {
+      "additionalProperties": false,
+      "type": "object",
+      "properties": {
+        "Name": {
+          "type": "string"
+        },
+        "Children": {
+          "items": {
+            "type": "string"
+          },
+          "type": "array"
+        }
+      }
+    },
+    "HierarchicalModelCreateObject": {
+      "additionalProperties": false,
+      "type": "object",
+      "properties": {
+        "Children": {
+          "items": {
+            "type": "string"
+          },
+          "type": "array"
+        },
+        "Name": {
+          "type": "string"
+        }
+      },
+      "example": "{\t\"name\": \"Reservation\",\t\"children\": [ \"Location::To\", \"datetime\" ]}"
+    },
+    "ApplicationPublishObject": {
+      "additionalProperties": false,
+      "type": "object",
+      "properties": {
+        "versionId": {
+          "type": "string"
+        },
+        "isStaging": {
+          "default": false,
+          "type": "boolean"
+        }
+      },
+      "example": "{   \"versionId\": \"0.1\",   \"isStaging\": false,   \"region\"\" \"westus\"}"
+    },
+    "JSONApp": {
+      "additionalProperties": false,
+      "type": "object",
+      "properties": {
+        "name": {
+          "type": "string"
+        },
+        "versionId": {
+          "type": "string"
+        },
+        "desc": {
+          "type": "string"
+        },
+        "culture": {
+          "type": "string"
+        },
+        "intents": {
+          "items": {
+            "type": "object",
+            "$ref": "#/definitions/HierarchicalModel"
+          },
+          "type": "array"
+        },
+        "entities": {
+          "items": {
+            "type": "object",
+            "$ref": "#/definitions/HierarchicalModel"
+          },
+          "type": "array"
+        },
+        "bing_entities": {
+          "items": {
+            "type": "string"
+          },
+          "type": "array"
+        },
+        "actions": {
+          "items": {
+            "type": "object",
+            "$ref": "#/definitions/JSONAction"
+          },
+          "type": "array"
+        },
+        "closedLists": {
+          "items": {
+            "type": "object",
+            "$ref": "#/definitions/JSONClosedList"
+          },
+          "type": "array"
+        },
+        "composites": {
+          "items": {
+            "type": "object",
+            "$ref": "#/definitions/HierarchicalModel"
+          },
+          "type": "array"
+        },
+        "regex_features": {
+          "items": {
+            "type": "object",
+            "$ref": "#/definitions/JSONRegexFeature"
+          },
+          "type": "array"
+        },
+        "model_features": {
+          "items": {
+            "type": "object",
+            "$ref": "#/definitions/JSONModelFeature"
+          },
+          "type": "array"
+        },
+        "utterances": {
+          "items": {
+            "type": "object",
+            "$ref": "#/definitions/JSONUtterance"
+          },
+          "type": "array"
+        }
+      },
+      "example": "{  \"luis_schema_version\": \"1.3.1\",  \"name\": \"DummyImportedApp\",  \"versionId\": \"0.2\",  \"desc\": \"This is my dummy imported application\",  \"culture\": \"en-us\",  \"intents\": [    {      \"name\": \"BookFlight\"    },    {      \"name\": \"GetWeather\"    },    {      \"name\": \"None\"    }  ],  \"entities\": [    {      \"name\": \"Location\",      \"children\": [        \"To\",        \"From\"      ]    }  ],  \"composites\": [],  \"closedLists\": [],  \"bing_entities\": [    \"datetime\"  ],  \"actions\": [],  \"model_features\": [    {      \"name\": \"Cities\",      \"mode\": true,      \"words\": \"Seattle,New York,Paris,Moscow,Beijin\",      \"activated\": true    }  ],  \"regex_features\": [],  \"utterances\": [    {      \"text\": \"book me a flight from redmond to new york next saturday\",      \"intent\": \"BookFlight\",      \"entities\": [        {          \"entity\": \"Location::From\",          \"startPos\": 5,          \"endPos\": 5        },        {          \"entity\": \"Location::To\",          \"startPos\": 7,          \"endPos\": 8        }      ]    },    {      \"text\": \"what's the weather like in paris?\",      \"intent\": \"GetWeather\",      \"entities\": [        {          \"entity\": \"Location\",          \"startPos\": 7,          \"endPos\": 7        }      ]    }  ]}"
+    }
+  }
+}
