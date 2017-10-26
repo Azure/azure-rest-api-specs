@@ -3,7 +3,7 @@
   "info": {
     "title": "RedisManagementClient",
     "description": "REST API for Azure Redis Cache Service.",
-    "version": "2017-02-01"
+    "version": "2017-10-01"
   },
   "host": "management.azure.com",
   "schemes": [
@@ -90,7 +90,7 @@
             "in": "body",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/RedisCreateParameters"
+              "$ref": "#/definitions/RedisResource"
             },
             "description": "Parameters supplied to the Create Redis operation."
           },
@@ -145,7 +145,7 @@
             "in": "body",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/RedisUpdateParameters"
+              "$ref": "#/definitions/RedisResource"
             },
             "description": "Parameters supplied to the Update Redis operation."
           },
@@ -1156,16 +1156,20 @@
     },
     "RedisProperties": {
       "properties": {
+        "sku": {
+          "$ref": "#/definitions/Sku",
+          "description": "The SKU of the Redis cache to deploy."
+        },
+        "enableNonSslPort": {
+          "type": "boolean",
+          "description": "Specifies whether the non-ssl Redis server port (6379) is enabled."
+        },
         "redisConfiguration": {
           "type": "object",
           "additionalProperties": {
             "type": "string"
           },
           "description": "All Redis Settings. Few possible keys: rdb-backup-enabled,rdb-storage-connection-string,rdb-backup-frequency,maxmemory-delta,maxmemory-policy,notify-keyspace-events,maxmemory-samples,slowlog-log-slower-than,slowlog-max-len,list-max-ziplist-entries,list-max-ziplist-value,hash-max-ziplist-entries,hash-max-ziplist-value,set-max-intset-entries,zset-max-ziplist-entries,zset-max-ziplist-value etc."
-        },
-        "enableNonSslPort": {
-          "type": "boolean",
-          "description": "Specifies whether the non-ssl Redis server port (6379) is enabled."
         },
         "tenantSettings": {
           "type": "object",
@@ -1188,41 +1192,50 @@
           "type": "string",
           "pattern": "^\\d+\\.\\d+\\.\\d+\\.\\d+$",
           "description": "Static IP address. Required when deploying a Redis cache inside an existing Azure Virtual Network."
-        }
-      },
-      "description": "Properties supplied to Create or Update Redis operation.",
-      "x-ms-external": true
-    },
-    "RedisCreateProperties": {
-      "properties": {
-        "sku": {
-          "$ref": "#/definitions/Sku",
-          "description": "The SKU of the Redis cache to deploy."
+        },
+        "redisVersion": {
+          "readOnly": true,
+          "type": "string",
+          "description": "Redis version."
+        },
+        "provisioningState": {
+          "readOnly": true,
+          "type": "string",
+          "description": "Redis instance provisioning status."
+        },
+        "hostName": {
+          "readOnly": true,
+          "type": "string",
+          "description": "Redis host name."
+        },
+        "port": {
+          "readOnly": true,
+          "type": "integer",
+          "format": "int32",
+          "description": "Redis non-SSL port."
+        },
+        "sslPort": {
+          "readOnly": true,
+          "type": "integer",
+          "format": "int32",
+          "description": "Redis SSL port."
+        },
+        "accessKeys": {
+          "readOnly": true,
+          "$ref": "#/definitions/RedisAccessKeys",
+          "description": "The keys of the Redis cache - not set if this object is not the response to Create or Update redis cache"
+        },
+        "linkedServers": {
+          "readOnly": true,
+          "$ref": "#/definitions/RedisLinkedServerList",
+          "description": "List of the linked servers associated with the cache"
         }
       },
       "required": [
         "sku"
       ],
-      "allOf": [
-        {
-          "$ref": "#/definitions/RedisProperties"
-        }
-      ],
-      "description": "Properties supplied to Create Redis operation."
-    },
-    "RedisUpdateProperties": {
-      "properties": {
-        "sku": {
-          "$ref": "#/definitions/Sku",
-          "description": "The SKU of the Redis cache to deploy."
-        }
-      },
-      "allOf": [
-        {
-          "$ref": "#/definitions/RedisProperties"
-        }
-      ],
-      "description": "Properties supplied to Update Redis operation."
+      "description": "Properties of the redis cache.",
+      "x-ms-external": true
     },
     "Resource": {
       "description": "The Resource definition.",
@@ -1285,41 +1298,6 @@
           "$ref": "#/definitions/Resource"
         }
       ]
-    },
-    "RedisCreateParameters": {
-      "properties": {
-        "properties": {
-          "x-ms-client-flatten": true,
-          "$ref": "#/definitions/RedisCreateProperties",
-          "description": "Redis cache properties."
-        }
-      },
-      "required": [
-        "properties"
-      ],
-      "allOf": [
-        {
-          "$ref": "#/definitions/TrackedResource"
-        }
-      ],
-      "description": "Parameters supplied to the Create Redis operation."
-    },
-    "RedisUpdateParameters": {
-      "properties": {
-        "properties": {
-          "x-ms-client-flatten": true,
-          "$ref": "#/definitions/RedisUpdateProperties",
-          "description": "Redis cache properties."
-        },
-        "tags": {
-          "type": "object",
-          "additionalProperties": {
-            "type": "string"
-          },
-          "description": "Resource tags."
-        }
-      },
-      "description": "Parameters supplied to the Update Redis operation."
     },
     "RedisAccessKeys": {
       "properties": {
@@ -1388,65 +1366,24 @@
       },
       "description": "The response of list firewall rules Redis operation."
     },
-    "RedisResourceProperties": {
-      "properties": {
-        "sku": {
-          "$ref": "#/definitions/Sku",
-          "description": "The SKU of the Redis cache to deploy."
-        },
-        "redisVersion": {
-          "readOnly": true,
-          "type": "string",
-          "description": "Redis version."
-        },
-        "provisioningState": {
-          "readOnly": true,
-          "type": "string",
-          "description": "Redis instance provisioning status."
-        },
-        "hostName": {
-          "readOnly": true,
-          "type": "string",
-          "description": "Redis host name."
-        },
-        "port": {
-          "readOnly": true,
-          "type": "integer",
-          "format": "int32",
-          "description": "Redis non-SSL port."
-        },
-        "sslPort": {
-          "readOnly": true,
-          "type": "integer",
-          "format": "int32",
-          "description": "Redis SSL port."
-        },
-        "accessKeys": {
-          "$ref": "#/definitions/RedisAccessKeys",
-          "readOnly": true,
-          "description": "The keys of the Redis cache - not set if this object is not the response to Create or Update redis cache"
-        },
-        "linkedServers": {
-          "$ref": "#/definitions/RedisLinkedServerList",
-          "readOnly": true,
-          "description": "List of the linked servers associated with the cache"
-        }
-      },
-      "allOf": [
-        {
-          "$ref": "#/definitions/RedisProperties"
-        }
-      ],
-      "description": "Parameters describing a Redis instance."
-    },
     "RedisResource": {
       "properties": {
         "properties": {
           "x-ms-client-flatten": true,
-          "$ref": "#/definitions/RedisResourceProperties",
+          "$ref": "#/definitions/RedisProperties",
           "description": "Redis cache properties."
+        },
+        "zones": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "description": "A list of availability zones denoting where the resource needs to come from." 
         }
       },
+      "required": [
+        "properties"
+      ],
       "allOf": [
         {
           "$ref": "#/definitions/TrackedResource"
