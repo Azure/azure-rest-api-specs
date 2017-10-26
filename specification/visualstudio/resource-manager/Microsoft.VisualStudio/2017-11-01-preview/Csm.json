@@ -1016,6 +1016,18 @@
         }
       ],
       "properties": {
+        "kind": {
+          "description": "Kind of project resource",
+          "type": "string",
+          "enum": [
+            "project",
+            "bootstrappedProject"
+          ],
+          "x-ms-enum": {
+            "name": "ProjectResourceKind",
+            "modelAsString": true
+          }
+        },
         "properties": {
           "description": "Custom properties of project resource.",
           "$ref": "#/definitions/ProjectResourceProperties",
