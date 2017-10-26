@@ -2,7 +2,7 @@
   "swagger": "2.0",
   "info": {
     "title": "Visual Studio Resource Provider Client",
-    "version": "2014-04-01-preview",
+    "version": "2017-11-01-preview",
     "description": "Use these APIs to manage Visual Studio Team Services resources through the Azure Resource Manager. All task operations conform to the HTTP/1.1 protocol specification and each operation returns an x-ms-request-id header that can be used to obtain information about the request. You must make sure that requests made to these resources are secure. For more information, see https://docs.microsoft.com/en-us/rest/api/index."
   },
   "host": "management.azure.com",
@@ -524,9 +524,9 @@
         "tags": [
           "Projects"
         ],
-        "summary": "Projects_ListByResourceGroup",
+        "summary": "Projects_ListByAccountResource",
         "description": "Gets all Visual Studio Team Services project resources created in the specified Team Services account.",
-        "operationId": "Projects_ListByResourceGroup",
+        "operationId": "Project_ListByAccountResource",
         "parameters": [
           {
             "$ref": "#/parameters/resourceGroupNameParameter"
@@ -728,79 +728,6 @@
         "x-ms-examples": {
           "Update a project resource": {
             "$ref": "./examples/UpdateProjectResource.json"
-          }
-        }
-      }
-    },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.visualstudio/account/{rootResourceName}/project/{resourceName}/subContainers/{subContainerName}/status": {
-      "get": {
-        "tags": [
-          "Projects"
-        ],
-        "summary": "Projects_GetJobStatus",
-        "description": "Gets the status of the project resource creation job.",
-        "operationId": "Projects_GetJobStatus",
-        "parameters": [
-          {
-            "$ref": "#/parameters/resourceGroupNameParameter"
-          },
-          {
-            "$ref": "#/parameters/subscriptionIdParameter"
-          },
-          {
-            "$ref": "#/parameters/apiVersionParameter"
-          },
-          {
-            "in": "path",
-            "name": "rootResourceName",
-            "description": "Name of the Team Services account.",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "in": "path",
-            "name": "resourceName",
-            "description": "Name of the Team Services project.",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "in": "path",
-            "name": "subContainerName",
-            "description": "This parameter should be set to the resourceName.",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "in": "query",
-            "name": "operation",
-            "description": "The operation type. The only supported value is 'put'.",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "in": "query",
-            "name": "jobId",
-            "description": "The job identifier.",
-            "required": false,
-            "type": "string",
-            "format": "uuid"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "The operation succeeded. The response contains the details of the newly created team project resource.",
-            "schema": {
-              "$ref": "#/definitions/ProjectResource"
-            }
-          },
-          "202": {
-            "description": "The team project creation job is still running."
-          }
-        },
-        "x-ms-examples": {
-          "Get the status of the project creation job": {
-            "$ref": "./examples/GetProjectJobStatus.json"
           }
         }
       }
@@ -1090,14 +1017,264 @@
       ],
       "properties": {
         "properties": {
-          "description": "Key/value pair of resource properties.",
-          "type": "object",
-          "additionalProperties": {
-            "type": "string"
-          },
+          "description": "Custom properties of project resource.",
+          "$ref": "#/definitions/ProjectResourceProperties",
           "x-ms-client-flatten": true
         }
       }
+    },
+    "ProjectResourceProperties": {
+      "description": "Defines the custom properties of project resource.",
+      "type": "object",
+      "properties": {
+        "processTemplateId": {
+          "description": "Process template to use in the project.",
+          "type": "string",
+          "enum": [
+            "Scrum",
+            "Agile",
+            "Cmmi"
+          ],
+          "x-ms-enum": {
+            "name": "ProcessTemplate",
+            "modelAsString": true
+          }
+        },
+        "versionControlOption": {
+          "description": "Version control to use for the default repo created in the project.",
+          "type": "string",
+          "enum": [
+            "Git",
+            "Tfvc"
+          ],
+          "x-ms-enum": {
+            "name": "VersionControlOption",
+            "modelAsString": true
+          }
+        },
+        "ownerUpn": {
+          "description": "Optional UPN of the owner, on-behalf-of whom the project is being created.",
+          "type": "string"
+        },
+        "tfsUniqueIdentifier": {
+          "description": "Unique identifier of the VSTS project.",
+          "readOnly": true,
+          "type": "string"
+        },
+        "bootstrapPipelineTemplate": {
+          "description": "Template used to configure a bootstrap pipeline in the VSTS project.",
+          "$ref": "#/definitions/PipelineTemplate"
+        }
+      }
+    },
+    "PipelineTemplate": {
+      "description": "Defines a VSTS pipeline template.",
+      "type": "object",
+      "properties": {
+        "applicationSource": {
+          "description": "Source application for the VSTS pipeline.",
+          "$ref": "#/definitions/ApplicationSource"
+        },
+        "applicationTarget": {
+          "description": "Target resources for the VSTS pipeline.",
+          "$ref": "#/definitions/ApplicationTarget"
+        },
+        "authorizationDetails": {
+          "description": "Global dictionary of authorization details used by the pipeline, with a friendly name as key. Individual resource in the pipeline can reference to a specific authorization info using the friendly name.",
+          "type": "object",
+          "additionalProperties": {
+            "$ref": "#/definitions/Authorization"
+          }
+        }
+      },
+      "required": [
+        "applicationSource",
+        "applicationTarget",
+        "authorizationDetails"
+      ]
+    },
+    "ApplicationSource": {
+      "description": "Defines the source application for a VSTS pipeline.",
+      "type": "object",
+      "discriminator": "sourceType",
+      "properties": {
+        "sourceType": {
+          "description": "Type of application source.",
+          "type": "string",
+          "enum": [
+            "codeTemplate",
+            "codeRepository"
+          ],
+          "x-ms-enum": {
+            "name": "ApplicationSourceType",
+            "modelAsString": true
+          }
+        },
+        "applicationType": {
+          "description": "Type of application.",
+          "type": "string",
+          "enum": [
+            "AspDotNet",
+            "AspDotNetCore",
+            "NodeJs"
+          ],
+          "x-ms-enum": {
+            "name": "ApplicationType",
+            "modelAsString": true
+          }
+        },
+        "applicationConfiguration": {
+          "description": "Application specific properties.",
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          }
+        }
+      },
+      "required": [
+        "sourceType",
+        "applicationType"
+      ]
+    },
+    "CodeRepositoryApplicationSource": {
+      "description": "Defines the source application, when it resides in a code repository.",
+      "type": "object",
+      "properties": {
+        "repository": {
+          "description": "Code repository where the application source resides.",
+          "$ref": "#/definitions/CodeRepository"
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "#/definitions/ApplicationSource"
+        }
+      ],
+      "required": [
+        "repository"
+      ]
+    },
+    "CodeRepository": {
+      "description": "Defines a code repository.",
+      "type": "object",
+      "properties": {
+        "repositoryType": {
+          "description": "Type of code repository.",
+          "type": "string",
+          "enum": [
+            "gitHub",
+            "vstsGit"
+          ],
+          "x-ms-enum": {
+            "name": "CodeRepositoryType",
+            "modelAsString": true
+          }
+        },
+        "id": {
+          "description": "Unique identifier of the code repository.",
+          "type": "string"
+        },
+        "defaultBranch": {
+          "description": "Default branch for which continuous integration should be configured in the VSTS pipeline.",
+          "type": "string"
+        },
+        "authorizationReference": {
+          "description": "Reference to the authorization info used to access the code repository. This value is used as a key into the global authorization details dictionary.",
+          "type": "string"
+        },
+        "properties": {
+          "description": "Repository-specific properties.",
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          }
+        }
+      },
+      "required": [
+        "repoType",
+        "id",
+        "defaultBranch"
+      ]
+    },
+    "ApplicationTarget": {
+      "description": "Defines the target resources for a VSTS pipeline.",
+      "type": "object",
+      "discriminator": "targetType",
+      "properties": {
+        "targetType": {
+          "description": "Type of target.",
+          "type": "string",
+          "enum": [
+            "WindowsAppService"
+          ],
+          "x-ms-enum": {
+            "name": "ApplicationTargetType",
+            "modelAsString": true
+          }
+        },
+        "resources": {
+          "description": "List of target resources.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/TargetResource"
+          }
+        }
+      },
+      "required": [
+        "targetType",
+        "resources"
+      ]
+    },
+    "TargetResource": {
+      "description": "Defines a single resource used as target for a VSTS pipeline.",
+      "type": "object",
+      "properties": {
+        "id": {
+          "description": "Unique identifier of the target resource.",
+          "type": "string"
+        },
+        "role": {
+          "description": "Role of the target resource.",
+          "type": "string"
+        },
+        "authorizationReference": {
+          "description": "Reference to the authorization info used to access the target resource. This value is used as a key into the global authorization details dictionary.",
+          "type": "string"
+        }
+      },
+      "required": [
+        "id",
+        "role"
+      ]
+    },
+    "Authorization": {
+      "description": "Defines the authorization type and its parameters.",
+      "type": "object",
+      "discriminator": "authorizationType",
+      "properties": {
+        "authorizationType": {
+          "description": "Type of authorization.",
+          "type": "string",
+          "enum": [
+            "servicePrincipal",
+            "token"
+          ],
+          "x-ms-enum": {
+            "name": "AuthorizationType",
+            "modelAsString": true
+          }
+        },
+        "parameters": {
+          "description": "Authorization parameters corresponding to the authorization type.",
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          }
+        }
+      },
+      "required": [
+        "authorizationType"
+      ]
     },
     "ProjectResourceListResult": {
       "description": "The response to a request to list Team Services project resources in a resource group/account.",

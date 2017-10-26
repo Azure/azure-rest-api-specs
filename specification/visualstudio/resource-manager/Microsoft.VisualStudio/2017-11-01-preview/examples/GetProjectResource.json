@@ -15,12 +15,41 @@
         "location": "North Central US",
         "tags": {},
         "properties": {
-            "AzureResourceName": "ExampleProject",
-            "TfsUniqueIdentifier": "vstfs:///Classification/TeamProject/7a4e6ba5-35bf-4667-86a4-9b598a88fa25"
+          "processTemplateId": "Scrum",
+          "versionControlOption": "Git",
+          "azureResourceName": "ExampleProject",
+          "tfsUniqueIdentifier": "vstfs:///Classification/TeamProject/7a4e6ba5-35bf-4667-86a4-9b598a88fa25",
+          "bootstrapPipelineTemplate": {
+            "applicationSource": {
+              "sourceType": "codeTemplate",
+              "applicationType": "NodeJs",
+              "applicationConfiguration": {
+                "nodeJsVersion": "8.5.0",
+                "taskRunner": "Gulp"
+              }
+            },
+            "applicationTarget": {
+              "targetType": "WindowsAppService",
+              "resources": [
+                {
+                  "id": "/subscriptions/ea99dfc9-1597-48ed-85f6-9bf922591395/resourceGroups/testrg/providers/Microsoft.Web/sites/MyWebSite",
+                  "role": "AppService"
+                }
+              ]
+            },
+            "authorizationDetails": {
+              "azure": {
+                "authorizationType": "servicePrincipal",
+                "parameters": {
+                  "clientId": "",
+                  "clientSecret": ""
+                }
+              }
+            }
+          }
         }
       }
     },
-    "404": {
-    }
+    "404": {}
   }
 }
