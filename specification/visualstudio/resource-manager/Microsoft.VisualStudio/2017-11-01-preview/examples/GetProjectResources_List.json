@@ -3,7 +3,7 @@
     "subscriptionId": "0de7f055-dbea-498d-8e9e-da287eedca90",
     "resourceGroupName": "VS-Example-Group",
     "rootResourceName": "ExampleAccount",
-    "api-version": "2014-04-01-preview"
+    "api-version": "2017-11-01-preview"
   },
   "responses": {
     "200": {
@@ -16,8 +16,36 @@
             "location": "Central US",
             "tags": {},
             "properties": {
-              "AzureResourceName": "ExampleProject",
-              "TfsUniqueIdentifier": "vstfs:///Classification/TeamProject/d921d601-0600-4e45-8600-3914ffc8811a"
+              "processTemplateId": "Scrum",
+              "versionControlOption": "Git",
+              "tfsUniqueIdentifier": "vstfs:///Classification/TeamProject/d921d601-0600-4e45-8600-3914ffc8811a",
+              "bootstrapPipelineTemplate": {
+                "applicationSource": {
+                  "sourceType": "codeTemplate",
+                  "applicationType": "NodeJs",
+                  "applicationConfiguration": {
+                    "nodeJsVersion": "8.5.0"
+                  }
+                },
+                "applicationTarget": {
+                  "targetType": "WindowsAppService",
+                  "resources": [
+                    {
+                      "id": "/subscriptions/ea99dfc9-1597-48ed-85f6-9bf922591395/resourceGroups/testrg/providers/Microsoft.Web/sites/MyWebSite",
+                      "role": "AppService"
+                    }
+                  ]
+                },
+                "authorizationDetails": {
+                  "azure": {
+                    "authorizationType": "servicePrincipal",
+                    "parameters": {
+                      "clientId": "",
+                      "clientSecret": ""
+                    }
+                  }
+                }
+              }
             }
           }
         ]
