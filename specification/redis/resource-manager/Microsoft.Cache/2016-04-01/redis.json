@@ -1017,13 +1017,6 @@
         "sku": {
           "$ref": "#/definitions/Sku",
           "description": "The SKU of the Redis cache to deploy."
-        },
-        "tags": {
-          "type": "object",
-          "additionalProperties": {
-            "type": "string"
-          },
-          "description": "Resource tags."
         }
       },
       "allOf": [
@@ -1092,6 +1085,13 @@
           "x-ms-client-flatten": true,
           "$ref": "#/definitions/RedisUpdateProperties",
           "description": "Redis cache properties."
+        },
+        "tags": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          },
+          "description": "Resource tags."
         }
       },
       "description": "Parameters supplied to the Update Redis operation."

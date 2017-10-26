@@ -369,7 +369,7 @@
         },
         "password": {
           "description": "Password to access the Dynamics instance.",
-          "$ref": "#/definitions/AzureKeyVaultSecretReference"
+          "$ref": "../datafactory.json#/definitions/AzureKeyVaultSecretReference"
         }
       },
       "required": [
@@ -377,48 +377,6 @@
         "authenticationType",
         "username",
         "password"
-      ]
-    },
-    "AzureKeyVaultReference": {
-      "type": "object",
-      "description": "A reference to an object in Azure Key Vault.",
-      "discriminator": "type",
-      "properties": {
-        "type": {
-          "type": "string",
-          "description": "The type of the Azure Key Vault object to reference."
-        },
-        "store": {
-          "description": "The Azure Key Vault LinkedService.",
-          "$ref": "../datafactory.json#/definitions/LinkedServiceReference"
-        }
-      },
-      "required": [
-        "type",
-        "store"
-      ]
-    },
-    "AzureKeyVaultSecretReference": {
-      "description": "Azure Key Vault Secret properties.",
-      "x-ms-discriminator-value": "AzureKeyVaultSecret",
-      "type": "object",
-      "allOf": [
-        {
-          "$ref": "#/definitions/AzureKeyVaultReference"
-        }
-      ],
-      "properties": {
-        "secretName": {
-          "type": "object",
-          "description": "The name of secret in Azure Key Vault. Type: string (or Expression with resultType string)."
-        },
-        "secretVersion": {
-          "type": "object",
-          "description": "The version of the secret in Azure Key Vault. The default value is the latest version of the secret. Type: string (or Expression with resultType string)."
-        }
-      },
-      "required": [
-        "secretName"
       ]
     },
     "HDInsightLinkedService": {
@@ -1377,11 +1335,11 @@
         },
         "password": {
           "description": "The password for Basic authentication of the Salesforce source.",
-          "$ref": "../datafactory.json#/definitions/SecureString"
+          "$ref": "../datafactory.json#/definitions/SecretBase"
         },
         "securityToken": {
           "description": "The security token is required to remotely access Salesforce source.",
-          "$ref": "../datafactory.json#/definitions/SecureString"
+          "$ref": "../datafactory.json#/definitions/SecretBase"
         },
         "encryptedCredential": {
           "type": "object",

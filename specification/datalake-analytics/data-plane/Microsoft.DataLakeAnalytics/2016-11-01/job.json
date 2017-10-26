@@ -496,7 +496,7 @@
         "x-ms-pageable": {
           "nextLinkName": "nextLink"
         },
-        "x-ms-odata": "#/definitions/JobInformation"
+        "x-ms-odata": "#/definitions/JobInformationBasic"
       }
     }
   },
@@ -1265,7 +1265,7 @@
           "items": {
             "$ref": "#/definitions/JobPipelineRunInformation"
           },
-          "description": "the list of recurrence identifiers representing each run of this pipeline."
+          "description": "the list of run identifiers representing each run of this pipeline."
         },
         "recurrences": {
           "type": "array",
@@ -1274,7 +1274,7 @@
             "type": "string",
             "format": "uuid"
           },
-          "description": "the list of recurrence identifiers representing each run of this pipeline."
+          "description": "the list of recurrence identifiers representing each recurrence in this pipeline."
         }
       },
       "description": "Job Pipeline Information, showing the relationship of jobs and recurrences of those jobs in a pipeline."

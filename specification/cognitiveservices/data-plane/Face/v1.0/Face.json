@@ -16,7 +16,7 @@
   "hostTemplate": "{AzureRegion}.api.cognitive.microsoft.com",
   "parameters": [
    {
-    "$ref": "../../Common/Parameters.json#/parameters/AzureRegion"
+    "$ref": "../../Common/ExtendedRegions.json#/parameters/AzureRegion"
    }
   ]
  },
@@ -1213,7 +1213,7 @@
       "$ref": "../../Common/Parameters.json#/parameters/SubscriptionKey"
      },
      {
-      "$ref": "#/parameters/ImageUrl"
+      "$ref": "../../Common/Parameters.json#/parameters/ImageUrl"
      }
     ],
     "consumes": [
@@ -1416,7 +1416,7 @@
       "$ref": "../../Common/Parameters.json#/parameters/SubscriptionKey"
      },
      {
-      "$ref": "#/parameters/ImageStream"
+      "$ref": "../../Common/Parameters.json#/parameters/ImageStream"
      }
     ],
     "consumes": [
@@ -2606,30 +2606,6 @@
      "type": "string",
      "description": "Show failure message when training failed (omitted when training succeed)."
     }
-   }
-  }
- },
- "parameters": {
-  "ImageStream": {
-   "name": "Image",
-   "in": "body",
-   "required": true,
-   "x-ms-parameter-location": "method",
-   "description": "An image stream.",
-   "schema": {
-    "type": "object",
-    "format": "file"
-   }
-  },
-  "ImageUrl": {
-   "name": "ImageUrl",
-   "in": "body",
-   "required": true,
-   "x-ms-parameter-location": "method",
-   "x-ms-client-flatten": true,
-   "description": "A JSON document with a URL pointing to the image that is to be analyzed.",
-   "schema": {
-    "$ref": "#/definitions/ImageUrl"
    }
   }
  }

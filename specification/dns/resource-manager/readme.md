@@ -26,9 +26,17 @@ These are the global settings for the DNS API.
 
 ``` yaml
 openapi-type: arm
-tag: package-2016-04
+tag: package-2017-09
 ```
 
+### Tag: package-2017-09
+
+These settings apply only when `--tag=package-2017-09` is specified on the command line.
+
+``` yaml $(tag) == 'package-2017-09'
+input-file:
+- Microsoft.Network/2017-09-01/dns.json
+```
 
 ### Tag: package-2016-04
 
@@ -66,4 +74,34 @@ csharp:
   payload-flattening-threshold: 2
   output-folder: $(csharp-sdks-folder)/Dns/Management.Dns/Generated
   clear-output-folder: true
+```
+
+
+## Go
+
+These settings apply only when `--go` is specified on the command line.
+
+``` yaml $(go)
+go:
+  license-header: MICROSOFT_APACHE_NO_VERSION
+  namespace: dns
+  clear-output-folder: true
+```
+
+### Tag: package-2016-04 and go
+
+These settings apply only when `--tag=package-2016-04 --go` is specified on the command line.
+Please also specify `--go-sdk-folder=<path to the root directory of your azure-sdk-for-go clone>`.
+
+``` yaml $(tag) == 'package-2016-04' && $(go)
+output-folder: $(go-sdk-folder)/services/dns/mgmt/2016-04-01/dns
+```
+
+### Tag: package-2015-05-preview and go
+
+These settings apply only when `--tag=package-2015-05-preview --go` is specified on the command line.
+Please also specify `--go-sdk-folder=<path to the root directory of your azure-sdk-for-go clone>`.
+
+``` yaml $(tag) == 'package-2015-05-preview' && $(go)
+output-folder: $(go-sdk-folder)/services/dns/mgmt/2015-05-04-preview/dns
 ```

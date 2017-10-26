@@ -658,8 +658,7 @@
       "type": "object",
       "description": "Information about the container service backing the cluster",
       "required": [
-        "orchestratorType",
-        "orchestratorProperties"
+        "orchestratorType"
       ],
       "properties": {
         "clusterFqdn": {
@@ -768,9 +767,6 @@
       "type": "object",
       "description": "Kubernetes cluster specific properties",
       "x-ms-discriminator-value": "Kubernetes",
-      "required": [
-        "servicePrincipal"
-      ],
       "properties": {
         "servicePrincipal": {
           "description": "The Azure Service Principal used by Kubernetes",
