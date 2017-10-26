@@ -163,6 +163,55 @@
             "description": "Delete successful."
           }
         }
+      },
+      "patch": {
+        "tags": [
+          "NetworkWatchers"
+        ],
+        "operationId": "NetworkWatchers_UpdateTags",
+        "description": "Updates a network watcher tags.",
+        "parameters": [
+          {
+            "name": "resourceGroupName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the resource group."
+          },
+          {
+            "name": "networkWatcherName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the network watcher."
+          },
+          {
+            "name": "parameters",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "./network.json#/definitions/TagsObject"
+            },
+            "description": "Parameters supplied to update network watcher tags."
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Update successful. The operation returns the resulting network watcher resource.",
+            "schema": {
+              "$ref": "#/definitions/NetworkWatcher"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Update network watcher tags": { "$ref": "./examples/NetworkWatcherUpdateTags.json" }
+        }
       }
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/networkWatchers": {

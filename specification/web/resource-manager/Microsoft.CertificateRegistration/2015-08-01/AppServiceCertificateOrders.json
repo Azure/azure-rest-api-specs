@@ -8,6 +8,12 @@
   "schemes": [
     "https"
   ],
+  "consumes": [
+    "application/json"
+  ],
+  "produces": [
+    "application/json"
+  ],
   "paths": {
     "/subscriptions/{subscriptionId}/providers/Microsoft.CertificateRegistration/certificateOrders": {
       "get": {
@@ -17,10 +23,6 @@
         "summary": "List all certificate orders in a subscription.",
         "description": "List all certificate orders in a subscription.",
         "operationId": "AppServiceCertificateOrders_List",
-        "produces": [
-          "application/json",
-          "text/json"
-        ],
         "parameters": [
           {
             "$ref": "#/parameters/subscriptionIdParameter"
@@ -50,13 +52,6 @@
         "summary": "Validate information for a certificate order.",
         "description": "Validate information for a certificate order.",
         "operationId": "AppServiceCertificateOrders_ValidatePurchaseInformation",
-        "consumes": [
-          "application/json",
-          "text/json",
-          "application/xml",
-          "text/xml",
-          "application/x-www-form-urlencoded"
-        ],
         "parameters": [
           {
             "name": "appServiceCertificateOrder",
@@ -89,10 +84,6 @@
         "summary": "Get certificate orders in a resource group.",
         "description": "Get certificate orders in a resource group.",
         "operationId": "AppServiceCertificateOrders_ListByResourceGroup",
-        "produces": [
-          "application/json",
-          "text/json"
-        ],
         "parameters": [
           {
             "$ref": "#/parameters/resourceGroupNameParameter"
@@ -125,12 +116,6 @@
         "summary": "Get a certificate order.",
         "description": "Get a certificate order.",
         "operationId": "AppServiceCertificateOrders_Get",
-        "produces": [
-          "application/json",
-          "text/json",
-          "application/xml",
-          "text/xml"
-        ],
         "parameters": [
           {
             "$ref": "#/parameters/resourceGroupNameParameter"
@@ -165,17 +150,6 @@
         "summary": "Create or update a certificate purchase order.",
         "description": "Create or update a certificate purchase order.",
         "operationId": "AppServiceCertificateOrders_CreateOrUpdate",
-        "consumes": [
-          "application/json",
-          "text/json",
-          "application/x-www-form-urlencoded"
-        ],
-        "produces": [
-          "application/json",
-          "text/json",
-          "application/xml",
-          "text/xml"
-        ],
         "parameters": [
           {
             "$ref": "#/parameters/resourceGroupNameParameter"
@@ -252,6 +226,55 @@
             "description": "Certificate order does not exist."
           }
         }
+      },
+      "patch": {
+        "tags": [
+          "AppServiceCertificateOrders"
+        ],
+        "summary": "Create or update a certificate purchase order.",
+        "description": "Create or update a certificate purchase order.",
+        "operationId": "AppServiceCertificateOrders_Update",
+        "parameters": [
+          {
+            "$ref": "#/parameters/resourceGroupNameParameter"
+          },
+          {
+            "name": "certificateOrderName",
+            "in": "path",
+            "description": "Name of the certificate order.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "certificateDistinguishedName",
+            "in": "body",
+            "description": "Distinguished name to to use for the certificate order.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/AppServiceCertificateOrderPatchResource"
+            }
+          },
+          {
+            "$ref": "#/parameters/subscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "App Service Certificate Order is created.",
+            "schema": {
+              "$ref": "#/definitions/AppServiceCertificateOrder"
+            }
+          },
+          "201": {
+            "description": "App Service Certificate Order creation operation is in progress",
+            "schema": {
+              "$ref": "#/definitions/AppServiceCertificateOrder"
+            }
+          }
+        }
       }
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.CertificateRegistration/certificateOrders/{certificateOrderName}/certificates": {
@@ -262,10 +285,6 @@
         "summary": "List all certificates associated with a certificate order.",
         "description": "List all certificates associated with a certificate order.",
         "operationId": "AppServiceCertificateOrders_ListCertificates",
-        "produces": [
-          "application/json",
-          "text/json"
-        ],
         "parameters": [
           {
             "$ref": "#/parameters/resourceGroupNameParameter"
@@ -305,12 +324,6 @@
         "summary": "Get the certificate associated with a certificate order.",
         "description": "Get the certificate associated with a certificate order.",
         "operationId": "AppServiceCertificateOrders_GetCertificate",
-        "produces": [
-          "application/json",
-          "text/json",
-          "application/xml",
-          "text/xml"
-        ],
         "parameters": [
           {
             "$ref": "#/parameters/resourceGroupNameParameter"
@@ -352,17 +365,6 @@
         "summary": "Creates or updates a certificate and associates with key vault secret.",
         "description": "Creates or updates a certificate and associates with key vault secret.",
         "operationId": "AppServiceCertificateOrders_CreateOrUpdateCertificate",
-        "consumes": [
-          "application/json",
-          "text/json",
-          "application/x-www-form-urlencoded"
-        ],
-        "produces": [
-          "application/json",
-          "text/json",
-          "application/xml",
-          "text/xml"
-        ],
         "parameters": [
           {
             "$ref": "#/parameters/resourceGroupNameParameter"
@@ -453,6 +455,62 @@
             "description": "Certificate does not exist."
           }
         }
+      },
+      "patch": {
+        "tags": [
+          "AppServiceCertificateOrders"
+        ],
+        "summary": "Creates or updates a certificate and associates with key vault secret.",
+        "description": "Creates or updates a certificate and associates with key vault secret.",
+        "operationId": "AppServiceCertificateOrders_UpdateCertificate",
+        "parameters": [
+          {
+            "$ref": "#/parameters/resourceGroupNameParameter"
+          },
+          {
+            "name": "certificateOrderName",
+            "in": "path",
+            "description": "Name of the certificate order.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "name",
+            "in": "path",
+            "description": "Name of the certificate.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "keyVaultCertificate",
+            "in": "body",
+            "description": "Key vault certificate resource Id.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/AppServiceCertificatePatchResource"
+            }
+          },
+          {
+            "$ref": "#/parameters/subscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "App Service Certificate is created.",
+            "schema": {
+              "$ref": "#/definitions/AppServiceCertificateResource"
+            }
+          },
+          "201": {
+            "description": "App Service Certificate creation operation is in progress",
+            "schema": {
+              "$ref": "#/definitions/AppServiceCertificateResource"
+            }
+          }
+        }
       }
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.CertificateRegistration/certificateOrders/{certificateOrderName}/reissue": {
@@ -463,13 +521,6 @@
         "summary": "Reissue an existing certificate order.",
         "description": "Reissue an existing certificate order.",
         "operationId": "AppServiceCertificateOrders_Reissue",
-        "consumes": [
-          "application/json",
-          "text/json",
-          "application/xml",
-          "text/xml",
-          "application/x-www-form-urlencoded"
-        ],
         "parameters": [
           {
             "$ref": "#/parameters/resourceGroupNameParameter"
@@ -512,13 +563,6 @@
         "summary": "Renew an existing certificate order.",
         "description": "Renew an existing certificate order.",
         "operationId": "AppServiceCertificateOrders_Renew",
-        "consumes": [
-          "application/json",
-          "text/json",
-          "application/xml",
-          "text/xml",
-          "application/x-www-form-urlencoded"
-        ],
         "parameters": [
           {
             "$ref": "#/parameters/resourceGroupNameParameter"
@@ -594,13 +638,6 @@
         "summary": "Verify domain ownership for this certificate order.",
         "description": "Verify domain ownership for this certificate order.",
         "operationId": "AppServiceCertificateOrders_ResendRequestEmails",
-        "consumes": [
-          "application/json",
-          "text/json",
-          "application/xml",
-          "text/xml",
-          "application/x-www-form-urlencoded"
-        ],
         "parameters": [
           {
             "$ref": "#/parameters/resourceGroupNameParameter"
@@ -618,7 +655,7 @@
             "description": "Email address",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/NameIdentifier"
+              "$ref": "../../Microsoft.Web/2016-03-01/CommonDefinitions.json#/definitions/NameIdentifier"
             }
           },
           {
@@ -643,19 +680,6 @@
         "summary": "Verify domain ownership for this certificate order.",
         "description": "Verify domain ownership for this certificate order.",
         "operationId": "AppServiceCertificateOrders_RetrieveSiteSeal",
-        "consumes": [
-          "application/json",
-          "text/json",
-          "application/xml",
-          "text/xml",
-          "application/x-www-form-urlencoded"
-        ],
-        "produces": [
-          "application/json",
-          "text/json",
-          "application/xml",
-          "text/xml"
-        ],
         "parameters": [
           {
             "$ref": "#/parameters/resourceGroupNameParameter"
@@ -734,12 +758,6 @@
         "summary": "Retrieve the list of certificate actions.",
         "description": "Retrieve the list of certificate actions.",
         "operationId": "AppServiceCertificateOrders_RetrieveCertificateActions",
-        "produces": [
-          "application/json",
-          "text/json",
-          "application/xml",
-          "text/xml"
-        ],
         "parameters": [
           {
             "$ref": "#/parameters/resourceGroupNameParameter"
@@ -779,12 +797,6 @@
         "summary": "Retrieve email history.",
         "description": "Retrieve email history.",
         "operationId": "AppServiceCertificateOrders_RetrieveCertificateEmailHistory",
-        "produces": [
-          "application/json",
-          "text/json",
-          "application/xml",
-          "text/xml"
-        ],
         "parameters": [
           {
             "$ref": "#/parameters/resourceGroupNameParameter"
@@ -879,7 +891,7 @@
       "type": "object",
       "allOf": [
         {
-          "$ref": "#/definitions/Resource"
+          "$ref": "../../Microsoft.Web/2016-03-01/CommonDefinitions.json#/definitions/Resource"
         }
       ],
       "properties": {
@@ -1078,17 +1090,218 @@
         }
       }
     },
-    "AppServiceCertificateResource": {
+    "AppServiceCertificateOrderPatchResource": {
+      "description": "ARM resource for a certificate order that is purchased through Azure.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "../../Microsoft.Web/2016-03-01/CommonDefinitions.json#/definitions/ProxyOnlyResource"
+        }
+      ],
+      "properties": {
+        "properties": {
+          "description": "AppServiceCertificateOrderPatchResource resource specific properties",
+          "required": [
+            "productType"
+          ],
+          "properties": {
+            "certificates": {
+              "description": "State of the Key Vault secret.",
+              "type": "object",
+              "additionalProperties": {
+                "$ref": "#/definitions/AppServiceCertificate"
+              }
+            },
+            "distinguishedName": {
+              "description": "Certificate distinguished name.",
+              "type": "string",
+              "x-ms-mutability": [
+                "create",
+                "read"
+              ]
+            },
+            "domainVerificationToken": {
+              "description": "Domain verification token.",
+              "type": "string",
+              "readOnly": true
+            },
+            "validityInYears": {
+              "format": "int32",
+              "description": "Duration in years (must be between 1 and 3).",
+              "default": 1,
+              "maximum": 3,
+              "minimum": 1,
+              "type": "integer",
+              "x-ms-mutability": [
+                "create",
+                "read"
+              ]
+            },
+            "keySize": {
+              "format": "int32",
+              "description": "Certificate key size.",
+              "default": 2048,
+              "type": "integer",
+              "x-ms-mutability": [
+                "create",
+                "read"
+              ]
+            },
+            "productType": {
+              "description": "Certificate product type.",
+              "enum": [
+                "StandardDomainValidatedSsl",
+                "StandardDomainValidatedWildCardSsl"
+              ],
+              "type": "string",
+              "x-ms-enum": {
+                "name": "CertificateProductType",
+                "modelAsString": false
+              },
+              "x-ms-mutability": [
+                "create",
+                "read"
+              ]
+            },
+            "autoRenew": {
+              "description": "<code>true</code> if the certificate should be automatically renewed when it expires; otherwise, <code>false</code>.",
+              "default": true,
+              "type": "boolean"
+            },
+            "provisioningState": {
+              "description": "Status of certificate order.",
+              "enum": [
+                "Succeeded",
+                "Failed",
+                "Canceled",
+                "InProgress",
+                "Deleting"
+              ],
+              "type": "string",
+              "readOnly": true,
+              "x-ms-enum": {
+                "name": "ProvisioningState",
+                "modelAsString": false
+              }
+            },
+            "status": {
+              "description": "Current order status.",
+              "enum": [
+                "Pendingissuance",
+                "Issued",
+                "Revoked",
+                "Canceled",
+                "Denied",
+                "Pendingrevocation",
+                "PendingRekey",
+                "Unused",
+                "Expired",
+                "NotSubmitted"
+              ],
+              "type": "string",
+              "readOnly": true,
+              "x-ms-enum": {
+                "name": "CertificateOrderStatus",
+                "modelAsString": false
+              }
+            },
+            "signedCertificate": {
+              "$ref": "#/definitions/CertificateDetails",
+              "description": "Signed certificate.",
+              "readOnly": true
+            },
+            "csr": {
+              "description": "Last CSR that was created for this order.",
+              "type": "string",
+              "x-ms-mutability": [
+                "create",
+                "read"
+              ]
+            },
+            "intermediate": {
+              "$ref": "#/definitions/CertificateDetails",
+              "description": "Intermediate certificate.",
+              "readOnly": true
+            },
+            "root": {
+              "$ref": "#/definitions/CertificateDetails",
+              "description": "Root certificate.",
+              "readOnly": true
+            },
+            "serialNumber": {
+              "description": "Current serial number of the certificate.",
+              "type": "string",
+              "readOnly": true
+            },
+            "lastCertificateIssuanceTime": {
+              "format": "date-time",
+              "description": "Certificate last issuance time.",
+              "type": "string",
+              "readOnly": true
+            },
+            "expirationTime": {
+              "format": "date-time",
+              "description": "Certificate expiration time.",
+              "type": "string",
+              "readOnly": true
+            },
+            "isPrivateKeyExternal": {
+              "description": "<code>true</code> if private key is external; otherwise, <code>false</code>.",
+              "type": "boolean",
+              "readOnly": true
+            },
+            "appServiceCertificateNotRenewableReasons": {
+              "description": "Reasons why App Service Certificate is not renewable at the current moment.",
+              "type": "array",
+              "items": {
+                "enum": [
+                  "RegistrationStatusNotSupportedForRenewal",
+                  "ExpirationNotInRenewalTimeRange",
+                  "SubscriptionNotActive"
+                ],
+                "type": "string"
+              },
+              "readOnly": true
+            },
+            "nextAutoRenewalTimeStamp": {
+              "format": "date-time",
+              "description": "Time stamp when the certificate would be auto renewed next",
+              "type": "string",
+              "readOnly": true
+            }
+          },
+          "x-ms-client-flatten": true
+        }
+      }
+    },
+    "AppServiceCertificatePatchResource": {
       "description": "Key Vault container ARM resource for a certificate that is purchased through Azure.",
       "type": "object",
       "allOf": [
         {
-          "$ref": "#/definitions/Resource"
+          "$ref": "../../Microsoft.Web/2016-03-01/CommonDefinitions.json#/definitions/ProxyOnlyResource"
         }
       ],
       "properties": {
         "properties": {
           "$ref": "#/definitions/AppServiceCertificate",
+          "description": "Core resource properties",
+          "x-ms-client-flatten": true
+        }
+      }
+    },
+    "AppServiceCertificateResource": {
+      "description": "Key Vault container ARM resource for a certificate that is purchased through Azure.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "../../Microsoft.Web/2016-03-01/CommonDefinitions.json#/definitions/Resource"
+        }
+      ],
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/AppServiceCertificate",
+          "description": "Core resource properties",
           "x-ms-client-flatten": true
         }
       }
@@ -1099,44 +1312,44 @@
       "properties": {
         "version": {
           "format": "int32",
-          "description": "Version.",
+          "description": "Certificate Version.",
           "type": "integer",
           "readOnly": true
         },
         "serialNumber": {
-          "description": "Serial Number.",
+          "description": "Certificate Serial Number.",
           "type": "string",
           "readOnly": true
         },
         "thumbprint": {
-          "description": "Thumbprint.",
+          "description": "Certificate Thumbprint.",
           "type": "string",
           "readOnly": true
         },
         "subject": {
-          "description": "Subject.",
+          "description": "Certificate Subject.",
           "type": "string",
           "readOnly": true
         },
         "notBefore": {
           "format": "date-time",
-          "description": "Valid from.",
+          "description": "Date Certificate is valid from.",
           "type": "string",
           "readOnly": true
         },
         "notAfter": {
           "format": "date-time",
-          "description": "Valid to.",
+          "description": "Date Certificate is valid to.",
           "type": "string",
           "readOnly": true
         },
         "signatureAlgorithm": {
-          "description": "Signature algorithm.",
+          "description": "Certificate Signature algorithm.",
           "type": "string",
           "readOnly": true
         },
         "issuer": {
-          "description": "Issuer.",
+          "description": "Certificate Issuer.",
           "type": "string",
           "readOnly": true
         },
@@ -1152,7 +1365,7 @@
       "type": "object",
       "allOf": [
         {
-          "$ref": "#/definitions/ProxyOnlyResource"
+          "$ref": "../../Microsoft.Web/2016-03-01/CommonDefinitions.json#/definitions/ProxyOnlyResource"
         }
       ],
       "properties": {
@@ -1178,7 +1391,7 @@
       "type": "object",
       "allOf": [
         {
-          "$ref": "#/definitions/Resource"
+          "$ref": "../../Microsoft.Web/2016-03-01/CommonDefinitions.json#/definitions/Resource"
         }
       ],
       "properties": {
@@ -1219,47 +1432,12 @@
         }
       }
     },
-    "NameIdentifier": {
-      "description": "Identifies an object.",
-      "type": "object",
-      "properties": {
-        "name": {
-          "description": "Name of the object.",
-          "type": "string"
-        }
-      }
-    },
-    "ProxyOnlyResource": {
-      "description": "Azure proxy only resource. This resource is not tracked by Azure Resource Manager.",
-      "properties": {
-        "id": {
-          "description": "Resource Id.",
-          "type": "string",
-          "readOnly": true
-        },
-        "name": {
-          "description": "Resource Name.",
-          "type": "string",
-          "readOnly": true
-        },
-        "kind": {
-          "description": "Kind of resource.",
-          "type": "string"
-        },
-        "type": {
-          "description": "Resource type.",
-          "type": "string",
-          "readOnly": true
-        }
-      },
-      "x-ms-azure-resource": true
-    },
     "ReissueCertificateOrderRequest": {
       "description": "Class representing certificate reissue request.",
       "type": "object",
       "allOf": [
         {
-          "$ref": "#/definitions/Resource"
+          "$ref": "../../Microsoft.Web/2016-03-01/CommonDefinitions.json#/definitions/Resource"
         }
       ],
       "properties": {
@@ -1294,7 +1472,7 @@
       "type": "object",
       "allOf": [
         {
-          "$ref": "#/definitions/Resource"
+          "$ref": "../../Microsoft.Web/2016-03-01/CommonDefinitions.json#/definitions/Resource"
         }
       ],
       "properties": {
@@ -1319,72 +1497,6 @@
         }
       }
     },
-    "Resource": {
-      "description": "Azure resource. This resource is tracked in Azure Resource Manager",
-      "required": [
-        "location"
-      ],
-      "properties": {
-        "id": {
-          "description": "Resource Id.",
-          "type": "string",
-          "readOnly": true
-        },
-        "name": {
-          "description": "Resource Name.",
-          "type": "string",
-          "readOnly": true
-        },
-        "kind": {
-          "description": "Kind of resource.",
-          "type": "string"
-        },
-        "location": {
-          "description": "Resource Location.",
-          "type": "string"
-        },
-        "type": {
-          "description": "Resource type.",
-          "type": "string",
-          "readOnly": true
-        },
-        "tags": {
-          "description": "Resource tags.",
-          "type": "object",
-          "additionalProperties": {
-            "type": "string"
-          }
-        },
-        "identity": {
-          "description": "Identity for the resource.",
-          "type": "object",
-          "properties": {
-            "principalId": {
-              "description": "The principal ID of resource identity.",
-              "type": "string",
-              "readOnly": true
-            },
-            "tenantId": {
-              "description": "The tenant ID of resource.",
-              "type": "string",
-              "readOnly": true
-            },
-            "type": {
-              "description": "The identity type.",
-              "type": "string",
-              "enum": [
-                "SystemAssigned"
-              ],
-              "x-ms-enum": {
-                "name": "ManagedServiceIdentityType",
-                "modelAsString": false
-              }
-            }
-          }
-        }
-      },
-      "x-ms-azure-resource": true
-    },
     "SiteSeal": {
       "description": "Site seal",
       "required": [
@@ -1404,11 +1516,11 @@
       "type": "object",
       "properties": {
         "lightTheme": {
-          "description": "Theme",
+          "description": "If <code>true</code> use the light color theme for site seal; otherwise, use the default color theme.",
           "type": "boolean"
         },
         "locale": {
-          "description": "Locale",
+          "description": "Locale of site seal.",
           "type": "string"
         }
       }
@@ -1427,11 +1539,11 @@
       "in": "path",
       "description": "Name of the resource group to which the resource belongs.",
       "required": true,
-      "x-ms-parameter-location": "method",
       "type": "string",
       "maxLength": 90,
       "minLength": 1,
-      "pattern": "^[-\\w\\._\\(\\)]+[^\\.]$"
+      "pattern": "^[-\\w\\._\\(\\)]+[^\\.]$",
+      "x-ms-parameter-location": "method"
     },
     "apiVersionParameter": {
       "name": "api-version",
