@@ -45,7 +45,7 @@
             "description": "The definition for completing the restore of this managed database.",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/CompleteDatabaseRestoreDefinition"
+              "$ref": "#/definitions/CompleteManagedDatabaseRestoreDefinition"
             }
           },
           {
@@ -62,7 +62,7 @@
           "default": {
             "description": "*** Error Responses: ***\n\n * 400 InvalidDatabaseCompleteRestoreRequest - The complete database restore request is invalid\n\n * 400 InvalidDatabaseCompleteRestoreRequestLastBackupName - The last backup name is invalid\n\n * 400 TokenTooLong - The provided token is too long.\n\n * 400 UnsupportedServiceName - The specified name is an invalid name because it contains one or more unsupported unicode characters.\n\n * 400 SourceDatabaseNotFound - The source database does not exist.\n\n * 400 InvalidIdentifier - The identifier contains NULL or an invalid unicode character.",
 			"schema": {
-				"$ref": "#/definitions/ManagedDatabaseError"
+				"$ref": "#/definitions/Error"
 			}
           },
           "202": {
@@ -108,7 +108,7 @@
           "default": {
             "description": "*** Error Responses: ***\n\n * 404 SubscriptionDoesNotHaveServer - The requested server was not found",
 			"schema": {
-				"$ref": "#/definitions/ManagedDatabaseError"
+				"$ref": "#/definitions/Error"
 			}
           }
         },
@@ -156,7 +156,7 @@
           "default": {
             "description": "*** Error Responses: ***\n\n * 404 SubscriptionDoesNotHaveServer - The requested server was not found\n\n * 404 ResourceNotFound - The requested resource was not found.",
 			"schema": {
-				"$ref": "#/definitions/ManagedDatabaseError"
+				"$ref": "#/definitions/Error"
 			}
           }
         },
@@ -208,7 +208,7 @@
           "default": {
             "description": "*** Error Responses: ***\n\n * 400 InvalidServerName - Invalid server name specified.\n\n * 400 TokenTooLong - The provided token is too long.\n\n * 400 CurrentDatabaseSizeExceedsMaxSize - User attempted to reduce the max size for a database to a size smaller than the current usage.\n\n * 400 InvalidCollation - Collation is not recognized by the server.\n\n * 400 SourceDatabaseNotFound - The source database does not exist.\n\n * 400 CannotUseTrailingWhitespacesInDatabaseName - The database name validation failed.\n\n * 400 RegionDoesNotSupportVersion - A user attempted to create a server of a specified version in a location where that server version isn't supported.\n\n * 400 SourceServerNotFound - The server part of a source database id provided in a CreateDatabaseAsCopy API call doesn't map to an existing server.\n\n * 400 ServerNotFound - The requested server was not found.\n\n * 400 UnsupportedServiceName - The specified name is an invalid name because it contains one or more unsupported unicode characters.\n\n * 400 CannotUseReservedDatabaseName - Cannot use reserved database name in this operation.\n\n * 400 SubscriptionNotFound - The requested subscription was not found.\n\n * 400 CurrentDatabaseLogSizeExceedsMaxSize - User attempted to change the database to a sku with lower max log size than the current usage.\n\n * 400 InvalidDatabaseCreateOrUpdateRequest - The request body for the create or update database operation is invalid.\n\n * 400 InvalidResourceId - Invalid resource identifier.\n\n * 400 InvalidSourceDatabaseId - Invalid source database identifier.\n\n * 400 MismatchingResourceGroupNameWithUrl - The provided resource group name did not match the name in the Url.\n\n * 400 MismatchingServerNameWithUrl - The provided server name did not match the name in the Url.\n\n * 400 MismatchingSubscriptionWithUrl - The provided subscription did not match the subscription in the Url.\n\n * 400 MissingCollation - Collation is required.\n\n * 400 MissingSourceDatabaseId - Missing source database identifier.\n\n * 400 MissingRestorePointInTime - Missing restore point in time\n\n * 400 MissingStorageContainerSasToken - Missing storage container SAS token\n\n * 400 MissingStorageContainerUri - Missing storage container URI\n\n * 400 RestorableDroppedDatabaseIdGivenForRestoreWithSourceDatabaseId - Cannot specify restorableDroppedDatabaseId when sourceDatabaseId is already given in restore create mode\n\n * 404 SubscriptionDoesNotHaveServer - The requested server was not found\n\n * 404 ResourceNotFound - The requested resource was not found.\n\n * 404 ServerNotInSubscription - Specified server does not exist on the specified subscription.\n\n * 404 ServerNotInSubscriptionResourceGroup - Specified server does not exist in the specified resource group and subscription.\n\n * 404 CannotFindObject - Cannot find the object because it does not exist or you do not have permissions\n\n * 409 RemoteDatabaseExists - The destination database name already exists on the destination server.\n\n * 409 SubscriptionDisabled - Subscription is disabled.\n\n * 409 ConflictingDatabaseOperation - There is already some operation on the database and the current operation should wait till it is done.\n\n * 409 ConflictingSystemOperationInProgress - A system maintenance operation is in progress on the database and further operations need to wait until it is completed.\n\n * 429 SubscriptionTooManyCreateUpdateRequests - Requests beyond max requests that can be processed by available resources.\n\n * 429 SubscriptionTooManyRequests - Requests beyond max requests that can be processed by available resources.\n\n * 500 ActivateOrDeactivateWorkflowThrottling - Activation or deactivation workflow failed because there are too many concurrent workflows\n\n * 503 TooManyRequests - Requests beyond max requests that can be processed by available resources.\n\n * 504 RequestTimeout - Service request exceeded the allowed timeout.",
 			"schema": {
-				"$ref": "#/definitions/ManagedDatabaseError"
+				"$ref": "#/definitions/Error"
 			}
           },
           "202": {
@@ -267,7 +267,7 @@
           "default": {
             "description": "*** Error Responses: ***\n\n * 400 CannotMoveOrDropJobAccountDatabase - Cannot drop database associated with job account.\n\n * 400 CannotUseReservedDatabaseName - Cannot use reserved database name in this operation.\n\n * 400 CannotMoveOrDropSyncMetadataDatabase - Cannot drop database used as sync metadata database.\n\n * 404 OperationIdNotFound - The operation with Id does not exist.\n\n * 404 ServerNotInSubscriptionResourceGroup - Specified server does not exist in the specified resource group and subscription.\n\n * 404 ServerNotInSubscription - Specified server does not exist on the specified subscription.\n\n * 409 OperationCancelled - The operation has been cancelled by user.\n\n * 409 OperationInterrupted - The operation on the resource could not be completed because it was interrupted by another operation on the same resource.\n\n * 500 OperationTimedOut - The operation timed out and automatically rolled back. Please retry the operation.\n\n * 503 TooManyRequests - Requests beyond max requests that can be processed by available resources.",
 			"schema": {
-				"$ref": "#/definitions/ManagedDatabaseError"
+				"$ref": "#/definitions/Error"
 			}
           },
           "202": {
@@ -326,7 +326,7 @@
           "default": {
             "description": "*** Error Responses: ***\n\n * 404 SubscriptionDoesNotHaveServer - The requested server was not found\n\n * 404 ResourceNotFound - The requested resource was not found.",
 			"schema": {
-				"$ref": "#/definitions/ManagedDatabaseError"
+				"$ref": "#/definitions/Error"
 			}
           },
           "202": {
@@ -346,8 +346,8 @@
     }
   },
   "definitions": {
-    "CompleteDatabaseRestoreDefinition": {
-      "description": "Contains the information necessary to perform a complete database restore operation.",
+    "CompleteManagedDatabaseRestoreDefinition": {
+      "description": "Contains the information necessary to perform a complete managed database restore operation.",
       "required": [
         "lastBackupName"
       ],
@@ -601,16 +601,16 @@
         }
       }
     },
-   "ManagedDatabaseError": {
+   "Error": {
 		"x-ms-external": true,
 		"properties": {
 			"error": {
-				"$ref": "#/definitions/ManagedDatabaseErrorBody"
+				"$ref": "#/definitions/ErrorProperties"
 			}
 		},
 		"description": "An error response."
 	},
-	"ManagedDatabaseErrorBody": {
+	"ErrorProperties": {
 		"x-ms-external": true,
 		"properties": {
 			"code": {
@@ -628,7 +628,7 @@
 			"details": {
 				"type": "array",
 				"items": {
-					"$ref": "#/definitions/ManagedDatabaseError"
+					"$ref": "#/definitions/Error"
 				},
 				"description": "A list of additional details about the error."
 			}
