@@ -802,6 +802,35 @@
         "tableName"
       ]
     },
+    "AzureMySqlTableDataset": {
+      "x-ms-discriminator-value": "AzureMySqlTable",
+      "description": "The Azure MySQL database dataset.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/Dataset"
+        }
+      ],
+      "properties": {
+        "typeProperties": {
+          "description": "Azure MySQL database dataset properties.",
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/AzureMySqlTableDatasetTypeProperties"
+        }
+      },
+      "required": [
+        "typeProperties"
+      ]
+    },
+    "AzureMySqlTableDatasetTypeProperties": {
+      "description": "Azure MySQL database dataset properties.",
+      "properties": {
+        "tableName": {
+          "type": "object",
+          "description": "The Azure MySQL database table name. Type: string (or Expression with resultType string)."
+        }
+      }
+    },
     "RelationalTableDataset": {
       "x-ms-discriminator-value": "RelationalTable",
       "description": "The relational table dataset.",
