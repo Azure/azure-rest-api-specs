@@ -1114,8 +1114,8 @@
           "description": "Type of application source.",
           "type": "string",
           "enum": [
-            "codeTemplate",
-            "codeRepository"
+            "CodeTemplate",
+            "CodeRepository"
           ],
           "x-ms-enum": {
             "name": "ApplicationSourceType",
@@ -1148,7 +1148,18 @@
         "applicationType"
       ]
     },
+    "CodeTemplateApplicationSource": {
+      "x-ms-discriminator-value": "CodeTemplate",
+      "description": "Defines the source application template.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/ApplicationSource"
+        }
+      ]
+    },
     "CodeRepositoryApplicationSource": {
+      "x-ms-discriminator-value": "CodeRepository",
       "description": "Defines the source application, when it resides in a code repository.",
       "type": "object",
       "properties": {
@@ -1211,7 +1222,6 @@
     "ApplicationTarget": {
       "description": "Defines the target resources for a VSTS pipeline.",
       "type": "object",
-      "discriminator": "targetType",
       "properties": {
         "targetType": {
           "description": "Type of target.",
@@ -1262,7 +1272,6 @@
     "Authorization": {
       "description": "Defines the authorization type and its parameters.",
       "type": "object",
-      "discriminator": "authorizationType",
       "properties": {
         "authorizationType": {
           "description": "Type of authorization.",
