@@ -88,6 +88,47 @@ batch:
     output-folder: $(csharp-sdks-folder)/MachineLearning/Management.MachineLearning/Generated/CommitmentPlans
 ```
 
+
+## Go
+
+These settings apply only when `--go` is specified on the command line.
+
+``` yaml $(go)
+go:
+  license-header: MICROSOFT_APACHE_NO_VERSION
+  clear-output-folder: true
+```
+
+### Tag: package-webservices-2017-01 and go
+
+These settings apply only when `--tag=package-webservices-2017-01 --go` is specified on the command line.
+Please also specify `--go-sdk-folder=<path to the root directory of your azure-sdk-for-go clone>`.
+
+``` yaml $(tag) == 'package-webservices-2017-01' && $(go)
+namespace: webservices
+output-folder: $(go-sdk-folder)/services/machinelearning/mgmt/2017-01-01/webservices
+```
+
+### Tag: package-webservices-2016-05-preview and go
+
+These settings apply only when `--tag=package-webservices-2016-05-preview --go` is specified on the command line.
+Please also specify `--go-sdk-folder=<path to the root directory of your azure-sdk-for-go clone>`.
+
+``` yaml $(tag) == 'package-webservices-2016-05-preview' && $(go)
+namespace: webservices
+output-folder: $(go-sdk-folder)/services/machinelearning/mgmt/2016-05-01-preview/webservices
+```
+
+### Tag: package-commitmentPlans-2016-05-preview and go
+
+These settings apply only when `--tag=package-commitmentPlans-2016-05-preview --go` is specified on the command line.
+Please also specify `--go-sdk-folder=<path to the root directory of your azure-sdk-for-go clone>`.
+
+``` yaml $(tag) == 'package-commitmentPlans-2016-05-preview' && $(go)
+namespace: commitmentplans
+output-folder: $(go-sdk-folder)/services/machinelearning/mgmt/2016-05-01-preview/commitmentplans
+```
+
 # Validation
 
 Since this RP has no unique default package, iterate over all of them for validation:

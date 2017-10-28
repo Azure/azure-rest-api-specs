@@ -16,50 +16,6 @@
         "application/json"
     ],
     "paths": {
-        "/subscriptions/{subscriptionId}/resourceGroups/System.{location}/providers/Microsoft.Fabric.Admin/fabricLocations/{location}/infraRoles/{infraRole}/ScaleUp": {
-            "post": {
-                "tags": [
-                    "InfraRoles"
-                ],
-                "description": "Create new infra role instances.",
-                "operationId": "InfraRoles_ScaleUp",
-                "parameters": [
-                    {
-                        "$ref": "Fabric.json#/parameters/SubscriptionIdParameter"
-                    },
-                    {
-                        "$ref": "Fabric.json#/parameters/LocationParameter"
-                    },
-                    {
-                        "$ref": "#/parameters/InfraRoleParameter"
-                    },
-                    {
-                        "$ref": "Fabric.json#/parameters/ApiVersionParameter"
-                    }
-                ],
-                "responses": {
-                    "200": {
-                        "description": "OK",
-                        "schema": {
-                            "$ref": "Operations.json#/definitions/ProvisioningState"
-                        }
-                    },
-                    "202": {
-                        "description": "ACCEPTED",
-                        "schema": {
-                            "$ref": "Operations.json#/definitions/ProvisioningState"
-                        }
-                    },
-                    "500": {
-                        "description": "FAILURE",
-                        "schema": {
-                            "$ref": "Operations.json#/definitions/ProvisioningState"
-                        }
-                    }
-                },
-                "x-ms-long-running-operation": true
-            }
-        },
         "/subscriptions/{subscriptionId}/resourceGroups/System.{location}/providers/Microsoft.Fabric.Admin/fabricLocations/{location}/infraRoles/{infraRole}": {
             "get": {
                 "x-ms-examples": {

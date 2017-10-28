@@ -2,7 +2,7 @@
   "swagger": "2.0",
   "info": {
     "title": "MySQLManagementClient",
-    "description": "The Microsoft Azure management API provides create, read, update, and delete functionality for Azure MySQL resources including servers, databases, firewall rules, log files and configurations.",
+    "description": "The Microsoft Azure management API provides create, read, update, and delete functionality for Azure MySQL resources including servers, databases, firewall rules, VNET rules, log files and configurations.",
     "version": "2017-04-30-preview"
   },
   "host": "management.azure.com",
@@ -432,6 +432,193 @@
         }
       }
     },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DBforMySQL/servers/{serverName}/virtualNetworkRules/{virtualNetworkRuleName}": {
+      "get": {
+        "tags": [
+          "VirtualNetworkRules"
+        ],
+        "description": "Gets a virtual network rule.",
+        "operationId": "VirtualNetworkRules_Get",
+        "parameters": [
+          {
+            "$ref": "#/parameters/ResourceGroupParameter"
+          },
+          {
+            "$ref": "#/parameters/ServerNameParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/virtualNetworkRuleNameParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successfully retrieved a specified virtual network rule.",
+            "schema": {
+              "$ref": "#/definitions/VirtualNetworkRule"
+            }
+          },
+          "default": {
+            "description": "*** Error Responses: ***\n\n * 404 SubscriptionDoesNotHaveServer - The requested server was not found\n\n * 404 ResourceNotFound - The requested resource was not found."
+          }
+        },
+        "x-ms-examples": {
+          "Gets a virtual network rule": {
+            "$ref": "./examples/VirtualNetworkRulesGet.json"
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "VirtualNetworkRules"
+        ],
+        "description": "Creates or updates an existing virtual network rule.",
+        "operationId": "VirtualNetworkRules_CreateOrUpdate",
+        "parameters": [
+          {
+            "$ref": "#/parameters/ResourceGroupParameter"
+          },
+          {
+            "$ref": "#/parameters/ServerNameParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/virtualNetworkRuleNameParameter"
+          },
+          {
+            "name": "parameters",
+            "in": "body",
+            "description": "The requested virtual Network Rule Resource state.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/VirtualNetworkRule"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successfully updated a virtual network rule.",
+            "schema": {
+              "$ref": "#/definitions/VirtualNetworkRule"
+            }
+          },
+          "default": {
+            "description": "*** Error Responses: ***\n\n * 400 InvalidResourceId - Invalid resource identifier.\n\n * 400 MismatchingSubscriptionWithUrl - The provided subscription did not match the subscription in the Url.\n\n * 400 MismatchingResourceGroupNameWithUrl - The provided resource group name did not match the name in the Url.\n\n * 400 MismatchingServerNameWithUrl - The provided server name did not match the name in the Url.\n\n * 400 NullVirtualNetworkRequest - Virtual Network Request is Null\n\n * 400 NullVirtualNetworkRequestParameters - Virtual Network Request Parameters are Null\n\n * 400 NullVirtualNetworkSubnetId - The Virtual Network Subnet Id is null\n\n * 404 SubscriptionDoesNotHaveServer - The requested server was not found\n\n * 404 VirtualNetworkRuleNotEnabled - Azure SQL Server Virtual Network Rule feature is not enabled\n\n * 404 OperationIdNotFound - The operation with Id does not exist.\n\n * 409 OperationCancelled - The operation has been cancelled by user.\n\n * 409 OperationInterrupted - The operation on the resource could not be completed because it was interrupted by another operation on the same resource.\n\n * 500 OperationTimedOut - The operation timed out and automatically rolled back. Please retry the operation."
+          },
+          "202": {
+            "description": "Accepted"
+          },
+          "201": {
+            "description": "Successfully created a virtual network rule.",
+            "schema": {
+              "$ref": "#/definitions/VirtualNetworkRule"
+            }
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-examples": {
+          "Create or update a virtual network rule": {
+            "$ref": "./examples/VirtualNetworkRulesCreateOrUpdate.json"
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "VirtualNetworkRules"
+        ],
+        "description": "Deletes the virtual network rule with the given name.",
+        "operationId": "VirtualNetworkRules_Delete",
+        "parameters": [
+          {
+            "$ref": "#/parameters/ResourceGroupParameter"
+          },
+          {
+            "$ref": "#/parameters/ServerNameParameter"
+          },
+          {
+            "$ref": "#/parameters/virtualNetworkRuleNameParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successfully deleted the virtual network rule."
+          },
+          "default": {
+            "description": "*** Error Responses: ***\n\n * 400 InvalidResourceId - Invalid resource identifier.\n\n * 400 MismatchingSubscriptionWithUrl - The provided subscription did not match the subscription in the Url.\n\n * 400 MismatchingResourceGroupNameWithUrl - The provided resource group name did not match the name in the Url.\n\n * 400 MismatchingServerNameWithUrl - The provided server name did not match the name in the Url.\n\n * 400 NullVirtualNetworkRequest - Virtual Network Request is Null\n\n * 400 NullVirtualNetworkRequestParameters - Virtual Network Request Parameters are Null\n\n * 404 SubscriptionDoesNotHaveServer - The requested server was not found\n\n * 404 OperationIdNotFound - The operation with Id does not exist.\n\n * 409 OperationCancelled - The operation has been cancelled by user.\n\n * 409 OperationInterrupted - The operation on the resource could not be completed because it was interrupted by another operation on the same resource.\n\n * 500 OperationTimedOut - The operation timed out and automatically rolled back. Please retry the operation."
+          },
+          "202": {
+            "description": "Accepted"
+          },
+          "204": {
+            "description": "The specified virtual network rule does not exist."
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-examples": {
+          "Delete a virtual network rule": {
+            "$ref": "./examples/VirtualNetworkRulesDelete.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DBforMySQL/servers/{serverName}/virtualNetworkRules": {
+      "get": {
+        "tags": [
+          "VirtualNetworkRules"
+        ],
+        "description": "Gets a list of virtual network rules in a server.",
+        "operationId": "VirtualNetworkRules_ListByServer",
+        "parameters": [
+          {
+            "$ref": "#/parameters/ResourceGroupParameter"
+          },
+          {
+            "$ref": "#/parameters/ServerNameParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successfully retrieved the list of virtual network rules.",
+            "schema": {
+              "$ref": "#/definitions/VirtualNetworkRuleListResult"
+            }
+          },
+          "default": {
+            "description": "*** Error Responses: ***\n\n * 404 SubscriptionDoesNotHaveServer - The requested server was not found\n\n * 404 ResourceNotFound - The requested resource was not found."
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        },
+        "x-ms-examples": {
+          "List virtual network rules": {
+            "$ref": "./examples/VirtualNetworkRulesList.json"
+          }
+        }
+      }
+    },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DBforMySQL/servers/{serverName}/databases/{databaseName}": {
       "put": {
         "tags": [
@@ -756,6 +943,113 @@
         "x-ms-pageable": {
           "nextLinkName": null
         }
+      }
+    },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.DBforMySQL/performanceTiers": {
+      "get": {
+        "tags": [
+          "PerformanceTiers"
+        ],
+        "operationId": "PerformanceTiers_List",
+        "x-ms-examples": {
+          "PerformanceTiersList": {
+            "$ref": "./examples/PerformanceTiersList.json"
+          }
+        },
+        "description": "List all the performance tiers in a given subscription.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/PerformanceTierListResult"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": null
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.DBforMySQL/locations/{locationName}/performanceTiers": {
+      "get": {
+        "tags": [
+          "LocationBasedPerformanceTier"
+        ],
+        "operationId": "LocationBasedPerformanceTier_List",
+        "x-ms-examples": {
+          "PerformanceTiersList": {
+            "$ref": "./examples/PerformanceTiersListByLocation.json"
+          }
+        },
+        "description": "List all the performance tiers at specified location in a given subscription.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/LocationNameParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/PerformanceTierListResult"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": null
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.DBforMySQL/checkNameAvailability": {
+      "post": {
+          "tags": [
+              "CheckNameAvailability"
+          ],
+          "operationId": "CheckNameAvailability_Execute",
+          "x-ms-examples": {
+              "NameAvailability": { "$ref": "./examples/CheckNameAvailability.json" }
+          },
+          "description": "Check the availability of name for resource",
+          "parameters": [
+              {
+                  "$ref": "#/parameters/ApiVersionParameter"
+              },
+              {
+                  "$ref": "#/parameters/SubscriptionIdParameter"
+              },
+              {
+                  "name": "nameAvailabilityRequest",
+                  "in": "body",
+                  "required": true,
+                  "schema": {
+                      "$ref": "#/definitions/NameAvailabilityRequest"
+                  },
+                  "description": "The required parameters for checking if resource name is available."
+              }
+
+          ],
+          "responses": {
+              "200": {
+                  "description": "OK",
+                  "schema": {
+                      "$ref": "#/definitions/NameAvailability"
+                  }
+              }
+          }
       }
     },
     "/providers/Microsoft.DBforMySQL/operations": {
@@ -1160,6 +1454,74 @@
       },
       "description": "A list of firewall rules."
     },
+    "VirtualNetworkRuleProperties": {
+      "description": "Properties of a virtual network rule.",
+      "required": [
+        "virtualNetworkSubnetId"
+      ],
+      "type": "object",
+      "properties": {
+        "virtualNetworkSubnetId": {
+          "description": "The ARM resource id of the virtual network subnet.",
+          "type": "string"
+        },
+        "ignoreMissingVnetServiceEndpoint": {
+          "description": "Create firewall rule before the virtual network has vnet service endpoint enabled.",
+          "type": "boolean"
+        },
+        "state": {
+          "description": "Virtual Network Rule State",
+          "enum": [
+            "Initializing",
+            "InProgress",
+            "Ready",
+            "Deleting",
+            "Unknown"
+          ],
+          "type": "string",
+          "readOnly": true,
+          "x-ms-enum": {
+            "name": "VirtualNetworkRuleState",
+            "modelAsString": true
+          }
+        }
+      }
+    },
+    "VirtualNetworkRule": {
+      "description": "A virtual network rule.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/ProxyResource"
+        }
+      ],
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/VirtualNetworkRuleProperties",
+          "description": "Resource properties.",
+          "x-ms-client-flatten": true
+        }
+      }
+    },
+    "VirtualNetworkRuleListResult": {
+      "description": "A list of virtual network rules.",
+      "type": "object",
+      "properties": {
+        "value": {
+          "description": "Array of results.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/VirtualNetworkRule"
+          },
+          "readOnly": true
+        },
+        "nextLink": {
+          "description": "Link to retrieve next page of results.",
+          "type": "string",
+          "readOnly": true
+        }
+      }
+    },
     "DatabaseProperties": {
       "properties": {
         "charset": {
@@ -1397,6 +1759,92 @@
         }
       },
       "description": "A list of log files."
+    },
+    "PerformanceTierServiceLevelObjectives": {
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "ID for the service level objective."
+        },
+        "edition": {
+          "type": "string",
+          "description": "Edition of the performance tier."
+        },
+        "dtu": {
+          "type": "integer",
+          "description": "Database throughput unit associated with the service level objective"
+        },
+        "storageMB": {
+          "type": "integer",
+          "description": "Maximum storage in MB associated with the service level objective"
+        }
+      },
+      "description": "Service level objectives for performance tier."
+    },
+    "PerformanceTierProperties": {
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "ID of the performance tier."
+        },
+        "backupRetentionDays": {
+          "type": "integer",
+          "description": "Backup retention in days for the performance tier edition"
+        },
+        "serviceLevelObjectives": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/PerformanceTierServiceLevelObjectives"
+          },
+          "description": "Service level objectives associated with the performance tier"
+        }
+      },
+      "description": "Performance tier properties"
+    },
+    "PerformanceTierListResult": {
+      "properties": {
+        "value": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/PerformanceTierProperties"
+          },
+          "description": "The list of performance tiers"
+        }
+      },
+      "description": "A list of performance tiers."
+    },
+    "NameAvailabilityRequest": {
+        "required": [
+            "name"
+        ],
+        "properties": {
+            "name": {
+                "type": "string",
+                "description": "Resource name to verify."
+            },
+            "type": {
+                "type": "string",
+                "description": "Resource type used for verification."
+            }
+        },
+        "description": "Request from client to check resource name availability."
+    },
+    "NameAvailability": {
+        "properties": {
+            "message": {
+                "type": "string",
+                "description": "Error Message."
+            },
+            "nameAvailable": {
+                "type": "boolean",
+                "description": "Indicates whether the resource name is available."
+            },
+            "reason": {
+                "type": "string",
+                "description": "Reason for name being unavailable."
+            }
+        },
+        "description": "Represents a resource name availability."
     }
   },
   "parameters": {
@@ -1438,6 +1886,14 @@
       "description": "The name of the server firewall rule.",
       "x-ms-parameter-location": "method"
     },
+    "virtualNetworkRuleNameParameter": {
+      "name": "virtualNetworkRuleName",
+      "in": "path",
+      "description": "The name of the virtual network rule.",
+      "required": true,
+      "type": "string",
+      "x-ms-parameter-location": "method"
+    },
     "DatabaseNameParameter": {
       "name": "databaseName",
       "in": "path",
@@ -1452,6 +1908,14 @@
       "required": true,
       "type": "string",
       "description": "The name of the server configuration.",
+      "x-ms-parameter-location": "method"
+    },
+    "LocationNameParameter": {
+      "name": "locationName",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "description": "The name of the location.",
       "x-ms-parameter-location": "method"
     }
   }

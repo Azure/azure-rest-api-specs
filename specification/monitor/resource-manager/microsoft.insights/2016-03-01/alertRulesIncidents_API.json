@@ -2,6 +2,9 @@
   "swagger": "2.0",
   "info": {
     "title": "MonitorManagementClient",
+    "x-ms-code-generation-settings": {
+      "name": "MonitorManagementClient"
+    },
     "version": "2016-03-01"
   },
   "host": "management.azure.com",
@@ -74,6 +77,9 @@
               "$ref": "#/definitions/Incident"
             }
           }
+        },
+        "x-ms-examples": {
+            "Get a single alert rule incident": { "$ref": "./examples/getAlertRuleIncident.json" }
         }
       }
     },
@@ -105,6 +111,9 @@
               "$ref": "#/definitions/IncidentListResult"
             }
           }
+        },
+        "x-ms-examples": {
+            "List alert rule incidents": { "$ref": "./examples/listAlertRuleIncidents.json" }
         },
         "x-ms-pageable": {
           "nextLinkName": null

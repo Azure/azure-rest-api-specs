@@ -8,6 +8,12 @@
   "schemes": [
     "https"
   ],
+  "consumes": [
+    "application/json"
+  ],
+  "produces": [
+    "application/json"
+  ],
   "paths": {
     "/subscriptions/{subscriptionId}/providers/Microsoft.Web/recommendations": {
       "get": {
@@ -17,12 +23,6 @@
         "summary": "List all recommendations for a subscription.",
         "description": "List all recommendations for a subscription.",
         "operationId": "Recommendations_List",
-        "produces": [
-          "application/json",
-          "text/json",
-          "application/xml",
-          "text/xml"
-        ],
         "parameters": [
           {
             "name": "featured",
@@ -34,8 +34,8 @@
             "name": "$filter",
             "in": "query",
             "description": "Filter is specified by using OData syntax. Example: $filter=channels eq 'Api' or channel eq 'Notification' and startTime eq '2014-01-01T00:00:00Z' and endTime eq '2014-12-31T23:59:59Z' and timeGrain eq duration'[PT1H|PT1M|P1D]",
-            "x-ms-skip-url-encoding": true,
-            "type": "string"
+            "type": "string",
+            "x-ms-skip-url-encoding": true
           },
           {
             "$ref": "#/parameters/subscriptionIdParameter"
@@ -88,12 +88,6 @@
         "summary": "Get past recommendations for an app, optionally specified by the time range.",
         "description": "Get past recommendations for an app, optionally specified by the time range.",
         "operationId": "Recommendations_ListHistoryForWebApp",
-        "produces": [
-          "application/json",
-          "text/json",
-          "application/xml",
-          "text/xml"
-        ],
         "parameters": [
           {
             "$ref": "#/parameters/resourceGroupNameParameter"
@@ -109,8 +103,8 @@
             "name": "$filter",
             "in": "query",
             "description": "Filter is specified by using OData syntax. Example: $filter=channels eq 'Api' or channel eq 'Notification' and startTime eq '2014-01-01T00:00:00Z' and endTime eq '2014-12-31T23:59:59Z' and timeGrain eq duration'[PT1H|PT1M|P1D]",
-            "x-ms-skip-url-encoding": true,
-            "type": "string"
+            "type": "string",
+            "x-ms-skip-url-encoding": true
           },
           {
             "$ref": "#/parameters/subscriptionIdParameter"
@@ -140,12 +134,6 @@
         "summary": "Get all recommendations for an app.",
         "description": "Get all recommendations for an app.",
         "operationId": "Recommendations_ListRecommendedRulesForWebApp",
-        "produces": [
-          "application/json",
-          "text/json",
-          "application/xml",
-          "text/xml"
-        ],
         "parameters": [
           {
             "$ref": "#/parameters/resourceGroupNameParameter"
@@ -167,8 +155,8 @@
             "name": "$filter",
             "in": "query",
             "description": "Return only channels specified in the filter. Filter is specified by using OData syntax. Example: $filter=channels eq 'Api' or channel eq 'Notification'",
-            "x-ms-skip-url-encoding": true,
-            "type": "string"
+            "type": "string",
+            "x-ms-skip-url-encoding": true
           },
           {
             "$ref": "#/parameters/subscriptionIdParameter"
@@ -264,12 +252,6 @@
         "summary": "Get a recommendation rule for an app.",
         "description": "Get a recommendation rule for an app.",
         "operationId": "Recommendations_GetRuleDetailsByWebApp",
-        "produces": [
-          "application/json",
-          "text/json",
-          "application/xml",
-          "text/xml"
-        ],
         "parameters": [
           {
             "$ref": "#/parameters/resourceGroupNameParameter"
@@ -323,8 +305,10 @@
           "type": "string"
         },
         "recommendationId": {
+          "format": "uuid",
           "description": "A GUID value that each recommendation object is associated with.",
-          "type": "string"
+          "type": "string",
+          "example": "00000000-0000-0000-0000-000000000000"
         },
         "resourceId": {
           "description": "Full ARM resource ID string that this recommendation object is associated with.",
@@ -461,8 +445,9 @@
         },
         "recommendationId": {
           "format": "uuid",
-          "description": "Recommendation ID of an associated recommendation object tied to the rule, if exists.\n If such an object doesn't exist, it is set to null.",
-          "type": "string"
+          "description": "Recommendation ID of an associated recommendation object tied to the rule, if exists.\nIf such an object doesn't exist, it is set to null.",
+          "type": "string",
+          "example": "00000000-0000-0000-0000-000000000000"
         },
         "description": {
           "description": "Localized detailed description of the rule.",
@@ -540,11 +525,11 @@
       "in": "path",
       "description": "Name of the resource group to which the resource belongs.",
       "required": true,
-      "x-ms-parameter-location": "method",
       "type": "string",
       "maxLength": 90,
       "minLength": 1,
-      "pattern": "^[-\\w\\._\\(\\)]+[^\\.]$"
+      "pattern": "^[-\\w\\._\\(\\)]+[^\\.]$",
+      "x-ms-parameter-location": "method"
     },
     "apiVersionParameter": {
       "name": "api-version",

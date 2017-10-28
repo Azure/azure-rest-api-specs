@@ -1,12 +1,12 @@
-# Commerce Admin
+# Fabric Admin
     
 > see https://aka.ms/autorest
 
-This is the AutoRest configuration file for Commerce Admin.
+This is the AutoRest configuration file for Fabric Admin.
 
 ---
 ## Getting Started 
-To build the SDK for Commerce Admin, simply [Install AutoRest](https://aka.ms/autorest/install) and in this folder, run:
+To build the SDK for Fabric Admin, simply [Install AutoRest](https://aka.ms/autorest/install) and in this folder, run:
 
 > `autorest`
 
@@ -18,7 +18,7 @@ To see additional help and options, run:
 ## Configuration
 
 ### Basic Information 
-These are the global settings for the Commerce API.
+These are the global settings for the Fabric API.
 
 ``` yaml
 title: FabricAdminClient
