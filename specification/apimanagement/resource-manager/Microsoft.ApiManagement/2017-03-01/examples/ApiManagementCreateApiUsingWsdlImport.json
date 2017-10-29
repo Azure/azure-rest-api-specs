@@ -1,0 +1,74 @@
+{
+  "parameters": {
+    "serviceName": "apimService1",
+    "resourceGroupName": "rg1",
+    "api-version": "2017-03-01",
+    "subscriptionId": "subid",
+    "apiId": "soapApi",
+    "parameters": {
+      "properties": {
+        "contentFormat": "wsdl-link",
+        "contentValue": "http://www.webservicex.net/CurrencyConvertor.asmx?WSDL",
+        "path": "currency",
+        "wsdlselector": {
+          "wsdlServiceName": "CurrencyConvertor",
+          "wsdlEndpointName": "CurrencyConvertorSoap"
+        }
+      }
+    }
+  },
+  "responses": {
+    "201": {
+      "body": {
+        "id": "/subscriptions/20010222-2b48-4245-a95c-090db6312d5f/resourceGroups/Admin-ResourceGroup/providers/Microsoft.ApiManagement/service/teched/apis/soapApi",
+        "type": "Microsoft.ApiManagement/service/apis",
+        "name": "soapApi",
+        "properties": {
+          "displayName": "CurrencyConvertor",
+          "apiRevision": "1",
+          "description": null,
+          "serviceUrl": "http://www.webservicex.net",
+          "path": "currency",
+          "protocols": [
+            "https"
+          ],
+          "authenticationSettings": {
+            "oAuth2": null,
+            "openid": null
+          },
+          "subscriptionKeyParameterNames": {
+            "header": "Ocp-Apim-Subscription-Key",
+            "query": "subscription-key"
+          },
+          "isCurrent": true
+        }
+      }
+    },
+    "200": {
+      "body": {
+        "id": "/subscriptions/20010222-2b48-4245-a95c-090db6312d5f/resourceGroups/Admin-ResourceGroup/providers/Microsoft.ApiManagement/service/teched/apis/soapApi",
+        "type": "Microsoft.ApiManagement/service/apis",
+        "name": "soapApi",
+        "properties": {
+          "displayName": "CurrencyConvertor",
+          "apiRevision": "1",
+          "description": null,
+          "serviceUrl": "http://www.webservicex.net",
+          "path": "currency",
+          "protocols": [
+            "https"
+          ],
+          "authenticationSettings": {
+            "oAuth2": null,
+            "openid": null
+          },
+          "subscriptionKeyParameterNames": {
+            "header": "Ocp-Apim-Subscription-Key",
+            "query": "subscription-key"
+          },
+          "isCurrent": true
+        }
+      }
+    }
+  }
+}
