@@ -211,8 +211,8 @@
         "operationId": "Backend_Update",
         "description": "Updates an existing backend.",
         "x-ms-examples": {
-          "ApiManagementUpdateBackendProxyBackend": {
-            "$ref": "./examples/ApiManagementUpdateBackendProxyBackend.json"
+          "ApiManagementUpdateBackend": {
+            "$ref": "./examples/ApiManagementUpdateBackend.json"
           }
         },
         "parameters": [
@@ -230,7 +230,7 @@
             "in": "body",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/BackendUpdateParameters"
+              "$ref": "#/definitions/BackendUpdateContract"
             },
             "description": "Update parameters."
           },
@@ -574,6 +574,16 @@
         "url"
       ],
       "description": "Details of the Backend WebProxy Server to use in the Request to Backend."
+    },
+    "BackendUpdateContract": {
+      "properties": {
+        "properties": {
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/BackendUpdateParameters",
+          "description": "Backend entity update contract properties."
+        }
+      },
+      "description": "Backend update contract."
     },
     "BackendUpdateParameters": {
       "properties": {
