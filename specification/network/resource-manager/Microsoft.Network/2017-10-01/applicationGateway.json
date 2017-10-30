@@ -394,7 +394,7 @@
             "required": false,
             "type": "string",
             "description": "Expands BackendAddressPool and BackendHttpSettings referenced in backend health."
-          }		  
+          }
         ],
         "responses": {
           "200": {
@@ -535,19 +535,19 @@
       "properties": {
         "backendAddressPools": {
           "type": "array",
-	        "items": {
+          "items": {
             "$ref": "#/definitions/ApplicationGatewayBackendHealthPool"
-	        }
-	      }
-	    },
-	    "description": "List of ApplicationGatewayBackendHealthPool resources."
-	},	
+          }
+        }
+      },
+      "description": "List of ApplicationGatewayBackendHealthPool resources."
+    },
     "ApplicationGatewayBackendHealthPool": {
       "properties": {
         "backendAddressPool": {
           "$ref": "#/definitions/ApplicationGatewayBackendAddressPool",
           "description": "Reference of an ApplicationGatewayBackendAddressPool resource."
-        },	  
+        },
         "backendHttpSettingsCollection": {
           "type": "array",
           "items": {
@@ -563,7 +563,7 @@
         "backendHttpSettings": {
           "$ref": "#/definitions/ApplicationGatewayBackendHttpSettings",
           "description": "Reference of an ApplicationGatewayBackendHttpSettings resource."
-        },	  
+        },
         "servers": {
           "type": "array",
           "items": {
@@ -573,17 +573,17 @@
         }
       },
       "description": "Application gateway BackendHealthHttp settings."
-    },	
+    },
     "ApplicationGatewayBackendHealthServer": {
       "properties": {
         "address": {
         "type": "string",
         "description": "IP address or FQDN of backend server."
-        },	  
+        },
         "ipConfiguration": {
           "$ref": "./networkInterface.json#/definitions/NetworkInterfaceIPConfiguration",
           "description": "Reference of IP configuration of backend server."
-        },	  
+        },
         "health": {
           "type": "string",
           "description": "Health of backend server.",
@@ -599,9 +599,9 @@
             "modelAsString": true
           }
         }
-      },	
+      },
       "description": "Application gateway backendhealth http settings."
-    },  
+    },
     "ApplicationGatewaySku": {
       "properties": {
         "name": {
