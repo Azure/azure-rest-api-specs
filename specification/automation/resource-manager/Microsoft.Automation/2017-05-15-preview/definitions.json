@@ -20,11 +20,11 @@
             "description": "Software update configuration properties.",
             "properties": {
                 "updateConfiguration": {
-                    "description":  "Software update configuration settings",
+                    "description":  "update specific properties for the Software update configuration",
                     "$ref": "#/definitions/updateConfiguration"
                 },
                 "scheduleInfo": {
-                    "description": "Software update configuration schedule information.",
+                    "description": "Schedule information for the Software update configuration",
                     "$ref": "../2015-10-31/definitions.json#/definitions/ScheduleProperties"
                 },
                 "provisioningState": {
@@ -35,38 +35,73 @@
                 "error": {
                     "description": "detailes of provisioning error",
                     "$ref": "../2015-10-31/definitions.json#/definitions/ErrorResponse"
+                },
+                "creationTime": {
+                    "type": "string",
+                    "description": "Creation time of theresource, which only appears in the response.",
+                    "format": "date-time",
+                    "readOnly": true
+                },
+                "createdBy": {
+                    "type": "string",
+                    "description": "createdBy property, which only appears in the response.",
+                    "readOnly": true
+                },
+                "lastModifiedTime": {
+                    "type": "string",
+                    "description": "Last time resource was modified, which only appears in the response.",
+                    "format": "date-time",
+                    "readOnly": true
+                },
+                "lastModifiedBy": {
+                    "type": "string",
+                    "description": "lastModifiedBy property, which only appears in the response.",
+                    "readOnly": true
                 }
             },
-            "allOf": [
-                {
-                  "$ref": "#/definitions/resource"
-                }
-              ],
             "required": [ "updateConfiguration" ]
         },
 
         "softwareUpdateConfiguration": {
-            "description": "Software update configuration model.",
             "x-ms-azure-resource": true,
+            "description": "Software update configuration properties.",
             "type": "object",
             "properties": {
-            "name": {
-                "readOnly": true,
-                "type": "string",
-                "description": "Resource name."
-            },
-            "id": {
-                "readOnly": true,
-                "type": "string",
-                "description": "Resource Id."
-            },
-            "properties": {
-                "x-ms-client-flatten": true,
-                "description": "Software update configuration properties.",
-                "$ref": "#/definitions/softwareUpdateConfigurationProperties"
-            }
+                "name": {
+                    "readOnly": true,
+                    "type": "string",
+                    "description": "Resource name."
+                },
+                "id": {
+                    "readOnly": true,
+                    "type": "string",
+                    "description": "Resource Id."
+                },
+                "type": {
+                    "readOnly": true,
+                    "type": "string",
+                    "description": "Resource type"
+                },
+                "properties": {
+                    "x-ms-client-flatten": true,
+                    "description": "Software update configuration properties.",
+                    "$ref": "#/definitions/softwareUpdateConfigurationProperties"
+                }
             },
             "required": [ "properties" ]
+        },
+
+        "softwareUpdateConfigurationListResult": {
+            "description": "result of listing all software update configuration",
+            "properties": {
+                "value": {
+                    "description": "outer object returned when listing all software update configurations",
+                    "type": "array",
+                    "items": {
+                        "$ref": "./definitions.json#/definitions/softwareUpdateConfigurationCollectionItem"
+                    }
+                }
+            }
         },
 
         "collectionItemUpdateConfiguration": {
@@ -89,18 +124,18 @@
         },
 
         "softwareUpdateConfigurationCollectionItem": {
-            "description": "Software update configuration collection item model.",
+            "description": "Software update configuration collection item properties.",
             "type": "object",
             "properties": {
             "name": {
                 "readOnly": true,
                 "type": "string",
-                "description": "Resource name."
+                "description": "Name of the software update configuration."
             },
             "id": {
                 "readOnly": true,
                 "type": "string",
-                "description": "Resource Id."
+                "description": "Resource Id of the software update configuration"
             },
             "properties": {
                 "x-ms-client-flatten": true,
@@ -115,7 +150,7 @@
             "description": "Software update configuration collection item properties.",
             "properties": {
                 "updateConfiguration": {
-                    "description": "update configuration properties.",
+                    "description": "Update specific properties of the software update configuration.",
                     "$ref": "#/definitions/collectionItemUpdateConfiguration"
                 },
                 "frequency": {
@@ -126,7 +161,7 @@
                 "startTime": {
                     "type": "string",
                     "format": "date-time",
-                    "description": "Gets or sets the start time of the schedule."
+                    "description": "the start time of the update."
                 },
                 "creationTime": {
                     "type": "string",
@@ -148,65 +183,71 @@
                 "nextRun": {
                     "type": "string",
                     "format": "date-time",
-                    "description": "Gets or sets the next run time of the schedule."
+                    "description": "ext run time of the update."
                 }
+            }
+        },
+
+        "operatingSystemType": {
+            "type": "string",
+            "description": "Target operating system for the software update configuration.",
+            "enum": [
+                "Windows",
+                "Linux"
+            ],
+            "x-ms-enum": {
+                "modelAsString": false,
+                "name": "OperatingSystemType"
             }
         },
 
         "updateConfiguration": {
             "type": "object",
-            "description": "Configuration settings for the software update configuration.",
+            "description": "Update specifc properties of the software update configuration.",
             "discriminator": "operatingSystem",
             "properties": {
-            "operatingSystem": {
-                "type": "string",
-                "description": "Target operating system for the software update configuration.",
-                "enum": [ "Windows", "Linux" ],
-                "x-ms-enum": {
-                "modelAsString": false,
-                "name": "OperatingSystemType"
+                "operatingSystem": {
+                    "$ref": "#/definitions/operatingSystemType"
+                },
+                "windows": {
+                    "description": "Windows specific update configuration.",
+                    "$ref": "#/definitions/WindowsProperties"
+                },
+                "linux": {
+                    "description": "Linux specific update configuration.",
+                    "$ref": "#/definitions/LinuxProperties"
+                },
+                "duration": {
+                    "type": "string",
+                    "format": "duration",
+                    "description": "Maximum time allowed for the software update configuration run. Duration needs to be specified using the format PT[n]H[n]M[n]S as per ISO8601"
+                },
+                "azureVirtualMachines": {
+                    "type": "array",
+                    "description": "List of azure resource Ids for azure virtual machines targeted by the software update configuration.",
+                    "items": {
+                    "type": "string",
+                    "description": "Azure Resource Manager Id for a virtual machine."
+                    }
+                },
+                "nonAzureComputerNames": {
+                    "type": "array",
+                    "description": "List of names of non-azure machines targeted by the software update configuration.",
+                    "items": {
+                    "type": "string",
+                    "description": "Name of Non-Azure OMS Computer."
+                    }
                 }
-            },
-            "windows": {
-                "description": "Windows specific update configuration.",
-                "$ref": "#/definitions/Windows"
-            },
-            "linux": {
-                "description": "Linux specific update configuration.",
-                "$ref": "#/definitions/Linux"
-            },
-            "duration": {
-                "type": "string",
-                "format": "duration",
-                "description": "Maximum time allowed for the software update configuration run. Duration needs to be specified using the format PT[n]H[n]M[n]S as per ISO8601"
-            },
-            "azureVirtualMachines": {
-                "type": "array",
-                "description": "List of azure resource Ids for azure virtual machines targeted by the software update configuration.",
-                "items": {
-                "type": "string",
-                "description": "Azure Resource Manager Id for a virtual machine."
-                }
-            },
-            "nonAzureComputerNames": {
-                "type": "array",
-                "description": "List of names of non-azure machines targeted by the software update configuration.",
-                "items": {
-                "type": "string",
-                "description": "Name of Non-Azure OMS Computer."
-                }
-            }
             },
             "required": [ "operatingSystem" ]
         },
 
-        "Windows": {
+        "WindowsProperties": {
             "type": "object",
             "description": "Windows specific update configuration.",
             "properties": {
             "includedUpdateClassifications": {
                 "description": "Update classification included in the software update configuration.",
-                "type": "array",
                 "items": {
                 "type": "string",
                 "enum": [
@@ -236,7 +277,7 @@
             }
         },
 
-        "Linux": {
+        "LinuxProperties": {
             "type": "object",
             "description": "Linux specific update configuration.",
             "properties": {
@@ -272,7 +313,7 @@
             "type": "object",
             "properties": {
             "name": {
-                "description": "Name of the software update configuration triggered this run",
+                "description": "Name of the software update configuration triggered the software update configuration run",
                 "type": "string",
                 "readOnly": true
             }
@@ -280,14 +321,54 @@
         },
 
         "jobNavigation": {
-            "description": "Software update configuration machine run job navigation model.",
+            "description": "Software update configuration machine run job navigation properties.",
             "type": "object",
             "properties": {
             "id": {
-                "description": "Name of the software update configuration triggered this run",
+                "description": "Id of the job associated with the software update configuration run",
                 "type": "string",
                 "readOnly": true
             }
+            }
+        },
+
+        "softwareUpdateConfigurationRunListResult": {
+            "description": "result of listing all software update configuration runs",
+            "properties": {
+                "value": {
+                    "description": "outer object returned when listing all software update configuration runs",
+                    "type": "array",
+                    "items": {
+                        "$ref": "./definitions.json#/definitions/softwareUpdateConfigurationRun"
+                    }
+                },
+                "nextLink": {
+                    "type": "string",
+                    "description": "link to next page of results."
+                }
+            }
+        },
+
+        "softwareUpdateConfigurationRun": {
+            "description": "Software update configuration Run properties.",
+            "x-ms-azure-resource": true,
+            "type": "object",
+            "properties": {
+                "name": {
+                    "readOnly": true,
+                    "type": "string",
+                    "description": "Name of the software update configuration run."
+                },
+                "id": {
+                    "readOnly": true,
+                    "type": "string",
+                    "description": "Resource Id of the software update configuration run"
+                },
+                "properties": {
+                    "x-ms-client-flatten": true,
+                    "description": "Software update configuration Run properties.",
+                    "$ref": "#/definitions/softwareUpdateConfigurationRunProperties"
+                }
             }
         },
 
@@ -303,6 +384,11 @@
                     "description": "Status of the software update configuration run.",
                     "readOnly": true
                 },
+                "configuredDuration": {
+                    "type": "string",
+                    "description": "configured duration for the software update configuration run.",
+                    "readOnly": true
+                },
                 "osType": {
                     "type": "string",
                     "description": "Operating system target of the software update configuration triggered this run",
@@ -311,52 +397,63 @@
                 "startTime": {
                     "type": "string",
                     "format": "date-time",
-                    "description": "Gets the start time of the software update configuration run.",
+                    "description": "Etart time of the software update configuration run.",
                     "readOnly": true
                 },
                 "endTime": {
                     "type": "string",
                     "format": "date-time",
-                    "description": "Gets the end time of the software update configuration run.",
+                    "description": "End time of the software update configuration run.",
                     "readOnly": true
                 },
                 "computerCount": {
                     "type": "integer",
-                    "description": "Gets the number of computers in the software update configuration run.",
+                    "description": "Number of computers in the software update configuration run.",
                     "readOnly": true
                 },
                 "failedCount": {
                     "type": "integer",
-                    "description": "Gets the number of computers with failed status.",
+                    "description": "Number of computers with failed status.",
+                    "readOnly": true
+                },
+                "creationTime": {
+                    "type": "string",
+                    "description": "Creation time of theresource, which only appears in the response.",
+                    "format": "date-time",
+                    "readOnly": true
+                },
+                "createdBy": {
+                    "type": "string",
+                    "description": "createdBy property, which only appears in the response.",
+                    "readOnly": true
+                },
+                "lastModifiedTime": {
+                    "type": "string",
+                    "description": "Last time resource was modified, which only appears in the response.",
+                    "format": "date-time",
+                    "readOnly": true
+                },
+                "lastModifiedBy": {
+                    "type": "string",
+                    "description": "lastModifiedBy property, which only appears in the response.",
                     "readOnly": true
                 }
-            },
-            "allOf": [
-                {
-                  "$ref": "#/definitions/resource"
-                }
-              ]
+            }
         },
 
-        "softwareUpdateConfigurationRun": {
-            "description": "Software update configuration Run model.",
-            "x-ms-azure-resource": true,
-            "type": "object",
+        "softwareUpdateConfigurationMachineRunListResult": {
+            "description": "result of listing all software update configuration machine runs",
             "properties": {
-                "name": {
-                    "readOnly": true,
-                    "type": "string",
-                    "description": "Resource name."
+                "value": {
+                    "description": "outer object returned when listing all software update configuration machine runs",
+                    "type": "array",
+                    "items": {
+                        "$ref": "./definitions.json#/definitions/softwareUpdateConfigurationMachineRun"
+                    }
                 },
-                "id": {
-                    "readOnly": true,
+                "nextLink": {
                     "type": "string",
-                    "description": "Resource Id."
-                },
-                "properties": {
-                    "x-ms-client-flatten": true,
-                    "description": "Software update configuration Run properties.",
-                    "$ref": "#/definitions/softwareUpdateConfigurationRunProperties"
+                    "description": "link to next page of results."
                 }
             }
         },
@@ -403,13 +500,13 @@
                 "startTime": {
                     "type": "string",
                     "format": "date-time",
-                    "description": "Gets the start time of the software update configuration machine run.",
+                    "description": "Start time of the software update configuration machine run.",
                     "readOnly": true
                 },
                 "endTime": {
                     "type": "string",
                     "format": "date-time",
-                    "description": "Gets the end time of the software update configuration machine run.",
+                    "description": "End time of the software update configuration machine run.",
                     "readOnly": true
                 },
                 "configuredDuration": {
@@ -418,49 +515,18 @@
                     "readOnly": true
                 },
                 "job": {
-                    "description": "Gets the number of computers with failed status.",
+                    "description": "Job associated with the software update configuration machine run",
                     "$ref": "#/definitions/jobNavigation"
-                }
-            },
-            "allOf": [
-                {
-                  "$ref": "#/definitions/resource"
-                }
-              ]
-        },
-        "softwareUpdateConfigurationMachineRun": {
-            "description": "Software update configuration machine run model.",
-            "x-ms-azure-resource": true,
-            "type": "object",
-            "properties": {
-                "name": {
-                    "readOnly": true,
-                    "type": "string",
-                    "description": "Resource name."
                 },
-                "id": {
-                    "readOnly": true,
-                    "type": "string",
-                    "description": "Resource Id."
-                },
-                "properties": {
-                    "x-ms-client-flatten": true,
-                    "description": "Software update configuration Run properties.",
-                    "$ref": "#/definitions/updateConfigurationMachineRunProperties"
-                }
-            }
-        },
-        "resource": {
-            "properties": {
                 "creationTime": {
                     "type": "string",
                     "description": "Creation time of theresource, which only appears in the response.",
                     "format": "date-time",
                     "readOnly": true
                 },
-                "creatededBy": {
+                "createdBy": {
                     "type": "string",
-                    "description": "lastModifiedBy property, which only appears in the response.",
+                    "description": "createdBy property, which only appears in the response.",
                     "readOnly": true
                 },
                 "lastModifiedTime": {
@@ -473,6 +539,33 @@
                     "type": "string",
                     "description": "lastModifiedBy property, which only appears in the response.",
                     "readOnly": true
+                }
+            }
+        },
+        "softwareUpdateConfigurationMachineRun": {
+            "description": "Software update configuration machine run model.",
+            "x-ms-azure-resource": true,
+            "type": "object",
+            "properties": {
+                "name": {
+                    "readOnly": true,
+                    "type": "string",
+                    "description": "Name of the software update configuration machine run"
+                },
+                "id": {
+                    "readOnly": true,
+                    "type": "string",
+                    "description": "Resource Id of the software update configuration machine run"
+                },
+                "type": {
+                    "readOnly": true,
+                    "type": "string",
+                    "description": "Type of the software update configuration machine run"
+                },
+                "properties": {
+                    "x-ms-client-flatten": true,
+                    "description": "Software update configuration machine run properties.",
+                    "$ref": "#/definitions/updateConfigurationMachineRunProperties"
                 }
             }
         }

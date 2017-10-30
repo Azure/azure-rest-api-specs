@@ -1,16 +1,17 @@
 {
     "parameters": {
-        "subcriptionId": "51766542-3ed7-4a72-a187-0c8ab644ddab",
+        "subscriptionId": "51766542-3ed7-4a72-a187-0c8ab644ddab",
         "resourceGroupName": "mygroup",
         "automationAccountName": "myaccount",
+        "softwareUpdateConfigurationName": "testpatch",
         "api-version": "2017-05-15-preview",
-        "body": {
+        "parameters": {
             "properties": {
                 "updateConfiguration": {
                     "operatingSystem": "Windows",
                     "duration": "PT2H0M",
                     "windows": {
-                        "excludedKBNumbers": [
+                        "excludedKbNumbers": [
                             "168934",
                             "168973"
                         ],
@@ -27,11 +28,11 @@
                     ]
                 },
                 "scheduleInfo": {
-                    "frequency": 3,
-                    "startTime": "2017-10-19T12:22:57.000",
+                    "frequency": "Hour",
+                    "startTime": "2017-10-19T12:22:57+00:00",
                     "timeZone": "America/Los_Angeles",
                     "interval": 1,
-                    "expiryTime": "2018-11-09T11:22:57.000",
+                    "expiryTime": "2018-11-09T11:22:57+00:00",
                     "advancedSchedule": {
                         "weekDays": [
                             "Monday",
@@ -58,7 +59,7 @@
                                 "168973"
                             ]
                         },
-                        "linux": null,
+                        "linux": {},
                         "duration": "PT2H",
                         "azureVirtualMachines": [
                             "/subscriptions/5ae68d89-69a4-454f-b5ce-e443cc4e0067/resourceGroups/myresources/providers/Microsoft.Compute/virtualMachines/vm-01",
@@ -71,7 +72,7 @@
                         ]
                     },
                     "scheduleInfo": {
-                        "description": null,
+                        "description": "",
                         "startTime": "2017-10-19T12:22:00-07:00",
                         "startTimeOffsetMinutes": -420.0,
                         "expiryTime": "2018-11-09T11:22:00-08:00",
@@ -84,20 +85,13 @@
                         "creationTime": "2017-10-19T18:54:50.5233333+00:00",
                         "lastModifiedTime": "2017-10-19T18:54:50.5233333+00:00",
                         "timeZone": "America/Los_Angeles",
-                        "advancedSchedule": {
-                            "monthDays":null,
-                            "monthlyOccurrences": null,
-                            "weekDays": [
-                                "Monday",
-                                "Thursday"
-                            ]
-                        }
+                        "advancedSchedule": {}
                     },
                     "provisioningState": "Provisioning",
-                    "createdBy": "eve@contoso.com",
-                    "error": null,
+                    "error": {},
                     "creationTime": "2017-10-19T18:54:50.5233333+00:00",
-                    "lastModifiedBy": null,
+                    "createdBy": "adam@contoso.com",
+                    "lastModifiedBy": "adam@contoso.com",
                     "lastModifiedTime": "2017-10-19T18:54:50.68+00:00"
                 }
             }
@@ -117,7 +111,7 @@
                                 "168973"
                             ]
                         },
-                        "linux": null,
+                        "linux": {},
                         "duration": "PT2H",
                         "azureVirtualMachines": [
                             "/subscriptions/5ae68d89-69a4-454f-b5ce-e443cc4e0067/resourceGroups/myresources/providers/Microsoft.Compute/virtualMachines/vm-01",
@@ -130,7 +124,7 @@
                         ]
                     },
                     "scheduleInfo": {
-                        "description": null,
+                        "description": "",
                         "startTime": "2017-10-19T12:22:00-07:00",
                         "startTimeOffsetMinutes": -420.0,
                         "expiryTime": "2018-11-09T11:22:00-08:00",
@@ -143,20 +137,12 @@
                         "creationTime": "2017-10-19T18:54:50.5233333+00:00",
                         "lastModifiedTime": "2017-10-19T18:54:50.5233333+00:00",
                         "timeZone": "America/Los_Angeles",
-                        "advancedSchedule": {
-                            "monthDays":null,
-                            "monthlyOccurrences": null,
-                            "weekDays": [
-                                "Monday",
-                                "Thursday"
-                            ]
-                        }
+                        "advancedSchedule": null
                     },
                     "provisioningState": "Provisioning",
-                    "createdBy": "eve@contoso.com",
-                    "error": null,
+                    "error": {},
                     "creationTime": "2017-10-19T18:54:50.5233333+00:00",
-                    "lastModifiedBy": null,
+                    "lastModifiedBy": "",
                     "lastModifiedTime": "2017-10-19T18:54:50.68+00:00"
                 }
             }

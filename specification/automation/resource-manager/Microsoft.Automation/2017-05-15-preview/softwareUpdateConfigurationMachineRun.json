@@ -79,9 +79,6 @@
                 "$ref": "./definitions.json#/definitions/softwareUpdateConfigurationMachineRun"
               }
             },
-            "400": {
-              "description": "Request validation failed."
-            },
             "404": {
               "description": "Resource group, account, or software update configuration machine run doesn't exist."
             }
@@ -147,14 +144,8 @@
             "200": {
               "description": "Return list of software update configuration machine runs.",
               "schema": {
-                "type": "array",
-                "items": {
-                  "$ref": "./definitions.json#/definitions/softwareUpdateConfigurationMachineRun"
-                }
+                  "$ref": "./definitions.json#/definitions/softwareUpdateConfigurationMachineRunListResult"
               }
-            },
-            "400": {
-              "description": "Request validation failed."
             },
             "404": {
               "description": "Resource group, or account doesn't exist."
