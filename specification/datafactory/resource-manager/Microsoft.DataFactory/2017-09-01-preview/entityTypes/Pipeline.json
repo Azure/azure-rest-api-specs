@@ -344,6 +344,21 @@
         }
       }
     },
+    "SapCloudForCustomerSource": {
+      "description": "A copy activity source for SAP Cloud for Customer source.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/CopySource"
+        }
+      ],
+      "properties": {
+        "query": {
+          "type": "object",
+          "description": "SAP Cloud for Customer OData query. For example, \"$top=1\". Type: string (or Expression with resultType string)."
+        }
+      }
+    },
     "SqlSource": {
       "description": "A copy activity SQL source.",
       "type": "object",
