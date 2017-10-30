@@ -2954,6 +2954,21 @@
       },
       "description": "The runbook property associated with the entity."
     },
+    "scheduleFrequency": {
+      "type": "string",
+      "description": "Gets or sets the frequency of the schedule.",
+      "enum": [
+        "OneTime",
+        "Day",
+        "Hour",
+        "Week",
+        "Month"
+      ],
+      "x-ms-enum": {
+        "name": "ScheduleFrequency",
+        "modelAsString": true
+      }
+    },
     "ScheduleCreateOrUpdateProperties": {
       "properties": {
         "description": {
@@ -2975,18 +2990,7 @@
         },
         "frequency": {
           "type": "string",
-          "description": "Gets or sets the frequency of the schedule.",
-          "enum": [
-            "OneTime",
-            "Day",
-            "Hour",
-            "Week",
-            "Month"
-          ],
-          "x-ms-enum": {
-            "name": "ScheduleFrequency",
-            "modelAsString": true
-          }
+          "$ref": "#/definitions/scheduleFrequency"
         },
         "timeZone": {
           "type": "string",
