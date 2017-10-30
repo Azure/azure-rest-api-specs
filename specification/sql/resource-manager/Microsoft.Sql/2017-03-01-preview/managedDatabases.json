@@ -379,7 +379,6 @@
       }
     },
     "ManagedDatabaseProperties": {
-	  "discriminator": "createMode",
       "description": "The managed database's properties.",
       "type": "object",
       "properties": {
@@ -449,70 +448,38 @@
           "x-ms-mutability": [
             "create"
           ]
-        }
+        },
+		"restorePointInTime": {
+		  "format": "date-time",
+		  "description": "Conditional. If createMode is PointInTimeRestore, this value is required. Specifies the point in time (ISO8601 format) of the source database that will be restored to create the new database.",
+		  "type": "string",
+		  "x-ms-mutability": [
+			"create"
+		  ]
+		},
+		"sourceDatabaseId": {
+		  "description": "The resource identifier of the source database associated with create operation of this database.",
+		  "type": "string",
+		  "x-ms-mutability": [
+			"create"
+		  ]
+		},
+		"storageContainerUri": {
+			"description": "Conditional. If createMode is RestoreExternalBackup, this value is required. Specifies the uri of the storage container where backups for this restore are stored.",
+			"type": "string",
+			"x-ms-mutability": [
+				"create"
+			]
+		},
+		"storageContainerSasToken": {
+			"description": "Conditional. If createMode is RestoreExternalBackup, this value is required. Specifies the storage container sas token.",
+			"type": "string",
+			"x-ms-mutability": [
+				"create"
+			]
+		}
       }
     },
-	"ManagedDatabasePropertiesForPointInTimeRestore": {
-		"x-ms-discriminator-value": "PointInTimeRestore",
-		"allOf": [
-			{
-				"$ref": "#/definitions/ManagedDatabaseProperties"
-			}
-		],
-		"description": "The managed database's properties.",
-		"type": "object",
-		"properties": {
-			"collation": {
-				"description": "Collation of the managed database.",
-				"type": "string",
-				"x-ms-mutability": [
-					"read",
-					"create"
-				]
-			},
-			"restorePointInTime": {
-			  "format": "date-time",
-			  "description": "Conditional. If createMode is PointInTimeRestore, this value is required. Specifies the point in time (ISO8601 format) of the source database that will be restored to create the new database.",
-			  "type": "string",
-			  "x-ms-mutability": [
-				"create"
-			  ]
-			},
-			"sourceDatabaseId": {
-			  "description": "The resource identifier of the source database associated with create operation of this database.",
-			  "type": "string",
-			  "x-ms-mutability": [
-				"create"
-			  ]
-			}
-		}
-	},
-	"ManagedDatabasePropertiesForExternalBackupRestore": {
-		"x-ms-discriminator-value": "RestoreExternalBackup",
-		"allOf": [
-			{
-				"$ref": "#/definitions/ManagedDatabaseProperties"
-			}
-		],
-		"description": "The managed database's properties.",
-		"type": "object",
-		"properties": {
-			"storageContainerUri": {
-				"description": "Conditional. If createMode is RestoreExternalBackup, this value is required. Specifies the uri of the storage container where backups for this restore are stored.",
-				"type": "string",
-				"x-ms-mutability": [
-					"create"
-				]
-			},
-			"storageContainerSasToken": {
-				"description": "Conditional. If createMode is RestoreExternalBackup, this value is required. Specifies the storage container sas token.",
-				"type": "string",
-				"x-ms-mutability": [
-					"create"
-				]
-			}
-		}
-	},
     "Resource": {
       "description": "ARM resource.",
       "type": "object",
