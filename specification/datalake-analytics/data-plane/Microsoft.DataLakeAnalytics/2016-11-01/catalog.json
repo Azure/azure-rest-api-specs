@@ -2485,9 +2485,9 @@
           "Catalog"
         ],
         "operationId": "Catalog_ListAclsByDatabase",
-        "description": "Retrieves the list of all ACLs for the database from the Data Lake Analytics catalog.",
+        "description": "Retrieves the list of access control list (ACL) entries for the database from the Data Lake Analytics catalog.",
         "x-ms-examples": {
-          "Retrieves the list of ACLs for the database from the Data Lake Analytics catalog": { "$ref": "./examples/Adla_Catalog_ListAclsByDatabase.json" }
+          "Retrieves the list of access control list (ACL) entries for the database from the Data Lake Analytics catalog": { "$ref": "./examples/Adla_Catalog_ListAclsByDatabase.json" }
         },
         "parameters": [
           {
@@ -2549,7 +2549,7 @@
         ],
         "responses": {
           "200": {
-            "description": "Successfully retrieved the list of all ACLs for the specified database.",
+            "description": "Successfully retrieved the list of access control list (ACL) entries for the specified database.",
             "schema": {
               "$ref": "#/definitions/AclList"
             }
@@ -2567,9 +2567,9 @@
           "Catalog"
         ],
         "operationId": "Catalog_ListAcls",
-        "description": "Retrieves the list of all ACLs for the Data Lake Analytics account.",
+        "description": "Retrieves the list of access control list (ACL) entries for the Data Lake Analytics catalog.",
         "x-ms-examples": {
-          "Retrieves the list of ACLs for the Data Lake Analytics account": { "$ref": "./examples/Adla_Catalog_ListAcls.json" }
+          "Retrieves the list of access control list (ACL) entries for the Data Lake Analytics catalog": { "$ref": "./examples/Adla_Catalog_ListAcls.json" }
         },
         "parameters": [
           {
@@ -2624,7 +2624,7 @@
         ],
         "responses": {
           "200": {
-            "description": "Successfully retrieved the list of all ACLs for the Data Lake Analytics account.",
+            "description": "Successfully retrieved the list of access control list (ACL) entries for the Data Lake Analytics catalog.",
             "schema": {
               "$ref": "#/definitions/AclList"
             }
@@ -2751,9 +2751,9 @@
           "Catalog"
         ],
         "operationId": "Catalog_GrantAclToDatabase",
-        "description": "Grants an ACL to the database from the Data Lake Analytics catalog.",
+        "description": "Grants an access control list (ACL) entry to the database from the Data Lake Analytics catalog.",
         "x-ms-examples": {
-          "Grants an ACL to the database from the Data Lake Analytics catalog": { "$ref": "./examples/Adla_Catalog_GrantAclToDatabase.json" }
+          "Grants an access control list (ACL) entry to the database from the Data Lake Analytics catalog": { "$ref": "./examples/Adla_Catalog_GrantAclToDatabase.json" }
         },
         "parameters": [
           {
@@ -2770,7 +2770,7 @@
             "schema": {
               "$ref": "#/definitions/AclCreateOrUpdateParameters"
             },
-            "description": "Parameters supplied to create or update an ACL for a database."
+            "description": "Parameters supplied to create or update an access control list (ACL) entry for a database."
           },
           {
             "name": "op",
@@ -2788,7 +2788,7 @@
         ],
         "responses": {
           "200": {
-            "description": "Successfully granted the ACL to the specified database."
+            "description": "Successfully granted the access control list (ACL) entry to the specified database."
           },
           "404": {
             "description": "Not found."
@@ -2802,9 +2802,9 @@
           "Catalog"
         ],
         "operationId": "Catalog_RevokeAclFromDatabase",
-        "description": "Revokes an ACL for the database from the Data Lake Analytics catalog.",
+        "description": "Revokes an access control list (ACL) entry for the database from the Data Lake Analytics catalog.",
         "x-ms-examples": {
-          "Revokes an ACL for the database from the Data Lake Analytics catalog": { "$ref": "./examples/Adla_Catalog_RevokeAclFromDatabase.json" }
+          "Revokes an access control list (ACL) entry for the database from the Data Lake Analytics catalog": { "$ref": "./examples/Adla_Catalog_RevokeAclFromDatabase.json" }
         },
         "parameters": [
           {
@@ -2821,7 +2821,7 @@
             "schema": {
               "$ref": "#/definitions/AclDeleteParameters"
             },
-            "description": "Parameters supplied to delete an ACL for a database."
+            "description": "Parameters supplied to delete an access control list (ACL) entry for a database."
           },
           {
             "name": "op",
@@ -2839,7 +2839,7 @@
         ],
         "responses": {
           "200": {
-            "description": "Successfully revoked the ACL from the specified database."
+            "description": "Successfully revoked the access control list (ACL) entry from the specified database."
           },
           "404": {
             "description": "Not found."
@@ -2853,9 +2853,9 @@
           "Catalog"
         ],
         "operationId": "Catalog_GrantAcl",
-        "description": "Grants an ACL to the Data Lake Analytics account.",
+        "description": "Grants an access control list (ACL) entry to the Data Lake Analytics catalog.",
         "x-ms-examples": {
-          "Grants an ACL to the Data Lake Analytics account": { "$ref": "./examples/Adla_Catalog_GrantAcl.json" }
+          "Grants an access control list (ACL) entry to the Data Lake Analytics catalog": { "$ref": "./examples/Adla_Catalog_GrantAcl.json" }
         },
         "parameters": [
           {
@@ -2865,7 +2865,7 @@
             "schema": {
               "$ref": "#/definitions/AclCreateOrUpdateParameters"
             },
-            "description": "Parameters supplied to create or update an ACL for a Data Lake Analytics account."
+            "description": "Parameters supplied to create or update an access control list (ACL) entry for a Data Lake Analytics catalog."
           },
           {
             "name": "op",
@@ -2883,7 +2883,7 @@
         ],
         "responses": {
           "200": {
-            "description": "Successfully granted the ACL to the Data Lake Analytics account."
+            "description": "Successfully granted the access control list (ACL) entry to the Data Lake Analytics catalog."
           },
           "404": {
             "description": "Not found."
@@ -2897,9 +2897,9 @@
           "Catalog"
         ],
         "operationId": "Catalog_RevokeAcl",
-        "description": "Revokes an ACL from the Data Lake Analytics account.",
+        "description": "Revokes an access control list (ACL) entry from the Data Lake Analytics catalog.",
         "x-ms-examples": {
-          "Revokes an ACL from the Data Lake Analytics account": { "$ref": "./examples/Adla_Catalog_RevokeAcl.json" }
+          "Revokes an access control list (ACL) entry from the Data Lake Analytics catalog": { "$ref": "./examples/Adla_Catalog_RevokeAcl.json" }
         },
         "parameters": [
           {
@@ -2909,7 +2909,7 @@
             "schema": {
               "$ref": "#/definitions/AclDeleteParameters"
             },
-            "description": "Parameters supplied to delete an ACL for a Data Lake Analytics account."
+            "description": "Parameters supplied to delete an access control list (ACL) entry from a Data Lake Analytics catalog."
           },
           {
             "name": "op",
@@ -2927,7 +2927,7 @@
         ],
         "responses": {
           "200": {
-            "description": "Successfully revoked the ACL from the Data Lake Analytics account."
+            "description": "Successfully revoked the access control list (ACL) entry from the Data Lake Analytics catalog."
           },
           "404": {
             "description": "Not found."
@@ -2952,12 +2952,12 @@
             "name": "AclType",
             "modelAsString": true
           },
-          "description": "the ACL type."
+          "description": "the access control list (ACL) entry type. UserObj and GroupObj denote the owning user and group, respectively."
         },
         "principalId": {
           "type": "string",
           "format": "uuid",
-          "description": "the identity of the target principal."
+          "description": "the Azure AD object ID of the user or group being specified in the access control list (ACL) entry."
         },
         "permission": {
           "type": "string",
@@ -2974,7 +2974,7 @@
             "name": "PermissionType",
             "modelAsString": true
           },
-          "description": "the permission type of the ACL."
+          "description": "the permission type of the access control list (ACL) entry."
         }
       },
       "required": [
@@ -2982,7 +2982,7 @@
         "principalId",
         "permission"
       ],
-      "description": "The parameters used to create or update an ACL."
+      "description": "The parameters used to create or update an access control list (ACL) entry."
     },
     "AclDeleteParameters": {
       "properties": {
@@ -2999,19 +2999,19 @@
             "name": "AclType",
             "modelAsString": true
           },
-          "description": "the ACL type."
+          "description": "the access control list (ACL) entry type. UserObj and GroupObj denote the owning user and group, respectively."
         },
         "principalId": {
           "type": "string",
           "format": "uuid",
-          "description": "the identity of the target principal."
+          "description": "the Azure AD object ID of the user or group being specified in the access control list (ACL) entry."
         }
       },
       "required": [
         "aceType",
         "principalId"
       ],
-      "description": "The parameters used to delete an ACL."
+      "description": "The parameters used to delete an access control list (ACL) entry."
     },
     "Acl": {
       "properties": {
@@ -3029,13 +3029,13 @@
             "modelAsString": true
           },
           "readOnly": true,
-          "description": "the ACL type."
+          "description": "the access control list (ACL) entry type. UserObj and GroupObj denote the owning user and group, respectively."
         },
         "principalId": {
           "type": "string",
           "format": "uuid",
           "readOnly": true,
-          "description": "the identity of the target principal."
+          "description": "the Azure AD object ID of the user or group being specified in the access control list (ACL) entry."
         },
         "permission": {
           "type": "string",
@@ -3053,10 +3053,10 @@
             "modelAsString": true
           },
           "readOnly": true,
-          "description": "the permission type of the ACL."
+          "description": "the permission type of the access control list (ACL) entry."
         }
       },
-      "description": "A Data Lake Analytics catalog ACL."
+      "description": "A Data Lake Analytics catalog access control list (ACL) entry."
     },
     "AclList": {
       "properties": {
@@ -3066,10 +3066,10 @@
           "items": {
             "$ref": "#/definitions/Acl"
           },
-          "description": "the list of ACLs"
+          "description": "the access control list (ACL)."
         }
       },
-      "description": "A Data Lake Analytics catalog ACL list."
+      "description": "A Data Lake Analytics catalog access control list (ACL)."
     },
     "DataLakeAnalyticsCatalogSecretCreateOrUpdateParameters": {
       "properties": {
