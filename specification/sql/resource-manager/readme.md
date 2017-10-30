@@ -66,6 +66,7 @@ input-file:
 - Microsoft.Sql/2015-05-01-preview/syncMembers.json
 - Microsoft.Sql/2015-05-01-preview/virtualNetworkRules.json
 - Microsoft.Sql/2017-03-01-preview/cancelOperations.json
+- Microsoft.Sql/2017-03-01-preview/managedDatabases.json
 - Microsoft.Sql/2017-03-01-preview/serverDnsAliases.json
 
 # Needed when there is more than one input file
