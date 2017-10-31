@@ -12,6 +12,11 @@
             "in": "header"
         }
     },
+    "security": [
+        {
+            "apim_key": []
+        }
+    ],
     "x-ms-parameterized-host": {
         "hostTemplate": "{AzureRegion}.api.cognitive.microsoft.com",
         "parameters": [
@@ -31,11 +36,6 @@
                 "operationId": "ListModels",
                 "produces": [
                     "application/json"
-                ],
-                "parameters": [
-                    {
-                        "$ref": "../../Common/Parameters.json#/parameters/SubscriptionKey"
-                    }
                 ],
                 "responses": {
                     "200": {
@@ -70,9 +70,6 @@
                 ],
                 "parameters": [
                     {
-                        "$ref": "../../Common/Parameters.json#/parameters/SubscriptionKey"
-                    },
-                    {
                         "$ref": "#/parameters/VisualFeatures"
                     },
                     {
@@ -84,7 +81,7 @@
                         "collectionFormat": "csv",
                         "items": {
                             "type": "string",
-                            "x-nullable": "false",
+                            "x-nullable": false,
                             "x-ms-enum": {
                                 "name": "Details",
                                 "modelAsString": false
@@ -102,7 +99,7 @@
                         "type": "string",
                         "required": false,
                         "default": "en",
-                        "x-nullable": "false",
+                        "x-nullable": false,
                         "x-ms-enum": {
                             "name": "Language",
                             "modelAsString": false
@@ -148,9 +145,6 @@
                     "application/octet-stream"
                 ],
                 "parameters": [
-                    {
-                        "$ref": "../../Common/Parameters.json#/parameters/SubscriptionKey"
-                    },
                     {
                         "name": "width",
                         "type": "integer",
@@ -214,9 +208,6 @@
                 ],
                 "parameters": [
                     {
-                        "$ref": "../../Common/Parameters.json#/parameters/SubscriptionKey"
-                    },
-                    {
                         "$ref": "#/parameters/DetectOrientation"
                     },
                     {
@@ -267,9 +258,6 @@
                         "default": "1"
                     },
                     {
-                        "$ref": "../../Common/Parameters.json#/parameters/SubscriptionKey"
-                    },
-                    {
                         "$ref": "../../Common/Parameters.json#/parameters/ImageUrl"
                     }
                 ],
@@ -305,9 +293,6 @@
                     "application/json"
                 ],
                 "parameters": [
-                    {
-                        "$ref": "../../Common/Parameters.json#/parameters/SubscriptionKey"
-                    },
                     {
                         "$ref": "../../Common/Parameters.json#/parameters/ImageUrl"
                     }
@@ -345,15 +330,12 @@
                 ],
                 "parameters": [
                     {
-                        "$ref": "../../Common/Parameters.json#/parameters/SubscriptionKey"
-                    },
-                    {
                         "name": "model",
                         "in": "path",
                         "description": "The domain-specific content to recognize.",
                         "required": true,
                         "type": "string",
-                        "x-nullable": "false",
+                        "x-nullable": false,
                         "x-ms-enum": {
                             "name": "DomainModels",
                             "modelAsString": false
@@ -393,9 +375,6 @@
                 "description": "Recognize Text operation. When you use the Recognize Text interface, the response contains a field called “Operation-Location”. The “Operation-Location” field contains the URL that you must use for your Get Handwritten Text Operation Result operation.",
                 "operationId": "RecognizeText",
                 "parameters": [
-                    {
-                        "$ref": "../../Common/Parameters.json#/parameters/SubscriptionKey"
-                    },
                     {
                         "$ref": "../../Common/Parameters.json#/parameters/ImageUrl"
                     },
@@ -444,9 +423,6 @@
                         "description": "Id of the text operation returned in the response of the 'Recognize Handwritten Text'",
                         "required": true,
                         "type": "string"
-                    },
-                    {
-                        "$ref": "../../Common/Parameters.json#/parameters/SubscriptionKey"
                     }
                 ],
                 "produces": [
@@ -486,9 +462,6 @@
                     "application/json"
                 ],
                 "parameters": [
-                    {
-                        "$ref": "../../Common/Parameters.json#/parameters/SubscriptionKey"
-                    },
                     {
                         "$ref": "#/parameters/VisualFeatures"
                     },
@@ -548,9 +521,6 @@
                 ],
                 "parameters": [
                     {
-                        "$ref": "../../Common/Parameters.json#/parameters/SubscriptionKey"
-                    },
-                    {
                         "name": "width",
                         "type": "integer",
                         "in": "query",
@@ -608,9 +578,6 @@
                 ],
                 "parameters": [
                     {
-                        "$ref": "../../Common/Parameters.json#/parameters/SubscriptionKey"
-                    },
-                    {
                         "$ref": "#/parameters/OcrLanguage"
                     },
                     {
@@ -656,9 +623,6 @@
                         "default": "1"
                     },
                     {
-                        "$ref": "../../Common/Parameters.json#/parameters/SubscriptionKey"
-                    },
-                    {
                         "$ref": "../../Common/Parameters.json#/parameters/ImageStream"
                     }
                 ],
@@ -690,9 +654,6 @@
                 ],
                 "parameters": [
                     {
-                        "$ref": "../../Common/Parameters.json#/parameters/SubscriptionKey"
-                    },
-                    {
                         "$ref": "../../Common/Parameters.json#/parameters/ImageStream"
                     }
                 ],
@@ -723,9 +684,6 @@
                     "application/json"
                 ],
                 "parameters": [
-                    {
-                        "$ref": "../../Common/Parameters.json#/parameters/SubscriptionKey"
-                    },
                     {
                         "name": "model",
                         "in": "path",
@@ -760,9 +718,6 @@
                 "parameters": [
                     {
                         "$ref": "#/parameters/HandwritingBoolean"
-                    },
-                    {
-                        "$ref": "../../Common/Parameters.json#/parameters/SubscriptionKey"
                     },
                     {
                         "$ref": "../../Common/Parameters.json#/parameters/ImageStream"
@@ -1372,7 +1327,7 @@
             "collectionFormat": "csv",
             "items": {
                 "type": "string",
-                "x-nullable": "false",
+                "x-nullable": false,
                 "x-ms-enum": {
                     "name": "VisualFeatureTypes",
                     "modelAsString": false
@@ -1395,7 +1350,7 @@
             "type": "string",
             "required": false,
             "x-ms-parameter-location": "method",
-            "x-nullable": "false",
+            "x-nullable": false,
             "x-ms-enum": {
                 "name": "OcrLanguages",
                 "modelAsString": false
