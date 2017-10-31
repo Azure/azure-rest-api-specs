@@ -207,6 +207,11 @@
         ],
         "operationId": "User_Update",
         "description": "Updates the details of the user specified by its identifier.",
+        "x-ms-examples": {
+          "ApiManagementUpdateUserBasic": {
+            "$ref": "./examples/ApiManagementUpdateUserBasic.json"
+          }
+        },
         "parameters": [
           {
             "$ref": "./apimanagement.json#/parameters/ResourceGroupNameParameter"
@@ -244,14 +249,8 @@
           "204": {
             "description": "The user details were successfully updated."
           },
-          "405": {
-            "description": "Administrator user cannot be modified.",
-            "schema": {
-              "$ref": "./apimanagement.json#/definitions/ErrorResponse"
-            }
-          },
           "default": {
-            "description": "Error response describing why the operation failed.",
+            "description": "*** Error Responses: ***\n\n * 405 Administrator user cannot be modified\n\n * 4XX Error response giving details why the operation failed.",
             "schema": {
               "$ref": "./apimanagement.json#/definitions/ErrorResponse"
             }
