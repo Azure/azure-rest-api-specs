@@ -5,6 +5,23 @@
     "description": "The Entity Search API lets you send a search query to Bing and get back search results that include entities and places. Place results include restaurants, hotel, or other local businesses. For places, the query can specify the name of the local business or it can ask for a list (for example, restaurants near me). Entity results include persons, places, or things. Place in this context is tourist attractions, states, countries, etc.",
     "version": "1.0"
   },
+  "parameters": {
+    "x-bingapis-sdk": {
+      "name": "X-BingApis-SDK",
+      "description": "Activate swagger compliance",
+      "x-ms-parameter-location": "method",
+      "required": true,
+      "type": "string",
+      "in": "header",
+      "x-ms-enum": {
+        "name": "XBingApisSDK",
+        "modelAsString": true
+      },
+      "enum": [
+        "true"
+      ]
+    }
+  },
   "host": "api.cognitive.microsoft.com",
   "schemes": [
     "https"
@@ -18,19 +35,11 @@
       "name": "Ocp-Apim-Subscription-Key",
       "type": "apiKey",
       "in": "header"
-    },
-    "apiKeyQuery": {
-      "name": "subscription-key",
-      "type": "apiKey",
-      "in": "query"
     }
   },
   "security": [
     {
       "apiKeyHeader": []
-    },
-    {
-      "apiKeyQuery": []
     }
   ],
   "paths": {
@@ -42,6 +51,9 @@
           "EntitySearch"
         ],
         "parameters": [
+          {
+            "$ref": "#/parameters/x-bingapis-sdk"
+          },
           {
             "name": "Accept",
             "in": "header",
@@ -232,6 +244,7 @@
       }
     },
     "Response": {
+      "description": "Defines a response. All schemas that could be returned at the root of a response should inherit from this",
       "allOf": [
         {
           "$ref": "#/definitions/Identifiable"
@@ -361,6 +374,7 @@
       }
     },
     "Identifiable": {
+      "description": "Defines the identity of a resource.",
       "allOf": [
         {
           "$ref": "#/definitions/ResponseBase"
@@ -369,6 +383,7 @@
       "type": "object",
       "properties": {
         "id": {
+          "description": "A String identifier.",
           "readOnly": true,
           "type": "string"
         }
@@ -715,6 +730,21 @@
         }
       }
     },
+    "MovieTheater": {
+      "allOf": [
+        {
+          "$ref": "#/definitions/EntertainmentBusiness"
+        }
+      ],
+      "type": "object",
+      "properties": {
+        "screenCount": {
+          "readOnly": true,
+          "type": "integer",
+          "format": "int32"
+        }
+      }
+    },
     "ContractualRulesAttribution": {
       "x-ms-discriminator-value": "ContractualRules/Attribution",
       "allOf": [
@@ -762,6 +792,52 @@
           "format": "int32"
         }
       }
+    },
+    "CivicStructure": {
+      "allOf": [
+        {
+          "$ref": "#/definitions/Place"
+        }
+      ],
+      "type": "object"
+    },
+    "LocalBusiness": {
+      "allOf": [
+        {
+          "$ref": "#/definitions/Place"
+        }
+      ],
+      "type": "object",
+      "properties": {
+        "priceRange": {
+          "description": "$$.",
+          "readOnly": true,
+          "type": "string"
+        },
+        "panoramas": {
+          "readOnly": true,
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ImageObject"
+          }
+        },
+        "isPermanentlyClosed": {
+          "readOnly": true,
+          "type": "boolean"
+        },
+        "tagLine": {
+          "readOnly": true,
+          "type": "string"
+        }
+      }
+    },
+    "TouristAttraction": {
+      "allOf": [
+        {
+          "$ref": "#/definitions/Place"
+        }
+      ],
+      "type": "object"
     },
     "PostalAddress": {
       "description": "Defines a postal address.",
@@ -839,6 +915,14 @@
       "allOf": [
         {
           "$ref": "#/definitions/Intangible"
+        }
+      ],
+      "type": "object"
+    },
+    "EntertainmentBusiness": {
+      "allOf": [
+        {
+          "$ref": "#/definitions/LocalBusiness"
         }
       ],
       "type": "object"
@@ -932,6 +1016,43 @@
           "description": "Indicates whether this provider's attribution is optional.",
           "readOnly": true,
           "type": "boolean"
+        }
+      }
+    },
+    "FoodEstablishment": {
+      "allOf": [
+        {
+          "$ref": "#/definitions/LocalBusiness"
+        }
+      ],
+      "type": "object"
+    },
+    "LodgingBusiness": {
+      "allOf": [
+        {
+          "$ref": "#/definitions/LocalBusiness"
+        }
+      ],
+      "type": "object"
+    },
+    "Hotel": {
+      "allOf": [
+        {
+          "$ref": "#/definitions/LodgingBusiness"
+        }
+      ],
+      "type": "object",
+      "properties": {
+        "hotelClass": {
+          "readOnly": true,
+          "type": "string"
+        },
+        "amenities": {
+          "readOnly": true,
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
         }
       }
     }
