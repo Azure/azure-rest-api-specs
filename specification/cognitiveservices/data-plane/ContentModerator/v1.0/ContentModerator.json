@@ -90,7 +90,7 @@
           "200": {
             "description": "The found text and list of candidate text.",
             "schema": {
-              "$ref": "#/definitions/OCRResponse"
+              "$ref": "#/definitions/OCR"
             }
           },
           "default": {
@@ -128,7 +128,7 @@
           "200": {
             "description": "",
             "schema": {
-              "$ref": "#/definitions/EvaluateResponse"
+              "$ref": "#/definitions/Evaluate"
             }
           },
           "default": {
@@ -226,7 +226,7 @@
           "200": {
             "description": "Status 200",
             "schema": {
-              "$ref": "#/definitions/ScreenResponse"
+              "$ref": "#/definitions/Screen"
             }
           }
         },
@@ -1446,7 +1446,7 @@
           "200": {
             "description": "The found text and list of candidate text.",
             "schema": {
-              "$ref": "#/definitions/OCRResponse"
+              "$ref": "#/definitions/OCR"
             }
           },
           "default": {
@@ -1515,7 +1515,7 @@
           "200": {
             "description": "The found text and list of candidate text.",
             "schema": {
-              "$ref": "#/definitions/OCRResponse"
+              "$ref": "#/definitions/OCR"
             }
           },
           "default": {
@@ -1568,7 +1568,7 @@
           "200": {
             "description": "",
             "schema": {
-              "$ref": "#/definitions/EvaluateResponse"
+              "$ref": "#/definitions/Evaluate"
             }
           },
           "default": {
@@ -1616,7 +1616,7 @@
           "200": {
             "description": "",
             "schema": {
-              "$ref": "#/definitions/EvaluateResponse"
+              "$ref": "#/definitions/Evaluate"
             }
           },
           "default": {
@@ -1847,7 +1847,7 @@
     }
   },
   "definitions": {
-    "ScreenResponse": {
+    "Screen": {
       "description": "The response for a Screen text request.",
       "properties": {
         "originalText": {
@@ -2071,7 +2071,7 @@
         }
       }
     },
-    "OCRResponse": {
+    "OCR": {
       "description": "Contains the text found in image for the language specified.",
       "properties": {
         "status": {
@@ -2136,7 +2136,7 @@
         }
       }
     },
-    "EvaluateResponse": {
+    "Evaluate": {
       "description": "Evaluate response object.",
       "properties": {
         "cacheID": {
@@ -2193,6 +2193,7 @@
         },
         "exception": {
           "description": "The evaluate response exception object."
+          
         }
       }
     },
@@ -2265,16 +2266,16 @@
     "DetectedLanguageResult": {
       "description": "Detect language result.",
       "properties": {
-        "trackingId": {
-          "description": "The tracking id.",
+        "detectedLanguage": {
+          "description": "The detected language.",
           "type": "string"
         },
         "status": {
           "description": "The detect language status",
           "$ref": "#/definitions/ResponseStatus"
         },
-        "detectedLanguage": {
-          "description": "The detected language.",
+        "trackingId": {
+          "description": "The tracking id.",
           "type": "string"
         }
       }
@@ -2859,16 +2860,14 @@
         }
       }
     },
-    "CreateJob": 
-      {
+    "CreateJob": {
         "properties": {
           "jobId": {
             "description": "Id of the created job.",
             "type": "string"
           }
         }
-      }
-    
+      } 
   },
   "parameters": {
     "languageQueryParameter": {
@@ -2946,7 +2945,7 @@
       "schema": {
         "type": "string"
       },
-      "description": "Text content file."
+      "description": "Text content."
     },
     "term": {
       "name": "term",
