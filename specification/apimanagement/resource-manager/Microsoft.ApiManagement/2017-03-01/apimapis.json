@@ -159,6 +159,9 @@
           "ApiManagementCreateApiUsingWadlImport": {
             "$ref": "./examples/ApiManagementCreateApiUsingWadlImport.json"
           },
+          "ApiManagementCreateApiUsingWsdlImport": {
+            "$ref": "./examples/ApiManagementCreateApiUsingWsdlImport.json"
+          },
           "ApiManagementCreateApi": {
             "$ref": "./examples/ApiManagementCreateApi.json"
           }
@@ -235,6 +238,11 @@
         ],
         "operationId": "Api_Update",
         "description": "Updates the specified API of the API Management service instance.",
+        "x-ms-examples": {
+          "ApiManagementUpdateApi.json": {
+            "$ref": "./examples/ApiManagementUpdateApi.json"
+          }
+        },
         "parameters": [
           {
             "$ref": "./apimanagement.json#/parameters/ResourceGroupNameParameter"
@@ -286,6 +294,11 @@
         ],
         "operationId": "Api_Delete",
         "description": "Deletes the specified API of the API Management service instance.",
+        "x-ms-examples": {
+          "ApiManagementDeleteApi.json": {
+            "$ref": "./examples/ApiManagementDeleteApi.json"
+          }
+        },
         "parameters": [
           {
             "$ref": "./apimanagement.json#/parameters/ResourceGroupNameParameter"
@@ -505,6 +518,11 @@
         ],
         "operationId": "ApiOperation_Update",
         "description": "Updates the details of the operation in the API specified by its identifier.",
+        "x-ms-examples": {
+          "ApiManagementUpdateApiOperation": {
+            "$ref": "./examples/ApiManagementUpdateApiOperation.json"
+          }
+        },
         "parameters": [
           {
             "$ref": "./apimanagement.json#/parameters/ResourceGroupNameParameter"
@@ -714,6 +732,11 @@
         ],
         "operationId": "ApiOperationPolicy_CreateOrUpdate",
         "description": "Creates or updates policy configuration for the API Operation level.",
+        "x-ms-examples": {
+          "ApiManagementCreateApiOperationPolicy": {
+            "$ref": "./examples/ApiManagementCreateApiOperationPolicy.json"
+          }
+        },
         "parameters": [
           {
             "$ref": "./apimanagement.json#/parameters/ResourceGroupNameParameter"
@@ -1000,6 +1023,11 @@
         ],
         "operationId": "ApiPolicy_CreateOrUpdate",
         "description": "Creates or updates policy configuration for the API.",
+        "x-ms-examples": {
+          "ApiManagementCreateApiPolicy": {
+            "$ref": "./examples/ApiManagementCreateApiPolicy.json"
+          }
+        },
         "parameters": [
           {
             "$ref": "./apimanagement.json#/parameters/ResourceGroupNameParameter"
@@ -1063,6 +1091,11 @@
         ],
         "operationId": "ApiPolicy_Delete",
         "description": "Deletes the policy configuration at the Api.",
+        "x-ms-examples": {
+          "ApiManagementDeleteApiPolicy": {
+            "$ref": "./examples/ApiManagementDeleteApiPolicy.json"
+          }
+        },
         "parameters": [
           {
             "$ref": "./apimanagement.json#/parameters/ResourceGroupNameParameter"
@@ -1495,6 +1528,20 @@
           "x-ms-enum": {
             "name": "ContentFormat",
             "modelAsString": false
+          }
+        },
+        "wsdlSelector": {
+          "type": "object",
+          "description": "Criteria to limit import of WSDL to a subset of the document.",
+          "properties": {
+            "wsdlServiceName": {
+              "type": "string",
+              "description": "Name of service to import from WSDL"
+            },
+            "wsdlEndpointName": {
+              "type": "string",
+              "description": "Name of endpoint(port) to import from WSDL"
+            }
           }
         }
       },

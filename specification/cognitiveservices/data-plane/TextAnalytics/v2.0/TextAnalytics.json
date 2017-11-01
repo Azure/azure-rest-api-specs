@@ -14,7 +14,7 @@
         "hostTemplate": "{AzureRegion}.api.cognitive.microsoft.com",
         "parameters": [
             {
-                "$ref": "../../Common/Parameters.json#/parameters/AzureRegion"
+                "$ref": "../../Common/BasicRegions.json#/parameters/AzureRegion"
             }
         ]
     },
@@ -25,6 +25,11 @@
             "in": "header"
         }
     },
+    "security": [
+        {
+            "apim_key": []
+        }
+    ],    
     "basePath": "/text/analytics",
     "schemes": [
         "https"
@@ -45,9 +50,6 @@
                     "application/json"
                 ],
                 "parameters": [
-                    {
-                        "$ref": "../../Common/Parameters.json#/parameters/SubscriptionKey"
-                    },
                     {
                         "name": "input",
                         "in": "body",
@@ -95,9 +97,6 @@
                     "application/json"
                 ],
                 "parameters": [
-                    {
-                        "$ref": "../../Common/Parameters.json#/parameters/SubscriptionKey"
-                    },
                     {
                         "name": "input",
                         "in": "body",
@@ -153,9 +152,6 @@
                     "application/json"
                 ],
                 "parameters": [
-                    {
-                        "$ref": "../../Common/Parameters.json#/parameters/SubscriptionKey"
-                    },
                     {
                         "name": "input",
                         "in": "body",
