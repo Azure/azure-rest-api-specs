@@ -116,7 +116,7 @@ async function runScript() {
 
   for (let readme of readmesToProcess) {
 	  console.log(`Linter Validation on configuration file: "${readme}"`);
-      let linterCmd = 'autorest ' + readme + ' --azure-validator=true --message-format=json';
+      let linterCmd = 'autorest ' + readme + ' --azure-validator=true --Validation --message-format=json';
       const linterErrors = await runCmd(linterCmd);
       updateResult(readme, linterErrors, true);
   }
