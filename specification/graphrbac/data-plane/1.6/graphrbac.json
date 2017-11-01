@@ -553,41 +553,6 @@
         }
       }
     },
-    "/{tenantID}/groups/{groupObjectId}": {
-      "delete": {
-        "tags": [
-          "Group"
-        ],
-        "operationId": "Groups_Delete",
-        "description": "Delete a group from the directory.",
-        "parameters": [
-          {
-            "name": "groupObjectId",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "description": "The object ID of the group to delete."
-          },
-          {
-            "$ref": "#/parameters/ApiVersionParameter"
-          },
-          {
-            "$ref": "#/parameters/tenantIDInPath"
-          }
-        ],
-        "responses": {
-          "204": {
-            "description": "No Content"
-          },
-          "default": {
-            "description": "Error response describing why the operation failed.",
-            "schema": {
-              "$ref": "#/definitions/GraphError"
-            }
-          }
-        }
-      }
-    },
     "/{tenantID}/groups": {
       "post": {
         "tags": [
@@ -747,7 +712,40 @@
             }
           }
         }
-      }
+      },
+      "delete": {
+        "tags": [
+          "Group"
+        ],
+        "operationId": "Groups_Delete",
+        "description": "Delete a group from the directory.",
+        "parameters": [
+          {
+            "name": "objectId",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The object ID of the group to delete."
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/tenantIDInPath"
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "No Content"
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/GraphError"
+            }
+          }
+        }
+      }      
     },
     "/{tenantID}/groups/{objectId}/getMemberGroups": {
       "post": {
