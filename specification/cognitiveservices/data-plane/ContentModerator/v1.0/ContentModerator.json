@@ -272,7 +272,7 @@
         },
         "x-ms-examples": {
           "Detect Language request": {
-            "$ref": "./examples/DetectLanguageResource.json"
+            "$ref": "./examples/DetectLanguageResource.JSON"
           }
         },
         "produces": [
@@ -2939,13 +2939,14 @@
       }
     },
     "textBody": {
-      "name": "text",
+      "name": "Text Content",
       "in": "body",
       "required": true,
       "schema": {
+        "format": "binary",
         "type": "string"
       },
-      "description": "Text content."
+      "description": "Text content whose language is to be detected."
     },
     "term": {
       "name": "term",
