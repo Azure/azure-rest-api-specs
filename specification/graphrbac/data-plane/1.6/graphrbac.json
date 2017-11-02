@@ -261,6 +261,92 @@
         }
       }
     },
+    "/{tenantID}/applications/{applicationObjectId}/owners": {
+      "get": {
+        "tags": [
+          "ApplicationOwners"
+        ],
+        "operationId": "Applications_ListOwners",
+        "summary": "Directory objects that are owners of the application.",
+        "description": "The owners are a set of non-admin users who are allowed to modify this object.",
+        "parameters": [
+          {
+            "name": "applicationObjectId",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The object ID of the application for which to get owners."
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/tenantIDInPath"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK. The operation was successful.",
+            "schema": {
+              "$ref": "#/definitions/DirectoryObjectListResult"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/GraphError"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": null
+        }
+      }
+    },
+    "/{tenantID}/applications/{applicationObjectId}/$links/owners": {
+      "post": {
+        "tags": [
+          "ApplicationOwners"
+        ],
+        "operationId": "Applications_AddOwner",
+        "description": "Add an owner to an application.",
+        "parameters": [
+          {
+            "name": "applicationObjectId",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The object ID of the application to which to add the owner."
+          },
+          {
+            "name": "parameters",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/ApplicationAddOwnerParameters"
+            },
+            "description": "The URL of the owner object, such as https://graph.windows.net/0b1f9851-1bf0-433f-aec3-cb9272f093dc/directoryObjects/f260bbc4-c254-447b-94cf-293b5ec434dd."
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/tenantIDInPath"
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "No Content. Indicates success. No response body is returned."
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/GraphError"
+            }
+          }
+        }
+      }
+    },    
     "/{tenantID}/applications/{applicationObjectId}/keyCredentials": {
       "get": {
         "tags": [
@@ -946,6 +1032,48 @@
               "$ref": "#/definitions/GraphError"
             }
           }
+        }
+      }
+    },
+    "/{tenantID}/servicePrincipals/{objectId}/owners": {
+      "get": {
+        "tags": [
+          "ServicePrincipalOwners"
+        ],
+        "operationId": "ServicePrincipals_ListOwners",
+        "summary": "Directory objects that are owners of this service principal.",
+        "description": "The owners are a set of non-admin users who are allowed to modify this object.",
+        "parameters": [
+          {
+            "name": "objectId",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The object ID of the service principal for which to get owners."
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/tenantIDInPath"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK. The operation was successful.",
+            "schema": {
+              "$ref": "#/definitions/DirectoryObjectListResult"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/GraphError"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": null
         }
       }
     },
@@ -1757,6 +1885,27 @@
       },
       "description": "Active Directory error message."
     },
+    "DirectoryObject": {
+      "properties": {
+        "objectId": {
+          "type": "string",
+          "description": "The object ID."
+        },
+        "objectType": {
+          "type": "string",
+          "description": "The object type."
+        },
+        "deletionTimestamp": {
+          "type": "string",
+          "format": "date-time",
+          "description": "The time at which the directory object was deleted."
+        }
+      },
+      "required": [
+        "objectId"
+      ],
+      "description": "Represents an Azure Active Directory object."
+    },
     "KeyCredential": {
       "properties": {
         "startDate": {
@@ -1964,15 +2113,12 @@
       "description": "Request parameters for updating an existing application."
     },
     "Application": {
+      "allOf": [
+        {
+          "$ref": "#/definitions/DirectoryObject"
+        }
+      ],            
       "properties": {
-        "objectId": {
-          "type": "string",
-          "description": "The object ID."
-        },
-        "objectType": {
-          "type": "string",
-          "description": "The object type."
-        },
         "appId": {
           "type": "string",
           "description": "The application ID."
@@ -2033,6 +2179,18 @@
       },
       "description": "Application list operation result."
     },
+    "ApplicationAddOwnerParameters": {
+      "properties": {
+        "url": {
+          "type": "string",
+          "description": "A owner object URL, such as \"https://graph.windows.net/0b1f9851-1bf0-433f-aec3-cb9272f093dc/directoryObjects/f260bbc4-c254-447b-94cf-293b5ec434dd\", where \"0b1f9851-1bf0-433f-aec3-cb9272f093dc\" is the tenantId and \"f260bbc4-c254-447b-94cf-293b5ec434dd\" is the objectId of the owner (user, application, servicePrincipal, group) to be added."
+        }
+      },
+      "required": [
+        "url"
+      ],
+      "description": "Request parameters for adding a owner to an application."
+    },    
     "KeyCredentialListResult": {
       "properties": {
         "value": {
@@ -2044,6 +2202,18 @@
         }
       },
       "description": "KeyCredential list operation result."
+    },
+    "DirectoryObjectListResult": {
+      "properties": {
+        "value": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/DirectoryObject"
+          },
+          "description": "A collection of DirectoryObject."
+        }
+      },
+      "description": "DirectoryObject list operation result."
     },
     "KeyCredentialsUpdateParameters": {
       "properties": {
@@ -2242,15 +2412,12 @@
       "description": "Request parameters for creating a new group."
     },
     "ADGroup": {
+      "allOf": [
+        {
+          "$ref": "#/definitions/DirectoryObject"
+        }
+      ],            
       "properties": {
-        "objectId": {
-          "type": "string",
-          "description": "The object ID."
-        },
-        "objectType": {
-          "type": "string",
-          "description": "The object type."
-        },
         "displayName": {
           "type": "string",
           "description": "The display name of the group."
@@ -2364,15 +2531,12 @@
       "description": "Request parameters for creating a new service principal."
     },
     "ServicePrincipal": {
+      "allOf": [
+        {
+          "$ref": "#/definitions/DirectoryObject"
+        }
+      ],      
       "properties": {
-        "objectId": {
-          "type": "string",
-          "description": "The object ID."
-        },
-        "objectType": {
-          "type": "string",
-          "description": "The object type."
-        },
         "displayName": {
           "type": "string",
           "description": "The display name of the service principal."
