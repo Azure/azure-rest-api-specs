@@ -11,8 +11,6 @@ var exec = require('child_process').exec,
 
 var swaggersToProcess = utils.swaggers;
 var readmesToProcess = utils.readmes;
-//readmesToProcess = readmesToProcess.slice(0, 10);
-//swaggersToProcess = swaggersToProcess.slice(0, 10);
 var finalResult = {};
 var filename = `log_${utils.getTimeStamp()}.log`;
 var logFilepath = path.join(getLogDir(), filename);
@@ -53,8 +51,7 @@ function writeContent(content) {
 }
 
 //runs the command on a given swagger spec.
-async function runCmd(linterCmd) {
-    let cmd = linterCmd;
+async function runCmd(cmd) {
   console.log(cmd);
   const {err, stdout, stderr } = await new Promise(res => exec(cmd, { encoding: 'utf8', maxBuffer: 1024 * 1024 * 64 },
     (err, stdout, stderr) => res({ err: err, stdout: stdout, stderr: stderr })));
@@ -71,7 +68,7 @@ async function runCmd(linterCmd) {
       //console.log('>>>>>> Parsed Result...');
       //console.dir(resultObject, {depth: null, colors: true});
     } catch (e) {
-        console.log(`An error occurred while executing JSON.parse() on the output for ${linterCmd}:`);
+      console.log(`An error occurred while executing JSON.parse() on the output for ${linterCmd}:`);
       console.dir(resultString);
       console.dir(e, { depth: null, colors: true });
     }
@@ -112,16 +109,16 @@ async function runScript() {
 		updateResult(swagger, validationErrors, true);
 	  }
   }
-  console.log(`\t- Running Linter.`);
 
+  console.log(`\t- Running Linter.`);
   for (let readme of readmesToProcess) {
-	  console.log(`Linter Validation on configuration file: "${readme}"`);
-      let linterCmd = 'autorest ' + readme + ' --azure-validator=true --Validation --message-format=json';
+      console.log(`Linter Validation on configuration file: "${readme}"`);
+      let linterCmd = 'autorest ' + readme + ' --azure-validator=true --validation --message-format=json';
       const linterErrors = await runCmd(linterCmd);
       updateResult(readme, linterErrors, true);
   }
-  console.log(`\t- Running Model Validator.`);
 
+  console.log(`\t- Running Model Validator.`);
     //model validator run
   for (let readme of readmesToProcess) {
       console.log(`Model Validation on configuration file: "${readme}"`);
