@@ -68,7 +68,7 @@ async function runCmd(cmd) {
       //console.log('>>>>>> Parsed Result...');
       //console.dir(resultObject, {depth: null, colors: true});
     } catch (e) {
-      console.log(`An error occurred while executing JSON.parse() on the output for ${linterCmd}:`);
+      console.log(`An error occurred while executing JSON.parse() on the output for ${cmd}:`);
       console.dir(resultString);
       console.dir(e, { depth: null, colors: true });
     }
