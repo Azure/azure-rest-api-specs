@@ -146,7 +146,7 @@
               ],
               "x-ms-enum": {
                 "name": "AnswerType",
-                "modelAsString": false
+                "modelAsString": true
               }
             },
             "collectionFormat": "csv"
@@ -165,7 +165,7 @@
               ],
               "x-ms-enum": {
                 "name": "ResponseFormat",
-                "modelAsString": false
+                "modelAsString": true
               }
             },
             "collectionFormat": "csv"
@@ -183,7 +183,7 @@
             ],
             "x-ms-enum": {
               "name": "SafeSearch",
-              "modelAsString": false
+              "modelAsString": true
             }
           },
           {
@@ -326,7 +326,7 @@
           ],
           "x-ms-enum": {
             "name": "EntityQueryScenario",
-            "modelAsString": false
+            "modelAsString": true
           }
         },
         "value": {
@@ -557,7 +557,7 @@
           ],
           "x-ms-enum": {
             "name": "ErrorCode",
-            "modelAsString": false
+            "modelAsString": true
           }
         },
         "subCode": {
@@ -579,7 +579,7 @@
           ],
           "x-ms-enum": {
             "name": "ErrorSubCode",
-            "modelAsString": false
+            "modelAsString": true
           }
         },
         "message": {
@@ -657,7 +657,7 @@
           ],
           "x-ms-enum": {
             "name": "EntityScenario",
-            "modelAsString": false
+            "modelAsString": true
           }
         },
         "entityTypeHints": {
@@ -719,7 +719,7 @@
             ],
             "x-ms-enum": {
               "name": "EntityType",
-              "modelAsString": false
+              "modelAsString": true
             }
           }
         },
@@ -902,6 +902,24 @@
         }
       }
     },
+    "Airport": {
+      "allOf": [
+        {
+          "$ref": "#/definitions/CivicStructure"
+        }
+      ],
+      "type": "object",
+      "properties": {
+        "iataCode": {
+          "readOnly": true,
+          "type": "string"
+        },
+        "icaoCode": {
+          "readOnly": true,
+          "type": "string"
+        }
+      }
+    },
     "License": {
       "description": "Defines the license under which the text or photo may be used.",
       "allOf": [
@@ -1034,6 +1052,35 @@
         }
       ],
       "type": "object"
+    },
+    "Restaurant": {
+      "allOf": [
+        {
+          "$ref": "#/definitions/FoodEstablishment"
+        }
+      ],
+      "type": "object",
+      "properties": {
+        "acceptsReservations": {
+          "readOnly": true,
+          "type": "boolean"
+        },
+        "reservationUrl": {
+          "readOnly": true,
+          "type": "string"
+        },
+        "servesCuisine": {
+          "readOnly": true,
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "menuUrl": {
+          "readOnly": true,
+          "type": "string"
+        }
+      }
     },
     "Hotel": {
       "allOf": [
