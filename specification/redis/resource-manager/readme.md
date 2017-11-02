@@ -144,7 +144,7 @@ output-folder: $(go-sdk-folder)/services/redis/mgmt/2015-08-01/cache
 directive:
   - suppress: R3006  # Model definition 'RedisResource' has extra properties ['zones']."
     where:
-	  - $.definitions.RedisResource.properties
-	from: redis.json
-	reason: zones properties will be allowed in subsequent version of the linter tool
+      - $.definitions.RedisResource.properties
+    from: redis.json
+    reason: zones properties will be allowed in subsequent version of the linter tool
 ```
