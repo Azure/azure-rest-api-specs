@@ -85,10 +85,6 @@ csharp:
   namespace: Microsoft.Azure.Management.Redis
   output-folder: $(csharp-sdks-folder)/RedisCache/Management.Redis/Generated
   clear-output-folder: true
-  directive:
-  - from: Microsoft.Azure.Management.Redis
-    suppress: 
-      - R3006    
 ```
 
 
@@ -138,4 +134,17 @@ Please also specify `--go-sdk-folder=<path to the root directory of your azure-s
 
 ``` yaml $(tag) == 'package-2015-08' && $(go)
 output-folder: $(go-sdk-folder)/services/redis/mgmt/2015-08-01/cache
+```
+
+# Validation
+
+## Suppression
+
+``` yaml
+directive:
+  - suppress: R3006  # Model definition 'RedisResource' has extra properties ['zones']."
+    where:
+	  - $.definitions.RedisResource.properties
+	from: redis.json
+	reason: zones properties will be allowed in subsequent version of the linter tool
 ```
