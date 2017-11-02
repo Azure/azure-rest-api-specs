@@ -26,7 +26,16 @@ These are the global settings for the Redis API.
 
 ``` yaml
 openapi-type: arm
-tag: package-2017-02
+tag: package-2017-10
+```
+
+### Tag: package-2017-10
+
+These settings apply only when `--tag=package-2017-10` is specified on the command line.
+
+``` yaml $(tag) == 'package-2017-10'
+input-file:
+- Microsoft.Cache/2017-10-01/redis.json
 ```
 
 
@@ -76,6 +85,10 @@ csharp:
   namespace: Microsoft.Azure.Management.Redis
   output-folder: $(csharp-sdks-folder)/RedisCache/Management.Redis/Generated
   clear-output-folder: true
+  directive:
+  - from: Microsoft.Azure.Management.Redis
+    suppress: 
+      - R3006    
 ```
 
 
@@ -89,6 +102,16 @@ go:
   namespace: cache
   clear-output-folder: true
 ```
+
+### Tag: package-2017-10 and go
+
+These settings apply only when `--tag=package-2017-10 --go` is specified on the command line.
+Please also specify `--go-sdk-folder=<path to the root directory of your azure-sdk-for-go clone>`.
+
+``` yaml $(tag) == 'package-2017-10' && $(go)
+output-folder: $(go-sdk-folder)/services/redis/mgmt/2017-10-01/cache
+```
+
 
 ### Tag: package-2017-02 and go
 
