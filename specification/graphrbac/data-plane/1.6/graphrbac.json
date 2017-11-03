@@ -1889,21 +1889,21 @@
       "properties": {
         "objectId": {
           "type": "string",
-          "description": "The object ID."
+          "description": "The object ID.",
+          "readOnly": true
         },
         "objectType": {
           "type": "string",
-          "description": "The object type."
+          "description": "The object type.",
+          "readOnly": true
         },
         "deletionTimestamp": {
           "type": "string",
           "format": "date-time",
-          "description": "The time at which the directory object was deleted."
+          "description": "The time at which the directory object was deleted.",
+          "readOnly": true
         }
       },
-      "required": [
-        "objectId"
-      ],
       "description": "Represents an Azure Active Directory object."
     },
     "KeyCredential": {
@@ -2588,6 +2588,11 @@
       "description": "The password profile associated with a user."
     },
     "UserBase": {
+      "allOf": [
+        {
+          "$ref": "#/definitions/DirectoryObject"
+        }
+      ],
       "properties": {
         "immutableId": {
           "type": "string",
@@ -2716,14 +2721,6 @@
         "mail": {
           "type": "string",
           "description": "The primary email address of the user."
-        },
-        "objectId": {
-          "type": "string",
-          "description": "The object ID."
-        },
-        "objectType": {
-          "type": "string",
-          "description": "The object type."
         },
         "signInNames": {
           "type": "array",
