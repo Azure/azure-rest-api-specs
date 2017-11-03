@@ -16,7 +16,7 @@
         "hostTemplate": "{AzureRegion}.api.cognitive.microsoft.com",
         "parameters": [
             {
-                "$ref": "../../Common/Parameters.json#/parameters/ExtendedRegions.json"
+                "$ref": "../../Common/ExtendedRegions.json#/parameters/AzureRegion"
             }
         ]
     },
@@ -30,9 +30,6 @@
                 "description": "Given query face's faceId, find the similar-looking faces from a faceId array or a faceListId.",
                 "operationId": "Face_FindSimilar",
                 "parameters": [
-                    {
-                        "$ref": "../../Common/Parameters.json#/parameters/SubscriptionKey"
-                    },
                     {
                         "name": "body",
                         "in": "body",
@@ -78,9 +75,6 @@
                 "description": "Divide candidate faces into groups based on face similarity.",
                 "operationId": "Face_Group",
                 "parameters": [
-                    {
-                        "$ref": "../../Common/Parameters.json#/parameters/SubscriptionKey"
-                    },
                     {
                         "name": "body",
                         "in": "body",
@@ -137,9 +131,6 @@
                 "description": "Identify unknown faces from a person group.",
                 "operationId": "Face_Identify",
                 "parameters": [
-                    {
-                        "$ref": "../../Common/Parameters.json#/parameters/SubscriptionKey"
-                    },
                     {
                         "name": "body",
                         "in": "body",
@@ -200,9 +191,6 @@
                 "operationId": "Face_VerifyWithPersonGroup",
                 "parameters": [
                     {
-                        "$ref": "../../Common/Parameters.json#/parameters/SubscriptionKey"
-                    },
-                    {
                         "name": "body",
                         "in": "body",
                         "required": true,
@@ -245,9 +233,6 @@
                 "description": "Verify whether two faces belong to a same person. Compares two different face Ids.",
                 "operationId": "Face_Verify",
                 "parameters": [
-                    {
-                        "$ref": "../../Common/Parameters.json#/parameters/SubscriptionKey"
-                    },
                     {
                         "name": "body",
                         "in": "body",
@@ -299,9 +284,6 @@
                         "type": "string"
                     },
                     {
-                        "$ref": "../../Common/Parameters.json#/parameters/SubscriptionKey"
-                    },
-                    {
                         "name": "body",
                         "in": "body",
                         "required": true,
@@ -347,9 +329,6 @@
                         "description": "personGroupId of the target person group.",
                         "required": true,
                         "type": "string"
-                    },
-                    {
-                        "$ref": "../../Common/Parameters.json#/parameters/SubscriptionKey"
                     },
                     {
                         "name": "start",
@@ -428,9 +407,6 @@
                         "description": "The target personId to delete.",
                         "required": true,
                         "type": "string"
-                    },
-                    {
-                        "$ref": "../../Common/Parameters.json#/parameters/SubscriptionKey"
                     }
                 ],
                 "responses": {
@@ -465,9 +441,6 @@
                         "description": "Specifying the target person.",
                         "required": true,
                         "type": "string"
-                    },
-                    {
-                        "$ref": "../../Common/Parameters.json#/parameters/SubscriptionKey"
                     }
                 ],
                 "responses": {
@@ -517,9 +490,6 @@
                         "description": "personId of the target person.",
                         "required": true,
                         "type": "string"
-                    },
-                    {
-                        "$ref": "../../Common/Parameters.json#/parameters/SubscriptionKey"
                     },
                     {
                         "name": "body",
@@ -575,9 +545,6 @@
                         "description": "The persisted face to remove.",
                         "required": true,
                         "type": "string"
-                    },
-                    {
-                        "$ref": "../../Common/Parameters.json#/parameters/SubscriptionKey"
                     }
                 ],
                 "responses": {
@@ -619,9 +586,6 @@
                         "description": "The persistedFaceId of the target persisted face of the person.",
                         "required": true,
                         "type": "string"
-                    },
-                    {
-                        "$ref": "../../Common/Parameters.json#/parameters/SubscriptionKey"
                     }
                 ],
                 "responses": {
@@ -674,9 +638,6 @@
                         "type": "string"
                     },
                     {
-                        "$ref": "../../Common/Parameters.json#/parameters/SubscriptionKey"
-                    },
-                    {
                         "name": "body",
                         "in": "body",
                         "required": true,
@@ -720,9 +681,6 @@
                         "pattern": "^[a-z0-9-_]+$"
                     },
                     {
-                        "$ref": "../../Common/Parameters.json#/parameters/SubscriptionKey"
-                    },
-                    {
                         "name": "body",
                         "in": "body",
                         "required": true,
@@ -760,9 +718,6 @@
                         "description": "The personGroupId of the person group to be deleted.",
                         "required": true,
                         "type": "string"
-                    },
-                    {
-                        "$ref": "../../Common/Parameters.json#/parameters/SubscriptionKey"
                     }
                 ],
                 "responses": {
@@ -790,9 +745,6 @@
                         "description": "personGroupId of the target person group.",
                         "required": true,
                         "type": "string"
-                    },
-                    {
-                        "$ref": "../../Common/Parameters.json#/parameters/SubscriptionKey"
                     }
                 ],
                 "responses": {
@@ -830,9 +782,6 @@
                         "description": "personGroupId of the person group to be updated.",
                         "required": true,
                         "type": "string"
-                    },
-                    {
-                        "$ref": "../../Common/Parameters.json#/parameters/SubscriptionKey"
                     },
                     {
                         "name": "body",
@@ -874,9 +823,6 @@
                         "description": "personGroupId of target person group.",
                         "required": true,
                         "type": "string"
-                    },
-                    {
-                        "$ref": "../../Common/Parameters.json#/parameters/SubscriptionKey"
                     }
                 ],
                 "responses": {
@@ -926,9 +872,6 @@
                         "minimum": 1,
                         "maximum": 1000,
                         "default": 1000
-                    },
-                    {
-                        "$ref": "../../Common/Parameters.json#/parameters/SubscriptionKey"
                     }
                 ],
                 "responses": {
@@ -975,9 +918,6 @@
                         "description": "Target person group to be trained.",
                         "required": true,
                         "type": "string"
-                    },
-                    {
-                        "$ref": "../../Common/Parameters.json#/parameters/SubscriptionKey"
                     }
                 ],
                 "responses": {
@@ -1009,9 +949,6 @@
                         "type": "string",
                         "maxLength": 64,
                         "pattern": "^[a-z0-9-_]+$"
-                    },
-                    {
-                        "$ref": "../../Common/Parameters.json#/parameters/SubscriptionKey"
                     },
                     {
                         "name": "body",
@@ -1053,9 +990,6 @@
                         "type": "string",
                         "maxLength": 64,
                         "pattern": "^[a-z0-9-_]+$"
-                    },
-                    {
-                        "$ref": "../../Common/Parameters.json#/parameters/SubscriptionKey"
                     }
                 ],
                 "responses": {
@@ -1103,9 +1037,6 @@
                         "pattern": "^[a-z0-9-_]+$"
                     },
                     {
-                        "$ref": "../../Common/Parameters.json#/parameters/SubscriptionKey"
-                    },
-                    {
                         "name": "body",
                         "in": "body",
                         "required": true,
@@ -1145,9 +1076,6 @@
                         "type": "string",
                         "pattern": "^[a-z0-9-_]+$",
                         "maxLength": 64
-                    },
-                    {
-                        "$ref": "../../Common/Parameters.json#/parameters/SubscriptionKey"
                     }
                 ],
                 "responses": {
@@ -1171,9 +1099,7 @@
                 "description": "Retrieve information about all existing face lists. Only faceListId, name and userData will be returned.",
                 "operationId": "FaceList_List",
                 "parameters": [
-                    {
-                        "$ref": "../../Common/Parameters.json#/parameters/SubscriptionKey"
-                    }
+
                 ],
                 "responses": {
                     "200": {
@@ -1223,9 +1149,6 @@
                         "description": "persistedFaceId of an existing face. ",
                         "required": true,
                         "type": "string"
-                    },
-                    {
-                        "$ref": "../../Common/Parameters.json#/parameters/SubscriptionKey"
                     }
                 ],
                 "responses": {
@@ -1296,9 +1219,6 @@
                                 "noise"
                             ]
                         }
-                    },
-                    {
-                        "$ref": "../../Common/Parameters.json#/parameters/SubscriptionKey"
                     },
                     {
                         "$ref": "#/parameters/ImageUrl"
@@ -1527,9 +1447,6 @@
                         }
                     },
                     {
-                        "$ref": "../../Common/Parameters.json#/parameters/SubscriptionKey"
-                    },
-                    {
                         "$ref": "#/parameters/ImageStream"
                     }
                 ],
@@ -1744,9 +1661,6 @@
                     },
                     {
                         "$ref": "#/parameters/ImageUrl"
-                    },
-                    {
-                        "$ref": "../../Common/Parameters.json#/parameters/SubscriptionKey"
                     }
                 ],
                 "consumes": [
@@ -1814,9 +1728,6 @@
                     },
                     {
                         "$ref": "#/parameters/ImageStream"
-                    },
-                    {
-                        "$ref": "../../Common/Parameters.json#/parameters/SubscriptionKey"
                     }
                 ],
                 "consumes": [
@@ -1868,9 +1779,6 @@
                         "in": "query",
                         "description": "A face rectangle to specify the target face to be added into the face list, in the format of \"targetFace=left,top,width,height\". E.g. \"targetFace=10,10,100,100\". If there is more than one face in the image, targetFace is required to specify which face to add. No targetFace means there is only one face detected in the entire image.",
                         "type": "string"
-                    },
-                    {
-                        "$ref": "../../Common/Parameters.json#/parameters/SubscriptionKey"
                     }
                 ],
                 "consumes": [
@@ -1923,9 +1831,6 @@
                         "in": "query",
                         "description": "A face rectangle to specify the target face to be added into the face list, in the format of \"targetFace=left,top,width,height\". E.g. \"targetFace=10,10,100,100\". If there is more than one face in the image, targetFace is required to specify which face to add. No targetFace means there is only one face detected in the entire image.",
                         "type": "string"
-                    },
-                    {
-                        "$ref": "../../Common/Parameters.json#/parameters/SubscriptionKey"
                     }
                 ],
                 "consumes": [
