@@ -109,13 +109,13 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/providers/Microsoft.Network/trafficManagerUserMetricsKeys/default": {
+    "/subscriptions/{subscriptionId}/providers/Microsoft.Network/trafficManagerUserMetricsKeys": {
       "get": {
         "tags": [
-          "RealtimeUserMetrics"
+          "RealUserMetrics"
         ],
-        "operationId": "TrafficManagerUserMetricsKeys_GetDefault",
-        "description": "Get the subscription-level key used for Realtime User Metrics collection.",
+        "operationId": "TrafficManagerUserMetricsKeys_Get",
+        "description": "Get the subscription-level key used for Real User Metrics collection.",
         "parameters": [
           {
             "$ref": "#/parameters/ApiVersionParameter"
@@ -126,13 +126,10 @@
         ],
         "responses": {
           "200": {
-            "description": "The subscription-level Traffic Manager Realtime User Metrics key.",
+            "description": "The subscription-level Traffic Manager Real User Metrics key.",
             "schema": {
               "$ref": "#/definitions/TrafficManagerUserMetricsKeyModel" 
             }
-          },
-          "204": {
-            "description": "There is no Realtime User Metrics key for this subscription."
           },
           "default": {
             "description": "Default response. It will be deserialized as per the Error definition.",
@@ -142,17 +139,17 @@
           }
         },
         "x-ms-examples": {
-          "TrafficManagerUserMetricsKeys-GET-default": {
-            "$ref": "./examples/TrafficManagerUserMetricsKeys-GET-default.json"
+          "TrafficManagerUserMetricsKeys-GET": {
+            "$ref": "./examples/TrafficManagerUserMetricsKeys-GET.json"
           }
         }
       },
       "put": {
         "tags": [
-          "RealtimeUserMetrics"
+          "RealUserMetrics"
         ],
         "operationId": "TrafficManagerUserMetricsKeys_CreateOrUpdate",
-        "description": "Create or update a subscription-level key used for Realtime User Metrics collection.",
+        "description": "Create or update a subscription-level key used for Real User Metrics collection.",
         "parameters": [
           {
             "$ref": "#/parameters/ApiVersionParameter"
@@ -163,7 +160,7 @@
         ],
         "responses": {
           "201": {
-            "description": "A new subscription-level key has been created for Realtime User Metrics collection.",
+            "description": "A new subscription-level key has been created for Real User Metrics collection.",
             "schema": {
               "$ref": "#/definitions/TrafficManagerUserMetricsKeyModel" 
             }            
@@ -183,10 +180,10 @@
       },
       "delete": {
         "tags": [
-          "RealtimeUserMetrics"
+          "RealUserMetrics"
         ],
         "operationId": "TrafficManagerUserMetricsKeys_Delete",
-        "description": "Delete a subscription-level key used for Realtime User Metrics collection.",
+        "description": "Delete a subscription-level key used for Real User Metrics collection.",
         "parameters": [
           {
             "$ref": "#/parameters/ApiVersionParameter"
@@ -197,7 +194,7 @@
         ],
         "responses": {
           "200": {
-            "description": "The Traffic Manager Realtime User Metrics key was deleted successfully.",
+            "description": "The Traffic Manager Real User Metrics key was deleted successfully.",
             "schema": {
               "$ref": "#/definitions/DeleteOperationResult"
             }
@@ -430,30 +427,32 @@
       ],
       "description": "Class representing a Traffic Manager HeatMap."
     },
-    "TrafficManagerUserMetricsKeyProperties": {
-       "properties": {
-         "key": {
-           "type" : "string",
-           "description": "The key returned by the Realtime User Metrics operation."
-         }
-       },
-       "description": "Class representing the properties of a Real User Metrics key operation response."
-     },
-     "TrafficManagerUserMetricsKeyModel": {
-       "properties": {
-         "properties": {
-           "x-ms-client-flatten": true,
-           "$ref": "#/definitions/TrafficManagerUserMetricsKeyProperties",
-           "description": "The key property returned from a Realtime User Metrics GET operation."
-         }
-       },
-       "allOf": [
-         {
-           "$ref": "#/definitions/ProxyResource"
-         }
+    "TrafficManagerUserMetricsKeyModel": {
+      "properties": {
+        "id": {
+          "type" : "string",
+          "description": "Fully qualified resource Id for the resource. Ex - /providers/Microsoft.Network/trafficManagerUserMetricsKeys"
+        },
+        "name": {
+          "type" : "string",
+          "description": "The word default."
+        },
+        "type": {
+          "type" : "string",
+          "description": "The type of the resource. Ex- Microsoft.Network/trafficManagerUserMetricsKeys."
+        },
+        "key": {
+          "type" : "string",
+          "description": "The key returned by the Real User Metrics operation."
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "#/definitions/ProxyResource"
+        }
       ],
-       "description": "Class representing a Traffic Manager Real User Metrics key response."
-      }
+      "description": "Class representing a Traffic Manager Real User Metrics key response."
+    }
   },
   "parameters": {
     "SubscriptionIdParameter": {

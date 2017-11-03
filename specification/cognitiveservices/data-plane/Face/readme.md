@@ -1,8 +1,8 @@
-# Cognitive Services Vision SDK
+# Cognitive Services Face SDK
 
 > see https://aka.ms/autorest
 
-Configuration for generating Vision SDK.
+Configuration for generating Face SDK.
 
 The current release is `release_1_0`.
 

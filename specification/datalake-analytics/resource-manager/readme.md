@@ -66,3 +66,33 @@ csharp:
   output-folder: $(csharp-sdks-folder)/DataLake.Analytics/Management.DataLake.Analytics/Generated
   clear-output-folder: true
 ```
+
+
+## Go
+
+These settings apply only when `--go` is specified on the command line.
+
+``` yaml $(go)
+go:
+  license-header: MICROSOFT_APACHE_NO_VERSION
+  namespace: account
+  clear-output-folder: true
+```
+
+### Tag: package-2016-11 and go
+
+These settings apply only when `--tag=package-2016-11 --go` is specified on the command line.
+Please also specify `--go-sdk-folder=<path to the root directory of your azure-sdk-for-go clone>`.
+
+``` yaml $(tag) == 'package-2016-11' && $(go)
+output-folder: $(go-sdk-folder)/services/datalake/analytics/mgmt/2016-11-01/account
+```
+
+### Tag: package-2015-10-preview and go
+
+These settings apply only when `--tag=package-2015-10-preview --go` is specified on the command line.
+Please also specify `--go-sdk-folder=<path to the root directory of your azure-sdk-for-go clone>`.
+
+``` yaml $(tag) == 'package-2015-10-preview' && $(go)
+output-folder: $(go-sdk-folder)/services/datalake/analytics/mgmt/2015-10-01-preview/account
+```
