@@ -95,7 +95,7 @@ These settings apply only when `--go` is specified on the command line.
 ``` yaml $(go)
 go:
   license-header: MICROSOFT_APACHE_NO_VERSION
-  namespace: cache
+  namespace: redis
   clear-output-folder: true
 ```
 
@@ -115,7 +115,7 @@ These settings apply only when `--tag=package-2017-02 --go` is specified on the 
 Please also specify `--go-sdk-folder=<path to the root directory of your azure-sdk-for-go clone>`.
 
 ``` yaml $(tag) == 'package-2017-02' && $(go)
-output-folder: $(go-sdk-folder)/services/redis/mgmt/2017-02-01/cache
+output-folder: $(go-sdk-folder)/services/redis/mgmt/2017-02-01/redis
 ```
 
 ### Tag: package-2016-04 and go
@@ -124,7 +124,7 @@ These settings apply only when `--tag=package-2016-04 --go` is specified on the 
 Please also specify `--go-sdk-folder=<path to the root directory of your azure-sdk-for-go clone>`.
 
 ``` yaml $(tag) == 'package-2016-04' && $(go)
-output-folder: $(go-sdk-folder)/services/redis/mgmt/2016-04-01/cache
+output-folder: $(go-sdk-folder)/services/redis/mgmt/2016-04-01/redis
 ```
 
 ### Tag: package-2015-08 and go
@@ -133,7 +133,7 @@ These settings apply only when `--tag=package-2015-08 --go` is specified on the 
 Please also specify `--go-sdk-folder=<path to the root directory of your azure-sdk-for-go clone>`.
 
 ``` yaml $(tag) == 'package-2015-08' && $(go)
-output-folder: $(go-sdk-folder)/services/redis/mgmt/2015-08-01/cache
+output-folder: $(go-sdk-folder)/services/redis/mgmt/2015-08-01/redis
 ```
 
 # Validation
