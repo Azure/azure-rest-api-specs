@@ -889,6 +889,38 @@
         }
       }
     },
+    "SapCloudForCustomerResourceDataset": {
+      "x-ms-discriminator-value": "SapCloudForCustomerResource",
+      "description": "The path of the SAP Cloud for Customer OData entity.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/Dataset"
+        }
+      ],
+      "properties": {
+        "typeProperties": {
+          "description": "SAP Cloud For Customer OData resource dataset properties.",
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/SapCloudForCustomerResourceDatasetTypeProperties"
+        }
+      },
+      "required": [
+        "typeProperties"
+      ]
+    },
+    "SapCloudForCustomerResourceDatasetTypeProperties": {
+      "description": "Sap Cloud For Customer OData resource dataset properties.",
+      "properties": {
+        "path": {
+          "type": "object",
+          "description": "The path of the SAP Cloud for Customer OData entity. Type: string (or Expression with resultType string)."
+        }
+      },
+      "required": [
+        "path"
+      ]
+    },
     "SqlServerTableDataset": {
       "x-ms-discriminator-value": "SqlServerTable",
       "description": "The on-premises SQL Server dataset.",
