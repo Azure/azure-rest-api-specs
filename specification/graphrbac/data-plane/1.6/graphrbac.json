@@ -1886,6 +1886,7 @@
       "description": "Active Directory error message."
     },
     "DirectoryObject": {
+      "discriminator": "objectType",
       "properties": {
         "objectId": {
           "type": "string",
@@ -2431,6 +2432,7 @@
           "description": "The primary email address of the group."
         }
       },
+      "x-ms-discriminator-value": "Group",
       "description": "Active Directory group information."
     },
     "GroupListResult": {
@@ -2588,11 +2590,6 @@
       "description": "The password profile associated with a user."
     },
     "UserBase": {
-      "allOf": [
-        {
-          "$ref": "#/definitions/DirectoryObject"
-        }
-      ],
       "properties": {
         "immutableId": {
           "type": "string",
@@ -2698,10 +2695,38 @@
     "User": {
       "allOf": [
         {
-          "$ref": "#/definitions/UserBase"
+          "$ref": "#/definitions/DirectoryObject"
         }
       ],
       "properties": {
+        "immutableId": {
+          "type": "string",
+          "description": "This must be specified if you are using a federated domain for the user's userPrincipalName (UPN) property when creating a new user account. It is used to associate an on-premises Active Directory user account with their Azure AD user object."
+        },
+        "usageLocation": {
+          "type": "string",
+          "description": "A two letter country code (ISO standard 3166). Required for users that will be assigned licenses due to legal requirement to check for availability of services in countries. Examples include: \"US\", \"JP\", and \"GB\"."
+        },
+        "givenName": {
+          "type": "string",
+          "description": "The given name for the user."
+        },
+        "surname": {
+          "type": "string",
+          "description": "The user's surname (family name or last name)."
+        },
+        "userType": {
+          "type": "string",
+          "description": "A string value that can be used to classify user types in your directory, such as 'Member' and 'Guest'.",
+          "enum": [
+            "Member",
+            "Guest"
+          ],
+          "x-ms-enum": {
+            "name": "UserType",
+            "modelAsString": true
+          }
+        },        
         "accountEnabled": {
           "type": "boolean",
           "description": "Whether the account is enabled."
