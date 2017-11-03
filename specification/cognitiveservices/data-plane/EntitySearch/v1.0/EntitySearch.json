@@ -42,7 +42,9 @@
           "EntitySearch"
         ],
         "parameters": [
-          { "$ref": "#/parameters/x-bingapis-sdk" },
+          {
+            "$ref": "#/parameters/x-bingapis-sdk"
+          },
           {
             "name": "Accept",
             "in": "header",
@@ -933,13 +935,15 @@
     }
   },
   "parameters": {
-    "x-bingapis-sdk" :{
+    "x-bingapis-sdk": {
       "name": "X-BingApis-SDK",
       "in": "header",
       "description": "Activate Swagger compliance",
       "required": true,
       "type": "string",
-      "enum": ["true"],
+      "enum": [
+        "true"
+      ],
       "x-ms-enum": {
         "name": "XBingApisSDK",
         "modelAsString": true
