@@ -8,18 +8,18 @@
   "schemes": [
     "https"
   ],
+  "consumes": [
+    "application/json"
+  ],
+  "produces": [
+    "application/json"
+  ],
   "paths": {
     "/providers/Microsoft.Web/publishingUsers/web": {
       "get": {
         "summary": "Gets publishing user",
         "description": "Gets publishing user",
         "operationId": "GetPublishingUser",
-        "produces": [
-          "application/json",
-          "text/json",
-          "application/xml",
-          "text/xml"
-        ],
         "parameters": [
           {
             "$ref": "#/parameters/apiVersionParameter"
@@ -29,7 +29,7 @@
           "200": {
             "description": "OK",
             "schema": {
-              "$ref": "#/definitions/User"
+              "$ref": "./CommonDefinitions.json#/definitions/User"
             }
           }
         }
@@ -38,17 +38,6 @@
         "summary": "Updates publishing user",
         "description": "Updates publishing user",
         "operationId": "UpdatePublishingUser",
-        "consumes": [
-          "application/json",
-          "text/json",
-          "application/x-www-form-urlencoded"
-        ],
-        "produces": [
-          "application/json",
-          "text/json",
-          "application/xml",
-          "text/xml"
-        ],
         "parameters": [
           {
             "name": "userDetails",
@@ -56,7 +45,7 @@
             "description": "Details of publishing user",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/User"
+              "$ref": "./CommonDefinitions.json#/definitions/User"
             }
           },
           {
@@ -67,7 +56,7 @@
           "200": {
             "description": "OK",
             "schema": {
-              "$ref": "#/definitions/User"
+              "$ref": "./CommonDefinitions.json#/definitions/User"
             }
           }
         }
@@ -78,10 +67,6 @@
         "summary": "Gets the source controls available for Azure websites.",
         "description": "Gets the source controls available for Azure websites.",
         "operationId": "ListSourceControls",
-        "produces": [
-          "application/json",
-          "text/json"
-        ],
         "parameters": [
           {
             "$ref": "#/parameters/apiVersionParameter"
@@ -101,21 +86,35 @@
       }
     },
     "/providers/Microsoft.Web/sourcecontrols/{sourceControlType}": {
+      "get": {
+        "summary": "Gets source control token",
+        "description": "Gets source control token",
+        "operationId": "GetSourceControl",
+        "parameters": [
+          {
+            "name": "sourceControlType",
+            "in": "path",
+            "description": "Type of source control",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/SourceControl"
+            }
+          }
+        }
+      },
       "put": {
         "summary": "Updates source control token",
         "description": "Updates source control token",
         "operationId": "UpdateSourceControl",
-        "consumes": [
-          "application/json",
-          "text/json",
-          "application/x-www-form-urlencoded"
-        ],
-        "produces": [
-          "application/json",
-          "text/json",
-          "application/xml",
-          "text/xml"
-        ],
         "parameters": [
           {
             "name": "sourceControlType",
@@ -152,19 +151,6 @@
         "summary": "Check if a resource name is available.",
         "description": "Check if a resource name is available.",
         "operationId": "CheckNameAvailability",
-        "consumes": [
-          "application/json",
-          "text/json",
-          "application/xml",
-          "text/xml",
-          "application/x-www-form-urlencoded"
-        ],
-        "produces": [
-          "application/json",
-          "text/json",
-          "application/xml",
-          "text/xml"
-        ],
         "parameters": [
           {
             "name": "request",
@@ -193,24 +179,39 @@
         }
       }
     },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.Web/deploymentLocations": {
+      "get": {
+        "summary": "Gets list of available geo regions plus ministamps",
+        "description": "Gets list of available geo regions plus ministamps",
+        "operationId": "GetSubscriptionDeploymentLocations",
+        "parameters": [
+          {
+            "$ref": "#/parameters/subscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/DeploymentLocations"
+            }
+          }
+        }
+      }
+    },
     "/subscriptions/{subscriptionId}/providers/Microsoft.Web/geoRegions": {
       "get": {
         "summary": "Get a list of available geographical regions.",
         "description": "Get a list of available geographical regions.",
         "operationId": "ListGeoRegions",
-        "produces": [
-          "application/json",
-          "text/json"
-        ],
         "parameters": [
           {
             "name": "sku",
             "in": "query",
             "description": "Name of SKU used to filter the regions.",
-            "x-ms-enum": {
-              "name": "SkuName",
-              "modelAsString": true
-            },
             "type": "string",
             "enum": [
               "Free",
@@ -221,7 +222,11 @@
               "PremiumV2",
               "Dynamic",
               "Isolated"
-            ]
+            ],
+            "x-ms-enum": {
+              "name": "SkuName",
+              "modelAsString": true
+            }
           },
           {
             "name": "linuxWorkersEnabled",
@@ -254,10 +259,6 @@
         "summary": "List all premier add-on offers.",
         "description": "List all premier add-on offers.",
         "operationId": "ListPremierAddOnOffers",
-        "produces": [
-          "application/json",
-          "text/json"
-        ],
         "parameters": [
           {
             "$ref": "#/parameters/subscriptionIdParameter"
@@ -284,12 +285,6 @@
         "summary": "List all SKUs.",
         "description": "List all SKUs.",
         "operationId": "ListSkus",
-        "produces": [
-          "application/json",
-          "text/json",
-          "application/xml",
-          "text/xml"
-        ],
         "parameters": [
           {
             "$ref": "#/parameters/subscriptionIdParameter"
@@ -310,18 +305,9 @@
     },
     "/subscriptions/{subscriptionId}/providers/Microsoft.Web/verifyHostingEnvironmentVnet": {
       "post": {
-        "summary": "Verifies if this VNET is compatible with an App Service Environment.",
+        "summary": "Verifies if this VNET is compatible with an App Service Environment by analyzing the Network Security Group rules.",
         "description": "Verifies if this VNET is compatible with an App Service Environment by analyzing the Network Security Group rules.",
         "operationId": "VerifyHostingEnvironmentVnet",
-        "x-ms-examples": {
-          "VerifyHostingEnvironmentVnet": { "$ref": "./examples/VerifyHostingEnvironmentVnet.json" }
-        },
-        "consumes": [
-          "application/json"
-        ],
-        "produces": [
-          "application/json"
-        ],
         "parameters": [
           {
             "name": "parameters",
@@ -346,6 +332,11 @@
               "$ref": "#/definitions/VnetValidationFailureDetails"
             }
           }
+        },
+        "x-ms-examples": {
+          "VerifyHostingEnvironmentVnet": {
+            "$ref": "./examples/VerifyHostingEnvironmentVnet.json"
+          }
         }
       }
     },
@@ -354,13 +345,6 @@
         "summary": "Move resources between resource groups.",
         "description": "Move resources between resource groups.",
         "operationId": "Move",
-        "consumes": [
-          "application/json",
-          "text/json",
-          "application/xml",
-          "text/xml",
-          "application/x-www-form-urlencoded"
-        ],
         "parameters": [
           {
             "$ref": "#/parameters/resourceGroupNameParameter"
@@ -393,19 +377,6 @@
         "summary": "Validate if a resource can be created.",
         "description": "Validate if a resource can be created.",
         "operationId": "Validate",
-        "consumes": [
-          "application/json",
-          "text/json",
-          "application/xml",
-          "text/xml",
-          "application/x-www-form-urlencoded"
-        ],
-        "produces": [
-          "application/json",
-          "text/json",
-          "application/xml",
-          "text/xml"
-        ],
         "parameters": [
           {
             "$ref": "#/parameters/resourceGroupNameParameter"
@@ -441,13 +412,6 @@
         "summary": "Validate whether a resource can be moved.",
         "description": "Validate whether a resource can be moved.",
         "operationId": "ValidateMove",
-        "consumes": [
-          "application/json",
-          "text/json",
-          "application/xml",
-          "text/xml",
-          "application/x-www-form-urlencoded"
-        ],
         "parameters": [
           {
             "$ref": "#/parameters/resourceGroupNameParameter"
@@ -477,24 +441,6 @@
     }
   },
   "definitions": {
-    "Capability": {
-      "description": "Describes the capabilities/features allowed for a specific SKU.",
-      "type": "object",
-      "properties": {
-        "name": {
-          "description": "Name of the SKU capability.",
-          "type": "string"
-        },
-        "value": {
-          "description": "Value of the SKU capability.",
-          "type": "string"
-        },
-        "reason": {
-          "description": "Reason of the SKU capability.",
-          "type": "string"
-        }
-      }
-    },
     "CsmMoveResourceEnvelope": {
       "description": "Object with a list of the resources that need to be moved and the resource group they should be moved to.",
       "type": "object",
@@ -513,12 +459,39 @@
         }
       }
     },
+    "DeploymentLocations": {
+      "description": "List of available locations (regions or App Service Environments) for\ndeployment of App Service resources.",
+      "type": "object",
+      "properties": {
+        "locations": {
+          "description": "Available regions.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/GeoRegion"
+          }
+        },
+        "hostingEnvironments": {
+          "description": "Available App Service Environments with full descriptions of the environments.",
+          "type": "array",
+          "items": {
+            "$ref": "./CommonDefinitions.json#/definitions/AppServiceEnvironment"
+          }
+        },
+        "hostingEnvironmentDeploymentInfos": {
+          "description": "Available App Service Environments with basic information.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/HostingEnvironmentDeploymentInfo"
+          }
+        }
+      }
+    },
     "GeoRegion": {
       "description": "Geographical region.",
       "type": "object",
       "allOf": [
         {
-          "$ref": "#/definitions/ProxyOnlyResource"
+          "$ref": "./CommonDefinitions.json#/definitions/ProxyOnlyResource"
         }
       ],
       "properties": {
@@ -577,8 +550,16 @@
           "description": "Service Tier of the resource SKU.",
           "type": "string"
         },
+        "size": {
+          "description": "Size specifier of the resource SKU.",
+          "type": "string"
+        },
+        "family": {
+          "description": "Family code of the resource SKU.",
+          "type": "string"
+        },
         "capacity": {
-          "$ref": "#/definitions/SkuCapacity",
+          "$ref": "./CommonDefinitions.json#/definitions/SkuCapacity",
           "description": "Min, max, and default scale values of the SKU."
         },
         "locations": {
@@ -592,8 +573,22 @@
           "description": "Capabilities of the SKU, e.g., is traffic manager enabled?",
           "type": "array",
           "items": {
-            "$ref": "#/definitions/Capability"
+            "$ref": "./CommonDefinitions.json#/definitions/Capability"
           }
+        }
+      }
+    },
+    "HostingEnvironmentDeploymentInfo": {
+      "description": "Information needed to create resources on an App Service Environment.",
+      "type": "object",
+      "properties": {
+        "name": {
+          "description": "Name of the App Service Environment.",
+          "type": "string"
+        },
+        "location": {
+          "description": "Location of the App Service Environment.",
+          "type": "string"
         }
       }
     },
@@ -602,7 +597,7 @@
       "type": "object",
       "allOf": [
         {
-          "$ref": "#/definitions/ProxyOnlyResource"
+          "$ref": "./CommonDefinitions.json#/definitions/ProxyOnlyResource"
         }
       ],
       "properties": {
@@ -691,31 +686,6 @@
         }
       }
     },
-    "ProxyOnlyResource": {
-      "description": "Azure proxy only resource. This resource is not tracked by Azure Resource Manager.",
-      "properties": {
-        "id": {
-          "description": "Resource Id.",
-          "type": "string",
-          "readOnly": true
-        },
-        "name": {
-          "description": "Resource Name.",
-          "type": "string",
-          "readOnly": true
-        },
-        "kind": {
-          "description": "Kind of resource.",
-          "type": "string"
-        },
-        "type": {
-          "description": "Resource type.",
-          "type": "string",
-          "readOnly": true
-        }
-      },
-      "x-ms-azure-resource": true
-    },
     "ResourceNameAvailability": {
       "description": "Information regarding availbility of a resource name.",
       "type": "object",
@@ -773,31 +743,6 @@
         }
       }
     },
-    "SkuCapacity": {
-      "description": "Description of the App Service plan scale options.",
-      "type": "object",
-      "properties": {
-        "minimum": {
-          "format": "int32",
-          "description": "Minimum number of workers for this App Service plan SKU.",
-          "type": "integer"
-        },
-        "maximum": {
-          "format": "int32",
-          "description": "Maximum number of workers for this App Service plan SKU.",
-          "type": "integer"
-        },
-        "default": {
-          "format": "int32",
-          "description": "Default number of workers for this App Service plan SKU.",
-          "type": "integer"
-        },
-        "scaleType": {
-          "description": "Available scale configurations for an App Service plan.",
-          "type": "string"
-        }
-      }
-    },
     "SkuInfos": {
       "description": "Collection of SKU information.",
       "type": "object",
@@ -820,7 +765,7 @@
       "type": "object",
       "allOf": [
         {
-          "$ref": "#/definitions/ProxyOnlyResource"
+          "$ref": "./CommonDefinitions.json#/definitions/ProxyOnlyResource"
         }
       ],
       "properties": {
@@ -873,50 +818,6 @@
         }
       }
     },
-    "User": {
-      "description": "User crendentials used for publishing activity.",
-      "type": "object",
-      "allOf": [
-        {
-          "$ref": "#/definitions/ProxyOnlyResource"
-        }
-      ],
-      "properties": {
-        "properties": {
-          "description": "User resource specific properties",
-          "required": [
-            "publishingUserName"
-          ],
-          "properties": {
-            "name": {
-              "description": "Username",
-              "type": "string",
-              "x-ms-client-name": "UserName"
-            },
-            "publishingUserName": {
-              "description": "Username used for publishing.",
-              "type": "string"
-            },
-            "publishingPassword": {
-              "format": "password",
-              "description": "Password used for publishing.",
-              "type": "string"
-            },
-            "publishingPasswordHash": {
-              "format": "password",
-              "description": "Password hash used for publishing.",
-              "type": "string"
-            },
-            "publishingPasswordHashSalt": {
-              "format": "password",
-              "description": "Password hash salt used for publishing.",
-              "type": "string"
-            }
-          },
-          "x-ms-client-flatten": true
-        }
-      }
-    },
     "ValidateProperties": {
       "description": "App properties used for validation.",
       "type": "object",
@@ -931,6 +832,10 @@
         },
         "needLinuxWorkers": {
           "description": "<code>true</code> if App Service plan is for Linux workers; otherwise, <code>false</code>.",
+          "type": "boolean"
+        },
+        "isSpot": {
+          "description": "<code>true</code> if App Service plan is for Spot instances; otherwise, <code>false</code>.",
           "type": "boolean"
         },
         "capacity": {
@@ -1015,7 +920,7 @@
       "type": "object",
       "allOf": [
         {
-          "$ref": "#/definitions/ProxyOnlyResource"
+          "$ref": "./CommonDefinitions.json#/definitions/ProxyOnlyResource"
         }
       ],
       "properties": {
@@ -1044,7 +949,7 @@
       "type": "object",
       "allOf": [
         {
-          "$ref": "#/definitions/ProxyOnlyResource"
+          "$ref": "./CommonDefinitions.json#/definitions/ProxyOnlyResource"
         }
       ],
       "properties": {
@@ -1072,7 +977,7 @@
       "type": "object",
       "allOf": [
         {
-          "$ref": "#/definitions/ProxyOnlyResource"
+          "$ref": "./CommonDefinitions.json#/definitions/ProxyOnlyResource"
         }
       ],
       "properties": {
@@ -1106,11 +1011,11 @@
       "in": "path",
       "description": "Name of the resource group to which the resource belongs.",
       "required": true,
-      "x-ms-parameter-location": "method",
       "type": "string",
       "maxLength": 90,
       "minLength": 1,
-      "pattern": "^[-\\w\\._\\(\\)]+[^\\.]$"
+      "pattern": "^[-\\w\\._\\(\\)]+[^\\.]$",
+      "x-ms-parameter-location": "method"
     },
     "apiVersionParameter": {
       "name": "api-version",

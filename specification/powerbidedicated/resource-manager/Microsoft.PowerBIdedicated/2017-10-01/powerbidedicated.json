@@ -77,7 +77,7 @@
           "Create capacity": { "$ref": "./examples/createCapacity.json" }
         },
         "tags": [ "Capacities" ],
-        "operationId": "Capacity_Create",
+        "operationId": "Capacities_Create",
         "parameters": [
           {
             "$ref": "#/parameters/ResourceGroupNameParameter"
@@ -456,7 +456,7 @@
         }
       }
     },
-     "Operation": {
+    "Operation": {
       "description": "Capacities REST API operation.",
       "type": "object",
       "properties": {
@@ -661,17 +661,13 @@
       "description": "An object that represents a set of mutable Dedicated capacity resource properties.",
       "type": "object",
       "properties": {
-        "capacityAdministrators": {
-          "$ref": "#/definitions/DedicatedCapacityServerAdministrators",
+        "administration": {
+          "$ref": "#/definitions/DedicatedCapacityAdministrators",
           "description": "A collection of Dedicated capacity administrators"
-        },
-        "backupBlobContainerUri": {
-          "type": "string",
-          "description": "The container URI of backup blob."
         }
       }
     },
-    "DedicatedCapacityServerAdministrators": {
+    "DedicatedCapacityAdministrators": {
       "description": "An array of administrator user identities",
       "type": "object",
       "properties": {
@@ -752,11 +748,11 @@
       "in": "path",
       "required": true,
       "type": "string",
-      "pattern": "^[-\\w\\._\\(\\)]+$", 
-      "minLength": 1, 
-      "maxLength": 90 ,
+      "pattern": "^[-\\w\\._\\(\\)]+$",
+      "minLength": 1,
+      "maxLength": 90,
       "x-ms-parameter-location": "method",
-      "description": "The name of the Azure Resource group of which a given Analysis Services server is part. This name must be at least 1 character in length, and no more than 90."
+      "description": "The name of the Azure Resource group of which a given PowerBIDedicated capacity is part. This name must be at least 1 character in length, and no more than 90."
     }
   }
 }
