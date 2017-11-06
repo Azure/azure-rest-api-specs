@@ -210,6 +210,11 @@
         ],
         "operationId": "Backend_Update",
         "description": "Updates an existing backend.",
+        "x-ms-examples": {
+          "ApiManagementUpdateBackend": {
+            "$ref": "./examples/ApiManagementUpdateBackend.json"
+          }
+        },
         "parameters": [
           {
             "$ref": "./apimanagement.json#/parameters/ResourceGroupNameParameter"
@@ -260,6 +265,11 @@
           "Backends"
         ],
         "operationId": "Backend_Delete",
+        "x-ms-examples": {
+          "ApiManagementDeleteBackend": {
+            "$ref": "./examples/ApiManagementDeleteBackend.json"
+          }
+        },
         "description": "Deletes the specified backend.",
         "parameters": [
           {
@@ -566,6 +576,16 @@
       "description": "Details of the Backend WebProxy Server to use in the Request to Backend."
     },
     "BackendUpdateParameters": {
+      "properties": {
+        "properties": {
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/BackendUpdateParameterProperties",
+          "description": "Backend entity update contract properties."
+        }
+      },
+      "description": "Backend update parameters."
+    },
+    "BackendUpdateParameterProperties": {
       "properties": {
         "url": {
           "type": "string",

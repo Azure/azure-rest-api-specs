@@ -1015,6 +1015,68 @@
                     }
                 },
                 "x-ms-long-running-operation": true
+            },
+            "patch": {
+                "tags": [
+                    "Topics"
+                ],
+                "summary": "Update a topic",
+                "description": "Asynchronously updates a topic with the specified parameters.",
+                "operationId": "Topics_Update",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                        "$ref": "#/parameters/SubscriptionIdParameter"
+                    },
+                    {
+                        "name": "resourceGroupName",
+                        "in": "path",
+                        "description": "The name of the resource group within the user's subscription.",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "name": "topicName",
+                        "in": "path",
+                        "description": "Name of the topic",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "name": "topicUpdateParameters",
+                        "in": "body",
+                        "description": "Topic update information",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/TopicUpdateParameters"
+                        }
+                    },
+                    {
+                        "$ref": "#/parameters/ApiVersionParameter"
+                    }
+                ],
+                "responses": {
+                    "201": {
+                        "description": "Topic update request accepted.",
+                        "schema": {
+                            "$ref": "#/definitions/Topic"
+                        }
+                    },
+                    "default": {
+                        "description": "*** Error Responses: ***\n\n * 400 Bad Request.\n\n * 500 Internal Server Error."
+                    }
+                },
+                "x-ms-examples": {
+                    "Topics_Update": {
+                        "$ref": "./examples/Topics_Update.json"
+                    }
+                },
+                "x-ms-long-running-operation": true
             }
         },
         "/subscriptions/{subscriptionId}/providers/Microsoft.EventGrid/topics": {
@@ -1789,6 +1851,19 @@
                 }
             }
         },
+        "TopicUpdateParameters": {
+            "description": "Properties of the Topic update",
+            "type": "object",
+            "properties": {
+                "tags": {
+                    "description": "Tags of the resource",
+                    "type": "object",
+                    "additionalProperties": {
+                        "type": "string"
+                    }
+                }
+            }
+        },        
         "TopicsListResult": {
             "description": "Result of the List Topics operation",
             "type": "object",
