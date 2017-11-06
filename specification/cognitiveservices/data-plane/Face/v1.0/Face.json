@@ -235,7 +235,7 @@
     },
     "/verify": {
       "post": {
-        "description": "Verify whether two faces belong to a same person. Compares two different face Ids.",
+        "description": "Verify whether two faces belong to a same person or whether one face belongs to a person.",
         "operationId": "Face_Verify",
         "parameters": [
           {
@@ -325,7 +325,7 @@
         ]
       },
       "get": {
-        "description": "List all persons in a person group, and retrieve person information (including personId, name, userData and persistedFaceIds of registered faces of the person). Start and top are used to specify a range of person groups to list indicated by a 'start'ing Person ID and the number (top) of persons to return.",
+        "description": "List all persons in a person group, and retrieve person information (including personId, name, userData and persistedFaceIds of registered faces of the person).",
         "operationId": "Person_List",
         "parameters": [
           {
@@ -1224,7 +1224,7 @@
             }
           },
           {
-            "$ref": "#/parameters/ImageUrl"
+            "$ref": "../../Common/Parameters.json#/parameters/ImageUrl"
           }
         ],
         "consumes": [
@@ -1450,7 +1450,7 @@
             }
           },
           {
-            "$ref": "#/parameters/ImageStream"
+            "$ref": "../../Common/Parameters.json#/parameters/ImageStream"
           }
         ],
         "consumes": [
@@ -1663,7 +1663,7 @@
             }
           },
           {
-            "$ref": "#/parameters/ImageUrl"
+            "$ref": "../../Common/Parameters.json#/parameters/ImageUrl"
           }
         ],
         "consumes": [
@@ -1730,7 +1730,7 @@
             }
           },
           {
-            "$ref": "#/parameters/ImageStream"
+            "$ref": "../../Common/Parameters.json#/parameters/ImageStream"
           }
         ],
         "consumes": [
