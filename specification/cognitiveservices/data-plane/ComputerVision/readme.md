@@ -30,5 +30,6 @@ csharp:
   namespace: Microsoft.Azure.CognitiveServices.Vision.ComputerVision
   output-folder: $(csharp-sdks-folder)/CognitiveServices/dataPlane/Vision/Vision/Generated/ComputerVision
   clear-output-folder: true
+  add-credentials: true
 ```
 
