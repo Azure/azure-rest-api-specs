@@ -50,11 +50,9 @@ function writeContent(content) {
   fs.writeFileSync(logFilepath, content);
 }
 
-//runs the linter on a given swagger spec.
-async function runLinter(readme) {
-    let cmd = 'autorest ' + readme + ' --azure-validator=true --message-format=json';
+//runs the command on a given swagger spec.
+async function runCmd(cmd) {
   console.log(cmd);
-  console.log(`\t- Running Linter.`);
   const {err, stdout, stderr } = await new Promise(res => exec(cmd, { encoding: 'utf8', maxBuffer: 1024 * 1024 * 64 },
     (err, stdout, stderr) => res({ err: err, stdout: stdout, stderr: stderr })));
   let resultObject = [];
@@ -70,7 +68,7 @@ async function runLinter(readme) {
       //console.log('>>>>>> Parsed Result...');
       //console.dir(resultObject, {depth: null, colors: true});
     } catch (e) {
-      console.log(`An error occurred while executing JSON.parse() on the linter output for ${readme}:`);
+      console.log(`An error occurred while executing JSON.parse() on the output for ${cmd}:`);
       console.dir(resultString);
       console.dir(e, { depth: null, colors: true });
     }
@@ -80,7 +78,6 @@ async function runLinter(readme) {
 
 //runs the semantic validator on a given swagger spec.
 function runSemanticValidator(swagger) {
-  console.log('\t- Running Semantic Validator.')
   return oav.validateSpec(swagger, {consoleLogLevel: 'off'}).then(function (validationResult) {
     //console.dir(validationResult, { depth: null, colors: true });
     return validationResult.validateSpec.errors;
@@ -101,7 +98,8 @@ async function runScript() {
    // });
   createLogFile();
   console.log(`The results will be logged here: "${logFilepath}".`);
-  
+
+  console.log('\t- Running Semantic Validator.')
   for (let swagger of swaggersToProcess) {
       const validationErrors = await runSemanticValidator(swagger);
 	  swagger = swagger.split(/\/Microsoft\./gi)[0] + "/readme.md";
@@ -111,11 +109,22 @@ async function runScript() {
 		updateResult(swagger, validationErrors, true);
 	  }
   }
-  
+
+  console.log(`\t- Running Linter.`);
   for (let readme of readmesToProcess) {
-	  console.log(`Configuration file: "${readme}"`);
-      const linterErrors = await runLinter(readme);
+      console.log(`Linter Validation on configuration file: "${readme}"`);
+      let linterCmd = 'autorest ' + readme + ' --azure-validator=true --validation --message-format=json';
+      const linterErrors = await runCmd(linterCmd);
       updateResult(readme, linterErrors, true);
+  }
+
+  console.log(`\t- Running Model Validator.`);
+    //model validator run
+  for (let readme of readmesToProcess) {
+      console.log(`Model Validation on configuration file: "${readme}"`);
+      let modelValCmd = 'autorest --version=2.0.4174 --model-validator --message-format=json ' + readme;
+      const modelValErrors = await runCmd(modelValCmd);
+      updateResult(readme, modelValErrors, true);
   }
   
   //console.dir(finalResult, { depth: null, colors: true });
