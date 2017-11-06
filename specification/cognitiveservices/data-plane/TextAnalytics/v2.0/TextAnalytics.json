@@ -14,7 +14,7 @@
     "hostTemplate": "{AzureRegion}.api.cognitive.microsoft.com",
     "parameters": [
       {
-        "$ref": "../../Common/BasicRegions.json#/parameters/AzureRegion"
+        "$ref": "../../Common/ExtendedRegions.json#/parameters/AzureRegion"
       }
     ]
   },
@@ -105,14 +105,6 @@
             "schema": {
               "$ref": "#/definitions/BatchInput"
             }
-          },
-          {
-            "name": "numberOfLanguagesToDetect",
-            "in": "query",
-            "description": "(Optional. Deprecated) Number of languages to detect. Set to 1 by default. Irrespective of the value, the language with the highest score is returned.",
-            "required": false,
-            "type": "integer",
-            "format": "int32"
           }
         ],
         "responses": {
