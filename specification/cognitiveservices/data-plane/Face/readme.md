@@ -9,6 +9,7 @@ The current release is `release_1_0`.
 ``` yaml
 
 tag: release_1_0
+add-credentials: true
 openapi-type: data-plane
 ```
 # Releases
@@ -30,6 +31,5 @@ csharp:
   namespace: Microsoft.Azure.CognitiveServices.Vision.Face
   output-folder: $(csharp-sdks-folder)/CognitiveServices/dataPlane/Vision/Vision/Generated/Face
   clear-output-folder: true
-  add-credentials: true
 ```
 

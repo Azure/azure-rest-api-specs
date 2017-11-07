@@ -116,6 +116,7 @@ namespace ConsoleApp1
 The current release is `release_2_0`.
 ``` yaml
 tag: release_2_0
+add-credentials: true
 ```
 
 ### Release 2.0
@@ -136,6 +137,5 @@ csharp:
   namespace: Microsoft.Azure.CognitiveServices.Language.TextAnalytics
   output-folder: $(csharp-sdks-folder)/CognitiveServices/dataPlane/Language/Microsoft.CognitiveServices.Language/Generated/TextAnalytics
   clear-output-folder: true
-  add-credentials: true
 ```
 
