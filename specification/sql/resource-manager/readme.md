@@ -46,6 +46,7 @@ input-file:
 - Microsoft.Sql/stable/2014-04-01/backups.json
 - Microsoft.Sql/stable/2014-04-01/capabilities.json
 - Microsoft.Sql/stable/2014-04-01/connectionPolicies.json
+- Microsoft.Sql/stable/2014-04-01/databases.json
 - Microsoft.Sql/stable/2014-04-01/databaseSecurityAlertPolicies.json
 - Microsoft.Sql/stable/2014-04-01/dataMasking.json
 - Microsoft.Sql/stable/2014-04-01/firewallRules.json
@@ -90,6 +91,7 @@ input-file:
 - Microsoft.Sql/stable/2014-04-01/backupLongTermRetentionVaults.json
 - Microsoft.Sql/stable/2014-04-01/backups.json
 - Microsoft.Sql/stable/2014-04-01/connectionPolicies.json
+- Microsoft.Sql/stable/2014-04-01/databases.json
 - Microsoft.Sql/stable/2014-04-01/databaseSecurityAlertPolicies.json
 - Microsoft.Sql/stable/2014-04-01/dataMasking.json
 - Microsoft.Sql/stable/2014-04-01/firewallRules.json
@@ -102,8 +104,8 @@ input-file:
 - Microsoft.Sql/stable/2014-04-01/serviceObjectives.json
 - Microsoft.Sql/stable/2014-04-01/sql.core.json
 - Microsoft.Sql/stable/2014-04-01/usages.json
-- Microsoft.Sql/preview/2015-05-01-preview/blobAuditingPolicies.json
 - Microsoft.Sql/stable/2015-05-01/capabilities.json
+- Microsoft.Sql/preview/2015-05-01-preview/blobAuditingPolicies.json
 - Microsoft.Sql/preview/2015-05-01-preview/encryptionProtectors.json
 - Microsoft.Sql/preview/2015-05-01-preview/failoverGroups.json
 - Microsoft.Sql/preview/2015-05-01-preview/operations.json
@@ -126,6 +128,7 @@ These settings apply only when `--tag=package-2014-04` is specified on the comma
 
 ``` yaml $(tag) == 'package-2014-04'
 input-file:
+- Microsoft.Sql/stable/2014-04-01/databases.json
 - Microsoft.Sql/stable/2014-04-01/firewallRules.json
 - Microsoft.Sql/stable/2014-04-01/importExport.json
 - Microsoft.Sql/stable/2014-04-01/replicationLinks.json
@@ -202,6 +205,7 @@ input-file:
  - ./Microsoft.Sql/stable/2014-04-01/backups.json
  - ./Microsoft.Sql/stable/2014-04-01/capabilities.json
  - ./Microsoft.Sql/stable/2014-04-01/connectionPolicies.json
+ - ./Microsoft.Sql/stable/2014-04-01/databases.json
  - ./Microsoft.Sql/stable/2014-04-01/databaseSecurityAlertPolicies.json
  - ./Microsoft.Sql/stable/2014-04-01/dataMasking.json
  - ./Microsoft.Sql/stable/2014-04-01/deprecated.json
