@@ -495,6 +495,97 @@
         "x-ms-long-running-operation": true
       }
     },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/virtualNetworkGateways/{virtualNetworkGatewayName}/setvpnclientipsecparameters": {
+      "post": {
+        "tags": [
+          "VirtualNetworkGateways"
+        ],
+        "operationId": "VirtualNetworkGateways_SetVpnclientIpsecParameters",
+        "description": "The Set VpnclientIpsecParameters operation sets the vpnclient ipsec policy for P2S client of virtual network gateway  in the specified resource group through Network resource provider.",
+        "parameters": [
+          {
+            "name": "resourceGroupName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the resource group."
+          },
+          {
+            "name": "virtualNetworkGatewayName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the virtual network gateway."
+          },
+          {
+            "name": "vpnclientIpsecParams",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/IPsecParameters"
+            },
+            "description": "Parameters supplied to the Begin Set vpnclient ipsec parameters of Virtual Network Gateway P2S client operation through Network resource provider."
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "202": {
+            "description": "Accepted and the operation will complete asynchronously."
+          },
+          "200": {
+            "description": "Request successful. The operation sets the specificed vpnclient ipsec parameters for P2S client of the virtual network gateway.",
+            "schema": {
+              "$ref": "#/definitions/VirtualNetworkGateway"
+            }
+          }
+        },
+        "x-ms-long-running-operation": true
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/virtualNetworkGateways/{virtualNetworkGatewayName}/getvpnclientipsecparameters": {
+      "get": {
+        "tags": [
+          "VirtualNetworkGateways"
+        ],
+        "operationId": "VirtualNetworkGateways_GetVpnclientIpsecParameters",
+        "description": "The Get VpnclientIpsecParameters operation retrieves information about the vpnclient ipsec policy for P2S client of virtual network gateway in the specified resource group through Network resource provider.",
+        "parameters": [
+          {
+            "name": "resourceGroupName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the resource group."
+          },
+          {
+            "name": "virtualNetworkGatewayName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The virtual network gateway name."
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Request successful. The operation returns the set vpnclient ipsec parameters for P2S client of VirtualNetworkGateway resource.",
+            "schema": {
+              "$ref": "#/definitions/IPsecParameters"
+            }
+          }
+        }
+      }	  
+    },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/connections/{virtualNetworkGatewayConnectionName}": {
       "put": {
         "tags": [
@@ -1222,7 +1313,14 @@
             }
           },
           "description": "VpnClientProtocols for Virtual network gateway."
-        }
+        },
+        "vpnClientIpsecPolicies": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/IpsecPolicy"
+          },
+          "description": "VpnClientIpsecPolicies for virtual network gateway P2S client."
+        }		
       },
       "description": "VpnClientConfiguration for P2S client."
     },
@@ -1829,6 +1927,103 @@
       ],
       "description": "An IPSec Policy configuration for a virtual network gateway connection"
     },
+	"IPsecParameters": {
+      "properties": {
+        "saLifeTimeSeconds": {
+          "type": "integer",
+          "format": "int64",
+          "description": "SA Lifetime in seconds."
+        },
+        "saDataSizeKilobytes": {
+          "type": "integer",
+          "format": "int64",
+          "description": "SA DataSize in kilobytes."
+        },		
+        "ipsecEncryption": {
+          "type": "string",
+          "description": "The IPSec encryption for IPsecParameters. Possible values are: 'GCMAES256', 'GCMAES128', 'AES256' and 'AES128'."
+          "enum": [
+            "GCMAES256",
+            "GCMAES128",
+			"AES256",
+			"AES128"
+          ],
+          "x-ms-enum": {
+            "name": "IpsecEncryption",
+            "modelAsString": true
+          }		  
+        },
+        "ipsecIntegrity": {
+          "type": "string",
+          "description": "The IPSec integrity for IPsecParameters. Possible values are: 'GCMAES256', 'GCMAES128', 'SHA256' and 'SHA1'."
+          "enum": [
+            "GCMAES256",
+            "GCMAES128",
+			"SHA256",
+			"SHA1"
+          ],
+          "x-ms-enum": {
+            "name": "IpsecIntegrity",
+            "modelAsString": true
+          }		  
+        },
+        "ikeEncryption": {
+          "type": "string",
+          "description": "The IKE encryption for IPsecParameters. Possible values are: 'AES256' and 'AES128'."
+          "enum": [
+			"AES256",
+			"AES128"
+          ],
+          "x-ms-enum": {
+            "name": "IkeEncryption",
+            "modelAsString": true
+          }		  
+        },
+        "ikeIntegrity": {
+          "type": "string",
+          "description": "The IPSec integrity for IPsecParameters. Possible values are: 'SHA384', 'SHA256', 'SHA1'."
+          "enum": [
+            "SHA384",
+            "SHA256",
+			"SHA1"
+          ],
+          "x-ms-enum": {
+            "name": "IkeIntegrity",
+            "modelAsString": true
+          }		  
+        },
+		"dhGroup": {
+          "type": "string",
+          "description": "The DhGroup for IPsecParameters. Possible values are: 'DHGroup24', 'ECP384', 'ECP256', 'DHGroup14' and 'DHGroup2'."
+          "enum": [
+            "DHGroup24",
+            "ECP384",
+			"ECP256",
+			"DHGroup14",
+			"DHGroup2"
+          ],
+          "x-ms-enum": {
+            "name": "DhGroup",
+            "modelAsString": true
+          }		  
+        },
+		"pfsGroup": {
+          "type": "string",
+          "description": "The PfsGroup for IPsecParameters. Possible values are: 'ECP384', 'ECP256', 'PFS1', 'PFS2' and 'None'."
+          "enum": [
+            "ECP384",
+            "ECP256",
+			"PFS1",
+			"PFS2",
+			"None"
+          ],
+          "x-ms-enum": {
+            "name": "PfsGroup",
+            "modelAsString": true
+          }		  
+        }
+      }
+    },	
 	"LocalNetworkGatewayPropertiesFormat": {
       "properties": {
         "localNetworkAddressSpace": {
