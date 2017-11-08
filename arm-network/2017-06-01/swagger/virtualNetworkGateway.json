@@ -522,7 +522,7 @@
             "in": "body",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/IPsecParameters"
+              "$ref": "#/definitions/VpnClientIPsecParameters"
             },
             "description": "Parameters supplied to the Begin Set vpnclient ipsec parameters of Virtual Network Gateway P2S client operation through Network resource provider."
           },
@@ -580,7 +580,7 @@
           "200": {
             "description": "Request successful. The operation returns the set vpnclient ipsec parameters for P2S client of VirtualNetworkGateway resource.",
             "schema": {
-              "$ref": "#/definitions/IPsecParameters"
+              "$ref": "#/definitions/VpnClientIPsecParameters"
             }
           }
         }
@@ -1927,103 +1927,130 @@
       ],
       "description": "An IPSec Policy configuration for a virtual network gateway connection"
     },
-	"IPsecParameters": {
+    "VpnClientIPsecParameters": {
       "properties": {
         "saLifeTimeSeconds": {
           "type": "integer",
-          "format": "int64",
-          "description": "SA Lifetime in seconds."
+          "format": "int32",
+          "description": "The IPSec Security Association (also called Quick Mode or Phase 2 SA) lifetime in seconds for P2S client."
         },
         "saDataSizeKilobytes": {
           "type": "integer",
-          "format": "int64",
-          "description": "SA DataSize in kilobytes."
-        },		
+          "format": "int32",
+          "description": "The IPSec Security Association (also called Quick Mode or Phase 2 SA) payload size in KB for P2S client.."
+        },
         "ipsecEncryption": {
           "type": "string",
-          "description": "The IPSec encryption for IPsecParameters. Possible values are: 'GCMAES256', 'GCMAES128', 'AES256' and 'AES128'."
+          "description": "The IPSec encryption algorithm (IKE phase 1).",
           "enum": [
-            "GCMAES256",
+            "None",
+            "DES",
+            "DES3",
+            "AES128",
+            "AES192",
+            "AES256",
             "GCMAES128",
-			"AES256",
-			"AES128"
+            "GCMAES192",
+            "GCMAES256"
           ],
           "x-ms-enum": {
             "name": "IpsecEncryption",
             "modelAsString": true
-          }		  
+          }
         },
         "ipsecIntegrity": {
           "type": "string",
-          "description": "The IPSec integrity for IPsecParameters. Possible values are: 'GCMAES256', 'GCMAES128', 'SHA256' and 'SHA1'."
+          "description": "The IPSec integrity algorithm (IKE phase 1).",
           "enum": [
-            "GCMAES256",
+            "MD5",
+            "SHA1",
+            "SHA256",
             "GCMAES128",
-			"SHA256",
-			"SHA1"
+            "GCMAES192",
+            "GCMAES256"
           ],
           "x-ms-enum": {
             "name": "IpsecIntegrity",
             "modelAsString": true
-          }		  
+          }
         },
         "ikeEncryption": {
           "type": "string",
-          "description": "The IKE encryption for IPsecParameters. Possible values are: 'AES256' and 'AES128'."
+          "description": "The IKE encryption algorithm (IKE phase 2).",
           "enum": [
-			"AES256",
-			"AES128"
+            "DES",
+            "DES3",
+            "AES128",
+            "AES192",
+            "AES256"
           ],
           "x-ms-enum": {
             "name": "IkeEncryption",
             "modelAsString": true
-          }		  
+          }
         },
         "ikeIntegrity": {
           "type": "string",
-          "description": "The IPSec integrity for IPsecParameters. Possible values are: 'SHA384', 'SHA256', 'SHA1'."
+          "description": "The IKE integrity algorithm (IKE phase 2).",
           "enum": [
-            "SHA384",
+            "MD5",
+            "SHA1",
             "SHA256",
-			"SHA1"
+            "SHA384"
           ],
           "x-ms-enum": {
             "name": "IkeIntegrity",
             "modelAsString": true
-          }		  
+          }
         },
-		"dhGroup": {
+        "dhGroup": {
           "type": "string",
-          "description": "The DhGroup for IPsecParameters. Possible values are: 'DHGroup24', 'ECP384', 'ECP256', 'DHGroup14' and 'DHGroup2'."
+          "description": "The DH Groups used in IKE Phase 1 for initial SA.",
           "enum": [
-            "DHGroup24",
+            "None",
+            "DHGroup1",
+            "DHGroup2",
+            "DHGroup14",
+            "DHGroup2048",
+            "ECP256",
             "ECP384",
-			"ECP256",
-			"DHGroup14",
-			"DHGroup2"
+            "DHGroup24"
           ],
           "x-ms-enum": {
             "name": "DhGroup",
             "modelAsString": true
-          }		  
+          }
         },
-		"pfsGroup": {
+        "pfsGroup": {
           "type": "string",
-          "description": "The PfsGroup for IPsecParameters. Possible values are: 'ECP384', 'ECP256', 'PFS1', 'PFS2' and 'None'."
+          "description": "The DH Groups used in IKE Phase 2 for new child SA.",
           "enum": [
-            "ECP384",
+            "None",
+            "PFS1",
+            "PFS2",
+            "PFS2048",
             "ECP256",
-			"PFS1",
-			"PFS2",
-			"None"
+            "ECP384",
+            "PFS24"
           ],
           "x-ms-enum": {
             "name": "PfsGroup",
             "modelAsString": true
-          }		  
+          }
         }
-      }
-    },	
+      },
+      "required": [
+        "saLifeTimeSeconds",
+        "saDataSizeKilobytes",
+        "ipsecEncryption",
+        "ipsecIntegrity",
+        "ikeEncryption",
+        "ikeIntegrity",
+        "dhGroup",
+        "pfsGroup"
+      ],
+      "description": "An IPSec parameters for a virtual network gateway P2S connection."
+    },
 	"LocalNetworkGatewayPropertiesFormat": {
       "properties": {
         "localNetworkAddressSpace": {
