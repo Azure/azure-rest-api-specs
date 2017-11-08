@@ -1366,10 +1366,6 @@
           "type": "string",
           "description": "The kind of the event source.",
           "enum": [ "Microsoft.EventHub", "Microsoft.IoTHub" ]
-        },
-        "properties": {
-          "x-ms-client-flatten": true,
-          "$ref": "#/definitions/EventSourceCommonProperties"
         }
       },
       "required": [
@@ -1497,9 +1493,6 @@
           "$ref": "#/definitions/EventHubEventSourceCommonProperties"
         },
         {
-          "$ref": "#/definitions/AzureEventSourceProperties"
-        },
-        {
           "$ref": "#/definitions/EventSourceCommonProperties"
         }
       ],
@@ -1556,9 +1549,6 @@
         },
         {
           "$ref": "#/definitions/IoTHubEventSourceCommonProperties"
-        },
-        {
-          "$ref": "#/definitions/AzureEventSourceProperties"
         },
         {
           "$ref": "#/definitions/EventSourceCommonProperties"
