@@ -1,0 +1,870 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "ComputeArtifactPublishingServiceClient",
+    "description": "The Compute Artifact Publishing Service Resource Provider Client.",
+    "version": "2017-10-15-preview"
+  },
+  "host": "management.azure.com",
+  "schemes": [
+    "https"
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "produces": [
+    "application/json"
+  ],
+  "security": [
+    {
+      "azure_auth": [
+        "user_impersonation"
+      ]
+    }
+  ],
+  "securityDefinitions": {
+    "azure_auth": {
+      "type": "oauth2",
+      "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
+      "flow": "implicit",
+      "description": "Azure Active Directory OAuth2 Flow",
+      "scopes": {
+        "user_impersonation": "impersonate your user account"
+      }
+    }
+  },
+  "paths": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/sharedVMImages/{sharedVMImageName}": {
+      "put": {
+        "tags": [
+          "SharedVMImages"
+        ],
+        "operationId": "SharedVMImages_CreateOrUpdate",
+        "description": "Creates or updates a shared VM image.",
+        "parameters": [
+		  {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          }, 
+		  {
+            "$ref": "#/parameters/ResourceGroupNameParameter"
+          }, 
+		  {
+            "$ref": "#/parameters/SharedVMImageNameParameter"
+          }, 
+		  {
+            "$ref": "#/parameters/ApiVersionParameter"
+          }, 
+		  {
+            "name": "parameters",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/SharedVMImage"
+            },
+            "description": "SharedVMImage object supplied in the body of the Put SharedVMImage operation."
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": "Created",
+            "schema": {
+              "$ref": "#/definitions/SharedVMImage"
+            }
+          },
+          "202": {
+            "description": "Accepted",
+            "schema": {
+              "$ref": "#/definitions/SharedVMImage"
+            }
+          }
+        },
+        "x-ms-long-running-operation": true
+      },
+      "get": {
+        "tags": [
+          "SharedVMImages"
+        ],
+        "operationId": "SharedVMImages_Get",
+        "description": "Gets information about a shared VM image.",
+        "parameters": [{
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          }, {
+            "$ref": "#/parameters/ResourceGroupNameParameter"
+          }, {
+            "$ref": "#/parameters/SharedVMImageNameParameter"
+          }, {
+            "$ref": "#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/SharedVMImage"
+            }
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "SharedVMImages"
+        ],
+        "operationId": "SharedVMImages_Delete",
+        "description": "Deletes a shared VM image.",
+        "parameters": [{
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          }, {
+            "$ref": "#/parameters/ResourceGroupNameParameter"
+          }, {
+            "$ref": "#/parameters/SharedVMImageNameParameter"
+          }, {
+            "$ref": "#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "202": {
+            "description": "Accepted"
+          },
+          "204": {
+            "description": "If the shared VM image is deleted, this is an expected error code."
+          }
+        },
+        "x-ms-long-running-operation": true
+      }
+    },
+	 "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/sharedvmimages/{sharedVMImageName}/versions/{version}": {
+      "put": {
+        "tags": [
+          "sharedVMImageVersions"
+        ],
+        "operationId": "SharedVMImageVersions_CreateOrUpdate",
+        "description": "Creates or updates a shared VM image version.",
+        "parameters": [{
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          }, {
+            "$ref": "#/parameters/ResourceGroupNameParameter"
+          }, {
+            "$ref": "#/parameters/SharedVMImageNameParameter"
+          }, {
+            "$ref": "#/parameters/SharedVMImageVersionParameter"
+          }, {
+            "$ref": "#/parameters/ApiVersionParameter"
+          }, {
+            "name": "sharedVMImageVersion",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/SharedVMImageVersion"
+            },
+            "description": "SharedVMImageVersion object supplied in the body of the Put SharedVMImageVersion operation."
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": "Created",
+            "schema": {
+              "$ref": "#/definitions/SharedVMImageVersion"
+            }
+          },
+          "202": {
+            "description": "Accepted",
+            "schema": {
+              "$ref": "#/definitions/SharedVMImageVersion"
+            }
+          }
+        },
+        "x-ms-long-running-operation": true
+      },
+      "get": {
+        "tags": [
+          "sharedVMImageVersions"
+        ],
+        "operationId": "SharedVMImageVersions_Get",
+        "description": "Gets information about a shared VM image version.",
+        "parameters": [{
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          }, {
+            "$ref": "#/parameters/ResourceGroupNameParameter"
+          }, {
+            "$ref": "#/parameters/SharedVMImageNameParameter"
+          }, {
+            "$ref": "#/parameters/SharedVMImageVersionParameter"
+          }, {
+            "$ref": "#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/SharedVMImageVersion"
+            }
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "SharedVMImageVersions"
+        ],
+        "operationId": "SharedVMImageVersions_Delete",
+        "description": "Deletes a shared VM image version.",
+        "parameters": [{
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          }, {
+            "$ref": "#/parameters/ResourceGroupNameParameter"
+          }, {
+            "$ref": "#/parameters/SharedVMImageNameParameter"
+          }, {
+            "$ref": "#/parameters/SharedVMImageVersionParameter"
+          }, {
+            "$ref": "#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "202": {
+            "description": "Accepted"
+          },
+          "204": {
+            "description": "If the shared VM image version is deleted, this is an expected error code."
+          }
+        },
+        "x-ms-long-running-operation": true
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/sharedVMImages": {
+      "get": {
+        "tags": [
+          "SharedVMImages"
+        ],
+        "operationId": "SharedVMImages_ListByResourceGroup",
+        "description": "Lists all the shared VM images under a resource group.",
+        "parameters": [{
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          }, {
+            "$ref": "#/parameters/ResourceGroupNameParameter"
+          }, {
+            "$ref": "#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/SharedVMImageList"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.Compute/sharedVMImages": {
+      "get": {
+        "tags": [
+          "SharedVMImages"
+        ],
+        "operationId": "SharedVMImages_ListBySubscription",
+        "description": "Lists all the shared VM image under a subscription.",
+        "parameters": [{
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          }, {
+            "$ref": "#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/SharedVMImageList"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    }
+  },
+  "definitions": {
+    "Resource": {
+      "description": "The Resource model definition.",
+      "properties": {
+        "id": {
+          "readOnly": true,
+          "type": "string",
+          "description": "Resource Id"
+        },
+        "name": {
+          "readOnly": true,
+          "type": "string",
+          "description": "Resource name"
+        },
+        "type": {
+          "readOnly": true,
+          "type": "string",
+          "description": "Resource type"
+        },
+        "location": {
+          "type": "string",
+          "description": "Resource location"
+        },
+        "tags": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          },
+          "description": "Resource tags"
+        }
+      },
+      "required": [
+        "location"
+      ],
+      "x-ms-azure-resource": true
+    },
+    "SharedVMImage": {
+      "properties": {
+        "properties": {
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/SharedVMImageProperties"
+        }
+      },
+      "allOf": [{
+          "$ref": "#/definitions/Resource"
+        }
+      ],
+      "description": "Shared VM image resource."
+    },
+
+    "SharedVMImageList": {
+      "properties": {
+        "value": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/SharedVMImage"
+          },
+          "description": "A list of shared VM images."
+        },
+        "nextLink": {
+          "type": "string",
+          "description": "the uri to fetch the next page of shared VM images. Call ListNext() with this to fetch the next page of shared VM images."
+        }
+      },
+      "required": [
+        "value"
+      ],
+      "description": "The List shared VM images operation response."
+    },
+    "SharedVMImageProperties": {
+      "properties": {
+        "label": {
+          "type": "string",
+          "description": "Shared VM image label, required in RDFE, Max-Lenth = 100."
+        },
+        "description": {
+          "type": "string",
+          "description": "Shared VM image description, Max-Lenth = 1024."
+        },
+        "language": {
+          "type": "string",
+          "description": "Language used for the shared VM image."
+        },
+        "eula": {
+          "type": "string",
+          "description": "Eula agreement of the shared VM image."
+        },
+        "privacyUri": {
+          "type": "string",
+          "description": "Privacy agreement URI of the shared VM image, must be a valid URI."
+        },
+        "osType": {
+          "type": "string",
+          "description": "The Operating System type of the shared VM image.",
+          "enum": [
+            "Windows",
+            "Linux"
+          ],
+          "x-ms-enum": {
+            "name": "OSTypes",
+            "modelAsString": false
+          }
+        },
+        "identifier": {
+          "$ref": "#/definitions/SharedVMImageIdentifier",
+          "description": "Properties of the image identifier."
+        },
+        "recommended": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "description": "Suggest the disallowed usage for the image, such as vmSkus."
+        },
+        "disallowed": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "description": "Suggest the disallowed usage for the image, such as vmSkus."
+        },
+        "classicComputeProfile": {
+          "$ref": "#/definitions/SharedVMImageClassicComputeProfile",
+          "description": "Properties of the image classic compute profile."
+        },
+        "purchasePlan": {
+          "$ref": "#/definitions/SharedVMImagePurchasePlan",
+          "description": "Properties of the image purchase plan."
+        },
+        "provisioningState": {
+          "readOnly": true,
+          "type": "string"
+        },
+      },
+      "required": [
+        "label",
+        "osType",
+		"identifier",
+		"classicComputeProfile"
+      ],
+      "description": "Shared VM image resource properties."
+    },
+    "SharedVMImageIdentifier": {
+      "properties": {
+        "publisher": {
+          "type": "string",
+          "description": "Publisher name for which the image is being published."
+        },
+        "offer": {
+          "type": "string",
+          "description": "Offer name for which the image is being published."
+        },
+        "sku": {
+          "type": "string",
+          "description": "Sku name for which the image is being published."
+        }
+      },
+      "required": [
+        "publisher",
+        "ofer",
+        "sku"
+      ],
+      "description": "Shared VM image identifier."
+    },
+    "SharedVMImageClassicComputeProfile": {
+      "properties": {
+        "imageType": {
+          "type": "string",
+          "description": "The image type.",
+          "enum": [
+            "VMImage",
+            "OSImage"
+          ],
+          "x-ms-enum": {
+            "name": "ImageTypes",
+            "modelAsString": false
+          }
+        },
+        "imageFamily": {
+          "type": "string",
+          "description": "ImageFamily for categorization in classic portal."
+        },
+        "iconUri": {
+          "type": "string",
+          "description": "IconUri of the image, must be a valid URI."
+        },
+        "smallIconUri": {
+          "type": "string",
+          "description": "Small thumbnail IconUri of the image, must be a valid URI."
+        },
+      },
+      "required": [
+        "imageType"
+      ],
+      "description": "Shared VM image classic compute profile."
+    },
+    "SharedVMImagePurchasePlan": {
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "Purchase plan name."
+        },
+        "publisher": {
+          "type": "string",
+          "description": "Publisher name."
+        },
+        "product": {
+          "type": "string",
+          "description": "Product name."
+        }
+      },
+      "required": [
+      ],
+      "description": "Shared VM image purchase plan."
+    },
+	"SharedVMImageVersion": {
+      "properties": {
+        "properties": {
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/SharedVMImageVersionProperties"
+        }
+      },
+      "allOf": [{
+          "$ref": "#/definitions/Resource"
+        }
+      ],
+      "description": "Shared VM image verison resource."
+    },
+	 "SharedVMImageVersionProperties": {
+      "properties": {
+        "classicComputeProfile": {
+          "$ref": "#/definitions/SharedVMImageVersionClassicComputeProfile",
+          "description": "Properties of the image version classic compute profile."
+        },
+        "storageProfile": {
+          "$ref": "#/definitions/SharedVMImageVersionStorageProfile",
+          "description": "Properties of the image version storage profile."
+        },
+		"publishingProfile": {
+          "$ref": "#/definitions/SharedVMImageVersionPublishingProfile",
+          "description": "Properties of the image version publishing profile."
+        },
+		"replicationStatus": {
+          "$ref": "#/definitions/ReplicationStatus",
+          "description": "Properties of the image version replication status."
+        },
+        "provisioningState": {
+          "readOnly": true,
+          "type": "string"
+        },
+      },
+      "required": [
+        "publishingProfile",
+		"storageProfile",
+		"classicComputeProfile"
+      ],
+      "description": "Shared VM image version resource properties."
+    },
+	"SharedVMImageVersionClassicComputeProfile": {
+      "properties": {
+        "showInGui": {
+          "type": "boolean",
+          "description": "Used by portal to show the image in dropdown."
+        },
+        "imageName": {
+          "type": "string",
+          "description": "ImageName for classic compute. If not specified we publish the image with Guid name and hide the image in listing in classic compute."
+        }
+      },
+      "required": [
+      ],
+      "description": "Shared VM image version classic compute profile."
+    },
+	"SharedVMImageVersionStorageProfile": {
+      "properties": {
+        "osDiskImage": {
+          "$ref": "#/definitions/CapsOSDiskImage",
+          "description": "Properties of the OS disk image."
+        },
+        "dataDiskImages": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/CapsDataDiskImage"
+          },
+          "description": "An array which contains the dataDiskImage of the image version. This should not be present if the image is created to publish as OSImage in RDFE."
+        }
+      },
+      "required": [
+	    "osDiskImage"
+      ],
+      "description": "Shared VM image version Storage Profile."
+    },
+	"CapsOSDiskImage": {
+      "properties": {
+        "hostCaching": {
+          "type": "string",
+          "description": "The hostCaching type.",
+          "enum": [
+            "ReadOnly",
+            "ReadWrite",
+			"None"
+          ],
+          "x-ms-enum": {
+            "name": "HostCachingTypes",
+            "modelAsString": false
+          }
+        },
+        "sourceVhdUri": {
+          "type": "string",
+          "description": "Blob uri of the source os disk blob."
+        },
+        "sizeInGB": {
+          "type": "integer",
+          "format": "int32",
+          "description": "OS disk image size."
+        }
+      },
+      "required": [
+        "sourceVhdUri"
+      ],
+      "description": "Shared VM image verison os disk image properties."
+    },
+	"CapsDataDiskImage": {
+      "properties": {
+        "hostCaching": {
+          "type": "string",
+          "description": "The hostCaching type.",
+          "enum": [
+            "ReadOnly",
+            "ReadWrite",
+			"None"
+          ],
+          "x-ms-enum": {
+            "name": "HostCachingTypes",
+            "modelAsString": false
+          }
+        },
+        "sourceVhdUri": {
+          "type": "string",
+          "description": "Blob uri of the source os disk blob."
+        },
+        "sizeInGB": {
+          "type": "integer",
+          "format": "int32",
+          "description": "OS disk image size."
+        },
+		"lun": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Lun number of the data disk."
+        }
+      },
+      "required": [
+        "sourceVhdUri",
+		"lun"
+      ],
+      "description": "Shared VM image verison data disk image properties."
+    },
+	"SharedVMImageVersionPublishingProfile": {
+      "properties": {
+        "regions": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "description": "List of ARM regions where the image version is published to."
+        },
+		"global": {
+          "type": "boolean",
+          "description": "Specify that this image is global."
+        }, 
+		"shareType": {
+          "type": "string",
+          "description": "Control the image availiability in the given region or globally for 'global'.",
+          "enum": [
+            "Public",
+            "Private",
+			"EA",
+			"MSDN"
+          ],
+          "x-ms-enum": {
+            "name": "ShareTypes",
+            "modelAsString": false
+          }
+        }
+      },
+      "required": [
+	    "regions",
+		"shareType"
+      ],
+      "description": "Shared VM image version publishing profile."
+    },
+	"ReplicationStatus": {
+      "properties": {
+        "summary": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/RegionReplicationStatus"
+          },
+          "description": "Replication status for all the regions."
+        }, 
+		"aggregatedState": {
+          "type": "string",
+          "description": "Aggregated status of the image, we only show Unknown,InProgress,Completed,Failed",
+          "enum": [
+            "Unknown",
+            "InProgress",
+			"Completed",
+			"Failed"
+          ],
+          "x-ms-enum": {
+            "name": "AggregatedStates",
+            "modelAsString": false
+          }
+        }
+      },
+      "description": "Shared VM image version replication status."
+    },
+	"RegionReplicationStatus": {
+      "properties": {
+        "state": {
+          "type": "string",
+          "description": "State of the image in that region.",
+          "enum": [
+            "UnKnown",
+            "Replicating",
+			"Completed",
+			"Failed"
+          ],
+          "x-ms-enum": {
+            "name": "ReplicationStates",
+            "modelAsString": false
+          }
+        },
+        "region": {
+          "type": "string",
+          "description": "Region for which this object contains the status."
+        },
+        "progress": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Progress of the replication."
+        },
+		"details": {
+          "type": "string",
+          "description": "Details of the state ."
+        }
+      },
+      "description": "Region replication status."
+    },
+    "ApiErrorBase": {
+      "properties": {
+        "code": {
+          "type": "string",
+          "description": "The error code."
+        },
+        "target": {
+          "type": "string",
+          "description": "The target of the particular error."
+        },
+        "message": {
+          "type": "string",
+          "description": "The error message."
+        }
+      },
+      "description": "Api error base."
+    },
+    "InnerError": {
+      "properties": {
+        "exceptiontype": {
+          "type": "string",
+          "description": "The exception type."
+        },
+        "errordetail": {
+          "type": "string",
+          "description": "The internal error message or exception dump."
+        }
+      },
+      "description": "Inner error details."
+    },
+    "ApiError": {
+      "properties": {
+        "details": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ApiErrorBase"
+          },
+          "description": "The Api error details"
+        },
+        "innererror": {
+          "$ref": "#/definitions/InnerError",
+          "description": "The Api inner error"
+        },
+        "code": {
+          "type": "string",
+          "description": "The error code."
+        },
+        "target": {
+          "type": "string",
+          "description": "The target of the particular error."
+        },
+        "message": {
+          "type": "string",
+          "description": "The error message."
+        }
+      },
+      "description": "Api error."
+    },
+    "OperationStatusResponse": {
+      "properties": {
+        "name": {
+          "readOnly": true,
+          "type": "string",
+          "description": "Operation ID"
+        },
+        "status": {
+          "readOnly": true,
+          "type": "string",
+          "description": "Operation status"
+        },
+        "startTime": {
+          "readOnly": true,
+          "type": "string",
+          "format": "date-time",
+          "description": "Start time of the operation"
+        },
+        "endTime": {
+          "readOnly": true,
+          "type": "string",
+          "format": "date-time",
+          "description": "End time of the operation"
+        },
+        "error": {
+          "readOnly": true,
+          "$ref": "#/definitions/ApiError",
+          "description": "Api error"
+        }
+      },
+      "description": "Operation status response"
+    }
+  },
+  "parameters": {
+    "SubscriptionIdParameter": {
+      "name": "subscriptionId",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "description": "Subscription credentials which uniquely identify Microsoft Azure subscription. The subscription ID forms part of the URI for every service call."
+    },
+    "ApiVersionParameter": {
+      "name": "api-version",
+      "in": "query",
+      "required": true,
+      "type": "string",
+      "description": "Client Api Version."
+    },
+    "ResourceGroupNameParameter": {
+      "name": "resourceGroupName",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "description": "The name of the resource group.",
+      "x-ms-parameter-location": "method"
+    },
+    "SharedVMImageNameParameter": {
+      "name": "sharedVMImageName",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "description": "The name of the shared VM image within the given subscription and resource group.",
+      "x-ms-parameter-location": "method"
+    },
+    "SharedVMImageVersionParameter": {
+      "name": "version",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "description": "The name of the shared VM image version within the given subscription and resource group.",
+      "x-ms-parameter-location": "method"
+    }
+  }
+}
