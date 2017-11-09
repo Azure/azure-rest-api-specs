@@ -48,19 +48,14 @@
         "consumes": [
           "application/json"
         ],
+        "produces": [
+          "application/json"
+        ],
         "responses": {
           "200": {
             "description": "A successful call returns an array of the most similar faces represented in faceId if the input parameter is faceIds or persistedFaceId if the input parameter is faceListId.",
             "schema": {
               "$ref": "#/definitions/SimilarFaceResults"
-            },
-            "examples": {
-              "application/json": [
-                {
-                  "persistedFaceId": "015839fb-fbd9-4f79-ace9-7675fc2f1dd9",
-                  "confidence": 0.82
-                }
-              ]
             }
           },
           "default": {
@@ -70,9 +65,11 @@
             }
           }
         },
-        "produces": [
-          "application/json"
-        ]
+        "x-ms-examples": {
+          "Find similar results example": {
+            "$ref": "./examples/FindSimilar.json"
+          }
+        }
       }
     },
     "/group": {
@@ -93,30 +90,14 @@
         "consumes": [
           "application/json"
         ],
+        "produces": [
+          "application/json"
+        ],
         "responses": {
           "200": {
             "description": "A successful call returns one or more groups of similar faces (rank by group size) and a messyGroup.",
             "schema": {
               "$ref": "#/definitions/GroupResponse"
-            },
-            "examples": {
-              "application/json": {
-                "groups": [
-                  [
-                    "c5c24a82-6845-4031-9d5d-978df9175426",
-                    "015839fb-fbd9-4f79-ace9-7675fc2f1dd9",
-                    "fce92aed-d578-4d2e-8114-068f8af4492e",
-                    "b64d5e15-8257-4af2-b20a-5a750f8940e7"
-                  ],
-                  [
-                    "65d083d4-9447-47d1-af30-b626144bf0fb",
-                    "30ea1073-cc9e-4652-b1e3-d08fb7b95315"
-                  ]
-                ],
-                "messyGroup": [
-                  "be386ab3-af91-4104-9e6d-4dae4c9fddb7"
-                ]
-              }
             }
           },
           "default": {
@@ -126,9 +107,11 @@
             }
           }
         },
-        "produces": [
-          "application/json"
-        ]
+        "x-ms-examples": {
+          "Group example": {
+            "$ref": "./examples/Group.json"
+          }
+        }
       }
     },
     "/identify": {
@@ -149,33 +132,14 @@
         "consumes": [
           "application/json"
         ],
+        "produces": [
+          "application/json"
+        ],
         "responses": {
           "200": {
             "description": "A successful call returns the identified candidate person(s) for each query face.",
             "schema": {
               "$ref": "#/definitions/IdentifyResult"
-            },
-            "examples": {
-              "application/json": [
-                {
-                  "faceId": "c5c24a82-6845-4031-9d5d-978df9175426",
-                  "candidates": [
-                    {
-                      "personId": "25985303-c537-4467-b41d-bdb45cd95ca1",
-                      "confidence": 0.92
-                    }
-                  ]
-                },
-                {
-                  "faceId": "65d083d4-9447-47d1-af30-b626144bf0fb",
-                  "candidates": [
-                    {
-                      "personId": "2ae4935b-9659-44c3-977f-61fac20d0538",
-                      "confidence": 0.89
-                    }
-                  ]
-                }
-              ]
             }
           },
           "default": {
@@ -185,52 +149,11 @@
             }
           }
         },
-        "produces": [
-          "application/json"
-        ]
-      }
-    },
-    "/verify?overload=persongroup": {
-      "post": {
-        "description": "Verify whether two faces belong to a same person. Compares a face Id with a Person Id",
-        "operationId": "Face_VerifyWithPersonGroup",
-        "parameters": [
-          {
-            "name": "body",
-            "in": "body",
-            "required": true,
-            "x-ms-client-flatten": true,
-            "schema": {
-              "$ref": "#/definitions/VerifyPersonGroupRequest"
-            }
+        "x-ms-examples": {
+          "Identiy example": {
+            "$ref": "./examples/Identify.json"
           }
-        ],
-        "consumes": [
-          "application/json"
-        ],
-        "responses": {
-          "200": {
-            "description": "A successful call returns the verification result.",
-            "schema": {
-              "$ref": "#/definitions/VerifyResult"
-            },
-            "examples": {
-              "application/json": {
-                "isIdentical": true,
-                "confidence": 0.9
-              }
-            }
-          },
-          "default": {
-            "description": "Error response.",
-            "schema": {
-              "$ref": "#/definitions/APIError"
-            }
-          }
-        },
-        "produces": [
-          "application/json"
-        ]
+        }
       }
     },
     "/verify": {
@@ -251,17 +174,14 @@
         "consumes": [
           "application/json"
         ],
+        "produces": [
+          "application/json"
+        ],
         "responses": {
           "200": {
             "description": "A successful call returns the verification result.",
             "schema": {
               "$ref": "#/definitions/VerifyResult"
-            },
-            "examples": {
-              "application/json": {
-                "isIdentical": true,
-                "confidence": 0.9
-              }
             }
           },
           "default": {
@@ -271,9 +191,11 @@
             }
           }
         },
-        "produces": [
-          "application/json"
-        ]
+        "x-ms-examples": {
+          "Verify example": {
+            "$ref": "./examples/Verify.json"
+          }
+        }
       }
     },
     "/persongroups/{personGroupId}/persons": {
@@ -301,16 +223,14 @@
         "consumes": [
           "application/json"
         ],
+        "produces": [
+          "application/json"
+        ],
         "responses": {
           "200": {
             "description": "A successful call returns a new personId created.",
             "schema": {
               "$ref": "#/definitions/CreatePersonResult"
-            },
-            "examples": {
-              "application/json": {
-                "personId": "25985303-c537-4467-b41d-bdb45cd95ca1"
-              }
             }
           },
           "default": {
@@ -320,9 +240,11 @@
             }
           }
         },
-        "produces": [
-          "application/json"
-        ]
+        "x-ms-examples": {
+          "Create person group example": {
+            "$ref": "./examples/CreatePersonGroup.json"
+          }
+        }
       },
       "get": {
         "description": "List all persons in a person group, and retrieve person information (including personId, name, userData and persistedFaceIds of registered faces of the person).",
@@ -1172,6 +1094,49 @@
     }
   },
   "x-ms-paths": {
+    "/verify?overload=persongroup": {
+      "post": {
+        "description": "Verify whether two faces belong to a same person. Compares a face Id with a Person Id",
+        "operationId": "Face_VerifyWithPersonGroup",
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "x-ms-client-flatten": true,
+            "schema": {
+              "$ref": "#/definitions/VerifyPersonGroupRequest"
+            }
+          }
+        ],
+        "consumes": [
+          "application/json"
+        ],
+        "responses": {
+          "200": {
+            "description": "A successful call returns the verification result.",
+            "schema": {
+              "$ref": "#/definitions/VerifyResult"
+            },
+            "examples": {
+              "application/json": {
+                "isIdentical": true,
+                "confidence": 0.9
+              }
+            }
+          },
+          "default": {
+            "description": "Error response.",
+            "schema": {
+              "$ref": "#/definitions/APIError"
+            }
+          }
+        },
+        "produces": [
+          "application/json"
+        ]
+      }
+    },
     "/detect?overload=url": {
       "post": {
         "description": "Detect human faces in an image and returns face locations, and optionally with faceIds, landmarks, and attributes.",
@@ -2426,10 +2391,6 @@
     },
     "SimilarFaceResult": {
       "type": "object",
-      "required": [
-        "faceId",
-        "persistedFaceId"
-      ],
       "description": "Response body for find similar face operation.",
       "properties": {
         "faceId": {
