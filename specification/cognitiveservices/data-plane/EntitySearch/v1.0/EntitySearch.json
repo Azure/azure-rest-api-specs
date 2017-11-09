@@ -5,6 +5,23 @@
     "description": "The Entity Search API lets you send a search query to Bing and get back search results that include entities and places. Place results include restaurants, hotel, or other local businesses. For places, the query can specify the name of the local business or it can ask for a list (for example, restaurants near me). Entity results include persons, places, or things. Place in this context is tourist attractions, states, countries, etc.",
     "version": "1.0"
   },
+  "parameters": {
+    "x-bingapis-sdk": {
+      "name": "X-BingApis-SDK",
+      "description": "Activate swagger compliance",
+      "x-ms-parameter-location": "method",
+      "required": true,
+      "type": "string",
+      "in": "header",
+      "x-ms-enum": {
+        "name": "XBingApisSDK",
+        "modelAsString": true
+      },
+      "enum": [
+        "true"
+      ]
+    }
+  },
   "host": "api.cognitive.microsoft.com",
   "schemes": [
     "https"
@@ -18,19 +35,11 @@
       "name": "Ocp-Apim-Subscription-Key",
       "type": "apiKey",
       "in": "header"
-    },
-    "apiKeyQuery": {
-      "name": "subscription-key",
-      "type": "apiKey",
-      "in": "query"
     }
   },
   "security": [
     {
       "apiKeyHeader": []
-    },
-    {
-      "apiKeyQuery": []
     }
   ],
   "paths": {
@@ -42,6 +51,9 @@
           "EntitySearch"
         ],
         "parameters": [
+          {
+            "$ref": "#/parameters/x-bingapis-sdk"
+          },
           {
             "name": "Accept",
             "in": "header",
@@ -110,7 +122,8 @@
             "in": "query",
             "description": "The market where the results come from. You are strongly encouraged to always specify the market, if known. Specifying the market helps Bing route the request and return an appropriate and optimal response. This parameter and the cc query parameter are mutually exclusive—do not specify both.",
             "required": false,
-            "type": "string"
+            "type": "string",
+            "default": "en-us"
           },
           {
             "name": "q",
@@ -134,7 +147,7 @@
               ],
               "x-ms-enum": {
                 "name": "AnswerType",
-                "modelAsString": false
+                "modelAsString": true
               }
             },
             "collectionFormat": "csv"
@@ -153,7 +166,7 @@
               ],
               "x-ms-enum": {
                 "name": "ResponseFormat",
-                "modelAsString": false
+                "modelAsString": true
               }
             },
             "collectionFormat": "csv"
@@ -171,7 +184,7 @@
             ],
             "x-ms-enum": {
               "name": "SafeSearch",
-              "modelAsString": false
+              "modelAsString": true
             }
           },
           {
@@ -195,6 +208,11 @@
               "$ref": "#/definitions/ErrorResponse"
             }
           }
+        },
+        "x-ms-examples": {
+            "Successful query": {
+                "$ref": "./examples//SuccessfulQueryRequest.json"
+            }
         }
       }
     }
@@ -227,6 +245,7 @@
       }
     },
     "Response": {
+      "description": "Defines a response. All schemas that could be returned at the root of a response should inherit from this",
       "allOf": [
         {
           "$ref": "#/definitions/Identifiable"
@@ -308,7 +327,7 @@
           ],
           "x-ms-enum": {
             "name": "EntityQueryScenario",
-            "modelAsString": false
+            "modelAsString": true
           }
         },
         "value": {
@@ -356,6 +375,7 @@
       }
     },
     "Identifiable": {
+      "description": "Defines the identity of a resource.",
       "allOf": [
         {
           "$ref": "#/definitions/ResponseBase"
@@ -364,6 +384,7 @@
       "type": "object",
       "properties": {
         "id": {
+          "description": "A String identifier.",
           "readOnly": true,
           "type": "string"
         }
@@ -537,7 +558,7 @@
           ],
           "x-ms-enum": {
             "name": "ErrorCode",
-            "modelAsString": false
+            "modelAsString": true
           }
         },
         "subCode": {
@@ -559,7 +580,7 @@
           ],
           "x-ms-enum": {
             "name": "ErrorSubCode",
-            "modelAsString": false
+            "modelAsString": true
           }
         },
         "message": {
@@ -637,7 +658,7 @@
           ],
           "x-ms-enum": {
             "name": "EntityScenario",
-            "modelAsString": false
+            "modelAsString": true
           }
         },
         "entityTypeHints": {
@@ -699,7 +720,7 @@
             ],
             "x-ms-enum": {
               "name": "EntityType",
-              "modelAsString": false
+              "modelAsString": true
             }
           }
         },
@@ -707,6 +728,21 @@
           "description": "A display version of the entity hint. For example, if entityTypeHints is Artist, this field may be set to American Singer.",
           "readOnly": true,
           "type": "string"
+        }
+      }
+    },
+    "MovieTheater": {
+      "allOf": [
+        {
+          "$ref": "#/definitions/EntertainmentBusiness"
+        }
+      ],
+      "type": "object",
+      "properties": {
+        "screenCount": {
+          "readOnly": true,
+          "type": "integer",
+          "format": "int32"
         }
       }
     },
@@ -757,6 +793,52 @@
           "format": "int32"
         }
       }
+    },
+    "CivicStructure": {
+      "allOf": [
+        {
+          "$ref": "#/definitions/Place"
+        }
+      ],
+      "type": "object"
+    },
+    "LocalBusiness": {
+      "allOf": [
+        {
+          "$ref": "#/definitions/Place"
+        }
+      ],
+      "type": "object",
+      "properties": {
+        "priceRange": {
+          "description": "$$.",
+          "readOnly": true,
+          "type": "string"
+        },
+        "panoramas": {
+          "readOnly": true,
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ImageObject"
+          }
+        },
+        "isPermanentlyClosed": {
+          "readOnly": true,
+          "type": "boolean"
+        },
+        "tagLine": {
+          "readOnly": true,
+          "type": "string"
+        }
+      }
+    },
+    "TouristAttraction": {
+      "allOf": [
+        {
+          "$ref": "#/definitions/Place"
+        }
+      ],
+      "type": "object"
     },
     "PostalAddress": {
       "description": "Defines a postal address.",
@@ -821,6 +903,24 @@
         }
       }
     },
+    "Airport": {
+      "allOf": [
+        {
+          "$ref": "#/definitions/CivicStructure"
+        }
+      ],
+      "type": "object",
+      "properties": {
+        "iataCode": {
+          "readOnly": true,
+          "type": "string"
+        },
+        "icaoCode": {
+          "readOnly": true,
+          "type": "string"
+        }
+      }
+    },
     "License": {
       "description": "Defines the license under which the text or photo may be used.",
       "allOf": [
@@ -834,6 +934,14 @@
       "allOf": [
         {
           "$ref": "#/definitions/Intangible"
+        }
+      ],
+      "type": "object"
+    },
+    "EntertainmentBusiness": {
+      "allOf": [
+        {
+          "$ref": "#/definitions/LocalBusiness"
         }
       ],
       "type": "object"
@@ -927,6 +1035,72 @@
           "description": "Indicates whether this provider's attribution is optional.",
           "readOnly": true,
           "type": "boolean"
+        }
+      }
+    },
+    "FoodEstablishment": {
+      "allOf": [
+        {
+          "$ref": "#/definitions/LocalBusiness"
+        }
+      ],
+      "type": "object"
+    },
+    "LodgingBusiness": {
+      "allOf": [
+        {
+          "$ref": "#/definitions/LocalBusiness"
+        }
+      ],
+      "type": "object"
+    },
+    "Restaurant": {
+      "allOf": [
+        {
+          "$ref": "#/definitions/FoodEstablishment"
+        }
+      ],
+      "type": "object",
+      "properties": {
+        "acceptsReservations": {
+          "readOnly": true,
+          "type": "boolean"
+        },
+        "reservationUrl": {
+          "readOnly": true,
+          "type": "string"
+        },
+        "servesCuisine": {
+          "readOnly": true,
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "menuUrl": {
+          "readOnly": true,
+          "type": "string"
+        }
+      }
+    },
+    "Hotel": {
+      "allOf": [
+        {
+          "$ref": "#/definitions/LodgingBusiness"
+        }
+      ],
+      "type": "object",
+      "properties": {
+        "hotelClass": {
+          "readOnly": true,
+          "type": "string"
+        },
+        "amenities": {
+          "readOnly": true,
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
         }
       }
     }

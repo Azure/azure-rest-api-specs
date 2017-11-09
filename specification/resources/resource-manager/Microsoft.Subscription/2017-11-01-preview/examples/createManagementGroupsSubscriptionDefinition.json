@@ -1,0 +1,38 @@
+{
+  "parameters": {
+    "scope": "providers/Microsoft.Management/managementGroups/d7bd0f12-2920-450e-a54a-4c35d851a3fc",
+    "subscriptionDefinitionName": "MySubscriptionDefinitionName",
+    "api-version": "2017-11-01-preview",
+    "body": {
+      "properties": {
+        "subscriptionDisplayName": "My Azure Subscription Name",
+        "offerType": "MS-AZR-0017P"
+      }
+    }
+  },
+  "responses": {
+    "202": {
+      "headers": {
+        "Location": "https://management.azure.com/providers/Microsoft.Management/managementGroups/d7bd0f12-2920-450e-a54a-4c35d851a3fc/providers/Microsoft.Subscription/subscriptionOperations/aeb76128-ebde-4f5a-a9ed-e7bbf2dbc994?api-version=2017-11-01",
+        "Retry-After": "60"
+      }
+    },
+    "200": {
+      "body": {
+        "id": "/providers/Microsoft.Management/managementGroups/d7bd0f12-2920-450e-a54a-4c35d851a3fc/providers/Microsoft.Subscription/subscriptionDefinitions/MySubscriptionDefinitionName",
+        "type": "SubscriptionDefinition",
+        "name": "MySubscriptionDefinitionName",
+        "properties": {
+          "subscriptionId": "0ebc0024-9459-448b-aef4-6617b6f8d217",
+          "subscriptionTenantId": "9735e710-7fd3-4c29-890d-052bffa591fd",
+          "subscriptionDisplayName": "My Azure Subscription Name",
+          "offerType": "MS-AZR-0017P",
+          "groupId": "/providers/Microsoft.Management/managementGroups/d7bd0f12-2920-450e-a54a-4c35d851a3fc",
+          "groupTenantId": "e65cb761-88a2-4419-bbab-c29371cfea87",
+          "userCancellationRequested": false,
+          "etag": "somestring"
+        }
+      }
+    }
+  }
+}

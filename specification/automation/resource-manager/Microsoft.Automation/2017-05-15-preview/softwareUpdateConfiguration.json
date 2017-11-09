@@ -1,0 +1,213 @@
+{
+  "swagger": "2.0",
+
+  "info": {
+    "title": "Update Management API",
+    "description": "APIs for managing software update configurations.",
+    "contact": {
+      "name": "Mohamed Enein"
+    },
+    "version": "2017-05-15-preview"
+  },
+
+  "consumes": [ "application/json" ],
+
+  "produces": [ "application/json" ],
+
+  "schemes": [ "https" ],
+
+  "host": "management.azure.com",
+
+  "basePath": "/",
+
+  "security": [
+    {
+      "azure_auth": [
+        "user_impersonation"
+      ]
+    }
+  ],
+  "securityDefinitions": {
+    "azure_auth": {
+      "type": "oauth2",
+      "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
+      "flow": "implicit",
+      "description": "Azure Active Directory OAuth2 Flow",
+      "scopes": {
+        "user_impersonation": "impersonate your user account"
+      }
+    }
+  },
+
+  "paths": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Automation/automationAccounts/{automationAccountName}/softwareUpdateConfigurations/{softwareUpdateConfigurationName}": {
+      "parameters": [
+        {
+          "$ref": "./definitions.json#/parameters/subscriptionId"
+        },
+        {
+          "$ref": "./definitions.json#/parameters/resourceGroupName"
+        },
+        {
+          "$ref": "./definitions.json#/parameters/automationAccountName"
+        },
+        {
+          "$ref": "./definitions.json#/parameters/softwareUpdateConfigurationName"
+        },
+        {
+          "$ref": "./definitions.json#/parameters/apiVersion"
+        },
+        {
+          "$ref": "./definitions.json#/parameters/clientRequestId"
+        }
+      ],
+
+      "put": {
+        "tags": [ "Software Update Configuration" ],
+        "description": "Create a new software update configuration with the name given in the URI.",
+        "externalDocs": {
+          "url": "http://aka.ms/azureautomationsdk/softwareupdateconfigurationoperations"
+        },
+        "x-ms-examples": {
+          "Create software update configuration": { "$ref": "./examples/softwareUpdateConfiguration/createSoftwareUpdateConfiguration.json" }
+        },
+        "operationId": "softwareUpdateConfigurations_Create",
+        "parameters": [
+          {
+            "name": "parameters",
+            "description": "Request body.",
+            "required": true,
+            "in": "body",
+            "schema": {
+              "$ref": "./definitions.json#/definitions/softwareUpdateConfiguration"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Software update configuration with the same name and properties already exists.",
+            "schema": {
+              "$ref": "./definitions.json#/definitions/softwareUpdateConfiguration"
+            }
+          },
+          "201": {
+            "description": "Software update configuration is created.",
+            "schema": {
+              "$ref": "./definitions.json#/definitions/softwareUpdateConfiguration"
+            }
+          },
+          "400": {
+            "description": "Bad request."
+          },
+          "404": {
+            "description": "Resource group or automation account does not exist."
+          },
+          "409": {
+            "description": "A software update configuration with different properties and the same name already exist."
+          }
+        }
+      },
+
+
+      "get": {
+        "tags": [ "Software Update Configuration" ],
+        "description": "Get a single software update configuration by name.",
+        "externalDocs": {
+          "url": "http://aka.ms/azureautomationsdk/softwareupdateconfigurationoperations"
+        },
+        "x-ms-examples": {
+          "Get software update configuration by name": { "$ref": "./examples/softwareUpdateConfiguration/getSoftwareUpdateConfigurationByName.json" }
+        },
+        "operationId": "softwareUpdateConfigurations_GetByName",
+        "responses": {
+          "200": {
+            "description": "A single software update configuration.",
+            "schema": {
+              "$ref": "./definitions.json#/definitions/softwareUpdateConfiguration"
+            }
+          },
+          "404": {
+            "description": "Resource group, account, or software update configuration doesn't exist."
+          }
+        }
+      },
+
+      "delete": {
+        "tags": [ "Software Update Configuration" ],
+        "description": "delete a specific software update configuration.",
+        "externalDocs": {
+          "url": "http://aka.ms/azureautomationsdk/softwareupdateconfigurationoperations"
+        },
+        "x-ms-examples": {
+          "Delete software update configuration": { "$ref": "./examples/softwareUpdateConfiguration/deleteSoftwareUpdateConfiguration.json" }
+        },
+        "operationId": "softwareUpdateConfigurations_Delete",
+        "responses": {
+          "200": {
+            "description": "The software update configuration has been deleted."
+          },
+          "204": {
+            "description": "The software update configuration does not exist."
+          },
+          "404": {
+            "description": "Resource group, account, or software update configuration doesn't exist."
+          }
+        }
+      }
+    },
+
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Automation/automationAccounts/{automationAccountName}/softwareUpdateConfigurations": {
+      "parameters": [
+        {
+          "$ref": "./definitions.json#/parameters/subscriptionId"
+        },
+        {
+          "$ref": "./definitions.json#/parameters/resourceGroupName"
+        },
+        {
+          "$ref": "./definitions.json#/parameters/automationAccountName"
+        },
+        {
+          "$ref": "./definitions.json#/parameters/apiVersion"
+        },
+        {
+          "$ref": "./definitions.json#/parameters/clientRequestId"
+        }
+      ],
+
+
+      "get": {
+        "tags": [ "Software Update Configuration" ],
+        "description": "Get all software update configurations for the account.",
+        "externalDocs": {
+          "url": "http://aka.ms/azureautomationsdk/softwareupdateconfigurationoperations"
+        },
+        "x-ms-examples": {
+          "List software update configurations": { "$ref": "./examples/softwareUpdateConfiguration/listSoftwareUpdateConfigurations.json" },
+          "List software update configurations Targeting a specific azure virtual machine": { "$ref": "./examples/softwareUpdateConfiguration/listSoftwareUpdateConfigurationsByVm.json" }
+        },
+        "operationId": "softwareUpdateConfigurations_List",
+        "parameters": [
+          {
+            "name": "$filter",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "description": "The filter to apply on the operation."
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Return list of software update configurations.",
+            "schema": {
+              "$ref": "./definitions.json#/definitions/softwareUpdateConfigurationListResult"
+            }
+          },
+          "404": {
+            "description": "Resource group, or account doesn't exist."
+          }
+        }
+      }
+    }
+  }  
+}
