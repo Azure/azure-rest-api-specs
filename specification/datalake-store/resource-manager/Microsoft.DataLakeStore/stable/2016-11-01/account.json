@@ -74,7 +74,7 @@
             "in": "body",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/FirewallRule"
+              "$ref": "#/definitions/CreateOrUpdateFirewallRuleParameters"
             },
             "description": "Parameters supplied to create or update the firewall rule."
           },
@@ -327,7 +327,7 @@
             "in": "body",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/TrustedIdProvider"
+              "$ref": "#/definitions/CreateOrUpdateTrustedIdProviderParameters"
             },
             "description": "Parameters supplied to create or replace the trusted identity provider."
           },
@@ -965,7 +965,7 @@
             "in": "path",
             "required": true,
             "type": "string",
-            "description": "The Resource location without whitespace."
+            "description": "The resource location without whitespace."
           },
           {
             "name": "parameters",
@@ -999,9 +999,9 @@
           "Locations"
         ],
         "operationId": "Locations_GetCapability",
-        "description": "Gets subscription-level properties and limits for Data Lake Store specified by Resource location.",
+        "description": "Gets subscription-level properties and limits for Data Lake Store specified by resource location.",
         "x-ms-examples": {
-          "Gets subscription-level properties and limits for Data Lake Store specified by Resource location": { "$ref": "./examples/Adls_Locations_GetCapability.json" }
+          "Gets subscription-level properties and limits for Data Lake Store specified by resource location": { "$ref": "./examples/Adls_Locations_GetCapability.json" }
         },
         "parameters": [
           {
@@ -1009,7 +1009,7 @@
             "in": "path",
             "required": true,
             "type": "string",
-            "description": "The Resource location without whitespace."
+            "description": "The resource location without whitespace."
           },
           {
             "$ref": "#/parameters/ApiVersionParameter"
@@ -1020,7 +1020,7 @@
         ],
         "responses": {
           "200": {
-            "description": "Successfully retrieved the subscription-level properties and limits for Data Lake Store specified by Resource location.",
+            "description": "Successfully retrieved the subscription-level properties and limits for Data Lake Store specified by resource location.",
             "schema": {
               "$ref": "#/definitions/CapabilityInformation"
             }
@@ -1062,26 +1062,26 @@
       "properties": {
         "startIpAddress": {
           "type": "string",
-          "description": "the start IP address for the firewall rule. This can be either ipv4 or ipv6. Start and End should be in the same protocol."
+          "description": "The start IP address for the firewall rule. This can be either ipv4 or ipv6. Start and End should be in the same protocol."
         },
         "endIpAddress": {
           "type": "string",
-          "description": "the end IP address for the firewall rule. This can be either ipv4 or ipv6. Start and End should be in the same protocol."
+          "description": "The end IP address for the firewall rule. This can be either ipv4 or ipv6. Start and End should be in the same protocol."
         }
       },
-      "description": "Data Lake Store firewall rule properties information"
+      "description": "The firewall rule properties to use when updating a firewall rule."
     },
     "UpdateFirewallRuleParameters": {
       "properties": {
         "properties": {
+          "x-ms-client-flatten": true,
           "$ref": "#/definitions/UpdateFirewallRuleProperties",
-          "description": "the properties of the firewall rule to update.",
-          "x-ms-client-flatten": true
+          "description": "The firewall rule properties to use when updating a firewall rule."
         }
       },
-      "description": "Data Lake Store firewall rule update parameters"
+      "description": "The parameters used to update a firewall rule."
     },
-    "FirewallRuleProperties": {
+    "CreateOrUpdateFirewallRuleProperties": {
       "required": [
         "startIpAddress",
         "endIpAddress"
@@ -1089,19 +1089,79 @@
       "properties": {
         "startIpAddress": {
           "type": "string",
-          "description": "the start IP address for the firewall rule. This can be either ipv4 or ipv6. Start and End should be in the same protocol."
+          "description": "The start IP address for the firewall rule. This can be either ipv4 or ipv6. Start and End should be in the same protocol."
         },
         "endIpAddress": {
           "type": "string",
-          "description": "the end IP address for the firewall rule. This can be either ipv4 or ipv6. Start and End should be in the same protocol."
+          "description": "The end IP address for the firewall rule. This can be either ipv4 or ipv6. Start and End should be in the same protocol."
         }
       },
-      "description": "Data Lake Store firewall rule properties information"
+      "description": "The firewall rule properties to use when creating a new firewall rule."
     },
-    "FirewallRule": {
+    "CreateOrUpdateFirewallRuleParameters": {
       "required": [
         "properties"
       ],
+      "properties": {
+        "properties": {
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/CreateOrUpdateFirewallRuleProperties",
+          "description": "The firewall rule properties to use when creating a new firewall rule."
+        }
+      },
+      "description": "The parameters used to create a new firewall rule."
+    },
+    "CreateFirewallRuleWithAccountParameters": {
+      "required": [
+        "name",
+        "properties"
+      ],
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "The unique name of the firewall rule to create."
+        },
+        "properties": {
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/CreateOrUpdateFirewallRuleProperties",
+          "description": "The firewall rule properties to use when creating a new firewall rule."
+        }
+      },
+      "description": "The parameters used to create a new firewall rule while creating a new Data Lake Store account."
+    },
+    "UpdateFirewallRuleWithAccountParameters": {
+      "required": [
+        "name"
+      ],
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "The unique name of the firewall rule to update."
+        },
+        "properties": {
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/UpdateFirewallRuleProperties",
+          "description": "The firewall rule properties to use when updating a firewall rule."
+        }
+      },
+      "description": "The parameters used to update a firewall rule while updating a Data Lake Store account."
+    },
+    "FirewallRuleProperties": {
+      "properties": {
+        "startIpAddress": {
+          "readOnly": true,
+          "type": "string",
+          "description": "The start IP address for the firewall rule. This can be either ipv4 or ipv6. Start and End should be in the same protocol."
+        },
+        "endIpAddress": {
+          "readOnly": true,
+          "type": "string",
+          "description": "The end IP address for the firewall rule. This can be either ipv4 or ipv6. Start and End should be in the same protocol."
+        }
+      },
+      "description": "The firewall rule properties."
+    },
+    "FirewallRule": {
       "allOf": [
         {
           "$ref": "#/definitions/SubResource"
@@ -1109,48 +1169,104 @@
       ],
       "properties": {
         "properties": {
+          "x-ms-client-flatten": true,
           "$ref": "#/definitions/FirewallRuleProperties",
-          "description": "the properties of the firewall rule.",
-          "x-ms-client-flatten": true
+          "description": "The firewall rule properties."
         }
       },
-      "description": "Data Lake Store firewall rule information"
+      "x-ms-azure-resource": true,
+      "description": "Data Lake Store firewall rule information."
     },
     "UpdateTrustedIdProviderProperties": {
       "properties": {
         "idProvider": {
           "type": "string",
-          "description": "The URL of this trusted identity provider"
+          "description": "The URL of this trusted identity provider."
         }
       },
-      "description": "Data Lake Store trusted identity provider property update information"
+      "description": "The trusted identity provider properties to use when updating a trusted identity provider."
     },
     "UpdateTrustedIdProviderParameters": {
       "properties": {
         "properties": {
+          "x-ms-client-flatten": true,
           "$ref": "#/definitions/UpdateTrustedIdProviderProperties",
-          "description": "the properties of the trusted identity provider to update.",
-          "x-ms-client-flatten": true
+          "description": "The trusted identity provider properties to use when updating a trusted identity provider."
         }
       },
-      "description": "Data Lake Store Trusted Identity Provider update parameters"
+      "description": "The parameters used to update a trusted identity provider."
     },
-    "TrustedIdProviderProperties": {
+    "CreateOrUpdateTrustedIdProviderProperties": {
       "required": [
         "idProvider"
       ],
       "properties": {
         "idProvider": {
           "type": "string",
-          "description": "The URL of this trusted identity provider"
+          "description": "The URL of this trusted identity provider."
         }
       },
-      "description": "Data Lake Store trusted identity provider properties information"
+      "description": "The trusted identity provider properties to use when creating a new trusted identity provider."
     },
-    "TrustedIdProvider": {
+    "CreateOrUpdateTrustedIdProviderParameters": {
       "required": [
         "properties"
       ],
+      "properties": {
+        "properties": {
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/CreateOrUpdateTrustedIdProviderProperties",
+          "description": "The trusted identity provider properties to use when creating a new trusted identity provider."
+        }
+      },
+      "description": "The parameters used to create a new trusted identity provider."
+    },
+    "CreateTrustedIdProviderWithAccountParameters": {
+      "required": [
+        "name",
+        "properties"
+      ],
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "The unique name of the trusted identity provider to create."
+        },
+        "properties": {
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/CreateOrUpdateTrustedIdProviderProperties",
+          "description": "The trusted identity provider properties to use when creating a new trusted identity provider."
+        }
+      },
+      "description": "The parameters used to create a new trusted identity provider while creating a new Data Lake Store account."
+    },
+    "UpdateTrustedIdProviderWithAccountParameters": {
+      "required": [
+        "name"
+      ],
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "The unique name of the trusted identity provider to update."
+        },
+        "properties": {
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/UpdateTrustedIdProviderProperties",
+          "description": "The trusted identity provider properties to use when updating a trusted identity provider."
+        }
+      },
+      "description": "The parameters used to update a trusted identity provider while updating a Data Lake Store account."
+    },
+    "TrustedIdProviderProperties": {
+      "properties": {
+        "idProvider": {
+          "readOnly": true,
+          "type": "string",
+          "description": "The URL of this trusted identity provider."
+        }
+      },
+      "description": "The trusted identity provider properties."
+    },
+    "TrustedIdProvider": {
       "allOf": [
         {
           "$ref": "#/definitions/SubResource"
@@ -1158,12 +1274,13 @@
       ],
       "properties": {
         "properties": {
+          "x-ms-client-flatten": true,
           "$ref": "#/definitions/TrustedIdProviderProperties",
-          "description": "the properties of the trusted identity provider.",
-          "x-ms-client-flatten": true
+          "description": "The trusted identity provider properties."
         }
       },
-      "description": "Data Lake Store Trusted Identity Provider information"
+      "x-ms-azure-resource": true,
+      "description": "Data Lake Store trusted identity provider information."
     },
     "DataLakeStoreTrustedIdProviderListResult": {
       "properties": {
@@ -1305,7 +1422,7 @@
       "properties": {
         "encryptionState": {
           "type": "string",
-          "description": "The current state of encryption for this Data Lake store account.",
+          "description": "The current state of encryption for this Data Lake Store account.",
           "enum": [
             "Enabled",
             "Disabled"
@@ -1318,7 +1435,7 @@
         "encryptionProvisioningState": {
           "readOnly": true,
           "type": "string",
-          "description": "The current state of encryption provisioning for this Data Lake store account.",
+          "description": "The current state of encryption provisioning for this Data Lake Store account.",
           "enum": [
             "Creating",
             "Succeeded"
@@ -1334,7 +1451,7 @@
         },
         "firewallState": {
           "type": "string",
-          "description": "The current state of the IP address firewall for this Data Lake store account.",
+          "description": "The current state of the IP address firewall for this Data Lake Store account.",
           "enum": [
             "Enabled",
             "Disabled"
@@ -1344,16 +1461,28 @@
             "modelAsString": false
           }
         },
+        "firewallAllowAzureIps": {
+          "type": "string",
+          "description": "The current state of allowing or disallowing IPs originating within Azure through the firewall. If the firewall is disabled, this is not enforced.",
+          "enum": [
+            "Enabled",
+            "Disabled"
+          ],
+          "x-ms-enum": {
+            "name": "FirewallAllowAzureIpsState",
+            "modelAsString": false
+          }
+        },
         "firewallRules": {
           "type": "array",
           "items": {
-            "$ref": "#/definitions/FirewallRule"
+            "$ref": "#/definitions/CreateFirewallRuleWithAccountParameters"
           },
-          "description": "The list of firewall rules associated with this Data Lake store account."
+          "description": "The list of firewall rules associated with this Data Lake Store account."
         },
         "trustedIdProviderState": {
           "type": "string",
-          "description": "The current state of the trusted identity provider feature for this Data Lake store account.",
+          "description": "The current state of the trusted identity provider feature for this Data Lake Store account.",
           "enum": [
             "Enabled",
             "Disabled"
@@ -1366,9 +1495,9 @@
         "trustedIdProviders": {
           "type": "array",
           "items": {
-            "$ref": "#/definitions/TrustedIdProvider"
+            "$ref": "#/definitions/CreateTrustedIdProviderWithAccountParameters"
           },
-          "description": "The list of trusted identity providers associated with this Data Lake store account."
+          "description": "The list of trusted identity providers associated with this Data Lake Store account."
         },
         "defaultGroup": {
           "type": "string",
@@ -1408,6 +1537,27 @@
           },
           "readOnly": true,
           "description": "the commitment tier in use for the current month."
+        }
+      },
+      "description": "Data Lake Store account properties information."
+    },
+    "UpdateDataLakeStoreAccountProperties": {
+      "properties": {
+        "encryptionConfig": {
+          "$ref": "#/definitions/UpdateEncryptionConfig",
+          "description": "Used for rotation of user managed Key Vault keys. Can only be used to rotate a user managed encryption Key Vault key."
+        },
+        "firewallState": {
+          "type": "string",
+          "description": "The current state of the IP address firewall for this Data Lake Store account. Disabling the firewall does not remove existing rules, they will just be ignored until the firewall is re-enabled.",
+          "enum": [
+            "Enabled",
+            "Disabled"
+          ],
+          "x-ms-enum": {
+            "name": "FirewallState",
+            "modelAsString": false
+          }
         },
         "firewallAllowAzureIps": {
           "type": "string",
@@ -1420,27 +1570,17 @@
             "name": "FirewallAllowAzureIpsState",
             "modelAsString": false
           }
-        }
-      },
-      "description": "Data Lake Store account properties information"
-    },
-    "UpdateDataLakeStoreAccountProperties": {
-      "properties": {
-        "firewallState": {
-          "type": "string",
-          "description": "The current state of the IP address firewall for this Data Lake store account. Disabling the firewall does not remove existing rules, they will just be ignored until the firewall is re-enabled.",
-          "enum": [
-            "Enabled",
-            "Disabled"
-          ],
-          "x-ms-enum": {
-            "name": "FirewallState",
-            "modelAsString": false
-          }
+        },
+        "firewallRules": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/UpdateFirewallRuleWithAccountParameters"
+          },
+          "description": "The list of firewall rules associated with this Data Lake Store account."
         },
         "trustedIdProviderState": {
           "type": "string",
-          "description": "The current state of the trusted identity provider feature for this Data Lake store account. Disabling trusted identity provider functionality does not remove the providers, they will just be ignored until this feature is re-enabled.",
+          "description": "The current state of the trusted identity provider feature for this Data Lake Store account. Disabling trusted identity provider functionality does not remove the providers, they will just be ignored until this feature is re-enabled.",
           "enum": [
             "Enabled",
             "Disabled"
@@ -1449,6 +1589,13 @@
             "name": "TrustedIdProviderState",
             "modelAsString": false
           }
+        },
+        "trustedIdProviders": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/UpdateTrustedIdProviderWithAccountParameters"
+          },
+          "description": "The list of trusted identity providers associated with this Data Lake Store account."
         },
         "defaultGroup": {
           "type": "string",
@@ -1470,22 +1617,6 @@
             "modelAsString": false
           },
           "description": "the commitment tier to use for next month."
-        },
-        "firewallAllowAzureIps": {
-          "type": "string",
-          "description": "The current state of allowing or disallowing IPs originating within Azure through the firewall. If the firewall is disabled, this is not enforced.",
-          "enum": [
-            "Enabled",
-            "Disabled"
-          ],
-          "x-ms-enum": {
-            "name": "FirewallAllowAzureIpsState",
-            "modelAsString": false
-          }
-        },
-        "encryptionConfig": {
-          "$ref": "#/definitions/UpdateEncryptionConfig",
-          "description": "Used for rotation of user managed Key Vault keys. Can only be used to rotate a user managed encryption Key Vault key."
         }
       },
       "description": "Data Lake Store account properties information to be updated."
@@ -1653,7 +1784,7 @@
           "enum": [
             "Microsoft.DataLakeStore/accounts"
           ],
-          "description": "the Resource type. Note: This should not be set by the user, as the constant value is Microsoft.DataLakeStore/accounts"
+          "description": "the resource type. Note: This should not be set by the user, as the constant value is Microsoft.DataLakeStore/accounts"
         }
       },
       "required": [
@@ -1711,12 +1842,12 @@
         "provider": {
           "type": "string",
           "readOnly": true,
-          "description": "the Resource provider of the operation."
+          "description": "the resource provider of the operation."
         },
         "resource": {
           "type": "string",
           "readOnly": true,
-          "description": "the Resource type of the operation."
+          "description": "the resource type of the operation."
         },
         "operation": {
           "type": "string",
@@ -1798,7 +1929,9 @@
       "description": "Data Lake Store error details information"
     },
     "Resource": {
-      "description": "The Resource model definition.",
+      "required": [
+        "location"
+      ],
       "properties": {
         "id": {
           "readOnly": true,
@@ -1827,13 +1960,10 @@
           "description": "Resource tags"
         }
       },
-      "required": [
-        "location"
-      ],
-      "x-ms-azure-resource": true
+      "x-ms-azure-resource": true,
+      "description": "The Resource model definition."
     },
     "SubResource": {
-      "description": "The Resource model definition for a nested resource.",
       "properties": {
         "id": {
           "readOnly": true,
@@ -1841,6 +1971,7 @@
           "description": "Resource Id"
         },
         "name": {
+          "readOnly": true,
           "type": "string",
           "description": "Resource name"
         },
@@ -1849,7 +1980,8 @@
           "type": "string",
           "description": "Resource type"
         }
-      }
+      },
+      "description": "The Resource model definition for a nested resource."
     }
   },
   "parameters": {
