@@ -1,0 +1,1165 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "Azure Log Analytics",
+    "description": "Azure Log Analytics API reference for LinkTargets, StorageInsightConfigs and SavedSearches.",
+    "version": "2015-03-20"
+  },
+  "host": "management.azure.com",
+  "schemes": [
+    "https"
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "produces": [
+    "application/json"
+  ],
+  "security": [
+    {
+      "azure_auth": [
+        "user_impersonation"
+      ]
+    }
+  ],
+  "securityDefinitions": {
+    "azure_auth": {
+      "type": "oauth2",
+      "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
+      "flow": "implicit",
+      "description": "Azure Active Directory OAuth2 Flow",
+      "scopes": {
+        "user_impersonation": "impersonate your user account"
+      }
+    }
+  },
+  "paths": {
+    "/subscriptions/{subscriptionId}/resourcegroups/{resourceGroupName}/providers/Microsoft.OperationalInsights/workspaces/{workspaceName}/storageInsightConfigs/{storageInsightName}": {
+      "put": {
+        "tags": [
+          "StorageInsights"
+        ],
+        "operationId": "StorageInsights_CreateOrUpdate",
+        "description": "Create or update a storage insight.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "workspaceName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "Log Analytics Workspace name that will contain the storageInsightsConfigs resource"
+          },
+          {
+            "name": "storageInsightName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "Name of the storageInsightsConfigs resource"
+          },
+          {
+            "name": "parameters",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/StorageInsight"
+            },
+            "description": "The parameters required to create or update a storage insight."
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": "Created response definition.",
+            "schema": {
+              "$ref": "#/definitions/StorageInsight"
+            }
+          },
+          "200": {
+            "description": "OK response definition.",
+            "schema": {
+              "$ref": "#/definitions/StorageInsight"
+            }
+          }
+        }
+      },
+      "get": {
+        "tags": [
+          "StorageInsights"
+        ],
+        "operationId": "StorageInsights_Get",
+        "description": "Gets a storage insight instance.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "workspaceName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "Log Analytics Workspace name that contains the storageInsightsConfigs resource"
+          },
+          {
+            "name": "storageInsightName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "Name of the storageInsightsConfigs resource"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK response definition.",
+            "schema": {
+              "$ref": "#/definitions/StorageInsight"
+            }
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "StorageInsights"
+        ],
+        "operationId": "StorageInsights_Delete",
+        "description": "Deletes a storageInsightsConfigs resource",
+        "parameters": [
+          {
+            "$ref": "#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "workspaceName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "Log Analytics Workspace name that contains the storageInsightsConfigs resource"
+          },
+          {
+            "name": "storageInsightName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "Name of the storageInsightsConfigs resource"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK response definition."
+          },
+          "204": {
+            "description": "NoContent response definition."
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourcegroups/{resourceGroupName}/providers/Microsoft.OperationalInsights/workspaces/{workspaceName}/storageInsightConfigs": {
+      "get": {
+        "tags": [
+          "StorageInsights"
+        ],
+        "operationId": "StorageInsights_ListByWorkspace",
+        "description": "Lists the storage insight instances within a workspace",
+        "parameters": [
+          {
+            "$ref": "#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "workspaceName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "Log Analytics Workspace name that will contain the storageInsightsConfigs resource"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK response definition.",
+            "schema": {
+              "$ref": "#/definitions/StorageInsightListResult"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "@odata.nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.OperationalInsights/linkTargets": {
+      "get": {
+        "tags": [
+          "Workspaces"
+        ],
+        "operationId": "Workspaces_ListLinkTargets",
+        "description": "Get a list of workspaces which the current user has administrator privileges and are not associated with an Azure Subscription. The subscriptionId parameter in the Url is ignored.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK response definition.",
+            "schema": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/LinkTarget"
+              }
+            }
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourcegroups/{resourceGroupName}/providers/Microsoft.OperationalInsights/workspaces/{workspaceName}/savedSearches/{savedSearchName}": {
+      "delete": {
+        "tags": [
+          "SavedSearches"
+        ],
+        "operationId": "SavedSearches_Delete",
+        "description": "Deletes the specified saved search in a given workspace.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "workspaceName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "Log Analytics workspace name"
+          },
+          {
+            "name": "savedSearchName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "Name of the saved search."
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK response definition."
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "SavedSearches"
+        ],
+        "operationId": "SavedSearches_CreateOrUpdate",
+        "description": "Creates or updates a saved search for a given workspace.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "workspaceName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "Log Analytics workspace name"
+          },
+          {
+            "name": "savedSearchName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The id of the saved search."
+          },
+          {
+            "name": "parameters",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/SavedSearch"
+            },
+            "description": "The parameters required to save a search."
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK response definition.",
+            "schema": {
+              "$ref": "#/definitions/SavedSearch"
+            }
+          }
+        }
+      },
+      "get": {
+        "tags": [
+          "SavedSearches"
+        ],
+        "operationId": "SavedSearches_Get",
+        "description": "Gets the specified saved search for a given workspace.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "workspaceName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "Log Analytics workspace name"
+          },
+          {
+            "name": "savedSearchName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The id of the saved search."
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK response definition.",
+            "schema": {
+              "$ref": "#/definitions/SavedSearch"
+            }
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourcegroups/{resourceGroupName}/providers/Microsoft.OperationalInsights/workspaces/{workspaceName}/savedSearches": {
+      "get": {
+        "tags": [
+          "SavedSearches"
+        ],
+        "operationId": "SavedSearches_ListByWorkspace",
+        "description": "Gets the saved searches for a given Log Analytics Workspace",
+        "parameters": [
+          {
+            "$ref": "#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "workspaceName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "Log Analytics workspace name"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK response definition.",
+            "schema": {
+              "$ref": "#/definitions/SavedSearchesListResult"
+            }
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourcegroups/{resourceGroupName}/providers/Microsoft.OperationalInsights/workspaces/{workspaceName}/savedSearches/{savedSearchName}/results": {
+      "get": {
+        "tags": [
+          "SavedSearches"
+        ],
+        "operationId": "SavedSearches_GetResults",
+        "description": "Gets the results from a saved search for a given workspace.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "workspaceName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "Log Analytics workspace name"
+          },
+          {
+            "name": "savedSearchName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the saved search."
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK response definition.",
+            "schema": {
+              "$ref": "#/definitions/SearchResultsResponse"
+            }
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourcegroups/{resourceGroupName}/providers/Microsoft.OperationalInsights/workspaces/{workspaceName}/schema": {
+      "post": {
+        "tags": [
+          "Workspaces"
+        ],
+        "operationId": "Workspaces_GetSchema",
+        "description": "Gets the schema for a given workspace.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "workspaceName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "Log Analytics workspace name"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK response definition.",
+            "schema": {
+              "$ref": "#/definitions/SearchGetSchemaResponse"
+            }
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourcegroups/{resourceGroupName}/providers/Microsoft.OperationalInsights/workspaces/{workspaceName}/search": {
+      "post": {
+        "tags": [
+          "Workspaces"
+        ],
+        "operationId": "Workspaces_GetSearchResults",
+        "description": "Submit a search for a given workspace. The response will contain an id to track the search. User can use the id to poll the search status and get the full search result later if the search takes long time to finish. ",
+        "parameters": [
+          {
+            "$ref": "#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "workspaceName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "Log Analytics workspace name"
+          },
+          {
+            "name": "parameters",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/SearchParameters"
+            },
+            "description": "The parameters required to execute a search query."
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK response definition.",
+            "schema": {
+              "$ref": "#/definitions/SearchResultsResponse"
+            }
+          },
+          "202": {
+            "description": "Accepted response definition"
+          }
+        },
+        "x-ms-long-running-operation": true
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourcegroups/{resourceGroupName}/providers/Microsoft.OperationalInsights/workspaces/{workspaceName}/search/{id}": {
+      "post": {
+        "tags": [
+          "Workspaces"
+        ],
+        "operationId": "Workspaces_UpdateSearchResults",
+        "description": "Gets updated search results for a given search query.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "workspaceName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "Log Analytics workspace name"
+          },
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The id of the search that will have results updated. You can get the id from the response of the GetResults call."
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK response definition.",
+            "schema": {
+              "$ref": "#/definitions/SearchResultsResponse"
+            }
+          }
+        }
+      }
+    }
+  },
+  "definitions": {
+    "LinkTarget": {
+      "properties": {
+        "customerId": {
+          "type": "string",
+          "description": "The GUID that uniquely identifies the workspace. "
+        },
+        "accountName": {
+          "type": "string",
+          "description": "The display name of the workspace.",
+          "x-ms-client-name": "DisplayName"
+        },
+        "workspaceName": {
+          "type": "string",
+          "description": "The DNS valid workspace name."
+        },
+        "location": {
+          "type": "string",
+          "description": "The location of the workspace."
+        }
+      },
+      "description": "Metadata for a workspace that isn't linked to an Azure subscription."
+    },
+    "Tag": {
+      "properties": {
+        "Name": {
+          "type": "string",
+          "description": "The tag name."
+        },
+        "Value": {
+          "type": "string",
+          "description": "The tag value."
+        }
+      },
+      "required": [
+        "Name",
+        "Value"
+      ],
+      "description": "A tag of a saved search."
+    },
+    "SavedSearchProperties": {
+      "properties": {
+        "Category": {
+          "type": "string",
+          "description": "The category of the saved search. This helps the user to find a saved search faster. "
+        },
+        "DisplayName": {
+          "type": "string",
+          "description": "Saved search display name."
+        },
+        "Query": {
+          "type": "string",
+          "description": "The query expression for the saved search. Please see https://docs.microsoft.com/en-us/azure/log-analytics/log-analytics-search-reference for reference."
+        },
+        "Version": {
+          "type": "integer",
+          "format": "int64",
+          "minimum": 1,
+          "maximum": 1,
+          "description": "The version number of the query lanuage. Only verion 1 is allowed here."
+        },
+        "Tags": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Tag"
+          },
+          "description": "The tags attached to the saved search."
+        }
+      },
+      "required":[
+        "Category",
+        "DisplayName",
+        "Query",
+        "Version"
+      ],
+      "description": "Value object for saved search results."
+    },
+    "CoreSummary": {
+      "properties": {
+        "Status": {
+          "type": "string",
+          "description": "The status of a core summary."
+        },
+        "NumberOfDocuments": {
+          "type": "integer",
+          "format": "int64",
+          "description": "The number of documents of a core summary."
+        }
+      },
+      "required": [
+        "NumberOfDocuments" 
+      ],
+      "description": "The core summary of a search."
+    },
+    "SearchSort": {
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "The name of the field the search query is sorted on."
+        },
+        "order": {
+          "type": "string",
+          "description": "The sort order of the search.",
+          "enum": [
+            "asc",
+            "desc"
+          ],
+          "x-ms-enum": {
+            "name": "SearchSortEnum",
+            "modelAsString": true
+          }
+        }
+      },
+      "description": "The sort parameters for search."
+    },
+    "SearchMetadataSchema": {
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "The name of the metadata schema."
+        },
+        "version": {
+          "type": "integer",
+          "format": "int32",
+          "description": "The version of the metadata schema."
+        }
+      },
+      "description": "Schema metadata for search."
+    },
+    "SearchMetadata": {
+      "properties": {
+        "RequestId": {
+          "x-ms-client-name": "SearchId",
+          "type": "string",
+          "description": "The request id of the search."
+        },
+        "resultType": {
+          "type": "string",
+          "description": "The search result type."
+        },
+        "total": {
+          "type": "integer",
+          "format": "int64",
+          "description": "The total number of search results."
+        },
+        "top": {
+          "type": "integer",
+          "format": "int64",
+          "description": "The number of top search results."
+        },
+        "id": {
+          "type": "string",
+          "description": "The id of the search results request."
+        },
+        "CoreSummaries": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/CoreSummary"
+          },
+          "description": "The core summaries."
+        },
+        "Status": {
+          "type": "string",
+          "description": "The status of the search results."
+        },
+        "StartTime": {
+          "type": "string",
+          "format": "date-time",
+          "description": "The start time for the search."
+        },
+        "LastUpdated": {
+          "type": "string",
+          "format": "date-time",
+          "description": "The time of last update."
+        },
+        "ETag": {
+          "type": "string",
+          "description": "The ETag of the search results."
+        },
+        "sort": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/SearchSort"
+          },
+          "description": "How the results are sorted."
+        },
+        "requestTime": {
+          "type": "integer",
+          "format": "int64",
+          "description": "The request time."
+        },
+        "aggregatedValueField": {
+          "type": "string",
+          "description": "The aggregated value field."
+        },
+        "aggregatedGroupingFields": {
+          "type": "string",
+          "description": "The aggregated grouping fields."
+        },
+        "sum": {
+          "type": "integer",
+          "format": "int64",
+          "description": "The sum of all aggregates returned in the result set."
+        },
+        "max": {
+          "type": "integer",
+          "format": "int64",
+          "description": "The max of all aggregates returned in the result set."
+        },
+        "schema": {
+          "$ref": "#/definitions/SearchMetadataSchema",
+          "description": "The schema."
+        }
+      },
+      "description": "Metadata for search results."
+    },
+    "SavedSearch": {
+      "properties": {
+        "id": {
+          "type": "string",
+          "readOnly": true,
+          "description": "The id of the saved search."
+        },
+        "etag": {
+          "type": "string",
+          "description": "The etag of the saved search."
+        },
+        "properties": {
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/SavedSearchProperties",
+          "description": "Gets or sets properties of the saved search."
+        }
+      },
+      "required": [
+        "properties"
+      ],
+      "description": "Value object for saved search results."
+    },
+    "SavedSearchesListResult": {
+      "properties": {
+        "__metadata": {
+          "x-ms-client-name": "Metadata",
+          "$ref": "#/definitions/SearchMetadata",
+          "description": "The metadata from search results."
+        },
+        "value": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/SavedSearch"
+          },
+          "description": "The array of result values."
+        }
+      },
+      "description": "The saved search operation response."
+    },
+    "SearchError": {
+      "properties": {
+        "type": {
+          "type": "string",
+          "description": "The error type."
+        },
+        "message": {
+          "type": "string",
+          "description": "The error message."
+        }
+      },
+      "description": "Details for a search error."
+    },
+    "SearchResultsResponse": {
+      "properties": {
+        "id": {
+          "type": "string",
+          "readOnly": true,
+          "description": "The id of the search, which includes the full url."
+        },
+        "__metadata": {
+          "x-ms-client-name": "Metadata",
+          "$ref": "#/definitions/SearchMetadata",
+          "description": "The metadata from search results."
+        },
+        "value": {
+          "type": "array",
+          "items": {
+            "type": "object"
+          },
+          "description": "The array of result values."
+        },
+        "error": {
+          "$ref": "#/definitions/SearchError",
+          "description": "The error."
+        }
+      },
+      "description": "The get search result operation response."
+    },
+    "SearchSchemaValue": {
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "The name of the schema."
+        },
+        "displayName": {
+          "type": "string",
+          "description": "The display name of the schema."
+        },
+        "type": {
+          "type": "string",
+          "description": "The type."
+        },
+        "indexed": {
+          "type": "boolean",
+          "description": "The boolean that indicates the field is searchable as free text."
+        },
+        "stored": {
+          "type": "boolean",
+          "description": "The boolean that indicates whether or not the field is stored."
+        },
+        "facet": {
+          "type": "boolean",
+          "description": "The boolean that indicates whether or not the field is a facet."
+        },
+        "ownerType": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "description": "The array of workflows containing the field."
+        }
+      },
+      "required": [
+        "facet",
+        "stored",
+        "indexed"
+      ],
+      "description": "Value object for schema results."
+    },
+    "SearchGetSchemaResponse": {
+      "properties": {
+        "__metadata": {
+          "x-ms-client-name": "Metadata",
+          "$ref": "#/definitions/SearchMetadata",
+          "description": "The metadata from search results."
+        },
+        "value": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/SearchSchemaValue"
+          },
+          "description": "The array of result values."
+        }
+      },
+      "description": "The get schema operation response."
+    },
+    "SearchHighlight": {
+      "properties": {
+        "pre": {
+          "type": "string",
+          "description": "The string that is put before a matched result."
+        },
+        "post": {
+          "type": "string",
+          "description": "The string that is put after a matched result."
+        }
+      },
+      "description": "Highlight details."
+    },
+    "SearchParameters": {
+      "properties": {
+        "top": {
+          "type": "integer",
+          "format": "int64",
+          "description": "The number to get from the top."
+        },
+        "highlight": {
+          "$ref": "#/definitions/SearchHighlight",
+          "description": "The highlight that looks for all occurences of a string."
+        },
+        "query": {
+          "type": "string",
+          "description": "The query to search."
+        },
+        "start": {
+          "type": "string",
+          "format": "date-time",
+          "description": "The start date filter, so the only query results returned are after this date."
+        },
+        "end": {
+          "type": "string",
+          "format": "date-time",
+          "description": "The end date filter, so the only query results returned are before this date."
+        }
+      },
+      "required": [
+        "query"
+      ],
+      "description": "Parameters specifying the search query and range."
+    },
+    "StorageAccount": {
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "The Azure Resource Manager ID of the storage account resource."
+        },
+        "key": {
+          "type": "string",
+          "description": "The storage account key."
+        }
+      },
+      "required": [
+        "id",
+        "key"
+      ],
+      "description": "Describes a storage account connection."
+    },
+    "StorageInsightStatus": {
+      "properties": {
+        "state": {
+          "type": "string",
+          "description": "The state of the storage insight connection to the workspace",
+          "enum": [
+            "OK",
+            "ERROR"
+          ],
+          "x-ms-enum": {
+            "name": "StorageInsightState",
+            "modelAsString": true
+          }
+        },
+        "description":{
+          "type": "string",
+          "description": "Description of the state of the storage insight."
+        }
+      },
+      "required": [
+        "state"
+      ],
+      "description": "The status of the storage insight."
+    },
+    "StorageInsightProperties": {
+      "properties": {
+        "containers": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "description": "The names of the blob containers that the workspace should read"
+        },
+        "tables": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "description": "The names of the Azure tables that the workspace should read"
+        },
+        "storageAccount": {
+          "$ref": "#/definitions/StorageAccount",
+          "description": "The storage account connection details"
+        },
+        "status": {
+          "$ref": "#/definitions/StorageInsightStatus",
+          "description": "The status of the storage insight",
+          "readOnly": true
+        }
+      },
+      "required": [
+        "storageAccount"
+      ],
+      "description": "Storage insight properties."
+    },
+    "StorageInsight": {
+      "properties": {
+        "properties": {
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/StorageInsightProperties",
+          "description": "Storage insight properties."
+        },
+        "eTag": {
+          "type": "string",
+          "description": "The ETag of the storage insight."
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "#/definitions/ProxyResource"
+        }
+      ],
+      "description": "The top level storage insight resource container."
+    },
+    "StorageInsightListResult": {
+      "properties": {
+        "value": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/StorageInsight"
+          },
+          "description": "Gets or sets a list of storage insight instances."
+        },
+        "@odata.nextLink": {
+          "type": "string",
+          "description": "The link (url) to the next page of results.",
+          "x-ms-client-name": "odataNextLink"
+        }
+      },
+      "description": "The list storage insights operation response."
+    },
+    "Resource": {
+      "properties": {
+        "id": {
+          "readOnly": true,
+          "type": "string",
+          "description": "Resource Id"
+        },
+        "name": {
+          "readOnly": true,
+          "type": "string",
+          "description": "Resource name"
+        },
+        "type": {
+          "readOnly": true,
+          "type": "string",
+          "description": "Resource type"
+        },
+        "location": {
+          "type": "string",
+          "description": "Resource location"
+        },
+        "tags": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          },
+          "description": "Resource tags"
+        }
+      },
+      "required": [
+        "location"
+      ],
+      "description": "The resource definition.",
+      "x-ms-azure-resource": true
+    },
+    "ProxyResource": { 
+      "properties": { 
+        "id": { 
+          "readOnly": true, 
+          "type": "string", 
+          "description": "Resource ID." 
+        }, 
+        "name": { 
+          "readOnly": true, 
+          "type": "string", 
+          "description": "Resource name." 
+        }, 
+        "type": { 
+          "readOnly": true, 
+          "type": "string", 
+          "description": "Resource type." 
+        },
+        "tags": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          },
+          "description": "Resource tags"
+        }
+      }, 
+      "description": "Common properties of proxy resource." 
+    }
+  },
+  "parameters": {
+    "SubscriptionIdParameter": {
+      "name": "subscriptionId",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "description": "Gets subscription credentials which uniquely identify Microsoft Azure subscription. The subscription ID forms part of the URI for every service call."
+    },
+    "ApiVersionParameter": {
+      "name": "api-version",
+      "in": "query",
+      "required": true,
+      "type": "string",
+      "description": "Client Api Version."
+    },
+    "ResourceGroupNameParameter": {
+        "name": "resourceGroupName",
+        "in": "path",
+        "required": true,
+        "type": "string",
+        "x-ms-parameter-location": "method",
+        "description": "The name of the resource group to get. The name is case insensitive.",
+        "pattern": "^[-\\w\\._\\(\\)]+$",
+        "minLength": 1,
+        "maxLength": 90
+    }
+  }
+}

@@ -47,41 +47,37 @@
         ],
         "responses": {
           "200": {
-            "description": "Successful request to create or update an alert rule",
+            "description": "Successful request to update an alert rule",
             "schema": {
               "$ref": "#/definitions/AlertRuleResource"
             },
             "examples": {
               "application/json": {
-                "location": "eastus",
-                "tags": { },
-                "name": "CPUHigh Plan",
-                "description": "The average CPU is high across all the instances of Plan",
-                "isEnabled": true,
-                "condition": {
-                  "odata.type": "Microsoft.Azure.Management.Insights.Models.ThresholdRuleCondition",
-                  "dataSource": {
-                    "odata.type": "Microsoft.Azure.Management.Insights.Models.RuleMetricDataSource",
-                    "resourceUri": "/subscriptions/089bd33f-d4ec-47fe-8ba5-0753aa5c5b33/resourceGroups/Default-Storage-NorthCentralUS/providers/Microsoft.Web/serverfarms/Plan",
-                    "metricName": "CpuPercentage",
-                    "operator": "GreaterThan"
-                  },
-                  "threshold": 90,
-                  "windowSize": "PT15M",
-                  "timeAggregation": "Average"
+                "id":"/subscriptions/b67f7fec-69fc-4974-9099-a26bd6ffeda3/resourceGroups/Rac46PostSwapRG/providers/microsoft.insights/alertrules/chiricutin",
+                "name":"chiricutin",
+                "type":"Microsoft.Insights/alertRules",
+                "location":"West US",
+                "tags": {
+                  "$type":"Microsoft.WindowsAzure.Management.Common.Storage.CasePreservedDictionary, Microsoft.WindowsAzure.Management.Common.Storage","hidden-link:/subscriptions/b67f7fec-69fc-4974-9099-a26bd6ffeda3/resourceGroups/Rac46PostSwapRG/providers/Microsoft.Web/sites/leoalerttest":"Resource"
                 },
-                "actions": [
-                  {
-                    "odata.type": "Microsoft.Azure.Management.Insights.Models.RuleEmailAction",
-                    "sendToServiceOwners": true,
-                    "customEmails": ["email1@contoso.com","email2@contoso.com" ]
+                "properties": {
+                  "name":"chiricutin",
+                  "description":"Pura Vida",
+                  "isEnabled":true,
+                  "condition": {
+                    "odata.type":"Microsoft.Azure.Management.Insights.Models.ThresholdRuleCondition",
+                    "dataSource": {
+                      "odata.type":"Microsoft.Azure.Management.Insights.Models.RuleMetricDataSource",
+                      "resourceUri":"/subscriptions/b67f7fec-69fc-4974-9099-a26bd6ffeda3/resourceGroups/Rac46PostSwapRG/providers/Microsoft.Web/sites/leoalerttest",
+                      "metricName":"Requests"
+                    },
+                    "threshold":3.0,
+                    "windowSize":"PT5M",
+                    "timeAggregation":"Total"
                   },
-                  {
-                    "odata.type": "Microsoft.Azure.Management.Insights.Models.RuleWebhookAction",
-                    "serviceUri": "http://contoso.com/",
-                    "properties": { }
-                  }
-                ]
+                  "lastUpdatedTime":"2016-11-23T21:23:52.0221265Z",
+                  "actions":[]
+                }
               }
             }
           },
@@ -92,35 +88,31 @@
             },
             "examples": {
               "application/json": {
-                "location": "eastus",
-                "tags": { },
-                "name": "CPUHigh Plan",
-                "description": "The average CPU is high across all the instances of Plan",
-                "isEnabled": true,
-                "condition": {
-                  "odata.type": "Microsoft.Azure.Management.Insights.Models.ThresholdRuleCondition",
-                  "dataSource": {
-                    "odata.type": "Microsoft.Azure.Management.Insights.Models.RuleMetricDataSource",
-                    "resourceUri": "/subscriptions/089bd33f-d4ec-47fe-8ba5-0753aa5c5b33/resourceGroups/Default-Storage-NorthCentralUS/providers/Microsoft.Web/serverfarms/Plan",
-                    "metricName": "CpuPercentage",
-                    "operator": "GreaterThan"
-                  },
-                  "threshold": 90,
-                  "windowSize": "PT15M",
-                  "timeAggregation": "Average"
+                "id":"/subscriptions/b67f7fec-69fc-4974-9099-a26bd6ffeda3/resourceGroups/Rac46PostSwapRG/providers/microsoft.insights/alertrules/chiricutin",
+                "name":"chiricutin",
+                "type":"Microsoft.Insights/alertRules",
+                "location":"West US",
+                "tags": { 
+                  "$type":"Microsoft.WindowsAzure.Management.Common.Storage.CasePreservedDictionary, Microsoft.WindowsAzure.Management.Common.Storage","hidden-link:/subscriptions/b67f7fec-69fc-4974-9099-a26bd6ffeda3/resourceGroups/Rac46PostSwapRG/providers/Microsoft.Web/sites/leoalerttest":"Resource"
                 },
-                "actions": [
-                  {
-                    "odata.type": "Microsoft.Azure.Management.Insights.Models.RuleEmailAction",
-                    "sendToServiceOwners": true,
-                    "customEmails": ["email1@contoso.com","email2@contoso.com" ]
+                "properties": {
+                  "name":"chiricutin",
+                  "description":"Pura Vida",
+                  "isEnabled":true,
+                  "condition": {
+                    "odata.type":"Microsoft.Azure.Management.Insights.Models.ThresholdRuleCondition",
+                    "dataSource": {
+                      "odata.type":"Microsoft.Azure.Management.Insights.Models.RuleMetricDataSource",
+                      "resourceUri":"/subscriptions/b67f7fec-69fc-4974-9099-a26bd6ffeda3/resourceGroups/Rac46PostSwapRG/providers/Microsoft.Web/sites/leoalerttest",
+                      "metricName":"Requests"
+                    },
+                    "threshold":2.0,
+                    "windowSize":"PT5M",
+                    "timeAggregation":"Total"
                   },
-                  {
-                    "odata.type": "Microsoft.Azure.Management.Insights.Models.RuleWebhookAction",
-                    "serviceUri": "http://contoso.com/",
-                    "properties": { }
-                  }
-                ]
+                  "lastUpdatedTime":"2016-11-23T21:21:40.3097118Z",
+                  "actions":[]
+                }
               }
             }
           }
@@ -183,38 +175,32 @@
             },
             "examples": {
               "application/json": {
-                "id": "/subscriptions/089bd33f-d4ec-47fe-8ba5-0753aa5c5b33/resourceGroups/Default-Web-NorthCentralUS/providers/microsoft.insights/alertrules/CPUHigh%20Plan",
-                "location": "eastus",
-                "tags": { },
-                "name": "CPUHigh Plan",
-                "description": "The average CPU is high across all the instances of Plan",
-                "isEnabled": true,
-                "condition": {
-                  "odata.type": "Microsoft.Azure.Management.Insights.Models.ThresholdRuleCondition",
-                  "dataSource": {
-                    "odata.type": "Microsoft.Azure.Management.Insights.Models.RuleMetricDataSource",
-                    "resourceUri": "/subscriptions/089bd33f-d4ec-47fe-8ba5-0753aa5c5b33/resourceGroups/Default-Storage-NorthCentralUS/providers/Microsoft.Web/serverfarms/Plan",
-                    "metricName": "CpuPercentage",
-                    "operator": "GreaterThan"
-                  },
-                  "threshold": 90,
-                  "windowSize": "PT15M",
-                  "timeAggregation": "Average"
+                "id":"/subscriptions/b67f7fec-69fc-4974-9099-a26bd6ffeda3/resourceGroups/Rac46PostSwapRG/providers/microsoft.insights/alertrules/chiricutin0",
+                "name":"chiricutin0",
+                "type":"Microsoft.Insights/alertRules",
+                "location":"West US",
+                "tags": {
+                  "$type":"Microsoft.WindowsAzure.Management.Common.Storage.CasePreservedDictionary, Microsoft.WindowsAzure.Management.Common.Storage","hidden-link:/subscriptions/b67f7fec-69fc-4974-9099-a26bd6ffeda3/resourceGroups/Rac46PostSwapRG/providers/Microsoft.Web/sites/leoalerttest":"Resource"
                 },
-                "actions": [
-                  {
-                    "odata.type": "Microsoft.Azure.Management.Insights.Models.RuleEmailAction",
-                    "sendToServiceOwners": true,
-                    "customEmails": ["email1@contoso.com","email2@contoso.com" ]
+                "properties": {
+                  "name":"chiricutin0",
+                  "description":"Pura Vida 0",
+                  "isEnabled":true,
+                  "condition": {
+                    "odata.type":"Microsoft.Azure.Management.Insights.Models.ThresholdRuleCondition",
+                    "dataSource": { 
+                      "odata.type":"Microsoft.Azure.Management.Insights.Models.RuleMetricDataSource",
+                      "resourceUri":"/subscriptions/b67f7fec-69fc-4974-9099-a26bd6ffeda3/resourceGroups/Rac46PostSwapRG/providers/Microsoft.Web/sites/leoalerttest",
+                      "metricNamespace":"",
+                      "metricName":"Requests"
+                    },
+                    "threshold":2.0,
+                    "windowSize":"PT5M",
+                    "timeAggregation":"Total"
                   },
-                  {
-                    "odata.type": "Microsoft.Azure.Management.Insights.Models.RuleWebhookAction",
-                    "serviceUri": "http://contoso.com/",
-                    "properties": { }
-                  }
-                ],
-                "lastUpdatedTime": "2015-01-24T00:21:53.3323416Z",
-                "provisioningState": "Succeeded"
+                  "lastUpdatedTime":"2016-11-10T21:04:39.1082596Z",
+                  "actions":[]
+                }
               }
             }
           }
@@ -251,39 +237,70 @@
             "examples": {
               "application/json": {
                 "value": [
-                  {
-                    "id": "/subscriptions/089bd33f-d4ec-47fe-8ba5-0753aa5c5b33/resourceGroups/Default-Web-NorthCentralUS/providers/microsoft.insights/alertrules/CPUHigh%20Plan",
-                    "location": "eastus",
-                    "tags": { },
-                    "name": "CPUHigh Plan",
-                    "description": "The average CPU is high across all the instances of Plan",
-                    "isEnabled": true,
-                    "condition": {
-                      "odata.type": "Microsoft.Azure.Management.Insights.Models.ThresholdRuleCondition",
-                      "dataSource": {
-                        "odata.type": "Microsoft.Azure.Management.Insights.Models.RuleMetricDataSource",
-                        "resourceUri": "/subscriptions/089bd33f-d4ec-47fe-8ba5-0753aa5c5b33/resourceGroups/Default-Storage-NorthCentralUS/providers/Microsoft.Web/serverfarms/Plan",
-                        "metricName": "CpuPercentage",
-                        "operator": "GreaterThan"
-                      },
-                      "threshold": 90,
-                      "windowSize": "PT15M",
-                      "timeAggregation": "Average"
+                  { 
+                    "id":"/subscriptions/b67f7fec-69fc-4974-9099-a26bd6ffeda3/resourceGroups/Rac46PostSwapRG/providers/microsoft.insights/alertrules/{ruleName}",
+                    "name":"{ruleName}",
+                    "type":"Microsoft.Insights/alertRules",
+                    "location":"West US",
+                    "tags": {
+                      "$type":"Microsoft.WindowsAzure.Management.Common.Storage.CasePreservedDictionary, Microsoft.WindowsAzure.Management.Common.Storage","hidden-link:/subscriptions/b67f7fec-69fc-4974-9099-a26bd6ffeda3/resourceGroups/Rac46PostSwapRG/providers/Microsoft.Web/sites/leoalerttest":"Resource"
                     },
-                    "actions": [
-                      {
-                        "odata.type": "Microsoft.Azure.Management.Insights.Models.RuleEmailAction",
-                        "sendToServiceOwners": true,
-                        "customEmails": ["email1@contoso.com","email2@contoso.com" ]
+                    "properties": {
+                      "name":"{ruleName}",
+                      "description":"Pura Vida",
+                      "isEnabled":true,
+                      "condition": {
+                        "odata.type":"Microsoft.Azure.Management.Insights.Models.ThresholdRuleCondition",
+                        "dataSource": {
+                          "odata.type":"Microsoft.Azure.Management.Insights.Models.RuleMetricDataSource",
+                          "resourceUri":"/subscriptions/b67f7fec-69fc-4974-9099-a26bd6ffeda3/resourceGroups/Rac46PostSwapRG/providers/Microsoft.Web/sites/leoalerttest",
+                          "metricNamespace":"",
+                          "metricName":"Requests"
+                        },
+                        "threshold":2.0,
+                        "windowSize":"PT5M",
+                        "timeAggregation":"Total"
                       },
-                      {
-                        "odata.type": "Microsoft.Azure.Management.Insights.Models.RuleWebhookAction",
-                        "serviceUri": "http://contoso.com/",
-                        "properties": { }
-                      }
-                    ],
-                    "lastUpdatedTime": "2015-01-24T00:21:53.3323416Z",
-                    "provisioningState": "Succeeded"
+                      "lastUpdatedTime":"2016-11-10T21:04:39.0005255Z",
+                      "actions": [
+                        {
+                          "odata.type":"Microsoft.Azure.Management.Insights.Models.RuleEmailAction",
+                          "sendToServiceOwners":true,
+                          "customEmails": [
+                            "gu@ms.com",
+                            "su@ms.net"
+                          ]
+                        }
+                      ]
+                    }
+                  },
+                  {
+                    "id":"/subscriptions/b67f7fec-69fc-4974-9099-a26bd6ffeda3/resourceGroups/Rac46PostSwapRG/providers/microsoft.insights/alertrules/chiricutin0",
+                    "name":"chiricutin0",
+                    "type":"Microsoft.Insights/alertRules",
+                    "location":"West US",
+                    "tags": {
+                      "$type":"Microsoft.WindowsAzure.Management.Common.Storage.CasePreservedDictionary, Microsoft.WindowsAzure.Management.Common.Storage","hidden-link:/subscriptions/b67f7fec-69fc-4974-9099-a26bd6ffeda3/resourceGroups/Rac46PostSwapRG/providers/Microsoft.Web/sites/leoalerttest":"Resource"
+                    },
+                    "properties": {
+                      "name":"chiricutin0",
+                      "description":"Pura Vida 0",
+                      "isEnabled":true,
+                      "condition": {
+                        "odata.type":"Microsoft.Azure.Management.Insights.Models.ThresholdRuleCondition",
+                        "dataSource": {
+                          "odata.type":"Microsoft.Azure.Management.Insights.Models.RuleMetricDataSource",
+                          "resourceUri":"/subscriptions/b67f7fec-69fc-4974-9099-a26bd6ffeda3/resourceGroups/Rac46PostSwapRG/providers/Microsoft.Web/sites/leoalerttest",
+                          "metricNamespace":"",
+                          "metricName":"Requests"
+                        },
+                        "threshold":2.0,
+                        "windowSize":"PT5M",
+                        "timeAggregation":"Total"
+                      },
+                      "lastUpdatedTime":"2016-11-10T21:04:39.1082596Z",
+                      "actions":[]
+                    }
                   }
                 ]
               }

@@ -1,4 +1,4 @@
-﻿{
+{
   "swagger": "2.0",
   "info": {
     "title": "EventHubManagementClient",
@@ -10,12 +10,10 @@
     "https"
   ],
   "consumes": [
-    "application/json",
-    "text/json"
+    "application/json"
   ],
   "produces": [
-    "application/json",
-    "text/json"
+    "application/json"
   ],
   "security": [
     {
@@ -36,13 +34,81 @@
     }
   },
   "paths": {
+    "/providers/Microsoft.EventHub/operations": {
+      "get": {
+        "tags": [
+          "Operations"
+        ],
+        "operationId": "Operations_List",
+        "x-ms-examples": {
+          "EHOperations_List": { "$ref": "../examples/EHOperations_List.json" }
+        },
+        "description": "Lists all of the available Event Hub REST API operations.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK. The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/OperationListResult"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.EventHub/CheckNameAvailability": {
+      "post": {
+        "tags": [
+          "Namespaces"
+        ],
+        "operationId": "Namespaces_CheckNameAvailability",
+        "x-ms-examples": {
+          "NamespacesCheckNameAvailability": { "$ref": "../examples/NameSpaces/EHNameSpaceCheckNameAvailability.json" }
+        },
+        "description": "Check the give Namespace name availability.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "name": "parameters",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/CheckNameAvailabilityParameter"
+            },
+            "description": "Parameters to check availability of the given Namespace name"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "check availability returned successfully.",
+            "schema": {
+              "$ref": "#/definitions/CheckNameAvailabilityResult"
+            }
+          }
+        }
+      }
+    },
     "/subscriptions/{subscriptionId}/providers/Microsoft.EventHub/namespaces": {
       "get": {
         "tags": [
           "Namespaces"
         ],
         "operationId": "Namespaces_ListBySubscription",
-        "description": "Lists all the available namespaces within a subscription, irrespective of the resource groups.",
+        "x-ms-examples": {
+          "NamespacesListBySubscription": { "$ref": "../examples/NameSpaces/EHNameSpaceList.json" }
+        },
+        "description": "Lists all the available Namespaces within a subscription, irrespective of the resource groups.",
         "parameters": [
           {
             "$ref": "#/parameters/ApiVersionParameter"
@@ -70,14 +136,13 @@
           "Namespaces"
         ],
         "operationId": "Namespaces_ListByResourceGroup",
-        "description": "Lists the available namespaces within a resource group.",
+        "x-ms-examples": {
+          "NamespaceListByResourceGroup": { "$ref": "../examples/NameSpaces/EHNameSpaceListByResourceGroup.json" }
+        },
+        "description": "Lists the available Namespaces within a resource group.",
         "parameters": [
           {
-            "name": "resourceGroupName",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "description": "The name of the resource group."
+            "$ref": "#/parameters/resourceGroupNameParameter"
           },
           {
             "$ref": "#/parameters/ApiVersionParameter"
@@ -105,21 +170,16 @@
           "Namespaces"
         ],
         "operationId": "Namespaces_CreateOrUpdate",
+        "x-ms-examples": {
+          "NamespaceCreate": { "$ref": "../examples/NameSpaces/EHNameSpaceCreate.json" }
+        },
         "description": "Creates or updates a namespace. Once created, this namespace's resource manifest is immutable. This operation is idempotent.",
         "parameters": [
           {
-            "name": "resourceGroupName",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "description": "The name of the resource group."
+            "$ref": "#/parameters/resourceGroupNameParameter"
           },
           {
-            "name": "namespaceName",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "description": "The namespace name."
+            "$ref": "#/parameters/namespaceNameParameter"
           },
           {
             "name": "parameters",
@@ -149,6 +209,9 @@
             "schema": {
               "$ref": "#/definitions/NamespaceResource"
             }
+          },
+          "202": {
+            "description": "Namespace create or update request accepted."
           }
         },
         "x-ms-long-running-operation": true
@@ -158,21 +221,16 @@
           "Namespaces"
         ],
         "operationId": "Namespaces_Delete",
+        "x-ms-examples": {
+          "NameSpaceDelete": { "$ref": "../examples/NameSpaces/EHNameSpaceDelete.json" }
+        },
         "description": "Deletes an existing namespace. This operation also removes all associated resources under the namespace.",
         "parameters": [
           {
-            "name": "resourceGroupName",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "description": "The name of the resource group in which the namespace lives."
+            "$ref": "#/parameters/resourceGroupNameParameter"
           },
           {
-            "name": "namespaceName",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "description": "The name of the namespace to delete."
+            "$ref": "#/parameters/namespaceNameParameter"
           },
           {
             "$ref": "#/parameters/ApiVersionParameter"
@@ -199,21 +257,16 @@
           "Namespaces"
         ],
         "operationId": "Namespaces_Get",
+        "x-ms-examples": {
+          "NameSpaceGet": { "$ref": "../examples/NameSpaces/EHNameSpaceGet.json" }
+        },
         "description": "Gets the description of the specified namespace.",
         "parameters": [
           {
-            "name": "resourceGroupName",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "description": "The name of the resource group in which the namespace lives."
+            "$ref": "#/parameters/resourceGroupNameParameter"
           },
           {
-            "name": "namespaceName",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "description": "The name of the specified namespace."
+            "$ref": "#/parameters/namespaceNameParameter"
           },
           {
             "$ref": "#/parameters/ApiVersionParameter"
@@ -228,6 +281,62 @@
             "schema": {
               "$ref": "#/definitions/NamespaceResource"
             }
+          },
+          "201": {
+            "description": "Namespace update request accepted.",
+            "schema": {
+              "$ref": "#/definitions/NamespaceResource"
+            }
+          }
+        }
+      },
+      "patch": {
+        "tags": [
+          "Namespaces"
+        ],
+        "operationId": "Namespaces_Update",
+        "x-ms-examples": {
+          "NamespacesUpdate": { "$ref": "../examples/NameSpaces/EHNameSpaceUpdate.json" }
+        },
+        "description": "Creates or updates a namespace. Once created, this namespace's resource manifest is immutable. This operation is idempotent.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/resourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/namespaceNameParameter"
+          },
+          {
+            "name": "parameters",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/NamespaceUpdateParameter"
+            },
+            "description": "Parameters for updating a namespace resource."
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": "Namespace update request accepted.",
+            "schema": {
+              "$ref": "#/definitions/NamespaceResource"
+            }
+          },
+          "200": {
+            "description": "Namespace successfuly updated.",
+            "schema": {
+              "$ref": "#/definitions/NamespaceResource"
+            }
+          },
+          "202": {
+            "description": "Namespace create or update request accepted."
           }
         }
       }
@@ -238,21 +347,16 @@
           "Namespaces"
         ],
         "operationId": "Namespaces_ListAuthorizationRules",
-        "description": "Gets a list of authorization rules for a namespace.",
+        "x-ms-examples": {
+          "ListAuthorizationRules": { "$ref": "../examples/NameSpaces/EHNameSpaceAutorizationRuleListAll.json" }
+        },
+        "description": "Gets a list of authorization rules for a Namespace.",
         "parameters": [
           {
-            "name": "resourceGroupName",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "description": "The name of the resource group in which the namespace lives."
+            "$ref": "#/parameters/resourceGroupNameParameter"
           },
           {
-            "name": "namespaceName",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "description": "The namespace name."
+            "$ref": "#/parameters/namespaceNameParameter"
           },
           {
             "$ref": "#/parameters/ApiVersionParameter"
@@ -263,7 +367,7 @@
         ],
         "responses": {
           "200": {
-            "description": "Namespace authorization rule successfully returned.",
+            "description": "Namespace AuthorizationRule successfully returned.",
             "schema": {
               "$ref": "#/definitions/SharedAccessAuthorizationRuleListResult"
             }
@@ -280,28 +384,19 @@
           "Namespaces"
         ],
         "operationId": "Namespaces_CreateOrUpdateAuthorizationRule",
-        "description": "Creates or updates an authorization rule for a namespace.",
+        "x-ms-examples": {
+          "NameSpaceAuthorizationRuleCreate": { "$ref": "../examples/NameSpaces/EHNameSpaceAuthorizationRuleCreate.json" }
+        },
+        "description": "Creates or updates an AuthorizationRule for a Namespace.",
         "parameters": [
           {
-            "name": "resourceGroupName",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "description": "The name of the resource group in which the namespace lives."
+            "$ref": "#/parameters/resourceGroupNameParameter"
           },
           {
-            "name": "namespaceName",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "description": "The namespace name."
+            "$ref": "#/parameters/namespaceNameParameter"
           },
           {
-            "name": "authorizationRuleName",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "description": "Namespace authorization rule name."
+            "$ref": "#/parameters/authorizationRuleNameParameter"
           },
           {
             "name": "parameters",
@@ -310,7 +405,7 @@
             "schema": {
               "$ref": "#/definitions/SharedAccessAuthorizationRuleCreateOrUpdateParameters"
             },
-            "description": "The shared access authorization rule."
+            "description": "The shared access AuthorizationRule."
           },
           {
             "$ref": "#/parameters/ApiVersionParameter"
@@ -321,7 +416,7 @@
         ],
         "responses": {
           "200": {
-            "description": "Namespace authorization rule created",
+            "description": "Namespace AuthorizationRule created",
             "schema": {
               "$ref": "#/definitions/SharedAccessAuthorizationRuleResource"
             }
@@ -333,28 +428,19 @@
           "Namespaces"
         ],
         "operationId": "Namespaces_DeleteAuthorizationRule",
-        "description": "Deletes an authorization rule for a namespace.",
+        "x-ms-examples": {
+          "NameSpaceAutorizationRuleDelete": { "$ref": "../examples/NameSpaces/EHNameSpaceAutorizationRuleDelete.json" }
+        },
+        "description": "Deletes an AuthorizationRule for a Namespace.",
         "parameters": [
           {
-            "name": "resourceGroupName",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "description": "The name of the resource group in which the namespace lives."
+            "$ref": "#/parameters/resourceGroupNameParameter"
           },
           {
-            "name": "namespaceName",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "description": "The namespace name."
+            "$ref": "#/parameters/namespaceNameParameter"
           },
           {
-            "name": "authorizationRuleName",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "description": "Authorization rule name."
+            "$ref": "#/parameters/authorizationRuleNameParameter"
           },
           {
             "$ref": "#/parameters/ApiVersionParameter"
@@ -368,7 +454,7 @@
             "description": "No content."
           },
           "200": {
-            "description": "Namespace authorization rule successfully deleted."
+            "description": "Namespace AuthorizationRule successfully deleted."
           }
         }
       },
@@ -377,28 +463,19 @@
           "Namespaces"
         ],
         "operationId": "Namespaces_GetAuthorizationRule",
-        "description": "Gets an authorization rule for a namespace by rule name.",
+        "x-ms-examples": {
+          "NameSpaceAutorizationRuleGet": { "$ref": "../examples/NameSpaces/EHNameSpaceAutorizationRuleGet.json" }
+        },
+        "description": "Gets an AuthorizationRule for a Namespace by rule name.",
         "parameters": [
           {
-            "name": "resourceGroupName",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "description": "The name of the resource group in which the namespace lives."
+            "$ref": "#/parameters/resourceGroupNameParameter"
           },
           {
-            "name": "namespaceName",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "description": "The namespace name."
+            "$ref": "#/parameters/namespaceNameParameter"
           },
           {
-            "name": "authorizationRuleName",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "description": "Authorization rule name."
+            "$ref": "#/parameters/authorizationRuleNameParameter"
           },
           {
             "$ref": "#/parameters/ApiVersionParameter"
@@ -409,7 +486,7 @@
         ],
         "responses": {
           "200": {
-            "description": "Namespace authorization rule returned successfully.",
+            "description": "Namespace AuthorizationRule returned successfully.",
             "schema": {
               "$ref": "#/definitions/SharedAccessAuthorizationRuleResource"
             }
@@ -423,28 +500,19 @@
           "Namespaces"
         ],
         "operationId": "Namespaces_ListKeys",
-        "description": "Gets the primary and secondary connection strings for the namespace.",
+        "x-ms-examples": {
+          "NameSpaceAuthorizationRuleListKey": { "$ref": "../examples/NameSpaces/EHNameSpaceAuthorizationRuleListKey.json" }
+        },
+        "description": "Gets the primary and secondary connection strings for the Namespace.",
         "parameters": [
           {
-            "name": "resourceGroupName",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "description": "The name of the resource group in which the namespace lives."
+            "$ref": "#/parameters/resourceGroupNameParameter"
           },
           {
-            "name": "namespaceName",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "description": "The namespace name."
+            "$ref": "#/parameters/namespaceNameParameter"
           },
           {
-            "name": "authorizationRuleName",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "description": "The authorization rule name."
+            "$ref": "#/parameters/authorizationRuleNameParameter"
           },
           {
             "$ref": "#/parameters/ApiVersionParameter"
@@ -469,28 +537,19 @@
           "Namespaces"
         ],
         "operationId": "Namespaces_RegenerateKeys",
-        "description": "Regenerates the primary or secondary connection strings for the specified namespace.",
+        "x-ms-examples": {
+          "NameSpaceAuthorizationRuleRegenrateKey": { "$ref": "../examples/NameSpaces/EHNameSpaceAuthorizationRuleRegenrateKey.json" }
+        },
+        "description": "Regenerates the primary or secondary connection strings for the specified Namespace.",
         "parameters": [
           {
-            "name": "resourceGroupName",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "description": "The name of the resource group in which the namespace lives."
+            "$ref": "#/parameters/resourceGroupNameParameter"
           },
           {
-            "name": "namespaceName",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "description": "The namespace name."
+            "$ref": "#/parameters/namespaceNameParameter"
           },
           {
-            "name": "authorizationRuleName",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "description": "The authorization rule name."
+            "$ref": "#/parameters/authorizationRuleNameParameter"
           },
           {
             "name": "parameters",
@@ -524,24 +583,19 @@
           "EventHubs"
         ],
         "operationId": "EventHubs_ListAll",
-        "description": "Gets all the Event Hubs in a namespace.",
+        "x-ms-examples": {
+          "EventHubsListAll": { "$ref": "../examples/EventHubs/EHEventHubListByNameSpace.json" }
+        },
+        "description": "Gets all the Event Hubs in a Namespace.",
         "externalDocs": {
           "url": "https://msdn.microsoft.com/en-us/library/azure/mt639493.aspx"
         },
         "parameters": [
           {
-            "name": "resourceGroupName",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "description": "The name of the resource group."
+            "$ref": "#/parameters/resourceGroupNameParameter"
           },
           {
-            "name": "namespaceName",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "description": "The namespace name."
+            "$ref": "#/parameters/namespaceNameParameter"
           },
           {
             "$ref": "#/parameters/ApiVersionParameter"
@@ -569,31 +623,22 @@
           "EventHubs"
         ],
         "operationId": "EventHubs_CreateOrUpdate",
-        "description": "Creates or updates a new Event Hub as a nested resource within a namespace.",
+        "x-ms-examples": {
+          "EventHubCreate": { "$ref": "../examples/EventHubs/EHEventHubCreate.json" }
+        },
+        "description": "Creates or updates a new Event Hub as a nested resource within a Namespace.",
         "externalDocs": {
           "url": "https://msdn.microsoft.com/en-us/library/azure/mt639497.aspx"
         },
         "parameters": [
           {
-            "name": "resourceGroupName",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "description": "The name of the resource group."
+            "$ref": "#/parameters/resourceGroupNameParameter"
           },
           {
-            "name": "namespaceName",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "description": "The namespace name."
+            "$ref": "#/parameters/namespaceNameParameter"
           },
           {
-            "name": "eventHubName",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "description": "The Event Hub name."
+            "$ref": "#/parameters/eventHubNameParameter"
           },
           {
             "name": "parameters",
@@ -625,31 +670,22 @@
           "EventHubs"
         ],
         "operationId": "EventHubs_Delete",
-        "description": "Deletes an Event Hub from the specified namespace and resource group.",
+        "x-ms-examples": {
+          "EventHubDelete": { "$ref": "../examples/EventHubs/EHEventHubDelete.json" }
+        },
+        "description": "Deletes an Event Hub from the specified Namespace and resource group.",
         "externalDocs": {
           "url": "https://msdn.microsoft.com/en-us/library/azure/mt639496.aspx"
         },
         "parameters": [
           {
-            "name": "resourceGroupName",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "description": "The name of the resource group."
+            "$ref": "#/parameters/resourceGroupNameParameter"
           },
           {
-            "name": "namespaceName",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "description": "The namespace name."
+            "$ref": "#/parameters/namespaceNameParameter"
           },
           {
-            "name": "eventHubName",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "description": "The name of the Event Hub to delete."
+            "$ref": "#/parameters/eventHubNameParameter"
           },
           {
             "$ref": "#/parameters/ApiVersionParameter"
@@ -672,31 +708,22 @@
           "EventHubs"
         ],
         "operationId": "EventHubs_Get",
+        "x-ms-examples": {
+          "EventHubGet": { "$ref": "../examples/EventHubs/EHEventHubGet.json" }
+        },
         "description": "Gets an Event Hubs description for the specified Event Hub.",
         "externalDocs": {
           "url": "https://msdn.microsoft.com/en-us/library/azure/mt639501.aspx"
         },
         "parameters": [
           {
-            "name": "resourceGroupName",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "description": "The name of the resource group."
+            "$ref": "#/parameters/resourceGroupNameParameter"
           },
           {
-            "name": "namespaceName",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "description": "The namespace name."
+            "$ref": "#/parameters/namespaceNameParameter"
           },
           {
-            "name": "eventHubName",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "description": "The Event Hub name."
+            "$ref": "#/parameters/eventHubNameParameter"
           },
           {
             "$ref": "#/parameters/ApiVersionParameter"
@@ -721,28 +748,19 @@
           "EventHubs"
         ],
         "operationId": "EventHubs_ListAuthorizationRules",
+        "x-ms-examples": {
+          "EventHubAutorizationRuleListAll": { "$ref": "../examples/EventHubs/EHEventHubAutorizationRuleListAll.json" }
+        },
         "description": "Gets the authorization rules for an Event Hub.",
         "parameters": [
           {
-            "name": "resourceGroupName",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "description": "The name of the resource group."
+            "$ref": "#/parameters/resourceGroupNameParameter"
           },
           {
-            "name": "namespaceName",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "description": "The namespace name"
+            "$ref": "#/parameters/namespaceNameParameter"
           },
           {
-            "name": "eventHubName",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "description": "The Event Hub name."
+            "$ref": "#/parameters/eventHubNameParameter"
           },
           {
             "$ref": "#/parameters/ApiVersionParameter"
@@ -753,7 +771,7 @@
         ],
         "responses": {
           "200": {
-            "description": "Event Hub authorization rule returned successfully.",
+            "description": "Event Hub AuthorizationRule returned successfully.",
             "schema": {
               "$ref": "#/definitions/SharedAccessAuthorizationRuleListResult"
             }
@@ -770,38 +788,25 @@
           "EventHubs"
         ],
         "operationId": "EventHubs_CreateOrUpdateAuthorizationRule",
-        "description": "Creates or updates an authorization rule for the specified Event Hub.",
+        "x-ms-examples": {
+          "EventHubAuthorizationRuleCreate": { "$ref": "../examples/EventHubs/EHEventHubAuthorizationRuleCreate.json" }
+        },
+        "description": "Creates or updates an AuthorizationRule for the specified Event Hub.",
         "externalDocs": {
           "url": "https://msdn.microsoft.com/en-us/library/azure/mt706096.aspx"
         },
         "parameters": [
           {
-            "name": "resourceGroupName",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "description": "The name of the resource group."
+            "$ref": "#/parameters/resourceGroupNameParameter"
           },
           {
-            "name": "namespaceName",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "description": "The namespace name."
+            "$ref": "#/parameters/namespaceNameParameter"
           },
           {
-            "name": "eventHubName",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "description": "The Event Hub name."
+            "$ref": "#/parameters/eventHubNameParameter"
           },
           {
-            "name": "authorizationRuleName",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "description": "The authorization rule name."
+            "$ref": "#/parameters/authorizationRuleNameParameter"
           },
           {
             "name": "parameters",
@@ -810,7 +815,7 @@
             "schema": {
               "$ref": "#/definitions/SharedAccessAuthorizationRuleCreateOrUpdateParameters"
             },
-            "description": "The shared access authorization rule."
+            "description": "The shared access AuthorizationRule."
           },
           {
             "$ref": "#/parameters/ApiVersionParameter"
@@ -821,7 +826,7 @@
         ],
         "responses": {
           "200": {
-            "description": "Event Hubs authorization rule successfully created.",
+            "description": "Event Hub AuthorizationRule successfully created.",
             "schema": {
               "$ref": "#/definitions/SharedAccessAuthorizationRuleResource"
             }
@@ -833,38 +838,25 @@
           "EventHubs"
         ],
         "operationId": "EventHubs_GetAuthorizationRule",
-        "description": "Gets an authorization rule for an Event Hub by rule name.",
+        "x-ms-examples": {
+          "EventHubAutorizationRuleGet": { "$ref": "../examples/EventHubs/EHEventHubAutorizationRuleGet.json" }
+        },
+        "description": "Gets an AuthorizationRule for an Event Hub by rule name.",
         "externalDocs": {
           "url": "https://msdn.microsoft.com/en-us/library/azure/mt706097.aspx"
         },
         "parameters": [
           {
-            "name": "resourceGroupName",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "description": "The name of the resource group."
+            "$ref": "#/parameters/resourceGroupNameParameter"
           },
           {
-            "name": "namespaceName",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "description": "The namespace name."
+            "$ref": "#/parameters/namespaceNameParameter"
           },
           {
-            "name": "eventHubName",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "description": "The Event Hub name."
+            "$ref": "#/parameters/eventHubNameParameter"
           },
           {
-            "name": "authorizationRuleName",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "description": "The authorization rule name."
+            "$ref": "#/parameters/authorizationRuleNameParameter"
           },
           {
             "$ref": "#/parameters/ApiVersionParameter"
@@ -875,7 +867,7 @@
         ],
         "responses": {
           "200": {
-            "description": "Event Hub authorization rule successfully returned.",
+            "description": "Event Hub AuthorizationRule successfully returned.",
             "schema": {
               "$ref": "#/definitions/SharedAccessAuthorizationRuleResource"
             }
@@ -887,38 +879,25 @@
           "EventHubs"
         ],
         "operationId": "EventHubs_DeleteAuthorizationRule",
-        "description": "Deletes an Event Hubs authorization rule.",
+        "x-ms-examples": {
+          "EventHubAutorizationRuleDelete": { "$ref": "../examples/EventHubs/EHEventHubAutorizationRuleDelete.json" }
+        },
+        "description": "Deletes an Event Hub AuthorizationRule.",
         "externalDocs": {
           "url": "https://msdn.microsoft.com/en-us/library/azure/mt706100.aspx"
         },
         "parameters": [
           {
-            "name": "resourceGroupName",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "description": "The name of the resource group."
+            "$ref": "#/parameters/resourceGroupNameParameter"
           },
           {
-            "name": "namespaceName",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "description": "The namespace name."
+            "$ref": "#/parameters/namespaceNameParameter"
           },
           {
-            "name": "eventHubName",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "description": "The Event Hub name."
+            "$ref": "#/parameters/eventHubNameParameter"
           },
           {
-            "name": "authorizationRuleName",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "description": "The authorization rule name."
+            "$ref": "#/parameters/authorizationRuleNameParameter"
           },
           {
             "$ref": "#/parameters/ApiVersionParameter"
@@ -932,7 +911,7 @@
             "description": "No content."
           },
           "200": {
-            "description": "Event Hub authorization rule successfully deleted."
+            "description": "Event Hub AuthorizationRule successfully deleted."
           }
         }
       }
@@ -943,38 +922,25 @@
           "EventHubs"
         ],
         "operationId": "EventHubs_ListKeys",
+        "x-ms-examples": {
+          "EventHubAuthorizationRuleListKey": { "$ref": "../examples/EventHubs/EHEventHubAuthorizationRuleListKey.json" }
+        },
         "description": "Gets the ACS and SAS connection strings for the Event Hub.",
         "externalDocs": {
           "url": "https://msdn.microsoft.com/en-us/library/azure/mt706098.aspx"
         },
         "parameters": [
           {
-            "name": "resourceGroupName",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "description": "The name of the resource group."
+            "$ref": "#/parameters/resourceGroupNameParameter"
           },
           {
-            "name": "namespaceName",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "description": "The namespace name."
+            "$ref": "#/parameters/namespaceNameParameter"
           },
           {
-            "name": "eventHubName",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "description": "The Event Hub name."
+            "$ref": "#/parameters/eventHubNameParameter"
           },
           {
-            "name": "authorizationRuleName",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "description": "The connection string of the namespace for the specified authorization rule."
+            "$ref": "#/parameters/authorizationRuleNameParameter"
           },
           {
             "$ref": "#/parameters/ApiVersionParameter"
@@ -999,38 +965,25 @@
           "EventHubs"
         ],
         "operationId": "EventHubs_RegenerateKeys",
+        "x-ms-examples": {
+          "EventHubAuthorizationRuleRegenrateKey": { "$ref": "../examples/EventHubs/EHEventHubAuthorizationRuleRegenrateKey.json" }
+        },
         "description": "Regenerates the ACS and SAS connection strings for the Event Hub.",
         "externalDocs": {
           "url": "https://msdn.microsoft.com/en-us/library/azure/mt706099.aspx"
         },
         "parameters": [
           {
-            "name": "resourceGroupName",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "description": "The name of the resource group."
+            "$ref": "#/parameters/resourceGroupNameParameter"
           },
           {
-            "name": "namespaceName",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "description": "The namespace name."
+            "$ref": "#/parameters/namespaceNameParameter"
           },
           {
-            "name": "eventHubName",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "description": "The Event Hub name."
+            "$ref": "#/parameters/eventHubNameParameter"
           },
           {
-            "name": "authorizationRuleName",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "description": "The connection string of the Event Hub for the specified authorization rule."
+            "$ref": "#/parameters/authorizationRuleNameParameter"
           },
           {
             "name": "parameters",
@@ -1039,7 +992,7 @@
             "schema": {
               "$ref": "#/definitions/RegenerateKeysParameters"
             },
-            "description": "Parameters supplied to regenerate the authorization rule."
+            "description": "Parameters supplied to regenerate the AuthorizationRule Keys (PrimaryKey/SecondaryKey)."
           },
           {
             "$ref": "#/parameters/ApiVersionParameter"
@@ -1064,38 +1017,25 @@
           "ConsumerGroups"
         ],
         "operationId": "ConsumerGroups_CreateOrUpdate",
-        "description": "Creates or updates an Event Hubs consumer group as a nested resource within a namespace.",
+        "x-ms-examples": {
+          "ConsumerGroupCreate": { "$ref": "../examples/ConsumerGroup/EHConsumerGroupCreate.json" }
+        },
+        "description": "Creates or updates an Event Hubs consumer group as a nested resource within a Namespace.",
         "externalDocs": {
           "url": "https://msdn.microsoft.com/en-us/library/azure/mt639498.aspx"
         },
         "parameters": [
           {
-            "name": "resourceGroupName",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "description": "The name of the resource group."
+            "$ref": "#/parameters/resourceGroupNameParameter"
           },
           {
-            "name": "namespaceName",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "description": "The namespace name."
+            "$ref": "#/parameters/namespaceNameParameter"
           },
           {
-            "name": "eventHubName",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "description": "The Event Hub name."
+            "$ref": "#/parameters/eventHubNameParameter"
           },
           {
-            "name": "consumerGroupName",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "description": "The consumer group name."
+            "$ref": "#/parameters/consumerGroupNameParameter"
           },
           {
             "name": "parameters",
@@ -1104,7 +1044,7 @@
             "schema": {
               "$ref": "#/definitions/ConsumerGroupCreateOrUpdateParameters"
             },
-            "description": "Parameters supplied to create a consumer group resource."
+            "description": "Parameters supplied to create or update a consumer group resource."
           },
           {
             "$ref": "#/parameters/ApiVersionParameter"
@@ -1127,38 +1067,25 @@
           "ConsumerGroups"
         ],
         "operationId": "ConsumerGroups_Delete",
+        "x-ms-examples": {
+          "ConsumerGroupDelete": { "$ref": "../examples/ConsumerGroup/EHConsumerGroupDelete.json" }
+        },
         "description": "Deletes a consumer group from the specified Event Hub and resource group.",
         "externalDocs": {
           "url": "https://msdn.microsoft.com/en-us/library/azure/mt639491.aspx"
         },
         "parameters": [
           {
-            "name": "resourceGroupName",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "description": "The name of the resource group."
+            "$ref": "#/parameters/resourceGroupNameParameter"
           },
           {
-            "name": "namespaceName",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "description": "The namespace name."
+            "$ref": "#/parameters/namespaceNameParameter"
           },
           {
-            "name": "eventHubName",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "description": "The Event Hub name."
+            "$ref": "#/parameters/eventHubNameParameter"
           },
           {
-            "name": "consumerGroupName",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "description": "The Cconsumer group name."
+            "$ref": "#/parameters/consumerGroupNameParameter"
           },
           {
             "$ref": "#/parameters/ApiVersionParameter"
@@ -1181,38 +1108,25 @@
           "ConsumerGroups"
         ],
         "operationId": "ConsumerGroups_Get",
+        "x-ms-examples": {
+          "ConsumerGroupGet": { "$ref": "../examples/ConsumerGroup/EHConsumerGroupGet.json" }
+        },
         "description": "Gets a description for the specified consumer group.",
         "externalDocs": {
           "url": "https://msdn.microsoft.com/en-us/library/azure/mt639488.aspx"
         },
         "parameters": [
           {
-            "name": "resourceGroupName",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "description": "The name of the resource group."
+            "$ref": "#/parameters/resourceGroupNameParameter"
           },
           {
-            "name": "namespaceName",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "description": "The namespace name."
+            "$ref": "#/parameters/namespaceNameParameter"
           },
           {
-            "name": "eventHubName",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "description": "The Event Hub name."
+            "$ref": "#/parameters/eventHubNameParameter"
           },
           {
-            "name": "consumerGroupName",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "description": "The consumer group name."
+            "$ref": "#/parameters/consumerGroupNameParameter"
           },
           {
             "$ref": "#/parameters/ApiVersionParameter"
@@ -1237,31 +1151,22 @@
           "ConsumerGroups"
         ],
         "operationId": "ConsumerGroups_ListAll",
-        "description": "Gets all the consumer groups in a namespace. An empty feed is returned if no consumer group exists in the namespace.",
+        "x-ms-examples": {
+          "ConsumerGroupsListAll": { "$ref": "../examples/ConsumerGroup/EHConsumerGroupListByEventHub.json" }
+        },
+        "description": "Gets all the consumer groups in a Namespace. An empty feed is returned if no consumer group exists in the Namespace.",
         "externalDocs": {
           "url": "https://msdn.microsoft.com/en-us/library/azure/mt639503.aspx"
         },
         "parameters": [
           {
-            "name": "resourceGroupName",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "description": "The name of the resource group."
+            "$ref": "#/parameters/resourceGroupNameParameter"
           },
           {
-            "name": "namespaceName",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "description": "The namespace name."
+            "$ref": "#/parameters/namespaceNameParameter"
           },
           {
-            "name": "eventHubName",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "description": "The Event Hub name."
+            "$ref": "#/parameters/eventHubNameParameter"
           },
           {
             "$ref": "#/parameters/ApiVersionParameter"
@@ -1285,23 +1190,57 @@
     }
   },
   "definitions": {
-    "Resource": {
+    "OperationListResult": {
+      "description": "Result of the request to list Event Hub operations. It contains a list of operations and a URL link to get the next set of results.",
       "properties": {
-        "id": {
+        "value": {
+          "description": "List of Event Hub operations supported by the Microsoft.EventHub resource provider.",
+          "type": "array",
           "readOnly": true,
-          "type": "string",
-          "description": "Resource Id"
+          "items": {
+            "$ref": "#/definitions/Operation"
+          }
         },
+        "nextLink": {
+          "description": "URL to get the next set of operation list results if there are any.",
+          "type": "string",
+          "readOnly": true
+        }
+      }
+    },
+    "Operation": {
+      "description": "A Event Hub REST API operation",
+      "type": "object",
+      "properties": {
         "name": {
-          "readOnly": true,
+          "description": "Operation name: {provider}/{resource}/{operation}",
           "type": "string",
-          "description": "Resource name"
+          "readOnly": true
         },
-        "type": {
-          "readOnly": true,
-          "type": "string",
-          "description": "Resource type"
-        },
+        "display": {
+          "description": "The object that represents the operation.",
+          "properties": {
+            "provider": {
+              "description": "Service provider: Microsoft.EventHub",
+              "type": "string",
+              "readOnly": true
+            },
+            "resource": {
+              "description": "Resource on which the operation is performed: Invoice, etc.",
+              "type": "string",
+              "readOnly": true
+            },
+            "operation": {
+              "description": "Operation type: Read, write, delete, etc.",
+              "type": "string",
+              "readOnly": true
+            }
+          }
+        }
+      }
+    },
+    "TrackedResource": {
+      "properties": {
         "location": {
           "type": "string",
           "description": "Resource location"
@@ -1317,6 +1256,36 @@
       "required": [
         "location"
       ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/Resource"
+        }
+      ],
+      "description": "Definition of Resource"
+    },
+    "Resource": {
+      "properties": {
+        "id": {
+          "readOnly": true,
+          "type": "string",
+          "description": "Resource Id"
+        },
+        "name": {
+          "readOnly": true,
+          "type": "string",
+          "description": "Resource name"
+        },
+        "location": {
+          "type": "string",
+          "description": "Resource location"
+        },
+        "type": {
+          "readOnly": true,
+          "type": "string",
+          "description": "Resource type"
+        }
+      },
+      "description": "The Resource definition",
       "x-ms-azure-resource": true
     },
     "NamespaceCreateOrUpdateParameters": {
@@ -1373,20 +1342,16 @@
       },
       "allOf": [
         {
-          "$ref": "#/definitions/Resource"
+          "$ref": "#/definitions/TrackedResource"
         }
       ],
-      "description": "Description of a namespace resource."
+      "description": "Single Namespace item in List or Get Operation"
     },
     "NamespaceProperties": {
       "properties": {
-        "provisioningState": {
-          "type": "string",
-          "description": "Provisioning state of the namespace."
-        },
         "status": {
           "type": "string",
-          "description": "State of the namespace.",
+          "description": "State of the Namespace.",
           "enum": [
             "Unknown",
             "Creating",
@@ -1407,15 +1372,19 @@
             "modelAsString": false
           }
         },
+        "provisioningState": {
+          "type": "string",
+          "description": "Provisioning state of the Namespace."
+        },
         "createdAt": {
           "type": "string",
           "format": "date-time",
-          "description": "The time the namespace was created."
+          "description": "The time the Namespace was created."
         },
         "updatedAt": {
           "type": "string",
           "format": "date-time",
-          "description": "The time the namespace was updated."
+          "description": "The time the Namespace was updated."
         },
         "serviceBusEndpoint": {
           "externalDocs": {
@@ -1424,16 +1393,17 @@
           "type": "string",
           "description": "Endpoint you can use to perform Service Bus operations."
         },
-        "createACSNamespace": {
-          "type": "boolean",
-          "description": "Indicates whether to create an ACS namespace."
+        "metricId": {
+          "type": "string",
+          "readOnly": true,
+          "description": "Identifier for Azure Insights metrics"
         },
         "enabled": {
           "type": "boolean",
           "description": "Specifies whether this instance is enabled."
         }
       },
-      "description": "Properties of the namespace."
+      "description": "Properties of the Namespace supplied for create or update Namespace operation"
     },
     "Sku": {
       "type": "object",
@@ -1443,8 +1413,7 @@
           "description": "Name of this SKU.",
           "enum": [
             "Basic",
-            "Standard",
-            "Premium"
+            "Standard"
           ],
           "x-ms-enum": {
             "name": "SkuName",
@@ -1473,7 +1442,7 @@
       "required": [
         "tier"
       ],
-      "description": "SKU of the namespace."
+      "description": "SKU parameters supplied to the create Namespace operation"
     },
     "SharedAccessAuthorizationRuleCreateOrUpdateParameters": {
       "properties": {
@@ -1483,7 +1452,7 @@
         },
         "name": {
           "type": "string",
-          "description": "Name of the authorization rule."
+          "description": "Name of the AuthorizationRule."
         },
         "properties": {
           "x-ms-client-flatten": true,
@@ -1520,7 +1489,7 @@
           "$ref": "#/definitions/Resource"
         }
       ],
-      "description": "Description of a namespace authorization rule."
+      "description": "Single item in a List or Get AuthorizationRule operation"
     },
     "SharedAccessAuthorizationRuleProperties": {
       "properties": {
@@ -1544,36 +1513,41 @@
       "required": [
         "rights"
       ],
-      "description": "SharedAccessAuthorizationRule properties."
+      "description": "Properties supplied to create or update SharedAccessAuthorizationRule"
     },
     "ResourceListKeys": {
       "properties": {
         "primaryConnectionString": {
           "type": "string",
-          "description": "Primary connection string of the created namespace authorization rule."
+          "readOnly": true,
+          "description": "Primary connection string of the created Namespace AuthorizationRule."
         },
         "secondaryConnectionString": {
           "type": "string",
-          "description": "Secondary connection string of the created namespace authorization rule."
+          "readOnly": true,
+          "description": "Secondary connection string of the created Namespace AuthorizationRule."
         },
         "primaryKey": {
           "type": "string",
+          "readOnly": true,
           "description": "A base64-encoded 256-bit primary key for signing and validating the SAS token."
         },
         "secondaryKey": {
           "type": "string",
+          "readOnly": true,
           "description": "A base64-encoded 256-bit primary key for signing and validating the SAS token."
         },
         "keyName": {
           "type": "string",
-          "description": "A string that describes the authorization rule."
+          "readOnly": true,
+          "description": "A string that describes the AuthorizationRule."
         }
       },
       "description": "Namespace/EventHub Connection String"
     },
     "RegenerateKeysParameters": {
       "properties": {
-        "Policykey": {
+        "policykey": {
           "type": "string",
           "description": "Key that needs to be regenerated.",
           "enum": [
@@ -1586,7 +1560,7 @@
           }
         }
       },
-      "description": "Parameters supplied to the Regenerate Authorization Rule operation."
+      "description": "Parameters supplied to the Regenerate Authorization Rule keys operation."
     },
     "EventHubCreateOrUpdateParameters": {
       "properties": {
@@ -1596,7 +1570,7 @@
         },
         "type": {
           "type": "string",
-          "description": "ARM type of the namespace."
+          "description": "ARM type of the Namespace."
         },
         "name": {
           "type": "string",
@@ -1617,6 +1591,7 @@
         "createdAt": {
           "type": "string",
           "format": "date-time",
+          "readOnly": true,
           "description": "Exact time the Event Hub was created."
         },
         "messageRetentionInDays": {
@@ -1631,6 +1606,7 @@
         },
         "partitionIds": {
           "type": "array",
+          "readOnly": true,
           "items": {
             "type": "string"
           },
@@ -1657,10 +1633,12 @@
         },
         "updatedAt": {
           "type": "string",
+          "readOnly": true,
           "format": "date-time",
           "description": "The exact time the message was updated."
         }
-      }
+      },
+      "description": "Properties supplied to the Create Or Update Event Hub operation."
     },
     "EventHubResource": {
       "properties": {
@@ -1674,7 +1652,7 @@
           "$ref": "#/definitions/Resource"
         }
       ],
-      "description": "Description of the Event Hub resource."
+      "description": "Single item in List or Get Event Hub operation"
     },
     "EventHubListResult": {
       "properties": {
@@ -1683,14 +1661,14 @@
           "items": {
             "$ref": "#/definitions/EventHubResource"
           },
-          "description": "Result of the List Event Hubs operation."
+          "description": "Result of the List EventHubs operation."
         },
         "nextLink": {
           "type": "string",
-          "description": "Link to the next set of results. Not empty if Value contains incomplete list of Event Hubs."
+          "description": "Link to the next set of results. Not empty if Value contains incomplete list of EventHubs."
         }
       },
-      "description": "The response of the List Event Hubs operation."
+      "description": "The result of the List EventHubs operation."
     },
     "ConsumerGroupCreateOrUpdateParameters": {
       "properties": {
@@ -1700,7 +1678,7 @@
         },
         "type": {
           "type": "string",
-          "description": "ARM type of the namespace."
+          "description": "ARM type of the Namespace."
         },
         "name": {
           "type": "string",
@@ -1721,22 +1699,26 @@
         "createdAt": {
           "type": "string",
           "format": "date-time",
+          "readOnly": true,
           "description": "Exact time the message was created."
         },
         "eventHubPath": {
           "type": "string",
+          "readOnly": true,
           "description": "The path of the Event Hub."
         },
         "updatedAt": {
           "type": "string",
           "format": "date-time",
+          "readOnly": true,
           "description": "The exact time the message was updated."
         },
         "userMetadata": {
           "type": "string",
           "description": "The user metadata."
         }
-      }
+      },
+      "description": "Properties supplied to the Create Or Update Consumer Group operation."
     },
     "ConsumerGroupResource": {
       "properties": {
@@ -1750,7 +1732,7 @@
           "$ref": "#/definitions/Resource"
         }
       ],
-      "description": "Description of the consumer group resource."
+      "description": "Single item in List or Get Consumer group operation"
     },
     "ConsumerGroupListResult": {
       "properties": {
@@ -1766,7 +1748,69 @@
           "description": "Link to the next set of results. Not empty if Value contains incomplete list of Consumer Group"
         }
       },
-      "description": "The response to the List Consumer Group operation."
+      "description": "The result to the List Consumer Group operation."
+    },
+    "UnavailableReason": {
+      "type": "string",
+      "enum": [
+        "None",
+        "InvalidName",
+        "SubscriptionIsDisabled",
+        "NameInUse",
+        "NameInLockdown",
+        "TooManyNamespaceInCurrentSubscription"
+      ],
+      "x-ms-enum": {
+        "name": "UnavailableReason",
+        "modelAsString": false
+      },
+      "description": "Specifies the reason for the unavailability of the service."
+    },
+    "CheckNameAvailabilityParameter": {
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "Name to check the namespace name availability"
+        }
+      },
+      "required": [
+        "name"
+      ],
+      "description": "Parameter supplied to check Namespace name availability operation "
+    },
+    "CheckNameAvailabilityResult": {
+      "properties": {
+        "nameAvailable": {
+          "type": "boolean",
+          "description": "Value indicating Namespace is availability, true if the Namespace is available; otherwise, false."
+        },
+        "reason": {
+          "$ref": "#/definitions/UnavailableReason",
+          "description": "The reason for unavailability of a Namespace."
+        },
+        "message": {
+          "type": "string",
+          "readOnly": true,
+          "description": "The detailed info regarding the reason associated with the Namespace."
+        }
+      },
+      "description": "The Result of the CheckNameAvailability operation"
+    },
+    "NamespaceUpdateParameter": {
+      "properties": {
+        "tags": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          },
+          "description": "Resource tags"
+        },
+        "sku": {
+          "$ref": "#/definitions/Sku",
+          "description": "The sku of the created Namespace"
+        }
+      },
+      "description": "Parameters supplied to the Patch/update Namespace operation."
     }
   },
   "parameters": {
@@ -1783,6 +1827,56 @@
       "required": true,
       "type": "string",
       "description": "Client API Version."
+    },
+    "resourceGroupNameParameter": {
+      "name": "resourceGroupName",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 90,
+      "x-ms-parameter-location": "method",
+      "description": "Name of the resource group within the azure subscription."
+    },
+    "namespaceNameParameter": {
+      "name": "namespaceName",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "minLength": 6,
+      "maxLength": 50,
+      "x-ms-parameter-location": "method",
+      "description": "The Namespace name"
+    },
+    "authorizationRuleNameParameter": {
+      "name": "authorizationRuleName",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 50,
+      "x-ms-parameter-location": "method",
+      "description": "The authorization rule name."
+    },
+    "eventHubNameParameter": {
+      "name": "eventHubName",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 50,
+      "x-ms-parameter-location": "method",
+      "description": "The Event Hub name"
+    },
+    "consumerGroupNameParameter": {
+      "name": "consumerGroupName",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 50,
+      "x-ms-parameter-location": "method",
+      "description": "The consumer group name"
     }
   }
 }

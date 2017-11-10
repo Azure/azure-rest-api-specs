@@ -21,9 +21,10 @@ Azure Key Vault enables users to store and use cryptographic keys within the Mic
 |Keys             | Operations for interacting with keys including create, import, update, and delete.|
 |Secrets          | Operations for interacting with secrets including create, update, and delete.|
 |Certificates     | Operations for interacting with certificates including create, import, update, delete and a set of contact and renawal management tasks.|
+|Storage          | Operations for interacting with storage accounts including create, read, update, delete, list, regeneratekey and a set of sas definition related tasks.|
 
 ## See Also
 
-- [About keys, secrets, and certificates](link)
+- [About keys, secrets, certificates and storage](link)
 
 

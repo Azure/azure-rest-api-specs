@@ -1,0 +1,605 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "AutomationManagement",
+    "version": "2015-10-31"
+  },
+  "host": "management.azure.com",
+  "schemes": [
+    "https"
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "produces": [
+    "application/json"
+  ],
+  "paths": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Automation/automationAccounts/{automationAccountName}/modules/{moduleName}/activities/{activityName}": {
+      "get": {
+        "tags": [
+          "Activity"
+        ],
+        "operationId": "Activity_Get",
+        "description": "Retrieve the activity in the module identified by module name and activity name.",
+        "externalDocs": {
+          "url": "http://aka.ms/azureautomationsdk/activityoperations"
+        },
+        "x-ms-examples": {
+          "Get Activity in a module": {
+            "$ref": "../examples/module/getActivityInAModule.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "./definitions.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "automationAccountName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The automation account name."
+          },
+          {
+            "name": "moduleName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of module."
+          },
+          {
+            "name": "activityName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of activity."
+          },
+          {
+            "$ref": "./definitions.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "./definitions.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "./definitions.json#/definitions/Activity"
+            }
+          },
+          "default": {
+            "description": "Automation error response describing why the operation failed.",
+            "schema": {
+              "$ref": "./definitions.json#/definitions/ErrorResponse"
+            }
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Automation/automationAccounts/{automationAccountName}/modules/{moduleName}/activities": {
+      "get": {
+        "tags": [
+          "Activity"
+        ],
+        "operationId": "Activity_ListByModule",
+        "description": "Retrieve a list of activities in the module identified by module name.",
+        "externalDocs": {
+          "url": "http://aka.ms/azureautomationsdk/activityoperations"
+        },
+        "x-ms-examples": {
+          "List activities by a module": {
+            "$ref": "../examples/module/listActivitiesByModule.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "./definitions.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "automationAccountName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The automation account name."
+          },
+          {
+            "name": "moduleName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of module."
+          },
+          {
+            "$ref": "./definitions.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "./definitions.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "./definitions.json#/definitions/ActivityListResult"
+            }
+          },
+          "default": {
+            "description": "Automation error response describing why the operation failed.",
+            "schema": {
+              "$ref": "./definitions.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Automation/automationAccounts/{automationAccountName}/modules/{moduleName}": {
+      "delete": {
+        "tags": [
+          "Module"
+        ],
+        "operationId": "Module_Delete",
+        "description": "Delete the module by name.",
+        "externalDocs": {
+          "url": "http://aka.ms/azureautomationsdk/moduleoperations"
+        },
+        "x-ms-examples": {
+          "Delete a module": {
+            "$ref": "../examples/module/deleteModule.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "./definitions.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "automationAccountName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The automation account name."
+          },
+          {
+            "name": "moduleName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The module name."
+          },
+          {
+            "$ref": "./definitions.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "./definitions.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "default": {
+            "description": "Automation error response describing why the operation failed.",
+            "schema": {
+              "$ref": "./definitions.json#/definitions/ErrorResponse"
+            }
+          }
+        }
+      },
+      "get": {
+        "tags": [
+          "Module"
+        ],
+        "operationId": "Module_Get",
+        "description": "Retrieve the module identified by module name.",
+        "externalDocs": {
+          "url": "http://aka.ms/azureautomationsdk/moduleoperations"
+        },
+        "x-ms-examples": {
+          "Get a module": {
+            "$ref": "../examples/module/getModule.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "./definitions.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "automationAccountName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The automation account name."
+          },
+          {
+            "name": "moduleName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The module name."
+          },
+          {
+            "$ref": "./definitions.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "./definitions.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "./definitions.json#/definitions/Module"
+            }
+          },
+          "default": {
+            "description": "Automation error response describing why the operation failed.",
+            "schema": {
+              "$ref": "./definitions.json#/definitions/ErrorResponse"
+            }
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "Module"
+        ],
+        "operationId": "Module_CreateOrUpdate",
+        "description": "Create or Update the module identified by module name.",
+        "externalDocs": {
+          "url": "http://aka.ms/azureautomationsdk/moduleoperations"
+        },
+        "x-ms-examples": {
+          "Create or update a module": {
+            "$ref": "../examples/module/createOrUpdateModule.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "./definitions.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "automationAccountName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The automation account name."
+          },
+          {
+            "name": "moduleName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of module."
+          },
+          {
+            "name": "parameters",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "./definitions.json#/definitions/ModuleCreateOrUpdateParameters"
+            },
+            "description": "The create or update parameters for module."
+          },
+          {
+            "$ref": "./definitions.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "./definitions.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": "Created",
+            "schema": {
+              "$ref": "./definitions.json#/definitions/Module"
+            }
+          },
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "./definitions.json#/definitions/Module"
+            }
+          },
+          "default": {
+            "description": "Automation error response describing why the operation failed.",
+            "schema": {
+              "$ref": "./definitions.json#/definitions/ErrorResponse"
+            }
+          }
+        }
+      },
+      "patch": {
+        "tags": [
+          "Module"
+        ],
+        "operationId": "Module_Update",
+        "description": "Update the module identified by module name.",
+        "externalDocs": {
+          "url": "http://aka.ms/azureautomationsdk/moduleoperations"
+        },
+        "parameters": [
+          {
+            "$ref": "./definitions.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "automationAccountName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The automation account name."
+          },
+          {
+            "name": "moduleName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of module."
+          },
+          {
+            "name": "parameters",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "./definitions.json#/definitions/ModuleUpdateParameters"
+            },
+            "description": "The update parameters for module."
+          },
+          {
+            "$ref": "./definitions.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "./definitions.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "./definitions.json#/definitions/Module"
+            }
+          },
+          "default": {
+            "description": "Automation error response describing why the operation failed.",
+            "schema": {
+              "$ref": "./definitions.json#/definitions/ErrorResponse"
+            }
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Automation/automationAccounts/{automationAccountName}/modules": {
+      "get": {
+        "tags": [
+          "Module"
+        ],
+        "operationId": "Module_ListByAutomationAccount",
+        "description": "Retrieve a list of modules.",
+        "externalDocs": {
+          "url": "http://aka.ms/azureautomationsdk/moduleoperations"
+        },
+        "x-ms-examples": {
+          "List modules by automation account": {
+            "$ref": "../examples/module/listModulesByAutomationAccount.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "./definitions.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "automationAccountName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The automation account name."
+          },
+          {
+            "$ref": "./definitions.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "./definitions.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "./definitions.json#/definitions/ModuleListResult"
+            }
+          },
+          "default": {
+            "description": "Automation error response describing why the operation failed.",
+            "schema": {
+              "$ref": "./definitions.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Automation/automationAccounts/{automationAccountName}/modules/{moduleName}/objectDataTypes/{typeName}/fields": {
+      "get": {
+        "tags": [
+          "ObjectDataTypes"
+        ],
+        "operationId": "ObjectDataTypes_ListFieldsByModuleAndType",
+        "description": "Retrieve a list of fields of a given type identified by module name.",
+        "externalDocs": {
+          "url": "http://aka.ms/azureautomationsdk/objectdatatypeoperations"
+        },
+        "parameters": [
+          {
+            "$ref": "./definitions.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "automationAccountName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The automation account name."
+          },
+          {
+            "name": "moduleName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of module."
+          },
+          {
+            "name": "typeName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of type."
+          },
+          {
+            "$ref": "./definitions.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "./definitions.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "./definitions.json#/definitions/TypeFieldListResult"
+            }
+          },
+          "default": {
+            "description": "Automation error response describing why the operation failed.",
+            "schema": {
+              "$ref": "./definitions.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": null
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Automation/automationAccounts/{automationAccountName}/objectDataTypes/{typeName}/fields": {
+      "get": {
+        "tags": [
+          "ObjectDataTypes"
+        ],
+        "operationId": "ObjectDataTypes_ListFieldsByType",
+        "description": "Retrieve a list of fields of a given type across all accessible modules.",
+        "externalDocs": {
+          "url": "http://aka.ms/azureautomationsdk/objectdatatypeoperations"
+        },
+        "parameters": [
+          {
+            "$ref": "./definitions.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "automationAccountName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The automation account name."
+          },
+          {
+            "name": "typeName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of type."
+          },
+          {
+            "$ref": "./definitions.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "./definitions.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "./definitions.json#/definitions/TypeFieldListResult"
+            }
+          },
+          "default": {
+            "description": "Automation error response describing why the operation failed.",
+            "schema": {
+              "$ref": "./definitions.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": null
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Automation/automationAccounts/{automationAccountName}/modules/{moduleName}/types/{typeName}/fields": {
+      "get": {
+        "tags": [
+          "TypeFields"
+        ],
+        "operationId": "Fields_ListByType",
+        "description": "Retrieve a list of fields of a given type identified by module name.",
+        "externalDocs": {
+          "url": "http://aka.ms/azureautomationsdk/typefieldoperations"
+        },
+        "parameters": [
+          {
+            "$ref": "./definitions.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "automationAccountName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The automation account name."
+          },
+          {
+            "name": "moduleName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of module."
+          },
+          {
+            "name": "typeName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of type."
+          },
+          {
+            "$ref": "./definitions.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "./definitions.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "./definitions.json#/definitions/TypeFieldListResult"
+            }
+          },
+          "default": {
+            "description": "Automation error response describing why the operation failed.",
+            "schema": {
+              "$ref": "./definitions.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": null
+        }
+      }
+    }
+  },
+  "definitions": {},
+  "parameters": {}
+}

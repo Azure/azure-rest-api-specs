@@ -102,7 +102,7 @@
           "default": {
             "description": "Error response describing why the operation failed.",
             "schema": {
-              "$ref": "#/definitions/ErrorBody"
+              "$ref": "#/definitions/CloudError"
             }
           }
         },
@@ -159,7 +159,7 @@
           "default": {
             "description": "Error response describing why the operation failed.",
             "schema": {
-              "$ref": "#/definitions/ErrorBody"
+              "$ref": "#/definitions/CloudError"
             }
           }
         }
@@ -217,7 +217,7 @@
           "default": {
             "description": "Error response describing why the operation failed.",
             "schema": {
-              "$ref": "#/definitions/ErrorBody"
+              "$ref": "#/definitions/CloudError"
             }
           }
         },
@@ -265,7 +265,7 @@
           "default": {
             "description": "Error response describing why the operation failed.",
             "schema": {
-              "$ref": "#/definitions/ErrorBody"
+              "$ref": "#/definitions/CloudError"
             }
           }
         }
@@ -296,7 +296,7 @@
           "default": {
             "description": "Error response describing why the operation failed.",
             "schema": {
-              "$ref": "#/definitions/ErrorBody"
+              "$ref": "#/definitions/CloudError"
             }
           }
         },
@@ -338,7 +338,7 @@
           "default": {
             "description": "Error response describing why the operation failed.",
             "schema": {
-              "$ref": "#/definitions/ErrorBody"
+              "$ref": "#/definitions/CloudError"
             }
           }
         },
@@ -387,7 +387,7 @@
           "default": {
             "description": "Error response describing why the operation failed.",
             "schema": {
-              "$ref": "#/definitions/ErrorBody"
+              "$ref": "#/definitions/CloudError"
             }
           }
         }
@@ -445,7 +445,7 @@
           "default": {
             "description": "Error response describing why the operation failed.",
             "schema": {
-              "$ref": "#/definitions/ErrorBody"
+              "$ref": "#/definitions/CloudError"
             }
           }
         }
@@ -494,7 +494,7 @@
           "default": {
             "description": "Error response describing why the operation failed.",
             "schema": {
-              "$ref": "#/definitions/ErrorBody"
+              "$ref": "#/definitions/CloudError"
             }
           }
         }
@@ -563,7 +563,7 @@
           "default": {
             "description": "Error response describing why the operation failed.",
             "schema": {
-              "$ref": "#/definitions/ErrorBody"
+              "$ref": "#/definitions/CloudError"
             }
           }
         }
@@ -628,7 +628,7 @@
           "default": {
             "description": "Error response describing why the operation failed.",
             "schema": {
-              "$ref": "#/definitions/ErrorBody"
+              "$ref": "#/definitions/CloudError"
             }
           }
         }
@@ -679,7 +679,7 @@
           "default": {
             "description": "Error response describing why the operation failed.",
             "schema": {
-              "$ref": "#/definitions/ErrorBody"
+              "$ref": "#/definitions/CloudError"
             }
           }
         }
@@ -733,7 +733,7 @@
           "default": {
             "description": "Error response describing why the operation failed.",
             "schema": {
-              "$ref": "#/definitions/ErrorBody"
+              "$ref": "#/definitions/CloudError"
             }
           }
         }
@@ -793,7 +793,7 @@
           "default": {
             "description": "Error response describing why the operation failed.",
             "schema": {
-              "$ref": "#/definitions/ErrorBody"
+              "$ref": "#/definitions/CloudError"
             }
           }
         }
@@ -856,7 +856,7 @@
           "default": {
             "description": "Error response describing why the operation failed.",
             "schema": {
-              "$ref": "#/definitions/ErrorBody"
+              "$ref": "#/definitions/CloudError"
             }
           }
         }
@@ -914,7 +914,7 @@
           "default": {
             "description": "Error response describing why the operation failed.",
             "schema": {
-              "$ref": "#/definitions/ErrorBody"
+              "$ref": "#/definitions/CloudError"
             }
           }
         }
@@ -975,7 +975,7 @@
           "default": {
             "description": "Error response describing why the operation failed.",
             "schema": {
-              "$ref": "#/definitions/ErrorBody"
+              "$ref": "#/definitions/CloudError"
             }
           }
         }
@@ -1032,7 +1032,7 @@
           "default": {
             "description": "Error response describing why the operation failed.",
             "schema": {
-              "$ref": "#/definitions/ErrorBody"
+              "$ref": "#/definitions/CloudError"
             }
           }
         },
@@ -1073,7 +1073,7 @@
           "default": {
             "description": "Error response describing why the operation failed.",
             "schema": {
-              "$ref": "#/definitions/ErrorBody"
+              "$ref": "#/definitions/CloudError"
             }
           }
         }
@@ -1447,24 +1447,8 @@
       "description": "A definition of an Azure resource.",
       "x-ms-azure-resource": true
     },
-    "ErrorDetail": {
-      "properties": {
-        "code": {
-          "type": "string",
-          "description": "An identifier for the error. Codes are invariant and are intended to be consumed programmatically."
-        },
-        "message": {
-          "type": "string",
-          "description": "A message describing the error, intended to be suitable for display in a user interface."
-        },
-        "target": {
-          "type": "string",
-          "description": "The target of the particular error. For example, the name of the property in error."
-        }
-      },
-      "description": "Specific detail about an error."
-    },
-    "ErrorBody": {
+    "CloudError": {
+      "x-ms-external" : true,
       "properties": {
         "code": {
           "type": "string",
@@ -1481,7 +1465,7 @@
         "details": {
           "type": "array",
           "items": {
-            "$ref": "#/definitions/ErrorDetail"
+            "$ref": "#/definitions/CloudError"
           },
           "description": "A list of additional details about the error."
         }

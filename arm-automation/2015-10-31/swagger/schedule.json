@@ -1,0 +1,315 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "AutomationManagement",
+    "version": "2015-10-31"
+  },
+  "host": "management.azure.com",
+  "schemes": [
+    "https"
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "produces": [
+    "application/json"
+  ],
+  "paths": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Automation/automationAccounts/{automationAccountName}/schedules/{scheduleName}": {
+      "put": {
+        "tags": [
+          "Schedule"
+        ],
+        "operationId": "Schedule_CreateOrUpdate",
+        "description": "Create a schedule.",
+        "externalDocs": {
+          "url": "http://aka.ms/azureautomationsdk/scheduleoperations"
+        },
+        "x-ms-examples": {
+          "Create or update a schedule": {
+            "$ref": "../examples/schedule/createOrUpdateSchedule.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "./definitions.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "automationAccountName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The automation account name."
+          },
+          {
+            "name": "scheduleName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The schedule name."
+          },
+          {
+            "name": "parameters",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "./definitions.json#/definitions/ScheduleCreateOrUpdateParameters"
+            },
+            "description": "The parameters supplied to the create or update schedule operation."
+          },
+          {
+            "$ref": "./definitions.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "./definitions.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": "Created",
+            "schema": {
+              "$ref": "./definitions.json#/definitions/Schedule"
+            }
+          },
+          "409": {
+            "description": "Conflict"
+          },
+          "default": {
+            "description": "Automation error response describing why the operation failed.",
+            "schema": {
+              "$ref": "./definitions.json#/definitions/ErrorResponse"
+            }
+          }
+        }
+      },
+      "patch": {
+        "tags": [
+          "Schedule"
+        ],
+        "operationId": "Schedule_Update",
+        "description": "Update the schedule identified by schedule name.",
+        "externalDocs": {
+          "url": "http://aka.ms/azureautomationsdk/scheduleoperations"
+        },
+        "x-ms-examples": {
+          "Update a schedule": {
+            "$ref": "../examples/schedule/updateSchedule.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "./definitions.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "automationAccountName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The automation account name."
+          },
+          {
+            "name": "scheduleName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The schedule name."
+          },
+          {
+            "name": "parameters",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "./definitions.json#/definitions/ScheduleUpdateParameters"
+            },
+            "description": "The parameters supplied to the update schedule operation."
+          },
+          {
+            "$ref": "./definitions.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "./definitions.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "./definitions.json#/definitions/Schedule"
+            }
+          },
+          "default": {
+            "description": "Automation error response describing why the operation failed.",
+            "schema": {
+              "$ref": "./definitions.json#/definitions/ErrorResponse"
+            }
+          }
+        }
+      },
+      "get": {
+        "tags": [
+          "Schedule"
+        ],
+        "operationId": "Schedule_Get",
+        "description": "Retrieve the schedule identified by schedule name.",
+        "externalDocs": {
+          "url": "http://aka.ms/azureautomationsdk/scheduleoperations"
+        },
+        "x-ms-examples": {
+          "Get a schedule": {
+            "$ref": "../examples/schedule/getSchedule.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "./definitions.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "automationAccountName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The automation account name."
+          },
+          {
+            "name": "scheduleName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The schedule name."
+          },
+          {
+            "$ref": "./definitions.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "./definitions.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "./definitions.json#/definitions/Schedule"
+            }
+          },
+          "default": {
+            "description": "Automation error response describing why the operation failed.",
+            "schema": {
+              "$ref": "./definitions.json#/definitions/ErrorResponse"
+            }
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "Schedule"
+        ],
+        "operationId": "Schedule_Delete",
+        "description": "Delete the schedule identified by schedule name.",
+        "externalDocs": {
+          "url": "http://aka.ms/azureautomationsdk/scheduleoperations"
+        },
+        "x-ms-examples": {
+          "Delete schedule": {
+            "$ref": "../examples/schedule/deleteSchedule.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "./definitions.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "automationAccountName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The automation account name."
+          },
+          {
+            "name": "scheduleName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The schedule name."
+          },
+          {
+            "$ref": "./definitions.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "./definitions.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "404": {
+            "description": "Not Found"
+          },
+          "default": {
+            "description": "Automation error response describing why the operation failed.",
+            "schema": {
+              "$ref": "./definitions.json#/definitions/ErrorResponse"
+            }
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Automation/automationAccounts/{automationAccountName}/schedules": {
+      "get": {
+        "tags": [
+          "Schedule"
+        ],
+        "operationId": "Schedule_ListByAutomationAccount",
+        "description": "Retrieve a list of schedules.",
+        "externalDocs": {
+          "url": "http://aka.ms/azureautomationsdk/scheduleoperations"
+        },
+        "x-ms-examples": {
+          "List schedules by automation account, first 100": {
+            "$ref": "../examples/schedule/listSchedulesByAutomationAccount_First100.json"
+          },
+          "List schedules by automation account, next 100": {
+            "$ref": "../examples/schedule/listSchedulesByAutomationAccount_Next100.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "./definitions.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "automationAccountName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The automation account name."
+          },
+          {
+            "$ref": "./definitions.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "./definitions.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "./definitions.json#/definitions/ScheduleListResult"
+            }
+          },
+          "default": {
+            "description": "Automation error response describing why the operation failed.",
+            "schema": {
+              "$ref": "./definitions.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    }
+  },
+  "definitions": {},
+  "parameters": {}
+}

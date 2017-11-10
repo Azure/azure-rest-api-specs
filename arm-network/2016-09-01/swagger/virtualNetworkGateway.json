@@ -302,6 +302,149 @@
         }
       }
     },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/virtualNetworkGateways/{virtualNetworkGatewayName}/getBgpPeerStatus": {
+      "post": {
+        "tags": [
+          "VirtualNetworkGateways"
+        ],
+        "operationId": "VirtualNetworkGateways_GetBgpPeerStatus",
+        "description": "The GetBgpPeerStatus operation retrieves the status of all BGP peers.",
+        "parameters": [
+          {
+            "name": "resourceGroupName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the resource group."
+          },
+          {
+            "name": "virtualNetworkGatewayName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the virtual network gateway."
+          },
+          {
+            "name": "peer",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "description": "The IP address of the peer to retrieve the status of."
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "List of BGP peer statuses",
+            "schema": {
+              "$ref": "#/definitions/BgpPeerStatusListResult"
+            }
+          },
+          "202": {
+            "description": "Accepted and the operation will complete asynchronously."
+          }
+        },
+        "x-ms-long-running-operation": true
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/virtualNetworkGateways/{virtualNetworkGatewayName}/getLearnedRoutes": {
+      "post": {
+        "tags": [
+          "VirtualNetworkGateways"
+        ],
+        "operationId": "VirtualNetworkGateways_GetLearnedRoutes",
+        "description": "This operation retrieves a list of routes the virtual network gateway has learned, including routes learned from BGP peers.",
+        "parameters": [
+          {
+            "name": "resourceGroupName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the resource group."
+          },
+          {
+            "name": "virtualNetworkGatewayName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the virtual network gateway."
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "List of advertised BGP routes",
+            "schema": {
+              "$ref": "#/definitions/GatewayRouteListResult"
+            }
+          },
+          "202": {
+            "description": "Accepted and the operation will complete asynchronously."
+          }
+        },
+        "x-ms-long-running-operation": true
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/virtualNetworkGateways/{virtualNetworkGatewayName}/getAdvertisedRoutes": {
+      "post": {
+        "tags": [
+          "VirtualNetworkGateways"
+        ],
+        "operationId": "VirtualNetworkGateways_GetAdvertisedRoutes",
+        "description": "This operation retrieves a list of routes the virtual network gateway is advertising to the specified peer.",
+        "parameters": [
+          {
+            "name": "resourceGroupName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the resource group."
+          },
+          {
+            "name": "virtualNetworkGatewayName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the virtual network gateway."
+          },
+          {
+            "name": "peer",
+            "in": "query",
+            "required": true,
+            "type": "string",
+            "description": "The IP address of the peer"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "List of learned BGP routes",
+            "schema": {
+              "$ref": "#/definitions/GatewayRouteListResult"
+            }
+          },
+          "202": {
+            "description": "Accepted and the operation will complete asynchronously."
+          }
+        },
+        "x-ms-long-running-operation": true
+      }
+    },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/connections/{virtualNetworkGatewayConnectionName}": {
       "put": {
         "tags": [
@@ -1075,6 +1218,105 @@
         }
       }
     },
+    "BgpPeerStatus": {
+      "properties": {
+        "localAddress": {
+          "type": "string",
+          "readOnly": true,
+          "description": "The virtual network gateway's local address"
+        },
+        "neighbor": {
+          "type": "string",
+          "readOnly": true,
+          "description": "The remote BGP peer"
+        },
+        "asn": {
+          "type": "integer",
+          "format": "int32",
+          "readOnly": true,
+          "description": "The autonomous system number of the remote BGP peer"
+        },
+        "state": {
+          "type": "string",
+          "readOnly": true,
+          "description": "The BGP peer state",
+          "enum": [
+            "Unknown",
+            "Stopped",
+            "Idle",
+            "Connecting",
+            "Connected"
+          ],
+          "x-ms-enum": {
+            "name": "BgpPeerState",
+            "modelAsString": true
+          }
+        },
+        "connectedDuration": {
+          "type": "string",
+          "readOnly": true,
+          "description": "For how long the peering has been up"
+        },
+        "routesReceived": {
+          "type": "integer",
+          "format": "int64",
+          "readOnly": true,
+          "description": "The number of routes learned from this peer"
+        },
+        "messagesSent": {
+          "type": "integer",
+          "format": "int64",
+          "readOnly": true,
+          "description": "The number of BGP messages sent"
+        },
+        "messagesReceived": {
+          "type": "integer",
+          "format": "in64",
+          "readOnly": true,
+          "description": "The number of BGP messages received"
+        }
+      }
+    },
+    "GatewayRoute": {
+      "properties": {
+        "localAddress": {
+          "type": "string",
+          "readOnly": true,
+          "description": "The gateway's local address"
+        },
+        "network": {
+          "type": "string",
+          "readOnly": true,
+          "description": "The route's network prefix"
+        },
+        "nextHop": {
+          "type": "string",
+          "readOnly": true,
+          "description": "The route's next hop"
+        },
+        "sourcePeer": {
+          "type": "string",
+          "readOnly": true,
+          "description": "The peer this route was learned from"
+        },
+        "origin": {
+          "type": "string",
+          "readOnly": true,
+          "description": "The source this route was learned from"
+        },
+        "asPath": {
+          "type": "string",
+          "readOnly": true,
+          "description": "The route's AS path sequence"
+        },
+        "weight": {
+          "type": "integer",
+          "format": "int32",
+          "readOnly": true,
+          "description": "The route's weight"
+        }
+      }
+    },
     "VirtualNetworkGateway": {
       "properties": {
         "properties": {
@@ -1132,7 +1374,31 @@
       },
       "description": "Response for the ListVirtualNetworkGateways API service call."
     },
-	"TunnelConnectionHealth": {
+    "BgpPeerStatusListResult": {
+      "properties": {
+        "value": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/BgpPeerStatus"
+          },
+          "description": "List of BGP peers"
+        }
+      },
+      "description": "Response for list BGP peer status API service call"
+    },
+    "GatewayRouteListResult": {
+      "properties": {
+        "value": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/GatewayRoute"
+          },
+          "description": "List of gateway routes"
+        }
+      },
+      "description": "List of virtual network gateway routes"
+    },
+    "TunnelConnectionHealth": {
       "properties": {
         "tunnel": {
           "readOnly": true,

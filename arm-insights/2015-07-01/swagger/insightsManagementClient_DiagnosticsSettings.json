@@ -27,9 +27,7 @@
             "$ref": "#/parameters/ResourceUriParameter"
           },
           {
-            "$ref": "#/parameters/ApiVersionParameter"          },
-          {
-            "$ref": "#/parameters/SubscriptionIdParameter"
+            "$ref": "#/parameters/ApiVersionParameter"
           }
         ],
         "responses": {
@@ -40,37 +38,35 @@
             },
             "examples": {
               "application/json": {
-                "storageAccountId": "/subscriptions/s1/resourceGroups/rg1/providers/Microsoft.Storage/storageAccounts/testStorageAcct",
-                "serviceBusRuleId": "/subscriptions/s1/resourceGroups/rg1/providers/Microsoft.ServiceBus/namespaces/testNamespace/authorizationrules/RootManageSharedAccessKey",
-                "workspaceId": "/subscriptions/s1/resourceGroups/rg1/providers/Microsoft.OperationalInsights/workspaces/myWorkspace",
-                "metrics": [
+                "id":"/subscriptions/1a66ce04-b633-4a0b-b2bc-a912ec8986a6/resourcegroups/viruela1/providers/microsoft.logic/workflows/viruela6/diagnosticSettings/service",
+                "type":"",
+                "name":"service",
+                "location":"",
+                "tags":null,
+                "properties": {
+                  "storageAccountId":"/subscriptions/df602c9c-7aa0-407d-a6fb-eb20c8bd1192/resourceGroups/apptest/providers/Microsoft.Storage/storageAccounts/appteststorage1","serviceBusRuleId":"/subscriptions/b67f7fec-69fc-4974-9099-a26bd6ffeda3/resourceGroups/andy1101/providers/Microsoft.EventHub/namespaces/andy1101/authorizationrules/RootManageSharedAccessKey",
+                  "workspaceId":"",
+                  "metrics": [
                     {
-                        "timeGrain": "PT1M",
-                        "enabled": true,
-                        "retentionPolicy": {
-                            "enabled": false,
-                            "days": 0
-                        }
+                      "timeGrain":"PT1M",
+                      "enabled":true,
+                      "retentionPolicy": {
+                        "enabled":false,
+                        "days":0
+                      }
                     }
-                ],
-                "logs": [
+                  ],
+                  "logs": [
                     {
-                        "category": "NetworkSecurityGroupEvent",
-                        "enabled": true,
-                        "retentionPolicy": {
-                            "enabled": false,
-                            "days": 0
-                        }
-                    },
-                    {
-                        "category": "NetworkSecurityGroupRuleCounter",
-                        "enabled": true,
-                        "retentionPolicy": {
-                            "enabled": false,
-                            "days": 0
-                        }
+                      "category":"WorkflowRuntime",
+                      "enabled":true,
+                      "retentionPolicy": {
+                        "enabled":false,
+                        "days":0
+                      }
                     }
-                ]
+                  ]
+                }
               }
             }
           }
@@ -94,12 +90,9 @@
             "in": "body",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/ServiceDiagnosticSettings"
+              "$ref": "#/definitions/ServiceDiagnosticSettingsResource"
             },
             "description": "Parameters supplied to the operation."
-          },
-          {
-            "$ref": "#/parameters/SubscriptionIdParameter"
           }
         ],
         "responses": {
@@ -110,37 +103,35 @@
             },
             "examples": {
               "application/json": {
-                "storageAccountId": "/subscriptions/s1/resourceGroups/rg1/providers/Microsoft.Storage/storageAccounts/testStorageAcct",
-                "serviceBusRuleId": "/subscriptions/s1/resourceGroups/rg1/providers/Microsoft.ServiceBus/namespaces/testNamespace/authorizationrules/RootManageSharedAccessKey",
-                "workspaceId": "/subscriptions/s1/resourceGroups/rg1/providers/Microsoft.OperationalInsights/workspaces/myWorkspace",
-                "metrics": [
+                "id":"/subscriptions/1a66ce04-b633-4a0b-b2bc-a912ec8986a6/resourcegroups/viruela1/providers/microsoft.logic/workflows/viruela6/diagnosticSettings/service",
+                "type":"",
+                "name":"service",
+                "location":"",
+                "tags":null,
+                "properties": {
+                  "storageAccountId":"/subscriptions/df602c9c-7aa0-407d-a6fb-eb20c8bd1192/resourceGroups/apptest/providers/Microsoft.Storage/storageAccounts/appteststorage1","serviceBusRuleId":"/subscriptions/b67f7fec-69fc-4974-9099-a26bd6ffeda3/resourceGroups/andy1101/providers/Microsoft.EventHub/namespaces/andy1101/authorizationrules/RootManageSharedAccessKey",
+                  "workspaceId":"",
+                  "metrics": [
                     {
-                        "timeGrain": "PT1M",
-                        "enabled": true,
-                        "retentionPolicy": {
-                            "enabled": false,
-                            "days": 0
-                        }
+                      "timeGrain":"PT1M",
+                      "enabled":true,
+                      "retentionPolicy": {
+                        "enabled":false,
+                        "days":0
+                      }
                     }
-                ],
-                "logs": [
+                  ],
+                  "logs": [
                     {
-                        "category": "NetworkSecurityGroupEvent",
-                        "enabled": true,
-                        "retentionPolicy": {
-                            "enabled": false,
-                            "days": 0
-                        }
-                    },
-                    {
-                        "category": "NetworkSecurityGroupRuleCounter",
-                        "enabled": true,
-                        "retentionPolicy": {
-                            "enabled": false,
-                            "days": 0
-                        }
+                      "category":"WorkflowRuntime",
+                      "enabled":true,
+                      "retentionPolicy": {
+                        "enabled":false,
+                        "days":0
+                      }
                     }
-                ]
+                  ]
+                }
               }
             }
           }
@@ -282,13 +273,6 @@
     }
   },
   "parameters": {
-    "SubscriptionIdParameter": {
-      "name": "subscriptionId",
-      "in": "path",
-      "required": true,
-      "type": "string",
-      "description": "The Azure subscription Id."
-    },
     "ApiVersionParameter": {
       "name": "api-version",
       "in": "query",

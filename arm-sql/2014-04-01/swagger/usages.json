@@ -1,0 +1,273 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "Azure SQL Database",
+    "description": "Provides create, read, update and delete functionality for Azure SQL Database resources including servers, databases, elastic pools, recommendations, operations, and usage metrics.",
+    "version": "2014-04-01"
+  },
+  "host": "management.azure.com",
+  "schemes": [
+    "https"
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "produces": [
+    "application/json"
+  ],
+  "paths": {
+      "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/servers/{serverName}/usages": {
+      "get": {
+        "tags": [
+          "Servers"
+        ],
+        "operationId": "Servers_ListUsages",
+        "description": "Returns server usages.",
+        "x-ms-examples":{
+          "List servers usages": { "$ref": "../examples/ServerUsageMetricsList.json" }
+        },
+        "parameters": [
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupParameter"
+          },
+          {
+            "$ref": "#/parameters/ServerNameParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/ServerUsageListResult"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": null
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/servers/{serverName}/databases/{databaseName}/usages": {
+      "get": {
+        "tags": [
+          "Databases"
+        ],
+        "operationId": "Databases_ListUsages",
+        "description": "Returns database usages.",
+        "x-ms-examples": {
+          "List database usage metrics": { "$ref": "../examples/DatabaseUsageMetricsList.json" }
+        },
+        "parameters": [
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupParameter"
+          },
+          {
+            "$ref": "#/parameters/ServerNameParameter"
+          },
+          {
+            "name": "databaseName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the database."
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/DatabaseUsageListResult"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": null
+        }
+      }
+    }
+  },
+  "definitions": {
+    "ServerUsage": {
+      "properties": {
+        "name": {
+          "readOnly": true,
+          "type": "string",
+          "description": "Name of the server usage metric."
+        },
+        "resourceName": {
+          "readOnly": true,
+          "type": "string",
+          "description": "The name of the resource."
+        },
+        "displayName": {
+          "readOnly": true,
+          "type": "string",
+          "description": "The metric display name."
+        },
+        "currentValue": {
+          "readOnly": true,
+          "type": "number",
+          "format": "double",
+          "description": "The current value of the metric."
+        },
+        "limit": {
+          "readOnly": true,
+          "type": "number",
+          "format": "double",
+          "description": "The current limit of the metric."
+        },
+        "unit": {
+          "readOnly": true,
+          "type": "string",
+          "description": "The units of the metric."
+        },
+        "nextResetTime": {
+          "readOnly": true,
+          "type": "string",
+          "format": "date-time",
+          "description": "The next reset time for the metric (ISO8601 format)."
+        }
+      },
+      "description": "Represents server metrics."
+    },
+    "ServerUsageListResult": {
+      "properties": {
+        "value": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ServerUsage"
+          },
+          "description": "The list of server metrics for the server."
+        }
+      },
+      "required": ["value"],
+      "description": "Represents the response to a list server metrics request."
+    },
+    "DatabaseUsage": {
+      "properties": {
+        "resourceName": {
+          "readOnly": true,
+          "type": "string",
+          "description": "The name of the resource."
+        },
+        "displayName": {
+          "readOnly": true,
+          "type": "string",
+          "description": "The usage metric display name."
+        },
+        "currentValue": {
+          "readOnly": true,
+          "type": "number",
+          "format": "double",
+          "description": "The current value of the usage metric."
+        },
+        "limit": {
+          "readOnly": true,
+          "type": "number",
+          "format": "double",
+          "description": "The current limit of the usage metric."
+        },
+        "unit": {
+          "readOnly": true,
+          "type": "string",
+          "description": "The units of the usage metric."
+        },
+        "nextResetTime": {
+          "readOnly": true,
+          "type": "string",
+          "format": "date-time",
+          "description": "The next reset time for the usage metric (ISO8601 format)."
+        }
+      },
+      "description": "The database usages.",
+      "allOf": [
+        {
+          "$ref": "#/definitions/SubResource"
+        }
+      ]
+    },
+    "DatabaseUsageListResult": {
+      "properties": {
+        "value": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/DatabaseUsage"
+          },
+          "description": "The list of database usages for the database."
+        }
+      },
+      "required": ["value"],
+      "description": "The response to a list database metrics request."
+    },
+    "SubResource": {
+      "description": "Subresource properties",
+      "properties": {
+        "name": {
+          "readOnly": true,
+          "type": "string",
+          "description": "Resource name"
+        },
+        "id": {
+          "readOnly": true,
+          "type": "string",
+          "description": "The resource ID."
+        }
+      }
+    }
+  },
+  "parameters": {
+    "SubscriptionIdParameter": {
+      "name": "subscriptionId",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "description": "The subscription ID that identifies an Azure subscription."
+    },
+    "ApiVersionParameter": {
+      "name": "api-version",
+      "in": "query",
+      "required": true,
+      "type": "string",
+      "description": "The API version to use for the request."
+    },
+    "ResourceGroupParameter": {
+      "name": "resourceGroupName",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "description": "The name of the resource group that contains the resource. You can obtain this value from the Azure Resource Manager API or the portal.",
+      "x-ms-parameter-location": "method"
+    },
+    "ServerNameParameter": {
+      "name": "serverName",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "description": "The name of the server.",
+      "x-ms-parameter-location": "method"
+    }
+  },
+  "securityDefinitions": {
+    "azure_auth": {
+      "type": "oauth2",
+      "description": "Azure Active Directory OAuth2 Flow",
+      "flow": "implicit",
+      "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
+      "scopes": {
+        "user_impersonation": "impersonate your user account"
+      }
+    }
+  }
+}

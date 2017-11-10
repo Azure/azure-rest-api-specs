@@ -1,12 +1,8 @@
 # Contributing to azure-rest-api-specs
-First, thank you for contributing to our Azure specs repository! Specs are the basis for generating Azure SDKs in multiple different languages, Azure CLIs for interacting with the services, and can provide documentation for these services.
+First, thank you for contributing to Azure specs repository! Swagger specs are the basis for generating Azure SDKs in multiple different languages, Azure CLIs for interacting with the services, and can provide documentation for these services.
 
 ## Basics
-In the Azure Developer Experience workflow, you are at Step 3:
-
-[API Design Review](https://github.com/Azure/adx-documentation-pr#begin-api-design-review) -> [Engage with ADX team](https://github.com/Azure/adx-documentation-pr/blob/master/README.md#engage-with-adx-team) -> _**[Swagger specification](https://github.com/Azure/adx-documentation-pr#create-swagger-specification)**_ -> [SDKs](https://github.com/Azure/adx-documentation-pr#sdks) -> [CLIs](https://github.com/Azure/adx-documentation-pr#clis)
-
-If you're a spec author looking for information about all of of the repositories and steps in the pipeline, go back to the [adx-documentation-pr](https://github.com/Azure/adx-documentation-pr) repository. Make sure to [join the Github Azure organization](http://aka.ms/azuregithub) to get access to that repo.
+If you're a spec author looking for information about all of of the repositories and steps in the pipeline, go to the [adx-documentation-pr](https://github.com/Azure/adx-documentation-pr) repository. Make sure to [join the Github Azure organization](http://aka.ms/azuregithub) to get access to that repo.
 
 ## Table of Contents
 [Before starting](#before-starting)
@@ -29,7 +25,7 @@ If you're a spec author looking for information about all of of the repositories
 ## Before starting
 
 ### Onboarding
-Make sure that your Github account is part of the Azure organization. [Use this page](aka.ms/azuregithub) to link your account.
+Make sure that your Github account is part of the Azure organization. [Use this page](http://aka.ms/azuregithub) to link your account.
 
 Before cloning this repository, please make sure you have started in our [documentation repository adx-documentation-pr](https://github.com/Azure/adx-documentation-pr) (you will only have access to that page if you are part of the Azure organization).
 
@@ -50,11 +46,9 @@ Swagger files are simply JSON files that follow the [OpenAPI Specification](http
 ### Documentation
 The [/documentation](../documentation/) folder contains many resources for writing Swagger files.
 
-The [Swagger Good Patterns](../documentation/swagger-good-patterns.md) page is intended as a guide for different scenarios. If you know the service behavior that you're trying to model (e.g. PUT/PATCH/GET responses and request schemas, or modeling long running operations), that document is structured to make it easy to find our recommendations.
+The [Swagger Checklist](../documentation/swagger-checklist.md) page is intended as a guide for different scenarios. If you know the service behavior that you're trying to model (e.g. PUT/PATCH/GET responses and request schemas, or modeling long running operations), that document is structured to make it easy to find our recommendations.
 
-The [Reference Documentation](../documentation/creating-swagger.md) page contains lots of information about each part of a Swagger file and how to structure it correctly for code generation. If you're looking for an explanation of what a part of Swagger relates to your service or how it's used to generate code, that document is the right place to go.
-
-The [Linter](../documentation/linter.md) page has instructions for downloading our extension for VS Code and links to explanations for each validation error or warning.
+The [Reference Documentation](../documentation/creating-swagger.md) page contains lots of information about each part of a Swagger file and how to structure it correctly for code generation. If you're looking for an explanation on what a part of Swagger relates to your service or how it's used to generate code, that document is the right place to go.
 
 ### Filenames and folder structure
 - Swagger spec for every api-version should be in a separate folder named with the api-version.
@@ -63,14 +57,13 @@ The [Linter](../documentation/linter.md) page has instructions for downloading o
 ### Tools for writing Swagger
 As JSON files, specs can be modified in any text editor that you choose. We have some recommendations that can make editing these files easier.
 
-- _**Recommended**_ Our [Linter extension for VS Code](../documentation/linter.md) provides validation, go to definition support, HTML preview of the spec, and other ease-of-use improvements.
-- Visual Studio can also provide a nice experience for editing JSON, though it takes extra work to use the JSON schema that defines Swagger files. Additionally, there will be extra work later to make sure any validation rules are followed. Both of these are automatically handled with the extension for VS Code.
+- _**Recommended**_ Visual Studio Code.
+- Visual Studio Code can provide a nice experience for editing JSON, though it takes extra work to use the JSON schema that defines Swagger files. 
 
 ### Tools for validating Swagger
-There are some tools that can help you make sure your spec doesn't contain basic errors. The more of these issues that are caught before the PR is sent, the quicker the turnaround to merging the PR will be. 
+There are some tools that can help you make sure your spec conforms to guidelines. The more of these issues that are caught before the PR is sent, the quicker the turnaround to merging the PR will be. 
 
-- _**Recommended**_ Our [Linter extension for VS Code](../documentation/linter.md) provides validation for common issues we see in specs. If we see any of the issues during the review process, we will ask you to use this extension before we continue reviewing.
-- `AutoRest.exe` will output the same errors as the VS Code extension if you run it from the command line. AutoRest is used in the [next step in the pipeline, SDK generation](https://github.com/Azure/adx-documentation-pr#sdks). If you add the `-ValidationLevel Warning` flag or `-Verbose`, the command line output will include validation messages. See the [AutoRest documentation](https://github.com/Azure/autorest/blob/master/Documentation/cli.md) for more info.
+- _**Recommended**_ Please take a look at the [validation tools for swagger checklist] (https://github.com/Azure/azure-rest-api-specs/blob/master/documentation/swagger-checklist.md#validation-tools-for-swagger-checklist) section. 
 - The [OpenAPI Initiative Swagger editor](http://editor.swagger.io/#/) will help find basic issues in a Swagger file. However, we apply a higher bar than this validator - just because this site doesn't show errors doesn't mean the spec is ready to merge. 
 - Similarly, this online [schema validator](https://json-schema-validator.herokuapp.com/) can help find basic errors. Again, we apply a higher bar than this validator - just because this site doesn't show errors doesn't mean the spec is ready to merge. 
   * In the upper left box, paste the [swagger schema from here](https://github.com/swagger-api/swagger-spec/blob/master/schemas/v2.0/schema.json)
@@ -93,25 +86,12 @@ Use the git tools you have available to you, such as amend, rebase, etc.
 
 
 ## Review process
-We review spec PRs to maintain a high bar of quality for all products that will be generated from these specs (including SDKs in all languages, CLIs and documentation). It's critical that spec files are both sytactically and semantically correct, as well as conform to common patterns that make it possible to generate SDKs and CLIs that are usable for customers. Since specs are the base input for all of these products, the review process starts with PRs to this repository.
+We review spec PRs to maintain a high bar of quality for all products that will be generated from these specs (including SDKs in all languages, CLIs and documentation). It's critical that spec files are both sytactically and semantically correct, as well as conform to common patterns that make it possible to generate SDKs and CLIs that are usable for customers. Since specs are the base input for all of these products, the review process starts with PRs to this repository. Please refer to [Swagger Review Process](https://github.com/Azure/adx-documentation-pr/wiki/Swagger-Review-Process) for more details.
 
-### SLA
-Our SLA for reviewing specs is **2 business days**. We are committed to either merging the PR or providing you with a set of changes that are required before we can merge. Please be aware that the process can take longer if there are major changes requested after the initial review (since we will need to review the spec again).
-
-### Review Criteria
-This section lists what we look for when reviewing a PR. This constantly changes as we discover issues in specs that cause SDK or CLI issues. Standard patterns for common scenarios also change as we support more functionality in generated code or try to improve the experience for users of the SDKs.
-
-The following criteria are ordered from least to most stringent. The expectation is that every spec in a PR will be correct JSON, syntactically correct, will semantically agree with the service it applies to, and will follow the recommended patterns except for special circumstances.
+The expectation is that every spec in a PR will be correct JSON, syntactically correct, will semantically agree with the service it applies to, and will follow the recommended patterns.
 
 #### Basic JSON correctness
 A spec file must be valid JSON, according to the [JSON specification](https://tools.ietf.org/html/rfc7159). It must also be a valid Swagger file, according to the [OpenAPI Specification](http://swagger.io/specification/). Finally, it must also conform to the [schema that AutoRest applies](https://raw.githubusercontent.com/Azure/autorest/master/schema/swagger-extensions.json).
-
-**Recommendation**:  Use our [Linter extension for VS Code](../documentation/linter.md) when editing your spec. It will show JSON errors and use the correct Swagger schema to the file.
-
-#### Static analysis
-There are certain issues in spec files that make it impossible to generate working SDK code or usable SDKs, CLIs or documentation. These go beyond JSON or Swagger schema correctness, since a Swagger file could correctly describe an API yet still generate a bad SDK.
-
-**Recommendation**: Use our [Linter extension for VS Code](../documentation/linter.md) when editing your spec. It will catch these errors automatically and underline the file wherever there are errors.
 
 #### Semantic correctness
 Your spec file must correctly represent your service. Even if a spec passes all of the rules listed above, it might not accurately describe the service that it is intended to describe. This could include 
@@ -124,7 +104,3 @@ Making sure that the spec is correct from a semantic point of view requires doma
 
 **Recommendation**: Check each operation, parameter, schema, property to make sure it accurately models the service API. Refer back to the [Reference documentation](../documentation/creating-swagger.md) for more details on every part of Swagger.
 
-#### Good patterns
-Following good patterns are an even higher standard than semantic correctness. These ensure that we provide a good experience across all Azure SDKs and CLIs. We manually check to make sure your spec follows these patterns, and we expect that any author sending a PR has checked their spec by hand as well.
-
-**Recommendation**: Refer to our [Swagger Recommended Patterns](../documentation/swagger-good-patterns.md) page. We expect that a spec will follow these patterns by default unless there is a good reason to deviate (e.g. the service behaves differently from the Azure API Guidelines for an old api-version).

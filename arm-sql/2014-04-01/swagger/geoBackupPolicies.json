@@ -1,0 +1,312 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "Azure SQL Database",
+    "description": "Provides read and update functionality for Azure SQL Database geo backup policies.",
+    "version": "2014-04-01"
+  },
+  "host": "management.azure.com",
+  "schemes": [
+    "https"
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "produces": [
+    "application/json"
+  ],
+  "paths": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/servers/{serverName}/databases/{databaseName}/geoBackupPolicies/{geoBackupPolicyName}": {
+      "put": {
+        "tags": [
+          "GeoBackupPolicies"
+        ],
+        "operationId": "Databases_CreateOrUpdateGeoBackupPolicy",
+        "description": "Updates a database geo backup policy.",
+        "x-ms-examples": {
+          "Update geo backup policy": { "$ref": "../examples/GeoBackupPoliciesCreateOrUpdate.json" }
+        },
+        "parameters": [
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupParameter"
+          },
+          {
+            "$ref": "#/parameters/ServerNameParameter"
+          },
+          {
+            "name": "databaseName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the database."
+          },
+          {
+            "$ref": "#/parameters/GeoBackupPolicyNameParameter"
+          },
+          {
+            "name": "parameters",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/GeoBackupPolicy"
+            },
+            "description": "The required parameters for creating or updating the geo backup policy."
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": "Created",
+            "schema": {
+              "$ref": "#/definitions/GeoBackupPolicy"
+            }
+          },
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/GeoBackupPolicy"
+            }
+          }
+        }
+      },
+      "get": {
+        "tags": [
+          "GeoBackupPolicies"
+        ],
+        "operationId": "Databases_GetGeoBackupPolicy",
+        "description": "Gets a geo backup policy.",
+        "x-ms-examples": {
+          "Get geo backup policy": { "$ref": "../examples/GeoBackupPoliciesGet.json" }
+        },
+        "parameters": [
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupParameter"
+          },
+          {
+            "$ref": "#/parameters/ServerNameParameter"
+          },
+          {
+            "name": "databaseName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the database."
+          },
+          {
+            "$ref": "#/parameters/GeoBackupPolicyNameParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/GeoBackupPolicy"
+            }
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/servers/{serverName}/databases/{databaseName}/geoBackupPolicies": {
+      "get": {
+        "tags": [
+          "GeoBackupPolicies"
+        ],
+        "operationId": "Databases_ListGeoBackupPolicies",
+        "description": "Returns a list of geo backup policies.",
+        "x-ms-examples": {
+          "List geo backup policies": { "$ref": "../examples/GeoBackupPoliciesList.json" }
+        },
+        "parameters": [
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupParameter"
+          },
+          {
+            "$ref": "#/parameters/ServerNameParameter"
+          },
+          {
+            "name": "databaseName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the database."
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/GeoBackupPolicyListResult"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": null
+        }
+      }
+    }
+  },
+  "definitions": {
+    "GeoBackupPolicyProperties": {
+      "properties": {
+        "state": {
+          "type": "string",
+          "description": "The state of the geo backup policy.",
+          "enum": ["Disabled", "Enabled"],
+          "x-ms-enum": {
+            "modelAsString": false,
+            "name": "GeoBackupPolicyState"
+          }
+        },
+        "storageType": {
+          "type": "string",
+          "description": "The storage type of the geo backup policy.",
+          "readOnly": true
+        }
+      },
+      "required": ["state"],
+      "description": "The properties of the geo backup policy."
+    },
+    "GeoBackupPolicy": {
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/GeoBackupPolicyProperties",
+          "description": "The properties of the geo backup policy.",
+          "x-ms-client-flatten": true
+        },
+        "kind": {
+          "readOnly": true,
+          "type": "string",
+          "description": "Kind of geo backup policy.  This is metadata used for the Azure portal experience."
+        },
+        "location":{
+          "type":"string",
+          "readOnly": true,
+          "description":"Backup policy location."
+        }
+      },
+      "required": [
+        "properties"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/ProxyResource"
+        }
+      ],
+      "description": "A database geo backup policy."
+    },
+    "GeoBackupPolicyListResult": {
+      "properties": {
+        "value": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/GeoBackupPolicy"
+          },
+          "description": "The list of geo backup policies."
+        }
+      },
+      "description": "The response to a list geo backup policies request."
+    },
+    "Resource":{
+      "description":"ARM resource.",
+      "properties":{
+        "id":{
+          "readOnly":true,
+          "type":"string",
+          "description":"Resource ID."
+        },
+        "name":{
+          "readOnly":true,
+          "type":"string",
+          "description":"Resource name."
+        },
+        "type":{
+          "readOnly":true,
+          "type":"string",
+          "description":"Resource type."
+        }
+      },
+      "x-ms-azure-resource": true
+    },
+    "ProxyResource":{
+      "description":"ARM proxy resource.",
+      "allOf":[
+        {
+          "$ref":"#/definitions/Resource"
+        }
+      ]
+    }
+  },
+  "parameters": {
+    "SubscriptionIdParameter": {
+      "name": "subscriptionId",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "description": "The subscription ID that identifies an Azure subscription."
+    },
+    "ApiVersionParameter": {
+      "name": "api-version",
+      "in": "query",
+      "required": true,
+      "type": "string",
+      "description": "The API version to use for the request."
+    },
+    "ResourceGroupParameter": {
+      "name": "resourceGroupName",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "description": "The name of the resource group that contains the resource. You can obtain this value from the Azure Resource Manager API or the portal.",
+      "x-ms-parameter-location": "method"
+    },
+    "ServerNameParameter": {
+      "name": "serverName",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "description": "The name of the server.",
+      "x-ms-parameter-location": "method"
+    },
+    "GeoBackupPolicyNameParameter": {
+      "name": "geoBackupPolicyName",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "enum": ["Default"],
+      "description": "The name of the geo backup policy.",
+      "x-ms-enum":{
+        "modelAsString": true,
+        "name": "GeoBackupPolicyName"
+      },
+      "x-ms-parameter-location": "method"
+    }
+  },
+  "securityDefinitions": {
+    "azure_auth": {
+      "type": "oauth2",
+      "description": "Azure Active Directory OAuth2 Flow",
+      "flow": "implicit",
+      "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
+      "scopes": {
+        "user_impersonation": "impersonate your user account"
+      }
+    }
+  }
+}
