@@ -46,3 +46,17 @@ input-file:
 - Microsoft.HDInsight/2015-03-01-preview/scriptActions.json
 - Microsoft.HDInsight/2015-03-01-preview/operations.json
 ```
+
+## C# 
+
+These settings apply only when `--csharp` is specified on the command line.
+Please also specify `--csharp-sdks-folder=<path to "SDKs" directory of your azure-sdk-for-net clone>`.
+
+``` yaml $(csharp)
+csharp:
+  azure-arm: true
+  license-header: MICROSOFT_APACHE_NO_VERSION
+  namespace: Microsoft.HDInsight
+  output-folder: $(csharp-sdks-folder)/HDInsight/Management.HDInsight/Generated
+  clear-output-folder: true
+```
