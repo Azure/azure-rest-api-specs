@@ -152,6 +152,7 @@
       "name": "timespan",
       "in": "query",
       "required": false,
+      "format": "duration",
       "x-ms-parameter-location": "method",
       "description": "Optional. The timespan over which to query data. This is an ISO8601 time period value.  This timespan is applied in addition to any that are specified in the query expression.",
       "type": "string"
@@ -164,7 +165,8 @@
     },
     "timespanParam": {
       "description": "Optional. The timespan over which to query data. This is an ISO8601 time period value.  This timespan is applied in addition to any that are specified in the query expression.",
-      "type": "string"
+      "type": "string",
+      "format": "duration"
     },
     "workspacesParam": {
       "description": "Workspace IDs to include in cross-workspace queries.",
