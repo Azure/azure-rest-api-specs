@@ -300,7 +300,7 @@
       }
     },
     "DynamicsSource": {
-      "description": "A copy activity Dynamics entity source.",
+      "description": "A copy activity Dynamics source.",
       "type": "object",
       "allOf": [
         {
@@ -326,6 +326,36 @@
         "query": {
           "type": "object",
           "description": "Database query. Type: string (or Expression with resultType string)."
+        }
+      }
+    },
+    "SalesforceSource": {
+      "description": "A copy activity Salesforce source.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/CopySource"
+        }
+      ],
+      "properties": {
+        "query": {
+          "type": "object",
+          "description": "Database query. Type: string (or Expression with resultType string)."
+        }
+      }
+    },
+    "SapCloudForCustomerSource": {
+      "description": "A copy activity source for SAP Cloud for Customer source.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/CopySource"
+        }
+      ],
+      "properties": {
+        "query": {
+          "type": "object",
+          "description": "SAP Cloud for Customer OData query. For example, \"$top=1\". Type: string (or Expression with resultType string)."
         }
       }
     },
@@ -394,7 +424,7 @@
       }
     },
     "HdfsSource": {
-      "description": "A copy activity source for HDFS source.",
+      "description": "A copy activity HDFS source.",
       "type": "object",
       "allOf": [
         {
@@ -433,6 +463,21 @@
         "resourceManagerEndpoint",
         "tempScriptPath"
       ]
+    },
+    "AzureMySqlSource": {
+      "description": "A copy activity Azure MySQL source.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/CopySource"
+        }
+      ],
+      "properties": {
+        "query": {
+          "type": "object",
+          "description": "Database query. Type: string (or Expression with resultType string)."
+        }
+      }
     },
     "OracleSource": {
       "description": "A copy activity Oracle source.",
@@ -642,6 +687,29 @@
       "required": [
         "type"
       ]
+    },
+    "SapCloudForCustomerSink": {
+      "description": "A copy activity SAP Cloud for Customer sink.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/CopySink"
+        }
+      ],
+      "properties": {
+        "writeBehavior": {
+          "description": "The write behavior for the operation. Default is 'Insert'.",
+          "type": "string",
+          "enum": [
+            "Insert",
+            "Update"
+          ],
+          "x-ms-enum": {
+            "name": "SapCloudForCustomerSinkWriteBehavior",
+            "modelAsString": true
+          }
+        }
+      }
     },
     "AzureQueueSink": {
       "description": "A copy activity Azure Queue sink.",
@@ -940,6 +1008,66 @@
         "preCopyScript": {
           "type": "object",
           "description": "A query to execute before starting the copy. Type: string (or Expression with resultType string)."
+        }
+      }
+    },
+    "DynamicsSink": {
+      "description": "A copy activity Dynamics sink.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/CopySink"
+        }
+      ],
+      "properties": {
+        "writeBehavior": {
+          "description": "The write behavior for the operation.",
+          "type": "string",
+          "enum": [
+            "Upsert"
+          ],
+          "x-ms-enum": {
+            "name": "DynamicsSinkWriteBehavior",
+            "modelAsString": true
+          }
+        },
+        "ignoreNullValues": {
+          "type": "object",
+          "description": "The flag indicating whether ignore null values from input dataset (except key fields) during write operation. Default is false. Type: boolean (or Expression with resultType boolean)."
+        }
+      },
+      "required": [
+        "writeBehavior"
+      ]
+    },
+    "SalesforceSink": {
+      "description": "A copy activity Salesforce sink.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/CopySink"
+        }
+      ],
+      "properties": {
+        "writeBehavior": {
+          "description": "The write behavior for the operation. Default is Insert.",
+          "type": "string",
+          "enum": [
+            "Insert",
+            "Upsert"
+          ],
+          "x-ms-enum": {
+            "name": "SalesforceSinkWriteBehavior",
+            "modelAsString": true
+          }
+        },
+        "externalIdFieldName": {
+          "type": "object",
+          "description": "The name of the external ID field for upsert operation. Default value is 'Id' column. Type: string (or Expression with resultType string)."
+        },
+        "ignoreNullValues": {
+          "type": "object",
+          "description": "The flag indicating whether or not to ignore null values from input dataset (except key fields) during write operation. Default value is false. If set it to true, it means ADF will leave the data in the destination object unchanged when doing upsert/update operation and insert defined default value when doing insert operation, versus ADF will update the data in the destination object to NULL when doing upsert/update operation and insert NULL value when doing insert operation. Type: boolean (or Expression with resultType boolean)."
         }
       }
     },

@@ -369,7 +369,7 @@
         },
         "password": {
           "description": "Password to access the Dynamics instance.",
-          "$ref": "#/definitions/AzureKeyVaultSecretReference"
+          "$ref": "../datafactory.json#/definitions/AzureKeyVaultSecretReference"
         }
       },
       "required": [
@@ -377,48 +377,6 @@
         "authenticationType",
         "username",
         "password"
-      ]
-    },
-    "AzureKeyVaultReference": {
-      "type": "object",
-      "description": "A reference to an object in Azure Key Vault.",
-      "discriminator": "type",
-      "properties": {
-        "type": {
-          "type": "string",
-          "description": "The type of the Azure Key Vault object to reference."
-        },
-        "store": {
-          "description": "The Azure Key Vault LinkedService.",
-          "$ref": "../datafactory.json#/definitions/LinkedServiceReference"
-        }
-      },
-      "required": [
-        "type",
-        "store"
-      ]
-    },
-    "AzureKeyVaultSecretReference": {
-      "description": "Azure Key Vault Secret properties.",
-      "x-ms-discriminator-value": "AzureKeyVaultSecret",
-      "type": "object",
-      "allOf": [
-        {
-          "$ref": "#/definitions/AzureKeyVaultReference"
-        }
-      ],
-      "properties": {
-        "secretName": {
-          "type": "object",
-          "description": "The name of secret in Azure Key Vault. Type: string (or Expression with resultType string)."
-        },
-        "secretVersion": {
-          "type": "object",
-          "description": "The version of the secret in Azure Key Vault. The default value is the latest version of the secret. Type: string (or Expression with resultType string)."
-        }
-      },
-      "required": [
-        "secretName"
       ]
     },
     "HDInsightLinkedService": {
@@ -539,6 +497,42 @@
     },
     "OracleLinkedServiceTypeProperties": {
       "description": "Oracle database linked service properties.",
+      "properties": {
+        "connectionString": {
+          "description": "The connection string.",
+          "$ref": "../datafactory.json#/definitions/SecureString"
+        },
+        "encryptedCredential": {
+          "type": "object",
+          "description": "The encrypted credential used for authentication. Credentials are encrypted using the integration runtime credential manager. Type: string (or Expression with resultType string)."
+        }
+      },
+      "required": [
+        "connectionString"
+      ]
+    },
+    "AzureMySqlLinkedService": {
+      "x-ms-discriminator-value": "AzureMySql",
+      "description": "Azure MySQL database linked service.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/LinkedService"
+        }
+      ],
+      "properties": {
+        "typeProperties": {
+          "description": "Azure MySQL database linked service properties.",
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/AzureMySqlLinkedServiceTypeProperties"
+        }
+      },
+      "required": [
+        "typeProperties"
+      ]
+    },
+    "AzureMySqlLinkedServiceTypeProperties": {
+      "description": "Azure MySQL database linked service properties.",
       "properties": {
         "connectionString": {
           "description": "The connection string.",
@@ -1373,21 +1367,65 @@
         },
         "username": {
           "type": "object",
-          "description": "The username for Basic authentication of the Salesforce source. Type: string (or Expression with resultType string)."
+          "description": "The username for Basic authentication of the Salesforce instance. Type: string (or Expression with resultType string)."
         },
         "password": {
-          "description": "The password for Basic authentication of the Salesforce source.",
-          "$ref": "../datafactory.json#/definitions/SecureString"
+          "description": "The password for Basic authentication of the Salesforce instance.",
+          "$ref": "../datafactory.json#/definitions/SecretBase"
         },
         "securityToken": {
-          "description": "The security token is required to remotely access Salesforce source.",
-          "$ref": "../datafactory.json#/definitions/SecureString"
+          "description": "The security token is required to remotely access Salesforce instance.",
+          "$ref": "../datafactory.json#/definitions/SecretBase"
         },
         "encryptedCredential": {
           "type": "object",
           "description": "The encrypted credential used for authentication. Credentials are encrypted using the integration runtime credential manager. Type: string (or Expression with resultType string)."
         }
       }
+    },
+    "SapCloudForCustomerLinkedService": {
+      "x-ms-discriminator-value": "SapCloudForCustomer",
+      "description": "Linked service for SAP Cloud for Customer.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/LinkedService"
+        }
+      ],
+      "properties": {
+        "typeProperties": {
+          "description": "SAP Cloud for Customer linked service properties.",
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/SapCloudForCustomerLinkedServiceTypeProperties"
+        }
+      },
+      "required": [
+        "typeProperties"
+      ]
+    },
+    "SapCloudForCustomerLinkedServiceTypeProperties": {
+      "description": "SAP Cloud for Customer linked service properties.",
+      "properties": {
+        "url": {
+          "type": "object",
+          "description": "The URL of SAP Cloud for Customer OData API. For example, '[https://[tenantname].crm.ondemand.com/sap/c4c/odata/v1]'. Type: string (or Expression with resultType string)."
+        },
+        "username": {
+          "type": "object",
+          "description": "The username for Basic authentication. Type: string (or Expression with resultType string)."
+        },
+        "password": {
+          "description": "The password for Basic authentication.",
+          "$ref": "../datafactory.json#/definitions/SecureString"
+        },
+        "encryptedCredential": {
+          "type": "object",
+          "description": "The encrypted credential used for authentication. Credentials are encrypted using the integration runtime credential manager. Either encryptedCredential or username/password must be provided. Type: string (or Expression with resultType string)."
+        }
+      },
+      "required": [
+        "url"
+      ]
     },
     "AmazonS3LinkedService": {
       "x-ms-discriminator-value": "AmazonS3",

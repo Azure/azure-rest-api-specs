@@ -625,10 +625,10 @@
           "format": "int64"
         },
         "maxIntervalInSeconds": {
-          "description": "When used with the Bounded Staleness consistency level, this value represents the time amount of staleness (in seconds) tolerated. Accepted range for this value is 1 - 100. Required when defaultConsistencyPolicy is set to 'BoundedStaleness'.",
+          "description": "When used with the Bounded Staleness consistency level, this value represents the time amount of staleness (in seconds) tolerated. Accepted range for this value is 5 - 86400. Required when defaultConsistencyPolicy is set to 'BoundedStaleness'.",
           "type": "integer",
-          "minimum": 1,
-          "maximum": 100,
+          "minimum": 5,
+          "maximum": 86400,
           "format": "int32"
         }
       },

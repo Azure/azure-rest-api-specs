@@ -38,3 +38,28 @@ These settings apply only when `--tag=package-2017-04-preview` is specified on t
 input-file:
 - Microsoft.DBforMySQL/2017-04-30-preview/mysql.json
 ```
+
+
+---
+# Code Generation
+
+
+## Go
+
+These settings apply only when `--go` is specified on the command line.
+
+``` yaml $(go)
+go:
+  license-header: MICROSOFT_APACHE_NO_VERSION
+  namespace: mysql
+  clear-output-folder: true
+```
+
+### Tag: package-2017-04-preview and go
+
+These settings apply only when `--tag=package-2017-04-preview --go` is specified on the command line.
+Please also specify `--go-sdk-folder=<path to the root directory of your azure-sdk-for-go clone>`.
+
+``` yaml $(tag) == 'package-2017-04-preview' && $(go)
+output-folder: $(go-sdk-folder)/services/mysql/mgmt/2017-04-30-preview/mysql
+```

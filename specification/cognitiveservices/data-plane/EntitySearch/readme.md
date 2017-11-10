@@ -9,6 +9,7 @@ The current release is `release_1_0`.
 ``` yaml
 
 tag: release_1_0
+add-credentials: true
 openapi-type: data-plane
 ```
 # Releases
@@ -24,7 +25,7 @@ input-file: v1.0/EntitySearch.json
 These settings apply only when `--csharp` is specified on the command line.
 ``` yaml $(csharp) 
 csharp: 
-  namespace: Microsoft.CognitiveServices.EntitySearch
+  namespace: Microsoft.Azure.CognitiveServices.Search.EntitySearch
   output-folder: $(csharp-sdks-folder)/CognitiveServices/dataPlane/Search/Search/Generated/EntitySearch
 ```
 

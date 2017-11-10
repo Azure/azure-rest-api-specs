@@ -116,6 +116,7 @@ namespace ConsoleApp1
 The current release is `release_2_0`.
 ``` yaml
 tag: release_2_0
+add-credentials: true
 ```
 
 ### Release 2.0
@@ -130,6 +131,7 @@ log-file: logs/log.txt
 These settings apply only when `--csharp` is specified on the command line.
 ``` yaml $(csharp) 
 csharp: 
+  sync-methods: None
   license-header: MICROSOFT_MIT_NO_VERSION
   azure-arm: false
   namespace: Microsoft.Azure.CognitiveServices.Language.TextAnalytics
