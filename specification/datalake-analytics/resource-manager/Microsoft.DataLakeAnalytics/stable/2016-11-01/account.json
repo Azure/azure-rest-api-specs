@@ -74,7 +74,7 @@
             "in": "body",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/ComputePolicyCreateOrUpdateParameters"
+              "$ref": "#/definitions/CreateOrUpdateComputePolicyParameters"
             },
             "description": "Parameters supplied to create or update the compute policy. The max degree of parallelism per job property, min priority per job property, or both must be present."
           },
@@ -130,7 +130,7 @@
             "in": "body",
             "required": false,
             "schema": {
-              "$ref": "#/definitions/ComputePolicy"
+              "$ref": "#/definitions/UpdateComputePolicyParameters"
             },
             "description": "Parameters supplied to update the compute policy."
           },
@@ -327,7 +327,7 @@
             "in": "body",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/FirewallRule"
+              "$ref": "#/definitions/CreateOrUpdateFirewallRuleParameters"
             },
             "description": "Parameters supplied to create or update the firewall rule."
           },
@@ -1621,7 +1621,7 @@
             "in": "path",
             "required": true,
             "type": "string",
-            "description": "The Resource location without whitespace."
+            "description": "The resource location without whitespace."
           },
           {
             "name": "parameters",
@@ -1655,9 +1655,9 @@
           "Locations"
         ],
         "operationId": "Locations_GetCapability",
-        "description": "Gets subscription-level properties and limits for Data Lake Analytics specified by Resource location.",
+        "description": "Gets subscription-level properties and limits for Data Lake Analytics specified by resource location.",
         "x-ms-examples": {
-          "Gets subscription-level properties and limits for Data Lake Analytics specified by Resource location": { "$ref": "./examples/Adla_Locations_GetCapability.json" }
+          "Gets subscription-level properties and limits for Data Lake Analytics specified by resource location": { "$ref": "./examples/Adla_Locations_GetCapability.json" }
         },
         "parameters": [
           {
@@ -1665,7 +1665,7 @@
             "in": "path",
             "required": true,
             "type": "string",
-            "description": "The Resource location without whitespace."
+            "description": "The resource location without whitespace."
           },
           {
             "$ref": "#/parameters/ApiVersionParameter"
@@ -1676,7 +1676,7 @@
         ],
         "responses": {
           "200": {
-            "description": "Successfully retrieved the subscription-level properties and limits for Data Lake Analytics specified by Resource location.",
+            "description": "Successfully retrieved the subscription-level properties and limits for Data Lake Analytics specified by resource location.",
             "schema": {
               "$ref": "#/definitions/CapabilityInformation"
             }
@@ -1714,34 +1714,49 @@
     }
   },
   "definitions": {
-    "StorageAccountProperties": {
+    "AddStorageAccountProperties": {
       "required": [
         "accessKey"
       ],
       "properties": {
         "accessKey": {
           "type": "string",
-          "description": "the access key associated with this Azure Storage account that will be used to connect to it."
+          "description": "The access key associated with this Azure Storage account that will be used to connect to it."
         },
         "suffix": {
           "type": "string",
-          "description": "the optional suffix for the storage account."
+          "description": "The optional suffix for the storage account."
         }
       },
-      "description": "Azure Storage account properties information."
+      "description": "The Azure Storage account properties to use when adding a new Azure Storage account."
+    },
+    "StorageAccountProperties": {
+      "properties": {
+        "accessKey": {
+          "readOnly": true,
+          "type": "string",
+          "description": "The access key associated with this Azure Storage account that will be used to connect to it."
+        },
+        "suffix": {
+          "readOnly": true,
+          "type": "string",
+          "description": "The optional suffix for the storage account."
+        }
+      },
+      "description": "The Azure Storage account properties."
     },
     "UpdateStorageAccountProperties": {
       "properties": {
         "accessKey": {
           "type": "string",
-          "description": "the updated access key associated with this Azure Storage account that will be used to connect to it."
+          "description": "The updated access key associated with this Azure Storage account that will be used to connect to it."
         },
         "suffix": {
           "type": "string",
-          "description": "the optional suffix for the storage account."
+          "description": "The optional suffix for the storage account."
         }
       },
-      "description": "Azure Storage account properties information to update."
+      "description": "The Azure Storage account properties to use when updating an Azure Storage account."
     },
     "StorageAccountInfo": {
       "allOf": [
@@ -1749,14 +1764,11 @@
           "$ref": "#/definitions/SubResource"
         }
       ],
-      "required": [
-        "properties"
-      ],
       "properties": {
         "properties": {
+          "x-ms-client-flatten": true,
           "$ref": "#/definitions/StorageAccountProperties",
-          "description": "the properties associated with this storage account.",
-          "x-ms-client-flatten": true
+          "description": "The Azure Storage account properties."
         }
       },
       "description": "Azure Storage account information."
@@ -1843,14 +1855,33 @@
       },
       "description": "The SAS response that contains the storage account, container and associated SAS token for connection use."
     },
-    "DataLakeStoreAccountInfoProperties": {
+    "AddDataLakeStoreProperties": {
       "properties": {
         "suffix": {
           "type": "string",
-          "description": "the optional suffix for the Data Lake Store account."
+          "description": "The optional suffix for the Data Lake Store account."
         }
       },
-      "description": "Data Lake Store account properties information."
+      "description": "The Data Lake Store account properties to use when adding a new Data Lake Store account."
+    },
+    "UpdateDataLakeStoreProperties": {
+      "properties": {
+        "suffix": {
+          "type": "string",
+          "description": "The optional suffix for the Data Lake Store account."
+        }
+      },
+      "description": "The Data Lake Store account properties to use when updating a Data Lake Store account."
+    },
+    "DataLakeStoreAccountInfoProperties": {
+      "properties": {
+        "suffix": {
+          "readOnly": true,
+          "type": "string",
+          "description": "The optional suffix for the Data Lake Store account."
+        }
+      },
+      "description": "The Data Lake Store account properties."
     },
     "DataLakeStoreAccountInfo": {
       "allOf": [
@@ -1860,9 +1891,9 @@
       ],
       "properties": {
         "properties": {
+          "x-ms-client-flatten": true,
           "$ref": "#/definitions/DataLakeStoreAccountInfoProperties",
-          "description": "the properties associated with this Data Lake Store account.",
-          "x-ms-client-flatten": true
+          "description": "The Data Lake Store account properties."
         }
       },
       "description": "Data Lake Store account information."
@@ -1955,14 +1986,14 @@
         "dataLakeStoreAccounts": {
           "type": "array",
           "items": {
-            "$ref": "#/definitions/DataLakeStoreAccountInfo"
+            "$ref": "#/definitions/AddDataLakeStoreWithAccountParameters"
           },
-          "description": "the list of Data Lake storage accounts associated with this account."
+          "description": "the list of Data Lake Store accounts associated with this account."
         },
         "storageAccounts": {
           "type": "array",
           "items": {
-            "$ref": "#/definitions/StorageAccountInfo"
+            "$ref": "#/definitions/AddStorageAccountWithAccountParameters"
           },
           "description": "the list of Azure Blob storage accounts associated with this account."
         },
@@ -2032,7 +2063,7 @@
         "firewallRules": {
           "type": "array",
           "items": {
-            "$ref": "#/definitions/FirewallRule"
+            "$ref": "#/definitions/CreateFirewallRuleWithAccountParameters"
           },
           "description": "The list of firewall rules associated with this Data Lake Analytics account."
         },
@@ -2051,9 +2082,9 @@
         "computePolicies": {
           "type": "array",
           "items": {
-            "$ref": "#/definitions/ComputePolicyAccountCreateParameters"
+            "$ref": "#/definitions/CreateComputePolicyWithAccountParameters"
           },
-          "description": "the list of compute policies to create in this account."
+          "description": "the list of compute policies associated with this account."
         }
       },
       "description": "The account specific properties that are associated with an underlying Data Lake Analytics account. Returned only when retrieving a specific account."
@@ -2078,6 +2109,20 @@
           "format": "int32",
           "minimum": 1,
           "description": "the maximum supported jobs running under the account at the same time."
+        },
+        "dataLakeStoreAccounts": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/UpdateDataLakeStoreWithAccountParameters"
+          },
+          "description": "the list of Data Lake Store accounts associated with this account."
+        },
+        "storageAccounts": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/UpdateStorageAccountWithAccountParameters"
+          },
+          "description": "the list of Azure Blob storage accounts associated with this account."
         },
         "newTier": {
           "type": "string",
@@ -2125,7 +2170,7 @@
         "firewallRules": {
           "type": "array",
           "items": {
-            "$ref": "#/definitions/FirewallRule"
+            "$ref": "#/definitions/UpdateFirewallRuleWithAccountParameters"
           },
           "description": "The list of firewall rules associated with this Data Lake Analytics account."
         },
@@ -2144,9 +2189,9 @@
         "computePolicies": {
           "type": "array",
           "items": {
-            "$ref": "#/definitions/ComputePolicy"
+            "$ref": "#/definitions/UpdateComputePolicyWithAccountParameters"
           },
-          "description": "the list of existing compute policies to update in this account."
+          "description": "the list of compute policies associated with this account."
         }
       },
       "description": "The properties to update that are associated with an underlying Data Lake Analytics account to."
@@ -2154,12 +2199,46 @@
     "AddDataLakeStoreParameters": {
       "properties": {
         "properties": {
-          "$ref": "#/definitions/DataLakeStoreAccountInfoProperties",
-          "description": "the properties for the Data Lake Store account being added.",
-          "x-ms-client-flatten": true
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/AddDataLakeStoreProperties",
+          "description": "The Data Lake Store account properties to use when adding a new Data Lake Store account."
         }
       },
-      "description": "Additional Data Lake Store parameters."
+      "description": "The parameters used to add a new Data Lake Store account."
+    },
+    "AddDataLakeStoreWithAccountParameters": {
+      "required": [
+        "name"
+      ],
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "The unique name of the Data Lake Store account to add."
+        },
+        "properties": {
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/AddDataLakeStoreProperties",
+          "description": "The Data Lake Store account properties to use when adding a new Data Lake Store account."
+        }
+      },
+      "description": "The parameters used to add a new Data Lake Store account while creating a new Data Lake Analytics account."
+    },
+    "UpdateDataLakeStoreWithAccountParameters": {
+      "required": [
+        "name"
+      ],
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "The unique name of the Data Lake Store account to update."
+        },
+        "properties": {
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/UpdateDataLakeStoreProperties",
+          "description": "The Data Lake Store account properties to use when updating a Data Lake Store account."
+        }
+      },
+      "description": "The parameters used to update a Data Lake Store account while updating a Data Lake Analytics account."
     },
     "AddStorageAccountParameters": {
       "required": [
@@ -2167,24 +2246,63 @@
       ],
       "properties": {
         "properties": {
-          "$ref": "#/definitions/StorageAccountProperties",
-          "description": "the properties for the Azure Storage account being added.",
-          "x-ms-client-flatten": true
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/AddStorageAccountProperties",
+          "description": "The Azure Storage account properties to use when adding a new Azure Storage account."
         }
       },
-      "description": "Storage account parameters for a storage account being added to a Data Lake Analytics account."
+      "description": "The parameters used to add a new Azure Storage account."
     },
     "UpdateStorageAccountParameters": {
       "properties": {
         "properties": {
+          "x-ms-client-flatten": true,
           "$ref": "#/definitions/UpdateStorageAccountProperties",
-          "description": "the properties for the Azure Storage account being updated.",
-          "x-ms-client-flatten": true
+          "description": "The Azure Storage account properties to use when updating an Azure Storage account."
         }
       },
-      "description": "Storage account parameters for a storage account being updated in a Data Lake Analytics account."
+      "description": "The parameters used to update an Azure Storage account."
     },
-    "ComputePolicyPropertiesCreateParameters": {
+    "AddStorageAccountWithAccountParameters": {
+      "required": [
+        "name",
+        "properties"
+      ],
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "The unique name of the Azure Storage account to add."
+        },
+        "properties": {
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/AddStorageAccountProperties",
+          "description": "The Azure Storage account properties to use when adding a new Azure Storage account."
+        }
+      },
+      "description": "The parameters used to add a new Azure Storage account while creating a new Data Lake Analytics account."
+    },
+    "UpdateStorageAccountWithAccountParameters": {
+      "required": [
+        "name"
+      ],
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "The unique name of the Azure Storage account to update."
+        },
+        "properties": {
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/UpdateStorageAccountProperties",
+          "description": "The Azure Storage account properties to use when updating an Azure Storage account."
+        }
+      },
+      "description": "The parameters used to update an Azure Storage account while updating a Data Lake Analytics account."
+    },
+    "CreateOrUpdateComputePolicyProperties": {
+      "required": [
+        "objectId",
+        "objectType"
+      ],
       "properties": {
         "objectId": {
           "type": "string",
@@ -2193,7 +2311,6 @@
         },
         "objectType": {
           "type": "string",
-          "description": "The type of AAD object the object identifier refers to.",
           "enum": [
             "User",
             "Group",
@@ -2202,7 +2319,8 @@
           "x-ms-enum": {
             "name": "AADObjectType",
             "modelAsString": true
-          }
+          },
+          "description": "The type of AAD object the object identifier refers to."
         },
         "maxDegreeOfParallelismPerJob": {
           "type": "integer",
@@ -2217,55 +2335,30 @@
           "description": "The minimum priority per job this user can use to submit jobs. This property, the max degree of parallelism per job property, or both must be passed."
         }
       },
-      "required": [
-        "objectId",
-        "objectType"
-      ],
-      "description": "The compute policy properties to use when creating a new compute policy"
+      "description": "The compute policy properties to use when creating a new compute policy."
     },
-    "ComputePolicyCreateOrUpdateParameters": {
-      "properties": {
-        "properties": {
-          "$ref": "#/definitions/ComputePolicyPropertiesCreateParameters",
-          "description": "The policy properties to use when creating a new compute policy",
-          "x-ms-client-flatten": true
-        }
-      },
+    "CreateOrUpdateComputePolicyParameters": {
       "required": [
         "properties"
       ],
-      "description": "The parameters used to create a new compute policy."
-    },
-    "ComputePolicyAccountCreateParameters": {
       "properties": {
-        "name": {
-          "type": "string",
-          "description": "The unique name of the policy to create"
-        },
         "properties": {
-          "$ref": "#/definitions/ComputePolicyPropertiesCreateParameters",
-          "description": "The policy properties to use when creating a new compute policy",
-          "x-ms-client-flatten": true
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/CreateOrUpdateComputePolicyProperties",
+          "description": "The compute policy properties to use when creating a new compute policy."
         }
       },
-      "required": [
-        "name",
-        "properties"
-      ],
       "description": "The parameters used to create a new compute policy."
     },
-    "ComputePolicyProperties": {
+    "UpdateComputePolicyProperties": {
       "properties": {
         "objectId": {
           "type": "string",
           "format": "uuid",
-          "readOnly": true,
           "description": "The AAD object identifier for the entity to create a policy for."
         },
         "objectType": {
           "type": "string",
-          "readOnly": true,
-          "description": "The type of AAD object the object identifier refers to.",
           "enum": [
             "User",
             "Group",
@@ -2274,37 +2367,123 @@
           "x-ms-enum": {
             "name": "AADObjectType",
             "modelAsString": true
-          }
+          },
+          "description": "The type of AAD object the object identifier refers to."
         },
         "maxDegreeOfParallelismPerJob": {
+          "type": "integer",
+          "format": "int32",
+          "minimum": 1,
+          "description": "The maximum degree of parallelism per job this user can use to submit jobs. This property, the min priority per job property, or both must be passed."
+        },
+        "minPriorityPerJob": {
+          "type": "integer",
+          "format": "int32",
+          "minimum": 1,
+          "description": "The minimum priority per job this user can use to submit jobs. This property, the max degree of parallelism per job property, or both must be passed."
+        }
+      },
+      "description": "The compute policy properties to use when updating a compute policy."
+    },
+    "UpdateComputePolicyParameters": {
+      "properties": {
+        "properties": {
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/UpdateComputePolicyProperties",
+          "description": "The compute policy properties to use when updating a compute policy."
+        }
+      },
+      "description": "The parameters used to update a compute policy."
+    },
+    "CreateComputePolicyWithAccountParameters": {
+      "required": [
+        "name",
+        "properties"
+      ],
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "The unique name of the compute policy to create."
+        },
+        "properties": {
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/CreateOrUpdateComputePolicyProperties",
+          "description": "The compute policy properties to use when creating a new compute policy."
+        }
+      },
+      "description": "The parameters used to create a new compute policy while creating a new Data Lake Analytics account."
+    },
+    "UpdateComputePolicyWithAccountParameters": {
+      "required": [
+        "name"
+      ],
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "The unique name of the compute policy to update."
+        },
+        "properties": {
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/UpdateComputePolicyProperties",
+          "description": "The compute policy properties to use when updating a compute policy."
+        }
+      },
+      "description": "The parameters used to update a compute policy while updating a Data Lake Analytics account."
+    },
+    "ComputePolicyProperties": {
+      "properties": {
+        "objectId": {
+          "readOnly": true,
+          "type": "string",
+          "format": "uuid",
+          "description": "The AAD object identifier for the entity to create a policy for."
+        },
+        "objectType": {
+          "readOnly": true,
+          "type": "string",
+          "enum": [
+            "User",
+            "Group",
+            "ServicePrincipal"
+          ],
+          "x-ms-enum": {
+            "name": "AADObjectType",
+            "modelAsString": true
+          },
+          "description": "The type of AAD object the object identifier refers to."
+        },
+        "maxDegreeOfParallelismPerJob": {
+          "readOnly": true,
           "type": "integer",
           "format": "int32",
           "minimum": 1,
           "description": "The maximum degree of parallelism per job this user can use to submit jobs."
         },
         "minPriorityPerJob": {
+          "readOnly": true,
           "type": "integer",
           "format": "int32",
           "minimum": 1,
           "description": "The minimum priority per job this user can use to submit jobs."
         }
       },
-      "description": "The compute policy properties to use when creating a new compute policy"
+      "description": "The compute policy properties."
     },
     "ComputePolicy": {
+      "allOf": [
+        {
+          "$ref": "#/definitions/SubResource"
+        }
+      ],
       "properties": {
-        "name": {
-          "type": "string",
-          "readOnly": true,
-          "description": "The name of the compute policy"
-        },
         "properties": {
+          "x-ms-client-flatten": true,
           "$ref": "#/definitions/ComputePolicyProperties",
-          "description": "The compute policy properties",
-          "x-ms-client-flatten": true
+          "description": "The compute policy properties."
         }
       },
-      "description": "The parameters used to create a new compute policy."
+      "x-ms-azure-resource": true,
+      "description": "Data Lake Analytics compute policy information."
     },
     "ComputePolicyListResult": {
       "properties": {
@@ -2428,9 +2607,6 @@
           "$ref": "#/definitions/Resource"
         }
       ],
-      "required": [
-        "properties"
-      ],
       "properties": {
         "properties": {
           "$ref": "#/definitions/DataLakeAnalyticsAccountProperties",
@@ -2438,6 +2614,9 @@
           "x-ms-client-flatten": true
         }
       },
+      "required": [
+        "properties"
+      ],
       "description": "A Data Lake Analytics account object, containing all information associated with the named Data Lake Analytics account."
     },
     "DataLakeAnalyticsAccountListResult": {
@@ -2476,7 +2655,7 @@
       },
       "description": "Data Lake Analytics firewall rule list information."
     },
-    "FirewallRuleProperties": {
+    "CreateOrUpdateFirewallRuleProperties": {
       "required": [
         "startIpAddress",
         "endIpAddress"
@@ -2484,55 +2663,116 @@
       "properties": {
         "startIpAddress": {
           "type": "string",
-          "description": "the start IP address for the firewall rule. This can be either ipv4 or ipv6. Start and End should be in the same protocol."
+          "description": "The start IP address for the firewall rule. This can be either ipv4 or ipv6. Start and End should be in the same protocol."
         },
         "endIpAddress": {
           "type": "string",
-          "description": "the end IP address for the firewall rule. This can be either ipv4 or ipv6. Start and End should be in the same protocol."
+          "description": "The end IP address for the firewall rule. This can be either ipv4 or ipv6. Start and End should be in the same protocol."
         }
       },
-      "description": "Data Lake Analytics firewall rule properties information"
+      "description": "The firewall rule properties to use when creating a new firewall rule."
     },
-    "FirewallRule": {
+    "CreateOrUpdateFirewallRuleParameters": {
       "required": [
         "properties"
       ],
+      "properties": {
+        "properties": {
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/CreateOrUpdateFirewallRuleProperties",
+          "description": "The firewall rule properties to use when creating a new firewall rule."
+        }
+      },
+      "description": "The parameters used to create a new firewall rule."
+    },
+    "FirewallRuleProperties": {
+      "properties": {
+        "startIpAddress": {
+          "readOnly": true,
+          "type": "string",
+          "description": "The start IP address for the firewall rule. This can be either ipv4 or ipv6. Start and End should be in the same protocol."
+        },
+        "endIpAddress": {
+          "readOnly": true,
+          "type": "string",
+          "description": "The end IP address for the firewall rule. This can be either ipv4 or ipv6. Start and End should be in the same protocol."
+        }
+      },
+      "description": "The firewall rule properties."
+    },
+    "FirewallRule": {
       "allOf": [
         {
-          "$ref": "#/definitions/OptionalSubResource"
+          "$ref": "#/definitions/SubResource"
         }
       ],
       "properties": {
         "properties": {
+          "x-ms-client-flatten": true,
           "$ref": "#/definitions/FirewallRuleProperties",
-          "description": "the properties of the firewall rule.",
-          "x-ms-client-flatten": true
+          "description": "The firewall rule properties."
         }
       },
-      "description": "Data Lake Analytics firewall rule information"
+      "x-ms-azure-resource": true,
+      "description": "Data Lake Analytics firewall rule information."
     },
     "UpdateFirewallRuleProperties": {
       "properties": {
         "startIpAddress": {
           "type": "string",
-          "description": "the start IP address for the firewall rule. This can be either ipv4 or ipv6. Start and End should be in the same protocol."
+          "description": "The start IP address for the firewall rule. This can be either ipv4 or ipv6. Start and End should be in the same protocol."
         },
         "endIpAddress": {
           "type": "string",
-          "description": "the end IP address for the firewall rule. This can be either ipv4 or ipv6. Start and End should be in the same protocol."
+          "description": "The end IP address for the firewall rule. This can be either ipv4 or ipv6. Start and End should be in the same protocol."
         }
       },
-      "description": "Data Lake Analytics firewall rule properties information"
+      "description": "The firewall rule properties to use when updating a firewall rule."
     },
     "UpdateFirewallRuleParameters": {
       "properties": {
         "properties": {
+          "x-ms-client-flatten": true,
           "$ref": "#/definitions/UpdateFirewallRuleProperties",
-          "description": "the properties of the firewall rule to update.",
-          "x-ms-client-flatten": true
+          "description": "The firewall rule properties to use when updating a firewall rule."
         }
       },
-      "description": "Data Lake Analytics firewall rule update parameters"
+      "description": "The parameters used to update a firewall rule."
+    },
+    "CreateFirewallRuleWithAccountParameters": {
+      "required": [
+        "name",
+        "properties"
+      ],
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "The unique name of the firewall rule to create."
+        },
+        "properties": {
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/CreateOrUpdateFirewallRuleProperties",
+          "description": "The firewall rule properties to use when creating a new firewall rule."
+        }
+      },
+      "description": "The parameters used to create a new firewall rule while creating a new Data Lake Analytics account."
+    },
+    "UpdateFirewallRuleWithAccountParameters": {
+      "required": [
+        "name"
+      ],
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "The unique name of the firewall rule to update."
+        },
+        "properties": {
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/UpdateFirewallRuleProperties",
+          "description": "The firewall rule properties to use when updating a firewall rule."
+        }
+      },
+      "description": "The parameters used to update a firewall rule while updating a Data Lake Analytics account."
     },
     "NameAvailabilityInformation": {
       "properties": {
@@ -2565,7 +2805,7 @@
           "enum": [
             "Microsoft.DataLakeAnalytics/accounts"
           ],
-          "description": "the Resource type. Note: This should not be set by the user, as the constant value is Microsoft.DataLakeAnalytics/accounts"
+          "description": "the resource type. Note: This should not be set by the user, as the constant value is Microsoft.DataLakeAnalytics/accounts"
         }
       },
       "required": [
@@ -2623,12 +2863,12 @@
         "provider": {
           "type": "string",
           "readOnly": true,
-          "description": "the Resource provider of the operation."
+          "description": "the resource provider of the operation."
         },
         "resource": {
           "type": "string",
           "readOnly": true,
-          "description": "the Resource type of the operation."
+          "description": "the resource type of the operation."
         },
         "operation": {
           "type": "string",
@@ -2690,7 +2930,9 @@
       "description": "The list of available operations for Data Lake Analytics"
     },
     "Resource": {
-      "description": "The Resource model definition.",
+      "required": [
+        "location"
+      ],
       "properties": {
         "id": {
           "readOnly": true,
@@ -2719,32 +2961,10 @@
           "description": "Resource tags"
         }
       },
-      "required": [
-        "location"
-      ],
-      "x-ms-azure-resource": true
-    },
-    "OptionalSubResource": {
-      "description": "The Resource model definition for a nested resource with no required properties.",
-      "properties": {
-        "id": {
-          "readOnly": true,
-          "type": "string",
-          "description": "Resource Id"
-        },
-        "name": {
-          "type": "string",
-          "description": "Resource name"
-        },
-        "type": {
-          "readOnly": true,
-          "type": "string",
-          "description": "Resource type"
-        }
-      }
+      "x-ms-azure-resource": true,
+      "description": "The Resource model definition."
     },
     "SubResource": {
-      "description": "The Sub Resource model definition.",
       "properties": {
         "id": {
           "readOnly": true,
@@ -2752,6 +2972,7 @@
           "description": "Resource Id"
         },
         "name": {
+          "readOnly": true,
           "type": "string",
           "description": "Resource name"
         },
@@ -2761,9 +2982,7 @@
           "description": "Resource type"
         }
       },
-      "required": [
-        "name"
-      ]
+      "description": "The Resource model definition for a nested resource."
     }
   },
   "parameters": {
