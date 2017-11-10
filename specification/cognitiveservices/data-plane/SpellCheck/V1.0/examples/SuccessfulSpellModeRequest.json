@@ -1,0 +1,31 @@
+{
+  "parameters": {
+    "Ocp-Apim-Subscription-Key": "{API key}",
+    "mkt": "en-US",
+    "body": [
+      {
+        "Text": "micosoft"
+      },
+      {
+        "Mode": "spell"
+      }
+    ]
+  },
+   "responses": {
+    "200": {
+      "headers": { },
+      "body": {
+        "_type": "SpellCheck",
+        "flaggedTokens": [{
+          "offset": 0,
+          "token": "micosoft",
+          "type": "UnknownToken",
+          "suggestions": [{
+            "suggestion": "microsoft",
+            "score": 1
+          }]
+        }]
+      }
+    }
+  }
+}
