@@ -34,6 +34,34 @@
     }
   },
   "paths": {
+    "/providers/Microsoft.TimeSeriesInsights/operations": {
+      "get": {
+        "tags": [
+          "Operations"
+        ],
+        "operationId": "Operations_List",
+        "description": "Lists all of the available Time Series Insights related operations.",
+        "x-ms-examples": {
+          "List available operations for the Time Series Insights resource provider": { "$ref": "../examples/Operation_List.json" }
+        },
+        "parameters": [
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successfully listed the available operations.",
+            "schema": {
+              "$ref": "#/definitions/OperationListResult"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.TimeSeriesInsights/environments/{environmentName}": {
       "put": {
         "tags": [
@@ -993,6 +1021,61 @@
     }
   },
   "definitions": {
+    "OperationListResult": {
+      "description": "Result of the request to list Time Series Insights operations. It contains a list of operations and a URL link to get the next set of results.",
+      "properties": {
+        "value": {
+          "description": "List of Time Series Insights operations supported by the Microsoft.TimeSeriesInsights resource provider.",
+          "type": "array",
+          "readOnly": true,
+          "items": {
+            "$ref": "#/definitions/Operation"
+          }
+        },
+        "nextLink": {
+          "description": "URL to get the next set of operation list results if there are any.",
+          "type": "string",
+          "readOnly": true
+        }
+      }
+    },
+    "Operation": {
+      "description": "A Time Series Insights REST API operation",
+      "type": "object",
+      "properties": {
+        "name": {
+          "description": "The name of the operation being performed on this particular object.",
+          "type": "string",
+          "readOnly": true
+        },
+        "display": {
+          "description": "Contains the localized display information for this particular operation / action.",
+          "readOnly": true,
+          "properties": {
+            "provider": {
+              "description": "The localized friendly form of the resource provider name.",
+              "type": "string",
+              "readOnly": true
+            },
+            "resource": {
+              "description": "The localized friendly form of the resource type related to this action/operation.",
+              "type": "string",
+              "readOnly": true
+            },
+            "operation": {
+              "description": "The localized friendly name for the operation.",
+              "type": "string",
+              "readOnly": true
+            },
+            "description": {
+              "description": "The localized friendly description for the operation.",
+              "type": "string",
+              "readOnly": true
+            }
+          }
+        }
+      }
+    },
     "Resource": {
       "properties": {
         "id": {
