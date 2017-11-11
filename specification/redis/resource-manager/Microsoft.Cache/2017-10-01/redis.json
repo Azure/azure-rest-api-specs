@@ -1154,12 +1154,8 @@
       ],
       "description": "SKU parameters supplied to the create Redis operation."
     },
-    "RedisUpdateProperties": {
+    "RedisCreateUpdateCommonProperties": {
       "properties": {
-        "sku": {
-          "$ref": "#/definitions/Sku",
-          "description": "The SKU of the Redis cache to deploy."
-        },
         "enableNonSslPort": {
           "type": "boolean",
           "description": "Specifies whether the non-ssl Redis server port (6379) is enabled."
@@ -1184,12 +1180,30 @@
           "description": "The number of shards to be created on a Premium Cluster Cache."
         }
       },
-      "required": [],
+      "description": "Create/Update/Get common properties of the redis cache.",
+      "x-ms-external": true
+    },
+    "RedisUpdateProperties": {
+      "properties": {
+        "sku": {
+          "$ref": "#/definitions/Sku",
+          "description": "The SKU of the Redis cache to deploy."
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "#/definitions/RedisCreateUpdateCommonProperties"
+        }
+      ],
       "description": "Patchable properties of the redis cache.",
       "x-ms-external": true
     },
     "RedisCreateProperties": {
       "properties": {
+        "sku": {
+          "$ref": "#/definitions/Sku",
+          "description": "The SKU of the Redis cache to deploy."
+        },
         "subnetId": {
           "type": "string",
           "pattern": "^/subscriptions/[^/]*/resourceGroups/[^/]*/providers/Microsoft.(ClassicNetwork|Network)/virtualNetworks/[^/]*/subnets/[^/]*$",
@@ -1206,7 +1220,7 @@
       ],
       "allOf": [
         {
-          "$ref": "#/definitions/RedisUpdateProperties"
+          "$ref": "#/definitions/RedisCreateUpdateCommonProperties"
         }
       ],
       "description": "Properties supplied to Create Redis operation.",
@@ -1252,9 +1266,7 @@
           "description": "List of the linked servers associated with the cache"
         }
       },
-      "required": [
-        "sku"
-      ],
+      "required": [],
       "allOf": [
         {
           "$ref": "#/definitions/RedisCreateProperties"
@@ -1349,7 +1361,8 @@
         }
       },
       "required": [
-        "properties"
+        "properties",
+        "location"
       ],
       "description": "Parameters supplied to the Create Redis operation."
     },
