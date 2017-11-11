@@ -78,16 +78,20 @@ exports.getTargetBranch = function getTargetBranch() {
  */
 exports.checkoutTargetBranch = function checkoutTargetBranch() {
   let targetBranch = exports.getTargetBranch();
+  let cmds = [`git remote -vv`, `git branch --all`,
+  `git remote set-branches origin --add ${targetBranch}`,
+  `git fetch origin ${targetBranch}`,
+  `git diff`,
+  `git stash`,
+  `git checkout ${targetBranch}`,
+  `git log -3`];
 
   console.log(`Changing the branch to ${targetBranch}...`);
-  execSync(`git remote -vv`, { encoding: 'utf8', stdio: 'inherit' });
-  execSync(`git branch --all`, { encoding: 'utf8', stdio: 'inherit' });
-  execSync(`git remote set-branches origin --add ${targetBranch}`, { encoding: 'utf8', stdio: 'inherit' });
-  execSync(`git fetch origin ${targetBranch}`, { encoding: 'utf8', stdio: 'inherit' });
-  execSync(`git diff`, { encoding: 'utf8', stdio: 'inherit' });
-  execSync(`git stash`, { encoding: 'utf8', stdio: 'inherit' });
-  execSync(`git checkout ${targetBranch}`, { encoding: 'utf8', stdio: 'inherit' });
-  execSync(`git log -3`, { encoding: 'utf8', stdio: 'inherit' });
+  for(let cmd of cmds)
+  {
+    console.log(cmd);
+    execSync(cmd,  { encoding: 'utf8', stdio: 'inherit' });
+  }
 }
 
 /**
