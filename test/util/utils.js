@@ -59,7 +59,7 @@ exports.parseJsonFromFile = async function parseJsonFromFile(filepath) {
 };
 
 /**
- * Gets the name of the target branch to which the PR is sent. We are using the environment 
+ * Gets the name of the target branch to which the PR is sent. We are using the environment
  * variable provided by travis-ci. It is called TRAVIS_BRANCH. More info can be found here:
  * https://docs.travis-ci.com/user/environment-variables/#Default-Environment-Variables
  * If the environment variable is undefined then the method returns 'master' as the default value.
@@ -80,13 +80,14 @@ exports.checkoutTargetBranch = function checkoutTargetBranch() {
   let targetBranch = exports.getTargetBranch();
 
   console.log(`Changing the branch to ${targetBranch}...`);
-  execSync(`git remote -vv`, { encoding: 'utf8' });
-  execSync(`git branch --all`, { encoding: 'utf8' });
-  execSync(`git fetch origin ${targetBranch}`, { encoding: 'utf8' });
-  execSync(`git diff`, { encoding: 'utf8' });
-  execSync(`git stash`, { encoding: 'utf8' });
-  execSync(`git checkout ${targetBranch}`, { encoding: 'utf8' });
-  execSync(`git log -3`, { encoding: 'utf8' });
+  execSync(`git remote -vv`, { encoding: 'utf8', stdio: 'inherit' });
+  execSync(`git branch --all`, { encoding: 'utf8', stdio: 'inherit' });
+  execSync(`git remote set-branches origin --add ${targetBranch}`, { encoding: 'utf8', stdio: 'inherit' });
+  execSync(`git fetch origin ${targetBranch}`, { encoding: 'utf8', stdio: 'inherit' });
+  execSync(`git diff`, { encoding: 'utf8', stdio: 'inherit' });
+  execSync(`git stash`, { encoding: 'utf8', stdio: 'inherit' });
+  execSync(`git checkout ${targetBranch}`, { encoding: 'utf8', stdio: 'inherit' });
+  execSync(`git log -3`, { encoding: 'utf8', stdio: 'inherit' });
 }
 
 /**
@@ -110,7 +111,7 @@ exports.getSourceBranch = function getSourceBranch() {
 };
 
 /**
- * Gets the PR number. We are using the environment 
+ * Gets the PR number. We are using the environment
  * variable provided by travis-ci. It is called TRAVIS_PULL_REQUEST. More info can be found here:
  * https://docs.travis-ci.com/user/environment-variables/#Convenience-Variables
  * @returns {string} PR number or 'undefined'.
@@ -127,7 +128,7 @@ exports.getPullRequestNumber = function getPullRequestNumber() {
 };
 
 /**
- * Gets the Repo name. We are using the environment 
+ * Gets the Repo name. We are using the environment
  * variable provided by travis-ci. It is called TRAVIS_REPO_SLUG. More info can be found here:
  * https://docs.travis-ci.com/user/environment-variables/#Convenience-Variables
  * @returns {string} PR number or 'undefined'.
@@ -232,7 +233,7 @@ exports.getFilesChangedInPR = function getFilesChangedInPR() {
         return true;
       });
       console.log(`>>>> Number of swaggers found in this PR: ${swaggerFilesInPR.length}`);
-      
+
       var deletedFiles = swaggerFilesInPR.filter(function(swaggerFile){
         return !fs.existsSync(swaggerFile);
       });
