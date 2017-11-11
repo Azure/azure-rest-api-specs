@@ -1058,29 +1058,6 @@
     }
   },
   "definitions": {
-    "UpdateFirewallRuleProperties": {
-      "properties": {
-        "startIpAddress": {
-          "type": "string",
-          "description": "The start IP address for the firewall rule. This can be either ipv4 or ipv6. Start and End should be in the same protocol."
-        },
-        "endIpAddress": {
-          "type": "string",
-          "description": "The end IP address for the firewall rule. This can be either ipv4 or ipv6. Start and End should be in the same protocol."
-        }
-      },
-      "description": "The firewall rule properties to use when updating a firewall rule."
-    },
-    "UpdateFirewallRuleParameters": {
-      "properties": {
-        "properties": {
-          "x-ms-client-flatten": true,
-          "$ref": "#/definitions/UpdateFirewallRuleProperties",
-          "description": "The firewall rule properties to use when updating a firewall rule."
-        }
-      },
-      "description": "The parameters used to update a firewall rule."
-    },
     "CreateOrUpdateFirewallRuleProperties": {
       "required": [
         "startIpAddress",
@@ -1129,6 +1106,29 @@
       },
       "description": "The parameters used to create a new firewall rule while creating a new Data Lake Store account."
     },
+    "UpdateFirewallRuleProperties": {
+      "properties": {
+        "startIpAddress": {
+          "type": "string",
+          "description": "The start IP address for the firewall rule. This can be either ipv4 or ipv6. Start and End should be in the same protocol."
+        },
+        "endIpAddress": {
+          "type": "string",
+          "description": "The end IP address for the firewall rule. This can be either ipv4 or ipv6. Start and End should be in the same protocol."
+        }
+      },
+      "description": "The firewall rule properties to use when updating a firewall rule."
+    },
+    "UpdateFirewallRuleParameters": {
+      "properties": {
+        "properties": {
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/UpdateFirewallRuleProperties",
+          "description": "The firewall rule properties to use when updating a firewall rule."
+        }
+      },
+      "description": "The parameters used to update a firewall rule."
+    },
     "UpdateFirewallRuleWithAccountParameters": {
       "required": [
         "name"
@@ -1176,24 +1176,23 @@
       },
       "description": "Data Lake Store firewall rule information."
     },
-    "UpdateTrustedIdProviderProperties": {
+    "DataLakeStoreFirewallRuleListResult": {
       "properties": {
-        "idProvider": {
+        "value": {
+          "readOnly": true,
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/FirewallRule"
+          },
+          "description": "The results of the list operation."
+        },
+        "nextLink": {
+          "readOnly": true,
           "type": "string",
-          "description": "The URL of this trusted identity provider."
+          "description": "The link (url) to the next page of results."
         }
       },
-      "description": "The trusted identity provider properties to use when updating a trusted identity provider."
-    },
-    "UpdateTrustedIdProviderParameters": {
-      "properties": {
-        "properties": {
-          "x-ms-client-flatten": true,
-          "$ref": "#/definitions/UpdateTrustedIdProviderProperties",
-          "description": "The trusted identity provider properties to use when updating a trusted identity provider."
-        }
-      },
-      "description": "The parameters used to update a trusted identity provider."
+      "description": "Data Lake Store firewall rule list information."
     },
     "CreateOrUpdateTrustedIdProviderProperties": {
       "required": [
@@ -1237,6 +1236,25 @@
         }
       },
       "description": "The parameters used to create a new trusted identity provider while creating a new Data Lake Store account."
+    },
+    "UpdateTrustedIdProviderProperties": {
+      "properties": {
+        "idProvider": {
+          "type": "string",
+          "description": "The URL of this trusted identity provider."
+        }
+      },
+      "description": "The trusted identity provider properties to use when updating a trusted identity provider."
+    },
+    "UpdateTrustedIdProviderParameters": {
+      "properties": {
+        "properties": {
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/UpdateTrustedIdProviderProperties",
+          "description": "The trusted identity provider properties to use when updating a trusted identity provider."
+        }
+      },
+      "description": "The parameters used to update a trusted identity provider."
     },
     "UpdateTrustedIdProviderWithAccountParameters": {
       "required": [
@@ -1283,38 +1301,20 @@
     "DataLakeStoreTrustedIdProviderListResult": {
       "properties": {
         "value": {
-          "type": "array",
           "readOnly": true,
+          "type": "array",
           "items": {
             "$ref": "#/definitions/TrustedIdProvider"
           },
-          "description": "the results of the list operation"
+          "description": "The results of the list operation."
         },
         "nextLink": {
-          "type": "string",
           "readOnly": true,
-          "description": "the link (url) to the next page of results."
+          "type": "string",
+          "description": "The link (url) to the next page of results."
         }
       },
       "description": "Data Lake Store trusted identity provider list information."
-    },
-    "DataLakeStoreFirewallRuleListResult": {
-      "properties": {
-        "value": {
-          "type": "array",
-          "readOnly": true,
-          "items": {
-            "$ref": "#/definitions/FirewallRule"
-          },
-          "description": "the results of the list operation"
-        },
-        "nextLink": {
-          "type": "string",
-          "readOnly": true,
-          "description": "the link (url) to the next page of results."
-        }
-      },
-      "description": "Data Lake Store firewall rule list information."
     },
     "EncryptionIdentity": {
       "required": [
@@ -1323,53 +1323,29 @@
       "properties": {
         "type": {
           "type": "string",
-          "description": "The type of encryption being used. Currently the only supported type is 'SystemAssigned'.",
           "enum": [
             "SystemAssigned"
           ],
           "x-ms-enum": {
             "name": "EncryptionIdentityType",
             "modelAsString": false
-          }
+          },
+          "description": "The type of encryption being used. Currently the only supported type is 'SystemAssigned'."
         },
         "principalId": {
+          "readOnly": true,
           "type": "string",
           "format": "uuid",
-          "readOnly": true,
           "description": "The principal identifier associated with the encryption."
         },
         "tenantId": {
+          "readOnly": true,
           "type": "string",
           "format": "uuid",
-          "readOnly": true,
           "description": "The tenant identifier associated with the encryption."
         }
       },
       "description": "The encryption identity properties."
-    },
-    "EncryptionConfig": {
-      "required": [
-        "type"
-      ],
-      "properties": {
-        "type": {
-          "type": "string",
-          "description": "The type of encryption configuration being used. Currently the only supported types are 'UserManaged' and 'ServiceManaged'.",
-          "enum": [
-            "UserManaged",
-            "ServiceManaged"
-          ],
-          "x-ms-enum": {
-            "name": "EncryptionConfigType",
-            "modelAsString": false
-          }
-        },
-        "keyVaultMetaInfo": {
-          "$ref": "#/definitions/KeyVaultMetaInfo",
-          "description": "The Key Vault information for connecting to user managed encryption keys."
-        }
-      },
-      "description": "The encryption configuration for the account."
     },
     "KeyVaultMetaInfo": {
       "required": [
@@ -1393,14 +1369,29 @@
       },
       "description": "Metadata information used by account encryption."
     },
-    "UpdateEncryptionConfig": {
+    "EncryptionConfig": {
+      "required": [
+        "type"
+      ],
       "properties": {
+        "type": {
+          "type": "string",
+          "enum": [
+            "UserManaged",
+            "ServiceManaged"
+          ],
+          "x-ms-enum": {
+            "name": "EncryptionConfigType",
+            "modelAsString": false
+          },
+          "description": "The type of encryption configuration being used. Currently the only supported types are 'UserManaged' and 'ServiceManaged'."
+        },
         "keyVaultMetaInfo": {
-          "$ref": "#/definitions/UpdateKeyVaultMetaInfo",
-          "description": "The updated Key Vault key to use in user managed key rotation."
+          "$ref": "#/definitions/KeyVaultMetaInfo",
+          "description": "The Key Vault information for connecting to user managed encryption keys."
         }
       },
-      "description": "The encryption configuration used to update a user managed Key Vault key."
+      "description": "The encryption configuration for the account."
     },
     "UpdateKeyVaultMetaInfo": {
       "properties": {
@@ -1411,271 +1402,20 @@
       },
       "description": "The Key Vault update information used for user managed key rotation."
     },
-    "DataLakeStoreAccountProperties": {
-      "allOf": [
-        {
-          "$ref": "#/definitions/DataLakeStoreAccountPropertiesBasic"
-        }
-      ],
+    "UpdateEncryptionConfig": {
       "properties": {
-        "encryptionState": {
-          "type": "string",
-          "description": "The current state of encryption for this Data Lake Store account.",
-          "enum": [
-            "Enabled",
-            "Disabled"
-          ],
-          "x-ms-enum": {
-            "name": "EncryptionState",
-            "modelAsString": false
-          }
-        },
-        "encryptionProvisioningState": {
-          "readOnly": true,
-          "type": "string",
-          "description": "The current state of encryption provisioning for this Data Lake Store account.",
-          "enum": [
-            "Creating",
-            "Succeeded"
-          ],
-          "x-ms-enum": {
-            "name": "EncryptionProvisioningState",
-            "modelAsString": false
-          }
-        },
-        "encryptionConfig": {
-          "$ref": "#/definitions/EncryptionConfig",
-          "description": "The Key Vault encryption configuration."
-        },
-        "firewallState": {
-          "type": "string",
-          "description": "The current state of the IP address firewall for this Data Lake Store account.",
-          "enum": [
-            "Enabled",
-            "Disabled"
-          ],
-          "x-ms-enum": {
-            "name": "FirewallState",
-            "modelAsString": false
-          }
-        },
-        "firewallAllowAzureIps": {
-          "type": "string",
-          "description": "The current state of allowing or disallowing IPs originating within Azure through the firewall. If the firewall is disabled, this is not enforced.",
-          "enum": [
-            "Enabled",
-            "Disabled"
-          ],
-          "x-ms-enum": {
-            "name": "FirewallAllowAzureIpsState",
-            "modelAsString": false
-          }
-        },
-        "firewallRules": {
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/CreateFirewallRuleWithAccountParameters"
-          },
-          "description": "The list of firewall rules associated with this Data Lake Store account."
-        },
-        "trustedIdProviderState": {
-          "type": "string",
-          "description": "The current state of the trusted identity provider feature for this Data Lake Store account.",
-          "enum": [
-            "Enabled",
-            "Disabled"
-          ],
-          "x-ms-enum": {
-            "name": "TrustedIdProviderState",
-            "modelAsString": false
-          }
-        },
-        "trustedIdProviders": {
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/CreateTrustedIdProviderWithAccountParameters"
-          },
-          "description": "The list of trusted identity providers associated with this Data Lake Store account."
-        },
-        "defaultGroup": {
-          "type": "string",
-          "description": "the default owner group for all new folders and files created in the Data Lake Store account."
-        },
-        "newTier": {
-          "type": "string",
-          "enum": [
-            "Consumption",
-            "Commitment_1TB",
-            "Commitment_10TB",
-            "Commitment_100TB",
-            "Commitment_500TB",
-            "Commitment_1PB",
-            "Commitment_5PB"
-          ],
-          "x-ms-enum": {
-            "name": "TierType",
-            "modelAsString": false
-          },
-          "description": "the commitment tier to use for next month."
-        },
-        "currentTier": {
-          "type": "string",
-           "enum": [
-            "Consumption",
-            "Commitment_1TB",
-            "Commitment_10TB",
-            "Commitment_100TB",
-            "Commitment_500TB",
-            "Commitment_1PB",
-            "Commitment_5PB"
-          ],
-          "x-ms-enum": {
-            "name": "TierType",
-            "modelAsString": false
-          },
-          "readOnly": true,
-          "description": "the commitment tier in use for the current month."
+        "keyVaultMetaInfo": {
+          "$ref": "#/definitions/UpdateKeyVaultMetaInfo",
+          "description": "The updated Key Vault key to use in user managed key rotation."
         }
       },
-      "description": "Data Lake Store account properties information."
-    },
-    "UpdateDataLakeStoreAccountProperties": {
-      "properties": {
-        "encryptionConfig": {
-          "$ref": "#/definitions/UpdateEncryptionConfig",
-          "description": "Used for rotation of user managed Key Vault keys. Can only be used to rotate a user managed encryption Key Vault key."
-        },
-        "firewallState": {
-          "type": "string",
-          "description": "The current state of the IP address firewall for this Data Lake Store account. Disabling the firewall does not remove existing rules, they will just be ignored until the firewall is re-enabled.",
-          "enum": [
-            "Enabled",
-            "Disabled"
-          ],
-          "x-ms-enum": {
-            "name": "FirewallState",
-            "modelAsString": false
-          }
-        },
-        "firewallAllowAzureIps": {
-          "type": "string",
-          "description": "The current state of allowing or disallowing IPs originating within Azure through the firewall. If the firewall is disabled, this is not enforced.",
-          "enum": [
-            "Enabled",
-            "Disabled"
-          ],
-          "x-ms-enum": {
-            "name": "FirewallAllowAzureIpsState",
-            "modelAsString": false
-          }
-        },
-        "firewallRules": {
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/UpdateFirewallRuleWithAccountParameters"
-          },
-          "description": "The list of firewall rules associated with this Data Lake Store account."
-        },
-        "trustedIdProviderState": {
-          "type": "string",
-          "description": "The current state of the trusted identity provider feature for this Data Lake Store account. Disabling trusted identity provider functionality does not remove the providers, they will just be ignored until this feature is re-enabled.",
-          "enum": [
-            "Enabled",
-            "Disabled"
-          ],
-          "x-ms-enum": {
-            "name": "TrustedIdProviderState",
-            "modelAsString": false
-          }
-        },
-        "trustedIdProviders": {
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/UpdateTrustedIdProviderWithAccountParameters"
-          },
-          "description": "The list of trusted identity providers associated with this Data Lake Store account."
-        },
-        "defaultGroup": {
-          "type": "string",
-          "description": "the default owner group for all new folders and files created in the Data Lake Store account."
-        },
-        "newTier": {
-          "type": "string",
-           "enum": [
-            "Consumption",
-            "Commitment_1TB",
-            "Commitment_10TB",
-            "Commitment_100TB",
-            "Commitment_500TB",
-            "Commitment_1PB",
-            "Commitment_5PB"
-          ],
-          "x-ms-enum": {
-            "name": "TierType",
-            "modelAsString": false
-          },
-          "description": "the commitment tier to use for next month."
-        }
-      },
-      "description": "Data Lake Store account properties information to be updated."
-    },
-    "DataLakeStoreAccountUpdateParameters": {
-      "properties": {
-        "tags": {
-          "type": "object",
-          "additionalProperties": {
-            "type": "string"
-          },
-          "description": "Resource tags"
-        },
-        "properties": {
-          "$ref": "#/definitions/UpdateDataLakeStoreAccountProperties",
-          "description": "the Data Lake Store account properties to update.",
-          "x-ms-client-flatten": true
-        }
-      },
-      "description": "Data Lake Store account information to update"
-    },
-    "DataLakeStoreAccount": {
-      "allOf": [
-        {
-          "$ref": "#/definitions/Resource"
-        }
-      ],
-      "properties": {
-        "identity": {
-          "$ref": "#/definitions/EncryptionIdentity",
-          "description": "The Key Vault encryption identity, if any."
-        },
-        "properties": {
-          "$ref": "#/definitions/DataLakeStoreAccountProperties",
-          "description": "the Data Lake Store account properties.",
-          "x-ms-client-flatten": true
-        }
-      },
-      "description": "Data Lake Store account information"
-    },
-    "DataLakeStoreAccountBasic": {
-      "allOf": [
-        {
-          "$ref": "#/definitions/Resource"
-        }
-      ],
-      "properties": {
-        "properties": {
-          "$ref": "#/definitions/DataLakeStoreAccountPropertiesBasic",
-          "description": "the basic Data Lake Store account properties.",
-          "x-ms-client-flatten": true
-        }
-      },
-      "description": "Basic Data Lake Store account information, returned on list calls."
+      "description": "The encryption configuration used to update a user managed Key Vault key."
     },
     "DataLakeStoreAccountPropertiesBasic": {
       "properties": {
         "provisioningState": {
           "readOnly": true,
           "type": "string",
-          "description": "the provisioning status of the Data Lake Store account.",
           "enum": [
             "Failed",
             "Creating",
@@ -1692,12 +1432,12 @@
           "x-ms-enum": {
             "name": "DataLakeStoreAccountStatus",
             "modelAsString": false
-          }
+          },
+          "description": "The provisioning status of the Data Lake Store account."
         },
         "state": {
           "readOnly": true,
           "type": "string",
-          "description": "the state of the Data Lake Store account.",
           "enum": [
             "Active",
             "Suspended"
@@ -1705,48 +1445,308 @@
           "x-ms-enum": {
             "name": "DataLakeStoreAccountState",
             "modelAsString": false
-          }
+          },
+          "description": "The state of the Data Lake Store account."
         },
         "creationTime": {
-          "type": "string",
           "readOnly": true,
+          "type": "string",
           "format": "date-time",
-          "description": "the account creation time."
+          "description": "The account creation time."
         },
         "lastModifiedTime": {
-          "type": "string",
           "readOnly": true,
+          "type": "string",
           "format": "date-time",
-          "description": "the account last modified time."
+          "description": "The account last modified time."
         },
         "endpoint": {
-          "type": "string",
           "readOnly": true,
-          "description": "the full CName endpoint for this account."
+          "type": "string",
+          "description": "The full CName endpoint for this account."
         },
         "accountId": {
+          "readOnly": true,
           "type": "string",
           "format": "uuid",
-          "readOnly": true,
           "description": "The unique identifier associated with this Data Lake Store account."
         }
       },
       "description": "The basic account specific properties that are associated with an underlying Data Lake Store account."
     },
+    "DataLakeStoreAccountBasic": {
+      "allOf": [
+        {
+          "$ref": "#/definitions/Resource"
+        }
+      ],
+      "properties": {
+        "properties": {
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/DataLakeStoreAccountPropertiesBasic",
+          "description": "The basic Data Lake Store account properties."
+        }
+      },
+      "description": "Basic Data Lake Store account information, returned on list calls."
+    },
+    "DataLakeStoreAccountProperties": {
+      "allOf": [
+        {
+          "$ref": "#/definitions/DataLakeStoreAccountPropertiesBasic"
+        }
+      ],
+      "properties": {
+        "encryptionState": {
+          "type": "string",
+          "enum": [
+            "Enabled",
+            "Disabled"
+          ],
+          "x-ms-enum": {
+            "name": "EncryptionState",
+            "modelAsString": false
+          },
+          "description": "The current state of encryption for this Data Lake Store account."
+        },
+        "encryptionProvisioningState": {
+          "readOnly": true,
+          "type": "string",
+          "enum": [
+            "Creating",
+            "Succeeded"
+          ],
+          "x-ms-enum": {
+            "name": "EncryptionProvisioningState",
+            "modelAsString": false
+          },
+          "description": "The current state of encryption provisioning for this Data Lake Store account."
+        },
+        "encryptionConfig": {
+          "$ref": "#/definitions/EncryptionConfig",
+          "description": "The Key Vault encryption configuration."
+        },
+        "firewallState": {
+          "type": "string",
+          "enum": [
+            "Enabled",
+            "Disabled"
+          ],
+          "x-ms-enum": {
+            "name": "FirewallState",
+            "modelAsString": false
+          },
+          "description": "The current state of the IP address firewall for this Data Lake Store account."
+        },
+        "firewallAllowAzureIps": {
+          "type": "string",
+          "enum": [
+            "Enabled",
+            "Disabled"
+          ],
+          "x-ms-enum": {
+            "name": "FirewallAllowAzureIpsState",
+            "modelAsString": false
+          },
+          "description": "The current state of allowing or disallowing IPs originating within Azure through the firewall. If the firewall is disabled, this is not enforced."
+        },
+        "firewallRules": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/CreateFirewallRuleWithAccountParameters"
+          },
+          "description": "The list of firewall rules associated with this Data Lake Store account."
+        },
+        "trustedIdProviderState": {
+          "type": "string",
+          "enum": [
+            "Enabled",
+            "Disabled"
+          ],
+          "x-ms-enum": {
+            "name": "TrustedIdProviderState",
+            "modelAsString": false
+          },
+          "description": "The current state of the trusted identity provider feature for this Data Lake Store account."
+        },
+        "trustedIdProviders": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/CreateTrustedIdProviderWithAccountParameters"
+          },
+          "description": "The list of trusted identity providers associated with this Data Lake Store account."
+        },
+        "defaultGroup": {
+          "type": "string",
+          "description": "The default owner group for all new folders and files created in the Data Lake Store account."
+        },
+        "newTier": {
+          "type": "string",
+          "enum": [
+            "Consumption",
+            "Commitment_1TB",
+            "Commitment_10TB",
+            "Commitment_100TB",
+            "Commitment_500TB",
+            "Commitment_1PB",
+            "Commitment_5PB"
+          ],
+          "x-ms-enum": {
+            "name": "TierType",
+            "modelAsString": false
+          },
+          "description": "The commitment tier to use for next month."
+        },
+        "currentTier": {
+          "readOnly": true,
+          "type": "string",
+           "enum": [
+            "Consumption",
+            "Commitment_1TB",
+            "Commitment_10TB",
+            "Commitment_100TB",
+            "Commitment_500TB",
+            "Commitment_1PB",
+            "Commitment_5PB"
+          ],
+          "x-ms-enum": {
+            "name": "TierType",
+            "modelAsString": false
+          },
+          "description": "The commitment tier in use for the current month."
+        }
+      },
+      "description": "Data Lake Store account properties information."
+    },
+    "DataLakeStoreAccount": {
+      "allOf": [
+        {
+          "$ref": "#/definitions/Resource"
+        }
+      ],
+      "properties": {
+        "identity": {
+          "$ref": "#/definitions/EncryptionIdentity",
+          "description": "The Key Vault encryption identity, if any."
+        },
+        "properties": {
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/DataLakeStoreAccountProperties",
+          "description": "The Data Lake Store account properties."
+        }
+      },
+      "description": "Data Lake Store account information."
+    },
+    "UpdateDataLakeStoreAccountProperties": {
+      "properties": {
+        "encryptionConfig": {
+          "$ref": "#/definitions/UpdateEncryptionConfig",
+          "description": "Used for rotation of user managed Key Vault keys. Can only be used to rotate a user managed encryption Key Vault key."
+        },
+        "firewallState": {
+          "type": "string",
+          "enum": [
+            "Enabled",
+            "Disabled"
+          ],
+          "x-ms-enum": {
+            "name": "FirewallState",
+            "modelAsString": false
+          },
+          "description": "The current state of the IP address firewall for this Data Lake Store account. Disabling the firewall does not remove existing rules, they will just be ignored until the firewall is re-enabled."
+        },
+        "firewallAllowAzureIps": {
+          "type": "string",
+          "enum": [
+            "Enabled",
+            "Disabled"
+          ],
+          "x-ms-enum": {
+            "name": "FirewallAllowAzureIpsState",
+            "modelAsString": false
+          },
+          "description": "The current state of allowing or disallowing IPs originating within Azure through the firewall. If the firewall is disabled, this is not enforced."
+        },
+        "firewallRules": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/UpdateFirewallRuleWithAccountParameters"
+          },
+          "description": "The list of firewall rules associated with this Data Lake Store account."
+        },
+        "trustedIdProviderState": {
+          "type": "string",
+          "enum": [
+            "Enabled",
+            "Disabled"
+          ],
+          "x-ms-enum": {
+            "name": "TrustedIdProviderState",
+            "modelAsString": false
+          },
+          "description": "The current state of the trusted identity provider feature for this Data Lake Store account. Disabling trusted identity provider functionality does not remove the providers, they will just be ignored until this feature is re-enabled."
+        },
+        "trustedIdProviders": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/UpdateTrustedIdProviderWithAccountParameters"
+          },
+          "description": "The list of trusted identity providers associated with this Data Lake Store account."
+        },
+        "defaultGroup": {
+          "type": "string",
+          "description": "The default owner group for all new folders and files created in the Data Lake Store account."
+        },
+        "newTier": {
+          "type": "string",
+           "enum": [
+            "Consumption",
+            "Commitment_1TB",
+            "Commitment_10TB",
+            "Commitment_100TB",
+            "Commitment_500TB",
+            "Commitment_1PB",
+            "Commitment_5PB"
+          ],
+          "x-ms-enum": {
+            "name": "TierType",
+            "modelAsString": false
+          },
+          "description": "The commitment tier to use for next month."
+        }
+      },
+      "description": "Data Lake Store account properties information to be updated."
+    },
+    "DataLakeStoreAccountUpdateParameters": {
+      "properties": {
+        "tags": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          },
+          "description": "Resource tags"
+        },
+        "properties": {
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/UpdateDataLakeStoreAccountProperties",
+          "description": "The Data Lake Store account properties to update."
+        }
+      },
+      "description": "Data Lake Store account information to update."
+    },
     "DataLakeStoreAccountListResult": {
       "properties": {
         "value": {
-          "type": "array",
           "readOnly": true,
+          "type": "array",
           "items": {
             "$ref": "#/definitions/DataLakeStoreAccountBasic"
           },
-          "description": "the results of the list operation"
+          "description": "The results of the list operation."
         },
         "nextLink": {
-          "type": "string",
           "readOnly": true,
-          "description": "the link (url) to the next page of results."
+          "type": "string",
+          "description": "The link (url) to the next page of results."
         }
       },
       "description": "Data Lake Store account list information response."
@@ -1754,52 +1754,53 @@
     "NameAvailabilityInformation": {
       "properties": {
         "nameAvailable": {
-          "type": "boolean",
           "readOnly": true,
-          "description": "the Boolean value of true or false to indicate whether the Data Lake Store account name is available or not."
+          "type": "boolean",
+          "description": "The Boolean value of true or false to indicate whether the Data Lake Store account name is available or not."
         },
         "reason": {
-          "type": "string",
           "readOnly": true,
-          "description": "the reason why the Data Lake Store account name is not available, if nameAvailable is false."
+          "type": "string",
+          "description": "The reason why the Data Lake Store account name is not available, if nameAvailable is false."
         },
         "message": {
-          "type": "string",
           "readOnly": true,
-          "description": "the message describing why the Data Lake Store account name is not available, if nameAvailable is false."
+          "type": "string",
+          "description": "The message describing why the Data Lake Store account name is not available, if nameAvailable is false."
         }
       },
-      "description": "Data Lake Store account name availability result information"
+      "description": "Data Lake Store account name availability result information."
     },
     "CheckNameAvailabilityParameters": {
+      "required": [
+        "name",
+        "type"
+      ],
       "properties": {
         "name": {
           "type": "string",
-          "description": "the Data Lake Store name to check availability for."
+          "description": "The Data Lake Store name to check availability for."
         },
         "type": {
           "type": "string",
           "enum": [
             "Microsoft.DataLakeStore/accounts"
           ],
-          "description": "the resource type. Note: This should not be set by the user, as the constant value is Microsoft.DataLakeStore/accounts"
+          "description": "The resource type. Note: This should not be set by the user, as the constant value is Microsoft.DataLakeStore/accounts"
         }
       },
-      "required": [
-        "name",
-        "type"
-      ],
-      "description": "Data Lake Store account name availability check parameters"
+      "description": "Data Lake Store account name availability check parameters."
     },
     "CapabilityInformation": {
       "properties": {
         "subscriptionId": {
+          "readOnly": true,
           "type": "string",
           "format": "uuid",
-          "readOnly": true,
-          "description": "the subscription credentials that uniquely identifies the subscription."
+          "description": "The subscription credentials that uniquely identifies the subscription."
         },
         "state": {
+          "readOnly": true,
           "type": "string",
           "enum": [
             "Registered",
@@ -1812,66 +1813,66 @@
             "name": "SubscriptionState",
             "modelAsString": true
           },
-          "readOnly": true,
-          "description": "the subscription state."
+          "description": "The subscription state."
         },
         "maxAccountCount": {
+          "readOnly": true,
           "type": "integer",
           "format": "int32",
-          "readOnly": true,
-          "description": "the maximum supported number of accounts under this subscription."
+          "description": "The maximum supported number of accounts under this subscription."
         },
         "accountCount": {
+          "readOnly": true,
           "type": "integer",
           "format": "int32",
-          "readOnly": true,
-          "description": "the current number of accounts under this subscription."
+          "description": "The current number of accounts under this subscription."
         },
         "migrationState": {
-          "type": "boolean",
           "readOnly": true,
-          "description": "the Boolean value of true or false to indicate the maintenance state."
+          "type": "boolean",
+          "description": "The Boolean value of true or false to indicate the maintenance state."
         }
       },
-      "description": "Subscription-level properties and limits for Data Lake Store"
+      "description": "Subscription-level properties and limits for Data Lake Store."
     },
     "OperationDisplay": {
       "properties": {
         "provider": {
-          "type": "string",
           "readOnly": true,
-          "description": "the resource provider of the operation."
+          "type": "string",
+          "description": "The resource provider of the operation."
         },
         "resource": {
-          "type": "string",
           "readOnly": true,
-          "description": "the resource type of the operation."
+          "type": "string",
+          "description": "The resource type of the operation."
         },
         "operation": {
-          "type": "string",
           "readOnly": true,
-          "description": "a friendly name of the operation."
+          "type": "string",
+          "description": "A friendly name of the operation."
         },
         "description": {
-          "type": "string",
           "readOnly": true,
-          "description": "a friendly description of the operation."
+          "type": "string",
+          "description": "A friendly description of the operation."
         }
       },
-      "description": "The display information for a particular operation"
+      "description": "The display information for a particular operation."
     },
     "Operation": {
       "properties": {
         "name": {
-          "type": "string",
           "readOnly": true,
-          "description": "the name of the operation."
+          "type": "string",
+          "description": "The name of the operation."
         },
         "display": {
           "$ref": "#/definitions/OperationDisplay",
-          "description": "the display information for the operation."
+          "description": "The display information for the operation."
         },
         "origin": {
+          "readOnly": true,
           "type": "string",
           "enum": [
             "user",
@@ -1882,49 +1883,48 @@
             "name": "OperationOrigin",
             "modelAsString": true
           },
-          "readOnly": true,
-          "description": "the intended executor of the operation."
+          "description": "The intended executor of the operation."
         }
       },
-      "description": "An available operation for Data Lake Store"
+      "description": "An available operation for Data Lake Store."
     },
     "OperationListResult": {
       "properties": {
         "value": {
+          "readOnly": true,
           "type": "array",
           "items": {
             "$ref": "#/definitions/Operation"
           },
-          "readOnly": true,
-          "description": "the results of the list operation."
+          "description": "The results of the list operation."
         },
         "nextLink": {
-          "type": "string",
           "readOnly": true,
-          "description": "the link (url) to the next page of results."
+          "type": "string",
+          "description": "The link (url) to the next page of results."
         }
       },
-      "description": "The list of available operations for Data Lake Store"
+      "description": "The list of available operations for Data Lake Store."
     },
     "ErrorDetails": {
       "properties": {
         "code": {
-          "type": "string",
           "readOnly": true,
-          "description": "the HTTP status code or error code associated with this error"
+          "type": "string",
+          "description": "The HTTP status code or error code associated with this error."
         },
         "message": {
-          "type": "string",
           "readOnly": true,
-          "description": "the error message localized based on Accept-Language"
+          "type": "string",
+          "description": "The error message localized based on Accept-Language."
         },
         "target": {
-          "type": "string",
           "readOnly": true,
-          "description": "the target of the particular error (for example, the name of the property in error)."
+          "type": "string",
+          "description": "The target of the particular error (for example, the name of the property in error)."
         }
       },
-      "description": "Data Lake Store error details information"
+      "description": "Data Lake Store error details information."
     },
     "Resource": {
       "required": [
