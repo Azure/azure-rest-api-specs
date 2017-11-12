@@ -1,0 +1,133 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "Azure Data Migration Service Resource Provider",
+    "version": "2017-11-15-preview"
+  },
+  "securityDefinitions": {
+    "azure_auth": {
+      "type": "oauth2",
+      "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
+      "flow": "implicit",
+      "description": "Azure Active Directory OAuth2 Flow",
+      "scopes": {
+        "user_impersonation": "impersonate your user account"
+      }
+    }
+  },
+  "paths": {},
+  "definitions": {
+    "TaskOutput": {
+      "type": "object",
+      "description": "Base class for all DMS task outputs",
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "Result identifier",
+          "readOnly": true
+        }
+      }
+    },
+    "ProjectTaskProperties": {
+      "type": "object",
+      "description": "Base class for all types of DMS task properties. If task is not supported by current client, this object is returned.",
+      "x-ms-discriminator-value": "Unknown",
+      "properties": {
+        "taskType": {
+          "description": "Task type.",
+          "type": "string"
+        },
+        "errors": {
+          "type": "array",
+          "items": {
+            "$ref": "./Common.json#/definitions/ODataError"
+          },
+          "description": "Array of errors. This is ignored if submitted.",
+          "readOnly": true
+        },
+        "state": {
+          "type": "string",
+          "description": "The state of the task. This is ignored if submitted.",
+          "enum": [
+            "Unknown",
+            "Queued",
+            "Running",
+            "Canceled",
+            "Succeeded",
+            "Failed",
+            "FailedInputValidation",
+            "Faulted"
+          ],
+          "x-ms-enum": {
+            "name": "TaskState",
+            "modelAsString": false
+          },
+          "readOnly": true
+        }
+      },
+      "required": [ "taskType" ],
+      "discriminator": "taskType"
+    },
+    "ProjectTask": {
+      "type": "object",
+      "description": "A task resource",
+      "properties": {
+        "etag": {
+          "type": "string",
+          "description": "HTTP strong entity tag value. This is ignored if submitted."
+        },
+        "properties": {
+          "description": "Custom task properties",
+          "$ref": "#/definitions/ProjectTaskProperties"
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "./Common.json#/definitions/ProxyResource"
+        }
+      ]
+    },
+    "TaskList": {
+      "type": "object",
+      "description": "OData page of tasks",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "List of tasks",
+          "items": {
+            "$ref": "#/definitions/ProjectTask"
+          }
+        },
+        "nextLink": {
+          "type": "string",
+          "description": "URL to load the next page of tasks"
+        }
+      }
+    },
+    "UnknownProjectTaskProperties": {
+      "x-ms-discriminator-value": "Unknown",
+      "type": "object",
+      "description": "If task is not supported by current client version, this object is returned.",
+      "properties": {
+        "input": {
+          "type": "object",
+          "description": "Task input object",
+          "readOnly": true
+        },
+        "output": {
+          "description": "Task output object.",
+          "type": "array",
+          "items": {
+            "type": "object"
+          },
+          "readOnly": true
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "./Tasks.json#/definitions/ProjectTaskProperties"
+        }
+      ]
+    }
+  }
+}
