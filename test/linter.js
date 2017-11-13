@@ -84,6 +84,7 @@ function execLinterCommand(args) {
   console.log(`Executing: ${cmd}`);
   try {
     let result = execSync(cmd, { encoding: 'utf8', maxBuffer: 1024 * 1024 * 64 });
+    console.error(result);
   } catch (err) {
     throw new Error('Linter validation contains error(s)');
   }
