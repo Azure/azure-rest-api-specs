@@ -41,27 +41,6 @@
 
   "paths": {
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Automation/automationAccounts/{automationAccountName}/softwareUpdateConfigurations/{softwareUpdateConfigurationName}": {
-      "parameters": [
-        {
-          "$ref": "./definitions.json#/parameters/subscriptionId"
-        },
-        {
-          "$ref": "./definitions.json#/parameters/resourceGroupName"
-        },
-        {
-          "$ref": "./definitions.json#/parameters/automationAccountName"
-        },
-        {
-          "$ref": "./definitions.json#/parameters/softwareUpdateConfigurationName"
-        },
-        {
-          "$ref": "./definitions.json#/parameters/apiVersion"
-        },
-        {
-          "$ref": "./definitions.json#/parameters/clientRequestId"
-        }
-      ],
-
       "put": {
         "tags": [ "Software Update Configuration" ],
         "description": "Create a new software update configuration with the name given in the URI.",
@@ -73,6 +52,24 @@
         },
         "operationId": "softwareUpdateConfigurations_Create",
         "parameters": [
+          {
+            "$ref": "./definitions.json#/parameters/subscriptionId"
+          },
+          {
+            "$ref": "./definitions.json#/parameters/resourceGroupName"
+          },
+          {
+            "$ref": "./definitions.json#/parameters/automationAccountName"
+          },
+          {
+            "$ref": "./definitions.json#/parameters/softwareUpdateConfigurationName"
+          },
+          {
+            "$ref": "./definitions.json#/parameters/apiVersion"
+          },
+          {
+            "$ref": "./definitions.json#/parameters/clientRequestId"
+          },
           {
             "name": "parameters",
             "description": "Request body.",
@@ -119,6 +116,26 @@
           "Get software update configuration by name": { "$ref": "./examples/softwareUpdateConfiguration/getSoftwareUpdateConfigurationByName.json" }
         },
         "operationId": "softwareUpdateConfigurations_GetByName",
+        "parameters": [
+          {
+            "$ref": "./definitions.json#/parameters/subscriptionId"
+          },
+          {
+            "$ref": "./definitions.json#/parameters/resourceGroupName"
+          },
+          {
+            "$ref": "./definitions.json#/parameters/automationAccountName"
+          },
+          {
+            "$ref": "./definitions.json#/parameters/softwareUpdateConfigurationName"
+          },
+          {
+            "$ref": "./definitions.json#/parameters/apiVersion"
+          },
+          {
+            "$ref": "./definitions.json#/parameters/clientRequestId"
+          }
+        ],
         "responses": {
           "200": {
             "description": "A single software update configuration.",
@@ -142,6 +159,26 @@
           "Delete software update configuration": { "$ref": "./examples/softwareUpdateConfiguration/deleteSoftwareUpdateConfiguration.json" }
         },
         "operationId": "softwareUpdateConfigurations_Delete",
+        "parameters": [
+          {
+            "$ref": "./definitions.json#/parameters/subscriptionId"
+          },
+          {
+            "$ref": "./definitions.json#/parameters/resourceGroupName"
+          },
+          {
+            "$ref": "./definitions.json#/parameters/automationAccountName"
+          },
+          {
+            "$ref": "./definitions.json#/parameters/softwareUpdateConfigurationName"
+          },
+          {
+            "$ref": "./definitions.json#/parameters/apiVersion"
+          },
+          {
+            "$ref": "./definitions.json#/parameters/clientRequestId"
+          }
+        ],
         "responses": {
           "200": {
             "description": "The software update configuration has been deleted."
@@ -157,25 +194,6 @@
     },
 
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Automation/automationAccounts/{automationAccountName}/softwareUpdateConfigurations": {
-      "parameters": [
-        {
-          "$ref": "./definitions.json#/parameters/subscriptionId"
-        },
-        {
-          "$ref": "./definitions.json#/parameters/resourceGroupName"
-        },
-        {
-          "$ref": "./definitions.json#/parameters/automationAccountName"
-        },
-        {
-          "$ref": "./definitions.json#/parameters/apiVersion"
-        },
-        {
-          "$ref": "./definitions.json#/parameters/clientRequestId"
-        }
-      ],
-
-
       "get": {
         "tags": [ "Software Update Configuration" ],
         "description": "Get all software update configurations for the account.",
@@ -188,6 +206,21 @@
         },
         "operationId": "softwareUpdateConfigurations_List",
         "parameters": [
+          {
+            "$ref": "./definitions.json#/parameters/subscriptionId"
+          },
+          {
+            "$ref": "./definitions.json#/parameters/resourceGroupName"
+          },
+          {
+            "$ref": "./definitions.json#/parameters/automationAccountName"
+          },
+          {
+            "$ref": "./definitions.json#/parameters/apiVersion"
+          },
+          {
+            "$ref": "./definitions.json#/parameters/clientRequestId"
+          },
           {
             "name": "$filter",
             "in": "query",

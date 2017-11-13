@@ -40,28 +40,7 @@
     },
   
     "paths": {
-      "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Automation/automationAccounts/{automationAccountName}/softwareUpdateConfigurationsRuns/{softwareUpdateConfigurationRunId}": {
-        "parameters": [
-          {
-            "$ref": "./definitions.json#/parameters/subscriptionId"
-          },
-          {
-            "$ref": "./definitions.json#/parameters/resourceGroupName"
-          },
-          {
-            "$ref": "./definitions.json#/parameters/automationAccountName"
-          },
-          {
-            "$ref": "./definitions.json#/parameters/softwareUpdateConfigurationRunId"
-          },
-          {
-            "$ref": "./definitions.json#/parameters/apiVersion"
-          },
-          {
-            "$ref": "./definitions.json#/parameters/clientRequestId"
-          }
-        ],
-  
+      "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Automation/automationAccounts/{automationAccountName}/softwareUpdateConfigurationRuns/{softwareUpdateConfigurationRunId}": {
         "get": {
           "tags": [ "Software Update Configuration Run" ],
           "description": "Get a single software update configuration Run by Id.",
@@ -72,6 +51,26 @@
             "Get software update configuration runs by Id": { "$ref": "./examples/softwareUpdateConfigurationRun/getSoftwareUpdateConfigurationRunById.json" }
           },
           "operationId": "softwareUpdateConfigurationRuns_GetById",
+          "parameters": [
+            {
+              "$ref": "./definitions.json#/parameters/subscriptionId"
+            },
+            {
+              "$ref": "./definitions.json#/parameters/resourceGroupName"
+            },
+            {
+              "$ref": "./definitions.json#/parameters/automationAccountName"
+            },
+            {
+              "$ref": "./definitions.json#/parameters/softwareUpdateConfigurationRunId"
+            },
+            {
+              "$ref": "./definitions.json#/parameters/apiVersion"
+            },
+            {
+              "$ref": "./definitions.json#/parameters/clientRequestId"
+            }
+          ],
           "responses": {
             "200": {
               "description": "A single software update configuration Run.",
@@ -87,25 +86,7 @@
       },
   
   
-      "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Automation/automationAccounts/{automationAccountName}/softwareUpdateConfigurationsRuns": {
-        "parameters": [
-          {
-            "$ref": "#/parameters/subscriptionId"
-          },
-          {
-            "$ref": "#/parameters/resourceGroupName"
-          },
-          {
-            "$ref": "#/parameters/automationAccountName"
-          },
-          {
-            "$ref": "#/parameters/apiVersion"
-          },
-          {
-            "$ref": "#/parameters/clientRequestId"
-          }
-        ],
-  
+      "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Automation/automationAccounts/{automationAccountName}/softwareUpdateConfigurationRuns": {
         "get": {
           "tags": [ "Software Update Configuration Run" ],
           "description": "Return list of software update configuration runs",
@@ -116,7 +97,23 @@
             "List software update configuration machine runs": { "$ref": "./examples/softwareUpdateConfigurationRun/listSoftwareUpdateConfigurationRuns.json" },
             "List software update configuration machine run with status equal to 'Failed'": { "$ref": "./examples/softwareUpdateConfigurationRun/listFailedSoftwareUpdateConfigurationRuns.json" }
           },
+          "operationId": "softwareUpdateConfigurationRuns_List",
           "parameters": [
+            {
+              "$ref": "#/parameters/subscriptionId"
+            },
+            {
+              "$ref": "#/parameters/resourceGroupName"
+            },
+            {
+              "$ref": "#/parameters/automationAccountName"
+            },
+            {
+              "$ref": "#/parameters/apiVersion"
+            },
+            {
+              "$ref": "#/parameters/clientRequestId"
+            },
             {
               "name": "$skip",
               "in": "query",
@@ -139,7 +136,6 @@
               "description": "The filter to apply on the operation. You can use the following filters: 'properties/osType', 'properties/status', 'properties/startTime', and 'properties/softwareUpdateConfiguration/name'"
             }
           ],
-          "operationId": "softwareUpdateConfigurationRuns_List",
           "responses": {
             "200": {
               "description": "Return list of software update configurations runs.",
