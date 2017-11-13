@@ -1,0 +1,25 @@
+{
+    "parameters": {
+        "api-version": "2016-11-01",
+        "databaseName": "master",
+        "$filter": "test_filter",
+        "$top": 1,
+        "$skip": 1,
+        "$select": "test_select",
+        "$orderby": "test_orderby",
+        "$count": false
+    },
+    "responses": {
+        "200": {
+            "body": {
+                "value": [{
+                    "aceType": "User",
+                    "principalId": "34adfa4f-cedf-4dc0-ba29-b6d1a69ab345",
+                    "permission": "Use"
+                }]
+            }
+        },
+        "404": {
+        }
+    }
+}

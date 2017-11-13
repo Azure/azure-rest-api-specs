@@ -688,6 +688,29 @@
         "type"
       ]
     },
+    "SapCloudForCustomerSink": {
+      "description": "A copy activity SAP Cloud for Customer sink.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/CopySink"
+        }
+      ],
+      "properties": {
+        "writeBehavior": {
+          "description": "The write behavior for the operation. Default is 'Insert'.",
+          "type": "string",
+          "enum": [
+            "Insert",
+            "Update"
+          ],
+          "x-ms-enum": {
+            "name": "SapCloudForCustomerSinkWriteBehavior",
+            "modelAsString": true
+          }
+        }
+      }
+    },
     "AzureQueueSink": {
       "description": "A copy activity Azure Queue sink.",
       "type": "object",
