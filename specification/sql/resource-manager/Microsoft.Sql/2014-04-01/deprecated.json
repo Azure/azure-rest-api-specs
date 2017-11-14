@@ -60,7 +60,47 @@
           "nextLinkName": null
         }
       }
-    }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/servers/{serverName}/databases/{databaseName}/extensions": {
+      "put": {
+          "tags": [
+              "ImportExport"
+          ],
+          "operationId": "Extensions_ListByDatabase",
+          "description": "Gets database extensions.",
+          "parameters": [
+              {
+                  "$ref": "#/parameters/ApiVersionParameter"
+              },
+              {
+                  "$ref": "#/parameters/SubscriptionIdParameter"
+              },
+              {
+                  "$ref": "#/parameters/ResourceGroupParameter"
+              },
+              {
+                  "$ref": "#/parameters/ServerNameParameter"
+              },
+              {
+                  "name": "databaseName",
+                  "in": "path",
+                  "required": true,
+                  "type": "string",
+                  "description": "The name of the database to import into"
+              }
+          ],
+          "responses": {
+              "200": {
+                  "description": "OK",
+                  "schema": {
+                  "$ref": "#/definitions/ExtensionListResult"
+                  }
+              }
+          },
+          "x-ms-pageable": {
+            "nextLinkName": null
+          }
+      }
   },
   "definitions": {
     "TransparentDataEncryptionListResult": {
@@ -74,6 +114,20 @@
         }
       },
       "description": "Represents the response to a list transparent data encryption configurations request."
+    },
+    "ExtensionListResult": {
+      "properties": {
+        "value": {
+          "type": "array",
+          "items": {
+            "properties": {
+
+            }
+          },
+          "description": "The list of extensions."
+        }
+      },
+      "description": "Represents the response to a list extensions request."
     }
   },
   "parameters": {
