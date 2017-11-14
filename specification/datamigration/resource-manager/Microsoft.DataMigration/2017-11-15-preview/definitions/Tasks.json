@@ -103,31 +103,6 @@
           "description": "URL to load the next page of tasks"
         }
       }
-    },
-    "UnknownProjectTaskProperties": {
-      "x-ms-discriminator-value": "Unknown",
-      "type": "object",
-      "description": "If task is not supported by current client version, this object is returned.",
-      "properties": {
-        "input": {
-          "type": "object",
-          "description": "Task input object",
-          "readOnly": true
-        },
-        "output": {
-          "description": "Task output object.",
-          "type": "array",
-          "items": {
-            "type": "object"
-          },
-          "readOnly": true
-        }
-      },
-      "allOf": [
-        {
-          "$ref": "./Tasks.json#/definitions/ProjectTaskProperties"
-        }
-      ]
     }
   }
 }
