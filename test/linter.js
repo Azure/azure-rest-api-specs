@@ -80,10 +80,11 @@ async function getTagsFromConfig(config) {
 }
 
 function execLinterCommand(args) {
-  var cmd = `autorest --validation --azure-validator --message-format=json ${args}`.trim();
+  var cmd = `npx autorest@2.0.4152 --validation --azure-validator --message-format=json ${args}`.trim();
   console.log(`Executing: ${cmd}`);
   try {
     let result = execSync(cmd, { encoding: 'utf8', maxBuffer: 1024 * 1024 * 64 });
+    console.error(result);
   } catch (err) {
     throw new Error('Linter validation contains error(s)');
   }
@@ -114,7 +115,7 @@ describe('AutoRest Linter validation:', function () {
             prFile += '';
             return prFile.startsWith(configDir) && prFile.indexOf('examples') === -1 && prFile.endsWith('.json');
           }).forEach(prFileInConfigFile => {
-            console.warn(`Configuration file not found for file: ${prFileInConfigFile}, running validation rules against it in individual context.`);
+            console.warn(`WARNING: Configuration file not found for file: ${prFileInConfigFile}, running validation rules against it in individual context.`);
             execLinterCommand(`--input-file=${prFileInConfigFile}`);
           });
         }

@@ -8,6 +8,12 @@
   "schemes": [
     "https"
   ],
+  "consumes": [
+    "application/json"
+  ],
+  "produces": [
+    "application/json"
+  ],
   "paths": {
     "/providers/Microsoft.Web/availableStacks": {
       "get": {
@@ -17,12 +23,6 @@
         "summary": "Get available application frameworks and their versions",
         "description": "Get available application frameworks and their versions",
         "operationId": "Provider_GetAvailableStacks",
-        "produces": [
-          "application/json",
-          "text/json",
-          "application/xml",
-          "text/xml"
-        ],
         "parameters": [
           {
             "$ref": "#/parameters/apiVersionParameter"
@@ -32,7 +32,7 @@
           "200": {
             "description": "OK",
             "schema": {
-              "$ref": "#/definitions/Object"
+              "type": "object"
             }
           }
         }
@@ -43,11 +43,9 @@
         "tags": [
           "Provider"
         ],
+        "summary": "Gets all available operations for the Microsoft.Web resource provider. Also exposes resource metric definitions",
+        "description": "Gets all available operations for the Microsoft.Web resource provider. Also exposes resource metric definitions",
         "operationId": "Provider_ListOperations",
-        "produces": [
-          "application/json",
-          "text/json"
-        ],
         "parameters": [
           {
             "$ref": "#/parameters/apiVersionParameter"
@@ -74,12 +72,6 @@
         "summary": "Get available application frameworks and their versions",
         "description": "Get available application frameworks and their versions",
         "operationId": "Provider_GetAvailableStacksOnPrem",
-        "produces": [
-          "application/json",
-          "text/json",
-          "application/xml",
-          "text/xml"
-        ],
         "parameters": [
           {
             "$ref": "#/parameters/subscriptionIdParameter"
@@ -92,7 +84,7 @@
           "200": {
             "description": "OK",
             "schema": {
-              "$ref": "#/definitions/Object"
+              "type": "object"
             }
           }
         }
@@ -121,6 +113,7 @@
       }
     },
     "CsmOperationDescription": {
+      "description": "Description of an operation available for Microsoft.Web resource provider.",
       "type": "object",
       "properties": {
         "name": {
@@ -138,6 +131,7 @@
       }
     },
     "CsmOperationDescriptionProperties": {
+      "description": "Properties available for a Microsoft.Web resource provider operation.",
       "type": "object",
       "properties": {
         "serviceSpecification": {
@@ -146,6 +140,7 @@
       }
     },
     "CsmOperationDisplay": {
+      "description": "Meta data about operation used for display in portal.",
       "type": "object",
       "properties": {
         "provider": {
@@ -163,6 +158,7 @@
       }
     },
     "Dimension": {
+      "description": "Dimension of a resource metric. For e.g. instance specific HTTP requests for a web app, \nwhere instance name is dimension of the metric HTTP request",
       "type": "object",
       "properties": {
         "name": {
@@ -180,6 +176,7 @@
       }
     },
     "MetricAvailability": {
+      "description": "Retention policy of a resource metric.",
       "type": "object",
       "properties": {
         "timeGrain": {
@@ -191,6 +188,7 @@
       }
     },
     "MetricSpecification": {
+      "description": "Definition of a single resource metric.",
       "type": "object",
       "properties": {
         "name": {
@@ -246,11 +244,8 @@
         }
       }
     },
-    "Object": {
-      "type": "object",
-      "properties": {}
-    },
     "ServiceSpecification": {
+      "description": "Resource metrics service provided by Microsoft.Insights resource provider.",
       "type": "object",
       "properties": {
         "metricSpecifications": {

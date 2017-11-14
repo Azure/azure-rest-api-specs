@@ -48,6 +48,7 @@ input-file:
 - Microsoft.DomainRegistration/2015-04-01/Domains.json
 - Microsoft.DomainRegistration/2015-04-01/TopLevelDomains.json
 - Microsoft.Web/2016-03-01/Certificates.json
+- Microsoft.Web/2016-03-01/CommonDefinitions.json
 - Microsoft.Web/2016-03-01/DeletedWebApps.json
 - Microsoft.Web/2016-03-01/Provider.json
 - Microsoft.Web/2016-03-01/Recommendations.json
@@ -85,6 +86,36 @@ csharp:
   namespace: Microsoft.Azure.Management.WebSites
   output-folder: $(csharp-sdks-folder)/WebSites/Management.WebSites/Generated
   clear-output-folder: true
+```
+
+
+## Go
+
+These settings apply only when `--go` is specified on the command line.
+
+``` yaml $(go)
+go:
+  license-header: MICROSOFT_APACHE_NO_VERSION
+  namespace: web
+  clear-output-folder: true
+```
+
+### Tag: package-2016-09 and go
+
+These settings apply only when `--tag=package-2016-09 --go` is specified on the command line.
+Please also specify `--go-sdk-folder=<path to the root directory of your azure-sdk-for-go clone>`.
+
+``` yaml $(tag) == 'package-2016-09' && $(go)
+output-folder: $(go-sdk-folder)/services/web/mgmt/2016-09-01/web
+```
+
+### Tag: package-2015-08-preview and go
+
+These settings apply only when `--tag=package-2015-08-preview --go` is specified on the command line.
+Please also specify `--go-sdk-folder=<path to the root directory of your azure-sdk-for-go clone>`.
+
+``` yaml $(tag) == 'package-2015-08-preview' && $(go)
+output-folder: $(go-sdk-folder)/services/web/mgmt/2015-08-preview/web
 ```
 
 

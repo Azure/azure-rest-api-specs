@@ -26,7 +26,17 @@ These are the global settings for the ContainerInstance API.
 
 ``` yaml
 openapi-type: arm
-tag: package-2017-08-preview
+tag: package-2017-10-preview
+```
+
+
+### Tag: package-2017-10-preview
+
+These settings apply only when `--tag=package-2017-10-preview` is specified on the command line.
+
+``` yaml $(tag) == 'package-2017-10-preview'
+input-file:
+- Microsoft.ContainerInstance/2017-10-01-preview/containerInstance.json
 ```
 
 
@@ -56,6 +66,27 @@ csharp:
   payload-flattening-threshold: 1
   output-folder: $(csharp-sdks-folder)/ContainerInstance/Management.ContainerInstance/Generated
   clear-output-folder: true
+```
+
+
+## Go
+
+These settings apply only when `--go` is specified on the command line.
+
+``` yaml $(go)
+go:
+  license-header: MICROSOFT_APACHE_NO_VERSION
+  namespace: containerinstance
+  clear-output-folder: true
+```
+
+### Tag: package-2017-08-preview and go
+
+These settings apply only when `--tag=package-2017-08-preview --go` is specified on the command line.
+Please also specify `--go-sdk-folder=<path to the root directory of your azure-sdk-for-go clone>`.
+
+``` yaml $(tag) == 'package-2017-08-preview' && $(go)
+output-folder: $(go-sdk-folder)/services/containerinstance/mgmt/2017-08-01-preview/containerinstance
 ```
 
 

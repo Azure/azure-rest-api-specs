@@ -66,3 +66,33 @@ csharp:
   output-folder: $(csharp-sdks-folder)/ServerManagement/Management.ServerManagement/Generated
   clear-output-folder: true
 ```
+
+
+## Go
+
+These settings apply only when `--go` is specified on the command line.
+
+``` yaml $(go)
+go:
+  license-header: MICROSOFT_APACHE_NO_VERSION
+  namespace: servermanagement
+  clear-output-folder: true
+```
+
+### Tag: package-2016-07-preview and go
+
+These settings apply only when `--tag=package-2016-07-preview --go` is specified on the command line.
+Please also specify `--go-sdk-folder=<path to the root directory of your azure-sdk-for-go clone>`.
+
+``` yaml $(tag) == 'package-2016-07-preview' && $(go)
+output-folder: $(go-sdk-folder)/services/servermanagement/mgmt/2016-07-01-preview/servermanagement
+```
+
+### Tag: package-2015-07-preview and go
+
+These settings apply only when `--tag=package-2015-07-preview --go` is specified on the command line.
+Please also specify `--go-sdk-folder=<path to the root directory of your azure-sdk-for-go clone>`.
+
+``` yaml $(tag) == 'package-2015-07-preview' && $(go)
+output-folder: $(go-sdk-folder)/services/servermanagement/mgmt/2015-07-01-preview/servermanagement
+```

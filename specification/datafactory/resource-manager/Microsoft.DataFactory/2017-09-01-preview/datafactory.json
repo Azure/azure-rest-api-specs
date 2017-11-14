@@ -1770,6 +1770,48 @@
         }
       }
     },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DataFactory/factories/{factoryName}/cancelpipelinerun/{runId}": {
+      "post": {
+        "operationId": "Factories_CancelPipelineRun",
+        "x-ms-examples": {
+          "Factories_CancelPipelineRun": {
+            "$ref": "./examples/Factories_CancelPipelineRun.json"
+          }
+        },
+        "description": "Cancel a pipeline run by its run ID.",
+        "tags": [
+          "pipelineruns"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/subscriptionId"
+          },
+          {
+            "$ref": "#/parameters/resourceGroupName"
+          },
+          {
+            "$ref": "#/parameters/factoryName"
+          },
+          {
+            "$ref": "#/parameters/runId"
+          },
+          {
+            "$ref": "#/parameters/api-version"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Pipeline run has been canceled successfully. "
+          },
+          "default": {
+            "description": "An error response received from the Azure Data Factory service.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        }
+      }
+    },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DataFactory/factories/{factoryName}/triggers": {
       "get": {
         "tags": [
@@ -2201,24 +2243,64 @@
       ]
     },
     "SecureString": {
+      "x-ms-discriminator-value": "SecureString",
       "description": "Azure Data Factory secure string definition. The string value will be masked with asterisks '*' during Get or List API calls.",
       "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/SecretBase"
+        }
+      ],
       "properties": {
-        "type": {
-          "type": "string",
-          "description": "SecureString type.",
-          "enum": [
-            "SecureString"
-          ]
-        },
         "value": {
           "type": "string",
           "description": "Value of secure string."
         }
       },
       "required": [
-        "type",
         "value"
+      ]
+    },
+    "AzureKeyVaultSecretReference": {
+      "x-ms-discriminator-value": "AzureKeyVaultSecret",
+      "description": "Azure Key Vault secret reference.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/SecretBase"
+        }
+      ],
+      "properties": {
+        "store": {
+          "description": "The Azure Key Vault linked service reference.",
+          "$ref": "#/definitions/LinkedServiceReference"
+        },
+        "secretName": {
+          "type": "object",
+          "description": "The name of the secret in Azure Key Vault. Type: string (or Expression with resultType string)."
+        },
+        "secretVersion": {
+          "type": "object",
+          "description": "The version of the secret in Azure Key Vault. The default value is the latest version of the secret. Type: string (or Expression with resultType string)."
+        }
+      },
+      "required": [
+        "store",
+        "secretName"
+      ]
+    },
+    "SecretBase": {
+      "description": "The base definition of a secret type.",
+      "discriminator": "type",
+      "type": "object",
+      "properties": {
+        "type": {
+          "type": "string",
+          "description": "Type of the secret."
+        }
+      },
+      "required": [
+        "type"
       ]
     },
     "FactoryListResponse": {

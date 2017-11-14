@@ -83,7 +83,7 @@
                 "tags": [
                     "Applications"
                 ],
-                "description": "Lists properties of the application.",
+                "description": "Lists properties of the specified application.",
                 "operationId": "Applications_Get",
                 "x-ms-examples": {
                     "Get application on HDInsight cluster successfully created.": {
@@ -118,11 +118,7 @@
                         "in": "path",
                         "required": true,
                         "type": "string",
-                        "description": "The constant value for the applicationName",
-                        "x-ms-enum": {
-                            "name": "ApplicationName",
-                            "modelAsString": true
-                        }
+                        "description": "The constant value for the application name."
                     }
                 ],
                 "responses": {
@@ -138,7 +134,7 @@
                 "tags": [
                     "Applications"
                 ],
-                "description": "The operation creates applications for the HDInsight cluster.",
+                "description": "Creates applications for the HDInsight cluster.",
                 "operationId": "Applications_Create",
                 "x-ms-examples": {
                     "Create Application": {
@@ -164,7 +160,7 @@
                         "in": "path",
                         "required": true,
                         "type": "string",
-                        "description": "The constant value for the applicationName",
+                        "description": "The constant value for the application name.",
                         "enum": [
                             "hue"
                         ],
@@ -202,7 +198,7 @@
                 "tags": [
                     "Applications"
                 ],
-                "description": "Lists all of the applications HDInsight cluster.",
+                "description": "Deletes the specified application on the HDInsight cluster.",
                 "operationId": "Applications_Delete",
                 "x-ms-examples": {
                     "Delete Application from HDInsight cluster": {
@@ -228,7 +224,7 @@
                         "in": "path",
                         "required": true,
                         "type": "string",
-                        "description": "The constant value for the applicationName.",
+                        "description": "The constant value for the application name.",
                         "enum": [
                             "hue"
                         ],
@@ -255,7 +251,7 @@
     },
     "definitions": {
         "ApplicationGetHttpsEndpoint": {
-            "description": "Gets application Http endpoints.",
+            "description": "Gets the application HTTP endpoints.",
             "type": "object",
             "properties": {
                 "accessModes": {
@@ -272,12 +268,12 @@
                 "destinationPort": {
                     "type": "integer",
                     "format": "int32",
-                    "description": "The destinationPort to connect to."
+                    "description": "The destination port to connect to."
                 },
                 "publicPort": {
                     "type": "integer",
                     "format": "int32",
-                    "description": "The publicPort to connect to."
+                    "description": "The public port to connect to."
                 }
             },
             "additionalProperties": {
@@ -285,7 +281,7 @@
             }
         },
         "ApplicationGetEndpoint": {
-            "description": "Gets Application ssh endpoint",
+            "description": "Gets the application SSH endpoint",
             "type": "object",
             "properties": {
                 "location": {
@@ -295,17 +291,17 @@
                 "destinationPort": {
                     "type": "integer",
                     "format": "int32",
-                    "description": "The destinationPort to connect to."
+                    "description": "The destination port to connect to."
                 },
                 "publicPort": {
                     "type": "integer",
                     "format": "int32",
-                    "description": "The publicPort to connect to."
+                    "description": "The public port to connect to."
                 }
             }
         },
         "ApplicationGetProperties": {
-            "description": "HDInsight cluster application.",
+            "description": "The HDInsight cluster application GET response.",
             "type": "object",
             "properties": {
                 "computeProfile": {
@@ -331,28 +327,28 @@
                     "items": {
                         "$ref": "#/definitions/ApplicationGetHttpsEndpoint"
                     },
-                    "description": "The list of application Https endpoints."
+                    "description": "The list of application HTTPS endpoints."
                 },
                 "sshEndpoints": {
                     "type": "array",
                     "items": {
                         "$ref": "#/definitions/ApplicationGetEndpoint"
                     },
-                    "description": "The list of application ssh endpoints."
+                    "description": "The list of application SSH endpoints."
                 },
                 "provisioningState": {
                     "readOnly": true,
                     "type": "string",
-                    "description": "The provisioning state of the application"
+                    "description": "The provisioning state of the application."
                 },
                 "applicationType": {
                     "type": "string",
-                    "description": "The Application type."
+                    "description": "The application type."
                 },
                 "applicationState": {
                     "readOnly": true,
                     "type": "string",
-                    "description": "The Application state."
+                    "description": "The application state."
                 },
                 "errors": {
                     "type": "array",
@@ -369,7 +365,7 @@
                 "marketplaceIdentifier": {
                     "readOnly": true,
                     "type": "string",
-                    "description": "The Marketplace identifier."
+                    "description": "The marketplace identifier."
                 },
                 "additionalProperties": {
                     "description": "The additional properties for application.",
@@ -378,24 +374,14 @@
             }
         },
         "Application": {
-            "description": "HDInsight cluster application",
+            "description": "The HDInsight cluster application",
             "type": "object",
+            "allOf": [
+                {
+                    "$ref": "./cluster.json#/definitions/ProxyResource"
+                }
+            ],
             "properties": {
-                "id": {
-                    "readOnly": true,
-                    "$ref": "./cluster.json#/definitions/SubResource",
-                    "description": "The resource id for the application"
-                },
-                "name": {
-                    "readOnly": true,
-                    "description": "The name of the application.",
-                    "type": "string"
-                },
-                "type": {
-                    "readOnly": true,
-                    "description": "The type of application.",
-                    "type": "string"
-                },
                 "etag": {
                     "description": "The ETag for the application",
                     "type": "string"
@@ -409,7 +395,7 @@
                 },
                 "properties": {
                     "$ref": "#/definitions/ApplicationGetProperties",
-                    "description": "Gets or sets the properties of the application."
+                    "description": "The properties of the application."
                 }
             }
         },
@@ -421,12 +407,12 @@
                     "items": {
                         "$ref": "#/definitions/Application"
                     },
-                    "description": "List of HDInsight applications installed on HDInsight cluster."
+                    "description": "The list of HDInsight applications installed on HDInsight cluster."
                 },
                 "nextLink": {
                     "type": "string",
                     "readOnly": true,
-                    "description": "URL to get the next set of operation list results if there are any."
+                    "description": "The URL to get the next set of operation list results if there are any."
                 }
             }
         }
@@ -437,14 +423,14 @@
             "in": "path",
             "required": true,
             "type": "string",
-            "description": "Gets subscription credentials which uniquely identify Microsoft Azure subscription. The subscription ID forms part of the URI for every service call."
+            "description": "The subscription credentials which uniquely identify Microsoft Azure subscription. The subscription ID forms part of the URI for every service call."
         },
         "ApiVersionParameter": {
             "name": "api-version",
             "in": "query",
             "required": true,
             "type": "string",
-            "description": "Client Api Version."
+            "description": "The HDInsight client API Version."
         }
     }
 }

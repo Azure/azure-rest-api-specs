@@ -159,6 +159,9 @@
           "ApiManagementCreateApiUsingWadlImport": {
             "$ref": "./examples/ApiManagementCreateApiUsingWadlImport.json"
           },
+          "ApiManagementCreateApiUsingWsdlImport": {
+            "$ref": "./examples/ApiManagementCreateApiUsingWsdlImport.json"
+          },
           "ApiManagementCreateApi": {
             "$ref": "./examples/ApiManagementCreateApi.json"
           }
@@ -235,6 +238,11 @@
         ],
         "operationId": "Api_Update",
         "description": "Updates the specified API of the API Management service instance.",
+        "x-ms-examples": {
+          "ApiManagementUpdateApi.json": {
+            "$ref": "./examples/ApiManagementUpdateApi.json"
+          }
+        },
         "parameters": [
           {
             "$ref": "./apimanagement.json#/parameters/ResourceGroupNameParameter"
@@ -286,6 +294,11 @@
         ],
         "operationId": "Api_Delete",
         "description": "Deletes the specified API of the API Management service instance.",
+        "x-ms-examples": {
+          "ApiManagementDeleteApi.json": {
+            "$ref": "./examples/ApiManagementDeleteApi.json"
+          }
+        },
         "parameters": [
           {
             "$ref": "./apimanagement.json#/parameters/ResourceGroupNameParameter"
@@ -505,6 +518,11 @@
         ],
         "operationId": "ApiOperation_Update",
         "description": "Updates the details of the operation in the API specified by its identifier.",
+        "x-ms-examples": {
+          "ApiManagementUpdateApiOperation": {
+            "$ref": "./examples/ApiManagementUpdateApiOperation.json"
+          }
+        },
         "parameters": [
           {
             "$ref": "./apimanagement.json#/parameters/ResourceGroupNameParameter"
@@ -714,6 +732,11 @@
         ],
         "operationId": "ApiOperationPolicy_CreateOrUpdate",
         "description": "Creates or updates policy configuration for the API Operation level.",
+        "x-ms-examples": {
+          "ApiManagementCreateApiOperationPolicy": {
+            "$ref": "./examples/ApiManagementCreateApiOperationPolicy.json"
+          }
+        },
         "parameters": [
           {
             "$ref": "./apimanagement.json#/parameters/ResourceGroupNameParameter"
@@ -1000,6 +1023,11 @@
         ],
         "operationId": "ApiPolicy_CreateOrUpdate",
         "description": "Creates or updates policy configuration for the API.",
+        "x-ms-examples": {
+          "ApiManagementCreateApiPolicy": {
+            "$ref": "./examples/ApiManagementCreateApiPolicy.json"
+          }
+        },
         "parameters": [
           {
             "$ref": "./apimanagement.json#/parameters/ResourceGroupNameParameter"
@@ -1063,6 +1091,11 @@
         ],
         "operationId": "ApiPolicy_Delete",
         "description": "Deletes the policy configuration at the Api.",
+        "x-ms-examples": {
+          "ApiManagementDeleteApiPolicy": {
+            "$ref": "./examples/ApiManagementDeleteApiPolicy.json"
+          }
+        },
         "parameters": [
           {
             "$ref": "./apimanagement.json#/parameters/ResourceGroupNameParameter"
@@ -1093,6 +1126,232 @@
         "responses": {
           "204": {
             "description": "Successfully deleted the policy configuration at the API level."
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "./apimanagement.json#/definitions/ErrorResponse"
+            }
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ApiManagement/service/{serviceName}/apis/{apiId}/schemas": {
+      "get": {
+        "tags": [
+          "ApiSchema"
+        ],
+        "operationId": "ApiSchema_ListByApi",
+        "description": "Get the schema configuration at the API level.",
+        "x-ms-examples": {
+          "ApiManagementListApiSchemas": {
+            "$ref": "./examples/ApiManagementListApiSchemas.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "./apimanagement.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "./apimanagement.json#/parameters/ServiceNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ApiIdParameter"
+          },
+          {
+            "$ref": "./apimanagement.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "./apimanagement.json#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Apis Schema Collection.",
+            "schema": {
+              "$ref": "#/definitions/SchemaCollection"
+            },
+            "headers": {
+              "ETag": {
+                "description": "Current entity state version. Should be treated as opaque and used to make conditional HTTP requests.",
+                "type": "string"
+              }
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "./apimanagement.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ApiManagement/service/{serviceName}/apis/{apiId}/schemas/{schemaId}": {
+      "get": {
+        "tags": [
+          "ApiSchema"
+        ],
+        "operationId": "ApiSchema_Get",
+        "description": "Get the schema configuration at the API level.",
+        "x-ms-examples": {
+          "ApiManagementGetApiSchema": {
+            "$ref": "./examples/ApiManagementGetApiSchema.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "./apimanagement.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "./apimanagement.json#/parameters/ServiceNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ApiIdParameter"
+          },
+          {
+            "$ref": "#/parameters/SchemaIdParameter"
+          },
+          {
+            "$ref": "./apimanagement.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "./apimanagement.json#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Api Schema information.",
+            "schema": {
+              "$ref": "#/definitions/SchemaContract"
+            },
+            "headers": {
+              "ETag": {
+                "description": "Current entity state version. Should be treated as opaque and used to make conditional HTTP requests.",
+                "type": "string"
+              }
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "./apimanagement.json#/definitions/ErrorResponse"
+            }
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "ApiSchema"
+        ],
+        "operationId": "ApiSchema_CreateOrUpdate",
+        "description": "Creates or updates schema configuration for the API.",
+        "x-ms-examples": {
+          "ApiManagementCreateApiSchema": {
+            "$ref": "./examples/ApiManagementCreateApiSchema.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "./apimanagement.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "./apimanagement.json#/parameters/ServiceNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ApiIdParameter"
+          },
+          {
+            "$ref": "#/parameters/SchemaIdParameter"
+          },
+          {
+            "name": "parameters",
+            "in": "body",
+            "schema": {
+              "$ref": "#/definitions/SchemaContract"
+            },
+            "required": true,
+            "description": "The schema contents to apply."
+          },
+          {
+            "name": "If-Match",
+            "in": "header",
+            "required": false,
+            "description": "The entity state (Etag) version of the Api Schema to update. A value of \"*\" can be used for If-Match to unconditionally apply the operation.",
+            "type": "string"
+          },
+          {
+            "$ref": "./apimanagement.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "./apimanagement.json#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": "Api schema configuration was successfully created.",
+            "schema": {
+              "$ref": "#/definitions/SchemaContract"
+            }
+          },
+          "200": {
+            "description": "Api schema configuration of the tenant was successfully updated.",
+            "schema": {
+              "$ref": "#/definitions/SchemaContract"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "./apimanagement.json#/definitions/ErrorResponse"
+            }
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "ApiSchema"
+        ],
+        "operationId": "ApiSchema_Delete",
+        "description": "Deletes the schema configuration at the Api.",
+        "x-ms-examples": {
+          "ApiManagementDeleteApiSchema": {
+            "$ref": "./examples/ApiManagementDeleteApiSchema.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "./apimanagement.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "./apimanagement.json#/parameters/ServiceNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ApiIdParameter"
+          },
+          {
+            "$ref": "#/parameters/SchemaIdParameter"
+          },
+          {
+            "name": "If-Match",
+            "in": "header",
+            "required": true,
+            "description": "The entity state (Etag) version of the Api schema to update. A value of \"*\" can be used for If-Match to unconditionally apply the operation.",
+            "type": "string"
+          },
+          {
+            "$ref": "./apimanagement.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "./apimanagement.json#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "Successfully deleted the schema configuration at the API level."
           },
           "default": {
             "description": "Error response describing why the operation failed.",
@@ -1269,6 +1528,20 @@
           "x-ms-enum": {
             "name": "ContentFormat",
             "modelAsString": false
+          }
+        },
+        "wsdlSelector": {
+          "type": "object",
+          "description": "Criteria to limit import of WSDL to a subset of the document.",
+          "properties": {
+            "wsdlServiceName": {
+              "type": "string",
+              "description": "Name of service to import from WSDL"
+            },
+            "wsdlEndpointName": {
+              "type": "string",
+              "description": "Name of endpoint(port) to import from WSDL"
+            }
           }
         }
       },
@@ -1728,6 +2001,63 @@
           "header": "customHeaderParameterName"
         }
       }
+    },
+    "SchemaCollection": {
+      "properties": {
+        "value": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/SchemaContract"
+          },
+          "description": "Api Schema Contract value."
+        },
+        "nextLink": {
+          "type": "string",
+          "description": "Next page link if any."
+        }
+      },
+      "description": "The response of the list schema operation."
+    },
+    "SchemaContract": {
+      "properties": {
+        "properties": {
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/SchemaContractProperties",
+          "description": "Properties of the Schema."
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "#/definitions/Resource"
+        }
+      ],
+      "description": "Schema Contract details."
+    },
+    "SchemaContractProperties": {
+      "properties": {
+        "contentType": {
+          "type": "string",
+          "description": "Must be a valid a media type used in a Content-Type header as defined in the RFC 2616. Media type of the schema document (e.g. application/json, application/xml)."
+        },
+        "document": {
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/SchemaDocumentProperties",
+          "description": "Properties of the Schema Document."
+        }
+      },
+      "required": [
+        "contentType"
+      ],
+      "description": "Schema contract Properties."
+    },
+    "SchemaDocumentProperties": {
+      "properties": {
+        "value": {
+          "type": "string",
+          "description": "Json escaped string defining the document representing the Schema."
+        }
+      },
+      "description": "Schema Document Properties."
     }
   },
   "parameters": {
@@ -1748,6 +2078,17 @@
       "required": true,
       "type": "string",
       "description": "Operation identifier within an API. Must be unique in the current API Management service instance.",
+      "minLength": 1,
+      "maxLength": 256,
+      "pattern": "^[^*#&+:<>?]+$",
+      "x-ms-parameter-location": "method"
+    },
+    "SchemaIdParameter": {
+      "name": "schemaId",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "description": "Schema identifier within an API. Must be unique in the current API Management service instance.",
       "minLength": 1,
       "maxLength": 256,
       "pattern": "^[^*#&+:<>?]+$",
