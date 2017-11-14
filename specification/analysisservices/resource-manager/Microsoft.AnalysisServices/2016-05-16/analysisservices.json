@@ -713,6 +713,42 @@
         }
       }
     },
+    "CheckServerNameAvailabilityBody": {
+      "description": "Details of server name request body.",
+      "type": "object",
+      "properties": {
+        "name": {
+          "type": "string",
+          "pattern": "^[a-z][a-z0-9]*$",
+          "minLength": 3,
+          "maxLength": 63,
+          "description": "Name for checking availability."
+        },
+        "type": {
+          "type": "string",
+          "default": "Microsoft.AnalysisServices/servers",
+          "description": "The resource type of azure analysis services."
+        }
+      }
+    },
+    "CheckServerNameAvailabilityResult": {
+      "description": "The checking result of server name availibility.",
+      "type": "object",
+      "properties": {
+        "nameAvailable": {
+          "type": "boolean",
+          "description": "Indicator of available of the server name."
+        },
+        "reason": {
+          "type": "string",
+          "description": "The reason of unavailability."
+        },
+        "message": {
+          "type": "string",
+          "description": "The detailed message of the request unavailability."
+        }
+      }
+    },
     "OperationStatus": {
       "description": "The status of operation.",
       "type": "object",
