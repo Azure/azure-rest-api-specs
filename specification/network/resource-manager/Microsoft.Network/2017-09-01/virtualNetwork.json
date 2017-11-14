@@ -185,6 +185,56 @@
           "Create virtual network with subnet": { "$ref": "./examples/VirtualNetworkCreateSubnet.json" },
           "Create virtual network with service endpoints": { "$ref": "./examples/VirtualNetworkCreateServiceEndpoints.json" }
         }
+      },
+      "patch": {
+        "tags": [
+          "VirtualNetworks"
+        ],
+        "operationId": "VirtualNetworks_UpdateTags",
+        "description": "Updates a virtual network tags.",
+        "parameters": [
+          {
+            "name": "resourceGroupName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the resource group."
+          },
+          {
+            "name": "virtualNetworkName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the virtual network."
+          },
+          {
+            "name": "parameters",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "./network.json#/definitions/TagsObject"
+            },
+            "description": "Parameters supplied to update virtual network tags."
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Update successful. The operation returns the resulting VirtualNetwork resource.",
+            "schema": {
+              "$ref": "#/definitions/VirtualNetwork"
+            }
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-examples": {
+          "Update virtual network tags": { "$ref": "./examples/VirtualNetworkUpdateTags.json" }
+        }
       }
     },
     "/subscriptions/{subscriptionId}/providers/Microsoft.Network/virtualNetworks": {
@@ -896,6 +946,10 @@
         "remoteVirtualNetwork": {
           "$ref": "./network.json#/definitions/SubResource",
           "description": "The reference of the remote virtual network. The remote virtual network can be in the same or different region (preview). See here to register for the preview and learn more (https://docs.microsoft.com/en-us/azure/virtual-network/virtual-network-create-peering)."
+        },
+        "remoteAddressSpace": {
+          "$ref": "#/definitions/AddressSpace",
+          "description": "The reference of the remote virtual network address space."
         },
         "peeringState": {
           "type": "string",

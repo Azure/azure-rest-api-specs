@@ -58,3 +58,43 @@ These settings apply only when `--tag=6.0` is specified on the command line.
 input-file:
 - Microsoft.ServiceFabric/6.0/servicefabric.json
 ```
+
+
+---
+# Code Generation
+
+
+## Go
+
+These settings apply only when `--go` is specified on the command line.
+
+``` yaml $(go)
+go:
+  license-header: MICROSOFT_APACHE_NO_VERSION
+  namespace: servicefabric
+  clear-output-folder: true
+```
+
+### Tag: 1.0.0 and go
+
+These settings apply only when `--tag=1.0.0 --go` is specified on the command line.
+
+``` yaml $(tag) == '1.0.0' && $(go)
+output-folder: $(go-sdk-folder)/services/servicefabric/1.0.0/servicefabric
+```
+
+### Tag: 5.6 and go
+
+These settings apply only when `--tag=5.6 --go` is specified on the command line.
+
+``` yaml $(tag) == '5.6' && $(go)
+output-folder: $(go-sdk-folder)/services/servicefabric/5.6/servicefabric
+```
+
+### Tag: 6.0 and go
+
+These settings apply only when `--tag=6.0 --go` is specified on the command line.
+
+``` yaml $(tag) == '6.0' && $(go)
+output-folder: $(go-sdk-folder)/services/servicefabric/6.0/servicefabric
+```

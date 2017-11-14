@@ -138,7 +138,15 @@
         },
         "encodingName": {
           "type": "object",
-          "description": "The code page name of the preferred encoding. If not provided, the default value is 'utf-8', unless the byte order mark (BOM) denotes another Unicode encoding. The full list of supported values can be found in the 'Name' column of the table of encodings in the following reference: https://msdn.microsoft.com/library/system.text.encoding.aspx#Anchor_5. Type: string (or Expression with resultType string)."
+          "description": "The code page name of the preferred encoding. If not provided, the default value is 'utf-8', unless the byte order mark (BOM) denotes another Unicode encoding. The full list of supported values can be found in the 'Name' column of the table of encodings in the following reference: https://go.microsoft.com/fwlink/?linkid=861078. Type: string (or Expression with resultType string)."
+        },
+        "jsonNodeReference": {
+          "type": "object",
+          "description": "The JSONPath of the JSON array element to be flattened. Example: \"$.ArrayPath\". Type: string (or Expression with resultType string)."
+        },
+        "jsonPathDefinition": {
+          "type": "object",
+          "description": "The JSONPath definition for each column mapping with a customized column name to extract data from JSON file. For fields under root object, start with \"$\"; for fields inside the array chosen by jsonNodeReference property, start from the array element. Example: {\"Column1\": \"$.Column1Path\", \"Column2\": \"Column2PathInArray\"}. Type: object (or Expression with resultType object)."
         }
       }
     },
@@ -794,6 +802,35 @@
         "tableName"
       ]
     },
+    "AzureMySqlTableDataset": {
+      "x-ms-discriminator-value": "AzureMySqlTable",
+      "description": "The Azure MySQL database dataset.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/Dataset"
+        }
+      ],
+      "properties": {
+        "typeProperties": {
+          "description": "Azure MySQL database dataset properties.",
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/AzureMySqlTableDatasetTypeProperties"
+        }
+      },
+      "required": [
+        "typeProperties"
+      ]
+    },
+    "AzureMySqlTableDatasetTypeProperties": {
+      "description": "Azure MySQL database dataset properties.",
+      "properties": {
+        "tableName": {
+          "type": "object",
+          "description": "The Azure MySQL database table name. Type: string (or Expression with resultType string)."
+        }
+      }
+    },
     "RelationalTableDataset": {
       "x-ms-discriminator-value": "RelationalTable",
       "description": "The relational table dataset.",
@@ -822,6 +859,67 @@
           "description": "The relational table name. Type: string (or Expression with resultType string)."
         }
       }
+    },
+    "SalesforceObjectDataset": {
+      "x-ms-discriminator-value": "SalesforceObject",
+      "description": "The Salesforce object dataset.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/Dataset"
+        }
+      ],
+      "properties": {
+        "typeProperties": {
+          "description": "Salesforce object dataset properties.",
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/SalesforceObjectDatasetTypeProperties"
+        }
+      },
+      "required": [
+        "typeProperties"
+      ]
+    },
+    "SalesforceObjectDatasetTypeProperties": {
+      "description": "Salesforce object dataset properties.",
+      "properties": {
+        "objectApiName": {
+          "type": "object",
+          "description": "The Salesforce object API name. Type: string (or Expression with resultType string)."
+        }
+      }
+    },
+    "SapCloudForCustomerResourceDataset": {
+      "x-ms-discriminator-value": "SapCloudForCustomerResource",
+      "description": "The path of the SAP Cloud for Customer OData entity.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/Dataset"
+        }
+      ],
+      "properties": {
+        "typeProperties": {
+          "description": "SAP Cloud For Customer OData resource dataset properties.",
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/SapCloudForCustomerResourceDatasetTypeProperties"
+        }
+      },
+      "required": [
+        "typeProperties"
+      ]
+    },
+    "SapCloudForCustomerResourceDatasetTypeProperties": {
+      "description": "Sap Cloud For Customer OData resource dataset properties.",
+      "properties": {
+        "path": {
+          "type": "object",
+          "description": "The path of the SAP Cloud for Customer OData entity. Type: string (or Expression with resultType string)."
+        }
+      },
+      "required": [
+        "path"
+      ]
     },
     "SqlServerTableDataset": {
       "x-ms-discriminator-value": "SqlServerTable",

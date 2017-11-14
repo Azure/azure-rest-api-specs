@@ -26,9 +26,17 @@ These are the global settings for the DomainServices API.
 
 ``` yaml
 openapi-type: arm
-tag: package-2017-01
+tag: package-2017-06
 ```
 
+### Tag: package-2017-06
+
+These settings apply only when `--tag=package-2017-06` is specified on the command line.
+
+``` yaml $(tag) == 'package-2017-06'
+input-file:
+- Microsoft.AAD/2017-06-01/domainservices.json
+```
 
 ### Tag: package-2017-01
 
@@ -36,12 +44,11 @@ These settings apply only when `--tag=package-2017-01` is specified on the comma
 
 ``` yaml $(tag) == 'package-2017-01'
 input-file:
-- Microsoft.AAD/2017-01-01/DomainServicesSwagger.json
+- Microsoft.AAD/2017-01-01/domainservices.json
 ```
 
 ---
 # Code Generation
-
 
 ## C# 
 
@@ -56,4 +63,25 @@ csharp:
   payload-flattening-threshold: 2
   output-folder: $(csharp-sdks-folder)/DomainServices/Management.DomainServices/Generated
   clear-output-folder: true
+```
+
+
+## Go
+
+These settings apply only when `--go` is specified on the command line.
+
+``` yaml $(go)
+go:
+  license-header: MICROSOFT_APACHE_NO_VERSION
+  namespace: aad
+  clear-output-folder: true
+```
+
+### Tag: package-2017-01 and go
+
+These settings apply only when `--tag=package-2017-01 --go` is specified on the command line.
+Please also specify `--go-sdk-folder=<path to the root directory of your azure-sdk-for-go clone>`.
+
+``` yaml $(tag) == 'package-2017-01' && $(go)
+output-folder: $(go-sdk-folder)/services/domainservices/mgmt/2017-01-01/aad
 ```

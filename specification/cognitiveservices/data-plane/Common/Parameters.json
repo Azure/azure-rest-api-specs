@@ -1,39 +1,46 @@
 {
- "swagger": "2.0",
- "info": {
-  "version": "2017-08-30",
-  "title": "Common Referenced Parameters File",
-  "description": "File containing commonly referenced parameters."
- },
- "paths": {},
- "parameters": {
-  "AzureRegion": {
-   "name": "AzureRegion",
-   "description": "Supported Azure regions for Cognitive Services endpoints",
-   "x-ms-parameter-location": "client",
-   "required": true,
-   "type": "string",
-   "in": "path",
-   "x-ms-skip-url-encoding": true,
-   "x-ms-enum": {
-    "name": "AzureRegions",
-    "modelAsString": false
-   },
-   "enum": [
-    "westus",
-    "westeurope",
-    "southeastasia",
-    "eastus2",
-    "westcentralus"
-   ]
+  "swagger": "2.0",
+  "info": {
+    "version": "2017-08-30",
+    "title": "Common Referenced Parameters File",
+    "description": "File containing commonly referenced parameters."
   },
-  "SubscriptionKey": {
-   "name": "Ocp-Apim-Subscription-Key",
-   "x-ms-client-name": "SubscriptionKey",
-   "in": "header",
-   "required": true,
-   "description": "Subscription key in header",
-   "type": "string"
+  "paths": {},
+  "parameters": {
+    "ImageStream": {
+      "name": "Image",
+      "in": "body",
+      "required": true,
+      "x-ms-parameter-location": "method",
+      "description": "An image stream.",
+      "schema": {
+        "type": "object",
+        "format": "file"
+      }
+    },
+    "ImageUrl": {
+      "name": "ImageUrl",
+      "in": "body",
+      "required": true,
+      "x-ms-parameter-location": "method",
+      "x-ms-client-flatten": true,
+      "description": "A JSON document with a URL pointing to the image that is to be analyzed.",
+      "schema": {
+        "$ref": "#/definitions/ImageUrl"
+      }
+    }
+  },
+  "definitions": {
+    "ImageUrl": {
+      "type": "object",
+      "required": [
+        "url"
+      ],
+      "properties": {
+        "url": {
+          "type": "string"
+        }
+      }
+    }
   }
- }
 }

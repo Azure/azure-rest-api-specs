@@ -3128,27 +3128,25 @@
     "api-version": {
       "name": "api-version",
       "in": "query",
-      "description": "The version of the API. This is a required parameter and it's value must be \"2016-09-01\".",
+      "description": "The version of the API. This is a required parameter.",
       "required": true,
-      "type": "string",
-      "enum": [
-        "2016-09-01"
-      ],
-      "default": "2016-09-01"
+      "type": "string"
     },
     "applicationName": {
       "name": "applicationName",
       "in": "path",
       "description": "The name of the application resource.",
       "required": true,
-      "type": "string"
+      "type": "string",
+      "x-ms-parameter-location": "method"
     },
     "applicationTypeName": {
       "name": "applicationTypeName",
       "in": "path",
       "description": "The name of the application type name resource",
       "required": true,
-      "type": "string"
+      "type": "string",
+      "x-ms-parameter-location": "method"
     },
     "clusterNameParameter": {
       "name": "clusterName",
@@ -3199,7 +3197,8 @@
       "in": "path",
       "description": "The name of the service resource in the format of {applicationName}~{serviceName}.",
       "required": true,
-      "type": "string"
+      "type": "string",
+      "x-ms-parameter-location": "method"
     },
     "subscriptionId": {
       "name": "subscriptionId",
@@ -3213,7 +3212,8 @@
       "in": "path",
       "description": "The application type version.",
       "required": true,
-      "type": "string"
+      "type": "string",
+      "x-ms-parameter-location": "method"
     },
     "clusterBodyParam": {
       "name": "Cluster",
@@ -3222,7 +3222,8 @@
       "required": true,
       "schema": {
         "$ref": "#/definitions/Cluster"
-      }
+      },
+      "x-ms-parameter-location": "method"
     },
     "clusterUpdateParameterBody": {
       "name": "ClusterUpdateParameters",
@@ -3231,7 +3232,8 @@
       "required": true,
       "schema": {
         "$ref": "#/definitions/ClusterUpdateParameters"
-      }
+      },
+      "x-ms-parameter-location": "method"
     }
   }
 }
