@@ -17,30 +17,6 @@
   },
   "paths": {},
   "definitions": {
-    "MigrateSqlServerSqlDbTaskProperties": {
-      "x-ms-discriminator-value": "Migrate.SqlServer.SqlDb",
-      "type": "object",
-      "description": "Properties for the task that migrates on-prem SQL Server databases to Azure SQL Database",
-      "properties": {
-        "input": {
-          "description": "Task input",
-          "$ref": "#/definitions/MigrateSqlServerSqlDbTaskInput"
-        },
-        "output": {
-          "description": "Task output. This is ignored if submitted.",
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/MigrateSqlServerSqlDbTaskOutput"
-          },
-          "readOnly": true
-        }
-      },
-      "allOf": [
-        {
-          "$ref": "./Tasks.json#/definitions/ProjectTaskProperties"
-        }
-      ]
-    },
     "MigrateSqlServerSqlDbTaskInput": {
       "type": "object",
       "description": "Input for the task that migrates on-prem SQL Server databases to Azure SQL Database",
@@ -54,7 +30,7 @@
         },
         "validationOptions": {
           "description": "Options for enabling various post migration validations. Available options, \n 1.) Data Integrity Check: Performs a checksum based comparison on source and target tables after the migration to ensure the correctness of the data. \n 2.) Schema Validation: Performs a thorough schema comparison between the source and target tables and provides a list of differences between the source and target database, 3.) Query Analysis: Executes a set of queries picked up automatically either from the Query Plan Cache or Query Store and execute them and compares the execution time between the source and target database.",
-          "$ref": "MigrationValidation.json#/definitions/MigrationValidationOptions"
+          "$ref": "./MigrationValidation.json#/definitions/MigrationValidationOptions"
         }
       },
       "required": [
@@ -77,7 +53,7 @@
       },
       "allOf": [
         {
-          "$ref": "./Tasks.json#/definitions/TaskOutput"
+          "$ref": "./TasksCommon.json#/definitions/TaskOutput"
         }
       ],
       "required": [ "resultType" ],
@@ -106,7 +82,7 @@
           "readOnly": true
         },
         "status": {
-          "$ref": "TasksCommon.json#/definitions/MigrationStatus",
+          "$ref": "./TasksCommon.json#/definitions/MigrationStatus",
           "description": "Current status of migration",
           "readOnly": true
         },
@@ -139,7 +115,7 @@
         "migrationReportResult": {
           "type": "object",
           "description": "Migration Report Result, provides unique url for downloading your migration report.",
-          "$ref": "MigrationValidation.json#/definitions/MigrationReportResult"
+          "$ref": "./MigrationValidation.json#/definitions/MigrationReportResult"
         },
         "sourceServerVersion": {
           "type": "string",
@@ -198,12 +174,12 @@
           "readOnly": true
         },
         "state": {
-          "$ref": "TasksCommon.json#/definitions/MigrationState",
+          "$ref": "./TasksCommon.json#/definitions/MigrationState",
           "description": "Current state of migration",
           "readOnly": true
         },
         "stage": {
-          "$ref": "TasksCommon.json#/definitions/DatabaseMigrationStage",
+          "$ref": "./TasksCommon.json#/definitions/DatabaseMigrationStage",
           "description": "Migration stage that this database is in",
           "readOnly": true
         },
@@ -257,7 +233,7 @@
           "type": "string",
           "description": "Summary of object results in the migration",
           "additionalProperties": {
-            "$ref": "TasksCommon.json#/definitions/DataItemMigrationSummaryResult"
+            "$ref": "./TasksCommon.json#/definitions/DataItemMigrationSummaryResult"
           },
           "readOnly": true
         }
@@ -290,7 +266,7 @@
           "readOnly": true
         },
         "state": {
-          "$ref": "TasksCommon.json#/definitions/MigrationState",
+          "$ref": "./TasksCommon.json#/definitions/MigrationState",
           "description": "Current state of migration",
           "readOnly": true
         },
@@ -338,7 +314,7 @@
           "readOnly": true
         },
         "error": {
-          "$ref": "Common.json#/definitions/ReportableException",
+          "$ref": "./Common.json#/definitions/ReportableException",
           "description": "Migration error",
           "readOnly": true
         }
@@ -387,7 +363,7 @@
       },
       "allOf": [
         {
-          "$ref": "TasksCommon.json#/definitions/DataItemMigrationSummaryResult"
+          "$ref": "./TasksCommon.json#/definitions/DataItemMigrationSummaryResult"
         }
       ]
     },

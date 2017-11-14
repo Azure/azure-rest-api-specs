@@ -17,30 +17,6 @@
   },
   "paths": {},
   "definitions": {
-    "GetUserTablesSqlTaskProperties": {
-      "x-ms-discriminator-value": "GetUserTables.Sql",
-      "type": "object",
-      "description": "Properties for the task that collects user tables for the given list of databases",
-      "properties": {
-        "input": {
-          "description": "Task input",
-          "$ref": "#/definitions/GetUserTablesSqlTaskInput"
-        },
-        "output": {
-          "description": "Task output. This is ignored if submitted.",
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/GetUserTablesSqlTaskOutput"
-          },
-          "readOnly": true
-        }
-      },
-      "allOf": [
-        {
-          "$ref": "./Tasks.json#/definitions/ProjectTaskProperties"
-        }
-      ]
-    },
     "GetUserTablesSqlTaskInput": {
       "type": "object",
       "description": "Input for the task that collects user tables for the given list of databases",
@@ -88,7 +64,7 @@
       },
       "allOf": [
         {
-          "$ref": "./Tasks.json#/definitions/TaskOutput"
+          "$ref": "./TasksCommon.json#/definitions/TaskOutput"
         }
       ]
     },

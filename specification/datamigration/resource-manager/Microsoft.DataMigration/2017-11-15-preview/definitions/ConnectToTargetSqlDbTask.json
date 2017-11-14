@@ -17,30 +17,6 @@
   },
   "paths": {},
   "definitions": {
-    "ConnectToTargetSqlDbTaskProperties": {
-      "x-ms-discriminator-value": "ConnectToTarget.SqlDb",
-      "type": "object",
-      "description": "Properties for the task that validates connection to SQL DB and target server requirements",
-      "properties": {
-        "input": {
-          "description": "Task input",
-          "$ref": "#/definitions/ConnectToTargetSqlDbTaskInput"
-        },
-        "output": {
-          "description": "Task output. This is ignored if submitted.",
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/ConnectToTargetSqlDbTaskOutput"
-          },
-          "readOnly": true
-        }
-      },
-      "allOf": [
-        {
-          "$ref": "./Tasks.json#/definitions/ProjectTaskProperties"
-        }
-      ]
-    },
     "ConnectToTargetSqlDbTaskInput": {
       "type": "object",
       "description": "Input for the task that validates connection to SQL DB and target server requirements",
@@ -79,7 +55,7 @@
       },
       "allOf": [
         {
-          "$ref": "./Tasks.json#/definitions/TaskOutput"
+          "$ref": "./TasksCommon.json#/definitions/TaskOutput"
         }
       ]
     }
