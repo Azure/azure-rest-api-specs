@@ -2,7 +2,7 @@
   "swagger": "2.0",
   "info": {
     "title": "ComputeArtifactPublishingServiceClient",
-    "description": "The Compute Artifact Publishing Service Resource Provider Client.",
+    "description": "The Compute Artifact(Image/Extension) Publishing Service Resource Provider Client.",
     "version": "2017-10-15-preview"
   },
   "host": "management.azure.com",
@@ -132,7 +132,7 @@
         "x-ms-long-running-operation": true
       }
     },
-	 "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/sharedvmimages/{sharedVMImageName}/versions/{version}": {
+	 "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/sharedVMImages/{sharedVMImageName}/versions/{version}": {
       "put": {
         "tags": [
           "sharedVMImageVersions"
@@ -347,7 +347,7 @@
         },
         "nextLink": {
           "type": "string",
-          "description": "the uri to fetch the next page of shared VM images. Call ListNext() with this to fetch the next page of shared VM images."
+          "description": "The uri to fetch the next page of shared VM images. Call ListNext() with this to fetch the next page of shared VM images."
         }
       },
       "required": [
