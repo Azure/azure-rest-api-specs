@@ -38,6 +38,7 @@
           {
             "name": "body",
             "in": "body",
+            "description": "Request body for Find Similar.",
             "required": true,
             "x-ms-client-flatten": true,
             "schema": {
@@ -79,6 +80,7 @@
         "parameters": [
           {
             "name": "body",
+            "description": "Request body for grouping.",
             "in": "body",
             "required": true,
             "x-ms-client-flatten": true,
@@ -121,6 +123,7 @@
         "parameters": [
           {
             "name": "body",
+            "description": "Request body for identify operation.",
             "in": "body",
             "required": true,
             "x-ms-client-flatten": true,
@@ -163,6 +166,7 @@
         "parameters": [
           {
             "name": "body",
+            "description": "Request body for verify operation.",
             "in": "body",
             "required": true,
             "x-ms-client-flatten": true,
@@ -212,6 +216,7 @@
           },
           {
             "name": "body",
+            "description": "Request body for creating new person.",
             "in": "body",
             "required": true,
             "x-ms-client-flatten": true,
@@ -238,11 +243,6 @@
             "schema": {
               "$ref": "#/definitions/APIError"
             }
-          }
-        },
-        "x-ms-examples": {
-          "Create person group example": {
-            "$ref": "./examples/CreatePersonGroup.json"
           }
         }
       },
@@ -274,34 +274,14 @@
             "maximum": 1000
           }
         ],
+        "produces": [
+          "application/json"
+        ],
         "responses": {
           "200": {
             "description": "A successful call returns an array of person information that belong to the person group.",
             "schema": {
               "$ref": "#/definitions/PersonResults"
-            },
-            "examples": {
-              "application/json": [
-                {
-                  "personId": "25985303-c537-4467-b41d-bdb45cd95ca1",
-                  "name": "Ryan",
-                  "userData": "User-provided data attached to the person",
-                  "persistedFaceIds": [
-                    "015839fb-fbd9-4f79-ace9-7675fc2f1dd9",
-                    "fce92aed-d578-4d2e-8114-068f8af4492e",
-                    "b64d5e15-8257-4af2-b20a-5a750f8940e7"
-                  ]
-                },
-                {
-                  "personId": "2ae4935b-9659-44c3-977f-61fac20d0538",
-                  "name": "David",
-                  "userData": "User-provided data attached to the person",
-                  "persistedFaceIds": [
-                    "30ea1073-cc9e-4652-b1e3-d08fb7b95315",
-                    "fbd2a038-dbff-452c-8e79-2ee81b1aa84e"
-                  ]
-                }
-              ]
             }
           },
           "default": {
@@ -311,9 +291,11 @@
             }
           }
         },
-        "produces": [
-          "application/json"
-        ]
+        "x-ms-examples": {
+          "List persons in person group": {
+            "$ref": "./examples/ListPersonGroupPersons.json"
+          }
+        }
       }
     },
     "/persongroups/{personGroupId}/persons/{personId}": {
@@ -370,23 +352,14 @@
             "type": "string"
           }
         ],
+        "produces": [
+          "application/json"
+        ],
         "responses": {
           "200": {
             "description": "A successful call returns the person's information.",
             "schema": {
               "$ref": "#/definitions/PersonResult"
-            },
-            "examples": {
-              "application/json": {
-                "personId": "25985303-c537-4467-b41d-bdb45cd95ca1",
-                "persistedFaceIds": [
-                  "015839fb-fbd9-4f79-ace9-7675fc2f1dd9",
-                  "fce92aed-d578-4d2e-8114-068f8af4492e",
-                  "b64d5e15-8257-4af2-b20a-5a750f8940e7"
-                ],
-                "name": "Ryan",
-                "userData": "User-provided data attached to the person"
-              }
             }
           },
           "default": {
@@ -396,9 +369,11 @@
             }
           }
         },
-        "produces": [
-          "application/json"
-        ]
+        "x-ms-examples": {
+          "Get person example": {
+            "$ref": "./examples/GetPerson.json"
+          }
+        }
       },
       "patch": {
         "description": "Update name or userData of a person.",
@@ -420,6 +395,7 @@
           },
           {
             "name": "body",
+            "description": "Request body  for person update operation.",
             "in": "body",
             "required": true,
             "x-ms-client-flatten": true,
@@ -515,17 +491,14 @@
             "type": "string"
           }
         ],
+        "produces": [
+          "application/json"
+        ],
         "responses": {
           "200": {
             "description": "A successful call returns target persisted face's information (persistedFaceId and userData).",
             "schema": {
               "$ref": "#/definitions/PersonFaceResult"
-            },
-            "examples": {
-              "application/json": {
-                "persistedFaceId": "015839fb-fbd9-4f79-ace9-7675fc2f1dd9",
-                "userData": "User-provided data attached to the person"
-              }
             }
           },
           "default": {
@@ -535,9 +508,11 @@
             }
           }
         },
-        "produces": [
-          "application/json"
-        ]
+        "x-ms-examples": {
+          "Get persisted face example": {
+            "$ref": "./examples/GetPersistedFace.json"
+          }
+        }
       },
       "patch": {
         "description": "Update a person persisted face's userData field.",
@@ -566,6 +541,7 @@
           },
           {
             "name": "body",
+            "description": "Request body for updating persisted face.",
             "in": "body",
             "required": true,
             "x-ms-client-flatten": true,
@@ -609,6 +585,7 @@
           },
           {
             "name": "body",
+            "description": "Request body for creating new person group.",
             "in": "body",
             "required": true,
             "x-ms-client-flatten": true,
@@ -630,10 +607,7 @@
               "$ref": "#/definitions/APIError"
             }
           }
-        },
-        "produces": [
-          "application/json"
-        ]
+        }
       },
       "delete": {
         "description": "Delete an existing person group. Persisted face images of all people in the person group will also be deleted.",
@@ -679,13 +653,6 @@
             "description": "A successful call returns the person group's information.",
             "schema": {
               "$ref": "#/definitions/PersonGroupResult"
-            },
-            "examples": {
-              "application/json": {
-                "personGroupId": "sample_group",
-                "name": "group1",
-                "userData": "User-provided data attached to the person group"
-              }
             }
           },
           "default": {
@@ -712,6 +679,7 @@
           },
           {
             "name": "body",
+            "description": "Request body for updating person group.",
             "in": "body",
             "required": true,
             "x-ms-client-flatten": true,
@@ -757,14 +725,6 @@
             "description": "A successful call returns the person group's training status.",
             "schema": {
               "$ref": "#/definitions/TrainingStatus"
-            },
-            "examples": {
-              "application/json": {
-                "status": "succeeded",
-                "createdDateTime": "1/3/2017 4:11:35 AM",
-                "lastActionDateTime": null,
-                "message": null
-              }
             }
           },
           "default": {
@@ -806,20 +766,6 @@
             "description": "A successful call returns an array of person groups and their information.",
             "schema": {
               "$ref": "#/definitions/PersonGroupResults"
-            },
-            "examples": {
-              "application/json": [
-                {
-                  "personGroupId": "sample_group",
-                  "name": "group1",
-                  "userData": "User-provideddataattachedtothepersongroup"
-                },
-                {
-                  "personGroupId": "sample_group2",
-                  "name": "group2",
-                  "userData": "User-provideddataattachedtothepersongroup"
-                }
-              ]
             }
           },
           "default": {
@@ -879,6 +825,7 @@
           },
           {
             "name": "body",
+            "description": "Request body for creating a face list.",
             "in": "body",
             "required": true,
             "x-ms-client-flatten": true,
@@ -924,19 +871,6 @@
             "description": "A successful call returns the face list's information.",
             "schema": {
               "$ref": "#/definitions/GetFaceListResult"
-            },
-            "examples": {
-              "application/json": {
-                "faceListId": "sample_list",
-                "name": "list1",
-                "userData": "User-provideddataattachedtothefacelist",
-                "persistedFaces": [
-                  {
-                    "persistedFaceId": "B8D802CF-DD8F-4E61-B15C-9E6C5844CCBD",
-                    "userData": "User-provideddataattachedtotheface"
-                  }
-                ]
-              }
             }
           },
           "default": {
@@ -965,6 +899,7 @@
           },
           {
             "name": "body",
+            "description": "Request body for updating a face list.",
             "in": "body",
             "required": true,
             "x-ms-client-flatten": true,
@@ -1031,15 +966,6 @@
             "description": "A successful call returns an array of faceList.",
             "schema": {
               "$ref": "#/definitions/FaceListResults"
-            },
-            "examples": {
-              "application/json": [
-                {
-                  "faceListId": "sample_list",
-                  "name": "list1",
-                  "userData": "User-provideddataattachedtothefacelist"
-                }
-              ]
             }
           },
           "default": {
@@ -1091,22 +1017,47 @@
           "application/json"
         ]
       }
-    }
-  },
-  "x-ms-paths": {
-    "/verify?overload=persongroup": {
+    },
+    "/persongroups/{personGroupId}/persons/{personId}/persistedFaces": {
       "post": {
-        "description": "Verify whether two faces belong to a same person. Compares a face Id with a Person Id",
-        "operationId": "Face_VerifyWithPersonGroup",
+        "description": "Add a representative face to a person for identification. The input face is specified as an image with a targetFace rectangle.",
+        "operationId": "Person_AddPersonFace",
         "parameters": [
           {
-            "name": "body",
-            "in": "body",
+            "name": "personGroupId",
+            "in": "path",
+            "description": "Specifying the person group containing the target person.",
             "required": true,
-            "x-ms-client-flatten": true,
-            "schema": {
-              "$ref": "#/definitions/VerifyPersonGroupRequest"
+            "type": "string"
+          },
+          {
+            "name": "personId",
+            "in": "path",
+            "description": "Target person that the face is added to.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "userData",
+            "in": "query",
+            "description": "User-specified data about the target face to add for any purpose. The maximum length is 1KB. ",
+            "type": "string"
+          },
+          {
+            "name": "targetFace",
+            "in": "query",
+            "description": "A face rectangle to specify the target face to be added to a person in the format of \"targetFace=left,top,width,height\". E.g. \"targetFace=10,10,100,100\". If there is more than one face in the image, targetFace is required to specify which face to add. No targetFace means there is only one face detected in the entire image. ",
+            "type": "array",
+            "collectionFormat": "csv",
+            "items": {
+              "type": "integer",
+              "format": "int32",
+              "maxItems": 4,
+              "minItems": 4
             }
+          },
+          {
+            "$ref": "../../Common/Parameters.json#/parameters/ImageUrl"
           }
         ],
         "consumes": [
@@ -1114,16 +1065,7 @@
         ],
         "responses": {
           "200": {
-            "description": "A successful call returns the verification result.",
-            "schema": {
-              "$ref": "#/definitions/VerifyResult"
-            },
-            "examples": {
-              "application/json": {
-                "isIdentical": true,
-                "confidence": 0.9
-              }
-            }
+            "description": "A successful call returns the new persistedFaceId."
           },
           "default": {
             "description": "Error response.",
@@ -1137,7 +1079,7 @@
         ]
       }
     },
-    "/detect?overload=url": {
+    "/detect": {
       "post": {
         "description": "Detect human faces in an image and returns face locations, and optionally with faceIds, landmarks, and attributes.",
         "operationId": "Face_Detect",
@@ -1195,160 +1137,103 @@
         "consumes": [
           "application/json"
         ],
+        "produces": [
+          "application/json"
+        ],
         "responses": {
           "200": {
             "description": "A successful call returns an array of face entries ranked by face rectangle size in descendingorder. An empty response indicates no faces detected. ",
             "schema": {
               "$ref": "#/definitions/DetectionResult"
-            },
-            "examples": {
-              "application/json": [
-                {
-                  "faceId": "c5c24a82-6845-4031-9d5d-978df9175426",
-                  "faceRectangle": {
-                    "width": 78,
-                    "height": 78,
-                    "left": 394,
-                    "top": 54
-                  },
-                  "faceLandmarks": {
-                    "pupilLeft": {
-                      "x": 412,
-                      "y": 78
-                    },
-                    "pupilRight": {
-                      "x": 446,
-                      "y": 74
-                    },
-                    "noseTip": {
-                      "x": 437,
-                      "y": 92
-                    },
-                    "mouthLeft": {
-                      "x": 417,
-                      "y": 114
-                    },
-                    "mouthRight": {
-                      "x": 451,
-                      "y": 109
-                    },
-                    "eyebrowLeftOuter": {
-                      "x": 397,
-                      "y": 78
-                    },
-                    "eyebrowLeftInner": {
-                      "x": 425,
-                      "y": 70
-                    },
-                    "eyeLeftOuter": {
-                      "x": 406,
-                      "y": 80
-                    },
-                    "eyeLeftTop": {
-                      "x": 412,
-                      "y": 76
-                    },
-                    "eyeLeftBottom": {
-                      "x": 413,
-                      "y": 80
-                    },
-                    "eyeLeftInner": {
-                      "x": 418,
-                      "y": 78
-                    },
-                    "eyebrowRightInner": {
-                      "x": 4,
-                      "y": 69
-                    },
-                    "eyebrowRightOuter": {
-                      "x": 5,
-                      "y": 68
-                    },
-                    "eyeRightInner": {
-                      "x": 441,
-                      "y": 75
-                    },
-                    "eyeRightTop": {
-                      "x": 446,
-                      "y": 71
-                    },
-                    "eyeRightBottom": {
-                      "x": 447,
-                      "y": 75
-                    },
-                    "eyeRightOuter": {
-                      "x": 451,
-                      "y": 73
-                    },
-                    "noseRootLeft": {
-                      "x": 428,
-                      "y": 77
-                    },
-                    "noseRootRight": {
-                      "x": 435,
-                      "y": 75
-                    },
-                    "noseLeftAlarTop": {
-                      "x": 428,
-                      "y": 89
-                    },
-                    "noseRightAlarTop": {
-                      "x": 442,
-                      "y": 87
-                    },
-                    "noseLeftAlarOutTip": {
-                      "x": 424,
-                      "y": 96
-                    },
-                    "noseRightAlarOutTip": {
-                      "x": 446,
-                      "y": 92
-                    },
-                    "upperLipTop": {
-                      "x": 437,
-                      "y": 105
-                    },
-                    "upperLipBottom": {
-                      "x": 437,
-                      "y": 108
-                    },
-                    "underLipTop": {
-                      "x": 436,
-                      "y": 111
-                    },
-                    "underLipBottom": {
-                      "x": 437,
-                      "y": 114
-                    }
-                  },
-                  "faceAttributes": {
-                    "age": 71,
-                    "gender": "male",
-                    "smile": 0.88,
-                    "facialHair": {
-                      "mustache": 0.8,
-                      "beard": 0.1,
-                      "sideburns": 0.02
-                    }
-                  },
-                  "glasses": "sunglasses",
-                  "headPose": {
-                    "roll": 2.1,
-                    "yaw": 3,
-                    "pitch": 0
-                  },
-                  "emotion": {
-                    "anger": 0.575,
-                    "contempt": 0,
-                    "disgust": 0.006,
-                    "fear": 0.008,
-                    "happiness": 0.394,
-                    "neutral": 0.013,
-                    "sadness": 0,
-                    "surprise": 0.004
-                  }
-                }
-              ]
+            }
+          },
+          "default": {
+            "description": "Error response.",
+            "schema": {
+              "$ref": "#/definitions/APIError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Detect example": {
+            "$ref": "./examples/Detect.json"
+          }
+        }
+      }
+    },
+    "/facelists/{faceListId}/persistedFaces": {
+      "post": {
+        "description": "Add a face to a face list. The input face is specified as an image with a targetFace rectangle. It returns a persistedFaceId representing the added face, and persistedFaceId will not expire. ",
+        "operationId": "FaceList_AddFace",
+        "parameters": [
+          {
+            "name": "faceListId",
+            "in": "path",
+            "description": "Id referencing a Face List.",
+            "required": true,
+            "type": "string",
+            "maxLength": 64,
+            "pattern": "^[a-z0-9-_]+$"
+          },
+          {
+            "name": "userData",
+            "in": "query",
+            "description": "User-specified data about the face list for any purpose. The  maximum length is 1KB.",
+            "type": "string"
+          },
+          {
+            "name": "targetFace",
+            "in": "query",
+            "description": "A face rectangle to specify the target face to be added into the face list, in the format of \"targetFace=left,top,width,height\". E.g. \"targetFace=10,10,100,100\". If there is more than one face in the image, targetFace is required to specify which face to add. No targetFace means there is only one face detected in the entire image.",
+            "type": "string"
+          }
+        ],
+        "consumes": [
+          "application/json",
+          "application/octet-stream"
+        ],
+        "responses": {
+          "200": {
+            "description": "A successful call returns a new persistedFaceId."
+          },
+          "default": {
+            "description": "Error response.",
+            "schema": {
+              "$ref": "#/definitions/APIError"
+            }
+          }
+        },
+        "produces": [
+          "application/json"
+        ]
+      }
+    }
+  },
+  "x-ms-paths": {
+    "/verify?overload=persongroup": {
+      "post": {
+        "description": "Verify whether two faces belong to a same person. Compares a face Id with a Person Id",
+        "operationId": "Face_VerifyWithPersonGroup",
+        "parameters": [
+          {
+            "name": "body",
+            "description": "Request body for verifying two faces in a person group",
+            "in": "body",
+            "required": true,
+            "x-ms-client-flatten": true,
+            "schema": {
+              "$ref": "#/definitions/VerifyPersonGroupRequest"
+            }
+          }
+        ],
+        "consumes": [
+          "application/json"
+        ],
+        "responses": {
+          "200": {
+            "description": "A successful call returns the verification result.",
+            "schema": {
+              "$ref": "#/definitions/VerifyResult"
             }
           },
           "default": {
@@ -1426,221 +1311,6 @@
             "description": "A successful call returns an array of face entries ranked by face rectangle size in descendingorder. An empty response indicates no faces detected. ",
             "schema": {
               "$ref": "#/definitions/DetectionResult"
-            },
-            "examples": {
-              "application/json": [
-                {
-                  "faceId": "c5c24a82-6845-4031-9d5d-978df9175426",
-                  "faceRectangle": {
-                    "width": 78,
-                    "height": 78,
-                    "left": 394,
-                    "top": 54
-                  },
-                  "faceLandmarks": {
-                    "pupilLeft": {
-                      "x": 412,
-                      "y": 78
-                    },
-                    "pupilRight": {
-                      "x": 446,
-                      "y": 74
-                    },
-                    "noseTip": {
-                      "x": 437,
-                      "y": 92
-                    },
-                    "mouthLeft": {
-                      "x": 417,
-                      "y": 114
-                    },
-                    "mouthRight": {
-                      "x": 451,
-                      "y": 109
-                    },
-                    "eyebrowLeftOuter": {
-                      "x": 397,
-                      "y": 78
-                    },
-                    "eyebrowLeftInner": {
-                      "x": 425,
-                      "y": 70
-                    },
-                    "eyeLeftOuter": {
-                      "x": 406,
-                      "y": 80
-                    },
-                    "eyeLeftTop": {
-                      "x": 412,
-                      "y": 76
-                    },
-                    "eyeLeftBottom": {
-                      "x": 413,
-                      "y": 80
-                    },
-                    "eyeLeftInner": {
-                      "x": 418,
-                      "y": 78
-                    },
-                    "eyebrowRightInner": {
-                      "x": 4,
-                      "y": 69
-                    },
-                    "eyebrowRightOuter": {
-                      "x": 5,
-                      "y": 68
-                    },
-                    "eyeRightInner": {
-                      "x": 441,
-                      "y": 75
-                    },
-                    "eyeRightTop": {
-                      "x": 446,
-                      "y": 71
-                    },
-                    "eyeRightBottom": {
-                      "x": 447,
-                      "y": 75
-                    },
-                    "eyeRightOuter": {
-                      "x": 451,
-                      "y": 73
-                    },
-                    "noseRootLeft": {
-                      "x": 428,
-                      "y": 77
-                    },
-                    "noseRootRight": {
-                      "x": 435,
-                      "y": 75
-                    },
-                    "noseLeftAlarTop": {
-                      "x": 428,
-                      "y": 89
-                    },
-                    "noseRightAlarTop": {
-                      "x": 442,
-                      "y": 87
-                    },
-                    "noseLeftAlarOutTip": {
-                      "x": 424,
-                      "y": 96
-                    },
-                    "noseRightAlarOutTip": {
-                      "x": 446,
-                      "y": 92
-                    },
-                    "upperLipTop": {
-                      "x": 437,
-                      "y": 105
-                    },
-                    "upperLipBottom": {
-                      "x": 437,
-                      "y": 108
-                    },
-                    "underLipTop": {
-                      "x": 436,
-                      "y": 111
-                    },
-                    "underLipBottom": {
-                      "x": 437,
-                      "y": 114
-                    }
-                  },
-                  "faceAttributes": {
-                    "age": 71,
-                    "gender": "male",
-                    "smile": 0.88,
-                    "facialHair": {
-                      "mustache": 0.8,
-                      "beard": 0.1,
-                      "sideburns": 0.02
-                    }
-                  },
-                  "glasses": "sunglasses",
-                  "headPose": {
-                    "roll": 2.1,
-                    "yaw": 3,
-                    "pitch": 0
-                  },
-                  "emotion": {
-                    "anger": 0.575,
-                    "contempt": 0,
-                    "disgust": 0.006,
-                    "fear": 0.008,
-                    "happiness": 0.394,
-                    "neutral": 0.013,
-                    "sadness": 0,
-                    "surprise": 0.004
-                  }
-                }
-              ]
-            }
-          },
-          "default": {
-            "description": "Error response.",
-            "schema": {
-              "$ref": "#/definitions/APIError"
-            }
-          }
-        },
-        "produces": [
-          "application/json"
-        ]
-      }
-    },
-    "/persongroups/{personGroupId}/persons/{personId}/persistedFaces?overload=url": {
-      "post": {
-        "description": "Add a representative face to a person for identification. The input face is specified as an image with a targetFace rectangle.",
-        "operationId": "Person_AddPersonFace",
-        "parameters": [
-          {
-            "name": "personGroupId",
-            "in": "path",
-            "description": "Specifying the person group containing the target person.",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "name": "personId",
-            "in": "path",
-            "description": "Target person that the face is added to.",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "name": "userData",
-            "in": "query",
-            "description": "User-specified data about the target face to add for any purpose. The maximum length is 1KB. ",
-            "type": "string"
-          },
-          {
-            "name": "targetFace",
-            "in": "query",
-            "description": "A face rectangle to specify the target face to be added to a person in the format of \"targetFace=left,top,width,height\". E.g. \"targetFace=10,10,100,100\". If there is more than one face in the image, targetFace is required to specify which face to add. No targetFace means there is only one face detected in the entire image. ",
-            "type": "array",
-            "collectionFormat": "csv",
-            "items": {
-              "type": "integer",
-              "format": "int32",
-              "maxItems": 4,
-              "minItems": 4
-            }
-          },
-          {
-            "$ref": "../../Common/Parameters.json#/parameters/ImageUrl"
-          }
-        ],
-        "consumes": [
-          "application/json"
-        ],
-        "responses": {
-          "200": {
-            "description": "A successful call returns the new persistedFaceId.",
-            "examples": {
-              "application/json": {
-                "persistedFaceId": "B8D802CF-DD8F-4E61-B15C-9E6C5844CCBA"
-              }
             }
           },
           "default": {
@@ -1703,64 +1373,7 @@
         ],
         "responses": {
           "200": {
-            "description": "A successful call returns the new persistedFaceId.",
-            "examples": {
-              "application/json": {
-                "persistedFaceId": "B8D802CF-DD8F-4E61-B15C-9E6C5844CCBA"
-              }
-            }
-          },
-          "default": {
-            "description": "Error response.",
-            "schema": {
-              "$ref": "#/definitions/APIError"
-            }
-          }
-        },
-        "produces": [
-          "application/json"
-        ]
-      }
-    },
-    "/facelists/{faceListId}/persistedFaces?overload=url": {
-      "post": {
-        "description": "Add a face to a face list. The input face is specified as an image with a targetFace rectangle. It returns a persistedFaceId representing the added face, and persistedFaceId will not expire. ",
-        "operationId": "FaceList_AddFace",
-        "parameters": [
-          {
-            "name": "faceListId",
-            "in": "path",
-            "description": "Id referencing a Face List.",
-            "required": true,
-            "type": "string",
-            "maxLength": 64,
-            "pattern": "^[a-z0-9-_]+$"
-          },
-          {
-            "name": "userData",
-            "in": "query",
-            "description": "User-specified data about the face list for any purpose. The  maximum length is 1KB.",
-            "type": "string"
-          },
-          {
-            "name": "targetFace",
-            "in": "query",
-            "description": "A face rectangle to specify the target face to be added into the face list, in the format of \"targetFace=left,top,width,height\". E.g. \"targetFace=10,10,100,100\". If there is more than one face in the image, targetFace is required to specify which face to add. No targetFace means there is only one face detected in the entire image.",
-            "type": "string"
-          }
-        ],
-        "consumes": [
-          "application/json",
-          "application/octet-stream"
-        ],
-        "responses": {
-          "200": {
-            "description": "A successful call returns a new persistedFaceId.",
-            "examples": {
-              "application/json": {
-                "persistedFaceId": "B8D802CF-DD8F-4E61-B15C-9E6C5844CCBA"
-              }
-            }
+            "description": "A successful call returns the new persistedFaceId."
           },
           "default": {
             "description": "Error response.",
@@ -1807,12 +1420,7 @@
         ],
         "responses": {
           "200": {
-            "description": "A successful call returns a new persistedFaceId.",
-            "examples": {
-              "application/json": {
-                "persistedFaceId": "B8D802CF-DD8F-4E61-B15C-9E6C5844CCBA"
-              }
-            }
+            "description": "A successful call returns a new persistedFaceId."
           },
           "default": {
             "description": "Error response.",
@@ -2365,6 +1973,11 @@
           "type": "string",
           "description": "Similar face searching mode. It can be \"matchPerson\" or \"matchFace\".",
           "default": "matchPerson",
+          "x-nullable": false,
+          "x-ms-enum": {
+            "name": "FaceMatchingMode",
+            "modelAsString": false
+          },
           "enum": [
             "matchPerson",
             "matchFace"
@@ -2777,6 +2390,11 @@
         "status": {
           "type": "string",
           "description": "Training status: notstarted, running, succeeded, failed. If the training process is waiting to perform, the status is notstarted. If the training is ongoing, the status is running. Status succeed means this person group is ready for Face - Identify. Status failed is often caused by no person or no persisted face exist in the person group",
+          "x-nullable": false,
+          "x-ms-enum": {
+            "name": "TrainingStatus",
+            "modelAsString": false
+          },
           "enum": [
             "nonstarted",
             "running",
