@@ -475,7 +475,7 @@
             "required": true,
             "schema":
             { 
-              "$ref": "#/definitions/CheckServerNameAvailabilityBody"
+              "$ref": "#/definitions/CheckServerNameAvailabilityParameters"
             },
             "description": "Contains the information used to provision the Analysis Services server."
           },
@@ -855,7 +855,7 @@
         }
       }
     },
-    "CheckServerNameAvailabilityBody": {
+    "CheckServerNameAvailabilityParameters": {
       "description": "Details of server name request body.",
       "type": "object",
       "properties": {
@@ -917,16 +917,8 @@
         },
         "error": {
           "type": "object",
-          "properties": {
-            "code": {
-              "type": "string",
-              "description": "The error code of the operation if any."
-            },
-            "message": {
-              "type": "string",
-              "description": "The error message of the operation if any."
-            }
-          }
+          "description": "The error detail of the operation if any.",
+          "$ref": "#/definitions/ErrorResponse"
         }
       }
     },
@@ -959,6 +951,20 @@
         "sku": {
           "$ref": "#/definitions/ResourceSku",
           "description": "The SKU in SKU details for existing resources."
+        }
+      }
+    },
+    "ErrorResponse": {
+      "description": "Describes the format of Error response.",
+      "type": "object",
+      "properties": {
+        "code": {
+          "description": "Error code",
+          "type": "string"
+        },
+        "message": {
+          "description": "Error message indicating why the operation failed.",
+          "type": "string"
         }
       }
     }
