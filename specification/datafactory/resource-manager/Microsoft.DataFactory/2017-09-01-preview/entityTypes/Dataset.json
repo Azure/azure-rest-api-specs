@@ -246,6 +246,22 @@
         }
       }
     },
+    "DatasetZipDeflateCompression": {
+      "x-ms-discriminator-value": "ZipDeflate",
+      "description": "The ZipDeflate compression method used on a dataset.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/DatasetCompression"
+        }
+      ],
+      "properties": {
+        "level": {
+          "description": "The ZipDeflate compression level.",
+          "$ref": "#/definitions/CompressionLevel"
+        }
+      }
+    },
     "CompressionLevel": {
       "title": "Microsoft.Azure.Management.DataFactories.Models.CompressionLevel",
       "description": "All available compression levels.",
@@ -257,54 +273,6 @@
       "x-ms-enum": {
         "name": "DatasetCompressionLevel",
         "modelAsString": true
-      }
-    },
-    "DatasetPartitionValue": {
-      "discriminator": "type",
-      "description": "The value of a partition.",
-      "type": "object",
-      "properties": {
-        "type": {
-          "type": "string",
-          "description": "Type of partition value."
-        }
-      },
-      "required": [
-        "type"
-      ]
-    },
-    "DatasetDateTimePartitionValue": {
-      "x-ms-discriminator-value": "DateTime",
-      "description": "The date/time value of a partition.",
-      "type": "object",
-      "allOf": [
-        {
-          "$ref": "#/definitions/DatasetPartitionValue"
-        }
-      ],
-      "properties": {
-        "date": {
-          "type": "object",
-          "description": "Name of variable containing date. Type: string (or Expression with resultType string)."
-        },
-        "format": {
-          "type": "object",
-          "description": "Format string for the Date value. Type: string (or Expression with resultType string)."
-        }
-      }
-    },
-    "DatasetPartition": {
-      "description": "The partition definition.",
-      "type": "object",
-      "properties": {
-        "name": {
-          "type": "object",
-          "description": "Name of the partition. Type: string (or Expression with resultType string)."
-        },
-        "value": {
-          "description": "Value of the partition.",
-          "$ref": "#/definitions/DatasetPartitionValue"
-        }
       }
     },
     "AmazonS3Dataset": {
@@ -651,13 +619,6 @@
         "compression": {
           "description": "The data compression method used for the item(s) in the Azure Data Lake Store.",
           "$ref": "#/definitions/DatasetCompression"
-        },
-        "partitionedBy": {
-          "description": "Specify a dynamic path and filename for time series data.",
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/DatasetPartition"
-          }
         }
       },
       "required": [
@@ -1059,10 +1020,6 @@
         "additionalHeaders": {
           "type": "object",
           "description": "The headers for the HTTP Request. e.g. request-header-name-1:request-header-value-1\r\n...\r\nrequest-header-name-n:request-header-value-n Type: string (or Expression with resultType string)."
-        },
-        "partitionedBy": {
-          "description": "The HTTP method for the HTTP request.",
-          "$ref": "#/definitions/DatasetPartition"
         },
         "format": {
           "description": "The format of files.",
