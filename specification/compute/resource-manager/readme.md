@@ -37,6 +37,14 @@ openapi-type: arm
 tag: package-2017-03
 ```
 
+### Tag: package-2017-10-15-preview
+
+These settings apply only when `--tag=package-2017-10-15-preview` is specified on the command line.
+
+``` yaml $(tag) == 'package-2017-10-15-preview'
+input-file:
+- Microsoft.Compute/2017-10-15-preview/computeArtifactPublishingService.json
+```
 
 ### Tag: package-2017-03
 
@@ -187,6 +195,16 @@ go:
   clear-output-folder: true
 ```
 
+### Tag: package-compute-2017-10-15-preview and go
+
+These settings apply only when `--tag=package-compute-2017-10-15-preview --go` is specified on the command line.
+Please also specify `--go-sdk-folder=<path to the root directory of your azure-sdk-for-go clone>`.
+
+``` yaml $(tag)=='package-compute-2017-10-15-preview' && $(go)
+namespace: compute
+output-folder: $(go-sdk-folder)/services/compute/mgmt/2017-10-15-preview/compute
+```
+
 ### Tag: package-compute-2017-03 and go
 
 These settings apply only when `--tag=package-compute-2017-03 --go` is specified on the command line.
@@ -278,6 +296,14 @@ python:
   output-folder: $(output-folder)/python
   license-header: MICROSOFT_MIT_NO_VERSION
   payload-flattening-threshold: 2
+```
+
+### Tag: package-compute-2017-10-15-preview and python
+
+These settings apply only when `--tag=package-compute-2017-10-15-preview --python` is specified on the command line.
+
+``` yaml $(tag) == 'package-compute-2017-10-15-preview' && $(python)
+namespace: azure.mgmt.compute.compute.v2017-10-15-preview
 ```
 
 ### Tag: package-compute-2017-03 and python
