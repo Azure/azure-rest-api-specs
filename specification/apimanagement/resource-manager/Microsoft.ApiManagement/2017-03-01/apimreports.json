@@ -34,13 +34,13 @@
 		}
 	},
 	"paths": {
-		"/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ApiManagement/service/{serviceName}/reports/{byApiId}": {
+		"/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ApiManagement/service/{serviceName}/reports/byApiId": {
 			"get": {
 				"tags": [
 					"Reports"
 				],
 				"operationId": "Reports_ListByApi",
-				"description": "Lists report records.",
+				"description": "Lists report records by API.",
 				"x-ms-examples": {
 					"ApiManagementGetReportsByApi": {
 						"$ref": "./examples/ApiManagementGetReportsByApi.json"
@@ -52,20 +52,6 @@
 					},
 					{
 						"$ref": "./apimanagement.json#/parameters/ServiceNameParameter"
-					},
-					{
-						"name": "byApiId",
-						"in": "path",
-						"required": true,
-						"type": "string",
-						"enum": [
-							"byApi"
-						],
-						"description": "The identifier of the byApi Reports.",
-						"x-ms-enum": {
-							"modelAsString": true,
-							"name": "ByApiIdName"
-						}
 					},
 					{
 						"name": "$filter",
@@ -101,7 +87,7 @@
 				"x-ms-odata": "#/definitions/ReportRecordContract"
 			}
 		},
-		"/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ApiManagement/service/{serviceName}/reports/{byUserId}": {
+		"/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ApiManagement/service/{serviceName}/reports/byUserId": {
 			"get": {
 				"tags": [
 					"Reports"
@@ -121,20 +107,6 @@
 						"$ref": "./apimanagement.json#/parameters/ServiceNameParameter"
 					},
 					{
-						"name": "byUserId",
-						"in": "path",
-						"required": true,
-						"type": "string",
-						"enum": [
-							"byUser"
-						],
-						"description": "The identifier of the byUser Reports.",
-						"x-ms-enum": {
-							"modelAsString": true,
-							"name": "byUserIdName"
-						}
-					},
-					{
 						"name": "$filter",
 						"in": "query",
 						"required": true,
@@ -168,7 +140,7 @@
 				"x-ms-odata": "#/definitions/ReportRecordContract"
 			}
 		},
-		"/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ApiManagement/service/{serviceName}/reports/{byOperationId}": {
+		"/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ApiManagement/service/{serviceName}/reports/byOperationId": {
 			"get": {
 				"tags": [
 					"Reports"
@@ -188,20 +160,6 @@
 						"$ref": "./apimanagement.json#/parameters/ServiceNameParameter"
 					},
 					{
-						"name": "byOperationId",
-						"in": "path",
-						"required": true,
-						"type": "string",
-						"enum": [
-							"byOperation"
-						],
-						"description": "The identifier of the byOperations Reports.",
-						"x-ms-enum": {
-							"modelAsString": true,
-							"name": "byOperationIdName"
-						}
-					},
-					{
 						"name": "$filter",
 						"in": "query",
 						"required": true,
@@ -235,7 +193,7 @@
 				"x-ms-odata": "#/definitions/ReportRecordContract"
 			}
 		},
-		"/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ApiManagement/service/{serviceName}/reports/{byProductId}": {
+		"/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ApiManagement/service/{serviceName}/reports/byProductId": {
 			"get": {
 				"tags": [
 					"Reports"
@@ -255,20 +213,6 @@
 						"$ref": "./apimanagement.json#/parameters/ServiceNameParameter"
 					},
 					{
-						"name": "byProductId",
-						"in": "path",
-						"required": true,
-						"type": "string",
-						"enum": [
-							"byProduct"
-						],
-						"description": "The identifier of the byProduct Reports.",
-						"x-ms-enum": {
-							"modelAsString": true,
-							"name": "byProductIdName"
-						}
-					},
-					{
 						"name": "$filter",
 						"in": "query",
 						"required": true,
@@ -302,7 +246,7 @@
 				"x-ms-odata": "#/definitions/ReportRecordContract"
 			}
 		},
-		"/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ApiManagement/service/{serviceName}/reports/{byGeoId}": {
+		"/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ApiManagement/service/{serviceName}/reports/byGeoId": {
 			"get": {
 				"tags": [
 					"Reports"
@@ -322,20 +266,6 @@
 						"$ref": "./apimanagement.json#/parameters/ServiceNameParameter"
 					},
 					{
-						"name": "byGeoId",
-						"in": "path",
-						"required": true,
-						"type": "string",
-						"enum": [
-							"byGeo"
-						],
-						"description": "The identifier of the byGeo Reports.",
-						"x-ms-enum": {
-							"modelAsString": true,
-							"name": "byGeoIdName"
-						}
-					},
-					{
 						"name": "$filter",
 						"in": "query",
 						"required": false,
@@ -369,7 +299,7 @@
 				"x-ms-odata": "#/definitions/ReportRecordContract"
 			}
 		},
-		"/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ApiManagement/service/{serviceName}/reports/{bySubscriptionId}": {
+		"/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ApiManagement/service/{serviceName}/reports/bySubscriptionId": {
 			"get": {
 				"tags": [
 					"Reports"
@@ -389,20 +319,6 @@
 						"$ref": "./apimanagement.json#/parameters/ServiceNameParameter"
 					},
 					{
-						"name": "bySubscriptionId",
-						"in": "path",
-						"required": true,
-						"type": "string",
-						"enum": [
-							"bySubscription"
-						],
-						"description": "The identifier of the bySubscription Reports.",
-						"x-ms-enum": {
-							"modelAsString": true,
-							"name": "bySubscriptionIdName"
-						}
-					},
-					{
 						"name": "$filter",
 						"in": "query",
 						"required": false,
@@ -436,7 +352,7 @@
 				"x-ms-odata": "#/definitions/ReportRecordContract"
 			}
 		},
-		"/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ApiManagement/service/{serviceName}/reports/{byTimeId}": {
+		"/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ApiManagement/service/{serviceName}/reports/byTimeId": {
 			"get": {
 				"tags": [
 					"Reports"
@@ -454,20 +370,6 @@
 					},
 					{
 						"$ref": "./apimanagement.json#/parameters/ServiceNameParameter"
-					},
-					{
-						"name": "byTimeId",
-						"in": "path",
-						"required": true,
-						"type": "string",
-						"enum": [
-							"byTime"
-						],
-						"description": "The identifier of the byTime Reports.",
-						"x-ms-enum": {
-							"modelAsString": true,
-							"name": "byTimeIdName"
-						}
 					},
 					{
 						"name": "$filter",
@@ -511,7 +413,7 @@
 				"x-ms-odata": "#/definitions/ReportRecordContract"
 			}
 		},
-		"/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ApiManagement/service/{serviceName}/reports/{byRequestId}": {
+		"/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ApiManagement/service/{serviceName}/reports/byRequestId": {
 			"get": {
 				"tags": [
 					"Reports"
@@ -529,20 +431,6 @@
 					},
 					{
 						"$ref": "./apimanagement.json#/parameters/ServiceNameParameter"
-					},
-					{
-						"name": "byRequestId",
-						"in": "path",
-						"required": true,
-						"type": "string",
-						"enum": [
-							"byRequest"
-						],
-						"description": "The identifier of the byRequest Reports.",
-						"x-ms-enum": {
-							"modelAsString": true,
-							"name": "byRequestIdName"
-						}
 					},
 					{
 						"name": "$filter",

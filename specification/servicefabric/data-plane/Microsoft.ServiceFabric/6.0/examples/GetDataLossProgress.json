@@ -1,0 +1,26 @@
+{
+  "operationId": "GetDataLossProgress",
+  "description": "This shows an example of possible output when GetDataLossProgress has reached a State of Completed.  If the State has a value of Running, only the State field will have a value.",
+  "parameters": {
+    "serviceId": "fabric:/myapp/myservice",
+    "partitionId": "1daae3f5-7fd6-42e9-b1ba-8c05f873994d",
+    "OperationId": "7216486c-1ee9-4b00-99b2-92b26fcb07f5",
+    "api-version": "6.0"
+  },
+  "responses": {
+    "200": {
+      "headers": {
+      },
+      "body": {
+        "State": "Completed",
+        "InvokeDataLossResult": {
+          "ErrorCode": 0,
+          "SelectedPartition": {
+            "ServiceName": "fabric:/myapp/myservice",
+            "PartitionId": "1daae3f5-7fd6-42e9-b1ba-8c05f873994d"
+          }
+        }
+      }
+    }
+  }
+}

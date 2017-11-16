@@ -2,6 +2,9 @@
   "swagger": "2.0",
   "info": {
     "title": "MonitorManagementClient",
+    "x-ms-code-generation-settings": {
+      "name": "MonitorManagementClient"
+    },
     "version": "2016-03-01"
   },
   "host": "management.azure.com",
@@ -346,6 +349,9 @@
                     }
                   }
               }
+          },
+          "x-ms-examples": {
+              "Patch an alert rule": { "$ref": "./examples/patchAlertRule.json" }
           }
       }
     },
@@ -482,7 +488,7 @@
         },
         "resourceUri": {
           "type": "string",
-          "description": "the resource identifier of the resource the rule monitors."
+          "description": "the resource identifier of the resource the rule monitors. **NOTE**: this property cannot be updated for an existing rule."
         }
       },
       "required": [ "odata.type" ],
@@ -706,14 +712,14 @@
       "properties": {
         "sendToServiceOwners": {
             "type": "boolean",
-            "description": "Whether the administrators (service and co-adiminstrators) of the service should be notified when the alert is activated."
+            "description": "Whether the administrators (service and co-administrators) of the service should be notified when the alert is activated."
         },
         "customEmails": {
             "type": "array",
             "items": {
               "type" : "string"
             },
-            "description": "the list of administrator's custom email addresses notifiy of the activation of the alert."
+            "description": "the list of administrator's custom email addresses to notify of the activation of the alert."
         }
       },
       "description": "Specifies the action to send email when the rule condition is evaluated. The discriminator is always RuleEmailAction in this case.",
@@ -730,7 +736,7 @@
       "properties": {
          "serviceUri": {
            "type": "string",
-           "description": "the service uri to Post the notitication when the alert activates or resolves."
+           "description": "the service uri to Post the notification when the alert activates or resolves."
          },
          "properties": {
            "type": "object",

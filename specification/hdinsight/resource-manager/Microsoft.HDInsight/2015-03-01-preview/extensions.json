@@ -32,15 +32,146 @@
         }
     },
     "paths": {
+		"/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.HDInsight/clusters/{clusterName}/extensions/clustermonitoring": {
+            "put": {
+                "tags": [
+                    "Extensions"
+                ],
+                "description": "Enables the Operations Management Suite (OMS) on the HDInsight cluster.",
+                "x-ms-examples": {
+                    "Enable cluster monitoring": {
+                        "$ref": "./examples/EnableLinuxClusterMonitoring.json"
+                    }
+                },
+                "operationId": "Extension_EnableMonitoring",
+                "parameters": [{
+                        "name": "resourceGroupName",
+                        "in": "path",
+                        "required": true,
+                        "type": "string",
+                        "description": "The name of the resource group."
+                    },
+                    {
+                        "name": "clusterName",
+                        "in": "path",
+                        "required": true,
+                        "type": "string",
+                        "description": "The name of the cluster."
+                    },
+                    {
+                        "name": "parameters",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/ClusterMonitoringRequest"
+                        },
+                        "description": "The Operations Management Suite (OMS) workspace parameters."
+                    },
+                    {
+                        "$ref": "#/parameters/ApiVersionParameter"
+                    },
+                    {
+                        "$ref": "#/parameters/SubscriptionIdParameter"
+                    }
+                ],
+                "responses": {
+                    "202": {
+                        "description": "Accepted response definition."
+                    }
+                },
+                "x-ms-long-running-operation": true
+            },
+            "get": {
+                "tags": [
+                    "Extensions"
+                ],
+                "description": "Gets the status of Operations Management Suite (OMS) on the HDInsight cluster.",
+                "x-ms-examples": {
+                    "Enable cluster monitoring": {
+                        "$ref": "./examples/GetLinuxClusterMonitoringStatus.json"
+                    }
+                },
+                "operationId": "Extension_GetMonitoringStatus",
+                "parameters": [{
+                        "name": "resourceGroupName",
+                        "in": "path",
+                        "required": true,
+                        "type": "string",
+                        "description": "The name of the resource group."
+                    },
+                    {
+                        "name": "clusterName",
+                        "in": "path",
+                        "required": true,
+                        "type": "string",
+                        "description": "The name of the cluster."
+                    },
+                    {
+                        "$ref": "#/parameters/ApiVersionParameter"
+                    },
+                    {
+                        "$ref": "#/parameters/SubscriptionIdParameter"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK. The request has succeeded.",
+                        "schema": {
+                            "$ref": "#/definitions/ClusterMonitoringResponse"
+                        }
+                    }
+                }
+            },
+            "delete": {
+                "tags": [
+                    "Extensions"
+                ],
+                "description": "Disables the Operations Management Suite (OMS) on the HDInsight cluster.",
+                "x-ms-examples": {
+                    "Enable cluster monitoring": {
+                        "$ref": "./examples/DisableLinuxClusterMonitoring.json"
+                    }
+                },
+                "operationId": "Extension_DisableMonitoring",
+                "parameters": [{
+                        "name": "resourceGroupName",
+                        "in": "path",
+                        "required": true,
+                        "type": "string",
+                        "description": "The name of the resource group."
+                    },
+                    {
+                        "name": "clusterName",
+                        "in": "path",
+                        "required": true,
+                        "type": "string",
+                        "description": "The name of the cluster."
+                    },
+                    {
+                        "$ref": "#/parameters/ApiVersionParameter"
+                    },
+                    {
+                        "$ref": "#/parameters/SubscriptionIdParameter"
+                    }
+                ],
+                "responses": {
+                    "202": {
+                        "description": "OK response definition."
+                    }
+                },
+                "x-ms-long-running-operation": true
+            }
+        },
+	
         "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.HDInsight/clusters/{clusterName}/extensions/{extensionName}": {
             "put": {
                 "tags": [
                     "Extensions"
                 ],
-                "description": "Create HDInsight cluster extension.",
+                "description": "Creates an HDInsight cluster extension.",
                 "operationId": "Extension_Create",
                 "x-ms-examples": {
-                    "Create extensions on Hadoop Linux cluster": {
+                    "Create a monitoring extension on Hadoop Linux cluster": {
                         "$ref": "./examples/CreateExtension.json"
                     }
                 },
@@ -89,7 +220,7 @@
                     }
                 ],
                 "responses": {
-                    "200": {
+                    "202": {
                         "description": "OK. The request has succeeded."
                     }
                 }
@@ -98,7 +229,12 @@
                 "tags": [
                     "Extensions"
                 ],
-                "description": "Get extension properties for HDInsight cluster extension.",
+                "description": "Gets the extension properties for the specified HDInsight cluster extension.",
+                "x-ms-examples": {
+                    "Get an extension": {
+                        "$ref": "./examples/GetExtension.json"
+                    }
+                },
                 "operationId": "Extension_Get",
                 "parameters": [{
                         "name": "resourceGroupName",
@@ -148,7 +284,12 @@
                 "tags": [
                     "Extensions"
                 ],
-                "description": "Delete extension for HDInsight cluster.",
+                "description": "Deletes the specified extension for HDInsight cluster.",
+                "x-ms-examples": {
+                    "Delete an extension": {
+                        "$ref": "./examples/DeleteExtension.json"
+                    }
+                },
                 "operationId": "Extension_Delete",
                 "parameters": [{
                         "name": "resourceGroupName",
@@ -186,7 +327,7 @@
                     }
                 ],
                 "responses": {
-                    "200": {
+                    "202": {
                         "description": "OK response definition."
                     }
                 }
@@ -198,30 +339,56 @@
             "description": "Cluster monitoring extensions",
             "properties": {
                 "workspaceId": {
-                    "description": "Workspace Id for cluster monitoring extension",
+                    "description": "The workspace ID for the cluster monitoring extension.",
                     "type": "string"
                 },
                 "primaryKey": {
-                    "description": "Certificate for monitoring extensions",
+                    "description": "The certificate for the cluster monitoring extensions.",
                     "type": "string"
                 }
             }
-        }
-    },
-    "parameters": {
-        "SubscriptionIdParameter": {
-            "name": "subscriptionId",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "description": "Gets subscription credentials which uniquely identify Microsoft Azure subscription. The subscription ID forms part of the URI for every service call."
         },
-        "ApiVersionParameter": {
-            "name": "api-version",
-            "in": "query",
-            "required": true,
-            "type": "string",
-            "description": "Client Api Version."
-        }
-    }
+		"ClusterMonitoringResponse": {
+			"description": "The Operations Management Suite (OMS) status response",
+			"properties": {
+				"ClusterMonitoringEnabled": {
+					"description": "The status of the Operations Management Suite (OMS) on the HDInsight cluster.",
+					"type": "boolean"
+				},
+				"WorkspaceId": {
+					"description": "The workspace ID of the Operations Management Suite (OMS) on the HDInsight cluster.",
+					"type": "string"
+				}
+			}
+		},
+		"ClusterMonitoringRequest": {
+			"description": "The Operations Management Suite (OMS) parameters.",
+			"properties": {
+				"workspaceId": {
+					"description": "The Operations Management Suite (OMS) workspace ID.",
+					"type": "string"
+				},
+				"primaryKey": {
+					"description": "The Operations Management Suite (OMS) workspace key.",
+					"type": "string"
+				}
+			}
+		}
+    },
+	"parameters": {
+		"SubscriptionIdParameter": {
+			"name": "subscriptionId",
+			"in": "path",
+			"required": true,
+			"type": "string",
+			"description": "The subscription credentials which uniquely identify Microsoft Azure subscription. The subscription ID forms part of the URI for every service call."
+		},
+		"ApiVersionParameter": {
+			"name": "api-version",
+			"in": "query",
+			"required": true,
+			"type": "string",
+			"description": "The HDInsight client API Version."
+		}
+	}
 }

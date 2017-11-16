@@ -2923,8 +2923,8 @@
         },
         "kty": {
           "type": "string",
-          "description": "Supported JsonWebKey key types (kty) for Elliptic Curve, RSA, HSM, Octet. Kty is usually set to RSA",
-          "enum": [ "EC", "RSA", "RSA-HSM", "oct" ],
+          "description": "JsonWebKey key type (kty).",
+          "enum": [ "EC", "EC-HSM", "RSA", "RSA-HSM", "oct" ],
           "x-ms-enum": {
             "name": "JsonWebKeyType",
             "modelAsString": true
@@ -2950,7 +2950,7 @@
         "d": {
           "type": "string",
           "format": "base64url",
-          "description": "RSA private exponent."
+          "description": "RSA private exponent, or the D component of an EC private key."
         },
         "dp": {
           "x-ms-client-name": "DP",
@@ -2990,6 +2990,25 @@
           "type": "string",
           "format": "base64url",
           "description": "HSM Token, used with 'Bring Your Own Key'."
+        },
+        "crv": {
+          "type": "string",
+          "description": "Elliptic curve name. For valid values, see JsonWebKeyCurveName.",
+          "enum": [ "P-256", "P-384", "P-521", "SECP256K1" ],
+          "x-ms-enum": {
+            "name": "JsonWebKeyCurveName",
+            "modelAsString": true
+          }
+        },
+        "x": {
+          "type": "string",
+          "format": "base64url",
+          "description": "X component of an EC public key."
+        },
+        "y": {
+          "type": "string",
+          "format": "base64url",
+          "description": "Y component of an EC public key."
         }
       },
       "description": "As of http://tools.ietf.org/html/draft-ietf-jose-json-web-key-18"
@@ -3815,8 +3834,8 @@
         "kty": {
           "type": "string",
           "minLength": 1,
-          "description": "The type of key to create. For valid key types, see JsonWebKeyType. Supported JsonWebKey key types (kty) for Elliptic Curve, RSA, HSM, Octet",
-          "enum": [ "EC", "RSA", "RSA-HSM", "oct" ],
+          "description": "The type of key to create. For valid values, see JsonWebKeyType.",
+          "enum": [ "EC", "EC-HSM", "RSA", "RSA-HSM", "oct" ],
           "x-ms-enum": {
             "name": "JsonWebKeyType",
             "modelAsString": true
@@ -3849,6 +3868,16 @@
             "type": "string"
           },
           "description": "Application specific metadata in the form of key-value pairs."
+        },
+        "crv": {
+          "x-ms-client-name": "curve",
+          "type": "string",
+          "description": "Elliptic curve name. For valid values, see JsonWebKeyCurveName.",
+          "enum": [ "P-256", "P-384", "P-521", "SECP256K1" ],
+          "x-ms-enum": {
+            "name": "JsonWebKeyCurveName",
+            "modelAsString": true
+          }
         }
       },
       "description": "The key create parameters.",
@@ -3908,7 +3937,7 @@
           "type": "string",
           "minLength": 1,
           "description": "The signing/verification algorithm identifier. For more information on possible algorithm types, see JsonWebKeySignatureAlgorithm.",
-          "enum": [ "PS256", "PS384", "PS512", "RS256", "RS384", "RS512", "RSNULL" ],
+          "enum": [ "PS256", "PS384", "PS512", "RS256", "RS384", "RS512", "RSNULL", "ES256", "ES384", "ES512", "ECDSA256" ],
           "x-ms-enum": {
             "name": "JsonWebKeySignatureAlgorithm",
             "modelAsString": true
@@ -3929,7 +3958,7 @@
           "type": "string",
           "minLength": 1,
           "description": "The signing/verification algorithm. For more information on possible algorithm types, see JsonWebKeySignatureAlgorithm.",
-          "enum": [ "PS256", "PS384", "PS512", "RS256", "RS384", "RS512", "RSNULL" ],
+          "enum": [ "PS256", "PS384", "PS512", "RS256", "RS384", "RS512", "RSNULL", "ES256", "ES384", "ES512", "ECDSA256" ],
           "x-ms-enum": {
             "name": "JsonWebKeySignatureAlgorithm",
             "modelAsString": true

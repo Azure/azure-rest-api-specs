@@ -1054,7 +1054,7 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DataLakeAnalytics/accounts/{accountName}/StorageAccounts/": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DataLakeAnalytics/accounts/{accountName}/StorageAccounts": {
       "get": {
         "tags": [
           "StorageAccounts"
@@ -1146,7 +1146,7 @@
         "x-ms-odata": "#/definitions/StorageAccountInfo"
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DataLakeAnalytics/accounts/{accountName}/DataLakeStoreAccounts/": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DataLakeAnalytics/accounts/{accountName}/DataLakeStoreAccounts": {
       "get": {
         "tags": [
           "DataLakeStoreAccounts"
@@ -1320,7 +1320,7 @@
         "x-ms-pageable": {
           "nextLinkName": "nextLink"
         },
-        "x-ms-odata": "#/definitions/DataLakeAnalyticsAccount"
+        "x-ms-odata": "#/definitions/DataLakeAnalyticsAccountBasic"
       }
     },
     "/subscriptions/{subscriptionId}/providers/Microsoft.DataLakeAnalytics/accounts": {
@@ -1398,7 +1398,7 @@
         "x-ms-pageable": {
           "nextLinkName": "nextLink"
         },
-        "x-ms-odata": "#/definitions/DataLakeAnalyticsAccount"
+        "x-ms-odata": "#/definitions/DataLakeAnalyticsAccountBasic"
       }
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DataLakeAnalytics/accounts/{accountName}": {
@@ -1510,6 +1510,12 @@
             "schema": {
               "$ref": "#/definitions/DataLakeAnalyticsAccount"
             }
+          },
+          "202": {
+            "description": "Successfully initiated an update of the specified account.",
+            "schema": {
+              "$ref": "#/definitions/DataLakeAnalyticsAccount"
+            }
           }
         },
         "x-ms-long-running-operation": true
@@ -1594,6 +1600,113 @@
             "description": "Successfully retrieved the details of the specified account.",
             "schema": {
               "$ref": "#/definitions/DataLakeAnalyticsAccount"
+            }
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.DataLakeAnalytics/locations/{location}/checkNameAvailability": {
+      "post": {
+        "tags": [
+          "Account"
+        ],
+        "operationId": "Account_CheckNameAvailability",
+        "description": "Checks whether the specified account name is available or taken.",
+        "x-ms-examples": {
+          "Checks whether the specified account name is available or taken": { "$ref": "./examples/Adla_Account_CheckNameAvailability.json" }
+        },
+        "parameters": [
+          {
+            "name": "location",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The Resource location without whitespace."
+          },
+          {
+            "name": "parameters",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/CheckNameAvailabilityParameters"
+            },
+            "description": "Parameters supplied to check the Data Lake Analytics account name availability."
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successfully retrieved the Data Lake Analytics account name availability information.",
+            "schema": {
+              "$ref": "#/definitions/NameAvailabilityInformation"
+            }
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.DataLakeAnalytics/locations/{location}/capability": {
+      "get": {
+        "tags": [
+          "Locations"
+        ],
+        "operationId": "Locations_GetCapability",
+        "description": "Gets subscription-level properties and limits for Data Lake Analytics specified by Resource location.",
+        "x-ms-examples": {
+          "Gets subscription-level properties and limits for Data Lake Analytics specified by Resource location": { "$ref": "./examples/Adla_Locations_GetCapability.json" }
+        },
+        "parameters": [
+          {
+            "name": "location",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The Resource location without whitespace."
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successfully retrieved the subscription-level properties and limits for Data Lake Analytics specified by Resource location.",
+            "schema": {
+              "$ref": "#/definitions/CapabilityInformation"
+            }
+          },
+          "404": {
+            "description": "Subscription not found."
+          }
+        }
+      }
+    },
+    "/providers/Microsoft.DataLakeAnalytics/operations": {
+      "get": {
+        "tags": [
+          "Operations"
+        ],
+        "operationId": "Operations_List",
+        "description": "Lists all of the available Data Lake Analytics REST API operations.",
+        "x-ms-examples": {
+          "Lists all of the available Data Lake Analytics REST API operations": { "$ref": "./examples/Adla_Operations_List.json" }
+        },
+        "parameters": [
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successfully listed the available operations for Data Lake Analytics.",
+            "schema": {
+              "$ref": "#/definitions/OperationListResult"
             }
           }
         }
@@ -1831,7 +1944,7 @@
           "type": "integer",
           "format": "int32",
           "readOnly": true,
-          "description": "the system defined maximum supported degree of parallelism for this account, which restricts the maximum value of parallelism the user can set for the account.."
+          "description": "the system defined maximum supported degree of parallelism for this account, which restricts the maximum value of parallelism the user can set for the account."
         },
         "systemMaxJobCount": {
           "type": "integer",
@@ -2261,7 +2374,9 @@
             "Suspending",
             "Resuming",
             "Deleting",
-            "Deleted"
+            "Deleted",
+            "Undeleting",
+            "Canceled"
           ],
           "x-ms-enum": {
             "name": "DataLakeAnalyticsAccountStatus",
@@ -2418,6 +2533,161 @@
         }
       },
       "description": "Data Lake Analytics firewall rule update parameters"
+    },
+    "NameAvailabilityInformation": {
+      "properties": {
+        "nameAvailable": {
+          "type": "boolean",
+          "readOnly": true,
+          "description": "the Boolean value of true or false to indicate whether the Data Lake Analytics account name is available or not."
+        },
+        "reason": {
+          "type": "string",
+          "readOnly": true,
+          "description": "the reason why the Data Lake Analytics account name is not available, if nameAvailable is false."
+        },
+        "message": {
+          "type": "string",
+          "readOnly": true,
+          "description": "the message describing why the Data Lake Analytics account name is not available, if nameAvailable is false."
+        }
+      },
+      "description": "Data Lake Analytics account name availability result information"
+    },
+    "CheckNameAvailabilityParameters": {
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "the Data Lake Analytics name to check availability for."
+        },
+        "type": {
+          "type": "string",
+          "enum": [
+            "Microsoft.DataLakeAnalytics/accounts"
+          ],
+          "description": "the Resource type. Note: This should not be set by the user, as the constant value is Microsoft.DataLakeAnalytics/accounts"
+        }
+      },
+      "required": [
+        "name",
+        "type"
+      ],
+      "description": "Data Lake Analytics account name availability check parameters"
+    },
+    "CapabilityInformation": {
+      "properties": {
+        "subscriptionId": {
+          "type": "string",
+          "format": "uuid",
+          "readOnly": true,
+          "description": "the subscription credentials that uniquely identifies the subscription."
+        },
+        "state": {
+          "type": "string",
+          "enum": [
+            "Registered",
+            "Suspended",
+            "Deleted",
+            "Unregistered",
+            "Warned"
+          ],
+          "x-ms-enum": {
+            "name": "SubscriptionState",
+            "modelAsString": true
+          },
+          "readOnly": true,
+          "description": "the subscription state."
+        },
+        "maxAccountCount": {
+          "type": "integer",
+          "format": "int32",
+          "readOnly": true,
+          "description": "the maximum supported number of accounts under this subscription."
+        },
+        "accountCount": {
+          "type": "integer",
+          "format": "int32",
+          "readOnly": true,
+          "description": "the current number of accounts under this subscription."
+        },
+        "migrationState": {
+          "type": "boolean",
+          "readOnly": true,
+          "description": "the Boolean value of true or false to indicate the maintenance state."
+        }
+      },
+      "description": "Subscription-level properties and limits for Data Lake Analytics"
+    },
+    "OperationDisplay": {
+      "properties": {
+        "provider": {
+          "type": "string",
+          "readOnly": true,
+          "description": "the Resource provider of the operation."
+        },
+        "resource": {
+          "type": "string",
+          "readOnly": true,
+          "description": "the Resource type of the operation."
+        },
+        "operation": {
+          "type": "string",
+          "readOnly": true,
+          "description": "a friendly name of the operation."
+        },
+        "description": {
+          "type": "string",
+          "readOnly": true,
+          "description": "a friendly description of the operation."
+        }
+      },
+      "description": "The display information for a particular operation"
+    },
+    "Operation": {
+      "properties": {
+        "name": {
+          "type": "string",
+          "readOnly": true,
+          "description": "the name of the operation."
+        },
+        "display": {
+          "$ref": "#/definitions/OperationDisplay",
+          "description": "the display information for the operation."
+        },
+        "origin": {
+          "type": "string",
+          "enum": [
+            "user",
+            "system",
+            "user,system"
+          ],
+          "x-ms-enum": {
+            "name": "OperationOrigin",
+            "modelAsString": true
+          },
+          "readOnly": true,
+          "description": "the intended executor of the operation."
+        }
+      },
+      "description": "An available operation for Data Lake Analytics"
+    },
+    "OperationListResult": {
+      "properties": {
+        "value": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Operation"
+          },
+          "readOnly": true,
+          "description": "the results of the list operation."
+        },
+        "nextLink": {
+          "type": "string",
+          "readOnly": true,
+          "description": "the link (url) to the next page of results."
+        }
+      },
+      "description": "The list of available operations for Data Lake Analytics"
     },
     "Resource": {
       "description": "The Resource model definition.",

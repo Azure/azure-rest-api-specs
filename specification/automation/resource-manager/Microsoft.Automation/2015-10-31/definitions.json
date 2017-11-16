@@ -1446,6 +1446,13 @@
         "etag": {
           "type": "string",
           "description": "Gets or sets the etag of the resource."
+        },
+        "extensionHandler": {
+          "type": "array",
+          "description": "Gets or sets the list of extensionHandler properties for a Node.",
+          "items": {
+            "$ref": "#/definitions/DscNodeExtensionHandlerAssociationProperty"
+          }
         }
       },
       "allOf": [
@@ -1528,6 +1535,19 @@
         }
       },
       "description": "The dsc nodeconfiguration property associated with the entity."
+    },
+    "DscNodeExtensionHandlerAssociationProperty": {
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "Gets or sets the name of the extension handler."
+        },
+        "version": {
+          "type": "string",
+          "description": "Gets or sets the version of the extension handler."
+        }
+      },
+      "description": "The dsc extensionHandler property associated with the node"
     },
     "DscNodeListResult": {
       "properties": {
@@ -2934,6 +2954,21 @@
       },
       "description": "The runbook property associated with the entity."
     },
+    "scheduleFrequency": {
+      "type": "string",
+      "description": "Gets or sets the frequency of the schedule.",
+      "enum": [
+        "OneTime",
+        "Day",
+        "Hour",
+        "Week",
+        "Month"
+      ],
+      "x-ms-enum": {
+        "name": "ScheduleFrequency",
+        "modelAsString": true
+      }
+    },
     "ScheduleCreateOrUpdateProperties": {
       "properties": {
         "description": {
@@ -2955,18 +2990,7 @@
         },
         "frequency": {
           "type": "string",
-          "description": "Gets or sets the frequency of the schedule.",
-          "enum": [
-            "OneTime",
-            "Day",
-            "Hour",
-            "Week",
-            "Month"
-          ],
-          "x-ms-enum": {
-            "name": "ScheduleFrequency",
-            "modelAsString": true
-          }
+          "$ref": "#/definitions/scheduleFrequency"
         },
         "timeZone": {
           "type": "string",

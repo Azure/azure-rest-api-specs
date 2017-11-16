@@ -71,19 +71,19 @@
     },
     "definitions": {
         "versionSpec": {
-            "description": "Gets or sets Version spec properties.",
+            "description": "The version properties.",
             "properties": {
                 "friendlyName": {
                     "type": "string",
-                    "description": "Friendly Name"
+                    "description": "The friendly name"
                 },
                 "displayName": {
                     "type": "string",
-                    "description": "Display Name"
+                    "description": "The display name"
                 },
                 "isDefault": {
                     "type": "string",
-                    "description": "Value true if the version is the default version."
+                    "description": "Whether or not the version is the default version."
                 },
                 "componentVersions": {
                     "type": "object",
@@ -98,7 +98,7 @@
             "description": "The version capability.",
             "properties": {
                 "available": {
-                    "description": "Gets the list of version capabilities.",
+                    "description": "The list of version capabilities.",
                     "type": "array",
                     "items": {
                         "$ref": "#/definitions/versionSpec"
@@ -110,7 +110,7 @@
             "description": "The regions capability.",
             "properties": {
                 "available": {
-                    "description": "Gets the list of region capabilities.",
+                    "description": "The list of region capabilities.",
                     "type": "array",
                     "items": {
                         "type": "string"
@@ -122,7 +122,7 @@
             "description": "The virtual machine sizes capability.",
             "properties": {
                 "available": {
-                    "description": "Gets the list of virtual machine size capabilities.",
+                    "description": "The list of virtual machine size capabilities.",
                     "type": "array",
                     "items": {
                         "type": "string"
@@ -134,7 +134,7 @@
             "description": "The virtual machine type compatibility filter.",
             "properties": {
                 "FilterMode": {
-                    "description": "Gets the mode for the filter.",
+                    "description": "The mode for the filter.",
                     "type": "string"
                 },
                 "Regions": {
@@ -178,7 +178,7 @@
             "description": "The regional quota capacity.",
             "properties": {
                 "region_name": {
-                    "description": "Gets the region name.",
+                    "description": "The region name.",
                     "type": "string"
                 },
                 "cores_used": {
@@ -222,14 +222,14 @@
                         "$ref": "#/definitions/regionsCapability"
                     }
                 },
-                "vmsizes": {
+                "vmSizes": {
                     "description": "The virtual machine sizes.",
                     "type": "object",
                     "additionalProperties": {
                         "$ref": "#/definitions/vmSizesCapability"
                     }
                 },
-                "vmsize_filters": {
+                "vmSize_filters": {
                     "description": "The virtual machine size compatibilty filters.",
                     "type": "array",
                     "items": {
@@ -256,14 +256,14 @@
             "in": "path",
             "required": true,
             "type": "string",
-            "description": "Gets subscription credentials which uniquely identify Microsoft Azure subscription. The subscription ID forms part of the URI for every service call."
+            "description": "The subscription credentials which uniquely identify Microsoft Azure subscription. The subscription ID forms part of the URI for every service call."
         },
         "ApiVersionParameter": {
             "name": "api-version",
             "in": "query",
             "required": true,
             "type": "string",
-            "description": "Client Api Version."
+            "description": "The HDInsight client API Version."
         }
     }
 }
