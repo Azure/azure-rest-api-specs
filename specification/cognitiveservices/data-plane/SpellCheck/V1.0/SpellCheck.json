@@ -254,7 +254,17 @@
         }
       ],
       "type": "object",
-      "properties": {}
+      "required": [
+        "flaggedTokens"
+      ],
+      "properties": {
+        "flaggedTokens": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/SpellingFlaggedToken"
+          }
+        }
+      }
     },
     "Answer": {
       "allOf": [
