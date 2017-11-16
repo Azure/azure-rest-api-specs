@@ -196,8 +196,8 @@
           }
         },
         "x-ms-examples": {
-          "Verify example": {
-            "$ref": "./examples/Verify.json"
+          "Verify faces example": {
+            "$ref": "./examples/VerifyFaces.json"
           }
         }
       }
@@ -1044,17 +1044,7 @@
             "type": "string"
           },
           {
-            "name": "targetFace",
-            "in": "query",
-            "description": "A face rectangle to specify the target face to be added to a person in the format of \"targetFace=left,top,width,height\". E.g. \"targetFace=10,10,100,100\". If there is more than one face in the image, targetFace is required to specify which face to add. No targetFace means there is only one face detected in the entire image. ",
-            "type": "array",
-            "collectionFormat": "csv",
-            "items": {
-              "type": "integer",
-              "format": "int32",
-              "maxItems": 4,
-              "minItems": 4
-            }
+            "$ref": "#/parameters/targetFace"
           },
           {
             "$ref": "../../Common/Parameters.json#/parameters/ImageUrl"
@@ -1099,36 +1089,7 @@
             "default": false
           },
           {
-            "name": "returnFaceAttributes",
-            "in": "query",
-            "description": "Analyze and return the one or more specified face attributes in the comma-separated string like \"returnFaceAttributes=age,gender\". Supported face attributes include age, gender, headPose, smile, facialHair, glasses and emotion. Note that each face attribute analysis has additional computational and time cost.",
-            "type": "array",
-            "required": false,
-            "collectionFormat": "csv",
-            "items": {
-              "type": "string",
-              "x-nullable": false,
-              "x-ms-enum": {
-                "name": "FaceAttributeTypes",
-                "modelAsString": false
-              },
-              "enum": [
-                "age",
-                "gender",
-                "headPose",
-                "smile",
-                "facialHair",
-                "glasses",
-                "emotion",
-                "hair",
-                "makeup",
-                "occlusion",
-                "accessories",
-                "blur",
-                "exposure",
-                "noise"
-              ]
-            }
+            "$ref": "#/parameters/returnFaceAttributes"
           },
           {
             "$ref": "../../Common/Parameters.json#/parameters/ImageUrl"
@@ -1182,15 +1143,14 @@
             "type": "string"
           },
           {
-            "name": "targetFace",
-            "in": "query",
-            "description": "A face rectangle to specify the target face to be added into the face list, in the format of \"targetFace=left,top,width,height\". E.g. \"targetFace=10,10,100,100\". If there is more than one face in the image, targetFace is required to specify which face to add. No targetFace means there is only one face detected in the entire image.",
-            "type": "string"
+            "$ref": "#/parameters/targetFace"
+          },
+          {
+            "$ref": "../../Common/Parameters.json#/parameters/ImageUrl"
           }
         ],
         "consumes": [
-          "application/json",
-          "application/octet-stream"
+          "application/json"
         ],
         "responses": {
           "200": {
@@ -1229,6 +1189,9 @@
         "consumes": [
           "application/json"
         ],
+        "produces": [
+          "application/json"
+        ],
         "responses": {
           "200": {
             "description": "A successful call returns the verification result.",
@@ -1243,9 +1206,11 @@
             }
           }
         },
-        "produces": [
-          "application/json"
-        ]
+        "x-ms-examples":{
+          "Verify with person group example": {
+            "$ref": "./examples/VerifyPersonGroup.json"
+          }
+        }
       }
     },
     "/detect?overload=stream": {
@@ -1268,36 +1233,7 @@
             "default": false
           },
           {
-            "name": "returnFaceAttributes",
-            "in": "query",
-            "description": "Analyze and return the one or more specified face attributes in the comma-separated string like \"returnFaceAttributes=age,gender\". Supported face attributes include age, gender, headPose, smile, facialHair, glasses and emotion. Note that each face attribute analysis has additional computational and time cost.",
-            "type": "array",
-            "required": false,
-            "collectionFormat": "csv",
-            "items": {
-              "type": "string",
-              "x-nullable": false,
-              "x-ms-enum": {
-                "name": "FaceAttributeTypes",
-                "modelAsString": false
-              },
-              "enum": [
-                "age",
-                "gender",
-                "headPose",
-                "smile",
-                "facialHair",
-                "glasses",
-                "emotion",
-                "hair",
-                "makeup",
-                "occlusion",
-                "accessories",
-                "blur",
-                "exposure",
-                "noise"
-              ]
-            }
+            "$ref": "#/parameters/returnFaceAttributes"
           },
           {
             "$ref": "../../Common/Parameters.json#/parameters/ImageStream"
@@ -1351,18 +1287,7 @@
             "type": "string"
           },
           {
-            "name": "targetFace",
-            "in": "query",
-            "description": "A face rectangle to specify the target face to be added to a person in the format of \"targetFace=left,top,width,height\". E.g. \"targetFace=10,10,100,100\". If there is more than one face in the image, targetFace is required to specify which face to add. No targetFace means there is only one face detected in the entire image. ",
-            "type": "array",
-            "required": false,
-            "collectionFormat": "csv",
-            "items": {
-              "type": "integer",
-              "format": "int32",
-              "maxItems": 4,
-              "minItems": 4
-            }
+            "$ref": "#/parameters/targetFace"
           },
           {
             "$ref": "../../Common/Parameters.json#/parameters/ImageStream"
@@ -1408,10 +1333,7 @@
             "type": "string"
           },
           {
-            "name": "targetFace",
-            "in": "query",
-            "description": "A face rectangle to specify the target face to be added into the face list, in the format of \"targetFace=left,top,width,height\". E.g. \"targetFace=10,10,100,100\". If there is more than one face in the image, targetFace is required to specify which face to add. No targetFace means there is only one face detected in the entire image.",
-            "type": "string"
+            "$ref": "#/parameters/targetFace"
           }
         ],
         "consumes": [
@@ -1791,23 +1713,29 @@
           "type": "boolean",
           "description": "A boolean value describing whether the hair is visible in the image."
         },
-        "hairColor": {
-          "type": "array",
-          "description": "An array of candidate colors and confidence level in the presence of each.",
-          "items": {
-            "type": "object",
-            "description": "Hair color and associated confidence",
-            "properties": {
-              "color": {
-                "type": "string",
-                "description": "Name of the color."
-              },
-              "confidence": {
-                "x-nullable": false,
-                "$ref": "#/definitions/ConfidenceProperty"
-              }
-            }
-          }
+        "hairColors": {
+          "$ref": "#/definitions/HairColors"
+        }
+      }
+    },
+    "HairColors": {
+      "type": "array",
+      "description": "An array of candidate colors and confidence level in the presence of each.",
+      "items": {
+        "$ref": "#/definitions/ColorProperty"
+      }
+    },
+    "ColorProperty": {
+      "type": "object",
+      "description": "Hair color and associated confidence",
+      "properties": {
+        "color": {
+          "type": "string",
+          "description": "Name of the color."
+        },
+        "confidence": {
+          "x-nullable": false,
+          "$ref": "#/definitions/ConfidenceProperty"
         }
       }
     },
@@ -1847,16 +1775,20 @@
       "type": "array",
       "description": "Properties describing any accessories on a given face.",
       "items": {
-        "type": "object",
-        "properties": {
-          "type": {
-            "type": "string",
-            "description": "Description of an accessory"
-          },
-          "confidence": {
-            "x-nullable": false,
-            "$ref": "#/definitions/ConfidenceProperty"
-          }
+        "$ref": "#/definitions/AccessoryItem"
+      }
+    },
+    "AccessoryItem": {
+      "type": "object",
+      "description": "Accessory item and corresponding confidence level.",
+      "properties": {
+        "type": {
+          "type": "string",
+          "description": "Description of an accessory"
+        },
+        "confidence": {
+          "x-nullable": false,
+          "$ref": "#/definitions/ConfidenceProperty"
         }
       }
     },
@@ -2428,15 +2360,53 @@
     }
   },
   "parameters": {
-    "ImageStream": {
-      "name": "Image",
-      "in": "body",
-      "required": true,
+    "returnFaceAttributes": {
+      "name": "returnFaceAttributes",
+      "in": "query",
+      "description": "Analyze and return the one or more specified face attributes in the comma-separated string like \"returnFaceAttributes=age,gender\". Supported face attributes include age, gender, headPose, smile, facialHair, glasses and emotion. Note that each face attribute analysis has additional computational and time cost.",
+      "type": "array",
       "x-ms-parameter-location": "method",
-      "description": "An image stream.",
-      "schema": {
-        "type": "object",
-        "format": "file"
+      "required": false,
+      "collectionFormat": "csv",
+      "items": {
+        "type": "string",
+        "x-nullable": false,
+        "x-ms-enum": {
+          "name": "FaceAttributeTypes",
+          "modelAsString": false
+        },
+        "enum": [
+          "age",
+          "gender",
+          "headPose",
+          "smile",
+          "facialHair",
+          "glasses",
+          "emotion",
+          "hair",
+          "makeup",
+          "occlusion",
+          "accessories",
+          "blur",
+          "exposure",
+          "noise"
+        ]
+      }
+    },
+    "targetFace": {
+      "name": "targetFace",
+      "in": "query",
+      "description": "A face rectangle to specify the target face to be added to a person in the format of \"targetFace=left,top,width,height\". E.g. \"targetFace=10,10,100,100\". If there is more than one face in the image, targetFace is required to specify which face to add. No targetFace means there is only one face detected in the entire image. ",
+      "type": "array",
+      "x-ms-parameter-location": "method",
+      "required": false,
+      "collectionFormat": "csv",
+      "items": {
+        "type": "integer",
+        "format": "int32",
+        "x-nullable": false,
+        "maxItems": 4,
+        "minItems": 4
       }
     }
   }
