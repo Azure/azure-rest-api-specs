@@ -654,7 +654,7 @@
             "in": "body",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/RedisFirewallRule"
+              "$ref": "#/definitions/RedisFirewallRuleCreateParameters"
             },
             "description": "Parameters supplied to the create or update redis firewall rule operation."
           },
@@ -1109,6 +1109,9 @@
               "$ref": "#/definitions/RedisLinkedServerWithPropertiesList"
             }
           }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
         }
       }
     }
@@ -1154,18 +1157,18 @@
       ],
       "description": "SKU parameters supplied to the create Redis operation."
     },
-    "RedisCreateUpdateCommonProperties": {
+    "RedisCommonProperties": {
       "properties": {
-        "enableNonSslPort": {
-          "type": "boolean",
-          "description": "Specifies whether the non-ssl Redis server port (6379) is enabled."
-        },
         "redisConfiguration": {
           "type": "object",
           "additionalProperties": {
             "type": "string"
           },
           "description": "All Redis Settings. Few possible keys: rdb-backup-enabled,rdb-storage-connection-string,rdb-backup-frequency,maxmemory-delta,maxmemory-policy,notify-keyspace-events,maxmemory-samples,slowlog-log-slower-than,slowlog-max-len,list-max-ziplist-entries,list-max-ziplist-value,hash-max-ziplist-entries,hash-max-ziplist-value,set-max-intset-entries,zset-max-ziplist-entries,zset-max-ziplist-value etc."
+        },
+        "enableNonSslPort": {
+          "type": "boolean",
+          "description": "Specifies whether the non-ssl Redis server port (6379) is enabled."
         },
         "tenantSettings": {
           "type": "object",
@@ -1181,21 +1184,6 @@
         }
       },
       "description": "Create/Update/Get common properties of the redis cache.",
-      "x-ms-external": true
-    },
-    "RedisUpdateProperties": {
-      "properties": {
-        "sku": {
-          "$ref": "#/definitions/Sku",
-          "description": "The SKU of the Redis cache to deploy."
-        }
-      },
-      "allOf": [
-        {
-          "$ref": "#/definitions/RedisCreateUpdateCommonProperties"
-        }
-      ],
-      "description": "Patchable properties of the redis cache.",
       "x-ms-external": true
     },
     "RedisCreateProperties": {
@@ -1220,10 +1208,25 @@
       ],
       "allOf": [
         {
-          "$ref": "#/definitions/RedisCreateUpdateCommonProperties"
+          "$ref": "#/definitions/RedisCommonProperties"
         }
       ],
       "description": "Properties supplied to Create Redis operation.",
+      "x-ms-external": true
+    },
+    "RedisUpdateProperties": {
+      "properties": {
+        "sku": {
+          "$ref": "#/definitions/Sku",
+          "description": "The SKU of the Redis cache to deploy."
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "#/definitions/RedisCommonProperties"
+        }
+      ],
+      "description": "Patchable properties of the redis cache.",
       "x-ms-external": true
     },
     "RedisProperties": {
@@ -1262,11 +1265,13 @@
         },
         "linkedServers": {
           "readOnly": true,
-          "$ref": "#/definitions/RedisLinkedServerList",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/RedisLinkedServer"
+          },
           "description": "List of the linked servers associated with the cache"
         }
       },
-      "required": [],
       "allOf": [
         {
           "$ref": "#/definitions/RedisCreateProperties"
@@ -1415,6 +1420,19 @@
           "$ref": "#/definitions/ProxyResource"
         }
       ]
+    },
+    "RedisFirewallRuleCreateParameters": {
+      "properties": {
+        "properties": {
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/RedisFirewallRuleProperties",
+          "description": "Properties required to create a firewall rule ."
+        }
+      },
+      "required": [
+        "properties"
+      ],
+      "description": "Parameters required for creating a firewall rule on redis cache."
     },
     "RedisFirewallRuleProperties": {
       "description": "Specifies a range of IP addresses permitted to connect to the cache",
@@ -1700,21 +1718,6 @@
         }
       ]
     },
-    "RedisLinkedServerList": {
-      "properties": {
-        "value": {
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/RedisLinkedServer"
-          },
-          "description": "List of linked server Ids of a Redis cache."
-        }
-      },
-      "required": [
-        "value"
-      ],
-      "description": "List of linked server Ids of a Redis cache."
-    },
     "RedisLinkedServerWithPropertiesList": {
       "properties": {
         "value": {
@@ -1723,11 +1726,13 @@
             "$ref": "#/definitions/RedisLinkedServerWithProperties"
           },
           "description": "List of linked servers (with properites) of a Redis cache."
+        },
+        "nextLink": {
+          "type": "string",
+          "readOnly": true,
+          "description": "Link for next set."
         }
       },
-      "required": [
-        "value"
-      ],
       "description": "List of linked servers (with properites) of a Redis cache."
     },
     "RedisLinkedServerCreateProperties": {
