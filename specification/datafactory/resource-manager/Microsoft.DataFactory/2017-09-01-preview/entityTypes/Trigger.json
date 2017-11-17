@@ -263,7 +263,7 @@
       ]
     },
     "TumblingWindowTrigger": {
-      "description": "This schedules pipeline runs for all fixed time interval windows from a start time without gaps and also supports backfill scenarios (when start time is in the past).",
+      "description": "Trigger that schedules pipeline runs for all fixed time interval windows from a start time without gaps and also supports backfill scenarios (when start time is in the past).",
       "type": "object",
       "allOf": [
         {
@@ -347,7 +347,9 @@
         },
         "intervalInSeconds": {
           "description": "Interval between retries in seconds. Default is 30.",
-          "type": "integer"
+          "type": "integer",
+          "minimum": 30,
+          "maximum": 86400
         }
       }
     }
