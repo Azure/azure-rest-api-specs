@@ -244,6 +244,11 @@
               "$ref": "#/definitions/APIError"
             }
           }
+        },
+        "x-ms-examples": {
+          "Create new person example": {
+            "$ref": "./examples/CreateNewPerson.json"
+          }
         }
       },
       "get": {
@@ -417,10 +422,7 @@
               "$ref": "#/definitions/APIError"
             }
           }
-        },
-        "produces": [
-          "application/json"
-        ]
+        }
       }
     },
     "/persongroups/{personGroupId}/persons/{personId}/persistedFaces/{persistedFaceId}": {
@@ -460,10 +462,7 @@
               "$ref": "#/definitions/APIError"
             }
           }
-        },
-        "produces": [
-          "application/json"
-        ]
+        }
       },
       "get": {
         "description": "Retrieve information about a persisted face (specified by persistedFaceId, personId and its belonging personGroupId).",
@@ -563,10 +562,7 @@
               "$ref": "#/definitions/APIError"
             }
           }
-        },
-        "produces": [
-          "application/json"
-        ]
+        }
       }
     },
     "/persongroups/{personGroupId}": {
@@ -1206,7 +1202,7 @@
             }
           }
         },
-        "x-ms-examples":{
+        "x-ms-examples": {
           "Verify with person group example": {
             "$ref": "./examples/VerifyPersonGroup.json"
           }
@@ -1404,6 +1400,47 @@
         },
         "faceAttributes": {
           "$ref": "#/definitions/FaceAttributes"
+        },
+        "glasses": {
+          "type": "string",
+          "description": "Glasses type if any of the face.",
+          "x-ms-enum": {
+            "name": "GlassesTypes",
+            "modelAsString": false
+          },
+          "enum": [
+            "noGlasses",
+            "readingGlasses",
+            "sunglasses",
+            "swimmingGoggles"
+          ]
+        },
+        "headPose": {
+          "$ref": "#/definitions/HeadPoseProperties"
+        },
+        "emotion": {
+          "$ref": "#/definitions/EmotionProperties"
+        },
+        "hair": {
+          "$ref": "#/definitions/HairProperties"
+        },
+        "makeup": {
+          "$ref": "#/definitions/MakeupProperties"
+        },
+        "occlusion": {
+          "$ref": "#/definitions/OcclusionProperties"
+        },
+        "accessories": {
+          "$ref": "#/definitions/AccessoryProperties"
+        },
+        "blur": {
+          "$ref": "#/definitions/BlurProperties"
+        },
+        "exposure": {
+          "$ref": "#/definitions/ExposureProperties"
+        },
+        "noise": {
+          "$ref": "#/definitions/NoiseProperties"
         }
       }
     },
@@ -1571,49 +1608,8 @@
           "minimum": 0,
           "maximum": 1
         },
-        "glasses": {
-          "type": "string",
-          "description": "Glasses type if any of the face.",
-          "x-ms-enum": {
-            "name": "GlassesTypes",
-            "modelAsString": false
-          },
-          "enum": [
-            "noGlasses",
-            "readingGlasses",
-            "sunglasses",
-            "swimmingGoggles"
-          ]
-        },
         "facialHair": {
           "$ref": "#/definitions/FacialHairProperties"
-        },
-        "headPose": {
-          "$ref": "#/definitions/HeadPoseProperties"
-        },
-        "emotion": {
-          "$ref": "#/definitions/EmotionProperties"
-        },
-        "hair": {
-          "$ref": "#/definitions/HairProperties"
-        },
-        "makeup": {
-          "$ref": "#/definitions/MakeupProperties"
-        },
-        "occlusion": {
-          "$ref": "#/definitions/OcclusionProperties"
-        },
-        "accessories": {
-          "$ref": "#/definitions/AccessoryProperties"
-        },
-        "blur": {
-          "$ref": "#/definitions/BlurProperties"
-        },
-        "exposure": {
-          "$ref": "#/definitions/ExposureProperties"
-        },
-        "noise": {
-          "$ref": "#/definitions/NoiseProperties"
         }
       }
     },
@@ -1713,7 +1709,7 @@
           "type": "boolean",
           "description": "A boolean value describing whether the hair is visible in the image."
         },
-        "hairColors": {
+        "hairColor": {
           "$ref": "#/definitions/HairColors"
         }
       }

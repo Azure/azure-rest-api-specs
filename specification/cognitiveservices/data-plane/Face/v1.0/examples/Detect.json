@@ -2,9 +2,23 @@
   "parameters": {
     "Content-Type": "application/json",
     "Ocp-Apim-Subscription-Key": "{API key}",
-    "body": {
-      "url": "{Image Url here}"
-    }
+    "returnFaceAttributes": [
+      "age",
+      "gender",
+      "headPose",
+      "smile",
+      "facialHair",
+      "glasses",
+      "emotion",
+      "hair",
+      "makeup",
+      "occlusion",
+      "accessories",
+      "blur",
+      "exposure",
+      "noise"
+    ],
+    "ImageUrl": "{Image Url here}"
   },
   "responses": {
     "200": {
@@ -203,7 +217,7 @@
             },
             {
               "type": "mask",
-              " confidence": 0.87
+              "confidence": 0.87
             }
           ],
           "blur": {
