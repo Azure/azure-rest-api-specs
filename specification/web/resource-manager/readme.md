@@ -45,8 +45,10 @@ These settings apply only when `--tag=package-2016-09` is specified on the comma
 ``` yaml $(tag) == 'package-2016-09'
 input-file:
 - Microsoft.CertificateRegistration/2015-08-01/AppServiceCertificateOrders.json
+- Microsoft.CertificateRegistration/2015-08-01/CertificateRegistrationProvider.json
 - Microsoft.DomainRegistration/2015-04-01/Domains.json
 - Microsoft.DomainRegistration/2015-04-01/TopLevelDomains.json
+- Microsoft.DomainRegistration/2015-04-01/DomainRegistrationProvider.json
 - Microsoft.Web/2016-03-01/Certificates.json
 - Microsoft.Web/2016-03-01/CommonDefinitions.json
 - Microsoft.Web/2016-03-01/DeletedWebApps.json
