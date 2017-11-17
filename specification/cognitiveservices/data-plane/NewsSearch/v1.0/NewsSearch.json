@@ -239,7 +239,7 @@
               "$ref": "#/definitions/ErrorResponse"
             }
           }
-        },
+        }
         "x-ms-examples": {
             "Successful query": {
                 "$ref": "./examples//SuccessfulNewsSearchRequest.json"
@@ -629,6 +629,13 @@
         "value"
       ],
       "properties": {
+        "value": {
+          "description": "An array of NewsArticle objects that contain information about news articles that are relevant to the query. If there are no results to return for the request, the array is empty.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/NewsArticle"
+          }
+        },
         "location": {
           "readOnly": true,
           "type": "string"
@@ -648,6 +655,35 @@
           "readOnly": true,
           "type": "integer",
           "format": "int64"
+        }
+      }
+    },
+    "NewsArticle": {
+      "description": "Defines a news article.",
+      "allOf": [
+        {
+          "$ref": "#/definitions/Article"
+        }
+      ],
+      "type": "object",
+      "properties": {
+        "category": {
+          "description": "The news category that the article belongs to. For example, Sports. If the news category cannot be determined, the article does not include this field.",
+          "readOnly": true,
+          "type": "string"
+        },
+        "headline": {
+          "description": "A Boolean value that indicates whether the news article is a headline. If true, the article is a headline. The article includes this field only for news categories requests that do not specify the category query parameter.",
+          "readOnly": true,
+          "type": "boolean"
+        },
+        "clusteredArticles": {
+          "description": "A list of related news articles.",
+          "readOnly": true,
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/NewsArticle"
+          }
         }
       }
     },
@@ -691,6 +727,22 @@
           "items": {
             "$ref": "#/definitions/Query"
           }
+        }
+      }
+    },
+    "Article": {
+      "allOf": [
+        {
+          "$ref": "#/definitions/CreativeWork"
+        }
+      ],
+      "type": "object",
+      "properties": {
+        "wordCount": {
+          "description": "The number of words in the text of the Article.",
+          "readOnly": true,
+          "type": "integer",
+          "format": "int32"
         }
       }
     },
