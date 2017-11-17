@@ -457,32 +457,36 @@
       "description": "An error response from the ManagedServiceIdentity service."
     },
     "Operation": {
-      "title": "Microsoft.ManagedIdentity REST API operation",
+      "title": "Microsoft.ManagedIdentity Operation.",
+      "description": "Operation supported by the Microsoft.ManagedIdentity REST API.",
       "type": "object",
       "properties": {
         "name": {
-          "title": "The operation name.",
-          "description": "This is of the format {provider}/{resource}/{operation}",
+          "title": "Operation Name.",
+          "description": "The name of the REST Operation. This is of the format {provider}/{resource}/{operation}.",
           "type": "string"
         },
         "display": {
-          "title": "The object that describes the operation.",
+          "description": "The object that describes the operation.",
           "properties": {
             "provider": {
-              "title": "Friendly name of the resource provider.",
+              "title": "Resource Provider Name.",
+              "description": "Friendly name of the resource provider.",
               "type": "string"
             },
             "operation": {
-              "title": "The operation type.",
-              "description": "For example: read, write, delete",
+              "title": "Operation Type.",
+              "description": "The type of operation. For example: read, write, delete.",
               "type": "string"
             },
             "resource": {
-              "title": "The resource type on which the operation is performed.",
+              "title": "Resource Type.",
+              "description": "The resource type on which the operation is performed.",
               "type": "string"
             },
             "description": {
-              "title": "The friendly name of the operation",
+              "title": "Operation description",
+              "description": "A description of the operation.",
               "type": "string"
             }
           }
@@ -490,17 +494,20 @@
       }
     },
     "OperationListResult": {
-      "title": "Result of the request to list REST API operations. It contains a list of operations supported by the API.",
+      "title": "Operations List.",
+      "description": "A list of operations supported by Microsoft.ManagedIdentity Resource Provider.",
       "properties": {
         "value": {
           "type": "array",
           "items": {
             "$ref": "#/definitions/Operation"
           },
-          "title": "The list of operations supported by the resource provider."
+          "title": "Operations List.",
+          "description": "A list of operations supported by Microsoft.ManagedIdentity Resource Provider."
         },
         "nextLink": {
           "type": "string",
+          "title": "Next Link",
           "description": "The url to get the next page of results, if any."
         }
       }
