@@ -467,29 +467,35 @@
           "type": "string"
         },
         "display": {
+          "title": "Operation Display.",
           "description": "The object that describes the operation.",
-          "properties": {
-            "provider": {
-              "title": "Resource Provider Name.",
-              "description": "Friendly name of the resource provider.",
-              "type": "string"
-            },
-            "operation": {
-              "title": "Operation Type.",
-              "description": "The type of operation. For example: read, write, delete.",
-              "type": "string"
-            },
-            "resource": {
-              "title": "Resource Type.",
-              "description": "The resource type on which the operation is performed.",
-              "type": "string"
-            },
-            "description": {
-              "title": "Operation description",
-              "description": "A description of the operation.",
-              "type": "string"
-            }
-          }
+          "$ref": "#/definitions/OperationDisplay"
+        }
+      }
+    },
+    "OperationDisplay": {
+      "title": "Operation Display.",
+      "description": "The object that describes the operation.",
+      "properties": {
+        "provider": {
+          "title": "Resource Provider Name.",
+          "description": "Friendly name of the resource provider.",
+          "type": "string"
+        },
+        "operation": {
+          "title": "Operation Type.",
+          "description": "The type of operation. For example: read, write, delete.",
+          "type": "string"
+        },
+        "resource": {
+          "title": "Resource Type.",
+          "description": "The resource type on which the operation is performed.",
+          "type": "string"
+        },
+        "description": {
+          "title": "Operation description",
+          "description": "A description of the operation.",
+          "type": "string"
         }
       }
     },
