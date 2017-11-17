@@ -369,14 +369,17 @@
         },
         "password": {
           "description": "Password to access the Dynamics instance.",
-          "$ref": "../datafactory.json#/definitions/AzureKeyVaultSecretReference"
+          "$ref": "../datafactory.json#/definitions/SecretBase"
+        },
+        "encryptedCredential": {
+          "type": "object",
+          "description": "The encrypted credential used for authentication. Credentials are encrypted using the integration runtime credential manager. Type: string (or Expression with resultType string)."
         }
       },
       "required": [
         "deploymentType",
         "authenticationType",
-        "username",
-        "password"
+        "username"
       ]
     },
     "HDInsightLinkedService": {
@@ -1382,6 +1385,50 @@
           "description": "The encrypted credential used for authentication. Credentials are encrypted using the integration runtime credential manager. Type: string (or Expression with resultType string)."
         }
       }
+    },
+    "SapCloudForCustomerLinkedService": {
+      "x-ms-discriminator-value": "SapCloudForCustomer",
+      "description": "Linked service for SAP Cloud for Customer.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/LinkedService"
+        }
+      ],
+      "properties": {
+        "typeProperties": {
+          "description": "SAP Cloud for Customer linked service properties.",
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/SapCloudForCustomerLinkedServiceTypeProperties"
+        }
+      },
+      "required": [
+        "typeProperties"
+      ]
+    },
+    "SapCloudForCustomerLinkedServiceTypeProperties": {
+      "description": "SAP Cloud for Customer linked service properties.",
+      "properties": {
+        "url": {
+          "type": "object",
+          "description": "The URL of SAP Cloud for Customer OData API. For example, '[https://[tenantname].crm.ondemand.com/sap/c4c/odata/v1]'. Type: string (or Expression with resultType string)."
+        },
+        "username": {
+          "type": "object",
+          "description": "The username for Basic authentication. Type: string (or Expression with resultType string)."
+        },
+        "password": {
+          "description": "The password for Basic authentication.",
+          "$ref": "../datafactory.json#/definitions/SecureString"
+        },
+        "encryptedCredential": {
+          "type": "object",
+          "description": "The encrypted credential used for authentication. Credentials are encrypted using the integration runtime credential manager. Either encryptedCredential or username/password must be provided. Type: string (or Expression with resultType string)."
+        }
+      },
+      "required": [
+        "url"
+      ]
     },
     "AmazonS3LinkedService": {
       "x-ms-discriminator-value": "AmazonS3",
