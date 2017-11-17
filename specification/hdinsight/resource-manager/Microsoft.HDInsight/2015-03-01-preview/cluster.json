@@ -38,7 +38,7 @@
                     "Clusters"
                 ],
                 "operationId": "Clusters_Create",
-                "description": "Begins creating a new HDInsight cluster with the specified parameters.",
+                "description": "Creates a new HDInsight cluster with the specified parameters.",
                 "x-ms-examples": {
                     "Create Hadoop on Linux cluster with SSH password": {
                         "$ref": "./examples/CreateLinuxHadoopSshPassword.json"
@@ -48,9 +48,6 @@
                     },
                     "Create Spark on Linux Cluster with SSH password": {
                         "$ref": "./examples/CreateLinuxSparkSshPassword.json"
-                    },
-                    "Create Windows Cluster": {
-                        "$ref": "./examples/CreateWindowsHadoopRdp.json"
                     },
                     "Create Secure Hadoop cluster": {
                         "$ref": "./examples/CreateLinuxHadoopSecureHadoop.json"
@@ -151,7 +148,7 @@
                     "Clusters"
                 ],
                 "operationId": "Clusters_Delete",
-                "description": "Begins deleting the specified HDInsight cluster.",
+                "description": "Deletes the specified HDInsight cluster.",
                 "x-ms-examples": {
                     "Delete Hadoop on Linux cluster": {
                         "$ref": "./examples/DeleteLinuxHadoopCluster.json"
@@ -239,10 +236,10 @@
                     "Clusters"
                 ],
                 "operationId": "Clusters_ListByResourceGroup",
-                "description": "List the HDInsight clusters in a resource group.",
+                "description": "Lists the HDInsight clusters in a resource group.",
                 "x-ms-examples": {
-                    "Get All Hadoop on Linux cluster": {
-                        "$ref": "./examples/GetLinuxHadoopAllCluster.json"
+                    "Get All Hadoop on Linux clusters in a resource group": {
+                        "$ref": "./examples/GetLinuxHadoopAllClustersInResourceGroup.json"
                     }
                 },
                 "parameters": [{
@@ -278,7 +275,12 @@
                     "Clusters"
                 ],
                 "operationId": "Clusters_Resize",
-                "description": "Begins a resize operation on the specified HDInsight cluster.",
+                "description": "Resizes the specified HDInsight cluster to the specified size.",
+                "x-ms-examples": {
+                    "Resize the worker nodes for a Hadoop on Linux cluster": {
+                        "$ref": "./examples/ResizeLinuxHadoopCluster.json"
+                    }
+                },
                 "parameters": [{
                         "name": "resourceGroupName",
                         "in": "path",
@@ -324,11 +326,11 @@
                     }
                 ],
                 "responses": {
+                    "200": {
+                        "description": "OK response definition."
+                    },
                     "202": {
                         "description": "Accepted response definition."
-                    },
-                    "200": {
-                        "description": "Ok response definition."
                     }
                 },
                 "x-ms-long-running-operation": true
@@ -340,7 +342,12 @@
                     "Clusters"
                 ],
                 "operationId": "Clusters_List",
-                "description": "Lists HDInsight clusters under the subscription.",
+                "x-ms-examples": {
+                    "Get All Hadoop on Linux clusters": {
+                        "$ref": "./examples/GetLinuxHadoopAllClusters.json"
+                    }
+                },
+                "description": "Lists all the HDInsight clusters under the subscription.",
                 "parameters": [{
                         "$ref": "#/parameters/ApiVersionParameter"
                     },
@@ -363,29 +370,8 @@
         }
     },
     "definitions": {
-        "HttpSettingsParameters": {
-            "properties": {
-                "restAuthCredential.isEnabled": {
-                    "type": "string",
-                    "description": "Whether HTTP auth is enabled or disabled."
-                },
-                "restAuthCredential.username": {
-                    "type": "string",
-                    "description": "Http username."
-                },
-                "restAuthCredential.password": {
-                    "type": "string",
-                    "format": "password",
-                    "description": "Http user password."
-                }
-            },
-            "required": [
-                "restAuthCredential.isEnabled"
-            ],
-            "description": "The payload for a Configure HTTP settings request."
-        },
         "ClusterDefinition": {
-            "description": "The cluste definition.",
+            "description": "The cluster definition.",
             "properties": {
                 "blueprint": {
                     "type": "string",
@@ -424,22 +410,22 @@
                 },
                 "domain": {
                     "type": "string",
-                    "description": "domain."
+                    "description": "The organization's active directory domain."
                 },
                 "organizationalUnitDN": {
                     "type": "string",
-                    "description": "Distinguished Name for organizational unit."
+                    "description": "The organizational unit within the Active Directory to place the cluster and service accounts."
                 },
                 "ldapsUrls": {
                     "type": "array",
                     "items": {
                         "type": "string"
                     },
-                    "description": "The LDAP URLs."
+                    "description": "The LDAPS protocol URLs to communicate with the Active Directory."
                 },
                 "domainUsername": {
                     "type": "string",
-                    "description": "The domain admin user name."
+                    "description": "The domain user account that will have admin privileges on the cluster."
                 },
                 "domainUserPassword": {
                     "type": "string",
@@ -462,10 +448,10 @@
                     "description": "The size of the VM"
                 }
             },
-            "description": "Describes the hardware profile."
+            "description": "The hardware profile."
         },
         "VirtualNetworkProfile": {
-            "description": "The Virtual network properties.",
+            "description": "The virtual network properties.",
             "properties": {
                 "id": {
                     "type": "string",
@@ -474,6 +460,26 @@
                 "subnet": {
                     "type": "string",
                     "description": "The name of the subnet."
+                }
+            }
+        },
+        "DataDisksGroups": {
+            "description": "The data disks groups for the role.",
+            "properties": {
+                "disksPerNode": {
+                    "type": "integer",
+                    "format": "int32",
+                    "description": "The number of disks per node."
+                },
+                "storageAccountType": {
+                    "type": "string",
+                    "description": "ReadOnly. The storage account type. Do not set this value.",
+                    "readOnly": true
+                },
+                "diskSizeGB": {
+                    "type": "integer",
+                    "description": "ReadOnly. The DiskSize in GB. Do not set this value.",
+                    "readOnly": true
                 }
             }
         },
@@ -505,6 +511,13 @@
                     "$ref": "#/definitions/VirtualNetworkProfile",
                     "description": "The virtual network profile."
                 },
+                "dataDisksGroups": {
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/definitions/DataDisksGroups"
+                    },
+                    "description": "The data disks groups for the role."
+                },
                 "scriptActions": {
                     "type": "array",
                     "items": {
@@ -535,7 +548,7 @@
                 },
                 "isDefault": {
                     "type": "boolean",
-                    "description": "Describes is the storage account is the default storage account."
+                    "description": "Whether or not the storage account is the default storage account."
                 },
                 "container": {
                     "type": "string",
@@ -546,7 +559,7 @@
                     "description": "The storage account access key."
                 }
             },
-            "description": "Describes the storage Account."
+            "description": "The storage Account."
         },
         "StorageProfile": {
             "properties": {
@@ -558,7 +571,7 @@
                     "description": "The list of storage accounts in the cluster."
                 }
             },
-            "description": "Describes the storage profile."
+            "description": "The storage profile."
         },
         "ClusterCreateProperties": {
             "description": "The cluster create parameters.",
@@ -643,7 +656,7 @@
             "description": "The PatchCluster request parameters"
         },
         "QuotaInfo": {
-            "description": "Gets or sets Quota properties for the cluster.",
+            "description": "The quota properties for the cluster.",
             "properties": {
                 "coresUsed": {
                     "type": "integer",
@@ -778,7 +791,7 @@
         },
         "Cluster": {
             "allOf": [{
-                "$ref": "#/definitions/Resource"
+                "$ref": "#/definitions/TrackedResource"
             }],
             "properties": {
                 "etag": {
@@ -790,7 +803,7 @@
                     "description": "The properties of the cluster."
                 }
             },
-            "description": "Describes the cluster."
+            "description": "The HDInsight cluster."
         },
         "RuntimeScriptAction": {
             "properties": {
@@ -836,14 +849,14 @@
                     "description": "The list of run time script actions."
                 },
                 "persistOnSuccess": {
-                    "type": "string",
+                    "type": "boolean",
                     "description": "Gets or sets if the scripts needs to be persisted."
                 }
             },
             "required": [
                 "persistOnSuccess"
             ],
-            "description": "Describes the script actions on a running cluster."
+            "description": "The parameters for the script actions to execute on a running cluster."
         },
         "ClusterListPersistedScriptActionsResult": {
             "properties": {
@@ -860,7 +873,7 @@
                     "description": "The link (url) to the next page of results."
                 }
             },
-            "description": "List PersistedScriptActions operations response."
+            "description": "The ListPersistedScriptActions operation response."
         },
         "ScriptActionExecutionSummary": {
             "properties": {
@@ -876,80 +889,58 @@
                     "description": "The instance count for a given script action execution status."
                 }
             },
-            "description": "Describes the execution summary of a script action."
+            "description": "The execution summary of a script action."
         },
         "RuntimeScriptActionDetail": {
-            "properties": {
-                "scriptExecutionId": {
-                    "readOnly": true,
-                    "type": "integer",
-                    "format": "int64",
-                    "description": "The execution id of the script action."
+            "allOf": [
+                {
+                    "$ref": "#/definitions/RuntimeScriptAction"
                 },
-                "startTime": {
-                    "readOnly": true,
-                    "type": "string",
-                    "description": "The start time of script action execution."
-                },
-                "endTime": {
-                    "readOnly": true,
-                    "type": "string",
-                    "description": "The end time of script action execution."
-                },
-                "status": {
-                    "readOnly": true,
-                    "type": "string",
-                    "description": "The current execution status of the script action."
-                },
-                "operation": {
-                    "readOnly": true,
-                    "type": "string",
-                    "description": "The reason why the script action was executed."
-                },
-                "executionSummary": {
-                    "readOnly": true,
-                    "type": "array",
-                    "items": {
-                        "$ref": "#/definitions/ScriptActionExecutionSummary"
-                    },
-                    "description": "The summary of script action execution result."
-                },
-                "debugInformation": {
-                    "readOnly": true,
-                    "type": "string",
-                    "description": "The script action execution debug information."
-                },
-                "name": {
-                    "type": "string",
-                    "description": "The name of the script action."
-                },
-                "uri": {
-                    "type": "string",
-                    "description": "The URI to the script."
-                },
-                "parameters": {
-                    "type": "string",
-                    "description": "The parameters for the script"
-                },
-                "roles": {
-                    "type": "array",
-                    "items": {
-                        "type": "string"
-                    },
-                    "description": "The list of roles where script will be executed."
-                },
-                "applicationName": {
-                    "readOnly": true,
-                    "type": "string",
-                    "description": "The application name of the script action, if any."
+                {
+                    "properties": {
+                        "scriptExecutionId": {
+                            "readOnly": true,
+                            "type": "integer",
+                            "format": "int64",
+                            "description": "The execution id of the script action."
+                        },
+                        "startTime": {
+                            "readOnly": true,
+                            "type": "string",
+                            "description": "The start time of script action execution."
+                        },
+                        "endTime": {
+                            "readOnly": true,
+                            "type": "string",
+                            "description": "The end time of script action execution."
+                        },
+                        "status": {
+                            "readOnly": true,
+                            "type": "string",
+                            "description": "The current execution status of the script action."
+                        },
+                        "operation": {
+                            "readOnly": true,
+                            "type": "string",
+                            "description": "The reason why the script action was executed."
+                        },
+                        "executionSummary": {
+                            "readOnly": true,
+                            "type": "array",
+                            "items": {
+                                "$ref": "#/definitions/ScriptActionExecutionSummary"
+                            },
+                            "description": "The summary of script action execution result."
+                        },
+                        "debugInformation": {
+                            "readOnly": true,
+                            "type": "string",
+                            "description": "The script action execution debug information."
+                        }
+                    }
                 }
-            },
-            "required": [
-                "name",
-                "uri",
-                "roles"
             ],
-            "description": "Describes the execution details of a script action."
+            "description": "The execution details of a script action."
         },
         "ClusterListRuntimeScriptActionDetailResult": {
             "properties": {
@@ -966,12 +957,12 @@
                     "description": "The link (url) to the next page of results."
                 }
             },
-            "description": "The ListScriptExecutionHistory response."
+            "description": "The list runtime script action detail response."
         },
         "ClusterListResult": {
             "properties": {
                 "value": {
-                    "description": "Gets the list of Clusters.",
+                    "description": "The list of Clusters.",
                     "type": "array",
                     "items": {
                         "$ref": "#/definitions/Cluster"
@@ -1018,71 +1009,85 @@
             "description": "The azure async operation response."
         },
         "Resource": {
+            "description": "The core properties of ARM resources",
             "properties": {
                 "id": {
                     "readOnly": true,
                     "type": "string",
-                    "description": "Resource Id"
+                    "description": "Fully qualified resource Id for the resource."
                 },
                 "name": {
                     "readOnly": true,
                     "type": "string",
-                    "description": "Resource name"
+                    "description": "The name of the resource"
                 },
                 "type": {
                     "readOnly": true,
                     "type": "string",
-                    "description": "Resource type"
-                },
+                    "description": "The type of the resource."
+                }
+            },
+            "x-ms-azure-resource": true
+        },
+        "TrackedResource": {
+            "description": "The resource model definition for a ARM tracked top level resource",
+            "properties": {
                 "location": {
                     "type": "string",
-                    "description": "Resource location"
+                    "x-ms-mutability": [
+                        "read",
+                        "create"
+                    ],
+                    "description": "The Azure Region where the resource lives"
                 },
                 "tags": {
                     "type": "object",
                     "additionalProperties": {
                         "type": "string"
                     },
-                    "description": "Resource tags"
+                    "x-ms-mutability": [
+                        "read",
+                        "create",
+                        "update"
+                    ],
+                    "description": "Resource tags."
                 }
             },
-            "required": [
-                "location"
-            ],
-            "description": "The resource definition.",
-            "x-ms-azure-resource": true
+            "allOf": [
+                {
+                    "$ref": "#/definitions/Resource"
+                }
+            ]
         },
-        "SubResource": {
-            "properties": {
-                "id": {
-                    "type": "string",
-                    "description": "Resource Id"
+        "ProxyResource": {
+            "description": "The resource model definition for a ARM proxy resource. It will have everything other than required location and tags",
+            "allOf": [
+                {
+                    "$ref": "#/definitions/Resource"
                 }
-            },
-            "description": "The sub resource definition.",
-            "x-ms-azure-resource": true
+            ]
         },
         "Operation": {
-            "description": "HDInsight REST API operation",
+            "description": "The HDInsight REST API operation.",
             "type": "object",
             "properties": {
                 "name": {
-                    "description": "Operation name: {provider}/{resource}/{operation}",
+                    "description": "The operation name: {provider}/{resource}/{operation}",
                     "type": "string"
                 },
                 "display": {
                     "description": "The object that represents the operation.",
                     "properties": {
                         "provider": {
-                            "description": "Service provider: Microsoft.HDInsight",
+                            "description": "The service provider: Microsoft.HDInsight",
                             "type": "string"
                         },
                         "resource": {
-                            "description": "Resource on which the operation is performed: Profile, endpoint, etc.",
+                            "description": "The resource on which the operation is performed: Cluster, Capabilities, etc.",
                             "type": "string"
                         },
                         "operation": {
-                            "description": "Operation type: Read, write, delete, etc.",
+                            "description": "The operation type: read, write, delete, etc.",
                             "type": "string"
                         }
                     }
@@ -1097,11 +1102,11 @@
                     "items": {
                         "$ref": "#/definitions/Operation"
                     },
-                    "description": "List of HDInsight operations supported by the HDInsight resource provider."
+                    "description": "The list of HDInsight operations supported by the HDInsight resource provider."
                 },
                 "nextLink": {
                     "type": "string",
-                    "description": "URL to get the next set of operation list results if there are any."
+                    "description": "The URL to get the next set of operation list results if there are any."
                 }
             }
         }
@@ -1112,14 +1117,14 @@
             "in": "path",
             "required": true,
             "type": "string",
-            "description": "Gets subscription credentials which uniquely identify Microsoft Azure subscription. The subscription ID forms part of the URI for every service call."
+            "description": "The subscription credentials which uniquely identify Microsoft Azure subscription. The subscription ID forms part of the URI for every service call."
         },
         "ApiVersionParameter": {
             "name": "api-version",
             "in": "query",
             "required": true,
             "type": "string",
-            "description": "Client Api Version."
+            "description": "The HDInsight client API Version."
         }
     }
 }

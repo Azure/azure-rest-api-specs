@@ -37,6 +37,34 @@
     }
   },
   "paths": {
+    "/providers/Microsoft.CustomerInsights/operations": {
+      "get": {
+        "tags": [
+          "Operations"
+        ],
+        "operationId": "Operations_List",
+        "x-ms-examples": {
+          "DCIOperations_List": { "$ref": "./examples/DCIOperations_List.json" }
+        },
+        "description": "Lists all of the available Customer Insights REST API operations.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK. The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/OperationListResult"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.CustomerInsights/hubs/{hubName}": {
       "put": {
         "tags": [
@@ -6422,6 +6450,55 @@
         }
       },
       "description": "The response of list predictions operation."
+    },
+    "OperationListResult": {
+      "description": "Result of the request to list Customer Insights operations. It contains a list of operations and a URL link to get the next set of results.",
+      "properties": {
+        "value": {
+          "description": "List of Customer Insights operations supported by the Microsoft.CustomerInsights resource provider.",
+          "type": "array",
+          "readOnly": true,
+          "items": {
+            "$ref": "#/definitions/Operation"
+          }
+        },
+        "nextLink": {
+          "readOnly": true,
+          "type": "string",
+          "description": "URL to get the next set of operation list results if there are any."
+        }
+      }
+    },
+    "Operation": {
+      "description": "A Customer Insights REST API operation",
+      "type": "object",
+      "properties": {
+        "name": {
+          "readOnly": true,
+          "type": "string",
+          "description": "Operation name: {provider}/{resource}/{operation}"
+        },
+        "display": {
+          "description": "The object that represents the operation.",
+          "properties": {
+            "provider": {
+              "readOnly": true,
+              "type": "string",
+              "description": "Service provider: Microsoft.CustomerInsights"
+            },
+            "resource": {
+              "readOnly": true,
+              "type": "string",
+              "description": "Resource on which the operation is performed: Invoice, etc."
+            },
+            "operation": {
+              "readOnly": true,
+              "type": "string",
+              "description": "Operation type: Read, write, delete, etc."
+            }
+          }
+        }
+      }
     }
   },
   "parameters": {

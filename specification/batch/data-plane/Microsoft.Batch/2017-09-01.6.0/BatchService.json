@@ -283,7 +283,7 @@
             "in": "query",
             "required": false,
             "type": "string",
-            "description": "An OData $filter clause. If this is not specified the response includes all pools that existed in the account in the time range of the returned aggregation intervals.",
+            "description": "An OData $filter clause. For more information on constructing this filter, see https://docs.microsoft.com/en-us/rest/api/batchservice/odata-filters-in-batch#list-account-usage-metrics.",
             "x-ms-parameter-grouping": {
               "postfix": "Options"
             }
@@ -410,7 +410,7 @@
             "in": "query",
             "required": false,
             "type": "string",
-            "description": "An OData $filter clause.",
+            "description": "An OData $filter clause. For more information on constructing this filter, see https://docs.microsoft.com/en-us/rest/api/batchservice/odata-filters-in-batch#list-node-agent-skus.",
             "x-ms-parameter-grouping": {
               "postfix": "Options"
             }
@@ -844,7 +844,7 @@
             "in": "query",
             "required": false,
             "type": "string",
-            "description": "An OData $filter clause.",
+            "description": "An OData $filter clause. For more information on constructing this filter, see https://docs.microsoft.com/en-us/rest/api/batchservice/odata-filters-in-batch#list-certificates.",
             "x-ms-parameter-grouping": {
               "postfix": "Options"
             }
@@ -2240,7 +2240,7 @@
             "in": "query",
             "required": false,
             "type": "string",
-            "description": "An OData $filter clause.",
+            "description": "An OData $filter clause. For more information on constructing this filter, see https://docs.microsoft.com/en-us/rest/api/batchservice/odata-filters-in-batch#list-task-files.",
             "x-ms-parameter-grouping": {
               "postfix": "Options"
             }
@@ -2388,7 +2388,7 @@
             "in": "query",
             "required": false,
             "type": "string",
-            "description": "An OData $filter clause.",
+            "description": "An OData $filter clause. For more information on constructing this filter, see https://docs.microsoft.com/en-us/rest/api/batchservice/odata-filters-in-batch#list-compute-node-files.",
             "x-ms-parameter-grouping": {
               "postfix": "Options"
             }
@@ -3836,7 +3836,7 @@
             "in": "query",
             "required": false,
             "type": "string",
-            "description": "An OData $filter clause.",
+            "description": "An OData $filter clause. For more information on constructing this filter, see https://docs.microsoft.com/en-us/rest/api/batchservice/odata-filters-in-batch#list-job-schedules.",
             "x-ms-parameter-grouping": {
               "postfix": "Options"
             }
@@ -5172,7 +5172,7 @@
             "in": "query",
             "required": false,
             "type": "string",
-            "description": "An OData $filter clause.",
+            "description": "An OData $filter clause. For more information on constructing this filter, see https://docs.microsoft.com/en-us/rest/api/batchservice/odata-filters-in-batch#list-jobs.",
             "x-ms-parameter-grouping": {
               "postfix": "Options"
             }
@@ -5323,7 +5323,7 @@
             "in": "query",
             "required": false,
             "type": "string",
-            "description": "An OData $filter clause.",
+            "description": "An OData $filter clause. For more information on constructing this filter, see https://docs.microsoft.com/en-us/rest/api/batchservice/odata-filters-in-batch#list-jobs-in-a-job-schedule.",
             "x-ms-parameter-grouping": {
               "postfix": "Options"
             }
@@ -5478,7 +5478,7 @@
             "in": "query",
             "required": false,
             "type": "string",
-            "description": "An OData $filter clause. To get the status of the Job Preparation and Job Release tasks on a specific compute node, use \"nodeId eq '{desired-node-id}'\"",
+            "description": "An OData $filter clause. For more information on constructing this filter, see https://docs.microsoft.com/en-us/rest/api/batchservice/odata-filters-in-batch#list-job-preparation-and-release-status.",
             "x-ms-parameter-grouping": {
               "postfix": "Options"
             }
@@ -5823,7 +5823,7 @@
             "in": "query",
             "required": false,
             "type": "string",
-            "description": "An OData $filter clause.",
+            "description": "An OData $filter clause. For more information on constructing this filter, see https://docs.microsoft.com/en-us/rest/api/batchservice/odata-filters-in-batch#list-pools.",
             "x-ms-parameter-grouping": {
               "postfix": "Options"
             }
@@ -7817,7 +7817,7 @@
             "in": "query",
             "required": false,
             "type": "string",
-            "description": "An OData $filter clause.",
+            "description": "An OData $filter clause. For more information on constructing this filter, see https://docs.microsoft.com/en-us/rest/api/batchservice/odata-filters-in-batch#list-tasks.",
             "x-ms-parameter-grouping": {
               "postfix": "Options"
             }
@@ -10193,7 +10193,7 @@
             "in": "query",
             "required": false,
             "type": "string",
-            "description": "An OData $filter clause..",
+            "description": "An OData $filter clause. For more information on constructing this filter, see https://docs.microsoft.com/en-us/rest/api/batchservice/odata-filters-in-batch#list-nodes-in-a-pool.",
             "x-ms-parameter-grouping": {
               "postfix": "Options"
             }
@@ -13992,17 +13992,17 @@
         "totalTasksRun": {
           "type": "integer",
           "format": "int32",
-          "title": "The total number of job tasks completed on the compute node. This includes Job Preparation, Job Release and Job Manager tasks, but not the pool start task."
+          "title": "The total number of job tasks completed on the compute node. This includes Job Manager tasks and normal tasks, but not Job Preparation, Job Release or Start tasks."
         },
         "runningTasksCount": {
           "type": "integer",
           "format": "int32",
-          "title": "The total number of currently running job tasks on the compute node. This includes Job Preparation, Job Release, and Job Manager tasks, but not the pool start task."
+          "title": "The total number of currently running job tasks on the compute node. This includes Job Manager tasks and normal tasks, but not Job Preparation, Job Release or Start tasks."
         },
         "totalTasksSucceeded": {
           "type": "integer",
           "format": "int32",
-          "title": "The total number of job tasks which completed successfully (with exitCode 0) on the compute node. This includes Job Preparation, Job Release, and Job Manager tasks, but not the pool start task."
+          "title": "The total number of job tasks which completed successfully (with exitCode 0) on the compute node. This includes Job Manager tasks and normal tasks, but not Job Preparation, Job Release or Start tasks."
         },
         "recentTasks": {
           "type": "array",
