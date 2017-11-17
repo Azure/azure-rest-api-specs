@@ -55,6 +55,9 @@
               "$ref": "#/definitions/CloudError"
             }
           }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
         }
       }
     },
@@ -413,7 +416,7 @@
         },
         "nextLink": {
           "type": "string",
-          "description": "The continuation token."
+          "description": "The url to get the next page of results, if any."
         }
       },
       "description": "Values returned by the List operation."
@@ -495,6 +498,10 @@
             "$ref": "#/definitions/Operation"
           },
           "title": "The list of operations supported by the resource provider."
+        },
+        "nextLink": {
+          "type": "string",
+          "description": "The url to get the next page of results, if any."
         }
       }
     }
