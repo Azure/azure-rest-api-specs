@@ -334,9 +334,11 @@
             }
           }
         },
-        "produces": [
-          "application/json"
-        ]
+        "x-ms-examples": {
+          "Delete an existing person example": {
+            "$ref": "./examples/DeletePerson.json"
+          }
+        }
       },
       "get": {
         "description": "Retrieve a person's information, including registered persisted faces, name and userData.",
@@ -422,6 +424,11 @@
               "$ref": "#/definitions/APIError"
             }
           }
+        },
+        "x-ms-examples": {
+          "Update person example": {
+            "$ref": "./examples/UpdatePerson.json"
+          }
         }
       }
     },
@@ -461,6 +468,11 @@
             "schema": {
               "$ref": "#/definitions/APIError"
             }
+          }
+        },
+        "x-ms-examples": {
+          "Delete face from person example": {
+            "$ref": "./examples/DeletePersonFace.json"
           }
         }
       },
@@ -562,6 +574,11 @@
               "$ref": "#/definitions/APIError"
             }
           }
+        },
+        "x-ms-examples": {
+          "Update person face example": {
+            "$ref": "./examples/UpdatePersonFace.json"
+          }
         }
       }
     },
@@ -603,6 +620,11 @@
               "$ref": "#/definitions/APIError"
             }
           }
+        },
+        "x-ms-examples": {
+          "Create new person group example": {
+            "$ref": "./examples/CreateNewPersonGroup.json"
+          }
         }
       },
       "delete": {
@@ -628,9 +650,11 @@
             }
           }
         },
-        "produces": [
-          "application/json"
-        ]
+        "x-ms-examples": {
+          "Delete a person group example": {
+            "$ref": "./examples/DeletePersonGroup.json"
+          }
+        }
       },
       "get": {
         "description": "Retrieve the information of a person group, including its name and userData.",
@@ -660,7 +684,12 @@
         },
         "produces": [
           "application/json"
-        ]
+        ],
+        "x-ms-examples": {
+          "Get person group example": {
+            "$ref": "./examples/GetPersonGroup.json"
+          }
+        }
       },
       "patch": {
         "description": "Update an existing person group's display name and userData. The properties which does not appear in request body will not be updated.",
@@ -698,9 +727,11 @@
             }
           }
         },
-        "produces": [
-          "application/json"
-        ]
+        "x-ms-examples": {
+          "Update person group example": {
+            "$ref": "./examples/UpdatePersonGroup.json"
+          }
+        }
       }
     },
     "/persongroups/{personGroupId}/training": {
@@ -732,7 +763,12 @@
         },
         "produces": [
           "application/json"
-        ]
+        ],
+        "x-ms-examples": {
+          "Get training status example": {
+            "$ref": "./examples/GetTrainingStatus.json"
+          }
+        }
       }
     },
     "/persongroups": {
@@ -2332,18 +2368,24 @@
         },
         "createdDateTime": {
           "type": "string",
-          "format": "date-time",
+          "format": "date-time-rfc1123",
           "description": "A combined UTC date and time string that describes person group created time.",
           "x-ms-client-name": "created"
         },
         "lastActionDateTime": {
           "type": "string",
-          "format": "date-time",
+          "format": "date-time-rfc1123",
+          "x-nullable": "true",
+          "nullable": true,
+          "default": null,
           "description": "Person group last modify time in the UTC, could be null value when the person group is not successfully trained.",
           "x-ms-client-name": "lastAction"
         },
         "message": {
           "type": "string",
+          "x-nullable": true,
+          "nullable": true,
+          "default": null,
           "description": "Show failure message when training failed (omitted when training succeed)."
         }
       }
