@@ -278,7 +278,43 @@
     "SpellingFlaggedToken": {
       "x-ms-discriminator-value": "Spelling/FlaggedToken",
       "type": "object",
-      "properties": {}
+      "required": [
+        "offset",
+        "token",
+        "type"
+      ],
+      "properties": {
+        "offset": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "token": {
+          "type": "string"
+        },
+        "type": {
+          "type": "string",
+          "default": "UnknownToken",
+          "enum": [
+            "UnknownToken",
+            "RepeatedToken"
+          ],
+          "x-ms-enum": {
+            "name": "ErrorType",
+            "modelAsString": true
+          }
+        },
+        "suggestions": {
+          "readOnly": true,
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/SpellingTokenSuggestion"
+          }
+        },
+        "pingUrlSuffix": {
+          "readOnly": true,
+          "type": "string"
+        }
+      }
     },
     "Response": {
       "description": "Defines a response. All schemas that could be returned at the root of a response should inherit from this",
@@ -288,12 +324,7 @@
         }
       ],
       "type": "object",
-      "properties": {
-        "adaptiveCard": {
-          "readOnly": true,
-          "type": "string"
-        }
-      }
+      "properties": {}
     },
     "SpellingTokenSuggestion": {
       "x-ms-discriminator-value": "Spelling/TokenSuggestion",
