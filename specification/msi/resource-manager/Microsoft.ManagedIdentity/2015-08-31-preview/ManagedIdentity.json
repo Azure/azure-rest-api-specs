@@ -163,7 +163,7 @@
             "in": "body",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/IdentityCreateOrUpdateParameters"
+              "$ref": "#/definitions/Identity"
             },
             "description": "Parameters to create or update the identity"
           }
@@ -215,7 +215,7 @@
             "in": "body",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/IdentityCreateOrUpdateParameters"
+              "$ref": "#/definitions/Identity"
             },
             "description": "Parameters to update the identity"
           }
@@ -315,22 +315,6 @@
     }
   },
   "definitions": {
-    "IdentityCreateOrUpdateParameters": {
-      "properties": {
-        "location": {
-          "type": "string",
-          "description": "The supported Azure region where the associated Resource Group exists."
-        },
-        "tags": {
-          "type": "object",
-          "additionalProperties": {
-            "type": "string"
-          },
-          "description": "Resource tags"
-        }
-      },
-      "description": "Parameters for creating or updating identity."
-    },
     "Identity": {
       "properties": {
         "id": {
@@ -345,7 +329,7 @@
         },
         "location": {
           "type": "string",
-          "description": "The Azure region where the identity was created."
+          "description": "The Azure region where the identity lives."
         },
         "tags": {
           "type": "object",
