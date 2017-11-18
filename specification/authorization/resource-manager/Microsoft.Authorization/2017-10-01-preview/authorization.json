@@ -106,7 +106,12 @@
         "x-ms-pageable": {
           "nextLinkName": "nextLink"
         },
-        "x-ms-odata": "#/definitions/RoleAssignmentFilter"
+        "x-ms-odata": "#/definitions/RoleAssignmentFilter",
+        "x-ms-examples": {
+          "GetConfigurations": {
+            "$ref": "./examples/GetRoleAssignmentsForResource.json"
+          }
+        }
       }
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Authorization/roleAssignments": {
@@ -149,7 +154,12 @@
         "x-ms-pageable": {
           "nextLinkName": "nextLink"
         },
-        "x-ms-odata": "#/definitions/RoleAssignmentFilter"
+        "x-ms-odata": "#/definitions/RoleAssignmentFilter",
+        "x-ms-examples": {
+          "GetConfigurations": {
+            "$ref": "./examples/GetRoleAssignmentsForResourceGroup.json"
+          }
+        }
       }
     },
     "/{scope}/providers/Microsoft.Authorization/roleAssignments/{roleAssignmentName}": {
@@ -185,6 +195,11 @@
             "schema": {
               "$ref": "#/definitions/RoleAssignment"
             }
+          }
+        },
+        "x-ms-examples": {
+          "GetConfigurations": {
+            "$ref": "./examples/DeleteRoleAssignmentByName.json"
           }
         }
       },
@@ -230,6 +245,11 @@
               "$ref": "#/definitions/RoleAssignment"
             }
           }
+        },
+        "x-ms-examples": {
+          "GetConfigurations": {
+            "$ref": "./examples/PutRoleAssignment.json"
+          }
         }
       },
       "get": {
@@ -265,6 +285,11 @@
               "$ref": "#/definitions/RoleAssignment"
             }
           }
+        },
+        "x-ms-examples": {
+          "GetConfigurations": {
+            "$ref": "./examples/GetRoleAssignmentByName.json"
+          }
         }
       }
     },
@@ -294,6 +319,11 @@
             "schema": {
               "$ref": "#/definitions/RoleAssignment"
             }
+          }
+        },
+        "x-ms-examples": {
+          "GetConfigurations": {
+            "$ref": "./examples/DeleteRoleAssignmentById.json"
           }
         }
       },
@@ -332,6 +362,11 @@
               "$ref": "#/definitions/RoleAssignment"
             }
           }
+        },
+        "x-ms-examples": {
+          "GetConfigurations": {
+            "$ref": "./examples/PutRoleAssignmentById.json"
+          }
         }
       },
       "get": {
@@ -359,6 +394,11 @@
             "schema": {
               "$ref": "#/definitions/RoleAssignment"
             }
+          }
+        },
+        "x-ms-examples": {
+          "GetConfigurations": {
+            "$ref": "./examples/GetRoleAssignmentById.json"
           }
         }
       }
@@ -396,7 +436,12 @@
         "x-ms-pageable": {
           "nextLinkName": "nextLink"
         },
-        "x-ms-odata": "#/definitions/RoleAssignmentFilter"
+        "x-ms-odata": "#/definitions/RoleAssignmentFilter",
+        "x-ms-examples": {
+          "GetConfigurations": {
+            "$ref": "./examples/GetAllRoleAssignments.json"
+          }
+        }
       }
     },
     "/{scope}/providers/Microsoft.Authorization/roleAssignments": {
@@ -437,7 +482,12 @@
         "x-ms-pageable": {
           "nextLinkName": "nextLink"
         },
-        "x-ms-odata": "#/definitions/RoleAssignmentFilter"
+        "x-ms-odata": "#/definitions/RoleAssignmentFilter",
+        "x-ms-examples": {
+          "GetConfigurations": {
+            "$ref": "./examples/GetRoleAssignmentByScope.json"
+          }
+        }
       }
     }
   },
