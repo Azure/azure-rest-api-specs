@@ -26,7 +26,7 @@ These are the global settings for the Authorization API.
 
 ``` yaml
 openapi-type: arm
-tag: package-2015-07
+tag: package-2017-10-01-preview
 ```
 
 
@@ -37,9 +37,17 @@ These settings apply only when `--tag=package-2015-07` is specified on the comma
 ``` yaml $(tag) == 'package-2015-07'
 input-file:
 - Microsoft.Authorization/2015-07-01/authorization.json
-- Microsoft.Authorization/2017-10-01-preview/authorization.json
 ```
 
+### Tag: package-2017-10-01-preview
+
+These settings apply only when `--tag=package-2017-10-01-preview` is specified on the command line.
+
+``` yaml $(tag) == 'package-2017-10-01-preview'
+input-file:
+- Microsoft.Authorization/2017-10-01-preview/authorization.json
+- Microsoft.Authorization/2017-10-01-preview/authorization-RACalls.json
+```
 
 
 ---
