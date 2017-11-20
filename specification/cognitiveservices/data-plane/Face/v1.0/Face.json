@@ -247,13 +247,18 @@
         },
         "x-ms-examples": {
           "Create new person example": {
-            "$ref": "./examples/CreateNewPerson.json"
+            "$ref": "./examples//CreateNewPerson.json"
           }
         }
       },
       "get": {
         "description": "List all persons in a person group, and retrieve person information (including personId, name, userData and persistedFaceIds of registered faces of the person).",
         "operationId": "Person_List",
+        "x-ms-examples": {
+          "List persons in person group": {
+            "$ref": "./examples/ListPersonGroupPersons.json"
+          }
+        },
         "parameters": [
           {
             "name": "personGroupId",
@@ -294,11 +299,6 @@
             "schema": {
               "$ref": "#/definitions/APIError"
             }
-          }
-        },
-        "x-ms-examples": {
-          "List persons in person group": {
-            "$ref": "./examples/ListPersonGroupPersons.json"
           }
         }
       }
@@ -779,6 +779,7 @@
           {
             "name": "start",
             "in": "query",
+            "required": false,
             "description": "List person groups from the least personGroupId greater than the \"start\".",
             "type": "string",
             "maxLength": 64
@@ -786,12 +787,16 @@
           {
             "name": "top",
             "in": "query",
+            "required": false,
             "description": "The number of person groups to list.",
             "type": "integer",
             "minimum": 1,
             "maximum": 1000,
             "default": 1000
           }
+        ],
+        "produces": [
+          "application/json"
         ],
         "responses": {
           "200": {
@@ -807,9 +812,11 @@
             }
           }
         },
-        "produces": [
-          "application/json"
-        ]
+        "x-ms-examples": {
+          "Get person groups example": {
+            "$ref": "./examples/GetPersonGroups.json"
+          }
+        }
       }
     },
     "/persongroups/{personGroupId}/train": {
@@ -825,6 +832,9 @@
             "type": "string"
           }
         ],
+        "produces": [
+          "application/json"
+        ],
         "responses": {
           "202": {
             "description": "The training task was queued successfully."
@@ -836,9 +846,11 @@
             }
           }
         },
-        "produces": [
-          "application/json"
-        ]
+        "x-ms-examples": {
+          "Queue person group training": {
+            "$ref": "./examples/QueueTraining.json"
+          }
+        }
       }
     },
     "/facelists/{faceListId}": {
@@ -869,6 +881,9 @@
         "consumes": [
           "application/json"
         ],
+        "produces": [
+          "application/json"
+        ],
         "responses": {
           "200": {
             "description": "A successful call returns an empty response body."
@@ -880,9 +895,11 @@
             }
           }
         },
-        "produces": [
-          "application/json"
-        ]
+        "x-ms-examples": {
+          "Create new face list example": {
+            "$ref": "./examples/CreateNewFaceList.json"
+          }
+        }
       },
       "get": {
         "description": "Retrieve a face list's information.",
@@ -898,6 +915,9 @@
             "pattern": "^[a-z0-9-_]+$"
           }
         ],
+        "produces": [
+          "application/json"
+        ],
         "responses": {
           "200": {
             "description": "A successful call returns the face list's information.",
@@ -912,9 +932,11 @@
             }
           }
         },
-        "produces": [
-          "application/json"
-        ]
+        "x-ms-examples":{
+          "Get Face list example":{
+            "$ref":"./examples/GetFaceList.json"
+          }
+        }
       },
       "patch": {
         "description": "Update information of a face list. ",
