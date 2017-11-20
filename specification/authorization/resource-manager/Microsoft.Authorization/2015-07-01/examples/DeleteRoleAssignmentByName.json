@@ -1,28 +1,25 @@
 {
   "parameters": {
-    "resourceUri": "resourceUri",
-    "recommendationId": "recommendationId",
-    "name": "suppressionName1",
-    "suppressionContract": {
-      "id": "/resourceUri/providers/Microsoft.Advisor/recommendations/recommendationId/suppressions/suppressionName1",
-      "name": "suppressionName1",
-      "type": "Microsoft.Advisor/suppressions",
-      "properties": {
-        "ttl": "07:00:00:00"
-      }
-    },
-    "api-version": "2017-04-19"
+    "scope": "scope",
+    "roleAssignmentName": "roleAssignmentName",
+    "api-version": "2015-07-01"
   },
   "responses": {
     "200": {
       "body": {
-        "id": "/resourceUri/providers/Microsoft.Advisor/recommendations/recommendationId/suppressions/suppressionName1",
-        "name": "suppressionName1",
-        "type": "Microsoft.Advisor/suppressions",
         "properties": {
-          "suppressionId": "suppresionId",
-          "ttl": "07:00:00:00"
-        }
+          "roleDefinitionId": "/subscriptions/subId/providers/Microsoft.Authorization/roleDefinitions/roledefinitionId",
+          "principalId": "Pid",
+          "principalType": "principal type",
+          "scope": "/subscriptions/subId/resourcegroups/rgname",
+          "createdOn": "created datetime",
+          "updatedOn": "updated datetime",
+          "createdBy": "OID of the creater",
+          "updatedBy": "OID of the updater"
+        },
+        "id": "/subscriptions/subId/resourcegroups/rgname/providers/Microsoft.Authorization/roleAssignments/roleassignmentId",
+        "type": "Microsoft.Authorization/roleAssignments",
+        "name": "roleassignmentId"
       }
     }
   }

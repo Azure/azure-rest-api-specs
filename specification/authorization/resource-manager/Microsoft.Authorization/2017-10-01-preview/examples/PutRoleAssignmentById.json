@@ -1,28 +1,33 @@
 {
   "parameters": {
-    "resourceUri": "resourceUri",
-    "recommendationId": "recommendationId",
-    "name": "suppressionName1",
-    "suppressionContract": {
-      "id": "/resourceUri/providers/Microsoft.Advisor/recommendations/recommendationId/suppressions/suppressionName1",
-      "name": "suppressionName1",
-      "type": "Microsoft.Advisor/suppressions",
+    "scope": "scope",
+    "roleAssignmentId": "roleAssignmentId",
+    "parameters":{
       "properties": {
-        "ttl": "07:00:00:00"
+        "roleDefinitionId": "/subscriptions/4004a9fd-d58e-48dc-aeb2-4a4aec58606f/providers/Microsoft.Authorization/roleDefinitions/de139f84-1756-47ae-9be6-808fbbe84772",
+        "principalId": "d93a38bc-d029-4160-bfb0-fbda779ac214",
+        "canDelegate": "delegationflag value"
       }
     },
-    "api-version": "2017-04-19"
+    "api-version": "2015-07-01"
   },
   "responses": {
-    "200": {
+    "201": {
       "body": {
-        "id": "/resourceUri/providers/Microsoft.Advisor/recommendations/recommendationId/suppressions/suppressionName1",
-        "name": "suppressionName1",
-        "type": "Microsoft.Advisor/suppressions",
         "properties": {
-          "suppressionId": "suppresionId",
-          "ttl": "07:00:00:00"
-        }
+          "roleDefinitionId": "/subscriptions/subId/providers/Microsoft.Authorization/roleDefinitions/roledefinitionId",
+          "principalId": "Pid",
+          "principalType": "principal type",
+          "scope": "/subscriptions/subId/resourcegroups/rgname",
+          "createdOn": "created datetime",
+          "updatedOn": "updated datetime",
+          "createdBy": "OID of the creater",
+          "updatedBy": "OID of the updater",
+          "canDelegate": "delegationflag value"
+        },
+        "id": "/subscriptions/subId/resourcegroups/rgname/providers/Microsoft.Authorization/roleAssignments/roleassignmentId",
+        "type": "Microsoft.Authorization/roleAssignments",
+        "name": "roleassignmentId"
       }
     }
   }

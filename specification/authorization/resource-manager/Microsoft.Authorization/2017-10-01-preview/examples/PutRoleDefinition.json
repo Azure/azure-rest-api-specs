@@ -1,28 +1,58 @@
 {
   "parameters": {
-    "resourceUri": "resourceUri",
-    "recommendationId": "recommendationId",
-    "name": "suppressionName1",
-    "suppressionContract": {
-      "id": "/resourceUri/providers/Microsoft.Advisor/recommendations/recommendationId/suppressions/suppressionName1",
-      "name": "suppressionName1",
-      "type": "Microsoft.Advisor/suppressions",
-      "properties": {
-        "ttl": "07:00:00:00"
-      }
-    },
-    "api-version": "2017-04-19"
+    "scope": "scope",
+    "roleDefinitionId": "roleDefinitionId",
+    "roledefinition": {
+        "id": "roleDefinitionId",
+        "name": "Role name",
+        "type": "roletype",
+        "properties": {
+          "roleName": "Role name",
+          "description": "Role description",
+          "type": "roletype",
+          "permissions":{
+            "actions": [
+              "action"
+            ],
+            "notActions": [
+              
+            ]
+          },
+          "assignableScopes":[
+              "/subscriptions/subId",
+          ],
+        }
+      },
+    "api-version": "2015-07-01"
   },
   "responses": {
     "200": {
-      "body": {
-        "id": "/resourceUri/providers/Microsoft.Advisor/recommendations/recommendationId/suppressions/suppressionName1",
-        "name": "suppressionName1",
-        "type": "Microsoft.Advisor/suppressions",
+      "body":{
         "properties": {
-          "suppressionId": "suppresionId",
-          "ttl": "07:00:00:00"
-        }
+          "roleName": "Role name",
+          "type": "roletype",
+          "description": "Role description",
+          "assignableScopes": [
+            "/subscriptions/subId",
+          ],
+          "permissions": [
+            {
+              "actions": [
+                "action"
+              ],
+              "notActions": [
+                
+              ]
+            }
+          ],
+          "createdOn": "created datetime",
+          "updatedOn": "updated datetime",
+          "createdBy": "OID of the creater",
+          "updatedBy": "OID of the updater"
+        },
+        "id": "/subscriptions/subID/providers/Microsoft.Authorization/roleDefinitions/roleDefinitionId",
+        "type": "Microsoft.Authorization/roleDefinitions",
+        "name": "54d11eda-97f5-4f67-905e-ada5cc5e5589"
       }
     }
   }

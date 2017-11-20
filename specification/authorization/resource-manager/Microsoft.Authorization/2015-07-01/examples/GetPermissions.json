@@ -1,27 +1,17 @@
 {
   "parameters": {
-    "resourceUri": "resourceUri",
-    "recommendationId": "recommendationId",
-    "name": "suppressionName1",
-    "suppressionContract": {
-      "id": "/resourceUri/providers/Microsoft.Advisor/recommendations/recommendationId/suppressions/suppressionName1",
-      "name": "suppressionName1",
-      "type": "Microsoft.Advisor/suppressions",
-      "properties": {
-        "ttl": "07:00:00:00"
-      }
-    },
-    "api-version": "2017-04-19"
+    "resourceGroupName": "rgname",
+    "subscriptionId": "subID",
+    "api-version": "2015-07-01"
   },
   "responses": {
     "200": {
       "body": {
-        "id": "/resourceUri/providers/Microsoft.Advisor/recommendations/recommendationId/suppressions/suppressionName1",
-        "name": "suppressionName1",
-        "type": "Microsoft.Advisor/suppressions",
+        "id": "/subscriptions/subID/resourceGroups/rgname",
+        "name": "rgname",
+        "location": "location",
         "properties": {
-          "suppressionId": "suppresionId",
-          "ttl": "07:00:00:00"
+          "provisioningState": "Succeeded"
         }
       }
     }

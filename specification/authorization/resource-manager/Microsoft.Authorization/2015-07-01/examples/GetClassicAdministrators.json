@@ -1,28 +1,31 @@
 {
   "parameters": {
-    "resourceUri": "resourceUri",
-    "recommendationId": "recommendationId",
-    "name": "suppressionName1",
-    "suppressionContract": {
-      "id": "/resourceUri/providers/Microsoft.Advisor/recommendations/recommendationId/suppressions/suppressionName1",
-      "name": "suppressionName1",
-      "type": "Microsoft.Advisor/suppressions",
-      "properties": {
-        "ttl": "07:00:00:00"
-      }
-    },
-    "api-version": "2017-04-19"
+    "subscriptionId": "subId",
+    "api-version": "2015-07-01"
   },
   "responses": {
     "200": {
       "body": {
-        "id": "/resourceUri/providers/Microsoft.Advisor/recommendations/recommendationId/suppressions/suppressionName1",
-        "name": "suppressionName1",
-        "type": "Microsoft.Advisor/suppressions",
-        "properties": {
-          "suppressionId": "suppresionId",
-          "ttl": "07:00:00:00"
-        }
+        "value": [
+          {
+            "properties": {
+              "emailAddress": "test@test.com",
+              "role": "ServiceAdministrator;AccountAdministrator"
+            },
+            "id": "/subscriptions/subId/providers/Microsoft.Authorization/classicAdministrators/classicadminid",
+            "type": "Microsoft.Authorization/classicAdministrators",
+            "name": "classicadminid"
+          },
+          {
+            "properties": {
+              "emailAddress": "coadmin@test.com",
+              "role": "CoAdministrator"
+            },
+            "id": "/subscriptions/subId/providers/Microsoft.Authorization/classicAdministrators/classicadminid2",
+            "type": "Microsoft.Authorization/classicAdministrators",
+            "name": "classicadminid2"
+          }
+        ]
       }
     }
   }
