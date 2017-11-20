@@ -88,3 +88,12 @@ Please also specify `--go-sdk-folder=<path to the root directory of your azure-s
 ``` yaml $(tag) == 'package-2015-07' && $(go)
 output-folder: $(go-sdk-folder)/services/authorization/mgmt/2015-07-01/authorization
 ```
+
+### Tag: package-2017-10-01-preview and go
+
+These settings apply only when `--tag=package-2017-10-01-preview --go` is specified on he command line.
+Please also specify `--go-sdk-folder=<path to the root directory of your azure-sdk-for-go clone>`.
+
+``` yaml $(tag) == 'package-2017-10-01-preview' && $(go)
+output-folder: $(go-sdk-folder)/services/authorization/mgmt/2017-10-01-preview/authorization
+```
