@@ -8,6 +8,7 @@
   "definitions": {
     "Dataset": {
       "description": "The Azure Data Factory nested object which identifies data within different data stores, such as tables, files, folders, and documents.",
+      "type": "object",
       "discriminator": "type",
       "properties": {
         "type": {
@@ -30,6 +31,9 @@
           "$ref": "../datafactory.json#/definitions/ParameterDefinitionSpecification",
           "description": "Parameters for dataset."
         }
+      },
+      "additionalProperties": {
+        "type": "object"
       },
       "required": [
         "type",
@@ -67,6 +71,9 @@
           "type": "object",
           "description": "Deserializer. Type: string (or Expression with resultType string)."
         }
+      },
+      "additionalProperties": {
+        "type": "object"
       },
       "required": [
         "type"
@@ -198,6 +205,9 @@
           "type": "string",
           "description": "Type of dataset compression."
         }
+      },
+      "additionalProperties": {
+        "type": "object"
       },
       "required": [
         "type"
