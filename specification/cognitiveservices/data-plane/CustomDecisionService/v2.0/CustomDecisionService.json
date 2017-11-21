@@ -1,0 +1,358 @@
+﻿{
+  "x-generator": "NSwag v11.12.7.0 (NJsonSchema v9.10.6.0 (Newtonsoft.Json v9.0.0.0))",
+  "swagger": "2.0",
+  "info": {
+    "title": "",
+    "version": ""
+  },
+  "schemes": [],
+  "consumes": [
+    "application/json"
+  ],
+  "produces": [
+    "application/json"
+  ],
+  "paths": {
+    "/api/v2/{appId}/rank": {
+      "post": {
+        "tags": [
+          "RankingServerFeatures"
+        ],
+        "operationId": "Rank",
+        "parameters": [
+          {
+            "type": "string",
+            "name": "appId",
+            "in": "path",
+            "required": true,
+            "x-nullable": false,
+            "description": "The application id."
+          },
+          {
+            "name": "decisionRequests",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/DecisionRequestCollection"
+            },
+            "x-nullable": true,
+            "description": "A collection of one or more decision requests."
+          },
+          {
+            "type": "string",
+            "name": "eventId",
+            "in": "query",
+            "x-nullable": true,
+            "description": "Optionally pass an event id. Otherwise the service generates a unique one. The event id wil be used for (a) joining this request with its reward, as well as (b) seeding the pseudo-random generator when making a decision."
+          },
+          {
+            "type": "integer",
+            "name": "details",
+            "in": "query",
+            "x-nullable": true,
+            "description": "Optionally specifies the level of detail returned for each action. 0=none, 1=some, 2=all.",
+            "format": "int32",
+            "default": 0
+          },
+          {
+            "type": "integer",
+            "name": "limit",
+            "in": "query",
+            "x-nullable": true,
+            "description": "Optionally limits the number of actions supplied. Actions can originate from the request or can be referenced through actionSets. Valid values are in the range of 2 to 30.",
+            "format": "int32",
+            "default": 20
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "schema": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/DecisionResponse"
+              }
+            },
+            "x-nullable": true
+          }
+        }
+      }
+    },
+    "/api/v2/{appId}/reward/{eventId}": {
+      "get": {
+        "tags": [
+          "Reward"
+        ],
+        "summary": "Report a reward of 1 for the given application and event.",
+        "operationId": "Reward1",
+        "parameters": [
+          {
+            "type": "string",
+            "name": "appId",
+            "in": "path",
+            "required": true,
+            "x-nullable": false,
+            "description": "The application id."
+          },
+          {
+            "type": "string",
+            "name": "eventId",
+            "in": "path",
+            "required": true,
+            "x-nullable": false,
+            "description": "The event id this reward should be joined with."
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": ""
+          }
+        }
+      },
+      "post": {
+        "tags": [
+          "Reward"
+        ],
+        "summary": "Report reward for the given application and event.",
+        "operationId": "Reward",
+        "parameters": [
+          {
+            "type": "string",
+            "name": "appId",
+            "in": "path",
+            "required": true,
+            "x-nullable": false,
+            "description": "The application id."
+          },
+          {
+            "type": "string",
+            "name": "eventId",
+            "in": "path",
+            "required": true,
+            "x-nullable": false,
+            "description": "The event id this reward should bne joined with."
+          },
+          {
+            "name": "reward",
+            "in": "body",
+            "schema": {},
+            "x-nullable": true,
+            "description": "The reward should be a float, unless the application is configured to use a custom reward function. If a custom reward function is configured, the scheme of the reward is dependent on the function."
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": ""
+          }
+        }
+      }
+    }
+  },
+  "definitions": {
+    "DecisionRequestCollection": {
+      "type": "object",
+      "description": "A batch of decision requests. They have to target the same app for now.",
+      "additionalProperties": false,
+      "properties": {
+        "decisions": {
+          "type": "array",
+          "description": "A batch of decision requests. They have to target the same app for now.",
+          "items": {
+            "$ref": "#/definitions/DecisionRequest"
+          }
+        }
+      }
+    },
+    "DecisionRequest": {
+      "type": "object",
+      "description": "A Decision request",
+      "additionalProperties": false,
+      "properties": {
+        "site": {
+          "type": "string",
+          "description": "For future use"
+        },
+        "shared": {
+          "description": "The shared set of features (between actions). E.g. user demographics.",
+          "allOf": [
+            {
+              "$ref": "#/definitions/DecisionFeatures"
+            }
+          ]
+        },
+        "actions": {
+          "type": "array",
+          "description": "The set of actions the Custom Decision Service should pick from",
+          "items": {
+            "$ref": "#/definitions/DecisionFeatures"
+          }
+        },
+        "actionSets": {
+          "type": "array",
+          "description": "The set of server-side action sets that should be resolved to actions.",
+          "items": {
+            "$ref": "#/definitions/DecisionActionSet"
+          }
+        }
+      }
+    },
+    "DecisionFeatures": {
+      "type": "object",
+      "description": "Specifies a set of ML features, either directly ",
+      "additionalProperties": false,
+      "required": [
+        "lock"
+      ],
+      "properties": {
+        "ids": {
+          "type": "array",
+          "description": "References features from a server-side feature set.",
+          "items": {
+            "$ref": "#/definitions/DecisionReferenceId"
+          }
+        },
+        "features": {
+          "type": "array",
+          "description": "Vowpal Wabbit style features",
+          "items": {
+            "type": "string"
+          },
+          "OverrideItemType": "string"
+        },
+        "lock": {
+          "type": "boolean",
+          "description": "Set to true if this action should be excluded from ranking and just passed through to Rank-invoker."
+        },
+        "details": {
+          "type": "array",
+          "description": "Returned to the API caller (e.g. rendering information)",
+          "items": {
+            "type": "string"
+          },
+          "OverrideItemType": "string"
+        },
+        "privateDetails": {
+          "type": "array",
+          "description": "Details passed on to featurization end point",
+          "items": {
+            "type": "string"
+          },
+          "OverrideItemType": "string"
+        }
+      }
+    },
+    "DecisionReferenceId": {
+      "type": "object",
+      "description": "A Decision Service id used to reference actions and action sets.",
+      "additionalProperties": false,
+      "properties": {
+        "site": {
+          "type": "string",
+          "description": "For future use."
+        },
+        "id": {
+          "type": "string",
+          "description": "The id of the action or action set. If this id is a URL, the auto-featurization workflow will be triggered"
+        }
+      }
+    },
+    "DecisionActionSet": {
+      "type": "object",
+      "description": "Specifies an ActionSet reference.",
+      "additionalProperties": false,
+      "properties": {
+        "id": {
+          "description": "The id of the ActionSet.",
+          "allOf": [
+            {
+              "$ref": "#/definitions/DecisionReferenceId"
+            }
+          ]
+        },
+        "param": {
+          "type": "string",
+          "description": "Data passed on ActionSet endpoint"
+        }
+      }
+    },
+    "DecisionResponse": {
+      "type": "object",
+      "description": "A decision for a corresponding Decision Request.",
+      "additionalProperties": false,
+      "properties": {
+        "ranking": {
+          "type": "array",
+          "description": "The choosen ranking for the current request. Act according to it.",
+          "items": {
+            "$ref": "#/definitions/DecisionResponseAction"
+          }
+        },
+        "eventId": {
+          "type": "string",
+          "description": "The event id for this decision."
+        },
+        "appId": {
+          "type": "string",
+          "description": "The application id."
+        },
+        "rewardAction": {
+          "type": "string",
+          "description": "The action for which to report the reward. This might not be the first found in 'ranking' if lock=true for some actions."
+        },
+        "error": {
+          "type": "string",
+          "description": "Error message."
+        },
+        "actionSets": {
+          "type": "array",
+          "description": "Contains information on the referenced action sets (e.g. last refresh time)",
+          "items": {
+            "$ref": "#/definitions/DecisionResponseActionSet"
+          }
+        }
+      }
+    },
+    "DecisionResponseAction": {
+      "type": "object",
+      "description": "Action description",
+      "additionalProperties": false,
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "Id of the action"
+        },
+        "details": {
+          "type": "array",
+          "description": "Details of the action",
+          "items": {
+            "type": "string"
+          }
+        },
+        "lastRefresh": {
+          "type": "string",
+          "description": "Last refresh of the action",
+          "format": "date-time"
+        }
+      }
+    },
+    "DecisionResponseActionSet": {
+      "type": "object",
+      "description": "Status information on used action set.",
+      "additionalProperties": false,
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "Id of the action set."
+        },
+        "lastRefresh": {
+          "type": "string",
+          "description": "Last refresh time of the action set.",
+          "format": "date-time"
+        }
+      }
+    }
+  },
+  "parameters": {},
+  "responses": {},
+  "securityDefinitions": {}
+}
