@@ -3,29 +3,20 @@
     "scope": "scope",
     "roleAssignmentName": "roleAssignmentName",
     "subscriptionId": "subId",
-    "api-version": "2015-07-01"
+    "api-version": "2017-10-01-preview"
   },
   "responses": {
     "200": {
       "body": {
-        "value": [
-          {
-            "properties": {
-              "roleDefinitionId": "/subscriptions/subId/providers/Microsoft.Authorization/roleDefinitions/roledefinitionId",
-              "principalId": "Pid",
-              "principalType": "principal type",
-              "scope": "/subscriptions/subId/resourcegroups/rgname",
-              "createdOn": "created datetime",
-              "updatedOn": "updated datetime",
-              "createdBy": "OID of the creater",
-              "updatedBy": "OID of the updater",
-              "canDelegate": "delegationflag value"
-            },
-            "id": "/subscriptions/subId/resourcegroups/rgname/providers/Microsoft.Authorization/roleAssignments/roleassignmentId",
-            "type": "Microsoft.Authorization/roleAssignments",
-            "name": "raId"
-          }
-        ]
+        "properties": {
+          "roleDefinitionId": "/subscriptions/subId/providers/Microsoft.Authorization/roleDefinitions/roledefinitionId",
+          "principalId": "Pid",
+          "scope": "/subscriptions/subId/resourcegroups/rgname",
+          "canDelegate":false
+        },
+        "id": "/subscriptions/subId/resourcegroups/rgname/providers/Microsoft.Authorization/roleAssignments/roleassignmentId",
+        "type": "Microsoft.Authorization/roleAssignments",
+        "name": "raId"
       }
     }
   }

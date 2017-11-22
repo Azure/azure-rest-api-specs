@@ -2,32 +2,37 @@
   "parameters": {
     "scope": "scope",
     "roleDefinitionId": "roleDefinitionId",
-    "roledefinition": {
-        "id": "roleDefinitionId",
-        "name": "Role name",
+    "roleDefinition": {
+      
+    },
+    "body": {
+      "roleDefinition": {
+        "roleName": "Role name",
         "type": "roletype",
-        "properties": {
-          "roleName": "Role name",
-          "description": "Role description",
-          "type": "roletype",
-          "permissions":{
+        "description": "Role description",
+        "assignableScopes": [
+          "/subscriptions/subId"
+        ],
+        "permissions": [
+          {
             "actions": [
               "action"
             ],
             "notActions": [
               
             ]
-          },
-          "assignableScopes":[
-              "/subscriptions/subId"
-          ]
-        }
-      },
+          }
+        ],
+        "id": "/subscriptions/subID/providers/Microsoft.Authorization/roleDefinitions/roleDefinitionId",
+        "type": "Microsoft.Authorization/roleDefinitions",
+        "name": "roleDefinitionId"
+      }
+    },
     "api-version": "2015-07-01"
   },
   "responses": {
-    "200": {
-      "body":{
+    "201": {
+      "body": {
         "properties": {
           "roleName": "Role name",
           "type": "roletype",
@@ -44,15 +49,11 @@
                 
               ]
             }
-          ],
-          "createdOn": "created datetime",
-          "updatedOn": "updated datetime",
-          "createdBy": "OID of the creater",
-          "updatedBy": "OID of the updater"
+          ]
         },
         "id": "/subscriptions/subID/providers/Microsoft.Authorization/roleDefinitions/roleDefinitionId",
         "type": "Microsoft.Authorization/roleDefinitions",
-        "name": "54d11eda-97f5-4f67-905e-ada5cc5e5589"
+        "name": "roleDefinitionId"
       }
     }
   }
