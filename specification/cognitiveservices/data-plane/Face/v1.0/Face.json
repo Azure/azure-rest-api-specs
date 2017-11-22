@@ -932,9 +932,9 @@
             }
           }
         },
-        "x-ms-examples":{
-          "Get Face list example":{
-            "$ref":"./examples/GetFaceList.json"
+        "x-ms-examples": {
+          "Get Face list example": {
+            "$ref": "./examples/GetFaceList.json"
           }
         }
       },
@@ -2217,6 +2217,13 @@
           "type": "string",
           "description": "User-provided data attached to this face list.",
           "maxLength": 16384
+        },
+        "persistedFaces": {
+          "type": "array",
+          "description": "Persisted faces within the face list.",
+          "items": {
+            "$ref": "#/definitions/PersonFaceResult"
+          }
         }
       }
     },
