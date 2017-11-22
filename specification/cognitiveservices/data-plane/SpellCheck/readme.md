@@ -1,8 +1,8 @@
-# Cognitive Services Entity Search SDK
+# Cognitive Services Spell Check SDK
 
 > see https://aka.ms/autorest
 
-Configuration for generating Entity Search SDK.
+Configuration for generating Spell Check SDK.
 
 The current release is `release_1_0`.
 
@@ -18,14 +18,15 @@ openapi-type: data-plane
 These settings apply only when `--tag=release_1_0` is specified on the command line.
 
 ``` yaml $(tag) == 'release_1_0'
-input-file: v1.0/EntitySearch.json
+input-file: v1.0/SpellCheck.json
 ```
 
 ## CSharp Settings
 These settings apply only when `--csharp` is specified on the command line.
 ``` yaml $(csharp) 
 csharp: 
-  namespace: Microsoft.Azure.CognitiveServices.Search.EntitySearch
-  output-folder: $(csharp-sdks-folder)/CognitiveServices/dataPlane/Search/BingEntitySearch/Generated/EntitySearch
+  namespace: Microsoft.Azure.CognitiveServices.SpellCheck
+  output-folder: $(csharp-sdks-folder)/CognitiveServices/dataPlane/SpellCheck/Generated/
+  sync-methods: none
 ```
 

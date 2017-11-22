@@ -2,8 +2,8 @@
   "swagger": "2.0",
   "info": {
     "version": "2017-11-01-preview",
-    "title": "SubscriptionDefinitionClient",
-    "description": "Subscription definition client provides an interface to create, modify and retrieve azure subscriptions programmatically."
+    "title": "SubscriptionDefinitionsClient",
+    "description": "Subscription definitions client provides an interface to create, modify and retrieve azure subscriptions programmatically."
   },
   "host": "management.azure.com",
   "schemes": [
@@ -19,7 +19,7 @@
     "/providers/Microsoft.Subscription/operations": {
       "get": {
         "tags": [
-          "SubscriptionDefinition"
+          "SubscriptionDefinitions"
         ],
         "description": "Lists all of the available Microsoft.Subscription API operations.",
         "operationId": "SubscriptionDefinitionsOperationMetadata_list",
@@ -52,26 +52,23 @@
         }
       }
     },
-    "/{scope}/providers/Microsoft.Subscription/subscriptionDefinitions/{subscriptionDefinitionName}": {
+    "/providers/Microsoft.Subscription/subscriptionDefinitions/{subscriptionDefinitionName}": {
       "put": {
         "tags": [
-          "SubscriptionDefinition"
+          "SubscriptionDefinitions"
         ],
-        "description": "Create an Azure subscription definition. Note, action is only available via /providers/Microsoft.Management/managementGroups/{groupName}.",
+        "description": "Create an Azure subscription definition.",
         "operationId": "SubscriptionDefinitions_Create",
         "x-ms-examples": {
-          "createManagementGroupsSubscriptionDefinition": {
-            "$ref": "./examples/createManagementGroupsSubscriptionDefinition.json"
+          "createSubscriptionDefinition": {
+            "$ref": "./examples/createSubscriptionDefinition.json"
           }
         },
         "parameters": [
           {
-            "$ref": "#/parameters/scopeParameter"
-          },
-          {
             "name": "subscriptionDefinitionName",
             "in": "path",
-            "description": "The name of the Azure subscription definition or 'default' for the subscriptions/{subscriptionId} scope.",
+            "description": "The name of the Azure subscription definition.",
             "required": true,
             "type": "string"
           },
@@ -119,26 +116,20 @@
       },
       "get": {
         "tags": [
-          "SubscriptionDefinition"
+          "SubscriptionDefinitions"
         ],
-        "description": "Get an Azure subscription definition within a management group.",
+        "description": "Get an Azure subscription definition.",
         "operationId": "SubscriptionDefinitions_Get",
         "x-ms-examples": {
-          "getManagementGroupsSubscriptionDefinition": {
-            "$ref": "./examples/getManagementGroupsSubscriptionDefinition.json"
-          },
-          "getSubscriptionsSubscriptionDefinition": {
-            "$ref": "./examples/getSubscriptionsSubscriptionDefinition.json"
+          "getSubscriptionDefinition": {
+            "$ref": "./examples/getSubscriptionDefinition.json"
           }
         },
         "parameters": [
           {
-            "$ref": "#/parameters/scopeParameter"
-          },
-          {
             "name": "subscriptionDefinitionName",
             "in": "path",
-            "description": "The name of the Azure subscription definition or 'default' for the subscriptions/{subscriptionId} scope.",
+            "description": "The name of the Azure subscription definition.",
             "required": true,
             "type": "string"
           },
@@ -162,25 +153,19 @@
         }
       }
     },
-    "/{scope}/providers/Microsoft.Subscription/subscriptionDefinitions": {
+    "/providers/Microsoft.Subscription/subscriptionDefinitions": {
       "get": {
         "tags": [
-          "SubscriptionDefinition"
+          "SubscriptionDefinitions"
         ],
         "description": "List an Azure subscription definition by subscriptionId.",
         "operationId": "SubscriptionDefinitions_List",
         "x-ms-examples": {
-          "ListViaSubscriptionsSubscriptionDefinition": {
-            "$ref": "./examples/listSubscriptionDefinition.json"
-          },
-          "ListViaManagementGroupsSubscriptionDefinition": {
-            "$ref": "./examples/listSubscriptionDefinitionsViaManagementGroups.json"
+          "ListSubscriptionDefinition": {
+            "$ref": "./examples/listSubscriptionDefinitions.json"
           }
         },
         "parameters": [
-          {
-            "$ref": "#/parameters/scopeParameter"
-          },
           {
             "$ref": "#/parameters/apiVersionParameter"
           }
@@ -198,25 +183,25 @@
               "$ref": "#/definitions/ErrorResponse"
             }
           }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
         }
       }
     },
-    "/{scope}/providers/Microsoft.Subscription/subscriptionOperations/{operationId}": {
+    "/providers/Microsoft.Subscription/subscriptionOperations/{operationId}": {
       "get": {
         "tags": [
-          "SubscriptionOperation"
+          "SubscriptionDefinitions"
         ],
         "description": "Retrieves the status of the subscription definition PUT operation. The URI of this API is returned in the Location field of the response header.",
         "operationId": "SubscriptionDefinitions_GetOperationStatus",
         "x-ms-examples": {
-          "getManagementGroupsSubscriptionDefinitionOperation": {
-            "$ref": "./examples/getManagementGroupsSubscriptionDefinitionOperation.json"
+          "getSubscriptionDefinitionOperation": {
+            "$ref": "./examples/getSubscriptionDefinitionOperation.json"
           }
         },
         "parameters": [
-          {
-            "$ref": "#/parameters/scopeParameter"
-          },
           {
             "$ref": "#/parameters/apiVersionParameter"
           },
@@ -256,7 +241,7 @@
   },
   "definitions": {
     "SubscriptionDefinition": {
-      "description": "The subscription definition used to create and modify the subscription.",
+      "description": "The subscription definition used to create the subscription.",
       "x-ms-azure-resource": true,
       "properties": {
         "id": {
@@ -289,11 +274,6 @@
           "readOnly": true,
           "type": "string"
         },
-        "subscriptionTenantId": {
-          "description": "The AAD Tenant ID associated with the subscription.",
-          "readOnly": true,
-          "type": "string"
-        },
         "subscriptionDisplayName": {
           "description": "The display name of the subscription.",
           "type": "string"
@@ -305,20 +285,6 @@
             "create",
             "read"
           ]
-        },
-        "userCancellationRequested": {
-          "type": "boolean",
-          "description": "True when User wants the subscription disabled due to userCancellation."
-        },
-        "groupId": {
-          "description": "Link to the management group that contains subscription definition.",
-          "readOnly": true,
-          "type": "string"
-        },
-        "groupTenantId": {
-          "description": "The AAD Tenant ID associated with the management group.",
-          "readOnly": true,
-          "type": "string"
         },
         "etag": {
           "description": "The etag the subscription definition.",
@@ -334,6 +300,10 @@
             "$ref": "#/definitions/SubscriptionDefinition"
           },
           "description": "An array of subscriptionDefinitions"
+        },
+        "nextLink": {
+          "type": "string",
+          "description": "URL to get the next set of operation list results if there are any."
         }
       },
       "description": "Subscription Definition List operation response."
@@ -397,13 +367,6 @@
     }
   },
   "parameters": {
-    "scopeParameter": {
-      "name": "scope",
-      "in": "path",
-      "description": "The scope of the Microsoft.Subscription url. The scope can be 'subscriptions/{subscriptionId}' or 'providers/Microsoft.Management/managementGroups/{groupName}' however put will only allow 'providers/Microsoft.Management/managementGroups/{groupName}'.",
-      "required": true,
-      "type": "string"
-    },
     "apiVersionParameter": {
       "name": "api-version",
       "in": "query",
