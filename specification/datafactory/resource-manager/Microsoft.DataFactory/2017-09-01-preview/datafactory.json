@@ -2876,6 +2876,7 @@
       },
       "PipelineResource": {
         "description": "Pipeline resource type.",
+        "type": "object",
         "allOf": [
           {
             "$ref": "#/definitions/SubResource"
@@ -2887,6 +2888,9 @@
             "$ref": "./entityTypes/Pipeline.json#/definitions/Pipeline",
             "description": "Properties of the pipeline."
           }
+        },
+        "additionalProperties": {
+          "type": "object"
         },
         "required": [
           "properties"
@@ -2948,6 +2952,7 @@
       },
       "Factory": {
         "description": "Factory resource type.",
+        "type": "object",
         "allOf": [
           {
             "$ref": "#/definitions/Resource"
@@ -2963,6 +2968,9 @@
             "$ref": "#/definitions/FactoryProperties",
             "description": "Properties of the factory."
           }
+        },
+        "additionalProperties": {
+          "type": "object"
         }
       },
       "FactoryUpdateParameters": {
@@ -3288,6 +3296,9 @@
             "type": "string",
             "readOnly": true
           }
+        },
+        "additionalProperties": {
+          "type": "object"
         }
       },
       "PipelineRunInvokedBy": {
@@ -3397,6 +3408,9 @@
             "type": "object",
             "readOnly": true
           }
+        },
+        "additionalProperties": {
+          "type": "object"
         }
       },
       "TriggerRunListResponse": {
@@ -3479,6 +3493,9 @@
             },
             "readOnly": true
           }
+        },
+        "additionalProperties": {
+          "type": "object"
         }
       },
       "OperationListResponse": {
