@@ -976,9 +976,11 @@
             }
           }
         },
-        "produces": [
-          "application/json"
-        ]
+        "x-ms-examples": {
+          "Update face list example": {
+            "$ref": "./examples/UpdateFaceList.json"
+          }
+        }
       },
       "delete": {
         "description": "Delete an existing face list according to faceListId. Persisted face images in the face list will also be deleted.",
@@ -1005,9 +1007,11 @@
             }
           }
         },
-        "produces": [
-          "application/json"
-        ]
+        "x-ms-examples": {
+          "Delete face list example": {
+            "$ref": "./examples/DeleteFaceList.json"
+          }
+        }
       }
     },
     "/facelists": {
@@ -1031,7 +1035,12 @@
         },
         "produces": [
           "application/json"
-        ]
+        ],
+        "x-ms-examples": {
+          "Get Face lists example": {
+            "$ref": "./examples/GetFaceLists.json"
+          }
+        }
       }
     },
     "/facelists/{faceListId}/persistedFaces/{persistedFaceId}": {
@@ -1067,9 +1076,11 @@
             }
           }
         },
-        "produces": [
-          "application/json"
-        ]
+        "x-ms-examples": {
+          "Delete face in face list example": {
+            "$ref": "./examples/DeleteFaceListFace.json"
+          }
+        }
       }
     },
     "/persongroups/{personGroupId}/persons/{personId}/persistedFaces": {
@@ -1107,6 +1118,9 @@
         "consumes": [
           "application/json"
         ],
+        "produces": [
+          "application/json"
+        ],
         "responses": {
           "200": {
             "description": "A successful call returns the new persistedFaceId."
@@ -1118,9 +1132,11 @@
             }
           }
         },
-        "produces": [
-          "application/json"
-        ]
+        "x-ms-examples": {
+          "Add Person face example": {
+            "$ref": "./examples/CreateNewPersonFace.json"
+          }
+        }
       }
     },
     "/detect": {
@@ -1203,6 +1219,9 @@
             "$ref": "../../Common/Parameters.json#/parameters/ImageUrl"
           }
         ],
+        "produces": [
+          "application/json"
+        ],
         "consumes": [
           "application/json"
         ],
@@ -1217,9 +1236,11 @@
             }
           }
         },
-        "produces": [
-          "application/json"
-        ]
+        "x-ms-examples": {
+          "Create face list face example": {
+            "$ref": "./examples/CreateNewFaceListFace.json"
+          }
+        }
       }
     }
   },
@@ -1296,6 +1317,9 @@
         "consumes": [
           "application/octet-stream"
         ],
+        "produces": [
+          "application/json"
+        ],
         "responses": {
           "200": {
             "description": "A successful call returns an array of face entries ranked by face rectangle size in descendingorder. An empty response indicates no faces detected. ",
@@ -1310,9 +1334,11 @@
             }
           }
         },
-        "produces": [
-          "application/json"
-        ]
+        "x-ms-examples": {
+          "Detect with stream example": {
+            "$ref": "./examples/DetectWithStream.json"
+          }
+        }
       }
     },
     "/persongroups/{personGroupId}/persons/{personId}/persistedFaces?overload=stream": {
@@ -1347,6 +1373,9 @@
             "$ref": "../../Common/Parameters.json#/parameters/ImageStream"
           }
         ],
+        "produces": [
+          "application/json"
+        ],
         "consumes": [
           "application/octet-stream"
         ],
@@ -1361,9 +1390,11 @@
             }
           }
         },
-        "produces": [
-          "application/json"
-        ]
+        "x-ms-examples": {
+          "Add face to person with stream example": {
+            "$ref": "./examples/CreateNewPersonFaceFromStream.json"
+          }
+        }
       }
     },
     "/facelists/{faceListId}/persistedFaces?overload=stream": {
@@ -1407,7 +1438,12 @@
         },
         "produces": [
           "application/json"
-        ]
+        ],
+        "x-ms-examples": {
+          "Add face to face list from stream example": {
+            "$ref": "./examples/CreateNewFaceListFaceFromStream.json"
+          }
+        }
       }
     }
   },
