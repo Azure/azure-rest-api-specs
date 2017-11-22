@@ -459,6 +459,40 @@
             "nextLinkName": "nextLink"
         }
       }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroup}/providers/Microsoft.DocumentDB/databaseAccounts/{accountName}/metrics": {
+      "get": {
+        "operationId": "DatabaseAccounts_GetMetrics",
+        "x-ms-examples": {
+          "CosmosDBDatabaseAccountGetMetrics": { "$ref": "./examples/CosmosDBDatabaseAccountGetMetricsFilter.json" }
+        },
+        "description": "Retrieves the metrics determined by the given filter for the given database account.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/subscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/resourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/accountNameParameter"
+          },
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/filterParameter" 
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The metrics for the database account were retrieved successfully.",
+            "schema": {
+              "$ref": "#/definitions/MetricListResult"
+            }
+          }
+        }
+      },
     }
   },
   "definitions": {
@@ -921,6 +955,120 @@
           "description": "URL to get the next set of operation list results if there are any."
         }
       }
+    },
+    "MetricListResult": {
+      "properties": {
+        "value": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Metric"
+          },
+          "description": "The list of metrics for the database."
+        }
+      },
+      "required": ["value"],
+      "description": "The response to a list database metrics request."
+    }, 
+    "Metric": {
+      "properties": {
+        "startTime": {
+          "readOnly": true,
+          "type": "string",
+          "format": "date-time",
+          "description": "The start time for the metric (ISO-8601 format)."
+        },
+        "endTime": {
+          "readOnly": true,
+          "type": "string",
+          "format": "date-time",
+          "description": "The end time for the metric (ISO-8601 format)."
+        },
+        "timeGrain": {
+          "readOnly": true,
+          "type": "string",
+          "description": "The time grain to be used to summarize the metric values."
+        },
+        "unit": {
+          "readOnly": true,
+          "type": "string",
+          "description": "The unit of the metric.",
+          "enum": ["count", "bytes", "seconds", "percent", "countPerSecond", "bytesPerSecond", "milliseconds"],
+          "x-ms-enum": {
+            "modelAsString": true,
+            "name": "UnitType"
+          }
+        },
+        "name": {
+          "readOnly": true,
+          "$ref": "#/definitions/MetricName",
+          "description": "The name information for the metric."
+        },
+        "metricValues": {
+          "readOnly": true,
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/MetricValue"
+          },
+          "description": "The metric values for the specified time window and timestep."
+        }
+      },
+      "description": "Metric data"
+    }, 
+    "MetricName": {
+      "properties": {
+        "value": {
+          "readOnly": true,
+          "type": "string",
+          "description": "The name of the metric."
+        },
+        "localizedValue": {
+          "readOnly": true,
+          "type": "string",
+          "description": "The friendly name of the metric."
+        }
+      },
+      "description": "A metric name."
+    }, 
+    "MetricValue": {
+      "properties": {
+        "count": {
+          "readOnly": true,
+          "type": "number",
+          "format": "int32",
+          "description": "The number of values for the metric."
+        },
+        "average": {
+          "readOnly": true,
+          "type": "number",
+          "format": "double",
+          "description": "The average value of the metric."
+        },
+        "maximum": {
+          "readOnly": true,
+          "type": "number",
+          "format": "double",
+          "description": "The max value of the metric."
+        },
+        "minimum": {
+          "readOnly": true,
+          "type": "number",
+          "format": "double",
+          "description": "The min value of the metric."
+        },
+        "timestamp": {
+          "readOnly": true,
+          "type": "string",
+          "format": "date-time",
+          "description": "The metric timestamp (ISO-8601 format)."
+        },
+        "total": {
+          "readOnly": true,
+          "type": "number",
+          "format": "double",
+          "description": "The total value of the metric."
+        }
+      },
+      "description": "Represents database metrics."
     }
   },
   "parameters": {
@@ -958,6 +1106,14 @@
       "description": "Cosmos DB database account name.",
       "minLength": 3,
       "maxLength": 50
+    },
+    "filterParameter": {
+      "name": "$filter",
+      "in": "query",
+      "required": true,
+      "type": "string",
+      "description": "An OData filter expression that describes a subset of metrics to return."
     }
+
   }  
 }
