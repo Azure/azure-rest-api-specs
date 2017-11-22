@@ -3662,7 +3662,7 @@
         "days_before_expiry": {
           "type": "integer",
           "format": "int32",
-          "description": "Days before expiry."
+          "description": "Days before expiry to attempt renewal. Value should be between 1 and validity_in_months multiplied by 27. If validity_in_months is 36, then value should be between 1 and 972 (36 * 27)."
         }
       },
       "description": "A condition to be satisfied for an action to be executed."
