@@ -1123,7 +1123,10 @@
         ],
         "responses": {
           "200": {
-            "description": "A successful call returns the new persistedFaceId."
+            "description": "A successful call returns the new persistedFaceId.",
+            "schema": {
+              "$ref": "#/definitions/PersistedFaceResult"
+            }
           },
           "default": {
             "description": "Error response.",
@@ -1227,7 +1230,10 @@
         ],
         "responses": {
           "200": {
-            "description": "A successful call returns a new persistedFaceId."
+            "description": "A successful call returns a new persistedFaceId.",
+            "schema": {
+              "$ref": "#/definitions/PersistedFaceResult"
+            }
           },
           "default": {
             "description": "Error response.",
@@ -1381,7 +1387,10 @@
         ],
         "responses": {
           "200": {
-            "description": "A successful call returns the new persistedFaceId."
+            "description": "A successful call returns the new persistedFaceId.",
+            "schema": {
+              "$ref": "#/definitions/PersistedFaceResult"
+            }
           },
           "default": {
             "description": "Error response.",
@@ -1427,7 +1436,10 @@
         ],
         "responses": {
           "200": {
-            "description": "A successful call returns a new persistedFaceId."
+            "description": "A successful call returns a new persistedFaceId.",
+            "schema": {
+              "$ref": "#/definitions/PersistedFaceResult"
+            }
           },
           "default": {
             "description": "Error response.",
@@ -1473,6 +1485,19 @@
       "type": "array",
       "items": {
         "$ref": "#/definitions/DetectedFace"
+      }
+    },
+    "PersistedFaceResult": {
+      "type": "object",
+      "required": [
+        "persistedFaceId"
+      ],
+      "description": "Persisted face result.",
+      "properties": {
+        "persistedFaceId": {
+          "type": "string",
+          "description": "persistedFaceId of candidate face when find by faceListId. persistedFaceId in face list is persisted and will not expire. As showed in below response"
+        }
       }
     },
     "DetectedFace": {
