@@ -8,6 +8,7 @@
   "definitions": {
     "Trigger": {
       "description": "Azure data factory nested object which contains information about creating pipeline run",
+      "type": "object",
       "discriminator": "type",
       "properties": {
         "type": {
@@ -23,6 +24,9 @@
           "description": "Indicates if trigger is running or not. Updated when Start/Stop APIs are called on the Trigger.",
           "readOnly": true
         }
+      },
+      "additionalProperties": {
+        "type": "object"
       },
       "required": [
         "type"
@@ -117,6 +121,9 @@
           "description": "The recurrence schedule."
         }
       },
+      "additionalProperties": {
+        "type": "object"
+      },
       "description": "The workflow trigger recurrence."
     },
     "RecurrenceFrequency": {
@@ -191,6 +198,9 @@
           "description": "The monthly occurrences."
         }
       },
+      "additionalProperties": {
+        "type": "object"
+      },
       "description": "The recurrence schedule."
     },
     "RecurrenceScheduleOccurrence": {
@@ -205,6 +215,9 @@
           "format": "int32",
           "description": "The occurrence."
         }
+      },
+      "additionalProperties": {
+        "type": "object"
       },
       "description": "The recurrence schedule occurence."
     },
