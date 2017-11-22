@@ -10,12 +10,10 @@
     "https"
   ],
   "consumes": [
-    "application/json",
-    "text/json"
+    "application/json"
   ],
   "produces": [
-    "application/json",
-    "text/json"
+    "application/json"
   ],
   "security": [
     {
@@ -530,20 +528,21 @@
       "properties": {
         "id": {
           "type": "string",
-          "readOnly":false,
+          "readonly": true,
           "description": "The role assignment ID."
         },
         "name": {
           "type": "string",
-          "readOnly":false,
+          "readonly": true,
           "description": "The role assignment name."
         },
         "type": {
           "type": "string",
-          "readOnly":false,
+          "readonly": true,
           "description": "The role assignment type."
         },
         "properties": {
+          "x-ms-client-flatten": true,
           "$ref": "#/definitions/RoleAssignmentPropertiesWithScope",
           "description": "Role assignment properties."
         }
@@ -586,6 +585,7 @@
     "RoleAssignmentCreateParameters": {
       "properties": {
         "properties": {
+          "x-ms-client-flatten": true,
           "$ref": "#/definitions/RoleAssignmentProperties",
           "description": "Role assignment properties."
         }

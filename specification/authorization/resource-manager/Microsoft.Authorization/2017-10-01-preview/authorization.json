@@ -10,12 +10,10 @@
     "https"
   ],
   "consumes": [
-    "application/json",
-    "text/json"
+    "application/json"
   ],
   "produces": [
-    "application/json",
-    "text/json"
+    "application/json"
   ],
   "security": [
     {
@@ -522,6 +520,7 @@
           "description": "The type of the administrator."
         },
         "properties": {
+          "x-ms-client-flatten": true,
           "$ref": "#/definitions/ClassicAdministratorProperties",
           "description": "Properties for the classic administrator."
         }
@@ -599,6 +598,7 @@
         },
         "properties": {
           "type": "object",
+          "x-ms-client-flatten": true,
           "description": "The operation properties."
         }
       },
@@ -685,7 +685,7 @@
           "type": "string",
           "description": "The role definition description."
         },
-        "type": {
+        "roletype": {
           "type": "string",
           "description": "The role type."
         },
@@ -710,20 +710,21 @@
       "properties": {
         "id": {
           "type": "string",
-          "readOnly":false,
+          "readonly": true,
           "description": "The role definition ID."
         },
         "name": {
           "type": "string",
-          "readOnly":false,
+          "readonly": true,
           "description": "The role definition name."
         },
         "type": {
           "type": "string",
-          "readOnly":false,
+          "readonly": true,
           "description": "The role definition type."
         },
         "properties": {
+          "x-ms-client-flatten": true,
           "$ref": "#/definitions/RoleDefinitionProperties",
           "description": "Role definition properties."
         }
