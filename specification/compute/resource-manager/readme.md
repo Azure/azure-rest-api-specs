@@ -50,6 +50,36 @@ input-file:
 - Microsoft.ContainerService/2017-01-31/containerService.json
 ```
 
+### Tag: package-compute-2017-12
+
+These settings apply only when `--tag=package-compute-2017-12` is specified on the command line.
+
+``` yaml $(tag) == 'package-compute-2017-12'
+input-file:
+- Microsoft.Compute/2017-12-01/compute.json
+- Microsoft.Compute/2017-09-01/skus.json
+- Microsoft.Compute/2017-03-30/disk.json
+- Microsoft.Compute/2017-03-30/runCommands.json
+```
+
+### Tag: package-compute-only-2017-12
+
+These settings apply only when `--tag=package-compute-only-2017-12` is specified on the command line.
+
+``` yaml $(tag) == 'package-compute-only-2017-12'
+input-file:
+- Microsoft.Compute/2017-12-01/compute.json
+```
+
+### Tag: package-skus-2017-09
+
+These settings apply only when `--tag=package-skus-2017-09` is specified on the command line.
+
+``` yaml $(tag) == 'package-skus-2017-09'
+input-file:
+- Microsoft.Compute/2017-09-01/skus.json
+```
+
 ### Tag: package-2017-03
 
 These settings apply only when `--tag=package-2017-03` is specified on the command line.
@@ -292,20 +322,28 @@ python:
   payload-flattening-threshold: 2
 ```
 
+### Tag: package-compute-only-2017-12 and python
+
+These settings apply only when `--tag=package-compute-only-2017-12 --python` is specified on the command line.
+
+``` yaml $(tag) == 'package-compute-only-2017-12' && $(python)
+namespace: azure.mgmt.compute.v2017_12_01
+```
+
+### Tag: package-skus-2017-09 and python
+
+These settings apply only when `--tag=package-skus-2017-09 --python` is specified on the command line.
+
+``` yaml $(tag) == 'package-skus-2017-09' && $(python)
+namespace: azure.mgmt.compute.v2017_09_01
+```
+
 ### Tag: package-compute-2017-03 and python
 
 These settings apply only when `--tag=package-compute-2017-03 --python` is specified on the command line.
 
 ``` yaml $(tag) == 'package-compute-2017-03' && $(python)
-namespace: azure.mgmt.compute.compute.v2017_03_30
-```
-
-### Tag: package-container-service-2017-01 and python
-
-These settings apply only when `--tag=package-container-service-2017-01 --python` is specified on the command line.
-
-``` yaml $(tag) == 'package-container-service-2017-01' && $(python)
-namespace: azure.mgmt.compute.containerservice.v2017_01_31
+namespace: azure.mgmt.compute.v2017_03_30
 ```
 
 ### Tag: package-compute-2016-04-preview and python
@@ -313,7 +351,7 @@ namespace: azure.mgmt.compute.containerservice.v2017_01_31
 These settings apply only when `--tag=package-compute-2016-04-preview --python` is specified on the command line.
 
 ``` yaml $(tag) == 'package-compute-2016-04-preview' && $(python)
-namespace: azure.mgmt.compute.compute.v2016_04_30_preview
+namespace: azure.mgmt.compute.v2016_04_30_preview
 ```
 
 ### Tag: package-compute-2016-03 and python
@@ -321,7 +359,7 @@ namespace: azure.mgmt.compute.compute.v2016_04_30_preview
 These settings apply only when `--tag=package-compute-2016-03 --python` is specified on the command line.
 
 ``` yaml $(tag) == 'package-compute-2016-03' && $(python)
-namespace: azure.mgmt.compute.compute.v2016_03_30
+namespace: azure.mgmt.compute.v2016_03_30
 ```
 
 ### Tag: package-compute-2015-06 and python
@@ -329,6 +367,6 @@ namespace: azure.mgmt.compute.compute.v2016_03_30
 These settings apply only when `--tag=package-compute-2015-06 --python` is specified on the command line.
 
 ``` yaml $(tag) == 'package-compute-2015-06' && $(python)
-namespace: azure.mgmt.compute.compute.v2015_06_15
+namespace: azure.mgmt.compute.v2015_06_15
 ```
 
