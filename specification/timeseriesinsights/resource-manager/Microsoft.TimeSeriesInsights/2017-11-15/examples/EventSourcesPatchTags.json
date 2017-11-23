@@ -5,9 +5,7 @@
     "environmentName": "env1",
     "eventSourceName": "es1",
     "eventSourceUpdateParameters": {
-      "properties": {
-        "timestampPropertyName": "someOtherTimestampProperty"
-      }
+      "tags": { "someKey": "someValue" }
     },
     "api-version": "2017-11-15"
   },
@@ -18,7 +16,7 @@
         "location": "West US",
         "name": "es1",
         "type": "Microsoft.TimeSeriesInsights/Environments/EventSources",
-        "tags": {},
+        "tags": { "someKey": "someValue" },
         "kind": "Microsoft.EventHub",
         "properties": {
           "eventSourceResourceId": "somePathInArm",

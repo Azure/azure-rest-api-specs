@@ -330,8 +330,7 @@
         ],
         "operationId": "EventSources_CreateOrUpdate",
         "x-ms-examples": {
-          "CreateEventHubEventSource": { "$ref": "./examples/EventSourcesCreateEventHub.json" },
-          "CreateIoTHubEventSources": { "$ref": "./examples/EventSourcesCreateIoTHub.json" }
+          "CreateEventHubEventSource": { "$ref": "./examples/EventSourcesCreateEventHub.json" }
         },
         "description": "Create or update an event source under the specified environment.",
         "parameters": [
@@ -394,8 +393,7 @@
         ],
         "operationId": "EventSources_Get",
         "x-ms-examples": {
-          "GetEventHubEventSource": { "$ref": "./examples/EventSourcesGetEventHub.json" },
-          "GetIoTHubEventSource": { "$ref": "./examples/EventSourcesGetIoTHub.json" }
+          "GetEventHubEventSource": { "$ref": "./examples/EventSourcesGetEventHub.json" }
         },
         "description": "Gets the event source with the specified name in the specified environment.",
         "parameters": [
@@ -1343,6 +1341,15 @@
           "type": "string",
           "format": "duration",
           "description": "ISO8601 timespan specifying the minimum number of days the environment's events will be available for query."
+        },
+        "storageLimitExceededBehavior": {
+          "type": "string",
+          "description": "The behavior the Time Series Insights service should take when the environment's capacity has been exceeded. If \"PauseIngress\" is specified, new events will not be read from the event source. If \"PurgeOldData\" is specified, new events will continue to be read and old events will be deleted from the environment. The default behavior is PurgeOldData.",
+          "enum": [ "PurgeOldData", "PauseIngress" ],
+          "x-ms-enum": {
+            "name": "StorageLimitExceededBehavior",
+            "modelAsString": false
+          }
         }
       }
     },
