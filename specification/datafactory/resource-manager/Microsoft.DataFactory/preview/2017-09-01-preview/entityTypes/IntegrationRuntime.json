@@ -146,6 +146,22 @@
             "name": "IntegrationRuntimeLicenseType",
             "modelAsString": true
           }
+        },
+        "customSetupScriptProperties": {
+          "description": "Custom setup script properties for a managed dedicated integration runtime.",
+          "$ref": "#/definitions/IntegrationRuntimeCustomSetupScriptProperties"
+        },
+        "edition": {
+          "description": "The edition for the SSIS Integration Runtime",
+          "type": "string",
+          "enum": [
+            "Standard",
+            "Enterprise"
+          ], 
+          "x-ms-enum": {
+            "name": "IntegrationRuntimeEdition",
+            "modelAsString": true
+          }
         }
       },
       "additionalProperties": {
@@ -187,6 +203,20 @@
       },
       "additionalProperties": {
         "type": "object"
+      }
+    },
+    "IntegrationRuntimeCustomSetupScriptProperties": {
+      "description": "Custom setup script properties for a managed dedicated integration runtime.",
+      "type": "object",
+      "properties": {
+        "blobContainerUri": {
+          "description": "The URI of the Azure blob container that contains the custom setup script.",
+          "type": "string"
+        },
+        "sasToken": {
+          "description": "The SAS token of the Azure blob container.",
+          "$ref": "../datafactory.json#/definitions/SecureString"
+        }
       }
     },
     "SelfHostedIntegrationRuntime": {
