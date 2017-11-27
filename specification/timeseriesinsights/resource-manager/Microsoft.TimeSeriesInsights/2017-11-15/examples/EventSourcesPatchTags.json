@@ -4,6 +4,9 @@
     "resourceGroupName": "rg1",
     "environmentName": "env1",
     "eventSourceName": "es1",
+    "eventSourceUpdateParameters": {
+      "tags": { "someKey": "someValue" }
+    },
     "api-version": "2017-11-15"
   },
   "responses": {
@@ -13,7 +16,7 @@
         "location": "West US",
         "name": "es1",
         "type": "Microsoft.TimeSeriesInsights/Environments/EventSources",
-        "tags": {},
+        "tags": { "someKey": "someValue" },
         "kind": "Microsoft.EventHub",
         "properties": {
           "eventSourceResourceId": "somePathInArm",
@@ -22,7 +25,8 @@
           "eventHubName": "ehn",
           "keyName": "managementKey",
           "provisioningState": "Succeeded",
-          "creationTime": "2017-04-18T19:20:33.2288820Z"
+          "creationTime": "2017-04-18T19:20:33.2288820Z",
+          "timestampPropertyName": "someOtherTimestampProperty"
         }
       }
     }
