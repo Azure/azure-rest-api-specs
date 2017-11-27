@@ -51,6 +51,8 @@ input-file:
 - microsoft.insights/2015-04-01/tenantActivityLogs_API.json
 - microsoft.insights/2017-05-01-preview/metricDefinitions_API.json
 - microsoft.insights/2017-05-01-preview/metrics_API.json
+- microsoft.insights/2017-11-01-preview/baseline_API.json
+- microsoft.insights/2017-11-01-preview/calculateBaseline_API.json
 ```
 
 ### Tag: package-2017-08
