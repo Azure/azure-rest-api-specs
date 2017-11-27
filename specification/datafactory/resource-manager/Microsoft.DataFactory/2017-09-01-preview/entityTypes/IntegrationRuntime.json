@@ -138,7 +138,9 @@
         },
         "catalogAdminUserName": {
           "description": "The administrator user name of catalog database.",
-          "type": "string"
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 128
         },
         "catalogAdminPassword": {
           "description": "The password of the administrator user account of the catalog database.",
@@ -152,7 +154,7 @@
             "Standard",
             "Premium",
             "PremiumRS"
-          ], 
+          ],
           "x-ms-enum": {
             "name": "IntegrationRuntimeSsisCatalogPricingTier",
             "modelAsString": true
@@ -296,6 +298,11 @@
             "type": "string",
             "description": "Error message parameters."
           },
+          "readOnly": true
+        },
+        "activityId": {
+          "description": "The activity id for the operation request.",
+          "type": "string",
           "readOnly": true
         }
       },
@@ -467,17 +474,27 @@
         },
         "autoUpdate": {
           "description": "Whether Self-hosted integration runtime auto update has been turned on.",
+          "$ref": "#/definitions/IntegrationRuntimeAutoUpdate",
+          "readOnly": true
+        },
+        "versionStatus": {
+          "description": "Status of the integration runtime version.",
           "type": "string",
-          "enum": [
-            "On",
-            "Off"
-          ],
-          "x-ms-enum": {
-            "name": "IntegrationRuntimeAutoUpdate",
-            "modelAsString": true
-          },
           "readOnly": true
         }
+      }
+    },
+    "IntegrationRuntimeAutoUpdate": {
+      "description": "The state of integration runtime auto update.",
+      "type": "string",
+      "readOnly": true,
+      "enum": [
+        "On",
+        "Off"
+      ],
+      "x-ms-enum": {
+        "name": "IntegrationRuntimeAutoUpdate",
+        "modelAsString": true
       }
     },
     "SelfHostedIntegrationRuntimeNode": {
@@ -757,6 +774,17 @@
       },
       "additionalProperties": {
         "type": "object"
+      }
+    },
+    "IntegrationRuntimeNodeIpAddress": {
+      "type": "object",
+      "description": "The IP address of self-hosted integration runtime node.",
+      "properties": {
+        "ipAddress": {
+          "description": "The IP address of self-hosted integration runtime node.",
+          "type": "string",
+          "readOnly": true
+        }
       }
     }
   }
