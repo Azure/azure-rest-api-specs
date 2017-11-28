@@ -3085,14 +3085,18 @@
         }
       },
       "post": {
-        "description": "Adds a user to the allowed list of users to access this LUIS application.Users are added using their email address.",
+        "description": "Adds a user to the allowed list of users to access this LUIS application. Users are added using their email address.",
         "operationId": "Permissions_AddUserToAccessList",
         "parameters": [
           {
-            "name": "body",
+            "$ref": "#/parameters/AppIdInPath"
+          },
+          {
+            "name": "userToAdd",
             "in": "body",
+            "required": true,
             "schema": {
-              "example": "{\t\"email\":\"test@domain.com\"}"
+              "$ref": "#/definitions/UserCollaborator"
             },
             "description": "A JSON object containing the user's email address."
           }
@@ -3102,25 +3106,34 @@
         ],
         "responses": {
           "200": {
-            "description": ""
+            "description": "No Content. Successfully operation."
           },
           "default": {
             "description": "Error Response.",
             "schema": {
               "$ref": "#/definitions/ErrorResponse"
             }
+          }
+        },
+        "x-ms-examples": {
+          "successful Add User To Access List": {
+            "$ref": "./examples/permissions/SuccessfulAddUserToAccessListRequest.json"
           }
         }
       },
       "delete": {
-        "description": "Removed a user to the allowed list of users to access this LUIS application.Users are removed using their email address.",
+        "description": "Removed a user to the allowed list of users to access this LUIS application. Users are removed using their email address.",
         "operationId": "Permissions_RemoveUserFromAccessList",
         "parameters": [
           {
-            "name": "body",
+            "$ref": "#/parameters/AppIdInPath"
+          },
+          {
+            "name": "userToDelete",
             "in": "body",
+            "required": true,
             "schema": {
-              "example": "{\t\"email\":\"test@domain.com\"}"
+              "$ref": "#/definitions/UserCollaborator"
             },
             "description": "A JSON object containing the user's email address."
           }
@@ -3130,7 +3143,7 @@
         ],
         "responses": {
           "200": {
-            "description": ""
+            "description": "No Content. Successfully operation."
           },
           "default": {
             "description": "Error Response.",
@@ -3138,17 +3151,26 @@
               "$ref": "#/definitions/ErrorResponse"
             }
           }
+        },
+        "x-ms-examples": {
+          "successful Remove User From Access List": {
+            "$ref": "./examples/permissions/SuccessfulRemoveUserFromAccessListRequest.json"
+          }
         }
       },
       "put": {
-        "description": "Replaces the current users access list with the one sent in the body.If an empty list is sent, all access to other users will be removed.",
+        "description": "Replaces the current users access list with the one sent in the body. If an empty list is sent, all access to other users will be removed.",
         "operationId": "Permissions_UpdateAccessList",
         "parameters": [
           {
-            "name": "body",
+            "$ref": "#/parameters/AppIdInPath"
+          },
+          {
+            "name": "collaborators",
             "in": "body",
+            "required": true,
             "schema": {
-              "example": "{\t\"emails\": [\t\t\"test1@domain.com\",\t\t\"test2@domain.com\"\t]}"
+              "$ref": "#/definitions/CollaboratorsArray"
             },
             "description": "A JSON object containing a list of user's email addresses."
           }
@@ -3158,7 +3180,7 @@
         ],
         "responses": {
           "200": {
-            "description": ""
+            "description": "No Content. Successfully operation."
           },
           "default": {
             "description": "Error Response.",
@@ -3167,9 +3189,11 @@
             }
           }
         },
-        "produces": [
-          "application/json"
-        ]
+        "x-ms-examples": {
+          "successful Replaces Users From Access List": {
+            "$ref": "./examples/permissions/SuccessfulReplacesUsersFromAccessListRequest.json"
+          }
+        }
       }
     },
     "/apps/{appId}/endpoints": {
@@ -5284,6 +5308,27 @@
         },
         "emails": {
           "type": "array",
+          "items": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "UserCollaborator": {
+      "type": "object",
+      "properties": {
+        "email": {
+          "type": "string",
+          "description": "The email address of the user."
+        }
+      }
+    },
+    "CollaboratorsArray": {
+      "type": "object",
+      "properties": {
+        "emails": {
+          "type": "array",
+          "description": "The email address of the users.",
           "items": {
             "type": "string"
           }
