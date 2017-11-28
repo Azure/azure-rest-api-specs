@@ -173,6 +173,64 @@
         {
           "$ref": "#/definitions/IntegrationRuntime"
         }
+      ],
+      "properties": {
+        "linkedIntegrationRuntimeInfo": {
+          "description": "When this property is not null, means this is a linked integration runtime. The property is used to access original integration runtime.",
+          "$ref": "#/definitions/LinkedIntegrationRuntimeInfo"
+        }
+      }
+    },
+    "LinkedIntegrationRuntimeInfo": {
+      "description": "The base definition of a secret type.",
+      "discriminator": "authType",
+      "type": "object",
+      "properties": {
+        "authType": {
+          "type": "string",
+          "description": "Type of the secret."
+        }
+      },
+      "required": [
+        "authType"
+      ]
+    },
+    "LinkedIntegrationRuntimeKeyInfo": {
+      "x-ms-discriminator-value": "Key",
+      "description": "The base definition of a secret type.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/LinkedIntegrationRuntimeInfo"
+        }
+      ],
+      "properties": {
+        "key": {
+          "description": "Type of the secret.",
+          "$ref": "../datafactory.json#/definitions/SecureString"
+        }
+      },
+      "required": [
+        "key"
+      ]
+    },
+    "LinkedIntegrationRuntimeRbacInfo": {
+      "x-ms-discriminator-value": "RBAC",
+      "description": "The base definition of a secret type.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/LinkedIntegrationRuntimeInfo"
+        }
+      ],
+      "properties": {
+        "resourceId": {
+          "description": "Type of the secret.",
+          "type": "string"
+        }
+      },
+      "required": [
+        "resourceId"
       ]
     },
     "IntegrationRuntimeStatus": {
