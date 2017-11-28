@@ -2202,10 +2202,11 @@
           {
             "name": "applicationPublishObject",
             "in": "body",
+            "required": true,
             "schema": {
               "$ref": "#/definitions/ApplicationPublishObject"
             },
-            "description": "The application publish object.The region is the target region that the application is published to. Possible values are \"westus\", \"eastus2\", \"westcentralus\" or \"southeastasia\" for applications created in west US, and \"westeurope\" for applications created in West Europe."
+            "description": "The application publish object. The region is the target region that the application is published to. Possible values are \"westus\", \"eastus2\", \"westcentralus\" or \"southeastasia\" for applications created in west US, and \"westeurope\" for applications created in West Europe."
           }
         ],
         "consumes": [
@@ -2215,7 +2216,7 @@
           "201": {
             "description": "An object containing the application endpoint URL and its assigned endpoint key.",
             "schema": {
-              "$ref": "#/definitions/ApplicationPublishResponse"
+              "$ref": "#/definitions/ProductionOrStagingEndpointInfo"
             }
           },
           "default": {
@@ -4469,9 +4470,16 @@
         "isStaging": {
           "default": false,
           "type": "boolean"
+        },
+        "region": {
+          "type": "string"
         }
       },
-      "example": "{   \"versionId\": \"0.1\",   \"isStaging\": false,   \"region\"\" \"westus\"}"
+      "example": {
+       "versionId": "0.1",
+       "isStaging": false,
+       "region": "westus"
+      }
     },
     "JSONApp": {
       "additionalProperties": false,
@@ -5087,7 +5095,8 @@
       "description": "The base class \"ProductionOrStagingEndpointInfo\" inherits from.",
       "properties": {
         "versionId": {
-
+          "type": "string",
+          "x-nullable": true
         },
         "isStaging": {
           "type": "boolean"
@@ -5108,23 +5117,6 @@
         },
         "publishedDateTime": {
           "type": "string"
-        }
-      }
-    },
-    "ApplicationPublishResponse": {
-      "type": "object",
-      "properties": {
-        "endpointUrl": {
-          "type": "string"
-        },
-        "subscription-key": {
-          "type": "string"
-        },
-        "endpointRegion": {
-          "type": "string"
-        },
-        "isStaging": {
-          "type": "boolean"
         }
       }
     },
