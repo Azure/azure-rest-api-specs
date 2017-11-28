@@ -3087,7 +3087,7 @@
             "in": "body",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/UserToAdd"
+              "$ref": "#/definitions/UserCollaborator"
             },
             "description": "A JSON object containing the user's email address."
           }
@@ -3107,20 +3107,24 @@
           }
         },
         "x-ms-examples": {
-          "successful Add Application User Access List": {
-            "$ref": "./examples/permissions/SuccessfulAddApplicationUserAccessListRequest.json"
+          "successful Add User To Access List": {
+            "$ref": "./examples/permissions/SuccessfulAddUserToAccessListRequest.json"
           }
         }
       },
       "delete": {
-        "description": "Removed a user to the allowed list of users to access this LUIS application.Users are removed using their email address.",
+        "description": "Removed a user to the allowed list of users to access this LUIS application. Users are removed using their email address.",
         "operationId": "Permissions_RemoveUserFromAccessList",
         "parameters": [
           {
-            "name": "body",
+            "$ref": "#/parameters/AppIdInPath"
+          },
+          {
+            "name": "userToDelete",
             "in": "body",
+            "required": true,
             "schema": {
-              "example": "{\t\"email\":\"test@domain.com\"}"
+              "$ref": "#/definitions/UserCollaborator"
             },
             "description": "A JSON object containing the user's email address."
           }
@@ -3130,13 +3134,18 @@
         ],
         "responses": {
           "200": {
-            "description": ""
+            "description": "No Content. Successfully operation."
           },
           "default": {
             "description": "Error Response.",
             "schema": {
               "$ref": "#/definitions/ErrorResponse"
             }
+          }
+        },
+        "x-ms-examples": {
+          "successful Remove User From Access List": {
+            "$ref": "./examples/permissions/SuccessfulRemoveUserFromAccessListRequest.json"
           }
         }
       },
@@ -5298,12 +5307,12 @@
         }
       }
     },
-    "UserToAdd": {
+    "UserCollaborator": {
       "type": "object",
       "properties": {
         "email": {
           "type": "string",
-          "description": "The email address of the user to add."
+          "description": "The email address of the user."
         }
       }
     },
