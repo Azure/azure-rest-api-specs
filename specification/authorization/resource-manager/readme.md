@@ -26,7 +26,7 @@ These are the global settings for the Authorization API.
 
 ``` yaml
 openapi-type: arm
-tag: package-2015-07
+tag: package-2017-10-01-preview
 ```
 
 
@@ -39,6 +39,15 @@ input-file:
 - Microsoft.Authorization/2015-07-01/authorization.json
 ```
 
+### Tag: package-2017-10-01-preview
+
+These settings apply only when `--tag=package-2017-10-01-preview` is specified on the command line.
+
+``` yaml $(tag) == 'package-2017-10-01-preview'
+input-file:
+- Microsoft.Authorization/2017-10-01-preview/authorization.json
+- Microsoft.Authorization/2017-10-01-preview/authorization-RACalls.json
+```
 
 
 ---
@@ -78,4 +87,13 @@ Please also specify `--go-sdk-folder=<path to the root directory of your azure-s
 
 ``` yaml $(tag) == 'package-2015-07' && $(go)
 output-folder: $(go-sdk-folder)/services/authorization/mgmt/2015-07-01/authorization
+```
+
+### Tag: package-2017-10-01-preview and go
+
+These settings apply only when `--tag=package-2017-10-01-preview --go` is specified on he command line.
+Please also specify `--go-sdk-folder=<path to the root directory of your azure-sdk-for-go clone>`.
+
+``` yaml $(tag) == 'package-2017-10-01-preview' && $(go)
+output-folder: $(go-sdk-folder)/services/authorization/mgmt/2017-10-01-preview/authorization
 ```
