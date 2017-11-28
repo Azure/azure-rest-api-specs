@@ -3076,14 +3076,18 @@
         }
       },
       "post": {
-        "description": "Adds a user to the allowed list of users to access this LUIS application.Users are added using their email address.",
+        "description": "Adds a user to the allowed list of users to access this LUIS application. Users are added using their email address.",
         "operationId": "Permissions_AddUserToAccessList",
         "parameters": [
           {
-            "name": "body",
+            "$ref": "#/parameters/AppIdInPath"
+          },
+          {
+            "name": "userToAdd",
             "in": "body",
+            "required": true,
             "schema": {
-              "example": "{\t\"email\":\"test@domain.com\"}"
+              "$ref": "#/definitions/UserToAdd"
             },
             "description": "A JSON object containing the user's email address."
           }
@@ -3093,13 +3097,18 @@
         ],
         "responses": {
           "200": {
-            "description": ""
+            "description": "No Content. Successfully operation."
           },
           "default": {
             "description": "Error Response.",
             "schema": {
               "$ref": "#/definitions/ErrorResponse"
             }
+          }
+        },
+        "x-ms-examples": {
+          "successful Add Application User Access List": {
+            "$ref": "./examples/permissions/SuccessfulAddApplicationUserAccessListRequest.json"
           }
         }
       },
@@ -5287,6 +5296,15 @@
           "items": {
             "type": "string"
           }
+        }
+      }
+    },
+    "UserToAdd": {
+      "type": "object",
+      "properties": {
+        "email": {
+          "type": "string",
+          "description": "The email address of the user to add."
         }
       }
     },
