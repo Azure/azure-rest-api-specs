@@ -2953,14 +2953,14 @@
       }
     },
     "/apps/{appId}/settings": {
-      "parameters": [
-        {
-          "$ref": "#/parameters/AppIdInPath"
-        }
-      ],
       "get": {
         "description": "Get the application settings",
         "operationId": "Apps_GetApplicationSettings",
+        "parameters": [
+          {
+            "$ref": "#/parameters/AppIdInPath"
+          }
+        ],
         "responses": {
           "200": {
             "description": "A JSON object containing the application settings.",
@@ -2988,6 +2988,9 @@
         "description": "Updates the application settings",
         "operationId": "Apps_UpdateApplicationSettings",
         "parameters": [
+          {
+            "$ref": "#/parameters/AppIdInPath"
+          },
           {
             "name": "applicationSettingUpdateObject",
             "in": "body",
