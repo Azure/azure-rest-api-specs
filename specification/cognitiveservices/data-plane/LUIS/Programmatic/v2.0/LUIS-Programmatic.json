@@ -3535,10 +3535,11 @@
           {
             "name": "prebuiltDomainCreateObject",
             "in": "body",
+            "required": true,
+            "description": "A prebuilt domain create object containing the name and culture of the domain",
             "schema": {
               "$ref": "#/definitions/PrebuiltDomainCreateObject"
-            },
-            "description": "A prebuilt domain create object containing the name and culture of the domain"
+            }
           }
         ],
         "consumes": [
@@ -3563,7 +3564,12 @@
         },
         "produces": [
           "application/json"
-        ]
+        ],
+        "x-ms-examples": {
+          "Successful Add Custom Prebuilt Application request": {
+            "$ref": "./examples/apps/SuccessfulAddCustomPrebuiltApplicationRequest.json"
+          }
+        }
       }
     },
     "/apps/customprebuiltdomains/{culture}": {
@@ -3907,14 +3913,17 @@
       "additionalProperties": false,
       "type": "object",
       "properties": {
-        "DomainName": {
+        "domainName": {
           "type": "string"
         },
-        "Culture": {
+        "culture": {
           "type": "string"
         }
       },
-      "example": "{\t\"domainName\": \"Web\", \t\"culture\": \"en-us\"}"
+      "example": {
+        "domainName": "Web",
+        "culture": "en-US"
+      }
     },
     "PrebuiltDomainModelCreateObject": {
       "additionalProperties": false,
