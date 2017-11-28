@@ -360,6 +360,13 @@
           "$ref": "#/definitions/PublicIPAddressDnsSettings",
           "description": "The FQDN of the DNS record associated with the public IP address."
         },
+        "ipTags": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/IpTag"
+          },
+          "description": "The list of tags associated with the public IP address."
+        },
         "ipAddress": {
           "type": "string",
           "description": "The IP address associated with the public IP address resource."
@@ -442,6 +449,19 @@
         }
       },
       "description": "Contains FQDN of the DNS record associated with the public IP address"
+    },
+    "IpTag": {
+      "properties": {
+        "ipTagType": {
+          "type": "string",
+          "description": "Gets or sets the ipTag type: Example FirstPartyUsage."
+        },
+        "tag": {
+          "type": "string",
+          "description": "Gets or sets value of the IpTag associated with the public IP. Example SQL, Storage etc"
+        }
+      },
+      "description": "Contains the IpTag associated with the public IP address"
     }
   },
   "parameters": {
