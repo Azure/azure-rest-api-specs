@@ -2994,10 +2994,11 @@
           {
             "name": "applicationSettingUpdateObject",
             "in": "body",
+            "required": true,
             "schema": {
               "$ref": "#/definitions/ApplicationSettingUpdateObject"
             },
-            "description": "An app setting object contains the new app settings"
+            "description": "An object containing the new application settings."
           }
         ],
         "consumes": [
@@ -3005,13 +3006,18 @@
         ],
         "responses": {
           "200": {
-            "description": ""
+            "description": "No Content. Successfully updated application settings."
           },
           "default": {
             "description": "Error Response.",
             "schema": {
               "$ref": "#/definitions/ErrorResponse"
             }
+          }
+        },
+        "x-ms-examples": {
+          "Successful Update Application Settings request": {
+            "$ref": "./examples/apps/SuccessfulUpdateApplicationSettingsRequest.json"
           }
         }
       }
@@ -4006,11 +4012,14 @@
       "additionalProperties": false,
       "type": "object",
       "properties": {
-        "Public": {
-          "type": "boolean"
+        "public": {
+          "type": "boolean",
+          "x-nullable": false
         }
       },
-      "example": "{\t\"public\": true}"
+      "example": {
+        "public": true
+      }
     },
     "ExampleLabelObject": {
       "additionalProperties": false,
