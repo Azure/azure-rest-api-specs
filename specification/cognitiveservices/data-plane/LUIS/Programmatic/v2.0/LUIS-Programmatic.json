@@ -2133,13 +2133,18 @@
         ],
         "responses": {
           "200": {
-            "description": ""
+            "description": "No Content. Successfully deleted application."
           },
           "default": {
             "description": "Error Response.",
             "schema": {
               "$ref": "#/definitions/ErrorResponse"
             }
+          }
+        },
+        "x-ms-examples": {
+          "Successful Rename Application request": {
+            "$ref": "./examples/apps/SuccessfulDeleteApplicationRequest.json"
           }
         }
       }
@@ -2197,10 +2202,11 @@
           {
             "name": "applicationPublishObject",
             "in": "body",
+            "required": true,
             "schema": {
               "$ref": "#/definitions/ApplicationPublishObject"
             },
-            "description": "The application publish object.The region is the target region that the application is published to. Possible values are \"westus\", \"eastus2\", \"westcentralus\" or \"southeastasia\" for applications created in west US, and \"westeurope\" for applications created in West Europe."
+            "description": "The application publish object. The region is the target region that the application is published to. Possible values are \"westus\", \"eastus2\", \"westcentralus\" or \"southeastasia\" for applications created in west US, and \"westeurope\" for applications created in West Europe."
           }
         ],
         "consumes": [
@@ -2210,7 +2216,7 @@
           "201": {
             "description": "An object containing the application endpoint URL and its assigned endpoint key.",
             "schema": {
-              "$ref": "#/definitions/ApplicationPublishResponse"
+              "$ref": "#/definitions/ProductionOrStagingEndpointInfo"
             }
           },
           "default": {
@@ -2955,14 +2961,14 @@
       }
     },
     "/apps/{appId}/settings": {
-      "parameters": [
-        {
-          "$ref": "#/parameters/AppIdInPath"
-        }
-      ],
       "get": {
         "description": "Get the application settings",
         "operationId": "Apps_GetApplicationSettings",
+        "parameters": [
+          {
+            "$ref": "#/parameters/AppIdInPath"
+          }
+        ],
         "responses": {
           "200": {
             "description": "A JSON object containing the application settings.",
@@ -2991,12 +2997,16 @@
         "operationId": "Apps_UpdateApplicationSettings",
         "parameters": [
           {
+            "$ref": "#/parameters/AppIdInPath"
+          },
+          {
             "name": "applicationSettingUpdateObject",
             "in": "body",
+            "required": true,
             "schema": {
               "$ref": "#/definitions/ApplicationSettingUpdateObject"
             },
-            "description": "An app setting object contains the new app settings"
+            "description": "An object containing the new application settings."
           }
         ],
         "consumes": [
@@ -3004,13 +3014,18 @@
         ],
         "responses": {
           "200": {
-            "description": ""
+            "description": "No Content. Successfully updated application settings."
           },
           "default": {
             "description": "Error Response.",
             "schema": {
               "$ref": "#/definitions/ErrorResponse"
             }
+          }
+        },
+        "x-ms-examples": {
+          "Successful Update Application Settings request": {
+            "$ref": "./examples/apps/SuccessfulUpdateApplicationSettingsRequest.json"
           }
         }
       }
@@ -3078,7 +3093,7 @@
           "application/json"
         ],
         "x-ms-examples": {
-          "successful Get Application User Access List": {
+          "Successful Get Application User Access List": {
             "$ref": "./examples/permissions/SuccessfulGetApplicationUserAccessListRequest.json"
           }
         }
@@ -3115,7 +3130,7 @@
           }
         },
         "x-ms-examples": {
-          "successful Add User To Access List": {
+          "Successful Add User To Access List": {
             "$ref": "./examples/permissions/SuccessfulAddUserToAccessListRequest.json"
           }
         }
@@ -3152,7 +3167,7 @@
           }
         },
         "x-ms-examples": {
-          "successful Remove User From Access List": {
+          "Successful Remove User From Access List": {
             "$ref": "./examples/permissions/SuccessfulRemoveUserFromAccessListRequest.json"
           }
         }
@@ -3189,7 +3204,7 @@
           }
         },
         "x-ms-examples": {
-          "successful Replaces Users From Access List": {
+          "Successful Replaces Users From Access List": {
             "$ref": "./examples/permissions/SuccessfulReplacesUsersFromAccessListRequest.json"
           }
         }
@@ -3197,7 +3212,7 @@
     },
     "/apps/{appId}/endpoints": {
       "get": {
-        "description": "Returns the available endpoint deployment regions and urls",
+        "description": "Returns the available endpoint deployment regions and URLs",
         "operationId": "Apps_GetEndpoints",
         "parameters": [
           {
@@ -4005,11 +4020,14 @@
       "additionalProperties": false,
       "type": "object",
       "properties": {
-        "Public": {
-          "type": "boolean"
+        "public": {
+          "type": "boolean",
+          "x-nullable": false
         }
       },
-      "example": "{\t\"public\": true}"
+      "example": {
+        "public": true
+      }
     },
     "ExampleLabelObject": {
       "additionalProperties": false,
@@ -4555,9 +4573,16 @@
         "isStaging": {
           "default": false,
           "type": "boolean"
+        },
+        "region": {
+          "type": "string"
         }
       },
-      "example": "{   \"versionId\": \"0.1\",   \"isStaging\": false,   \"region\"\" \"westus\"}"
+      "example": {
+       "versionId": "0.1",
+       "isStaging": false,
+       "region": "westus"
+      }
     },
     "JSONApp": {
       "additionalProperties": false,
@@ -5173,7 +5198,8 @@
       "description": "The base class \"ProductionOrStagingEndpointInfo\" inherits from.",
       "properties": {
         "versionId": {
-
+          "type": "string",
+          "x-nullable": true
         },
         "isStaging": {
           "type": "boolean"
@@ -5194,23 +5220,6 @@
         },
         "publishedDateTime": {
           "type": "string"
-        }
-      }
-    },
-    "ApplicationPublishResponse": {
-      "type": "object",
-      "properties": {
-        "endpointUrl": {
-          "type": "string"
-        },
-        "subscription-key": {
-          "type": "string"
-        },
-        "endpointRegion": {
-          "type": "string"
-        },
-        "isStaging": {
-          "type": "boolean"
         }
       }
     },
@@ -5282,7 +5291,8 @@
           "type": "string"
         },
         "public": {
-          "type": "boolean"
+          "type": "boolean",
+          "x-nullable": false
         }
       }
     },
