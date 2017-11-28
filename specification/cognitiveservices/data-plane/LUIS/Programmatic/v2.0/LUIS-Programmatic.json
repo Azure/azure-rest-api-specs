@@ -899,18 +899,56 @@
       }
     },
     "/apps/{appId}/versions/{versionId}/closedlists": {
-      "parameters": [
-        {
-          "$ref": "#/parameters/AppIdInPath"
+      "get": {
+        "description": "Gets information about the closedlist models.",
+        "operationId": "Model_GetApplicationVersionClosedListInfos",
+        "parameters": [
+          {
+            "$ref": "#/parameters/AppIdInPath"
+          },
+          {
+            "$ref": "#/parameters/VersionIdInPath"
+          },
+          {
+            "$ref": "#/parameters/SkipInPath"
+          },
+          {
+            "$ref": "#/parameters/TakeInPath"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "A list of closedlist entity model infos.",
+            "schema": {
+              "$ref": "#/definitions/ClosedListEntityExtractorsList"
+            }
+          },
+          "default": {
+            "description": "Error Response.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
         },
-        {
-          "$ref": "#/parameters/VersionIdInPath"
+        "produces": [
+          "application/json"
+        ],
+        "x-ms-examples": {
+          "Successful Get Application Version Closed List Infos request": {
+            "$ref": "./examples/model/SuccessfulGetApplicationVersionClosedListInfosRequest.json"
+          }
         }
-      ],
+      },
       "post": {
         "description": "Adds a closed list model to the application.",
         "operationId": "Model_CreateClosedListEntityModel",
         "parameters": [
+          {
+            "$ref": "#/parameters/AppIdInPath"
+          },
+          {
+            "$ref": "#/parameters/VersionIdInPath"
+          },
           {
             "name": "closedListModelCreateObject",
             "in": "body",
@@ -943,40 +981,6 @@
         "x-ms-examples": {
           "Successful Create Closed List Entity Model request": {
             "$ref": "./examples/model/SuccessfulCreateClosedListEntityModelRequest.json"
-          }
-        }
-      },
-      "get": {
-        "description": "Gets information about the closedlist models.",
-        "operationId": "Model_GetApplicationVersionClosedListInfos",
-        "parameters": [
-          {
-            "$ref": "#/parameters/SkipInPath"
-          },
-          {
-            "$ref": "#/parameters/TakeInPath"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "A list of closedlist entity model infos.",
-            "schema": {
-              "$ref": "#/definitions/ClosedListEntityExtractorsList"
-            }
-          },
-          "default": {
-            "description": "Error Response.",
-            "schema": {
-              "$ref": "#/definitions/ErrorResponse"
-            }
-          }
-        },
-        "produces": [
-          "application/json"
-        ],
-        "x-ms-examples": {
-          "Successful Get Application Version Closed List Infos request": {
-            "$ref": "./examples/model/SuccessfulGetApplicationVersionClosedListInfosRequest.json"
           }
         }
       }
@@ -4025,7 +4029,7 @@
       },
       "example": "{\t\"name\": \"DaysOfWeek\",\t\"phrases\": \"monday,tuesday,wednesday,thursday,friday,saturday,sunday\",        \"isExchangeable\": true}"
     },
-    "JSONSubClosedList": {
+    "SubClosedList": {
       "additionalProperties": false,
       "type": "object",
       "properties": {
@@ -4040,11 +4044,11 @@
         }
       }
     },
-    "JSONSubClosedListResponse": {
+    "SubClosedListResponse": {
       "type": "object",
       "allOf": [
         {
-          "$ref": "#/definitions/JSONSubClosedList"
+          "$ref": "#/definitions/SubClosedList"
         }
       ],
       "properties": {
@@ -4161,7 +4165,7 @@
         "SubLists": {
           "items": {
             "type": "object",
-            "$ref": "#/definitions/JSONSubClosedList"
+            "$ref": "#/definitions/SubClosedList"
           },
           "type": "array"
         }
@@ -4897,7 +4901,7 @@
         "subLists": {
           "type": "array",
           "items": {
-            "$ref": "#/definitions/JSONSubClosedListResponse"
+            "$ref": "#/definitions/SubClosedListResponse"
           }
         }
       }
