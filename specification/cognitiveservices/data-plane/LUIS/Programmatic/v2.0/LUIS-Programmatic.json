@@ -3150,14 +3150,18 @@
         }
       },
       "put": {
-        "description": "Replaces the current users access list with the one sent in the body.If an empty list is sent, all access to other users will be removed.",
+        "description": "Replaces the current users access list with the one sent in the body. If an empty list is sent, all access to other users will be removed.",
         "operationId": "Permissions_UpdateAccessList",
         "parameters": [
           {
-            "name": "body",
+            "$ref": "#/parameters/AppIdInPath"
+          },
+          {
+            "name": "collaborators",
             "in": "body",
+            "required": true,
             "schema": {
-              "example": "{\t\"emails\": [\t\t\"test1@domain.com\",\t\t\"test2@domain.com\"\t]}"
+              "$ref": "#/definitions/CollaboratorsArray"
             },
             "description": "A JSON object containing a list of user's email addresses."
           }
@@ -3167,7 +3171,7 @@
         ],
         "responses": {
           "200": {
-            "description": ""
+            "description": "No Content. Successfully operation."
           },
           "default": {
             "description": "Error Response.",
@@ -3176,9 +3180,11 @@
             }
           }
         },
-        "produces": [
-          "application/json"
-        ]
+        "x-ms-examples": {
+          "successful Replaces Users From Access List": {
+            "$ref": "./examples/permissions/SuccessfulReplacesUsersFromAccessListRequest.json"
+          }
+        }
       }
     },
     "/apps/{appId}/endpoints": {
@@ -5313,6 +5319,18 @@
         "email": {
           "type": "string",
           "description": "The email address of the user."
+        }
+      }
+    },
+    "CollaboratorsArray": {
+      "type": "object",
+      "properties": {
+        "emails": {
+          "type": "array",
+          "description": "The email address of the users.",
+          "items": {
+            "type": "string"
+          }
         }
       }
     },
