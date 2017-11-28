@@ -2428,6 +2428,14 @@
           "description": "The resource type.",
           "readOnly": true
         },
+        "location": {
+          "type": "string",
+          "description": "The resource location."
+        },
+        "tags": {
+          "$ref": "#/definitions/Tags",
+          "description": "Optional resource tags."
+        },
         "properties": {
           "$ref": "#/definitions/TransformProperties",
           "description": "The resource properties.",
@@ -2436,6 +2444,10 @@
       },
       "type": "object",
       "description": "A sample Key Policy resource type."
+    },
+    "Tags": {
+      "properties": {},
+      "type": "object"
     },
     "JobInput": {
       "discriminator": "@odata.type",
@@ -2627,6 +2639,43 @@
       "type": "object",
       "description": "Represents a value to override in a transform output preset."
     },
+    "JobErrorDetails": {
+      "properties": {
+        "code": {
+          "type": "string",
+          "enum": [
+            "Unknown"
+          ],
+          "x-ms-enum": {
+            "name": "JobErrorCode",
+            "values": [
+              {
+                "value": "Unknown",
+                "description": "This is reserved for backward compatibility of api versions."
+              }
+            ],
+            "modelAsString": false
+          },
+          "description": "Code describing the error."
+        },
+        "message": {
+          "type": "string",
+          "description": "Message describing the error."
+        },
+        "additionalDetails": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "description": "Additional details specific to the given error code."
+        }
+      },
+      "type": "object",
+      "required": [
+        "code"
+      ],
+      "description": "Details of JobOutput errors."
+    },
     "JobOutput": {
       "discriminator": "@odata.type",
       "properties": {
@@ -2711,10 +2760,6 @@
         "@odata.type"
       ],
       "description": "Base class for the output of a Job."
-    },
-    "JobErrorDetails": {
-      "properties": {},
-      "type": "object"
     },
     "JobOutputAsset": {
       "x-ms-discriminator-value": "#Microsoft.Media.JobOutputAsset",
@@ -2977,9 +3022,9 @@
     }
   },
   "paths": {
-    "api/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Media/mediaServices/{accountName}/transforms": {
+    "/api/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Media/mediaServices/{accountName}/transforms": {
       "get": {
-        "summary": "Lists the Transforms in the account.",
+        "summary": "List Transforms",
         "description": "Lists the Transforms in the account.",
         "operationId": "Transforms_List",
         "responses": {
@@ -3036,9 +3081,9 @@
         }
       }
     },
-    "api/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Media/mediaServices/{accountName}/transforms/getAvailablePresets": {
+    "/api/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Media/mediaServices/{accountName}/transforms/getAvailablePresets": {
       "get": {
-        "summary": "Gets the presets available which may vary by region.",
+        "summary": "Get Available Presets",
         "description": "Gets the presets available which may vary by region.",
         "operationId": "Transforms_GetAvailablePresets",
         "responses": {
@@ -3076,9 +3121,9 @@
         }
       }
     },
-    "api/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Media/mediaServices/{accountName}/transforms/{transformName}/": {
+    "/api/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Media/mediaServices/{accountName}/transforms/{transformName}": {
       "get": {
-        "summary": "Gets a Transform.",
+        "summary": "Get Transform",
         "description": "Gets a Transform.",
         "operationId": "Transforms_Get",
         "responses": {
@@ -3123,7 +3168,7 @@
         }
       },
       "put": {
-        "summary": "Creates or updates a new Transform.",
+        "summary": "Create or Update Transform",
         "description": "Creates or updates a new Transform.",
         "operationId": "Transforms_CreateOrUpdate",
         "responses": {
@@ -3182,7 +3227,7 @@
         }
       },
       "delete": {
-        "summary": "Deletes a Transform.",
+        "summary": "Delete Transform",
         "description": "Deletes a Transform.",
         "operationId": "Transforms_Delete",
         "responses": {
@@ -3224,7 +3269,7 @@
         }
       },
       "patch": {
-        "summary": "Updates a Transform.",
+        "summary": "Update Transform",
         "description": "Updates a Transform.",
         "operationId": "Transforms_Update",
         "responses": {
@@ -3277,9 +3322,9 @@
         }
       }
     },
-    "api/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Media/mediaServices/{accountName}/transforms/{transformName}/getStatistics": {
+    "/api/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Media/mediaServices/{accountName}/transforms/{transformName}/getStatistics": {
       "post": {
-        "summary": "Gets the Job Statistics of a Transform.",
+        "summary": "Get Transform Statistics",
         "description": "Gets the Job Statistics of a Transform.",
         "operationId": "Transforms_GetStatistics",
         "responses": {
@@ -3335,9 +3380,9 @@
         }
       }
     },
-    "api/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Media/mediaServices/{accountName}/transforms/{transformName}/jobs": {
+    "/api/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Media/mediaServices/{accountName}/transforms/{transformName}/jobs": {
       "get": {
-        "summary": "Lists all of the Jobs for the Transform.",
+        "summary": "List Jobs",
         "description": "Lists all of the Jobs for the Transform.",
         "operationId": "Jobs_List",
         "responses": {
@@ -3401,9 +3446,9 @@
         }
       }
     },
-    "api/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Media/mediaServices/{accountName}/transforms/{transformName}/jobs/{jobName}/": {
+    "/api/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Media/mediaServices/{accountName}/transforms/{transformName}/jobs/{jobName}": {
       "get": {
-        "summary": "Gets a Job.",
+        "summary": "Get Job",
         "description": "Gets a Job.",
         "operationId": "Jobs_Get",
         "responses": {
@@ -3455,7 +3500,7 @@
         }
       },
       "put": {
-        "summary": "Creates or updates a Job.",
+        "summary": "Create or Update Job",
         "description": "Creates or updates a Job.",
         "operationId": "Jobs_CreateOrUpdate",
         "responses": {
@@ -3521,7 +3566,7 @@
         }
       },
       "delete": {
-        "summary": "Deletes a Job.",
+        "summary": "Delete Job",
         "description": "Deletes a Job.",
         "operationId": "Jobs_Delete",
         "responses": {
@@ -3570,7 +3615,7 @@
         }
       },
       "patch": {
-        "summary": "Updates a Job.",
+        "summary": "Update Job",
         "description": "Updates a Job.",
         "operationId": "Jobs_Update",
         "responses": {
@@ -3630,10 +3675,10 @@
         }
       }
     },
-    "api/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Media/mediaServices/{accountName}/transforms/{transformName}/jobs/{jobName}/cancelJob": {
+    "/api/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Media/mediaServices/{accountName}/transforms/{transformName}/jobs/{jobName}/cancelJob": {
       "post": {
-        "summary": "Cancel a Job",
-        "description": "Cancel a Job",
+        "summary": "Cancel Job",
+        "description": "Cancel a Job.",
         "operationId": "Jobs_CancelJob",
         "responses": {
           "200": {
