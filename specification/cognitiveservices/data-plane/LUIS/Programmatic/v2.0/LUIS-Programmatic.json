@@ -2247,9 +2247,12 @@
         ],
         "responses": {
           "200": {
-            "description": "A JSON object containing the tasks info.",
-            "examples": {
-              "application/json": "[  {    \"version\": \"0.1\",    \"createdDateTime\": \"2017-01-31T16:38:06Z\",    \"lastModifiedDateTime\": \"2017-01-31T18:04:35Z\",    \"lastTrainedDateTime\": \"2017-01-31T17:05:25Z\",    \"lastPublishedDateTime\": \"2017-01-31T17:05:37Z\",    \"endpointUrl\": \"DummyUrl\",    \"assignedEndpointKey\": {      \"SubscriptionKey\": \"\",      \"SubscriptionName\": \"\"    },    \"externalApiKeys\": {},    \"intentsCount\": 3,    \"entitiesCount\": 2,    \"endpointHitsCount\": 0  },  {    \"version\": \"0.2\",    \"createdDateTime\": \"2017-01-31T19:10:29Z\",    \"lastModifiedDateTime\": \"2017-01-31T19:12:47Z\",    \"lastTrainedDateTime\": \"2017-01-31T19:13:00Z\",    \"lastPublishedDateTime\": \"2017-01-31T19:13:20Z\",    \"endpointUrl\": \"DummyUrl\",    \"assignedEndpointKey\": {      \"SubscriptionKey\": \"\",      \"SubscriptionName\": \"\"    },    \"externalApiKeys\": {},    \"intentsCount\": 3,    \"entitiesCount\": 2,    \"endpointHitsCount\": 0  }]"
+            "description": "A JSON object containing the list of versions.",
+            "schema": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/VersionInfo"
+              }
             }
           },
           "default": {
@@ -2261,7 +2264,12 @@
         },
         "produces": [
           "application/json"
-        ]
+        ],
+        "x-ms-examples": {
+          "Successful Get Application Versions info request": {
+            "$ref": "./examples/versions/SuccessfulGetApplicationVersionsInfoRequest.json"
+          }
+        }
       }
     },
     "/apps/{appId}/versions/{versionId}/": {
@@ -4415,6 +4423,65 @@
       },
       "type": "array",
       "example": "[\t{\t\t\"text\": \"Book me a flight from Cairo to Redmond next Thursday\",\t\t\"intentName\": \"BookFlight\",\t\t\"entityLabels\":\t\t[\t\t\t{\t\t\t\t\"entityName\": \"Location::From\",\t\t\t\t\"startCharIndex\": 22,\t\t\t\t\"endCharIndex\": 26\t\t\t},\t\t\t{\t\t\t\t\"entityName\": \"Location::To\",\t\t\t\t\"startCharIndex\": 31,\t\t\t\t\"endCharIndex\": 37\t\t\t}\t\t]\t},\t{\t\t\"text\": \"What's the weather like in Seattle?\",\t\t\"intentName\": \"GetWeather\",\t\t\"entityLabels\":\t\t[\t\t\t{\t\t\t\t\"entityName\": \"Location\",\t\t\t\t\"startCharIndex\": 27,\t\t\t\t\"endCharIndex\": 33\t\t\t}\t\t]\t}]"
+    },
+    "VersionInfo": {
+      "type": "object",
+      "required": [
+        "version", "createdDateTime", "lastModifiedDateTime", "trainingStatus"
+      ],
+      "properties": {
+        "version": {
+          "type": "string"
+        },
+        "createdDateTime": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "lastModifiedDateTime": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "lastTrainedDateTime": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "lastPublishedDateTime": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "endpointUrl": {
+          "type": "string"
+        },
+        "assignedEndpointKey": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          }
+        },
+        "externalApiKeys": {
+          "type": "object"
+        },
+        "intentsCount": {
+          "type": "integer"
+        },
+        "entitiesCount": {
+          "type": "integer"
+        },
+        "endpointHitsCount": {
+          "type": "integer"
+        },
+        "trainingStatus": {
+          "type": "string",
+          "enum": [
+            "NeedsTraining",
+            "InProgress",
+            "Trained"
+          ],
+          "x-ms-enum": {
+            "name": "TrainingStatus"
+          }
+        }
+      }
     },
     "TaskUpdateObject": {
       "additionalProperties": false,
