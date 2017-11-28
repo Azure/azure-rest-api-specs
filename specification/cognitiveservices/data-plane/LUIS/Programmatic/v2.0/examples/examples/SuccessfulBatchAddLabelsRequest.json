@@ -1,0 +1,40 @@
+{
+  "parameters": {
+    "Ocp-Apim-Subscription-Key": "{API key}",
+    "appId": "{appId}",
+    "versionId": "{versionId}"
+  },
+  "responses": {
+    "200": {
+      "headers": {},
+      "body": [
+        {
+          "value": {
+            "UtteranceText": "book me a flight from cairo to redmond next thursday",
+            "ExampleId": -11
+          },
+          "hasError": false
+        },
+        {
+          "value": {
+            "UtteranceText": "what's the weather like in seattle?",
+            "ExampleId": -12
+          },
+          "hasError": true,
+          "error": {
+            "code": "FAILED",
+            "message": "what's the weather like in seattle?. Error: The intent classifier MyLocation does not exist in the selected application"
+          }
+        },
+        {
+          "value": null,
+          "hasError": true,
+          "error": {
+            "code": "FAILED",
+            "message": "1 ticket to seattle tomorrow. Error: The entity extractor builtin.number doesn't exist in the selected application"
+          }
+        }
+      ]
+    }
+  }
+}
