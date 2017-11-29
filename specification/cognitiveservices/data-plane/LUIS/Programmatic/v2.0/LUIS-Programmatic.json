@@ -3258,8 +3258,9 @@
             "$ref": "#/parameters/VersionIdInPath"
           },
           {
-            "name": "prebuiltDomainCreateBaseObject",
+            "name": "prebuiltDomainObject",
             "in": "body",
+            "required": true,
             "schema": {
               "$ref": "#/definitions/PrebuiltDomainCreateBaseObject"
             },
@@ -3272,9 +3273,6 @@
         "responses": {
           "201": {
             "description": "An array of the created custom prebuilt domain model Ids.",
-            "examples": {
-              "application/json": "[  \"9500536f-ffec-4fab-93ad-6268abb0f73c\",  \"72a15bcc-538a-4e59-be8c-9fdd43b5338f\",  \"3397fc83-5b1d-4f5f-b4cd-0f2169f076c6\",  \"d116d287-3e53-4bd8-8b7b-4728c58c34d1\",  \"facd34fa-86a3-4805-8bf3-b99e40043b10\",  \"ad2cac73-2abf-41cb-99e2-f79d0dd6ca46\",  \"b8e31be4-300f-455e-894b-6f079abca0a2\",  \"70de3f00-3943-4a93-a88c-09392016b776\"]"
-            },
             "schema": {
               "$ref": "#/definitions/GuidList"
             }
@@ -3288,7 +3286,12 @@
         },
         "produces": [
           "application/json"
-        ]
+        ],
+        "x-ms-examples": {
+          "Successful Add Custom Prebuilt Domain to Application request": {
+            "$ref": "./examples/apps/SuccessfulAddCustomPrebuildDomainToApplicationRequest.json"
+          }
+        }
       }
     },
     "/apps/{appId}/versions/{versionId}/customprebuiltintents": {
@@ -3901,11 +3904,11 @@
       "additionalProperties": false,
       "type": "object",
       "properties": {
-        "DomainName": {
+        "domainName": {
           "type": "string"
         }
       },
-      "example": "{ \t\"domainName\": \"Camera\" }"
+      "example": { "domainName": "Camera" }
     },
     "PrebuiltDomainCreateObject": {
       "additionalProperties": false,
@@ -4619,7 +4622,7 @@
     },
     "GuidResponse": {
       "type": "string",
-      "example": "\"363187f1-c573-46b3-bc4c-ae01d686e68e\""
+      "example": "363187f1-c573-46b3-bc4c-ae01d686e68e"
     },
     "FeatureIDResponse": {
       "type": "number",
@@ -5417,7 +5420,12 @@
       "type": "array",
       "items": {
         "$ref": "#/definitions/GuidResponse"
-      }
+      },
+      "example": [
+        "2639049a-e41d-4285-a3c6-8a17ed299473",
+        "200d6173-ecfa-4967-bf95-3c319902dc52",
+        "f80aa9ba-64c8-4a36-8cc5-92010d0aadf1"
+      ]
     },
     "SubscriptionKeyList": {
       "type": "array",
