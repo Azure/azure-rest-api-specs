@@ -952,6 +952,7 @@
           {
             "name": "closedListModelCreateObject",
             "in": "body",
+            "required": true,
             "schema": {
               "$ref": "#/definitions/ClosedListModelCreateObject"
             },
@@ -4033,10 +4034,10 @@
       "additionalProperties": false,
       "type": "object",
       "properties": {
-        "CanonicalForm": {
+        "canonicalForm": {
           "type": "string"
         },
-        "List": {
+        "list": {
           "items": {
             "type": "string"
           },
@@ -4155,14 +4156,14 @@
       },
       "example": "{\t\"name\": \"ModifiedEmailPattern\",        \"pattern\": \"\\b[A-Z0-9._%+-]+@[A-Z0-9.-]+\\\\.[A-Z]{2,}\\b\"}"
     },
-    "JSONClosedList": {
+    "ClosedList": {
       "additionalProperties": false,
       "type": "object",
       "properties": {
-        "Name": {
+        "name": {
           "type": "string"
         },
-        "SubLists": {
+        "subLists": {
           "items": {
             "type": "object",
             "$ref": "#/definitions/SubClosedList"
@@ -4293,17 +4294,20 @@
       "additionalProperties": false,
       "type": "object",
       "properties": {
-        "CanonicalForm": {
+        "canonicalForm": {
           "type": "string"
         },
-        "List": {
+        "list": {
           "items": {
             "type": "string"
           },
           "type": "array"
         }
       },
-      "example": "{\t\"canonicalForm\": \"BankName\",\t\"list\": [\t\t\"HSBC\",\t\t\"CitiBank\"\t]}"
+      "example": {
+          "canonicalForm": "California",
+          "list": ["California", "CA", "Calif.", "Cal."]
+      }
     },
     "WordListBaseUpdateObject": {
       "additionalProperties": false,
@@ -4384,18 +4388,30 @@
       "additionalProperties": false,
       "type": "object",
       "properties": {
-        "SubLists": {
+        "subLists": {
           "items": {
             "type": "object",
             "$ref": "#/definitions/WordListCreateObject"
           },
           "type": "array"
         },
-        "Name": {
+        "name": {
           "type": "string"
         }
       },
-      "example": "{\t\"name\": \"States\",\t\"sublists\": \t[\t\t{\t\t\t\"canonicalForm\": \"New York\",\t\t\t\"list\": [ \"NY\", \"New York\" ]\t\t},\t\t{\t\t\t\"canonicalForm\": \"Washington\",\t\t\t\"list\": [ \"Washington\", \"WA\" ]\t\t},\t\t{\t\t\t\"canonicalForm\": \"California\",\t\t\t\"list\": [ \"California\", \"CA\", \"Calif.\", \"Cal.\" ]\t\t}\t]}"
+      "example": {
+        "name": "States",
+        "subLists": [{
+            "canonicalForm": "New York",
+            "list": ["NY", "New York"]
+        }, {
+            "canonicalForm": "Washington",
+            "list": ["Washington", "WA"]
+        }, {
+            "canonicalForm": "California",
+            "list": ["California", "CA", "Calif.", "Cal."]
+        }]
+      }
     },
     "ExampleLabelObjectArray": {
       "items": {
@@ -4594,7 +4610,7 @@
         "closedLists": {
           "items": {
             "type": "object",
-            "$ref": "#/definitions/JSONClosedList"
+            "$ref": "#/definitions/ClosedList"
           },
           "type": "array"
         },
@@ -4797,8 +4813,7 @@
       },
       "required": [
         "readableType"
-      ],
-      "discriminator": "readableType"
+      ]
     },
     "ModelInfoResponse": {
       "type": "object",
