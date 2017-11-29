@@ -2491,68 +2491,6 @@
         ]
       }
     },
-    "/apps/{appId}/versions/{versionId}/assignedkey": {
-      "parameters": [
-        {
-          "$ref": "#/parameters/AppIdInPath"
-        },
-        {
-          "$ref": "#/parameters/VersionIdInPath"
-        }
-      ],
-      "get": {
-        "description": "Gets the given application version's subscription key.",
-        "operationId": "Versions_GetApplicationVersionSubscriptionKey",
-        "responses": {
-          "200": {
-            "description": "The subscription key for this application's endpoint.",
-            "examples": {
-              "application/json": {
-                "subscriptionName": "DummyName",
-                "subscriptionKey": "DummyKey"
-              }
-            }
-          },
-          "default": {
-            "description": "Error Response.",
-            "schema": {
-              "$ref": "#/definitions/ErrorResponse"
-            }
-          }
-        },
-        "produces": [
-          "application/json"
-        ]
-      },
-      "put": {
-        "description": "Assigns a subscription key to the given application version.",
-        "operationId": "Versions_AssignSubscriptionKeyToVersion",
-        "parameters": [
-          {
-            "name": "keyValue",
-            "in": "body",
-            "schema": {
-              "$ref": "#/definitions/KeyValue"
-            },
-            "description": "The value of the endpoint key to assign to the application."
-          }
-        ],
-        "consumes": [
-          "application/json"
-        ],
-        "responses": {
-          "200": {
-            "description": ""
-          },
-          "default": {
-            "description": "Error Response.",
-            "schema": {
-              "$ref": "#/definitions/ErrorResponse"
-            }
-          }
-        }
-      }
-    },
     "/apps/{appId}/versions/{versionId}/externalKeys": {
       "parameters": [
         {
