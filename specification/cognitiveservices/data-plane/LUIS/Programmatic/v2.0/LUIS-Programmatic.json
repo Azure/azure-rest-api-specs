@@ -2318,8 +2318,15 @@
         "operationId": "Versions_RenameApplicationVersion",
         "parameters": [
           {
-            "name": "taskUpdateObject",
+            "$ref": "#/parameters/AppIdInPath"
+          },
+          {
+            "$ref": "#/parameters/VersionIdInPath"
+          },
+          {
+            "name": "versionUpdateObject",
             "in": "body",
+            "required": true,
             "schema": {
               "$ref": "#/definitions/TaskUpdateObject"
             },
@@ -2331,13 +2338,18 @@
         ],
         "responses": {
           "200": {
-            "description": ""
+            "description": "No Content. Successfully operation."
           },
           "default": {
             "description": "Error Response.",
             "schema": {
               "$ref": "#/definitions/ErrorResponse"
             }
+          }
+        },
+        "x-ms-examples": {
+          "Successful Rename Application Version request": {
+            "$ref": "./examples/versions/SuccessfulRenameApplicationVersionRequest.json"
           }
         }
       },
@@ -4493,11 +4505,13 @@
       "additionalProperties": false,
       "type": "object",
       "properties": {
-        "Version": {
+        "version": {
           "type": "string"
         }
       },
-      "example": "{\t\"version\": \"1.0\"}"
+      "example": {
+        "version": "1.0"
+      }
     },
     "PhraselistUpdateObject": {
       "additionalProperties": false,
