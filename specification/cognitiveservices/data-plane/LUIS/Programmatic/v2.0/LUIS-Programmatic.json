@@ -1571,8 +1571,22 @@
         "operationId": "Model_PatchClosedListEntityModel",
         "parameters": [
           {
+            "$ref": "#/parameters/AppIdInPath"
+          },
+          {
+            "$ref": "#/parameters/VersionIdInPath"
+          },
+          {
+            "name": "clEntityId",
+            "in": "path",
+            "description": "Format - guid. The closed list model ID.",
+            "required": true,
+            "type": "string"
+          },
+          {
             "name": "closedListModelPatchObject",
             "in": "body",
+            "required": true,
             "schema": {
               "$ref": "#/definitions/ClosedListModelPatchObject"
             },
@@ -1584,13 +1598,18 @@
         ],
         "responses": {
           "200": {
-            "description": ""
+            "description": "No Content. Successfully added sublists to Closed List."
           },
           "default": {
             "description": "Error Response.",
             "schema": {
               "$ref": "#/definitions/ErrorResponse"
             }
+          }
+        },
+        "x-ms-examples": {
+          "Successful Add SubLists to Closed List Entity request": {
+            "$ref": "./examples/model/SuccessfulPathClosedListEntityModelRequest.json"
           }
         }
       },
@@ -4236,7 +4255,7 @@
       "additionalProperties": false,
       "type": "object",
       "properties": {
-        "SubLists": {
+        "subLists": {
           "items": {
             "type": "object",
             "$ref": "#/definitions/WordListObject"
@@ -4244,7 +4263,15 @@
           "type": "array"
         }
       },
-      "example": "{\t\"sublists\":\t[\t\t{\t\t\t\"canonicalForm\": \"Ohio\",\t\t\t\"list\": [ \"Ohio\", \"OH\" ]\t\t}\t]}"
+      "example": {
+        "subLists":
+        [
+          {
+            "canonicalForm": "Ohio",
+            "list": [ "Ohio", "OH" ]
+          }
+        ]
+      }
     },
     "KeyValue": {
       "type": "string",
