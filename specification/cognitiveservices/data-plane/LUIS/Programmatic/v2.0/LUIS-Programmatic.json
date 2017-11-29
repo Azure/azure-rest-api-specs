@@ -2253,7 +2253,7 @@
         ],
         "responses": {
           "200": {
-            "description": "A JSON object containing the list of versions.",
+            "description": "A list of all versions of the application.",
             "schema": {
               "type": "array",
               "items": {
@@ -2293,23 +2293,8 @@
         "responses": {
           "200": {
             "description": "A JSON object containing the task info.",
-            "examples": {
-              "application/json": {
-                "version": "0.1",
-                "createdDateTime": "2017-01-31T16:38:06Z",
-                "lastModifiedDateTime": "2017-01-31T18:04:35Z",
-                "lastTrainedDateTime": "2017-01-31T17:05:25Z",
-                "lastPublishedDateTime": "2017-01-31T17:05:37Z",
-                "endpointUrl": "DummyUrl",
-                "assignedEndpointKey": {
-                  "SubscriptionKey": "",
-                  "SubscriptionName": ""
-                },
-                "externalApiKeys": {},
-                "intentsCount": 3,
-                "entitiesCount": 2,
-                "endpointHitsCount": 0
-              }
+            "schema": {
+              "$ref": "#/definitions/VersionInfo"
             }
           },
           "default": {
@@ -2321,7 +2306,12 @@
         },
         "produces": [
           "application/json"
-        ]
+        ],
+        "x-ms-examples": {
+          "Successful Get Application Version info request": {
+            "$ref": "./examples/versions/SuccessfulGetApplicationVersionInfoRequest.json"
+          }
+        }
       },
       "put": {
         "description": "Updates the name or description of the application version.",
@@ -4444,9 +4434,7 @@
     },
     "VersionInfo": {
       "type": "object",
-      "required": [
-        "version", "createdDateTime", "lastModifiedDateTime", "trainingStatus"
-      ],
+      "required": [ "version", "trainingStatus" ],
       "properties": {
         "version": {
           "type": "string"
