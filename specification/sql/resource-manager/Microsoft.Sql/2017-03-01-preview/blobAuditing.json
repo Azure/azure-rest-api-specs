@@ -263,7 +263,143 @@
         }
       }
     },
-	"/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/servers/{serverName}/databases/{databaseName}/auditingSettings/{blobAuditingPolicyName}": {
+	"/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/servers/{serverName}/databases/{databaseName}/extendedAuditingSettings/{blobAuditingPolicyName}": {
+      "get": {
+        "tags": [
+          "BlobAuditing"
+        ],
+        "description": "Gets an extended database's blob auditing policy.",
+        "operationId": "ExtendedDatabaseBlobAuditingPolicies_Get",
+        "parameters": [
+          {
+            "$ref": "#/parameters/ResourceGroupParameter"
+          },
+          {
+            "$ref": "#/parameters/ServerNameParameter"
+          },
+          {
+            "name": "databaseName",
+            "in": "path",
+            "description": "The name of the database for which the extended blob auditing policy is defined.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "blobAuditingPolicyName",
+            "in": "path",
+            "description": "The name of the extended blob auditing policy.",
+            "required": true,
+            "type": "string",
+            "enum": [
+              "default"
+            ],
+            "x-ms-enum": {
+              "name": "BlobAuditingPolicyName",
+              "modelAsString": true
+            }
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successfully retrieved the extended database blob auditing policy.",
+            "schema": {
+              "$ref": "#/definitions/ExtendedDatabaseBlobAuditingPolicy"
+            }
+          },
+          "default": {
+            "description": "*** Error Responses: ***\n\n * 400 BlobAuditingIsNotSupportedOnResourceType - Blob Auditing is currently not supported for this resource type.\n\n * 400 BlobAuditingInvalidStorageAccountName - The provided storage account is not valid or does not exist.\n\n * 400 BlobAuditingInvalidStorageAccountCredentials - The provided storage account access key is not valid.\n\n * 400 BlobAuditingIsNotSupportedOnGeoDr - Blob auditing can be configured on primary databases only.\n\n * 400 BlobAuditingPredicateExpressionSyntaxError - Invalid parameter 'predicateExpression', Syntax error.\n\n * 400 InvalidDatabaseBlobAuditingPolicyCreateRequest - The create database blob auditing policy request does not exist or has no properties object.\n\n * 400 InvalidBlobAuditActionsAndGroups - Invalid audit actions or action groups.\n\n * 400 DataSecurityInvalidUserSuppliedParameter - An invalid parameter value was provided by the client.\n\n * 400 BlobAuditingPredicateExpressionEmpty - Invalid parameter 'predicateExpression', Value can not be empty.\n\n * 404 SubscriptionDoesNotHaveServer - The requested server was not found\n\n * 404 DatabaseDoesNotExist - User has specified a database name that does not exist on this server instance.\n\n * 404 SourceDatabaseNotFound - The source database does not exist.\n\n * 500 DatabaseIsUnavailable - Loading failed. Please try again later.\n\n * 500 GetBlobAuditingPolicyFailed - Failed to get Auditing settings"
+          }
+        },
+        "x-ms-examples": {
+          "Get an extended database's blob auditing policy": {
+            "$ref": "./examples/ExtendedDatabaseBlobAuditingGet.json"
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "BlobAuditing"
+        ],
+        "description": "Creates or updates an extended database's blob auditing policy.",
+        "operationId": "ExtendedDatabaseBlobAuditingPolicies_CreateOrUpdate",
+        "parameters": [
+          {
+            "$ref": "#/parameters/ResourceGroupParameter"
+          },
+          {
+            "$ref": "#/parameters/ServerNameParameter"
+          },
+          {
+            "name": "databaseName",
+            "in": "path",
+            "description": "The name of the database for which the extended blob auditing policy will be defined.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "blobAuditingPolicyName",
+            "in": "path",
+            "description": "The name of the extended blob auditing policy.",
+            "required": true,
+            "type": "string",
+            "enum": [
+              "default"
+            ],
+            "x-ms-enum": {
+              "name": "BlobAuditingPolicyName",
+              "modelAsString": true
+            }
+          },
+          {
+            "name": "parameters",
+            "in": "body",
+            "description": "The extended database blob auditing policy.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/ExtendedDatabaseBlobAuditingPolicy"
+            }
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successfully set the extended database blob auditing policy.",
+            "schema": {
+              "$ref": "#/definitions/ExtendedDatabaseBlobAuditingPolicy"
+            }
+          },
+          "default": {
+            "description": "*** Error Responses: ***\n\n * 400 BlobAuditingIsNotSupportedOnResourceType - Blob Auditing is currently not supported for this resource type.\n\n * 400 BlobAuditingInvalidStorageAccountName - The provided storage account is not valid or does not exist.\n\n * 400 BlobAuditingInvalidStorageAccountCredentials - The provided storage account access key is not valid.\n\n * 400 BlobAuditingIsNotSupportedOnGeoDr - Blob auditing can be configured on primary databases only.\n\n * 400 BlobAuditingPredicateExpressionSyntaxError - Invalid parameter 'predicateExpression', Syntax error.\n\n * 400 InvalidDatabaseBlobAuditingPolicyCreateRequest - The create database blob auditing policy request does not exist or has no properties object.\n\n * 400 InvalidBlobAuditActionsAndGroups - Invalid audit actions or action groups.\n\n * 400 DataSecurityInvalidUserSuppliedParameter - An invalid parameter value was provided by the client.\n\n * 400 BlobAuditingPredicateExpressionEmpty - Invalid parameter 'predicateExpression', Value can not be empty.\n\n * 404 SubscriptionDoesNotHaveServer - The requested server was not found\n\n * 404 DatabaseDoesNotExist - User has specified a database name that does not exist on this server instance.\n\n * 404 SourceDatabaseNotFound - The source database does not exist.\n\n * 500 DatabaseIsUnavailable - Loading failed. Please try again later.\n\n * 500 UpsertBlobAuditingPolicyFailed - An error has occurred while saving Auditing settings, please try again later"
+          },
+          "201": {
+            "description": "Successfully created the extended database blob auditing policy.",
+            "schema": {
+              "$ref": "#/definitions/ExtendedDatabaseBlobAuditingPolicy"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Create or update an extended database's blob auditing policy with minimal parameters": {
+            "$ref": "./examples/ExtendedDatabaseBlobAuditingCreateMin.json"
+          },
+          "Create or update an extended database's blob auditing policy with all parameters": {
+            "$ref": "./examples/ExtendedDatabaseBlobAuditingCreateMax.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/servers/{serverName}/databases/{databaseName}/auditingSettings/{blobAuditingPolicyName}": {
       "get": {
         "tags": [
           "BlobAuditing"
@@ -577,6 +713,64 @@
         }
       }
     },
+    "ExtendedDatabaseBlobAuditingPolicyProperties": {
+      "description": "Properties of an extended database blob auditing policy.",
+      "required": [
+        "state"
+      ],
+      "type": "object",
+      "properties": {
+        "predicateExpression": {
+          "description": "Specifies condition of where clause when creating an audit.",
+          "type": "string"
+        },
+        "state": {
+          "description": "Specifies the state of the policy. If state is Enabled, storageEndpoint and storageAccountAccessKey are required.",
+          "enum": [
+            "Enabled",
+            "Disabled"
+          ],
+          "type": "string",
+          "x-ms-enum": {
+            "name": "BlobAuditingPolicyState",
+            "modelAsString": false
+          }
+        },
+        "storageEndpoint": {
+          "description": "Specifies the blob storage endpoint (e.g. https://MyAccount.blob.core.windows.net). If state is Enabled, storageEndpoint is required.",
+          "type": "string"
+        },
+        "storageAccountAccessKey": {
+          "description": "Specifies the identifier key of the auditing storage account. If state is Enabled, storageAccountAccessKey is required.",
+          "type": "string",
+          "x-ms-mutability": [
+            "create",
+            "update"
+          ]
+        },
+        "retentionDays": {
+          "format": "int32",
+          "description": "Specifies the number of days to keep in the audit logs.",
+          "type": "integer"
+        },
+        "auditActionsAndGroups": {
+          "description": "Specifies the Actions and Actions-Groups to audit.",
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "storageAccountSubscriptionId": {
+          "format": "uuid",
+          "description": "Specifies the blob storage subscription Id.",
+          "type": "string"
+        },
+        "isStorageSecondaryKeyInUse": {
+          "description": "Specifies whether storageAccountAccessKey value is the storage’s secondary key.",
+          "type": "boolean"
+        }
+      }
+    },
 	"DatabaseBlobAuditingPolicyProperties": {
       "description": "Properties of a database blob auditing policy.",
       "required": [
@@ -628,6 +822,27 @@
         "isStorageSecondaryKeyInUse": {
           "description": "Specifies whether storageAccountAccessKey value is the storage’s secondary key.",
           "type": "boolean"
+        }
+      }
+    },
+    "ExtendedDatabaseBlobAuditingPolicy": {
+      "description": "An extended database blob auditing policy.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/ProxyResource"
+        }
+      ],
+      "properties": {
+        "kind": {
+          "description": "Resource kind.",
+          "type": "string",
+          "readOnly": true
+        },
+        "properties": {
+          "$ref": "#/definitions/ExtendedDatabaseBlobAuditingPolicyProperties",
+          "description": "Resource properties.",
+          "x-ms-client-flatten": true
         }
       }
     },
