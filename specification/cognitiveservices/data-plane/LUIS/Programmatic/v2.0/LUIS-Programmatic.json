@@ -1597,15 +1597,35 @@
       "delete": {
         "description": "Deletes a closed list model from the application.",
         "operationId": "Model_DeleteClosedListEntityModel",
+        "parameters": [
+          {
+            "$ref": "#/parameters/AppIdInPath"
+          },
+          {
+            "$ref": "#/parameters/VersionIdInPath"
+          },
+          {
+            "name": "clEntityId",
+            "in": "path",
+            "description": "Format - guid. The closed list model ID.",
+            "required": true,
+            "type": "string"
+          }
+        ],
         "responses": {
           "200": {
-            "description": ""
+            "description": "No Content. Successfully delete Closed List from application."
           },
           "default": {
             "description": "Error Response.",
             "schema": {
               "$ref": "#/definitions/ErrorResponse"
             }
+          }
+        },
+        "x-ms-examples": {
+          "Successful Delete Closed List Entity Info request": {
+            "$ref": "./examples/model/SuccessfulDeleteClosedListEntityModelRequest.json"
           }
         }
       }
