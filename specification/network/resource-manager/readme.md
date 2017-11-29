@@ -28,7 +28,35 @@ These are the global settings for the Network API.
 title: NetworkManagementClient
 description: Network Client
 openapi-type: arm
-tag: package-2017-10
+tag: package-2017-11
+```
+
+### Tag: package-2017-11
+
+These settings apply only when `--tag=package-2017-11` is specified on the command line.
+
+``` yaml $(tag) == 'package-2017-11'
+input-file:
+- Microsoft.Network/2017-11-01/applicationGateway.json
+- Microsoft.Network/2017-11-01/applicationSecurityGroup.json
+- Microsoft.Network/2017-11-01/checkDnsAvailability.json
+- Microsoft.Network/2017-11-01/endpointService.json
+- Microsoft.Network/2017-11-01/expressRouteCircuit.json
+- Microsoft.Network/2017-11-01/loadBalancer.json
+- Microsoft.Network/2017-11-01/network.json
+- Microsoft.Network/2017-11-01/networkInterface.json
+- Microsoft.Network/2017-11-01/networkSecurityGroup.json
+- Microsoft.Network/2017-11-01/networkWatcher.json
+- Microsoft.Network/2017-11-01/operation.json
+- Microsoft.Network/2017-11-01/publicIpAddress.json
+- Microsoft.Network/2017-11-01/routeFilter.json
+- Microsoft.Network/2017-11-01/routeTable.json
+- Microsoft.Network/2017-11-01/serviceCommunity.json
+- Microsoft.Network/2017-11-01/usage.json
+- Microsoft.Network/2017-11-01/virtualNetwork.json
+- Microsoft.Network/2017-11-01/virtualNetworkGateway.json
+- Microsoft.Network/2017-11-01/vmssNetworkInterface.json
+- Microsoft.Network/2017-11-01/vmssPublicIpAddress.json
 ```
 
 ### Tag: package-2017-10
