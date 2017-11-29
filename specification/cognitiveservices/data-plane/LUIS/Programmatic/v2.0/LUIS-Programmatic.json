@@ -1478,24 +1478,24 @@
       }
     },
     "/apps/{appId}/versions/{versionId}/closedlists/{clEntityId}": {
-      "parameters": [
-        {
-          "$ref": "#/parameters/AppIdInPath"
-        },
-        {
-          "$ref": "#/parameters/VersionIdInPath"
-        },
-        {
-          "name": "clEntityId",
-          "in": "path",
-          "description": "Format - guid. The closed list model ID.",
-          "required": true,
-          "type": "string"
-        }
-      ],
       "get": {
         "description": "Gets information of a closed list model.",
         "operationId": "Model_GetClosedListEntityInfo",
+        "parameters": [
+          {
+            "$ref": "#/parameters/AppIdInPath"
+          },
+          {
+            "$ref": "#/parameters/VersionIdInPath"
+          },
+          {
+            "name": "clEntityId",
+            "in": "path",
+            "description": "Format - guid. The closed list model ID.",
+            "required": true,
+            "type": "string"
+          }
+        ],
         "responses": {
           "200": {
             "description": "The closed list model info.",
@@ -1524,12 +1524,26 @@
         "operationId": "Model_UpdateClosedListEntityModel",
         "parameters": [
           {
+            "$ref": "#/parameters/AppIdInPath"
+          },
+          {
+            "$ref": "#/parameters/VersionIdInPath"
+          },
+          {
+            "name": "clEntityId",
+            "in": "path",
+            "description": "Format - guid. The closed list model ID.",
+            "required": true,
+            "type": "string"
+          },
+          {
             "name": "closedListModelUpdateObject",
             "in": "body",
+            "required": true,
             "schema": {
               "$ref": "#/definitions/ClosedListModelUpdateObject"
             },
-            "description": "A json object containing the new entity name and words list."
+            "description": "The new entity name and words list."
           }
         ],
         "consumes": [
@@ -1537,13 +1551,18 @@
         ],
         "responses": {
           "200": {
-            "description": ""
+            "description": "No Content. Successfully updated Closed List name and words list."
           },
           "default": {
             "description": "Error Response.",
             "schema": {
               "$ref": "#/definitions/ErrorResponse"
             }
+          }
+        },
+        "x-ms-examples": {
+          "Successful Update Closed List Entity Info request": {
+            "$ref": "./examples/model/SuccessfulUpdateClosedListEntityModelRequest.json"
           }
         }
       },
@@ -3221,7 +3240,7 @@
             "name": "wordListCreateObject",
             "in": "body",
             "schema": {
-              "$ref": "#/definitions/WordListCreateObject"
+              "$ref": "#/definitions/WordListObject"
             },
             "description": "A json object containing words list."
           }
@@ -4200,7 +4219,7 @@
         "SubLists": {
           "items": {
             "type": "object",
-            "$ref": "#/definitions/WordListCreateObject"
+            "$ref": "#/definitions/WordListObject"
           },
           "type": "array"
         }
@@ -4290,7 +4309,7 @@
       },
       "example": "{\t\"name\": \"EmailPattern\",\t\"pattern\": \"\\\\b[A-Z0-9._%+-]+@[A-Z0-9.-]+\\\\.[A-Z]{2,}\\\\b\"}"
     },
-    "WordListCreateObject": {
+    "WordListObject": {
       "additionalProperties": false,
       "type": "object",
       "properties": {
@@ -4358,18 +4377,52 @@
       "additionalProperties": false,
       "type": "object",
       "properties": {
-        "SubLists": {
+        "subLists": {
           "items": {
             "type": "object",
-            "$ref": "#/definitions/WordListCreateObject"
+            "$ref": "#/definitions/WordListObject"
           },
           "type": "array"
         },
-        "Name": {
+        "name": {
           "type": "string"
         }
       },
-      "example": "{  \"name\": \"States\",  \"subLists\": [    {      \"canonicalForm\": \"new york\",      \"list\": [        \"ny\",        \"new york\"      ]    },    {      \"canonicalForm\": \"washington\",      \"list\": [        \"washington\",        \"wa\"      ]    },    {      \"canonicalForm\": \"california\",      \"list\": [        \"california\",        \"ca\",        \"calif.\",        \"cal.\"      ]    },    {    \t\"canonicalForm\": \"Texas\",    \t\"list\": [    \t\t\"Texas\",    \t\t\"TX\"    \t]    }  ]}"
+      "example": {
+        "name": "States",
+        "subLists": [
+          {
+            "canonicalForm": "new york",
+            "list": [
+              "ny",
+              "new york"
+            ]
+          },
+          {
+            "canonicalForm": "washington",
+            "list": [
+              "washington",
+              "wa"
+            ]
+          },
+          {
+            "canonicalForm": "california",
+            "list": [
+              "california",
+              "ca",
+              "calif.",
+              "cal."
+            ]
+          },
+          {
+            "canonicalForm": "Texas",
+            "list": [
+              "Texas",
+              "TX"
+            ]
+          }
+        ]
+      }
     },
     "ExternalKeyUpdateObject": {
       "additionalProperties": false,
@@ -4391,7 +4444,7 @@
         "subLists": {
           "items": {
             "type": "object",
-            "$ref": "#/definitions/WordListCreateObject"
+            "$ref": "#/definitions/WordListObject"
           },
           "type": "array"
         },
