@@ -2161,7 +2161,7 @@
             "$ref": "#/parameters/VersionIdInPath"
           },
           {
-            "name": "taskUpdateObject",
+            "name": "versionCloneObject",
             "in": "body",
             "schema": {
               "$ref": "#/definitions/TaskUpdateObject"
@@ -2175,8 +2175,9 @@
         "responses": {
           "201": {
             "description": "The version ID of the created task.",
-            "examples": {
-              "application/json": "\"0.2\""
+            "schema": {
+              "type": "string",
+              "example": "0.2"
             }
           },
           "default": {
@@ -2188,7 +2189,12 @@
         },
         "produces": [
           "application/json"
-        ]
+        ],
+        "x-ms-examples": {
+          "Successful Clone Application Version request": {
+            "$ref": "./examples/versions/SuccessfulCloneApplicatioVersionRequest.json"
+          }
+        }
       }
     },
     "/apps/{appId}/publish": {
