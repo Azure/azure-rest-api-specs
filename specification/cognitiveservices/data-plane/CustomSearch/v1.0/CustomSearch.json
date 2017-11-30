@@ -360,6 +360,52 @@
         }
       }
     },
+    "WebPage": {
+      "description": "Defines a webpage that is relevant to the query.",
+      "allOf": [
+        {
+          "$ref": "#/definitions/CreativeWork"
+        }
+      ],
+      "type": "object",
+      "properties": {
+        "displayUrl": {
+          "description": "The display URL of the webpage. The URL is meant for display purposes only and is not well formed.",
+          "readOnly": true,
+          "type": "string"
+        },
+        "snippet": {
+          "description": "A snippet of text from the webpage that describes its contents.",
+          "readOnly": true,
+          "type": "string"
+        },
+        "deepLinks": {
+          "description": "A list of links to related content that Bing found in the website that contains this webpage. The Webpage object in this context includes only the name, url, urlPingSuffix, and snippet fields.",
+          "readOnly": true,
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/WebPage"
+          }
+        },
+        "dateLastCrawled": {
+          "description": "The last time that Bing crawled the webpage. The date is in the form, YYYY-MM-DDTHH:MM:SS. For example, 2015-04-13T05:23:39.",
+          "readOnly": true,
+          "type": "string"
+        },
+        "searchTags": {
+          "description": "A list of search tags that the webpage owner specified on the webpage. The API returns only indexed search tags. The name field of the MetaTag object contains the indexed search tag. Search tags begin with search.* (for example, search.assetId). The content field contains the tag's value.",
+          "readOnly": true,
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/WebMetaTag"
+          }
+        },
+        "primaryImageOfPage": {
+          "$ref": "#/definitions/ImageObject",
+          "readOnly": true
+        }
+      }
+    },
     "ErrorResponse": {
       "description": "The top-level response that represents a failed request.",
       "allOf": [
