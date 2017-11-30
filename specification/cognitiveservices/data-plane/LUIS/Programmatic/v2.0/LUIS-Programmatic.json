@@ -1306,13 +1306,18 @@
         ],
         "responses": {
           "200": {
-            "description": ""
+            "description": "No Content. Successfully updated entity extractor name."
           },
           "default": {
             "description": "Error Response.",
             "schema": {
               "$ref": "#/definitions/ErrorResponse"
             }
+          }
+        },
+        "x-ms-examples": {
+          "Successful Rename Entity Info request": {
+            "$ref": "./examples/model/SuccessfulRenameEntityExtractorRequest.json"
           }
         }
       },
@@ -4492,11 +4497,13 @@
       "additionalProperties": false,
       "type": "object",
       "properties": {
-        "Name": {
+        "name": {
           "type": "string"
         }
       },
-      "example": "{\t\"name\": \"DaysOfWeek\"}"
+      "example": {
+        "name": "New Name"
+      }
     },
     "ClosedListModelUpdateObject": {
       "additionalProperties": false,
