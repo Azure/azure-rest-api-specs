@@ -471,10 +471,11 @@
           {
             "name": "exampleLabelObjectArray",
             "in": "body",
+            "required": true,
             "schema": {
               "$ref": "#/definitions/ExampleLabelObjectArray"
             },
-            "description": "A JSON array containing example labels."
+            "description": "Array of example labels."
           }
         ],
         "consumes": [
@@ -4642,7 +4643,35 @@
         "$ref": "#/definitions/ExampleLabelObject"
       },
       "type": "array",
-      "example": "[\t{\t\t\"text\": \"Book me a flight from Cairo to Redmond next Thursday\",\t\t\"intentName\": \"BookFlight\",\t\t\"entityLabels\":\t\t[\t\t\t{\t\t\t\t\"entityName\": \"Location::From\",\t\t\t\t\"startCharIndex\": 22,\t\t\t\t\"endCharIndex\": 26\t\t\t},\t\t\t{\t\t\t\t\"entityName\": \"Location::To\",\t\t\t\t\"startCharIndex\": 31,\t\t\t\t\"endCharIndex\": 37\t\t\t}\t\t]\t},\t{\t\t\"text\": \"What's the weather like in Seattle?\",\t\t\"intentName\": \"GetWeather\",\t\t\"entityLabels\":\t\t[\t\t\t{\t\t\t\t\"entityName\": \"Location\",\t\t\t\t\"startCharIndex\": 27,\t\t\t\t\"endCharIndex\": 33\t\t\t}\t\t]\t}]"
+      "example": [
+         {
+            "text":"Book me a flight from Cairo to Redmond next Thursday",
+            "intentName":"BookFlight",
+            "entityLabels":[
+               {
+                  "entityName":"Location::From",
+                  "startCharIndex":22,
+                  "endCharIndex":26
+               },
+               {
+                  "entityName":"Location::To",
+                  "startCharIndex":31,
+                  "endCharIndex":37
+               }
+            ]
+         },
+         {
+            "text":"What's the weather like in Seattle?",
+            "intentName":"GetWeather",
+            "entityLabels":[
+               {
+                  "entityName":"Location",
+                  "startCharIndex":27,
+                  "endCharIndex":33
+               }
+            ]
+         }
+      ]
     },
     "VersionInfo": {
       "type": "object",
