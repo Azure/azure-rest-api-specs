@@ -3278,10 +3278,11 @@
           {
             "name": "wordListCreateObject",
             "in": "body",
+            "required": true,
             "schema": {
               "$ref": "#/definitions/WordListObject"
             },
-            "description": "A json object containing words list."
+            "description": "Words list."
           }
         ],
         "consumes": [
@@ -3290,11 +3291,12 @@
         "responses": {
           "201": {
             "description": "The id of the newly created list",
+            "schema": {
+              "type": "string",
+              "example": "90440"
+            },
             "examples": {
               "application/json": "90440"
-            },
-            "schema": {
-              "$ref": "#/definitions/ApplicationsInfoList"
             }
           },
           "default": {
@@ -3306,7 +3308,12 @@
         },
         "produces": [
           "application/json"
-        ]
+        ],
+        "x-ms-examples": {
+          "Successful Add Sublist request": {
+            "$ref": "./examples/model/SuccessfulAddSublistToClosedListEntityModelRequest.json"
+          }
+        }
       }
     },
     "/apps/{appId}/versions/{versionId}/customprebuiltdomains": {
