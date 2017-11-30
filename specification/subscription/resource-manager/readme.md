@@ -1,14 +1,14 @@
-# Resource
+# Subscription
     
 > see https://aka.ms/autorest
 
-This is the AutoRest configuration file for Resource.
+This is the AutoRest configuration file for Subscription.
 
 
 
 ---
 ## Getting Started 
-To build the SDK for Resource, simply [Install AutoRest](https://aka.ms/autorest/install) and in this folder, run:
+To build the SDK for Subscription, simply [Install AutoRest](https://aka.ms/autorest/install) and in this folder, run:
 
 > `autorest`
 
@@ -22,7 +22,7 @@ To see additional help and options, run:
 
 
 ### Basic Information 
-These are the global settings for the Resource API.
+These are the global settings for the Subscription API.
 
 ``` yaml
 openapi-type: arm
@@ -54,7 +54,7 @@ csharp:
   azure-arm: true
   namespace: Microsoft.Azure.Management.Subscription
   license-header: MICROSOFT_MIT_NO_VERSION
-  output-folder: $(csharp-sdks-folder)/Resource/Management.Subscription/Generated
+  output-folder: $(csharp-sdks-folder)/Subscription/Management.Subscription/Generated
 batch:
     clear-output-folder: true # clear output folder on first run
   - package-subscriptionDefinitions: true  
