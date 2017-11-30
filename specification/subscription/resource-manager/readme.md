@@ -26,16 +26,15 @@ These are the global settings for the Subscription API.
 
 ``` yaml
 openapi-type: arm
+tag: package-2017-11-preview
 ```
 
-``` yaml $(package-subscriptionDefinitions)
-tag: package-subscriptionDefinitions-2017-11-preview
-```
 
-### Tag: package-subscriptionDefinitions-2017-11-preview
-These settings apply only when `--tag=package-subscriptionDefinitions-2017-11-preview` is specified on the command line.
+### Tag: package-2017-11-preview
 
-``` yaml $(tag) == 'package-subscriptionDefinitions-2017-11-preview'
+These settings apply only when `--tag=package-2017-11-preview` is specified on the command line.
+
+``` yaml $(tag) == 'package-2017-11-preview'
 input-file:
 - Microsoft.Subscription/2017-11-01-preview/subscriptionDefinitions.json
 ```
@@ -55,16 +54,5 @@ csharp:
   namespace: Microsoft.Azure.Management.Subscription
   license-header: MICROSOFT_MIT_NO_VERSION
   output-folder: $(csharp-sdks-folder)/Subscription/Management.Subscription/Generated
-batch:
-    clear-output-folder: true # clear output folder on first run
-  - package-subscriptionDefinitions: true  
-```
-
-# Validation
-
-Since this RP has no unique default package, iterate over all of them for validation:
-
-``` yaml $(validation)
-batch:
-  - package-subscriptionDefinitions: true  
+  clear-output-folder: true
 ```
