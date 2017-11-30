@@ -1708,40 +1708,45 @@
       }
     },
     "/apps/{appId}/versions/{versionId}/closedlists/{clEntityId}/sublists/{subListId}": {
-      "parameters": [
-        {
-          "$ref": "#/parameters/AppIdInPath"
-        },
-        {
-          "$ref": "#/parameters/VersionIdInPath"
-        },
-        {
-          "name": "clEntityId",
-          "in": "path",
-          "description": "Format - guid. The closed list entity extractor ID.",
-          "required": true,
-          "type": "string"
-        },
-        {
-          "name": "subListId",
-          "in": "path",
-          "description": "The sublist ID.",
-          "required": true,
-          "type": "integer"
-        }
-      ],
       "delete": {
         "description": "Deletes a sublist of a specific closed list model.",
         "operationId": "Model_DeleteSubList",
+        "parameters": [
+          {
+            "$ref": "#/parameters/AppIdInPath"
+          },
+          {
+            "$ref": "#/parameters/VersionIdInPath"
+          },
+          {
+            "name": "clEntityId",
+            "in": "path",
+            "description": "Format - guid. The closed list entity extractor ID.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "subListId",
+            "in": "path",
+            "description": "The sublist ID.",
+            "required": true,
+            "type": "integer"
+          }
+        ],
         "responses": {
           "200": {
-            "description": ""
+            "description": "No Content. Successfully deleted sublist."
           },
           "default": {
             "description": "Error Response.",
             "schema": {
               "$ref": "#/definitions/ErrorResponse"
             }
+          }
+        },
+        "x-ms-examples": {
+          "Successful Delete Sublist request": {
+            "$ref": "./examples/model/SuccessfulDeleteSublistRequest.json"
           }
         }
       },
@@ -1750,8 +1755,29 @@
         "operationId": "Model_UpdateSubList",
         "parameters": [
           {
+            "$ref": "#/parameters/AppIdInPath"
+          },
+          {
+            "$ref": "#/parameters/VersionIdInPath"
+          },
+          {
+            "name": "clEntityId",
+            "in": "path",
+            "description": "Format - guid. The closed list entity extractor ID.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "subListId",
+            "in": "path",
+            "description": "The sublist ID.",
+            "required": true,
+            "type": "integer"
+          },
+          {
             "name": "wordListBaseUpdateObject",
             "in": "body",
+            "required": true,
             "schema": {
               "$ref": "#/definitions/WordListBaseUpdateObject"
             },
@@ -4119,7 +4145,8 @@
       ],
       "properties": {
         "id": {
-          "type": "number",
+          "type": "integer",
+          "x-nullable": "false",
           "example": "123456"
         }
       }
