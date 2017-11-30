@@ -1,0 +1,2171 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "Image Search API",
+    "description": "The Image Search API lets you send a search query to Bing and get back a list of relevant images. This section provides technical details about the query parameters and headers that you use to request images and the JSON response objects that contain them. For examples that show how to make requests, see [Searching the Web for Images](https://docs.microsoft.com/azure/cognitive-services/bing-image-search/search-the-web).",
+    "version": "1.0"
+  },
+  "parameters": {
+    "x-bingapis-sdk": {
+      "name": "X-BingApis-SDK",
+      "description": "Activate swagger compliance",
+      "x-ms-parameter-location": "method",
+      "required": true,
+      "type": "string",
+      "in": "header",
+      "x-ms-enum": {
+        "name": "XBingApisSDK",
+        "modelAsString": true
+      },
+      "enum": [
+        "true"
+      ]
+    }
+  },
+  "host": "api.cognitive.microsoft.com",
+  "schemes": [
+    "https"
+  ],
+  "basePath": "/bing/v7.0",
+  "produces": [
+    "application/json"
+  ],
+  "securityDefinitions": {
+    "apiKeyHeader": {
+      "name": "Ocp-Apim-Subscription-Key",
+      "type": "apiKey",
+      "in": "header"
+    }
+  },
+  "security": [
+    {
+      "apiKeyHeader": []
+    }
+  ],
+  "paths": {
+    "/images/search": {
+      "get": {
+        "summary": "The Image Search API lets you send a search query to Bing and get back a list of relevant images. This section provides technical details about the query parameters and headers that you use to request images and the JSON response objects that contain them. For examples that show how to make requests, see [Searching the Web for Images](https://docs.microsoft.com/azure/cognitive-services/bing-image-search/search-the-web).",
+        "operationId": "Images_Search",
+        "tags": [
+          "ImageSearch"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/x-bingapis-sdk"
+          },
+          {
+            "name": "Accept",
+            "in": "header",
+            "description": "The default media type is application/json. To specify that the response use [JSON-LD](http://json-ld.org/), set the Accept header to application/ld+json.",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "Accept-Language",
+            "x-ms-client-name": "AcceptLanguage",
+            "in": "header",
+            "description": "A comma-delimited list of one or more languages to use for user interface strings. The list is in decreasing order of preference. For additional information, including expected format, see [RFC2616](http://www.w3.org/Protocols/rfc2616/rfc2616-sec14.html). This header and the [setLang](https://docs.microsoft.com/en-us/rest/api/cognitiveservices/bing-images-api-v7-reference#setlang) query parameter are mutually exclusive; do not specify both. If you set this header, you must also specify the [cc](https://docs.microsoft.com/en-us/rest/api/cognitiveservices/bing-images-api-v7-reference#cc) query parameter. To determine the market to return results for, Bing uses the first supported language it finds from the list and combines it with the cc parameter value. If the list does not include a supported language, Bing finds the closest language and market that supports the request or it uses an aggregated or default market for the results. To determine the market that Bing used, see the BingAPIs-Market header. Use this header and the cc query parameter only if you specify multiple languages. Otherwise, use the [mkt](https://docs.microsoft.com/en-us/rest/api/cognitiveservices/bing-images-api-v7-reference#mkt) and [setLang](https://docs.microsoft.com/en-us/rest/api/cognitiveservices/bing-images-api-v7-reference#setlang) query parameters. A user interface string is a string that's used as a label in a user interface. There are few user interface strings in the JSON response objects. Any links to Bing.com properties in the response objects apply the specified language.",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "User-Agent",
+            "x-ms-client-name": "UserAgent",
+            "in": "header",
+            "description": "The user agent originating the request. Bing uses the user agent to provide mobile users with an optimized experience. Although optional, you are encouraged to always specify this header. The user-agent should be the same string that any commonly used browser sends. For information about user agents, see [RFC 2616](http://www.w3.org/Protocols/rfc2616/rfc2616-sec14.html). The following are examples of user-agent strings. Windows Phone: Mozilla/5.0 (compatible; MSIE 10.0; Windows Phone 8.0; Trident/6.0; IEMobile/10.0; ARM; Touch; NOKIA; Lumia 822). Android: Mozilla / 5.0 (Linux; U; Android 2.3.5; en - us; SCH - I500 Build / GINGERBREAD) AppleWebKit / 533.1 (KHTML; like Gecko) Version / 4.0 Mobile Safari / 533.1. iPhone: Mozilla / 5.0 (iPhone; CPU iPhone OS 6_1 like Mac OS X) AppleWebKit / 536.26 (KHTML; like Gecko) Mobile / 10B142 iPhone4; 1 BingWeb / 3.03.1428.20120423. PC: Mozilla / 5.0 (Windows NT 6.3; WOW64; Trident / 7.0; Touch; rv:11.0) like Gecko. iPad: Mozilla / 5.0 (iPad; CPU OS 7_0 like Mac OS X) AppleWebKit / 537.51.1 (KHTML, like Gecko) Version / 7.0 Mobile / 11A465 Safari / 9537.53",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "X-MSEdge-ClientID",
+            "x-ms-client-name": "ClientId",
+            "in": "header",
+            "description": "Bing uses this header to provide users with consistent behavior across Bing API calls. Bing often flights new features and improvements, and it uses the client ID as a key for assigning traffic on different flights. If you do not use the same client ID for a user across multiple requests, then Bing may assign the user to multiple conflicting flights. Being assigned to multiple conflicting flights can lead to an inconsistent user experience. For example, if the second request has a different flight assignment than the first, the experience may be unexpected. Also, Bing can use the client ID to tailor web results to that client ID’s search history, providing a richer experience for the user. Bing also uses this header to help improve result rankings by analyzing the activity generated by a client ID. The relevance improvements help with better quality of results delivered by Bing APIs and in turn enables higher click-through rates for the API consumer. IMPORTANT: Although optional, you should consider this header required. Persisting the client ID across multiple requests for the same end user and device combination enables 1) the API consumer to receive a consistent user experience, and 2) higher click-through rates via better quality of results from the Bing APIs. Each user that uses your application on the device must have a unique, Bing generated client ID. If you do not include this header in the request, Bing generates an ID and returns it in the X-MSEdge-ClientID response header. The only time that you should NOT include this header in a request is the first time the user uses your app on that device. Use the client ID for each Bing API request that your app makes for this user on the device. Persist the client ID. To persist the ID in a browser app, use a persistent HTTP cookie to ensure the ID is used across all sessions. Do not use a session cookie. For other apps such as mobile apps, use the device's persistent storage to persist the ID. The next time the user uses your app on that device, get the client ID that you persisted. Bing responses may or may not include this header. If the response includes this header, capture the client ID and use it for all subsequent Bing requests for the user on that device. If you include the X-MSEdge-ClientID, you must not include cookies in the request.",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "X-MSEdge-ClientIP",
+            "x-ms-client-name": "ClientIp",
+            "in": "header",
+            "description": "The IPv4 or IPv6 address of the client device. The IP address is used to discover the user's location. Bing uses the location information to determine safe search behavior. Although optional, you are encouraged to always specify this header and the X-Search-Location header. Do not obfuscate the address (for example, by changing the last octet to 0). Obfuscating the address results in the location not being anywhere near the device's actual location, which may result in Bing serving erroneous results.",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "X-Search-Location",
+            "x-ms-client-name": "Location",
+            "in": "header",
+            "description": "A semicolon-delimited list of key/value pairs that describe the client's geographical location. Bing uses the location information to determine safe search behavior and to return relevant local content. Specify the key/value pair as <key>:<value>. The following are the keys that you use to specify the user's location. lat (required): The latitude of the client's location, in degrees. The latitude must be greater than or equal to -90.0 and less than or equal to +90.0. Negative values indicate southern latitudes and positive values indicate northern latitudes. long (required): The longitude of the client's location, in degrees. The longitude must be greater than or equal to -180.0 and less than or equal to +180.0. Negative values indicate western longitudes and positive values indicate eastern longitudes. re (required): The radius, in meters, which specifies the horizontal accuracy of the coordinates. Pass the value returned by the device's location service. Typical values might be 22m for GPS/Wi-Fi, 380m for cell tower triangulation, and 18,000m for reverse IP lookup. ts (optional): The UTC UNIX timestamp of when the client was at the location. (The UNIX timestamp is the number of seconds since January 1, 1970.) head (optional): The client's relative heading or direction of travel. Specify the direction of travel as degrees from 0 through 360, counting clockwise relative to true north. Specify this key only if the sp key is nonzero. sp (optional): The horizontal velocity (speed), in meters per second, that the client device is traveling. alt (optional): The altitude of the client device, in meters. are (optional): The radius, in meters, that specifies the vertical accuracy of the coordinates. Specify this key only if you specify the alt key. Although many of the keys are optional, the more information that you provide, the more accurate the location results are. Although optional, you are encouraged to always specify the user's geographical location. Providing the location is especially important if the client's IP address does not accurately reflect the user's physical location (for example, if the client uses VPN). For optimal results, you should include this header and the X-MSEdge-ClientIP header, but at a minimum, you should include this header.",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "aspect",
+            "x-ms-client-name": "Aspect",
+            "in": "query",
+            "description": "Filter images by the following aspect ratios. All: Do not filter by aspect.Specifying this value is the same as not specifying the aspect parameter. Square: Return images with standard aspect ratio. Wide: Return images with wide screen aspect ratio. Tall: Return images with tall aspect ratio.",
+            "required": false,
+            "type": "string",
+            "enum": [
+              "All",
+              "Square",
+              "Wide",
+              "Tall"
+            ],
+            "x-ms-enum": {
+              "name": "ImageAspect",
+              "modelAsString": true
+            }
+          },
+          {
+            "name": "color",
+            "x-ms-client-name": "Color",
+            "in": "query",
+            "description": "Filter images by the following color options. ColorOnly: Return color images. Monochrome: Return black and white images. Return images with one of the following dominant colors: Black, Blue, Brown, Gray, Green, Orange, Pink, Purple, Red, Teal, White, Yellow",
+            "required": false,
+            "type": "string",
+            "enum": [
+              "ColorOnly",
+              "Monochrome",
+              "Black",
+              "Blue",
+              "Brown",
+              "Gray",
+              "Green",
+              "Orange",
+              "Pink",
+              "Purple",
+              "Red",
+              "Teal",
+              "White",
+              "Yellow"
+            ],
+            "x-ms-enum": {
+              "name": "ImageColor",
+              "modelAsString": true
+            }
+          },
+          {
+            "name": "cc",
+            "x-ms-client-name": "CountryCode",
+            "in": "query",
+            "description": "A 2-character country code of the country where the results come from. For a list of possible values, see [Market Codes](https://docs.microsoft.com/en-us/rest/api/cognitiveservices/bing-images-api-v7-reference#market-codes). If you set this parameter, you must also specify the [Accept-Language](https://docs.microsoft.com/en-us/rest/api/cognitiveservices/bing-images-api-v7-reference#acceptlanguage) header. Bing uses the first supported language it finds from the languages list, and combine that language with the country code that you specify to determine the market to return results for. If the languages list does not include a supported language, Bing finds the closest language and market that supports the request, or it may use an aggregated or default market for the results instead of a specified one. You should use this query parameter and the Accept-Language query parameter only if you specify multiple languages; otherwise, you should use the mkt and setLang query parameters. This parameter and the [mkt](https://docs.microsoft.com/en-us/rest/api/cognitiveservices/bing-images-api-v7-reference#mkt) query parameter are mutually exclusive—do not specify both.",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "count",
+            "x-ms-client-name": "Count",
+            "in": "query",
+            "description": "The number of images to return in the response. The actual number delivered may be less than requested. The default is 35. The maximum value is 150. You use this parameter along with the offset parameter to page results.For example, if your user interface displays 20 images per page, set count to 20 and offset to 0 to get the first page of results.For each subsequent page, increment offset by 20 (for example, 0, 20, 40). Use this parameter only with the Image Search API.Do not specify this parameter when calling the Insights, Trending Images, or Web Search APIs.",
+            "required": false,
+            "type": "integer",
+            "format": "int32"
+          },
+          {
+            "name": "freshness",
+            "x-ms-client-name": "Freshness",
+            "in": "query",
+            "description": "Filter images by the following discovery options. Day: Return images discovered by Bing within the last 24 hours. Week: Return images discovered by Bing within the last 7 days. Month: Return images discovered by Bing within the last 30 days.",
+            "required": false,
+            "type": "string",
+            "enum": [
+              "Day",
+              "Week",
+              "Month"
+            ],
+            "x-ms-enum": {
+              "name": "Freshness",
+              "modelAsString": true
+            }
+          },
+          {
+            "name": "height",
+            "x-ms-client-name": "Height",
+            "in": "query",
+            "description": "Filter images that have the specified height, in pixels. You may use this filter with the size filter to return small images that have a height of 150 pixels.",
+            "required": false,
+            "type": "integer",
+            "format": "int32"
+          },
+          {
+            "name": "id",
+            "x-ms-client-name": "Id",
+            "in": "query",
+            "description": "An ID that uniquely identifies an image. Use this parameter to ensure that the specified image is the first image in the list of images that Bing returns. The [Image](https://docs.microsoft.com/en-us/rest/api/cognitiveservices/bing-images-api-v7-reference#image) object's imageId field contains the ID that you set this parameter to.",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "imageContent",
+            "x-ms-client-name": "ImageContent",
+            "in": "query",
+            "description": "Filter images by the following content types. Face: Return images that show only a person's face. Portrait: Return images that show only a person's head and shoulders.",
+            "required": false,
+            "type": "string",
+            "enum": [
+              "Face",
+              "Portrait"
+            ],
+            "x-ms-enum": {
+              "name": "ImageContent",
+              "modelAsString": true
+            }
+          },
+          {
+            "name": "imageType",
+            "x-ms-client-name": "ImageType",
+            "in": "query",
+            "description": "Filter images by the following image types. AnimatedGif: Return only animated GIFs. Clipart: Return only clip art images. Line: Return only line drawings. Photo: Return only photographs(excluding line drawings, animated Gifs, and clip art). Shopping: Return only images that contain items where Bing knows of a merchant that is selling the items. This option is valid in the en - US market only.Transparent: Return only images with a transparent background.",
+            "required": false,
+            "type": "string",
+            "enum": [
+              "AnimatedGif",
+              "Clipart",
+              "Line",
+              "Photo",
+              "Shopping",
+              "Transparent"
+            ],
+            "x-ms-enum": {
+              "name": "ImageType",
+              "modelAsString": true
+            }
+          },
+          {
+            "name": "license",
+            "x-ms-client-name": "License",
+            "in": "query",
+            "description": "Filter images by the following license types. All: Do not filter by license type.Specifying this value is the same as not specifying the license parameter. Any: Return images that are under any license type. The response doesn't include images that do not specify a license or the license is unknown. Public: Return images where the creator has waived their exclusive rights, to the fullest extent allowed by law. Share: Return images that may be shared with others. Changing or editing the image might not be allowed. Also, modifying, sharing, and using the image for commercial purposes might not be allowed. Typically, this option returns the most images. ShareCommercially: Return images that may be shared with others for personal or commercial purposes. Changing or editing the image might not be allowed. Modify: Return images that may be modified, shared, and used. Changing or editing the image might not be allowed. Modifying, sharing, and using the image for commercial purposes might not be allowed. ModifyCommercially: Return images that may be modified, shared, and used for personal or commercial purposes. Typically, this option returns the fewest images. For more information about these license types, see [Filter Images By License Type](http://go.microsoft.com/fwlink/?LinkId=309768).",
+            "required": false,
+            "type": "string",
+            "enum": [
+              "All",
+              "Any",
+              "Public",
+              "Share",
+              "ShareCommercially",
+              "Modify",
+              "ModifyCommercially"
+            ],
+            "x-ms-enum": {
+              "name": "ImageLicense",
+              "modelAsString": true
+            }
+          },
+          {
+            "name": "mkt",
+            "x-ms-client-name": "Market",
+            "in": "query",
+            "description": "The market where the results come from. Typically, mkt is the country where the user is making the request from. However, it could be a different country if the user is not located in a country where Bing delivers results. The market must be in the form <language code>-<country code>. For example, en-US. The string is case insensitive. For a list of possible market values, see [Market Codes](https://docs.microsoft.com/en-us/rest/api/cognitiveservices/bing-images-api-v7-reference#market-codes). NOTE: If known, you are encouraged to always specify the market. Specifying the market helps Bing route the request and return an appropriate and optimal response. If you specify a market that is not listed in [Market Codes](https://docs.microsoft.com/en-us/rest/api/cognitiveservices/bing-images-api-v7-reference#market-codes), Bing uses a best fit market code based on an internal mapping that is subject to change. This parameter and the [cc](https://docs.microsoft.com/en-us/rest/api/cognitiveservices/bing-images-api-v7-reference#cc) query parameter are mutually exclusive—do not specify both.",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "maxFileSize",
+            "x-ms-client-name": "MaxFileSize",
+            "in": "query",
+            "description": "Filter images that are less than or equal to the specified file size. The maximum file size that you may specify is 520,192 bytes. If you specify a larger value, the API uses 520,192. It is possible that the response may include images that are slightly larger than the specified maximum. You may specify this filter and minFileSize to filter images within a range of file sizes.",
+            "required": false,
+            "type": "integer",
+            "format": "int64"
+          },
+          {
+            "name": "maxHeight",
+            "x-ms-client-name": "MaxHeight",
+            "in": "query",
+            "description": "Filter images that have a height that is less than or equal to the specified height. Specify the height in pixels. You may specify this filter and minHeight to filter images within a range of heights. This filter and the height filter are mutually exclusive.",
+            "required": false,
+            "type": "integer",
+            "format": "int64"
+          },
+          {
+            "name": "maxWidth",
+            "x-ms-client-name": "MaxWidth",
+            "in": "query",
+            "description": "Filter images that have a width that is less than or equal to the specified width. Specify the width in pixels. You may specify this filter and maxWidth to filter images within a range of widths. This filter and the width filter are mutually exclusive.",
+            "required": false,
+            "type": "integer",
+            "format": "int64"
+          },
+          {
+            "name": "minFileSize",
+            "x-ms-client-name": "MinFileSize",
+            "in": "query",
+            "description": "Filter images that are greater than or equal to the specified file size. The maximum file size that you may specify is 520,192 bytes. If you specify a larger value, the API uses 520,192. It is possible that the response may include images that are slightly smaller than the specified minimum. You may specify this filter and maxFileSize to filter images within a range of file sizes.",
+            "required": false,
+            "type": "integer",
+            "format": "int64"
+          },
+          {
+            "name": "minHeight",
+            "x-ms-client-name": "MinHeight",
+            "in": "query",
+            "description": "Filter images that have a height that is greater than or equal to the specified height. Specify the height in pixels. You may specify this filter and maxHeight to filter images within a range of heights. This filter and the height filter are mutually exclusive.",
+            "required": false,
+            "type": "integer",
+            "format": "int64"
+          },
+          {
+            "name": "minWidth",
+            "x-ms-client-name": "MinWidth",
+            "in": "query",
+            "description": "Filter images that have a width that is greater than or equal to the specified width. Specify the width in pixels. You may specify this filter and maxWidth to filter images within a range of widths. This filter and the width filter are mutually exclusive.",
+            "required": false,
+            "type": "integer",
+            "format": "int64"
+          },
+          {
+            "name": "offset",
+            "x-ms-client-name": "Offset",
+            "in": "query",
+            "description": "The zero-based offset that indicates the number of images to skip before returning images. The default is 0. The offset should be less than ([totalEstimatedMatches](https://docs.microsoft.com/en-us/rest/api/cognitiveservices/bing-images-api-v7-reference#totalestimatedmatches) - count). Use this parameter along with the count parameter to page results. For example, if your user interface displays 20 images per page, set count to 20 and offset to 0 to get the first page of results. For each subsequent page, increment offset by 20 (for example, 0, 20, 40). It is possible for multiple pages to include some overlap in results. To prevent duplicates, see [nextOffset](https://docs.microsoft.com/en-us/rest/api/cognitiveservices/bing-images-api-v7-reference#nextoffset). Use this parameter only with the Image API. Do not specify this parameter when calling the Trending Images API or the Web Search API.",
+            "required": false,
+            "type": "integer",
+            "format": "int64"
+          },
+          {
+            "name": "q",
+            "x-ms-client-name": "Query",
+            "in": "query",
+            "description": "The user's search query term. The term cannot be empty. The term may contain [Bing Advanced Operators](http://msdn.microsoft.com/library/ff795620.aspx). For example, to limit images to a specific domain, use the [site:](http://msdn.microsoft.com/library/ff795613.aspx) operator. To help improve relevance of an insights query (see [insightsToken](https://docs.microsoft.com/en-us/rest/api/cognitiveservices/bing-images-api-v7-reference#insightstoken)), you should always include the user's query term. Use this parameter only with the Image Search API.Do not specify this parameter when calling the Trending Images API.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "safeSearch",
+            "x-ms-client-name": "SafeSearch",
+            "in": "query",
+            "description": "Filter images for adult content. The following are the possible filter values. Off: May return images with adult content. If the request is through the Image Search API, the response includes thumbnail images that are clear (non-fuzzy). However, if the request is through the Web Search API, the response includes thumbnail images that are pixelated (fuzzy). Moderate: If the request is through the Image Search API, the response doesn't include images with adult content. If the request is through the Web Search API, the response may include images with adult content (the thumbnail images are pixelated (fuzzy)). Strict: Do not return images with adult content. The default is Moderate. If the request comes from a market that Bing's adult policy requires that safeSearch is set to Strict, Bing ignores the safeSearch value and uses Strict. If you use the site: query operator, there is the chance that the response may contain adult content regardless of what the safeSearch query parameter is set to. Use site: only if you are aware of the content on the site and your scenario supports the possibility of adult content.",
+            "required": false,
+            "type": "string",
+            "enum": [
+              "Off",
+              "Moderate",
+              "Strict"
+            ],
+            "x-ms-enum": {
+              "name": "SafeSearch",
+              "modelAsString": true
+            }
+          },
+          {
+            "name": "size",
+            "x-ms-client-name": "Size",
+            "in": "query",
+            "description": "Filter images by the following sizes. All: Do not filter by size. Specifying this value is the same as not specifying the size parameter. Small: Return images that are less than 200x200 pixels. Medium: Return images that are greater than or equal to 200x200 pixels but less than 500x500 pixels. Large: Return images that are 500x500 pixels or larger. Wallpaper: Return wallpaper images. You may use this parameter along with the height or width parameters. For example, you may use height and size to request small images that are 150 pixels tall.",
+            "required": false,
+            "type": "string",
+            "enum": [
+              "All",
+              "Small",
+              "Medium",
+              "Large",
+              "Wallpaper"
+            ],
+            "x-ms-enum": {
+              "name": "ImageSize",
+              "modelAsString": true
+            }
+          },
+          {
+            "name": "setLang",
+            "x-ms-client-name": "SetLang",
+            "in": "query",
+            "description": "The language to use for user interface strings. Specify the language using the ISO 639-1 2-letter language code. For example, the language code for English is EN. The default is EN (English). Although optional, you should always specify the language. Typically, you set setLang to the same language specified by mkt unless the user wants the user interface strings displayed in a different language. This parameter and the [Accept-Language](https://docs.microsoft.com/en-us/rest/api/cognitiveservices/bing-images-api-v7-reference#acceptlanguage) header are mutually exclusive; do not specify both. A user interface string is a string that's used as a label in a user interface. There are few user interface strings in the JSON response objects. Also, any links to Bing.com properties in the response objects apply the specified language.",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "width",
+            "x-ms-client-name": "Width",
+            "in": "query",
+            "description": "Filter images that have the specified width, in pixels. You may use this filter with the size filter to return small images that have a width of 150 pixels.",
+            "required": false,
+            "type": "integer",
+            "format": "int32"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success.",
+            "schema": {
+              "$ref": "#/definitions/Images"
+            }
+          },
+          "default": {
+            "description": "An error has occurred. Check the response type and/or status code for more details.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Successful image search": {
+            "$ref": "./examples/SuccessfulImageSearchRequest.json"
+          }
+        }
+      }
+    },
+    "/images/details": {
+      "get": {
+        "summary": "The Image Detail Search API lets you search on Bing and get back insights about an image, such as webpages that include the image. This section provides technical details about the query parameters and headers that you use to request insights of images and the JSON response objects that contain them. For examples that show how to make requests, see [Searching the Web for Images](https://docs.microsoft.com/azure/cognitive-services/bing-image-search/search-the-web).",
+        "operationId": "Imagess_Details",
+        "tags": [
+          "ImageDetailSearch"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/x-bingapis-sdk"
+          },
+          {
+            "name": "Accept",
+            "in": "header",
+            "description": "The default media type is application/json. To specify that the response use [JSON-LD](http://json-ld.org/), set the Accept header to application/ld+json.",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "Accept-Language",
+            "x-ms-client-name": "AcceptLanguage",
+            "in": "header",
+            "description": "A comma-delimited list of one or more languages to use for user interface strings. The list is in decreasing order of preference. For additional information, including expected format, see [RFC2616](http://www.w3.org/Protocols/rfc2616/rfc2616-sec14.html). This header and the [setLang](https://docs.microsoft.com/en-us/rest/api/cognitiveservices/bing-images-api-v7-reference#setlang) query parameter are mutually exclusive; do not specify both. If you set this header, you must also specify the [cc](https://docs.microsoft.com/en-us/rest/api/cognitiveservices/bing-images-api-v7-reference#cc) query parameter. To determine the market to return results for, Bing uses the first supported language it finds from the list and combines it with the cc parameter value. If the list does not include a supported language, Bing finds the closest language and market that supports the request or it uses an aggregated or default market for the results. To determine the market that Bing used, see the BingAPIs-Market header. Use this header and the cc query parameter only if you specify multiple languages. Otherwise, use the [mkt](https://docs.microsoft.com/en-us/rest/api/cognitiveservices/bing-images-api-v7-reference#mkt) and [setLang](https://docs.microsoft.com/en-us/rest/api/cognitiveservices/bing-images-api-v7-reference#setlang) query parameters. A user interface string is a string that's used as a label in a user interface. There are few user interface strings in the JSON response objects. Any links to Bing.com properties in the response objects apply the specified language.",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "Content-Type",
+            "x-ms-client-name": "ContentType",
+            "in": "header",
+            "description": "Optional request header. If you set the [modules](https://docs.microsoft.com/en-us/rest/api/cognitiveservices/bing-images-api-v7-reference#modulesrequested) query parameter to RecognizedEntities, you may specify the binary of an image in the body of a POST request. If you specify the image in the body of a POST request, you must specify this header and set its value to multipart/form-data. The maximum image size is 1 MB.",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "User-Agent",
+            "x-ms-client-name": "UserAgent",
+            "in": "header",
+            "description": "The user agent originating the request. Bing uses the user agent to provide mobile users with an optimized experience. Although optional, you are encouraged to always specify this header. The user-agent should be the same string that any commonly used browser sends. For information about user agents, see [RFC 2616](http://www.w3.org/Protocols/rfc2616/rfc2616-sec14.html). The following are examples of user-agent strings. Windows Phone: Mozilla/5.0 (compatible; MSIE 10.0; Windows Phone 8.0; Trident/6.0; IEMobile/10.0; ARM; Touch; NOKIA; Lumia 822). Android: Mozilla / 5.0 (Linux; U; Android 2.3.5; en - us; SCH - I500 Build / GINGERBREAD) AppleWebKit / 533.1 (KHTML; like Gecko) Version / 4.0 Mobile Safari / 533.1. iPhone: Mozilla / 5.0 (iPhone; CPU iPhone OS 6_1 like Mac OS X) AppleWebKit / 536.26 (KHTML; like Gecko) Mobile / 10B142 iPhone4; 1 BingWeb / 3.03.1428.20120423. PC: Mozilla / 5.0 (Windows NT 6.3; WOW64; Trident / 7.0; Touch; rv:11.0) like Gecko. iPad: Mozilla / 5.0 (iPad; CPU OS 7_0 like Mac OS X) AppleWebKit / 537.51.1 (KHTML, like Gecko) Version / 7.0 Mobile / 11A465 Safari / 9537.53",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "X-MSEdge-ClientID",
+            "x-ms-client-name": "ClientId",
+            "in": "header",
+            "description": "Bing uses this header to provide users with consistent behavior across Bing API calls. Bing often flights new features and improvements, and it uses the client ID as a key for assigning traffic on different flights. If you do not use the same client ID for a user across multiple requests, then Bing may assign the user to multiple conflicting flights. Being assigned to multiple conflicting flights can lead to an inconsistent user experience. For example, if the second request has a different flight assignment than the first, the experience may be unexpected. Also, Bing can use the client ID to tailor web results to that client ID’s search history, providing a richer experience for the user. Bing also uses this header to help improve result rankings by analyzing the activity generated by a client ID. The relevance improvements help with better quality of results delivered by Bing APIs and in turn enables higher click-through rates for the API consumer. IMPORTANT: Although optional, you should consider this header required. Persisting the client ID across multiple requests for the same end user and device combination enables 1) the API consumer to receive a consistent user experience, and 2) higher click-through rates via better quality of results from the Bing APIs. Each user that uses your application on the device must have a unique, Bing generated client ID. If you do not include this header in the request, Bing generates an ID and returns it in the X-MSEdge-ClientID response header. The only time that you should NOT include this header in a request is the first time the user uses your app on that device. Use the client ID for each Bing API request that your app makes for this user on the device. Persist the client ID. To persist the ID in a browser app, use a persistent HTTP cookie to ensure the ID is used across all sessions. Do not use a session cookie. For other apps such as mobile apps, use the device's persistent storage to persist the ID. The next time the user uses your app on that device, get the client ID that you persisted. Bing responses may or may not include this header. If the response includes this header, capture the client ID and use it for all subsequent Bing requests for the user on that device. If you include the X-MSEdge-ClientID, you must not include cookies in the request.",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "X-MSEdge-ClientIP",
+            "x-ms-client-name": "ClientIp",
+            "in": "header",
+            "description": "The IPv4 or IPv6 address of the client device. The IP address is used to discover the user's location. Bing uses the location information to determine safe search behavior. Although optional, you are encouraged to always specify this header and the X-Search-Location header. Do not obfuscate the address (for example, by changing the last octet to 0). Obfuscating the address results in the location not being anywhere near the device's actual location, which may result in Bing serving erroneous results.",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "X-Search-Location",
+            "x-ms-client-name": "Location",
+            "in": "header",
+            "description": "A semicolon-delimited list of key/value pairs that describe the client's geographical location. Bing uses the location information to determine safe search behavior and to return relevant local content. Specify the key/value pair as <key>:<value>. The following are the keys that you use to specify the user's location. lat (required): The latitude of the client's location, in degrees. The latitude must be greater than or equal to -90.0 and less than or equal to +90.0. Negative values indicate southern latitudes and positive values indicate northern latitudes. long (required): The longitude of the client's location, in degrees. The longitude must be greater than or equal to -180.0 and less than or equal to +180.0. Negative values indicate western longitudes and positive values indicate eastern longitudes. re (required): The radius, in meters, which specifies the horizontal accuracy of the coordinates. Pass the value returned by the device's location service. Typical values might be 22m for GPS/Wi-Fi, 380m for cell tower triangulation, and 18,000m for reverse IP lookup. ts (optional): The UTC UNIX timestamp of when the client was at the location. (The UNIX timestamp is the number of seconds since January 1, 1970.) head (optional): The client's relative heading or direction of travel. Specify the direction of travel as degrees from 0 through 360, counting clockwise relative to true north. Specify this key only if the sp key is nonzero. sp (optional): The horizontal velocity (speed), in meters per second, that the client device is traveling. alt (optional): The altitude of the client device, in meters. are (optional): The radius, in meters, that specifies the vertical accuracy of the coordinates. Specify this key only if you specify the alt key. Although many of the keys are optional, the more information that you provide, the more accurate the location results are. Although optional, you are encouraged to always specify the user's geographical location. Providing the location is especially important if the client's IP address does not accurately reflect the user's physical location (for example, if the client uses VPN). For optimal results, you should include this header and the X-MSEdge-ClientIP header, but at a minimum, you should include this header.",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "cab",
+            "x-ms-client-name": "CropBottom",
+            "in": "query",
+            "description": "The bottom coordinate of the region to crop. The coordinate is a fractional value of the original image's height and is measured from the top, left corner of the image. Specify the coordinate as a value from 0.0 through 1.0. Use this parameter only with the Insights API. Do not specify this parameter when calling the Images, Trending Images, or Web Search APIs.",
+            "required": false,
+            "type": "number",
+            "format": "float"
+          },
+          {
+            "name": "cal",
+            "x-ms-client-name": "CropLeft",
+            "in": "query",
+            "description": "The left coordinate of the region to crop. The coordinate is a fractional value of the original image's height and is measured from the top, left corner of the image. Specify the coordinate as a value from 0.0 through 1.0. Use this parameter only with the Insights API. Do not specify this parameter when calling the Images, Trending Images, or Web Search APIs.",
+            "required": false,
+            "type": "number",
+            "format": "float"
+          },
+          {
+            "name": "car",
+            "x-ms-client-name": "CropRight",
+            "in": "query",
+            "description": "The right coordinate of the region to crop. The coordinate is a fractional value of the original image's height and is measured from the top, left corner of the image. Specify the coordinate as a value from 0.0 through 1.0. Use this parameter only with the Insights API. Do not specify this parameter when calling the Images, Trending Images, or Web Search APIs.",
+            "required": false,
+            "type": "number",
+            "format": "float"
+          },
+          {
+            "name": "cat",
+            "x-ms-client-name": "CropTop",
+            "in": "query",
+            "description": "The top coordinate of the region to crop. The coordinate is a fractional value of the original image's height and is measured from the top, left corner of the image. Specify the coordinate as a value from 0.0 through 1.0. Use this parameter only with the Insights API. Do not specify this parameter when calling the Images, Trending Images, or Web Search APIs.",
+            "required": false,
+            "type": "number",
+            "format": "float"
+          },
+          {
+            "name": "ct",
+            "x-ms-client-name": "CropType",
+            "in": "query",
+            "description": "The crop type to use when cropping the image based on the coordinates specified in the cal, cat, car, and cab parameters. The following are the possible values. 0: Rectangular (default). Use this parameter only with the Insights API. Do not specify this parameter when calling the Images, Trending Images, or Web Search APIs.",
+            "required": false,
+            "type": "string",
+            "enum": [
+              "Rectangular"
+            ],
+            "x-ms-enum": {
+              "name": "ImageCropType",
+              "modelAsString": true
+            }
+          },
+          {
+            "name": "cc",
+            "x-ms-client-name": "CountryCode",
+            "in": "query",
+            "description": "A 2-character country code of the country where the results come from. For a list of possible values, see [Market Codes](https://docs.microsoft.com/en-us/rest/api/cognitiveservices/bing-images-api-v7-reference#market-codes). If you set this parameter, you must also specify the [Accept-Language](https://docs.microsoft.com/en-us/rest/api/cognitiveservices/bing-images-api-v7-reference#acceptlanguage) header. Bing uses the first supported language it finds from the languages list, and combine that language with the country code that you specify to determine the market to return results for. If the languages list does not include a supported language, Bing finds the closest language and market that supports the request, or it may use an aggregated or default market for the results instead of a specified one. You should use this query parameter and the Accept-Language query parameter only if you specify multiple languages; otherwise, you should use the mkt and setLang query parameters. This parameter and the [mkt](https://docs.microsoft.com/en-us/rest/api/cognitiveservices/bing-images-api-v7-reference#mkt) query parameter are mutually exclusive—do not specify both.",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "id",
+            "x-ms-client-name": "Id",
+            "in": "query",
+            "description": "An ID that uniquely identifies an image. Use this parameter to ensure that the specified image is the first image in the list of images that Bing returns. The [Image](https://docs.microsoft.com/en-us/rest/api/cognitiveservices/bing-images-api-v7-reference#image) object's imageId field contains the ID that you set this parameter to.",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "imgUrl",
+            "x-ms-client-name": "ImageUrl",
+            "in": "query",
+            "description": "The URL of an image that you want to get insights of. Use this parameter as an alternative to using the insightsToken parameter to specify the image. You may also specify the image by placing the binary of the image in the body of a POST request. If you use the binary option, see the [Content-Type](https://docs.microsoft.com/en-us/rest/api/cognitiveservices/bing-images-api-v7-reference#contenttype) header. The maximum supported image size is 1 MB. Use this parameter only with the Insights API. Do not specify this parameter when calling the Images, Trending Images, or Web Search APIs.",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "insightsToken",
+            "x-ms-client-name": "InsightsToken",
+            "in": "query",
+            "description": "An image token. The [Image](https://docs.microsoft.com/en-us/rest/api/cognitiveservices/bing-images-api-v7-reference#image) object's [imageInsightsToken](https://docs.microsoft.com/en-us/rest/api/cognitiveservices/bing-images-api-v7-reference#image-imageinsightstoken) contains the token. Specify this parameter to get additional information about an image, such as a caption or shopping source. For a list of the additional information about an image that you can get, see the [modules](https://docs.microsoft.com/en-us/rest/api/cognitiveservices/bing-images-api-v7-reference#modulesrequested) query parameter. Use this parameter only with the Insights API. Do not specify this parameter when calling the Images, Trending Images, or Web Search APIs.",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "modules",
+            "x-ms-client-name": "Modules",
+            "in": "query",
+            "description": "A comma-delimited list of insights to request. The following are the possible case-insensitive values. All: Return all insights, if available, except RecognizedEntities. BRQ: Best representative query. The query term that best describes the image. Caption: A caption that provides information about the image. If the caption contains entities, the response may include links to images of those entities. Collections: A list of related images. Recipes: A list of recipes for cooking the food shown in the images. PagesIncluding: A list of webpages that include the image. RecognizedEntities: A list of entities (people) that were recognized in the image. NOTE: You may not specify this module with any other module. If you specify it with other modules, the response doesn't include recognized entities. RelatedSearches: A list of related searches made by others. ShoppingSources: A list of merchants where you can buy related offerings. SimilarImages: A list of images that are visually similar to the original image. SimilarProducts: A list of images that contain a product that is similar to a product found in the original image. Tags: Provides characteristics of the type of content found in the image. For example, if the image is of a person, the tags might indicate the person's gender and type of clothes they're wearing. If you specify a module and there is no data for the module, the response object doesn't include the related field. For example, if you specify Caption and it does not exist, the response doesn't include the imageCaption field. To include related searches, the request must include the original query string. Although the original query string is not required for similar images or products, you should always include it because it can help improve relevance and the results. Use this parameter only with the Insights API. Do not specify this parameter when calling the Images, Trending Images, or Web Search APIs.",
+            "required": false,
+            "type": "array",
+            "items": {
+              "type": "string",
+              "enum": [
+                "All",
+                "BRQ",
+                "Caption",
+                "Collections",
+                "Recipes",
+                "PagesIncluding",
+                "RecognizedEntities",
+                "RelatedSearches",
+                "ShoppingSources",
+                "SimilarImages",
+                "SimilarProducts",
+                "Tags"
+              ],
+              "x-ms-enum": {
+                "name": "ImageInsightModule",
+                "modelAsString": true
+              }
+            },
+            "collectionFormat": "csv"
+          },
+          {
+            "name": "mkt",
+            "x-ms-client-name": "Market",
+            "in": "query",
+            "description": "The market where the results come from. Typically, mkt is the country where the user is making the request from. However, it could be a different country if the user is not located in a country where Bing delivers results. The market must be in the form <language code>-<country code>. For example, en-US. The string is case insensitive. For a list of possible market values, see [Market Codes](https://docs.microsoft.com/en-us/rest/api/cognitiveservices/bing-images-api-v7-reference#market-codes). NOTE: If known, you are encouraged to always specify the market. Specifying the market helps Bing route the request and return an appropriate and optimal response. If you specify a market that is not listed in [Market Codes](https://docs.microsoft.com/en-us/rest/api/cognitiveservices/bing-images-api-v7-reference#market-codes), Bing uses a best fit market code based on an internal mapping that is subject to change. This parameter and the [cc](https://docs.microsoft.com/en-us/rest/api/cognitiveservices/bing-images-api-v7-reference#cc) query parameter are mutually exclusive—do not specify both.",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "q",
+            "x-ms-client-name": "Query",
+            "in": "query",
+            "description": "The user's search query term. The term cannot be empty. The term may contain [Bing Advanced Operators](http://msdn.microsoft.com/library/ff795620.aspx). For example, to limit images to a specific domain, use the [site:](http://msdn.microsoft.com/library/ff795613.aspx) operator. To help improve relevance of an insights query (see [insightsToken](https://docs.microsoft.com/en-us/rest/api/cognitiveservices/bing-images-api-v7-reference#insightstoken)), you should always include the user's query term. Use this parameter only with the Image Search API.Do not specify this parameter when calling the Trending Images API.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "safeSearch",
+            "x-ms-client-name": "SafeSearch",
+            "in": "query",
+            "description": "Filter images for adult content. The following are the possible filter values. Off: May return images with adult content. If the request is through the Image Search API, the response includes thumbnail images that are clear (non-fuzzy). However, if the request is through the Web Search API, the response includes thumbnail images that are pixelated (fuzzy). Moderate: If the request is through the Image Search API, the response doesn't include images with adult content. If the request is through the Web Search API, the response may include images with adult content (the thumbnail images are pixelated (fuzzy)). Strict: Do not return images with adult content. The default is Moderate. If the request comes from a market that Bing's adult policy requires that safeSearch is set to Strict, Bing ignores the safeSearch value and uses Strict. If you use the site: query operator, there is the chance that the response may contain adult content regardless of what the safeSearch query parameter is set to. Use site: only if you are aware of the content on the site and your scenario supports the possibility of adult content.",
+            "required": false,
+            "type": "string",
+            "enum": [
+              "Off",
+              "Moderate",
+              "Strict"
+            ],
+            "x-ms-enum": {
+              "name": "SafeSearch",
+              "modelAsString": true
+            }
+          },
+          {
+            "name": "setLang",
+            "x-ms-client-name": "SetLang",
+            "in": "query",
+            "description": "The language to use for user interface strings. Specify the language using the ISO 639-1 2-letter language code. For example, the language code for English is EN. The default is EN (English). Although optional, you should always specify the language. Typically, you set setLang to the same language specified by mkt unless the user wants the user interface strings displayed in a different language. This parameter and the [Accept-Language](https://docs.microsoft.com/en-us/rest/api/cognitiveservices/bing-images-api-v7-reference#acceptlanguage) header are mutually exclusive; do not specify both. A user interface string is a string that's used as a label in a user interface. There are few user interface strings in the JSON response objects. Also, any links to Bing.com properties in the response objects apply the specified language.",
+            "required": false,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success.",
+            "schema": {
+              "$ref": "#/definitions/ImageInsights"
+            }
+          },
+          "default": {
+            "description": "An error has occurred. Check the response type and/or status code for more details.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Successful image detail": {
+            "$ref": "./examples/SuccessfulImageDetailRequest.json"
+          }
+        }
+      }
+    },
+    "/images/trending": {
+      "get": {
+        "summary": "The Image Trending Search API lets you search on Bing and get back a list of images that are trending based on search requests made by others. The images are broken out into different categories. For example, Popular People Searches. For a list of markets that support trending images, see [Trending Images](https://docs.microsoft.com/en-us/azure/cognitive-services/bing-image-search/trending-images).",
+        "operationId": "Images_Trending",
+        "tags": [
+          "ImageTrendingSearch"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/x-bingapis-sdk"
+          },
+          {
+            "name": "Accept",
+            "in": "header",
+            "description": "The default media type is application/json. To specify that the response use [JSON-LD](http://json-ld.org/), set the Accept header to application/ld+json.",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "Accept-Language",
+            "x-ms-client-name": "AcceptLanguage",
+            "in": "header",
+            "description": "A comma-delimited list of one or more languages to use for user interface strings. The list is in decreasing order of preference. For additional information, including expected format, see [RFC2616](http://www.w3.org/Protocols/rfc2616/rfc2616-sec14.html). This header and the [setLang](https://docs.microsoft.com/en-us/rest/api/cognitiveservices/bing-images-api-v7-reference#setlang) query parameter are mutually exclusive; do not specify both. If you set this header, you must also specify the [cc](https://docs.microsoft.com/en-us/rest/api/cognitiveservices/bing-images-api-v7-reference#cc) query parameter. To determine the market to return results for, Bing uses the first supported language it finds from the list and combines it with the cc parameter value. If the list does not include a supported language, Bing finds the closest language and market that supports the request or it uses an aggregated or default market for the results. To determine the market that Bing used, see the BingAPIs-Market header. Use this header and the cc query parameter only if you specify multiple languages. Otherwise, use the [mkt](https://docs.microsoft.com/en-us/rest/api/cognitiveservices/bing-images-api-v7-reference#mkt) and [setLang](https://docs.microsoft.com/en-us/rest/api/cognitiveservices/bing-images-api-v7-reference#setlang) query parameters. A user interface string is a string that's used as a label in a user interface. There are few user interface strings in the JSON response objects. Any links to Bing.com properties in the response objects apply the specified language.",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "User-Agent",
+            "x-ms-client-name": "UserAgent",
+            "in": "header",
+            "description": "The user agent originating the request. Bing uses the user agent to provide mobile users with an optimized experience. Although optional, you are encouraged to always specify this header. The user-agent should be the same string that any commonly used browser sends. For information about user agents, see [RFC 2616](http://www.w3.org/Protocols/rfc2616/rfc2616-sec14.html). The following are examples of user-agent strings. Windows Phone: Mozilla/5.0 (compatible; MSIE 10.0; Windows Phone 8.0; Trident/6.0; IEMobile/10.0; ARM; Touch; NOKIA; Lumia 822). Android: Mozilla / 5.0 (Linux; U; Android 2.3.5; en - us; SCH - I500 Build / GINGERBREAD) AppleWebKit / 533.1 (KHTML; like Gecko) Version / 4.0 Mobile Safari / 533.1. iPhone: Mozilla / 5.0 (iPhone; CPU iPhone OS 6_1 like Mac OS X) AppleWebKit / 536.26 (KHTML; like Gecko) Mobile / 10B142 iPhone4; 1 BingWeb / 3.03.1428.20120423. PC: Mozilla / 5.0 (Windows NT 6.3; WOW64; Trident / 7.0; Touch; rv:11.0) like Gecko. iPad: Mozilla / 5.0 (iPad; CPU OS 7_0 like Mac OS X) AppleWebKit / 537.51.1 (KHTML, like Gecko) Version / 7.0 Mobile / 11A465 Safari / 9537.53",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "X-MSEdge-ClientID",
+            "x-ms-client-name": "ClientId",
+            "in": "header",
+            "description": "Bing uses this header to provide users with consistent behavior across Bing API calls. Bing often flights new features and improvements, and it uses the client ID as a key for assigning traffic on different flights. If you do not use the same client ID for a user across multiple requests, then Bing may assign the user to multiple conflicting flights. Being assigned to multiple conflicting flights can lead to an inconsistent user experience. For example, if the second request has a different flight assignment than the first, the experience may be unexpected. Also, Bing can use the client ID to tailor web results to that client ID’s search history, providing a richer experience for the user. Bing also uses this header to help improve result rankings by analyzing the activity generated by a client ID. The relevance improvements help with better quality of results delivered by Bing APIs and in turn enables higher click-through rates for the API consumer. IMPORTANT: Although optional, you should consider this header required. Persisting the client ID across multiple requests for the same end user and device combination enables 1) the API consumer to receive a consistent user experience, and 2) higher click-through rates via better quality of results from the Bing APIs. Each user that uses your application on the device must have a unique, Bing generated client ID. If you do not include this header in the request, Bing generates an ID and returns it in the X-MSEdge-ClientID response header. The only time that you should NOT include this header in a request is the first time the user uses your app on that device. Use the client ID for each Bing API request that your app makes for this user on the device. Persist the client ID. To persist the ID in a browser app, use a persistent HTTP cookie to ensure the ID is used across all sessions. Do not use a session cookie. For other apps such as mobile apps, use the device's persistent storage to persist the ID. The next time the user uses your app on that device, get the client ID that you persisted. Bing responses may or may not include this header. If the response includes this header, capture the client ID and use it for all subsequent Bing requests for the user on that device. If you include the X-MSEdge-ClientID, you must not include cookies in the request.",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "X-MSEdge-ClientIP",
+            "x-ms-client-name": "ClientIp",
+            "in": "header",
+            "description": "The IPv4 or IPv6 address of the client device. The IP address is used to discover the user's location. Bing uses the location information to determine safe search behavior. Although optional, you are encouraged to always specify this header and the X-Search-Location header. Do not obfuscate the address (for example, by changing the last octet to 0). Obfuscating the address results in the location not being anywhere near the device's actual location, which may result in Bing serving erroneous results.",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "X-Search-Location",
+            "x-ms-client-name": "Location",
+            "in": "header",
+            "description": "A semicolon-delimited list of key/value pairs that describe the client's geographical location. Bing uses the location information to determine safe search behavior and to return relevant local content. Specify the key/value pair as <key>:<value>. The following are the keys that you use to specify the user's location. lat (required): The latitude of the client's location, in degrees. The latitude must be greater than or equal to -90.0 and less than or equal to +90.0. Negative values indicate southern latitudes and positive values indicate northern latitudes. long (required): The longitude of the client's location, in degrees. The longitude must be greater than or equal to -180.0 and less than or equal to +180.0. Negative values indicate western longitudes and positive values indicate eastern longitudes. re (required): The radius, in meters, which specifies the horizontal accuracy of the coordinates. Pass the value returned by the device's location service. Typical values might be 22m for GPS/Wi-Fi, 380m for cell tower triangulation, and 18,000m for reverse IP lookup. ts (optional): The UTC UNIX timestamp of when the client was at the location. (The UNIX timestamp is the number of seconds since January 1, 1970.) head (optional): The client's relative heading or direction of travel. Specify the direction of travel as degrees from 0 through 360, counting clockwise relative to true north. Specify this key only if the sp key is nonzero. sp (optional): The horizontal velocity (speed), in meters per second, that the client device is traveling. alt (optional): The altitude of the client device, in meters. are (optional): The radius, in meters, that specifies the vertical accuracy of the coordinates. Specify this key only if you specify the alt key. Although many of the keys are optional, the more information that you provide, the more accurate the location results are. Although optional, you are encouraged to always specify the user's geographical location. Providing the location is especially important if the client's IP address does not accurately reflect the user's physical location (for example, if the client uses VPN). For optimal results, you should include this header and the X-MSEdge-ClientIP header, but at a minimum, you should include this header.",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "cc",
+            "x-ms-client-name": "CountryCode",
+            "in": "query",
+            "description": "A 2-character country code of the country where the results come from. This API supports only the United States, Canada, Australia, and China markets. If you specify this query parameter, it must be set to us, ca, au, or cn. If you set this parameter, you must also specify the Accept-Language header. Bing uses the first supported language it finds from the languages list, and combine that language with the country code that you specify to determine the market to return results for. If the languages list does not include a supported language, Bing finds the closest language and market that supports the request, or it may use an aggregated or default market for the results instead of a specified one. You should use this query parameter and the Accept-Language query parameter only if you specify multiple languages; otherwise, you should use the mkt and setLang query parameters. This parameter and the mkt query parameter are mutually exclusive—do not specify both.",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "mkt",
+            "x-ms-client-name": "Market",
+            "in": "query",
+            "description": "The market where the results come from. Typically, mkt is the country where the user is making the request from. However, it could be a different country if the user is not located in a country where Bing delivers results. The market must be in the form <language code>-<country code>. For example, en-US. The string is case insensitive. For a list of possible market values, see [Market Codes](https://docs.microsoft.com/en-us/rest/api/cognitiveservices/bing-images-api-v7-reference#market-codes). NOTE: If known, you are encouraged to always specify the market. Specifying the market helps Bing route the request and return an appropriate and optimal response. If you specify a market that is not listed in [Market Codes](https://docs.microsoft.com/en-us/rest/api/cognitiveservices/bing-images-api-v7-reference#market-codes), Bing uses a best fit market code based on an internal mapping that is subject to change. This parameter and the [cc](https://docs.microsoft.com/en-us/rest/api/cognitiveservices/bing-images-api-v7-reference#cc) query parameter are mutually exclusive—do not specify both.",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "safeSearch",
+            "x-ms-client-name": "SafeSearch",
+            "in": "query",
+            "description": "Filter images for adult content. The following are the possible filter values. Off: May return images with adult content. If the request is through the Image Search API, the response includes thumbnail images that are clear (non-fuzzy). However, if the request is through the Web Search API, the response includes thumbnail images that are pixelated (fuzzy). Moderate: If the request is through the Image Search API, the response doesn't include images with adult content. If the request is through the Web Search API, the response may include images with adult content (the thumbnail images are pixelated (fuzzy)). Strict: Do not return images with adult content. The default is Moderate. If the request comes from a market that Bing's adult policy requires that safeSearch is set to Strict, Bing ignores the safeSearch value and uses Strict. If you use the site: query operator, there is the chance that the response may contain adult content regardless of what the safeSearch query parameter is set to. Use site: only if you are aware of the content on the site and your scenario supports the possibility of adult content.",
+            "required": false,
+            "type": "string",
+            "enum": [
+              "Off",
+              "Moderate",
+              "Strict"
+            ],
+            "x-ms-enum": {
+              "name": "SafeSearch",
+              "modelAsString": true
+            }
+          },
+          {
+            "name": "setLang",
+            "x-ms-client-name": "SetLang",
+            "in": "query",
+            "description": "The language to use for user interface strings. Specify the language using the ISO 639-1 2-letter language code. For example, the language code for English is EN. The default is EN (English). Although optional, you should always specify the language. Typically, you set setLang to the same language specified by mkt unless the user wants the user interface strings displayed in a different language. This parameter and the [Accept-Language](https://docs.microsoft.com/en-us/rest/api/cognitiveservices/bing-images-api-v7-reference#acceptlanguage) header are mutually exclusive; do not specify both. A user interface string is a string that's used as a label in a user interface. There are few user interface strings in the JSON response objects. Also, any links to Bing.com properties in the response objects apply the specified language.",
+            "required": false,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success.",
+            "schema": {
+              "$ref": "#/definitions/TrendingImages"
+            }
+          },
+          "default": {
+            "description": "An error has occurred. Check the response type and/or status code for more details.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Successful image trending": {
+            "$ref": "./examples/SuccessfulImageTrendingRequest.json"
+          }
+        }
+      }
+    }
+  },
+  "definitions": {
+    "Images": {
+      "description": "Defines an image answer",
+      "allOf": [
+        {
+          "$ref": "#/definitions/SearchResultsAnswer"
+        }
+      ],
+      "type": "object",
+      "required": [
+        "value"
+      ],
+      "properties": {
+        "nextOffset": {
+          "readOnly": true,
+          "type": "integer",
+          "format": "int32"
+        },
+        "value": {
+          "description": "A list of image objects that are relevant to the query. If there are no results, the List is empty.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ImageObject"
+          }
+        },
+        "queryExpansions": {
+          "readOnly": true,
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Query"
+          }
+        },
+        "pivotSuggestions": {
+          "readOnly": true,
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/PivotSuggestions"
+          }
+        },
+        "similarTerms": {
+          "readOnly": true,
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Query"
+          }
+        }
+      }
+    },
+    "SearchResultsAnswer": {
+      "allOf": [
+        {
+          "$ref": "#/definitions/Answer"
+        }
+      ],
+      "type": "object",
+      "properties": {
+        "totalEstimatedMatches": {
+          "description": "The estimated number of webpages that are relevant to the query. Use this number along with the count and offset query parameters to page the results.",
+          "readOnly": true,
+          "type": "integer",
+          "format": "int64"
+        },
+        "isFamilyFriendly": {
+          "readOnly": true,
+          "type": "boolean"
+        }
+      }
+    },
+    "ImageObject": {
+      "description": "Defines an image",
+      "allOf": [
+        {
+          "$ref": "#/definitions/MediaObject"
+        }
+      ],
+      "type": "object",
+      "properties": {
+        "thumbnail": {
+          "description": "The URL to a thumbnail of the image",
+          "$ref": "#/definitions/ImageObject",
+          "readOnly": true
+        },
+        "imageInsightsToken": {
+          "readOnly": true,
+          "type": "string"
+        },
+        "insightsMetadata": {
+          "$ref": "#/definitions/ImagesImageMetadata",
+          "readOnly": true
+        },
+        "imageId": {
+          "readOnly": true,
+          "type": "string"
+        },
+        "accentColor": {
+          "readOnly": true,
+          "type": "string"
+        },
+        "visualWords": {
+          "readOnly": true,
+          "type": "string"
+        }
+      }
+    },
+    "Query": {
+      "description": "Defines a search query.",
+      "type": "object",
+      "required": [
+        "text"
+      ],
+      "properties": {
+        "text": {
+          "description": "The query string. Use this string as the query term in a new search request.",
+          "type": "string"
+        },
+        "displayText": {
+          "description": "The display version of the query term. This version of the query term may contain special characters that highlight the search term found in the query string. The string contains the highlighting characters only if the query enabled hit highlighting",
+          "readOnly": true,
+          "type": "string"
+        },
+        "webSearchUrl": {
+          "description": "The URL that takes the user to the Bing search results page for the query.Only related search results include this field.",
+          "readOnly": true,
+          "type": "string"
+        },
+        "searchLink": {
+          "readOnly": true,
+          "type": "string"
+        },
+        "thumbnail": {
+          "$ref": "#/definitions/ImageObject",
+          "readOnly": true
+        }
+      }
+    },
+    "PivotSuggestions": {
+      "type": "object",
+      "required": [
+        "pivot",
+        "suggestions"
+      ],
+      "properties": {
+        "pivot": {
+          "type": "string"
+        },
+        "suggestions": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Query"
+          }
+        }
+      }
+    },
+    "Answer": {
+      "allOf": [
+        {
+          "$ref": "#/definitions/Response"
+        }
+      ],
+      "type": "object",
+      "properties": {
+        "followUpQueries": {
+          "readOnly": true,
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Query"
+          }
+        }
+      }
+    },
+    "MediaObject": {
+      "allOf": [
+        {
+          "$ref": "#/definitions/CreativeWork"
+        }
+      ],
+      "type": "object",
+      "properties": {
+        "contentUrl": {
+          "description": "Original URL to retrieve the source (file) for the media object (e.g the source URL for the image).",
+          "readOnly": true,
+          "type": "string"
+        },
+        "hostPageUrl": {
+          "description": "URL of the page that hosts the media object.",
+          "readOnly": true,
+          "type": "string"
+        },
+        "contentSize": {
+          "description": "Size of the media object content (use format \"value unit\" e.g \"1024 B\").",
+          "readOnly": true,
+          "type": "string"
+        },
+        "encodingFormat": {
+          "description": "Encoding format (e.g mp3, mp4, jpeg, etc).",
+          "readOnly": true,
+          "type": "string"
+        },
+        "hostPageDisplayUrl": {
+          "description": "Display URL of the page that hosts the media object.",
+          "readOnly": true,
+          "type": "string"
+        },
+        "width": {
+          "description": "The width of the source media object, in pixels.",
+          "readOnly": true,
+          "type": "integer",
+          "format": "int32"
+        },
+        "height": {
+          "description": "The height of the source media object, in pixels.",
+          "readOnly": true,
+          "type": "integer",
+          "format": "int32"
+        }
+      }
+    },
+    "ImagesImageMetadata": {
+      "x-ms-discriminator-value": "Images/ImageMetadata",
+      "type": "object",
+      "properties": {
+        "shoppingSourcesCount": {
+          "readOnly": true,
+          "type": "integer",
+          "format": "int32"
+        },
+        "recipeSourcesCount": {
+          "readOnly": true,
+          "type": "integer",
+          "format": "int32"
+        },
+        "aggregateOffer": {
+          "$ref": "#/definitions/AggregateOffer",
+          "readOnly": true
+        },
+        "bestRepresentativeQuery": {
+          "$ref": "#/definitions/Query",
+          "readOnly": true
+        },
+        "caption": {
+          "readOnly": true,
+          "type": "string"
+        },
+        "pagesIncludingCount": {
+          "readOnly": true,
+          "type": "integer",
+          "format": "int32"
+        },
+        "availableSizesCount": {
+          "readOnly": true,
+          "type": "integer",
+          "format": "int32"
+        }
+      }
+    },
+    "Response": {
+      "description": "Defines a response. All schemas that could be returned at the root of a response should inherit from this",
+      "allOf": [
+        {
+          "$ref": "#/definitions/Identifiable"
+        }
+      ],
+      "type": "object",
+      "properties": {
+        "readLink": {
+          "readOnly": true,
+          "type": "string"
+        },
+        "webSearchUrl": {
+          "description": "The URL To Bing's search result for this item.",
+          "readOnly": true,
+          "type": "string"
+        }
+      }
+    },
+    "CreativeWork": {
+      "allOf": [
+        {
+          "$ref": "#/definitions/Thing"
+        }
+      ],
+      "type": "object",
+      "properties": {
+        "thumbnailUrl": {
+          "description": "The URL to a thumbnail of the item.",
+          "readOnly": true,
+          "type": "string"
+        },
+        "provider": {
+          "description": "The source of the creative work.",
+          "readOnly": true,
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Thing"
+          }
+        },
+        "datePublished": {
+          "readOnly": true,
+          "type": "string"
+        },
+        "text": {
+          "readOnly": true,
+          "type": "string"
+        }
+      }
+    },
+    "AggregateOffer": {
+      "allOf": [
+        {
+          "$ref": "#/definitions/Offer"
+        }
+      ],
+      "type": "object",
+      "properties": {
+        "lowPrice": {
+          "readOnly": true,
+          "type": "number",
+          "format": "float"
+        },
+        "offers": {
+          "readOnly": true,
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Offer"
+          }
+        },
+        "offerCount": {
+          "readOnly": true,
+          "type": "integer",
+          "format": "int64"
+        }
+      }
+    },
+    "Identifiable": {
+      "description": "Defines the identity of a resource.",
+      "allOf": [
+        {
+          "$ref": "#/definitions/ResponseBase"
+        }
+      ],
+      "type": "object",
+      "properties": {
+        "id": {
+          "description": "A String identifier.",
+          "readOnly": true,
+          "type": "string"
+        }
+      }
+    },
+    "ErrorResponse": {
+      "description": "The top-level response that represents a failed request.",
+      "allOf": [
+        {
+          "$ref": "#/definitions/Response"
+        }
+      ],
+      "type": "object",
+      "required": [
+        "errors"
+      ],
+      "properties": {
+        "errors": {
+          "description": "A list of errors that describe the reasons why the request failed.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Error"
+          }
+        }
+      }
+    },
+    "Thing": {
+      "allOf": [
+        {
+          "$ref": "#/definitions/Response"
+        }
+      ],
+      "type": "object",
+      "properties": {
+        "name": {
+          "description": "The name of the thing represented by this object.",
+          "readOnly": true,
+          "type": "string"
+        },
+        "url": {
+          "description": "The URL to get more information about the thing represented by this object.",
+          "readOnly": true,
+          "type": "string"
+        },
+        "image": {
+          "$ref": "#/definitions/ImageObject",
+          "readOnly": true
+        },
+        "description": {
+          "description": "A short description of the item.",
+          "readOnly": true,
+          "type": "string"
+        },
+        "alternateName": {
+          "readOnly": true,
+          "type": "string"
+        },
+        "bingId": {
+          "description": "An ID that uniquely identifies this item.",
+          "readOnly": true,
+          "type": "string"
+        }
+      }
+    },
+    "ImageInsights": {
+      "allOf": [
+        {
+          "$ref": "#/definitions/Response"
+        }
+      ],
+      "type": "object",
+      "properties": {
+        "imageInsightsToken": {
+          "readOnly": true,
+          "type": "string"
+        },
+        "bestRepresentativeQuery": {
+          "$ref": "#/definitions/Query",
+          "readOnly": true
+        },
+        "imageCaption": {
+          "$ref": "#/definitions/ImageInsightsImageCaption",
+          "readOnly": true
+        },
+        "relatedCollections": {
+          "$ref": "#/definitions/RelatedCollectionsModule",
+          "readOnly": true
+        },
+        "pagesIncluding": {
+          "$ref": "#/definitions/ImagesModule",
+          "readOnly": true
+        },
+        "shoppingSources": {
+          "$ref": "#/definitions/AggregateOffer",
+          "readOnly": true
+        },
+        "relatedSearches": {
+          "$ref": "#/definitions/RelatedSearchesModule",
+          "readOnly": true
+        },
+        "recipes": {
+          "$ref": "#/definitions/RecipesModule",
+          "readOnly": true
+        },
+        "visuallySimilarImages": {
+          "$ref": "#/definitions/ImagesModule",
+          "readOnly": true
+        },
+        "visuallySimilarProducts": {
+          "$ref": "#/definitions/ImagesModule",
+          "readOnly": true
+        },
+        "recognizedEntityGroups": {
+          "$ref": "#/definitions/RecognizedEntitiesModule",
+          "readOnly": true
+        },
+        "imageTags": {
+          "$ref": "#/definitions/ImageTagsModule",
+          "readOnly": true
+        },
+        "imageBasedRelatedSearches": {
+          "$ref": "#/definitions/RelatedSearchesModule",
+          "readOnly": true
+        },
+        "image": {
+          "$ref": "#/definitions/ImageObject",
+          "readOnly": true
+        }
+      }
+    },
+    "RecognizedEntityRegion": {
+      "allOf": [
+        {
+          "$ref": "#/definitions/Response"
+        }
+      ],
+      "type": "object",
+      "properties": {
+        "region": {
+          "$ref": "#/definitions/NormalizedRectangle",
+          "readOnly": true
+        },
+        "matchingEntities": {
+          "readOnly": true,
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/RecognizedEntity"
+          }
+        }
+      }
+    },
+    "RecognizedEntity": {
+      "allOf": [
+        {
+          "$ref": "#/definitions/Response"
+        }
+      ],
+      "type": "object",
+      "properties": {
+        "entity": {
+          "$ref": "#/definitions/Thing",
+          "readOnly": true
+        },
+        "matchConfidence": {
+          "readOnly": true,
+          "type": "number",
+          "format": "float"
+        }
+      }
+    },
+    "TrendingImages": {
+      "allOf": [
+        {
+          "$ref": "#/definitions/Response"
+        }
+      ],
+      "type": "object",
+      "required": [
+        "categories"
+      ],
+      "properties": {
+        "categories": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/TrendingImagesCategory"
+          }
+        }
+      }
+    },
+    "Organization": {
+      "description": "Defines an organization.",
+      "allOf": [
+        {
+          "$ref": "#/definitions/Thing"
+        }
+      ],
+      "type": "object",
+      "properties": {}
+    },
+    "PropertiesItem": {
+      "x-ms-discriminator-value": "Properties/Item",
+      "discriminator": "_type",
+      "type": "object",
+      "required": [
+        "_type"
+      ],
+      "properties": {
+        "text": {
+          "readOnly": true,
+          "type": "string"
+        },
+        "_type": {
+          "type": "string"
+        }
+      }
+    },
+    "Recipe": {
+      "allOf": [
+        {
+          "$ref": "#/definitions/CreativeWork"
+        }
+      ],
+      "type": "object",
+      "properties": {
+        "cookTime": {
+          "readOnly": true,
+          "type": "string"
+        },
+        "prepTime": {
+          "readOnly": true,
+          "type": "string"
+        },
+        "totalTime": {
+          "readOnly": true,
+          "type": "string"
+        }
+      }
+    },
+    "WebPage": {
+      "description": "Defines a webpage that is relevant to the query.",
+      "allOf": [
+        {
+          "$ref": "#/definitions/CreativeWork"
+        }
+      ],
+      "type": "object",
+      "properties": {}
+    },
+    "AggregateRating": {
+      "allOf": [
+        {
+          "$ref": "#/definitions/Rating"
+        }
+      ],
+      "type": "object",
+      "properties": {
+        "reviewCount": {
+          "readOnly": true,
+          "type": "integer",
+          "format": "int32"
+        }
+      }
+    },
+    "Offer": {
+      "allOf": [
+        {
+          "$ref": "#/definitions/Thing"
+        }
+      ],
+      "type": "object",
+      "properties": {
+        "priceSpecification": {
+          "$ref": "#/definitions/PriceSpecification",
+          "readOnly": true
+        },
+        "seller": {
+          "$ref": "#/definitions/Organization",
+          "readOnly": true
+        },
+        "price": {
+          "readOnly": true,
+          "type": "number",
+          "format": "float"
+        },
+        "priceCurrency": {
+          "readOnly": true,
+          "type": "string",
+          "default": "USD",
+          "enum": [
+            "USD",
+            "CAD",
+            "GBP",
+            "EUR",
+            "COP",
+            "JPY",
+            "CNY",
+            "AUD",
+            "INR",
+            "AED",
+            "AFN",
+            "ALL",
+            "AMD",
+            "ANG",
+            "AOA",
+            "ARS",
+            "AWG",
+            "AZN",
+            "BAM",
+            "BBD",
+            "BDT",
+            "BGN",
+            "BHD",
+            "BIF",
+            "BMD",
+            "BND",
+            "BOB",
+            "BOV",
+            "BRL",
+            "BSD",
+            "BTN",
+            "BWP",
+            "BYR",
+            "BZD",
+            "CDF",
+            "CHE",
+            "CHF",
+            "CHW",
+            "CLF",
+            "CLP",
+            "COU",
+            "CRC",
+            "CUC",
+            "CUP",
+            "CVE",
+            "CZK",
+            "DJF",
+            "DKK",
+            "DOP",
+            "DZD",
+            "EGP",
+            "ERN",
+            "ETB",
+            "FJD",
+            "FKP",
+            "GEL",
+            "GHS",
+            "GIP",
+            "GMD",
+            "GNF",
+            "GTQ",
+            "GYD",
+            "HKD",
+            "HNL",
+            "HRK",
+            "HTG",
+            "HUF",
+            "IDR",
+            "ILS",
+            "IQD",
+            "IRR",
+            "ISK",
+            "JMD",
+            "JOD",
+            "KES",
+            "KGS",
+            "KHR",
+            "KMF",
+            "KPW",
+            "KRW",
+            "KWD",
+            "KYD",
+            "KZT",
+            "LAK",
+            "LBP",
+            "LKR",
+            "LRD",
+            "LSL",
+            "LYD",
+            "MAD",
+            "MDL",
+            "MGA",
+            "MKD",
+            "MMK",
+            "MNT",
+            "MOP",
+            "MRO",
+            "MUR",
+            "MVR",
+            "MWK",
+            "MXN",
+            "MXV",
+            "MYR",
+            "MZN",
+            "NAD",
+            "NGN",
+            "NIO",
+            "NOK",
+            "NPR",
+            "NZD",
+            "OMR",
+            "PAB",
+            "PEN",
+            "PGK",
+            "PHP",
+            "PKR",
+            "PLN",
+            "PYG",
+            "QAR",
+            "RON",
+            "RSD",
+            "RUB",
+            "RWF",
+            "SAR",
+            "SBD",
+            "SCR",
+            "SDG",
+            "SEK",
+            "SGD",
+            "SHP",
+            "SLL",
+            "SOS",
+            "SRD",
+            "SSP",
+            "STD",
+            "SYP",
+            "SZL",
+            "THB",
+            "TJS",
+            "TMT",
+            "TND",
+            "TOP",
+            "TRY",
+            "TTD",
+            "TWD",
+            "TZS",
+            "UAH",
+            "UGX",
+            "UYU",
+            "UZS",
+            "VEF",
+            "VND",
+            "VUV",
+            "WST",
+            "XAF",
+            "XCD",
+            "XOF",
+            "XPF",
+            "YER",
+            "ZAR",
+            "ZMW"
+          ],
+          "x-ms-enum": {
+            "name": "Currency",
+            "modelAsString": true
+          }
+        },
+        "availability": {
+          "readOnly": true,
+          "type": "string",
+          "enum": [
+            "Discontinued",
+            "InStock",
+            "InStoreOnly",
+            "LimitedAvailability",
+            "OnlineOnly",
+            "OutOfStock",
+            "PreOrder",
+            "SoldOut"
+          ],
+          "x-ms-enum": {
+            "name": "ItemAvailability",
+            "modelAsString": true
+          }
+        },
+        "aggregateRating": {
+          "$ref": "#/definitions/AggregateRating",
+          "readOnly": true
+        },
+        "lastUpdated": {
+          "readOnly": true,
+          "type": "string"
+        }
+      }
+    },
+    "ResponseBase": {
+      "discriminator": "_type",
+      "type": "object",
+      "required": [
+        "_type"
+      ],
+      "properties": {
+        "_type": {
+          "type": "string"
+        }
+      }
+    },
+    "Error": {
+      "description": "Defines the error that occurred.",
+      "type": "object",
+      "required": [
+        "code",
+        "message"
+      ],
+      "properties": {
+        "code": {
+          "description": "The error code that identifies the category of error.",
+          "type": "string",
+          "default": "None",
+          "enum": [
+            "None",
+            "ServerError",
+            "InvalidRequest",
+            "RateLimitExceeded",
+            "InvalidAuthorization",
+            "InsufficientAuthorization"
+          ],
+          "x-ms-enum": {
+            "name": "ErrorCode",
+            "modelAsString": true
+          }
+        },
+        "subCode": {
+          "description": "The error code that further helps to identify the error.",
+          "readOnly": true,
+          "type": "string",
+          "enum": [
+            "UnexpectedError",
+            "ResourceError",
+            "NotImplemented",
+            "ParameterMissing",
+            "ParameterInvalidValue",
+            "HttpNotAllowed",
+            "Blocked",
+            "AuthorizationMissing",
+            "AuthorizationRedundancy",
+            "AuthorizationDisabled",
+            "AuthorizationExpired"
+          ],
+          "x-ms-enum": {
+            "name": "ErrorSubCode",
+            "modelAsString": true
+          }
+        },
+        "message": {
+          "description": "A description of the error.",
+          "type": "string"
+        },
+        "moreDetails": {
+          "description": "A description that provides additional information about the error.",
+          "readOnly": true,
+          "type": "string"
+        },
+        "parameter": {
+          "description": "The parameter in the request that caused the error.",
+          "readOnly": true,
+          "type": "string"
+        },
+        "value": {
+          "description": "The parameter's value in the request that was not valid.",
+          "readOnly": true,
+          "type": "string"
+        }
+      }
+    },
+    "Person": {
+      "allOf": [
+        {
+          "$ref": "#/definitions/Thing"
+        }
+      ],
+      "type": "object",
+      "properties": {
+        "jobTitle": {
+          "readOnly": true,
+          "type": "string"
+        },
+        "twitterProfile": {
+          "readOnly": true,
+          "type": "string"
+        }
+      }
+    },
+    "Intangible": {
+      "allOf": [
+        {
+          "$ref": "#/definitions/Thing"
+        }
+      ],
+      "type": "object"
+    },
+    "ImageInsightsImageCaption": {
+      "x-ms-discriminator-value": "ImageInsights/ImageCaption",
+      "type": "object",
+      "required": [
+        "caption",
+        "dataSourceUrl",
+        "relatedSearches"
+      ],
+      "properties": {
+        "caption": {
+          "type": "string"
+        },
+        "dataSourceUrl": {
+          "type": "string"
+        },
+        "relatedSearches": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Query"
+          }
+        }
+      }
+    },
+    "RelatedCollectionsModule": {
+      "type": "object",
+      "properties": {
+        "value": {
+          "readOnly": true,
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ImageGallery"
+          }
+        }
+      }
+    },
+    "ImagesModule": {
+      "type": "object",
+      "properties": {
+        "value": {
+          "readOnly": true,
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ImageObject"
+          }
+        }
+      }
+    },
+    "RelatedSearchesModule": {
+      "type": "object",
+      "properties": {
+        "value": {
+          "readOnly": true,
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Query"
+          }
+        }
+      }
+    },
+    "RecipesModule": {
+      "type": "object",
+      "properties": {
+        "value": {
+          "readOnly": true,
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Recipe"
+          }
+        }
+      }
+    },
+    "RecognizedEntitiesModule": {
+      "type": "object",
+      "properties": {
+        "value": {
+          "readOnly": true,
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/RecognizedEntityGroup"
+          }
+        }
+      }
+    },
+    "ImageTagsModule": {
+      "type": "object",
+      "required": [
+        "value"
+      ],
+      "properties": {
+        "value": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/InsightsTag"
+          }
+        }
+      }
+    },
+    "NormalizedRectangle": {
+      "allOf": [
+        {
+          "$ref": "#/definitions/StructuredValue"
+        }
+      ],
+      "type": "object",
+      "required": [
+        "left",
+        "top",
+        "right",
+        "bottom"
+      ],
+      "properties": {
+        "left": {
+          "type": "number",
+          "format": "float"
+        },
+        "top": {
+          "type": "number",
+          "format": "float"
+        },
+        "right": {
+          "type": "number",
+          "format": "float"
+        },
+        "bottom": {
+          "type": "number",
+          "format": "float"
+        }
+      }
+    },
+    "TrendingImagesCategory": {
+      "x-ms-discriminator-value": "TrendingImages/Category",
+      "type": "object",
+      "required": [
+        "title",
+        "tiles"
+      ],
+      "properties": {
+        "title": {
+          "type": "string"
+        },
+        "tiles": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/TrendingImagesTile"
+          }
+        }
+      }
+    },
+    "Rating": {
+      "allOf": [
+        {
+          "$ref": "#/definitions/PropertiesItem"
+        }
+      ],
+      "type": "object",
+      "required": [
+        "ratingValue"
+      ],
+      "properties": {
+        "ratingValue": {
+          "type": "number",
+          "format": "float"
+        },
+        "bestRating": {
+          "readOnly": true,
+          "type": "number",
+          "format": "float"
+        },
+        "worstRating": {
+          "readOnly": true,
+          "type": "number",
+          "format": "float"
+        }
+      }
+    },
+    "CollectionPage": {
+      "allOf": [
+        {
+          "$ref": "#/definitions/WebPage"
+        }
+      ],
+      "type": "object"
+    },
+    "PriceSpecification": {
+      "allOf": [
+        {
+          "$ref": "#/definitions/StructuredValue"
+        }
+      ],
+      "type": "object",
+      "properties": {
+        "maxPrice": {
+          "readOnly": true,
+          "type": "number",
+          "format": "float"
+        },
+        "minPrice": {
+          "readOnly": true,
+          "type": "number",
+          "format": "float"
+        },
+        "price": {
+          "readOnly": true,
+          "type": "number",
+          "format": "float"
+        },
+        "priceCurrency": {
+          "readOnly": true,
+          "type": "string",
+          "default": "USD",
+          "enum": [
+            "USD",
+            "CAD",
+            "GBP",
+            "EUR",
+            "COP",
+            "JPY",
+            "CNY",
+            "AUD",
+            "INR",
+            "AED",
+            "AFN",
+            "ALL",
+            "AMD",
+            "ANG",
+            "AOA",
+            "ARS",
+            "AWG",
+            "AZN",
+            "BAM",
+            "BBD",
+            "BDT",
+            "BGN",
+            "BHD",
+            "BIF",
+            "BMD",
+            "BND",
+            "BOB",
+            "BOV",
+            "BRL",
+            "BSD",
+            "BTN",
+            "BWP",
+            "BYR",
+            "BZD",
+            "CDF",
+            "CHE",
+            "CHF",
+            "CHW",
+            "CLF",
+            "CLP",
+            "COU",
+            "CRC",
+            "CUC",
+            "CUP",
+            "CVE",
+            "CZK",
+            "DJF",
+            "DKK",
+            "DOP",
+            "DZD",
+            "EGP",
+            "ERN",
+            "ETB",
+            "FJD",
+            "FKP",
+            "GEL",
+            "GHS",
+            "GIP",
+            "GMD",
+            "GNF",
+            "GTQ",
+            "GYD",
+            "HKD",
+            "HNL",
+            "HRK",
+            "HTG",
+            "HUF",
+            "IDR",
+            "ILS",
+            "IQD",
+            "IRR",
+            "ISK",
+            "JMD",
+            "JOD",
+            "KES",
+            "KGS",
+            "KHR",
+            "KMF",
+            "KPW",
+            "KRW",
+            "KWD",
+            "KYD",
+            "KZT",
+            "LAK",
+            "LBP",
+            "LKR",
+            "LRD",
+            "LSL",
+            "LYD",
+            "MAD",
+            "MDL",
+            "MGA",
+            "MKD",
+            "MMK",
+            "MNT",
+            "MOP",
+            "MRO",
+            "MUR",
+            "MVR",
+            "MWK",
+            "MXN",
+            "MXV",
+            "MYR",
+            "MZN",
+            "NAD",
+            "NGN",
+            "NIO",
+            "NOK",
+            "NPR",
+            "NZD",
+            "OMR",
+            "PAB",
+            "PEN",
+            "PGK",
+            "PHP",
+            "PKR",
+            "PLN",
+            "PYG",
+            "QAR",
+            "RON",
+            "RSD",
+            "RUB",
+            "RWF",
+            "SAR",
+            "SBD",
+            "SCR",
+            "SDG",
+            "SEK",
+            "SGD",
+            "SHP",
+            "SLL",
+            "SOS",
+            "SRD",
+            "SSP",
+            "STD",
+            "SYP",
+            "SZL",
+            "THB",
+            "TJS",
+            "TMT",
+            "TND",
+            "TOP",
+            "TRY",
+            "TTD",
+            "TWD",
+            "TZS",
+            "UAH",
+            "UGX",
+            "UYU",
+            "UZS",
+            "VEF",
+            "VND",
+            "VUV",
+            "WST",
+            "XAF",
+            "XCD",
+            "XOF",
+            "XPF",
+            "YER",
+            "ZAR",
+            "ZMW"
+          ],
+          "x-ms-enum": {
+            "name": "Currency",
+            "modelAsString": true
+          }
+        }
+      }
+    },
+    "StructuredValue": {
+      "allOf": [
+        {
+          "$ref": "#/definitions/Intangible"
+        }
+      ],
+      "type": "object"
+    },
+    "ImageGallery": {
+      "allOf": [
+        {
+          "$ref": "#/definitions/CollectionPage"
+        }
+      ],
+      "type": "object",
+      "properties": {
+        "source": {
+          "readOnly": true,
+          "type": "string"
+        },
+        "imagesCount": {
+          "readOnly": true,
+          "type": "integer",
+          "format": "int64"
+        },
+        "followersCount": {
+          "readOnly": true,
+          "type": "integer",
+          "format": "int64"
+        }
+      }
+    },
+    "RecognizedEntityGroup": {
+      "type": "object",
+      "required": [
+        "recognizedEntityRegions",
+        "name"
+      ],
+      "properties": {
+        "recognizedEntityRegions": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/RecognizedEntityRegion"
+          }
+        },
+        "name": {
+          "type": "string"
+        }
+      }
+    },
+    "InsightsTag": {
+      "type": "object",
+      "properties": {
+        "name": {
+          "readOnly": true,
+          "type": "string"
+        },
+        "score": {
+          "readOnly": true,
+          "type": "number",
+          "format": "float"
+        }
+      }
+    },
+    "TrendingImagesTile": {
+      "x-ms-discriminator-value": "TrendingImages/Tile",
+      "type": "object",
+      "required": [
+        "query",
+        "image"
+      ],
+      "properties": {
+        "query": {
+          "$ref": "#/definitions/Query"
+        },
+        "image": {
+          "$ref": "#/definitions/ImageObject"
+        }
+      }
+    }
+  }
+}
