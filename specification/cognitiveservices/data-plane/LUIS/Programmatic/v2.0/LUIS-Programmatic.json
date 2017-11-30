@@ -1012,8 +1012,15 @@
         "operationId": "Model_AddPrebuiltEntityExtractors",
         "parameters": [
           {
+            "$ref": "#/parameters/AppIdInPath"
+          },
+          {
+            "$ref": "#/parameters/VersionIdInPath"
+          },
+          {
             "name": "prebuiltExtractorNames",
             "in": "body",
+            "required": true,
             "schema": {
               "$ref": "#/definitions/PrebuiltExtractorNames"
             },
@@ -1026,9 +1033,6 @@
         "responses": {
           "201": {
             "description": "An array of the created prebuilt extractor infos.",
-            "examples": {
-              "application/json": "[  {    \"id\": \"a18eaa87-ecd9-4a67-a951-e70cf5b87c7e\",    \"name\": \"datetime\",    \"typeId\": 2,    \"readableType\": \"Prebuilt Entity Extractor\"  }]"
-            },
             "schema": {
               "$ref": "#/definitions/PrebuiltEntityExtractorsList"
             }
@@ -1042,7 +1046,12 @@
         },
         "produces": [
           "application/json"
-        ]
+        ],
+        "x-ms-examples": {
+          "Successful Add Application Version Prebuilt Infos request": {
+            "$ref": "./examples/model/SuccessfulAddApplicationVersionPrebuiltInfosRequest.json"
+          }
+        }
       },
       "get": {
         "description": "Gets information about the prebuilt entity models.",
@@ -4323,11 +4332,11 @@
       }
     },
     "PrebuiltExtractorNames": {
+      "type": "array",
       "items": {
         "type": "string"
       },
-      "type": "array",
-      "example": "[ \"datetimeV2\" ]"
+      "example": [ "number", "ordinal" ]
     },
     "JSONRegexFeature": {
       "additionalProperties": false,
