@@ -2593,89 +2593,10 @@
         ],
         "responses": {
           "200": {
-            "description": "The JSON string of the exported application.",
-            "examples": {
-              "application/json": {
-                "luis_schema_version": "1.3.0",
-                "name": "DummyImportedApp",
-                "desc": "This is my dummy imported application",
-                "culture": "en-us",
-                "intents": [
-                  {
-                    "name": "BookFlight"
-                  },
-                  {
-                    "name": "GetWeather"
-                  },
-                  {
-                    "name": "None"
-                  }
-                ],
-                "entities": [
-                  {
-                    "name": "Location",
-                    "children": [
-                      "To",
-                      "From"
-                    ]
-                  }
-                ],
-                "composites": [],
-                "closedLists": [],
-                "bing_entities": [
-                  "datetime"
-                ],
-                "actions": [],
-                "model_features": [
-                  {
-                    "name": "Cities",
-                    "mode": true,
-                    "words": "Seattle,New York,Paris,Moscow,Beijin",
-                    "activated": true
-                  }
-                ],
-                "regex_features": [],
-                "utterances": [
-                  {
-                    "text": "what's the weather like in paris?",
-                    "intent": "GetWeather",
-                    "entities": [
-                      {
-                        "entity": "Location",
-                        "startPos": 7,
-                        "endPos": 7
-                      }
-                    ]
-                  },
-                  {
-                    "text": "what's the weather like in seattle?",
-                    "intent": "GetWeather",
-                    "entities": [
-                      {
-                        "entity": "Location",
-                        "startPos": 7,
-                        "endPos": 7
-                      }
-                    ]
-                  },
-                  {
-                    "text": "book me a flight from cairo to redmond next thursday",
-                    "intent": "BookFlight",
-                    "entities": [
-                      {
-                        "entity": "Location::To",
-                        "startPos": 7,
-                        "endPos": 7
-                      },
-                      {
-                        "entity": "Location::From",
-                        "startPos": 5,
-                        "endPos": 5
-                      }
-                    ]
-                  }
-                ]
-              }
+            "description": "A JSON file with the exported application.",
+            "schema": {
+              "type": "file",
+              "description": "A JSON file with the exported application."
             }
           },
           "default": {
