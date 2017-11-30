@@ -457,19 +457,16 @@
       }
     },
     "/apps/{appId}/versions/{versionId}/examples": {
-      "parameters": [
-        {
-          "$ref": "#/parameters/AppIdInPath"
-        },
-        {
-          "$ref": "#/parameters/VersionIdInPath"
-        }
-      ],
       "post": {
         "description": "Adds a batch of labeled examples to the specified application.",
         "operationId": "Examples_BatchAddLabels",
         "parameters": [
-
+          {
+            "$ref": "#/parameters/AppIdInPath"
+          },
+          {
+            "$ref": "#/parameters/VersionIdInPath"
+          },
           {
             "name": "exampleLabelObjectArray",
             "in": "body",
@@ -509,6 +506,12 @@
         "description": "Returns examples to be reviewed.",
         "operationId": "Examples_ReviewLabeledExamples",
         "parameters": [
+          {
+            "$ref": "#/parameters/AppIdInPath"
+          },
+          {
+            "$ref": "#/parameters/VersionIdInPath"
+          },
           {
             "$ref": "#/parameters/SkipInPath"
           },
