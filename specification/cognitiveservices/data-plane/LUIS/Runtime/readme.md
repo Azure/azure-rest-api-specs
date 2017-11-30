@@ -36,4 +36,14 @@ csharp:
   namespace: Microsoft.Azure.CognitiveServices.Language.LUIS
   output-folder: $(csharp-sdks-folder)/CognitiveServices/dataPlane/Language/LUIS-Runtime/Generated
   clear-output-folder: true
+
+# csharp has support for modelAsExtensible now; replace modelAsString with that. 
+directive:
+  from: swagger-document
+  where: $..['x-ms-enum']
+  transform: >
+    if( $['modelAsString'] ) {
+      $['modelAsExtensible'] = true;
+      $['modelAsString'] = false;
+    }
 ```
