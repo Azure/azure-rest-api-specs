@@ -3529,8 +3529,15 @@
         "operationId": "Model_AddCustomPrebuiltEntityModel",
         "parameters": [
           {
+            "$ref": "#/parameters/AppIdInPath"
+          },
+          {
+            "$ref": "#/parameters/VersionIdInPath"
+          },
+          {
             "name": "prebuiltDomainModelCreateObject",
             "in": "body",
+            "required": true,
             "schema": {
               "$ref": "#/definitions/PrebuiltDomainModelCreateObject"
             },
@@ -3543,9 +3550,6 @@
         "responses": {
           "201": {
             "description": "The ID of the created model.",
-            "examples": {
-              "application/json": "\"1c2e70c1-3cbf-4e89-9703-9583b81102b9\""
-            },
             "schema": {
               "$ref": "#/definitions/GuidResponse"
             }
@@ -3559,7 +3563,12 @@
         },
         "produces": [
           "application/json"
-        ]
+        ],
+        "x-ms-examples": {
+          "Successful Add Custom Prebuilt Entity request": {
+            "$ref": "./examples/model/SuccessfulAddCustomPrebuiltEntityRequest.json"
+          }
+        }
       },
       "get": {
         "description": "Gets all custom prebuilt entities information of this application",
@@ -3567,11 +3576,8 @@
         "responses": {
           "200": {
             "description": "Returns a list of all custom prebuilt entities and their representations.",
-            "examples": {
-              "application/json": "[  {    \"id\": \"b8e31be4-300f-455e-894b-6f079abca0a2\",    \"name\": \"$Camera.AppName\",    \"typeId\": 1,    \"readableType\": \"Entity Extractor\",    \"customPrebuiltDomainName\": \"Camera\",    \"customPrebuiltModelName\": \"AppName\"  }]"
-            },
             "schema": {
-              "$ref": "#/definitions/ModelsResponseObject"
+              "$ref": "#/definitions/EntityExtractorsList"
             }
           },
           "default": {
@@ -3583,7 +3589,12 @@
         },
         "produces": [
           "application/json"
-        ]
+        ],
+        "x-ms-examples": {
+          "Successful Get Custom Prebuilt Domain Entities request": {
+            "$ref": "./examples/model/SuccessfulGetCustomPrebuiltDomainEntitiesRequest.json"
+          }
+        }
       }
     },
     "/apps/{appId}/versions/{versionId}/customprebuiltmodels": {
@@ -4085,14 +4096,17 @@
       "additionalProperties": false,
       "type": "object",
       "properties": {
-        "DomainName": {
+        "domainName": {
           "type": "string"
         },
-        "ModelName": {
+        "modelName": {
           "type": "string"
         }
       },
-      "example": "{\t\"domainName\": \"Camera\",        \"modelName\": \"AppName\"}"
+      "example": {
+        "domainName": "Camera",
+        "modelName": "AppName"
+      }
     },
     "HierarchicalModelUpdateObject": {
       "additionalProperties": false,
@@ -5231,6 +5245,14 @@
         "customPrebuiltModelName": {
           "type": "string"
         }
+      },
+      "example": {
+        "id": "0212bfea-97b9-4229-be73-f33490048d39",
+        "name": "Gaming.Contact",
+        "typeId": 1,
+        "readableType": "Entity Extractor",
+        "customPrebuiltDomainName": "Gaming",
+        "customPrebuiltModelName": "Contact"
       }
     },
     "IntentClassifiersList": {
