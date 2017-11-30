@@ -1208,16 +1208,48 @@
         "tags": [
           "Resources"
         ],
-        "operationId": "Resources_UpdateById",
-        "description": "Updates a resource by ID.",
+        "operationId": "Resources_Update",
+        "description": "Updates a resource.",
         "parameters": [
           {
-            "name": "resourceId",
+            "name": "resourceGroupName",
             "in": "path",
             "required": true,
             "type": "string",
-            "description": "The fully qualified ID of the resource, including the resource name and resource type. Use the format, /subscriptions/{guid}/resourceGroups/{resource-group-name}/{resource-provider-namespace}/{resource-type}/{resource-name}",
+            "description": "The name of the resource group for the resource. The name is case insensitive.",
+            "pattern": "^[-\\w\\._\\(\\)]+$",
+            "minLength": 1,
+            "maxLength": 90
+          },
+          {
+            "name": "resourceProviderNamespace",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The namespace of the resource provider."
+          },
+          {
+            "name": "parentResourcePath",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The parent resource identity.",
             "x-ms-skip-url-encoding": true
+          },
+          {
+            "name": "resourceType",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The resource type of the resource to create.",
+            "x-ms-skip-url-encoding": true
+          },
+          {
+            "name": "resourceName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the resource to create."
           },
           {
             "name": "api-version",
@@ -1233,7 +1265,10 @@
             "schema": {
               "$ref": "#/definitions/GenericResource"
             },
-            "description": "Update resource parameters."
+            "description": "Parameters for creating or updating the resource."
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
           }
         ],
         "responses": {
