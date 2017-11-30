@@ -3480,8 +3480,15 @@
         "operationId": "Model_AddCustomPrebuiltEntityModel",
         "parameters": [
           {
+            "$ref": "#/parameters/AppIdInPath"
+          },
+          {
+            "$ref": "#/parameters/VersionIdInPath"
+          },
+          {
             "name": "prebuiltDomainModelCreateObject",
             "in": "body",
+            "required": true,
             "schema": {
               "$ref": "#/definitions/PrebuiltDomainModelCreateObject"
             },
@@ -3494,9 +3501,6 @@
         "responses": {
           "201": {
             "description": "The ID of the created model.",
-            "examples": {
-              "application/json": "\"1c2e70c1-3cbf-4e89-9703-9583b81102b9\""
-            },
             "schema": {
               "$ref": "#/definitions/GuidResponse"
             }
@@ -3510,7 +3514,12 @@
         },
         "produces": [
           "application/json"
-        ]
+        ],
+        "x-ms-examples": {
+          "Successful Add Custom Prebuilt Entity request": {
+            "$ref": "./examples/model/SuccessfulAddCustomPrebuiltEntityRequest.json"
+          }
+        }
       },
       "get": {
         "description": "Gets all custom prebuilt entities information of this application",
@@ -4038,14 +4047,17 @@
       "additionalProperties": false,
       "type": "object",
       "properties": {
-        "DomainName": {
+        "domainName": {
           "type": "string"
         },
-        "ModelName": {
+        "modelName": {
           "type": "string"
         }
       },
-      "example": "{\t\"domainName\": \"Camera\",        \"modelName\": \"AppName\"}"
+      "example": {
+        "domainName": "Camera",
+        "modelName": "AppName"
+      }
     },
     "HierarchicalModelUpdateObject": {
       "additionalProperties": false,
