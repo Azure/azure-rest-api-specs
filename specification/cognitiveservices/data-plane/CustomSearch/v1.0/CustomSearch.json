@@ -213,10 +213,10 @@
 					}
 				},
 				"x-ms-examples": {
-						"Successful query": {
-							"$ref": "./examples//SuccessfulQueryRequest.json"
-						}
+					"Successful query": {
+						"$ref": "./examples//SuccessfulQueryRequest.json"
 					}
+				}
 			}
 		}
 	},
@@ -494,6 +494,23 @@
 					}
 				},
 				"text": {
+					"readOnly": true,
+					"type": "string"
+				}
+			}
+		},
+		"WebMetaTag": {
+			"description": "Defines a webpage's metadata.",
+			"x-ms-discriminator-value": "Web/MetaTag",
+			"type": "object",
+			"properties": {
+				"name": {
+					"description": "The metadata.",
+					"readOnly": true,
+					"type": "string"
+				},
+				"content": {
+					"description": "The name of the metadata.",
 					"readOnly": true,
 					"type": "string"
 				}
