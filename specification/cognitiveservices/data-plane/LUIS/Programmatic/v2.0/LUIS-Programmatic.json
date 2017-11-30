@@ -1897,8 +1897,8 @@
         "responses": {
           "200": {
             "description": "If there's no trained model, nothing is returned in the response.</br>If there's a trained model and the active learning algorithm finds any relevant queries, they are returned with the model predictions.</br>If there's a trained model but the active learning algorithm didn't find any relevant queries, an empty list is returned in the response.",
-            "examples": {
-              "application/json": "[  {    \"text\": \"hello, world!\",    \"tokenizedText\": [      \"hello\",      \",\",      \"world\",      \"!\"    ],    \"intentPredictions\": [      {        \"name\": \"None\",        \"score\": 0.63      },      {        \"name\": \"GetWeather\",        \"score\": 0      },      {        \"name\": \"BookFlight\",        \"score\": 0      }    ],    \"entityPredictions\": []  }]"
+            "schema": {
+              "$ref": "#/definitions/IntentsSuggestionExamples"
             }
           },
           "default": {
@@ -1910,7 +1910,12 @@
         },
         "produces": [
           "application/json"
-        ]
+        ],
+        "x-ms-examples": {
+          "Successful Get Intents Suggestion Examples": {
+            "$ref": "./examples/model/SuccessfulGetIntentsSuggestionExamples.json"
+          }
+        }
       }
     },
     "/apps/{appId}/versions/{versionId}/entities/{entityId}/suggest": {
@@ -4933,6 +4938,40 @@
           "type": "array",
           "items": {
             "$ref": "#/definitions/EntityLabel"
+          }
+        },
+        "intentPredictions": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/IntentPrediction"
+          }
+        },
+        "entityPredictions": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/EntityPrediction"
+          }
+        }
+      }
+    },
+    "IntentsSuggestionExamples": {
+      "type": "array",
+      "items": {
+        "$ref": "#/definitions/IntentsSuggestionExample"
+      }
+    },
+    "IntentsSuggestionExample": {
+      "type": "object",
+      "properties": {
+        "text": {
+          "type": "string",
+          "description": "what's the weather like in seattle?"
+        },
+        "tokenizedText": {
+          "type": "array",
+          "description": "the utterance tokenized",
+          "items": {
+            "type": "string"
           }
         },
         "intentPredictions": {
