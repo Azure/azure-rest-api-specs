@@ -46,7 +46,8 @@
     "/search": {
       "get": {
         "summary": "The Custom Search API lets you send a search query to Bing and get back web pages found in your custom view of the web.",
-        "operationId": "Custom_Search",
+        "operation
+        ": "Custom_Search",
         "tags": [
           "CustomSearch"
         ],
@@ -466,6 +467,67 @@
           "type": "string"
         },
         "searchLink": {
+          "readOnly": true,
+          "type": "string"
+        }
+      }
+    },
+    "Thing": {
+      "allOf": [
+        {
+          "$ref": "#/definitions/Response"
+        }
+      ],
+      "type": "object",
+      "properties": {
+        "name": {
+          "description": "The name of the thing represented by this object.",
+          "readOnly": true,
+          "type": "string"
+        },
+        "url": {
+          "description": "The URL to get more information about the thing represented by this object.",
+          "readOnly": true,
+          "type": "string"
+        },
+        "image": {
+          "$ref": "#/definitions/ImageObject",
+          "readOnly": true
+        },
+        "description": {
+          "description": "A short description of the item.",
+          "readOnly": true,
+          "type": "string"
+        },
+        "bingId": {
+          "description": "An ID that uniquely identifies this item.",
+          "readOnly": true,
+          "type": "string"
+        }
+      }
+    },
+    "CreativeWork": {
+      "allOf": [
+        {
+          "$ref": "#/definitions/Thing"
+        }
+      ],
+      "type": "object",
+      "properties": {
+        "thumbnailUrl": {
+          "description": "The URL to a thumbnail of the item.",
+          "readOnly": true,
+          "type": "string"
+        },
+        "provider": {
+          "description": "The source of the creative work.",
+          "readOnly": true,
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Thing"
+          }
+        },
+        "text": {
           "readOnly": true,
           "type": "string"
         }
