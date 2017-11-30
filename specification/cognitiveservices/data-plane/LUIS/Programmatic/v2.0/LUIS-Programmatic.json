@@ -3518,11 +3518,8 @@
         "responses": {
           "200": {
             "description": "Returns a list of all custom prebuilt entities and their representations.",
-            "examples": {
-              "application/json": "[  {    \"id\": \"b8e31be4-300f-455e-894b-6f079abca0a2\",    \"name\": \"$Camera.AppName\",    \"typeId\": 1,    \"readableType\": \"Entity Extractor\",    \"customPrebuiltDomainName\": \"Camera\",    \"customPrebuiltModelName\": \"AppName\"  }]"
-            },
             "schema": {
-              "$ref": "#/definitions/ModelsResponseObject"
+              "$ref": "#/definitions/EntityExtractorsList"
             }
           },
           "default": {
@@ -3534,7 +3531,12 @@
         },
         "produces": [
           "application/json"
-        ]
+        ],
+        "x-ms-examples": {
+          "Successful Get Custom Prebuilt Domain Entities request": {
+            "$ref": "./examples/model/SuccessfulGetCustomPrebuiltDomainEntitiesRequest.json"
+          }
+        }
       }
     },
     "/apps/{appId}/versions/{versionId}/customprebuiltmodels": {
@@ -5144,6 +5146,14 @@
         "customPrebuiltModelName": {
           "type": "string"
         }
+      },
+      "example": {
+        "id": "0212bfea-97b9-4229-be73-f33490048d39",
+        "name": "Gaming.Contact",
+        "typeId": 1,
+        "readableType": "Entity Extractor",
+        "customPrebuiltDomainName": "Gaming",
+        "customPrebuiltModelName": "Contact"
       }
     },
     "IntentClassifiersList": {
