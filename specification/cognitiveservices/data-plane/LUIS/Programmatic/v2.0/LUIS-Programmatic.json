@@ -1789,13 +1789,18 @@
         ],
         "responses": {
           "200": {
-            "description": ""
+            "description": "No Content. Successfully updated sublist."
           },
           "default": {
             "description": "Error Response.",
             "schema": {
               "$ref": "#/definitions/ErrorResponse"
             }
+          }
+        },
+        "x-ms-examples": {
+          "Successful Update Sublist request": {
+            "$ref": "./examples/model/SuccessfulUpdateSublistRequest.json"
           }
         }
       }
@@ -4413,17 +4418,20 @@
       "additionalProperties": false,
       "type": "object",
       "properties": {
-        "CanonicalForm": {
+        "canonicalForm": {
           "type": "string"
         },
-        "List": {
+        "list": {
           "items": {
             "type": "string"
           },
           "type": "array"
         }
       },
-      "example": "{\t\"canonicalForm\": \"NewYorkCities\",\t\"list\" : [\"Yonkers\", \"Utica\", \"Olean\", \"Cohoes\", \"Buffalo\"]} "
+      "example": {
+          "canonicalForm": "California",
+          "list": ["California", "CA", "Calif.", "Cal."]
+      }
     },
     "JSONUtterance": {
       "additionalProperties": false,
