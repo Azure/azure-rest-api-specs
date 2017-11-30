@@ -650,21 +650,20 @@
       }
     },
     "/apps/{appId}/versions/{versionId}/entities": {
-      "parameters": [
-        {
-          "$ref": "#/parameters/AppIdInPath"
-        },
-        {
-          "$ref": "#/parameters/VersionIdInPath"
-        }
-      ],
       "post": {
         "description": "Adds an entity extractor to the application.",
         "operationId": "Model_CreateEntityExtractor",
         "parameters": [
           {
+            "$ref": "#/parameters/AppIdInPath"
+          },
+          {
+            "$ref": "#/parameters/VersionIdInPath"
+          },
+          {
             "name": "modelCreateObject",
             "in": "body",
+            "required": true,
             "schema": {
               "$ref": "#/definitions/ModelCreateObject"
             },
@@ -701,6 +700,12 @@
         "description": "Gets information about the entity models.",
         "operationId": "Model_GetApplicationVersionEntityInfos",
         "parameters": [
+          {
+            "$ref": "#/parameters/AppIdInPath"
+          },
+          {
+            "$ref": "#/parameters/VersionIdInPath"
+          },
           {
             "$ref": "#/parameters/SkipInPath"
           },
@@ -4364,11 +4369,13 @@
       "additionalProperties": false,
       "type": "object",
       "properties": {
-        "Name": {
+        "name": {
           "type": "string"
         }
       },
-      "example": "{\t\"name\": \"DayOfWeek\"}"
+      "example": {
+        "name": "DayOfWeek"
+      }
     },
     "Setting": {
       "additionalProperties": false,
