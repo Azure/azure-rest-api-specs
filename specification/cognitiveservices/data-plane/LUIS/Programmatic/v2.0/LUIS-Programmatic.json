@@ -1233,24 +1233,24 @@
       }
     },
     "/apps/{appId}/versions/{versionId}/entities/{entityId}": {
-      "parameters": [
-        {
-          "$ref": "#/parameters/AppIdInPath"
-        },
-        {
-          "$ref": "#/parameters/VersionIdInPath"
-        },
-        {
-          "name": "entityId",
-          "in": "path",
-          "description": "Format - guid. The entity extractor ID.",
-          "required": true,
-          "type": "string"
-        }
-      ],
       "get": {
         "description": "Gets information about the entity model.",
         "operationId": "Model_GetEntityInfo",
+        "parameters": [
+          {
+            "$ref": "#/parameters/AppIdInPath"
+          },
+          {
+            "$ref": "#/parameters/VersionIdInPath"
+          },
+          {
+            "name": "entityId",
+            "in": "path",
+            "description": "Format - guid. The entity extractor ID.",
+            "required": true,
+            "type": "string"
+          }
+        ],
         "responses": {
           "200": {
             "description": "An entity model info.",
@@ -1279,8 +1279,22 @@
         "operationId": "Model_RenameEntityModel",
         "parameters": [
           {
+            "$ref": "#/parameters/AppIdInPath"
+          },
+          {
+            "$ref": "#/parameters/VersionIdInPath"
+          },
+          {
+            "name": "entityId",
+            "in": "path",
+            "description": "Format - guid. The entity extractor ID.",
+            "required": true,
+            "type": "string"
+          },
+          {
             "name": "modelUpdateObject",
             "in": "body",
+            "required": true,
             "schema": {
               "$ref": "#/definitions/ModelUpdateObject"
             },
@@ -1305,6 +1319,21 @@
       "delete": {
         "description": "Deletes an entity extractor from the application.",
         "operationId": "Model_DeleteEntityModel",
+        "parameters": [
+          {
+            "$ref": "#/parameters/AppIdInPath"
+          },
+          {
+            "$ref": "#/parameters/VersionIdInPath"
+          },
+          {
+            "name": "entityId",
+            "in": "path",
+            "description": "Format - guid. The entity extractor ID.",
+            "required": true,
+            "type": "string"
+          }
+        ],
         "responses": {
           "200": {
             "description": ""
