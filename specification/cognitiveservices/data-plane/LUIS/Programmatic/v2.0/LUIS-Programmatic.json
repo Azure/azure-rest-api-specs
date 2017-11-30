@@ -650,21 +650,20 @@
       }
     },
     "/apps/{appId}/versions/{versionId}/entities": {
-      "parameters": [
-        {
-          "$ref": "#/parameters/AppIdInPath"
-        },
-        {
-          "$ref": "#/parameters/VersionIdInPath"
-        }
-      ],
       "post": {
         "description": "Adds an entity extractor to the application.",
         "operationId": "Model_CreateEntityExtractor",
         "parameters": [
           {
+            "$ref": "#/parameters/AppIdInPath"
+          },
+          {
+            "$ref": "#/parameters/VersionIdInPath"
+          },
+          {
             "name": "modelCreateObject",
             "in": "body",
+            "required": true,
             "schema": {
               "$ref": "#/definitions/ModelCreateObject"
             },
@@ -701,6 +700,12 @@
         "description": "Gets information about the entity models.",
         "operationId": "Model_GetApplicationVersionEntityInfos",
         "parameters": [
+          {
+            "$ref": "#/parameters/AppIdInPath"
+          },
+          {
+            "$ref": "#/parameters/VersionIdInPath"
+          },
           {
             "$ref": "#/parameters/SkipInPath"
           },
@@ -1228,24 +1233,24 @@
       }
     },
     "/apps/{appId}/versions/{versionId}/entities/{entityId}": {
-      "parameters": [
-        {
-          "$ref": "#/parameters/AppIdInPath"
-        },
-        {
-          "$ref": "#/parameters/VersionIdInPath"
-        },
-        {
-          "name": "entityId",
-          "in": "path",
-          "description": "Format - guid. The entity extractor ID.",
-          "required": true,
-          "type": "string"
-        }
-      ],
       "get": {
         "description": "Gets information about the entity model.",
         "operationId": "Model_GetEntityInfo",
+        "parameters": [
+          {
+            "$ref": "#/parameters/AppIdInPath"
+          },
+          {
+            "$ref": "#/parameters/VersionIdInPath"
+          },
+          {
+            "name": "entityId",
+            "in": "path",
+            "description": "Format - guid. The entity extractor ID.",
+            "required": true,
+            "type": "string"
+          }
+        ],
         "responses": {
           "200": {
             "description": "An entity model info.",
@@ -1274,8 +1279,22 @@
         "operationId": "Model_RenameEntityModel",
         "parameters": [
           {
+            "$ref": "#/parameters/AppIdInPath"
+          },
+          {
+            "$ref": "#/parameters/VersionIdInPath"
+          },
+          {
+            "name": "entityId",
+            "in": "path",
+            "description": "Format - guid. The entity extractor ID.",
+            "required": true,
+            "type": "string"
+          },
+          {
             "name": "modelUpdateObject",
             "in": "body",
+            "required": true,
             "schema": {
               "$ref": "#/definitions/ModelUpdateObject"
             },
@@ -1300,6 +1319,21 @@
       "delete": {
         "description": "Deletes an entity extractor from the application.",
         "operationId": "Model_DeleteEntityModel",
+        "parameters": [
+          {
+            "$ref": "#/parameters/AppIdInPath"
+          },
+          {
+            "$ref": "#/parameters/VersionIdInPath"
+          },
+          {
+            "name": "entityId",
+            "in": "path",
+            "description": "Format - guid. The entity extractor ID.",
+            "required": true,
+            "type": "string"
+          }
+        ],
         "responses": {
           "200": {
             "description": ""
@@ -4165,7 +4199,7 @@
       "properties": {
         "id": {
           "type": "integer",
-          "x-nullable": "false",
+          "x-nullable": false,
           "example": "123456"
         }
       }
@@ -4378,11 +4412,13 @@
       "additionalProperties": false,
       "type": "object",
       "properties": {
-        "Name": {
+        "name": {
           "type": "string"
         }
       },
-      "example": "{\t\"name\": \"DayOfWeek\"}"
+      "example": {
+        "name": "DayOfWeek"
+      }
     },
     "Setting": {
       "additionalProperties": false,
