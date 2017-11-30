@@ -586,8 +586,15 @@
         "operationId": "Model_CreateIntentClassifier",
         "parameters": [
           {
-            "name": "modelCreateObject",
+            "$ref": "#/parameters/AppIdInPath"
+          },
+          {
+            "$ref": "#/parameters/VersionIdInPath"
+          },
+          {
+            "name": "intentCreateObject",
             "in": "body",
+            "required": true,
             "schema": {
               "$ref": "#/definitions/ModelCreateObject"
             },
