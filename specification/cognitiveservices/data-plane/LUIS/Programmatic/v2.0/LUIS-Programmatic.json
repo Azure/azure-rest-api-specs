@@ -1200,8 +1200,18 @@
         "operationId": "Model_RenameIntentModel",
         "parameters": [
           {
+            "$ref": "#/parameters/AppIdInPath"
+          },
+          {
+            "$ref": "#/parameters/VersionIdInPath"
+          },
+          {
+            "$ref": "#/parameters/IntentIdInPath"
+          },
+          {
             "name": "modelUpdateObject",
             "in": "body",
+            "required": true,
             "schema": {
               "$ref": "#/definitions/ModelUpdateObject"
             },
@@ -1220,6 +1230,11 @@
             "schema": {
               "$ref": "#/definitions/ErrorResponse"
             }
+          }
+        },
+        "x-ms-examples": {
+          "Successful Rename Intent Model request": {
+            "$ref": "./examples/model/SuccessfulRenameIntentModelRequest.json"
           }
         }
       },
