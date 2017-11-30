@@ -19,6 +19,10 @@ These settings apply only when `--tag=runtime_2_0` is specified on the command l
 
 ``` yaml $(tag) == 'runtime_2_0'
 input-file: v2.0/LUIS-Runtime.json
+
+# remove Resolve2 from code-generation (since the POST and GET operations are functionally identical)
+directive:
+  remove-operation: Prediction_Resolve2
 ```
 
 ### Runtime 2.0 - CSharp Settings
