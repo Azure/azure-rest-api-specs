@@ -26,16 +26,16 @@ These are the global settings for the API.
 
 ``` yaml
 openapi-type: arm
-tag: package-2017-08
+tag: package-2017-11
 ```
 
-### Tag: package-2017-08
+### Tag: package-2017-11
 
-These settings apply only when `--tag=package-2017-08` is specified on the command line.
+These settings apply only when `--tag=package-2017-11` is specified on the command line.
 
-``` yaml $(tag) == 'package-2017-08'
+``` yaml $(tag) == 'package-2017-11'
 input-file:
-- Microsoft.Devices/2017-08-21-preview/iotdps.json
+- Microsoft.Devices/2017-11-15/iotdps.json
 ```
 
 ---
