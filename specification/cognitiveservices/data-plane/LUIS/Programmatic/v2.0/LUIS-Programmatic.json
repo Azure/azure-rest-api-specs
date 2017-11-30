@@ -43,8 +43,15 @@
         "operationId": "Features_CreatePatternFeature",
         "parameters": [
           {
+            "$ref": "#/parameters/AppIdInPath"
+          },
+          {
+            "$ref": "#/parameters/VersionIdInPath"
+          },
+          {
             "name": "patternCreateObject",
             "in": "body",
+            "required": true,
             "schema": {
               "$ref": "#/definitions/PatternCreateObject"
             },
@@ -4530,14 +4537,17 @@
       "additionalProperties": false,
       "type": "object",
       "properties": {
-        "Pattern": {
+        "pattern": {
           "type": "string"
         },
-        "Name": {
+        "name": {
           "type": "string"
         }
       },
-      "example": "{\t\"name\": \"EmailPattern\",\t\"pattern\": \"\\\\b[A-Z0-9._%+-]+@[A-Z0-9.-]+\\\\.[A-Z]{2,}\\\\b\"}"
+      "example": {
+        "name": "EmailPattern",
+        "pattern": "\\b[A-Z0-9._%+-]+@[A-Z0-9.-]+\\.[A-Z]{2,}\\b"
+      }
     },
     "WordListObject": {
       "additionalProperties": false,
@@ -4967,7 +4977,7 @@
     },
     "FeatureIDResponse": {
       "type": "number",
-      "example": "398102"
+      "example": 398102
     },
     "LabeledUtterances": {
       "type": "array",
