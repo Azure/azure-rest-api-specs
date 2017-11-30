@@ -596,8 +596,15 @@
         "operationId": "Model_CreateIntentClassifier",
         "parameters": [
           {
-            "name": "modelCreateObject",
+            "$ref": "#/parameters/AppIdInPath"
+          },
+          {
+            "$ref": "#/parameters/VersionIdInPath"
+          },
+          {
+            "name": "intentCreateObject",
             "in": "body",
+            "required": true,
             "schema": {
               "$ref": "#/definitions/ModelCreateObject"
             },
@@ -1015,8 +1022,15 @@
         "operationId": "Model_AddPrebuiltEntityExtractors",
         "parameters": [
           {
+            "$ref": "#/parameters/AppIdInPath"
+          },
+          {
+            "$ref": "#/parameters/VersionIdInPath"
+          },
+          {
             "name": "prebuiltExtractorNames",
             "in": "body",
+            "required": true,
             "schema": {
               "$ref": "#/definitions/PrebuiltExtractorNames"
             },
@@ -1029,9 +1043,6 @@
         "responses": {
           "201": {
             "description": "An array of the created prebuilt extractor infos.",
-            "examples": {
-              "application/json": "[  {    \"id\": \"a18eaa87-ecd9-4a67-a951-e70cf5b87c7e\",    \"name\": \"datetime\",    \"typeId\": 2,    \"readableType\": \"Prebuilt Entity Extractor\"  }]"
-            },
             "schema": {
               "$ref": "#/definitions/PrebuiltEntityExtractorsList"
             }
@@ -1045,7 +1056,12 @@
         },
         "produces": [
           "application/json"
-        ]
+        ],
+        "x-ms-examples": {
+          "Successful Add Application Version Prebuilt Infos request": {
+            "$ref": "./examples/model/SuccessfulAddApplicationVersionPrebuiltInfosRequest.json"
+          }
+        }
       },
       "get": {
         "description": "Gets information about the prebuilt entity models.",
@@ -1203,8 +1219,18 @@
         "operationId": "Model_RenameIntentModel",
         "parameters": [
           {
+            "$ref": "#/parameters/AppIdInPath"
+          },
+          {
+            "$ref": "#/parameters/VersionIdInPath"
+          },
+          {
+            "$ref": "#/parameters/IntentIdInPath"
+          },
+          {
             "name": "modelUpdateObject",
             "in": "body",
+            "required": true,
             "schema": {
               "$ref": "#/definitions/ModelUpdateObject"
             },
@@ -1216,13 +1242,18 @@
         ],
         "responses": {
           "200": {
-            "description": ""
+            "description": "No Content. Successfully operation."
           },
           "default": {
             "description": "Error Response.",
             "schema": {
               "$ref": "#/definitions/ErrorResponse"
             }
+          }
+        },
+        "x-ms-examples": {
+          "Successful Rename Intent Model request": {
+            "$ref": "./examples/model/SuccessfulRenameIntentModelRequest.json"
           }
         }
       },
@@ -1231,13 +1262,18 @@
         "operationId": "Model_DeleteIntentModel",
         "responses": {
           "200": {
-            "description": ""
+            "description": "No Content. Successfully operation."
           },
           "default": {
             "description": "Error Response.",
             "schema": {
               "$ref": "#/definitions/ErrorResponse"
             }
+          }
+        },
+        "x-ms-examples": {
+          "Successful Delete Intent Model request": {
+            "$ref": "./examples/model/SuccessfulDeleteIntentModelRequest.json"
           }
         }
       }
@@ -1750,13 +1786,18 @@
         "operationId": "Model_DeletePrebuiltModel",
         "responses": {
           "200": {
-            "description": ""
+            "description": "No Content. Successfully operation."
           },
           "default": {
             "description": "Error Response.",
             "schema": {
               "$ref": "#/definitions/ErrorResponse"
             }
+          }
+        },
+        "x-ms-examples": {
+          "Successful Get Prebuilt Info request": {
+            "$ref": "./examples/model/SuccessfulDeletePrebuiltEntityRequest.json"
           }
         }
       }
@@ -1880,8 +1921,8 @@
         "responses": {
           "200": {
             "description": "If there's no trained model, nothing is returned in the response.</br>If there's a trained model and the active learning algorithm finds any relevant queries, they are returned with the model predictions.</br>If there's a trained model but the active learning algorithm didn't find any relevant queries, an empty list is returned in the response.",
-            "examples": {
-              "application/json": "[  {    \"text\": \"hello, world!\",    \"tokenizedText\": [      \"hello\",      \",\",      \"world\",      \"!\"    ],    \"intentPredictions\": [      {        \"name\": \"None\",        \"score\": 0.63      },      {        \"name\": \"GetWeather\",        \"score\": 0      },      {        \"name\": \"BookFlight\",        \"score\": 0      }    ],    \"entityPredictions\": []  }]"
+            "schema": {
+              "$ref": "#/definitions/IntentsSuggestionExamples"
             }
           },
           "default": {
@@ -1893,7 +1934,12 @@
         },
         "produces": [
           "application/json"
-        ]
+        ],
+        "x-ms-examples": {
+          "Successful Get Intents Suggestion Examples": {
+            "$ref": "./examples/model/SuccessfulGetIntentsSuggestionExamples.json"
+          }
+        }
       }
     },
     "/apps/{appId}/versions/{versionId}/entities/{entityId}/suggest": {
@@ -3468,8 +3514,15 @@
         "operationId": "Model_AddCustomPrebuiltIntentModel",
         "parameters": [
           {
+            "$ref": "#/parameters/AppIdInPath"
+          },
+          {
+            "$ref": "#/parameters/VersionIdInPath"
+          },
+          {
             "name": "prebuiltDomainModelCreateObject",
             "in": "body",
+            "required": true,
             "schema": {
               "$ref": "#/definitions/PrebuiltDomainModelCreateObject"
             },
@@ -3482,9 +3535,6 @@
         "responses": {
           "201": {
             "description": "The ID of the created model.",
-            "examples": {
-              "application/json": "\"c0d59374-cf44-4302-98d1-e853886a4674\""
-            },
             "schema": {
               "$ref": "#/definitions/GuidResponse"
             }
@@ -3498,7 +3548,12 @@
         },
         "produces": [
           "application/json"
-        ]
+        ],
+        "x-ms-examples": {
+          "Successful Add Custom Prebuilt Intent request": {
+            "$ref": "./examples/model/SuccessfulAddCustomPrebuildIntentRequest.json"
+          }
+        }
       },
       "get": {
         "description": "Gets custom prebuilt intents information of this application",
@@ -3506,11 +3561,8 @@
         "responses": {
           "200": {
             "description": "Returns a list of all custom prebuilt intents and their representations.",
-            "examples": {
-              "application/json": "[  {    \"id\": \"9500536f-ffec-4fab-93ad-6268abb0f73c\",    \"name\": \"$Camera.CapturePhoto\",    \"typeId\": 0,    \"readableType\": \"Intent Classifier\",    \"customPrebuiltDomainName\": \"Camera\",    \"customPrebuiltModelName\": \"CapturePhoto\"  },  {    \"id\": \"facd34fa-86a3-4805-8bf3-b99e40043b10\",    \"name\": \"$Camera.CaptureScreenshot\",    \"typeId\": 0,    \"readableType\": \"Intent Classifier\",    \"customPrebuiltDomainName\": \"Camera\",    \"customPrebuiltModelName\": \"CaptureScreenshot\"  },  {    \"id\": \"d116d287-3e53-4bd8-8b7b-4728c58c34d1\",    \"name\": \"$Camera.CaptureSelfie\",    \"typeId\": 0,    \"readableType\": \"Intent Classifier\",    \"customPrebuiltDomainName\": \"Camera\",    \"customPrebuiltModelName\": \"CaptureSelfie\"  },  {    \"id\": \"ad2cac73-2abf-41cb-99e2-f79d0dd6ca46\",    \"name\": \"$Camera.CaptureVideo\",    \"typeId\": 0,    \"readableType\": \"Intent Classifier\",    \"customPrebuiltDomainName\": \"Camera\",    \"customPrebuiltModelName\": \"CaptureVideo\"  },  {    \"id\": \"70de3f00-3943-4a93-a88c-09392016b776\",    \"name\": \"$Camera.StartBroadcasting\",    \"typeId\": 0,    \"readableType\": \"Intent Classifier\",    \"customPrebuiltDomainName\": \"Camera\",    \"customPrebuiltModelName\": \"StartBroadcasting\"  },  {    \"id\": \"3397fc83-5b1d-4f5f-b4cd-0f2169f076c6\",    \"name\": \"$Camera.StopBroadcasting\",    \"typeId\": 0,    \"readableType\": \"Intent Classifier\",    \"customPrebuiltDomainName\": \"Camera\",    \"customPrebuiltModelName\": \"StopBroadcasting\"  },  {    \"id\": \"72a15bcc-538a-4e59-be8c-9fdd43b5338f\",    \"name\": \"$Camera.StopVideoRecording\",    \"typeId\": 0,    \"readableType\": \"Intent Classifier\",    \"customPrebuiltDomainName\": \"Camera\",    \"customPrebuiltModelName\": \"StopVideoRecording\"  }]"
-            },
             "schema": {
-              "$ref": "#/definitions/ModelsResponseObject"
+              "$ref": "#/definitions/IntentClassifiersList"
             }
           },
           "default": {
@@ -3522,7 +3574,12 @@
         },
         "produces": [
           "application/json"
-        ]
+        ],
+        "x-ms-examples": {
+          "Successful Get Custom Prebuilt Intent request": {
+            "$ref": "./examples/model/SuccessfulGetCustomPrebuildIntentRequest.json"
+          }
+        }
       }
     },
     "/apps/{appId}/versions/{versionId}/customprebuiltentities": {
@@ -3622,11 +3679,8 @@
         "responses": {
           "200": {
             "description": "Returns a list of all custom prebuilt models and their representations.",
-            "examples": {
-              "application/json": "[  {    \"id\": \"b8e31be4-300f-455e-894b-6f079abca0a2\",    \"name\": \"$Camera.AppName\",    \"typeId\": 1,    \"readableType\": \"Entity Extractor\",    \"customPrebuiltDomainName\": \"Camera\",    \"customPrebuiltModelName\": \"AppName\"  },  {    \"id\": \"9500536f-ffec-4fab-93ad-6268abb0f73c\",    \"name\": \"$Camera.CapturePhoto\",    \"typeId\": 0,    \"readableType\": \"Intent Classifier\",    \"customPrebuiltDomainName\": \"Camera\",    \"customPrebuiltModelName\": \"CapturePhoto\"  },  {    \"id\": \"facd34fa-86a3-4805-8bf3-b99e40043b10\",    \"name\": \"$Camera.CaptureScreenshot\",    \"typeId\": 0,    \"readableType\": \"Intent Classifier\",    \"customPrebuiltDomainName\": \"Camera\",    \"customPrebuiltModelName\": \"CaptureScreenshot\"  },  {    \"id\": \"d116d287-3e53-4bd8-8b7b-4728c58c34d1\",    \"name\": \"$Camera.CaptureSelfie\",    \"typeId\": 0,    \"readableType\": \"Intent Classifier\",    \"customPrebuiltDomainName\": \"Camera\",    \"customPrebuiltModelName\": \"CaptureSelfie\"  },  {    \"id\": \"ad2cac73-2abf-41cb-99e2-f79d0dd6ca46\",    \"name\": \"$Camera.CaptureVideo\",    \"typeId\": 0,    \"readableType\": \"Intent Classifier\",    \"customPrebuiltDomainName\": \"Camera\",    \"customPrebuiltModelName\": \"CaptureVideo\"  },  {    \"id\": \"70de3f00-3943-4a93-a88c-09392016b776\",    \"name\": \"$Camera.StartBroadcasting\",    \"typeId\": 0,    \"readableType\": \"Intent Classifier\",    \"customPrebuiltDomainName\": \"Camera\",    \"customPrebuiltModelName\": \"StartBroadcasting\"  },  {    \"id\": \"3397fc83-5b1d-4f5f-b4cd-0f2169f076c6\",    \"name\": \"$Camera.StopBroadcasting\",    \"typeId\": 0,    \"readableType\": \"Intent Classifier\",    \"customPrebuiltDomainName\": \"Camera\",    \"customPrebuiltModelName\": \"StopBroadcasting\"  },  {    \"id\": \"72a15bcc-538a-4e59-be8c-9fdd43b5338f\",    \"name\": \"$Camera.StopVideoRecording\",    \"typeId\": 0,    \"readableType\": \"Intent Classifier\",    \"customPrebuiltDomainName\": \"Camera\",    \"customPrebuiltModelName\": \"StopVideoRecording\"  }]"
-            },
             "schema": {
-              "$ref": "#/definitions/ModelsResponseObject"
+              "$ref": "#/definitions/CustomPrebuiltModelList"
             }
           },
           "default": {
@@ -3638,7 +3692,12 @@
         },
         "produces": [
           "application/json"
-        ]
+        ],
+        "x-ms-examples": {
+          "Successful Get Custom Prebuilt Domain Models request": {
+            "$ref": "./examples/model/SuccessfulGetCustomPrebuiltDomainModelsRequest.json"
+          }
+        }
       }
     },
     "/apps/{appId}/versions/{versionId}/customprebuiltdomains/{domainName}": {
@@ -4298,11 +4357,11 @@
       }
     },
     "PrebuiltExtractorNames": {
+      "type": "array",
       "items": {
         "type": "string"
       },
-      "type": "array",
-      "example": "[ \"datetimeV2\" ]"
+      "example": [ "number", "ordinal" ]
     },
     "JSONRegexFeature": {
       "additionalProperties": false,
@@ -4957,6 +5016,40 @@
         }
       }
     },
+    "IntentsSuggestionExamples": {
+      "type": "array",
+      "items": {
+        "$ref": "#/definitions/IntentsSuggestionExample"
+      }
+    },
+    "IntentsSuggestionExample": {
+      "type": "object",
+      "properties": {
+        "text": {
+          "type": "string",
+          "description": "what's the weather like in seattle?"
+        },
+        "tokenizedText": {
+          "type": "array",
+          "description": "the utterance tokenized",
+          "items": {
+            "type": "string"
+          }
+        },
+        "intentPredictions": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/IntentPrediction"
+          }
+        },
+        "entityPredictions": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/EntityPrediction"
+          }
+        }
+      }
+    },
     "EntitiesSuggestionExamples": {
       "type": "array",
       "items": {
@@ -5261,6 +5354,19 @@
         { "$ref": "#/definitions/ChildEntity" }
       ]
     },
+    "CustomPrebuiltModel": {
+      "allOf": [
+        { "$ref": "#/definitions/ModelInfo" },
+        { "$ref": "#/definitions/IntentClassifier" },
+        { "$ref": "#/definitions/EntityExtractor" }
+      ]
+    },
+    "CustomPrebuiltModelList": {
+      "type": "array",
+      "items": {
+        "$ref": "#/definitions/CustomPrebuiltModel"
+      }
+    },
     "IntentClassifier": {
       "type": "object",
       "x-ms-discriminator-value": "Intent Classifier",
@@ -5293,14 +5399,6 @@
         "customPrebuiltModelName": {
           "type": "string"
         }
-      },
-      "example": {
-        "id": "0212bfea-97b9-4229-be73-f33490048d39",
-        "name": "Gaming.Contact",
-        "typeId": 1,
-        "readableType": "Entity Extractor",
-        "customPrebuiltDomainName": "Gaming",
-        "customPrebuiltModelName": "Contact"
       }
     },
     "IntentClassifiersList": {
