@@ -3458,8 +3458,15 @@
         "operationId": "Model_AddCustomPrebuiltIntentModel",
         "parameters": [
           {
+            "$ref": "#/parameters/AppIdInPath"
+          },
+          {
+            "$ref": "#/parameters/VersionIdInPath"
+          },
+          {
             "name": "prebuiltDomainModelCreateObject",
             "in": "body",
+            "required": true,
             "schema": {
               "$ref": "#/definitions/PrebuiltDomainModelCreateObject"
             },
@@ -3472,9 +3479,6 @@
         "responses": {
           "201": {
             "description": "The ID of the created model.",
-            "examples": {
-              "application/json": "\"c0d59374-cf44-4302-98d1-e853886a4674\""
-            },
             "schema": {
               "$ref": "#/definitions/GuidResponse"
             }
@@ -3488,7 +3492,12 @@
         },
         "produces": [
           "application/json"
-        ]
+        ],
+        "x-ms-examples": {
+          "Successful Add Custom Prebuilt Intent request": {
+            "$ref": "./examples/model/SuccessfulAddCustomPrebuildIntentRequest.json"
+          }
+        }
       },
       "get": {
         "description": "Gets custom prebuilt intents information of this application",
