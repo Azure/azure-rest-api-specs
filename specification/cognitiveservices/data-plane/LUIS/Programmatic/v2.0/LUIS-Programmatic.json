@@ -1888,7 +1888,7 @@
     },
     "/apps/{appId}/versions/{versionId}/entities/{entityId}/suggest": {
       "get": {
-        "description": "Suggests examples that would improve the accuracy of the entity model.",
+        "description": "Get suggestion examples that would improve the accuracy of the entity model.",
         "operationId": "Model_SuggestEndpointQueriesForEntities",
         "parameters": [
           {
@@ -1910,9 +1910,9 @@
         ],
         "responses": {
           "200": {
-            "description": "If there's no trained model, nothing is returned in the response.</br>If there's a trained model and the active learning algorithm finds any relevant queries, they are returned with the model predictions.</br>If there's a trained model but the active learning algorithm didn't find any relevant queries, an empty list is returned in the response.",
-            "examples": {
-              "application/json": "[  {    \"text\": \"hello, world!\",    \"tokenizedText\": [      \"hello\",      \",\",      \"world\",      \"!\"    ],    \"intentPredictions\": [      {        \"name\": \"None\",        \"score\": 0.63      },      {        \"name\": \"BookFlight\",        \"score\": 0      },      {        \"name\": \"GetWeather\",        \"score\": 0      }    ],    \"entityPredictions\": []  }]"
+            "description": "If there's no trained model, nothing is returned in the response. If there's a trained model and the active learning algorithm finds any relevant queries, they are returned with the model predictions. If there's a trained model but the active learning algorithm didn't find any relevant queries, an empty list is returned in the response.",
+            "schema": {
+              "$ref": "#/definitions/EntitiesSuggestionExamples"
             }
           },
           "default": {
@@ -1924,7 +1924,12 @@
         },
         "produces": [
           "application/json"
-        ]
+        ],
+        "x-ms-examples": {
+          "Successful Get Entity Suggestion Examples": {
+            "$ref": "./examples/model/SuccessfulGetEntitySuggestionExamples.json"
+          }
+        }
       }
     },
     "/apps/": {
@@ -4890,6 +4895,40 @@
         }
       }
     },
+    "EntitiesSuggestionExamples": {
+      "type": "array",
+      "items": {
+        "$ref": "#/definitions/EntitiesSuggestionExample"
+      }
+    },
+    "EntitiesSuggestionExample": {
+      "type": "object",
+      "properties": {
+        "text": {
+          "type": "string",
+          "description": "what's the weather like in seattle?"
+        },
+        "tokenizedText": {
+          "type": "array",
+          "description": "the utterance tokenized",
+          "items": {
+            "type": "string"
+          }
+        },
+        "intentPredictions": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/IntentPrediction"
+          }
+        },
+        "entityPredictions": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/EntityPrediction"
+          }
+        }
+      }
+    },
     "EntityLabel": {
       "type": "object",
       "properties": {
@@ -4924,10 +4963,10 @@
         "entityName": {
           "type": "string"
         },
-        "startIndex": {
+        "startTokenIndex": {
           "type": "number"
         },
-        "endIndex": {
+        "endTokenIndex": {
           "type": "number"
         },
         "phrase": {
