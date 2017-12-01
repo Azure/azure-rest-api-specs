@@ -55,7 +55,7 @@
             "schema": {
               "$ref": "#/definitions/PatternCreateObject"
             },
-            "description": "A JSON object containing Name and Pattern of the feature."
+            "description": "The Name and Pattern of the feature."
           }
         ],
         "consumes": [
@@ -97,7 +97,7 @@
         ],
         "responses": {
           "200": {
-            "description": "A JSON object containing a list of all pattern features.",
+            "description": "A list of all pattern features.",
             "schema": {
               "$ref": "#/definitions/PatternFeatureInfoList"
             }
@@ -227,7 +227,7 @@
         ],
         "responses": {
           "200": {
-            "description": "A JSON object containing a list of all phraselist features and a list of all pattern featuers in the application.",
+            "description": "A list of all phraselist features and a list of all pattern features in the application.",
             "schema": {
               "$ref": "#/definitions/FeaturesResponseObject"
             }
@@ -270,7 +270,7 @@
         "operationId": "Features_GetPatternFeatureInfo",
         "responses": {
           "200": {
-            "description": "A JSON object containing the pattern feature info.",
+            "description": "The pattern feature info.",
             "schema": {
               "$ref": "#/definitions/PatternFeatureInfo"
             }
@@ -315,7 +315,7 @@
             "schema": {
               "$ref": "#/definitions/PatternUpdateObject"
             },
-            "description": "A JSON object containing either:</br>1- Just a boolean called IsActive, in which case the status of the feature will be changed.</br>2- Name, Pattern and a boolean called IsActive to update the feature."
+            "description": "The new values for: - Just a boolean called IsActive, in which case the status of the feature will be changed. - Name, Pattern and a boolean called IsActive to update the feature."
           }
         ],
         "consumes": [
@@ -1754,7 +1754,7 @@
             "schema": {
               "$ref": "#/definitions/ClosedListModelPatchObject"
             },
-            "description": "A json object containing words list batch."
+            "description": "A words list batch."
           }
         ],
         "consumes": [
@@ -2074,7 +2074,7 @@
             "schema": {
               "$ref": "#/definitions/ApplicationCreateObject"
             },
-            "description": "A JSON object containing Name, Description (optional), Culture, Usage Scenario (optional), Domain (optional) and initial version ID (optional) of the application. \r\nDefault value for the version ID is 0.1. \r\nNote that the culture cannot be changed after the app is created."
+            "description": "A model containing Name, Description (optional), Culture, Usage Scenario (optional), Domain (optional) and initial version ID (optional) of the application. \r\nDefault value for the version ID is 0.1. \r\nNote that the culture cannot be changed after the app is created."
           }
         ],
         "consumes": [
@@ -2376,7 +2376,7 @@
             "schema": {
               "$ref": "#/definitions/ApplicationUpdateObject"
             },
-            "description": "A JSON object containing Name and Description of the application."
+            "description": "A model containing Name and Description of the application."
           }
         ],
         "consumes": [
@@ -2442,7 +2442,7 @@
             "schema": {
               "$ref": "#/definitions/TaskUpdateObject"
             },
-            "description": "An object containing the new version ID."
+            "description": "An model containing the new version ID."
           }
         ],
         "consumes": [
@@ -2574,7 +2574,7 @@
         "operationId": "Versions_GetApplicationVersion",
         "responses": {
           "200": {
-            "description": "A JSON object containing the task info.",
+            "description": "A model containing the task info.",
             "schema": {
               "$ref": "#/definitions/VersionInfo"
             }
@@ -2612,7 +2612,7 @@
             "schema": {
               "$ref": "#/definitions/TaskUpdateObject"
             },
-            "description": "A JSON object containing Name and Description of the application."
+            "description": "A model containing Name and Description of the application."
           }
         ],
         "consumes": [
@@ -2840,7 +2840,7 @@
         ],
         "responses": {
           "200": {
-            "description": "A JSON object containing the application settings.",
+            "description": "An object containing the application settings.",
             "schema": {
               "$ref": "#/definitions/ApplicationSettings"
             }
@@ -2987,7 +2987,7 @@
             "schema": {
               "$ref": "#/definitions/UserCollaborator"
             },
-            "description": "A JSON object containing the user's email address."
+            "description": "A model containing the user's email address."
           }
         ],
         "consumes": [
@@ -3024,7 +3024,7 @@
             "schema": {
               "$ref": "#/definitions/UserCollaborator"
             },
-            "description": "A JSON object containing the user's email address."
+            "description": "A model containing the user's email address."
           }
         ],
         "consumes": [
@@ -3061,7 +3061,7 @@
             "schema": {
               "$ref": "#/definitions/CollaboratorsArray"
             },
-            "description": "A JSON object containing a list of user's email addresses."
+            "description": "A model containing a list of user's email addresses."
           }
         ],
         "consumes": [
