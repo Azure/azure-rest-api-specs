@@ -50,6 +50,20 @@ input-file:
 - Microsoft.DataLakeStore/preview/2015-10-01-preview/account.json
 ```
 
+## Suppression
+``` yaml
+directive:
+  - suppress: TrackedResourceGetOperation
+    reason: This is by design in that we return DataLakeStoreAccountBasic only for Account_List
+    #where:
+    #  - $.definitions.DataLakeStoreAccountBasic
+
+  - suppress: TrackedResourcePatchOperation
+    reason: DataLakeStoreAccountBasic is not independent and its purpose is for Account_List only.  PATCH is for DataLakeStoreAccount, which will effectively update DataLakeStoreAccountBasic
+    #where:
+    #  - $.definitions.DataLakeStoreAccountBasic
+```
+
 ---
 # Code Generation
 
