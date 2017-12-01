@@ -27,7 +27,6 @@ These are the global settings for the Authorization API.
 ``` yaml
 openapi-type: arm
 tag: package-2017-10-01-preview
-create: false
 ```
 
 
