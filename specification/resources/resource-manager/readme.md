@@ -191,6 +191,14 @@ input-file:
 - Microsoft.Resources/2016-09-01/links.json
 ```
 
+### Tag: package-managedapplications-2017-09
+These settings apply only when `--tag=package-managedapplications-2017-09` is specified on the command line.
+
+``` yaml $(tag) == 'package-managedapplications-2017-09'
+input-file:
+- Microsoft.Solutions/2017-09-01/managedapplications.json
+```
+
 ### Tag: package-managedapplications-2016-09
 These settings apply only when `--tag=package-managedapplications-2016-09` is specified on the command line.
 
@@ -414,6 +422,186 @@ Please also specify `--go-sdk-folder=<path to the root directory of your azure-s
 namespace: management
 output-folder: $(go-sdk-folder)/services/resources/mgmt/2017-08-31-preview/management
 ```
+
+## Python
+
+These settings apply only when `--python` is specified on the command line.
+
+```yaml $(python)
+python:
+  azure-arm: true
+  license-header: MICROSOFT_MIT_NO_VERSION
+  package-name: azure-mgmt-resource
+  payload-flattening-threshold: 2
+  clear-output-folder: true
+  no-namespace-folders: true
+```
+
+### Python multi-api
+
+Generate all API versions currently shipped for this package
+
+```yaml $(python) && $(multiapi)
+batch:
+  - tag: package-features-2015-12
+  - tag: package-links-2016-09
+  - tag: package-locks-2016-09
+  - tag: package-locks-2015-01
+  - tag: package-managedapplications-2017-09
+  - tag: package-compute-2015-06
+  - tag: package-policy-2017-06
+  - tag: package-policy-2016-12
+  - tag: package-policy-2016-04
+  - tag: package-policy-2015-10
+  - tag: package-resources-2017-05
+  - tag: package-resources-2016-09
+  - tag: package-resources-2016-02
+  - tag: package-subscriptions-2016-06
+```
+
+### Tag: package-features-2015-12 and python
+
+These settings apply only when `--tag=package-features-2015-12 --python` is specified on the command line.
+Please also specify `--python-sdks-folder=<path to the root directory of your azure-sdk-for-python clone>`.
+
+``` yaml $(tag) == 'package-features-2015-12' && $(python)
+python:
+  namespace: azure.mgmt.resource.features.v2015_12_01
+  output-folder: $(python-sdks-folder)/azure-mgmt-resource/azure/mgmt/resource/features/v2015_12_01
+```
+
+### Tag: package-links-2016-09 and python
+
+These settings apply only when `--tag=package-links-2016-09 --python` is specified on the command line.
+Please also specify `--python-sdks-folder=<path to the root directory of your azure-sdk-for-python clone>`.
+
+``` yaml $(tag) == 'package-links-2016-09' && $(python)
+python:
+  namespace: azure.mgmt.resource.links.v2016_09_01
+  output-folder: $(python-sdks-folder)/azure-mgmt-resource/azure/mgmt/resource/links/v2016_09_01
+```
+
+### Tag: package-locks-2016-09 and python
+
+These settings apply only when `--tag=package-locks-2016-09 --python` is specified on the command line.
+Please also specify `--python-sdks-folder=<path to the root directory of your azure-sdk-for-python clone>`.
+
+``` yaml $(tag) == 'package-locks-2016-09' && $(python)
+python:
+  namespace: azure.mgmt.resource.locks.v2016_09_01
+  output-folder: $(python-sdks-folder)/azure-mgmt-resource/azure/mgmt/resource/locks/v2016_09_01
+```
+
+### Tag: package-locks-2015-01 and python
+
+These settings apply only when `--tag=package-locks-2015-01 --python` is specified on the command line.
+Please also specify `--python-sdks-folder=<path to the root directory of your azure-sdk-for-python clone>`.
+
+``` yaml $(tag) == 'package-locks-2015-01' && $(python)
+python:
+  namespace: azure.mgmt.resource.locks.v2016_09_01
+  output-folder: $(python-sdks-folder)/azure-mgmt-resource/azure/mgmt/resource/locks/v2016_09_01
+```
+
+### Tag: package-managedapplications-2017-09 and python
+
+These settings apply only when `--tag=package-managedapplications-2017-09 --python` is specified on the command line.
+Please also specify `--python-sdks-folder=<path to the root directory of your azure-sdk-for-python clone>`.
+
+``` yaml $(tag) == 'package-managedapplications-2017-09' && $(python)
+python:
+  namespace: azure.mgmt.resource.managedapplications
+  output-folder: $(python-sdks-folder)/azure-mgmt-resource/azure/mgmt/resource/managedapplications
+```
+
+### Tag: package-policy-2017-06 and python
+
+These settings apply only when `--tag=package-policy-2017-06 --python` is specified on the command line.
+Please also specify `--python-sdks-folder=<path to the root directory of your azure-sdk-for-python clone>`.
+
+``` yaml $(tag) == 'package-policy-2017-06' && $(python)
+python:
+  namespace: azure.mgmt.resource.policy.v2017_06_01_preview
+  output-folder: $(python-sdks-folder)/azure-mgmt-resource/azure/mgmt/resource/policy/v2017_06_01_preview
+```
+
+### Tag: package-policy-2016-12 and python
+
+These settings apply only when `--tag=package-policy-2016-12 --python` is specified on the command line.
+Please also specify `--python-sdks-folder=<path to the root directory of your azure-sdk-for-python clone>`.
+
+``` yaml $(tag) == 'package-policy-2016-12' && $(python)
+python:
+  namespace: azure.mgmt.resource.policy.v2016_12_01
+  output-folder: $(python-sdks-folder)/azure-mgmt-resource/azure/mgmt/resource/policy/v2016_12_01
+```
+
+### Tag: package-policy-2016-04 and python
+
+These settings apply only when `--tag=package-policy-2016-04 --python` is specified on the command line.
+Please also specify `--python-sdks-folder=<path to the root directory of your azure-sdk-for-python clone>`.
+
+``` yaml $(tag) == 'package-policy-2016-04' && $(python)
+python:
+  namespace: azure.mgmt.resource.policy.v2016_04_01
+  output-folder: $(python-sdks-folder)/azure-mgmt-resource/azure/mgmt/resource/policy/v2016_04_01
+```
+
+### Tag: package-policy-2015-10 and python
+
+These settings apply only when `--tag=package-policy-2015-10 --python` is specified on the command line.
+Please also specify `--python-sdks-folder=<path to the root directory of your azure-sdk-for-python clone>`.
+
+``` yaml $(tag) == 'package-policy-2015-10' && $(python)
+python:
+  namespace: azure.mgmt.resource.policy.v2015_10_01_preview
+  output-folder: $(python-sdks-folder)/azure-mgmt-resource/azure/mgmt/resource/policy/v2015_10_01_preview
+```
+
+### Tag: package-resources-2017-05 and python
+
+These settings apply only when `--tag=package-resources-2017-05 --python` is specified on the command line.
+Please also specify `--python-sdks-folder=<path to the root directory of your azure-sdk-for-python clone>`.
+
+``` yaml $(tag) == 'package-resources-2017-05' && $(python)
+python:
+  namespace: azure.mgmt.resource.resources.v2017_05_10
+  output-folder: $(python-sdks-folder)/azure-mgmt-resource/azure/mgmt/resource/resources/v2017_05_10
+```
+
+### Tag: package-resources-2016-09 and python
+
+These settings apply only when `--tag=package-resources-2016-09 --python` is specified on the command line.
+Please also specify `--python-sdks-folder=<path to the root directory of your azure-sdk-for-python clone>`.
+
+``` yaml $(tag) == 'package-resources-2016-09' && $(python)
+python:
+  namespace: azure.mgmt.resource.resources.v2016_09_01
+  output-folder: $(python-sdks-folder)/azure-mgmt-resource/azure/mgmt/resource/resources/v2016_09_01
+```
+
+### Tag: package-resources-2016-02 and python
+
+These settings apply only when `--tag=package-resources-2016-02 --python` is specified on the command line.
+Please also specify `--python-sdks-folder=<path to the root directory of your azure-sdk-for-python clone>`.
+
+``` yaml $(tag) == 'package-resources-2016-02' && $(python)
+python:
+  namespace: azure.mgmt.resource.resources.v2016_02_01
+  output-folder: $(python-sdks-folder)/azure-mgmt-resource/azure/mgmt/resource/resources/v2016_02_01
+```
+
+### Tag: package-subscriptions-2016-06 and python
+
+These settings apply only when `--tag=package-subscriptions-2016-06 --python` is specified on the command line.
+Please also specify `--python-sdks-folder=<path to the root directory of your azure-sdk-for-python clone>`.
+
+``` yaml $(tag) == 'package-subscriptions-2016-06' && $(python)
+python:
+  namespace: azure.mgmt.resource.subscriptions.v2016_06_01
+  output-folder: $(python-sdks-folder)/azure-mgmt-resource/azure/mgmt/resource/subscriptions/v2016_06_01
+```
+
 
 
 # Validation
