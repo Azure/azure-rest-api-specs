@@ -2902,26 +2902,32 @@
             "$ref": "#/parameters/VersionIdInPath"
           },
           {
-            "name": "body",
+            "name": "utterance",
             "in": "body",
+            "required": true,
             "schema": {
-              "example": "\"Dummy text\""
+              "type": "string"
             },
             "description": "The utterance text to delete"
           }
         ],
         "consumes": [
-          "text/plain"
+          "application/json"
         ],
         "responses": {
           "200": {
-            "description": ""
+            "description": "No Content. Successfully operation."
           },
           "default": {
             "description": "Error Response.",
             "schema": {
               "$ref": "#/definitions/ErrorResponse"
             }
+          }
+        },
+        "x-ms-examples": {
+          "Successful Delete Unlabelled Utterance": {
+            "$ref": "./examples/versions/SuccessfulDeleteUnlabelledUtteranceRequest.json"
           }
         }
       }
@@ -5086,22 +5092,8 @@
     "PersonalAssistantUrls": {
       "type": "object",
       "description": "Endpoint URLs for prebuilt Cortana applications.",
-      "properties": {
-        "English": {
-          "type":"string"
-        },
-        "Chinese": {
-          "type":"string"
-        },
-        "French": {
-          "type":"string"
-        },
-        "Spanish": {
-          "type":"string"
-        },
-        "Italian": {
-          "type":"string"
-        }
+      "additionalProperties": {
+        "type": "string"
       }
     },
     "ModelsResponseObject" : {
