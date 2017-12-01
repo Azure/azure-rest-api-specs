@@ -102,6 +102,53 @@
           "nextLinkName": null
         }
       }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/servers/{serverName}/databases/{databaseName}/topQueries/{queryId}/queryText": {
+      "get": {
+        "tags": [
+          "Queries"
+        ],
+        "operationId": "QueryTexts_ListByQuery",
+        "description": "Gets a query's text.",
+        "x-ms-examples":{
+          "Get a query": { "$ref": "./examples/QueryTextsList.json" }
+        },
+        "parameters": [
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupParameter"
+          },
+          {
+            "$ref": "#/parameters/ServerNameParameter"
+          },
+          {
+            "$ref": "#/parameters/DatabaseNameParameter"
+          },
+          {
+            "name": "queryId",
+            "type": "string",
+            "description": "The id of the query",
+            "required": true,
+            "in": "path"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/QueryTextListResult"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": null
+        }
+      }
     }
   },
   "definitions": {
@@ -291,6 +338,38 @@
       },
       "required": ["value"],
       "description": "Represents the response to a get query request."
+    },
+    "QueryText": {
+      "properties": {
+        "name": {
+          "readOnly":true,
+          "type":"string",
+          "description":"Resource name."
+        },
+        "type": {
+          "readOnly":true,
+          "type":"string",
+          "description":"Resource type."
+        },
+        "queryText": {
+          "readOnly":true,
+          "type":"string",
+          "description":"Query text."
+        }
+      }
+    },
+    "QueryTextListResult": {
+      "properties": {
+        "value": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/QueryText"
+          },
+          "description": "The query text."
+        }
+      },
+      "required": ["value"],
+      "description": "Represents the response to a get query text request."
     }
   },
   "parameters": {

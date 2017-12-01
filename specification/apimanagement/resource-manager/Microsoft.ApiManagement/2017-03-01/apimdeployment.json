@@ -41,6 +41,11 @@
         ],
         "description": "Lists all of the available REST API operations of the Microsoft.ApiManagement provider.",
         "operationId": "ApiManagementOperations_List",
+        "x-ms-examples": {
+          "ApiManagementListOperations": {
+            "$ref": "./examples/ApiManagementListOperations.json"
+          }
+        },
         "parameters": [
           {
             "$ref": "./apimanagement.json#/parameters/ApiVersionParameter"
@@ -703,7 +708,7 @@
         },
         "keyVaultId": {
           "type": "string",
-          "description": "Url to the KeyVault Secret containing the Ssl Certificate. If absolute Url containing version is provided, auto-update of ssl certificate will not work. This requires Api Management service to be configured with MSI."
+          "description": "Url to the KeyVault Secret containing the Ssl Certificate. If absolute Url containing version is provided, auto-update of ssl certificate will not work. This requires Api Management service to be configured with MSI. The secret should be of type *application/x-pkcs12*"
         },
         "encodedCertificate": {
           "type": "string",
@@ -1263,7 +1268,7 @@
         "certificate"
       ],
       "description": "Custom hostname configuration."
-    }, 
+    },
     "ApiManagementServiceUpdateHostnameParameters": {
       "properties": {
         "update": {
@@ -1321,6 +1326,15 @@
               "type": "string"
             }
           }
+        },
+        "origin": {
+          "type": "string",
+          "description": "The operation origin."
+        },
+        "properties": {
+          "type": "object",
+          "x-ms-client-flatten": true,
+          "description": "The operation properties."
         }
       }
     },
