@@ -1672,9 +1672,20 @@
       "delete": {
         "description": "Deletes a composite entity extractor from the application.",
         "operationId": "Model_DeleteCompositeEntityModel",
+        "parameters": [
+          {
+            "$ref": "#/parameters/AppIdInPath"
+          },
+          {
+            "$ref": "#/parameters/VersionIdInPath"
+          },
+          {
+            "$ref": "#/parameters/CEntityIdInPath"
+          }
+        ],
         "responses": {
           "200": {
-            "description": ""
+            "description": "No Content. Successfully deleted composite entity."
           },
           "default": {
             "description": "Error Response.",
