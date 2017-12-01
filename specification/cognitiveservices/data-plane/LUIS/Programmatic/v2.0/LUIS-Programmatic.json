@@ -2746,124 +2746,6 @@
         }
       }
     },
-    "/subscriptions": {
-      "post": {
-        "description": "Adds a subscription key to the user.",
-        "operationId": "User_AddSubscriptionKey",
-        "parameters": [
-          {
-            "name": "userSubscriptionCreateObject",
-            "in": "body",
-            "schema": {
-              "$ref": "#/definitions/UserSubscriptionCreateObject"
-            },
-            "description": "Subscription key object."
-          }
-        ],
-        "consumes": [
-          "application/json"
-        ],
-        "responses": {
-          "201": {
-            "description": "Returns the added subscription key information",
-            "examples": {
-              "application/json": {
-                "subscriptionKey": "DummyKey",
-                "subscriptionName": "DummyName",
-                "subscriptionRegion": "westus"
-              }
-            }
-          },
-          "default": {
-            "description": "Error Response.",
-            "schema": {
-              "$ref": "#/definitions/ErrorResponse"
-            }
-          }
-        },
-        "produces": [
-          "application/json"
-        ]
-      },
-      "get": {
-        "description": "Gets the user's endpoint subscription keys.",
-        "operationId": "User_GetUserSubscriptionKeys",
-        "responses": {
-          "200": {
-            "description": "A list containing subscription keys info.",
-            "examples": {
-              "application/json": "[  {    \"subscriptionKey\": \"dummykey\",    \"subscriptionName\": \"DummyName\",    \"subscriptionRegion\":\"westus\"  }]"
-            },
-            "schema": {
-              "$ref": "#/definitions/SubscriptionKeyList"
-            }
-          },
-          "default": {
-            "description": "Error Response.",
-            "schema": {
-              "$ref": "#/definitions/ErrorResponse"
-            }
-          }
-        },
-        "produces": [
-          "application/json"
-        ]
-      },
-      "put": {
-        "description": "Renames a subscription key owned by the user.",
-        "operationId": "User_RenameSubscriptionKey",
-        "parameters": [
-          {
-            "name": "body",
-            "in": "body",
-            "schema": {
-              "example": "{\t\"subscriptionName\": \"DummyName\",\t\"subscriptionKey\": \"DummyKey\"}"
-            },
-            "description": "Subscription key object."
-          }
-        ],
-        "consumes": [
-          "application/json"
-        ],
-        "responses": {
-          "200": {
-            "description": ""
-          },
-          "default": {
-            "description": "Error Response.",
-            "schema": {
-              "$ref": "#/definitions/ErrorResponse"
-            }
-          }
-        }
-      }
-    },
-    "/subscriptions/{subscriptionKey}": {
-      "delete": {
-        "description": "Deletes a user subscription key.",
-        "operationId": "User_DeleteSubscriptionKey",
-        "parameters": [
-          {
-            "name": "subscriptionKey",
-            "in": "path",
-            "description": "The subscription key.",
-            "required": true,
-            "type": "string"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": ""
-          },
-          "default": {
-            "description": "Error Response.",
-            "schema": {
-              "$ref": "#/definitions/ErrorResponse"
-            }
-          }
-        }
-      }
-    },
     "/programmatickey": {
       "put": {
         "description": "Resets the user programmatic key.",
@@ -4292,19 +4174,6 @@
     "KeyValue": {
       "type": "string",
       "example": "\"DummyKey\""
-    },
-    "UserSubscriptionCreateObject": {
-      "additionalProperties": false,
-      "type": "object",
-      "properties": {
-        "SubscriptionName": {
-          "type": "string"
-        },
-        "SubscriptionKey": {
-          "type": "string"
-        }
-      },
-      "example": "{\t\"subscriptionName\": \"DummyName\",\t\"subscriptionKey\": \"DummyKey\"}"
     },
     "JSONModelFeature": {
       "additionalProperties": false,
@@ -5912,26 +5781,6 @@
         "200d6173-ecfa-4967-bf95-3c319902dc52",
         "f80aa9ba-64c8-4a36-8cc5-92010d0aadf1"
       ]
-    },
-    "SubscriptionKeyList": {
-      "type": "array",
-      "items": {
-        "$ref": "#/definitions/SubscriptionKeyInfo"
-      }
-    },
-    "SubscriptionKeyInfo": {
-      "type": "object",
-      "properties": {
-        "subscriptionKey": {
-          "type": "string"
-        },
-        "subscriptionName": {
-          "type": "string"
-        },
-        "subscriptionRegion": {
-          "type": "string"
-        }
-      }
     }
   },
   "parameters": {
