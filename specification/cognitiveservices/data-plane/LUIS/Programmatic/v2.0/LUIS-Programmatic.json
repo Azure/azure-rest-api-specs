@@ -2682,99 +2682,6 @@
         }
       }
     },
-    "/apps/{appId}/versions/{versionId}/externalKeys": {
-      "parameters": [
-        {
-          "$ref": "#/parameters/AppIdInPath"
-        },
-        {
-          "$ref": "#/parameters/VersionIdInPath"
-        }
-      ],
-      "put": {
-        "description": "Assigns an external API key to the given application according to the specified key type.",
-        "operationId": "Versions_UpdateApplicationVersionExternalKey",
-        "parameters": [
-          {
-            "name": "externalKeyUpdateObject",
-            "in": "body",
-            "schema": {
-              "$ref": "#/definitions/ExternalKeyUpdateObject"
-            },
-            "description": "The external api key to be assigned."
-          }
-        ],
-        "consumes": [
-          "application/json"
-        ],
-        "responses": {
-          "200": {
-            "description": ""
-          },
-          "default": {
-            "description": "Error Response.",
-            "schema": {
-              "$ref": "#/definitions/ErrorResponse"
-            }
-          }
-        }
-      },
-      "get": {
-        "description": "Gets the given application versions's external keys.",
-        "operationId": "Versions_GetApplicationVersionExternalApiKeys",
-        "responses": {
-          "200": {
-            "description": "An array containing the external keys.",
-            "examples": {
-              "application/json": {
-                "BingSpellCheck": "40fd1383c949492cb16d7b082dcaac82"
-              }
-            }
-          },
-          "default": {
-            "description": "Error Response.",
-            "schema": {
-              "$ref": "#/definitions/ErrorResponse"
-            }
-          }
-        },
-        "produces": [
-          "application/json"
-        ]
-      }
-    },
-    "/apps/{appId}/versions/{versionId}/externalKeys/{keyType}": {
-      "delete": {
-        "description": "Deletes an external API key currently associated to the given application according for the specified key type.",
-        "operationId": "Versions_DeleteApplicationVersionExternalKey",
-        "parameters": [
-          {
-            "$ref": "#/parameters/AppIdInPath"
-          },
-          {
-            "$ref": "#/parameters/VersionIdInPath"
-          },
-          {
-            "name": "keyType",
-            "in": "path",
-            "description": "The external key type.",
-            "required": true,
-            "type": "string"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": ""
-          },
-          "default": {
-            "description": "Error Response.",
-            "schema": {
-              "$ref": "#/definitions/ErrorResponse"
-            }
-          }
-        }
-      }
-    },
     "/apps/{appId}/versions/{versionId}/train": {
       "parameters": [
         {
@@ -2957,57 +2864,6 @@
         }
       }
     },
-    "/externalKeys": {
-      "post": {
-        "description": "Adds an external API key to the user.",
-        "operationId": "User_AddExternalApiKey",
-        "parameters": [
-          {
-            "name": "externalKeyCreateObject",
-            "in": "body",
-            "schema": {
-              "$ref": "#/definitions/ExternalKeyCreateObject"
-            },
-            "description": "External API key object."
-          }
-        ],
-        "consumes": [
-          "application/json"
-        ],
-        "responses": {
-          "201": {
-            "description": ""
-          },
-          "default": {
-            "description": "Error Response.",
-            "schema": {
-              "$ref": "#/definitions/ErrorResponse"
-            }
-          }
-        }
-      },
-      "get": {
-        "description": "Gets a list of the user's external api keys.",
-        "operationId": "User_GetUserExternalApiKeys",
-        "responses": {
-          "200": {
-            "description": "A list containing user's external keys info.",
-            "examples": {
-              "application/json": "[  {    \"type\": \"bingspellcheck\",    \"values\": [      \"ee29eff4fe914fe282ad75d16328d717\"    ]  }]"
-            }
-          },
-          "default": {
-            "description": "Error Response.",
-            "schema": {
-              "$ref": "#/definitions/ErrorResponse"
-            }
-          }
-        },
-        "produces": [
-          "application/json"
-        ]
-      }
-    },
     "/programmatickey": {
       "put": {
         "description": "Resets the user programmatic key.",
@@ -3029,32 +2885,6 @@
         "produces": [
           "application/json"
         ]
-      }
-    },
-    "/externalKeys/{externalKeyValue}": {
-      "delete": {
-        "description": "Deletes a user external API key.",
-        "operationId": "User_DeleteExternalApiKey",
-        "parameters": [
-          {
-            "name": "externalKeyValue",
-            "in": "path",
-            "description": "The external API key.",
-            "required": true,
-            "type": "string"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": ""
-          },
-          "default": {
-            "description": "Error Response.",
-            "schema": {
-              "$ref": "#/definitions/ErrorResponse"
-            }
-          }
-        }
       }
     },
     "/apps/{appId}/versions/import": {
@@ -4463,19 +4293,6 @@
       "type": "string",
       "example": "\"DummyKey\""
     },
-    "ExternalKeyCreateObject": {
-      "additionalProperties": false,
-      "type": "object",
-      "properties": {
-        "Type": {
-          "type": "string"
-        },
-        "Value": {
-          "type": "string"
-        }
-      },
-      "example": "{\t\"type\": \"BingSpellCheck\",\t\"value\": \"ee29eff4fe914fe282ad75d16328d717\"}"
-    },
     "UserSubscriptionCreateObject": {
       "additionalProperties": false,
       "type": "object",
@@ -4667,19 +4484,6 @@
         ]
       }
     },
-    "ExternalKeyUpdateObject": {
-      "additionalProperties": false,
-      "type": "object",
-      "properties": {
-        "Type": {
-          "type": "string"
-        },
-        "Value": {
-          "type": "string"
-        }
-      },
-      "example": "{\t\"type\": \"BingSpellCheck\",        \"value\": \"ee29eff4fe914fe282ad75d16328d717\"}"
-    },
     "ClosedListModelCreateObject": {
       "additionalProperties": false,
       "type": "object",
@@ -4776,9 +4580,6 @@
           "additionalProperties": {
             "type": "string"
           }
-        },
-        "externalApiKeys": {
-          "type": "object"
         },
         "intentsCount": {
           "type": "integer"
