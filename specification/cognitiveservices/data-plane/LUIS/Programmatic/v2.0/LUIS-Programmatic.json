@@ -360,24 +360,24 @@
       }
     },
     "/apps/{appId}/versions/{versionId}/phraselists/{phraselistId}": {
-      "parameters": [
-        {
-          "$ref": "#/parameters/AppIdInPath"
-        },
-        {
-          "$ref": "#/parameters/VersionIdInPath"
-        },
-        {
-          "name": "phraselistId",
-          "in": "path",
-          "description": "The ID of the feature to be deleted.",
-          "required": true,
-          "type": "integer"
-        }
-      ],
       "get": {
         "description": "Gets phraselist feature info.",
         "operationId": "Features_GetPhraselistFeatureInfo",
+        "parameters": [
+          {
+            "$ref": "#/parameters/AppIdInPath"
+          },
+          {
+            "$ref": "#/parameters/VersionIdInPath"
+          },
+          {
+            "name": "phraselistId",
+            "in": "path",
+            "description": "The ID of the feature to be deleted.",
+            "required": true,
+            "type": "integer"
+          }
+        ],
         "responses": {
           "200": {
             "description": "A JSON object containing the phraselist feature info.",
@@ -406,6 +406,19 @@
         "operationId": "Features_UpdatePhraselistFeature",
         "parameters": [
           {
+            "$ref": "#/parameters/AppIdInPath"
+          },
+          {
+            "$ref": "#/parameters/VersionIdInPath"
+          },
+          {
+            "name": "phraselistId",
+            "in": "path",
+            "description": "The ID of the feature to be deleted.",
+            "required": true,
+            "type": "integer"
+          },
+          {
             "name": "phraselistUpdateObject",
             "in": "body",
             "schema": {
@@ -432,6 +445,21 @@
       "delete": {
         "description": "Deletes a phraselist feature from an application.",
         "operationId": "Features_DeletePhraselistFeature",
+        "parameters": [
+          {
+            "$ref": "#/parameters/AppIdInPath"
+          },
+          {
+            "$ref": "#/parameters/VersionIdInPath"
+          },
+          {
+            "name": "phraselistId",
+            "in": "path",
+            "description": "The ID of the feature to be deleted.",
+            "required": true,
+            "type": "integer"
+          }
+        ],
         "responses": {
           "200": {
             "description": ""
