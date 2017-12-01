@@ -1220,7 +1220,7 @@
           "200": {
             "description": "A list of application models infos.",
             "schema": {
-              "$ref": "#/definitions/ModelsResponseObject"
+              "$ref": "#/definitions/ModelsInfoResponseObject"
             }
           },
           "default": {
@@ -5124,6 +5124,12 @@
       "required": [
         "readableType"
       ]
+    },
+    "ModelsInfoResponseObject" : {
+      "type": "array",
+      "items": {
+        "$ref": "#/definitions/ModelInfoResponse"
+      }
     },
     "ModelInfoResponse": {
       "type": "object",
