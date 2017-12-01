@@ -29,3 +29,10 @@ csharp:
   output-folder: $(csharp-sdks-folder)/CognitiveServices/dataPlane/Search/BingCustomSearch/Generated/CustomSearch
   sync-methods: none
 ```
+## Suppressions
+Suppressing errors due to API design:
+``` yaml $(csharp) 
+directive:
+  - suppress: R3016
+    reason: _type is a polymorphic discriminator that can't be changed. 
+```
