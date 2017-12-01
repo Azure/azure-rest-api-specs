@@ -373,14 +373,14 @@
           {
             "name": "phraselistId",
             "in": "path",
-            "description": "The ID of the feature to be deleted.",
+            "description": "The ID of the feature to be retrieved.",
             "required": true,
             "type": "integer"
           }
         ],
         "responses": {
           "200": {
-            "description": "A JSON object containing the phraselist feature info.",
+            "description": "A phraselist feature info.",
             "schema": {
               "$ref": "#/definitions/PhraseListFeatureInfo"
             }
@@ -462,13 +462,18 @@
         ],
         "responses": {
           "200": {
-            "description": ""
+            "description": "No Content. Successfully deleted phraselist."
           },
           "default": {
             "description": "Error Response.",
             "schema": {
               "$ref": "#/definitions/ErrorResponse"
             }
+          }
+        },
+        "x-ms-examples": {
+          "Successful Delete Phraselist Feature Info request": {
+            "$ref": "./examples/features/SuccessfulDeletePhraselistFeatureInfoRequest.json"
           }
         }
       }
@@ -5355,7 +5360,7 @@
       "type": "object",
       "properties": {
         "id": {
-          "type": "number",
+          "type": "integer",
           "description": "A six-digit ID used for Features."
         },
         "name": {
