@@ -65,6 +65,19 @@ csharp:
   clear-output-folder: true
 ```
 
+## Python
+
+These settings apply only when `--python` is specified on the command line.
+
+``` yaml $(python)
+python:
+  azure-arm: true
+  license-header: MICROSOFT_MIT_NO_VERSION
+  payload-flattening-threshold: 2
+  namespace: azure.keyvault
+  package-name: azure-keyvault
+```
+
 
 ## Go
 
