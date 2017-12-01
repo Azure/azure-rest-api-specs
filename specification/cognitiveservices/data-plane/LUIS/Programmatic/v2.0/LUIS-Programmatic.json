@@ -3631,27 +3631,27 @@
       }
     },
     "/apps/{appId}/versions/{versionId}/hierarchicalentities/{hEntityId}/children/{hChildId}": {
-      "parameters": [
-        {
-          "$ref": "#/parameters/AppIdInPath"
-        },
-        {
-          "$ref": "#/parameters/VersionIdInPath"
-        },
-        {
-          "$ref": "#/parameters/HEntityIdInPath"
-        },
-        {
-          "name": "hChildId",
-          "in": "path",
-          "description": "Format - guid. The hierarchical entity extractor child ID.",
-          "required": true,
-          "type": "string"
-        }
-      ],
       "get": {
         "description": "Gets information about the hierarchical entity child model.",
         "operationId": "Model_GetHierarchicalEntityChildInfo",
+        "parameters": [
+          {
+            "$ref": "#/parameters/AppIdInPath"
+          },
+          {
+            "$ref": "#/parameters/VersionIdInPath"
+          },
+          {
+            "$ref": "#/parameters/HEntityIdInPath"
+          },
+          {
+            "name": "hChildId",
+            "in": "path",
+            "description": "Format - guid. The hierarchical entity extractor child ID.",
+            "required": true,
+            "type": "string"
+          }
+        ],
         "responses": {
           "200": {
             "description": "The hierarchical entity child model info.",
@@ -3680,10 +3680,30 @@
         "operationId": "Model_UpdateHierarchicalEntityChildModel",
         "parameters": [
           {
+            "$ref": "#/parameters/AppIdInPath"
+          },
+          {
+            "$ref": "#/parameters/VersionIdInPath"
+          },
+          {
+            "$ref": "#/parameters/HEntityIdInPath"
+          },
+          {
+            "name": "hChildId",
+            "in": "path",
+            "required": true,
+            "description": "Format - guid. The hierarchical entity extractor child ID.",
+            "required": true,
+            "type": "string"
+          },
+          {
             "name": "body",
             "in": "body",
+            "required": true,
             "schema": {
-              "example": "{\t\"name\": \"Source\"}"
+              "example": {
+                "name": "Source"
+              }
             },
             "description": "Model object containing new name of the hierarchical entity child."
           }
@@ -3706,6 +3726,24 @@
       "delete": {
         "description": "Deletes a hierarchical entity extractor child from the application.",
         "operationId": "Model_DeleteHierarchicalEntityChildModel",
+        "parameters": [
+          {
+            "$ref": "#/parameters/AppIdInPath"
+          },
+          {
+            "$ref": "#/parameters/VersionIdInPath"
+          },
+          {
+            "$ref": "#/parameters/HEntityIdInPath"
+          },
+          {
+            "name": "hChildId",
+            "in": "path",
+            "description": "Format - guid. The hierarchical entity extractor child ID.",
+            "required": true,
+            "type": "string"
+          }
+        ],
         "responses": {
           "200": {
             "description": ""
