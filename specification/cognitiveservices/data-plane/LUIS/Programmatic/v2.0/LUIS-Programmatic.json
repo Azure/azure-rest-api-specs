@@ -120,25 +120,24 @@
       }
     },
     "/apps/{appId}/versions/{versionId}/phraselists": {
-      "parameters": [
-        {
-          "$ref": "#/parameters/AppIdInPath"
-        },
-        {
-          "$ref": "#/parameters/VersionIdInPath"
-        }
-      ],
       "post": {
         "description": "Creates a new phraselist feature.",
         "operationId": "Features_CreatePhraselistFeature",
         "parameters": [
           {
+            "$ref": "#/parameters/AppIdInPath"
+          },
+          {
+            "$ref": "#/parameters/VersionIdInPath"
+          },
+          {
             "name": "phraselistCreateObject",
             "in": "body",
+            "required": true,
             "schema": {
               "$ref": "#/definitions/PhraselistCreateObject"
             },
-            "description": "A JSON object containing Name, comma-separated Phrases and the isExchangeable boolean.            Default value for isExchangeable is true."
+            "description": "A Phraselist object containing Name, comma-separated Phrases and the isExchangeable boolean. Default value for isExchangeable is true."
           }
         ],
         "consumes": [
@@ -168,9 +167,15 @@
         }
       },
       "get": {
-        "description": "Gets all application phraselist features.",
+        "description": "Gets phraselist features.",
         "operationId": "Features_GetApplicationVersionPhraselistFeatures",
         "parameters": [
+          {
+            "$ref": "#/parameters/AppIdInPath"
+          },
+          {
+            "$ref": "#/parameters/VersionIdInPath"
+          },
           {
             "$ref": "#/parameters/SkipInPath"
           },
@@ -180,7 +185,7 @@
         ],
         "responses": {
           "200": {
-            "description": "A JSON object containing a list of all phraselist features.",
+            "description": "A list of all phraselist features.",
             "schema": {
               "$ref": "#/definitions/PhraseListFeatureInfoList"
             }
@@ -4220,18 +4225,22 @@
       "additionalProperties": false,
       "type": "object",
       "properties": {
-        "Phrases": {
+        "phrases": {
           "type": "string"
         },
-        "Name": {
+        "name": {
           "type": "string"
         },
-        "IsExchangeable": {
+        "isExchangeable": {
           "default": true,
           "type": "boolean"
         }
       },
-      "example": "{\t\"name\": \"DaysOfWeek\",\t\"phrases\": \"monday,tuesday,wednesday,thursday,friday,saturday,sunday\",        \"isExchangeable\": true}"
+      "example": {
+        "name": "DaysOfWeek",
+        "phrases": "monday,tuesday,wednesday,thursday,friday,saturday,sunday",
+        "isExchangeable": true
+      }
     },
     "SubClosedList": {
       "additionalProperties": false,
@@ -5192,7 +5201,8 @@
       "example": "0.1"
     },
     "FeatureIDResponse": {
-      "type": "number",
+      "type": "integer",
+      "x-nullable": false,
       "example": 398102
     },
     "LabeledUtterances": {
