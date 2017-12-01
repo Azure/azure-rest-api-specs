@@ -322,6 +322,11 @@
               "$ref": "#/definitions/Topology"
             }
           }
+        },
+        "x-ms-examples": {
+          "Get Topology": {
+            "$ref": "./examples/NetworkWatcherTopologyGet.json"
+          }
         }
       }
     },
@@ -1224,13 +1229,18 @@
       "description": "List of network watcher resources."
     },
     "TopologyParameters": {
-      "required": [
-        "targetResourceGroupName"
-      ],
       "properties": {
         "targetResourceGroupName": {
           "type": "string",
           "description": "The name of the target resource group to perform topology on."
+        },
+        "targetVirtualNetwork": {
+          "$ref": "./network.json#/definitions/SubResource",
+          "description": "The reference of the Virtual Network resource."
+        },
+        "targetSubnet": {
+          "$ref": "./network.json#/definitions/SubResource",
+          "description": "The reference of the Subnet resource."
         }
       },
       "description": "Parameters that define the representation of topology."

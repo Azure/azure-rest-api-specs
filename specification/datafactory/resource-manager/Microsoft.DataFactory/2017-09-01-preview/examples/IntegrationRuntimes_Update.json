@@ -4,8 +4,8 @@
     "resourceGroupName": "exampleResourceGroup",
     "factoryName": "exampleFactoryName",
     "integrationRuntimeName": "exampleIntegrationRuntime",
-    "integrationRuntimePatchRequest": {
-      "autoUpdate": "On",
+    "updateIntegrationRuntimeRequest": {
+      "autoUpdate": "Off",
       "updateDelayOffset": "\"PT3H\""
     },
     "api-version": "2017-09-01-preview"
@@ -13,29 +13,25 @@
   "responses": {
     "200": {
       "headers": {
-        "Date": "Thu, 19 Oct 2017 15:21:33 GMT",
-        "x-ms-request-id": "f8691852-232a-4527-bf8a-52b61afd4083",
+        "Date": "Tue, 28 Nov 2017 06:05:14 GMT",
+        "x-ms-request-id": "2fcc5cb6-e236-4848-99b7-8c834a622144",
         "X-Content-Type-Options": "nosniff"
       },
       "body": {
         "name": "exampleIntegrationRuntime",
         "properties": {
-          "dataFactoryName": "exampleFactoryName",
           "state": "Online",
-          "iRType": "SelfHosted",
           "type": "SelfHosted",
-          "dataFactoryLocation": null,
-          "resourceUri": null,
           "typeProperties": {
-            "autoUpdate": "On",
-            "nodeCommunicationChannelEncryptionMode": "None",
-            "taskQueueId": "b31b4165-bca1-47d3-a20a-6b20b2c28015",
-            "version": "3.1.6493.1",
+            "autoUpdate": "Off",
+            "nodeCommunicationChannelEncryptionMode": "NonEncryption",
+            "taskQueueId": "c4f7521d-66cc-4d44-8aad-4d3679821c41",
+            "version": "3.2.6519.3",
             "nodes": [
               {
                 "nodeName": "Node_1",
-                "machineName": "YANZHANG-DT",
-                "hostServiceUri": "https://yanzhang-dt.fareast.corp.microsoft.com:8050/HostServiceRemote.svc/",
+                "machineName": "YANZHANG-02",
+                "hostServiceUri": "https://yanzhang-02.redmond.corp.microsoft.com:8050/HostServiceRemote.svc/",
                 "status": "Online",
                 "capabilities": {
                   "serviceBusConnected": "True",
@@ -44,20 +40,23 @@
                   "connectedToResourceManager": "True",
                   "nodeEnabled": "True"
                 },
-                "versionStatus": "None",
-                "version": "3.1.6493.1",
-                "registerTime": "2017-10-19T15:20:29.3833194Z",
-                "lastConnectTime": "2017-10-19T15:21:33.2990651Z",
-                "lastStartTime": "2017-10-19T15:21:00.1172773Z",
+                "versionStatus": "UpToDate",
+                "version": "3.2.6519.3",
+                "registerTime": "2017-11-28T05:54:38.5305162Z",
+                "lastConnectTime": "2017-11-28T06:04:53.3204752Z",
+                "lastStartTime": "2017-11-28T05:55:24.1066418Z",
                 "lastUpdateResult": "None",
                 "isActiveDispatcher": true,
-                "maxConcurrentJobs": 56
+                "maxConcurrentJobs": 48
               }
             ],
+            "updateDelayOffset": "PT3H",
+            "localTimeZoneOffset": "PT8H",
             "serviceUrls": [
               "wu.frontend.int.clouddatahub-int.net",
               "*.servicebus.windows.net"
             ],
+            "versionStatus": "UpToDate",
             "capabilities": {
               "serviceBusConnected": "True",
               "httpsPortEnabled": "True",
@@ -66,7 +65,7 @@
               "nodeEnabled": "True"
             },
             "state": "Online",
-            "createTime": "2017-10-19T08:00:54.3752529Z"
+            "createTime": "2017-11-28T05:42:42.9629741Z"
           }
         }
       }

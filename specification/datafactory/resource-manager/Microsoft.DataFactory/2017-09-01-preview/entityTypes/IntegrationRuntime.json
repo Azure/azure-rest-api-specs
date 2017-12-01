@@ -13,7 +13,7 @@
       "properties": {
         "type": {
           "description": "Type of integration runtime.",
-          "type": "string"
+          "$ref": "#/definitions/IntegrationRuntimeType"
         },
         "description": {
           "description": "Integration runtime description.",
@@ -26,6 +26,18 @@
       "required": [
         "type"
       ]
+    },
+    "IntegrationRuntimeType": {
+      "description": "The type of integration runtime.",
+      "type": "string",
+      "enum": [
+        "Managed",
+        "SelfHosted"
+      ],
+      "x-ms-enum": {
+        "name": "IntegrationRuntimeType",
+        "modelAsString": true
+      }
     },
     "ManagedIntegrationRuntime": {
       "x-ms-discriminator-value": "Managed",
@@ -240,7 +252,7 @@
       "properties": {
         "type": {
           "description": "Type of integration runtime.",
-          "type": "string"
+          "$ref": "#/definitions/IntegrationRuntimeType"
         },
         "state": {
           "description": "The state of integration runtime.",
