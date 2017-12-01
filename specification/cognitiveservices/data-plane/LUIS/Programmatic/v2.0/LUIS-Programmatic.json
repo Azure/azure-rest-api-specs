@@ -1589,20 +1589,20 @@
       }
     },
     "/apps/{appId}/versions/{versionId}/compositeentities/{cEntityId}": {
-      "parameters": [
-        {
-          "$ref": "#/parameters/AppIdInPath"
-        },
-        {
-          "$ref": "#/parameters/VersionIdInPath"
-        },
-        {
-          "$ref": "#/parameters/CEntityIdInPath"
-        }
-      ],
       "get": {
         "description": "Gets information about the composite entity model.",
         "operationId": "Model_GetCompositeEntityInfo",
+        "parameters": [
+          {
+            "$ref": "#/parameters/AppIdInPath"
+          },
+          {
+            "$ref": "#/parameters/VersionIdInPath"
+          },
+          {
+            "$ref": "#/parameters/CEntityIdInPath"
+          }
+        ],
         "responses": {
           "200": {
             "description": "The composite entity model info.",
@@ -1631,8 +1631,18 @@
         "operationId": "Model_UpdateCompositeEntityModel",
         "parameters": [
           {
+            "$ref": "#/parameters/AppIdInPath"
+          },
+          {
+            "$ref": "#/parameters/VersionIdInPath"
+          },
+          {
+            "$ref": "#/parameters/CEntityIdInPath"
+          },
+          {
             "name": "hierarchicalModelUpdateObject",
             "in": "body",
+            "required": true,
             "schema": {
               "$ref": "#/definitions/HierarchicalModelUpdateObject"
             },
@@ -1649,7 +1659,7 @@
         },
         "responses": {
           "200": {
-            "description": ""
+            "description": "No Content. Successfully updated composite entity."
           },
           "default": {
             "description": "Error Response.",
