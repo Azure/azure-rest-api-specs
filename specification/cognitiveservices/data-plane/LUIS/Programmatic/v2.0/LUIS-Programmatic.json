@@ -2069,22 +2069,23 @@
     },
     "/apps/import": {
       "post": {
-        "description": "Imports an application to LUIS, the application's JSON should be included in in the request body.",
+        "description": "Imports an application to LUIS, the application's structure should be included in in the request body.",
         "operationId": "Apps_ImportApplication",
         "parameters": [
           {
             "name": "appName",
             "in": "query",
-            "description": "The imported application name.",
+            "description": "The application name to create. If not specified, the application name will be read from the imported object.",
             "type": "string"
           },
           {
-            "name": "jSONApp",
+            "name": "luisApp",
             "in": "body",
+            "required": true,
             "schema": {
-              "$ref": "#/definitions/JSONApp"
+              "$ref": "#/definitions/LuisApp"
             },
-            "description": "A JSON representing the LUIS application structure."
+            "description": "A LUIS application structure."
           }
         ],
         "consumes": [
@@ -2093,9 +2094,6 @@
         "responses": {
           "201": {
             "description": "The ID of the imported application.",
-            "examples": {
-              "application/json": "\"f8c64e2a-8635-4a09-8f78-39d7adc76ec5\""
-            },
             "schema": {
               "$ref": "#/definitions/GuidResponse"
             }
@@ -2593,11 +2591,10 @@
         ],
         "responses": {
           "200": {
-            "description": "A JSON file with the exported application.",
             "schema": {
-              "type": "file",
-              "description": "A JSON file with the exported application."
-            }
+              "$ref": "#/definitions/LuisApp"
+            },
+            "description": "A LUIS application structure."
           },
           "default": {
             "description": "Error Response.",
@@ -2988,7 +2985,7 @@
     },
     "/apps/{appId}/versions/import": {
       "post": {
-        "description": "Imports a new version into a LUIS application, the version's JSON should be included in in the request body.",
+        "description": "Imports a new version into a LUIS application.",
         "operationId": "Versions_ImportVersionToApplication",
         "parameters": [
           {
@@ -2997,16 +2994,17 @@
           {
             "name": "versionId",
             "in": "query",
-            "description": "The imported versionId.",
+            "description": "The new versionId to import. If not specified, the versionId will be read from the imported object.",
             "type": "string"
           },
           {
-            "name": "jSONApp",
+            "name": "luisApp",
             "in": "body",
+            "required": true,
             "schema": {
-              "$ref": "#/definitions/JSONApp"
+              "$ref": "#/definitions/LuisApp"
             },
-            "description": "A JSON representing the LUIS application structure."
+            "description": "A LUIS application structure."
           }
         ],
         "consumes": [
@@ -3015,8 +3013,8 @@
         "responses": {
           "201": {
             "description": "The created application version.",
-            "examples": {
-              "application/json": "\"0.2\""
+            "schema": {
+              "$ref": "#/definitions/VersionResponse"
             }
           },
           "default": {
@@ -4752,10 +4750,10 @@
       "additionalProperties": false,
       "type": "object",
       "properties": {
-        "Name": {
+        "name": {
           "type": "string"
         },
-        "Children": {
+        "children": {
           "items": {
             "type": "string"
           },
@@ -4800,8 +4798,8 @@
        "region": "westus"
       }
     },
-    "JSONApp": {
-      "additionalProperties": false,
+    "LuisApp": {
+      "additionalProperties": true,
       "type": "object",
       "properties": {
         "name": {
@@ -4880,11 +4878,266 @@
           "type": "array"
         }
       },
-      "example": "{  \"luis_schema_version\": \"1.3.1\",  \"name\": \"DummyImportedApp\",  \"versionId\": \"0.2\",  \"desc\": \"This is my dummy imported application\",  \"culture\": \"en-us\",  \"intents\": [    {      \"name\": \"BookFlight\"    },    {      \"name\": \"GetWeather\"    },    {      \"name\": \"None\"    }  ],  \"entities\": [    {      \"name\": \"Location\",      \"children\": [        \"To\",        \"From\"      ]    }  ],  \"composites\": [],  \"closedLists\": [],  \"bing_entities\": [    \"datetime\"  ],  \"actions\": [],  \"model_features\": [    {      \"name\": \"Cities\",      \"mode\": true,      \"words\": \"Seattle,New York,Paris,Moscow,Beijin\",      \"activated\": true    }  ],  \"regex_features\": [],  \"utterances\": [    {      \"text\": \"book me a flight from redmond to new york next saturday\",      \"intent\": \"BookFlight\",      \"entities\": [        {          \"entity\": \"Location::From\",          \"startPos\": 5,          \"endPos\": 5        },        {          \"entity\": \"Location::To\",          \"startPos\": 7,          \"endPos\": 8        }      ]    },    {      \"text\": \"what's the weather like in paris?\",      \"intent\": \"GetWeather\",      \"entities\": [        {          \"entity\": \"Location\",          \"startPos\": 7,          \"endPos\": 7        }      ]    }  ]}"
+      "example": {
+        "luis_schema_version": "2.1.0",
+        "versionId": "0.1",
+        "name": "LuisBot",
+        "desc": "",
+        "culture": "en-us",
+        "intents": [
+          {
+            "name": "dateintent"
+          },
+          {
+            "name": "Help"
+          },
+          {
+            "name": "None"
+          },
+          {
+            "name": "SearchHotels"
+          },
+          {
+            "name": "ShowHotelsReviews"
+          }
+        ],
+        "entities": [
+          {
+            "name": "AirportCode"
+          },
+          {
+            "name": "Hotel"
+          }
+        ],
+        "composites": [],
+        "closedLists": [],
+        "bing_entities": [
+          "datetimeV2",
+          "geography"
+        ],
+        "model_features": [
+          {
+            "name": "Near",
+            "mode": true,
+            "words": "near,around,close,nearby",
+            "activated": true
+          },
+          {
+            "name": "Show",
+            "mode": true,
+            "words": "show,find,look,search",
+            "activated": true
+          }
+        ],
+        "regex_features": [
+          {
+            "name": "AirportCodeRegex",
+            "pattern": "[a-z]{3}",
+            "activated": true
+          }
+        ],
+        "utterances": [
+          {
+            "text": "i need help",
+            "intent": "Help",
+            "entities": []
+          },
+          {
+            "text": "help me",
+            "intent": "Help",
+            "entities": []
+          },
+          {
+            "text": "tomorrow",
+            "intent": "dateintent",
+            "entities": []
+          },
+          {
+            "text": "search for hotels in seattle",
+            "intent": "SearchHotels",
+            "entities": []
+          },
+          {
+            "text": "what can i do?",
+            "intent": "Help",
+            "entities": []
+          },
+          {
+            "text": "next monday",
+            "intent": "dateintent",
+            "entities": []
+          },
+          {
+            "text": "next year",
+            "intent": "dateintent",
+            "entities": []
+          },
+          {
+            "text": "look for hotels in miami",
+            "intent": "SearchHotels",
+            "entities": []
+          },
+          {
+            "text": "show me hotels in california",
+            "intent": "SearchHotels",
+            "entities": []
+          },
+          {
+            "text": "show me the reviews of the amazing bot resort",
+            "intent": "ShowHotelsReviews",
+            "entities": [
+              {
+                "entity": "Hotel",
+                "startPos": 23,
+                "endPos": 44
+              }
+            ]
+          },
+          {
+            "text": "can i see the reviews of extended bot hotel?",
+            "intent": "ShowHotelsReviews",
+            "entities": [
+              {
+                "entity": "Hotel",
+                "startPos": 25,
+                "endPos": 42
+              }
+            ]
+          },
+          {
+            "text": "find reviews of hotelxya",
+            "intent": "ShowHotelsReviews",
+            "entities": [
+              {
+                "entity": "Hotel",
+                "startPos": 16,
+                "endPos": 23
+              }
+            ]
+          },
+          {
+            "text": "show me reviews of the amazing hotel",
+            "intent": "ShowHotelsReviews",
+            "entities": [
+              {
+                "entity": "Hotel",
+                "startPos": 19,
+                "endPos": 35
+              }
+            ]
+          },
+          {
+            "text": "what are the available options?",
+            "intent": "Help",
+            "entities": []
+          },
+          {
+            "text": "best hotels in seattle",
+            "intent": "SearchHotels",
+            "entities": []
+          },
+          {
+            "text": "hotels in los angeles",
+            "intent": "SearchHotels",
+            "entities": []
+          },
+          {
+            "text": "can you show me hotels from los angeles?",
+            "intent": "SearchHotels",
+            "entities": []
+          },
+          {
+            "text": "can you show me the reviews of the amazing resort & hotel",
+            "intent": "ShowHotelsReviews",
+            "entities": [
+              {
+                "entity": "Hotel",
+                "startPos": 31,
+                "endPos": 56
+              }
+            ]
+          },
+          {
+            "text": "what are the reviews of the hotel bot framework?",
+            "intent": "ShowHotelsReviews",
+            "entities": [
+              {
+                "entity": "Hotel",
+                "startPos": 24,
+                "endPos": 46
+              }
+            ]
+          },
+          {
+            "text": "find hotels near eze",
+            "intent": "SearchHotels",
+            "entities": [
+              {
+                "entity": "AirportCode",
+                "startPos": 17,
+                "endPos": 19
+              }
+            ]
+          },
+          {
+            "text": "where can i stay near nnn?",
+            "intent": "SearchHotels",
+            "entities": [
+              {
+                "entity": "AirportCode",
+                "startPos": 22,
+                "endPos": 24
+              }
+            ]
+          },
+          {
+            "text": "show hotels near att airport",
+            "intent": "SearchHotels",
+            "entities": [
+              {
+                "entity": "AirportCode",
+                "startPos": 17,
+                "endPos": 19
+              }
+            ]
+          },
+          {
+            "text": "find hotels near agl",
+            "intent": "SearchHotels",
+            "entities": [
+              {
+                "entity": "AirportCode",
+                "startPos": 17,
+                "endPos": 19
+              }
+            ]
+          },
+          {
+            "text": "find hotels around eze airport",
+            "intent": "SearchHotels",
+            "entities": [
+              {
+                "entity": "AirportCode",
+                "startPos": 19,
+                "endPos": 21
+              }
+            ]
+          },
+          {
+            "text": "01/7",
+            "intent": "dateintent",
+            "entities": []
+          }
+        ]
+      }
     },
     "GuidResponse": {
       "type": "string",
       "example": "363187f1-c573-46b3-bc4c-ae01d686e68e"
+    },
+    "VersionResponse": {
+      "type": "string",
+      "example": "0.1"
     },
     "FeatureIDResponse": {
       "type": "number",
