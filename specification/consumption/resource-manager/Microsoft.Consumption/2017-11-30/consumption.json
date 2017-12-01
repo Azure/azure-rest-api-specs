@@ -3,7 +3,7 @@
   "info": {
     "version": "2017-11-30",
     "title": "Consumption Management",
-    "description": "Consumption management client provides access to consumption resources for Azure Enterprise Subscriptions."
+    "description": "Consumption management client provides access to consumption resources for Azure Subscriptions."
   },
   "host": "management.azure.com",
   "schemes": [
@@ -20,6 +20,12 @@
       "azure_auth": [
         "user_impersonation"
       ]
+    }
+  ],
+  "tags": [
+    {
+      "name": "UsageDetails",
+      "description": "Lists the usage details for a scope by billing period. Usage details are available via this API only for May 1, 2014 or later."
     }
   ],
   "securityDefinitions": {
@@ -440,8 +446,8 @@
         },
         "tags": {
           "readOnly": true,
-          "type": "object",
-          "additionalProperties": {
+          "type": "array",
+          "items": {
             "type": "string"
           },
           "description": "Resource tags."
