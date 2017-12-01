@@ -391,6 +391,20 @@
                         "$ref": "#/definitions/WebhookReceiver"
                     },
                     "description": "The list of webhook receivers that are part of this action group."
+                },
+                "ItsmReceivers": {
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/definitions/ItsmReceiver"
+                    },
+                    "description": "The list of Itsm receivers that are part of this action group."
+                },
+                "AzureAppPushReceivers": {
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/definitions/AzureAppPushReceiver"
+                    },
+                    "description": "The list of AzureAppPush receivers that are part of this action group."
                 }
             },
             "required": [
@@ -458,6 +472,55 @@
                     "type": "string",
                     "description": "The URI where webhooks should be sent."
                 }
+            },
+            "ItsmReceiver": {
+                "description": "An Itsm receiver.",
+                "properties": {
+                    "name": {
+                        "type": "string",
+                        "description": "The name of the Itsm receiver. Names must be unique across all receivers within an action group."
+                    },
+                    "workspaceId": {
+                        "type": "string",
+                        "description": "OMS LA instance identifier."
+                    },
+                    "connectionId": {
+                        "type": "string",
+                        "description": "Unique identification of ITSM connection among multiple defined in above workspace."
+                    },
+                    "ticketConfiguration": {
+                        "type": "string",
+                        "description": "XML blob for the configurations of the ITSM action. CreateMultipleWorkItems option will be part of this blob as well."
+                    },
+                    "region": {
+                        "type": "string",
+                        "description": "Region in which workspace resides. Supported values:'centralindia','japaneast','southeastasia','australiasoutheast','uksouth','westcentralus','canadacentral','eastus','westeurope'"
+                    }
+                },
+                "required": [
+                    "name",
+                    "workspaceId",
+                    "connectionId",
+                    "ticketConfiguration",
+                    "region"
+                ]
+            },
+            "AzureAppPushReceiver": {
+                "description": "The Azure mobile App push notification receiver.",
+                "properties": {
+                    "name": {
+                        "type": "string",
+                        "description": "The name of the Azure mobile app push receiver. Names must be unique across all receivers within an action group."
+                    },
+                    "emailAddress": {
+                        "type": "string",
+                        "description": "The email address registered for the Azure mobile app."
+                    }
+                },
+                "required": [
+                    "name",
+                    "emailAddress"
+                ]
             },
             "required": [
                 "name",
