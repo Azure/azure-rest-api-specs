@@ -414,7 +414,7 @@
           {
             "name": "phraselistId",
             "in": "path",
-            "description": "The ID of the feature to be deleted.",
+            "description": "The ID of the feature to be updated.",
             "required": true,
             "type": "integer"
           },
@@ -424,7 +424,7 @@
             "schema": {
               "$ref": "#/definitions/PhraselistUpdateObject"
             },
-            "description": "A JSON object containing either:</br>1- Just a boolean called IsActive, in which case the status of the feature will be changed.</br>2- Name, Pattern, Mode, and a boolean called IsActive to update the feature."
+            "description": "A PhraselistUpdateObject object containing either: - Just a boolean called IsActive, in which case the status of the feature will be changed. - Name, Pattern, Mode, and a boolean called IsActive to update the feature."
           }
         ],
         "consumes": [
@@ -432,13 +432,18 @@
         ],
         "responses": {
           "200": {
-            "description": ""
+            "description": "No Content. Successfully updated phraselist."
           },
           "default": {
             "description": "Error Response.",
             "schema": {
               "$ref": "#/definitions/ErrorResponse"
             }
+          }
+        },
+        "x-ms-examples": {
+          "Successful Update Phraselist Feature Info request": {
+            "$ref": "./examples/features/SuccessfulUpdatePhraselistFeatureInfoRequest.json"
           }
         }
       },
@@ -4499,22 +4504,25 @@
       "additionalProperties": false,
       "type": "object",
       "properties": {
-        "Phrases": {
+        "phrases": {
           "type": "string"
         },
-        "Name": {
+        "name": {
           "type": "string"
         },
-        "IsActive": {
+        "isActive": {
           "default": true,
           "type": "boolean"
         },
-        "IsExchangeable": {
+        "isExchangeable": {
           "default": true,
           "type": "boolean"
         }
       },
-      "example": "{\t\"name\": \"BusinessDaysOfWeek\",\t\"phrases\": \"monday,tuesday,wednesday,thursday,friday\"}"
+      "example": {
+        "name": "DaysOfWeek",
+        "phrases": "monday,tuesday,wednesday,thursday,friday,saturday,sunday"
+      }
     },
     "HierarchicalModel": {
       "additionalProperties": false,
