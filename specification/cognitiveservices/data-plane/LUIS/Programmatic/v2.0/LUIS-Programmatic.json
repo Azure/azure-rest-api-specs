@@ -912,18 +912,16 @@
       }
     },
     "/apps/{appId}/versions/{versionId}/compositeentities": {
-      "parameters": [
-        {
-          "$ref": "#/parameters/AppIdInPath"
-        },
-        {
-          "$ref": "#/parameters/VersionIdInPath"
-        }
-      ],
       "post": {
         "description": "Adds a composite entity extractor to the application.",
         "operationId": "Model_CreateCompositeEntityExtractor",
         "parameters": [
+          {
+            "$ref": "#/parameters/AppIdInPath"
+          },
+          {
+            "$ref": "#/parameters/VersionIdInPath"
+          },
           {
             "name": "hierarchicalModelCreateObject",
             "in": "body",
@@ -963,6 +961,12 @@
         "description": "Gets information about the composite entity models.",
         "operationId": "Model_GetApplicationVersionCompositeEntityInfos",
         "parameters": [
+          {
+            "$ref": "#/parameters/AppIdInPath"
+          },
+          {
+            "$ref": "#/parameters/VersionIdInPath"
+          },
           {
             "$ref": "#/parameters/SkipInPath"
           },
