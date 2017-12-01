@@ -36,7 +36,7 @@ These settings apply only when `--tag=package-2017-02-preview` is specified on t
 
 ``` yaml $(tag) == 'package-2017-02-preview'
 input-file:
-- Microsoft.TimeSeriesInsights/2017-02-28-preview/timeseriesinsights.json
+- Microsoft.TimeSeriesInsights/preview/2017-02-28-preview/timeseriesinsights.json
 ```
 
 ### Tag: package-2017-11-15
@@ -45,5 +45,5 @@ These settings apply only when `--tag=package-2017-11-15` is specified on the co
 
 ``` yaml $(tag) == 'package-2017-11-15'
 input-file:
-- Microsoft.TimeSeriesInsights/2017-11-15/timeseriesinsights.json
+- Microsoft.TimeSeriesInsights/stable/2017-11-15/timeseriesinsights.json
 ```

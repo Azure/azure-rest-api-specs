@@ -36,7 +36,7 @@ These settings apply only when `--tag=package-2015-04` is specified on the comma
 
 ``` yaml $(tag) == 'package-2015-04'
 input-file:
-- Microsoft.DocumentDB/2015-04-08/cosmos-db.json
+- Microsoft.DocumentDB/stable/2015-04-08/cosmos-db.json
 ```
 
 

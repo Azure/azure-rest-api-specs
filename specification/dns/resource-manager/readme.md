@@ -35,7 +35,7 @@ These settings apply only when `--tag=package-2017-09` is specified on the comma
 
 ``` yaml $(tag) == 'package-2017-09'
 input-file:
-- Microsoft.Network/2017-09-01/dns.json
+- Microsoft.Network/stable/2017-09-01/dns.json
 ```
 
 ### Tag: package-2016-04
@@ -44,7 +44,7 @@ These settings apply only when `--tag=package-2016-04` is specified on the comma
 
 ``` yaml $(tag) == 'package-2016-04'
 input-file:
-- Microsoft.Network/2016-04-01/dns.json
+- Microsoft.Network/stable/2016-04-01/dns.json
 ```
 
 ### Tag: package-2015-05-preview
@@ -53,7 +53,7 @@ These settings apply only when `--tag=package-2015-05-preview` is specified on t
 
 ``` yaml $(tag) == 'package-2015-05-preview'
 input-file:
-- Microsoft.Network/2015-05-04-preview/dns.json
+- Microsoft.Network/preview/2015-05-04-preview/dns.json
 ```
 
 
