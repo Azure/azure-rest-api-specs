@@ -9,6 +9,7 @@ The current release is `release_1_0`.
 ``` yaml
 
 tag: release_1_0
+add-credentials: true
 openapi-type: data-plane
 ```
 # Releases
@@ -25,8 +26,7 @@ These settings apply only when `--csharp` is specified on the command line.
 ``` yaml $(csharp) 
 csharp: 
   namespace: Microsoft.Azure.CognitiveServices.Search.WebSearch
-  output-folder: $(csharp-sdks-folder)/CognitiveServices/dataPlane/Search/Search/Generated/WebSearch
-  add-credentials: true
+  output-folder: $(csharp-sdks-folder)/CognitiveServices/dataPlane/Search/BingWebSearch/Generated/WebSearch
   sync-methods: none
 ```
 

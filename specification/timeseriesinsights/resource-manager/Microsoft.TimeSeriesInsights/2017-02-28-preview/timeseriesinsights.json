@@ -34,6 +34,34 @@
     }
   },
   "paths": {
+    "/providers/Microsoft.TimeSeriesInsights/operations": {
+      "get": {
+        "tags": [
+          "Operations"
+        ],
+        "operationId": "Operations_List",
+        "description": "Lists all of the available Time Series Insights related operations.",
+        "x-ms-examples": {
+          "List available operations for the Time Series Insights resource provider": { "$ref": "./examples/Operation_List.json" }
+        },
+        "parameters": [
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successfully listed the available operations.",
+            "schema": {
+              "$ref": "#/definitions/OperationListResult"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.TimeSeriesInsights/environments/{environmentName}": {
       "put": {
         "tags": [
@@ -993,6 +1021,61 @@
     }
   },
   "definitions": {
+    "OperationListResult": {
+      "description": "Result of the request to list Time Series Insights operations. It contains a list of operations and a URL link to get the next set of results.",
+      "properties": {
+        "value": {
+          "description": "List of Time Series Insights operations supported by the Microsoft.TimeSeriesInsights resource provider.",
+          "type": "array",
+          "readOnly": true,
+          "items": {
+            "$ref": "#/definitions/Operation"
+          }
+        },
+        "nextLink": {
+          "description": "URL to get the next set of operation list results if there are any.",
+          "type": "string",
+          "readOnly": true
+        }
+      }
+    },
+    "Operation": {
+      "description": "A Time Series Insights REST API operation",
+      "type": "object",
+      "properties": {
+        "name": {
+          "description": "The name of the operation being performed on this particular object.",
+          "type": "string",
+          "readOnly": true
+        },
+        "display": {
+          "description": "Contains the localized display information for this particular operation / action.",
+          "readOnly": true,
+          "properties": {
+            "provider": {
+              "description": "The localized friendly form of the resource provider name.",
+              "type": "string",
+              "readOnly": true
+            },
+            "resource": {
+              "description": "The localized friendly form of the resource type related to this action/operation.",
+              "type": "string",
+              "readOnly": true
+            },
+            "operation": {
+              "description": "The localized friendly name for the operation.",
+              "type": "string",
+              "readOnly": true
+            },
+            "description": {
+              "description": "The localized friendly description for the operation.",
+              "type": "string",
+              "readOnly": true
+            }
+          }
+        }
+      }
+    },
     "Resource": {
       "properties": {
         "id": {
@@ -1192,6 +1275,15 @@
           "type": "string",
           "format": "duration",
           "description": "ISO8601 timespan specifying the minimum number of days the environment's events will be available for query."
+        },
+        "storageLimitExceededBehavior": {
+          "type": "string",
+          "description": "The behavior the Time Series Insights service should take when the environment's capacity has been exceeded. If \"PauseIngress\" is specified, new events will not be read from the event source. If \"PurgeOldData\" is specified, new events will continue to be read and old events will be deleted from the environment. The default behavior is PurgeOldData.",
+          "enum": [ "PurgeOldData", "PauseIngress" ],
+          "x-ms-enum": {
+            "name": "StorageLimitExceededBehavior",
+            "modelAsString": false
+          }
         }
       },
       "required": [
@@ -1238,6 +1330,7 @@
       }
     },
     "EventSourceCreateOrUpdateParameters": {
+      "discriminator": "kind",
       "properties": {
         "kind": {
           "type": "string",
@@ -1250,15 +1343,10 @@
             "name": "Kind",
             "modelAsString": false
           }
-        },
-        "properties": {
-          "x-ms-client-flatten": true,
-          "$ref": "#/definitions/EventSourceCommonProperties"
         }
       },
       "required": [
-        "kind",
-        "properties"
+        "kind"
       ],
       "allOf": [
         {
@@ -1268,6 +1356,7 @@
       "description": "Parameters supplied to the Create or Update Event Source operation."
     },
     "EventHubEventSourceCreateOrUpdateParameters": {
+      "x-ms-discriminator-value": "Microsoft.EventHub",
       "properties": {
         "properties": {
           "x-ms-client-flatten": true,
@@ -1285,6 +1374,7 @@
       "description": "Parameters supplied to the Create or Update Event Source operation for an EventHub event source."
     },
     "IoTHubEventSourceCreateOrUpdateParameters": {
+      "x-ms-discriminator-value": "Microsoft.IoTHub",
       "properties": {
         "properties": {
           "x-ms-client-flatten": true,
@@ -1366,15 +1456,10 @@
           "type": "string",
           "description": "The kind of the event source.",
           "enum": [ "Microsoft.EventHub", "Microsoft.IoTHub" ]
-        },
-        "properties": {
-          "x-ms-client-flatten": true,
-          "$ref": "#/definitions/EventSourceCommonProperties"
         }
       },
       "required": [
-        "kind",
-        "properties"
+        "kind"
       ],
       "allOf": [
         {
@@ -1391,6 +1476,9 @@
           "$ref": "#/definitions/EventHubEventSourceResourceProperties"
         }
       },
+      "required": [
+        "properties"
+      ],
       "allOf": [
         {
           "$ref": "#/definitions/EventSourceResource"
@@ -1406,6 +1494,9 @@
           "$ref": "#/definitions/IoTHubEventSourceResourceProperties"
         }
       },
+      "required": [
+        "properties"
+      ],
       "allOf": [
         {
           "$ref": "#/definitions/EventSourceResource"
@@ -1420,6 +1511,11 @@
           "description": "The event property that will be used as the event source's timestamp. If a value isn't specified for timestampPropertyName, or if null or empty-string is specified, the event creation time will be used."
         }
       },
+      "allOf": [
+        {
+          "$ref": "#/definitions/ResourceProperties"
+        }
+      ],
       "description": "Properties of the event source."
     },
     "AzureEventSourceProperties": {
@@ -1491,16 +1587,7 @@
     "EventHubEventSourceResourceProperties": {
       "allOf": [
         {
-          "$ref": "#/definitions/ResourceProperties"
-        },
-        {
           "$ref": "#/definitions/EventHubEventSourceCommonProperties"
-        },
-        {
-          "$ref": "#/definitions/AzureEventSourceProperties"
-        },
-        {
-          "$ref": "#/definitions/EventSourceCommonProperties"
         }
       ],
       "description": "Properties of the EventHub event source resource."
@@ -1552,19 +1639,39 @@
     "IoTHubEventSourceResourceProperties": {
       "allOf": [
         {
-          "$ref": "#/definitions/ResourceProperties"
-        },
-        {
           "$ref": "#/definitions/IoTHubEventSourceCommonProperties"
-        },
-        {
-          "$ref": "#/definitions/AzureEventSourceProperties"
-        },
-        {
-          "$ref": "#/definitions/EventSourceCommonProperties"
         }
       ],
       "description": "Properties of the IoTHub event source resource."
+    },
+    "LocalTimestamp": {
+      "description": "An object that represents the local timestamp property. It contains the format of local timestamp that needs to be used and the corresponding timezone offset information. If a value isn't specified for localTimestamp, or if null, then the local timestamp will not be ingressed with the events.",
+      "type": "object",
+      "properties": {
+        "format": {
+          "description": "An enum that represents the format of the local timestamp property that needs to be set.", 
+          "type": "string",
+          "enum": [
+            "Embedded",
+            "Iana",
+            "TimeSpan"
+          ],
+          "x-ms-enum": {
+            "name": "LocalTimestampFormat",
+            "modelAsString": false
+          }
+        },
+        "timeZoneOffset": {
+          "description": "An object that represents the offset information for the local timestamp format specified. Should not be specified for LocalTimestampFormat - Embedded.",
+          "type": "object",
+          "properties": {
+            "propertyName": {
+              "type": "string",
+              "description":  "The event property that will be contain the offset information to calculate the local timestamp. When the LocalTimestampFormat is Iana, the property name will contain the name of the column which contains IANA Timezone Name (eg: Americas/Los Angeles). When LocalTimestampFormat is Timespan, it contains the name of property which contains values representing the offset (eg: P1D or 1.00:00:00)" 
+            }
+          }
+        }
+      }
     },
     "EventSourceMutableProperties": {
       "description": "An object that represents a set of mutable event source resource properties.",
@@ -1573,6 +1680,9 @@
         "timestampPropertyName": {
           "type": "string",
           "description": "The event property that will be used as the event source's timestamp. If a value isn't specified for timestampPropertyName, or if null or empty-string is specified, the event creation time will be used."
+        },
+        "localTimestamp": {
+          "$ref": "#/definitions/LocalTimestamp"
         }
       }
     },

@@ -35,19 +35,11 @@
       "name": "Ocp-Apim-Subscription-Key",
       "type": "apiKey",
       "in": "header"
-    },
-    "apiKeyQuery": {
-      "name": "subscription-key",
-      "type": "apiKey",
-      "in": "query"
     }
   },
   "security": [
     {
       "apiKeyHeader": []
-    },
-    {
-      "apiKeyQuery": []
     }
   ],
   "paths": {
@@ -156,7 +148,7 @@
             ],
             "x-ms-enum": {
               "name": "Freshness",
-              "modelAsString": false
+              "modelAsString": true
             }
           },
           {
@@ -165,7 +157,8 @@
             "in": "query",
             "description": "The market where the results come from. Typically, mkt is the country where the user is making the request from. However, it could be a different country if the user is not located in a country where Bing delivers results. The market must be in the form <language code>-<country code>. For example, en-US. The string is case insensitive. If known, you are encouraged to always specify the market. Specifying the market helps Bing route the request and return an appropriate and optimal response. If you specify a market that is not listed in Market Codes, Bing uses a best fit market code based on an internal mapping that is subject to change. This parameter and the cc query parameter are mutually exclusive—do not specify both.",
             "required": false,
-            "type": "string"
+            "type": "string",
+            "default": "en-us"
           },
           {
             "name": "offset",
@@ -250,7 +243,7 @@
             ],
             "x-ms-enum": {
               "name": "SafeSearch",
-              "modelAsString": false
+              "modelAsString": true
             }
           },
           {
@@ -282,7 +275,7 @@
             ],
             "x-ms-enum": {
               "name": "TextFormat",
-              "modelAsString": false
+              "modelAsString": true
             }
           }
         ],
@@ -299,6 +292,11 @@
               "$ref": "#/definitions/ErrorResponse"
             }
           }
+        },
+        "x-ms-examples": {
+            "Successful query": {
+                "$ref": "./examples//SuccessfulQueryRequest.json"
+            }
         }
       }
     }
@@ -409,6 +407,10 @@
         },
         "askUserForLocation": {
           "description": "A Boolean value that indicates whether Bing requires the user's location to provide accurate results. If you specified the user's location by using the X-MSEdge-ClientIP and X-Search-Location headers, you can ignore this field. For location aware queries, such as \"today's weather\" or \"restaurants near me\" that need the user's location to provide accurate results, this field is set to true. For location aware queries that include the location (for example, \"Seattle weather\"), this field is set to false. This field is also set to false for queries that are not location aware, such as \"best sellers\".",
+          "readOnly": true,
+          "type": "boolean"
+        },
+        "isTransactional": {
           "readOnly": true,
           "type": "boolean"
         }
@@ -775,7 +777,7 @@
       "type": "object",
       "properties": {
         "name": {
-          "description": "The name of the thing represented by this object.The name of the thing represented by this object.",
+          "description": "The name of the thing represented by this object.",
           "readOnly": true,
           "type": "string"
         },
@@ -1046,7 +1048,7 @@
           ],
           "x-ms-enum": {
             "name": "ErrorCode",
-            "modelAsString": false
+            "modelAsString": true
           }
         },
         "subCode": {
@@ -1068,7 +1070,7 @@
           ],
           "x-ms-enum": {
             "name": "ErrorSubCode",
-            "modelAsString": false
+            "modelAsString": true
           }
         },
         "message": {
@@ -1182,7 +1184,15 @@
           "$ref": "#/definitions/CreativeWork"
         }
       ],
-      "type": "object"
+      "type": "object",
+      "properties": {
+        "wordCount": {
+          "description": "The number of words in the text of the Article.",
+          "readOnly": true,
+          "type": "integer",
+          "format": "int32"
+        }
+      }
     },
     "RankingRankingItem": {
       "description": "Defines a search result item to display",
