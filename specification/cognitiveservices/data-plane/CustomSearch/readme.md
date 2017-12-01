@@ -31,7 +31,7 @@ csharp:
 ```
 ## Suppressions
 Suppressing errors due to API design:
-``` yaml $(csharp) 
+``` yaml
 directive:
   - suppress: R3016
     reason: _type is a polymorphic discriminator that can't be changed. 
