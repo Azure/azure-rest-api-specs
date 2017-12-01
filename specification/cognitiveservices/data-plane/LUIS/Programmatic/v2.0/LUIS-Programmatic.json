@@ -43,8 +43,15 @@
         "operationId": "Features_CreatePatternFeature",
         "parameters": [
           {
+            "$ref": "#/parameters/AppIdInPath"
+          },
+          {
+            "$ref": "#/parameters/VersionIdInPath"
+          },
+          {
             "name": "patternCreateObject",
             "in": "body",
+            "required": true,
             "schema": {
               "$ref": "#/definitions/PatternCreateObject"
             },
@@ -284,8 +291,22 @@
         "operationId": "Features_UpdatePatternFeature",
         "parameters": [
           {
+            "$ref": "#/parameters/AppIdInPath"
+          },
+          {
+            "$ref": "#/parameters/VersionIdInPath"
+          },
+          {
+            "name": "patternId",
+            "in": "path",
+            "description": "The pattern feature ID.",
+            "required": true,
+            "type": "integer"
+          },
+          {
             "name": "patternUpdateObject",
             "in": "body",
+            "required": true,
             "schema": {
               "$ref": "#/definitions/PatternUpdateObject"
             },
@@ -297,13 +318,18 @@
         ],
         "responses": {
           "200": {
-            "description": ""
+            "description": "No Content. Successfully operation."
           },
           "default": {
             "description": "Error Response.",
             "schema": {
               "$ref": "#/definitions/ErrorResponse"
             }
+          }
+        },
+        "x-ms-examples": {
+          "Successful Update Pattern Feature Info request": {
+            "$ref": "./examples/features/SuccessfulUpdatePatternFeatureInfoRequest.json"
           }
         }
       },
@@ -312,13 +338,18 @@
         "operationId": "Features_DeletePatternFeature",
         "responses": {
           "200": {
-            "description": ""
+            "description": "No Content. Successfully operation."
           },
           "default": {
             "description": "Error Response.",
             "schema": {
               "$ref": "#/definitions/ErrorResponse"
             }
+          }
+        },
+        "x-ms-examples": {
+          "Successful Delete Pattern Feature Info request": {
+            "$ref": "./examples/features/SuccessfulDeletePatternFeatureInfoRequest.json"
           }
         }
       }
@@ -4316,18 +4347,21 @@
       "additionalProperties": false,
       "type": "object",
       "properties": {
-        "Pattern": {
+        "pattern": {
           "type": "string"
         },
-        "Name": {
+        "name": {
           "type": "string"
         },
-        "IsActive": {
+        "isActive": {
           "default": true,
           "type": "boolean"
         }
       },
-      "example": "{\t\"name\": \"ModifiedEmailPattern\",        \"pattern\": \"\\b[A-Z0-9._%+-]+@[A-Z0-9.-]+\\\\.[A-Z]{2,}\\b\"}"
+      "example": {
+        "name": "ModifiedEmailPattern",
+        "pattern": "\\b[A-Z0-9._%+-]+@[A-Z0-9.-]+\\.[A-Z]{2,}\\b"
+      }
     },
     "ClosedList": {
       "additionalProperties": false,
@@ -4464,14 +4498,17 @@
       "additionalProperties": false,
       "type": "object",
       "properties": {
-        "Pattern": {
+        "pattern": {
           "type": "string"
         },
-        "Name": {
+        "name": {
           "type": "string"
         }
       },
-      "example": "{\t\"name\": \"EmailPattern\",\t\"pattern\": \"\\\\b[A-Z0-9._%+-]+@[A-Z0-9.-]+\\\\.[A-Z]{2,}\\\\b\"}"
+      "example": {
+        "name": "EmailPattern",
+        "pattern": "\\b[A-Z0-9._%+-]+@[A-Z0-9.-]+\\.[A-Z]{2,}\\b"
+      }
     },
     "WordListObject": {
       "additionalProperties": false,
@@ -5156,7 +5193,7 @@
     },
     "FeatureIDResponse": {
       "type": "number",
-      "example": "398102"
+      "example": 398102
     },
     "LabeledUtterances": {
       "type": "array",
