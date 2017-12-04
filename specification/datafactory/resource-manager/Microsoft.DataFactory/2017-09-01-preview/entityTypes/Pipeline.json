@@ -1496,36 +1496,14 @@
       "properties": {
         "packageLocation": {
           "description": "SSIS package location.",
-          "$ref": "#/definitions/SsisPackageLocation"
+          "$ref": "#/definitions/SSISPackageLocation"
         },
         "use32bitRuntime": {
           "description": "Specifies whether to use 32 bit runtime to execute SSIS package.",
-          "type": "string",
-          "enum": [
-            "True",
-            "False"
-          ],
-          "x-ms-enum": {
-            "name": "SsisExecutionUse32bitRuntime",
-            "modelAsString": true
-          }
+          "type": "boolean"
         },
         "loggingLevel": {
           "description": "The logging level of SSIS package execution.",
-          "type": "string",
-          "enum": [
-            "None",
-            "Basic",
-            "Performance",
-            "Verbose"
-          ],
-          "x-ms-enum": {
-            "name": "SsisExecutionLoggingLevel",
-            "modelAsString": true
-          }
-        },
-        "customizedLoggingLevel": {
-          "description": "The customized logging level of SSIS package execution.",
           "type": "string"
         },
         "environmentPath": {
@@ -1542,9 +1520,9 @@
         "connectVia"
       ]
     },
-    "SsisPackageLocation": {
+    "SSISPackageLocation": {
       "description": "SSIS package location.",
-      "type" :  "object",
+      "type" : "object",
       "properties": {
         "packagePath": {
           "description": "The SSIS package path.",
