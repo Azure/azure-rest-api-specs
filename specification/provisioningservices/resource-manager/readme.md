@@ -36,7 +36,7 @@ tag: package-2017-11
 
 These settings apply only when `--tag=package-2017-08` is specified on the command line.
 
-``` yaml $(tag) == 'package-2017-11'
+``` yaml $(tag) == 'package-2017-08'
 input-file:
 - Microsoft.Devices/2017-08-21-preview/iotdps.json
 ```
