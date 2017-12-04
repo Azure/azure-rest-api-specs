@@ -1833,11 +1833,23 @@
         "properties": {
             "name": {
                 "type": "string",
-                "description": "Name of certificate."
+                "description": "Name of certificate.",
+                "readOnly": true
             },
             "etag": {
+                "readOnly": true,
                 "type": "string",
                 "description": "Request etag."
+            },
+            "id": {
+                "readOnly": true,
+                "type": "string",
+                "description": "The resource identifier."
+            },
+            "type": {
+                "readOnly": true,
+                "type": "string",
+                "description": "The resource type."
             },
             "properties": {
                 "type": "object",
@@ -1872,7 +1884,8 @@
                     }
                 }
             }
-        }
+        },
+        "x-ms-azure-resource": true
     },
      "VerificationCodeRequest": {
       "type": "object",
