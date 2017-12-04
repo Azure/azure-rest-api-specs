@@ -47,13 +47,20 @@
             "$ref": "#/parameters/clusterNameParameter"
           },
           {
-            "$ref": "#/parameters/clusterBodyParam"
-          },
-          {
             "$ref": "#/parameters/api-version"
           },
           {
             "$ref": "#/parameters/subscriptionId"
+          },
+          {
+            "name": "parameters",
+            "in": "body",
+            "description": "The cluster resource.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/Cluster"
+            },
+            "x-ms-parameter-location": "method"
           }
         ],
         "tags": [
@@ -183,10 +190,17 @@
             "$ref": "#/parameters/api-version"
           },
           {
-            "$ref": "#/parameters/clusterUpdateParameterBody"
+            "$ref": "#/parameters/subscriptionId"
           },
           {
-            "$ref": "#/parameters/subscriptionId"
+            "name": "parameters",
+            "in": "body",
+            "description": "The parameters which contains the property value and property name which used to update the cluster configuration.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/ClusterUpdateParameters"
+            },
+            "x-ms-parameter-location": "method"
           }
         ],
         "tags": [
@@ -502,6 +516,11 @@
             "$ref": "#/parameters/api-version"
           }
         ],
+        "x-ms-examples": {
+          "Get an application type": {
+            "$ref": "./examples/ApplicationTypeNameGetOperation_example.json"
+          }
+        },
         "responses": {
           "200": {
             "description": "The operation completed successfully.",
@@ -546,83 +565,18 @@
             "required": true,
             "schema": {
               "$ref": "#/definitions/ApplicationTypeResource"
-            }
+            },
+            "x-ms-parameter-location": "method"
           }
         ],
+        "x-ms-examples": {
+          "Put an application type": {
+            "$ref": "./examples/ApplicationTypeNamePutOperation_example.json"
+          }
+        },
         "responses": {
           "200": {
             "description": "The operation completed successfully.",
-            "schema": {
-              "$ref": "#/definitions/ApplicationTypeResource"
-            }
-          },
-          "201": {
-            "description": "The resource creation process has been started. Query the resource to retrieve the latest status for the operation.",
-            "schema": {
-              "$ref": "#/definitions/ApplicationTypeResource"
-            }
-          },
-          "202": {
-            "description": "The request was accepted and the operation will complete asynchronously.",
-            "schema": {
-              "$ref": "#/definitions/ApplicationTypeResource"
-            }
-          },
-          "default": {
-            "description": "The detailed error response.",
-            "schema": {
-              "$ref": "#/definitions/ErrorModel"
-            }
-          }
-        }
-      },
-      "patch": {
-        "tags": [
-          "ApplicationType"
-        ],
-        "operationId": "ApplicationType_Patch",
-        "description": "Updates the application type name resource.",
-        "parameters": [
-          {
-            "$ref": "#/parameters/subscriptionId"
-          },
-          {
-            "$ref": "#/parameters/resourceGroupNameParameter"
-          },
-          {
-            "$ref": "#/parameters/clusterNameParameter"
-          },
-          {
-            "$ref": "#/parameters/applicationTypeName"
-          },
-          {
-            "$ref": "#/parameters/api-version"
-          },
-          {
-            "name": "parameters",
-            "in": "body",
-            "description": "The application type name resource for patch operations.",
-            "required": true,
-            "schema": {
-              "$ref": "#/definitions/ApplicationTypeResource"
-            }
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "The operation completed successfully.",
-            "schema": {
-              "$ref": "#/definitions/ApplicationTypeResource"
-            }
-          },
-          "201": {
-            "description": "The resource creation process has been started. Query the resource to retrieve the latest status for the operation.",
-            "schema": {
-              "$ref": "#/definitions/ApplicationTypeResource"
-            }
-          },
-          "202": {
-            "description": "The request was accepted and the operation will complete asynchronously.",
             "schema": {
               "$ref": "#/definitions/ApplicationTypeResource"
             }
@@ -658,10 +612,13 @@
             "$ref": "#/parameters/api-version"
           }
         ],
+        "x-ms-examples": {
+          "Delete an application type": {
+            "$ref": "./examples/ApplicationTypeNameDeleteOperation_example.json"
+          }
+        },
+        "x-ms-long-running-operation": true,
         "responses": {
-          "200": {
-            "description": "The operation completed successfully."
-          },
           "202": {
             "description": "The request was accepted and the operation will complete asynchronously."
           },
@@ -698,6 +655,11 @@
             "$ref": "#/parameters/api-version"
           }
         ],
+        "x-ms-examples": {
+          "Get a list of application type version resources": {
+            "$ref": "./examples/ApplicationTypeVersionListOperation_example.json"
+          }
+        },
         "responses": {
           "200": {
             "description": "The operation completed successfully.",
@@ -741,6 +703,11 @@
             "$ref": "#/parameters/api-version"
           }
         ],
+        "x-ms-examples": {
+          "Get an application type version": {
+            "$ref": "./examples/ApplicationTypeVersionGetOperation_example.json"
+          }
+        },
         "responses": {
           "200": {
             "description": "The operation completed successfully.",
@@ -788,84 +755,17 @@
             "required": true,
             "schema": {
               "$ref": "#/definitions/VersionResource"
-            }
+            },
+            "x-ms-parameter-location": "method"
           }
         ],
+        "x-ms-examples": {
+          "Put an application type version": {
+            "$ref": "./examples/ApplicationTypeVersionPutOperation_example.json"
+          }
+        },
+        "x-ms-long-running-operation": true,
         "responses": {
-          "200": {
-            "description": "The operation completed successfully.",
-            "schema": {
-              "$ref": "#/definitions/VersionResource"
-            }
-          },
-          "201": {
-            "description": "The resource creation process has been started. Query the resource to retrieve the latest status for the operation.",
-            "schema": {
-              "$ref": "#/definitions/VersionResource"
-            }
-          },
-          "202": {
-            "description": "The request was accepted and the operation will complete asynchronously.",
-            "schema": {
-              "$ref": "#/definitions/VersionResource"
-            }
-          },
-          "default": {
-            "description": "The detailed error response.",
-            "schema": {
-              "$ref": "#/definitions/ErrorModel"
-            }
-          }
-        }
-      },
-      "patch": {
-        "tags": [
-          "Version"
-        ],
-        "operationId": "Version_Patch",
-        "description": "Updates an application type version resource.",
-        "parameters": [
-          {
-            "$ref": "#/parameters/subscriptionId"
-          },
-          {
-            "$ref": "#/parameters/resourceGroupNameParameter"
-          },
-          {
-            "$ref": "#/parameters/clusterNameParameter"
-          },
-          {
-            "$ref": "#/parameters/applicationTypeName"
-          },
-          {
-            "$ref": "#/parameters/version"
-          },
-          {
-            "$ref": "#/parameters/api-version"
-          },
-          {
-            "name": "parameters",
-            "in": "body",
-            "description": "The application type version resource for patch operations.",
-            "required": true,
-            "schema": {
-              "$ref": "#/definitions/VersionResource"
-            }
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "The operation completed successfully.",
-            "schema": {
-              "$ref": "#/definitions/VersionResource"
-            }
-          },
-          "201": {
-            "description": "The resource creation process has been started. Query the resource to retrieve the latest status for the operation.",
-            "schema": {
-              "$ref": "#/definitions/VersionResource"
-            }
-          },
           "202": {
             "description": "The request was accepted and the operation will complete asynchronously.",
             "schema": {
@@ -906,10 +806,13 @@
             "$ref": "#/parameters/api-version"
           }
         ],
+        "x-ms-examples": {
+          "Delete an application type version": {
+            "$ref": "./examples/ApplicationTypeVersionDeleteOperation_example.json"
+          }
+        },
+        "x-ms-long-running-operation": true,
         "responses": {
-          "200": {
-            "description": "The operation completed successfully."
-          },
           "202": {
             "description": "The request was accepted and the operation will complete asynchronously."
           },
@@ -949,6 +852,11 @@
             "$ref": "#/parameters/api-version"
           }
         ],
+        "x-ms-examples": {
+          "Get a list of application type version resources": {
+            "$ref": "./examples/ApplicationTypeVersionListOperation_example.json"
+          }
+        },
         "responses": {
           "200": {
             "description": "The operation completed successfully.",
@@ -989,6 +897,11 @@
             "$ref": "#/parameters/api-version"
           }
         ],
+        "x-ms-examples": {
+          "Get an application": {
+            "$ref": "./examples/ApplicationGetOperation_example.json"
+          }
+        },
         "responses": {
           "200": {
             "description": "The operation completed successfully.",
@@ -1033,22 +946,20 @@
             "required": true,
             "schema": {
               "$ref": "#/definitions/ApplicationResource"
-            }
+            },
+            "x-ms-parameter-location": "method"
           }
         ],
+        "x-ms-examples": {
+          "Put an application with mininum parameters": {
+            "$ref": "./examples/ApplicationPutOperation_example_min.json"
+          },
+          "Put an application with maximum parameters": {
+            "$ref": "./examples/ApplicationPutOperation_example_max.json"
+          }
+        },
+        "x-ms-long-running-operation": true,
         "responses": {
-          "200": {
-            "description": "The operation completed successfully.",
-            "schema": {
-              "$ref": "#/definitions/ApplicationResource"
-            }
-          },
-          "201": {
-            "description": "The resource creation process has been started. Query the resource to retrieve the latest status for the operation.",
-            "schema": {
-              "$ref": "#/definitions/ApplicationResource"
-            }
-          },
           "202": {
             "description": "The request was accepted and the operation will complete asynchronously.",
             "schema": {
@@ -1092,22 +1003,17 @@
             "required": true,
             "schema": {
               "$ref": "#/definitions/ApplicationResourceUpdate"
-            }
+            },
+            "x-ms-parameter-location": "method"
           }
         ],
+        "x-ms-examples": {
+          "Patch an application": {
+            "$ref": "./examples/ApplicationPatchOperation_example.json"
+          }
+        },
+        "x-ms-long-running-operation": true,
         "responses": {
-          "200": {
-            "description": "The operation completed successfully.",
-            "schema": {
-              "$ref": "#/definitions/ApplicationResourceUpdate"
-            }
-          },
-          "201": {
-            "description": "The resource creation process has been started. Query the resource to retrieve the latest status for the operation.",
-            "schema": {
-              "$ref": "#/definitions/ApplicationResourceUpdate"
-            }
-          },
           "202": {
             "description": "The request was accepted and the operation will complete asynchronously.",
             "schema": {
@@ -1145,10 +1051,13 @@
             "$ref": "#/parameters/api-version"
           }
         ],
+        "x-ms-examples": {
+          "Delete an application": {
+            "$ref": "./examples/ApplicationDeleteOperation_example.json"
+          }
+        },
+        "x-ms-long-running-operation": true,
         "responses": {
-          "200": {
-            "description": "The operation completed successfully."
-          },
           "202": {
             "description": "The request was accepted and the operation will complete asynchronously."
           },
@@ -1185,6 +1094,11 @@
             "$ref": "#/parameters/api-version"
           }
         ],
+        "x-ms-examples": {
+          "Get a list of application resources": {
+            "$ref": "./examples/ApplicationListOperation_example.json"
+          }
+        },
         "responses": {
           "200": {
             "description": "The operation completed successfully.",
@@ -1228,6 +1142,11 @@
             "$ref": "#/parameters/api-version"
           }
         ],
+        "x-ms-examples": {
+          "Get a service": {
+            "$ref": "./examples/ServiceGetOperation_example.json"
+          }
+        },
         "responses": {
           "200": {
             "description": "The operation completed successfully.",
@@ -1275,22 +1194,20 @@
             "required": true,
             "schema": {
               "$ref": "#/definitions/ServiceResource"
-            }
+            },
+            "x-ms-parameter-location": "method"
           }
         ],
+        "x-ms-examples": {
+          "Put a service with mininum parameters": {
+            "$ref": "./examples/ServicePutOperation_example_min.json"
+          },
+          "Put a service with maximum parameters": {
+            "$ref": "./examples/ServicePutOperation_example_max.json"
+          }
+        },
+        "x-ms-long-running-operation": true,
         "responses": {
-          "200": {
-            "description": "The operation completed successfully.",
-            "schema": {
-              "$ref": "#/definitions/ServiceResource"
-            }
-          },
-          "201": {
-            "description": "The resource creation process has been started. Query the resource to retrieve the latest status for the operation.",
-            "schema": {
-              "$ref": "#/definitions/ServiceResource"
-            }
-          },
           "202": {
             "description": "The request was accepted and the operation will complete asynchronously.",
             "schema": {
@@ -1337,22 +1254,17 @@
             "required": true,
             "schema": {
               "$ref": "#/definitions/ServiceResourceUpdate"
-            }
+            },
+            "x-ms-parameter-location": "method"
           }
         ],
+        "x-ms-examples": {
+          "Patch a service": {
+            "$ref": "./examples/ServicePatchOperation_example.json"
+          }
+        },
+        "x-ms-long-running-operation": true,
         "responses": {
-          "200": {
-            "description": "The operation completed successfully.",
-            "schema": {
-              "$ref": "#/definitions/ServiceResourceUpdate"
-            }
-          },
-          "201": {
-            "description": "The resource creation process has been started. Query the resource to retrieve the latest status for the operation.",
-            "schema": {
-              "$ref": "#/definitions/ServiceResourceUpdate"
-            }
-          },
           "202": {
             "description": "The request was accepted and the operation will complete asynchronously.",
             "schema": {
@@ -1393,10 +1305,13 @@
             "$ref": "#/parameters/api-version"
           }
         ],
+        "x-ms-examples": {
+          "Delete a service": {
+            "$ref": "./examples/ServiceDeleteOperation_example.json"
+          }
+        },
+        "x-ms-long-running-operation": true,
         "responses": {
-          "200": {
-            "description": "The operation completed successfully."
-          },
           "202": {
             "description": "The request was accepted and the operation will complete asynchronously."
           },
@@ -1436,6 +1351,11 @@
             "$ref": "#/parameters/api-version"
           }
         ],
+        "x-ms-examples": {
+          "Get a list of service resources": {
+            "$ref": "./examples/ServiceListOperation_example.json"
+          }
+        },
         "responses": {
           "200": {
             "description": "The operation completed successfully.",
@@ -1931,6 +1851,9 @@
     },
     "VersionProperties": {
       "description": "The properties of the version resource.",
+      "required": [
+        "appPackageUrl"
+      ],
       "properties": {
         "provisioningState": {
           "readOnly": true,
@@ -2039,7 +1962,7 @@
       }
     },
     "ApplicationUpgradePolicy": {
-      "description": "The application upgrade policy.",
+      "description": "Describes the policy for a monitored application upgrade.",
       "properties": {
         "upgradeReplicaSetCheckTimeout": {
           "$ref": "#/definitions/UpgradeReplicaSetCheckTimeout"
@@ -2088,17 +2011,10 @@
         }
       ],
       "required": [
-        "serviceResourceType"
+        "serviceKind"
       ],
-      "discriminator": "serviceResourceType",
+      "discriminator": "serviceKind",
       "properties": {
-        "serviceResourceType": {
-          "type": "string",
-          "enum": [
-            "StatelessService",
-            "StatefulService"
-          ]
-        },
         "provisioningState": {
           "readOnly": true,
           "type": "string",
@@ -2159,26 +2075,23 @@
         }
       ],
       "required": [
-        "serviceResourceType"
+        "serviceKind"
       ],
-      "discriminator": "serviceResourceType",
+      "discriminator": "serviceKind",
       "properties": {
-        "serviceResourceType": {
-          "type": "string",
-          "enum": [
-            "StatelessServiceUpdate",
-            "StatefulServiceUpdate"
-          ]
+        "serviceKind": {
+          "$ref": "#/definitions/ServiceKind"
         }
       }
     },
-    "StatelessService": {
+    "StatelessServiceProperties": {
       "description": "The properties of a stateless service resource.",
       "allOf": [
         {
           "$ref": "#/definitions/ServiceProperties"
         }
       ],
+      "x-ms-discriminator-value": "Stateless",
       "properties": {
         "instanceCount": {
           "type": "integer",
@@ -2187,13 +2100,14 @@
         }
       }
     },
-    "StatelessServiceUpdate": {
+    "StatelessServiceUpdateProperties": {
       "description": "The properties of a stateless service resource for patch operations.",
       "allOf": [
         {
           "$ref": "#/definitions/ServiceUpdateProperties"
         }
       ],
+      "x-ms-discriminator-value": "Stateless",
       "properties": {
         "instanceCount": {
           "type": "integer",
@@ -2202,13 +2116,14 @@
         }
       }
     },
-    "StatefulService": {
+    "StatefulServiceProperties": {
       "description": "The properties of a stateful service resource.",
       "allOf": [
         {
           "$ref": "#/definitions/ServiceProperties"
         }
       ],
+      "x-ms-discriminator-value": "Stateful",
       "properties": {
         "hasPersistedState": {
           "type": "boolean",
@@ -2241,13 +2156,14 @@
         }
       }
     },
-    "StatefulServiceUpdate": {
+    "StatefulServiceUpdateProperties": {
       "description": "The properties of a stateful service resource for patch operations.",
       "allOf": [
         {
           "$ref": "#/definitions/ServiceUpdateProperties"
         }
       ],
+      "x-ms-discriminator-value": "Stateful",
       "properties": {
         "targetReplicaSetSize": {
           "type": "integer",
@@ -2955,7 +2871,7 @@
           "description": "Resource location."
         }
       },
-      "description": "The resource model definition.",
+      "description": "The resource model definition for proxy-only resource.",
       "x-ms-azure-resource": true
     },
     "Resource": {
@@ -3128,9 +3044,10 @@
     "api-version": {
       "name": "api-version",
       "in": "query",
-      "description": "The version of the API. This is a required parameter.",
+      "description": "The version of the API.",
       "required": true,
-      "type": "string"
+      "type": "string",
+      "x-ms-parameter-location": "method"
     },
     "applicationName": {
       "name": "applicationName",
@@ -3205,7 +3122,8 @@
       "in": "path",
       "description": "The customer subscription identifier",
       "required": true,
-      "type": "string"
+      "type": "string",
+      "x-ms-parameter-location": "method"
     },
     "version": {
       "name": "version",
@@ -3213,26 +3131,6 @@
       "description": "The application type version.",
       "required": true,
       "type": "string",
-      "x-ms-parameter-location": "method"
-    },
-    "clusterBodyParam": {
-      "name": "Cluster",
-      "in": "body",
-      "description": "The cluster resource.",
-      "required": true,
-      "schema": {
-        "$ref": "#/definitions/Cluster"
-      },
-      "x-ms-parameter-location": "method"
-    },
-    "clusterUpdateParameterBody": {
-      "name": "ClusterUpdateParameters",
-      "in": "body",
-      "description": "The parameters which contains the property value and property name which used to update the cluster configuration.",
-      "required": true,
-      "schema": {
-        "$ref": "#/definitions/ClusterUpdateParameters"
-      },
       "x-ms-parameter-location": "method"
     }
   }

@@ -54,7 +54,6 @@ csharp:
   namespace: Microsoft.Azure.OperationalInsights
   output-folder: $(csharp-sdks-folder)/OperationalInsights/DataPlane/OperationalInsights/Generated
   clear-output-folder: true
-  use-internal-constructors: true
   payload-flattening-threshold: 3
 directive:
   - reason: Don't expose the GET endpoint since it's behavior is more limited than POST

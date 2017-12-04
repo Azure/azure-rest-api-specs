@@ -3,53 +3,99 @@
     "subscriptionId": "00000000-0000-0000-0000-000000000000",
     "resourceGroupName": "resRg",
     "clusterName": "myCluster",
-    "api-version": "2016-09-01",
-    "ClusterUpdateParameters": {
+    "api-version": "2017-07-01-preview",
+    "parameters": {
+      "type": "Microsoft.ServiceFabric/clusters",
+      "location": "eastus",
+      "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourcegroups/resRg/providers/Microsoft.ServiceFabric/clusters/myCluster",
+      "name": "myCluster",
+      "tags": {
+        "a": "b"
+      },
       "properties": {
+        "clusterState": "Default",
         "nodeTypes": [
           {
-            "name": "n1",
+            "name": "nt1vm",
             "clientConnectionEndpointPort": 19000,
-            "httpGatewayEndpointPort": 19080,
-            "durabilityLevel": "Silver",
+            "httpGatewayEndpointPort": 19007,
             "applicationPorts": {
               "startPort": 20000,
               "endPort": 30000
             },
             "ephemeralPorts": {
-              "startPort": 49152,
-              "endPort": 65534
+              "startPort": 49000,
+              "endPort": 64000
             },
             "isPrimary": true,
             "vmInstanceCount": 5,
-            "reverseProxyEndpointPort": 9998
+            "durabilityLevel": "Bronze"
+          },
+          {
+            "name": "testnt1",
+            "clientConnectionEndpointPort": 0,
+            "httpGatewayEndpointPort": 0,
+            "applicationPorts": {
+              "startPort": 1000,
+              "endPort": 2000
+            },
+            "ephemeralPorts": {
+              "startPort": 3000,
+              "endPort": 4000
+            },
+            "isPrimary": false,
+            "vmInstanceCount": 3,
+            "durabilityLevel": "Bronze"
           }
-        ]
+        ],
+        "reliabilityLevel": "Bronze",
+        "upgradeMode": "Default",
+        "addonFeatures": []
       }
     }
   },
   "responses": {
-    "200": {
-      "headers": {},
+    "202": {
+      "headers": {
+        "Retry-After": "10",
+        "Location": "http://10.91.140.224/subscriptions/00000000-0000-0000-0000-000000000000/providers/Microsoft.ServiceFabric/locations/eastus/operationResults/1ca6e48d-70ca-4e43-b652-3b0522f64d67?api-version=2017-07-01-privatepreview"
+      },
       "body": {
         "type": "Microsoft.ServiceFabric/clusters",
-        "location": "southcentralus",
+        "location": "eastus",
         "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourcegroups/resRg/providers/Microsoft.ServiceFabric/clusters/myCluster",
         "name": "myCluster",
-        "tags": {},
+        "tags": {
+          "a": "b"
+        },
+        "etag": "W/\"636462502169240744\"",
         "properties": {
           "provisioningState": "Succeeded",
-          "clusterId": "8d566293-3508-4d62-ba7b-056fa710c3c9",
-          "clusterCodeVersion": "5.5.216.0",
-          "clusterState": "Ready",
-          "managementEndpoint": "http://myCluster.southcentralus.cloudapp.azure.com:19080",
-          "clusterEndpoint": "https://warp-test-winfabrp-southcentralus.trafficmanager.net/runtime/clusters/8d566293-3508-4d62-ba7b-056fa710c3c9",
+          "clusterId": "92584666-9889-4ae8-8d02-91902923d37f",
+          "clusterCodeVersion": "6.0.219.9494",
+          "clusterState": "WaitingForNodes",
+          "managementEndpoint": "http://myCluster.eastus.cloudapp.azure.com:19080",
+          "clusterEndpoint": "92584666-9889-4ae8-8d02-91902923d37f",
+          "clientCertificateThumbprints": [],
+          "clientCertificateCommonNames": [],
+          "fabricSettings": [
+            {
+              "name": "UpgradeService",
+              "parameters": [
+                {
+                  "name": "AppPollIntervalInSeconds",
+                  "value": "60"
+                }
+              ]
+            }
+          ],
           "upgradeDescription": {
-            "forceRestart": true,
+            "overrideUserUpgradePolicy": false,
+            "forceRestart": false,
             "upgradeReplicaSetCheckTimeout": "10675199.02:48:05.4775807",
-            "healthCheckWaitDuration": "00:00:01",
-            "healthCheckStableDuration": "00:00:01",
-            "healthCheckRetryTimeout": "00:00:01",
+            "healthCheckWaitDuration": "00:05:00",
+            "healthCheckStableDuration": "00:05:00",
+            "healthCheckRetryTimeout": "00:45:00",
             "upgradeTimeout": "12:00:00",
             "upgradeDomainTimeout": "02:00:00",
             "healthPolicy": {
@@ -63,51 +109,56 @@
             }
           },
           "diagnosticsStorageAccountConfig": {
-            "storageAccountName": "sflogssdktest5486",
+            "storageAccountName": "diag",
             "protectedAccountKeyName": "StorageAccountKey1",
-            "blobEndpoint": "https://sflogssdktest5486.blob.core.windows.net/",
-            "queueEndpoint": "https://sflogssdktest5486.queue.core.windows.net/",
-            "tableEndpoint": "https://sflogssdktest5486.table.core.windows.net/"
+            "blobEndpoint": "https://diag.blob.core.windows.net/",
+            "queueEndpoint": "https://diag.queue.core.windows.net/",
+            "tableEndpoint": "https://diag.table.core.windows.net/"
           },
           "nodeTypes": [
             {
-              "name": "n1",
+              "name": "nt1vm",
               "clientConnectionEndpointPort": 19000,
-              "httpGatewayEndpointPort": 19080,
+              "httpGatewayEndpointPort": 19007,
               "applicationPorts": {
                 "startPort": 20000,
                 "endPort": 30000
               },
               "ephemeralPorts": {
-                "startPort": 49152,
-                "endPort": 65534
+                "startPort": 49000,
+                "endPort": 64000
               },
               "isPrimary": true,
               "vmInstanceCount": 5,
-              "reverseProxyEndpointPort": 9998,
-              "durabilityLevel": "Silver"
+              "durabilityLevel": "Bronze"
+            },
+            {
+              "name": "testnt1",
+              "clientConnectionEndpointPort": 0,
+              "httpGatewayEndpointPort": 0,
+              "applicationPorts": {
+                "startPort": 1000,
+                "endPort": 2000
+              },
+              "ephemeralPorts": {
+                "startPort": 3000,
+                "endPort": 4000
+              },
+              "isPrimary": false,
+              "vmInstanceCount": 3,
+              "durabilityLevel": "Bronze"
             }
           ],
-          "vmImage": "Windows",
           "reliabilityLevel": "Bronze",
           "upgradeMode": "Automatic",
           "availableClusterVersions": [
             {
-              "codeVersion": "5.4.145.9494",
-              "supportExpiryUtc": "2017-05-10T00:00:00",
-              "environment": "Windows"
-            },
-            {
-              "codeVersion": "5.4.164.9494",
-              "supportExpiryUtc": "2017-05-10T00:00:00",
-              "environment": "Windows"
-            },
-            {
-              "codeVersion": "5.5.216.0",
+              "codeVersion": "6.0.219.9494",
               "supportExpiryUtc": "9999-12-31T23:59:59.9999999",
               "environment": "Windows"
             }
-          ]
+          ],
+          "addonFeatures": []
         }
       }
     }

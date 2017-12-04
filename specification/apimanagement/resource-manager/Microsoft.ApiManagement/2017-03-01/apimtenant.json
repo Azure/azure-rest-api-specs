@@ -365,6 +365,11 @@
           "description": "To deploy any service configuration changes to the API Management service instance",
           "url": "https://azure.microsoft.com/en-us/documentation/articles/api-management-configuration-repository-git/#to-deploy-any-service-configuration-changes-to-the-api-management-service-instance"
         },
+        "x-ms-examples": {
+          "ApiManagementTenantConfigurationDeploy": {
+            "$ref": "./examples/ApiManagementTenantConfigurationDeploy.json"
+          }
+        },
         "parameters": [
           {
             "$ref": "./apimanagement.json#/parameters/ResourceGroupNameParameter"
@@ -422,6 +427,11 @@
           "description": "To save the service configuration to the Git repository",
           "url": "https://azure.microsoft.com/en-us/documentation/articles/api-management-configuration-repository-git/#to-save-the-service-configuration-to-the-git-repository"
         },
+        "x-ms-examples": {
+          "ApiManagementTenantConfigurationSave": {
+            "$ref": "./examples/ApiManagementTenantConfigurationSave.json"
+          }
+        },
         "parameters": [
           {
             "$ref": "./apimanagement.json#/parameters/ResourceGroupNameParameter"
@@ -475,6 +485,11 @@
         ],
         "operationId": "TenantConfiguration_Validate",
         "description": "This operation validates the changes in the specified Git branch. This is a long running operation and could take several minutes to complete.",
+        "x-ms-examples": {
+          "ApiManagementTenantConfigurationValidate": {
+            "$ref": "./examples/ApiManagementTenantConfigurationValidate.json"
+          }
+        },
         "parameters": [
           {
             "$ref": "./apimanagement.json#/parameters/ResourceGroupNameParameter"
@@ -645,9 +660,34 @@
         "error": {
           "$ref": "./apimanagement.json#/definitions/ErrorResponse",
           "description": "Error Body Contract"
+        },
+        "actionLog": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/OperationResultLogItemContract"
+          },
+          "readOnly": true,
+          "description": "This property if only provided as part of the TenantConfiguration_Validate operation. It contains the log the entities which will be updated/created/deleted as part of the TenantConfiguration_Deploy operation."
         }
       },
       "description": "Operation Result."
+    },
+    "OperationResultLogItemContract": {
+      "properties": {
+        "objectType": {
+          "type": "string",
+          "description": "The type of entity contract."
+        },
+        "action": {
+          "type": "string",
+          "description": "Action like create/update/delete."
+        },
+        "objectKey": {
+          "type": "string",
+          "description": "Identifier of the entity being created/updated/deleted."
+        }
+      },
+      "description": "Log of the entity being created, updated or deleted."
     },
     "SaveConfigurationParameter": {
       "properties": {
