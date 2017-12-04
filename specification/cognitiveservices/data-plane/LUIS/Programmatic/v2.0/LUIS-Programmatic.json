@@ -1104,14 +1104,6 @@
       }
     },
     "/apps/{appId}/versions/{versionId}/prebuilts": {
-      "parameters": [
-        {
-          "$ref": "#/parameters/AppIdInPath"
-        },
-        {
-          "$ref": "#/parameters/VersionIdInPath"
-        }
-      ],
       "post": {
         "description": "Adds a list of prebuilt entity extractors to the application.",
         "operationId": "Model_AddPrebuiltEntityExtractors",
@@ -1162,6 +1154,12 @@
         "description": "Gets information about the prebuilt entity models.",
         "operationId": "Model_GetApplicationVersionPrebuiltInfos",
         "parameters": [
+          {
+            "$ref": "#/parameters/AppIdInPath"
+          },
+          {
+            "$ref": "#/parameters/VersionIdInPath"
+          },
           {
             "$ref": "#/parameters/SkipInPath"
           },
@@ -1272,20 +1270,20 @@
       }
     },
     "/apps/{appId}/versions/{versionId}/intents/{intentId}": {
-      "parameters": [
-        {
-          "$ref": "#/parameters/AppIdInPath"
-        },
-        {
-          "$ref": "#/parameters/VersionIdInPath"
-        },
-        {
-          "$ref": "#/parameters/IntentIdInPath"
-        }
-      ],
       "get": {
         "description": "Gets information about the intent model.",
         "operationId": "Model_GetIntentInfo",
+        "parameters": [
+          {
+            "$ref": "#/parameters/AppIdInPath"
+          },
+          {
+            "$ref": "#/parameters/VersionIdInPath"
+          },
+          {
+            "$ref": "#/parameters/IntentIdInPath"
+          }
+        ],
         "responses": {
           "200": {
             "description": "An intent model info.",
@@ -1355,6 +1353,17 @@
       "delete": {
         "description": "Deletes an intent classifier from the application.",
         "operationId": "Model_DeleteIntentModel",
+        "parameters": [
+          {
+            "$ref": "#/parameters/AppIdInPath"
+          },
+          {
+            "$ref": "#/parameters/VersionIdInPath"
+          },
+          {
+            "$ref": "#/parameters/IntentIdInPath"
+          }
+        ],
         "responses": {
           "200": {
             "description": "No Content. Successful operation."
