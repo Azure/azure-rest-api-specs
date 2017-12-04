@@ -134,6 +134,18 @@
         "catalogInfo": {
           "description": "Catalog information for managed dedicated integration runtime.",
           "$ref": "#/definitions/IntegrationRuntimeSsisCatalogInfo"
+        },
+        "licenseType": {
+          "description": "License type for bringing your own license scenario.",
+          "type": "string",
+          "enum": [
+            "BasePrice",
+            "LicenseIncluded"
+          ],
+          "x-ms-enum": {
+            "name": "IntegrationRuntimeLicenseType",
+            "modelAsString": true
+          }
         }
       },
       "additionalProperties": {
