@@ -19,14 +19,26 @@ To see additional help and options, run:
 
 ## Configuration
 
-
-
 ### Basic Information 
 These are the global settings for the API.
 
 ``` yaml
 openapi-type: arm
+tag: package-2017-08
+```
+
+``` yaml
+openapi-type: arm
 tag: package-2017-11
+```
+
+### Tag: package-2017-08
+
+These settings apply only when `--tag=package-2017-08` is specified on the command line.
+
+``` yaml $(tag) == 'package-2017-11'
+input-file:
+- Microsoft.Devices/2017-08-21-preview/iotdps.json
 ```
 
 ### Tag: package-2017-11

@@ -1681,29 +1681,31 @@
       }
      },
      "ErrorDetails": {
-      "description": "Standard Error Response information including statusCode and message",
-      "type": "object",
-      "properties": {
-       "code": {
-        "description": "error code.",
-        "type": "string",
-        "readOnly": true
-       },
-       "httpStatusCode": {
-        "description": "The HTTP status code.",
-        "type": "string",
-        "readOnly": true
-       },
-       "message": {
-        "description": "The error message.",
-        "type": "string"
-       },
-       "details": {
-        "description": "The error details.",
-        "type": "string"
-       }
-      }
-     },
+        "description": "Error details.",
+        "type": "object",
+        "properties": {
+          "Code": {
+            "description": "The error code.",
+            "type": "string",
+            "readOnly": true
+          },
+          "HttpStatusCode": {
+            "description": "The HTTP status code.",
+            "type": "string",
+            "readOnly": true
+          },
+          "Message": {
+            "description": "The error message.",
+            "type": "string",
+            "readOnly": true
+          },
+          "Details": {
+            "description": "The error details.",
+            "type": "string",
+            "readOnly": true
+          }
+        }
+      },
      "SharedAccessSignatureAuthorizationRuleListResult": {
       "type": "object",
       "description": "List of shared access keys.",
@@ -1775,7 +1777,7 @@
       "description": "Description of name availability.",
       "properties": {
        "nameAvailable": {
-        "description": "specifies if a name is availanle or not",
+        "description": "specifies if a name is available or not",
         "type": "boolean"
        },
        "reason": {
@@ -1789,6 +1791,10 @@
          "name": "NameUnavailabilityReason",
          "modelAsString": true
         }
+       },
+       "etag": {
+        "description": "The Etag field is *not* required. If it is provided in the response body, it must also be provided as a header per the normal ETag convention.",
+        "type": "string"
        },
        "message": {
         "description": "message containing a etailed reason name is unavailable",
@@ -1826,47 +1832,52 @@
       }
      },
      "VerificationCodeResponse": {
-      "type": "object",
-      "description": "Description of the response of the verification code.",
-      "properties": {
-       "verificationCode": {
-        "type": "string",
-        "description": "Verification code."
-       },
-       "name": {
-        "type": "string",
-        "description": "Name of certificate."
-       },
-       "etag": {
-        "type": "string",
-        "description": "Request etag."
-       },
-       "subject": {
-        "type": "string",
-        "description": "Certificate subject."
-       },
-       "expiry": {
-        "type": "string",
-        "description": "Code expiry."
-       },
-       "thumbprint": {
-        "type": "string",
-        "description": "Certificate thumbprint."
-       },
-       "isVerified": {
-        "type": "boolean",
-        "description": "Indicate if the certificate is verified by owner of private key."
-       },
-       "created": {
-        "type": "string",
-        "description": "Certificate created time."
-       },
-       "updated": {
-        "type": "string",
-        "description": "Certificate updated time."
-       }
-      }
-     },
+        "type": "object",
+        "description": "Description of the response of the verification code.",
+        "properties": {
+            "name": {
+                "type": "string",
+                "description": "Name of certificate."
+            },
+            "etag": {
+                "type": "string",
+                "description": "Request etag."
+            },
+            "properties": {
+                "type": "object",
+                "properties": {
+                    "verificationCode": {
+                        "type": "string",
+                        "description": "Verification code."
+                    },
+                    "subject": {
+                        "type": "string",
+                        "description": "Certificate subject."
+                    },
+                    "expiry": {
+                        "type": "string",
+                        "description": "Code expiry."
+                    },
+                    "thumbprint": {
+                        "type": "string",
+                        "description": "Certificate thumbprint."
+                    },
+                    "isVerified": {
+                        "type": "boolean",
+                        "description": "Indicate if the certificate is verified by owner of private key."
+                    },
+                    "created": {
+                        "type": "string",
+                        "description": "Certificate created time."
+                    },
+                    "updated": {
+                        "type": "string",
+                        "description": "Certificate updated time."
+                    }
+                }
+            }
+        }
+    },
      "VerificationCodeRequest": {
       "type": "object",
       "description": "The JSON-serialized leaf certificate",
