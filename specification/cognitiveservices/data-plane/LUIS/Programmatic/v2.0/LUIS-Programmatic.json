@@ -696,6 +696,7 @@
         "responses": {
           "201": {
             "description": "The ID of the created model.",
+            "x-nullable": false,
             "schema": {
               "$ref": "#/definitions/GuidResponse"
             }
@@ -778,6 +779,7 @@
         "responses": {
           "201": {
             "description": "The ID of the created model.",
+            "x-nullable": false,
             "schema": {
               "$ref": "#/definitions/GuidResponse"
             }
@@ -866,6 +868,7 @@
         "responses": {
           "201": {
             "description": "The ID of the created model.",
+            "x-nullable": false,
             "schema": {
               "$ref": "#/definitions/GuidResponse"
             }
@@ -954,6 +957,7 @@
         "responses": {
           "201": {
             "description": "The ID of the created Model.",
+            "x-nullable": false,
             "schema": {
               "$ref": "#/definitions/GuidResponse"
             }
@@ -1082,6 +1086,7 @@
         "responses": {
           "201": {
             "description": "The ID of the created model.",
+            "x-nullable": false,
             "schema": {
               "$ref": "#/definitions/GuidResponse"
             }
@@ -2185,9 +2190,7 @@
         "responses": {
           "201": {
             "description": "The ID of the created application.",
-            "examples": {
-              "application/json": "\"363187f1-c573-46b3-bc4c-ae01d686e68e\""
-            },
+            "x-nullable": false,
             "schema": {
               "$ref": "#/definitions/GuidResponse"
             }
@@ -2270,6 +2273,7 @@
         "responses": {
           "201": {
             "description": "The ID of the imported application.",
+            "x-nullable": false,
             "schema": {
               "$ref": "#/definitions/GuidResponse"
             }
@@ -3342,6 +3346,7 @@
         "responses": {
           "201": {
             "description": "The ID of the created model.",
+            "x-nullable": false,
             "schema": {
               "$ref": "#/definitions/GuidResponse"
             }
@@ -3424,6 +3429,7 @@
         "responses": {
           "201": {
             "description": "The ID of the created model.",
+            "x-nullable": false,
             "schema": {
               "$ref": "#/definitions/GuidResponse"
             }
@@ -3591,9 +3597,7 @@
         "responses": {
           "201": {
             "description": "The ID of the created application.",
-            "examples": {
-              "application/json": "\"739f1513-11f0-4aae-8a19-f660804e6da5\""
-            },
+            "x-nullable": false,
             "schema": {
               "$ref": "#/definitions/GuidResponse"
             }
@@ -3829,6 +3833,7 @@
         "responses": {
           "201": {
             "description": "The ID of the created model.",
+            "x-nullable": false,
             "schema": {
               "$ref": "#/definitions/GuidResponse"
             }
@@ -3885,6 +3890,7 @@
         "responses": {
           "201": {
             "description": "The ID of the created model.",
+            "x-nullable": false,
             "schema": {
               "$ref": "#/definitions/GuidResponse"
             }
@@ -5301,9 +5307,7 @@
           "$ref": "#/definitions/ReadableType"
         }
       },
-      "required": [
-        "readableType"
-      ]
+      "required": [ "id", "readableType" ]
     },
     "ModelsInfoResponseObject" : {
       "type": "array",
@@ -5331,9 +5335,7 @@
           "$ref": "#/definitions/ReadableType"
         }
       },
-      "required": [
-        "readableType"
-      ],
+      "required": [ "id", "readableType" ],
       "discriminator": "readableType",
       "allOf": [
         { "$ref": "#/definitions/HierarchicalEntityExtractor" },
@@ -5452,7 +5454,8 @@
           "type": "string",
           "description": "The name of a child entity."
         }
-      }
+      },
+      "required": [ "id" ]
     },
     "HierarchicalChildEntity": {
       "type": "object",
@@ -5765,13 +5768,16 @@
       "type": "object",
       "properties": {
         "id": {
-          "type": "string"
+          "type": "string",
+          "format": "uuid"
         },
         "public": {
           "type": "boolean",
-          "x-nullable": false
+          "x-nullable": false,
+          "x-ms-client-name": "isPublic"          
         }
-      }
+      },
+      "required": [ "id", "public" ]
     },
     "AvailablePrebuiltEntityModel": {
       "type": "object",
@@ -5982,7 +5988,6 @@
       "description": "The version ID of the task.",
       "required": true,
       "type": "string",
-      "format": "uuid",
       "x-ms-parameter-location": "method"
     },
     "CEntityIdInPath": {
