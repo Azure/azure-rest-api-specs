@@ -248,24 +248,24 @@
       }
     },
     "/apps/{appId}/versions/{versionId}/patterns/{patternId}": {
-      "parameters": [
-        {
-          "$ref": "#/parameters/AppIdInPath"
-        },
-        {
-          "$ref": "#/parameters/VersionIdInPath"
-        },
-        {
-          "name": "patternId",
-          "in": "path",
-          "description": "The pattern feature ID.",
-          "required": true,
-          "type": "integer"
-        }
-      ],
       "get": {
         "description": "Gets pattern feature info.",
         "operationId": "Features_GetPatternFeatureInfo",
+        "parameters": [
+          {
+            "$ref": "#/parameters/AppIdInPath"
+          },
+          {
+            "$ref": "#/parameters/VersionIdInPath"
+          },
+          {
+            "name": "patternId",
+            "in": "path",
+            "description": "The pattern feature ID.",
+            "required": true,
+            "type": "integer"
+          }
+        ],
         "responses": {
           "200": {
             "description": "The pattern feature info.",
@@ -339,6 +339,21 @@
       "delete": {
         "description": "Deletes a pattern feature from an application version.",
         "operationId": "Features_DeletePatternFeature",
+        "parameters": [
+          {
+            "$ref": "#/parameters/AppIdInPath"
+          },
+          {
+            "$ref": "#/parameters/VersionIdInPath"
+          },
+          {
+            "name": "patternId",
+            "in": "path",
+            "description": "The pattern feature ID.",
+            "required": true,
+            "type": "integer"
+          }
+        ],
         "responses": {
           "200": {
             "description": "No Content. Successful operation."
