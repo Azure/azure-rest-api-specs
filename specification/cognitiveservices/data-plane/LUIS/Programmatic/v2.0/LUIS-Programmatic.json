@@ -670,14 +670,6 @@
       }
     },
     "/apps/{appId}/versions/{versionId}/intents": {
-      "parameters": [
-        {
-          "$ref": "#/parameters/AppIdInPath"
-        },
-        {
-          "$ref": "#/parameters/VersionIdInPath"
-        }
-      ],
       "post": {
         "description": "Adds an intent classifier to the application.",
         "operationId": "Model_CreateIntentClassifier",
@@ -722,6 +714,12 @@
         "description": "Gets information about the intent models.",
         "operationId": "Model_GetApplicationVersionIntentInfos",
         "parameters": [
+          {
+            "$ref": "#/parameters/AppIdInPath"
+          },
+          {
+            "$ref": "#/parameters/VersionIdInPath"
+          },
           {
             "$ref": "#/parameters/SkipInPath"
           },
