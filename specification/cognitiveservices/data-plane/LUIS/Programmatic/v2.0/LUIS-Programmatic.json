@@ -1577,13 +1577,18 @@
         ],
         "responses": {
           "200": {
-            "description": "No Content. Successfully updated entity."
+            "description": "No Content. Successfully deleted entity."
           },
           "default": {
             "description": "Error Response.",
             "schema": {
               "$ref": "#/definitions/ErrorResponse"
             }
+          }
+        },
+        "x-ms-examples": {
+          "Successful Delete Hierarchical Entity Model request": {
+            "$ref": "./examples/model/SuccessfulDeleteHierarchicalEntityModelRequest.json"
           }
         }
       }
@@ -2387,7 +2392,12 @@
         },
         "produces": [
           "application/octet-stream"
-        ]
+        ],
+        "x-ms-examples": {
+          "Successful Download Application Query logs request": {
+            "$ref": "./examples/apps/SuccessfulDownloadApplicationQueryLogsRequest.json"
+          }
+        }
       }
     },
     "/apps/{appId}": {
@@ -2822,8 +2832,8 @@
         "responses": {
           "200": {
             "description": "The new programmatic key.",
-            "examples": {
-              "application/json": "\"NewDummyProgrammaticKey\""
+            "schema":{
+              "type": "string"
             }
           },
           "default": {
@@ -2835,7 +2845,12 @@
         },
         "produces": [
           "application/json"
-        ]
+        ],
+        "x-ms-examples": {
+          "Successful Reset User Programmatic Key request": {
+            "$ref": "./examples/user/SuccessfulResetUserProgrammaticKeyRequest.json"
+          }
+        }
       }
     },
     "/apps/{appId}/versions/import": {
@@ -3696,12 +3711,12 @@
             "type": "string"
           },
           {
-            "name": "body",
+            "name": "hierarchicalChildModelUpdateObject",
             "in": "body",
             "required": true,
             "schema": {
-              "example": {
-                "name": "Source"
+              "name": {
+                "type": "string"
               }
             },
             "description": "Model object containing new name of the hierarchical entity child."
@@ -3719,6 +3734,11 @@
             "schema": {
               "$ref": "#/definitions/ErrorResponse"
             }
+          }
+        },
+        "x-ms-examples": {
+          "Successful Update Hierarchical Entity Child Model request": {
+            "$ref": "./examples/model/SuccessfulUpdateHierarchicalChildModelRequest.json"
           }
         }
       },
@@ -3753,6 +3773,11 @@
               "$ref": "#/definitions/ErrorResponse"
             }
           }
+        },
+        "x-ms-examples": {
+          "Successful Delete Hierarchical Entity Child Model request": {
+            "$ref": "./examples/model/SuccessfulDeleteHierarchicalChildModelRequest.json"
+          }
         }
       }
     },
@@ -3771,10 +3796,13 @@
             "$ref": "#/parameters/HEntityIdInPath"
           },
           {
-            "name": "body",
+            "name": "hierarchicalChildModelCreateObject",
             "in": "body",
+            "required": true,
             "schema": {
-              "example": "{\t\"name\" : \"To\"}"
+              "name": {
+                "type": "string"
+              }
             },
             "description": "A model object containing the name of the new hierarchical child model."
           }
@@ -3785,9 +3813,6 @@
         "responses": {
           "201": {
             "description": "The ID of the created model.",
-            "examples": {
-              "application/json": "\"891c235f-4f42-4320-bc36-b6256b6c3f2b\""
-            },
             "schema": {
               "$ref": "#/definitions/GuidResponse"
             }
@@ -3801,7 +3826,12 @@
         },
         "produces": [
           "application/json"
-        ]
+        ],
+        "x-ms-examples": {
+          "Successful Create Hierarchical Entity Child Model request": {
+            "$ref": "./examples/model/SuccessfulCreateHierarchicalChildModelRequest.json"
+          }
+        }
       }
     },
     "/apps/{appId}/versions/{versionId}/compositeentities/{cEntityId}/children": {
@@ -3819,10 +3849,12 @@
             "$ref": "#/parameters/CEntityIdInPath"
           },
           {
-            "name": "body",
+            "name": "compositeChildModelCreateObject",
             "in": "body",
             "schema": {
-              "example": "{\t\"name\" : \"datetime\"}"
+              "name": {
+                "type": "string"
+              }
             },
             "description": "A model object containing the name of the new composite child model."
           }
@@ -3833,9 +3865,6 @@
         "responses": {
           "201": {
             "description": "The ID of the created model.",
-            "examples": {
-              "application/json": "\"891c235f-4f42-4320-bc36-b6256b6c3f2b\""
-            },
             "schema": {
               "$ref": "#/definitions/GuidResponse"
             }
@@ -3849,7 +3878,12 @@
         },
         "produces": [
           "application/json"
-        ]
+        ],
+        "x-ms-examples": {
+          "Successful Create Composite Entity Child Model request": {
+            "$ref": "./examples/model/SuccessfulCreateCompositeChildModelRequest.json"
+          }
+        }
       }
     },
     "/apps/{appId}/versions/{versionId}/compositeentities/{cEntityId}/children/{cChildId}": {
@@ -3884,6 +3918,11 @@
               "$ref": "#/definitions/ErrorResponse"
             }
           }
+        },
+        "x-ms-examples": {
+          "Successful Delete Composite Entity Child Model request": {
+            "$ref": "./examples/model/SuccessfulDeleteCompositeChildModelRequest.json"
+          }
         }
       }
     }
@@ -3893,19 +3932,19 @@
       "additionalProperties": false,
       "type": "object",
       "properties": {
-        "Culture": {
+        "culture": {
           "type": "string"
         },
-        "UsageScenario": {
+        "usageScenario": {
           "type": "string"
         },
-        "Description": {
+        "description": {
           "type": "string"
         },
-        "Domain": {
+        "domain": {
           "type": "string"
         },
-        "Name": {
+        "name": {
           "type": "string"
         }
       }
@@ -4170,17 +4209,17 @@
       "additionalProperties": false,
       "type": "object",
       "properties": {
-        "Settings": {
+        "settings": {
           "items": {
             "type": "object",
             "$ref": "#/definitions/Setting"
           },
           "type": "array"
         },
-        "Name": {
+        "name": {
           "type": "string"
         },
-        "Method": {
+        "method": {
           "type": "string"
         }
       }
@@ -4324,10 +4363,10 @@
       "additionalProperties": false,
       "type": "object",
       "properties": {
-        "Name": {
+        "name": {
           "type": "string"
         },
-        "Value": {
+        "value": {
           "type": "string"
         }
       }
@@ -4715,8 +4754,7 @@
           "items": {
             "type": "string"
           },
-          "type": "array",
-          "x-ms-client-name": "bing_entities"
+          "type": "array"
         },
         "actions": {
           "items": {
