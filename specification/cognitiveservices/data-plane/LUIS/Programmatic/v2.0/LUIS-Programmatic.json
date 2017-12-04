@@ -77,7 +77,7 @@
         }
       },
       "get": {
-        "description": "Gets all application version pattern features.",
+        "description": "Gets all the pattern features.",
         "operationId": "Features_GetApplicationVersionPatternFeatures",
         "parameters": [
           {
@@ -95,7 +95,7 @@
         ],
         "responses": {
           "200": {
-            "description": "A list of all pattern features.",
+            "description": "A list of pattern features.",
             "schema": {
               "$ref": "#/definitions/PatternFeatureInfoList"
             }
@@ -165,7 +165,7 @@
         }
       },
       "get": {
-        "description": "Gets phraselist features.",
+        "description": "Gets all the phraselist features.",
         "operationId": "Features_GetApplicationVersionPhraselistFeatures",
         "parameters": [
           {
@@ -207,7 +207,7 @@
     },
     "/apps/{appId}/versions/{versionId}/features": {
       "get": {
-        "description": "Gets all application version features.",
+        "description": "Gets all the extraction features for the specified application version.",
         "operationId": "Features_GetApplicationVersionFeatures",
         "parameters": [
           {
@@ -225,7 +225,7 @@
         ],
         "responses": {
           "200": {
-            "description": "A list of all phraselist features and a list of all pattern features in the application.",
+            "description": "A list of all phraselist features and a list of all pattern features.",
             "schema": {
               "$ref": "#/definitions/FeaturesResponseObject"
             }
@@ -249,7 +249,7 @@
     },
     "/apps/{appId}/versions/{versionId}/patterns/{patternId}": {
       "get": {
-        "description": "Gets pattern feature info.",
+        "description": "Gets the specified pattern feature's info.",
         "operationId": "Features_GetPatternFeatureInfo",
         "parameters": [
           {
@@ -337,7 +337,7 @@
         }
       },
       "delete": {
-        "description": "Deletes a pattern feature from an application version.",
+        "description": "Deletes a pattern feature.",
         "operationId": "Features_DeletePatternFeature",
         "parameters": [
           {
@@ -437,7 +437,7 @@
             "schema": {
               "$ref": "#/definitions/PhraselistUpdateObject"
             },
-            "description": "A PhraselistUpdateObject object containing either: - Just a boolean called IsActive, in which case the status of the feature will be changed. - Name, Pattern, Mode, and a boolean called IsActive to update the feature."
+            "description": "The new values for: - Just a boolean called IsActive, in which case the status of the feature will be changed. - Name, Pattern, Mode, and a boolean called IsActive to update the feature."
           }
         ],
         "consumes": [
@@ -461,7 +461,7 @@
         }
       },
       "delete": {
-        "description": "Deletes a phraselist feature from an application.",
+        "description": "Deletes a phraselist feature.",
         "operationId": "Features_DeletePhraselistFeature",
         "parameters": [
           {
@@ -546,7 +546,7 @@
     },
     "/apps/{appId}/versions/{versionId}/examples": {
       "post": {
-        "description": "Adds a batch of labeled examples to the specified application.",
+        "description": "Adds a batch of labeled examples to the application.",
         "operationId": "Examples_BatchAddLabels",
         "parameters": [
           {
@@ -562,7 +562,7 @@
             "schema": {
               "$ref": "#/definitions/ExampleLabelObjectArray"
             },
-            "description": "Array of example labels."
+            "description": "Array of examples."
           }
         ],
         "consumes": [
@@ -634,7 +634,7 @@
     },
     "/apps/{appId}/versions/{versionId}/examples/{exampleId}": {
       "delete": {
-        "description": "Deletes the label with the specified ID.",
+        "description": "Deletes the labeled example with the specified ID.",
         "operationId": "Examples_DeleteExampleLabels",
         "parameters": [
           {
@@ -859,7 +859,7 @@
             "schema": {
               "$ref": "#/definitions/HierarchicalModelCreateObject"
             },
-            "description": "A model object containing the name and children of the new entity extractor."
+            "description": "A model containing the name and children of the new entity extractor."
           }
         ],
         "consumes": [
@@ -948,7 +948,7 @@
             "schema": {
               "$ref": "#/definitions/HierarchicalModelCreateObject"
             },
-            "description": "A model object containing the name and children of the new entity extractor."
+            "description": "A model containing the name and children of the new entity extractor."
           }
         ],
         "consumes": [
@@ -1077,7 +1077,7 @@
             "schema": {
               "$ref": "#/definitions/ClosedListModelCreateObject"
             },
-            "description": "A model object containing the name and words for the new closed list entity extractor."
+            "description": "A model containing the name and words for the new closed list entity extractor."
           }
         ],
         "consumes": [
@@ -1252,7 +1252,7 @@
         ],
         "responses": {
           "200": {
-            "description": "A list of application models infos.",
+            "description": "A list of application model infos.",
             "schema": {
               "$ref": "#/definitions/ModelsInfoResponseObject"
             }
@@ -1401,7 +1401,7 @@
           {
             "name": "entityId",
             "in": "path",
-            "description": "Format - guid. The entity extractor ID.",
+            "description": "The entity extractor ID.",
             "required": true,
             "type": "string",
             "format": "uuid"
@@ -1443,7 +1443,7 @@
           {
             "name": "entityId",
             "in": "path",
-            "description": "Format - guid. The entity extractor ID.",
+            "description": "The entity extractor ID.",
             "required": true,
             "type": "string",
             "format": "uuid"
@@ -1491,7 +1491,7 @@
           {
             "name": "entityId",
             "in": "path",
-            "description": "Format - guid. The entity extractor ID.",
+            "description": "The entity extractor ID.",
             "required": true,
             "type": "string",
             "format": "uuid"
@@ -1569,6 +1569,7 @@
           {
             "name": "hierarchicalModelUpdateObject",
             "in": "body",
+            "required": true,
             "schema": {
               "$ref": "#/definitions/HierarchicalModelUpdateObject"
             },
@@ -1754,7 +1755,7 @@
           {
             "name": "clEntityId",
             "in": "path",
-            "description": "Format - guid. The closed list model ID.",
+            "description": "The closed list model ID.",
             "required": true,
             "type": "string",
             "format": "uuid"
@@ -1796,7 +1797,7 @@
           {
             "name": "clEntityId",
             "in": "path",
-            "description": "Format - guid. The closed list model ID.",
+            "description": "The closed list model ID.",
             "required": true,
             "type": "string",
             "format": "uuid"
@@ -1844,7 +1845,7 @@
           {
             "name": "clEntityId",
             "in": "path",
-            "description": "Format - guid. The closed list model ID.",
+            "description": "The closed list model ID.",
             "required": true,
             "type": "string",
             "format": "uuid"
@@ -1892,7 +1893,7 @@
           {
             "name": "clEntityId",
             "in": "path",
-            "description": "Format - guid. The closed list model ID.",
+            "description": "The closed list model ID.",
             "required": true,
             "type": "string",
             "format": "uuid"
@@ -1917,25 +1918,25 @@
       }
     },
     "/apps/{appId}/versions/{versionId}/prebuilts/{prebuiltId}": {
-      "parameters": [
-        {
-          "$ref": "#/parameters/AppIdInPath"
-        },
-        {
-          "$ref": "#/parameters/VersionIdInPath"
-        },
-        {
-          "name": "prebuiltId",
-          "in": "path",
-          "description": "Format - guid. The prebuilt entity extractor ID.",
-          "required": true,
-          "type": "string",
-          "format": "uuid"
-        }
-      ],
       "get": {
         "description": "Gets information about the prebuilt entity model.",
         "operationId": "Model_GetPrebuiltInfo",
+        "parameters": [
+          {
+            "$ref": "#/parameters/AppIdInPath"
+          },
+          {
+            "$ref": "#/parameters/VersionIdInPath"
+          },
+          {
+            "name": "prebuiltId",
+            "in": "path",
+            "description": "The prebuilt entity extractor ID.",
+            "required": true,
+            "type": "string",
+            "format": "uuid"
+          }
+        ],
         "responses": {
           "200": {
             "description": "A prebuilt entity models info.",
@@ -1962,6 +1963,22 @@
       "delete": {
         "description": "Deletes a prebuilt entity extractor from the application.",
         "operationId": "Model_DeletePrebuiltModel",
+        "parameters": [
+          {
+            "$ref": "#/parameters/AppIdInPath"
+          },
+          {
+            "$ref": "#/parameters/VersionIdInPath"
+          },
+          {
+            "name": "prebuiltId",
+            "in": "path",
+            "description": "The prebuilt entity extractor ID.",
+            "required": true,
+            "type": "string",
+            "format": "uuid"
+          }
+        ],
         "responses": {
           "200": {
             "description": "No Content. Successful operation."
@@ -1994,7 +2011,7 @@
           {
             "name": "clEntityId",
             "in": "path",
-            "description": "Format - guid. The closed list entity extractor ID.",
+            "description": "The closed list entity extractor ID.",
             "required": true,
             "type": "string",
             "format": "uuid"
@@ -2025,7 +2042,7 @@
         }
       },
       "put": {
-        "description": "Updates one of the closed list's sublists",
+        "description": "Updates one of the closed list's sublists.",
         "operationId": "Model_UpdateSubList",
         "parameters": [
           {
@@ -2037,7 +2054,7 @@
           {
             "name": "clEntityId",
             "in": "path",
-            "description": "Format - guid. The closed list entity extractor ID.",
+            "description": "The closed list entity extractor ID.",
             "required": true,
             "type": "string",
             "format": "uuid"
@@ -2100,7 +2117,7 @@
         ],
         "responses": {
           "200": {
-            "description": "If there's no trained model, nothing is returned in the response.</br>If there's a trained model and the active learning algorithm finds any relevant queries, they are returned with the model predictions.</br>If there's a trained model but the active learning algorithm didn't find any relevant queries, an empty list is returned in the response.",
+            "description": "If there's no trained model, nothing is returned in the response. If there's a trained model and the active learning algorithm finds any relevant queries, they are returned with the model predictions. If there's a trained model but the active learning algorithm didn't find any relevant queries, an empty list is returned in the response.",
             "schema": {
               "$ref": "#/definitions/IntentsSuggestionExamples"
             }
@@ -2136,7 +2153,7 @@
           {
             "name": "entityId",
             "in": "path",
-            "description": "Format - guid. The target entity extractor model to enhance.",
+            "description": "The target entity extractor model to enhance.",
             "required": true,
             "type": "string",
             "format": "uuid"
@@ -2181,7 +2198,7 @@
             "schema": {
               "$ref": "#/definitions/ApplicationCreateObject"
             },
-            "description": "A model containing Name, Description (optional), Culture, Usage Scenario (optional), Domain (optional) and initial version ID (optional) of the application. \r\nDefault value for the version ID is 0.1. \r\nNote that the culture cannot be changed after the app is created."
+            "description": "A model containing Name, Description (optional), Culture, Usage Scenario (optional), Domain (optional) and initial version ID (optional) of the application. Default value for the version ID is 0.1. Note: the culture cannot be changed after the app is created."
           }
         ],
         "consumes": [
@@ -2538,7 +2555,7 @@
     },
     "/apps/{appId}/versions/{versionId}/clone": {
       "post": {
-        "description": "Creates a new version equivalent to the current snapshot of the selected application version.",
+        "description": "Creates a new version using the current snapshot of the selected application version.",
         "operationId": "Versions_CloneVersion",
         "parameters": [
           {
@@ -2553,7 +2570,7 @@
             "schema": {
               "$ref": "#/definitions/TaskUpdateObject"
             },
-            "description": "An model containing the new version ID."
+            "description": "A model containing the new version ID."
           }
         ],
         "consumes": [
@@ -2599,7 +2616,7 @@
             "schema": {
               "$ref": "#/definitions/ApplicationPublishObject"
             },
-            "description": "The application publish object. The region is the target region that the application is published to. Possible values are \"westus\", \"eastus2\", \"westcentralus\" or \"southeastasia\" for applications created in west US, and \"westeurope\" for applications created in West Europe."
+            "description": "The application publish object. The region is the target region that the application is published to."
           }
         ],
         "consumes": [
@@ -2672,20 +2689,20 @@
       }
     },
     "/apps/{appId}/versions/{versionId}/": {
-      "parameters": [
-        {
-          "$ref": "#/parameters/AppIdInPath"
-        },
-        {
-          "$ref": "#/parameters/VersionIdInPath"
-        }
-      ],
       "get": {
-        "description": "Gets the task info.",
+        "description": "Gets the version info.",
         "operationId": "Versions_GetApplicationVersion",
+        "parameters": [
+          {
+            "$ref": "#/parameters/AppIdInPath"
+          },
+          {
+            "$ref": "#/parameters/VersionIdInPath"
+          }
+        ],
         "responses": {
           "200": {
-            "description": "A model containing the task info.",
+            "description": "A model containing the version info.",
             "schema": {
               "$ref": "#/definitions/VersionInfo"
             }
@@ -2749,6 +2766,14 @@
       "delete": {
         "description": "Deletes an application version.",
         "operationId": "Versions_DeleteApplicationVersion",
+        "parameters": [
+          {
+            "$ref": "#/parameters/AppIdInPath"
+          },
+          {
+            "$ref": "#/parameters/VersionIdInPath"
+          }
+        ],
         "responses": {
           "200": {
             "description": "No Content. Successful operation."
@@ -2784,7 +2809,7 @@
             "schema": {
               "$ref": "#/definitions/LuisApp"
             },
-            "description": "A LUIS application structure."
+            "description": "The LUIS application structure in JSON format."
           },
           "default": {
             "description": "Error Response.",
@@ -2804,17 +2829,17 @@
       }
     },
     "/apps/{appId}/versions/{versionId}/train": {
-      "parameters": [
-        {
-          "$ref": "#/parameters/AppIdInPath"
-        },
-        {
-          "$ref": "#/parameters/VersionIdInPath"
-        }
-      ],
       "post": {
         "description": "Sends a training request for a version of a specified LUIS app. This POST request initiates a request asynchronously. To determine whether the training request is successful, submit a GET request to get training status. Note: The application version is not fully trained unless all the models (intents and entities) are trained successfully or are up to date. To verify training success, get the training status at least once after training is complete.",
         "operationId": "Train_TrainApplicationVersion",
+        "parameters": [
+          {
+            "$ref": "#/parameters/AppIdInPath"
+          },
+          {
+            "$ref": "#/parameters/VersionIdInPath"
+          }
+        ],
         "responses": {
           "202": {
             "description": "This response indicates the initial training status.",
@@ -2841,9 +2866,17 @@
       "get": {
         "description": "Gets the training status of all models (intents and entities) for the specified LUIS app. You must call the train API to train the LUIS app before you call this API to get training status. \"appID\" specifies the LUIS app ID. \"versionId\" specifies the version number of the LUIS app. For example, \"0.1\".",
         "operationId": "Train_GetApplicationVersionTrainingStatus",
+        "parameters": [
+          {
+            "$ref": "#/parameters/AppIdInPath"
+          },
+          {
+            "$ref": "#/parameters/VersionIdInPath"
+          }
+        ],
         "responses": {
           "200": {
-            "description": "A successful response provides an array of training status details for a LUIS app that you submitted for training. Each element in the response array provides training status for a model (intent or entity) in the LUIS app.  <br/><br/><b>Note:</b> Training status is not provided for prebuilt entities because they are pretrained. <br/></br>The <b>modelId</b> property identifies which intent or entity the training status corresponds to. To get the name and type of each model, use the models API which has a request URL in this format: <br/></br>https://westus.api.cognitive.microsoft.com/luis/api/v2.0/apps/{appId}/versions/{versionId}/models<br/></br> The details property for each model can contain the following fields: <br/><br/><b>statusId</b>: An integer from 0 to 3 that corresponds to the value of the <b>status</b> field. <br/><br/><b>status</b>: A string with one of the following values: “Success”, “UpToDate”, “InProgress”, “Fail”. If the status is “Fail”, the <b>failureReason</b> property provides the reason for failure. <br/><br/><b>exampleCount</b>: The number of examples used for training. In the case of the None intent or prebuilt domain intents and entities, this number includes example provided internally by the system as well as examples you added to your LUIS app. <br/></br><b>failureReason</b>:  A string that indicates the reason training failed.  The value \"FewLabels\" means that no labeled examples were provided for training. <br/></br><b>trainingDateTime</b>: A string indicating the time the model was last trained. The value uses the ISO 8601 format for representing times in UTC (Coordinated Universal Time) with a UTC designator (“Z”), for example: \"2017-08-10T01:08:34Z\".",
+            "description": "A successful response provides an array of training status details for a LUIS app that you submitted for training. Each element in the response array provides training status for a model (intent or entity) in the LUIS app. Note: Training status is not provided for prebuilt entities because they are pretrained. The \"modelId\" property identifies which intent or entity the training status corresponds to. To get the name and type of each model, use the models API which has a request URL in this format: https://westus.api.cognitive.microsoft.com/luis/api/v2.0/apps/{appId}/versions/{versionId}/models The details property for each model can contain the following fields: \"statusId\": An integer from 0 to 3 that corresponds to the value of the status field. \"status\": A string with one of the following values: “Success”, “UpToDate”, “InProgress”, “Fail”. If the status is “Fail”, the \"failureReason\" property provides the reason for failure. \"exampleCount\": The number of examples used for training. In the case of the None intent or prebuilt domain intents and entities, this number includes example provided internally by the system as well as examples you added to your LUIS app. \"failureReason\": A string that indicates the reason training failed.  The value \"FewLabels\" means that no labeled examples were provided for training. \"trainingDateTime\": A string indicating the time the model was last trained. The value uses the ISO 8601 format for representing times in UTC (Coordinated Universal Time) with a UTC designator (“Z”), for example: \"2017-08-10T01:08:34Z\".",
             "schema": {
               "$ref": "#/definitions/ModelTrainingInfoList"
             }
@@ -2919,7 +2952,7 @@
     },
     "/apps/{appId}/settings": {
       "get": {
-        "description": "Get the application settings",
+        "description": "Get the application settings.",
         "operationId": "Apps_GetApplicationSettings",
         "parameters": [
           {
@@ -2928,7 +2961,7 @@
         ],
         "responses": {
           "200": {
-            "description": "An object containing the application settings.",
+            "description": "The application settings.",
             "schema": {
               "$ref": "#/definitions/ApplicationSettings"
             }
@@ -2950,7 +2983,7 @@
         }
       },
       "put": {
-        "description": "Updates the application settings",
+        "description": "Updates the application settings.",
         "operationId": "Apps_UpdateApplicationSettings",
         "parameters": [
           {
@@ -3005,7 +3038,7 @@
             "schema": {
               "type": "string"
             },
-            "description": "The utterance text to delete"
+            "description": "The utterance text to delete."
           }
         ],
         "consumes": [
@@ -3030,14 +3063,14 @@
       }
     },
     "/apps/{appId}/permissions": {
-      "parameters": [
-        {
-          "$ref": "#/parameters/AppIdInPath"
-        }
-      ],
       "get": {
         "description": "Gets the list of user emails that have permissions to access your application.",
         "operationId": "Permissions_GetApplicationUserAccessList",
+        "parameters": [
+          {
+            "$ref": "#/parameters/AppIdInPath"
+          }
+        ],
         "responses": {
           "200": {
             "description": "The list includes a single owner. All collaborators are listed in the emails array.",
@@ -3099,7 +3132,7 @@
         }
       },
       "delete": {
-        "description": "Removed a user to the allowed list of users to access this LUIS application. Users are removed using their email address.",
+        "description": "Removes a user from the allowed list of users to access this LUIS application. Users are removed using their email address.",
         "operationId": "Permissions_RemoveUserFromAccessList",
         "parameters": [
           {
@@ -3175,7 +3208,7 @@
     },
     "/apps/{appId}/endpoints": {
       "get": {
-        "description": "Returns the available endpoint deployment regions and URLs",
+        "description": "Returns the available endpoint deployment regions and URLs.",
         "operationId": "Apps_GetEndpoints",
         "parameters": [
           {
@@ -3184,7 +3217,7 @@
         ],
         "responses": {
           "200": {
-            "description": "Returns a list of endpoints regions and their corresponding endpoint URL",
+            "description": "Returns a list of endpoints regions and their corresponding endpoint URL.",
             "schema": {
               "$ref": "#/definitions/AvailableEndpoints"
             }
@@ -3208,7 +3241,7 @@
     },
     "/apps/{appId}/versions/{versionId}/closedlists/{clEntityId}/sublists": {
       "post": {
-        "description": "Adds a list to an existing closed list",
+        "description": "Adds a list to an existing closed list.",
         "operationId": "Model_AddSubList",
         "parameters": [
           {
@@ -3220,7 +3253,7 @@
           {
             "name": "clEntityId",
             "in": "path",
-            "description": "Format - guid. The closed list entity extractor ID.",
+            "description": "The closed list entity extractor ID.",
             "required": true,
             "type": "string",
             "format": "uuid"
@@ -3240,7 +3273,7 @@
         ],
         "responses": {
           "201": {
-            "description": "The id of the newly created list",
+            "description": "The ID of the newly created list.",
             "schema": {
               "type": "integer",
               "example": 90440
@@ -3281,7 +3314,7 @@
             "schema": {
               "$ref": "#/definitions/PrebuiltDomainCreateBaseObject"
             },
-            "description": "A prebuilt domain create object containing the name of the domain"
+            "description": "A prebuilt domain create object containing the name of the domain."
           }
         ],
         "consumes": [
@@ -3312,16 +3345,8 @@
       }
     },
     "/apps/{appId}/versions/{versionId}/customprebuiltintents": {
-      "parameters": [
-        {
-          "$ref": "#/parameters/AppIdInPath"
-        },
-        {
-          "$ref": "#/parameters/VersionIdInPath"
-        }
-      ],
       "post": {
-        "description": "Adds a custom prebuilt intent model to the application",
+        "description": "Adds a custom prebuilt intent model to the application.",
         "operationId": "Model_AddCustomPrebuiltIntentModel",
         "parameters": [
           {
@@ -3368,8 +3393,16 @@
         }
       },
       "get": {
-        "description": "Gets custom prebuilt intents information of this application",
+        "description": "Gets custom prebuilt intents information of this application.",
         "operationId": "Model_GetCustomPrebuiltDomainIntentsInfo",
+        "parameters": [
+          {
+            "$ref": "#/parameters/AppIdInPath"
+          },
+          {
+            "$ref": "#/parameters/VersionIdInPath"
+          }
+        ],
         "responses": {
           "200": {
             "description": "Returns a list of all custom prebuilt intents and their representations.",
@@ -3395,16 +3428,8 @@
       }
     },
     "/apps/{appId}/versions/{versionId}/customprebuiltentities": {
-      "parameters": [
-        {
-          "$ref": "#/parameters/AppIdInPath"
-        },
-        {
-          "$ref": "#/parameters/VersionIdInPath"
-        }
-      ],
       "post": {
-        "description": "Adds a custom prebuilt entity model to the application",
+        "description": "Adds a custom prebuilt entity model to the application.",
         "operationId": "Model_AddCustomPrebuiltEntityModel",
         "parameters": [
           {
@@ -3451,8 +3476,16 @@
         }
       },
       "get": {
-        "description": "Gets all custom prebuilt entities information of this application",
+        "description": "Gets all custom prebuilt entities information of this application.",
         "operationId": "Model_GetCustomPrebuiltDomainEntitiesInfo",
+        "parameters": [
+          {
+            "$ref": "#/parameters/AppIdInPath"
+          },
+          {
+            "$ref": "#/parameters/VersionIdInPath"
+          }
+        ],
         "responses": {
           "200": {
             "description": "Returns a list of all custom prebuilt entities and their representations.",
@@ -3479,7 +3512,7 @@
     },
     "/apps/{appId}/versions/{versionId}/customprebuiltmodels": {
       "get": {
-        "description": "Gets all custom prebuilt models information of this application",
+        "description": "Gets all custom prebuilt models information of this application.",
         "operationId": "Model_GetCustomPrebuiltDomainModelsInfo",
         "parameters": [
           {
@@ -3527,7 +3560,7 @@
           {
             "name": "domainName",
             "in": "path",
-            "description": "Domain name",
+            "description": "Domain name.",
             "required": true,
             "type": "string"
           }
@@ -3552,11 +3585,11 @@
     },
     "/apps/customprebuiltdomains": {
       "get": {
-        "description": "Gets all the available custom prebuilt domains for all cultures",
+        "description": "Gets all the available custom prebuilt domains for all cultures.",
         "operationId": "Apps_GetAvailableCustomPrebuiltDomains",
         "responses": {
           "200": {
-            "description": "Returns a list of all custom prebuilt domains and their intents/entities representation",
+            "description": "Returns a list of all custom prebuilt domains and their intents/entities representation.",
             "schema": {
               "$ref": "#/definitions/PrebuiltDomainsList"
             }
@@ -3585,7 +3618,7 @@
             "name": "prebuiltDomainCreateObject",
             "in": "body",
             "required": true,
-            "description": "A prebuilt domain create object containing the name and culture of the domain",
+            "description": "A prebuilt domain create object containing the name and culture of the domain.",
             "schema": {
               "$ref": "#/definitions/PrebuiltDomainCreateObject"
             }
@@ -3621,20 +3654,20 @@
     },
     "/apps/customprebuiltdomains/{culture}": {
       "get": {
-        "description": "Gets all the available custom prebuilt domains for a specific culture",
+        "description": "Gets all the available custom prebuilt domains for a specific culture.",
         "operationId": "Apps_GetAvailableCustomPrebuiltDomainsForCulture",
         "parameters": [
           {
             "name": "culture",
             "in": "path",
-            "description": "Format - string. Culture",
+            "description": "Culture.",
             "required": true,
             "type": "string"
           }
         ],
         "responses": {
           "200": {
-            "description": "Returns a list of all domains and their intents/entities representation for a specific culture",
+            "description": "Returns a list of all domains and their intents/entities representation for a specific culture.",
             "schema": {
               "$ref": "#/definitions/PrebuiltDomainsList"
             }
@@ -3673,7 +3706,7 @@
           {
             "name": "hChildId",
             "in": "path",
-            "description": "Format - guid. The hierarchical entity extractor child ID.",
+            "description": "The hierarchical entity extractor child ID.",
             "required": true,
             "type": "string",
             "format": "uuid"
@@ -3719,7 +3752,7 @@
             "name": "hChildId",
             "in": "path",
             "required": true,
-            "description": "Format - guid. The hierarchical entity extractor child ID.",
+            "description": "The hierarchical entity extractor child ID.",
             "type": "string",
             "format": "uuid"
           },
@@ -3774,7 +3807,7 @@
           {
             "name": "hChildId",
             "in": "path",
-            "description": "Format - guid. The hierarchical entity extractor child ID.",
+            "description": "The hierarchical entity extractor child ID.",
             "required": true,
             "type": "string",
             "format": "uuid"
@@ -3929,7 +3962,7 @@
           {
             "name": "cChildId",
             "in": "path",
-            "description": "Format - guid. The hierarchical entity extractor child ID.",
+            "description": "The hierarchical entity extractor child ID.",
             "required": true,
             "type": "string",
             "format": "uuid"
@@ -4016,7 +4049,7 @@
       },
       "example": {
         "name": "MyFirstDummyApp",
-        "description": "This is my first dummy application",
+        "description": "This is my first dummy application.",
         "culture": "en-us",
         "usageScenario": "IoT",
         "domain": "Comics",
@@ -4229,7 +4262,7 @@
       },
       "example": {
         "name": "MyFirstRenamedDummyAp",
-        "description": "This is my first modified dummy description"
+        "description": "This is my first modified dummy description."
       }
     },
     "Channel": {
@@ -5108,11 +5141,11 @@
         },
         "text": {
           "type": "string",
-          "description": "what's the weather like in seattle?"
+          "description": "The utterance. E.g.: what's the weather like in seattle?"
         },
         "tokenizedText": {
           "type": "array",
-          "description": "the utterance tokenized",
+          "description": "the utterance tokenized.",
           "items": {
             "type": "string"
           }
@@ -5151,11 +5184,11 @@
       "properties": {
         "text": {
           "type": "string",
-          "description": "what's the weather like in seattle?"
+          "description": "The utterance. E.g.: what's the weather like in seattle?"
         },
         "tokenizedText": {
           "type": "array",
-          "description": "the utterance tokenized",
+          "description": "the utterance tokenized.",
           "items": {
             "type": "string"
           }
@@ -5185,11 +5218,11 @@
       "properties": {
         "text": {
           "type": "string",
-          "description": "what's the weather like in seattle?"
+          "description": "The utterance. E.g.: what's the weather like in seattle?"
         },
         "tokenizedText": {
           "type": "array",
-          "description": "the utterance tokenized",
+          "description": "the utterance tokenized.",
           "items": {
             "type": "string"
           }
@@ -5979,7 +6012,7 @@
       "required": true,
       "type": "string",
       "format": "uuid",
-      "description": "Format - guid. The application ID.",
+      "description": "The application ID.",
       "x-ms-parameter-location": "method"
     },
     "VersionIdInPath": {
@@ -5993,7 +6026,7 @@
     "CEntityIdInPath": {
       "name": "cEntityId",
       "in": "path",
-      "description": "Format - guid. The hierarchical entity extractor ID.",
+      "description": "The hierarchical entity extractor ID.",
       "required": true,
       "type": "string",
       "format": "uuid",
@@ -6002,7 +6035,7 @@
     "HEntityIdInPath": {
       "name": "hEntityId",
       "in": "path",
-      "description": "Format - guid. The hierarchical entity extractor ID.",
+      "description": "The hierarchical entity extractor ID.",
       "required": true,
       "type": "string",
       "format": "uuid",
@@ -6011,7 +6044,7 @@
     "IntentIdInPath": {
       "name": "intentId",
       "in": "path",
-      "description": "Format - guid. The intent classifier ID.",
+      "description": "The intent classifier ID.",
       "required": true,
       "type": "string",
       "format": "uuid",
