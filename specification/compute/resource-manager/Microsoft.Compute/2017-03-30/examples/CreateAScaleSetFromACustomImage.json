@@ -1,7 +1,7 @@
 {
   "parameters": {
     "subscriptionId": "{subscription-id}",
-    "resourceGroupName": "{resource-group-name}",
+    "resourceGroupName": "myResourceGroup",
     "vmScaleSetName": "{vmss-name}",
     "api-version": "2017-03-30",
     "parameters": {
@@ -16,7 +16,7 @@
         "virtualMachineProfile": {
           "storageProfile": {
             "imageReference": {
-              "id": "/subscriptions/{subscription-id}/resourceGroups/{resource-group-name}/providers/Microsoft.Compute/images/{existing-custom-image-name}"
+              "id": "/subscriptions/{subscription-id}/resourceGroups/myResourceGroup/providers/Microsoft.Compute/images/{existing-custom-image-name}"
             },
             "osDisk": {
               "caching": "ReadWrite",
@@ -42,7 +42,7 @@
                       "name": "{vmss-name}",
                       "properties": {
                         "subnet": {
-                          "id": "/subscriptions/{subscription-id}/resourceGroups/{resource-group-name}/providers/Microsoft.Network/virtualNetworks/{existing-virtual-network-name}/subnets/{existing-subnet-name}"
+                          "id": "/subscriptions/{subscription-id}/resourceGroups/myResourceGroup/providers/Microsoft.Network/virtualNetworks/{existing-virtual-network-name}/subnets/{existing-subnet-name}"
                         }
                       }
                     }
@@ -74,7 +74,7 @@
           "virtualMachineProfile": {
             "storageProfile": {
               "imageReference": {
-                "id": "/subscriptions/{subscription-id}/resourceGroups/{resource-group-name}/providers/Microsoft.Compute/images/nsgcustom"
+                "id": "/subscriptions/{subscription-id}/resourceGroups/myResourceGroup/providers/Microsoft.Compute/images/nsgcustom"
               },
               "osDisk": {
                 "caching": "ReadWrite",
@@ -106,7 +106,7 @@
                         "name": "{vmss-name}",
                         "properties": {
                           "subnet": {
-                            "id": "/subscriptions/{subscription-id}/resourceGroups/{resource-group-name}/providers/Microsoft.Network/virtualNetworks/nsgExistingVnet/subnets/nsgExistingSubnet"
+                            "id": "/subscriptions/{subscription-id}/resourceGroups/myResourceGroup/providers/Microsoft.Network/virtualNetworks/nsgExistingVnet/subnets/nsgExistingSubnet"
                           },
                           "privateIPAddressVersion": "IPv4"
                         }
@@ -125,7 +125,7 @@
         },
         "location": "westus",
         "type": "Microsoft.Compute/virtualMachineScaleSets",
-        "id": "/subscriptions/{subscription-id}/resourceGroups/{resource-group-name}/providers/Microsoft.Compute/virtualMachineScaleSets/{vmss-name}"
+        "id": "/subscriptions/{subscription-id}/resourceGroups/myResourceGroup/providers/Microsoft.Compute/virtualMachineScaleSets/{vmss-name}"
       }
     }
   }

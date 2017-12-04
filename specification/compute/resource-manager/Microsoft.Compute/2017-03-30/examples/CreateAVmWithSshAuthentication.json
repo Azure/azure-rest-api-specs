@@ -1,7 +1,7 @@
 {
   "parameters": {
     "subscriptionId": "{subscription-id}",
-    "resourceGroupName": "{resource-group-name}",
+    "resourceGroupName": "myResourceGroup",
     "vmName": "myVM",
     "api-version": "2017-03-30",
     "parameters": {
@@ -44,7 +44,7 @@
         "networkProfile": {
           "networkInterfaces": [
             {
-              "id": "/subscriptions/{subscription-id}/resourceGroups/{resource-group-name}/providers/Microsoft.Network/networkInterfaces/{existing-nic-name}",
+              "id": "/subscriptions/{subscription-id}/resourceGroups/myResourceGroup/providers/Microsoft.Network/networkInterfaces/{existing-nic-name}",
               "properties": {
                 "primary": true
               }
@@ -58,7 +58,7 @@
   "responses": {
     "200": {
       "body": {
-        "id": "/subscriptions/{subscription-id}/resourceGroups/{resource-group-name}/providers/Microsoft.Compute/virtualMachines/myVM",
+        "id": "/subscriptions/{subscription-id}/resourceGroups/myResourceGroup/providers/Microsoft.Compute/virtualMachines/myVM",
         "type": "Microsoft.Compute/virtualMachines",
         "properties": {
           "osProfile": {
@@ -80,7 +80,7 @@
           "networkProfile": {
             "networkInterfaces": [
               {
-                "id": "/subscriptions/{subscription-id}/resourceGroups/{resource-group-name}/providers/Microsoft.Network/networkInterfaces/nsgExistingNic",
+                "id": "/subscriptions/{subscription-id}/resourceGroups/myResourceGroup/providers/Microsoft.Network/networkInterfaces/nsgExistingNic",
                 "properties": {
                   "primary": true
                 }
@@ -117,7 +117,7 @@
     },
     "201": {
       "body": {
-        "id": "/subscriptions/{subscription-id}/resourceGroups/{resource-group-name}/providers/Microsoft.Compute/virtualMachines/myVM",
+        "id": "/subscriptions/{subscription-id}/resourceGroups/myResourceGroup/providers/Microsoft.Compute/virtualMachines/myVM",
         "type": "Microsoft.Compute/virtualMachines",
         "properties": {
           "osProfile": {
@@ -139,7 +139,7 @@
           "networkProfile": {
             "networkInterfaces": [
               {
-                "id": "/subscriptions/{subscription-id}/resourceGroups/{resource-group-name}/providers/Microsoft.Network/networkInterfaces/nsgExistingNic",
+                "id": "/subscriptions/{subscription-id}/resourceGroups/myResourceGroup/providers/Microsoft.Network/networkInterfaces/nsgExistingNic",
                 "properties": {
                   "primary": true
                 }

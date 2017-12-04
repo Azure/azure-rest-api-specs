@@ -1,7 +1,7 @@
 {
   "parameters": {
     "subscriptionId": "{subscription-id}",
-    "resourceGroupName": "{resource-group-name}",
+    "resourceGroupName": "myResourceGroup",
     "vmScaleSetName": "{vmss-name}",
     "api-version": "2017-12-01",
     "parameters": {
@@ -44,7 +44,7 @@
                       "name": "{vmss-name}",
                       "properties": {
                         "subnet": {
-                          "id": "/subscriptions/{subscription-id}/resourceGroups/{resource-group-name}/providers/Microsoft.Network/virtualNetworks/{existing-virtual-network-name}/subnets/{existing-subnet-name}"
+                          "id": "/subscriptions/{subscription-id}/resourceGroups/myResourceGroup/providers/Microsoft.Network/virtualNetworks/{existing-virtual-network-name}/subnets/{existing-subnet-name}"
                         }
                       }
                     }
@@ -75,7 +75,7 @@
           "name": "Standard_D1_v2"
         },
         "name": "{vmss-name}",
-        "id": "/subscriptions/{subscription-id}/resourceGroups/{resource-group-name}/providers/Microsoft.Compute/virtualMachineScaleSets/{vmss-name}",
+        "id": "/subscriptions/{subscription-id}/resourceGroups/myResourceGroup/providers/Microsoft.Compute/virtualMachineScaleSets/{vmss-name}",
         "plan": {
           "publisher": "microsoft-ads",
           "product": "standard-data-science-vm",
@@ -125,7 +125,7 @@
                         "name": "{vmss-name}",
                         "properties": {
                           "subnet": {
-                            "id": "/subscriptions/{subscription-id}/resourceGroups/{resource-group-name}/providers/Microsoft.Network/virtualNetworks/nsgExistingVnet/subnets/nsgExistingSubnet"
+                            "id": "/subscriptions/{subscription-id}/resourceGroups/myResourceGroup/providers/Microsoft.Network/virtualNetworks/nsgExistingVnet/subnets/nsgExistingSubnet"
                           },
                           "privateIPAddressVersion": "IPv4"
                         }

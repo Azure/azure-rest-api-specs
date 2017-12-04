@@ -1,7 +1,7 @@
 {
   "parameters": {
     "subscriptionId": "{subscription-id}",
-    "resourceGroupName": "{resource-group-name}",
+    "resourceGroupName": "myResourceGroup",
     "vmName": "myVM",
     "api-version": "2017-03-30",
     "parameters": {
@@ -29,7 +29,7 @@
         "networkProfile": {
           "networkInterfaces": [
             {
-              "id": "/subscriptions/{subscription-id}/resourceGroups/{resource-group-name}/providers/Microsoft.Network/networkInterfaces/{existing-nic-name}",
+              "id": "/subscriptions/{subscription-id}/resourceGroups/myResourceGroup/providers/Microsoft.Network/networkInterfaces/{existing-nic-name}",
               "properties": {
                 "primary": true
               }
@@ -42,7 +42,7 @@
           "adminPassword": "{your-password}"
         },
         "availabilitySet": {
-          "id": "/subscriptions/{subscription-id}/resourceGroups/{resource-group-name}/providers/Microsoft.Compute/availabilitySets/{existing-availability-set-name}"
+          "id": "/subscriptions/{subscription-id}/resourceGroups/myResourceGroup/providers/Microsoft.Compute/availabilitySets/{existing-availability-set-name}"
         }
       },
       "name": "myVM"
@@ -51,7 +51,7 @@
   "responses": {
     "200": {
       "body": {
-        "id": "/subscriptions/{subscription-id}/resourceGroups/{resource-group-name}/providers/Microsoft.Compute/virtualMachines/myVM",
+        "id": "/subscriptions/{subscription-id}/resourceGroups/myResourceGroup/providers/Microsoft.Compute/virtualMachines/myVM",
         "type": "Microsoft.Compute/virtualMachines",
         "properties": {
           "osProfile": {
@@ -66,7 +66,7 @@
           "networkProfile": {
             "networkInterfaces": [
               {
-                "id": "/subscriptions/{subscription-id}/resourceGroups/{resource-group-name}/providers/Microsoft.Network/networkInterfaces/nsgExistingNic",
+                "id": "/subscriptions/{subscription-id}/resourceGroups/myResourceGroup/providers/Microsoft.Network/networkInterfaces/nsgExistingNic",
                 "properties": {
                   "primary": true
                 }
@@ -96,7 +96,7 @@
             "vmSize": "Standard_D1_v2"
           },
           "availabilitySet": {
-            "id": "/subscriptions/{subscription-id}/resourceGroups/{resource-group-name}/providers/Microsoft.Compute/availabilitySets/NSGEXISTINGAS"
+            "id": "/subscriptions/{subscription-id}/resourceGroups/myResourceGroup/providers/Microsoft.Compute/availabilitySets/NSGEXISTINGAS"
           },
           "provisioningState": "Creating"
         },
@@ -106,7 +106,7 @@
     },
     "201": {
       "body": {
-        "id": "/subscriptions/{subscription-id}/resourceGroups/{resource-group-name}/providers/Microsoft.Compute/virtualMachines/myVM",
+        "id": "/subscriptions/{subscription-id}/resourceGroups/myResourceGroup/providers/Microsoft.Compute/virtualMachines/myVM",
         "type": "Microsoft.Compute/virtualMachines",
         "properties": {
           "osProfile": {
@@ -121,7 +121,7 @@
           "networkProfile": {
             "networkInterfaces": [
               {
-                "id": "/subscriptions/{subscription-id}/resourceGroups/{resource-group-name}/providers/Microsoft.Network/networkInterfaces/nsgExistingNic",
+                "id": "/subscriptions/{subscription-id}/resourceGroups/myResourceGroup/providers/Microsoft.Network/networkInterfaces/nsgExistingNic",
                 "properties": {
                   "primary": true
                 }
@@ -151,7 +151,7 @@
             "vmSize": "Standard_D1_v2"
           },
           "availabilitySet": {
-            "id": "/subscriptions/{subscription-id}/resourceGroups/{resource-group-name}/providers/Microsoft.Compute/availabilitySets/NSGEXISTINGAS"
+            "id": "/subscriptions/{subscription-id}/resourceGroups/myResourceGroup/providers/Microsoft.Compute/availabilitySets/NSGEXISTINGAS"
           },
           "provisioningState": "Creating"
         },
