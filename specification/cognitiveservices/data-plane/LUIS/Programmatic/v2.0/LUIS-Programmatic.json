@@ -3715,8 +3715,11 @@
             "in": "body",
             "required": true,
             "schema": {
-              "name": {
-                "type": "string"
+              "type": "object",
+              "properties": {
+                "name": {
+                  "type": "string"
+                }
               }
             },
             "description": "Model object containing new name of the hierarchical entity child."
@@ -3800,8 +3803,11 @@
             "in": "body",
             "required": true,
             "schema": {
-              "name": {
-                "type": "string"
+              "type": "object",
+                "properties": {
+                "name": {
+                  "type": "string"
+                }
               }
             },
             "description": "A model object containing the name of the new hierarchical child model."
@@ -3851,9 +3857,13 @@
           {
             "name": "compositeChildModelCreateObject",
             "in": "body",
+            "required": true,
             "schema": {
-              "name": {
-                "type": "string"
+              "type": "object",
+              "properties": {
+                "name": {
+                  "type": "string"
+                }
               }
             },
             "description": "A model object containing the name of the new composite child model."
