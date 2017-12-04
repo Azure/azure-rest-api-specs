@@ -840,18 +840,16 @@
       }
     },
     "/apps/{appId}/versions/{versionId}/hierarchicalentities": {
-      "parameters": [
-        {
-          "$ref": "#/parameters/AppIdInPath"
-        },
-        {
-          "$ref": "#/parameters/VersionIdInPath"
-        }
-      ],
       "post": {
         "description": "Adds a hierarchical entity extractor to the application version.",
         "operationId": "Model_CreateHierarchicalEntityExtractor",
         "parameters": [
+          {
+            "$ref": "#/parameters/AppIdInPath"
+          },
+          {
+            "$ref": "#/parameters/VersionIdInPath"
+          },
           {
             "name": "hierarchicalModelCreateObject",
             "in": "body",
@@ -891,6 +889,12 @@
         "description": "Gets information about the hierarchical entity models.",
         "operationId": "Model_GetApplicationVersionHierarchicalEntityInfos",
         "parameters": [
+          {
+            "$ref": "#/parameters/AppIdInPath"
+          },
+          {
+            "$ref": "#/parameters/VersionIdInPath"
+          },
           {
             "$ref": "#/parameters/SkipInPath"
           },
