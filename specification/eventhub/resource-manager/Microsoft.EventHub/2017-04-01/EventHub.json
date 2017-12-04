@@ -664,6 +664,55 @@
         }
       }
     },
+	"/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.EventHub/namespaces/{namespaceName}/disasterRecoveryConfigs/CheckNameAvailability": {
+      "post": {
+        "tags": [
+          "DisasterRecoveryConfigs"
+        ],
+        "operationId": "DisasterRecoveryConfigs_CheckNameAvailability",
+        "x-ms-examples": {
+          "NamespacesCheckNameAvailability": { "$ref": "./examples/NameSpaces/EHNameSpaceCheckNameAvailability.json" }
+        },
+        "description": "Check the give Namespace name availability.",
+        "parameters": [
+		  {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/resourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/namespaceNameParameter"
+          },
+          {
+            "name": "parameters",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/CheckNameAvailabilityParameter"
+            },
+            "description": "Parameters to check availability of the given Alias name"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "check availability returned successfully.",
+            "schema": {
+              "$ref": "#/definitions/CheckNameAvailabilityResult"
+            }
+          },
+          "default": {
+            "description": "Eventhub error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        }
+      }
+    },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.EventHub/namespaces/{namespaceName}/disasterRecoveryConfigs": {
       "get": {
         "tags": [
@@ -911,6 +960,144 @@
         "responses": {
           "200": {
             "description": "Failover operation is successful."
+          },
+          "default": {
+            "description": "Eventhub error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        }
+      }
+    },
+	"/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.EventHub/namespaces/{namespaceName}/disasterRecoveryConfigs/{alias}/AuthorizationRules": {
+      "get": {
+        "tags": [
+          "DisasterRecoveryConfigs"
+        ],
+        "operationId": "DisasterRecoveryConfigs_ListAuthorizationRules",
+        "x-ms-examples": {
+          "ListAuthorizationRules": { "$ref": "./examples/NameSpaces/EHNameSpaceAutorizationRuleListAll.json" }
+        },
+        "description": "Gets a list of authorization rules for a Namespace.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/resourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/namespaceNameParameter"
+          },
+		  {
+            "$ref": "#/parameters/aliasNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Namespace AuthorizationRule successfully returned.",
+            "schema": {
+              "$ref": "#/definitions/AuthorizationRuleListResult"
+            }
+          },
+          "default": {
+            "description": "Eventhub error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+	"/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.EventHub/namespaces/{namespaceName}/disasterRecoveryConfigs/{alias}/AuthorizationRules/{authorizationRuleName}": {      
+      "get": {
+        "tags": [
+          "DisasterRecoveryConfigs"
+        ],
+        "operationId": "DisasterRecoveryConfigs_GetAuthorizationRule",
+        "x-ms-examples": {
+          "NameSpaceAutorizationRuleGet": { "$ref": "./examples/NameSpaces/EHNameSpaceAutorizationRuleGet.json" }
+        },
+        "description": "Gets an AuthorizationRule for a Namespace by rule name.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/resourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/namespaceNameParameter"
+          },		  
+		  {
+            "$ref": "#/parameters/aliasNameParameter"
+          },
+          {
+            "$ref": "#/parameters/authorizationRuleNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Alias Namespace AuthorizationRule returned successfully.",
+            "schema": {
+              "$ref": "#/definitions/AuthorizationRule"
+            }
+          },
+          "default": {
+            "description": "Eventhub error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        }
+      }
+    },
+	"/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.EventHub/namespaces/{namespaceName}/disasterRecoveryConfigs/{alias}/AuthorizationRules/{authorizationRuleName}/listKeys": {
+      "post": {
+        "tags": [
+          "DisasterRecoveryConfigs"
+        ],
+        "operationId": "DisasterRecoveryConfigs_ListKeys",
+        "x-ms-examples": {
+          "NameSpaceAuthorizationRuleListKey": { "$ref": "./examples/NameSpaces/EHNameSpaceAuthorizationRuleListKey.json" }
+        },
+        "description": "Gets the primary and secondary connection strings for the Namespace.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/resourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/namespaceNameParameter"
+          },		  
+		  {
+            "$ref": "#/parameters/aliasNameParameter"
+          },
+          {
+            "$ref": "#/parameters/authorizationRuleNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Connection strings returned successfully.",
+            "schema": {
+              "$ref": "#/definitions/AccessKeys"
+            }
           },
           "default": {
             "description": "Eventhub error response describing why the operation failed.",
@@ -1887,14 +2074,12 @@
             "messageRetentionInDays": {
               "format": "int64",
               "type": "integer",
-              "maximum": 7,
               "minimum": 1,
               "description": "Number of days to retain the events for this Event Hub, value should be 1 to 7 days"
             },
             "partitionCount": {
               "format": "int64",
               "type": "integer",
-              "maximum": 32,
               "minimum": 1,
               "description": "Number of partitions created for the Event Hub, allowed values are from 1 to 32 partitions."
             },
@@ -2193,7 +2378,11 @@
             },
             "partnerNamespace": {
               "type": "string",
-              "description": "Primary/Secondary eventhub namespace name, which is part of GEO DR pairning"
+              "description": "ARM Id of the Primary/Secondary eventhub namespace name, which is part of GEO DR pairning"
+            },
+			"alternateName": {
+              "type": "string",
+              "description": "Alternate name specified when alias and namespace names are same."
             },
             "role": {
               "readOnly": true,
