@@ -6018,7 +6018,7 @@
     "VersionIdInPath": {
       "name": "versionId",
       "in": "path",
-      "description": "The version ID of the task.",
+      "description": "The version ID.",
       "required": true,
       "type": "string",
       "x-ms-parameter-location": "method"
@@ -6026,7 +6026,7 @@
     "CEntityIdInPath": {
       "name": "cEntityId",
       "in": "path",
-      "description": "The hierarchical entity extractor ID.",
+      "description": "The composite entity extractor ID.",
       "required": true,
       "type": "string",
       "format": "uuid",
@@ -6056,6 +6056,7 @@
       "description": "The number of entries to skip. Default value is 0.",
       "type": "integer",
       "default": 0,
+      "minimum": 0,
       "x-ms-parameter-location": "method"
     },
     "TakeInPath": {
@@ -6064,6 +6065,8 @@
       "description": "The number of entries to return. Maximum page size is 500. Default is 100.",
       "type": "integer",
       "default": 100,
+      "minimum": 0,
+      "maximum": 500,
       "x-ms-parameter-location": "method"
     }
   }
