@@ -30,14 +30,6 @@
   ],
   "paths": {
     "/apps/{appId}/versions/{versionId}/patterns": {
-      "parameters": [
-        {
-          "$ref": "#/parameters/AppIdInPath"
-        },
-        {
-          "$ref": "#/parameters/VersionIdInPath"
-        }
-      ],
       "post": {
         "description": "Creates a new pattern feature.",
         "operationId": "Features_CreatePatternFeature",
@@ -88,6 +80,12 @@
         "description": "Gets all application version pattern features.",
         "operationId": "Features_GetApplicationVersionPatternFeatures",
         "parameters": [
+          {
+            "$ref": "#/parameters/AppIdInPath"
+          },
+          {
+            "$ref": "#/parameters/VersionIdInPath"
+          },
           {
             "$ref": "#/parameters/SkipInPath"
           },
