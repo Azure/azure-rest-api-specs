@@ -2825,34 +2825,6 @@
         }
       }
     },
-    "/programmatickey": {
-      "put": {
-        "description": "Resets the user programmatic key.",
-        "operationId": "User_ResetProgrammaticKey",
-        "responses": {
-          "200": {
-            "description": "The new programmatic key.",
-            "schema":{
-              "type": "string"
-            }
-          },
-          "default": {
-            "description": "Error Response.",
-            "schema": {
-              "$ref": "#/definitions/ErrorResponse"
-            }
-          }
-        },
-        "produces": [
-          "application/json"
-        ],
-        "x-ms-examples": {
-          "Successful Reset User Programmatic Key request": {
-            "$ref": "./examples/user/SuccessfulResetUserProgrammaticKeyRequest.json"
-          }
-        }
-      }
-    },
     "/apps/{appId}/versions/import": {
       "post": {
         "description": "Imports a new version into a LUIS application.",
