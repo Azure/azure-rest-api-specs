@@ -5807,7 +5807,7 @@
         "public": {
           "type": "boolean",
           "x-nullable": false,
-          "x-ms-client-name": "isPublic"          
+          "x-ms-client-name": "isPublic"
         }
       },
       "required": [ "id", "public" ]
@@ -5940,11 +5940,23 @@
         "type": "object"
       }
     },
-    "ApiError": {
+    "OperationError": {
       "type": "object",
       "properties": {
         "code": {
           "type": "string"
+        },
+        "message": {
+          "type": "string"
+        }
+      }
+    },
+    "ApiError": {
+      "type": "object",
+      "properties": {
+        "statusCode": {
+          "type": "string",
+          "x-ms-client-name": "code"
         },
         "message": {
           "type": "string"
