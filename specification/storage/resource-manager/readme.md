@@ -237,7 +237,7 @@ Please also specify `--python-sdks-folder=<path to the root directory of your az
 
 ``` yaml $(tag) == 'package-2015-06' && $(python)
 python:
-  namespace: azure.mgmt.storage.v2017_05_15
+  namespace: azure.mgmt.storage.v2015_06_15
   output-folder: $(python-sdks-folder)/azure-mgmt-storage/azure/mgmt/storage/v2015_06_15
 ```
 
