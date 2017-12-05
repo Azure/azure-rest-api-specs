@@ -5932,15 +5932,22 @@
     "ErrorResponse": {
       "type": "object",
       "properties": {
-        "statusCode": {
-          "type": "integer",
-          "example": "401",
-          "x-nullable": false
+        "errorType": {
+          "type": "string"
+        }
+      },
+      "additionalProperties": {
+        "type": "object"
+      }
+    },
+    "ApiError": {
+      "type": "object",
+      "properties": {
+        "code": {
+          "type": "string"
         },
         "message": {
-          "type": "string",
-          "x-nullable": false,
-          "example": "Access denied due to invalid subscription key. Make sure to provide a valid key for an active subscription."
+          "type": "string"
         }
       }
     },
