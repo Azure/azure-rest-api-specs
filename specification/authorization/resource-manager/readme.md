@@ -29,6 +29,15 @@ openapi-type: arm
 tag: package-2017-10-01-preview
 ```
 
+## Suppression
+``` yaml
+directive:
+  - suppress: OperationsAPIImplementation
+    reason: we do have a operations api as "/providers/Microsoft.Authorization/operations"
+    #where:
+    #  -   $.paths["/providers/Microsoft.Authorization/operations"]  
+
+```
 
 ### Tag: package-2015-07
 
