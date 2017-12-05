@@ -739,7 +739,8 @@
           "DeletedKeys"
         ],
         "operationId": "GetDeletedKeys",
-        "description": "List deleted keys in the specified vault. Authorization: Requires the keys/list permission.",
+        "summary": "Lists the deleted keys in the specified vault.",
+        "description": "Retrieves a list of the keys in the Key Vault as JSON Web Key structures that contain the public part of a deleted key. The Get Deleted Keys operation is applicable for soft-delete enabled vaults. It requires the keys/list permission to be enabled on this vault. While the operation can be invoked on any vault, it will return an error if invoked on a non soft-delete enabled vault.",
         "parameters": [
           {
             "name": "maxresults",
@@ -757,7 +758,7 @@
         ],
         "responses": {
           "200": {
-            "description": "A response message containing a list of deleted keys in the vault along with a link to the next page of deleted keys",
+            "description": "A response message containing a list of deleted keys in the vault along with a link to the next page of deleted keys.",
             "schema": {
               "$ref": "#/definitions/DeletedKeyListResult"
             }
@@ -780,14 +781,15 @@
           "DeletedKeys"
         ],
         "operationId": "GetDeletedKey",
-        "description": "Retrieves the deleted key information plus its attributes. Authorization: Requires the keys/get permission.",
+        "summary": "Gets the public part of a deleted key.",
+        "description": "The Get Deleted Key operation is applicable for soft-delete enabled vaults. It requires the keys/list permission to be enabled on this vault. While the operation can be invoked on any vault, it will return an error if invoked on a non soft-delete enabled vault.",
         "parameters": [
           {
             "name": "key-name",
             "in": "path",
             "required": true,
             "type": "string",
-            "description": "The name of the key"
+            "description": "The name of the key."
           },
           {
             "$ref": "#/parameters/ApiVersionParameter"
@@ -795,7 +797,7 @@
         ],
         "responses": {
           "200": {
-            "description": "A DeletedKeyBundle consisting of a WebKey plus its Attributes and deletion info",
+            "description": "A DeletedKeyBundle consisting of a WebKey plus its Attributes and deletion information.",
             "schema": {
               "$ref": "#/definitions/DeletedKeyBundle"
             }
@@ -813,7 +815,8 @@
           "DeletedKeys"
         ],
         "operationId": "PurgeDeletedKey",
-        "description": "Permanently deletes the specified key. aka purges the key. Authorization: Requires the keys/purge permission.",
+        "summary": "Permanently deletes the specified key.",
+        "description": "The Purge Deleted Key operation is applicable for soft-delete enabled vaults. It requires the keys/purge permission to be enabled on this vault. While the operation can be invoked on any vault, it will return an error if invoked on a non soft-delete enabled vault.",
         "parameters": [
           {
             "name": "key-name",
@@ -828,7 +831,7 @@
         ],
         "responses": {
           "204": {
-            "description": "No content signaling that the key was purged forever."
+            "description": "No content, signaling that the key was permanently purged."
           },
           "default": {
             "description": "Key Vault error response describing why the operation failed.",
@@ -845,14 +848,15 @@
           "DeletedKeys"
         ],
         "operationId": "RecoverDeletedKey",
-        "description": "Recovers the deleted key back to its current version under /keys. Authorization: Requires the keys/recover permission.",
+        "summary": "Recovers the deleted key to its latest version.",
+        "description": "The Recover Deleted Key operation is applicable for deleted keys in soft-delete enabled vaults. It recovers the deleted key back to its latest version under /keys. It requires the keys/recover permissions to be enabled on this vault. An attempt to recover an non-deleted key will return an error. Consider this the inverse of the delete operation on soft-delete enabled vaults.",
         "parameters": [
           {
             "name": "key-name",
             "in": "path",
             "required": true,
             "type": "string",
-            "description": "The name of the deleted key"
+            "description": "The name of the deleted key."
           },
           {
             "$ref": "#/parameters/ApiVersionParameter"
