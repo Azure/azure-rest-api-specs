@@ -1,6 +1,5 @@
 {
   "swagger": "2.0",
-
   "info": {
     "title": "Update Management API",
     "description": "APIs for managing software update configurations.",
@@ -9,17 +8,17 @@
     },
     "version": "2017-05-15-preview"
   },
-
-  "consumes": [ "application/json" ],
-
-  "produces": [ "application/json" ],
-
-  "schemes": [ "https" ],
-
+  "consumes": [
+    "application/json"
+  ],
+  "produces": [
+    "application/json"
+  ],
+  "schemes": [
+    "https"
+  ],
   "host": "management.azure.com",
-
   "basePath": "/",
-
   "security": [
     {
       "azure_auth": [
@@ -38,34 +37,41 @@
       }
     }
   },
-
   "paths": {
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Automation/automationAccounts/{automationAccountName}/softwareUpdateConfigurations/{softwareUpdateConfigurationName}": {
       "put": {
-        "tags": [ "Software Update Configuration" ],
+        "tags": [
+          "Software Update Configuration"
+        ],
         "description": "Create a new software update configuration with the name given in the URI.",
         "externalDocs": {
           "url": "http://aka.ms/azureautomationsdk/softwareupdateconfigurationoperations"
         },
         "x-ms-examples": {
-          "Create software update configuration": { "$ref": "./examples/softwareUpdateConfiguration/createSoftwareUpdateConfiguration.json" }
+          "Create software update configuration": {
+            "$ref": "./examples/softwareUpdateConfiguration/createSoftwareUpdateConfiguration.json"
+          }
         },
-        "operationId": "softwareUpdateConfigurations_Create",
+        "operationId": "SoftwareUpdateConfigurations_Create",
         "parameters": [
           {
-            "$ref": "./definitions.json#/parameters/subscriptionId"
+            "$ref": "../2015-10-31/definitions.json#/parameters/SubscriptionIdParameter"
           },
           {
-            "$ref": "./definitions.json#/parameters/resourceGroupName"
+            "$ref": "../2015-10-31/definitions.json#/parameters/ResourceGroupNameParameter"
           },
           {
             "$ref": "./definitions.json#/parameters/automationAccountName"
           },
           {
-            "$ref": "./definitions.json#/parameters/softwareUpdateConfigurationName"
+            "name": "softwareUpdateConfigurationName",
+            "description": "The name of the software update configuration to be created.",
+            "type": "string",
+            "required": true,
+            "in": "path"
           },
           {
-            "$ref": "./definitions.json#/parameters/apiVersion"
+            "$ref": "../2015-10-31/definitions.json#/parameters/ApiVersionParameter"
           },
           {
             "$ref": "./definitions.json#/parameters/clientRequestId"
@@ -104,33 +110,39 @@
           }
         }
       },
-
-
       "get": {
-        "tags": [ "Software Update Configuration" ],
+        "tags": [
+          "Software Update Configuration"
+        ],
         "description": "Get a single software update configuration by name.",
         "externalDocs": {
           "url": "http://aka.ms/azureautomationsdk/softwareupdateconfigurationoperations"
         },
         "x-ms-examples": {
-          "Get software update configuration by name": { "$ref": "./examples/softwareUpdateConfiguration/getSoftwareUpdateConfigurationByName.json" }
+          "Get software update configuration by name": {
+            "$ref": "./examples/softwareUpdateConfiguration/getSoftwareUpdateConfigurationByName.json"
+          }
         },
-        "operationId": "softwareUpdateConfigurations_GetByName",
+        "operationId": "SoftwareUpdateConfigurations_GetByName",
         "parameters": [
           {
-            "$ref": "./definitions.json#/parameters/subscriptionId"
+            "$ref": "../2015-10-31/definitions.json#/parameters/SubscriptionIdParameter"
           },
           {
-            "$ref": "./definitions.json#/parameters/resourceGroupName"
+            "$ref": "../2015-10-31/definitions.json#/parameters/ResourceGroupNameParameter"
           },
           {
             "$ref": "./definitions.json#/parameters/automationAccountName"
           },
           {
-            "$ref": "./definitions.json#/parameters/softwareUpdateConfigurationName"
+            "name": "softwareUpdateConfigurationName",
+            "description": "The name of the software update configuration to be created.",
+            "type": "string",
+            "required": true,
+            "in": "path"
           },
           {
-            "$ref": "./definitions.json#/parameters/apiVersion"
+            "$ref": "../2015-10-31/definitions.json#/parameters/ApiVersionParameter"
           },
           {
             "$ref": "./definitions.json#/parameters/clientRequestId"
@@ -148,32 +160,39 @@
           }
         }
       },
-
       "delete": {
-        "tags": [ "Software Update Configuration" ],
+        "tags": [
+          "Software Update Configuration"
+        ],
         "description": "delete a specific software update configuration.",
         "externalDocs": {
           "url": "http://aka.ms/azureautomationsdk/softwareupdateconfigurationoperations"
         },
         "x-ms-examples": {
-          "Delete software update configuration": { "$ref": "./examples/softwareUpdateConfiguration/deleteSoftwareUpdateConfiguration.json" }
+          "Delete software update configuration": {
+            "$ref": "./examples/softwareUpdateConfiguration/deleteSoftwareUpdateConfiguration.json"
+          }
         },
-        "operationId": "softwareUpdateConfigurations_Delete",
+        "operationId": "SoftwareUpdateConfigurations_Delete",
         "parameters": [
           {
-            "$ref": "./definitions.json#/parameters/subscriptionId"
+            "$ref": "../2015-10-31/definitions.json#/parameters/SubscriptionIdParameter"
           },
           {
-            "$ref": "./definitions.json#/parameters/resourceGroupName"
+            "$ref": "../2015-10-31/definitions.json#/parameters/ResourceGroupNameParameter"
           },
           {
             "$ref": "./definitions.json#/parameters/automationAccountName"
           },
           {
-            "$ref": "./definitions.json#/parameters/softwareUpdateConfigurationName"
+            "name": "softwareUpdateConfigurationName",
+            "description": "The name of the software update configuration to be created.",
+            "type": "string",
+            "required": true,
+            "in": "path"
           },
           {
-            "$ref": "./definitions.json#/parameters/apiVersion"
+            "$ref": "../2015-10-31/definitions.json#/parameters/ApiVersionParameter"
           },
           {
             "$ref": "./definitions.json#/parameters/clientRequestId"
@@ -192,31 +211,36 @@
         }
       }
     },
-
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Automation/automationAccounts/{automationAccountName}/softwareUpdateConfigurations": {
       "get": {
-        "tags": [ "Software Update Configuration" ],
+        "tags": [
+          "Software Update Configuration"
+        ],
         "description": "Get all software update configurations for the account.",
         "externalDocs": {
           "url": "http://aka.ms/azureautomationsdk/softwareupdateconfigurationoperations"
         },
         "x-ms-examples": {
-          "List software update configurations": { "$ref": "./examples/softwareUpdateConfiguration/listSoftwareUpdateConfigurations.json" },
-          "List software update configurations Targeting a specific azure virtual machine": { "$ref": "./examples/softwareUpdateConfiguration/listSoftwareUpdateConfigurationsByVm.json" }
+          "List software update configurations": {
+            "$ref": "./examples/softwareUpdateConfiguration/listSoftwareUpdateConfigurations.json"
+          },
+          "List software update configurations Targeting a specific azure virtual machine": {
+            "$ref": "./examples/softwareUpdateConfiguration/listSoftwareUpdateConfigurationsByVm.json"
+          }
         },
-        "operationId": "softwareUpdateConfigurations_List",
+        "operationId": "SoftwareUpdateConfigurations_List",
         "parameters": [
           {
-            "$ref": "./definitions.json#/parameters/subscriptionId"
+            "$ref": "../2015-10-31/definitions.json#/parameters/SubscriptionIdParameter"
           },
           {
-            "$ref": "./definitions.json#/parameters/resourceGroupName"
+            "$ref": "../2015-10-31/definitions.json#/parameters/ResourceGroupNameParameter"
           },
           {
             "$ref": "./definitions.json#/parameters/automationAccountName"
           },
           {
-            "$ref": "./definitions.json#/parameters/apiVersion"
+            "$ref": "../2015-10-31/definitions.json#/parameters/ApiVersionParameter"
           },
           {
             "$ref": "./definitions.json#/parameters/clientRequestId"
@@ -242,5 +266,5 @@
         }
       }
     }
-  }  
+  }
 }
