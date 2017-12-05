@@ -121,101 +121,6 @@
           }
         }
       }
-    },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/servers/{serverName}/auditingSettings/{blobAuditingPolicyName}/operationResults/{operationId}": {
-      "get": {
-        "tags": [
-          "BlobAuditing"
-        ],
-        "description": "Gets a blob auditing operation result.",
-        "operationId": "Servers_GetBlobAuditingOperationStatus",
-        "parameters": [
-          {
-            "$ref": "#/parameters/ResourceGroupParameter"
-          },
-          {
-            "$ref": "#/parameters/ServerNameParameter"
-          },
-          {
-            "$ref": "#/parameters/BlobAuditingPolicyNameParameter"
-          },
-          {
-            "name": "operationId",
-            "in": "path",
-            "description": "The server blob auditing operation id to retrieve.",
-            "required": true,
-            "type": "string",
-            "format": "uuid"
-          },
-          {
-            "$ref": "#/parameters/SubscriptionIdParameter"
-          },
-          {
-            "$ref": "#/parameters/ApiVersionParameter"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Successfully retrieved the server blob auditing operation result.",
-            "schema": {
-              "$ref": "#/definitions/BlobAuditingOperationResult"
-            }
-          },
-          "default": {
-            "description": "*** Error Responses: ***\n\n * 404 SubscriptionDoesNotHaveServer - The requested server was not found\n\n * 404 OperationIdNotFound - The operation with Id does not exist.\n\n * 405 ServerBlobAuditingOperationResultsNotImplemented - Operations on Server Auditing operation results are not enabled yet\n\n * 500 GetServerBlobAuditingOperationResultsFailed - Failed to get Auditing operation results"
-          }
-        },
-        "x-ms-examples": {
-          "Get a blob auditing operation result.": {
-            "$ref": "./examples/ServerBlobAuditingOperationResultsGet.json"
-          }
-        }
-      }
-    },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/servers/{serverName}/auditingSettings/{blobAuditingPolicyName}/operationResults": {
-      "get": {
-        "tags": [
-          "BlobAuditing"
-        ],
-        "description": "Gets a list of blob auditing operation results.",
-        "operationId": "Servers_ListBlobAuditingOperationStatus",
-        "parameters": [
-          {
-            "$ref": "#/parameters/ResourceGroupParameter"
-          },
-          {
-            "$ref": "#/parameters/ServerNameParameter"
-          },
-          {
-            "$ref": "#/parameters/BlobAuditingPolicyNameParameter"
-          },
-          {
-            "$ref": "#/parameters/SubscriptionIdParameter"
-          },
-          {
-            "$ref": "#/parameters/ApiVersionParameter"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Successfully retrieved the server blob auditing operation results.",
-            "schema": {
-              "$ref": "#/definitions/BlobAuditingOperationListResult"
-            }
-          },
-          "default": {
-            "description": "*** Error Responses: ***\n\n * 404 SubscriptionDoesNotHaveServer - The requested server was not found\n\n * 404 OperationIdNotFound - The operation with Id does not exist.\n\n * 405 ServerBlobAuditingOperationResultsNotImplemented - Operations on Server Auditing operation results are not enabled yet\n\n * 500 GetServerBlobAuditingOperationResultsFailed - Failed to get Auditing operation results"
-          }
-        },
-        "x-ms-pageable": {
-          "nextLinkName": "nextLink"
-        },
-        "x-ms-examples": {
-          "List blob auditing operation results.": {
-            "$ref": "./examples/ServerBlobAuditingOperationResultsList.json"
-          }
-        }
-      }
     }
   },
   "definitions": {
@@ -325,62 +230,6 @@
           "x-ms-client-flatten": true
         }
       }
-    },
-    "BlobAuditingOperationResultProperties": {
-      "description": "Properties of a blob auditing operation result.",
-      "type": "object",
-      "properties": {
-        "operationId": {
-          "description": "Specifies the Blob Auditing operation ID",
-          "type": "string",
-          "readOnly": true
-        },
-        "state": {
-          "description": "Specifies the state of the Blob Auditing operation.",
-          "type": "string",
-          "readOnly": true
-        },
-        "startTime": {
-          "description": "Specifies the start time of the Blob Auditing operation.",
-          "type": "string",
-          "readOnly": true
-        }
-      }
-    },
-    "BlobAuditingOperationResult": {
-      "description": "A server blob auditing operation result resource.",
-      "type": "object",
-      "allOf": [
-        {
-          "$ref": "#/definitions/ProxyResource"
-        }
-      ],
-      "properties": {
-        "properties": {
-          "$ref": "#/definitions/BlobAuditingOperationResultProperties",
-          "description": "Resource properties.",
-          "x-ms-client-flatten": true
-        }
-      }
-    },
-    "BlobAuditingOperationListResult": {
-      "description": "A list of blob auditing operation results.",
-      "type": "object",
-      "properties": {
-        "value": {
-          "description": "Array of results.",
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/BlobAuditingOperationResult"
-          },
-          "readOnly": true
-        },
-        "nextLink": {
-          "description": "Link to retrieve next page of results.",
-          "type": "string",
-          "readOnly": true
-        }
-      }
     }
   },
   "parameters": {
@@ -434,7 +283,7 @@
         "default"
       ],
       "x-ms-parameter-location": "method"
-    },
+    }
   },
   "securityDefinitions": {
     "azure_auth": {
