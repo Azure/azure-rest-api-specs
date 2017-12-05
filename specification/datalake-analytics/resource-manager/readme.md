@@ -67,6 +67,23 @@ csharp:
   clear-output-folder: true
 ```
 
+## Python
+
+These settings apply only when `--python` is specified on the command line.
+Please also specify `--python-sdks-folder=<path to the root directory of your azure-sdk-for-python clone>`.
+
+```yaml $(python)
+python:
+  azure-arm: true
+  license-header: MICROSOFT_MIT_NO_VERSION
+  payload-flattening-threshold: 2
+  package-name: azure-mgmt-datalake-analytics
+  clear-output-folder: true
+  no-namespace-folders: true
+  namespace: azure.mgmt.datalake.analytics.account
+  output-folder: $(python-sdks-folder)/azure-mgmt-datalake-analytics/azure/mgmt/datalake/analytics/account
+```
+
 
 ## Go
 

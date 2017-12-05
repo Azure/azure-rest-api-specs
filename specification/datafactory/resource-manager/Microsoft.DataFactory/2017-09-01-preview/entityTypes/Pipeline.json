@@ -8,6 +8,7 @@
   "definitions": {
     "Pipeline": {
       "description": "A data factory pipeline.",
+      "type": "object",
       "properties": {
         "description": {
           "description": "The description of the pipeline.",
@@ -34,6 +35,7 @@
     "Activity": {
       "discriminator": "type",
       "description": "A pipeline activity.",
+      "type": "object",
       "properties": {
         "name": {
           "description": "Activity name.",
@@ -55,6 +57,9 @@
           }
         }
       },
+      "additionalProperties": {
+        "type": "object"
+      },
       "required": [
         "name",
         "type"
@@ -62,6 +67,7 @@
     },
     "ActivityDependency": {
       "description": "Activity dependency information.",
+      "type": "object",
       "properties": {
         "activity": {
           "description": "Activity name.",
@@ -84,6 +90,9 @@
             }
           }
         }
+      },
+      "additionalProperties": {
+        "type": "object"
       },
       "required": [
         "activity",
@@ -121,6 +130,7 @@
     },
     "ActivityPolicy": {
       "description": "Execution policy for an activity.",
+      "type": "object",
       "properties": {
         "timeout": {
           "type": "object",
@@ -136,6 +146,9 @@
           "minimum": 30,
           "maximum": 86400
         }
+      },
+      "additionalProperties": {
+        "type": "object"
       }
     },
     "CopyActivity": {
@@ -233,6 +246,9 @@
           "type": "object",
           "description": "Source retry wait. Type: string (or Expression with resultType string), pattern: ((\\d+)\\.)?(\\d\\d):(60|([0-5][0-9])):(60|([0-5][0-9]))."
         }
+      },
+      "additionalProperties": {
+        "type": "object"
       },
       "required": [
         "type"
@@ -341,6 +357,18 @@
         "query": {
           "type": "object",
           "description": "Database query. Type: string (or Expression with resultType string)."
+        },
+        "readBehavior": {
+          "description": "The read behavior for the operation. Default is Query.",
+          "type": "string",
+          "enum": [
+            "Query",
+            "QueryAll"
+          ],
+          "x-ms-enum": {
+            "name": "SalesforceSourceReadBehavior",
+            "modelAsString": true
+          }
         }
       }
     },
@@ -1074,6 +1102,9 @@
           "description": "Sink retry wait. Type: string (or Expression with resultType string), pattern: ((\\d+)\\.)?(\\d\\d):(60|([0-5][0-9])):(60|([0-5][0-9]))."
         }
       },
+      "additionalProperties": {
+        "type": "object"
+      },
       "required": [
         "type"
       ]
@@ -1281,6 +1312,9 @@
           "type": "object",
           "description": "Specifies how to handle missing values in delimited text files when PolyBase retrieves data from the text file. Type: boolean (or Expression with resultType boolean)."
         }
+      },
+      "additionalProperties": {
+        "type": "object"
       }
     },
     "PolybaseSettingsRejectType": {
@@ -1312,6 +1346,9 @@
           "description": "Specifies whether to use compression when copying data via an interim staging. Default value is false. Type: boolean (or Expression with resultType boolean)."
         }
       },
+      "additionalProperties": {
+        "type": "object"
+      },
       "required": [
         "linkedServiceName"
       ]
@@ -1328,6 +1365,9 @@
           "type": "object",
           "description": "The path for storing the redirect incompatible row data. Type: string (or Expression with resultType string)."
         }
+      },
+      "additionalProperties": {
+        "type": "object"
       },
       "required": [
         "linkedServiceName"
@@ -1470,6 +1510,9 @@
           "type": "string",
           "description": "Copy translator type."
         }
+      },
+      "additionalProperties": {
+        "type": "object"
       },
       "required": [
         "type"
