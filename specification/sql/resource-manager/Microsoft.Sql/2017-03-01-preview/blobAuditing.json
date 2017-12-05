@@ -51,7 +51,7 @@
             }
           },
           "default": {
-            "description": "*** Error Responses: ***\n\n * 400 BlobAuditingIsNotSupportedOnResourceType - Blob Auditing is currently not supported for this resource type.\n\n * 400 BlobAuditingInvalidStorageAccountName - The provided storage account is not valid or does not exist.\n\n * 400 BlobAuditingInvalidStorageAccountCredentials - The provided storage account access key is not valid.\n\n * 400 BlobAuditingIsNotSupportedOnGeoDr - Blob auditing can be configured on primary databases only.\n\n * 400 BlobAuditingPredicateExpressionSyntaxError - Invalid parameter 'predicateExpression', Syntax error.\n\n * 400 InvalidDatabaseBlobAuditingPolicyCreateRequest - The create database blob auditing policy request does not exist or has no properties object.\n\n * 400 InvalidBlobAuditActionsAndGroups - Invalid audit actions or action groups.\n\n * 400 DataSecurityInvalidUserSuppliedParameter - An invalid parameter value was provided by the client.\n\n * 400 BlobAuditingPredicateExpressionEmpty - Invalid parameter 'predicateExpression', Value can not be empty.\n\n * 404 SubscriptionDoesNotHaveServer - The requested server was not found\n\n * 404 DatabaseDoesNotExist - User has specified a database name that does not exist on this server instance.\n\n * 404 SourceDatabaseNotFound - The source database does not exist.\n\n * 500 DatabaseIsUnavailable - Loading failed. Please try again later.\n\n * 500 GetBlobAuditingPolicyFailed - Failed to get Auditing settings"
+            "description": "*** Error Responses: ***\n\n * 400 BlobAuditingIsNotSupportedOnResourceType - Blob Auditing is currently not supported for this resource type.\n\n * 400 BlobAuditingInvalidStorageAccountName - The provided storage account is not valid or does not exist.\n\n * 400 BlobAuditingInvalidStorageAccountCredentials - The provided storage account access key is not valid.\n\n * 400 BlobAuditingIsNotSupportedOnGeoDr - Blob auditing can be configured on primary databases only.\n\n * 400 InvalidDatabaseBlobAuditingPolicyCreateRequest - The create database blob auditing policy request does not exist or has no properties object.\n\n * 400 InvalidBlobAuditActionsAndGroups - Invalid audit actions or action groups.\n\n * 400 DataSecurityInvalidUserSuppliedParameter - An invalid parameter value was provided by the client.\n\n * 400 BlobAuditingPredicateExpressionEmpty - Invalid parameter 'predicateExpression', Value can not be empty.\n\n * 404 SubscriptionDoesNotHaveServer - The requested server was not found\n\n * 404 DatabaseDoesNotExist - User has specified a database name that does not exist on this server instance.\n\n * 404 SourceDatabaseNotFound - The source database does not exist.\n\n * 500 DatabaseIsUnavailable - Loading failed. Please try again later.\n\n * 500 GetBlobAuditingPolicyFailed - Failed to get Auditing settings"
           }
         },
         "x-ms-examples": {
@@ -103,7 +103,7 @@
             }
           },
           "default": {
-            "description": "*** Error Responses: ***\n\n * 400 BlobAuditingIsNotSupportedOnResourceType - Blob Auditing is currently not supported for this resource type.\n\n * 400 BlobAuditingInvalidStorageAccountName - The provided storage account is not valid or does not exist.\n\n * 400 BlobAuditingInvalidStorageAccountCredentials - The provided storage account access key is not valid.\n\n * 400 BlobAuditingIsNotSupportedOnGeoDr - Blob auditing can be configured on primary databases only.\n\n * 400 BlobAuditingPredicateExpressionSyntaxError - Invalid parameter 'predicateExpression', Syntax error.\n\n * 400 InvalidDatabaseBlobAuditingPolicyCreateRequest - The create database blob auditing policy request does not exist or has no properties object.\n\n * 400 InvalidBlobAuditActionsAndGroups - Invalid audit actions or action groups.\n\n * 400 DataSecurityInvalidUserSuppliedParameter - An invalid parameter value was provided by the client.\n\n * 400 BlobAuditingPredicateExpressionEmpty - Invalid parameter 'predicateExpression', Value can not be empty.\n\n * 404 SubscriptionDoesNotHaveServer - The requested server was not found\n\n * 404 DatabaseDoesNotExist - User has specified a database name that does not exist on this server instance.\n\n * 404 SourceDatabaseNotFound - The source database does not exist.\n\n * 500 DatabaseIsUnavailable - Loading failed. Please try again later.\n\n * 500 UpsertBlobAuditingPolicyFailed - An error has occurred while saving Auditing settings, please try again later"
+            "description": "*** Error Responses: ***\n\n * 400 BlobAuditingIsNotSupportedOnResourceType - Blob Auditing is currently not supported for this resource type.\n\n * 400 BlobAuditingInvalidStorageAccountName - The provided storage account is not valid or does not exist.\n\n * 400 BlobAuditingInvalidStorageAccountCredentials - The provided storage account access key is not valid.\n\n * 400 BlobAuditingIsNotSupportedOnGeoDr - Blob auditing can be configured on primary databases only.\n\n * 400 InvalidDatabaseBlobAuditingPolicyCreateRequest - The create database blob auditing policy request does not exist or has no properties object.\n\n * 400 InvalidBlobAuditActionsAndGroups - Invalid audit actions or action groups.\n\n * 400 DataSecurityInvalidUserSuppliedParameter - An invalid parameter value was provided by the client.\n\n * 400 BlobAuditingPredicateExpressionEmpty - Invalid parameter 'predicateExpression', Value can not be empty.\n\n * 404 SubscriptionDoesNotHaveServer - The requested server was not found\n\n * 404 DatabaseDoesNotExist - User has specified a database name that does not exist on this server instance.\n\n * 404 SourceDatabaseNotFound - The source database does not exist.\n\n * 500 DatabaseIsUnavailable - Loading failed. Please try again later.\n\n * 500 UpsertBlobAuditingPolicyFailed - An error has occurred while saving Auditing settings, please try again later"
           },
           "201": {
             "description": "Successfully created the extended database blob auditing policy.",
@@ -113,11 +113,11 @@
           }
         },
         "x-ms-examples": {
-          "Create or update an extended database's blob auditing policy with minimal parameters": {
-            "$ref": "./examples/ExtendedDatabaseBlobAuditingCreateMin.json"
-          },
           "Create or update an extended database's blob auditing policy with all parameters": {
             "$ref": "./examples/ExtendedDatabaseBlobAuditingCreateMax.json"
+          },
+          "Create or update an extended database's blob auditing policy with minimal parameters": {
+            "$ref": "./examples/ExtendedDatabaseBlobAuditingCreateMin.json"
           }
         }
       }
@@ -309,11 +309,11 @@
         },
         "x-ms-long-running-operation": true,
         "x-ms-examples": {
-          "Update a server's blob auditing policy with minimal parameters": {
-            "$ref": "./examples/ServerBlobAuditingCreateMin.json"
-          },
           "Update a server's blob auditing policy with all parameters": {
             "$ref": "./examples/ServerBlobAuditingCreateMax.json"
+          },
+          "Update a server's blob auditing policy with minimal parameters": {
+            "$ref": "./examples/ServerBlobAuditingCreateMin.json"
           }
         }
       }
@@ -423,7 +423,7 @@
           }
         }
       }
-    },
+    }
   },
   "definitions": {
     "ExtendedDatabaseBlobAuditingPolicyProperties": {
@@ -525,11 +525,6 @@
         }
       ],
       "properties": {
-        "kind": {
-          "description": "Resource kind.",
-          "type": "string",
-          "readOnly": true
-        },
         "properties": {
           "$ref": "#/definitions/ExtendedDatabaseBlobAuditingPolicyProperties",
           "description": "Resource properties.",
@@ -755,7 +750,7 @@
           "x-ms-client-flatten": true
         }
       }
-    },
+    }
   },
   "parameters": {
     "SubscriptionIdParameter": {
@@ -808,7 +803,7 @@
         "default"
       ],
       "x-ms-parameter-location": "method"
-    },
+    }
   },
   "securityDefinitions": {
     "azure_auth": {
