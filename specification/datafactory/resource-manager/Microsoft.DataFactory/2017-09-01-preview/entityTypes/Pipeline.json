@@ -1500,7 +1500,15 @@
         },
         "use32bitRuntime": {
           "description": "Specifies whether to use 32 bit runtime to execute SSIS package.",
-          "type": "boolean"
+          "type": "string",
+          "enum": [
+            "Yes",
+            "No"
+          ],
+          "x-ms-enum": {
+            "name": "SSISExecutionUse32bitRuntime",
+            "modelAsString": true
+          }
         },
         "loggingLevel": {
           "description": "The logging level of SSIS package execution.",
