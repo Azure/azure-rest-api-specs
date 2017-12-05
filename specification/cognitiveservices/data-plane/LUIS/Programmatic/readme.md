@@ -19,6 +19,18 @@ These settings apply only when `--tag=programmatic_2_0` is specified on the comm
 
 ``` yaml $(tag) == 'programmatic_2_0'
 input-file: v2.0/LUIS-Programmatic.json
+# Remove Deprecated Pattern's Operations
+directive:
+  - reason: Deprecated
+    remove-operation: Features_GetApplicationVersionPatternFeatures
+  - reason: Deprecated
+    remove-operation: Features_CreatePatternFeature
+  - reason: Deprecated
+    remove-operation: Features_GetPatternFeatureInfo
+  - reason: Deprecated
+    remove-operation: Features_UpdatePatternFeature
+  - reason: Deprecated
+    remove-operation: Features_DeletePatternFeature
 ```
 
 ### Programmatic 2.0 - CSharp Settings
