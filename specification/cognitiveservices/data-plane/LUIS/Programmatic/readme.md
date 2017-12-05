@@ -19,6 +19,7 @@ These settings apply only when `--tag=programmatic_2_0` is specified on the comm
 
 ``` yaml $(tag) == 'programmatic_2_0'
 input-file: v2.0/LUIS-Programmatic.json
+
 # Remove Deprecated Pattern's Operations
 directive:
   - reason: Deprecated
@@ -31,6 +32,15 @@ directive:
     remove-operation: Features_UpdatePatternFeature
   - reason: Deprecated
     remove-operation: Features_DeletePatternFeature
+
+# Ignore autorest-linter issues that cannot be resolve without updates to the API implementation
+directive:
+  - supress: R3013
+    from: v2.0/LUIS-Programmatic.json
+    reason: Body is used to specify entity to deltee
+  - supress: R3016
+    from: v2.0/LUIS-Programmatic.json
+    reason: Changing casing will break existing clients/consumers
 ```
 
 ### Programmatic 2.0 - CSharp Settings
