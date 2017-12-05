@@ -3988,62 +3988,53 @@
     }
   },
   "definitions": {
-    "ApplicationCreateBaseObject": {
-      "additionalProperties": false,
-      "type": "object",
-      "properties": {
-        "culture": {
-          "type": "string"
-        },
-        "usageScenario": {
-          "type": "string"
-        },
-        "description": {
-          "type": "string"
-        },
-        "domain": {
-          "type": "string"
-        },
-        "name": {
-          "type": "string"
-        }
-      }
-    },
     "EntityLabelObject": {
+      "description": "Defines the entity type and position of the extracted entity within the example.",
       "additionalProperties": false,
       "type": "object",
       "properties": {
         "entityName": {
+          "description": "The entity type.",
           "type": "string"
         },
         "startCharIndex": {
+          "description": "The index within the utterance where the extracted entity starts.",
           "type": "integer"
         },
         "endCharIndex": {
+          "description": "The index within the utterance where the extracted entity ends.",
           "type": "integer"
         }
       }
     },
     "ApplicationCreateObject": {
+      "description": "Properties for creating a new LUIS Application",
       "additionalProperties": false,
       "type": "object",
+      "required": [ "culture", "name" ],
       "properties": {
         "culture": {
+          "description": "The culture for the new application. It is the language that your app understands and speaks. E.g.: \"en-us\". Note: the culture cannot be changed after the app is created.",
           "type": "string"
         },
         "domain": {
+          "description": "The domain for the new application. Optional. E.g.: Comics.",
           "type": "string"
         },
         "description": {
+          "description": "Description of the new application. Optional.",
           "type": "string"
         },
         "initialVersionId": {
+          "description": "The initial version ID. Optional. Default value is: \"0.1\"",
           "type": "string"
         },
         "usageScenario": {
+          "description": "Defines the scenario for the new application. Optional. E.g.: IoT.",
           "type": "string"
         },
         "name": {
+          "description": "The name for the new application.",
           "type": "string"
         }
       },
@@ -4057,23 +4048,28 @@
       }
     },
     "PrebuiltDomainCreateBaseObject": {
+      "description": "A model object containing the name of the custom prebuilt entity and the name of the domain to which this model belongs.",
       "additionalProperties": false,
       "type": "object",
       "properties": {
         "domainName": {
+          "description": "The domain name.",
           "type": "string"
         }
       },
       "example": { "domainName": "Camera" }
     },
     "PrebuiltDomainCreateObject": {
+      "description": "A prebuilt domain create object containing the name and culture of the domain.",
       "additionalProperties": false,
       "type": "object",
       "properties": {
         "domainName": {
+          "description": "The domain name.",
           "type": "string"
         },
         "culture": {
+          "description": "The culture of the new domain.",
           "type": "string"
         }
       },
@@ -4083,13 +4079,16 @@
       }
     },
     "PrebuiltDomainModelCreateObject": {
+      "description": "A model object containing the name of the custom prebuilt intent or entity and the name of the domain to which this model belongs.",
       "additionalProperties": false,
       "type": "object",
       "properties": {
         "domainName": {
+          "description": "The domain name.",
           "type": "string"
         },
         "modelName": {
+          "description": "The intent name or entity name.",
           "type": "string"
         }
       },
@@ -4099,16 +4098,19 @@
       }
     },
     "HierarchicalModelUpdateObject": {
+      "description": "A model object containing the properties to update.",
       "additionalProperties": false,
       "type": "object",
       "properties": {
         "children": {
+          "description": "Child entities.",
           "items": {
             "type": "string"
           },
           "type": "array"
         },
         "name": {
+          "description": "The new entity name.",
           "type": "string"
         }
       },
@@ -4118,25 +4120,31 @@
       }
     },
     "JSONEntity": {
+      "description": "Exported Model - Extracted Entity from utterance.",
       "additionalProperties": false,
       "type": "object",
       "properties": {
         "startPos": {
+          "description": "The index within the utterance where the extracted entity starts.",
           "type": "integer"
         },
         "endPos": {
+          "description": "The index within the utterance where the extracted entity ends.",
           "type": "integer"
         },
         "entity": {
+          "description": "The entity name.",
           "type": "string"
         }
       }
     },
     "ApplicationSettingUpdateObject": {
+      "description": "Object model for updating an application's settings.",
       "additionalProperties": false,
       "type": "object",
       "properties": {
         "public": {
+          "description": "Setting your application as public allows other people to use your application's endpoint using their own keys.",
           "type": "boolean",
           "x-nullable": false
         }
@@ -4146,13 +4154,16 @@
       }
     },
     "ExampleLabelObject": {
+      "description": "A labeled example.",
       "additionalProperties": false,
       "type": "object",
       "properties": {
         "text": {
+          "description": "The sample's utterance.",
           "type": "string"
         },
         "entityLabels": {
+          "description": "The idenfied entities within the utterance.",
           "items": {
             "type": "object",
             "$ref": "#/definitions/EntityLabelObject"
@@ -4160,6 +4171,7 @@
           "type": "array"
         },
         "intentName": {
+          "description": "The idenfitied intent representing the utterance.",
           "type": "string"
         }
       },
@@ -4176,16 +4188,20 @@
       }
     },
     "PhraselistCreateObject": {
+      "description": "Object model for creating a phraselist model.",
       "additionalProperties": false,
       "type": "object",
       "properties": {
         "phrases": {
+          "description": "List of comma-separated phrases that represent the Phraselist.",
           "type": "string"
         },
         "name": {
+          "description": "The Phraselist name.",
           "type": "string"
         },
         "isExchangeable": {
+          "description": "An exchangeable phrase list feature are serves as single feature to the LUIS underlying training algorithm. It is used as a lexicon lookup feature where its value is 1 if the lexicon contains a given word or 0 if it doesn’t. Think of an exchangeable as a synonyms list. A non-exchangeable phrase list feature has all the phrases in the list serve as separate features to the underlying training algorithm. So, if you your phrase list feature contains 5 phrases, they will be mapped to 5 separate features. You can think of the non-exchangeable phrase list feature as an additional bag of words that you are willing to add to LUIS existing vocabulary features. Think of a non-exchangeable as set of different words. Default value is true.",
           "default": true,
           "type": "boolean"
         }
@@ -4193,25 +4209,36 @@
       "example": {
         "name": "DaysOfWeek",
         "phrases": "monday,tuesday,wednesday,thursday,friday,saturday,sunday",
-        "isExchangeable": true
+        "isExchangeable": false
       }
     },
     "SubClosedList": {
+      "description": "Sublist of items for a Closed list.",
       "additionalProperties": false,
       "type": "object",
       "properties": {
         "canonicalForm": {
+          "description": "The standard form that the list represents.",
           "type": "string"
         },
         "list": {
+          "description": "List of synonym words.",
           "items": {
             "type": "string"
           },
           "type": "array"
         }
+      },
+      "example": {
+        "canonicalForm": "BankName",
+        "list": [
+          "HSBC",
+          "CitiBank"
+        ]
       }
     },
     "SubClosedListResponse": {
+      "description": "Sublist of items for a Closed list.",
       "type": "object",
       "allOf": [
         {
@@ -4220,43 +4247,24 @@
       ],
       "properties": {
         "id": {
+          "description": "The sublist ID",
           "type": "integer",
           "x-nullable": false,
           "example": "123456"
         }
       }
     },
-    "JSONAction": {
-      "additionalProperties": false,
-      "type": "object",
-      "properties": {
-        "actionName": {
-          "type": "string"
-        },
-        "actionParameters": {
-          "items": {
-            "type": "object",
-            "$ref": "#/definitions/JSONActionParam"
-          },
-          "type": "array"
-        },
-        "intentName": {
-          "type": "string"
-        },
-        "channel": {
-          "type": "object",
-          "$ref": "#/definitions/Channel"
-        }
-      }
-    },
     "ApplicationUpdateObject": {
+      "description": "Object model for updating the name or description of an application.",
       "additionalProperties": false,
       "type": "object",
       "properties": {
         "name": {
+          "description": "The application's new name.",
           "type": "string"
         },
         "description": {
+          "description": "The application's new description.",
           "type": "string"
         }
       },
@@ -4265,26 +4273,8 @@
         "description": "This is my first modified dummy description."
       }
     },
-    "Channel": {
-      "additionalProperties": false,
-      "type": "object",
-      "properties": {
-        "settings": {
-          "items": {
-            "type": "object",
-            "$ref": "#/definitions/Setting"
-          },
-          "type": "array"
-        },
-        "name": {
-          "type": "string"
-        },
-        "method": {
-          "type": "string"
-        }
-      }
-    },
     "PrebuiltExtractorNames": {
+      "description": "Objet model for adding a prebuilt entity to the application.",
       "type": "array",
       "items": {
         "type": "string"
@@ -4292,31 +4282,39 @@
       "example": [ "number", "ordinal" ]
     },
     "JSONRegexFeature": {
+      "description": "Exported Model - A Pattern feature.",
       "additionalProperties": false,
       "type": "object",
       "properties": {
         "pattern": {
+          "description": "The Regular Expression to match.",
           "type": "string"
         },
         "activated": {
+          "description": "Indicates if the Pattern feature is enabled.",
           "type": "boolean"
         },
         "name": {
+          "description": "Name of the feature.",
           "type": "string"
         }
       }
     },
     "PatternUpdateObject": {
+      "description": "Object model for updating an existing Pattern feature.",
       "additionalProperties": false,
       "type": "object",
       "properties": {
         "pattern": {
+          "description": "The Regular Expression to match.",
           "type": "string"
         },
         "name": {
+          "description": "Name of the feature.",
           "type": "string"
         },
         "isActive": {
+          "description": "Indicates if the Pattern feature is enabled.",
           "default": true,
           "type": "boolean"
         }
@@ -4327,13 +4325,16 @@
       }
     },
     "ClosedList": {
+      "description": "Exported Model - A Closed List.",
       "additionalProperties": false,
       "type": "object",
       "properties": {
         "name": {
+          "description": "Name of the closed list feature.",
           "type": "string"
         },
         "subLists": {
+          "description": "Sublists for the feature.",
           "items": {
             "type": "object",
             "$ref": "#/definitions/SubClosedList"
@@ -4342,32 +4343,13 @@
         }
       }
     },
-    "JSONActionParam": {
-      "additionalProperties": false,
-      "type": "object",
-      "properties": {
-        "phraseListFeatureName": {
-          "type": "string"
-        },
-        "parameterName": {
-          "type": "string"
-        },
-        "entityName": {
-          "type": "string"
-        },
-        "required": {
-          "type": "boolean"
-        },
-        "question": {
-          "type": "string"
-        }
-      }
-    },
     "ClosedListModelPatchObject": {
+      "description": "Object model for adding a batch of sublists to an existing closedlist.",
       "additionalProperties": false,
       "type": "object",
       "properties": {
         "subLists": {
+          "description": "Sublists to add.",
           "items": {
             "type": "object",
             "$ref": "#/definitions/WordListObject"
@@ -4385,33 +4367,36 @@
         ]
       }
     },
-    "KeyValue": {
-      "type": "string",
-      "example": "\"DummyKey\""
-    },
     "JSONModelFeature": {
+      "description": "Exported Model - Phraselist Model Feature.",
       "additionalProperties": false,
       "type": "object",
       "properties": {
         "activated": {
+          "description": "Indicates if the feature is enabled.",
           "type": "boolean"
         },
         "name": {
+          "description": "The Phraselist name.",
           "type": "string"
         },
         "words": {
+          "description": "List of comma-separated phrases that represent the Phraselist.",
           "type": "string"
         },
         "mode": {
+          "description": "An exchangeable phrase list feature are serves as single feature to the LUIS underlying training algorithm. It is used as a lexicon lookup feature where its value is 1 if the lexicon contains a given word or 0 if it doesn’t. Think of an exchangeable as a synonyms list. A non-exchangeable phrase list feature has all the phrases in the list serve as separate features to the underlying training algorithm. So, if you your phrase list feature contains 5 phrases, they will be mapped to 5 separate features. You can think of the non-exchangeable phrase list feature as an additional bag of words that you are willing to add to LUIS existing vocabulary features. Think of a non-exchangeable as set of different words. Default value is true.",
           "type": "boolean"
         }
       }
     },
     "ModelCreateObject": {
+      "description": "Object model for creating a new entity extractor.",
       "additionalProperties": false,
       "type": "object",
       "properties": {
         "name": {
+          "description": "Name of the new entity extractor.",
           "type": "string"
         }
       },
@@ -4419,26 +4404,17 @@
         "name": "DayOfWeek"
       }
     },
-    "Setting": {
-      "additionalProperties": false,
-      "type": "object",
-      "properties": {
-        "name": {
-          "type": "string"
-        },
-        "value": {
-          "type": "string"
-        }
-      }
-    },
     "PatternCreateObject": {
+      "description": "Object model for creating a Pattern feature.",
       "additionalProperties": false,
       "type": "object",
       "properties": {
         "pattern": {
+          "description": "The Regular Expression to match.",
           "type": "string"
         },
         "name": {
+          "description": "Name of the feature.",
           "type": "string"
         }
       },
@@ -4448,13 +4424,16 @@
       }
     },
     "WordListObject": {
+      "description": "Sublist of items for a Closed list.",
       "additionalProperties": false,
       "type": "object",
       "properties": {
         "canonicalForm": {
+          "description": "The standard form that the list represents.",
           "type": "string"
         },
         "list": {
+          "description": "List of synonym words.",
           "items": {
             "type": "string"
           },
@@ -4467,13 +4446,16 @@
       }
     },
     "WordListBaseUpdateObject": {
+      "description": "Object model for updating one of the closed list's sublists.",
       "additionalProperties": false,
       "type": "object",
       "properties": {
         "canonicalForm": {
+          "description": "The standard form that the list represents.",
           "type": "string"
         },
         "list": {
+          "description": "List of synonym words.",
           "items": {
             "type": "string"
           },
@@ -4486,16 +4468,20 @@
       }
     },
     "JSONUtterance": {
+      "description": "Exported Model - Utterance that was used to train the model.",
       "additionalProperties": false,
       "type": "object",
       "properties": {
         "text": {
+          "description": "The utterance.",
           "type": "string"
         },
         "intent": {
+          "description": "The matched intent.",
           "type": "string"
         },
         "entities": {
+          "description": "The matched entities.",
           "items": {
             "type": "object",
             "$ref": "#/definitions/JSONEntity"
@@ -4505,10 +4491,12 @@
       }
     },
     "ModelUpdateObject": {
+      "description": "Object model for updating an intent classifier.",
       "additionalProperties": false,
       "type": "object",
       "properties": {
         "name": {
+          "description": "The entity's new name.",
           "type": "string"
         }
       },
@@ -4517,10 +4505,12 @@
       }
     },
     "ClosedListModelUpdateObject": {
+      "description": "Object model for updating a closed list.",
       "additionalProperties": false,
       "type": "object",
       "properties": {
         "subLists": {
+          "description": "The new sublists for the feature.",
           "items": {
             "type": "object",
             "$ref": "#/definitions/WordListObject"
@@ -4528,6 +4518,7 @@
           "type": "array"
         },
         "name": {
+          "description": "The new name of the closed list feature.",
           "type": "string"
         }
       },
@@ -4568,10 +4559,12 @@
       }
     },
     "ClosedListModelCreateObject": {
+      "description": "Object model for creating a closed list.",
       "additionalProperties": false,
       "type": "object",
       "properties": {
         "subLists": {
+          "description": "Sublists for the feature.",
           "items": {
             "type": "object",
             "$ref": "#/definitions/WordListObject"
@@ -4579,6 +4572,7 @@
           "type": "array"
         },
         "name": {
+          "description": "Name of the closed list feature.",
           "type": "string"
         }
       },
@@ -4597,6 +4591,7 @@
       }
     },
     "ExampleLabelObjectArray": {
+      "description": "Object model for adding a batch of labeled examples.",
       "items": {
         "type": "object",
         "$ref": "#/definitions/ExampleLabelObject"
@@ -4633,50 +4628,63 @@
       ]
     },
     "VersionInfo": {
+      "description": "Object model of an application version.",
       "type": "object",
       "required": [ "version", "trainingStatus" ],
       "properties": {
         "version": {
+          "description": "The version ID. E.g.: \"0.1\"",
           "type": "string"
         },
         "createdDateTime": {
+          "description": "The version's creation timestamp.",
           "type": "string",
           "format": "date-time"
         },
         "lastModifiedDateTime": {
+          "description": "Timestamp of the last update.",
           "type": "string",
           "format": "date-time"
         },
         "lastTrainedDateTime": {
+          "description": "Timestamp of the last time the model was trained.",
           "type": "string",
           "format": "date-time"
         },
         "lastPublishedDateTime": {
+          "description": "Timestamp when was last published.",
           "type": "string",
           "format": "date-time"
         },
         "endpointUrl": {
+          "description": "The Runtime endpoint URL for this model version.",
           "type": "string"
         },
         "assignedEndpointKey": {
+          "description": "The endpoint key.",
           "type": "object",
           "additionalProperties": {
             "type": "string"
           }
         },
         "externalApiKeys": {
+          "description": "External keys.",
           "type": "object"
         },
         "intentsCount": {
+          "description": "Number of intents in this model.",
           "type": "integer"
         },
         "entitiesCount": {
+          "description": "Number of entities in this model.",
           "type": "integer"
         },
         "endpointHitsCount": {
+          "description": "Number of calls made to this endpoint.",
           "type": "integer"
         },
         "trainingStatus": {
+          "description": "The current training status.",
           "type": "string",
           "enum": [
             "NeedsTraining",
@@ -4690,10 +4698,12 @@
       }
     },
     "TaskUpdateObject": {
+      "description": "Object model for cloning an application's version.",
       "additionalProperties": false,
       "type": "object",
       "properties": {
         "version": {
+          "description": "The new version for the cloned model.",
           "type": "string"
         }
       },
@@ -4702,20 +4712,25 @@
       }
     },
     "PhraselistUpdateObject": {
+      "description": "Object model for updating a Phraselist.",
       "additionalProperties": false,
       "type": "object",
       "properties": {
         "phrases": {
+          "description": "List of comma-separated phrases that represent the Phraselist.",
           "type": "string"
         },
         "name": {
+          "description": "The Phraselist name.",
           "type": "string"
         },
         "isActive": {
+          "description": "Indicates if the Phraselist is enabled.",
           "default": true,
           "type": "boolean"
         },
         "isExchangeable": {
+          "description": "An exchangeable phrase list feature are serves as single feature to the LUIS underlying training algorithm. It is used as a lexicon lookup feature where its value is 1 if the lexicon contains a given word or 0 if it doesn’t. Think of an exchangeable as a synonyms list. A non-exchangeable phrase list feature has all the phrases in the list serve as separate features to the underlying training algorithm. So, if you your phrase list feature contains 5 phrases, they will be mapped to 5 separate features. You can think of the non-exchangeable phrase list feature as an additional bag of words that you are willing to add to LUIS existing vocabulary features. Think of a non-exchangeable as set of different words. Default value is true.",
           "default": true,
           "type": "boolean"
         }
@@ -4741,16 +4756,19 @@
       }
     },
     "HierarchicalModelCreateObject": {
+      "description": "Object model for creating a hierarchical entity extractor.",
       "additionalProperties": false,
       "type": "object",
       "properties": {
         "children": {
+          "description": "List of child entities.",
           "items": {
             "type": "string"
           },
           "type": "array"
         },
         "name": {
+          "description": "Name of the new hierarchical entity.",
           "type": "string"
         }
       },
@@ -4760,17 +4778,21 @@
       }
     },
     "ApplicationPublishObject": {
+      "description": "Object model for publishing a specific application version.",
       "additionalProperties": false,
       "type": "object",
       "properties": {
         "versionId": {
+          "description": "The version ID to publish.",
           "type": "string"
         },
         "isStaging": {
+          "description": "Indicates if the staging slot should be used, instead of the Production one.",
           "default": false,
           "type": "boolean"
         },
         "region": {
+          "description": "The target region that the application is published to.",
           "type": "string"
         }
       },
@@ -4781,22 +4803,28 @@
       }
     },
     "LuisApp": {
+      "description": "Exported Model - An exported LUIS Application.",
       "additionalProperties": true,
       "type": "object",
       "properties": {
         "name": {
+          "description": "The name of the application.",
           "type": "string"
         },
         "versionId": {
+          "description": "The version ID of the application that was exported.",
           "type": "string"
         },
         "desc": {
+          "description": "The description of the application.",
           "type": "string"
         },
         "culture": {
+          "description": "The culture of the application. E.g.: en-us.",
           "type": "string"
         },
         "intents": {
+          "description": "List of intents.",
           "items": {
             "type": "object",
             "$ref": "#/definitions/HierarchicalModel"
@@ -4804,6 +4832,7 @@
           "type": "array"
         },
         "entities": {
+          "description": "List of entities.",
           "items": {
             "type": "object",
             "$ref": "#/definitions/HierarchicalModel"
@@ -4811,19 +4840,14 @@
           "type": "array"
         },
         "bing_entities": {
+          "description": "List of prebuilt intents.",
           "items": {
             "type": "string"
           },
           "type": "array"
         },
-        "actions": {
-          "items": {
-            "type": "object",
-            "$ref": "#/definitions/JSONAction"
-          },
-          "type": "array"
-        },
         "closedLists": {
+          "description": "List of closed lists.",
           "items": {
             "type": "object",
             "$ref": "#/definitions/ClosedList"
@@ -4831,6 +4855,7 @@
           "type": "array"
         },
         "composites": {
+          "description": "List of composite entities.",
           "items": {
             "type": "object",
             "$ref": "#/definitions/HierarchicalModel"
@@ -4838,6 +4863,7 @@
           "type": "array"
         },
         "regex_features": {
+          "description": "List of pattern features.",
           "items": {
             "type": "object",
             "$ref": "#/definitions/JSONRegexFeature"
@@ -4845,6 +4871,7 @@
           "type": "array"
         },
         "model_features": {
+          "description": "List of model features.",
           "items": {
             "type": "object",
             "$ref": "#/definitions/JSONModelFeature"
@@ -4852,6 +4879,7 @@
           "type": "array"
         },
         "utterances": {
+          "description": "List of sample utterances.",
           "items": {
             "type": "object",
             "$ref": "#/definitions/JSONUtterance"
@@ -5113,26 +5141,31 @@
       }
     },
     "GuidResponse": {
+      "description": "The ID (GUID) returned by an operation.",
       "type": "string",
       "format": "uuid",
       "example": "363187f1-c573-46b3-bc4c-ae01d686e68e"
     },
     "VersionResponse": {
+      "description": "The new version ID returned by when importing a model version.",
       "type": "string",
       "example": "0.1"
     },
     "FeatureIDResponse": {
+      "description": "The ID of the created feature.",
       "type": "integer",
       "x-nullable": false,
       "example": 398102
     },
     "LabeledUtterances": {
+      "description": "A list of predictions and label pairs for every example in the application.",
       "type": "array",
       "items": {
         "$ref": "#/definitions/LabeledUtterance"
       }
     },
     "LabeledUtterance": {
+      "description": "A prediction and label pair of an example.",
       "type": "object",
       "properties": {
         "id": {
@@ -5145,27 +5178,31 @@
         },
         "tokenizedText": {
           "type": "array",
-          "description": "the utterance tokenized.",
+          "description": "The utterance tokenized.",
           "items": {
             "type": "string"
           }
         },
         "intentLabel": {
+          "description": "The intent matching the example.",
           "type": "string"
         },
         "entityLabels": {
+          "description": "The entities matching the example.",
           "type": "array",
           "items": {
             "$ref": "#/definitions/EntityLabel"
           }
         },
         "intentPredictions": {
+          "description": "List of suggested intents.",
           "type": "array",
           "items": {
             "$ref": "#/definitions/IntentPrediction"
           }
         },
         "entityPredictions": {
+          "description": "List of suggested entities.",
           "type": "array",
           "items": {
             "$ref": "#/definitions/EntityPrediction"
@@ -5174,12 +5211,14 @@
       }
     },
     "IntentsSuggestionExamples": {
+      "description": "List of predicted/suggested intents.",
       "type": "array",
       "items": {
         "$ref": "#/definitions/IntentsSuggestionExample"
       }
     },
     "IntentsSuggestionExample": {
+      "description": "Predicted/suggested intent.",
       "type": "object",
       "properties": {
         "text": {
@@ -5188,18 +5227,20 @@
         },
         "tokenizedText": {
           "type": "array",
-          "description": "the utterance tokenized.",
+          "description": "The utterance tokenized.",
           "items": {
             "type": "string"
           }
         },
         "intentPredictions": {
+          "description": "Predicted/suggested intents.",
           "type": "array",
           "items": {
             "$ref": "#/definitions/IntentPrediction"
           }
         },
         "entityPredictions": {
+          "description": "Predicted/suggested entities.",
           "type": "array",
           "items": {
             "$ref": "#/definitions/EntityPrediction"
@@ -5208,12 +5249,14 @@
       }
     },
     "EntitiesSuggestionExamples": {
+      "description": "List of predicted/suggested entities.",
       "type": "array",
       "items": {
         "$ref": "#/definitions/EntitiesSuggestionExample"
       }
     },
     "EntitiesSuggestionExample": {
+      "description": "Predicted/suggested entity.",
       "type": "object",
       "properties": {
         "text": {
@@ -5222,18 +5265,20 @@
         },
         "tokenizedText": {
           "type": "array",
-          "description": "the utterance tokenized.",
+          "description": "The utterance tokenized.",
           "items": {
             "type": "string"
           }
         },
         "intentPredictions": {
+          "description": "Predicted/suggested intents.",
           "type": "array",
           "items": {
             "$ref": "#/definitions/IntentPrediction"
           }
         },
         "entityPredictions": {
+          "description": "Predicted/suggested entities.",
           "type": "array",
           "items": {
             "$ref": "#/definitions/EntityPrediction"
@@ -5242,15 +5287,19 @@
       }
     },
     "EntityLabel": {
+      "description": "Defines the entity type and position of the extracted entity within the example.",
       "type": "object",
       "properties": {
         "entityName": {
+          "description": "The entity type.",
           "type": "string"
         },
         "startTokenIndex": {
+          "description": "The index within the utterance where the extracted entity starts.",
           "type": "integer"
         },
         "endTokenIndex": {
+          "description": "The index within the utterance where the extracted entity ends.",
           "type": "integer"
         }
       },
@@ -5259,26 +5308,33 @@
       ]
     },
     "IntentPrediction": {
+      "description": "A suggested intent.",
       "type": "object",
       "properties": {
         "name": {
+          "description": "The intent's name",
           "type": "string"
         },
         "score": {
+          "description": "The intent's score, based on the prediction model.",
           "type": "number"
         }
       }
     },
     "EntityPrediction": {
+      "description": "A suggested entity.",
       "type": "object",
       "properties": {
         "entityName": {
+          "description": "The entity's name",
           "type": "string"
         },
         "startTokenIndex": {
+          "description": "The index within the utterance where the extracted entity starts.",
           "type": "integer"
         },
         "endTokenIndex": {
+          "description": "The index within the utterance where the extracted entity ends.",
           "type": "integer"
         },
         "phrase": {
@@ -5314,19 +5370,14 @@
         "type": "string"
       }
     },
-    "ModelsResponseObject" : {
-      "type": "array",
-      "items": {
-        "$ref": "#/definitions/ModelInfo"
-      }
-    },
     "ModelInfo": {
+      "description": "Base type used in entity types.",
       "type": "object",
       "properties": {
         "id": {
           "type": "string",
           "format": "uuid",
-          "description": "The GUID of the Entity Model."
+          "description": "The ID of the Entity Model."
         },
         "name": {
           "type": "string",
@@ -5343,18 +5394,20 @@
       "required": [ "id", "readableType" ]
     },
     "ModelsInfoResponseObject" : {
+      "description": "A list of application model infos.",
       "type": "array",
       "items": {
         "$ref": "#/definitions/ModelInfoResponse"
       }
     },
     "ModelInfoResponse": {
+      "description": "An application model info.",
       "type": "object",
       "properties": {
         "id": {
           "type": "string",
           "format": "uuid",
-          "description": "The GUID of the Entity Model."
+          "description": "The ID of the Entity Model."
         },
         "name": {
           "type": "string",
@@ -5379,6 +5432,7 @@
       ]
     },
     "ReadableType": {
+      "description": "Full name of the entity type.",
       "type": "string",
       "enum": [
         "Entity Extractor",
@@ -5391,6 +5445,7 @@
       ]
     },
     "HierarchicalEntityExtractor": {
+      "description": "Hierarchical Entity Extractor.",
       "type": "object",
       "x-ms-discriminator-value": "Hierarchical Entity Extractor",
       "allOf": [
@@ -5400,6 +5455,7 @@
       ],
       "properties": {
         "children": {
+          "description": "List of child entities.",
           "type": "array",
           "items": {
             "$ref": "#/definitions/ChildEntity"
@@ -5408,12 +5464,14 @@
       }
     },
     "HierarchicalEntityExtractorsList": {
+      "description": "List of Hierarchical Entity Extractors.",
       "type": "array",
       "items": {
         "$ref": "#/definitions/HierarchicalEntityExtractor"
       }
     },
     "CompositeEntityExtractor": {
+      "description": "A Composite Entity Extractor.",
       "type": "object",
       "x-ms-discriminator-value": "Composite Entity Extractor",
       "allOf": [
@@ -5423,6 +5481,7 @@
       ],
       "properties": {
         "children": {
+          "description": "List of child entities.",
           "type": "array",
           "items": {
             "$ref": "#/definitions/ChildEntity"
@@ -5431,12 +5490,14 @@
       }
     },
     "CompositeEntityExtractorsList": {
+      "description": "List of Composite Entity Extractors.",
       "type": "array",
       "items": {
         "$ref": "#/definitions/CompositeEntityExtractor"
       }
     },
     "ClosedListEntityExtractor": {
+      "description": "Closed List Entity Extractor.",
       "type": "object",
       "x-ms-discriminator-value": "Closed List Entity Extractor",
       "allOf": [
@@ -5446,6 +5507,7 @@
       ],
       "properties": {
         "subLists": {
+          "description": "List of sub-lists.",
           "type": "array",
           "items": {
             "$ref": "#/definitions/SubClosedListResponse"
@@ -5454,12 +5516,14 @@
       }
     },
     "ClosedListEntityExtractorsList": {
+      "description": "List of Closed List Entity Extractors.",
       "type": "array",
       "items": {
         "$ref": "#/definitions/ClosedListEntityExtractor"
       }
     },
     "PrebuiltEntityExtractor": {
+      "description": "Prebuilt Entity Extractor.",
       "type": "object",
       "x-ms-discriminator-value": "Prebuilt Entity Extractor",
       "allOf": [
@@ -5469,6 +5533,7 @@
       ]
     },
     "PrebuiltEntityExtractorsList": {
+      "description": "List of Prebuilt Entity Extractors.",
       "type": "array",
       "items": {
         "$ref": "#/definitions/PrebuiltEntityExtractor"
@@ -5476,12 +5541,12 @@
     },
     "ChildEntity": {
       "type": "object",
-      "description": "The base child entity class.",
+      "description": "The base child entity type.",
       "properties": {
         "id": {
           "type": "string",
           "format": "uuid",
-          "description": "The GUID belonging to a child entity."
+          "description": "The ID (GUID) belonging to a child entity."
         },
         "name": {
           "type": "string",
@@ -5491,9 +5556,11 @@
       "required": [ "id" ]
     },
     "HierarchicalChildEntity": {
+      "description": "A Hierarchical Child Entity.",
       "type": "object",
       "properties": {
         "typeId": {
+          "description": "The type ID of the Entity Model.",
           "type": "integer"
         },
         "readableType": {
@@ -5505,6 +5572,7 @@
       ]
     },
     "CustomPrebuiltModel": {
+      "description": "A Custom Prebuilt model.",
       "allOf": [
         { "$ref": "#/definitions/ModelInfo" },
         { "$ref": "#/definitions/IntentClassifier" },
@@ -5512,12 +5580,14 @@
       ]
     },
     "CustomPrebuiltModelList": {
+      "description": "A List of Custom Prebuilt models.",
       "type": "array",
       "items": {
         "$ref": "#/definitions/CustomPrebuiltModel"
       }
     },
     "IntentClassifier": {
+      "description": "Intent Classifier.",
       "type": "object",
       "x-ms-discriminator-value": "Intent Classifier",
       "allOf": [
@@ -5527,14 +5597,17 @@
       ],
       "properties": {
         "customPrebuiltDomainName": {
+          "description": "The domain name.",
           "type": "string"
         },
         "customPrebuiltModelName": {
+          "description": "The intent name or entity name.",
           "type": "string"
         }
       }
     },
     "EntityExtractor": {
+      "description": "Entity Extractor.",
       "type": "object",
       "x-ms-discriminator-value": "Entity Extractor",
       "allOf": [
@@ -5544,26 +5617,31 @@
       ],
       "properties": {
         "customPrebuiltDomainName": {
+          "description": "The domain name.",
           "type": "string"
         },
         "customPrebuiltModelName": {
+          "description": "The intent name or entity name.",
           "type": "string"
         }
       }
     },
     "IntentClassifiersList": {
+      "description": "List of Intent Classifiers.",
       "type": "array",
       "items": {
         "$ref": "#/definitions/IntentClassifier"
       }
     },
     "EntityExtractorsList": {
+      "description": "List of Entity Extractors.",
       "type": "array",
       "items": {
         "$ref": "#/definitions/EntityExtractor"
       }
     },
     "FeaturesResponseObject": {
+      "description": "Model Features, including Patterns and Phraselists.",
       "type": "object",
       "properties": {
         "phraselistFeatures": {
@@ -5587,14 +5665,17 @@
           "description": "The name of the Feature."
         },
         "isActive": {
+          "description": "Indicates if the feature is enabled.",
           "type": "boolean"
         }
       }
     },
     "PatternFeatureInfo": {
+      "description": "Pattern feature.",
       "type": "object",
       "properties": {
         "pattern": {
+          "description": "The Regular Expression to match.",
           "type": "string"
         }
       },
@@ -5603,12 +5684,14 @@
       ]
     },
     "PatternFeatureInfoList": {
+      "description": "List of Pattern features.",
       "type": "array",
       "items": {
         "$ref": "#/definitions/PatternFeatureInfo"
       }
     },
     "PhraseListFeatureInfo": {
+      "description": "Phraselist Feature.",
       "type": "object",
       "properties": {
         "phrases": {
@@ -5616,6 +5699,7 @@
           "description": "A list of comma-separated values."
         },
         "isExchangeable": {
+          "description": "An exchangeable phrase list feature are serves as single feature to the LUIS underlying training algorithm. It is used as a lexicon lookup feature where its value is 1 if the lexicon contains a given word or 0 if it doesn’t. Think of an exchangeable as a synonyms list. A non-exchangeable phrase list feature has all the phrases in the list serve as separate features to the underlying training algorithm. So, if you your phrase list feature contains 5 phrases, they will be mapped to 5 separate features. You can think of the non-exchangeable phrase list feature as an additional bag of words that you are willing to add to LUIS existing vocabulary features. Think of a non-exchangeable as set of different words. Default value is true.",
           "type": "boolean"
         }
       },
@@ -5624,25 +5708,30 @@
       ]
     },
     "PhraseListFeatureInfoList": {
+      "description": "List of Phraselist Features.",
       "type": "array",
       "items": {
         "$ref": "#/definitions/PhraseListFeatureInfo"
       }
     },
     "LabelExampleResponse": {
+      "description": "Response when adding a labeled example.",
       "type": "object",
       "properties": {
         "UtteranceText": {
+          "description": "The sample's utterance.",
           "type": "string",
           "example": "book me a flight from cairo to redmond next thursday"
         },
         "ExampleId": {
+          "description": "The newly created sample ID.",
           "type": "integer",
           "example": -6830368
         }
       }
     },
     "BatchLabelExample": {
+      "description": "Response when adding a batch of labeled examples.",
       "type": "object",
       "properties": {
         "value": {
@@ -5654,52 +5743,65 @@
       }
     },
     "BatchLabelExampleResponse": {
+      "description": "Response when adding a batch of labeled examples.",
       "type": "array",
       "items": {
         "$ref": "#/definitions/BatchLabelExample"
       }
     },
     "ApplicationInfoResponse": {
+      "description": "Response containing the Application Info.",
       "type": "object",
       "properties": {
         "id": {
           "type": "string",
           "format": "uuid",
-          "description": "The GUID of the application."
+          "description": "The ID (GUID) of the application."
         },
         "name": {
+          "description": "The name of the application.",
           "type": "string"
         },
         "description": {
+          "description": "The description of the application.",
           "type": "string"
         },
         "culture": {
+          "description": "The culture of the application. E.g.: en-us.",
           "type": "string"
         },
         "usageScenario": {
+          "description": "Defines the scenario for the new application. Optional. E.g.: IoT.",
           "type": "string"
         },
         "domain": {
+          "description": "The domain for the new application. Optional. E.g.: Comics.",
           "type": "string"
         },
         "versionsCount": {
+          "description": "Amount of model versions within the application.",
           "type": "integer"
         },
         "createdDateTime": {
+          "description": "The version's creation timestamp.",
           "type": "string"
         },
         "endpoints": {
+          "description": "The Runtime endpoint URL for this model version.",
           "type": "object"
         },
         "endpointHitsCount": {
+          "description": "Number of calls made to this endpoint.",
           "type": "integer"
         },
         "activeVersion": {
+          "description": "The version ID currently marked as active.",
           "type": "string"
         }
       }
     },
     "ApplicationsInfoList": {
+      "description": "List of Application Infos.",
       "type": "array",
       "items": {
         "$ref": "#/definitions/ApplicationInfoResponse"
@@ -5718,18 +5820,23 @@
       "description": "The base class \"ProductionOrStagingEndpointInfo\" inherits from.",
       "properties": {
         "versionId": {
+          "description": "The version ID to publish.",
           "type": "string"
         },
         "isStaging": {
+          "description": "Indicates if the staging slot should be used, instead of the Production one.",
           "type": "boolean"
         },
         "endpointUrl": {
+          "description": "The Runtime endpoint URL for this model version.",
           "type": "string"
         },
         "region": {
+          "description": "The target region that the application is published to.",
           "type": "string"
         },
         "assignedEndpointKey": {
+          "description": "The endpoint key.",
           "type": "string"
         },
         "endpointRegion": {
@@ -5737,6 +5844,7 @@
           "description": "The endpoint's region."
         },
         "publishedDateTime": {
+          "description": "Timestamp when was last published.",
           "type": "string"
         }
       }
@@ -5768,43 +5876,51 @@
       }
     },
     "AvailableCulture": {
+      "description": "Available culture for using in a new application.",
       "type": "object",
       "properties": {
         "name": {
+          "description": "The language name.",
           "type": "string"
         },
         "code": {
+          "description": "The ISO value for the language.",
           "type": "string"
         }
       }
     },
     "AvailableCultures": {
       "type": "array",
-      "description": "A list object containing the available application domains.",
+      "description": "A list of available application cultures.",
       "items": {
         "$ref": "#/definitions/AvailableCulture"
       }
     },
     "AvailableDomains": {
+      "description": "A list of available application domains.",
       "type": "array",
       "items": {
         "type": "string"
       }
     },
     "ApplicationUsageScenarios": {
+      "description": "A list of possible application usage scenarios.",
       "type": "array",
       "items": {
         "type": "string"
       }
     },
     "ApplicationSettings": {
+      "description": "The application settings.",
       "type": "object",
       "properties": {
         "id": {
+          "description": "The application ID.",
           "type": "string",
           "format": "uuid"
         },
         "public": {
+          "description": "Setting your application as public allows other people to use your application's endpoint using their own keys.",
           "type": "boolean",
           "x-nullable": false,
           "x-ms-client-name": "isPublic"
@@ -5813,29 +5929,36 @@
       "required": [ "id", "public" ]
     },
     "AvailablePrebuiltEntityModel": {
+      "description": "Available Prebuilt entity model for using in an application.",
       "type": "object",
       "properties": {
         "name": {
+          "description": "The entity name.",
           "type": "string"
         },
         "description": {
+          "description": "The entity description and usage information.",
           "type": "string"
         },
         "examples": {
+          "description": "Usage examples.",
           "type": "string"
         }
       }
     },
     "AvailablePrebuiltEntityModels": {
+      "description": "List of Available Prebuilt entity models.",
       "type": "array",
       "items": {
         "$ref": "#/definitions/AvailablePrebuiltEntityModel"
       }
     },
     "EnqueueTrainingResponse": {
+      "description": "Response model when requesting to train the model.",
       "type": "object",
       "properties": {
         "statusId": {
+          "description": "The train request status ID.",
           "type": "integer"
         },
         "status": {
@@ -5844,6 +5967,7 @@
       }
     },
     "TrainingStatus": {
+      "description": "The Trainning status.",
       "type": "string",
       "enum": [
         "Queued",
@@ -5854,12 +5978,13 @@
       ]
     },
     "ModelTrainingInfo": {
+      "description": "Model Training Info.",
       "type": "object",
       "properties": {
         "modelId": {
           "type": "string",
           "format": "uuid",
-          "description": "The GUID of the model."
+          "description": "The ID (GUID) of the model."
         },
         "details": {
           "$ref": "#/definitions/ModelTrainingDetails"
@@ -5867,33 +5992,40 @@
       }
     },
     "ModelTrainingDetails": {
+      "description": "Model Training Details.",
       "type": "object",
       "properties": {
         "statusId": {
+          "description": "The train request status ID.",
           "type": "integer"
         },
         "status": {
           "$ref": "#/definitions/TrainingStatus"
         },
         "exampleCount": {
+          "description": "The count of examples used to train the model.",
           "type": "integer"
         },
         "trainingDateTime": {
+          "description": "When the model was trained.",
           "type": "string",
           "format": "date-time"
         },
         "failureReason": {
+          "description": "Reason for the training failure.",
           "type": "string"
         }
       }
     },
     "ModelTrainingInfoList": {
+      "description": "List of Model Training Infos.",
       "type": "array",
       "items": {
         "$ref": "#/definitions/ModelTrainingInfo"
       }
     },
     "UserAccessList": {
+      "description": "List of user permissions.",
       "type": "object",
       "properties": {
         "owner": {
@@ -5930,6 +6062,7 @@
       }
     },
     "ErrorResponse": {
+      "description": "Error response when invoking an operation on the API.",
       "type": "object",
       "properties": {
         "errorType": {
@@ -5941,6 +6074,7 @@
       }
     },
     "OperationError": {
+      "description": "Operation error details when invoking an operation on the API.",
       "type": "object",
       "properties": {
         "code": {
@@ -5951,25 +6085,15 @@
         }
       }
     },
-    "ApiError": {
-      "type": "object",
-      "properties": {
-        "statusCode": {
-          "type": "string",
-          "x-ms-client-name": "code"
-        },
-        "message": {
-          "type": "string"
-        }
-      }
-    },
     "PrebuiltDomainsList": {
+      "description": "List of Prebuilt Domains.",
       "type": "array",
       "items": {
         "$ref": "#/definitions/PrebuiltDomain"
       }
     },
     "PrebuiltDomain": {
+      "description": "Prebuilt Domain.",
       "type": "object",
       "properties": {
         "name": {
@@ -6013,6 +6137,7 @@
       }
     },
     "GuidList": {
+      "description": "List of IDs (GUID)",
       "type": "array",
       "items": {
         "$ref": "#/definitions/GuidResponse"
