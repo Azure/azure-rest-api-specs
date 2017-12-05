@@ -146,6 +146,52 @@
                 },
                 "x-ms-long-running-operation": true
             }
+        },
+        "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/servers/{serverName}/databases/{databaseName}/backupLongTermRetentionPolicies": {
+            "get": {
+                "tags": [
+                    "BackupLongTermRetentionPolicies"
+                ],
+                "operationId": "BackupLongTermRetentionPolicies_ListByDatabase",
+                "description": "Returns a database backup long term retention policy",
+                "x-ms-examples": {
+                    "Get backup long term retention policy": {
+                        "$ref": "./examples/BackupLongTermRetentionPolicyList.json"
+                    }
+                },
+                "parameters": [
+                    {
+                        "$ref": "#/parameters/ApiVersionParameter"
+                    },
+                    {
+                        "$ref": "#/parameters/SubscriptionIdParameter"
+                    },
+                    {
+                        "$ref": "#/parameters/ResourceGroupParameter"
+                    },
+                    {
+                        "$ref": "#/parameters/ServerNameParameter"
+                    },
+                    {
+                        "name": "databaseName",
+                        "in": "path",
+                        "required": true,
+                        "type": "string",
+                        "description": "The name of the database."
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/BackupLongTermRetentionPolicyListResult"
+                        }
+                    }
+                },
+                "x-ms-pageable": {
+                  "nextLinkName": null
+                }
+            }
         }
     },
     "definitions": {
@@ -218,6 +264,19 @@
                 }
             ],
             "description": "A backup long term retention policy"
+        },
+        "BackupLongTermRetentionPolicyListResult": {
+            "properties": {
+              "value": {
+                "type": "array",
+                "items": {
+                  "$ref": "#/definitions/BackupLongTermRetentionPolicy"
+                },
+                "description": "The list of long-term retention policies in the database."
+              }
+            },
+            "required": ["value"],
+            "description": "Represents the response to a list long-term retention policies request."
         }
     },
     "parameters": {

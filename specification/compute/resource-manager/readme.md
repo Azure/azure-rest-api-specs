@@ -34,9 +34,51 @@ These are the global settings for the Compute API.
 title: ComputeManagementClient
 description: Compute Client
 openapi-type: arm
-tag: package-2017-03
+tag: package-2017-12
 ```
 
+### Tag: package-2017-12
+
+These settings apply only when `--tag=package-2017-12` is specified on the command line.
+
+``` yaml $(tag) == 'package-2017-12'
+input-file:
+- Microsoft.Compute/2017-12-01/compute.json
+- Microsoft.Compute/2017-09-01/skus.json
+- Microsoft.Compute/2017-03-30/disk.json
+- Microsoft.Compute/2017-03-30/runCommands.json
+- Microsoft.ContainerService/2017-01-31/containerService.json
+```
+
+### Tag: package-compute-2017-12
+
+These settings apply only when `--tag=package-compute-2017-12` is specified on the command line.
+
+``` yaml $(tag) == 'package-compute-2017-12'
+input-file:
+- Microsoft.Compute/2017-12-01/compute.json
+- Microsoft.Compute/2017-09-01/skus.json
+- Microsoft.Compute/2017-03-30/disk.json
+- Microsoft.Compute/2017-03-30/runCommands.json
+```
+
+### Tag: package-compute-only-2017-12
+
+These settings apply only when `--tag=package-compute-only-2017-12` is specified on the command line.
+
+``` yaml $(tag) == 'package-compute-only-2017-12'
+input-file:
+- Microsoft.Compute/2017-12-01/compute.json
+```
+
+### Tag: package-skus-2017-09
+
+These settings apply only when `--tag=package-skus-2017-09` is specified on the command line.
+
+``` yaml $(tag) == 'package-skus-2017-09'
+input-file:
+- Microsoft.Compute/2017-09-01/skus.json
+```
 
 ### Tag: package-2017-03
 
@@ -274,49 +316,90 @@ These settings apply only when `--python` is specified on the command line.
 
 ``` yaml $(python)
 python:
-  # override the default output folder
-  output-folder: $(output-folder)/python
+  azure-arm: true
   license-header: MICROSOFT_MIT_NO_VERSION
   payload-flattening-threshold: 2
+  package-name: azure-mgmt-compute
+  clear-output-folder: true
+```
+
+### Python multi-api
+
+Generate all API versions currently shipped for this package
+
+```yaml $(python) && $(multiapi)
+batch:
+  - tag: package-compute-only-2017-12
+  - tag: package-skus-2017-09
+  - tag: package-compute-2017-03
+  - tag: package-compute-2016-04-preview
+  - tag: package-compute-2016-03
+  - tag: package-compute-2015-06
+```
+
+### Tag: package-compute-only-2017-12 and python
+
+These settings apply only when `--tag=package-compute-only-2017-12 --python` is specified on the command line.
+Please also specify `--python-sdks-folder=<path to the root directory of your azure-sdk-for-python clone>`.
+
+``` yaml $(tag) == 'package-compute-only-2017-12' && $(python)
+python:
+  namespace: azure.mgmt.compute.v2017_12_01
+  output-folder: $(python-sdks-folder)/azure-mgmt-compute/azure/mgmt/compute/v2017_12_01
+```
+
+### Tag: package-skus-2017-09 and python
+
+These settings apply only when `--tag=package-skus-2017-09 --python` is specified on the command line.
+Please also specify `--python-sdks-folder=<path to the root directory of your azure-sdk-for-python clone>`.
+
+``` yaml $(tag) == 'package-skus-2017-09' && $(python)
+python:
+  namespace: azure.mgmt.compute.v2017_09_01
+  output-folder: $(python-sdks-folder)/azure-mgmt-compute/azure/mgmt/compute/v2017_09_01
 ```
 
 ### Tag: package-compute-2017-03 and python
 
 These settings apply only when `--tag=package-compute-2017-03 --python` is specified on the command line.
+Please also specify `--python-sdks-folder=<path to the root directory of your azure-sdk-for-python clone>`.
 
 ``` yaml $(tag) == 'package-compute-2017-03' && $(python)
-namespace: azure.mgmt.compute.compute.v2017_03_30
-```
-
-### Tag: package-container-service-2017-01 and python
-
-These settings apply only when `--tag=package-container-service-2017-01 --python` is specified on the command line.
-
-``` yaml $(tag) == 'package-container-service-2017-01' && $(python)
-namespace: azure.mgmt.compute.containerservice.v2017_01_31
+python:
+  namespace: azure.mgmt.compute.v2017_03_30
+  output-folder: $(python-sdks-folder)/azure-mgmt-compute/azure/mgmt/compute/v2017_03_30
 ```
 
 ### Tag: package-compute-2016-04-preview and python
 
 These settings apply only when `--tag=package-compute-2016-04-preview --python` is specified on the command line.
+Please also specify `--python-sdks-folder=<path to the root directory of your azure-sdk-for-python clone>`.
 
 ``` yaml $(tag) == 'package-compute-2016-04-preview' && $(python)
-namespace: azure.mgmt.compute.compute.v2016_04_30_preview
+python:
+  namespace: azure.mgmt.compute.v2016_04_30_preview
+  output-folder: $(python-sdks-folder)/azure-mgmt-compute/azure/mgmt/compute/v2016_04_30_preview
 ```
 
 ### Tag: package-compute-2016-03 and python
 
 These settings apply only when `--tag=package-compute-2016-03 --python` is specified on the command line.
+Please also specify `--python-sdks-folder=<path to the root directory of your azure-sdk-for-python clone>`.
 
 ``` yaml $(tag) == 'package-compute-2016-03' && $(python)
-namespace: azure.mgmt.compute.compute.v2016_03_30
+python:
+  namespace: azure.mgmt.compute.v2016_03_30
+  output-folder: $(python-sdks-folder)/azure-mgmt-compute/azure/mgmt/compute/v2016_03_30
 ```
 
 ### Tag: package-compute-2015-06 and python
 
 These settings apply only when `--tag=package-compute-2015-06 --python` is specified on the command line.
+Please also specify `--python-sdks-folder=<path to the root directory of your azure-sdk-for-python clone>`.
 
 ``` yaml $(tag) == 'package-compute-2015-06' && $(python)
-namespace: azure.mgmt.compute.compute.v2015_06_15
+python:
+  namespace: azure.mgmt.compute.v2015_06_15
+  output-folder: $(python-sdks-folder)/azure-mgmt-compute/azure/mgmt/compute/v2015_06_15
 ```
 
