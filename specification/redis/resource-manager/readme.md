@@ -147,4 +147,16 @@ directive:
       - $.definitions.RedisResource.properties
     from: redis.json
     reason: zones properties will be allowed in subsequent version of the linter tool
+  - suppress: R3018  # Booleans are not descriptive and make them hard to use. Consider using string enums with allowed set of values defined. Property: enableNonSslPort."
+    where:
+      - $.definitions.RedisCommonProperties.properties.enableNonSslPort
+    from: redis.json
+    reason: this will result in breaking change
+  - suppress: R2017  # PUT request and response should be of same type "
+    where:
+      - $.paths[\"/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Cache/Redis/{name}/linkedServers/{linkedServerName}\"].put
+      - $.paths[\"/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Cache/Redis/{name}\"].put
+      - $.paths[\"/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Cache/Redis/{cacheName}/firewallRules/{ruleName}\"].put
+    from: redis.json
+    reason: bug from sdk team
 ```
