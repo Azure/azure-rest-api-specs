@@ -159,4 +159,9 @@ directive:
       - $.paths[\"/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Cache/Redis/{cacheName}/firewallRules/{ruleName}\"].put
     from: redis.json
     reason: bug from sdk team
+  - suppress: R3010  # The child tracked resource, 'linkedServers' with immediate parent 'RedisResource', must have a list by immediate parent operation."
+    where:
+      - $.definitions
+    from: redis.json
+    reason: This is false positive, 'linkedServers' is not a tracked resource.
 ```
