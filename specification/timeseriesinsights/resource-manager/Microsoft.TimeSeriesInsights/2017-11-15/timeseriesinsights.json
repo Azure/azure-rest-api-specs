@@ -325,7 +325,7 @@
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.TimeSeriesInsights/environments/{environmentName}/status": {
       "get": {
-        "operationId": "Environments_Status",
+        "operationId": "Environments_GetStatus",
         "x-ms-examples": {
           "EnvironmentsBySubscription": { "$ref": "./examples/EnvironmentsStatusGet.json" }
         },
@@ -343,7 +343,7 @@
             "$ref": "#/parameters/ApiVersionParameter"
           }
         ],
-        "description": "Gets the status of the environment, its associated operations like ingress.",
+        "description": "Gets the status of the environment, and its internal state in the Time Series Insights service.",
         "responses": {
           "200": {
             "description": "The environment status was successfully retrieved and is in the response.",
@@ -1153,7 +1153,8 @@
       "properties": {
         "location": {
           "type": "string",
-          "description": "Resource location"
+          "description": "Resource location",
+          "x-ms-mutability":["read", "create"]
         },
         "tags": {
           "type": "object",
@@ -1176,7 +1177,8 @@
     "ResourceProperties": {
       "properties": {
         "provisioningState": {
-          "$ref": "#/definitions/ProvisioningState"
+          "$ref": "#/definitions/ProvisioningState",
+          "description": "Provisioning state of the resource."
         },
         "creationTime": {
           "readOnly": true,
@@ -1237,7 +1239,8 @@
       "properties": {
         "location": {
           "type": "string",
-          "description": "The location of the resource."
+          "description": "The location of the resource.",
+          "x-ms-mutability":["read", "create"]
         },
         "tags": {
           "type": "object",
@@ -1255,7 +1258,8 @@
     "EnvironmentCreateOrUpdateParameters": {
       "properties": {
         "sku": {
-          "$ref": "#/definitions/Sku"
+          "$ref": "#/definitions/Sku",
+          "description": "The sku determines the capacity of the environment, the SLA (in queries-per-minute and total capacity), and the billing rate."
         },
         "properties": {
           "x-ms-client-flatten": true,
@@ -1310,7 +1314,8 @@
     "EnvironmentResource": {
       "properties": {
         "sku": {
-          "$ref": "#/definitions/Sku"
+          "$ref": "#/definitions/Sku",
+          "description": "The sku determines the capacity of the environment, the SLA (in queries-per-minute and total capacity), and the billing rate."
         },
         "properties": {
           "x-ms-client-flatten": true,
@@ -1396,13 +1401,15 @@
     "EnvironmentStatus": {
       "readOnly": true,
       "type": "object",
-      "description": "An object that represents the status of an environment and its associated operations.",
+      "description": "An object that represents the status of the environment, and its internal state in the Time Series Insights service",
       "properties": {
         "provisioningState": {
-          "$ref": "#/definitions/ProvisioningState"
+          "$ref": "#/definitions/ProvisioningState",
+          "description": "Provisioning state of the environment."
         },
         "ingress": {
-          "$ref": "#/definitions/IngressEnvironmentStatus"
+          "$ref": "#/definitions/IngressEnvironmentStatus",
+          "description": "An object that represents the status of ingress on an environment."
         }
       }
     },
@@ -1414,25 +1421,32 @@
         "state": {
           "type": "string",
           "description": "This string represents the state of ingress operations on an environment. It can be \"Disabled\", \"Ready\", \"Running\", \"Paused\" or \"Unknown\"",
-          "enum": [ "Disabled", "Ready", "Running", "Paused", "Unknown" ],
+          "enum": [ 
+            "Disabled", 
+            "Ready", 
+            "Running", 
+            "Paused", 
+            "Unknown" 
+          ],
           "x-ms-enum": {
             "name": "IngressState",
             "modelAsString": false
           }
         },
         "stateDetails": {
-          "$ref": "#/definitions/EnvironmentStateDetails"
+          "$ref": "#/definitions/EnvironmentStateDetails",
+          "description": "An object that contains the details about an environment's state."
         }
       }
     },
     "EnvironmentStateDetails": {
       "readOnly": true,
       "type": "object",
-      "description": "An object that contains the details of why an environment is in a particular state.",
+      "description": "An object that contains the details about an environment's state.",
       "properties":{
         "code": {
           "type": "string",
-          "description": "Contains the code that represents why an environment is in a particular state. Can be used to programatically handle specific cases."
+          "description": "Contains the code that represents the reason of an environment being in a particular state. Can be used to programatically handle specific cases."
         },
         "message": {
           "type": "string",
@@ -1793,7 +1807,8 @@
           "description": "The event property that will be used as the event source's timestamp. If a value isn't specified for timestampPropertyName, or if null or empty-string is specified, the event creation time will be used."
         },
         "localTimestamp": {
-          "$ref": "#/definitions/LocalTimestamp"
+          "$ref": "#/definitions/LocalTimestamp",
+          "description": "An object that represents the local timestamp property. It contains the format of local timestamp that needs to be used and the corresponding timezone offset information. If a value isn't specified for localTimestamp, or if null, then the local timestamp will not be ingressed with the events."          
         }
       }
     },
@@ -2040,7 +2055,8 @@
       "type": "object",
       "properties": {
         "error": {
-          "$ref": "#/definitions/CloudErrorBody"
+          "$ref": "#/definitions/CloudErrorBody",
+          "description": "Describes a particular API error with an error code and a message."
         }
       },
       "description": "Contains information about an API error.",
@@ -2065,7 +2081,8 @@
         "details": {
           "type": "array",
           "items": {
-            "$ref": "#/definitions/CloudErrorBody"
+            "$ref": "#/definitions/CloudErrorBody",
+            "description": "Describes a particular API error with an error code and a message."
           },
           "description": "Contains nested errors that are related to this error."
         }
