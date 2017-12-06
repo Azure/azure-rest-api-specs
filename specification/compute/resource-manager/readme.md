@@ -320,6 +320,7 @@ python:
   license-header: MICROSOFT_MIT_NO_VERSION
   payload-flattening-threshold: 2
   package-name: azure-mgmt-compute
+  no-namespace-folders: true
   clear-output-folder: true
 ```
 
