@@ -323,6 +323,43 @@
         }
       }
     },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.TimeSeriesInsights/environments/{environmentName}/status": {
+      "get": {
+        "operationId": "Environments_Status",
+        "x-ms-examples": {
+          "EnvironmentsBySubscription": { "$ref": "./examples/EnvironmentsStatusGet.json" }
+        },
+        "parameters": [
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/EnvironmentNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          }
+        ],
+        "description": "Gets the status of the environment, its associated operations like ingress.",
+        "responses": {
+          "200": {
+            "description": "The environment status was successfully retrieved and is in the response.",
+            "schema": {
+              "$ref": "#/definitions/EnvironmentStatus"
+            }
+          },
+          "default": {
+            "description": "HTTP 404 (Not Found): The subscription, resource group, or environment could not be found.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        }
+      }
+    },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.TimeSeriesInsights/environments/{environmentName}/eventSources/{eventSourceName}": {
       "put": {
         "tags": [
@@ -1139,21 +1176,7 @@
     "ResourceProperties": {
       "properties": {
         "provisioningState": {
-          "readOnly": true,
-          "type": "string",
-          "description": "Provisioning state of the resource.",
-          "enum": [
-            "Accepted",
-            "Creating",
-            "Updating",
-            "Succeeded",
-            "Failed",
-            "Deleting"
-          ],
-          "x-ms-enum": {
-            "name": "ProvisioningState",
-            "modelAsString": false
-          }
+          "$ref": "#/definitions/ProvisioningState"
         },
         "creationTime": {
           "readOnly": true,
@@ -1163,6 +1186,23 @@
         }
       },
       "description": "Properties that are common to all tracked resources."
+    },
+    "ProvisioningState": {
+      "readOnly": true,
+      "type": "string",
+      "description": "Provisioning state of the resource.",
+      "enum": [
+        "Accepted",
+        "Creating",
+        "Updating",
+        "Succeeded",
+        "Failed",
+        "Deleting"
+      ],
+      "x-ms-enum": {
+        "name": "ProvisioningState",
+        "modelAsString": false
+      }
     },
     "Sku": {
       "type": "object",
@@ -1350,6 +1390,53 @@
             "name": "StorageLimitExceededBehavior",
             "modelAsString": false
           }
+        }
+      }
+    },
+    "EnvironmentStatus": {
+      "readOnly": true,
+      "type": "object",
+      "description": "An object that represents the status of an environment and its associated operations.",
+      "properties": {
+        "provisioningState": {
+          "$ref": "#/definitions/ProvisioningState"
+        },
+        "ingress": {
+          "$ref": "#/definitions/IngressEnvironmentStatus"
+        }
+      }
+    },
+    "IngressEnvironmentStatus": {
+      "readOnly": true,
+      "type": "object",
+      "description": "An object that represents the status of ingress on an environment.",
+      "properties": {
+        "state": {
+          "type": "string",
+          "description": "This string represents the state of ingress operations on an environment. It can be \"Disabled\", \"Ready\", \"Running\", \"Paused\" or \"Unknown\"",
+          "enum": [ "Disabled", "Ready", "Running", "Paused", "Unknown" ],
+          "x-ms-enum": {
+            "name": "IngressState",
+            "modelAsString": false
+          }
+        },
+        "stateDetails": {
+          "$ref": "#/definitions/EnvironmentStateDetails"
+        }
+      }
+    },
+    "EnvironmentStateDetails": {
+      "readOnly": true,
+      "type": "object",
+      "description": "An object that contains the details of why an environment is in a particular state.",
+      "properties":{
+        "code": {
+          "type": "string",
+          "description": "Contains the code that represents why an environment is in a particular state. Can be used to programatically handle specific cases."
+        },
+        "message": {
+          "type": "string",
+          "description": "A message that describes the state in detail."
         }
       }
     },
