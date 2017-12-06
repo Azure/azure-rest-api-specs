@@ -1976,7 +1976,7 @@
       "properties": {
         "name": {
           "type": "string",
-          "description": "Name for capture destination"
+          "description": "Name for capture destination (Azure Data Lake Store, Azure Storage)"
         },
         "properties": {
           "x-ms-client-flatten": true,
@@ -1989,12 +1989,24 @@
               "type": "string",
               "description": "Blob container Name"
             },
+            "dataLakeSubscriptionId": {
+              "type": "string",
+              "description": "Subscription id of the Microsoft Azure subscription which owns the destination Data Lake Store account"
+            },
+            "dataLakeAccountName": {
+              "type": "string",
+              "description": "Data Lake Store account name"
+            },
+            "dataLakeFolderPath": {
+              "type": "string",
+              "description": "Existing path in the Data Lake Store to write captured events"
+            },
             "archiveNameFormat": {
               "type": "string",
               "description": "Blob naming convention for archive, e.g. {Namespace}/{EventHub}/{PartitionId}/{Year}/{Month}/{Day}/{Hour}/{Minute}/{Second}. Here all the parameters (Namespace,EventHub .. etc) are mandatory irrespective of order"
             }
           },
-          "description": "Properties describing the storage account, blob container and acrchive anme format for capture destination"
+          "description": "Properties describing the storage account, blob container and archive name format for capture destination"
         }
       },
       "description": "Capture storage details for capture description"
