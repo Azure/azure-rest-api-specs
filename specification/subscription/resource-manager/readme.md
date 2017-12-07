@@ -39,6 +39,19 @@ input-file:
 - Microsoft.Subscription/2017-11-01-preview/subscriptionDefinitions.json
 ```
 
+### Tag: package-all-subscription
+
+These settings apply only when `--tag=package-all-subscription` is specified on the command line.
+
+``` yaml $(tag) == 'package-all-subscription'
+input-file:
+- Microsoft.Subscription/2017-11-01-preview/subscriptionDefinitions.json
+- ../../resources/resource-manager/Microsoft.Resources/2016-06-01/subscriptions.json
+title: SubscriptionClient
+description: The subscription client
+```
+
+
 ---
 # Code Generation
 
@@ -55,4 +68,31 @@ csharp:
   license-header: MICROSOFT_MIT_NO_VERSION
   output-folder: $(csharp-sdks-folder)/Subscription/Management.Subscription/Generated
   clear-output-folder: true
+```
+
+## Python
+
+These settings apply only when `--python --tag=package-all-subscription` is specified on the command line.
+Please also specify `--python-sdks-folder=<path to the root directory of your azure-sdk-for-python clone>`.
+Use `--python-mode=update` if you already have a setup.py and just want to update the code itself.
+
+``` yaml $(python) && $(tag) == 'package-all-subscription'
+python-mode: create
+python:
+  azure-arm: true
+  license-header: MICROSOFT_MIT_NO_VERSION
+  payload-flattening-threshold: 2
+  namespace: azure.mgmt.subscription
+  package-name: azure-mgmt-subscription
+  clear-output-folder: true
+```
+``` yaml $(python) && $(python-mode) == 'update' && $(tag) == 'package-all-subscription'
+python:
+  no-namespace-folders: true
+  output-folder: $(python-sdks-folder)/azure-mgmt-subscription/azure/mgmt/subscription
+```
+``` yaml $(python) && $(python-mode) == 'create' && $(tag) == 'package-all-subscription'
+python:
+  basic-setup-py: true
+  output-folder: $(python-sdks-folder)/azure-mgmt-subscription
 ```
