@@ -1913,7 +1913,7 @@
       "type": "object",
       "allOf": [
         {
-          "$ref": "#/definitions/Resource"
+          "$ref": "#/definitions/TrackedResource"
         }
       ],
       "properties": {
@@ -2016,7 +2016,7 @@
       "type": "object",
       "allOf": [
         {
-          "$ref": "#/definitions/Resource"
+          "$ref": "#/definitions/TrackedResource"
         }
       ],
       "properties": {
@@ -2278,7 +2278,7 @@
       "type": "object",
       "allOf": [
         {
-          "$ref": "#/definitions/Resource"
+          "$ref": "#/definitions/TrackedResource"
         }
       ],
       "properties": {
@@ -2391,28 +2391,17 @@
     "CustomDomain": {
       "description": "Friendly domain name mapping to the endpoint hostname that the customer provides for branding purposes, e.g. www.consoto.com.",
       "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/ProxyResource"
+        }
+      ],
       "properties": {
-        "id": {
-          "description": "Resource ID.",
-          "readOnly": true,
-          "type": "string"
-        },
-        "name": {
-          "description": "Resource name.",
-          "readOnly": true,
-          "type": "string"
-        },
-        "type": {
-          "description": "Resource type.",
-          "readOnly": true,
-          "type": "string"
-        },
         "properties": {
           "x-ms-client-flatten": true,
           "$ref": "#/definitions/CustomDomainProperties"
         }
-      },
-      "x-ms-azure-resource": true
+      }
     },
     "CustomDomainProperties": {
       "description": "The JSON object that contains the properties of the custom domain to create.",
@@ -2754,28 +2743,17 @@
     "EdgeNode": {
       "description": "Edgenode is a global Point of Presence (POP) location used to deliver CDN content to end users.",
       "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/ProxyResource"
+        }
+      ],
       "properties": {
-        "id": {
-          "description": "Resource ID.",
-          "readOnly": true,
-          "type": "string"
-        },
-        "name": {
-          "description": "Resource name.",
-          "readOnly": true,
-          "type": "string"
-        },
-        "type": {
-          "description": "Resource type.",
-          "readOnly": true,
-          "type": "string"
-        },
         "properties": {
           "x-ms-client-flatten": true,
           "$ref": "#/definitions/EdgeNodeProperties"
         }
-      },
-      "x-ms-azure-resource": true
+      }
     },
     "EdgeNodeProperties": {
       "description": "The JSON object that contains the properties required to create an edgenode.",
@@ -2831,7 +2809,7 @@
       }
     },
     "Resource": {
-      "description": "The Resource definition.",
+      "description": "The core properties of ARM resources",
       "properties": {
         "id": {
           "description": "Resource ID.",
@@ -2847,7 +2825,18 @@
           "description": "Resource type.",
           "readOnly": true,
           "type": "string"
-        },
+        }
+      },
+      "x-ms-azure-resource": true
+    },
+    "TrackedResource": {
+      "description": "The resource model definition for a ARM tracked top level resource.",
+      "allOf": [
+        {
+          "$ref": "#/definitions/Resource"
+        }
+      ],
+      "properties": {
         "location": {
           "type": "string",
           "description": "Resource location."
@@ -2857,13 +2846,25 @@
           "additionalProperties": {
             "type": "string"
           },
+          "x-ms-mutability": [
+            "read",
+            "create",
+            "update"
+          ],
           "description": "Resource tags."
         }
       },
       "required": [
         "location"
-      ],
-      "x-ms-azure-resource": true
+      ]
+    },
+    "ProxyResource": {
+      "description": "The resource model definition for a ARM proxy resource. It will have everything other than required location and tags",
+      "allOf": [
+        {
+          "$ref": "#/definitions/Resource"
+        }
+      ]
     },
     "QueryStringCachingBehavior": {
       "description": "Defines how CDN caches requests that include query strings. You can ignore any query strings when caching, bypass caching to prevent requests that contain query strings from being cached, or cache every request with a unique URL.",
