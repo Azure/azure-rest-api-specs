@@ -61,7 +61,12 @@
             "in": "query",
             "type": "boolean",
             "description": "If true, return all intents instead of just the top scoring intent."
-
+          },
+          {
+            "name": "staging",
+            "in": "query",
+            "type": "boolean",
+            "description": "Use the staging endpoint slot."
           },
           {
             "name": "spellCheck",
@@ -70,10 +75,16 @@
             "description": "Enable spell checking."
           },
           {
-            "name": "staging",
+            "name": "bing-spell-check-subscription-key",
             "in": "query",
-            "type": "boolean",
-            "description": "Use the staging endpoint slot."
+            "description": "The subscription key to use when enabling bing spell check",
+            "type": "string"
+          },
+          {
+            "name": "log",
+            "in": "query",
+            "description": "Log query (default is true)",
+            "type": "boolean"
           }
         ],
         "responses": {
@@ -133,16 +144,28 @@
             "description": "If true, return all intents instead of just the top scoring intent."
           },
           {
+            "name": "staging",
+            "in": "query",
+            "type": "boolean",
+            "description": "Use the staging endpoint slot."
+          },
+          {
             "name": "spellCheck",
             "in": "query",
             "type": "boolean",
             "description": "Enable spell checking."
           },
           {
-            "name": "staging",
+            "name": "bing-spell-check-subscription-key",
             "in": "query",
-            "type": "boolean",
-            "description": "Use the staging endpoint slot."
+            "description": "The subscription key to use when enabling bing spell check",
+            "type": "string"
+          },
+          {
+            "name": "log",
+            "in": "query",
+            "description": "Log query (default is true)",
+            "type": "boolean"
           }
         ],
         "consumes": [
@@ -187,6 +210,10 @@
         "query": {
           "description": "The input utterance that was analized.",
           "type": "string"
+        },
+        "alteredQuery": {
+          "type": "string",
+          "description": "The corrected utterance (when spell checking was enabled)."
         },
         "topScoringIntent": {
           "$ref": "#/definitions/IntentModel"
