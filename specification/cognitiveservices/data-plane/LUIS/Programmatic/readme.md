@@ -19,8 +19,11 @@ These settings apply only when `--tag=programmatic_2_0` is specified on the comm
 
 ``` yaml $(tag) == 'programmatic_2_0'
 input-file: v2.0/LUIS-Programmatic.json
+```
 
-# Remove Deprecated Pattern's Operations
+Deprecated Pattern's Operations
+
+``` yaml $(tag) == 'programmatic_2_0'
 directive:
   - reason: Deprecated
     remove-operation: Features_GetApplicationVersionPatternFeatures
@@ -32,7 +35,11 @@ directive:
     remove-operation: Features_UpdatePatternFeature
   - reason: Deprecated
     remove-operation: Features_DeletePatternFeature
+```
 
+AutoRest-Linter Supressions
+
+``` yaml
 # Ignore autorest-linter issues that cannot be resolve without updates to the API implementation
 directive:
   - supress: R3013
