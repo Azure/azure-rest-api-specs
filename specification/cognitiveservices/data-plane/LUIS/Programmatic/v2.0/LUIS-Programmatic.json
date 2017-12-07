@@ -3997,6 +3997,7 @@
       "description": "Defines the entity type and position of the extracted entity within the example.",
       "additionalProperties": false,
       "type": "object",
+      "required": ["entityName", "startCharIndex", "endCharIndex"],
       "properties": {
         "entityName": {
           "description": "The entity type.",
@@ -4128,6 +4129,7 @@
       "description": "Exported Model - Extracted Entity from utterance.",
       "additionalProperties": false,
       "type": "object",
+      "required": ["startPos", "endPos", "entity"],
       "properties": {
         "startPos": {
           "description": "The index within the utterance where the extracted entity starts.",
@@ -5329,6 +5331,7 @@
     "EntityPrediction": {
       "description": "A suggested entity.",
       "type": "object",
+      "required": ["entityName", "startTokenIndex", "endTokenIndex", "phrase"],
       "properties": {
         "entityName": {
           "description": "The entity's name",
