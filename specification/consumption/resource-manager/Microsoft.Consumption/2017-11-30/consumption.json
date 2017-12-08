@@ -155,7 +155,8 @@
             "description": "Can be daily or monthly",
             "in": "query",
             "required": true,
-            "type": "string"
+            "type": "string",
+            "enum": ["daily", "monthly"]
           },       
           {
             "name": "$filter",
@@ -181,6 +182,9 @@
               "$ref": "#/definitions/ErrorResponse"
             }
           }
+        },        
+        "x-ms-pageable": {
+          "nextLinkName": null
         }
       }
     }, 
@@ -235,6 +239,9 @@
               "$ref": "#/definitions/ErrorResponse"
             }
           }
+        },                
+        "x-ms-pageable": {
+         "nextLinkName": null
         }
       }
     },    
