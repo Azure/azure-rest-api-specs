@@ -1728,6 +1728,9 @@
         "summary": "Gets the last lines of docker logs for the given site",
         "description": "Gets the last lines of docker logs for the given site",
         "operationId": "WebApps_GetWebSiteContainerLogs",
+        "produces": [
+          "application/octet-stream"
+        ],
         "parameters": [
           {
             "$ref": "#/parameters/resourceGroupNameParameter"
@@ -1766,7 +1769,10 @@
         ],
         "summary": "Gets the ZIP archived docker log files for the given site",
         "description": "Gets the ZIP archived docker log files for the given site",
-        "operationId": "WebApps_GetContainerLogsZip",
+        "operationId": "WebApps_GetWebSiteContainerLogsZip",
+        "produces": [
+          "application/zip"
+        ],
         "parameters": [
           {
             "$ref": "#/parameters/resourceGroupNameParameter"
@@ -7621,6 +7627,9 @@
         "summary": "Gets the last lines of docker logs for the given site",
         "description": "Gets the last lines of docker logs for the given site",
         "operationId": "WebApps_GetWebSiteContainerLogsSlot",
+        "produces": [
+          "application/octet-stream"
+        ],
         "parameters": [
           {
             "$ref": "#/parameters/resourceGroupNameParameter"
@@ -7666,7 +7675,10 @@
         ],
         "summary": "Gets the ZIP archived docker log files for the given site",
         "description": "Gets the ZIP archived docker log files for the given site",
-        "operationId": "WebApps_GetContainerLogsZipSlot",
+        "operationId": "WebApps_GetWebSiteContainerLogsZipSlot",
+        "produces": [
+          "application/zip"
+        ],
         "parameters": [
           {
             "$ref": "#/parameters/resourceGroupNameParameter"

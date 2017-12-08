@@ -90,7 +90,7 @@
             "in": "body",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/RedisResource"
+              "$ref": "#/definitions/RedisCreateParameters"
             },
             "description": "Parameters supplied to the Create Redis operation."
           },
@@ -145,7 +145,7 @@
             "in": "body",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/RedisPatchResource"
+              "$ref": "#/definitions/RedisUpdateParameters"
             },
             "description": "Parameters supplied to the Update Redis operation."
           },
@@ -158,7 +158,7 @@
         ],
         "responses": {
           "200": {
-            "description": "",
+            "description": "The existing redis cache was successfully updated. Check provisioningStatus to see detailed status.",
             "schema": {
               "$ref": "#/definitions/RedisResource"
             }
@@ -654,7 +654,7 @@
             "in": "body",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/RedisFirewallRule"
+              "$ref": "#/definitions/RedisFirewallRuleCreateParameters"
             },
             "description": "Parameters supplied to the create or update redis firewall rule operation."
           },
@@ -919,10 +919,10 @@
         "tags": [
           "Redis"
         ],
-        "operationId": "RedisLinkedServer_Create",
+        "operationId": "LinkedServer_Create",
         "x-ms-long-running-operation": true,
         "x-ms-examples": {
-          "RedisLinkedServer_Create": { "$ref": "./examples/RedisCacheLinkedServer_Create.json" }
+          "LinkedServer_Create": { "$ref": "./examples/RedisCacheLinkedServer_Create.json" }
         },
         "description": "Adds a linked server to the Redis cache (requires Premium SKU).",
         "parameters": [
@@ -982,9 +982,9 @@
         "tags": [
           "Redis"
         ],
-        "operationId": "RedisLinkedServer_Delete",
+        "operationId": "LinkedServer_Delete",
         "x-ms-examples": {
-          "RedisLinkedServerDelete": { "$ref": "./examples/RedisCacheLinkedServer_Delete.json" }
+          "LinkedServerDelete": { "$ref": "./examples/RedisCacheLinkedServer_Delete.json" }
         },
         "description": "Deletes the linked server from a redis cache (requires Premium SKU).",
         "parameters": [
@@ -1026,9 +1026,9 @@
         "tags": [
           "Redis"
         ],
-        "operationId": "RedisLinkedServer_Get",
+        "operationId": "LinkedServer_Get",
         "x-ms-examples": {
-          "RedisLinkedServer_Get": { "$ref": "./examples/RedisCacheLinkedServer_Get.json" }
+          "LinkedServer_Get": { "$ref": "./examples/RedisCacheLinkedServer_Get.json" }
         },
         "description": "Gets the detailed information about a linked server of a redis cache (requires Premium SKU).",
         "parameters": [
@@ -1075,9 +1075,9 @@
         "tags": [
           "Redis"
         ],
-        "operationId": "RedisLinkedServer_List",
+        "operationId": "LinkedServer_List",
         "x-ms-examples": {
-          "RedisLinkedServer_List": { "$ref": "./examples/RedisCacheLinkedServer_List.json" }
+          "LinkedServer_List": { "$ref": "./examples/RedisCacheLinkedServer_List.json" }
         },
         "description": "Gets the list of linked servers associated with this redis cache (requires Premium SKU).",
         "parameters": [
@@ -1109,6 +1109,9 @@
               "$ref": "#/definitions/RedisLinkedServerWithPropertiesList"
             }
           }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
         }
       }
     }
@@ -1154,22 +1157,18 @@
       ],
       "description": "SKU parameters supplied to the create Redis operation."
     },
-    "RedisProperties": {
+    "RedisCommonProperties": {
       "properties": {
-        "sku": {
-          "$ref": "#/definitions/Sku",
-          "description": "The SKU of the Redis cache to deploy."
-        },
-        "enableNonSslPort": {
-          "type": "boolean",
-          "description": "Specifies whether the non-ssl Redis server port (6379) is enabled."
-        },
         "redisConfiguration": {
           "type": "object",
           "additionalProperties": {
             "type": "string"
           },
           "description": "All Redis Settings. Few possible keys: rdb-backup-enabled,rdb-storage-connection-string,rdb-backup-frequency,maxmemory-delta,maxmemory-policy,notify-keyspace-events,maxmemory-samples,slowlog-log-slower-than,slowlog-max-len,list-max-ziplist-entries,list-max-ziplist-value,hash-max-ziplist-entries,hash-max-ziplist-value,set-max-intset-entries,zset-max-ziplist-entries,zset-max-ziplist-value etc."
+        },
+        "enableNonSslPort": {
+          "type": "boolean",
+          "description": "Specifies whether the non-ssl Redis server port (6379) is enabled."
         },
         "tenantSettings": {
           "type": "object",
@@ -1182,6 +1181,16 @@
           "type": "integer",
           "format": "int32",
           "description": "The number of shards to be created on a Premium Cluster Cache."
+        }
+      },
+      "description": "Create/Update/Get common properties of the redis cache.",
+      "x-ms-external": true
+    },
+    "RedisCreateProperties": {
+      "properties": {
+        "sku": {
+          "$ref": "#/definitions/Sku",
+          "description": "The SKU of the Redis cache to deploy."
         },
         "subnetId": {
           "type": "string",
@@ -1192,7 +1201,36 @@
           "type": "string",
           "pattern": "^\\d+\\.\\d+\\.\\d+\\.\\d+$",
           "description": "Static IP address. Required when deploying a Redis cache inside an existing Azure Virtual Network."
-        },
+        }
+      },
+      "required": [
+        "sku"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/RedisCommonProperties"
+        }
+      ],
+      "description": "Properties supplied to Create Redis operation.",
+      "x-ms-external": true
+    },
+    "RedisUpdateProperties": {
+      "properties": {
+        "sku": {
+          "$ref": "#/definitions/Sku",
+          "description": "The SKU of the Redis cache to deploy."
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "#/definitions/RedisCommonProperties"
+        }
+      ],
+      "description": "Patchable properties of the redis cache.",
+      "x-ms-external": true
+    },
+    "RedisProperties": {
+      "properties": {
         "redisVersion": {
           "readOnly": true,
           "type": "string",
@@ -1227,47 +1265,19 @@
         },
         "linkedServers": {
           "readOnly": true,
-          "$ref": "#/definitions/RedisLinkedServerList",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/RedisLinkedServer"
+          },
           "description": "List of the linked servers associated with the cache"
         }
       },
-      "required": [
-        "sku"
+      "allOf": [
+        {
+          "$ref": "#/definitions/RedisCreateProperties"
+        }
       ],
       "description": "Properties of the redis cache.",
-      "x-ms-external": true
-    },
-    "RedisPatchProperties": {
-      "properties": {
-        "sku": {
-          "$ref": "#/definitions/Sku",
-          "description": "The SKU of the Redis cache to deploy."
-        },
-        "enableNonSslPort": {
-          "type": "boolean",
-          "description": "Specifies whether the non-ssl Redis server port (6379) is enabled."
-        },
-        "redisConfiguration": {
-          "type": "object",
-          "additionalProperties": {
-            "type": "string"
-          },
-          "description": "All Redis Settings. Few possible keys: rdb-backup-enabled,rdb-storage-connection-string,rdb-backup-frequency,maxmemory-delta,maxmemory-policy,notify-keyspace-events,maxmemory-samples,slowlog-log-slower-than,slowlog-max-len,list-max-ziplist-entries,list-max-ziplist-value,hash-max-ziplist-entries,hash-max-ziplist-value,set-max-intset-entries,zset-max-ziplist-entries,zset-max-ziplist-value etc."
-        },
-        "tenantSettings": {
-          "type": "object",
-          "additionalProperties": {
-            "type": "string"
-          },
-          "description": "A dictionary of tenant settings"
-        },
-        "shardCount": {
-          "type": "integer",
-          "format": "int32",
-          "description": "The number of shards to be created on a Premium Cluster Cache."
-        }
-      },
-      "description": "Patchable properties of the redis cache.",
       "x-ms-external": true
     },
     "Resource": {
@@ -1332,6 +1342,59 @@
         }
       ]
     },
+    "RedisCreateParameters": {
+      "properties": {
+        "properties": {
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/RedisCreateProperties",
+          "description": "Redis cache properties."
+        },
+        "zones": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "description": "A list of availability zones denoting where the resource needs to come from."
+        },
+        "location": {
+          "type": "string",
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ],
+          "description": "The geo-location where the resource lives"
+        },
+        "tags": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          },
+          "description": "Resource tags."
+        }
+      },
+      "required": [
+        "properties",
+        "location"
+      ],
+      "description": "Parameters supplied to the Create Redis operation."
+    },
+    "RedisUpdateParameters": {
+      "properties": {
+        "properties": {
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/RedisUpdateProperties",
+          "description": "Redis cache properties."
+        },
+        "tags": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          },
+          "description": "Resource tags."
+        }
+      },
+      "description": "Parameters supplied to the Update Redis operation."
+    },
     "RedisAccessKeys": {
       "properties": {
         "primaryKey": {
@@ -1364,6 +1427,19 @@
           "$ref": "#/definitions/ProxyResource"
         }
       ]
+    },
+    "RedisFirewallRuleCreateParameters": {
+      "properties": {
+        "properties": {
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/RedisFirewallRuleProperties",
+          "description": "Properties required to create a firewall rule ."
+        }
+      },
+      "required": [
+        "properties"
+      ],
+      "description": "Parameters required for creating a firewall rule on redis cache."
     },
     "RedisFirewallRuleProperties": {
       "description": "Specifies a range of IP addresses permitted to connect to the cache",
@@ -1411,7 +1487,7 @@
           "items": {
             "type": "string"
           },
-          "description": "A list of availability zones denoting where the resource needs to come from." 
+          "description": "A list of availability zones denoting where the resource needs to come from."
         }
       },
       "required": [
@@ -1423,21 +1499,6 @@
         }
       ],
       "description": "A single Redis item in List or Get Operation."
-    },
-    "RedisPatchResource": {
-      "properties": {
-        "properties": {
-          "x-ms-client-flatten": true,
-          "$ref": "#/definitions/RedisPatchProperties",
-          "description": "Redis cache patchable properties."
-        }
-      },
-      "allOf": [
-        {
-          "$ref": "#/definitions/Resource"
-        }
-      ],
-      "description": "A request holding properties to patch a redis cache."
     },
     "RedisListResult": {
       "properties": {
@@ -1583,6 +1644,7 @@
     "ScheduleEntries": {
       "properties": {
         "scheduleEntries": {
+          "x-ms-client-name": "ScheduleEntries",
           "type": "array",
           "items": {
             "$ref": "#/definitions/ScheduleEntry"
@@ -1663,21 +1725,6 @@
         }
       ]
     },
-    "RedisLinkedServerList": {
-      "properties": {
-        "value": {
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/RedisLinkedServer"
-          },
-          "description": "List of linked server Ids of a Redis cache."
-        }
-      },
-      "required": [
-        "value"
-      ],
-      "description": "List of linked server Ids of a Redis cache."
-    },
     "RedisLinkedServerWithPropertiesList": {
       "properties": {
         "value": {
@@ -1686,11 +1733,13 @@
             "$ref": "#/definitions/RedisLinkedServerWithProperties"
           },
           "description": "List of linked servers (with properites) of a Redis cache."
+        },
+        "nextLink": {
+          "type": "string",
+          "readOnly": true,
+          "description": "Link for next set."
         }
       },
-      "required": [
-        "value"
-      ],
       "description": "List of linked servers (with properites) of a Redis cache."
     },
     "RedisLinkedServerCreateProperties": {
@@ -1786,19 +1835,19 @@
     }
   },
   "parameters": {
-    "SubscriptionIdParameter": {
-      "name": "subscriptionId",
-      "in": "path",
-      "required": true,
-      "type": "string",
-      "description": "Gets subscription credentials which uniquely identify the Microsoft Azure subscription. The subscription ID forms part of the URI for every service call."
-    },
-    "ApiVersionParameter": {
-      "name": "api-version",
-      "in": "query",
-      "required": true,
-      "type": "string",
-      "description": "Client Api Version."
+      "SubscriptionIdParameter": {
+        "name": "subscriptionId",
+        "in": "path",
+        "required": true,
+        "type": "string",
+        "description": "Gets subscription credentials which uniquely identify the Microsoft Azure subscription. The subscription ID forms part of the URI for every service call."
+      },
+      "ApiVersionParameter": {
+        "name": "api-version",
+        "in": "query",
+        "required": true,
+        "type": "string",
+        "description": "Client Api Version."
+      }
     }
   }
-}

@@ -51,10 +51,9 @@ Please also specify `--csharp-sdks-folder=<path to "SDKs" directory of your azur
 
 ```yaml $(csharp)
 csharp:
-  namespace: Microsoft.Azure.Management.OperationalInsights.Data
-  output-folder: $(csharp-sdks-folder)/OperationalInsights/Data/OperationalInsights.Data/Generated
+  namespace: Microsoft.Azure.OperationalInsights
+  output-folder: $(csharp-sdks-folder)/OperationalInsights/DataPlane/OperationalInsights/Generated
   clear-output-folder: true
-  use-internal-constructors: true
   payload-flattening-threshold: 3
 directive:
   - reason: Don't expose the GET endpoint since it's behavior is more limited than POST

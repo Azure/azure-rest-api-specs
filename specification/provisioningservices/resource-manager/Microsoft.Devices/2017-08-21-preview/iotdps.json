@@ -116,7 +116,7 @@
          "in": "header",
          "required": false,
          "type": "string",
-         "description": "ETag of the certificate. This is required to update an existing certificate, and ignored while creating a brand new certificate."
+         "description": "ETag of the certificate."
         },
         {
          "$ref": "#/parameters/api-version"
@@ -184,6 +184,13 @@
          "schema": {
           "$ref": "#/definitions/CertificateBodyDescription"
          }
+        },
+        {
+         "name": "If-Match",
+         "in": "header",
+         "required": false,
+         "type": "string",
+         "description": "ETag of the certificate. This is required to update an existing certificate, and ignored while creating a brand new certificate."
         }
        ],
        "responses": {
@@ -230,6 +237,13 @@
          "required": true,
          "type": "string",
          "description": "Resource group identifier."
+        },
+        {
+         "name": "If-Match",
+         "in": "header",
+         "required": true,
+         "type": "string",
+         "description": "ETag of the certificate"
         },
         {
          "name": "provisioningServiceName",
@@ -788,6 +802,13 @@
          "description": "The mandatory logical name of the certificate, that the provisioning service uses to access."
         },
         {
+         "name": "If-Match",
+         "in": "header",
+         "required": true,
+         "type": "string",
+         "description": "ETag of the certificate. This is required to update an existing certificate, and ignored while creating a brand new certificate."
+        },
+        {
          "$ref": "#/parameters/subscriptionId"
         },
         {
@@ -914,6 +935,13 @@
          "required": true,
          "type": "string",
          "description": "The mandatory logical name of the certificate, that the provisioning service uses to access."
+        },
+        {
+         "name": "If-Match",
+         "in": "header",
+         "required": true,
+         "type": "string",
+         "description": "ETag of the certificate."
         },
         {
          "name": "request",
@@ -1347,7 +1375,8 @@
        }
       ],
       "required": [
-       "sku"
+       "sku",
+       "properties"
       ]
      },
      "IotDpsPropertiesDescription": {
@@ -1484,7 +1513,11 @@
          "modelAsString": true
         }
        }
-      }
+      },
+      "required": [
+        "keyName",
+        "rights"
+       ]
      },
      "Resource": {
       "description": "The common properties of an Azure resource.",
@@ -1575,11 +1608,9 @@
       "type": "object",
       "properties": {
        "code": {
+        "description": "error code.",
         "type": "string",
-        "x-ms-enum": {
-         "name": "ErrorCode",
-         "modelAsString": true
-        }
+        "readOnly": true
        },
        "httpStatusCode": {
         "type": "string",

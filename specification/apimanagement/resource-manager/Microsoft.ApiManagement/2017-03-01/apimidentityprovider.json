@@ -193,6 +193,11 @@
         ],
         "operationId": "IdentityProvider_Update",
         "description": "Updates an existing IdentityProvider configuration.",
+        "x-ms-examples": {
+          "ApiManagementUpdateIdentityProvider": {
+            "$ref": "./examples/ApiManagementUpdateIdentityProvider.json"
+          }
+        },
         "parameters": [
           {
             "$ref": "./apimanagement.json#/parameters/ResourceGroupNameParameter"
@@ -387,7 +392,33 @@
           ],
           "x-ms-enum": {
             "name": "IdentityProviderType",
-            "modelAsString": false
+            "modelAsString": true,
+            "values": [
+              {
+                "value": "facebook",
+                "description": "Facebook as Identity provider."
+              },
+              {
+                "value": "google",
+                "description": "Google as Identity provider."
+              },
+              {
+                "value": "microsoft",
+                "description": "Microsoft Live as Identity provider."
+              },
+              {
+                "value": "twitter",
+                "description": "Twitter as Identity provider."
+              },
+              {
+                "value": "aad",
+                "description": "Azure Active Directory as Identity provider."
+              },
+              {
+                "value": "aadB2C",
+                "description": "Azure Active Directory B2C as Identity provider."
+              }
+            ]
           },
           "description": "Identity Provider Type identifier."
         },
@@ -439,7 +470,33 @@
       ],
       "x-ms-enum": {
         "name": "IdentityProviderType",
-        "modelAsString": false
+        "modelAsString": true,
+        "values": [
+          {
+            "value": "facebook",
+            "description": "Facebook as Identity provider."
+          },
+          {
+            "value": "google",
+            "description": "Google as Identity provider."
+          },
+          {
+            "value": "microsoft",
+            "description": "Microsoft Live as Identity provider."
+          },
+          {
+            "value": "twitter",
+            "description": "Twitter as Identity provider."
+          },
+          {
+            "value": "aad",
+            "description": "Azure Active Directory as Identity provider."
+          },
+          {
+            "value": "aadB2C",
+            "description": "Azure Active Directory B2C as Identity provider."
+          }
+        ]
       },
       "description": "Identity Provider Type identifier.",
       "x-ms-parameter-location": "method"

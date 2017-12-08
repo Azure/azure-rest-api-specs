@@ -81,7 +81,7 @@ Please also specify `--csharp-sdks-folder=<path to "SDKs" directory of your azur
 ``` yaml $(csharp)
 csharp:
   license-header: MICROSOFT_MIT_NO_VERSION
-  namespace: Microsoft.HDInsight
+  namespace: Microsoft.Azure.Management.HDInsight
   output-folder: $(csharp-sdks-folder)/HDInsight/Management.HDInsight/Generated
   clear-output-folder: true
 ```
