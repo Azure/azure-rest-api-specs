@@ -8,6 +8,7 @@
   "definitions": {
     "Pipeline": {
       "description": "A data factory pipeline.",
+      "type": "object",
       "properties": {
         "description": {
           "description": "The description of the pipeline.",
@@ -34,6 +35,7 @@
     "Activity": {
       "discriminator": "type",
       "description": "A pipeline activity.",
+      "type": "object",
       "properties": {
         "name": {
           "description": "Activity name.",
@@ -55,6 +57,9 @@
           }
         }
       },
+      "additionalProperties": {
+        "type": "object"
+      },
       "required": [
         "name",
         "type"
@@ -62,6 +67,7 @@
     },
     "ActivityDependency": {
       "description": "Activity dependency information.",
+      "type": "object",
       "properties": {
         "activity": {
           "description": "Activity name.",
@@ -84,6 +90,9 @@
             }
           }
         }
+      },
+      "additionalProperties": {
+        "type": "object"
       },
       "required": [
         "activity",
@@ -121,6 +130,7 @@
     },
     "ActivityPolicy": {
       "description": "Execution policy for an activity.",
+      "type": "object",
       "properties": {
         "timeout": {
           "type": "object",
@@ -136,6 +146,9 @@
           "minimum": 30,
           "maximum": 86400
         }
+      },
+      "additionalProperties": {
+        "type": "object"
       }
     },
     "CopyActivity": {
@@ -234,6 +247,9 @@
           "description": "Source retry wait. Type: string (or Expression with resultType string), pattern: ((\\d+)\\.)?(\\d\\d):(60|([0-5][0-9])):(60|([0-5][0-9]))."
         }
       },
+      "additionalProperties": {
+        "type": "object"
+      },
       "required": [
         "type"
       ]
@@ -300,7 +316,7 @@
       }
     },
     "DynamicsSource": {
-      "description": "A copy activity Dynamics entity source.",
+      "description": "A copy activity Dynamics source.",
       "type": "object",
       "allOf": [
         {
@@ -326,6 +342,48 @@
         "query": {
           "type": "object",
           "description": "Database query. Type: string (or Expression with resultType string)."
+        }
+      }
+    },
+    "SalesforceSource": {
+      "description": "A copy activity Salesforce source.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/CopySource"
+        }
+      ],
+      "properties": {
+        "query": {
+          "type": "object",
+          "description": "Database query. Type: string (or Expression with resultType string)."
+        },
+        "readBehavior": {
+          "description": "The read behavior for the operation. Default is Query.",
+          "type": "string",
+          "enum": [
+            "Query",
+            "QueryAll"
+          ],
+          "x-ms-enum": {
+            "name": "SalesforceSourceReadBehavior",
+            "modelAsString": true
+          }
+        }
+      }
+    },
+    "SapCloudForCustomerSource": {
+      "description": "A copy activity source for SAP Cloud for Customer source.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/CopySource"
+        }
+      ],
+      "properties": {
+        "query": {
+          "type": "object",
+          "description": "SAP Cloud for Customer OData query. For example, \"$top=1\". Type: string (or Expression with resultType string)."
         }
       }
     },
@@ -394,7 +452,7 @@
       }
     },
     "HdfsSource": {
-      "description": "A copy activity source for HDFS source.",
+      "description": "A copy activity HDFS source.",
       "type": "object",
       "allOf": [
         {
@@ -433,6 +491,21 @@
         "resourceManagerEndpoint",
         "tempScriptPath"
       ]
+    },
+    "AzureMySqlSource": {
+      "description": "A copy activity Azure MySQL source.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/CopySource"
+        }
+      ],
+      "properties": {
+        "query": {
+          "type": "object",
+          "description": "Database query. Type: string (or Expression with resultType string)."
+        }
+      }
     },
     "OracleSource": {
       "description": "A copy activity Oracle source.",
@@ -543,6 +616,396 @@
         }
       }
     },
+    "AmazonMWSSource": { 
+      "description": "A copy activity Amazon Marketplace Web Service source.", 
+      "type": "object", 
+      "allOf": [ 
+        { 
+          "$ref": "#/definitions/CopySource" 
+        } 
+      ], 
+      "properties": {
+        "query": { 
+          "type": "object", 
+          "description": "A query to retrieve data from source. Type: string (or Expression with resultType string)." 
+        }
+      } 
+    }, 
+    "AzurePostgreSqlSource": { 
+      "description": "A copy activity Azure PostgreSQL source.", 
+      "type": "object", 
+      "allOf": [ 
+        { 
+          "$ref": "#/definitions/CopySource" 
+        } 
+      ], 
+      "properties": {
+        "query": { 
+          "type": "object", 
+          "description": "A query to retrieve data from source. Type: string (or Expression with resultType string)." 
+        }
+      } 
+    }, 
+    "ConcurSource": { 
+      "description": "A copy activity Concur Serivce source.", 
+      "type": "object", 
+      "allOf": [ 
+        { 
+          "$ref": "#/definitions/CopySource" 
+        } 
+      ], 
+      "properties": {
+        "query": { 
+          "type": "object", 
+          "description": "A query to retrieve data from source. Type: string (or Expression with resultType string)." 
+        }
+      } 
+    }, 
+    "CouchbaseSource": { 
+      "description": "A copy activity Couchbase server source.", 
+      "type": "object", 
+      "allOf": [ 
+        { 
+          "$ref": "#/definitions/CopySource" 
+        } 
+      ], 
+      "properties": {
+        "query": { 
+          "type": "object", 
+          "description": "A query to retrieve data from source. Type: string (or Expression with resultType string)." 
+        }
+      } 
+    }, 
+    "DrillSource": { 
+      "description": "A copy activity Drill server source.", 
+      "type": "object", 
+      "allOf": [ 
+        { 
+          "$ref": "#/definitions/CopySource" 
+        } 
+      ], 
+      "properties": {
+        "query": { 
+          "type": "object", 
+          "description": "A query to retrieve data from source. Type: string (or Expression with resultType string)." 
+        }
+      } 
+    }, 
+    "EloquaSource": { 
+      "description": "A copy activity Eloqua server source.", 
+      "type": "object", 
+      "allOf": [ 
+        { 
+          "$ref": "#/definitions/CopySource" 
+        } 
+      ], 
+      "properties": {
+        "query": { 
+          "type": "object", 
+          "description": "A query to retrieve data from source. Type: string (or Expression with resultType string)." 
+        }
+      } 
+    }, 
+    "GoogleBigQuerySource": { 
+      "description": "A copy activity Google BigQuery service source.", 
+      "type": "object", 
+      "allOf": [ 
+        { 
+          "$ref": "#/definitions/CopySource" 
+        } 
+      ], 
+      "properties": {
+        "query": { 
+          "type": "object", 
+          "description": "A query to retrieve data from source. Type: string (or Expression with resultType string)." 
+        }
+      } 
+    }, 
+    "GreenplumSource": { 
+      "description": "A copy activity Greenplum Database source.", 
+      "type": "object", 
+      "allOf": [ 
+        { 
+          "$ref": "#/definitions/CopySource" 
+        } 
+      ], 
+      "properties": {
+        "query": { 
+          "type": "object", 
+          "description": "A query to retrieve data from source. Type: string (or Expression with resultType string)." 
+        }
+      } 
+    }, 
+    "HBaseSource": { 
+      "description": "A copy activity HBase server source.", 
+      "type": "object", 
+      "allOf": [ 
+        { 
+          "$ref": "#/definitions/CopySource" 
+        } 
+      ], 
+      "properties": {
+        "query": { 
+          "type": "object", 
+          "description": "A query to retrieve data from source. Type: string (or Expression with resultType string)." 
+        }
+      } 
+    }, 
+    "HiveSource": { 
+      "description": "A copy activity Hive Server source.", 
+      "type": "object", 
+      "allOf": [ 
+        { 
+          "$ref": "#/definitions/CopySource" 
+        } 
+      ], 
+      "properties": {
+        "query": { 
+          "type": "object", 
+          "description": "A query to retrieve data from source. Type: string (or Expression with resultType string)." 
+        }
+      } 
+    }, 
+    "HubspotSource": { 
+      "description": "A copy activity Hubspot Serivce source.", 
+      "type": "object", 
+      "allOf": [ 
+        { 
+          "$ref": "#/definitions/CopySource" 
+        } 
+      ], 
+      "properties": {
+        "query": { 
+          "type": "object", 
+          "description": "A query to retrieve data from source. Type: string (or Expression with resultType string)." 
+        }
+      } 
+    }, 
+    "ImpalaSource": { 
+      "description": "A copy activity Impala server source.", 
+      "type": "object", 
+      "allOf": [ 
+        { 
+          "$ref": "#/definitions/CopySource" 
+        } 
+      ], 
+      "properties": {
+        "query": { 
+          "type": "object", 
+          "description": "A query to retrieve data from source. Type: string (or Expression with resultType string)." 
+        }
+      } 
+    }, 
+    "JiraSource": { 
+      "description": "A copy activity Jira Serivce source.", 
+      "type": "object", 
+      "allOf": [ 
+        { 
+          "$ref": "#/definitions/CopySource" 
+        } 
+      ], 
+      "properties": {
+        "query": { 
+          "type": "object", 
+          "description": "A query to retrieve data from source. Type: string (or Expression with resultType string)." 
+        }
+      } 
+    }, 
+    "MagentoSource": { 
+      "description": "A copy activity Magento server source.", 
+      "type": "object", 
+      "allOf": [ 
+        { 
+          "$ref": "#/definitions/CopySource" 
+        } 
+      ], 
+      "properties": {
+        "query": { 
+          "type": "object", 
+          "description": "A query to retrieve data from source. Type: string (or Expression with resultType string)." 
+        }
+      } 
+    }, 
+    "MariaDBSource": { 
+      "description": "A copy activity MariaDB server source.", 
+      "type": "object", 
+      "allOf": [ 
+        { 
+          "$ref": "#/definitions/CopySource" 
+        } 
+      ], 
+      "properties": {
+        "query": { 
+          "type": "object", 
+          "description": "A query to retrieve data from source. Type: string (or Expression with resultType string)." 
+        }
+      } 
+    }, 
+    "MarketoSource": { 
+      "description": "A copy activity Marketo server source.", 
+      "type": "object", 
+      "allOf": [ 
+        { 
+          "$ref": "#/definitions/CopySource" 
+        } 
+      ], 
+      "properties": {
+        "query": { 
+          "type": "object", 
+          "description": "A query to retrieve data from source. Type: string (or Expression with resultType string)." 
+        }
+      } 
+    }, 
+    "PaypalSource": { 
+      "description": "A copy activity Paypal Serivce source.", 
+      "type": "object", 
+      "allOf": [ 
+        { 
+          "$ref": "#/definitions/CopySource" 
+        } 
+      ], 
+      "properties": {
+        "query": { 
+          "type": "object", 
+          "description": "A query to retrieve data from source. Type: string (or Expression with resultType string)." 
+        }
+      } 
+    }, 
+    "PhoenixSource": { 
+      "description": "A copy activity Phoenix server source.", 
+      "type": "object", 
+      "allOf": [ 
+        { 
+          "$ref": "#/definitions/CopySource" 
+        } 
+      ], 
+      "properties": {
+        "query": { 
+          "type": "object", 
+          "description": "A query to retrieve data from source. Type: string (or Expression with resultType string)." 
+        }
+      } 
+    }, 
+    "PrestoSource": { 
+      "description": "A copy activity Presto server source.", 
+      "type": "object", 
+      "allOf": [ 
+        { 
+          "$ref": "#/definitions/CopySource" 
+        } 
+      ], 
+      "properties": {
+        "query": { 
+          "type": "object", 
+          "description": "A query to retrieve data from source. Type: string (or Expression with resultType string)." 
+        }
+      } 
+    }, 
+    "QuickBooksSource": { 
+      "description": "A copy activity QuickBooks server source.", 
+      "type": "object", 
+      "allOf": [ 
+        { 
+          "$ref": "#/definitions/CopySource" 
+        } 
+      ], 
+      "properties": {
+        "query": { 
+          "type": "object", 
+          "description": "A query to retrieve data from source. Type: string (or Expression with resultType string)." 
+        }
+      } 
+    }, 
+    "ServiceNowSource": { 
+      "description": "A copy activity ServiceNow server source.", 
+      "type": "object", 
+      "allOf": [ 
+        { 
+          "$ref": "#/definitions/CopySource" 
+        } 
+      ], 
+      "properties": {
+        "query": { 
+          "type": "object", 
+          "description": "A query to retrieve data from source. Type: string (or Expression with resultType string)." 
+        }
+      } 
+    }, 
+    "ShopifySource": { 
+      "description": "A copy activity Shopify Serivce source.", 
+      "type": "object", 
+      "allOf": [ 
+        { 
+          "$ref": "#/definitions/CopySource" 
+        } 
+      ], 
+      "properties": {
+        "query": { 
+          "type": "object", 
+          "description": "A query to retrieve data from source. Type: string (or Expression with resultType string)." 
+        }
+      } 
+    }, 
+    "SparkSource": { 
+      "description": "A copy activity Spark Server source.", 
+      "type": "object", 
+      "allOf": [ 
+        { 
+          "$ref": "#/definitions/CopySource" 
+        } 
+      ], 
+      "properties": {
+        "query": { 
+          "type": "object", 
+          "description": "A query to retrieve data from source. Type: string (or Expression with resultType string)." 
+        }
+      } 
+    }, 
+    "SquareSource": { 
+      "description": "A copy activity Square Serivce source.", 
+      "type": "object", 
+      "allOf": [ 
+        { 
+          "$ref": "#/definitions/CopySource" 
+        } 
+      ], 
+      "properties": {
+        "query": { 
+          "type": "object", 
+          "description": "A query to retrieve data from source. Type: string (or Expression with resultType string)." 
+        }
+      } 
+    }, 
+    "XeroSource": { 
+      "description": "A copy activity Xero Serivce source.", 
+      "type": "object", 
+      "allOf": [ 
+        { 
+          "$ref": "#/definitions/CopySource" 
+        } 
+      ], 
+      "properties": {
+        "query": { 
+          "type": "object", 
+          "description": "A query to retrieve data from source. Type: string (or Expression with resultType string)." 
+        }
+      } 
+    }, 
+    "ZohoSource": { 
+      "description": "A copy activity Zoho server source.", 
+      "type": "object", 
+      "allOf": [ 
+        { 
+          "$ref": "#/definitions/CopySource" 
+        } 
+      ], 
+      "properties": {
+        "query": { 
+          "type": "object", 
+          "description": "A query to retrieve data from source. Type: string (or Expression with resultType string)." 
+        }
+      } 
+    },
     "AmazonRedshiftSource": {
       "description": "A copy activity source for Amazon Redshift Source.",
       "type": "object",
@@ -639,9 +1102,35 @@
           "description": "Sink retry wait. Type: string (or Expression with resultType string), pattern: ((\\d+)\\.)?(\\d\\d):(60|([0-5][0-9])):(60|([0-5][0-9]))."
         }
       },
+      "additionalProperties": {
+        "type": "object"
+      },
       "required": [
         "type"
       ]
+    },
+    "SapCloudForCustomerSink": {
+      "description": "A copy activity SAP Cloud for Customer sink.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/CopySink"
+        }
+      ],
+      "properties": {
+        "writeBehavior": {
+          "description": "The write behavior for the operation. Default is 'Insert'.",
+          "type": "string",
+          "enum": [
+            "Insert",
+            "Update"
+          ],
+          "x-ms-enum": {
+            "name": "SapCloudForCustomerSinkWriteBehavior",
+            "modelAsString": true
+          }
+        }
+      }
     },
     "AzureQueueSink": {
       "description": "A copy activity Azure Queue sink.",
@@ -823,6 +1312,9 @@
           "type": "object",
           "description": "Specifies how to handle missing values in delimited text files when PolyBase retrieves data from the text file. Type: boolean (or Expression with resultType boolean)."
         }
+      },
+      "additionalProperties": {
+        "type": "object"
       }
     },
     "PolybaseSettingsRejectType": {
@@ -854,6 +1346,9 @@
           "description": "Specifies whether to use compression when copying data via an interim staging. Default value is false. Type: boolean (or Expression with resultType boolean)."
         }
       },
+      "additionalProperties": {
+        "type": "object"
+      },
       "required": [
         "linkedServiceName"
       ]
@@ -864,12 +1359,15 @@
       "properties": {
         "linkedServiceName": {
           "type": "object",
-          "description": "Name of the Azure Storage or Storage SAS linked service used for redirecting incompatible row. Must be specified if redirectIncompatibleRowSettings is specified. Type: string (or Expression with resultType string)."
+          "description": "Name of the Azure Storage, Storage SAS, or Azure Data Lake Store linked service used for redirecting incompatible row. Must be specified if redirectIncompatibleRowSettings is specified. Type: string (or Expression with resultType string)."
         },
         "path": {
           "type": "object",
-          "description": "The path to storage for storing the redirect incompatible row data Type: string (or Expression with resultType string)."
+          "description": "The path for storing the redirect incompatible row data. Type: string (or Expression with resultType string)."
         }
+      },
+      "additionalProperties": {
+        "type": "object"
       },
       "required": [
         "linkedServiceName"
@@ -943,6 +1441,66 @@
         }
       }
     },
+    "DynamicsSink": {
+      "description": "A copy activity Dynamics sink.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/CopySink"
+        }
+      ],
+      "properties": {
+        "writeBehavior": {
+          "description": "The write behavior for the operation.",
+          "type": "string",
+          "enum": [
+            "Upsert"
+          ],
+          "x-ms-enum": {
+            "name": "DynamicsSinkWriteBehavior",
+            "modelAsString": true
+          }
+        },
+        "ignoreNullValues": {
+          "type": "object",
+          "description": "The flag indicating whether ignore null values from input dataset (except key fields) during write operation. Default is false. Type: boolean (or Expression with resultType boolean)."
+        }
+      },
+      "required": [
+        "writeBehavior"
+      ]
+    },
+    "SalesforceSink": {
+      "description": "A copy activity Salesforce sink.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/CopySink"
+        }
+      ],
+      "properties": {
+        "writeBehavior": {
+          "description": "The write behavior for the operation. Default is Insert.",
+          "type": "string",
+          "enum": [
+            "Insert",
+            "Upsert"
+          ],
+          "x-ms-enum": {
+            "name": "SalesforceSinkWriteBehavior",
+            "modelAsString": true
+          }
+        },
+        "externalIdFieldName": {
+          "type": "object",
+          "description": "The name of the external ID field for upsert operation. Default value is 'Id' column. Type: string (or Expression with resultType string)."
+        },
+        "ignoreNullValues": {
+          "type": "object",
+          "description": "The flag indicating whether or not to ignore null values from input dataset (except key fields) during write operation. Default value is false. If set it to true, it means ADF will leave the data in the destination object unchanged when doing upsert/update operation and insert defined default value when doing insert operation, versus ADF will update the data in the destination object to NULL when doing upsert/update operation and insert NULL value when doing insert operation. Type: boolean (or Expression with resultType boolean)."
+        }
+      }
+    },
     "CopyTranslator": {
       "discriminator": "type",
       "description": "A copy activity translator.",
@@ -952,6 +1510,9 @@
           "type": "string",
           "description": "Copy translator type."
         }
+      },
+      "additionalProperties": {
+        "type": "object"
       },
       "required": [
         "type"

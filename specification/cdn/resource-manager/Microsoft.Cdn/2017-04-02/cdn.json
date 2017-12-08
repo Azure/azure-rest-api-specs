@@ -41,6 +41,11 @@
         ],
         "description": "Lists all of the CDN profiles within an Azure subscription.",
         "operationId": "Profiles_List",
+        "x-ms-examples": {
+          "Profiles_List": {
+            "$ref": "./examples/Profiles_List.json"
+          }
+        },
         "parameters": [
           {
             "$ref": "#/parameters/subscriptionIdParameter"
@@ -75,6 +80,11 @@
         ],
         "description": "Lists all of the CDN profiles within a resource group.",
         "operationId": "Profiles_ListByResourceGroup",
+        "x-ms-examples": {
+          "Profiles_ListByResourceGroup": {
+            "$ref": "./examples/Profiles_ListByResourceGroup.json"
+          }
+        },
         "parameters": [
           {
             "$ref": "#/parameters/resourceGroupNameParameter"
@@ -112,6 +122,11 @@
         ],
         "description": "Gets a CDN profile with the specified profile name under the specified subscription and resource group.",
         "operationId": "Profiles_Get",
+        "x-ms-examples": {
+          "Profiles_Get": {
+            "$ref": "./examples/Profiles_Get.json"
+          }
+        },
         "parameters": [
           {
             "$ref": "#/parameters/resourceGroupNameParameter"
@@ -151,6 +166,11 @@
         ],
         "description": "Creates a new CDN profile with a profile name under the specified subscription and resource group.",
         "operationId": "Profiles_Create",
+        "x-ms-examples": {
+          "Profiles_Create": {
+            "$ref": "./examples/Profiles_Create.json"
+          }
+        },
         "parameters": [
           {
             "$ref": "#/parameters/resourceGroupNameParameter"
@@ -212,6 +232,11 @@
         ],
         "description": "Updates an existing CDN profile with the specified profile name under the specified subscription and resource group.",
         "operationId": "Profiles_Update",
+        "x-ms-examples": {
+          "Profiles_Update": {
+            "$ref": "./examples/Profiles_Update.json"
+          }
+        },
         "parameters": [
           {
             "$ref": "#/parameters/resourceGroupNameParameter"
@@ -267,6 +292,11 @@
         ],
         "description": "Deletes an existing CDN profile with the specified parameters. Deleting a profile will result in the deletion of all of the sub-resources including endpoints, origins and custom domains.",
         "operationId": "Profiles_Delete",
+        "x-ms-examples": {
+          "Profiles_Delete": {
+            "$ref": "./examples/Profiles_Delete.json"
+          }
+        },
         "parameters": [
           {
             "$ref": "#/parameters/resourceGroupNameParameter"
@@ -309,6 +339,11 @@
         ],
         "description": "Generates a dynamic SSO URI used to sign in to the CDN supplemental portal. Supplemnetal portal is used to configure advanced feature capabilities that are not yet available in the Azure portal, such as core reports in a standard profile; rules engine, advanced HTTP reports, and real-time stats and alerts in a premium profile. The SSO URI changes approximately every 10 minutes.",
         "operationId": "Profiles_GenerateSsoUri",
+        "x-ms-examples": {
+          "Profiles_GenerateSsoUri": {
+            "$ref": "./examples/Profiles_GenerateSsoUri.json"
+          }
+        },
         "parameters": [
           {
             "$ref": "#/parameters/resourceGroupNameParameter"
@@ -350,6 +385,11 @@
         ],
         "description": "Gets the supported optimization types for the current profile. A user can create an endpoint with an optimization type from the listed values.",
         "operationId": "Profiles_ListSupportedOptimizationTypes",
+        "x-ms-examples": {
+          "Profiles_ListSupportedOptimizationTypes": {
+            "$ref": "./examples/Profiles_ListSupportedOptimizationTypes.json"
+          }
+        },
         "parameters": [
           {
             "$ref": "#/parameters/resourceGroupNameParameter"
@@ -391,6 +431,11 @@
         ],
         "description": "Checks the quota and actual usage of endpoints under the given CDN profile.",
         "operationId": "Profiles_ListResourceUsage",
+        "x-ms-examples": {
+          "Profiles_ListResourceUsage": {
+            "$ref": "./examples/Profiles_ListResourceUsage.json"
+          }
+        },
         "parameters": [
           {
             "$ref": "#/parameters/resourceGroupNameParameter"
@@ -435,6 +480,11 @@
         ],
         "description": "Lists existing CDN endpoints.",
         "operationId": "Endpoints_ListByProfile",
+        "x-ms-examples": {
+          "Endpoints_ListByProfile": {
+            "$ref": "./examples/Endpoints_ListByProfile.json"
+          }
+        },
         "parameters": [
           {
             "$ref": "#/parameters/resourceGroupNameParameter"
@@ -479,6 +529,11 @@
         ],
         "description": "Gets an existing CDN endpoint with the specified endpoint name under the specified subscription, resource group and profile.",
         "operationId": "Endpoints_Get",
+        "x-ms-examples": {
+          "Endpoints_Get": {
+            "$ref": "./examples/Endpoints_Get.json"
+          }
+        },
         "parameters": [
           {
             "$ref": "#/parameters/resourceGroupNameParameter"
@@ -525,6 +580,11 @@
         ],
         "description": "Creates a new CDN endpoint with the specified endpoint name under the specified subscription, resource group and profile.",
         "operationId": "Endpoints_Create",
+        "x-ms-examples": {
+          "Endpoints_Create": {
+            "$ref": "./examples/Endpoints_Create.json"
+          }
+        },
         "parameters": [
           {
             "$ref": "#/parameters/resourceGroupNameParameter"
@@ -593,6 +653,11 @@
         ],
         "description": "Updates an existing CDN endpoint with the specified endpoint name under the specified subscription, resource group and profile. Only tags and Origin HostHeader can be updated after creating an endpoint. To update origins, use the Update Origin operation. To update custom domains, use the Update Custom Domain operation.",
         "operationId": "Endpoints_Update",
+        "x-ms-examples": {
+          "Endpoints_Update": {
+            "$ref": "./examples/Endpoints_Update.json"
+          }
+        },
         "parameters": [
           {
             "$ref": "#/parameters/resourceGroupNameParameter"
@@ -655,6 +720,11 @@
         ],
         "description": "Deletes an existing CDN endpoint with the specified endpoint name under the specified subscription, resource group and profile.",
         "operationId": "Endpoints_Delete",
+        "x-ms-examples": {
+          "Endpoints_Delete": {
+            "$ref": "./examples/Endpoints_Delete.json"
+          }
+        },
         "parameters": [
           {
             "$ref": "#/parameters/resourceGroupNameParameter"
@@ -704,6 +774,11 @@
         ],
         "description": "Starts an existing CDN endpoint that is on a stopped state.",
         "operationId": "Endpoints_Start",
+        "x-ms-examples": {
+          "Endpoints_Start": {
+            "$ref": "./examples/Endpoints_Start.json"
+          }
+        },
         "parameters": [
           {
             "$ref": "#/parameters/resourceGroupNameParameter"
@@ -730,6 +805,12 @@
           }
         ],
         "responses": {
+          "200": {
+            "description": "OK. The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/Endpoint"
+            }
+          },
           "202": {
             "description": "Accepted and the operation will complete asynchronously.",
             "schema": {
@@ -753,6 +834,11 @@
         ],
         "description": "Stops an existing running CDN endpoint.",
         "operationId": "Endpoints_Stop",
+        "x-ms-examples": {
+          "Endpoints_Stop": {
+            "$ref": "./examples/Endpoints_Stop.json"
+          }
+        },
         "parameters": [
           {
             "$ref": "#/parameters/resourceGroupNameParameter"
@@ -779,6 +865,12 @@
           }
         ],
         "responses": {
+          "200": {
+            "description": "OK. The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/Endpoint"
+            }
+          },          
           "202": {
             "description": "Accepted and the operation will complete asynchronously.",
             "schema": {
@@ -802,6 +894,11 @@
         ],
         "description": "Removes a content from CDN.",
         "operationId": "Endpoints_PurgeContent",
+        "x-ms-examples": {
+          "Endpoints_PurgeContent": {
+            "$ref": "./examples/Endpoints_PurgeContent.json"
+          }
+        },
         "parameters": [
           {
             "$ref": "#/parameters/resourceGroupNameParameter"
@@ -837,6 +934,9 @@
           }
         ],
         "responses": {
+          "200": {
+            "description": "OK. The request has succeeded."
+          },          
           "202": {
             "description": "Accepted and the operation will complete asynchronously."
           },
@@ -857,6 +957,11 @@
         ],
         "description": "Pre-loads a content to CDN. Available for Verizon Profiles.",
         "operationId": "Endpoints_LoadContent",
+        "x-ms-examples": {
+          "Endpoints_LoadContent": {
+            "$ref": "./examples/Endpoints_LoadContent.json"
+          }
+        },
         "parameters": [
           {
             "$ref": "#/parameters/resourceGroupNameParameter"
@@ -892,6 +997,9 @@
           }
         ],
         "responses": {
+          "200": {
+            "description": "OK. The request has succeeded."
+          },          
           "202": {
             "description": "Accepted and the operation will complete asynchronously."
           },
@@ -912,6 +1020,11 @@
         ],
         "description": "Validates the custom domain mapping to ensure it maps to the correct CDN endpoint in DNS.",
         "operationId": "Endpoints_ValidateCustomDomain",
+        "x-ms-examples": {
+          "Endpoints_ValidateCustomDomain": {
+            "$ref": "./examples/Endpoints_ValidateCustomDomain.json"
+          }
+        },
         "parameters": [
           {
             "$ref": "#/parameters/resourceGroupNameParameter"
@@ -969,6 +1082,11 @@
         ],
         "description": "Checks the quota and usage of geo filters and custom domains under the given endpoint.",
         "operationId": "Endpoints_ListResourceUsage",
+        "x-ms-examples": {
+          "Endpoints_ListResourceUsage": {
+            "$ref": "./examples/Endpoints_ListResourceUsage.json"
+          }
+        },
         "parameters": [
           {
             "$ref": "#/parameters/resourceGroupNameParameter"
@@ -1020,6 +1138,11 @@
         ],
         "description": "Lists all of the existing origins within an endpoint.",
         "operationId": "Origins_ListByEndpoint",
+        "x-ms-examples": {
+          "Origins_ListByEndpoint": {
+            "$ref": "./examples/Origins_ListByEndpoint.json"
+          }
+        },
         "parameters": [
           {
             "$ref": "#/parameters/resourceGroupNameParameter"
@@ -1071,6 +1194,11 @@
         ],
         "description": "Gets an existing origin within an endpoint.",
         "operationId": "Origins_Get",
+        "x-ms-examples": {
+          "Origins_Get": {
+            "$ref": "./examples/Origins_Get.json"
+          }
+        },
         "parameters": [
           {
             "$ref": "#/parameters/resourceGroupNameParameter"
@@ -1124,6 +1252,11 @@
         ],
         "description": "Updates an existing origin within an endpoint.",
         "operationId": "Origins_Update",
+        "x-ms-examples": {
+          "Origins_Update": {
+            "$ref": "./examples/Origins_Update.json"
+          }
+        },
         "parameters": [
           {
             "$ref": "#/parameters/resourceGroupNameParameter"
@@ -1195,6 +1328,11 @@
         ],
         "description": "Lists all of the existing custom domains within an endpoint.",
         "operationId": "CustomDomains_ListByEndpoint",
+        "x-ms-examples": {
+          "CustomDomains_ListByEndpoint": {
+            "$ref": "./examples/CustomDomains_ListByEndpoint.json"
+          }
+        },
         "parameters": [
           {
             "$ref": "#/parameters/resourceGroupNameParameter"
@@ -1246,6 +1384,11 @@
         ],
         "description": "Gets an exisitng custom domain within an endpoint.",
         "operationId": "CustomDomains_Get",
+        "x-ms-examples": {
+          "CustomDomains_Get": {
+            "$ref": "./examples/CustomDomains_Get.json"
+          }
+        },
         "parameters": [
           {
             "$ref": "#/parameters/resourceGroupNameParameter"
@@ -1299,6 +1442,11 @@
         ],
         "description": "Creates a new custom domain within an endpoint.",
         "operationId": "CustomDomains_Create",
+        "x-ms-examples": {
+          "CustomDomains_Create": {
+            "$ref": "./examples/CustomDomains_Create.json"
+          }
+        },
         "parameters": [
           {
             "$ref": "#/parameters/resourceGroupNameParameter"
@@ -1374,6 +1522,11 @@
         ],
         "description": "Deletes an existing custom domain within an endpoint.",
         "operationId": "CustomDomains_Delete",
+        "x-ms-examples": {
+          "CustomDomains_Delete": {
+            "$ref": "./examples/CustomDomains_Delete.json"
+          }
+        },
         "parameters": [
           {
             "$ref": "#/parameters/resourceGroupNameParameter"
@@ -1436,6 +1589,11 @@
         ],
         "description": "Disable https delivery of the custom domain.",
         "operationId": "CustomDomains_DisableCustomHttps",
+        "x-ms-examples": {
+          "CustomDomains_DisableCustomHttps": {
+            "$ref": "./examples/CustomDomains_DisableCustomHttps.json"
+          }
+        },
         "parameters": [
           {
             "$ref": "#/parameters/resourceGroupNameParameter"
@@ -1494,6 +1652,11 @@
         ],
         "description": "Enable https delivery of the custom domain.",
         "operationId": "CustomDomains_EnableCustomHttps",
+        "x-ms-examples": {
+          "CustomDomains_EnableCustomHttps": {
+            "$ref": "./examples/CustomDomains_EnableCustomHttps.json"
+          }
+        },
         "parameters": [
           {
             "$ref": "#/parameters/resourceGroupNameParameter"
@@ -1552,6 +1715,11 @@
         ],
         "description": "Check the availability of a resource name. This is needed for resources where name is globally unique, such as a CDN endpoint.",
         "operationId": "CheckNameAvailability",
+        "x-ms-examples": {
+          "CheckNameAvailability": {
+            "$ref": "./examples/CheckNameAvailability.json"
+          }
+        },
         "parameters": [
           {
             "name": "checkNameAvailabilityInput",
@@ -1589,6 +1757,11 @@
         ],
         "description": "Check if the probe path is a valid path and the file can be accessed. Probe path is the path to a file hosted on the origin server to help accelerate the delivery of dynamic content via the CDN endpoint. This path is relative to the origin path specified in the endpoint configuration.",
         "operationId": "ValidateProbe",
+        "x-ms-examples": {
+          "ValidateProbe": {
+            "$ref": "./examples/ValidateProbe.json"
+          }
+        },
         "parameters": [
           {
             "name": "validateProbeInput",
@@ -1629,6 +1802,11 @@
         ],
         "description": "Check the quota and actual usage of the CDN profiles under the given subscription.",
         "operationId": "ResourceUsage_List",
+        "x-ms-examples": {
+          "ResourceUsage_List": {
+            "$ref": "./examples/ResourceUsage_List.json"
+          }
+        },
         "parameters": [
           {
             "$ref": "#/parameters/subscriptionIdParameter"
@@ -1663,6 +1841,11 @@
         ],
         "description": "Lists all of the available CDN REST API operations.",
         "operationId": "Operations_List",
+        "x-ms-examples": {
+          "Operations_List": {
+            "$ref": "./examples/Operations_List.json"
+          }
+        },
         "parameters": [
           {
             "$ref": "#/parameters/apiVersionParameter"
@@ -1694,6 +1877,11 @@
         ],
         "description": "Edgenodes are the global Point of Presence (POP) locations used to deliver CDN content to end users.",
         "operationId": "EdgeNodes_List",
+        "x-ms-examples": {
+          "EdgeNodes_List": {
+            "$ref": "./examples/EdgeNodes_List.json"
+          }
+        },
         "parameters": [
           {
             "$ref": "#/parameters/apiVersionParameter"
@@ -1725,7 +1913,7 @@
       "type": "object",
       "allOf": [
         {
-          "$ref": "#/definitions/Resource"
+          "$ref": "#/definitions/TrackedResource"
         }
       ],
       "properties": {
@@ -1787,9 +1975,6 @@
     "ProfileUpdateParameters": {
       "type": "object",
       "description": "Properties required to update a profile.",
-      "required": [
-        "tags"
-      ],
       "properties": {
         "tags": {
           "description": "Profile tags",
@@ -1831,7 +2016,7 @@
       "type": "object",
       "allOf": [
         {
-          "$ref": "#/definitions/Resource"
+          "$ref": "#/definitions/TrackedResource"
         }
       ],
       "properties": {
@@ -1927,7 +2112,7 @@
       "description": "The JSON object containing endpoint update parameters.",
       "properties": {
         "originHostHeader": {
-          "description": "The host header CDN sends along with content requests to origin. The default value is the host name of the origin.",
+          "description": "The host header value sent to the origin with each request. If you leave this blank, the request hostname determines this value. Azure CDN origins, such as Web Apps, Blob Storage, and Cloud Services require this host header value to match the origin hostname by default.",
           "type": "string"
         },
         "originPath": {
@@ -2093,7 +2278,7 @@
       "type": "object",
       "allOf": [
         {
-          "$ref": "#/definitions/Resource"
+          "$ref": "#/definitions/TrackedResource"
         }
       ],
       "properties": {
@@ -2208,7 +2393,7 @@
       "type": "object",
       "allOf": [
         {
-          "$ref": "#/definitions/Resource"
+          "$ref": "#/definitions/ProxyResource"
         }
       ],
       "properties": {
@@ -2560,7 +2745,7 @@
       "type": "object",
       "allOf": [
         {
-          "$ref": "#/definitions/Resource"
+          "$ref": "#/definitions/ProxyResource"
         }
       ],
       "properties": {
@@ -2624,7 +2809,7 @@
       }
     },
     "Resource": {
-      "description": "The Resource definition.",
+      "description": "The core properties of ARM resources",
       "properties": {
         "id": {
           "description": "Resource ID.",
@@ -2640,7 +2825,18 @@
           "description": "Resource type.",
           "readOnly": true,
           "type": "string"
-        },
+        }
+      },
+      "x-ms-azure-resource": true
+    },
+    "TrackedResource": {
+      "description": "The resource model definition for a ARM tracked top level resource.",
+      "allOf": [
+        {
+          "$ref": "#/definitions/Resource"
+        }
+      ],
+      "properties": {
         "location": {
           "type": "string",
           "description": "Resource location."
@@ -2650,13 +2846,25 @@
           "additionalProperties": {
             "type": "string"
           },
+          "x-ms-mutability": [
+            "read",
+            "create",
+            "update"
+          ],
           "description": "Resource tags."
         }
       },
       "required": [
         "location"
-      ],
-      "x-ms-azure-resource": true
+      ]
+    },
+    "ProxyResource": {
+      "description": "The resource model definition for a ARM proxy resource. It will have everything other than required location and tags",
+      "allOf": [
+        {
+          "$ref": "#/definitions/Resource"
+        }
+      ]
     },
     "QueryStringCachingBehavior": {
       "description": "Defines how CDN caches requests that include query strings. You can ignore any query strings when caching, bypass caching to prevent requests that contain query strings from being cached, or cache every request with a unique URL.",

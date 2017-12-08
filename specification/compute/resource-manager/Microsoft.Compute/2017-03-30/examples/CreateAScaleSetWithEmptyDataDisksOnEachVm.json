@@ -1,63 +1,63 @@
 {
   "parameters": {
-    "subscriptionId": "<subscription-id>", 
-    "resourceGroupName": "myRG",
-    "vmScaleSetName": "myVMSS", 
-    "api-version": "2017-03-30", 
+    "subscriptionId": "{subscription-id}",
+    "resourceGroupName": "myResourceGroup",
+    "vmScaleSetName": "{vmss-name}",
+    "api-version": "2017-03-30",
     "parameters": {
       "sku": {
-        "tier": "Standard", 
-        "capacity": 3, 
+        "tier": "Standard",
+        "capacity": 3,
         "name": "Standard_D2_v2"
-      }, 
-      "location": "westus", 
+      },
+      "location": "westus",
       "properties": {
-        "overprovision": true, 
+        "overprovision": true,
         "virtualMachineProfile": {
           "storageProfile": {
             "imageReference": {
-              "sku": "2016-Datacenter", 
-              "publisher": "MicrosoftWindowsServer", 
-              "version": "latest", 
+              "sku": "2016-Datacenter",
+              "publisher": "MicrosoftWindowsServer",
+              "version": "latest",
               "offer": "WindowsServer"
-            }, 
+            },
             "osDisk": {
-              "caching": "ReadWrite", 
+              "caching": "ReadWrite",
               "managedDisk": {
                 "storageAccountType": "Standard_LRS"
-              }, 
+              },
               "createOption": "FromImage"
-            }, 
+            },
             "dataDisks": [
               {
-                "diskSizeGB": 1023, 
-                "createOption": "Empty", 
+                "diskSizeGB": 1023,
+                "createOption": "Empty",
                 "lun": 0
-              }, 
+              },
               {
-                "diskSizeGB": 1023, 
-                "createOption": "Empty", 
+                "diskSizeGB": 1023,
+                "createOption": "Empty",
                 "lun": 1
               }
             ]
-          }, 
+          },
           "osProfile": {
-            "computerNamePrefix": "myVMSS", 
-            "adminUsername": "<your-username>", 
-            "adminPassword": "<your-password>"
-          }, 
+            "computerNamePrefix": "{vmss-name}",
+            "adminUsername": "{your-username}",
+            "adminPassword": "{your-password}"
+          },
           "networkProfile": {
             "networkInterfaceConfigurations": [
               {
-                "name": "myVMSS", 
+                "name": "{vmss-name}",
                 "properties": {
-                  "primary": true, 
+                  "primary": true,
                   "ipConfigurations": [
                     {
-                      "name": "myVMSS", 
+                      "name": "{vmss-name}",
                       "properties": {
                         "subnet": {
-                          "id": "/subscriptions/<subscription-id>/resourceGroups/<resource-group-name>/providers/Microsoft.Network/virtualNetworks/<existing-virtual-network-name>/subnets/<existing-subnet-name>"
+                          "id": "/subscriptions/{subscription-id}/resourceGroups/myResourceGroup/providers/Microsoft.Network/virtualNetworks/{existing-virtual-network-name}/subnets/{existing-subnet-name}"
                         }
                       }
                     }
@@ -66,105 +66,105 @@
               }
             ]
           }
-        }, 
+        },
         "upgradePolicy": {
           "mode": "Manual"
         }
       }
     }
-  }, 
+  },
   "responses": {
     "201": {
       "body": {
         "sku": {
-          "tier": "Standard", 
-          "capacity": 3, 
+          "tier": "Standard",
+          "capacity": 3,
           "name": "Standard_D2_v2"
-        }, 
-        "name": "myVMSS", 
+        },
+        "name": "{vmss-name}",
         "properties": {
-          "singlePlacementGroup": true, 
-          "overprovision": true, 
-          "uniqueId": "8042c376-4690-4c47-9fa2-fbdad70e32fa", 
+          "singlePlacementGroup": true,
+          "overprovision": true,
+          "uniqueId": "8042c376-4690-4c47-9fa2-fbdad70e32fa",
           "virtualMachineProfile": {
             "storageProfile": {
               "imageReference": {
-                "sku": "2016-Datacenter", 
-                "publisher": "MicrosoftWindowsServer", 
-                "version": "latest", 
+                "sku": "2016-Datacenter",
+                "publisher": "MicrosoftWindowsServer",
+                "version": "latest",
                 "offer": "WindowsServer"
-              }, 
+              },
               "osDisk": {
-                "caching": "ReadWrite", 
+                "caching": "ReadWrite",
                 "managedDisk": {
                   "storageAccountType": "Standard_LRS"
-                }, 
+                },
                 "createOption": "FromImage"
-              }, 
+              },
               "dataDisks": [
                 {
-                  "caching": "None", 
+                  "caching": "None",
                   "managedDisk": {
                     "storageAccountType": "Standard_LRS"
-                  }, 
-                  "createOption": "Empty", 
-                  "lun": 0, 
+                  },
+                  "createOption": "Empty",
+                  "lun": 0,
                   "diskSizeGB": 1023
-                }, 
+                },
                 {
-                  "caching": "None", 
+                  "caching": "None",
                   "managedDisk": {
                     "storageAccountType": "Standard_LRS"
-                  }, 
-                  "createOption": "Empty", 
-                  "lun": 1, 
+                  },
+                  "createOption": "Empty",
+                  "lun": 1,
                   "diskSizeGB": 1023
                 }
               ]
-            }, 
+            },
             "osProfile": {
-              "computerNamePrefix": "myVMSS", 
-              "adminUsername": "negat", 
-              "secrets": [], 
+              "computerNamePrefix": "{vmss-name}",
+              "adminUsername": "{your-username}",
+              "secrets": [],
               "windowsConfiguration": {
-                "provisionVMAgent": true, 
+                "provisionVMAgent": true,
                 "enableAutomaticUpdates": true
               }
-            }, 
+            },
             "networkProfile": {
               "networkInterfaceConfigurations": [
                 {
-                  "name": "myVMSS", 
+                  "name": "{vmss-name}",
                   "properties": {
                     "dnsSettings": {
                       "dnsServers": []
-                    }, 
-                    "primary": true, 
+                    },
+                    "primary": true,
                     "ipConfigurations": [
                       {
-                        "name": "myVMSS", 
+                        "name": "{vmss-name}",
                         "properties": {
                           "subnet": {
-                            "id": "/subscriptions/5a810961-5236-4bbd-b50a-bda258eb00c0/resourceGroups/nsgExampleRg/providers/Microsoft.Network/virtualNetworks/nsgExistingVnet/subnets/nsgExistingSubnet"
-                          }, 
+                            "id": "/subscriptions/{subscription-id}/resourceGroups/myResourceGroup/providers/Microsoft.Network/virtualNetworks/nsgExistingVnet/subnets/nsgExistingSubnet"
+                          },
                           "privateIPAddressVersion": "IPv4"
                         }
                       }
-                    ], 
+                    ],
                     "enableAcceleratedNetworking": false
                   }
                 }
               ]
             }
-          }, 
+          },
           "upgradePolicy": {
             "mode": "Manual"
-          }, 
+          },
           "provisioningState": "Creating"
-        }, 
-        "location": "westus", 
-        "type": "Microsoft.Compute/virtualMachineScaleSets", 
-        "id": "/subscriptions/5a810961-5236-4bbd-b50a-bda258eb00c0/resourceGroups/nsgExampleRg/providers/Microsoft.Compute/virtualMachineScaleSets/myVMSS"
+        },
+        "location": "westus",
+        "type": "Microsoft.Compute/virtualMachineScaleSets",
+        "id": "/subscriptions/{subscription-id}/resourceGroups/myResourceGroup/providers/Microsoft.Compute/virtualMachineScaleSets/{vmss-name}"
       }
     }
   }

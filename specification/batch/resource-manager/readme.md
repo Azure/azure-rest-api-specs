@@ -26,7 +26,26 @@ These are the global settings for the Batch API.
 
 ``` yaml
 openapi-type: arm
-tag: package-2017-05
+tag: package-2017-09
+```
+
+### Tag: package-2017-09
+
+These settings apply only when `--tag=package-2017-09` is specified on the command line.
+
+``` yaml $(tag) == 'package-2017-09'
+input-file:
+- Microsoft.Batch/2017-09-01/BatchManagement.json
+```
+
+## Suppression
+
+Note that this setting should be removed once [this GitHub bug](https://github.com/Azure/azure-openapi-validator/issues/68) is fixed.
+``` yaml
+directive:
+  - suppress: R2063
+    from: BatchManagement.json
+    reason: Bug in linter
 ```
 
 
@@ -77,4 +96,79 @@ csharp:
   payload-flattening-threshold: 1
   output-folder: $(csharp-sdks-folder)/Batch/Management/Management.Batch/Generated
   clear-output-folder: true
+```
+
+## Python
+
+These settings apply only when `--python` is specified on the command line.
+Please also specify `--python-sdks-folder=<path to the root directory of your azure-sdk-for-python clone>`.
+Use `--python-mode=update` if you already have a setup.py and just want to update the code itself.
+
+``` yaml $(python)
+python-mode: create
+python:
+  azure-arm: true
+  license-header: MICROSOFT_MIT_NO_VERSION
+  payload-flattening-threshold: 2
+  namespace: azure.mgmt.batch
+  package-name: azure-mgmt-batch
+  clear-output-folder: true
+```
+``` yaml $(python) && $(python-mode) == 'update'
+python:
+  no-namespace-folders: true
+  output-folder: $(python-sdks-folder)/azure-mgmt-batch/azure/mgmt/batch
+```
+``` yaml $(python) && $(python-mode) == 'create'
+python:
+  basic-setup-py: true
+  output-folder: $(python-sdks-folder)/azure-mgmt-batch
+```
+
+
+## Go
+
+These settings apply only when `--go` is specified on the command line.
+
+``` yaml $(go)
+go:
+  license-header: MICROSOFT_APACHE_NO_VERSION
+  namespace: batch
+  clear-output-folder: true
+```
+
+### Tag: package-2017-09 and go
+
+These settings apply only when `--tag=package-2017-09 --go` is specified on the command line.
+Please also specify `--go-sdk-folder=<path to the root directory of your azure-sdk-for-go clone>`.
+
+``` yaml $(tag) == 'package-2017-09' && $(go)
+output-folder: $(go-sdk-folder)/services/batch/mgmt/2017-09-01/batch
+```
+
+### Tag: package-2017-05 and go
+
+These settings apply only when `--tag=package-2017-05 --go` is specified on the command line.
+Please also specify `--go-sdk-folder=<path to the root directory of your azure-sdk-for-go clone>`.
+
+``` yaml $(tag) == 'package-2017-05' && $(go)
+output-folder: $(go-sdk-folder)/services/batch/mgmt/2017-05-01/batch
+```
+
+### Tag: package-2017-01 and go
+
+These settings apply only when `--tag=package-2017-01 --go` is specified on the command line.
+Please also specify `--go-sdk-folder=<path to the root directory of your azure-sdk-for-go clone>`.
+
+``` yaml $(tag) == 'package-2017-01' && $(go)
+output-folder: $(go-sdk-folder)/services/batch/mgmt/2017-01-01/batch
+```
+
+### Tag: package-2015-12 and go
+
+These settings apply only when `--tag=package-2015-12 --go` is specified on the command line.
+Please also specify `--go-sdk-folder=<path to the root directory of your azure-sdk-for-go clone>`.
+
+``` yaml $(tag) == 'package-2015-12' && $(go)
+output-folder: $(go-sdk-folder)/services/batch/mgmt/2015-12-01/batch
 ```

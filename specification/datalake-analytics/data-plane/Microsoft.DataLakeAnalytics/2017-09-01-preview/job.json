@@ -350,12 +350,15 @@
           },
           "202": {
             "description": "Successfully initiated the cancellation of the specified job."
+          },
+          "204": {
+            "description": "The specified job was not found."
           }
         },
         "x-ms-long-running-operation": true
       }
     },
-    "/Jobs/{jobIdentity}/Yield": {
+    "/Jobs/{jobIdentity}/YieldJob": {
       "post": {
         "tags": [
           "Job"
@@ -384,6 +387,9 @@
           },
           "202": {
             "description": "Successfully initiated the yielding of the specified job."
+          },
+          "204": {
+            "description": "The specified job was not found."
           }
         },
         "x-ms-long-running-operation": true
@@ -499,6 +505,9 @@
               "$ref": "#/definitions/JobInformation"
             }
           },
+          "201": {
+            "description": "Successfully initiated an update of the specified job."
+          },
           "202": {
             "description": "Successfully initiated an update of the specified job."
           }
@@ -578,7 +587,7 @@
         "x-ms-pageable": {
           "nextLinkName": "nextLink"
         },
-        "x-ms-odata": "#/definitions/JobInformation"
+        "x-ms-odata": "#/definitions/JobInformationBasic"
       }
     }
   },

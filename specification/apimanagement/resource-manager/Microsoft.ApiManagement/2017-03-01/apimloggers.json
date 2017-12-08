@@ -210,6 +210,11 @@
         ],
         "operationId": "Logger_Update",
         "description": "Updates an existing logger.",
+        "x-ms-examples": {
+          "ApiManagementUpdateLogger": {
+            "$ref": "./examples/ApiManagementUpdateLogger.json"
+          }
+        },
         "parameters": [
           {
             "$ref": "./apimanagement.json#/parameters/ResourceGroupNameParameter"
@@ -351,7 +356,13 @@
           ],
           "x-ms-enum": {
             "name": "LoggerType",
-            "modelAsString": false
+            "modelAsString": true,
+            "values": [
+              {
+                "value": "azureEventHub",
+                "description": "Azure Event Hub as log destination."
+              }
+            ]
           }
         },
         "description": {
@@ -372,7 +383,7 @@
         },
         "isBuffered": {
           "type": "boolean",
-          "description": "Whether records are buffered in the logger before publishing. Default is assumed to be true."          
+          "description": "Whether records are buffered in the logger before publishing. Default is assumed to be true."
         }
       },
       "required": [
@@ -401,7 +412,13 @@
           ],
           "x-ms-enum": {
             "name": "LoggerType",
-            "modelAsString": false
+            "modelAsString": true,
+            "values": [
+              {
+                "value": "azureEventHub",
+                "description": "Azure Event Hub as log destination."
+              }
+            ]
           }
         },
         "description": {
@@ -417,7 +434,7 @@
         },
         "isBuffered": {
           "type": "boolean",
-          "description": "Whether records are buffered in the logger before publishing. Default is assumed to be true."          
+          "description": "Whether records are buffered in the logger before publishing. Default is assumed to be true."
         }
       },
       "description": "Parameters supplied to the Update Logger operation."

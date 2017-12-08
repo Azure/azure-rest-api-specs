@@ -1,202 +1,202 @@
 {
   "parameters": {
-    "subscriptionId": "<subscription-id>", 
-    "resourceGroupName": "myRG",
-    "vmName": "myVM", 
-    "api-version": "2017-03-30", 
+    "subscriptionId": "{subscription-id}",
+    "resourceGroupName": "myResourceGroup",
+    "vmName": "myVM",
+    "api-version": "2017-03-30",
     "parameters": {
-      "location": "westus", 
+      "location": "westus",
       "properties": {
         "hardwareProfile": {
           "vmSize": "Standard_D2_v2"
-        }, 
+        },
         "storageProfile": {
           "imageReference": {
-            "sku": "2016-Datacenter", 
-            "publisher": "MicrosoftWindowsServer", 
-            "version": "latest", 
+            "sku": "2016-Datacenter",
+            "publisher": "MicrosoftWindowsServer",
+            "version": "latest",
             "offer": "WindowsServer"
-          }, 
+          },
           "osDisk": {
-            "caching": "ReadWrite", 
+            "caching": "ReadWrite",
             "managedDisk": {
               "storageAccountType": "Standard_LRS"
-            }, 
-            "name": "myVMosdisk", 
+            },
+            "name": "myVMosdisk",
             "createOption": "FromImage"
-          }, 
+          },
           "dataDisks": [
             {
-              "diskSizeGB": 1023, 
-              "createOption": "Empty", 
+              "diskSizeGB": 1023,
+              "createOption": "Empty",
               "lun": 0
-            }, 
+            },
             {
-              "diskSizeGB": 1023, 
-              "createOption": "Empty", 
+              "diskSizeGB": 1023,
+              "createOption": "Empty",
               "lun": 1
             }
           ]
-        }, 
+        },
         "osProfile": {
-          "adminUsername": "<your-username>", 
-          "computerName": "myVM", 
-          "adminPassword": "<your-password>"
-        }, 
+          "adminUsername": "{your-username}",
+          "computerName": "myVM",
+          "adminPassword": "{your-password}"
+        },
         "networkProfile": {
           "networkInterfaces": [
             {
-              "id": "/subscriptions/<subscription-id>/resourceGroups/<resource-group-name>/providers/Microsoft.Network/networkInterfaces/<existing-nic-name>", 
+              "id": "/subscriptions/{subscription-id}/resourceGroups/myResourceGroup/providers/Microsoft.Network/networkInterfaces/{existing-nic-name}",
               "properties": {
                 "primary": true
               }
             }
           ]
         }
-      }, 
+      },
       "name": "myVM"
     }
   },
   "responses": {
     "200": {
       "body": {
-        "id": "/subscriptions/5a810961-5236-4bbd-b50a-bda258eb00c0/resourceGroups/nsgExampleRg/providers/Microsoft.Compute/virtualMachines/myVM", 
-        "type": "Microsoft.Compute/virtualMachines", 
+        "id": "/subscriptions/{subscription-id}/resourceGroups/myResourceGroup/providers/Microsoft.Compute/virtualMachines/myVM",
+        "type": "Microsoft.Compute/virtualMachines",
         "properties": {
           "osProfile": {
-            "adminUsername": "negat", 
-            "secrets": [], 
-            "computerName": "myVM", 
+            "adminUsername": "{your-username}",
+            "secrets": [],
+            "computerName": "myVM",
             "windowsConfiguration": {
-              "provisionVMAgent": true, 
+              "provisionVMAgent": true,
               "enableAutomaticUpdates": true
             }
-          }, 
+          },
           "networkProfile": {
             "networkInterfaces": [
               {
-                "id": "/subscriptions/5a810961-5236-4bbd-b50a-bda258eb00c0/resourceGroups/nsgExampleRg/providers/Microsoft.Network/networkInterfaces/nsgExistingNic", 
+                "id": "/subscriptions/{subscription-id}/resourceGroups/myResourceGroup/providers/Microsoft.Network/networkInterfaces/nsgExistingNic",
                 "properties": {
                   "primary": true
                 }
               }
             ]
-          }, 
+          },
           "storageProfile": {
             "imageReference": {
-              "sku": "2016-Datacenter", 
-              "publisher": "MicrosoftWindowsServer", 
-              "version": "latest", 
+              "sku": "2016-Datacenter",
+              "publisher": "MicrosoftWindowsServer",
+              "version": "latest",
               "offer": "WindowsServer"
-            }, 
+            },
             "osDisk": {
-              "osType": "Windows", 
-              "caching": "ReadWrite", 
-              "createOption": "FromImage", 
-              "name": "myVMosdisk", 
+              "osType": "Windows",
+              "caching": "ReadWrite",
+              "createOption": "FromImage",
+              "name": "myVMosdisk",
               "managedDisk": {
                 "storageAccountType": "Standard_LRS"
               }
-            }, 
+            },
             "dataDisks": [
               {
-                "caching": "None", 
+                "caching": "None",
                 "managedDisk": {
                   "storageAccountType": "Standard_LRS"
-                }, 
-                "createOption": "Empty", 
-                "lun": 0, 
+                },
+                "createOption": "Empty",
+                "lun": 0,
                 "diskSizeGB": 1023
-              }, 
+              },
               {
-                "caching": "None", 
+                "caching": "None",
                 "managedDisk": {
                   "storageAccountType": "Standard_LRS"
-                }, 
-                "createOption": "Empty", 
-                "lun": 1, 
+                },
+                "createOption": "Empty",
+                "lun": 1,
                 "diskSizeGB": 1023
               }
             ]
-          }, 
-          "vmId": "3906fef9-a1e5-4b83-a8a8-540858b41df0", 
+          },
+          "vmId": "3906fef9-a1e5-4b83-a8a8-540858b41df0",
           "hardwareProfile": {
             "vmSize": "Standard_D2_v2"
-          }, 
+          },
           "provisioningState": "Creating"
-        }, 
-        "name": "myVM", 
+        },
+        "name": "myVM",
         "location": "westus"
       }
     },
     "201": {
       "body": {
-        "id": "/subscriptions/5a810961-5236-4bbd-b50a-bda258eb00c0/resourceGroups/nsgExampleRg/providers/Microsoft.Compute/virtualMachines/myVM", 
-        "type": "Microsoft.Compute/virtualMachines", 
+        "id": "/subscriptions/{subscription-id}/resourceGroups/myResourceGroup/providers/Microsoft.Compute/virtualMachines/myVM",
+        "type": "Microsoft.Compute/virtualMachines",
         "properties": {
           "osProfile": {
-            "adminUsername": "negat", 
-            "secrets": [], 
-            "computerName": "myVM", 
+            "adminUsername": "{your-username}",
+            "secrets": [],
+            "computerName": "myVM",
             "windowsConfiguration": {
-              "provisionVMAgent": true, 
+              "provisionVMAgent": true,
               "enableAutomaticUpdates": true
             }
-          }, 
+          },
           "networkProfile": {
             "networkInterfaces": [
               {
-                "id": "/subscriptions/5a810961-5236-4bbd-b50a-bda258eb00c0/resourceGroups/nsgExampleRg/providers/Microsoft.Network/networkInterfaces/nsgExistingNic", 
+                "id": "/subscriptions/{subscription-id}/resourceGroups/myResourceGroup/providers/Microsoft.Network/networkInterfaces/nsgExistingNic",
                 "properties": {
                   "primary": true
                 }
               }
             ]
-          }, 
+          },
           "storageProfile": {
             "imageReference": {
-              "sku": "2016-Datacenter", 
-              "publisher": "MicrosoftWindowsServer", 
-              "version": "latest", 
+              "sku": "2016-Datacenter",
+              "publisher": "MicrosoftWindowsServer",
+              "version": "latest",
               "offer": "WindowsServer"
-            }, 
+            },
             "osDisk": {
-              "osType": "Windows", 
-              "caching": "ReadWrite", 
-              "createOption": "FromImage", 
-              "name": "myVMosdisk", 
+              "osType": "Windows",
+              "caching": "ReadWrite",
+              "createOption": "FromImage",
+              "name": "myVMosdisk",
               "managedDisk": {
                 "storageAccountType": "Standard_LRS"
               }
-            }, 
+            },
             "dataDisks": [
               {
-                "caching": "None", 
+                "caching": "None",
                 "managedDisk": {
                   "storageAccountType": "Standard_LRS"
-                }, 
-                "createOption": "Empty", 
-                "lun": 0, 
+                },
+                "createOption": "Empty",
+                "lun": 0,
                 "diskSizeGB": 1023
-              }, 
+              },
               {
-                "caching": "None", 
+                "caching": "None",
                 "managedDisk": {
                   "storageAccountType": "Standard_LRS"
-                }, 
-                "createOption": "Empty", 
-                "lun": 1, 
+                },
+                "createOption": "Empty",
+                "lun": 1,
                 "diskSizeGB": 1023
               }
             ]
-          }, 
-          "vmId": "3906fef9-a1e5-4b83-a8a8-540858b41df0", 
+          },
+          "vmId": "3906fef9-a1e5-4b83-a8a8-540858b41df0",
           "hardwareProfile": {
             "vmSize": "Standard_D2_v2"
-          }, 
+          },
           "provisioningState": "Creating"
-        }, 
-        "name": "myVM", 
+        },
+        "name": "myVM",
         "location": "westus"
       }
     }

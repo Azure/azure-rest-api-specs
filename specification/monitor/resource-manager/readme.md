@@ -28,9 +28,30 @@ These are the global settings for the MonitorClient API.
 title: MonitorClient
 description: Monitor Management Client
 openapi-type: arm
-tag: package-2017-08
+tag: package-2017-09
 ```
 
+### Tag: package-2017-09
+
+These settings apply only when `--tag=package-2017-09` is specified on the command line.
+
+``` yaml $(tag) == 'package-2017-09'
+input-file:
+- microsoft.insights/2015-04-01/autoscale_API.json
+- microsoft.insights/2015-04-01/operations_API.json
+- microsoft.insights/2016-03-01/alertRulesIncidents_API.json
+- microsoft.insights/2016-03-01/alertRules_API.json
+- microsoft.insights/2016-03-01/logProfiles_API.json
+- microsoft.insights/2017-05-01-preview/diagnosticsSettings_API.json
+- microsoft.insights/2017-05-01-preview/diagnosticsSettingsCategories_API.json
+- microsoft.insights/2017-04-01/actionGroups_API.json
+- microsoft.insights/2017-04-01/activityLogAlerts_API.json
+- microsoft.insights/2015-04-01/activityLogs_API.json
+- microsoft.insights/2015-04-01/eventCategories_API.json
+- microsoft.insights/2015-04-01/tenantActivityLogs_API.json
+- microsoft.insights/2017-05-01-preview/metricDefinitions_API.json
+- microsoft.insights/2017-05-01-preview/metrics_API.json
+```
 
 ### Tag: package-2017-08
 
@@ -52,7 +73,6 @@ input-file:
 ---
 # Code Generation
 
-
 ## C# 
 
 These settings apply only when `--csharp` is specified on the command line.
@@ -63,23 +83,58 @@ csharp:
   azure-arm: true
   payload-flattening-threshold: 1
   license-header: MICROSOFT_MIT_NO_VERSION
-  namespace: Microsoft.Azure.Management.Monitor.Management
-  output-folder: $(csharp-sdks-folder)/Monitor/Management.Monitor/Generated/Management/Monitor
+  namespace: Microsoft.Azure.Management.Monitor
+  output-folder: $(csharp-sdks-folder)/Monitor/Management.Monitor/Generated
   clear-output-folder: true
+```
+
+
+## Go
+
+These settings apply only when `--go` is specified on the command line.
+
+``` yaml $(go)
+go:
+  license-header: MICROSOFT_APACHE_NO_VERSION
+  namespace: insights
+  clear-output-folder: true
+```
+
+### Tag: package-2017-08 and go
+
+These settings apply only when `--tag=package-2017-08 --go` is specified on the command line.
+Please also specify `--go-sdk-folder=<path to the root directory of your azure-sdk-for-go clone>`.
+
+``` yaml $(tag) == 'package-2017-08' && $(go)
+output-folder: $(go-sdk-folder)/services/monitor/mgmt/2017-05-01-preview/insights
 ```
 
 
 ## Python
 
 These settings apply only when `--python` is specified on the command line.
+Please also specify `--python-sdks-folder=<path to the root directory of your azure-sdk-for-python clone>`.
+Use `--python-mode=update` if you already have a setup.py and just want to update the code itself.
 
 ``` yaml $(python)
+python-mode: create
 python:
-  # override the default output folder
-  output-folder: $(output-folder)/python
+  azure-arm: true
   license-header: MICROSOFT_MIT_NO_VERSION
   payload-flattening-threshold: 2
   namespace: azure.mgmt.monitor
+  package-name: azure-mgmt-monitor
+  clear-output-folder: true
+```
+``` yaml $(python) && $(python-mode) == 'update'
+python:
+  no-namespace-folders: true
+  output-folder: $(python-sdks-folder)/azure-mgmt-monitor/azure/mgmt/monitor
+```
+``` yaml $(python) && $(python-mode) == 'create'
+python:
+  basic-setup-py: true
+  output-folder: $(python-sdks-folder)/azure-mgmt-monitor
 ```
 
 ## Java
@@ -93,4 +148,14 @@ java:
   license-header: MICROSOFT_MIT_NO_VERSION
   payload-flattening-threshold: 2
   namespace: com.microsoft.azure.management.monitor
+```
+
+# Validation
+
+## Suppression
+
+``` yaml
+directive:
+  - suppress: R3016  # DefinitionsPropertiesNamesCamelCase (to suppress the error due to odata.type)
+    reason: The feature (polymorphic types) is in the process of deprecation and fixing this will require changes in the backend.
 ```

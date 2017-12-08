@@ -8,6 +8,12 @@
   "schemes": [
     "https"
   ],
+  "consumes": [
+    "application/json"
+  ],
+  "produces": [
+    "application/json"
+  ],
   "paths": {
     "/providers/Microsoft.Web/availableStacks": {
       "get": {
@@ -17,12 +23,6 @@
         "summary": "Get available application frameworks and their versions",
         "description": "Get available application frameworks and their versions",
         "operationId": "Provider_GetAvailableStacks",
-        "produces": [
-          "application/json",
-          "text/json",
-          "application/xml",
-          "text/xml"
-        ],
         "parameters": [
           {
             "$ref": "#/parameters/apiVersionParameter"
@@ -32,7 +32,7 @@
           "200": {
             "description": "OK",
             "schema": {
-              "$ref": "#/definitions/Object"
+              "type": "object"
             }
           }
         }
@@ -43,11 +43,9 @@
         "tags": [
           "Provider"
         ],
+        "summary": "Gets all available operations for the Microsoft.Web resource provider. Also exposes resource metric definitions",
+        "description": "Gets all available operations for the Microsoft.Web resource provider. Also exposes resource metric definitions",
         "operationId": "Provider_ListOperations",
-        "produces": [
-          "application/json",
-          "text/json"
-        ],
         "parameters": [
           {
             "$ref": "#/parameters/apiVersionParameter"
@@ -57,8 +55,13 @@
           "200": {
             "description": "OK",
             "schema": {
-              "$ref": "#/definitions/CsmOperationCollection"
+              "$ref": "./CommonDefinitions.json#/definitions/CsmOperationCollection"
             }
+          }
+        },
+        "x-ms-examples": {
+          "List operations": {
+            "$ref": "./examples/ListOperations.json"
           }
         },
         "x-ms-pageable": {
@@ -74,12 +77,6 @@
         "summary": "Get available application frameworks and their versions",
         "description": "Get available application frameworks and their versions",
         "operationId": "Provider_GetAvailableStacksOnPrem",
-        "produces": [
-          "application/json",
-          "text/json",
-          "application/xml",
-          "text/xml"
-        ],
         "parameters": [
           {
             "$ref": "#/parameters/subscriptionIdParameter"
@@ -92,176 +89,14 @@
           "200": {
             "description": "OK",
             "schema": {
-              "$ref": "#/definitions/Object"
+              "type": "object"
             }
           }
         }
       }
     }
   },
-  "definitions": {
-    "CsmOperationCollection": {
-      "description": "Collection of Azure resource manager operation metadata.",
-      "required": [
-        "value"
-      ],
-      "type": "object",
-      "properties": {
-        "value": {
-          "description": "Collection of resources.",
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/CsmOperationDescription"
-          }
-        },
-        "nextLink": {
-          "description": "Link to next page of resources.",
-          "type": "string"
-        }
-      }
-    },
-    "CsmOperationDescription": {
-      "type": "object",
-      "properties": {
-        "name": {
-          "type": "string"
-        },
-        "display": {
-          "$ref": "#/definitions/CsmOperationDisplay"
-        },
-        "origin": {
-          "type": "string"
-        },
-        "properties": {
-          "$ref": "#/definitions/CsmOperationDescriptionProperties"
-        }
-      }
-    },
-    "CsmOperationDescriptionProperties": {
-      "type": "object",
-      "properties": {
-        "serviceSpecification": {
-          "$ref": "#/definitions/ServiceSpecification"
-        }
-      }
-    },
-    "CsmOperationDisplay": {
-      "type": "object",
-      "properties": {
-        "provider": {
-          "type": "string"
-        },
-        "resource": {
-          "type": "string"
-        },
-        "operation": {
-          "type": "string"
-        },
-        "description": {
-          "type": "string"
-        }
-      }
-    },
-    "Dimension": {
-      "type": "object",
-      "properties": {
-        "name": {
-          "type": "string"
-        },
-        "displayName": {
-          "type": "string"
-        },
-        "internalName": {
-          "type": "string"
-        },
-        "toBeExportedForShoebox": {
-          "type": "boolean"
-        }
-      }
-    },
-    "MetricAvailability": {
-      "type": "object",
-      "properties": {
-        "timeGrain": {
-          "type": "string"
-        },
-        "blobDuration": {
-          "type": "string"
-        }
-      }
-    },
-    "MetricSpecification": {
-      "type": "object",
-      "properties": {
-        "name": {
-          "type": "string"
-        },
-        "displayName": {
-          "type": "string"
-        },
-        "displayDescription": {
-          "type": "string"
-        },
-        "unit": {
-          "type": "string"
-        },
-        "aggregationType": {
-          "type": "string"
-        },
-        "supportsInstanceLevelAggregation": {
-          "type": "boolean"
-        },
-        "enableRegionalMdmAccount": {
-          "type": "boolean"
-        },
-        "sourceMdmAccount": {
-          "type": "string"
-        },
-        "sourceMdmNamespace": {
-          "type": "string"
-        },
-        "metricFilterPattern": {
-          "type": "string"
-        },
-        "fillGapWithZero": {
-          "type": "boolean"
-        },
-        "isInternal": {
-          "type": "boolean"
-        },
-        "dimensions": {
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/Dimension"
-          }
-        },
-        "category": {
-          "type": "string"
-        },
-        "availabilities": {
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/MetricAvailability"
-          }
-        }
-      }
-    },
-    "Object": {
-      "type": "object",
-      "properties": {}
-    },
-    "ServiceSpecification": {
-      "type": "object",
-      "properties": {
-        "metricSpecifications": {
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/MetricSpecification"
-          }
-        }
-      }
-    }
-  },
+  "definitions": {},
   "parameters": {
     "subscriptionIdParameter": {
       "name": "subscriptionId",

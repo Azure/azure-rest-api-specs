@@ -36,7 +36,7 @@
     }
   },
   "paths": {
-    "/subscriptions/{subscriptionId}/providers/Microsoft.Authorization/policydefinitions/{policyDefinitionName}": {
+    "/subscriptions/{subscriptionId}/providers/Microsoft.Authorization/policyDefinitions/{policyDefinitionName}": {
       "put": {
         "tags": [
           "PolicyDefinitions"
@@ -137,7 +137,36 @@
         }
       }
     },
-    "/providers/Microsoft.Management/managementgroups/{managementGroupId}/providers/Microsoft.Authorization/policydefinitions/{policyDefinitionName}": {
+    "/providers/Microsoft.Authorization/policyDefinitions/{policyDefinitionName}": {
+      "get": {
+        "tags": [
+          "PolicyDefinitions"
+        ],
+        "operationId": "PolicyDefinitions_GetBuiltIn",
+        "description": "Gets the built in policy definition.",
+        "parameters": [
+          {
+            "name": "policyDefinitionName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the built in policy definition to get."
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK - Returns information about the built in policy definition.",
+            "schema": {
+              "$ref": "#/definitions/PolicyDefinition"
+            }
+          }
+        }
+      }
+    },
+    "/providers/Microsoft.Management/managementgroups/{managementGroupId}/providers/Microsoft.Authorization/policyDefinitions/{policyDefinitionName}": {
       "put": {
         "tags": [
           "PolicyDefinitions"
@@ -163,9 +192,6 @@
           },
           {
             "$ref": "#/parameters/ApiVersionParameter"
-          },
-          {
-            "$ref": "#/parameters/SubscriptionIdParameter"
           },
           {
             "$ref": "#/parameters/ManagementGroupIdParameter"
@@ -198,9 +224,6 @@
             "$ref": "#/parameters/ApiVersionParameter"
           },
           {
-            "$ref": "#/parameters/SubscriptionIdParameter"
-          },
-          {
             "$ref": "#/parameters/ManagementGroupIdParameter"
           }
         ],
@@ -231,9 +254,6 @@
             "$ref": "#/parameters/ApiVersionParameter"
           },
           {
-            "$ref": "#/parameters/SubscriptionIdParameter"
-          },
-          {
             "$ref": "#/parameters/ManagementGroupIdParameter"
           }
         ],
@@ -247,7 +267,7 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/providers/Microsoft.Authorization/policydefinitions": {
+    "/subscriptions/{subscriptionId}/providers/Microsoft.Authorization/policyDefinitions": {
       "get": {
         "tags": [
           "PolicyDefinitions"
@@ -255,13 +275,6 @@
         "operationId": "PolicyDefinitions_List",
         "description": "Gets all the policy definitions for a subscription.",
         "parameters": [
-          {
-            "name": "$filter",
-            "in": "query",
-            "required": false,
-            "type": "string",
-            "description": "The filter to apply on the operation."
-          },
           {
             "$ref": "#/parameters/ApiVersionParameter"
           },
@@ -279,11 +292,35 @@
         },
         "x-ms-pageable": {
           "nextLinkName": "nextLink"
-        },
-        "x-ms-odata": "#/definitions/PolicyDefinition"
+        }
       }
     },
-    "/providers/Microsoft.Management/managementgroups/{managementGroupId}/providers/Microsoft.Authorization/policydefinitions": {
+    "/providers/Microsoft.Authorization/policyDefinitions": {
+      "get": {
+        "tags": [
+          "PolicyDefinitions"
+        ],
+        "operationId": "PolicyDefinitions_ListBuiltIn",
+        "description": "Gets all the built in policy definitions.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK - Returns an array of built in policy definitions.",
+            "schema": {
+              "$ref": "#/definitions/PolicyDefinitionListResult"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/providers/Microsoft.Management/managementgroups/{managementGroupId}/providers/Microsoft.Authorization/policyDefinitions": {
       "get": {
         "tags": [
           "PolicyDefinitions"
@@ -292,17 +329,7 @@
         "description": "Gets all the policy definitions for a subscription at management group level.",
         "parameters": [
           {
-            "name": "$filter",
-            "in": "query",
-            "required": false,
-            "type": "string",
-            "description": "The filter to apply on the operation."
-          },
-          {
             "$ref": "#/parameters/ApiVersionParameter"
-          },
-          {
-            "$ref": "#/parameters/SubscriptionIdParameter"
           },
           {
             "$ref": "#/parameters/ManagementGroupIdParameter"
@@ -318,8 +345,7 @@
         },
         "x-ms-pageable": {
           "nextLinkName": "nextLink"
-        },
-        "x-ms-odata": "#/definitions/PolicyDefinition"
+        }
       }
     }
   },

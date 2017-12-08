@@ -1,0 +1,40 @@
+{
+    "parameters": {
+        "api-version": "2016-04-01",
+        "subscriptionId": "00000000-0000-0000-0000-000000000000",
+        "resourceGroupName": "myResourceGroup",
+        "workspaceName": "testworkspace",
+		"parameters": {
+		  "tags": {
+			"tagKey1": "TagValue1"
+		  },
+		  "location": "West Europe",
+		  "properties": {
+				  "userStorageAccountId": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/myResourceGroup/providers/Microsoft.Storage/storageAccounts/teststorage"
+		  }
+		}
+    },
+    "responses": {
+		"200": {
+		  "body": {
+			"tags": {
+			  "tagKey1": "TagValue1"
+			},
+			"id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/myResourceGroup/providers/Microsoft.MachineLearning/workspaces/testworkspace",
+			"name": "testworkspace",
+			"type": "Microsoft.MachineLearning/workspaces",
+			"location": "East US",
+			"properties": {
+			  "userStorageAccountId": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/myResourceGroup/providers/Microsoft.Storage/storageAccounts/teststorage",
+			  "ownerEmail": "abc@microsoft.com",
+			  "workspaceType": "PaidStandard",
+			  "workspaceState": "Enabled",
+			  "workspaceId": "00000000-1111-2222-3333-444444444444",
+			  "studioEndpoint": "https://studioapi.azureml.net",
+			  "creationTime": "2017-03-01T23:14:37.0707808Z",
+			  "keyVaultIdentifierId": "kvid"
+			}
+		  }
+		}
+    }
+}

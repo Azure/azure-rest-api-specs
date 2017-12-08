@@ -210,6 +210,11 @@
         ],
         "operationId": "Backend_Update",
         "description": "Updates an existing backend.",
+        "x-ms-examples": {
+          "ApiManagementUpdateBackend": {
+            "$ref": "./examples/ApiManagementUpdateBackend.json"
+          }
+        },
         "parameters": [
           {
             "$ref": "./apimanagement.json#/parameters/ResourceGroupNameParameter"
@@ -260,6 +265,11 @@
           "Backends"
         ],
         "operationId": "Backend_Delete",
+        "x-ms-examples": {
+          "ApiManagementDeleteBackend": {
+            "$ref": "./examples/ApiManagementDeleteBackend.json"
+          }
+        },
         "description": "Deletes the specified backend.",
         "parameters": [
           {
@@ -407,7 +417,17 @@
           ],
           "x-ms-enum": {
             "name": "BackendProtocol",
-            "modelAsString": false
+            "modelAsString": true,
+            "values": [
+              {
+                "value": "http",
+                "description": "The Backend is a RESTful service."
+              },
+              {
+                "value": "soap",
+                "description": "The Backend is a SOAP service."
+              }
+            ]
           },
           "description": "Backend communication protocol."
         }
@@ -567,6 +587,16 @@
     },
     "BackendUpdateParameters": {
       "properties": {
+        "properties": {
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/BackendUpdateParameterProperties",
+          "description": "Backend entity update contract properties."
+        }
+      },
+      "description": "Backend update parameters."
+    },
+    "BackendUpdateParameterProperties": {
+      "properties": {
         "url": {
           "type": "string",
           "description": "Runtime Url of the Backend.",
@@ -581,7 +611,17 @@
           ],
           "x-ms-enum": {
             "name": "BackendProtocol",
-            "modelAsString": false
+            "modelAsString": true,
+            "values": [
+              {
+                "value": "http",
+                "description": "The Backend is a RESTful service."
+              },
+              {
+                "value": "soap",
+                "description": "The Backend is a SOAP service."
+              }
+            ]
           },
           "description": "Backend communication protocol."
         }
