@@ -73,7 +73,6 @@ input-file:
 ---
 # Code Generation
 
-
 ## C# 
 
 These settings apply only when `--csharp` is specified on the command line.
@@ -149,4 +148,14 @@ java:
   license-header: MICROSOFT_MIT_NO_VERSION
   payload-flattening-threshold: 2
   namespace: com.microsoft.azure.management.monitor
+```
+
+# Validation
+
+## Suppression
+
+``` yaml
+directive:
+  - suppress: R3016  # DefinitionsPropertiesNamesCamelCase (to suppress the error due to odata.type)
+    reason: The feature (polymorphic types) is in the process of deprecation and fixing this will require changes in the backend.
 ```
