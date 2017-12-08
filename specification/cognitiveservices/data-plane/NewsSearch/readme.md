@@ -21,6 +21,15 @@ These settings apply only when `--tag=release_1_0` is specified on the command l
 input-file: v1.0/NewsSearch.json
 ```
 
+## Suppressions 
+
+Suppressing errors due to API design: 
+``` yaml 
+directive:
+  - suppress: R3016
+    reason: _type is a polymorphic discriminator that can't be changed. 
+```
+
 ## CSharp Settings
 These settings apply only when `--csharp` is specified on the command line.
 ``` yaml $(csharp) 
