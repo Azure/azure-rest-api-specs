@@ -157,7 +157,21 @@
             "required": true,
             "type": "string",
             "enum": ["daily", "monthly"],
-            "modelAsString":true
+            "x-ms-enum": {
+              "name": "datagrain",
+              "modelAsString":true,
+              "values":[
+                        { 
+                          "value":"daily",
+                          "description":"Daily grain of data",
+                          "name":"DailyGrain"                          
+                        },
+                        { "value":"monthly",
+                          "description":"Monthly grain of data",
+                          "name":"MonthlyGrain"                          
+                        }
+                      ]
+            }
           },       
           {
             "name": "$filter",
