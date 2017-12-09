@@ -162,6 +162,52 @@
                         }
                     }
                 }
+            },
+            "patch": {
+                "description": "Updates an existing action group's tags. To update other fields use the CreateOrUpdate method.",
+                "operationId": "ActionGroups_Update",
+                "parameters": [
+                    {
+                        "$ref": "#/parameters/SubscriptionIdParameter"
+                    },
+                    {
+                        "$ref": "#/parameters/ResourceGroupNameParameter"
+                    },
+                    {
+                        "$ref": "#/parameters/ActionGroupNameParameter"
+                    },
+                    {
+                        "$ref": "#/parameters/ApiVersionParameter"
+                    },
+                    {
+                        "name": "actionGroupPatch",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/ActionGroupPatchBody"
+                        },
+                        "description": "Parameters supplied to the operation."
+                    }
+                ],
+                "responses": {
+                    "default": {
+                        "description": "Error response describing why the operation failed.",
+                        "schema": {
+                            "$ref": "#/definitions/ErrorResponse"
+                        }
+                    },
+                    "200": {
+                        "description": "An existing action group was successfully updated.",
+                        "schema": {
+                            "$ref": "#/definitions/ActionGroupResource"
+                        }
+                    }
+                },
+                "x-ms-examples": {
+                    "Patch an activity log alert": {
+                        "$ref": "./examples/patchActionGroup.json"
+                    }
+                }
             }
         },
         "/subscriptions/{subscriptionId}/providers/microsoft.insights/actionGroups": {
@@ -563,6 +609,32 @@
                 "message": {
                     "description": "Error message indicating why the operation failed.",
                     "type": "string"
+                }
+            }
+        },
+        "ActionGroupPatchBody": {
+            "description": "An action group object for the body of patch operations.",
+            "properties": {
+                "tags": {
+                    "additionalProperties": {
+                        "type": "string"
+                    },
+                    "description": "Resource tags"
+                },
+                "properties": {
+                    "x-ms-client-flatten": true,
+                    "$ref": "#/definitions/ActionGroupPatch",
+                    "description": "The action group settings for an update operation."
+                }
+            }
+        },
+        "ActionGroupPatch": {
+            "description": "An Azure action group for patch operations.",
+            "properties": {
+                "enabled": {
+                    "type": "boolean",
+                    "default": true,
+                    "description": "Indicates whether this action group is enabled. If an action group is not enabled, then none of its actions will be activated."
                 }
             }
         }
