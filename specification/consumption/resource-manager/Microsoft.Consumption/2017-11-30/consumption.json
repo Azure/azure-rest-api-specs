@@ -117,7 +117,7 @@
         }
       }
     },
-    "/{scope}/providers/Microsoft.Consumption/reservationsummaries": {
+    "/{scope}/providers/Microsoft.Consumption/reservationSummaries": {
       "get": {
         "tags": [
           "ReservedInstances"
@@ -127,7 +127,7 @@
         "externalDocs": {
           "url": "https://azure.microsoft.com/en-us/blog/announcing-preview-of-consumption-and-charge-apis-for-enterprise-azure-customers/"
         },
-        "x-ms-examples": {         
+        "x-ms-examples": {
           "ReservationSummariesDaily": {
             "$ref": "./examples/ReservationSummariesDaily.json"
           },
@@ -140,7 +140,7 @@
           "ReservationSummariesMonthlyWithReservationId": {
             "$ref": "./examples/ReservationSummariesMonthlyWithReservationId.json"
           }
-          },
+        },
         "parameters": [
           {
             "name": "scope",
@@ -149,30 +149,34 @@
             "required": true,
             "type": "string",
             "x-ms-skip-url-encoding": true
-          },  
+          },
           {
             "name": "grain",
             "description": "Can be daily or monthly",
             "in": "query",
             "required": true,
             "type": "string",
-            "enum": ["daily", "monthly"],
+            "enum": [
+              "daily",
+              "monthly"
+            ],
             "x-ms-enum": {
               "name": "datagrain",
-              "modelAsString":true,
-              "values":[
-                        { 
-                          "value":"daily",
-                          "description":"Daily grain of data",
-                          "name":"DailyGrain"                          
-                        },
-                        { "value":"monthly",
-                          "description":"Monthly grain of data",
-                          "name":"MonthlyGrain"                          
-                        }
-                      ]
+              "modelAsString": true,
+              "values": [
+                {
+                  "value": "daily",
+                  "description": "Daily grain of data",
+                  "name": "DailyGrain"
+                },
+                {
+                  "value": "monthly",
+                  "description": "Monthly grain of data",
+                  "name": "MonthlyGrain"
+                }
+              ]
             }
-          },       
+          },
           {
             "name": "$filter",
             "description": "Required only for daily grain. The properties/UsageDate for start date and end date. The filter supports 'le' and  'ge'",
@@ -197,13 +201,13 @@
               "$ref": "#/definitions/ErrorResponse"
             }
           }
-        },        
+        },
         "x-ms-pageable": {
           "nextLinkName": null
         }
       }
-    }, 
-    "/{scope}/providers/Microsoft.Consumption/reservationdetails": {
+    },
+    "/{scope}/providers/Microsoft.Consumption/reservationDetails": {
       "get": {
         "tags": [
           "ReservedInstances"
@@ -213,14 +217,14 @@
         "externalDocs": {
           "url": "https://azure.microsoft.com/en-us/blog/announcing-preview-of-consumption-and-charge-apis-for-enterprise-azure-customers/"
         },
-        "x-ms-examples": {         
+        "x-ms-examples": {
           "ReservationDetails": {
             "$ref": "./examples/ReservationDetails.json"
           },
           "ReservationDetailsWithReservationId": {
             "$ref": "./examples/ReservationDetailsWithReservationId.json"
           }
-          },
+        },
         "parameters": [
           {
             "name": "scope",
@@ -229,7 +233,7 @@
             "required": true,
             "type": "string",
             "x-ms-skip-url-encoding": true
-          },              
+          },
           {
             "name": "$filter",
             "description": "Filter reservation details by date range. The properties/UsageDate for start date and end date. The filter supports 'le' and  'ge' ",
@@ -254,12 +258,12 @@
               "$ref": "#/definitions/ErrorResponse"
             }
           }
-        },                
+        },
         "x-ms-pageable": {
-         "nextLinkName": null
+          "nextLinkName": null
         }
       }
-    },    
+    },
     "/providers/Microsoft.Consumption/operations": {
       "get": {
         "tags": [
@@ -517,7 +521,7 @@
           }
         }
       }
-    },    
+    },
     "ReservationSummariesProperties": {
       "description": "The properties of the reservation summaries.",
       "properties": {
@@ -553,7 +557,7 @@
           "type": "number",
           "format": "decimal",
           "readOnly": true
-        },        
+        },
         "minUtilizationPercentage": {
           "description": "This is the minimum hourly utilization in the usage time (day or month). E.g. if usage record corresponds to 12/10/2017 and on that for hour 4 and 5, utilization was 10%, this field will return 10% for that day",
           "type": "number",
@@ -602,7 +606,7 @@
           }
         }
       }
-    },    
+    },
     "ReservationDetailsProperties": {
       "description": "The properties of the reservation details.",
       "properties": {
@@ -638,7 +642,7 @@
           "type": "number",
           "format": "decimal",
           "readOnly": true
-        },        
+        },
         "instanceId": {
           "description": "This identifier is the name of the resource or the fully qualified Resource ID.",
           "type": "string",
