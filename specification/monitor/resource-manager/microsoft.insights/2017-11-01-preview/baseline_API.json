@@ -45,7 +45,7 @@
           "description": "**Gets the baseline values for a specific metric**.",
           "parameters": [
             {
-              "$ref": "#/parameters/ResourceUriParameter"            
+              "$ref": "#/parameters/ExtendedResourceUriParameter"            
             },
             {
               "$ref": "#/parameters/MetricNameParameter"
@@ -91,36 +91,36 @@
                   "properties": {
                     "timespan": "2017-04-14T02:20:00Z/2017-04-14T04:20:00Z",
                     "aggregation": "Average",
-                    "interval": "PT1H"
-                  },
-                  "timestamps": [
-                    "2017-04-14T02:20:00Z",
-                    "2017-04-14T03:20:00Z"
-                  ],
-                  "baseline": [
-                    {
-                      "sensitivity": "Low",
-                      "lowThresholds": [
-                        30.0,
-                        31.1
-                      ],
-                      "highThresholds": [
-                        90.3453,
-                        91.3453
-                      ]
-                    },
-                    {
-                      "sensitivity": "Medium",
-                      "lowThresholds": [
-                        50.0,
-                        51.1
-                      ],
-                      "highThresholds": [
-                        70.3453,
-                        71.3453
-                      ]
-                    }
-                  ]                  
+                    "interval": "PT1H",
+                    "timestamps": [
+                      "2017-04-14T02:20:00Z",
+                      "2017-04-14T03:20:00Z"
+                    ],
+                    "baseline": [
+                      {
+                        "sensitivity": "Low",
+                        "lowThresholds": [
+                          30.0,
+                          31.1
+                        ],
+                        "highThresholds": [
+                          90.3453,
+                          91.3453
+                        ]
+                      },
+                      {
+                        "sensitivity": "Medium",
+                        "lowThresholds": [
+                          50.0,
+                          51.1
+                        ],
+                        "highThresholds": [
+                          70.3453,
+                          71.3453
+                        ]
+                      }
+                    ]
+                  }                                    
                 }
               }
             }
@@ -146,24 +146,6 @@
           }
         },
         "description": "The localizable string class."
-      },
-      "BaselineProperties": {
-        "properties": {
-          "timespan": {
-            "type": "string",
-            "description": "The timespan for which the data was retrieved. Its value consists of two datatimes concatenated, separated by '/'.  This may be adjusted in the future and returned back from what was originally requested."
-          },
-          "interval": {
-            "type": "string",
-            "format": "duration",
-            "description": "The interval (window size) for which the metric data was returned in.  This may be adjusted in the future and returned back from what was originally requested.  This is not present if a metadata request was made."
-          },
-          "aggregation": {
-            "type": "string",
-            "description": "The aggregation type of the metric."
-          }
-        },
-        "description": "The baseline properties class."
       },
       "BaselineMetadataValue": {
         "properties": {
@@ -197,20 +179,41 @@
         "properties": {
           "id": {
             "type": "string",
+            "readOnly": true,
             "description": "the metric baseline Id."
           },
           "type": {
             "type": "string",
+            "readOnly": true,
             "description": "the resource type of the baseline resource."
           },
           "name": {
             "$ref": "#/definitions/LocalizableString",
+            "readOnly": true,
             "description": "the name and the display name of the metric, i.e. it is localizable string."
           },
           "properties": {
             "x-ms-client-flatten": true,
             "$ref": "#/definitions/BaselineProperties",
             "description": "the properties of the baseline."
+          }
+        },
+        "description": "The response to a baseline query."
+      },
+      "BaselineProperties": {
+        "properties": {
+          "timespan": {
+            "type": "string",
+            "description": "The timespan for which the data was retrieved. Its value consists of two datatimes concatenated, separated by '/'.  This may be adjusted in the future and returned back from what was originally requested."
+          },
+          "interval": {
+            "type": "string",
+            "format": "duration",
+            "description": "The interval (window size) for which the metric data was returned in.  This may be adjusted in the future and returned back from what was originally requested.  This is not present if a metadata request was made."
+          },
+          "aggregation": {
+            "type": "string",
+            "description": "The aggregation type of the metric."
           },
           "timestamps": {
             "type": "array",
@@ -235,15 +238,23 @@
             },
             "description": "the baseline metadata values."
           }
-        }, 
-        "required": [ "id", "type", "name" ],
-        "description": "The response to a baseline query."
+        },
+        "description": "The baseline properties class."
       },
       "Baseline": {
         "type": "object",
         "properties": {
           "sensitivity": {
             "type": "string",
+            "enum": [
+              "Low",
+              "Medium",
+              "High"
+            ],
+            "x-ms-enum": {
+              "name": "AccountType",
+              "modelAsString": false
+            },
             "description": "the sensitivity of the baseline."
           },
           "lowThresholds": {
@@ -270,12 +281,12 @@
       }
     },
     "parameters": {
-      "ResourceUriParameter": {
+      "ExtendedResourceUriParameter": {
         "name": "resourceUri",
         "in": "path",
         "required": true,
         "type": "string",
-        "description": "The identifier of the resource.",
+        "description": "The identifier of the resource. It has the following structure: subscriptions/{subscriptionName}/resourceGroups/{resourceGroupName}/providers/{providerName}/{resourceName}. For example: subscriptions/b368ca2f-e298-46b7-b0ab-012281956afa/resourceGroups/vms/providers/Microsoft.Compute/virtualMachines/vm1",
         "x-ms-parameter-location": "method",
         "x-ms-skip-url-encoding": true
       },

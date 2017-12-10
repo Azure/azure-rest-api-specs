@@ -45,7 +45,7 @@
           "description": "**Lists the baseline values for a resource**.",
           "parameters": [
             {
-              "$ref": "#/parameters/ResourceUriParameter"            
+              "$ref": "#/parameters/ExtendedResourceUriParameter"            
             },
             {
               "$ref": "#/parameters/ApiVersionParameter"
@@ -192,6 +192,15 @@
         "properties": {
           "sensitivity": {
             "type": "string",
+            "enum": [
+              "Low",
+              "Medium",
+              "High"
+            ],
+            "x-ms-enum": {
+              "name": "AccountType",
+              "modelAsString": false
+            },
             "description": "the sensitivity of the baseline."
           },
           "lowThresholds": {
@@ -218,12 +227,12 @@
       }
     },
     "parameters": {
-      "ResourceUriParameter": {
+      "ExtendedResourceUriParameter": {
         "name": "resourceUri",
         "in": "path",
         "required": true,
         "type": "string",
-        "description": "The identifier of the resource.",
+        "description": "The identifier of the resource. It has the following structure: subscriptions/{subscriptionName}/resourceGroups/{resourceGroupName}/providers/{providerName}/{resourceName}. For example: subscriptions/b368ca2f-e298-46b7-b0ab-012281956afa/resourceGroups/vms/providers/Microsoft.Compute/virtualMachines/vm1",
         "x-ms-parameter-location": "method",
         "x-ms-skip-url-encoding": true
       },      
