@@ -1498,15 +1498,15 @@
           "description": "SSIS package location.",
           "$ref": "#/definitions/SSISPackageLocation"
         },
-        "use32bitRuntime": {
-          "description": "Specifies whether to use 32 bit runtime to execute SSIS package.",
+        "runtime": {
+          "description": "Specifies the runtime to execute SSIS package.",
           "type": "string",
           "enum": [
-            "Yes",
-            "No"
+            "x64",
+            "x86"
           ],
           "x-ms-enum": {
-            "name": "SSISExecutionUse32bitRuntime",
+            "name": "SSISExecutionRuntime",
             "modelAsString": true
           }
         },
