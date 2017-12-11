@@ -438,19 +438,26 @@
                     },
                     "description": "The list of webhook receivers that are part of this action group."
                 },
-                "ItsmReceivers": {
+                "itsmReceivers": {
                     "type": "array",
                     "items": {
                         "$ref": "#/definitions/ItsmReceiver"
                     },
                     "description": "The list of ITSM receivers that are part of this action group."
                 },
-                "AzureAppPushReceivers": {
+                "azureAppPushReceivers": {
                     "type": "array",
                     "items": {
                         "$ref": "#/definitions/AzureAppPushReceiver"
                     },
                     "description": "The list of AzureAppPush receivers that are part of this action group."
+                },
+                "automationRunbookReceiver": {
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/definitions/AutomationRunbookReceiver"
+                    },
+                    "description": "The list of AutomationRunbook receivers that are part of this action group."
                 }
             },
             "required": [
@@ -572,6 +579,33 @@
                     "name",
                     "emailAddress"
                 ]
+        },
+        "AutomationRunbookReceiver": {
+            "description": "The Azure Automation Runbook notification receiver.",
+            "properties": {
+                "automationAccountId": {
+                    "type": "string",
+                    "description": "The Azure automation account Id which holds this runbook and authenticate to Azure resource."
+                },
+                "runbookName": {
+                    "type": "string",
+                    "description": "The name for this runbook."
+                },
+                "webhookResourceId": {
+                    "type": "string",
+                    "description": "The resource id for webhook linked to this runbook."
+                },
+                "isGlobalRunbook": {
+                    "type": "string",
+                    "description": "Indicates whether this instance is global runbook."
+                }
+            },
+            "required": [
+                "automationAccountId",
+                "runbookName",
+                "webhookResourceId",
+                "isGlobalRunbook"
+            ]
         },
         "ReceiverStatus": {
             "type": "string",
