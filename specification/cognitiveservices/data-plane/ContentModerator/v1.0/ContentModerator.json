@@ -6,10 +6,10 @@
     "description": "You use the API to scan your content as it is generated. Content Moderator then processes your content and sends the results along with relevant information either back to your systems or to the built-in review tool. You can use this information to take decisions e.g. take it down, send to human judge, etc.\r\n\r\nWhen using the API, images need to have a minimum of 128 pixels and a maximum file size of 4MB. \r\nText can be at most 1024 characters long. \r\nIf the content passed to the text API or the image API exceeds the size limits, the API will return an error code that informs about the issue.\r\n\r\nThis API is currently available in:\r\n\r\n* West US - westus.api.cognitive.microsoft.com\r\n* East US 2 - eastus2.api.cognitive.microsoft.com\r\n* West Central US - westcentralus.api.cognitive.microsoft.com\r\n* West Europe - westeurope.api.cognitive.microsoft.com\r\n* Southeast Asia - southeastasia.api.cognitive.microsoft.com ."
   },
   "x-ms-parameterized-host": {
-    "hostTemplate": "{azureRegionBaseUrl}",
+    "hostTemplate": "{baseUrl}",
     "parameters": [
       {
-        "$ref": "#/parameters/azureRegionBaseUrl"
+        "$ref": "#/parameters/baseUrl"
       }
     ]
   },
@@ -1682,49 +1682,7 @@
             "$ref": "#/parameters/reviewId"
           },
           {
-            "name": "transcriptModerationBody",
-            "description": "Body for add video transcript moderation result API",
-            "in": "body",
-            "required": true,
-            "schema": {
-              "type": "array",
-              "description": "Schema of the body.",
-              "items": {
-                "required": [
-                  "Timestamp",
-                  "Terms"
-                ],
-                "type": "object",
-                "description": "Schema items of the body.",
-                "properties": {
-                  "Timestamp": {
-                    "description": "Timestamp of the image.",
-                    "type": "string"
-                  },
-                  "Terms": {
-                    "description": "Optional metadata details.",
-                    "type": "array",
-                    "items": {
-                      "required": [
-                        "Index",
-                        "Term"
-                      ],
-                      "type": "object",
-                      "properties": {
-                        "Index": {
-                          "description": "Index of the word",
-                          "type": "integer"
-                        },
-                        "Term": {
-                          "description": "Detected word.",
-                          "type": "string"
-                        }
-                      }
-                    }
-                  }
-                }
-              }
-            }
+            "$ref": "#/parameters/transcriptModerationBody"
           },
           {
             "$ref": "#/parameters/ocpApimSubscriptionKeyParameter"
@@ -2391,145 +2349,7 @@
             "$ref": "#/parameters/subTeam"
           },
           {
-            "name": "CreateVideoReviewsBody",
-            "description": "Body for create reviews API",
-            "in": "body",
-            "required": true,
-            "schema": {
-              "type": "array",
-              "description": "Schema of the body.",
-              "items": {
-                "required": [
-                  "Content",
-                  "ContentId",
-                  "Type",
-                  "Status"
-                ],
-                "type": "object",
-                "description": "Schema items of the body.",
-                "properties": {
-                  "VideoFrames": {
-                    "description": "Optional metadata details.",
-                    "type": "array",
-                    "items": {
-                      "required": [
-                        "Id",
-                        "Timestamp",
-                        "FrameImage"
-
-                      ],
-                      "type": "object",
-                      "properties": {
-                        "Id": {
-                          "description": "Id of the frame.",
-                          "type": "string"
-                        },
-                        "Timestamp": {
-                          "description": "Timestamp of the frame.",
-                          "type": "string"
-                        },
-                        "FrameImage": {
-                          "description": "Frame image Url.",
-                          "type": "string"
-                        },
-                        "ReviewerResultTags": {
-                          "type": "array",
-                          "items": {
-                            "required": [
-                              "Key",
-                              "Value"
-                            ],
-                            "type": "object",
-                            "properties": {
-                              "Key": {
-                                "description": "Your key parameter.",
-                                "type": "string"
-                              },
-                              "Value": {
-                                "description": "Your value parameter.",
-                                "type": "string"
-                              }
-                            }
-                          }
-                        },
-                        "Metadata": {
-                          "description": "Optional metadata details.",
-                          "type": "array",
-                          "items": {
-                            "required": [
-                              "Key",
-                              "Value"
-                            ],
-                            "type": "object",
-                            "properties": {
-                              "Key": {
-                                "description": "Your key parameter.",
-                                "type": "string"
-                              },
-                              "Value": {
-                                "description": "Your value parameter.",
-                                "type": "string"
-                              }
-                            }
-                          }
-                        }
-                      }
-                    }
-
-                  },
-                  "Metadata": {
-                    "description": "Optional metadata details.",
-                    "type": "array",
-                    "items": {
-                      "required": [
-                        "Key",
-                        "Value"
-                      ],
-                      "type": "object",
-                      "properties": {
-                        "Key": {
-                          "description": "Your key parameter.",
-                          "type": "string"
-                        },
-                        "Value": {
-                          "description": "Your value parameter.",
-                          "type": "string"
-                        }
-                      }
-                    }
-                  },
-                  "Type": {
-                    "description": "Type of the content.",
-                    "enum": [
-                      "Video"
-                    ],
-                    "type": "string"
-                  },
-                  "Content": {
-                    "description": "Video content url to review.",
-                    "type": "string"
-                  },
-                  "ContentId": {
-                    "description": "Content Identifier.",
-                    "type": "string"
-                  },
-                  "Status": {
-                    "description": "Status of the video(Published,Unpublished,Pending)",
-                    "type": "string"
-                  },
-                  "Timescale": {
-                    "description": "Timescale of the video.",
-                    "type": "string"
-                  },
-                  "CallbackEndpoint": {
-                    "description": "Optional CallbackEndpoint.",
-                    "type": "string"
-                  }
-
-
-                }
-              }
-            }
+            "$ref": "#/parameters/CreateVideoReviewsBody"
           },
           {
             "$ref": "#/parameters/ocpApimSubscriptionKeyParameter"
@@ -2588,73 +2408,7 @@
             "$ref": "#/parameters/timescale"
           },
           {
-            "name": "videoFrameBody",
-            "description": "Body for add video frames API",
-            "in": "body",
-            "required": true,
-            "schema": {
-              "type": "array",
-              "description": "Schema of the body.",
-              "items": {
-                "required": [
-                  "Timestamp",
-                  "frameImage"
-                ],
-                "type": "object",
-                "description": "Schema items of the body.",
-                "properties": {
-                  "Timestamp": {
-                    "description": "Timestamp of the frame.",
-                    "type": "string"
-                  },
-                  "frameImage": {
-                    "description": "Content to review.",
-                    "type": "string"
-                  },
-                  "ReviewerResultTags": {
-                    "type": "array",
-                    "items": {
-                      "required": [
-                        "Key",
-                        "Value"
-                      ],
-                      "type": "object",
-                      "properties": {
-                        "Key": {
-                          "description": "Your key parameter.",
-                          "type": "string"
-                        },
-                        "Value": {
-                          "description": "Your value parameter.",
-                          "type": "string"
-                        }
-                      }
-                    }
-                  },
-                  "Metadata": {
-                    "description": "Optional metadata details.",
-                    "type": "array",
-                    "items": {
-                      "required": [
-                        "Key",
-                        "Value"
-                      ],
-                      "type": "object",
-                      "properties": {
-                        "Key": {
-                          "description": "Your key parameter.",
-                          "type": "string"
-                        },
-                        "Value": {
-                          "description": "Your value parameter.",
-                          "type": "string"
-                        }
-                      }
-                    }
-                  }
-                }
-              }
-            }
+            "$ref": "#/parameters/videoFrameBody"
           },
           {
             "$ref": "#/parameters/ocpApimSubscriptionKeyParameter"
@@ -3850,6 +3604,193 @@
       "type": "string",
       "x-ms-parameter-location": "method"
     },
+    "transcriptModerationBody": {
+      "name": "transcriptModerationBody",
+      "description": "Body for add video transcript moderation result API",
+      "in": "body",
+      "required": true,
+      "schema": {
+        "type": "array",
+        "description": "Schema of the body.",
+        "items": {
+          "required": [
+            "Timestamp",
+            "Terms"
+          ],
+          "type": "object",
+          "description": "Schema items of the body.",
+          "properties": {
+            "Timestamp": {
+              "description": "Timestamp of the image.",
+              "type": "string"
+            },
+            "Terms": {
+              "description": "Optional metadata details.",
+              "type": "array",
+              "items": {
+                "required": [
+                  "Index",
+                  "Term"
+                ],
+                "type": "object",
+                "properties": {
+                  "Index": {
+                    "description": "Index of the word",
+                    "type": "integer"
+                  },
+                  "Term": {
+                    "description": "Detected word.",
+                    "type": "string"
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "x-ms-parameter-location": "method"
+    },
+    "CreateVideoReviewsBody": {
+      "name": "CreateVideoReviewsBody",
+      "description": "Body for create reviews API",
+      "in": "body",
+      "required": true,
+      "schema": {
+        "type": "array",
+        "description": "Schema of the body.",
+        "items": {
+          "required": [
+            "Content",
+            "ContentId",
+            "Type",
+            "Status"
+          ],
+          "type": "object",
+          "description": "Schema items of the body.",
+          "properties": {
+            "VideoFrames": {
+              "description": "Optional metadata details.",
+              "type": "array",
+              "items": {
+                "required": [
+                  "Id",
+                  "Timestamp",
+                  "FrameImage"
+
+                ],
+                "type": "object",
+                "properties": {
+                  "Id": {
+                    "description": "Id of the frame.",
+                    "type": "string"
+                  },
+                  "Timestamp": {
+                    "description": "Timestamp of the frame.",
+                    "type": "string"
+                  },
+                  "FrameImage": {
+                    "description": "Frame image Url.",
+                    "type": "string"
+                  },
+                  "ReviewerResultTags": {
+                    "type": "array",
+                    "items": {
+                      "required": [
+                        "Key",
+                        "Value"
+                      ],
+                      "type": "object",
+                      "properties": {
+                        "Key": {
+                          "description": "Your key parameter.",
+                          "type": "string"
+                        },
+                        "Value": {
+                          "description": "Your value parameter.",
+                          "type": "string"
+                        }
+                      }
+                    }
+                  },
+                  "Metadata": {
+                    "description": "Optional metadata details.",
+                    "type": "array",
+                    "items": {
+                      "required": [
+                        "Key",
+                        "Value"
+                      ],
+                      "type": "object",
+                      "properties": {
+                        "Key": {
+                          "description": "Your key parameter.",
+                          "type": "string"
+                        },
+                        "Value": {
+                          "description": "Your value parameter.",
+                          "type": "string"
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+
+            },
+            "Metadata": {
+              "description": "Optional metadata details.",
+              "type": "array",
+              "items": {
+                "required": [
+                  "Key",
+                  "Value"
+                ],
+                "type": "object",
+                "properties": {
+                  "Key": {
+                    "description": "Your key parameter.",
+                    "type": "string"
+                  },
+                  "Value": {
+                    "description": "Your value parameter.",
+                    "type": "string"
+                  }
+                }
+              }
+            },
+            "Type": {
+              "description": "Type of the content.",
+              "enum": [
+                "Video"
+              ],
+              "type": "string"
+            },
+            "Content": {
+              "description": "Video content url to review.",
+              "type": "string"
+            },
+            "ContentId": {
+              "description": "Content Identifier.",
+              "type": "string"
+            },
+            "Status": {
+              "description": "Status of the video(Published,Unpublished,Pending)",
+              "type": "string"
+            },
+            "Timescale": {
+              "description": "Timescale of the video.",
+              "type": "string"
+            },
+            "CallbackEndpoint": {
+              "description": "Optional CallbackEndpoint.",
+              "type": "string"
+            }
+
+
+          }
+        }
+      }
+    },
     "body": {
       "name": "body",
       "in": "body",
@@ -3925,6 +3866,75 @@
       "x-ms-parameter-location": "method",
       "description": "The image url."
     },
+    "videoFrameBody": {
+      "name": "videoFrameBody",
+      "description": "Body for add video frames API",
+      "in": "body",
+      "required": true,
+      "schema": {
+        "type": "array",
+        "description": "Schema of the body.",
+        "items": {
+          "required": [
+            "Timestamp",
+            "frameImage"
+          ],
+          "type": "object",
+          "description": "Schema items of the body.",
+          "properties": {
+            "Timestamp": {
+              "description": "Timestamp of the frame.",
+              "type": "string"
+            },
+            "frameImage": {
+              "description": "Content to review.",
+              "type": "string"
+            },
+            "ReviewerResultTags": {
+              "type": "array",
+              "items": {
+                "required": [
+                  "Key",
+                  "Value"
+                ],
+                "type": "object",
+                "properties": {
+                  "Key": {
+                    "description": "Your key parameter.",
+                    "type": "string"
+                  },
+                  "Value": {
+                    "description": "Your value parameter.",
+                    "type": "string"
+                  }
+                }
+              }
+            },
+            "Metadata": {
+              "description": "Optional metadata details.",
+              "type": "array",
+              "items": {
+                "required": [
+                  "Key",
+                  "Value"
+                ],
+                "type": "object",
+                "properties": {
+                  "Key": {
+                    "description": "Your key parameter.",
+                    "type": "string"
+                  },
+                  "Value": {
+                    "description": "Your value parameter.",
+                    "type": "string"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
     "ImageStreamParameter": {
       "name": "ImageStream",
       "required": true,
@@ -3944,9 +3954,9 @@
       "type": "string",
       "in": "header"
     },
-    "azureRegionBaseUrl": {
-      "name": "azureRegionBaseUrl",
-      "description": "Supported Azure regions for Computer Vision endpoints",
+    "baseUrl": {
+      "name": "baseUrl",
+      "description": "Supported Azure regions for Content Moderator endpoints",
       "x-ms-parameter-location": "client",
       "required": true,
       "type": "string",
