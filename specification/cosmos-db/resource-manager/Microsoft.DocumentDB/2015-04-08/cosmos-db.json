@@ -693,7 +693,7 @@
         "x-ms-examples": {
           "CosmosDBDatabaseGetUsages": { "$ref": "./examples/CosmosDBDatabaseGetUsages.json" }
         },
-        "description": "Retrieves the usages (most recent data) for the given database account.",
+        "description": "Retrieves the usages (most recent data) for the given database.",
         "parameters": [
           {
             "$ref": "#/parameters/subscriptionIdParameter"
@@ -730,7 +730,7 @@
         "x-ms-examples": {
           "CosmosDBCollectionGetUsages": { "$ref": "./examples/CosmosDBCollectionGetUsages.json" }
         },
-        "description": "Retrieves the usages (most recent storage data) for the given database account.",
+        "description": "Retrieves the usages (most recent storage data) for the given collection.",
         "parameters": [
           {
             "$ref": "#/parameters/subscriptionIdParameter"
@@ -1332,81 +1332,62 @@
       "properties": {
         "value": {
           "type": "array",
+          "readOnly": true,
           "items": {
             "$ref": "#/definitions/Usage"
           },
           "description": "The list of usages for the database. A usage is a point in time metric"
         }
       },
-      "required": [
-        "value"
-      ],
       "description": "The response to a list usage request."
     },
     "Usage": {
       "properties": {
         "unit": {
-          "type": "string",
           "description": "The unit of the metric.",
-          "enum": [
-            "count",
-            "bytes",
-            "seconds",
-            "percent",
-            "countPerSecond",
-            "bytesPerSecond",
-            "milliseconds"
-          ],
-          "x-ms-enum": {
-            "modelAsString": true,
-            "name": "UnitType"
-          }
+          "$ref": "#/definitions/UnitType"
         },
         "name": {
           "$ref": "#/definitions/MetricName",
+          "readOnly": true,
           "description": "The name information for the metric."
         },
         "quotaPeriod": {
           "type": "string",
+          "readOnly": true,
           "description": "The quota period used to summarize the usage values."
         },
         "limit": {
           "type": "integer",
+          "readOnly": true,
           "description": "Maximum value for this metric"
         },
         "currentValue": {
           "type": "integer",
+          "readOnly": true,
           "description": "Current value for this metric"
         }
       },
-      "required": [
-        "unit",
-        "name",
-        "quotaPeriod",
-        "limit",
-        "currentValue"
-      ],
       "description": "The usage data for a usage request."
     },
     "MetricDefinitionsListResult": {
       "properties": {
         "value": {
           "type": "array",
+          "readOnly": true,
           "items": {
             "$ref": "#/definitions/MetricDefinition"
           },
           "description": "The list of metric definitions for the account."
         }
       },
-      "required": [
-        "value"
-      ],
       "description": "The response to a list metric definitions request."
     },
     "MetricDefinition": {
       "properties": {
         "metricAvailabilities": {
           "type": "array",
+          "readOnly": true,
           "items": {
             "$ref": "#/definitions/MetricAvailability"
           },
@@ -1417,12 +1398,12 @@
           "type": "string",
           "description": "The primary aggregation type of the metric.",
           "enum": [
-            "none",
-            "average",
-            "total",
-            "minimimum",
-            "maximum",
-            "last"
+            "None",
+            "Average",
+            "Total",
+            "Minimimum",
+            "Maximum",
+            "Last"
           ],
           "x-ms-enum": {
             "modelAsString": true,
@@ -1430,22 +1411,8 @@
           }
         },
         "unit": {
-          "readOnly": true,
-          "type": "string",
           "description": "The unit of the metric.",
-          "enum": [
-            "count",
-            "bytes",
-            "seconds",
-            "percent",
-            "countPerSecond",
-            "bytesPerSecond",
-            "milliseconds"
-          ],
-          "x-ms-enum": {
-            "modelAsString": true,
-            "name": "UnitType"
-          }
+          "$ref": "#/definitions/UnitType"
         },
         "resourceUri": {
           "readOnly": true,
@@ -1478,6 +1445,7 @@
     "MetricListResult": {
       "properties": {
         "value": {
+          "readOnly": true,
           "type": "array",
           "items": {
             "$ref": "#/definitions/Metric"
@@ -1485,9 +1453,6 @@
           "description": "The list of metrics for the account."
         }
       },
-      "required": [
-        "value"
-      ],
       "description": "The response to a list metrics request."
     },
     "Metric": {
@@ -1510,22 +1475,8 @@
           "description": "The time grain to be used to summarize the metric values."
         },
         "unit": {
-          "readOnly": true,
-          "type": "string",
-          "description": "The unit of the metric.",
-          "enum": [
-            "count",
-            "bytes",
-            "seconds",
-            "percent",
-            "countPerSecond",
-            "bytesPerSecond",
-            "milliseconds"
-          ],
-          "x-ms-enum": {
-            "modelAsString": true,
-            "name": "UnitType"
-          }
+          "$ref": "#/definitions/UnitType",
+          "description": "The unit of the metric."
         },
         "name": {
           "readOnly": true,
@@ -1560,7 +1511,7 @@
     },
     "MetricValue": {
       "properties": {
-        "count": {
+        "_count": {
           "readOnly": true,
           "type": "number",
           "format": "int32",
@@ -1598,6 +1549,24 @@
         }
       },
       "description": "Represents metrics values."
+    },
+    "UnitType" : {
+      "type": "string",
+      "readOnly": true,
+      "description": "The unit of the metric.",
+      "enum": [
+        "Count",
+        "Bytes",
+        "Seconds",
+        "Percent",
+        "CountPerSecond",
+        "BytesPerSecond",
+        "Milliseconds"
+      ],
+      "x-ms-enum": {
+        "modelAsString": true,
+        "name": "UnitType"
+      }
     }
   },
   "parameters": {
