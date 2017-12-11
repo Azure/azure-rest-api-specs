@@ -37,19 +37,6 @@ directive:
     remove-operation: Features_DeletePatternFeature
 ```
 
-AutoRest-Linter Supressions
-
-``` yaml
-# Ignore autorest-linter issues that cannot be resolve without updates to the API implementation
-directive:
-  - supress: R3013
-    from: v2.0/LUIS-Programmatic.json
-    reason: Body is used to specify entity to deltee
-  - supress: R3016
-    from: v2.0/LUIS-Programmatic.json
-    reason: Changing casing will break existing clients/consumers
-```
-
 ### Programmatic 2.0 - CSharp Settings
 These settings apply only when `--csharp` is specified on the command line.
 ``` yaml $(csharp)
