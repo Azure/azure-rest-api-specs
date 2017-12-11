@@ -87,6 +87,33 @@ csharp:
   clear-output-folder: true
 ```
 
+## Python
+
+These settings apply only when `--python` is specified on the command line.
+Please also specify `--python-sdks-folder=<path to the root directory of your azure-sdk-for-python clone>`.
+Use `--python-mode=update` if you already have a setup.py and just want to update the code itself.
+
+``` yaml $(python)
+python-mode: create
+python:
+  azure-arm: true
+  license-header: MICROSOFT_MIT_NO_VERSION
+  payload-flattening-threshold: 2
+  namespace: azure.mgmt.redis
+  package-name: azure-mgmt-redis
+  clear-output-folder: true
+```
+``` yaml $(python) && $(python-mode) == 'update'
+python:
+  no-namespace-folders: true
+  output-folder: $(python-sdks-folder)/azure-mgmt-redis/azure/mgmt/redis
+```
+``` yaml $(python) && $(python-mode) == 'create'
+python:
+  basic-setup-py: true
+  output-folder: $(python-sdks-folder)/azure-mgmt-redis
+```
+
 
 ## Go
 
@@ -147,4 +174,21 @@ directive:
       - $.definitions.RedisResource.properties
     from: redis.json
     reason: zones properties will be allowed in subsequent version of the linter tool
+  - suppress: R3018  # Booleans are not descriptive and make them hard to use. Consider using string enums with allowed set of values defined. Property: enableNonSslPort."
+    where:
+      - $.definitions.RedisCommonProperties.properties.enableNonSslPort
+    from: redis.json
+    reason: this will result in breaking change
+  - suppress: R2017  # PUT request and response should be of same type "
+    where:
+      - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Cache/Redis/{name}/linkedServers/{linkedServerName}"].put
+      - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Cache/Redis/{name}"].put
+      - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Cache/Redis/{cacheName}/firewallRules/{ruleName}"].put
+    from: redis.json
+    reason: bug from sdk team
+  - suppress: R3010  # The child tracked resource, 'linkedServers' with immediate parent 'RedisResource', must have a list by immediate parent operation."
+    where:
+      - $.definitions
+    from: redis.json
+    reason: This is false positive, 'linkedServers' is not a tracked resource.
 ```

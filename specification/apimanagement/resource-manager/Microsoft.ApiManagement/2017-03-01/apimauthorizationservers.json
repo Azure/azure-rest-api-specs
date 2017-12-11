@@ -201,6 +201,11 @@
 				],
 				"operationId": "AuthorizationServer_Update",
 				"description": "Updates the details of the authorization server specified by its identifier.",
+				"x-ms-examples": {
+					"ApiManagementUpdateAuthorizationServer": {
+						"$ref": "./examples/ApiManagementUpdateAuthorizationServer.json"
+					}
+				},
 				"parameters": [
 					{
 						"$ref": "./apimanagement.json#/parameters/ResourceGroupNameParameter"
@@ -360,7 +365,25 @@
 						],
 						"x-ms-enum": {
 							"name": "GrantType",
-							"modelAsString": false
+							"modelAsString": true,
+							"values": [
+								{
+									"value": "authorizationCode",
+									"description": "Authorization Code Grant flow as described https://tools.ietf.org/html/rfc6749#section-4.1."
+								},
+								{
+									"value": "implicit",
+									"description": "Implicit Code Grant flow as described https://tools.ietf.org/html/rfc6749#section-4.2."
+								},
+								{
+									"value": "resourceOwnerPassword",
+									"description": "Resource Owner Password Grant flow as described https://tools.ietf.org/html/rfc6749#section-4.3."
+								},
+								{
+									"value": "clientCredentials",
+									"description": "Client Credentials Grant flow as described https://tools.ietf.org/html/rfc6749#section-4.4."
+								}
+							]
 						}
 					},
 					"description": "Form of an authorization grant, which the client uses to request the access token.",
@@ -430,7 +453,25 @@
 						],
 						"x-ms-enum": {
 							"name": "GrantType",
-							"modelAsString": false
+							"modelAsString": true,
+							"values": [
+								{
+									"value": "authorizationCode",
+									"description": "Authorization Code Grant flow as described https://tools.ietf.org/html/rfc6749#section-4.1."
+								},
+								{
+									"value": "implicit",
+									"description": "Implicit Code Grant flow as described https://tools.ietf.org/html/rfc6749#section-4.2."
+								},
+								{
+									"value": "resourceOwnerPassword",
+									"description": "Resource Owner Password Grant flow as described https://tools.ietf.org/html/rfc6749#section-4.3."
+								},
+								{
+									"value": "clientCredentials",
+									"description": "Client Credentials Grant flow as described https://tools.ietf.org/html/rfc6749#section-4.4."
+								}
+							]
 						}
 					},
 					"description": "Form of an authorization grant, which the client uses to request the access token.",
@@ -487,7 +528,17 @@
 						],
 						"x-ms-enum": {
 							"name": "ClientAuthenticationMethod",
-							"modelAsString": false
+							"modelAsString": true,
+							"values": [
+								{
+									"value": "Basic",
+									"description": "Basic Client Authentication method."
+								},
+								{
+									"value": "Body",
+									"description": "Body based Authentication method."
+								}
+							]
 						}
 					},
 					"description": "Method of authentication supported by the token endpoint of this authorization server. Possible values are Basic and/or Body. When Body is specified, client credentials and other parameters are passed within the request body in the application/x-www-form-urlencoded format."
@@ -530,7 +581,7 @@
 						],
 						"x-ms-enum": {
 							"name": "BearerTokenSendingMethod",
-							"modelAsString": false
+							"modelAsString": true
 						}
 					},
 					"description": "Specifies the mechanism by which access token is passed to the API. ",
