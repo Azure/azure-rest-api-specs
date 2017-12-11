@@ -2442,7 +2442,8 @@
           "200": {
             "description": "A CSV file containing the query logs for the past month.",
             "schema": {
-              "type": "file",
+              "type": "object",
+              "format": "file",
               "description": "The query logs of an application for the past month in CSV format."
             }
           },
@@ -5430,7 +5431,6 @@
         }
       },
       "required": [ "id", "readableType" ],
-      "discriminator": "readableType",
       "allOf": [
         { "$ref": "#/definitions/HierarchicalEntityExtractor" },
         { "$ref": "#/definitions/CompositeEntityExtractor"},
