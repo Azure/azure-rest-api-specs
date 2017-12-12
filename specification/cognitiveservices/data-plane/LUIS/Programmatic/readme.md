@@ -37,6 +37,17 @@ directive:
     remove-operation: Features_DeletePatternFeature
 ```
 
+AutoRest-Linter Suppressions
+
+``` yaml
+# Ignore autorest-linter issues that cannot be resolve without updates to the API implementation
+directive:
+  - suppress: DeleteMustNotHaveRequestBody
+    reason: Body is used to specify entity to delete
+  - suppress: DefinitionsPropertiesNamesCamelCase
+    reason: Changing casing will break existing clients/consumers
+```
+
 ### Programmatic 2.0 - CSharp Settings
 These settings apply only when `--csharp` is specified on the command line.
 ``` yaml $(csharp)
