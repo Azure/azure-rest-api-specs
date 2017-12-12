@@ -1,18 +1,18 @@
 {
     "swagger": "2.0",
     "info": {
-      "title": "AutomationManagement",
-      "version": "2015-10-31"
+        "title": "AutomationManagement",
+        "version": "2015-10-31"
     },
     "host": "management.azure.com",
     "schemes": [
-      "https"
+        "https"
     ],
     "consumes": [
-      "application/json"
+        "application/json"
     ],
     "produces": [
-      "application/json"
+        "application/json"
     ],
     "paths": {},
     "definitions": {
@@ -20,7 +20,7 @@
             "description": "Software update configuration properties.",
             "properties": {
                 "updateConfiguration": {
-                    "description":  "update specific properties for the Software update configuration",
+                    "description": "update specific properties for the Software update configuration",
                     "$ref": "#/definitions/updateConfiguration"
                 },
                 "scheduleInfo": {
@@ -59,38 +59,41 @@
                     "readOnly": true
                 }
             },
-            "required": [ "updateConfiguration" ]
+            "required": [
+                "updateConfiguration",
+                "scheduleInfo"
+            ]
         },
-
         "softwareUpdateConfiguration": {
             "x-ms-azure-resource": true,
             "description": "Software update configuration properties.",
             "type": "object",
-          "properties": {
-            "name": {
-              "readOnly": true,
-              "type": "string",
-              "description": "Resource name."
-            },
-            "id": {
-              "readOnly": true,
-              "type": "string",
-              "description": "Resource Id."
-            },
-            "type": {
-              "readOnly": true,
-              "type": "string",
-              "description": "Resource type"
-            },
             "properties": {
-              "x-ms-client-flatten": true,
-              "description": "Software update configuration properties.",
-              "$ref": "#/definitions/softwareUpdateConfigurationProperties"
-            }
-          },
-            "required": [ "properties" ]
+                "name": {
+                    "readOnly": true,
+                    "type": "string",
+                    "description": "Resource name."
+                },
+                "id": {
+                    "readOnly": true,
+                    "type": "string",
+                    "description": "Resource Id."
+                },
+                "type": {
+                    "readOnly": true,
+                    "type": "string",
+                    "description": "Resource type"
+                },
+                "properties": {
+                    "x-ms-client-flatten": true,
+                    "description": "Software update configuration properties.",
+                    "$ref": "#/definitions/softwareUpdateConfigurationProperties"
+                }
+            },
+            "required": [
+                "properties"
+            ]
         },
-
         "softwareUpdateConfigurationListResult": {
             "description": "result of listing all software update configuration",
             "properties": {
@@ -103,7 +106,6 @@
                 }
             }
         },
-
         "collectionItemUpdateConfiguration": {
             "description": "object returned when requesting a collection of software update configuration",
             "properties": {
@@ -111,8 +113,8 @@
                     "type": "array",
                     "description": "List of azure resource Ids for azure virtual machines targeted by the software update configuration.",
                     "items": {
-                    "type": "string",
-                    "description": "Azure Resource Manager Id for a virtual machine."
+                        "type": "string",
+                        "description": "Azure Resource Manager Id for a virtual machine."
                     }
                 },
                 "duration": {
@@ -122,30 +124,30 @@
                 }
             }
         },
-
         "softwareUpdateConfigurationCollectionItem": {
             "description": "Software update configuration collection item properties.",
             "type": "object",
             "properties": {
-            "name": {
-                "readOnly": true,
-                "type": "string",
-                "description": "Name of the software update configuration."
+                "name": {
+                    "readOnly": true,
+                    "type": "string",
+                    "description": "Name of the software update configuration."
+                },
+                "id": {
+                    "readOnly": true,
+                    "type": "string",
+                    "description": "Resource Id of the software update configuration"
+                },
+                "properties": {
+                    "x-ms-client-flatten": true,
+                    "description": "Software update configuration properties.",
+                    "$ref": "#/definitions/softwareUpdateConfigurationCollectionItemProperties"
+                }
             },
-            "id": {
-                "readOnly": true,
-                "type": "string",
-                "description": "Resource Id of the software update configuration"
-            },
-            "properties": {
-                "x-ms-client-flatten": true,
-                "description": "Software update configuration properties.",
-                "$ref": "#/definitions/softwareUpdateConfigurationCollectionItemProperties"
-            }
-            },
-            "required": [ "properties" ]
+            "required": [
+                "properties"
+            ]
         },
-
         "softwareUpdateConfigurationCollectionItemProperties": {
             "description": "Software update configuration collection item properties.",
             "properties": {
@@ -155,7 +157,7 @@
                 },
                 "frequency": {
                     "description": "execution frequency of the schedule associated with the software update configuration",
-                    "type":"string",
+                    "type": "string",
                     "$ref": "../2015-10-31/definitions.json#/definitions/scheduleFrequency"
                 },
                 "startTime": {
@@ -187,7 +189,6 @@
                 }
             }
         },
-
         "operatingSystemType": {
             "type": "string",
             "description": "Target operating system for the software update configuration.",
@@ -200,11 +201,9 @@
                 "name": "OperatingSystemType"
             }
         },
-
         "updateConfiguration": {
             "type": "object",
             "description": "Update specifc properties of the software update configuration.",
-            "discriminator": "operatingSystem",
             "properties": {
                 "operatingSystem": {
                     "description": "operating system of target machines",
@@ -227,112 +226,104 @@
                     "type": "array",
                     "description": "List of azure resource Ids for azure virtual machines targeted by the software update configuration.",
                     "items": {
-                    "type": "string",
-                    "description": "Azure Resource Manager Id for a virtual machine."
+                        "type": "string",
+                        "description": "Azure Resource Manager Id for a virtual machine."
                     }
                 },
                 "nonAzureComputerNames": {
                     "type": "array",
                     "description": "List of names of non-azure machines targeted by the software update configuration.",
                     "items": {
-                    "type": "string",
-                    "description": "Name of Non-Azure OMS Computer."
+                        "type": "string",
+                        "description": "Name of Non-Azure OMS Computer."
                     }
                 }
             },
-            "required": [ "operatingSystem" ]
+            "required": [
+                "operatingSystem"
+            ]
         },
-
         "WindowsProperties": {
             "type": "object",
             "description": "Windows specific update configuration.",
             "properties": {
-            "includedUpdateClassifications": {
-                "description": "Update classification included in the software update configuration.",
-                "items": {
-                "type": "string",
-                "enum": [
-                    "Unclassified",
-                    "Critical",
-                    "Security",
-                    "UpdateRollup",
-                    "FeaturePack",
-                    "ServicePack",
-                    "Definition",
-                    "Tools",
-                    "Updates"
-                ],
-                "x-ms-enum": {
-                    "name": "WindowsUpdateClasses",
-                    "modelAsString": true
+                "includedUpdateClassifications": {
+                    "description": "Update classification included in the software update configuration. A comma separated string with required values",
+                    "type": "string",
+                    "enum": [
+                        "Unclassified",
+                        "Critical",
+                        "Security",
+                        "UpdateRollup",
+                        "FeaturePack",
+                        "ServicePack",
+                        "Definition",
+                        "Tools",
+                        "Updates"
+                    ],
+                    "x-ms-enum": {
+                        "name": "WindowsUpdateClasses",
+                        "modelAsString": true
+                    }
+                },
+                "excludedKbNumbers": {
+                    "type": "array",
+                    "description": "KB numbers excluded from the software update configuration.",
+                    "items": {
+                        "type": "string"
+                    }
                 }
-                }
-            },
-            "excludedKbNumbers": {
-                "type": "array",
-                "description": "KB numbers excluded from the software update configuration.",
-                "items": {
-                "type": "string"
-                }
-            }
             }
         },
-
         "LinuxProperties": {
             "type": "object",
             "description": "Linux specific update configuration.",
             "properties": {
-            "includedPackageClassifications": {
-                "description": "Update classifications included in the software update configuration.",
-                "type": "array",
-                "items": {
-                "type": "string",
-                "enum": [
-                    "Unclassified",
-                    "Critical",
-                    "Security",
-                    "Other"
-                ]
+                "includedPackageClassifications": {
+                    "description": "Update classifications included in the software update configuration.",
+                    "type": "string",
+                    "enum": [
+                        "Unclassified",
+                        "Critical",
+                        "Security",
+                        "Other"
+                    ],
+                    "x-ms-enum": {
+                        "name": "LinuxUpdateClasses",
+                        "modelAsString": true
+                    }
                 },
-                "x-ms-enum": {
-                "name": "LinuxUpdateClasses",
-                "modelAsString": true
+                "excludedPackageNameMasks": {
+                    "type": "array",
+                    "description": "packages excluded from the software update configuration.",
+                    "items": {
+                        "type": "string"
+                    }
                 }
-            },
-            "excludedPackageNameMasks": {
-                "type": "array",
-                "description": "packages excluded from the software update configuration.",
-                "items": {
-                "type": "string"
-                }
-            }
             }
         },
-
         "updateConfigurationNavigation": {
             "description": "Software update configuration Run Navigation model.",
             "type": "object",
             "properties": {
-            "name": {
-                "description": "Name of the software update configuration triggered the software update configuration run",
-                "type": "string",
-                "readOnly": true
-            }
+                "name": {
+                    "description": "Name of the software update configuration triggered the software update configuration run",
+                    "type": "string",
+                    "readOnly": true
+                }
             }
         },
-
         "jobNavigation": {
             "description": "Software update configuration machine run job navigation properties.",
             "type": "object",
             "properties": {
-            "id": {
-                "description": "Id of the job associated with the software update configuration run",
-                "type": "string",
-                "readOnly": true
-            }
+                "id": {
+                    "description": "Id of the job associated with the software update configuration run",
+                    "type": "string",
+                    "readOnly": true
+                }
             }
         },
-
         "softwareUpdateConfigurationRunListResult": {
             "description": "result of listing all software update configuration runs",
             "properties": {
@@ -349,7 +340,6 @@
                 }
             }
         },
-
         "softwareUpdateConfigurationRun": {
             "description": "Software update configuration Run properties.",
             "x-ms-azure-resource": false,
@@ -372,7 +362,6 @@
                 }
             }
         },
-
         "softwareUpdateConfigurationRunProperties": {
             "description": "Software update configuration properties.",
             "properties": {
@@ -441,7 +430,6 @@
                 }
             }
         },
-
         "softwareUpdateConfigurationMachineRunListResult": {
             "description": "result of listing all software update configuration machine runs",
             "properties": {
@@ -458,7 +446,6 @@
                 }
             }
         },
-
         "updateConfigurationMachineRunProperties": {
             "description": "Software update configuration machine run properties.",
             "properties": {
@@ -567,65 +554,19 @@
         }
     },
     "parameters": {
-        "subscriptionId": {
-          "name": "subscriptionId",
-          "description": "subscription id for tenant issuing the request.",
-          "type": "string",
-          "required": true,
-          "in": "path",
-          "format": "uuid"
-        },
-        "resourceGroupName": {
-          "name": "resourceGroupName",
-          "description": "The name of the resource group within user's subscription.",
-          "type": "string",
-          "required": true,
-          "in": "path"
-        },
         "automationAccountName": {
-          "name": "automationAccountName",
-          "description": "The name of the automation account.",
-          "type": "string",
-          "required": true,
-          "in": "path",
-          "format": "uuid"
-        },
-        "softwareUpdateConfigurationName": {
-          "name": "softwareUpdateConfigurationName",
-          "description": "The name of the software update configuration to be created.",
-          "type": "string",
-          "required": true,
-          "in": "path"
-        },
-        "softwareUpdateConfigurationRunId": {
-          "name": "softwareUpdateConfigurationRunId",
-          "description": "The Id of the software update configuration run.",
-          "type": "string",
-          "required": true,
-          "in": "path",
-          "format": "uuid"
-        },
-        "softwareUpdateConfigurationMachineRunId": {
-          "name": "softwareUpdateConfigurationMachineRunId",
-          "description": "The Id of the software update configuration machine run.",
-          "type": "string",
-          "required": true,
-          "in": "path",
-          "format": "uuid"
-        },
-        "apiVersion": {
-          "name": "api-version",
-          "description": "The API version.",
-          "type": "string",
-          "required": true,
-          "in": "query"
+            "name": "automationAccountName",
+            "description": "The name of the automation account.",
+            "type": "string",
+            "required": true,
+            "in": "path"
         },
         "clientRequestId": {
-          "name": "clientRequestId",
-          "description": "Identifies this specific client request.",
-          "type": "string",
-          "required": false,
-          "in": "header"
+            "name": "clientRequestId",
+            "description": "Identifies this specific client request.",
+            "type": "string",
+            "required": false,
+            "in": "header"
         }
     }
 }
