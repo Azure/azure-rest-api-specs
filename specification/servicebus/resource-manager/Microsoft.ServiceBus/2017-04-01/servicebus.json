@@ -692,6 +692,55 @@
         }
       }
     },
+	"/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ServiceBus/namespaces/{namespaceName}/disasterRecoveryConfigs/CheckNameAvailability": {
+      "post": {
+        "tags": [
+          "DisasterRecoveryConfigs"
+        ],
+        "operationId": "DisasterRecoveryConfigs_CheckNameAvailability",
+        "x-ms-examples": {
+          "AliasNameAvailability": { "$ref": "./examples/disasterRecoveryConfigs/SBAliasCheckNameAvailability.json" }
+        },
+        "description": "Check the give namespace name availability.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/resourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/namespaceNameParameter"
+          },
+		  {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "name": "parameters",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/CheckNameAvailability"
+            },
+            "description": "Parameters to check availability of the given namespace name"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "check availability returned successfully.",
+            "schema": {
+              "$ref": "#/definitions/CheckNameAvailabilityResult"
+            }
+          },
+          "default": {
+            "description": "ServiceBus error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        }
+      }
+    },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ServiceBus/namespaces/{namespaceName}/disasterRecoveryConfigs": {
       "get": {
         "tags": [
@@ -939,6 +988,153 @@
         "responses": {
           "200": {
             "description": "Failover operation is successful."
+          },
+          "default": {
+            "description": "ServiceBus error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        }
+      }
+    },
+	"/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ServiceBus/namespaces/{namespaceName}/disasterRecoveryConfigs/{alias}/AuthorizationRules": {
+      "get": {
+        "tags": [
+          "DisasterRecoveryConfigs"
+        ],
+        "operationId": "DisasterRecoveryConfigs_ListAuthorizationRules",
+        "x-ms-examples": {
+          "NameSpaceAutorizationRuleListAll": { "$ref": "./examples/disasterRecoveryConfigs/SBAliasAutorizationRuleListAll.json" }
+        },
+        "description": "Gets the authorization rules for a namespace.",
+        "externalDocs": {
+          "url": "https://msdn.microsoft.com/en-us/library/azure/mt639376.aspx"
+        },
+        "parameters": [
+          {
+            "$ref": "#/parameters/resourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/namespaceNameParameter"
+          },
+          {
+            "$ref": "#/parameters/aliasNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "DisasterRecoveryConfigs authorization rules returned successfully.",
+            "schema": {
+              "$ref": "#/definitions/SBAuthorizationRuleListResult"
+            }
+          },
+          "default": {
+            "description": "ServiceBus error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ServiceBus/namespaces/{namespaceName}/disasterRecoveryConfigs/{alias}/AuthorizationRules/{authorizationRuleName}": {      
+      "get": {
+        "tags": [
+          "DisasterRecoveryConfigs"
+        ],
+        "operationId": "DisasterRecoveryConfigs_GetAuthorizationRule",
+        "x-ms-examples": {
+          "DisasterRecoveryConfigsAutorizationRuleGet": { "$ref": "./examples/disasterRecoveryConfigs/SBAliasAutorizationRuleGet.json" }
+        },
+        "description": "Gets an authorization rule for a namespace by rule name.",
+        "externalDocs": {
+          "url": "https://msdn.microsoft.com/en-us/library/azure/mt639392.aspx"
+        },
+        "parameters": [
+          {
+            "$ref": "#/parameters/resourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/namespaceNameParameter"
+          },
+          {
+            "$ref": "#/parameters/aliasNameParameter"
+          },
+          {
+            "$ref": "#/parameters/authorizationRuleNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "DisasterRecoveryConfigs authorization rule returned successfully.",
+            "schema": {
+              "$ref": "#/definitions/SBAuthorizationRule"
+            }
+          },
+          "default": {
+            "description": "ServiceBus error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ServiceBus/namespaces/{namespaceName}/disasterRecoveryConfigs/{alias}/AuthorizationRules/{authorizationRuleName}/listKeys": {
+      "post": {
+        "tags": [
+          "DisasterRecoveryConfigs"
+        ],
+        "operationId": "DisasterRecoveryConfigs_ListKeys",
+        "x-ms-examples": {
+          "DisasterRecoveryConfigsAuthorizationRuleListKey": { "$ref": "./examples/disasterRecoveryConfigs/SBAliasAuthorizationRuleListKey.json" }
+        },
+        "description": "Gets the primary and secondary connection strings for the namespace.",
+        "externalDocs": {
+          "url": "https://msdn.microsoft.com/en-us/library/azure/mt639398.aspx"
+        },
+        "parameters": [
+          {
+            "$ref": "#/parameters/resourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/namespaceNameParameter"
+          },
+          {
+            "$ref": "#/parameters/aliasNameParameter"
+          },
+          {
+            "$ref": "#/parameters/authorizationRuleNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Connection strings successfully returned.",
+            "schema": {
+              "$ref": "#/definitions/AccessKeys"
+            }
           },
           "default": {
             "description": "ServiceBus error response describing why the operation failed.",
@@ -2931,11 +3127,11 @@
         },
 		"forwardTo": {
           "type": "string",
-          "description": "Queue name to forward the messages"
+          "description": "Queue/Topic name to forward the messages"
         },
 		"forwardDeadLetteredMessagesTo": {
           "type": "string",
-          "description": "Queue name to forward the Dead Letter message"
+          "description": "Queue/Topic name to forward the Dead Letter message"
         }
       },
       "description": "The Queue Properties definition."
@@ -3193,6 +3389,14 @@
           "format": "duration",
           "type": "string",
           "description": "ISO 8061 timeSpan idle interval after which the topic is automatically deleted. The minimum duration is 5 minutes."
+        },
+		"forwardTo": {
+          "type": "string",
+          "description": "Queue/Topic name to forward the messages"
+        },
+		"forwardDeadLetteredMessagesTo": {
+          "type": "string",
+          "description": "Queue/Topic name to forward the Dead Letter message"
         }
       },
       "description": "Description of Subscription Resource."
@@ -3717,6 +3921,10 @@
               }
             },
             "partnerNamespace": {
+              "type": "string",
+              "description": "ARM Id of the Primary/Secondary eventhub namespace name, which is part of GEO DR pairning"
+            },
+			"alternateName": {
               "type": "string",
               "description": "Primary/Secondary eventhub namespace name, which is part of GEO DR pairning"
             },
