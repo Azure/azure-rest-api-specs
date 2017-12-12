@@ -39,6 +39,11 @@
             }
           }
         },
+        "x-ms-examples": {
+          "List Certificates for subscription": {
+            "$ref": "./examples/ListCertificates.json"
+          }
+        },
         "x-ms-pageable": {
           "nextLinkName": "nextLink"
         }
@@ -69,6 +74,11 @@
             "schema": {
               "$ref": "#/definitions/CertificateCollection"
             }
+          }
+        },
+        "x-ms-examples": {
+          "List Certificates by resource group": {
+            "$ref": "./examples/ListCertificatesByResourceGroup.json"
           }
         },
         "x-ms-pageable": {
@@ -108,6 +118,11 @@
             "schema": {
               "$ref": "#/definitions/Certificate"
             }
+          }
+        },
+        "x-ms-examples": {
+          "Get Certificate": {
+            "$ref": "./examples/GetCertificate.json"
           }
         }
       },
@@ -152,6 +167,11 @@
               "$ref": "#/definitions/Certificate"
             }
           }
+        },
+        "x-ms-examples": {
+          "Create Or Update Certificate": {
+            "$ref": "./examples/CreateOrUpdateCertificate.json"
+          }
         }
       },
       "delete": {
@@ -185,6 +205,11 @@
           },
           "204": {
             "description": "Certificate does not exist."
+          }
+        },
+        "x-ms-examples": {
+          "Delete Certificate": {
+            "$ref": "./examples/DeleteCertificate.json"
           }
         }
       },
@@ -229,6 +254,11 @@
               "$ref": "#/definitions/Certificate"
             }
           }
+        },
+        "x-ms-examples": {
+          "Patch Certificate": {
+            "$ref": "./examples/PatchCertificate.json"
+          }
         }
       }
     }
@@ -239,7 +269,7 @@
       "type": "object",
       "allOf": [
         {
-          "$ref": "#/definitions/Resource"
+          "$ref": "./CommonDefinitions.json#/definitions/Resource"
         }
       ],
       "properties": {
@@ -327,7 +357,7 @@
               "readOnly": true
             },
             "hostingEnvironmentProfile": {
-              "$ref": "#/definitions/HostingEnvironmentProfile",
+              "$ref": "./CommonDefinitions.json#/definitions/HostingEnvironmentProfile",
               "description": "Specification for the App Service Environment to use for the certificate.",
               "readOnly": true
             },
@@ -400,7 +430,7 @@
       "type": "object",
       "allOf": [
         {
-          "$ref": "#/definitions/ProxyOnlyResource"
+          "$ref": "./CommonDefinitions.json#/definitions/ProxyOnlyResource"
         }
       ],
       "properties": {
@@ -488,7 +518,7 @@
               "readOnly": true
             },
             "hostingEnvironmentProfile": {
-              "$ref": "#/definitions/HostingEnvironmentProfile",
+              "$ref": "./CommonDefinitions.json#/definitions/HostingEnvironmentProfile",
               "description": "Specification for the App Service Environment to use for the certificate.",
               "readOnly": true
             },
@@ -535,90 +565,6 @@
           "x-ms-client-flatten": true
         }
       }
-    },
-    "HostingEnvironmentProfile": {
-      "description": "Specification for an App Service Environment to use for this resource.",
-      "type": "object",
-      "properties": {
-        "id": {
-          "description": "Resource ID of the App Service Environment.",
-          "type": "string"
-        },
-        "name": {
-          "description": "Name of the App Service Environment.",
-          "type": "string",
-          "readOnly": true
-        },
-        "type": {
-          "description": "Resource type of the App Service Environment.",
-          "type": "string",
-          "readOnly": true
-        }
-      }
-    },
-    "ProxyOnlyResource": {
-      "description": "Azure proxy only resource. This resource is not tracked by Azure Resource Manager.",
-      "properties": {
-        "id": {
-          "description": "Resource Id.",
-          "type": "string",
-          "readOnly": true
-        },
-        "name": {
-          "description": "Resource Name.",
-          "type": "string",
-          "readOnly": true
-        },
-        "kind": {
-          "description": "Kind of resource.",
-          "type": "string"
-        },
-        "type": {
-          "description": "Resource type.",
-          "type": "string",
-          "readOnly": true
-        }
-      },
-      "x-ms-azure-resource": true
-    },
-    "Resource": {
-      "description": "Azure resource. This resource is tracked in Azure Resource Manager",
-      "required": [
-        "location"
-      ],
-      "properties": {
-        "id": {
-          "description": "Resource Id.",
-          "type": "string",
-          "readOnly": true
-        },
-        "name": {
-          "description": "Resource Name.",
-          "type": "string",
-          "readOnly": true
-        },
-        "kind": {
-          "description": "Kind of resource.",
-          "type": "string"
-        },
-        "location": {
-          "description": "Resource Location.",
-          "type": "string"
-        },
-        "type": {
-          "description": "Resource type.",
-          "type": "string",
-          "readOnly": true
-        },
-        "tags": {
-          "description": "Resource tags.",
-          "type": "object",
-          "additionalProperties": {
-            "type": "string"
-          }
-        }
-      },
-      "x-ms-azure-resource": true
     }
   },
   "parameters": {
