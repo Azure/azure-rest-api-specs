@@ -3108,11 +3108,11 @@
             "type": "object",
             "properties": {
               "key One": {
-                "description": "Key value pair.",
+                "description": "Key parameter to describe advanced info.",
                 "type": "string"
               },
               "key Two": {
-                "description": "Key value pair.",
+                "description": "Key parameter to describe advanced info.",
                 "type": "string"
               }
             }
@@ -3237,7 +3237,7 @@
       }
     },
     "TermsData": {
-      "description": "Gets all term Id response properties.",
+      "description": "All term Id response properties.",
       "properties": {
         "language": {
           "description": "Language of the terms.",
@@ -3251,7 +3251,7 @@
           }
         },
         "status": {
-          "description": "Get Term Status.",
+          "description": "Term Status.",
           "type": "object",
           "$ref": "#/definitions/Status"
         },
@@ -3436,7 +3436,7 @@
       "description": "Timescale of the video.",
       "in": "query",
       "required": false,
-      "type": "number",
+      "type": "integer",
       "x-ms-parameter-location": "method"
 
     },
@@ -3774,8 +3774,13 @@
               "type": "string"
             },
             "Status": {
-              "description": "Status of the video(Published,Unpublished,Pending)",
-              "type": "string"
+              "description": "Status of the video(Complete,Unpublished,Pending)",
+              "type": "string",
+              "enum": [
+                "Complete",
+                "Unpublished",
+                "Pending"
+              ]
             },
             "Timescale": {
               "description": "Timescale of the video.",
