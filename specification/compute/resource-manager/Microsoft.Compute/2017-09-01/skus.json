@@ -161,6 +161,11 @@
           },
           "description": "The value of restrictions. If the restriction type is set to location. This would be different locations where the SKU is restricted."
         },
+        "restrictionInfo": {
+          "$ref": "#/definitions/ResourceSkuRestrictionInfo",
+          "readOnly": true,
+          "description": "The information about the restriction where the SKU cannot be used."
+        },
         "reasonCode": {
           "type": "string",
           "readOnly": true,
@@ -266,21 +271,41 @@
       "description": "Describes an available Compute SKU."
     },
     "ResourceSkuLocationInfo": {
-        "properties": {
-          "location": {
-            "readOnly": true,
-            "type": "string",
-            "description": "Location of the SKU"
+      "properties": {
+        "location": {
+          "readOnly": true,
+          "type": "string",
+          "description": "Location of the SKU"
+        },
+        "zones": {
+          "readOnly": true,
+          "type": "array",
+          "items": {
+            "type": "string"
           },
-          "zones": {
-            "readOnly": true,
-            "type": "array",
-            "items": {
-                "type": "string"
-            },
-            "description": "List of availability zones where the SKU is supported."
-          }
+          "description": "List of availability zones where the SKU is supported."
         }
+      }
+    },
+    "ResourceSkuRestrictionInfo": {
+      "properties": {
+        "locations": {
+          "readOnly": true,
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "description": "Locations where the SKU is restricted"
+        },
+        "zones": {
+          "readOnly": true,
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "description": "List of availability zones where the SKU is restricted."
+        }
+      }
     },
     "ResourceSkusResult": {
       "properties": {
