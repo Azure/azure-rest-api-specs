@@ -1,0 +1,44 @@
+﻿{
+	"parameters": {
+		"subscriptionId": "subscriptionId",
+		"api-version": "2018-01-01",
+		"$filter": "service eq 'Virtual Machines' or region eq 'West US'"
+	},
+	"responses": {
+		"200": {
+			"body": {
+				"value": [
+					{
+						"id": "<resourceId>/providers/Microsoft.ResourceHealth/impactedResources/current",
+						"name": "current",
+						"type": "Microsoft.ResourceHealth/impactedResources",
+						"location": "eastus",
+						"properties": {
+							"availabilityState": "Available",
+							"summary": "Vm is available",
+							"reasonType": "Unplanned",
+							"detailedStatus": "We have not seen any issues with your virtual machine",
+							"occuredTime": "2016-03-29T09:12:00Z",
+							"reportedTime": "2016-05-04T14:11:29.7598931Z"
+						}
+					},
+					{
+						"id": "<resourceId>/providers/Microsoft.ResourceHealth/impactedResources/current",
+						"name": "current",
+						"type": "Microsoft.ResourceHealth/impactedResources",
+						"location": "eastus",
+						"properties": {
+							"availabilityState": "Unavailable",
+							"summary": "We are sorry, we couldn't automatically recovery our virtualmachine",
+							"reasonType": "Unplanned",
+							"detailedStatus": "Diskproblemsarepreventingusfromautomaticallyrecoveringyourvirtualmachine",
+							"occuredTime": "2016-03-29T09:12:00Z",
+							"reportedTime": "2016-05-04T14:11:29.7598931Z"
+						}
+					}
+				],
+				"nextLink": "{originalRequestUrl}?$skipToken={OpaquePageNumber}"
+			}
+		}
+	}
+}

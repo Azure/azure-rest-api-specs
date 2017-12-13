@@ -73,6 +73,90 @@
         }
       }
     },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.ResourceHealth/impactedResources": {
+      "get": {
+        "tags": [
+          "ImpactedResources"
+        ],
+        "operationId": "ImpactedResources_ListBySubscriptionId",
+        "description": "Lists the current availability status for impacted resources in the subscription. Use the nextLink property in the response to get the next page of availability statuses.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/FilterParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The body contains the list of the current availability status for impacted resources in the subscription",
+            "schema": {
+              "$ref": "#/definitions/availabilityStatusListResult"
+            }
+          },
+          "default": {
+            "description": "DefaultErrorResponse",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        },
+        "x-ms-examples": {
+          "ListHealthBySubscriptionId": {
+            "$ref": "./examples/ImpactedResources_ListBySubscriptionId.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.ResourceHealth/events/{eventId}/impactedResources": {
+      "get": {
+        "tags": [
+          "EventImpactedResources"
+        ],
+        "operationId": "EventImpactedResources_ListBySubscriptionId",
+        "description": "Lists the current availability status for resources impacted by given event in the subscription. Use the nextLink property in the response to get the next page of availability statuses.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/EventIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The body contains the list of the current availability status for impacted resources in the subscription",
+            "schema": {
+              "$ref": "#/definitions/availabilityStatusListResult"
+            }
+          },
+          "default": {
+            "description": "DefaultErrorResponse",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        },
+        "x-ms-examples": {
+          "ListHealthBySubscriptionId": {
+            "$ref": "./examples/EventImpactedResources_ListBySubscriptionId.json"
+          }
+        }
+      }
+    },
     "/subscriptions/{subscriptionId}/providers/Microsoft.ResourceHealth/availabilityStatuses": {
       "get": {
         "tags": [
@@ -506,6 +590,7 @@
               "enum": [
                 "Available",
                 "Unavailable",
+                "Degraded",
                 "Unknown"
               ],
               "x-ms-enum": {
@@ -785,6 +870,13 @@
       "type": "string",
       "description": "Setting $expand=recommendedactions in url query expands the recommendedactions in the response.",
       "x-ms-parameter-location": "method"
+    },
+    "EventIdParameter": {
+      "name": "eventId",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "description": "EventId for the Service health event"
     }
   }
 }
