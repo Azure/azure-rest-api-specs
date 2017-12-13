@@ -374,15 +374,9 @@
         },
         "contactRoles": {
           "description": "Contact roles to send the budget notification to when the threshold is exceeded.",
-          "type": "string",
-          "enum": [
-            "Reader",
-            "Contributor",
-            "Owner"
-          ],
-          "x-ms-enum": {
-            "name": "OperatorType",
-            "modelAsString": true
+          "type": "array",
+          "items": {
+            "type": "string"
           }
         }
       }
