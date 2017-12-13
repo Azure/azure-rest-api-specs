@@ -51,18 +51,18 @@ python:
   license-header: MICROSOFT_MIT_NO_VERSION
   add-credentials: true
   payload-flattening-threshold: 2
-  namespace: azure.cognitiveservices.vision.contentmoderator
-  package-name: azure-cognitiveservices-vision-contentmoderator
+  namespace: azure.cognitiveservices.contentmoderator
+  package-name: azure-cognitiveservices-contentmoderator
   clear-output-folder: true
   title: "Content Moderator API"
 ```
 ``` yaml $(python) && $(python-mode) == 'update'
 python:
   no-namespace-folders: true
-  output-folder: $(python-sdks-folder)/azure-cognitiveservices-vision-contentmoderator/azure/cognitiveservices/vision/contentmoderator
+  output-folder: $(python-sdks-folder)/azure-cognitiveservices-contentmoderator/azure/cognitiveservices/contentmoderator
 ```
 ``` yaml $(python) && $(python-mode) == 'create'
 python:
   basic-setup-py: true
-  output-folder: $(python-sdks-folder)/azure-cognitiveservices-vision-contentmoderator
+  output-folder: $(python-sdks-folder)/azure-cognitiveservices-contentmoderator
 ```
