@@ -13,15 +13,15 @@
             "type": "Microsoft.Consumption/budgets",
             "eTag": "\"1d34d012214157f\"",
             "properties": {
-              "category": "COST",
-              "amount": 100,
+              "category": "Cost",
+              "amount": 100.65,
               "timeGrain": "Monthly",
               "timePeriod": {
-                "startDate": "2017-10-01",
-                "endDate": "2018-10-31"
+                "startDate": "2017-10-01T00:00:00Z",
+                "endDate": "2018-10-31T00:00:00Z"
               },
               "currentSpend": {
-                "amount": 80,
+                "amount": 80.89,
                 "unit": "USD"
               },
               "notifications": {
@@ -30,8 +30,68 @@
                   "operator": "GreaterThan",
                   "threshold": 80,
                   "contactEmails": [
-                    "johndoe@email.com",
-                    "janesmith@email.com"
+                    "johndoe@contoso.com",
+                    "janesmith@contoso.com"
+                  ],
+                  "contactRoles": [
+                    "Contributor",
+                    "Reader"
+                  ]
+                },
+                "Actual_GreaterThanOrEqual_90_Percent": {
+                  "enabled": true,
+                  "operator": "GreaterThanOrEqual",
+                  "threshold": 90,
+                  "contactEmails": [
+                    "johndoe@contoso.com",
+                    "janesmith@contoso.com"
+                  ],
+                  "contactRoles": [
+                    "Contributor",
+                    "Reader"
+                  ]
+                }
+              }
+            }
+          },
+          {
+            "id": "subscriptions/{subscription-id}/providers/Microsoft.Consumption/budgets/TestBudget",
+            "name": "TestBudget",
+            "type": "Microsoft.Consumption/budgets",
+            "eTag": "\"1d34d012214157f\"",
+            "properties": {
+              "category": "Cost",
+              "amount": 600.65,
+              "timeGrain": "Monthly",
+              "timePeriod": {
+                "startDate": "2017-10-01T00:00:00Z",
+                "endDate": "2018-10-31T00:00:00Z"
+              },
+              "currentSpend": {
+                "amount": 120.89,
+                "unit": "USD"
+              },
+              "notifications": {
+                "Actual_GreaterThan_40_Percent": {
+                  "enabled": true,
+                  "operator": "GreaterThan",
+                  "threshold": 40,
+                  "contactEmails": [
+                    "johndoe@contoso.com",
+                    "janesmith@contoso.com"
+                  ],
+                  "contactRoles": [
+                    "Contributor",
+                    "Reader"
+                  ]
+                },
+                "Actual_GreaterThanOrEqual_60_Percent": {
+                  "enabled": true,
+                  "operator": "GreaterThanOrEqual",
+                  "threshold": 60,
+                  "contactEmails": [
+                    "johndoe@contoso.com",
+                    "janesmith@contoso.com"
                   ],
                   "contactRoles": [
                     "Contributor",

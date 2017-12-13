@@ -49,7 +49,7 @@
           "Budgets"
         ],
         "operationId": "Budgets_List",
-        "description": "Lists the budgets for a scope. Budgets are available via this API only for December 30, 2017 or later.",
+        "description": "Lists all budgets for a subscription.",
         "externalDocs": {
           "url": "https://docs.microsoft.com/en-us/rest/api/consumption/"
         },
@@ -91,7 +91,7 @@
           "Budget"
         ],
         "operationId": "Budget_Get",
-        "description": "Get the budget for a scope by budget name. Budgets are available via this API only for December 30, 2017 or later.",
+        "description": "Gets the budget for a subscription by budget name.",
         "externalDocs": {
           "url": "https://docs.microsoft.com/en-us/rest/api/consumption/"
         },
@@ -281,7 +281,7 @@
           "enum": [
             "Monthly",
             "Quarterly",
-            "Yearly"
+            "Annually"
           ],
           "x-ms-enum": {
             "name": "TimeGrainType",
@@ -289,7 +289,7 @@
           }
         },
         "timePeriod": {
-          "description": "Has start and end date of the budget. The start date must be first of the month and should be less than the end date. Future start date should not be more than three months. Past start date should not be selected within the timegrain preiod. There are no restrictions on the end date.",
+          "description": "Has start and end date of the budget. The start date must be first of the month and should be less than the end date. Budget start date must be on or after June 1, 2017. Future start date should not be more than three months. Past start date should not be selected within the timegrain preiod. There are no restrictions on the end date.",
           "$ref": "#/definitions/BudgetTimePeriod"          
         },
         "currentSpend": {
@@ -308,15 +308,15 @@
       }
     },
     "BudgetTimePeriod": {
-      "description": "The start and end date for a budget",
+      "description": "The start and end date for a budget.",
       "properties": {
         "startDate": {
-          "description": "The start date for the budget",
+          "description": "The start date for the budget.",
           "type": "string",
           "format": "date-time"
         },
         "endDate": {
-          "description": "The end date for the budget",
+          "description": "The end date for the budget. If not provided, we default this to 10 years from the start date.",
           "type": "string",
           "format": "date-time"
         } 
@@ -349,11 +349,9 @@
           "description": "The comparison operator.",
           "type": "string",
           "enum": [
-            "Equal",
+            "EqualTo",
             "GreaterThan",
-            "GreaterThanOrEqual",
-            "LessThan",
-            "LessThanOrEqual"
+            "GreaterThanOrEqualTo"
           ],
           "x-ms-enum": {
             "name": "OperatorType",
@@ -361,7 +359,7 @@
           }
         },
         "threshold": {
-          "description": "Threshold value associated with a notification. Notification is sent when the cost exceeded the threshold.",
+          "description": "Threshold value associated with a notification. Notification is sent when the cost exceeded the threshold. It is always percent and has to be between 0 and 1000.",
           "type": "number",
           "format": "decimal"
         },
