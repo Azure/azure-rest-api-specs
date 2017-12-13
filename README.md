@@ -6,6 +6,18 @@
 
 This repository is the canonical source for REST API specifications for Microsoft Azure.
 
+## News
+
+Starting at **6:00 p.m. PST, Friday December 15th, 2017** a few important changes are taking place:
+  1. The default branch of this repository will be set back to `master` (today it is `current`.)
+  1. Stable and Preview swaggers will be differentiated by folders named `preview` and `stable` in the root of each Resource Provider's folder. e.g.  {repoRoot}/specification/keyvault/resource-manager/Microsoft.KeyVault/2015-06-01/keyvault.json -> {repoRoot}/specification/keyvault/resource-manager/Microsoft.KeyVault/stable/2015-06-01/keyvault.json
+  1. The `master` and `current` branches in the Private repository (https://github.com/Azure/azure-rest-api-specs-pr) will be locked to their counter part in the public repository. PRs in Private will still be enabled, but merging them will be disabled.
+
+What this means for Contributors:
+  - Most people should be unimpacted.
+  - If you are an Open Source contributor to this repository, only the branch you should target and the folder the API Specs live will change.
+  - If you are a member of a service team currently working on a Private swagger in the `current` branch, you will need to reachout to @salameer or @marstr for assistance transfering your work to the newly structured branches.
+
 ## Basics
 If you're a spec author looking for information about all of of the repositories and steps in the pipeline, go to the [adx-documentation-pr](https://github.com/Azure/adx-documentation-pr) repository. Make sure to [join the Github Azure organization](http://aka.ms/azuregithub) to get access to that repo.
 
