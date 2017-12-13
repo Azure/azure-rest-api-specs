@@ -1,0 +1,464 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "version": "2017-12-30-preview",
+    "title": "ConsumptionManagementClient",
+    "description": "Consumption management client provides access to consumption resources for Azure Enterprise Subscriptions."
+  },
+  "host": "management.azure.com",
+  "schemes": [
+    "https"
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "produces": [
+    "application/json"
+  ],
+  "security": [
+    {
+      "azure_auth": [
+        "user_impersonation"
+      ]
+    }
+  ],
+  "tags": [
+    {
+      "name": "Budgets",
+      "description": "Creates, Updates, Delets and Lists the budgets for a scope by Subscription. Budgets are available via this API only for December 30, 2017 or later.",
+      "externalDocs": {
+        "url": "https://docs.microsoft.com/en-us/rest/api/consumption/"
+      }
+    }
+  ],
+  "securityDefinitions": {
+    "azure_auth": {
+      "type": "oauth2",
+      "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
+      "flow": "implicit",
+      "description": "Azure Active Directory OAuth2 Flow.",
+      "scopes": {
+        "user_impersonation": "impersonate your user account"
+      }
+    }
+  },
+  "paths": {
+    "/subscriptions/{subscriptionId}/providers/Microsoft.Consumption/budgets": {
+      "get": {
+        "tags": [
+          "Budgets"
+        ],
+        "operationId": "Budgets_List",
+        "description": "Lists the budgets for a scope. Budgets are available via this API only for December 30, 2017 or later.",
+        "externalDocs": {
+          "url": "https://docs.microsoft.com/en-us/rest/api/consumption/"
+        },
+        "x-ms-examples": {
+          "BudgetsList": {
+            "$ref": "./examples/BudgetsList.json"
+          }
+        },
+        "parameters": [    
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/subscriptionIdParameter"
+          }          
+        ],
+        "responses": {
+          "200": {
+            "description": "OK. The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/BudgetsListResult"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "null"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.Consumption/budgets/{budgetName}": {
+      "get": {
+        "tags": [
+          "Budget"
+        ],
+        "operationId": "Budget_Get",
+        "description": "Get the budget for a scope by budget name. Budgets are available via this API only for December 30, 2017 or later.",
+        "externalDocs": {
+          "url": "https://docs.microsoft.com/en-us/rest/api/consumption/"
+        },
+        "x-ms-examples": {
+          "Budget": {
+            "$ref": "./examples/Budget.json"
+          }
+        },
+        "parameters": [    
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/subscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/budgetNameParameter"
+          }        
+        ],
+        "responses": {
+          "200": {
+            "description": "OK. The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/Budget"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "null"
+        }
+      },
+      "put": {
+        "tags": [
+          "Budget"
+        ],
+        "operationId": "Budget_CreateOrUpdate",
+        "description": "The operation to create or update a budget.",
+        "externalDocs": {
+          "url": "https://docs.microsoft.com/en-us/rest/api/consumption/"
+        },
+        "x-ms-examples": {
+          "CreateBudget": {
+            "$ref": "./examples/CreateBudget.json"
+          },
+          "UpdateBudget": {
+            "$ref": "./examples/UpdateBudget.json"
+          }
+        },
+        "parameters": [    
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/subscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/budgetNameParameter"
+          },
+          {
+            "name": "parameters",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/Budget"
+            },
+            "description": "Parameters supplied to the Create Budget operation."
+          }        
+        ],
+        "responses": {
+          "200": {
+            "description": "OK. The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/Budget"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "null"
+        }
+      },
+      "delete": {
+        "tags": [
+          "Budget"
+        ],
+        "operationId": "Budget_Delete",
+        "description": "The operation to delete a budget.",
+        "externalDocs": {
+          "url": "https://docs.microsoft.com/en-us/rest/api/consumption/"
+        },
+        "x-ms-examples": {
+          "DeleteBudget": {
+            "$ref": "./examples/DeleteBudget.json"
+          }
+        },
+        "parameters": [    
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/subscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/budgetNameParameter"
+          }       
+        ],
+        "responses": {
+          "200": {
+            "description": "OK. The request has succeeded."            
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "null"
+        }
+      }
+    }
+  },
+  "definitions": {    
+    "BudgetsListResult": {
+      "description": "Result of listing budgets. It contains a list of available budgets in the scope provided.",
+      "properties": {
+        "value": {
+          "description": "The list of budgets.",
+          "type": "array",
+          "readOnly": true,
+          "items": {
+            "$ref": "#/definitions/Budget"
+          }
+        }
+      }
+    },
+    "Budget": {
+      "description": "A budget resource.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/Resource"
+        }
+      ],
+      "properties": {
+        "properties": {
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/BudgetProperties",
+          "title": "Budget properties"
+        }
+      }
+    },
+    "BudgetProperties": {
+      "description": "The properties of the budget.",
+      "properties": {
+        "category": {
+          "description": "The category of the budget, whether the budget tracks cost or something else.",
+          "type": "string",
+          "enum": [
+            "Cost"
+          ],
+          "x-ms-enum": {
+            "name": "CategoryType",
+            "modelAsString": true
+          }
+        },
+        "amount": {
+          "description": "The total amount of cost to track with the budget",
+          "type": "number",
+          "format": "decimal"         
+        },
+        "timeGrain": {
+          "description": "The time covered by a budget. Tracking of the amount will be reset based on the time grain.",
+          "type": "string",
+          "enum": [
+            "Monthly",
+            "Quarterly",
+            "Yearly"
+          ],
+          "x-ms-enum": {
+            "name": "TimeGrainType",
+            "modelAsString": true
+          }
+        },
+        "timePeriod": {
+          "description": "Has start and end date of the budget. The start date must be first of the month and should be less than the end date. Future start date should not be more than three months. Past start date should not be selected within the timegrain preiod. There are no restrictions on the end date.",
+          "$ref": "#/definitions/BudgetTimePeriod"          
+        },
+        "currentSpend": {
+          "description": "The current amount of cost which is being tracked for a budget.",
+          "$ref": "#/definitions/CurrentSpend",
+          "readOnly": true       
+        },
+        "notifications": {
+          "type": "object",
+          "description": "Dictionary of notifications associated with the budget. Budget can have up to five notifications.",
+          "additionalProperties": {
+            "type": "object",
+            "$ref": "#/definitions/Notification"
+          }
+        }
+      }
+    },
+    "BudgetTimePeriod": {
+      "description": "The start and end date for a budget",
+      "properties": {
+        "startDate": {
+          "description": "The start date for the budget",
+          "type": "string",
+          "format": "date-time"
+        },
+        "endDate": {
+          "description": "The end date for the budget",
+          "type": "string",
+          "format": "date-time"
+        } 
+      }
+    },
+    "CurrentSpend": {
+      "description": "The current amount of cost which is being tracked for a budget.",
+      "properties": {
+        "amount": {
+          "description": "The total amount of cost which is being tracked by the budget.",
+          "type": "number",
+          "format": "decimal",
+          "readOnly": true
+        },
+        "unit": {
+          "description": "The unit of measure for the budget amount.",
+          "type": "string",
+          "readOnly": true
+        } 
+      }
+    },
+    "Notification" : {
+      "description": "The notification associated with a budget.",
+      "properties": {
+        "enabled": {
+          "description": "The notification is enabled or not.",
+          "type": "boolean"
+        },
+        "operator": {
+          "description": "The comparison operator.",
+          "type": "string",
+          "enum": [
+            "Equal",
+            "GreaterThan",
+            "GreaterThanOrEqual",
+            "LessThan",
+            "LessThanOrEqual"
+          ],
+          "x-ms-enum": {
+            "name": "OperatorType",
+            "modelAsString": true
+          }
+        },
+        "threshold": {
+          "description": "Threshold value associated with a notification. Notification is sent when the cost exceeded the threshold.",
+          "type": "number",
+          "format": "decimal"
+        },
+        "contactEmails": {
+          "description": "Email addresses to send the budget notification to when the threshold is exceeded.",
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "contactRoles": {
+          "description": "Contact roles to send the budget notification to when the threshold is exceeded.",
+          "type": "string",
+          "enum": [
+            "Reader",
+            "Contributor",
+            "Owner"
+          ],
+          "x-ms-enum": {
+            "name": "OperatorType",
+            "modelAsString": true
+          }
+        }
+      }
+    },
+    "ErrorDetails": {
+      "description": "The details of the error.",
+      "properties": {
+        "code": {
+          "description": "Error code.",
+          "type": "string",
+          "readOnly": true
+        },
+        "message": {
+          "description": "Error message indicating why the operation failed.",
+          "type": "string",
+          "readOnly": true
+        }
+      }
+    },
+    "ErrorResponse": {
+      "description": "Error response indicates that the service is not able to process the incoming request. The reason is provided in the error message.",
+      "type": "object",
+      "properties": {
+        "error": {
+          "description": "The details of the error.",
+          "$ref": "#/definitions/ErrorDetails"
+        }
+      }
+    },
+    "Resource": {
+      "description": "The Resource model definition.",
+      "properties": {
+        "id": {
+          "readOnly": true,
+          "type": "string",
+          "description": "Resource Id."
+        },
+        "name": {
+          "readOnly": true,
+          "type": "string",
+          "description": "Resource name."
+        },
+        "type": {
+          "readOnly": true,
+          "type": "string",
+          "description": "Resource type."
+        },
+        "etag": {
+          "type": "string",
+          "description": "ETag of the resource. To handle concurrent update scenarion, this field will be used to determine whether the user is updating the latest version or not."
+        }
+      },
+      "x-ms-azure-resource": true
+    }
+  },
+  "parameters": {
+    "apiVersionParameter": {
+      "name": "api-version",
+      "in": "query",
+      "required": true,
+      "type": "string",
+      "description": "Version of the API to be used with the client request. The current version is 2017-12-30-preview."
+    },
+    "subscriptionIdParameter": {
+      "name": "subscriptionId",
+      "in": "path",
+      "description": "Azure Subscription ID.",
+      "required": true,
+      "type": "string"
+    },
+    "budgetNameParameter": {
+      "name": "budgetName",
+      "in": "path",
+      "description": "Budget name.",
+      "required": true,
+      "type": "string"
+    }
+  }
+}

@@ -1,0 +1,71 @@
+{
+  "parameters": {
+    "api-version": "2017-12-30-preview",
+    "subscriptionId": "{subscription-id}",
+    "budgetName": "TestBudget",
+    "parameters": {
+      "properties": {
+        "category": "COST",
+        "amount": 100,
+        "timeGrain": "Monthly",
+        "timePeriod": {
+          "startDate": "2017-10-01",
+          "endDate": "2018-10-31"
+        },
+        "notifications": {
+          "Actual_GreaterThan_80_Percent": {
+            "enabled": true,
+            "operator": "GreaterThan",
+            "threshold": 80,
+            "contactEmails": [
+              "johndoe@email.com",
+              "janesmith@email.com"
+            ],
+            "contactRoles": [
+              "Contributor",
+              "Reader"
+            ]
+          }
+        }
+      }
+    }
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "id": "subscriptions/{subscription-id}/providers/Microsoft.Consumption/budgets/TestBudget",
+        "name": "TestBudget",
+        "type": "Microsoft.Consumption/budgets",
+        "eTag": "\"1d34d012214157f\"",
+        "properties": {
+          "category": "COST",
+          "amount": 100,
+          "timeGrain": "Monthly",
+          "timePeriod": {
+            "startDate": "2017-10-01",
+            "endDate": "2018-10-31"
+          },
+          "currentSpend": {
+            "amount": 80,
+            "unit": "USD"
+          },
+          "notifications": {
+            "Actual_GreaterThan_80_Percent": {
+              "enabled": true,
+              "operator": "GreaterThan",
+              "threshold": 80,
+              "contactEmails": [
+                "johndoe@email.com",
+                "janesmith@email.com"
+              ],
+              "contactRoles": [
+                "Contributor",
+                "Reader"
+              ]
+            }
+          }
+        }
+      }
+    }
+  }
+}
