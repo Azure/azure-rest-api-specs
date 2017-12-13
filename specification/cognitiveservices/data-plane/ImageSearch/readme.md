@@ -26,7 +26,7 @@ These settings apply only when `--csharp` is specified on the command line.
 ``` yaml $(csharp) 
 csharp: 
   namespace: Microsoft.Azure.CognitiveServices.Search.ImageSearch
-  output-folder: $(csharp-sdks-folder)/CognitiveServices/dataPlane/Search/Search/Generated/ImageSearch
+  output-folder: $(csharp-sdks-folder)/CognitiveServices/dataPlane/Search/BingImageSearch/BingImageSearch/Generated/ImageSearch
   sync-methods: none
 ```
 
