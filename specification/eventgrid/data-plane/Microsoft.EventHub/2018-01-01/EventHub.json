@@ -1,0 +1,54 @@
+{
+    "swagger": "2.0",
+    "info": {
+        "version": "2018-01-01",
+        "title": "Schema of Azure EventHub events published to Azure Event Grid",
+        "description": "Describes the schema for the EventHub specific event data that's part of an EventGridEvent."
+    },
+    "definitions": {
+        "CaptureFileCreatedEventData": {
+            "description": "CaptureFileCreated Event Data that's part of an EventGridEvent.",
+            "type": "object",
+            "properties": {
+                "fileurl": {
+                    "description": "The path to the capture file.",
+                    "type": "string"
+                },
+                "fileType": {
+                    "description": "The file type of the capture file.",
+                    "type": "string"
+                },
+                "partitionId": {
+                    "description": "The shard ID.",
+                    "type": "string"
+                },
+                "sizeInBytes": {
+                    "description": "The file size.",
+                    "type": "integer"
+                },
+                "eventCount": {
+                    "description": "The number of events in the file.",
+                    "type": "integer"
+                },
+                "firstSequenceNumber": {
+                    "description": "The smallest sequence number from the queue.",
+                    "type": "integer"
+                },
+                "lastSequenceNumber": {
+                    "description": "The last sequence number from the queue.",
+                    "type": "integer"
+                },
+                "firstEnqueueTime": {
+                    "description": "The first time from the queue.",
+                    "format": "date-time",
+                    "type": "string"
+                },
+                "lastEnqueueTime": {
+                    "description": "The last time from the queue.",
+                    "format": "date-time",
+                    "type": "string"
+                }
+            }
+        }
+    }
+}

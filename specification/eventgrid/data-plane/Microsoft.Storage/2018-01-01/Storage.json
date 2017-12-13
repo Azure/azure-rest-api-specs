@@ -1,0 +1,94 @@
+{
+    "swagger": "2.0",
+    "info": {
+        "version": "2018-01-01",
+        "title": "Schema of Azure Storage events published to Azure Event Grid",
+        "description": "Describes the schema for the Storage specific event data that's part of an EventGridEvent."
+    },
+    "definitions": {
+        "BlobCreatedEventData": {
+            "description": "BlobCreated Event Data that's part of an EventGridEvent.",
+            "type": "object",
+            "properties": {
+                "api": {
+                    "description": "The name of the api operation that triggered this event. For BlobCreated events, this value can be PutBlob, PutBlockList, or CopyBlob.",
+                    "type": "string"
+                },
+                "clientRequestId": {
+                    "description": "Client-provided request id for the storage API operation. Can be used to correlate to Azure Storage diagnostic logs using the “client-request-id” field in the logs, and can be provided in client requests using the “x-ms-client-request-id” header",
+                    "type": "string"
+                },
+                "requestId": {
+                    "description": "Service-generated request id for the storage API operation. Can be used to correlate to Azure Storage diagnostic logs using the “request-id-header” field in the logs and is returned from initiating API call in the 'x-ms-request-id' header.",
+                    "type": "string"
+                },
+                "eTag": {
+                    "description": "The etag of the object when this event fired.",
+                    "type": "string"
+                },
+                "contentType": {
+                    "description": "The content type of the blob, as would be returned in the Content-Type header from the blob.",
+                    "type": "string"
+                },
+                "contentLength": {
+                    "description": "The size of the blob as in integer representing a number of bytes, as would be returned in the Content-Length header from the blob.",
+                    "type": "integer"
+                },
+                "blobType": {
+                    "description": "blobType",
+                    "type": "string"
+                },
+                "url": {
+                    "description": "The url of the object that is the subject of the event.",
+                    "type": "string"
+                },
+                "sequencer": {
+                    "description": "An opaque string value representing the logical sequence of events for any particular blob name. Users can use standard string comparison to understand the relative sequence of two events on the same blob name.",
+                    "type": "string"
+                },
+                "storageDiagnostics": {
+                    "description": "Diagnostic data occasionally included by the Azure Storage service. When present, should be ignored by event consumers.",
+                    "type": "object"
+                }
+            }
+        },
+        "BlobDeletedEventData": {
+            "description": "BlobDeleted Event Data that's part of an EventGridEvent.",
+            "type": "object",
+            "properties": {
+                "api": {
+                    "description": "The name of the api operation that triggered this event. For BlobDeleted events, this value is DeleteBlob",
+                    "type": "string"
+                },
+                "clientRequestId": {
+                    "description": "Client-provided request id for the storage API operation. Can be used to correlate to Azure Storage diagnostic logs using the “client-request-id” field in the logs, and can be provided in client requests using the “x-ms-client-request-id” header",
+                    "type": "string"
+                },
+                "requestId": {
+                    "description": "Service-generated request id for the storage API operation. Can be used to correlate to Azure Storage diagnostic logs using the “request-id-header” field in the logs and is returned from initiating API call in the 'x-ms-request-id' header.",
+                    "type": "string"
+                },
+                "contentType": {
+                    "description": "The content type of the blob, as would be returned in the Content-Type header from the blob.",
+                    "type": "string"
+                },
+                "blobType": {
+                    "description": "blobType",
+                    "type": "string"
+                },
+                "url": {
+                    "description": "The url of the object that is the subject of the event.",
+                    "type": "string"
+                },
+                "sequencer": {
+                    "description": "An opaque string value representing the logical sequence of events for any particular blob name. Users can use standard string comparison to understand the relative sequence of two events on the same blob name.",
+                    "type": "string"
+                },
+                "storageDiagnostics": {
+                    "description": "Diagnostic data occasionally included by the Azure Storage service. When present, should be ignored by event consumers.",
+                    "type": "object"
+                }
+            }
+        }
+    }
+}
