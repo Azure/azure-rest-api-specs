@@ -56,6 +56,12 @@
                         "schema": {
                             "$ref": "#/definitions/OperationList"
                         }
+                    },
+                    "default": {
+                        "description": "Error response describing why the operation failed.",
+                        "schema": {
+                            "$ref": "#/definitions/ErrorResponse"
+                        }
                     }
                 }
             }
@@ -86,6 +92,12 @@
                         "description": "OK",
                         "schema": {
                             "$ref": "#/definitions/HanaInstancesListResult"
+                        }
+                    },
+                    "default": {
+                        "description": "Error response describing why the operation failed.",
+                        "schema": {
+                            "$ref": "#/definitions/ErrorResponse"
                         }
                     }
                 },
@@ -123,6 +135,12 @@
                         "description": "OK",
                         "schema": {
                             "$ref": "#/definitions/HanaInstancesListResult"
+                        }
+                    },
+                    "default": {
+                        "description": "Error response describing why the operation failed.",
+                        "schema": {
+                            "$ref": "#/definitions/ErrorResponse"
                         }
                     }
                 },
@@ -163,6 +181,12 @@
                         "description": "OK",
                         "schema": {
                             "$ref": "#/definitions/HanaInstance"
+                        }
+                    },
+                    "default": {
+                        "description": "Error response describing why the operation failed.",
+                        "schema": {
+                            "$ref": "#/definitions/ErrorResponse"
                         }
                     }
                 }
@@ -273,8 +297,20 @@
                     "description": "Name of the hardware type (vendor and/or thrie product name)"
                 },
                 "hanaInstanceSize": {
-                   "readOnly": true,
+                    "readOnly": true,
                     "type": "string",
+                    "enum": [
+                        "S72m",
+                        "S144m",
+                        "S72",
+                        "S144",
+                        "S192",
+                        "S192m"
+                    ],
+                    "x-ms-enum": {
+                        "name": "HanaInstanceSizeNamesEnum",
+                        "modelAsString": true
+                    },
                     "description": "Specifies the HANA instance SKU."
                 }
             },
@@ -283,7 +319,7 @@
         "StorageProfile": {
             "properties": {
                 "nfsIpAddress": {
-                   "readOnly": true,
+                    "readOnly": true,
                     "type": "string",
                     "description": "IP Address to connect to storage."
                 }
@@ -301,7 +337,7 @@
                     "description": "This property allows you to specify the type of the OS."
                 },
                 "version": {
-                   "readOnly": true,
+                    "readOnly": true,
                     "type": "string",
                     "description": "Specifies version of operating system."
                 }
@@ -313,12 +349,12 @@
                 "networkInterfaces": {
                     "type": "array",
                     "items": {
-                      "$ref": "#/definitions/IpAddress"
+                        "$ref": "#/definitions/IpAddress"
                     },
                     "description": "Specifies the network interfaces for the HANA instance."
                 },
                 "circuitId": {
-                   "readOnly": true,
+                    "readOnly": true,
                     "type": "string",
                     "description": "Specifies the circuit id for connecting to express route."
                 }
@@ -326,12 +362,12 @@
             "description": "Specifies the network settings for the HANA instance disks."
         },
         "IpAddress": {
-          "properties": {
-            "ipAddress": {
-              "type": "string",
-              "description": "Specifies the IP address of the network interface."
+            "properties": {
+                "ipAddress": {
+                    "type": "string",
+                    "description": "Specifies the IP address of the network interface."
+                }
             }
-          }
         },
         "OperationList": {
             "type": "object",
@@ -385,6 +421,20 @@
                 }
             },
             "description": "Detailed HANA operation information"
+        },
+        "ErrorResponse": {
+            "description": "Describes the format of Error response.",
+            "type": "object",
+            "properties": {
+                "code": {
+                    "description": "Error code",
+                    "type": "string"
+                },
+                "message": {
+                    "description": "Error message indicating why the operation failed.",
+                    "type": "string"
+                }
+            }
         }
     },
     "parameters": {

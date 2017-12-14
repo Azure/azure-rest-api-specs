@@ -56,6 +56,12 @@
                         "schema": {
                             "$ref": "#/definitions/OperationList"
                         }
+                    },
+                    "default": {
+                        "description": "Error response describing why the operation failed.",
+                        "schema": {
+                            "$ref": "#/definitions/ErrorResponse"
+                        }
                     }
                 }
             }
@@ -86,6 +92,12 @@
                         "description": "OK",
                         "schema": {
                             "$ref": "#/definitions/HanaInstancesListResult"
+                        }
+                    },
+                    "default": {
+                        "description": "Error response describing why the operation failed.",
+                        "schema": {
+                            "$ref": "#/definitions/ErrorResponse"
                         }
                     }
                 },
@@ -123,6 +135,12 @@
                         "description": "OK",
                         "schema": {
                             "$ref": "#/definitions/HanaInstancesListResult"
+                        }
+                    },
+                    "default": {
+                        "description": "Error response describing why the operation failed.",
+                        "schema": {
+                            "$ref": "#/definitions/ErrorResponse"
                         }
                     }
                 },
@@ -163,6 +181,12 @@
                         "description": "OK",
                         "schema": {
                             "$ref": "#/definitions/HanaInstance"
+                        }
+                    },
+                    "default": {
+                        "description": "Error response describing why the operation failed.",
+                        "schema": {
+                            "$ref": "#/definitions/ErrorResponse"
                         }
                     }
                 }
@@ -305,6 +329,20 @@
                 }
             },
             "description": "Detailed HANA operation information"
+        },
+        "ErrorResponse": {
+            "description": "Describes the format of Error response.",
+            "type": "object",
+            "properties": {
+                "code": {
+                    "description": "Error code",
+                    "type": "string"
+                },
+                "message": {
+                    "description": "Error message indicating why the operation failed.",
+                    "type": "string"
+                }
+            }
         }
     },
     "parameters": {
