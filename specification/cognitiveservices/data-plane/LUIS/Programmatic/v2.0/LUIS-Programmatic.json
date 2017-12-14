@@ -323,9 +323,15 @@
         "consumes": [
           "application/json"
         ],
+        "produces": [
+          "application/json"
+        ],
         "responses": {
           "200": {
-            "description": "No Content. Successful operation."
+            "description": "Successful operation.",
+            "schema": {
+              "$ref": "#/definitions/OperationStatus"
+            }
           },
           "default": {
             "description": "Error Response.",
@@ -361,7 +367,10 @@
         ],
         "responses": {
           "200": {
-            "description": "No Content. Successful operation."
+            "description": "Successful operation.",
+            "schema": {
+              "$ref": "#/definitions/OperationStatus"
+            }
           },
           "default": {
             "description": "Error Response.",
@@ -370,6 +379,9 @@
             }
           }
         },
+        "produces": [
+          "application/json"
+        ],
         "x-ms-examples": {
           "Successful Delete Pattern Feature Info request": {
             "$ref": "./examples/features/SuccessfulDeletePatternFeatureInfoRequest.json"
@@ -450,7 +462,10 @@
         ],
         "responses": {
           "200": {
-            "description": "No Content. Successfully updated phraselist."
+            "description": "Successfully updated phraselist.",
+            "schema": {
+              "$ref": "#/definitions/OperationStatus"
+            }
           },
           "default": {
             "description": "Error Response.",
@@ -459,6 +474,9 @@
             }
           }
         },
+        "produces": [
+          "application/json"
+        ],
         "x-ms-examples": {
           "Successful Update Phraselist Feature Info request": {
             "$ref": "./examples/features/SuccessfulUpdatePhraselistFeatureInfoRequest.json"
@@ -485,7 +503,10 @@
         ],
         "responses": {
           "200": {
-            "description": "No Content. Successfully deleted phraselist."
+            "description": "Successfully deleted phraselist.",
+            "schema": {
+              "$ref": "#/definitions/OperationStatus"
+            }
           },
           "default": {
             "description": "Error Response.",
@@ -494,6 +515,9 @@
             }
           }
         },
+        "produces": [
+          "application/json"
+        ],
         "x-ms-examples": {
           "Successful Delete Phraselist Feature Info request": {
             "$ref": "./examples/features/SuccessfulDeletePhraselistFeatureInfoRequest.json"
@@ -658,7 +682,10 @@
         ],
         "responses": {
           "200": {
-            "description": "No Content. Successfully deleted example label."
+            "description": "Successfully deleted example label.",
+            "schema": {
+              "$ref": "#/definitions/OperationStatus"
+            }
           },
           "default": {
             "description": "Error Response.",
@@ -667,6 +694,9 @@
             }
           }
         },
+        "produces": [
+          "application/json"
+        ],
         "x-ms-examples": {
           "Successful Delete Example Label request": {
             "$ref": "./examples/examples/SuccessfulDeleteExampleLabelRequest.json"
@@ -1345,7 +1375,10 @@
         ],
         "responses": {
           "200": {
-            "description": "No Content. Successful operation."
+            "description": "Successful operation.",
+            "schema": {
+              "$ref": "#/definitions/OperationStatus"
+            }
           },
           "default": {
             "description": "Error Response.",
@@ -1354,6 +1387,9 @@
             }
           }
         },
+        "produces": [
+          "application/json"
+        ],
         "x-ms-examples": {
           "Successful Rename Intent Model request": {
             "$ref": "./examples/model/SuccessfulRenameIntentModelRequest.json"
@@ -1376,7 +1412,10 @@
         ],
         "responses": {
           "200": {
-            "description": "No Content. Successful operation."
+            "description": "Successful operation.",
+            "schema": {
+              "$ref": "#/definitions/OperationStatus"
+            }
           },
           "default": {
             "description": "Error Response.",
@@ -1385,6 +1424,9 @@
             }
           }
         },
+        "produces": [
+          "application/json"
+        ],
         "x-ms-examples": {
           "Successful Delete Intent Model request": {
             "$ref": "./examples/model/SuccessfulDeleteIntentModelRequest.json"
@@ -1468,7 +1510,10 @@
         ],
         "responses": {
           "200": {
-            "description": "No Content. Successfully updated entity extractor name."
+            "description": "Successfully updated entity extractor name.",
+            "schema": {
+              "$ref": "#/definitions/OperationStatus"
+            }
           },
           "default": {
             "description": "Error Response.",
@@ -1477,6 +1522,9 @@
             }
           }
         },
+        "produces": [
+          "application/json"
+        ],
         "x-ms-examples": {
           "Successful Rename Entity Info request": {
             "$ref": "./examples/model/SuccessfulRenameEntityExtractorRequest.json"
@@ -1504,7 +1552,10 @@
         ],
         "responses": {
           "200": {
-            "description": "No Content. Successfully deleted entity."
+            "description": "Successfully deleted entity.",
+            "schema": {
+              "$ref": "#/definitions/OperationStatus"
+            }
           },
           "default": {
             "description": "Error Response.",
@@ -1513,6 +1564,9 @@
             }
           }
         },
+        "produces": [
+          "application/json"
+        ],
         "x-ms-examples": {
           "Successful Delete Entity Info request": {
             "$ref": "./examples/model/SuccessfulDeleteEntityExtractorRequest.json"
@@ -1586,7 +1640,10 @@
         ],
         "responses": {
           "200": {
-            "description": "No Content. Successful operation."
+            "description": "Successful operation.",
+            "schema": {
+              "$ref": "#/definitions/OperationStatus"
+            }
           },
           "default": {
             "description": "Error Response.",
@@ -1595,6 +1652,9 @@
             }
           }
         },
+        "produces": [
+          "application/json"
+        ],
         "x-ms-examples": {
           "Successful Get Hierarchical Entity Info request": {
             "$ref": "./examples/model/SuccessfulUpdateHierarchicalEntityModelRequest.json"
@@ -1617,7 +1677,10 @@
         ],
         "responses": {
           "200": {
-            "description": "No Content. Successfully deleted entity."
+            "description": "Successfully deleted entity.",
+            "schema": {
+              "$ref": "#/definitions/OperationStatus"
+            }
           },
           "default": {
             "description": "Error Response.",
@@ -1626,6 +1689,9 @@
             }
           }
         },
+        "produces": [
+          "application/json"
+        ],
         "x-ms-examples": {
           "Successful Delete Hierarchical Entity Model request": {
             "$ref": "./examples/model/SuccessfulDeleteHierarchicalEntityModelRequest.json"
@@ -1702,9 +1768,15 @@
             "$ref": "./examples/model/SuccessfulUpdateCompositeEntityModelRequest.json"
           }
         },
+        "produces": [
+          "application/json"
+        ],
         "responses": {
           "200": {
-            "description": "No Content. Successfully updated composite entity."
+            "description": "Successfully updated composite entity.",
+            "schema": {
+              "$ref": "#/definitions/OperationStatus"
+            }
           },
           "default": {
             "description": "Error Response.",
@@ -1730,7 +1802,10 @@
         ],
         "responses": {
           "200": {
-            "description": "No Content. Successfully deleted composite entity."
+            "description": "Successfully deleted composite entity.",
+            "schema": {
+              "$ref": "#/definitions/OperationStatus"
+            }
           },
           "default": {
             "description": "Error Response.",
@@ -1739,6 +1814,9 @@
             }
           }
         },
+        "produces": [
+          "application/json"
+        ],
         "x-ms-examples": {
           "Successful Delete Entity Info request": {
             "$ref": "./examples/model/SuccessfulDeleteCompositeEntityModelRequest.json"
@@ -1822,7 +1900,10 @@
         ],
         "responses": {
           "200": {
-            "description": "No Content. Successfully updated Closed List name and words list."
+            "description": "Successfully updated Closed List name and words list.",
+            "schema": {
+              "$ref": "#/definitions/OperationStatus"
+            }
           },
           "default": {
             "description": "Error Response.",
@@ -1831,6 +1912,9 @@
             }
           }
         },
+        "produces": [
+          "application/json"
+        ],
         "x-ms-examples": {
           "Successful Update Closed List Entity Info request": {
             "$ref": "./examples/model/SuccessfulUpdateClosedListEntityModelRequest.json"
@@ -1870,7 +1954,10 @@
         ],
         "responses": {
           "200": {
-            "description": "No Content. Successfully added sublists to Closed List."
+            "description": "Successfully added sublists to Closed List.",
+            "schema": {
+              "$ref": "#/definitions/OperationStatus"
+            }
           },
           "default": {
             "description": "Error Response.",
@@ -1879,6 +1966,9 @@
             }
           }
         },
+        "produces": [
+          "application/json"
+        ],
         "x-ms-examples": {
           "Successful Add SubLists to Closed List Entity request": {
             "$ref": "./examples/model/SuccessfulPatchClosedListEntityModelRequest.json"
@@ -1906,7 +1996,10 @@
         ],
         "responses": {
           "200": {
-            "description": "No Content. Successfully delete Closed List from application."
+            "description": "Successfully delete Closed List from application.",
+            "schema": {
+              "$ref": "#/definitions/OperationStatus"
+            }
           },
           "default": {
             "description": "Error Response.",
@@ -1915,6 +2008,9 @@
             }
           }
         },
+        "produces": [
+          "application/json"
+        ],
         "x-ms-examples": {
           "Successful Delete Closed List Entity Info request": {
             "$ref": "./examples/model/SuccessfulDeleteClosedListEntityModelRequest.json"
@@ -1986,7 +2082,10 @@
         ],
         "responses": {
           "200": {
-            "description": "No Content. Successful operation."
+            "description": "Successful operation.",
+            "schema": {
+              "$ref": "#/definitions/OperationStatus"
+            }
           },
           "default": {
             "description": "Error Response.",
@@ -1995,6 +2094,9 @@
             }
           }
         },
+        "produces": [
+          "application/json"
+        ],
         "x-ms-examples": {
           "Successful Get Prebuilt Info request": {
             "$ref": "./examples/model/SuccessfulDeletePrebuiltEntityRequest.json"
@@ -2031,7 +2133,10 @@
         ],
         "responses": {
           "200": {
-            "description": "No Content. Successfully deleted sublist."
+            "description": "Successfully deleted sublist.",
+            "schema": {
+              "$ref": "#/definitions/OperationStatus"
+            }
           },
           "default": {
             "description": "Error Response.",
@@ -2040,6 +2145,9 @@
             }
           }
         },
+        "produces": [
+          "application/json"
+        ],
         "x-ms-examples": {
           "Successful Delete Sublist request": {
             "$ref": "./examples/model/SuccessfulDeleteSublistRequest.json"
@@ -2086,7 +2194,10 @@
         ],
         "responses": {
           "200": {
-            "description": "No Content. Successfully updated sublist."
+            "description": "Successfully updated sublist.",
+            "schema": {
+              "$ref": "#/definitions/OperationStatus"
+            }
           },
           "default": {
             "description": "Error Response.",
@@ -2095,6 +2206,9 @@
             }
           }
         },
+        "produces": [
+          "application/json"
+        ],
         "x-ms-examples": {
           "Successful Update Sublist request": {
             "$ref": "./examples/model/SuccessfulUpdateSublistRequest.json"
@@ -2518,7 +2632,10 @@
         ],
         "responses": {
           "200": {
-            "description": "No Content. Successfully updated application name and description."
+            "description": "Successfully updated application name and description.",
+            "schema": {
+              "$ref": "#/definitions/OperationStatus"
+            }
           },
           "default": {
             "description": "Error Response.",
@@ -2527,6 +2644,9 @@
             }
           }
         },
+        "produces": [
+          "application/json"
+        ],
         "x-ms-examples": {
           "Successful Rename Application request": {
             "$ref": "./examples/apps/SuccessfulRenameApplicationRequest.json"
@@ -2543,7 +2663,10 @@
         ],
         "responses": {
           "200": {
-            "description": "No Content. Successfully deleted application."
+            "description": "Successfully deleted application.",
+            "schema": {
+              "$ref": "#/definitions/OperationStatus"
+            }
           },
           "default": {
             "description": "Error Response.",
@@ -2552,6 +2675,9 @@
             }
           }
         },
+        "produces": [
+          "application/json"
+        ],
         "x-ms-examples": {
           "Successful Rename Application request": {
             "$ref": "./examples/apps/SuccessfulDeleteApplicationRequest.json"
@@ -2754,7 +2880,10 @@
         ],
         "responses": {
           "200": {
-            "description": "No Content. Successful operation."
+            "description": "Successful operation.",
+            "schema": {
+              "$ref": "#/definitions/OperationStatus"
+            }
           },
           "default": {
             "description": "Error Response.",
@@ -2763,6 +2892,9 @@
             }
           }
         },
+        "produces": [
+          "application/json"
+        ],
         "x-ms-examples": {
           "Successful Rename Application Version request": {
             "$ref": "./examples/versions/SuccessfulRenameApplicationVersionRequest.json"
@@ -2782,7 +2914,10 @@
         ],
         "responses": {
           "200": {
-            "description": "No Content. Successful operation."
+            "description": "Successful operation.",
+            "schema": {
+              "$ref": "#/definitions/OperationStatus"
+            }
           },
           "default": {
             "description": "Error Response.",
@@ -2791,6 +2926,9 @@
             }
           }
         },
+        "produces": [
+          "application/json"
+        ],
         "x-ms-examples": {
           "Successful Delete Application Version request": {
             "$ref": "./examples/versions/SuccessfulDeleteApplicationVersionRequest.json"
@@ -3010,7 +3148,10 @@
         ],
         "responses": {
           "200": {
-            "description": "No Content. Successfully updated application settings."
+            "description": "Successfully updated application settings.",
+            "schema": {
+              "$ref": "#/definitions/OperationStatus"
+            }
           },
           "default": {
             "description": "Error Response.",
@@ -3019,6 +3160,9 @@
             }
           }
         },
+        "produces": [
+          "application/json"
+        ],
         "x-ms-examples": {
           "Successful Update Application Settings request": {
             "$ref": "./examples/apps/SuccessfulUpdateApplicationSettingsRequest.json"
@@ -3052,7 +3196,10 @@
         ],
         "responses": {
           "200": {
-            "description": "No Content. Successful operation."
+            "description": "Successful operation.",
+            "schema": {
+              "$ref": "#/definitions/OperationStatus"
+            }
           },
           "default": {
             "description": "Error Response.",
@@ -3061,6 +3208,9 @@
             }
           }
         },
+        "produces": [
+          "application/json"
+        ],
         "x-ms-examples": {
           "Successful Delete Unlabelled Utterance": {
             "$ref": "./examples/versions/SuccessfulDeleteUnlabelledUtteranceRequest.json"
@@ -3122,7 +3272,10 @@
         ],
         "responses": {
           "200": {
-            "description": "No Content. Successful operation."
+            "description": "Successful operation.",
+            "schema": {
+              "$ref": "#/definitions/OperationStatus"
+            }
           },
           "default": {
             "description": "Error Response.",
@@ -3131,6 +3284,9 @@
             }
           }
         },
+        "produces": [
+          "application/json"
+        ],
         "x-ms-examples": {
           "Successful Add User To Access List": {
             "$ref": "./examples/permissions/SuccessfulAddUserToAccessListRequest.json"
@@ -3159,7 +3315,10 @@
         ],
         "responses": {
           "200": {
-            "description": "No Content. Successful operation."
+            "description": "Successful operation.",
+            "schema": {
+              "$ref": "#/definitions/OperationStatus"
+            }
           },
           "default": {
             "description": "Error Response.",
@@ -3168,6 +3327,9 @@
             }
           }
         },
+        "produces": [
+          "application/json"
+        ],
         "x-ms-examples": {
           "Successful Remove User From Access List": {
             "$ref": "./examples/permissions/SuccessfulRemoveUserFromAccessListRequest.json"
@@ -3196,7 +3358,10 @@
         ],
         "responses": {
           "200": {
-            "description": "No Content. Successful operation."
+            "description": "Successful operation.",
+            "schema": {
+              "$ref": "#/definitions/OperationStatus"
+            }
           },
           "default": {
             "description": "Error Response.",
@@ -3205,6 +3370,9 @@
             }
           }
         },
+        "produces": [
+          "application/json"
+        ],
         "x-ms-examples": {
           "Successful Replaces Users From Access List": {
             "$ref": "./examples/permissions/SuccessfulReplacesUsersFromAccessListRequest.json"
@@ -3573,7 +3741,10 @@
         ],
         "responses": {
           "200": {
-            "description": "No Content. Successful operation."
+            "description": "Successful operation.",
+            "schema": {
+              "$ref": "#/definitions/OperationStatus"
+            }
           },
           "default": {
             "description": "Error Response.",
@@ -3582,6 +3753,9 @@
             }
           }
         },
+        "produces": [
+          "application/json"
+        ],
         "x-ms-examples": {
           "Successful Delete Prebuilt Domain from Application request": {
             "$ref": "./examples/model/SuccessfulDeletePrebuiltDomainFromApplicationRequest.json"
@@ -3782,7 +3956,10 @@
         ],
         "responses": {
           "200": {
-            "description": "No Content. Successfully updated entity child."
+            "description": "Successfully updated entity child.",
+            "schema": {
+              "$ref": "#/definitions/OperationStatus"
+            }
           },
           "default": {
             "description": "Error Response.",
@@ -3791,6 +3968,9 @@
             }
           }
         },
+        "produces": [
+          "application/json"
+        ],
         "x-ms-examples": {
           "Successful Update Hierarchical Entity Child Model request": {
             "$ref": "./examples/model/SuccessfulUpdateHierarchicalChildModelRequest.json"
@@ -3821,7 +4001,10 @@
         ],
         "responses": {
           "200": {
-            "description": "No Content. Successfully deleted entity."
+            "description": "Successfully deleted entity.",
+            "schema": {
+              "$ref": "#/definitions/OperationStatus"
+            }
           },
           "default": {
             "description": "Error Response.",
@@ -3830,6 +4013,9 @@
             }
           }
         },
+        "produces": [
+          "application/json"
+        ],
         "x-ms-examples": {
           "Successful Delete Hierarchical Entity Child Model request": {
             "$ref": "./examples/model/SuccessfulDeleteHierarchicalChildModelRequest.json"
@@ -3976,7 +4162,10 @@
         ],
         "responses": {
           "200": {
-            "description": "No Content. Successfully deleted entity."
+            "description": "Successfully deleted entity.",
+            "schema": {
+              "$ref": "#/definitions/OperationStatus"
+            }
           },
           "default": {
             "description": "Error Response.",
@@ -3985,6 +4174,9 @@
             }
           }
         },
+        "produces": [
+          "application/json"
+        ],
         "x-ms-examples": {
           "Successful Delete Composite Entity Child Model request": {
             "$ref": "./examples/model/SuccessfulDeleteCompositeChildModelRequest.json"
@@ -6066,6 +6258,20 @@
           "items": {
             "type": "string"
           }
+        }
+      }
+    },
+    "OperationStatus": {
+      "description": "Response of an Operation status.",
+      "type": "object",
+      "properties": {
+        "code": {
+          "type": "string",
+          "description": "Status Code."
+        },
+        "message": {
+          "type": "string",
+          "description": "Status details."
         }
       }
     },
