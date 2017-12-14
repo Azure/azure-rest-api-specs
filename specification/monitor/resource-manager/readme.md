@@ -73,7 +73,6 @@ input-file:
 ---
 # Code Generation
 
-
 ## C# 
 
 These settings apply only when `--csharp` is specified on the command line.
@@ -114,14 +113,28 @@ output-folder: $(go-sdk-folder)/services/monitor/mgmt/2017-05-01-preview/insight
 ## Python
 
 These settings apply only when `--python` is specified on the command line.
+Please also specify `--python-sdks-folder=<path to the root directory of your azure-sdk-for-python clone>`.
+Use `--python-mode=update` if you already have a setup.py and just want to update the code itself.
 
 ``` yaml $(python)
+python-mode: create
 python:
-  # override the default output folder
-  output-folder: $(output-folder)/python
+  azure-arm: true
   license-header: MICROSOFT_MIT_NO_VERSION
   payload-flattening-threshold: 2
   namespace: azure.mgmt.monitor
+  package-name: azure-mgmt-monitor
+  clear-output-folder: true
+```
+``` yaml $(python) && $(python-mode) == 'update'
+python:
+  no-namespace-folders: true
+  output-folder: $(python-sdks-folder)/azure-mgmt-monitor/azure/mgmt/monitor
+```
+``` yaml $(python) && $(python-mode) == 'create'
+python:
+  basic-setup-py: true
+  output-folder: $(python-sdks-folder)/azure-mgmt-monitor
 ```
 
 ## Java
@@ -135,4 +148,14 @@ java:
   license-header: MICROSOFT_MIT_NO_VERSION
   payload-flattening-threshold: 2
   namespace: com.microsoft.azure.management.monitor
+```
+
+# Validation
+
+## Suppression
+
+``` yaml
+directive:
+  - suppress: R3016  # DefinitionsPropertiesNamesCamelCase (to suppress the error due to odata.type)
+    reason: The feature (polymorphic types) is in the process of deprecation and fixing this will require changes in the backend.
 ```

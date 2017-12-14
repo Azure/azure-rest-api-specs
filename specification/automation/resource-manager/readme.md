@@ -28,7 +28,7 @@ These are the global settings for the Automation API.
 title: AutomationClient
 description: Automation Client
 openapi-type: arm
-tag: package-2015-10
+tag: package-2017-05-preview
 ```
 
 
@@ -59,6 +59,34 @@ input-file:
 ```
 
 
+### Tag: package-2017-05-preview
+
+These settings apply only when `--tag=package-2017-05-preview` is specified on the command line.
+
+``` yaml $(tag) == 'package-2017-05-preview'
+input-file:
+- Microsoft.Automation/2015-10-31/account.json
+- Microsoft.Automation/2015-10-31/certificate.json
+- Microsoft.Automation/2015-10-31/connection.json
+- Microsoft.Automation/2015-10-31/connectionType.json
+- Microsoft.Automation/2015-10-31/credential.json
+- Microsoft.Automation/2015-10-31/definitions.json
+- Microsoft.Automation/2015-10-31/dscCompilationJob.json
+- Microsoft.Automation/2015-10-31/dscConfiguration.json
+- Microsoft.Automation/2015-10-31/dscNode.json
+- Microsoft.Automation/2015-10-31/dscNodeConfiguration.json
+- Microsoft.Automation/2015-10-31/hybridRunbookWorkerGroup.json
+- Microsoft.Automation/2015-10-31/job.json
+- Microsoft.Automation/2015-10-31/jobSchedule.json
+- Microsoft.Automation/2015-10-31/module.json
+- Microsoft.Automation/2015-10-31/runbook.json
+- Microsoft.Automation/2015-10-31/schedule.json
+- Microsoft.Automation/2015-10-31/variable.json
+- Microsoft.Automation/2015-10-31/webhook.json
+- Microsoft.Automation/2017-05-15-preview/softwareUpdateConfiguration.json
+- Microsoft.Automation/2017-05-15-preview/softwareUpdateConfigurationRun.json
+- Microsoft.Automation/2017-05-15-preview/softwareUpdateConfigurationMachineRun.json
+```
 
 ---
 # Code Generation

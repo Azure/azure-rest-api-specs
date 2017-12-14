@@ -1728,6 +1728,9 @@
         "summary": "Gets the last lines of docker logs for the given site",
         "description": "Gets the last lines of docker logs for the given site",
         "operationId": "WebApps_GetWebSiteContainerLogs",
+        "produces": [
+          "application/octet-stream"
+        ],
         "parameters": [
           {
             "$ref": "#/parameters/resourceGroupNameParameter"
@@ -1766,7 +1769,10 @@
         ],
         "summary": "Gets the ZIP archived docker log files for the given site",
         "description": "Gets the ZIP archived docker log files for the given site",
-        "operationId": "WebApps_GetContainerLogsZip",
+        "operationId": "WebApps_GetWebSiteContainerLogsZip",
+        "produces": [
+          "application/zip"
+        ],
         "parameters": [
           {
             "$ref": "#/parameters/resourceGroupNameParameter"
@@ -4603,6 +4609,9 @@
         "responses": {
           "200": {
             "description": "Successfully generate new password."
+          },
+          "204": {
+            "description": "Successfully generate new password."
           }
         }
       }
@@ -5493,6 +5502,9 @@
         ],
         "responses": {
           "202": {
+            "description": "Recovery operation started."
+          },
+          "200": {
             "description": "Recovery operation started."
           }
         },
@@ -7615,6 +7627,9 @@
         "summary": "Gets the last lines of docker logs for the given site",
         "description": "Gets the last lines of docker logs for the given site",
         "operationId": "WebApps_GetWebSiteContainerLogsSlot",
+        "produces": [
+          "application/octet-stream"
+        ],
         "parameters": [
           {
             "$ref": "#/parameters/resourceGroupNameParameter"
@@ -7660,7 +7675,10 @@
         ],
         "summary": "Gets the ZIP archived docker log files for the given site",
         "description": "Gets the ZIP archived docker log files for the given site",
-        "operationId": "WebApps_GetContainerLogsZipSlot",
+        "operationId": "WebApps_GetWebSiteContainerLogsZipSlot",
+        "produces": [
+          "application/zip"
+        ],
         "parameters": [
           {
             "$ref": "#/parameters/resourceGroupNameParameter"
@@ -10825,6 +10843,9 @@
         "responses": {
           "200": {
             "description": "Successfully generate new password."
+          },
+          "204": {
+            "description": "Successfully generate new password."
           }
         }
       }
@@ -11855,6 +11876,9 @@
         ],
         "responses": {
           "202": {
+            "description": "Recovery operation started."
+          },
+          "200": {
             "description": "Recovery operation started."
           }
         },
@@ -15874,7 +15898,7 @@
       }
     },
     "Identifier": {
-      "description": "Identifier.",
+      "description": "A domain specific resource identifier.",
       "type": "object",
       "allOf": [
         {
@@ -16317,39 +16341,39 @@
           "description": "PremierAddOn resource specific properties",
           "properties": {
             "sku": {
-              "description": "SKU.",
+              "description": "Premier add on SKU.",
               "type": "string"
             },
             "product": {
-              "description": "Product.",
+              "description": "Premier add on Product.",
               "type": "string"
             },
             "vendor": {
-              "description": "Vendor.",
+              "description": "Premier add on Vendor.",
               "type": "string"
             },
             "name": {
-              "description": "Name.",
+              "description": "Premier add on Name.",
               "type": "string",
               "x-ms-client-name": "PremierAddOnName"
             },
             "location": {
-              "description": "Location.",
+              "description": "Premier add on Location.",
               "type": "string"
             },
             "tags": {
-              "description": "Tags.",
+              "description": "Premier add on Tags.",
               "type": "object",
               "additionalProperties": {
                 "type": "string"
               }
             },
             "marketplacePublisher": {
-              "description": "Marketplace publisher.",
+              "description": "Premier add on Marketplace publisher.",
               "type": "string"
             },
             "marketplaceOffer": {
-              "description": "Marketplace offer.",
+              "description": "Premier add on Marketplace offer.",
               "type": "string"
             }
           },

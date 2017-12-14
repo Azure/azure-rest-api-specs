@@ -132,6 +132,45 @@
                 },
                 "x-ms-long-running-operation": true
             }
+        },
+        "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/servers/{serverName}/backupLongTermRetentionVaults": {
+            "get": {
+                "tags": [
+                    "BackupLongTermRetentionVaults"
+                ],
+                "operationId": "BackupLongTermRetentionVaults_ListByServer",
+                "description": "Gets server backup long term retention vaults in a server",
+                "x-ms-examples": {
+                    "Get backup long term retention vault": {
+                        "$ref": "./examples/BackupLongTermRetentionVaultList.json"
+                    }
+                },
+                "parameters": [
+                    {
+                        "$ref": "#/parameters/ApiVersionParameter"
+                    },
+                    {
+                        "$ref": "#/parameters/SubscriptionIdParameter"
+                    },
+                    {
+                        "$ref": "#/parameters/ResourceGroupParameter"
+                    },
+                    {
+                        "$ref": "#/parameters/ServerNameParameter"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/BackupLongTermRetentionVaultListResult"
+                        }
+                    }
+                },
+                "x-ms-pageable": {
+                  "nextLinkName": null
+                }
+            }
         }
     },
     "definitions": {
@@ -193,6 +232,19 @@
                 }
             ],
             "description": "A backup long term retention vault"
+        },
+        "BackupLongTermRetentionVaultListResult": {
+            "properties": {
+              "value": {
+                "type": "array",
+                "items": {
+                  "$ref": "#/definitions/BackupLongTermRetentionVault"
+                },
+                "description": "The list of vaults in the server."
+              }
+            },
+            "required": ["value"],
+            "description": "Represents the response to a list vaults request."
         }
     },
     "parameters": {
