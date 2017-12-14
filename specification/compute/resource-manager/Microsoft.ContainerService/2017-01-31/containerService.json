@@ -60,6 +60,11 @@
         },
         "x-ms-pageable": {
           "nextLinkName": "nextLink"
+        },
+        "x-ms-examples": {
+          "List Container Services": {
+            "$ref": "./examples/ContainerServicesList.json"
+          }
         }
       }
     },
@@ -122,7 +127,12 @@
             }
           }
         },
-        "x-ms-long-running-operation": true
+        "x-ms-long-running-operation": true,
+        "x-ms-examples": {
+          "Create/Update Container Service": {
+            "$ref": "./examples/ContainerServicesCreate_Update.json"
+          }
+        }
       },
       "get": {
         "tags": [
@@ -159,6 +169,11 @@
             "schema": {
               "$ref": "#/definitions/ContainerService"
             }
+          }
+        },
+        "x-ms-examples": {
+          "Get Container Service": {
+            "$ref": "./examples/ContainerServicesGet.json"
           }
         }
       },
@@ -199,7 +214,12 @@
             "description": "Not found"
           }
         },
-        "x-ms-long-running-operation": true
+        "x-ms-long-running-operation": true,
+        "x-ms-examples": {
+          "Delete Container Service": {
+            "$ref": "./examples/ContainerServicesDelete.json"
+          }
+        }
       }
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ContainerService/containerServices": {
@@ -235,6 +255,11 @@
         },
         "x-ms-pageable": {
           "nextLinkName": "nextLink"
+        },
+        "x-ms-examples": {
+          "List Container Services by Resource Group": {
+            "$ref": "./examples/ContainerServicesListByResourceGroup.json"
+          }
         }
       }
     }
