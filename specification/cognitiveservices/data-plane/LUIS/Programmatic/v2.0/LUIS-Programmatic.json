@@ -604,6 +604,12 @@
               "$ref": "#/definitions/BatchLabelExampleResponse"
             }
           },
+          "207": {
+            "description": "Indicates that the request was partially successful. The response contains a string array indicating the status of each of the added labels.",
+            "schema": {
+              "$ref": "#/definitions/BatchLabelExampleResponse"
+            }
+          },
           "default": {
             "description": "Error Response.",
             "schema": {
@@ -5939,6 +5945,9 @@
         },
         "hasError": {
           "type": "boolean"
+        },
+        "error": {
+          "$ref": "#/definitions/OperationStatus"
         }
       }
     },
