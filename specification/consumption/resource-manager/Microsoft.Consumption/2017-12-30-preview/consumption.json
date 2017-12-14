@@ -312,7 +312,8 @@
           "additionalProperties": {
             "type": "object",
             "$ref": "#/definitions/Notification"
-          }
+          },
+          "maxItems": 5
         }
       },
       "required": [
@@ -387,7 +388,9 @@
           "items": {
             "type": "string",
             "format": "email"
-          }
+          },
+          "minItems": 1,
+          "maxItems": 50
         },
         "contactRoles": {
           "description": "Contact roles to send the budget notification to when the threshold is exceeded.",
