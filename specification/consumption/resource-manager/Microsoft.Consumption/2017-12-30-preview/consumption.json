@@ -58,13 +58,13 @@
             "$ref": "./examples/BudgetsList.json"
           }
         },
-        "parameters": [    
+        "parameters": [
           {
             "$ref": "#/parameters/apiVersionParameter"
           },
           {
             "$ref": "#/parameters/subscriptionIdParameter"
-          }          
+          }
         ],
         "responses": {
           "200": {
@@ -100,7 +100,7 @@
             "$ref": "./examples/Budget.json"
           }
         },
-        "parameters": [    
+        "parameters": [
           {
             "$ref": "#/parameters/apiVersionParameter"
           },
@@ -109,7 +109,7 @@
           },
           {
             "$ref": "#/parameters/budgetNameParameter"
-          }        
+          }
         ],
         "responses": {
           "200": {
@@ -124,9 +124,6 @@
               "$ref": "#/definitions/ErrorResponse"
             }
           }
-        },
-        "x-ms-pageable": {
-          "nextLinkName": null
         }
       },
       "put": {
@@ -146,7 +143,7 @@
             "$ref": "./examples/UpdateBudget.json"
           }
         },
-        "parameters": [    
+        "parameters": [
           {
             "$ref": "#/parameters/apiVersionParameter"
           },
@@ -164,7 +161,7 @@
               "$ref": "#/definitions/Budget"
             },
             "description": "Parameters supplied to the Create Budget operation."
-          }        
+          }
         ],
         "responses": {
           "200": {
@@ -204,7 +201,7 @@
             "$ref": "./examples/DeleteBudget.json"
           }
         },
-        "parameters": [    
+        "parameters": [
           {
             "$ref": "#/parameters/apiVersionParameter"
           },
@@ -213,11 +210,39 @@
           },
           {
             "$ref": "#/parameters/budgetNameParameter"
-          }       
+          }
         ],
         "responses": {
           "200": {
-            "description": "OK. The request has succeeded."            
+            "description": "OK. The request has succeeded."
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        }
+      }
+    },
+    "/providers/Microsoft.Consumption/operations": {
+      "get": {
+        "tags": [
+          "Operations"
+        ],
+        "operationId": "Operations_List",
+        "description": "Lists all of the available consumption REST API operations.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK. The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/OperationListResult"
+            }
           },
           "default": {
             "description": "Error response describing why the operation failed.",
@@ -227,12 +252,12 @@
           }
         },
         "x-ms-pageable": {
-          "nextLinkName": null
+          "nextLinkName": "nextLink"
         }
       }
     }
   },
-  "definitions": {    
+  "definitions": {
     "BudgetsListResult": {
       "description": "Result of listing budgets. It contains a list of available budgets in the scope provided.",
       "properties": {
@@ -279,7 +304,7 @@
         "amount": {
           "description": "The total amount of cost to track with the budget",
           "type": "number",
-          "format": "decimal"         
+          "format": "decimal"
         },
         "timeGrain": {
           "description": "The time covered by a budget. Tracking of the amount will be reset based on the time grain.",
@@ -296,12 +321,12 @@
         },
         "timePeriod": {
           "description": "Has start and end date of the budget. The start date must be first of the month and should be less than the end date. Budget start date must be on or after June 1, 2017. Future start date should not be more than three months. Past start date should  be selected within the timegrain preiod. There are no restrictions on the end date.",
-          "$ref": "#/definitions/BudgetTimePeriod"          
+          "$ref": "#/definitions/BudgetTimePeriod"
         },
         "currentSpend": {
           "description": "The current amount of cost which is being tracked for a budget.",
           "$ref": "#/definitions/CurrentSpend",
-          "readOnly": true       
+          "readOnly": true
         },
         "notifications": {
           "type": "object",
@@ -351,10 +376,10 @@
           "description": "The unit of measure for the budget amount.",
           "type": "string",
           "readOnly": true
-        } 
+        }
       }
     },
-    "Notification" : {
+    "Notification": {
       "description": "The notification associated with a budget.",
       "properties": {
         "enabled": {
@@ -383,8 +408,7 @@
           "description": "Email addresses to send the budget notification to when the threshold is exceeded.",
           "type": "array",
           "items": {
-            "type": "string",
-            "format": "email"
+            "type": "string"
           },
           "minItems": 1,
           "maxItems": 50
@@ -403,6 +427,55 @@
         "threshold",
         "contactEmails"
       ]
+    },   
+    "Operation": {
+      "description": "A Consumption REST API operation.",
+      "type": "object",
+      "properties": {
+        "name": {
+          "description": "Operation name: {provider}/{resource}/{operation}.",
+          "type": "string",
+          "readOnly": true
+        },
+        "display": {
+          "description": "The object that represents the operation.",
+          "properties": {
+            "provider": {
+              "description": "Service provider: Microsoft.Consumption.",
+              "type": "string",
+              "readOnly": true
+            },
+            "resource": {
+              "description": "Resource on which the operation is performed: UsageDetail, etc.",
+              "type": "string",
+              "readOnly": true
+            },
+            "operation": {
+              "description": "Operation type: Read, write, delete, etc.",
+              "type": "string",
+              "readOnly": true
+            }
+          }
+        }
+      }
+    }, 
+    "OperationListResult": {
+      "description": "Result of listing consumption operations. It contains a list of operations and a URL link to get the next set of results.",
+      "properties": {
+        "value": {
+          "description": "List of consumption operations supported by the Microsoft.Consumption resource provider.",
+          "type": "array",
+          "readOnly": true,
+          "items": {
+            "$ref": "#/definitions/Operation"
+          }
+        },
+        "nextLink": {
+          "description": "URL to get the next set of operation list results if there are any.",
+          "type": "string",
+          "readOnly": true
+        }
+      }
     },
     "ErrorDetails": {
       "description": "The details of the error.",
