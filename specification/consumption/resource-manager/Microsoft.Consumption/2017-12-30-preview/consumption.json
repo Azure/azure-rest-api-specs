@@ -305,7 +305,13 @@
             "$ref": "#/definitions/Notification"
           }
         }
-      }
+      },
+      "required": [
+        "category",
+        "amount",
+        "timeGrain",
+        "timePeriod"
+      ]
     },
     "BudgetTimePeriod": {
       "description": "The start and end date for a budget.",
@@ -319,8 +325,11 @@
           "description": "The end date for the budget. If not provided, we default this to 10 years from the start date.",
           "type": "string",
           "format": "date-time"
-        } 
-      }
+        }
+      },
+      "required": [
+        "startDate"
+      ]
     },
     "CurrentSpend": {
       "description": "The current amount of cost which is being tracked for a budget.",
@@ -377,7 +386,13 @@
             "type": "string"
           }
         }
-      }
+      },
+      "required": [
+        "enabled",
+        "operator",
+        "threshold",
+        "contactEmails"
+      ]
     },
     "ErrorDetails": {
       "description": "The details of the error.",
