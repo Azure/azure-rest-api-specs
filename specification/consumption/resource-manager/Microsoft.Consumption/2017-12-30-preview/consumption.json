@@ -81,16 +81,16 @@
           }
         },
         "x-ms-pageable": {
-          "nextLinkName": "null"
+          "nextLinkName": null
         }
       }
     },
-    "/subscriptions/{subscriptionId}/providers/Microsoft.Consumption/budgets/{budgetName}": {
+    "/subscriptions/{subscriptionId}/providers/Microsoft.Consumption/budgets/{name}": {
       "get": {
         "tags": [
           "Budget"
         ],
-        "operationId": "Budget_Get",
+        "operationId": "Budgets_Get",
         "description": "Gets the budget for a subscription by budget name.",
         "externalDocs": {
           "url": "https://docs.microsoft.com/en-us/rest/api/consumption/"
@@ -126,14 +126,14 @@
           }
         },
         "x-ms-pageable": {
-          "nextLinkName": "null"
+          "nextLinkName": null
         }
       },
       "put": {
         "tags": [
           "Budget"
         ],
-        "operationId": "Budget_CreateOrUpdate",
+        "operationId": "Budgets_CreateOrUpdate",
         "description": "The operation to create or update a budget.",
         "externalDocs": {
           "url": "https://docs.microsoft.com/en-us/rest/api/consumption/"
@@ -173,6 +173,12 @@
               "$ref": "#/definitions/Budget"
             }
           },
+          "201": {
+            "description": "Created.",
+            "schema": {
+              "$ref": "#/definitions/Budget"
+            }
+          },
           "default": {
             "description": "Error response describing why the operation failed.",
             "schema": {
@@ -181,14 +187,14 @@
           }
         },
         "x-ms-pageable": {
-          "nextLinkName": "null"
+          "nextLinkName": null
         }
       },
       "delete": {
         "tags": [
           "Budget"
         ],
-        "operationId": "Budget_Delete",
+        "operationId": "Budgets_Delete",
         "description": "The operation to delete a budget.",
         "externalDocs": {
           "url": "https://docs.microsoft.com/en-us/rest/api/consumption/"
@@ -213,6 +219,9 @@
           "200": {
             "description": "OK. The request has succeeded."            
           },
+          "404": {
+            "description": "Not found."            
+          },
           "default": {
             "description": "Error response describing why the operation failed.",
             "schema": {
@@ -221,7 +230,7 @@
           }
         },
         "x-ms-pageable": {
-          "nextLinkName": "null"
+          "nextLinkName": null
         }
       }
     }
@@ -289,7 +298,7 @@
           }
         },
         "timePeriod": {
-          "description": "Has start and end date of the budget. The start date must be first of the month and should be less than the end date. Budget start date must be on or after June 1, 2017. Future start date should not be more than three months. Past start date should not be selected within the timegrain preiod. There are no restrictions on the end date.",
+          "description": "Has start and end date of the budget. The start date must be first of the month and should be less than the end date. Budget start date must be on or after June 1, 2017. Future start date should not be more than three months. Past start date should  be selected within the timegrain preiod. There are no restrictions on the end date.",
           "$ref": "#/definitions/BudgetTimePeriod"          
         },
         "currentSpend": {
@@ -376,7 +385,8 @@
           "description": "Email addresses to send the budget notification to when the threshold is exceeded.",
           "type": "array",
           "items": {
-            "type": "string"
+            "type": "string",
+            "format": "email"
           }
         },
         "contactRoles": {
@@ -461,7 +471,7 @@
       "type": "string"
     },
     "budgetNameParameter": {
-      "name": "budgetName",
+      "name": "name",
       "in": "path",
       "description": "Budget name.",
       "required": true,
