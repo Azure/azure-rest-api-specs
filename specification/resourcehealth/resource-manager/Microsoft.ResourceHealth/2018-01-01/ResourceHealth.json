@@ -37,7 +37,7 @@
           "Events"
         ],
         "operationId": "Events_ListBySubscriptionId",
-        "description": "Lists current service health events in the subscription. Use the nextLink property in the response to get the next page of events.",
+        "description": "Lists current service health events in the subscription.",
         "parameters": [
           {
             "$ref": "#/parameters/ApiVersionParameter"
@@ -51,7 +51,7 @@
         ],
         "responses": {
           "200": {
-            "description": "The body contains the list of the current service health events in the subscription",
+            "description": "The list of current service health events in the subscription",
             "schema": {
               "$ref": "#/definitions/events"
             }
@@ -79,7 +79,7 @@
           "ImpactedResources"
         ],
         "operationId": "ImpactedResources_ListBySubscriptionId",
-        "description": "Lists the current availability status for impacted resources in the subscription. Use the nextLink property in the response to get the next page of availability statuses.",
+        "description": "Lists the current availability status for impacted resources in the subscription.",
         "parameters": [
           {
             "$ref": "#/parameters/ApiVersionParameter"
@@ -93,7 +93,7 @@
         ],
         "responses": {
           "200": {
-            "description": "The body contains the list of the current availability status for impacted resources in the subscription",
+            "description": "The list of current availability status for impacted resources in the subscription",
             "schema": {
               "$ref": "#/definitions/availabilityStatusListResult"
             }
@@ -121,7 +121,7 @@
           "EventImpactedResources"
         ],
         "operationId": "EventImpactedResources_ListBySubscriptionId",
-        "description": "Lists the current availability status for resources impacted by given event in the subscription. Use the nextLink property in the response to get the next page of availability statuses.",
+        "description": "Lists the current availability status for resources impacted by given event in the subscription.",
         "parameters": [
           {
             "$ref": "#/parameters/ApiVersionParameter"
@@ -135,7 +135,7 @@
         ],
         "responses": {
           "200": {
-            "description": "The body contains the list of the current availability status for impacted resources in the subscription",
+            "description": "The list of current availability status for impacted resources in the subscription",
             "schema": {
               "$ref": "#/definitions/availabilityStatusListResult"
             }
@@ -163,7 +163,7 @@
           "AvailabilityStatuses"
         ],
         "operationId": "AvailabilityStatuses_ListBySubscriptionId",
-        "description": "Lists the current availability status for all the resources in the subscription. Use the nextLink property in the response to get the next page of availability statuses.",
+        "description": "Lists the current availability status for all the resources in the subscription.",
         "parameters": [
           {
             "$ref": "#/parameters/ApiVersionParameter"
@@ -180,7 +180,7 @@
         ],
         "responses": {
           "200": {
-            "description": "The body contains the list of the current availability status for all the resources in the subscription",
+            "description": "The list of current availability status for all the resources in the subscription",
             "schema": {
               "$ref": "#/definitions/availabilityStatusListResult"
             }
@@ -208,7 +208,7 @@
           "AvailabilityStatuses"
         ],
         "operationId": "AvailabilityStatuses_ListByResourceGroup",
-        "description": "Lists the current availability status for all the resources in the resource group. Use the nextLink property in the response to get the next page of availability statuses.",
+        "description": "Lists the current availability status for all the resources in the resource group.",
         "parameters": [
           {
             "$ref": "#/parameters/SubscriptionIdParameter"
@@ -228,7 +228,7 @@
         ],
         "responses": {
           "200": {
-            "description": "The body contains the list of the current availability status for all the resources in the resource group",
+            "description": "The list of current availability status for all the resources in the resource group",
             "schema": {
               "$ref": "#/definitions/availabilityStatusListResult"
             }
@@ -278,7 +278,7 @@
         ],
         "responses": {
           "200": {
-            "description": "The body contains the current availability status for a single resource",
+            "description": "The current availability status for a single resource",
             "schema": {
               "$ref": "#/definitions/availabilityStatus"
             }
@@ -303,7 +303,7 @@
           "AvailabilityStatuses"
         ],
         "operationId": "AvailabilityStatuses_List",
-        "description": "Lists all historical availability transitions and impacting events for a single resource. Use the nextLink property in the response to get the next page of availability status",
+        "description": "Lists all historical availability transitions and impacting events for a single resource.",
         "parameters": [
           {
             "name": "resourceUri",
@@ -325,7 +325,7 @@
         ],
         "responses": {
           "200": {
-            "description": "The body contains the list of the historical availability statuses for a single resource",
+            "description": "The list of historical availability statuses for a single resource",
             "schema": {
               "$ref": "#/definitions/availabilityStatusListResult"
             }
@@ -361,7 +361,7 @@
         ],
         "responses": {
           "200": {
-            "description": "The body contains the list of available operations for the resourcehealth resource provider",
+            "description": "The list of available operations for the resourcehealth resource provider",
             "schema": {
               "$ref": "#/definitions/operationListResult"
             }
@@ -377,6 +377,9 @@
     }
   },
   "definitions": {
+    "Resource": {
+      "$ref": "../../../../common-types/resource-management/v1/types.json"
+    },
     "events": {
       "properties": {
         "value": {
@@ -400,19 +403,8 @@
       "type": "object",
       "description": "Service health event",
       "properties": {
-        "id": {
-          "type": "string",
-          "description": "Azure Resource Manager Identity for the event resource."
-        },
-        "name": {
-          "type": "string",
-          "description": "Tracking Id for the event resource"
-        },
-        "type": {
-          "type": "string",
-          "description": "Microsoft.ResourceHealth/events"
-        },
         "properties": {
+          "x-ms-client-flatten": true,
           "type": "object",
           "description": "Properties of event.",
           "properties": {
@@ -485,7 +477,12 @@
             }
           }
         }
-      }
+      },
+      "allOf": [
+        {
+          "$ref": "#/definitions/Resource"
+        }
+      ]
     },
     "impact": {
       "description": "Azure service impacted by the service health event.",
