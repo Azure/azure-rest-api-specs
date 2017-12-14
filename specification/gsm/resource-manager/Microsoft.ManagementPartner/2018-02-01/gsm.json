@@ -1,0 +1,190 @@
+{
+    "swagger": "2.0",
+    "info": {
+        "title": "ACE Provisioning GSM API",
+        "description": "This API describe ACE Provisioning GSM",
+        "version": "2018-01-01"
+    },
+    "host": "management.azure.com",
+    "schemes": [
+        "https"
+    ],
+    "produces": [
+        "application/json"
+    ],
+    "consumes": [
+        "application/json"
+    ],
+    "securityDefinitions": {
+        "azure_auth": {
+            "type": "oauth2",
+            "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
+            "flow": "implicit",
+            "description": "Azure Active Directory OAuth2 Flow",
+            "scopes": {
+                "user_impersonation": "impersonate your user account"
+            }
+        }
+    },
+    "paths": {
+        "/providers/Microsoft.ManagementPartner/partners/{partnerId}": {
+            "get": {
+                "summary": "Get a specific `Partner`.",
+                "description": "Get the details of the `PartnerId`.",
+                "operationId": "Partner_Get",
+                "x-ms-examples": {
+                    "GetPartnerDetails": {
+                        "$ref": "./examples/GetPartnerDetails.json"
+                    }
+                },
+                "parameters": [
+                    {
+                        "$ref": "#/parameters/PartnerIdParameter"
+                    },
+                    {
+                        "$ref": "#/parameters/ApiVersionParameter"
+                    }
+                ],
+                "tags": [
+                    "Reservation"
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Get the details of the `Partner`.",
+                        "schema": {
+                            "$ref": "#/definitions/PartnerResponse"
+                        }
+                    },
+                    "default": {
+                        "description": "Unexpected error",
+                        "schema": {
+                            "$ref": "#/definitions/Error"
+                        }
+                    }
+                }
+            }
+        }
+    },
+    "definitions": {
+     "PartnerResponse": {
+            "type": "object",
+            "x-ms-azure-resource": true,
+            "properties": {
+                "etag": {
+                    "type": "integer"
+                },
+                "id": {
+                    "type": "string",
+                    "readOnly": true,
+                    "description": "Identifier of the reservation"
+                },
+                "name": {
+                    "type": "string",
+                    "readOnly": true,
+                    "description": "Name of the reservation"
+                },
+                "properties": {
+                    "x-ms-client-flatten": true,
+                    "$ref": "#/definitions/PartnerProperties"
+                },
+                "type": {
+                    "type": "string",
+                    "readOnly": true,
+                    "description": "Type of resource. \"Microsoft.ManagementPartner/partners\""
+                }
+            }
+        },
+        "PartnerProperties": {
+            "type": "object",
+            "properties": {
+                "displayName": {
+                    "type": "string",
+                    "description": "Friendly name for user to easily identified the reservation."
+                },
+                "requestDateTime": {
+                    "type": "string",
+                    "format": "date-time",
+                    "description": "This is the DateTime when the reservation was initially requested for purchase."
+                },
+                "createdDateTime": {
+                    "type": "string",
+                    "format": "date-time",
+                    "description": "This is the DateTime when the reservation was created."
+                },
+                "partnerId": {
+                    "type": "string",
+                    "format": "date",
+                    "description": "This is the date when the Reservation will expire."
+                },
+                "objectId": {
+                    "type": "string",
+                    "format": "date",
+                    "description": "This is the date when the Reservation will expire."
+                },
+                "tenantId": {
+                   "type": "string",
+                    "format": "date",
+                    "description": "This is the date when the Reservation will expire."
+                }
+            }
+        },
+        "ErrorResponseCode": {
+            "type": "string",
+            "enum": [
+                "NotSpecified",
+                "InternalServerError",
+                "ServerTimeout",
+                "AuthorizationFailed",
+                "BadRequest",
+                "ClientCertificateThumbprintNotSet",
+                "InvalidRequestContent",
+                "OperationFailed",
+                "HttpMethodNotSupported",
+                "InvalidRequestUri",
+                "MissingTenantId",
+                "InvalidTenantId",
+                "InvalidPartnerId",
+                "InvalidReservationId",
+                "UnauthenticatedRequestsThrottled",
+                "InvalidHealthCheckType",
+                "Forbidden",
+            ]
+        },
+        "Error": {
+            "type": "object",
+            "properties": {
+                "error": {
+                    "$ref": "#/definitions/ExtendedErrorInfo"
+                }
+            }
+        },
+        "ExtendedErrorInfo": {
+            "type": "object",
+            "properties": {
+                "code": {
+                    "$ref": "#/definitions/ErrorResponseCode"
+                },
+                "message": {
+                    "type": "string"
+                }
+            }
+        }
+    },
+    "parameters": {
+        "PartnerIdParameter": {
+            "name": "reservationId",
+            "x-ms-parameter-location": "method",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "Id of the Partner"
+        },
+        "ApiVersionParameter": {
+            "name": "api-version",
+            "in": "query",
+            "description": "Supported version.",
+            "required": true,
+            "type": "string"
+        }
+    }
+}
