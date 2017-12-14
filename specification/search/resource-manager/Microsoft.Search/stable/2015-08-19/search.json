@@ -425,6 +425,83 @@
         },
         "x-ms-long-running-operation": true
       },
+      "patch": {
+        "tags": [
+          "Services"
+        ],
+        "operationId": "Services_Update",
+        "description": "Updates an existing Search service in the given resource group.",
+        "externalDocs": {
+          "url": "https://aka.ms/search-manage"
+        },
+        "parameters": [
+          {
+            "$ref": "#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "searchServiceName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the Azure Search service to update."
+          },
+          {
+            "name": "service",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/SearchService"
+            },
+            "description": "The definition of the Search service to update."
+          },
+          {
+            "$ref": "#/parameters/ClientRequestIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The existing service definition was successfully updated. If you changed the number of replicas or partitions, the scale operation will happen asynchronously. You can periodically get your service definition and monitor progress via the provisioningState property.",
+            "schema": {
+              "$ref": "#/definitions/SearchService"
+            },
+            "examples": {
+              "application/json": {
+                "id": "/subscriptions/<your subscription ID here>/resourceGroups/Default-ResourceGroup/providers/Microsoft.Search/searchServices/your-service-name-here",
+                "name": "your-service-name-here",
+                "location": "westus",
+                "type": "Microsoft.Search/searchServices",
+                "tags": {  
+                    "app-name": "My e-commerce app"
+                },
+                "sku": {  
+                    "name": "standard"
+                },
+                "properties":{  
+                    "replicaCount": 3,
+                    "partitionCount": 1,
+                    "status": "provisioning",
+                    "statusDetails": "",
+                    "hostingMode": "default",
+                    "provisioningState": "provisioning"
+                }
+              }
+            }
+          },
+          "default": {
+            "description": "HTTP 400 (Bad Request): The given service definition is invalid or you attempted to change a property that is immutable; See the error code and message in the response for details. HTTP 404 (Not Found): The subscription or resource group could not be found. HTTP 409 (Conflict): The specified subscription is disabled.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-long-running-operation": true
+      },
       "get": {
         "tags": [
           "Services"
