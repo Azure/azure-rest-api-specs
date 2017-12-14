@@ -1,0 +1,70 @@
+{
+    "parameters": {
+        "subscriptionId": "e7a191f5-713c-4bdb-b5e4-cf3dd90230ef",
+        "resourceGroupName": "SwaggerTestRg",
+        "vaultName": "NetSDKTestRsVault",
+        "api-version": "2017-07-01",
+        "$filter": "backupManagementType eq 'AzureWorkload'"
+    },
+    "responses": {
+        "200": {
+            "body": {
+                "value": [
+                {
+                    "id": "/backupmanagement/resources/2463056370089208293/backupPolicies/HourlyLogBackup",
+                    "name": "HourlyLogBackup",
+                    "type": "Microsoft.RecoveryServices/vaults/backupPolicies",
+                    "properties": {
+                        "backupManagementType": "AzureWorkload",
+                        "workLoadType": "SQLDataBase",
+                        "settings": {
+                            "timeZone": "UTC",
+                            "issqlcompression": false
+                        },
+                        "subProtectionPolicy": [
+                        {
+                            "policyType": "Full",
+                            "schedulePolicy": {
+                                "schedulePolicyType": "SimpleSchedulePolicy",
+                                "scheduleRunFrequency": "Daily",
+                                "scheduleRunTimes": [
+                                    "2017-12-05T19:00:00Z"
+                                ],
+                                "scheduleWeeklyFrequency": 0
+                            },
+                            "retentionPolicy": {
+                                "retentionPolicyType": "LongTermRetentionPolicy",
+                                "dailySchedule": {
+                                    "retentionTimes": [
+                                        "2017-12-05T19:00:00Z"
+                                    ],
+                                    "retentionDuration": {
+                                        "count": 30,
+                                        "durationType": "Days"
+                                    }
+                                }
+                            }
+                        },
+                        {
+                            "policyType": "Log",
+                            "schedulePolicy": {
+                                "schedulePolicyType": "LogSchedulePolicy",
+                                "scheduleFrequencyInMins": 60
+                            },
+                            "retentionPolicy": {
+                                "retentionPolicyType": "SimpleRetentionPolicy",
+                                "retentionDuration": {
+                                    "count": 30,
+                                    "durationType": "Days"
+                                }
+                            }
+                        }
+                        ],
+                        "protectedItemsCount": 0
+                    }
+                }
+                ]
+            }
+        }
+    }
+}

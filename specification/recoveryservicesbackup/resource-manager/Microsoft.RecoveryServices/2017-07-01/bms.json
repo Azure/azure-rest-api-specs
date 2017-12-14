@@ -18,6 +18,60 @@
     "application/json"
   ],
   "paths": {
+    "/Subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.RecoveryServices/vaults/{vaultName}/backupFabrics/{fabricName}/backupProtectionIntent/{intentObjectName}": {
+      "put": {
+        "tags": [
+          "ProtectionIntent"
+        ],
+        "description": "Create Intent for Enabling backup of an item. This is a synchronous operation.",
+        "operationId": "ProtectionIntent_CreateOrUpdate",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/ApiVersion"
+          },
+          {
+            "$ref": "#/parameters/VaultName"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupName"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionId"
+          },
+          {
+            "name": "fabricName",
+            "in": "path",
+            "description": "Fabric name associated with the backup item.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "intentObjectName",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "parameters",
+            "in": "body",
+            "description": "resource backed up item",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/ProtectionIntentResource"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        },
+        "deprecated": false
+      }
+    },
     "/Subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.RecoveryServices/vaults/{vaultName}/backupJobs": {
       "get": {
         "tags": [
@@ -70,8 +124,14 @@
           "nextLinkName": "nextLink"
         },
         "x-ms-examples": {
-          "ListJobs": {
+          "List All Jobs": {
             "$ref": "./examples/ListJobs.json"
+          },
+          "List Jobs With Filters": {
+            "$ref": "./examples/ListJobsWithAllSupportedFilters.json"
+          },
+          "List Jobs With Time Filter": {
+            "$ref": "./examples/ListJobsWithStartTimeAndEndTimeFilters.json"
           }
         }
       }
@@ -115,7 +175,12 @@
             }
           }
         },
-        "deprecated": false
+        "deprecated": false,
+        "x-ms-examples": {
+          "Get Job Details": {
+            "$ref": "./examples/GetJobDetails.json"
+          }
+        }
       }
     },
     "/Subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.RecoveryServices/vaults/{vaultName}/backupJobs/operationResults/{operationId}": {
@@ -157,11 +222,18 @@
             }
           },
           "202": {
-            "description": "Accepted"
+            "description": "Accepted",
+            "schema": {
+              "$ref": "#/definitions/OperationResultInfoBaseResource"
+            }
           }
         },
         "deprecated": false,
-        "x-ms-long-running-operation": true
+        "x-ms-examples": {
+          "Export Jobs Operation Results": {
+            "$ref": "./examples/ExportJobsOperationResult.json"
+          }
+        }
       }
     },
     "/Subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.RecoveryServices/vaults/{vaultName}/backupJobsExport": {
@@ -202,7 +274,11 @@
         },
         "deprecated": false,
         "x-ms-odata": "#/definitions/JobQueryObject",
-        "x-ms-long-running-operation": true
+        "x-ms-examples": {
+          "Export Jobs": {
+            "$ref": "./examples/TriggerExoprtJobs.json"
+          }
+        }
       }
     },
     "/Subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.RecoveryServices/vaults/{vaultName}/backupPolicies": {
@@ -248,6 +324,14 @@
         "x-ms-odata": "#/definitions/ProtectionPolicyQueryObject",
         "x-ms-pageable": {
           "nextLinkName": "nextLink"
+        },
+        "x-ms-examples": {
+          "List Azure Vm Protection Policies": {
+            "$ref": "./examples/AzureIaasVM_BackupPolicies_List.json"
+          },
+          "List Azure Workload Protection Policies": {
+            "$ref": "./examples/AzureWorkload_BackupPolicies_List.json"
+          }
         }
       }
     },
@@ -301,6 +385,11 @@
         "x-ms-odata": "#/definitions/ProtectedItemQueryObject",
         "x-ms-pageable": {
           "nextLinkName": "nextLink"
+        },
+        "x-ms-examples": {
+          "List Protected Azure Virtual Machines": {
+            "$ref": "./examples/AzureIaasVM_BackupProtectedItems_List.json"
+          }
         }
       }
     },
@@ -360,6 +449,7 @@
   },
   "definitions": {
     "AzureFileshareProtectedItem": {
+      "description": "Azure File Share workload-specific backup item.",
       "type": "object",
       "allOf": [
         {
@@ -392,6 +482,7 @@
           }
         },
         "healthStatus": {
+          "description": "backups running status for this backup item.",
           "enum": [
             "Passed",
             "ActionRequired",
@@ -421,6 +512,7 @@
       "x-ms-discriminator-value": "AzureFileShareProtectedItem"
     },
     "AzureFileshareProtectedItemExtendedInfo": {
+      "description": "Additional information about Azure File Share backup item.",
       "type": "object",
       "properties": {
         "oldestRecoveryPoint": {
@@ -775,6 +867,22 @@
         }
       },
       "x-ms-discriminator-value": "AzureIaasVM"
+    },
+    "AzureResourceProtectionIntent": {
+      "description": "IaaS VM specific backup protection intent item.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/ProtectionIntent"
+        }
+      ],
+      "properties": {
+        "friendlyName": {
+          "description": "Friendly name of the VM represented by this backup item.",
+          "type": "string"
+        }
+      },
+      "x-ms-discriminator-value": "AzureResourceProtectionIntent"
     },
     "AzureSqlProtectedItem": {
       "description": "Azure SQL workload-specific backup item.",
@@ -2243,7 +2351,7 @@
             "modelAsString": false
           }
         },
-        "Headers": {
+        "headers": {
           "description": "HTTP headers associated with this operation.",
           "type": "object",
           "additionalProperties": {
@@ -2430,6 +2538,76 @@
           "items": {
             "$ref": "#/definitions/ProtectedItemResource"
           }
+        }
+      }
+    },
+    "ProtectionIntent": {
+      "description": "Base class for backup ProtectionIntent.",
+      "type": "object",
+      "properties": {
+        "protectionIntentItemType": {
+          "description": "backup protectionIntent type.",
+          "type": "string"
+        },
+        "backupManagementType": {
+          "description": "Type of backup managemenent for the backed up item.",
+          "enum": [
+            "Invalid",
+            "AzureIaasVM",
+            "MAB",
+            "DPM",
+            "AzureBackupServer",
+            "AzureSql",
+            "AzureStorage",
+            "AzureWorkload"
+          ],
+          "type": "string",
+          "x-ms-enum": {
+            "name": "BackupManagementType",
+            "modelAsString": true
+          }
+        },
+        "sourceResourceId": {
+          "description": "ARM ID of the resource to be backed up.",
+          "type": "string"
+        },
+        "itemId": {
+          "description": "ID of the item which is getting protected, In case of Azure Vm , it is ProtectedItemId",
+          "type": "string"
+        },
+        "policyId": {
+          "description": "ID of the backup policy with which this item is backed up.",
+          "type": "string"
+        },
+        "protectionState": {
+          "description": "Backup state of this backup item.",
+          "enum": [
+            "Invalid",
+            "NotProtected",
+            "Protecting",
+            "Protected",
+            "ProtectionFailed"
+          ],
+          "type": "string",
+          "x-ms-enum": {
+            "name": "ProtectionStatus",
+            "modelAsString": true
+          }
+        }
+      },
+      "discriminator": "protectionIntentItemType"
+    },
+    "ProtectionIntentResource": {
+      "description": "Base class for backup ProtectionIntent.",
+      "allOf": [
+        {
+          "$ref": "#/definitions/Resource"
+        }
+      ],
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/ProtectionIntent",
+          "description": "ProtectionIntentResource properties"
         }
       }
     },

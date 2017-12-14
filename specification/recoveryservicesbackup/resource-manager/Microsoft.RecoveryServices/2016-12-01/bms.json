@@ -251,8 +251,7 @@
             "description": "NoContent"
           }
         },
-        "deprecated": false,
-        "x-ms-long-running-operation": true
+        "deprecated": false
       }
     },
     "/Subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.RecoveryServices/vaults/{vaultName}/backupFabrics/{fabricName}/protectableContainers": {
@@ -304,6 +303,11 @@
         "x-ms-odata": "#/definitions/BMSContainerQueryObject",
         "x-ms-pageable": {
           "nextLinkName": "nextLink"
+        },
+        "x-ms-examples": {
+          "List Azure Storage Protectable Items": {
+            "$ref": "./examples/AzureStorage_ProtectableContainers_List.json"
+          }
         }
       }
     },
@@ -392,7 +396,7 @@
           {
             "name": "parameters",
             "in": "body",
-            "description": "parameters",
+            "description": "Request body for operation",
             "required": true,
             "schema": {
               "$ref": "#/definitions/ProtectionContainerResource"
@@ -410,7 +414,12 @@
             "description": "Accepted"
           }
         },
-        "deprecated": false
+        "deprecated": false,
+        "x-ms-examples": {
+          "RegisterAzure Storage ProtectionContainers": {
+            "$ref": "./examples/AzureStorage_ProtectionContainers_Register.json"
+          }
+        }
       },
       "delete": {
         "tags": [
@@ -457,8 +466,7 @@
             "description": "NoContent"
           }
         },
-        "deprecated": false,
-        "x-ms-long-running-operation": true
+        "deprecated": false
       }
     },
     "/Subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.RecoveryServices/vaults/{vaultName}/backupFabrics/{fabricName}/protectionContainers/{containerName}/inquire": {
@@ -505,7 +513,12 @@
             "description": "Accepted"
           }
         },
-        "deprecated": false
+        "deprecated": false,
+        "x-ms-examples": {
+          "Inquire Azure Storage Protection Containers": {
+            "$ref": "./examples/AzureStorage_ProtectionContainers_Inquire.json"
+          }
+        }
       }
     },
     "/Subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.RecoveryServices/vaults/{vaultName}/backupFabrics/{fabricName}/protectionContainers/{containerName}/items": {
@@ -632,8 +645,7 @@
             "description": "NoContent"
           }
         },
-        "deprecated": false,
-        "x-ms-long-running-operation": true
+        "deprecated": false
       }
     },
     "/Subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.RecoveryServices/vaults/{vaultName}/backupFabrics/{fabricName}/protectionContainers/{containerName}/protectedItems/{protectedItemName}": {
@@ -758,7 +770,11 @@
           }
         },
         "deprecated": false,
-        "x-ms-long-running-operation": true
+        "x-ms-examples": {
+          "Enable Protection on Azure IaasVm": {
+            "$ref": "./examples/IaasVmConfigureProtection.json"
+          }
+        }
       },
       "delete": {
         "tags": [
@@ -812,8 +828,7 @@
             "description": "NoContent"
           }
         },
-        "deprecated": false,
-        "x-ms-long-running-operation": true
+        "deprecated": false
       }
     },
     "/Subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.RecoveryServices/vaults/{vaultName}/backupFabrics/{fabricName}/protectionContainers/{containerName}/protectedItems/{protectedItemName}/backup": {
@@ -876,7 +891,11 @@
           }
         },
         "deprecated": false,
-        "x-ms-long-running-operation": true
+        "x-ms-examples": {
+          "Trigger Backup": {
+            "$ref": "./examples/TriggerBackup_Post.json"
+          }
+        }
       }
     },
     "/Subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.RecoveryServices/vaults/{vaultName}/backupFabrics/{fabricName}/protectionContainers/{containerName}/protectedItems/{protectedItemName}/operationResults/{operationId}": {
@@ -1207,8 +1226,7 @@
             "description": "Accepted"
           }
         },
-        "deprecated": false,
-        "x-ms-long-running-operation": true
+        "deprecated": false
       }
     },
     "/Subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.RecoveryServices/vaults/{vaultName}/backupFabrics/{fabricName}/protectionContainers/{containerName}/protectedItems/{protectedItemName}/recoveryPoints/{recoveryPointId}/restore": {
@@ -1278,7 +1296,14 @@
           }
         },
         "deprecated": false,
-        "x-ms-long-running-operation": true
+        "x-ms-examples": {
+          "Restore to New Azure IaasVm": {
+            "$ref": "./examples/TriggerRestore_ALR.json"
+          },
+          "Restore Disks": {
+            "$ref": "./examples/TriggerRestore_RestoreDisks.json"
+          }
+        }
       }
     },
     "/Subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.RecoveryServices/vaults/{vaultName}/backupFabrics/{fabricName}/protectionContainers/{containerName}/protectedItems/{protectedItemName}/recoveryPoints/{recoveryPointId}/revokeInstantItemRecovery": {
@@ -1338,8 +1363,7 @@
             "description": "Accepted"
           }
         },
-        "deprecated": false,
-        "x-ms-long-running-operation": true
+        "deprecated": false
       }
     },
     "/Subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.RecoveryServices/vaults/{vaultName}/backupFabrics/{fabricName}/refreshContainers": {
@@ -1386,8 +1410,7 @@
           }
         },
         "deprecated": false,
-        "x-ms-odata": "#/definitions/BMSRefreshContainersQueryObject",
-        "x-ms-long-running-operation": true
+        "x-ms-odata": "#/definitions/BMSRefreshContainersQueryObject"
       }
     },
     "/Subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.RecoveryServices/vaults/{vaultName}/backupJobs/{jobName}/cancel": {
@@ -1427,7 +1450,11 @@
           }
         },
         "deprecated": false,
-        "x-ms-long-running-operation": true
+        "x-ms-examples": {
+          "Cancel Job": {
+            "$ref": "./examples/TriggerCancelJob.json"
+          }
+        }
       }
     },
     "/Subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.RecoveryServices/vaults/{vaultName}/backupJobs/{jobName}/operationResults/{operationId}": {
@@ -1480,7 +1507,11 @@
           }
         },
         "deprecated": false,
-        "x-ms-long-running-operation": true
+        "x-ms-examples": {
+          "Cancel Job Operation Result": {
+            "$ref": "./examples/CancelJobOperationResult.json"
+          }
+        }
       }
     },
     "/Subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.RecoveryServices/vaults/{vaultName}/backupOperationResults/{operationId}": {
@@ -1525,8 +1556,7 @@
             "description": "NoContent"
           }
         },
-        "deprecated": false,
-        "x-ms-long-running-operation": true
+        "deprecated": false
       }
     },
     "/Subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.RecoveryServices/vaults/{vaultName}/backupOperations/{operationId}": {
@@ -1610,7 +1640,12 @@
             }
           }
         },
-        "deprecated": false
+        "deprecated": false,
+        "x-ms-examples": {
+          "Get Azure IaasVm Protection Policy Details": {
+            "$ref": "./examples/AzureIaasVM_ProtectionPolicies_Get.json"
+          }
+        }
       },
       "put": {
         "tags": [
@@ -1663,7 +1698,17 @@
           }
         },
         "deprecated": false,
-        "x-ms-long-running-operation": true
+        "x-ms-examples": {
+          "Create or Update Simple Azure Vm Protection Policy": {
+            "$ref": "./examples/AzureIaasVM_ProtectionPolicies_CreateOrUpdate_Simple.json"
+          },
+          "Create or Update Full Azure Vm Protection Policy": {
+            "$ref": "./examples/AzureIaasVM_ProtectionPolicies_CreateOrUpdate_Complex.json"
+          },
+          "Create or Update Full Azure Workload Protection Policy": {
+            "$ref": "./examples/AzureWorkload_ProtectionPolicies_CreateOrUpdate_Complex.json"
+          }
+        }
       },
       "delete": {
         "tags": [
@@ -1703,7 +1748,12 @@
             "description": "NoContent"
           }
         },
-        "deprecated": false
+        "deprecated": false,
+        "x-ms-examples": {
+          "Delete Azure Vm Protection Policy": {
+            "$ref": "./examples/AzureIaasVM_ProtectionPolicies_Delete.json"
+          }
+        }
       }
     },
     "/Subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.RecoveryServices/vaults/{vaultName}/backupPolicies/{policyName}/operationResults/{operationId}": {
@@ -1752,7 +1802,12 @@
             }
           }
         },
-        "deprecated": false
+        "deprecated": false,
+        "x-ms-examples": {
+          "Get Protection Policy Operation Results": {
+            "$ref": "./examples/AzureIaasVM_ProtectionPolicyOperationResults_Get.json"
+          }
+        }
       }
     },
     "/Subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.RecoveryServices/vaults/{vaultName}/backupPolicies/{policyName}/operations/{operationId}": {
@@ -1801,7 +1856,12 @@
             }
           }
         },
-        "deprecated": false
+        "deprecated": false,
+        "x-ms-examples": {
+          "Get Protection Policy Operation Status": {
+            "$ref": "./examples/AzureIaasVM_ProtectionPolicyOperationStatuses_Get.json"
+          }
+        }
       }
     },
     "/Subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.RecoveryServices/vaults/{vaultName}/backupProtectableItems": {
@@ -1854,6 +1914,11 @@
         "x-ms-odata": "#/definitions/BMSPOQueryObject",
         "x-ms-pageable": {
           "nextLinkName": "nextLink"
+        },
+        "x-ms-examples": {
+          "List Protectable Azure Virtual Machines": {
+            "$ref": "./examples/AzureIaasVM_BackupProtectableItems_List.json"
+          }
         }
       }
     },
@@ -2037,14 +2102,14 @@
           "description": "Backup engine Agent version",
           "type": "string"
         },
-        "DPMServers": {
+        "dpmServers": {
           "description": "List of BackupEngines protecting the container",
           "type": "array",
           "items": {
             "type": "string"
           }
         },
-        "UpgradeAvailable": {
+        "upgradeAvailable": {
           "description": "To check if upgrade available",
           "type": "boolean"
         },
@@ -2120,6 +2185,7 @@
       "x-ms-discriminator-value": "AzureFileShare"
     },
     "AzureFileshareProtectedItem": {
+      "description": "Azure File Share workload-specific backup item.",
       "type": "object",
       "allOf": [
         {
@@ -2152,6 +2218,7 @@
           }
         },
         "healthStatus": {
+          "description": "backups running status for this backup item.",
           "enum": [
             "Passed",
             "ActionRequired",
@@ -2181,6 +2248,7 @@
       "x-ms-discriminator-value": "AzureFileShareProtectedItem"
     },
     "AzureFileshareProtectedItemExtendedInfo": {
+      "description": "Additional information about Azure File Share backup item.",
       "type": "object",
       "properties": {
         "oldestRecoveryPoint": {
@@ -2228,6 +2296,7 @@
       "x-ms-discriminator-value": "AzureStorage"
     },
     "AzureFileShareRecoveryPoint": {
+      "description": "Azure File Share workload specific backup copy.",
       "type": "object",
       "allOf": [
         {
@@ -3265,7 +3334,7 @@
           "description": "To check if backup agent upgrade available",
           "type": "boolean"
         },
-        "isDPMUpgradeAvailable": {
+        "isDpmUpgradeAvailable": {
           "description": "To check if backup engine upgrade available",
           "type": "boolean"
         },
@@ -3749,7 +3818,7 @@
           }
         },
         "extendedInfo": {
-          "description": "ExtendedInfo",
+          "description": "In Get Recovery Point, it tells whether extended information about recovery point is asked.",
           "type": "boolean"
         }
       }
@@ -3954,14 +4023,14 @@
           "description": "Backup engine Agent version",
           "type": "string"
         },
-        "DPMServers": {
+        "dpmServers": {
           "description": "List of BackupEngines protecting the container",
           "type": "array",
           "items": {
             "type": "string"
           }
         },
-        "UpgradeAvailable": {
+        "upgradeAvailable": {
           "description": "To check if upgrade available",
           "type": "boolean"
         },
@@ -4306,7 +4375,7 @@
           "$ref": "#/definitions/KeyAndSecretDetails",
           "description": "Required details for recovering an encrypted VM. Applicable only when IsSourceVMEncrypted is true."
         },
-        "isInstantILRSessionActive": {
+        "isInstantIlrSessionActive": {
           "description": "Is the session to recover items from this backup copy still active.",
           "type": "boolean"
         },
@@ -5433,6 +5502,7 @@
       }
     },
     "RestoreFileSpecs": {
+      "description": "Restore file specs like file path, type and target folder path info.",
       "type": "object",
       "properties": {
         "path": {
@@ -5696,6 +5766,7 @@
       }
     },
     "TargetAFSRestoreInfo": {
+      "description": "Target Azure File Share Info.",
       "type": "object",
       "properties": {
         "name": {
