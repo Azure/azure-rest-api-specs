@@ -46,7 +46,7 @@
                     }
                 ],
                 "tags": [
-                    "Reservation"
+                    "partner"
                 ],
                 "responses": {
                     "200": {
@@ -76,12 +76,12 @@
                 "id": {
                     "type": "string",
                     "readOnly": true,
-                    "description": "Identifier of the reservation"
+                    "description": "Identifier of the partner"
                 },
                 "name": {
                     "type": "string",
                     "readOnly": true,
-                    "description": "Name of the reservation"
+                    "description": "Name of the partner"
                 },
                 "properties": {
                     "x-ms-client-flatten": true,
@@ -97,34 +97,32 @@
         "PartnerProperties": {
             "type": "object",
             "properties": {
-                "displayName": {
-                    "type": "string",
-                    "description": "Friendly name for user to easily identified the reservation."
+                "tenantId": {
+                   "type": "string",
+                    "description": "This is the tenant id."
                 },
-                "requestDateTime": {
+                "objectId": {
                     "type": "string",
-                    "format": "date-time",
-                    "description": "This is the DateTime when the reservation was initially requested for purchase."
+                    "description": "This is the object id."
+                },
+                "partnerId": {
+                    "type": "string",
+                    "description": "This is the partner id"
                 },
                 "createdDateTime": {
                     "type": "string",
                     "format": "date-time",
-                    "description": "This is the DateTime when the reservation was created."
+                    "description": "This is the DateTime when the partner was created."
                 },
-                "partnerId": {
+                "modifiedDateTime": {
                     "type": "string",
-                    "format": "date",
-                    "description": "This is the date when the Reservation will expire."
+                    "format": "date-time",
+                    "description": "This is the DateTime when the partner was created."
                 },
-                "objectId": {
+                "deletedDateTime": {
                     "type": "string",
-                    "format": "date",
-                    "description": "This is the date when the Reservation will expire."
-                },
-                "tenantId": {
-                   "type": "string",
-                    "format": "date",
-                    "description": "This is the date when the Reservation will expire."
+                    "format": "date-time",
+                    "description": "This is the DateTime when the partner was created."
                 }
             }
         },
@@ -144,7 +142,7 @@
                 "MissingTenantId",
                 "InvalidTenantId",
                 "InvalidPartnerId",
-                "InvalidReservationId",
+                "InvalidpartnerId",
                 "UnauthenticatedRequestsThrottled",
                 "InvalidHealthCheckType",
                 "Forbidden",
@@ -172,7 +170,7 @@
     },
     "parameters": {
         "PartnerIdParameter": {
-            "name": "reservationId",
+            "name": "partnerId",
             "x-ms-parameter-location": "method",
             "in": "path",
             "required": true,
