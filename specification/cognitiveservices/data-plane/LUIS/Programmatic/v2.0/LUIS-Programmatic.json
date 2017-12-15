@@ -987,7 +987,7 @@
             "in": "body",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/CompositeModelCreateObject"
+              "$ref": "#/definitions/CompositeEntityModel"
             },
             "description": "A model containing the name and children of the new entity extractor."
           }
@@ -1768,7 +1768,7 @@
             "in": "body",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/CompositeModelUpdateObject"
+              "$ref": "#/definitions/CompositeEntityModel"
             },
             "description": "A model object containing the new entity extractor name and children."
           }
@@ -4325,8 +4325,8 @@
         "children": [ "Location::To" ]
       }
     },
-    "CompositeModelUpdateObject": {
-      "description": "A model object containing the properties to update.",
+    "CompositeEntityModel": {
+      "description": "A composite entity.",
       "type": "object",
       "properties": {
         "children": {
@@ -4337,7 +4337,7 @@
           "type": "array"
         },
         "name": {
-          "description": "The new entity name.",
+          "description": "Entity name.",
           "type": "string"
         }
       },
@@ -4980,27 +4980,6 @@
       "example": {
         "name": "FlightClass",
         "children": [ "Economy", "First" ]
-      }
-    },
-    "CompositeModelCreateObject": {
-      "description": "Object model for creating a composite entity extractor.",
-      "type": "object",
-      "properties": {
-        "children": {
-          "description": "List of child entities.",
-          "items": {
-            "type": "string"
-          },
-          "type": "array"
-        },
-        "name": {
-          "description": "Name of the new composite entity.",
-          "type": "string"
-        }
-      },
-      "example": {
-        "name": "Reservation",
-        "children": [ "Location::To", "datetime" ]
       }
     },
     "ApplicationPublishObject": {
