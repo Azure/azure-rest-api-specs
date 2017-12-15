@@ -983,11 +983,11 @@
             "$ref": "#/parameters/VersionIdInPath"
           },
           {
-            "name": "hierarchicalModelCreateObject",
+            "name": "compositeModelCreateObject",
             "in": "body",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/HierarchicalModelCreateObject"
+              "$ref": "#/definitions/CompositeModelCreateObject"
             },
             "description": "A model containing the name and children of the new entity extractor."
           }
@@ -1764,11 +1764,11 @@
             "$ref": "#/parameters/CEntityIdInPath"
           },
           {
-            "name": "hierarchicalModelUpdateObject",
+            "name": "compositeModelUpdateObject",
             "in": "body",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/HierarchicalModelUpdateObject"
+              "$ref": "#/definitions/CompositeModelUpdateObject"
             },
             "description": "A model object containing the new entity extractor name and children."
           }
@@ -4331,6 +4331,28 @@
         "children": [ "Location::To" ]
       }
     },
+    "CompositeModelUpdateObject": {
+      "description": "A model object containing the properties to update.",
+      "additionalProperties": false,
+      "type": "object",
+      "properties": {
+        "children": {
+          "description": "Child entities.",
+          "items": {
+            "type": "string"
+          },
+          "type": "array"
+        },
+        "name": {
+          "description": "The new entity name.",
+          "type": "string"
+        }
+      },
+      "example": {
+        "name": "Reservation",
+        "children": [ "Class", "Location" ]
+      }
+    },
     "JSONEntity": {
       "description": "Exported Model - Extracted Entity from utterance.",
       "additionalProperties": false,
@@ -4982,6 +5004,28 @@
         },
         "name": {
           "description": "Name of the new hierarchical entity.",
+          "type": "string"
+        }
+      },
+      "example": {
+        "name": "FlightClass",
+        "children": [ "Economy", "First" ]
+      }
+    },
+    "CompositeModelCreateObject": {
+      "description": "Object model for creating a composite entity extractor.",
+      "additionalProperties": false,
+      "type": "object",
+      "properties": {
+        "children": {
+          "description": "List of child entities.",
+          "items": {
+            "type": "string"
+          },
+          "type": "array"
+        },
+        "name": {
+          "description": "Name of the new composite entity.",
           "type": "string"
         }
       },
