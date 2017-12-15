@@ -4056,7 +4056,7 @@
             "required": true,
             "schema": {
               "type": "object",
-                "properties": {
+              "properties": {
                 "name": {
                   "type": "string"
                 }
@@ -4202,7 +4202,11 @@
     "EntityLabelObject": {
       "description": "Defines the entity type and position of the extracted entity within the example.",
       "type": "object",
-      "required": ["entityName", "startCharIndex", "endCharIndex"],
+      "required": [
+        "entityName",
+        "startCharIndex",
+        "endCharIndex"
+      ],
       "properties": {
         "entityName": {
           "description": "The entity type.",
@@ -4221,7 +4225,10 @@
     "ApplicationCreateObject": {
       "description": "Properties for creating a new LUIS Application",
       "type": "object",
-      "required": [ "culture", "name" ],
+      "required": [
+        "culture",
+        "name"
+      ],
       "properties": {
         "culture": {
           "description": "The culture for the new application. It is the language that your app understands and speaks. E.g.: \"en-us\". Note: the culture cannot be changed after the app is created.",
@@ -4266,7 +4273,9 @@
           "type": "string"
         }
       },
-      "example": { "domainName": "Camera" }
+      "example": {
+        "domainName": "Camera"
+      }
     },
     "PrebuiltDomainCreateObject": {
       "description": "A prebuilt domain create object containing the name and culture of the domain.",
@@ -4322,7 +4331,9 @@
       },
       "example": {
         "name": "Reservation",
-        "children": [ "Location::To" ]
+        "children": [
+          "Location::To"
+        ]
       }
     },
     "CompositeEntityModel": {
@@ -4343,13 +4354,20 @@
       },
       "example": {
         "name": "Reservation",
-        "children": [ "Class", "Location" ]
+        "children": [
+          "Class",
+          "Location"
+        ]
       }
     },
     "JSONEntity": {
       "description": "Exported Model - Extracted Entity from utterance.",
       "type": "object",
-      "required": ["startPos", "endPos", "entity"],
+      "required": [
+        "startPos",
+        "endPos",
+        "entity"
+      ],
       "properties": {
         "startPos": {
           "description": "The index within the utterance where the extracted entity starts.",
@@ -4405,9 +4423,9 @@
         "intentName": "WeatherInPlace",
         "entityLabels": [
           {
-          "entityName": "Place",
-          "startCharIndex": 21,
-          "endCharIndex": 34
+            "entityName": "Place",
+            "startCharIndex": 21,
+            "endCharIndex": 34
           }
         ]
       }
@@ -4501,7 +4519,10 @@
       "items": {
         "type": "string"
       },
-      "example": [ "number", "ordinal" ]
+      "example": [
+        "number",
+        "ordinal"
+      ]
     },
     "JSONRegexFeature": {
       "description": "Exported Model - A Pattern feature.",
@@ -4576,11 +4597,13 @@
         }
       },
       "example": {
-        "subLists":
-        [
+        "subLists": [
           {
             "canonicalForm": "Ohio",
-            "list": [ "Ohio", "OH" ]
+            "list": [
+              "Ohio",
+              "OH"
+            ]
           }
         ]
       }
@@ -4655,8 +4678,13 @@
         }
       },
       "example": {
-          "canonicalForm": "California",
-          "list": ["California", "CA", "Calif.", "Cal."]
+        "canonicalForm": "California",
+        "list": [
+          "California",
+          "CA",
+          "Calif.",
+          "Cal."
+        ]
       }
     },
     "WordListBaseUpdateObject": {
@@ -4676,8 +4704,13 @@
         }
       },
       "example": {
-          "canonicalForm": "California",
-          "list": ["California", "CA", "Calif.", "Cal."]
+        "canonicalForm": "California",
+        "list": [
+          "California",
+          "CA",
+          "Calif.",
+          "Cal."
+        ]
       }
     },
     "JSONUtterance": {
@@ -4787,16 +4820,31 @@
       },
       "example": {
         "name": "States",
-        "subLists": [{
+        "subLists": [
+          {
             "canonicalForm": "New York",
-            "list": ["NY", "New York"]
-        }, {
+            "list": [
+              "NY",
+              "New York"
+            ]
+          },
+          {
             "canonicalForm": "Washington",
-            "list": ["Washington", "WA"]
-        }, {
+            "list": [
+              "Washington",
+              "WA"
+            ]
+          },
+          {
             "canonicalForm": "California",
-            "list": ["California", "CA", "Calif.", "Cal."]
-        }]
+            "list": [
+              "California",
+              "CA",
+              "Calif.",
+              "Cal."
+            ]
+          }
+        ]
       }
     },
     "ExampleLabelObjectArray": {
@@ -4807,39 +4855,42 @@
       },
       "type": "array",
       "example": [
-         {
-            "text":"Book me a flight from Cairo to Redmond next Thursday",
-            "intentName":"BookFlight",
-            "entityLabels":[
-               {
-                  "entityName":"Location::From",
-                  "startCharIndex":22,
-                  "endCharIndex":26
-               },
-               {
-                  "entityName":"Location::To",
-                  "startCharIndex":31,
-                  "endCharIndex":37
-               }
-            ]
-         },
-         {
-            "text":"What's the weather like in Seattle?",
-            "intentName":"GetWeather",
-            "entityLabels":[
-               {
-                  "entityName":"Location",
-                  "startCharIndex":27,
-                  "endCharIndex":33
-               }
-            ]
-         }
+        {
+          "text": "Book me a flight from Cairo to Redmond next Thursday",
+          "intentName": "BookFlight",
+          "entityLabels": [
+            {
+              "entityName": "Location::From",
+              "startCharIndex": 22,
+              "endCharIndex": 26
+            },
+            {
+              "entityName": "Location::To",
+              "startCharIndex": 31,
+              "endCharIndex": 37
+            }
+          ]
+        },
+        {
+          "text": "What's the weather like in Seattle?",
+          "intentName": "GetWeather",
+          "entityLabels": [
+            {
+              "entityName": "Location",
+              "startCharIndex": 27,
+              "endCharIndex": 33
+            }
+          ]
+        }
       ]
     },
     "VersionInfo": {
       "description": "Object model of an application version.",
       "type": "object",
-      "required": [ "version", "trainingStatus" ],
+      "required": [
+        "version",
+        "trainingStatus"
+      ],
       "properties": {
         "version": {
           "description": "The version ID. E.g.: \"0.1\"",
@@ -4980,9 +5031,9 @@
         }
       },
       "example": {
-       "versionId": "0.1",
-       "isStaging": false,
-       "region": "westus"
+        "versionId": "0.1",
+        "isStaging": false,
+        "region": "westus"
       }
     },
     "LuisApp": {
@@ -5487,7 +5538,9 @@
         }
       },
       "required": [
-        "entityName", "startTokenIndex", "endTokenIndex"
+        "entityName",
+        "startTokenIndex",
+        "endTokenIndex"
       ]
     },
     "IntentPrediction": {
@@ -5507,7 +5560,12 @@
     "EntityPrediction": {
       "description": "A suggested entity.",
       "type": "object",
-      "required": ["entityName", "startTokenIndex", "endTokenIndex", "phrase"],
+      "required": [
+        "entityName",
+        "startTokenIndex",
+        "endTokenIndex",
+        "phrase"
+      ],
       "properties": {
         "entityName": {
           "description": "The entity's name",
@@ -5575,9 +5633,12 @@
           "$ref": "#/definitions/ReadableType"
         }
       },
-      "required": [ "id", "readableType" ]
+      "required": [
+        "id",
+        "readableType"
+      ]
     },
-    "ModelsInfoResponseObject" : {
+    "ModelsInfoResponseObject": {
       "description": "A list of application model infos.",
       "type": "array",
       "items": {
@@ -5605,13 +5666,26 @@
           "$ref": "#/definitions/ReadableType"
         }
       },
-      "required": [ "id", "readableType" ],
+      "required": [
+        "id",
+        "readableType"
+      ],
       "allOf": [
-        { "$ref": "#/definitions/HierarchicalEntityExtractor" },
-        { "$ref": "#/definitions/CompositeEntityExtractor"},
-        { "$ref": "#/definitions/ClosedListEntityExtractor" },
-        { "$ref": "#/definitions/IntentClassifier" },
-        { "$ref": "#/definitions/EntityExtractor" }
+        {
+          "$ref": "#/definitions/HierarchicalEntityExtractor"
+        },
+        {
+          "$ref": "#/definitions/CompositeEntityExtractor"
+        },
+        {
+          "$ref": "#/definitions/ClosedListEntityExtractor"
+        },
+        {
+          "$ref": "#/definitions/IntentClassifier"
+        },
+        {
+          "$ref": "#/definitions/EntityExtractor"
+        }
       ]
     },
     "ReadableType": {
@@ -5736,7 +5810,9 @@
           "description": "The name of a child entity."
         }
       },
-      "required": [ "id" ]
+      "required": [
+        "id"
+      ]
     },
     "HierarchicalChildEntity": {
       "description": "A Hierarchical Child Entity.",
@@ -5751,15 +5827,23 @@
         }
       },
       "allOf": [
-        { "$ref": "#/definitions/ChildEntity" }
+        {
+          "$ref": "#/definitions/ChildEntity"
+        }
       ]
     },
     "CustomPrebuiltModel": {
       "description": "A Custom Prebuilt model.",
       "allOf": [
-        { "$ref": "#/definitions/ModelInfo" },
-        { "$ref": "#/definitions/IntentClassifier" },
-        { "$ref": "#/definitions/EntityExtractor" }
+        {
+          "$ref": "#/definitions/ModelInfo"
+        },
+        {
+          "$ref": "#/definitions/IntentClassifier"
+        },
+        {
+          "$ref": "#/definitions/EntityExtractor"
+        }
       ]
     },
     "CustomPrebuiltModelList": {
@@ -5831,7 +5915,7 @@
           "$ref": "#/definitions/PhraseListFeatureInfoList"
         },
         "patternFeatures": {
-            "$ref": "#/definitions/PatternFeatureInfoList"
+          "$ref": "#/definitions/PatternFeatureInfoList"
         }
       }
     },
@@ -5863,7 +5947,9 @@
         }
       },
       "allOf": [
-        { "$ref": "#/definitions/FeatureInfoObject" }
+        {
+          "$ref": "#/definitions/FeatureInfoObject"
+        }
       ]
     },
     "PatternFeatureInfoList": {
@@ -5887,7 +5973,9 @@
         }
       },
       "allOf": [
-        { "$ref": "#/definitions/FeatureInfoObject" }
+        {
+          "$ref": "#/definitions/FeatureInfoObject"
+        }
       ]
     },
     "PhraseListFeatureInfoList": {
@@ -6093,7 +6181,10 @@
           "x-ms-client-name": "isPublic"
         }
       },
-      "required": [ "id", "public" ]
+      "required": [
+        "id",
+        "public"
+      ]
     },
     "AvailablePrebuiltEntityModel": {
       "description": "Available Prebuilt entity model for using in an application.",
@@ -6235,8 +6326,12 @@
         "code": {
           "type": "string",
           "description": "Status Code.",
-          "enum" : [ "Failed", "FAILED", "Success" ], 
-          "x-ms-enum" : { 
+          "enum": [
+            "Failed",
+            "FAILED",
+            "Success"
+          ],
+          "x-ms-enum": {
             "modelAsString": true,
             "name": "OperationStatusType"
           }
