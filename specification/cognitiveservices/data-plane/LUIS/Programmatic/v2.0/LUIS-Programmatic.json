@@ -323,9 +323,15 @@
         "consumes": [
           "application/json"
         ],
+        "produces": [
+          "application/json"
+        ],
         "responses": {
           "200": {
-            "description": "No Content. Successful operation."
+            "description": "Successful operation.",
+            "schema": {
+              "$ref": "#/definitions/OperationStatus"
+            }
           },
           "default": {
             "description": "Error Response.",
@@ -361,7 +367,10 @@
         ],
         "responses": {
           "200": {
-            "description": "No Content. Successful operation."
+            "description": "Successful operation.",
+            "schema": {
+              "$ref": "#/definitions/OperationStatus"
+            }
           },
           "default": {
             "description": "Error Response.",
@@ -370,6 +379,9 @@
             }
           }
         },
+        "produces": [
+          "application/json"
+        ],
         "x-ms-examples": {
           "Successful Delete Pattern Feature Info request": {
             "$ref": "./examples/features/SuccessfulDeletePatternFeatureInfoRequest.json"
@@ -450,7 +462,10 @@
         ],
         "responses": {
           "200": {
-            "description": "No Content. Successfully updated phraselist."
+            "description": "Successfully updated phraselist.",
+            "schema": {
+              "$ref": "#/definitions/OperationStatus"
+            }
           },
           "default": {
             "description": "Error Response.",
@@ -459,6 +474,9 @@
             }
           }
         },
+        "produces": [
+          "application/json"
+        ],
         "x-ms-examples": {
           "Successful Update Phraselist Feature Info request": {
             "$ref": "./examples/features/SuccessfulUpdatePhraselistFeatureInfoRequest.json"
@@ -485,7 +503,10 @@
         ],
         "responses": {
           "200": {
-            "description": "No Content. Successfully deleted phraselist."
+            "description": "Successfully deleted phraselist.",
+            "schema": {
+              "$ref": "#/definitions/OperationStatus"
+            }
           },
           "default": {
             "description": "Error Response.",
@@ -494,6 +515,9 @@
             }
           }
         },
+        "produces": [
+          "application/json"
+        ],
         "x-ms-examples": {
           "Successful Delete Phraselist Feature Info request": {
             "$ref": "./examples/features/SuccessfulDeletePhraselistFeatureInfoRequest.json"
@@ -580,6 +604,12 @@
               "$ref": "#/definitions/BatchLabelExampleResponse"
             }
           },
+          "207": {
+            "description": "Indicates that the request was partially successful. The response contains a string array indicating the status of each of the added labels.",
+            "schema": {
+              "$ref": "#/definitions/BatchLabelExampleResponse"
+            }
+          },
           "default": {
             "description": "Error Response.",
             "schema": {
@@ -658,7 +688,10 @@
         ],
         "responses": {
           "200": {
-            "description": "No Content. Successfully deleted example label."
+            "description": "Successfully deleted example label.",
+            "schema": {
+              "$ref": "#/definitions/OperationStatus"
+            }
           },
           "default": {
             "description": "Error Response.",
@@ -667,6 +700,9 @@
             }
           }
         },
+        "produces": [
+          "application/json"
+        ],
         "x-ms-examples": {
           "Successful Delete Example Label request": {
             "$ref": "./examples/examples/SuccessfulDeleteExampleLabelRequest.json"
@@ -862,7 +898,7 @@
             "in": "body",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/HierarchicalModelCreateObject"
+              "$ref": "#/definitions/HierarchicalEntityModel"
             },
             "description": "A model containing the name and children of the new entity extractor."
           }
@@ -947,11 +983,11 @@
             "$ref": "#/parameters/VersionIdInPath"
           },
           {
-            "name": "hierarchicalModelCreateObject",
+            "name": "compositeModelCreateObject",
             "in": "body",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/HierarchicalModelCreateObject"
+              "$ref": "#/definitions/CompositeEntityModel"
             },
             "description": "A model containing the name and children of the new entity extractor."
           }
@@ -1345,7 +1381,10 @@
         ],
         "responses": {
           "200": {
-            "description": "No Content. Successful operation."
+            "description": "Successful operation.",
+            "schema": {
+              "$ref": "#/definitions/OperationStatus"
+            }
           },
           "default": {
             "description": "Error Response.",
@@ -1354,6 +1393,9 @@
             }
           }
         },
+        "produces": [
+          "application/json"
+        ],
         "x-ms-examples": {
           "Successful Rename Intent Model request": {
             "$ref": "./examples/model/SuccessfulRenameIntentModelRequest.json"
@@ -1372,11 +1414,21 @@
           },
           {
             "$ref": "#/parameters/IntentIdInPath"
+          },
+          {
+            "name": "deleteUtterances",
+            "in": "query",
+            "type": "boolean",
+            "description": "Also delete the intent's utterances (true). Or move the utterances to the None intent (false - the default value).",
+            "default": false
           }
         ],
         "responses": {
           "200": {
-            "description": "No Content. Successful operation."
+            "description": "Successful operation.",
+            "schema": {
+              "$ref": "#/definitions/OperationStatus"
+            }
           },
           "default": {
             "description": "Error Response.",
@@ -1385,6 +1437,9 @@
             }
           }
         },
+        "produces": [
+          "application/json"
+        ],
         "x-ms-examples": {
           "Successful Delete Intent Model request": {
             "$ref": "./examples/model/SuccessfulDeleteIntentModelRequest.json"
@@ -1468,7 +1523,10 @@
         ],
         "responses": {
           "200": {
-            "description": "No Content. Successfully updated entity extractor name."
+            "description": "Successfully updated entity extractor name.",
+            "schema": {
+              "$ref": "#/definitions/OperationStatus"
+            }
           },
           "default": {
             "description": "Error Response.",
@@ -1477,6 +1535,9 @@
             }
           }
         },
+        "produces": [
+          "application/json"
+        ],
         "x-ms-examples": {
           "Successful Rename Entity Info request": {
             "$ref": "./examples/model/SuccessfulRenameEntityExtractorRequest.json"
@@ -1504,7 +1565,10 @@
         ],
         "responses": {
           "200": {
-            "description": "No Content. Successfully deleted entity."
+            "description": "Successfully deleted entity.",
+            "schema": {
+              "$ref": "#/definitions/OperationStatus"
+            }
           },
           "default": {
             "description": "Error Response.",
@@ -1513,6 +1577,9 @@
             }
           }
         },
+        "produces": [
+          "application/json"
+        ],
         "x-ms-examples": {
           "Successful Delete Entity Info request": {
             "$ref": "./examples/model/SuccessfulDeleteEntityExtractorRequest.json"
@@ -1576,7 +1643,7 @@
             "in": "body",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/HierarchicalModelUpdateObject"
+              "$ref": "#/definitions/HierarchicalEntityModel"
             },
             "description": "Model containing names of the children of the hierarchical entity."
           }
@@ -1586,7 +1653,10 @@
         ],
         "responses": {
           "200": {
-            "description": "No Content. Successful operation."
+            "description": "Successful operation.",
+            "schema": {
+              "$ref": "#/definitions/OperationStatus"
+            }
           },
           "default": {
             "description": "Error Response.",
@@ -1595,6 +1665,9 @@
             }
           }
         },
+        "produces": [
+          "application/json"
+        ],
         "x-ms-examples": {
           "Successful Get Hierarchical Entity Info request": {
             "$ref": "./examples/model/SuccessfulUpdateHierarchicalEntityModelRequest.json"
@@ -1617,7 +1690,10 @@
         ],
         "responses": {
           "200": {
-            "description": "No Content. Successfully deleted entity."
+            "description": "Successfully deleted entity.",
+            "schema": {
+              "$ref": "#/definitions/OperationStatus"
+            }
           },
           "default": {
             "description": "Error Response.",
@@ -1626,6 +1702,9 @@
             }
           }
         },
+        "produces": [
+          "application/json"
+        ],
         "x-ms-examples": {
           "Successful Delete Hierarchical Entity Model request": {
             "$ref": "./examples/model/SuccessfulDeleteHierarchicalEntityModelRequest.json"
@@ -1685,11 +1764,11 @@
             "$ref": "#/parameters/CEntityIdInPath"
           },
           {
-            "name": "hierarchicalModelUpdateObject",
+            "name": "compositeModelUpdateObject",
             "in": "body",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/HierarchicalModelUpdateObject"
+              "$ref": "#/definitions/CompositeEntityModel"
             },
             "description": "A model object containing the new entity extractor name and children."
           }
@@ -1702,9 +1781,15 @@
             "$ref": "./examples/model/SuccessfulUpdateCompositeEntityModelRequest.json"
           }
         },
+        "produces": [
+          "application/json"
+        ],
         "responses": {
           "200": {
-            "description": "No Content. Successfully updated composite entity."
+            "description": "Successfully updated composite entity.",
+            "schema": {
+              "$ref": "#/definitions/OperationStatus"
+            }
           },
           "default": {
             "description": "Error Response.",
@@ -1730,7 +1815,10 @@
         ],
         "responses": {
           "200": {
-            "description": "No Content. Successfully deleted composite entity."
+            "description": "Successfully deleted composite entity.",
+            "schema": {
+              "$ref": "#/definitions/OperationStatus"
+            }
           },
           "default": {
             "description": "Error Response.",
@@ -1739,6 +1827,9 @@
             }
           }
         },
+        "produces": [
+          "application/json"
+        ],
         "x-ms-examples": {
           "Successful Delete Entity Info request": {
             "$ref": "./examples/model/SuccessfulDeleteCompositeEntityModelRequest.json"
@@ -1822,7 +1913,10 @@
         ],
         "responses": {
           "200": {
-            "description": "No Content. Successfully updated Closed List name and words list."
+            "description": "Successfully updated Closed List name and words list.",
+            "schema": {
+              "$ref": "#/definitions/OperationStatus"
+            }
           },
           "default": {
             "description": "Error Response.",
@@ -1831,6 +1925,9 @@
             }
           }
         },
+        "produces": [
+          "application/json"
+        ],
         "x-ms-examples": {
           "Successful Update Closed List Entity Info request": {
             "$ref": "./examples/model/SuccessfulUpdateClosedListEntityModelRequest.json"
@@ -1870,7 +1967,10 @@
         ],
         "responses": {
           "200": {
-            "description": "No Content. Successfully added sublists to Closed List."
+            "description": "Successfully added sublists to Closed List.",
+            "schema": {
+              "$ref": "#/definitions/OperationStatus"
+            }
           },
           "default": {
             "description": "Error Response.",
@@ -1879,6 +1979,9 @@
             }
           }
         },
+        "produces": [
+          "application/json"
+        ],
         "x-ms-examples": {
           "Successful Add SubLists to Closed List Entity request": {
             "$ref": "./examples/model/SuccessfulPatchClosedListEntityModelRequest.json"
@@ -1906,7 +2009,10 @@
         ],
         "responses": {
           "200": {
-            "description": "No Content. Successfully delete Closed List from application."
+            "description": "Successfully delete Closed List from application.",
+            "schema": {
+              "$ref": "#/definitions/OperationStatus"
+            }
           },
           "default": {
             "description": "Error Response.",
@@ -1915,6 +2021,9 @@
             }
           }
         },
+        "produces": [
+          "application/json"
+        ],
         "x-ms-examples": {
           "Successful Delete Closed List Entity Info request": {
             "$ref": "./examples/model/SuccessfulDeleteClosedListEntityModelRequest.json"
@@ -1986,7 +2095,10 @@
         ],
         "responses": {
           "200": {
-            "description": "No Content. Successful operation."
+            "description": "Successful operation.",
+            "schema": {
+              "$ref": "#/definitions/OperationStatus"
+            }
           },
           "default": {
             "description": "Error Response.",
@@ -1995,6 +2107,9 @@
             }
           }
         },
+        "produces": [
+          "application/json"
+        ],
         "x-ms-examples": {
           "Successful Get Prebuilt Info request": {
             "$ref": "./examples/model/SuccessfulDeletePrebuiltEntityRequest.json"
@@ -2031,7 +2146,10 @@
         ],
         "responses": {
           "200": {
-            "description": "No Content. Successfully deleted sublist."
+            "description": "Successfully deleted sublist.",
+            "schema": {
+              "$ref": "#/definitions/OperationStatus"
+            }
           },
           "default": {
             "description": "Error Response.",
@@ -2040,6 +2158,9 @@
             }
           }
         },
+        "produces": [
+          "application/json"
+        ],
         "x-ms-examples": {
           "Successful Delete Sublist request": {
             "$ref": "./examples/model/SuccessfulDeleteSublistRequest.json"
@@ -2086,7 +2207,10 @@
         ],
         "responses": {
           "200": {
-            "description": "No Content. Successfully updated sublist."
+            "description": "Successfully updated sublist.",
+            "schema": {
+              "$ref": "#/definitions/OperationStatus"
+            }
           },
           "default": {
             "description": "Error Response.",
@@ -2095,6 +2219,9 @@
             }
           }
         },
+        "produces": [
+          "application/json"
+        ],
         "x-ms-examples": {
           "Successful Update Sublist request": {
             "$ref": "./examples/model/SuccessfulUpdateSublistRequest.json"
@@ -2475,7 +2602,7 @@
         ],
         "responses": {
           "200": {
-            "description": "A JSON object containing the application info.",
+            "description": "The application info.",
             "schema": {
               "$ref": "#/definitions/ApplicationInfoResponse"
             }
@@ -2518,7 +2645,10 @@
         ],
         "responses": {
           "200": {
-            "description": "No Content. Successfully updated application name and description."
+            "description": "Successfully updated application name and description.",
+            "schema": {
+              "$ref": "#/definitions/OperationStatus"
+            }
           },
           "default": {
             "description": "Error Response.",
@@ -2527,6 +2657,9 @@
             }
           }
         },
+        "produces": [
+          "application/json"
+        ],
         "x-ms-examples": {
           "Successful Rename Application request": {
             "$ref": "./examples/apps/SuccessfulRenameApplicationRequest.json"
@@ -2543,7 +2676,10 @@
         ],
         "responses": {
           "200": {
-            "description": "No Content. Successfully deleted application."
+            "description": "Successfully deleted application.",
+            "schema": {
+              "$ref": "#/definitions/OperationStatus"
+            }
           },
           "default": {
             "description": "Error Response.",
@@ -2552,6 +2688,9 @@
             }
           }
         },
+        "produces": [
+          "application/json"
+        ],
         "x-ms-examples": {
           "Successful Rename Application request": {
             "$ref": "./examples/apps/SuccessfulDeleteApplicationRequest.json"
@@ -2754,7 +2893,10 @@
         ],
         "responses": {
           "200": {
-            "description": "No Content. Successful operation."
+            "description": "Successful operation.",
+            "schema": {
+              "$ref": "#/definitions/OperationStatus"
+            }
           },
           "default": {
             "description": "Error Response.",
@@ -2763,6 +2905,9 @@
             }
           }
         },
+        "produces": [
+          "application/json"
+        ],
         "x-ms-examples": {
           "Successful Rename Application Version request": {
             "$ref": "./examples/versions/SuccessfulRenameApplicationVersionRequest.json"
@@ -2782,7 +2927,10 @@
         ],
         "responses": {
           "200": {
-            "description": "No Content. Successful operation."
+            "description": "Successful operation.",
+            "schema": {
+              "$ref": "#/definitions/OperationStatus"
+            }
           },
           "default": {
             "description": "Error Response.",
@@ -2791,6 +2939,9 @@
             }
           }
         },
+        "produces": [
+          "application/json"
+        ],
         "x-ms-examples": {
           "Successful Delete Application Version request": {
             "$ref": "./examples/versions/SuccessfulDeleteApplicationVersionRequest.json"
@@ -3010,7 +3161,10 @@
         ],
         "responses": {
           "200": {
-            "description": "No Content. Successfully updated application settings."
+            "description": "Successfully updated application settings.",
+            "schema": {
+              "$ref": "#/definitions/OperationStatus"
+            }
           },
           "default": {
             "description": "Error Response.",
@@ -3019,6 +3173,9 @@
             }
           }
         },
+        "produces": [
+          "application/json"
+        ],
         "x-ms-examples": {
           "Successful Update Application Settings request": {
             "$ref": "./examples/apps/SuccessfulUpdateApplicationSettingsRequest.json"
@@ -3052,7 +3209,10 @@
         ],
         "responses": {
           "200": {
-            "description": "No Content. Successful operation."
+            "description": "Successful operation.",
+            "schema": {
+              "$ref": "#/definitions/OperationStatus"
+            }
           },
           "default": {
             "description": "Error Response.",
@@ -3061,6 +3221,9 @@
             }
           }
         },
+        "produces": [
+          "application/json"
+        ],
         "x-ms-examples": {
           "Successful Delete Unlabelled Utterance": {
             "$ref": "./examples/versions/SuccessfulDeleteUnlabelledUtteranceRequest.json"
@@ -3122,7 +3285,10 @@
         ],
         "responses": {
           "200": {
-            "description": "No Content. Successful operation."
+            "description": "Successful operation.",
+            "schema": {
+              "$ref": "#/definitions/OperationStatus"
+            }
           },
           "default": {
             "description": "Error Response.",
@@ -3131,6 +3297,9 @@
             }
           }
         },
+        "produces": [
+          "application/json"
+        ],
         "x-ms-examples": {
           "Successful Add User To Access List": {
             "$ref": "./examples/permissions/SuccessfulAddUserToAccessListRequest.json"
@@ -3159,7 +3328,10 @@
         ],
         "responses": {
           "200": {
-            "description": "No Content. Successful operation."
+            "description": "Successful operation.",
+            "schema": {
+              "$ref": "#/definitions/OperationStatus"
+            }
           },
           "default": {
             "description": "Error Response.",
@@ -3168,6 +3340,9 @@
             }
           }
         },
+        "produces": [
+          "application/json"
+        ],
         "x-ms-examples": {
           "Successful Remove User From Access List": {
             "$ref": "./examples/permissions/SuccessfulRemoveUserFromAccessListRequest.json"
@@ -3196,7 +3371,10 @@
         ],
         "responses": {
           "200": {
-            "description": "No Content. Successful operation."
+            "description": "Successful operation.",
+            "schema": {
+              "$ref": "#/definitions/OperationStatus"
+            }
           },
           "default": {
             "description": "Error Response.",
@@ -3205,6 +3383,9 @@
             }
           }
         },
+        "produces": [
+          "application/json"
+        ],
         "x-ms-examples": {
           "Successful Replaces Users From Access List": {
             "$ref": "./examples/permissions/SuccessfulReplacesUsersFromAccessListRequest.json"
@@ -3573,7 +3754,10 @@
         ],
         "responses": {
           "200": {
-            "description": "No Content. Successful operation."
+            "description": "Successful operation.",
+            "schema": {
+              "$ref": "#/definitions/OperationStatus"
+            }
           },
           "default": {
             "description": "Error Response.",
@@ -3582,6 +3766,9 @@
             }
           }
         },
+        "produces": [
+          "application/json"
+        ],
         "x-ms-examples": {
           "Successful Delete Prebuilt Domain from Application request": {
             "$ref": "./examples/model/SuccessfulDeletePrebuiltDomainFromApplicationRequest.json"
@@ -3782,7 +3969,10 @@
         ],
         "responses": {
           "200": {
-            "description": "No Content. Successfully updated entity child."
+            "description": "Successfully updated entity child.",
+            "schema": {
+              "$ref": "#/definitions/OperationStatus"
+            }
           },
           "default": {
             "description": "Error Response.",
@@ -3791,6 +3981,9 @@
             }
           }
         },
+        "produces": [
+          "application/json"
+        ],
         "x-ms-examples": {
           "Successful Update Hierarchical Entity Child Model request": {
             "$ref": "./examples/model/SuccessfulUpdateHierarchicalChildModelRequest.json"
@@ -3821,7 +4014,10 @@
         ],
         "responses": {
           "200": {
-            "description": "No Content. Successfully deleted entity."
+            "description": "Successfully deleted entity.",
+            "schema": {
+              "$ref": "#/definitions/OperationStatus"
+            }
           },
           "default": {
             "description": "Error Response.",
@@ -3830,6 +4026,9 @@
             }
           }
         },
+        "produces": [
+          "application/json"
+        ],
         "x-ms-examples": {
           "Successful Delete Hierarchical Entity Child Model request": {
             "$ref": "./examples/model/SuccessfulDeleteHierarchicalChildModelRequest.json"
@@ -3857,7 +4056,7 @@
             "required": true,
             "schema": {
               "type": "object",
-                "properties": {
+              "properties": {
                 "name": {
                   "type": "string"
                 }
@@ -3976,7 +4175,10 @@
         ],
         "responses": {
           "200": {
-            "description": "No Content. Successfully deleted entity."
+            "description": "Successfully deleted entity.",
+            "schema": {
+              "$ref": "#/definitions/OperationStatus"
+            }
           },
           "default": {
             "description": "Error Response.",
@@ -3985,6 +4187,9 @@
             }
           }
         },
+        "produces": [
+          "application/json"
+        ],
         "x-ms-examples": {
           "Successful Delete Composite Entity Child Model request": {
             "$ref": "./examples/model/SuccessfulDeleteCompositeChildModelRequest.json"
@@ -3996,9 +4201,12 @@
   "definitions": {
     "EntityLabelObject": {
       "description": "Defines the entity type and position of the extracted entity within the example.",
-      "additionalProperties": false,
       "type": "object",
-      "required": ["entityName", "startCharIndex", "endCharIndex"],
+      "required": [
+        "entityName",
+        "startCharIndex",
+        "endCharIndex"
+      ],
       "properties": {
         "entityName": {
           "description": "The entity type.",
@@ -4016,9 +4224,11 @@
     },
     "ApplicationCreateObject": {
       "description": "Properties for creating a new LUIS Application",
-      "additionalProperties": false,
       "type": "object",
-      "required": [ "culture", "name" ],
+      "required": [
+        "culture",
+        "name"
+      ],
       "properties": {
         "culture": {
           "description": "The culture for the new application. It is the language that your app understands and speaks. E.g.: \"en-us\". Note: the culture cannot be changed after the app is created.",
@@ -4056,7 +4266,6 @@
     },
     "PrebuiltDomainCreateBaseObject": {
       "description": "A model object containing the name of the custom prebuilt entity and the name of the domain to which this model belongs.",
-      "additionalProperties": false,
       "type": "object",
       "properties": {
         "domainName": {
@@ -4064,11 +4273,12 @@
           "type": "string"
         }
       },
-      "example": { "domainName": "Camera" }
+      "example": {
+        "domainName": "Camera"
+      }
     },
     "PrebuiltDomainCreateObject": {
       "description": "A prebuilt domain create object containing the name and culture of the domain.",
-      "additionalProperties": false,
       "type": "object",
       "properties": {
         "domainName": {
@@ -4087,7 +4297,6 @@
     },
     "PrebuiltDomainModelCreateObject": {
       "description": "A model object containing the name of the custom prebuilt intent or entity and the name of the domain to which this model belongs.",
-      "additionalProperties": false,
       "type": "object",
       "properties": {
         "domainName": {
@@ -4104,9 +4313,8 @@
         "modelName": "AppName"
       }
     },
-    "HierarchicalModelUpdateObject": {
-      "description": "A model object containing the properties to update.",
-      "additionalProperties": false,
+    "HierarchicalEntityModel": {
+      "description": "A Hierarchical Entity Extractor.",
       "type": "object",
       "properties": {
         "children": {
@@ -4117,20 +4325,49 @@
           "type": "array"
         },
         "name": {
-          "description": "The new entity name.",
+          "description": "Entity name.",
           "type": "string"
         }
       },
       "example": {
         "name": "Reservation",
-        "children": [ "Location::To" ]
+        "children": [
+          "Location::To"
+        ]
+      }
+    },
+    "CompositeEntityModel": {
+      "description": "A composite entity.",
+      "type": "object",
+      "properties": {
+        "children": {
+          "description": "Child entities.",
+          "items": {
+            "type": "string"
+          },
+          "type": "array"
+        },
+        "name": {
+          "description": "Entity name.",
+          "type": "string"
+        }
+      },
+      "example": {
+        "name": "Reservation",
+        "children": [
+          "Class",
+          "Location"
+        ]
       }
     },
     "JSONEntity": {
       "description": "Exported Model - Extracted Entity from utterance.",
-      "additionalProperties": false,
       "type": "object",
-      "required": ["startPos", "endPos", "entity"],
+      "required": [
+        "startPos",
+        "endPos",
+        "entity"
+      ],
       "properties": {
         "startPos": {
           "description": "The index within the utterance where the extracted entity starts.",
@@ -4148,7 +4385,6 @@
     },
     "ApplicationSettingUpdateObject": {
       "description": "Object model for updating an application's settings.",
-      "additionalProperties": false,
       "type": "object",
       "properties": {
         "public": {
@@ -4163,7 +4399,6 @@
     },
     "ExampleLabelObject": {
       "description": "A labeled example.",
-      "additionalProperties": false,
       "type": "object",
       "properties": {
         "text": {
@@ -4188,16 +4423,15 @@
         "intentName": "WeatherInPlace",
         "entityLabels": [
           {
-          "entityName": "Place",
-          "startCharIndex": 21,
-          "endCharIndex": 34
+            "entityName": "Place",
+            "startCharIndex": 21,
+            "endCharIndex": 34
           }
         ]
       }
     },
     "PhraselistCreateObject": {
       "description": "Object model for creating a phraselist model.",
-      "additionalProperties": false,
       "type": "object",
       "properties": {
         "phrases": {
@@ -4222,7 +4456,6 @@
     },
     "SubClosedList": {
       "description": "Sublist of items for a Closed list.",
-      "additionalProperties": false,
       "type": "object",
       "properties": {
         "canonicalForm": {
@@ -4264,7 +4497,6 @@
     },
     "ApplicationUpdateObject": {
       "description": "Object model for updating the name or description of an application.",
-      "additionalProperties": false,
       "type": "object",
       "properties": {
         "name": {
@@ -4287,11 +4519,13 @@
       "items": {
         "type": "string"
       },
-      "example": [ "number", "ordinal" ]
+      "example": [
+        "number",
+        "ordinal"
+      ]
     },
     "JSONRegexFeature": {
       "description": "Exported Model - A Pattern feature.",
-      "additionalProperties": false,
       "type": "object",
       "properties": {
         "pattern": {
@@ -4310,7 +4544,6 @@
     },
     "PatternUpdateObject": {
       "description": "Object model for updating an existing Pattern feature.",
-      "additionalProperties": false,
       "type": "object",
       "properties": {
         "pattern": {
@@ -4334,7 +4567,6 @@
     },
     "ClosedList": {
       "description": "Exported Model - A Closed List.",
-      "additionalProperties": false,
       "type": "object",
       "properties": {
         "name": {
@@ -4353,7 +4585,6 @@
     },
     "ClosedListModelPatchObject": {
       "description": "Object model for adding a batch of sublists to an existing closedlist.",
-      "additionalProperties": false,
       "type": "object",
       "properties": {
         "subLists": {
@@ -4366,18 +4597,19 @@
         }
       },
       "example": {
-        "subLists":
-        [
+        "subLists": [
           {
             "canonicalForm": "Ohio",
-            "list": [ "Ohio", "OH" ]
+            "list": [
+              "Ohio",
+              "OH"
+            ]
           }
         ]
       }
     },
     "JSONModelFeature": {
       "description": "Exported Model - Phraselist Model Feature.",
-      "additionalProperties": false,
       "type": "object",
       "properties": {
         "activated": {
@@ -4400,7 +4632,6 @@
     },
     "ModelCreateObject": {
       "description": "Object model for creating a new entity extractor.",
-      "additionalProperties": false,
       "type": "object",
       "properties": {
         "name": {
@@ -4414,7 +4645,6 @@
     },
     "PatternCreateObject": {
       "description": "Object model for creating a Pattern feature.",
-      "additionalProperties": false,
       "type": "object",
       "properties": {
         "pattern": {
@@ -4433,7 +4663,6 @@
     },
     "WordListObject": {
       "description": "Sublist of items for a Closed list.",
-      "additionalProperties": false,
       "type": "object",
       "properties": {
         "canonicalForm": {
@@ -4449,13 +4678,17 @@
         }
       },
       "example": {
-          "canonicalForm": "California",
-          "list": ["California", "CA", "Calif.", "Cal."]
+        "canonicalForm": "California",
+        "list": [
+          "California",
+          "CA",
+          "Calif.",
+          "Cal."
+        ]
       }
     },
     "WordListBaseUpdateObject": {
       "description": "Object model for updating one of the closed list's sublists.",
-      "additionalProperties": false,
       "type": "object",
       "properties": {
         "canonicalForm": {
@@ -4471,13 +4704,17 @@
         }
       },
       "example": {
-          "canonicalForm": "California",
-          "list": ["California", "CA", "Calif.", "Cal."]
+        "canonicalForm": "California",
+        "list": [
+          "California",
+          "CA",
+          "Calif.",
+          "Cal."
+        ]
       }
     },
     "JSONUtterance": {
       "description": "Exported Model - Utterance that was used to train the model.",
-      "additionalProperties": false,
       "type": "object",
       "properties": {
         "text": {
@@ -4500,7 +4737,6 @@
     },
     "ModelUpdateObject": {
       "description": "Object model for updating an intent classifier.",
-      "additionalProperties": false,
       "type": "object",
       "properties": {
         "name": {
@@ -4514,7 +4750,6 @@
     },
     "ClosedListModelUpdateObject": {
       "description": "Object model for updating a closed list.",
-      "additionalProperties": false,
       "type": "object",
       "properties": {
         "subLists": {
@@ -4568,7 +4803,6 @@
     },
     "ClosedListModelCreateObject": {
       "description": "Object model for creating a closed list.",
-      "additionalProperties": false,
       "type": "object",
       "properties": {
         "subLists": {
@@ -4586,16 +4820,31 @@
       },
       "example": {
         "name": "States",
-        "subLists": [{
+        "subLists": [
+          {
             "canonicalForm": "New York",
-            "list": ["NY", "New York"]
-        }, {
+            "list": [
+              "NY",
+              "New York"
+            ]
+          },
+          {
             "canonicalForm": "Washington",
-            "list": ["Washington", "WA"]
-        }, {
+            "list": [
+              "Washington",
+              "WA"
+            ]
+          },
+          {
             "canonicalForm": "California",
-            "list": ["California", "CA", "Calif.", "Cal."]
-        }]
+            "list": [
+              "California",
+              "CA",
+              "Calif.",
+              "Cal."
+            ]
+          }
+        ]
       }
     },
     "ExampleLabelObjectArray": {
@@ -4606,39 +4855,42 @@
       },
       "type": "array",
       "example": [
-         {
-            "text":"Book me a flight from Cairo to Redmond next Thursday",
-            "intentName":"BookFlight",
-            "entityLabels":[
-               {
-                  "entityName":"Location::From",
-                  "startCharIndex":22,
-                  "endCharIndex":26
-               },
-               {
-                  "entityName":"Location::To",
-                  "startCharIndex":31,
-                  "endCharIndex":37
-               }
-            ]
-         },
-         {
-            "text":"What's the weather like in Seattle?",
-            "intentName":"GetWeather",
-            "entityLabels":[
-               {
-                  "entityName":"Location",
-                  "startCharIndex":27,
-                  "endCharIndex":33
-               }
-            ]
-         }
+        {
+          "text": "Book me a flight from Cairo to Redmond next Thursday",
+          "intentName": "BookFlight",
+          "entityLabels": [
+            {
+              "entityName": "Location::From",
+              "startCharIndex": 22,
+              "endCharIndex": 26
+            },
+            {
+              "entityName": "Location::To",
+              "startCharIndex": 31,
+              "endCharIndex": 37
+            }
+          ]
+        },
+        {
+          "text": "What's the weather like in Seattle?",
+          "intentName": "GetWeather",
+          "entityLabels": [
+            {
+              "entityName": "Location",
+              "startCharIndex": 27,
+              "endCharIndex": 33
+            }
+          ]
+        }
       ]
     },
     "VersionInfo": {
       "description": "Object model of an application version.",
       "type": "object",
-      "required": [ "version", "trainingStatus" ],
+      "required": [
+        "version",
+        "trainingStatus"
+      ],
       "properties": {
         "version": {
           "description": "The version ID. E.g.: \"0.1\"",
@@ -4707,7 +4959,6 @@
     },
     "TaskUpdateObject": {
       "description": "Object model for cloning an application's version.",
-      "additionalProperties": false,
       "type": "object",
       "properties": {
         "version": {
@@ -4721,7 +4972,6 @@
     },
     "PhraselistUpdateObject": {
       "description": "Object model for updating a Phraselist.",
-      "additionalProperties": false,
       "type": "object",
       "properties": {
         "phrases": {
@@ -4749,7 +4999,6 @@
       }
     },
     "HierarchicalModel": {
-      "additionalProperties": false,
       "type": "object",
       "properties": {
         "name": {
@@ -4761,33 +5010,10 @@
           },
           "type": "array"
         }
-      }
-    },
-    "HierarchicalModelCreateObject": {
-      "description": "Object model for creating a hierarchical entity extractor.",
-      "additionalProperties": false,
-      "type": "object",
-      "properties": {
-        "children": {
-          "description": "List of child entities.",
-          "items": {
-            "type": "string"
-          },
-          "type": "array"
-        },
-        "name": {
-          "description": "Name of the new hierarchical entity.",
-          "type": "string"
-        }
-      },
-      "example": {
-        "name": "Reservation",
-        "children": [ "Location::To", "datetime" ]
       }
     },
     "ApplicationPublishObject": {
       "description": "Object model for publishing a specific application version.",
-      "additionalProperties": false,
       "type": "object",
       "properties": {
         "versionId": {
@@ -4805,9 +5031,9 @@
         }
       },
       "example": {
-       "versionId": "0.1",
-       "isStaging": false,
-       "region": "westus"
+        "versionId": "0.1",
+        "isStaging": false,
+        "region": "westus"
       }
     },
     "LuisApp": {
@@ -5312,7 +5538,9 @@
         }
       },
       "required": [
-        "entityName", "startTokenIndex", "endTokenIndex"
+        "entityName",
+        "startTokenIndex",
+        "endTokenIndex"
       ]
     },
     "IntentPrediction": {
@@ -5332,7 +5560,12 @@
     "EntityPrediction": {
       "description": "A suggested entity.",
       "type": "object",
-      "required": ["entityName", "startTokenIndex", "endTokenIndex", "phrase"],
+      "required": [
+        "entityName",
+        "startTokenIndex",
+        "endTokenIndex",
+        "phrase"
+      ],
       "properties": {
         "entityName": {
           "description": "The entity's name",
@@ -5400,9 +5633,12 @@
           "$ref": "#/definitions/ReadableType"
         }
       },
-      "required": [ "id", "readableType" ]
+      "required": [
+        "id",
+        "readableType"
+      ]
     },
-    "ModelsInfoResponseObject" : {
+    "ModelsInfoResponseObject": {
       "description": "A list of application model infos.",
       "type": "array",
       "items": {
@@ -5430,13 +5666,26 @@
           "$ref": "#/definitions/ReadableType"
         }
       },
-      "required": [ "id", "readableType" ],
+      "required": [
+        "id",
+        "readableType"
+      ],
       "allOf": [
-        { "$ref": "#/definitions/HierarchicalEntityExtractor" },
-        { "$ref": "#/definitions/CompositeEntityExtractor"},
-        { "$ref": "#/definitions/ClosedListEntityExtractor" },
-        { "$ref": "#/definitions/IntentClassifier" },
-        { "$ref": "#/definitions/EntityExtractor" }
+        {
+          "$ref": "#/definitions/HierarchicalEntityExtractor"
+        },
+        {
+          "$ref": "#/definitions/CompositeEntityExtractor"
+        },
+        {
+          "$ref": "#/definitions/ClosedListEntityExtractor"
+        },
+        {
+          "$ref": "#/definitions/IntentClassifier"
+        },
+        {
+          "$ref": "#/definitions/EntityExtractor"
+        }
       ]
     },
     "ReadableType": {
@@ -5561,7 +5810,9 @@
           "description": "The name of a child entity."
         }
       },
-      "required": [ "id" ]
+      "required": [
+        "id"
+      ]
     },
     "HierarchicalChildEntity": {
       "description": "A Hierarchical Child Entity.",
@@ -5576,15 +5827,23 @@
         }
       },
       "allOf": [
-        { "$ref": "#/definitions/ChildEntity" }
+        {
+          "$ref": "#/definitions/ChildEntity"
+        }
       ]
     },
     "CustomPrebuiltModel": {
       "description": "A Custom Prebuilt model.",
       "allOf": [
-        { "$ref": "#/definitions/ModelInfo" },
-        { "$ref": "#/definitions/IntentClassifier" },
-        { "$ref": "#/definitions/EntityExtractor" }
+        {
+          "$ref": "#/definitions/ModelInfo"
+        },
+        {
+          "$ref": "#/definitions/IntentClassifier"
+        },
+        {
+          "$ref": "#/definitions/EntityExtractor"
+        }
       ]
     },
     "CustomPrebuiltModelList": {
@@ -5656,7 +5915,7 @@
           "$ref": "#/definitions/PhraseListFeatureInfoList"
         },
         "patternFeatures": {
-            "$ref": "#/definitions/PatternFeatureInfoList"
+          "$ref": "#/definitions/PatternFeatureInfoList"
         }
       }
     },
@@ -5688,7 +5947,9 @@
         }
       },
       "allOf": [
-        { "$ref": "#/definitions/FeatureInfoObject" }
+        {
+          "$ref": "#/definitions/FeatureInfoObject"
+        }
       ]
     },
     "PatternFeatureInfoList": {
@@ -5712,7 +5973,9 @@
         }
       },
       "allOf": [
-        { "$ref": "#/definitions/FeatureInfoObject" }
+        {
+          "$ref": "#/definitions/FeatureInfoObject"
+        }
       ]
     },
     "PhraseListFeatureInfoList": {
@@ -5747,6 +6010,9 @@
         },
         "hasError": {
           "type": "boolean"
+        },
+        "error": {
+          "$ref": "#/definitions/OperationStatus"
         }
       }
     },
@@ -5859,28 +6125,9 @@
     },
     "AvailableEndpoints": {
       "type": "object",
-      "description": "Collection of endpoint URLs the selected application is deployed to.",
-      "properties": {
-        "westus": {
-          "type": "string",
-          "example": "https://westus.api.cognitive.microsoft.com/api/v2.0/apps/bb25e72c-2279-46bb-a99b-89fcb921b58a"
-        },
-        "eastus2": {
-          "type": "string",
-          "example": "https://eastus2.api.cognitive.microsoft.com/api/v2.0/apps/bb25e72c-2279-46bb-a99b-89fcb921b58a"
-        },
-        "westcentralus": {
-          "type": "string",
-          "example": "https://westcentralus.api.cognitive.microsoft.com/api/v2.0/apps/bb25e72c-2279-46bb-a99b-89fcb921b58a"
-        },
-        "southeastasia": {
-          "type": "string",
-          "example": "https://southeastasia.api.cognitive.microsoft.com/api/v2.0/apps/bb25e72c-2279-46bb-a99b-89fcb921b58a"
-        },
-        "westeurope": {
-          "type": "string",
-          "example": "https://westeurope.dev.cognitive.microsoft.com/docs/services/5890b47c39e2bb17b84a55ff/operations/590aff885aca2f09e404ec3f"
-        }
+      "description": "Collection of endpoint URLs where the selected application is deployed to.",
+      "additionalProperties": {
+        "type": "string"
       }
     },
     "AvailableCulture": {
@@ -5934,7 +6181,10 @@
           "x-ms-client-name": "isPublic"
         }
       },
-      "required": [ "id", "public" ]
+      "required": [
+        "id",
+        "public"
+      ]
     },
     "AvailablePrebuiltEntityModel": {
       "description": "Available Prebuilt entity model for using in an application.",
@@ -6066,6 +6316,29 @@
           "items": {
             "type": "string"
           }
+        }
+      }
+    },
+    "OperationStatus": {
+      "description": "Response of an Operation status.",
+      "type": "object",
+      "properties": {
+        "code": {
+          "type": "string",
+          "description": "Status Code.",
+          "enum": [
+            "Failed",
+            "FAILED",
+            "Success"
+          ],
+          "x-ms-enum": {
+            "modelAsString": true,
+            "name": "OperationStatusType"
+          }
+        },
+        "message": {
+          "type": "string",
+          "description": "Status details."
         }
       }
     },
