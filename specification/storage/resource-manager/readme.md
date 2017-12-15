@@ -26,7 +26,17 @@ These are the global settings for the Storage API.
 
 ``` yaml
 openapi-type: arm
-tag: package-2017-06
+tag: package-2017-10
+```
+
+
+### Tag: package-2017-10
+
+These settings apply only when `--tag=package-2017-10` is specified on the command line.
+
+``` yaml $(tag) == 'package-2017-10'
+input-file:
+- Microsoft.Storage/2017-10-01/storage.json
 ```
 
 
@@ -191,10 +201,22 @@ Generate all API versions currently shipped for this package
 
 ```yaml $(python) && $(multiapi)
 batch:
+  - tag: package-2017-10
   - tag: package-2017-06
   - tag: package-2016-12
   - tag: package-2016-01
   - tag: package-2015-06
+```
+
+### Tag: package-2017-10 and python
+
+These settings apply only when `--tag=package-2017-10 --python` is specified on the command line.
+Please also specify `--python-sdks-folder=<path to the root directory of your azure-sdk-for-python clone>`.
+
+``` yaml $(tag) == 'package-2017-10' && $(python)
+python:
+  namespace: azure.mgmt.storage.v2017_10_01
+  output-folder: $(python-sdks-folder)/azure-mgmt-storage/azure/mgmt/storage/v2017_10_01
 ```
 
 ### Tag: package-2017-06 and python

@@ -1,15 +1,15 @@
 {
   "swagger": "2.0",
   "info": {
-    "title": "Content Moderator Image Text Client",
+    "title": "Content Moderator Client",
     "version": "1.0",
     "description": "You use the API to scan your content as it is generated. Content Moderator then processes your content and sends the results along with relevant information either back to your systems or to the built-in review tool. You can use this information to take decisions e.g. take it down, send to human judge, etc.\r\n\r\nWhen using the API, images need to have a minimum of 128 pixels and a maximum file size of 4MB. \r\nText can be at most 1024 characters long. \r\nIf the content passed to the text API or the image API exceeds the size limits, the API will return an error code that informs about the issue.\r\n\r\nThis API is currently available in:\r\n\r\n* West US - westus.api.cognitive.microsoft.com\r\n* East US 2 - eastus2.api.cognitive.microsoft.com\r\n* West Central US - westcentralus.api.cognitive.microsoft.com\r\n* West Europe - westeurope.api.cognitive.microsoft.com\r\n* Southeast Asia - southeastasia.api.cognitive.microsoft.com ."
   },
   "x-ms-parameterized-host": {
-    "hostTemplate": "{azureRegion}.api.cognitive.microsoft.com",
+    "hostTemplate": "{baseUrl}",
     "parameters": [
       {
-        "$ref": "#/parameters/AzureRegion"
+        "$ref": "#/parameters/baseUrl"
       }
     ]
   },
@@ -21,9 +21,9 @@
     "/contentmoderator/moderate/v1.0/ProcessImage/FindFaces": {
       "post": {
         "tags": [
-          "Images"
+          "ImageModeration"
         ],
-        "operationId": "Images_FindFaces",
+        "operationId": "ImageModeration_FindFaces",
         "description": "Returns the list of faces found.",
         "parameters": [
           {
@@ -31,13 +31,16 @@
           },
           {
             "$ref": "#/parameters/ocpApimSubscriptionKeyParameter"
-          },
-          {
-            "$ref": "#/parameters/contentTypeHeader"
           }
+
         ],
         "consumes": [
-          "application/json"
+          "application/json",
+          "image/gif",
+          "image/jpeg",
+          "image/png",
+          "image/bmp",
+          "image/tiff"
         ],
         "responses": {
           "200": {
@@ -47,7 +50,10 @@
             }
           },
           "default": {
-            "description": ""
+            "description": "Error response.",
+            "schema": {
+              "$ref": "#/definitions/APIError"
+            }
           }
         },
         "produces": [
@@ -58,28 +64,26 @@
     "/contentmoderator/moderate/v1.0/ProcessImage/OCR": {
       "post": {
         "tags": [
-          "Images"
+          "ImageModeration"
         ],
-        "operationId": "Images_OCR",
+        "operationId": "ImageModeration_OCR",
         "description": "Returns any text found in the image for the language specified. If no language is specified in input then the detection defaults to English.",
         "parameters": [
           {
-            "$ref": "#/parameters/languageQueryParameter"
+            "$ref": "#/parameters/language"
           },
           {
-             "$ref": "#/parameters/CacheImage"
+            "$ref": "#/parameters/CacheImage"
           },
           {
             "$ref": "#/parameters/enhanced"
           },
           {
             "$ref": "#/parameters/ocpApimSubscriptionKeyParameter"
-          },
-          {
-            "$ref": "#/parameters/contentTypeHeader"
           }
         ],
         "consumes": [
+          "application/json",
           "image/gif",
           "image/jpeg",
           "image/png",
@@ -88,13 +92,16 @@
         ],
         "responses": {
           "200": {
-            "description": "The found text and list of candidate text.",
+            "description": "The text found and list of candidate text details.",
             "schema": {
               "$ref": "#/definitions/OCR"
             }
           },
           "default": {
-            "description": ""
+            "description": "Error response.",
+            "schema": {
+              "$ref": "#/definitions/APIError"
+            }
           }
 
         },
@@ -106,9 +113,9 @@
     "/contentmoderator/moderate/v1.0/ProcessImage/Evaluate": {
       "post": {
         "tags": [
-          "Images"
+          "ImageModeration"
         ],
-        "operationId": "Images_Evaluate",
+        "operationId": "ImageModeration_Evaluate",
         "description": "Returns probabilities of the image containing racy or adult content.",
         "parameters": [
           {
@@ -116,13 +123,15 @@
           },
           {
             "$ref": "#/parameters/ocpApimSubscriptionKeyParameter"
-          },
-          {
-            "$ref": "#/parameters/contentTypeHeader"
           }
         ],
         "consumes": [
-          "application/json"
+          "application/json",
+          "image/gif",
+          "image/jpeg",
+          "image/png",
+          "image/bmp",
+          "image/tiff"
         ],
         "responses": {
           "200": {
@@ -132,7 +141,10 @@
             }
           },
           "default": {
-            "description": ""
+            "description": "Error response.",
+            "schema": {
+              "$ref": "#/definitions/APIError"
+            }
           }
         },
         "produces": [
@@ -143,9 +155,9 @@
     "/contentmoderator/moderate/v1.0/ProcessImage/Match": {
       "post": {
         "tags": [
-          "Images"
+          "ImageModeration"
         ],
-        "operationId": "Images_Match",
+        "operationId": "ImageModeration_Match",
         "description": "Fuzzily match an image against one of your custom Image Lists. You can create and manage your custom image lists using <a href=\"/docs/services/578ff44d2703741568569ab9/operations/578ff7b12703741568569abe\">this</a> API. \r\n\r\nReturns ID and tags of matching image.<br/>\r\n<br/>\r\nNote: Refresh Index must be run on the corresponding Image List before additions and removals are reflected in the response.",
         "parameters": [
           {
@@ -156,12 +168,11 @@
           },
           {
             "$ref": "#/parameters/ocpApimSubscriptionKeyParameter"
-          },
-          {
-            "$ref": "#/parameters/contentTypeHeader"
           }
+
         ],
         "consumes": [
+          "application/json",
           "image/gif",
           "image/jpeg",
           "image/png",
@@ -176,7 +187,10 @@
             }
           },
           "default": {
-            "description": ""
+            "description": "Error response.",
+            "schema": {
+              "$ref": "#/definitions/APIError"
+            }
           }
         },
         "produces": [
@@ -187,15 +201,15 @@
     "/contentmoderator/moderate/v1.0/ProcessText/Screen/": {
       "post": {
         "tags": [
-          "Text"
+          "TextModeration"
         ],
         "summary": "Detect profanity and match against custom and shared blacklists",
         "description": "Detects profanity in more than 100 languages and match against custom and shared blacklists.",
-        "operationId": "Text_ScreenText",
+        "operationId": "TextModeration_ScreenText",
 
         "parameters": [
           {
-            "$ref": "#/parameters/languageQueryParameter"
+            "$ref": "#/parameters/language"
           },
           {
             "$ref": "#/parameters/autocorrect"
@@ -210,7 +224,21 @@
             "$ref": "#/parameters/classify"
           },
           {
-            "$ref": "#/parameters/contentTypeHeader"
+            "name": "Content-Type",
+            "description": "The content type.",
+            "required": true,
+            "x-ms-client-name": "textContentType",
+            "type": "string",
+            "in": "header",
+            "enum": [
+              "text/plain",
+              "text/html",
+              "text/xml",
+              "text/markdown"
+            ]
+          },
+          {
+            "$ref": "#/parameters/ocpApimSubscriptionKeyParameter"
           },
           {
             "$ref": "#/parameters/textContent"
@@ -228,6 +256,12 @@
             "schema": {
               "$ref": "#/definitions/Screen"
             }
+          },
+          "default": {
+            "description": "Error response.",
+            "schema": {
+              "$ref": "#/definitions/APIError"
+            }
           }
         },
         "x-ms-examples": {
@@ -243,19 +277,30 @@
     "/contentmoderator/moderate/v1.0/ProcessText/DetectLanguage": {
       "post": {
         "tags": [
-          "Text"
+          "TextModeration"
         ],
-        "operationId": "Text_DetectLanguage",
+        "operationId": "TextModeration_DetectLanguage",
         "description": "This operation will detect the language of given input content. Returns the <a href=\"http://www-01.sil.org/iso639-3/codes.asp\">ISO 639-3 code</a> for the predominant language comprising the submitted text. Over 110 languages supported.",
         "parameters": [
           {
             "$ref": "#/parameters/ocpApimSubscriptionKeyParameter"
           },
           {
-            "$ref": "#/parameters/contentTypeHeader"
+            "name": "Content-Type",
+            "description": "The content type.",
+            "required": true,
+            "x-ms-client-name": "textContentType",
+            "type": "string",
+            "in": "header",
+            "enum": [
+              "text/plain",
+              "text/html",
+              "text/xml",
+              "text/markdown"
+            ]
           },
           {
-            "$ref": "#/parameters/textBody"
+            "$ref": "#/parameters/textContent"
           }
         ],
         "consumes": [
@@ -268,11 +313,14 @@
           "200": {
             "description": "The detected language result.",
             "schema": {
-              "$ref": "#/definitions/DetectedLanguageResult"
+              "$ref": "#/definitions/DetectedLanguage"
             }
           },
           "default": {
-            "description": ""
+            "description": "Error response.",
+            "schema": {
+              "$ref": "#/definitions/APIError"
+            }
           }
         },
         "x-ms-examples": {
@@ -288,9 +336,9 @@
     "/contentmoderator/lists/v1.0/imagelists/{listId}": {
       "get": {
         "tags": [
-          "ImageList"
+          "ListManagementImageLists"
         ],
-        "operationId": "ImageList_GetDetails",
+        "operationId": "ListManagementImageLists_GetDetails",
         "description": "Returns the details of the image list with list Id equal to list Id passed.",
         "parameters": [
           {
@@ -305,7 +353,13 @@
           "200": {
             "description": "OK",
             "schema": {
-              "$ref": "#/definitions/ImageListGetDetails"
+              "$ref": "#/definitions/ImageList"
+            }
+          },
+          "default": {
+            "description": "Error response.",
+            "schema": {
+              "$ref": "#/definitions/APIError"
             }
           }
         },
@@ -320,9 +374,9 @@
       },
       "delete": {
         "tags": [
-          "ImageList"
+          "ListManagementImageLists"
         ],
-        "operationId": "ImageList_Delete",
+        "operationId": "ListManagementImageLists_Delete",
         "description": "Deletes image list with the list Id equal to list Id passed.",
         "parameters": [
           {
@@ -338,6 +392,12 @@
             "schema": {
               "type": "string"
             }
+          },
+          "default": {
+            "description": "Error response.",
+            "schema": {
+              "$ref": "#/definitions/APIError"
+            }
           }
         },
         "x-ms-examples": {
@@ -351,16 +411,20 @@
       },
       "put": {
         "tags": [
-          "ImageList"
+          "ListManagementImageLists"
         ],
-        "operationId": "ImageList_Update",
+        "operationId": "ListManagementImageLists_Update",
         "description": "Updates an image list with list Id equal to list Id passed.",
         "parameters": [
           {
             "$ref": "#/parameters/listId"
           },
           {
-            "$ref": "#/parameters/contentTypeHeader"
+            "name": "Content-Type",
+            "description": "The content type.",
+            "required": true,
+            "type": "string",
+            "in": "header"
           },
           {
             "$ref": "#/parameters/body"
@@ -376,7 +440,13 @@
           "200": {
             "description": "OK",
             "schema": {
-              "$ref": "#/definitions/UpdateImageList"
+              "$ref": "#/definitions/ImageList"
+            }
+          },
+          "default": {
+            "description": "Error response.",
+            "schema": {
+              "$ref": "#/definitions/APIError"
             }
           }
         },
@@ -393,13 +463,17 @@
     "/contentmoderator/lists/v1.0/imagelists": {
       "post": {
         "tags": [
-          "ImageList"
+          "ListManagementImageLists"
         ],
-        "operationId": "ImageList_Create",
+        "operationId": "ListManagementImageLists_Create",
         "description": "Creates an image list.",
         "parameters": [
           {
-            "$ref": "#/parameters/contentTypeHeader"
+            "name": "Content-Type",
+            "description": "The content type.",
+            "required": true,
+            "type": "string",
+            "in": "header"
           },
           {
             "$ref": "#/parameters/body"
@@ -415,7 +489,13 @@
           "200": {
             "description": "OK",
             "schema": {
-              "$ref": "#/definitions/CreateImageList"
+              "$ref": "#/definitions/ImageList"
+            }
+          },
+          "default": {
+            "description": "Error response.",
+            "schema": {
+              "$ref": "#/definitions/APIError"
             }
           }
         },
@@ -430,9 +510,9 @@
       },
       "get": {
         "tags": [
-          "ImageList"
+          "ListManagementImageLists"
         ],
-        "operationId": "ImageList_GetAllImageLists",
+        "operationId": "ListManagementImageLists_GetAllImageLists",
         "description": "Gets all the Image Lists.",
         "parameters": [
           {
@@ -443,7 +523,13 @@
           "200": {
             "description": "OK",
             "schema": {
-              "$ref": "#/definitions/GetAllImageList"
+              "$ref": "#/definitions/ImageLists"
+            }
+          },
+          "default": {
+            "description": "Error response.",
+            "schema": {
+              "$ref": "#/definitions/APIError"
             }
           }
         },
@@ -460,9 +546,9 @@
     "/contentmoderator/lists/v1.0/imagelists/{listId}/RefreshIndex": {
       "post": {
         "tags": [
-          "ImageList"
+          "ListManagementImageLists"
         ],
-        "operationId": "ImageList_RefreshIndex",
+        "operationId": "ListManagementImageLists_RefreshIndex",
         "description": "Refreshes the index of the list with list Id equal to list Id passed.",
         "parameters": [
           {
@@ -481,6 +567,12 @@
             "schema": {
               "$ref": "#/definitions/RefreshIndex"
             }
+          },
+          "default": {
+            "description": "Error response.",
+            "schema": {
+              "$ref": "#/definitions/APIError"
+            }
           }
         },
         "x-ms-examples": {
@@ -496,9 +588,9 @@
     "/contentmoderator/lists/v1.0/termlists/{listId}": {
       "get": {
         "tags": [
-          "TermsList"
+          "ListManagementTermLists"
         ],
-        "operationId": "TermsList_GetDetails",
+        "operationId": "ListManagementTermLists_GetDetails",
         "description": "Returns list Id details of the term list with list Id equal to list Id passed.",
         "parameters": [
           {
@@ -512,7 +604,13 @@
           "200": {
             "description": "OK",
             "schema": {
-              "$ref": "#/definitions/TermListGetListIdDetails"
+              "$ref": "#/definitions/TermList"
+            }
+          },
+          "default": {
+            "description": "Error response.",
+            "schema": {
+              "$ref": "#/definitions/APIError"
             }
           }
         },
@@ -527,9 +625,9 @@
       },
       "delete": {
         "tags": [
-          "Termlist"
+          "ListManagementTermLists"
         ],
-        "operationId": "Termlist_Delete",
+        "operationId": "ListManagementTermLists_Delete",
         "description": "Deletes term list with the list Id equal to list Id passed.",
         "parameters": [
           {
@@ -545,6 +643,12 @@
             "schema": {
               "type": "string"
             }
+          },
+          "default": {
+            "description": "Error response.",
+            "schema": {
+              "$ref": "#/definitions/APIError"
+            }
           }
         },
         "x-ms-examples": {
@@ -558,16 +662,20 @@
       },
       "put": {
         "tags": [
-          "Termlist"
+          "ListManagementTermLists"
         ],
-        "operationId": "Termlist_Update",
+        "operationId": "ListManagementTermLists_Update",
         "description": "Updates an Term List.",
         "parameters": [
           {
             "$ref": "#/parameters/listId"
           },
           {
-            "$ref": "#/parameters/contentTypeHeader"
+            "name": "Content-Type",
+            "description": "The content type.",
+            "required": true,
+            "type": "string",
+            "in": "header"
           },
           {
             "$ref": "#/parameters/body"
@@ -583,7 +691,13 @@
           "200": {
             "description": "OK",
             "schema": {
-              "$ref": "#/definitions/UpdateTermList"
+              "$ref": "#/definitions/TermList"
+            }
+          },
+          "default": {
+            "description": "Error response.",
+            "schema": {
+              "$ref": "#/definitions/APIError"
             }
           }
         },
@@ -600,13 +714,17 @@
     "/contentmoderator/lists/v1.0/termlists": {
       "post": {
         "tags": [
-          "Termlist"
+          "ListManagementTermLists"
         ],
-        "operationId": "Termlists_Create",
+        "operationId": "ListManagementTermLists_Create",
         "description": "Creates a Term List",
         "parameters": [
           {
-            "$ref": "#/parameters/contentTypeHeader"
+            "name": "Content-Type",
+            "description": "The content type.",
+            "required": true,
+            "type": "string",
+            "in": "header"
           },
           {
             "$ref": "#/parameters/body"
@@ -622,7 +740,13 @@
           "200": {
             "description": "OK",
             "schema": {
-              "$ref": "#/definitions/CreateTermList"
+              "$ref": "#/definitions/TermList"
+            }
+          },
+          "default": {
+            "description": "Error response.",
+            "schema": {
+              "$ref": "#/definitions/APIError"
             }
           }
         },
@@ -637,9 +761,9 @@
       },
       "get": {
         "tags": [
-          "Termlist"
+          "ListManagementTermLists"
         ],
-        "operationId": "Termlist_GetAllTermLists",
+        "operationId": "ListManagementTermLists_GetAllTermLists",
         "description": "gets all the Term Lists",
         "parameters": [
           {
@@ -650,7 +774,13 @@
           "200": {
             "description": "OK",
             "schema": {
-              "$ref": "#/definitions/GetAllTermList"
+              "$ref": "#/definitions/TermLists"
+            }
+          },
+          "default": {
+            "description": "Error response.",
+            "schema": {
+              "$ref": "#/definitions/APIError"
             }
           }
         },
@@ -667,9 +797,9 @@
     "/contentmoderator/lists/v1.0/termlists/{listId}/RefreshIndex": {
       "post": {
         "tags": [
-          "Termlist"
+          "ListManagementTermLists"
         ],
-        "operationId": "Termlist_RefreshIndex",
+        "operationId": "ListManagementTermLists_RefreshIndex",
         "description": "Refreshes the index of the list with list Id equal to list ID passed.",
         "parameters": [
           {
@@ -677,6 +807,9 @@
           },
           {
             "$ref": "#/parameters/ocpApimSubscriptionKeyParameter"
+          },
+          {
+            "$ref": "#/parameters/language"
           }
         ],
         "consumes": [
@@ -687,6 +820,12 @@
             "description": "OK",
             "schema": {
               "$ref": "#/definitions/RefreshIndex"
+            }
+          },
+          "default": {
+            "description": "Error response.",
+            "schema": {
+              "$ref": "#/definitions/APIError"
             }
           }
         },
@@ -703,9 +842,9 @@
     "/contentmoderator/lists/v1.0/imagelists/{listId}/images": {
       "post": {
         "tags": [
-          "ImageList"
+          "ListManagementImage"
         ],
-        "operationId": "ImageList_AddImage",
+        "operationId": "ListManagementImage_AddImage",
         "description": "Add an image to the list with list Id equal to list Id passed.",
         "parameters": [
           {
@@ -719,25 +858,28 @@
           },
           {
             "$ref": "#/parameters/ocpApimSubscriptionKeyParameter"
-          },
-          {
-            "$ref": "#/parameters/contentTypeHeader"
           }
 
         ],
         "consumes": [
+          "application/json",
           "image/gif",
           "image/jpeg",
           "image/png",
           "image/bmp",
-          "image/tiff",
-          "application/json"
+          "image/tiff"
         ],
         "responses": {
           "200": {
             "description": "OK",
             "schema": {
-              "$ref": "#/definitions/AddImage"
+              "$ref": "#/definitions/Image"
+            }
+          },
+          "default": {
+            "description": "Error response.",
+            "schema": {
+              "$ref": "#/definitions/APIError"
             }
           }
         },
@@ -752,9 +894,9 @@
       },
       "delete": {
         "tags": [
-          "ImageList"
+          "ListManagementImage"
         ],
-        "operationId": "ImageList_DeleteAllImages",
+        "operationId": "ListManagementImage_DeleteAllImages",
         "description": "Deletes all images from the list with list Id equal to list Id passed.",
         "parameters": [
           {
@@ -770,6 +912,12 @@
             "schema": {
               "type": "string"
             }
+          },
+          "default": {
+            "description": "Error response.",
+            "schema": {
+              "$ref": "#/definitions/APIError"
+            }
           }
         },
         "x-ms-examples": {
@@ -783,9 +931,9 @@
       },
       "get": {
         "tags": [
-          "ImageList"
+          "ListManagementImage"
         ],
-        "operationId": "ImageList_GetAllImageIds",
+        "operationId": "ListManagementImage_GetAllImageIds",
         "description": "Gets all image Ids from the list with list Id equal to list Id passed.",
         "parameters": [
           {
@@ -799,7 +947,13 @@
           "200": {
             "description": "OK",
             "schema": {
-              "$ref": "#/definitions/GetAllImageIds"
+              "$ref": "#/definitions/ImageIds"
+            }
+          },
+          "default": {
+            "description": "Error response.",
+            "schema": {
+              "$ref": "#/definitions/APIError"
             }
           }
         },
@@ -816,9 +970,9 @@
     "/contentmoderator/lists/v1.0/imagelists/{listId}/images/{ImageId}": {
       "delete": {
         "tags": [
-          "ImageList"
+          "ListManagementImage"
         ],
-        "operationId": "ImageList_DeleteImage",
+        "operationId": "ListManagementImage_DeleteImage",
         "description": "Deletes an image from the list with list Id and image Id passed.",
         "parameters": [
           {
@@ -837,6 +991,12 @@
             "schema": {
               "type": "string"
             }
+          },
+          "default": {
+            "description": "Error response.",
+            "schema": {
+              "$ref": "#/definitions/APIError"
+            }
           }
         },
         "x-ms-examples": {
@@ -852,9 +1012,9 @@
     "/contentmoderator/lists/v1.0/termlists/{listId}/terms/{term}": {
       "post": {
         "tags": [
-          "TermList"
+          "ListManagementTerm"
         ],
-        "operationId": "TermList_AddTerm",
+        "operationId": "ListManagementTerm_AddTerm",
         "description": "Add a term to the term list with list Id equal to list Id passed.",
         "parameters": [
           {
@@ -875,10 +1035,16 @@
           "application/json"
         ],
         "responses": {
-          "200": {
-            "description": "OK",
+          "201": {
+            "description": "Created",
             "schema": {
 
+            }
+          },
+          "default": {
+            "description": "Error response.",
+            "schema": {
+              "$ref": "#/definitions/APIError"
             }
           }
         },
@@ -893,9 +1059,9 @@
       },
       "delete": {
         "tags": [
-          "TermsList"
+          "ListManagementTerm"
         ],
-        "operationId": "TermsList_DeleteTerm",
+        "operationId": "ListManagementTerm_DeleteTerm",
         "description": "Deletes a term from the list with list Id equal to the list Id passed.",
         "parameters": [
           {
@@ -912,12 +1078,19 @@
           }
         ],
         "responses": {
-          "200": {
-            "description": "OK",
+          "204": {
+            "description": "No Content",
             "schema": {
               "type": "string"
             }
+          },
+          "default": {
+            "description": "Error response.",
+            "schema": {
+              "$ref": "#/definitions/APIError"
+            }
           }
+
         },
         "x-ms-examples": {
           "Delete Term request": {
@@ -932,9 +1105,9 @@
     "/contentmoderator/lists/v1.0/termlists/{listId}/terms": {
       "get": {
         "tags": [
-          "Termlist"
+          "ListManagementTerm"
         ],
-        "operationId": "Termlist_GetAllTerms",
+        "operationId": "ListManagementTerm_GetAllTerms",
         "description": "Gets all terms from the list with list Id equal to the list Id passed.",
         "parameters": [
           {
@@ -945,13 +1118,33 @@
           },
           {
             "$ref": "#/parameters/ocpApimSubscriptionKeyParameter"
+          },
+          {
+            "name": "offset",
+            "in": "query",
+            "description": "The pagination start index.",
+            "required": false,
+            "type": "integer"
+          },
+          {
+            "name": "limit",
+            "in": "query",
+            "description": "The max limit.",
+            "required": false,
+            "type": "integer"
           }
         ],
         "responses": {
           "200": {
             "description": "OK",
             "schema": {
-              "$ref": "#/definitions/GetAllTerms"
+              "$ref": "#/definitions/Terms"
+            }
+          },
+          "default": {
+            "description": "Error response.",
+            "schema": {
+              "$ref": "#/definitions/APIError"
             }
           }
         },
@@ -966,9 +1159,9 @@
       },
       "delete": {
         "tags": [
-          "Termlist"
+          "ListManagementTerm"
         ],
-        "operationId": "Termlist_DeleteAllTerms",
+        "operationId": "ListManagementTerm_DeleteAllTerms",
         "description": "Deletes all terms from the list with list Id equal to the list Id passed.",
         "parameters": [
           {
@@ -982,10 +1175,16 @@
           }
         ],
         "responses": {
-          "200": {
-            "description": "OK",
+          "204": {
+            "description": "No Content",
             "schema": {
               "type": "string"
+            }
+          },
+          "default": {
+            "description": "Error response.",
+            "schema": {
+              "$ref": "#/definitions/APIError"
             }
           }
         },
@@ -1031,6 +1230,12 @@
             "schema": {
               "$ref": "#/definitions/Review"
             }
+          },
+          "default": {
+            "description": "Error response.",
+            "schema": {
+              "$ref": "#/definitions/APIError"
+            }
           }
         },
         "x-ms-examples": {
@@ -1046,9 +1251,9 @@
     "/contentmoderator/review/v1.0/teams/{teamName}/jobs/{JobId}": {
       "get": {
         "tags": [
-          "Jobs"
+          "Reviews"
         ],
-        "operationId": "Jobs_GetJobDetails",
+        "operationId": "Reviews_GetJobDetails",
         "description": "Get the Job Details for a Job Id.",
         "parameters": [
           {
@@ -1075,6 +1280,12 @@
             "schema": {
               "$ref": "#/definitions/Job"
             }
+          },
+          "default": {
+            "description": "Error response.",
+            "schema": {
+              "$ref": "#/definitions/APIError"
+            }
           }
         },
         "x-ms-examples": {
@@ -1096,24 +1307,20 @@
         "description": "The reviews created would show up for Reviewers on your team. As Reviewers complete reviewing, results of the Review would be POSTED (i.e. HTTP POST) on the specified CallBackEndpoint.\r\n\r\n<h3>CallBack Schemas </h3>\r\n<h4>Review Completion CallBack Sample</h4>\r\n<p>\r\n{<br/>\r\n  \"ReviewId\": \"<Review Id>\",<br/>\r\n  \"ModifiedOn\": \"2016-10-11T22:36:32.9934851Z\",<br/>\r\n  \"ModifiedBy\": \"<Name of the Reviewer>\",<br/>\r\n  \"CallBackType\": \"Review\",<br/>\r\n  \"ContentId\": \"<The ContentId that was specified input>\",<br/>\r\n  \"Metadata\": {<br/>\r\n    \"adultscore\": \"0.xxx\",<br/>\r\n    \"a\": \"False\",<br/>\r\n    \"racyscore\": \"0.xxx\",<br/>\r\n    \"r\": \"True\"<br/>\r\n  },<br/>\r\n  \"ReviewerResultTags\": {<br/>\r\n    \"a\": \"False\",<br/>\r\n    \"r\": \"True\"<br/>\r\n  }<br/>\r\n}<br/>\r\n\r\n</p>.",
         "parameters": [
           {
-            "$ref": "#/parameters/contentTypeHeader"
-          },
-          {
-            "name": "teamName",
-            "description": "Your team name.",
-            "in": "path",
+            "name": "UrlContentType",
+            "description": "The content type.",
             "required": true,
-            "type": "string"
+            "type": "string",
+            "in": "header"
           },
           {
-            "name": "subTeam",
-            "description": "SubTeam of your team, you want to assign the created review to.",
-            "in": "query",
-            "required": false,
-            "type": "string"
+            "$ref": "#/parameters/teamName"
           },
           {
-            "name": "body",
+            "$ref": "#/parameters/subTeam"
+          },
+          {
+            "name": "createReviewBody",
             "description": "Body for create reviews API",
             "in": "body",
             "required": true,
@@ -1172,9 +1379,6 @@
                   }
                 }
               }
-            },
-            "x-examples": {
-              "application/json": "[\n  {\n    \"Metadata\": [\n      {\n        \"Key\": \"string\",\n        \"Value\": \"string\"\n      }\n    ],\n    \"Type\": \"Image\",\n    \"Content\": \"<Content Url>\",\n    \"ContentId\": \"<Your identifier for this content>\",\n    \"CallbackEndpoint\": \"<Url where you would receive callbacks>\"\n  }\n]"
             }
           },
           {
@@ -1188,7 +1392,13 @@
           "200": {
             "description": "OK",
             "schema": {
-              "$ref": "#/definitions/ReviewListResult"
+              "$ref": "#/definitions/ReviewList"
+            }
+          },
+          "default": {
+            "description": "Error response.",
+            "schema": {
+              "$ref": "#/definitions/APIError"
             }
           }
         },
@@ -1206,56 +1416,40 @@
     "/contentmoderator/review/v1.0/teams/{teamName}/jobs": {
       "post": {
         "tags": [
-          "Jobs"
+          "Reviews"
         ],
-        "operationId": "Jobs_CreateJob",
+        "operationId": "Reviews_CreateJob",
         "description": "A job Id will be returned for the content posted on this endpoint. \r\n\r\nOnce the content is evaluated against the Workflow provided the review will be created or ignored based on the workflow expression.\r\n\r\n<h3>CallBack Schemas </h3>\r\n\r\n<p>\r\n<h4>Job Completion CallBack Sample</h4><br/>\r\n\r\n{<br/>\r\n  \"JobId\": \"<Job Id>,<br/>\r\n  \"ReviewId\": \"<Review Id, if the Job resulted in a Review to be created>\",<br/>\r\n  \"WorkFlowId\": \"default\",<br/>\r\n  \"Status\": \"<This will be one of Complete, InProgress, Error>\",<br/>\r\n  \"ContentType\": \"Image\",<br/>\r\n  \"ContentId\": \"<This is the ContentId that was specified on input>\",<br/>\r\n  \"CallBackType\": \"Job\",<br/>\r\n  \"Metadata\": {<br/>\r\n    \"adultscore\": \"0.xxx\",<br/>\r\n    \"a\": \"False\",<br/>\r\n    \"racyscore\": \"0.xxx\",<br/>\r\n    \"r\": \"True\"<br/>\r\n  }<br/>\r\n}<br/>\r\n\r\n</p>\r\n<p>\r\n<h4>Review Completion CallBack Sample</h4><br/>\r\n\r\n{\r\n  \"ReviewId\": \"<Review Id>\",<br/>\r\n  \"ModifiedOn\": \"2016-10-11T22:36:32.9934851Z\",<br/>\r\n  \"ModifiedBy\": \"<Name of the Reviewer>\",<br/>\r\n  \"CallBackType\": \"Review\",<br/>\r\n  \"ContentId\": \"<The ContentId that was specified input>\",<br/>\r\n  \"Metadata\": {<br/>\r\n    \"adultscore\": \"0.xxx\",\r\n    \"a\": \"False\",<br/>\r\n    \"racyscore\": \"0.xxx\",<br/>\r\n    \"r\": \"True\"<br/>\r\n  },<br/>\r\n  \"ReviewerResultTags\": {<br/>\r\n    \"a\": \"False\",<br/>\r\n    \"r\": \"True\"<br/>\r\n  }<br/>\r\n}<br/>\r\n\r\n</p>.",
         "parameters": [
           {
-            "name": "teamName",
-            "in": "path",
-            "description": "Your team name.",
-            "required": true,
-            "type": "string"
+            "$ref": "#/parameters/teamName"
           },
           {
-            "name": "ContentType",
-            "in": "query",
-            "description": "Image, Text or Video.",
-            "required": true,
-            "type": "string",
-            "default": "Image",
-            "enum": [
-              "Image",
-              "Text",
-              "Video"
-            ]
+            "$ref": "#/parameters/ContentType"
           },
           {
-            "name": "ContentId",
-            "in": "query",
-            "description": "Id/Name to identify the content submitted.",
-            "required": true,
-            "type": "string"
+            "$ref": "#/parameters/ContentId"
           },
           {
-            "name": "WorkflowName",
-            "in": "query",
-            "description": "Workflow Name that you want to invoke.",
-            "required": true,
-            "type": "string"
+            "$ref": "#/parameters/WorkflowName"
           },
           {
-            "name": "CallBackEndpoint",
-            "in": "query",
-            "description": "Callback endpoint for posting the create job result.",
-            "type": "string"
+            "$ref": "#/parameters/CallBackEndpoint"
           },
           {
             "$ref": "#/parameters/ocpApimSubscriptionKeyParameter"
           },
           {
-            "$ref": "#/parameters/contentTypeHeader"
+            "name": "Content-Type",
+            "description": "The content type.",
+            "required": true,
+            "x-ms-client-name": "jobContentType",
+            "type": "string",
+            "in": "header",
+            "enum": [
+              "application/json",
+              "image/jpeg"
+            ]
           },
           {
             "name": "Content",
@@ -1287,7 +1481,13 @@
           "200": {
             "description": "OK",
             "schema": {
-              "$ref": "#/definitions/CreateJob"
+              "$ref": "#/definitions/JobId"
+            }
+          },
+          "default": {
+            "description": "Error response.",
+            "schema": {
+              "$ref": "#/definitions/APIError"
             }
           }
         },
@@ -1301,29 +1501,292 @@
           "text/json"
         ]
       }
-    }
-  },
-  "x-ms-paths": {
-    "/contentmoderator/moderate/v1.0/ProcessImage/FindFaces?overload=stream": {
+    },
+    "/contentmoderator/review/v1.0/teams/{teamName}/reviews/{reviewId}/frames": {
       "post": {
         "tags": [
-          "Images"
+          "Reviews"
         ],
-        "operationId": "Images_FindFacesFileInput",
-        "description": "Returns the list of faces found.",
+        "operationId": "Reviews_AddVideoFrame",
+        "description": "The reviews created would show up for Reviewers on your team. As Reviewers complete reviewing, results of the Review would be POSTED (i.e. HTTP POST) on the specified CallBackEndpoint.\r\n\r\n<h3>CallBack Schemas </h3>\r\n<h4>Review Completion CallBack Sample</h4>\r\n<p>\r\n{<br/>\r\n  \"ReviewId\": \"<Review Id>\",<br/>\r\n  \"ModifiedOn\": \"2016-10-11T22:36:32.9934851Z\",<br/>\r\n  \"ModifiedBy\": \"<Name of the Reviewer>\",<br/>\r\n  \"CallBackType\": \"Review\",<br/>\r\n  \"ContentId\": \"<The ContentId that was specified input>\",<br/>\r\n  \"Metadata\": {<br/>\r\n    \"adultscore\": \"0.xxx\",<br/>\r\n    \"a\": \"False\",<br/>\r\n    \"racyscore\": \"0.xxx\",<br/>\r\n    \"r\": \"True\"<br/>\r\n  },<br/>\r\n  \"ReviewerResultTags\": {<br/>\r\n    \"a\": \"False\",<br/>\r\n    \"r\": \"True\"<br/>\r\n  }<br/>\r\n}<br/>\r\n\r\n</p>.",
         "parameters": [
+
           {
-            "name": "CacheImage",
+            "$ref": "#/parameters/teamName"
+          },
+          {
+            "name": "reviewId",
+            "description": "Id of the review.",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "timescale",
+            "description": "Timescale of the video you are adding frames to.",
             "in": "query",
-            "description": "Whether to retain the submitted image for future use; defaults to false if omitted.",
-            "type": "boolean"
+            "required": false,
+            "type": "integer"
+          },
+          {
+            "$ref": "#/parameters/ocpApimSubscriptionKeyParameter"
+          }
+        ],
+        "consumes": [
+          "application/json",
+          "application/x-www-form-urlencoded"
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "default": {
+            "description": "Error response.",
+            "schema": {
+              "$ref": "#/definitions/APIError"
+            }
+          }
+        },
+        "produces": [
+          "application/json"
+        ]
+
+      },
+      "get": {
+        "tags": [
+          "Reviews"
+        ],
+        "operationId": "Reviews_GetVideoFrames",
+        "description": "The reviews created would show up for Reviewers on your team. As Reviewers complete reviewing, results of the Review would be POSTED (i.e. HTTP POST) on the specified CallBackEndpoint.\r\n\r\n<h3>CallBack Schemas </h3>\r\n<h4>Review Completion CallBack Sample</h4>\r\n<p>\r\n{<br/>\r\n  \"ReviewId\": \"<Review Id>\",<br/>\r\n  \"ModifiedOn\": \"2016-10-11T22:36:32.9934851Z\",<br/>\r\n  \"ModifiedBy\": \"<Name of the Reviewer>\",<br/>\r\n  \"CallBackType\": \"Review\",<br/>\r\n  \"ContentId\": \"<The ContentId that was specified input>\",<br/>\r\n  \"Metadata\": {<br/>\r\n    \"adultscore\": \"0.xxx\",<br/>\r\n    \"a\": \"False\",<br/>\r\n    \"racyscore\": \"0.xxx\",<br/>\r\n    \"r\": \"True\"<br/>\r\n  },<br/>\r\n  \"ReviewerResultTags\": {<br/>\r\n    \"a\": \"False\",<br/>\r\n    \"r\": \"True\"<br/>\r\n  }<br/>\r\n}<br/>\r\n\r\n</p>.",
+        "parameters": [
+
+          {
+            "$ref": "#/parameters/teamName"
+          },
+          {
+            "$ref": "#/parameters/reviewId"
           },
           {
             "$ref": "#/parameters/ocpApimSubscriptionKeyParameter"
           },
           {
-            "$ref": "#/parameters/contentTypeHeader"
+            "name": "startSeed",
+            "in": "query",
+            "description": "Time stamp of the frame from where you want to start fetching the frames.",
+            "type": "integer"
           },
+          {
+            "name": "noOfRecords",
+            "in": "query",
+            "description": "Number of frames to fetch.",
+            "type": "integer"
+          },
+          {
+            "name": "filter",
+            "in": "query",
+            "description": "Get frames filtered by tags.",
+            "type": "string"
+          }
+        ],
+        "consumes": [
+          "application/json"
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/Frames"
+            }
+          },
+          "default": {
+            "description": "Error response.",
+            "schema": {
+              "$ref": "#/definitions/APIError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Get Frames Request": {
+            "$ref": "./examples/GetFramesResource.JSON"
+          }
+        },
+        "produces": [
+          "application/json"
+        ]
+
+      }
+    },
+    "/contentmoderator/review/v1.0/teams/{teamName}/reviews/{reviewId}/publish": {
+      "post": {
+        "tags": [
+          "Reviews"
+        ],
+        "operationId": "Reviews_PublishVideoReview",
+        "description": "Publish video review to make it available for review.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/teamName"
+          },
+          {
+            "$ref": "#/parameters/reviewId"
+          },
+          {
+            "$ref": "#/parameters/ocpApimSubscriptionKeyParameter"
+          }
+        ],
+        "consumes": [
+          "application/json"
+        ],
+        "responses": {
+          "204": {
+            "description": "No Content"
+          },
+          "default": {
+            "description": "Error response.",
+            "schema": {
+              "$ref": "#/definitions/APIError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "publish video request": {
+            "$ref": "./examples/PublishVideoReviewResource.JSON"
+          }
+        },
+        "produces": [
+          "application/json"
+        ]
+      }
+    },
+    "/contentmoderator/review/v1.0/teams/{teamName}/reviews/{reviewId}/transcriptmoderationresult": {
+      "put": {
+        "tags": [
+          "Reviews"
+        ],
+        "operationId": "Reviews_AddVideoTranscriptModerationResult",
+        "description": "This API adds a transcript screen text result file for a video review. Transcript screen text result file is a result of Screen Text API . In order to generate transcript screen text result file , a transcript file has to be screened for profanity using Screen Text API.",
+        "parameters": [
+          {
+
+            "name": "Content-Type",
+            "description": "The content type.",
+            "x-ms-client-name": "ContentType",
+            "required": true,
+            "type": "string",
+            "in": "header"
+          },
+          {
+            "$ref": "#/parameters/teamName"
+          },
+          {
+            "$ref": "#/parameters/reviewId"
+          },
+          {
+            "$ref": "#/parameters/transcriptModerationBody"
+          },
+          {
+            "$ref": "#/parameters/ocpApimSubscriptionKeyParameter"
+          }
+        ],
+        "consumes": [
+          "application/json"
+        ],
+        "responses": {
+          "204": {
+            "description": "No Content"
+          },
+          "default": {
+            "description": "Error response.",
+            "schema": {
+              "$ref": "#/definitions/APIError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Transcript moderation result request": {
+            "$ref": "./examples/TranscriptModerationResult.JSON"
+          }
+        },
+        "produces": [
+          "application/json"
+        ]
+
+      }
+    },
+    "/contentmoderator/review/v1.0/teams/{teamName}/reviews/{reviewId}/transcript": {
+      "put": {
+        "tags": [
+          "Reviews"
+        ],
+        "operationId": "Reviews_AddVideoTranscript",
+        "description": "This API adds a transcript file (text version of all the words spoken in a video) to a video review. The file should be a valid WebVTT format.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/teamName"
+          },
+          {
+            "$ref": "#/parameters/reviewId"
+          },
+          {
+            "$ref": "#/parameters/ocpApimSubscriptionKeyParameter"
+          },
+          {
+            "name": "Content-Type",
+            "description": "The content type.",
+            "required": true,
+            "x-ms-client-name": "ContentType",
+            "type": "string",
+            "in": "header",
+            "enum": [
+              "text/plain"
+            ]
+          },
+          {
+            "$ref": "#/parameters/transcriptFile"
+          }
+        ],
+        "consumes": [
+          "text/plain"
+        ],
+        "responses": {
+          "204": {
+            "description": "No Content"
+          },
+          "default": {
+            "description": "Error response.",
+            "schema": {
+              "$ref": "#/definitions/APIError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Add transcript request": {
+            "$ref": "./examples/AddVideoTranscriptResource.JSON"
+          }
+        },
+        "produces": [
+          "application/json"
+        ]
+      }
+    }
+
+  },
+  "x-ms-paths": {
+    "/contentmoderator/moderate/v1.0/ProcessImage/FindFaces?overload=stream": {
+      "post": {
+        "tags": [
+          "ImageModeration"
+        ],
+        "operationId": "ImageModeration_FindFacesFileInput",
+        "description": "Returns the list of faces found.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/CacheImage"
+          },
+          {
+            "$ref": "#/parameters/ocpApimSubscriptionKeyParameter"
+          },
+          
           {
             "$ref": "#/parameters/ImageStreamParameter"
           }
@@ -1343,14 +1806,13 @@
             }
           },
           "default": {
-            "description": ""
+            "description": "Error response.",
+            "schema": {
+              "$ref": "#/definitions/APIError"
+            }
           }
         },
-        "x-ms-examples": {
-          "Find Faces request": {
-            "$ref": "./examples/FindFacesStreamResource.JSON"
-          }
-        },
+        
         "produces": [
           "application/json"
         ]
@@ -1359,22 +1821,23 @@
     "/contentmoderator/moderate/v1.0/ProcessImage/FindFaces?overload=url": {
       "post": {
         "tags": [
-          "Images"
+          "ImageModeration"
         ],
-        "operationId": "Images_FindFacesUrlInput",
+        "operationId": "ImageModeration_FindFacesUrlInput",
         "description": "Returns the list of faces found.",
         "parameters": [
           {
-            "name": "CacheImage",
-            "in": "query",
-            "description": "Whether to retain the submitted image for future use; defaults to false if omitted.",
-            "type": "boolean"
+            "$ref": "#/parameters/CacheImage"
           },
           {
             "$ref": "#/parameters/ocpApimSubscriptionKeyParameter"
           },
           {
-            "$ref": "#/parameters/contentTypeHeader"
+            "name": "Content-Type",
+            "description": "The content type.",
+            "required": true,
+            "type": "string",
+            "in": "header"
           },
           {
             "$ref": "#/parameters/ImageUrlParameter"
@@ -1391,7 +1854,10 @@
             }
           },
           "default": {
-            "description": ""
+            "description": "Error response.",
+            "schema": {
+              "$ref": "#/definitions/APIError"
+            }
           }
         },
         "x-ms-examples": {
@@ -1407,38 +1873,29 @@
     "/contentmoderator/moderate/v1.0/ProcessImage/OCR?overload=url": {
       "post": {
         "tags": [
-          "Images"
+          "ImageModeration"
         ],
-        "operationId": "Images_OCRUrlInput",
+        "operationId": "ImageModeration_OCRUrlInput",
         "description": "Returns any text found in the image for the language specified. If no language is specified in input then the detection defaults to English.",
         "parameters": [
           {
-            "name": "language",
-            "in": "query",
-            "description": "<a href=\"http://www-01.sil.org/iso639-3/codes.asp\">ISO 639-3 code</a>.",
-            "required": true,
-            "type": "string",
-            "default": "eng"
+            "$ref": "#/parameters/language"
           },
           {
-            "name": "CacheImage",
-            "in": "query",
-            "description": "Whether to retain the submitted image for future use; defaults to false if omitted.",
-            "type": "boolean",
-            "default": false
+            "$ref": "#/parameters/CacheImage"
           },
           {
-            "name": "enhanced",
-            "in": "query",
-            "description": "When set to True, the image goes through additional processing to come with additional candidates.\n\nimage/tiff is not supported when enhanced is set to true\n\nNote: This impacts the response time.",
-            "type": "boolean",
-            "default": false
+            "$ref": "#/parameters/enhanced"
           },
           {
             "$ref": "#/parameters/ocpApimSubscriptionKeyParameter"
           },
           {
-            "$ref": "#/parameters/contentTypeHeader"
+            "name": "Content-Type",
+            "description": "The content type.",
+            "required": true,
+            "type": "string",
+            "in": "header"
           },
           {
             "$ref": "#/parameters/ImageUrlParameter"
@@ -1455,9 +1912,11 @@
             }
           },
           "default": {
-            "description": ""
+            "description": "Error response.",
+            "schema": {
+              "$ref": "#/definitions/APIError"
+            }
           }
-
         },
         "x-ms-examples": {
           "Image OCR request": {
@@ -1472,39 +1931,24 @@
     "/contentmoderator/moderate/v1.0/ProcessImage/OCR?overload=stream": {
       "post": {
         "tags": [
-          "Images"
+          "ImageModeration"
         ],
-        "operationId": "Images_OCRFileInput",
+        "operationId": "ImageModeration_OCRFileInput",
         "description": "Returns any text found in the image for the language specified. If no language is specified in input then the detection defaults to English.",
         "parameters": [
           {
-            "name": "language",
-            "in": "query",
-            "description": "<a href=\"http://www-01.sil.org/iso639-3/codes.asp\">ISO 639-3 code</a>.",
-            "required": true,
-            "type": "string",
-            "default": "eng"
+            "$ref": "#/parameters/language"
           },
           {
-            "name": "CacheImage",
-            "in": "query",
-            "description": "Whether to retain the submitted image for future use; defaults to false if omitted.",
-            "type": "boolean",
-            "default": false
+            "$ref": "#/parameters/CacheImage"
           },
           {
-            "name": "enhanced",
-            "in": "query",
-            "description": "When set to True, the image goes through additional processing to come with additional candidates.\n\nimage/tiff is not supported when enhanced is set to true\n\nNote: This impacts the response time.",
-            "type": "boolean",
-            "default": false
+            "$ref": "#/parameters/enhanced"
           },
           {
             "$ref": "#/parameters/ocpApimSubscriptionKeyParameter"
           },
-          {
-            "$ref": "#/parameters/contentTypeHeader"
-          },
+         
           {
             "$ref": "#/parameters/ImageStreamParameter"
           }
@@ -1524,15 +1968,14 @@
             }
           },
           "default": {
-            "description": ""
+            "description": "Error response.",
+            "schema": {
+              "$ref": "#/definitions/APIError"
+            }
           }
 
         },
-        "x-ms-examples": {
-          "Image OCR request": {
-            "$ref": "./examples/OCRStreamResource.JSON"
-          }
-        },
+        
         "produces": [
           "application/json"
         ]
@@ -1541,23 +1984,18 @@
     "/contentmoderator/moderate/v1.0/ProcessImage/Evaluate?overload=stream": {
       "post": {
         "tags": [
-          "Images"
+          "ImageModeration"
         ],
-        "operationId": "Images_EvaluateFileInput",
+        "operationId": "ImageModeration_EvaluateFileInput",
         "description": "Returns probabilities of the image containing racy or adult content.",
         "parameters": [
           {
-            "name": "CacheImage",
-            "in": "query",
-            "description": "Whether to retain the submitted image for future use; defaults to false if omitted.",
-            "type": "boolean"
+            "$ref": "#/parameters/CacheImage"
           },
           {
             "$ref": "#/parameters/ocpApimSubscriptionKeyParameter"
           },
-          {
-            "$ref": "#/parameters/contentTypeHeader"
-          },
+          
           {
             "$ref": "#/parameters/ImageStreamParameter"
           }
@@ -1577,14 +2015,13 @@
             }
           },
           "default": {
-            "description": ""
+            "description": "Error response.",
+            "schema": {
+              "$ref": "#/definitions/APIError"
+            }
           }
         },
-        "x-ms-examples": {
-          "Evaluate Image request": {
-            "$ref": "./examples/EvaluateImageStreamResource.JSON"
-          }
-        },
+        
         "produces": [
           "application/json"
         ]
@@ -1593,22 +2030,23 @@
     "/contentmoderator/moderate/v1.0/ProcessImage/Evaluate?overload=url": {
       "post": {
         "tags": [
-          "Images"
+          "ImageModeration"
         ],
-        "operationId": "Images_EvaluateUrlInput",
+        "operationId": "ImageModeration_EvaluateUrlInput",
         "description": "Returns probabilities of the image containing racy or adult content.",
         "parameters": [
           {
-            "name": "CacheImage",
-            "in": "query",
-            "description": "Whether to retain the submitted image for future use; defaults to false if omitted.",
-            "type": "boolean"
+            "$ref": "#/parameters/CacheImage"
           },
           {
             "$ref": "#/parameters/ocpApimSubscriptionKeyParameter"
           },
           {
-            "$ref": "#/parameters/contentTypeHeader"
+            "name": "Content-Type",
+            "description": "The content type.",
+            "required": true,
+            "type": "string",
+            "in": "header"
           },
           {
             "$ref": "#/parameters/ImageUrlParameter"
@@ -1625,7 +2063,10 @@
             }
           },
           "default": {
-            "description": ""
+            "description": "Error response.",
+            "schema": {
+              "$ref": "#/definitions/APIError"
+            }
           }
         },
         "x-ms-examples": {
@@ -1641,28 +2082,26 @@
     "/contentmoderator/moderate/v1.0/ProcessImage/Match?overload=url": {
       "post": {
         "tags": [
-          "Images"
+          "ImageModeration"
         ],
-        "operationId": "Images_MatchUrlInput",
+        "operationId": "ImageModeration_MatchUrlInput",
         "description": "Fuzzily match an image against one of your custom Image Lists. You can create and manage your custom image lists using <a href=\"/docs/services/578ff44d2703741568569ab9/operations/578ff7b12703741568569abe\">this</a> API. \r\n\r\nReturns ID and tags of matching image.<br/>\r\n<br/>\r\nNote: Refresh Index must be run on the corresponding Image List before additions and removals are reflected in the response.",
         "parameters": [
           {
-            "name": "listId",
-            "in": "query",
-            "description": "The list id.",
-            "type": "string"
+            "$ref": "#/parameters/listIdQueryParameter"
           },
           {
-            "name": "cacheimage",
-            "in": "query",
-            "description": "Use cached image.",
-            "type": "boolean"
+            "$ref": "#/parameters/CacheImage"
           },
           {
             "$ref": "#/parameters/ocpApimSubscriptionKeyParameter"
           },
           {
-            "$ref": "#/parameters/contentTypeHeader"
+            "name": "Content-Type",
+            "description": "The content type.",
+            "required": true,
+            "type": "string",
+            "in": "header"
           },
           {
             "$ref": "#/parameters/ImageUrlParameter"
@@ -1679,7 +2118,10 @@
             }
           },
           "default": {
-            "description": ""
+            "description": "Error response.",
+            "schema": {
+              "$ref": "#/definitions/APIError"
+            }
           }
         },
         "x-ms-examples": {
@@ -1695,29 +2137,21 @@
     "/contentmoderator/moderate/v1.0/ProcessImage/Match?overload=stream": {
       "post": {
         "tags": [
-          "Images"
+          "ImageModeration"
         ],
-        "operationId": "Images_MatchFileInput",
+        "operationId": "ImageModeration_MatchFileInput",
         "description": "Fuzzily match an image against one of your custom Image Lists. You can create and manage your custom image lists using <a href=\"/docs/services/578ff44d2703741568569ab9/operations/578ff7b12703741568569abe\">this</a> API. \r\n\r\nReturns ID and tags of matching image.<br/>\r\n<br/>\r\nNote: Refresh Index must be run on the corresponding Image List before additions and removals are reflected in the response.",
         "parameters": [
           {
-            "name": "listId",
-            "in": "query",
-            "description": "The list id.",
-            "type": "string"
+            "$ref": "#/parameters/listIdQueryParameter"
           },
           {
-            "name": "cacheimage",
-            "in": "query",
-            "description": "Use cached image.",
-            "type": "boolean"
+            "$ref": "#/parameters/CacheImage"
           },
           {
             "$ref": "#/parameters/ocpApimSubscriptionKeyParameter"
           },
-          {
-            "$ref": "#/parameters/contentTypeHeader"
-          },
+          
           {
             "$ref": "#/parameters/ImageStreamParameter"
           }
@@ -1737,14 +2171,13 @@
             }
           },
           "default": {
-            "description": ""
+            "description": "Error response.",
+            "schema": {
+              "$ref": "#/definitions/APIError"
+            }
           }
         },
-        "x-ms-examples": {
-          "Match Image request": {
-            "$ref": "./examples/MatchImageStreamResource.JSON"
-          }
-        },
+        
         "produces": [
           "application/json"
         ]
@@ -1753,9 +2186,9 @@
     "/contentmoderator/lists/v1.0/imagelists/{listId}/images?overload=url": {
       "post": {
         "tags": [
-          "ImageList"
+          "ListManagementImage"
         ],
-        "operationId": "ImageList_AddImageUrlInput",
+        "operationId": "ListManagementImage_AddImageUrlInput",
         "description": "Add an image to the list with list Id equal to list Id passed.",
         "parameters": [
           {
@@ -1771,7 +2204,11 @@
             "$ref": "#/parameters/ocpApimSubscriptionKeyParameter"
           },
           {
-            "$ref": "#/parameters/contentTypeHeader"
+            "name": "Content-Type",
+            "description": "The content type.",
+            "required": true,
+            "type": "string",
+            "in": "header"
           },
           {
             "$ref": "#/parameters/ImageUrlParameter"
@@ -1784,7 +2221,13 @@
           "200": {
             "description": "OK",
             "schema": {
-              "$ref": "#/definitions/AddImage"
+              "$ref": "#/definitions/Image"
+            }
+          },
+          "default": {
+            "description": "Error response.",
+            "schema": {
+              "$ref": "#/definitions/APIError"
             }
           }
         },
@@ -1801,9 +2244,9 @@
     "/contentmoderator/lists/v1.0/imagelists/{listId}/images?overload=stream": {
       "post": {
         "tags": [
-          "ImageList"
+          "ListManagementImage"
         ],
-        "operationId": "ImageList_AddImageFileInput",
+        "operationId": "ListManagementImage_AddImageFileInput",
         "description": "Add an image to the list with list Id equal to list Id passed.",
         "parameters": [
           {
@@ -1818,9 +2261,7 @@
           {
             "$ref": "#/parameters/ocpApimSubscriptionKeyParameter"
           },
-          {
-            "$ref": "#/parameters/contentTypeHeader"
-          },
+          
           {
             "$ref": "#/parameters/ImageStreamParameter"
           }
@@ -1836,22 +2277,258 @@
           "200": {
             "description": "OK",
             "schema": {
-              "$ref": "#/definitions/AddImage"
+              "$ref": "#/definitions/Image"
+            }
+          },
+          "default": {
+            "description": "Error response.",
+            "schema": {
+              "$ref": "#/definitions/APIError"
+            }
+          }
+        },
+        
+        "produces": [
+          "application/json"
+        ]
+      }
+    },
+    "/contentmoderator/review/v1.0/teams/{teamName}/reviews?overload=video": {
+      "post": {
+        "tags": [
+          "Reviews"
+        ],
+        "operationId": "Reviews_CreateVideoReviews",
+        "description": "The reviews created would show up for Reviewers on your team. As Reviewers complete reviewing, results of the Review would be POSTED (i.e. HTTP POST) on the specified CallBackEndpoint.\r\n\r\n<h3>CallBack Schemas </h3>\r\n<h4>Review Completion CallBack Sample</h4>\r\n<p>\r\n{<br/>\r\n  \"ReviewId\": \"<Review Id>\",<br/>\r\n  \"ModifiedOn\": \"2016-10-11T22:36:32.9934851Z\",<br/>\r\n  \"ModifiedBy\": \"<Name of the Reviewer>\",<br/>\r\n  \"CallBackType\": \"Review\",<br/>\r\n  \"ContentId\": \"<The ContentId that was specified input>\",<br/>\r\n  \"Metadata\": {<br/>\r\n    \"adultscore\": \"0.xxx\",<br/>\r\n    \"a\": \"False\",<br/>\r\n    \"racyscore\": \"0.xxx\",<br/>\r\n    \"r\": \"True\"<br/>\r\n  },<br/>\r\n  \"ReviewerResultTags\": {<br/>\r\n    \"a\": \"False\",<br/>\r\n    \"r\": \"True\"<br/>\r\n  }<br/>\r\n}<br/>\r\n\r\n</p>.",
+        "parameters": [
+          {
+            "name": "Content-Type",
+            "description": "The content type.",
+            "required": true,
+            "type": "string",
+            "in": "header"
+          },
+          {
+            "$ref": "#/parameters/teamName"
+          },
+          {
+            "$ref": "#/parameters/subTeam"
+          },
+          {
+            "$ref": "#/parameters/CreateVideoReviewsBody"
+          },
+          {
+            "$ref": "#/parameters/ocpApimSubscriptionKeyParameter"
+          }
+        ],
+        "consumes": [
+          "application/json"
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/ReviewList"
+            }
+          },
+          "default": {
+            "description": "Error response.",
+            "schema": {
+              "$ref": "#/definitions/APIError"
             }
           }
         },
         "x-ms-examples": {
-          "Add Image request": {
-            "$ref": "./examples/AddImageStreamResource.JSON"
+          "Create video review request": {
+            "$ref": "./examples/CreateVideoReviewResource.JSON"
           }
         },
         "produces": [
           "application/json"
         ]
+
+      }
+    },
+    "/contentmoderator/review/v1.0/teams/{teamName}/reviews/{reviewId}/frames?overload=url": {
+      "post": {
+        "tags": [
+          "Reviews"
+        ],
+        "operationId": "Reviews_AddVideoFrameUrl",
+        "description": "Use this method to add frames for a video review.Timescale: This parameter is a factor which is used to convert the timestamp on a frame into milliseconds. Timescale is provided in the output of the Content Moderator video media processor on the Azure Media Services platform.Timescale in the Video Moderation output is Ticks/Second.",
+        "parameters": [
+          {
+            "name": "Content-Type",
+            "description": "The content type.",
+            "required": true,
+            "type": "string",
+            "in": "header"
+          },
+          {
+            "$ref": "#/parameters/teamName"
+          },
+          {
+            "$ref": "#/parameters/reviewId"
+          },
+          {
+            "$ref": "#/parameters/timescale"
+          },
+          {
+            "$ref": "#/parameters/videoFrameBody"
+          },
+          {
+            "$ref": "#/parameters/ocpApimSubscriptionKeyParameter"
+          }
+        ],
+        "consumes": [
+          "application/json"
+        ],
+        "responses": {
+          "204": {
+            "description": "No Content"
+          },
+          "default": {
+            "description": "Error response.",
+            "schema": {
+              "$ref": "#/definitions/APIError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Add video frame url input request": {
+            "$ref": "./examples/AddFrameResource.JSON"
+          }
+        },
+        "produces": [
+          "application/json"
+        ]
+
+      }
+    },
+    "/contentmoderator/review/v1.0/teams/{teamName}/reviews/{reviewId}/frames?overload=stream": {
+      "post": {
+        "tags": [
+          "Reviews"
+        ],
+        "operationId": "Reviews_AddVideoFrameStream",
+        "description": "Use this method to add frames for a video review.Timescale: This parameter is a factor which is used to convert the timestamp on a frame into milliseconds. Timescale is provided in the output of the Content Moderator video media processor on the Azure Media Services platform.Timescale in the Video Moderation output is Ticks/Second.",
+        "parameters": [
+          {
+            "name": "Content-Type",
+            "description": "The content type.",
+            "required": true,
+            "type": "string",
+            "in": "header"
+          },
+          {
+            "name": "teamName",
+            "description": "Your team name.",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "reviewId",
+            "description": "Id of the review.",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "timescale",
+            "description": "Timescale of the video .",
+            "in": "query",
+            "required": false,
+            "type": "integer"
+          },
+
+          {
+            "name": "frameImageZip",
+            "description": "Zip file containing frame images.",
+            "in": "formData",
+            "required": true,
+            "type": "file"
+
+          },
+          {
+            "name": "frameMetadata",
+            "description": "Metadata of the frame.",
+            "in": "formData",
+            "required": true,
+            "type": "string"
+
+          },
+          {
+            "$ref": "#/parameters/ocpApimSubscriptionKeyParameter"
+          }
+        ],
+        "consumes": [
+          "multipart/form-data"
+        ],
+        "responses": {
+          "204": {
+            "description": "No Content"
+          },
+          "default": {
+            "description": "Error response.",
+            "schema": {
+              "$ref": "#/definitions/APIError"
+            }
+          }
+        },
+       
+        "produces": [
+          "application/json"
+        ]
+
       }
     }
+    
   },
   "definitions": {
+    "Frames": {
+      "description": "The response for a Get Frames request.",
+      "properties": {
+        "reviewId": {
+          "description": "Id of the review.",
+          "type": "string"
+        },
+        "videoFrames": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Frame"
+          }
+        }
+      }
+    },
+    "Frame": {
+      "description": "Video frame property details.",
+      "properties": {
+        "timestamp": {
+          "description": "Timestamp of the frame.",
+          "type": "string"
+        },
+        "frameImage": {
+          "description": "Frame image.",
+          "type": "string"
+        },
+        "metadata": {
+          "description": "Array of KeyValue.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/KeyValuePair"
+          }
+        },
+        "reviewerResultTags": {
+          "description": "Reviewer result tags.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Tag"
+          }
+        }
+        
+      }
+    },
     "Screen": {
       "description": "The response for a Screen text request.",
       "properties": {
@@ -1863,6 +2540,10 @@
           "description": "The normalized text.",
           "type": "string"
         },
+        "autoCorrectedText": {
+          "description": "The autocorrected text",
+          "type": "string"
+        },
         "misrepresentation": {
           "description": "The misrepresentation text.",
           "type": "array",
@@ -1870,13 +2551,17 @@
             "type": "string"
           }
         },
+        "classification": {
+          "description": "The classification details of the text.",
+          "$ref": "#/definitions/Classification"
+        },
         "status": {
           "description": "The evaluate status.",
-          "$ref": "#/definitions/ResponseStatus"
+          "$ref": "#/definitions/Status"
         },
         "pii": {
           "description": "Personal Identifier Information details.",
-          "$ref": "#/definitions/PIIDetailsProperties"
+          "$ref": "#/definitions/PII"
         },
         "language": {
           "description": "Language of the input text content.",
@@ -1885,7 +2570,7 @@
         "terms": {
           "type": "array",
           "items": {
-            "$ref": "#/definitions/TermsProperties"
+            "$ref": "#/definitions/DetectedTerms"
           }
         },
         "trackingId": {
@@ -1894,38 +2579,59 @@
         }
       }
     },
-    "PIIDetailsProperties": {
+    "Classification": {
+      "description": "The classification details of the text.",
+      "properties": {
+        "adultScore": {
+          "description": "The adult score.",
+          "type": "number"
+        },
+        "racyScore": {
+          "description": "The racy score.",
+          "type": "number"
+        },
+        "offensiveScore": {
+          "description": "The offensive score.",
+          "type": "number"
+        },
+        "reviewRecommended": {
+          "description": "The review recommended flag.",
+          "type": "boolean"
+        }
+      }
+    },
+    "PII": {
       "description": "Personal Identifier Information details.",
       "properties": {
         "email": {
           "type": "array",
           "items": {
-            "$ref": "#/definitions/EmailProperties"
+            "$ref": "#/definitions/Email"
           }
 
         },
         "ipa": {
           "type": "array",
           "items": {
-            "$ref": "#/definitions/IPAProperties"
+            "$ref": "#/definitions/IPA"
 
           }
         },
         "phone": {
           "type": "array",
           "items": {
-            "$ref": "#/definitions/PhoneProperties"
+            "$ref": "#/definitions/Phone"
           }
         },
         "address": {
           "type": "array",
           "items": {
-            "$ref": "#/definitions/AddressProperties"
+            "$ref": "#/definitions/Address"
           }
         }
       }
     },
-    "EmailProperties": {
+    "Email": {
       "description": "Email Address details.",
       "properties": {
         "detected": {
@@ -1942,11 +2648,11 @@
         },
         "index": {
           "description": "Index(Location) of the Email address in the input text content.",
-          "type": "number"
+          "type": "integer"
         }
       }
     },
-    "IPAProperties": {
+    "IPA": {
       "description": "IP Address details.",
       "properties": {
         "subType": {
@@ -1959,11 +2665,11 @@
         },
         "index": {
           "description": "Index(Location) of the IP Address in the input text content.",
-          "type": "number"
+          "type": "integer"
         }
       }
     },
-    "PhoneProperties": {
+    "Phone": {
       "description": "Phone Property details.",
       "properties": {
         "countryCode": {
@@ -1976,11 +2682,11 @@
         },
         "index": {
           "description": "Index(Location) of the Phone number in the input text content.",
-          "type": "number"
+          "type": "integer"
         }
       }
     },
-    "AddressProperties": {
+    "Address": {
       "description": "Address details.",
       "properties": {
         "text": {
@@ -1989,25 +2695,25 @@
         },
         "index": {
           "description": "Index(Location) of the Address in the input text content.",
-          "type": "number"
+          "type": "integer"
         }
       }
 
     },
-    "TermsProperties": {
+    "DetectedTerms": {
       "description": "Detected Terms details.",
       "properties": {
         "index": {
           "description": "Index(Location) of the detected profanity term in the input text content.",
-          "type": "number"
+          "type": "integer"
         },
         "originalIndex": {
           "description": "Original Index(Location) of the detected profanity term in the input text content.",
-          "type": "number"
+          "type": "integer"
         },
         "listId": {
           "description": "Matched Terms list Id.",
-          "type": "number"
+          "type": "integer"
         },
         "term": {
           "description": "Detected profanity term.",
@@ -2021,7 +2727,7 @@
       "properties": {
         "status": {
           "description": "The evaluate status",
-          "$ref": "#/definitions/ResponseStatus"
+          "$ref": "#/definitions/Status"
         },
         "trackingId": {
           "description": "The tracking id.",
@@ -2043,19 +2749,19 @@
           "description": "The advanced info.",
           "type": "array",
           "items": {
-            "type": "string"
+            "$ref": "#/definitions/KeyValuePair"
           }
         },
         "faces": {
           "description": "The list of faces.",
           "type": "array",
           "items": {
-            "$ref": "#/definitions/FoundFace"
+            "$ref": "#/definitions/Face"
           }
         }
       }
     },
-    "FoundFace": {
+    "Face": {
       "description": "Coordinates to the found face.",
       "properties": {
         "bottom": {
@@ -2081,7 +2787,7 @@
       "properties": {
         "status": {
           "description": "The evaluate status",
-          "$ref": "#/definitions/ResponseStatus"
+          "$ref": "#/definitions/Status"
         },
         "metadata": {
           "description": "Array of KeyValue.",
@@ -2176,29 +2882,12 @@
           "description": "The advanced info.",
           "type": "array",
           "items": {
-            "type": "string"
+            "$ref": "#/definitions/KeyValuePair"
           }
         },
         "status": {
           "description": "The evaluate status",
-          "$ref": "#/definitions/ResponseStatus"
-        }
-      }
-    },
-    "ResponseStatus": {
-      "description": "The evaluate response status object.",
-      "properties": {
-        "code": {
-          "description": "Evaluate response status code.",
-          "type": "integer"
-        },
-        "description": {
-          "description": "Description of evaluate response status code.",
-          "type": "string"
-        },
-        "exception": {
-          "description": "The evaluate response exception object."
-          
+          "$ref": "#/definitions/Status"
         }
       }
     },
@@ -2219,16 +2908,19 @@
         },
         "matches": {
           "description": "The match details.",
-          "$ref": "#/definitions/MatchDetailProperties"
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Match"
+          }
         },
         "status": {
           "description": "The evaluate status",
-          "$ref": "#/definitions/ResponseStatus"
+          "$ref": "#/definitions/Status"
         }
       }
     },
-    "MatchDetailProperties": {
-      "description": "The match detail.",
+    "Match": {
+      "description": "The match details.",
       "properties": {
         "score": {
           "description": "Confidence score of the image match.",
@@ -2236,7 +2928,7 @@
         },
         "matchId": {
           "description": "The match id.",
-          "type": "string"
+          "type": "integer"
         },
         "source": {
           "description": "The source.",
@@ -2246,7 +2938,7 @@
           "description": "The tags for match details.",
           "type": "array",
           "items": {
-            "$ref": "#/definitions/MatchDetailTag"
+            "type": "integer"
           }
         },
         "label": {
@@ -2255,8 +2947,8 @@
         }
       }
     },
-    "MatchDetailTag": {
-      "description": "The details for a match.",
+    "Tag": {
+      "description": "Tag details.",
       "properties": {
         "key": {
           "description": "The key parameter.",
@@ -2268,7 +2960,7 @@
         }
       }
     },
-    "DetectedLanguageResult": {
+    "DetectedLanguage": {
       "description": "Detect language result.",
       "properties": {
         "detectedLanguage": {
@@ -2277,7 +2969,7 @@
         },
         "status": {
           "description": "The detect language status",
-          "$ref": "#/definitions/ResponseStatus"
+          "$ref": "#/definitions/Status"
         },
         "trackingId": {
           "description": "The tracking id.",
@@ -2285,12 +2977,12 @@
         }
       }
     },
-    "CreateImageList": {
-      "description": "Create Image List Response.",
+    "ImageList": {
+      "description": "Image List Properties.",
       "properties": {
         "id": {
           "description": "Image List Id.",
-          "type": "number"
+          "type": "integer"
         },
         "name": {
           "description": "Image List Name.",
@@ -2318,12 +3010,12 @@
         }
       }
     },
-    "CreateTermList": {
-      "description": "Create Term List Response.",
+    "TermList": {
+      "description": "Term List  Properties.",
       "properties": {
         "id": {
           "description": "Term list Id.",
-          "type": "number"
+          "type": "integer"
         },
         "name": {
           "description": "Term list name.",
@@ -2349,140 +3041,16 @@
         }
       }
     },
-    "ImageListGetDetails": {
-      "description": "Get Image List Details Response.",
-      "properties": {
-        "id": {
-          "description": "Id of the image list.",
-          "type": "number"
-        },
-        "name": {
-          "description": "Name of the image list.",
-          "type": "string"
-        },
-        "description": {
-          "description": "Description of the image list.",
-          "type": "string"
-        },
-        "metadata": {
-          "description": "Metadata of the image list.",
-          "type": "object",
-          "properties": {
-            "key One": {
-              "description": "Optional Key value pair to describe your list.",
-              "type": "string"
-            },
-            "key Two": {
-              "description": "Optional Key value pair to describe your list.",
-              "type": "string"
-            }
-          }
-        }
-      }
-    },
-    "TermListGetListIdDetails": {
-      "description": "Get Term List Details Response.",
-      "properties": {
-        "id": {
-          "description": "Term list Id.",
-          "type": "number"
-        },
-        "name": {
-          "description": "Term list name.",
-          "type": "string"
-        },
-        "description": {
-          "description": "Description of the term list.",
-          "type": "string"
-        },
-        "metadata": {
-          "description": "Term List metadata.",
-          "type": "object",
-
-          "properties": {
-            "key One": {
-              "description": "Optional Key value pair to describe your list.",
-              "type": "string"
-            },
-            "key Two": {
-              "description": "Optional Key value pair to describe your list.",
-              "type": "string"
-            }
-          }
-
-        }
-      }
-    },
-    "GetAllImageList": {
+    "ImageLists": {
       "type": "array",
       "items": {
-        "type": "object",
-        "properties": {
-          "id": {
-            "description": "Image list Id.",
-            "type": "number"
-          },
-          "name": {
-            "description": "Image list name.",
-            "type": "string"
-          },
-          "description": {
-            "description": "Description for image list.",
-            "type": "string"
-          },
-          "metadata": {
-            "description": "Image list metadata.",
-            "type": "object",
-
-            "properties": {
-              "key One": {
-                "description": "Optional Key value pair to describe your list.",
-                "type": "string"
-              },
-              "key Two": {
-                "description": "Optional Key value pair to describe your list.",
-                "type": "string"
-              }
-            }
-
-          }
-        }
+        "$ref": "#/definitions/ImageList"
       }
     },
-    "GetAllTermList": {
+    "TermLists": {
       "type": "array",
       "items": {
-        "type": "object",
-        "properties": {
-          "id": {
-            "description": "Term list id.",
-            "type": "number"
-          },
-          "name": {
-            "description": "Term list name.",
-            "type": "string"
-          },
-          "description": {
-            "description": "Description for the term list.",
-            "type": "string"
-          },
-          "metadata": {
-            "description": "Term list metadata.",
-            "type": "object",
-
-            "properties": {
-              "key One": {
-                "description": "Optional Key value pair to describe your list.",
-                "type": "string"
-              },
-              "key Two": {
-                "description": "Optional Key value pair to describe your list.",
-                "type": "string"
-              }
-            }
-
-          }
-        }
+        "$ref": "#/definitions/TermList"
       }
     },
     "RefreshIndex": {
@@ -2503,11 +3071,11 @@
             "type": "object",
             "properties": {
               "key One": {
-                "description": "Key value pair.",
+                "description": "Key parameter to describe advanced info.",
                 "type": "string"
               },
               "key Two": {
-                "description": "Key value pair.",
+                "description": "Key parameter to describe advanced info.",
                 "type": "string"
               }
             }
@@ -2515,7 +3083,7 @@
         },
         "status": {
           "description": "Refresh index status.",
-          "$ref": "#/definitions/AddGetRefreshStatus"
+          "$ref": "#/definitions/Status"
         },
         "trackingId": {
           "description": "Tracking Id.",
@@ -2523,73 +3091,8 @@
         }
       }
     },
-    "UpdateImageList": {
-      "description": "Update Image List Response.",
-      "properties": {
-        "id": {
-          "description": "Id of the image list.",
-          "type": "number"
-        },
-        "name": {
-          "description": "Name of the image list.",
-          "type": "string"
-        },
-        "description": {
-          "description": "Description of the image list.",
-          "type": "string"
-        },
-        "metadata": {
-          "description": "Metadata of the image list.",
-          "type": "object",
-
-          "properties": {
-            "key One": {
-              "description": "Optional Key value pair to describe your list.",
-              "type": "string"
-            },
-            "key Two": {
-              "description": "Optional Key value pair to describe your list.",
-              "type": "string"
-            }
-          }
-        }
-      }
-    },
-    "UpdateTermList": {
-      "description": "Update Term List Response.",
-      "properties": {
-        "id": {
-          "description": "Term List Id.",
-          "type": "number"
-        },
-        "name": {
-          "description": "Term List Name.",
-          "type": "string"
-        },
-        "description": {
-          "description": "Description for term list.",
-          "type": "string"
-        },
-        "metadata": {
-          "description": "Term List Metadata.",
-          "type": "object",
-
-          "properties": {
-            "key One": {
-              "description": "Optional Key value pair to describe your list.",
-              "type": "string"
-            },
-            "key Two": {
-              "description": "Optional Key value pair to describe your list.",
-              "type": "string"
-            }
-          }
-
-        }
-      }
-    },
-    "AddImage": {
-      "description": "Add Image Response.",
+    "Image": {
+      "description": "Image Properties.",
       "properties": {
 
         "contentId": {
@@ -2614,8 +3117,8 @@
           }
         },
         "status": {
-          "description": "Add image response status.",
-          "$ref": "#/definitions/AddGetRefreshStatus"
+          "description": "Status details.",
+          "$ref": "#/definitions/Status"
         },
         "trackingId": {
           "description": "Tracking Id.",
@@ -2624,12 +3127,12 @@
       }
 
     },
-    "AddGetRefreshStatus": {
-      "description": "Add and Get status response properties",
+    "Status": {
+      "description": "Status properties.",
       "properties": {
         "code": {
           "description": "Status code.",
-          "type": "number"
+          "type": "integer"
         },
         "description": {
           "description": "Status description.",
@@ -2641,24 +3144,24 @@
         }
       }
     },
-    "GetAllImageIds": {
-      "description": "Gets all image Id response properties.",
+    "ImageIds": {
+      "description": "Image Id properties.",
       "properties": {
         "contentSource": {
-          "description": "Source of thecontent.",
+          "description": "Source of the content.",
           "type": "string"
         },
         "contentIds": {
           "description": "Id of the contents.",
           "type": "array",
           "items": {
-            "type": "number"
+            "type": "integer"
           }
         },
         "status": {
           "description": "Get Image status.",
           "type": "object",
-          "$ref": "#/definitions/AddGetRefreshStatus"
+          "$ref": "#/definitions/Status"
         },
         "trackingId": {
           "description": "Tracking Id.",
@@ -2666,38 +3169,38 @@
         }
       }
     },
-    "GetAllTerms": {
-      "description": "Gets all term Id response properties.",
+    "Terms": {
+      "description": "Terms properties.",
       "properties": {
         "data": {
           "description": "Term data details.",
-          "$ref": "#/definitions/TermData"
+          "$ref": "#/definitions/TermsData"
         },
         "paging": {
           "description": "Paging details.",
           "properties": {
             "Total": {
               "description": "Total details.",
-              "type": "number"
+              "type": "integer"
             },
             "Limit": {
               "description": "Limit details.",
-              "type": "number"
+              "type": "integer"
             },
             "Offset": {
               "description": "Offset details.",
-              "type": "number"
+              "type": "integer"
             },
             "Returned": {
               "description": "Returned text details.",
-              "type": "number"
+              "type": "integer"
             }
           }
         }
       }
     },
-    "TermData": {
-      "description": "Gets all term Id response properties.",
+    "TermsData": {
+      "description": "All term Id response properties.",
       "properties": {
         "language": {
           "description": "Language of the terms.",
@@ -2711,9 +3214,9 @@
           }
         },
         "status": {
-          "description": "Get Term Status.",
+          "description": "Term Status.",
           "type": "object",
-          "$ref": "#/definitions/AddGetRefreshStatus"
+          "$ref": "#/definitions/Status"
         },
         "trackingId": {
           "description": "Tracking Id.",
@@ -2823,12 +3326,12 @@
           "description": "Job execution report- Array of KeyValue pairs object.",
           "type": "array",
           "items": {
-            "$ref": "#/definitions/jobExecutionReportValues"
+            "$ref": "#/definitions/jobExecutionReportDetails"
           }
         }
       }
     },
-    "jobExecutionReportValues": {
+    "jobExecutionReportDetails": {
       "description": "Job Execution Report Values.",
       "properties": {
         "ts": {
@@ -2841,16 +3344,11 @@
         }
       }
     },
-    "ReviewListResult": {
+    "ReviewList": {
       "description": "The list of review ids.",
-      "properties": {
-        "value": {
-          "type": "array",
-          "items": {
-            "type": "string"
-          },
-          "description": "The Id of the review."
-        }
+      "type": "array",
+      "items": {
+        "type": "string"
       }
     },
     "JobListResult": {
@@ -2865,49 +3363,147 @@
         }
       }
     },
-    "CreateJob": {
-        "properties": {
-          "jobId": {
-            "description": "Id of the created job.",
-            "type": "string"
-          }
+    "JobId": {
+      "properties": {
+        "jobId": {
+          "description": "Id of the created job.",
+          "type": "string"
         }
-      } 
+      }
+    },
+    "APIError": {
+      "type": "object",
+      "description": "Error information returned by the API",
+      "properties": {
+        "error": {
+          "$ref": "#/definitions/Error"
+        }
+      }
+    },
+    "Error": {
+      "type": "object",
+      "description": "Error body.",
+      "properties": {
+        "code": {
+          "type": "string"
+        },
+        "message": {
+          "type": "string"
+        }
+      }
+    }
   },
   "parameters": {
-    "languageQueryParameter": {
-      "name": "language",
+    "timescale": {
+      "name": "timescale",
+      "description": "Timescale of the video.",
       "in": "query",
-      "description": "<a href=\"http://www-01.sil.org/iso639-3/codes.asp\">ISO 639-3 code</a>.",
+      "required": false,
+      "type": "integer",
+      "x-ms-parameter-location": "method"
+
+    },
+    "CallBackEndpoint": {
+      "name": "CallBackEndpoint",
+      "in": "query",
+      "description": "Callback endpoint for posting the create job result.",
+      "type": "string",
+      "x-ms-parameter-location": "method"
+
+    },
+    "WorkflowName": {
+      "name": "WorkflowName",
+      "in": "query",
+      "description": "Workflow Name that you want to invoke.",
       "required": true,
       "type": "string",
-      "default": "eng"
+      "x-ms-parameter-location": "method"
+    },
+    "ContentType": {
+      "name": "ContentType",
+      "in": "query",
+      "description": "Image, Text or Video.",
+      "required": true,
+      "type": "string",
+      "enum": [
+        "Image",
+        "Text",
+        "Video"
+      ],
+      "x-ms-parameter-location": "method"
+    },
+    "ContentId": {
+      "name": "ContentId",
+      "in": "query",
+      "description": "Id/Name to identify the content submitted.",
+      "required": true,
+      "type": "string",
+      "x-ms-parameter-location": "method"
+    },
+    "subTeam": {
+      "name": "subTeam",
+      "description": "SubTeam of your team, you want to assign the created review to.",
+      "in": "query",
+      "required": false,
+      "type": "string",
+      "x-ms-parameter-location": "method"
+    },
+    "transcriptFile": {
+      "name": "VTT file",
+      "in": "body",
+      "required": true,
+      "schema": {
+        "type": "object",
+        "format": "file"
+      },
+      "description": "Transcript file of the video.",
+      "x-ms-parameter-location": "method"
+    },
+    "teamName": {
+      "name": "teamName",
+      "description": "Your team name.",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "x-ms-parameter-location": "method"
+    },
+    "reviewId": {
+      "name": "reviewId",
+      "description": "Id of the review.",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "x-ms-parameter-location": "method"
     },
     "CacheImage": {
       "name": "CacheImage",
       "in": "query",
       "description": "Whether to retain the submitted image for future use; defaults to false if omitted.",
-      "type": "boolean"
+      "type": "boolean",
+      "x-ms-parameter-location": "method"
     },
     "enhanced": {
       "name": "enhanced",
       "in": "query",
       "description": "When set to True, the image goes through additional processing to come with additional candidates.\n\nimage/tiff is not supported when enhanced is set to true\n\nNote: This impacts the response time.",
       "type": "boolean",
-      "default": false
+      "default": false,
+      "x-ms-parameter-location": "method"
     },
     "ImageId": {
       "name": "ImageId",
       "in": "path",
       "description": "Id of the image.",
       "required": true,
-      "type": "string"
+      "type": "string",
+      "x-ms-parameter-location": "method"
     },
     "listIdQueryParameter": {
       "name": "listId",
       "in": "query",
       "description": "The list Id.",
-      "type": "string"
+      "type": "string",
+      "x-ms-parameter-location": "method"
     },
     "autocorrect": {
       "name": "autocorrect",
@@ -2915,7 +3511,8 @@
       "required": false,
       "description": "Autocorrect text.",
       "type": "boolean",
-      "default": false
+      "default": false,
+      "x-ms-parameter-location": "method"
     },
     "PII": {
       "name": "PII",
@@ -2923,7 +3520,8 @@
       "description": "Detect personal identifiable information.",
       "required": false,
       "type": "boolean",
-      "default": false
+      "default": false,
+      "x-ms-parameter-location": "method"
     },
     "classify": {
       "name": "classify",
@@ -2931,7 +3529,8 @@
       "in": "query",
       "required": false,
       "type": "boolean",
-      "default": false
+      "default": false,
+      "x-ms-parameter-location": "method"
     },
     "textContent": {
       "name": "Text Content",
@@ -2941,38 +3540,225 @@
       "schema": {
         "format": "binary",
         "type": "string"
-      }
-    },
-    "textBody": {
-      "name": "Text Content",
-      "in": "body",
-      "required": true,
-      "schema": {
-        "format": "binary",
-        "type": "string"
       },
-      "description": "Text content whose language is to be detected."
+      "x-ms-parameter-location": "method"
     },
     "term": {
       "name": "term",
       "in": "path",
       "description": "Term to be deleted",
       "required": true,
-      "type": "string"
+      "type": "string",
+      "x-ms-parameter-location": "method"
     },
     "label": {
       "name": "label",
       "in": "query",
       "description": "The image label.",
       "type": "string",
-      "required": false
+      "required": false,
+      "x-ms-parameter-location": "method"
     },
     "language": {
       "name": "language",
       "in": "query",
       "description": "Language of the terms.",
       "required": true,
-      "type": "string"
+      "type": "string",
+      "x-ms-parameter-location": "method"
+    },
+    "transcriptModerationBody": {
+      "name": "transcriptModerationBody",
+      "description": "Body for add video transcript moderation result API",
+      "in": "body",
+      "required": true,
+      "schema": {
+        "type": "array",
+        "description": "Schema of the body.",
+        "items": {
+          "required": [
+            "Timestamp",
+            "Terms"
+          ],
+          "type": "object",
+          "description": "Schema items of the body.",
+          "properties": {
+            "Timestamp": {
+              "description": "Timestamp of the image.",
+              "type": "string"
+            },
+            "Terms": {
+              "description": "Optional metadata details.",
+              "type": "array",
+              "items": {
+                "required": [
+                  "Index",
+                  "Term"
+                ],
+                "type": "object",
+                "properties": {
+                  "Index": {
+                    "description": "Index of the word",
+                    "type": "integer"
+                  },
+                  "Term": {
+                    "description": "Detected word.",
+                    "type": "string"
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "x-ms-parameter-location": "method"
+    },
+    "CreateVideoReviewsBody": {
+      "name": "CreateVideoReviewsBody",
+      "description": "Body for create reviews API",
+      "in": "body",
+      "required": true,
+      "schema": {
+        "type": "array",
+        "description": "Schema of the body.",
+        "items": {
+          "required": [
+            "Content",
+            "ContentId",
+            "Type",
+            "Status"
+          ],
+          "type": "object",
+          "description": "Schema items of the body.",
+          "properties": {
+            "VideoFrames": {
+              "description": "Optional metadata details.",
+              "type": "array",
+              "items": {
+                "required": [
+                  "Id",
+                  "Timestamp",
+                  "FrameImage"
+
+                ],
+                "type": "object",
+                "properties": {
+                  "Id": {
+                    "description": "Id of the frame.",
+                    "type": "string"
+                  },
+                  "Timestamp": {
+                    "description": "Timestamp of the frame.",
+                    "type": "integer"
+                  },
+                  "FrameImage": {
+                    "description": "Frame image Url.",
+                    "type": "string"
+                  },
+                  "ReviewerResultTags": {
+                    "type": "array",
+                    "items": {
+                      "required": [
+                        "Key",
+                        "Value"
+                      ],
+                      "type": "object",
+                      "properties": {
+                        "Key": {
+                          "description": "Your key parameter.",
+                          "type": "string"
+                        },
+                        "Value": {
+                          "description": "Your value parameter.",
+                          "type": "string"
+                        }
+                      }
+                    }
+                  },
+                  "Metadata": {
+                    "description": "Optional metadata details.",
+                    "type": "array",
+                    "items": {
+                      "required": [
+                        "Key",
+                        "Value"
+                      ],
+                      "type": "object",
+                      "properties": {
+                        "Key": {
+                          "description": "Your key parameter.",
+                          "type": "string"
+                        },
+                        "Value": {
+                          "description": "Your value parameter.",
+                          "type": "string"
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+
+            },
+            "Metadata": {
+              "description": "Optional metadata details.",
+              "type": "array",
+              "items": {
+                "required": [
+                  "Key",
+                  "Value"
+                ],
+                "type": "object",
+                "properties": {
+                  "Key": {
+                    "description": "Your key parameter.",
+                    "type": "string"
+                  },
+                  "Value": {
+                    "description": "Your value parameter.",
+                    "type": "string"
+                  }
+                }
+              }
+            },
+            "Type": {
+              "description": "Type of the content.",
+              "enum": [
+                "Video"
+              ],
+              "type": "string"
+            },
+            "Content": {
+              "description": "Video content url to review.",
+              "type": "string"
+            },
+            "ContentId": {
+              "description": "Content Identifier.",
+              "type": "string"
+            },
+            "Status": {
+              "description": "Status of the video(Complete,Unpublished,Pending)",
+              "type": "string",
+              "enum": [
+                "Complete",
+                "Unpublished",
+                "Pending"
+              ]
+            },
+            "Timescale": {
+              "description": "Timescale of the video.",
+              "type": "integer"
+            },
+            "CallbackEndpoint": {
+              "description": "Optional CallbackEndpoint.",
+              "type": "string"
+            }
+
+
+          }
+        }
+      },
+      "x-ms-parameter-location": "method"
     },
     "body": {
       "name": "body",
@@ -3010,28 +3796,25 @@
           }
         }
 
-      }
+      },
+      "x-ms-parameter-location": "method"
     },
     "tag": {
       "name": "tag",
       "in": "query",
       "description": "Tag for the image.",
-      "type": "number",
-      "required": false
+      "type": "integer",
+      "required": false,
+      "x-ms-parameter-location": "method"
     },
     "listId": {
       "name": "listId",
       "in": "path",
       "description": "List Id of the image list.",
       "required": true,
-      "type": "string"
-    },
-    "contentTypeHeader": {
-      "name": "Content-Type",
-      "description": "The content type.",
-      "required": true,
       "type": "string",
-      "in": "header"
+      "x-ms-parameter-location": "method"
+
     },
     "ImageUrlParameter": {
       "name": "ImageUrl",
@@ -3049,7 +3832,78 @@
           }
         }
       },
+      "x-ms-parameter-location": "method",
       "description": "The image url."
+    },
+    "videoFrameBody": {
+      "name": "videoFrameBody",
+      "description": "Body for add video frames API",
+      "in": "body",
+      "required": true,
+      "schema": {
+        "type": "array",
+        "description": "Schema of the body.",
+        "items": {
+          "required": [
+            "Timestamp",
+            "frameImage"
+          ],
+          "type": "object",
+          "description": "Schema items of the body.",
+          "properties": {
+            "Timestamp": {
+              "description": "Timestamp of the frame.",
+              "type": "string"
+            },
+            "frameImage": {
+              "description": "Content to review.",
+              "type": "string"
+            },
+            "ReviewerResultTags": {
+              "type": "array",
+              "items": {
+                "required": [
+                  "Key",
+                  "Value"
+                ],
+                "type": "object",
+                "properties": {
+                  "Key": {
+                    "description": "Your key parameter.",
+                    "type": "string"
+                  },
+                  "Value": {
+                    "description": "Your value parameter.",
+                    "type": "string"
+                  }
+                }
+              }
+            },
+            "Metadata": {
+              "description": "Optional metadata details.",
+              "type": "array",
+              "items": {
+                "required": [
+                  "Key",
+                  "Value"
+                ],
+                "type": "object",
+                "properties": {
+                  "Key": {
+                    "description": "Your key parameter.",
+                    "type": "string"
+                  },
+                  "Value": {
+                    "description": "Your value parameter.",
+                    "type": "string"
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "x-ms-parameter-location": "method"
     },
     "ImageStreamParameter": {
       "name": "ImageStream",
@@ -3059,7 +3913,8 @@
         "type": "object",
         "format": "file"
       },
-      "description": "The image file."
+      "description": "The image file.",
+      "x-ms-parameter-location": "method"
     },
     "ocpApimSubscriptionKeyParameter": {
       "name": "Ocp-Apim-Subscription-Key",
@@ -3069,24 +3924,32 @@
       "type": "string",
       "in": "header"
     },
-    "AzureRegion": {
-      "name": "azureRegion",
-      "description": "Supported Azure regions for Computer Vision endpoints",
+    "baseUrl": {
+      "name": "baseUrl",
+      "description": "Supported Azure regions for Content Moderator endpoints",
       "x-ms-parameter-location": "client",
       "required": true,
       "type": "string",
       "in": "path",
       "x-ms-skip-url-encoding": true,
       "x-ms-enum": {
-        "name": "AzureRegion",
+        "name": "azureRegionBaseUrl",
         "modelAsString": true
       },
       "enum": [
-        "westus",
-        "westeurope",
-        "southeastasia",
-        "eastus2",
-        "westcentralus"
+        "westus.api.cognitive.microsoft.com",
+        "westus2.api.cognitive.microsoft.com",
+        "eastus.api.cognitive.microsoft.com",
+        "eastus2.api.cognitive.microsoft.com",
+        "westcentralus.api.cognitive.microsoft.com",
+        "southcentralus.api.cognitive.microsoft.com",
+        "westeurope.api.cognitive.microsoft.com",
+        "northeurope.api.cognitive.microsoft.com",
+        "southeastasia.api.cognitive.microsoft.com",
+        "eastasia.api.cognitive.microsoft.com",
+        "australiaeast.api.cognitive.microsoft.com",
+        "brazilsouth.api.cognitive.microsoft.com",
+        "contentmoderatortest.azure-api.net"
       ]
     }
 

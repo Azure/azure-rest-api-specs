@@ -126,6 +126,153 @@
         }
       }
     },
+    "/{scope}/providers/Microsoft.Consumption/reservationSummaries": {
+      "get": {
+        "tags": [
+          "ReservedInstances"
+        ],
+        "operationId": "ReservationsSummaries_List",
+        "description": "Lists the reservations summaries for daily or monthly grain.",
+        "externalDocs": {
+          "url": "https://docs.microsoft.com/en-us/rest/api/consumption/"
+        },
+        "x-ms-examples": {
+          "ReservationSummariesDaily": {
+            "$ref": "./examples/ReservationSummariesDaily.json"
+          },
+          "ReservationSummariesDailyWithReservationId": {
+            "$ref": "./examples/ReservationSummariesDailyWithReservationId.json"
+          },
+          "ReservationSummariesMonthly": {
+            "$ref": "./examples/ReservationSummariesMonthly.json"
+          },
+          "ReservationSummariesMonthlyWithReservationId": {
+            "$ref": "./examples/ReservationSummariesMonthlyWithReservationId.json"
+          }
+        },
+        "parameters": [
+          {
+            "name": "scope",
+            "description": "The scope of the reservation summaries. The scope can be 'providers/Microsoft.Capacity/reservationorders/{ReservationOrderId}' or 'providers/Microsoft.Capacity/reservationorders/{ReservationOrderId}/reservations/{ReservationId}'",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "x-ms-skip-url-encoding": true
+          },
+          {
+            "name": "grain",
+            "description": "Can be daily or monthly",
+            "in": "query",
+            "required": true,
+            "type": "string",
+            "enum": [
+              "daily",
+              "monthly"
+            ],
+            "x-ms-enum": {
+              "name": "datagrain",
+              "modelAsString": true,
+              "values": [
+                {
+                  "value": "daily",
+                  "description": "Daily grain of data",
+                  "name": "DailyGrain"
+                },
+                {
+                  "value": "monthly",
+                  "description": "Monthly grain of data",
+                  "name": "MonthlyGrain"
+                }
+              ]
+            }
+          },
+          {
+            "name": "$filter",
+            "description": "Required only for daily grain. The properties/UsageDate for start date and end date. The filter supports 'le' and  'ge'",
+            "in": "query",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK. The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/ReservationSummariesListResult"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": null
+        }
+      }
+    },
+    "/{scope}/providers/Microsoft.Consumption/reservationDetails": {
+      "get": {
+        "tags": [
+          "ReservedInstances"
+        ],
+        "operationId": "ReservationsDetails_List",
+        "description": "Lists the reservations details for provided date range.",
+        "externalDocs": {
+          "url": "https://docs.microsoft.com/en-us/rest/api/consumption/"
+        },
+        "x-ms-examples": {
+          "ReservationDetails": {
+            "$ref": "./examples/ReservationDetails.json"
+          },
+          "ReservationDetailsWithReservationId": {
+            "$ref": "./examples/ReservationDetailsWithReservationId.json"
+          }
+        },
+        "parameters": [
+          {
+            "name": "scope",
+            "description": "The scope of the reservation details. The scope can be 'providers/Microsoft.Capacity/reservationorders/{ReservationOrderId}' or 'providers/Microsoft.Capacity/reservationorders/{ReservationOrderId}/reservations/{ReservationId}'",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "x-ms-skip-url-encoding": true
+          },
+          {
+            "name": "$filter",
+            "description": "Filter reservation details by date range. The properties/UsageDate for start date and end date. The filter supports 'le' and  'ge' ",
+            "in": "query",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK. The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/ReservationDetailsListResult"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": null
+        }
+      }
+    },
     "/providers/Microsoft.Consumption/operations": {
       "get": {
         "tags": [
@@ -351,6 +498,169 @@
         "additionalProperties": {
           "description": "Additional details of this usage item. By default this is not populated, unless it's specified in $expand.",
           "type": "string",
+          "readOnly": true
+        }
+      }
+    },
+    "ReservationSummaries": {
+      "description": "reservation summaries resource.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/Resource"
+        }
+      ],
+      "properties": {
+        "properties": {
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/ReservationSummariesProperties",
+          "title": "Reservation Summaries properties"
+        }
+      }
+    },
+    "ReservationSummariesListResult": {
+      "description": "Result of listing reservation summaries.",
+      "properties": {
+        "value": {
+          "description": "The list of reservation summaries.",
+          "type": "array",
+          "readOnly": true,
+          "items": {
+            "$ref": "#/definitions/ReservationSummaries"
+          }
+        }
+      }
+    },
+    "ReservationSummariesProperties": {
+      "description": "The properties of the reservation summaries.",
+      "properties": {
+        "reservationOrderId": {
+          "description": "The reservation order ID is the identifier for a reservation purchase. Each reservation order ID represents a single purchase transaction. A reservation order contains reservations. The reservation order specifies the VM size and region for the reservations.",
+          "type": "string",
+          "readOnly": true
+        },
+        "reservationId": {
+          "description": "The reservation ID is the identifier of a reservation within a reservation order. Each reservation is the grouping for applying the benefit scope and also specifies the number of instances to which the reservation benefit can be applied to.",
+          "type": "string",
+          "readOnly": true
+        },
+        "skuName": {
+          "description": "This is the ARM Sku name. It can be used to join with the servicetype field in additoinalinfo in usage records.",
+          "type": "string",
+          "readOnly": true
+        },
+        "reservedHours": {
+          "description": "This is the total hours reserved. E.g. if reservation for 1 instance was made on 1 PM, this will be 11 hours for that day and 24 hours from subsequent days",
+          "type": "number",
+          "format": "decimal",
+          "readOnly": true
+        },
+        "usageDate": {
+          "description": "Data corresponding to the utilization record. If the grain of data is monthly, it will be first day of month.",
+          "type": "string",
+          "format": "date-time",
+          "readOnly": true
+        },
+        "usedHours": {
+          "description": "Total used hours by the reservation",
+          "type": "number",
+          "format": "decimal",
+          "readOnly": true
+        },
+        "minUtilizationPercentage": {
+          "description": "This is the minimum hourly utilization in the usage time (day or month). E.g. if usage record corresponds to 12/10/2017 and on that for hour 4 and 5, utilization was 10%, this field will return 10% for that day",
+          "type": "number",
+          "format": "decimal",
+          "readOnly": true
+        },
+        "avgUtilizationPercentage": {
+          "description": "This is average utilization for the entire time range. (day or month depending on the grain)",
+          "type": "number",
+          "format": "decimal",
+          "readOnly": true
+        },
+        "maxUtilizationPercentage": {
+          "description": "This is the maximum hourly utilization in the usage time (day or month). E.g. if usage record corresponds to 12/10/2017 and on that for hour 4 and 5, utilization was 100%, this field will return 100% for that day.",
+          "type": "number",
+          "format": "decimal",
+          "readOnly": true
+        }
+      }
+    },
+    "ReservationDetails": {
+      "description": "reservation details resource.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/Resource"
+        }
+      ],
+      "properties": {
+        "properties": {
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/ReservationDetailsProperties",
+          "title": "Reservation Details properties"
+        }
+      }
+    },
+    "ReservationDetailsListResult": {
+      "description": "Result of listing reservation details.",
+      "properties": {
+        "value": {
+          "description": "The list of reservation details.",
+          "type": "array",
+          "readOnly": true,
+          "items": {
+            "$ref": "#/definitions/ReservationDetails"
+          }
+        }
+      }
+    },
+    "ReservationDetailsProperties": {
+      "description": "The properties of the reservation details.",
+      "properties": {
+        "reservationOrderId": {
+          "description": "The reservation order ID is the identifier for a reservation purchase. Each reservation order ID represents a single purchase transaction. A reservation order contains reservations. The reservation order specifies the VM size and region for the reservations.",
+          "type": "string",
+          "readOnly": true
+        },
+        "reservationId": {
+          "description": "The reservation ID is the identifier of a reservation within a reservation order. Each reservation is the grouping for applying the benefit scope and also specifies the number of instances to which the reservation benefit can be applied to.",
+          "type": "string",
+          "readOnly": true
+        },
+        "skuName": {
+          "description": "This is the ARM Sku name. It can be used to join with the servicetype field in additoinalinfo in usage records.",
+          "type": "string",
+          "readOnly": true
+        },
+        "reservedHours": {
+          "description": "This is the total hours reserved for the day. E.g. if reservation for 1 instance was made on 1 PM, this will be 11 hours for that day and 24 hours from subsequent days.",
+          "type": "number",
+          "format": "decimal",
+          "readOnly": true
+        },
+        "usageDate": {
+          "description": "The date on which consumption occurred.",
+          "type": "string",
+          "format": "date-time",
+          "readOnly": true
+        },
+        "usedHours": {
+          "description": "This is the total hours used by the instance.",
+          "type": "number",
+          "format": "decimal",
+          "readOnly": true
+        },
+        "instanceId": {
+          "description": "This identifier is the name of the resource or the fully qualified Resource ID.",
+          "type": "string",
+          "readOnly": true
+        },
+        "totalReservedQuantity": {
+          "description": "This is the total count of instances that are reserved for the reservationid.",
+          "type": "number",
+          "format": "decimal",
           "readOnly": true
         }
       }

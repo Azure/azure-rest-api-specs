@@ -1905,6 +1905,75 @@
         "entryFilePath"
       ]
     },
+    "ExecuteSSISPackageActivity": {
+      "description": "Execute SSIS package activity.",
+      "x-ms-discriminator-value": "ExecuteSSISPackage",
+      "allOf": [
+        {
+          "$ref": "#/definitions/ExecutionActivity"
+        }
+      ],
+      "properties": {
+        "typeProperties": {
+          "x-ms-client-flatten": true,
+          "description": "Execute SSIS package activity properties.",
+          "$ref": "#/definitions/ExecuteSSISPackageActivityTypeProperties"
+        }
+      },
+      "required": [
+        "typeProperties"
+      ]
+    },
+    "ExecuteSSISPackageActivityTypeProperties": {
+      "description": "Execute SSIS package activity properties.",
+      "properties": {
+        "packageLocation": {
+          "description": "SSIS package location.",
+          "$ref": "#/definitions/SSISPackageLocation"
+        },
+        "runtime": {
+          "description": "Specifies the runtime to execute SSIS package.",
+          "type": "string",
+          "enum": [
+            "x64",
+            "x86"
+          ],
+          "x-ms-enum": {
+            "name": "SSISExecutionRuntime",
+            "modelAsString": true
+          }
+        },
+        "loggingLevel": {
+          "description": "The logging level of SSIS package execution.",
+          "type": "string"
+        },
+        "environmentPath": {
+          "description": "The environment path to execution the SSIS package.",
+          "type": "string"
+        },
+        "connectVia": {
+          "description": "The integration runtime reference.",
+          "$ref": "../datafactory.json#/definitions/IntegrationRuntimeReference"
+        }
+      },
+      "required": [
+        "packageLocation",
+        "connectVia"
+      ]
+    },
+    "SSISPackageLocation": {
+      "description": "SSIS package location.",
+      "type" : "object",
+      "properties": {
+        "packagePath": {
+          "description": "The SSIS package path.",
+          "type": "string"
+        }
+      },
+      "required": [
+        "packagePath"
+      ]
+    },
     "CustomActivity": {
       "description": "Custom activity type.",
       "x-ms-discriminator-value": "Custom",

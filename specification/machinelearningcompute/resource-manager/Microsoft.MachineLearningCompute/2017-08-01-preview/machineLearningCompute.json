@@ -196,6 +196,9 @@
           },
           {
             "$ref": "#/parameters/ClusterNameParameter"
+          },
+          {
+            "$ref": "#/parameters/DeleteAllParameter"
           }
         ],
         "responses": {
@@ -486,6 +489,14 @@
       "type": "string",
       "description": "The version of the Microsoft.MachineLearningCompute resource provider API to use.",
       "required": true
+    },
+    "DeleteAllParameter": {
+      "name": "deleteAll",
+      "description": "If true, deletes all resources associated with this cluster.",
+      "in": "query",
+      "type": "boolean",
+      "required": false,
+      "x-ms-parameter-location": "method"
     }
   },
   "definitions": {
@@ -882,11 +893,11 @@
         },
         "cert": {
           "type": "string",
-          "description": "The SSL cert data in PEM format encoded as base64 string"
+          "description": "The SSL cert data in PEM format."
         },
         "key": {
           "type": "string",
-          "description": "The SSL key data in PEM format encoded as base64 string. This is not returned in response of GET/PUT on the resource. To see this please call listKeys API."
+          "description": "The SSL key data in PEM format. This is not returned in response of GET/PUT on the resource. To see this please call listKeys API."
         },
         "cname": {
           "type": "string",
