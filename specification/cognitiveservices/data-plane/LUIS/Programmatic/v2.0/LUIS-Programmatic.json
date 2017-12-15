@@ -6234,7 +6234,12 @@
       "properties": {
         "code": {
           "type": "string",
-          "description": "Status Code."
+          "description": "Status Code.",
+          "enum" : [ "Failed", "FAILED", "Success" ], 
+          "x-ms-enum" : { 
+            "modelAsString": true,
+            "name": "OperationStatusType"
+          }
         },
         "message": {
           "type": "string",
