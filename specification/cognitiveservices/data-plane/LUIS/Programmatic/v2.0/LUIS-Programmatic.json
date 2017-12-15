@@ -898,7 +898,7 @@
             "in": "body",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/HierarchicalModelCreateObject"
+              "$ref": "#/definitions/HierarchicalEntityModel"
             },
             "description": "A model containing the name and children of the new entity extractor."
           }
@@ -1643,7 +1643,7 @@
             "in": "body",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/HierarchicalModelUpdateObject"
+              "$ref": "#/definitions/HierarchicalEntityModel"
             },
             "description": "Model containing names of the children of the hierarchical entity."
           }
@@ -4304,8 +4304,8 @@
         "modelName": "AppName"
       }
     },
-    "HierarchicalModelUpdateObject": {
-      "description": "A model object containing the properties to update.",
+    "HierarchicalEntityModel": {
+      "description": "A Hierarchical Entity Extractor.",
       "type": "object",
       "properties": {
         "children": {
@@ -4316,7 +4316,7 @@
           "type": "array"
         },
         "name": {
-          "description": "The new entity name.",
+          "description": "Entity name.",
           "type": "string"
         }
       },
@@ -4959,27 +4959,6 @@
           },
           "type": "array"
         }
-      }
-    },
-    "HierarchicalModelCreateObject": {
-      "description": "Object model for creating a hierarchical entity extractor.",
-      "type": "object",
-      "properties": {
-        "children": {
-          "description": "List of child entities.",
-          "items": {
-            "type": "string"
-          },
-          "type": "array"
-        },
-        "name": {
-          "description": "Name of the new hierarchical entity.",
-          "type": "string"
-        }
-      },
-      "example": {
-        "name": "FlightClass",
-        "children": [ "Economy", "First" ]
       }
     },
     "ApplicationPublishObject": {
